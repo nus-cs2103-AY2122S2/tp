@@ -43,3 +43,7 @@ jobs:
         with:
           file: ${{ github.workspace }}/build/reports/jacoco/coverage/coverage.xml
           fail_ci_if_error: true
+      
+      - name: Codecov
+        uses: codecov/codecov-action@v2.1.0
+
