@@ -18,17 +18,6 @@ jobs:
         with:
           ref: master
      
-      - name: Set up Codecov
-        uses: codecov/codecov-action@v2
-        with:
-          # token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
-          version: "v0.1.15"
-          files: ./coverage1.xml,./coverage2.xml # optional
-          flags: unittests # optional
-          name: codecov-umbrella # optional
-          fail_ci_if_error: true # optional (default = false)
-          verbose: true # optional (default = false)
-
       - name: Merge to master
         run: git checkout --progress --force ${{ github.sha }}
 
