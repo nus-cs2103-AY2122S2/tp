@@ -4,4 +4,4 @@
 
 *** insert our UI screenshot here ***
 
-* For the detailed documentation of this project, see the **[User Guide (replace with actual link)](https://se-education.org/addressbook-level3)**.
+* For the detailed documentation of this project, see our **[User Guide](https://ay2122s2-cs2103t-w11-3.github.io/tp/)** 😁
