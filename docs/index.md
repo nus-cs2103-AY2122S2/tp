@@ -3,8 +3,8 @@ layout: page
 title: TeachWhat!
 ---
 
-[![CI Status](https://github.com/AY2122S2-CS2103T-W11-3/tp/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
-[![codecov](https://codecov.io/gh/AY2122S2-CS2103T-W11-3/tp/branch/master/graph/badge.svg?token=Z9W4W1RD86)](https://codecov.io/gh/AY2122S2-CS2103T-W11-3/tp)
+[![CI Status]](https://github.com/AY2122S2-CS2103T-W11-3/tp/workflows/Java%20CI/badge.svg)
+[![codecov]](https://codecov.io/gh/AY2122S2-CS2103T-W11-3/tp/branch/master/graph/badge.svg?token=Z9W4W1RD86)
 
 ![Ui](images/Ui.png)
 
