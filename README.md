@@ -2,7 +2,7 @@
 
 ![Ui](docs/images/Ui.png)
 
-* This is T12-1's repo. Hello!
+* This is T12-2's repo. Hello!
 * This is **a sample project for Software Engineering (SE) students**.<br>
   Example usages:
   * as a starting point of a course project (as opposed to writing everything from scratch)
