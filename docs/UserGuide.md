@@ -183,10 +183,13 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS s/STATUS…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 c/5A s/negative`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find By Name** | `find_by_name NAME [MORE_NAME]`<br> e.g., `find_by_name James Jake`
+**Find By Status** | `find_by_status STATUS`<br> e.g., `find_by_status positive`
+**Find By Class** | `find_by_class CLASS`<br> e.g., `find_by_class 5A `
 **List** | `list`
-**Help** | `help`
+**Update Status** | `update_status INDEX STATUS`<br> e.g., `update_status 56 positive`
+**Exit** | `exit`
