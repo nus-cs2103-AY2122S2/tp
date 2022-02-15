@@ -1,0 +1,1 @@
+Here is some dummy text, to test if CI with `codecov` works.
