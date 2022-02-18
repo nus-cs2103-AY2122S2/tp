@@ -11,9 +11,9 @@ IBook is an inventory recording system for storekeepers to manage incoming and o
   * [Viewing help](#viewing-help--help) 
   * Products
     * [Adding a product](#adding-a-product--add)
-    * [Listing all products](#listing-products--list)
-    * [Updating a product](#updating-product--update)
-    * [Deleting a product](#deleting-product--delete)
+    * [Listing products](#listing-products--list)
+    * [Updating products](#updating-products--update)
+    * [Deleting products](#deleting-products--delete)
   * Categories
   * [Exiting the program](#exiting-the-program--exit)
 
@@ -74,7 +74,7 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a product: `add`
+### Adding a product : `add`
 
 Adds a new product to the application.
 
