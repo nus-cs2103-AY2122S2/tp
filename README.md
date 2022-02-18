@@ -5,3 +5,4 @@
 *** insert our UI screenshot here ***
 
 * For the detailed documentation of this project, see our **[User Guide](https://ay2122s2-cs2103t-w11-3.github.io/tp/)** 😁
+* For our UI mockup, check out our [Figma page](https://www.figma.com/file/k3XOdc4CVhhdSDkIS6Q6RU/TeachWhat?node-id=0%3A1) ✍️
