@@ -16,6 +16,8 @@ IBook is an inventory recording system for storekeepers to manage incoming and o
     * [Deleting products](#deleting-products--delete)
   * Categories
   * [Exiting the program](#exiting-the-program--exit)
+ * [FAQ](#faq)
+ * [Command Summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
