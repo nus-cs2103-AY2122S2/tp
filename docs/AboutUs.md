@@ -38,17 +38,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Tan Yong Rui
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/fenway17.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/fenway17)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### Lye Zi FOong
+### Lye Zi Foong
 
 <img src="images/lzf834.png" width="200px">
 
