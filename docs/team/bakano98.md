@@ -1,8 +1,8 @@
 ---
 layout: page
-title: John Doe's Project Portfolio Page
+title: Wei Jies Project Portfolio Page
 ---
-#Skeleton of the Project Portfolio Page for Wei Jie
+# Skeleton of the Project Portfolio Page for Wei Jie
 
 ### Project: AddressBook Level 3
 
