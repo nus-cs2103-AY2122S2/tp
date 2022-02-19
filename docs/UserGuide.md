@@ -3,10 +3,10 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+ModuleMateFinder Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
-{:toc}
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -14,9 +14,9 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `ModuleMateFinder.jar` from [here](https://github.com/se-edu/ModuleMateFinder-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your ModuleMateFinder.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -26,7 +26,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * **`list`** : Lists all contacts.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to ModuleMate Finder.
 
    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
@@ -64,6 +64,17 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 </div>
 
+### Quick Jump
+- [Help](#viewing-help--help)
+- [List](#listing-all-persons--list)
+- [Add](#adding-a-person-add)
+- [Delete](#deleting-a-person--delete)
+- [Edit](#editing-a-person--edit)
+- [Clear](#clearing-all-entries--clear)
+- [Tags](#tagging-a-person--tag)
+- [Find](#locating-a-person-find)
+- [Exit](#exiting-the-program--exit)
+
 ### Viewing help : `help`
 
 Shows a message explaning how to access the help page.
@@ -72,11 +83,16 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+### Listing all persons : `list`
+
+Shows a list of all persons in ModuleMate Finder.
+
+Format: `list`
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
-
+Adds a person to ModuleMate Finder.
+ 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -87,15 +103,11 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
-
-Format: `list`
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in ModuleMate Finder.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
@@ -110,27 +122,9 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
-
-Finds persons whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified person from ModuleMate Finder.
 
 Format: `delete INDEX`
 
@@ -139,14 +133,50 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `list` followed by `delete 2` deletes the 2nd person in ModuleMate Finder.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries, based on the given flag, from ModuleMate Finder.
 
-Format: `clear`
+Format: `clear -FLAG`
+
+Examples:
+- `clear -a` wipes all data from ModuleMate Finder.
+- `clear -c` wipes all contact details in ModuleMate Finder. Note that modules associated with contacts are also deleted
+- `clear -m` wipes _only_ module details in ModuleMate Finder.
+
+### Tagging a Person : `tag`
+Tags a person as favourite or blacklisted.
+
+Format: `tag INDEX -FLAG`
+- Gives a tag to the person at specified `INDEX`
+- Tag can either be a `blacklist` or `favourite`, indicated by using the flags `-b` or `-f` respectively.
+- `INDEX` must be a **positive integer** 1, 2, 3, ...
+
+Examples:
+- `tag 1 -f` tags the 1st person in ModuleMate Finder as favourite.
+- `tag 2 -b` tags the 2nd person in ModuleMate Finder as blacklisted.
+
+
+### Locating a person: `find`
+
+Finds a person by the given flag and keyword.
+
+Format: `find -FLAG [INDICATOR]/KEYWORD`
+
+- The search is case-insensitive. e.g `hans` will match `Hans`
+- Only the given flag + keyword is searched
+- Keyword not matching the indicator is ignored
+- Only full keywords will be matched e.g. `CS323` will not match `CS3230`
+-Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+Examples:
+* `find John` returns `john` and `John Doe`
+* `find -m c/CS3230` returns `Bob` if he takes the module CS3230
+
 
 ### Exiting the program : `exit`
 
@@ -154,17 +184,20 @@ Exits the program.
 
 Format: `exit`
 
+
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+ModuleMateFinder data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+ModuleMateFinder data are saved as a JSON file `[JAR file location]/data/ModuleMateFinder.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid, ModuleMateFinder will discard all data and start with an empty data file at the next run.
 </div>
+
+
 
 ### Archiving data files `[coming in v2.0]`
 
@@ -174,19 +207,19 @@ _Details coming soon ..._
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+_To be compiled..._
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+Action | Format                                                                                               | Examples                                                              
+--------|------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------
+**List** | `list -flags`                                                                                        | `list -m`, `list -c`                                                  
+**Add** | `add index -m c/CODE`<br/>`add -c n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`                           | `add 2 -m c/CS1231`<br/>`add -c n/Bob p/87654321 e/bob@u.nus.edu`        
+**Delete** | `delete index`, `delete index -m c/CODE`</br> `delete index -t t/TAG`, `delete 1 -ta`                | `delete `, `delete 1 -m c/CS1231` `delete 1 -ta` <br/>`delete 1 -t t/favourite`
+**Edit** | `edit index -c [n/NAME] [c/CODE] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` **brackets indicate optional | `edit 1 -c n/Alice`                                                   
+**Clear** | `clear -flags`                                                                                       | `clear -m`, `clear -c`, `clear -a`
+**Tag** | `tag index -f`, `tag index -b`                                                                       | `tag 2 -f`, `tag 3 -b`
+**Find** | `find -m c/CODE` `find -n n/NAME`                                                                    | `find -m c/CS3230`, `find -n n/Bob`
+
