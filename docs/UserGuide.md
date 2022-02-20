@@ -34,28 +34,51 @@ McKitchener is a **desktop app for managing recipes, optimized for use via a Com
 
    * **`exit`** : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## Features
 
-<div markdown="block" class="alert alert-info">
+### Create recipe
+Create a recipe by specifying its name, ingredients, and steps to prepare the dish.<br>
+Usage: `create recipe n/ <name of recipe> i/ <ingredients separated by commas> s/ <steps separated by commas>` <br>
+Example:
+- `create recipe n/ Aglio Olio i/ spaghetti 56 grams, garlic 3 cloves, bacon 3 slices, olive oil 110 ml, salt ?, pepper ? s/ Cook the spaghetti until al dante, Saute the chopped garlic, Toss spaghetti in the sauce, taste and season with salt and black pepper`
+  - This creates a recipe for "Aglio Olio" with 56 grams of spaghetti, 3 cloves of garlic, 3 slices of bacon, 110 ml of olive oil and a non-fixed amount of salt, and pepper (to taste) with the steps of:
+    1. Cook the spaghetti until al dante,
+    2. Saute the chopped garlic,
+    3. Toss the spaghetti in the sauce,
+    4. Taste and season with salt and black pepper.
 
-**:information_source: Notes about the command format:**<br>
+### List recipes
+Displays a list of recipes that the user has stored locally. If this is the first time that the user runs the application, sample recipes will be shown instead. Recipes shown here would be a shortened version of the recipe and only display its name and tags (type of cuisine). For the full details of the recipe, refer to [`view`](###view-recipe) <br>
+Note: The numbers associated with the recipes would be used for other commands.<br>
+Usage: `list`
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+### View recipe
+View the contents of an existing stored recipe based on the number it is associated with in the `list`. <br>
+Usage: `view <recipe number>` <br>
+Example:
+- view 1
+    - This would display the full contents of the first recipe in the list which includes its ingredients and steps to prepare the dish.
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+### Delete recipe
+Removes a stored recipe based on the number it is associated with in the `list` <br>
+Usage: `delete <recipe number>` <br>
+Example:
+- delete 1
+    - This would delete the first entry in the list of recipes.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+### Store recipe
+Store the recipe in a human-readable text file on the user's computer and is modifiable through a text editor if the user is familiar with the format (JSON). <br>
+Usage: (Automatically updates text file upon each modifying (writing) operation).
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+### Load recipe
+Load existing recipes from the text file on the user's computer. Modifications to this file would be displayed accordingly as long as the format is followed. <br>
+Usage: (Automatically loads the recipes upon launching the application).
 
+<<<<<<< HEAD
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
@@ -172,22 +195,23 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
+=======
+---
+>>>>>>> upstream/master
 
 ## FAQ
+(To be filled)
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+---
 
---------------------------------------------------------------------------------------------------------------------
+## Command Summary
+(To be filled)
 
-## Command summary
+| Action                     | Command format                                                                                          |
+|----------------------------|---------------------------------------------------------------------------------------------------------|
+| add a new recipe           | `create recipe n/ <name of recipe> i/ <ingredients separated by commas> s/ <steps separated by commas>` |
+| list all available recipes | `list`                                                                                                  |
+| view specific recipe       | `view <recipe number from list>`                                                                        |
+| delete recipe              | `delete <recipe number from list>`                                                                      |
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+
