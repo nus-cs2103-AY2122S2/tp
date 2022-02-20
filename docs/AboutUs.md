@@ -13,7 +13,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/johndoe.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
+[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/johndoe)]
 [[portfolio](team/johndoe.md)]
 
@@ -31,9 +31,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Johnny Doe
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/blake.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[homepage](https://vigilant-hoover-ef8564.netlify.app/)]
+[[github](http://github.com/blaketingyu)]
+[[portfolio](team/blake.md)]
 
 * Role: Developer
 * Responsibilities: Data
