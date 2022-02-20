@@ -50,10 +50,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Tan Weiu Cheng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/davidtan0527.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/DavidTan0527)]
+<!-- [[portfolio](team/weiucheng.md)] -->
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Integration, Code Quality, Git expert
