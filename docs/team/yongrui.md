@@ -33,7 +33,7 @@ Given below are my contributions to the project.
     * Added quick start for user guide [\#--]()
     * Added documentation for the features `add` and `list` [\#--]()
   * Developer Guide:
-    * --
+    * Added use cases for developer guide [\#--]()
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#--]()
