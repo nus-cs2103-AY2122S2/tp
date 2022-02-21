@@ -9,11 +9,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Wee Jun Hong
 
-<img src="images/junhong.png" width="200px">
+<img src="images/junhong.jpg" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/whoisjunhong)]
 [[portfolio](team/junhong.md)]
 
