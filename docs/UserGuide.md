@@ -62,6 +62,24 @@ Find an existing student in the application by their Covid-19 Status
   - `find_by_status positive`
   - `find_by_status negative`
 
+##Find student by class: `find_by_class`
+Finds an existing student in the address book by their class.
+- Format: `find_by_class CLASS`
+  - Returns a list of students with the specified `CLASS`.
+  - `CLASS` is case-insensitive
+- Example:
+  - `find_by_class 4A`
+
+##Deleting a person : `delete_student`
+Deletes the specified person from the address book.
+- Format: `delete_student INDEX`
+  - Deletes the student at the specified `INDEX`.
+  - The index refers to the index number shown in the displayed student list.
+  - The index must be a **positive integer** 1, 2, 3, ...
+- Examples:
+  - `list` followed by `delete_student 2` deletes the 2nd person in the address book.
+  - find Betsy followed by `delete_student 1` deletes the 1st student in the results of the `find` command.
+             
 ###Saving the data
 AddressBook data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
