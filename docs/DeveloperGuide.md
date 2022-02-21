@@ -289,16 +289,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `UltimateDivocTracker` and the **Actor** is the `user`, unless specified otherwise)
+
+**Use case: Add a person**
+
+**MSS**
+
+1.  User requests to add a person
+2.  UltimateDivocTracker adds a person to the list of persons
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The person already exists.
+  
+  * 2a1. UltimateDivocTracker shows an error message.
+  
+  Use case ends.
+
 
 **Use case: Delete a person**
 
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  UltimateDivocTracker shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  UltimateDivocTracker deletes the person
 
     Use case ends.
 
@@ -310,9 +328,97 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+  * 3a1. AddressBook shows an error message.
 
-      Use case resumes at step 2.
+    Use case resumes at step 2.
+
+
+**Use case: Finding a person by name**
+
+**MSS**
+
+1.  User requests to find a person by name
+2.  UltimateDivocTracker shows the person's information
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given name is invalid (cannot be found).
+  
+  * 2a1. UltimateDivocTracker shows an error message.
+
+  Use case ends.
+  
+  
+**Use case: Finding persons by status**
+
+**MSS**
+
+1.  User requests to find persons by status
+2.  UltimateDivocTracker shows the list of persons with said status
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 2a. The given status is invalid.
+
+  * 2a1. UltimateDivocTracker shows an error message.
+
+  Use case ends.
+  
+  
+**Use case: Finding persons by class**
+
+**MSS**
+
+1.  User requests to find persons by class
+2.  UltimateDivocTracker shows the list of persons with said class
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 2a. The given class is invalid.
+
+  * 2a1. UltimateDivocTracker shows an error message.
+
+  Use case ends.
+
+
+**Use case: Updating a person's status**
+
+**MSS**
+
+1.  User requests person's information
+2.  UltimateDivocTracker shows the person's information
+3.  User requests to update a person's status
+4.  UltimateDivocTracker updates the person's status
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The person cannot be found.
+  
+  * 2a1. UltimateDivocTracker shows an error message.
+
+  Use case ends.
+
+* 4a. The given status is invalid.
+
+  * 4a1. UltimateDivocTracker shows an error message.
+
+  Use case ends.
 
 *{More to be added}*
 
