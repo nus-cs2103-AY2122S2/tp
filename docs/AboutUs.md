@@ -15,7 +15,7 @@ You can reach us at the email `cs2103tATeam@gmail.com`
 
 
 [[github](https://github.com/janakanuwan)]
-[[portfolio](team/janakanuwan.md)]
+[[portfolio](team/janakanuwan.html)]
 
 * Role: Project Advisor
 
@@ -25,7 +25,7 @@ You can reach us at the email `cs2103tATeam@gmail.com`
 
 
 [[github](https://github.com/BrendonLau)]
-[[portfolio](team/brendonlau.md)]
+[[portfolio](team/brendonlau.html)]
 
 * Role: Team Lead
 * Responsibilities: Git
@@ -35,7 +35,7 @@ You can reach us at the email `cs2103tATeam@gmail.com`
 <img src="images/jinnhl.png" width="200px">
 
 [[github](http://github.com/jinnhl)]
-[[portfolio](team/jinnhl.md)]
+[[portfolio](team/jinnhl.html)]
 
 * Role: Integration Reviewer
 * Responsibilities: 
@@ -44,7 +44,7 @@ You can reach us at the email `cs2103tATeam@gmail.com`
 
 <img src="images/justinyjt.png" width="200px">
 
-[[github](http://github.com/justinyjt)] [[portfolio](team/justinyjt.md)]
+[[github](http://github.com/justinyjt)] [[portfolio](team/justinyjt.html)]
 
 * Role: Code Quality and Documentation Reviewer
 * Responsibilities: 
@@ -54,7 +54,7 @@ You can reach us at the email `cs2103tATeam@gmail.com`
 <img src="images/kerbysoh.png" width="200px">
 
 [[github](http://github.com/kerbysoh)]
-[[portfolio](team/kerbysoh.md)]
+[[portfolio](team/kerbysoh.html)]
 
 * Role: Testing Reviewer
 * Responsibilities: Dev Ops + Threading
@@ -64,7 +64,7 @@ You can reach us at the email `cs2103tATeam@gmail.com`
 <img src="images/petermonky.png" width="200px">
 
 [[github](http://github.com/petermonky)]
-[[portfolio](team/petermonky.md)]
+[[portfolio](team/petermonky.html)]
 
 * Role: Frontend Developer
 * Responsibilities: GUI
