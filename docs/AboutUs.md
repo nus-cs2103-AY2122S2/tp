@@ -14,7 +14,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/lkldev.png" width="200px">
 
 [[github](https://github.com/lkldev)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/lkldev.md)]
 
 * Role: Team Lead
 * Responsibilities: Code quality / Scheduling and tracking
