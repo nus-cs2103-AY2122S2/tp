@@ -9,51 +9,53 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Li KangLi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/lkldev.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
+[[github](https://github.com/lkldev)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Code quality / Scheduling and tracking
 
-### Johnny Doe
+### Gernene Tan
 
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
 
 <img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/Gernene)]
+[[portfolio](team/gernene.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: UI and Documentation
 
-### James Doe
+### Liong Wen Xuan
+
 
 <img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/wxliong)] [[portfolio](team/wxliong.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Testing
+
+### Meng An
+
+<img src="images/johndoe.png" width="200px">
+
+[[github](http://github.com/evaderfati)]
+[[portfolio](team/evaderfati.md)]
+
+* Role: Developer
+* Responsibilities: Integration
+
+### Tan Jia Xin
+
+<img src="images/johndoe.png" width="200px">
+
+[[github](http://github.com/jxt00)]
+[[portfolio](team/jxt00.md)]
+
+* Role: Developer
+* Responsibilities: Deliverables and deadlines
