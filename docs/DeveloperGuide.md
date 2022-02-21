@@ -262,8 +262,11 @@ _{Explain here how the data archiving feature will be implemented}_
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
+* School admins
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: 
+* Manage contacts faster than a typical mouse/GUI driven app
+* To enable the school’s COVID-19 management task force to identify and implement the correct measures for students who are positive/close-contact
 
 
 ### User stories
@@ -273,26 +276,47 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
+| `* * *`  | user                                       | add a new student              |                                                                        |
+| `* * *`  | user                                       | delete a student               | remove entries that I no longer need                                   |
+| `* *`    | user                                       | find a student by name         | locate details of persons without having to go through the entire list |
+| `* *`    | user                                       | find a student by status       | locate details of persons without having to go through the entire list |
+| `* *`    | user                                       | find a student by class        | locate details of persons without having to go through the entire list |
+| `* *`    | user                                       | update a student's Covid-19 status | make the necessary changes to the student's status as required     |
+| `* *`    | user                                       | edit a student's details       | update the details of a student's particulars                          |
 | `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `UltimateDivocTracker` and the **Actor** is the `user`, unless specified otherwise)
+
+**Use case: Add a person**
+
+**MSS**
+
+1.  User requests to add a person
+2.  UltimateDivocTracker adds a person to the list of persons
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The person already exists.
+  
+  * 2a1. UltimateDivocTracker shows an error message.
+  
+  Use case ends.
+
 
 **Use case: Delete a person**
 
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  UltimateDivocTracker shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  UltimateDivocTracker deletes the person
 
     Use case ends.
 
@@ -304,9 +328,97 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+  * 3a1. AddressBook shows an error message.
 
-      Use case resumes at step 2.
+    Use case resumes at step 2.
+
+
+**Use case: Finding a person by name**
+
+**MSS**
+
+1.  User requests to find a person by name
+2.  UltimateDivocTracker shows the person's information
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given name is invalid (cannot be found).
+  
+  * 2a1. UltimateDivocTracker shows an error message.
+
+  Use case ends.
+  
+  
+**Use case: Finding persons by status**
+
+**MSS**
+
+1.  User requests to find persons by status
+2.  UltimateDivocTracker shows the list of persons with said status
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 2a. The given status is invalid.
+
+  * 2a1. UltimateDivocTracker shows an error message.
+
+  Use case ends.
+  
+  
+**Use case: Finding persons by class**
+
+**MSS**
+
+1.  User requests to find persons by class
+2.  UltimateDivocTracker shows the list of persons with said class
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 2a. The given class is invalid.
+
+  * 2a1. UltimateDivocTracker shows an error message.
+
+  Use case ends.
+
+
+**Use case: Updating a person's status**
+
+**MSS**
+
+1.  User requests person's information
+2.  UltimateDivocTracker shows the person's information
+3.  User requests to update a person's status
+4.  UltimateDivocTracker updates the person's status
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The person cannot be found.
+  
+  * 2a1. UltimateDivocTracker shows an error message.
+
+  Use case ends.
+
+* 4a. The given status is invalid.
+
+  * 4a1. UltimateDivocTracker shows an error message.
+
+  Use case ends.
 
 *{More to be added}*
 

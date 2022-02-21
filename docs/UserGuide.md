@@ -44,7 +44,7 @@ Adds a student to the tracking list
 Shows a list of all students in the address book.
 - Format: `list`
   
-##Find a student by name: `find_by_name`
+## Find a student by name: `find_by_name`
 Find an existing student in the application by their name
 - Format: `find_by_name NAME`
   - Returns a list of students with the specified `NAME`
@@ -53,7 +53,7 @@ Find an existing student in the application by their name
 - Example:
   - `find_by_name john`
 
-##Find a student by status: `find_by_status`
+## Find a student by status: `find_by_status`
 Find an existing student in the application by their Covid-19 Status
 - Format: `find_by_status STATUS`
   - Returns a list of students with the specified `STATUS`
@@ -62,7 +62,7 @@ Find an existing student in the application by their Covid-19 Status
   - `find_by_status positive`
   - `find_by_status negative`
 
-##Find student by class: `find_by_class`
+## Find student by class: `find_by_class`
 Finds an existing student in the address book by their class.
 - Format: `find_by_class CLASS`
   - Returns a list of students with the specified `CLASS`.
@@ -70,7 +70,19 @@ Finds an existing student in the address book by their class.
 - Example:
   - `find_by_class 4A`
 
-##Deleting a person : `delete_student`
+## Updating persons status: `update_status`
+Updates persons status to the given status.
+- Format: `update_status INDEX STATUS`
+  - Index of the person in the list is defined by `INDEX`
+  - `INDEX` must be a positive integer, otherwise the command would return an error
+  - GUI: Select student’s status via a dropdown menu
+  - CLI: enter command `update_status [INDEX] [STATUS]`. Replace `[STATUS]` placeholder with either `Positive, Negative, Close Contact or Untested`.
+  - The status is case-insensitive. e.g `positive` will mean `Positive`
+  - `STATUS` must either be `Positive, Negative, Close Contact, Untested`
+- Example:
+  - `update_status 1 Positive` - Updates the person with Index 1 status to Positive
+
+## Deleting a person : `delete_student`
 Deletes the specified person from the address book.
 - Format: `delete_student INDEX`
   - Deletes the student at the specified `INDEX`.
@@ -80,15 +92,19 @@ Deletes the specified person from the address book.
   - `list` followed by `delete_student 2` deletes the 2nd person in the address book.
   - find Betsy followed by `delete_student 1` deletes the 1st student in the results of the `find` command.
              
-###Saving the data
+
+## Exiting the program: `exit`
+Exits the program.
+Format: `exit`
+## Saving the data
 AddressBook data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-###Editing the data file
+## Editing the data file
 AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 ----------------
 
-###Command Summary
+## Command Summary
 | Action           | Format, Examples                                                                                                                                                          |
 |------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Add a student    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS s/STATUS`<br/>e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/5A s/NEGATIVE` |
