@@ -19,3 +19,5 @@ Below are the current and upcoming features of the UDT
 * Updating COVID-19 status
 * Exiting the program
 * Editing student’s personal details (coming in v1.3)
+
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
