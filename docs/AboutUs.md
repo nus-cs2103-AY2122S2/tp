@@ -19,21 +19,22 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Joshua Yap
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/joshua.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/e0544333)]
+[[portfolio](team/joshua.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Louis
 
 <img src="images/louisdavinlie.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/johndoe)]
+[[portfolio](team/louis.md)]
 
 * Role: Developer
 * Responsibilities: Data
@@ -43,7 +44,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/fenway17.png" width="200px">
 
 [[github](http://github.com/fenway17)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/yongrui.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
@@ -53,7 +54,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/lzf834.png" width="200px">
 
 [[github](http://github.com/lzf834)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/zifoong.md)]
 
 * Role: Developer
 * Responsibilities: UI
