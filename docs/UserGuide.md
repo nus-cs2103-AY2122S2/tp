@@ -79,3 +79,24 @@ Deletes the specified person from the address book.
 - Examples:
   - `list` followed by `delete_student 2` deletes the 2nd person in the address book.
   - find Betsy followed by `delete_student 1` deletes the 1st student in the results of the `find` command.
+             
+###Saving the data
+AddressBook data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+###Editing the data file
+AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+
+----------------
+
+###Command Summary
+| Action           | Format, Examples                                                                                                                                                          |
+|------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Add a student    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS s/STATUS`<br/>e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/5A s/NEGATIVE` |
+| Delete a student | `delete_student INDEX`<br/>e.g., `delete_student 3`                                                                                                                       |
+| Edit             | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br/>e.g., `edit 2 n/James Lee e/jameslee@example.com`                                                        |
+| Find by name     | `find_by_name NAME [MORE_NAME]`<br/>e.g., `find_by_name James Jake`                                                                                                       |
+| Find by status   | `find_by_status STATUS`<br/>e.g., `find_by_status positive`                                                                                                               |
+| Find by class    | `find_by_class CLASS`<br/>e.g., `find_by_class 4A`                                                                                                                        |
+| List             | `list`                                                                                                                                                                    |
+| Update status    | `update_status INDEX STATUS`<br/>e.g., `update_status 54 positive`                                                                                                        |
+| Exit             | `exit`                                                                                                                                                                    |
