@@ -70,6 +70,18 @@ Finds an existing student in the address book by their class.
 - Example:
   - `find_by_class 4A`
 
+## Updating persons status: `update_status`
+Updates persons status to the given status.
+- Format: `update_status INDEX STATUS`
+  - Index of the person in the list is defined by `INDEX`
+  - `INDEX` must be a positive integer, otherwise the command would return an error
+  - GUI: Select student’s status via a dropdown menu
+  - CLI: enter command `update_status [INDEX] [STATUS]`. Replace `[STATUS]` placeholder with either `Positive, Negative, Close Contact or Untested`.
+  - The status is case-insensitive. e.g `positive` will mean `Positive`
+  - `STATUS` must either be `Positive, Negative, Close Contact, Untested`
+- Example:
+  - `update_status 1 Positive` - Updates the person with Index 1 status to Positive
+
 ## Deleting a person : `delete_student`
 Deletes the specified person from the address book.
 - Format: `delete_student INDEX`
@@ -80,6 +92,10 @@ Deletes the specified person from the address book.
   - `list` followed by `delete_student 2` deletes the 2nd person in the address book.
   - find Betsy followed by `delete_student 1` deletes the 1st student in the results of the `find` command.
              
+
+## Exiting the program: `exit`
+Exits the program.
+Format: `exit`
 ## Saving the data
 AddressBook data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
