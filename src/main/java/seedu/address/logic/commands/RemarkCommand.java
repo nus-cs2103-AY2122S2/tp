@@ -21,6 +21,7 @@ public class RemarkCommand extends Command {
     public static final String COMMAND_WORD = "remark";
 
     public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to Person: %1$s";
+    public static final String MESSAGE_ADD_REMARK_FAILURE = "Tags should be either 'blacklist' or 'favourite'";
     public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from Person: %1$s";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the remark of the person identified "
             + "by the index number used in the last person listing. "
@@ -58,7 +59,6 @@ public class RemarkCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-
         return new CommandResult(generateSuccessMessage(editedPerson));
     }
 
