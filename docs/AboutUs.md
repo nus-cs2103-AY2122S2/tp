@@ -29,11 +29,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Louis
+### Louis Davin Lie
 
 <img src="images/louisdavinlie.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/louisdavinlie)]
 [[portfolio](team/louis.md)]
 
 * Role: Developer
