@@ -24,4 +24,3 @@ Given below are my contributions
     * Developer's Guide:
         * `to be added soon`
 * **Community**: `to be added soon`
-* 
