@@ -262,8 +262,11 @@ _{Explain here how the data archiving feature will be implemented}_
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
+* School admins
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: 
+* Manage contacts faster than a typical mouse/GUI driven app
+* To enable the school’s COVID-19 management task force to identify and implement the correct measures for students who are positive/close-contact
 
 
 ### User stories
@@ -273,10 +276,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
+| `* * *`  | user                                       | add a new student              |                                                                        |
+| `* * *`  | user                                       | delete a student               | remove entries that I no longer need                                   |
+| `* *`    | user                                       | find a student by name         | locate details of persons without having to go through the entire list |
+| `* *`    | user                                       | find a student by status       | locate details of persons without having to go through the entire list |
+| `* *`    | user                                       | find a student by class        | locate details of persons without having to go through the entire list |
+| `* *`    | user                                       | update a student's Covid-19 status | make the necessary changes to the student's status as required     |
+| `* *`    | user                                       | edit a student's details       | update the details of a student's particulars                          |
 | `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
 
 *{More to be added}*
