@@ -11,10 +11,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Daniel Lee Min Qiang
 
-<img src="images/daniel.png" width="200px">
+<img src="images/dandaandaaaaaan.png" width="200px">
 
 [[github](https://github.com/dandaandaaaaaan)]
-[[portfolio](team/daniel.md)]
+[[portfolio](team/dandaandaaaaaan.md)]
 
 * Role: Developer
 * Responsibilities: Workflow setting, CI/CD, Import/Export
