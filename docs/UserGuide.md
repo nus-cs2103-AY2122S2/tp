@@ -1,5 +1,6 @@
 ---
-User Guide
+layout: page
+title: User Guide
 ---
 
 Tinner (Anagram of Intern) is a desktop app for managing internship applications, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Tinner allows you to easily sort through and retrieve the relevant information faster than traditional GUI apps. benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
@@ -83,6 +84,7 @@ Format: `add company n/COMPANY_NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
 
 Examples:
 * `add company n/Google p/98765432 e/hr_google@gmail.com a/70 Pasir Panjang Rd, #03-71 Mapletree Business City II, Singapore 117371 `
+* `add company n/Meta p/91234567 e/hr_meta@meta.com a/9 Straits View, Marina One, Singapore 018937 `
 
 ### Adding an internship role to an existing company: `add role` <a id="c-add-c-r"></a>
 
@@ -93,7 +95,7 @@ Format: `add role COMPANY_INDEX n/ROLE s/STATUS b/DEADLINE d/DESCRIPTION $/STIPE
 
 Examples:
 * `add role 1 n/Data Analyst s/Applying b/31 March 2022 23:59 d/Analyse data $/4800 `
-
+* `add role 3 n/Software Engineer s/Applying b/30 April 2022 01:23 d/Frontend web development $/2400 `
 
 ### Deleting a Company : `delete company` <a id="c-delete-c"></a>
 
@@ -106,7 +108,7 @@ Format: `delete company COMPANY_INDEX`
 * The index must be a positive integer 1, 2, 3, …
 
 Examples:
-* `list` followed by `delete company 2` deletes the 2nd company in Tinner.
+* `list` followed by `delete company 2` deletes the 2nd company on the list in Tinner.
 
 ### Deleting an internship role from company : `delete role` <a id="c-delete-c-r"></a>
 
