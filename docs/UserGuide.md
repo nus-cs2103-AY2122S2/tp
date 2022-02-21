@@ -5,7 +5,7 @@ title: User Guide
 
 Ultimate DivocTracker is a desktop app for managing COVID-19 contacts in school admin, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Ultimate DivocTracker can get your contact management tasks done faster than traditional GUI apps.
 
-#Glossary
+# Glossary
 - Quick start
 - Features
   - Adding a student: add
@@ -19,7 +19,7 @@ Ultimate DivocTracker is a desktop app for managing COVID-19 contacts in school 
   - Editing student’s personal details: edit [coming in v1.3]
 - Command summary
 
-#Quick start
+# Quick start
 - Ensure you have Java 11 or above installed in your Computer.
 - Download the latest ultimatedivoctracker.jar from <website link>.
 - Copy the file to the folder you want to use as the home folder for your Ultimate DivocTracker.
@@ -28,8 +28,8 @@ Ultimate DivocTracker is a desktop app for managing COVID-19 contacts in school 
 
 
  
-#Features
-##Adding a person: add
+# Features
+## Adding a person: add
 Adds a student to the tracking list
 
 - Format: add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS​ c/CLASS s/STATUS
@@ -37,6 +37,6 @@ Adds a student to the tracking list
   - add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/5A s/NEGATIVE
   - add n/Betsy Crowe p/99999999 e/betsycrowe@example.com a/Newgate Prison p/1234567 c/2B s/POSITIVE
 
-##Listing all persons : list
+## Listing all persons : list
 Shows a list of all students in the address book.
 - Format: list
