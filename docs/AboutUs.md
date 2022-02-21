@@ -14,6 +14,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/daniel.png" width="200px">
 
 [[github](https://github.com/dandaandaaaaaan)]
+[[portfolio](team/daniel.md)]
 
 * Role: Developer
 * Responsibilities: Workflow setting, CI/CD, Import/Export
