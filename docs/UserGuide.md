@@ -156,7 +156,7 @@ Examples:
 
 Format: `delete [TAG:VALUE ...]`
 
-* Delete all products that match the (tag, value) pair.
+* Deletes all products that match the (tag, value) pair.
 * Must include at least one (tag, value) pair.
 
 Example: `delete n:Bread`
