@@ -89,7 +89,8 @@ Supported Types: Recurring `-cr` and Temporary `-c`
 
 Example: `add -cr programming 101 -d 2022-02-17 -t 1700 -p 2`
 Adds a recurring class programming 101 every Thursday at 5pm from 17th Feb 2022.
-
+Example: `add -c programming 101 -d 2022-02-18 -t 1500`
+Adds a temporary class programming 101 on Friday at 3pm from 18th Feb 2022.
 >**Note:** If no type is given then the class is assumed to be temporary.
 > <br> e.g. To add a temporary class programming 101 on Thursday at 5pm on 17th Feb 2022,
 > do: <br> `add -c programming 101 -d 2022-02-17 -t 1700`
