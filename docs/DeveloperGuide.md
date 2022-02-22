@@ -141,7 +141,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
 
 
-* 7c. User already provided the duration of class in command.
+* 7c. User already provided the duration of class in command.  
   Use case ends.
 
 
@@ -200,7 +200,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
 
 
-* 7c. User already provided the ending time in command.
+* 7c. User already provided the ending time in command.  
   Use case ends.
 
 
