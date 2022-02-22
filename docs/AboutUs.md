@@ -9,15 +9,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Daniel Lee Min Qiang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/dandaandaaaaaan.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/dandaandaaaaaan)]
+[[portfolio](team/dandaandaaaaaan.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: Workflow setting, CI/CD, Import/Export
 
 ### Ho Zong Han
 
