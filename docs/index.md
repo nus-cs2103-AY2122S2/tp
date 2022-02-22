@@ -8,7 +8,7 @@ title: TeachWhat!
 
 ![Ui](images/Ui.png)
 
-**TeachWhat! is a desktop address book application used for private tutors in managing their class.** The user interacts
+**TeachWhat! is a desktop application used for private tutors in managing their class.** The user interacts
 with it using a CLI, and it has a GUI created with JavaFX.
 
 * If you are interested in using TeachWhat, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
