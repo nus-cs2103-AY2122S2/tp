@@ -191,7 +191,8 @@ the data of your previous TeachWhat! folder.
 | Action             | Format, Examples                                                                                               |
 |--------------------|----------------------------------------------------------------------------------------------------------------|
 | **Add Student**    | `add -s [STUDENT_NAME]` <br> e.g., `add -s sammy boyo`                                                         |
-| **Add Class**      | `add -c -[TYPE] [CLASS_NAME] -d [DATE] -t [TIME]` <br> e.g., `add -c -r programming 101 -d 2022-02-17 -t 1700` |
+| **Add Temporary Class**      | `add -c [CLASS_NAME] -d [DATE] -t [START_TIME] -p [DURATION_OF_LESSON]` <br> e.g., `add -c programming 101 -d 2022-02-18 -t 1500 -p 2` |
+| **Add Recurring Class**      | `add -cr [CLASS_NAME] -d [START_DATE] -t [START_TIME] -p [DURATION_OF_LESSON]` <br> e.g., `add -cr programming 101 -d 2022-02-17 -t 1700 -p 2` |
 | **Delete Student** | `rm -s [STUDENT_ID]`<br> e.g. `rm -s 13`                                                                       |
 | **Delete Class**   | `rm -c [CLASS_ID]`<br> e.g.`rm -c 5`                                                                           |
 | **Assign Student** | `add -s -c [STUDENT_ID] [CLASS_ID]`<br> e.g.`add -s -c 5 11`                                                   |
