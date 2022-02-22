@@ -14,6 +14,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/wei-xinn.png" width="200px">
 
 [[github](https://github.com/wei-xinn)]
+[[portfolio](team/wei-xinn.md)]
 
 * Role: Developer
 * Responsibilities: User onboarding guide
