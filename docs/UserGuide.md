@@ -69,16 +69,16 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 ### Adding entries
-#### Adding a student: `add`
+#### Adding a student: `add student`
 
 Adds a student to TAssist.
 
-Format: `add student id/STUDENT_ID student n/NAME p/PHONE_NUMBER e/EMAIL`
+Format: `add student id/STUDENT_ID n/NAME p/PHONE_NUMBER e/EMAIL`
 
 Examples:
 * `add student id/E0123456 n/John Doe p/98765432 e/johnd@example.com`
 
-#### Adding a module: `add`
+#### Adding a module: `add module`
 
 Adds a module to TAssist.
 
@@ -87,7 +87,7 @@ Format: `add module n/MODULE_NAME c/MODULE_CODE`
 Examples:
 * `add module n/Software Engineering Project c/CS2103T`
 
-#### Adding a lesson: `add`
+#### Adding a lesson: `add lesson`
 
 Adds a lesson to TAssist.
 
@@ -138,7 +138,7 @@ Examples:
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ###Deleting entries
-#### Deleting a student : `delete`
+#### Deleting a student : `delete student`
 
 Deletes the specified student from TAssist.
 
@@ -151,7 +151,7 @@ Format: `delete student INDEX`
 Examples:
 * `list student` followed by `delete student 2` deletes the 2nd student in TAssist.
 
-#### Deleting a module : `delete`
+#### Deleting a module : `delete module`
 
 Deletes the specified module from TAssist.
 
@@ -164,7 +164,7 @@ Format: `delete module INDEX`
 Examples:
 * `list module` followed by `delete module 2` deletes the 2nd module in TAssist.
 
-#### Deleting a lesson : `delete`
+#### Deleting a lesson : `delete lesson`
 
 Deletes the specified lesson from TAssist.
 
