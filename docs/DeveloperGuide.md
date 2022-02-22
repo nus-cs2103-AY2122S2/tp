@@ -26,7 +26,7 @@ Students who...
 
 * Track (View all your internship applications at a glance)
 * Remind (Be reminded of your upcoming assessments)
-* Review (Comment on each stage of the application process for future self-improvement OR Review the company’s hiring process)
+* Review (Comment on each stage of the application process for future self-improvement or review the company’s hiring process)
 
 ### User stories
 
