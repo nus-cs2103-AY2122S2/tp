@@ -42,8 +42,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/vishwanth2210.png" width="200px">
 
-[github](http://github.com/vishwanth2210)
-[portfolio](team/vishwanth2210.md)
+[[github](http://github.com/vishwanth2210)]
+[[portfolio](team/vishwanth2210.md)]
 
 * Role: Developer + Deliverables and Deadlines
 * Responsibilities: Dev Ops + Threading
