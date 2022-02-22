@@ -97,6 +97,19 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 d/Salary-3400`
 
+
+
+### Adding additional information: `addinfo`
+
+Adds additional information that is relevant to a client
+
+Format: `Format: addinfo n/NAME [INFO] [VALUE]`
+
+
+Examples:
+* `addinfo n/John Doe Preference CryptoCurrencies`
+* `addinfo n/Betsy Risk High`
+
 ### Listing all persons : `list`
 
 Shows a list of all clients in the HustleBook.
