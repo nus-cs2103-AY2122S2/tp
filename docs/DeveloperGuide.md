@@ -285,14 +285,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: showing customer's detail by Index**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list customers
+2.  AddressBook shows a list of customers with their customer Index
+3.  User requests to show information about customer using Index
+4.  AddressBook shows information about customer
+
+    Use case ends.
+    
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3. The given index is invalid.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 3.
+    
+**Use case: find customer's detail by their name**
+
+1.  User requests to find a customer by name using a keyword
+2.  AddressBook shows a list of customers with matching keyword with their customer Index
+3.  User requests to show information about customer using Index
+4.  AddressBook shows information about customer
 
     Use case ends.
 
@@ -306,9 +327,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 3a1. AddressBook shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
+      
+**Use case: user wishes to exit the application**
 
-*{More to be added}*
+1.  User requests to exit the application
+2.  AddressBook closes the application
+
+    Use case ends.
 
 ### Non-Functional Requirements
 
@@ -351,27 +377,28 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### showing customer's details
 
-1. Deleting a person while all persons are being shown
+1. showing customer customer
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Test case: `show 1`<br>
+      Expected: Details of the first customer on the list will be shown.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   1. Test case: `show 0`<br>
+      Expected: Customer does not exist. Error details shown in the status message. Status bar remains the same.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect show commands to try: `show`, `show x` (where x is larger than the list size or less than 1)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### finding customer by keyword
 
-### Saving data
+1. finding customer by keyword
 
-1. Dealing with missing/corrupted data files
+   1. Test case: `find john`<br>
+      Expected: list of customers with john in their name will be shown
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Test case: `find j0hn`<br>
+      Expected: Invalid keyword has been enter. Error details shown in the status message. Status bar remains the same.
 
-1. _{ more test cases …​ }_
+   1. Other incorrect show commands to try: `find`, `find x` (where x only contains english characters)<br>
+      Expected: Similar to previous.
