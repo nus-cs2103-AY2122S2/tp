@@ -120,18 +120,31 @@ Format: `list`
 
 Edits an existing person in the HustleBook.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+* Using **Index**:
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+  Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+  * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+  * At least one of the optional fields must be provided.
+  * Existing values will be updated to the input values.
+  * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+  * You can remove all the person’s tags by typing `t/` without
+      specifying any tags after it.
+
+    Examples:
+    * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+    * `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+
+
+* Using **Name**:
+
+    Format: `edit n/NAME d/NEW_DATE`
+
+  * Edits the meeting date of the person with the specified name.
+  * Date has to be in the format **DD-MM-YYYY**.
+  
+    Examples:
+    * `edit n/John Doe d/04-12-2020` Edits the meeting date of the person with the name `John Doe` to `04-12-2020` which is 4th Dec 2020. 
 
 ### Locating persons by name: `find`
 
@@ -155,15 +168,24 @@ Examples:
 
 Deletes the specified person from the HustleBook.
 
-Format: `delete INDEX`
+* Using **Index**:
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+  Format: `delete INDEX`
 
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the HustleBook.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+  * Deletes the person at the specified `INDEX`.
+  * The index refers to the index number shown in the displayed person list.
+  * The index **must be a positive integer** 1, 2, 3, …​
+  
+    Examples:
+    * `list` followed by `delete 2` deletes the 2nd person in the address book.
+    * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+    
+
+* Using **Name**: 
+
+  Format: `delete n/NAME`
+
+  * Deletes the person with the specified `NAME`.
 
 ### Clearing all entries : `clear`
 
