@@ -137,7 +137,7 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-###Deleting entries
+### Deleting entries
 #### Deleting a student : `delete student`
 
 Deletes the specified student from TAssist.
