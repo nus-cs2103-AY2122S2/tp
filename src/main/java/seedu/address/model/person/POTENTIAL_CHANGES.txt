@@ -1,0 +1,19 @@
+This file depicts changes and potential changes to be made to implement Status.java
+
+Implemented:
+1. Status Class
+
+Potential edits:
+1. ui/PersonCard.java
+2. Storage/JsonAdaptedPerson.java
+3. logic/commands/AddCommand.java
+4. logic/parser/AddCommandParser.java
+5. logic/parser/CliSyntax.java
+6. logic/parser/parserUtil.java
+7. model/person/Person.java
+
+Future edits:
+1. parser/EditCommandParser.java
+2. parser/FindCommandParser.java
+3. logic/commands/EditCommand.java
+4. logic/commands/FindCommand.java
