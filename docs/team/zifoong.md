@@ -23,10 +23,11 @@ Given below are my contributions to the project.
   * `To be added soon`
 * **Documentation**:
   * User Guide:
-    * `To be added soon`
-    * `To be added soon`
+    * Update AboutUs.md [\#18](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/18)
+    * Update Readme.md [\#18](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/18)
   * Developer Guide:
-    * `To be added soon`
+    * Editted Glossary
+    * Added User Profile, User Stories and Value Prepositions [\#25](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/25)
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#32](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/32)
   * `To be added soon`
