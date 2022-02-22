@@ -11,8 +11,8 @@ title: TeachWhat!
 **TeachWhat! is a desktop application used for private tutors in managing their class.** The user interacts
 with it using a CLI, and it has a GUI created with JavaFX.
 
-* If you are interested in using TeachWhat, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
-* If you are interested about developing TeachWhat, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+* If you are interested in using TeachWhat!, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
+* If you are interested about developing TeachWhat!, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
 
 
 **Acknowledgements**
