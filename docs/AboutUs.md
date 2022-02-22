@@ -17,7 +17,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/lkldev.md)]
 
 * Role: Team Lead
-* Responsibilities: Code quality / Scheduling and tracking
+* Responsibilities: Deliverables and deadlines
 
 ### Gernene Tan
 
@@ -52,10 +52,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Tan Jia Xin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jxt00.png" width="200px">
 
 [[github](http://github.com/jxt00)]
 [[portfolio](team/jxt00.md)]
 
 * Role: Developer
-* Responsibilities: Deliverables and deadlines / Scheduling and tracking
+* Responsibilities: Scheduling and tracking
