@@ -29,9 +29,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: None yet
 
-### Nikhil
+### Nyayapati Nikhil
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/nnmoq.png" width="200px">
 
 [[github](http://github.com/nnmoq)]
 [[portfolio](team/nnmoq.md)]
