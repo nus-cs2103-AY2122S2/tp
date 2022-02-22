@@ -17,7 +17,7 @@ Given below are my contributions to the project.
 
 * **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
 
-* **Code contributed**: [RepoSense link]()
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/#breakdown=true&search=lkldev)
 
 * **Project management**:
   * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
@@ -28,8 +28,7 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `delete` and `find` [\#72]()
-    * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
+    * Added documentation for project description and quick start. [\#6]()
   * Developer Guide:
     * Added implementation details of the `delete` feature.
 
