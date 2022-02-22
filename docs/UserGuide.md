@@ -87,7 +87,7 @@ Format: `add -[TYPE OF CLASS] [CLASS_NAME] -d [DATE / START_DATE] -t [START_TIME
 
 Supported Types: Recurring `-r` and Temporary `-t`
 
-Example: `add -c -r programming 101 -d 2022-02-17 -t 1700`
+Example: `add -cr programming 101 -d 2022-02-17 -t 1700 -p 2`
 Adds a recurring class programming 101 every Thursday at 5pm from 17th Feb 2022.
 
 >**Note:** If no type is given then the class is assumed to be temporary.
