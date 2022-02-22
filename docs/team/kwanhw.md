@@ -11,33 +11,28 @@ ContacX will allow for efficient management of a large list of contacts, allowin
 
 Given below are my contributions to the project.
 
--   **New Feature**: Onboarding guide for new users
+* **New Feature**: Added ability to create and manage tags
+    * What it does: `To be added soon`
+    * Justification: `To be added soon`
+    * Highlights: `To be added soon`
+    * Credits: `To be added soon`
 
-    -   What it does: `To be added soon`
-    -   Justification: `To be added soon`
-    -   Highlights: `To be added soon`
-    -   Credits: `To be added soon`
+* **Code contributed**: `to be added soon`
 
--   **Code contributed**: `to be added soon`
+* **Project management**:
+    * `to be added soon`
 
--   **Project management**:
+* **Enhancements to existing features**:
+    * `to be added soon`
 
-    -   `to be added soon`
+* **Documentation**:
+    * User Guide:
+        * `to be added soon`
+    * Developer Guide:
+        * `to be added soon`
 
--   **Enhancements to existing features**:
+* **Community**:
+    * `to be added soon`
 
-    -   `to be added soon`
-
--   **Documentation**:
-
-    -   User Guide:
-        -   `to be added soon`
-    -   Developer Guide:
-        -   `to be added soon`
-
--   **Community**:
-
-    -   `to be added soon`
-
--   **Tools**:
-    -   `to be added soon`
+* **Tools**:
+    * `to be added soon`

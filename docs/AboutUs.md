@@ -45,8 +45,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/kwanhw)]
 [[portfolio](team/kwanhw.md)]
 
--   Role: Developer
--   Responsibilities: Contact tagging
+*   Role: Developer
+*   Responsibilities: Contact tagging
 
 ### James Doe
 
