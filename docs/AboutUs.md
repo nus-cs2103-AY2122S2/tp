@@ -57,3 +57,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: UI
+
+### Samuel Tee
+
+<img src="images/kidsnd274.png" width="200px">
+
+[[github](http://github.com/kidsnd274)]
+[[portfolio](team/kidsnd274.md)]
+
+* Role: Developer
+* Responsibilities: None yet
