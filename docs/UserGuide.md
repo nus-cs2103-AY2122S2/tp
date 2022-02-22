@@ -124,19 +124,44 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting a student : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified student from TAssist.
 
-Format: `delete INDEX`
+Format: `delete student INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the student at the specified `INDEX`.
+* The index refers to the index number shown in the displayed student list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list student` followed by `delete student 2` deletes the 2nd student in TAssist.
+
+### Deleting a module : `delete`
+
+Deletes the specified module from TAssist.
+
+Format: `delete module INDEX`
+
+* Deletes the module at the specified `INDEX`.
+* The index refers to the index number shown in the displayed module list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list module` followed by `delete module 2` deletes the 2nd module in TAssist.
+
+### Deleting a lesson : `delete`
+
+Deletes the specified lesson from TAssist.
+
+Format: `delete lesson INDEX`
+
+* Deletes the lesson at the specified `INDEX`.
+* The index refers to the index number shown in the displayed lesson list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list lesson` followed by `delete lesson 2` deletes the 2nd lesson in TAssist.
 
 ### Clearing all entries : `clear`
 
