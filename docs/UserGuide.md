@@ -87,11 +87,24 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Listing all persons : `list`
+### Listing all customers : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all customers in the application.
 
 Format: `list`
+
+### Listing individual customer's profile: `show`
+
+Display all information about an individual customer.
+
+Format: `show INDEX`
+
+* Shows the customer profile at the specified INDEX.
+* Index refers to the index number shown in the displayed customer list.
+* Index must be a positive integer 1, 2, 3, …
+
+Examples:
+* `show 2` returns the profile of the 2nd customer in the application.
 
 ### Editing a person : `edit`
 
@@ -110,23 +123,18 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Listing customers' profile by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds customers whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The search is case-insensitive. e.g `john` will match `john`
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Only full words will be matched e.g. `john` will not match `joh`
 
 Examples:
 * `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a person : `delete`
 
