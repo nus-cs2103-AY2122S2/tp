@@ -9,15 +9,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Brandon Kheng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/brelkh.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/brelkh)]
 
-* Role: Project Advisor
+* Role: Undecided
 
 ### Jane Doe
 
@@ -29,31 +27,32 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Jet Tan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/medajet.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/medajet)]
+[[portfolio](team/medajet.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Undecided
 
-### Jean Doe
+### Saravanan Anuja Harish
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/harish-coding.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/harish-coding)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Terng Yan Long
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/korochii.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/korochii)]
+[[portfolio](team/korochii.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Undecided
