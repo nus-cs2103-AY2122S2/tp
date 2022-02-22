@@ -85,7 +85,7 @@ Adds a class to TeachWhat!
 
 Format: `add -[TYPE OF CLASS] [CLASS_NAME] -d [DATE / START_DATE] -t [START_TIME] -p [DURATION_OF_LESSON]`
 
-Supported Types: Recurring `-r` and Temporary `-t`
+Supported Types: Recurring `-cr` and Temporary `-c`
 
 Example: `add -cr programming 101 -d 2022-02-17 -t 1700 -p 2`
 Adds a recurring class programming 101 every Thursday at 5pm from 17th Feb 2022.
