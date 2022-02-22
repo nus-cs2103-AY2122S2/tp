@@ -424,11 +424,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Administrative requirements: there should be at least 1 DIVOCTracker admin to monitor data entries.
+5. Performance requirements: the display of students' information should be done within 2 seconds.
+6. Quality requirements: the system should be usable by a novice who has never administered COVID-19 statuses. 
+7. Notes about project scope: 
+   1. DIVOCtracker is not required to handle user login and permissions.
+   2. The central idea of the product is to provide a tracking tool for teachers/administrators to track COVID-19 in schools.
 
 ### Glossary
 
