@@ -15,5 +15,5 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/medajet)]
 [[portfolio](team/medajet.md)]
 
-* Role: Undecided
+* Role: Developer
 * Responsibilities: Undecided
