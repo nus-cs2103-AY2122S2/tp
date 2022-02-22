@@ -19,6 +19,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: TBA
 
+### Benjamin Tay Keck Bin
+
+<img src="images/johndoe.png" width="200px">
+
+[[github](https://github.com/Btaykb)]
+[[portfolio](team/Btaykb.md)]
+
+* Role: Developer
+* Responsibilities: TBC
+
 ### Jane Doe
 
 <img src="images/johndoe.png" width="200px">
