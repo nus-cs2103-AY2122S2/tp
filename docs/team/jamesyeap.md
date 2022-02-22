@@ -5,7 +5,7 @@ title: Yeap Yi Sheng James's Project Portfolio Page
 
 ## Project: TeachWhat!
 TeachWhat! is a desktop address book application used for private tutors in managing their class. The user interacts 
-with it using a CLI, and it has a GUI created with JavaFX. 
+with it using a CLI, and it has a GUI created with JavaFX.
 
 It is written in Java, and has about 10 kLoC.
 
@@ -37,3 +37,4 @@ Given below are my contributions to the project.
 
 # Contributions beyond the project team
 `to be added soon`
+
