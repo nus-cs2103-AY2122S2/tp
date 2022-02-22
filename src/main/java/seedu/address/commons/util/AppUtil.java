@@ -35,7 +35,6 @@ public class AppUtil {
      * @throws IllegalArgumentException with {@code errorMessage} if {@code condition} is false.
      */
     public static void checkArgument(Boolean condition, String errorMessage) {
-        System.out.println(condition);
         if (!condition) {
             throw new IllegalArgumentException(errorMessage);
         }
