@@ -9,51 +9,32 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### James Yeap
 
 <img src="images/johndoe.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/jamesyeap)]
+[[portfolio](team/jamesyeap.md)]
 
 * Role: Developer
 * Responsibilities: UI
+
+### Samuel Tee
+
+<img src="images/kidsnd274.png" width="200px">
+
+[[github](http://github.com/kidsnd274)]
+[[portfolio](team/kidsnd274.md)]
+
+* Role: Developer
+* Responsibilities: None yet
+
+### Nyayapati Nikhil
+
+<img src="images/nnmoq.png" width="200px">
+
+[[github](http://github.com/nnmoq)]
+[[portfolio](team/nnmoq.md)]
+
+* Role: Developer
+* Responsibilities: `tbd`
