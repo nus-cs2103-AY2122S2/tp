@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-TeachWhat is a **desktop app for tutors to manage their schedule, students, classes, and 
+TeachWhat! is a **desktop app for tutors to manage their schedule, students, classes, and 
 income**, optimized for use via a Command Line Interface (CLI) while still having the 
 benefits of a Graphical User Interface (GUI). 
 If you can type fast, TeachWhat can get your tuition management tasks done faster than 
