@@ -4,7 +4,7 @@ title: User Guide
 ---
 
 TeachWhat is a **desktop app for tutors to manage their schedule, students, classes, and 
-income, optimized for use via a Command Line Interface** (CLI) while still having the 
+income**, optimized for use via a Command Line Interface (CLI) while still having the 
 benefits of a Graphical User Interface (GUI). 
 If you can type fast, TeachWhat can get your tuition management tasks done faster than 
 traditional GUI apps.
@@ -18,13 +18,14 @@ traditional GUI apps.
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `TeachWhat.jar` from [here](https://github.com/AY2122S2-CS2103T-W11-3/tp/releases).
+2. Download the latest `TeachWhat.jar` from [here](https://github.com/AY2122S2-CS2103T-W11-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your ClassBook.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. 
+Note how the app contains some sample data.<br> ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * **`ls -c`** : Lists all classes.
@@ -38,7 +39,7 @@ traditional GUI apps.
 
    * **`quit`** : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -46,7 +47,7 @@ traditional GUI apps.
 
 <div markdown="block" class="alert alert-info">
 
-**Notes about the command format:**
+**:information_source:Notes about the command format:**
 
 * Words in `[UPPER_CASE]` are the parameters to be supplied by the user.<br>
   e.g. in `add -s [STUDENT_NAME]`, `[STUDENT_NAME]` is a parameter which can be used as `add -s John Doe`.
