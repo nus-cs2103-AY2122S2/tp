@@ -171,7 +171,7 @@ Example: `save /TeachWhat/store.txt` sets the save file to be
 
 ### Exit
 
-Closes TeachWhat window.
+Closes TeachWhat! window.
   
 Format: `quit`
 
