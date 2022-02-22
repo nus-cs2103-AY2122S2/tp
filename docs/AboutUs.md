@@ -9,6 +9,25 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Benjamin Tay Keck Bin
+
+<img src="images/johndoe.png" width="200px">
+
+
+[[github](https://github.com/Btaykb)]
+[[portfolio](team/Btaykb.md)]
+
+* Role: Developer
+* Responsibilities: TBC
+
+<img src="images/johndoe.png" width="200px">
+
+[[homepage](http://www.comp.nus.edu.sg/~damithch)]
+[[github](https://github.com/johndoe)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Project Advisor
+
 ### John Doe
 
 <img src="images/johndoe.png" width="200px">
