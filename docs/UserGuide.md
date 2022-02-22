@@ -83,7 +83,7 @@ Example: `rm -s 13`
 
 Adds a class to TeachWhat!
 
-Format: `add -c -[TYPE] [CLASS_NAME] -d [DATE] -t [TIME]`
+Format: `add -[TYPE OF CLASS] [CLASS_NAME] -d [DATE / START_DATE] -t [START_TIME] -p [DURATION_OF_LESSON]`
 
 Supported Types: Recurring `-r` and Temporary `-t`
 
