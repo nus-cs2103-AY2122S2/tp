@@ -11,7 +11,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Kuan Jian Rong
 
-<img src="images/jr.png" width="200px">
+<img src="images/kuanjr.png" width="200px">
 
 [[github](https://github.com/kuanjr)]
 [[portfolio](team/kuanjr.md)]
