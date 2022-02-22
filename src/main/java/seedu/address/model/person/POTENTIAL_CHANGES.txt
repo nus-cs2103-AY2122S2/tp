@@ -4,16 +4,23 @@ Implemented:
 1. Status Class
 
 Potential edits:
-1. ui/PersonCard.java
-2. Storage/JsonAdaptedPerson.java
-3. logic/commands/AddCommand.java
-4. logic/parser/AddCommandParser.java
-5. logic/parser/CliSyntax.java
-6. logic/parser/parserUtil.java
-7. model/person/Person.java
+1. ui/PersonCard.java - DONE
+2. Storage/JsonAdaptedPerson.java - DONE
+3. logic/commands/AddCommand.java - DONE
+4. logic/parser/AddCommandParser.java - DONE
+5. logic/parser/CliSyntax.java - DONE
+6. logic/parser/parserUtil.java - DONE
+7. model/person/Person.java - DONE
+8. logic/commands/EditCommand.java - DONE
+9. parser/EditCommandParser.java - DONE
+
+test folder
+1. testutil/PersonBuilder.java - DONE
+2. test/JsonAdaptedPersonTest.java - DONE
+
+SampleData/Test changes:
+1. model/util/SampleDataUtil.java - DONE
 
 Future edits:
-1. parser/EditCommandParser.java
-2. parser/FindCommandParser.java
-3. logic/commands/EditCommand.java
-4. logic/commands/FindCommand.java
+1. parser/FindCommandParser.java
+2. logic/commands/FindCommand.java

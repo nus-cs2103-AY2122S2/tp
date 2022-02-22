@@ -13,7 +13,7 @@ public class Status {
     public static final String MESSAGE_CONSTRAINTS =
             "Status should only be Positive, Negative or Close-Contact";
     private static final String[] STATUS_INPUT = {"Positive", "Negative", "Close-Contact"};
-    public final String status;
+    public final String value;
 
     /**
      * Constructs a {@code Phone}.
@@ -23,7 +23,7 @@ public class Status {
     public Status(String status) {
         requireNonNull(status);
         checkArgument(isValidStatus(status), MESSAGE_CONSTRAINTS);
-        this.status = status;
+        this.value = status;
     }
 
     /**
@@ -41,19 +41,19 @@ public class Status {
 
     @Override
     public String toString() {
-        return this.status;
+        return this.value;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Status // instanceof handles nulls
-                && status.equals(((Status) other).status)); // state check
+                && value.equals(((Status) other).value)); // state check
     }
 
     @Override
     public int hashCode() {
-        return status.hashCode();
+        return value.hashCode();
     }
 
 }
