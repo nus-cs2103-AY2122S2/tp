@@ -12,7 +12,7 @@ To be added
 Refer to https://nus-cs2103-ay2122s2.github.io/website/admin/tp-deliverables.html#deliverable-project-portfolio-page-ppp
 
 ### Code contributed
-To be added 
+To be added
 
 ### Enhancements implemented
 To be added
