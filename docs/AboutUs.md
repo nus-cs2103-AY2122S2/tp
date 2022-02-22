@@ -9,34 +9,25 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### Benjamin Tay Keck Bin
+### Bryan Tan Jing Kai
 
 <img src="images/johndoe.png" width="200px">
 
+[[github](https://github.com/fantablack)]
+[[portfolio](team/fantablack.md)]
+
+* Role: Developer
+* Responsibilities: TBA
+
+### Benjamin Tay Keck Bin
+
+<img src="images/johndoe.png" width="200px">
 
 [[github](https://github.com/Btaykb)]
 [[portfolio](team/Btaykb.md)]
 
 * Role: Developer
 * Responsibilities: TBC
-
-<img src="images/johndoe.png" width="200px">
-
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### John Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
 
 ### Jane Doe
 
@@ -57,12 +48,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Wei Jie
 
 <img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/bakano98)]
+[[portfolio](team/bakano98.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
