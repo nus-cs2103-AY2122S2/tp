@@ -9,51 +9,51 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Kuan Jian Rong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kuanjr.png" width="200px">
 
-[homepage](http://www.comp.nus.edu.sg/~damithch)
-[github](https://github.com/johndoe)
-[portfolio](team/johndoe.md)
+[[github](https://github.com/kuanjr)]
+[[portfolio](team/kuanjr.md)]
 
-* Role: Project Advisor
+* Role: Developer + Team Lead
 
 ### Mohd Shafik
 
 <img src="images/ad-nap.png" width="200px">
 
-[github](https://github.com/AD-NAP/)
-[portfolio](team/ad-nap.md)
+[[github](https://github.com/AD-NAP/)]
+[[portfolio](team/ad-nap.md)]
 
 * Role: Developer + Scheduling and Tracking
 * Responsibilities: UI
 
-### Johnny Doe
+### Jack Ng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/j4ck990.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/j4ck990)]
+[[portfolio](team/j4ck990.md)]
 
-* Role: Developer
+* Role: Developer + Integration
 * Responsibilities: Data
 
-### Jean Doe
+### Vishwanth
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/vishwanth2210.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/vishwanth2210)]
+[[portfolio](team/vishwanth2210.md)]
 
-* Role: Developer
+* Role: Developer + Deliverables and Deadlines
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Wee Heng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/decaxical.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/decaxical)]
+[[portfolio](team/decaxical.md)]
 
-* Role: Developer
+* Role: Developer + Testing
 * Responsibilities: UI
