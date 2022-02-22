@@ -1,0 +1,43 @@
+---
+layout: page
+title: Ka Shing's Project Portfolio Page
+---
+
+### Project: TrackBeau
+
+TrackBeau is a desktop app for beauty salons to manage customer information, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, TrackBeau can get your customer profile management tasks done faster than traditional GUI apps.
+
+Given below are my contributions to the project.
+
+* **New Feature**: Added the ability to undo/redo previous commands.
+  * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
+  * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
+  * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
+  * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+
+* **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
+
+* **Code contributed**:
+
+* **Project management**:
+  * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+
+* **Enhancements to existing features**:
+  * Updated the GUI color scheme
+  * Wrote additional tests for existing features to increase coverage from 88% to 92%
+
+* **Documentation**:
+  * User Guide:
+    * Added documentation for the features `list` and `show`
+  * Developer Guide:
+
+* **Community**:
+  * PRs reviewed (with non-trivial review comments):
+  * Contributed to forum discussions
+  * Reported bugs and suggestions for other teams in the class
+  * Some parts of the history feature I added was adopted by several other class mates
+
+* **Tools**:
+  * Integrated a third party library (Natty) to the project
+  * Integrated a new Github plugin (CircleCI) to the team repo
+  
