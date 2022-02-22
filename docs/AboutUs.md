@@ -19,15 +19,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Benjamin Koh Wei Jie
+### Jane Doe
 
-<img src="images/benjykoh.png" width="200px">
+<img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/benjykoh)]
-[[portfolio](team/benjykoh.md)]
+[[github](http://github.com/johndoe)]
+[[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Undecided
+* Role: Team Lead
+* Responsibilities: UI
 
 ### Johnny Doe
 
