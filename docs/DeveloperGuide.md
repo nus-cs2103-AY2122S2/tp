@@ -153,7 +153,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### Add a recurring class
 **System:** ClassBook  
-**Use case:** UC1 - Add a recurring class   
+**Use case:** UC2 - Add a recurring class   
 **Actor:** User
 
 **MSS**
@@ -234,7 +234,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 #### Delete a class
 
 **System:** ClassBook  
-**Use case:** UC1 - Delete a class   
+**Use case:** UC3 - Delete a class   
 **Actor:** User
 
 **MSS**
@@ -264,7 +264,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 #### Assign a student to a class
 
 **System:** StudentBook, ClassBook  
-**Use case:** UC2 - Assign a student to a class  
+**Use case:** UC4 - Assign a student to a class  
 **Actor:** User
 
 **MSS**
@@ -298,7 +298,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 #### Delete a student
 
 **System:** StudentBook  
-**Use case:** UC3 - Delete a student  
+**Use case:** UC5 - Delete a student  
 **Actor:** User
 
 **MSS**
