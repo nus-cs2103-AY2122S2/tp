@@ -33,12 +33,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 ### Liong Wen Xuan
 
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/wxliong.png" width="200px">
 
-[[github](http://github.com/wxliong)] [[portfolio](team/wxliong.md)]
+[[github](http://github.com/wxliong)]
+[[portfolio](team/wxliong.md)]
 
 * Role: Developer
-* Responsibilities: Testing
+* Responsibilities: Testing and Code Quality
 
 ### Meng An
 

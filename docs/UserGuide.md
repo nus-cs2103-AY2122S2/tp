@@ -68,20 +68,33 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+### Adding entries
+#### Adding a student: `add`
 
-### Adding a person: `add`
+Adds a student to TAssist.
 
-Adds a person to the address book.
-
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+Format: `add student id/STUDENT_ID student n/NAME p/PHONE_NUMBER e/EMAIL`
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add student id/E0123456 n/John Doe p/98765432 e/johnd@example.com`
+
+#### Adding a module: `add`
+
+Adds a module to TAssist.
+
+Format: `add module n/MODULE_NAME c/MODULE_CODE`
+
+Examples:
+* `add module n/Software Engineering Project c/CS2103T`
+
+#### Adding a lesson: `add`
+
+Adds a lesson to TAssist.
+
+Format: `add lesson id/LESSON_ID t/LESSON_TYPE m/MODULE_CODE`
+
+Examples:
+* `add lesson id/T13 t/tutorial m/CS2103T`
 
 ### Listing all persons : `list`
 
@@ -124,7 +137,8 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a student : `delete`
+###Deleting entries
+#### Deleting a student : `delete`
 
 Deletes the specified student from TAssist.
 
@@ -137,7 +151,7 @@ Format: `delete student INDEX`
 Examples:
 * `list student` followed by `delete student 2` deletes the 2nd student in TAssist.
 
-### Deleting a module : `delete`
+#### Deleting a module : `delete`
 
 Deletes the specified module from TAssist.
 
@@ -150,7 +164,7 @@ Format: `delete module INDEX`
 Examples:
 * `list module` followed by `delete module 2` deletes the 2nd module in TAssist.
 
-### Deleting a lesson : `delete`
+#### Deleting a lesson : `delete`
 
 Deletes the specified lesson from TAssist.
 
