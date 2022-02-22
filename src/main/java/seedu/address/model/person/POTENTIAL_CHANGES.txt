@@ -3,7 +3,7 @@ This file depicts changes and potential changes to be made to implement Status.j
 Implemented:
 1. Status Class
 
-Potential edits:
+Edits:
 1. ui/PersonCard.java - DONE
 2. Storage/JsonAdaptedPerson.java - DONE
 3. logic/commands/AddCommand.java - DONE
@@ -17,6 +17,9 @@ Potential edits:
 test folder
 1. testutil/PersonBuilder.java - DONE
 2. test/JsonAdaptedPersonTest.java - DONE
+
+resources folder
+1. PersonListCard.fxml - DONE
 
 SampleData/Test changes:
 1. model/util/SampleDataUtil.java - DONE
