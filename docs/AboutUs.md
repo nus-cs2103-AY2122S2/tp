@@ -13,8 +13,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/jamesyeap)]
-[[portfolio](team/jamesyeap.md)]
+* [github](http://github.com/jamesyeap)
+* [portfolio](team/jamesyeap.md)
 
 * Role: Developer
 * Responsibilities: UI
@@ -23,8 +23,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/kidsnd274.png" width="200px">
 
-[[github](http://github.com/kidsnd274)]
-[[portfolio](team/kidsnd274.md)]
+* [github](http://github.com/kidsnd274)
+* [portfolio](team/kidsnd274.md)
 
 * Role: Developer
 * Responsibilities: None yet
@@ -33,8 +33,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/nnmoq.png" width="200px">
 
-[[github](http://github.com/nnmoq)]
-[[portfolio](team/nnmoq.md)]
+* [github](http://github.com/nnmoq)
+* [portfolio](team/nnmoq.md)
+* Role: Developer
+* Responsibilities: `tbd`
+
+### Ryan Low
+
+<img src="images/Ryan-L98.png" width="200px">
+
+* [GitHub](http://github.com/Ryan-L98)
+* [Portfolio](team/Ryan-L98.md)
 
 * Role: Developer
 * Responsibilities: `tbd`
