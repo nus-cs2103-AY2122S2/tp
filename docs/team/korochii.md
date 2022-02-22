@@ -10,30 +10,31 @@ TAPA is a desktop contact management application used to manage students' contac
 Given below are my contributions to the project.
 
 * **New Feature**: 
-  * 
+  * to be added soon
 
 * **New Feature**: 
-
-* **Code contributed**: [RepoSense link]()
+  * to be added soon
+  
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=korochii&breakdown=true)
 
 * **Project management**:
-  * 
+  * to be added soon
 
 * **Enhancements to existing features**:
-  * 
+  * to be added soon
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features ...
+    * to be added soon
   * Developer Guide:
-    * Added implementation details of the ...
+    * to be added soon
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-  * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-  * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-  * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
+  * PRs reviewed (with non-trivial review comments): to be added soon
+  * Contributed to forum discussions (examples: to be added soon)
+  * Reported bugs and suggestions for other teams in the class (examples: to be added soon)
+  * Some parts of the history feature I added was adopted by several other class mates (to be added soon)
 
 * **Tools**:
-  * 
+  * to be added soon
 
