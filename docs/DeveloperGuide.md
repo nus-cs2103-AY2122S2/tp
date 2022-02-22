@@ -283,16 +283,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is`TrackBeau` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: Delete a person**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list customers
+2.  TrackBeau shows a list of customers
+3.  User requests to delete a specific customer in the list
+4.  TrackBeau deletes the person
 
     Use case ends.
 
@@ -304,10 +304,45 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. TrackBeau shows an error message.
 
       Use case resumes at step 2.
 
+**Use case: Add a person**
+
+**MSS**
+
+1.  User requests to see input format for adding a customer using `help`
+2.  TrackBeau shows command input formats
+3.  User requests to add a customer based on the input format
+4.  TrackBeau adds the customer to the list
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The input format is wrong.
+    * 2a1. AddressBook shows an error message.
+    
+      Use case resumes at step 3.
+
+**Use case: Edit a person**
+
+**MSS**
+
+1.  User requests to see input format for editing a customer's information using `help`
+2.  TrackBeau shows command input formats
+3.  User requests to edit a customer's information based on the input format
+4.  TrackBeau adds the customer to the list
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The input format is wrong.
+    * 2a1. AddressBook shows an error message.
+    
+      Use case resumes at step 3.
 *{More to be added}*
 
 ### Non-Functional Requirements
