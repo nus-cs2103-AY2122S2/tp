@@ -9,12 +9,11 @@ This project is based on the AddressBook-Level3 project created by the SE-EDU in
 
 Given below are my contributions to the project.
 
-**To be added soon**
-* **New Feature**: --
-  * What it does: --
-  * Justification: --
-  * Highlights: --
-  * Credits: *{-}*
+* **New Feature**: Status attribute for persons
+  * What it does: Gives each person in the list a status attribute denoting their COVID-19 status. 
+  * Justification: Track COVID-19 status of each person
+  * Highlights: Status can be `"Positive"`, `"Negative"` or `"Close-Contact"`
+  * Credits: *{Collaborators: Yong Rui, Zi Foong}*
 
 * **New Feature**: --
 
