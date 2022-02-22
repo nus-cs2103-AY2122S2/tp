@@ -19,15 +19,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Ho Zong Han
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/sharpstorm.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/sharpstorm)]
+[[portfolio](team/sharpstorm.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Code Quality, Scheduling and Deadlines, Progress Tracking, In charge of Appointments Subcomponent
 
 ### Johnny Doe
 
