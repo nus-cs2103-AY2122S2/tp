@@ -58,4 +58,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/jxt00.md)]
 
 * Role: Developer
-* Responsibilities: Deliverables and deadlines
+* Responsibilities: Deliverables and deadlines / Scheduling and tracking
