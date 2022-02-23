@@ -9,15 +9,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Howard Wong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/howardwong.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/howardwhw2)] 
+[[portfolio](team/howardwong.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: Data
 
 ### Jane Doe
 
@@ -28,15 +28,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Team Lead
 * Responsibilities: UI
-
-### Howard Wong
-
-<img src="images/howardwong.png" width="200px">
-
-[[github](http://github.com/howardwhw2)] [[portfolio](team/howardwong.md)]
-
-* Role: Developer
-* Responsibilities: Data
 
 ### Jean Doe
 
