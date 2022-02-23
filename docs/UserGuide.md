@@ -106,7 +106,7 @@ Format: `delete company COMPANY_INDEX`
 
 * Deletes the company at the specified COMPANY_INDEX.
 * The index refers to the index number shown in the displayed person list.
-* The index must be a positive integer 1, 2, 3, …
+* The index must be a positive integer like 1, 2, 3, …
 
 Examples:
 * `list` followed by `delete company 2` deletes the 2nd company on the list in Tinner.
@@ -118,7 +118,7 @@ Deletes the specified role in the specified company.
 Format: `delete role COMPANY_INDEX ROLE_INDEX`
 
 * Deletes the role at the specified ROLE_INDEX of the company at the specified COMPANY_INDEX. The indexes refer to the index numbers shown in the displayed company list.
-* The indexes must be a positive integer 1, 2, 3, …
+* The indexes must be a positive integer like 1, 2, 3, …
 
 Examples:
 * `list` followed by, `delete role 1 1` deletes the 1st role from the 1st company in Tinner.
