@@ -3,190 +3,176 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+# Tracey
 
-* Table of Contents
-{:toc}
+Tracey is a **desktop app for managing health statuses of NUS students, optimized for use via a Command Line
+Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast,
+Tracey can get your student health status management tasks done faster than traditional GUI apps.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+* [Quick Start](#quick-start)
+* [Features](#features)
+    * [Finding a contact](#finding-a-contact-find)
+    * [Adding a contact](#adding-a-contact-add)
+    * [Deleting a contact](#deleting-a-contact-delete)
+    * [Editing an exisiting contact](#editing-an-existing-contact-edit)
+    * [Saving](#saving)
+    * [Clearing all records](#clearing-all-records-clear)
+    * [Summarising records](#summarising-records-summarise)
+    * [Listing the records](#listing-the-records-list)
+    * [Viewing help](#viewing-help-help)
+    * [Filtering contacts](#filtering-contacts-filter)
+* [FAQ](#faq)
+* [Command Summary](#command-summary)
 
-1. Ensure you have Java `11` or above installed in your Computer.
+--------------------------------------------------------------------------------------------------------------------
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
-
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
-
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+## Quick Start
+1. Ensure you have Java 11 or above installed in your Computer.
+2. Download the latest `Tracey.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+3. Copy the file to the folder you want to use as the home folder for your Tracey application.
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
+   Note how the app contains some sample data. <br>
    ![Ui](images/Ui.png)
-
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+* **`list`** : Lists all contacts.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+* **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
-   * **`clear`** : Deletes all contacts.
+* **`clear`** : Deletes all contacts.
 
-   * **`exit`** : Exits the app.
+* **`exit`** : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
+### Finding a contact: `find`
+Find a particular contact in Tracey.
 
-<div markdown="block" class="alert alert-info">
+Format: `find NAME`
+* Returns the student(s) with the given details: `covid-positive`, `covid-negative`, `close-contact`
+* The search is case-sensitive. e.g `johnDoe` will not match `Johndoe`
 
-**:information_source: Notes about the command format:**<br>
+Examples of usages:
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+* `find John` returns `john` and `John Doe`
+* `find alex david` returns `Alex Yeoh` and`David Li`
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+### Adding a contact: `add`
+Add a student with relevant details into Tracey.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+Format: `add n/NAME p/PHONENUMBER e/EMAIL ...`
+* Add a student with the specific tags
+* The student name is case sensitive e.g. `add n/johnDoe` will logged as `johnDoe` and not `JohnDoe` in Tracey
+* Order of the tags does not matter e.g. `add n/NAME p/PHONENUMBER` is the same as `add p/PHONENUMBER n/NAME`
+* Tracey will ackoledge that the student has been added
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+Examples of usage:
+* `add n/Melvin f/SOC cs/ Negative`
+* `add e/student69@u.nus.edu n/ Martin`
 
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
+Possible tags:
+| **Tag** | **Meaning** |
+| - | - |
+| `n/`  | Name |
+| `p/` | Phone Number |
+| `e/` | Email |
+| `a/` | Address |
+| `f/` | Faculty |
+| `mc/` | Matriculation Number |
+| `cs`/ | Covid Status (Transient, Close Contact, Negative, Positive) |
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+### Deleting a contact: `delete`
+Delete a contact at a specific index
 
-</div>
+Format: `delete NAME`
+* Delete the student from the database
+* Deletes one student at a time
+* Can only delete at an index where a student exist
 
-### Viewing help : `help`
+Examples of usage:
+* `delete 2` removes the 2nd student on the list
+* `delete 10` removes the 10th student on the list
 
-Shows a message explaning how to access the help page.
-
-![help message](images/helpMessage.png)
-
-Format: `help`
-
-
-### Adding a person: `add`
-
-Adds a person to the address book.
-
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
-
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
-
-### Listing all persons : `list`
-
-Shows a list of all persons in the address book.
-
-Format: `list`
-
-### Editing a person : `edit`
-
-Edits an existing person in the address book.
-
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
-
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+### Editing an existing contact: `edit`
+* Edits the person at the specified INDEX. The index refers to the index number shown in the displayed person list.
+  The index **must be a positive integer** 1, 2, 3, …
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+* You can remove all the person’s tags by typing t/ without specifying any tags after it.
 
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+Format: `edit INDEX n/NAME ...`
 
-### Locating persons by name: `find`
+Examples of usage:
+* `edit 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st person to be `91234567`
+  and `johndoe@example.com` respectively.
+* `edit 2 n/David Limpeh t/` edits the entry to become `David Limpeh` and clears all existing tags.
 
-Finds persons whose names contain any of the given keywords.
+### Clearing all records: `clear`
+Clear all the data inside `Tracey`
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format:`clear`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+:warning: `Save a copy of the data file if you intend to keep it as the deleted files cannot be recovered.`
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+### Summarising the records: `summarise`
+Summarises the record inside `Tracey` that an overview of the data, such as number of students who are `covid-positive`.
 
-### Deleting a person : `delete`
+Format:`summarise record`
 
-Deletes the specified person from the address book.
+### Listing the records: `list`
+List the full record, which displays all the student's data that are logged into Tracey.
 
-Format: `delete INDEX`
+Format: `list`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+### Viewing help: `help`
+Shows a message explaining how to access the help page.
 
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+![help message](imagee/helpMessage.png)
 
-### Clearing all entries : `clear`
+Format: `help`
 
-Clears all entries from the address book.
+### Filtering contacts: `filter`
+Filter student based on health statuses
 
-Format: `clear`
+Format:`find HEALTH_STATUS`
 
-### Exiting the program : `exit`
+* Returns a list of students with the given health status: `covid-positive`, `covid-negative`, `close-contact`
+* The search is case-sensitive. e.g `Covid-Positive` will not match `covid-positive`
 
-Exits the program.
+Examples of usage:
+* `find covid-positive` returna all student that are tagged as covid-positive
 
-Format: `exit`
-
-### Saving the data
-
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-### Editing the data file
-
-AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
-</div>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
+### Saving
+Saving in the application is automatic. The data in the file will be saved accordingly whenever
+there are changes to `Tracey`.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
-
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+### FAQ
+**Q**: How do I transfer my data to another computer?
+**A**: Copy the file from [ROOT]/data/tracey.txt over to your other computer.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
-
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+### Command Summary
+| No. | Command | Description |
+| - | - | - |
+| 1. | `find` | Included in `AB3`|
+| 2. | `add' | Included in AB3, Additional Field: Include health categories (Positive, Close Contact, Transient Contact, Health Risk Warning etc.) |
+| 3. | `delete` | Included in `AB3` |
+| 4. | `edit` | Included in `AB3` |
+| 5. | `clear` | Delete everything inside `Tracey` |
+| 6. | `summarise` | Summarise data into a list for an overview |
+| 7. | `list` | Included in `AB3` |
+| 8. | `help` | Included in `AB3` |
+| 9. | `filter` | Retrieve list of people based on covid status |
+| 10. | Saving contacts into file | `Tracey` auto saves contacts into file |
