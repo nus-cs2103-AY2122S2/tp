@@ -9,6 +9,26 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Haikal Yusuf
+
+<img src="images/waffledood.png" width="200px">
+
+[[github](http://github.com/waffledood)]
+[[portfolio](team/waffledood.md)]
+
+* Role: Team Lead
+* Responsibilities: UI
+
+### Bryan Zheng
+
+<img src="images/ashuh.png" width="200px">
+
+[[github](http://github.com/ashuh)] 
+[[portfolio](team/ashuh.md)]
+
+* Role: Developer
+* Responsibilities: Data
+
 ### Howard Wong
 
 <img src="images/howardwong.png" width="200px">
@@ -19,31 +39,22 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jane Doe
+### HsiaoJietNg
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/hsiaojietng.jpeg" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/hsiaojietng)]
+[[portfolio](team/hsiaojietng.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Yang Xiquan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/cindyangxq.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/cindyangXQ)]
+[[portfolio](team/cindyangxq.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Dev Ops + Threading
