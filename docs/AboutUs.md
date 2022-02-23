@@ -19,15 +19,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Dione Goh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/dionegoh.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/dionegoh)]
+[[portfolio](team/dionegoh.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer
+* Responsibilities: [to be discussed]
 
 ### Johnny Doe
 
