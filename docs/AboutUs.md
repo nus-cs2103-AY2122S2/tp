@@ -43,7 +43,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/tanchinkiat99.png" width="200px">
 
 [[github](http://github.com/tanchinkiat99)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/tanchinkiat99.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
