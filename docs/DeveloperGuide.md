@@ -257,33 +257,64 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* has a need to manage a significant number of contacts for contact-tracing of students
+* has a simple-to-use product to check on health status of students
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: 
+
+Keep track of students’ covid status. This is a central repository for covid status updating to ease the facilitation of
+management of NUS students across different faculties. It will be easier to read and update covid status.
+
+Every students’ info in one integrated application platform. The app will help to manage students across different 
+faculties within NUS (no support for other schools).
+
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
+| Priority | As a …​                                 | I want to …​                     | So that I can…​                                                |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| `* * *`  | IT admin                                   | obtain student contact information | quickly contact students if required                               |
+| `* * *`  | IT admin                                   | get a list of students with covid  |  find out any possible hotspots                                    |
+| `* * *`  | IT admin                                   | save the data locally              | for easy dissemination of information to other admins              |
+| `* * *`  | IT admin                                   | find details of a particular student | follow up with checking on the student                           |
+| `* * *`  | IT admin                                   | add a student’s details into the system | store their details for reference                             |
+| `* * *`  | First time user                            | add a list of students with their info into the system  | have a centralised hub for covid health status |
+| `* * *`  | IT admin                                   | delete a user from the system      | remove wrongly keyed in inputs from the system                     |
+| `* * *`  | IT admin                                   | clear the system database          | quickly restore the initial state of the system and to start on a clean slate again             |
+| `* * *`  | IT admin                                   | edit a contact’s information       | can modify any change in contact details regarding a user          |
+| `* * *`  | Professors                                 | get the statistics of covid cases among different groups of students | Can use for further medical research |
+| `* *`    | IT admin                                   | seek help if unfamiliar with Tracey | straighten out any uncertainties regarding the usage of the system 
+| `* *`    | IT admin                                   | easily keep track and update  the covid status of students  | use data to inform relevant module lecturers and TAs |
+| `* *`    | IT admin                                   | see when a particular student started having covid symptoms | find who is the superspreader             |
+| `* *`    | IT admin                                   | store the date when the student tested positive for covid   | check the duration for which the student has to be isolated for                |
+| `* *`    | Busy admin                                 | mass send emails to specific students | check on their health                                           |
+| `* *`    | IT admin                                   | be notified of when a student’s status change   | follow up on their health                             |
+| `* *`    | OCD IT admin                               | categorise contacts according to faculty | I am happy                                                   |
+| `* *`    | IT admin                                   | filter out those students with covid easily     | write out future modules plan for different faculty   |
+| `* *`    | IT admin                                   | easily export data from the application  | To show my boss                                              |
+| `* *`    | User                                       | send contact info of someone    | his/her TA can contact the student only if TA is allowed to do so              |
+| `* *`    | IT admin                                   | mass send emails to the professors of affected students  | inform the relevant TAs and professors about their absence in class              |
+| `* *`    | UHC people                                 | get the number of students with covid    | prepare enough medical resources accordingly                 |
+| `* *`    | IT admin                                   | easy method to Import data into the app  | save the hassle                                              |
+| `* *`    | Hostel Management people                   | Retrieve the number of students with covid in the different hostel  | Can plan out the number of rooms for covid use like quarantine etc.                |
+| `* *`    | User                                       | have a quick keyword search     | to find a specific person if unsure of his full name or complete contact number                |
+| `* *`    | Professor                                  | be informed when one of my students are covid positive     | make arrangements for makeup class or examinations                |
+| `* *`    | IT admin                                   | add the last known location of where a particular student caught the virus     | manage the severity of the hotspot and choose to take follow up actions              |
+| `* `    | Parents                                     | get the name of students with covid      | check if their children or friends or neighbors’ children got covid or not               |
+| `* `    | NUS President                               | know covid status of students  and staffs     | come up with policies                                   |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Tracey` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: Delete a person**
 
