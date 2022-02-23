@@ -11,13 +11,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### James Yeap
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jamesyeap.png" width="200px">
 
 * [github](http://github.com/jamesyeap)
 * [portfolio](team/jamesyeap.md)
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: `tbd`
 
 ### Samuel Tee
 
