@@ -85,13 +85,13 @@ If a tutor has many students, it may be difficult to keep track of all of the st
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​    | I want to …​                                             | So that I can…​                                              |
-|----------|------------|----------------------------------------------------------|--------------------------------------------------------------|
-| `* * *`  | user       | add my student's information                             | keep track of their progress                                 |
-| `* * *`  | user       | delete classes                                           | clear old classes                                            |
-| `* * *`  | user       | delete students and their details                        | reduce clutter of old students and keep their privacy intact |
-| `* * *`  | user       | add classes to the list and assign students to the class | have an overview of which students are attending the class   |
-| `* *`    | a new user | clear and reset my entire list of classes and students   | add actual data after testing the program out                |
-| `*`      | user       | specify the type of class when creating one              | know if a class is permanent or a temporary class            |
+|---------|------------|----------------------------------------------------------|--------------------------------------------------------------|
+| `* * *` | user       | add my student's information                             | keep track of their progress                                 |
+| `* * *` | user       | delete classes                                           | clear old classes                                            |
+| `* * *` | user       | delete students and their details                        | reduce clutter of old students and keep their privacy intact |
+| `* * *` | user       | add classes to the list and assign students to the class | have an overview of which students are attending the class   |
+| `* *`   | a new user | clear and reset my entire list of classes and students   | add actual data after testing the program out                |
+| `* *`   | user       | specify the type of class when creating one              | know if a class is permanent or a temporary class            |
 
 
 ### Use cases
@@ -306,8 +306,8 @@ TODO
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **Command Line**: A text interface for your computer.
 
-TODO
 
 --------------------------------------------------------------------------------------------------------------------
 
