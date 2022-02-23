@@ -40,9 +40,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Tan Chin Kiat
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/tanchinkiat99.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/tanchinkiat99)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
