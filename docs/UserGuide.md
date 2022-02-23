@@ -17,12 +17,12 @@ Tracey can get your student health status management tasks done faster than trad
     * [Adding a contact](#adding-a-contact-add)
     * [Deleting a contact](#deleting-a-contact-delete)
     * [Editing an exisiting contact](#editing-an-existing-contact-edit)
-    * [Saving](#saving)
     * [Clearing all records](#clearing-all-records-clear)
-    * [Summarising records](#summarising-records-summarise)
+    * [Summarising the records](#summarising-the-records-summarise)
     * [Listing the records](#listing-the-records-list)
     * [Viewing help](#viewing-help-help)
     * [Filtering contacts](#filtering-contacts-filter)
+    * [Saving](#saving)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
 
@@ -136,7 +136,9 @@ Format: `list`
 ### Viewing help: `help`
 Shows a message explaining how to access the help page.
 
-![help message](imagee/helpMessage.png)
+<div align="center">
+<img src="./images/helpMessage.png" alt="help message" width=600px/>
+</div>
 
 Format: `help`
 
