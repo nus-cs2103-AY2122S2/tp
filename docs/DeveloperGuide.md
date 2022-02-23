@@ -180,6 +180,6 @@ Guarantees: every company stored in Tinner will be shown
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **Mainstream OS**: Windows, Linux, Unix, macOS
 * **CLI**: Command Line Interface
 * **MSS**: Main Success Scenario
