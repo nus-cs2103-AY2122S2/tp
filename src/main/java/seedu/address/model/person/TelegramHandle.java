@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class TelegramHandle {
     // Telegram handle has a limit of 5 to 32 characters excluding the @symbol at the front.
     public static final String MESSAGE_CONSTRAINTS = "Telegram handles should contain 5 to 32 alphanumeric characters.";
-    public static final String VALIDATION_REGEX = "[a-zA-Z0-9]{5,32}"; // TODO: Check if this is correct
+    public static final String VALIDATION_REGEX = "[a-zA-Z0-9]{5,32}";
 
     public final String telegramHandle;
 

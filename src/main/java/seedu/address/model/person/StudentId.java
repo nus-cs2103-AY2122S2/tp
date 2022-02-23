@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class StudentId {
     public static final String MESSAGE_CONSTRAINTS = "Matriculation number should only contain alphanumeric characters";
-    public static final String VALIDATION_REGEX = "[a-zA-Z0-9]*"; // TODO: Check if this is correct
+    public static final String VALIDATION_REGEX = "[a-zA-Z0-9]*";
 
     public final String id;
 
