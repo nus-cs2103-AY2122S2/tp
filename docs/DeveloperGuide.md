@@ -256,43 +256,65 @@ _{Explain here how the data archiving feature will be implemented}_
 ### Product scope
 
 **Target user profile**:
-
-* has a need to manage a significant number of contacts
+* works in beauty salon
+* has a need to manage a significant number of customer profiles
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: 
+With many customers, it is hard for beauty salons to provide personalized customer service. 
+Our product allows the user to keep track of customer information and group their customers to provide targeted services every time they return. 
+It can also keep track of performance metrics, like total new memberships.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​           | I want to …​                                                                             | So that I can…​                                                                  |
+|----------|-------------------|------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
+| `* * *`  | new user          | view the user guide easily                                                               | refer to instructions when I forget how to use the App                           |
+| `* * *`  | new user          | see where to key in information easily                                                   |                                                                                  |
+| `* * *`  | new user          | easily see the format to follow for commands for the system to understand                | key in customer information easily                                               |
+| `* * *`  | new user          | add name of customer                                                                     |                                                                                  |
+| `* * *`  | new user          | add contact details of customer                                                          | contact them for their appointment or for follow up                              |
+| `* * *`  | new user          | add customer preference for staff                                                        | appoint the staff they prefer during their appointment                           |
+| `* * *`  | new user          | add allergy information of customer                                                      | make sure I do not affect their health by applying products they are allergic to |
+| `* * *`  | new user          | add hair type of customer                                                                | choose the correct products when treating their hair                             |
+| `* * *`  | new user          | add skin type of customer                                                                | choose the appropriate products when treating their skin                         |
+| `* * *`  | new user          | view a customer profile                                                                  |                                                                                  |
+| `* * *`  | new user          | delete a customer profile                                                                | get rid of sample data I used to explore the app                                 |
+| `* * *`  | new user          | edit a customer profile                                                                  | update details when needed                                                       |
+| `* * *`  | new user          | find a customer profile                                                                  | locate a customer easily                                                         |
+| `* *`    | intermediate user | view customers based on when they are coming to the salon                                | do appropriate preparations based on customer profile                            |
+| `* *`    | intermediate user | add the birth date of a customer                                                         | know when to sent birthday wishes to customers                                   |
+| `* *`    | intermediate user | view the customers that are having their birthday today                                  | be reminded to sent them birthday wishes                                         |
+| `*`      | new user          | add personal details of staff like birth date, contact number, part time/full timer, etc | know my staffs better                                                            |
+| `*`      | new user          | add services that customer prefers                                                       | better pitch new products and personalise their experience at the salon          |
+| `*`      | new user          | add photo of customer                                                                    | remember new customers more easily                                               |
+| `*`      | expert user       | add the feedback of the customer after been serviced for a booking                       | know how satisfied the customer is and know the areas of improvement if any      |
+| `*`      | expert user       | keep track of number of customers on a specific day                                      | better allocate manpower                                                         |
+| `*`      | expert user       | keep track of how many new customers gained                                              | review and improve my company's performance                                      |
+| `*`      | expert user       | keep track of expected spending of customer                                              | review and improve my company's performance                                      |
+| `*`      | expert user       | get summary statistics on my customer profile (age)                                      | review and improve my choice of services and products                            |
+| `*`      | expert user       | get summary statistics on my customer profile (preferred staff)                          | identify the best staff and let the team learn from them                         |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is`TrackBeau` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: Delete a person**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list customers
+2.  TrackBeau shows a list of customers
+3.  User requests to delete a specific customer in the list
+4.  TrackBeau deletes the person
 
     Use case ends.
 
@@ -304,10 +326,45 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. TrackBeau shows an error message.
 
       Use case resumes at step 2.
 
+**Use case: Add a person**
+
+**MSS**
+
+1.  User requests to see input format for adding a customer using `help`
+2.  TrackBeau shows command input formats
+3.  User requests to add a customer based on the input format
+4.  TrackBeau adds the customer to the list
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The input format is wrong.
+    * 2a1. AddressBook shows an error message.
+    
+      Use case resumes at step 3.
+
+**Use case: Edit a person**
+
+**MSS**
+
+1.  User requests to see input format for editing a customer's information using `help`
+2.  TrackBeau shows command input formats
+3.  User requests to edit a customer's information based on the input format
+4.  TrackBeau adds the customer to the list
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The input format is wrong.
+    * 2a1. AddressBook shows an error message.
+    
+      Use case resumes at step 3.
 *{More to be added}*
 
 ### Non-Functional Requirements
@@ -315,6 +372,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Features should be relatively easy to test for both manual and automated testing.
+5.  The product should be for a single user i.e. (not a multi-user product).
+6.  The data should be stored locally and should be in a human editable text file.
+7.  Does not use a DBMS to store data.
+8.  The software should work without requiring an installer. 
+9.  The file sizes of the deliverables should be reasonable and not exceed the limits given below:
+    -   Product (i.e., the JAR/ZIP file)): 100MB
+    -   Documents (i.e., PDF files): 15MB/file
+10. The GUI should work well (i.e., should not cause any resolution-related inconveniences to the user) for,
+    -   standard screen resolutions 1920x1080 and higher, and,
+    -   for screen scales 100% and 125%.
+11. The GUI should be usable (i.e., all functions can be used even if the user experience is not optimal) for,
+    -   resolutions 1280x720 and higher, and
+    -   for screen scales 150%.
 
 *{More to be added}*
 
