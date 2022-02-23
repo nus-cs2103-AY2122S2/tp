@@ -44,7 +44,7 @@ TAssist is a **desktop app for managing students and their participation in less
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -52,7 +52,7 @@ TAssist is a **desktop app for managing students and their participation in less
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+* If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
@@ -62,13 +62,14 @@ TAssist is a **desktop app for managing students and their participation in less
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
 
 ### Adding entries
+
 #### Adding a student: `add student`
 
 Adds a student to TAssist.
@@ -87,31 +88,33 @@ Format: `add module n/MODULE_NAME c/MODULE_CODE`
 Examples:
 * `add module n/Software Engineering Project c/CS2103T`
 
-#### Adding a lesson: `add lesson`
+#### Adding a class group: `add class`
 
-Adds a lesson to TAssist.
+Adds a class group to TAssist.
 
-Format: `add lesson id/LESSON_ID t/LESSON_TYPE m/MODULE_CODE`
+Format: `add class id/CLASSGROUP_ID t/CLASSGROUP_TYPE m/MODULE_CODE`
 
 Examples:
-* `add lesson id/T13 t/tutorial m/CS2103T`
+* `add class id/T13 t/tutorial m/CS2103T`
 
-### Listing all persons : `list`
+### Listing entries
+
+#### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
 
 Format: `list`
 
-### Editing a person : `edit`
+### Editing entries : `edit` [coming soon]
 
-Edits an existing person in the address book.
+Edits an existing entry in TAssist.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
 
@@ -119,13 +122,13 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Locating entries: `find` [coming soon]
 
 Finds persons whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
@@ -138,6 +141,7 @@ Examples:
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting entries
+
 #### Deleting a student : `delete student`
 
 Deletes the specified student from TAssist.
@@ -164,18 +168,18 @@ Format: `delete module INDEX`
 Examples:
 * `list module` followed by `delete module 2` deletes the 2nd module in TAssist.
 
-#### Deleting a lesson : `delete lesson`
+#### Deleting a class group : `delete class`
 
-Deletes the specified lesson from TAssist.
+Deletes the specified class group from TAssist.
 
-Format: `delete lesson INDEX`
+Format: `delete class INDEX`
 
-* Deletes the lesson at the specified `INDEX`.
-* The index refers to the index number shown in the displayed lesson list.
+* Deletes the class group at the specified `INDEX`.
+* The index refers to the index number shown in the displayed class groups list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list lesson` followed by `delete lesson 2` deletes the 2nd lesson in TAssist.
+* `list class` followed by `delete class 2` deletes the 2nd class group in TAssist.
 
 ### Clearing all entries : `clear`
 
@@ -191,14 +195,14 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+TAssist data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+TAssist data are saved as a JSON file `[JAR file location]/data/tassist.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid, TAssist will discard all data and start with an empty data file at the next run.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -210,7 +214,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TAssist home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
