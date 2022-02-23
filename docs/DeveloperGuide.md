@@ -73,22 +73,26 @@ TODO
 ### Product scope
 
 **Target user profile**:
+- is a private tutor
+- has multiple students and classes
+- can type fast
+- skilled at using the command line
 
-TODO
-
-**Value proposition**: TODO
+**Value proposition**:\
+If a tutor has many students, it may be difficult to keep track of all of the students and the rates offered to each of them. TeachWhat! solves this issue by helping tutors manage their schedule, students and income more efficiently.
 
 ### User stories
-
-TODO
-
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​    | I want to …​                                             | So that I can…​                                              |
+|----------|------------|----------------------------------------------------------|--------------------------------------------------------------|
+| `* * *`  | user       | add my student's information                             | keep track of their progress                                 |
+| `* * *`  | user       | delete classes                                           | clear old classes                                            |
+| `* * *`  | user       | delete students and their details                        | reduce clutter of old students and keep their privacy intact |
+| `* * *`  | user       | add classes to the list and assign students to the class | have an overview of which students are attending the class   |
+| `* *`    | a new user | clear and reset my entire list of classes and students   | add actual data after testing the program out                |
+| `*`      | user       | specify the type of class when creating one              | know if a class is permanent or a temporary class            |
+
 
 ### Use cases
 
