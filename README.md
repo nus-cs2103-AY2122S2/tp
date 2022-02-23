@@ -5,7 +5,6 @@
 # Tracey
 
 * Tracey is a desktop app for **managing health statuses** of NUS students by administrative staffs, optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Tracey can get your student health status management tasks done faster than traditional GUI apps.
-  Example usages:
 
 ## Example Usages
 * To facilitate the management of covid status tracking amongst the NUS population
