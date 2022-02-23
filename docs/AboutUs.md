@@ -8,16 +8,6 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project team
 
-### John Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
 ### Yong Kai Qi
 
 <img src="images/johndoe.png" width="200px">
@@ -34,6 +24,16 @@ We are a team based in the [School of Computing, National University of Singapor
 
 [[github](https://github.com/hanhuiice)]
 [[portfolio](team/hanhuiice.md)]
+
+* Role: Developer
+* Responsibilities: Data + Features
+
+### Tan Ka Shing
+
+<img src="images/kashing_photo.jpg" width="200px">
+
+[[github](http://github.com/kashing555)]
+[[portfolio](team/kashing555.md)]
 
 * Role: Developer
 * Responsibilities: Data + Features
