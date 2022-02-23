@@ -50,10 +50,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Chee Jia Le
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jiale-c.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/jiale-c)]
+[[portfolio](team/jiale-c.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Features and testings
