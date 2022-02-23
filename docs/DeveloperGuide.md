@@ -316,14 +316,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `Tracey` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Delete a student**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list students
+2.  Tracey shows a list of students
+3.  User requests to delete a specific student in the list
+4.  Tracey deletes the person
 
     Use case ends.
 
@@ -335,11 +335,156 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. Tracey shows an error message.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: Search for a student**
+
+**MSS**
+
+1.  User requests to search for student
+2.  Tracey shows the info of student with that matching name
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list does not contain student(s) of that name.
+
+  Use case ends.
+
+* 2b. The given student name exists multiple places on the list.
+
+    * 2b1. Tracey shows a list of students with the name with their info.
+
+      Use case ends.
+
+**Use case: Add a student into Tracey**
+
+**MSS**
+
+1.  User requests to add the student with his/her details such as year, faculty, covid status
+2.  Tracey shows the info of student with that matching name
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The student info has an invalid format.
+  
+    * 1a1. Tracey will inform user that he/she did not provide the correct information.
+      
+    * 1a2. User provide the correct details in the correct format.
+    
+* 1b. The student to be added already exist in the list by Tracey.
+  
+    * 1b1. Tracey inform user that the contact exist in her.
+    
+        Use case ends
+* 1c. User adds multiple students in one go.
+  
+    * 1c1. Tracey will list out a list of new students added with their info.
+      
+        Use case ends
+
+**Use case: Edit information of a student**
+
+**MSS**
+
+1.  User requests to list students
+2.  Tracey shows a list of students
+3.  User requests to edit a specific student in the list
+4.  Tracey updates details of the person
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list does not contain student(s) of that name.
+
+  Use case ends.
+
+* 2b. The given student name exists multiple places on the list.
+
+    * 2b1. Tracey will inform user that he/she did not provide the correct information formatting.
+    
+    * 2b2. User will key in the correct format to edit student.
+
+**Use case: Clear the system database**
+
+**MSS**
+
+1.  User requests to clear all students
+2.  Tracey shows an empty list of students
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list does not contain student(s) of that name.
+
+  Use case ends.
+
+**Use case: Summarize the system database for number of covid patient**
+
+**MSS**
+
+1.  User requests to summarise number of students with covid
+2.  Tracey shows lists of students of that with the covid positive status
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list with that tag does not contain student(s) of that name.
+
+  Use case ends.
+
+**Use case: List all students**
+
+**MSS**
+
+1.  User requests to list all students
+2.  Tracey shows a list of students
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list does not contain student(s) of that name.
+
+  Use case ends.
+
+**Use case: Request for help from Tracey**
+
+**MSS**
+
+1.  User requests Tracey for more details on what she can do.
+2.  Tracey redirects user to user guide.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The user guide is empty.
+
+  Use case ends.
+
+**Use case: Filter the system database for list overview by filter**
+
+**MSS**
+
+1.  User requests to filter all students by a tag (ie. year)
+2.  Tracey shows a list of students of that specific tag with the covid status
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list with that tag does not contain student(s) of that name.
+
+  Use case ends.
 
 ### Non-Functional Requirements
 
