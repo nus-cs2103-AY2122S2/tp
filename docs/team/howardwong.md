@@ -1,11 +1,11 @@
 ---
 layout: page
-title: John Doe's Project Portfolio Page
+title: Howard Wong's Project Portfolio Page
 ---
 
-### Project: AddressBook Level 3
+### Project: RealEstatePro
 
-AddressBook - Level 3 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+RealEstatePro is a desktop address book application used by real estate agents to better manage their clients.. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java.
 
 Given below are my contributions to the project.
 
