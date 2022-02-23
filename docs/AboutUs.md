@@ -28,14 +28,15 @@ We are a team based in the [School of Computing, National University of Singapor
 * Role: Team Lead, Developer
 * Responsibilities: Deliverables & deadlines, scheduling & tracking
 
-### Johnny Doe
+### Wu HanHui
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/hanhuiice.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/hanhuiice)]
+[[portfolio](team/hanhuiice.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Data + Features
 
 ### Jean Doe
 
