@@ -7,6 +7,10 @@ import java.util.StringJoiner;
 
 import seedu.address.model.person.Address;
 
+/**
+ * Represents a Property in the address book.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 public class Property {
 
     public static final String MESSAGE_CONSTRAINTS =

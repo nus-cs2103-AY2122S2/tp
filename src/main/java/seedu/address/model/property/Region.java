@@ -4,6 +4,10 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Arrays;
 
+/**
+ * Represents a Property's region.
+ * Guarantees: is valid as declared in {@link #isValidRegion(String)}
+ */
 public enum Region {
     NORTH("North"),
     SOUTH("South"),

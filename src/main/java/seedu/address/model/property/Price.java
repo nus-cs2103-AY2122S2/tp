@@ -3,6 +3,10 @@ package seedu.address.model.property;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a Property's price.
+ * Guarantees: immutable; is valid as declared in {@link #isValidPrice(String)}
+ */
 public class Price {
 
     public static final String MESSAGE_CONSTRAINTS = "Price must have the format $#####";
@@ -32,6 +36,12 @@ public class Price {
         return Integer.parseInt(value.substring(1));
     }
 
+    /**
+     * Gets the price as a String.
+     * If the price is greater than a thousand, it will be formatted as $###.#K.
+     * If the price is greater than a million, it will be formatted as $###.#M.
+     * Otherwise, it will be formatted as $###.
+     */
     @Override
     public String toString() {
         int intValue = getAsInt();

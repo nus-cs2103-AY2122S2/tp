@@ -5,6 +5,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Arrays;
 
+/**
+ * Represents a Property's size.
+ * Guarantees: is valid as declared in {@link #isValidSize(String)}
+ */
 public enum Size {
     ONE_ROOM("1-room"),
     TWO_ROOM("2-room"),
