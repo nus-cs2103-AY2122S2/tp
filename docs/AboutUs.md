@@ -40,7 +40,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Tan Ka Shing
 
-<img src="images/kashing_photo.jpg" width="200px">
+<img src="images/kashing_photo.png" width="200px">
 
 [[github](http://github.com/kashing555)]
 [[portfolio](team/kashing555.md)]
