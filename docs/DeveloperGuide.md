@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -255,46 +255,148 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Target user profile**: Teaching Assistants who
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
+* has a need to manage a significant number of students (especially across multiple modules)
+* prefers desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:  better manage the student’s contact and progress, 
+especially for those who are teaching multiple classes/modules at the same time. 
+It is optimised for use on CLI.
+
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                                | I want to …​                                                                        | So that I can…​                                                                            |
+| -------- | --------------------------------------------------------- | -------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `* * *`  | Teaching Assistant                                        | add students to TAPA                                                                   | know which students are taking my classes                                                     |
+| `* * *`  | Teaching Assistant                                        | delete a specific student from TAPA                                                    | remove student who has withdrawn from the module during the semester                          |
+| `* * *`  | Teaching Assistant                                        | list students alphabetically                                                           | print students in a list as their names would appear on the official class list               |
+| `* * *`  | Teaching Assistant                                        | save existing data to hard drive                                                       | access the data again when I reopen the app                                                   |
+| `* *`    | Teaching Assistant                                        | see all the tasks that a student currently have                                        | observe his/her progress                                                                      |
+| `* *`    | Teaching Assistant                                        | delete all students from TAPA                                                          | remove students that were taught in previous semesters and are no longer relevant             |
+| `* *`    | Teaching Assistant                                        | mark/unmark students’ tasks according to the completion status                         | update his/her progress                                                                       |
+| `* *`    | Teaching Assistant                                        | see students’ contact details (such as email address)                                  | contact them if needed                                                                        |
+| `* *`    | Teaching Assistant                                        | find a student                                                                         | check details of a specific student                                                           |
+| `* *`    | Teaching Assistant                                        | assign tasks to a specific student                                                     | allocate and track a task that is given to the student                                        |
+| `* *`    | Teaching Assistant                                        | display the possible actions that  I can take, or do                                   | have a quick reference without the need of reading a user guide                               |
+| `* *`    | Teaching Assistant                                        | edit the details of the students                                                       | fix any errors that occurred during the insertion of student details                          |
+| `* *`    | Teaching Assistant who is teaching in multiple semesters  | archive the existing data                                                              | save a copy on the local machine before undergoing a complete deletion of data                |
+| `*`      | Teaching Assistant                                        | tag students                                                                           | know what modules they are taking                                                             |
+| `*`      | Teaching Assistant                                        | delete multiple students from TAPA                                                     | remove students that are no longer being taught, without needing to delete them individually  |
+| `*`      | Teaching Assistant                                        | display student progress                                                               | locate a person easily                                                                        |
+| `*`      | Teaching Assistant                                        | filter students by their tags                                                          | view the progress of students in each separate tag (different class/module)                   |
+| `*`      | Teaching Assistant                                        | update the student’s tags                                                              | edit when the student drop/take a new module                                                  |
+| `*`      | Teaching Assistant                                        | define my own tasks for each module                                                    | customise the tasks to each module                                                            |
+| `*`      | Teaching Assistant                                        | assign tasks to multiple students                                                      | allocate tasks to students without having to individually assign them                         |
+| `*`      | Teaching Assistant                                        | track attendance                                                                       | mark attendance for modules that require student attendance                                   |
+| `*`      | Teaching Assistant                                        | see modules I’m teaching at a glance                                                   | remind myself of what needs to be prepared for classes                                        |
+| `*`      | Teaching Assistant                                        | sort students by their progress/grading in each assignment/number of classes attended  | see how the class is performing                                                               |
+| `*`      | Teaching Assistant                                        | see student’s timetable                                                                | find a good time to arrange a consult with them                                               |
+| `*`      | Teaching Assistant who is a long time user                | type in chain commands                                                                 | execute multiple different commands quickly                                                   |
+| `*`      | Teaching Assistant who is a long time user                | send emails from the command line                                                      | send emails to students with specific tags quickly                                            |
+| `*`      | Teaching Assistant who is used to CLI commands            | customise commands                                                                     | execute commands quickly                                                                      |
+| `*`      | Teaching Assistant                                        | undo the most recent command entered                                                   | revert any unwanted changes (such as deleting student) without much trouble                   |
+| `*`      | Teaching Assistant                                        | customise task details such as deadlines                                               | track upcoming deadlines more easily                                                          |
+| `*`      | Teaching Assistant                                        | view grades scored by students in each assignment                                      | understand which topics they are finding difficult                                            |
+| `*`      | Teaching Assistant                                        | edit an assignment name/deadline                                                       | update the name/deadline of an assignment in case of future changes or extensions             |
+| `*`      | Teaching Assistant                                        | be able to highlight or feature certain students                                       | know which students are performing the best or need more help                                 |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TAPA` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Add a student**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to add a specific student.
+2. TAPA shows the updated list of students.
 
     Use case ends.
+
+**Extensions**
+
+* 1a. A student with the same matriculation number already exist.
+  
+    * 1a1. TAPA shows an error message
+    
+        Use case ends.
+
+* 1b. The matriculation number of the student is not in the input command.
+
+    * 1b1. TAPA shows an error message
+
+        Use case ends.
+
+* 1c. The name of the student is not in the input command.
+
+    * 1c1. TAPA shows an error message
+
+        Use case ends.
+
+* 1d. The module code that the student is currently taking is not in the input command.
+
+    * 1d1. TAPA shows an error message
+
+        Use case ends.
+
+**Use case: UC02 - List all students**
+
+**MSS**
+
+1. User requests to list students.
+2. TAPA shows a list of students.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+**Use case: UC03 - Delete a student**
+
+**MSS**
+
+1. User requests to list students.
+2. TAPA shows a list of students.
+3. User requests to delete a specific student in the list.
+4. TAPA deletes the students.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+  
+    Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. TAPA shows an error message.
+
+      Use case resumes from step 2.
+    
+**Use case: UC04 - Edit a student**
+
+**MSS**
+
+1. User requests to list students.
+2. TAPA shows a list of students.
+3. User requests edits to the supplied details of a specific student in the list.
+4. TAPA updates the details of the student with the supplied details.
+   
+   Use case ends.
 
 **Extensions**
 
@@ -304,9 +406,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. TAPA shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes from step 2.
+
+* 3b. The given field is invalid.
+
+    * 3b1. TAPA shows an error message.
+
+      Use case resumes from step 2.
+
+* 3c. The new matriculation number specified is already in the database.
+
+    * 3c1. TAPA shows an error message.
+
+      Use case resumes from step 2.
 
 *{More to be added}*
 
@@ -314,14 +428,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3.  Usage should be more efficient than a regular contact management application for a user who types fast in English text.
+4.  Should be usable by a novice who has never used a contact management application before.
+5.  The system should respond within 3 seconds.
+6.  The student's data should only be stored locally.
 
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Module**: A specific class that a student is taking
+* **Tag**: A category that the student belong to (usually denotes the module that is currently being taken)
 
 --------------------------------------------------------------------------------------------------------------------
 
