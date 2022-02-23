@@ -28,9 +28,9 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the feature `delete`
+    * Added documentation for the feature `delete`. [\#13](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/13)
   * Developer Guide:
-    * Added implementation details of the `delete` feature.
+    * Added implementation details of the `delete` feature. [\#](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/)
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()

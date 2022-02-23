@@ -87,14 +87,14 @@ Format: `add module n/MODULE_NAME c/MODULE_CODE`
 Examples:
 * `add module n/Software Engineering Project c/CS2103T`
 
-#### Adding a lesson: `add lesson`
+#### Adding a class group: `add class`
 
-Adds a lesson to TAssist.
+Adds a class group to TAssist.
 
-Format: `add lesson id/LESSON_ID t/LESSON_TYPE m/MODULE_CODE`
+Format: `add class id/CLASSGROUP_ID t/CLASSGROUP_TYPE m/MODULE_CODE`
 
 Examples:
-* `add lesson id/T13 t/tutorial m/CS2103T`
+* `add class id/T13 t/tutorial m/CS2103T`
 
 ### Listing all persons : `list`
 
@@ -164,18 +164,18 @@ Format: `delete module INDEX`
 Examples:
 * `list module` followed by `delete module 2` deletes the 2nd module in TAssist.
 
-#### Deleting a lesson : `delete lesson`
+#### Deleting a class group : `delete class`
 
-Deletes the specified lesson from TAssist.
+Deletes the specified class group from TAssist.
 
-Format: `delete lesson INDEX`
+Format: `delete class INDEX`
 
-* Deletes the lesson at the specified `INDEX`.
-* The index refers to the index number shown in the displayed lesson list.
+* Deletes the class group at the specified `INDEX`.
+* The index refers to the index number shown in the displayed class groups list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list lesson` followed by `delete lesson 2` deletes the 2nd lesson in TAssist.
+* `list class` followed by `delete class 2` deletes the 2nd class group in TAssist.
 
 ### Clearing all entries : `clear`
 
