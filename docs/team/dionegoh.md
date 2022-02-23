@@ -42,7 +42,7 @@ Given below are my contributions to the project.
         * Added documentation for the features `addfriend`, `deletefriend`, and `editfriend`' 
       [\#22](https://github.com/AY2122S2-CS2103-F09-2/tp/pull/22)
     * Developer Guide:
-        * Added implementation details of the `delete` feature.
+        * Added use cases for `addfriend`, `deletefriend`, and `editfriend`.
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): 
