@@ -9,16 +9,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
 ### Haikal Yusuf
 
 <img src="images/waffledood.png" width="200px">
@@ -35,6 +25,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](http://github.com/ashuh)] 
 [[portfolio](team/ashuh.md)]
+
+* Role: Developer
+* Responsibilities: Data
+
+### Howard Wong
+
+<img src="images/howardwong.png" width="200px">
+
+[[github](http://github.com/howardwhw2)] 
+[[portfolio](team/howardwong.md)]
 
 * Role: Developer
 * Responsibilities: Data
