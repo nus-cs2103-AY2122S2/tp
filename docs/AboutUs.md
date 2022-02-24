@@ -27,7 +27,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * [portfolio](team/kidsnd274.md)
 
 * Role: Developer
-* Responsibilities: None yet
+* Responsibilities: `tbd`
 
 ### Nyayapati Nikhil
 
@@ -43,7 +43,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/Ryan-L98.png" width="200px">
 
 * [GitHub](http://github.com/Ryan-L98)
-* [Portfolio](team/Ryan-L98.md)
+* [Portfolio](team/ryan-l98.md)
 
 * Role: Developer
 * Responsibilities: `tbd`
