@@ -16,10 +16,10 @@ public class Deadline {
     public static final String MESSAGE_CONSTRAINTS =
             "Deadlines should be in the following format: dd-MM-yyyy HH:mm";
 
-    public static final DateTimeFormatter VALIDATION_FORMATTER
-            = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-    public static final DateTimeFormatter STRING_REPRESENTATION_FORMATTER
-            = DateTimeFormatter.ofPattern("E, MMM dd yyyy, HH:mm a");
+    public static final DateTimeFormatter VALIDATION_FORMATTER =
+            DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+    public static final DateTimeFormatter STRING_REPRESENTATION_FORMATTER =
+            DateTimeFormatter.ofPattern("E, MMM dd yyyy, HH:mm a");
 
     public final LocalDateTime value;
 

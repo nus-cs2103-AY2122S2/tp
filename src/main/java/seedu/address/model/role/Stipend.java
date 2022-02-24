@@ -11,7 +11,7 @@ public class Stipend {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Stipends should only contain numbers, and it should be at most 10 digits long";
-    public static final String VALIDATION_REGEX = "\\d{0,10}";
+    public static final String VALIDATION_REGEX = "\\d{1,10}";
     public final String value;
 
     /**
