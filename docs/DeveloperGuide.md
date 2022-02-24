@@ -26,7 +26,7 @@ Students who...
 
 * Track (View all your internship applications at a glance)
 * Remind (Be reminded of your upcoming assessments)
-* Review (Comment on each stage of the application process for future self-improvement OR Review the company’s hiring process)
+* Review (Comment on each stage of the application process for future self-improvement or review the company’s hiring process)
 
 ### User stories
 
@@ -101,7 +101,7 @@ Guarantees: an internship role will be successfully created
 
 **Use case: UC03 - Delete a company**
 
-Precondition: there exists one or more companies in the list of companies
+Precondition: there exists at least one company in the list of companies
 
 Guarantees: a company is successfully removed from the list of companies
 
@@ -126,7 +126,7 @@ Guarantees: a company is successfully removed from the list of companies
 
 **Use case: UC04 - Delete an internship role**
 
-Precondition: there exists one or more internship roles associated with a company in the list of companies
+Precondition: there exists at least one internship role associated with a company in the list of companies
 
 Guarantees: a specified internship role is successfully removed from the associated company
 
@@ -155,7 +155,7 @@ Guarantees: a specified internship role is successfully removed from the associa
 
 **Use case: UC05 - List all companies**
 
-Precondition: there exist one or more companies stored in Tinner
+Precondition: there exist at least one company stored in Tinner
 
 Guarantees: every company stored in Tinner will be shown
 
@@ -180,6 +180,6 @@ Guarantees: every company stored in Tinner will be shown
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **Mainstream OS**: Windows, Linux, Unix, macOS
 * **CLI**: Command Line Interface
 * **MSS**: Main Success Scenario

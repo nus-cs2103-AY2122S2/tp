@@ -23,6 +23,7 @@ Tinner (Anagram of Intern) is a desktop app for managing internship applications
 2. Download the latest tinner.jar.
 3. Copy the file to the folder you want to use as the home folder for your Tinner.
 4. Double-click the file to start the app. The GUI like below should appear in a few seconds. Note how the app contains some sample data.
+
    ![Ui](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing help and pressing Enter will open the help window.  
@@ -105,7 +106,7 @@ Format: `delete company COMPANY_INDEX`
 
 * Deletes the company at the specified COMPANY_INDEX.
 * The index refers to the index number shown in the displayed person list.
-* The index must be a positive integer 1, 2, 3, …
+* The index must be a positive integer like 1, 2, 3, …
 
 Examples:
 * `list` followed by `delete company 2` deletes the 2nd company on the list in Tinner.
@@ -117,7 +118,7 @@ Deletes the specified role in the specified company.
 Format: `delete role COMPANY_INDEX ROLE_INDEX`
 
 * Deletes the role at the specified ROLE_INDEX of the company at the specified COMPANY_INDEX. The indexes refer to the index numbers shown in the displayed company list.
-* The indexes must be a positive integer 1, 2, 3, …
+* The indexes must be a positive integer like 1, 2, 3, …
 
 Examples:
 * `list` followed by, `delete role 1 1` deletes the 1st role from the 1st company in Tinner.
@@ -141,9 +142,10 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**List** | `list`
-**Add company** | `add company n/COMPANY_NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` <br> e.g.,`add company n/Google p/98765432 e/hr_google@gmail.com a/70 Pasir Panjang Rd, #03-71 Mapletree Business City II, Singapore 117371` 
-**Add role** | `add role COMPANY_INDEX r/ROLE s/STATUS b/DEADLINE d/DESCRIPTION $/STIPEND` <br> e.g.,` add role 1 n/Data Analyst s/Applying b/31`
-**Delete company** | `delete company COMPANY_INDEX `<br> e.g.,`delete company 3 `
-**Delete role** | `delete role COMPANY_INDEX ROLE_INDEX` <br> e.g.,`delete role 3 1 `
+**List companies** | `list`
+**Add company** | `add company n/COMPANY_NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` <br><br> e.g.,`add company n/Google p/98765432 e/hr_google@gmail.com a/70 Pasir Panjang Rd, #03-71 Mapletree Business City II, Singapore 117371` 
+**Add role** | `add role COMPANY_INDEX n/ROLE s/STATUS b/DEADLINE d/DESCRIPTION $/STIPEND` <br><br> e.g.,` add role 1 n/Data Analyst s/Applying b/31 March 2022 23:59 d/Analyse marketing data $/5000`
+**Delete company** | `delete company COMPANY_INDEX `<br><br> e.g.,`delete company 3 `
+**Delete role** | `delete role COMPANY_INDEX ROLE_INDEX` <br><br> e.g.,`delete role 3 1 `
 **Help** | `help`
+**Exit Tinner** | `exit`
