@@ -11,7 +11,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Ben Murphy
 
-<img src="images/benmurphy.png" width="200px">
+<img src="images/benmurphyy.png" width="200px">
 
 [[github](https://github.com/benmurphyy)]
 [[portfolio](team/benmurphy.md)]
