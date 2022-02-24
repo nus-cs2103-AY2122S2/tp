@@ -3,8 +3,7 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
-
+UniBook is a **desktop app for students to manage their university contacts in smart organized manner,** optimized for command-line interface (CLI) while still having the benefits of a Graphical User Interface (GUI).  
 * Table of Contents
 {:toc}
 
@@ -87,11 +86,36 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Listing all persons : `list`
+### Listing entries: `list`
 
-Shows a list of all persons in the address book.
+Lists entries in UniBook according listing criteria.
 
-Format: `list`
+Format: list [o/LISTING_CRITERIA CRITERIA_INFORMATION]…
+
+* lists all contacts in UniBook in ordered alphabetically by name if no optional field is provided
+* if [o/LISTING_CRITERIA CRITERIA_INFORMATION] is provided, then only contacts with fields (defined by LISTING\_CRITERIA) matching the CRITERIA\_INFORMATION provided will be shown to user
+* listing criteria stack - so multiple listing criteria will further narrow the listing shown to user
+
+LISTING_CRITERIA values:
+
+* "module" -  lists all contacts that are participants of that module
+
+* "group" - lists all contacts that are participants of that group
+
+* "type" - lists all contacts by their contact type (professor or student)
+
+Examples:
+
+* `list o/module CS2103` lists all contacts related to the module CS2103
+
+* `list o/group W16-T1` lists all contacts that are related to the group W16-T1
+
+* `list o/type professors` lists all professors
+
+* `list o/module CS2103 o/type professors` lists all professors of the module CS2103
+
+* `list o/module CS2104 o/type students` lists all students of the module CS2103
+
 
 ### Editing a person : `edit`
 
@@ -188,5 +212,5 @@ Action | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
+**List** | `list [o/LISTING_CRITERIA CRITERIA_INFORMATION]` <br>e.g., `list o/module CS2103`
 **Help** | `help`
