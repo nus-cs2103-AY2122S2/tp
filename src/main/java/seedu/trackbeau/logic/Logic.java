@@ -8,7 +8,7 @@ import seedu.trackbeau.logic.commands.CommandResult;
 import seedu.trackbeau.logic.commands.exceptions.CommandException;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
 import seedu.trackbeau.model.ReadOnlyTrackBeau;
-import seedu.trackbeau.model.person.Customer;
+import seedu.trackbeau.model.customer.Customer;
 
 /**
  * API of the Logic component

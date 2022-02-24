@@ -19,11 +19,11 @@ import org.junit.jupiter.api.Test;
 import seedu.trackbeau.commons.core.Messages;
 import seedu.trackbeau.commons.core.index.Index;
 import seedu.trackbeau.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.trackbeau.model.TrackBeau;
 import seedu.trackbeau.model.Model;
 import seedu.trackbeau.model.ModelManager;
+import seedu.trackbeau.model.TrackBeau;
 import seedu.trackbeau.model.UserPrefs;
-import seedu.trackbeau.model.person.Customer;
+import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.testutil.EditPersonDescriptorBuilder;
 import seedu.trackbeau.testutil.PersonBuilder;
 
@@ -111,7 +111,7 @@ public class EditCommandTest {
     public void execute_duplicatePersonFilteredList_failure() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        // edit person in filtered list into a duplicate in trackbeau book
+        // edit customer in filtered list into a duplicate in trackbeau book
         Customer customerInList = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder(customerInList).build());

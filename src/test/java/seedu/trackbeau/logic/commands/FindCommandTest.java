@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 import seedu.trackbeau.model.Model;
 import seedu.trackbeau.model.ModelManager;
 import seedu.trackbeau.model.UserPrefs;
-import seedu.trackbeau.model.person.NameContainsKeywordsPredicate;
+import seedu.trackbeau.model.customer.NameContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -50,7 +50,7 @@ public class FindCommandTest {
         // null -> returns false
         assertFalse(findFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different customer -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 

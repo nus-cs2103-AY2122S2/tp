@@ -14,7 +14,7 @@ import seedu.trackbeau.logic.parser.TrackBeauParser;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
 import seedu.trackbeau.model.Model;
 import seedu.trackbeau.model.ReadOnlyTrackBeau;
-import seedu.trackbeau.model.person.Customer;
+import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.storage.Storage;
 
 /**

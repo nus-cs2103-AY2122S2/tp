@@ -1,4 +1,4 @@
-package seedu.trackbeau.model.person;
+package seedu.trackbeau.model.customer;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -65,7 +65,7 @@ public class CustomerTest {
         // different type -> returns false
         assertFalse(ALICE.equals(5));
 
-        // different person -> returns false
+        // different customer -> returns false
         assertFalse(ALICE.equals(BOB));
 
         // different name -> returns false

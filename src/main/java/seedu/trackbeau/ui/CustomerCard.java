@@ -7,7 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.trackbeau.model.person.Customer;
+import seedu.trackbeau.model.customer.Customer;
 
 /**
  * An UI component that displays information of a {@code Person}.

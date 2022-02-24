@@ -5,9 +5,9 @@ import static seedu.trackbeau.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.trackbeau.model.TrackBeau;
 import seedu.trackbeau.model.Model;
 import seedu.trackbeau.model.ModelManager;
+import seedu.trackbeau.model.TrackBeau;
 import seedu.trackbeau.model.UserPrefs;
 
 public class ClearCommandTest {

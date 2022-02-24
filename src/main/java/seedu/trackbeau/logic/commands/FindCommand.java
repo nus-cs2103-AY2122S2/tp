@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.trackbeau.commons.core.Messages;
 import seedu.trackbeau.model.Model;
-import seedu.trackbeau.model.person.NameContainsKeywordsPredicate;
+import seedu.trackbeau.model.customer.NameContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in trackbeau book whose name contains any of the argument keywords.

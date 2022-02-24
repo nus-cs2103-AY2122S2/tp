@@ -1,4 +1,4 @@
-package seedu.trackbeau.model.person;
+package seedu.trackbeau.model.customer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -15,8 +15,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.trackbeau.model.person.exceptions.DuplicateCustomerException;
-import seedu.trackbeau.model.person.exceptions.CustomerNotFoundException;
+import seedu.trackbeau.model.customer.exceptions.CustomerNotFoundException;
+import seedu.trackbeau.model.customer.exceptions.DuplicateCustomerException;
 import seedu.trackbeau.testutil.PersonBuilder;
 
 public class UniqueCustomerListTest {

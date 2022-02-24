@@ -1,7 +1,7 @@
 package seedu.trackbeau.testutil;
 
 import seedu.trackbeau.model.TrackBeau;
-import seedu.trackbeau.model.person.Customer;
+import seedu.trackbeau.model.customer.Customer;
 
 /**
  * A utility class to help with building Addressbook objects.

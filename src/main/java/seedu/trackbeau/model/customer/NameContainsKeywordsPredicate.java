@@ -1,4 +1,4 @@
-package seedu.trackbeau.model.person;
+package seedu.trackbeau.model.customer;
 
 import java.util.List;
 import java.util.function.Predicate;

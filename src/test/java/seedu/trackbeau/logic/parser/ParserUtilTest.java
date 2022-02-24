@@ -14,10 +14,10 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
-import seedu.trackbeau.model.person.Address;
-import seedu.trackbeau.model.person.Email;
-import seedu.trackbeau.model.person.Name;
-import seedu.trackbeau.model.person.Phone;
+import seedu.trackbeau.model.customer.Address;
+import seedu.trackbeau.model.customer.Email;
+import seedu.trackbeau.model.customer.Name;
+import seedu.trackbeau.model.customer.Phone;
 import seedu.trackbeau.model.tag.Tag;
 
 public class ParserUtilTest {

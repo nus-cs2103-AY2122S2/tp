@@ -1,4 +1,4 @@
-package seedu.trackbeau.model.person;
+package seedu.trackbeau.model.customer;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.trackbeau.commons.util.AppUtil.checkArgument;

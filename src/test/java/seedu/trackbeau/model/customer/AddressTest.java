@@ -1,4 +1,4 @@
-package seedu.trackbeau.model.person;
+package seedu.trackbeau.model.customer;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;

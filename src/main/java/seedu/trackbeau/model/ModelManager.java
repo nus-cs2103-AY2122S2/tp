@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.trackbeau.commons.core.GuiSettings;
 import seedu.trackbeau.commons.core.LogsCenter;
-import seedu.trackbeau.model.person.Customer;
+import seedu.trackbeau.model.customer.Customer;
 
 /**
  * Represents the in-memory model of the trackbeau book data.

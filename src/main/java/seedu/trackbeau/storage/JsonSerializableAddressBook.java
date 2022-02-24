@@ -9,9 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.trackbeau.commons.exceptions.IllegalValueException;
-import seedu.trackbeau.model.TrackBeau;
 import seedu.trackbeau.model.ReadOnlyTrackBeau;
-import seedu.trackbeau.model.person.Customer;
+import seedu.trackbeau.model.TrackBeau;
+import seedu.trackbeau.model.customer.Customer;
 
 /**
  * An Immutable TrackBeau that is serializable to JSON format.
@@ -19,7 +19,7 @@ import seedu.trackbeau.model.person.Customer;
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate customer(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
 

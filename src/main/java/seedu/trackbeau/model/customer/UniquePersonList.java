@@ -1,4 +1,4 @@
-package seedu.trackbeau.model.person;
+package seedu.trackbeau.model.customer;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.trackbeau.commons.util.CollectionUtil.requireAllNonNull;
@@ -8,15 +8,15 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.trackbeau.model.person.exceptions.DuplicateCustomerException;
-import seedu.trackbeau.model.person.exceptions.CustomerNotFoundException;
+import seedu.trackbeau.model.customer.exceptions.CustomerNotFoundException;
+import seedu.trackbeau.model.customer.exceptions.DuplicateCustomerException;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
- * persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object) so
- * as to ensure that the person with exactly the same fields will be removed.
+ * A customer is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating
+ * of persons uses Person#isSamePerson(Person) for equality so as to ensure that the customer being added or updated is
+ * unique in terms of identity in the UniquePersonList. However, the removal of a customer uses Person#equals(Object) so
+ * as to ensure that the customer with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
@@ -29,7 +29,7 @@ public class UniquePersonList implements Iterable<Customer> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent customer as the given argument.
      */
     public boolean contains(Customer toCheck) {
         requireNonNull(toCheck);
@@ -37,8 +37,8 @@ public class UniquePersonList implements Iterable<Customer> {
     }
 
     /**
-     * Adds a person to the list.
-     * The person must not already exist in the list.
+     * Adds a customer to the list.
+     * The customer must not already exist in the list.
      */
     public void add(Customer toAdd) {
         requireNonNull(toAdd);
@@ -49,9 +49,9 @@ public class UniquePersonList implements Iterable<Customer> {
     }
 
     /**
-     * Replaces the person {@code target} in the list with {@code editedPerson}.
+     * Replaces the customer {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the list.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
+     * The customer identity of {@code editedPerson} must not be the same as another existing customer in the list.
      */
     public void setPerson(Customer target, Customer editedCustomer) {
         requireAllNonNull(target, editedCustomer);
@@ -69,8 +69,8 @@ public class UniquePersonList implements Iterable<Customer> {
     }
 
     /**
-     * Removes the equivalent person from the list.
-     * The person must exist in the list.
+     * Removes the equivalent customer from the list.
+     * The customer must exist in the list.
      */
     public void remove(Customer toRemove) {
         requireNonNull(toRemove);

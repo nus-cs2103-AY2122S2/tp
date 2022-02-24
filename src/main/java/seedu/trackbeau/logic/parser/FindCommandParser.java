@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 import seedu.trackbeau.logic.commands.FindCommand;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
-import seedu.trackbeau.model.person.NameContainsKeywordsPredicate;
+import seedu.trackbeau.model.customer.NameContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object

@@ -15,7 +15,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.trackbeau.commons.core.GuiSettings;
-import seedu.trackbeau.model.person.NameContainsKeywordsPredicate;
+import seedu.trackbeau.model.customer.NameContainsKeywordsPredicate;
 import seedu.trackbeau.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {

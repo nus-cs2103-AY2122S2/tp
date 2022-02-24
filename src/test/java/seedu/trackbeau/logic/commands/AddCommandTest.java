@@ -16,11 +16,11 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.trackbeau.commons.core.GuiSettings;
 import seedu.trackbeau.logic.commands.exceptions.CommandException;
-import seedu.trackbeau.model.TrackBeau;
 import seedu.trackbeau.model.Model;
 import seedu.trackbeau.model.ReadOnlyTrackBeau;
 import seedu.trackbeau.model.ReadOnlyUserPrefs;
-import seedu.trackbeau.model.person.Customer;
+import seedu.trackbeau.model.TrackBeau;
+import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -70,7 +70,7 @@ public class AddCommandTest {
         // null -> returns false
         assertFalse(addAliceCommand.equals(null));
 
-        // different person -> returns false
+        // different customer -> returns false
         assertFalse(addAliceCommand.equals(addBobCommand));
     }
 
@@ -150,7 +150,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single customer.
      */
     private class ModelStubWithPerson extends ModelStub {
         private final Customer customer;
@@ -168,7 +168,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the customer being added.
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
         final ArrayList<Customer> personsAdded = new ArrayList<>();

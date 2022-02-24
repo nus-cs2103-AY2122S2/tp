@@ -10,7 +10,7 @@ import java.util.Set;
 
 import seedu.trackbeau.logic.commands.AddCommand;
 import seedu.trackbeau.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.trackbeau.model.person.Customer;
+import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.model.tag.Tag;
 
 /**
@@ -19,14 +19,14 @@ import seedu.trackbeau.model.tag.Tag;
 public class PersonUtil {
 
     /**
-     * Returns an add command string for adding the {@code person}.
+     * Returns an add command string for adding the {@code customer}.
      */
     public static String getAddCommand(Customer customer) {
         return AddCommand.COMMAND_WORD + " " + getPersonDetails(customer);
     }
 
     /**
-     * Returns the part of command string for the given {@code person}'s details.
+     * Returns the part of command string for the given {@code customer}'s details.
      */
     public static String getPersonDetails(Customer customer) {
         StringBuilder sb = new StringBuilder();

@@ -5,8 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import seedu.trackbeau.model.person.Customer;
-import seedu.trackbeau.model.person.UniquePersonList;
+import seedu.trackbeau.model.customer.Customer;
+import seedu.trackbeau.model.customer.UniquePersonList;
 
 /**
  * Wraps all data at the trackbeau level
@@ -40,7 +40,7 @@ public class TrackBeau implements ReadOnlyTrackBeau {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
+     * Replaces the contents of the customer list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
      */
     public void setPersons(List<Customer> customers) {
@@ -56,10 +56,10 @@ public class TrackBeau implements ReadOnlyTrackBeau {
         setPersons(newData.getPersonList());
     }
 
-    //// person-level operations
+    //// customer-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the trackbeau book.
+     * Returns true if a customer with the same identity as {@code customer} exists in the trackbeau book.
      */
     public boolean hasPerson(Customer customer) {
         requireNonNull(customer);
@@ -67,17 +67,17 @@ public class TrackBeau implements ReadOnlyTrackBeau {
     }
 
     /**
-     * Adds a person to the trackbeau book.
-     * The person must not already exist in the trackbeau book.
+     * Adds a customer to the trackbeau book.
+     * The customer must not already exist in the trackbeau book.
      */
     public void addPerson(Customer p) {
         persons.add(p);
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
+     * Replaces the given customer {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the trackbeau book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the trackbeau book.
+     * The customer identity of {@code editedPerson} must not be the same as another existing customer in trackbeau.
      */
     public void setPerson(Customer target, Customer editedCustomer) {
         requireNonNull(editedCustomer);

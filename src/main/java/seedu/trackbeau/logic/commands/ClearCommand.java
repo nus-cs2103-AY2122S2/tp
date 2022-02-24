@@ -2,8 +2,8 @@ package seedu.trackbeau.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.trackbeau.model.TrackBeau;
 import seedu.trackbeau.model.Model;
+import seedu.trackbeau.model.TrackBeau;
 
 /**
  * Clears the trackbeau book.

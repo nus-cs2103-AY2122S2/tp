@@ -26,7 +26,7 @@ import seedu.trackbeau.model.Model;
 import seedu.trackbeau.model.ModelManager;
 import seedu.trackbeau.model.ReadOnlyTrackBeau;
 import seedu.trackbeau.model.UserPrefs;
-import seedu.trackbeau.model.person.Customer;
+import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.storage.JsonTrackBeauStorage;
 import seedu.trackbeau.storage.JsonUserPrefsStorage;
 import seedu.trackbeau.storage.StorageManager;

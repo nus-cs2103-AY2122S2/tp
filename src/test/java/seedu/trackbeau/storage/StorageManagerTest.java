@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.trackbeau.commons.core.GuiSettings;
-import seedu.trackbeau.model.TrackBeau;
 import seedu.trackbeau.model.ReadOnlyTrackBeau;
+import seedu.trackbeau.model.TrackBeau;
 import seedu.trackbeau.model.UserPrefs;
 
 public class StorageManagerTest {

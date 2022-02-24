@@ -4,13 +4,13 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.trackbeau.model.TrackBeau;
 import seedu.trackbeau.model.ReadOnlyTrackBeau;
-import seedu.trackbeau.model.person.Address;
-import seedu.trackbeau.model.person.Customer;
-import seedu.trackbeau.model.person.Email;
-import seedu.trackbeau.model.person.Name;
-import seedu.trackbeau.model.person.Phone;
+import seedu.trackbeau.model.TrackBeau;
+import seedu.trackbeau.model.customer.Address;
+import seedu.trackbeau.model.customer.Customer;
+import seedu.trackbeau.model.customer.Email;
+import seedu.trackbeau.model.customer.Name;
+import seedu.trackbeau.model.customer.Phone;
 import seedu.trackbeau.model.tag.Tag;
 
 /**

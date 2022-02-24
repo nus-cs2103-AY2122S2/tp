@@ -16,7 +16,7 @@ import seedu.trackbeau.commons.core.index.Index;
 import seedu.trackbeau.model.Model;
 import seedu.trackbeau.model.ModelManager;
 import seedu.trackbeau.model.UserPrefs;
-import seedu.trackbeau.model.person.Customer;
+import seedu.trackbeau.model.customer.Customer;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -94,7 +94,7 @@ public class DeleteCommandTest {
         // null -> returns false
         assertFalse(deleteFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different customer -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
     }
 

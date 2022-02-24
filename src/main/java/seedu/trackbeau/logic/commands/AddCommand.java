@@ -9,10 +9,10 @@ import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.trackbeau.logic.commands.exceptions.CommandException;
 import seedu.trackbeau.model.Model;
-import seedu.trackbeau.model.person.Customer;
+import seedu.trackbeau.model.customer.Customer;
 
 /**
- * Adds a person to the trackbeau book.
+ * Adds a customer to the trackbeau book.
  */
 public class AddCommand extends Command {
 

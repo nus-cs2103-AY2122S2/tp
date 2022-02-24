@@ -8,17 +8,17 @@ import seedu.trackbeau.commons.core.Messages;
 import seedu.trackbeau.commons.core.index.Index;
 import seedu.trackbeau.logic.commands.exceptions.CommandException;
 import seedu.trackbeau.model.Model;
-import seedu.trackbeau.model.person.Customer;
+import seedu.trackbeau.model.customer.Customer;
 
 /**
- * Deletes a person identified using it's displayed index from the trackbeau book.
+ * Deletes a customer identified using it's displayed index from the trackbeau book.
  */
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
+            + ": Deletes the customer identified by the index number used in the displayed customer list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 

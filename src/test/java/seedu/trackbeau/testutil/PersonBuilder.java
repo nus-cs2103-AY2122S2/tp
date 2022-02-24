@@ -3,11 +3,11 @@ package seedu.trackbeau.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.trackbeau.model.person.Address;
-import seedu.trackbeau.model.person.Customer;
-import seedu.trackbeau.model.person.Email;
-import seedu.trackbeau.model.person.Name;
-import seedu.trackbeau.model.person.Phone;
+import seedu.trackbeau.model.customer.Address;
+import seedu.trackbeau.model.customer.Customer;
+import seedu.trackbeau.model.customer.Email;
+import seedu.trackbeau.model.customer.Name;
+import seedu.trackbeau.model.customer.Phone;
 import seedu.trackbeau.model.tag.Tag;
 import seedu.trackbeau.model.util.SampleDataUtil;
 

@@ -32,11 +32,11 @@ import static seedu.trackbeau.testutil.TypicalPersons.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.trackbeau.logic.commands.AddCommand;
-import seedu.trackbeau.model.person.Address;
-import seedu.trackbeau.model.person.Customer;
-import seedu.trackbeau.model.person.Email;
-import seedu.trackbeau.model.person.Name;
-import seedu.trackbeau.model.person.Phone;
+import seedu.trackbeau.model.customer.Address;
+import seedu.trackbeau.model.customer.Customer;
+import seedu.trackbeau.model.customer.Email;
+import seedu.trackbeau.model.customer.Name;
+import seedu.trackbeau.model.customer.Phone;
 import seedu.trackbeau.model.tag.Tag;
 import seedu.trackbeau.testutil.PersonBuilder;
 

@@ -15,10 +15,10 @@ import java.util.List;
 
 import seedu.trackbeau.commons.core.index.Index;
 import seedu.trackbeau.logic.commands.exceptions.CommandException;
-import seedu.trackbeau.model.TrackBeau;
 import seedu.trackbeau.model.Model;
-import seedu.trackbeau.model.person.Customer;
-import seedu.trackbeau.model.person.NameContainsKeywordsPredicate;
+import seedu.trackbeau.model.TrackBeau;
+import seedu.trackbeau.model.customer.Customer;
+import seedu.trackbeau.model.customer.NameContainsKeywordsPredicate;
 import seedu.trackbeau.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -99,7 +99,7 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the trackbeau book, filtered person list and selected person in {@code actualModel} remain unchanged
+     * - the trackbeau book, filtered customer list and selected customer in {@code actualModel} remain unchanged
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
@@ -112,7 +112,7 @@ public class CommandTestUtil {
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
     /**
-     * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
+     * Updates {@code model}'s filtered list to show only the customer at the given {@code targetIndex} in the
      * {@code model}'s trackbeau book.
      */
     public static void showPersonAtIndex(Model model, Index targetIndex) {

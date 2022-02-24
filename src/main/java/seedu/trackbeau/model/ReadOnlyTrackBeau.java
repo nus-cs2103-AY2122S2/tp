@@ -1,7 +1,7 @@
 package seedu.trackbeau.model;
 
 import javafx.collections.ObservableList;
-import seedu.trackbeau.model.person.Customer;
+import seedu.trackbeau.model.customer.Customer;
 
 /**
  * Unmodifiable view of an trackbeau book

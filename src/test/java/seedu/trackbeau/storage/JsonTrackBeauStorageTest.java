@@ -16,8 +16,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.trackbeau.commons.exceptions.DataConversionException;
-import seedu.trackbeau.model.TrackBeau;
 import seedu.trackbeau.model.ReadOnlyTrackBeau;
+import seedu.trackbeau.model.TrackBeau;
 
 public class JsonTrackBeauStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonAddressBookStorageTest");

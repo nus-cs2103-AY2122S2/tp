@@ -5,7 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.trackbeau.commons.core.GuiSettings;
-import seedu.trackbeau.model.person.Customer;
+import seedu.trackbeau.model.customer.Customer;
 
 /**
  * The API of the Model component.
@@ -53,34 +53,34 @@ public interface Model {
     ReadOnlyTrackBeau getAddressBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the trackbeau book.
+     * Returns true if a customer with the same identity as {@code customer} exists in the trackbeau book.
      */
     boolean hasPerson(Customer customer);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the trackbeau book.
+     * Deletes the given customer.
+     * The customer must exist in the trackbeau book.
      */
     void deletePerson(Customer target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the trackbeau book.
+     * Adds the given customer.
+     * {@code customer} must not already exist in the trackbeau book.
      */
     void addPerson(Customer customer);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
+     * Replaces the given customer {@code target} with {@code editedPerson}.
      * {@code target} must exist in the trackbeau book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the trackbeau book.
+     * The customer identity of {@code editedPerson} must not be the same as another existing customer in trackbeau.
      */
     void setPerson(Customer target, Customer editedCustomer);
 
-    /** Returns an unmodifiable view of the filtered person list */
+    /** Returns an unmodifiable view of the filtered customer list */
     ObservableList<Customer> getFilteredPersonList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered customer list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Customer> predicate);
