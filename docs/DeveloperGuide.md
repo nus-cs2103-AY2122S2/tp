@@ -283,32 +283,89 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Amigos` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Delete a friend**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list friends
+2.  Amigos shows a list of friends
+3.  User requests to delete a specific friend in the list
+4.  Amigos deletes the friend
 
     Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
+    * Use case ends.
 
-  Use case ends.
 
-* 3a. The given index is invalid.
+* 2b. User requests to delete all friends.
+   * 2b1. Amigoes deletes all friends.
+  
+     Use case ends.
+    
+* 3a. No name is entered by the user. 
+   * 3a1. Amigos shows an error message. 
+     
+     Use case resumes at step 2. 
 
-    * 3a1. AddressBook shows an error message.
+* 3b. The given name does not exist in the address book.
+    * 3b1. Amigos shows an error message.
+
+      Use case resumes at step 2.
+    
+
+* 3c. There is more than 1 friend with the same name.
+    * 3c1. Amigos shows a list containing all friends with the same name.
+    
+      Use case resumes at step 3.
+
+
+* 3d. The user requests to delete all friends with the same name.
+     * 3d1. Amigos deletes all friends with the same name.
+  
+       Use case ends.
+
+**Use case: Edit a friend**
+
+1.  User requests to list friends
+2.  Amigos shows a list of friends
+3.  User requests to edit details of a specific friend in the list
+4.  Amigos edits the details of the friend accordingly. 
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+    * Use case ends.
+
+
+* 3a. No name is entered by the user.
+    * 3a1. Amigos shows an error message.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+
+* 3b. The given name does not exist in the address book.
+    * 3b1. Amigos shows an error message.
+
+      Use case resumes at step 2.
+
+
+* 3c. There is more than 1 friend with the same name.
+    * 3c1. Amigos shows a list containing all friends with the same name.
+
+      Use case resumes at step 3.
+
+
+* 3d. No fields to edit are entered by user.  
+    * 3d1. Amigos shows an error message. 
+  
+      Use case resumes at step 2.
 
 ### Non-Functional Requirements
 
