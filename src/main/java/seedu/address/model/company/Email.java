@@ -45,10 +45,10 @@ public class Email {
     }
 
     /**
-     * Returns if a given string is a valid email.
+     * Returns if a given string is a valid email or when the string is empty.
      */
     public static boolean isValidEmail(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) || test.isEmpty();
     }
 
     @Override
