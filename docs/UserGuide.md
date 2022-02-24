@@ -70,7 +70,7 @@ Shows a message explaining how to access the User Guide.
 
 Format: `help`
 
-### Listing all persons : `list` <a id="c-list"></a>
+### Listing all companies : `list` <a id="c-list"></a>
 
 Shows a list of all companies and internship roles in Tinner.
 
@@ -105,7 +105,7 @@ Deletes the specified company from the list.
 Format: `delete company COMPANY_INDEX`
 
 * Deletes the company at the specified COMPANY_INDEX.
-* The index refers to the index number shown in the displayed person list.
+* The index refers to the index number shown in the displayed company list.
 * The index must be a positive integer like 1, 2, 3, …
 
 Examples:
