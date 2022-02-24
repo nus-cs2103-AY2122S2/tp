@@ -312,9 +312,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list customers
-2.  AddressBook shows a list of customers with their customer Index
+2.  TrackBeau shows a list of customers with their customer Index
 3.  User requests to show information about customer using Index
-4.  AddressBook shows information about customer
+4.  TrackBeau shows information about customer
 
     Use case ends.
     
@@ -326,16 +326,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. TrackBeau shows an error message.
 
       Use case resumes at step 3.
     
 **Use case: find customer's detail by their name**
 
 1.  User requests to find a customer by name using a keyword
-2.  AddressBook shows a list of customers with matching keyword with their customer Index
+2.  TrackBeau shows a list of customers with matching keyword with their customer Index
 3.  User requests to show information about customer using Index
-4.  AddressBook shows information about customer
+4.  TrackBeau shows information about customer
 
     Use case ends.
 
@@ -365,7 +365,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The input format is wrong.
-    * 2a1. AddressBook shows an error message.
+    * 2a1. TrackBeau shows an error message.
     
       Use case resumes at step 3.
 
@@ -383,9 +383,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The input format is wrong.
-    * 2a1. AddressBook shows an error message.
+    * 2a1. TrackBeau shows an error message.
     
       Use case resumes at step 3.
+      
 *{More to be added}*
 
 **Use case: user wishes to exit the application**
