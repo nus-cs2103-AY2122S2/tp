@@ -64,7 +64,7 @@ Tinner (Anagram of Intern) is a desktop app for managing internship applications
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the User Guide.
 
 ![help message](images/helpMessage.png)
 
@@ -72,7 +72,7 @@ Format: `help`
 
 ### Listing all persons : `list` <a id="c-list"></a>
 
-Shows a list of all persons in the address book.
+Shows a list of all companies and internship roles in Tinner.
 
 Format: `list`
 
