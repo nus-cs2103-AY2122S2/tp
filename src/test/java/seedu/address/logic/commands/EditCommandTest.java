@@ -11,7 +11,8 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showCompanyAtIndex;
 import static seedu.address.testutil.TypicalCompanies.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalIndexes.*;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_COMPANY;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_COMPANY;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,8 +24,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.company.Company;
-import seedu.address.testutil.EditCompanyDescriptorBuilder;
 import seedu.address.testutil.CompanyBuilder;
+import seedu.address.testutil.EditCompanyDescriptorBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -121,7 +122,8 @@ public class EditCommandTest {
     @Test
     public void execute_invalidCompanyIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredCompanyList().size() + 1);
-        EditCommand.EditCompanyDescriptor descriptor = new EditCompanyDescriptorBuilder().withName(VALID_NAME_BOB).build();
+        EditCommand.EditCompanyDescriptor descriptor =
+                new EditCompanyDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX);

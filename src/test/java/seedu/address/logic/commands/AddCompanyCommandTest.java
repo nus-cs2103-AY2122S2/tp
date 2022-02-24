@@ -47,7 +47,8 @@ public class AddCompanyCommandTest {
         AddCompanyCommand addCompanyCommand = new AddCompanyCommand(validCompany);
         ModelStub modelStub = new ModelStubWithCompany(validCompany);
 
-        assertThrows(CommandException.class, AddCompanyCommand.MESSAGE_DUPLICATE_COMPANY, () -> addCompanyCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddCompanyCommand.MESSAGE_DUPLICATE_COMPANY, () ->
+                addCompanyCommand.execute(modelStub));
     }
 
     @Test
