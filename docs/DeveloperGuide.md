@@ -257,42 +257,73 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* has a need to manage a significant number of contacts for contact-tracing of students
+* has a simple-to-use product to check on health status of students
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: 
+
+Keep track of students’ covid status. This is a central repository for covid status updating to ease the facilitation of
+management of NUS students across different faculties. It will be easier to read and update covid status.
+
+Every students’ info in one integrated application platform. The app will help to manage students across different 
+faculties within NUS (no support for other schools).
+
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
+| Priority | As a …​                                 | I want to …​                     | So that I can…​                                                |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| `* * *`  | IT admin                                   | obtain student contact information | quickly contact students if required                               |
+| `* * *`  | IT admin                                   | get a list of students with covid  |  find out any possible hotspots                                    |
+| `* * *`  | IT admin                                   | save the data locally              | for easy dissemination of information to other admins              |
+| `* * *`  | IT admin                                   | find details of a particular student | follow up with checking on the student                           |
+| `* * *`  | IT admin                                   | add a student’s details into the system | store their details for reference                             |
+| `* * *`  | First time user                            | add a list of students with their info into the system  | have a centralised hub for covid health status |
+| `* * *`  | IT admin                                   | delete a user from the system      | remove wrongly keyed in inputs from the system                     |
+| `* * *`  | IT admin                                   | clear the system database          | quickly restore the initial state of the system and to start on a clean slate again             |
+| `* * *`  | IT admin                                   | edit a contact’s information       | can modify any change in contact details regarding a user          |
+| `* * *`  | Professors                                 | get the statistics of covid cases among different groups of students | Can use for further medical research |
+| `* *`    | IT admin                                   | seek help if unfamiliar with Tracey | straighten out any uncertainties regarding the usage of the system 
+| `* *`    | IT admin                                   | easily keep track and update  the covid status of students  | use data to inform relevant module lecturers and TAs |
+| `* *`    | IT admin                                   | see when a particular student started having covid symptoms | find who is the superspreader             |
+| `* *`    | IT admin                                   | store the date when the student tested positive for covid   | check the duration for which the student has to be isolated for                |
+| `* *`    | Busy admin                                 | mass send emails to specific students | check on their health                                           |
+| `* *`    | IT admin                                   | be notified of when a student’s status change   | follow up on their health                             |
+| `* *`    | OCD IT admin                               | categorise contacts according to faculty | I am happy                                                   |
+| `* *`    | IT admin                                   | filter out those students with covid easily     | write out future modules plan for different faculty   |
+| `* *`    | IT admin                                   | easily export data from the application  | To show my boss                                              |
+| `* *`    | User                                       | send contact info of someone    | his/her TA can contact the student only if TA is allowed to do so              |
+| `* *`    | IT admin                                   | mass send emails to the professors of affected students  | inform the relevant TAs and professors about their absence in class              |
+| `* *`    | UHC people                                 | get the number of students with covid    | prepare enough medical resources accordingly                 |
+| `* *`    | IT admin                                   | easy method to Import data into the app  | save the hassle                                              |
+| `* *`    | Hostel Management people                   | Retrieve the number of students with covid in the different hostel  | Can plan out the number of rooms for covid use like quarantine etc.                |
+| `* *`    | User                                       | have a quick keyword search     | to find a specific person if unsure of his full name or complete contact number                |
+| `* *`    | Professor                                  | be informed when one of my students are covid positive     | make arrangements for makeup class or examinations                |
+| `* *`    | IT admin                                   | add the last known location of where a particular student caught the virus     | manage the severity of the hotspot and choose to take follow up actions              |
+| `* `    | Parents                                     | get the name of students with covid      | check if their children or friends or neighbors’ children got covid or not               |
+| `* `    | NUS President                               | know covid status of students  and staffs     | come up with policies                                   |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Tracey` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Delete a student**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list students
+2.  Tracey shows a list of students
+3.  User requests to delete a specific student in the list
+4.  Tracey deletes the person
 
     Use case ends.
 
@@ -304,11 +335,156 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. Tracey shows an error message.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: Search for a student**
+
+**MSS**
+
+1.  User requests to search for student
+2.  Tracey shows the info of student with that matching name
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list does not contain student(s) of that name.
+
+  Use case ends.
+
+* 2b. The given student name exists multiple places on the list.
+
+    * 2b1. Tracey shows a list of students with the name with their info.
+
+      Use case ends.
+
+**Use case: Add a student into Tracey**
+
+**MSS**
+
+1.  User requests to add the student with his/her details such as year, faculty, covid status
+2.  Tracey shows the info of student with that matching name
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The student info has an invalid format.
+  
+    * 1a1. Tracey will inform user that he/she did not provide the correct information.
+      
+    * 1a2. User provide the correct details in the correct format.
+    
+* 1b. The student to be added already exist in the list by Tracey.
+  
+    * 1b1. Tracey inform user that the contact exist in her.
+    
+        Use case ends
+* 1c. User adds multiple students in one go.
+  
+    * 1c1. Tracey will list out a list of new students added with their info.
+      
+        Use case ends
+
+**Use case: Edit information of a student**
+
+**MSS**
+
+1.  User requests to list students
+2.  Tracey shows a list of students
+3.  User requests to edit a specific student in the list
+4.  Tracey updates details of the person
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list does not contain student(s) of that name.
+
+  Use case ends.
+
+* 2b. The given student name exists multiple places on the list.
+
+    * 2b1. Tracey will inform user that he/she did not provide the correct information formatting.
+    
+    * 2b2. User will key in the correct format to edit student.
+
+**Use case: Clear the system database**
+
+**MSS**
+
+1.  User requests to clear all students
+2.  Tracey shows an empty list of students
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list does not contain student(s) of that name.
+
+  Use case ends.
+
+**Use case: Summarize the system database for number of covid patient**
+
+**MSS**
+
+1.  User requests to summarise number of students with covid
+2.  Tracey shows lists of students of that with the covid positive status
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list with that tag does not contain student(s) of that name.
+
+  Use case ends.
+
+**Use case: List all students**
+
+**MSS**
+
+1.  User requests to list all students
+2.  Tracey shows a list of students
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list does not contain student(s) of that name.
+
+  Use case ends.
+
+**Use case: Request for help from Tracey**
+
+**MSS**
+
+1.  User requests Tracey for more details on what she can do.
+2.  Tracey redirects user to user guide.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The user guide is empty.
+
+  Use case ends.
+
+**Use case: Filter the system database for list overview by filter**
+
+**MSS**
+
+1.  User requests to filter all students by a tag (ie. year)
+2.  Tracey shows a list of students of that specific tag with the covid status
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list with that tag does not contain student(s) of that name.
+
+  Use case ends.
 
 ### Non-Functional Requirements
 
