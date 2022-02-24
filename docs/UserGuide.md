@@ -222,10 +222,6 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+**Add** | Adding student<ul><li>syntax: `add student id/STUDENT_ID n/NAME p/PHONE_NUMBER e/EMAIL` </li><li>e.g., `add student id/E0123456 n/John Doe p/98765432 e/johnd@example.com`</li></ul>Adding module<ul><li>syntax: `add module n/MODULE_NAME c/MODULE_CODE` </li><li>e.g., `add module n/Software Engineering Project c/CS2103T`</li></ul>Adding class group<ul><li>syntax: `add class id/CLASSGROUP_ID t/CLASSGROUP_TYPE m/MODULE_CODE` </li><li>e.g., `add class id/T13 t/tutorial m/CS2103T`</li></ul>
+**Delete** | Deleting student<ul><li>syntax: `delete student INDEX` </li><li>e.g., `delete student 2`</li></ul>Deleting module<ul><li>syntax: `delete module INDEX` </li><li>e.g., `delete module 2`</li></ul>Deleting class group<ul><li>syntax: `delete class INDEX` </li><li>e.g., `delete class 2`</li></ul>
+**List** | Listing students<ul><li>syntax: `list student` </li></ul>Listing modules<ul><li>syntax: `list module` </li></ul>Listing class groups<ul><li>syntax: `list class` </li></ul>
