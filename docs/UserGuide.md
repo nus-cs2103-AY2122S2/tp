@@ -178,7 +178,7 @@ Creates an appointment in the schedule.
 Format: `addAppointment n/NAME d/DATE t/TIME l/DURATION p/PERSON`
 
 * Creates a new appointment with the specified parameters.
-* All parameters **must** be specified, but may appear in any order.
+* All parameters **must** be specified.
 * The `NAME` parameter must be **non-empty**.
 * The `DATE` parameter denotes the starting date, and **must conform to the [Common Date Formats](#common-date-and-time-syntax)**.
 * The `TIME` parameter denotes the starting time, and **must conform to the [Common Time Formats](#common-date-and-time-syntax)**.
@@ -299,4 +299,9 @@ Action | Format, Examples
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
+**Add Appointment** | `addAppointment n/NAME d/DATE t/TIME l/DURATION p/PERSON`<br> e.g., `addAppointment n/Cold Call Bob To Sell Insurance d/14-02-2022 t/11:00 p/2 l/60`
+**List Appointments** | `listAppointments`
+**Delete Appointment** | `deleteAppointment INDEX`<br> e.g., `deleteAppointment 2`
+**Edit Appointment** | `editAppointment INDEX [n/NAME] [d/DATE] [t/TIME] [p/PERSON] [l/DURATION]`<br> e.g., `editAppointment 2 n/Call Juliet t/13:45`
+**List Appointments in Period** | `appointmentsBetween sd/STARTDATE st/STARTTIME ed/ENDDATE et/ENDTIME` <br> e.g. `appointmentsBetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00`
 **Help** | `help`
