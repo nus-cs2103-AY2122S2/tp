@@ -7,7 +7,8 @@ import seedu.address.model.Model;
 import seedu.address.model.person.PersonContainsKeywordsPredicate;
 
 /**
- * Finds and lists all persons in address book whose name, phone, email, address or tags contains any of the argument keywords.
+ * Finds and lists all persons in address book whose name, phone, email, address or tags
+ * contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
 public class FindCommand extends Command {
