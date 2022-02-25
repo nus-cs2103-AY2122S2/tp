@@ -342,6 +342,32 @@ Use case ends.
 
       Use case resumes from step 2.
 
+
+**Use case: UC02 - Find Client**
+
+**MSS**
+
+1.  User requests enters search term
+2.  HustleBook shows a client whose name matches the given search term
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Client list is empty.
+
+  Use case ends.
+
+* 2b. Search term does not match any client's name.
+
+  Use case ends.
+
+* 2c. Search term matches multiple client's name
+
+    * 2c1. HustleBook shows list of clients whose name matches search term
+
+      Use case ends.
+
 **Use case: UC03 - Tag a client**
 
 **MSS**
