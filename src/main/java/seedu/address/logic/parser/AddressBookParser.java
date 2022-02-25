@@ -60,8 +60,8 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
-        case RemarkCommand.COMMAND_WORD:
-            return new RemarkCommandParser().parse(arguments);
+        case StatusCommand.COMMAND_WORD:
+            return new StatusCommandParser().parse(arguments);
         case FilterCommand.COMMAND_WORD:
             return new FilterCommandParser().parse(arguments);
         default:

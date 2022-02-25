@@ -14,13 +14,13 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
-    private final Remark BLACKLIST = new Remark("blacklist");
-    private final Remark FAVOURITE = new Remark("favourite");
+    private final Status BLACKLIST = new Status("blacklist");
+    private final Status FAVOURITE = new Status("favourite");
     // Identity fields
     private final Name name;
     private final Phone phone;
     private final Email email;
-    private final Remark remark;
+    private final Status status;
 
     // Data fields
     private final Address address;
@@ -29,16 +29,16 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Status status, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         // This is how to add a proper blacklist/favourite when editing the thing!
-        if (remark.equals(BLACKLIST) || remark.equals(FAVOURITE)) {
-            this.remark = remark;
+        if (status.equals(BLACKLIST) || status.equals(FAVOURITE)) {
+            this.status = status;
         } else {
-            this.remark = new Remark("");
+            this.status = new Status("");
         }
         this.address = address;
         this.tags.addAll(tags);
@@ -60,8 +60,8 @@ public class Person {
         return address;
     }
 
-    public Remark getRemark() {
-        return remark;
+    public Status getStatus() {
+        return status;
     }
 
     /**
@@ -105,7 +105,7 @@ public class Person {
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getTags().equals(getTags())
-                && otherPerson.getRemark().equals(getRemark());
+                && otherPerson.getStatus().equals(getStatus());
     }
 
     @Override
@@ -124,8 +124,8 @@ public class Person {
                 .append(getEmail())
                 .append("; Address: ")
                 .append(getAddress())
-                .append("; Remark: ")
-                .append(getRemark());
+                .append("; Status: ")
+                .append(getStatus());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
