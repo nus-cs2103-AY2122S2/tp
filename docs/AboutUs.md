@@ -9,15 +9,25 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Bryan Tan Jing Kai
 
 <img src="images/johndoe.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/fantablack)]
+[[portfolio](team/fantablack.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: TBA
+
+### Benjamin Tay Keck Bin
+
+<img src="images/johndoe.png" width="200px">
+
+[[github](https://github.com/Btaykb)]
+[[portfolio](team/Btaykb.md)]
+
+* Role: Developer
+* Responsibilities: TBC
 
 ### Jane Doe
 
@@ -48,12 +58,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Law Wei Ming
 
 <img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/lawwm)]
+[[portfolio](team/lawwm.md)]
+
 
 * Role: Developer
 * Responsibilities: UI
