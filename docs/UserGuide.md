@@ -66,9 +66,9 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ### Common Date and Time Syntax
 
-<div markdown="block" class="alert alert-info">
+<div markdown="block" class="alert alert-secondary">
 
-**:information_source: Notes about input date and time formats:**<br>
+**:information_source: This section details the format(s) that date and time inputs are expected to be in.**<br>
 
 * All date inputs must conform to the following format: `dd-mm-yyyy`.
 
@@ -178,16 +178,19 @@ Creates an appointment in the schedule.
 Format: `addAppointment n/NAME d/DATE t/TIME l/DURATION p/PERSON`
 
 * Creates a new appointment with the specified parameters.
-* The operation will fail if the appointment **overlaps** with another appointment.
+* All parameters **must** be specified, but may appear in any order.
 * The `NAME` parameter must be **non-empty**.
-* The `PERSON` parameter **must be a positive integer**, and refers to the index number shown in the displayed person list.
 * The `DATE` parameter denotes the starting date, and **must conform to the [Common Date Formats](#common-date-and-time-syntax)**.
 * The `TIME` parameter denotes the starting time, and **must conform to the [Common Time Formats](#common-date-and-time-syntax)**.
 * The `DURATION` parameter is the duration of the appointment in *minutes*, and **must be a positive number**.
+* The `PERSON` parameter **must be a positive integer**, and refers to the index number shown in the displayed person list.
+<div markdown="span" class="alert alert-warning">:rotating_light: **Important Note:**
+The operation will fail if the appointment **overlaps** with another appointment.
+</div>
 
 Examples:
-* `addAppointment n/Cold Call Bob To Sell Insurance d/14-02-2022 t/11:00 p/2 l/60` Creates a one-hour appointment named "Cold Call Bob To Sell Insurance" on 14th Feb 2022 at 11:00 AM, associated with the second person in the contact list.
-* `addAppointment n/Contract Signing With Charlie d/22-10-2022 t/16:30 p/1 l/300` Creates a 5-hour appointment named "Contract Signing With Charlie" on 22nd Oct 2022 at 4:30 PM, associated with the first person in the contact list.
+* `addAppointment n/Cold Call Bob To Sell Insurance d/14-02-2022 t/11:00 p/2 l/60` Creates a *one-hour* appointment named *"Cold Call Bob To Sell Insurance"* on *14th Feb 2022* at *11:00 AM*, associated with the *second* person in the contact list.
+* `addAppointment n/Contract Signing With Charlie d/22-10-2022 t/16:30 p/1 l/300` Creates a *5-hour* appointment named *"Contract Signing With Charlie"* on *22nd Oct 2022* at *4:30 PM*, associated with the *first* person in the contact list.
 
 ### Listing All Appointments : `listAppointments`
 
@@ -195,7 +198,7 @@ Shows a list of all appointments in the schedule.
 
 Format: `listAppointments`
 
-Example output:
+**Example output**
 
 ![List Appointments Wireframe](images/wireframes/ListAppointments.png)
 
@@ -209,7 +212,7 @@ Format: `deleteAppointment INDEX`
 * The `INDEX` parameter **must be a positive integer**, and refers to the index number shown in the **displayed appointment list**.
 
 Examples:
-* `deleteAppointment 2` Deletes the second appointment in the list of appointments.
+* `deleteAppointment 2` Deletes the *second* appointment in the list of appointments.
 
 ### Editing an Appointment : `editAppointment`
 
@@ -219,18 +222,20 @@ Format: `editAppointment INDEX [n/NAME] [d/DATE] [t/TIME] [p/PERSON] [l/DURATION
 
 * Edits the appointment that is at `INDEX` in the appointment list, setting the supplied parameter(s) to the supplied value(s).
 * The `INDEX` parameter **must be a positive integer**, and refers to the index number shown in the **displayed appointment list**.
-* At least one of the optional parameters must be supplied, otherwise the command will not perform any operation.
+* At least one of the optional parameters must be supplied, otherwise the command will be ignored.
 * If supplied, the optional parameters must conform to the following rules:
     * The `NAME` parameter must be non-empty.
-    * The `PERSON` parameter must be a positive integer, and refers to the index number shown in the displayed person list.
     * The `DATE` parameter denotes the starting date, and **must conform to the [Common Date Formats](#common-date-and-time-syntax)**.
     * The `TIME` parameter denotes the starting time, and **must conform to the [Common Time Formats](#common-date-and-time-syntax)**.
+    * The `PERSON` parameter must be a positive integer, and refers to the index number shown in the displayed person list.
     * The `DURATION` parameter is the duration of the appointment in *minutes*, and **must be a positive number**.
-* Note that the edit operation will fail if the new appointment time **overlaps** with another appointment.
+<div markdown="span" class="alert alert-warning">:rotating_light: **Important Note:**
+The operation will fail if the modified appointment **overlaps** with another appointment.
+</div>
 
 Examples:
-* `editAppointment 6 l/300` Edits the 6th appointment in the list of appointments to have a duration of 5 hours. No other properties are changed.
-* `editAppointment 2 n/Call Juliet t/13:45` Edits the second appointment in the list of appointments to have the name "Call Juliet" and changes the time to 1:45 PM. No other properties are changed.
+* `editAppointment 6 l/300` Edits the *6th* appointment in the list of appointments to have a duration of *5 hours*. No other properties are changed.
+* `editAppointment 2 n/Call Juliet t/13:45` Edits the *second* appointment in the list of appointments to have the name *"Call Juliet"* and changes the time to *1:45 PM*. No other properties are changed.
 
 ### Listing Appointments Within A Period : `appointmentsBetween`
 
@@ -238,19 +243,18 @@ Lists all the appointments between a starting time and ending time.
 
 Format: `appointmentsBetween sd/STARTDATE st/STARTTIME ed/ENDDATE et/ENDTIME`
 
-* Lists all the appointments between the starting date-time and ending date-time.
-* The starting date-time **must be before** the ending date-time.
+* The starting time **must be before** the ending time.
 * The `STARTDATE` parameter denotes the *starting date* of the period.
-* The `ENDDATE` parameter denotes the *ending date* of the period.
-* Both `STARTDATE` and `ENDDATE` **must conform to the [Common Date Formats](#common-date-and-time-syntax)**.
 * The `STARTTIME` parameter denotes the *starting time* on the starting date for the period.
+* The `ENDDATE` parameter denotes the *ending date* of the period.
 * The `ENDTIME` parameter denotes the *ending time* on the ending date for the period.
+* Both `STARTDATE` and `ENDDATE` **must conform to the [Common Date Formats](#common-date-and-time-syntax)**.
 * Both `STARTTIME` and `ENDTIME` **must conform to the [Common Time Formats](#common-date-and-time-syntax)**.
 
 Example:
-* `appointmentsBetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00` Lists all appointments between 21 October 2022, 12 PM and 23 October 2022, 5PM.
+* `appointmentsBetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00` Lists all appointments between *21 October 2022, 12 PM* and *23 October 2022, 5PM*.
 
-Example Output:
+**Example Output:**
 
 ![Appointments Between Wireframe](images/wireframes/AppointmentsBetween.png)
 
