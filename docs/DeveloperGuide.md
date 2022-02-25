@@ -430,7 +430,7 @@ Use case ends.
 
       Use case resumes at step 2.
 
-**Use case: Delete a person**
+**Use case: UC05 - Delete a person**
 
 **MSS**
 
