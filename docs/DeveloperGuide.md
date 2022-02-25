@@ -2,8 +2,25 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-{:toc}
+## Table of Contents
+* [Acknowledgements](#acknowledgements)
+* [Setting up, getting started](#setting-up-getting-started)
+* [Design](#design)
+  * D1
+  * D2
+* [Implementation](#implementation)
+  * I1
+  * I2
+* [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+* [Appendix: Requirements](#appendix-requirements)
+  * [Product Scope](#product-scope)
+  * [User Stories](#user-stories)
+  * [Use cases](#use-cases)
+  * [Non-Functional Requirements](#non-functional-requirements)
+  * [Glossary](#glossary)
+* [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+  * A1
+  * A2
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -257,56 +274,67 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* wealth managers managing a significant number of clients
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: keep track and be more organised with their clients 
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| <div style="width:55px">Priority</div> | As a …​                 | I want to …​                                                           | So that I can…​                                                        |
+|----------------------------------------|-------------------------|------------------------------------------------------------------------|------------------------------------------------------------------------|
+| `* * *`                                | new user                | click on the help button for a user guide on how to use the HustleBook | learn on how to use the features in the HustleBook                     |
+| `* * *`                                | new user                | clear the demo data                                                    | start using the HustleBook and enter their own data                    |
+| `* * *`                                | new user                | view demo data                                                         | play around with the features                                          |
+| `* * *`                                | new user                | create new contacts for each new client I get                          | keep track of my clients                                               | 
+| `* * *`                                | new user                | Add relevant information of each client                                | keep important information regarding each client is captured           | 
+| `* * *`                                | new user                | find which client they have not met in some time                       | contact them and get updates                                           |
+| `* * *`                                | new user                | view client details                                                    | contact them and get updates                                           | 
+| `* * *`                                | new user                | delete a contact                                                       | completely delete a contact so it clears up the list                   | 
+| `* * *`                                | expert user             | tag clients for urgent meetings                                        | avoid forgetting important meetings                                    |
+| `* * *`                                | expert user             | edit contact information                                               | update my client's details                                             |
+| `* * *`                                | expert user             | find a person by name                                                  | locate details of persons without having to go through the entire list |
+| `* *`                                  | expert user             | archive old contacts                                                   | keep the contact list clean and free clutter                           |
+| `* *`                                  | new user                | add a meet up information to a client                                  | track when is the next meet up                                         |
+| `* *`                                  | new user                | get tips on existing features                                          | get the required info without referring to help section                |
+| `* *`                                  | expert user             | load up previous work before shutting                                  | be more efficient                                                      |
+| `* *`                                  | expert user             | filter important clients                                               | prioritise them                                                        |
+| `* *`                                  | expert user             | list meet ups for a specific day                                       | view and manage the meet ups with the clients                          |
+| `* *`                                  | busy user               | be alerted when any meeting clashes                                    | make sure my meetings with my clients are scheduled                    |
+| `* *`                                  | busy user               | be reminded if I havent met a client in a long time                    | I wont lose contact with my clients                                    |
+| `* *`                                  | busy and forgetful User | tag certain clients as priority                                        | be constantly reminded as to not forget them                           | 
+| `* *`                                  | busy user               | identify conflicting names by index                                    | perform opearations more accurately                                    |
+| `*`                                    | new user                | Add social media data for clients                                      | access their social media details                                      |
 
 ### Use cases
 
 (For all use cases below, the **System** is the `HustleBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Add a client**
 
 **MSS**
+1. User requests to add a client.
+2. HustleBook adds the client information into the list.
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+Use case ends.
 
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. AddressBook shows an error message.
-
-      Use case resumes at step 2.
+Extension:
+* 1a. HustleBook detects insufficient information. 
+  * 1a1. HustleBook informs user the minimal data needed to add a client.
+  * 1a2. User enters the correct data. 
+  * Steps 1a1 - 1a2 are repeated until the data entered is sufficient.
+  * Use case resumes from step 2.
+* 1b. HustleBook detects incorrect format. 
+  * 1b1. HustleBook informs user the format to follow
+  * 1b2. User enters the correct format.
+  * Steps 1b1 - 1b2 are repeated until the format and data is correct.
+  * Use case resumes from step 2.
 
 **Use case: UC03 - Tagging a client**
 
@@ -318,7 +346,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4. User requests to list clients again
 5. HustleBook shows priority client at the start
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
@@ -328,24 +356,85 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. Specified person does not exist on the list.
 
-  * 3a1. HustleBook shows an error message. 
+    * 3a1. HustleBook shows an error message.
 
-    Use case resumes at step 2.
+      Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: UC04 - Edit a client's information**
+
+**MSS**
+
+1. User requests to list clients
+2. HustleBook shows a list of clients
+3. User requests to edit the information of a specific client in the list
+4. HustleBook updates the client's information with the given information
+5. HustleBook shows the client's updated information
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 2b. User decides to cancel editing the client's information.
+
+  Use case ends.
+
+* 3a. The given client name is invalid.
+
+    * 3a1. HustleBook shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. There are multiple clients with the same given name.
+
+    * 3b1. HustleBook shows a list of clients with the same given name.
+
+    * 3b2. HustleBook requests for index of the client to update the information to.
+  
+    * 3b3. User enters an index.
+
+      Step 3b2-3b3 is repeated until a valid index is entered.
+
+      Use case resumes at step 4.
+    
+* 3c. User doesn't provide information for updating.
+
+    * 3c1. HustleBook shows an error message.
+
+      Use case resumes at step 2.
+  
+* 3d. The given information is in the wrong format.
+
+    * 3d1. HustleBook shows an error message.
+
+      Use case resumes at step 2.
+    
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+* **Data requirement**:
+  * HustleBook should be able to handle up to 250 clients. 
+  * Each client’s data should be able to be edited anytime.
+* **Constraints**: 
+  * A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+* **Environment requirements**: 
+  * System should work on _mainstream OS_ with java 11 or above installed.
+* **Technical requirements**: 
+  * System should be able to scale up and handle clients with the same name.
+* **Process requirements**: 
+  * The project is expected to adhere to a schedule that delivers a feature set every two weeks (v1.2 and v1.3).
+* **Notes about project scope**: 
+  * The product is not required to handle exporting of data to files for printing or other purposes.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **HB (HustleBook)**: The app that is being used to record client details.
+* **CLI (Command Line Interface)**: The text box where users can type their inputs and commands.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
