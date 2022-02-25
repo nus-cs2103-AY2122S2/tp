@@ -20,14 +20,14 @@ public class StatusCommand extends Command {
 
     public static final String COMMAND_WORD = "status";
 
-    public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added status to Person: %1$s";
-    public static final String MESSAGE_ADD_REMARK_FAILURE = "Tags should be either 'blacklist' or 'favourite'";
-    public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed status from Person: %1$s";
+    public static final String MESSAGE_ADD_STATUS_SUCCESS = "Added status to Person: %1$s";
+    public static final String MESSAGE_ADD_STATUS_FAILURE = "Tags should be either 'blacklist' or 'favourite'";
+    public static final String MESSAGE_DELETE_STATUS_SUCCESS = "Removed status from Person: %1$s";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the status of the person identified "
             + "by the index number used in the last person listing. "
             + "Existing status will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_STATUS + "[REMARK]\n"
+            + PREFIX_STATUS + "[STATUS]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_STATUS + "Likes to swim.";
 
@@ -67,7 +67,7 @@ public class StatusCommand extends Command {
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        String message = !status.value.isEmpty() ? MESSAGE_ADD_REMARK_SUCCESS : MESSAGE_DELETE_REMARK_SUCCESS;
+        String message = !status.value.isEmpty() ? MESSAGE_ADD_STATUS_SUCCESS : MESSAGE_DELETE_STATUS_SUCCESS;
         return String.format(message, personToEdit);
     }
 

@@ -28,23 +28,44 @@ import seedu.address.testutil.PersonBuilder;
  */
 public class StatusCommandTest {
 
-    private static final String REMARK_STUB = "Some status";
+    private static final String STATUS_STUB = "favourite";
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_addStatusUnfilteredList_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(firstPerson).withStatus(REMARK_STUB).build();
+        Person editedPerson = new PersonBuilder(firstPerson).withStatus(STATUS_STUB).build();
 
         StatusCommand statusCommand = new StatusCommand(INDEX_FIRST_PERSON, new Status(editedPerson.getStatus().value));
 
-        String expectedMessage = String.format(StatusCommand.MESSAGE_ADD_REMARK_SUCCESS, editedPerson);
+        String expectedMessage = String.format(StatusCommand.MESSAGE_ADD_STATUS_SUCCESS, editedPerson);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
 
         assertCommandSuccess(statusCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_addStatusUnfilteredList_failure() throws IllegalArgumentException {
+        boolean isStatusAdded;
+        try {
+            Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+            Person editedPerson = new PersonBuilder(firstPerson).withStatus("asdf").build();
+            StatusCommand statusCommand = new StatusCommand(INDEX_FIRST_PERSON, new Status("asdf"));
+            String expectedMessage = String.format(StatusCommand.MESSAGE_ADD_STATUS_FAILURE, editedPerson);
+
+            Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+            expectedModel.setPerson(firstPerson, editedPerson);
+            isStatusAdded = true;
+            // Unable to actually execute this due to IllegalArgumentException when "asdf" is passed in.
+            // Instead, check if isStatusAdded is false.
+            assertCommandSuccess(statusCommand, model, expectedMessage, expectedModel);
+        } catch (IllegalArgumentException e) {
+            isStatusAdded = false;
+        }
+        assertFalse(isStatusAdded);
     }
 
     @Test
@@ -55,7 +76,7 @@ public class StatusCommandTest {
         StatusCommand statusCommand = new StatusCommand(INDEX_FIRST_PERSON,
                 new Status(editedPerson.getStatus().toString()));
 
-        String expectedMessage = String.format(StatusCommand.MESSAGE_DELETE_REMARK_SUCCESS, editedPerson);
+        String expectedMessage = String.format(StatusCommand.MESSAGE_DELETE_STATUS_SUCCESS, editedPerson);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
@@ -69,11 +90,11 @@ public class StatusCommandTest {
 
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(model.getFilteredPersonList()
-                .get(INDEX_FIRST_PERSON.getZeroBased())).withStatus(REMARK_STUB).build();
+                .get(INDEX_FIRST_PERSON.getZeroBased())).withStatus(STATUS_STUB).build();
 
         StatusCommand statusCommand = new StatusCommand(INDEX_FIRST_PERSON, new Status(editedPerson.getStatus().value));
 
-        String expectedMessage = String.format(StatusCommand.MESSAGE_ADD_REMARK_SUCCESS, editedPerson);
+        String expectedMessage = String.format(StatusCommand.MESSAGE_ADD_STATUS_SUCCESS, editedPerson);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
