@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+InternBuddy is a **desktop app for managing companies for internships, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).** If you can type fast, InternBuddy can get your internship management deliverables done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -38,7 +38,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## Current Features
 
 <div markdown="block" class="alert alert-info">
 
@@ -77,15 +77,15 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/COMPANY [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/shopee`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal c/shopee`
 
 ### Listing all persons : `list`
 
@@ -97,7 +97,7 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/COMPANY] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -166,6 +166,43 @@ AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
 </div>
 
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Features Added in V1.2
+
+### Adding a Company : `add_company`
+
+Adds a company to the address book. <br>
+A company must have: <br>
+- Name of Company
+- Email Address
+
+Additionally, a company can optionally have a tag. <br>
+
+Format: `add_company n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS]`
+
+### Adding an Event : `add_event`
+
+Adds an event to the address book. <br>
+An event must have : <br>
+- A Name
+- A Date
+- The company involved in the event
+
+Format: `add_event n/NAME d/DATE [tm/TIME] c/COMPANY`
+
+### List All Companies : `list_company`
+
+Shows a list of all companies in the address book. <br>
+Format: `list_company`
+
+### List All Events : `list_event`
+
+Shows a list of either all the events in the addressbook or all the events from certain companies. <br>
+Format: `list_event [c/COMPANY]...`
+
+
 ### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
@@ -189,4 +226,8 @@ Action | Format, Examples
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
+**Add Company** | `add_company n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS]`
+**Add Event** | `add_event n/NAME d/DATE [tm/TIME] c/COMPANY`
+**List All Companies** | `list_company`
+**List All Events** | `list_event [c/COMPANY]...`
 **Help** | `help`
