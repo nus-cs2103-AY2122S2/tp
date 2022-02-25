@@ -9,15 +9,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Kuan Jian Rong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kuanjr.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/kuanjr)]
+[[portfolio](team/kuanjr.md)]
 
-* Role: Project Advisor
+* Role: Developer + Team Lead
 
 ### Mohd Shafik
 
@@ -39,14 +38,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer + Integration
 * Responsibilities: Data
 
-### Jean Doe
+### Vishwanth
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/vishwanth2210.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/vishwanth2210)]
+[[portfolio](team/vishwanth2210.md)]
 
-* Role: Developer
+* Role: Developer + Deliverables and Deadlines
 * Responsibilities: Dev Ops + Threading
 
 ### Wee Heng
