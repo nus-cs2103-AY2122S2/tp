@@ -308,6 +308,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: UC03 - Tagging a client**
+
+**MSS**
+
+1. User requests to list clients
+2. HustleBook shows a list of clients
+3. User requests to add a priority tag to a specific person in the list
+4. User requests to list clients again
+5. HustleBook shows priority client at the start
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. Specified person does not exist on the list.
+
+  * 3a1. HustleBook shows an error message. 
+
+    Use case resumes at step 2.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
