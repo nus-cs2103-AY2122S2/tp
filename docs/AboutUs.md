@@ -19,15 +19,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Albert Sutiono
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/albertsutiono.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/albertsutz)]
+[[linkedin](https://www.linkedin.com/in/albert-sutiono/)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer
+* Responsibilities: TBD <br>
+
+I am an eager Y2 computer science undergraduate with the desire to learn and improve myself in this field. I aim to delve deeper into the world of software engineering and cybersecurity which address and solve real world problems with the focus on privacy and data security.
 
 ### Johnny Doe
 
