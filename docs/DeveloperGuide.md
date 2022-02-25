@@ -324,16 +324,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 Use case ends.
 
-Extension:
+**Extension:**
+
 * 1a. HustleBook detects insufficient information.
     * 1a1. HustleBook informs user the minimal data needed to add a client.
     * 1a2. User enters the correct data.
+
       Steps 1a1 - 1a2 are repeated until the data entered is sufficient.
+
       Use case resumes from step 2.
+
 * 1b. HustleBook detects incorrect format.
     * 1b1. HustleBook informs user the format to follow
     * 1b2. User enters the correct format.
+
       Steps 1b1 - 1b2 are repeated until the format and data is correct.
+
       Use case resumes from step 2.
 
 **Use case: UC03 - Tagging a client**
@@ -428,17 +434,28 @@ Extension:
 ### Non-Functional Requirements
 
 * **Data requirement**:
+
     * HustleBook should be able to handle up to 250 clients.
     * Each client’s data should be able to be edited anytime.
+
 * **Constraints**:
+
     * A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+
 * **Environment requirements**:
+
     * System should work on _mainstream OS_ with java 11 or above installed.
+
 * **Technical requirements**:
+
     * System should be able to scale up and handle clients with the same name.
+
 * **Process requirements**:
+
     * The project is expected to adhere to a schedule that delivers a feature set every two weeks (v1.2 and v1.3).
+
 * **Notes about project scope**:
+
     * The product is not required to handle exporting of data to files for printing or other purposes.
 
 ### Glossary
