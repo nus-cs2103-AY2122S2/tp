@@ -79,6 +79,36 @@ Example:
 * `add i/A0123456Z n/john m/CS2103T p/98765432 t/@john e/E0123456Z`
     * A student named John is added to TAPA.
 
+### Deleting a student: `delete`
+
+Deletes a student from TAPA.
+
+Format: `delete STUDENT_INDEX`
+
+* The student whose index in the address book is specified after the `delete` command will be removed from the address book.
+
+Example:
+* `delete 10`
+    * A student named John (whose list index is “10”) is deleted from TAPA.
+    * An error message will be displayed to the user if the specified index is a negative number or larger than the number of students in TAPA.
+
+### Finding a student: `find`
+
+Allows the user to look up the details of a particular student.
+
+Format: `find n/[NAME] (or) find i/[STUDENT_ID]`
+
+* The student whose name or student id is specified after the `find` command will appear in the list.
+
+Example:
+* `find n/John`
+    * Displays the particulars of the students whose names include John.
+    * If no name matches John, then the user will be given a message saying no student found under this name.
+* `find i/AXXXXXXXR`
+    * Displays the particulars of the student with student ID AXXXXXXXR.
+    * If the student ID is of the wrong format (incorrect number of characters, or starts with a number, ends with a number), an error will be displayed.
+    * If no student is found with the student ID, then a message saying no student found will be displayed.
+
 ### Checking all the tasks that a particular student have: `task`
 
 Displays all the tasks that are allocated to a particular student.
@@ -121,6 +151,8 @@ Format: `exit`
 Action      | Format, Examples
 ------------|------------------
 **Add**     | `add i/MATRICULATION_NO n/STUDENT_NAME m/MODULE_CODE [p/PHONE_NUMBER] [t/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] ` <br> e.g., `add i/A0123456Z n/john m/CS2103T p/98765432 t/@john e/E0123456Z`
+**Delete**    | `delete STUDENT_INDEX` <br> e.g., `delete 10`
+**Find**    | `find n/NAME` (or) `find i/STUDENT_ID` <br> e.g., `find n/john`, `find i/A0123456Z`
 **Exit**    | `exit`
 **Task**    | `task i/STUDENT_ID` <br> e.g., `task A0123456Z`
 **Archive** | `archive`
