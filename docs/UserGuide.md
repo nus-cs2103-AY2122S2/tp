@@ -90,7 +90,6 @@ Format: `delete STUDENT_INDEX`
 Example:
 * `delete 10`
     * A student named John (whose list index is “10”) is deleted from TAPA.
-    * An error message will be displayed to the user if the specified index is a negative number or larger than the number of students in TAPA.
 
 ### Finding a student: `find`
 
@@ -103,11 +102,8 @@ Format: `find n/[NAME] (or) find i/[STUDENT_ID]`
 Example:
 * `find n/John`
     * Displays the particulars of the students whose names include John.
-    * If no name matches John, then the user will be given a message saying no student found under this name.
 * `find i/AXXXXXXXR`
     * Displays the particulars of the student with student ID AXXXXXXXR.
-    * If the student ID is of the wrong format (incorrect number of characters, or starts with a number, ends with a number), an error will be displayed.
-    * If no student is found with the student ID, then a message saying no student found will be displayed.
 
 ### Checking all the tasks that a particular student have: `task`
 
