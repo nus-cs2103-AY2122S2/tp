@@ -18,3 +18,8 @@
   * A **reasonable level of user and developer documentation**.
   * For the detailed documentation of this project, see the **[HustleBook Product Website](https://ay2122s2-cs2103t-w15-2.github.io/tp/)**.
   * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+
+
+* Attribution:
+
+  HustleBook Icon created by [popo2021](https://www.flaticon.com/authors/popo2021)
