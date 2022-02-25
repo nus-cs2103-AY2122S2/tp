@@ -175,21 +175,21 @@ Format: `clear`
 
 Creates an appointment in the schedule.
 
-Format: `addAppointment n/NAME d/DATE t/TIME l/DURATION p/PERSON`
+Format: `addAppointment n/NAME d/DATE t/TIME l/DURATION [p/PERSON]`
 
 * Creates a new appointment with the specified parameters.
-* All parameters **must** be specified.
+* All parameters except `PERSON` **must** be specified.
 * The `NAME` parameter must be **non-empty**.
 * The `DATE` parameter denotes the starting date, and **must conform to the [Common Date Formats](#common-date-and-time-syntax)**.
 * The `TIME` parameter denotes the starting time, and **must conform to the [Common Time Formats](#common-date-and-time-syntax)**.
 * The `DURATION` parameter is the duration of the appointment in *minutes*, and **must be a positive number**.
-* The `PERSON` parameter **must be a positive integer**, and refers to the index number shown in the displayed person list.
+* The `PERSON` parameter, if specified, **must be a positive integer**, and refers to the index number shown in the displayed person list.
 <div markdown="span" class="alert alert-warning">:rotating_light: **Important Note:**
 The operation will fail if the appointment **overlaps** with another appointment.
 </div>
 
 Examples:
-* `addAppointment n/Cold Call Bob To Sell Insurance d/14-02-2022 t/11:00 p/2 l/60` Creates a *one-hour* appointment named *"Cold Call Bob To Sell Insurance"* on *14th Feb 2022* at *11:00 AM*, associated with the *second* person in the contact list.
+* `addAppointment n/Bi-Weekly Meeting d/14-02-2022 t/11:00 l/60` Creates a *one-hour* appointment named *"Bi-Weekly Meeting"* on *14th Feb 2022* at *11:00 AM*, associated with nobody in the contact list.
 * `addAppointment n/Contract Signing With Charlie d/22-10-2022 t/16:30 p/1 l/300` Creates a *5-hour* appointment named *"Contract Signing With Charlie"* on *22nd Oct 2022* at *4:30 PM*, associated with the *first* person in the contact list.
 
 ### Listing All Appointments : `listAppointments`
