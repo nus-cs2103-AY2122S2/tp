@@ -288,30 +288,38 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `AgentSee` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a client**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User types in client information
+2.  AddressBook adds the new client
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The wrong format is used.
 
-  Use case ends.
+  * 1a1. System shows an error message.
 
-* 3a. The given index is invalid.
+    Use case resumes at step 1.
 
-    * 3a1. AddressBook shows an error message.
+* 1b. A duplicate client is entered.
 
-      Use case resumes at step 2.
+    * 1b. System shows an error message.
+
+      Use case resumes at step 1.
+
+*{More to be added}*
+
+**Use case: Edit a client**
+
+*{More to be added}*
+
+**Use case: Delete a client**
 
 *{More to be added}*
 
