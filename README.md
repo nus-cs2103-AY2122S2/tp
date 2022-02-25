@@ -22,4 +22,4 @@
 
 * Attribution:
 
-  Hustlebook Icon created by [popo2021](https://www.flaticon.com/authors/popo2021)
+  HustleBook Icon created by [popo2021](https://www.flaticon.com/authors/popo2021)
