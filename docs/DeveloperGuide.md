@@ -310,6 +310,59 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
+**Use case: UC04 - Edit a client's information**
+
+**MSS**
+
+1. User requests to list clients
+2. HustleBook shows a list of clients
+3. User requests to edit the information of a specific client in the list
+4. HustleBook updates the client's information with the given information
+5. HustleBook shows the client's updated information
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 2b. User decides to cancel editing the client's information.
+
+  Use case ends.
+
+* 3a. The given client name is invalid.
+
+    * 3a1. HustleBook shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. There are multiple clients with the same given name.
+
+    * 3b1. HustleBook shows a list of clients with the same given name.
+
+    * 3b2. HustleBook requests for index of the client to update the information to.
+  
+    * 3b3. User enters an index.
+
+      Step 3b2-3b3 is repeated until a valid index is entered.
+
+      Use case resumes at step 4.
+    
+* 3c. User doesn't provide information for updating.
+
+    * 3c1. HustleBook shows an error message.
+
+      Use case resumes at step 2.
+  
+* 3d. The given information is in the wrong format.
+
+    * 3d1. HustleBook shows an error message.
+
+      Use case resumes at step 2.
+    
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
