@@ -287,7 +287,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| <div style="width:55px">Priority</div> | As a …​                 | I want to …​                                                           | So that I can…​                                                        |
+| Priority                               | As a …​              | I want to …​                                                        | So that I can…​                                                     |
 |----------------------------------------|-------------------------|------------------------------------------------------------------------|------------------------------------------------------------------------|
 | `* * *`                                | new user                | click on the help button for a user guide on how to use the HustleBook | learn on how to use the features in the HustleBook                     |
 | `* * *`                                | new user                | clear the demo data                                                    | start using the HustleBook and enter their own data                    |
@@ -307,9 +307,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`                                  | expert user             | filter important clients                                               | prioritise them                                                        |
 | `* *`                                  | expert user             | list meet ups for a specific day                                       | view and manage the meet ups with the clients                          |
 | `* *`                                  | busy user               | be alerted when any meeting clashes                                    | make sure my meetings with my clients are scheduled                    |
-| `* *`                                  | busy user               | be reminded if I havent met a client in a long time                    | I wont lose contact with my clients                                    |
+| `* *`                                  | busy user               | be reminded if I haven't met a client in a long time                   | maintain contact with my clients                                       |
 | `* *`                                  | busy and forgetful User | tag certain clients as priority                                        | be constantly reminded as to not forget them                           | 
-| `* *`                                  | busy user               | identify conflicting names by index                                    | perform opearations more accurately                                    |
+| `* *`                                  | busy user               | identify conflicting names by index                                    | perform operations more accurately                                     |
 | `*`                                    | new user                | Add social media data for clients                                      | access their social media details                                      |
 
 ### Use cases
@@ -322,7 +322,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to add a client.
 2. HustleBook adds the client information into the list.
 
-Use case ends.
+   Use case ends.
 
 **Extension:**
 
@@ -330,74 +330,84 @@ Use case ends.
     * 1a1. HustleBook informs user the minimal data needed to add a client.
     * 1a2. User enters the correct data.
 
-      Steps 1a1 - 1a2 are repeated until the data entered is sufficient.
+      Steps 1a1-1a2 are repeated until the data entered is sufficient.
 
-      Use case resumes from step 2.
+      Use case resumes at step 2.
 
 * 1b. HustleBook detects incorrect format.
-    * 1b1. HustleBook informs user the format to follow
+    * 1b1. HustleBook informs user the format to follow.
     * 1b2. User enters the correct format.
 
-      Steps 1b1 - 1b2 are repeated until the format and data is correct.
+      Steps 1b1-1b2 are repeated until a valid format and data is entered.
 
-      Use case resumes from step 2.
+      Use case resumes at step 2.
+
+* 1c. There are multiple clients with the same given name.
+    * 1c1. HustleBook requests confirmation from the user to add client with same name. 
+    * 1c2. User enters his confirmation.
+      * 1c2a. User accepts to add the client.
+      
+        Use case resumes at step 2.
+      
+      * 1c2b. User rejects.
+    
+        Use case ends.
 
 
 **Use case: UC02 - Find Client**
 
 **MSS**
 
-1.  User requests enters search term
-2.  HustleBook shows a client whose name matches the given search term
+1. User requests to find a client.
+2. HustleBook shows a client whose name matches the given name.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
 * 2a. Client list is empty.
-
-  Use case ends.
-
-* 2b. Search term does not match any client's name.
-
-  Use case ends.
-
-* 2c. Search term matches multiple client's name
-
-    * 2c1. HustleBook shows list of clients whose name matches search term
+    * 2a1. HustleBook informs the user that the list is empty.
 
       Use case ends.
 
-**Use case: UC03 - Tag a client**
+* 2b. Specified person does not exist on the list.
+    * 2b1. HustleBook informs the user that the client is not in the list.
+
+      Use case ends.
+
+* 2c. There are multiple clients with the same given name.
+    * 2c1. HustleBook shows list of clients whose name matches search term.
+
+      Use case ends.
+
+**Use case: UC03 - Flag a client**
 
 **MSS**
 
-1. User requests to list clients
-2. HustleBook shows a list of clients
-3. User requests to add a priority tag to a specific person in the list
-4. User requests to list clients again
-5. HustleBook shows priority client at the start
+1. User requests to list clients.
+2. HustleBook shows a list of clients.
+3. User requests to add a flag to a specific client in the list.
+4. HustleBook adds a flag to the client.
+5. User requests to list clients again.
+6. HustleBook shows flagged client at the top of the list.
 
    Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
+    * 2a1. HustleBook informs the user that the list is empty.
 
-  Use case ends.
+      Use case ends.
 
 * 3a. Specified person does not exist on the list.
-
-    * 3a1. HustleBook shows an error message.
+    * 3a1. HustleBook informs the user that the client is not in the list.
 
       Use case resumes at step 2.
 
-* 3b. Specified name matches multiple clients.
-
+* 3b. There are multiple clients with the same given name.
     * 3b1. HustleBook shows a list of clients that match the specified name.
-
     * 3b2. HustleBook requests for index of the client to update the information to.
-
     * 3b3. User enters an index.
 
       Step 3b2-3b3 is repeated until a valid index is entered.
@@ -408,51 +418,48 @@ Use case ends.
 
 **MSS**
 
-1. User requests to list clients
-2. HustleBook shows a list of clients
-3. User requests to edit the information of a specific client in the list
-4. HustleBook updates the client's information with the given information
-5. HustleBook shows the client's updated information
+1. User requests to list clients.
+2. HustleBook shows a list of clients.
+3. User requests to edit the information of a specific client in the list.
+4. HustleBook updates the client's information with the given information.
+5. HustleBook shows the client's updated information.
 
    Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
+    * 2a1. HustleBook informs the user that the list is empty.
 
-  Use case ends.
+      Use case ends.
 
-* 2b. User decides to cancel editing the client's information.
-
-  Use case ends.
-
-* 3a. The given client name is invalid.
-
-    * 3a1. HustleBook shows an error message.
+* 3a. Specified person does not exist on the list.
+    * 3a1. HustleBook informs the user that the client is not in the list.
 
       Use case resumes at step 2.
 
 * 3b. There are multiple clients with the same given name.
-
     * 3b1. HustleBook shows a list of clients with the same given name.
-
     * 3b2. HustleBook requests for index of the client to update the information to.
-
     * 3b3. User enters an index.
 
       Step 3b2-3b3 is repeated until a valid index is entered.
 
       Use case resumes at step 4.
 
-* 3c. User doesn't provide information for updating.
+* 3c. HustleBook detects insufficient information.
+    * 3c1. HustleBook informs user the minimal data needed to add a client.
+    * 3c2. User enters the correct data.
 
-    * 3c1. HustleBook shows an error message.
-
+      Steps 3c1-3c2 are repeated until the data entered is sufficient.
+  
       Use case resumes at step 2.
 
-* 3d. The given information is in the wrong format.
+* 3d. HustleBook detects incorrect format.
+    * 3d1. HustleBook informs user the format to follow.
+    * 3d2. User enters the correct format.
 
-    * 3d1. HustleBook shows an error message.
+      Steps 3d1-3d2 are repeated until a valid format and data is entered.
 
       Use case resumes at step 2.
 
@@ -460,33 +467,28 @@ Use case ends.
 
 **MSS**
 
-1.  User requests to list persons
-2.  HustleBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  HustleBook deletes the person
+1.  User requests to list persons.
+2.  HustleBook shows a list of persons.
+3.  User requests to delete a specific person in the list.
+4.  HustleBook deletes the person.
 
     Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
-  
-    * 2a1. HustleBook notifies user list is empty.
+    * 2a1. HustleBook informs the user that the list is empty.
 
       Use case ends.
 
-* 3a. The given client name is invalid.
-
-    * 3a1. HustleBook shows an error message.
+* 3a. Specified person does not exist on the list.
+    * 3a1. HustleBook informs the user that the client is not in the list.
 
       Use case resumes at step 2.
 
 * 3b. There are multiple clients with the same given name.
-
     * 3b1. HustleBook shows a list of clients with the same given name.
-
     * 3b2. HustleBook requests for index of the client to delete.
-
     * 3b3. User enters an index.
 
       Step 3b2-3b3 is repeated until a valid index is entered.
