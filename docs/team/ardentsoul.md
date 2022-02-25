@@ -5,8 +5,6 @@ title: Zachary's Project Portfolio Page
 
 ### Project: Trackermon
 
-~~AddressBook - Level 3 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.~~
-
 Trackermon - The app will help to allow the user to track and remember what shows they have watched. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java.
 
 Given below are my contributions to the project.
@@ -36,13 +34,13 @@ Given below are my contributions to the project.
     * ~~Added implementation details of the `delete` feature.~~
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-  * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-  * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-  * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
+  * ~~PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]().~~
+  * ~~Contributed to forum discussions (examples: [1](), [2](), [3](), [4]()).~~
+  * ~~Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]()).~~
+  * ~~Some parts of the history feature I added was adopted by several other class mates ([1](), [2]()).~~
 
 * **Tools**:
-  * Integrated a third party library (Natty) to the project ([\#42]())
-  * Integrated a new Github plugin (CircleCI) to the team repo
+  * ~~Integrated a third party library (Natty) to the project ([\#42]()).~~
+  * ~~Integrated a new Github plugin (CircleCI) to the team repo~~
 
-* _{you can add/remove categories in the list above}_
+* ~~_{you can add/remove categories in the list above}_~~
