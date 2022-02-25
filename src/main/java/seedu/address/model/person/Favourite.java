@@ -1,0 +1,19 @@
+package seedu.address.model.person;
+
+/**
+ * Represents a Client's favourited status in the address book.
+ */
+public class Favourite {
+    private boolean value;
+
+    public Favourite(boolean status) {
+        this.value = status;
+    }
+
+    @Override
+    public String toString() {
+        return value
+                ? "Favourited"
+                : "Unfavourited";
+    }
+}
