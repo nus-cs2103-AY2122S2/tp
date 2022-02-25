@@ -342,7 +342,7 @@ Use case ends.
 
       Use case resumes from step 2.
 
-**Use case: UC03 - Tagging a client**
+**Use case: UC03 - Tag a client**
 
 **MSS**
 
