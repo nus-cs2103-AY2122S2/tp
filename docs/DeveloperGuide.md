@@ -263,21 +263,26 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: Able to keep track of clients and the 
+**Value proposition**: Able to keep track of client's preferences, housing details and budget
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                             | I want to …​                                                                     | So that I can…​                                     |
+|--------|-------------------------------------|----------------------------------------------------------------------------------|-----------------------------------------------------|
+| `* * *` | housing agent with many clients     | view client details fast                                                         | can deal with customers easily when they contact me |
+| `* * *` | housing agent                       | add a new client quickly with a quick description                                | update my client list efficiently                   |
+| `* * *` | housing agent                       | see relevant information about my clients                                        | understand their needs                              |
+| `* * *` | housing agent                       | edit my client data                                                              | stay in touch with their changing needs             |
+| `* * *` | housing agent                       | delete a client when their house has been sold or after they have bought a house | not mix up information in the future                |
+| `* * *` | housing agent                       | access some of my favourite clients quickly                                      | always focus on them                                |
+| `* * *` | housing agent                       | "tag" my clients with custom text                                                | remember every client easily                        |
+| `* * *` | housing agent with too many clients | be able to find a client by name                                                 | locate them easily and quickly                      |
+| `* *`  | housing agent                       | have access to my search history                                                 | look up my recently contacted clients               |
+| `* *`  | new user                            | have a quick guide to start me off                                               | learn how to use the application                    |
+| `* *`  | housing agent                       | check my important deadlines                                                     | avoid missing important meetings with my clients    |
 
 *{More to be added}*
 
