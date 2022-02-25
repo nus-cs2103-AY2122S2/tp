@@ -3,9 +3,9 @@ layout: page
 title: Wang Jun Hong's Project Portfolio Page
 ---
 
-### Project: AgenSee
+### Project: AgentSee
 
-AgenSee is a desktop application for property agents to efficiently manage their client information.
+AgentSee is a desktop application for property agents to efficiently manage their client information.
 
 Given below are my contributions to the project.
 
