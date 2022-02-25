@@ -74,6 +74,14 @@ public class CompanyBuilder {
     }
 
     /**
+     * Sets the {@code Address} of the {@code Company} that we are building to an empty {@code Address}.
+     */
+    public CompanyBuilder withoutAddress() {
+        this.address = new Address("");
+        return this;
+    }
+
+    /**
      * Sets the {@code Phone} of the {@code Company} that we are building.
      */
     public CompanyBuilder withPhone(String phone) {
@@ -82,10 +90,26 @@ public class CompanyBuilder {
     }
 
     /**
+     * Sets the {@code Phone} of the {@code Company} that we are building to an empty {@code Phone}.
+     */
+    public CompanyBuilder withoutPhone() {
+        this.phone = new Phone("");
+        return this;
+    }
+
+    /**
      * Sets the {@code Email} of the {@code Company} that we are building.
      */
     public CompanyBuilder withEmail(String email) {
         this.email = new Email(email);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Email} of the {@code Company} that we are building to an empty {@code Email}.
+     */
+    public CompanyBuilder withoutEmail() {
+        this.email = new Email("");
         return this;
     }
 
