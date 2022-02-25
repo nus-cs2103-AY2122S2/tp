@@ -313,7 +313,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to find clients with the specified keyword(s)
-2.  CinnamonBun shows a list of clients an attribute containing at least one keyword
+2.  CinnamonBun shows a list of clients with an attribute containing at least one keyword
 
 **Extensions**
 
