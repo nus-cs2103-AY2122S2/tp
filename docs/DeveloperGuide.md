@@ -337,7 +337,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 3b1. HustleBook shows a list of clients with the same given name.
 
-    * 3b2. HustleBook requests for index of the client to update the information to.
+    * 3b2. HustleBook requests for index of the client to delete.
 
     * 3b3. User enters an index.
 
