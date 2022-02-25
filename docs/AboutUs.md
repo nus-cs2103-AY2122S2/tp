@@ -50,7 +50,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Law Wei Ming
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/lawwm.png" width="200px">
 
 [[github](http://github.com/lawwm)]
 [[portfolio](team/lawwm.md)]
