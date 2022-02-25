@@ -6,7 +6,7 @@
   Example usages:
   * managing clients for housing agents.
 * The project simulates an ongoing software project for a desktop application (called _AgentSee_) used for managing client details.
-  * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
+  * It is **written in OOP fashion**.
   * It comes with a **reasonable level of user and developer documentation**.
 * It is named `AgentSee` because it is meant to help housing agents manage their clients.
 * For the detailed documentation of this project, see the **[AgentSee Product Website](https://ay2122s2-cs2103t-t11-2.github.io/tp/)**.
