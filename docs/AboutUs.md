@@ -29,14 +29,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Lim Wei Liang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/limweiliang.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/limweiliang)] [[portfolio](team/limweiliang.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: [To be discussed]
 
 ### Jean Doe
 
