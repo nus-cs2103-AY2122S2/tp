@@ -29,14 +29,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Ho Qi Yuan, Janald
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/janald99.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/janald99)] [[portfolio](team/janald99.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Code Quality, Documentation
 
 ### Jean Doe
 
