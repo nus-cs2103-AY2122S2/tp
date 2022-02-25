@@ -3,12 +3,8 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_MORE_TAGS_THAN_EXPECTED;
 
-import java.util.Arrays;
-
 import seedu.address.logic.commands.FilterCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsTagPredicate;
 
 /**
@@ -38,5 +34,4 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         String tagToFind = tagKeywords[0];
         return new FilterCommand(new NameContainsTagPredicate(tagToFind));
     }
-
 }

@@ -9,7 +9,7 @@ import seedu.address.model.tag.Tag;
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
  */
 public class NameContainsTagPredicate implements Predicate<Person> {
-//    private final List<String> keywords; // may change to a list of tags next time, idk
+    // May possibly change to a list of tags
     private final Tag tag;
 
     public NameContainsTagPredicate(String tag) {
@@ -18,8 +18,6 @@ public class NameContainsTagPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-//        return keywords.stream()
-//                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword));
         // instead of converting to stream, it is simply a tag now
         // so, to do the "test", we only need to check if tag is within the set of tags
         Set<Tag> tags = person.getTags();

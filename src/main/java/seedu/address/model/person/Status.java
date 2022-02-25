@@ -8,8 +8,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is always valid
  */
 public class Status {
-    public final String value;
+
     public static final String MESSAGE_CONSTRAINTS = "Status should be either 'blacklist' or 'favourite'";
+    public final String value;
+
     /**
      * Constructor for a status
      * Represents a status for a Person.

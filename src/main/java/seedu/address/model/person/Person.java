@@ -14,8 +14,9 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
-    private final Status BLACKLIST = new Status("blacklist");
-    private final Status FAVOURITE = new Status("favourite");
+    private static final Status BLACKLIST = new Status("blacklist");
+    private static final Status FAVOURITE = new Status("favourite");
+
     // Identity fields
     private final Name name;
     private final Phone phone;
