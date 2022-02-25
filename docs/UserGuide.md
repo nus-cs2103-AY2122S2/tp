@@ -74,17 +74,24 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a person to the UniBook.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add o/OPTION n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [m/MODULE]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A person can have any number of modules (including 0)
 </div>
 
+* Adds the entity type defined by `o/OPTION` to UniBook, where `n/NAME` is its name. These are the only two compulsory fields.
+* 3 values for `o/OPTION`:
+  * `o/module`: add module to UniBook, `n/name` specifies module name, while `m/MODULE` is compulsory to specify the module code.
+  * `o/professor`: add professor to UniBook, compulsory `n/name` to specify their name, optional field `[m/MODULE]` to specify what module(s) that professor is handling.
+  * `o/student`: add student to UniBook, compulsory field n/name to specify their name, and optional field `[m/MODULE]` to specify what module(s) that student is enrolled in.
+
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add o/module n/Software Engineering m/cs2103`
+* `add o/professor n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 m/cs2103`
+* `add o/student n/Betsy Crowe e/betsycrowe@example.com a/Sheares hall, block b, #02-04 p/81234567 m/cs2103 m/cs2100`
 
 ### Listing entries: `list`
 
@@ -207,7 +214,7 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add** | `add o/OPTION n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [m/MODULE]… ​` <br> e.g., `add o/module n/Software Engineering m/cs2103`<br> e.g., `add o/module n/Computer Organisation m/cs2100`<br> e.g., `add o/professor n/James Ho p/22224444 e/jamesho@example.com a/123 Clementi Rd S123466 m/cs2103`<br> e.g., `add o/student n/Peter Ho p/81234567 e/peterho@u.nus.edu m/cs2103 m/cs2100`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
