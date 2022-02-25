@@ -10,7 +10,7 @@ AddressBook - Level 3 is a desktop address book application used for teaching So
 Given below are my contributions to the project.
 
 * **Code contributed**:
-    * [RepoSense link]()
+    * `To be added soon`
 
 * **Enhancements implemented**:
   * Improved Find Command - Keywords need not exactly match the client name, and can simply be contained in them.
@@ -28,3 +28,4 @@ Given below are my contributions to the project.
     * Set up milestone [#v1.1]()
 
 * **Review contributions**:
+  * `To be added soon`
