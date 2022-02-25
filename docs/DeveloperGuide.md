@@ -430,6 +430,42 @@ Use case ends.
 
       Use case resumes at step 2.
 
+**Use case: UC05 - Delete a person**
+
+**MSS**
+
+1.  User requests to list persons
+2.  HustleBook shows a list of persons
+3.  User requests to delete a specific person in the list
+4.  HustleBook deletes the person
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+  
+    * 2a1. HustleBook notifies user list is empty.
+
+      Use case ends.
+
+* 3a. The given client name is invalid.
+
+    * 3a1. HustleBook shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. There are multiple clients with the same given name.
+
+    * 3b1. HustleBook shows a list of clients with the same given name.
+
+    * 3b2. HustleBook requests for index of the client to delete.
+
+    * 3b3. User enters an index.
+
+      Step 3b2-3b3 is repeated until a valid index is entered.
+
+      Use case resumes at step 4.
 
 ### Non-Functional Requirements
 
