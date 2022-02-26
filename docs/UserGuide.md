@@ -142,6 +142,17 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Deleting a Task : `deleteTask`
+Deletes the specified Task from the List.
+Format: `deleteTask INDEX`
+
+* Deletes the task at the specified `INDEX`.
+* The index refers to the index number shown in the displayed Task list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `delete 2` deletes the 2nd Task in the Task list.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
