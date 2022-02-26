@@ -3,7 +3,7 @@ layout: page
 title: Developer Guide
 ---
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -73,22 +73,26 @@ TODO
 ### Product scope
 
 **Target user profile**:
+- is a private tutor
+- has multiple students and classes
+- can type fast
+- skilled at using the command line
 
-TODO
-
-**Value proposition**: TODO
+**Value proposition**:\
+If a tutor has many students, it may be difficult to keep track of all of the students and the rates offered to each of them. TeachWhat! solves this issue by helping tutors manage their schedule, students and income more efficiently.
 
 ### User stories
-
-TODO
-
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​    | I want to …​                                             | So that I can…​                                              |
+|---------|------------|----------------------------------------------------------|--------------------------------------------------------------|
+| `* * *` | user       | add my student's information                             | keep track of their progress                                 |
+| `* * *` | user       | delete classes                                           | clear old classes                                            |
+| `* * *` | user       | delete students and their details                        | reduce clutter of old students and keep their privacy intact |
+| `* * *` | user       | add classes to the list and assign students to the class | have an overview of which students are attending the class   |
+| `* *`   | a new user | clear and reset my entire list of classes and students   | add actual data after testing the program out                |
+| `* *`   | user       | specify the type of class when creating one              | know if a class is permanent or a temporary class            |
+
 
 ### Use cases
 
@@ -103,45 +107,45 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. User provides date of the class.
 4. ClassBook requests for the starting time of the class.
 5. User provides starting time of the class.
-6. ClassBook requests for the ending time of the class. 
-7. User provides ending time of the class.  
+6. ClassBook requests for the duration of the class.
+7. User provides duration of the class.  
    Use case ends.
 
 **Extensions**
 * 1a. User did not provide any classname.
-  * 1a1. ClassBook shows an error message.  
-    Use case resumes at step 1.
-  
+    * 1a1. ClassBook shows an error message.  
+      Use case resumes at step 1.
+
 
 * 3a. User did not provide a date or date has invalid format.
-  * 3a1. ClassBook shows an error message.  
-    Use case resumes at step 2.
+    * 3a1. ClassBook shows an error message.  
+      Use case resumes at step 2.
 
 
 * 3b. User already provided the date in command.  
-    Use case resumes at step 4.
-  
+  Use case resumes at step 4.
+
 
 * 5a. User did not provide a starting time or starting time has invalid format.
-  * 5a1. ClassBook shows an error message.  
-    Use case resumes at step 4.
+    * 5a1. ClassBook shows an error message.  
+      Use case resumes at step 4.
 
 
 * 5b. User already provided the starting time in command.  
-    Use case resumes at step 6.
-  
+  Use case resumes at step 6.
 
-* 7a. User did not provide an ending time or ending time has invalid format.
-  * 7a1. ClassBook shows an error message.  
-    Use case resumes at step 6.
-  
 
-* 7b. User already has an existing class overlapping with the specified starting, ending time and date.
-    * 7b1. ClassBook shows an error message.  
+* 7a. User did not provide the duration of class or duration of class has invalid format.
+    * 7a1. ClassBook shows an error message.  
       Use case resumes at step 6.
 
 
-* 7c. User already provided the ending time in command.
+* 7b. User already has an existing class overlapping with the specified starting, ending time and date.
+    * 7b1. ClassBook shows an error message.  
+      Use case resumes at step 2.
+
+
+* 7c. User already provided the duration of class in command.  
   Use case ends.
 
 
@@ -158,78 +162,56 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1. User adds a class with a specified classname.
-2. ClassBook requests for the day of the class.
-3. User provides day of the class.
-4. ClassBook requests for the date of the first class.
-5. User provides date of the first class. 
-6. ClassBook requests for the date of the last class.
-7. User provides date of the last class.
-8. ClassBook requests for the starting time of the class.
-9. User provides starting time of the class.
-10. ClassBook requests for the ending time of the class.
-11. User provides ending time of the class.  
-    Use case ends.
+2. ClassBook requests for the date of the first class.
+3. User provides date of the first class.
+4. ClassBook requests for the starting time of the class.
+5. User provides starting time of the class.
+6. ClassBook requests for the duration of the class.
+7. User provides duration of the class.  
+   Use case ends.
 
 **Extensions**
 * 1a. User did not provide any classname.
-  * 1a1. ClassBook shows an error message.  
-    Use case resumes at step 1.
+    * 1a1. ClassBook shows an error message.  
+      Use case resumes at step 1.
+
+
+* 3a. User did not provide the date of the first class or date has invalid format.
+    * 3a1. ClassBook shows an error message.  
+      Use case resumes at step 2.
+
+
+* 3b. User already provided the date of the first class in command.  
+  Use case resumes at step 2.
+
+
+* 5a. User did not provide a starting time or starting time has invalid format.
+    * 5a1. ClassBook shows an error message.  
+      Use case resumes at step 4.
+
+
+* 5b. User already provided the starting time in command.  
+  Use case resumes at step 6.
+
+
+* 7a. User did not provide a duration of the class or duration of class has invalid format.
+    * 7a1. ClassBook shows an error message.  
+      Use case resumes at step 6.
   
 
-* 3a. User did not provide a day or day has invalid format.
-  * 3a1. ClassBook shows an error message.  
-    Use case resumes at step 2.
-  
-
-* 3b. User already provided the day in command.  
-    Use case resumes at step 4.
-  
-
-* 5a. User did not provide the date of the first class or date has invalid format.
-  * 5a1. ClassBook shows an error message.  
-    Use case resumes at step 4.
-  
-
-* 5b. User already provided the starting date in command.  
-    Use case resumes at step 6.
+* 7b. User already has an existing class overlapping with the specified starting, ending time and date.
+    * 7b1. ClassBook shows an error message.  
+      Use case resumes at step 2.
 
 
-* 7a. User did not provide the date of the last class or date has invalid format.
-  * 7a1. ClassBook shows an error message.  
-    Use case resumes at step 6.
-
-
-* 7b. User already provided the ending date in command.  
-  Use case resumes at step 8.
-  
-
-* 9a. User did not provide a starting time or starting time has invalid format.
-  * 9a1. ClassBook shows an error message.  
-    Use case resumes at step 8.
-
-
-* 9b. User already provided the starting time in command.  
-  Use case resumes at step 10.
-
-
-* 11a. User did not provide an ending time or ending time has invalid format.
-  * 11a1. ClassBook shows an error message.  
-    Use case resumes at step 10.
-  
-
-* 11b. User already has an existing class overlapping with the specified starting, ending time and date.
-  * 11b1. ClassBook shows an error message.  
-    Use case resumes at step 10.
-  
-
-* 11c. User already provided the ending time in command.
+* 7c. User already provided the ending time in command.  
   Use case ends.
-  
+
 
 * \*a. At any time, User chooses to cancel the creation of a new class.
-  * \*a1. ClassBook requests to confirm the cancellation.
-  * \*a2. User confirms the cancellation.  
-    Use case ends.
+    * \*a1. ClassBook requests to confirm the cancellation.
+    * \*a2. User confirms the cancellation.  
+      Use case ends.
 
 #### Delete a class
 
@@ -250,16 +232,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 * 3a. The given index is invalid.
-  * 3a1. ClassBook shows an error message.  
-    Use case resumes at step 2.
-  
+    * 3a1. ClassBook shows an error message.  
+      Use case resumes at step 2.
+
 
 * 3b. The specified class still has students assigned to it.
-  * 3b1. ClassBook shows a warning message.  
-  * 3b2a. User confirms deletion.  
-    Use case ends.
-  * 3b2b. User cancels deletion.  
-    Use case ends.
+    * 3b1. ClassBook shows a warning message.
+    * 3b2a. User confirms deletion.  
+      Use case ends.
+    * 3b2b. User cancels deletion.  
+      Use case ends.
 
 #### Assign a student to a class
 
@@ -282,19 +264,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 * 3a. The given index is invalid.
-  * 3a1. StudentBook shows an error message.  
-    Use case resumes at step 2.
-  
+    * 3a1. StudentBook shows an error message.  
+      Use case resumes at step 2.
+
 
 * 5a. The list is empty.
-  * 4a1. ClassBook shows a warning message.  
-    Use case ends.
-  
+    * 4a1. ClassBook shows a warning message.  
+      Use case ends.
+
 
 * 6a. The given index is invalid.
     * 6a1. ClassBook shows an error message.  
       Use case resumes at step 5.
-  
+
 #### Delete a student
 
 **System:** StudentBook  
@@ -306,16 +288,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. StudentBook shows a list of students
 3. User requests to delete a specific student in the list
 4. StudentBook deletes the student  
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 * 2a. The list is empty.  
-    Use case ends.
+  Use case ends.
 
 
 * 3a. The given index is invalid.
-  * 3a1. StudentBook shows an error message.  
-  Use case resumes at step 2.
+    * 3a1. StudentBook shows an error message.  
+      Use case resumes at step 2.
 
 ### Non-Functional Requirements
 
@@ -324,8 +306,8 @@ TODO
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **Command Line**: A text interface for your computer.
 
-TODO
 
 --------------------------------------------------------------------------------------------------------------------
 

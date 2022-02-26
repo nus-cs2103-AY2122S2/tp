@@ -3,7 +3,11 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+TeachWhat! is a **desktop app for tutors to manage their schedule, students, classes, and 
+income**, optimized for use via a Command Line Interface (CLI) while still having the 
+benefits of a Graphical User Interface (GUI). 
+If you can type fast, TeachWhat! can get your tuition management tasks done faster than 
+traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -14,27 +18,28 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `TeachWhat.jar` from [here](https://github.com/AY2122S2-CS2103T-W11-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your ClassBook.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. 
+Note how the app contains some sample data.<br> ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+   * **`ls -c`** : Lists all classes.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * **`ls -s`** : Lists all students.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+   * **`add -c -r programming 101 -d 2022-02-17 -t 1700`** : 
+   Adds a recurring class programming 101 every Thursday at 5pm from 17th Feb 2022.
 
-   * **`clear`** : Deletes all contacts.
+   * **`save TeachWhat/store.txt`** : Saves students and classes into the store.txt text file.
 
-   * **`exit`** : Exits the app.
+   * **`quit`** : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -42,151 +47,158 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format:**<br>
+**:information_source:Notes about the command format:**
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+* Words in `[UPPER_CASE]` are the parameters to be supplied by the user.<br>
+  e.g. in `add -s [STUDENT_NAME]`, `[STUDENT_NAME]` is a parameter which can be used as `add -s John Doe`.
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
-
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* Parameters must be in order.<br>
+  e.g. if the command specifies `-d [DATE] -t [TIME]`, `-t [TIME] -d [DATE]` is not acceptable.
 
 </div>
 
-### Viewing help : `help`
+---
 
-Shows a message explaning how to access the help page.
+### Adding a student
 
-![help message](images/helpMessage.png)
+Adds a student to TeachWhat!
 
-Format: `help`
+Format: `add -s [STUDENT_ID]`
 
+Example: `add -s sammy boyo`
 
-### Adding a person: `add`
+---
 
-Adds a person to the address book.
+### Deleting a student
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Deletes a student from TeachWhat!
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+Format: `rm -s [STUDENT_ID]`
 
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+Example: `rm -s 13`
 
-### Listing all persons : `list`
+---
 
-Shows a list of all persons in the address book.
+### Adding a class
 
-Format: `list`
+Adds a class to TeachWhat!
 
-### Editing a person : `edit`
+Format: `add -[TYPE OF CLASS] [CLASS_NAME] -d [DATE / START_DATE] -t [START_TIME] -p [DURATION_OF_LESSON]`
 
-Edits an existing person in the address book.
+Supported Types: Recurring `-cr` and Temporary `-c`
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Example: `add -cr programming 101 -d 2022-02-17 -t 1700 -p 2`
+Adds a recurring class programming 101 every Thursday at 5pm from 17th Feb 2022.
+Example: `add -c programming 101 -d 2022-02-18 -t 1500`
+Adds a temporary class programming 101 on Friday at 3pm from 18th Feb 2022.
+>**Note:** If no type is given then the class is assumed to be temporary.
+> <br> e.g. To add a temporary class programming 101 on Thursday at 5pm on 17th Feb 2022,
+> do: <br> `add -c programming 101 -d 2022-02-17 -t 1700`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+---
 
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+### Deleting a class
 
-### Locating persons by name: `find`
+Deletes the specified class from the list of classes.
 
-Finds persons whose names contain any of the given keywords.
+Format:  `rm -c [CLASS_ID]`
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Deletes the class with the specified `CLASS_ID`.
+The `CLASS_ID` corresponds to the number in the displayed class list.
+The `CLASS_ID` must be a positive integer.
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+Example:
+`ls -c` to list the classes and display their `CLASS_ID`, 
+followed by `rm -c 5` to delete the class with the id 5.
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+---
 
-### Deleting a person : `delete`
+### Assigning a student to a class
 
-Deletes the specified person from the address book.
+Assigns the specified student to the specified class.
 
-Format: `delete INDEX`
+Format: `add -s -c [STUDENT_ID] [CLASS_ID]`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+Example: `ls -s` followed by `add -s -c 5 11` assigns the student with `STUDENT_ID` of **5**
+to the class with `CLASS_ID` of **11**.
 
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+---
 
-### Clearing all entries : `clear`
+### Viewing all classes
 
-Clears all entries from the address book.
+Format: `ls -c`
 
-Format: `clear`
+Example: `ls -c` would display a list of all the classes that a tutor has.
 
-### Exiting the program : `exit`
+---
 
-Exits the program.
+### Viewing all students
 
-Format: `exit`
+Format: `ls -s`
 
-### Saving the data
+Example: `ls -s` would display a list of all the students that a tutor has.
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+---
 
-### Editing the data file
+### Viewing a class
+Displays the details for the class with the specified class ID.
 
-AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+Format: `class [CLASS_ID]`
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
-</div>
+Example: `class 3` displays the details of the class with `CLASS_ID` of **3**.
 
-### Archiving data files `[coming in v2.0]`
+---
 
-_Details coming soon ..._
+### Viewing a student
+
+Displays the details for the student with the specified student ID.
+
+Format: `student [STUDENT_ID]`
+
+Examples: `student 3` displays the details of the student with `STUDENT_ID` of **3**.
+
+___
+
+### Setting a save file location
+Sets the file to retrieve from and save data to, to the specified directory. 
+If the file does not exist, a new file will be created.
+
+Format: `save [RELATIVE_PATH]`
+
+Example: `save /TeachWhat/store.txt` sets the save file to be 
+`store.txt` in the directory `TeachWhat`.
+
+---
+
+### Exit
+
+Closes TeachWhat! window.
+  
+Format: `quit`
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
+the data of your previous TeachWhat! folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+| Action             | Format, Examples                                                                                               |
+|--------------------|----------------------------------------------------------------------------------------------------------------|
+| **Add Student**    | `add -s [STUDENT_NAME]` <br> e.g., `add -s sammy boyo`                                                         |
+| **Add Temporary Class**      | `add -c [CLASS_NAME] -d [DATE] -t [START_TIME] -p [DURATION_OF_LESSON]` <br> e.g., `add -c programming 101 -d 2022-02-18 -t 1500 -p 2` |
+| **Add Recurring Class**      | `add -cr [CLASS_NAME] -d [START_DATE] -t [START_TIME] -p [DURATION_OF_LESSON]` <br> e.g., `add -cr programming 101 -d 2022-02-17 -t 1700 -p 2` |
+| **Delete Student** | `rm -s [STUDENT_ID]`<br> e.g. `rm -s 13`                                                                       |
+| **Delete Class**   | `rm -c [CLASS_ID]`<br> e.g.`rm -c 5`                                                                           |
+| **Assign Student** | `add -s -c [STUDENT_ID] [CLASS_ID]`<br> e.g.`add -s -c 5 11`                                                   |
+| **List Students**  | `ls -s`                                                                                                        |
+| **List Class**     | `ls -c`                                                                                                        |
+| **View Student**   | `student [STUDENT_ID]` <br> e.g. `student 5`                                                                   |
+| **View Class**     | `class [CLASS_ID]`<br> e.g. `class 2`                                                                          |
+| **Save**           | `save [RELATIVE_PATH]` <br> e.g. `/TeachWhat/store.txt`                                                        |
+| **Exit**           | `quit`                                                                                                         |
