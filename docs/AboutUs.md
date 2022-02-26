@@ -41,7 +41,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Julio Harjo
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/junlee1991.png" width="200px">
 
 [[github](https://github.com/junlee1991)] 
 [[portfolio](team/junlee1991.md)]
