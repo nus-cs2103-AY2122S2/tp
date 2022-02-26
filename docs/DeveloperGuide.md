@@ -283,32 +283,128 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `Amigos` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: L01 - Adding a new log to a contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User decides to add a new log to a specific contact. 
+2. User keys in necessary details with the one-line command 
+3. Amigos displays the contact and the specific log. 
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. Amigos finds no contact with the given name.
+  * 2a1. Amigos requests user to check input and reenter.
+  * 2a2. User corrects command (if desired), and keys in edited command.
 
-  Use case ends.
+  Use case resumes at step 3.
+* 
+* 2b. Amigos detects that neither `TITLE` nor `DESCRIPTION` arguments provided
+  * 2b1. Separate window pops up, allowing for long-form text to be keyed in.
+  * 2b2. User keys in long form text into pop-up window, with first line as title.
+  * 2b3. User confirms entry, closing the window.
 
-* 3a. The given index is invalid.
+  Use case resumes at step 3.
+* 
+* 2d. Amigos detects that `TITLE` argument not provided but `DESCRIPTION` is
+  * 2d1. Amigos tells the user that `TITLE` argument is necessary, and requests for input.
+  * 2d2. User keys in a valid title.
+  
+  Use case resumes at step 3.
 
-    * 3a1. AddressBook shows an error message.
+**Use case: L02 - Editing a log of a single contact**
 
-      Use case resumes at step 2.
+**MSS**
 
-*{More to be added}*
+1. User decides to edit a log in a specific contact. 
+2. User keys in necessary details with the one-line command. 
+3. Amigos displays the contact and the specific log.
+
+    Use case ends.
+
+
+**Extensions**
+
+* 2a. Amigos finds no contact with the given name.
+    * 2a1. Amigos requests user to check input and reenter.
+    * 2a2. User corrects command (if desired), and keys in edited command.
+
+  Use case resumes at step 3.
+
+
+* 2b. Amigos detects that no `LOG_INDEX` is provided by the user.
+  * 2b1. Amigos provides a list of all logs (their titles) and an accompanying index, asking the user to key in the index.
+  * 2b2. User keys in the index.
+
+  Use case resumes at step 3.
+
+
+* 2c. Amigos detects that `NEW_DESCRIPTION` provided but `NEW_TITLE` not provided by user.
+  * 2c1. Amigos tells the user that `NEW_TITLE` argument is necessary, and requests for input.
+  * 2c2. User keys in a valid title.
+
+  Use case resumes at step 3.
+
+
+* 2d. Amigos detects that neither `NEW_TITLE` nor `NEW_DESCRIPTION` arguments provided
+  * 2d1. Separate window pops up, allowing for long-form text to be keyed in.
+  * 2d2. User keys in long form text into pop-up window, with first line as new title.
+  * 2d3. User confirms entry, closing the window.
+
+  Use case resumes at step 3.
+
+
+**Use case: L03 - Deleting a log/logs from a contact**
+
+**MSS**
+
+1. User decides to delete a log/logs in a specific contact.
+2. User keys in necessary details with the one-line command.
+3. Amigos displays the contact and the specific log.
+
+   Use case ends.
+
+
+**Extensions**
+
+* 2a. Amigos finds no contact with the given name.
+    * 2a1. Amigos requests user to check input and reenter.
+    * 2a2. User corrects command (if desired), and keys in edited command.
+
+  Use case resumes at step 3.
+
+
+* 2b. Amigos detects that `LOG_INDEX` and `-a` flag are both not provided.
+  * 2b1. Amigos lists all logs of the contact with an index.
+  * 2b2. User keys in index, and deletes the log.
+
+  Use case resumes at step 3.
+
+
+* 2c. Amigos detects that no `NAME` or `LOG_INDEX` arguments are provided, but -a flag is provided.
+  * 2c1. All logs in all contacts are deleted.
+
+  Use case resumes at step 3.
+
+
+* 2d. Amigos detects that `NAME` and `-a` flag are provided, but not LOG_INDEX
+  * 2d1. Amigos deletes all logs of the contact.
+
+  Use case resumes at step 3.
+
+
+* 2e. Amigos detects an invalid combination of arguments, like `LOG_INDEX` without name, etc.
+  * 2e1. Amigos requests the user to check input and reenter, reverting to default state.
+
+  Use case resumes at step 3.
+
+
+
+
 
 ### Non-Functional Requirements
 
