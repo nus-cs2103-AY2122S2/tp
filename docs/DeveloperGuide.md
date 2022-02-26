@@ -316,18 +316,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3b1. Amigos shows an error message.
 
       Use case resumes at step 2.
-    
 
-* 3c. There is more than 1 friend with the same name.
-    * 3c1. Amigos shows a list containing all friends with the same name.
-    
-      Use case resumes at step 3.
-
-
-* 3d. The user requests to delete all friends with the same name.
-     * 3d1. Amigos deletes all friends with the same name.
-  
-       Use case ends.
 
 **Use case: Edit a friend**
 
@@ -354,16 +343,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3b1. Amigos shows an error message.
 
       Use case resumes at step 2.
+    
 
-
-* 3c. There is more than 1 friend with the same name.
-    * 3c1. Amigos shows a list containing all friends with the same name.
-
-      Use case resumes at step 3.
-
-
-* 3d. No fields to edit are entered by user.  
-    * 3d1. Amigos shows an error message. 
+* 3c. No fields to edit are entered by user.  
+    * 3c1. Amigos shows an error message. 
   
       Use case resumes at step 2.
 
