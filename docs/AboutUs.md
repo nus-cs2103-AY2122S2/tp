@@ -13,7 +13,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="../src/main/resources/images/brandon.png" width="200"/> 
 
-[[github](http://github.com/brandonrhan)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/brandonrhan)] [[portfolio](team/brandonrhan.md)]
 
 * Role: Developer
 * Responsibilities: Data
