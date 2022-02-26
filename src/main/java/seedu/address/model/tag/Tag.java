@@ -9,8 +9,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String MESSAGE_CONSTRAINTS = "Tags names should have 2-3 letters prefix "
+            + "followed by 4 digits and an optional letter\n";
+
+    public static final String VALIDATION_REGEX = "[a-zA-Z]{2,3}\\d{4}[a-zA-Z]?";
 
     public final String tagName;
 
@@ -22,7 +24,7 @@ public class Tag {
     public Tag(String tagName) {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
-        this.tagName = tagName;
+        this.tagName = tagName.toUpperCase();
     }
 
     /**
