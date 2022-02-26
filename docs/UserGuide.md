@@ -175,7 +175,7 @@ Adds a new event, which can be optionally linked to existing friends.
 
 **Format**: `addevent n/{EVENT_NAME} dt/{DATE_TIME} dd/{DESCRIPTION} f/{FRIEND_NAME1, FRIEND_NAME2…}`
 
-* The `EVENT_NAME` and `DATE_TIME` fields are compulsory, while the remaining fields are optional.
+* The `EVENT_NAME` and `DATE_TIME` fields are **compulsory**, while the remaining fields are **optional**.
 * There **cannot** be any duplicate events with the same name and date.
 
 **Examples**:
@@ -187,15 +187,17 @@ Edits an existing event.
 
 **Format**: `editevent n/{EVENT_NAME} dt/{DATE} nn/{NEW_EVENT_NAME} ndt/{NEW_DATE_TIME} ndd/{NEW_DESCRIPTION}  af/{ADD_FRIEND_NAME1, ADD_FRIEND_NAME2…} rf/{REMOVE_FRIEND_NAME1, REMOVE_FRIEND_NAME2…}`
 
-* The `EVENT_NAME` and `DATE` fields are compulsory and uniquely identify the event to be edited.
-* The `NEW_EVENT_NAME`, `NEW_DATE_TIME` and `NEW_DESCRIPTION` arguments are optional. If provided, they directly overwrite the existing details.
-* The `ADD_FRIEND_NAME` and `REMOVE_FRIEND_NAME` arguments are also optional and add/remove friends tied to the event respectively.
+* The `EVENT_NAME` and `DATE` fields are **compulsory** and uniquely identify the event to be edited.
+* The `NEW_EVENT_NAME`, `NEW_DATE_TIME` and `NEW_DESCRIPTION` arguments are **optional**. If provided, they directly overwrite the existing details.
+* The `ADD_FRIEND_NAME` and `REMOVE_FRIEND_NAME` arguments are also **optional** and add/remove friends tied to the event respectively.
 
 **Examples**:
 * `editevent n/John’s Birthday dt/15-08-2021 ndt/16-08-2021 1600 af/Bob rf/Sarah, Edison`
 
 ### Deleting events: `deleteevent`
-Format: `deleteevent n/{EVENT_NAME} dt/{DATE} -a`
+Delete existing event(s).
+
+**Format**: `deleteevent n/{EVENT_NAME} dt/{DATE} -a`
 
 * When at least one of `EVENT_NAME` and `DATE` are provided:
   * If only a single event matches the argument(s), it will be deleted.
