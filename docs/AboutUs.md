@@ -9,25 +9,25 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Frederick Tang 
+
+<img src="images/fredericktang.png" width="200px">
+
+[[github](https://github.com/fredtwt)][[portfolio](team/fredericktang.md)]
+
+* Role: Team Lead / Developer
+* Responsibilities: 
+  * Oversee the entire project
+
+### Ong Kim Lai 
 
 <img src="images/johndoe.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/johndoe)][[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Deliverables and deadlines / Developer
+* Responsibilities: 
+  * Handle project deliverables and plan deadlines
 
 ### Johnny Doe
 
@@ -35,8 +35,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Testing / Developer
+* Responsibilities: 
+  * Testing of project to ensure everything is proper 
 
 ### Jean Doe
 
@@ -45,15 +46,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/johndoe)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
+* Role: Documentation / Code Quality / Developer
+* Responsibilities: 
+  * Ensures project documentation done properly
+  * Ensures code adheres to coding standards 
