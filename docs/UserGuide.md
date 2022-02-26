@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-NUSocials is a **desktop app for university students to maintain a professional contact list, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). The value of the app is to facilitate a convenient way for university students to manage their professional networks with fellow acquaintances. 
+NUSocials is a **desktop app for university students to maintain a professional contact list, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). The value of the app is to facilitate a convenient way for university students to manage their professional networks with fellow acquaintances.
 
 * Table of Contents
 {:toc}
@@ -29,9 +29,9 @@ NUSocials is a **desktop app for university students to maintain a professional 
    * **`add`**`n/fred p/99998888 e/fred@example.com a/fred street, block 123, #01-01` : Adds a contact named `fred` to the Address Book.
 
    * **`tag`** `2 edu/computer science m/CS2040S` : Tags the 2nd contact shown in the current list with a Computer Science degree and CS2040S module.
-    
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list. 
-    
+ 
+   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+
    * **`clear`** : Deletes all contacts.
 
    * **`exit`** : Exits the app.
@@ -72,9 +72,9 @@ Format: `help`
 
 
 ### Adding a person: `add` [coming in V1.2]
-Adds a person to the address book. 
+Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` 
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
@@ -92,9 +92,9 @@ Format: `tag INDEX [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDU
 * At least one of the optional fields must be provided.
 * Input tag values will be accumulated to the existing tags.
 
-Examples: 
+Examples:
 * `tag 1 i/abc-company m/CS2100 m/CS2030S` Tags the internship company and 2 modules to the 1st person.
- 
+
 ### Listing all persons : `list` [coming in V1.2]
 Shows a list of all persons in the address book.
 
@@ -165,7 +165,7 @@ Format: `exit`
 
 NUSocials data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file 
+### Editing the data file
 
 AddressBook data are saved as a JSON file `[JAR file location]/data/nusocials.json`. Advanced users are welcome to update data directly by editing that data file.
 

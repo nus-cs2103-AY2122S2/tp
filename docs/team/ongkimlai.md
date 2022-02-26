@@ -23,7 +23,6 @@ Given below are my contributions to the project.
     * {to be added}
   * README:
     * Updated the README page
-  
+
 * **Tools**:
   * Integrated Codecov into team repo
-  
