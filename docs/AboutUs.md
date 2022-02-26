@@ -39,11 +39,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Julio Harjo
 
 <img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/junlee1991)] 
+[[portfolio](team/junlee1991.md)]
 
 * Role: Developer
 * Responsibilities: Data

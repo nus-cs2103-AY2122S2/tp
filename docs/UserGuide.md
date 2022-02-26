@@ -40,12 +40,12 @@ ModuleMateFinder Level 3 (AB3) is a **desktop app for managing contacts, optimiz
 
 ## Features
 
-<div markdown="block" class="alert alert-info">
+ModuleMate Finder is a desktop app that allows students to find people taking the same modules as them, easily and efficiently
 
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`, `NAME`, `PHONE_NUMBER`, `EMAIL` and `ADDRESS`  are parameters which cannot be left empty. 
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
@@ -53,8 +53,8 @@ ModuleMateFinder Level 3 (AB3) is a **desktop app for managing contacts, optimiz
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Parameters has to be in order.<br>
+  e.g. if the command specifies `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`, then it must follow strictly that format.
 
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
@@ -207,7 +207,9 @@ _Details coming soon ..._
 
 ## FAQ
 
-_To be compiled..._
+Q: Are all modules offered by NUS available in ModuleMateFinder
+
+A: As long as the module offered can be found in NUSmod, it will be available on ModuleMateFinder as well.  
 
 --------------------------------------------------------------------------------------------------------------------
 
