@@ -163,7 +163,7 @@ public class AddCommandTest {
         @Override
         public boolean hasCustomer(Customer customer) {
             requireNonNull(customer);
-            return this.customer.isSamePerson(customer);
+            return this.customer.isSameCustomer(customer);
         }
     }
 
@@ -176,7 +176,7 @@ public class AddCommandTest {
         @Override
         public boolean hasCustomer(Customer customer) {
             requireNonNull(customer);
-            return personsAdded.stream().anyMatch(customer::isSamePerson);
+            return personsAdded.stream().anyMatch(customer::isSameCustomer);
         }
 
         @Override

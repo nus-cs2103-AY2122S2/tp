@@ -69,7 +69,7 @@ public class DeleteCommandTest {
 
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of trackbeau book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getTrackBeau().getPersonList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getTrackBeau().getCustomerList().size());
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 

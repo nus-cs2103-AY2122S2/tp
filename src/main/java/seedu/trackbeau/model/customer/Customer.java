@@ -10,7 +10,7 @@ import java.util.Set;
 import seedu.trackbeau.model.tag.Tag;
 
 /**
- * Represents a Person in the trackbeau book.
+ * Represents a Customer in trackbeau.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Customer {
@@ -61,10 +61,10 @@ public class Customer {
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both customers have the same name.
+     * This defines a weaker notion of equality between two customers.
      */
-    public boolean isSamePerson(Customer otherCustomer) {
+    public boolean isSameCustomer(Customer otherCustomer) {
         if (otherCustomer == this) {
             return true;
         }
@@ -74,8 +74,8 @@ public class Customer {
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both customers have the same identity and data fields.
+     * This defines a stronger notion of equality between two customers.
      */
     @Override
     public boolean equals(Object other) {

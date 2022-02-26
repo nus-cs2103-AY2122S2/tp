@@ -33,7 +33,7 @@ public class ModelManager implements Model {
 
         this.addressBook = new TrackBeau(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredCustomers = new FilteredList<>(this.addressBook.getPersonList());
+        filteredCustomers = new FilteredList<>(this.addressBook.getCustomerList());
     }
 
     public ModelManager() {
@@ -66,13 +66,13 @@ public class ModelManager implements Model {
 
     @Override
     public Path getTrackBeauFilePath() {
-        return userPrefs.getAddressBookFilePath();
+        return userPrefs.getTrackBeauFilePath();
     }
 
     @Override
     public void setTrackBeauFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+        userPrefs.setTrackBeauFilePath(addressBookFilePath);
     }
 
     //=========== TrackBeau ================================================================================

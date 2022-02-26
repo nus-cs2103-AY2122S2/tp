@@ -56,7 +56,7 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        TrackBeauStorage trackBeauStorage = new JsonTrackBeauStorage(userPrefs.getAddressBookFilePath());
+        TrackBeauStorage trackBeauStorage = new JsonTrackBeauStorage(userPrefs.getTrackBeauFilePath());
         storage = new StorageManager(trackBeauStorage, userPrefsStorage);
 
         initLogging(config);

@@ -70,9 +70,9 @@ public interface Model {
     void addCustomer(Customer customer);
 
     /**
-     * Replaces the given customer {@code target} with {@code editedPerson}.
+     * Replaces the given customer {@code target} with {@code editedCustomer}.
      * {@code target} must exist in trackbeau.
-     * The customer identity of {@code editedPerson} must not be the same as another existing customer in trackbeau.
+     * The customer identity of {@code editedCustomer} must not be the same as another existing customer in trackbeau.
      */
     void setCustomer(Customer target, Customer editedCustomer);
 

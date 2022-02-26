@@ -77,7 +77,7 @@ public class EditCommand extends Command {
         Customer customerToEdit = lastShownList.get(index.getZeroBased());
         Customer editedCustomer = createEditedPerson(customerToEdit, editPersonDescriptor);
 
-        if (!customerToEdit.isSamePerson(editedCustomer) && model.hasCustomer(editedCustomer)) {
+        if (!customerToEdit.isSameCustomer(editedCustomer) && model.hasCustomer(editedCustomer)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 

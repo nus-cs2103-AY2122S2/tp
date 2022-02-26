@@ -6,15 +6,15 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.trackbeau.model.customer.Customer;
-import seedu.trackbeau.model.customer.UniquePersonList;
+import seedu.trackbeau.model.customer.UniqueCustomerList;
 
 /**
  * Wraps all data at the trackbeau level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicates are not allowed (by .isSameCustomer comparison)
  */
 public class TrackBeau implements ReadOnlyTrackBeau {
 
-    private final UniquePersonList persons;
+    private final UniqueCustomerList customers;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -24,13 +24,13 @@ public class TrackBeau implements ReadOnlyTrackBeau {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
+        customers = new UniqueCustomerList();
     }
 
     public TrackBeau() {}
 
     /**
-     * Creates an TrackBeau using the Persons in the {@code toBeCopied}
+     * Creates a TrackBeau using the Customers in the {@code toBeCopied}
      */
     public TrackBeau(ReadOnlyTrackBeau toBeCopied) {
         this();
@@ -40,11 +40,11 @@ public class TrackBeau implements ReadOnlyTrackBeau {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the customer list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the customer list with {@code customers}.
+     * {@code customers} must not contain duplicate customers.
      */
-    public void setPersons(List<Customer> customers) {
-        this.persons.setPersons(customers);
+    public void setCustomers(List<Customer> customers) {
+        this.customers.setCustomers(customers);
     }
 
     /**
@@ -53,68 +53,68 @@ public class TrackBeau implements ReadOnlyTrackBeau {
     public void resetData(ReadOnlyTrackBeau newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getPersonList());
+        setCustomers(newData.getCustomerList());
     }
 
     //// customer-level operations
 
     /**
-     * Returns true if a customer with the same identity as {@code customer} exists in the trackbeau book.
+     * Returns true if a customer with the same identity as {@code customer} exists in trackbeau.
      */
     public boolean hasPerson(Customer customer) {
         requireNonNull(customer);
-        return persons.contains(customer);
+        return customers.contains(customer);
     }
 
     /**
-     * Adds a customer to the trackbeau book.
-     * The customer must not already exist in the trackbeau book.
+     * Adds a customer to trackbeau.
+     * The customer must not already exist in trackbeau.
      */
     public void addPerson(Customer p) {
-        persons.add(p);
+        customers.add(p);
     }
 
     /**
-     * Replaces the given customer {@code target} in the list with {@code editedPerson}.
-     * {@code target} must exist in the trackbeau book.
-     * The customer identity of {@code editedPerson} must not be the same as another existing customer in trackbeau.
+     * Replaces the given customer {@code target} in the list with {@code editedCustomer}.
+     * {@code target} must exist in trackbeau.
+     * The customer identity of {@code editedCustomer} must not be the same as another existing customer in trackbeau.
      */
     public void setPerson(Customer target, Customer editedCustomer) {
         requireNonNull(editedCustomer);
 
-        persons.setPerson(target, editedCustomer);
+        customers.setCustomer(target, editedCustomer);
     }
 
     /**
      * Removes {@code key} from this {@code TrackBeau}.
-     * {@code key} must exist in the trackbeau book.
+     * {@code key} must exist in trackbeau.
      */
     public void removePerson(Customer key) {
-        persons.remove(key);
+        customers.remove(key);
     }
 
     //// util methods
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
+        return customers.asUnmodifiableObservableList().size() + " customers";
         // TODO: refine later
     }
 
     @Override
-    public ObservableList<Customer> getPersonList() {
-        return persons.asUnmodifiableObservableList();
+    public ObservableList<Customer> getCustomerList() {
+        return customers.asUnmodifiableObservableList();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TrackBeau // instanceof handles nulls
-                && persons.equals(((TrackBeau) other).persons));
+                && customers.equals(((TrackBeau) other).customers));
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return customers.hashCode();
     }
 }

@@ -112,7 +112,7 @@ public class EditCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         // edit customer in filtered list into a duplicate in trackbeau book
-        Customer customerInList = model.getTrackBeau().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Customer customerInList = model.getTrackBeau().getCustomerList().get(INDEX_SECOND_PERSON.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder(customerInList).build());
 
@@ -137,7 +137,7 @@ public class EditCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of trackbeau book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getTrackBeau().getPersonList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getTrackBeau().getCustomerList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());

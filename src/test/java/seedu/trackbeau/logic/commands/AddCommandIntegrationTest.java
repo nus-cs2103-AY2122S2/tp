@@ -38,7 +38,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Customer customerInList = model.getTrackBeau().getPersonList().get(0);
+        Customer customerInList = model.getTrackBeau().getCustomerList().get(0);
         assertCommandFailure(new AddCommand(customerInList), model, AddCommand.MESSAGE_DUPLICATE_PERSON);
     }
 

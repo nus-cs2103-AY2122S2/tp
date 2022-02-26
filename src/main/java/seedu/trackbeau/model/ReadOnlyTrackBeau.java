@@ -4,14 +4,14 @@ import javafx.collections.ObservableList;
 import seedu.trackbeau.model.customer.Customer;
 
 /**
- * Unmodifiable view of an trackbeau book
+ * Unmodifiable view of trackbeau.
  */
 public interface ReadOnlyTrackBeau {
 
     /**
-     * Returns an unmodifiable view of the persons list.
-     * This list will not contain any duplicate persons.
+     * Returns an unmodifiable view of the customers list.
+     * This list will not contain any duplicate customers.
      */
-    ObservableList<Customer> getPersonList();
+    ObservableList<Customer> getCustomerList();
 
 }
