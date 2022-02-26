@@ -14,8 +14,9 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
-    private static final Status BLACKLIST = new Status("blacklist");
-    private static final Status FAVOURITE = new Status("favourite");
+    // constants
+    public static final String BLACKLIST = "blacklist";
+    public static final String FAVOURITE = "favourite";
 
     // Identity fields
     private final Name name;
@@ -36,7 +37,7 @@ public class Person {
         this.phone = phone;
         this.email = email;
         // This is how to add a proper blacklist/favourite when editing the thing!
-        if (status.equals(BLACKLIST) || status.equals(FAVOURITE)) {
+        if (status.toString().equals(BLACKLIST) || status.toString().equals(FAVOURITE)) {
             this.status = status;
         } else {
             this.status = new Status("");

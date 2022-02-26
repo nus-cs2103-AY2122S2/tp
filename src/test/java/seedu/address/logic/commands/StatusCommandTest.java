@@ -2,8 +2,8 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -105,7 +105,7 @@ public class StatusCommandTest {
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        StatusCommand statusCommand = new StatusCommand(outOfBoundIndex, new Status(VALID_REMARK_BOB));
+        StatusCommand statusCommand = new StatusCommand(outOfBoundIndex, new Status(VALID_STATUS_BOB));
 
         assertCommandFailure(statusCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
@@ -121,17 +121,17 @@ public class StatusCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
-        StatusCommand statusCommand = new StatusCommand(outOfBoundIndex, new Status(VALID_REMARK_BOB));
+        StatusCommand statusCommand = new StatusCommand(outOfBoundIndex, new Status(VALID_STATUS_BOB));
 
         assertCommandFailure(statusCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        final StatusCommand standardCommand = new StatusCommand(INDEX_FIRST_PERSON, new Status(VALID_REMARK_AMY));
+        final StatusCommand standardCommand = new StatusCommand(INDEX_FIRST_PERSON, new Status(VALID_STATUS_AMY));
 
         // same values -> returns true
-        StatusCommand commandWithSameValues = new StatusCommand(INDEX_FIRST_PERSON, new Status(VALID_REMARK_AMY));
+        StatusCommand commandWithSameValues = new StatusCommand(INDEX_FIRST_PERSON, new Status(VALID_STATUS_AMY));
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -144,9 +144,9 @@ public class StatusCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new StatusCommand(INDEX_SECOND_PERSON, new Status(VALID_REMARK_AMY))));
+        assertFalse(standardCommand.equals(new StatusCommand(INDEX_SECOND_PERSON, new Status(VALID_STATUS_AMY))));
 
         // different status -> returns false
-        assertFalse(standardCommand.equals(new StatusCommand(INDEX_FIRST_PERSON, new Status(VALID_REMARK_BOB))));
+        assertFalse(standardCommand.equals(new StatusCommand(INDEX_FIRST_PERSON, new Status(VALID_STATUS_BOB))));
     }
 }
