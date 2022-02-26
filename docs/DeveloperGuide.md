@@ -289,8 +289,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User decides to add a new log to a specific contact. 
-2. User keys in necessary details with the one-line command 
+1. User decides to add a new log to a specific contact.
+2. User keys in necessary details with the one-line command.
 3. Amigos displays the contact and the specific log. 
 
     Use case ends.
@@ -302,26 +302,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 2a2. User corrects command (if desired), and keys in edited command.
 
   Use case resumes at step 3.
-* 
-* 2b. Amigos detects that neither `TITLE` nor `DESCRIPTION` arguments provided
+
+* 2b. Amigos detects that neither `TITLE` nor `DESCRIPTION` arguments provided.
   * 2b1. Separate window pops up, allowing for long-form text to be keyed in.
   * 2b2. User keys in long form text into pop-up window, with first line as title.
   * 2b3. User confirms entry, closing the window.
 
   Use case resumes at step 3.
-* 
-* 2d. Amigos detects that `TITLE` argument not provided but `DESCRIPTION` is
+
+* 2d. Amigos detects that `TITLE` argument not provided but `DESCRIPTION` is.
   * 2d1. Amigos tells the user that `TITLE` argument is necessary, and requests for input.
   * 2d2. User keys in a valid title.
-  
+
   Use case resumes at step 3.
 
 **Use case: L02 - Editing a log of a single contact**
 
 **MSS**
 
-1. User decides to edit a log in a specific contact. 
-2. User keys in necessary details with the one-line command. 
+1. User decides to edit a log in a specific contact.
+2. User keys in necessary details with the one-line command.
 3. Amigos displays the contact and the specific log.
 
     Use case ends.
@@ -350,7 +350,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case resumes at step 3.
 
 
-* 2d. Amigos detects that neither `NEW_TITLE` nor `NEW_DESCRIPTION` arguments provided
+* 2d. Amigos detects that neither `NEW_TITLE` nor `NEW_DESCRIPTION` arguments provided.
   * 2d1. Separate window pops up, allowing for long-form text to be keyed in.
   * 2d2. User keys in long form text into pop-up window, with first line as new title.
   * 2d3. User confirms entry, closing the window.

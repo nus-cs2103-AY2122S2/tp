@@ -28,3 +28,4 @@ still having the benefits of a Graphical User Interface (GUI).
 
 * **Team-based tasks**
     * Set up GitHub team org/repo and maintained issue tracker for milestone v1.1
+

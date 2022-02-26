@@ -66,7 +66,7 @@ Format: `addlog n/[NAME] t/[TITLE] d/[DESCRIPTION]`
 
 * The `NAME` field is compulsory.
 * If the `TITLE` argument is provided, then the `DESCRIPTON` argument is optional.
-* If neither `TITLE` nor `DESCRIPTION` arguments are provided, then a GUI 
+* If neither `TITLE` nor `DESCRIPTION` arguments are provided, then a GUI
   pop up will prompt the user to key in the title and longer-form text as the description.
 
 Examples:
@@ -80,9 +80,9 @@ Edits an existing log of an existing friend in the address book.
 Format: `editlog n/[NAME] id/[LOG_INDEX] nt/[NEW_TITLE] nd/[NEW_DESCRIPTION]`
 
 * The `NAME` field is compulsory.
-* If `LOG_INDEX` is not provided, then all logs, each with an accompanying index, will allow a user to 
+* If `LOG_INDEX` is not provided, then all logs, each with an accompanying index, will allow a user to
   choose which log to apply the changes to.
-* At least one of the `NEW_TITLE` or `NEW_DESCRIPTION` arguments must be provided. 
+* At least one of the `NEW_TITLE` or `NEW_DESCRIPTION` arguments must be provided.
   Both will directly overwrite the current values.
 * If neither `NEW_TITLE` nor `NEW_DESCRIPTION` arguments are provided, then a GUI
   pop up will prompt the user to key in the title and longer-form text as the description.
@@ -99,14 +99,14 @@ Format: `deletelog n/[NAME] id/[LOG_INDEX] -a`
 
 * The `NAME` field is compulsory.
 * If `NAME` is provided as well as a `-a` flag, then all logs of tht person will
-  be deleted. 
-* If `LOG_INDEX` is not provided and there is no `-a` flat, then all logs, each with an 
+  be deleted.
+* If `LOG_INDEX` is not provided and there is no `-a` flat, then all logs, each with an
   accompanying index, will allow a user to choose one log to delete.
 * If no `NAME` or `LOG_INDEX` is provided, but `-a` is provided, then all possible logs
   of all friends will be deleted.
 
 Examples:
-* `deletelog n/John Doe id/1' 
+* `deletelog n/John Doe id/1'
 * `deletelog n/John Doe -a `
 * `deletelog -a`
 
