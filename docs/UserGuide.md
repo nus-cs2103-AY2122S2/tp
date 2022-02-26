@@ -116,8 +116,8 @@ and email of John Doe to be `John street, block 456, #01-01` and `johndoe@exampl
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add Friend** | `addfriend n/NAME  [p/PHONE_NUMBER] [e/EMAIL]  [a/ADDRESS] [d/DESCRIPTION]` <br> e.g., `addfriend n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 d/Physics Major, Sarah’s friend. Met at Freshman Dinner`
-**Delete Friend** | `deletefriend n/NAME` <br> `deletefriend -a` <br> e.g., `deletefriend n/John Doe`
-**Edit a friend** | `editfriend cn/CURRENT_NAME [nn/NEW_NAME]  [np/NEW_PHONE_NUMBER] [ne/NEW_EMAIL] [na/NEW_ADDRESS] [nd/NEW_DESCRIPTION]`<br> e.g., `editfriend cn/John Doe na/John street, block 456, #01-01 ne/johndoe@example.com`
+| Action            | Format, Examples                                                                                                                                                                                                                      |
+|-------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Friend**    | `addfriend n/NAME  [p/PHONE_NUMBER] [e/EMAIL]  [a/ADDRESS] [d/DESCRIPTION]` <br> e.g., `addfriend n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 d/Physics Major, Sarah’s friend. Met at Freshman Dinner` |
+| **Delete Friend** | `deletefriend n/NAME` <br> `deletefriend -a` <br> e.g., `deletefriend n/John Doe`                                                                                                                                                     |
+| **Edit a friend** | `editfriend cn/CURRENT_NAME [nn/NEW_NAME]  [np/NEW_PHONE_NUMBER] [ne/NEW_EMAIL] [na/NEW_ADDRESS] [nd/NEW_DESCRIPTION]`<br> e.g., `editfriend cn/John Doe na/John street, block 456, #01-01 ne/johndoe@example.com`                    |
