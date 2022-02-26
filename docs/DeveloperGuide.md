@@ -301,32 +301,91 @@ Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Mediu
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `Harmonia` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Adding a task**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User chooses to add a task.
+2.  User enters the task description.
+3.  Harmonia adds the task.
+4.  Harmonia informs the user that the task has been successfully added.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. Harmonia detects an error in the entered request.
+    * 2a1. Harmonia outputs an error message.
+    * 2a2. User enters new data.
+  
+    Steps 2a1-2a2 are repeated until valid data is inputted.
 
-  Use case ends.
+    Use case resumes from step 3.
 
-* 3a. The given index is invalid.
+**Use case: UC02 - Deleting a task**
 
-    * 3a1. AddressBook shows an error message.
+**MSS**
 
-      Use case resumes at step 2.
+1.  User chooses to remove a task from the task list.
+2.  User enters the request to remove the task.
+3.  Harmonia deletes the task.
+4.  Harmonia informs the user that the task has been successfully deleted.
 
-*{More to be added}*
+    Use case ends.
+
+**Extensions**
+
+* 2a. Harmonia detects an error in the entered index.
+    * 2a1. Harmonia outputs an error message.
+    * 2a2. User enters new data.
+
+    Steps 2a1-2a2 are repeated until a valid index is inputted.    
+
+    Use case resumes from step 3.
+
+**Use case: UC03 - Marking a task as complete**
+
+**MSS**
+
+1.  User chooses to mark a task as complete from the task list.
+2.  User enters the request to mark a task based on its index in the task list.
+3.  Harmonia marks the task as complete.
+4.  Harmonia informs the user that the task has been successfully marked.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Harmonia detects an error in the entered index.
+    * 2a1. Harmonia outputs an error message.
+    * 2a2. User enters new data.
+    
+    Steps 2a1-2a2 are repeated until a valid index is inputted.
+
+    Use case resumes from step 3.
+
+**Use case: UC04 - Unmarking a task from completion**
+
+**MSS**
+
+1.  User chooses to unmark a task from completion from the task list.
+2.  User enters the request to unmark a task based on its index in the task list.
+3.  Harmonia unmarks the task to become uncompleted.
+4.  Harmonia informs the user that the task has been successfully unmarked.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Harmonia detects an error in the entered index.
+    * 2a1. Harmonia outputs an error message.
+    * 2a2. User enters new data.
+
+  Steps 2a1-2a2 are repeated until a valid index is inputted.
+
+  Use case resumes from step 3.
 
 ### Non-Functional Requirements
 
