@@ -40,7 +40,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Ryan Low
 
-<img src="images/Ryan-L98.png" width="200px">
+<img src="images/ryan-l98.png" width="200px">
 
 * [GitHub](http://github.com/Ryan-L98)
 * [Portfolio](team/ryan-l98.md)
