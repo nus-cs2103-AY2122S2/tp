@@ -104,25 +104,25 @@ public class CommandTestUtil {
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        TrackBeau expectedAddressBook = new TrackBeau(actualModel.getAddressBook());
-        List<Customer> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
+        TrackBeau expectedAddressBook = new TrackBeau(actualModel.getTrackBeau());
+        List<Customer> expectedFilteredList = new ArrayList<>(actualModel.getFilteredCustomerList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedAddressBook, actualModel.getAddressBook());
-        assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
+        assertEquals(expectedAddressBook, actualModel.getTrackBeau());
+        assertEquals(expectedFilteredList, actualModel.getFilteredCustomerList());
     }
     /**
      * Updates {@code model}'s filtered list to show only the customer at the given {@code targetIndex} in the
      * {@code model}'s trackbeau book.
      */
     public static void showPersonAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredCustomerList().size());
 
-        Customer customer = model.getFilteredPersonList().get(targetIndex.getZeroBased());
+        Customer customer = model.getFilteredCustomerList().get(targetIndex.getZeroBased());
         final String[] splitName = customer.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredCustomerList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
-        assertEquals(1, model.getFilteredPersonList().size());
+        assertEquals(1, model.getFilteredCustomerList().size());
     }
 
 }

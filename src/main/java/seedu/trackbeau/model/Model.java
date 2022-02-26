@@ -35,53 +35,53 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' trackbeau book file path.
+     * Returns the user prefs' trackbeau file path.
      */
-    Path getAddressBookFilePath();
+    Path getTrackBeauFilePath();
 
     /**
-     * Sets the user prefs' trackbeau book file path.
+     * Sets the user prefs' trackbeau file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setTrackBeauFilePath(Path addressBookFilePath);
 
     /**
-     * Replaces trackbeau book data with the data in {@code addressBook}.
+     * Replaces trackbeau data with the data in {@code addressBook}.
      */
-    void setAddressBook(ReadOnlyTrackBeau addressBook);
+    void setTrackBeau(ReadOnlyTrackBeau addressBook);
 
     /** Returns the TrackBeau */
-    ReadOnlyTrackBeau getAddressBook();
+    ReadOnlyTrackBeau getTrackBeau();
 
     /**
-     * Returns true if a customer with the same identity as {@code customer} exists in the trackbeau book.
+     * Returns true if a customer with the same identity as {@code customer} exists in trackbeau.
      */
-    boolean hasPerson(Customer customer);
+    boolean hasCustomer(Customer customer);
 
     /**
      * Deletes the given customer.
-     * The customer must exist in the trackbeau book.
+     * The customer must exist in trackbeau.
      */
-    void deletePerson(Customer target);
+    void deleteCustomer(Customer target);
 
     /**
      * Adds the given customer.
-     * {@code customer} must not already exist in the trackbeau book.
+     * {@code customer} must not already exist in trackbeau.
      */
-    void addPerson(Customer customer);
+    void addCustomer(Customer customer);
 
     /**
      * Replaces the given customer {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the trackbeau book.
+     * {@code target} must exist in trackbeau.
      * The customer identity of {@code editedPerson} must not be the same as another existing customer in trackbeau.
      */
-    void setPerson(Customer target, Customer editedCustomer);
+    void setCustomer(Customer target, Customer editedCustomer);
 
     /** Returns an unmodifiable view of the filtered customer list */
-    ObservableList<Customer> getFilteredPersonList();
+    ObservableList<Customer> getFilteredCustomerList();
 
     /**
      * Updates the filter of the filtered customer list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Customer> predicate);
+    void updateFilteredCustomerList(Predicate<Customer> predicate);
 }

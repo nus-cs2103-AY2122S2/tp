@@ -65,12 +65,12 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
+    public Path getTrackBeauFilePath() {
         return userPrefs.getAddressBookFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
+    public void setTrackBeauFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
@@ -78,34 +78,34 @@ public class ModelManager implements Model {
     //=========== TrackBeau ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyTrackBeau addressBook) {
+    public void setTrackBeau(ReadOnlyTrackBeau addressBook) {
         this.addressBook.resetData(addressBook);
     }
 
     @Override
-    public ReadOnlyTrackBeau getAddressBook() {
+    public ReadOnlyTrackBeau getTrackBeau() {
         return addressBook;
     }
 
     @Override
-    public boolean hasPerson(Customer customer) {
+    public boolean hasCustomer(Customer customer) {
         requireNonNull(customer);
         return addressBook.hasPerson(customer);
     }
 
     @Override
-    public void deletePerson(Customer target) {
+    public void deleteCustomer(Customer target) {
         addressBook.removePerson(target);
     }
 
     @Override
-    public void addPerson(Customer customer) {
+    public void addCustomer(Customer customer) {
         addressBook.addPerson(customer);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredCustomerList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
-    public void setPerson(Customer target, Customer editedCustomer) {
+    public void setCustomer(Customer target, Customer editedCustomer) {
         requireAllNonNull(target, editedCustomer);
 
         addressBook.setPerson(target, editedCustomer);
@@ -118,12 +118,12 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Customer> getFilteredPersonList() {
+    public ObservableList<Customer> getFilteredCustomerList() {
         return filteredCustomers;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Customer> predicate) {
+    public void updateFilteredCustomerList(Predicate<Customer> predicate) {
         requireNonNull(predicate);
         filteredCustomers.setPredicate(predicate);
     }

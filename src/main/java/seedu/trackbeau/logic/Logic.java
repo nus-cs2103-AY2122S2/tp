@@ -26,7 +26,7 @@ public interface Logic {
     /**
      * Returns the TrackBeau.
      *
-     * @see seedu.trackbeau.model.Model#getAddressBook()
+     * @see seedu.trackbeau.model.Model#getTrackBeau()
      */
     ReadOnlyTrackBeau getAddressBook();
 
