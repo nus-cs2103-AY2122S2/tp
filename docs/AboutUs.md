@@ -11,9 +11,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Brandon R. Han
 
-<img src="images/Brandon.jpeg" width="200px">
+<img src="images/Brandon.jng.jpeg" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/brandonrhan)] [[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Data
