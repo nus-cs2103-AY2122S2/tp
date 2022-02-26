@@ -307,12 +307,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case resumes at step 3.
 
-* 3a. There is a duplicate show.
+* 3a. User adds a duplicate show.
 
-    * 3a1. Trackermon shows an error message.
+    * 3a1. Trackermon shows an error message to user, indicating that there is a duplicate show in the list and requests the user to either delete the show in the list or add another show.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
+* 3b. User uses `add` command with the wrong syntax.
+
+    * 3b1. Trackermon shows an error message to user, indicating the format for adding shows is incorrect, and attaches the correct syntax format.
+
+      Use case resumes at step 3.
+    
 ---
 **Use case: UC02 - Delete a show**
 
@@ -337,9 +343,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. Trackermon shows an error message.
+    * 3a1. Trackermon shows an error message,  indicating the format for deleting shows is incorrect, and attaches the correct syntax format.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
 ---
 **Use case: UC03 - List a show**
@@ -366,7 +372,113 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list is empty.
 
   Use case ends.
-  
+
+---
+**Use case: UC04 - Mark a show**
+
+**Preconditions: Trackermon application is started.**
+
+**Guarantees: Show will be marked in Trackermon only if the user input matches the `mark` format.**
+
+**MSS**
+
+1.  User requests to list shows.
+2.  Trackermon shows a list of shows.
+3.  User requests to mark a specific show in the list.
+4.  Trackermon marks the show.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. Trackermon shows an error message, indicating the format for marking shows is incorrect, and attaches the correct syntax format.
+
+      Use case resumes at step 3.
+---
+**Use case: UC05 - Unmark a show**
+
+**Preconditions: Trackermon application is started.**
+
+**Guarantees: Show will be unmarked in Trackermon only if the user input matches the `unmark` format.**
+
+**MSS**
+
+1.  User requests to list shows.
+2.  Trackermon shows a list of shows.
+3.  User requests to unmark a specific show in the list since the show was not watched yet and marked on accident.
+4.  Trackermon unmarks the show.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. Trackermon shows an error message, indicating the format for unmarking shows is incorrect, and attaches the correct syntax format.
+
+      Use case resumes at step 3.
+
+---
+**Use case: UC06 - Tag a show**
+
+**Preconditions: Trackermon application is started.**
+
+**Guarantees: Show will be tagged in Trackermon only if the user input matches the `add` format.**
+
+**MSS**
+
+1.  User requests to list shows.
+2.  Trackermon shows a list of shows.
+3.  User requests to tag a specific show in the list.
+4.  Trackermon tags the show.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. User uses `add` command with the wrong syntax.
+
+    * 3a1. Trackermon shows an error message to user, indicating the format for adding shows is incorrect, and attaches the correct syntax format.
+
+      Use case resumes at step 3.
+    
+---
+**Use case: UC07 - Exiting Trackermon**
+
+**Preconditions: Trackermon application is started.**
+
+**Guarantees: Trackermon will exit and display an exit message for the user.**
+
+**MSS**
+
+1. User enters `exit` command in Trackermon.
+2. Trackermon saves all changes into the disk.
+3. Trackermon displays a message to tell the user that the app has successfully closed.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. There is further input after the user enters exit. E.g. `exit now`
+
+    * 1a1. Trackermon will only register the `exit` command.
+
+      Use case resumes at step 2.
+---  
 *{More to be added}*
 
 ---
