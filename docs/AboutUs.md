@@ -11,7 +11,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Brandon R. Han
 
-<img src="images/Brandon.jng.jpeg" width="200px">
+<img src="images/Brandon.png" width="200px">
 
 [[github](http://github.com/brandonrhan)] [[portfolio](team/johndoe.md)]
 
