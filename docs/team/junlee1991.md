@@ -1,7 +1,9 @@
 ---
 layout: page
-title: John Doe's Project Portfolio Page
+title: Julio Harjo's Project Portfolio Page
 ---
+
+# Skeleton of the Project Portfolio Page for Julio Harjo
 
 ### Project: AddressBook Level 3
 
