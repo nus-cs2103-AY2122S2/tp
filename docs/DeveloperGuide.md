@@ -257,13 +257,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* Pet daycare centre owners and employees
+* has a need to manage administrative details of pets on a daily basis
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: manage administrative details of pets faster than a typical mouse/GUI driven app
 
 
 ### User stories
@@ -283,37 +284,133 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `WoofAreYou` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a pet**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User adds a pet with pet details
+2.  System shows confirmation message that pet details are added
 
-    Use case ends.
+Use case ends.
+    
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. User keyed in wrong command format.
 
-  Use case ends.
+    * 1a1. System shows an error message.
+      
+      Use case resumes at step 1.
 
-* 3a. The given index is invalid.
+**Use case: Delete a pet**
 
-    * 3a1. AddressBook shows an error message.
+**MSS**
 
-      Use case resumes at step 2.
+1.  User deletes a pet with pet ID
+2.  System shows confirmation message that pet details are deleted
 
-*{More to be added}*
+Use case ends.
+    
+
+**Extensions**
+
+* 1a. User keyed in missing/ invalid pet ID.
+
+    * 1a1. System shows an error message.
+      
+      Use case resumes at step 1.
+
+**Use case: Get pet ID**
+
+**MSS**
+
+1.  User get pet ID with name of pet.
+2.  System shows a list of pet IDs with the specified name.
+
+Use case ends.
+    
+
+**Extensions**
+
+* 1a. User keyed in invalid pet name.
+
+    * 1a1. System shows empty list.
+      
+      Use case resumes at step 1.
+
+
+**Use case: Get pet dietary requirements**
+
+**MSS**
+
+1.  User keys in pet ID.
+2.  System shows the dietary requirement of the pet with specified ID.
+
+Use case ends.
+    
+
+**Extensions**
+
+* 1a. User keyed in invalid pet ID.
+
+    * 1a1. System shows an error message.
+      
+      Use case resumes at step 1.
+      
+      
+**Use case: Get pet owner details**
+
+**MSS**
+
+1.  User keys in pet ID.
+2.  System shows the pet owner's details of the pet with specified ID.
+
+Use case ends.
+    
+
+**Extensions**
+
+* 1a. User keyed in invalid pet ID.
+
+    * 1a1. System shows an error message.
+      
+      Use case resumes at step 1.
+      
+
+**Use case: Get pet pickup and drop-off time**
+
+**MSS**
+
+1.  User keys in pet ID.
+2.  System shows the pickup and drop-off time of the pet with specified ID.
+
+Use case ends.
+    
+
+**Extensions**
+
+* 1a. User keyed in invalid pet ID.
+
+    * 1a1. System shows an error message.
+      
+      Use case resumes at step 1.
+
+**Use case: Exit**
+
+**MSS**
+
+1.  User keys exit.
+2.  System terminates the program.
+
+Use case ends.
+
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 pets without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 *{More to be added}*
@@ -321,7 +418,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
 
