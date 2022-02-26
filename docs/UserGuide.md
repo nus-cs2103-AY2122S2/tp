@@ -85,7 +85,7 @@ Deletes a student from TAPA.
 
 Format: `delete STUDENT_INDEX`
 
-* The student whose index in the address book is specified after the `delete` command will be removed from the address book.
+* The student corresponding to the index (specified after the `delete` command) will be removed from TAPA.
 
 Example:
 * `delete 10`
