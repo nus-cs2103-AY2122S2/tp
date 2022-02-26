@@ -1,3 +1,8 @@
+---
+layout: page
+title: Harmonia User Guide
+---
+
 Harmonia is a **desktop app for managing tasks related to your academic life, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Harmonia can get your task management done faster than traditional GUI apps.
 
 --------------------------------------------------------------------------------------------------------------------   
