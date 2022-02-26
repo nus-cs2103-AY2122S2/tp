@@ -72,7 +72,7 @@ public class ModelManager implements Model {
     @Override
     public void setTrackBeauFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
-        userPrefs.setTrackBeauFilePath(addressBookFilePath);
+        userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
     //=========== TrackBeau ================================================================================
