@@ -38,7 +38,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+# Features
 
 <div markdown="block" class="alert alert-info">
 
@@ -166,9 +166,46 @@ AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
 </div>
 
-### Archiving data files `[coming in v2.0]`
+## Event Management [Coming Soon!]
+Amigos also allows you to keep track of your social events!
+![Events Page](images/EventPage.png)
 
-_Details coming soon ..._
+### Creating an event: `addevent`
+Adds a new event, which can be optionally linked to existing friends.
+
+**Format**: `addevent n/{EVENT_NAME} dt/{DATE_TIME} dd/{DESCRIPTION} f/{FRIEND_NAME1, FRIEND_NAME2…}`
+
+* The `EVENT_NAME` and `DATE_TIME` fields are compulsory, while the remaining fields are optional.
+* There **cannot** be any duplicate events with the same name and date.
+
+**Examples**:
+* `addevent n/John’s Birthday dt/15-08-2021 1700 dd/Remember to get a present! f/John, Abe, Bob`
+* `addevent n/Christmas Party dt/25-12-2022`
+
+### Editing an event: `editevent`
+Edits an existing event.
+
+**Format**: `editevent n/{EVENT_NAME} dt/{DATE} nn/{NEW_EVENT_NAME} ndt/{NEW_DATE_TIME} ndd/{NEW_DESCRIPTION}  af/{ADD_FRIEND_NAME1, ADD_FRIEND_NAME2…} rf/{REMOVE_FRIEND_NAME1, REMOVE_FRIEND_NAME2…}`
+
+* The `EVENT_NAME` and `DATE` fields are compulsory and uniquely identify the event to be edited.
+* The `NEW_EVENT_NAME`, `NEW_DATE_TIME` and `NEW_DESCRIPTION` arguments are optional. If provided, they directly overwrite the existing details.
+* The `ADD_FRIEND_NAME` and `REMOVE_FRIEND_NAME` arguments are also optional and add/remove friends tied to the event respectively.
+
+**Examples**:
+* `editevent n/John’s Birthday dt/15-08-2021 ndt/16-08-2021 1600 af/Bob rf/Sarah, Edison`
+
+### Deleting events: `deleteevent`
+Format: `deleteevent n/{EVENT_NAME} dt/{DATE} -a`
+
+* When at least one of `EVENT_NAME` and `DATE` are provided:
+  * If only a single event matches the argument(s), it will be deleted.
+  * If multiple events match the argument(s), the `-a` flag is required for all to be deleted.
+* If only the `-a` flag is given, all events will be cleared.
+
+**Examples**:
+* `deleteevent n/John’s Birthday dt/15-08-2021`
+* `deleteevent n/Weekly Boardgames -a`
+* `deleteevent -a`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -183,10 +220,10 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+**Add Event** | `addevent n/{EVENT_NAME} dt/{DATE_TIME} dd/{DESCRIPTION} f/{FRIEND_NAME1, FRIEND_NAME2…}` <br> e.g.,`addevent n/John’s Birthday dt/15-08-2021 1700 dd/Remember to get a present! f/John, Abe, Bob`
+**Edit Event** | `editevent n/{EVENT_NAME} dt/{DATE} nn/{NEW_EVENT_NAME} ndt/{NEW_DATE_TIME} ndd/{NEW_DESCRIPTION}  af/{ADD_FRIEND_NAME1, ADD_FRIEND_NAME2…} rf/{REMOVE_FRIEND_NAME1, REMOVE_FRIEND_NAME2…}` <br> e.g., `editevent n/John’s Birthday dt/15-08-2021 ndt/16-08-2021 1600 af/Bob rf/Sarah, Edison`
+**Delete Event** | `deleteevent n/{EVENT_NAME} dt/{DATE} -a` <br> e.g., `deleteevent n/John’s Birthday dt/15-08-2021` <br> e.g., `deleteevent n/Weekly Boardgames -a` <br> e.g., `deleteevent -a`
+
+
+
+
