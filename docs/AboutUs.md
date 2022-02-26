@@ -13,40 +13,40 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/fredericktang.png" width="200px">
 
-[[github](https://github.com/fredtwt)][[portfolio](team/fredericktang.md)]
+[[github](https://github.com/fredtwt)][[portfolio](team/fredtwt.md)]
 
-* Role: Team Lead / Developer
+* Role: Team Lead / Developer [tbd]
 * Responsibilities: 
   * Oversee the entire project
 
 ### Ong Kim Lai 
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ongkimlai.png" width="200px">
 
-[[github](http://github.com/johndoe)][[portfolio](team/johndoe.md)]
+[[github](http://github.com/ongkimlai)][[portfolio](team/ongkimlai.md)]
 
-* Role: Deliverables and deadlines / Developer
+* Role: Deliverables and deadlines / Developer [tbd]
 * Responsibilities: 
   * Handle project deliverables and plan deadlines
 
-### Johnny Doe
+### Vikrant
 
 <img src="images/johndoe.png" width="200px">
 
 [[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
 
-* Role: Testing / Developer
+* Role: Testing / Developer [tbd]
 * Responsibilities: 
   * Testing of project to ensure everything is proper 
 
-### Jean Doe
+### Manusha
 
 <img src="images/johndoe.png" width="200px">
 
 [[github](http://github.com/johndoe)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Documentation / Code Quality / Developer
+* Role: Documentation / Code Quality / Developer [tbd]
 * Responsibilities: 
   * Ensures project documentation done properly
   * Ensures code adheres to coding standards 
