@@ -97,7 +97,7 @@ Allows the user to look up the details of a particular student.
 
 Format: `find n/[NAME] (or) find i/[STUDENT_ID]`
 
-* The student whose name or student id is specified after the `find` command will appear in the list.
+* The student whose name or student id is specified after the `find` command will appear in the resulting list.
 
 Example:
 * `find n/John`
