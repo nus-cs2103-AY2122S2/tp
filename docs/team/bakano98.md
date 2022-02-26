@@ -11,6 +11,10 @@ title: Wei Jies Project Portfolio Page
   - Fully set up team repo
   - Set up User Guide for ease of update
 
+- **New Feature**:
+  - Added the ability to blacklist/favourite users in the ModuleMateFinder
+  - Added the ability to filter by users by module code
+
 
 AddressBook - Level 3 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
