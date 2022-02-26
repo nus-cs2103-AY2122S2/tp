@@ -148,7 +148,7 @@ Action      | Format, Examples
 ------------|------------------
 **Add**     | `add i/MATRICULATION_NO n/STUDENT_NAME m/MODULE_CODE [p/PHONE_NUMBER] [t/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] ` <br> e.g., `add i/A0123456Z n/john m/CS2103T p/98765432 t/@john e/E0123456Z`
 **Delete**    | `delete STUDENT_INDEX` <br> e.g., `delete 10`
-**Find**    | `find n/NAME` (or) `find i/STUDENT_ID` <br> e.g., `find n/john`, `find i/A0123456Z`
+**Find**    | `find n/STUDENT_NAME` (or) `find i/STUDENT_ID` <br> e.g., `find n/john`, `find i/A0123456Z`
 **Exit**    | `exit`
 **Task**    | `task i/STUDENT_ID` <br> e.g., `task A0123456Z`
 **Archive** | `archive`
