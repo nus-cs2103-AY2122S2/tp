@@ -283,16 +283,49 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `Trackermon` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+---
+**Use case: UC01 - Add a show**
+
+**Preconditions: Trackermon application is started.**
+
+**Guarantees: Show will be added into Trackermon only if the user input matches the `add` format.**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list shows.
+2.  Trackermon shows a list of shows.
+3.  User adds a show in Trackermon.
+4.  Trackermon stores the show in its storage.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case resumes at step 3.
+
+* 3a. There is a duplicate show.
+
+    * 3a1. Trackermon shows an error message.
+
+      Use case resumes at step 2.
+
+---
+**Use case: UC02 - Delete a show**
+
+**Preconditions: Trackermon application is started.**
+
+**Guarantees: Show will be deleted from Trackermon only if the user input matches the `delete` format.**
+
+**MSS**
+
+1.  User requests to list shows.
+2.  Trackermon shows a list of shows.
+3.  User requests to delete a specific show in the list.
+4.  Trackermon deletes the show.
 
     Use case ends.
 
@@ -304,11 +337,39 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. Trackermon shows an error message.
 
       Use case resumes at step 2.
 
+---
+**Use case: UC03 - List a show**
+
+**Preconditions: Trackermon application is started.**
+
+**Guarantees: A list of shows will be displayed for the user.**
+
+**MSS**
+
+1.  User requests to list shows.
+2.  Trackermon shows a list of shows.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. There is further input after the user enters list. E.g. `list shows`
+
+    * 1a1. Trackermon will only register the `list` command.
+
+      Use case resumes at step 2.
+
+* 2a. The list is empty.
+
+  Use case ends.
+  
 *{More to be added}*
+
+---
 
 ### Non-Functional Requirements
 
