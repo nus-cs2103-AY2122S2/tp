@@ -256,30 +256,48 @@ _{Explain here how the data archiving feature will be implemented}_
 ### Product scope
 
 **Target user profile**:
-
-* has a need to manage a significant number of contacts
+* students who have a need to manage a significant number of tasks of different types
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:  
+Harmonia is the easiest way for students to manage the complexity associated with their schooling years – from the plethora of assignments, ad-hoc consultations and events, to deadlines. This app will only help to manage tasks, and does not act as a calendar notifying the user of any upcoming event/deadline.
 
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Priorities: High (must have) - `* * * *`, Medium (nice to have) - `* * *`, Medium-low (nice to have but difficult) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority  | As a …​        | I want to …​                                                | So that I can…​                                                                |
+|-----------|----------------|-------------------------------------------------------------|--------------------------------------------------------------------------------|
+| `* * * *` | user           | add a new task                                              |                                                                                |
+| `* * * *` | user           | delete a task                                               | remove tasks that I no longer need                                             |
+| `* * * *` | user           | mark a task as complete                                     |                                                                                |
+| `* * * *` | user           | mark a task as incomplete                                   |                                                                                |
+| `* * * *` | user           | see all my tasks when I start up the application            | view my tasks more conveniently without having to perform any extra operations |
+| `* * * *` | user           | tag a task                                                  | categorise my tasks according to my preferred system                           |
+| `* * * *` | user           | modify a task                                               | amend a mistake or update a task                                               |
+| `* * * *` | user           | search by tags                                              | find tasks related to a category                                               |
+| `* * * *` | user           | search by keywords                                          | find a specific task more easily                                               |
+| `* * * *` | new user       | have straightforward commands I can use                     | use the application more intuitively                                           |
+| `* * * *` | expert user    | modify the tasks in the data file directly                  | modify the tasks in a way that is not supported by the application             |
+| `* * *`   | user           | tag a task with multiple tags                               | categorise tasks under multiple categories at a time                           |
+| `* * *`   | user           | search for tasks that fall within a specific time range     | find the tasks that lie between a specific period                              |
+| `* * *`   | user           | view upcoming deadlines                                     | prioritise what tasks I need to do first                                       |
+| `* * *`   | user           | view tags I have already added when creating a new task     | know how to tag new tasks and avoid creating similar tags                      |
+| `* * *`   | user           | view all of my upcoming–deadlines and longer-term deadlines | have a more holistic view of all events in the short-term and long-term future |
+| `* * *`   | user           | access the user guide through the interface                 | access the documentation without having to search online for it                |
+| `* * *`   | user           | sort my tasks by certain filters                            | organise my view the way I prefer                                              |
+| `* * *`   | user           | label my tasks with priorities                              | keep track of which tasks are more important                                   |
+| `* * *`   | new user       | view suggestions if I type in the wrong command             | recover from mistakes and use the correct command more easily                  |
+| `* * *`   | potential user | see the app populated with sample data                      | easily see how the application would look like when in use                     |
+| `* *`     | user           | set repeated occurrence of a task                           | avoid having to add a task multiple times                                      |
+| `* *`     | new user       | revert changes made                                         | undo changes that were made by mistake                                         |
+| `* *`     | expert user    | use shortcuts                                               | perform operations more efficiently                                            |
+| `*`       | user           | bulk mark different tasks as complete                       | marking everything I finished a day with just one command                      |
+| `*`       | expert user    | delete multiple tasks at once                               | do not have to delete tasks one by one                                         |
 
 ### Use cases
 
@@ -312,16 +330,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1. Should work on most *Mainstream* OS as long as it has Java `11` or above installed.
+2. Should be able to accomplish most of the tasks faster using commands than using the mouse by users with above average typing speed for regular English text (i.e. not code, not system admin commands)
+3. Should respond within two seconds.
+4. Should be usable by a novice who has never used Harmonia before.
+5. Is not required to remind users about upcoming deadlines or events.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Task**: A piece of work that the user needs to complete
+* **Tag**: A label or category attached to a task to give additional information to it
+* **Keyword**: A word that the user queries to search for a task
+
 
 --------------------------------------------------------------------------------------------------------------------
 
