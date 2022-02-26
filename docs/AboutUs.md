@@ -51,7 +51,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Wei Jie
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/bakano98.png" width="200px">
 
 [[github](http://github.com/bakano98)]
 [[portfolio](team/bakano98.md)]
