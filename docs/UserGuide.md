@@ -26,8 +26,10 @@ NUSocials is a **desktop app for university students to maintain a professional 
 
    * **`list`** : Lists all contacts.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * **`add`**`n/fred p/99998888 e/fred@example.com a/fred street, block 123, #01-01` : Adds a contact named `fred` to the Address Book.
 
+   * **`tag`** `2 edu/computer science m/CS2040S` : Tags the 2nd contact shown in the current list with a Computer Science degree and CS2040S module.
+    
    * **`delete`**`3` : Deletes the 3rd contact shown in the current list. 
     
    * **`clear`** : Deletes all contacts.
