@@ -9,24 +9,24 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### Frederick Tang 
+### Frederick Tang
 
 <img src="images/fredericktang.png" width="200px">
 
 [[github](https://github.com/fredtwt)][[portfolio](team/fredtwt.md)]
 
 * Role: Team Lead / Developer [tbd]
-* Responsibilities: 
+* Responsibilities:
   * Oversee the entire project
 
-### Ong Kim Lai 
+### Ong Kim Lai
 
 <img src="images/ongkimlai.png" width="200px">
 
 [[github](http://github.com/ongkimlai)][[portfolio](team/ongkimlai.md)]
 
 * Role: Deliverables and deadlines / Developer [tbd]
-* Responsibilities: 
+* Responsibilities:
   * Handle project deliverables and plan deadlines
 
 ### Vikrant
@@ -36,8 +36,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
 
 * Role: Testing / Developer [tbd]
-* Responsibilities: 
-  * Testing of project to ensure everything is proper 
+* Responsibilities:
+  * Testing of project to ensure everything is proper
 
 ### Manusha
 
@@ -47,6 +47,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/johndoe.md)]
 
 * Role: Documentation / Code Quality / Developer [tbd]
-* Responsibilities: 
+* Responsibilities:
   * Ensures project documentation done properly
-  * Ensures code adheres to coding standards 
+  * Ensures code adheres to coding standards
