@@ -303,7 +303,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 * 2b. User requests to delete all friends.
-   * 2b1. Amigoes deletes all friends.
+   * 2b1. Amigos deletes all friends.
   
      Use case ends.
     
@@ -345,7 +345,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
     
 
-* 3c. No fields to edit are entered by user.  
+* 3c. No field to edit is entered by user.  
     * 3c1. Amigos shows an error message. 
   
       Use case resumes at step 2.
