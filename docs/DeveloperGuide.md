@@ -330,6 +330,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Real estate agents**: Agents who are the medium that manages clients, and are the target persona for our product.
+* **Clients**: Sellers who are looking to sell their property.
+* **Address**: Address of the Property that Sellers are trying to sell.
 
 --------------------------------------------------------------------------------------------------------------------
 
