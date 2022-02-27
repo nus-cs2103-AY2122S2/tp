@@ -89,7 +89,7 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all shows in Trackermon.
 
 Format: `list`
 
