@@ -13,53 +13,53 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/aweijun.png" width="200px">
 
-[github](https://github.com/aweijun)
+[<img src="images/github-icon.png" width="50px">](https://github.com/aweijun) &nbsp; &nbsp; &nbsp;
+[<img src="images/portfolio-icon.png" width="50px">](team/aweijun.md)
 
-[portfolio](team/aweijun.md)
-
-* Role: Developer
-* Responsibilities: Integration
+|   Role    | Responsibilities |
+|:---------:|:-----------------|
+| Developer | Integration      |
 
 ### Jonathan Yeo
 
 <img src="images/jonathanhoshi.png" width="200px">
 
-| [GitHub](http://github.com/jonathanhoshi)
-| [Portfolio](team/jonathanhoshi.md) 
-|
+[<img src="images/github-icon.png" width="50px">](http://github.com/jonathanhoshi) &nbsp; &nbsp; &nbsp;
+[<img src="images/portfolio-icon.png" width="50px">](team/jonathanhoshi.md)
 
-* Role: Developer
-* Responsibilities: 
-  * Team Lead
-  * UI
+|   Role    | Responsibilities   |
+|:---------:|:-------------------|
+| Developer | Team Lead <br/> UI |
 
 ### Low Kaiwei
 
 <img src="images/Lowkaiwei98.png" width="200px">
 
-[[github](http://github.com/lowkaiwei98)][[portfolio](team/lowkaiwei98.md)]
+[<img src="images/github-icon.png" width="50px">](http://github.com/lowkaiwei98) &nbsp; &nbsp; &nbsp;
+[<img src="images/portfolio-icon.png" width="50px">](team/lowkaiwei98.md)
 
-* Role: Developer
-* Responsibilities: Code Quality
+|   Role    | Responsibilities |
+|:---------:|:-----------------|
+| Developer | Code Quality     |
 
 ### Lim Shao Cong
 
 <img src="images/arcornior.png" width="200px">
 
+[<img src="images/github-icon.png" width="50px">](http://github.com/arcornior) &nbsp; &nbsp; &nbsp;
+[<img src="images/portfolio-icon.png" width="50px">](team/arcornior.md)
 
-[[github]](http://github.com/arcornior)
-[[portfolio]](team/arcornior.md)
-
-* Role: Developer
-* Responsibilities:
-  * Documentation
+|   Role    | Responsibilities |
+|:---------:|:-----------------|
+| Developer | Documentation    |
 
 ### Zachary Chan
 
 <img src="images/ardentsoul.png" width="200px">
 
-[<img src="images/github-icon.png" width="50px">](https://github.com/Ardentsoul)
+[<img src="images/github-icon.png" width="50px">](https://github.com/Ardentsoul) &nbsp; &nbsp; &nbsp;
 [<img src="images/portfolio-icon.png" width="50px">](team/ardentsoul.md)
 
-* Role: Developer
-* Responsibilities: Quality Assurance
+|   Role    | Responsibilities               |
+|:---------:|:-------------------------------|
+| Developer | Quality Assurance              |
