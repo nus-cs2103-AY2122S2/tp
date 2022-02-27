@@ -34,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private FavouriteWindow favouriteWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -161,6 +162,14 @@ public class MainWindow extends UiPart<Stage> {
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
+    }
+
+    /**
+     * Opens up FavouriteWindow.
+     */
+    @FXML
+    private void handleFavourite() {
+        favouriteWindow.show();
     }
 
     public PersonListPanel getPersonListPanel() {
