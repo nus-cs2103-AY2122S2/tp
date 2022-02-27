@@ -290,9 +290,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  ContaX shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  ContaX deletes the person
 
     Use case ends.
 
@@ -302,11 +302,222 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 3a. The given index is out of range
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. ContaX shows an error message indicating that the given index is invalid.
 
-      Use case resumes at step 2.
+    * Use case resumes at step 2.
+
+* 3b. The given index is of invalid format
+
+    * 3b1. ContaX shows an error message indicating that the given command is of invalid format.
+
+    * Use case resumes at step 2.
+
+**Use case: Edit a person**
+
+**MSS**
+1. User requests to list persons
+2. ContaX shows a list of persons
+3. User requests to modify a specific person by specifying the corresponding index and parameter flags followed by the new values to change to
+4. ContaX edits the person accordingly
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is out of range
+
+    * 3a1. ContaX shows an error message indicating that the given index is invalid.
+
+    * Use case resumes at step 2.
+
+* 3b. The given index is of invalid format
+
+    * 3b1. ContaX shows an error message indicating that the given command is of invalid format.
+
+    * Use case resumes at step 2.
+
+* 3c. The phone tag is specified and the given phone is of incorrect format
+   
+    * 3c1. ContaX shows an error message indicating that the given phone number is of invalid format. 
+
+    * Use case resumes at step 2.
+
+*  3d. The email flag is specified and the given email is of incorrect format
+
+    * 3c1. ContaX shows an error message indicating that the given email is of invalid format.
+
+    * Use case resumes at step 2.
+
+*  3e. The tag flag is specified and it is not followed by any tag name
+   
+    * 3e1. ContaX removes all the person's tags.
+
+    * Use case ends.
+
+**Use case: Delete a appointment**
+
+**MSS**
+
+1.  User requests to list appointments
+2.  ContaX shows a list of appointments
+3.  User requests to delete a specific appointments in the list
+4.  ContaX deletes the appointment
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is out of range
+
+    * 3a1. ContaX shows an error message indicating that the given index is invalid.
+
+    * Use case resumes at step 2.
+
+* 3b. The given index is of invalid format
+
+    * 3b1. ContaX shows an error message indicating that the given command is of invalid format.
+
+    * Use case resumes at step 2.
+
+**Use case: Edit a appointment**
+
+**MSS**
+1. User requests to list appointments
+2. ContaX shows a list of appointments
+3. User requests to modify a specific appointment by specifying the corresponding index and parameter flags followed by the new values to change to
+4. ContaX edits the appointment.
+
+**Extensions**
+
+* 1a. User specifies a starting time and ending time
+
+    * 1a1. ContaX lists all appointments that fall between the given dates    
+
+    * Use case resumes at step 3. 
+
+* 1b. User specifies a starting time and ending time with a incorrect format
+
+   * 1b1. ContaX shows an error message indicating that the given time is invalid.
+
+   * Use case ends.
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is out of range
+
+    * 3a1. ContaX shows an error message indicating that the given index is invalid.
+
+    * Use case resumes at step 2.
+
+* 3b. The given index is of invalid format
+
+    * 3b1. ContaX shows an error message indicating that the given command is of invalid format.
+
+    * Use case resumes at step 2.
+
+**Use case: Export data file**
+
+**MSS**
+1. User requests to export data file for ContaX 
+2. ContaX generates CSV file according to the format of ContaX
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User requests to export data file for Google Contacts
+   
+    * ContaX generates CSV file according to the format of Google Contacts
+
+    * Use case ends.
+
+* 1b. User requests to export data file for Microsoft Outlook 
+
+    * ContaX generates CSV file accroding to the format of Microsfot Outlook
+   
+    * Use case ends.
+
+**Use Case: Import data file**
+1. User requests to import a data file by clicking the `Import` button
+2. ContactX imports the data file
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User requests to import data using the importcsv command
+
+    * Use case resumes at step 2.
+
+**Use case: User requests to perform a batch command**
+
+**MSS**
+1. User requests to perform a batch command which includes a condition
+2. ContaX executes the command based on the given condition
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given condition is of invalid format
+
+    * 1a1. ContaX shows an error message indicating that the condition is of invalid format.
+
+    * Use case ends. 
+
+* 1b. There are no list/ appointments that matches the given condition
+    
+    * Use case ends. 
+
+**Use case: User requests to perform a command on a specified range**
+
+**MSS**
+1. User requests to perform a command to a specified range
+2. ContaX executes the command based on the given range
+    Use case ends.
+
+**Extensions**
+* 1a. The given range is of invalid format
+   
+    * 1a1. ContaX shows an error message indicating that the range provided is of invalid format.
+
+    * Use case ends. 
+
+* 1b. The given starting index is larger than the ending index
+
+    * 1b1. ContaX shows an error message indicating that the range provided is invalid. 
+
+    * Use case ends. 
+
+**Use case: User requests to chain 2 commands**
+
+**MSS**
+1. User requests to perform 2 commands by chaining them
+2. ContaX executes the first command, followed by the second command
+
+**Extensions**
+* 1a. The first command is invalid
+   
+    * 1a1. ContaX shows an error message indicating that the first command is invalid.
+
+    * Use case ends.
+
+* 1b. The second command is invalid
+
+    * 1b1. ContaX shows an error message indicating that the second command is invalid.
+
+    * Use case ends.
 
 *{More to be added}*
 
