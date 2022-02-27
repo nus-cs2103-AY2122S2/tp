@@ -245,7 +245,7 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|-----------------------------------------------------
-**Add** | `add P/ n/NAME a/AGE j/JERSY_NUMBER w/WEIGHT h/HEIGHT p/PHONE_NUMBER e/EMAIL_ADDRESS`<br>e.g. `add P/ n/John Doe a/17 j/3 w/69 h/188 p/98765432 e/johnd@example.com`<br> `add T/ n/TEAM_NAME [P/PLAYER]…​`<br> e.g. `add T/ n/Huskers  P/John Doe  P/James Doe<br>add L/ n/LINEUP_NAME T/TEAM [P/PLAYER]…​`<br>e.g. `add L/ n/starting five T/Balluba P/James P/Curry P/Harden P/Durant P/Embiid`<br>`add S/ T/TEAM n/DESCRIPTION d/DATETIME`<br>e.g. `add S/ T/Yabuda n/competition d/22/02/2022 0900`
+**Add** | `add P/ n/NAME a/AGE j/JERSY_NUMBER w/WEIGHT h/HEIGHT p/PHONE_NUMBER e/EMAIL_ADDRESS`<br>e.g. `add P/ n/John Doe a/17 j/3 w/69 h/188 p/98765432 e/johnd@example.com`<br> `add T/ n/TEAM_NAME [P/PLAYER]…​`<br> e.g. `add T/ n/Huskers  P/John Doe  P/James Doe`<br>`add L/ n/LINEUP_NAME T/TEAM [P/PLAYER]…​`<br>e.g. `add L/ n/starting five T/Balluba P/James P/Curry P/Harden P/Durant P/Embiid`<br>`add S/ T/TEAM n/DESCRIPTION d/DATETIME`<br>e.g. `add S/ T/Yabuda n/competition d/22/02/2022 0900`
 **Delete** | `xxx`<br>e.g.`xxx`
 **View** | `xxx`<br> e.g.`xxx`
 **Tag** | `tag P/PLAYER t/TAG…​`<br>e.g. `tag P/LBJ t/SF`
