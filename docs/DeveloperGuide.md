@@ -459,13 +459,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. TAssist detects an error in the entered command.
+* 1a. TAssist detects an error in the entered command.
 
-    * 2a1. TAssist prompts for the correct command.
+    * 1a1. TAssist prompts for the correct command.
 
-    * 2a2. TA enters a new command.
+    * 1a2. TA enters a new command.
 
-      Steps 2a1-2a2 are repeated until the command entered is correct.
+      Steps 1a1-1a2 are repeated until the command entered is correct.
 
       Use case resumes from step 2.
 
@@ -480,13 +480,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. TAssist detects an error in the entered command.
+* 1a. TAssist detects an error in the entered command.
 
-    * 2a1. TAssist prompts for the correct command.
+    * 1a1. TAssist prompts for the correct command.
 
-    * 2a2. TA enters a new command.
+    * 1a2. TA enters a new command.
 
-      Steps 2a1-2a2 are repeated until the command entered is correct.
+      Steps 1a1-1a2 are repeated until the command entered is correct.
 
       Use case resumes from step 2.
 
@@ -506,13 +506,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. TAssist detects an error in the entered command.
+* 2a. TAssist detects an error in the entered command.
 
-    * 3a1. TAssist prompts for the correct command.
+    * 2a1. TAssist prompts for the correct command.
   
-    * 3a2. TA enters a new command.
+    * 2a2. TA enters a new command.
 
-      Steps 3a1-3a2 are repeated until the command entered is correct.
+      Steps 2a1-2a2 are repeated until the command entered is correct.
 
       Use case resumes from step 3.
 
