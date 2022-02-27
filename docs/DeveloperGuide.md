@@ -301,7 +301,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-TODO
+1. TeachWhat! able to run on all mainstream OS that has Java 11 or above installed
+2. Should be able to hold up to 1000 students and classes without a noticeable sluggishness in performance for typical 
+usage
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be 
+able to accomplish most of the tasks faster using commands than using the mouse
+4. A new user should be able to pick up on how to use TeachWhat! within 10 minutes
+5. TeachWhat! must boot up within 5 seconds on a device that is under normal load (i.e. not running cpu intensive applications in the background).
 
 ### Glossary
 
