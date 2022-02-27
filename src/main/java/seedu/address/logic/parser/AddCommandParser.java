@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
 
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -35,7 +35,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_NAME, PREFIX_MODULE_CODE, PREFIX_PHONE,
-                        PREFIX_TELEGRAM, PREFIX_EMAIL);
+                        PREFIX_TELEGRAM_HANDLE, PREFIX_EMAIL);
 
         // Check if compulsory fields are present in the user input.
         if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_NAME, PREFIX_MODULE_CODE)
@@ -55,7 +55,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             phone = ParserUtil.parsePhone(currPhone.get());
         }
 
-        Optional<String> currTelegramHandle = argMultimap.getValue(PREFIX_TELEGRAM);
+        Optional<String> currTelegramHandle = argMultimap.getValue(PREFIX_TELEGRAM_HANDLE);
         TelegramHandle telegramHandle;
         if (currTelegramHandle.isEmpty()) {
             telegramHandle = null;
