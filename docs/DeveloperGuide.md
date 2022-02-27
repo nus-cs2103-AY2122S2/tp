@@ -488,9 +488,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1.  Application is offered free.
+2.  Has storage function
+3. Source code is open source
+4. The user interface should be intuitive enough for users who are not IT-savvy.
+5. Should be compatible with Mac and Windows
+6. A record table should be able to have up to 5000 NUS students.
+7. the application should work on both 32-bit and 64-bit environments.
+8. The application will always answer the user.
+9. The application cannot handle image input.
+10. The application cannot store 2 or more schools into a instance of application
+11. Product is not required to handle printing of reports
+12. Product should respond within 10 seconds.
+
 
 *{More to be added}*
 
@@ -498,6 +508,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Student Status**: A student detail that indicates whether the student has Covid-19 
+* **Health Risk Warning**: A warning that informs school and students for high health risk 
+* **Covid-19**: An infectious disease caused by the SARS-CoV-2 virus.
+* **NUS IT**: The information technology department at the National University of Singapore
 
 --------------------------------------------------------------------------------------------------------------------
 
