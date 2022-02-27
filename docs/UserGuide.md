@@ -73,7 +73,7 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 ### Onboarding guide
-When you run the program for the first time, you will be prompted to take a quick tour of the ContacX's basic functions guided through a series of step-by-step instructions.
+When you run the program for the first time, you will be prompted to take a quick tour of the ContaX's basic functions guided through a series of step-by-step instructions.
 
 Example of instructions:
 * Input command
