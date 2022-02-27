@@ -17,7 +17,7 @@
   * Contact Tagging and Filtering
   * Advanced command chaining/mass operations
   * Add/Delete/Edit Appointments
-* For the detailed documentation of this project, see the **[ContacX Product Website](https://ay2122s2-cs2103-w17-1.github.io/tp/)**.
+* For the detailed documentation of this project, see the **[ContaX Product Website](https://ay2122s2-cs2103-w17-1.github.io/tp/)**.
 
 
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org)
