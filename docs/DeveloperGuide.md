@@ -283,30 +283,63 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `MyGM` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Find A Player**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
-
-    Use case ends.
+1. User requests to find a player.
+2. MyGM displays details about the player.  
+Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
-
+* 1a. MyGM detects an error in the entered command.
+  * 1a1. MyGM displays the error message  
   Use case ends.
 
-* 3a. The given index is invalid.
+* 1b. MyGM cannot find the player.
+  * 1b1. MyGM displays failure.  
+  Use case ends.
 
-    * 3a1. AddressBook shows an error message.
+**Use case: UC02 - Mark The Attendance of A Player**
 
-      Use case resumes at step 2.
+**MSS**
+
+1. User requests to view the team schedule.
+2. MyGM displays the team schedule.
+3. User requests to mark the attendance of a player for an event
+4. MyGM displays the success message.  
+   Use case ends.
+
+**Extensions**
+
+* 1a. MyGM cannot find the team. 
+  * 1a1. MyGM displays the error message.   
+  Use case returns to the start of 1.
+
+* 3a. MyGM cannot find the player in the team. 
+  * 3a1. MyGM displays failure.   
+  Use case returns to the start of 3.
+
+* 3b. MyGM cannot find the schedule based on the request. 
+  * 3b1. MyGM requests for correct details.  
+  Use case returns to the start of 3.
+
+**Use case: UC03 - Tagging a Player’s Position**
+
+**MSS**
+
+1. Find a player (UC01)
+2. User adds a tag to the player.
+3. MyGM displays the success message.   
+   Use case ends.
+
+**Extensions**
+* 3a. User entered an invalid tag. 
+  * 3a1. MyGM displays the invalid tag message and the appropriate tags.   
+  Use case ends.
 
 *{More to be added}*
 
