@@ -72,6 +72,14 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+### Onboarding guide
+The user will be prompted to take a quick tour of the ContacX's basic functions via a series of step-by-step instructions on the first run of the program.
+ 
+Example of instructions:
+* Input command
+![](images/onboardingCommand.png) 
+* List contacts
+![](images/onboardingList.png)
 
 ### Adding a person: `add`
 
