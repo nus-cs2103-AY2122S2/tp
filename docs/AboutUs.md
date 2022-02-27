@@ -52,8 +52,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/ardentsoul.png" width="200px">
 
-[github](https://github.com/Ardentsoul)
-[portfolio](team/ardentsoul.md)
+
+[<img src="images/github-icon.png" width="50px">](https://github.com/Ardentsoul)
+[<img src="images/portfolio-icon.png" width="50px">](team/ardentsoul.md)
 
 * Role: Developer
 * Responsibilities: Data
