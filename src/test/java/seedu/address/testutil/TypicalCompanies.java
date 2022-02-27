@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.CompanyList;
 import seedu.address.model.company.Company;
 
 /**
@@ -60,10 +60,10 @@ public class TypicalCompanies {
     private TypicalCompanies() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical companies.
+     * Returns an {@code CompanyList} with all the typical companies.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static CompanyList getTypicalAddressBook() {
+        CompanyList ab = new CompanyList();
         for (Company company : getTypicalCompanies()) {
             ab.addCompany(company);
         }

@@ -6,7 +6,7 @@ import seedu.address.model.company.Company;
 /**
  * Unmodifiable view of an address book
  */
-public interface ReadOnlyAddressBook {
+public interface ReadOnlyCompanyList {
 
     /**
      * Returns an unmodifiable view of the companies list.

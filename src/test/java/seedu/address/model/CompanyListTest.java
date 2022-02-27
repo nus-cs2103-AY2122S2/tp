@@ -22,25 +22,25 @@ import seedu.address.model.company.Company;
 import seedu.address.model.company.exceptions.DuplicateCompanyException;
 import seedu.address.testutil.CompanyBuilder;
 
-public class AddressBookTest {
+public class CompanyListTest {
 
-    private final AddressBook addressBook = new AddressBook();
+    private final CompanyList companyList = new CompanyList();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getCompanyList());
+        assertEquals(Collections.emptyList(), companyList.getCompanyList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
+        assertThrows(NullPointerException.class, () -> companyList.resetData(null));
     }
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+        CompanyList newData = getTypicalAddressBook();
+        companyList.resetData(newData);
+        assertEquals(newData, companyList);
     }
 
     @Test
@@ -49,47 +49,47 @@ public class AddressBookTest {
         Company editedAlice = new CompanyBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Company> newCompanies = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newCompanies);
+        CompanyListStub newData = new CompanyListStub(newCompanies);
 
-        assertThrows(DuplicateCompanyException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicateCompanyException.class, () -> companyList.resetData(newData));
     }
 
     @Test
     public void hasCompany_nullCompany_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasCompany(null));
+        assertThrows(NullPointerException.class, () -> companyList.hasCompany(null));
     }
 
     @Test
     public void hasCompany_companyNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasCompany(ALICE));
+        assertFalse(companyList.hasCompany(ALICE));
     }
 
     @Test
     public void hasCompany_companyInAddressBook_returnsTrue() {
-        addressBook.addCompany(ALICE);
-        assertTrue(addressBook.hasCompany(ALICE));
+        companyList.addCompany(ALICE);
+        assertTrue(companyList.hasCompany(ALICE));
     }
 
     @Test
     public void hasCompany_companyWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addCompany(ALICE);
+        companyList.addCompany(ALICE);
         Company editedAlice = new CompanyBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasCompany(editedAlice));
+        assertTrue(companyList.hasCompany(editedAlice));
     }
 
     @Test
     public void getCompanyList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getCompanyList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> companyList.getCompanyList().remove(0));
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose companies list can violate interface constraints.
+     * A stub ReadOnlyCompanyList whose companies list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class CompanyListStub implements ReadOnlyCompanyList {
         private final ObservableList<Company> companies = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Company> companies) {
+        CompanyListStub(Collection<Company> companies) {
             this.companies.setAll(companies);
         }
 

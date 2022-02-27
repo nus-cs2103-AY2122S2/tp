@@ -29,7 +29,7 @@ import seedu.address.testutil.CompanyBuilder;
 import seedu.address.testutil.CompanyUtil;
 import seedu.address.testutil.EditCompanyDescriptorBuilder;
 
-public class AddressBookParserTest {
+public class CompanyListParserTest {
 
     private final AddressBookParser parser = new AddressBookParser();
 
