@@ -3,13 +3,16 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
-
+AgentSee is a **desktop app for managing house selling clients and for quick filtering for a specific type of house to recommend to buyers, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AgentSee can get your contact management tasks done faster than traditional GUI apps.
 * Table of Contents
 {:toc}
-
 --------------------------------------------------------------------------------------------------------------------
-
+## Table of Contents
+1. Quick start
+2. Functions
+3. Help
+4. FAQ
+5. Command Summary
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
@@ -38,7 +41,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## Functions
 
 <div markdown="block" class="alert alert-info">
 
@@ -119,7 +122,8 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* All partial words will be matched e.g. `Han` keyword will match `Hans` in the name
+* However, if the keyword is larger, it will not match e.g. `Hans` keyword will not match `Han` in name
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
