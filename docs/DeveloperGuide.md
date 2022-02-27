@@ -267,22 +267,9 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Value proposition**: TAssist creates a more conducive learning environment for educators and students by helping TAs consolidate students’ contacts and track their progress.
 
-
-### User stories
+### TAssist User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
-
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-
-## TAssist Target User Stories
 
 <table class="c20">
     <tbody>
@@ -459,16 +446,57 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TAssist` and the **Actor** is the `TA`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case 04: Add a class group**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  TA requests to add a new class group with the specified details.
+2.  TAssist adds the new class group and displays its details.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. TAssist detects an error in the entered command.
+
+    * 2a1. TAssist prompts for the correct command.
+
+    * 2a2. TA enters a new command.
+
+      Steps 2a1-2a2 are repeated until the command entered is correct.
+
+      Use case resumes from step 2.
+
+**Use case 05: List class groups**
+
+**MSS**
+
+1.  TA requests to list class groups.
+2.  TAssist displays the details of all class groups.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. TAssist detects an error in the entered command.
+
+    * 2a1. TAssist prompts for the correct command.
+
+    * 2a2. TA enters a new command.
+
+      Steps 2a1-2a2 are repeated until the command entered is correct.
+
+      Use case resumes from step 2.
+
+**Use case 06: Delete a class group**
+
+**MSS**
+
+1.  TA requests to <ins>list class groups (UC05)</ins>.
+2.  TA requests to delete a specific class group in the list.
+3.  TAssist deletes the class group.
 
     Use case ends.
 
@@ -478,11 +506,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 3a. TAssist detects an error in the entered command.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. TAssist prompts for the correct command.
+  
+    * 3a2. TA enters a new command.
 
-      Use case resumes at step 2.
+      Steps 3a1-3a2 are repeated until the command entered is correct.
+
+      Use case resumes from step 3.
+
+* 3b. The given index is invalid.
+
+    * 3b1. TAssist shows an error message.
+
+      Use case resumes from step 2.
 
 *{More to be added}*
 
