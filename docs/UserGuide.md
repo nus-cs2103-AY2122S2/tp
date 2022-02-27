@@ -25,6 +25,7 @@ They can easily look up the list of shows if they need to.
 
 5. Start communicating with Trackermon using the command box.
 
+
 Some example commands you can try:
 
    * **`list`** : Lists all shows.
@@ -90,9 +91,9 @@ Examples:
 * `add n/All of us are dead s/completed t/Kdrama`
 * `add n/All of us are dead`
 
-### Listing all persons : `list`
+### Listing all shows : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all shows in Trackermon.
 
 Format: `list`
 
