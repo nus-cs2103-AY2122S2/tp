@@ -77,7 +77,7 @@ Format: `help`
 
 Adds a new show to trackermon. Note that the name of the show can only contain alphanumeric characters.
 
-Format: `add n/<NAME> [t/TAG]…​`
+Format: `add n/<NAME> [s/<STATUS>] [t/<TAG>]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
@@ -85,6 +85,7 @@ A person can have any number of tags (including 0)
 
 Examples:
 * `add n/All of us are dead t/Kdrama`
+* `add n/All of us are dead s/completed t/Kdrama`
 * `add n/All of us are dead`
 
 ### Listing all persons : `list`
