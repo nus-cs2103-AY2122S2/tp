@@ -29,6 +29,8 @@ UniBook is a **desktop app for students to manage their university contacts in s
 
    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
+   * **`edit`**`o/person 1 p/91234567 e/prof@email.com` : Edits the 1st contact's phone number and email shown in the current list.
+
    * **`clear`** : Deletes all contacts.
 
    * **`exit`** : Exits the app.
