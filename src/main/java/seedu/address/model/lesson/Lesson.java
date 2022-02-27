@@ -51,11 +51,44 @@ public class Lesson {
     }
 
     /**
-     * Returns true if both lessons are the same instance.
+     * Returns true if both lessons have the same name, subject and timeslot.
+     * @param otherLesson
+     * @return
+     */
+    public boolean isSameLesson(Lesson otherLesson) {
+        if (!otherLesson.getName().equals(name)) {
+            return false;
+        }
+
+        if (!otherLesson.getSubject().equals(subject)) {
+            return false;
+        }
+
+        if (!otherLesson.getTimeSlot().equals(timeSlot)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Returns true if both lessons have the same identity and data fields.
      */
     @Override
     public boolean equals(Object other) {
-        return other == this;
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Lesson)) {
+            return false;
+        }
+
+        Lesson otherLesson = (Lesson) other;
+
+        return otherLesson.getName().equals(getName())
+                && otherLesson.getSubject().equals(getSubject())
+                && otherLesson.getTimeSlot().equals(getTimeSlot());
     }
 
     @Override

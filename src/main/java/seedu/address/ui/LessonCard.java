@@ -12,7 +12,7 @@ import seedu.address.model.lesson.Lesson;
  */
 public class LessonCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "LessonListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -30,6 +30,12 @@ public class LessonCard extends UiPart<Region> {
     private Label name;
     @FXML
     private Label id;
+    @FXML
+    private Label subject;
+    @FXML
+    private Label date;
+    @FXML
+    private Label time;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -39,6 +45,9 @@ public class LessonCard extends UiPart<Region> {
         this.lesson = lesson;
         id.setText(displayedIndex + ". ");
         name.setText(lesson.getName().fullName);
+        subject.setText(lesson.getSubject().subjectName);
+        date.setText(lesson.getTimeSlot().getDate());
+        time.setText(lesson.getTimeSlot().getTime());
     }
 
     @Override

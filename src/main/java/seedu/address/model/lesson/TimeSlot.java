@@ -3,6 +3,8 @@ package seedu.address.model.lesson;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -12,6 +14,8 @@ import java.util.Date;
 public class TimeSlot {
     private static final String MESSAGE_CONSTRAINTS =
             "Lessons can only be created when there are no clashes in the timetable";
+    private static final DateFormat displayedDateFormat = new SimpleDateFormat("EEEE [d MMMM yyyy]");
+    private static final DateFormat displayedTimeFormat = new SimpleDateFormat("h:mm a");
 
     private final Date dateOfLesson;
     private final int duration;
@@ -39,9 +43,6 @@ public class TimeSlot {
 
     /**
      * Returns true if both timeslots overlap.
-     *
-     * @param otherTimeSlot
-     * @return
      */
     protected boolean isClashingWith(TimeSlot otherTimeSlot) {
         Date currentTimeSlotStart = this.dateOfLesson;
@@ -58,6 +59,16 @@ public class TimeSlot {
         cal.setTime(dateOfLesson);
         cal.add(Calendar.HOUR_OF_DAY, duration);
         return cal.getTime();
+    }
+
+    public String getDate() {
+        return displayedDateFormat.format(this.dateOfLesson);
+    }
+
+    public String getTime() {
+        return String.format("%s - %s",
+                displayedTimeFormat.format(this.dateOfLesson),
+                displayedTimeFormat.format(this.getEndDate()));
     }
 
     @Override

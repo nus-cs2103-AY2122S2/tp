@@ -1,11 +1,18 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.LessonBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyLessonBook;
+import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.Subject;
+import seedu.address.model.lesson.TimeSlot;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -40,12 +47,46 @@ public class SampleDataUtil {
         };
     }
 
+    public static Lesson[] getSampleLessons() {
+        Calendar calendar = Calendar.getInstance();
+
+        Date firstLessonDate;
+        Date secondLessonDate;
+        Date thirdLessonDate;
+
+        calendar.add(Calendar.DATE, 10);
+        firstLessonDate = calendar.getTime();
+
+        calendar.add(Calendar.DATE, 10);
+        secondLessonDate = calendar.getTime();
+
+        calendar.add(Calendar.DATE, 10);
+        thirdLessonDate = calendar.getTime();
+
+        return new Lesson[] {
+            new Lesson(new seedu.address.model.lesson.Name("Make up lesson for George"), new Subject("Geography"),
+                    new TimeSlot(firstLessonDate, 2)),
+            new Lesson(new seedu.address.model.lesson.Name("Trial lesson for Jake"), new Subject("Biology"),
+                    new TimeSlot(secondLessonDate, 1)),
+            new Lesson(new seedu.address.model.lesson.Name("Make up lesson for Henry"), new Subject("Physics"),
+                    new TimeSlot(thirdLessonDate, 2))
+        };
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }
         return sampleAb;
+    }
+
+    public static ReadOnlyLessonBook getSampleLessonBook() {
+        LessonBook sampleLb = new LessonBook();
+        for (Lesson sampleLesson : getSampleLessons()) {
+            sampleLb.addLesson(sampleLesson);
+        }
+        return sampleLb;
     }
 
     /**
