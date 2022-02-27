@@ -8,6 +8,6 @@
 * The project is a software project for a desktop application that manages student contact details and progress.
   * It is **written in OOP fashion**.
   * It comes with a **reasonable level of user and developer documentation**.
-* It is named `Teaching Assistant Personal Assistant` (`TAPA` for short) because it helps TAs manage their students' contacts and progress.
+* It is named `Teaching Assistant's Personal Assistant` (`TAPA` for short) because it helps TAs manage their students' contacts and progress.
 * For the detailed documentation of this project, see **[TAPA's page on Github](https://github.com/AY2122S2-CS2103T-W09-4/tp)**.
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
