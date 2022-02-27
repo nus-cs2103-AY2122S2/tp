@@ -353,7 +353,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Address Book**: The part of ContaX that keeps track of a list of Persons
+* **Schedule**: The part of ContaX that keeps track of Appointments 
 
 --------------------------------------------------------------------------------------------------------------------
 
