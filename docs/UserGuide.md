@@ -201,7 +201,12 @@ Upon click, the default OS file picker should show up, with filters for only .cs
 
 Format: `importcsv [n/COLUMNNUM] [p/COLUMN_PERSON] [e/COLUMN_EMAIL] [a/COLUMN_ADDRESS] [t/COLUMN_TAGS]`
 
-* Each argument represents the corresponding attribute for a person. n = Name, p = Phone, e = Email, a = Address, t = Tagged
+* Each argument represents the corresponding attribute for a person. 
+  * n = Name
+  * p = Phone
+  * e = Email
+  * a = Address
+  * t = Tagged
 * If any argument is omitted, it will follow the next available column based on the default sequence of
   Name - Phone - Email - Address - Tagged
 * This user guide will be updated later on with templates for importing for the following contact csv formats:
