@@ -257,27 +257,26 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* wants to keep track of their shows
+* prefers desktop applications to web applications
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: track and remember what shows they have watched or are currently watching easily with a 
+list if they have to
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
+| Priority | As a …​                                    | I want to …​             | So that I can…​                                                     |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| `* * *`  | casual show watcher                        | add shows I want to watch      | get around to watching them                                            |
+| `* * *`  | casual show watcher                        | delete a show                  | remove incorrect entries                                               |
+| `* * *`  | casual show watcher                        | view watch status of shows     | check if I have completed a show                                       |
+| `* *`    | show critic                                | leave reviews of various shows | remember what was good or bad about the show                           |
+| `* *`    | casual show watcher                        | keep track of my favourite shows | recommend them to others                                             |
+| `*`      | forgetful user                             | keep track of where I stoppped a show | continue from the correct episode                               |
 
 *{More to be added}*
 
