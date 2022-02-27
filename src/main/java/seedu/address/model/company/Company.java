@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.role.RoleManager;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,6 +24,7 @@ public class Company {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private RoleManager roleManager = new RoleManager();
 
     /**
      * Name is compulsory but Phone, Email and Address are optional
