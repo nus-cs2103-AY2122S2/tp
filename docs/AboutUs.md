@@ -29,14 +29,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Code Quality
 * Responsibilities: Add contacts
 
-### Johnny Doe
+### Gerald Neo
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/geraldneo567.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/geraldneo567)] [[portfolio](team/geraldneo567.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Documentation
+* Responsibilities: Parsing input
 
 ### Jean Doe
 

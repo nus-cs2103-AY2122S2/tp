@@ -159,21 +159,52 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting specific entries : `delete`
 
-Deletes the specified person from the address book.
+Removes the specified modules, module subgroup, student or professor profile from the system.
 
-Format: `delete INDEX`
+Format:
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+`delete m/MODULECODE [o/OPTION]`
 
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* Deletes the module with the specified `MODULECODE`.
+* The module must already exist in the system.
+* Option is optional, and can take the following values: 
+  - `ALL` -> Delete everything associated with the module, including profiles.
+  - `MOD` -> Delete only the module
+  - `PROF` -> Delete the Professor associated with the module.
+* If the option field is left blank, the `MOD` setting is assumed.    
+
+Example:
+* `delete m/CS2107` removes the "CS2107" module only.
+
+`delete m/MODULECODE g/GROUPCODE [o/OPTION]`
+* Deletes the subgroup specified by `GROUPCODE`, within the module specified by `MODULECODE`.
+* Option is optional, and can take the following values:
+    - `ALL` -> Delete everything associated with the group, including profiles.
+    - `GROUP` -> Delete only the relevant subgroup
+* If the option field is left blank, the `GROUP` setting is assumed.
+* Both the module and the subgroup must already exist in the system.
+
+Example:
+* `delete m/CS2107 g/T04` removes the T04 subgroup from the CS2107 module.
+
+`delete n/STUDENTNAME`
+* Deletes the student profile specified by `STUDENTNAME`. If there are multiple matches,
+a prompt to specify which profile to delete will appear.
+  
+Example: `delete n/Alan Tan` will remove the profile associated with Alan Tan. If there are multiple
+profiles associated with this name, a list will appear prompting you to specify which profile to delete.
+
+`delete n/PROFNAME`
+* Deletes the professor profile specified by `PROFNAME`. If there are multiple matches, a prompt
+to specify which profile to delete will appear.
+  
+Example: `delete n/Martin Henz` will remove the profile associated with Martin Henz. If there are multiple 
+profiles associated with this name, a list will appear prompting you to specify which profile to delete.
 
 ### Clearing all entries : `clear`
+
 
 Clears all entries from the address book.
 
@@ -216,7 +247,7 @@ Action | Format, Examples
 --------|------------------
 **Add** | `add o/OPTION n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [m/MODULE]… ​` <br> e.g., `add o/module n/Software Engineering m/cs2103`<br> e.g., `add o/module n/Computer Organisation m/cs2100`<br> e.g., `add o/professor n/James Ho p/22224444 e/jamesho@example.com a/123 Clementi Rd S123466 m/cs2103`<br> e.g., `add o/student n/Peter Ho p/81234567 e/peterho@u.nus.edu m/cs2103 m/cs2100`
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete** | `delete m/MODULECODE [o/OPTION]` <br> e.g. `delete m/CS2103` <br> e.g. `delete m/CS2103 o/PROF` <br> `delete m/MODULECODE g/GROUPCODE [o/OPTION]` <br> e.g. `delete m/CS2105 g/G04` <br> e.g. `delete m/CS2105 g/04 o/ALL` <br> `delete n/STUDENTNAME` <br> e.g. `delete n/Alan Tan` <br> `delete n/PROFNAME` <br> e.g. `delete n/Ooi Wei Tsang`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list [o/LISTING_CRITERIA CRITERIA_INFORMATION]` <br>e.g., `list o/module CS2103`
