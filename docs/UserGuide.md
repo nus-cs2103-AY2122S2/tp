@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+ContaX is a **desktop application for managing your Contacts and Schedule**. It is a powerful tool *optimized for use via a Command Line Interface* (CLI), while incorporating Graphical User Interface (GUI) elements to make it user-friendly. If you are able to type fast, ContaX is capable of helping you manage your contacts and schedule more efficiently than traditional GUI applications, allowing you to shift your focus to other things.
 
 * Table of Contents
 {:toc}
@@ -61,6 +61,29 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+</div>
+
+### Common Date and Time Syntax
+
+<div markdown="block" class="alert alert-secondary">
+
+**:information_source: This section details the format(s) that date and time inputs are expected to be in.**<br>
+
+* All date inputs must conform to the following format: `dd-mm-yyyy`.
+
+| Field | Description |
+| - | - |
+| `dd` | Day of the month. |
+| `mm` | Numerical representation of the month, from `1` to `12`. |
+| `yyyy` | Year in the full 4-digit format. |
+
+* All time inputs must conform to the following format: `hh:mm`
+
+| Field | Description |
+| - | - |
+| `hh` | Hour of the day, in 24-hour format. |
+| `mm` | Minute of the hour, from `00` to `59`. |
 
 </div>
 
@@ -148,6 +171,93 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+### Creating an Appointment : `addAppointment`
+
+Creates an appointment in the schedule.
+
+Format: `addAppointment n/NAME d/DATE t/TIME l/DURATION [p/PERSON]`
+
+* Creates a new appointment with the specified parameters.
+* All parameters except `PERSON` **must** be specified.
+* The `NAME` parameter must be **non-empty**.
+* The `DATE` parameter denotes the starting date, and **must conform to the [Common Date Formats](#common-date-and-time-syntax)**.
+* The `TIME` parameter denotes the starting time, and **must conform to the [Common Time Formats](#common-date-and-time-syntax)**.
+* The `DURATION` parameter is the duration of the appointment in *minutes*, and **must be a positive number**.
+* The `PERSON` parameter, if specified, **must be a positive integer**, and refers to the index number shown in the displayed person list.
+<div markdown="span" class="alert alert-warning">:rotating_light: **Important Note:**
+The operation will fail if the appointment **overlaps** with another appointment.
+</div>
+
+Examples:
+* `addAppointment n/Bi-Weekly Meeting d/14-02-2022 t/11:00 l/60` Creates a *one-hour* appointment named *"Bi-Weekly Meeting"* on *14th Feb 2022* at *11:00 AM*, associated with nobody in the contact list.
+* `addAppointment n/Contract Signing With Charlie d/22-10-2022 t/16:30 p/1 l/300` Creates a *5-hour* appointment named *"Contract Signing With Charlie"* on *22nd Oct 2022* at *4:30 PM*, associated with the *first* person in the contact list.
+
+### Listing All Appointments : `listAppointments`
+
+Shows a list of all appointments in the schedule.
+
+Format: `listAppointments`
+
+**Example output**
+
+![List Appointments Wireframe](images/wireframes/ListAppointments.png)
+
+### Deleting an Appointment : `deleteAppointment`
+
+Deletes an appointment previously created in the schedule.
+
+Format: `deleteAppointment INDEX`
+
+* Deletes the appointment that is at `INDEX` in the appointment list.
+* The `INDEX` parameter **must be a positive integer**, and refers to the index number shown in the **displayed appointment list**.
+
+Examples:
+* `deleteAppointment 2` Deletes the *second* appointment in the list of appointments.
+
+### Editing an Appointment : `editAppointment`
+
+Edits an appointment previously created in the schedule.
+
+Format: `editAppointment INDEX [n/NAME] [d/DATE] [t/TIME] [p/PERSON] [l/DURATION]`
+
+* Edits the appointment that is at `INDEX` in the appointment list, setting the supplied parameter(s) to the supplied value(s).
+* The `INDEX` parameter **must be a positive integer**, and refers to the index number shown in the **displayed appointment list**.
+* At least one of the optional parameters must be supplied, otherwise the command will be ignored.
+* If supplied, the optional parameters must conform to the following rules:
+    * The `NAME` parameter must be non-empty.
+    * The `DATE` parameter denotes the starting date, and **must conform to the [Common Date Formats](#common-date-and-time-syntax)**.
+    * The `TIME` parameter denotes the starting time, and **must conform to the [Common Time Formats](#common-date-and-time-syntax)**.
+    * The `PERSON` parameter must be a positive integer, and refers to the index number shown in the displayed person list.
+    * The `DURATION` parameter is the duration of the appointment in *minutes*, and **must be a positive number**.
+<div markdown="span" class="alert alert-warning">:rotating_light: **Important Note:**
+The operation will fail if the modified appointment **overlaps** with another appointment.
+</div>
+
+Examples:
+* `editAppointment 6 l/300` Edits the *6th* appointment in the list of appointments to have a duration of *5 hours*. No other properties are changed.
+* `editAppointment 2 n/Call Juliet t/13:45` Edits the *second* appointment in the list of appointments to have the name *"Call Juliet"* and changes the time to *1:45 PM*. No other properties are changed.
+
+### Listing Appointments Within A Period : `appointmentsBetween`
+
+Lists all the appointments between a starting time and ending time.
+
+Format: `appointmentsBetween sd/STARTDATE st/STARTTIME ed/ENDDATE et/ENDTIME`
+
+* The starting time **must be before** the ending time.
+* The `STARTDATE` parameter denotes the *starting date* of the period.
+* The `STARTTIME` parameter denotes the *starting time* on the starting date for the period.
+* The `ENDDATE` parameter denotes the *ending date* of the period.
+* The `ENDTIME` parameter denotes the *ending time* on the ending date for the period.
+* Both `STARTDATE` and `ENDDATE` **must conform to the [Common Date Formats](#common-date-and-time-syntax)**.
+* Both `STARTTIME` and `ENDTIME` **must conform to the [Common Time Formats](#common-date-and-time-syntax)**.
+
+Example:
+* `appointmentsBetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00` Lists all appointments between *21 October 2022, 12 PM* and *23 October 2022, 5PM*.
+
+**Example Output:**
+
+![Appointments Between Wireframe](images/wireframes/AppointmentsBetween.png)
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -189,4 +299,9 @@ Action | Format, Examples
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
+**Add Appointment** | `addAppointment n/NAME d/DATE t/TIME l/DURATION p/PERSON`<br> e.g., `addAppointment n/Call Bob d/14-02-2022 t/11:00 p/2 l/60`
+**List Appointments** | `listAppointments`
+**Delete Appointment** | `deleteAppointment INDEX`<br> e.g., `deleteAppointment 2`
+**Edit Appointment** | `editAppointment INDEX [n/NAME] [d/DATE] [t/TIME] [p/PERSON] [l/DURATION]`<br> e.g., `editAppointment 2 n/Call Juliet t/13:45`
+**List Appointments Within Period** | `appointmentsBetween sd/STARTDATE st/STARTTIME ed/ENDDATE et/ENDTIME` <br> e.g. `appointmentsBetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00`
 **Help** | `help`

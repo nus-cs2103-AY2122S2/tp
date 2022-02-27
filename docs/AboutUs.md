@@ -29,24 +29,25 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: Code Quality, Scheduling and Deadlines, Progress Tracking, In charge of Appointments Subcomponent
 
-### Johnny Doe
+### Ong Wei Xin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/wei-xinn.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/wei-xinn)]
+[[portfolio](team/wei-xinn.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: User onboarding guide
+
+### Kwan Hao Wei
+
+<img src="images/kwanhw.png" width="200px">
+
+[[github](http://github.com/kwanhw)]
+[[portfolio](team/kwanhw.md)]
+
+* Role: Developer
+* Responsibilities: Contact tagging
 
 ### James Doe
 
@@ -55,5 +56,5 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/johndoe)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: UI
+-   Role: Developer
+-   Responsibilities: UI
