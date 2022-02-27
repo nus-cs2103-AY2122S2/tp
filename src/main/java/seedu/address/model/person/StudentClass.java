@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Student's classroom in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidClassroom(String)}
  */
-public class Classroom {
+public class StudentClass {
 
 
     /**
@@ -15,7 +15,7 @@ public class Classroom {
      *
      * @param classroom A valid classroom.
      */
-    public Classroom(String classroom) {
+    public StudentClass(String classroom) {
         requireNonNull(classroom);
 //        checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
 //        value = phone;
