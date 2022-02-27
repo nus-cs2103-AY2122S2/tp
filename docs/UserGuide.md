@@ -77,9 +77,9 @@ The user will be prompted to take a quick tour of the ContacX's basic functions 
  
 Example of instructions:
 * Input command
-![](images/onboardingCommand.png) 
+![](images/OnboardingCommand.png) 
 * List contacts
-![](images/onboardingList.png)
+![](images/OnboardingList.png)
 
 ### Adding a person: `add`
 
