@@ -48,12 +48,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Lye Jia Yang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jiaaa-yang.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/jiaaa-yang)][[portfolio](team/jiaaa-yang.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Code Quality
