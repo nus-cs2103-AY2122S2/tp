@@ -11,7 +11,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Frederick Tang
 
-<img src="images/fredericktang.png" width="200px">
+<img src="images/fredtwt.png" width="200px">
 
 [[github](https://github.com/fredtwt)][[portfolio](team/fredtwt.md)]
 
