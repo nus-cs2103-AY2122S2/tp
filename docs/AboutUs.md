@@ -27,8 +27,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 | [Portfolio](team/jonathanhoshi.md) 
 |
 
-* Role: Team Lead
-* Responsibilities: *TBA
+* Role: Developer
+* Responsibilities: 
+  * Team Lead
+  * UI
 
 ### Johnny Doe
 
