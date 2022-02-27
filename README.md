@@ -2,6 +2,7 @@
 [![codecov](https://codecov.io/gh/AY2122S2-CS2103T-W11-1/tp/branch/master/graph/badge.svg?token=EQL5RQUWFN)](https://codecov.io/gh/AY2122S2-CS2103T-W11-1/tp)
 
 ![Ui](docs/images/Ui.png)
+
 {Ui to be updated}
 
 ### NUSocials
