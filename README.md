@@ -4,8 +4,8 @@
 
 * Trackermon is a **desktop app for managing shows, optimized for use via a Command Line Interface**.<br>
   Example usages:
-  * To keep track of shows a user is currently watching
-  * To rate and review shows a user has finished watching
+  * as a tool to keep track of shows a user is currently watching
+  * as a tool to rate and review shows a user has finished watching
   
 
 * It is named `Trackermon` because it was created with a mascot in mind to help track the user's shows.
