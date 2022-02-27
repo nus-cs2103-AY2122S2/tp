@@ -19,24 +19,24 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Chua Shi Hong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/chuashihong.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/chuashihong)]
+[[portfolio](team/chuashihong.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Testing, UI
+
+### Ho Qi Yuan, Janald
+
+<img src="images/janald99.png" width="200px">
+
+[[github](http://github.com/janald99)] [[portfolio](team/janald99.md)]
+
+* Role: Developer
+* Responsibilities: Code Quality, Documentation
 
 ### Jean Doe
 
