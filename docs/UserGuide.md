@@ -214,9 +214,9 @@ Format: `importcsv [n/COLUMNNUM] [p/COLUMN_PERSON] [e/COLUMN_EMAIL] [a/COLUMN_AD
   * Outlook Contacts
 
 Examples:
-* `importCSV n/2 p/3 e/5 a/6 t/4`
+* `importcsv n/2 p/3 e/5 a/6 t/4`
   * Reads from a CSV file treating the 2nd row as names, 3rd row as phone numbers, 5th row as email addresses, 4th row as tagged.
-* `importCSV n/2`
+* `importcsv n/2`
   * Reads from CSV treating the 2nd row as names, 3rd row as phone numbers, 4th row as email address, 5th row as tagged.
 
 
