@@ -51,12 +51,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Zachary Chan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ardentsoul.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[<img src="images/github-icon.png" width="50px">](https://github.com/Ardentsoul)
+[<img src="images/portfolio-icon.png" width="50px">](team/ardentsoul.md)
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Quality Assurance
