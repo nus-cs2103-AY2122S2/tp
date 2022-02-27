@@ -38,12 +38,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Alex Teo
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/alexteo98.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/alexteo98)][[portfolio](team/alexteo98.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
