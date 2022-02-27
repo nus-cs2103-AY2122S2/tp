@@ -257,56 +257,69 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
+* real estate agent
+* has a need to manage clients in an organized fashion 
+* mainly uses desktop for work
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Able to keep track of client's preferences, housing details and budget
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                             | I want to …​                                                                     | So that I can…​                                     |
+|--------|-------------------------------------|----------------------------------------------------------------------------------|-----------------------------------------------------|
+| `* * *` | housing agent with many clients     | view client details fast                                                         | can deal with customers easily when they contact me |
+| `* * *` | housing agent                       | add a new client quickly with a quick description                                | update my client list efficiently                   |
+| `* * *` | housing agent                       | see relevant information about my clients                                        | understand their needs                              |
+| `* * *` | housing agent                       | edit my client data                                                              | stay in touch with their changing needs             |
+| `* * *` | housing agent                       | delete a client when their house has been sold or after they have bought a house | not mix up information in the future                |
+| `* * *` | housing agent                       | access some of my favourite clients quickly                                      | always focus on them                                |
+| `* * *` | housing agent                       | "tag" my clients with custom text                                                | remember every client easily                        |
+| `* * *` | housing agent with too many clients | be able to find a client by name                                                 | locate them easily and quickly                      |
+| `* *`  | housing agent                       | have access to my search history                                                 | look up my recently contacted clients               |
+| `* *`  | new user                            | have a quick guide to start me off                                               | learn how to use the application                    |
+| `* *`  | housing agent                       | check my important deadlines                                                     | avoid missing important meetings with my clients    |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `AgentSee` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a client**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User types in client information
+2.  AddressBook adds the new client
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The wrong format is used.
 
-  Use case ends.
+  * 1a1. System shows an error message.
 
-* 3a. The given index is invalid.
+    Use case resumes at step 1.
 
-    * 3a1. AddressBook shows an error message.
+* 1b. A duplicate client is entered.
 
-      Use case resumes at step 2.
+    * 1b. System shows an error message.
+
+      Use case resumes at step 1.
+
+*{More to be added}*
+
+**Use case: Edit a client**
+
+*{More to be added}*
+
+**Use case: Delete a client**
 
 *{More to be added}*
 
