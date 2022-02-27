@@ -3,10 +3,29 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+MyGM is a **desktop app for high school basketball team trainers to manage players’ contacts and data, optimized for use
+via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). 
+If you can type fast, MyGM can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
+  * Quick Start
+  * Features
+    * Adding a player/ team/ lineup/ schedule: add
+    * Deleting a player/ team/ lineup/ schedule: delete 
+    * Filtering players by position: filter 
+    * Marking the attendance of player: mark 
+    * Unmarking the attendance of players: unmark 
+    * Tagging players by their position: tag 
+    * Viewing the summary: view 
+    * Finding a lineup or player: find 
+    * Putting a player to a team/ lineup: put 
+    * Updating a player/ team/ lineup/ schedule: update 
+    * Saving the data: save 
+    * Loading data from user-specified file: load 
+    * Clearing all data: clear
+  * FAQ
+  * Command Summary 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -14,9 +33,9 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `MyGM.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your MyGM.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -44,23 +63,18 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `UPPER_CASE` are the parameters to be supplied by the user.  
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+* Items in square brackets are optional.  
+  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/PG` or as `n/John Doe`.
+* Items with …​ after them can be used multiple times including zero times.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/SF`, `t/PF t/C` etc.
+* Parameters can be in any order.  
+  e.g. if the command specifies `n/NAME p/PHONE_NUMBER, p/PHONE_NUMBER n/NAME` is also acceptable.
+* If a parameter is expected only once in the command but you have specified it multiple times, only the last occurrence of the parameter will be taken.  
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
-
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.  
+  e.g. if the command specifies `help 123`, it will be interpreted as help.
 
 </div>
 
@@ -73,19 +87,54 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a player/ team/ lineup/ schedule: `add`
 
-Adds a person to the address book.
+Adds a player/ team/ lineup/ schedule to MyGM.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+**To add a player:**  
+Format: `add P/ n/NAME a/AGE j/JERSY_NUMBER w/WEIGHT h/HEIGHT p/PHONE_NUMBER e/EMAIL_ADDRESS`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+* Adds a player with the specified attributes to the player list in MyGM.
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add P/ n/John Doe a/17 j/3 w/69 h/188 p/98765432 e/johnd@example.com` Adds a player by the name of John Doe, 
+who is age of 17, jersey number of 3, weight of 69kg, height of 188cm, handphone number of 98765432
+and email of johnd@example.com to the player list.`
+
+**To add a team:**  
+Format: `add T/ n/TEAM_NAME [P/PLAYER]…​`
+* Adds a team with the specified team name in MyGM.
+* If `n/TEAM_NAME` and `P/PLAYER` are specified, a team with the specified `TEAM_NAME` and the specified `PLAYER`
+  added into team `TEAM_NAME`.
+* Multiple `PLAYER` can be specified.
+* The `PLAYER` specified **must already exist** in MyGM.
+
+Examples:
+* `add T/ n/Huskers` Creates a team by the name of `Huskers` only.
+* `add T/ n/Huskers  P/John Doe P/James` Doe Creates a team by the name of `Huskers` with players `John Doe` and `James Doe`
+added to team `Huskers`.
+
+**To add a lineup:**  
+Format: `add L/ n/LINEUP_NAME T/TEAM [P/PLAYER]…​`
+* Adds a lineup with the specified `LINEUP_NAME` inside `TEAM`.
+* If `n/LINEUP_NAME`, `T/TEAM` and `P/PLAYER` are specified, a lineup with the specified `LINEUP_NAME` 
+with the specified `PLAYER` added to this lineup will also be added to `TEAM`.
+* Multiple `PLAYER` can be specified but it will be **capped at 5**.
+* Both the team `TEAM` and the `PLAYER` specified **must already exist** in MyGM.
+
+Examples:
+* `add L/ n/starting five T/Balluba` adds a lineup by the name of `starting five` inside team `Balluba`.
+* `add L/ n/starting five T/Balluba P/James P/Curry P/Harden P/Durant P/Embiid` adds a lineup by the name of `starting five`
+inside team `Balluba`. Players `James`, `Curry`, `Harden`, `Durant` and `Embiid` are also added to the lineup `starting five`.
+
+**To add a schedule:**  
+Format: `add S/ T/TEAM n/DESCRIPTION d/DATETIME`
+* Adds a schedule with the description of `DESCRIPTION` and the date time of `DATETIME` inside the specified team `TEAM`.
+* `TEAM` specified **must already exists** in MyGM
+* `DATETIME` must be in a date time format.
+
+Examples:
+* `add S/ n/Yabuda d/competition d/22/02/2022 0900` adds a schedule with the description of `competition` that is held on `22/02/2022 0900` inside team `Yabuda`.
 
 ### Listing all persons : `list`
 
@@ -127,6 +176,20 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+### Tagging a player by their position: `tag`
+
+Tag a player by their position. Position includes: Point Guard (PG), Shooting Guard(SG), Small Forward(SF), 
+Power Forward(PF) and Centre(C).
+
+Format: `tag P/PLAYER t/TAG…​`
+* Tags the specified `PLAYER` with the position of `TAG`
+* The specified `PLAYER` can be tagged with a multiple `TAG`
+* The `PLAYER` specified **must already exist** in MyGM.
+
+Examples:
+* `tag P/LBJ t/SF tags` the player `LBJ` with the position of `SF` only.
+* `tag P/LBJ t/PG t/SG t/PF` tags the player `LBJ` with the position of `PG`, `SF` and `PF`.
 
 ### Deleting a person : `delete`
 
@@ -174,19 +237,25 @@ _Details coming soon ..._
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
 Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
+--------|-----------------------------------------------------
+**Add** | `add P/ n/NAME a/AGE j/JERSY_NUMBER w/WEIGHT h/HEIGHT p/PHONE_NUMBER e/EMAIL_ADDRESS`<br>e.g. `add P/ n/John Doe a/17 j/3 w/69 h/188 p/98765432 e/johnd@example.com`<br> `add T/ n/TEAM_NAME [P/PLAYER]…​`<br> e.g. `add T/ n/Huskers  P/John Doe  P/James Doe<br>add L/ n/LINEUP_NAME T/TEAM [P/PLAYER]…​`<br>e.g. `add L/ n/starting five T/Balluba P/James P/Curry P/Harden P/Durant P/Embiid`<br>`add S/ T/TEAM n/DESCRIPTION d/DATETIME`<br>e.g. `add S/ T/Yabuda n/competition d/22/02/2022 0900`
+**Delete** | `xxx`<br>e.g.`xxx`
+**View** | `xxx`<br> e.g.`xxx`
+**Tag** | `tag P/PLAYER t/TAG…​`<br>e.g. `tag P/LBJ t/SF`
+**Put** | `xxx`<br> e.g.`xxx`
+**Mark** | `xxx`<br> e.g.`xxx`
+**Unmark** | `xxx`<br> e.g.`xxx`
+**Filter** | `xxx`<br> e.g.`xxx`
+**Update** | `xxx`<br> e.g.`xxx`
+**Find** | `xxx`<br> e.g.`xxx`
+**Save** | `xxx`<br> e.g.`xxx`
+**Load** | `xxx`<br> e.g.`xxx`
+**Clear** | `xxx`<br> e.g.`xxx`
 **Help** | `help`
