@@ -19,6 +19,7 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final ClassCode classCode;
 
     // Data fields
     private final Address address;
@@ -26,16 +27,19 @@ public class Person {
     
     private Status status;
 
+
+
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Status status, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Status status, ClassCode classCode, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.status = status;
+        this.classCode = classCode;
         this.tags.addAll(tags);
     }
 
@@ -57,6 +61,10 @@ public class Person {
 
     public Status getStatus() {
         return status;
+    }
+
+    public ClassCode getClassCode() {
+        return classCode;
     }
 
     /**
@@ -100,13 +108,14 @@ public class Person {
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getTags().equals(getTags())
-                && otherPerson.getStatus().equals(getStatus());
+                && otherPerson.getStatus().equals(getStatus())
+                && otherPerson.getStatus().equals(getClassCode());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, status, tags);
+        return Objects.hash(name, phone, email, address, status, classCode, tags);
     }
 
     @Override
@@ -120,7 +129,9 @@ public class Person {
                 .append("; Address: ")
                 .append(getAddress())
                 .append("; Status: ")
-                .append(getStatus());
+                .append(getStatus())
+                .append("; Class Code: ")
+                .append(getClassCode());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
@@ -129,5 +140,4 @@ public class Person {
         }
         return builder.toString();
     }
-
 }
