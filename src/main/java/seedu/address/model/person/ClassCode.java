@@ -4,27 +4,27 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Student's classroom in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidClassroom(String)}
+ * Represents a Student's class code in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidClassCode(String)}
  */
-public class StudentClass {
+public class ClassCode {
 
 
     /**
-     * Constructs a {@code Classroom}.
+     * Constructs a {@code classCode}.
      *
-     * @param classroom A valid classroom.
+     * @param classCode A valid class code.
      */
-    public StudentClass(String classroom) {
-        requireNonNull(classroom);
+    public ClassCode(String classCode) {
+        requireNonNull(classCode);
 //        checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
 //        value = phone;
     }
 
     /**
-     * Returns true if a given string is a valid classroom.
+     * Returns true if a given string is a valid class code.
      */
-    public static boolean isValidClassroom(String test) {
+    public static boolean isValidClassCode(String test) {
         return true;
     }
 }
