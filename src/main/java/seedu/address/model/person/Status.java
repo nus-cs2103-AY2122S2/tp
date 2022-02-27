@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's phone number in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
+ * Represents a Person's covid test status  in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidStatus(String)}
  */
 public class Status {
 
@@ -16,9 +16,9 @@ public class Status {
     public final String value;
 
     /**
-     * Constructs a {@code Phone}.
+     * Constructs a {@code Status}.
      *
-     * @param phone A valid phone number.
+     * @param status Covid status of student
      */
     public Status(String status) {
         requireNonNull(status);
@@ -27,7 +27,7 @@ public class Status {
     }
 
     /**
-     * Returns true if a given string is a valid phone number.
+     * Returns true if a given string is a valid covid status
      */
     public static boolean isValidStatus(String test) {
         boolean isValid = false;
