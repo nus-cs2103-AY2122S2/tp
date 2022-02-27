@@ -46,8 +46,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github]](http://github.com/arcornior)
 [[portfolio]](team/arcornior.md)
 
-* Role: Developer + Documentation
-* Responsibilities: *TBA
+* Role: Developer
+* Responsibilities:
+  * Documentation
 
 ### James Doe
 
