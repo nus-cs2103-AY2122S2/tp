@@ -257,14 +257,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a large number of clients
-* has a busy schedule with many appointments and meetings
-* needs to know when he is free very quickly
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Needs to manage a large number of contacts
+* Has a busy schedule with many appointments and meetings
+* Needs to know when he is free very quickly
+* May need documents or information related to contacts or meetings
+* Prefers keyboard over mouse interactions for on-the-go usage
+* Is reasonably comfortable using apps with text-based inputs
 
-**Value proposition**: Allows efficient management of a large list of contacts together with a schedule, providing an integrated solution for work-related issues.
+**Value proposition**: Allows efficient management of a large list of contacts together with a schedule, providing an integrated solution for tracking work-related information.
 
 
 ### User stories
