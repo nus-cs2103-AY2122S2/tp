@@ -16,7 +16,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/whoisjunhong)]
 [[portfolio](team/whoisjunhong.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: Backend
 
 ### Joshua Yap
 
@@ -25,8 +26,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/e0544333)]
 [[portfolio](team/e0544333.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer
+* Responsibilities: Backend
 
 ### Louis Davin Lie
 
@@ -36,7 +37,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/louisdavinlie.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Backend
 
 ### Tan Yong Rui
 
@@ -46,7 +47,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/fenway17.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Backend
 
 ### Lye Zi Foong
 
@@ -56,4 +57,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/lzf834.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Backend
