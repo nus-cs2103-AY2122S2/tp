@@ -142,6 +142,49 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Adding positions : `posadd`
+
+Adds a new open position to HireLah.
+Format: `posadd POSITION_NAME n/NUM_OPENINGS [d/DESCRIPTION] [r/REQUIREMENTS]`
+* Positions must have a **unique name**.
+* Name provided is case-insensitive.
+* Number of openings in the position must be **0 or more** 0, 1, 2, …​
+
+Examples:
+* `posadd Senior Software Engineer n/3 d/More than 5 years experience r/JavaScript r/HTML r/CSS`
+
+### Edit positions : `posedit`
+
+Edit an existing position in HireLah.
+Format: `posedit POSITION_NAME [n/NUM_OPENINGS] [d/DESCRIPTION] [r/REQUIREMENTS]`
+
+* Edits the available position with POSITION_NAME.
+* Position name provided is case-insensitive.
+* At least one optional field must be provided.
+* Existing attributes of the position will be updated to the input value.
+* When editing requirements, the existing requirements of the position will be removed. i.e. adding requirements is not cumulative. 
+* Requirements can be removed by providing an empty requirement field. i.e. r/
+
+Examples:
+* `posedit Senior Frontend Software Engineer n/5`
+* `posedit Senior Frontend Software Engineer r/JavaScript r/React`
+
+### Delete positions : `posdel`
+
+Deletes an existing position in HireLah.
+Format: `posdel POSITION_NAME`
+* Existing position with the specified name is deleted.
+* The position name has to match with the position that is to be deleted.
+* Position name provided is case-insensitive.
+
+Examples:
+* `posdel Senior Frontend Software Engineer`
+
+### List Positions : `poslist`
+
+Lists all existing positions in HireLah.
+Format: `poslist`
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
