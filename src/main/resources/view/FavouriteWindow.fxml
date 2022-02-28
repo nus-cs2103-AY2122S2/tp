@@ -21,45 +21,38 @@
             <URL value="@DarkTheme.css" />
             <URL value="@Extensions.css" />
          </stylesheets>
-         <root>
-            <VBox>
-               <children>
-                  <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
-                     <menus>
-                        <Menu mnemonicParsing="false" text="File">
-                           <items>
-                              <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
-                           </items>
-                        </Menu>
-                        <Menu mnemonicParsing="false" text="Help">
-                           <items>
-                              <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
-                           </items>
-                        </Menu>
-                     </menus>
-                  </MenuBar>
-                  <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
-                     <padding>
-                        <Insets bottom="5" left="10" right="10" top="5" />
-                     </padding>
-                  </StackPane>
-                  <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" styleClass="pane-with-border" VBox.vgrow="NEVER">
-                     <padding>
-                        <Insets bottom="5" left="10" right="10" top="5" />
-                     </padding>
-                  </StackPane>
-                  <VBox fx:id="personList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
-                     <padding>
-                        <Insets bottom="10" left="10" right="10" top="10" />
-                     </padding>
-                     <children>
-                        <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
-                     </children>
-                  </VBox>
-                  <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
-               </children>
-            </VBox>
-         </root>
+         <VBox>
+            <children>
+               <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
+                  <menus>
+                     <Menu mnemonicParsing="false" text="File">
+                        <items>
+                           <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
+                        </items>
+                     </Menu>
+                  </menus>
+               </MenuBar>
+               <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
+                  <padding>
+                     <Insets bottom="5" left="10" right="10" top="5" />
+                  </padding>
+               </StackPane>
+               <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" styleClass="pane-with-border" VBox.vgrow="NEVER">
+                  <padding>
+                     <Insets bottom="5" left="10" right="10" top="5" />
+                  </padding>
+               </StackPane>
+               <VBox fx:id="personList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+                  <padding>
+                     <Insets bottom="10" left="10" right="10" top="10" />
+                  </padding>
+                  <children>
+                     <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                  </children>
+               </VBox>
+               <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
+            </children>
+         </VBox>
       </Scene>
    </scene>
 </Stage>

@@ -1,13 +1,17 @@
 package seedu.address.ui;
 
+import java.net.URL;
+import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
@@ -23,16 +27,10 @@ public class FavouriteWindow extends UiPart<Stage> {
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-    private Stage primaryStage;
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
-    private ResultDisplay resultDisplay;
-    private HelpWindow helpWindow;
-
-    @javafx.fxml.FXML
-    private StackPane commandBoxPlaceholder;
 
     @FXML
     private MenuItem helpMenuItem;
@@ -40,67 +38,32 @@ public class FavouriteWindow extends UiPart<Stage> {
     @FXML
     private StackPane personListPanelPlaceholder;
 
-    @FXML
-    private StackPane resultDisplayPlaceholder;
-
-    @FXML
-    private StackPane statusbarPlaceholder;
-
     /**
-     * Creates a {@code FavouriteWindow} with the given {@code Stage} and {@code Logic}.
+     * Sets up Logic instance in FavoriteWindow
      */
-    public FavouriteWindow(Stage root, Logic logic) {
-        super(FXML, root);
-
-        // Set dependencies
-        this.primaryStage = root;
+    public FavouriteWindow(Logic logic) {
+        super(FXML);
         this.logic = logic;
-
-        // Configure the UI
-        setWindowDefaultSize(logic.getGuiSettings());
-
-        helpWindow = new HelpWindow();
-    }
-
-    public Stage getPrimaryStage() {
-        return primaryStage;
     }
 
     /**
-     * Fills up all the placeholders of this window.
+     * Closes the application.
      */
-    void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
-
-        resultDisplay = new ResultDisplay();
-        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
-
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
-        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+    @FXML
+    private void handleExit() {
+        GuiSettings guiSettings = new GuiSettings(getRoot().getWidth(), getRoot().getHeight(),
+                (int) getRoot().getX(), (int) getRoot().getY());
+        logic.setGuiSettings(guiSettings);
+        getRoot().hide();
     }
 
-    /**
-     * Sets the default size based on {@code guiSettings}.
-     */
-    private void setWindowDefaultSize(GuiSettings guiSettings) {
-        primaryStage.setHeight(guiSettings.getWindowHeight());
-        primaryStage.setWidth(guiSettings.getWindowWidth());
-        if (guiSettings.getWindowCoordinates() != null) {
-            primaryStage.setX(guiSettings.getWindowCoordinates().getX());
-            primaryStage.setY(guiSettings.getWindowCoordinates().getY());
-        }
-    }
-
-
-    void show() {
+    public void show() {
+        logger.fine("Showing Favourite Window.");
         getRoot().show();
         getRoot().centerOnScreen();
     }
 
-
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
-
 }
