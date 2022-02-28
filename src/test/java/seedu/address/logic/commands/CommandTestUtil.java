@@ -26,6 +26,12 @@ import seedu.address.testutil.EditCompanyDescriptorBuilder;
  */
 public class CommandTestUtil {
 
+    public static final String VALID_DEADLINE_SOFTWARE_ENGINEER = "01-01-2021 00:00";
+    public static final String VALID_NAME_SOFTWARE_ENGINEER = "Software engineer";
+    public static final String VALID_STIPEND_SOFTWARE_ENGINEER = "8888";
+    public static final String VALID_STATUS_SOFTWARE_ENGINEER = "offered";
+    public static final String VALID_DESCRIPTION_SOFTWARE_ENGINEER = "Develop web applications.";
+
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "11111111";

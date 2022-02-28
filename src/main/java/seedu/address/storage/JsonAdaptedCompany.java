@@ -15,6 +15,7 @@ import seedu.address.model.company.Company;
 import seedu.address.model.company.Email;
 import seedu.address.model.company.Name;
 import seedu.address.model.company.Phone;
+import seedu.address.model.role.Role;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -29,6 +30,7 @@ class JsonAdaptedCompany {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final List<JsonAdaptedRole> roles = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedCompany} with the given company details.
@@ -36,13 +38,17 @@ class JsonAdaptedCompany {
     @JsonCreator
     public JsonAdaptedCompany(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                               @JsonProperty("email") String email, @JsonProperty("address") String address,
-                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+                              @JsonProperty("roles") List<JsonAdaptedRole> roles) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         if (tagged != null) {
             this.tagged.addAll(tagged);
+        }
+        if (roles != null) {
+            this.roles.addAll(roles);
         }
     }
 
@@ -57,6 +63,9 @@ class JsonAdaptedCompany {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        roles.addAll(source.getRoleManager().getRoles().stream()
+                .map(JsonAdaptedRole::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -68,6 +77,11 @@ class JsonAdaptedCompany {
         final List<Tag> companyTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
             companyTags.add(tag.toModelType());
+        }
+
+        final List<Role> companyRoles = new ArrayList<>();
+        for (JsonAdaptedRole role : roles) {
+            companyRoles.add(role.toModelType());
         }
 
         if (name == null) {
@@ -103,7 +117,10 @@ class JsonAdaptedCompany {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(companyTags);
-        return new Company(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+
+        final List<Role> modelRoles = new ArrayList<>(companyRoles);
+
+        return new Company(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelRoles);
     }
 
 }

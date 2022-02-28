@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.CompanyBuilder;
 
-public class NameContainsKeywordsPredicateTest {
+public class RoleNameContainsKeywordsPredicateTest {
 
     @Test
     public void equals() {

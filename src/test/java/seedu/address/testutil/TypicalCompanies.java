@@ -30,7 +30,8 @@ public class TypicalCompanies {
     public static final Company BENSON = new CompanyBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withTags("owesMoney", "friends").build();
+            .withTags("owesMoney", "friends")
+            .w.build();
     public static final Company CARL = new CompanyBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").build();
     public static final Company DANIEL = new CompanyBuilder().withName("Daniel Meier").withPhone("87652533")
