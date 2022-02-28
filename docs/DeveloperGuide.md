@@ -322,6 +322,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * Use case ends. 
 
+* 1c. The person already exists
+
+    * 1c1. ContaX shows an error message indicating that the person already exists
+
+    * Use case ends. 
+
 **Use case: Delete a person**
 
 **MSS**
@@ -382,6 +388,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to list appointments
 2. ContaX shows a list of appointments
 
+    Use case ends.
+
 **Extensions**
 
 * 1a. The list is empty
@@ -392,8 +400,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to add a appointment
+1. User requests to add an appointment
 2. ContaX adds the appointment
+
+    Use case ends.
 
 **Extensions**
 
@@ -405,6 +415,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1b. The parameter given is in an invalid format
 
     * 1b1. ContaX shows an error message indicating that the given parameter is of invalid format. 
+
+    * Use case ends. 
+
+* 1c. The appointment already exists
+
+    * 1c1. ContaX shows an error message indicating that the appointment already exists
 
     * Use case ends. 
 
