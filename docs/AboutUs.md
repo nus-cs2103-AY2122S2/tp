@@ -38,7 +38,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Documentation
 * Responsibilities: Parsing input
 
-### Jean Doe
+### Ryan Walter Lee
 
 <img src="images/ryanwalterlee.png" width="200px">
 
