@@ -378,17 +378,20 @@ Use case ends.
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold up to `100` players without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Should have a _friendly user interface_. 
+5. The system should respond within `2` seconds.
+6. Should there be any invalid command, the part of the command that causes this issue should be **highlighted**.
 
-*{More to be added}*
 
 ### Glossary
 
+* **Team**: A team contains the players from the same highschool basketball club.
+* **Lineup**: Part of a team that plays together on the court, typically consisting of 5 players.
+* **Schedule**: Event of a team, including training and competitions.
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
