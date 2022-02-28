@@ -3,10 +3,13 @@ layout: page
 title: User Guide
 ---
 
-ModuleMateFinder Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+ModuleMateFinder Level 3 (MMF3) is a **desktop app for managing contacts in your educational organization, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, MMF3 can get your contact management tasks done faster than traditional GUI apps.
 
-* Table of Contents
-
+- [Quick Start](#quick-start)
+- [Features](#features)
+  - [Quick Jump](#quick-jump)
+- [FAQ](#faq)
+- [Command Summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -42,6 +45,8 @@ ModuleMateFinder Level 3 (AB3) is a **desktop app for managing contacts, optimiz
 
 ModuleMate Finder is a desktop app that allows students to find people taking the same modules as them, easily and efficiently
 
+<div markdown="block" class="alert alert-info">
+
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
@@ -62,10 +67,12 @@ ModuleMate Finder is a desktop app that allows students to find people taking th
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+</div>
+
 ### Quick Jump
 - [Help](#viewing-help--help)
 - [List](#listing-all-persons--list)
-- [Add](#adding-a-person-add)
+- [Add](#adding-a-person--add)
 - [Delete](#deleting-a-person--delete)
 - [Edit](#editing-a-person--edit)
 - [Clear](#clearing-all-entries--clear)
@@ -87,7 +94,7 @@ Shows a list of all persons in ModuleMate Finder.
 
 Format: `list`
 
-### Adding a person: `add`
+### Adding a person : `add`
 
 Adds a person to ModuleMate Finder.
  
