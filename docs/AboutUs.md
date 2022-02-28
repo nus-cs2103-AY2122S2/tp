@@ -19,6 +19,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: TBA
 
+### Benjamin Tay Keck Bin
+
+<img src="images/btaykb.png" width="200px">
+
+[[github](https://github.com/Btaykb)]
+[[portfolio](team/btaykb.md)]
+
+* Role: Developer
+* Responsibilities: TBC
+
 ### Jane Doe
 
 <img src="images/johndoe.png" width="200px">
@@ -29,18 +39,19 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Julio Harjo
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/junlee1991.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/junlee1991)] 
+[[portfolio](team/junlee1991.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
 ### Wei Jie
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/bakano98.png" width="200px">
 
 [[github](http://github.com/bakano98)]
 [[portfolio](team/bakano98.md)]
@@ -50,7 +61,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Law Wei Ming
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/lawwm.png" width="200px">
 
 [[github](http://github.com/lawwm)]
 [[portfolio](team/lawwm.md)]

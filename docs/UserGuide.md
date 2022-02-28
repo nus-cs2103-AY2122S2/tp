@@ -40,12 +40,12 @@ ModuleMateFinder Level 3 (AB3) is a **desktop app for managing contacts, optimiz
 
 ## Features
 
-<div markdown="block" class="alert alert-info">
+ModuleMate Finder is a desktop app that allows students to find people taking the same modules as them, easily and efficiently
 
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`, `NAME`, `PHONE_NUMBER`, `EMAIL` and `ADDRESS`  are parameters which cannot be left empty. 
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
@@ -53,8 +53,8 @@ ModuleMateFinder Level 3 (AB3) is a **desktop app for managing contacts, optimiz
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Parameters has to be in order.<br>
+  e.g. if the command specifies `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`, then it must follow strictly that format.
 
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
@@ -136,35 +136,60 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in ModuleMate Finder.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Clearing all entries : `clear`
+### Deleting a module : `deletemodule`
 
-Clears all entries, based on the given flag, from ModuleMate Finder.
+Deletes the specified module from contact in ModuleMate Finder.
 
-Format: `clear -FLAG`
+Format: `deletemodule INDEX t/TAG...`
+
+* Deletes modules for the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* The modules will be deleted only if the person has the specified modules.
 
 Examples:
-- `clear -a` wipes all data from ModuleMate Finder.
-- `clear -c` wipes all contact details in ModuleMate Finder. Note that modules associated with contacts are also deleted
-- `clear -m` wipes _only_ module details in ModuleMate Finder.
+* `list` followed by `delete 2 t/CS3230` deletes the module CS3230 for the 2nd person in ModuleMate Finder.
+* `find Betsy` followed by `delete 1 t/CS2102 t/CS2040S` deletes the specified modules for the 1st person in the results of the `find` command.
 
-### Tagging a Person : `tag`
-Tags a person as favourite or blacklisted.
 
-Format: `tag INDEX -FLAG`
-- Gives a tag to the person at specified `INDEX`
-- Tag can either be a `blacklist` or `favourite`, indicated by using the flags `-b` or `-f` respectively.
+### Clearing all entries : `clear`
+
+Clears all entries from the address book.
+
+Format: `clear`
+
+Examples:
+- `clear` wipes all data from ModuleMate Finder.
+
+
+### Clearing all modules for a person : `clearmodules`
+
+Clears all modules based on the given index from ModuleMate Finder.
+
+Format: `clearmodules INDEX`
+
+Examples:
+- `clear 5` wipes all modules for person in index 5.
+
+
+### Set a status for a Person : `status`
+Sets a person's status as favourite or blacklisted.
+
+Format: `status INDEX s/STATUS`
+- Gives a status to the person at specified `INDEX`
+- Status can either be a `blacklist` or `favourite`, a person can have no status tagged.
 - `INDEX` must be a **positive integer** 1, 2, 3, ...
 
 Examples:
-- `tag 1 -f` tags the 1st person in ModuleMate Finder as favourite.
-- `tag 2 -b` tags the 2nd person in ModuleMate Finder as blacklisted.
+- `status 1 s/blacklist` tags the 1st person in ModuleMate Finder as blacklisted.
+- `status 2 s/favourite` tags the 2nd person in ModuleMate Finder as favourite.
 
 
 ### Locating a person: `find`
 
 Finds a person by the given flag and keyword.
 
-Format: `find -FLAG [INDICATOR]/KEYWORD`
+Format: `find KEYWORD [MORE_KEYWORDS]`
 
 - The search is case-insensitive. e.g `hans` will match `Hans`
 - Only the given flag + keyword is searched
@@ -175,8 +200,20 @@ Format: `find -FLAG [INDICATOR]/KEYWORD`
 
 Examples:
 * `find John` returns `john` and `John Doe`
-* `find -m c/CS3230` returns `Bob` if he takes the module CS3230
+* `find alex david` returns `Alex Yeoh`, `David Li`
 
+### Locating a person by their module: `filter`
+
+Finds a person by the given module code. 
+
+Format: `filter t/TAG`
+
+- Only the given flag + keyword is searched
+- Keyword not matching the indicator is ignored
+- Valid module code have 2-3 prefix letters followed by 4 digits and one optional letter.
+
+Examples:
+* `filter t/CS3230`  will find all persons with the module CS3230
 
 ### Exiting the program : `exit`
 
@@ -207,19 +244,24 @@ _Details coming soon ..._
 
 ## FAQ
 
-_To be compiled..._
+Q: Are all modules offered by NUS available in ModuleMateFinder
+
+A: As long as the module offered can be found in NUSmod, it will be available on ModuleMateFinder as well.  
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
-Action | Format                                                                                               | Examples                                                              
---------|------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------
-**List** | `list -flags`                                                                                        | `list -m`, `list -c`                                                  
-**Add** | `add index -m c/CODE`<br/>`add -c n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`                           | `add 2 -m c/CS1231`<br/>`add -c n/Bob p/87654321 e/bob@u.nus.edu`        
-**Delete** | `delete index`, `delete index -m c/CODE`</br> `delete index -t t/TAG`, `delete 1 -ta`                | `delete `, `delete 1 -m c/CS1231` `delete 1 -ta` <br/>`delete 1 -t t/favourite`
-**Edit** | `edit index -c [n/NAME] [c/CODE] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` **brackets indicate optional | `edit 1 -c n/Alice`                                                   
-**Clear** | `clear -flags`                                                                                       | `clear -m`, `clear -c`, `clear -a`
-**Tag** | `tag index -f`, `tag index -b`                                                                       | `tag 2 -f`, `tag 3 -b`
-**Find** | `find -m c/CODE` `find -n n/NAME`                                                                    | `find -m c/CS3230`, `find -n n/Bob`
+Action | Format                                                                                             | Examples                                                              
+--------|----------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------
+**List** | `list -flags`                                                                                      | `list -m`, `list -c`                                                  
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`                                                      | `add n/Bob p/87654321 e/bob@u.nus.edu`        
+**Delete** | `delete index`                                                                                     | `delete 3`
+**Delete Module** | `deletemodule index t/TAG`...                                                                      | `deletemodule 1 t/CS1231`
+**Edit** | `edit index [n/NAME] [c/CODE] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` **brackets indicate optional | `edit 1 -c n/Alice`                                                   
+**Clear** | `clear`                                                                                            | `clear`
+**Clear Modules** | `clear INDEX`                                                                                      | `clear 3`
+**Status** | `status INDEX s/STATUS`                                                                            | `status 2 s/favourite`
+**Find** | `find KEYWORD [MORE_KEYWORDS]`                                                                     | `find James Jake`
+**Filter** | `filter t/TAG`                                                                                     | `filter t/CS3230`
 
