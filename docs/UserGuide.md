@@ -222,7 +222,7 @@ Deletes the specified tag in Contax.
 Format: `deletetag n/TAGNAME`
 
 * The `TAGNAME` parameter **must** be specified.
-* Deletes the tag that matches the tag name (case-insensitive) e.g. `students` is the same as `Students`.
+* Deletion is case-insensitive e.g. `students` is the same as `Students`.
 * When the tag is deleted, contacts that contain this tag will have the tag removed.
 * If `TAGNAME` cannot be found, the command will not execute.
 
