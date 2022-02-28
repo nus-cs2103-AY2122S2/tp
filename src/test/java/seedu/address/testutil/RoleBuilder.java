@@ -2,8 +2,8 @@ package seedu.address.testutil;
 
 import seedu.address.model.role.Deadline;
 import seedu.address.model.role.Description;
-import seedu.address.model.role.RoleName;
 import seedu.address.model.role.Role;
+import seedu.address.model.role.RoleName;
 import seedu.address.model.role.Status;
 import seedu.address.model.role.Stipend;
 

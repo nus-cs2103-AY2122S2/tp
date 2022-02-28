@@ -81,7 +81,7 @@ public class LogicManagerTest {
         // Execute add command
         String addCompanyCommand = AddCompanyCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + ADDRESS_DESC_AMY;
-        Company expectedCompany = new CompanyBuilder(AMY).withTags().build();
+        Company expectedCompany = new CompanyBuilder(AMY).withTags().withRoles().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addCompany(expectedCompany);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;

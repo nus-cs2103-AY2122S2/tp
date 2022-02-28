@@ -1,6 +1,5 @@
 package seedu.address.model.util;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -27,10 +26,10 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
 
     private static final Role SAMPLE_ROLE_1 = new Role(new RoleName("Software engineer"),
-            new Status("pending"), new Deadline("27-02-2022"), new Description("Backend engineer"),
+            new Status("pending"), new Deadline("27-02-2022 18:00"), new Description("Backend engineer"),
             new Stipend("1000"));
     private static final Role SAMPLE_ROLE_2 = new Role(new RoleName("Software engineer"),
-            new Status("pending"), new Deadline("28-02-2022"), new Description("Frontend engineer"),
+            new Status("pending"), new Deadline("28-02-2022 22:00"), new Description("Frontend engineer"),
             new Stipend("1000"));
 
     private static final List<Role> SAMPLE_ROLES_1 = Arrays.asList(SAMPLE_ROLE_1);

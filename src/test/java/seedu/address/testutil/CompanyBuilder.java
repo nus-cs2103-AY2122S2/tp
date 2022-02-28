@@ -72,7 +72,7 @@ public class CompanyBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code Company} that we are building.
+     * Parses the {@code roles} into a {@code ArrayList<Role>} and set it to the {@code Company} that we are building.
      */
     public CompanyBuilder withRoles(Role... roles) {
         this.roles = SampleDataUtil.getRoleList(roles);
@@ -128,7 +128,7 @@ public class CompanyBuilder {
     }
 
     public Company build() {
-        return new Company(name, phone, email, address, tags);
+        return new Company(name, phone, email, address, tags, roles);
     }
 
 }

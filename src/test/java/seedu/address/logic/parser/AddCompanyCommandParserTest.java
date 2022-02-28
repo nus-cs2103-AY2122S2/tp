@@ -32,6 +32,7 @@ import static seedu.address.testutil.TypicalCompanies.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCompanyCommand;
+//import seedu.address.model.company.Address;
 import seedu.address.model.company.Company;
 import seedu.address.model.company.Email;
 import seedu.address.model.company.Name;
@@ -76,22 +77,22 @@ public class AddCompanyCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Company expectedCompany = new CompanyBuilder(AMY).withTags().build();
+        Company expectedCompany = new CompanyBuilder(AMY).withTags().withRoles().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
                 new AddCompanyCommand(expectedCompany));
 
         // missing phone prefix and value
-        expectedCompany = new CompanyBuilder(BOB).withTags().withoutPhone().build();
+        expectedCompany = new CompanyBuilder(BOB).withTags().withoutPhone().withRoles().build();
         assertParseSuccess(parser, NAME_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
                 new AddCompanyCommand(expectedCompany));
 
         // missing email prefix and value
-        expectedCompany = new CompanyBuilder(BOB).withTags().withoutEmail().build();
+        expectedCompany = new CompanyBuilder(BOB).withTags().withoutEmail().withRoles().build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + ADDRESS_DESC_BOB,
                 new AddCompanyCommand(expectedCompany));
 
         // missing address prefix
-        expectedCompany = new CompanyBuilder(BOB).withTags().withoutAddress().build();
+        expectedCompany = new CompanyBuilder(BOB).withTags().withoutAddress().withRoles().build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB,
                 new AddCompanyCommand(expectedCompany));
     }
@@ -124,8 +125,8 @@ public class AddCompanyCommandParserTest {
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
 
         // invalid address
-        //assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-        //        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Address.MESSAGE_CONSTRAINTS);
+        // assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
+        // + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Address.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB

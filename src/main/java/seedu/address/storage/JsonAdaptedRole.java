@@ -1,13 +1,13 @@
 package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.role.Deadline;
 import seedu.address.model.role.Description;
-import seedu.address.model.role.RoleName;
 import seedu.address.model.role.Role;
+import seedu.address.model.role.RoleName;
 import seedu.address.model.role.Status;
 import seedu.address.model.role.Stipend;
 
@@ -25,7 +25,9 @@ public class JsonAdaptedRole {
      * Constructs a {@code JsonAdaptedRole} with the given fields.
      */
     @JsonCreator
-    public JsonAdaptedRole(String name, String status, String deadline, String description, String stipend) {
+    public JsonAdaptedRole(@JsonProperty("name") String name, @JsonProperty("status") String status,
+                           @JsonProperty("deadline") String deadline, @JsonProperty("description") String description,
+                           @JsonProperty("stipend") String stipend) {
         this.name = name;
         this.status = status;
         this.deadline = deadline;
@@ -44,30 +46,31 @@ public class JsonAdaptedRole {
         stipend = source.getStipend().value;
     }
 
-    @JsonValue
-    public String getRoleName() {
-        return name;
-    }
+    //    @JsonValue
+    //    public String getRoleName() {
+    //        return name;
+    //    }
+    //
+    //    @JsonValue
+    //    public String getRoleStatus() {
+    //        return status;
+    //    }
+    //
+    //    @JsonValue
+    //    public String getRoleDeadline() {
+    //        return deadline;
+    //    }
+    //
+    //    @JsonValue
+    //    public String getRoleDescription() {
+    //        return description;
+    //    }
+    //
+    //    @JsonValue
+    //    public String getRoleStipend() {
+    //        return stipend;
+    //    }
 
-    @JsonValue
-    public String getRoleStatus() {
-        return status;
-    }
-
-    @JsonValue
-    public String getRoleDeadline() {
-        return deadline;
-    }
-
-    @JsonValue
-    public String getRoleDescription() {
-        return description;
-    }
-
-    @JsonValue
-    public String getRoleStipend() {
-        return stipend;
-    }
     /**
      * Converts this Jackson-friendly adapted tag object into the model's {@code Role} object.
      *
@@ -75,7 +78,8 @@ public class JsonAdaptedRole {
      */
     public Role toModelType() throws IllegalValueException {
         if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, RoleName.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    RoleName.class.getSimpleName()));
         }
         if (!RoleName.isValidName(name)) {
             throw new IllegalValueException(RoleName.MESSAGE_CONSTRAINTS);
@@ -83,7 +87,8 @@ public class JsonAdaptedRole {
         final RoleName modelRoleName = new RoleName(name);
 
         if (status == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Status.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Status.class.getSimpleName()));
         }
         if (!Status.isValidStatus(status)) {
             throw new IllegalValueException(Status.MESSAGE_CONSTRAINTS);
@@ -91,7 +96,8 @@ public class JsonAdaptedRole {
         final Status roleStatus = new Status(status);
 
         if (deadline == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Deadline.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Deadline.class.getSimpleName()));
         }
         if (!Deadline.isValidDeadline(deadline)) {
             throw new IllegalValueException(Deadline.MESSAGE_CONSTRAINTS);
@@ -99,7 +105,8 @@ public class JsonAdaptedRole {
         final Deadline roleDeadline = new Deadline(deadline);
 
         if (description == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Description.class.getSimpleName()));
         }
         if (!Description.isValidDescription(description)) {
             throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
@@ -107,7 +114,8 @@ public class JsonAdaptedRole {
         final Description roleDescription = new Description(description);
 
         if (stipend == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Stipend.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Stipend.class.getSimpleName()));
         }
         if (!Stipend.isValidStipend(stipend)) {
             throw new IllegalValueException(Stipend.MESSAGE_CONSTRAINTS);
