@@ -352,7 +352,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  A new user should be able to learn how to use all functions of the address book within 10 minutes.
-5.  Product should come with storage system, should not depend on external servers/Database Management Systems (DBMS)
+5.  Product should come with a storage system, and should not depend on external servers/Database Management Systems (DBMS)
 6.  Product should work without an installer.
 7.  Source code is open source.
 8.  Features should be easy to test, for both manual and automated testing.
