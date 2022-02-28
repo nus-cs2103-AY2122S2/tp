@@ -257,29 +257,61 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Needs to manage a large number of contacts
+* Has a busy schedule with many appointments and meetings
+* Needs to know when he is free very quickly
+* May need documents or information related to contacts or meetings
+* Prefers keyboard over mouse interactions for on-the-go usage
+* Is reasonably comfortable using apps with text-based inputs
+* Currently uses excel for managing contacts
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Allows efficient management of a large list of contacts together with a schedule, providing an integrated solution for tracking work-related information.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                     | I want to …​                                                                         | So that I can…​                                                     |
+| -------- | ------------------------------------------ | ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `* * *`  | beginner user                              | see usage instructions and tutorials                                                | remember how to perform certain tasks                                  |
+| `* * *`  | new user on my first run of the App        | see examples and onboarding guides                                                  | quickly learn how to use the application                               |
+| `*    `  | beginner user                              | see examples for all commands that can be used                                      | learn from them and modify them for my needs                           |
+| `* * *`  | user                                       | add a new person to my address book                                                 | record their information                                               |
+| `* * *`  | user                                       | list all the people in my address book                                              | see everyone in my address book                                        |
+| `* * *`  | user                                       | find a person by name                                                               | locate details of persons without having to go through the entire list |
+| `* *  `  | forgetful user                             | find a person by contact number, email or other attributes                          | find people even if I forget their name                                |
+| `* * *`  | user                                       | delete a person in my address book                                                  | remove people if I no longer need to remember them                     |
+| `* * *`  | user                                       | edit a person in my address book                                                    | update the information of various people when they change              |
+| `* * *`  | user keeping track of many kinds of people | add tags to persons in my address book                                              | group multiple contacts together as a broader category                 |
+| `* *  `  | power user                                 | find a person by tags                                                               | easily find subgroups of persons within my address book                |
+| `* * *`  | new user                                   | import data from an Excel compatible format                                         | transfer my current list of persons from an Excel document             |
+| `* *  `  | seasoned user                              | export my address book to an Excel compatible format                                | share my address book in a widely known document format                |
+| `*    `  | power user                                 | link documents to a person                                                          | easily locate related documents for a person                           |
+| `*    `  | power user                                 | unlink documents from a person                                                      | remove documents no longer required for a person                       |
+| `* * *`  | user                                       | create a new appointment in my schedule                                             | keep track of things that I need to do at different times              |
+| `* * *`  | user                                       | list all appointments in my schedule                                                | have an overview of all scheduled events                               |
+| `* *  `  | user                                       | edit the details of an appointment                                                  | respond to any changes in my schedule                                  |
+| `* * *`  | user                                       | delete an appointment                                                               | free up my schedule if events are cancelled                            |
+| `* * *`  | user                                       | find appointments within a range of dates                                           | plan my day(s) ahead of time                                           |
+| `*    `  | user                                       | view all appointments on a calendar interface                                       | get an overview of all my appointments in the month                    |
+| `* *  `  | user                                       | search for appointments by a person's name                                          | find all appointments related to a particular person                   |
+| `* *  `  | user                                       | be reminded of things that are happening on a particular day                        | remember to attend them                                                |
+| `* *  `  | power user                                 | add a to-do list to an appointment                                                  | be reminded to make preparations for that appointment                  |
+| `* *  `  | power user                                 | view the to-do list of an appointment                                               | ensure that I am fully prepared for the appointment                    |
+| `* *  `  | power user                                 | indicate if a task in the to-do list of an appointment is done                      | keep track of the things that are already done                         |
+| `* *  `  | power user                                 | search for appointments by tags and other filters                                   | easily find appointments amongst my large address book                 |
+| `* *  `  | power user                                 | link documents to an appointment                                                    | easily find them to prepare for my appointment                         |
+| `*    `  | seasoned user                              | export contact information to PDF                                                   | easily print mailing labels for contacts                               |
+| `* * *`  | seasoned user                              | directly edit the .json data file to add/edit persons                               | manage the address book faster                                         |
+| `* * *`  | seasoned user                              | export and import the .json file                                                    | easily transfer the data in ContaX across multiple users or devices    |
+| `*    `  | seasoned user                              | export all my data files as backup                                                  | have a copy of the contact list and import it in case of data loss     |
+| `* * *`  | seasoned user                              | enter commands that perform an action on multiple contacts in a single step         | efficiently manage my address book                                     |
+| `* *  `  | seasoned user                              | enter commands that perform an action on multiple appointments in a single step     | efficiently manage my schedule                                         |
+| `*    `  | seasoned user                              | customise the names and format of text-based commands                               | easily remember and use commands I need                                |
+| `* * *`  | seasoned user                              | batch multiple commands together                                                    | perform complex tasks in a single action                               |
+| `*    `  | seasoned user                              | add macros to chain multiple actions together as custom command                     | perform complex actions that I need in 1 command                       |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -321,7 +353,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Address Book**: The part of ContaX that keeps track of a list of Persons
+* **Schedule**: The part of ContaX that keeps track of Appointments 
 
 --------------------------------------------------------------------------------------------------------------------
 
