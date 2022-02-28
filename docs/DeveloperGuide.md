@@ -264,7 +264,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * is reasonably comfortable using CLI apps
 * School admins
 
-**Value proposition**: 
+**Value proposition**:
 * Manage contacts faster than a typical mouse/GUI driven app
 * To enable the school’s COVID-19 management task force to identify and implement the correct measures for students who are positive/close-contact
 
@@ -303,9 +303,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The person already exists.
-  
+
   * 2a1. UltimateDivocTracker shows an error message.
-  
+
   Use case ends.
 
 
@@ -345,12 +345,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The given name is invalid (cannot be found).
-  
+
   * 2a1. UltimateDivocTracker shows an error message.
 
   Use case ends.
-  
-  
+
+
 **Use case: Finding persons by status**
 
 **MSS**
@@ -371,8 +371,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 2a1. UltimateDivocTracker shows an error message.
 
   Use case ends.
-  
-  
+
+
 **Use case: Finding persons by class**
 
 **MSS**
@@ -409,7 +409,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The person cannot be found.
-  
+
   * 2a1. UltimateDivocTracker shows an error message.
 
   Use case ends.
@@ -429,8 +429,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Administrative requirements: there should be at least 1 DIVOCTracker admin to monitor data entries.
 5. Performance requirements: the display of students' information should be done within 2 seconds.
-6. Quality requirements: the system should be usable by a novice who has never administered COVID-19 statuses. 
-7. Notes about project scope: 
+6. Quality requirements: the system should be usable by a novice who has never administered COVID-19 statuses.
+7. Notes about project scope:
    1. DIVOCtracker is not required to handle user login and permissions.
    2. The central idea of the product is to provide a tracking tool for teachers/administrators to track COVID-19 in schools.
 

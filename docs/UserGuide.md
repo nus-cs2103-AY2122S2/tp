@@ -31,7 +31,7 @@ Ultimate DivocTracker is a desktop app for managing COVID-19 contacts in school 
 - Refer to the Features below for details of each command.
 
 
- 
+
 # Features
 ## Adding a person: `add`
 Adds a student to the tracking list
@@ -43,7 +43,7 @@ Adds a student to the tracking list
 ## Listing all persons : `list`
 Shows a list of all students in the address book.
 - Format: `list`
-  
+
 ## Find a student by name: `find_by_name`
 Find an existing student in the application by their name
 - Format: `find_by_name NAME`
@@ -91,7 +91,7 @@ Deletes the specified person from the address book.
 - Examples:
   - `list` followed by `delete_student 2` deletes the 2nd person in the address book.
   - find Betsy followed by `delete_student 1` deletes the 1st student in the results of the `find` command.
-             
+
 
 ## Exiting the program: `exit`
 Exits the program.
@@ -115,4 +115,5 @@ AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.
 | Find by class    | `find_by_class CLASS`<br/>e.g., `find_by_class 4A`                                                                                                                        |
 | List             | `list`                                                                                                                                                                    |
 | Update status    | `update_status INDEX STATUS`<br/>e.g., `update_status 54 positive`                                                                                                        |
-| Exit             | `exit`                                                                                                                                                                    |
+| Exit             | `exit`
+|

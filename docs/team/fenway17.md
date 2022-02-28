@@ -10,7 +10,7 @@ This project is based on the AddressBook-Level3 project created by the SE-EDU in
 Given below are my contributions to the project.
 
 * **New Feature**: Status attribute for persons (Pull request [\#32](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/32))
-  * What it does: Gives each person in the list a status attribute denoting their COVID-19 status. 
+  * What it does: Gives each person in the list a status attribute denoting their COVID-19 status.
   * Justification: Track COVID-19 status of each person
   * Highlights: Status can be `"Positive"`, `"Negative"` or `"Close-Contact"`
   * Credits: *{Collaborators: Yong Rui, Zi Foong}*
