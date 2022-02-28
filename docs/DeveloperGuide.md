@@ -506,19 +506,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 2a. TAssist detects an error in the entered command.
+* 2b. TAssist detects an error in the entered command.
 
-    * 2a1. TAssist prompts for the correct command.
+    * 2b1. TAssist prompts for the correct command.
 
-    * 2a2. TA enters a new command.
+    * 2b2. TA enters a new command.
 
-      Steps 2a1-2a2 are repeated until the command entered is correct.
+      Steps 2b1-2b2 are repeated until the command entered is correct.
 
       Use case resumes from step 3.
 
-* 3b. The given index is invalid.
+* 2c The given index is invalid.
 
-    * 3b1. TAssist shows an error message.
+    * 2c1. TAssist shows an error message.
 
       Use case resumes from step 2.
 
@@ -580,19 +580,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 2a. TAssist detects an error in the entered command.
+* 2b. TAssist detects an error in the entered command.
 
-    * 2a1. TAssist prompts for the correct command.
+    * 2b1. TAssist prompts for the correct command.
   
-    * 2a2. TA enters a new command.
+    * 2b2. TA enters a new command.
 
-      Steps 2a1-2a2 are repeated until the command entered is correct.
+      Steps 2b1-2b2 are repeated until the command entered is correct.
 
       Use case resumes from step 3.
 
-* 3b. The given index is invalid.
+* 2c. The given index is invalid.
 
-    * 3b1. TAssist shows an error message.
+    * 2c1. TAssist shows an error message.
 
       Use case resumes from step 2.
 
