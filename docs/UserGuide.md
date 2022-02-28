@@ -9,10 +9,10 @@ Tinner (Anagram of Intern) is a desktop app for managing internship applications
 * [Features](#features)
   * [Viewing help: help](#c-help)
   * [Viewing all companies and roles: list](#c-list) 
-  * [Adding a company: add company](#c-add-c) 
-  * [Adding a role: add role](#c-add-c-r) 
-  * [Deleting a company: delete company](#c-delete-c) 
-  * [Deleting a role: delete role](#c-delete-c-r)
+  * [Adding a company: addCompany](#c-add-c) 
+  * [Adding a role: addRole](#c-add-c-r) 
+  * [Deleting a company: deleteCompany](#c-delete-c) 
+  * [Deleting a role: deleteRole](#c-delete-c-r)
 * [Command summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -29,10 +29,10 @@ Tinner (Anagram of Intern) is a desktop app for managing internship applications
 5. Type the command in the command box and press Enter to execute it. e.g. typing help and pressing Enter will open the help window.  
    Some example commands you can try:
    * **list** : Lists all companies and internship roles.
-   * **add company** `n/Google p/98765432 e/hr_google@gmail.com a/70 Pasir Panjang Rd, #03-71 Mapletree Business City II, Singapore 117371` : Adds a company named `Google` to Tinner.
-   * **add role**`1 n/Software Engineering Intern s/Applying b/31 March 2022 23:59 d/Write mobile applications $/5000` : Adds a software engineering intern role to the company at index 1.
-   * **delete role** `1 1`: Deletes the 1st role of the 1st company shown in the current list.
-   * **delete company**`1` : Deletes the 1st company shown in the current list.
+   * **addCompany** `n/Google p/98765432 e/hr_google@gmail.com a/70 Pasir Panjang Rd, #03-71 Mapletree Business City II, Singapore 117371` : Adds a company named `Google` to Tinner.
+   * **addRole**`1 n/Software Engineering Intern s/Applying b/31 March 2022 23:59 d/Write mobile applications $/5000` : Adds a software engineering intern role to the company at index 1.
+   * **deleteRole** `1 1`: Deletes the 1st role of the 1st company shown in the current list.
+   * **deleteCompany**`1` : Deletes the 1st company shown in the current list.
    * **exit** : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
@@ -77,51 +77,51 @@ Shows a list of all companies and internship roles in Tinner.
 Format: `list`
 
 
-### Adding a company: `add company` <a id="c-add-c"></a>
+### Adding a company: `addCompany` <a id="c-add-c"></a>
 
 Adding a company that does not exist in the list.
 
-Format: `add company n/COMPANY_NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
+Format: `addCompany n/COMPANY_NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
 
 Examples:
-* `add company n/Google p/98765432 e/hr_google@gmail.com a/70 Pasir Panjang Rd, #03-71 Mapletree Business City II, Singapore 117371 `
-* `add company n/Meta p/91234567 e/hr_meta@meta.com a/9 Straits View, Marina One, Singapore 018937 `
+* `addCompany n/Google p/98765432 e/hr_google@gmail.com a/70 Pasir Panjang Rd, #03-71 Mapletree Business City II, Singapore 117371 `
+* `addCompany n/Meta p/91234567 e/hr_meta@meta.com a/9 Straits View, Marina One, Singapore 018937 `
 
-### Adding an internship role to an existing company: `add role` <a id="c-add-c-r"></a>
+### Adding an internship role to an existing company: `addRole` <a id="c-add-c-r"></a>
 
 Adding an internship role to a company that already exists in the list.
 
-Format: `add role COMPANY_INDEX n/ROLE s/STATUS b/DEADLINE d/DESCRIPTION $/STIPEND`
+Format: `addRole COMPANY_INDEX n/ROLE s/STATUS b/DEADLINE d/DESCRIPTION $/STIPEND`
 
 
 Examples:
-* `add role 1 n/Data Analyst s/Applying b/31 March 2022 23:59 d/Analyse data $/4800 `
-* `add role 3 n/Software Engineer s/Applying b/30 April 2022 01:23 d/Frontend web development $/2400 `
+* `addRole 1 n/Data Analyst s/Applying b/31 March 2022 23:59 d/Analyse data $/4800 `
+* `addRole 3 n/Software Engineer s/Applying b/30 April 2022 01:23 d/Frontend web development $/2400 `
 
-### Deleting a Company : `delete company` <a id="c-delete-c"></a>
+### Deleting a Company : `deleteCompany` <a id="c-delete-c"></a>
 
 Deletes the specified company from the list.
 
-Format: `delete company COMPANY_INDEX`
+Format: `deleteCompany COMPANY_INDEX`
 
 * Deletes the company at the specified COMPANY_INDEX.
 * The index refers to the index number shown in the displayed company list.
 * The index must be a positive integer like 1, 2, 3, …
 
 Examples:
-* `list` followed by `delete company 2` deletes the 2nd company on the list in Tinner.
+* `list` followed by `deleteCompany 2` deletes the 2nd company on the list in Tinner.
 
-### Deleting an internship role from company : `delete role` <a id="c-delete-c-r"></a>
+### Deleting an internship role from company : `deleteRole` <a id="c-delete-c-r"></a>
 
 Deletes the specified role in the specified company.
 
-Format: `delete role COMPANY_INDEX ROLE_INDEX`
+Format: `deleteRole COMPANY_INDEX ROLE_INDEX`
 
 * Deletes the role at the specified ROLE_INDEX of the company at the specified COMPANY_INDEX. The indexes refer to the index numbers shown in the displayed company list.
 * The indexes must be a positive integer like 1, 2, 3, …
 
 Examples:
-* `list` followed by, `delete role 1 1` deletes the 1st role from the 1st company in Tinner.
+* `list` followed by, `deleteRole 1 1` deletes the 1st role from the 1st company in Tinner.
 
 ### Exiting the program : `exit` <a id="c-exit"></a>
 
@@ -143,9 +143,9 @@ _Details coming soon ..._
 Action | Format, Examples
 --------|------------------
 **List companies** | `list`
-**Add company** | `add company n/COMPANY_NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` <br><br> e.g.,`add company n/Google p/98765432 e/hr_google@gmail.com a/70 Pasir Panjang Rd, #03-71 Mapletree Business City II, Singapore 117371` 
-**Add role** | `add role COMPANY_INDEX n/ROLE s/STATUS b/DEADLINE d/DESCRIPTION $/STIPEND` <br><br> e.g.,` add role 1 n/Data Analyst s/Applying b/31 March 2022 23:59 d/Analyse marketing data $/5000`
-**Delete company** | `delete company COMPANY_INDEX `<br><br> e.g.,`delete company 3 `
-**Delete role** | `delete role COMPANY_INDEX ROLE_INDEX` <br><br> e.g.,`delete role 3 1 `
+**Add company** | `addCompany n/COMPANY_NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` <br><br> e.g.,`addCompany n/Google p/98765432 e/hr_google@gmail.com a/70 Pasir Panjang Rd, #03-71 Mapletree Business City II, Singapore 117371` 
+**Add role** | `addRole COMPANY_INDEX n/ROLE s/STATUS b/DEADLINE d/DESCRIPTION $/STIPEND` <br><br> e.g.,` addRole 1 n/Data Analyst s/Applying b/31 March 2022 23:59 d/Analyse marketing data $/5000`
+**Delete company** | `deleteCompany COMPANY_INDEX `<br><br> e.g.,`deleteCompany 3 `
+**Delete role** | `deleteRole COMPANY_INDEX ROLE_INDEX` <br><br> e.g.,`deleteRole 3 1 `
 **Help** | `help`
 **Exit Tinner** | `exit`
