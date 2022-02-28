@@ -109,7 +109,7 @@ public class Person {
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getTags().equals(getTags())
                 && otherPerson.getStatus().equals(getStatus())
-                && otherPerson.getStatus().equals(getClassCode());
+                && otherPerson.getClassCode().equals(getClassCode());
     }
 
     @Override
