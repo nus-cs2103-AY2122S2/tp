@@ -202,6 +202,71 @@ Examples:
 * `tag P/LBJ t/SF tags` the player `LBJ` with the position of `SF` only.
 * `tag P/LBJ t/PG t/SG t/PF` tags the player `LBJ` with the position of `PG`, `SF` and `PF`.
 
+### Viewing the summary: `view`
+
+Views the summarised information of a team, lineup or player.
+
+####To view a team
+
+Format: `view T/[TEAM]`
+* Displays the aggregated data of the team of the specified `TEAM`. The summary contains information such as all players in the team, number of players in each position.
+* If no `TEAM` is provided, the summary of all existing teams will be provided.
+* The specified `TEAM` must be **valid** to be viewed.
+
+Examples:
+* `view T/Lakaka` Displays the team summary of `Lakaka`.
+* `view T/` Displays all existing teams.
+
+####To view a lineup
+
+Format: `view T/TEAM L/[LINEUP]`
+* Displays the summary of the specified `LINEUP` in the specified `TEAM`.
+* If no `LINEUP` is provided, the summary of all lineups in the specified `TEAM` will be displayed.
+* The specified `LINEUP` must be valid to be viewed (i.e. it exists in the specified `TEAM`).
+
+Examples:
+* `view T/Lakaka L/Starting Five` Displays the lineup summary of `Start Five` lineup in `Lakaka`.
+* `view T/Lakaka L/` Displays the lineup summary of all lineups in `Lakaka`.
+
+####To view a player
+
+Format: `view P/[PLAYER]`
+* Displays the information of the specified `PLAYER`.
+* If no `PLAYER` is provided, the information of all existing players in the system will be displayed.
+
+Examples:
+* `view P/Kelvin Darent` Displays the information of `Kelvin Darent`.
+* `view P/` Displays all players in the system.
+
+###To view a schedule
+
+Format: `view T/TEAM i/[INDEX]`
+* Displays the schedule of the specified `TEAM` numbered with the specified `INDEX`.
+* If no `INDEX` is provided, the list of all schedules of the `TEAM` will be displayed.
+
+Examples:
+* `view T/Lakaka i/1` Displays the information on `Lakaka`'s 1st schedule.
+
+### Finding a lineup or player: `find`
+
+Finds the specified lineup or player.
+
+####To find a lineup:
+Format: `find L/LINEUP`
+* Finds the specified `LINEUP` and displays its information.
+
+Examples:
+* `find L/STARTING FIVE` If the user forgets which team `STARTING FIVE` belongs to, they can use this command to find it.
+
+####To find a player:
+Format: `find P/PLAYER`
+* Finds the specified `PLAYER` and displays his/her information.
+
+Examples:
+* `find P/Brown James` If the user forgets which team and lineup `Brown James` belongs to, they can use this command to find him.
+
+
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
