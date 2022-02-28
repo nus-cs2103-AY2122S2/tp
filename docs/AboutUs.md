@@ -14,12 +14,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/benmurphyy.png" width="200px">
 
 [[github](https://github.com/benmurphyy)]
-[[portfolio](team/benmurphy.md)]
+[[portfolio](team/benmurphyy.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
 
-### Jane Doe
+### Loy Yoke Yue
 
 <img src="images/yokeyue.png" width="200px">
 
@@ -48,12 +48,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Sophie Ng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/sophie.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/sophiien)]
+[[portfolio](team/sophiien.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Updating contacts
+
