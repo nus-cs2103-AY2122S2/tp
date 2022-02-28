@@ -18,6 +18,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
+### Tian Xiao
+
+<img src="../src/main/resources/images/snoidetx.png" width="200"/> 
+
+[github](https://github.com/snoidetx) | [portfolio](team/snoidetx.md)
+
+* Role: Developer
+* Responsibilities: Code
+
 ### Wu Weiye
 
 <img src="images/teddye.png" width="200px">
