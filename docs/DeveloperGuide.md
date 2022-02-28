@@ -257,28 +257,52 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* NUS Computing student looking for teammates to do team projects with
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Provide ability for users to sort contacts by technical skills and find teammates with specific technical skills.
+Hacknet functions as an addressbook to store all relevant details of potential teammates, as well as all the relevant information required to search and filter to form teams for the project.
 
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Priorities: High (must have) - A, Medium (nice to have) - B, Low (unlikely to have) - C
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
+| Priority | As a …​                                             | I want to …​                                                          | So that I can…​                                                                       |
+| -------- | --------------------------------------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| A        | Beginner user                                       | Save contacts even after HackNet is closed                            | Access those contacts again without having to keep HackNet running the whole time     |
+| A        | User familiar with CLI                              | Make use of HackNet through the use of CLI                            | I do not have to take a long time getting used to HackNet                             |
+| A        | Beginner user                                       | Manually add a new contact                                            | I am able to have his details                                                         |
+| A        | Beginner user                                       | Delete a contact                                                      | Remove a contact from my address book                                                 |
+| A        | Beginner user                                       | I can view my added contacts                                          | So that I can see the contacts I have saved                                           |
+| B        | Expert user                                         | Sort my contacts by relevant details                                  | I can find potential teammates faster                                                 |
+| B        | Expert user                                         | create my custom tags to label teammates by                           | I can search for relevant teammates faster                                            |
+| B        | Intermediate user                                   | Look at the github profile of a potential teammate                    | I can further scrutinize the person’s past experience/project                         |
+| B        | Intermediate user                                   | Filter out people based on certain skills i.e. proficient in java     | I can easily look for the teammate that complements my skill                          |
+| B        | Intermediate user                                   | Add people into my ‘basket’.                                          | I can simulate possible team-ups for the project                                      |
+| B        | Potential user                                      | Get help on the features available                                    | I can try those features out                                                          |
+| B        | Expert user                                         | Share my profile with others                                          | Other people will be able contact me if they think that i fit their team              |
+| B        | New user urgently searching for project members     | Download HackNet and share contacts with an avid user                 | I can have a large selection of project members to choose from                        |
+| B        | Users who prefer typing to mouse interaction        | Use HackNet with minimal mouse interaction                            | User HackNet to add contacts faster                                                   |
+| B        | Intermediate user                                   | Create my profile and populate it with my details                     | I can share it with others                                                            |
+| B        | Beginner user                                       | Undo my last command                                                  | I can rectify my mistakes                                                             |
+| B        | Someone who wants to upskill in a less focused area | Check my contacts and see which skills are not well focused on        | I can know which skill are less popular                                               |
+| B        | Visual person                                       | Use different colors to differentiate my contacts by technical skills | I can classify my contacts at a glance                                                |
+| B        | Expert user                                         | Tweak settings such as shortcuts and preferences                      | I can be more productive with HackNet                                                 |
+| B        | Person with a friend also using HackNet             | Add him to my team and share contacts                                 | We can share contacts with a team                                                     |
+| B        | Intermediate user                                   | Use batch actions                                                     | Add tags to multiple people in a single action                                        |
+| B        | Intermediate user                                   | View past teammates                                                   | Keep track of who i worked with before                                                |
+| B        | Expert user                                         | Request/suggest a feature to the developer                            | Future experience with the app gets faster and more user friendly                     |
+| B        | Expert user                                         | Choose specific formats to display info in                            | Formats are more natural(date formats and name formats etc)                           |
+| B        | Expert user                                         | Enter multiple commands at one time                                   | I can perform tedious tasks more quickly                                              |
+| B        | Beginner user                                       | Follow a interactive tutorial                                         | Get to know the basic features without looking at the documentation                   |
+| B        | Intermediate user                                   | Export a save data of the contacts                                    | To work with the same data in a different/new pc                                      |
+| B        | Users who can type fast                             | Enter commands quickly on HackNet                                     | Navigate through HackNet faster                                                       |
+| B        | Users with need to manage large number of contacts  | Manage large number of contacts effortlessly                          | Search for contacts through the use of different search options easily / add contacts |
+| B        | User who value my privacy                           | Make my contact private so others cannot share it                     | Only users that directly share contacts with me will have my contact                  |
 *{More to be added}*
 
 ### Use cases
@@ -290,9 +314,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  HackNet shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  HackNet deletes the person
 
     Use case ends.
 
@@ -304,7 +328,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. HackNet shows an error message.
 
       Use case resumes at step 2.
 
@@ -312,9 +336,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. The program should not have functionalities sharing data with others.
 
 *{More to be added}*
 
