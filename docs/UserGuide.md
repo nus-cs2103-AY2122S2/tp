@@ -62,8 +62,6 @@ ModuleMate Finder is a desktop app that allows students to find people taking th
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-</div>
-
 ### Quick Jump
 - [Help](#viewing-help--help)
 - [List](#listing-all-persons--list)
@@ -252,16 +250,16 @@ A: As long as the module offered can be found in NUSmod, it will be available on
 
 ## Command summary
 
-Action | Format                                                                                             | Examples                                                              
---------|----------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------
-**List** | `list -flags`                                                                                      | `list -m`, `list -c`                                                  
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`                                                      | `add n/Bob p/87654321 e/bob@u.nus.edu`        
-**Delete** | `delete index`                                                                                     | `delete 3`
-**Delete Module** | `deletemodule index t/TAG`...                                                                      | `deletemodule 1 t/CS1231`
-**Edit** | `edit index [n/NAME] [c/CODE] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` **brackets indicate optional | `edit 1 -c n/Alice`                                                   
-**Clear** | `clear`                                                                                            | `clear`
-**Clear Modules** | `clear INDEX`                                                                                      | `clear 3`
-**Status** | `status INDEX s/STATUS`                                                                            | `status 2 s/favourite`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`                                                                     | `find James Jake`
-**Filter** | `filter t/TAG`                                                                                     | `filter t/CS3230`
+| Action            | Format                                                                                             | Examples                               |
+|-------------------|----------------------------------------------------------------------------------------------------|----------------------------------------|
+| **List**          | `list -flags`                                                                                      | `list -m`, `list -c`                   |
+| **Add**           | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`                                                      | `add n/Bob p/87654321 e/bob@u.nus.edu` |
+| **Delete**        | `delete index`                                                                                     | `delete 3`                             |
+| **Delete Module** | `deletemodule index t/TAG`...                                                                      | `deletemodule 1 t/CS1231`              |
+| **Edit**          | `edit index [n/NAME] [c/CODE] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` **brackets indicate optional | `edit 1 -c n/Alice`                    |
+| **Clear**         | `clear`                                                                                            | `clear`                                |
+| **Clear Modules** | `clear INDEX`                                                                                      | `clear 3`                              |
+| **Status**        | `status INDEX s/STATUS`                                                                            | `status 2 s/favourite`                 |
+| **Find**          | `find KEYWORD [MORE_KEYWORDS]`                                                                     | `find James Jake`                      |
+| **Filter**        | `filter t/TAG`                                                                                     | `filter t/CS3230`                      |
 
