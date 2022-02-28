@@ -154,9 +154,11 @@ Format: `clear`
 
 ### Exiting the program : `exit`
 
-Exits the program.
+Exits the program. 
 
 Format: `exit`
+
+* Displays error message and exits the programme after 3 seconds.
 
 ### Saving the data
 
