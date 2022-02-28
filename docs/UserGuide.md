@@ -86,11 +86,11 @@ Deletes a student from TAPA.
 Format: `delete STUDENT_INDEX`
 
 * The student corresponding to the index (specified after the `delete` command) will be removed from TAPA.
+* An error message will be displayed to the user if the specified index is a negative number or larger than the number of students in TAPA.
 
 Example:
 * `delete 10`
     * A student named John (whose list index is “10”) is deleted from TAPA.
-    * An error message will be displayed to the user if the specified index is a negative number or larger than the number of students in TAPA.
 
 ### Finding a student: `find`
 
