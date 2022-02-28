@@ -224,7 +224,7 @@ Format: `deletetag n/TAGNAME`
 * The `TAGNAME` parameter **must** be specified.
 * Deletion is case-insensitive e.g. `students` is the same as `Students`.
 * When the tag is deleted, contacts that contain this tag will have the tag removed.
-* If `TAGNAME` cannot be found, the command will not execute.
+* An error will be thrown if the specified `TAGNAME` cannot be found.
 
 Examples:
 * `deletetag n/friends` Deletes the tag named *friends* and disassociates any contacts that have the *friends* tag.
