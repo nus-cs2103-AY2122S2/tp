@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_COMPANY;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ROLE;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -13,6 +14,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.company.Address;
 import seedu.address.model.company.Email;
@@ -54,6 +56,26 @@ public class ParserUtilTest {
 
         // Leading and trailing whitespaces
         assertEquals(INDEX_FIRST_COMPANY, ParserUtil.parseIndex("  1  "));
+    }
+
+    @Test
+    public void parseDoubleIndex_invalidInput_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDoubleIndex("10"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDoubleIndex("10 a"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDoubleIndex("1 1 1"));
+    }
+
+    @Test
+    public void parseDoubleIndex_validInput_success() throws Exception {
+        // No whitespaces
+        Index[] indexesInput = ParserUtil.parseDoubleIndex("1 1");
+        assertEquals(INDEX_FIRST_COMPANY, indexesInput[0]);
+        assertEquals(INDEX_FIRST_ROLE, indexesInput[1]);
+
+        // Leading and trailing whitespaces
+        Index[] indexesWhiteSpaceInput = ParserUtil.parseDoubleIndex("  1     1  ");
+        assertEquals(INDEX_FIRST_COMPANY, indexesWhiteSpaceInput[0]);
+        assertEquals(INDEX_FIRST_ROLE, indexesWhiteSpaceInput[1]);
     }
 
     @Test
