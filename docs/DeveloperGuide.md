@@ -596,12 +596,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  Should be intutitive for a first-time user to perform basic actions.
 5.  The data file should be understandable to tech-savvy human readers.
-6.  The system's design should follow the Object-Oriented Paradigm (OOP).
+6.  The system's design should follow the *Object-Oriented Paradigm (OOP)*.
 7.  Should be packageable into a single JAR file.
 8.  No initial setup should be required before running the application.
 9.  Should function properly without an internet connection.
-10. Graphical User Interface (GUI) should be properly displayed on screens with a minimum resolution of 1280x720.
-11. Graphical User Interface (GUI) should be properly displayed with 100%, 125% and 150% text scaling configurations.
+10. Graphical User Interface (GUI) should be properly displayed on screens with a minimum resolution of `1280x720`.
+11. Graphical User Interface (GUI) should be properly displayed with `100%`, `125%` and `150%` text scaling configurations.
 
 
 ### Glossary
