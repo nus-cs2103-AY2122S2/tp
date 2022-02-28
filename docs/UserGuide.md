@@ -181,7 +181,7 @@ Format: `clear`
 
 ### Creating a Tag: `addtag`
 
-Creates a new tag to the address book.
+Creates a new tag to Contax.
 
 Format: `addtag n/TAGNAME`
 
@@ -193,7 +193,7 @@ Examples:
 
 ### Editing a Tag: `edittag`
 
-Edits an existing tag in the address book.
+Edits an existing tag in Contax.
 
 Format: `edittag f/OLD_TAGNAME t/NEW_TAGNAME`
 
@@ -201,22 +201,24 @@ Format: `edittag f/OLD_TAGNAME t/NEW_TAGNAME`
 * Edits a tag specified at `OLD_TAGNAME` and updates to the tag specified at `NEW_TAGNAME`.
 * `OLD_TAGNAME` and `NEW_TAGNAME` are case-insensitive.
 * If `OLD_TAGNAME` cannot be found, the command will not execute.
+* If `NEW_TAGNAME` already exists in Contax (case-insensitive), the command will not execute.
 
 Examples:
 * `edittag f/New Clients t/Prospective Clients` Changes the name of the tag *New Clients* to *Prospective Clients*. Command will be ignored if the tag *New Clients* does not exist in the first place.
 
 ### Listing All Tags: `listtags`
 
-Shows a list of all tags in the address book.
+Shows a list of all tags in Contax.
 
 Format: `listtags`
 
 **Example output**
+
 ![List Tags](images/ListTag.png)
 
 ### Deleting a Tag: `deletetag`
 
-Deletes the specified tag from the address book.
+Deletes the specified tag in Contax.
 
 Format: `deletetag n/TAGNAME`
 
@@ -240,6 +242,7 @@ Format: `findtag t/TAGNAME`
 
 Examples:
 * `findtag t/friends` Displays the contact information of contacts who have the *friends* tag.
+ 
 ![Find Tags](images/FindTag.png)
 
 ### Creating an Appointment : `addAppointment`
