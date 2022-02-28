@@ -200,7 +200,7 @@ Format: `edittag f/OLD_TAGNAME t/NEW_TAGNAME`
 * All parameters **must** be specified.
 * Changes the name of a tag`OLD_TAGNAME` to `NEW_TAGNAME`.
 * `OLD_TAGNAME` and `NEW_TAGNAME` are case-insensitive.
-* An error would be thrown if either `OLD_TAGNAME` cannot be found or `NEW_TAGNAME` already exists in Contax.
+* An error will be thrown if either `OLD_TAGNAME` cannot be found or `NEW_TAGNAME` already exists in ContaX.
 
 Examples:
 * `edittag f/New Clients t/Prospective Clients` Changes the name of the tag *New Clients* to *Prospective Clients*. Command will be ignored if the tag *New Clients* does not exist in the first place or *Prospective Clients* already exists in Contax.
