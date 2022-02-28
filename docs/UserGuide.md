@@ -181,7 +181,7 @@ Format: `clear`
 
 ### Creating a Tag : `addtag`
 
-Creates a new tag in Contax.
+Creates a new tag in ContaX.
 
 Format: `addtag n/TAGNAME`
 
@@ -193,7 +193,7 @@ Examples:
 
 ### Editing a Tag : `edittag`
 
-Edits an existing tag in Contax.
+Edits an existing tag in ContaX.
 
 Format: `edittag f/OLD_TAGNAME t/NEW_TAGNAME`
 
@@ -207,7 +207,7 @@ Examples:
 
 ### Listing All Tags : `listtags`
 
-Shows a list of all tags in Contax.
+Shows a list of all tags in ContaX.
 
 Format: `listtags`
 
@@ -217,7 +217,7 @@ Format: `listtags`
 
 ### Deleting a Tag : `deletetag`
 
-Deletes the specified tag in Contax.
+Deletes the specified tag in ContaX.
 
 Format: `deletetag n/TAGNAME`
 
