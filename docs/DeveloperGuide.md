@@ -1,9 +1,29 @@
 ---
-layout: page
-title: Developer Guide
+# Developer Guide
 ---
-* Table of Contents
-{:toc}
+
+Table of Contents
+  * Acknowledgements
+  * Setting up, getting started
+  * Design
+    * Architecture
+    * UI Component
+    * Logic Component
+    * Model Component
+    * Storage Component
+    * Common classes
+  * Implementation
+  * Documentation, logging, testing, configuration, dev-ops
+  * Appendix: Requirements
+    * Product Scope
+    * User Stories
+    * Use Cases
+    * Non-Functional Requirements
+    * Glossary
+  * Appendix: Instructions for manual testing
+    * Launch and shutdown
+    * Deleting a person
+    * Saving data
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -257,13 +277,16 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+A tech savvy insurance agent who:
+* has to manage a significant number of clients and their different profiles
+* prefers quick commands to locate his clients in his address book
+* has to meet up with clients to introduce new packages at different locations
+* is on the move often, prefers an app that can be used efficiently and relabily on the go
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
+* Allow clients to be saved, ordered and filtered by different categories
+* Allow different pieces of data to be saved for different clients
+* Has short commands for address book to be used efficiently and reliably on the go
 
 
 ### User stories
@@ -272,12 +295,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| `* * *`  | new user                                     | have a quick guide         | learn how to use the address book efficiently and effectively                 |
+| `* * *`  | user                                         | add a new client               | have a list of my clients                                                                       |
+| `* * *`  | user                                         | delete an old client                | remove clients who have stopped working with me                                   |
+| `* * *`  | user                                         | update a client's details          | keep information of my clients accurate and up-to-date |
+| `* * *`  | user                                         | list all clients         | have an overview of my clientele |
+| `* * *`  | user                                         | have an 'information' field in each client's details          | store miscellaneous infomation pertaining to each client |
+| `* *`    | user                                         | sort my clients   |  see contacts in ascending/descending order w.r.t a certain priority (i.e. next meeting)               |
+| `* *`    | user on-the-move                             | have keyboard shortcuts   |  use the app efficiently and reliably               |
+| `* *`    | clumsy user                                  | undo my last command |  revert if I made a mistake in my previous command               |
+| `* *`    | clumsy user                                  | have autocorrect for commands |  make minor mistyping errors without having to rewrite entire commands               |
+| `* *`    | user with many clients in the address book   | search for clients           | obtain information about a client easily                                            |
+| `* *`    | user with many clients in the address book   | filter clients           | obtain information about a group of clients easily                                            |
+| `* *`    | user with many clients in the address book   | pin certain clients           | easily access them |
+| `* *`    | anxious user                                 | set reminders                 | be alerted for upcoming meetings, deadlines etc. 
+| `* *`    | user                                         | see relationships between my clients  | manage entire families/groups of friends at the same time and tailor pacakages specifically for them |
+| `*`      | user                                         | export my data into other formats such as Excel | visualise and share information with others |
+| `*`      | user                                         | import and view the data of others' using this app | help out my colleagues when needed |
+| `*`      | night-owl user                               | turn on dark mode           | strain my eyes less when working at night |
+| `*`      | artsy user                                   | artsy mode                      | enjoy different visuals on the app 
 
 *{More to be added}*
 
@@ -315,13 +351,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  A new user should be able to learn how to use all functions of the address book within 10 minutes.
+5.  Product should come with storage system, should not depend on external servers/Database Management Systems (DBMS)
+6.  Product should work without an installer.
+7.  Source code is open source.
+8.  Features should be easy to test, for both manual and automated testing.
 
-*{More to be added}*
+*{More to be added (?)}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
 
