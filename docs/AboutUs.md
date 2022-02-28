@@ -9,17 +9,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### Ang Wei Jun
-
-<img src="images/aweijun.png" width="200px">
-
-[<img src="images/github-icon.png" width="50px">](https://github.com/aweijun) &nbsp; &nbsp; &nbsp;
-[<img src="images/portfolio-icon.png" width="50px">](team/aweijun.md)
-
-|   Role    | Responsibilities |
-|:---------:|:-----------------|
-| Developer | Integration      |
-
 ### Jonathan Yeo
 
 <img src="images/jonathanhoshi.png" width="200px">
@@ -30,6 +19,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 |   Role    | Responsibilities   |
 |:---------:|:-------------------|
 | Developer | Team Lead <br/> UI |
+
+### Ang Wei Jun
+
+<img src="images/aweijun.png" width="200px">
+
+[<img src="images/github-icon.png" width="50px">](https://github.com/aweijun) &nbsp; &nbsp; &nbsp;
+[<img src="images/portfolio-icon.png" width="50px">](team/aweijun.md)
+
+|   Role    | Responsibilities |
+|:---------:|:-----------------|
+| Developer | Integration      |
 
 ### Low Kaiwei
 
