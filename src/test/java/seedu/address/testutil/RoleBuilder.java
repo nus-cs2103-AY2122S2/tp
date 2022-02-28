@@ -18,6 +18,7 @@ public class RoleBuilder {
     public static final String DEFAULT_DESCRIPTION = "Frontend web development";
     public static final String DEFAULT_STIPEND = "1000";
 
+
     private RoleName roleName;
     private Status status;
     private Deadline deadline;

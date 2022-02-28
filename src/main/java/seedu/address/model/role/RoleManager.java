@@ -17,7 +17,7 @@ public class RoleManager {
     }
 
     /**
- nnnnnnnn      * Obtains the list of roles tagged to a Company
+     * Obtains the list of roles tagged to a Company
      * @return <code>ArrayList</code> representing the list of roles
      */
     public ArrayList<Role> getRoles() {
