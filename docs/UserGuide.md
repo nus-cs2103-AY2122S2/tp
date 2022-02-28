@@ -204,7 +204,7 @@ Format: `edittag f/OLD_TAGNAME t/NEW_TAGNAME`
 * If `NEW_TAGNAME` already exists in Contax (case-insensitive), the command will not execute.
 
 Examples:
-* `edittag f/New Clients t/Prospective Clients` Changes the name of the tag *New Clients* to *Prospective Clients*. Command will be ignored if the tag *New Clients* does not exist in the first place.
+* `edittag f/New Clients t/Prospective Clients` Changes the name of the tag *New Clients* to *Prospective Clients*. Command will be ignored if the tag *New Clients* does not exist in the first place or *Prospective Clients* already exists in Contax.
 
 ### Listing All Tags: `listtags`
 
