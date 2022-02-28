@@ -38,6 +38,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Documentation
 * Responsibilities: Parsing input
 
+### Ryan Walter Lee
+
+<img src="images/ryanwalterlee.png" width="200px">
+
+[[github](http://github.com/ryanwalterlee)]
+[[portfolio](team/ryanwalterlee.md)]
+
+* Role: Developer
+* Responsibilities: Dev Ops + Threading
+
 ### Sophie Ng
 
 <img src="images/sophie.png" width="200px">
