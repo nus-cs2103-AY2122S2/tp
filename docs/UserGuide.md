@@ -136,39 +136,6 @@ Format: `add S/ T/TEAM n/DESCRIPTION d/DATETIME`
 Examples:
 * `add S/ n/Yabuda d/competition d/22/02/2022 0900` adds a schedule with the description of `competition` that is held on `22/02/2022 0900` inside team `Yabuda`.
 
-### deleting a player/ team/ lineup/ schedule :  `delete`
-deletes a player/ team/ lineup/ schedule from MyGM
-
-**To delete a player:**
-Format: `delete P/PLAYER [T/TEAM] [L/LINEUP]`
-* Deletes the player from the player list.
-* If only `T/TEAM` is specified, delete the player from the team.
-* If `T/TEAM` and `L/LINEUP` are specified, delete the player from the lineup.
-
-Example:
-*`delete P/James Soften T/Netts` will delete player `James Soften` from team `Netts`.
-
-**To delete a team:**
-Format: `delete T/TEAM`
-* Deletes the team.
-
-Example:
-*`delete T/Lokers` will delete team `Lokers`.
-
-**To delete a lineup:**
-Format: `delete T/TEAM L/LINEUP`
-* Delete the lineup in the team.
-
-Example:
-* `delete T/Lokers L/starting five` will delete the lineup `starting five` from team `Lokers`.
-
-**To delete a schedule:**
-Format: `delete T/TEAM i/INDEX_SCHEDULE`
-* Delete the i-th schedule of the team.
-Example:
-*`delete T/Lokers i/1` will delete schedule `1` from team `Lokers`.
-
-
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
@@ -269,6 +236,20 @@ Examples:
 * `tag P/LBJ t/SF tags` the player `LBJ` with the position of `SF` only.
 * `tag P/LBJ t/PG t/SG t/PF` tags the player `LBJ` with the position of `PG`, `SF` and `PF`.
 
+### Deleting a person : `delete`
+
+Delete the specified person from the address book.
+
+Format: `delete INDEX`
+
+* Deletes the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
 ### Filtering players by position: `filter`
 
 Filter all players with the specified tag(s).
@@ -317,7 +298,7 @@ Example:
 
 ### Clearing all entries : `clear`
 
-Clears all data in MyGM.
+Clears all entries from the address book.
 
 Format: `clear`
 
