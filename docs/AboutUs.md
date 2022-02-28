@@ -11,7 +11,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Wee Jun Hong
 
-<img src="images/junhong.jpg" width="200px">
+<img src="images/whoisjunhong.png" width="200px">
 
 [[github](https://github.com/whoisjunhong)]
 [[portfolio](team/whoisjunhong.md)]
@@ -20,7 +20,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Joshua Yap
 
-<img src="images/joshua.jpg" width="200px">
+<img src="images/e0544333.png" width="200px">
 
 [[github](http://github.com/e0544333)]
 [[portfolio](team/e0544333.md)]
