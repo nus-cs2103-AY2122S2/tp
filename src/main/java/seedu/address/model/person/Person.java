@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.tag.Skill;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,17 +24,19 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<Skill> skillSet = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Set<Skill> skillSet) {
+        requireAllNonNull(name, phone, email, address, tags, skillSet);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.skillSet.addAll(skillSet);
     }
 
     public Name getName() {
@@ -58,6 +61,14 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Skill> getSkillSet() {
+        return Collections.unmodifiableSet(skillSet);
     }
 
     /**
@@ -92,13 +103,14 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getSkillSet().equals(getSkillSet());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, skillSet);
     }
 
     @Override
@@ -117,6 +129,13 @@ public class Person {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
         }
+
+        Set<Skill> skillSet = getSkillSet();
+        if (!skillSet.isEmpty()) {
+            builder.append("; Skills: ");
+            skillSet.forEach(builder::append);
+        }
+
         return builder.toString();
     }
 
