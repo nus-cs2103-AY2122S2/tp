@@ -4,7 +4,8 @@ title: User Guide
 ---
 
 ContaX is a **desktop application for managing your Contacts and Schedule**. It is a powerful tool *optimized for use via a Command Line Interface* (CLI), while incorporating Graphical User Interface (GUI) elements to make it user-friendly. If you are able to type fast, ContaX is capable of helping you manage your contacts and schedule more efficiently than traditional GUI applications, allowing you to shift your focus to other things.
-Broadly speaking, ContaX consists of an *Address Book* used to manage Contacts, and a *Schedule* used to manage Appointments.
+
+Broadly speaking, ContaX consists of an *Address Book* for managing Contacts, and a *Schedule* for managing Appointments.
 
 * Table of Contents
 {:toc}
