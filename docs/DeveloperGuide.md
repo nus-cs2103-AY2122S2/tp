@@ -285,6 +285,43 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `ContaX` and the **Actor** is the `user`, unless specified otherwise)
 
+**Use case: List persons**
+
+**MSS**
+
+1. User requests to list persons
+2. ContaX shows a list of persons
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty
+
+  Use case ends. 
+
+**Use case: Add a person**
+
+**MSS**
+
+1. User requests to add a person
+2. ContaX adds the person
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The command given is in an invalid format
+
+    * 1a1. ContaX shows an error message indicating that the given command is of invalid format.
+
+    * Use case ends.
+* 1b. The parameter given is in an invalid format
+
+    * 1b1. ContaX shows an error message indicating that the given parameter is of invalid format. 
+
+    * Use case ends. 
+
 **Use case: Delete a person**
 
 **MSS**
@@ -298,7 +335,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The list is empty
 
   Use case ends.
 
@@ -311,6 +348,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: Edit a person**
 
 **MSS**
+
 1. User requests to list persons
 2. ContaX shows a list of persons
 3. User requests to modify a specific person and enters new values
@@ -330,23 +368,45 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * Use case resumes at step 2.
 
-* 3b. The phone parameter is specified and the given phone is of an incorrect format
-   
-    * 3c1. ContaX shows an error message indicating that the given phone number is of invalid format. 
+* 3b. The parameter given is in an invalid format
 
-    * Use case resumes at step 2.
+    * 1b1. ContaX shows an error message indicating that the given parameter is of invalid format. 
 
-*  3c. The email parameter is specified and the given email is of an incorrect format
+    * Use case resumes at step 2. 
 
-    * 3c1. ContaX shows an error message indicating that the given email is of invalid format.
 
-    * Use case resumes at step 2.
+**Use case: List appointments**
 
-*  3e. The tag parameter is specified and it is not followed by any tag name
-   
-    * 3e1. ContaX removes all the person's tags.
+**MSS**
+
+1. User requests to list appointments
+2. ContaX shows a list of appointments
+
+**Extensions**
+
+* 1a. The list is empty
+
+  Use case ends. 
+
+**Use case: Add an appointment**
+
+**MSS**
+
+1. User requests to add a appointment
+2. ContaX adds the appointment
+
+**Extensions**
+
+* 1a. The command given is in an invalid format
+
+    * 1a1. ContaX shows an error message indicating that the given command is of invalid format.
 
     * Use case ends.
+* 1b. The parameter given is in an invalid format
+
+    * 1b1. ContaX shows an error message indicating that the given parameter is of invalid format. 
+
+    * Use case ends. 
 
 **Use case: Delete an appointment**
 
@@ -374,6 +434,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: Edit an appointment**
 
 **MSS**
+
 1. User requests to list appointments
 2. ContaX shows a list of appointments
 3. User requests to modify a specific appointment and enters new values
@@ -390,10 +451,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. ContaX shows an error message indicating that the given command is of invalid format.
 
     * Use case resumes at step 2.
+    
+* 3b. The parameter given is in an invalid format
+
+    * 3b1. ContaX shows an error message indicating that the given parameter is of invalid format. 
+
+    * Use case resumes at step 2.
 
 **Use case: Export address book**
 
 **MSS**
+
 1. User requests to export address book as file for ContaX
 2. ContaX saves a CSV file to the disk according to the format requested by the user
 
@@ -403,15 +471,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. User requests to export address book as file for Google Contacts
    
-    * Use case resumes at step 2.
+  Use case resumes at step 2.
     
 * 1b. User requests to export address book as file for Microsoft Outlook
 
-    * Use case resumes at step 2. 
+  Use case resumes at step 2. 
 
 **Use Case: Import CSV file**
 
 **MSS**
+
 1. User requests to import a CSV file
 2. ContactX imports the given CSV file
 
@@ -428,6 +497,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: User requests to perform a batch command**
 
 **MSS**
+
 1. User requests to perform a batch command which includes a condition
 2. ContaX executes the command based on the given condition
 
@@ -448,6 +518,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: User requests to perform a command on a specified range**
 
 **MSS**
+
 1. User requests to perform a command to a specified range
 2. ContaX executes the command based on the given range
 
@@ -464,6 +535,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: User requests to chain multiple commands**
 
 **MSS**
+
 1. User requests to perform multiple commands by chaining them
 2. ContaX starts from the first command
 3. ConaX executes the command
