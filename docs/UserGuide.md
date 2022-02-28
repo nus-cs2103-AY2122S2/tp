@@ -79,6 +79,33 @@ Example:
 * `add i/A0123456Z n/john m/CS2103T p/98765432 t/@john e/E0123456Z`
     * A student named John is added to TAPA.
 
+### Deleting a student: `delete`
+
+Deletes a student from TAPA.
+
+Format: `delete STUDENT_INDEX`
+
+* The student corresponding to the index (specified after the `delete` command) will be removed from TAPA.
+* An error message will be displayed to the user if the specified index is a negative number or larger than the number of students in TAPA.
+
+Example:
+* `delete 10`
+    * A student named John (whose list index is “10”) is deleted from TAPA.
+
+### Finding a student: `find`
+
+Allows the user to look up the details of a particular student.
+
+Format: `find n/STUDENT_NAME` (or) `find i/STUDENT_ID`
+
+* The student whose name or student id is specified after the `find` command will appear in the resulting list.
+
+Example:
+* `find n/John`
+    * Displays the particulars of the students whose names include John.
+* `find i/AXXXXXXXR`
+    * Displays the particulars of the student with student ID AXXXXXXXR.
+
 ### Checking all the tasks that a particular student have: `task`
 
 Displays all the tasks that are allocated to a particular student.
@@ -121,6 +148,8 @@ Format: `exit`
 Action      | Format, Examples
 ------------|------------------
 **Add**     | `add i/MATRICULATION_NO n/STUDENT_NAME m/MODULE_CODE [p/PHONE_NUMBER] [t/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] ` <br> e.g., `add i/A0123456Z n/john m/CS2103T p/98765432 t/@john e/E0123456Z`
+**Delete**    | `delete STUDENT_INDEX` <br> e.g., `delete 10`
+**Find**    | `find n/STUDENT_NAME` (or) `find i/STUDENT_ID` <br> e.g., `find n/john`, `find i/A0123456Z`
 **Exit**    | `exit`
 **Task**    | `task i/STUDENT_ID` <br> e.g., `task A0123456Z`
 **Archive** | `archive`
