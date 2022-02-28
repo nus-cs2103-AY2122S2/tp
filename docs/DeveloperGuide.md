@@ -294,12 +294,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Extensions**
-
-* 1a. The list is empty
-
-  Use case ends. 
-
 **Use case: Add a person**
 
 **MSS**
@@ -316,7 +310,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. ContaX shows an error message indicating that the given command is of invalid format.
 
     * Use case ends.
-* 1b. The parameter given is in an invalid format
+
+* 1b. A parameter given is in an invalid format
 
     * 1b1. ContaX shows an error message indicating that the given parameter is of invalid format. 
 
@@ -374,7 +369,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * Use case resumes at step 2.
 
-* 3b. The parameter given is in an invalid format
+* 3b. A parameter given is in an invalid format
 
     * 1b1. ContaX shows an error message indicating that the given parameter is of invalid format. 
 
@@ -389,12 +384,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. ContaX shows a list of appointments
 
     Use case ends.
-
-**Extensions**
-
-* 1a. The list is empty
-
-  Use case ends. 
 
 **Use case: Add an appointment**
 
@@ -412,15 +401,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. ContaX shows an error message indicating that the given command is of invalid format.
 
     * Use case ends.
-* 1b. The parameter given is in an invalid format
+* 1b. A parameter given is in an invalid format
 
     * 1b1. ContaX shows an error message indicating that the given parameter is of invalid format. 
 
     * Use case ends. 
 
-* 1c. The appointment already exists
+* 1c. The appointment timing overlaps with another appointment
 
-    * 1c1. ContaX shows an error message indicating that the appointment already exists.
+    * 1c1. ContaX shows an error message indicating that the appointment cannot be created due to overlaps.
 
     * Use case ends. 
 
@@ -468,7 +457,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * Use case resumes at step 2.
     
-* 3b. The parameter given is in an invalid format
+* 3b. A parameter given is in an invalid format
 
     * 3b1. ContaX shows an error message indicating that the given parameter is of invalid format. 
 
@@ -498,7 +487,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to import a CSV file
-2. ContactX imports the given CSV file
+2. User selects the CSV file to import
+3. ContactX imports the given CSV file
 
     Use case ends.
 
@@ -554,7 +544,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to perform multiple commands by chaining them
 2. ContaX starts from the first command
-3. ConaX executes the command
+3. ContaX executes the command
 4. If there is a subsequent chained command, ContaX repeats from step 3 on the next command
 
     Use case ends.
