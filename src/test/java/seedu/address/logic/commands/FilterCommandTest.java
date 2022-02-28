@@ -8,9 +8,8 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +17,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.NameContainsTagPredicate;
-import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
+import seedu.address.testutil.TypicalPersons;
 
 
 /**
@@ -31,9 +31,9 @@ public class FilterCommandTest {
     @Test
     public void equals() {
         NameContainsTagPredicate firstPredicate =
-                new NameContainsTagPredicate("first");
+                new NameContainsTagPredicate("CS2103T");
         NameContainsTagPredicate secondPredicate =
-                new NameContainsTagPredicate("second");
+                new NameContainsTagPredicate("CS2102");
 
         FilterCommand findFirstCommand = new FilterCommand(firstPredicate);
         FilterCommand findSecondCommand = new FilterCommand(secondPredicate);
@@ -58,7 +58,7 @@ public class FilterCommandTest {
     @Test
     public void execute_zeroTags_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        NameContainsTagPredicate predicate = preparePredicate("CS0000");
+        NameContainsTagPredicate predicate = preparePredicate("CS2102");
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -67,14 +67,22 @@ public class FilterCommandTest {
 
     @Test
     public void execute_oneTag_onePersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
-        NameContainsTagPredicate predicate = preparePredicate("owesMoney");
+        Optional<Tag> tagToString = BENSON.getTags().stream()
+                .findFirst();
+        String moduleName = tagToString
+                .map(x -> x.toString().substring(1, x.toString().length() - 1))
+                .orElse("CS2103T");
+        Integer numOfMatches = (int) (TypicalPersons.getTypicalPersons().stream()
+                .filter(x -> x.getTags().contains(tagToString.orElse(new Tag("CS2103T"))))
+                .count());
+
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, numOfMatches);
+        NameContainsTagPredicate predicate = preparePredicate(moduleName);
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
+
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        List<Person> al = new ArrayList<>();
-        al.add(BENSON);
-        assertTrue(model.getFilteredPersonList().equals(al));
+        assertTrue(model.getFilteredPersonList().contains(BENSON));
     }
 
     /**
