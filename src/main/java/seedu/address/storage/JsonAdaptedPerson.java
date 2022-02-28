@@ -118,7 +118,7 @@ class JsonAdaptedPerson {
         if (!Status.isValidStatus(status)) {
             throw new IllegalValueException(Status.MESSAGE_CONSTRAINTS);
         }
-        Status modelStatus = new Status(status);
+        final Status modelStatus = new Status(status);
 
         if (classCode == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -127,7 +127,7 @@ class JsonAdaptedPerson {
         if (!ClassCode.isValidClassCode(classCode)) {
             throw new IllegalValueException(ClassCode.MESSAGE_CONSTRAINTS);
         }
-        ClassCode modelClassCode = new ClassCode(classCode);
+        final ClassCode modelClassCode = new ClassCode(classCode);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelStatus, modelClassCode, modelTags);

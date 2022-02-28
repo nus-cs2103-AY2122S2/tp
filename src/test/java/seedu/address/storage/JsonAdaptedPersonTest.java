@@ -169,12 +169,12 @@ public class JsonAdaptedPersonTest {
                 INVALID_STATUS,
                 VALID_CLASSCODE,
                 VALID_TAGS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Status.class.getSimpleName());
+        String expectedMessage = Status.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
     @Test
-    public void toModelType_nullStaus_throwsIllegalValueException() {
+    public void toModelType_nullStatus_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(
                 VALID_NAME,
                 VALID_PHONE,
@@ -197,7 +197,7 @@ public class JsonAdaptedPersonTest {
                 VALID_STATUS,
                 INVALID_CLASSCODE,
                 VALID_TAGS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, ClassCode.class.getSimpleName());
+        String expectedMessage = ClassCode.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
