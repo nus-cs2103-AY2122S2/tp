@@ -29,7 +29,7 @@ public class AddCompanyCommandIntegrationTest {
     public void execute_newCompany_success() {
         Company validCompany = new CompanyBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getCompanyList(), new UserPrefs());
         expectedModel.addCompany(validCompany);
 
         assertCommandSuccess(new AddCompanyCommand(validCompany), model,
@@ -38,7 +38,7 @@ public class AddCompanyCommandIntegrationTest {
 
     @Test
     public void execute_duplicateCompany_throwsCommandException() {
-        Company companyInList = model.getAddressBook().getCompanyList().get(0);
+        Company companyInList = model.getCompanyList().getCompanyList().get(0);
         assertCommandFailure(new AddCompanyCommand(companyInList), model, AddCompanyCommand.MESSAGE_DUPLICATE_COMPANY);
     }
 

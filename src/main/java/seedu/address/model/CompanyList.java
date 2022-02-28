@@ -12,7 +12,7 @@ import seedu.address.model.company.UniqueCompanyList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSameCompany comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class CompanyList implements ReadOnlyCompanyList {
 
     private final UniqueCompanyList companies;
 
@@ -27,12 +27,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         companies = new UniqueCompanyList();
     }
 
-    public AddressBook() {}
+    public CompanyList() {}
 
     /**
-     * Creates an AddressBook using the Companies in the {@code toBeCopied}
+     * Creates an CompanyList using the Companies in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public CompanyList(ReadOnlyCompanyList toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -48,9 +48,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code CompanyList} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyCompanyList newData) {
         requireNonNull(newData);
 
         setCompanies(newData.getCompanyList());
@@ -87,7 +87,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
+     * Removes {@code key} from this {@code CompanyList}.
      * {@code key} must exist in the address book.
      */
     public void removeCompany(Company key) {
@@ -110,8 +110,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && companies.equals(((AddressBook) other).companies));
+                || (other instanceof CompanyList // instanceof handles nulls
+                && companies.equals(((CompanyList) other).companies));
     }
 
     @Override

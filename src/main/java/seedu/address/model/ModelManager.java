@@ -19,25 +19,25 @@ import seedu.address.model.company.Company;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final CompanyList companyList;
     private final UserPrefs userPrefs;
     private final FilteredList<Company> filteredCompanies;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given companyList and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyCompanyList companyList, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(companyList, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + companyList + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.companyList = new CompanyList(companyList);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredCompanies = new FilteredList<>(this.addressBook.getCompanyList());
+        filteredCompanies = new FilteredList<>(this.companyList.getCompanyList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new CompanyList(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -65,42 +65,42 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getCompanyListFilePath() {
+        return userPrefs.getCompanyListFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
+    public void setCompanyListFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+        userPrefs.setCompanyListFilePath(addressBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== CompanyList ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setCompanyList(ReadOnlyCompanyList companyList) {
+        this.companyList.resetData(companyList);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyCompanyList getCompanyList() {
+        return companyList;
     }
 
     @Override
     public boolean hasCompany(Company company) {
         requireNonNull(company);
-        return addressBook.hasCompany(company);
+        return companyList.hasCompany(company);
     }
 
     @Override
     public void deleteCompany(Company target) {
-        addressBook.removeCompany(target);
+        companyList.removeCompany(target);
     }
 
     @Override
     public void addCompany(Company company) {
-        addressBook.addCompany(company);
+        companyList.addCompany(company);
         updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);
     }
 
@@ -108,7 +108,7 @@ public class ModelManager implements Model {
     public void setCompany(Company target, Company editedCompany) {
         requireAllNonNull(target, editedCompany);
 
-        addressBook.setCompany(target, editedCompany);
+        companyList.setCompany(target, editedCompany);
     }
 
     //=========== Filtered Company List Accessors =============================================================
@@ -142,7 +142,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return companyList.equals(other.companyList)
                 && userPrefs.equals(other.userPrefs)
                 && filteredCompanies.equals(other.filteredCompanies);
     }
