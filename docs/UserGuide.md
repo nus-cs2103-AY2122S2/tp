@@ -72,7 +72,8 @@ ModuleMate Finder is a desktop app that allows students to find people taking th
 ### Quick Jump
 - [Help](#viewing-help--help)
 - [List](#listing-all-persons--list)
-- [Add](#adding-a-person--add)
+- [Add Contact](#adding-a-contact--add)
+- [Add Module to Contact](#adding-a-module-to-a-contact--add)
 - [Delete](#deleting-a-person--delete)
 - [Edit](#editing-a-person--edit)
 - [Clear](#clearing-all-entries--clear)
@@ -94,21 +95,27 @@ Shows a list of all persons in ModuleMate Finder.
 
 Format: `list`
 
-### Adding a person : `add`
+### Adding a Contact : `add`
 
-Adds a person to ModuleMate Finder.
+Adds a contact to ModuleMate Finder.
  
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+Format: `add -c n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS​`
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add -c n/Bob p/87654321 e/bob@u.nus.edu`
 
+### Adding a Module to a Contact : `add`
 
+Adds a module to an existing contact
+
+Format: `add INDEX -m c/CODE`
+
+* Adds a module represented by module code `CODE` to a contact at index `INDEX`
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `add 2 -m c/CS1231`
 
 ### Editing a person : `edit`
 
