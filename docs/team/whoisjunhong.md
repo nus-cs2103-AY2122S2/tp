@@ -9,12 +9,11 @@ This project is based on the AddressBook-Level3 project created by the SE-EDU in
 
 Given below are my contributions to the project.
 
-**To be added soon**
-* **New Feature**: --
-  * What it does: --
-  * Justification: --
-  * Highlights: --
-  * Credits: *{-}*
+* **New Feature**: Status attribute for persons -- (Pull Request [\#37](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/37))
+  * What it does: Gives each person in the list a class code attribute denoting class number/code.
+  * Justification: Track COVID-19 close contact using class code
+  * Highlights: Class Code follows the convention of an integer followed by an alphabet
+  * Credits: *{Collaborators: Jun Hong, Joshua, Louis}*
 
 * **New Feature**: --
 
@@ -29,11 +28,9 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-    * Added glossary for user guide [\#--]()
-    * Added quick start for user guide [\#--]()
-    * Added documentation for the features `add` and `list` [\#--]()
+    * Update AboutUs.md [\#16](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/16)
+    * Update Readme.md [\#26](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/26)
   * Developer Guide:
-    * --
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#--]()
