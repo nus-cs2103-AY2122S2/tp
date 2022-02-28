@@ -24,6 +24,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Skill;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -98,8 +99,9 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<Skill> updatedSkills = editPersonDescriptor.getSkillSet().orElse(personToEdit.getSkillSet());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedSkills);
     }
 
     @Override
@@ -130,6 +132,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private Set<Skill> skillSet;
 
         public EditPersonDescriptor() {}
 
@@ -143,6 +146,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setSkillSet(toCopy.skillSet);
         }
 
         /**
@@ -193,12 +197,29 @@ public class EditCommand extends Command {
         }
 
         /**
+         * Sets {@code skill} to this object's {@code skill}.
+         * A defensive copy of {@code skill} is used internally.
+         */
+        public void setSkillSet(Set<Skill> skillSet) {
+            this.skillSet = (skillSet != null) ? new HashSet<>(skillSet) : null;
+        }
+
+        /**
          * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        /**
+         * Returns an unmodifiable skill set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code skill} is null.
+         */
+        public Optional<Set<Skill>> getSkillSet() {
+            return (skillSet != null) ? Optional.of(Collections.unmodifiableSet(skillSet)) : Optional.empty();
         }
 
         @Override
@@ -220,7 +241,9 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
-                    && getTags().equals(e.getTags());
+                    && getTags().equals(e.getTags())
+                    && getSkillSet().equals(e.getSkillSet());
         }
+
     }
 }
