@@ -11,7 +11,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Bryan Tan Jing Kai
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/fantablack.png" width="200px">
 
 [[github](https://github.com/fantablack)]
 [[portfolio](team/fantablack.md)]

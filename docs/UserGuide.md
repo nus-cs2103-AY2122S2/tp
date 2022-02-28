@@ -3,10 +3,13 @@ layout: page
 title: User Guide
 ---
 
-ModuleMateFinder Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+ModuleMateFinder Level 3 (MMF3) is a **desktop app for managing contacts in your educational organization, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, MMF3 can get your contact management tasks done faster than traditional GUI apps.
 
-* Table of Contents
-
+- [Quick Start](#quick-start)
+- [Features](#features)
+  - [Quick Jump](#quick-jump)
+- [FAQ](#faq)
+- [Command Summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -42,6 +45,8 @@ ModuleMateFinder Level 3 (AB3) is a **desktop app for managing contacts, optimiz
 
 ModuleMate Finder is a desktop app that allows students to find people taking the same modules as them, easily and efficiently
 
+<div markdown="block" class="alert alert-info">
+
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
@@ -67,7 +72,8 @@ ModuleMate Finder is a desktop app that allows students to find people taking th
 ### Quick Jump
 - [Help](#viewing-help--help)
 - [List](#listing-all-persons--list)
-- [Add](#adding-a-person-add)
+- [Add Contact](#adding-a-contact--add)
+- [Add Module to Contact](#adding-a-module-to-a-contact--add)
 - [Delete](#deleting-a-person--delete)
 - [Edit](#editing-a-person--edit)
 - [Clear](#clearing-all-entries--clear)
@@ -89,21 +95,27 @@ Shows a list of all persons in ModuleMate Finder.
 
 Format: `list`
 
-### Adding a person: `add`
+### Adding a Contact : `add`
 
-Adds a person to ModuleMate Finder.
+Adds a contact to ModuleMate Finder.
  
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+Format: `add -c n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS​`
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add -c n/Bob p/87654321 e/bob@u.nus.edu`
 
+### Adding a Module to a Contact : `add`
 
+Adds a module to an existing contact
+
+Format: `add INDEX -m c/CODE`
+
+* Adds a module represented by module code `CODE` to a contact at index `INDEX`
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `add 2 -m c/CS1231`
 
 ### Editing a person : `edit`
 
@@ -252,16 +264,16 @@ A: As long as the module offered can be found in NUSmod, it will be available on
 
 ## Command summary
 
-Action | Format                                                                                             | Examples                                                              
---------|----------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------
-**List** | `list -flags`                                                                                      | `list -m`, `list -c`                                                  
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`                                                      | `add n/Bob p/87654321 e/bob@u.nus.edu`        
-**Delete** | `delete index`                                                                                     | `delete 3`
-**Delete Module** | `deletemodule index t/TAG`...                                                                      | `deletemodule 1 t/CS1231`
-**Edit** | `edit index [n/NAME] [c/CODE] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` **brackets indicate optional | `edit 1 -c n/Alice`                                                   
-**Clear** | `clear`                                                                                            | `clear`
-**Clear Modules** | `clear INDEX`                                                                                      | `clear 3`
-**Status** | `status INDEX s/STATUS`                                                                            | `status 2 s/favourite`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`                                                                     | `find James Jake`
-**Filter** | `filter t/TAG`                                                                                     | `filter t/CS3230`
+| Action            | Format                                                                                             | Examples                               |
+|-------------------|----------------------------------------------------------------------------------------------------|----------------------------------------|
+| **List**          | `list -flags`                                                                                      | `list -m`, `list -c`                   |
+| **Add**           | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`                                                      | `add n/Bob p/87654321 e/bob@u.nus.edu` |
+| **Delete**        | `delete index`                                                                                     | `delete 3`                             |
+| **Delete Module** | `deletemodule index t/TAG`...                                                                      | `deletemodule 1 t/CS1231`              |
+| **Edit**          | `edit index [n/NAME] [c/CODE] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` **brackets indicate optional | `edit 1 -c n/Alice`                    |
+| **Clear**         | `clear`                                                                                            | `clear`                                |
+| **Clear Modules** | `clear INDEX`                                                                                      | `clear 3`                              |
+| **Status**        | `status INDEX s/STATUS`                                                                            | `status 2 s/favourite`                 |
+| **Find**          | `find KEYWORD [MORE_KEYWORDS]`                                                                     | `find James Jake`                      |
+| **Filter**        | `filter t/TAG`                                                                                     | `filter t/CS3230`                      |
 
