@@ -2,13 +2,14 @@
 layout: page
 title: User Guide
 ---
+
 Trackermon is a **desktop app** for **tracking and managing shows**, **optimized for use via a
 Command Line Interface (CLI)** while still having the **benefits of a Graphical User Interface (GUI)**.
-The app allows the user to track and remember what shows they have watched or currently watching. 
+The app allows the user to track and remember what shows they have watched or currently watching.
 They can easily look up the list of shows if they need to.
 
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -27,22 +28,23 @@ They can easily look up the list of shows if they need to.
 
 Some example commands you can try:
 
-   * **`list`** : Lists all shows.
+* **`list`** : Lists all shows.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+* **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
-   * **`clear`** : Deletes all contacts.
+* **`clear`** : Deletes all contacts.
 
-   * **`exit`** : Exits the app.
+* **`exit`** : Exits the app.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
 
 <div markdown="block" class="alert alert-info">
-                        
+
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
@@ -106,7 +108,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+  specifying any tags after it.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -134,8 +136,6 @@ Examples:
 
 Deletes the specified person from the address book.
 
-Deletes a show in Trackermon.
-
 Format: `delete <INDEX>`
 * Deletes the show at the specified `<INDEX>`.
 * The index refers to the index number shown in the displayed show list. (not overall)
@@ -145,6 +145,28 @@ Examples:
 * `list` followed by `delete 2` removes 2nd show in Trackermon
 * `find ghibli` followed by `delete 1` removes 1st show in results of `find` command
 
+### Clearing all entries : `clear`
+
+Clears all entries from the address book.
+
+Format: `clear`
+
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+### Saving the data
+
+AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+### Editing the data file
+
+AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -163,4 +185,10 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**List** | `list`
+**Help** | `help`
