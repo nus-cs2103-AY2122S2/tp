@@ -116,4 +116,3 @@ AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.
 | List             | `list`                                                                                                                                                                    |
 | Update status    | `update_status INDEX STATUS`<br/>e.g., `update_status 54 positive`                                                                                                        |
 | Exit             | `exit`
-|
