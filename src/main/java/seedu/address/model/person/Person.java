@@ -2,12 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
-
-import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
@@ -16,52 +11,55 @@ import seedu.address.model.tag.Tag;
 public class Person {
 
     // Identity fields
+    private final StudentId studentId;
     private final Name name;
-    private final Phone phone;
-    private final Email email;
 
     // Data fields
-    private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final ModuleCode moduleCode;
+    private final Phone phone;
+    private final TelegramHandle telegramHandle;
+    private final Email email;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(StudentId studentId, Name name, ModuleCode moduleCode, Phone phone,
+                  TelegramHandle telegramHandle, Email email) {
+        requireAllNonNull(studentId, name, moduleCode); // Compulsory fields
+        this.studentId = studentId;
         this.name = name;
+        this.moduleCode = moduleCode;
         this.phone = phone;
+        this.telegramHandle = telegramHandle;
         this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
+    }
+
+    public StudentId getStudentId() {
+        return studentId;
     }
 
     public Name getName() {
         return name;
     }
 
+    public ModuleCode getModuleCode() {
+        return moduleCode;
+    }
+
     public Phone getPhone() {
         return phone;
+    }
+
+    public TelegramHandle getTelegramHandle() {
+        return telegramHandle;
     }
 
     public Email getEmail() {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
-    }
-
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
-    }
-
-    /**
-     * Returns true if both persons have the same name.
+     * Returns true if both persons have the same student id.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
@@ -70,7 +68,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getStudentId().equals(getStudentId());
     }
 
     /**
@@ -88,35 +86,44 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return otherPerson.getName().equals(getName())
+        return otherPerson.getStudentId().equals(getStudentId())
+                && otherPerson.getName().equals(getName())
+                && otherPerson.getModuleCode().equals(getModuleCode())
                 && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getTelegramHandle().equals(getTelegramHandle())
+                && otherPerson.getEmail().equals(getEmail());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(studentId, name, moduleCode, phone, telegramHandle, email);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append("; Phone: ")
-                .append(getPhone())
-                .append("; Email: ")
-                .append(getEmail())
-                .append("; Address: ")
-                .append(getAddress());
+        builder.append(getStudentId())
+                .append("; Name: ")
+                .append(getName())
+                .append("; Module Code: ")
+                .append(getModuleCode());
 
-        Set<Tag> tags = getTags();
-        if (!tags.isEmpty()) {
-            builder.append("; Tags: ");
-            tags.forEach(builder::append);
+        Phone currentPhone = getPhone();
+        if (currentPhone != null) {
+            builder.append("; Phone Number: ").append(currentPhone);
         }
+
+        TelegramHandle currentTelegramHandle = getTelegramHandle();
+        if (currentTelegramHandle != null) {
+            builder.append("; Telegram Handle: @").append(currentTelegramHandle);
+        }
+
+        Email currentEmail = getEmail();
+        if (currentEmail != null) {
+            builder.append("; Email: ").append(currentEmail);
+        }
+
         return builder.toString();
     }
 
