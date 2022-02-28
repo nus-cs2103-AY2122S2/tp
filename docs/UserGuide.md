@@ -226,7 +226,7 @@ Format: `deletetag n/TAGNAME`
 * If `TAGNAME` cannot be found, the command will not execute.
 
 Examples:
-`deletetag n/friends` Deletes the tag named *friends* and disassociates any contacts that have the *friends* tag.
+* `deletetag n/friends` Deletes the tag named *friends* and disassociates any contacts that have the *friends* tag.
 
 ### Finding Contacts by Tag: `findtag`
 
@@ -424,6 +424,10 @@ Action | Format, Examples
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
+**Add Tag** | `addtag n/TAGNAME` <br> e.g., `addtag n/Potential Clients`
+**Edit Tag** | `edittag f/OLD_TAGNAME t/NEW_TAGNAME` <br> e.g., `edittag f/New Clients t/Prospective Clients`
+**List Tags** | `listtags`
+**Delete Tag** | `deletetag n/TAGNAME` <br> e.g., `deletetag n/friends`
 **Add Appointment** | `addAppointment n/NAME d/DATE t/TIME l/DURATION p/PERSON`<br> e.g., `addAppointment n/Call Bob d/14-02-2022 t/11:00 p/2 l/60`
 **List Appointments** | `listAppointments`
 **Delete Appointment** | `deleteAppointment INDEX`<br> e.g., `deleteAppointment 2`
