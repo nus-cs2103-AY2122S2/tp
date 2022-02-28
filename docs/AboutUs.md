@@ -18,4 +18,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
+### Wu Weiye
 
+<img src="images/teddye.png" width="200px">
+
+[[github](http://github.com/teddye)]
+[[portfolio](team/teddye.md)]
+
+* Role: Developer
+* Responsibilities: TBD
+=======
