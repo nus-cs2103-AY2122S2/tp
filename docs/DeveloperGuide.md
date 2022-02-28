@@ -324,7 +324,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1c. The person already exists
 
-    * 1c1. ContaX shows an error message indicating that the person already exists
+    * 1c1. ContaX shows an error message indicating that the person already exists.
 
     * Use case ends. 
 
@@ -420,7 +420,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1c. The appointment already exists
 
-    * 1c1. ContaX shows an error message indicating that the appointment already exists
+    * 1c1. ContaX shows an error message indicating that the appointment already exists.
 
     * Use case ends. 
 
