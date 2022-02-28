@@ -494,9 +494,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. Invalid CSV file selected
+* 2a. Invalid CSV file selected
 
-    * 1a1. ContaX shows an error message indicating that the CSV file selected is invalid. 
+    * 2a1. ContaX shows an error message indicating that the CSV file selected is invalid. 
 
     * Use case ends.
 
