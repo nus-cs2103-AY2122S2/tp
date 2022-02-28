@@ -17,27 +17,38 @@ public class Person {
 
     // Identity fields
     private final Name name;
+    private final Faculty faculty;
     private final Phone phone;
     private final Email email;
+    private final MatriculationNumber number;
 
     // Data fields
     private final Address address;
+    private final CovidStatus status;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Faculty faculty, Phone phone, Email email, Address address,
+                  MatriculationNumber number, CovidStatus status, Set<Tag> tags) {
+        requireAllNonNull(name, faculty, phone, email, address, tags);
         this.name = name;
+        this.faculty = faculty;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.number = number;
+        this.status = status;
         this.tags.addAll(tags);
     }
 
     public Name getName() {
         return name;
+    }
+
+    public Faculty getFaculty() {
+        return faculty;
     }
 
     public Phone getPhone() {
@@ -46,6 +57,14 @@ public class Person {
 
     public Email getEmail() {
         return email;
+    }
+
+    public MatriculationNumber getMatriculationNumber() {
+        return number;
+    }
+
+    public CovidStatus getStatus() {
+        return status;
     }
 
     public Address getAddress() {
@@ -89,6 +108,7 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return otherPerson.getName().equals(getName())
+                && otherPerson.getFaculty().equals(getFaculty())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
@@ -105,11 +125,18 @@ public class Person {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
+                .append("; Matriculation Number: ")
+                .append(getMatriculationNumber())
+                .append("; Faculty: ")
+                .append(getFaculty())
                 .append("; Phone: ")
                 .append(getPhone())
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Address: ")
+                .append(getAddress())
+                .append("; Covid Status: ")
+                .append(getStatus())
                 .append(getAddress());
 
         Set<Tag> tags = getTags();
