@@ -4,10 +4,15 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.CovidStatus;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Faculty;
+import seedu.address.model.person.MatriculationNumber;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+
+
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -17,14 +22,20 @@ import seedu.address.model.util.SampleDataUtil;
 public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
+    public static final String DEFAULT_FACULTY = "FOL";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_MATRICULATION_NUMBER = "A0263512N";
+    public static final String DEFAULT_COVID_STATUS = "negative";
 
     private Name name;
+    private Faculty faculty;
     private Phone phone;
     private Email email;
     private Address address;
+    private MatriculationNumber number;
+    private CovidStatus status;
     private Set<Tag> tags;
 
     /**
@@ -90,7 +101,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, faculty, phone, email, address, number, status, tags);
     }
 
 }
