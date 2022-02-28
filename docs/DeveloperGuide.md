@@ -325,9 +325,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1.  Essential: Technical: Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2.  Typical: Performance: Should be able to hold up to 1000 clients without a noticeable sluggishness in performance for typical usage.
+3.  Typical: A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Essential" Technical: Should work on both 32-bit and 64-bit environments.
+5.  Novel: Quality: Should be usable by a novice who is not extremely tech savvy.
+6.  Typical: Scalability: Features and improvements should be easy to implement iteratively.
+6.  Typical: Constraints: Minimal mouse clicking to interact with Ui.
+7.  Essential: Process requirements: the project is expected to adhere to a schedule that delivers a feature set according to the module requirements.
+8.  Typical: Business/domain: Clients should be unique; they cannot have the exact same fields.
+9.  Notes about project scope: the product is not required to handle any sort of physical printing (e.g client list hardcopy).
+10. Typical: Disaster recovery: If user makes a mistake on his client list, he should be able to recover from the mistake quickly without too much stress.
 
 *{More to be added}*
 
