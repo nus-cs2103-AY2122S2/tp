@@ -20,4 +20,8 @@ Below are the current and upcoming features of the UDT
 * Exiting the program
 * Editing student’s personal details (coming in v1.3)
 
-This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+## Miscellaneous
+
+* Refer to our Tracey website here: **[Ultimate Divoc Tracker](https://ay2122s2-cs2103t-t12-1.github.io/tp/)**.
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+* This project was adopted from the existing AB3 se-education.org project. Refer to the AB3 product website **[here](https://se-education.org/addressbook-level3/)**.
