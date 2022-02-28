@@ -448,6 +448,80 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `TAssist` and the **Actor** is the `TA`, unless specified otherwise)
 
+**Use case 01: Add Module**
+
+**MSS**
+
+1.  TA enters a new module with the specified details.
+2.  TAssist adds the module and displays the new module’s details.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. TAssist detects an error in the entered command.
+
+    * 1a1. TAssist prompts for the correct command.
+
+    * 1a2. TA enters a new command.
+
+      Steps 1a1-1a2 are repeated until the command entered is correct.
+
+      Use case resumes from step 2.
+
+**Use case 02: List Modules**
+
+**MSS**
+
+1.  TA lists the modules.
+2.  TAssists display the details of all the modules.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. TAssist detects an error in the entered command.
+
+    * 1a1. TAssist prompts for the correct command.
+
+    * 1a2. TA enters a new command.
+
+      Steps 1a1-1a2 are repeated until the command entered is correct.
+
+      Use case resumes from step 2.
+
+**Use case 03: Delete Module**
+
+**MSS**
+
+1. TA requests to <ins>list modules (UC02)</ins>. 
+2. TA deletes a module with the specified index.
+3. TAssist deletes the module and the class groups associated to it.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 2a. TAssist detects an error in the entered command.
+
+    * 2a1. TAssist prompts for the correct command.
+
+    * 2a2. TA enters a new command.
+
+      Steps 2a1-2a2 are repeated until the command entered is correct.
+
+      Use case resumes from step 3.
+
+* 3b. The given index is invalid.
+
+    * 3b1. TAssist shows an error message.
+
+      Use case resumes from step 2.
+
 **Use case 04: Add a class group**
 
 **MSS**
