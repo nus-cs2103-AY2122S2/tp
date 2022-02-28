@@ -23,8 +23,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/1001mei.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/1001mei)]
+[[portfolio](team/1001mei.md)]
 
 * Role: Developer
 * Responsibilities: Documentation
