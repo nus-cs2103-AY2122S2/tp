@@ -14,7 +14,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/junhong.jpg" width="200px">
 
 [[github](https://github.com/whoisjunhong)]
-[[portfolio](team/junhong.md)]
+[[portfolio](team/whoisjunhong.md)]
 
 * Role: Project Advisor
 
@@ -23,7 +23,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/joshua.jpg" width="200px">
 
 [[github](http://github.com/e0544333)]
-[[portfolio](team/joshua.md)]
+[[portfolio](team/e0544333.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
@@ -33,7 +33,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/louisdavinlie.png" width="200px">
 
 [[github](http://github.com/louisdavinlie)]
-[[portfolio](team/louis.md)]
+[[portfolio](team/louisdavinlie.md)]
 
 * Role: Developer
 * Responsibilities: Data
@@ -43,7 +43,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/fenway17.png" width="200px">
 
 [[github](http://github.com/fenway17)]
-[[portfolio](team/yongrui.md)]
+[[portfolio](team/fenway17.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
@@ -53,7 +53,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/lzf834.png" width="200px">
 
 [[github](http://github.com/lzf834)]
-[[portfolio](team/zifoong.md)]
+[[portfolio](team/lzf834.md)]
 
 * Role: Developer
 * Responsibilities: UI
