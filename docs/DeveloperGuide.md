@@ -516,12 +516,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 3.
 
-* 2c The given index is invalid.
-
-    * 2c1. TAssist shows an error message.
-
-      Use case resumes from step 2.
-
 **Use case 04: Add a class group**
 
 **MSS**
@@ -589,12 +583,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Steps 2b1-2b2 are repeated until the command entered is correct.
 
       Use case resumes from step 3.
-
-* 2c. The given index is invalid.
-
-    * 2c1. TAssist shows an error message.
-
-      Use case resumes from step 2.
 
 *{More to be added}*
 
