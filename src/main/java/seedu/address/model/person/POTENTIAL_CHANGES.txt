@@ -1,5 +1,8 @@
 This file depicts changes and potential changes to be made to implement Status.java
 
+Implementing:
+1. Classroom Class
+
 Implemented:
 1. Status Class
 
