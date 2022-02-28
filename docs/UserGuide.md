@@ -179,9 +179,9 @@ Clears all entries from the address book.
 
 Format: `clear`
 
-### Creating a Tag: `addtag`
+### Creating a Tag : `addtag`
 
-Creates a new tag to Contax.
+Creates a new tag in Contax.
 
 Format: `addtag n/TAGNAME`
 
@@ -191,22 +191,21 @@ Format: `addtag n/TAGNAME`
 Examples:
 * `addtag n/Potential Clients` Creates a tag named *Potential Clients* in the address book (if it does not exist).
 
-### Editing a Tag: `edittag`
+### Editing a Tag : `edittag`
 
 Edits an existing tag in Contax.
 
 Format: `edittag f/OLD_TAGNAME t/NEW_TAGNAME`
 
 * All parameters **must** be specified.
-* Edits a tag specified at `OLD_TAGNAME` and updates to the tag specified at `NEW_TAGNAME`.
+* Changes the name of a tag`OLD_TAGNAME` to `NEW_TAGNAME`.
 * `OLD_TAGNAME` and `NEW_TAGNAME` are case-insensitive.
-* If `OLD_TAGNAME` cannot be found, the command will not execute.
-* If `NEW_TAGNAME` already exists in Contax (case-insensitive), the command will not execute.
+* An error would be thrown if either `OLD_TAGNAME` cannot be found or `NEW_TAGNAME` already exists in Contax.
 
 Examples:
 * `edittag f/New Clients t/Prospective Clients` Changes the name of the tag *New Clients* to *Prospective Clients*. Command will be ignored if the tag *New Clients* does not exist in the first place or *Prospective Clients* already exists in Contax.
 
-### Listing All Tags: `listtags`
+### Listing All Tags : `listtags`
 
 Shows a list of all tags in Contax.
 
@@ -216,32 +215,32 @@ Format: `listtags`
 
 ![List Tags](images/ListTag.png)
 
-### Deleting a Tag: `deletetag`
+### Deleting a Tag : `deletetag`
 
 Deletes the specified tag in Contax.
 
 Format: `deletetag n/TAGNAME`
 
 * The `TAGNAME` parameter **must** be specified.
-* Deletes the tag that matches the tag name (case-insensitive) e.g. *students* is the same as *Students*.
-* When the tag is deleted, all persons that contain this tag will have the tag removed.
+* Deletes the tag that matches the tag name (case-insensitive) e.g. `students` is the same as `Students`.
+* When the tag is deleted, contacts that contain this tag will have the tag removed.
 * If `TAGNAME` cannot be found, the command will not execute.
 
 Examples:
 * `deletetag n/friends` Deletes the tag named *friends* and disassociates any contacts that have the *friends* tag.
 
-### Finding Contacts by Tag: `findtag`
+### Finding Contacts by Tag : `findByTag`
 
 Finds persons whose tags match the given tag names.
 
-Format: `findtag t/TAGNAME`
+Format: `findByTag t/TAGNAME`
 
 * The `TAGNAME` parameter **must** be specified.
-* Search is case-insensitive e.g. *clients* is the same as *Clients*.
-* If the specified `TAGNAME` does not exist in the address book, the command will not execute.
+* Search is case-insensitive e.g. `clients` is the same as `Clients`.
+* An error will be thrown if the specified `TAGNAME` does not exist.
 
 Examples:
-* `findtag t/friends` Displays the contact information of contacts who have the *friends* tag.
+* `findByTag t/friends` Displays the contact information of contacts who have the *friends* tag.
  
 ![Find Tags](images/FindTag.png)
 
@@ -431,6 +430,7 @@ Action | Format, Examples
 **Edit Tag** | `edittag f/OLD_TAGNAME t/NEW_TAGNAME` <br> e.g., `edittag f/New Clients t/Prospective Clients`
 **List Tags** | `listtags`
 **Delete Tag** | `deletetag n/TAGNAME` <br> e.g., `deletetag n/friends`
+**Find Contacts By Tag** | `findByTag t/TAGNAME` <br> e.g., `findByTag t/friends`
 **Add Appointment** | `addAppointment n/NAME d/DATE t/TIME l/DURATION p/PERSON`<br> e.g., `addAppointment n/Call Bob d/14-02-2022 t/11:00 p/2 l/60`
 **List Appointments** | `listAppointments`
 **Delete Appointment** | `deleteAppointment INDEX`<br> e.g., `deleteAppointment 2`
