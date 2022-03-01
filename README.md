@@ -3,7 +3,7 @@
 
 ![Ui](docs/images/Ui.png)
 
-##ContaX
+## ContaX
 
 * This application is aimed at professionals with many clients to help them to organise contacts, appointments and resources
 
