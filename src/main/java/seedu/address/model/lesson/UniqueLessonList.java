@@ -3,12 +3,14 @@ package seedu.address.model.lesson;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.lesson.exceptions.ConflictsWithLessonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
@@ -29,22 +31,37 @@ public class UniqueLessonList implements Iterable<Lesson> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent lesson as the given argument.
+     * Returns true if some lesson in the list conflicts with the specified lesson
      */
-    public boolean contains(Lesson toCheck) {
+    public boolean hasConflictingLesson(Lesson toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isClashingWithLesson);
+
+        return findLessonConflictingWith(toCheck) == null;
+    }
+
+    /**
+     * Returns some lesson in the list with timeslot that overlaps with the specified lesson, if exists.
+     */
+    public Lesson findLessonConflictingWith(Lesson toCheck) {
+        requireNonNull(toCheck);
+
+        for (Lesson existingLesson : internalList) {
+            if (existingLesson.isClashingWithLesson(toCheck)) {
+                return existingLesson;
+            }
+        }
+
+        return null;
     }
 
     /**
      * Adds a lesson to the list.
-     * The lesson must not already exist in the list.
+     * The time slot of the lesson must not conflict with any of the existing lessons in the list.
      */
     public void add(Lesson toAdd) {
         requireNonNull(toAdd);
-        if (contains(toAdd)) {
-            // TODO: create a DuplicateLessonException()
-            throw new DuplicatePersonException();
+        if (hasConflictingLesson(toAdd)) {
+            throw new ConflictsWithLessonException(findLessonConflictingWith(toAdd), toAdd);
         }
         internalList.add(toAdd);
     }
@@ -59,13 +76,12 @@ public class UniqueLessonList implements Iterable<Lesson> {
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            // TODO: create a PersonNotFoundException()
+            // TODO: create a LessonNotFoundException()
             throw new PersonNotFoundException();
         }
 
-        if (contains(editedLesson)) {
-            // TODO: replace with ClashesWithLessonException() once created
-            throw new DuplicatePersonException();
+        if (hasConflictingLesson(editedLesson)) {
+            throw new ConflictsWithLessonException(findLessonConflictingWith(editedLesson), editedLesson);
         }
 
         internalList.set(index, editedLesson);
@@ -78,7 +94,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
     public void remove(Lesson toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            // TODO: replace with PersonNotFoundException() once created
+            // TODO: replace with LessonNotFoundException() once created
             throw new PersonNotFoundException();
         }
     }
@@ -94,9 +110,9 @@ public class UniqueLessonList implements Iterable<Lesson> {
      */
     public void setLessons(List<Lesson> lessons) {
         requireAllNonNull(lessons);
-        if (!lessonsAreUnique(lessons)) {
-            // TODO: replace with DuplicateLessonException() once created
-            throw new DuplicatePersonException();
+        if (!lessonsDoNotConflict(lessons)) {
+            List<Lesson> conflictingLessons = findConflictingLessons(lessons);
+            throw new ConflictsWithLessonException(conflictingLessons.get(0), conflictingLessons.get(1));
         }
 
         internalList.setAll(lessons);
@@ -127,9 +143,9 @@ public class UniqueLessonList implements Iterable<Lesson> {
     }
 
     /**
-     * Returns true if {@code lessons} contains only unique lessons.
+     * Returns true if {@code lessons} contains only non-conflicting lessons.
      */
-    private boolean lessonsAreUnique(List<Lesson> lessons) {
+    private boolean lessonsDoNotConflict(List<Lesson> lessons) {
         for (int i = 0; i < lessons.size() - 1; i++) {
             for (int j = i + 1; j < lessons.size(); j++) {
                 if (lessons.get(i).isClashingWithLesson(lessons.get(j))) {
@@ -138,5 +154,19 @@ public class UniqueLessonList implements Iterable<Lesson> {
             }
         }
         return true;
+    }
+
+    /**
+     * Returns a list containing two instances of conflicting lessons in {@code lessons}, if any.
+     */
+    private List<Lesson> findConflictingLessons(List<Lesson> lessons) {
+        for (int i = 0; i < lessons.size() - 1; i++) {
+            for (int j = i + 1; j < lessons.size(); j++) {
+                if (lessons.get(i).isClashingWithLesson(lessons.get(j))) {
+                    return Arrays.asList(lessons.get(i), lessons.get(j));
+                }
+            }
+        }
+        return null;
     }
 }

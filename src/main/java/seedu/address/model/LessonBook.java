@@ -59,11 +59,11 @@ public class LessonBook implements ReadOnlyLessonBook {
     //// lesson-level operations
 
     /**
-     * Returns true if a lesson with the same identity as {@code lesson} exists in the lesson book.
+     * Returns true if a lesson with the same identity as {@code lesson} exists in the list of lessons.
      */
-    public boolean hasLesson(Lesson lesson) {
+    public boolean hasConflictingLesson(Lesson lesson) {
         requireNonNull(lesson);
-        return lessons.contains(lesson);
+        return lessons.hasConflictingLesson(lesson);
     }
 
     /**
