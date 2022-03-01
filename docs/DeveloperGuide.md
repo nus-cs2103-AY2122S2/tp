@@ -257,58 +257,165 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* has a need to manage a significant number of client contacts
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
+* easily contact clients
+* arrange for meetups with clients in one place
+* manage contacts faster than a typical mouse/GUI driven app
+
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                    | I want to …​                                       | So that I can…​                                                        |
+|----------|--------------------------------------------|----------------------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | potential user                             | see the app populated with sample data             | see how the app will look like when it is in use                       |
+| `* * *`  | new user                                   | see usage instructions                             | refer to instructions when I forget how to use the App                 |
+| `* * *`  | user                                       | add a new person                                   |                                                                        |
+| `* * *`  | user                                       | update a person                                    |                                                                        |
+| `* * *`  | user                                       | delete a person                                    |                                                                        |
+| `* * *`  | user                                       | view all my contacts                               |                                                                        |
+| `* * *`  | user                                       | find a person by name                              | locate details of persons without having to go through the entire list |
+| `* * *`  | user                                       | schedule meeting with a client                     |                                                                        |
+| `* * *`  | user                                       | view my meeting schedule for today                 | know what timings I am occupied                                        |
+| `* *`    | user                                       | get warnings if there are conflicts in my schedule | avoid scheduling clashing meetings                                     |
+| `* *`    | user                                       | add notes about my clients                         | record details about clients                                           |
+| `* *`    | user                                       | add details of my client's policies                |                                                                        |
+| `* *`    | user                                       | record my client's individual preferences          | better cater to their needs                                            |
+| `*`      | user with many persons in the address book | sort persons by name                               | locate a person easily                                                 |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `onlyFAs` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a person**
+
+**MSS**
+
+1. User requests to add a person
+2. onlyFAs prompts user to add data about a new person
+3. User enters details of new person
+4. onlyFAs adds the new person
+
+Use case ends.
+
+---
+
+**Use case: Update a client's details**
+
+**MSS**
+
+1. User requests to edit a specific client in the list
+2. onlyFAs prompts user to enter client's email
+3. User enters client's email
+4. onlyFAs prompts user to enter new details
+5. User enters new details of client
+6. onlyFAs edits the client details
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. The email does not belong to any client.
+    * 3a1. onlyFAs shows an error message.
+    * Use case resumes at step 2.
+
+---
+
+**Use case: Delete a client**
 
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  onlyFAs shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  onlyFAs deletes the person
 
     Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
-
-  Use case ends.
+  * Use case ends.
 
 * 3a. The given index is invalid.
+    * 3a1. onlyFAs shows an error message.
+    * Use case resumes at step 2.
 
-    * 3a1. AddressBook shows an error message.
+---
+**Use case: Find a client by name**
 
-      Use case resumes at step 2.
+**MSS**
 
-*{More to be added}*
+1. User requests to search
+2. onlyFAs prompts user to enter client name
+3. User enters client name
+4. onlyFAs displays matching client’s details
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. There are no matching clients.
+  * Use case ends.
+
+
+* 2b. There are multiple matching clients.
+  * 2b1. onlyFAs lists all matching clients.
+  * 2b2. User requests to view a specific client in the list.
+  * Use case resumes at step 4.
+
+---
+**Use case: Schedule meeting with a client**
+
+**MSS**
+
+1. User requests to schedule meeting with client
+2. onlyFAs prompts user to enter client email
+3. User enters client email
+4. onlyFAs prompts user to enter meeting details
+5. User enters meeting details
+6. onlyFAs requests for confirmation
+7. User confirms
+8. onlyFAs displays the confirmed client and meeting details
+
+    Use case ends.
+
+**Extensions:**
+
+* 3a. The email does not belong to any client. 
+  * 3a1. onlyFAs shows an error message.
+  * Use case resumes at step 2.
+
+* 5a. onlyFAs detects a conflicting meeting in the schedule
+  * 5a1. onlyFAs requests for user to enter another meeting time.
+  * 5a2. User enters new meeting time.
+  * Steps 5a1-5a2 are repeated until the data entered are correct.
+  * Use case resumes from step 6.
+
+---
+**Use case: View my meeting schedule for today**
+
+**MSS**
+
+1. User requests to show meeting schedule
+2. onlyFAs displays meetings for today.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. There are no meetings today.
+  * Use case ends.
 
 ### Non-Functional Requirements
 
@@ -321,7 +428,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Client**: A contact using the services of the user (a Financial Advisor).
 
 --------------------------------------------------------------------------------------------------------------------
 
