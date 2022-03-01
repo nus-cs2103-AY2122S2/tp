@@ -13,7 +13,7 @@ import seedu.address.model.role.Stipend;
 
 public class JsonAdaptedRole {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Company's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Role's %s field is missing!";
 
     private final String name;
     private final String status;
