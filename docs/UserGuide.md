@@ -463,7 +463,7 @@ Perform multiple actions in a single command.
 
 Format: `COMMAND_A && COMMAND_B`
 
-* Calls multiple specified scommands
+* Calls multiple specified commands
 * The syntax of `COMMAND_A` and `COMMAND_B` must be correct
 * A valid command must be supplied before and after the `&&` operator, otherwise the command will fail
 
