@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-TAPA (Teaching Assistant Personal Assistant) is a desktop app that allows TAs to better manage their student’s progress, 
+TAPA (Teaching Assistant's Personal Assistant) is a desktop app that allows TAs to better manage their student’s progress, 
 especially for those 
 who are teaching multiple classes/modules at the same time. It is optimised for use on a CLI.
 
@@ -28,7 +28,7 @@ who are teaching multiple classes/modules at the same time. It is optimised for 
 
    * **`list`** : Lists all contacts.
 
-   * **`add`**`i/A0123456Z n/john m/CS2103T p/98765432 t/@john e/E0123456Z` : Adds a contact named `John` to TAPA.
+   * **`add`**`i/A0123456Z n/john m/CS2103T p/98765432 t/johnnn e/e0123456@u.nus.edu` : Adds a contact named `John` to TAPA.
 
    * **`delete`**`3` : Deletes the 3rd entry in TAPA.
 
@@ -78,7 +78,7 @@ Format: `add i/STUDENT_ID n/STUDENT_NAME m/MODULE_CODE [p/PHONE_NUMBER] [h/TELEG
 * The phone number, telegram handle, and email address fields are optional and can be excluded.
 
 Example:
-* `add i/A0123456Z n/john m/CS2103T p/98765432 t/@john e/E0123456Z`
+* `add i/AXXXXXXXR n/john m/CS2103T p/98765432 t/johnnn e/e0123456@u.nus.edu`
     * A student named John is added to TAPA.
 
 ### Deleting a student: `delete`
@@ -117,8 +117,8 @@ Format: `task i/STUDENT_ID`
 * The completed and uncompleted tasks are separated into 2 different sections.
 
 Example:
-* `task i/A0123456Z`
-    * Lists out the tasks that student (A0123456Z) has.
+* `task i/AXXXXXXXR`
+    * Lists out the tasks that student (AXXXXXXXR) has.
     
 ### Marking an undone task as done for a student: `mark`
 
@@ -204,8 +204,8 @@ Format: `assign i/STUDENT_ID tn/TASK_NAME`
 * Assigns a task to a particular student.
 
 Example:
-* `assign i/A0XXXXXXR tn/assignment 1`
-    * Assigns assignment 1 to student with id A0XXXXXXR.
+* `assign i/AXXXXXXXR tn/assignment 1`
+    * Assigns assignment 1 to student with id AXXXXXXXR.
 
 
 ### Displaying manual for a command: `manual`
@@ -224,6 +224,12 @@ Example
 * `manual`
     * Display all available commands.
 
+### Viewing help : `help`
+
+Shows a pop-up window explaining how to access the user guide.
+
+Format: `help`
+
 
 ### Exiting the program : `exit`
 
@@ -237,7 +243,7 @@ Format: `exit`
 ## FAQ
 
 **Q**: What command can I use to view a list of available commands?<br>
-**A**: Use the command “help” to view the list of commands used within TAPA. Alternatively, refer to the Command Summary section below.
+**A**: Use the command “manual” to view the list of commands used within TAPA. Alternatively, refer to the Command Summary section below.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -245,19 +251,20 @@ Format: `exit`
 
 Action      | Format, Examples
 ------------|------------------
-**Add**     | `add i/MATRICULATION_NO n/STUDENT_NAME m/MODULE_CODE [p/PHONE_NUMBER] [h/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] ` <br> e.g., `add i/A0123456Z n/john m/CS2103T p/98765432 t/@john e/E0123456Z`
-**Delete**    | `delete STUDENT_INDEX` <br> e.g., `delete 10`
-**Find**    | `find n/STUDENT_NAME` (or) `find i/STUDENT_ID` <br> e.g., `find n/john`, `find i/A0123456Z`
+**Add**     | `add i/MATRICULATION_NO n/STUDENT_NAME m/MODULE_CODE [p/PHONE_NUMBER] [h/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] ` <br> e.g., `add i/AXXXXXXXR n/john m/CS2103T p/98765432 t/johnnn e/e0123456@u.nus.edu`
+**Delete**  | `delete STUDENT_INDEX` <br> e.g., `delete 10`
+**Find**    | `find n/STUDENT_NAME` (or) `find i/STUDENT_ID` <br> e.g., `find n/john`, `find i/AXXXXXXXR`
 **Manual**  | `manual COMMAND_NAME` <br> e.g., `manual add`
 **Exit**    | `exit`
-**Task**    | `task i/STUDENT_ID` <br> e.g., `task i/A0123456Z`
+**Task**    | `task i/STUDENT_ID` <br> e.g., `task i/AXXXXXXXR`
 **Mark**    | `mark i/STUDENT_ID UNDONE_TASK_INDEX` <br> e.g., `mark i/AXXXXXXXR 1`
 **Unmark**  | `unmark i/STUDENT_ID DONE_TASK_INDEX` <br> e.g., `unmark i/AXXXXXXXR 1`
 **list**    | `list`                                                                                                                                                                                     
-**Assign**  | `assign i/STUDENT_ID tn/TASK_NAME` <br> e.g., `task i/A0123456Z tn/assignment 1`                                                                                                           
-**Edit**    | `edit STUDENT_INDEX [i/MATRICULATION_NO] [n/STUDENT_NAME] [m/MODULE_CODE] [p/PHONE_NUMBER] [t/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] ` <br> e.g., `edit 10 m/CS2103T p/98765432 t/@john e/E0123456Z`
+**Assign**  | `assign i/STUDENT_ID tn/TASK_NAME` <br> e.g., `task i/AXXXXXXXR tn/assignment 1`                                                                                                           
+**Edit**    | `edit STUDENT_INDEX [i/MATRICULATION_NO] [n/STUDENT_NAME] [m/MODULE_CODE] [p/PHONE_NUMBER] [t/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] ` <br> e.g., `edit 10 m/CS2103T p/98765432 t/johnnn e/e0123456@nus.edu.sg`
 **Clear**   | `clear`
 **Archive** | `archive`
+**Help**    | `help`
 
 
 
