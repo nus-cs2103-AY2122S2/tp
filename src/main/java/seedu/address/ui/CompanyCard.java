@@ -49,9 +49,25 @@ public class CompanyCard extends UiPart<Region> {
         this.company = company;
         id.setText(displayedIndex + ". ");
         name.setText(company.getName().fullName);
-        phone.setText(company.getPhone().value);
-        address.setText(company.getAddress().value);
-        email.setText(company.getEmail().value);
+
+        String phoneField = company.getPhone().value;
+        String addressField = company.getAddress().value;
+        String emailField = company.getEmail().value;
+
+        phone.setText(phoneField);
+        address.setText(addressField);
+        email.setText(emailField);
+
+        if (phoneField == "") {
+            phone.setManaged(false);
+        }
+        if (addressField == "") {
+            address.setManaged(false);
+        }
+        if (emailField == "") {
+            email.setManaged(false);
+        }
+
         company.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
