@@ -9,36 +9,35 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Papattarada Apithanangsiri
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/punpun1643.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/Punpun1643)]
 
-* Role: Project Advisor
+* Role: TBC
+* Responsibilities: TBC
 
-### Jane Doe
+### Raja Dishafnya Achadi
 
 <img src="images/johndoe.png" width="200px">
 
 [[github](http://github.com/johndoe)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: TBC
+* Responsibilities: TBC
 
-### Johnny Doe
+### QUEK KAH LEONG
 
 <img src="images/johndoe.png" width="200px">
 
 [[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: TBC
+* Responsibilities: TBC
 
-### Jean Doe
+### KRISTOPHER PUTRA TASLIM
 
 <img src="images/johndoe.png" width="200px">
 
@@ -48,12 +47,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### LOW LIK HERN
 
 <img src="images/johndoe.png" width="200px">
 
 [[github](http://github.com/johndoe)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: TBC
+* Responsibilities: TBC
