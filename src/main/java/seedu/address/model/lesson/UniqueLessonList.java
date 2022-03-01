@@ -22,7 +22,7 @@ import seedu.address.model.lesson.exceptions.LessonNotFoundException;
  *
  * Supports a minimal set of list operations.
  *
- * @see Lesson#isClashingWithLesson(Lesson)
+ * @see Lesson#isConflictingWithLesson(Lesson)
  */
 public class UniqueLessonList implements Iterable<Lesson> {
 
@@ -46,7 +46,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
         requireNonNull(toCheck);
 
         for (Lesson existingLesson : internalList) {
-            if (existingLesson.isClashingWithLesson(toCheck)) {
+            if (existingLesson.isConflictingWithLesson(toCheck)) {
                 return existingLesson;
             }
         }
@@ -147,7 +147,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
     private boolean lessonsDoNotConflict(List<Lesson> lessons) {
         for (int i = 0; i < lessons.size() - 1; i++) {
             for (int j = i + 1; j < lessons.size(); j++) {
-                if (lessons.get(i).isClashingWithLesson(lessons.get(j))) {
+                if (lessons.get(i).isConflictingWithLesson(lessons.get(j))) {
                     return false;
                 }
             }
@@ -161,7 +161,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
     private List<Lesson> findConflictingLessons(List<Lesson> lessons) {
         for (int i = 0; i < lessons.size() - 1; i++) {
             for (int j = i + 1; j < lessons.size(); j++) {
-                if (lessons.get(i).isClashingWithLesson(lessons.get(j))) {
+                if (lessons.get(i).isConflictingWithLesson(lessons.get(j))) {
                     return Arrays.asList(lessons.get(i), lessons.get(j));
                 }
             }

@@ -56,7 +56,7 @@ public abstract class Lesson {
     /**
      * Returns true if both lessons have overlapping timeslots.
      */
-    public abstract boolean isClashingWithLesson(Lesson otherLesson);
+    public abstract boolean isConflictingWithLesson(Lesson otherLesson);
 
     /**
      * Returns the date and time that the lesson starts and ends.

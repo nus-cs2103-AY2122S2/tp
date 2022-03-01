@@ -29,7 +29,7 @@ public class TemporaryLesson extends Lesson {
     /**
      * Returns true if both lessons clash.
      */
-    public boolean isClashingWithLesson(Lesson otherLesson) {
+    public boolean isConflictingWithLesson(Lesson otherLesson) {
         if (otherLesson == this) {
             return true;
         }
