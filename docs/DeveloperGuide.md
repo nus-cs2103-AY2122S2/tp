@@ -363,7 +363,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2d. Amigos detects that user has requested for a pop-up window in the command.
     * 2d1. Amigos creates a separate window, allowing for long-form text to be keyed in.
-    * 2d2. User keys in long form text into pop-up window, with first line as title.
+    * 2d2. User keys in long form text into pop-up window in an appropriate format.
     * 2d3. User confirms entry, closing the window.
 
   Use case resumes at step 3.
