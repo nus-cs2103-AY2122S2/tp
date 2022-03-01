@@ -13,6 +13,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Skill;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -111,6 +112,26 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String skill} into a {@code skill}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code skill} is invalid.
+     */
+    public static Skill parseSkill(String skill) throws ParseException {
+        requireNonNull(skill);
+        String[] trimmedSkill = skill.trim().split("_");
+        String skillName = trimmedSkill[0];
+        int skillProficiency = Integer.parseInt(trimmedSkill[1]);
+        if (!Skill.isValidSkillName(skillName)) {
+            throw new ParseException(Skill.NAME_CONSTRAINTS);
+        }
+        if (!Skill.isValidSkillProficiency(skillProficiency)) {
+            throw new ParseException(Skill.PROFICIENCY_CONSTRAINTS);
+        }
+        return new Skill(skillName, skillProficiency);
+    }
+
+    /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
@@ -120,5 +141,17 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses {@code Collection<String> skill} into a {@code Set<Skill>}.
+     */
+    public static Set<Skill> parseSkillSet(Collection<String> skills) throws ParseException {
+        requireNonNull(skills);
+        final Set<Skill> skillSet = new HashSet<>();
+        for (String skill : skills) {
+            skillSet.add(parseSkill(skill));
+        }
+        return skillSet;
     }
 }
