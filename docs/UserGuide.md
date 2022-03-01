@@ -201,11 +201,11 @@ Example:
 
 Format: `assign i/STUDENT_ID tn/TASK_NAME`
 
-* Assigns a task to a particular student
+* Assigns a task to a particular student.
 
 Example:
 * `assign i/A0XXXXXXR tn/assignment 1`
-    * assigns assignment 1 to student with id A0XXXXXXR.
+    * Assigns assignment 1 to student with id A0XXXXXXR.
 
 
 ### Displaying manual for a command: `manual`
