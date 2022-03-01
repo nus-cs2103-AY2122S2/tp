@@ -4,7 +4,8 @@ title: User Guide
 ---
 # WoofAreYou 
 
-WoofAreYou is a desktop app for pet daycare owners to handle the administrative information of their pets. If you can type fast, WoofAreYou can get your contact management tasks done faster than traditional GUI apps.
+WoofAreYou is a desktop app for pet daycare owners to handle the administrative information of their pets. If you can 
+type fast, WoofAreYou can get your contact management tasks done faster than traditional GUI apps.
 ![Ui](images/Ui.png)
 --------------------------------------------------------------------------------------------------------------------
 
@@ -153,12 +154,6 @@ Clears all entries from the address book.
 
 Format: `clear`
 
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
-
 ### Saving the data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -197,28 +192,20 @@ Format: `delete INDEX`
 Examples:
 * `getId PeePee followed by delete 2 deletes the 2nd pet in the address book.`
 
+### Exiting the program : `exit`
 
-### Archiving data files `[coming in v2.0]`
+Exits the program.
 
-_Details coming soon ..._
-
---------------------------------------------------------------------------------------------------------------------
-
-## FAQ
-
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
-
---------------------------------------------------------------------------------------------------------------------
+Format: `exit`
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+| Action     | Format, Examples                                                                                                                                                   |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME_OF_PET o/OWNER_NAME p/PHONE_NUMBER a/ADDRESS` <br> e.g., `add n/Peepee o/Peter p/98648252 a/13 Computing Drive, Singapore 117417 t/friend t/colleague` |
+| **Delete** | `delete id` <br> e.g., `delete 3` (where 3 is the id of the pet in the system)                                                                                     |
+| **Get ID** | `getId nameOfPet `<br> e.g., `getId PeePee` (returns id of all pets called PeePee)                                                                                 |
+| **Time**   | `time id `<br> e.g.,`pickup 3 0900 1200` (where 3 is the id of the pet in the system)                                                                              |
+| **Food**   | `food id `<br> e.g., `food 3` (where 3 is the id of the pet in the system)                                                                                         |
+| **Owner**  | `owner o/OWNER_NAME` <br> e.g., `owner o/Jeff Lin`                                                                                                                 |
+| **Exit**   | `exit`                                                                                                                                                             |
