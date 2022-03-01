@@ -119,9 +119,9 @@ Format: `find k/KEYWORD [k/MORE_KEYWORDS] f/ATTRIBUTE_FIELD`
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The search will return a list of all TAs containing any of the specified keyword(s) in the specified attribute field.
 * For `f/all`, the search will find keywords across all attribute fields of the TA records.
-* Only full keywords will be matched 
+* Only full keywords will be matched
   e.g. `k/jane doe f/name` will not match TAs with name `jane koe` or just `jane`
-* TAs matching at least one full keyword (in the specified attribute field) will be returned i.e. OR search, 
+* TAs matching at least one full keyword (in the specified attribute field) will be returned i.e. OR search,
   e.g. `k/Jane k/Doe f/name` will return TAs with name e.g. `Jane Koe`, `John Doe`
 
 Examples:
