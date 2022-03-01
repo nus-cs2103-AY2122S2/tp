@@ -2,11 +2,19 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.logic.field.FieldParser;
+import seedu.address.logic.parser.CliSyntax;
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -14,42 +22,99 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
+    private static final Map<Prefix, FieldParser<? extends Field>> FIELD_PARSERS;
+    public static final Prefix[] PREFIXES;
+    public static final Prefix[] REQUIRED_PREFIXES;
 
-    // Identity fields
-    private final Name name;
-    private final Phone phone;
-    private final Email email;
-
-    // Data fields
-    private final Address address;
+    private final HashMap<Prefix, Field> fields = new HashMap<>();
     private final Set<Tag> tags = new HashSet<>();
+
+    // Static initialisation.
+    static {
+        HashMap<Prefix, FieldParser<? extends Field>> fieldParsers = new HashMap<>();
+
+        // -------------------------- Do not modify above. --------------------------
+
+        // Declare your fields here.
+        fieldParsers.put(CliSyntax.PREFIX_NAME, ParserUtil::parseName);
+        fieldParsers.put(CliSyntax.PREFIX_PHONE, ParserUtil::parsePhone);
+        fieldParsers.put(CliSyntax.PREFIX_EMAIL, ParserUtil::parseEmail);
+        fieldParsers.put(CliSyntax.PREFIX_ADDRESS, ParserUtil::parseAddress);
+
+        // -------------------------- Do not modify below. --------------------------
+        FIELD_PARSERS = Collections.unmodifiableMap(fieldParsers);
+        PREFIXES = FIELD_PARSERS.keySet().toArray(new Prefix[0]);
+        REQUIRED_PREFIXES = Arrays.stream(PREFIXES).filter(Prefix::isRequired).toArray(Prefix[]::new);
+    }
+
+    public static <T extends Field> FieldParser<T> getParser(Prefix prefix) {
+        return (FieldParser<T>) FIELD_PARSERS.get(prefix);
+    }
 
     /**
      * Every field must be present and not null.
      */
+    @Deprecated
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
+        addField(CliSyntax.PREFIX_NAME, name);
+        addField(CliSyntax.PREFIX_PHONE, phone);
+        addField(CliSyntax.PREFIX_EMAIL, email);
+        addField(CliSyntax.PREFIX_ADDRESS, address);
         this.tags.addAll(tags);
     }
 
+    public Person() {
+    }
+
+    public void addField(Prefix prefix, Field field) {
+        requireAllNonNull(prefix, field);
+        fields.put(prefix, field);
+    }
+
+    public void removeField(Prefix prefix) {
+        requireAllNonNull(prefix);
+        if (Arrays.asList(REQUIRED_PREFIXES).contains(prefix)) {
+            throw new IllegalArgumentException("Cannot remove mandatory fields.");
+        }
+        fields.remove(prefix);
+    }
+
+    public <T extends Field> T getField(Prefix prefix) {
+        requireAllNonNull(prefix);
+        return (T) fields.get(prefix);
+    }
+
     public Name getName() {
-        return name;
+        return getField(CliSyntax.PREFIX_NAME);
     }
 
     public Phone getPhone() {
-        return phone;
+        return getField(CliSyntax.PREFIX_PHONE);
     }
 
     public Email getEmail() {
-        return email;
+        return getField(CliSyntax.PREFIX_EMAIL);
     }
 
     public Address getAddress() {
-        return address;
+        return getField(CliSyntax.PREFIX_ADDRESS);
+    }
+
+    public void addTags(Collection<Tag> tags) {
+        this.tags.addAll(tags);
+    }
+
+    public void addTag(Tag tag) {
+        this.tags.add(tag);
+    }
+
+    public void removeTag(Tag tag) {
+        this.tags.remove(tag);
+    }
+
+    public void clearTags() {
+        this.tags.clear();
     }
 
     /**
@@ -98,7 +163,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(getName(), getPhone(), getEmail(), getAddress(), tags);
     }
 
     @Override
