@@ -16,7 +16,7 @@ public class TemporaryLesson extends Lesson {
     /**
      * Every field must be present and not null.
      */
-    public TemporaryLesson(Name name, Subject subject, TimeSlot timeSlot) {
+    protected TemporaryLesson(Name name, Subject subject, TimeSlot timeSlot) {
         super(name, subject);
         requireAllNonNull(name, subject, timeSlot);
         this.timeSlot = timeSlot;

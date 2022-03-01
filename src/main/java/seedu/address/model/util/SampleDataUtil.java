@@ -65,15 +65,9 @@ public class SampleDataUtil {
         thirdLessonDate = calendar.getTime();
 
         return new Lesson[] {
-            new TemporaryLesson(new seedu.address.model.lesson.Name("Make up lesson for George"),
-                    new Subject("Geography"),
-                    new TimeSlot(firstLessonDate, 2)),
-            new TemporaryLesson(new seedu.address.model.lesson.Name("Trial lesson for Jake"),
-                    new Subject("Biology"),
-                    new TimeSlot(secondLessonDate, 1)),
-            new TemporaryLesson(new seedu.address.model.lesson.Name("Make up lesson for Henry"),
-                    new Subject("Physics"),
-                    new TimeSlot(thirdLessonDate, 2))
+            Lesson.makeTemporaryLesson("Make up lesson for George", "Geography", firstLessonDate, 2),
+            Lesson.makeTemporaryLesson("Trial lesson for Jake", "Biology", secondLessonDate, 2),
+            Lesson.makeTemporaryLesson("Make up lesson for Henry", "Physics", thirdLessonDate, 2)
         };
     }
 
