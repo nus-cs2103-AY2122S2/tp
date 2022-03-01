@@ -22,7 +22,7 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final Flag flag;
+    private Flag flag;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -56,6 +56,10 @@ public class Person {
 
     public Flag getFlag() {
         return flag;
+    }
+
+    public void setFlag(Flag flag) {
+        this.flag = flag;
     }
 
     /**

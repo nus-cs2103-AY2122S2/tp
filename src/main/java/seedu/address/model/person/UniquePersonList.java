@@ -68,6 +68,18 @@ public class UniquePersonList implements Iterable<Person> {
         internalList.set(index, editedPerson);
     }
 
+    public void flagPerson(Person target, Flag flag) {
+        requireAllNonNull(target, flag);
+
+//        int index = internalList.indexOf(target);
+//        if (index == -1) {
+//            throw new PersonNotFoundException();
+//        }
+        target.setFlag(flag);
+//        internalList.set(index, flag);
+    }
+
+
     /**
      * Removes the equivalent person from the list.
      * The person must exist in the list.

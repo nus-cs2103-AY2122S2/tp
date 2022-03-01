@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.person.Flag;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -83,6 +84,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedPerson);
 
         persons.setPerson(target, editedPerson);
+    }
+
+    public void flagPerson(Person target, Flag flag) {
+        requireNonNull(flag);
+
+        persons.flagPerson(target, flag);
     }
 
     /**
