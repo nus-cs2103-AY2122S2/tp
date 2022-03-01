@@ -161,14 +161,17 @@ Format: `archive`
 
 Display the format for a specified command and a short description for that command.
 
-Format: `manual COMMAND_NAME`
+Format: `manual [COMMAND_NAME]`
 
-* The format for the command corresponding to the command name will be displayed, along with a short description.
+* The format of the command corresponding to the command name will be displayed, along with a short description.
+* If there are no inputs for the command name, all the available commands will be displayed.
 * An error message will be displayed to the user if the user input a command name that is invalid.
 
 Example
 * `manual add`
     * Display the format for the command add, and briefly describes the command.
+* `manual`
+    * Display all available commands.
 
 ### Exiting the program : `exit`
 
