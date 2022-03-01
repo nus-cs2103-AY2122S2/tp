@@ -136,6 +136,38 @@ Format: `add S/ T/TEAM n/DESCRIPTION d/DATETIME`
 Examples:
 * `add S/ n/Yabuda d/competition d/22/02/2022 0900` adds a schedule with the description of `competition` that is held on `22/02/2022 0900` inside team `Yabuda`.
 
+### deleting a player/ team/ lineup/ schedule :  `delete`
+deletes a player/ team/ lineup/ schedule from MyGM
+
+**To delete a player:**
+Format: `delete P/PLAYER [T/TEAM] [L/LINEUP]`
+* Deletes the player from the player list.
+* If only `T/TEAM` is specified, delete the player from the team.
+* If `T/TEAM` and `L/LINEUP` are specified, delete the player from the lineup.
+
+Example:
+*`delete P/James Soften T/Netts` will delete player `James Soften` from team `Netts`.
+
+**To delete a team:**
+Format: `delete T/TEAM`
+* Deletes the team.
+
+Example:
+*`delete T/Lokers` will delete team `Lokers`.
+
+**To delete a lineup:**
+Format: `delete T/TEAM L/LINEUP`
+* Delete the lineup in the team.
+
+Example:
+* `delete T/Lokers L/starting five` will delete the lineup `starting five` from team `Lokers`.
+
+**To delete a schedule:**
+Format: `delete T/TEAM i/INDEX_SCHEDULE`
+* Delete the i-th schedule of the team.
+  Example:
+  *`delete T/Lokers i/1` will delete schedule `1` from team `Lokers`.
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
@@ -176,6 +208,40 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+### Putting a player to a team/ lineup: `put`
+
+Puts a player to a specific team or to a specific lineup.
+
+**To put a player into a team:** <br>
+Format: `put P/PLAYER T/TEAM`
+* Puts a player to a specific team for managing purposes.
+* Displays error if either the input PLAYER or TEAM does not exist.
+* Each player can only belong to one team at a time. Displays errors if the input player already has a team.
+
+Example:
+* `put P/John Doe T/Hulluka` Puts Player John Doe into the team named Hulluka
+
+**To put a player to a lineup:** <br>
+Format: `put P/PLAYER L/LINEUP`
+* Adds a player to a specific lineup within his team for training purposes.
+* Displays error if either the specified PLAYER or LINEUP does not exist.
+* Displays error if the input player does not belong to any team.
+* Each player can join multiple lineups within the team he belongs to.
+
+* Example:
+* `put P/John Doe L/starting five` Puts John Doe into the lineup named starting five
+
+### Mark the attendance of players: `mark`
+
+Mark the attendance of players in a team for a specific training date or competition.
+
+Format: `mark T/TEAM i/INDEX_SCHEDULE P/PLAYER [P/MORE_PLAYERS]`
+* Mark all players specified PLAYER_NAME as present for the event with index number INDEX_SCHEDULE on the schedule.
+* The index must be a positive integer 1, 2, 3…
+
+Example:
+* `mark T/Jiayous i/1 P/Budaha P/john` Marks Budaha Arda and John Doe as present for the event with schedule index 1.
 
 ### Mark a player as absent: `unmark`
 
@@ -269,7 +335,7 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Delete the specified person from the address book.
 
 Format: `delete INDEX`
 
@@ -280,6 +346,18 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+### Filtering players by position: `filter`
+
+Filter all players with the specified tag(s).
+
+Format: `filter [T/TEAM] t/TAG [t/TAGS]`
+* Display all the players with the specific tag(s) from a particular team.
+* If T/TEAM is not specified, players with these tags from all teams will be displayed.
+
+Example:
+* `filter T/Sandama t/PF` Displays all the players with the tag PF in the team Sandama.
+
 
 ### Update a player/team/lineup/schedule information : `update`
 
@@ -317,7 +395,7 @@ Example:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all data from MyGM.
 
 Format: `clear`
 
@@ -338,6 +416,18 @@ Format: `save PATH`
 
 Example:
 * `save ./Documents/data.txt` will save the data in ./Documents/data.txt
+
+### Loading data from user-specified file: `load`
+
+Loads data from a user-specified file to the system.
+
+Format: `load PATH`
+
+* Load all the data from the path specified by the user.
+* Display error if the path given is invalid.
+
+Example:
+* `load ./Documents/data.txt`
 
 
 ### Editing the data file

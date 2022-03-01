@@ -18,6 +18,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
+### Fan Jue
+
+<img src="images/FYimu.png" width="200px">
+
+[ [github](http://github.com/FYimu) ] [ [portfolio](team/FYimu.md) ]
+
+* Role: Developer
+* Responsibility: TBD
+
+
 ### Wu Weiye
 
 <img src="images/teddye.png" width="200px">
@@ -27,4 +37,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: TBD
+
+### Lin Da
+
+<img src="images/dalin-prog.png" width="200px">
+
+[[github](https://github.com/DALIN-Prog)]
+[[portfolio](team/dalin-prog.md)]
+
+* Role: Developer
+* Responsibilities: TBD
+
 =======
