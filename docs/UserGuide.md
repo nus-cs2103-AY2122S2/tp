@@ -5,11 +5,7 @@ title: User Guide
 # WoofAreYou 
 
 WoofAreYou is a desktop app for pet daycare owners to handle the administrative information of their pets. If you can type fast, WoofAreYou can get your contact management tasks done faster than traditional GUI apps.
-
-
 ![Ui](images/Ui.png)
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
@@ -20,7 +16,7 @@ WoofAreYou is a desktop app for pet daycare owners to handle the administrative 
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Double-click the file to start the app. 
+1. Double-click the file to start the app.
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -72,7 +68,6 @@ Shows a message explaning how to access the help page.
 ![help message](images/helpMessage.png)
 
 Format: `help`
-
 
 ### Adding a person: `add`
 
@@ -169,7 +164,7 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 
 ### Viewing pets’ pick-up and drop-off time: `time`
 
-Views pets’ pick-up and drop-off time 
+Views pets’ pick-up and drop-off time
 
 Format: `time INDEX`
 

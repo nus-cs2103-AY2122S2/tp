@@ -5,7 +5,6 @@ title: Tiffany's Project Portfolio Page
 
 ### Project: WoofAreYou
 
-
 WoofAreYou is a desktop app for pet daycare owners to handle the administrative information of their pets. If you can type fast, WoofAreYou can get your contact management tasks done faster than traditional GUI apps. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
 Given below are my contributions to the project:
