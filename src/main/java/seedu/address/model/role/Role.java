@@ -2,6 +2,8 @@ package seedu.address.model.role;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Objects;
+
 /**
  * Represents a Role in Tinner.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -19,7 +21,8 @@ public class Role {
     /**
      * Every field must be present and not null.
      */
-    public Role(RoleName roleName, Status status, Deadline deadline, Description description, Stipend stipend) {
+    public Role(RoleName roleName, Status status, Deadline deadline, Description description,
+                Stipend stipend) {
         requireAllNonNull(roleName, status, deadline, description, stipend);
         this.roleName = roleName;
         this.status = status;
@@ -67,6 +70,27 @@ public class Role {
                 && otherRole.getDeadline().equals(getDeadline())
                 && otherRole.getDescription().equals(getDescription())
                 && otherRole.getStipend().equals(getStipend());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(roleName, status, deadline, description, stipend);
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getName())
+                .append("; Status: ")
+                .append(getStatus())
+                .append("; Deadline: ")
+                .append(getDeadline())
+                .append("; Description: ")
+                .append(getDescription())
+                .append("; Stipend: ")
+                .append(getStipend());
+
+        return builder.toString();
     }
 
 }
