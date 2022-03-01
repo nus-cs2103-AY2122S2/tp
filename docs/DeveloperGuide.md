@@ -270,14 +270,16 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​ | I want to …​                                          | So that I can…​                                                                                             |
+|----------|---------|-------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
+| `* * *`  | TA      | add a student to my class list                        | begin keeping track of their lab assignments                                                                |
+| `* * *`  | TA      | edit a student's information                          | fix any errors I made during the initial adding phase or add information that was not provided to me before |
+| `* * *`  | TA      | delete a student from my class list                   | my list will be reflective of who is currently in my class                                                  |
+| `* * *`  | TA      | list all students                                     | have an overview of all the students in my class                                                            |
+| `* *`    | TA      | locate students by name                               | easily find students whose names contain certain keywords                                                   |
+| `* *`    | TA      | filter students based on the status of their lab tags | quickly filter out the students that possess the same tags                                                  |
+| `* *`    | TA      | add a new lab assignment to the assignment list       | keep track of which lab assignments have been released to students                                          |
+| `* *`    | TA      | update status of a lab tag                            | keep track of which labs I have graded, and which lab grades I have submitted to the system                 |
 
 *{More to be added}*
 
