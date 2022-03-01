@@ -124,13 +124,13 @@ Example:
 
 Marks a specific undone task as done for a particular student.
 
-Format : `mark n/STUDENT_NAME UNDONE_TASK_INDEX` (or) `mark i/STUDENT_ID UNDONE_TASK_INDEX`
+Format : `mark i/STUDENT_ID UNDONE_TASK_INDEX`
 
 * The undone task corresponding to the index or the particular student will be marked as done in the TAPA.
+* An error message will be displayed to the user if the specified index is a negative number or larger than the number of tasks for that particular student.
+* An error message will be displayed to the user if the task with that specified index for the particular student is already marked as done.
   
 Example:
-* `mark n/John 1`
-    * Marks the first undone task for John as done.
 * `mark i/AXXXXXXXR 1`
     * Marks the first undone task for the student with student ID AXXXXXXXR as done.
 
@@ -138,13 +138,13 @@ Example:
 
 Marks a specific done task as undone for a particular student.
 
-Format : `unmark n/STUDENT_NAME DONE_TASK_INDEX` (or) `unmark i/STUDENT_ID DONE_TASK_INDEX`
+Format : `unmark i/STUDENT_ID DONE_TASK_INDEX`
 
 * The done task corresponding to the index for the particular student will be marked as undone in the TAPA.
+* An error message will be displayed to the user if the specified index is a negative number or larger than the number of tasks for that particular student.
+* An error message will be displayed to the user if the task with that specified index for the particular student is already marked as undone.
 
 Example:
-* `unmark n/John 1`
-    * Marks the first done task for John as undone.
 * `unmark i/AXXXXXXXR 1`
     * Marks the first done task for the student with student ID AXXXXXXXR as undone.
     
@@ -164,6 +164,7 @@ Display the format for a specified command and a short description for that comm
 Format: `manual COMMAND_NAME`
 
 * The format for the command corresponding to the command name will be displayed, along with a short description
+* An error message will be displayed to the user if the user input a command name that is invalid.
 
 Example
 * `manual add`
@@ -195,8 +196,8 @@ Action      | Format, Examples
 **Manual**  | `manual COMMAND_NAME` <br> e.g., `manual add`
 **Exit**    | `exit`
 **Task**    | `task i/STUDENT_ID` <br> e.g., `task A0123456Z`
-**Mark**    | `mark n/STUDENT_NAME UNDONE_TASK_INDEX` (or) `mark i/STUDENT_ID UNDONE_TASK_INDEX` <br> e.g., `mark n/John 1`, `mark i/AXXXXXXXR 1`
-**Unmark**  | `unmark n/STUDENT_NAME DONE_TASK_INDEX` (or) `unmark i/STUDENT_ID DONE_TASK_INDEX` <br> e.g., `unmark n/John 1`, `unmark i/AXXXXXXXR 1`
+**Mark**    | `mark i/STUDENT_ID UNDONE_TASK_INDEX` <br> e.g., `mark i/AXXXXXXXR 1`
+**Unmark**  | `unmark i/STUDENT_ID DONE_TASK_INDEX` <br> e.g., `unmark i/AXXXXXXXR 1`
 **Archive** | `archive`
 
 
