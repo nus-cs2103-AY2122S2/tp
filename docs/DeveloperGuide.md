@@ -276,10 +276,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | TA      | edit a student's information                          | fix any errors I made during the initial adding phase or add information that was not provided to me before |
 | `* * *`  | TA      | delete a student from my class list                   | my list will be reflective of who is currently in my class                                                  |
 | `* * *`  | TA      | list all students                                     | have an overview of all the students in my class                                                            |
-| `* *`    | TA      | locate students by name                               | easily find students whose names contain certain keywords                                                   |
-| `* *`    | TA      | filter students based on the status of their lab tags | quickly filter out the students that possess the same tags                                                  |
-| `* *`    | TA      | add a new lab assignment to the assignment list       | keep track of which lab assignments have been released to students                                          |
-| `* *`    | TA      | update status of a lab tag                            | keep track of which labs I have graded, and which lab grades I have submitted to the system                 |
+| `* * *`  | TA      | locate students by name                               | easily find students whose names contain certain keywords                                                   |
+| `* * *`  | TA      | filter students based on the status of their lab tags | quickly filter out the students that possess the same tags                                                  |
+| `* * *`  | TA      | add a new lab assignment to the assignment list       | keep track of which lab assignments have been released to students                                          |
+| `* * *`  | TA      | update status of a lab tag                            | keep track of which labs I have graded, and which lab grades I have submitted to the system                 |
 
 *{More to be added}*
 
