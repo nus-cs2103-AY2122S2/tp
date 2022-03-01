@@ -69,11 +69,12 @@ Command Line Interface (CLI)** while still having the benefits of a Graphical Us
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
-
-![help message](images/helpMessage.png)
+Lists the application commands that are available in the system.
 
 Format: `help`
+
+Example: `[help]` Lists all available commands.
+
 
 
 ### Adding a person: `add`
