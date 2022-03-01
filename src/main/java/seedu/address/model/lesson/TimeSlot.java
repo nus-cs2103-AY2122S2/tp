@@ -46,39 +46,43 @@ public class TimeSlot {
      */
     protected boolean isClashingWith(TimeSlot otherTimeSlot) {
         Date currentTimeSlotStart = this.dateOfLesson;
-        Date currentTimeSlotEnd = this.getEndDate();
+        Date currentTimeSlotEnd = this.getEndingDateTime();
         Date otherTimeSlotStart = otherTimeSlot.dateOfLesson;
-        Date otherTimeSlotEnd = otherTimeSlot.getEndDate();
+        Date otherTimeSlotEnd = otherTimeSlot.getEndingDateTime();
 
         return (currentTimeSlotStart.before(otherTimeSlotEnd) || currentTimeSlotStart.equals(otherTimeSlotEnd))
                 && (currentTimeSlotEnd.after(otherTimeSlotStart) || currentTimeSlotEnd.equals(otherTimeSlotStart));
-
-        /* for recurring lessons */
-        // check day
-        //      if same day
-        //          check if timeslot on that day overlaps
     }
 
-    private Date getEndDate() {
+    /**
+     * Get the date and time at which the lesson ends.
+     */
+    private Date getEndingDateTime() {
         Calendar cal = Calendar.getInstance();
         cal.setTime(dateOfLesson);
         cal.add(Calendar.HOUR_OF_DAY, duration);
         return cal.getTime();
     }
 
-    public String getDate() {
+    /**
+     * Returns a string representation of the date on which the lesson would take place.
+     */
+    public String getDateString() {
         return displayedDateFormat.format(this.dateOfLesson);
     }
 
-    public String getTime() {
+    /**
+     * Returns a string representation of the starting and ending time of the lesson.
+     */
+    public String getTimeString() {
         return String.format("%s - %s",
                 displayedTimeFormat.format(this.dateOfLesson),
-                displayedTimeFormat.format(this.getEndDate()));
+                displayedTimeFormat.format(this.getEndingDateTime()));
     }
 
     @Override
     public String toString() {
-        return dateOfLesson.toString();
+        return String.format("%s [%s]", this.getDateString(), this.getTimeString());
     }
 
     @Override
@@ -92,7 +96,8 @@ public class TimeSlot {
         }
 
         TimeSlot otherTimeSlot = (TimeSlot) other;
-        return this.dateOfLesson.equals(otherTimeSlot.dateOfLesson);
+        return this.dateOfLesson.equals(otherTimeSlot.dateOfLesson)
+                && this.duration == (otherTimeSlot.duration);
     }
 
     @Override

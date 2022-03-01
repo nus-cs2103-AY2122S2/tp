@@ -67,11 +67,11 @@ public class TemporaryLesson extends Lesson {
             return true;
         }
 
-        if (!(other instanceof Lesson)) {
+        if (!(other instanceof TemporaryLesson)) {
             return false;
         }
 
-        Lesson otherLesson = (Lesson) other;
+        TemporaryLesson otherLesson = (TemporaryLesson) other;
 
         return otherLesson.getName().equals(getName())
                 && otherLesson.getSubject().equals(getSubject())
@@ -89,5 +89,4 @@ public class TemporaryLesson extends Lesson {
         // TODO: come up with string representation for a lesson
         return this.getName().toString();
     }
-
 }
