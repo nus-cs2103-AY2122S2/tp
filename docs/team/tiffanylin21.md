@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Shaine's Project Portfolio Page
+title: Tiffany's Project Portfolio Page
 ---
 
 ### Project: WoofAreYou
