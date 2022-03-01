@@ -13,8 +13,8 @@ public class ConflictsWithLessonException extends RuntimeException {
      */
     public ConflictsWithLessonException(Lesson firstLesson, Lesson secondLesson) {
         super(
-                String.format("Operation would result in two lessons with clashing timeslots:\n   %s\n   %s",
-                        firstLesson, secondLesson)
+                String.format("Operation would result in these two lessons having conflicting timeslots:\n   %s\n   %s",
+                firstLesson, secondLesson)
         );
     }
 }

@@ -10,14 +10,15 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.lesson.exceptions.ConflictsWithLessonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.lesson.exceptions.LessonNotFoundException;
 
 /**
  * A list of lessons that enforces uniqueness between its elements and does not allow nulls.
- * A lesson is considered unique by comparing using {@code Lesson#isClashingWith(Lesson)}. As such, adding and updating
- * of lessons uses Lesson#isClashingWith(Lesson) for equality so as to ensure that the lesson being added or updated is
- * does not clash with any lesson in the UniqueLessonList. However, the removal of a lesson uses Lesson#equals(Object)
- * so as to ensure that the lesson with exactly the same fields will be removed.
+ * A lesson is considered unique by comparing using {@code Lesson#isClashingWith(Lesson)}.
+ * As such, adding and updating of lessons uses Lesson#isClashingWith(Lesson) for equality so as to
+ * ensure that the lesson being added or updated does not clash with any lesson in the UniqueLessonList.
+ * However, the removal of a lesson uses Lesson#equals(Object) to ensure that the lesson with exactly the
+ * same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
@@ -76,8 +77,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            // TODO: create a LessonNotFoundException()
-            throw new PersonNotFoundException();
+            throw new LessonNotFoundException();
         }
 
         if (hasConflictingLesson(editedLesson)) {
@@ -94,8 +94,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
     public void remove(Lesson toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            // TODO: replace with LessonNotFoundException() once created
-            throw new PersonNotFoundException();
+            throw new LessonNotFoundException();
         }
     }
 
