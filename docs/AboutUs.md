@@ -41,7 +41,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Manusha
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/manu2002g.png" width="200px">
 
 [[github](http://github.com/manu2002g)]
 [[portfolio](team/manu2002g.md)]
