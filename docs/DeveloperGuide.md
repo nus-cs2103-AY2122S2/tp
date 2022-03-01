@@ -257,13 +257,17 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+CS2030S Teaching Assistants (TAs) who
+* have to keep track of students' details
+* have to keep track of students' performance and progress on labs
+* have to keep track of their own progress on grading labs
 * prefer desktop apps over other types
 * can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* prefer typing to mouse interactions
+* are reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: provides CS2030S TAs with a systematic way to keep track of students, including who he/she
+has graded and what grade was given for every lab.
 
 
 ### User stories
