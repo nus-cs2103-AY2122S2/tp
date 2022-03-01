@@ -18,15 +18,15 @@ We are a team based in the [School of Computing, National University of Singapor
 
 * Role: Team Lead & Integration
 
-### Jane Doe
+### Channe Chwa
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/channne.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/channne)]
+[[portfolio](team/channne.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer
+* Responsibilities: Documentation, Testing
 
 ### Ryan Tan Gee Teng
 
