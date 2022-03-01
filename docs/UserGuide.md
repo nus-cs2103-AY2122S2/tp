@@ -159,7 +159,7 @@ Format: `edit STUDENT_INDEX [i/STUDENT_ID] [n/STUDENT_NAME] [m/MODULE_CODE] [p/P
 * An error message will be displayed to the user if the specified index is a negative number or larger than the number of students in TAPA.
 
 Example:
-* `edit 10 m/CS2103T p/98765432 t/@john e/E0123456Z`
+* `edit 10 m/CS2103T p/98765432 t/johnnn e/e0123456z@u.nus.edu`
     * A student (whose list index is “10”) has their module, phone number, telegram handle and email address edited.
 
 ### Deleting all students: `clear`
