@@ -18,6 +18,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Deliverables and deadlines
 
+
 ### S Dinesh Raj
 
 <img src="images/dineshraj555.png" width="200px">
@@ -27,14 +28,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 
-### Johnny Doe
 
-<img src="images/johndoe.png" width="200px">
+### Teo Hao Yu
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+<img src="images/tobihy.png" width="200px">
+
+[[github](http://github.com/tobihy)] 
+[[portfolio](team/tobihy.md)]
 
 * Role: Developer
-* Responsibilities: Data
+
 
 ### Jean Doe
 
