@@ -69,19 +69,28 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
-### Adding a person: `add`
+### Add a pet: `add`
 
-Adds a person to the address book.
+Add a pet to the database.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+Format: `add n/NAME_OF_PET o/OWNER_NAME p/PHONE_NUMBER a/ADDRESS`
+* Each particular field is compulsory.
+* Each particular entered must strictly correspond to its legal prefix.`e.g: p/Address is considered illegal`
+* Phone number **must only contain numbers**.
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Mojo n/John Doe p/98765432 a/523 Woodlands ave 5, #01-01`
+
+### Get pet Id: `getId`
+
+Retrieve and return a list of all pet Ids corresponding to the specified name from the database. 
+
+Format: `getId NAME_OF_PET`
+* The name of pet is case-insensitive.`e.g: Mojo will match mojo`
+* Only the name is searched.
+
+Examples:
+* `getId Mojo`
 
 ### Listing all persons : `list`
 
