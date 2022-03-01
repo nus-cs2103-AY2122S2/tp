@@ -32,6 +32,8 @@ who are teaching multiple classes/modules at the same time. It is optimised for 
 
    * **`delete`**`3` : Deletes the 3rd entry in TAPA.
 
+   * **`manual`**`add` : Display the user manual of the command `add`.
+
    * **`clear`** : Deletes all contacts.
 
    * **`exit`** : Exits the app.
@@ -118,6 +120,34 @@ Example:
 * `task A0123456Z`
     * Lists out the tasks that student (A0123456Z) has.
     
+### Marking an undone task as done for a particular student: `mark`
+
+Marks a specific undone task as done for a particular student.
+
+Format : `mark n/STUDENT_NAME UNDONE_TASK_INDEX` (or) `mark i/STUDENT_ID UNDONE_TASK_INDEX`
+
+* The undone task corresponding to the index or the particular student will be marked as done in the TAPA.
+  
+Example:
+* `mark n/John 1`
+    * Marks the first undone task for John as done.
+* `mark i/AXXXXXXXR 1`
+    * Marks the first undone task for the student with student ID AXXXXXXXR as done.
+
+### Marking a done task as undone for a particular student: `unmark`
+
+Marks a specific done task as undone for a particular student.
+
+Format : `unmark n/STUDENT_NAME DONE_TASK_INDEX` (or) `unmark i/STUDENT_ID DONE_TASK_INDEX`
+
+* The done task corresponding to the index for the particular student will be marked as undone in the TAPA.
+
+Example:
+* `unmark n/John 1`
+    * Marks the first done task for John as undone.
+* `unmark i/AXXXXXXXR 1`
+    * Marks the first done task for the student with student ID AXXXXXXXR as undone.
+    
 ### Archiving details in the address book: `archive`
 
 Saves a copy of the details currently saved in the address book into a separate file.
@@ -126,6 +156,18 @@ Format: `archive`
 
 * A copy of the details currently saved in the address book will be saved to a separate file.
 * The file name will be the date and time of the archive operation.
+
+### Displaying manual for a command: `manual`
+
+Display the format for a specified command and a short description for that command.
+
+Format: `manual COMMAND_NAME`
+
+* The format for the command corresponding to the command name will be displayed, along with a short description
+
+Example
+* `manual add`
+    * Display the format for the command add, and briefly describes the command
 
 ### Exiting the program : `exit`
 
@@ -150,6 +192,9 @@ Action      | Format, Examples
 **Add**     | `add i/MATRICULATION_NO n/STUDENT_NAME m/MODULE_CODE [p/PHONE_NUMBER] [t/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] ` <br> e.g., `add i/A0123456Z n/john m/CS2103T p/98765432 t/@john e/E0123456Z`
 **Delete**    | `delete STUDENT_INDEX` <br> e.g., `delete 10`
 **Find**    | `find n/STUDENT_NAME` (or) `find i/STUDENT_ID` <br> e.g., `find n/john`, `find i/A0123456Z`
+**Manual**  | `manual COMMAND_NAME` <br> e.g., `manual add`
+**Mark**    | `mark n/STUDENT_NAME UNDONE_TASK_INDEX` (or) `mark i/STUDENT_ID UNDONE_TASK_INDEX` <br> e.g., `mark n/John 1`, `mark i/AXXXXXXXR 1`
+**Unmark**  | `unmark n/STUDENT_NAME DONE_TASK_INDEX` (or) `unmark i/STUDENT_ID DONE_TASK_INDEX` <br> e.g., `unmark n/John 1`, `unmark i/AXXXXXXXR 1`
 **Exit**    | `exit`
 **Task**    | `task i/STUDENT_ID` <br> e.g., `task A0123456Z`
 **Archive** | `archive`
