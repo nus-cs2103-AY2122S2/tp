@@ -2,12 +2,10 @@
 layout: page
 title: User Guide
 ---
+# WoofAreYou 
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
-
-* Table of Contents
-{:toc}
-
+WoofAreYou is a desktop app for pet daycare owners to handle the administrative information of their pets. If you can type fast, WoofAreYou can get your contact management tasks done faster than traditional GUI apps.
+![Ui](images/Ui.png)
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
@@ -18,8 +16,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+1. Double-click the file to start the app.
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -72,20 +69,28 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+### Add a pet: `add`
 
-### Adding a person: `add`
+Add a pet to the database.
 
-Adds a person to the address book.
-
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+Format: `add n/NAME_OF_PET o/OWNER_NAME p/PHONE_NUMBER a/ADDRESS`
+* Each particular field is compulsory.
+* Each particular entered must strictly correspond to its legal prefix.`e.g: p/Address is considered illegal`
+* Phone number **must only contain numbers**.
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Mojo n/John Doe p/98765432 a/523 Woodlands ave 5, #01-01`
+
+### Get pet Id: `getId`
+
+Retrieve and return a list of all pet Ids corresponding to the specified name from the database. 
+
+Format: `getId NAME_OF_PET`
+* The name of pet is case-insensitive.`e.g: Mojo will match mojo`
+* Only the name is searched.
+
+Examples:
+* `getId Mojo`
 
 ### Listing all persons : `list`
 
@@ -165,6 +170,33 @@ AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
 </div>
+
+### Viewing pets’ pick-up and drop-off time: `time`
+
+Views pets’ pick-up and drop-off time
+
+Format: `time INDEX`
+
+* Views pick-up and drop-off time of the pet at the specified `INDEX`.
+* The index refers to the index number shown in the displayed getId list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `time 12 returns pet 12’s pickup and dropoff times.`
+
+### Deleting a pet: `delete`
+
+Deletes the specified pet from the address book.
+
+Format: `delete INDEX`
+
+* Deletes the pet at the specified `INDEX`.
+* The index refers to the index number shown in the displayed getId list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `getId PeePee followed by delete 2 deletes the 2nd pet in the address book.`
+
 
 ### Archiving data files `[coming in v2.0]`
 
