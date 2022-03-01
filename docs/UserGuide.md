@@ -4,7 +4,8 @@ title: User Guide
 ---
 # WoofAreYou 
 
-WoofAreYou is a desktop app for pet daycare owners to handle the administrative information of their pets. If you can type fast, WoofAreYou can get your contact management tasks done faster than traditional GUI apps.
+WoofAreYou is a desktop app for pet daycare owners to handle the administrative information of their pets. If you can 
+type fast, WoofAreYou can get your contact management tasks done faster than traditional GUI apps.
 ![Ui](images/Ui.png)
 --------------------------------------------------------------------------------------------------------------------
 
@@ -190,11 +191,6 @@ Format: `delete INDEX`
 
 Examples:
 * `getId PeePee followed by delete 2 deletes the 2nd pet in the address book.`
-
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 ### Exiting the program : `exit`
 
