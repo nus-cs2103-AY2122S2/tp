@@ -18,26 +18,18 @@ Given below are my contributions to the project.
 
 * **New Feature**: _To be added soon_
 
-* **Code contributed**: [RepoSense link]()
+* **Code contributed**:
 
 * **Project management**:
-    * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
 
 * **Enhancements to existing features**:
-    * _To be added soon_ (Pull requests [\#33](), [\#34]())
-    * _To be added soon_ (Pull requests [\#36](), [\#38]())
 
 * **Documentation**:
     * User Guide:
-        * _To be added soon_ [\#72]()
-        * _To be added soon_: [\#74]()
     * Developer Guide:
-        * _To be added soon_
 
 * **Community**:
-    * _To be added soon_: [\#12](), [\#32](), [\#19](), [\#42]()
 
 * **Tools**:
-    * _To be added soon_ ([\#42]())
 
 * _{you can add/remove categories in the list above}_
