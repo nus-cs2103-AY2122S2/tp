@@ -68,9 +68,9 @@ who are teaching multiple classes/modules at the same time. It is optimised for 
 
 </div>
 
-### Adding a person: `add`
+### Adding a student: `add`
 
-Adds a person to TAPA.
+Adds a student to TAPA.
 
 Format: `add i/STUDENT_ID n/STUDENT_NAME m/MODULE_CODE [p/PHONE_NUMBER] [h/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS]​`
 
@@ -108,7 +108,7 @@ Example:
 * `find i/AXXXXXXXR`
     * Displays the particulars of the student with student ID AXXXXXXXR.
 
-### Checking all the tasks that a particular student have: `task`
+### Checking all the tasks that a student has: `task`
 
 Displays all the tasks that are allocated to a particular student.
 
@@ -120,7 +120,7 @@ Example:
 * `task A0123456Z`
     * Lists out the tasks that student (A0123456Z) has.
     
-### Marking an undone task as done for a particular student: `mark`
+### Marking an undone task as done for a student: `mark`
 
 Marks a specific undone task as done for a particular student.
 
@@ -134,7 +134,7 @@ Example:
 * `mark i/AXXXXXXXR 1`
     * Marks the first undone task for the student with student ID AXXXXXXXR as done.
 
-### Marking a done task as undone for a particular student: `unmark`
+### Marking a done task as undone for a student: `unmark`
 
 Marks a specific done task as undone for a particular student.
 
@@ -147,7 +147,34 @@ Format : `unmark i/STUDENT_ID DONE_TASK_INDEX`
 Example:
 * `unmark i/AXXXXXXXR 1`
     * Marks the first done task for the student with student ID AXXXXXXXR as undone.
-    
+
+### Editing a student's information: `edit`
+
+Edits a student's information in TAPA.
+
+Format: `edit STUDENT_INDEX [i/STUDENT_ID] [n/STUDENT_NAME] [m/MODULE_CODE] [p/PHONE_NUMBER] [h/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS]​`
+
+* The index of the student to be edited is a compulsory field.
+* The student’s matriculation number, name, module code, phone number, telegram handle, and email address fields are optional and can be excluded.
+* An error message will be displayed to the user if the specified index is a negative number or larger than the number of students in TAPA.
+
+Example:
+* `edit 10 m/CS2103T p/98765432 t/johnnn e/e0123456z@u.nus.edu`
+    * A student (whose list index is “10”) has their module, phone number, telegram handle and email address edited.
+
+### Deleting all students: `clear`
+
+Clears all students from TAPA.
+
+Format: `clear`
+
+* All students and their corresponding details will be removed from TAPA.
+* A message will be displayed if TAPA is already empty and there are no students to be removed.
+
+Example:
+* `clear`
+    * All students cleared from TAPA.
+
 ### Archiving details in the address book: `archive`
 
 Saves a copy of the details currently saved in the address book into a separate file.
@@ -159,7 +186,7 @@ Format: `archive`
 
 ### Displaying manual for a command: `manual`
 
-Display the format for a specified command and a short description for that command.
+Display the format for a specified command and a short description for a particular command.
 
 Format: `manual [COMMAND_NAME]`
 
@@ -201,6 +228,8 @@ Action      | Format, Examples
 **Task**    | `task i/STUDENT_ID` <br> e.g., `task A0123456Z`
 **Mark**    | `mark i/STUDENT_ID UNDONE_TASK_INDEX` <br> e.g., `mark i/AXXXXXXXR 1`
 **Unmark**  | `unmark i/STUDENT_ID DONE_TASK_INDEX` <br> e.g., `unmark i/AXXXXXXXR 1`
+**Edit**     | `edit STUDENT_INDEX [i/MATRICULATION_NO] [n/STUDENT_NAME] [m/MODULE_CODE] [p/PHONE_NUMBER] [t/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] ` <br> e.g., `edit 10 m/CS2103T p/98765432 t/@john e/E0123456Z`
+**Clear**    | `clear`
 **Archive** | `archive`
 
 
