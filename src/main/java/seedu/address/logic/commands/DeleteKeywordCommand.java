@@ -33,7 +33,7 @@ public class DeleteKeywordCommand extends Command {
         for (Person person : lastShownList) {
             model.deletePerson(person);
         }
-        return new CommandResult(String.format(MESSAGE_PERSONS_DELETED_OVERVIEW,  lastShownList.size()));
+        return new CommandResult(String.format(MESSAGE_PERSONS_DELETED_OVERVIEW, lastShownList.size()));
     }
 
     @Override
