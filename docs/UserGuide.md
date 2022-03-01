@@ -147,7 +147,7 @@ Examples:
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find KEYWORD [MORE_KEYWORDS] [t/SEARCH_TYPE]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -155,34 +155,19 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-
-#### Extension on Find contact by type : `find` `t/`
-
-Locates persons by different search types
-
-Format: `find KEYWORD [MORE_KEYWORDS] [t/SEARCH_TYPE]`
-
-* The search is case-insensitive. e.g. hans will match Hans
-* The order of the keywords does not matter. e.g. Hans Bo will match Bo Hans
 * `SEARCH_TYPE` must match one of the following:
   * Name
   * Address
   * Phone
   * Email
 * If `SEARCH_TYPE` is not specified, default search type is by `Name`.
-* Persons matching at least one keyword will be returned
 
 Examples:
-* `find t/Address k/Garden`
-  * Lists all contact with address contains keyword "Garden"
-* `find t/Phone k/87438807`
-  * Lists all contact with phone matches keyword "87438807"
-
+* `find John` returns `john` and `John Doe`
+* `find t/Address k/Garden` lists all persons whose address contain the keyword "Garden"
+* `find t/Phone k/87438807` lists all persons whose phone number matches "87438807"
+* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a person : `delete`
 
@@ -431,39 +416,39 @@ Examples:
 
 _Details coming soon ..._
 
-
-### Batch and Range Commands
-
 ### Operate on Contacts by Conditional Clause : `batch`
 
-If the given condition is satisfied, it returns a group of contacts
+Returns contacts in the address book that match the given condition.
 
 Format: `batch COMMAND where/CONDITION`
 
-* The commands include list, edit, delete
+* The allowed operations in `COMMAND` are
+  * list
+  * edit
+  * delete
 * The `CONDITION` field must conform to the following syntax: `TERM OP TERM`
   * Valid operators for the `OP` field are `>`, `<`, `=`, `!=`, `LIKE`
   * A `TERM` may be an attribute of a person or a constant value
+
 Examples:
 * `batch delete where/name LIKE A%` 
   * Deletes all persons whose name start with A (case-sensitive)
-* `batch Edit p/87438806 where/ p/Phone = 87438807 `
-    * Edit contact with phone matches keyword 87438807 change to 87438806
+* `batch edit p/87438806 where/phone = 87438807 `
+  * Edit contact with phone matches keyword 87438807 change to 87438806
 
 ### Operate on Contacts within Range : `range`
 
-Perform actions on a group of contacts
+Perform actions on a group of contacts.
 
 Format: `range COMMAND from/INDEX_FROM to/INDEX_TO`
 
-* Performs the specified COMMAND on all contacts between the specified range of `INDEX_FROM` to `INDEX_TO`
-* The allowed operations in `COMMAND` are
+* Performs the specified COMMAND on all contacts between the specified range of `INDEX_FROM` to `INDEX_TO` inclusive
+* `COMMAND` must be a valid command. The allowed operations in `COMMAND` are
   * list
   * edit
   * delete
 * The `INDEX_FROM` and `INDEX_TO` parameters must be **positive integers**, and refer to the index number shown in the **displayed contact list**
 * `INDEX_FROM` must be less than `INDEX_TO` must be supplied, otherwise the command will perform no operation
-* `COMMAND` must be a valid command
 * The resultant effect of the command is dependent on the performed action
 
 Examples:
@@ -474,11 +459,11 @@ Examples:
 
 ### Chaining Commands: `&&`
 
-Perform actions on a group of contacts
+Perform multiple actions in a single command.
 
 Format: `COMMAND_A && COMMAND_B`
 
-* Call multiple commands
+* Calls multiple specified scommands
 * The syntax of `COMMAND_A` and `COMMAND_B` must be correct
 * A valid command must be supplied before and after the `&&` operator, otherwise the command will fail
 Examples:
@@ -486,8 +471,7 @@ Examples:
     * Edits the 6th to 10th appointments in the list of appointments to have a duration of 6 hours. Then list all appointments in the Schedule
 * `deleteAppointment 2 && addAppointment n/Contract Signing With Charlie d/22-10-2022 t/16:30 p/1 l/300`
     * Deletes the 2nd appointment in the list of appointments.
-      Creates a 5-hour appointment named "Contract Signing With Charlie" on 22nd Oct 2022 at 4:30 PM, associated with the first person in the contact list
-
+    * Then, create a 5-hour appointment named "Contract Signing With Charlie" on 22nd Oct 2022 at 4:30 PM, associated with the first person in the contact list
 
 
 --------------------------------------------------------------------------------------------------------------------
