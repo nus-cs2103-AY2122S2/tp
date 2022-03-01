@@ -165,10 +165,11 @@ Format: `manual COMMAND_NAME`
 
 * The format for the command corresponding to the command name will be displayed, along with a short description
 * An error message will be displayed to the user if the user input a command name that is invalid.
+* The format for the command corresponding to the command name will be displayed, along with a short description.
 
 Example
 * `manual add`
-    * Display the format for the command add, and briefly describes the command
+    * Display the format for the command add, and briefly describes the command.
 
 ### Exiting the program : `exit`
 
