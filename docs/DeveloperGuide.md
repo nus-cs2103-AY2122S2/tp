@@ -287,6 +287,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
+**Use case: Add Labs**
+**Use case: Filter Students**
+**Use case: Grade Student Lab**
+**Use case: Mark Student Lab as Submitted**
+
+
+
 **Use case: Delete a person**
 
 **MSS**
