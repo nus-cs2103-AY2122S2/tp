@@ -584,7 +584,73 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 3.
 
-*{More to be added}*
+**Use case 07: Add a student**
+
+**MSS**
+
+1.  TA enters a new student with the specified details.
+2.  TAssist adds the new student and displays its details.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. TAssist detects an error in the entered command.
+
+    * 1a1. TAssist prompts for the correct command.
+
+    * 1a2. TA enters a new command.
+
+      Steps 1a1-1a2 are repeated until the command entered is correct.
+
+      Use case resumes from step 2.
+
+**Use case 08: List students**
+
+**MSS**
+
+1.  TA lists the students.
+2.  TAssist displays the details of all student.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. TAssist detects an error in the entered command.
+
+    * 1a1. TAssist prompts for the correct command.
+
+    * 1a2. TA enters a new command.
+
+      Steps 1a1-1a2 are repeated until the command entered is correct.
+
+      Use case resumes from step 2.
+
+**Use case 09: Delete a student**
+
+**MSS**
+
+1.  TA requests to <ins>list students (UC08)</ins>.
+2.  TA deletes a specific student in the list.
+3.  TAssist deletes the student.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 2b. TAssist detects an error in the entered command.
+
+    * 2b1. TAssist prompts for the correct command.
+
+    * 2b2. TA enters a new command.
+
+      Steps 2b1-2b2 are repeated until the command entered is correct.
+
+      Use case resumes from step 3.
 
 ### Non-Functional Requirements
 
