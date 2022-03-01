@@ -1,5 +1,7 @@
 package seedu.address.model.lesson;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.Date;
 
 /**
@@ -14,6 +16,15 @@ public abstract class Lesson {
 
     // Data fields
     // no data fields in abstract class
+
+    /**
+     * Every field must be present and not null.
+     */
+    protected Lesson(Name name, Subject subject) {
+        requireAllNonNull(name, subject);
+        this.name = name;
+        this.subject = subject;
+    }
 
     /**
      * Creates a new instance of a non-recurring lesson.
@@ -32,14 +43,6 @@ public abstract class Lesson {
                 lessonSubject,
                 lessonTimeSlot
         );
-    }
-
-    /**
-     * Every field must be present and not null.
-     */
-    protected Lesson(Name name, Subject subject) {
-        this.name = name;
-        this.subject = subject;
     }
 
     public Name getName() {
