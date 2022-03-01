@@ -79,6 +79,8 @@ ModuleMate Finder is a desktop app that allows students to find people taking th
 - [Clear](#clearing-all-entries--clear)
 - [Tags](#tagging-a-person--tag)
 - [Find](#locating-a-person-find)
+- [Undo](#undo-a-command--undo)
+- [Redo](#redo-a-command--redo)
 - [Exit](#exiting-the-program--exit)
 
 ### Viewing help : `help`
@@ -227,6 +229,25 @@ Format: `filter t/TAG`
 Examples:
 * `filter t/CS3230`  will find all persons with the module CS3230
 
+### Undo a command : `undo`
+
+Undoes the most recent command. 
+
+Format: `undo`
+
+Examples:
+- After deleting a contact at index 5, `undo` will reverse the delete command and bring the contact back at index 5.
+
+### Redo a command : `redo`
+
+Restores most recent command that was undone using `undo`.
+
+Format: `redo`
+
+Examples:
+- After editing a contact's name at index 3 from `George` to `Adam` and using `undo` to reverse the contact's name
+back to `George`, using `redo` will restore the contact's name back to `Adam`.
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -276,4 +297,6 @@ A: As long as the module offered can be found in NUSmod, it will be available on
 | **Status**        | `status INDEX s/STATUS`                                                                            | `status 2 s/favourite`                 |
 | **Find**          | `find KEYWORD [MORE_KEYWORDS]`                                                                     | `find James Jake`                      |
 | **Filter**        | `filter t/TAG`                                                                                     | `filter t/CS3230`                      |
+| **Undo**          | `undo`                                                                                             | `undo`                                 |
+| **Redo**          | `redo`                                                                                             | `redo`                                 |
 
