@@ -1,22 +1,16 @@
 package seedu.address.ui;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
-import javafx.event.ActionEvent;
+import javafx.collections.ObservableArray;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextInputControl;
-import javafx.scene.input.KeyCombination;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
+import seedu.address.model.person.Person;
 
 /**
  * The Favourite Window. Provides the basic application layout containing
@@ -33,9 +27,6 @@ public class FavouriteWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
 
     @FXML
-    private MenuItem helpMenuItem;
-
-    @FXML
     private StackPane personListPanelPlaceholder;
 
     /**
@@ -46,24 +37,22 @@ public class FavouriteWindow extends UiPart<Stage> {
         this.logic = logic;
     }
 
-    /**
-     * Closes the application.
-     */
-    @FXML
-    private void handleExit() {
-        GuiSettings guiSettings = new GuiSettings(getRoot().getWidth(), getRoot().getHeight(),
-                (int) getRoot().getX(), (int) getRoot().getY());
-        logic.setGuiSettings(guiSettings);
-        getRoot().hide();
-    }
-
     public void show() {
         logger.fine("Showing Favourite Window.");
+        fillInnerParts();
         getRoot().show();
         getRoot().centerOnScreen();
     }
 
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
+    }
+
+    /**
+     * Fills up all the placeholders of this window.
+     */
+    void fillInnerParts() {
+        personListPanel = new PersonListPanel(logic.getFavouritedPersonList());
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
     }
 }

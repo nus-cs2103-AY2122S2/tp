@@ -29,7 +29,6 @@ public class FavouriteCommand extends Command {
 
     public FavouriteCommand(Index index) {
         requireAllNonNull(index);
-
         this.index = index;
     }
 

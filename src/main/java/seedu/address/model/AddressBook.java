@@ -4,7 +4,10 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import com.sun.javafx.UnmodifiableArrayList;
+
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableListBase;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -104,6 +107,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Person> getFavouritedPersonList() {
+        return persons.asUnmodifiableFavouritedObservableList();
     }
 
     @Override
