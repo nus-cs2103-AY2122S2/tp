@@ -312,11 +312,68 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
       Use case ends
 
+**Use case: Mark Student Lab as Graded**
 
-**Use case: Grade Student Lab**
+**MSS**
+1. TA requests to change a student’s lab status to “Graded”
+2. TAB changes the student’s lab status from “Submitted” to “Graded”
+3. TAB shows updated lab tag
+4. TAB displays success message
+
+   Use case ends.
+
+**Extensions**
+
+- 1a. TA provides invalid student index
+    - 1a1. TAB shows error message that student index is invalid
+    - 1a2. TAB requests for valid student index
+
+  Use case resumes from step 1
+- 1b. TA provides lab that is already graded
+    - 1b1. TAB shows error message stating that lab is already graded
+    - 1b2. TAB requests for valid lab
+
+  Use case resumes from step 1
+- 1c. TA provides lab that has not been submitted yet
+    - 1c1. TAB shows error message that lab status has to be “Submitted” first
+    - 1c2. TAB requests for valid lab
+
+  Use case resumes from step 1
+- 1d. TA provides lab that does not exist
+    - 1d1. TAB shows error message stating that lab does not exist
+    - 1d2. TAB requests for valid lab
+
+  Use case resumes from step 1
+
 **Use case: Mark Student Lab as Submitted**
 
+**MSS**
 
+1. TA requests to change a student’s lab status to “Submitted”
+2. TAB changes the student’s lab status from “Unsubmitted” to “Submitted”
+3. TAB shows updated lab tag
+4. TAB displays success message
+
+   Use case ends.
+
+**Extensions**
+
+- 1a. TA provides invalid student index
+    - 1a1. TAB shows error message that student index is invalid
+    - 1a2. TAB requests for valid student index
+
+  Use case resumes from step 1.
+- 1b. TA provides lab that is already submitted
+    - 1b1. TAB shows error message stating that the lab for the particular student has already been submitted
+    - 1b2. TAB requests for valid lab and student
+
+  Use case resumes from step 1
+
+- 1c. TA provides lab that does not exist
+    - 1c1. TAB shows error message stating that lab does not exist
+    - 1c2. TAB requests for valid lab
+
+  Use case resumes from step 1
 
 **Use case: Delete a person**
 
