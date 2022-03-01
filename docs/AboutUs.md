@@ -53,7 +53,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/davidtan0527.png" width="200px">
 
 [[github](http://github.com/DavidTan0527)]
-<!-- [[portfolio](team/weiucheng.md)] -->
+[[portfolio](team/weiucheng.md)]
 
 * Role: Developer
 * Responsibilities: Integration, Code Quality, Git expert
