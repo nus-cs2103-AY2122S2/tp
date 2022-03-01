@@ -99,11 +99,23 @@ Examples:
 
 ### Listing entries
 
-#### Listing all persons : `list`
+#### Listing all students : `list student`
 
-Shows a list of all persons in the address book.
+Shows a list of all students.
 
-Format: `list`
+Format: `list student`
+
+#### Listing all modules : `list module`
+
+Shows a list of all modules.
+
+Format: `list module`
+
+#### Listing all students : `list class`
+
+Shows a list of all class groups.
+
+Format: `list class`
 
 ### Editing entries : `edit` [coming soon]
 
