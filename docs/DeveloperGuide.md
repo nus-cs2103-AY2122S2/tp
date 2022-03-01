@@ -657,13 +657,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4.  Should not depend on external/remote servers.
+5.  Should not depend on a Database Management System (DBMS).
 
 ### Glossary
 
+* **MSS**: Main Success Scenario
+* **Class Group**: The different types of classes a module has. E.g. T01, T02, B01, B02
+* **CLI**: Command line interface
+* **GUI**: Graphical user interface
+* **Lesson**: The weekly lesson that students turn up for
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Module**: A NUS SoC module
+* **MSS**: Main Success Scenario
+* **NUS**: The National University of Singapore
+* **Student**: A student in NUS
+* **TA**: Teaching Assistant in NUS SoC
 
 --------------------------------------------------------------------------------------------------------------------
 
