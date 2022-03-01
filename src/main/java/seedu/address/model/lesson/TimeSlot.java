@@ -52,6 +52,11 @@ public class TimeSlot {
 
         return (currentTimeSlotStart.before(otherTimeSlotEnd) || currentTimeSlotStart.equals(otherTimeSlotEnd))
                 && (currentTimeSlotEnd.after(otherTimeSlotStart) || currentTimeSlotEnd.equals(otherTimeSlotStart));
+
+        /* for recurring lessons */
+        // check day
+        //      if same day
+        //          check if timeslot on that day overlaps
     }
 
     private Date getEndDate() {

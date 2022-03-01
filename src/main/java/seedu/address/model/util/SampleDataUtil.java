@@ -12,6 +12,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyLessonBook;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.Subject;
+import seedu.address.model.lesson.TemporaryLesson;
 import seedu.address.model.lesson.TimeSlot;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -64,11 +65,14 @@ public class SampleDataUtil {
         thirdLessonDate = calendar.getTime();
 
         return new Lesson[] {
-            new Lesson(new seedu.address.model.lesson.Name("Make up lesson for George"), new Subject("Geography"),
+            new TemporaryLesson(new seedu.address.model.lesson.Name("Make up lesson for George"),
+                    new Subject("Geography"),
                     new TimeSlot(firstLessonDate, 2)),
-            new Lesson(new seedu.address.model.lesson.Name("Trial lesson for Jake"), new Subject("Biology"),
+            new TemporaryLesson(new seedu.address.model.lesson.Name("Trial lesson for Jake"),
+                    new Subject("Biology"),
                     new TimeSlot(secondLessonDate, 1)),
-            new Lesson(new seedu.address.model.lesson.Name("Make up lesson for Henry"), new Subject("Physics"),
+            new TemporaryLesson(new seedu.address.model.lesson.Name("Make up lesson for Henry"),
+                    new Subject("Physics"),
                     new TimeSlot(thirdLessonDate, 2))
         };
     }
