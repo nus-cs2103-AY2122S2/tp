@@ -156,6 +156,7 @@ Format: `edit STUDENT_INDEX [i/STUDENT_ID] [n/STUDENT_NAME] [m/MODULE_CODE] [p/P
 
 * The index of the student to be edited is a compulsory field.
 * The student’s matriculation number, name, module code, phone number, telegram handle, and email address fields are optional and can be excluded.
+* An error message will be displayed to the user if the specified index is a negative number or larger than the number of students in TAPA.
 
 Example:
 * `edit 10 m/CS2103T p/98765432 t/@john e/E0123456Z`
