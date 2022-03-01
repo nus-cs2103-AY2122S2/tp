@@ -61,7 +61,7 @@ Expense Expert is a **desktop app for keeping track of your expenses, and managi
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 Format: `help`
 
@@ -69,7 +69,7 @@ Format: `help`
 
 Adds an expense to the list.
 
-Format: `add n/EXPENSE_TITLE a/AMOUNT [t/TAG]…​`
+Format: `add d/EXPENSE_TITLE a/AMOUNT c/CATEGORY`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 An expense can have any number of tags (including 0)
@@ -88,23 +88,24 @@ Format: `list`
 
 ### Editing an expense : `edit`
 
-Edits an existing expense in the list.
+Edits an existing expense in the list. You only need to specify the index and the syntax of the field you want to edit. Use `list` before executing the command to identify the index of the expense you want to edit.
 
-Format: `edit [n/NAME] [a/AMOUNT] [t/TAG]…​`
+Format: `edit INDEX [d/DESCRIPTION] [a/AMOUNT] [c/CATEGORY]`
 
 Examples:
 
-- `edit n/Dinner at Privé a/40` Edits the amount of the mentioned expense.
+- `edit 1 a/40`
+- `edit 2 d/Groceries from Sheng Shiong`
 
 ### Deleting an expense : `delete`
 
-Deletes the specified expense from the list.
+Deletes the specified expense from the list. Use `list` before executing the command to identify the index of the expense you want to delete.
 
-Format: `delete n/EXPENSE_TITLE`
+Format: `delete INDEX`
 
 Examples:
 
-- `list` followed by `delete n/Dinner at Privé` deletes the specified expense.
+- `delete 1`
 
 ### Exiting the program : `quit`
 
