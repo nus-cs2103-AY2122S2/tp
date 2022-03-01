@@ -152,7 +152,7 @@ Example:
 
 Edits a student's information in TAPA.
 
-Format: `edit i/STUDENT_ID n/STUDENT_NAME m/MODULE_CODE [p/PHONE_NUMBER] [h/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS]​`
+Format: `edit STUDENT_INDEX [i/STUDENT_ID] [n/STUDENT_NAME] [m/MODULE_CODE] [p/PHONE_NUMBER] [h/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS]​`
 
 * The index of the student to be edited is a compulsory field.
 * The student’s matriculation number, name, module code, phone number, telegram handle, and email address fields are optional and can be excluded.
