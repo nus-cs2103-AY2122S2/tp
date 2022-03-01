@@ -75,21 +75,18 @@ Format: `help`
 
 Example: `[help]` Lists all available commands.
 
+### Adding a Teaching Assistant: `add`
 
+Adds a TA to the system.
 
-### Adding a person: `add`
-
-Adds a person to the address book.
-
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add [NUMBER_OF_ENTRIES]`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+You can add any number of TAs in.
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `[add 2] Adds 2 TAs. System will ask for TA’s details a field at a time, and repeat for the next entry.`
 
 ### Listing all persons : `list`
 
