@@ -2,8 +2,8 @@ package seedu.address.testutil;
 
 import seedu.address.model.role.Deadline;
 import seedu.address.model.role.Description;
-import seedu.address.model.role.Name;
 import seedu.address.model.role.Role;
+import seedu.address.model.role.RoleName;
 import seedu.address.model.role.Status;
 import seedu.address.model.role.Stipend;
 
@@ -18,7 +18,8 @@ public class RoleBuilder {
     public static final String DEFAULT_DESCRIPTION = "Frontend web development";
     public static final String DEFAULT_STIPEND = "1000";
 
-    private Name name;
+
+    private RoleName roleName;
     private Status status;
     private Deadline deadline;
     private Description description;
@@ -28,7 +29,7 @@ public class RoleBuilder {
      * Creates a {@code RoleBuilder} with the default details.
      */
     public RoleBuilder() {
-        name = new Name(DEFAULT_NAME);
+        roleName = new RoleName(DEFAULT_NAME);
         status = new Status(DEFAULT_STATUS);
         deadline = new Deadline(DEFAULT_DEADLINE);
         description = new Description(DEFAULT_DESCRIPTION);
@@ -39,7 +40,7 @@ public class RoleBuilder {
      * Initializes the RoleBuilder with the data of {@code roleToCopy}.
      */
     public RoleBuilder(Role roleToCopy) {
-        name = roleToCopy.getName();
+        roleName = roleToCopy.getName();
         status = roleToCopy.getStatus();
         deadline = roleToCopy.getDeadline();
         description = roleToCopy.getDescription();
@@ -50,7 +51,7 @@ public class RoleBuilder {
      * Sets the {@code Name} of the {@code Role} that we are building.
      */
     public RoleBuilder withName(String name) {
-        this.name = new Name(name);
+        this.roleName = new RoleName(name);
         return this;
     }
 
@@ -87,6 +88,6 @@ public class RoleBuilder {
     }
 
     public Role build() {
-        return new Role(name, status, deadline, description, stipend);
+        return new Role(roleName, status, deadline, description, stipend);
     }
 }

@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Role's name in the role list.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
-public class Name {
+public class RoleName {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters and spaces, and it should not be blank";
@@ -25,7 +25,7 @@ public class Name {
      *
      * @param name A valid name.
      */
-    public Name(String name) {
+    public RoleName(String name) {
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
         fullName = name;
@@ -46,8 +46,8 @@ public class Name {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Name // instanceof handles nulls
-                && fullName.equals(((Name) other).fullName)); // state check
+                || (other instanceof RoleName // instanceof handles nulls
+                && fullName.equals(((RoleName) other).fullName)); // state check
     }
 
     @Override

@@ -8,7 +8,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
  */
 public class Role {
 
-    private final Name name;
+    private final RoleName roleName;
     private final Status status;
     private final Deadline deadline;
 
@@ -19,17 +19,17 @@ public class Role {
     /**
      * Every field must be present and not null.
      */
-    public Role(Name name, Status status, Deadline deadline, Description description, Stipend stipend) {
-        requireAllNonNull(name, status, deadline, description, stipend);
-        this.name = name;
+    public Role(RoleName roleName, Status status, Deadline deadline, Description description, Stipend stipend) {
+        requireAllNonNull(roleName, status, deadline, description, stipend);
+        this.roleName = roleName;
         this.status = status;
         this.deadline = deadline;
         this.description = description;
         this.stipend = stipend;
     }
 
-    public Name getName() {
-        return name;
+    public RoleName getName() {
+        return roleName;
     }
 
     public Status getStatus() {

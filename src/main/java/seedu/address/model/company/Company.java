@@ -4,9 +4,11 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.role.Role;
 import seedu.address.model.role.RoleManager;
 import seedu.address.model.tag.Tag;
 
@@ -29,13 +31,14 @@ public class Company {
     /**
      * Name is compulsory but Phone, Email and Address are optional
      */
-    public Company(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Company(Name name, Phone phone, Email email, Address address, Set<Tag> tags, List<Role> roles) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.roleManager.getRoles().addAll(roles);
     }
 
     public Name getName() {
@@ -60,6 +63,10 @@ public class Company {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public RoleManager getRoleManager() {
+        return roleManager;
     }
 
     /**

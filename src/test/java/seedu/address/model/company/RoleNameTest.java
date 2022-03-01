@@ -1,4 +1,4 @@
-package seedu.address.model.role;
+package seedu.address.model.company;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -6,7 +6,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-public class NameTest {
+public class RoleNameTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -28,13 +28,13 @@ public class NameTest {
         assertFalse(Name.isValidName("")); // empty string
         assertFalse(Name.isValidName(" ")); // spaces only
         assertFalse(Name.isValidName("^")); // only non-alphanumeric characters
-        assertFalse(Name.isValidName("technician*")); // contains non-alphanumeric characters
+        assertFalse(Name.isValidName("peter*")); // contains non-alphanumeric characters
 
         // valid name
-        assertTrue(Name.isValidName("software engineer")); // alphabets only
+        assertTrue(Name.isValidName("peter jack")); // alphabets only
         assertTrue(Name.isValidName("12345")); // numbers only
-        assertTrue(Name.isValidName("data analyst 2")); // alphanumeric characters
-        assertTrue(Name.isValidName("Frontend Developer")); // with capital letters
-        assertTrue(Name.isValidName("Database Management and Server Integration")); // long names
+        assertTrue(Name.isValidName("peter the 2nd")); // alphanumeric characters
+        assertTrue(Name.isValidName("Capital Tan")); // with capital letters
+        assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
     }
 }

@@ -20,7 +20,7 @@ public class RoleManager {
      * Obtains the list of roles tagged to a Company
      * @return <code>ArrayList</code> representing the list of roles
      */
-    ArrayList<Role> getRoles() {
+    public ArrayList<Role> getRoles() {
         return this.roleList;
     }
 
