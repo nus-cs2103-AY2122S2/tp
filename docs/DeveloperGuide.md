@@ -285,10 +285,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TAddressBook` and the **Actor** is the `Teaching Assistant (TA)`, unless specified otherwise)
 
 **Use case: Add Labs**
 **Use case: Filter Students**
+
+**MSS**
+
+1.  TA requests to filter students by a tag 
+2.  TAB displays list of students based on filter criteria
+
+    Use case ends
+
+**Extensions**
+
+* 1a. TA provides non-existent tag
+  
+    * 1a1. TAB shows error message
+    * 1a2. TAB requests for valid tag
+
+      Use case resumes from step 1
+
+* 1b. TA tries to filter an empty list
+
+    * 1b1. TAB shows error message
+  
+      Use case ends
 
 **Use case: Mark Student Lab as Graded**
 
