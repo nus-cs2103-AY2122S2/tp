@@ -20,6 +20,7 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
+    public static final String MESSAGE_INVALID_DOUBLE_INDEX = "Double indexes are missing.";
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
     /**
@@ -33,6 +34,23 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses two {@code oneBasedIndex} into an array of {@code Index} of length two and returns it.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if one of the specified indexes is invalid (not non-zero unsigned integer)
+     * or one or both indexes are missing.
+     */
+    public static Index[] parseDoubleIndex(String oneBasedIndexes) throws ParseException {
+        String[] splitTrimmedIndexes = oneBasedIndexes.trim().split("\\s+");
+        if (!(splitTrimmedIndexes.length == 2)) {
+            throw new ParseException(MESSAGE_INVALID_DOUBLE_INDEX);
+        }
+        Index firstIndex = parseIndex(splitTrimmedIndexes[0]);
+        Index secondIndex = parseIndex(splitTrimmedIndexes[1]);
+
+        return new Index[]{firstIndex, secondIndex};
     }
 
     /**
