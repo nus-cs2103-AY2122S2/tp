@@ -36,7 +36,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/geraldneo567)] [[portfolio](team/geraldneo567.md)]
 
 * Role: Documentation
-* Responsibilities: Parsing input
+* Responsibilities: Parsing command input
 
 ### Ryan Walter Lee
 
