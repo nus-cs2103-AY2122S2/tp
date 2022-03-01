@@ -40,10 +40,20 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Isabel Teo
 
-<img src="images/isabelteo_photo.jpg" width="200px">
+<img src="images/isabelteo.png" width="200px">
 
 [[github](https://github.com/isabelteo)]
 [[portfolio](team/isabelteo.md)]
 
 * Role: Developer
 * Responsibilities: UI
+
+### Kong Jun Yin
+
+<img src="images/OhEyeSee.png" width="200px">
+
+[[github](https://github.com/OhEyeSee)]
+[[portfolio](team/OhEyeSee.md)]
+
+* Role: NIL
+* Responsibilities: NIL
