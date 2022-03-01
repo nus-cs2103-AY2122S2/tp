@@ -255,15 +255,20 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Target user profile**: 
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+This product is for competitive team sports manager to manage their players
+(i.e. roles, player attributes, trainings), team formation during practice as well as the booking of venues.
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: 
+
+This product solves:
+* the issues of managing large quantity of players;
+* identifying the positions that are lacking of manpower for recruitment.
+
+This product is not able to:
+* provide recommendation on team formation, coaching strategies, etc.
+* support users with multiple clubs.
 
 
 ### User stories
