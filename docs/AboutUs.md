@@ -9,16 +9,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### Daniel Lee Min Qiang
-
-<img src="images/dandaandaaaaaan.png" width="200px">
-
-[[github](https://github.com/dandaandaaaaaan)]
-[[portfolio](team/dandaandaaaaaan.md)]
-
-* Role: Developer
-* Responsibilities: Workflow setting, CI/CD, Import/Export
-
 ### Ho Zong Han
 
 <img src="images/sharpstorm.png" width="200px">
@@ -27,7 +17,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/sharpstorm.md)]
 
 * Role: Team Lead
-* Responsibilities: Code Quality, Scheduling and Deadlines, Progress Tracking, In charge of Appointments Subcomponent
+* Responsibilities: Code Quality, Scheduling and Deadlines, Progress Tracking, In Charge of Appointments Subcomponent
+
+### Daniel Lee Min Qiang
+
+<img src="images/dandaandaaaaaan.png" width="200px">
+
+[[github](https://github.com/dandaandaaaaaan)]
+[[portfolio](team/dandaandaaaaaan.md)]
+
+* Role: Developer
+* Responsibilities: CI/CD and Workflow Management, Repository Administration, In Charge of Import/Export Subcomponent
 
 ### Ong Wei Xin
 
@@ -37,7 +37,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/wei-xinn.md)]
 
 * Role: Developer
-* Responsibilities: User onboarding guide
+* Responsibilities: In Charge of User Onboarding Subcomponent
 
 ### Kwan Hao Wei
 
@@ -47,14 +47,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/kwanhw.md)]
 
 * Role: Developer
-* Responsibilities: Contact tagging
+* Responsibilities: In Charge of Tag Management Subcomponent
 
-### James Doe
+### Han Jiyao
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/hanjiyao.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/hanjiyao)]
+[[portfolio](team/hanjiyao.md)]
 
 -   Role: Developer
--   Responsibilities: UI
+-   Responsibilities: In Charge of Bulk Operations Subcomponent
