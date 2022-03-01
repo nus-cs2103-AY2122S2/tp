@@ -43,7 +43,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Meng An
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/mengan.png" width="200px">
 
 [[github](http://github.com/evaderfati)]
 [[portfolio](team/evaderfati.md)]
