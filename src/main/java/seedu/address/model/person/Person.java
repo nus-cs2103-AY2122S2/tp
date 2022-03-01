@@ -20,21 +20,21 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final GithubUsername githubUsername;
 
     // Data fields
-    private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Skill> skillSet = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Set<Skill> skillSet) {
-        requireAllNonNull(name, phone, email, address, tags, skillSet);
+    public Person(Name name, Phone phone, Email email, GithubUsername username, Set<Tag> tags, Set<Skill> skillSet) {
+        requireAllNonNull(name, phone, email, username, tags, skillSet);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
+        this.githubUsername = username;
         this.tags.addAll(tags);
         this.skillSet.addAll(skillSet);
     }
@@ -51,8 +51,8 @@ public class Person {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
+    public GithubUsername getGithubUsername() {
+        return githubUsername;
     }
 
     /**
@@ -102,7 +102,7 @@ public class Person {
         return otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getGithubUsername().equals(getGithubUsername())
                 && otherPerson.getTags().equals(getTags())
                 && otherPerson.getSkillSet().equals(getSkillSet());
     }
@@ -110,7 +110,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, skillSet);
+        return Objects.hash(name, phone, email, githubUsername, tags, skillSet);
     }
 
     @Override
@@ -121,8 +121,8 @@ public class Person {
                 .append(getPhone())
                 .append("; Email: ")
                 .append(getEmail())
-                .append("; Address: ")
-                .append(getAddress());
+                .append("; GitHub Username: ")
+                .append(getGithubUsername());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
