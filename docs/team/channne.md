@@ -5,8 +5,8 @@ title: Channe Chwa's Project Portfolio Page
 
 ### Project: TAddressBook
 
-TAddress Book is a desktop app for CS2030S TAs to manage students and labs, optimized for use via a Command Line 
-Interface. It is based on [AddressBook Level 3](https://se-education.org/addressbook-level3/). 
+TAddress Book is a desktop app for CS2030S TAs to manage students and labs, optimized for use via a Command Line
+Interface. It is based on [AddressBook Level 3](https://se-education.org/addressbook-level3/).
 
 Given below are my contributions to the project.
 
