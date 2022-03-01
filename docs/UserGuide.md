@@ -167,7 +167,7 @@ Format: `manual COMMAND_NAME`
 
 Example
 * `manual add`
-    * Display the format for the command add, and briefly describes the command
+    * Display the format for the command add, and briefly describes the command.
 
 ### Exiting the program : `exit`
 
