@@ -193,10 +193,10 @@ Action      | Format, Examples
 **Delete**    | `delete STUDENT_INDEX` <br> e.g., `delete 10`
 **Find**    | `find n/STUDENT_NAME` (or) `find i/STUDENT_ID` <br> e.g., `find n/john`, `find i/A0123456Z`
 **Manual**  | `manual COMMAND_NAME` <br> e.g., `manual add`
-**Mark**    | `mark n/STUDENT_NAME UNDONE_TASK_INDEX` (or) `mark i/STUDENT_ID UNDONE_TASK_INDEX` <br> e.g., `mark n/John 1`, `mark i/AXXXXXXXR 1`
-**Unmark**  | `unmark n/STUDENT_NAME DONE_TASK_INDEX` (or) `unmark i/STUDENT_ID DONE_TASK_INDEX` <br> e.g., `unmark n/John 1`, `unmark i/AXXXXXXXR 1`
 **Exit**    | `exit`
 **Task**    | `task i/STUDENT_ID` <br> e.g., `task A0123456Z`
+**Mark**    | `mark n/STUDENT_NAME UNDONE_TASK_INDEX` (or) `mark i/STUDENT_ID UNDONE_TASK_INDEX` <br> e.g., `mark n/John 1`, `mark i/AXXXXXXXR 1`
+**Unmark**  | `unmark n/STUDENT_NAME DONE_TASK_INDEX` (or) `unmark i/STUDENT_ID DONE_TASK_INDEX` <br> e.g., `unmark n/John 1`, `unmark i/AXXXXXXXR 1`
 **Archive** | `archive`
 
 
