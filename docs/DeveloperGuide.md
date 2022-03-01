@@ -301,11 +301,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 * 2a. TAB detects that the student list is empty
     * 2a1. TAB displays warning message to user (that there are no students yet)
-  
+
       Use case ends
 * 2b. TAB detects that an identical lab tag already exists.
     * 2b1. TAB displays error message (that tag already exists)
-      
+
       Use case ends
 
 **Use case: Filter Students**
