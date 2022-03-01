@@ -257,42 +257,246 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* TA in charge of tutorial groups
+* Needs to manage a significant number of student contacts
+* Might be instructing multiple modules/tutorials
+* Prefers desktop apps over other types
+* Types fast
+* Prefers typing to mouse interactions
+* Is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: TAssist creates a more conducive learning environment for educators and students by helping TAs consolidate students’ contacts and track their progress.
 
-
-### User stories
+### TAssist User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+<table class="c20">
+    <tbody>
+        <tr class="c11">
+            <td class="c16" colspan="1" rowspan="1">
+               No
+            </td>
+            <td class="c9" colspan="1" rowspan="1">
+               As a …
+            </td>
+            <td class="c3" colspan="1" rowspan="1">
+               I can…
+            </td>
+            <td class="c13" colspan="1" rowspan="1">
+               So that I can…
+            </td>
+            <td class="c12" colspan="1" rowspan="1">
+               Notes
+            </td>
+            <td class="c1" colspan="1" rowspan="1">
+               Priority
+            </td>
+        </tr>
+        <tr class="c11">
+            <td class="c16" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">1</span></p>
+            </td>
+            <td class="c9" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">TA</span></p>
+            </td>
+            <td class="c3" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">[EPIC] Manage my students in my contacts</span></p>
+                <p class="c8 c6"><span class="c0"></span></p>
+                <ol class="c10 lst-kix_ti3wjakiwqoc-0 start" start="1">
+                    <li class="c7 li-bullet-0"><span class="c0">Add students to my contacts</span></li>
+                    <li class="c7 li-bullet-0"><span class="c0">Remove students from my contacts</span></li>
+                    <li class="c7 li-bullet-0"><span class="c0">View students</span></li>
+                </ol>
+            </td>
+            <td class="c13" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">keep in contact with them.</span></p>
+            </td>
+            <td class="c12" colspan="1" rowspan="1">
+                <p class="c8 c6"><span class="c0"></span></p>
+            </td>
+            <td class="c1" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">***</span></p>
+            </td>
+        </tr>
+        <tr class="c11">
+            <td class="c16" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">2</span></p>
+            </td>
+            <td class="c9" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">TA</span></p>
+            </td>
+            <td class="c3" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">[EPIC] Manage the modules I am teaching</span></p>
+                <ol class="c10 lst-kix_rsnc1do3432k-0 start" start="1">
+                    <li class="c7 li-bullet-0"><span class="c0">add modules</span></li>
+                    <li class="c7 li-bullet-0"><span class="c0">remove modules</span></li>
+                    <li class="c7 li-bullet-0"><span class="c0">view modules</span></li>
+                </ol>
+            </td>
+            <td class="c13" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">monitor the modules I am teaching this semester.</span></p>
+            </td>
+            <td class="c12" colspan="1" rowspan="1">
+                <p class="c8 c6"><span class="c0"></span></p>
+            </td>
+            <td class="c1" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">***</span></p>
+            </td>
+        </tr>
+        <tr class="c11">
+            <td class="c16" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">3</span></p>
+            </td>
+            <td class="c9" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">TA</span></p>
+            </td>
+            <td class="c3" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">[EPIC] Manage the class groups I am teaching</span></p>
+                <ol class="c10 lst-kix_pn5b7fzij174-0 start" start="1">
+                    <li class="c7 li-bullet-0"><span class="c0">add class groups </span></li>
+                    <li class="c7 li-bullet-0"><span class="c0">remove class groups </span></li>
+                    <li class="c7 li-bullet-0"><span class="c0">view class groups </span></li>
+                </ol>
+            </td>
+            <td class="c13" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">monitor the class groups I have to teach.</span></p>
+            </td>
+            <td class="c12" colspan="1" rowspan="1">
+                <p class="c8 c6"><span class="c0"></span></p>
+            </td>
+            <td class="c1" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">***</span></p>
+            </td>
+        </tr>
+        <tr class="c11">
+            <td class="c16" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">4</span></p>
+            </td>
+            <td class="c9" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">TA</span></p>
+            </td>
+            <td class="c3" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">[EPIC] Manage students in the modules I am teaching</span></p>
+                <ol class="c10 lst-kix_l5c5afd4kfve-0 start" start="1">
+                    <li class="c7 li-bullet-0"><span class="c0">add students to a module</span></li>
+                    <li class="c7 li-bullet-0"><span class="c0">remove students from a module</span></li>
+                    <li class="c7 li-bullet-0"><span class="c0">view students in a module</span></li>
+                </ol>
+            </td>
+            <td class="c13" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">easily monitor the students I am teaching in a module.</span></p>
+            </td>
+            <td class="c12" colspan="1" rowspan="1">
+                <p class="c8 c6"><span class="c0"></span></p>
+            </td>
+            <td class="c1" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">***</span></p>
+            </td>
+        </tr>
+        <tr class="c11">
+            <td class="c16" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">5</span></p>
+            </td>
+            <td class="c9" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">TA</span></p>
+            </td>
+            <td class="c3" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">Add class groups to a module</span></p>
+            </td>
+            <td class="c13" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">track which module a class groups belongs to.</span></p>
+            </td>
+            <td class="c12" colspan="1" rowspan="1">
+                <p class="c8 c6"><span class="c0"></span></p>
+            </td>
+            <td class="c1" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">***</span></p>
+            </td>
+        </tr>
+        <tr class="c11">
+            <td class="c16" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">6</span></p>
+            </td>
+            <td class="c9" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">TA</span></p>
+            </td>
+            <td class="c3" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">keep track of students’ attendance</span></p>
+                <p class="c8"><span class="c0">Conditions:</span></p>
+                <ol class="c10 lst-kix_8pu3ok8lb4xj-0 start" start="1">
+                    <li class="c7 li-bullet-0"><span class="c0">add student to a lesson</span></li>
+                    <li class="c7 li-bullet-0"><span class="c0">remove student from a lesson </span></li>
+                    <li class="c7 li-bullet-0"><span class="c0">view students in a lesson</span></li>
+                    <li class="c7 li-bullet-0"><span class="c0">Total attendance count</span></li>
+                </ol>
+            </td>
+            <td class="c13" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">focus on students who have not been attending lessons.</span></p>
+            </td>
+            <td class="c12" colspan="1" rowspan="1">
+                <p class="c8 c6"><span class="c0"></span></p>
+            </td>
+            <td class="c1" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">***</span></p>
+            </td>
+        </tr>
+    </tbody>
+</table>
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TAssist` and the **Actor** is the `TA`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case 01: Add Module**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  TA enters a new module with the specified details.
+2.  TAssist adds the module and displays the new module’s details.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. TAssist detects an error in the entered command.
+
+    * 1a1. TAssist prompts for the correct command.
+
+    * 1a2. TA enters a new command.
+
+      Steps 1a1-1a2 are repeated until the command entered is correct.
+
+      Use case resumes from step 2.
+
+**Use case 02: List Modules**
+
+**MSS**
+
+1.  TA lists the modules.
+2.  TAssists display the details of all the modules.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. TAssist detects an error in the entered command.
+
+    * 1a1. TAssist prompts for the correct command.
+
+    * 1a2. TA enters a new command.
+
+      Steps 1a1-1a2 are repeated until the command entered is correct.
+
+      Use case resumes from step 2.
+
+**Use case 03: Delete Module**
+
+**MSS**
+
+1. TA requests to <ins>list modules (UC02)</ins>. 
+2. TA deletes a module with the specified index.
+3. TAssist deletes the module and the class groups associated to it.
 
     Use case ends.
 
@@ -302,11 +506,83 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 2b. TAssist detects an error in the entered command.
 
-    * 3a1. AddressBook shows an error message.
+    * 2b1. TAssist prompts for the correct command.
 
-      Use case resumes at step 2.
+    * 2b2. TA enters a new command.
+
+      Steps 2b1-2b2 are repeated until the command entered is correct.
+
+      Use case resumes from step 3.
+
+**Use case 04: Add a class group**
+
+**MSS**
+
+1.  TA requests to add a new class group with the specified details.
+2.  TAssist adds the new class group and displays its details.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. TAssist detects an error in the entered command.
+
+    * 1a1. TAssist prompts for the correct command.
+
+    * 1a2. TA enters a new command.
+
+      Steps 1a1-1a2 are repeated until the command entered is correct.
+
+      Use case resumes from step 2.
+
+**Use case 05: List class groups**
+
+**MSS**
+
+1.  TA requests to list class groups.
+2.  TAssist displays the details of all class groups.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. TAssist detects an error in the entered command.
+
+    * 1a1. TAssist prompts for the correct command.
+
+    * 1a2. TA enters a new command.
+
+      Steps 1a1-1a2 are repeated until the command entered is correct.
+
+      Use case resumes from step 2.
+
+**Use case 06: Delete a class group**
+
+**MSS**
+
+1.  TA requests to <ins>list class groups (UC05)</ins>.
+2.  TA requests to delete a specific class group in the list.
+3.  TAssist deletes the class group.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 2b. TAssist detects an error in the entered command.
+
+    * 2b1. TAssist prompts for the correct command.
+  
+    * 2b2. TA enters a new command.
+
+      Steps 2b1-2b2 are repeated until the command entered is correct.
+
+      Use case resumes from step 3.
 
 *{More to be added}*
 

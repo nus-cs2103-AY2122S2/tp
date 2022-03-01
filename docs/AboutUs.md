@@ -22,7 +22,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 ### Gernene Tan
 
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/gernene.png" width="200px">
 
 [[github](http://github.com/Gernene)]
 [[portfolio](team/gernene.md)]
