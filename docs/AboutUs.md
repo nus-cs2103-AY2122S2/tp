@@ -25,8 +25,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [ [github](http://github.com/FYimu) ] [ [portfolio](team/FYimu.md) ]
 
 * Role: Developer
-* Responsibility: TBD
+* Responsibility: Code
 
+### Tian Xiao
+
+<img src="../src/main/resources/images/snoidetx.png" width="200"/> 
+
+[github](https://github.com/snoidetx) | [portfolio](team/snoidetx.md)
+
+* Role: Developer
+* Responsibilities: Code
 
 ### Wu Weiye
 
