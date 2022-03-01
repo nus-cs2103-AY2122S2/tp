@@ -9,25 +9,25 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Bian Yuqi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/byq.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[homepage](https://github.com/Jacky142857)]
+[[portfolio](team/jacky142857.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: Documentation and testing.
 
-### Jane Doe
+### Chua Shi Hong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/chuashihong.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/chuashihong)]
+[[portfolio](team/chuashihong.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer
+* Responsibilities: Testing, UI
 
 ### Ho Qi Yuan, Janald
 
@@ -48,12 +48,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Wang Jun Hong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/wjunhong.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/WJunHong)]
+[[portfolio](team/wjunhong.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Team Lead
+* Responsibilities: Ensure overall team coordination
+
