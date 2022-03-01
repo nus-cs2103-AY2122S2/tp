@@ -35,7 +35,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
     public boolean hasConflictingLesson(Lesson toCheck) {
         requireNonNull(toCheck);
 
-        return findLessonConflictingWith(toCheck) == null;
+        return findLessonConflictingWith(toCheck) != null;
     }
 
     /**
@@ -60,6 +60,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
     public void add(Lesson toAdd) {
         requireNonNull(toAdd);
         if (hasConflictingLesson(toAdd)) {
+
             throw new ConflictsWithLessonException(findLessonConflictingWith(toAdd), toAdd);
         }
         internalList.add(toAdd);
