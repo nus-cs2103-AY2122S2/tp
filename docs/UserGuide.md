@@ -163,7 +163,7 @@ Display the format for a specified command and a short description for that comm
 
 Format: `manual COMMAND_NAME`
 
-* The format for the command corresponding to the command name will be displayed, along with a short description
+* The format for the command corresponding to the command name will be displayed, along with a short description.
 
 Example
 * `manual add`
