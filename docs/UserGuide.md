@@ -115,7 +115,7 @@ Format: `task i/STUDENT_ID`
 * The completed and uncompleted tasks are separated into 2 different sections.
 
 Example:
-* `task A0123456Z`
+* `task i/A0123456Z`
     * Lists out the tasks that student (A0123456Z) has.
     
 ### Archiving details in the address book: `archive`
@@ -126,6 +126,31 @@ Format: `archive`
 
 * A copy of the details currently saved in the address book will be saved to a separate file.
 * The file name will be the date and time of the archive operation.
+
+
+### Listing the student details: `list`
+
+Displays all the students enrolled in a list.
+
+Format: `list`
+
+* Displays the students from the list of students in alphabetical order.
+* The students are indexed as 1, 2, 3, ......
+
+Example:
+* `list`
+    * Displays all the enrolled students in alphabetical order.
+
+### Assigning tasks to a particular student: `assign`
+
+Format: `assign i/STUDENT_ID tn/TASK_NAME`
+
+* Assigns a task to a particular student
+
+Example:
+* `assign i/A0XXXXXXR tn/assignment 1`
+    * assigns assignment 1 to student with id A0XXXXXXR.
+
 
 ### Exiting the program : `exit`
 
@@ -145,13 +170,15 @@ Format: `exit`
 
 ## Command summary
 
-Action      | Format, Examples
-------------|------------------
-**Add**     | `add i/MATRICULATION_NO n/STUDENT_NAME m/MODULE_CODE [p/PHONE_NUMBER] [t/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] ` <br> e.g., `add i/A0123456Z n/john m/CS2103T p/98765432 t/@john e/E0123456Z`
-**Delete**    | `delete STUDENT_INDEX` <br> e.g., `delete 10`
-**Find**    | `find n/STUDENT_NAME` (or) `find i/STUDENT_ID` <br> e.g., `find n/john`, `find i/A0123456Z`
-**Exit**    | `exit`
-**Task**    | `task i/STUDENT_ID` <br> e.g., `task A0123456Z`
-**Archive** | `archive`
+Action      | Format, Examples                                                                                                                                                                           |
+------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+**Add**     | `add i/MATRICULATION_NO n/STUDENT_NAME m/MODULE_CODE [p/PHONE_NUMBER] [h/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] ` <br> e.g., `add i/A0123456Z n/john m/CS2103T p/98765432 t/@john e/E0123456Z` |
+**Delete**  | `delete STUDENT_INDEX` <br> e.g., `delete 10`                                                                                                                                              |
+**Find**    | `find n/STUDENT_NAME` (or) `find i/STUDENT_ID` <br> e.g., `find n/john`, `find i/A0123456Z`                                                                                                |
+**Exit**    | `exit`                                                                                                                                                                                     | 
+**Task**    | `task i/STUDENT_ID` <br> e.g., `task i/A0123456Z`                                                                                                                                          |
+**list**    | `list`                                                                                                                                                                                     |
+**Assign**  | `assign i/STUDENT_ID tn/TASK_NAME` <br> e.g., `task i/A0123456Z tn/assignment 1`                                                                                                           |
+**Archive** | `archive`                                                                                                                                                                                  |
 
 
