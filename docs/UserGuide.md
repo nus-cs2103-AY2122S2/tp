@@ -32,6 +32,8 @@ who are teaching multiple classes/modules at the same time. It is optimised for 
 
    * **`delete`**`3` : Deletes the 3rd entry in TAPA.
 
+   * **`manual`**`add` : Display the user manual of the command `add`.
+
    * **`clear`** : Deletes all contacts.
 
    * **`exit`** : Exits the app.
@@ -79,6 +81,33 @@ Example:
 * `add i/A0123456Z n/john m/CS2103T p/98765432 t/@john e/E0123456Z`
     * A student named John is added to TAPA.
 
+### Deleting a student: `delete`
+
+Deletes a student from TAPA.
+
+Format: `delete STUDENT_INDEX`
+
+* The student corresponding to the index (specified after the `delete` command) will be removed from TAPA.
+* An error message will be displayed to the user if the specified index is a negative number or larger than the number of students in TAPA.
+
+Example:
+* `delete 10`
+    * A student named John (whose list index is “10”) is deleted from TAPA.
+
+### Finding a student: `find`
+
+Allows the user to look up the details of a particular student.
+
+Format: `find n/STUDENT_NAME` (or) `find i/STUDENT_ID`
+
+* The student whose name or student id is specified after the `find` command will appear in the resulting list.
+
+Example:
+* `find n/John`
+    * Displays the particulars of the students whose names include John.
+* `find i/AXXXXXXXR`
+    * Displays the particulars of the student with student ID AXXXXXXXR.
+
 ### Checking all the tasks that a particular student have: `task`
 
 Displays all the tasks that are allocated to a particular student.
@@ -91,6 +120,34 @@ Example:
 * `task A0123456Z`
     * Lists out the tasks that student (A0123456Z) has.
     
+### Marking an undone task as done for a particular student: `mark`
+
+Marks a specific undone task as done for a particular student.
+
+Format : `mark i/STUDENT_ID UNDONE_TASK_INDEX`
+
+* The undone task corresponding to the index or the particular student will be marked as done in the TAPA.
+* An error message will be displayed to the user if the specified index is a negative number or larger than the number of tasks for that particular student.
+* An error message will be displayed to the user if the task with that specified index for the particular student is already marked as done.
+  
+Example:
+* `mark i/AXXXXXXXR 1`
+    * Marks the first undone task for the student with student ID AXXXXXXXR as done.
+
+### Marking a done task as undone for a particular student: `unmark`
+
+Marks a specific done task as undone for a particular student.
+
+Format : `unmark i/STUDENT_ID DONE_TASK_INDEX`
+
+* The done task corresponding to the index for the particular student will be marked as undone in the TAPA.
+* An error message will be displayed to the user if the specified index is a negative number or larger than the number of tasks for that particular student.
+* An error message will be displayed to the user if the task with that specified index for the particular student is already marked as undone.
+
+Example:
+* `unmark i/AXXXXXXXR 1`
+    * Marks the first done task for the student with student ID AXXXXXXXR as undone.
+    
 ### Archiving details in the address book: `archive`
 
 Saves a copy of the details currently saved in the address book into a separate file.
@@ -99,6 +156,22 @@ Format: `archive`
 
 * A copy of the details currently saved in the address book will be saved to a separate file.
 * The file name will be the date and time of the archive operation.
+
+### Displaying manual for a command: `manual`
+
+Display the format for a specified command and a short description for that command.
+
+Format: `manual [COMMAND_NAME]`
+
+* The format of the command corresponding to the command name will be displayed, along with a short description.
+* If there are no inputs for the command name, all the available commands will be displayed.
+* An error message will be displayed to the user if the user input a command name that is invalid.
+
+Example
+* `manual add`
+    * Display the format for the command add, and briefly describes the command.
+* `manual`
+    * Display all available commands.
 
 ### Exiting the program : `exit`
 
@@ -121,8 +194,13 @@ Format: `exit`
 Action      | Format, Examples
 ------------|------------------
 **Add**     | `add i/MATRICULATION_NO n/STUDENT_NAME m/MODULE_CODE [p/PHONE_NUMBER] [t/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] ` <br> e.g., `add i/A0123456Z n/john m/CS2103T p/98765432 t/@john e/E0123456Z`
+**Delete**    | `delete STUDENT_INDEX` <br> e.g., `delete 10`
+**Find**    | `find n/STUDENT_NAME` (or) `find i/STUDENT_ID` <br> e.g., `find n/john`, `find i/A0123456Z`
+**Manual**  | `manual COMMAND_NAME` <br> e.g., `manual add`
 **Exit**    | `exit`
 **Task**    | `task i/STUDENT_ID` <br> e.g., `task A0123456Z`
+**Mark**    | `mark i/STUDENT_ID UNDONE_TASK_INDEX` <br> e.g., `mark i/AXXXXXXXR 1`
+**Unmark**  | `unmark i/STUDENT_ID DONE_TASK_INDEX` <br> e.g., `unmark i/AXXXXXXXR 1`
 **Archive** | `archive`
 
 
