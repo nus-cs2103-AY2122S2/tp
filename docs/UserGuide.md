@@ -185,6 +185,53 @@ Examples:
 Lists all existing positions in HireLah.
 Format: `poslist`
 
+### Adding Interview : `intvwadd`
+
+Adds a new interview to HireLah.
+
+Format: `intvwadd n/CANDIDATE_INDEX d/DATE r/ROLE`
+* Date provided must be in format YYYY-MM-DD HH:MM.
+* Role *must* currently exist in position.
+
+Examples:
+* `intvwadd n/1 d/2022-01-01 14:00 r/Senior Frontend Software Engineer`
+
+### Editing an Interview : `intvwedit`
+
+Edit an existing interview in HireLah.
+
+Format: `intvwedit CANDIDATE_INDEX ROLE [d/DATE] [r/NEWROLE]`
+* Edits the interview with CANDIDATE_INDEX and ROLE.
+* At least one optional field must be provided.
+* Existing attribute of the interview will be updated to the input value.
+* When editing requirements, the existing requirements of the interview will be removed. i.e. 
+adding requirements is not cumulative.
+
+Examples:
+* `intvwedit 1 Senior Frontend Software Engineer d/2022-01-01 15:00`
+* `intvwedit 1 Senior Frontend Software Engineer r/Senior FullStack Developer`
+
+### Deleting an Interview: `intvwdel`
+
+Deletes an existing interview in HireLah.
+
+Format: `intvwdel CANDIDATE_INDEX ROLE`
+* Date provided must be in format YYYY-MM-DD HH:MM. 
+* Existing interview with the matching CANDIDATE_INDEX and ROLE is deleted. 
+* Role provided is case-insensitive.
+
+Examples:
+* `intvwdel 1 Senior Frontend Software Engineer`
+
+### Listing interviews: `intvwlist`
+
+Lists all existing interviews for the candidate in HireLah.
+
+Format: `intvwlist CANDIDATE_INDEX`
+
+Examples:
+* `intvwlist 1`
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
