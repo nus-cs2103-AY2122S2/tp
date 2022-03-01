@@ -167,6 +167,33 @@ AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
 </div>
 
+### Viewing pets’ pick-up and drop-off time: `time`
+
+Views pets’ pick-up and drop-off time 
+
+Format: `time INDEX`
+
+* Views pick-up and drop-off time of the pet at the specified `INDEX`.
+* The index refers to the index number shown in the displayed getId list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `time 12 returns pet 12’s pickup and dropoff times.`
+
+### Deleting a pet: `delete`
+
+Deletes the specified pet from the address book.
+
+Format: `delete INDEX`
+
+* Deletes the pet at the specified `INDEX`.
+* The index refers to the index number shown in the displayed getId list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `getId PeePee followed by delete 2 deletes the 2nd pet in the address book.`
+
+
 ### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
