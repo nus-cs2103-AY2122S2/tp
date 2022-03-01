@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCompanyCommand;
 import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteCompanyCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditCompanyDescriptor;
 import seedu.address.logic.commands.ExitCommand;
@@ -48,10 +48,10 @@ public class CompanyListParserTest {
 
     @Test
     public void parseCommand_delete() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_COMPANY
+        DeleteCompanyCommand command = (DeleteCompanyCommand) parser.parseCommand(
+                DeleteCompanyCommand.COMMAND_WORD + " " + INDEX_FIRST_COMPANY
                         .getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_COMPANY
+        assertEquals(new DeleteCompanyCommand(INDEX_FIRST_COMPANY
         ), command);
     }
 
