@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import java.time.format.DateTimeFormatter;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -15,6 +17,9 @@ public class JsonAdaptedRole {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Role's %s field is missing!";
 
+    public static final DateTimeFormatter VALIDATION_FORMATTER =
+            DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+
     private final String name;
     private final String status;
     private final String deadline;
@@ -26,7 +31,8 @@ public class JsonAdaptedRole {
      */
     @JsonCreator
     public JsonAdaptedRole(@JsonProperty("name") String name, @JsonProperty("status") String status,
-                           @JsonProperty("deadline") String deadline, @JsonProperty("description") String description,
+                           @JsonProperty("deadline") String deadline,
+                           @JsonProperty("description") String description,
                            @JsonProperty("stipend") String stipend) {
         this.name = name;
         this.status = status;
@@ -41,7 +47,7 @@ public class JsonAdaptedRole {
     public JsonAdaptedRole(Role source) {
         name = source.getName().fullName;
         status = source.getStatus().value;
-        deadline = source.getDeadline().value.toString();
+        deadline = source.getDeadline().value.format(VALIDATION_FORMATTER);
         description = source.getDescription().value;
         stipend = source.getStipend().value;
     }
@@ -74,7 +80,8 @@ public class JsonAdaptedRole {
     /**
      * Converts this Jackson-friendly adapted tag object into the model's {@code Role} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted role.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted
+     * role.
      */
     public Role toModelType() throws IllegalValueException {
         if (name == null) {
