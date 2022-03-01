@@ -418,7 +418,7 @@ _Details coming soon ..._
 
 ### Operate on Contacts by Conditional Clause : `batch`
 
-Returns contacts in the address book that match the given condition.
+Performs operations on contacts in the address book that match the given condition.
 
 Format: `batch COMMAND where/CONDITION`
 
@@ -442,7 +442,7 @@ Perform actions on a group of contacts.
 
 Format: `range COMMAND from/INDEX_FROM to/INDEX_TO`
 
-* Performs the specified COMMAND on all contacts between the specified range of `INDEX_FROM` to `INDEX_TO` inclusive
+* Performs the specified `COMMAND` on all contacts between the specified range of `INDEX_FROM` to `INDEX_TO` inclusive
 * `COMMAND` must be a valid command. The allowed operations in `COMMAND` are
   * list
   * edit
@@ -455,7 +455,7 @@ Examples:
 * `range edit e/johndoe@example.com from/6 to/10`
   * Sets the email address of the 6th to 10th contacts in the address book to `johndoe@example.com`
 * `range delete from/2 to/3`
-  * Deletes the 2nd and 3rd contacts in the Address Book
+  * Deletes the 2nd and 3rd contacts in the address book
 
 ### Chaining Commands: `&&`
 
@@ -466,9 +466,10 @@ Format: `COMMAND_A && COMMAND_B`
 * Calls multiple specified scommands
 * The syntax of `COMMAND_A` and `COMMAND_B` must be correct
 * A valid command must be supplied before and after the `&&` operator, otherwise the command will fail
+
 Examples:
 * `editAppointment 6 l/360 && listAppointments`
-    * Edits the 6th to 10th appointments in the list of appointments to have a duration of 6 hours. Then list all appointments in the Schedule
+    * Edits the 6th appointment in the list of appointments to have a duration of 6 hours. Then list all appointments in the Schedule
 * `deleteAppointment 2 && addAppointment n/Contract Signing With Charlie d/22-10-2022 t/16:30 p/1 l/300`
     * Deletes the 2nd appointment in the list of appointments.
     * Then, create a 5-hour appointment named "Contract Signing With Charlie" on 22nd Oct 2022 at 4:30 PM, associated with the first person in the contact list
