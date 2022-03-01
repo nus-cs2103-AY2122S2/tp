@@ -48,12 +48,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Documentation
 
-### James Doe
+### Tiew Wei Jian
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/tiewweijian.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/tiewweijian)]
+[[portfolio](team/tiewweijian.md)]
 
 * Role: Developer
 * Responsibilities: UI
