@@ -27,8 +27,6 @@ public abstract class Lesson {
         Subject lessonSubject = new Subject(subject);
         TimeSlot lessonTimeSlot = new TimeSlot(startDateTime, hours);
 
-        // TODO: add logic to check if specified timeslot conflicts with existing lessons
-
         return new TemporaryLesson(
                 lessonName,
                 lessonSubject,
@@ -53,15 +51,9 @@ public abstract class Lesson {
     }
 
     /**
-     * Returns true if both lessons clash.
+     * Returns true if both lessons have overlapping timeslots.
      */
     public abstract boolean isClashingWithLesson(Lesson otherLesson);
-
-    /**
-     * Returns true if both lessons have the same name, subject and timeslot.
-     * @param otherLesson
-     */
-    public abstract boolean isSameLesson(Lesson otherLesson);
 
     /**
      * Returns the date and time that the lesson starts and ends.

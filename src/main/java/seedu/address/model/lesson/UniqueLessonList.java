@@ -13,14 +13,14 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
  * A list of lessons that enforces uniqueness between its elements and does not allow nulls.
- * A lesson is considered unique by comparing using {@code Lesson#isSameLesson(Lesson)}. As such, adding and updating of
- * lessons uses Lesson#isSameLesson(Lesson) for equality so as to ensure that the person being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Lesson#equals(Object) so
- * as to ensure that the lesson with exactly the same fields will be removed.
+ * A lesson is considered unique by comparing using {@code Lesson#isClashingWith(Lesson)}. As such, adding and updating
+ * of lessons uses Lesson#isClashingWith(Lesson) for equality so as to ensure that the lesson being added or updated is
+ * does not clash with any lesson in the UniqueLessonList. However, the removal of a lesson uses Lesson#equals(Object)
+ * so as to ensure that the lesson with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
- * @see Lesson#isSameLesson(Lesson)
+ * @see Lesson#isClashingWithLesson(Lesson)
  */
 public class UniqueLessonList implements Iterable<Lesson> {
 
@@ -33,7 +33,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
      */
     public boolean contains(Lesson toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSameLesson);
+        return internalList.stream().anyMatch(toCheck::isClashingWithLesson);
     }
 
     /**
@@ -63,8 +63,8 @@ public class UniqueLessonList implements Iterable<Lesson> {
             throw new PersonNotFoundException();
         }
 
-        if (!target.isSameLesson(editedLesson) && contains(editedLesson)) {
-            // TODO: replace with DuplicateLessonException() once created
+        if (contains(editedLesson)) {
+            // TODO: replace with ClashesWithLessonException() once created
             throw new DuplicatePersonException();
         }
 
@@ -90,7 +90,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
 
     /**
      * Replaces the contents of this list with {@code lessons}.
-     * {@code persons} must not contain duplicate persons.
+     * {@code lessons} must not contain lessons with overlapping timeslots.
      */
     public void setLessons(List<Lesson> lessons) {
         requireAllNonNull(lessons);
@@ -132,7 +132,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
     private boolean lessonsAreUnique(List<Lesson> lessons) {
         for (int i = 0; i < lessons.size() - 1; i++) {
             for (int j = i + 1; j < lessons.size(); j++) {
-                if (lessons.get(i).isSameLesson(lessons.get(j))) {
+                if (lessons.get(i).isClashingWithLesson(lessons.get(j))) {
                     return false;
                 }
             }
