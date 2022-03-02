@@ -80,15 +80,17 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME d/DESCRIPTION p/PHONE_NUMBER e/EMAIL a/ADDRESS r/REMARK [t/TAG]...`
+
+Note: Must include n/ d/ p/ e/ a/ r/, t/ is optional
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe d/A student in NUS p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/Forgetful`
+* `add n/Betsy Crowe d/From Malaysia t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 r/Dangerous t/criminal`
 
 ### Listing all persons : `list`
 
