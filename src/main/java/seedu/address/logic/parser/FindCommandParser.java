@@ -12,6 +12,7 @@ import java.util.Arrays;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.*;
 
+
 /**
  * Parses input arguments and creates a new FindCommand object
  */
@@ -56,6 +57,14 @@ public class FindCommandParser implements Parser<FindCommand> {
         return Arrays.stream(knownPrefixes).noneMatch(s -> s.toString().equals(p));
     }
 
+    /**
+     * Executes the respective FindCommands with different signatures, depending on the prefix arguments.
+     *
+     * @param prefix The prefix that the user inputs, to find a Person.
+     * @param keywords Keywords that come after the prefix.
+     * @return The desired FindCommand, with the correct signature.
+     * @throws ParseException ParseException thrown if no valid prefix provided.
+     */
     public FindCommand findWithPrefix(String prefix, String[] keywords) throws ParseException {
         switch(prefix) {
         case "n/":
