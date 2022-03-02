@@ -353,6 +353,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4. Data should be auto saved locally each time a new command has been entered. 
 5. Should reload saved data accurately provided that data is not corrupted.
 6. System should respond within 3 seconds.
+7. UI should be clear and easy to use.
 
 *{More to be added}*
 
