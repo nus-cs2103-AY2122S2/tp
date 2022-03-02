@@ -14,17 +14,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/punpun1643.png" width="200px">
 
 [[github](https://github.com/Punpun1643)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/punpun1643.md)]
 
-* Role: TBC
-* Responsibilities: TBC
+* Role: Team Lead
+* Responsibilities: Deliverables and deadlines
 
 ### Raja Dishafnya Achadi
 
 <img src="images/johndoe.png" width="200px">
 
 [[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/punpun1643.md)]
 
 * Role: TBC
 * Responsibilities: TBC
@@ -33,7 +33,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/johndoe)] [[portfolio](team/punpun1643.md)]
 
 * Role: TBC
 * Responsibilities: TBC
@@ -43,7 +43,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/johndoe.png" width="200px">
 
 [[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/punpun1643.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
@@ -53,7 +53,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/johndoe.png" width="200px">
 
 [[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/punpun1643.md)]
 
 * Role: TBC
 * Responsibilities: TBC
