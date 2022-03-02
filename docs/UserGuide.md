@@ -61,8 +61,8 @@ from offering positions to scheduling interviews with candidates. It is optimise
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* Extraneous parameters for commands that do not take in parameters (such as `list`, `exit` and `clear`) will be ignored.<br>
+  e.g. if the command specifies `list 123`, it will be interpreted as `list`.
 
 </div>
 
@@ -241,6 +241,24 @@ Examples:
 * `filter appl name n/john`
 * `filter appl tag t/school t/friend`
 * `filter intvw date d/2022-03-20`
+
+### Viewing help: `help`
+
+Lists all the command keywords with their general descriptions
+
+Format: `help`
+
+_**For a more detail description about a specific `command`, you can type in the following:**_
+
+Format: `help COMMAND`
+
+* Full description and format of the command will be displayed
+
+* Command name is not case-sensitive
+
+Examples:
+* `help posadd`
+* `help Intvwdel`
 
 ### Exiting the program : `exit`
 
