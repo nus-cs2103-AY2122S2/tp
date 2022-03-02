@@ -1,0 +1,65 @@
+package seedu.address.logic.commands;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.List;
+
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.company.Company;
+import seedu.address.model.role.Role;
+import seedu.address.model.role.RoleManager;
+
+
+public class DeleteRoleCommand extends Command {
+    public static final String COMMAND_WORD = "deleteRole";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Deletes the role identified by the index number used in the displayed company list \n"
+            + "followed by the index number used by the role in the specified company.\n"
+            + "Parameters: COMPANY_INDEX ROLE_INDEX (both must be positive integers)\n"
+            + "Example: " + COMMAND_WORD + " 1 1";
+
+    public static final String MESSAGE_DELETE_ROLE_SUCCESS = "Deleted Role: %1$s %1$s";
+
+    private final Index companyIndex;
+    private final Index roleIndex;
+
+    /**
+     * @param companyIndex of the company in the company list
+     * @param roleIndex of the role in the specified company
+     */
+    public DeleteRoleCommand(Index companyIndex, Index roleIndex) {
+        requireAllNonNull(companyIndex, roleIndex);
+        this.companyIndex = companyIndex;
+        this.roleIndex = roleIndex;
+    }
+
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
+        List<Company> lastShownList = model.getFilteredCompanyList();
+        if (companyIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX);
+        }
+        Company company = lastShownList.get(companyIndex.getZeroBased());
+        RoleManager roleManager = company.getRoleManager();
+        if (roleIndex.getZeroBased() >= roleManager.getRoles().size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_ROLE_DISPLAYED_INDEX);
+        }
+        Role roleToDelete = roleManager.getRoles().get(roleIndex.getZeroBased());
+        roleManager.deleteRole(roleIndex.getZeroBased());
+        return new CommandResult(String.format(MESSAGE_DELETE_ROLE_SUCCESS, roleToDelete));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof DeleteRoleCommand // instanceof handles nulls
+                && companyIndex.equals(((DeleteRoleCommand) other).companyIndex)) // state check
+                && roleIndex.equals(((DeleteRoleCommand) other).roleIndex);
+    }
+}

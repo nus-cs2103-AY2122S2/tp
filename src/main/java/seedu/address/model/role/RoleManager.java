@@ -28,15 +28,15 @@ public class RoleManager {
      * Obtains the number of roles
      * @return Integer representing the number of roles
      */
-    int countRoles() {
+    public int countRoles() {
         return this.roleList.size();
     }
 
-    void addRole(Role role) {
+    public void addRole(Role role) {
         this.roleList.add(role);
     }
 
-    void deleteRole(int index) {
+    public void deleteRole(int index) {
         this.roleList.remove(index);
     }
 }
