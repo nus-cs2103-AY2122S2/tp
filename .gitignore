@@ -26,6 +26,6 @@ docs/_site/
 /bin/main/
 
 # eclipse
-/.settings/
 /.project
 /.classpath
+/.settings/
