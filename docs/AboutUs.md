@@ -21,10 +21,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Loy Yoke Yue
 
-<img src="images/yokeyue.png" width="200px">
+<img src="images/yokester98.png" width="200px">
 
 [[github](http://github.com/yokester98)]
-[[portfolio](team/yokeyue.md)]
+[[portfolio](team/yokester98.md)]
 
 * Role: Code Quality
 * Responsibilities: Add contacts
