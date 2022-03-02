@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -32,10 +33,10 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder(Person person) {
         descriptor = new EditPersonDescriptor();
-        descriptor.setName(person.getName());
-        descriptor.setPhone(person.getPhone());
-        descriptor.setEmail(person.getEmail());
-        descriptor.setAddress(person.getAddress());
+        descriptor.setField(CliSyntax.PREFIX_NAME, person.getName());
+        descriptor.setField(CliSyntax.PREFIX_PHONE, person.getPhone());
+        descriptor.setField(CliSyntax.PREFIX_EMAIL, person.getEmail());
+        descriptor.setField(CliSyntax.PREFIX_ADDRESS, person.getAddress());
         descriptor.setTags(person.getTags());
     }
 
@@ -43,7 +44,7 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code Name} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withName(String name) {
-        descriptor.setName(new Name(name));
+        descriptor.setField(CliSyntax.PREFIX_NAME, new Name(name));
         return this;
     }
 
@@ -51,7 +52,7 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code Phone} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withPhone(String phone) {
-        descriptor.setPhone(new Phone(phone));
+        descriptor.setField(CliSyntax.PREFIX_PHONE, new Phone(phone));
         return this;
     }
 
@@ -59,7 +60,7 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code Email} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withEmail(String email) {
-        descriptor.setEmail(new Email(email));
+        descriptor.setField(CliSyntax.PREFIX_EMAIL, new Email(email));
         return this;
     }
 
@@ -67,7 +68,7 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withAddress(String address) {
-        descriptor.setAddress(new Address(address));
+        descriptor.setField(CliSyntax.PREFIX_ADDRESS, new Address(address));
         return this;
     }
 

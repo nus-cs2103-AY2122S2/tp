@@ -10,7 +10,11 @@ import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -45,10 +49,14 @@ public class PersonUtil {
      */
     public static String getEditPersonDescriptorDetails(EditPersonDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
-        descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
-        descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
-        descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
-        descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
+        descriptor.getField(PREFIX_NAME).map(name -> (Name) name)
+                .ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
+        descriptor.getField(PREFIX_PHONE).map(phone -> (Phone) phone)
+                .ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
+        descriptor.getField(PREFIX_EMAIL).map(email -> (Email) email)
+                .ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
+        descriptor.getField(PREFIX_ADDRESS).map(address -> (Address) address)
+                .ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
