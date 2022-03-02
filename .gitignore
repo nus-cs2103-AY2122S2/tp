@@ -24,3 +24,8 @@ docs/_site/
 # bin
 /bin/test/
 /bin/main/
+
+# eclipse
+/.settings/
+/.project
+/.classpath
