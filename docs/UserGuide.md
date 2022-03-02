@@ -242,6 +242,26 @@ Examples:
 * `filter appl tag t/school t/friend`
 * `filter intvw date d/2022-03-20`
 
+### Sort data: `sort`
+
+Arranges applicants, interview and positions in HireLah according to their properties. 
+It alters the current display of HireLah and changes the index of the relevant data.
+
+Format: `sort DATA_TYPE SORT_ORDER`
+
+User can specify the order of the sorted data by typing `ASC` (for ascending) 
+or `DSC` (for descending) in the `REVERSE` part.
+
+| DATA_TYPE | Sorting properties | Description                                            |
+|-----------|--------------------|--------------------------------------------------------|
+| `APPL`    | Name               | Sort and view applicants based on their name           |
+| `INTVW`   | Date               | Sort and view interviews based on their occurring date |
+| `POS`     | Name               | Sort and view positions based on the position name     |
+
+Examples:
+* `sort APPL ASC`
+* `sort POS DSC`
+
 ### Viewing help: `help`
 
 Lists all the command keywords with their general descriptions
