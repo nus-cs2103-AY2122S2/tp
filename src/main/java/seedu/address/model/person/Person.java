@@ -2,11 +2,13 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -25,6 +27,7 @@ import seedu.address.model.tag.Tag;
 public class Person {
     public static final Prefix[] PREFIXES;
     public static final Prefix[] REQUIRED_PREFIXES;
+    public static final List<Prefix> PRIMARY_KEY; //unique among person, no duplicates allowed in addressBook
     private static final Map<Prefix, FieldParser<? extends Field>> FIELD_PARSERS;
     static {
         HashMap<Prefix, FieldParser<? extends Field>> fieldParsers = new HashMap<>();
@@ -41,6 +44,9 @@ public class Person {
         FIELD_PARSERS = Collections.unmodifiableMap(fieldParsers);
         PREFIXES = FIELD_PARSERS.keySet().toArray(new Prefix[0]);
         REQUIRED_PREFIXES = Arrays.stream(PREFIXES).filter(Prefix::isRequired).toArray(Prefix[]::new);
+
+        PRIMARY_KEY = new ArrayList<Prefix>();
+        PRIMARY_KEY.add(CliSyntax.PREFIX_EMAIL);
     }
 
     private final HashMap<Prefix, Field> fields = new HashMap<>();

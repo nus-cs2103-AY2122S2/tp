@@ -49,6 +49,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_PRIMARY_KEY_VIOLATION = "Another person already have these fields: ";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -82,6 +83,11 @@ public class EditCommand extends Command {
         }
 
         model.setPerson(personToEdit, editedPerson);
+        if (model.isPersonPrimaryKeyConstriantViolated(editedPerson)) {
+            model.setPerson(editedPerson, personToEdit); //revert changes
+            throw new CommandException(getPrimaryKeyViolationMsg());
+        }
+
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
@@ -101,6 +107,20 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedFields, updatedTags);
+    }
+
+    /**
+     * Gets the primary key violation message.
+     *
+     * @return A string of the primary key violations.
+     */
+    public String getPrimaryKeyViolationMsg() {
+        StringBuilder msg = new StringBuilder(MESSAGE_PRIMARY_KEY_VIOLATION);
+        for (Prefix prefix : Person.PRIMARY_KEY) {
+            msg.append(prefix.toString()).append(" ");
+        }
+
+        return msg.toString();
     }
 
     @Override

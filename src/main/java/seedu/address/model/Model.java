@@ -70,6 +70,14 @@ public interface Model {
     void addPerson(Person person);
 
     /**
+     * Checks whether the primary key constraint of person is violated.
+     * {@code person} primary key value must not already exist in the address book.
+     *
+     * @param target Person we want to check the addressbook database with.
+     */
+    boolean isPersonPrimaryKeyConstriantViolated(Person target);
+
+    /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
