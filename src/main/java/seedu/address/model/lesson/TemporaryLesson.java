@@ -38,27 +38,6 @@ public class TemporaryLesson extends Lesson {
     }
 
     /**
-     * Returns true if both lessons have the same name, subject and timeslot.
-     * @param otherLesson
-     * @return
-     */
-    public boolean isSameLesson(Lesson otherLesson) {
-        if (!otherLesson.getName().equals(this.getName())) {
-            return false;
-        }
-
-        if (!otherLesson.getSubject().equals(this.getSubject())) {
-            return false;
-        }
-
-        if (!otherLesson.getTimeSlot().equals(timeSlot)) {
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
      * Returns true if both lessons have the same identity and data fields.
      */
     @Override
