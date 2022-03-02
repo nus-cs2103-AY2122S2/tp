@@ -13,9 +13,9 @@ UniBook is a **desktop app for students to manage their university contacts in s
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `unibook.jar` from [here](https://github.com/AY2122S2-CS2103-W16-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for UniBook.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -25,7 +25,7 @@ UniBook is a **desktop app for students to manage their university contacts in s
 
    * **`list`** : Lists all contacts.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * **`add`**`o/student n/John Doe p/98765432 e/johnd@example.com` : Adds a student named `John Doe` to UniBook.
 
    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
@@ -78,7 +78,7 @@ Format: `help`
 
 Adds a person to the UniBook.
 
-Format: `add o/OPTION n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [m/MODULE]…​`
+Format: `add o/OPTION n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS][m/MODULE]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of modules (including 0)
@@ -88,12 +88,12 @@ A person can have any number of modules (including 0)
 * 3 values for `o/OPTION`:
   * `o/module`: add module to UniBook, `n/name` specifies module name, while `m/MODULE` is compulsory to specify the module code.
   * `o/professor`: add professor to UniBook, compulsory `n/name` to specify their name, optional field `[m/MODULE]` to specify what module(s) that professor is handling.
-  * `o/student`: add student to UniBook, compulsory field n/name to specify their name, and optional field `[m/MODULE]` to specify what module(s) that student is enrolled in.
+  * `o/student`: add student to UniBook, compulsory field `n/name` to specify their name, and optional field `[m/MODULE]` to specify what module(s) that student is enrolled in.
 
 Examples:
-* `add o/module n/Software Engineering m/cs2103`
-* `add o/professor n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 m/cs2103`
-* `add o/student n/Betsy Crowe e/betsycrowe@example.com a/Sheares hall, block b, #02-04 p/81234567 m/cs2103 m/cs2100`
+* `add o/module n/Software Engineering m/cs2103` add the module with code 'cs2103' and name 'Software Engineering' to UniBook
+* `add o/professor n/John Doe p/98765432 e/johnd@example.com a/COM2-02-02 m/cs2103` add the professor 'John Doe' to UniBook
+* `add o/student n/Betsy Crowe e/betsycrowe@example.com m/cs2103 m/cs2100` add a student 'Betsy Crowe' to UniBook
 
 ### Listing entries: `list`
 
@@ -128,7 +128,7 @@ Examples:
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in UniBook.
 
 Format: `edit o/OPTION [INDEX] [m/MODULE] [n/NAME] [p/PHONE] [e/EMAIL] [nm/NEWMODULE]`
 
@@ -208,7 +208,7 @@ profiles associated with this name, a list will appear prompting you to specify 
 ### Clearing all entries : `clear`
 
 
-Clears all entries from the address book.
+Clears all entries from UniBook.
 
 Format: `clear`
 
@@ -220,14 +220,14 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+UniBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+UniBook data are saved as a JSON file `[JAR file location]/data/unibook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid, UniBook will discard all data and start with an empty data file at the next run.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -239,7 +239,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous UniBook home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -247,7 +247,7 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add o/OPTION n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [m/MODULE]… ​` <br> e.g., `add o/module n/Software Engineering m/cs2103`<br> e.g., `add o/module n/Computer Organisation m/cs2100`<br> e.g., `add o/professor n/James Ho p/22224444 e/jamesho@example.com a/123 Clementi Rd S123466 m/cs2103`<br> e.g., `add o/student n/Peter Ho p/81234567 e/peterho@u.nus.edu m/cs2103 m/cs2100`
+**Add** | `add o/OPTION n/NAME [p/PHONE_NUMBER] [e/EMAIL] [m/MODULE]… ​` <br> e.g., `add o/module n/Software Engineering m/cs2103`<br> e.g., `add o/module n/Computer Organisation m/cs2100`<br> e.g., `add o/professor n/James Ho p/22224444 e/jamesho@example.com a/123 Clementi Rd S123466 m/cs2103`<br> e.g., `add o/student n/Peter Ho p/81234567 e/peterho@u.nus.edu m/cs2103 m/cs2100`
 **Clear** | `clear`
 **Delete** | `delete m/MODULECODE [o/OPTION]` <br> e.g. `delete m/CS2103` <br> e.g. `delete m/CS2103 o/PROF` <br> `delete m/MODULECODE g/GROUPCODE [o/OPTION]` <br> e.g. `delete m/CS2105 g/G04` <br> e.g. `delete m/CS2105 g/04 o/ALL` <br> `delete n/STUDENTNAME` <br> e.g. `delete n/Alan Tan` <br> `delete n/PROFNAME` <br> e.g. `delete n/Ooi Wei Tsang`
 **Edit** | `edit o/OPTION [INDEX] [m/MODULE] [n/NAME] [p/PHONE] [e/EMAIL] [nm/NEWMODULE] `<br> e.g. `edit o/person 1 p/91234567 e/prof@email.com` <br> e.g. `edit o/module m/CS2103 n/Software Engineering nm/CS2103T`

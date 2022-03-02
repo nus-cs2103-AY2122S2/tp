@@ -50,7 +50,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Sophie Ng
 
-<img src="images/sophie.png" width="200px">
+<img src="images/sophiien.png" width="200px">
 
 [[github](http://github.com/sophiien)]
 [[portfolio](team/sophiien.md)]
