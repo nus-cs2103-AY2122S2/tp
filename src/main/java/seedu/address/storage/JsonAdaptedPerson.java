@@ -1,6 +1,5 @@
 package seedu.address.storage;
 
-import java.beans.PropertyEditorManager;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -89,7 +88,8 @@ class JsonAdaptedPerson {
         final Name modelName = new Name(name);
 
         if (description == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Description.class.getSimpleName()));
         }
         if (!Description.isValidDescription(name)) {
             throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
@@ -128,7 +128,7 @@ class JsonAdaptedPerson {
         final Remark modelRemark = new Remark(remark);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName,modelDescription, modelPhone, modelEmail, modelAddress, modelRemark, modelTags);
+        return new Person(modelName, modelDescription, modelPhone, modelEmail, modelAddress, modelRemark, modelTags);
     }
 
 }
