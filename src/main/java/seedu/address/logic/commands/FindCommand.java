@@ -1,12 +1,17 @@
 package seedu.address.logic.commands;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.model.Model;
-import seedu.address.model.person.*;
+import static java.util.Objects.requireNonNull;
 
 import java.util.function.Predicate;
 
-import static java.util.Objects.requireNonNull;
+import seedu.address.commons.core.Messages;
+import seedu.address.model.Model;
+import seedu.address.model.person.AddressContainsKeywordsPredicate;
+import seedu.address.model.person.EmailContainsKeywordsPredicate;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.PhoneContainsKeywordsPredicate;
+
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -16,17 +21,11 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all clients whose fields contain the "
+            + " specified keywords in the specified fields, and displays them as a list with index numbers.\n"
+            + "Parameters: PREFIX KEYWORD [MORE_KEYWORDS]...\n"
+            + "Example: " + COMMAND_WORD + " n/ john";
 
-    /*
-    private final NameContainsKeywordsPredicate namePredicate;
-    private final EmailContainsKeywordsPredicate emailPredicate;
-    private final AddressContainsKeywordsPredicate addressPredicate;
-    private final PhoneContainsKeywordsPredicate PhonePredicate;
-     */
     private final Predicate<Person> predicate;
 
 
