@@ -59,7 +59,7 @@ public class LessonBook implements ReadOnlyLessonBook {
     //// lesson-level operations
 
     /**
-     * Returns true if a lesson with the same identity as {@code lesson} exists in the list of lessons.
+     * Returns true if a lesson that conflicts with {@code lesson} exists in the list of lessons.
      */
     public boolean hasConflictingLesson(Lesson lesson) {
         requireNonNull(lesson);

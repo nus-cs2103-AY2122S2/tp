@@ -131,6 +131,18 @@ public class ModelManager implements Model {
         return lessonBook;
     }
 
+    @Override
+    public boolean hasConflictingLesson(Lesson lesson) {
+        requireNonNull(lesson);
+        return lessonBook.hasConflictingLesson(lesson);
+    }
+
+    @Override
+    public void addLesson(Lesson lesson) {
+        lessonBook.addLesson(lesson);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_LESSONS);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -176,6 +188,12 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Lesson> getFilteredLessonList() {
         return filteredLessons;
+    }
+
+    @Override
+    public void updateFilteredLessonList(Predicate<Lesson> predicate) {
+        requireNonNull(predicate);
+        filteredLessons.setPredicate(predicate);
     }
 
     // TODO: add the remaining functions for LessonList too
