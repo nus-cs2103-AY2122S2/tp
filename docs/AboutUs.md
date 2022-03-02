@@ -14,6 +14,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/punpun1643.png" width="200px">
 
 [[github](https://github.com/Punpun1643)]
+[[portfolio](team/johndoe.md)]
 
 * Role: TBC
 * Responsibilities: TBC
