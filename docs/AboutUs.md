@@ -13,12 +13,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/pnutzz-0207.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/pnutzz-0207)]
 [[portfolio](team/simsileng.md)]
 
 * Role: Team lead
-* Responsibilities: Model 
+* Responsibilities: Model
 
 ### Wang ZiHao
 
