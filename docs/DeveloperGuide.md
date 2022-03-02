@@ -290,6 +290,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 (For all use cases below, the **System** is `Trackermon` and the **Actor** is the `user`, unless specified otherwise)
 
 ---
+
 **Use case: UC01 - Add a show**
 
 **Preconditions: Trackermon application is started.**
@@ -324,6 +325,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 3.
 
 ---
+
 **Use case: UC02 - Delete a show**
 
 **Preconditions: Trackermon application is started.**
@@ -352,6 +354,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 3.
 
 ---
+
 **Use case: UC03 - List a show**
 
 **Preconditions: Trackermon application is started.**
@@ -378,6 +381,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 ---
+
 **Use case: UC04 - Mark a show**
 
 **Preconditions: Trackermon application is started.**
@@ -404,7 +408,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. Trackermon shows an error message, indicating the format for marking shows is incorrect, and attaches the correct syntax format.
 
       Use case resumes at step 3.
+
 ---
+
 **Use case: UC05 - Unmark a show**
 
 **Preconditions: Trackermon application is started.**
@@ -433,6 +439,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 3.
 
 ---
+
 **Use case: UC06 - Tag a show**
 
 **Preconditions: Trackermon application is started.**
@@ -461,6 +468,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 3.
 
 ---
+
 **Use case: UC07 - Exiting Trackermon**
 
 **Preconditions: Trackermon application is started.**
@@ -482,7 +490,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. Trackermon will only register the `exit` command.
 
       Use case resumes at step 2.
+
 ---  
+    
 *{More to be added}*
 
 ---
