@@ -29,11 +29,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Documentation
 
-### Johnny Doe
+### Loo Xin Wei
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/redpelican2108.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/redpelican2108)] [[portfolio](team/redpelican2108.md)]
 
 * Role: Developer
 * Responsibilities: Data
