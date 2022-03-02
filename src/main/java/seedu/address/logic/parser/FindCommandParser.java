@@ -17,6 +17,8 @@ import static seedu.address.logic.parser.CliSyntax.*;
  */
 public class FindCommandParser implements Parser<FindCommand> {
 
+    private static final String PREFIX_DELIMITER = "/";
+
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.
@@ -31,12 +33,23 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         String[] keywords = trimmedArgs.split("\\s+");
 
-        String prefix = keywords[0];
+        String firstArg = keywords[0];
+        if (firstArg.length() < 3) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+        int delimiterIndex = firstArg.indexOf(PREFIX_DELIMITER);
+        if (delimiterIndex != 1) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+        String prefix = firstArg.substring(0,2);
         if (checkPrefix(prefix, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS)) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
-        return findWithPrefix(prefix, Arrays.copyOfRange(keywords, 1, keywords.length));
+        keywords[0] = firstArg.substring(2);
+        return findWithPrefix(prefix, keywords);
     }
 
     public boolean checkPrefix(String p, Prefix ... knownPrefixes) {
