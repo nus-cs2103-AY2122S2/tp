@@ -129,3 +129,4 @@ Given below are instructions to test the app manually.
     2. Test case: `delete 1`Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
     3. Test case: `delete 0`Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
     4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size or smaller than 0)Expected: Similar to previous.
+
