@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
 
 /**
@@ -84,4 +85,10 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /** Returns the LessonBook */
+    ReadOnlyLessonBook getLessonBook();
+
+    /** Returns an unmodifiable view of the filtered lesson list */
+    ObservableList<Lesson> getFilteredLessonList();
 }
