@@ -89,7 +89,7 @@ A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe d/A student in NUS p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/Forgetful` 
+* `add n/John Doe d/A student in NUS p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/Forgetful`
 * `add n/Betsy Crowe d/From Malaysia t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 r/Dangerous t/criminal`
 
 ### Listing all persons : `list`
