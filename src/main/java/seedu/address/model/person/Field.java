@@ -1,4 +1,4 @@
 package seedu.address.model.person;
 
-public class Field {
+public abstract class Field {
 }

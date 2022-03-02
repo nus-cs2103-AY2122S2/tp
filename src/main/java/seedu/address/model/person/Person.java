@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.commons.util.AppUtil;
 import seedu.address.logic.field.FieldParser;
 import seedu.address.logic.parser.CliSyntax;
 import seedu.address.logic.parser.ParserUtil;
@@ -47,7 +48,15 @@ public class Person {
         REQUIRED_PREFIXES = Arrays.stream(PREFIXES).filter(Prefix::isRequired).toArray(Prefix[]::new);
     }
 
+    /**
+     * Returns the parser of a field.
+     * @param prefix the field prefix
+     * @param <T> the field type
+     * @return the parser of a field
+     */
     public static <T extends Field> FieldParser<T> getParser(Prefix prefix) {
+        requireAllNonNull(prefix);
+        AppUtil.checkArgument(FIELD_PARSERS.containsKey(prefix), "Parser does not exist in Person.");
         return (FieldParser<T>) FIELD_PARSERS.get(prefix);
     }
 
@@ -82,14 +91,19 @@ public class Person {
 
     public void removeField(Prefix prefix) {
         requireAllNonNull(prefix);
-        if (Arrays.asList(REQUIRED_PREFIXES).contains(prefix)) {
-            throw new IllegalArgumentException("Cannot remove mandatory fields.");
-        }
+        AppUtil.checkArgument(!Arrays.asList(REQUIRED_PREFIXES).contains(prefix), "Cannot remove mandatory fields.");
         fields.remove(prefix);
     }
 
+    /**
+     * Returns the field specified by the prefix.
+     * @param prefix the field prefix
+     * @param <T> the field type
+     * @return the field specified by the prefix
+     */
     public <T extends Field> T getField(Prefix prefix) {
         requireAllNonNull(prefix);
+        AppUtil.checkArgument(fields.containsKey(prefix), "Person does not contain this field.");
         return (T) fields.get(prefix);
     }
 
