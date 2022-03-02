@@ -11,10 +11,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Howard Wong
 
-<img src="images/howardwong.png" width="200px">
+<img src="images/howardwhw2.png" width="200px">
 
 [[github](http://github.com/howardwhw2)] 
-[[portfolio](team/howardwong.md)]
+[[portfolio](team/howardwhw2.md)]
 
 * Role: Developer
 * Responsibilities: User Guide
