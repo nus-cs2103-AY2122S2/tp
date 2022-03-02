@@ -73,10 +73,6 @@ Lists the application commands that are available in the system.
 
 Format: `help`
 
-Example: `[help]` Lists all available commands.
-
-
-
 ### Adding a person: `add`
 
 Adds a person to the address book.
