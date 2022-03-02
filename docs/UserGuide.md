@@ -57,47 +57,6 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 </div>
 
-### Deleting a person : `delete`
-
-Deletes the specified person from the address book.
-
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
-### Clearing all entries : `clear`
-
-Clears all entries from the address book.
-
-Format: `clear`
-
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
-
-### Saving the data
-
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-### Editing the data file
-
-AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
-</div>
-
-## Log Management
-Amigos provides functionality to manage logs, which are essentially detailed notes about a specific friend.
-
 ### Adding a log: `addlog`
 
 Adds a log to an existing friend in Amigos.
@@ -146,7 +105,7 @@ Format: `deletelog n/[NAME] id/[LOG_INDEX] -a`
   of all friends will be deleted.
 
 Examples:
-* `deletelog n/John Doe id/1`
+* `deletelog n/John Doe id/1'
 * `deletelog n/John Doe -a `
 * `deletelog -a`
 
@@ -206,9 +165,9 @@ Delete existing event(s).
 
 Action | Format, Examples
 --------|------------------
-**Add Log** | `addlog n/[NAME] t/[TITLE] d/[DESCRIPTION]`
-**Edit Log** | `editlog n/[NAME] id/[LOG_INDEX] nt/[NEW_TITLE] nd/[NEW_DESCRIPTION]`
-**Delete Log** | `deletelog n/[NAME] id/[LOG_INDEX] -a`
+**addlog** | `addlog n/[NAME] t/[TITLE] d/[DESCRIPTION]`
+**editlog** | `editlog n/[NAME] id/[LOG_INDEX] nt/[NEW_TITLE] nd/[NEW_DESCRIPTION]`
+**deletelog** | `deletelog n/[NAME] id/[LOG_INDEX] -a`
 **Add Event** | `addevent n/{EVENT_NAME} dt/{DATE_TIME} dd/{DESCRIPTION} f/{FRIEND_NAME1, FRIEND_NAME2…}` <br> e.g.,`addevent n/John’s Birthday dt/15-08-2021 1700 dd/Remember to get a present! f/John, Abe, Bob`
 **Edit Event** | `editevent n/{EVENT_NAME} dt/{DATE} nn/{NEW_EVENT_NAME} ndt/{NEW_DATE_TIME} ndd/{NEW_DESCRIPTION}  af/{ADD_FRIEND_NAME1, ADD_FRIEND_NAME2…} rf/{REMOVE_FRIEND_NAME1, REMOVE_FRIEND_NAME2…}` <br> e.g., `editevent n/John’s Birthday dt/15-08-2021 ndt/16-08-2021 1600 af/Bob rf/Sarah, Edison`
 **Delete Event** | `deleteevent n/{EVENT_NAME} dt/{DATE} -a` <br> e.g., `deleteevent n/John’s Birthday dt/15-08-2021` <br> e.g., `deleteevent n/Weekly Boardgames -a` <br> e.g., `deleteevent -a`
