@@ -8,7 +8,7 @@ public class Group {
     public static final String MESSAGE_CONSTRAINTS = "Group can take any values";
 
     /*
-     * The first character of the address must not be a whitespace,
+     * The first character of the group must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[^\\s].*";
@@ -16,9 +16,9 @@ public class Group {
     public final String value;
 
     /**
-     * Constructs an {@code Address}.
+     * Constructs an {@code Group}.
      *
-     * @param group A valid address.
+     * @param group A valid group.
      */
     public Group(String group) {
         requireNonNull(group);
