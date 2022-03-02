@@ -328,21 +328,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2b. User requests to delete all friends.
    * 2b1. Amigos deletes all friends and clears the user input.
    
-     Use case ends.
+   Use case ends.
     
 
 * 3a. No name is entered by the user. 
    * 3a1. Amigos requests user to enter a name.
    * 3a2. User reenters the command along with a valid name.
      
-     Use case resumes at step 4 if newly-entered user input is valid, otherwise it may reach 3a/3b again. 
+   Use case resumes at step 4 if newly-entered user input is valid, otherwise it may reach 3a/3b again. 
 
 
 * 3b. Amigos finds no contact with the given name.
     * 3b1. Amigos requests user to check input and reenter.
     * 3b2. User reenters the command along with a valid name. 
 
-      Use case resumes at step 4 if newly-entered user input is valid, otherwise it may reach 3a/3b again.
+    Use case resumes at step 4 if newly-entered user input is valid, otherwise it may reach 3a/3b again.
 
 
 **Use case: F03 - Edit a friend**
@@ -369,21 +369,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. Amigos requests user to enter a name.
     * 3a2. User reenters the command along with a valid name and other relevant fields (at least one) to edit.
 
-      Use case resumes at step 4 if newly-entered user input is valid, otherwise it may reach 3a/3b/3c again.
+    Use case resumes at step 4 if newly-entered user input is valid, otherwise it may reach 3a/3b/3c again.
     
 
 * 3b. Amigos finds no contact with the given name.
     * 3b1. Amigos requests user to check input and reenter.
     * 3b2. User reenters the command along with a valid name and other relevant fields (at least one) to edit. 
 
-      Use case resumes at step 4 if newly-entered user input is valid, otherwise it may reach 3a/3b/3c again.
+    Use case resumes at step 4 if newly-entered user input is valid, otherwise it may reach 3a/3b/3c again.
     
 
 * 3c. A valid name is entered by user but no fields to edit are given.  
     * 3c1. Amigos requests user to enter at least one field to edit.
     * 3c2. User reenters command and name, along with at least one field to edit.
   
-      Use case resumes at step 4 if newly-entered user input is valid, otherwise it may reach 3a/3b/3c again.
+    Use case resumes at step 4 if newly-entered user input is valid, otherwise it may reach 3a/3b/3c again.
 
 ### Non-Functional Requirements
 
