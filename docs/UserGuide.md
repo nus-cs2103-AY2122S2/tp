@@ -75,7 +75,7 @@ Format: `help`
 
 ### Adding a Teaching Assistant: `add`
 
-Adds a TA to the system.
+Adds a TA into the system.
 
 Format: `add [NUMBER_OF_ENTRIES]`
 
