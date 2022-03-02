@@ -227,7 +227,6 @@ View different applicants, interviews and positions in HireLah through various f
 
 Format: `filter DATA_TYPE b/FILTER_TYPE [ARGUMENT]`
 
-* 
 * Different data has different filters available, thus requiring different arguments, as listed:
 
 DATA_TYPE | FILTER_TYPE | ARGUMENT(S)           | Description
