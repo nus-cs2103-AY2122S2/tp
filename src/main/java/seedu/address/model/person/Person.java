@@ -2,11 +2,20 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.commons.util.AppUtil;
+import seedu.address.logic.field.FieldParser;
+import seedu.address.logic.parser.CliSyntax;
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -14,42 +23,115 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
+    public static final Prefix[] PREFIXES;
+    public static final Prefix[] REQUIRED_PREFIXES;
+    private static final Map<Prefix, FieldParser<? extends Field>> FIELD_PARSERS;
+    static {
+        HashMap<Prefix, FieldParser<? extends Field>> fieldParsers = new HashMap<>();
 
-    // Identity fields
-    private final Name name;
-    private final Phone phone;
-    private final Email email;
+        // -------------------------- Do not modify above. --------------------------
 
-    // Data fields
-    private final Address address;
+        // Declare your fields here.
+        fieldParsers.put(CliSyntax.PREFIX_NAME, ParserUtil::parseName);
+        fieldParsers.put(CliSyntax.PREFIX_PHONE, ParserUtil::parsePhone);
+        fieldParsers.put(CliSyntax.PREFIX_EMAIL, ParserUtil::parseEmail);
+        fieldParsers.put(CliSyntax.PREFIX_ADDRESS, ParserUtil::parseAddress);
+
+        // -------------------------- Do not modify below. --------------------------
+        FIELD_PARSERS = Collections.unmodifiableMap(fieldParsers);
+        PREFIXES = FIELD_PARSERS.keySet().toArray(new Prefix[0]);
+        REQUIRED_PREFIXES = Arrays.stream(PREFIXES).filter(Prefix::isRequired).toArray(Prefix[]::new);
+    }
+
+    private final HashMap<Prefix, Field> fields = new HashMap<>();
     private final Set<Tag> tags = new HashSet<>();
 
     /**
-     * Every field must be present and not null.
+     * Constructs a person.
+     * @param name the name of the person
+     * @param phone the phone number of the person
+     * @param email the email of the person
+     * @param address the address of the person
+     * @param tags the tags of the person
      */
+    @Deprecated
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
+        addField(CliSyntax.PREFIX_NAME, name);
+        addField(CliSyntax.PREFIX_PHONE, phone);
+        addField(CliSyntax.PREFIX_EMAIL, email);
+        addField(CliSyntax.PREFIX_ADDRESS, address);
         this.tags.addAll(tags);
     }
 
+    /**
+     * Constructs a person.
+     */
+    public Person() {
+    }
+
+    /**
+     * Add a field to the person.
+     * @param prefix the field prefix
+     * @param field the field to add
+     */
+    public void addField(Prefix prefix, Field field) {
+        requireAllNonNull(prefix, field);
+        fields.put(prefix, field);
+    }
+
+    /**
+     * Remove a field from the preson.
+     * @param prefix the field prefix
+     */
+    public void removeField(Prefix prefix) {
+        requireAllNonNull(prefix);
+        AppUtil.checkArgument(!Arrays.asList(REQUIRED_PREFIXES).contains(prefix), "Cannot remove mandatory fields.");
+        fields.remove(prefix);
+    }
+
+    /**
+     * Returns the field specified by the prefix.
+     * @param prefix the field prefix
+     * @param <T> the field type
+     * @return the field specified by the prefix
+     */
+    public <T extends Field> T getField(Prefix prefix) {
+        requireAllNonNull(prefix);
+        AppUtil.checkArgument(fields.containsKey(prefix), "Person does not contain this field.");
+        return (T) fields.get(prefix);
+    }
+
     public Name getName() {
-        return name;
+        return getField(CliSyntax.PREFIX_NAME);
     }
 
     public Phone getPhone() {
-        return phone;
+        return getField(CliSyntax.PREFIX_PHONE);
     }
 
     public Email getEmail() {
-        return email;
+        return getField(CliSyntax.PREFIX_EMAIL);
     }
 
     public Address getAddress() {
-        return address;
+        return getField(CliSyntax.PREFIX_ADDRESS);
+    }
+
+    public void addTags(Collection<Tag> tags) {
+        this.tags.addAll(tags);
+    }
+
+    public void addTag(Tag tag) {
+        this.tags.add(tag);
+    }
+
+    public void removeTag(Tag tag) {
+        this.tags.remove(tag);
+    }
+
+    public void clearTags() {
+        this.tags.clear();
     }
 
     /**
@@ -70,7 +152,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+            && otherPerson.getName().equals(getName());
     }
 
     /**
@@ -89,28 +171,28 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return otherPerson.getName().equals(getName())
-                && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+            && otherPerson.getPhone().equals(getPhone())
+            && otherPerson.getEmail().equals(getEmail())
+            && otherPerson.getAddress().equals(getAddress())
+            && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(getName(), getPhone(), getEmail(), getAddress(), tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append("; Phone: ")
-                .append(getPhone())
-                .append("; Email: ")
-                .append(getEmail())
-                .append("; Address: ")
-                .append(getAddress());
+            .append("; Phone: ")
+            .append(getPhone())
+            .append("; Email: ")
+            .append(getEmail())
+            .append("; Address: ")
+            .append(getAddress());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
@@ -120,4 +202,15 @@ public class Person {
         return builder.toString();
     }
 
+    /**
+     * Returns the parser of a field.
+     * @param prefix the field prefix
+     * @param <T> the field type
+     * @return the parser of a field
+     */
+    public static <T extends Field> FieldParser<T> getParser(Prefix prefix) {
+        requireAllNonNull(prefix);
+        AppUtil.checkArgument(FIELD_PARSERS.containsKey(prefix), "Parser does not exist in Person.");
+        return (FieldParser<T>) FIELD_PARSERS.get(prefix);
+    }
 }
