@@ -11,7 +11,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Brandon R. Han
 
-<img src="../src/main/resources/images/brandon.png" width="200"/> 
+<img src="images/brandonrhan.png" width="200"/> 
 
 [[github](http://github.com/brandonrhan)] [[portfolio](team/brandonrhan.md)]
 
@@ -29,7 +29,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Tian Xiao
 
-<img src="../src/main/resources/images/snoidetx.png" width="200"/> 
+<img src="images/snoidetx.png" width="200"/> 
 
 [github](https://github.com/snoidetx) | [portfolio](team/snoidetx.md)
 
@@ -55,5 +55,3 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: TBD
-
-=======
