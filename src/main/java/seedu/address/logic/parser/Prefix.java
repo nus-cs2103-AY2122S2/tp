@@ -8,11 +8,20 @@ public class Prefix {
     private final String prefix;
     private final boolean isRequired;
 
+    /**
+     * Constructs a non-requried prefix.
+     * @param prefix the prefix string
+     */
     public Prefix(String prefix) {
         this.prefix = prefix;
         this.isRequired = false;
     }
 
+    /**
+     * Constructs a prefix.
+     * @param prefix the prefix string
+     * @param isRequired the required flag
+     */
     public Prefix(String prefix, boolean isRequired) {
         this.prefix = prefix;
         this.isRequired = isRequired;

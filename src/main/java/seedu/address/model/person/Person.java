@@ -22,12 +22,12 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
+    private final HashMap<Prefix, Field> fields = new HashMap<>();
+    private final Set<Tag> tags = new HashSet<>();
+
     private static final Map<Prefix, FieldParser<? extends Field>> FIELD_PARSERS;
     public static final Prefix[] PREFIXES;
     public static final Prefix[] REQUIRED_PREFIXES;
-
-    private final HashMap<Prefix, Field> fields = new HashMap<>();
-    private final Set<Tag> tags = new HashSet<>();
 
     // Static initialisation.
     static {
@@ -52,7 +52,18 @@ public class Person {
     }
 
     /**
-     * Every field must be present and not null.
+     * Constructs a person.
+     */
+    public Person() {
+    }
+
+    /**
+     * Constructs a person.
+     * @param name the name of the person
+     * @param phone the phone number of the person
+     * @param email the email of the person
+     * @param address the address of the person
+     * @param tags the tags of the person
      */
     @Deprecated
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
@@ -62,9 +73,6 @@ public class Person {
         addField(CliSyntax.PREFIX_EMAIL, email);
         addField(CliSyntax.PREFIX_ADDRESS, address);
         this.tags.addAll(tags);
-    }
-
-    public Person() {
     }
 
     public void addField(Prefix prefix, Field field) {
