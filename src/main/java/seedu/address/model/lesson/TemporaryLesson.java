@@ -34,7 +34,7 @@ public class TemporaryLesson extends Lesson {
             return true;
         }
 
-        return timeSlot.isClashingWith(otherLesson.getTimeSlot());
+        return timeSlot.isConflictingWith(otherLesson.getTimeSlot());
     }
 
     /**

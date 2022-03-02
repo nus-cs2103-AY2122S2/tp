@@ -44,7 +44,7 @@ public class TimeSlot {
     /**
      * Returns true if both timeslots overlap.
      */
-    protected boolean isClashingWith(TimeSlot otherTimeSlot) {
+    protected boolean isConflictingWith(TimeSlot otherTimeSlot) {
         Date currentTimeSlotStart = this.dateOfLesson;
         Date currentTimeSlotEnd = this.getEndingDateTime();
         Date otherTimeSlotStart = otherTimeSlot.dateOfLesson;
