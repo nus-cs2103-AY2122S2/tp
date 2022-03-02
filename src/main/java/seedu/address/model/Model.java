@@ -1,11 +1,11 @@
 package seedu.address.model;
 
-import java.nio.file.Path;
-import java.util.function.Predicate;
-
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+
+import java.nio.file.Path;
+import java.util.function.Predicate;
 
 /**
  * The API of the Model component.
@@ -35,44 +35,44 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' UniBook file path.
      */
-    Path getAddressBookFilePath();
+    Path getUniBookFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' UniBook file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setUniBookFilePath(Path uniBookFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces UniBook data with the data in {@code uniBook}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setUniBook(ReadOnlyUniBook uniBook);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the UniBook */
+    ReadOnlyUniBook getUniBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same identity as {@code person} exists in the UniBook.
      */
     boolean hasPerson(Person person);
 
     /**
      * Deletes the given person.
-     * The person must exist in the address book.
+     * The person must exist in the UniBook.
      */
     void deletePerson(Person target);
 
     /**
      * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * {@code person} must not already exist in the UniBook.
      */
     void addPerson(Person person);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * {@code target} must exist in the UniBook.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in the UniBook.
      */
     void setPerson(Person target, Person editedPerson);
 

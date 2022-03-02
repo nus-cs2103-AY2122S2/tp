@@ -3,7 +3,7 @@ layout: page
 title: Ben Murphy's Project Portfolio Page
 ---
 
-### Project: AddressBook Level 3
+### Project: UniBook
 
 UniBook is a desktop app for students to manage their university contacts in smart organized manner, optimized for command-line interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
