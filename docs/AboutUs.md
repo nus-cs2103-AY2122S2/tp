@@ -27,7 +27,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/yokester98.md)]
 
 * Role: Code Quality
-* Responsibilities: Add contacts
+* Responsibilities: Add contacts to UniBook
 
 ### Gerald Neo
 
