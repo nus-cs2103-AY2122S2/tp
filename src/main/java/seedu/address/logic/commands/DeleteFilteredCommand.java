@@ -11,9 +11,9 @@ import seedu.address.model.person.Person;
 /**
  * Deletes a person identified using keywords from the address book.
  */
-public class DeleteKeywordCommand extends Command {
+public class DeleteFilteredCommand extends Command {
 
-    public static final String COMMAND_WORD = "deleteKeyword";
+    public static final String COMMAND_WORD = "deleteFiltered";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes all filtered people.\n"
@@ -23,7 +23,7 @@ public class DeleteKeywordCommand extends Command {
     public static final String MESSAGE_PERSONS_DELETED_OVERVIEW = "%1$d persons deleted!";
 
 
-    public DeleteKeywordCommand() {
+    public DeleteFilteredCommand() {
     }
 
     @Override
