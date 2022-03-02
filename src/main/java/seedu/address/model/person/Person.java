@@ -66,6 +66,21 @@ public class Person {
 
     /**
      * Constructs a person.
+     *
+     * @param fields Fields to give a person
+     */
+    public Person(HashMap<Prefix, Field> fields, Set<Tag> tags) {
+        requireAllNonNull(fields, tags);
+
+        for (Map.Entry<Prefix, Field> entry : fields.entrySet()) {
+            addField(entry.getKey(), entry.getValue());
+        }
+
+        this.tags.addAll(tags);
+    }
+
+    /**
+     * Constructs a person.
      */
     public Person() {
     }
