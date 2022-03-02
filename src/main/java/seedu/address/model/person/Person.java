@@ -168,12 +168,21 @@ public class Person {
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
+        if (otherPerson == null) {
+            return false;
+        }
+
         if (otherPerson == this) {
             return true;
         }
 
-        return otherPerson != null
-            && otherPerson.getName().equals(getName());
+        for (Prefix prefix : Person.PRIMARY_KEY) {
+            if (getField(prefix).equals(otherPerson.getField(prefix))) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**

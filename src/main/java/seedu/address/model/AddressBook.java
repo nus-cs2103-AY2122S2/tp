@@ -3,10 +3,8 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
-import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -61,7 +59,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// person-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same identity as {@code person} exists in the address book based
+     * certain fields defined in person.
      */
     public boolean hasPerson(Person person) {
         requireNonNull(person);
@@ -93,30 +92,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
-    }
-
-    /**
-     * Checks whether the primary key constraint of person is violated.
-     *
-     * @param target Person we want to check the addressbook database with.
-     * @return Boolean stating if the new person violate the primary key constraint set for person.
-     */
-    public boolean isPersonPrimaryKeyConstriantViolated(Person target) {
-        Predicate<Person> checkConstraintViolation = p -> {
-            if (p.equals(target)) {
-                return false;
-            }
-
-            for (Prefix prefix : Person.PRIMARY_KEY) {
-                if (p.getField(prefix).equals(target.getField(prefix))) {
-                    return true;
-                }
-            }
-
-            return false;
-        };
-
-        return persons.asUnmodifiableObservableList().stream().anyMatch(checkConstraintViolation);
     }
 
     //// util methods

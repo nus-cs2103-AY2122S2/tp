@@ -111,14 +111,6 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
-    @Override
-    public boolean isPersonPrimaryKeyConstriantViolated(Person target) {
-        requireAllNonNull(target);
-
-        return addressBook.isPersonPrimaryKeyConstriantViolated(target);
-    }
-
-
     //=========== Filtered Person List Accessors =============================================================
 
     /**
