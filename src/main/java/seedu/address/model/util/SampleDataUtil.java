@@ -62,9 +62,9 @@ public class SampleDataUtil {
         thirdLessonDate = calendar.getTime();
 
         return new Lesson[] {
-            Lesson.makeTemporaryLesson("Make up lesson for George", "Geography", firstLessonDate, 2),
-            Lesson.makeTemporaryLesson("Trial lesson for Jake", "Biology", secondLessonDate, 2),
-            Lesson.makeTemporaryLesson("Make up lesson for Henry", "Physics", thirdLessonDate, 2)
+            Lesson.makeTemporaryLesson("Make up lesson for George", "Geography", firstLessonDate, 2, 0),
+            Lesson.makeTemporaryLesson("Trial lesson for Jake", "Biology", secondLessonDate, 2, 0),
+            Lesson.makeTemporaryLesson("Make up lesson for Henry", "Physics", thirdLessonDate, 2, 0)
         };
     }
 

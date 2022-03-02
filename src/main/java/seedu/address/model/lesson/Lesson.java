@@ -11,7 +11,7 @@ import java.util.Date;
 public abstract class Lesson {
 
     // Identity fields
-    private final Name name;
+    private final LessonName lessonName;
     private final Subject subject;
 
     // Data fields
@@ -20,21 +20,22 @@ public abstract class Lesson {
     /**
      * Every field must be present and not null.
      */
-    protected Lesson(Name name, Subject subject) {
-        requireAllNonNull(name, subject);
-        this.name = name;
+    protected Lesson(LessonName lessonName, Subject subject) {
+        requireAllNonNull(lessonName, subject);
+        this.lessonName = lessonName;
         this.subject = subject;
     }
 
     /**
      * Creates a new instance of a non-recurring lesson.
-     * @param name lesson name
+     * @param name lesson lessonName
      * @param subject what subject would be taught during the lesson
      * @param startDateTime date and starting time of the lesson
      * @param hours how long the lesson would last
      */
-    public static TemporaryLesson makeTemporaryLesson(String name, String subject, Date startDateTime, int hours) {
-        Name lessonName = new Name(name);
+    public static TemporaryLesson makeTemporaryLesson(String name, String subject,
+                                                      Date startDateTime, int hours, int minutes) {
+        LessonName lessonName = new LessonName(name);
         Subject lessonSubject = new Subject(subject);
         TimeSlot lessonTimeSlot = new TimeSlot(startDateTime, hours);
 
@@ -45,8 +46,8 @@ public abstract class Lesson {
         );
     }
 
-    public Name getName() {
-        return name;
+    public LessonName getName() {
+        return lessonName;
     }
 
     public Subject getSubject() {

@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's name in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidSubject(String)}
  */
 public class Subject {
 
@@ -21,20 +21,20 @@ public class Subject {
     public final String subjectName;
 
     /**
-     * Constructs a {@code Name}.
+     * Constructs a {@code LessonName}.
      *
      * @param name A valid name.
      */
     public Subject(String name) {
         requireNonNull(name);
-        checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidSubject(name), MESSAGE_CONSTRAINTS);
         subjectName = name;
     }
 
     /**
-     * Returns true if a given string is a valid name.
+     * Returns true if a given string is a valid subject.
      */
-    public static boolean isValidName(String test) {
+    public static boolean isValidSubject(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 

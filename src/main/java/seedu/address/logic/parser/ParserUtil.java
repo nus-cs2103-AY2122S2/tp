@@ -2,13 +2,17 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.lesson.LessonName;
+import seedu.address.model.lesson.Subject;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -36,7 +40,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String name} into a {@code Name}.
+     * Parses a {@code String name} into a {@code LessonName}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code name} is invalid.
@@ -120,5 +124,95 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String lessonName} into a {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code lessonName} is invalid.
+     */
+    public static String parseLessonName(String lessonName) throws ParseException {
+        requireNonNull(lessonName);
+        String trimmedName = lessonName.trim();
+        if (!LessonName.isValidName(trimmedName)) {
+            throw new ParseException(LessonName.MESSAGE_CONSTRAINTS);
+        }
+        return trimmedName;
+    }
+
+    /**
+     * Parses a {@code String subject} into a {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code subject} is invalid.
+     */
+    public static String parseSubject(String subject) throws ParseException {
+        requireNonNull(subject);
+        String trimmedSubject = subject.trim();
+        if (!Subject.isValidSubject(trimmedSubject)) {
+            throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
+        }
+        return trimmedSubject;
+    }
+
+    /**
+     * Parses a {@code String dateOfLesson} into a {@code Date}.
+     *
+     * @throws ParseException if the given {@code dateOfLesson} is invalid.
+     */
+    public static Date parseDate(String dateOfLesson) throws ParseException {
+        requireNonNull(dateOfLesson);
+        String trimmedDateString = dateOfLesson.trim();
+
+        Date date;
+        try {
+            date = new SimpleDateFormat("dd-MM-yyyy").parse(trimmedDateString);
+        } catch (java.text.ParseException exception) {
+            // TODO: figure out how to better handle exception for parsing date of lesson
+            throw new ParseException("TODO: figure out how to better handle exception for parsing date of lesson");
+        }
+
+        return date;
+    }
+
+    /**
+     * Parses a {@code String durationHours} into an {@code Integer}.
+     *
+     * @throws ParseException if the given {@code lessonDurationHours} is invalid.
+     */
+    public static int parseDurationHours(String durationHours) throws ParseException {
+        requireNonNull(durationHours);
+        String trimmedDurationString = durationHours.trim();
+
+        Integer hours;
+        try {
+            hours = Integer.parseInt(trimmedDurationString);
+        } catch (NumberFormatException exception) {
+            // TODO: figure out how to better handle exception for parsing duration of lesson (hours)
+            throw new ParseException("TODO: figure out how to better handle exception for parsing duration of lesson");
+        }
+
+        return hours;
+    }
+
+    /**
+     * Parses a {@code String durationMinutes} into an {@code Integer}.
+     *
+     * @throws ParseException if the given {@code lessonDurationMinutes} is invalid.
+     */
+    public static int parseDurationMinutes(String durationMinutes) throws ParseException {
+        requireNonNull(durationMinutes);
+        String trimmedDurationString = durationMinutes.trim();
+
+        Integer minutes;
+        try {
+            minutes = Integer.parseInt(trimmedDurationString);
+        } catch (NumberFormatException exception) {
+            // TODO: figure out how to better handle exception for parsing duration of lesson (minutes)
+            throw new ParseException("TODO: figure out how to better handle exception for parsing duration of lesson");
+        }
+
+        return minutes;
     }
 }
