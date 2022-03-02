@@ -3,7 +3,9 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+HireLah is a desktop app that helps **recruiters to manage talent and job candidates** by tracking every step of the hiring process, 
+from offering positions to scheduling interviews with candidates. It is optimised for Command Line Interface (CLI) users while still offering a GUI, so that power users can accomplish tasks much quicker by using commands
+
 
 * Table of Contents
 {:toc}
@@ -14,7 +16,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `HireLah.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
@@ -73,69 +75,57 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding an Applicant: `appladd`
 
-Adds a person to the address book.
+Adds a new applicant to HireLah
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `appladd n/APPLICANT_NAME d/DOB g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+An applicant can have any number of tags (including 0)
 </div>
 
+* DOB provided must be in format YYYY-MM-DD
+* Gender must be M/F
+
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `appladd n/Benedict d/1998-02-03 g/M p/98123456 e/ben@gmail.com a/12 Kent Ridge Drive, 119243`
+* `appladd n/Max d/2000-01-01 g/M p/97123456 e/max@yahoo.com a/12 Kent Ridge Drive, 119243 t/Data Analyst`
 
-### Listing all persons : `list`
+### Listing all Applicants : `appllist`
 
-Shows a list of all persons in the address book.
+Shows a list of all Applicants in HireLah.
 
-Format: `list`
+Format: `appllist`
 
-### Editing a person : `edit`
+### Editing an Applicant : `appledit`
 
-Edits an existing person in the address book.
+Edits an existing Applicant in HireLah.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `appledit INDEX [n/APPLICANT_NAME] [d/DOB] [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the Applicant at the specified `INDEX`. The index refers to the index number shown in the displayed Applicant 
+  list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
+* You can remove all the Applicant’s tags by typing `t/` without
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `appledit 1 n/Belle d/1960-03-04 g/F p/81234567` Edits the name, DOB, gender and phone number of the 1st person 
+   to be `Belle`, `1960-03-04`, `F` and `81234567` respectively.
+*  `appledit 2 e/belle@yahoo.com a/13 Computing Drive 612345 t/` Edits the email and address of the 2nd person to be 
+   `belle@yahoo.com` and `13 Computing Drive 612345` respectively, and clears all existing tags.
 
-### Locating persons by name: `find`
+### Deleting an Applicant : `appldel`
 
-Finds persons whose names contain any of the given keywords.
+Deletes the specified Applicant from HireLah.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `appdel INDEX`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-
-### Deleting a person : `delete`
-
-Deletes the specified person from the address book.
-
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the Applicant at the specified `INDEX`.
+* The index refers to the index number shown in the displayed Applicant list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
