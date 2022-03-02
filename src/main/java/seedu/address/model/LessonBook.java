@@ -10,7 +10,7 @@ import seedu.address.model.lesson.UniqueLessonList;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Lessons with conflicting timeslots are not allowed (by .isConflictingWithLesson comparison)
  */
 public class LessonBook implements ReadOnlyLessonBook {
 
