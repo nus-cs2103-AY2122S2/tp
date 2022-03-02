@@ -308,7 +308,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: F02 - Delete a friend**
 
 **Guarantees** 
-* An existing friend in Amigos whose name matches the user input will be deleted.
+* An existing friend in Amigos will be deleted only if the name input matches that of an existing friend in Amigos.
 
 **MSS**
 
@@ -345,10 +345,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 4 if newly-entered user input is valid, otherwise it may reach 3a/3b again.
 
 
-**Use case: FO3 - Edit a friend**
+**Use case: F03 - Edit a friend**
 
 **Guarantees**
-* The field(s) of an existing friend will be updated if the user input is valid.
+* The field(s) of an existing friend will be updated only if the user input is valid.
 
 **MSS**
 
