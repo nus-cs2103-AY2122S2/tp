@@ -29,6 +29,8 @@ UniBook is a **desktop app for students to manage their university contacts in s
 
    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
+   * **`edit`**`o/person 1 p/91234567 e/prof@email.com` : Edits the 1st contact's phone number and email shown in the current list.
+
    * **`clear`** : Deletes all contacts.
 
    * **`exit`** : Exits the app.
@@ -128,18 +130,18 @@ Examples:
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit o/OPTION [INDEX] [m/MODULE] [n/NAME] [p/PHONE] [e/EMAIL] [nm/NEWMODULE]`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
+* Edits the entity type defined by `o/OPTION`. This is a compulsory field.
+* Depending on the entity type, certain fields will be compulsory.
+* 2 values for `OPTION`:
+    * `module`: Edits the module specified by compulsory field `m/MODULE`. Optional fields `[n/NAME] [nm/NEWMODULE]` to specify the new name or module code of the module.
+    * `person`: Edits the person at the specified by the compulsory field INDEX. The index refers to the index number shown in the most recent list of contacts viewable on the GUI. The index must be a positive integer 1, 2, 3, …
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 p/91234567 e/prof@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `prof@example.com` respectively.
+*  `edit o/module m/CS2103 n/Software Engineering nm/CS2103T ` Edits the module code of the module with code `CS2103` to be named as `Software Engineering` and have a new code `CS2103T`
 
 ### Locating persons by name: `find`
 
@@ -248,7 +250,7 @@ Action | Format, Examples
 **Add** | `add o/OPTION n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [m/MODULE]… ​` <br> e.g., `add o/module n/Software Engineering m/cs2103`<br> e.g., `add o/module n/Computer Organisation m/cs2100`<br> e.g., `add o/professor n/James Ho p/22224444 e/jamesho@example.com a/123 Clementi Rd S123466 m/cs2103`<br> e.g., `add o/student n/Peter Ho p/81234567 e/peterho@u.nus.edu m/cs2103 m/cs2100`
 **Clear** | `clear`
 **Delete** | `delete m/MODULECODE [o/OPTION]` <br> e.g. `delete m/CS2103` <br> e.g. `delete m/CS2103 o/PROF` <br> `delete m/MODULECODE g/GROUPCODE [o/OPTION]` <br> e.g. `delete m/CS2105 g/G04` <br> e.g. `delete m/CS2105 g/04 o/ALL` <br> `delete n/STUDENTNAME` <br> e.g. `delete n/Alan Tan` <br> `delete n/PROFNAME` <br> e.g. `delete n/Ooi Wei Tsang`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit** | `edit o/OPTION [INDEX] [m/MODULE] [n/NAME] [p/PHONE] [e/EMAIL] [nm/NEWMODULE] `<br> e.g. `edit o/person 1 p/91234567 e/prof@email.com` <br> e.g. `edit o/module m/CS2103 n/Software Engineering nm/CS2103T`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list [o/LISTING_CRITERIA CRITERIA_INFORMATION]` <br>e.g., `list o/module CS2103`
 **Help** | `help`
