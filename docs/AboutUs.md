@@ -50,10 +50,10 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Kong Jun Yin
 
-<img src="images/OhEyeSee.png" width="200px">
+<img src="images/oheyesee.png" width="200px">
 
 [[github](https://github.com/OhEyeSee)]
-[[portfolio](team/OhEyeSee.md)]
+[[portfolio](team/oheyesee.md)]
 
 * Role: NIL
 * Responsibilities: NIL
