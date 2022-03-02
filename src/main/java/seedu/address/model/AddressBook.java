@@ -103,17 +103,17 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public boolean isPersonPrimaryKeyConstriantViolated(Person target) {
         Predicate<Person> checkConstraintViolation = p -> {
-                if (p.equals(target)) {
-                    return false;
-                }
-
-                for (Prefix prefix : Person.PRIMARY_KEY) {
-                    if (p.getField(prefix).equals(target.getField(prefix))) {
-                        return true;
-                    }
-                }
-
+            if (p.equals(target)) {
                 return false;
+            }
+
+            for (Prefix prefix : Person.PRIMARY_KEY) {
+                if (p.getField(prefix).equals(target.getField(prefix))) {
+                    return true;
+                }
+            }
+
+            return false;
         };
 
         return persons.asUnmodifiableObservableList().stream().anyMatch(checkConstraintViolation);
