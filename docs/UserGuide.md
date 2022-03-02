@@ -128,19 +128,18 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting a TA : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified TA from the system.
 
-Format: `delete INDEX`
+Format: `delete STUDENT_ID`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the specified TA with specified `STUDENT_ID`.
+* The `STUDENT_ID` **must belong to a TA** in the system.
+* Otherwise, the system will prompt a message, stating that the record does not exist.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `delete A0213456H` deletes the TA with STUDENT_ID A0123456H, if the record exists.
 
 ### Clearing all entries : `clear`
 
