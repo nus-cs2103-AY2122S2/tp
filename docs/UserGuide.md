@@ -232,11 +232,26 @@ Format: `intvwlist CANDIDATE_INDEX`
 Examples:
 * `intvwlist 1`
 
-### Clearing all entries : `clear`
+### Filter data: `filter`
+View different applicants, interviews and positions in HireLah through various filters. It alters the current display of HireLah and changes the index of the relevant data.
 
-Clears all entries from the address book.
+Format: `filter DATA_TYPE b/FILTER_TYPE [ARGUMENT]`
 
-Format: `clear`
+* 
+* Different data has different filters available, thus requiring different arguments, as listed:
+
+DATA_TYPE | FILTER_TYPE | ARGUMENT(S)           | Description
+----|-------------|-----------------------|---
+`appl` | `name`      | `n/KEYWORD`           | View applicants whose name contains the keyword
+`appl` | `tag`       | `t/TAG1, [t/TAG2, …]` | View applicants who have all the tags specified
+`intvw` | `appl`      | `n/NAME`              | View interviews for applicants whose name is specified
+`intvw` | `date`      | `d/DATE`              | View interviews happening on the specified date (Date provided must be in format YYYY-MM-DD)
+`pos` | `name`      | `n/KEYWORD`           | View positions which has the specified keyword in the position name
+
+Examples:
+* `filter appl name n/john`
+* `filter appl tag t/school t/friend`
+* `filter intvw date d/2022-03-20`
 
 ### Exiting the program : `exit`
 
@@ -246,19 +261,9 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Upon exiting HireLah, the data in the application will automatically be saved, including the positions, applicants, and interviews. There is no need to save manually.
 
-### Editing the data file
 
-AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
-</div>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -267,16 +272,18 @@ _Details coming soon ..._
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
---------------------------------------------------------------------------------------------------------------------
+**Q**: How do I schedule an interview for a new applicant?<br>
+**A**: You will need to first create a new applicant in HireLah, and ensure that the applied position exists in the system, else you will need to create the position as well. To schedule an interview, simply create a new interview with the applicant and the position.
 
-## Command summary
+**Q**: Can I add an applicant without any interviews scheduled?<br>
+**A**: Yes, you can simply add a new applicant in HireLah without adding any interviews.
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+**Q**: I have a position that is only open for one applicant, do I still have to add the position?<br>
+**A**: Yes, you will need to add the position as well even if it is only used once.
+
+**Q**: A position has been filled, what do I do with the position created in the app?<br>
+**A**: You can either mark the position as not open, or delete the position from HireLah according to your requirement and preference.
+
+**Q**: How do I transfer my data to another Computer?<br>
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous HireLah home folder.
+
