@@ -281,45 +281,100 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+**Use Case: UC01 - Add a Person**
 
-**Use case: Delete a person**
+Actor: User
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to add a person
+2. UniBook adds the appropriate person object to the system.
 
-    Use case ends.
+Use case ends.
 
 **Extensions**
+* 1a. The UniBook list is currently full.
+  - Use case ends.
+  
+* 1a. The user request is wrongly formatted/incomplete.
+    - 1a1. User is prompted to enter the format correctly.
+    - Use case ends.
 
-* 2a. The list is empty.
+**Use case: UC02 - List Persons**
 
-  Use case ends.
+Actor: User
 
-* 3a. The given index is invalid.
+**MSS**
 
-    * 3a1. AddressBook shows an error message.
+1. User requests to list persons
+2. UniBook displays persons according to listing criteria.
 
-      Use case resumes at step 2.
+Use case ends.
 
-*{More to be added}*
+**Use Case: UC03 - Edit Person/Module**
+
+Actor: User
+
+**Guarantees**
+
+- No changes will be made to any data if the user request is wrongly formatted/incomplete.
+
+**MSS**
+
+1. User requests to edit person/module
+2. UniBook updates the relevant data according to the user command.
+
+Use case ends.
+
+**Extensions**
+* 1a. The person/module does not exist in UniBook.
+    - The user is notified that the person/module does not exist.
+    - Use case ends.
+
+* 1a. The user request is wrongly formatted/incomplete.
+    - 1a1. User is prompted to enter the format correctly.
+    - Use case ends.
+
+**Use Case: UC04 - Finding specific persons**
+
+Actor: User
+
+**MSS**
+
+1. User requests to find a specific person.
+2. UniBook displays the people who match the specified search criteria.
+
+Use case ends.
+
+**Use Case: UC05 - Deleting**
+
+Actor: User
+
+**MSS**
+
+1. User requests to delete a specified set of data.
+2. UniBook removes the specified set of data from the system.
+3. The UI is updated to no longer reflect or display this data.
+
+Use case ends.
+
+
+
+
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1.  Should be able to work on any Popular Operating System as long as Java is installed.
+2.  The program should be able to handle up to 500 students per module.
+3. System should respond to commands within 2 seconds.
+4. There should be no memory leaks.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **User**: A user of UniBook, either a student or a professor.
+* **Module**: A group of students led by professor(s), representing a university course. 
+* **Popular Operating System**: Windows, Linux, Unix, MacOS
+
 
 --------------------------------------------------------------------------------------------------------------------
 
