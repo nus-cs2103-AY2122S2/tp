@@ -53,7 +53,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/oheyesee.png" width="200px">
 
 [[github](https://github.com/OhEyeSee)]
-[[portfolio](team/OhEyeSee.md)]
+[[portfolio](team/oheyesee.md)]
 
 * Role: NIL
 * Responsibilities: NIL
