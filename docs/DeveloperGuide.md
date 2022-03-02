@@ -414,6 +414,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Unsubmiited**: Status to indicate that the student has not submitted the lab assignment or it is overdue.
+* **Submitted**: Status to indicate that the student has submitted the lab assignment to his github repository.
+* **Graded**: Status to indicate that the User (TA) has graded the student's lab assignment.
 
 --------------------------------------------------------------------------------------------------------------------
 
