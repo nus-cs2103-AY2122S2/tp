@@ -27,7 +27,8 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for saving the data, editing the data file, and the command summary [\#23](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/23)
+    * Added documentation for saving and editing the data file [\#23](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/23)
+    * Added command summary in user guide [\#23](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/23)
   * Developer Guide:
     * --
 
