@@ -5,11 +5,11 @@ title: User Guide
 
 Trackermon is a **desktop app** for **tracking and managing shows**, **optimized for use via a
 Command Line Interface (CLI)** while still having the **benefits of a Graphical User Interface (GUI)**.
-The app allows the user to track and remember what shows they have watched or currently watching. 
+The app allows the user to track and remember what shows they have watched or currently watching.
 They can easily look up the list of shows if they need to.
 
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -28,15 +28,15 @@ They can easily look up the list of shows if they need to.
 
 Some example commands you can try:
 
-   * **`list`** : Lists all shows.
+* **`list`** : Lists all shows.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+* **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
-   * **`clear`** : Deletes all contacts.
+* **`clear`** : Deletes all contacts.
 
-   * **`exit`** : Exits the app.
+* **`exit`** : Exits the app.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -108,7 +108,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+  specifying any tags after it.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -136,15 +136,14 @@ Examples:
 
 Deletes the specified person from the address book.
 
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+Format: `delete <INDEX>`
+* Deletes the show at the specified `<INDEX>`.
+* The index refers to the index number shown in the displayed show list. (not overall)
+* The index **must be a positive integer** 1,2,3,..
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` removes 2nd show in Trackermon
+* `find ghibli` followed by `delete 1` removes 1st show in results of `find` command
 
 ### Clearing all entries : `clear`
 
