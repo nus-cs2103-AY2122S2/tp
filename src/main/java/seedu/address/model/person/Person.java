@@ -22,14 +22,9 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
-    private final HashMap<Prefix, Field> fields = new HashMap<>();
-    private final Set<Tag> tags = new HashSet<>();
-
-    private static final Map<Prefix, FieldParser<? extends Field>> FIELD_PARSERS;
     public static final Prefix[] PREFIXES;
     public static final Prefix[] REQUIRED_PREFIXES;
-
-    // Static initialisation.
+    private static final Map<Prefix, FieldParser<? extends Field>> FIELD_PARSERS;
     static {
         HashMap<Prefix, FieldParser<? extends Field>> fieldParsers = new HashMap<>();
 
@@ -47,15 +42,8 @@ public class Person {
         REQUIRED_PREFIXES = Arrays.stream(PREFIXES).filter(Prefix::isRequired).toArray(Prefix[]::new);
     }
 
-    public static <T extends Field> FieldParser<T> getParser(Prefix prefix) {
-        return (FieldParser<T>) FIELD_PARSERS.get(prefix);
-    }
-
-    /**
-     * Constructs a person.
-     */
-    public Person() {
-    }
+    private final HashMap<Prefix, Field> fields = new HashMap<>();
+    private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Constructs a person.
@@ -75,11 +63,26 @@ public class Person {
         this.tags.addAll(tags);
     }
 
+    /**
+     * Constructs a person.
+     */
+    public Person() {
+    }
+
+    /**
+     * Add a field to the person.
+     * @param prefix the field prefix
+     * @param field the field to add
+     */
     public void addField(Prefix prefix, Field field) {
         requireAllNonNull(prefix, field);
         fields.put(prefix, field);
     }
 
+    /**
+     * Remove a field from the preson.
+     * @param prefix the field prefix
+     */
     public void removeField(Prefix prefix) {
         requireAllNonNull(prefix);
         if (Arrays.asList(REQUIRED_PREFIXES).contains(prefix)) {
@@ -193,4 +196,7 @@ public class Person {
         return builder.toString();
     }
 
+    public static <T extends Field> FieldParser<T> getParser(Prefix prefix) {
+        return (FieldParser<T>) FIELD_PARSERS.get(prefix);
+    }
 }
