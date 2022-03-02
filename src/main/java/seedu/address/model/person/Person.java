@@ -23,14 +23,9 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
-    private final HashMap<Prefix, Field> fields = new HashMap<>();
-    private final Set<Tag> tags = new HashSet<>();
-
-    private static final Map<Prefix, FieldParser<? extends Field>> FIELD_PARSERS;
     public static final Prefix[] PREFIXES;
     public static final Prefix[] REQUIRED_PREFIXES;
-
-    // Static initialisation.
+    private static final Map<Prefix, FieldParser<? extends Field>> FIELD_PARSERS;
     static {
         HashMap<Prefix, FieldParser<? extends Field>> fieldParsers = new HashMap<>();
 
@@ -48,23 +43,8 @@ public class Person {
         REQUIRED_PREFIXES = Arrays.stream(PREFIXES).filter(Prefix::isRequired).toArray(Prefix[]::new);
     }
 
-    /**
-     * Returns the parser of a field.
-     * @param prefix the field prefix
-     * @param <T> the field type
-     * @return the parser of a field
-     */
-    public static <T extends Field> FieldParser<T> getParser(Prefix prefix) {
-        requireAllNonNull(prefix);
-        AppUtil.checkArgument(FIELD_PARSERS.containsKey(prefix), "Parser does not exist in Person.");
-        return (FieldParser<T>) FIELD_PARSERS.get(prefix);
-    }
-
-    /**
-     * Constructs a person.
-     */
-    public Person() {
-    }
+    private final HashMap<Prefix, Field> fields = new HashMap<>();
+    private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Constructs a person.
@@ -84,11 +64,26 @@ public class Person {
         this.tags.addAll(tags);
     }
 
+    /**
+     * Constructs a person.
+     */
+    public Person() {
+    }
+
+    /**
+     * Add a field to the person.
+     * @param prefix the field prefix
+     * @param field the field to add
+     */
     public void addField(Prefix prefix, Field field) {
         requireAllNonNull(prefix, field);
         fields.put(prefix, field);
     }
 
+    /**
+     * Remove a field from the preson.
+     * @param prefix the field prefix
+     */
     public void removeField(Prefix prefix) {
         requireAllNonNull(prefix);
         AppUtil.checkArgument(!Arrays.asList(REQUIRED_PREFIXES).contains(prefix), "Cannot remove mandatory fields.");
@@ -157,7 +152,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+            && otherPerson.getName().equals(getName());
     }
 
     /**
@@ -176,10 +171,10 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return otherPerson.getName().equals(getName())
-                && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+            && otherPerson.getPhone().equals(getPhone())
+            && otherPerson.getEmail().equals(getEmail())
+            && otherPerson.getAddress().equals(getAddress())
+            && otherPerson.getTags().equals(getTags());
     }
 
     @Override
@@ -192,12 +187,12 @@ public class Person {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append("; Phone: ")
-                .append(getPhone())
-                .append("; Email: ")
-                .append(getEmail())
-                .append("; Address: ")
-                .append(getAddress());
+            .append("; Phone: ")
+            .append(getPhone())
+            .append("; Email: ")
+            .append(getEmail())
+            .append("; Address: ")
+            .append(getAddress());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
@@ -207,4 +202,15 @@ public class Person {
         return builder.toString();
     }
 
+    /**
+     * Returns the parser of a field.
+     * @param prefix the field prefix
+     * @param <T> the field type
+     * @return the parser of a field
+     */
+    public static <T extends Field> FieldParser<T> getParser(Prefix prefix) {
+        requireAllNonNull(prefix);
+        AppUtil.checkArgument(FIELD_PARSERS.containsKey(prefix), "Parser does not exist in Person.");
+        return (FieldParser<T>) FIELD_PARSERS.get(prefix);
+    }
 }

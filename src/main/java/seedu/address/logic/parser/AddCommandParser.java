@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -32,12 +33,13 @@ public class AddCommandParser implements CommandParser<AddCommand> {
 
         Person person = new Person();
         for (Prefix p : Person.PREFIXES) {
-            String fieldArgs = argMultimap.getValue(p).orElse("");
-            if (fieldArgs.isEmpty()) {
-                continue;
+            Optional<String> optArg = argMultimap.getValue(p);
+            // If the argument is present, add the field to the person.
+            // If the argument is absent but required, parse an empty string to let it throw an exception.
+            if (optArg.isPresent() || p.isRequired()) {
+                Field field = Person.getParser(p).parse(optArg.orElse(""));
+                person.addField(p, field);
             }
-            Field field = Person.getParser(p).parse(fieldArgs);
-            person.addField(p, field);
         }
 
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(CliSyntax.PREFIX_TAG));
