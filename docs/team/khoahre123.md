@@ -3,7 +3,7 @@ layout: page
 title: Khoa's Project Portfolio Page
 ---
 
-### Project: AddressBook Level 3
+### Project: HireLah
 
 HireLah is a CLI-based app that offers help for recruiters who need to managed hundreds of applicants per day.
 By having short and simple syntax, HireLah helps to accelerate the normal scheduling and filtering process.

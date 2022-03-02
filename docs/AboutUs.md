@@ -29,12 +29,14 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Le Nguyen Quang Dang Khoa
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/khoahre123.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/khoahre123.md)]
+[[github](https://github.com/khoahre123)]
+[[portfolio](team/khoahre123.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Deliverables and deadlines and in charge of 
+`help` commands
 
 ### Lee Yi Hern
 
