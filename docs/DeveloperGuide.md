@@ -518,6 +518,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case 04: Add a class group**
 
+**Preconditions: The module that the class group will be added to already exists.**
+
 **MSS**
 
 1.  TA requests to add a new class group with the specified details.
