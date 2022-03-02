@@ -1,5 +1,9 @@
 package seedu.address.logic;
 
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.logging.Logger;
+
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -13,9 +17,6 @@ import seedu.address.model.ReadOnlyUniBook;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
 
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.logging.Logger;
 
 /**
  * The main LogicManager of the app.
