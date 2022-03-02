@@ -448,7 +448,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `TAssist` and the **Actor** is the `TA`, unless specified otherwise)
 
-**Use case 01: Add Module**
+**Use case 01: Add a module**
 
 **MSS**
 
@@ -469,7 +469,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 2.
 
-**Use case 02: List Modules**
+**Use case 02: List modules**
 
 **MSS**
 
@@ -490,7 +490,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 2.
 
-**Use case 03: Delete Module**
+**Use case 03: Delete a module**
 
 **MSS**
 
