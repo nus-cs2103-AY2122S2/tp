@@ -48,7 +48,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### Wei Jie
+### Chan Wei Jie
 
 <img src="images/chanweijie.png" width="200px">
 
@@ -56,4 +56,5 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Documentation + Code Quality 
+* Responsibilities: Integration + Documentation + Deliverables and Deadlines  
+* In Charge of Component Model
