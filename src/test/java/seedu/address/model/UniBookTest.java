@@ -70,15 +70,9 @@ public class UniBookTest {
     }
 
     @Test
-<<<<<<< HEAD:src/test/java/seedu/address/model/AddressBookTest.java
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
-=======
     public void hasPerson_personWithSameIdentityFieldsInUniBook_returnsTrue() {
         uniBook.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
->>>>>>> c1a634abff28b20650784c00cb64152a609d174e:src/test/java/seedu/address/model/UniBookTest.java
+        Person editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(uniBook.hasPerson(editedAlice));
     }
