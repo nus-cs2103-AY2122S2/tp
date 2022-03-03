@@ -21,7 +21,7 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * Developer Guide:
-    * Added Use-Cases (PR TO BE ADDED)
+    * Added Use-Cases (PR/ISSUE TO BE REFERENCE)
 
 * **Community**:
   * to be added soon
