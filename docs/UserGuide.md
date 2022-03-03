@@ -3,16 +3,16 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
-
+Amigos is a desktop application to help tech-savvy university students manage their friendships by helping them to keep track of important details. It is optimized for use via a Command Line interface while still having the benefits of a Graphical User Interface (GUI).
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+# Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
+
 
 1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
 
@@ -31,7 +31,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+# Features
 
 <div markdown="block" class="alert alert-info">
 
@@ -57,6 +57,8 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 </div>
 
+## Logs management
+Amigos provides functionality to manage logs, which are essentially detailed notes about a specific friend.
 
 ### Adding a log: `addlog`
 
@@ -148,9 +150,9 @@ Examples:
 
 | Action                     | Format, Examples                                                      |
 |----------------------------|-----------------------------------------------------------------------|
-| **addlog**                 | `addlog n/[NAME] t/[TITLE] d/[DESCRIPTION]`                           |
-| **editlog**                | `editlog n/[NAME] id/[LOG_INDEX] nt/[NEW_TITLE] nd/[NEW_DESCRIPTION]` |
-| **deletelog**              | `deletelog n/[NAME] id/[LOG_INDEX] -a`                                |
+| **Add log**                | `addlog n/[NAME] t/[TITLE] d/[DESCRIPTION]`                           |
+| **Edit log**               | `editlog n/[NAME] id/[LOG_INDEX] nt/[NEW_TITLE] nd/[NEW_DESCRIPTION]` |
+| **Delete log**             | `deletelog n/[NAME] id/[LOG_INDEX] -a`                                |
 | **Show all friends**       | `showfriends`                                                         |
 | **Show a specific friend** | `showfriend n/NAME -alllogs`                                          |
 | **Show all events**        | `showevents`                                                          |
