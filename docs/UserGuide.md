@@ -131,7 +131,7 @@ Shows all events stored in the address book. Switches GUI to the events tab.
 Format: `showevents`
 
 Examples:
-* `deletelog n/John Doe id/1'
+* `deletelog n/John Doe id/1`
 * `deletelog n/John Doe -a `
 * `deletelog -a`
 
