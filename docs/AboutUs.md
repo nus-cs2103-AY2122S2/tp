@@ -25,7 +25,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/cwq2326.png" width="200px">
 
 [[github](http://github.com/cwq2326)]
-[[portfolio](team/cwq2326.md)]
+[[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Features
