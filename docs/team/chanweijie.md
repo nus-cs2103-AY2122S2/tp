@@ -1,11 +1,11 @@
 ---
 layout: page
-title: Wei Jie's Project Portfolio Page
+title: Chan Wei Jie's Project Portfolio Page
 ---
 
 ### Project: ManageEZPZ
 
-ManageEZPZ - This app will help to allow Managers/supervisors to keep track of day to day tasks assigned to employees. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java.
+ManageEZPZ is a desktop application that allows managers or supervisors to manage employees and assign tasks to them. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java.
 
 Given below are my contributions to the project.
 
