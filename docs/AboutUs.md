@@ -58,3 +58,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: Ensure overall team coordination
 
+### Phua Jun Heng
+
+<img src="images/junheng.png" width="200px">
+
+[[github](http://github.com/cwnm)] [[portfolio](team/cwnm.md)]
+
+* Role: Developer
+* Responsibilities: Deliverables and deadlines, Scheduling and tracking
+
