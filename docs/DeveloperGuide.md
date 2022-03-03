@@ -294,17 +294,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list TA applicants
-2.  TAlent Assistant™ shows the list of TA applicants
+1.  User requests to list TAs
+2.  TAlent Assistant™ shows all TAs
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list of TA applicants is empty
-    * 2a1. TAlent Assistant™ displays a message to inform no TA applicants are in the list
+* 2a. The list is empty
+    * 2a1. TAlent Assistant™ feedbacks no TAs in system
 
-    Use case ends.
+      Use case ends.
 
 <hr>
 
