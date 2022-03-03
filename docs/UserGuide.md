@@ -3,19 +3,16 @@ layout: page
 title: User Guide
 ---
 
-Amigos is a desktop application to help tech-savvy university students manage their friendships by helping them to keep
-track of important details. It is optimized for use via a **Command Line interface** while still having the benefits of a 
-Graphical User Interface (GUI).
-
-
+Amigos is a desktop application to help tech-savvy university students manage their friendships by helping them to keep track of important details. It is optimized for use via a Command Line interface while still having the benefits of a Graphical User Interface (GUI).
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+# Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
+
 
 1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
 
@@ -27,21 +24,14 @@ Graphical User Interface (GUI).
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+   * **`list`** : Lists all contact. # to change
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
-
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
-
-   * **`clear`** : Deletes all contacts.
-
-   * **`exit`** : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+# Features
 
 <div markdown="block" class="alert alert-info">
 
@@ -67,6 +57,7 @@ Graphical User Interface (GUI).
 
 </div>
 
+
 ### Adding a friend: `addfriend`
 
 Adds a new friend to the address book. A friend has:
@@ -85,6 +76,21 @@ Examples:
 * `addfriend n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 d/Physics Major, Sarah’s friend. Met at Freshman Dinner.`
 * `addfriend n/John Doe`
 
+### Editing a friend : `editfriend`
+
+Edits an existing friend in the address book.
+
+Format: `editfriend cn/[CURRENT_NAME] nn/[NEW_NAME]  np/[NEW_PHONE_NUMBER] ne/[NEW_EMAIL] na/[NEW_ADDRESS] nd/[NEW_DESCRIPTION]`
+
+* Edits an existing friend in the address book. Field `CURRENT_NAME` is compulsory to identify the existing friend.
+* At least one of the optional fields must be provided.
+* Existing values will be overwritten to the input values.
+
+
+Examples:
+* `editfriend cn/John Doe na/John street, block 456, #01-01 ne/johndoe@example.com` edits the address
+  and email of John Doe to be `John street, block 456, #01-01` and `johndoe@example.com` respectively.
+
 
 ### Deleting a friend : `deletefriend`
 
@@ -99,25 +105,151 @@ Examples:
 * `deletefriend -a`
 
 
-### Editing a friend : `editfriend`
+### Show a specific friend: `showfriend`
 
-Edits an existing friend in the address book.
+Shows page containing the full details related to an existing friend in the address book. By default, only the latest 10 logs are displayed in this page.
 
-Format: `editfriend cn/[CURRENT_NAME] nn/[NEW_NAME]  np/[NEW_PHONE_NUMBER] ne/[NEW_EMAIL] na/[NEW_ADDRESS] nd/[NEW_DESCRIPTION]`
+### Show all friends : `showfriends`
 
-* Edits an existing friend in the address book. Field `CURRENT_NAME` is compulsory to identify the existing friend.
-* At least one of the optional fields must be provided.
-* Existing values will be overwritten to the input values.
+Shows all friends in the address book. Switches GUI to the friends tab.
 
+Format: `showfriends`
+
+
+Format: `showfriend n/NAME -alllogs`
+
+* NAME field **must** be provided.
+* If the `-alllogs` flag is provided all the logs contained in that person will be displayed instead of the default 10 logs.
 
 Examples:
-* `editfriend cn/John Doe na/John street, block 456, #01-01 ne/johndoe@example.com` edits the address
-and email of John Doe to be `John street, block 456, #01-01` and `johndoe@example.com` respectively.
+* `showfriend n/John Doe` Will open up the page containing full details related to John Doe - his name, address, phone number, email, description, logs, and upcoming events with him.
+* `showfriend n/John Doe -alllogs` Will do the same as above except every single log will be displayed
+
+## Logs management
+Amigos provides functionality to manage logs, which are essentially detailed notes about a specific friend.
+
+### Adding a log: `addlog`
+
+Adds a log to an existing friend in Amigos.
+
+Format: `addlog n/[NAME] t/[TITLE] d/[DESCRIPTION]`
+
+* The `NAME` field is compulsory.
+* If the `TITLE` argument is provided, then the `DESCRIPTON` argument is optional.
+* If neither `TITLE` nor `DESCRIPTION` arguments are provided, then a GUI
+  pop up will prompt the user to key in the title and longer-form text as the description.
+
+Examples:
+* `addlog n/John doe t/has a pet named poki`
+* `addlog n/Andrew Tan t/recommended movies d/the martian, interstellar, three idiots`
+
+### Editing a log: `editlog`
+
+Edits an existing log of an existing friend in the address book.
+
+Format: `editlog n/[NAME] id/[LOG_INDEX] nt/[NEW_TITLE] nd/[NEW_DESCRIPTION]`
+
+* The `NAME` field is compulsory.
+* If `LOG_INDEX` is not provided, then all logs, each with an accompanying index, will allow a user to
+  choose which log to apply the changes to.
+* At least one of the `NEW_TITLE` or `NEW_DESCRIPTION` arguments must be provided.
+  Both will directly overwrite the current values.
+* If neither `NEW_TITLE` nor `NEW_DESCRIPTION` arguments are provided, then a GUI
+  pop up will prompt the user to key in the title and longer-form text as the description.
+
+Examples:
+* `editlog n/John Doe id/1 nt/has a pet named Poki`
+* `editlog n/Andrew Tan id/1 nt/recommended movies and shows nd/the martian, interstellar, three idiots, peaky blinders`
+
+### Deleting a log: `deletelog`
+
+Deletes an existing log of an existing friend in Amigos.
+
+Format: `deletelog n/[NAME] id/[LOG_INDEX] -a`
+
+* The `NAME` field is compulsory.
+* If `NAME` is provided as well as a `-a` flag, then all logs of tht person will
+  be deleted.
+* If `LOG_INDEX` is not provided and there is no `-a` flat, then all logs, each with an
+  accompanying index, will allow a user to choose one log to delete.
+* If no `NAME` or `LOG_INDEX` is provided, but `-a` is provided, then all possible logs
+  of all friends will be deleted.
+
+## Event Management [Coming Soon!]
+Amigos also allows you to keep track of your social events!
+![Events Page](images/EventPage.png)
+
+### Creating an event: `addevent`
+Adds a new event, which can be optionally linked to existing friends.
+
+**Format**: `addevent n/[EVENT_NAME] dt/[DATE_TIME] dd/[DESCRIPTION] f/[FRIEND_NAME1, FRIEND_NAME2…]`
+
+* The `EVENT_NAME` and `DATE_TIME` fields are **compulsory**, while the remaining fields are **optional**.
+* There **cannot** be any duplicate events with the same name and date.
+
+**Examples**:
+* `addevent n/John’s Birthday dt/15-08-2021 1700 dd/Remember to get a present! f/John, Abe, Bob`
+* `addevent n/Christmas Party dt/25-12-2022`
+
+### Editing an event: `editevent`
+Edits an existing event.
+
+**Format**: `editevent n/[EVENT_NAME] dt/[DATE] nn/[NEW_EVENT_NAME] ndt/[NEW_DATE_TIME] ndd/[NEW_DESCRIPTION]  af/[ADD_FRIEND_NAME1, ADD_FRIEND_NAME2…] rf/[REMOVE_FRIEND_NAME1, REMOVE_FRIEND_NAME2…]`
+
+* The `EVENT_NAME` and `DATE` fields are **compulsory** and uniquely identify the event to be edited.
+* The `NEW_EVENT_NAME`, `NEW_DATE_TIME` and `NEW_DESCRIPTION` arguments are **optional**. If provided, they directly overwrite the existing details.
+* The `ADD_FRIEND_NAME` and `REMOVE_FRIEND_NAME` arguments are also **optional** and add/remove friends tied to the event respectively.
+
+**Examples**:
+* `editevent n/John’s Birthday dt/15-08-2021 ndt/16-08-2021 1600 af/Bob rf/Sarah, Edison`
+
+### Deleting events: `deleteevent`
+Delete existing event(s).
+
+**Format**: `deleteevent n/[EVENT_NAME] dt/[DATE] -a`
+
+* When at least one of `EVENT_NAME` and `DATE` are provided:
+  * If only a single event matches the argument(s), it will be deleted.
+  * If multiple events match the argument(s), the `-a` flag is required for all to be deleted.
+* If only the `-a` flag is given, all events will be cleared.
+
+**Examples**:
+* `deleteevent n/John’s Birthday dt/15-08-2021`
+* `deleteevent n/Weekly Boardgames -a`
+* `deleteevent -a`
+
+### Show all events : `showevents`
+
+Shows all events stored in the address book. Switches GUI to the events tab.
+
+Format: `showevents`
+
+Examples:
+* `deletelog n/John Doe id/1`
+* `deletelog n/John Doe -a `
+* `deletelog -a`
+--------------------------------------------------------------------------------------------------------------------
+
+## FAQ
+
+**Q**: How do I transfer my data to another Computer?<br>
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
-| Action            | Format, Examples                                                                                                                                                                                                                        |
-|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Friend**    | `addfriend n/[NAME]  p/[PHONE_NUMBER] e/[EMAIL]  a/[ADDRESS] d/[DESCRIPTION]` <br> e.g., `addfriend n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 d/Physics Major, Sarah’s friend. Met at Freshman Dinner` |
-| **Delete Friend** | `deletefriend n/[NAME]` <br> `deletefriend -a` <br> e.g., `deletefriend n/John Doe`                                                                                                                                                     |
-| **Edit a friend** | `editfriend cn[CURRENT_NAME] nn/[NEW_NAME]  np/[NEW_PHONE_NUMBER] ne/[NEW_EMAIL] na/[NEW_ADDRESS] nd/[NEW_DESCRIPTION]`<br> e.g., `editfriend cn/John Doe na/John street, block 456, #01-01 ne/johndoe@example.com`                     |
+| Action                     | Format, Examples                                                                                                                                                                                                                                                                               |
+|----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Friend**             | `addfriend n/[NAME] p/[PHONE_NUMBER] e/[EMAIL]  a/[ADDRESS] d/[DESCRIPTION]` <br> e.g., `addfriend n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 d/Physics Major, Sarah’s friend. Met at Freshman Dinner`                                                         |
+| **Edit friend**            | `editfriend cn[CURRENT_NAME] nn/[NEW_NAME]  np/[NEW_PHONE_NUMBER] ne/[NEW_EMAIL] na/[NEW_ADDRESS] nd/[NEW_DESCRIPTION]`<br> e.g., `editfriend cn/John Doe na/John street, block 456, #01-01 ne/johndoe@example.com`                                                                            |
+| **Delete Friend**          | `deletefriend n/[NAME]` <br> `deletefriend -a` <br> e.g., `deletefriend n/John Doe`                                                                                                                                                                                                            |
+| **Show a specific friend** | `showfriend n/NAME -alllogs`                                                                                                                                                                                                                                                                   |
+| **Show all friends**       | `showfriends`                                                                                                                                                                                                                                                                                  |
+| **Add log**                | `addlog n/[NAME] t/[TITLE] d/[DESCRIPTION]`                                                                                                                                                                                                                                                    |
+| **Edit log**               | `editlog n/[NAME] id/[LOG_INDEX] nt/[NEW_TITLE] nd/[NEW_DESCRIPTION]`                                                                                                                                                                                                                          |
+| **Delete log**             | `deletelog n/[NAME] id/[LOG_INDEX] -a`                                                                                                                                                                                                                                                         |
+| **Add Event**              | `addevent n/[EVENT_NAME] dt/[DATE_TIME] dd/[DESCRIPTION] f/[FRIEND_NAME1, FRIEND_NAME2…]` <br> e.g.,`addevent n/John’s Birthday dt/15-08-2021 1700 dd/Remember to get a present! f/John, Abe, Bob`                                                                                             |
+| **Edit Event**             | `editevent n/[EVENT_NAME] dt/[DATE] nn/[NEW_EVENT_NAME] ndt/[NEW_DATE_TIME] ndd/[NEW_DESCRIPTION]  af/[ADD_FRIEND_NAME1, ADD_FRIEND_NAME2…] rf/[REMOVE_FRIEND_NAME1, REMOVE_FRIEND_NAME2…]` <br> e.g., `editevent n/John’s Birthday dt/15-08-2021 ndt/16-08-2021 1600 af/Bob rf/Sarah, Edison` |
+| **Delete Event**           | `deleteevent n/[EVENT_NAME] dt/[DATE] -a` <br> e.g., `deleteevent n/John’s Birthday dt/15-08-2021` <br> e.g., `deleteevent n/Weekly Boardgames -a`                                                                                                                                             |
+| **Show all events**        | `showevents`                                                                                                                                                                                                                                                                                   |

@@ -257,71 +257,405 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* tech-savvy university students
 * prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* can type fast and has plenty of experience with CLI application
+* is often busy and struggles to manage important details about their relationships
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: The program will help busy university students to manage their friendships by keeping track of important details. An example of possible features include the tracking of birthdays, money owed, upcoming meetings etc. and providing relevant reminders, in addition to basic functionalities.
+
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​        | I want to …​                                                                            | So that I can…​                                                                                             |
+|----------|----------------|-----------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
+| `* * *`  | User           | list all my friends                                                                     | ensure that the information I have added is saved and check my friend's details                             |
+| `* * *`  | User           | add events relating to my friends                                                       | keep track of any future events                                                                             |
+| `* * *`  | User           | add new friends                                                                         | keep track of any new friends I make                                                                        |
+| `* * *`  | User           | remove friends I am no longer in contact with                                           | keep my friends list updated and remove irrelevant contact                                                  |
+| `* * *`  | User           | review my events for the next day along with their relevant details                     | take note and be prepared for the next day                                                                  |
+| `* * *`  | Forgetful user | keep track of things that my friend has recently talked about                           | appear invested in my relationship and not forget important things about my friends                         |
+| `* * *`  | Forgetful user | add descriptions and details about my friends that I would like to remember             | not stress about remember these details for the next time we meet                                           |
+| `* *`    | New User       | undo a command                                                                          | revert back accidental commands                                                                             | 
+| `* *`    | New User       | reset the application to its default state                                              | properly experiment with the application before using it properly                                           |
+| `* *`    | Forgetful User | use a keyword search to find a note written about someone                               | find out who I spoke to about a certain issue                                                               | 
+| `* *`    | Amateur User   | update details about my friends                                                         | keep my friends list up to date                                                                             |
+| `* *`    | Amateur User   | shorten command lengths                                                                 | increase my efficiency while using this application                                                         |
+| `* *`    | Seasoned User  | see which of my friends I am closest to and which of them I have not visited in a while | reflect more about how I spend my time with my friend and maybe catch up with ones I have not met in awhile | 
+| `* *`    | Seasoned User  | chain commands                                                                          | reduce the number of commands I need to type thereby increasing efficiency                                  |
+| `*`      | User           | tag friends under different categories                                                  | better classify and organise my friend circle                                                               | 
+| `*`      | New User       | know which features of the application I am not using as often                          | fully utilise the application to its maximum capability                                                     | 
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Amigos` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: F01 - Add a friend**
+
+**Guarantees** 
+* A new friend will be added into Amigos only if there does not already exist a friend with the same name in it.
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to add a friend.
+2. Amigos proceeds to add the friend.
+3. Amigos clears the user input.
+
+   Use case ends. 
+
+**Extensions**
+* 1a. A friend with the same name already exists in Amigos.
+    * 1a1. Amigos displays the existing friend with the same name and the corresponding error message.
+    * 1a2. Amigos clears the user input.
+
+    Use case ends
+
+
+**Use case: F02 - Edit a friend**
+
+**Guarantees**
+* The field(s) of an existing friend will be updated only if the user input is valid.
+
+**MSS**
+
+1.  User requests to list friends.
+2.  Amigos shows a list of friends.
+3.  User requests to edit details of a specific friend in the list.
+4.  Amigos edits the details of the friend accordingly and clears user input.
 
     Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
+    * Use case ends.
+
+
+* 3a. No name is entered by the user.
+    * 3a1. Amigos requests user to enter a name.
+    * 3a2. User reenters the command along with a valid name and other relevant fields (at least one) to edit.
+
+  Use case resumes at step 4 if newly-entered user input is valid, otherwise it may reach 3a/3b/3c again.
+
+
+* 3b. Amigos finds no contact with the given name.
+    * 3b1. Amigos requests user to check input and reenter.
+    * 3b2. User reenters the command along with a valid name and other relevant fields (at least one) to edit.
+
+  Use case resumes at step 4 if newly-entered user input is valid, otherwise it may reach 3a/3b/3c again.
+
+
+* 3c. A valid name is entered by user but no fields to edit are given.
+    * 3c1. Amigos requests user to enter at least one field to edit.
+    * 3c2. User reenters command and name, along with at least one field to edit.
+
+  Use case resumes at step 4 if newly-entered user input is valid, otherwise it may reach 3a/3b/3c again.
+
+**Use case: F03 - Delete a friend**
+
+**Guarantees** 
+* An existing friend in Amigos will be deleted only if the name input matches that of an existing friend in Amigos.
+
+**MSS**
+
+1.  User requests to list friends.
+2.  Amigos shows a list of friends.
+3.  User requests to delete a specific friend in the list.
+4.  Amigos deletes the friend and clears the user input.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+    * Use case ends.
+
+* 2b. User requests to delete all friends.
+   * 2b1. Amigos deletes all friends and clears the user input.
+   
+   Use case ends.
+    
+
+* 3a. No name is entered by the user. 
+   * 3a1. Amigos requests user to enter a name.
+   * 3a2. User reenters the command along with a valid name.
+     
+   Use case resumes at step 4 if newly-entered user input is valid, otherwise it may reach 3a/3b again. 
+
+
+* 3b. Amigos finds no contact with the given name.
+    * 3b1. Amigos requests user to check input and reenter.
+    * 3b2. User reenters the command along with a valid name. 
+
+    Use case resumes at step 4 if newly-entered user input is valid, otherwise it may reach 3a/3b again.
+
+
+**Use case: F04 - Checking details of a friend**
+
+**MSS**
+
+1. User requests to see all friends in Amigos.
+2. Amigos switches the GUI to the friends tab and shows all friends.
+4. User requests to view full details of a particular friend.
+5. Amigos displays a page containing the full details of that particular friend accompanied by some logs.
+
+Use case ends
+
+**Extensions**
+* 3a. There are no existing friends.
+    * 3a.1 Amigos displays an empty interface with the message “No friends yet”.
+
+      Use case ends
+  
+* 4a. User wants to see all the logs of a person
+    * 4a.1 Amigos displays a page containing the full details of that friend accompanied by all the logs
+      
+      Use Case ends.
+  
+* 4b. Amigos detects an issue in the input (e.g. incorrect input format, cannot find friend in the system)
+    * 4b.1 Amigos displays the error feedback to the user.
+  
+      Use case resumes at 4
+
+**Use case: L01 - Adding a new log to a friend**
+
+**Guarantees:**
+* If successful, log will be added to friend details and saved in storage.
+
+**MSS**
+
+
+1. User decides to add a new log to a specific friend. 
+2. User keys in necessary details with the one-line command 
+3. Amigos displays the friend and the specific log, and clears the input
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Amigos finds no friend with the given name.
+  * 2a1. Amigos clears the input, and requests user to check input and reenter.
+  * 2a2. User corrects command, and keys in edited command.
+
+  Use case resumes at step 3.
+
+
+* 2b. Amigos detects that user has requested for a pop-up window in the command.
+  * 2b1. Amigos creates a separate window, allowing for long-form text to be keyed in.
+  * 2b2. User keys in long form text into pop-up window, with first line as title.
+  * 2b3. User confirms entry, closing the window.
+
+  Use case resumes at step 3.
+
+
+* 2d. Amigos detects that an invalid format of the command has been keyed in.
+  * 2d1. Amigos clears the input and prompts the user with potential corrections, and requests for input.
+  * 2d2. User corrects command, and keys in edited command.
+  
+  Use case resumes at step 3.
+  
+
+**Use case: L02 - Editing a log of a single friend**
+
+**Guarantees:**
+* If successful, specified log will be overwritten and saved in storage.
+
+
+**MSS**
+
+
+1. User decides to edit a log in a specific friend. 
+2. User keys in necessary details with the one-line command. 
+3. Amigos clears the input and displays the friend and the specific log.
+
+    Use case ends.
+
+
+**Extensions**
+
+* 2a. Amigos finds no friend with the given name.
+    * 2a1. Amigos requests user to check input and reenter.
+    * 2a2. User corrects command (if desired), and keys in edited command.
+
+  Use case resumes at step 3.
+
+
+* 2b. Amigos detects that the user has not requested to edit a specific log.
+  * 2b1. Amigos clears the input and provides a list of all logs (their titles) and an accompanying index, asking the user to key in the index.
+  * 2b2. User keys in the index.
+
+  Use case resumes at step 3.
+
+
+* 2c. Amigos detects that an invalid format of the command has been keyed in.
+    * 2c1. Amigos clears the input and prompts the user with potential corrections, and requests for input.
+    * 2c2. User corrects command, and keys in edited command.
+
+    Use case resumes at step 3.
+
+
+
+* 2d. Amigos detects that user has requested for a pop-up window in the command.
+    * 2d1. Amigos creates a separate window, allowing for long-form text to be keyed in.
+    * 2d2. User keys in long form text into pop-up window in an appropriate format.
+    * 2d3. User confirms entry, closing the window.
+
+  Use case resumes at step 3.
+
+
+* 2e. Amigos detects that the requested friend has no logs to be edited.
+    * 2e1. Amigos clears the input and notifies the user that this friend has no logs to be edited.
 
   Use case ends.
 
-* 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+**Use case: L03 - Deleting a log/logs from a friend**
 
-      Use case resumes at step 2.
+**Guarantees:**
+* If successful, log will be deleted from friend and reflected in storage.
 
-*{More to be added}*
+**MSS**
+
+1. User decides to delete a log/logs in a specific friend.
+2. User keys in necessary details with the one-line command.
+3. Amigos clears the input and provides feedback of deletion success.
+
+   Use case ends.
+
+
+**Extensions**
+
+* 2a. Amigos finds no friend with the given name.
+    * 2a1. Amigos requests user to check input and reenter.
+    * 2a2. User corrects command (if desired), and keys in edited command.
+
+  Use case resumes at step 3.
+
+
+* 2b. Amigos detects that the user has not requested to delete a specific log.
+  * 2b1. Amigos clears the input and lists all logs of the friend with an index.
+  * 2b2. User keys in index, and deletes the log.
+
+  Use case resumes at step 3.
+
+
+* 2c. Amigos detects User has requested to delete all logs of all friends.
+  * 2c1. All logs in all friend are deleted.
+
+  Use case resumes at step 3.
+
+
+* 2d. Amigos detects that User has requested to delete all logs of a friend.
+  * 2d1. Amigos deletes all logs of the friend.
+
+  Use case resumes at step 3.
+
+
+* 2e. Amigos detects an invalid combination of arguments.
+  * 2e1. Amigos clears the input and requests the user to check input and reenter if necessary.
+
+* 2f. Amigos detects that the requested friend has no logs.
+    * 2f1. Amigos clears the input and notifies the user that this friend has no logs to be deleted.
+
+  Use case ends.
+
+**Use Case: E01 - Adding a new event**
+
+**Preconditions**: User can remember the event details they want. (e.g. names of friends to add)
+
+**Guarantees**: A new event will be created in Amigos, as long as the command was executed successfully.
+
+**MSS**:
+1. User chooses to add a new event, entering the details accordingly.
+2. System applies the change and reflects the new event details to the user.
+3. System clears the user input.
+
+   Use case ends.
+
+**Extensions**:
+* 1a. System detects an issue in the given input. (e.g. missing/wrong flag, wrong formatting)
+    * 1a1. System displays the error feedback to the user. 
+    * 1a2. User edits and resends the input to the system. 
+    
+  Use case resumes at 1 but may reach 1a again if the input remains erroneous.
+
+
+* 1b. System detects that an event with the same details already exists. 
+  * 1b1. System displays the duplicate event to the user and the corresponding error message. 
+  * 1b2. User cancels the operation.
+
+  Use case ends.
+
+
+* 3a. User realises they made a mistake in the event details. 
+  * 3a1. User <u>edits the event details (E02)</u>.
+  
+  Use case ends.
+       
+**Use Case: E02 - Editing an existing event**
+   
+**Preconditions**: The event has already been created, and the user can remember what they want to change the event details to.
+   
+**Guarantees**: An existing event will be edited, as long as the command is executed successfully.
+   
+**MSS**:
+   1. User chooses to search for the details of a specific event.
+   2. System shows the search results to the user.
+   3. User edits the details of an existing event through the system input.
+   4. System applies the change and reflects the updated event details to the user.
+   5. System clears the user input.
+
+      Use case ends.
+   
+**Extensions:**
+   * 3a. System detects an issue in the given input (e.g. missing/wrong flag, wrong formatting).
+     * 3a1. System displays the error feedback to the user.
+     * 3a2. User resends the command to the system.
+     
+     Use case resumes at 3 but may reach 3a again if the command remains erroneous.
+     
+
+   * 3b. System detects that an event with the same details already exists. 
+     * 3b1. System displays the duplicate event to the user and the corresponding error message. 
+     * 3b2. User cancels the operation.
+     
+     Use case ends.
+
+**Use case: E03 - Checking all events**
+
+**Guarantees**
+
+* If any events exist within the system they will be displayed.
+
+**MSS**
+
+1. User requests to show all events
+2. Amigos switches the GUI to the events tab and displays all possible events.
+    
+   Use case ends.
+
+**Extensions**
+* 2a. There are no events to show.
+    * 2a1. Amigos displays an empty interface with the message “No events”.
+    
+    Use case ends.
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold up to 200 friends with up to 100 events/logs per person without a noticeable sluggishness in performance for typical usage (time taken to process any one command is 1 second at most).
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. The project only supports managing of the user friendships and not other types of relationships.
+5. The application should work with different screen sizes, resolutions and window sizes.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Log**: Details of interaction between user and friend
+* **Event**: Upcoming meeting/ date of significance for a friend
 
 --------------------------------------------------------------------------------------------------------------------
 
