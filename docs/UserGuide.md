@@ -143,6 +143,17 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Deleting all filtered people : `deleteFiltered`
+
+Deletes the specified people from the address book.
+
+Format: `deleteFiltered`
+
+* Deletes the people filtered after using the find function.
+
+Examples:
+* `find Bob` followed by `deleteFiltered` deletes all people named Bob.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -187,6 +198,7 @@ Action | Format, Examples
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
+**DeleteFiltered** | `deleteFiltered`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
