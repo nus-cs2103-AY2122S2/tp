@@ -9,34 +9,34 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Aryan Sarswat
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/aryansarswat.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/AryanSarswat)]
+[[portfolio](team/aryansarswat.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Documentation (Developer Guide, User Guide[Show features])
+
+### Dione Goh
+
+<img src="images/dionegoh.png" width="200px">
+
+[[github](http://github.com/dionegoh)]
+[[portfolio](team/dionegoh.md)]
+
+* Role: Developer
+* Responsibilities: [to be discussed]
+
+### Lim Wei Liang
+
+<img src="images/limweiliang.png" width="200px">
+
+[[github](http://github.com/limweiliang)] [[portfolio](team/limweiliang.md)]
+
+* Role: Developer
+* Responsibilities: [To be discussed]
 
 ### Naaman Tan
 
