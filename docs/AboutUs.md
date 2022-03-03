@@ -9,25 +9,15 @@ You can reach us at the email `(placeholder for email address)`
 
 ## Project team
 
-### John Doe
+### Dominic Lim
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/domlimm.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/domlimm)]
+[[portfolio](team/domlimm.md)]
 
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer
+* Responsibilities: Integration, Testing
 
 ### Charmaine Ho
 
@@ -36,7 +26,7 @@ You can reach us at the email `(placeholder for email address)`
 [[github](http://github.com/charmainehly)] [[portfolio](team/charmainehly.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Scheduling & Tracking, Testing
 
 ### Lee En En
 
@@ -56,7 +46,7 @@ You can reach us at the email `(placeholder for email address)`
 [[portfolio](team/tiewweijian.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Code Quality, UI
 
 ### Ho Lanzan
 
