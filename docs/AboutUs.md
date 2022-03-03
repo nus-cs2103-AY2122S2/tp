@@ -40,7 +40,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Ryan Walter Lee
 
-<img src="images/RyanWalterLee.png" width="200px">
+<img src="images/ryanwalterlee.png" width="200px">
 
 [[github](http://github.com/ryanwalterlee)]
 [[portfolio](team/ryanwalterlee.md)]
