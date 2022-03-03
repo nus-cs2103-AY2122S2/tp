@@ -109,13 +109,6 @@ Examples:
 
 Shows page containing the full details related to an existing friend in the address book. By default, only the latest 10 logs are displayed in this page.
 
-### Show all friends : `showfriends`
-
-Shows all friends in the address book. Switches GUI to the friends tab.
-
-Format: `showfriends`
-
-
 Format: `showfriend n/NAME -alllogs`
 
 * NAME field **must** be provided.
@@ -124,6 +117,13 @@ Format: `showfriend n/NAME -alllogs`
 Examples:
 * `showfriend n/John Doe` Will open up the page containing full details related to John Doe - his name, address, phone number, email, description, logs, and upcoming events with him.
 * `showfriend n/John Doe -alllogs` Will do the same as above except every single log will be displayed
+
+### Show all friends : `showfriends`
+
+Shows all friends in the address book. Switches GUI to the friends tab.
+
+Format: `showfriends`
+
 
 ## Logs management
 Amigos provides functionality to manage logs, which are essentially detailed notes about a specific friend.
