@@ -33,14 +33,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/kahleongq.png" width="200px">
 
-[[github](http://github.com/kahleongq)] [[portfolio](team/kahleongq.md)]
+[[github](http://github.com/kahleongq)] 
+[[portfolio](team/kahleongq.md)]
 
 * Role: Testing
 * Responsibilities: Ensures tests are done correctly and on time.
 
 ### KRISTOPHER PUTRA TASLIM
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kristopherptaslim.png" width="200px">
 
 [[github](http://github.com/johndoe)]
 [[portfolio](team/punpun1643.md)]
@@ -50,7 +51,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### LOW LIK HERN
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/likhern.png" width="200px">
 
 [[github](http://github.com/johndoe)]
 [[portfolio](team/punpun1643.md)]
