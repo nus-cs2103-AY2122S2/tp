@@ -1,14 +1,20 @@
 package seedu.address.model.person;
 
 import seedu.address.model.tag.Tag;
-
 import java.util.Objects;
 import java.util.Set;
 
+/**
+ * Represents a Student in the address book.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 public class Student extends Person {
 
     private final Group group;
 
+    /**
+     * Every field must be present and not null.
+     */
     public Student(Name name, Phone phone, Email email, Set<Tag> tags, Group group) {
         super(name, phone, email, tags);
         this.group = group;

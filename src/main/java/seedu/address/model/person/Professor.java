@@ -1,14 +1,20 @@
 package seedu.address.model.person;
 
 import seedu.address.model.tag.Tag;
-
 import java.util.Objects;
 import java.util.Set;
 
+/**
+ * Represents a Professor in the address book.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 public class Professor extends Person {
 
     private final Office office;
 
+    /**
+     * Every field must be present and not null.
+     */
     public Professor(Name name, Phone phone, Email email, Set<Tag> tags, Office office) {
         super(name, phone, email, tags);
         this.office = office;
