@@ -56,5 +56,5 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Integration + Documentation + Deliverables and Deadlines  
+* Responsibilities: Integration, Documentation, Deliverables and Deadlines  
 * In Charge of Component Model
