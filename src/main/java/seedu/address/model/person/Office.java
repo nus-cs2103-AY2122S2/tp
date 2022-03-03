@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Professor's Office in the address book.
+ * Represents a Professor's Office in the UniBook.
  * Guarantees: immutable; is valid as declared in {@link #isValidOffice(String)}
  */
 public class Office {

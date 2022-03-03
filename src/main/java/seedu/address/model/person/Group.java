@@ -3,6 +3,10 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a Student's Group in the UniBook.
+ * Guarantees: immutable; is valid as declared in {@link #isValidGroup(String)}
+ */
 public class Group {
 
     public static final String MESSAGE_CONSTRAINTS = "Group can take any values";
