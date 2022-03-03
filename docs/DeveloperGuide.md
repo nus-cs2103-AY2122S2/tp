@@ -311,9 +311,50 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. Amigos displays the existing friend with the same name and the corresponding error message.
     * 1a2. Amigos clears the user input.
 
-    Use case ends 
+    Use case ends
 
-**Use case: F02 - Delete a friend**
+
+**Use case: F02 - Edit a friend**
+
+**Guarantees**
+* The field(s) of an existing friend will be updated only if the user input is valid.
+
+**MSS**
+
+1.  User requests to list friends.
+2.  Amigos shows a list of friends.
+3.  User requests to edit details of a specific friend in the list.
+4.  Amigos edits the details of the friend accordingly and clears user input.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+    * Use case ends.
+
+
+* 3a. No name is entered by the user.
+    * 3a1. Amigos requests user to enter a name.
+    * 3a2. User reenters the command along with a valid name and other relevant fields (at least one) to edit.
+
+  Use case resumes at step 4 if newly-entered user input is valid, otherwise it may reach 3a/3b/3c again.
+
+
+* 3b. Amigos finds no contact with the given name.
+    * 3b1. Amigos requests user to check input and reenter.
+    * 3b2. User reenters the command along with a valid name and other relevant fields (at least one) to edit.
+
+  Use case resumes at step 4 if newly-entered user input is valid, otherwise it may reach 3a/3b/3c again.
+
+
+* 3c. A valid name is entered by user but no fields to edit are given.
+    * 3c1. Amigos requests user to enter at least one field to edit.
+    * 3c2. User reenters command and name, along with at least one field to edit.
+
+  Use case resumes at step 4 if newly-entered user input is valid, otherwise it may reach 3a/3b/3c again.
+
+**Use case: F03 - Delete a friend**
 
 **Guarantees** 
 * An existing friend in Amigos will be deleted only if the name input matches that of an existing friend in Amigos.
@@ -351,46 +392,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 4 if newly-entered user input is valid, otherwise it may reach 3a/3b again.
 
-
-**Use case: F03 - Edit a friend**
-
-**Guarantees**
-* The field(s) of an existing friend will be updated only if the user input is valid.
-
-**MSS**
-
-1.  User requests to list friends.
-2.  Amigos shows a list of friends.
-3.  User requests to edit details of a specific friend in the list.
-4.  Amigos edits the details of the friend accordingly and clears user input. 
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-    * Use case ends.
-
-
-* 3a. No name is entered by the user.
-    * 3a1. Amigos requests user to enter a name.
-    * 3a2. User reenters the command along with a valid name and other relevant fields (at least one) to edit.
-
-    Use case resumes at step 4 if newly-entered user input is valid, otherwise it may reach 3a/3b/3c again.
-    
-
-* 3b. Amigos finds no contact with the given name.
-    * 3b1. Amigos requests user to check input and reenter.
-    * 3b2. User reenters the command along with a valid name and other relevant fields (at least one) to edit. 
-
-    Use case resumes at step 4 if newly-entered user input is valid, otherwise it may reach 3a/3b/3c again.
-    
-
-* 3c. A valid name is entered by user but no fields to edit are given.  
-    * 3c1. Amigos requests user to enter at least one field to edit.
-    * 3c2. User reenters command and name, along with at least one field to edit.
-  
-    Use case resumes at step 4 if newly-entered user input is valid, otherwise it may reach 3a/3b/3c again.
 
 **Use case: F04 - Checking details of a friend**
 
