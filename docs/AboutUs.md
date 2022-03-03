@@ -18,41 +18,22 @@ We are a team based in the [School of Computing, National University of Singapor
 
 * Role: Team Lead & Integration
 
-### Jane Doe
+### Channe Chwa
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/channne.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/channne)]
+[[portfolio](team/channne.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Documentation, Testing
 
-### Jean Doe
+### Ryan Tan Gee Teng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/RyanTan.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[github](http://github.com/geetengtan)
+[portfolio](team/johndoe.md)
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Code Quality, Deliverables and deadlines
