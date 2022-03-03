@@ -8,11 +8,11 @@ title: TAlent Assistant™
 
 ![Ui](images/Ui.png)
 
-**AddressBook is a desktop application for managing your contact details.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
+**TAlent Assistant™ is a desktop application used by professors to schedule interviews and
+keep track of applications for teaching assistants.**
 
-* If you are interested in using AddressBook, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
-* If you are interested about developing AddressBook, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
-
+* If you are interested in using TAlent Assistant™, head over to the (placeholder for link to _Quick Start_ section of the **User Guide**).
+* If you are interested about developing TAlent Assistant™, the (placeholder for link to **Developer Guide**) is a good place to start.
 
 **Acknowledgements**
 
