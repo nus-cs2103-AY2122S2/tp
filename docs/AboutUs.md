@@ -26,7 +26,7 @@ You can reach us at the email `(placeholder for email address)`
 [[github](http://github.com/charmainehly)] [[portfolio](team/charmainehly.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Scheduling & Tracking, Testing
 
 ### Lee En En
 
@@ -46,7 +46,7 @@ You can reach us at the email `(placeholder for email address)`
 [[portfolio](team/tiewweijian.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Code Quality, UI
 
 ### Ho Lanzan
 
