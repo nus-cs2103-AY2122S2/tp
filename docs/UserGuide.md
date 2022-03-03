@@ -109,23 +109,25 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Locating applicants by keyword search: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds and lists TAs whose attribute fields contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find k/KEYWORD [k/MORE_KEYWORDS] f/ATTRIBUTE_FIELD`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The search will return a list of all TAs containing any of the specified keyword(s) in the specified attribute field.
+* For `f/all`, the search will find keywords across all attribute fields of the TA records.
+* Only full keywords will be matched
+  e.g. `k/jane doe f/name` will not match TAs with name `jane koe` or just `jane`
+* TAs matching at least one full keyword (in the specified attribute field) will be returned i.e. OR search,
+  e.g. `k/Jane k/Doe f/name` will return TAs with name e.g. `Jane Koe`, `John Doe`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find k/Jane f/name` returns TAs with name e.g. `jane` and `jane doe`
+* `find k/Computer Science f/course` returns TAs with the course field e.g. recorded as `computer science`
+* `find k/Jane k/Tan f/name` returns TAs with name e.g. `Jane`, `tan` and `John Tan`
+
 
 ### Deleting a TA : `delete`
 
@@ -181,10 +183,10 @@ _Details coming soon ..._
 
 | Action     | Format, Examples                                                                                                                                                      |
 |------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Add**    | `add [NUMBER_OF_ENTRIES]`                                                                                                                                             |
 | **Clear**  | `clear`                                                                                                                                                               |
 | **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
 | **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
+| **Find**   | `find k/[KEYWORD] [k/MORE_KEYWORDS] f/[ATTRIBUTE_FIELD]`<br> e.g., `find k/Jane k/Doe f/name`                                                                         |
 | **List**   | `list`                                                                                                                                                                |
 | **Help**   | `help`                                                                                                                                                                |
