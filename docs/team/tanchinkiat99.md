@@ -13,7 +13,6 @@ Given below are my contributions to the project.
     * What it does: allows the user to add the details of a student.
     * Justification: This feature is fundamental to the product because a user can add the details of a new student.
     * Highlights: This enhancement increases the ease of adding entries. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-    * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
 
 * **New Feature**: Added a filter command that allows the user to retrieve certain entries using a filter.
 
