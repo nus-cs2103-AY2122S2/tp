@@ -42,7 +42,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/denniszedead.png" width="200px">
 
-[[github](http://github.com/denniszedead)
+[[github](http://github.com/denniszedead)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
