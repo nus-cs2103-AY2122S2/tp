@@ -19,21 +19,20 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Angie
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/lapisraider.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/LapisRaider)][[portfolio](team/lapisraider.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Project Manager, Coder 
 
 ### Keith
 
 <img src="images/keithczw.png" width="200px">
 
-[[github](http://github.com/keithczw)] [[portfolio](team/keithczw.md)]
+[[github](http://github.com/keithczw)][[portfolio](team/keithczw.md)]
 
 * Role: Developer
 * Responsibilities: Data
