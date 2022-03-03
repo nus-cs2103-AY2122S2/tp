@@ -57,6 +57,25 @@ Amigos is a desktop application to help tech-savvy university students manage th
 
 </div>
 
+### Show all friends : `showfriends`
+
+Shows all friends in the address book. Switches GUI to the friends tab.
+
+Format: `showfriends`
+
+### Show a specific friend: `showfriend`
+
+Shows page containing the full details related to an existing friend in the address book. By default, only the latest 10 logs are displayed in this page.
+
+Format: `showfriend n/NAME -alllogs`
+
+* NAME field **must** be provided.
+* If the `-alllogs` flag is provided all the logs contained in that person will be displayed instead of the default 10 logs.
+
+Examples:
+* `showfriend n/John Doe` Will open up the page containing full details related to John Doe - his name, address, phone number, email, description, logs, and upcoming events with him.
+* `showfriend n/John Doe -alllogs` Will do the same as above except every single log will be displayed
+
 ## Logs management
 Amigos provides functionality to manage logs, which are essentially detailed notes about a specific friend.
 
@@ -107,24 +126,48 @@ Format: `deletelog n/[NAME] id/[LOG_INDEX] -a`
 * If no `NAME` or `LOG_INDEX` is provided, but `-a` is provided, then all possible logs
   of all friends will be deleted.
 
-### Show all friends : `showfriends`
+## Event Management [Coming Soon!]
+Amigos also allows you to keep track of your social events!
+![Events Page](images/EventPage.png)
 
-Shows all friends in the address book. Switches GUI to the friends tab.
+### Creating an event: `addevent`
+Adds a new event, which can be optionally linked to existing friends.
 
-Format: `showfriends`
+**Format**: `addevent n/{EVENT_NAME} dt/{DATE_TIME} dd/{DESCRIPTION} f/{FRIEND_NAME1, FRIEND_NAME2…}`
 
-### Show a specific friend: `showfriend`
+* The `EVENT_NAME` and `DATE_TIME` fields are **compulsory**, while the remaining fields are **optional**.
+* There **cannot** be any duplicate events with the same name and date.
 
-Shows page containing the full details related to an existing friend in the address book. By default, only the latest 10 logs are displayed in this page.
+**Examples**:
+* `addevent n/John’s Birthday dt/15-08-2021 1700 dd/Remember to get a present! f/John, Abe, Bob`
+* `addevent n/Christmas Party dt/25-12-2022`
 
-Format: `showfriend n/NAME -alllogs`
+### Editing an event: `editevent`
+Edits an existing event.
 
-* NAME field **must** be provided.
-* If the `-alllogs` flag is provided all the logs contained in that person will be displayed instead of the default 10 logs.
+**Format**: `editevent n/{EVENT_NAME} dt/{DATE} nn/{NEW_EVENT_NAME} ndt/{NEW_DATE_TIME} ndd/{NEW_DESCRIPTION}  af/{ADD_FRIEND_NAME1, ADD_FRIEND_NAME2…} rf/{REMOVE_FRIEND_NAME1, REMOVE_FRIEND_NAME2…}`
 
-Examples:
-* `showfriend n/John Doe` Will open up the page containing full details related to John Doe - his name, address, phone number, email, description, logs, and upcoming events with him.
-* `showfriend n/John Doe -alllogs` Will do the same as above except every single log will be displayed
+* The `EVENT_NAME` and `DATE` fields are **compulsory** and uniquely identify the event to be edited.
+* The `NEW_EVENT_NAME`, `NEW_DATE_TIME` and `NEW_DESCRIPTION` arguments are **optional**. If provided, they directly overwrite the existing details.
+* The `ADD_FRIEND_NAME` and `REMOVE_FRIEND_NAME` arguments are also **optional** and add/remove friends tied to the event respectively.
+
+**Examples**:
+* `editevent n/John’s Birthday dt/15-08-2021 ndt/16-08-2021 1600 af/Bob rf/Sarah, Edison`
+
+### Deleting events: `deleteevent`
+Delete existing event(s).
+
+**Format**: `deleteevent n/{EVENT_NAME} dt/{DATE} -a`
+
+* When at least one of `EVENT_NAME` and `DATE` are provided:
+  * If only a single event matches the argument(s), it will be deleted.
+  * If multiple events match the argument(s), the `-a` flag is required for all to be deleted.
+* If only the `-a` flag is given, all events will be cleared.
+
+**Examples**:
+* `deleteevent n/John’s Birthday dt/15-08-2021`
+* `deleteevent n/Weekly Boardgames -a`
+* `deleteevent -a`
 
 ### Show all events : `showevents`
 
@@ -136,7 +179,6 @@ Examples:
 * `deletelog n/John Doe id/1`
 * `deletelog n/John Doe -a `
 * `deletelog -a`
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -148,11 +190,14 @@ Examples:
 
 ## Command summary
 
-| Action                     | Format, Examples                                                      |
-|----------------------------|-----------------------------------------------------------------------|
-| **Add log**                | `addlog n/[NAME] t/[TITLE] d/[DESCRIPTION]`                           |
-| **Edit log**               | `editlog n/[NAME] id/[LOG_INDEX] nt/[NEW_TITLE] nd/[NEW_DESCRIPTION]` |
-| **Delete log**             | `deletelog n/[NAME] id/[LOG_INDEX] -a`                                |
-| **Show all friends**       | `showfriends`                                                         |
-| **Show a specific friend** | `showfriend n/NAME -alllogs`                                          |
-| **Show all events**        | `showevents`                                                          |
+| Action                     | Format, Examples                                                                                                                                                                                                                                                                               |
+|----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add log**                | `addlog n/[NAME] t/[TITLE] d/[DESCRIPTION]`                                                                                                                                                                                                                                                    |
+| **Edit log**               | `editlog n/[NAME] id/[LOG_INDEX] nt/[NEW_TITLE] nd/[NEW_DESCRIPTION]`                                                                                                                                                                                                                          |
+| **Delete log**             | `deletelog n/[NAME] id/[LOG_INDEX] -a`                                                                                                                                                                                                                                                         |
+| **Add Event**              | `addevent n/{EVENT_NAME} dt/{DATE_TIME} dd/{DESCRIPTION} f/{FRIEND_NAME1, FRIEND_NAME2…}` <br> e.g.,`addevent n/John’s Birthday dt/15-08-2021 1700 dd/Remember to get a present! f/John, Abe, Bob`                                                                                             |
+| **Edit Event**             | `editevent n/{EVENT_NAME} dt/{DATE} nn/{NEW_EVENT_NAME} ndt/{NEW_DATE_TIME} ndd/{NEW_DESCRIPTION}  af/{ADD_FRIEND_NAME1, ADD_FRIEND_NAME2…} rf/{REMOVE_FRIEND_NAME1, REMOVE_FRIEND_NAME2…}` <br> e.g., `editevent n/John’s Birthday dt/15-08-2021 ndt/16-08-2021 1600 af/Bob rf/Sarah, Edison` |
+| **Delete Event**           | `deleteevent n/{EVENT_NAME} dt/{DATE} -a` <br> e.g., `deleteevent n/John’s Birthday dt/15-08-2021` <br> e.g., `deleteevent n/Weekly Boardgames -a`                                                                                                                                             |
+| **Show all friends**       | `showfriends`                                                                                                                                                                                                                                                                                  |
+| **Show a specific friend** | `showfriend n/NAME -alllogs`                                                                                                                                                                                                                                                                   |
+| **Show all events**        | `showevents`                                                                                                                                                                                                                                                                                   |
