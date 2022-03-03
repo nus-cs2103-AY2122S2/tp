@@ -4,15 +4,15 @@
 
 ![Ui](docs/images/Ui.png)
 
-Are you a real estate agent looking to level up your productivity & workflow? 
+Are you a real estate agent looking to level up your productivity & workflow?
 
-Do you need a centralized workspace to keep track of your clients, properties & close deals in a more efficient manner? 
-Then look no further! RealEstatePro is just the app **you** need! 
+Do you need a centralized workspace to keep track of your clients, properties & close deals in a more efficient manner?
+Then look no further! RealEstatePro is just the app **you** need!
 
-RealEstatePro helps you to: 
-* Input clients' details: phone number, address, & whether they're looking to buy or sell a property 
-* Match potential buyers & sellers, based on their property preferences 
+RealEstatePro helps you to:
+* Input clients' details: phone number, address, & whether they're looking to buy or sell a property
+* Match potential buyers & sellers, based on their property preferences
 
-## Acknowledgements 
+## Acknowledgements
 * RealEstatePro is adapted from the AddressBook-Level3 project created by the SE-EDU initiative.
 * Libraries used: [JavaFX](https://openjfx.io/)
