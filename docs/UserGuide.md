@@ -14,7 +14,7 @@ ArchDuke is a **desktop app for managing contacts, optimized for use via a Comma
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `archduke.jar` from [here](https://github.com/AY2122S2-CS2103-W16-3/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your ArchDuke.
 
@@ -28,7 +28,7 @@ ArchDuke is a **desktop app for managing contacts, optimized for use via a Comma
 
    * **`add`**`n/John Doe p/12345678 e/johndoe@u.nus.edu a/Y2 Computer Science [t/optional]` : Adds a contact named `John Doe` to ArchDuke.
 
-   * **`clear`** : Deletes all contacts.
+   * **`clear`** : Deletes all student contacts.
 
    * **`exit`** : Exits the app.
 
@@ -96,7 +96,7 @@ There is no need to save manually.
 Adds a student contact information to the address book. `add` must be followed by the student’s name, 
 phone number, email, and academic major. Tag is optional.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ACADEMIC MAJOR [t/TAG]`
 
 <div markdown="block" class="alert alert-info">
 
@@ -220,7 +220,7 @@ Expected outcome:
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file 
-that contains the data of your previous AddressBook home folder.
+that contains the data of your previous ArchDuke home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -239,7 +239,7 @@ Action | Format, Examples
 
 Action | Format, Examples
 --------|------------------
-**Add student contact information** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]` <br> e.g., `add n/John Doe p/12345678 e/johndoe@u.nus.edu a/Y2 Computer Science [t/optional]`
+**Add student contact information** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ACADEMIC MAJOR [t/TAG]` <br> e.g., `add n/John Doe p/12345678 e/johndoe@u.nus.edu a/Y2 Computer Science [t/optional]`
 
 ### Student group management
 
