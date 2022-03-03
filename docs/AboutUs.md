@@ -21,13 +21,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Raja Dishafnya Achadi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/rdac0.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/punpun1643.md)]
+[[github](http://github.com/Rdac0)]
+[[portfolio](team/rdac0.md)]
 
-* Role: TBC
-* Responsibilities: TBC
+* Role: Developer
+* Responsibilities: Code Quality and Documentation
 
 ### QUEK KAH LEONG
 
