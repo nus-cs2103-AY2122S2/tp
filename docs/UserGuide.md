@@ -86,9 +86,9 @@ You can add any number of TAs in.
 Examples:
 * `[add 2] Adds 2 TAs. System will ask for TA’s details a field at a time, and repeat for the next entry.`
 
-### Listing all persons : `list`
+### Listing all Teaching Assistants : `list`
 
-Shows a list of all persons in the address book.
+Displays all TAs found in the system.
 
 Format: `list`
 
