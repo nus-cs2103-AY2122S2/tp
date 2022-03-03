@@ -392,6 +392,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
     Use case resumes at step 4 if newly-entered user input is valid, otherwise it may reach 3a/3b/3c again.
 
+**Use case: F04 - Checking details of a friend**
+
+**MSS**
+
+1. User requests to see all friends in Amigos
+2. Amigos switches the GUI to the friends tab.
+3. Amigos displays all possible friends.
+4. User requests to view full details of a particular friend.
+5. Amigos displays a page containing the full details of that particular friend accompanied by some logs.
+
+Use case ends
+
+**Extensions**
+* 3a. There are no existing friends.
+    * 3a.1 Amigos displays an empty interface with the message “No friends yet”.
+
+      Use case ends
+  
+* 4a. User wants to see all the logs of a person
+    * 4a.1 Amigos displays a page containing the full details of that friend accompanied by all the logs
+
+  Use Case ends
+
 **Use case: L01 - Adding a new log to a friend**
 
 **Guarantees:**
@@ -429,7 +452,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
   Use case resumes at step 3.
   
-
 
 **Use case: L02 - Editing a log of a single friend**
 
@@ -534,6 +556,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2f1. Amigos clears the input and notifies the user that this friend has no logs to be deleted.
 
   Use case ends.
+
+**Use case: E01 - Checking all events**
+
+**Guarantees**
+
+* If any events exist within the system they will be displayed.
+
+**MSS**
+
+1. User requests to show all events
+2. Amigos switches the GUI to the events tab.
+3. Amigos displays all possible events.
+    
+   Use case ends.
+
+**Extensions**
+* 3a. There are no events to show.
+    * 3a1. Amigos displays an empty interface with the message “No events”.
+    
+    Use case ends.
 
 ### Non-Functional Requirements
 
