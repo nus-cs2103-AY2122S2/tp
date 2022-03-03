@@ -324,7 +324,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list is empty.
     * Use case ends.
 
-
 * 2b. User requests to delete all friends.
    * 2b1. Amigos deletes all friends and clears the user input.
    
@@ -384,6 +383,149 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3c2. User reenters command and name, along with at least one field to edit.
   
     Use case resumes at step 4 if newly-entered user input is valid, otherwise it may reach 3a/3b/3c again.
+
+**Use case: L01 - Adding a new log to a friend**
+
+**Guarantees:**
+* If successful, log will be added to friend details and saved in storage.
+
+**MSS**
+
+
+1. User decides to add a new log to a specific friend. 
+2. User keys in necessary details with the one-line command 
+3. Amigos displays the friend and the specific log, and clears the input
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Amigos finds no friend with the given name.
+  * 2a1. Amigos clears the input, and requests user to check input and reenter.
+  * 2a2. User corrects command, and keys in edited command.
+
+  Use case resumes at step 3.
+
+
+* 2b. Amigos detects that user has requested for a pop-up window in the command.
+  * 2b1. Amigos creates a separate window, allowing for long-form text to be keyed in.
+  * 2b2. User keys in long form text into pop-up window, with first line as title.
+  * 2b3. User confirms entry, closing the window.
+
+  Use case resumes at step 3.
+
+
+* 2d. Amigos detects that an invalid format of the command has been keyed in.
+  * 2d1. Amigos clears the input and prompts the user with potential corrections, and requests for input.
+  * 2d2. User corrects command, and keys in edited command.
+  
+  Use case resumes at step 3.
+  
+
+
+**Use case: L02 - Editing a log of a single friend**
+
+**Guarantees:**
+* If successful, specified log will be overwritten and saved in storage.
+
+
+**MSS**
+
+
+1. User decides to edit a log in a specific friend. 
+2. User keys in necessary details with the one-line command. 
+3. Amigos clears the input and displays the friend and the specific log.
+
+    Use case ends.
+
+
+**Extensions**
+
+* 2a. Amigos finds no friend with the given name.
+    * 2a1. Amigos requests user to check input and reenter.
+    * 2a2. User corrects command (if desired), and keys in edited command.
+
+  Use case resumes at step 3.
+
+
+* 2b. Amigos detects that the user has not requested to edit a specific log.
+  * 2b1. Amigos clears the input and provides a list of all logs (their titles) and an accompanying index, asking the user to key in the index.
+  * 2b2. User keys in the index.
+
+  Use case resumes at step 3.
+
+
+* 2c. Amigos detects that an invalid format of the command has been keyed in.
+    * 2c1. Amigos clears the input and prompts the user with potential corrections, and requests for input.
+    * 2c2. User corrects command, and keys in edited command.
+
+    Use case resumes at step 3.
+
+
+
+* 2d. Amigos detects that user has requested for a pop-up window in the command.
+    * 2d1. Amigos creates a separate window, allowing for long-form text to be keyed in.
+    * 2d2. User keys in long form text into pop-up window in an appropriate format.
+    * 2d3. User confirms entry, closing the window.
+
+  Use case resumes at step 3.
+
+
+* 2e. Amigos detects that the requested friend has no logs to be edited.
+    * 2e1. Amigos clears the input and notifies the user that this friend has no logs to be edited.
+
+  Use case ends.
+
+
+**Use case: L03 - Deleting a log/logs from a friend**
+
+**Guarantees:**
+* If successful, log will be deleted from friend and reflected in storage.
+
+**MSS**
+
+1. User decides to delete a log/logs in a specific friend.
+2. User keys in necessary details with the one-line command.
+3. Amigos clears the input and provides feedback of deletion success.
+
+   Use case ends.
+
+
+**Extensions**
+
+* 2a. Amigos finds no friend with the given name.
+    * 2a1. Amigos requests user to check input and reenter.
+    * 2a2. User corrects command (if desired), and keys in edited command.
+
+  Use case resumes at step 3.
+
+
+* 2b. Amigos detects that the user has not requested to delete a specific log.
+  * 2b1. Amigos clears the input and lists all logs of the friend with an index.
+  * 2b2. User keys in index, and deletes the log.
+
+  Use case resumes at step 3.
+
+
+* 2c. Amigos detects User has requested to delete all logs of all friends.
+  * 2c1. All logs in all friend are deleted.
+
+  Use case resumes at step 3.
+
+
+* 2d. Amigos detects that User has requested to delete all logs of a friend.
+  * 2d1. Amigos deletes all logs of the friend.
+
+  Use case resumes at step 3.
+
+
+* 2e. Amigos detects an invalid combination of arguments.
+  * 2e1. Amigos clears the input and requests the user to check input and reenter if necessary.
+
+* 2f. Amigos detects that the requested friend has no logs.
+    * 2f1. Amigos clears the input and notifies the user that this friend has no logs to be deleted.
+
+  Use case ends.
 
 ### Non-Functional Requirements
 
