@@ -257,10 +257,10 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* tech savy university students
+* tech-savvy university students
 * prefer desktop apps over other types
-* can type fast and have plenty of experience with CLI application
-* is often busy and struggle to manage important details about their relationships
+* can type fast and has plenty of experience with CLI application
+* is often busy and struggles to manage important details about their relationships
 
 **Value proposition**: The program will help busy university students to manage their friendships by keeping track of important details. An example of possible features include the tracking of birthdays, money owed, upcoming meetings etc. and providing relevant reminders, in addition to basic functionalities.
 
@@ -321,9 +321,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2. Should be able to hold up to 200 friends with up to 100 events/logs per person without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 200 friends with up to 100 events/logs per person without a noticeable sluggishness in performance for typical usage (time taken to process any one command is 1 second at most).
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. The project only supports managing of the user friendships and not other types of relationships
+4. The project only supports managing of the user friendships and not other types of relationships.
+5. The application should work with different screen sizes, resolutions and window sizes.
 
 ### Glossary
 
