@@ -561,7 +561,69 @@ Use case ends
 
   Use case ends.
 
-**Use case: E01 - Checking all events**
+**Use Case: E01 - Adding a new event**
+
+**Preconditions**: User can remember the event details they want. (e.g. names of friends to add)
+
+**Guarantees**: A new event will be created in Amigos, as long as the command was executed successfully.
+
+**MSS**:
+1. User chooses to add a new event, entering the details accordingly.
+2. System applies the change and reflects the new event details to the user.
+3. System clears the user input.
+
+   Use case ends.
+
+**Extensions**:
+* 1a. System detects an issue in the given input. (e.g. missing/wrong flag, wrong formatting)
+    * 1a1. System displays the error feedback to the user. 
+    * 1a2. User edits and resends the input to the system. 
+    
+  Use case resumes at 1 but may reach 1a again if the input remains erroneous.
+
+
+* 1b. System detects that an event with the same details already exists. 
+  * 1b1. System displays the duplicate event to the user and the corresponding error message. 
+  * 1b2. User cancels the operation.
+
+  Use case ends.
+
+
+* 3a. User realises they made a mistake in the event details. 
+  * 3a1. User <u>edits the event details (E02)</u>.
+  
+  Use case ends.
+       
+**Use Case: E02 - Editing an existing event**
+   
+**Preconditions**: The event has already been created, and the user can remember what they want to change the event details to.
+   
+**Guarantees**: An existing event will be edited, as long as the command is executed successfully.
+   
+**MSS**:
+   1. User chooses to search for the details of a specific event.
+   2. System shows the search results to the user.
+   3. User edits the details of an existing event through the system input.
+   4. System applies the change and reflects the updated event details to the user.
+   5. System clears the user input.
+
+      Use case ends.
+   
+**Extensions:**
+   * 3a. System detects an issue in the given input (e.g. missing/wrong flag, wrong formatting).
+     * 3a1. System displays the error feedback to the user.
+     * 3a2. User resends the command to the system.
+     
+     Use case resumes at 3 but may reach 3a again if the command remains erroneous.
+     
+
+   * 3b. System detects that an event with the same details already exists. 
+     * 3b1. System displays the duplicate event to the user and the corresponding error message. 
+     * 3b2. User cancels the operation.
+     
+     Use case ends.
+
+**Use case: E03 - Checking all events**
 
 **Guarantees**
 
