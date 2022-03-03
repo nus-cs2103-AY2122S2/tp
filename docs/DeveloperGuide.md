@@ -285,30 +285,103 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `TAlent Assistant™ Program` and the **Actor** is the `professor`, unless specified otherwise)
 
-**Use case: Delete a person**
+> Note: TA - Teaching Assistant
+
+
+**Use case: List all TA applicants**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list TAs
+2.  TAlent Assistant™ shows all TAs
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The list is empty
+    * 2a1. TAlent Assistant™ feedbacks no TAs in system
 
-  Use case ends.
+      Use case ends.
 
-* 3a. The given index is invalid.
+<hr>
+
+**Use case: Adds a TA**
+
+**MSS**
+
+1.  User requests to add a TA
+2.  TAlent Assistant™ requests for TA's details
+3.  User inputs details
+4.  TAlent Assistant™ adds the new TA
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The given format is invalid.
 
     * 3a1. AddressBook shows an error message.
 
       Use case resumes at step 2.
+
+<hr>
+
+**Use case: Delete a TA**
+
+**MSS**
+
+1.  User requests to list TA applicants
+2.  TAlent Assistant™ shows the list of TA applicants
+3.  User requests to delete an existing TA from the list
+4.  TAlent Assistant™ deletes the TA from the list and displays the deleted entry
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The given reference, i.e. Student Number, is invalid.
+
+    * 3a1. TAlent Assistant™ shows an error message.
+
+  Use case resumes at step 2.
+
+<hr>
+
+**Use case: Find TAs**
+
+**MSS**
+
+1.  User requests to find TAs containing a specific keyword
+2.  TAlent Assistant™ returns list of TAs found with given keyword in specified attribute field
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. No TA applicant entries contain the given keyword
+    * 2a1. TAlent Assistant™ returns an empty list with zero search results
+
+    Use case ends.
+
+* 2b. The specified attribute field is invalid
+    * 2b1. TAlent Assistant™ returns an error message
+
+    Use case resumes at step 1.
+
+<hr>
+
+**Use case: List available commands**
+
+**MSS**
+
+1.  User requests to list available commands
+2.  TAlent Assistant™ returns list of commands detailing example usage
+
+    Use case ends.
+
 
 *{More to be added}*
 
@@ -324,6 +397,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **TA**: Teaching Assistant
 
 --------------------------------------------------------------------------------------------------------------------
 
