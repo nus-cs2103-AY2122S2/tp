@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -44,7 +42,7 @@ public class CompanyCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private FlowPane tags;
+    private FlowPane roleTags;
     @FXML
     private ListView<Role> rolesListView;
     @FXML
@@ -81,9 +79,12 @@ public class CompanyCard extends UiPart<Region> {
         rolesListView.setItems(rolesList);
         rolesListView.setCellFactory(listView -> new RoleListViewCell());
 
-        company.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        if (rolesList.isEmpty()) {
+            rolesListView.setManaged(false);
+        }
+
+        company.getRoleManager().getSetRoles().stream()
+                .forEach(roleTag -> roleTags.getChildren().add(new Label(roleTag.getName().fullName)));
     }
 
     /**

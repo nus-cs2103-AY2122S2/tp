@@ -337,12 +337,12 @@
     -fx-background-radius: 0;
 }
 
-#tags {
+#roleTags {
     -fx-hgap: 7;
     -fx-vgap: 3;
 }
 
-#tags .label {
+#roleTags .label {
     -fx-text-fill: white;
     -fx-background-color: #3e7b91;
     -fx-padding: 1 3 1 3;
