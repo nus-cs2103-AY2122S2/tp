@@ -1,9 +1,9 @@
 ---
 layout: page
-title: AddressBook Level-3
+title: ArchDuke
 ---
 
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
+[![CI Status](https://github.com/AY2122S2-CS2103-W16-3/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S2-CS2103-W16-3/tp/actions)
 [![codecov](https://codecov.io/gh/AY2122S2-CS2103-W16-3/tp/branch/master/graph/badge.svg?token=NE5W6VTRJD)](https://codecov.io/gh/AY2122S2-CS2103-W16-3/tp)
 
 ![Ui](images/Ui.png)
