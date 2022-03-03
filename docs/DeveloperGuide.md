@@ -333,7 +333,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Student contact**: A contact of a student
 * **Task**: A piece of work to be done or undertaken by student contacts.
-* **Tag**: An optional 1 word identifier of a student contact. A student contact can have multiple tags.
+* **Tag**: An optional one-word identifier of a student contact. A student contact can have multiple tags.
 * **Student Group**: A number of student contact that are classed together. A group can have at least one student contact. A student contact can be assigned to a group.
 * **Group Name**: An identifier for a group that suggests the function of that group.
 
