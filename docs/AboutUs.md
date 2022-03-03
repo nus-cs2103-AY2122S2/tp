@@ -19,14 +19,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Wang Zihao
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/zihao.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](https://github.com/9teMare)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Team Lead
+* Role: Developer
 * Responsibilities: UI
 
 ### Johnny Doe
