@@ -126,7 +126,7 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -283,9 +283,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-> Definition: <br>
+> Definition: 
 > For all use cases below, the **System** is `ManageEZPZ` and the **Actor** is the `User`, unless specified otherwise.
-> <br>More specifically, the `User` are **Supervisors**.
+> More specifically, the `User` are **Supervisors**.
 
 ****
 
@@ -470,7 +470,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User starts up ManageEZPZ.
 2. ManageEZPZ greets User with our HELP page, with all the commands.
 3. User wants to add a new Employee, enters command to add Employee.
-4. ManageEZPZ adds the Employee & confirms with a successful message that the task is marked <br><br>
+4. ManageEZPZ adds the Employee & confirms with a successful message that the task is marked 
 
    Use case ends.
 
@@ -480,7 +480,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 3a1. ManageEZPZ sends an error message to User, indicating the
       format for the add Employee command is incorrect, attached with the
-      correct syntax format. <br><br>
+      correct syntax format. 
       
       Use Case ends.
 
@@ -547,7 +547,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-    1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by double-clicking the jar file.
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
@@ -558,13 +558,13 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-    1. Test case: `delete 1`<br>
+    1. Test case: `delete 1`
        Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-    1. Test case: `delete 0`<br>
+    1. Test case: `delete 0`
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)
        Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
