@@ -21,17 +21,20 @@ public class Person {
     private final Email email;
 
     // Data fields
+    private final InsurancePackage insurancePackage;
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email,
+                  InsurancePackage insurancePackage, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.insurancePackage = insurancePackage;
         this.address = address;
         this.tags.addAll(tags);
     }
@@ -46,6 +49,10 @@ public class Person {
 
     public Email getEmail() {
         return email;
+    }
+
+    public InsurancePackage getInsurancePackage() {
+        return insurancePackage;
     }
 
     public Address getAddress() {
@@ -91,6 +98,7 @@ public class Person {
         return otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
+                && otherPerson.getInsurancePackage().equals(getInsurancePackage())
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getTags().equals(getTags());
     }
@@ -109,6 +117,8 @@ public class Person {
                 .append(getPhone())
                 .append("; Email: ")
                 .append(getEmail())
+                .append("; Insurance Package: ")
+                .append(getInsurancePackage())
                 .append("; Address: ")
                 .append(getAddress());
 
