@@ -77,14 +77,12 @@ Format: `help`
 
 Adds a TA into the system.
 
-Format: `add [NUMBER_OF_ENTRIES]`
+Format: `add n/NAME id/STUDENT_ID c/COURSE`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-You can add any number of TAs in.
-</div>
+* `STUDENT_ID` is sensitive, will be validated.
 
 Examples:
-* `[add 2] Adds 2 TAs. System will ask for TA’s details a field at a time, and repeat for the next entry.`
+* `add n/John Doe id/A0123456H c/Computer Science` adds a new TA named John Doe.
 
 ### Listing all Teaching Assistants : `list`
 
@@ -92,6 +90,7 @@ Displays all TAs found in the system.
 
 Format: `list`
 
+<!-- For Edit TA in the future
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
@@ -108,6 +107,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+-->
 
 ### Locating applicants by keyword search: `find`
 
@@ -181,12 +181,12 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                      |
-|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add [NUMBER_OF_ENTRIES]`                                                                                                                                             |
-| **Clear**  | `clear`                                                                                                                                                               |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
-| **Find**   | `find k/[KEYWORD] [k/MORE_KEYWORDS] f/[ATTRIBUTE_FIELD]`<br> e.g., `find k/Jane k/Doe f/name`                                                                         |
-| **List**   | `list`                                                                                                                                                                |
-| **Help**   | `help`                                                                                                                                                                |
+| Action     | Format, Examples                                                                                                            |
+|------------|-----------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME id/STUDENT_ID c/COURSE`<br> e.g., `add n/John Doe id/A0123456H c/Computer Science`                              |
+| **Clear**  | `clear`                                                                                                                     |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                         |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` |
+| **Find**   | `find k/[KEYWORD] [k/MORE_KEYWORDS] f/[ATTRIBUTE_FIELD]`<br> e.g., `find k/Jane k/Doe f/name`                               |
+| **List**   | `list`                                                                                                                      |
+| **Help**   | `help`                                                                                                                      |
