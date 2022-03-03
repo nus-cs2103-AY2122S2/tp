@@ -112,21 +112,22 @@ Examples:
 
 ### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds clients whose name, phone, email, address or tags contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* The search is case-insensitive. e.g `bob` will match `Bob`
+* The order of the keywords does not matter. e.g. `Hans Bob` will match `Bob Hans`
+* The name, phone, email, address and tags are searched.
+* Only full words will be matched e.g. `Bob` will not match `Bobs`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  e.g. `Hans Bob` will return `Hans Zimmer`, `Bob Bob`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find Bob` returns `bob` and `Bob Doe`
+* `find 65123456` returns clients with the phone number `65123456`
+* `find kent ridge` returns clients with an address containing `kent` or `ridge`
+* `find manager hr` returns clients with the `manager` or `hr` tags
 
 ### Deleting a person : `delete`
 
