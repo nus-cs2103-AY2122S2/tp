@@ -271,13 +271,12 @@ _{Explain here how the data archiving feature will be implemented}_
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a client by name, phone, email, address or tag  | locate specific clients without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| -------- |--------------------------------------------| ------------------------------ | ---------------------------------------------------------------------- |
+| `* * *`  | business owner                                   | list all my clients information         | see my clients information.                 |
+| `* * *`  | business owner                                       | add a new client to CinnamonBun               |                                                                        |
+| `* * *`  | business owner                                       | edit a client’s information                | keep my client’s information updated.                                   |
+| `* * *`  | business owner                                       | delete a client information  | remove those who are no longer customers. |
+| `* *`    | business owner                                       | find a client based on keywords   | easily find a specific client or group of clients.                |
 
 *{More to be added}*
 
@@ -327,7 +326,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-*{More to be added}*
+**Use case: Edit a person information**
+
+**MSS**
+1. User specify which person to be edited
+2. User inputs the values to be edited
+3. AddressBook edits the value
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. No person index specified
+    * 1a1. AddressBook shows an error message.
+
+      Use case resumes at step 1.
+
+* 2a. No fields are provided
+    * 2a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+* 2b. Some fields are inputed wrongly
+    * 2b1. AddressBook shows the appropriate error message.
+
+      Use case resumes at step 2.
+
+* 2c. Value edited is email and there is already an existing email by another person in the addressBook
+    * 2c1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
 
 ### Non-Functional Requirements
 
