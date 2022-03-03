@@ -170,7 +170,7 @@ ManageEZPZ data are saved in the hard disk automatically after any command that 
 
 ### Editing the data file
 
-AddressBook data are saved as a JSON file `[JAR file location]/data/ManageEZPZ.json`. Advanced users are welcome to update data directly by editing that data file.
+ManageEZPZ data are saved as a JSON file `[JAR file location]/data/ManageEZPZ.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, ManageEZPZ will discard all data and start with an empty data file at the next run.
