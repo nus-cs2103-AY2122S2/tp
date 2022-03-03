@@ -396,9 +396,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to see all friends in Amigos
-2. Amigos switches the GUI to the friends tab.
-3. Amigos displays all possible friends.
+1. User requests to see all friends in Amigos.
+2. Amigos switches the GUI to the friends tab and shows all friends.
 4. User requests to view full details of a particular friend.
 5. Amigos displays a page containing the full details of that particular friend accompanied by some logs.
 
@@ -412,8 +411,13 @@ Use case ends
   
 * 4a. User wants to see all the logs of a person
     * 4a.1 Amigos displays a page containing the full details of that friend accompanied by all the logs
-
-  Use Case ends
+      
+      Use Case ends.
+  
+* 4b. Amigos detects an issue in the input (e.g. incorrect input format, cannot find friend in the system)
+    * 4b.1 Amigos displays the error feedback to the user.
+  
+      Use case resumes at 4
 
 **Use case: L01 - Adding a new log to a friend**
 
@@ -566,14 +570,13 @@ Use case ends
 **MSS**
 
 1. User requests to show all events
-2. Amigos switches the GUI to the events tab.
-3. Amigos displays all possible events.
+2. Amigos switches the GUI to the events tab and displays all possible events.
     
    Use case ends.
 
 **Extensions**
-* 3a. There are no events to show.
-    * 3a1. Amigos displays an empty interface with the message “No events”.
+* 2a. There are no events to show.
+    * 2a1. Amigos displays an empty interface with the message “No events”.
     
     Use case ends.
 
