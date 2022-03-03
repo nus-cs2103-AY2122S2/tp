@@ -257,27 +257,33 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* is a student
+* has a need to work collaboratively with other students
+* has a need to know the contacts and details of other students
+* has a need to manage group tasks
+* has a need to get update on progress of the group tasks
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
-
+**Value proposition**: manage student contacts, groups, and tasks faster than a typical mouse/GUI driven app
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+|----------| ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
+| `* * *`  | student who needs to contact other students for work-related matters                                   | add the contact information of other students         | I can easily contact other students when I need to                 |
+| `* * *`  | student who works on a group project                                       | add other students to my group               | I remember who is in my group                                                                      |
+| `* * *`  | student                                       | create a student group                | I can keep track of existing student groups in real life                                   | 
+| `* * *`  | student who needs to keep track of tasks that need to be done                                       | view the tasks that belong to each group          | I can know the list of tasks I need to complete for that particular group |
+| `* * *`  | student who works in a collaborative group project                                       | add/delete tasks to the group   | everyone in the group can see what we need to do                |
+| `* * *`  | student who wants to only keep groups that are presently relevant | delete/leave my groups to clear the inactive groups out of my group list           | I am not distracted by outdated information                                                 |
+| `* *`    | student who needs to keep track of my deadlines | add a deadline to a task           | I can record when a task needs to be done                                                 |
+| `* *`    | student who wants to keep track of the project progress | track the progress of the task that is handled by other students           | I know the overall picture of our project                                                 |
+| `*`      | student with bad time management | get a reminder of my impending group projects           | I won’t forget to complete the tasks by the deadline                                                 |
 
 *{More to be added}*
 
@@ -285,14 +291,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - List student contacts**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to list student contacts
+2. ArchDuke shows a list of student contacts
 
     Use case ends.
 
@@ -302,26 +306,76 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is invalid.
+**Use case: UC02 - Add a student contact**
 
-    * 3a1. AddressBook shows an error message.
+**MSS**
 
-      Use case resumes at step 2.
+1. User requests to add a student contact in ArchDuke contact list
+2. ArchDuke adds the student contact to the system
+3. ArchDuke GUI displays and reflects the data of that specific student contact
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The student contact attributes are in an invalid format
+  * 1a1. ArchDuke displays an error message
+    Use case resumes at step 1
+
+    Use case ends.
+
+**Use case: UC03 - Delete a student contact**
+
+**MSS**
+
+1. User requests to delete a specific person in the list
+2. ArchDuke deletes the person
+3. ArchDuke GUI no longer displays the data of that specific student contact
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given index is invalid
+
+    * 1a1. ArchDuke shows an error message
+    
+    Use case resumes at step 1
+
+**Use case: UC04 - Add a student group**
+
+**MSS**
+
+1. User requests to add a student group
+2. ArchDuke adds the group
+3. ArchDuke GUI displays the group in the group list
+
+   Use case ends.
 
 *{More to be added}*
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any _mainstream OS_ as long as it has Java `11` is installed.
+2. Should be able to hold up to 1000 student contacts without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Should be able to be usable enough for a beginner who just started using student contact management systems.
+5. Should be intuitive enough for a beginner who is new to Command Line Application.
+6. Not required to support any other language other than English.
+7. Should be able to work without a need for the user to install Gradle/JavaFX.
 
 *{More to be added}*
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Mainstream OS**: Windows, Linux, Unix, OS-X.
+* **Student contact**: A contact of a student.
+* **Student contact attribute**: A piece of information related to a student contact i.e. name, phone number, email, academic major.
+* **Task**: A piece of work to be done or undertaken by student contacts.
+* **Tag**: An optional one-word identifier of a student contact. A student contact can have multiple tags.
+* **Student Group**: A number of student contact that are classed together. A group can have at least one student contact. A student contact can be assigned to a group.
+* **Student Group Attribute**: A piece of information related to a group i.e. group name.
+* **Group Name**: An identifier for a group that suggests the function of that group.
 
 --------------------------------------------------------------------------------------------------------------------
 
