@@ -255,14 +255,12 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
+* university student taking modules in the curriculum 
 * has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
+* has a need to find relevant contacts pertaining to a specific module
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
-
+**Value proposition**: allows user to find relevant contacts (eg professors, classmates) from a specific module quickly
 
 ### User stories
 
@@ -270,12 +268,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| `* * *`  | student                                    | add contacts of other students taking a specific module | I can easily contact other students for help |
+| `* * *`  | student                                    | remove contacts of students who have finished the module | I can see only those students who are still in the module |
+| `* * *`  | student/professor                          | view all my contacts |
+| `* * *`  | student                                    | edit specific details of a contact  | 
+| `* * *`  | professor                                  | edit specific details of a contact  | 
+| `* * *`  | student                                    | find the relevant contact details (eg office location, email) to reach my TAs/professors | I am able to find the information I need quickly |
+| `* * *`  | student                                    | find classmates and their contact details taking the same module |  I can form teams with them for group projects                                                                      |
+| `* * `  | student with many modules                   | flag any important contacts to saved contacts | I can easily find the relevant contact in a hassle-free manner in the future |
+| `* `  | student with many modules                     | organise any saved contacts into categories | I can easily find the relevant contact in a hassle-free manner |
+| `*  `  | professor teaching multiple modules          | organise students into their respective modules | locate details of students in each module without having to go through the entire list |
+| `* `    | tech savvy user who is well-versed in using command-line interfaces | use command-lines to carry out a command (eg email cs2103 prof)  | I can easily contact the relevant person with one command |
+| `*`      | student/professor with many contacts in the UniBook | sort persons by name | locate a person easily |
 
 *{More to be added}*
 
