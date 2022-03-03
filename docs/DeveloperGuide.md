@@ -257,29 +257,37 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* tech-savvy university students
 * prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* can type fast and has plenty of experience with CLI application
+* is often busy and struggles to manage important details about their relationships
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: The program will help busy university students to manage their friendships by keeping track of important details. An example of possible features include the tracking of birthdays, money owed, upcoming meetings etc. and providing relevant reminders, in addition to basic functionalities.
+
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​        | I want to …​                                                                            | So that I can…​                                                                                             |
+|----------|----------------|-----------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
+| `* * *`  | User           | list all my friends                                                                     | ensure that the information I have added is saved and check my friend's details                             |
+| `* * *`  | User           | add events relating to my friends                                                       | keep track of any future events                                                                             |
+| `* * *`  | User           | add new friends                                                                         | keep track of any new friends I make                                                                        |
+| `* * *`  | User           | remove friends I am no longer in contact with                                           | keep my friends list updated and remove irrelevant contact                                                  |
+| `* * *`  | User           | review my events for the next day along with their relevant details                     | take note and be prepared for the next day                                                                  |
+| `* * *`  | Forgetful user | keep track of things that my friend has recently talked about                           | appear invested in my relationship and not forget important things about my friends                         |
+| `* * *`  | Forgetful user | add descriptions and details about my friends that I would like to remember             | not stress about remember these details for the next time we meet                                           |
+| `* *`    | New User       | undo a command                                                                          | revert back accidental commands                                                                             | 
+| `* *`    | New User       | reset the application to its default state                                              | properly experiment with the application before using it properly                                           |
+| `* *`    | Forgetful User | use a keyword search to find a note written about someone                               | find out who I spoke to about a certain issue                                                               | 
+| `* *`    | Amateur User   | update details about my friends                                                         | keep my friends list up to date                                                                             |
+| `* *`    | Amateur User   | shorten command lengths                                                                 | increase my efficiency while using this application                                                         |
+| `* *`    | Seasoned User  | see which of my friends I am closest to and which of them I have not visited in a while | reflect more about how I spend my time with my friend and maybe catch up with ones I have not met in awhile | 
+| `* *`    | Seasoned User  | chain commands                                                                          | reduce the number of commands I need to type thereby increasing efficiency                                  |
+| `*`      | User           | tag friends under different categories                                                  | better classify and organise my friend circle                                                               | 
+| `*`      | New User       | know which features of the application I am not using as often                          | fully utilise the application to its maximum capability                                                     | 
 
 ### Use cases
 
@@ -529,16 +537,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold up to 200 friends with up to 100 events/logs per person without a noticeable sluggishness in performance for typical usage (time taken to process any one command is 1 second at most).
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. The project only supports managing of the user friendships and not other types of relationships.
+5. The application should work with different screen sizes, resolutions and window sizes.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Log**: Details of interaction between user and friend
+* **Event**: Upcoming meeting/ date of significance for a friend
 
 --------------------------------------------------------------------------------------------------------------------
 
