@@ -29,7 +29,7 @@ Command Line Interface (CLI)** while still having the benefits of a Graphical Us
 
    * **`list`** : Lists all TAs.
 
-   * **`add 2`** Adds 2 TAs to the system. 
+   * **`add n/John Doe id/A0123456H c/Computer Science`** Adds a new TA into the system. 
 
    * **`delete A0123456H`** : Deletes the TA with ID A0213456H from the system.
 
