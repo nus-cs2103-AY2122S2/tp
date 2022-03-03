@@ -16,7 +16,8 @@ We are a team based in the [School of Computing, National University of Singapor
 [[github](https://github.com/bryans17)]
 [[portfolio](team/bryans17.md)]
 
-* Role: Team Lead & Integration
+* Role: Developer
+* Responsibilities: Team Lead, Integration
 
 ### Channe Chwa
 
