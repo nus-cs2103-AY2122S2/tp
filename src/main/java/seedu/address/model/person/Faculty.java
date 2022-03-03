@@ -16,17 +16,6 @@ public class Faculty {
 
     public final String studentFaculty;
 
-    /**
-     * Constructs a {@code Faculty}.
-     *
-     * @param faculty A valid faculty.
-     */
-    public Faculty(String faculty) {
-        requireNonNull(faculty);
-        checkArgument(isValidFaculty(faculty), MESSAGE_CONSTRAINTS);
-        studentFaculty = faculty.toUpperCase();
-    }
-
     public enum Nus {
         FASS,
         BIZ,
@@ -46,7 +35,20 @@ public class Faculty {
     }
 
     /**
+     * Constructs a {@code Faculty}.
+     *
+     * @param faculty A valid faculty.
+     */
+    public Faculty(String faculty) {
+        requireNonNull(faculty);
+        checkArgument(isValidFaculty(faculty), MESSAGE_CONSTRAINTS);
+        studentFaculty = faculty.toUpperCase();
+    }
+
+    /**
      * Returns true if a given string is a valid faculty.
+     * @param test
+     * @return true if a given string is valid, false otherwise.
      */
     public static boolean isValidFaculty(String test) {
         return Stream.of(Nus.values())
@@ -65,6 +67,7 @@ public class Faculty {
         return stringBuilder.toString();
     }
 
+    @Override
     public String toString() {
         return studentFaculty;
     }

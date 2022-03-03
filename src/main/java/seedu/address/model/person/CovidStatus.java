@@ -14,7 +14,7 @@ public class CovidStatus {
     public static final String MESSAGE_CONSTRAINTS =
             "Covid status should be one of the following: " + getCovidStatusEnumAsString();
 
-    public enum CovidStatusEnum {
+    public enum CovidStatusTier {
         HRW,
         HRN,
         NEGATIVE,
@@ -36,21 +36,24 @@ public class CovidStatus {
 
     /**
      * Returns true if a given string is a valid covid status.
+     *
+     * @param test
+     * @return true if given string is valid, false otherwise.
      */
     public static boolean isValidCovidStatus(String test) {
-        return Stream.of(CovidStatusEnum.values())
+        return Stream.of(CovidStatusTier.values())
                 .anyMatch(status -> status.name()
                         .equalsIgnoreCase(test));
     }
 
     /**
-     * Returns the list enum values from the CovidStatusEnum enum class.
+     * Returns the list enum values from the CovidStatusTier enum class.
      *
-     * @return String of CovidStatusEnum enum values.
+     * @return String of CovidStatusTier enum values.
      */
     public static String getCovidStatusEnumAsString() {
         StringBuilder stringBuilder = new StringBuilder();
-        Stream.of(CovidStatusEnum.values()).forEach(status -> stringBuilder.append(status + " "));
+        Stream.of(CovidStatusTier.values()).forEach(status -> stringBuilder.append(status + " "));
         return stringBuilder.toString();
     }
 
@@ -70,5 +73,4 @@ public class CovidStatus {
     public int hashCode() {
         return covidStatus.hashCode();
     }
-
 }

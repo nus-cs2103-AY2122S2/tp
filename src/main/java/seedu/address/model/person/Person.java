@@ -32,7 +32,7 @@ public class Person {
      */
     public Person(Name name, Faculty faculty, Phone phone, Email email, Address address,
                   MatriculationNumber number, CovidStatus status, Set<Tag> tags) {
-        requireAllNonNull(name, faculty, phone, email, address, tags);
+        requireAllNonNull(name, faculty, phone, email, address, number, status, tags);
         this.name = name;
         this.faculty = faculty;
         this.phone = phone;
@@ -112,21 +112,21 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getMatriculationNumber().equals(getMatriculationNumber())
+                && otherPerson.getStatus().equals(getStatus())
                 && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, faculty, phone, email, address, number, status, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append("; Matriculation Number: ")
-                .append(getMatriculationNumber())
                 .append("; Faculty: ")
                 .append(getFaculty())
                 .append("; Phone: ")
@@ -135,9 +135,10 @@ public class Person {
                 .append(getEmail())
                 .append("; Address: ")
                 .append(getAddress())
+                .append("; Matriculation Number: ")
+                .append(getMatriculationNumber())
                 .append("; Covid Status: ")
-                .append(getStatus())
-                .append(getAddress());
+                .append(getStatus());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
