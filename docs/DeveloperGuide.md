@@ -312,16 +312,49 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+#### Technical Requirements
 
-*{More to be added}*
+1. ManageEZPZ should be able to run on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. ManageEZPZ should work on both 32-bit and 64-bit environments.
+3. ManageEZPZ should be able to store and retrieve task data from File.
+4. ManageEZPZ must occupy as little storage as possible.
+5. ManageEZPZ should be backward compatible with data produced by earlier versions of itself.
+
+#### Performance Requirements
+
+1. ManageEZPZ should respond within two seconds for any queries.
+   * ManageEZPZ should be closed/terminated within 2 seconds.
+2. ManageEZPZ should work well under both normal and high workloads. 
+3. ManageEZPZ should be scalable.
+4. ManageEZPZ should be able to load huge amounts of data in a short amount of time.
+
+#### Quality Requirements
+
+1. ManageEZPZ should be easy to use by a novice.
+2. ManageEZPZ should be in English.
+3. The UI and fonts used in ManageEZPZ should be big enough for senior managers/supervisors.
+
+#### Process Requirements
+
+1. ManageEZPZ is expected to adhere to a schedule that delivers a feature set every 2 weeks.
+2. Updates to ManageEZPZ should be able to roll out to existing clients remotely.
+
+#### Other Noteworthy Points
+
+1. ManageEZPZ should not be used to support management of illegal activities
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+| Terms             | Meaning                                                                     |
+|:------------------|:----------------------------------------------------------------------------|
+| **Mainstream OS** | Windows, Linux, Unix, OS-X                                                  |
+| **Users**         | Applies to both supervisors & employees                                     |
+| **command**       | A message sent as an input from User, that coincides with our Command List  |
+| **todo**          | A task that only needs a description with no dates or times                 |
+| **deadline**      | A task that needs a description, a date, and a end time                     |
+| **event**         | A task that needs a description, a date, start and end times                |
+| **mark**          | To indicate that Task is done                                               |
+| **unmark**        | To indicate that Task is not done                                           |
 
 --------------------------------------------------------------------------------------------------------------------
 
