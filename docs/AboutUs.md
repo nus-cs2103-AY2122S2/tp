@@ -9,15 +9,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Sim SiLeng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/pnutzz-0207.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/pnutzz-0207)]
+[[portfolio](team/pnutzz-0207.md)]
 
-* Role: Project Advisor
+* Role: Team lead
+* Responsibilities: Model
 
 ### Wang Zihao
 
@@ -29,31 +29,21 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: UI
 
-### Johnny Doe
+### Dai TianLe
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ddx-510.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/ddx-510)] [[portfolio](team/ddx-510.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Teoh Jun Jie
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/junjieteoh.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/junjieteoh)]
+[[portfolio](team/junjieteoh.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
