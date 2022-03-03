@@ -38,22 +38,32 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Lee En En
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/leeenen.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/leeenen)]
+[[portfolio](team/leeenen.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Documentation
 
-### James Doe
+### Tiew Wei Jian
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/tiewweijian.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/tiewweijian)]
+[[portfolio](team/tiewweijian.md)]
 
 * Role: Developer
 * Responsibilities: UI
+
+### Ho Lanzan
+
+<img src="images/lzan98.png" width="200px">
+
+[[github](https://github.com/lzan98)]
+[[portfolio](team/lzan98.md)]
+
+* Role: Developer
+* Responsibilities: Deliverables and deadlines

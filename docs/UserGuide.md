@@ -3,10 +3,13 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+TAlent Assistant™ is a **desktop, lightweight and centralized management system** catered to professors for managing
+the process of hiring undergraduate/graduate Teaching Assistants (TA). They will be able to access the TAs’ application
+data easily and review qualifications or availability for scheduling interviews. It is **optimized for use via a 
+Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, this application will be able to help you manage all things under the hood of the TA initiative faster than traditional GUI applications.
+
 
 * Table of Contents
-{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -14,9 +17,9 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `TAlentAssistant.jar` from [here](https://github.com/AY2122S2-CS2103-F11-2/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your TAlent Assistant™.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -24,15 +27,15 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+   * **`list`** : Lists all TAs.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * **`add 2`** Adds 2 TAs to the system. 
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+   * **`delete A0123456H`** : Deletes the TA with ID A0213456H from the system.
 
-   * **`clear`** : Deletes all contacts.
+   * **`find k/Jane f/name`** : Searches for all TAs with name containing “Jane/jane”.
 
-   * **`exit`** : Exits the app.
+   * **`help`** : List all commands in the system.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -66,26 +69,22 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
-
-![help message](images/helpMessage.png)
+Lists the application commands that are available in the system.
 
 Format: `help`
 
+### Adding a Teaching Assistant: `add`
 
-### Adding a person: `add`
+Adds a TA into the system.
 
-Adds a person to the address book.
-
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add [NUMBER_OF_ENTRIES]`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+You can add any number of TAs in.
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `[add 2] Adds 2 TAs. System will ask for TA’s details a field at a time, and repeat for the next entry.`
 
 ### Listing all persons : `list`
 
@@ -130,19 +129,18 @@ Examples:
 * `find k/Jane k/Tan f/name` returns TAs with name e.g. `Jane`, `tan` and `John Tan`
 
 
-### Deleting a person : `delete`
+### Deleting a TA : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified TA from the system.
 
-Format: `delete INDEX`
+Format: `delete STUDENT_ID`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the specified TA with specified `STUDENT_ID`.
+* The `STUDENT_ID` **must belong to a TA** in the system.
+* Otherwise, the system will prompt a message, stating that the record does not exist.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `delete A0213456H` deletes the TA with STUDENT_ID A0123456H, if the record exists.
 
 ### Clearing all entries : `clear`
 
@@ -183,12 +181,12 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find k/[KEYWORD] [k/MORE_KEYWORDS] f/[ATTRIBUTE_FIELD]`<br> e.g., `find k/Jane k/Doe f/name`
-**List** | `list`
-**Help** | `help`
+| Action     | Format, Examples                                                                                                                                                      |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add [NUMBER_OF_ENTRIES]`                                                                                                                                             |
+| **Clear**  | `clear`                                                                                                                                                               |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
+| **Find**   | `find k/[KEYWORD] [k/MORE_KEYWORDS] f/[ATTRIBUTE_FIELD]`<br> e.g., `find k/Jane k/Doe f/name`                                                                         |
+| **List**   | `list`                                                                                                                                                                |
+| **Help**   | `help`                                                                                                                                                                |
