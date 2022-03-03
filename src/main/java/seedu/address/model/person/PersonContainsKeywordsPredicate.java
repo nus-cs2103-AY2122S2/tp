@@ -20,7 +20,7 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
     public boolean test(Person person) {
         return keywords.stream()
                 .anyMatch(keyword -> {
-                    return StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword)
+                    return StringUtil.containsWordIgnoreCase(person.getName().value, keyword)
                             || StringUtil.containsWordIgnoreCase(person.getPhone().value, keyword)
                             || StringUtil.containsWordIgnoreCase(person.getEmail().value, keyword)
                             || StringUtil.containsWordIgnoreCase(person.getAddress().value, keyword)
