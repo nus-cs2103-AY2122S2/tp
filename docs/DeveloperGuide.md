@@ -306,6 +306,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+<hr>
+
 **Use case: Adds a TA**
 
 **MSS**
