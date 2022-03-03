@@ -10,8 +10,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-//import static seedu.address.testutil.TypicalRoles.ML_ENGINEER;
-//import static seedu.address.testutil.TypicalRoles.MOBILE_ENGINEER;
+import static seedu.address.testutil.TypicalRoles.ML_ENGINEER;
+import static seedu.address.testutil.TypicalRoles.MOBILE_ENGINEER;
 //import static seedu.address.testutil.TypicalRoles.NETWORK_ENGINEER;
 
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public class TypicalCompanies {
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253")
             .withTags("friends")
-            // .withRoles(ML_ENGINEER, MOBILE_ENGINEER)
+            .withRoles(ML_ENGINEER, MOBILE_ENGINEER)
             .build();
     public static final Company BENSON = new CompanyBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
