@@ -296,29 +296,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User starts up ManageEZPZ
 2. ManageEZPZ greets User with our HELP page, with all the commands.
 3. User uses the appropriate command to add Task.
-4. ManageEZPZ adds the task & confirms with a successful message that the task is added. <br></br>
+4. ManageEZPZ adds the task & confirms with a successful message that the task is added.
 
     Use case ends.
 
 **Extensions**
 
-* 3a. User uses one of the three `addTask` commands: <br></br>
-    * 3a1. User uses `addTask /todo` command <br></br>
+* 3a. User uses one of the three `addTask` commands: 
+    * 3a1. User uses `addTask /todo` command 
 
-      Use case resumes from step 4. <br></br>
+      Use case resumes from step 4. 
 
-    * 3a2. User uses `addTask /event` command <br></br>
+    * 3a2. User uses `addTask /event` command 
 
-      Use case resumes from step 4. <br></br>
+      Use case resumes from step 4. 
 
-    * 3a3. User uses `addTask /deadline` command <br></br>
+    * 3a3. User uses `addTask /deadline` command 
 
-      Use case resumes from step 4. <br></br>
+      Use case resumes from step 4. 
     
-* 3b. User uses Add Task Commands with the wrong syntax <br></br>
+* 3b. User uses Add Task Commands with the wrong syntax 
 
     * 3b1. ManageEZPZ sends an error message to User, indicating the
-      format for adding Task is incorrect, attached with the correct syntax format. <br></br>
+      format for adding Task is incorrect, attached with the correct syntax format. 
 
       Use case ends.
 
@@ -331,15 +331,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User starts up ManageEZPZ
 2. ManageEZPZ greets User with our HELP page, with all the commands.
 3. User uses the appropriate command to delete a Task
-4. ManageEZPZ deletes the Task & confirms with a successful message that the Task is deleted. <br></br>
+4. ManageEZPZ deletes the Task & confirms with a successful message that the Task is deleted. 
 
    Use case ends.
 
 **Extensions**
 
-* 3a. ManageEZPZ detects an error in the entered data. (Invalid index) <br></br>
+* 3a. ManageEZPZ detects an error in the entered data. (Invalid index) 
     * 3a1. ManageEZPZ sends an error message to User, indicating the Index used for the delete
-      command is incorrect, attached with the correct syntax format. <br></br>
+      command is incorrect, attached with the correct syntax format. 
 
       Use case ends.
 
@@ -358,30 +358,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 3a. User uses one of the five `list` Task commands: <br></br>
-    * 3a1. User uses `list /all` command <br></br>
+* 3a. User uses one of the five `list` Task commands: 
+    * 3a1. User uses `list /all` command 
 
-      Use case resumes from step 4. <br></br>
+      Use case resumes from step 4. 
 
-    * 3a2. User uses `list /todo` command <br></br>
+    * 3a2. User uses `list /todo` command 
 
-      Use case resumes from step 4. <br></br>
+      Use case resumes from step 4. 
 
-    * 3a3. User uses `list /deadline` command <br></br>
+    * 3a3. User uses `list /deadline` command 
 
-      Use case resumes from step 4. <br></br>
+      Use case resumes from step 4. 
 
-    * 3a2. User uses `list /event` command <br></br>
+    * 3a2. User uses `list /event` command 
 
-      Use case resumes from step 4. <br></br>
+      Use case resumes from step 4. 
 
-    * 3a3. User uses `list /today` command <br></br>
+    * 3a3. User uses `list /today` command 
 
-      Use case resumes from step 4. <br></br>
+      Use case resumes from step 4. 
     
-* 3b. User uses list Task commands with the wrong syntax. <br></br>
+* 3b. User uses list Task commands with the wrong syntax. 
     * 3b1. ManageEZPZ sends an error message to User, that the list
-      command is incorrect, attached with the correct syntax format. <br></br>
+      command is incorrect, attached with the correct syntax format. 
 
       Use case ends.
 
@@ -400,10 +400,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 3a. ManageEZPZ detects an error in the entered data. (Invalid Index) <br></br>
+* 3a. ManageEZPZ detects an error in the entered data. (Invalid Index) 
 
     * 3a1. ManageEZPZ sends an error message to User, indicating the Index used for
-      the Mark command is incorrect, attached with the correct syntax format. <br></br>
+      the Mark command is incorrect, attached with the correct syntax format. 
       
       Use Case ends.
 
@@ -417,16 +417,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. ManageEZPZ displays the Tasks.
 3. User realises that Task is marked as done, but is actually not done.
 4. User enters command to unmark Task for the specific Task Number.
-5. ManageEZPZ unmarks the Task & confirms with a successful message that the task is unmarked. <br></br>
+5. ManageEZPZ unmarks the Task & confirms with a successful message that the task is unmarked. 
 
    Use case ends.
 
 **Extensions**
 
-* 4a. ManageEZPZ detects an error in the entered data. (Invalid Index) <br></br>
+* 4a. ManageEZPZ detects an error in the entered data. (Invalid Index) 
 
     * 4a1. ManageEZPZ sends an error message to User, indicating the Index used for
-      the unmark command is incorrect, attached with the correct syntax format. <br></br>
+      the unmark command is incorrect, attached with the correct syntax format. 
       
       Use Case ends.
 
@@ -439,26 +439,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User starts up ManageEZPZ
 2. ManageEZPZ greets User with our HELP page, with all the commands.
 3. User enters the command to find Tasks.
-4. ManageEZPZ displays the Task(s) which matches the search keyword. <br></br>
+4. ManageEZPZ displays the Task(s) which matches the search keyword. 
 
    Use case ends.
 
 **Extensions**
 
-* 3a. User uses one of the two Find Task commands: <br></br>
+* 3a. User uses one of the two Find Task commands: 
 
-    * 3a1. User uses `find /task TASK_DESCRIPTION` command <br></br>
+    * 3a1. User uses `find /task TASK_DESCRIPTION` command 
 
-      Use case resumes from step 4. <br></br>
+      Use case resumes from step 4. 
 
-    * 3a2. User uses `find /date DD-MM-YYYY` command <br></br>
+    * 3a2. User uses `find /date DD-MM-YYYY` command 
 
-      Use case resumes from step 4. <br></br>
+      Use case resumes from step 4. 
 
-* 3b. User uses View Task commands with the wrong syntax <br></br>
+* 3b. User uses View Task commands with the wrong syntax 
 
     * 3b1. ManageEZPZ sends an error message to User, indicating syntax used for
-      the View Task command is incorrect, attached with the correct syntax format. <br></br>
+      the View Task command is incorrect, attached with the correct syntax format. 
       
       Use Case ends.
 
@@ -476,7 +476,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 3a. ManageEZPZ detects an error in the entered data. <br></br>
+* 3a. ManageEZPZ detects an error in the entered data. 
 
     * 3a1. ManageEZPZ sends an error message to User, indicating the
       format for the add Employee command is incorrect, attached with the
@@ -492,7 +492,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User enters the command to clear all Tasks
 2. ManageEZPZ clears all Tasks & confirms with a successful 
-message that all Task are cleared. <br></br>
+message that all Task are cleared. 
 
    Use case ends.
 
@@ -504,7 +504,7 @@ message that all Task are cleared. <br></br>
 
 1. User enters a command to exit ManageEZPZ.
 2. ManageEZPZ confirms with a successful exit message.
-3. ManageEZPZ saves all changes to disk. <br></br>
+3. ManageEZPZ saves all changes to disk. 
 
    Use case ends.
 
