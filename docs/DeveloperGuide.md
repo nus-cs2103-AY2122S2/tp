@@ -312,19 +312,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list TA applicants
-2.  TAlent Assistant™ shows the list of TA applicants
-3.  User requests to add a new TA to the list
-4.  TAlent Assistant™ adds the new TA to the list and displays the added entry
+1.  User requests to add a TA
+2.  TAlent Assistant™ requests for TA's details
+3.  User inputs details
+4.  TAlent Assistant™ adds the new TA
 
     Use case ends.
 
 **Extensions**
 
-* 3a. The attribute fields added are invalid
-    * 3a1. TAlent Assistant™ shows an error message
+* 3a. The given format is invalid.
 
-    Use case resumes at step 2.
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
 
 <hr>
 
