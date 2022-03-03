@@ -291,14 +291,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - List student contacts**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to list student contacts
+2. ArchDuke shows a list of student contacts
 
     Use case ends.
 
@@ -308,11 +306,51 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is invalid.
+**Use case: UC02 - Add a student contact**
 
-    * 3a1. AddressBook shows an error message.
+**MSS**
 
-      Use case resumes at step 2.
+1. User requests to add a student contact in ArchDuke contact list
+2. ArchDuke adds the student contact to the system
+3. ArchDuke GUI displays and reflects the data of that specific student contact
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The student contact attributes are in an invalid format
+  * 1a1. ArchDuke displays an error message
+    Use case resumes at step 1
+
+    Use case ends.
+
+**Use case: UC03 - Delete a student contact**
+
+**MSS**
+
+1. User requests to delete a specific person in the list
+2. ArchDuke deletes the person
+3. ArchDuke GUI no longer displays the data of that specific student contact
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given index is invalid
+
+    * 1a1. ArchDuke shows an error message
+    
+    Use case resumes at step 1
+
+**Use case: UC04 - Add a student group**
+
+**MSS**
+
+1. User requests to add a student group
+2. ArchDuke adds the group
+3. ArchDuke GUI displays the group in the group list
+
+   Use case ends.
 
 *{More to be added}*
 
@@ -330,11 +368,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Student contact**: A contact of a student
+* **Mainstream OS**: Windows, Linux, Unix, OS-X.
+* **Student contact**: A contact of a student.
+* **Student contact attribute**: A piece of information related to a student contact i.e. name, phone number, email, academic major.
 * **Task**: A piece of work to be done or undertaken by student contacts.
 * **Tag**: An optional one-word identifier of a student contact. A student contact can have multiple tags.
 * **Student Group**: A number of student contact that are classed together. A group can have at least one student contact. A student contact can be assigned to a group.
+* **Student Group Attribute**: A piece of information related to a group i.e. group name.
 * **Group Name**: An identifier for a group that suggests the function of that group.
 
 --------------------------------------------------------------------------------------------------------------------
