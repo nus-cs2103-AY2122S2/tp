@@ -6,6 +6,7 @@ title: Chee Jia Le's Project Portfolio Page
 ### Project: Tracey
 
 Tracey is a desktop app for NUS admin staffs to track the covid health status of the students and manage the covid situation on campus, optimized for use via a CLI while still having the benefits of a GUI. It is written in Java, and has about 10 kLoC.
+Tracey aims to ease the barrier to manage the covid outbreak on campus and provide data for possible studies purposes.
 
 Given below are my contributions to the project.
 
@@ -15,7 +16,7 @@ Given below are my contributions to the project.
     * Highlights: This enhancement increases the ease of locating and checking on the well being of the student. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
     * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
 
-* **New Feature**: Added a delete command that allows the user to remove students from the list if the student is no longer a student of the school.
+* **New Feature**: Add a delete command that allows the user to remove students from the list if the student is no longer a student of the school.
 
 * **Code contributed**: [RepoSense link]()
 
