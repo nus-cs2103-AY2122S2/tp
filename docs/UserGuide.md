@@ -74,7 +74,7 @@ Format: `help`
 
 Adds a person, as well as any details, to ClientConnect.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS i/INSURANCE_PACKAGE [t/TAG]`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS i/INSURANCE_PACKAGE [t/TAG]…`
 
 Examples:
 * `add n/Damith p/99998888 e/damith@damith.com`
@@ -92,7 +92,7 @@ Format: `list`
 
 Edits an existing client in ClientConnect, similar to adding a new client.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [i/INSURANCE_PACKAGE] [t/TAG]`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [i/INSURANCE_PACKAGE] [t/TAG]…`
 
 Examples:
 * `edit 1 p/123456 will edit the phone number of the client listed as #1 to 123456`
