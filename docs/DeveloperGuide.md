@@ -452,8 +452,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  TA enters a new module with the specified details.
-2.  TAssist adds the module and displays the new module’s details.
+1.  TA requests to add a new module with the specified details.
+2.  TAssist adds the new module and displays its details.
 
     Use case ends.
 
@@ -473,8 +473,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  TA lists the modules.
-2.  TAssists display the details of all the modules.
+1.  TA requests to list modules.
+2.  TAssists displays the details of all modules.
 
     Use case ends.
 
@@ -495,8 +495,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. TA requests to <ins>list modules (UC02)</ins>. 
-2. TA deletes a module with the specified index.
-3. TAssist deletes the module and the class groups associated to it.
+2. TA requests to delete a specific module in the list.
+3. TAssist deletes the module and the class groups associated with it.
 
     Use case ends.
 
@@ -590,8 +590,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  TA enters a new student with the specified details.
-2.  TAssist adds the new student and displays its details.
+1.  TA requests to add a new student with the specified details.
+2.  TAssist adds the new student and displays their details.
 
     Use case ends.
 
@@ -611,8 +611,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  TA lists the students.
-2.  TAssist displays the details of all student.
+1.  TA requests to list students.
+2.  TAssist displays the details of all students.
 
     Use case ends.
 
@@ -633,7 +633,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  TA requests to <ins>list students (UC08)</ins>.
-2.  TA deletes a specific student in the list.
+2.  TA requests to delete a specific student in the list.
 3.  TAssist deletes the student.
 
     Use case ends.
@@ -664,7 +664,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **MSS**: Main Success Scenario
 * **Class Group**: The different types of classes a module has. E.g. T01, T02, B01, B02
 * **CLI**: Command line interface
 * **GUI**: Graphical user interface
@@ -674,7 +673,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **MSS**: Main Success Scenario
 * **NUS**: The National University of Singapore
 * **Student**: A student in NUS
-* **TA**: Teaching Assistant in NUS SoC
+* **TA**: A Teaching Assistant in NUS SoC
 
 --------------------------------------------------------------------------------------------------------------------
 
