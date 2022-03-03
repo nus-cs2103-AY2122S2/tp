@@ -9,25 +9,25 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Aryan Sarswat
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/aryansarswat.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/AryanSarswat)]
+[[portfolio](team/aryansarswat.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: Documentation (Developer Guide, User Guide[Show features])
 
-### Jane Doe
+### Dione Goh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/dionegoh.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/dionegoh)]
+[[portfolio](team/dionegoh.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer
+* Responsibilities: [to be discussed]
 
 ### Lim Wei Liang
 

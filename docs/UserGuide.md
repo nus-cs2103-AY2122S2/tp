@@ -3,16 +3,16 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
-
+Amigos is a desktop application to help tech-savvy university students manage their friendships by helping them to keep track of important details. It is optimized for use via a Command Line interface while still having the benefits of a Graphical User Interface (GUI).
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+# Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
+
 
 1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
 
@@ -31,7 +31,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+# Features
 
 <div markdown="block" class="alert alert-info">
 
@@ -57,6 +57,8 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 </div>
 
+## Logs management
+Amigos provides functionality to manage logs, which are essentially detailed notes about a specific friend.
 
 ### Adding a log: `addlog`
 
@@ -105,8 +107,33 @@ Format: `deletelog n/[NAME] id/[LOG_INDEX] -a`
 * If no `NAME` or `LOG_INDEX` is provided, but `-a` is provided, then all possible logs
   of all friends will be deleted.
 
+### Show all friends : `showfriends`
+
+Shows all friends in the address book. Switches GUI to the friends tab.
+
+Format: `showfriends`
+
+### Show a specific friend: `showfriend`
+
+Shows page containing the full details related to an existing friend in the address book. By default, only the latest 10 logs are displayed in this page.
+
+Format: `showfriend n/NAME -alllogs`
+
+* NAME field **must** be provided.
+* If the `-alllogs` flag is provided all the logs contained in that person will be displayed instead of the default 10 logs.
+
 Examples:
-* `deletelog n/John Doe id/1'
+* `showfriend n/John Doe` Will open up the page containing full details related to John Doe - his name, address, phone number, email, description, logs, and upcoming events with him.
+* `showfriend n/John Doe -alllogs` Will do the same as above except every single log will be displayed
+
+### Show all events : `showevents`
+
+Shows all events stored in the address book. Switches GUI to the events tab.
+
+Format: `showevents`
+
+Examples:
+* `deletelog n/John Doe id/1`
 * `deletelog n/John Doe -a `
 * `deletelog -a`
 
@@ -121,8 +148,11 @@ Examples:
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**addlog** | `addlog n/[NAME] t/[TITLE] d/[DESCRIPTION]`
-**editlog** | `editlog n/[NAME] id/[LOG_INDEX] nt/[NEW_TITLE] nd/[NEW_DESCRIPTION]`
-**deletelog** | `deletelog n/[NAME] id/[LOG_INDEX] -a`
+| Action                     | Format, Examples                                                      |
+|----------------------------|-----------------------------------------------------------------------|
+| **Add log**                | `addlog n/[NAME] t/[TITLE] d/[DESCRIPTION]`                           |
+| **Edit log**               | `editlog n/[NAME] id/[LOG_INDEX] nt/[NEW_TITLE] nd/[NEW_DESCRIPTION]` |
+| **Delete log**             | `deletelog n/[NAME] id/[LOG_INDEX] -a`                                |
+| **Show all friends**       | `showfriends`                                                         |
+| **Show a specific friend** | `showfriend n/NAME -alllogs`                                          |
+| **Show all events**        | `showevents`                                                          |
