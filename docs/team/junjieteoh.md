@@ -10,30 +10,26 @@ UNite is a **desktop app for managing contacts specifically designed for people 
 Given below are my contributions to the project.
 
 * **New Feature**: 
-    * 
-    * 
+
 
 * **New Feature**: 
 
 * **Code contributed**: 
 
 * **Project management**:
-    * 
+
 
 * **Enhancements to existing features**:
-    * 
+
 
 * **Documentation**:
     * User Guide:
-        * 
-        * 
+
     * Developer Guide:
-        * 
+
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): 
     * Contributed to forum discussions (examples: 
     * Reported bugs and suggestions for other teams in the class (examples: 
     * Some parts of the history feature I added was adopted by several other class mates 
-
-* _{you can add/remove categories in the list above}_
