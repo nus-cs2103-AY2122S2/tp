@@ -37,7 +37,7 @@ Step 2. Assuming there is a Person with the number 1. User then executes `favour
 
 Step 3. User can access the `Favourite`Window by navigating to the menu item as shown in the diagram, which pops up a new window that contains only those Persons that have ‘Favourite’ attribute set as True.
 
-![Untitled](Developer%20%2001421/Untitled.png)
+![FavouriteWindow](images/developer-guide/FavouriteWindowAccess.png)
 
 # Documentation, logging, testing, configuration, dev-ops
 
