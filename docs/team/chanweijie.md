@@ -26,7 +26,8 @@ Given below are my contributions to the project.
 
 
 * **Documentation**:
-* to be added soon
+  * User Guide:
+      * Added Commands to be implemented in V1.2
 
 
 * **Community**:
