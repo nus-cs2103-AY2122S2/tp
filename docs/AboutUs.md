@@ -21,10 +21,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Wang Zihao
 
-<img src="images/zihao.png" width="200px">
+<img src="images/9temare.png" width="200px">
 
 [[github](https://github.com/9teMare)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/9temare.md)]
 
 * Role: Developer
 * Responsibilities: UI
