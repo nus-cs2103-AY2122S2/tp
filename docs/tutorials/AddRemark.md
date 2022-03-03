@@ -198,7 +198,7 @@ Now that we have the know-how to extract the data that we need from the user’s
 public RemarkCommand parse(String args) throws ParseException {
     requireNonNull(args);
     ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
-        PREFIX_REMARK);
+        Remark.PREFIX);
 
     Index index;
     try {
@@ -208,7 +208,7 @@ public RemarkCommand parse(String args) throws ParseException {
             RemarkCommand.MESSAGE_USAGE), ive);
     }
 
-    String remark = argMultimap.getValue(PREFIX_REMARK).orElse("");
+    String remark = argMultimap.getValue(Remark.PREFIX).orElse("");
 
     return new RemarkCommand(index, remark);
 }

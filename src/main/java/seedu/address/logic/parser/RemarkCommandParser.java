@@ -17,16 +17,16 @@ public class RemarkCommandParser implements Parser<RemarkCommand> {
      */
     public RemarkCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_REMARK);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, Remark.PREFIX);
 
         Index index;
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            index = IndexParser.parse(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemarkCommand.MESSAGE_USAGE), ive);
         }
 
-        Remark remark = new Remark(argMultimap.getValue(CliSyntax.PREFIX_REMARK).orElse(""));
+        Remark remark = new Remark(argMultimap.getValue(Remark.PREFIX).orElse(""));
 
         return new RemarkCommand(index, remark);
     }
