@@ -73,7 +73,7 @@ public class ParserUtil {
     public static InsurancePackage parseInsurancePackage(String insurancePackage) {
         requireNonNull(insurancePackage);
         String trimmedInsurancePackage = insurancePackage.trim();
-        return new InsurancePackage(trimmedInsurancePackage );
+        return new InsurancePackage(trimmedInsurancePackage);
     }
 
     /**

@@ -9,6 +9,11 @@ import static java.util.Objects.requireNonNull;
 public class InsurancePackage {
     public final String packageName;
 
+    /**
+     * Constructs an {@code InsurancePackage}.
+     *
+     * @param packageName A name for the insurance package
+     */
     public InsurancePackage(String packageName) {
         requireNonNull(packageName);
         this.packageName = packageName;

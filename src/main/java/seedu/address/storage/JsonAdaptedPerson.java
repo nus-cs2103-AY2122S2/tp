@@ -99,7 +99,8 @@ class JsonAdaptedPerson {
         final Email modelEmail = new Email(email);
 
         if (insurancePackage == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, InsurancePackage.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    InsurancePackage.class.getSimpleName()));
         }
         final InsurancePackage modelInsurancePackage = new InsurancePackage(insurancePackage);
 
