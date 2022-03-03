@@ -273,17 +273,17 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-|----------| ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | student who needs to contact other students for work-related matters                                   | add the contact information of other students         | I can easily contact other students when I need to                 |
-| `* * *`  | student who works on a group project                                       | add other students to my group               | I remember who is in my group                                                                      |
-| `* * *`  | student                                       | create a student group                | I can keep track of existing student groups in real life                                   | 
-| `* * *`  | student who needs to keep track of tasks that need to be done                                       | view the tasks that belong to each group          | I can know the list of tasks I need to complete for that particular group |
-| `* * *`  | student who works in a collaborative group project                                       | add/delete tasks to the group   | everyone in the group can see what we need to do                |
-| `* * *`  | student who wants to only keep groups that are presently relevant | delete/leave my groups to clear the inactive groups out of my group list           | I am not distracted by outdated information                                                 |
-| `* *`    | student who needs to keep track of my deadlines | add a deadline to a task           | I can record when a task needs to be done                                                 |
-| `* *`    | student who wants to keep track of the project progress | track the progress of the task that is handled by other students           | I know the overall picture of our project                                                 |
-| `*`      | student with bad time management | get a reminder of my impending group projects           | I won’t forget to complete the tasks by the deadline                                                 |
+| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                     |
+|----------| ------------------------------------------ | ------------------------------ |---------------------------------------------------------------------|
+| `* * *`  | student who needs to contact other students for work-related matters                                   | add the contact information of other students         | easily contact other students when I need to                        |
+| `* * *`  | student who works on a group project                                       | add other students to my group               | remember who is in my group                                         |
+| `* * *`  | student                                       | create a student group                | keep track of existing student groups in real life                  | 
+| `* * *`  | student who needs to keep track of tasks that need to be done                                       | view the tasks that belong to each group          | know the list of tasks I need to complete for that particular group |
+| `* * *`  | student who works in a collaborative group project                                       | add/delete tasks to the group   | let everyone in the group to see what we need to do                 |
+| `* * *`  | student who wants to only keep groups that are presently relevant | delete/leave my groups to clear the inactive groups out of my group list           | not be distracted by outdated information                           |
+| `* *`    | student who needs to keep track of my deadlines | add a deadline to a task           | record when a task needs to be done                                 |
+| `* *`    | student who wants to keep track of the project progress | track the progress of the task that is handled by other students           | know the overall picture of our project                             |
+| `*`      | student with bad time management | get a reminder of my impending group projects           | not forget to complete the tasks by the deadline                    |
 
 *{More to be added}*
 
@@ -351,6 +351,60 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. ArchDuke GUI displays the group in the group list
 
    Use case ends.
+
+**Use case: UC05 - Delete a student group**
+
+**MSS**
+
+1. User requests to delete a specific group in the list
+2. ArchDuke deletes the group
+3. ArchDuke GUI no longer displays the data of that specific group
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The given index is invalid
+
+    * 1a1. ArchDuke shows an error message
+
+  Use case resumes at step 1
+
+**Use case: UC06 - Add task in a group**
+
+**MSS**
+
+1. User requests to add a specific task to a specific group
+2. ArchDuke adds the specific task in the group
+3. ArchDuke GUI displays the specific task in the task list in that group
+   Use case ends.
+
+**Extensions**
+
+* 1a. The given index is invalid
+
+    * 1a1. ArchDuke shows an error message
+
+  Use case resumes at step 1
+
+**Use case: UC07 - Delete task in a group**
+
+**MSS**
+
+1. User requests to delete a specific task from a specific group
+2. ArchDuke deletes the specific task in the group
+3. ArchDuke GUI no longer displays the specific task in the task list in that group
+   Use case ends.
+
+**Extensions**
+
+* 1a. The given index is invalid
+
+    * 1a1. ArchDuke shows an error message
+
+  Use case resumes at step 1
+
+
 
 *{More to be added}*
 
