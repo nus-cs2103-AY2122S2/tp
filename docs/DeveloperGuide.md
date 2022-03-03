@@ -562,6 +562,7 @@ Use case ends
   Use case ends.
 
 **Use Case: E01 - Adding a new event**
+
 **Preconditions**: User can remember the event details they want. (e.g. names of friends to add)
 
 **Guarantees**: A new event will be created in Amigos, as long as the command was executed successfully.
