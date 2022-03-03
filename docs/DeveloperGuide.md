@@ -339,8 +339,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 3a. The given index is invalid
-    * 3a1. TAlent Assistant™ shows an error message
+* 3a. The given reference, i.e. Student Number, is invalid.
+
+    * 3a1. TAlent Assistant™ shows an error message.
 
   Use case resumes at step 2.
 
