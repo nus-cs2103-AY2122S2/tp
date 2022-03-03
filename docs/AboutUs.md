@@ -21,13 +21,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Loy Yoke Yue
 
-<img src="images/yokeyue.png" width="200px">
+<img src="images/yokester98.png" width="200px">
 
 [[github](http://github.com/yokester98)]
-[[portfolio](team/yokeyue.md)]
+[[portfolio](team/yokester98.md)]
 
 * Role: Code Quality
-* Responsibilities: Add contacts
+* Responsibilities: Add contacts to UniBook
 
 ### Gerald Neo
 
@@ -36,7 +36,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/geraldneo567)] [[portfolio](team/geraldneo567.md)]
 
 * Role: Documentation
-* Responsibilities: Parsing input
+* Responsibilities: Parsing command input
 
 ### Ryan Walter Lee
 
@@ -50,7 +50,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Sophie Ng
 
-<img src="images/sophie.png" width="200px">
+<img src="images/sophiien.png" width="200px">
 
 [[github](http://github.com/sophiien)]
 [[portfolio](team/sophiien.md)]

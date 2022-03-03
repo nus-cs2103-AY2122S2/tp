@@ -4,8 +4,14 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+<<<<<<< HEAD
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+=======
+import seedu.address.model.ReadOnlyUniBook;
+import seedu.address.model.UniBook;
+import seedu.address.model.person.Address;
+>>>>>>> c1a634abff28b20650784c00cb64152a609d174e
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -13,7 +19,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code UniBook} with sample data.
  */
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
@@ -33,8 +39,8 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+    public static ReadOnlyUniBook getSampleUniBook() {
+        UniBook sampleAb = new UniBook();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }
