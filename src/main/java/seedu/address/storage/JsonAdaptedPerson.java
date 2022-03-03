@@ -11,7 +11,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.CovidStatus;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Faculty;
+import seedu.address.model.person.MatriculationNumber;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -25,22 +28,30 @@ class JsonAdaptedPerson {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
     private final String name;
+    private final String faculty;
     private final String phone;
     private final String email;
     private final String address;
+    private final String number;
+    private final String status;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("faculty") String faculty,
+                             @JsonProperty("phone") String phone,
+                             @JsonProperty("email") String email, @JsonProperty("address") String address,
+                             @JsonProperty("number") String number, @JsonProperty("status") String status,
+                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
+        this.faculty = faculty;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.number = number;
+        this.status = status;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -51,9 +62,12 @@ class JsonAdaptedPerson {
      */
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
+        faculty = source.getFaculty().studentFaculty;
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        number = source.getMatriculationNumber().value;
+        status = source.getStatus().covidStatus;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -77,6 +91,15 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
         final Name modelName = new Name(name);
+
+        if (faculty == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Faculty.class.getSimpleName()));
+        }
+
+        if (!Faculty.isValidFaculty(faculty)) {
+            throw new IllegalValueException(Faculty.MESSAGE_CONSTRAINTS);
+        }
+        final Faculty modelFaculty = new Faculty(faculty);
 
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
@@ -102,8 +125,27 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        if (number == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    MatriculationNumber.class.getSimpleName()));
+        }
+        if (!MatriculationNumber.isValidMatriculationNumber(number)) {
+            throw new IllegalValueException(MatriculationNumber.MESSAGE_CONSTRAINTS);
+        }
+        final MatriculationNumber matriculationNumber = new MatriculationNumber(number);
+
+        if (status == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    CovidStatus.class.getSimpleName()));
+        }
+        if (!Address.isValidAddress(status)) {
+            throw new IllegalValueException(CovidStatus.MESSAGE_CONSTRAINTS);
+        }
+        final CovidStatus covidStatus = new CovidStatus(status);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Person(modelName, modelFaculty, modelPhone, modelEmail, modelAddress, matriculationNumber,
+                covidStatus, modelTags);
     }
 
 }

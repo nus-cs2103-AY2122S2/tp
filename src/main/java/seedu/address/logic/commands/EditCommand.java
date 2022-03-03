@@ -20,7 +20,10 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.CovidStatus;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Faculty;
+import seedu.address.model.person.MatriculationNumber;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -99,7 +102,8 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, new Faculty("test"), updatedPhone, updatedEmail, updatedAddress,
+                new MatriculationNumber("a0123456m"), new CovidStatus("positive"), updatedTags);
     }
 
     @Override
