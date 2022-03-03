@@ -29,14 +29,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Code Quality and Documentation
 
-### QUEK KAH LEONG
+### Quek Kah Leong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kahleongq.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/punpun1643.md)]
+[[github](http://github.com/kahleongq)] [[portfolio](team/kahleongq.md)]
 
-* Role: TBC
-* Responsibilities: TBC
+* Role: Testing
+* Responsibilities: Ensures tests are done correctly and on time.
 
 ### KRISTOPHER PUTRA TASLIM
 
