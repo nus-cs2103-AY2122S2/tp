@@ -14,18 +14,17 @@ Amigos is a desktop application to help tech-savvy university students manage th
 1. Ensure you have Java `11` or above installed in your Computer.
 
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `amigos.jar` from [here](https://github.com/AY2122S2-CS2103-F09-2/tp/releases/tag/v1.1).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your application.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+1. Type the command in the command box and press Enter to execute it. e.g:
 
-   * **`list`** : Lists all contact. # to change
-
+   * **`showfriends`** : Lists all friends.
+   
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -52,15 +51,15 @@ Amigos is a desktop application to help tech-savvy university students manage th
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* Extraneous parameters for commands that do not take in parameters (such as `showfriends`, `showevents`, `exit` and `clear`) will be ignored.<br>
+  e.g. if the command specifies `showfriends 123`, it will be interpreted as `showfriends`.
 
 </div>
 
 
 ### Adding a friend: `addfriend`
 
-Adds a new friend to the address book. A friend has:
+Adds a new friend to Amigos. A friend has:
 * ***(compulsory)*** name
 * *(optional)* phone number
 * *(optional)* email
@@ -78,11 +77,11 @@ Examples:
 
 ### Editing a friend : `editfriend`
 
-Edits an existing friend in the address book.
+Edits an existing friend in Amigos.
 
 Format: `editfriend cn/[CURRENT_NAME] nn/[NEW_NAME]  np/[NEW_PHONE_NUMBER] ne/[NEW_EMAIL] na/[NEW_ADDRESS] nd/[NEW_DESCRIPTION]`
 
-* Edits an existing friend in the address book. Field `CURRENT_NAME` is compulsory to identify the existing friend.
+* Edits an existing friend in Amigos. Field `CURRENT_NAME` is compulsory to identify the existing friend.
 * At least one of the optional fields must be provided.
 * Existing values will be overwritten to the input values.
 
@@ -94,7 +93,7 @@ Examples:
 
 ### Deleting a friend : `deletefriend`
 
-Deletes a friend in the address book
+Deletes a friend in Amigos.
 
 Format: `deletefriend n/[NAME]`
 
@@ -107,7 +106,7 @@ Examples:
 
 ### Show a specific friend: `showfriend`
 
-Shows page containing the full details related to an existing friend in the address book. By default, only the latest 10 logs are displayed in this page.
+Shows page containing the full details related to an existing friend in Amigos. By default, only the latest 10 logs are displayed in this page.
 
 Format: `showfriend n/NAME -alllogs`
 
@@ -120,7 +119,7 @@ Examples:
 
 ### Show all friends : `showfriends`
 
-Shows all friends in the address book. Switches GUI to the friends tab.
+Shows all friends in Amigos. Switches GUI to the friends tab.
 
 Format: `showfriends`
 
@@ -145,7 +144,7 @@ Examples:
 
 ### Editing a log: `editlog`
 
-Edits an existing log of an existing friend in the address book.
+Edits an existing log of an existing friend in Amigos.
 
 Format: `editlog n/[NAME] id/[LOG_INDEX] nt/[NEW_TITLE] nd/[NEW_DESCRIPTION]`
 
@@ -220,7 +219,7 @@ Delete existing event(s).
 
 ### Show all events : `showevents`
 
-Shows all events stored in the address book. Switches GUI to the events tab.
+Shows all events stored in Amigos. Switches GUI to the events tab.
 
 Format: `showevents`
 
@@ -233,7 +232,7 @@ Examples:
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Amigos home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
