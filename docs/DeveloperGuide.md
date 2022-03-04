@@ -267,22 +267,9 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Value proposition**: TAssist creates a more conducive learning environment for educators and students by helping TAs consolidate students’ contacts and track their progress.
 
-
-### User stories
+### TAssist User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
-
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-
-## TAssist Target User Stories
 
 <table class="c20">
     <tbody>
@@ -459,16 +446,57 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TAssist` and the **Actor** is the `TA`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case 01: Add a module**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  TA requests to add a new module with the specified details.
+2.  TAssist adds the new module and displays its details.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. TAssist detects an error in the entered command.
+
+    * 1a1. TAssist prompts for the correct command.
+
+    * 1a2. TA enters a new command.
+
+      Steps 1a1-1a2 are repeated until the command entered is correct.
+
+      Use case resumes from step 2.
+
+**Use case 02: List modules**
+
+**MSS**
+
+1.  TA requests to list modules.
+2.  TAssists displays the details of all modules.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. TAssist detects an error in the entered command.
+
+    * 1a1. TAssist prompts for the correct command.
+
+    * 1a2. TA enters a new command.
+
+      Steps 1a1-1a2 are repeated until the command entered is correct.
+
+      Use case resumes from step 2.
+
+**Use case 03: Delete a module**
+
+**MSS**
+
+1. TA requests to <ins>list modules (UC02)</ins>. 
+2. TA requests to delete a specific module in the list.
+3. TAssist deletes the module and the class groups associated with it.
 
     Use case ends.
 
@@ -478,26 +506,174 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 2b. TAssist detects an error in the entered command.
 
-    * 3a1. AddressBook shows an error message.
+    * 2b1. TAssist prompts for the correct command.
 
-      Use case resumes at step 2.
+    * 2b2. TA enters a new command.
 
-*{More to be added}*
+      Steps 2b1-2b2 are repeated until the command entered is correct.
+
+      Use case resumes from step 3.
+
+**Use case 04: Add a class group**
+
+**Preconditions: The module that the class group will be added to already exists.**
+
+**MSS**
+
+1.  TA requests to add a new class group with the specified details.
+2.  TAssist adds the new class group and displays its details.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. TAssist detects an error in the entered command.
+
+    * 1a1. TAssist prompts for the correct command.
+
+    * 1a2. TA enters a new command.
+
+      Steps 1a1-1a2 are repeated until the command entered is correct.
+
+      Use case resumes from step 2.
+
+**Use case 05: List class groups**
+
+**MSS**
+
+1.  TA requests to list class groups.
+2.  TAssist displays the details of all class groups.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. TAssist detects an error in the entered command.
+
+    * 1a1. TAssist prompts for the correct command.
+
+    * 1a2. TA enters a new command.
+
+      Steps 1a1-1a2 are repeated until the command entered is correct.
+
+      Use case resumes from step 2.
+
+**Use case 06: Delete a class group**
+
+**MSS**
+
+1.  TA requests to <ins>list class groups (UC05)</ins>.
+2.  TA requests to delete a specific class group in the list.
+3.  TAssist deletes the class group.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 2b. TAssist detects an error in the entered command.
+
+    * 2b1. TAssist prompts for the correct command.
+  
+    * 2b2. TA enters a new command.
+
+      Steps 2b1-2b2 are repeated until the command entered is correct.
+
+      Use case resumes from step 3.
+
+**Use case 07: Add a student**
+
+**MSS**
+
+1.  TA requests to add a new student with the specified details.
+2.  TAssist adds the new student and displays their details.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. TAssist detects an error in the entered command.
+
+    * 1a1. TAssist prompts for the correct command.
+
+    * 1a2. TA enters a new command.
+
+      Steps 1a1-1a2 are repeated until the command entered is correct.
+
+      Use case resumes from step 2.
+
+**Use case 08: List students**
+
+**MSS**
+
+1.  TA requests to list students.
+2.  TAssist displays the details of all students.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. TAssist detects an error in the entered command.
+
+    * 1a1. TAssist prompts for the correct command.
+
+    * 1a2. TA enters a new command.
+
+      Steps 1a1-1a2 are repeated until the command entered is correct.
+
+      Use case resumes from step 2.
+
+**Use case 09: Delete a student**
+
+**MSS**
+
+1.  TA requests to <ins>list students (UC08)</ins>.
+2.  TA requests to delete a specific student in the list.
+3.  TAssist deletes the student.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 2b. TAssist detects an error in the entered command.
+
+    * 2b1. TAssist prompts for the correct command.
+
+    * 2b2. TA enters a new command.
+
+      Steps 2b1-2b2 are repeated until the command entered is correct.
+
+      Use case resumes from step 3.
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4.  Should not depend on external/remote servers.
+5.  Should not depend on a Database Management System (DBMS).
 
 ### Glossary
 
+* **Class Group**: The different types of classes a module has. E.g. T01, T02, B01, B02
+* **CLI**: Command line interface
+* **GUI**: Graphical user interface
+* **Lesson**: The weekly lesson that students turn up for
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Module**: A NUS SoC module
+* **MSS**: Main Success Scenario
+* **NUS**: The National University of Singapore
+* **Student**: A student in NUS
+* **TA**: A Teaching Assistant in NUS SoC
 
 --------------------------------------------------------------------------------------------------------------------
 
