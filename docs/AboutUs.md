@@ -56,3 +56,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: Documentation + Search
+
+
+### Daffa
+
+<img src="images/zunedz.png" width="200px">
+
+[[github](http://github.com/zunedz)][[portfolio](team/zunedz.md)]
+
+* Role: Developer
+* Responsibilities: Code, Testing
