@@ -2,16 +2,8 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.logging.Filter;
-
 import seedu.address.logic.commands.FilterSkillCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonContainsSkillPredicate;
 import seedu.address.model.tag.Skill;
 
