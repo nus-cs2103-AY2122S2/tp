@@ -345,13 +345,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1c. There are multiple clients with the same given name.
     * 1c1. HustleBook requests confirmation from the user to add client with same name. 
     * 1c2. User enters his confirmation.
-      * 1c2a. User accepts to add the client.
+    * 1c3. User accepts to add the client.
+
+      Use case resumes at step 2.
       
-        Use case resumes at step 2.
-      
-      * 1c2b. User rejects.
-    
-        Use case ends.
+* 1d. Same as 1c, except that user rejects to add the client at step 1c3.
+    * 1d1. HustleBook requests confirmation from the user to add client with same name.
+    * 1d2. User enters his confirmation.
+    * 1d3. User rejects to add the client.
+
+      Use case ends.
 
 
 **Use case: UC02 - Find Client**
@@ -498,28 +501,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 * **Data requirement**:
-
     * HustleBook should be able to handle up to 250 clients.
     * Each client’s data should be able to be edited anytime.
 
-* **Constraints**:
 
+* **Constraints**:
     * A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
-* **Environment requirements**:
 
+* **Environment requirements**:
     * System should work on _mainstream OS_ with java 11 or above installed.
 
-* **Technical requirements**:
 
+* **Technical requirements**:
     * System should be able to scale up and handle clients with the same name.
 
-* **Process requirements**:
 
+* **Process requirements**:
     * The project is expected to adhere to a schedule that delivers a feature set every two weeks (v1.2 and v1.3).
 
-* **Notes about project scope**:
 
+* **Notes about project scope**:
     * The product is not required to handle exporting of data to files for printing or other purposes.
 
 ### Glossary
