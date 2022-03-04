@@ -22,15 +22,10 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link]()
 
 * **Project management**:
-  * Managed releases ???? on GitHub
 
 * **Enhancements to existing features**:
 
 * **Documentation**:
-  * User Guide:
-  * Developer Guide:
-    * Added user stories.
-    * Added NFRs.
 
 * **Community**:
 
