@@ -206,7 +206,7 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
-        private void setRemark(Remark remark) {
+        public void setRemark(Remark remark) {
             this.remark = remark;
         }
 
