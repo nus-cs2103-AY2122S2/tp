@@ -33,11 +33,11 @@ I am an eager Y2 computer science undergraduate with the desire to learn and imp
 
 ### Steven Chua
 
-<img src="images/stevenchua.jpg" width="200px">
+<img src="images/graphcalibur.png" width="200px">
 
 [[homepage](https://www.linkedin.com/in/stevengkchua)]
-[[github](http://github.com/grraphcalibur)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/graphcalibur)]
+[[portfolio](team/graphcalibur.md)]
 
 * Role: Developer
 * Responsibilities: TBD
