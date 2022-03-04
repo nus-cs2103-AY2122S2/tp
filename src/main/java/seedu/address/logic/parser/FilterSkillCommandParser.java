@@ -8,13 +8,13 @@ import seedu.address.model.person.PersonContainsSkillPredicate;
 import seedu.address.model.tag.Skill;
 
 /**
- * Parses input arguments and creates a new FindCommand object
+ * Parses input arguments and creates a new FilterSkillCommand object
  */
 public class FilterSkillCommandParser implements Parser<FilterSkillCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the FindCommand
-     * and returns a FindCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the FilterSkillCommand
+     * and returns a FilterSkillCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public FilterSkillCommand parse(String args) throws ParseException {

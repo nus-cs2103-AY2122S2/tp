@@ -36,7 +36,7 @@ public class FilterSkillCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof FindCommand // instanceof handles nulls
+                || (other instanceof FilterSkillCommand // instanceof handles nulls
                 && predicate.equals(((FilterSkillCommand) other).predicate)); // state check
     }
 }
