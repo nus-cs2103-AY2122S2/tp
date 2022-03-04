@@ -448,77 +448,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `TAssist` and the **Actor** is the `TA`, unless specified otherwise)
 
-**Use case 01: Add a module**
-
-**MSS**
-
-1.  TA requests to add a new module with the specified details.
-2.  TAssist adds the new module and displays its details.
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. TAssist detects an error in the entered command.
-
-    * 1a1. TAssist prompts for the correct command.
-
-    * 1a2. TA enters a new command.
-
-      Steps 1a1-1a2 are repeated until the command entered is correct.
-
-      Use case resumes from step 2.
-
-**Use case 02: List modules**
-
-**MSS**
-
-1.  TA requests to list modules.
-2.  TAssists displays the details of all modules.
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. TAssist detects an error in the entered command.
-
-    * 1a1. TAssist prompts for the correct command.
-
-    * 1a2. TA enters a new command.
-
-      Steps 1a1-1a2 are repeated until the command entered is correct.
-
-      Use case resumes from step 2.
-
-**Use case 03: Delete a module**
-
-**MSS**
-
-1. TA requests to <ins>list modules (UC02)</ins>. 
-2. TA requests to delete a specific module in the list.
-3. TAssist deletes the module and the class groups associated with it.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 2b. TAssist detects an error in the entered command.
-
-    * 2b1. TAssist prompts for the correct command.
-
-    * 2b2. TA enters a new command.
-
-      Steps 2b1-2b2 are repeated until the command entered is correct.
-
-      Use case resumes from step 3.
-
 **Use case 04: Add a class group**
-
-**Preconditions: The module that the class group will be added to already exists.**
 
 **MSS**
 
@@ -576,104 +506,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 2b. TAssist detects an error in the entered command.
+* 2a. TAssist detects an error in the entered command.
 
-    * 2b1. TAssist prompts for the correct command.
+    * 2a1. TAssist prompts for the correct command.
   
-    * 2b2. TA enters a new command.
+    * 2a2. TA enters a new command.
 
-      Steps 2b1-2b2 are repeated until the command entered is correct.
+      Steps 2a1-2a2 are repeated until the command entered is correct.
 
       Use case resumes from step 3.
 
-**Use case 07: Add a student**
+* 3b. The given index is invalid.
 
-**MSS**
-
-1.  TA requests to add a new student with the specified details.
-2.  TAssist adds the new student and displays their details.
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. TAssist detects an error in the entered command.
-
-    * 1a1. TAssist prompts for the correct command.
-
-    * 1a2. TA enters a new command.
-
-      Steps 1a1-1a2 are repeated until the command entered is correct.
+    * 3b1. TAssist shows an error message.
 
       Use case resumes from step 2.
 
-**Use case 08: List students**
-
-**MSS**
-
-1.  TA requests to list students.
-2.  TAssist displays the details of all students.
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. TAssist detects an error in the entered command.
-
-    * 1a1. TAssist prompts for the correct command.
-
-    * 1a2. TA enters a new command.
-
-      Steps 1a1-1a2 are repeated until the command entered is correct.
-
-      Use case resumes from step 2.
-
-**Use case 09: Delete a student**
-
-**MSS**
-
-1.  TA requests to <ins>list students (UC08)</ins>.
-2.  TA requests to delete a specific student in the list.
-3.  TAssist deletes the student.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 2b. TAssist detects an error in the entered command.
-
-    * 2b1. TAssist prompts for the correct command.
-
-    * 2b2. TA enters a new command.
-
-      Steps 2b1-2b2 are repeated until the command entered is correct.
-
-      Use case resumes from step 3.
+*{More to be added}*
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  Should not depend on external/remote servers.
-5.  Should not depend on a Database Management System (DBMS).
+
+*{More to be added}*
 
 ### Glossary
 
-* **Class Group**: The different types of classes a module has. E.g. T01, T02, B01, B02
-* **CLI**: Command line interface
-* **GUI**: Graphical user interface
-* **Lesson**: The weekly lesson that students turn up for
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Module**: A NUS SoC module
-* **MSS**: Main Success Scenario
-* **NUS**: The National University of Singapore
-* **Student**: A student in NUS
-* **TA**: A Teaching Assistant in NUS SoC
+* **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
 
