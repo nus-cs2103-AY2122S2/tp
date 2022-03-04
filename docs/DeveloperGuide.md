@@ -345,13 +345,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1c. There are multiple clients with the same given name.
     * 1c1. HustleBook requests confirmation from the user to add client with same name. 
     * 1c2. User enters his confirmation.
-      * 1c2a. User accepts to add the client.
+    * 1c3. User accepts to add the client.
+
+      Use case resumes at step 2.
       
-        Use case resumes at step 2.
-      
-      * 1c2b. User rejects.
-    
-        Use case ends.
+* 1d. Same as 1c, except that user rejects to add the client at step 1c3.
+    * 1d1. HustleBook requests confirmation from the user to add client with same name.
+    * 1d2. User enters his confirmation.
+    * 1d3. User rejects to add the client.
+
+      Use case ends.
 
 
 **Use case: UC02 - Find Client**
