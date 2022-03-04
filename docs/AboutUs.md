@@ -10,7 +10,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Yong Kai Qi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/flairekq.png" width="200px">
 
 [[github](https://github.com/flairekq)]
 [[portfolio](team/flairekq.md)]
@@ -30,7 +30,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Tan Ka Shing
 
-<img src="images/kashing_photo.jpg" width="200px">
+<img src="images/kashing555.png" width="200px">
 
 [[github](http://github.com/kashing555)]
 [[portfolio](team/kashing555.md)]
@@ -40,10 +40,20 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Isabel Teo
 
-<img src="images/isabelteo_photo.jpg" width="200px">
+<img src="images/isabelteo.png" width="200px">
 
 [[github](https://github.com/isabelteo)]
 [[portfolio](team/isabelteo.md)]
 
 * Role: Developer
 * Responsibilities: UI
+
+### Kong Jun Yin
+
+<img src="images/oheyesee.png" width="200px">
+
+[[github](https://github.com/OhEyeSee)]
+[[portfolio](team/oheyesee.md)]
+
+* Role: NIL
+* Responsibilities: NIL
