@@ -21,6 +21,8 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_USERNAME = "amybee99";
+    public static final String DEFAULT_TAG = "friend";
+    public static final String DEFAULT_SKILL = "Python_33";
 
     private Name name;
     private Phone phone;
@@ -39,7 +41,8 @@ public class PersonBuilder {
         githubUsername = new GithubUsername(DEFAULT_USERNAME);
         tags = new HashSet<>();
         skillSet = new HashSet<>();
-
+        withSkillSet(DEFAULT_SKILL);
+        withTags(DEFAULT_TAG);
     }
 
     /**
@@ -73,8 +76,8 @@ public class PersonBuilder {
     /**
      * Parses the {@code skill} into a {@code Set<Skill>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withSkillSet(String ... tags) {
-        this.skillSet = SampleDataUtil.getSkillSet(tags);
+    public PersonBuilder withSkillSet(String ... skillSet) {
+        this.skillSet = SampleDataUtil.getSkillSet(skillSet);
         return this;
     }
 
