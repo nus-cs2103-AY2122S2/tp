@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Client;
+import seedu.address.model.client.Client;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -33,7 +33,7 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredClients = new FilteredList<>(this.addressBook.getPersonList());
+        filteredClients = new FilteredList<>(this.addressBook.getclientList());
     }
 
     public ModelManager() {
@@ -88,42 +88,42 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Client client) {
+    public boolean hasclient(Client client) {
         requireNonNull(client);
-        return addressBook.hasPerson(client);
+        return addressBook.hasclient(client);
     }
 
     @Override
-    public void deletePerson(Client target) {
-        addressBook.removePerson(target);
+    public void deleteclient(Client target) {
+        addressBook.removeclient(target);
     }
 
     @Override
-    public void addPerson(Client client) {
-        addressBook.addPerson(client);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addclient(Client client) {
+        addressBook.addclient(client);
+        updateFilteredclientList(PREDICATE_SHOW_ALL_clientS);
     }
 
     @Override
-    public void setPerson(Client target, Client editedClient) {
+    public void setclient(Client target, Client editedClient) {
         requireAllNonNull(target, editedClient);
 
-        addressBook.setPerson(target, editedClient);
+        addressBook.setclient(target, editedClient);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered client List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code client} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Client> getFilteredPersonList() {
+    public ObservableList<Client> getFilteredclientList() {
         return filteredClients;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Client> predicate) {
+    public void updateFilteredclientList(Predicate<Client> predicate) {
         requireNonNull(predicate);
         filteredClients.setPredicate(predicate);
     }
