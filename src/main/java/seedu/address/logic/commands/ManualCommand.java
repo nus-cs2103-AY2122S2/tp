@@ -8,7 +8,7 @@ import seedu.address.model.Model;
  * Display the format for a specified command and a short description for a particular command.
  */
 
-public class ManualCommand extends Command{
+public class ManualCommand extends Command {
 
     public static final String COMMAND_WORD = "manual";
 
