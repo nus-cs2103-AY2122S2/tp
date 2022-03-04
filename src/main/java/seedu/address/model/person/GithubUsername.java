@@ -11,12 +11,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class GithubUsername {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Github usernames should only contain at most 39 alphanumeric characters and hypens,"
-                    + " but cannot have consecutive hypens and cannot begin or end with hypens.";
+            "Github usernames should only contain at most 39 alphanumeric characters and hyphens,"
+                    + " but cannot have consecutive hyphens and cannot begin or end with hyphens.";
 
     /*
-     * The first character of the GitHub Username must not be a whitespace or a hypen,
-     * otherwise " " (a blank string) and "-" becomes a valid input.
+     * The first and last character of the GitHub Username must a hyphen,
+     * can't have consecutive hyphens in the GitHub Username,
+     * and can't be longer than 39 alphanumeric characters.
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}](?:[\\p{Alnum}]|-(?=[\\p{Alnum}])){0,38}";
 
