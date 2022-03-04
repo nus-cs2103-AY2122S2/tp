@@ -295,10 +295,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1. TA request to add new lab
-2. TAB adds lab tag to master list of lab tags
-3. TAB adds a new lab tag to every student
-4. TAB shows updated lab tags
-5. TAB displays success message
+2. TAB adds a new lab to every student
+3. TAB shows updated list of labs
+4. TAB displays success message
 
    Use case ends.
 
@@ -307,8 +306,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. TAB displays warning message to user (that there are no students yet)
 
       Use case ends
-* 2b. TAB detects that an identical lab tag already exists.
-    * 2b1. TAB displays error message (that tag already exists)
+* 2b. TAB detects that an identical lab already exists.
+    * 2b1. TAB displays error message (that lab already exists)
 
       Use case ends
 
@@ -316,17 +315,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  TA requests to filter students by a tag 
+1.  TA requests to filter students by a specific lab 
 2.  TAB displays list of students based on filter criteria
 
     Use case ends
 
 **Extensions**
 
-* 1a. TA provides non-existent tag
+* 1a. TA provides non-existent lab
   
     * 1a1. TAB shows error message
-    * 1a2. TAB requests for valid tag
+    * 1a2. TAB requests for valid lab
 
       Use case resumes from step 1
 
@@ -341,7 +340,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 1. TA requests to change a student’s lab status to “Graded”
 2. TAB changes the student’s lab status from “Submitted” to “Graded”
-3. TAB shows updated lab tag
+3. TAB shows updated lab status
 4. TAB displays success message
 
    Use case ends.
@@ -353,12 +352,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 1a2. TAB requests for valid student index
 
   Use case resumes from step 1
-- 1b. TA provides lab that is already graded
-    - 1b1. TAB shows error message stating that lab is already graded
+- 1b. TA provides lab that is already "Graded"
+    - 1b1. TAB shows error message stating that lab is already "Graded"
     - 1b2. TAB requests for valid lab
 
   Use case resumes from step 1
-- 1c. TA provides lab that has not been submitted yet
+- 1c. TA provides lab that has not been "Submitted"
     - 1c1. TAB shows error message that lab status has to be “Submitted” first
     - 1c2. TAB requests for valid lab
 
@@ -375,7 +374,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. TA requests to change a student’s lab status to “Submitted”
 2. TAB changes the student’s lab status from “Unsubmitted” to “Submitted”
-3. TAB shows updated lab tag
+3. TAB shows updated lab status
 4. TAB displays success message
 
    Use case ends.
@@ -387,8 +386,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 1a2. TAB requests for valid student index
 
   Use case resumes from step 1.
-- 1b. TA provides lab that is already submitted
-    - 1b1. TAB shows error message stating that the lab for the particular student has already been submitted
+- 1b. TA provides lab that is already "Submitted"
+    - 1b1. TAB shows error message stating that the lab for the particular student has already been "Submitted"
     - 1b2. TAB requests for valid lab and student
 
   Use case resumes from step 1
@@ -417,6 +416,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Unsubmiited**: Status to indicate that the student has not submitted the lab assignment or it is overdue.
 * **Submitted**: Status to indicate that the student has submitted the lab assignment to his github repository.
 * **Graded**: Status to indicate that the User (TA) has graded the student's lab assignment.
+* **Lab**: Refers to Lab assignments from the module CS2030S offered by The National University of Singapore.
 
 --------------------------------------------------------------------------------------------------------------------
 
