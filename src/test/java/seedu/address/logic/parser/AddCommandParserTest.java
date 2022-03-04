@@ -9,7 +9,10 @@ import static seedu.address.logic.commands.CommandTestUtil.GITHUB_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.GITHUB_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_GITHUB_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_GITHUB_CONSECUTIVE_HYPHEN_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_GITHUB_ENDING_HYPHEN_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_GITHUB_LONGER_THAN_39_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_GITHUB_STARTING_HYPHEN_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
@@ -138,9 +141,25 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + GITHUB_DESC_BOB + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
 
-        // invalid github
+        // invalid github (consecutive hyphens)
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + INVALID_GITHUB_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, GithubUsername.MESSAGE_CONSTRAINTS);
+                + INVALID_GITHUB_CONSECUTIVE_HYPHEN_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                GithubUsername.MESSAGE_CONSTRAINTS);
+
+        // invalid github (starting with hyphen)
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + INVALID_GITHUB_STARTING_HYPHEN_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                GithubUsername.MESSAGE_CONSTRAINTS);
+
+        // invalid github (ending with hyphen)
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + INVALID_GITHUB_ENDING_HYPHEN_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                GithubUsername.MESSAGE_CONSTRAINTS);
+
+        // invalid github (longer than 39 alphanumerical characters)
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + INVALID_GITHUB_LONGER_THAN_39_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                GithubUsername.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
