@@ -4,14 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 public class Description {
-    public static final String MESSAGE_CONSTRAINTS =
-            "Description should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Description should not be blank";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "[^\\s].*";
 
     public final String description;
 
@@ -42,8 +41,8 @@ public class Description {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                       || (other instanceof Name // instanceof handles nulls
-                                   && description.equals(((Name) other).fullName)); // state check
+                       || (other instanceof Description // instanceof handles nulls
+                                   && description.equals(((Description) other).description)); // state check
     }
 
     @Override
