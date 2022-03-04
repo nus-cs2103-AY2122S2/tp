@@ -58,7 +58,15 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-    public static final String INVALID_GITHUB_DESC = " " + PREFIX_GITHUB + "invalid--1"; // cant have consecutive '-'
+    // cant have consecutive '-'
+    public static final String INVALID_GITHUB_CONSECUTIVE_HYPHEN_DESC = " " + PREFIX_GITHUB + "invalid--1";
+    // cant start with '-'
+    public static final String INVALID_GITHUB_STARTING_HYPHEN_DESC = " " + PREFIX_GITHUB + "-invalid";
+    // cant end with '-'
+    public static final String INVALID_GITHUB_ENDING_HYPHEN_DESC = " " + PREFIX_GITHUB + "invalid-";
+    // cant be longer than 39 alphanumeric characters
+    public static final String INVALID_GITHUB_LONGER_THAN_39_DESC = " " + PREFIX_GITHUB
+            + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
