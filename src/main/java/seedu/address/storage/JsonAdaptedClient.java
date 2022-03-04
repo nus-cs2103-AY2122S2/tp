@@ -10,14 +10,17 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.client.*;
+import seedu.address.model.client.Address;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.Email;
+import seedu.address.model.client.Name;
+import seedu.address.model.client.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link Client}.
  */
-class JsonAdaptedclient {
+class JsonAdaptedClient {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "client's %s field is missing!";
 
@@ -31,9 +34,9 @@ class JsonAdaptedclient {
      * Constructs a {@code JsonAdaptedclient} with the given client details.
      */
     @JsonCreator
-    public JsonAdaptedclient(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+    public JsonAdaptedClient(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
+                             @JsonProperty("email") String email, @JsonProperty("address") String address,
+                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -46,7 +49,7 @@ class JsonAdaptedclient {
     /**
      * Converts a given {@code client} into this class for Jackson use.
      */
-    public JsonAdaptedclient(Client source) {
+    public JsonAdaptedClient(Client source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;

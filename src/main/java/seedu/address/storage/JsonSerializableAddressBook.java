@@ -19,15 +19,15 @@ import seedu.address.model.client.Client;
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_client = "clients list contains duplicate client(s).";
+    public static final String MESSAGE_DUPLICATE_CLIENT = "clients list contains duplicate client(s).";
 
-    private final List<JsonAdaptedclient> clients = new ArrayList<>();
+    private final List<JsonAdaptedClient> clients = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given clients.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("clients") List<JsonAdaptedclient> clients) {
+    public JsonSerializableAddressBook(@JsonProperty("clients") List<JsonAdaptedClient> clients) {
         this.clients.addAll(clients);
     }
 
@@ -37,7 +37,7 @@ class JsonSerializableAddressBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
-        clients.addAll(source.getclientList().stream().map(JsonAdaptedclient::new).collect(Collectors.toList()));
+        clients.addAll(source.getclientList().stream().map(JsonAdaptedClient::new).collect(Collectors.toList()));
     }
 
     /**
@@ -47,10 +47,10 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
-        for (JsonAdaptedclient jsonAdaptedclient : clients) {
+        for (JsonAdaptedClient jsonAdaptedclient : clients) {
             Client client = jsonAdaptedclient.toModelType();
             if (addressBook.hasclient(client)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_client);
+                throw new IllegalValueException(MESSAGE_DUPLICATE_CLIENT);
             }
             addressBook.addclient(client);
         }

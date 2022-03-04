@@ -86,7 +86,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     public void sortPersons() {
-        persons.sortPersons();
+        clients.sortPersons();
     }
 
     /**

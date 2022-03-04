@@ -89,24 +89,24 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasclient(Client client) {
+    public boolean hasClient(Client client) {
         requireNonNull(client);
         return addressBook.hasclient(client);
     }
 
     @Override
-    public void deleteclient(Client target) {
+    public void deleteClient(Client target) {
         addressBook.removeclient(target);
     }
 
     @Override
-    public void addclient(Client client) {
+    public void addClient(Client client) {
         addressBook.addclient(client);
-        updateFilteredclientList(PREDICATE_SHOW_ALL_clientS);
+        updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
     }
 
     @Override
-    public void setclient(Client target, Client editedClient) {
+    public void setClient(Client target, Client editedClient) {
         requireAllNonNull(target, editedClient);
 
         addressBook.setclient(target, editedClient);
@@ -119,18 +119,18 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Client> getFilteredclientList() {
+    public ObservableList<Client> getFilteredClientList() {
         return filteredClients;
     }
 
     @Override
-    public void updateFilteredclientList(Predicate<Client> predicate) {
+    public void updateFilteredClientList(Predicate<Client> predicate) {
         requireNonNull(predicate);
         filteredClients.setPredicate(predicate);
     }
 
     @Override
-    public void sortFilteredPersonList() {
+    public void sortFilteredClientList() {
         addressBook.sortPersons();
     }
 
