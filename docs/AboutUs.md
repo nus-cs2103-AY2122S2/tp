@@ -11,7 +11,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Haikal Yusuf
 
-<img src="images/team/waffledood.png" width="200px">
+<img src="images/waffledood.png" width="200px">
 
 [[github](http://github.com/waffledood)]
 [[portfolio](team/waffledood.md)]
@@ -21,7 +21,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Howard Wong
 
-<img src="images/team/howardwhw2.png" width="200px">
+<img src="images/howardwhw2.png" width="200px">
 
 [[github](http://github.com/howardwhw2)] 
 [[portfolio](team/howardwhw2.md)]
@@ -31,7 +31,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Bryan Zheng
 
-<img src="images/team/ashuh.png" width="200px">
+<img src="images/ashuh.png" width="200px">
 
 [[github](http://github.com/ashuh)] 
 [[portfolio](team/ashuh.md)]
@@ -41,7 +41,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### HsiaoJietNg
 
-<img src="images/team/hsiaojietng.jpeg" width="200px">
+<img src="images/hsiaojietng.png" width="200px">
 
 [[github](https://github.com/hsiaojietng)]
 [[portfolio](team/hsiaojietng.md)]
@@ -51,7 +51,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Yang Xiquan
 
-<img src="images/team/cindyangxq.png" width="200px">
+<img src="images/cindyangxq.png" width="200px">
 
 [[github](http://github.com/cindyangXQ)]
 [[portfolio](team/cindyangxq.md)]
