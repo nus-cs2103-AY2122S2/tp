@@ -68,7 +68,8 @@ public class PersonUtil {
             if (skillSet.isEmpty()) {
                 sb.append(PREFIX_SKILL);
             } else {
-                skillSet.forEach(s -> sb.append(PREFIX_SKILL).append(s.skillName).append("_").append(s.skillProficiency).append(" "));
+                skillSet.forEach(s -> sb.append(PREFIX_SKILL).append(s.skillName).append("_")
+                        .append(s.skillProficiency).append(" "));
             }
         }
         return sb.toString();
