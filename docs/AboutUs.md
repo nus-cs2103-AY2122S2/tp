@@ -31,14 +31,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 I am an eager Y2 computer science undergraduate with the desire to learn and improve myself in this field. I aim to delve deeper into the world of software engineering and cybersecurity which address and solve real world problems with the focus on privacy and data security.
 
-### Johnny Doe
+### Edward Alvin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/Edward_Alvin.jpeg" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/theprevailingone)] [[linkedin](https://www.linkedin.com/in/edwardalvin/)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: TBD
+
+Computer Science undergraduate passionate about software engineering and game development. Capable developer, having devised and developed multiple projects. Proficient in a range of modern technologies including Python, Javascript and Java. Interested in UI/UX Design and Data Science. Looking for new opportunities and challenges.
 
 ### Jean Doe
 
