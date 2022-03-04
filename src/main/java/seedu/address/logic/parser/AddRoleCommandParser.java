@@ -1,7 +1,11 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STIPEND;
 
 import java.util.stream.Stream;
 
@@ -9,11 +13,11 @@ import javafx.util.Pair;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddRoleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.role.Status;
-import seedu.address.model.role.Role;
 import seedu.address.model.role.Deadline;
-import seedu.address.model.role.RoleName;
 import seedu.address.model.role.Description;
+import seedu.address.model.role.Role;
+import seedu.address.model.role.RoleName;
+import seedu.address.model.role.Status;
 import seedu.address.model.role.Stipend;
 
 /**
@@ -27,7 +31,7 @@ public class AddRoleCommandParser implements Parser<AddRoleCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddRoleCommand parse(String args) throws ParseException {
-       Pair<Index, String> parsedInput;
+        Pair<Index, String> parsedInput;
         try {
             parsedInput = ParserUtil.parseIndexWithContent(args);
         } catch (ParseException pe) {

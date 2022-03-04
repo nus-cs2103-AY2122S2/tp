@@ -1,13 +1,11 @@
 package seedu.address.model.role;
 
-import seedu.address.model.company.Company;
+import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Represents the list of all roles tagged to a Company found in the address book.
@@ -53,7 +51,7 @@ public class RoleManager {
     }
 
     /**
-     * Checks if this role exist in the roleList
+     * Checks if this role exists in the roleList
      * @param role role to check if it is duplicated
      * @return Boolean representing if this role is already stored
      */

@@ -5,8 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-import javafx.util.Pair;
 
+import javafx.util.Pair;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -14,7 +14,11 @@ import seedu.address.model.company.Address;
 import seedu.address.model.company.Email;
 import seedu.address.model.company.Name;
 import seedu.address.model.company.Phone;
-import seedu.address.model.role.*;
+import seedu.address.model.role.Deadline;
+import seedu.address.model.role.Description;
+import seedu.address.model.role.RoleName;
+import seedu.address.model.role.Status;
+import seedu.address.model.role.Stipend;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -55,6 +59,12 @@ public class ParserUtil {
         return new Index[]{firstIndex, secondIndex};
     }
 
+    /**
+     * Parses two {@code oneBasedIndex} into an array of {@code Index} of length two and returns it.
+     * @param content String representation of user input.
+     * @return Pair containing company index and role information.
+     * @throws ParseException if either index or role information is absent or index is invalide.
+     */
     public static Pair<Index, String> parseIndexWithContent(String content) throws ParseException {
         String[] splitTrimmedContent = content.trim().split("\\s+", 2);
         if (!(splitTrimmedContent.length == 2)) {
@@ -62,7 +72,6 @@ public class ParserUtil {
         }
         Index index = parseIndex(splitTrimmedContent[0]);
         String info = " " + splitTrimmedContent[1];
-
         return new Pair<>(index, info);
     }
 
