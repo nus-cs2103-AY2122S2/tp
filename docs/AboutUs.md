@@ -41,7 +41,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### HsiaoJietNg
 
-<img src="images/hsiaojietng.jpeg" width="200px">
+<img src="images/hsiaojietng.png" width="200px">
 
 [[github](https://github.com/hsiaojietng)]
 [[portfolio](team/hsiaojietng.md)]
