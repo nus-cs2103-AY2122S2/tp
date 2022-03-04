@@ -135,10 +135,10 @@ Format: `labGrade i/INDEX l/LAB m/MARK`
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add** | `add n/NAME g/GITHUB t/TELEGRAM_HANDLE s/StudentID` <br> e.g., `add n/James Ho g/jamesH t/jamesho s/A0123456T`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit** | `edit INDEX [n/NAME] [g/GITHUB] [t/TELEGRAM_HANDLE] [s/StudentID]`<br> e.g.,`edit 2 n/James Lee g/jamesHo`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
