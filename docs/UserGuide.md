@@ -96,6 +96,27 @@ Shows a list of all persons in the address book.
 
 Format: `list`
 
+### Sort all persons : `sort`
+
+Sort all the person according to the orders specified
+
+Currently it does not take any arguments after and it sorts the name of the clients alphabetically.
+In the future it will be sorted according to the order of a specific field of an argument.
+
+Format: 
+`sort` default, sort the person by their names
+
+`sort o/name` sort the person by their names
+
+`sort o/appointment` sort the person by their appointment time 
+
+Examples:
+* `sort`
+* `sort o/name`
+* `sort o/appointment`
+
+
+
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
