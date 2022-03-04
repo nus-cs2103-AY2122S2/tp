@@ -26,13 +26,13 @@ public class ClientListPanel extends UiPart<Region> {
     public ClientListPanel(ObservableList<Client> clientList) {
         super(FXML);
         clientListView.setItems(clientList);
-        clientListView.setCellFactory(listView -> new clientListViewCell());
+        clientListView.setCellFactory(listView -> new ClientListViewCell());
     }
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code client} using a {@code clientCard}.
      */
-    class clientListViewCell extends ListCell<Client> {
+    class ClientListViewCell extends ListCell<Client> {
         @Override
         protected void updateItem(Client client, boolean empty) {
             super.updateItem(client, empty);
