@@ -13,20 +13,18 @@ Amigos is a desktop application to help tech-savvy university students manage th
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
+2. Download the latest `amigos.jar` from [here](https://github.com/AY2122S2-CS2103-F09-2/tp/releases/tag/v1.1).
 
-1. Download the latest `amigos.jar` from [here](https://github.com/AY2122S2-CS2103-F09-2/tp/releases/tag/v1.1).
+3. Copy the file to the folder you want to use as the _home folder_ for your application.
 
-1. Copy the file to the folder you want to use as the _home folder_ for your application.
-
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g:
+5. Type the command in the command box and press Enter to execute it. e.g:
 
    * **`showfriends`** : Lists all friends.
    
-
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -37,7 +35,7 @@ Amigos is a desktop application to help tech-savvy university students manage th
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `addfriend n/NAME`, `NAME` is a parameter which can be used as `addfriend n/John Doe`.
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
@@ -51,11 +49,13 @@ Amigos is a desktop application to help tech-savvy university students manage th
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `showfriends`, `showevents`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `showfriends`, `showevents` and `exit`) will be ignored.<br>
   e.g. if the command specifies `showfriends 123`, it will be interpreted as `showfriends`.
 
 </div>
 
+## Friend Management
+Amigos is designed to help you keep track of the friends in your life.
 
 ### Adding a friend: `addfriend`
 
@@ -227,6 +227,33 @@ Examples:
 * `deletelog n/John Doe id/1`
 * `deletelog n/John Doe -a `
 * `deletelog -a`
+
+## Miscellaneous
+### Viewing help : `help`
+
+Shows a message explaning how to access the help page.
+
+Format: `help`
+
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+### Saving the data
+
+Amigos data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+### Editing the data file
+
+Amigos data is saved as a JSON file `[JAR file location]/data/amigos.json`. Advanced users are welcome to update data directly by editing that data file.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your changes to the data file makes its format invalid, Amigos will discard all data and start with an empty data file at the next run.
+</div>
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
