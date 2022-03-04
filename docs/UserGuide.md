@@ -17,9 +17,9 @@ AgentSee is a **desktop app for managing house selling clients and for quick fil
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest jar from [here](https://github.com/AY2122S2-CS2103T-T11-2/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your AgenSee application.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -29,7 +29,7 @@ AgentSee is a **desktop app for managing house selling clients and for quick fil
 
    * **`list`** : Lists all contacts.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a client named `John Doe` to the AgenSee contacts.
 
    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
@@ -78,7 +78,7 @@ Format: `help`
 
 ### Adding a client: `add`
 
-Adds a client to the address book.
+Adds a client to the contact list.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
@@ -92,12 +92,14 @@ Examples:
 
 ### Listing all clients : `list`
 
-Shows a list of all clients in the address book.
+Shows a list of all clients in the contact list.
 
 Format: `list`
 
 ### Editing a client : `edit`
-=======
+
+Edits the fields of a client in the contact list.
+
 ### Sort all persons : `sort`
 
 Sort all the person according to the orders specified
@@ -121,7 +123,7 @@ Examples:
 
 ### Editing a person : `edit`
 
-Edits an existing client in the address book.
+Edits an existing client in the contact list.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
@@ -163,12 +165,10 @@ Format: `find field/KEYWORD1 [MORE_KEYWORDS]`
 Examples:
 * `find n/John` returns `john` and `John Doe`
 * `find e/alex david` returns `alex123@gmail.com`, `david456@abc.com`<br>
-* `Image to be replaced`
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a client : `delete`
 
-Deletes the specified client from the address book.
+Deletes the specified client from the contact list.
 
 Format: `delete INDEX`
 
@@ -177,12 +177,12 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd client in the address book.
+* `list` followed by `delete 2` deletes the 2nd client in the contact list.
 * `find Betsy` followed by `delete 1` deletes the 1st client in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the contact list.
 
 Format: `clear`
 
@@ -194,14 +194,14 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+AgenSee data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+AgenSee data are saved as a JSON file `[JAR file location]/data/agensee.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid, AgentSee will discard all data and start with an empty data file at the next run.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -213,7 +213,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AgenSee home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -225,6 +225,6 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find** | `find prefix/ KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/ James Jake`
 **List** | `list`
 **Help** | `help`
