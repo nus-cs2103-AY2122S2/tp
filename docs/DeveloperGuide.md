@@ -282,7 +282,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | recurring user | be able to see tasks that are due within X number of days                  | better manage my time                                                                             |
 | `* *`    | advance user   | able to sort tasks based on a specific location                            | better plan my travel to that location                                                            |
 
-*{More to be added}*
 
 ### Use cases
 
