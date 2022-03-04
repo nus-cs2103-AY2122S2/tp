@@ -5,7 +5,7 @@ title: Janald's Project Portfolio Page
 
 ### Project: AgenSee
 
-AgenSee is a desktop application used for ...
+AgentSee is a **desktop app for managing house selling clients and for quick filtering for a specific type of house to recommend to buyers, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AgentSee can get your contact management tasks done faster than traditional GUI apps.
 
 Given below are my contributions to the project.
 
