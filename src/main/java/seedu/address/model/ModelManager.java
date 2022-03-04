@@ -23,6 +23,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Client> filteredClients;
 
+
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -126,6 +127,11 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Client> predicate) {
         requireNonNull(predicate);
         filteredClients.setPredicate(predicate);
+    }
+
+    @Override
+    public void sortFilteredPersonList() {
+        addressBook.sortPersons();
     }
 
     @Override

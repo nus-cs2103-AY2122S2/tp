@@ -257,13 +257,13 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
+* real estate agent
+* has a need to manage clients in an organized fashion 
+* mainly uses desktop for work
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Able to keep track of client's preferences, housing details and budget
 
 
 ### User stories
@@ -278,12 +278,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | find a client by name          | locate details of clients without having to go through the entire list |
 | `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
 | `*`      | user with many clients in the address book | sort clients by name           | locate a client easily                                                 |
+=======
+| Priority | As a …​                             | I want to …​                                                                     | So that I can…​                                     |
+|--------|-------------------------------------|----------------------------------------------------------------------------------|-----------------------------------------------------|
+| `* * *` | housing agent with many clients     | view client details fast                                                         | can deal with customers easily when they contact me |
+| `* * *` | housing agent                       | add a new client quickly with a quick description                                | update my client list efficiently                   |
+| `* * *` | housing agent                       | see relevant information about my clients                                        | understand their needs                              |
+| `* * *` | housing agent                       | edit my client data                                                              | stay in touch with their changing needs             |
+| `* * *` | housing agent                       | delete a client when their house has been sold or after they have bought a house | not mix up information in the future                |
+| `* * *` | housing agent                       | access some of my favourite clients quickly                                      | always focus on them                                |
+| `* * *` | housing agent                       | "tag" my clients with custom text                                                | remember every client easily                        |
+| `* * *` | housing agent with too many clients | be able to find a client by name                                                 | locate them easily and quickly                      |
+| `* *`  | housing agent                       | have access to my search history                                                 | look up my recently contacted clients               |
+| `* *`  | new user                            | have a quick guide to start me off                                               | learn how to use the application                    |
+| `* *`  | housing agent                       | check my important deadlines                                                     | avoid missing important meetings with my clients    |
+
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `AgentSee` and the **Actor** is the `user`, unless specified otherwise)
+
 
 **Use case: Delete a client**
 
@@ -293,28 +309,60 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  AddressBook shows a list of clients
 3.  User requests to delete a specific client in the list
 4.  AddressBook deletes the client
+=======
+**Use case: Add a client**
+
+**MSS**
+
+1.  User types in client information
+2.  AddressBook adds the new client
+
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The wrong format is used.
 
-  Use case ends.
+  * 1a1. System shows an error message.
 
-* 3a. The given index is invalid.
+    Use case resumes at step 1.
 
-    * 3a1. AddressBook shows an error message.
+* 1b. A duplicate client is entered.
 
-      Use case resumes at step 2.
+    * 1b. System shows an error message.
+
+      Use case resumes at step 1.
+
+*{More to be added}*
+
+**Use case: Edit a client**
+
+*{More to be added}*
+
+**Use case: Delete a client**
 
 *{More to be added}*
 
 ### Non-Functional Requirements
 
+
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 clients without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+=======
+1.  Essential: Technical: Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2.  Typical: Performance: Should be able to hold up to 1000 clients without a noticeable sluggishness in performance for typical usage.
+3.  Typical: A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Essential" Technical: Should work on both 32-bit and 64-bit environments.
+5.  Novel: Quality: Should be usable by a novice who is not extremely tech savvy.
+6.  Typical: Scalability: Features and improvements should be easy to implement iteratively.
+6.  Typical: Constraints: Minimal mouse clicking to interact with Ui.
+7.  Essential: Process requirements: the project is expected to adhere to a schedule that delivers a feature set according to the module requirements.
+8.  Typical: Business/domain: Clients should be unique; they cannot have the exact same fields.
+9.  Notes about project scope: the product is not required to handle any sort of physical printing (e.g client list hardcopy).
+10. Typical: Disaster recovery: If user makes a mistake on his client list, he should be able to recover from the mistake quickly without too much stress.
+
 
 *{More to be added}*
 
@@ -322,6 +370,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Real estate agents**: Agents who are the medium that manages clients, and are the target persona for our product.
+* **Clients**: Sellers who are looking to sell their property.
+* **Address**: Address of the Property that Sellers are trying to sell.
 
 --------------------------------------------------------------------------------------------------------------------
 
