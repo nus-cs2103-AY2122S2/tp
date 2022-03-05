@@ -11,7 +11,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.module.Module;
 import seedu.address.model.person.Person;
+
 
 /**
  * Represents the in-memory model of the unibook data.
@@ -22,6 +24,7 @@ public class ModelManager implements Model {
     private final UniBook uniBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Module> filteredModules;
 
     /**
      * Initializes a ModelManager with the given uniBook and userPrefs.
@@ -34,6 +37,7 @@ public class ModelManager implements Model {
         this.uniBook = new UniBook(uniBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.uniBook.getPersonList());
+        filteredModules = new FilteredList<>(this.uniBook.getModuleList());
     }
 
     public ModelManager() {
@@ -76,7 +80,6 @@ public class ModelManager implements Model {
     }
 
     //=========== UniBook ================================================================================
-
     @Override
     public void setUniBook(ReadOnlyUniBook uniBook) {
         this.uniBook.resetData(uniBook);
@@ -87,6 +90,7 @@ public class ModelManager implements Model {
         return uniBook;
     }
 
+    //=========== Persons ================================================================================
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
@@ -111,6 +115,31 @@ public class ModelManager implements Model {
         uniBook.setPerson(target, editedPerson);
     }
 
+    //=========== Modules ================================================================================
+    @Override
+    public boolean hasModule(Module module) {
+        requireNonNull(module);
+        return uniBook.hasModule(module);
+    }
+
+    @Override
+    public void deleteModule(Module target) {
+        uniBook.removeModule(target);
+    }
+
+    @Override
+    public void addModule(Module module) {
+        uniBook.addModule(module);
+        updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
+    }
+
+    @Override
+    public void setModule(Module target, Module editedModule) {
+        requireAllNonNull(target, editedModule);
+
+        uniBook.setModule(target, editedModule);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -126,6 +155,19 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    //=========== Filtered Module List Accessors =============================================================
+
+    @Override
+    public ObservableList<Module> getFilteredModuleList() {
+        return filteredModules;
+    }
+
+    @Override
+    public void updateFilteredModuleList(Predicate<Module> predicate) {
+        requireNonNull(predicate);
+        filteredModules.setPredicate(predicate);
     }
 
     @Override
@@ -144,7 +186,8 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return uniBook.equals(other.uniBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPersons.equals(other.filteredPersons)
+                && filteredModules.equals(other.filteredModules);
     }
 
 }

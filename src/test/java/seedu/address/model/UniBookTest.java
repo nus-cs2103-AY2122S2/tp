@@ -8,6 +8,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalUniBook;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -17,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.module.Module;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
@@ -48,8 +50,8 @@ public class UniBookTest {
         Person editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        UniBookStub newData = new UniBookStub(newPersons);
-
+        List<Module> newModules = new ArrayList<>();
+        UniBookStub newData = new UniBookStub(newPersons, newModules);
         assertThrows(DuplicatePersonException.class, () -> uniBook.resetData(newData));
     }
 
@@ -88,13 +90,20 @@ public class UniBookTest {
     private static class UniBookStub implements ReadOnlyUniBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
 
-        UniBookStub(Collection<Person> persons) {
+        private final ObservableList<Module> modules = FXCollections.observableArrayList();
+
+        UniBookStub(Collection<Person> persons, Collection<Module> modules) {
             this.persons.setAll(persons);
+            this.modules.setAll(modules);
         }
 
         @Override
         public ObservableList<Person> getPersonList() {
             return persons;
+        }
+
+        public ObservableList<Module> getModuleList() {
+            return modules;
         }
     }
 

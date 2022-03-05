@@ -5,6 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -15,6 +17,7 @@ import seedu.address.model.person.UniquePersonList;
 public class UniBook implements ReadOnlyUniBook {
 
     private final UniquePersonList persons;
+    private final ModuleList modules;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,6 +28,7 @@ public class UniBook implements ReadOnlyUniBook {
      */
     {
         persons = new UniquePersonList();
+        modules = new ModuleList();
     }
 
     public UniBook() {}
@@ -48,13 +52,24 @@ public class UniBook implements ReadOnlyUniBook {
     }
 
     /**
+     * Replaces the contents of the person list with {@code modules}.
+     * {@code modules} must not contain duplicate modules.
+     */
+    public void setModules(List<Module> modules) {
+        this.modules.setModules(modules);
+    }
+
+
+    /**
      * Resets the existing data of this {@code UniBook} with {@code newData}.
      */
     public void resetData(ReadOnlyUniBook newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setModules(newData.getModuleList());
     }
+
 
     //// person-level operations
 
@@ -86,18 +101,54 @@ public class UniBook implements ReadOnlyUniBook {
     }
 
     /**
-     * Removes {@code key} from this {@code UniBook}.
+     * Removes person {@code key} from this {@code UniBook}.
      * {@code key} must exist in the UniBook.
      */
     public void removePerson(Person key) {
         persons.remove(key);
     }
 
+    //// module-level operations
+    /**
+     * Returns true if a person with the same identity as {@code person} exists in the UniBook.
+     */
+    public boolean hasModule(Module module) {
+        requireNonNull(module);
+        return modules.contains(module);
+    }
+
+    /**
+     * Adds a Module to the UniBook.
+     * The Module must not already exist in the UniBook.
+     */
+    public void addModule(Module m) {
+        modules.add(m);
+    }
+
+    /**
+     * Replaces the given module {@code target} in the list with {@code editedModule}.
+     * {@code target} must exist in the UniBook.
+     * The module code and name of {@code editedModule} must not be the same as another existing module in the UniBook.
+     */
+    public void setModule(Module target, Module editedModule) {
+        requireNonNull(editedModule);
+        modules.setModule(target, editedModule);
+    }
+
+    /**
+     * Removes module {@code key} from this {@code UniBook}.
+     * {@code key} must exist in the UniBook.
+     */
+    public void removeModule(Module key) {
+        modules.remove(key);
+    }
+
     //// util methods
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
+        return persons.asUnmodifiableObservableList().size() + " persons" + "||"
+                + modules.asUnmodifiableObservableList().size() + " modules";
         // TODO: refine later
     }
 
@@ -107,14 +158,20 @@ public class UniBook implements ReadOnlyUniBook {
     }
 
     @Override
+    public ObservableList<Module> getModuleList() {
+        return modules.asUnmodifiableObservableList();
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof UniBook // instanceof handles nulls
-                && persons.equals(((UniBook) other).persons));
+                && persons.equals(((UniBook) other).persons)
+                && modules.equals(((UniBook) other).modules));
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return persons.hashCode() + modules.hashCode();
     }
 }
