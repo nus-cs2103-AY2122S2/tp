@@ -19,7 +19,7 @@ public class Address extends Field {
      */
     public static final String VALIDATION_REGEX = "[^\\s].*";
 
-    public final String value;
+    private final String value;
 
     /**
      * Constructs an {@code Address}.
@@ -38,6 +38,11 @@ public class Address extends Field {
      */
     public static boolean isValidAddress(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    @Override
+    public String getValue() {
+        return value;
     }
 
     @Override

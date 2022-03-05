@@ -20,10 +20,10 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
     public boolean test(Person person) {
         return keywords.stream()
                 .anyMatch(keyword -> {
-                    return StringUtil.containsWordIgnoreCase(person.getName().value, keyword)
-                            || StringUtil.containsWordIgnoreCase(person.getPhone().value, keyword)
-                            || StringUtil.containsWordIgnoreCase(person.getEmail().value, keyword)
-                            || StringUtil.containsWordIgnoreCase(person.getAddress().value, keyword)
+                    return StringUtil.containsWordIgnoreCase(person.getName().getValue(), keyword)
+                            || StringUtil.containsWordIgnoreCase(person.getPhone().getValue(), keyword)
+                            || StringUtil.containsWordIgnoreCase(person.getEmail().getValue(), keyword)
+                            || StringUtil.containsWordIgnoreCase(person.getAddress().getValue(), keyword)
                             || person.getTags().stream().map(tag -> tag.tagName).anyMatch(keyword::equalsIgnoreCase);
                 });
     }

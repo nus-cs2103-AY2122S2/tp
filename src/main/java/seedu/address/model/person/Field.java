@@ -9,6 +9,5 @@ public abstract class Field {
         this.prefix = prefix;
     }
 
-    @Override
-    public abstract String toString();
+    public abstract String getValue();
 }
