@@ -10,7 +10,7 @@
     </Menu>
     <Menu mnemonicParsing="false" text="Edit">
         <MenuItem mnemonicParsing="false" text="Delete"/>
-    </Menu>x
+    </Menu>
     <Menu mnemonicParsing="false" text="Help">
         <MenuItem mnemonicParsing="false" text="About"/>
     </Menu>
