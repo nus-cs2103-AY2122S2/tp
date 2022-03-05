@@ -21,7 +21,7 @@ public class UiManager implements Ui {
     public static final String FATAL_ERROR_MESSAGE = "Fatal error during initializing";
 
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
-    private static final String ICON_APPLICATION = "/images/edit.png";
+    private static final String ICON_APPLICATION = "/images/iBook.png";
 
     private final Logic logic;
     private MainWindow mainWindow;
