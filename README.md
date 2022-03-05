@@ -19,6 +19,8 @@ UI to make your Job Seeking journey a smooth road.
 
 For more detailed information on how to use the application, click on [User Guide](docs/UserGuide.md)
 
+---
+
 ### More Information about the Project
 * InternBuddy is an **ongoing** collaborated Software Development Project maintained by 
   * Albert Sutiono
@@ -26,8 +28,9 @@ For more detailed information on how to use the application, click on [User Guid
   * Muhammad Radhya
   * Steven Gabriel Kho Chua
 * InterBuddy is a brown-field project which is forked from [Address Book 3](https://github.com/nus-cs2103-AY2122S2/tp), a software development project (around 6 KLoC) which provide a baseline for InternBuddy.
-* You can look into our [Developer Guide](docs/DeveloperGuide.md) for more details about the codebase.
-* Main Language and Tools used:
+* You can look into our [Developer Guide](docs/DeveloperGuide.md) for more details about the codebase. 
+
+### Main Language and Tools used:
 <p>
 <img alt="Java" src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white" />
 <img alt="JavaFX" src="https://img.shields.io/badge/JavaFX-ED8B00?style=for-the-badge&logo=java&logoColor=white" />
