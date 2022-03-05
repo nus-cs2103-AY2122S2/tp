@@ -53,11 +53,11 @@ class JsonAdaptedPerson {
      * Converts a given {@code Person} into this class for Jackson use.
      */
     public JsonAdaptedPerson(Person source) {
-        name = source.getName().value;
-        phone = source.getPhone().value;
-        email = source.getEmail().value;
-        address = source.getAddress().value;
-        remark = source.getRemark().value;
+        name = source.getName().getValue();
+        phone = source.getPhone().getValue();
+        email = source.getEmail().getValue();
+        address = source.getAddress().getValue();
+        remark = source.getField(Remark.PREFIX).orElse(Remark.EMPTY_REMARK).getValue();
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -109,7 +109,7 @@ class JsonAdaptedPerson {
         final Remark modelRemark = new Remark(remark);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRemark, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags).setField(modelRemark);
     }
 
 }

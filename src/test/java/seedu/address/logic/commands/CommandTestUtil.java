@@ -68,14 +68,12 @@ public class CommandTestUtil {
             new Phone(VALID_PHONE_AMY),
             new Email(VALID_EMAIL_AMY),
             new Address(VALID_ADDRESS_AMY),
-            new Remark(VALID_REMARK_AMY),
-            buildTagSet(VALID_TAG_FRIEND));
+            buildTagSet(VALID_TAG_FRIEND)).setField(new Remark(VALID_REMARK_AMY));
     public static final Person DESC_BOB = new Person(new Name(VALID_NAME_BOB),
             new Phone(VALID_PHONE_BOB),
             new Email(VALID_EMAIL_BOB),
             new Address(VALID_ADDRESS_BOB),
-            new Remark(VALID_REMARK_BOB),
-            buildTagSet(VALID_TAG_FRIEND, VALID_TAG_HUSBAND));
+            buildTagSet(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)).setField(new Remark(VALID_REMARK_BOB));
 
     /**
      * Executes the given {@code command}, confirms that <br>
@@ -127,7 +125,7 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
 
         Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
-        final String[] splitName = person.getName().value.split("\\s+");
+        final String[] splitName = person.getName().getValue().split("\\s+");
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());

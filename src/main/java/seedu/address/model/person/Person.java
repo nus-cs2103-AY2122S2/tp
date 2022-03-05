@@ -53,33 +53,6 @@ public class Person {
     }
 
     /**
-     * Deprecated constructor.
-     * @param name the person's name
-     * @param phone the person's phone
-     * @param email the person's email
-     * @param address the person's address
-     * @param remark the person's remark
-     * @param tags the person's tags
-     */
-    @Deprecated
-    public Person(Name name, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
-
-        // Add fields.
-        fields.put(name.prefix, name);
-        fields.put(phone.prefix, phone);
-        fields.put(email.prefix, email);
-        fields.put(address.prefix, address);
-        fields.put(remark.prefix, remark);
-
-        // Add tags.
-        for (Tag t : tags) {
-            checkArgument(t != null, "All tags in Person constructor cannot be null.");
-            this.tags.add(t);
-        }
-    }
-
-    /**
      * Placeholder
      * @param fields placeholder
      * @param tags placeholder
@@ -140,10 +113,6 @@ public class Person {
 
     public Address getAddress() {
         return (Address) this.fields.get(Address.PREFIX);
-    }
-
-    public Remark getRemark() {
-        return (Remark) this.fields.get(Remark.PREFIX);
     }
 
     /**

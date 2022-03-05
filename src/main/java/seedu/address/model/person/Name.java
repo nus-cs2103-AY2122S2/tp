@@ -20,7 +20,7 @@ public class Name extends Field {
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public final String value;
+    private final String value;
 
     /**
      * Constructs a {@code Name}.
@@ -41,6 +41,10 @@ public class Name extends Field {
         return test.matches(VALIDATION_REGEX);
     }
 
+    @Override
+    public String getValue() {
+        return value;
+    }
 
     @Override
     public String toString() {

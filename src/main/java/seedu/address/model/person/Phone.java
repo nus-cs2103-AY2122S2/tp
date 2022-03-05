@@ -36,6 +36,11 @@ public class Phone extends Field {
     }
 
     @Override
+    public String getValue() {
+        return value;
+    }
+
+    @Override
     public String toString() {
         return value;
     }
