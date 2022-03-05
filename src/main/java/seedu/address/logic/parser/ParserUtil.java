@@ -158,6 +158,7 @@ public class ParserUtil {
     /**
      * Parses a {@code String studentId} into an {@code StudentId}.
      * Leading and trailing whitespaces will be trimmed.
+     * Input will be converted to uppercase.
      *
      * @throws ParseException if the given {@code studentId} is invalid.
      */

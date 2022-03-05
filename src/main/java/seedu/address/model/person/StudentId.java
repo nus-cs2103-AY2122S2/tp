@@ -19,7 +19,7 @@ public class StudentId {
     /**
      * Constructs an {@code StudentId}.
      *
-     * @param studentId A valid student number.
+     * @param studentId A valid student ID.
      */
     public StudentId(String studentId) {
         requireNonNull(studentId);
@@ -28,7 +28,7 @@ public class StudentId {
     }
 
     /**
-     * Returns true if a given string is a valid student number.
+     * Returns true if a given string is a valid student ID.
      */
     public static boolean isValidStudentId(String test) {
         return test.matches(VALIDATION_REGEX);
