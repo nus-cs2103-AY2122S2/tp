@@ -29,31 +29,31 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Documentation
 
-### Johnny Doe
+### Loo Xin Wei
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/redpelican2108.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/redpelican2108)] [[portfolio](team/redpelican2108.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Tan Kel Zin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/mechfrog88.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/mechfrog88)]
+[[portfolio](team/mechfrog88.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: In charge of UI, JavaFX expert
+
+### Tan Weiu Cheng
+
+<img src="images/davidtan0527.png" width="200px">
+
+[[github](http://github.com/DavidTan0527)]
+[[portfolio](team/weiucheng.md)]
+
+* Role: Developer
+* Responsibilities: Integration, Code Quality, Git expert

@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -255,44 +255,56 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Target user profile**: A storekeeper who
 
-* has a need to manage a significant number of contacts
+* has a need to manage different products in the store
+* is forgetful and easily loses track of expiry dates in  a store
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+
+**Value proposition**: manage products and their expiry dates with ease using CLI 
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                    | I want to …​                                                            | So that I can…​                                        |
+|----------|----------------------------|-------------------------------------------------------------------------|--------------------------------------------------------|
+| `* * *`  | user                       | add a product                                                           | input product data that I want to store                |
+| `* * *`  | user                       | list all products added                                                 | check on all important details of all itemms at once   |
+| `* * *`  | user                       | search for specific products by category                                | find the relevant products and its details quickly     |
+| `* * *`  | user                       | delete a product                                                        | remove entries that I no longer need                   |
+| `* * *`  | user                       | update a product's information                                          | keep the details relevant                              |
+| `* *`    | beginner user              | learn about the basic features                                          | quickly get started with using the app                 |
+| `* *`    | user                       | get reminders on which stocks are nearing the expiry dates              | prioritize their sales                                 |
+| `* *`    | user familiar with the app | receive orders from an item and update in the app                       | easily manage large orders of several products         |
+| `* *`    | user familiar with the app | add customer records                                                    | keep track of their spending habits                    |
+| `* *`    | user familiar with the app | archive customer records                                                | ignore customers that are no longer active             |
+| `* *`    | professional user          | automate the reduction of the price of items when near the expiry dates | easily sell out the products via a discount            |
+| `* `     | user                       | import existing products to the application                             | transition to this app quickly                         |
+| `* `     | user familiar with the app | create multiple accounts for my staff to use                            | restrict the access rights that they have              |
+| `* `     | user familiar with the app | delete staff accounts                                                   | prevent staff no longer working from using the account |
+| `* `     | user familiar with the app | add custom permissions for the staff accounts                           | modify their access rights related to their job scope  |
+| `* `     | professional user          | create and use my own shortcut commands                                 | accomplish my task faster                              |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `IBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Delete a product**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list products according to a filter
+2.  IBook shows a list of products
+3.  User requests to delete a product in the list specified by the index
+4.  AddressBook deletes the product
 
     Use case ends.
 
@@ -304,7 +316,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. IBook shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Update a product**
+
+**MSS**
+
+1.  User requests to list products according to a filter
+2.  IBook shows a list of products
+3.  User requests to update a product in the list specified by the index
+4.  AddressBook update the product
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. IBook shows an error message.
 
       Use case resumes at step 2.
 
@@ -312,16 +347,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold up to 1000 products without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Data should be auto saved locally each time a new command has been entered. 
+5. Should reload saved data accurately provided that data is not corrupted.
+6. System should respond within 3 seconds.
+7. UI should be clear and easy to use.
 
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
 
