@@ -19,6 +19,7 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final GithubUsername githubUsername;
 
     // Data fields
     private final Address address;
@@ -27,13 +28,14 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, GithubUsername githubUsername) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.githubUsername = githubUsername;
     }
 
     public Name getName() {
@@ -46,6 +48,10 @@ public class Person {
 
     public Email getEmail() {
         return email;
+    }
+
+    public GithubUsername getGithubUsername() {
+        return githubUsername;
     }
 
     public Address getAddress() {
@@ -92,13 +98,14 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getGithubUsername().equals(getGithubUsername());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, githubUsername);
     }
 
     @Override
@@ -110,7 +117,9 @@ public class Person {
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Address: ")
-                .append(getAddress());
+                .append(getAddress())
+                .append("; Github: ")
+                .append(getGithubUsername());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
@@ -119,5 +128,4 @@ public class Person {
         }
         return builder.toString();
     }
-
 }
