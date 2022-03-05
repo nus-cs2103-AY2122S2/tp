@@ -31,7 +31,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/snoidetx.png" width="200"/> 
 
-[github](https://github.com/snoidetx) | [portfolio](team/snoidetx.md)
+[[github](https://github.com/snoidetx)] [[portfolio](team/snoidetx.md)]
 
 * Role: Developer
 * Responsibilities: Code
