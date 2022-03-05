@@ -258,7 +258,7 @@ _{Explain here how the data archiving feature will be implemented}_
 **Target user profile**:
 
 * real estate agent
-* has a need to manage clients in an organized fashion 
+* has a need to manage clients in an organized fashion
 * mainly uses desktop for work
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps

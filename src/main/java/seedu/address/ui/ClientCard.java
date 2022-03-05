@@ -31,6 +31,8 @@ public class ClientCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
+    private Label description;
+    @FXML
     private Label id;
     @FXML
     private Label phone;
@@ -39,19 +41,23 @@ public class ClientCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label remark;
+    @FXML
     private FlowPane tags;
 
     /**
-     * Creates a {@code clientCode} with the given {@code client} and index to display.
+     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
     public ClientCard(Client client, int displayedIndex) {
         super(FXML);
         this.client = client;
         id.setText(displayedIndex + ". ");
         name.setText(client.getName().fullName);
+        description.setText(client.getDescription().description);
         phone.setText(client.getPhone().value);
         address.setText(client.getAddress().value);
         email.setText(client.getEmail().value);
+        remark.setText(client.getRemark().value);
         client.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

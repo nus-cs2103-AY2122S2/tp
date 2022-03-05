@@ -7,9 +7,11 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.EditCommand.EditclientDescriptor;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.Description;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.client.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -33,9 +35,11 @@ public class EditClientDescriptorBuilder {
     public EditClientDescriptorBuilder(Client client) {
         descriptor = new EditclientDescriptor();
         descriptor.setName(client.getName());
+        descriptor.setDescription(client.getDescription());
         descriptor.setPhone(client.getPhone());
         descriptor.setEmail(client.getEmail());
         descriptor.setAddress(client.getAddress());
+        descriptor.setRemark(client.getRemark());
         descriptor.setTags(client.getTags());
     }
 
@@ -44,6 +48,14 @@ public class EditClientDescriptorBuilder {
      */
     public EditClientDescriptorBuilder withName(String name) {
         descriptor.setName(new Name(name));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Description} of the {@code EditclientDescriptor} that we are building.
+     */
+    public EditClientDescriptorBuilder withDescription(String description) {
+        descriptor.setDescription(new Description(description));
         return this;
     }
 
@@ -68,6 +80,14 @@ public class EditClientDescriptorBuilder {
      */
     public EditClientDescriptorBuilder withAddress(String address) {
         descriptor.setAddress(new Address(address));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Remark} of the {@code EditclientDescriptor} that we are building.
+     */
+    public EditClientDescriptorBuilder withRemark(String remark) {
+        descriptor.setRemark(new Remark(remark));
         return this;
     }
 
