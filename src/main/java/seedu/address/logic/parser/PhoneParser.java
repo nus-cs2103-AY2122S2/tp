@@ -5,6 +5,9 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Phone;
 
+/**
+ * Utility class for parsing a {@code String phone} into a {@code Phone}.
+ */
 public class PhoneParser {
     /**
      * Parses a {@code String phone} into a {@code Phone}.

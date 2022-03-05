@@ -4,6 +4,9 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Utility class for parsing a {@code String index} into a {@code Index}.
+ */
 public class IndexParser {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 

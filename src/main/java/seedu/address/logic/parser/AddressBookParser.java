@@ -37,11 +37,10 @@ public class AddressBookParser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
 
-        if (CommandRegistry.PARSERS.containsKey(commandWord)) {
-            return CommandRegistry.PARSERS.get(commandWord).parse(arguments);
+        if (!CommandRegistry.PARSERS.containsKey(commandWord)) {
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
-
-        throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+        return CommandRegistry.PARSERS.get(commandWord).parse(arguments);
     }
 
 }

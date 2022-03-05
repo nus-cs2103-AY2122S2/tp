@@ -37,7 +37,7 @@ public class EditCommand extends Command {
             + "[" + Phone.PREFIX + "PHONE] "
             + "[" + Email.PREFIX + "EMAIL] "
             + "[" + Address.PREFIX + "ADDRESS] "
-            + "[" + Remark.PREFIX + "ADDRESS] "
+            + "[" + Remark.PREFIX + "REMARK] "
             + "[" + Tag.PREFIX + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + Phone.PREFIX + "91234567 "
@@ -54,10 +54,10 @@ public class EditCommand extends Command {
     private final boolean replaceTags;
 
     /**
-     * Placeholder
-     * @param index placeholder
-     * @param fields placeholder
-     * @param tags placeholder
+     * Creates an EditCommand to edit the specified {@code Person}.
+     * @param index the index of the person
+     * @param fields the fields to edit
+     * @param tags the tags to edit
      */
     public EditCommand(Index index, List<Field> fields, Set<Tag> tags) {
         requireAllNonNull(index, fields);

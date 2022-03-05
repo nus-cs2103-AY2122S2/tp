@@ -10,7 +10,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods used for parsing strings in the various *Parser classes.
+ * Utility class for parsing a {@code String tag} into a {@code Tag}.
  */
 public class TagParser {
     /**

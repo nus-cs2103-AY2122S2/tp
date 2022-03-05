@@ -5,6 +5,9 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 
+/**
+ * Utility class for parsing a {@code String name} into a {@code Name}.
+ */
 public class NameParser {
     /**
      * Parses a {@code String name} into a {@code Name}.
