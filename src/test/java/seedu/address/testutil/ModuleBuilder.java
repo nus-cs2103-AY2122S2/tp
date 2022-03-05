@@ -10,9 +10,9 @@ import seedu.address.model.module.ModuleName;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Office;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Professor;
+import seedu.address.model.person.Student;
 
 /**
  * A utility class to help with building Module objects.
@@ -25,8 +25,8 @@ public class ModuleBuilder {
 
     private ModuleName moduleName;
     private ModuleCode moduleCode;
-    private ObservableList<Person> professors;
-    private ObservableList<Person> students;
+    private ObservableList<Professor> professors;
+    private ObservableList<Student> students;
 
     /**
      * Creates a {@code ModuleBuilder} with the default details.

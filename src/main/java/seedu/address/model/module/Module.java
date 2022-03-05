@@ -6,7 +6,6 @@ import java.util.Objects;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Professor;
 import seedu.address.model.person.Student;
 
@@ -23,8 +22,8 @@ public class Module {
 
 
     // Data fields
-    private final ObservableList<Person> professors;
-    private final ObservableList<Person> students;
+    private final ObservableList<Professor> professors;
+    private final ObservableList<Student> students;
 
     /**
      * Constructor for a Module, assuming no students and no professor initially.
@@ -48,7 +47,7 @@ public class Module {
      * @param students
      */
     public Module(ModuleName moduleName, ModuleCode moduleCode,
-                  ObservableList<Person> professors, ObservableList<Person> students) {
+                  ObservableList<Professor> professors, ObservableList<Student> students) {
         requireAllNonNull(moduleName, moduleCode, professors, students);
         this.moduleName = moduleName;
         this.moduleCode = moduleCode;
@@ -64,11 +63,11 @@ public class Module {
         return this.moduleCode;
     }
 
-    public ObservableList<Person> getProfessors() {
+    public ObservableList<Professor> getProfessors() {
         return this.professors;
     }
 
-    public ObservableList<Person> getStudents() {
+    public ObservableList<Student> getStudents() {
         return this.students;
     }
 
