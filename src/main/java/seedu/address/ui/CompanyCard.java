@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -75,7 +74,7 @@ public class CompanyCard extends UiPart<Region> {
             email.setManaged(false);
         }
 
-        rolesList = FXCollections.observableArrayList(company.getRoleManager().getRoles());
+        rolesList = company.getRoleManager().getRoles();
         rolesListView.setItems(rolesList);
         rolesListView.setCellFactory(listView -> new RoleListViewCell());
 
