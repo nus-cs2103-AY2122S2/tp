@@ -14,10 +14,15 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_GITHUB_LONGER
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_GITHUB_STARTING_HYPHEN_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_STUDENTID_END_NUMBER_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_STUDENTID_MIDDLE_LETTER;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_STUDENTID_START_LETTER_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_STUDENTID_WRONG_LENGTH_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.STUDENTID_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
@@ -28,6 +33,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_GITHUB_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -47,6 +53,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.GithubUsername;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.StudentId;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
@@ -105,6 +112,18 @@ public class EditCommandParserTest {
         // invalid github (consecutive hyphens)
         assertParseFailure(parser, "1" + INVALID_GITHUB_LONGER_THAN_39_DESC,
                 GithubUsername.MESSAGE_CONSTRAINTS);
+        // invalid student id (does not start with A)
+        assertParseFailure(parser, "1" + INVALID_STUDENTID_START_LETTER_DESC,
+                StudentId.MESSAGE_CONSTRAINTS);
+        // invalid student id (wrong length)
+        assertParseFailure(parser, "1" + INVALID_STUDENTID_WRONG_LENGTH_DESC,
+                StudentId.MESSAGE_CONSTRAINTS);
+        // invalid student id (ends with number)
+        assertParseFailure(parser, "1" + INVALID_STUDENTID_END_NUMBER_DESC,
+                StudentId.MESSAGE_CONSTRAINTS);
+        // invalid student id (contains middle letter)
+        assertParseFailure(parser, "1" + INVALID_STUDENTID_MIDDLE_LETTER,
+                StudentId.MESSAGE_CONSTRAINTS);
 
         // invalid phone followed by valid email
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
@@ -186,6 +205,12 @@ public class EditCommandParserTest {
         // github
         userInput = targetIndex.getOneBased() + GITHUB_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withGithub(VALID_GITHUB_AMY).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // student id
+        userInput = targetIndex.getOneBased() + STUDENTID_DESC_AMY;
+        descriptor = new EditPersonDescriptorBuilder().withStudentId(VALID_STUDENTID_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

@@ -20,6 +20,7 @@ public class Person {
     private final Phone phone;
     private final Email email;
     private final GithubUsername githubUsername;
+    private final StudentId studentId;
 
     // Data fields
     private final Address address;
@@ -28,14 +29,16 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, GithubUsername githubUsername) {
-        requireAllNonNull(name, phone, email, address, tags, githubUsername);
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+                  GithubUsername githubUsername, StudentId studentId) {
+        requireAllNonNull(name, phone, email, address, tags, githubUsername, studentId);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
         this.githubUsername = githubUsername;
+        this.studentId = studentId;
     }
 
     public Name getName() {
@@ -52,6 +55,10 @@ public class Person {
 
     public GithubUsername getGithubUsername() {
         return githubUsername;
+    }
+
+    public StudentId getStudentId() {
+        return studentId;
     }
 
     public Address getAddress() {
@@ -99,13 +106,14 @@ public class Person {
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getTags().equals(getTags())
-                && otherPerson.getGithubUsername().equals(getGithubUsername());
+                && otherPerson.getGithubUsername().equals(getGithubUsername())
+                && otherPerson.getStudentId().equals(getStudentId());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, githubUsername);
+        return Objects.hash(name, phone, email, address, tags, githubUsername, studentId);
     }
 
     @Override
@@ -119,7 +127,9 @@ public class Person {
                 .append("; Address: ")
                 .append(getAddress())
                 .append("; Github: ")
-                .append(getGithubUsername());
+                .append(getGithubUsername())
+                .append("; Student ID: ")
+                .append(getStudentId());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

@@ -14,6 +14,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.GithubUsername;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.StudentId;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -141,7 +142,7 @@ public class ParserUtil {
      * Parses a {@code String githubUsername} into an {@code GithubUsername}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code address} is invalid.
+     * @throws ParseException if the given {@code githubUsername} is invalid.
      */
     public static GithubUsername parseGithubUsername(String githubUsername) throws ParseException {
         requireNonNull(githubUsername);
@@ -152,5 +153,23 @@ public class ParserUtil {
         }
 
         return new GithubUsername(trimmedUsername);
+    }
+
+    /**
+     * Parses a {@code String studentId} into an {@code StudentId}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code studentId} is invalid.
+     */
+    public static StudentId parseStudentId(String studentId) throws ParseException {
+        requireNonNull(studentId);
+        String trimmedId = studentId.trim();
+        String capitalId = trimmedId.toUpperCase();
+
+        if (!StudentId.isValidStudentId(capitalId)) {
+            throw new ParseException(StudentId.MESSAGE_CONSTRAINTS);
+        }
+
+        return new StudentId(capitalId);
     }
 }
