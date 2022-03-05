@@ -202,7 +202,7 @@ public class EditCommandParserTest {
 
         // telegram
         userInput = targetIndex.getOneBased() + TELEGRAM_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withTelegram(TELEGRAM_DESC_AMY).build();
+        descriptor = new EditPersonDescriptorBuilder().withTelegram(VALID_TELEGRAM_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

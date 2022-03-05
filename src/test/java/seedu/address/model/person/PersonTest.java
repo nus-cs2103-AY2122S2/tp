@@ -95,7 +95,7 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different telegram -> returns false
-        editedAlice = new PersonBuilder(ALICE).withGithub(VALID_TELEGRAM_BOB).build();
+        editedAlice = new PersonBuilder(ALICE).withTelegram(VALID_TELEGRAM_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 }
