@@ -10,9 +10,9 @@ import seedu.address.model.module.ModuleName;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Office;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Professor;
-import seedu.address.model.person.Student;
 
 /**
  * A utility class to help with building Module objects.
@@ -25,8 +25,8 @@ public class ModuleBuilder {
 
     private ModuleName moduleName;
     private ModuleCode moduleCode;
-    private Professor professor;
-    private List<Student> students;
+    private List<Person> professors;
+    private List<Person> students;
 
     /**
      * Creates a {@code ModuleBuilder} with the default details.
@@ -34,8 +34,8 @@ public class ModuleBuilder {
     public ModuleBuilder() {
         moduleName = new ModuleName(DEFAULT_NAME);
         moduleCode = new ModuleCode(DEFAULT_CODE);
-        professor = new Professor(new Name(DEFAULT_PROFESSOR),
-                new Phone("98765432"), new Email("test@nus.edu.sg"), new HashSet<>(), new Office("SOC"));
+        professors = new ArrayList<>();
+        professors.add(new Professor(new Name(DEFAULT_PROFESSOR), new Phone("98765432"), new Email("test@nus.edu.sg"), new HashSet<>(), new Office("SOC")));
         students = new ArrayList<>();
     }
 
@@ -45,7 +45,7 @@ public class ModuleBuilder {
     public ModuleBuilder(Module moduleToCopy) {
         moduleName = moduleToCopy.getModuleName();
         moduleCode = moduleToCopy.getModuleCode();
-        professor = moduleToCopy.getProfessor();
+        professors = moduleToCopy.getProfessors();
         students = moduleToCopy.getStudents();
     }
 
@@ -69,12 +69,13 @@ public class ModuleBuilder {
      * Sets the {@code professor} of the {@code Module} that we are building.
      */
     public ModuleBuilder withProfessor(String profName) {
-        this.professor = new Professor(new Name(profName), null, null, null, null);
+        this.professors = new ArrayList<>();
+
         return this;
     }
 
     public Module build() {
-        return new Module(moduleName, moduleCode, professor, students);
+        return new Module(moduleName, moduleCode, professors, students);
     }
 
 }

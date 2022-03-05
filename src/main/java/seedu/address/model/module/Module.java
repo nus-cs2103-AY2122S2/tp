@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Professor;
 import seedu.address.model.person.Student;
 
@@ -22,35 +23,35 @@ public class Module {
 
 
     // Data fields
-    private final Professor professor;
-    private final List<Student> students;
+    private final List<Person> professors;
+    private final List<Person> students;
 
     /**
-     * Constructor for a Module, assuming no students initially present.
+     * Constructor for a Module, assuming no students and no professor initially.
+     * can add if necessary.
      * @param moduleName
      * @param moduleCode
-     * @param professor
      */
-    public Module(ModuleName moduleName, ModuleCode moduleCode, Professor professor) {
-        requireAllNonNull(moduleName, moduleCode, professor);
+    public Module(ModuleName moduleName, ModuleCode moduleCode) {
+        requireAllNonNull(moduleName, moduleCode);
         this.moduleName = moduleName;
         this.moduleCode = moduleCode;
-        this.professor = professor;
+        this.professors = new ArrayList<>();
         this.students = new ArrayList<>();
     }
 
     /**
-     * Constructor for a Module, using a pre-existing list of students.
+     * Constructor for a Module, using a pre-existing list of students and professors.
      * @param moduleName
      * @param moduleCode
-     * @param professor
+     * @param professors
      * @param students
      */
-    public Module(ModuleName moduleName, ModuleCode moduleCode, Professor professor, List<Student> students) {
-        requireAllNonNull(moduleName, moduleCode, professor, students);
+    public Module(ModuleName moduleName, ModuleCode moduleCode, List<Person> professors, List<Person> students) {
+        requireAllNonNull(moduleName, moduleCode, professors, students);
         this.moduleName = moduleName;
         this.moduleCode = moduleCode;
-        this.professor = professor;
+        this.professors = professors;
         this.students = students;
     }
 
@@ -62,12 +63,20 @@ public class Module {
         return this.moduleCode;
     }
 
-    public Professor getProfessor() {
-        return this.professor;
+    public List<Person> getProfessors() {
+        return this.professors;
     }
 
-    public List<Student> getStudents() {
+    public List<Person> getStudents() {
         return this.students;
+    }
+
+    public void addStudent(Student s) {
+        this.students.add(s);
+    }
+
+    public void addProfessor(Professor p) {
+        this.professors.add(p);
     }
 
     /**
@@ -102,7 +111,7 @@ public class Module {
 
         return otherModule.getModuleName().equals(getModuleName())
                 && otherModule.getModuleCode().equals(getModuleCode())
-                && otherModule.getProfessor().equals(getProfessor())
+                && otherModule.getProfessors().equals(getProfessors())
                 && otherModule.getStudents().equals(getStudents());
 
     }
@@ -110,7 +119,7 @@ public class Module {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(moduleName, moduleCode, professor, students);
+        return Objects.hash(moduleName, moduleCode, professors, students);
     }
 
     @Override
@@ -119,8 +128,8 @@ public class Module {
         builder.append(getModuleCode())
                 .append("; Name: ")
                 .append(getModuleName())
-                .append("; Professor:")
-                .append(getProfessor());
+                .append("; Professors: ")
+                .append(getProfessors());
         return builder.toString();
     }
 
