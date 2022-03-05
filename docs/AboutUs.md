@@ -32,14 +32,19 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 I am an eager Y2 computer science undergraduate with the desire to learn and improve myself in this field. I aim to delve deeper into the world of software engineering and cybersecurity which address and solve real world problems with the focus on privacy and data security.
 
-### Johnny Doe
+### Steven Chua
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/graphcalibur.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[homepage](https://www.linkedin.com/in/stevengkchua)]
+[[github](http://github.com/graphcalibur)]
+[[portfolio](team/graphcalibur.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: TBD
+
+I'm a Year 2 Computer Science undergraduate science with a passion for technology, games, and cybersecurity.
+I'm always looking for ways to improve my skills and widen my knowledge.
 
 ### Jean Doe
 
