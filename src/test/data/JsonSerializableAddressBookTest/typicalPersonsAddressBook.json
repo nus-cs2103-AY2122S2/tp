@@ -6,6 +6,7 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "github": "aliceP",
+    "telegram": "alice_P",
     "tagged" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
@@ -13,6 +14,7 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "github": "bensonM",
+    "telegram": "benson_M",
     "tagged" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
@@ -20,6 +22,7 @@
     "email" : "heinz@example.com",
     "address" : "wall street",
     "github": "carlK",
+    "telegram": "carl_K",
     "tagged" : [ ]
   }, {
     "name" : "Daniel Meier",
@@ -27,6 +30,7 @@
     "email" : "cornelia@example.com",
     "address" : "10th street",
     "github": "danielM",
+    "telegram": "daniel_M",
     "tagged" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
@@ -34,6 +38,7 @@
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "github": "elleM",
+    "telegram": "elle_M",
     "tagged" : [ ]
   }, {
     "name" : "Fiona Kunz",
@@ -41,6 +46,7 @@
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "github": "fionaK",
+    "telegram": "fiona_K",
     "tagged" : [ ]
   }, {
     "name" : "George Best",
@@ -48,6 +54,7 @@
     "email" : "anna@example.com",
     "address" : "4th street",
     "github": "georgeB",
+    "telegram": "george_B",
     "tagged" : [ ]
   } ]
 }
