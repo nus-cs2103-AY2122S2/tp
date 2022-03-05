@@ -2,12 +2,7 @@ package seedu.address.model.product;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
-
-import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Product in the address book.
@@ -53,8 +48,8 @@ public class Product {
     }
 
     public Price getPrice() {
-				return price;
-		}
+        return price;
+    }
 
     public boolean isExpired() {
         return expiryDate.isPast();
