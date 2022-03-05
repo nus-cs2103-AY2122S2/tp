@@ -102,7 +102,7 @@ When you run the program for the first time, you will be prompted to take a quic
 
 Example of instructions:
 * Input command
-![](images/OnboardingCommand.png) 
+![](images/OnboardingCommand.png)
 * List contacts
 ![](images/OnboardingList.png)
 
@@ -251,7 +251,7 @@ Format: `findByTag t/TAGNAME`
 
 Examples:
 * `findByTag t/friends` Displays the contact information of contacts who have the *friends* tag.
- 
+
 ![Find Tags](images/FindTag.png)
 
 ### Creating an Appointment : `addAppointment`
@@ -365,7 +365,7 @@ Format: `exportcsv [EXPORTTYPE]`
 * File will be saved on the directory `[JAR file location]/data/addressbook.csv`
 
 Examples:
-* `exportcsv 2`: Exports the current address book as a CSV file ready to be uploaded onto Google Contacts 
+* `exportcsv 2`: Exports the current address book as a CSV file ready to be uploaded onto Google Contacts
 ### Editing the data file
 
 ContaX data are saved as a JSON file `[JAR file location]/data/contax.json`. Advanced users are welcome to update data directly by editing that data file.
@@ -394,7 +394,7 @@ Upon clicking, you will be prompted to select .csv or .json files. Accessing imp
 
 Format: `importcsv [n/COLUMNNUM] [p/COLUMN_PERSON] [e/COLUMN_EMAIL] [a/COLUMN_ADDRESS] [t/COLUMN_TAGS]`
 
-* Each argument represents the corresponding attribute for a person. 
+* Each argument represents the corresponding attribute for a person.
   * n = Name
   * p = Phone
   * e = Email
@@ -431,7 +431,7 @@ Format: `batch COMMAND where/CONDITION`
   * A `TERM` may be an attribute of a person or a constant value
 
 Examples:
-* `batch delete where/name LIKE A%` 
+* `batch delete where/name LIKE A%`
   * Deletes all persons whose name start with A (case-sensitive)
 * `batch edit p/87438806 where/phone = 87438807 `
   * Edit contact with phone matches keyword 87438807 change to 87438806
