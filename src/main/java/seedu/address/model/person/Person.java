@@ -1,12 +1,20 @@
 package seedu.address.model.person;
 
+import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -14,60 +22,97 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
-    // Identity fields
-    private final Name name;
-    private final Phone phone;
-    private final Email email;
-
-    // Data fields
-    private final Address address;
-    private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
+    private final Map<Prefix, Field> fields = new HashMap<>();
 
     /**
-     * Every field must be present and not null.
+     * Deprecated constructor.
+     * @param name the person's name
+     * @param phone the person's phone
+     * @param email the person's email
+     * @param address the person's address
+     * @param tags the person's tags
      */
+    @Deprecated
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.remark = new Remark("");
-        this.tags.addAll(tags);
+
+        // Add fields.
+        fields.put(name.prefix, name);
+        fields.put(phone.prefix, phone);
+        fields.put(email.prefix, email);
+        fields.put(address.prefix, address);
+        Remark remark = new Remark("");
+        fields.put(remark.prefix, remark);
+
+        // Add tags.
+        for (Tag t : tags) {
+            checkArgument(t != null, "All tags in Person constructor cannot be null.");
+            this.tags.add(t);
+        }
     }
 
     /**
-     * Every field must be present and not null.
+     * Placeholder
+     * @param fields placeholder
+     * @param tags placeholder
      */
-    public Person(Name name, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, remark, tags);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.remark = remark;
-        this.tags.addAll(tags);
+    public Person(Collection<Field> fields, Collection<Tag> tags) {
+        requireAllNonNull(tags, fields);
+        // Add tags.
+        for (Tag t : tags) {
+            checkArgument(t != null, "All tags in Person constructor cannot be null.");
+            this.tags.add(t);
+        }
+
+        // Add fields.
+        for (Field f : fields) {
+            checkArgument(f != null, "All fields in Person constructor cannot be null.");
+            this.fields.put(f.prefix, f);
+        }
+
+        // Check for required fields.
+        for (Prefix p : FieldRegistry.REQUIRED_PREFIXES) {
+            checkArgument(this.fields.containsKey(p), "All required fields must be given.");
+        }
+    }
+
+    public Person(Person otherPerson) {
+        this(otherPerson.getFields(), otherPerson.getTags());
+    }
+
+    public Person setField(Field field) {
+        Map<Prefix, Field> updatedFields = fields;
+        if (field == null) {
+            updatedFields.remove(field.prefix);
+        } else {
+            updatedFields.put(field.prefix, field);
+        }
+        return new Person(updatedFields.values(), tags);
+    }
+
+    public Optional<Field> getField(Prefix prefix) {
+        return Optional.ofNullable(fields.get(prefix));
+    }
+
+    public List<Field> getFields() {
+        return Collections.unmodifiableList(new ArrayList<>(fields.values()));
     }
 
     public Name getName() {
-        return name;
+        return (Name) this.fields.get(Name.PREFIX);
     }
 
     public Phone getPhone() {
-        return phone;
+        return (Phone) this.fields.get(Phone.PREFIX);
     }
 
     public Email getEmail() {
-        return email;
+        return (Email) this.fields.get(Email.PREFIX);
     }
 
     public Address getAddress() {
-        return address;
-    }
-
-    public Remark getRemark() {
-        return remark;
+        return (Address) this.fields.get(Address.PREFIX);
     }
 
     /**
@@ -78,6 +123,10 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+    public Person setTags(Collection<Tag> tags) {
+        return new Person(this.fields.values(), tags);
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
@@ -86,9 +135,7 @@ public class Person {
         if (otherPerson == this) {
             return true;
         }
-
-        return otherPerson != null
-                && otherPerson.getEmail().equals(getEmail());
+        return otherPerson != null && otherPerson.getEmail().equals(getEmail());
     }
 
     /**
@@ -116,7 +163,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(getName(), getPhone(), getEmail(), getAddress(), tags);
     }
 
     @Override

@@ -6,13 +6,33 @@ package seedu.address.logic.parser;
  */
 public class Prefix {
     private final String prefix;
+    private final boolean isRequired;
 
+    /**
+     * Placeholder
+     * @param prefix placeholder
+     */
     public Prefix(String prefix) {
         this.prefix = prefix;
+        this.isRequired = false;
+    }
+
+    /**
+     * Placeholder
+     * @param prefix placeholder
+     * @param isRequired placeholder
+     */
+    public Prefix(String prefix, boolean isRequired) {
+        this.prefix = prefix;
+        this.isRequired = isRequired;
     }
 
     public String getPrefix() {
-        return prefix;
+        return this.prefix;
+    }
+
+    public boolean isRequired() {
+        return this.isRequired;
     }
 
     public String toString() {

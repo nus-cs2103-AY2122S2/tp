@@ -50,7 +50,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
-        remark = personToCopy.getRemark();
+        remark = (Remark) personToCopy.getField(Remark.PREFIX).orElse(Remark.EMPTY_REMARK);
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -103,7 +103,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, remark, tags);
+        return new Person(name, phone, email, address, tags).setField(remark);
     }
 
 }

@@ -2,11 +2,15 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.logic.parser.Prefix;
+
 /**
  * Represents a Person's remark in the address book.
  * Guarantees: immutable; is always valid
  */
-public class Remark {
+public class Remark extends Field {
+    public static final Prefix PREFIX = new Prefix("r/", false);
+    public static final Remark EMPTY_REMARK = new Remark("");
     public final String value;
 
     /**
@@ -15,8 +19,14 @@ public class Remark {
      * @param remark A valid remark.
      */
     public Remark(String remark) {
+        super(PREFIX);
         requireNonNull(remark);
         value = remark;
+    }
+
+    @Override
+    public String getValue() {
+        return value;
     }
 
     @Override
