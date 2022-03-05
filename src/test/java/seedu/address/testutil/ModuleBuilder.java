@@ -35,7 +35,8 @@ public class ModuleBuilder {
         moduleName = new ModuleName(DEFAULT_NAME);
         moduleCode = new ModuleCode(DEFAULT_CODE);
         professors = new ArrayList<>();
-        professors.add(new Professor(new Name(DEFAULT_PROFESSOR), new Phone("98765432"), new Email("test@nus.edu.sg"), new HashSet<>(), new Office("SOC")));
+        professors.add(new Professor(new Name(DEFAULT_PROFESSOR),
+                new Phone("98765432"), new Email("test@nus.edu.sg"), new HashSet<>(), new Office("SOC")));
         students = new ArrayList<>();
     }
 
