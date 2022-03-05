@@ -15,7 +15,7 @@ Given below are my contributions to the project.
   * What it does: 
   * Justification: 
   * Highlights: 
-  * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+  * Credits:
 
 * **New Feature**:
 
