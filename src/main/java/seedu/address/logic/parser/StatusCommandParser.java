@@ -10,6 +10,8 @@ import seedu.address.logic.commands.StatusCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Status;
 
+import java.util.NoSuchElementException;
+
 /**
  * Parses input arguments and creates a new {@code StatusCommand} object
  */
@@ -29,8 +31,13 @@ public class StatusCommandParser implements Parser<StatusCommand> {
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, StatusCommand.MESSAGE_USAGE), ive);
         }
-        Status status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
 
-        return new StatusCommand(index, status);
+        try {
+            Status status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
+            return new StatusCommand(index, status);
+        } catch (NoSuchElementException nsee) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, StatusCommand.MESSAGE_USAGE), nsee);
+        }
+
     }
 }
