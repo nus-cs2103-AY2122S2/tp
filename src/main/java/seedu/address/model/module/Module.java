@@ -2,10 +2,10 @@ package seedu.address.model.module;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Professor;
 import seedu.address.model.person.Student;
@@ -23,8 +23,8 @@ public class Module {
 
 
     // Data fields
-    private final List<Person> professors;
-    private final List<Person> students;
+    private final ObservableList<Person> professors;
+    private final ObservableList<Person> students;
 
     /**
      * Constructor for a Module, assuming no students and no professor initially.
@@ -36,8 +36,8 @@ public class Module {
         requireAllNonNull(moduleName, moduleCode);
         this.moduleName = moduleName;
         this.moduleCode = moduleCode;
-        this.professors = new ArrayList<>();
-        this.students = new ArrayList<>();
+        this.professors = FXCollections.observableArrayList();
+        this.students = FXCollections.observableArrayList();
     }
 
     /**
@@ -47,7 +47,8 @@ public class Module {
      * @param professors
      * @param students
      */
-    public Module(ModuleName moduleName, ModuleCode moduleCode, List<Person> professors, List<Person> students) {
+    public Module(ModuleName moduleName, ModuleCode moduleCode,
+                  ObservableList<Person> professors, ObservableList<Person> students) {
         requireAllNonNull(moduleName, moduleCode, professors, students);
         this.moduleName = moduleName;
         this.moduleCode = moduleCode;
@@ -63,11 +64,11 @@ public class Module {
         return this.moduleCode;
     }
 
-    public List<Person> getProfessors() {
+    public ObservableList<Person> getProfessors() {
         return this.professors;
     }
 
-    public List<Person> getStudents() {
+    public ObservableList<Person> getStudents() {
         return this.students;
     }
 

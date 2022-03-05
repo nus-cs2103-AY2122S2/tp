@@ -1,9 +1,9 @@
 package seedu.address.testutil;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.ModuleName;
@@ -25,8 +25,8 @@ public class ModuleBuilder {
 
     private ModuleName moduleName;
     private ModuleCode moduleCode;
-    private List<Person> professors;
-    private List<Person> students;
+    private ObservableList<Person> professors;
+    private ObservableList<Person> students;
 
     /**
      * Creates a {@code ModuleBuilder} with the default details.
@@ -34,10 +34,10 @@ public class ModuleBuilder {
     public ModuleBuilder() {
         moduleName = new ModuleName(DEFAULT_NAME);
         moduleCode = new ModuleCode(DEFAULT_CODE);
-        professors = new ArrayList<>();
+        professors = FXCollections.observableArrayList();
         professors.add(new Professor(new Name(DEFAULT_PROFESSOR),
                 new Phone("98765432"), new Email("test@nus.edu.sg"), new HashSet<>(), new Office("SOC")));
-        students = new ArrayList<>();
+        students = FXCollections.observableArrayList();
     }
 
     /**
@@ -70,8 +70,8 @@ public class ModuleBuilder {
      * Sets the {@code professor} of the {@code Module} that we are building.
      */
     public ModuleBuilder withProfessor(String profName) {
-        this.professors = new ArrayList<>();
-
+        this.professors = FXCollections.observableArrayList();
+        professors.add(new Professor(new Name(profName), null, null, null, null));
         return this;
     }
 
