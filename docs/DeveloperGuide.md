@@ -275,7 +275,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | new user                                                   | see usage instructions                                       | refer to instructions when I forget how to use the App                                                             |
 | `* * *`  | user                                                       | add companies                                                |                                                                                                                    |
 | `* * *`  | user                                                       | add events related to a company                              | keep track of all of a company’s events                                                                            |
-| `* * *`  | user                                                       | add contact people from a company                            | easily look up their contact details                                                                               |
+| `* * *`  | user                                                       | add contact people relared to a company                      | easily look up their contact details                                                                               |
 | `* * *`  | user                                                       | delete companies                                             | remove companies that I am no longer considering                                                                   |
 | `* * *`  | user                                                       | delete events                                                | remove events that have passed or been canceled                                                                    |
 | `* * *`  | user                                                       | delete contact people                                        | remove people who are no longer related to companies I'm looking at                                                |
@@ -354,7 +354,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2. Should be able to hold up to 1000 entries without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 1000 entries without noticeable lag in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Entries and their details should be displayed in an intuitive, easy-to-understand manner.
 5. The majority of the interactions the user makes with the app should be through the keyboard.
