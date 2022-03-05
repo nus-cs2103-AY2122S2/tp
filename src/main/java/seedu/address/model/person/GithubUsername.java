@@ -15,7 +15,7 @@ public class GithubUsername {
                     + " but cannot have consecutive hyphens and cannot begin or end with hyphens.";
 
     /*
-     * The first and last character of the GitHub Username must a hyphen,
+     * The first and last character of the GitHub Username must not be a hyphen,
      * can't have consecutive hyphens in the GitHub Username,
      * and can't be longer than 39 alphanumeric characters.
      */
