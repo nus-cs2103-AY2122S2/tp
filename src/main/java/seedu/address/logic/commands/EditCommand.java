@@ -7,8 +7,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GITHUB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.io.PrintStream;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -26,6 +28,7 @@ import seedu.address.model.person.GithubUsername;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -44,6 +47,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_GITHUB + "GITHUB] "
+            + "[" + PREFIX_TELEGRAM + "TELEGRAM] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -103,8 +107,10 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         GithubUsername updatedGithubUsername = editPersonDescriptor.getGithubUsername()
                 .orElse(personToEdit.getGithubUsername());
+        Telegram updatedTelegram = editPersonDescriptor.getTelegram().orElse(personToEdit.getTelegram());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedGithubUsername);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
+                updatedGithubUsername, updatedTelegram);
     }
 
     @Override
@@ -136,6 +142,7 @@ public class EditCommand extends Command {
         private Address address;
         private Set<Tag> tags;
         private GithubUsername githubUsername;
+        private Telegram telegram;
 
         public EditPersonDescriptor() {}
 
@@ -150,13 +157,14 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setTags(toCopy.tags);
             setGithubUsername(toCopy.githubUsername);
+            setTelegram(toCopy.telegram);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, githubUsername);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, githubUsername, telegram);
         }
 
         public void setName(Name name) {
@@ -199,6 +207,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(githubUsername);
         }
 
+        public void setTelegram(Telegram telegram) {
+            this.telegram = telegram;
+        }
+
+        public Optional<Telegram> getTelegram() {
+            return Optional.ofNullable(telegram);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -236,7 +252,8 @@ public class EditCommand extends Command {
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
                     && getTags().equals(e.getTags())
-                    && getGithubUsername().equals(e.getGithubUsername());
+                    && getGithubUsername().equals(e.getGithubUsername())
+                    && getTelegram().equals(e.getTelegram());
         }
     }
 }
