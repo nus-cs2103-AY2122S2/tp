@@ -5,7 +5,9 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.module.Module;
 import seedu.address.model.person.Person;
+
 
 /**
  * The API of the Model component.
@@ -13,6 +15,7 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Module> PREDICATE_SHOW_ALL_MODULES = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -84,4 +87,17 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    boolean hasModule(Module module);
+
+    void deleteModule(Module target);
+
+
+    void addModule(Module module);
+
+    void setModule(Module target, Module editedModule);
+
+    ObservableList<Module> getFilteredModuleList();
+
+    void updateFilteredModuleList(Predicate<Module> predicate);
 }
