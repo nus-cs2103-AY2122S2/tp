@@ -14,9 +14,9 @@ CinnamonBun is a **desktop app for managing contacts, optimized for use via a Co
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `CinnamonBun.jar` from [here]() Work in progress, no jar yet.
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your CinnamonBun Address Book.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -190,6 +190,9 @@ _Details coming soon ..._
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+
+**Q**: Why is this named CinnamonBun?<br>
+**A**: Because we like Cinnamon Buns.
 
 --------------------------------------------------------------------------------------------------------------------
 
