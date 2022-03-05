@@ -2,7 +2,6 @@ package seedu.address.testutil;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.concurrent.locks.ReentrantLock;
 
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Client;
@@ -117,7 +116,7 @@ public class ClientBuilder {
     }
 
     public Client build() {
-        return new Client(name, description, phone, email, address,remark, tags);
+        return new Client(name, description, phone, email, address, remark, tags);
     }
 
 }
