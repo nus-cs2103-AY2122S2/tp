@@ -16,6 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -35,6 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     private LessonListPanel lessonListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private PersonInfoPanel personInfoPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -112,8 +114,13 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        lessonListPanel = new LessonListPanel(logic.getFilteredLessonList());
-        lessonListPanelPlaceholder.getChildren().add(lessonListPanel.getRoot());
+        //lessonListPanel = new LessonListPanel(logic.getFilteredLessonList());
+        //lessonListPanelPlaceholder.getChildren().add(lessonListPanel.getRoot());
+
+        // Temporary placeholder
+        Person tempPerson = logic.getFilteredPersonList().get(0);
+        personInfoPanel = new PersonInfoPanel(tempPerson);
+        lessonListPanelPlaceholder.getChildren().add(personInfoPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
