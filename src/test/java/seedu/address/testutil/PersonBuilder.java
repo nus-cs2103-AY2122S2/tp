@@ -39,7 +39,6 @@ public class PersonBuilder {
         githubUsername = new GithubUsername(DEFAULT_USERNAME);
         tags = new HashSet<>();
         skillSet = new HashSet<>();
-
     }
 
     /**
@@ -73,8 +72,8 @@ public class PersonBuilder {
     /**
      * Parses the {@code skill} into a {@code Set<Skill>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withSkillSet(String ... tags) {
-        this.skillSet = SampleDataUtil.getSkillSet(tags);
+    public PersonBuilder withSkillSet(String ... skillSet) {
+        this.skillSet = SampleDataUtil.getSkillSet(skillSet);
         return this;
     }
 

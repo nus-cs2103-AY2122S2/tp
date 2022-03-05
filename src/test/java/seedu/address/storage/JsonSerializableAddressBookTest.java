@@ -29,7 +29,7 @@ public class JsonSerializableAddressBookTest {
                 JsonSerializableAddressBook.class).get();
         AddressBook addressBookFromFile = dataFromFile.toModelType();
         AddressBook typicalPersonsAddressBook = TypicalPersons.getTypicalAddressBook();
-        assertEquals(addressBookFromFile.toString(), typicalPersonsAddressBook.toString());
+        assertEquals(addressBookFromFile, typicalPersonsAddressBook);
     }
 
     @Test
