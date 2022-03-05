@@ -15,7 +15,8 @@ public class Telegram {
 
     /*
      * The first character of the telegram handle must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * otherwise " " (a blank string) becomes a valid input and must be at least
+     * 5 alphanumeric characters or underscores but no more than 32.
      */
     public static final String VALIDATION_REGEX = "[a-zA-Z0-9_]{5,32}";
 
