@@ -257,29 +257,37 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Company Managers/Supervisors wants to keep track of all the tasks given to their subordinates
+* They need to assign tasks to their subordinates as well
+* Prefers typing commands instead of clicking buttons
+* Needs a local database to store all tasks
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: 
 
+* An application to show all the tasks assigned to the employees
+* Tasks should be assigned to the employees as well
+* Commands are typed using command lines
+* All tasks created are stored in the local database
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​        | I want to …​                                                               | So that I can…​                                                                                   |
+|----------|----------------|----------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
+| `* * *`  | user           | add a task to the database                                                 | better organise my time                                                                           |
+| `* * *`  | user           | delete a task from the database                                            | better organise my list                                                                           |
+| `* * *`  | user           | view all my tasks                                                          | have a better picture of my schedule                                                              |
+| `* * *`  | user           | able to edit a task                                                        | update any details                                                                                |
+| `* * *`  | user           | able to view my tasks for the day (i.e. today)                             | better manage my time                                                                             |
+| `* * *`  | user           | able to view the tasks for the week                                        | have a better picture of my schedule for the week                                                 |
+| `* * *`  | user           | view the tasks on a specific day                                           | plan for that day ahead                                                                           |
+| `* *`    | CEO or manager | have the flexibility to reschedule tasks that are assigned to any employee | better manage the manpower and deadlines                                                          |
+| `* *`    | manager        | retrieve the list of tasks allocated with an employee                      | allow myself to have an overview of the employee's workload. For example, command: ``Track <name> |
+| `* *`    | new user       | have a more begineer-friendly user guide                                   | learn more about the product                                                                      |
+| `* *`    | recurring user | be able to see tasks that are due within X number of days                  | better manage my time                                                                             |
+| `* *`    | advance user   | able to sort tasks based on a specific location                            | better plan my travel to that location                                                            |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -312,16 +320,49 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+#### Technical Requirements
 
-*{More to be added}*
+1. ManageEZPZ should be able to run on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. ManageEZPZ should work on both 32-bit and 64-bit environments.
+3. ManageEZPZ should be able to store and retrieve task data from File.
+4. ManageEZPZ must occupy as little storage as possible.
+5. ManageEZPZ should be backward compatible with data produced by earlier versions of itself.
+
+#### Performance Requirements
+
+1. ManageEZPZ should respond within two seconds for any queries.
+   * ManageEZPZ should be closed/terminated within 2 seconds.
+2. ManageEZPZ should work well under both normal and high workloads. 
+3. ManageEZPZ should be scalable.
+4. ManageEZPZ should be able to load huge amounts of data in a short amount of time.
+
+#### Quality Requirements
+
+1. ManageEZPZ should be easy to use by a novice.
+2. ManageEZPZ should be in English.
+3. The UI and fonts used in ManageEZPZ should be big enough for senior managers/supervisors.
+
+#### Process Requirements
+
+1. ManageEZPZ is expected to adhere to a schedule that delivers a feature set every 2 weeks.
+2. Updates to ManageEZPZ should be able to roll out to existing clients remotely.
+
+#### Other Noteworthy Points
+
+1. ManageEZPZ should not be used to support management of illegal activities
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+| Terms             | Meaning                                                                     |
+|:------------------|:----------------------------------------------------------------------------|
+| **Mainstream OS** | Windows, Linux, Unix, OS-X                                                  |
+| **Users**         | Applies to both supervisors & employees                                     |
+| **command**       | A message sent as an input from User, that coincides with our Command List  |
+| **todo**          | A task that only needs a description with no dates or times                 |
+| **deadline**      | A task that needs a description, a date, and a end time                     |
+| **event**         | A task that needs a description, a date, start and end times                |
+| **mark**          | To indicate that Task is done                                               |
+| **unmark**        | To indicate that Task is not done                                           |
 
 --------------------------------------------------------------------------------------------------------------------
 
