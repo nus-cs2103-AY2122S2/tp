@@ -225,6 +225,7 @@ public class EditCommand extends Command {
 
         public Optional<StudentId> getStudentId() {
             return Optional.ofNullable(studentId);
+        }
 
         /**
          * Sets {@code tags} to this object's {@code tags}.
@@ -264,7 +265,7 @@ public class EditCommand extends Command {
                     && getAddress().equals(e.getAddress())
                     && getTags().equals(e.getTags())
                     && getGithubUsername().equals(e.getGithubUsername())
-                    && getTelegram().equals(e.getTelegram());
+                    && getTelegram().equals(e.getTelegram())
                     && getStudentId().equals(e.getStudentId());
         }
     }
