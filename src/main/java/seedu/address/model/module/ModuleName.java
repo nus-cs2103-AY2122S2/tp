@@ -3,6 +3,9 @@ package seedu.address.model.module;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a Module Name.
+ */
 public class ModuleName {
 
     public static final String MESSAGE_CONSTRAINTS =
