@@ -18,7 +18,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.CompanyList;
 import seedu.address.model.Model;
 import seedu.address.model.company.Company;
-import seedu.address.model.company.NameContainsKeywordsPredicate;
+import seedu.address.model.company.CompanyNameContainsKeywordsPredicate;
 import seedu.address.testutil.EditCompanyDescriptorBuilder;
 
 /**
@@ -54,11 +54,16 @@ public class CommandTestUtil {
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
-    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
-    public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
-    public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
-    public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not
+    // allowed in names
+    public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not
+    // allowed in phones
+    public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing
+    // '@' symbol
+    public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not
+    // allowed for addresses
+    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed
+    // in tags
 
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
@@ -81,8 +86,9 @@ public class CommandTestUtil {
      * - the returned {@link CommandResult} matches {@code expectedCommandResult} <br>
      * - the {@code actualModel} matches {@code expectedModel}
      */
-    public static void assertCommandSuccess(Command command, Model actualModel, CommandResult expectedCommandResult,
-            Model expectedModel) {
+    public static void assertCommandSuccess(Command command, Model actualModel,
+                                            CommandResult expectedCommandResult,
+                                            Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
             assertEquals(expectedCommandResult, result);
@@ -96,8 +102,9 @@ public class CommandTestUtil {
      * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)}
      * that takes a string {@code expectedMessage}.
      */
-    public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
-            Model expectedModel) {
+    public static void assertCommandSuccess(Command command, Model actualModel,
+                                            String expectedMessage,
+                                            Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
@@ -106,9 +113,11 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the address book, filtered company list and selected company in {@code actualModel} remain unchanged
+     * - the address book, filtered company list and selected company in {@code actualModel}
+     * remain unchanged
      */
-    public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
+    public static void assertCommandFailure(Command command, Model actualModel,
+                                            String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         CompanyList expectedCompanyList = new CompanyList(actualModel.getCompanyList());
@@ -118,8 +127,10 @@ public class CommandTestUtil {
         assertEquals(expectedCompanyList, actualModel.getCompanyList());
         assertEquals(expectedFilteredList, actualModel.getFilteredCompanyList());
     }
+
     /**
-     * Updates {@code model}'s filtered list to show only the company at the given {@code targetIndex} in the
+     * Updates {@code model}'s filtered list to show only the company at the given {@code
+     * targetIndex} in the
      * {@code model}'s address book.
      */
     public static void showCompanyAtIndex(Model model, Index targetIndex) {
@@ -127,7 +138,7 @@ public class CommandTestUtil {
 
         Company company = model.getFilteredCompanyList().get(targetIndex.getZeroBased());
         final String[] splitName = company.getName().fullName.split("\\s+");
-        model.updateFilteredCompanyList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredCompanyList(new CompanyNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredCompanyList().size());
     }
