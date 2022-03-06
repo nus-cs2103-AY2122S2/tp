@@ -23,6 +23,7 @@ public class RoleManager {
 
     /**
      * Obtains the list of roles tagged to a Company
+     *
      * @return <code>ArrayList</code> representing the list of roles
      */
     public ObservableList<Role> getRoles() {
@@ -31,6 +32,7 @@ public class RoleManager {
 
     /**
      * Obtains the unmodifiable set of roles tagged to a Company
+     *
      * @return <code>Set</code> representing the set of roles
      */
     public Set<Role> getSetRoles() {
@@ -40,6 +42,7 @@ public class RoleManager {
 
     /**
      * Obtains the number of roles
+     *
      * @return Integer representing the number of roles
      */
     public int countRoles() {
