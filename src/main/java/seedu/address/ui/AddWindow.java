@@ -8,6 +8,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Controller for a help page
@@ -19,6 +22,7 @@ public class AddWindow extends UiPart<Stage> {
     public static final String PHONE_LABEL = "Number: ";
     public static final String ADDRESS_LABEL = "Address: ";
     public static final String EMAIL_LABEL = "Email: ";
+
 
     private static final Logger logger = LogsCenter.getLogger(AddWindow.class);
     private static final String FXML = "AddWindow.fxml";
@@ -135,13 +139,22 @@ public class AddWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleAdd() {
-        String name = nameField.getText();
-        String phone = phoneField.getText();
-        String address = addressField.getText();
-        String email = emailField.getText();
+        String name = "n/" + nameField.getText();
+        String phone = "p/" + phoneField.getText();
+        String address = "a/" + addressField.getText();
+        String email = "e/" + emailField.getText();
+        StringBuilder userInput = new StringBuilder();
+        String[] personFields = {"add", name, phone, address, email};
 
+        // Craft the user input
+        for (int i = 0; i < personFields.length; i++) {
+            userInput.append(personFields[i]).append(" ");
+        }
+
+        System.out.println(userInput.toString());
         // TODO: Handle the proper adding of a new Person into ModuleMate Finder
         // For now, leaving it as a UI addition with no functionality.
+        // When submitting, basically treat
         this.hide();
     }
 
