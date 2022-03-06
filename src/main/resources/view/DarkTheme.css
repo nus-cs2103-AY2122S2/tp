@@ -116,11 +116,6 @@
     -fx-background-color: #282828;
 }
 
-.list-cell:filled:selected #roleCardPane {
-    -fx-background-color: #346a7d, #283140;
-    -fx-background-insets: 0, 1;
-}
-
 .list-cell .label {
     -fx-text-fill: white;
 }
