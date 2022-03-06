@@ -16,8 +16,8 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AB3Model;
 import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
@@ -32,7 +32,7 @@ public class AddCommandTest {
 
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        AB3ModelStubAcceptingPersonAdded modelStub = new AB3ModelStubAcceptingPersonAdded();
         Person validPerson = new PersonBuilder().build();
 
         CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
@@ -45,7 +45,7 @@ public class AddCommandTest {
     public void execute_duplicatePerson_throwsCommandException() {
         Person validPerson = new PersonBuilder().build();
         AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+        AB3ModelStub modelStub = new AB3ModelStubWithPerson(validPerson);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
     }
@@ -77,7 +77,7 @@ public class AddCommandTest {
     /**
      * A default model stub that have all of the methods failing.
      */
-    private class ModelStub implements Model {
+    private class AB3ModelStub implements AB3Model {
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
@@ -152,10 +152,10 @@ public class AddCommandTest {
     /**
      * A Model stub that contains a single person.
      */
-    private class ModelStubWithPerson extends ModelStub {
+    private class AB3ModelStubWithPerson extends AB3ModelStub {
         private final Person person;
 
-        ModelStubWithPerson(Person person) {
+        AB3ModelStubWithPerson(Person person) {
             requireNonNull(person);
             this.person = person;
         }
@@ -170,7 +170,7 @@ public class AddCommandTest {
     /**
      * A Model stub that always accept the person being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
+    private class AB3ModelStubAcceptingPersonAdded extends AB3ModelStub {
         final ArrayList<Person> personsAdded = new ArrayList<>();
 
         @Override
