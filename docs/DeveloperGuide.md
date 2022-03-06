@@ -287,59 +287,168 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 (For all use cases below, the **System** is `ModuleMateFinder` and the **Actor** is the `user`, unless specified otherwise)
 
 
-**Use case: Favourite a person**
+**Use case: UC01 - Listing all contacts**
 
 **MSS**
 
-1. User requests to list persons
-2. ModuleMateFinder shows a list of persons
-3. User requests to favourite a person in the list
-4. ModuleMateFinder favourites the person  
-   Use case ends
+1. User requests to list out all contacts.
+2. ModuleMateFinder shows a list of all contacts.
+
+   Use case ends.
 
 **Extensions**
 
 - 2a. The list is empty.  
-  Use case ends
-- 3a. The given index is invalid
+  Use case ends.
+
+**Use case: UC02 - Adding a contact**
+
+**MSS**
+
+1. User requests to add a person as a contact.
+2. User inputs the information of the person.
+3. ModuleMateFinder adds the person as a contact.
+
+   Use case ends.
+
+**Extensions**
+
+- 3a. The given name already exists in ModuleMateFinder.
     - 3a1. ModuleMateFinder shows an error message.  
-      Use case resumes at step 2
+      Use case resumes at step 2.
+
+
+**Use case: UC03 - Favourite a contact**
+
+**MSS**
+
+1. User requests to <u>list contacts (UC01)</u>.
+2. ModuleMateFinder shows a list of persons.
+3. User requests to favourite a person in the list.
+4. ModuleMateFinder favourites the person.
+
+   Use case ends.
+
+**Extensions**
+
+- 2a. The list is empty.  
+  Use case ends.
+- 3a. The given index is invalid.
+    - 3a1. ModuleMateFinder shows an error message.  
+      Use case resumes at step 2.
 
   
-**Use case: Blacklisting a person**
+**Use case: UC04 - Blacklisting a contact**
 
 **MSS**
-1. User requests to list persons
-2. ModuleMateFinder shows a list of persons
-3. User requests to blacklist a person in the list
-4. ModuleMateFinder blacklist the person  
-   Use case ends
+1. User requests to <u>list contacts (UC01)</u>.
+2. ModuleMateFinder shows a list of persons.
+3. User requests to blacklist a person in the list.
+4. ModuleMateFinder blacklist the person. 
+   
+   Use case ends.
 
 **Extensions**
 - 2a. The list is empty.  
-  Use case ends
-- 3a. The given index is invalid
+  Use case ends.
+- 3a. The given index is invalid.
     - 3a1. ModuleMateFinder shows an error message.  
-      Use case resumes at step 2
+      
+      Use case resumes at step 2.
 
 
-**Use case: Filter persons by tags**
+**Use case: UC05 - Filter contacts by modules**
 
 **MSS**
-1. User requests to list persons
-2. ModuleMateFinder shows a list of persons
-3. User requests to filter the list by a certain tag (e.g. `CS3230`)
-4. ModuleMateFinder finds all persons with the tag `CS3230`
-5. ModuleMateFinder shows a list of persons with the tag `CS3230`  
-   Use case ends
+1. User requests to <u>list contacts (UC01)</u>.
+2. ModuleMateFinder shows a list of persons.
+3. User requests to filter the list by a certain module (e.g. `CS3230`).
+4. ModuleMateFinder finds all persons with the module `CS3230`.
+5. ModuleMateFinder shows a list of persons with the module `CS3230`.  
+   Use case ends.
 
 **Extensions**
 - 2a. The list is empty.  
-  Use case ends
-- 3a. No persons has a matching tag
+  Use case ends.
+- 3a. No persons has a matching module.
     - 3a1. ModuleMateFinder shows an empty list.  
-      Use case ends
+      Use case ends.
 
+
+**Use case: UC06 - Filter contacts by name**
+
+**MSS**
+1. User requests to <u>list contacts (UC01)</u>.
+2. ModuleMateFinder shows a list of persons.
+3. User requests to filter the list by a certain name (e.g. `Hans`).
+4. ModuleMateFinder finds all persons with the tag `Hans`.
+5. ModuleMateFinder shows a list of persons with the tag `Hans`.
+   Use case ends.
+
+**Extensions**
+- 2a. The list is empty.  
+  Use case ends.
+- 3a. No persons has a matching name.
+    - 3a1. ModuleMateFinder shows an empty list.  
+      Use case ends.
+
+
+**Use case: UC07 - Editing a contact's details**
+
+**MSS**
+
+1. User requests to <u>list contacts (UC01)</u>.
+2. ModuleMateFinder shows a list of persons.
+3. User requests to edit a contact on the list.
+4. User inputs the updated information.
+5. ModuleMateFinder updates the contact's details.
+
+   Use case ends.
+
+**Extensions**
+- 2a. The list is empty.  
+  Use case ends.
+- 3a. The provided index is invalid.
+    - 3a1. ModuleMateFinder displays an error message.
+      
+      Use case resumes at step 2.
+
+**Use case: UC08 - Deleting a contact**
+
+**MSS**
+1. User requests to <u>list contacts (UC01)</u>.
+2. ModuleMateFinder shows a list of persons.
+3. User requests to delete a contact at a given index.
+4. ModuleMateFinder deletes the contact at the index .
+   
+   Use case ends.
+
+**Extensions**
+- 2a. The list is empty.  
+  Use case ends.
+- 3a. The provided index is invalid.
+    - 3a1. ModuleMateFinder displays an error message.
+      
+      Use case resumes at step 2.
+  
+
+**Use case: UC09 - Clearing all entries**
+
+**MSS**
+
+1. User requests to clear all entries in ModuleMateFinder.
+2. ModuleMateFinder removes all saved data and displays a success 
+message.
+
+
+**Use case: UC10 - Exiting the application**
+
+**MSS**
+
+1. User requests to exit ModuleMateFinder.
+2. ModuleMateFinder closes.
+   
+   Use case ends.
 
 *{More to be added}*
 
