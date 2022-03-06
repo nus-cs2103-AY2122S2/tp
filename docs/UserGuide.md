@@ -37,5 +37,4 @@ Format: /delete -t contact -i NRIC
 Note: Only NRIC can be used to uniquely identify the contact owner.
 
 Examples:
-
 * /delete -t contact -i S12345678P
