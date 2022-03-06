@@ -23,6 +23,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class MainWindow extends UiPart<Stage> {
 
+    // This is also a Ui part in MainWindow.
+    protected static ResultDisplay resultDisplay;
     private static final String FXML = "MainWindow.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
@@ -32,9 +34,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
-    private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-    // add a new field here for addWindow, something like:
     private AddWindow addWindow;
 
     @FXML

@@ -28,7 +28,6 @@ public class AddWindow extends UiPart<Stage> {
     private static final Logger logger = LogsCenter.getLogger(AddWindow.class);
     private static final String FXML = "AddWindow.fxml";
     private Logic logic;
-//    private ResultDisplay resultDisplay;
 
     @FXML
     private Button addButton;
@@ -79,7 +78,6 @@ public class AddWindow extends UiPart<Stage> {
     public AddWindow(Logic logic) {
         this(new Stage());
         this.logic = logic;
-//        this.resultDisplay = resultDisplay;
         addMessageLabel.setText(HELP_MESSAGE);
         nameLabel.setText(NAME_LABEL);
         phoneLabel.setText(PHONE_LABEL);
@@ -155,7 +153,6 @@ public class AddWindow extends UiPart<Stage> {
         String email = "e/" + emailField.getText();
         StringBuilder userInput = new StringBuilder();
         String[] personFields = {"add", name, phone, address, email};
-//        System.out.println(resultDisplay);
         if (isAnyFieldEmpty()) {
             errorLabel.setText("You must input all fields!");
             return;
@@ -179,8 +176,8 @@ public class AddWindow extends UiPart<Stage> {
      * @return true if any of the field is empty
      */
     private boolean isAnyFieldEmpty() {
-        if (nameField.getText().equals("") || phoneField.getText().equals("") ||
-                addressField.getText().equals("") || emailField.getText().equals("")) {
+        if (nameField.getText().equals("") || phoneField.getText().equals("")
+                || addressField.getText().equals("") || emailField.getText().equals("")) {
             return true;
         }
 
@@ -202,11 +199,11 @@ public class AddWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
-//            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            MainWindow.resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
-//            resultDisplay.setFeedbackToUser(e.getMessage());
+            MainWindow.resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
     }
