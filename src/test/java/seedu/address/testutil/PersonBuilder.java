@@ -10,6 +10,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.StudentId;
+import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -23,6 +24,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_GITHUB = "amyB123";
+    public static final String DEFAULT_TELEGRAM = "amy_B";
     public static final String DEFAULT_STUDENTID = "A1123456B";
 
     private Name name;
@@ -31,6 +33,7 @@ public class PersonBuilder {
     private Address address;
     private Set<Tag> tags;
     private GithubUsername githubUsername;
+    private Telegram telegram;
     private StudentId studentId;
 
     /**
@@ -43,6 +46,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         githubUsername = new GithubUsername(DEFAULT_GITHUB);
+        telegram = new Telegram(DEFAULT_TELEGRAM);
         studentId = new StudentId(DEFAULT_STUDENTID);
     }
 
@@ -56,6 +60,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
         githubUsername = personToCopy.getGithubUsername();
+        telegram = personToCopy.getTelegram();
         studentId = personToCopy.getStudentId();
     }
 
@@ -108,6 +113,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Telegram} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withTelegram(String telegram) {
+        this.telegram = new Telegram(telegram);
+        return this;
+    }
+
+    /**
      * Sets the {@code StudentId} of the {@code Person} that we are building.
      */
     public PersonBuilder withStudentId(String studentId) {
@@ -116,7 +129,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, tags, githubUsername, studentId);
+        return new Person(name, phone, email, address, tags, githubUsername, telegram, studentId);
     }
 
 }

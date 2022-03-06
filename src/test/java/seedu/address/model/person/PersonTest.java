@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -94,7 +95,11 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withGithub(VALID_GITHUB_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different student id -> returns fasle
+        // different telegram -> returns false
+        editedAlice = new PersonBuilder(ALICE).withTelegram(VALID_TELEGRAM_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different student id -> returns false
         editedAlice = new PersonBuilder(ALICE).withStudentId(VALID_STUDENTID_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
     }
