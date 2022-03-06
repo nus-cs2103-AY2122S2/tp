@@ -11,6 +11,9 @@ import javafx.collections.ObservableList;
 import unibook.model.module.exceptions.DuplicateModuleException;
 import unibook.model.module.exceptions.ModuleNotFoundException;
 
+/**
+ * Represents a list of Modules in the UniBook.
+ */
 public class ModuleList implements Iterable<Module> {
     private final ObservableList<Module> internalList = FXCollections.observableArrayList();
     private final ObservableList<Module> internalUnmodifiableList =

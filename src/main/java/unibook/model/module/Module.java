@@ -57,26 +57,50 @@ public class Module {
         this.students = students;
     }
 
+    /**
+     * Returns the module name.
+     * @return the name of the module.
+     */
     public ModuleName getModuleName() {
         return this.moduleName;
     }
 
+    /**
+     * Returns the module code.
+     * @return the code of the module.
+     */
     public ModuleCode getModuleCode() {
         return this.moduleCode;
     }
 
+    /**
+     * Returns the current list of professors.
+     * @return The observable list containing all professor objects.
+     */
     public ObservableList<Professor> getProfessors() {
         return this.professors;
     }
 
+    /**
+     * Returns the current list of students.
+     * @return The observable list containing all student objects.
+     */
     public ObservableList<Student> getStudents() {
         return this.students;
     }
 
+    /**
+     * Adds a student {@code s} to the list of the students.
+     * @param s
+     */
     public void addStudent(Student s) {
         this.students.add(s);
     }
 
+    /**
+     * Adds a professor {@code p} to the list of the professors.
+     * @param p
+     */
     public void addProfessor(Professor p) {
         this.professors.add(p);
     }
@@ -96,8 +120,8 @@ public class Module {
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both modules have the same identity and data fields.
+     * This defines a stronger notion of equality between two modules.
      */
     @Override
     public boolean equals(Object other) {

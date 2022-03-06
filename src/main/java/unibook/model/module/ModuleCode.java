@@ -3,6 +3,10 @@ package unibook.model.module;
 import static java.util.Objects.requireNonNull;
 import static unibook.commons.util.AppUtil.checkArgument;
 
+
+/**
+ * Represents a Module Code.
+ */
 public class ModuleCode {
     public static final String MESSAGE_CONSTRAINTS =
         "Module codes should only contain alphanumeric characters and cannot contain spaces.";
