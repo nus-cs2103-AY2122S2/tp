@@ -255,6 +255,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void populateInfoPanel(InfoPanel newInfoPanel) {
+        infoPanelPlaceholder.getChildren().clear();
         infoPanelPlaceholder.getChildren().add(newInfoPanel.getRoot());
     }
 }
