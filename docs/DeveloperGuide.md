@@ -283,10 +283,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-> Definition: 
-> For all use cases below, the **System** is `ManageEZPZ` and the **Actor** is the `User`, unless specified otherwise.
-> <br>More specifically, the `User` are **Supervisors**.
+> Definition:
+> - For all use cases below, the **System** is `ManageEZPZ` and the **Actor** is the `User`, unless specified otherwise.
+> - More specifically, the `User` are **Supervisors**.
 
+> Guarantees:
+> - For any use cases below that changes any data, ManageEZPZ will guarantee that the data is updated and saved.
 ****
 
 **Use Case 1 - Add Task**
@@ -410,6 +412,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ****
 
 **Use Case 5 - Unmark Tasks**
+
+Preconditions: User is currently using ManageEZPZ.
 
 **MSS**
 
