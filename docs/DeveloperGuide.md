@@ -296,9 +296,43 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `ArchDuke` and the **Actor** is the `Student`, unless specified otherwise)
 
-**Use case: UC01 - List student contacts**
+**Use case: UC01 - Add a student contact**
 
-**MSS**
+**MSS:**
+
+1. User requests to add a student contact in ArchDuke contact list.
+2. ArchDuke adds the student contact to the contact list.
+3. ArchDuke updates the contact list and displays the student contact in the contact list.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The student contact attributes are in an invalid format.
+    * 1a1. ArchDuke displays an error message.
+      Use case resumes from step 1.
+
+**Use case: UC02 - Delete a student contact**
+
+**MSS:**
+
+1. User requests to delete a specific person in the list
+2. ArchDuke deletes the person
+3. ArchDuke GUI no longer displays the data of that specific student contact
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The given index is invalid
+
+    * 1a1. ArchDuke shows an error message
+
+  Use case resumes at step 1
+
+**Use case: UC03 - List student contacts**
+
+**MSS:**
 
 1. User requests to list student contacts
 2. ArchDuke shows a list of student contacts
@@ -311,45 +345,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: UC02 - Add a student contact**
-
-**MSS**
-
-1. User requests to add a student contact in ArchDuke contact list
-2. ArchDuke adds the student contact to the system
-3. ArchDuke GUI displays and reflects the data of that specific student contact
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. The student contact attributes are in an invalid format
-  * 1a1. ArchDuke displays an error message
-    Use case resumes at step 1
-
-    Use case ends.
-
-**Use case: UC03 - Delete a student contact**
-
-**MSS**
-
-1. User requests to delete a specific person in the list
-2. ArchDuke deletes the person
-3. ArchDuke GUI no longer displays the data of that specific student contact
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The given index is invalid
-
-    * 1a1. ArchDuke shows an error message
-    
-    Use case resumes at step 1
-
 **Use case: UC04 - Add a student group**
 
-**MSS**
+**MSS:**
 
 1. User requests to add a student group
 2. ArchDuke adds the group
@@ -359,7 +357,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: UC05 - Delete a student group**
 
-**MSS**
+**MSS:**
 
 1. User requests to delete a specific group in the list
 2. ArchDuke deletes the group
@@ -377,7 +375,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: UC06 - Add task in a group**
 
-**MSS**
+**MSS:**
 
 1. User requests to add a specific task to a specific group
 2. ArchDuke adds the specific task in the group
@@ -394,7 +392,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: UC07 - Delete task in a group**
 
-**MSS**
+**MSS:**
 
 1. User requests to delete a specific task from a specific group
 2. ArchDuke deletes the specific task in the group
