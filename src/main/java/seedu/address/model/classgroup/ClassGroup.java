@@ -2,6 +2,8 @@ package seedu.address.model.classgroup;
 
 import java.util.Objects;
 
+import seedu.address.model.module.ModuleCode;
+
 /**
  * Represents a ClassGroup in TAssist.
  * Guarantees: details are present and not null, field values are validated, immutable.
