@@ -285,7 +285,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 > Definition: 
 > For all use cases below, the **System** is `ManageEZPZ` and the **Actor** is the `User`, unless specified otherwise.
-> More specifically, the `User` are **Supervisors**.
+> <br>More specifically, the `User` are **Supervisors**.
 
 ****
 
@@ -455,10 +455,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 4. 
 
-* 3b. User uses View Task commands with the wrong syntax 
+* 3b. User uses find Task commands with the wrong syntax 
 
     * 3b1. ManageEZPZ sends an error message to User, indicating syntax used for
-      the View Task command is incorrect, attached with the correct syntax format. 
+      the find Task command is incorrect, attached with the correct syntax format. 
       
       Use Case ends.
 
