@@ -31,9 +31,9 @@ public class PersonInfoPanel extends InfoPanel {
     private ListView<Lesson> assignedLessonList;
 
     /**
-     * Creates a {@code PersonInfoPanel} filled with information with the given details of {@code Person}
+     * Creates a {@code PersonInfoPanel} filled with information with the given details of {@code Person}.
      *
-     * @param person Fills the {@code PersonInfoPanel} with the given details of {@code Person}
+     * @param person Fills the {@code PersonInfoPanel} with the given details of {@code Person}.
      */
     public PersonInfoPanel(Person person) {
         super(FXML);
@@ -55,9 +55,9 @@ public class PersonInfoPanel extends InfoPanel {
     // TODO: This is public temporarily (Person doesn't hold assigned lessons)
 
     /**
-     * Sets the assigned lessons list to the provided {@code Lesson} list
+     * Sets the assigned lessons list to the provided {@code Lesson} list.
      *
-     * @param lessonList Provided lesson list
+     * @param lessonList Provided lesson list.
      */
     public void setAssignedLessons(ObservableList<Lesson> lessonList) {
         assignedLessonList.setItems(lessonList);
