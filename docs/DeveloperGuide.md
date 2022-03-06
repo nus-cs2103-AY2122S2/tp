@@ -300,7 +300,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 
-1. User requests to add a student contact in ArchDuke contact list.
+1. Student requests to add a student contact in ArchDuke contact list.
 2. ArchDuke adds the student contact to the contact list.
 3. ArchDuke updates the contact list and displays the student contact in the contact list.
 
@@ -316,19 +316,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 
-1. User requests to delete a specific person in the list
-2. ArchDuke deletes the person
-3. ArchDuke GUI no longer displays the data of that specific student contact
+1. Student requests to delete a student in the contact list.
+2. ArchDuke deletes the particular student.
+3. ArchDuke updates the contact list and deletes that student contact from the contact list.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The given index is invalid
-
-    * 1a1. ArchDuke shows an error message
-
-  Use case resumes at step 1
+* 1a. The given index of the student contact is invalid.
+    * 1a1. ArchDuke shows an error message.
+      Use case resumes from step 1.
 
 **Use case: UC03 - List student contacts**
 
