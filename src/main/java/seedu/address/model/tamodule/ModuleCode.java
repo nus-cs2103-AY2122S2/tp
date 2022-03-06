@@ -5,12 +5,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Module's module code in the TAssist.
- * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidModuleCode(String)}
  */
 public class ModuleCode {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Module code should start with 2 to 4 characters, followed by , 4 digits, ending with optional letters "
+            "Module code should start with 2 to 4 characters, followed by 4 digits, ending with optional letters "
                     + "and it should not be blank";
 
     /*
@@ -21,20 +21,20 @@ public class ModuleCode {
     public final String value;
 
     /**
-     * Constructs a {@code Name}.
+     * Constructs a {@code ModuleCode}.
      *
      * @param moduleCode A valid module code.
      */
     public ModuleCode(String moduleCode) {
         requireNonNull(moduleCode);
-        checkArgument(isValidName(moduleCode.toUpperCase()), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidModuleCode(moduleCode.toUpperCase()), MESSAGE_CONSTRAINTS);
         this.value = moduleCode.toUpperCase();
     }
 
     /**
      * Returns true if a given string is a valid module code.
      */
-    public static boolean isValidName(String test) {
+    public static boolean isValidModuleCode(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 

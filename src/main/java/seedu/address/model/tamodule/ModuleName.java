@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Module's name in the TAssist.
- * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidModuleName(String)}
  */
 public class ModuleName {
 
@@ -21,20 +21,20 @@ public class ModuleName {
     public final String value;
 
     /**
-     * Constructs a {@code Name}.
+     * Constructs a {@code ModuleName}.
      *
      * @param moduleName A valid module name.
      */
     public ModuleName(String moduleName) {
         requireNonNull(moduleName);
-        checkArgument(isValidName(moduleName), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidModuleName(moduleName), MESSAGE_CONSTRAINTS);
         value = moduleName;
     }
 
     /**
      * Returns true if a given string is a valid name.
      */
-    public static boolean isValidName(String test) {
+    public static boolean isValidModuleName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
