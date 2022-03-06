@@ -17,26 +17,22 @@ public class Person {
 
     // Identity fields
     private final Name name;
-    private final Phone phone;
     private final Email email;
     private final GithubUsername githubUsername;
     private final Telegram telegram;
     private final StudentId studentId;
 
     // Data fields
-    private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+    public Person(Name name, Email email, Set<Tag> tags,
                   GithubUsername githubUsername, Telegram telegram, StudentId studentId) {
-        requireAllNonNull(name, phone, email, address, tags, githubUsername, studentId);
+        requireAllNonNull(name, email, tags, githubUsername, studentId);
         this.name = name;
-        this.phone = phone;
         this.email = email;
-        this.address = address;
         this.tags.addAll(tags);
         this.githubUsername = githubUsername;
         this.telegram = telegram;
@@ -47,16 +43,8 @@ public class Person {
         return name;
     }
 
-    public Phone getPhone() {
-        return phone;
-    }
-
     public Email getEmail() {
         return email;
-    }
-
-    public Address getAddress() {
-        return address;
     }
 
     public GithubUsername getGithubUsername() {
@@ -80,8 +68,8 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both students have the same name.
+     * This defines a weaker notion of equality between two students.
      */
     public boolean isSamePerson(Person otherPerson) {
         if (otherPerson == this) {
@@ -108,9 +96,7 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return otherPerson.getName().equals(getName())
-                && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getTags().equals(getTags())
                 && otherPerson.getGithubUsername().equals(getGithubUsername())
                 && otherPerson.getTelegram().equals(getTelegram())
@@ -120,19 +106,15 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, githubUsername, telegram, studentId);
+        return Objects.hash(name, email, tags, githubUsername, telegram, studentId);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append("; Phone: ")
-                .append(getPhone())
                 .append("; Email: ")
                 .append(getEmail())
-                .append("; Address: ")
-                .append(getAddress())
                 .append("; Github: ")
                 .append(getGithubUsername())
                 .append("; Telegram: ")
