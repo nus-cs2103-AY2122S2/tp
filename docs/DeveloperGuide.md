@@ -332,14 +332,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 
-1. User requests to list student contacts
-2. ArchDuke shows a list of student contacts
+1. User requests to list student contacts.
+2. ArchDuke displays a list of student contacts.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The student contact list is empty.
 
   Use case ends.
 
@@ -347,19 +347,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 
-1. User requests to add a student group
-2. ArchDuke adds the group
-3. ArchDuke GUI displays the group in the group list
+1. User requests to add a student group.
+2. ArchDuke adds the group.
+3. ArchDuke updates the group list and displays the group in the group list.
 
    Use case ends.
+
+**Extensions**
+
+* 1a. The group attributes are in an invalid format.
+  * 1a1. ArchDuke shows an error message.
+    Use case resumes from step 1.
 
 **Use case: UC05 - Delete a student group**
 
 **MSS:**
 
-1. User requests to delete a specific group in the list
-2. ArchDuke deletes the group
-3. ArchDuke GUI no longer displays the data of that specific group
+1. User requests to delete a group in the group list.
+2. ArchDuke deletes the group.
+3. ArchDuke updates the group list and removes the group from the group list.
 
    Use case ends.
 
