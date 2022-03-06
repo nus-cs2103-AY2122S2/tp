@@ -140,7 +140,7 @@ Format: `delete INDEX`
 Examples:
 * `delete 2` deletes the 2nd Task in the Task list.
 
-### Locating persons by name: `find`
+### Locating Task by description or Date: `find`
 
 Find tasks based on the task description or date in the format of (DD-MM-YYYY).
 
@@ -193,8 +193,8 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add Employee** | `addEmployee n/NAME p/PHONE_NUMBER e/EMAIL` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com`
-**Add Task** | `add /task TASK_DESCRIPTION` <br> e.g., `add /task read book`
+**Add Employee** | `addEmployee n/NAME p/PHONE_NUMBER e/EMAIL` <br> e.g., `addEmployee n/James Ho p/22224444 e/jamesho@example.com`
+**Add Task** | `addTask /TASK_TYPE TASK_DESCRIPTION` <br> e.g., `addTask /todo read book`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Find** | `find /task TASK_DESCRIPTION` <br> e.g., `find /task homework`
