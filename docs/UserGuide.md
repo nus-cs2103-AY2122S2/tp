@@ -229,6 +229,21 @@ Format: `filter t/TAG`
 Examples:
 * `filter t/CS3230`  will find all persons with the module CS3230
 
+### Sorting contacts in list: `sort`
+
+Sort all people within address book.
+
+Format: `sort [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STATUS] [t/TAG] [o/ORDER]​`
+
+* Sorts list with specified field(s). For any two persons, latter fields will only be considered if preceding fields are equal.​
+* At least one of the optional fields must be provided (excluding order).
+* Parameters are ignored except for order `o/asc`.
+* Orders are optional and default order is "asc". Parameters of order must be either "asc" or "desc" and is case-insensitive. 
+
+Examples:
+* `sort n/ p/`  will sort the list by name first. If two persons have the same name, then sort by phone number.
+* `sort n/ o/desc` will sort the list by name in descending order.
+
 ### Undo a command : `undo`
 
 Undoes the most recent command. 

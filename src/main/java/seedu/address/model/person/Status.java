@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Person's status in the address book.
  * Guarantees: immutable; is always valid
  */
-public class Status {
+public class Status implements Comparable<Status> {
 
     public static final String MESSAGE_CONSTRAINTS = "Status should be either 'blacklist' or 'favourite'";
     public final String value;
@@ -45,5 +45,10 @@ public class Status {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    @Override
+    public int compareTo(Status status) {
+        return value.compareTo(status.value);
     }
 }
