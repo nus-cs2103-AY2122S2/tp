@@ -13,10 +13,10 @@ import seedu.address.model.tamodule.exceptions.ModuleNotFoundException;
 
 /**
  * A list of modules that enforces uniqueness between its elements and does not allow nulls.
- * A module is considered unique by comparing using {@code Module#isSameModule(Module)}. As such, adding and updating of
- * modules uses Module#isSameModule(Module) for equality so as to ensure that the module being added or updated is
- * unique in terms of identity in the UniqueModuleList. However, the removal of a module uses Module#equals(Object) so
- * as to ensure that the module with exactly the same fields will be removed.
+ * A module is considered unique by comparing using {@code TaModule#isSameModule(TaModule)}. As such, adding and
+ * updating of modules uses TaModule#isSameModule(TaModule) for equality so as to ensure that the module being added
+ * or updated is unique in terms of identity in the UniqueModuleList. However, the removal of a module uses
+ * TaModule#equals(Object) so as to ensure that the module with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
@@ -49,9 +49,9 @@ public class UniqueModuleList implements Iterable<TaModule> {
     }
 
     /**
-     * Replaces the module {@code target} in the list with {@code editedModule}.
+     * Replaces the module {@code target} in the list with {@code editedTaModule}.
      * {@code target} must exist in the list.
-     * The module identity of {@code editedModule} must not be the same as another existing module in the list.
+     * The module identity of {@code editedTaModule} must not be the same as another existing module in the list.
      */
     public void setModule(TaModule target, TaModule editedTaModule) {
         requireAllNonNull(target, editedTaModule);
@@ -85,8 +85,8 @@ public class UniqueModuleList implements Iterable<TaModule> {
     }
 
     /**
-     * Replaces the contents of this list with {@code modules}.
-     * {@code modules} must not contain duplicate modules.
+     * Replaces the contents of this list with {@code taModules}.
+     * {@code taModules} must not contain duplicate modules.
      */
     public void setModules(List<TaModule> taModules) {
         requireAllNonNull(taModules);
@@ -122,7 +122,7 @@ public class UniqueModuleList implements Iterable<TaModule> {
     }
 
     /**
-     * Returns true if {@code modules} contains only unique modules.
+     * Returns true if {@code taModules} contains only unique modules.
      */
     private boolean modulesAreUnique(List<TaModule> taModules) {
         for (int i = 0; i < taModules.size() - 1; i++) {

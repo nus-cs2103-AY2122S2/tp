@@ -5,7 +5,7 @@ import java.util.Objects;
 import seedu.address.model.tamodule.ModuleCode;
 
 /**
- * Represents a ClassGroup in TAssist.
+ * Represents a ClassGroup in the TAssist.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class ClassGroup {

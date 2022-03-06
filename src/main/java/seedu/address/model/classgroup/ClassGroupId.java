@@ -4,14 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a ClassGroup's ID in TAssist.
+ * Represents a ClassGroup's ID in the TAssist.
  * Guarantees: immutable; is valid as declared in {@link #isValidClassGroupId(String)}
  */
 public class ClassGroupId {
     public static final String MESSAGE_CONSTRAINTS =
-            "CLass Group ID should only contain numbers, and it should be at least 1 digit long";
-    // currently supports numerals only
-    public static final String VALIDATION_REGEX = "\\d{1,2}";
+            "CLass Group ID should start with a letter followed by 2 numbers";
+    public static final String VALIDATION_REGEX = "^[A-Z]{1}\\d{2}";
     public final String value;
 
     /**
@@ -21,8 +20,8 @@ public class ClassGroupId {
      */
     public ClassGroupId(String classGroupId) {
         requireNonNull(classGroupId);
-        checkArgument(isValidClassGroupId(classGroupId), MESSAGE_CONSTRAINTS);
-        value = classGroupId;
+        checkArgument(isValidClassGroupId(classGroupId.toUpperCase()), MESSAGE_CONSTRAINTS);
+        value = classGroupId.toUpperCase();
     }
 
     /**
