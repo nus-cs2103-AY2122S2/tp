@@ -2,7 +2,7 @@ package seedu.address.model.classgroup;
 
 import java.util.Objects;
 
-import seedu.address.model.module.ModuleCode;
+import seedu.address.model.tamodule.ModuleCode;
 
 /**
  * Represents a ClassGroup in TAssist.
