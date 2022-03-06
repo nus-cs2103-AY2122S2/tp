@@ -32,7 +32,7 @@ ManageEZPZ is a **desktop app for that allows managers or supervisors to manage 
    
    * **`deleteTask`**`3` : Deletes the 3rd task in the current Task list.
 
-   * **`add /todo read book`** : Adds a todo task with a description of `read book` to the Task list.
+   * **`addTask /todo read book`** : Adds a todo task with a description of `read book` to the Task list.
 
    * **`exit`** : Exits the app.
    
@@ -45,7 +45,7 @@ ManageEZPZ is a **desktop app for that allows managers or supervisors to manage 
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `addEmployee n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Parameters for adding employees can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -78,11 +78,11 @@ Format: `help`
 
 Adds an employee to ManageEZPZ.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL`
+Format: `addEmployee n/NAME p/PHONE_NUMBER e/EMAIL`
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com`
+* `addEmployee n/John Doe p/98765432 e/johnd@example.com`
+* `addEmployee n/Betsy Crowe t/friend e/betsycrowe@example.com`
 
 ### Adding a Task: `addTask`
 
