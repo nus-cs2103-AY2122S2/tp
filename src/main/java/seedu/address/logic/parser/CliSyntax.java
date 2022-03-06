@@ -12,5 +12,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_GITHUB = new Prefix("g/");
-
+    public static final Prefix PREFIX_TELEGRAM = new Prefix("tl/"); // need to change this in the future
 }

@@ -41,6 +41,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label github;
     @FXML
+    private Label telegram;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -54,7 +56,8 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        github.setText(person.getGithubUsername().value);
+        github.setText(person.getGithubUsername().username);
+        telegram.setText(person.getTelegram().handle);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

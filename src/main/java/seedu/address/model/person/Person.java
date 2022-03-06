@@ -20,6 +20,7 @@ public class Person {
     private final Phone phone;
     private final Email email;
     private final GithubUsername githubUsername;
+    private final Telegram telegram;
 
     // Data fields
     private final Address address;
@@ -28,7 +29,8 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, GithubUsername githubUsername) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+                  GithubUsername githubUsername, Telegram telegram) {
         requireAllNonNull(name, phone, email, address, tags, githubUsername);
         this.name = name;
         this.phone = phone;
@@ -36,6 +38,7 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
         this.githubUsername = githubUsername;
+        this.telegram = telegram;
     }
 
     public Name getName() {
@@ -52,6 +55,10 @@ public class Person {
 
     public GithubUsername getGithubUsername() {
         return githubUsername;
+    }
+
+    public Telegram getTelegram() {
+        return telegram;
     }
 
     public Address getAddress() {
@@ -99,13 +106,14 @@ public class Person {
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getTags().equals(getTags())
-                && otherPerson.getGithubUsername().equals(getGithubUsername());
+                && otherPerson.getGithubUsername().equals(getGithubUsername())
+                && otherPerson.getTelegram().equals(getTelegram());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, githubUsername);
+        return Objects.hash(name, phone, email, address, tags, githubUsername, telegram);
     }
 
     @Override
@@ -119,7 +127,9 @@ public class Person {
                 .append("; Address: ")
                 .append(getAddress())
                 .append("; Github: ")
-                .append(getGithubUsername());
+                .append(getGithubUsername())
+                .append("; Telegram: ")
+                .append(getTelegram());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

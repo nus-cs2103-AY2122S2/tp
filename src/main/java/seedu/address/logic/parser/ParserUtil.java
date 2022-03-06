@@ -14,6 +14,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.GithubUsername;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -141,7 +142,7 @@ public class ParserUtil {
      * Parses a {@code String githubUsername} into an {@code GithubUsername}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code address} is invalid.
+     * @throws ParseException if the given {@code githubUsername} is invalid.
      */
     public static GithubUsername parseGithubUsername(String githubUsername) throws ParseException {
         requireNonNull(githubUsername);
@@ -152,5 +153,22 @@ public class ParserUtil {
         }
 
         return new GithubUsername(trimmedUsername);
+    }
+
+    /**
+     * Parses a {@code String telegram} into an {@code Telegram}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code telegram} is invalid.
+     */
+    public static Telegram parseTelegram(String telegram) throws ParseException {
+        requireNonNull(telegram);
+        String trimmedTelegram = telegram.trim();
+
+        if (!Telegram.isValidTelegram(trimmedTelegram)) {
+            throw new ParseException(Telegram.MESSAGE_CONSTRAINTS);
+        }
+
+        return new Telegram(trimmedTelegram);
     }
 }
