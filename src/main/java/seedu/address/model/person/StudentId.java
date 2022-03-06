@@ -14,7 +14,7 @@ public class StudentId {
      */
     public static final String VALIDATION_REGEX = "A\\d{7}[A-Z]";
 
-    public final String value;
+    public final String id;
 
     /**
      * Constructs an {@code StudentId}.
@@ -24,7 +24,7 @@ public class StudentId {
     public StudentId(String studentId) {
         requireNonNull(studentId);
         checkArgument(isValidStudentId(studentId), MESSAGE_CONSTRAINTS);
-        value = studentId;
+        id = studentId;
     }
 
     /**
@@ -36,18 +36,18 @@ public class StudentId {
 
     @Override
     public String toString() {
-        return value;
+        return id;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof StudentId // instanceof handles nulls
-                && value.equals(((StudentId) other).value)); // state check
+                && id.equals(((StudentId) other).id)); // state check
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return id.hashCode();
     }
 }

@@ -37,7 +37,7 @@ public class PersonUtil {
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
         sb.append(PREFIX_GITHUB + person.getGithubUsername().value + " ");
-        sb.append(PREFIX_STUDENTID + person.getStudentId().value + " ");
+        sb.append(PREFIX_STUDENTID + person.getStudentId().id + " ");
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
@@ -55,7 +55,7 @@ public class PersonUtil {
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         descriptor.getGithubUsername().ifPresent(github -> sb.append(PREFIX_GITHUB).append(github.value).append(" "));
         descriptor.getStudentId().ifPresent(studentId -> sb.append(PREFIX_STUDENTID)
-                .append(studentId.value).append(" "));
+                .append(studentId.id).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
