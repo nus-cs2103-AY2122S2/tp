@@ -11,17 +11,17 @@ import java.util.Objects;
 public class Student {
 
     // Identity fields
+    private final StudentId studentId;
     private final Name name;
     private final Phone phone;
     private final Email email;
-    private final StudentID studentID;
 
     /**
      * Every field must be present and not null.
      */
-    public Student(StudentID studentID, Name name, Phone phone, Email email) {
-        requireAllNonNull(studentID, name, phone, email);
-        this.studentID = studentID;
+    public Student(StudentId studentId, Name name, Phone phone, Email email) {
+        requireAllNonNull(studentId, name, phone, email);
+        this.studentId = studentId;
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -39,8 +39,8 @@ public class Student {
         return email;
     }
 
-    public StudentID getStudentID() {
-        return studentID;
+    public StudentId getStudentId() {
+        return studentId;
     }
 
     /**
@@ -71,7 +71,7 @@ public class Student {
         }
 
         Student otherStudent = (Student) other;
-        return otherStudent.getStudentID().equals(getStudentID())
+        return otherStudent.getStudentId().equals(getStudentId())
                 && otherStudent.getName().equals(getName())
                 && otherStudent.getPhone().equals(getPhone())
                 && otherStudent.getEmail().equals(getEmail());
@@ -80,13 +80,13 @@ public class Student {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(studentID, name, phone, email);
+        return Objects.hash(studentId, name, phone, email);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getStudentID())
+        builder.append(getStudentId())
                 .append("; Name: ")
                 .append(getName())
                 .append("; Phone: ")
