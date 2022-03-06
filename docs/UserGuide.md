@@ -1,3 +1,7 @@
+---
+layout: page
+title: User Guide
+---
 ## 3.0	FAQ
 Q: How do I transfer my data to another Computer?  
 A: Install the app on the other computer and overwrite the empty data file it creates with the file that contains the data of your previous MedBook folder.  
