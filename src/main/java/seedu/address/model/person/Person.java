@@ -20,6 +20,7 @@ public class Person {
     private final Phone phone;
     private final Email email;
     private final GithubUsername githubUsername;
+    private final Telegram telegram;
     private final StudentId studentId;
 
     // Data fields
@@ -30,7 +31,7 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  GithubUsername githubUsername, StudentId studentId) {
+                  GithubUsername githubUsername, Telegram telegram, StudentId studentId) {
         requireAllNonNull(name, phone, email, address, tags, githubUsername, studentId);
         this.name = name;
         this.phone = phone;
@@ -38,6 +39,7 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
         this.githubUsername = githubUsername;
+        this.telegram = telegram;
         this.studentId = studentId;
     }
 
@@ -53,17 +55,22 @@ public class Person {
         return email;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
     public GithubUsername getGithubUsername() {
         return githubUsername;
     }
 
+    public Telegram getTelegram() {
+        return telegram;
+   }
+
     public StudentId getStudentId() {
         return studentId;
-    }
 
-    public Address getAddress() {
-        return address;
-    }
+
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -107,13 +114,14 @@ public class Person {
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getTags().equals(getTags())
                 && otherPerson.getGithubUsername().equals(getGithubUsername())
+                && otherPerson.getTelegram().equals(getTelegram());
                 && otherPerson.getStudentId().equals(getStudentId());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, githubUsername, studentId);
+        return Objects.hash(name, phone, email, address, tags, githubUsername, telegram, studentId);
     }
 
     @Override
@@ -128,6 +136,8 @@ public class Person {
                 .append(getAddress())
                 .append("; Github: ")
                 .append(getGithubUsername())
+                .append("; Telegram: ")
+                .append(getTelegram())
                 .append("; Student ID: ")
                 .append(getStudentId());
 
