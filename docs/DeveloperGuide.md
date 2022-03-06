@@ -391,6 +391,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use Case 4 - Mark Tasks**
 
+Preconditions: User is currently using ManageEZPZ.
+
 **MSS**
 
 1. User enters the command to view Tasks.
