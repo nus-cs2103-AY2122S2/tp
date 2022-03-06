@@ -93,19 +93,19 @@ public interface Model {
     ObservableList<Lesson> getFilteredLessonList();
 
     /**
-     * Updates the selected {@code Person} with the given {@code Person} for UI use.
+     * Sets the selected {@code Person} with the given {@code Person} for UI use.
      * @param person The given {@code Person}.
      */
-    void updateSelectedPerson(Person person);
+    void setSelectedPerson(Person person);
 
     /** Returns the selected {@code Person} */
     Person getSelectedPerson();
 
     /**
-     * Updates the selected {@code Lesson} with the given {@code Lesson} for UI use.
+     * Sets the selected {@code Lesson} with the given {@code Lesson} for UI use.
      * @param lesson The given {@code Lesson}.
      */
-    void updateSelectedLesson(Lesson lesson);
+    void setSelectedLesson(Lesson lesson);
 
     /** Returns the selected {@code Lesson} */
     Lesson getSelectedLesson();

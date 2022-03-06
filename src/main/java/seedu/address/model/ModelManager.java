@@ -185,7 +185,7 @@ public class ModelManager implements Model {
 
     //=========== Selected Person and Lesson Accessors and Setter ============================================
 
-    public void updateSelectedPerson(Person person) {
+    public void setSelectedPerson(Person person) {
         selectedPerson = person;
     }
 
@@ -193,7 +193,7 @@ public class ModelManager implements Model {
         return selectedPerson;
     }
 
-    public void updateSelectedLesson(Lesson lesson) {
+    public void setSelectedLesson(Lesson lesson) {
         selectedLesson = lesson;
     }
 
