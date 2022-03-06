@@ -257,11 +257,17 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-Company Managers/Supervisors
+* Company Managers/Supervisors wants to keep track of all the tasks given to their subordinates
+* They need to assign tasks to their subordinates as well
+* Prefers typing commands instead of clicking buttons
+* Needs a local database to store all tasks
 
 **Value proposition**: 
 
-Problem intending to solve : not being able to keep track of the task assigned and to aid in overseeing employees.
+* An application to show all the tasks assigned to the employees
+* Tasks should be assigned to the employees as well
+* Commands are typed using command lines
+* All tasks created are stored in the local database
 
 ### User stories
 
