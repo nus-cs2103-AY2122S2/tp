@@ -61,7 +61,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        githubUsername = source.getGithubUsername().value;
+        githubUsername = source.getGithubUsername().username;
         telegram = source.getTelegram().handle;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
