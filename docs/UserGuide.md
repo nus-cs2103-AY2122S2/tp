@@ -74,12 +74,12 @@ Format: `/delete -t contact -i NRIC`
 Note: Only NRIC can be used to uniquely identify the contact owner.
 
 Examples:
-* /delete -t contact -i S12345678P
+* `/delete -t contact -i S12345678P`
 
 ### Create Medical Information: `/create -t medical`
 Adds a patient's medical information to the MedBook.
 
-Format: `/create -t medical -i S12345678P [-a AGE] [-bt BLOOD_TYPE] [-md MEDICATION]...`
+Format: `/create -t medical -i NRIC [-a AGE] [-bt BLOOD_TYPE] [-md MEDICATION]...`
 
 Optional fields and associated flags:
 - Age `-a`
@@ -121,7 +121,7 @@ Examples:
 ### Create Consultation Information: `/create -t consultation`
 Adds a consultation report of a patient to the MedBook.
 
-Format: `/create -t consultation -i S12345678P [-dt DATE] [-tm TIME] [-n NOTES] [-p PRESCRIPTION] [-tt TESTS TAKEN AND RESULTS]`
+Format: `/create -t consultation -i NRIC [-dt DATE] [-tm TIME] [-n NOTES] [-p PRESCRIPTION] [-tt TESTS TAKEN AND RESULTS]`
 
 NOTE: [-dt DATE][-tm TIME] are in the form dd-MM-yyyy, HH-mm (24 hour) respectively.
 
@@ -131,7 +131,7 @@ Examples:
 ### View Past Consultations: `/view -t consultation`
 View all past consultations in the MedBook that fit search parameters. All fields are optional.
 
-Format: /view -t consultation  -i S12345678P [-dt DATE][-tm TIME]
+Format: `/view -t consultation  -i NRIC [-dt DATE][-tm TIME]`
 
 NOTE:  [-dt DATE][-tm TIME] are in the form dd-MM-yyyy, HH-mm (24 hour) respectively.
 
@@ -151,7 +151,7 @@ Examples:
 ### Delete Consultation Information: `/delete -t consultation`
 Deletes a consultation of a patient from the MedBook.
 
-Format: `/delete -t consultation -i S12345678P [-dt DATE] [-tm TIME]`
+Format: `/delete -t consultation -i NRIC [-dt DATE] [-tm TIME]`
 
 Examples:
 * `/delete -t consultation -i S12345678P  -dt 15-09-2021 -tm 18-00`
@@ -166,9 +166,9 @@ A: Install the app on the other computer and overwrite the empty data file it cr
 | Add Contact Info         | /create -t contact -i NRIC -n NAME -p PHONE_NUMBER -e EMAIL -a ADDRESS                                                 |
 | View Contact Info        | /view -t contact [-i NRIC] [-n NAME] [-p PHONE_NUMBER] [-e EMAIL]                                                      |
 | Delete Contact Info      | /delete -t contact -i NRIC                                                                                             |
-| Add Medical Info         | /create -t medical -i S12345678P [-a AGE] [-bt BLOOD_TYPE] [-md MEDICATION]...                                         |
+| Add Medical Info         | /create -t medical -i NRIC [-a AGE] [-bt BLOOD_TYPE] [-md MEDICATION]...                                         |
 | View Medical Info        | /view -t medical [-i NRIC]                                                                                             |
 | Delete Medical Info      | /delete -t medical -i NRIC                                                                                             |
-| Add Consultation Info    | /create -t consultation -i S12345678P [-dt DATE] [-tm TIME] [-n NOTES] [-p PRESCRIPTION] [-tt TESTS TAKEN AND RESULTS] |
-| View Consultation Info   | /view -t consultation  -i S12345678P [-dt DATE][-tm TIME]                                                              |
-| Delete Consultation Info | /delete -t consultation -i S12345678P [-dt DATE] [-tm TIME]                                                            |
+| Add Consultation Info    | /create -t consultation -i NRIC [-dt DATE] [-tm TIME] [-n NOTES] [-p PRESCRIPTION] [-tt TESTS TAKEN AND RESULTS] |
+| View Consultation Info   | /view -t consultation  -i NRIC [-dt DATE][-tm TIME]                                                              |
+| Delete Consultation Info | /delete -t consultation -i NRIC [-dt DATE] [-tm TIME]                                                            |
