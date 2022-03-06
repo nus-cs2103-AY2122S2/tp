@@ -494,7 +494,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. TA requests to <ins>list modules (UC02)</ins>. 
+1. TA requests to <ins>list modules (UC02)</ins>.
 2. TA requests to delete a specific module in the list.
 3. TAssist deletes the module and the class groups associated with it.
 
@@ -579,7 +579,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2b. TAssist detects an error in the entered command.
 
     * 2b1. TAssist prompts for the correct command.
-  
+
     * 2b2. TA enters a new command.
 
       Steps 2b1-2b2 are repeated until the command entered is correct.
