@@ -49,12 +49,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Chan Wei Jie
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/chanweijie.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/chanweijie)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Integration, Documentation, Deliverables and Deadlines  
+* In Charge of Component Model
