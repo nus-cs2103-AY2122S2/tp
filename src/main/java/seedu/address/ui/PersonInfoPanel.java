@@ -2,14 +2,16 @@ package seedu.address.ui;
 
 import java.util.Comparator;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.Region;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
 
-public class PersonInfoPanel extends UiPart<Region> {
+public class PersonInfoPanel extends InfoPanel {
     private static final String FXML = "PersonInfoPanel.fxml";
 
     public final Person person;
@@ -25,7 +27,7 @@ public class PersonInfoPanel extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
-    private ListView<Person> assignedLessonList;
+    private ListView<Lesson> assignedLessonList;
 
     /**
      * Creates a {@code PersonInfoPanel} filled with information with the given details of {@code Person}
@@ -35,10 +37,10 @@ public class PersonInfoPanel extends UiPart<Region> {
     public PersonInfoPanel(Person person) {
         super(FXML);
         this.person = person;
-        setPersonDetails(person);
+        setDetails(person);
     }
 
-    private void setPersonDetails(Person person) {
+    private void setDetails(Person person) {
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
@@ -47,5 +49,28 @@ public class PersonInfoPanel extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         // TODO: Add function to list assigned classes after implementing assigned lesson list in Person
+    }
+
+    // TODO: This is public temporarily (Person doesn't hold assigned lessons)
+    public void setAssignedLessons(ObservableList<Lesson> lessonList) {
+        assignedLessonList.setItems(lessonList);
+        assignedLessonList.setCellFactory(listView -> new LessonListViewCell());
+    }
+
+    /**
+     * Custom {@code ListCell} that displays the graphics of a {@code Lesson} using a {@code LessonCard}.
+     */
+    class LessonListViewCell extends ListCell<Lesson> {
+        @Override
+        protected void updateItem(Lesson lesson, boolean empty) {
+            super.updateItem(lesson, empty);
+
+            if (empty || lesson == null) {
+                setGraphic(null);
+                setText(null);
+            } else {
+                setGraphic(new LessonCard(lesson, getIndex() + 1).getRoot());
+            }
+        }
     }
 }
