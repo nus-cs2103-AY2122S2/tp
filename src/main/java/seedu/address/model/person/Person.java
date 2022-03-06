@@ -65,8 +65,8 @@ public class Person {
 
     public Telegram getTelegram() {
         return telegram;
-   }
-    
+    }
+
     public StudentId getStudentId() {
         return studentId;
     }

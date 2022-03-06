@@ -11,8 +11,8 @@ import seedu.address.model.person.GithubUsername;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Telegram;
 import seedu.address.model.person.StudentId;
+import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
 
 /**
