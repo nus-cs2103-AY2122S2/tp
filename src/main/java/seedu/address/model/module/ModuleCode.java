@@ -18,7 +18,7 @@ public class ModuleCode {
      */
     public static final String VALIDATION_REGEX = "^[\\p{Upper}]{2,4}[\\p{Digit}]{4}\\p{Upper}*$";
 
-    public final String moduleCode;
+    public final String value;
 
     /**
      * Constructs a {@code Name}.
@@ -28,7 +28,7 @@ public class ModuleCode {
     public ModuleCode(String moduleCode) {
         requireNonNull(moduleCode);
         checkArgument(isValidName(moduleCode.toUpperCase()), MESSAGE_CONSTRAINTS);
-        this.moduleCode = moduleCode.toUpperCase();
+        this.value = moduleCode.toUpperCase();
     }
 
     /**
@@ -41,19 +41,19 @@ public class ModuleCode {
 
     @Override
     public String toString() {
-        return moduleCode;
+        return value;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ModuleCode // instanceof handles nulls
-                && moduleCode.equals(((ModuleCode) other).moduleCode)); // state check
+                && value.equals(((ModuleCode) other).value)); // state check
     }
 
     @Override
     public int hashCode() {
-        return moduleCode.hashCode();
+        return value.hashCode();
     }
 
 }

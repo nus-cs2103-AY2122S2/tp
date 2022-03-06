@@ -50,15 +50,35 @@ public class UniqueClassGroupList implements Iterable<ClassGroup> {
     }
 
     /**
+     * Replaces the class group {@code target} in the list with {@code editedClassGroup}.
+     * {@code target} must exist in the list.
+     * The class group identity of {@code editedClassGroup} must not be the same as
+     * another existing class group in the list.
+     */
+    public void setClassGroup(ClassGroup target, ClassGroup editedClassGroup) {
+        requireAllNonNull(target, editedClassGroup);
+
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new ClassGroupNotFoundException();
+        }
+
+        if (!target.equals(editedClassGroup) && contains(editedClassGroup)) {
+            throw new DuplicateClassGroupException();
+        }
+
+        internalList.set(index, editedClassGroup);
+    }
+
+    /**
      * Removes the equivalent class group from the list.
      * The class group must exist in the list.
      */
-    public void remove(int index) {
-        requireNonNull(index);
-        if (index < 1 || index >= internalList.size()) {
+    public void remove(ClassGroup toRemove) {
+        requireNonNull(toRemove);
+        if (!internalList.remove(toRemove)) {
             throw new ClassGroupNotFoundException();
         }
-        internalList.remove(index - 1);
     }
 
     public void setClassGroups(UniqueClassGroupList replacement) {
