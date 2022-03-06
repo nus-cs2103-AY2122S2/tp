@@ -21,9 +21,10 @@ public class DurationTest {
         // invalid duration
         assertFalse(Duration.isValidDuration(-1)); // negative integer
         assertFalse(Duration.isValidDuration(-123456789)); // negative integer
+        assertFalse(Duration.isValidDuration(0)); // zero is also not allowed
 
         // valid duration
-        assertTrue(Duration.isValidDuration(0)); // edge of validity
+        assertTrue(Duration.isValidDuration(1)); // edge of validity
         assertTrue(Duration.isValidDuration(10)); // small integer
         assertTrue(Duration.isValidDuration(2147483646)); // large integer
     }

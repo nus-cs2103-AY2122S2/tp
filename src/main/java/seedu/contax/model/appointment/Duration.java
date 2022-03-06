@@ -7,7 +7,7 @@ import static seedu.contax.commons.util.AppUtil.checkArgument;
  * Guarantees: Immutable; is valid declared as in {@link #isValidDuration(int)}
  */
 public class Duration {
-    public static final String MESSAGE_CONSTRAINTS = "Duration should be a non-negative integer";
+    public static final String MESSAGE_CONSTRAINTS = "Duration should be a positive integer";
 
     public final int duration;
 
@@ -23,13 +23,13 @@ public class Duration {
 
     /**
      * Returns true if a given integer is a valid duration.
-     * A duration is considered valid if it is a non-negative integer.
+     * A duration is considered valid if it is a positive integer.
      *
      * @param test The integer to test.
      * @return A boolean indicating if the test integer supplied is a valid duration.
      */
     public static boolean isValidDuration(int test) {
-        return test >= 0;
+        return test > 0;
     }
 
     @Override

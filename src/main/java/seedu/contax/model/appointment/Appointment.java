@@ -13,10 +13,10 @@ import seedu.contax.model.person.Person;
 public class Appointment {
 
     // Appointment identification fields
-    private final Name name;
+    private final StartDateTime startDateTime;
 
     // Data fields
-    private final StartDateTime startDateTime;
+    private final Name name;
     private final Duration duration;
     private final Person person;
 
