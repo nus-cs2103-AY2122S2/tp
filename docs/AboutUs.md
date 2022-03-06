@@ -62,9 +62,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/aaron-ljx.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/aaron-ljx)]
+[[portfolio](team/aaronljx.md)]
 
 * Role: Developer
-* Responsibilities: 
+* Responsibilities: Deliverables and Deadlines
 * In Charge of Component: Logic
