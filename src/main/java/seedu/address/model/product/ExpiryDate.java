@@ -9,6 +9,9 @@ import java.time.format.DateTimeFormatter;
  */
 public class ExpiryDate {
 
+    // TODO : Add a message constraint
+    public static final String MESSAGE_CONSTRAINTS = "";
+
     private static final String DATE_FORMAT = "d MMM yyyy";
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT);
 
@@ -21,6 +24,14 @@ public class ExpiryDate {
      */
     public ExpiryDate(LocalDate date) {
         expiryDate = date;
+    }
+
+    /**
+     * Returns true if a given {@code LocalDate} is a valid expiry date.
+     */
+    public static boolean isValidExpiryDate(LocalDate expiryDate) {
+        // TODO : implement this method
+        return true;
     }
 
     public boolean isPast() {
