@@ -66,11 +66,10 @@ public class Person {
     public Telegram getTelegram() {
         return telegram;
    }
-
+    
     public StudentId getStudentId() {
         return studentId;
-
-
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -114,7 +113,7 @@ public class Person {
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getTags().equals(getTags())
                 && otherPerson.getGithubUsername().equals(getGithubUsername())
-                && otherPerson.getTelegram().equals(getTelegram());
+                && otherPerson.getTelegram().equals(getTelegram())
                 && otherPerson.getStudentId().equals(getStudentId());
     }
 
