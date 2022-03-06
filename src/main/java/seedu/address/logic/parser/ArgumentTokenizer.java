@@ -38,7 +38,7 @@ public class ArgumentTokenizer {
     public static List<Prefix> sortPrefixOrder(String argsString, Prefix... prefixes) {
         return findAllPrefixPositions(argsString, prefixes)
                 .stream()
-                .sorted((prefix1, prefix2) -> prefix1.getStartPosition() - prefix2.getStartPosition())
+                .sorted((prefix1, prefix2) -> Integer.compare(prefix1.getStartPosition(), prefix2.getStartPosition()))
                 .map(PrefixPosition::getPrefix)
                 .collect(Collectors.toList());
     }

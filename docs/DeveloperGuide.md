@@ -364,7 +364,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **Contact/Person**: A classmate whose information is kept in the address book. 
+* **Module**: A course that is held at NUS with specific module codes e.g. CS3230
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Favourite**: To mark a person favourably
+* **Blacklist**: To mark a person unfavourably
+* **Fast Typist**: A person who can type at speeds greater or equal to 70 words per minute.
 
 --------------------------------------------------------------------------------------------------------------------
 
