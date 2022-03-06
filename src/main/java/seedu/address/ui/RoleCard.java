@@ -38,10 +38,10 @@ public class RoleCard extends UiPart<Region> {
         this.role = role;
         id.setText(displayedIndex + ". ");
         roleName.setText(role.getName().fullName);
-        status.setText(role.getStatus().value);
-        deadline.setText(role.getDeadline().toString());
-        description.setText(role.getDescription().value);
-        stipend.setText(role.getStipend().value);
+        status.setText("Status: " + role.getStatus().value);
+        deadline.setText("Deadline: " + role.getDeadline().toString());
+        description.setText("Description: " + role.getDescription().value);
+        stipend.setText("Stipend: $" + role.getStipend().value);
     }
 
     @Override
