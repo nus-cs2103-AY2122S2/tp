@@ -57,4 +57,3 @@ A: Install the app on the other computer and overwrite the empty data file it cr
 | Add Consultation Info | /create -t consultation -i S12345678P [-dt DATE] [-tm TIME] [-n NOTES] [-p PRESCRIPTION] [-tt TESTS TAKEN AND RESULTS] |
 | View Consultation Info | /view -t consultation  -i S12345678P [-dt DATE][-tm TIME] |
 | Delete Consultation Info | /delete -t consultation -i S12345678P [-dt DATE] [-tm TIME] |
-
