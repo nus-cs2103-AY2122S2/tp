@@ -24,7 +24,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/alfredkohhh.png" width="200px">
 
 [[github](http://github.com/alfredkohhh)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/alfredkohhh.md)]
 
 * Role: Developer
 * Responsibilities: Integration, Documentation, Deliverables and Deadlines
