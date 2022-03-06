@@ -4,16 +4,16 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Student's studentID in the TAssist.
- * Guarantees: immutable; is valid as declared in {@link #isValidStudentID(String)}
+ * Represents a Student's student ID in the TAssist.
+ * Guarantees: immutable; is valid as declared in {@link #isValidStudentId(String)}
  */
-public class StudentID {
+public class StudentId {
 
-    public static final String MESSAGE_CONSTRAINTS = "StudentID can take any values except special characters"
+    public static final String MESSAGE_CONSTRAINTS = "Student ID can take any values except special characters"
            + ", and it should not be blank";
 
     /*
-     * The first character of the studentID must not be a whitespace,
+     * The first character of the student ID must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "^[Ee][0-9]{0,7}$";
@@ -21,20 +21,20 @@ public class StudentID {
     public final String value;
 
     /**
-     * Constructs an {@code StudentID}.
+     * Constructs an {@code StudentId}.
      *
-     * @param studentID A valid studentID.
+     * @param studentId A valid student ID.
      */
-    public StudentID(String studentID) {
-        requireNonNull(studentID);
-        checkArgument(isValidStudentID(studentID), MESSAGE_CONSTRAINTS);
-        value = studentID;
+    public StudentId(String studentId) {
+        requireNonNull(studentId);
+        checkArgument(isValidStudentId(studentId), MESSAGE_CONSTRAINTS);
+        value = studentId;
     }
 
     /**
      * Returns true if a given string is a valid email.
      */
-    public static boolean isValidStudentID(String test) {
+    public static boolean isValidStudentId(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
@@ -46,8 +46,8 @@ public class StudentID {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof StudentID // instanceof handles nulls
-                && value.equals(((StudentID) other).value)); // state check
+                || (other instanceof StudentId // instanceof handles nulls
+                && value.equals(((StudentId) other).value)); // state check
     }
 
     @Override
