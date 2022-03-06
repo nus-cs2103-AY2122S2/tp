@@ -1,3 +1,8 @@
+---
+layout: page
+title: User Guide
+---
+
 ## 2.0 Features
 
 ### 2.1 Create Contact Information: / create -t contact
