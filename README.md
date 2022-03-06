@@ -3,6 +3,8 @@
 
 ![Ui](docs/images/Ui.png)
 
+### Overview
+
 MedBook is a health monitoring system for healthcare professionals that simplifies tracking a patient’s medical details and scheduling appointments. MedBook delivers a seamless workflow for doctors and healthcare professionals to search for or update patients' medical information, billing and appointments through a simple and easy-to-use platform.
 
 * The project simulates an ongoing software project for a desktop application (called _AddressBook_) used for managing contact details.
