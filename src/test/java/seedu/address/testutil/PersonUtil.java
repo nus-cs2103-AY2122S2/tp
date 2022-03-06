@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
 import java.util.Set;
 
@@ -36,7 +37,8 @@ public class PersonUtil {
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
-        sb.append(PREFIX_GITHUB + person.getGithubUsername().value + " ");
+        sb.append(PREFIX_GITHUB + person.getGithubUsername().username + " ");
+        sb.append(PREFIX_TELEGRAM + person.getTelegram().handle + " ");
         sb.append(PREFIX_STUDENTID + person.getStudentId().id + " ");
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
@@ -53,7 +55,8 @@ public class PersonUtil {
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
-        descriptor.getGithubUsername().ifPresent(github -> sb.append(PREFIX_GITHUB).append(github.value).append(" "));
+        descriptor.getGithubUsername().ifPresent(git -> sb.append(PREFIX_GITHUB).append(git.username).append(" "));
+        descriptor.getTelegram().ifPresent(telegram -> sb.append(PREFIX_TELEGRAM).append(telegram.handle).append(" "));
         descriptor.getStudentId().ifPresent(studentId -> sb.append(PREFIX_STUDENTID)
                 .append(studentId.id).append(" "));
         if (descriptor.getTags().isPresent()) {
