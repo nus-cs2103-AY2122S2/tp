@@ -3,7 +3,7 @@ layout: page
 title: Developer Guide
 ---
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -224,13 +224,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
@@ -257,71 +257,319 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Company Managers/Supervisors wants to keep track of all the tasks given to their subordinates
+* They need to assign tasks to their subordinates as well
+* Prefers typing commands instead of clicking buttons
+* Needs a local database to store all tasks
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: 
 
+* An application to show all the tasks assigned to the employees
+* Tasks should be assigned to the employees as well
+* Commands are typed using command lines
+* All tasks created are stored in the local database
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​        | I want to …​                                                               | So that I can…​                                                                                   |
+|----------|----------------|----------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
+| `* * *`  | user           | add a task to the database                                                 | better organise my time                                                                           |
+| `* * *`  | user           | delete a task from the database                                            | better organise my list                                                                           |
+| `* * *`  | user           | view all my tasks                                                          | have a better picture of my schedule                                                              |
+| `* * *`  | user           | able to edit a task                                                        | update any details                                                                                |
+| `* * *`  | user           | able to view my tasks for the day (i.e. today)                             | better manage my time                                                                             |
+| `* * *`  | user           | able to view the tasks for the week                                        | have a better picture of my schedule for the week                                                 |
+| `* * *`  | user           | view the tasks on a specific day                                           | plan for that day ahead                                                                           |
+| `* *`    | CEO or manager | have the flexibility to reschedule tasks that are assigned to any employee | better manage the manpower and deadlines                                                          |
+| `* *`    | manager        | retrieve the list of tasks allocated with an employee                      | allow myself to have an overview of the employee's workload. For example, command: ``Track <name> |
+| `* *`    | new user       | have a more begineer-friendly user guide                                   | learn more about the product                                                                      |
+| `* *`    | recurring user | be able to see tasks that are due within X number of days                  | better manage my time                                                                             |
+| `* *`    | advance user   | able to sort tasks based on a specific location                            | better plan my travel to that location                                                            |
 
-*{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+> Definition:
+> - For all use cases below, the **System** is `ManageEZPZ` and the **Actor** is the `User`, unless specified otherwise.
+> - More specifically, the `User` are **Supervisors**.
 
-**Use case: Delete a person**
+> Guarantees:
+> - For any use cases below that changes any data, ManageEZPZ will guarantee that the data is updated and saved.
+****
+
+**Use Case 1 - Add Task**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User starts up ManageEZPZ
+2. ManageEZPZ greets User with our HELP page, with all the commands.
+3. User uses the appropriate command to add Task.
+4. ManageEZPZ adds the task & confirms with a successful message that the task is added.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 3a. User uses one of the three `addTask` commands: 
+    * 3a1. User uses `addTask /todo` command 
 
-  Use case ends.
+      Use case resumes from step 4. 
 
-* 3a. The given index is invalid.
+    * 3a2. User uses `addTask /event` command 
 
-    * 3a1. AddressBook shows an error message.
+      Use case resumes from step 4. 
 
-      Use case resumes at step 2.
+    * 3a3. User uses `addTask /deadline` command 
 
+      Use case resumes from step 4. 
+    
+* 3b. User uses Add Task Commands with the wrong syntax 
+
+    * 3b1. ManageEZPZ sends an error message to User, indicating the
+      format for adding Task is incorrect, attached with the correct syntax format. 
+
+      Use case ends.
+
+****
+
+**Use Case 2 - Delete Task**
+
+**MSS**
+
+1. User starts up ManageEZPZ
+2. ManageEZPZ greets User with our HELP page, with all the commands.
+3. User uses the appropriate command to delete a Task
+4. ManageEZPZ deletes the Task & confirms with a successful message that the Task is deleted. 
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. ManageEZPZ detects an error in the entered data. (Invalid index) 
+    * 3a1. ManageEZPZ sends an error message to User, indicating the Index used for the delete
+      command is incorrect, attached with the correct syntax format. 
+
+      Use case ends.
+
+****
+
+**Use Case 3 - List Tasks**
+
+**MSS**
+
+1. User starts up ManageEZPZ
+2. ManageEZPZ greets User with our HELP page, with all the commands.
+3. User enters the command to list Tasks.
+4. ManageEZPZ displays the Tasks according.
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. User uses one of the five `list` Task commands: 
+    * 3a1. User uses `list /all` command 
+
+      Use case resumes from step 4. 
+
+    * 3a2. User uses `list /todo` command 
+
+      Use case resumes from step 4. 
+
+    * 3a3. User uses `list /deadline` command 
+
+      Use case resumes from step 4. 
+
+    * 3a2. User uses `list /event` command 
+
+      Use case resumes from step 4. 
+
+    * 3a3. User uses `list /today` command 
+
+      Use case resumes from step 4. 
+    
+* 3b. User uses list Task commands with the wrong syntax. 
+    * 3b1. ManageEZPZ sends an error message to User, that the list
+      command is incorrect, attached with the correct syntax format. 
+
+      Use case ends.
+
+****
+
+**Use Case 4 - Mark Tasks**
+
+Preconditions: User is currently using ManageEZPZ.
+
+**MSS**
+
+1. User enters the command to view Tasks.
+2. ManageEZPZ displays the Tasks.
+3. User wants to mark a Task as finished, enters command to mark Task.
+4. ManageEZPZ marks the Task & confirms with a successful message that the task is marked
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. ManageEZPZ detects an error in the entered data. (Invalid Index) 
+
+    * 3a1. ManageEZPZ sends an error message to User, indicating the Index used for
+      the Mark command is incorrect, attached with the correct syntax format. 
+      
+      Use Case ends.
+
+****
+
+**Use Case 5 - Unmark Tasks**
+
+Preconditions: User is currently using ManageEZPZ.
+
+**MSS**
+
+1. User enters the command to view Tasks.
+2. ManageEZPZ displays the Tasks.
+3. User realises that Task is marked as done, but is actually not done.
+4. User enters command to unmark Task for the specific Task Number.
+5. ManageEZPZ unmarks the Task & confirms with a successful message that the task is unmarked. 
+
+   Use case ends.
+
+**Extensions**
+
+* 4a. ManageEZPZ detects an error in the entered data. (Invalid Index) 
+
+    * 4a1. ManageEZPZ sends an error message to User, indicating the Index used for
+      the unmark command is incorrect, attached with the correct syntax format. 
+      
+      Use Case ends.
+
+****
+
+**Use Case 6 - Find Tasks**
+
+**MSS**
+
+1. User starts up ManageEZPZ
+2. ManageEZPZ greets User with our HELP page, with all the commands.
+3. User enters the command to find Tasks.
+4. ManageEZPZ displays the Task(s) which matches the search keyword. 
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. User uses one of the two Find Task commands: 
+
+    * 3a1. User uses `find /task TASK_DESCRIPTION` command 
+
+      Use case resumes from step 4. 
+
+    * 3a2. User uses `find /date DD-MM-YYYY` command 
+
+      Use case resumes from step 4. 
+
+* 3b. User uses find Task commands with the wrong syntax 
+
+    * 3b1. ManageEZPZ sends an error message to User, indicating syntax used for
+      the find Task command is incorrect, attached with the correct syntax format. 
+      
+      Use Case ends.
+
+****
+
+**Use Case 7 - Add Employee**
+
+**MSS**
+1. User starts up ManageEZPZ.
+2. ManageEZPZ greets User with our HELP page, with all the commands.
+3. User wants to add a new Employee, enters command to add Employee.
+4. ManageEZPZ adds the Employee & confirms with a successful message that the task is marked 
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. ManageEZPZ detects an error in the entered data. 
+
+    * 3a1. ManageEZPZ sends an error message to User, indicating the
+      format for the add Employee command is incorrect, attached with the
+      correct syntax format. 
+      
+      Use Case ends.
+
+****
+
+**Use Case 8 - Clear all Tasks**
+
+**MSS**
+
+1. User enters the command to clear all Tasks
+2. ManageEZPZ clears all Tasks & confirms with a successful 
+message that all Task are cleared. 
+
+   Use case ends.
+
+****
+
+**Use Case 9 - Exit ManageEZPZ**
+
+**MSS**
+
+1. User enters a command to exit ManageEZPZ.
+2. ManageEZPZ confirms with a successful exit message.
+3. ManageEZPZ saves all changes to disk. 
+
+   Use case ends.
+
+****
 *{More to be added}*
-
+****
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+#### Technical Requirements
 
-*{More to be added}*
+1. ManageEZPZ should be able to run on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. ManageEZPZ should work on both 32-bit and 64-bit environments.
+3. ManageEZPZ should be able to store and retrieve task data from File.
+4. ManageEZPZ must occupy as little storage as possible.
+5. ManageEZPZ should be backward compatible with data produced by earlier versions of itself.
+
+#### Performance Requirements
+
+1. ManageEZPZ should respond within two seconds for any queries.
+   * ManageEZPZ should be closed/terminated within 2 seconds.
+2. ManageEZPZ should work well under both normal and high workloads. 
+3. ManageEZPZ should be scalable.
+4. ManageEZPZ should be able to load huge amounts of data in a short amount of time.
+
+#### Quality Requirements
+
+1. ManageEZPZ should be easy to use by a novice.
+2. ManageEZPZ should be in English.
+3. The UI and fonts used in ManageEZPZ should be big enough for senior managers/supervisors.
+
+#### Process Requirements
+
+1. ManageEZPZ is expected to adhere to a schedule that delivers a feature set every 2 weeks.
+2. Updates to ManageEZPZ should be able to roll out to existing clients remotely.
+
+#### Other Noteworthy Points
+
+1. ManageEZPZ should not be used to support management of illegal activities
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+| Terms             | Meaning                                                                     |
+|:------------------|:----------------------------------------------------------------------------|
+| **Mainstream OS** | Windows, Linux, Unix, OS-X                                                  |
+| **Users**         | Applies to both supervisors & employees                                     |
+| **command**       | A message sent as an input from User, that coincides with our Command List  |
+| **todo**          | A task that only needs a description with no dates or times                 |
+| **deadline**      | A task that needs a description, a date, and a end time                     |
+| **event**         | A task that needs a description, a date, start and end times                |
+| **mark**          | To indicate that Task is done                                               |
+| **unmark**        | To indicate that Task is not done                                           |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -338,15 +586,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
@@ -355,16 +603,16 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete 0`<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
@@ -372,6 +620,6 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
