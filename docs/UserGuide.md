@@ -1,5 +1,5 @@
 ---
-layout: page 
+layout: page
 title: User Guide
 ---
 
@@ -41,7 +41,6 @@ title: User Guide
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
-=======
 ## 2.0 Features
 
 ### 2.1 Create Contact Information: / create -t contact
@@ -104,7 +103,7 @@ Optional fields and associated flags:
 Examples:
 * `/create -t medical -i S12345678P -bt O -ht 185 cm`
 
-![create medical information](images/user-guide/CreateMedicalInformation.png)
+![create medical information](images/user-guide/feature2_4.png)
 
 ### 2.5 View Medical Information `/view -t medical`
 Displays medical information of a patient from the MedBook. If no NRIC number is included, displays a list of current medical information records.
@@ -115,7 +114,7 @@ Examples:
 * `/view -t medical`
 * `/view -t medical -i S12345678P`
 
-![view medical information](images/user-guide/ViewMedicalInformation.png)
+![view medical information](images/user-guide/feature2_5.png)
 
 ### 2.6	Delete Medical Information: `/delete -t medical`
 Deletes all medical information of a patient from the MedBook
@@ -132,7 +131,7 @@ Format: /create -t consultation -i S12345678P [-dt DATE] [-tm TIME] [-n NOTES] [
 
 NOTE:  [-dt DATE][-tm TIME] are in the form dd-MM-yyyy, HH-mm (24 hour) respectively.
 
-Examples:  
+Examples:
 * /create -t consultation -i S12345678P -dt 15-09-2021 -tm 18-00 -n Inflammation in the throat and windpipe, short and shallow breath, laboured breathing. Most likely has Upper Respiratory Infection. -p Augmentin Antibiotics 625mg - twice a day; Paracetamol 500mg - twice a day. -tt Stethoscope. Found short and laboured breathing.
 
 ### 2.8	View Past Consultations: /view -t consultation
