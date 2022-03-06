@@ -1,4 +1,4 @@
 package seedu.address.model.lesson;
 
-public class UniqueLessonTest {
+public class UniqueLessonListTest {
 }
