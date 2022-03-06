@@ -8,16 +8,18 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyIBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of IBook data in local storage.
  */
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
+    private IBookStorage iBookStorage;
     private UserPrefsStorage userPrefsStorage;
 
     /**
@@ -28,6 +30,14 @@ public class StorageManager implements Storage {
         this.userPrefsStorage = userPrefsStorage;
     }
 
+    /**
+     * Creates a {@code StorageManager} with the given {@code IBookStorage} and {@code UserPrefStorage}.
+     */
+    public StorageManager(IBookStorage iBookStorage, UserPrefsStorage userPrefsStorage) {
+        this.iBookStorage = iBookStorage;
+        this.userPrefsStorage = userPrefsStorage;
+    }
+    
     // ================ UserPrefs methods ==============================
 
     @Override
@@ -75,4 +85,32 @@ public class StorageManager implements Storage {
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
 
+    // ================ IBook methods ==============================
+
+    @Override
+    public Path getIBookFilePath() {
+        return iBookStorage.getIBookFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlyIBook> readIBook() throws DataConversionException, IOException {
+        return readIBook(iBookStorage.getIBookFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlyIBook> readIBook(Path filePath) throws DataConversionException, IOException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return iBookStorage.readIBook(filePath);
+    }
+
+    @Override
+    public void saveIBook(ReadOnlyIBook iBook) throws IOException {
+        saveIBook(iBook, iBookStorage.getIBookFilePath());
+    }
+
+    @Override
+    public void saveIBook(ReadOnlyIBook iBook, Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        iBookStorage.saveIBook(iBook, filePath);
+    }
 }
