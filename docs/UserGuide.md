@@ -6,13 +6,8 @@ title: User Guide
 <img src = "images/user-guide/icon.png" width = "250" alt="Unable to load image! Try again later.">
 
 
-MedBook is a **desktop app fir health monitoring system for healthcare professionals via a Command Line Interface** (
-CLI)  that simplifies tracking a patient’s medical details and scheduling appointments. MedBook delivers a seamless
-workflow for doctors and healthcare professionals to search for or update patients' medical information, billing and
-appointments through a simple and easy-to-use platform.
-
-
-* Table of Contents {:toc}
+* Table of Contents
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -20,14 +15,30 @@ appointments through a simple and easy-to-use platform.
 
 ### Requirement
 
-- Ensure you have Java 11 or above installed on your computer.
-- Download the latest medbook.jar from [here](https://github.com/AY2122S2-CS2103T-T11-1/tp/releases).
+1. Ensure you have Java `11` or above installed in your Computer.
+
+1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
 
 ### Setup
+1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Copy the file to the folder you want to use as the home folder for your MedBook.
-2. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
-3. Type the command in the command box and press Enter to execute it. e.g. typing help and pressing Enter will open the help window. Refer to the [Features](#features) below for details of each command.
+1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   ![Ui](images/Ui.png)
+
+1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+   Some example commands you can try:
+
+    * **`list`** : Lists all contacts.
+
+    * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+
+    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+
+    * **`clear`** : Deletes all contacts.
+
+    * **`exit`** : Exits the app.
+
+1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 =======
@@ -71,6 +82,48 @@ Note: Only NRIC can be used to uniquely identify the contact owner.
 
 Examples:
 * /delete -t contact -i S12345678P
+
+### 2.4	Create Medical Information: `/create -t medical`
+Adds a patient's medical information to the MedBook.
+
+Format: `/create -t medical -i S12345678P [-a AGE] [-bt BLOOD_TYPE] [-md MEDICATION]...`
+
+Optional fields and associated flags:
+- Age `-a`
+- Blood type `-bt`
+- Medication `-md`
+- Height `-ht`
+- Weight `-wt`
+- List of illnesses `-il`
+- List of surgeries `-su`
+- Family history `-fh`
+- Immunization history `-ih`
+- Gender `-gd`
+- Ethnicity `-et`
+
+Examples:
+* `/create -t medical -i S12345678P -bt O -ht 185 cm`
+
+![create medical information](images/user-guide/CreateMedicalInformation.png)
+
+### 2.5 View Medical Information `/view -t medical`
+Displays medical information of a patient from the MedBook. If no NRIC number is included, displays a list of current medical information records.
+
+Format:  `/view -t medical [-i NRIC]`
+
+Examples:
+* `/view -t medical`
+* `/view -t medical -i S12345678P`
+
+![view medical information](images/user-guide/ViewMedicalInformation.png)
+
+### 2.6	Delete Medical Information: `/delete -t medical`
+Deletes all medical information of a patient from the MedBook
+
+Format: `/delete -t medical -i NRIC`
+
+Examples:
+* `/delete -t medical -i S12345678P`
 
 ### 2.7	Create Consultation Information: /create -t consultation
 Adds a consultation report of a patient to the MedBook.
