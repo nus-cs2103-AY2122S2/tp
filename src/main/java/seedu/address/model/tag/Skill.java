@@ -33,6 +33,18 @@ public class Skill {
     }
 
     /**
+     * Constructs a {@code Skill}.
+     *
+     * @param skillName A valid skill name.
+     */
+    public Skill(String skillName) {
+        requireNonNull(skillName);
+        checkArgument(isValidSkillName(skillName), NAME_CONSTRAINTS);
+        this.skillName = skillName;
+        this.skillProficiency = 0;
+    }
+
+    /**
      * Returns true if a given string is a valid skill name.
      */
     public static boolean isValidSkillName(String test) {
@@ -45,6 +57,10 @@ public class Skill {
     public static boolean isValidSkillProficiency(int test) {
         String testInt = String.valueOf(test);
         return testInt.matches(PROFICIENCY_VALIDATION_REGEX);
+    }
+
+    public boolean isSameSkill(Skill skill) {
+        return this.skillName.equalsIgnoreCase(skill.skillName);
     }
 
     @Override
