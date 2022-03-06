@@ -1,4 +1,4 @@
-package unibook.ui.list_panels;
+package unibook.ui.listpanels;
 
 import java.util.logging.Logger;
 
@@ -16,7 +16,7 @@ import unibook.ui.cards.PersonCard;
  * Panel containing the list of persons.
  */
 public class PersonListPanel extends UiPart<Region> {
-    private static final String FXML = "list_panels/PersonListPanel.fxml";
+    private static final String FXML = "listpanels/PersonListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
 
     @FXML

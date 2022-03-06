@@ -16,8 +16,8 @@ import unibook.logic.Logic;
 import unibook.logic.commands.CommandResult;
 import unibook.logic.commands.exceptions.CommandException;
 import unibook.logic.parser.exceptions.ParseException;
-import unibook.ui.list_panels.ModuleListPanel;
-import unibook.ui.list_panels.PersonListPanel;
+import unibook.ui.listpanels.ModuleListPanel;
+import unibook.ui.listpanels.PersonListPanel;
 
 /**
  * The Main Window. Provides the basic application layout containing

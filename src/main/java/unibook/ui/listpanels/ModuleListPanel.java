@@ -1,4 +1,4 @@
-package unibook.ui.list_panels;
+package unibook.ui.listpanels;
 
 import java.util.logging.Logger;
 
@@ -16,7 +16,7 @@ import unibook.ui.cards.ModuleCard;
  * Panel containing the list of modules.
  */
 public class ModuleListPanel extends UiPart<Region> {
-    private static final String FXML = "list_panels/ModuleListPanel.fxml";
+    private static final String FXML = "listpanels/ModuleListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(ModuleListPanel.class);
 
     @FXML

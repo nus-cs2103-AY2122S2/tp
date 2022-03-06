@@ -71,7 +71,8 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedTags);
+        //TODO give modules to the new person, leaving as emptyset for now
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedTags, new HashSet<>());
     }
 
     @Override

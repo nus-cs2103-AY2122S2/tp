@@ -1,5 +1,6 @@
 package unibook.logic.parser;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -46,7 +47,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(CliSyntax.PREFIX_EMAIL).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(CliSyntax.PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, tagList);
+        //TODO give modules to the new person, leaving as empty set for now
+        Person person = new Person(name, phone, email, tagList, new HashSet<>());
 
         return new AddCommand(person);
     }

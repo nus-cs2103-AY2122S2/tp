@@ -3,6 +3,7 @@ package unibook.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import unibook.model.module.Module;
 import unibook.model.person.Email;
 import unibook.model.person.Name;
 import unibook.model.person.Person;
@@ -23,6 +24,7 @@ public class PersonBuilder {
     private Phone phone;
     private Email email;
     private Set<Tag> tags;
+    private Set<Module> modules;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -32,6 +34,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         tags = new HashSet<>();
+        modules = new HashSet<>();
     }
 
     /**
@@ -42,6 +45,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         tags = new HashSet<>(personToCopy.getTags());
+        modules = new HashSet<>(personToCopy.getModules());
     }
 
     /**
@@ -76,8 +80,9 @@ public class PersonBuilder {
         return this;
     }
 
+
     public Person build() {
-        return new Person(name, phone, email, tags);
+        return new Person(name, phone, email, tags, modules);
     }
 
 }

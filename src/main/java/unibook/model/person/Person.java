@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import unibook.commons.util.CollectionUtil;
+import unibook.model.module.Module;
 import unibook.model.tag.Tag;
 
 /**
@@ -19,18 +20,22 @@ public class Person {
     private final Phone phone;
     private final Email email;
 
+    // Module that is person is associated with
+    private final Set<Module> modules = new HashSet<>();
+
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Set<Tag> tags, Set<Module> modules) {
         CollectionUtil.requireAllNonNull(name, phone, email, tags);
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.tags.addAll(tags);
+        this.modules.addAll(modules);
     }
 
     public Name getName() {
@@ -45,12 +50,22 @@ public class Person {
         return email;
     }
 
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+
+    /**
+     * Returns an immutable module set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Module> getModules() {
+        return Collections.unmodifiableSet(modules);
     }
 
     /**

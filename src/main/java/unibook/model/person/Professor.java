@@ -3,6 +3,7 @@ package unibook.model.person;
 import java.util.Objects;
 import java.util.Set;
 
+import unibook.model.module.Module;
 import unibook.model.tag.Tag;
 
 /**
@@ -16,8 +17,8 @@ public class Professor extends Person {
     /**
      * Every field must be present and not null.
      */
-    public Professor(Name name, Phone phone, Email email, Set<Tag> tags, Office office) {
-        super(name, phone, email, tags);
+    public Professor(Name name, Phone phone, Email email, Set<Tag> tags, Office office, Set<Module> modules) {
+        super(name, phone, email, tags, modules);
         this.office = office;
     }
 

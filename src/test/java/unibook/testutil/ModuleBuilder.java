@@ -36,7 +36,7 @@ public class ModuleBuilder {
         moduleCode = new ModuleCode(DEFAULT_CODE);
         professors = FXCollections.observableArrayList();
         professors.add(new Professor(new Name(DEFAULT_PROFESSOR),
-            new Phone("98765432"), new Email("test@nus.edu.sg"), new HashSet<>(), new Office("SOC")));
+            new Phone("98765432"), new Email("test@nus.edu.sg"), new HashSet<>(), new Office("SOC"), new HashSet<>()));
         students = FXCollections.observableArrayList();
     }
 
@@ -71,7 +71,7 @@ public class ModuleBuilder {
      */
     public ModuleBuilder withProfessor(String profName) {
         this.professors = FXCollections.observableArrayList();
-        professors.add(new Professor(new Name(profName), null, null, null, null));
+        professors.add(new Professor(new Name(profName), null, null, new HashSet<>(), null, new HashSet<>()));
         return this;
     }
 

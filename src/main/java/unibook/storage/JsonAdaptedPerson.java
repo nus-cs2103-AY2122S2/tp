@@ -91,7 +91,10 @@ class JsonAdaptedPerson {
         final Email modelEmail = new Email(email);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelTags);
+
+        //TODO when storage is implemented, need to get the list of modules from storage first, then compare the
+        //module codes in this person, to create module set
+        return new Person(modelName, modelPhone, modelEmail, modelTags, new HashSet<>());
     }
 
 }
