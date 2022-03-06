@@ -6,7 +6,7 @@ title: User Guide
 AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -24,15 +24,15 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+    * **`list`** : Lists all contacts.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+    * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
-   * **`clear`** : Deletes all contacts.
+    * **`clear`** : Deletes all contacts.
 
-   * **`exit`** : Exits the app.
+    * **`exit`** : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -72,6 +72,46 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+## 2.4	Create Medical Information: `/create -t medical`
+Adds a patient's medical information to the MedBook.
+Format: /create -t medical -i S12345678P [-a AGE] [-bt BLOOD_TYPE] [-md MEDICATION]...
+
+Optional fields and associated flags:
+- Age -a
+- Blood type -bt
+- Medication -md
+- Height -ht
+- Weight -wt
+- List of illnesses -il
+- List of surgeries -su
+- Family history -fh
+- Immunization history -ih
+- Gender -gd
+- Ethnicity -et
+
+Examples:
+/create -t medical -i S12345678P -bt O -ht 185 cm
+
+![create medical information](images/CreateMedicalInformation.png)
+
+## 2.5 View Medical Information `/view -t medical`
+Displays medical information of a patient from the MedBook. If no NRIC number is included, displays a list of current medical information records.
+
+Format:  /view -t medical [-i NRIC]
+
+Examples:
+- /view -t medical
+- /view -t medical -i S12345678P
+
+![view medical information](images/ViewMedicalInformation.png)
+
+## 2.6	Delete Medical Information: `/delete -t medical`
+Deletes all medical information of a patient from the MedBook
+
+Format: /delete -t medical -i NRIC
+
+Examples:
+/delete -t medical -i S12345678P
 
 ### Adding a person: `add`
 
@@ -104,7 +144,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+  specifying any tags after it.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
