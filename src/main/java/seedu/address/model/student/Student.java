@@ -2,12 +2,7 @@ package seedu.address.model.student;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
-
-import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Student in the TAssist.
@@ -21,19 +16,15 @@ public class Student {
     private final Email email;
     private final StudentID studentID;
 
-    // Data fields
-    private final Set<Tag> tags = new HashSet<>();
-
     /**
      * Every field must be present and not null.
      */
-    public Student(StudentID studentID, Name name, Phone phone, Email email, Set<Tag> tags) {
-        requireAllNonNull(studentID, name, phone, email, tags);
+    public Student(StudentID studentID, Name name, Phone phone, Email email) {
+        requireAllNonNull(studentID, name, phone, email);
         this.studentID = studentID;
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.tags.addAll(tags);
     }
 
     public Name getName() {
@@ -50,14 +41,6 @@ public class Student {
 
     public StudentID getStudentID() {
         return studentID;
-    }
-
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
     }
 
     /**
@@ -91,14 +74,13 @@ public class Student {
         return otherStudent.getStudentID().equals(getStudentID())
                 && otherStudent.getName().equals(getName())
                 && otherStudent.getPhone().equals(getPhone())
-                && otherStudent.getEmail().equals(getEmail())
-                && otherStudent.getTags().equals(getTags());
+                && otherStudent.getEmail().equals(getEmail());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(studentID, name, phone, email, tags);
+        return Objects.hash(studentID, name, phone, email);
     }
 
     @Override
@@ -112,11 +94,6 @@ public class Student {
                 .append("; Email: ")
                 .append(getEmail());
 
-        Set<Tag> tags = getTags();
-        if (!tags.isEmpty()) {
-            builder.append("; Tags: ");
-            tags.forEach(builder::append);
-        }
         return builder.toString();
     }
 
