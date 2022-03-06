@@ -1,5 +1,8 @@
 package seedu.address.model.tag;
 
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -30,6 +33,22 @@ public class Tag {
      */
     public static boolean isValidTagName(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    public String getTagName() {
+        return tagName;
+    }
+    /**
+     * Returns true if both tags have the same description.
+     * This defines a weaker notion of equality between two persons.
+     */
+    public boolean isSameTag(Tag otherTag) {
+        if (otherTag == this) {
+            return true;
+        }
+
+        return otherTag != null
+                && otherTag.getTagName().equals(getTagName());
     }
 
     @Override
