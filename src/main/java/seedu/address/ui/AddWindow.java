@@ -15,7 +15,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 
 
 /**
- * Controller for a help page
+ * Controller for an Add page
  */
 public class AddWindow extends UiPart<Stage> {
 
@@ -111,7 +111,7 @@ public class AddWindow extends UiPart<Stage> {
     }
 
     /**
-     * Resets the fields when handleCancel() is triggered
+     * Resets the fields when handleCancel() is triggered, or when submission is successful
      */
     public void resetFields() {
         nameField.setText("");
