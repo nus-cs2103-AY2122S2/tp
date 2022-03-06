@@ -1,12 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION_HOURS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION_MINUTES;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import java.util.Date;
 import java.util.stream.Stream;
@@ -27,16 +22,16 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
      */
     public AddLessonCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_SUBJECT, PREFIX_DATE,
+                ArgumentTokenizer.tokenize(args, PREFIX_LESSON_NAME, PREFIX_SUBJECT, PREFIX_DATE,
                         PREFIX_DURATION_HOURS, PREFIX_DURATION_MINUTES, PREFIX_RECURRING);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_SUBJECT, PREFIX_DATE, PREFIX_DURATION_HOURS,
-                PREFIX_DURATION_MINUTES, PREFIX_RECURRING)
+        if (!arePrefixesPresent(argMultimap, PREFIX_LESSON_NAME, PREFIX_SUBJECT, PREFIX_DATE, PREFIX_DURATION_HOURS,
+                PREFIX_DURATION_MINUTES)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLessonCommand.MESSAGE_USAGE));
         }
 
-        String lessonName = ParserUtil.parseLessonName(argMultimap.getValue(PREFIX_NAME).get());
+        String lessonName = ParserUtil.parseLessonName(argMultimap.getValue(PREFIX_LESSON_NAME).get());
         String subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
         int durationHours = ParserUtil.parseDurationHours(argMultimap.getValue(PREFIX_DURATION_HOURS).get());
