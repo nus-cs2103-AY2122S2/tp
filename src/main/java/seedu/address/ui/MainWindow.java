@@ -34,6 +34,8 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    // add a new field here for addWindow, something like:
+    private AddWindow addWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -66,6 +68,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        addWindow = new AddWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -147,6 +150,18 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the add window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleAdd() {
+        if (!addWindow.isShowing()) {
+            addWindow.show();
+        } else {
+            addWindow.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -160,6 +175,7 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        addWindow.hide();
         primaryStage.hide();
     }
 
