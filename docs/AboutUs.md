@@ -31,7 +31,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 <img src="images/sibinhho99-nus.png" width="200px">
 
-[[github](http://github.com/sibinhho99-nus)] 
+[[github](http://github.com/sibinhho99-nus)]
 [[portfolio](team/sibinhho99-nus.md)]
 
 * Role: Developer, Integration
