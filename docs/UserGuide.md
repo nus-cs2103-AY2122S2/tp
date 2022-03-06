@@ -6,7 +6,6 @@ title: User Guide
 <img src = "images/user-guide/icon.png" width = "250" alt="Unable to load image! Try again 
 later.">
 ## Table of Contents
-- [Table of Contents](#table-of-contents)
 - [Quick start](#quick-start)
   - [Requirement](#requirement)
   - [Setup](#setup)
