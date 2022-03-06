@@ -11,19 +11,19 @@ import java.util.Objects;
 public class TemporaryLesson extends Lesson {
 
     // Data fields
-    private final TimeSlot timeSlot;
+    private final DateTimeSlot dateTimeSlot;
 
     /**
      * Every field must be present and not null.
      */
-    protected TemporaryLesson(Name name, Subject subject, TimeSlot timeSlot) {
+    protected TemporaryLesson(Name name, Subject subject, DateTimeSlot dateTimeSlot) {
         super(name, subject);
-        requireAllNonNull(timeSlot);
-        this.timeSlot = timeSlot;
+        requireAllNonNull(dateTimeSlot);
+        this.dateTimeSlot = dateTimeSlot;
     }
 
-    public TimeSlot getTimeSlot() {
-        return timeSlot;
+    public DateTimeSlot getTimeSlot() {
+        return dateTimeSlot;
     }
 
     /**
@@ -34,7 +34,7 @@ public class TemporaryLesson extends Lesson {
             return true;
         }
 
-        return timeSlot.isConflictingWith(otherLesson.getTimeSlot());
+        return dateTimeSlot.isConflictingWith(otherLesson.getTimeSlot());
     }
 
     /**
@@ -60,7 +60,7 @@ public class TemporaryLesson extends Lesson {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(this.getName(), this.getSubject(), timeSlot);
+        return Objects.hash(this.getName(), this.getSubject(), dateTimeSlot);
     }
 
     @Override

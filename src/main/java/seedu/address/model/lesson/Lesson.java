@@ -2,7 +2,7 @@ package seedu.address.model.lesson;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * Represents a Lesson in the Lesson book.
@@ -33,15 +33,27 @@ public abstract class Lesson {
      * @param startDateTime date and starting time of the lesson
      * @param hours how long the lesson would last
      */
-    public static TemporaryLesson makeTemporaryLesson(String name, String subject, Date startDateTime, int hours) {
+    public static TemporaryLesson makeTemporaryLesson(String name, String subject, LocalDateTime startDateTime, int hours) {
+        return Lesson.makeTemporaryLesson(name, subject, startDateTime, hours, 0);
+    }
+
+    /**
+     * Creates a new instance of a non-recurring lesson.
+     * @param name lesson name
+     * @param subject what subject would be taught during the lesson
+     * @param startDateTime date and starting time of the lesson
+     * @param hours how long the lesson would last
+     */
+    public static TemporaryLesson makeTemporaryLesson(String name, String subject, LocalDateTime startDateTime,
+                                                      int hours, int minutes) {
         Name lessonName = new Name(name);
         Subject lessonSubject = new Subject(subject);
-        TimeSlot lessonTimeSlot = new TimeSlot(startDateTime, hours);
+        DateTimeSlot lessonDateTimeSlot = new DateTimeSlot(startDateTime, hours, minutes);
 
         return new TemporaryLesson(
                 lessonName,
                 lessonSubject,
-                lessonTimeSlot
+                lessonDateTimeSlot
         );
     }
 
@@ -61,5 +73,5 @@ public abstract class Lesson {
     /**
      * Returns the date and time that the lesson starts and ends.
      */
-    public abstract TimeSlot getTimeSlot();
+    public abstract DateTimeSlot getTimeSlot();
 }
