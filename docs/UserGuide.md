@@ -1,11 +1,14 @@
 ---
-layout: page title: User Guide
+layout: page 
+title: User Guide
 ---
+<img src = "images/user-guide/icon.png" width = "250" alt="Unable to load image! Try again later.">
 
 MedBook is a **desktop app fir health monitoring system for healthcare professionals via a Command Line Interface** (
 CLI)  that simplifies tracking a patient’s medical details and scheduling appointments. MedBook delivers a seamless
 workflow for doctors and healthcare professionals to search for or update patients' medical information, billing and
 appointments through a simple and easy-to-use platform.
+
 
 * Table of Contents {:toc}
 
