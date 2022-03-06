@@ -59,6 +59,10 @@ public class Skill {
         return testInt.matches(PROFICIENCY_VALIDATION_REGEX);
     }
 
+    public boolean isSameSkill(Skill skill) {
+        return this.skillName.equalsIgnoreCase(skill.skillName);
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

@@ -81,7 +81,7 @@ public class Person {
     public boolean hasSkill(Skill skill) {
         requireAllNonNull(skill);
         for (Skill s : skillSet) {
-            if (s.skillName.equalsIgnoreCase(skill.skillName)) {
+            if (skill.isSameSkill(s)) {
                 return true;
             }
         }
