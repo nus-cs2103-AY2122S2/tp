@@ -1,4 +1,4 @@
-package seedu.address.model.module.exceptions;
+package seedu.address.model.tamodule.exceptions;
 
 /**
  * Signals that the operation is unable to find the specified module.
