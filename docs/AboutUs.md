@@ -41,15 +41,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Responsibilities: Deliverables and Deadlines, Code Quality
 * In Charge of Component UI
 
-### Jean Doe
+### Ng Wen Hao Dennis
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/denniszedead.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/denniszedead)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Deliverables and Deadlines, Quality Assurance
+* In Charge of Component Logic
 
 ### Chan Wei Jie
 
