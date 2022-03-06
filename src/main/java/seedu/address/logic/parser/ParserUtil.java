@@ -3,6 +3,9 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
@@ -161,14 +164,15 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code dateOfLesson} is invalid.
      */
-    public static Date parseDate(String dateOfLesson) throws ParseException {
+    public static LocalDateTime parseDate(String dateOfLesson) throws ParseException {
         requireNonNull(dateOfLesson);
         String trimmedDateString = dateOfLesson.trim();
 
-        Date date;
+        LocalDateTime date;
         try {
-            date = new SimpleDateFormat("dd-MM-yyyy").parse(trimmedDateString);
-        } catch (java.text.ParseException exception) {
+            DateTimeFormatter acceptedDateTimeFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            date = LocalDateTime.parse(trimmedDateString, acceptedDateTimeFormat);
+        } catch (DateTimeParseException exception) {
             // TODO: figure out how to better handle exception for parsing date of lesson
             throw new ParseException("TODO: figure out how to better handle exception for parsing date of lesson");
         }
