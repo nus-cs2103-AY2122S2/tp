@@ -15,7 +15,7 @@ Examples:
 * /create -t contact -i S12345678P -n John Doe -p 80008000 -e johndoe@gmail.com -a COM1
 
 
-![UI](images/user-guide/feature2_1.png)
+<img src = "images/user-guide/feature2_1.png" width = "350" alt="Unable to load image! Try again later.">
 
 
 ### 2.2 View Contact Information: /view -t contact
