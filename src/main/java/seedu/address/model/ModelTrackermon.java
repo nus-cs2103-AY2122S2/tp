@@ -1,14 +1,11 @@
 package seedu.address.model;
 
+import java.nio.file.Path;
+import java.util.function.Predicate;
+
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.show.Show;
-
-
-
-
-import java.nio.file.Path;
-import java.util.function.Predicate;
 
 public interface ModelTrackermon {
     /** {@code Predicate} that always evaluate to true */
