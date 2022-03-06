@@ -64,8 +64,7 @@ public class CompanyBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Company} that we
-     * are building.
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Company} that we are building.
      */
     public CompanyBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
@@ -73,8 +72,7 @@ public class CompanyBuilder {
     }
 
     /**
-     * Parses the {@code roles} into a {@code ArrayList<Role>} and set it to the {@code Company}
-     * that we are building.
+     * Parses the {@code roles} into a {@code ArrayList<Role>} and set it to the {@code Company}  that we are building.
      */
     public CompanyBuilder withRoles(Role... roles) {
         this.roles = SampleDataUtil.getRoleList(roles);
@@ -90,8 +88,7 @@ public class CompanyBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code Company} that we are building to an empty {@code
-     * Address}.
+     * Sets the {@code Address} of the {@code Company} that we are building to an empty {@code  Address}.
      */
     public CompanyBuilder withoutAddress() {
         this.address = new Address("");
