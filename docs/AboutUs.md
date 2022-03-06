@@ -46,3 +46,13 @@ We are a team based in the [School of Computing, National University of Singapor
 
 * Role: Developer, Testing
 * Responsibilities: Model
+
+### Justin Lam
+
+<img src="images/johndoe.png" width="200px">
+
+[[github](http://github.com/justinlam19)]
+[[portfolio](team/justinlam.md)]
+
+* Role: Documentation
+* Responsibilities: Ui
