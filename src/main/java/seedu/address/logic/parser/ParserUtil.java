@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -14,6 +15,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.lesson.DateTimeSlot;
 import seedu.address.model.lesson.LessonName;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.person.Address;
@@ -160,24 +162,44 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String dateOfLesson} into a {@code Date}.
+     * Parses a {@code String dateOfLesson} into a {@code LocalDate}.
      *
      * @throws ParseException if the given {@code dateOfLesson} is invalid.
      */
-    public static LocalDateTime parseDate(String dateOfLesson) throws ParseException {
+    public static LocalDate parseDate(String dateOfLesson) throws ParseException {
         requireNonNull(dateOfLesson);
         String trimmedDateString = dateOfLesson.trim();
 
-        LocalDateTime date;
+        if (!DateTimeSlot.isValidDate(dateOfLesson)) {
+            throw new ParseException("TODO: figure out how to better handle exception for parsing date of lesson");
+        }
+
+        LocalDate date;
         try {
-            DateTimeFormatter acceptedDateTimeFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-            date = LocalDateTime.parse(trimmedDateString, acceptedDateTimeFormat);
+            DateTimeFormatter acceptedDateTimeFormat = DateTimeSlot.getAcceptedDateFormat();
+            date = LocalDate.parse(trimmedDateString, acceptedDateTimeFormat);
         } catch (DateTimeParseException exception) {
             // TODO: figure out how to better handle exception for parsing date of lesson
             throw new ParseException("TODO: figure out how to better handle exception for parsing date of lesson");
         }
 
         return date;
+    }
+
+    /**
+     * Parses a {@code String startTime} into a {@code String}.
+     *
+     * @throws ParseException if the given {@code dateOfLesson} is invalid.
+     */
+    public static String parseStartTime(String startTime) throws ParseException {
+        requireNonNull(startTime);
+        String trimmedStartTimeString = startTime.trim();
+
+        if (!DateTimeSlot.isValidStartTime(trimmedStartTimeString)) {
+            throw new ParseException("TODO: figure out how to better handle exception for parsing date of lesson");
+        }
+
+        return trimmedStartTimeString;
     }
 
     /**

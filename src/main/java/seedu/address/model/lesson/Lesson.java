@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public abstract class Lesson {
 
     // Identity fields
-    private final Name name;
+    private final LessonName name;
     private final Subject subject;
 
     // Data fields
@@ -20,7 +20,7 @@ public abstract class Lesson {
     /**
      * Every field must be present and not null.
      */
-    protected Lesson(Name name, Subject subject) {
+    protected Lesson(LessonName name, Subject subject) {
         requireAllNonNull(name, subject);
         this.name = name;
         this.subject = subject;
@@ -46,7 +46,7 @@ public abstract class Lesson {
      */
     public static TemporaryLesson makeTemporaryLesson(String name, String subject, LocalDateTime startDateTime,
                                                       int hours, int minutes) {
-        Name lessonName = new Name(name);
+        LessonName lessonName = new LessonName(name);
         Subject lessonSubject = new Subject(subject);
         DateTimeSlot lessonDateTimeSlot = new DateTimeSlot(startDateTime, hours, minutes);
 
@@ -57,7 +57,7 @@ public abstract class Lesson {
         );
     }
 
-    public Name getName() {
+    public LessonName getName() {
         return name;
     }
 

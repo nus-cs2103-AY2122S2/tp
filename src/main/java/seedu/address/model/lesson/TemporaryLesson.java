@@ -9,14 +9,13 @@ import java.util.Objects;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class TemporaryLesson extends Lesson {
-
     // Data fields
     private final DateTimeSlot dateTimeSlot;
 
     /**
      * Every field must be present and not null.
      */
-    protected TemporaryLesson(Name name, Subject subject, DateTimeSlot dateTimeSlot) {
+    protected TemporaryLesson(LessonName name, Subject subject, DateTimeSlot dateTimeSlot) {
         super(name, subject);
         requireAllNonNull(dateTimeSlot);
         this.dateTimeSlot = dateTimeSlot;

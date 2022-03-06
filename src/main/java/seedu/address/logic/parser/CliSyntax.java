@@ -15,7 +15,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_LESSON_NAME = new Prefix("-n");
     public static final Prefix PREFIX_SUBJECT = new Prefix("-s");
     public static final Prefix PREFIX_DATE = new Prefix("-d");
-    public static final Prefix PREFIX_TIME = new Prefix("-t");
+    public static final Prefix PREFIX_START_TIME = new Prefix("-t");
     public static final Prefix PREFIX_DURATION_HOURS = new Prefix("-h");
     public static final Prefix PREFIX_DURATION_MINUTES = new Prefix("-m");
     public static final Prefix PREFIX_RECURRING = new Prefix("-r");

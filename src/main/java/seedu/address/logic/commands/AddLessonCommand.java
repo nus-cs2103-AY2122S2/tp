@@ -15,7 +15,7 @@ public class AddLessonCommand extends Command {
             + PREFIX_LESSON_NAME + " NAME "
             + PREFIX_SUBJECT + " SUBJECT "
             + PREFIX_DATE + " DATE "
-            + PREFIX_TIME + " START_TIME "
+            + PREFIX_START_TIME + " START_TIME "
             + PREFIX_DURATION_HOURS + " DURATION IN HOURS "
             + PREFIX_DURATION_MINUTES + " DURATION IN MINUTES "
             + PREFIX_RECURRING + " (optional) "
@@ -24,7 +24,7 @@ public class AddLessonCommand extends Command {
             + PREFIX_NAME + " Sec 2 Biology Group Tuition "
             + PREFIX_SUBJECT + " Biology "
             + PREFIX_DATE + "19-3-2022 "
-            + PREFIX_TIME + " 1800 "
+            + PREFIX_START_TIME + " 1800 "
             + PREFIX_DURATION_HOURS + " 2 "
             + PREFIX_DURATION_MINUTES + " 15 "
             + PREFIX_RECURRING;

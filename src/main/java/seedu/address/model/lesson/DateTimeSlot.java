@@ -7,6 +7,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Calendar;
 
 /**
@@ -15,12 +16,19 @@ import java.util.Calendar;
 public class DateTimeSlot {
     private static final String MESSAGE_CONSTRAINTS =
             "Lessons can only be created with a valid date.\nHours and minutes must be non-negative integers.";
+    private static final DateTimeFormatter acceptedDateFormat = DateTimeFormatter.ofPattern("d-M-y");
+    private static final DateTimeFormatter acceptedStartTimeFormat = DateTimeFormatter.ofPattern("HH:mm");
+
     private static final DateTimeFormatter displayedDateFormat = DateTimeFormatter.ofPattern("EEEE '['d MMMM yyyy']'");
     private static final DateTimeFormatter displayedTimeFormat = DateTimeFormatter.ofPattern("h:mm a");
 
     private final LocalDateTime dateOfLesson;
     private final int hours;
     private final int minutes;
+
+    public static DateTimeFormatter getAcceptedDateFormat() {
+        return acceptedDateFormat;
+    }
 
     /**
      * Constructs a {@code DateTimeSlot}.
@@ -83,6 +91,32 @@ public class DateTimeSlot {
         return String.format("%s - %s",
                 displayedTimeFormat.format(this.dateOfLesson),
                 displayedTimeFormat.format(this.getEndingDateTime()));
+    }
+
+    /**
+     * Returns true if specified string is an accepted date format
+     */
+    public static boolean isValidDate(String dateString) {
+        try {
+            acceptedDateFormat.parse(dateString);
+        } catch (DateTimeParseException exception) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Returns true if specified string is an accepted starting time format
+     */
+    public static boolean isValidStartTime(String startTimeString) {
+        try {
+            acceptedStartTimeFormat.parse(startTimeString);
+        } catch (DateTimeParseException exception) {
+            return false;
+        }
+
+        return true;
     }
 
     @Override
