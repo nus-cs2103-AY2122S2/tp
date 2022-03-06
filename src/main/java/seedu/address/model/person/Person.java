@@ -21,6 +21,7 @@ public class Person {
     private final Email email;
     private final GithubUsername githubUsername;
     private final Telegram telegram;
+    private final StudentId studentId;
 
     // Data fields
     private final Address address;
@@ -30,8 +31,8 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  GithubUsername githubUsername, Telegram telegram) {
-        requireAllNonNull(name, phone, email, address, tags, githubUsername);
+                  GithubUsername githubUsername, Telegram telegram, StudentId studentId) {
+        requireAllNonNull(name, phone, email, address, tags, githubUsername, studentId);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -39,6 +40,7 @@ public class Person {
         this.tags.addAll(tags);
         this.githubUsername = githubUsername;
         this.telegram = telegram;
+        this.studentId = studentId;
     }
 
     public Name getName() {
@@ -53,6 +55,10 @@ public class Person {
         return email;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
     public GithubUsername getGithubUsername() {
         return githubUsername;
     }
@@ -61,8 +67,8 @@ public class Person {
         return telegram;
     }
 
-    public Address getAddress() {
-        return address;
+    public StudentId getStudentId() {
+        return studentId;
     }
 
     /**
@@ -107,13 +113,14 @@ public class Person {
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getTags().equals(getTags())
                 && otherPerson.getGithubUsername().equals(getGithubUsername())
-                && otherPerson.getTelegram().equals(getTelegram());
+                && otherPerson.getTelegram().equals(getTelegram())
+                && otherPerson.getStudentId().equals(getStudentId());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, githubUsername, telegram);
+        return Objects.hash(name, phone, email, address, tags, githubUsername, telegram, studentId);
     }
 
     @Override
@@ -129,7 +136,9 @@ public class Person {
                 .append("; Github: ")
                 .append(getGithubUsername())
                 .append("; Telegram: ")
-                .append(getTelegram());
+                .append(getTelegram())
+                .append("; Student ID: ")
+                .append(getStudentId());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

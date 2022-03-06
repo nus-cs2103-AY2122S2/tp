@@ -3,8 +3,9 @@
     "name": "Person with invalid name field: Ha!ns Mu@ster",
     "phone": "9482424",
     "email": "hans@example.com",
-    "github": "fionaK",
     "address": "4th street",
-    "telegram": "fiona_K"
+    "github": "fionaK",
+    "telegram": "fiona_K",
+    "studentId": "A0123456B"
   } ]
 }

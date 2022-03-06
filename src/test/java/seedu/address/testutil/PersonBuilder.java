@@ -9,6 +9,7 @@ import seedu.address.model.person.GithubUsername;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.StudentId;
 import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -24,6 +25,7 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_GITHUB = "amyB123";
     public static final String DEFAULT_TELEGRAM = "amy_B";
+    public static final String DEFAULT_STUDENTID = "A1123456B";
 
     private Name name;
     private Phone phone;
@@ -32,6 +34,7 @@ public class PersonBuilder {
     private Set<Tag> tags;
     private GithubUsername githubUsername;
     private Telegram telegram;
+    private StudentId studentId;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -44,6 +47,7 @@ public class PersonBuilder {
         tags = new HashSet<>();
         githubUsername = new GithubUsername(DEFAULT_GITHUB);
         telegram = new Telegram(DEFAULT_TELEGRAM);
+        studentId = new StudentId(DEFAULT_STUDENTID);
     }
 
     /**
@@ -57,6 +61,7 @@ public class PersonBuilder {
         tags = new HashSet<>(personToCopy.getTags());
         githubUsername = personToCopy.getGithubUsername();
         telegram = personToCopy.getTelegram();
+        studentId = personToCopy.getStudentId();
     }
 
     /**
@@ -115,8 +120,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code StudentId} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withStudentId(String studentId) {
+        this.studentId = new StudentId(studentId);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, tags, githubUsername, telegram);
+        return new Person(name, phone, email, address, tags, githubUsername, telegram, studentId);
     }
 
 }

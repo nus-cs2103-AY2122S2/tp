@@ -6,6 +6,7 @@
     "address": "123, Jurong West Ave 6, #08-111",
     "github": "aliceP",
     "telegram": "alice_P",
+    "studentId": "A0123457C",
     "tagged": [ "friends" ]
   }, {
     "name": "Alice Pauline",
@@ -13,6 +14,7 @@
     "email": "pauline@example.com",
     "address": "4th street",
     "github": "aliceP",
-    "telegram": "alice_P"
+    "telegram": "alice_P",
+    "studentId": "A0123457C"
   } ]
 }

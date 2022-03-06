@@ -7,6 +7,7 @@
     "address" : "123, Jurong West Ave 6, #08-111",
     "github": "aliceP",
     "telegram": "alice_P",
+    "studentId": "A0123456B",
     "tagged" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
@@ -15,6 +16,7 @@
     "address" : "311, Clementi Ave 2, #02-25",
     "github": "bensonM",
     "telegram": "benson_M",
+    "studentId": "A0123457C",
     "tagged" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
@@ -23,6 +25,7 @@
     "address" : "wall street",
     "github": "carlK",
     "telegram": "carl_K",
+    "studentId": "A0123458D",
     "tagged" : [ ]
   }, {
     "name" : "Daniel Meier",
@@ -31,6 +34,7 @@
     "address" : "10th street",
     "github": "danielM",
     "telegram": "daniel_M",
+    "studentId": "A0123459E",
     "tagged" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
@@ -39,6 +43,7 @@
     "address" : "michegan ave",
     "github": "elleM",
     "telegram": "elle_M",
+    "studentId": "A0123411A",
     "tagged" : [ ]
   }, {
     "name" : "Fiona Kunz",
@@ -47,6 +52,7 @@
     "address" : "little tokyo",
     "github": "fionaK",
     "telegram": "fiona_K",
+    "studentId": "A0123412B",
     "tagged" : [ ]
   }, {
     "name" : "George Best",
@@ -55,6 +61,7 @@
     "address" : "4th street",
     "github": "georgeB",
     "telegram": "george_B",
+    "studentId": "A0123413C",
     "tagged" : [ ]
   } ]
 }
