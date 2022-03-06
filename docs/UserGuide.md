@@ -24,5 +24,4 @@ appointments through a simple and easy-to-use platform.
 2. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
 3. Type the command in the command box and press Enter to execute it. e.g. typing help and pressing Enter will open the
    help window. Refer to the [Features](#features) below for details of each command.
-
 --------------------------------------------------------------------------------------------------------------------
