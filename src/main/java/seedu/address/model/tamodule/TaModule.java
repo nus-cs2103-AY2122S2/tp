@@ -1,4 +1,4 @@
-package seedu.address.model.module;
+package seedu.address.model.tamodule;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -6,9 +6,10 @@ import java.util.Objects;
 
 /**
  * Represents a Module in the TAssist.
+ * It is named TaModule as it conflicts with the class java.lang.Module.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Module {
+public class TaModule {
 
     // Identity fields
     private final ModuleName moduleName;
@@ -17,7 +18,7 @@ public class Module {
     /**
      * Every field must be present and not null.
      */
-    public Module(ModuleName moduleName, ModuleCode moduleCode) {
+    public TaModule(ModuleName moduleName, ModuleCode moduleCode) {
         requireAllNonNull(moduleName, moduleCode);
         this.moduleName = moduleName;
         this.moduleCode = moduleCode;
@@ -35,13 +36,13 @@ public class Module {
      * Returns true if both modules have the same moduleCode.
      * This defines a weaker notion of equality between two modules.
      */
-    public boolean isSameModule(Module otherModule) {
-        if (otherModule == this) {
+    public boolean isSameModule(TaModule otherTaModule) {
+        if (otherTaModule == this) {
             return true;
         }
 
-        return otherModule != null
-                && otherModule.getModuleCode().equals(getModuleCode());
+        return otherTaModule != null
+                && otherTaModule.getModuleCode().equals(getModuleCode());
     }
 
     /**
@@ -54,13 +55,13 @@ public class Module {
             return true;
         }
 
-        if (!(other instanceof Module)) {
+        if (!(other instanceof TaModule)) {
             return false;
         }
 
-        Module otherModule = (Module) other;
-        return otherModule.getModuleName().equals(getModuleName())
-                && otherModule.getModuleCode().equals(getModuleCode());
+        TaModule otherTaModule = (TaModule) other;
+        return otherTaModule.getModuleName().equals(getModuleName())
+                && otherTaModule.getModuleCode().equals(getModuleCode());
     }
 
     @Override
