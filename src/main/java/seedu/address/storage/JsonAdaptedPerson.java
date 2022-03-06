@@ -17,6 +17,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.StudentId;
+import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -31,6 +32,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final String githubUsername;
+    private final String telegram;
     private final String studentId;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
@@ -41,13 +43,15 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("github") String githubUsername,
-            @JsonProperty("studentId") String studentId) {
+            @JsonProperty("telegram") String telegram, @JsonProperty("studentId") String studentId) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.githubUsername = githubUsername;
+        this.telegram = telegram;
         this.studentId = studentId;
+
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -61,7 +65,8 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        githubUsername = source.getGithubUsername().value;
+        githubUsername = source.getGithubUsername().username;
+        telegram = source.getTelegram().handle;
         studentId = source.getStudentId().id;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -120,6 +125,15 @@ class JsonAdaptedPerson {
         }
         final GithubUsername modelUsername = new GithubUsername(githubUsername);
 
+        if (telegram == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Telegram.class.getSimpleName()));
+        }
+        if (!Telegram.isValidTelegram(telegram)) {
+            throw new IllegalValueException(Telegram.MESSAGE_CONSTRAINTS);
+        }
+        final Telegram modelTelegram = new Telegram(telegram);
+
         if (studentId == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     StudentId.class.getSimpleName()));
@@ -130,7 +144,8 @@ class JsonAdaptedPerson {
         final StudentId modelId = new StudentId(studentId);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelUsername, modelId);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelUsername,
+                modelTelegram, modelId);
     }
 
 }
