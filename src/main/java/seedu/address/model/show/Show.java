@@ -7,10 +7,13 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.tag.Tag;
+
 public class Show {
 
     //Identity field
     private final Name name;
+    private final Status status;
 
     //Data field
     private final Set<Tag> tags = new HashSet<>();
@@ -18,14 +21,19 @@ public class Show {
     /**
      * Every field must be present and not null.
      */
-    public Show(Name name, Set<Tag> tags) {
-        requireAllNonNull(name, tags);
+    public Show(Name name, Status status, Set<Tag> tags) {
+        requireAllNonNull(name, status, tags);
         this.name = name;
+        this.status = status;
         this.tags.addAll(tags);
     }
 
     public Name getName() {
         return name;
+    }
+
+    public Status getStatus() {
+        return status;
     }
 
     /**
@@ -77,7 +85,8 @@ public class Show {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName());
+        builder.append(getName().toString());
+        builder.append(getStatus().toString());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
