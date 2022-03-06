@@ -143,10 +143,10 @@ public class AddWindow extends UiPart<Stage> {
     }
 
     /**
-     * Copies the URL to the user guide to the clipboard.
+     * Handles submission of the fields inputted by the user through AddWindow's Ui.
      */
     @FXML
-    private void handleAdd() throws CommandException, ParseException {
+    private void handleAdd() {
         String name = "n/" + nameField.getText();
         String phone = "p/" + phoneField.getText();
         String address = "a/" + addressField.getText();
@@ -158,17 +158,19 @@ public class AddWindow extends UiPart<Stage> {
             return;
         }
 
-        // Craft the user input
+        // Craft the user input to be fed into executeCommand
         for (int i = 0; i < personFields.length; i++) {
             userInput.append(personFields[i]).append(" ");
         }
 
-        // TODO: Handle the proper adding of a new Person into ModuleMate Finder
-        executeCommand(userInput.toString());
-
-        // reset all fields and then hide the panel
-        this.resetFields();
-        this.hide();
+        try {
+            executeCommand(userInput.toString());
+            // reset all fields and then hide the panel
+            this.resetFields();
+            this.hide();
+        } catch (CommandException | ParseException e) {
+            errorLabel.setText("Error encountered");
+        }
     }
 
     /**
