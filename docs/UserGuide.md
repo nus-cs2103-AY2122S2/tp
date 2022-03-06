@@ -84,7 +84,7 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com`
 
-### Adding a Task: 
+### Adding a Task: `addTask`
 
 Adds a Task into the Task list.
 
