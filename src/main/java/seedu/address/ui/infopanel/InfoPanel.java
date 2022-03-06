@@ -1,6 +1,7 @@
-package seedu.address.ui;
+package seedu.address.ui.infopanel;
 
 import javafx.scene.layout.Region;
+import seedu.address.ui.UiPart;
 
 /**
  * Information Panel showing detailed information of something

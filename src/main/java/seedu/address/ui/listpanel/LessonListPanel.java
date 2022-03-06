@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.address.ui.listpanel;
 
 import java.util.logging.Logger;
 
@@ -8,6 +8,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.ui.LessonCard;
 
 /**
  * Panel containing the list of lessons.

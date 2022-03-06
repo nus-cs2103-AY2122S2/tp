@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.address.ui.infopanel;
 
 import java.util.Comparator;
 
@@ -10,6 +10,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.FlowPane;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
+import seedu.address.ui.LessonCard;
 
 public class PersonInfoPanel extends InfoPanel {
     private static final String FXML = "PersonInfoPanel.fxml";
@@ -52,6 +53,12 @@ public class PersonInfoPanel extends InfoPanel {
     }
 
     // TODO: This is public temporarily (Person doesn't hold assigned lessons)
+
+    /**
+     * Sets the assigned lessons list to the provided {@code Lesson} list
+     *
+     * @param lessonList Provided lesson list
+     */
     public void setAssignedLessons(ObservableList<Lesson> lessonList) {
         assignedLessonList.setItems(lessonList);
         assignedLessonList.setCellFactory(listView -> new LessonListViewCell());

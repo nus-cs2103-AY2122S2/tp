@@ -1,6 +1,7 @@
-package seedu.address.ui;
+package seedu.address.ui.listpanel;
 
 import javafx.scene.layout.Region;
+import seedu.address.ui.UiPart;
 
 /**
  * Panel containing a list of something
