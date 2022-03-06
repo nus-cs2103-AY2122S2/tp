@@ -6,6 +6,7 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "github": "aliceP",
+    "telegram": "alice_P",
     "studentId": "A0123456B",
     "tagged" : [ "friends" ]
   }, {
@@ -14,6 +15,7 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "github": "bensonM",
+    "telegram": "benson_M",
     "studentId": "A0123457C",
     "tagged" : [ "owesMoney", "friends" ]
   }, {
@@ -22,6 +24,7 @@
     "email" : "heinz@example.com",
     "address" : "wall street",
     "github": "carlK",
+    "telegram": "carl_K",
     "studentId": "A0123458D",
     "tagged" : [ ]
   }, {
@@ -30,6 +33,7 @@
     "email" : "cornelia@example.com",
     "address" : "10th street",
     "github": "danielM",
+    "telegram": "daniel_M",
     "studentId": "A0123459E",
     "tagged" : [ "friends" ]
   }, {
@@ -38,6 +42,7 @@
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "github": "elleM",
+    "telegram": "elle_M",
     "studentId": "A0123411A",
     "tagged" : [ ]
   }, {
@@ -46,6 +51,7 @@
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "github": "fionaK",
+    "telegram": "fiona_K",
     "studentId": "A0123412B",
     "tagged" : [ ]
   }, {
@@ -54,6 +60,7 @@
     "email" : "anna@example.com",
     "address" : "4th street",
     "github": "georgeB",
+    "telegram": "george_B",
     "studentId": "A0123413C",
     "tagged" : [ ]
   } ]
