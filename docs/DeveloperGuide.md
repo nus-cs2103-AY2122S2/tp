@@ -257,13 +257,12 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* has a need to manage a significant number of contacts (in the university)
 * prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Prefer an app with a simplistic GUI design
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+
+**Value proposition**: help university Students and TAs to manage multiple project or tutorial groups, and help school admins to manage module groups.
 
 
 ### User stories
@@ -272,27 +271,37 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| `* * *`  | user                   | add someone’s contact information        | update the address book or contact him/her if I need to|
+| `* * *`  | user                   | delete someone’s contact information     |   clear and organize my contact list  if I need to |
+| `* * *`  | user                   | view a particular existing profile       | know his/her information such as name, year of study and faculty  |
+| `* * *`  | user                   | edit a profile                           | update the information if it is wrong or inaccurate|
+| `* * *`  | school admin           | see all the modules (as tags) in a list form | know my job scope for this semester|
+| `* * *`  | school admin/TA        | add a module tag to a student            |  keep the module enrolment status updated|
+| `* * *`  | school admin/TA        | delete a module tag from a student       | keep the module enrolment status updated|
+| `* * *`  | school admin/TA        | create a new module tag                  | add in a module that I am supposed to moderate/teach|
+| `* * *`  | school admin/TA        | delete an existing module tag            | remove a module if I no longer need to moderate the module|
+| `* * *`  | student                |  find my peers’ contact information in a module's tutorial/lab tag | contact them for help if I need any|
+| `* *`    | user                   | delete multiple contacts in one go       | clear and organize my contact list more effiiciently|
+| `* *`    | school admin           |  import a list of students along with the tags they have | set up student profiles and their module information in the application when the semester starts|
+| `*`      | school admin           |  see the number of students enrolled in every module | know about the enrolment status|
+
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `UNite` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Attach an existing tag to a user profile**
 
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+2.  UNite shows a list of persons
+3.  User selects a profile in the list
+4.  UNite shows detail of the profile
+5.  User request to attach tag to the selected profile
+6. UNite adds tag to profile
 
     Use case ends.
 
@@ -304,9 +313,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. UNite shows an error message.
 
       Use case resumes at step 2.
+    
+* 5a. Tag is already attached to the profile 
+    * 5a1. UNite shows an error message
+    
+      Use case resumes at step 5.
+    
+* 5b. Tag does not exist 
+    * 5b1. UNite shows an error message
+    
+      Use case resumes at step 5.
 
 *{More to be added}*
 
@@ -314,7 +333,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+
 
 *{More to be added}*
 
