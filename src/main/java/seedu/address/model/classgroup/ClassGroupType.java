@@ -7,6 +7,7 @@ package seedu.address.model.classgroup;
 public enum ClassGroupType {
     LAB,
     LECTURE,
+    RECITATION,
     SECTIONAL,
     TUTORIAL
 }
