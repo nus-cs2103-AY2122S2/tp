@@ -68,7 +68,9 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
-        addWindow = new AddWindow();
+
+        // Pass the logic into AddWindow so we can use it to execute commands as well
+        addWindow = new AddWindow(logic);
     }
 
     public Stage getPrimaryStage() {
