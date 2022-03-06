@@ -15,6 +15,7 @@ import seedu.address.model.person.GithubUsername;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.StudentId;
+import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -156,6 +157,23 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String telegram} into an {@code Telegram}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code telegram} is invalid.
+     */
+    public static Telegram parseTelegram(String telegram) throws ParseException {
+        requireNonNull(telegram);
+        String trimmedTelegram = telegram.trim();
+
+        if (!Telegram.isValidTelegram(trimmedTelegram)) {
+            throw new ParseException(Telegram.MESSAGE_CONSTRAINTS);
+        }
+
+        return new Telegram(trimmedTelegram);
+    }
+
+    /**
      * Parses a {@code String studentId} into an {@code StudentId}.
      * Leading and trailing whitespaces will be trimmed.
      * Input will be converted to uppercase.
@@ -173,4 +191,5 @@ public class ParserUtil {
 
         return new StudentId(capitalId);
     }
+    
 }
