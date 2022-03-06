@@ -371,11 +371,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The given index is invalid
-
-    * 1a1. ArchDuke shows an error message
-
-  Use case resumes at step 1
+* 1a. The given index of the group is invalid.
+    * 1a1. ArchDuke shows an error message.
+    Use case resumes from step 1.
 
 **Use case: UC06 - Add task in a group**
 
