@@ -24,14 +24,14 @@ public interface Storage extends AddressBookStorage, IBookStorage, UserPrefsStor
     // TODO : delete start
     @Override
     Path getAddressBookFilePath();
-    
+
     @Override
     Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException;
 
     @Override
     void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
     // TODO : delete end
-    
+
     @Override
     Path getIBookFilePath();
 

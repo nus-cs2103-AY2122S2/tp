@@ -37,7 +37,7 @@ public class StorageManager implements Storage {
         this.iBookStorage = iBookStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
-    
+
     // ================ UserPrefs methods ==============================
 
     @Override
