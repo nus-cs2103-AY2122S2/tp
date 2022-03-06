@@ -2,12 +2,18 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-{:toc}
 
---------------------------------------------------------------------------------------------------------------------
+## Table of Content
+- [Requirements](#requirements)
+  - [Product scope](#product-scope)
+  - [User stories](#user-stories)
+  - [Use cases](#use-cases)
+  - [Non-Functional Requirements](#non-functional-requirements)
+  - [Glossary](#glossary)
 
-## **Appendix: Requirements**
+---
+
+## Requirements
 
 ### Product scope
 
@@ -17,35 +23,33 @@ Our target users would be doctors who need to keep track of their patient's medi
 
 **Value proposition**: MedBook is a health monitoring system for healthcare professionals that simplifies tracking a patient’s medical details and scheduling appointments. MedBook delivers a seamless workflow for doctors and healthcare professionals to search for or update patients' medical information, billing and appointments through a simple and easy-to-use platform.
 
-
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​ | I want to …​ | So that I can…​                                                        |
-|-------|---------| -------- | ---------------------------------------------------------------------- |
-| `* * *` | user    | add, update and delete a patient's profile with their personal information         | keep track of my patients’ data                 |
-| `* * *` | user    | retrieve a patient's past diagnoses based on their name |             have more information to make diagnoses                                                           |
-| `* * *` | user    | retrieve a patient's medicine administration history based on their name | have more information to make diagnoses                                   |
-| `* * *` | user    |view the progress of my patient's condition by viewing their health analytics | check if they are healing or getting bettert |
-    | `* * *` | user    | to create patient medical information | so that I can retrieve the record in the future efficiently.                |
-| `* * *` | doctor  | make prescriptions (add, update and delete a medicine list and export it |                                            |
-| `* * *` | user    |I can add, update and delete a patient's test results|can make diagnoses|
-|`* * *`| user    |retrieve a patient's visit history based on their name|have more information to make diagnoses|
-|`* * *`|user|retrieve the contact details of the patient from the address book|communicate with the patient effectively|
-|`* * *`|user|retrieve patient's medical history based on a given date|pinpoint the patient's cause of disease more efficiently|
-|`* * *`|user|retrieve the medical history, information of the patient|assess the patient more accurately and quickly|
-|`* * *`|user|input my patient's information and medical history|store my patient’s medical data|
-|`* * *`|user|delete patient's medical record|better protect their privacy|
+| Priority | As a …​ | I want to …​                                                                  | So that I can…​                                              |
+| -------- | ------- | ----------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| `* * *`  | user    | add, update and delete a patient's profile with their personal information    | keep track of my patients’ data                              |
+| `* * *`  | user    | retrieve a patient's past diagnoses based on their name                       | have more information to make diagnoses                      |
+| `* * *`  | user    | retrieve a patient's medicine administration history based on their name      | have more information to make diagnoses                      |
+| `* * *`  | user    | view the progress of my patient's condition by viewing their health analytics | check if they are healing or getting better                  |
+| `* * *`  | user    | to create patient medical information                                         | so that I can retrieve the record in the future efficiently. |
+| `* * *`  | doctor  | make prescriptions (add, update and delete a medicine list and export it      |                                                              |
+| `* * *`  | user    | I can add, update and delete a patient's test results                         | can make diagnoses                                           |
+| `* * *`  | user    | retrieve a patient's visit history based on their name                        | have more information to make diagnoses                      |
+| `* * *`  | user    | retrieve the contact details of the patient from the address book             | communicate with the patient effectively                     |
+| `* * *`  | user    | retrieve patient's medical history based on a given date                      | pinpoint the patient's cause of disease more efficiently     |
+| `* * *`  | user    | retrieve the medical history, information of the patient                      | assess the patient more accurately and quickly               |
+| `* * *`  | user    | input my patient's information and medical history                            | store my patient’s medical data                              |
+| `* * *`  | user    | delete patient's medical record                                               | better protect their privacy                                 |
 
-*{More to be added}*
+_{More to be added}_
 
 ### Use cases
 
 (For all use cases below, the System is the MedBook and the Actor is the user, unless specified otherwise)
 
 Use Case: Delete a Patient’s Contact Information
-
 
 **MSS**
 
@@ -58,17 +62,17 @@ Use Case: Delete a Patient’s Contact Information
 
 **Extensions**
 
-* 2a. The list is empty.
+- 2a. The list is empty.
 
   Use case ends.
 
-* 3a. 3a. The given NRIC is invalid.
+- 3a. 3a. The given NRIC is invalid.
 
-    * 3a1. MedBook shows an error message.
+  - 3a1. MedBook shows an error message.
 
-      Use case resumes at step 2.
+    Use case resumes at step 2.
 
-*{More to be added}*
+_{More to be added}_
 
 ### Non-Functional Requirements
 
@@ -76,10 +80,10 @@ Use Case: Delete a Patient’s Contact Information
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
-*{More to be added}*
+_{More to be added}_
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
+- **Mainstream OS**: Windows, Linux, Unix, OS-X
 
---------------------------------------------------------------------------------------------------------------------
+---
