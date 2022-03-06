@@ -6,11 +6,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class StudentId {
 
     public static final String MESSAGE_CONSTRAINTS = "Student Numbers should start with an A, "
-            + "followed by 7 numbers, then end with an alphabet.";
+            + "followed by 7 numbers, then end with a capital alphabet.";
 
     /*
      * The first character of the Student ID must be an A,
-     * followed by 7 digits, then an alphabet.
+     * followed by 7 digits, then a capital alphabet.
      */
     public static final String VALIDATION_REGEX = "A\\d{7}[A-Z]";
 
