@@ -73,6 +73,22 @@ public class Person {
     }
 
     /**
+     * Returns the skill proficiency of the person for the given skill,
+     * or 0 if the person does not have the skill.
+     *
+     * @param skill Skill of person to get proficiency of.
+     * @return Skill proficiency of the person.
+     */
+    public int getSkillProficiency(Skill skill) {
+        for (Skill s: skillSet) {
+            if (s.isSameSkill(skill)) {
+                return s.skillProficiency;
+            }
+        }
+        return 0;
+    }
+
+    /**
      * Returns true if the person contains the skill, false otherwise.
      *
      * @param skill The skill to check if the person possess.
