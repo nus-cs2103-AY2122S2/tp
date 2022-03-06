@@ -31,7 +31,6 @@ Examples:
     
 <img src = "images/user-guide/feature2_8_1.png" width = "350" alt="Unable to load image! Try again later.">
 <img src = "images/user-guide/feature2_8_2.png" width = "350" alt="Unable to load image! Try again later.">
-
 <div style="font-style: italic"; align="center">View Consultation Information User Interface</div>
 
 ### 2.9	Delete Consultation Information: /delete -t consultation
