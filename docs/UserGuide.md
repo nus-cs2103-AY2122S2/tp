@@ -93,7 +93,7 @@ Optional fields and associated flags:
 Examples:
 `/create -t medical -i S12345678P -bt O -ht 185 cm`
 
-![create medical information](images/user-guide/CreateMedicalInformation.png)
+![create medical information](images/user-guide/feature2_4.png)
 
 ## 2.5 View Medical Information `/view -t medical`
 Displays medical information of a patient from the MedBook. If no NRIC number is included, displays a list of current medical information records.
@@ -104,7 +104,7 @@ Examples:
 - `/view -t medical`
 - `/view -t medical -i S12345678P`
 
-![view medical information](images/user-guide/ViewMedicalInformation.png)
+![view medical information](images/user-guide/feature2_5.png)
 
 ## 2.6	Delete Medical Information: `/delete -t medical`
 Deletes all medical information of a patient from the MedBook
