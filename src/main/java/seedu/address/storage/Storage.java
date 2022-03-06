@@ -13,6 +13,7 @@ import seedu.address.model.UserPrefs;
 /**
  * API of the Storage component
  */
+// TODO : remove the inheritance from AddressBookStorage
 public interface Storage extends AddressBookStorage, IBookStorage, UserPrefsStorage {
 
     @Override

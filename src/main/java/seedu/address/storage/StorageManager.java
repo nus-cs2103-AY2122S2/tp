@@ -18,10 +18,12 @@ import seedu.address.model.UserPrefs;
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
+    // TODO :  remove variable addressBookStorage
     private AddressBookStorage addressBookStorage;
     private IBookStorage iBookStorage;
     private UserPrefsStorage userPrefsStorage;
 
+    // TODO : delete start
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
@@ -29,6 +31,7 @@ public class StorageManager implements Storage {
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
+    // TODO : delete end
 
     /**
      * Creates a {@code StorageManager} with the given {@code IBookStorage} and {@code UserPrefStorage}.
@@ -55,7 +58,7 @@ public class StorageManager implements Storage {
         userPrefsStorage.saveUserPrefs(userPrefs);
     }
 
-
+    // TODO : delete start
     // ================ AddressBook methods ==============================
 
     @Override
@@ -84,6 +87,7 @@ public class StorageManager implements Storage {
         logger.fine("Attempting to write to data file: " + filePath);
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
+    // TODO : delete end
 
     // ================ IBook methods ==============================
 
