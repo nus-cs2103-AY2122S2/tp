@@ -6,10 +6,10 @@
     "telegram": "fiona_K",
     "studentId": "A0123456B"
   }, {
-    "name": "Person With Invalid Phone Field",
+    "name": "Person With Invalid Telegram Field",
     "email": "hans@example.com",
     "github": "fionaK",
-    "telegram": "fiona_K",
+    "telegram": "fiona&K",
     "studentId": "A0123456B"
   } ]
 }
