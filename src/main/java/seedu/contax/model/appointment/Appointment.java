@@ -31,7 +31,7 @@ public class Appointment {
      * @param person A valid Person or null.
      */
     public Appointment(Name name, StartDateTime startDateTime, Duration duration, Person person) {
-        requireAllNonNull(name, startDateTime, duration, person);
+        requireAllNonNull(name, startDateTime, duration);
 
         this.name = name;
         this.startDateTime = startDateTime;

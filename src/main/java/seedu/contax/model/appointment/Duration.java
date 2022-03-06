@@ -34,7 +34,7 @@ public class Duration {
 
     @Override
     public String toString() {
-        return String.format("%d", duration);
+        return String.format("%d Minutes", duration);
     }
 
     @Override
