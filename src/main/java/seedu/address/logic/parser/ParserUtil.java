@@ -191,5 +191,5 @@ public class ParserUtil {
 
         return new StudentId(capitalId);
     }
-    
+
 }
