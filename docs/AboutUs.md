@@ -47,6 +47,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: Deliverables and Deadlines, Quality Assurance
+* In Charge of Component Logic
 
 ### James Doe
 
