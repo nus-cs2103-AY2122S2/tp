@@ -32,7 +32,7 @@ public class ModuleName {
     }
 
     /**
-     * Returns true if a given string is a valid name.
+     * Returns true if a given string is a valid module name.
      */
     public static boolean isValidModuleName(String test) {
         return test.matches(VALIDATION_REGEX);
