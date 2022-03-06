@@ -57,7 +57,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/chanweijie.png" width="200px">
 
 [[github](http://github.com/chanweijie)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/chanweijie.md)]
 
 * Role: Developer
 * Responsibilities: Integration, Documentation, Deliverables and Deadlines  
