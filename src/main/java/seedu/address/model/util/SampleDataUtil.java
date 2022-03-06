@@ -48,7 +48,7 @@ public class SampleDataUtil {
     public static Lesson[] getSampleLessons() {
         LocalDateTime firstLessonDate = LocalDateTime.of(2022, 1, 5, 17, 50, 0);
         LocalDateTime secondLessonDate = LocalDateTime.of(2022, 1, 7, 18, 0,0);
-        LocalDateTime thirdLessonDate = LocalDateTime.of(2022, 1, 9, 50, 0);
+        LocalDateTime thirdLessonDate = LocalDateTime.of(2022, 1, 9, 0, 50);
 
         return new Lesson[] {
             Lesson.makeTemporaryLesson("Make up lesson for George", "Geography", firstLessonDate, 2),

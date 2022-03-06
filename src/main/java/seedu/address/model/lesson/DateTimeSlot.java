@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
 /**
@@ -14,8 +15,8 @@ import java.util.Calendar;
 public class DateTimeSlot {
     private static final String MESSAGE_CONSTRAINTS =
             "Lessons can only be created with a valid date.\nHours and minutes must be non-negative integers.";
-    private static final DateFormat displayedDateFormat = new SimpleDateFormat("EEEE [d MMMM yyyy]");
-    private static final DateFormat displayedTimeFormat = new SimpleDateFormat("h:mm a");
+    private static final DateTimeFormatter displayedDateFormat = DateTimeFormatter.ofPattern("EEEE '['d MMMM yyyy']'");
+    private static final DateTimeFormatter displayedTimeFormat = DateTimeFormatter.ofPattern("h:mm a");
 
     private final LocalDateTime dateOfLesson;
     private final int hours;
