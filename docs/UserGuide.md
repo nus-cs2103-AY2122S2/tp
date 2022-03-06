@@ -13,7 +13,7 @@ Examples:
 ![UI](images/user-guide/feature2_1.png)
 
 
-### 2.2 View Contact Information: /view -t contact 
+### 2.2 View Contact Information: /view -t contact
 
 Views a patient’s details from the MedBook
 
@@ -37,4 +37,5 @@ Format: /delete -t contact -i NRIC
 Note: Only NRIC can be used to uniquely identify the contact owner.
 
 Examples:
+
 * /delete -t contact -i S12345678P
