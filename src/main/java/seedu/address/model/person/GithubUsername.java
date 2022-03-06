@@ -21,7 +21,7 @@ public class GithubUsername {
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}](?:[\\p{Alnum}]|-(?=[\\p{Alnum}])){0,38}";
 
-    public final String value;
+    public final String username;
 
     /**
      * Constructs an {@code GithubUsername}.
@@ -31,7 +31,7 @@ public class GithubUsername {
     public GithubUsername(String githubUsername) {
         requireNonNull(githubUsername);
         checkArgument(isValidGithubUsername(githubUsername), MESSAGE_CONSTRAINTS);
-        value = githubUsername;
+        username = githubUsername;
     }
 
     /**
@@ -43,18 +43,18 @@ public class GithubUsername {
 
     @Override
     public String toString() {
-        return value;
+        return username;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof GithubUsername // instanceof handles nulls
-                && value.equals(((GithubUsername) other).value)); // state check
+                && username.equals(((GithubUsername) other).username)); // state check
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return username.hashCode();
     }
 }
