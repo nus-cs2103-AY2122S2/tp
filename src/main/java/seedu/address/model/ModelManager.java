@@ -25,6 +25,8 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Lesson> filteredLessons;
+    private Person selectedPerson;
+    private Lesson selectedLesson;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -180,4 +182,22 @@ public class ModelManager implements Model {
 
     // TODO: add the remaining functions for LessonList too
 
+
+    //=========== Selected Person and Lesson Accessors and Setter ============================================
+
+    public void updateSelectedPerson(Person person) {
+        selectedPerson = person;
+    }
+
+    public Person getSelectedPerson() {
+        return selectedPerson;
+    }
+
+    public void updateSelectedLesson(Lesson lesson) {
+        selectedLesson = lesson;
+    }
+
+    public Lesson getSelectedLesson() {
+        return selectedLesson;
+    }
 }
