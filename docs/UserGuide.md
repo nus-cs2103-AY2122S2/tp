@@ -3,10 +3,7 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
-
-* Table of Contents
-{:toc}
+ManageEZPZ is a **desktop app for that allows managers or supervisors to manage employees and assign tasks to them.  Optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -14,28 +11,31 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `ManageEZPZ.jar` from [here](https://github.com/AY2122S2-CS2103-F11-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your ManageEZPZ.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+4. Double-click the file to start the app.
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Start communicating with ManageEZPZ using the command box.
+
+6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+   * **`list /all`** : Lists all Tasks.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * **`addEmployee`**`n/John Doe p/98765432 e/johnd@example.com` : Adds a contact named `John Doe` to ManageEZPZ.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+   * **`delete`**`3` : Deletes the 3rd Task shown in the Task list.
 
-   * **`clear`** : Deletes all contacts.
+   * **`clear`** : Deletes all Tasks.
+   
+   * **`deleteTask`**`3` : Deletes the 3rd task in the current Task list.
+
+   * **`addTask /todo read book`** : Adds a todo task with a description of `read book` to the Task list.
 
    * **`exit`** : Exits the app.
-
-1. Refer to the [Features](#features) below for details of each command.
-
+   
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -45,15 +45,9 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `addEmployee n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-
-* Parameters can be in any order.<br>
+* Parameters for adding employees can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
@@ -62,89 +56,105 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+* Task related Commands must be strictly lower case.
+
+* Task related parameters always start with /.
+
+* Task related parameters must be in sequence as shown in the instruction.
+
+* Task related parameters must be lowercase.
 </div>
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
+![help message](images/helpMessage_new.png)
 
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a person: `addEmployee`
 
-Adds a person to the address book.
+Adds an employee to ManageEZPZ.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+Format: `addEmployee n/NAME p/PHONE_NUMBER e/EMAIL`
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `addEmployee n/John Doe p/98765432 e/johnd@example.com`
+* `addEmployee n/Betsy Crowe t/friend e/betsycrowe@example.com`
+
+### Adding a Task: `addTask`
+
+Adds a Task into the Task list.
+
+Format:
+
+* `addTask /todo TASK_DESCRIPTION`
+* `addTask /deadline TASK_DESCRIPTION /by DATETIME`
+* `addTask /event TASK_DESCRIPTION /at DATE START_TIME END_TIME`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Take Note:**
+For deadline and event, the DATE must be in this format: DD-MM-YYYY HHmm (in 24 hr format)
+</div>
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+View all tasks, all todo tasks, all deadline tasks, all event tasks or tasks for today
 
-Format: `list`
+Format:
 
-### Editing a person : `edit`
+* `list /all`
+* `list /todo`
+* `list /deadline`
+* `list /event`
+* `list /today`
 
-Edits an existing person in the address book.
+### Marking a task as done : `mark`
+Mark a task in the Task list as done :
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `mark INDEX`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+* Marks the task at the specified `INDEX`.
+* The index refers to the index number shown in the displayed Task list.
+* The index **must be a positive integer** 1, 2, 3, …​
 
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+### UnMarking a task as done : `unmark`
+Mark a task in the Task list as done :
 
-### Locating persons by name: `find`
+Format: `unmark INDEX`
 
-Finds persons whose names contain any of the given keywords.
+* UnMarks the task at the specified `INDEX`.
+* The index refers to the index number shown in the displayed Task list.
+* The index **must be a positive integer** 1, 2, 3, …​
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-
-### Deleting a person : `delete`
-
-Deletes the specified person from the address book.
+### Deleting a Task : `delete`
+Deletes the specified Task from the List.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the task at the specified `INDEX`.
+* The index refers to the index number shown in the displayed Task list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `delete 2` deletes the 2nd Task in the Task list.
+
+### Locating Task by description or Date: `find`
+
+Find tasks based on the task description or date in the format of (DD-MM-YYYY).
+
+Format: 
+* `find /task TASK_DESCRIPTION`
+* `find /date DD-MM-YYYY`
+
+Examples:
+* `find /task homework`
+* `find /date 02-02-2022`
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the Task list.
 
 Format: `clear`
 
@@ -156,17 +166,17 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+ManageEZPZ data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+ManageEZPZ data are saved as a JSON file `[JAR file location]/data/ManageEZPZ.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid, ManageEZPZ will discard all data and start with an empty data file at the next run.
 </div>
 
-### Archiving data files `[coming in v2.0]`
+### Tagging Tasks to Employees `[coming in v1.3]`
 
 _Details coming soon ..._
 
@@ -175,7 +185,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ManageEZPZ home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -183,10 +193,10 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add Employee** | `addEmployee n/NAME p/PHONE_NUMBER e/EMAIL` <br> e.g., `addEmployee n/James Ho p/22224444 e/jamesho@example.com`
+**Add Task** | `addTask /TASK_TYPE TASK_DESCRIPTION` <br> e.g., `addTask /todo read book`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
+**Find** | `find /task TASK_DESCRIPTION` <br> e.g., `find /task homework`
+**List** | `list` <br> e.g. `list /all` or `list /event` or `list /deadline`
 **Help** | `help`
