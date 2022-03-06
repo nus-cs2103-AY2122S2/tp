@@ -2,7 +2,7 @@ package seedu.address.model.lesson;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * Represents a Lesson in the Lesson book.
@@ -11,7 +11,7 @@ import java.util.Date;
 public abstract class Lesson {
 
     // Identity fields
-    private final LessonName lessonName;
+    private final Name name;
     private final Subject subject;
 
     // Data fields
@@ -20,34 +20,45 @@ public abstract class Lesson {
     /**
      * Every field must be present and not null.
      */
-    protected Lesson(LessonName lessonName, Subject subject) {
-        requireAllNonNull(lessonName, subject);
-        this.lessonName = lessonName;
+    protected Lesson(Name name, Subject subject) {
+        requireAllNonNull(name, subject);
+        this.name = name;
         this.subject = subject;
     }
 
     /**
      * Creates a new instance of a non-recurring lesson.
-     * @param name lesson lessonName
+     * @param name lesson name
      * @param subject what subject would be taught during the lesson
      * @param startDateTime date and starting time of the lesson
      * @param hours how long the lesson would last
      */
-    public static TemporaryLesson makeTemporaryLesson(String name, String subject,
-                                                      Date startDateTime, int hours, int minutes) {
-        LessonName lessonName = new LessonName(name);
+    public static TemporaryLesson makeTemporaryLesson(String name, String subject, LocalDateTime startDateTime, int hours) {
+        return Lesson.makeTemporaryLesson(name, subject, startDateTime, hours, 0);
+    }
+
+    /**
+     * Creates a new instance of a non-recurring lesson.
+     * @param name lesson name
+     * @param subject what subject would be taught during the lesson
+     * @param startDateTime date and starting time of the lesson
+     * @param hours how long the lesson would last
+     */
+    public static TemporaryLesson makeTemporaryLesson(String name, String subject, LocalDateTime startDateTime,
+                                                      int hours, int minutes) {
+        Name lessonName = new Name(name);
         Subject lessonSubject = new Subject(subject);
-        TimeSlot lessonTimeSlot = new TimeSlot(startDateTime, hours);
+        DateTimeSlot lessonDateTimeSlot = new DateTimeSlot(startDateTime, hours, minutes);
 
         return new TemporaryLesson(
                 lessonName,
                 lessonSubject,
-                lessonTimeSlot
+                lessonDateTimeSlot
         );
     }
 
-    public LessonName getName() {
-        return lessonName;
+    public Name getName() {
+        return name;
     }
 
     public Subject getSubject() {
@@ -62,5 +73,5 @@ public abstract class Lesson {
     /**
      * Returns the date and time that the lesson starts and ends.
      */
-    public abstract TimeSlot getTimeSlot();
+    public abstract DateTimeSlot getTimeSlot();
 }
