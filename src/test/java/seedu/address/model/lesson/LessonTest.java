@@ -1,48 +1,48 @@
 package seedu.address.model.lesson;
 
-import org.junit.jupiter.api.Test;
-
-import java.time.LocalDateTime;
-
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.LocalDateTime;
+
+import org.junit.jupiter.api.Test;
+
 public class LessonTest {
-    LocalDateTime d = LocalDateTime.of(2022, 1, 5, 17, 50, 0);
+    private final LocalDateTime d = LocalDateTime.of(2022, 1, 5, 17, 50, 0);
 
     @Test
     public void makeTemporaryLesson_nullName_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-                () -> Lesson.makeTemporaryLesson(null, "Biology", d, 1, 0));
+        assertThrows(NullPointerException.class, () -> Lesson.makeTemporaryLesson(
+            null, "Biology", d, 1, 0));
     }
 
     @Test
     public void makeTemporaryLesson_nullSubject_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-                () -> Lesson.makeTemporaryLesson("Test Lesson", null, d, 1, 0));
+        assertThrows(NullPointerException.class, () -> Lesson.makeTemporaryLesson(
+            "Test Lesson", null, d, 1, 0));
     }
 
     @Test
     public void makeTemporaryLesson_negativeHours_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class,
-                () -> Lesson.makeTemporaryLesson("Test Lesson", "Biology", d, -1, 0));
+        assertThrows(IllegalArgumentException.class, () -> Lesson.makeTemporaryLesson(
+            "Test Lesson", "Biology", d, -1, 0));
     }
 
     @Test
     public void makeTemporaryLesson_negativeMinutes_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class,
-                () -> Lesson.makeTemporaryLesson("Test Lesson", "Biology", d, 0, -50));
+        assertThrows(IllegalArgumentException.class, () ->
+                Lesson.makeTemporaryLesson("Test Lesson", "Biology", d, 0, -50));
     }
 
     @Test
-    public void makeTemporaryLesson_zeroHours_and_zeroMinutes_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class,
-                () -> Lesson.makeTemporaryLesson("Test Lesson", "Biology", d, 0, 0));
+    public void makeTemporaryLesson_zeroHoursAndZeroMinutes_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () ->
+                Lesson.makeTemporaryLesson("Test Lesson", "Biology", d, 0, 0));
     }
 
     @Test
-    public void makeTemporaryLesson_zeroHours_and_positiveMinutes_instantiatesSuccessfully() {
+    public void makeTemporaryLesson_zeroHoursAndPositiveMinutes_instantiatesSuccessfully() {
         assertNotNull(Lesson.makeTemporaryLesson("Test Lesson", "Biology", d, 0, 50));
     }
 

@@ -1,7 +1,13 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION_HOURS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION_MINUTES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -44,9 +50,11 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
         Lesson lesson;
         if (isRecurring(argMultimap)) {
             // TODO: change this to instantiate a recurring lesson here
-            lesson = Lesson.makeTemporaryLesson(lessonName, subject, getLessonDateTime(date, startTime), durationHours, durationMinutes);
+            lesson = Lesson.makeTemporaryLesson(lessonName, subject,
+                    getLessonDateTime(date, startTime), durationHours, durationMinutes);
         } else {
-            lesson = Lesson.makeTemporaryLesson(lessonName, subject, getLessonDateTime(date, startTime), durationHours, durationMinutes);
+            lesson = Lesson.makeTemporaryLesson(lessonName, subject,
+                    getLessonDateTime(date, startTime), durationHours, durationMinutes);
         }
 
         return new AddLessonCommand(lesson);

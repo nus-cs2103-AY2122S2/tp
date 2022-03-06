@@ -3,12 +3,9 @@ package seedu.address.model.lesson;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Calendar;
 
 /**
  * Represents the time in which a lesson takes place in the LessonBook.
@@ -26,20 +23,6 @@ public class DateTimeSlot {
     private final int hours;
     private final int minutes;
 
-    public static DateTimeFormatter getAcceptedDateFormat() {
-        return acceptedDateFormat;
-    }
-
-    /**
-     * Constructs a {@code DateTimeSlot}.
-     *
-     * @param date Date of the lesson.
-     * @param hours Duration of the lesson.
-     */
-    public DateTimeSlot(LocalDateTime date, int hours) {
-        this(date, hours, 0);
-    }
-
     /**
      * Constructs a {@code DateTimeSlot}.
      *
@@ -55,6 +38,20 @@ public class DateTimeSlot {
         dateOfLesson = date;
         this.hours = hours;
         this.minutes = minutes;
+    }
+
+    /**
+     * Constructs a {@code DateTimeSlot}.
+     *
+     * @param date Date of the lesson.
+     * @param hours Duration of the lesson.
+     */
+    public DateTimeSlot(LocalDateTime date, int hours) {
+        this(date, hours, 0);
+    }
+
+    public static DateTimeFormatter getAcceptedDateFormat() {
+        return acceptedDateFormat;
     }
 
     /**

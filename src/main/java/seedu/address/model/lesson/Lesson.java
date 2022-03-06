@@ -33,7 +33,8 @@ public abstract class Lesson {
      * @param startDateTime date and starting time of the lesson
      * @param hours how long the lesson would last
      */
-    public static TemporaryLesson makeTemporaryLesson(String name, String subject, LocalDateTime startDateTime, int hours) {
+    public static TemporaryLesson makeTemporaryLesson(String name, String subject,
+                                                      LocalDateTime startDateTime, int hours) {
         return Lesson.makeTemporaryLesson(name, subject, startDateTime, hours, 0);
     }
 

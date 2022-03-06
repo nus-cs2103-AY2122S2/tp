@@ -1,15 +1,15 @@
 package seedu.address.model.lesson;
 
-import org.junit.jupiter.api.Test;
-
-import java.time.LocalDateTime;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.LocalDateTime;
+
+import org.junit.jupiter.api.Test;
+
 public class DateTimeSlotTest {
-    LocalDateTime d = LocalDateTime.of(2022, 1, 20, 18, 0, 0);
+    private final LocalDateTime d = LocalDateTime.of(2022, 1, 20, 18, 0, 0);
 
     @Test
     public void constructor_nullDate_throwsNullPointerException() {
@@ -27,12 +27,12 @@ public class DateTimeSlotTest {
     }
 
     @Test
-    public void constructor_zeroHours_and_zeroMinutes_throwsIllegalArgumentException() {
+    public void constructor_zeroHoursAndZeroMinutes_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> new DateTimeSlot(d, 0, 0));
     }
 
     @Test
-    public void constructor_zeroHours_and_positiveMinutes_instantiatesSuccessfully() {
+    public void constructor_zeroHoursAndPositiveMinutes_instantiatesSuccessfully() {
         assertNotNull(new DateTimeSlot(d, 0, 50));
     }
 
