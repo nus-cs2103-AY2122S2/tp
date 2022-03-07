@@ -4,6 +4,8 @@ import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -15,6 +17,11 @@ import seedu.address.model.person.Person;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
+
+    // Credits to flaticon.com for the below two images
+    private Image favouriteImage = new Image(this.getClass().getResourceAsStream("/images/favourite.png"));
+    private Image blacklistImage = new Image(this.getClass().getResourceAsStream("/images/blacklist.png"));
+    private Image placeholderImage = new Image(this.getClass().getResourceAsStream("/images/placeholder.png"));
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -42,6 +49,8 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private Label status;
+    @FXML
+    private ImageView statusImage;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -55,9 +64,26 @@ public class PersonCard extends UiPart<Region> {
         status.setText(person.getStatus().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+
+        // Get the image to display
+        Image imageToDisplay = getImageToDisplay(status.getText());
+        // Then set the image
+        statusImage.setImage(imageToDisplay);
+
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+
+    private Image getImageToDisplay(String statusText) {
+        switch (statusText) {
+        case "blacklist":
+            return blacklistImage;
+        case "favourite":
+            return favouriteImage;
+        default:
+            return placeholderImage;
+        }
     }
 
     @Override
