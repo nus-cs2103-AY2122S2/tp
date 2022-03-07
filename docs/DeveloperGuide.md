@@ -96,148 +96,91 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-#### Add a temporary class
-**System:** ClassBook  
-**Use case:** UC1 - Add a temporary class   
+#### Add a temporary lesson
+**System:** TeachWhat!  
+**Use case:** UC1 - Add a temporary lesson  
 **Actor:** User
 
 **MSS**
-1. User adds a class with a specified classname.
-2. ClassBook requests for the date of the class.
-3. User provides date of the class.
-4. ClassBook requests for the starting time of the class.
-5. User provides starting time of the class.
-6. ClassBook requests for the duration of the class.
-7. User provides duration of the class.  
+1. User adds a temporary lesson with a specified name, subject, address, date, time and duration.
+2. TeachWhat! updates the list of lesson.
    Use case ends.
 
 **Extensions**
-* 1a. User did not provide any classname.
-    * 1a1. ClassBook shows an error message.  
+* 1a. User did not provide any name.
+    * 1a1. TeachWhat! shows an error message.  
       Use case resumes at step 1.
 
+* 1b. User did not provide a date or date has invalid format.
+    * 1b1. TeachWhat! shows an error message.  
+      Use case resumes at step 1.
 
-* 3a. User did not provide a date or date has invalid format.
-    * 3a1. ClassBook shows an error message.  
-      Use case resumes at step 2.
+* 1c. User did not provide a starting time or starting time has invalid format.
+    * 1c1. TeachWhat! shows an error message.  
+      Use case resumes at step 1.
 
+* 1d. User did not provide the duration of class or duration of class has invalid format.
+    * 1d1. TeachWhat! shows an error message.  
+      Use case resumes at step 1.
 
-* 3b. User already provided the date in command.  
-  Use case resumes at step 4.
+* 1e. User already has an existing class overlapping with the specified starting, ending time and date.
+    * 1e1. TeachWhat! shows an error message.  
+      Use case resumes at step 1.
 
-
-* 5a. User did not provide a starting time or starting time has invalid format.
-    * 5a1. ClassBook shows an error message.  
-      Use case resumes at step 4.
-
-
-* 5b. User already provided the starting time in command.  
-  Use case resumes at step 6.
-
-
-* 7a. User did not provide the duration of class or duration of class has invalid format.
-    * 7a1. ClassBook shows an error message.  
-      Use case resumes at step 6.
-
-
-* 7b. User already has an existing class overlapping with the specified starting, ending time and date.
-    * 7b1. ClassBook shows an error message.  
-      Use case resumes at step 2.
-
-
-* 7c. User already provided the duration of class in command.  
-  Use case ends.
-
-
-* \*a. At any time, User chooses to cancel the creation of a new class.
-    * \*a1. ClassBook requests to confirm the cancellation.
-    * \*a2. User confirms the cancellation.  
-      Use case ends.
-
-
-#### Add a recurring class
-**System:** ClassBook  
-**Use case:** UC2 - Add a recurring class   
+#### Add a recurring lesson
+**System:** TeachWhat!  
+**Use case:** UC2 - Add a recurring lesson  
 **Actor:** User
 
 **MSS**
-1. User adds a class with a specified classname.
-2. ClassBook requests for the date of the first class.
-3. User provides date of the first class.
-4. ClassBook requests for the starting time of the class.
-5. User provides starting time of the class.
-6. ClassBook requests for the duration of the class.
-7. User provides duration of the class.  
+1. User adds a recurring lesson with a specified name, subject, address, date, time and duration.
+2. TeachWhat! updates the list of lesson.
    Use case ends.
 
 **Extensions**
-* 1a. User did not provide any classname.
-    * 1a1. ClassBook shows an error message.  
+* 1a. User did not provide any name.
+    * 1a1. TeachWhat! shows an error message.  
       Use case resumes at step 1.
 
+* 1b. User did not provide a date or date has invalid format.
+    * 1b1. TeachWhat! shows an error message.  
+      Use case resumes at step 1.
 
-* 3a. User did not provide the date of the first class or date has invalid format.
-    * 3a1. ClassBook shows an error message.  
-      Use case resumes at step 2.
+* 1c. User did not provide a starting time or starting time has invalid format.
+    * 1c1. TeachWhat! shows an error message.  
+      Use case resumes at step 1.
 
+* 1d. User did not provide the duration of class or duration of class has invalid format.
+    * 1d1. TeachWhat! shows an error message.  
+      Use case resumes at step 1.
 
-* 3b. User already provided the date of the first class in command.  
-  Use case resumes at step 2.
+* 1e. User already has an existing class overlapping with the specified starting, ending time and date.
+    * 1e1. TeachWhat! shows an error message.  
+      Use case resumes at step 1.
 
+#### Delete a lesson
 
-* 5a. User did not provide a starting time or starting time has invalid format.
-    * 5a1. ClassBook shows an error message.  
-      Use case resumes at step 4.
-
-
-* 5b. User already provided the starting time in command.  
-  Use case resumes at step 6.
-
-
-* 7a. User did not provide a duration of the class or duration of class has invalid format.
-    * 7a1. ClassBook shows an error message.  
-      Use case resumes at step 6.
-  
-
-* 7b. User already has an existing class overlapping with the specified starting, ending time and date.
-    * 7b1. ClassBook shows an error message.  
-      Use case resumes at step 2.
-
-
-* 7c. User already provided the ending time in command.  
-  Use case ends.
-
-
-* \*a. At any time, User chooses to cancel the creation of a new class.
-    * \*a1. ClassBook requests to confirm the cancellation.
-    * \*a2. User confirms the cancellation.  
-      Use case ends.
-
-#### Delete a class
-
-**System:** ClassBook  
-**Use case:** UC3 - Delete a class   
+**System:** TeachWhat!  
+**Use case:** UC3 - Delete a lesson   
 **Actor:** User
 
 **MSS**
-1. User requests to list classes
-2. ClassBook shows a list of classes
-3. User requests to delete a specific class in the list
-4. ClassBook deletes the class  
+1. User requests to list lessons
+2. TeachWhat! shows a list of lessons
+3. User requests to delete a specific lesson in the list
+4. TeachWhat! deletes the lesson  
    Use case ends.
 
 **Extensions**
 * 2a. The list is empty.  
   Use case ends.
 
-
 * 3a. The given index is invalid.
-    * 3a1. ClassBook shows an error message.  
+    * 3a1. TeachWhat! shows an error message.  
       Use case resumes at step 2.
 
-
-* 3b. The specified class still has students assigned to it.
-    * 3b1. ClassBook shows a warning message.
+* 3b. The specified lesson still has students assigned to it.
+    * 3b1. TeachWhat! shows a warning message.
     * 3b2a. User confirms deletion.  
       Use case ends.
     * 3b2b. User cancels deletion.  
@@ -245,16 +188,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### Assign a student to a class
 
-**System:** StudentBook, ClassBook  
+**System:** TeachWhat!  
 **Use case:** UC4 - Assign a student to a class  
 **Actor:** User
 
 **MSS**
 1. User requests to list students
-2. StudentBook shows a list of students
+2. TeachWhat! shows a list of students
 3. User selects the student
 4. User requests to list classes
-5. ClassBook shows a list of classes
+5. TeachWhat! shows a list of classes
 6. User selects the class to assign the student to  
    Use case ends.
 
@@ -262,11 +205,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list is empty.  
   Use case ends.
 
-
 * 3a. The given index is invalid.
     * 3a1. StudentBook shows an error message.  
       Use case resumes at step 2.
-
 
 * 5a. The list is empty.
     * 4a1. ClassBook shows a warning message.  
@@ -279,33 +220,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### Delete a student
 
-**System:** StudentBook  
+**System:** TeachWhat!  
 **Use case:** UC5 - Delete a student  
 **Actor:** User
 
 **MSS**
 1. User requests to list students
-2. StudentBook shows a list of students
+2. TeachWhat! shows a list of students
 3. User requests to delete a specific student in the list
-4. StudentBook deletes the student  
+4. TeachWhat! deletes the student  
    Use case ends.
 
 **Extensions**
 * 2a. The list is empty.  
   Use case ends.
 
-
 * 3a. The given index is invalid.
-    * 3a1. StudentBook shows an error message.  
+    * 3a1. TeachWhat! shows an error message.  
       Use case resumes at step 2.
 
 ### Non-Functional Requirements
 
 1. TeachWhat! able to run on all mainstream OS that has Java 11 or above installed
-2. Should be able to hold up to 1000 students and classes without a noticeable sluggishness in performance for typical 
-usage
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be 
-able to accomplish most of the tasks faster using commands than using the mouse
+2. Should be able to hold up to 1000 students and classes without a noticeable sluggishness in performance for typical
+   usage
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
+   able to accomplish most of the tasks faster using commands than using the mouse
 4. A new user should be able to pick up on how to use TeachWhat! within 10 minutes
 5. TeachWhat! must boot up within 5 seconds on a device that is under normal load (i.e. not running cpu intensive applications in the background).
 
