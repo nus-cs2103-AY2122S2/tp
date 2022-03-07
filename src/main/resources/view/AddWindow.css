@@ -1,0 +1,35 @@
+#copyButton, #helpMessage {
+    -fx-text-fill: white;
+}
+
+#copyButton {
+    -fx-background-color: #6F686D;
+}
+
+#copyButton:hover {
+    -fx-background-color: gray;
+}
+
+#copyButton:armed {
+    -fx-background-color: darkgray;
+}
+
+#addContainer {
+    -fx-background-color: derive(#1d1d1d, 20%);
+}
+
+#nameLabel {
+    -fx-background-color: #6F686D;
+}
+
+#phoneLabel {
+    -fx-background-color: #6F686D;
+}
+
+#addressLabel {
+    -fx-background-color: #6F686D;
+}
+
+#emailLabel {
+    -fx-background-color: #6F686D;
+}
