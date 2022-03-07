@@ -24,7 +24,7 @@ public class RoleManager {
     /**
      * Obtains the list of roles tagged to a Company
      *
-     * @return <code>ArrayList</code> representing the list of roles
+     * @return <code>ObservableList</code> representing the list of roles
      */
     public ObservableList<Role> getRoles() {
         return this.roleList;
@@ -49,6 +49,10 @@ public class RoleManager {
         return this.roleList.size();
     }
 
+    /**
+     * Add <code>Role</code> to list of roles tagged to a company
+     * @param role Role to be added to the list of roles
+     */
     public void addRole(Role role) {
         this.roleList.add(role);
     }

@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -27,7 +28,6 @@ public class CompanyCard extends UiPart<Region> {
      */
 
     public final Company company;
-
     public final ObservableList<Role> roleList;
     public final RoleListPanel roleListPanel;
 
@@ -76,13 +76,27 @@ public class CompanyCard extends UiPart<Region> {
         if (emailField == "") {
             email.setManaged(false);
         }
-
-        company.getRoleManager().getSetRoles().stream()
-                .forEach(roleTag -> roleTags.getChildren().add(new Label(roleTag.getName().fullName)));
-
+        setRoleTags();
         roleList = company.getRoleManager().getRoles();
         roleListPanel = new RoleListPanel(roleList);
         roleListPanelPlaceholder.getChildren().add(roleListPanel.getRoot());
+
+        roleList.addListener((ListChangeListener<Role>) change -> {
+            roleTags.getChildren().clear();
+            setRoleTags();
+            if (roleList.isEmpty()) {
+                roleListPanelPlaceholder.getChildren().clear();
+            }
+        });
+    }
+
+    /**
+     * Populate <code>roleTags</code> with names of roles tagged to the company represented by this
+     * <code>CompanyCard</code>
+     */
+    public void setRoleTags() {
+        company.getRoleManager().getSetRoles().stream()
+                .forEach(roleTag -> roleTags.getChildren().add(new Label(roleTag.getName().fullName)));
     }
 
     @Override
