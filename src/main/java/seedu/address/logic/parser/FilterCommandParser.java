@@ -6,6 +6,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_MORE_TAGS_THAN_EXPECTE
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsTagPredicate;
+import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -30,6 +31,13 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             throw new ParseException(
                     String.format(MESSAGE_MORE_TAGS_THAN_EXPECTED, FilterCommand.MESSAGE_USAGE));
         }
+
+        if (!Tag.isValidTagName(tagKeywords[0])) {
+            throw new ParseException(
+                    String.format(FilterCommand.MESSAGE_CONSTRAINTS)
+            );
+        }
+
         // because we only allow ONE tag.
         String tagToFind = tagKeywords[0];
         return new FilterCommand(new NameContainsTagPredicate(tagToFind));
