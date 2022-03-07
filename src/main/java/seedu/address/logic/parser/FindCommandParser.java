@@ -40,10 +40,12 @@ public class FindCommandParser implements Parser<FindCommand> {
             Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
             String[] nameKeywords = name.toString().split("\\s+");
             findCommand = new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
-        } else { // student id was used
+        } else if (arePrefixesPresent(argMultimap, PREFIX_ID)){ // student id was used
             StudentId studentId = ParserUtil.parseStudentId(argMultimap.getValue(PREFIX_ID).get());
             String[] idKeywords = studentId.toString().split("\\s+");
             findCommand = new FindCommand(new StudentIdContainsKeywordsPredicate(Arrays.asList(idKeywords)));
+        } else {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
         return findCommand;
     }
