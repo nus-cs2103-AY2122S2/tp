@@ -462,13 +462,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1. Should work on any _mainstream OS_ as long as it has Java `11` is installed.
-2. Should be able to hold up to 1000 student contacts without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. Should be able to be usable enough for a beginner who just started using student contact management systems.
-5. Should be intuitive enough for a beginner who is new to Command Line Application.
-6. Not required to support any other language other than English.
-7. Should be able to work without a need for the user to install Gradle/JavaFX.
+1. The application should work on any _mainstream OS_ as long as it has Java `11` is installed.
+2. The application should be able to hold up to 1000 student contacts without a noticeable sluggishness in performance for typical usage.
+3. The application should be able to be usable enough for a beginner who just started using student contact management systems.
+4. The application should be intuitive enough for a beginner who is new to Command Line Application.
+5. The application should be able to work without a need for the user to install Gradle/JavaFX.
+6. The application is not required to support multiple users on a single device.
+7. The application is not required to support any other language other than English.
+8. The user interface should be intuitive enough for users who are not IT-savvy.
+9. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 *{More to be added}*
 
