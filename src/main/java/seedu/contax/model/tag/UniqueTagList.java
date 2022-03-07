@@ -22,6 +22,10 @@ public class UniqueTagList implements Iterable<Tag> {
         return internalList.stream().anyMatch(toCheck::equals);
     }
 
+    /**
+     * Adds a tag to the list. The specified tag must not already exist in the list.
+     * @param toAdd The specified tag to add
+     */
     public void add(Tag toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {

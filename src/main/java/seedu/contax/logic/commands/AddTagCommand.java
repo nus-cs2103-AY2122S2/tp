@@ -42,4 +42,17 @@ public class AddTagCommand extends Command {
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (o instanceof AddTagCommand) {
+            return ((AddTagCommand) o).toAdd.equals(toAdd);
+        }
+
+        return false;
+    }
 }

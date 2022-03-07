@@ -104,6 +104,11 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     //// tag-level operations
 
+    /**
+     * Returns true if there exists a {@code tag} with the same name in ContaX.
+     * @param tag The tag specified tag to search.
+     * @return true if the tag exists in the tags list.
+     */
     public boolean hasTag(Tag tag) {
         requireNonNull(tag);
         return tags.contains(tag);

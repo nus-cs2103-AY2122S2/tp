@@ -121,7 +121,7 @@ public class ModelManager implements Model {
 
     @Override
     public void addTag(Tag tag) {
-       addressBook.addTag(tag);
+        addressBook.addTag(tag);
     }
 
     //=========== Filtered Person List Accessors =============================================================
