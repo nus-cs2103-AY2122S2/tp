@@ -36,18 +36,24 @@ public class Overlay extends UiPart<Region> {
     }
 
     public void cover(DoubleProperty boundX, DoubleProperty boundY, ReadOnlyDoubleProperty height, ReadOnlyDoubleProperty width) {
-        bottomOverlay.layoutXProperty().bind(boundX);
-        bottomOverlay.layoutYProperty().bind(boundY);
-        bottomOverlay.minHeightProperty().bind(height);
-        bottomOverlay.minWidthProperty().bind(width);
-        bottomOverlay.maxHeightProperty().bind(height);
-        bottomOverlay.maxWidthProperty().bind(width);
+        showAll();
+        topOverlay.setStyle("-fx-background-color: rgb(0, 0, 0, 0.5)");
+        bottomOverlay.setStyle("-fx-background-color: rgb(0, 0, 0, 0)");
+        topOverlay.layoutXProperty().bind(boundX);
+        topOverlay.layoutYProperty().bind(boundY);
+        topOverlay.minHeightProperty().bind(height);
+        topOverlay.minWidthProperty().bind(width);
+        topOverlay.maxHeightProperty().bind(height);
+        topOverlay.maxWidthProperty().bind(width);
 
     }
 
     public void showOnly(DoubleProperty boundX, DoubleProperty boundY,
                          ReadOnlyDoubleProperty height, ReadOnlyDoubleProperty width,
                          ReadOnlyDoubleProperty parentHeight, ReadOnlyDoubleProperty parentWidth) {
+        showAll();
+        topOverlay.setStyle("-fx-background-color: rgb(0, 0, 0, 0.5)");
+        bottomOverlay.setStyle("-fx-background-color: rgb(0, 0, 0, 0.5)");
         topOverlay.layoutXProperty().bind(boundX);
         topOverlay.setLayoutY(0.0);
         topOverlay.minHeightProperty().bind(boundY);
@@ -62,5 +68,15 @@ public class Overlay extends UiPart<Region> {
         bottomOverlay.minWidthProperty().bind(parentWidth);
         bottomOverlay.maxHeightProperty().bind(parentHeight.subtract(boundY.add(height)));
         bottomOverlay.maxWidthProperty().bind(parentWidth);
+    }
+
+    private void showAll() {
+        topOverlay.setVisible(true);
+        bottomOverlay.setVisible(true);
+    }
+
+    private void hideAll() {
+        topOverlay.setVisible(false);
+        bottomOverlay.setVisible(false);
     }
 }
