@@ -53,7 +53,7 @@ public class Lab {
      * Sets the lab status of the lab to {@code LabStatus.SUBMITTED}
      */
     public void submitLab() {
-        if (this.labStatus == LabStatus.SUBMITTED) {
+        if (labStatus == LabStatus.SUBMITTED || labStatus == LabStatus.GRADED) {
             throw new LabAlreadySubmittedException(labNumber);
         }
 
@@ -64,11 +64,11 @@ public class Lab {
      * Sets the lab status of the lab to {@code LabStatus.GRADED}
      */
     public void gradeLab() {
-        if (this.labStatus == LabStatus.UNSUBMITTED) {
+        if (labStatus == LabStatus.UNSUBMITTED) {
             throw new LabNotSubmittedException(labNumber);
         }
 
-        if (this.labStatus == LabStatus.GRADED) {
+        if (labStatus == LabStatus.GRADED) {
             throw new LabAlreadyGradedException(labNumber);
         }
 
