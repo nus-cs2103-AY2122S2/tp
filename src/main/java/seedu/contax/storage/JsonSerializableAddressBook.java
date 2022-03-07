@@ -51,13 +51,6 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
-        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Person person = jsonAdaptedPerson.toModelType();
-            if (addressBook.hasPerson(person)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
-            }
-            addressBook.addPerson(person);
-        }
 
         for (JsonAdaptedTag jsonAdaptedTag: tags) {
             Tag tag = jsonAdaptedTag.toModelType();
@@ -66,7 +59,27 @@ class JsonSerializableAddressBook {
             }
             addressBook.addTag(tag);
         }
+
+        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
+            Person person = jsonAdaptedPerson.toModelType();
+            if (addressBook.hasPerson(person)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+            }
+
+            // Load tags that were not added from tag list
+            addMissingTags(person, addressBook);
+            addressBook.addPerson(person);
+        }
         return addressBook;
     }
 
+    public void addMissingTags(Person person, AddressBook addressbook) {
+        List<Tag> addressbookTags = addressbook.getTagList();
+        for (Tag personTag : person.getTags()) {
+            boolean hasTag = !addressbookTags.contains(personTag);
+            if (hasTag) {
+                addressbook.addTag(new Tag(personTag.getTagName()));
+            }
+        }
+    }
 }
