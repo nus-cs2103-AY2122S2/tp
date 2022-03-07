@@ -31,6 +31,10 @@ NUSocials is a **desktop app for university students to maintain a professional 
    * **`tag`** `2 edu/computer science m/CS2040S` : Tags the 2nd contact shown in the current list with a Computer Science degree and CS2040S module.
 
    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+    
+   * **`find`**`n/fred` : Finds persons that match the name 'fred'.
+    
+   * **`find -s`**`n/fred m/cs2040s edu/computer science` : Finds persons that match the name 'fred' AND takes the module 'cs2040s' AND is studying 'computer science'.
 
    * **`clear`** : Deletes all contacts.
 
@@ -66,7 +70,7 @@ NUSocials is a **desktop app for university students to maintain a professional 
 
 Shows a message explaning how to access the help page.
 
-![help message](images/helpMessage.png)
+![help message]()
 
 Format: `help`
 
@@ -117,24 +121,40 @@ Examples:
 * `edit 2 m/CS2040s` Clears all module tags of the 2nd person and tag `CS2040s` as a module.
 * `edit 2 edu/ m/` Clears all education and module tags of the 2nd person.
 
-### Locating persons by name: `find` [coming soon]
+### Locating persons: `find` [coming in v1.2]
 
-Finds persons whose names contain any of the given keywords.
+Finds persons that match any of the given fields.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find [n/NAME]…​ [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
+* At least one of the optional fields must be provided.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Persons matching at least one of the field will be returned (i.e. `OR` search).
+  e.g. `n/Hans m/cs2040s` will return `Hans`, `Bo Yang` (i.e. Bo Yang is tagged with cs2040s)
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find n/John` returns `john` 
+* `find i/Shopee m/cs2040s cs2030s` returns `Alex Yeoh` (i.e Alex Yeoh is tagged with Shopee), `David Li` (i.e. David Li is tagged with cs2040s, cs2030s)<br>
+  ![result for 'find i/Shopee m/cs2040s cs2030s']()
 
+### Locating specific persons: `find -s` [coming in v1.2]
+
+Finds persons that match all given fields.
+
+Format: `find -s [n/NAME]…​ [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`
+
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* At least one of the optional fields must be provided.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Only persons matching all fields will be returned (i.e. `AND` search).
+  e.g. `n/Bo Yang m/cs2040s` will return `Bo Yang` (i.e. Bo Yang is tagged with cs2040s)
+
+Examples:
+* `find -s n/John Doe` returns `John Doe`
+* `find -s n/David Li m/cs2040s cs2030s` returns `David Li` (i.e. David Li is tagged with cs2040s, cs2030s)<br>
+  ![result for 'find -s n/David Li m/cs2040s cs2030s']()
+ 
 ### Deleting a person : `delete` [coming in V1.2]
 
 Deletes the specified person from the address book.
@@ -195,6 +215,7 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`<br> e.g.,`edit 2 n/Fred e/fred111@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find Vikrant`
+**Find** | `find [n/NAME]…​ [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`<br> e.g., `find n/john edu/computer science`  
+**Find -s** | `find -s [n/NAME]…​ [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`<br> e.g., `find -s n/john i/bytedance edu/computer science`
 **List** | `list`
 **Help** | `help`

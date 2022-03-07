@@ -270,18 +270,23 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                                   | I want to …​                                      | So that I can…​                                                       |
-|----------|-----------------------------------------------------------|---------------------------------------------------|-----------------------------------------------------------------------|
-| `* * *`  | new user                                                  | see usage instructions                            | refer to instructions when I forget how to use the App                |
-| `* * *`  | user                                                      | view all of my contacts                           |                                                                       |
-| `* * *`  | user                                                      | add a new contact                                 |
-| `* * *`  | user                                                      | delete a contact                                  | remove entries that I no longer need                                  |
-| `* * *`  | user                                                      | edit an existing contact                          | update the information when needed                                    |
-| `* * *`  | user                                                      | tag additional information to an existing contact | keep a memo of such details for future references                     |
-| `* * `   | user                                                      | find a person by name                             | locate details of persons without having to go through the entire list |
-| `*`      | user that tagged a lot of information to the contacts     | remove a specific tag of a contact                | avoid going through the trouble of retagging all the inforamtion again |
-| `*`      | user with many persons in the contact list                | sort persons by name                              | locate a person easily                                                |
-| `*`      | user with too many irrelevant persons in the contact list | delete all my contacts                            | avoid the trouble of deleting each contact one by one                 |
+| Priority | As a …​                                                   | I want to …​                                     | So that I can…​                                                                                  |
+|----------|-----------------------------------------------------------|--------------------------------------------------|--------------------------------------------------------------------------------------------------|
+| `* * *`  | new user                                                  | see usage instructions                           | refer to instructions when I forget how to use the App                                           |
+| `* * *`  | user                                                      | view all of my contacts                          |                                                                                                  |
+| `* * *`  | user                                                      | add a new contact                                |
+| `* * *`  | user                                                      | delete a contact                                 | remove entries that I no longer need                                                             |
+| `* * *`  | user                                                      | delete multiple contacts at once                 | delete unwanted entries faster                                                                   |
+| `* * *`  | user                                                      | edit an existing contact                         | update the information when needed                                                               |
+| `* * *`  | user                                                      | tag additional information to an existing contact | keep a memo of such details for future references                                                |
+| `* * `   | user                                                      | find a person by name                            | locate details of persons without having to go through the entire list                           |
+| `* * `   | user                                                      | find a person by module                          | locate details of persons with identical modules, without having to go through the entire list   |
+| `* * `   | user                                                      | find a person by internship                      | locate details of persons with identical intership, without having to go through the entire list |
+| `* * `   | user                                                      | find a person by cca                             | locate details of persons with identical cca, without having to go through the entire list       |
+| `* * `   | user                                                      | find a person by education                       | locate details of persons with identical education, without having to go through the entire list |
+| `* *`    | user with too many irrelevant persons in the contact list | delete all my contacts                           | reset my contact list                                                                            |
+| `*`      | user that tagged a lot of information to the contacts     | remove a specific tag of a contact               | avoid going through the trouble of retagging all the inforamtion again                           |
+| `*`      | user with many persons in the contact list                | sort persons by name                             | locate a person easily                                                                           |
 
 
 *{More to be added}*
@@ -396,7 +401,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+1. Should work on _mainstream OS_ as long as it has Java `11` or above installed.
 2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. The system should work on both 32-bit and 64-bit environments.
@@ -406,7 +411,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **Mainstream OS**: Windows, macOS 
 
 --------------------------------------------------------------------------------------------------------------------
 
