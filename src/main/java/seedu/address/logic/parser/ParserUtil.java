@@ -59,7 +59,7 @@ public class ParserUtil {
     public static Category parseCategory(String category) throws ParseException {
         requireNonNull(category);
         String trimmedCategory = category.trim();
-        if (!Category.isValidPhone(trimmedCategory)) {
+        if (!Category.isValidCategoryName(trimmedCategory)) {
             throw new ParseException(Category.MESSAGE_CONSTRAINTS);
         }
         return new Category(trimmedCategory);
@@ -74,7 +74,7 @@ public class ParserUtil {
     public static Description parseDescription(String description) throws ParseException {
         requireNonNull(description);
         String trimmedDescription = description.trim();
-        if (!Description.isValidAddress(trimmedDescription)) {
+        if (!Description.isValidDescription(trimmedDescription)) {
             throw new ParseException(Description.MESSAGE_CONSTRAINTS);
         }
         return new Description(trimmedDescription);
@@ -87,12 +87,15 @@ public class ParserUtil {
      * @throws ParseException if the given {@code expiryDate} is invalid.
      */
     public static ExpiryDate parseExpiryDate(String expiryDate) throws ParseException {
+        /*
         requireNonNull(expiryDate);
-        String trimmedExpiryDate = expiryDate.trim();
-        if (!ExpiryDate.isValidEmail(trimmedExpiryDate)) {
+        LocalDate trimmedExpiryDate = expiryDate.trim();
+        if (!ExpiryDate.isValidExpiryDate(trimmedExpiryDate)) {
             throw new ParseException(ExpiryDate.MESSAGE_CONSTRAINTS);
         }
-        return new ExpiryDate(trimmedExpiryDate);
+
+         */
+        return new ExpiryDate(null);
     }
 
     /**
@@ -102,11 +105,14 @@ public class ParserUtil {
      * @throws ParseException if the given {@code price} is invalid.
      */
     public static Price parsePrice(String price) throws ParseException {
+        /*
         requireNonNull(price);
         String trimmedPrice = price.trim();
-        if (!Price.isValidTagName(trimmedPrice)) {
+        if (!Price.isValidPrice(trimmedPrice)) {
             throw new ParseException(Price.MESSAGE_CONSTRAINTS);
         }
-        return new Price(trimmedPrice);
+
+         */
+        return new Price(null);
     }
 }
