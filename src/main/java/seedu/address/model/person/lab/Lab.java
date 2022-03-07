@@ -84,6 +84,13 @@ public class Lab {
     }
 
     /**
+     * Returns a new immutable lab with the same attributes as this.
+     */
+    public Lab createCopy() {
+        return new Lab(String.valueOf(labNumber), labStatus);
+    }
+
+    /**
      * Returns true if both students have the same name.
      * This defines a weaker notion of equality between two students.
      */
