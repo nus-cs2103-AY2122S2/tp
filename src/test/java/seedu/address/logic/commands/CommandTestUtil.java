@@ -17,6 +17,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AB3Model;
 import seedu.address.model.AddressBook;
+import seedu.address.model.classgroup.ClassGroupType;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -36,6 +37,13 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+
+    public static final String VALID_CG_ID_CS2103T_TUT = "T13";
+    public static final ClassGroupType VALID_CG_TYPE_CS2103T_TUT = ClassGroupType.TUTORIAL;
+    public static final String VALID_MOD_CODE_CS2103T_TUT = "CS2103T";
+    public static final String VALID_CG_ID_CS2106_LAB = "B01";
+    public static final ClassGroupType VALID_CG_TYPE_CS2106_LAB = ClassGroupType.LAB;
+    public static final String VALID_MOD_CODE_CS2106_LAB = "CS2106";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
