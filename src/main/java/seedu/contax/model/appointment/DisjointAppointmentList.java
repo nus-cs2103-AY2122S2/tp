@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.contax.model.appointment.exceptions.AppointmentNotFoundException;
 import seedu.contax.model.appointment.exceptions.OverlappingAppointmentException;
 
 /**
@@ -39,7 +40,23 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
      */
     public void setAppointments(List<Appointment> appointments) {
         requireNonNull(appointments);
+
+        if (!isAppointmentListDisjoint(appointments)) {
+            throw new OverlappingAppointmentException();
+        }
+
         this.appointments.setAll(appointments);
+    }
+
+    /**
+     * Replaces the entire list of appointments with {@code appointments}.
+     *
+     * @param toCopy The {@code DisjointAppointmentList} from which the list of appointments should be
+     *               created from.
+     */
+    public void setAppointments(DisjointAppointmentList toCopy) {
+        requireNonNull(toCopy);
+        this.appointments.setAll(toCopy.appointments);
     }
 
     /**
@@ -64,6 +81,14 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
             throw new OverlappingAppointmentException();
         }
 
+        // Check for overlapping appointments
+        long overlappingAppointmentCount = appointments.stream().filter(
+                (appointment) -> (appointment.isOverlapping(target))).count();
+
+        if (overlappingAppointmentCount > 0) {
+            throw new OverlappingAppointmentException();
+        }
+
         appointments.add(target);
     }
 
@@ -80,7 +105,7 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
 
         int indexOfTarget = appointments.indexOf(target);
         if (indexOfTarget < 0) {
-            throw new OverlappingAppointmentException();
+            throw new AppointmentNotFoundException();
         }
 
         long clashing = appointments.stream().filter((appointment) -> (
@@ -131,5 +156,22 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
     @Override
     public int hashCode() {
         return appointments.hashCode();
+    }
+
+    /**
+     * Returns true if there are overlapping appointments in the supplied list.
+     *
+     * @param target The list to check for overlapping appointments.
+     * @return True if there are overlapping appointments, false otherwise.
+     */
+    private boolean isAppointmentListDisjoint(List<Appointment> target) {
+        for (int i = 0; i < target.size() - 1; i++) {
+            for (int j = i + 1; j < target.size(); j++) {
+                if (target.get(i).isOverlapping(target.get(j))) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

@@ -79,8 +79,17 @@ public class Appointment {
             return true;
         }
 
-        return (getEndDateTime().isBefore(other.getStartDateTime().dateTime)
-                || other.getEndDateTime().isBefore(getStartDateTime().dateTime));
+        final LocalDateTime otherStartDateTime = other.getStartDateTime().dateTime;
+        final LocalDateTime selfStartDateTime = getStartDateTime().dateTime;
+
+        if (otherStartDateTime.isAfter(selfStartDateTime.minusSeconds(1))) {
+            // In this case, other.startDateTime is after this.startDateTime.
+            return otherStartDateTime.isBefore(getEndDateTime());
+        }
+
+        // other.startDateTime is strictly before this.startDateTime, need to check if other.endDateTime
+        // overflows into this.startDateTime
+        return (other.getEndDateTime().isAfter(selfStartDateTime));
     }
 
     /**
@@ -101,7 +110,10 @@ public class Appointment {
         return otherPerson.getName().equals(getName())
                 && otherPerson.getStartDateTime().equals(getStartDateTime())
                 && otherPerson.getDuration().equals(getDuration())
-                && otherPerson.getPerson().equals(getPerson());
+                && (otherPerson.getPerson() == null ?
+                    getPerson() == null
+                    : otherPerson.getPerson().equals(getPerson())
+                );
     }
 
     @Override
