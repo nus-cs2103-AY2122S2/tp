@@ -26,7 +26,7 @@ public interface Logic {
     /**
      * Returns the list of products.
      *
-     * @see seedu.address.model.Model#getAddressBook()
+     * @see OldModel#getAddressBook()
      */
     ReadOnlyIBook getIBook();
 

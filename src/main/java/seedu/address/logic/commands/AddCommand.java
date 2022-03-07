@@ -47,8 +47,8 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
+    public CommandResult execute(OldModel oldModel) throws CommandException {
+        requireNonNull(oldModel);
 
         model.addProduct(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));

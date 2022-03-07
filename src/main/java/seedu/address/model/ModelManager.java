@@ -14,17 +14,17 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.product.Product;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory oldModel of the address book data.
  */
 public class ModelManager implements Model {
-    private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+    private static final Logger logger = LogsCenter.getLogger(OldModelManager.class);
 
     private final IBook iBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Product> filteredProducts;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a OldModelManager with the given iBook and userPrefs.
      */
     public ModelManager(ReadOnlyIBook iBook, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(iBook, userPrefs);
@@ -105,17 +105,17 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setProduct(Product target, Product editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void setProduct(Product target, Product editedProduct) {
+        requireAllNonNull(target, editedProduct);
 
-        iBook.setProduct(target, editedPerson);
+        iBook.setProduct(target, editedProduct);
     }
 
     //=========== Filtered Product List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Product} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedIBook}
      */
     @Override
     public ObservableList<Product> getFilteredProductList() {

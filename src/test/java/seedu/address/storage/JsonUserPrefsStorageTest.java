@@ -14,7 +14,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.UserPrefs;
+import seedu.address.model.OldUserPrefs;
 
 public class JsonUserPrefsStorageTest {
 
@@ -28,7 +28,7 @@ public class JsonUserPrefsStorageTest {
         assertThrows(NullPointerException.class, () -> readUserPrefs(null));
     }
 
-    private Optional<UserPrefs> readUserPrefs(String userPrefsFileInTestDataFolder) throws DataConversionException {
+    private Optional<OldUserPrefs> readUserPrefs(String userPrefsFileInTestDataFolder) throws DataConversionException {
         Path prefsFilePath = addToTestDataPathIfNotNull(userPrefsFileInTestDataFolder);
         return new JsonUserPrefsStorage(prefsFilePath).readUserPrefs(prefsFilePath);
     }
@@ -51,27 +51,27 @@ public class JsonUserPrefsStorageTest {
 
     @Test
     public void readUserPrefs_fileInOrder_successfullyRead() throws DataConversionException {
-        UserPrefs expected = getTypicalUserPrefs();
-        UserPrefs actual = readUserPrefs("TypicalUserPref.json").get();
+        OldUserPrefs expected = getTypicalUserPrefs();
+        OldUserPrefs actual = readUserPrefs("TypicalUserPref.json").get();
         assertEquals(expected, actual);
     }
 
     @Test
     public void readUserPrefs_valuesMissingFromFile_defaultValuesUsed() throws DataConversionException {
-        UserPrefs actual = readUserPrefs("EmptyUserPrefs.json").get();
-        assertEquals(new UserPrefs(), actual);
+        OldUserPrefs actual = readUserPrefs("EmptyUserPrefs.json").get();
+        assertEquals(new OldUserPrefs(), actual);
     }
 
     @Test
     public void readUserPrefs_extraValuesInFile_extraValuesIgnored() throws DataConversionException {
-        UserPrefs expected = getTypicalUserPrefs();
-        UserPrefs actual = readUserPrefs("ExtraValuesUserPref.json").get();
+        OldUserPrefs expected = getTypicalUserPrefs();
+        OldUserPrefs actual = readUserPrefs("ExtraValuesUserPref.json").get();
 
         assertEquals(expected, actual);
     }
 
-    private UserPrefs getTypicalUserPrefs() {
-        UserPrefs userPrefs = new UserPrefs();
+    private OldUserPrefs getTypicalUserPrefs() {
+        OldUserPrefs userPrefs = new OldUserPrefs();
         userPrefs.setGuiSettings(new GuiSettings(1000, 500, 300, 100));
         userPrefs.setAddressBookFilePath(Paths.get("addressbook.json"));
         return userPrefs;
@@ -84,13 +84,13 @@ public class JsonUserPrefsStorageTest {
 
     @Test
     public void saveUserPrefs_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveUserPrefs(new UserPrefs(), null));
+        assertThrows(NullPointerException.class, () -> saveUserPrefs(new OldUserPrefs(), null));
     }
 
     /**
      * Saves {@code userPrefs} at the specified {@code prefsFileInTestDataFolder} filepath.
      */
-    private void saveUserPrefs(UserPrefs userPrefs, String prefsFileInTestDataFolder) {
+    private void saveUserPrefs(OldUserPrefs userPrefs, String prefsFileInTestDataFolder) {
         try {
             new JsonUserPrefsStorage(addToTestDataPathIfNotNull(prefsFileInTestDataFolder))
                     .saveUserPrefs(userPrefs);
@@ -102,7 +102,7 @@ public class JsonUserPrefsStorageTest {
     @Test
     public void saveUserPrefs_allInOrder_success() throws DataConversionException, IOException {
 
-        UserPrefs original = new UserPrefs();
+        OldUserPrefs original = new OldUserPrefs();
         original.setGuiSettings(new GuiSettings(1200, 200, 0, 2));
 
         Path pefsFilePath = testFolder.resolve("TempPrefs.json");
@@ -110,7 +110,7 @@ public class JsonUserPrefsStorageTest {
 
         //Try writing when the file doesn't exist
         jsonUserPrefsStorage.saveUserPrefs(original);
-        UserPrefs readBack = jsonUserPrefsStorage.readUserPrefs().get();
+        OldUserPrefs readBack = jsonUserPrefsStorage.readUserPrefs().get();
         assertEquals(original, readBack);
 
         //Try saving when the file exists

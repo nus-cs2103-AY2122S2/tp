@@ -24,15 +24,15 @@ public class LogicManager implements Logic {
     public static final String FILE_OPS_ERROR_MESSAGE = "Could not save data to file: ";
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
-    private final Model model;
+    private final OldModel oldModel;
     private final Storage storage;
     private final IBookParser iBookParser;
 
     /**
-     * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
+     * Constructs a {@code LogicManager} with the given {@code OldModel} and {@code Storage}.
      */
-    public LogicManager(Model model, Storage storage) {
-        this.model = model;
+    public LogicManager(OldModel oldModel, Storage storage) {
+        this.oldModel = oldModel;
         this.storage = storage;
         iBookParser = new IBookParser();
     }
@@ -46,7 +46,7 @@ public class LogicManager implements Logic {
         commandResult = command.execute(model);
 
         try {
-            storage.saveAddressBook(model.getAddressBook());
+            storage.saveAddressBook(oldModel.getAddressBook());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
@@ -71,11 +71,11 @@ public class LogicManager implements Logic {
 
     @Override
     public GuiSettings getGuiSettings() {
-        return model.getGuiSettings();
+        return oldModel.getGuiSettings();
     }
 
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
-        model.setGuiSettings(guiSettings);
+        oldModel.setGuiSettings(guiSettings);
     }
 }

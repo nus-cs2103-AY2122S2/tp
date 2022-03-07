@@ -8,7 +8,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.product.Product;
 
 /**
- * The API of the Model component.
+ * The API of the OldModel component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
@@ -35,44 +35,44 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' Ibook file path.
      */
     Path getIBookFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' Ibook file path.
      */
     void setIBookFilePath(Path iBookFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces Ibook data with the data in {@code IBook}.
      */
     void setIBook(ReadOnlyIBook iBook);
 
-    /** Returns the AddressBook */
+    /** Returns the IBook */
     ReadOnlyIBook getIBook();
 
     /**
-     * Returns true if a product with the same identity as {@code product} exists in the address book.
+     * Returns true if a product with the same identity as {@code product} exists in the Ibook.
      */
     boolean hasProduct(Product product);
 
     /**
      * Deletes the given product.
-     * The product must exist in the address book.
+     * The product must exist in the Ibook.
      */
     void deleteProduct(Product target);
 
     /**
      * Adds the given product.
-     * {@code product} must not already exist in the address book.
+     * {@code product} must not already exist in the Ibook.
      */
     void addProduct(Product product);
 
     /**
-     * Replaces the given person {@code target} with {@code editedProduct}.
-     * {@code target} must exist in the address book.
-     * The product identity of {@code editedProduct} must not be the same as another existing person in the address book.
+     * Replaces the given product {@code target} with {@code editedProduct}.
+     * {@code target} must exist in the Ibook.
+     * The product identity of {@code editedProduct} must not be the same as another existing product in the book.
      */
     void setProduct(Product target, Product editedProduct);
 
@@ -80,7 +80,7 @@ public interface Model {
     ObservableList<Product> getFilteredProductList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered product list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredProductList(Predicate<Product> predicate);

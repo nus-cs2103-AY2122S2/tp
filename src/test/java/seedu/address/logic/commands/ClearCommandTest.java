@@ -6,27 +6,27 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
+import seedu.address.model.OldModel;
+import seedu.address.model.OldModelManager;
+import seedu.address.model.OldUserPrefs;
 
 public class ClearCommandTest {
 
     @Test
     public void execute_emptyAddressBook_success() {
-        Model model = new ModelManager();
-        Model expectedModel = new ModelManager();
+        OldModel oldModel = new OldModelManager();
+        OldModel expectedOldModel = new OldModelManager();
 
-        assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearCommand(), oldModel, ClearCommand.MESSAGE_SUCCESS, expectedOldModel);
     }
 
     @Test
     public void execute_nonEmptyAddressBook_success() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel.setAddressBook(new AddressBook());
+        OldModel oldModel = new OldModelManager(getTypicalAddressBook(), new OldUserPrefs());
+        OldModel expectedOldModel = new OldModelManager(getTypicalAddressBook(), new OldUserPrefs());
+        expectedOldModel.setAddressBook(new AddressBook());
 
-        assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearCommand(), oldModel, ClearCommand.MESSAGE_SUCCESS, expectedOldModel);
     }
 
 }
