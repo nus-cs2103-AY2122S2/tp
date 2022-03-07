@@ -1,5 +1,5 @@
 package seedu.address.logic.commands;
-
+/*
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -12,6 +12,7 @@ import seedu.address.model.OldModelManager;
 import seedu.address.model.OldUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
+ */
 
 /**
  * Contains integration tests (interaction with the OldModel) for {@code AddCommand}.
