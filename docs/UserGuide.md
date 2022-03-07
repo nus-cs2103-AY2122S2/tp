@@ -153,6 +153,20 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Locating persons by skills: `filter`
+
+Finds persons that have the specified skills.
+
+Format: `filter KEYWORD`
+
+* The search is case-insensitive. e.g `java` will match `Java`
+* Only full words will be matched e.g. `C` will not match `C#`
+
+Examples:
+* `find C` returns `Alex Yeoh`, `Bernice Yu` and `Irfan Ibrahim`
+* `filter python` returns `Alex Yeoh`<br>
+  ![result for 'filter C'](images/filterCResult.png)
+
 ### Clearing all entries : `clear`
 
 Clears all entries from HackNet.
