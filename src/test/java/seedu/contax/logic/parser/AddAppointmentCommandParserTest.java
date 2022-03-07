@@ -44,22 +44,22 @@ public class AddAppointmentCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + APPOINTMENT_NAME_ALONE + APPOINTMENT_DATE
-                + APPOINTMENT_TIME  + APPOINTMENT_DURATION,
+                + APPOINTMENT_TIME + APPOINTMENT_DURATION,
                 new AddAppointmentCommand(expectedAppointment, null));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, APPOINTMENT_NAME_AMELIA + APPOINTMENT_NAME_ALONE + APPOINTMENT_DATE
-                + APPOINTMENT_TIME  + APPOINTMENT_DURATION,
+                + APPOINTMENT_TIME + APPOINTMENT_DURATION,
                 new AddAppointmentCommand(expectedAppointment, null));
 
         // multiple dates - last date accepted
         assertParseSuccess(parser, APPOINTMENT_NAME_ALONE + APPOINTMENT_DATE2 + APPOINTMENT_DATE
-                + APPOINTMENT_TIME  + APPOINTMENT_DURATION,
+                + APPOINTMENT_TIME + APPOINTMENT_DURATION,
                 new AddAppointmentCommand(expectedAppointment, null));
 
         // multiple times - last time accepted
         assertParseSuccess(parser, APPOINTMENT_NAME_ALONE + APPOINTMENT_DATE + APPOINTMENT_TIME2
-                        + APPOINTMENT_TIME  + APPOINTMENT_DURATION,
+                        + APPOINTMENT_TIME + APPOINTMENT_DURATION,
                 new AddAppointmentCommand(expectedAppointment, null));
 
         // multiple durations - last duration accepted
@@ -74,8 +74,8 @@ public class AddAppointmentCommandParserTest {
         Appointment expectedAppointment = new AppointmentBuilder(APPOINTMENT_ALONE).build();
 
         // include a person index
-        assertParseSuccess(parser,  APPOINTMENT_NAME_ALONE + APPOINTMENT_DATE
-                        + APPOINTMENT_TIME  + APPOINTMENT_DURATION + APPOINTMENT_FIRST_PERSON,
+        assertParseSuccess(parser, APPOINTMENT_NAME_ALONE + APPOINTMENT_DATE
+                        + APPOINTMENT_TIME + APPOINTMENT_DURATION + APPOINTMENT_FIRST_PERSON,
                 new AddAppointmentCommand(expectedAppointment, TypicalIndexes.INDEX_FIRST_PERSON));
 
         // multiple persons - last person accepted

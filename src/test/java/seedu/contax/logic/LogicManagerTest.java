@@ -7,12 +7,10 @@ import static seedu.contax.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.contax.logic.commands.CommandTestUtil.APPOINTMENT_DATE;
 import static seedu.contax.logic.commands.CommandTestUtil.APPOINTMENT_DURATION;
 import static seedu.contax.logic.commands.CommandTestUtil.APPOINTMENT_NAME_ALONE;
-import static seedu.contax.logic.commands.CommandTestUtil.APPOINTMENT_NAME_AMELIA;
 import static seedu.contax.logic.commands.CommandTestUtil.APPOINTMENT_TIME;
 import static seedu.contax.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.contax.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.contax.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.contax.logic.commands.CommandTestUtil.VALID_APPOINTMENT_NAME_AMELIA;
 import static seedu.contax.testutil.Assert.assertThrows;
 import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALONE;
 import static seedu.contax.testutil.TypicalPersons.AMY;
@@ -36,13 +34,11 @@ import seedu.contax.model.ReadOnlyAddressBook;
 import seedu.contax.model.ReadOnlySchedule;
 import seedu.contax.model.Schedule;
 import seedu.contax.model.UserPrefs;
-import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.person.Person;
 import seedu.contax.storage.JsonAddressBookStorage;
 import seedu.contax.storage.JsonScheduleStorage;
 import seedu.contax.storage.JsonUserPrefsStorage;
 import seedu.contax.storage.StorageManager;
-import seedu.contax.testutil.AppointmentBuilder;
 import seedu.contax.testutil.PersonBuilder;
 
 public class LogicManagerTest {
@@ -106,8 +102,8 @@ public class LogicManagerTest {
 
         // Setup LogicManager with JsonScheduleIoExceptionThrowingStub
         addressBookStorage = new JsonAddressBookStorage(temporaryFolder.resolve("ioExceptionAddressBook.json"));
-        scheduleStorage
-                = new JsonScheduleIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionSchedule.json"));
+        scheduleStorage =
+                new JsonScheduleIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionSchedule.json"));
         userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
         storage = new StorageManager(addressBookStorage, scheduleStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
