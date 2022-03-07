@@ -82,8 +82,8 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
         }
 
         // Check for overlapping appointments
-        long overlappingAppointmentCount = appointments.stream().filter(
-                (appointment) -> (appointment.isOverlapping(target))).count();
+        long overlappingAppointmentCount = appointments.stream().filter((appointment) -> (
+                appointment.isOverlapping(target))).count();
 
         if (overlappingAppointmentCount > 0) {
             throw new OverlappingAppointmentException();

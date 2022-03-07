@@ -3,29 +3,19 @@ package seedu.contax.model.appointment;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.contax.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.contax.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.contax.testutil.Assert.assertThrows;
 import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALICE;
 import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALONE;
-import static seedu.contax.testutil.TypicalPersons.ALICE;
-import static seedu.contax.testutil.TypicalPersons.BOB;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.contax.model.appointment.exceptions.AppointmentNotFoundException;
 import seedu.contax.model.appointment.exceptions.OverlappingAppointmentException;
-import seedu.contax.model.person.Person;
-import seedu.contax.model.person.UniquePersonList;
-import seedu.contax.model.person.exceptions.DuplicatePersonException;
-import seedu.contax.model.person.exceptions.PersonNotFoundException;
 import seedu.contax.testutil.AppointmentBuilder;
-import seedu.contax.testutil.PersonBuilder;
 
 public class DisjointAppointmentListTest {
 
@@ -72,20 +62,20 @@ public class DisjointAppointmentListTest {
 
     @Test
     public void setAppointment_nullTargetAppointment_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-                () -> appointmentList.setAppointment(null, APPOINTMENT_ALICE));
+        assertThrows(NullPointerException.class, ()
+            -> appointmentList.setAppointment(null, APPOINTMENT_ALICE));
     }
 
     @Test
     public void setAppointment_nullEditedAppointment_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-                () -> appointmentList.setAppointment(APPOINTMENT_ALICE, null));
+        assertThrows(NullPointerException.class, ()
+            -> appointmentList.setAppointment(APPOINTMENT_ALICE, null));
     }
 
     @Test
     public void setAppointment_targetAppointmentNotInList_throwsAppointmentNotFoundException() {
-        assertThrows(AppointmentNotFoundException.class,
-                () -> appointmentList.setAppointment(APPOINTMENT_ALICE, APPOINTMENT_ALONE));
+        assertThrows(AppointmentNotFoundException.class, ()
+            -> appointmentList.setAppointment(APPOINTMENT_ALICE, APPOINTMENT_ALONE));
     }
 
     @Test
@@ -131,14 +121,14 @@ public class DisjointAppointmentListTest {
         appointmentList.add(APPOINTMENT_ALICE);
         appointmentList.add(disjointAppointment);
 
-        assertThrows(OverlappingAppointmentException.class,
-                () -> appointmentList.setAppointment(APPOINTMENT_ALICE, disjointAppointment));
+        assertThrows(OverlappingAppointmentException.class, ()
+            -> appointmentList.setAppointment(APPOINTMENT_ALICE, disjointAppointment));
     }
 
     @Test
     public void setAppointments_nullDisjointAppointmentList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-                () -> appointmentList.setAppointments((DisjointAppointmentList) null));
+        assertThrows(NullPointerException.class, ()
+            -> appointmentList.setAppointments((DisjointAppointmentList) null));
     }
 
     @Test
@@ -152,8 +142,8 @@ public class DisjointAppointmentListTest {
 
     @Test
     public void setAppointments_nullList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-                () -> appointmentList.setAppointments((List<Appointment>) null));
+        assertThrows(NullPointerException.class, ()
+            -> appointmentList.setAppointments((List<Appointment>) null));
     }
 
     @Test
@@ -177,8 +167,8 @@ public class DisjointAppointmentListTest {
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
-                -> appointmentList.asUnmodifiableObservableList().remove(0));
+            -> appointmentList.asUnmodifiableObservableList().remove(0));
         assertThrows(UnsupportedOperationException.class, ()
-                -> appointmentList.asUnmodifiableObservableList().add(APPOINTMENT_ALICE));
+            -> appointmentList.asUnmodifiableObservableList().add(APPOINTMENT_ALICE));
     }
 }

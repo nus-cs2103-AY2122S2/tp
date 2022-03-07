@@ -110,8 +110,8 @@ public class Appointment {
         return otherPerson.getName().equals(getName())
                 && otherPerson.getStartDateTime().equals(getStartDateTime())
                 && otherPerson.getDuration().equals(getDuration())
-                && (otherPerson.getPerson() == null ?
-                    getPerson() == null
+                && (otherPerson.getPerson() == null
+                    ? getPerson() == null
                     : otherPerson.getPerson().equals(getPerson())
                 );
     }
