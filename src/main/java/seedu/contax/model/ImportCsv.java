@@ -1,5 +1,7 @@
 package seedu.contax.model;
 
+import static seedu.contax.commons.util.CollectionUtil.requireAllNonNull;
+
 public class ImportCsv {
     public static final String MESSAGE_CONSTRAINTS = "Positions should be integers above 0";
 
@@ -15,6 +17,7 @@ public class ImportCsv {
      */
     public ImportCsv(String filePath, int namePosition, int phonePosition, int emailPosition,
                      int addressPosition, int tagPosition) {
+        requireAllNonNull(filePath, namePosition, phonePosition, emailPosition, addressPosition, tagPosition);
         this.filePath = filePath;
         this.namePosition = namePosition;
         this.phonePosition = phonePosition;

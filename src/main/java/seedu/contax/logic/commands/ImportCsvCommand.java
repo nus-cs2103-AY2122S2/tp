@@ -24,6 +24,7 @@ public class ImportCsvCommand extends Command {
     public static final String COMMAND_WORD = "importcsv";
     public static final String MESSAGE_USAGE = "to be entered";
     public static final String MESSAGE_NO_FILE_FOUND = "file not found";
+    public static final String MESSAGE_SUCCESS = "imported successfully";
 
 
     private final ImportCsv toImport;
@@ -59,7 +60,7 @@ public class ImportCsvCommand extends Command {
                     continue;
                 }
             }
-            return new CommandResult("imported success");
+            return new CommandResult(ImportCsvCommand.MESSAGE_SUCCESS);
         } catch (IOException e) {
             throw new CommandException(MESSAGE_NO_FILE_FOUND);
         }
