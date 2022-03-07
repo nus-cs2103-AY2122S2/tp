@@ -27,23 +27,23 @@ public class ImportCsv {
         return filePath;
     }
 
-    public int getNamePosition() {
-        return namePosition;
+    public int getNamePositionIndex() {
+        return namePosition - 1;
     }
 
-    public int getPhonePosition() {
-        return phonePosition;
+    public int getPhonePositionIndex() {
+        return phonePosition - 1;
     }
 
-    public int getEmailPosition() {
-        return emailPosition;
+    public int getEmailPositionIndex() {
+        return emailPosition - 1;
     }
 
-    public int getAddressPosition() {
-        return addressPosition;
+    public int getAddressPositionIndex() {
+        return addressPosition - 1;
     }
 
-    public int getTagPosition() {
-        return tagPosition;
+    public int getTagPositionIndex() {
+        return tagPosition - 1;
     }
 }
