@@ -10,7 +10,9 @@ InternBuddy is a desktop app for managing companies for internships, optimized f
 If you can type fast, InternBuddy can get your internship management deliverables done faster than traditional GUI apps.
 
 InternBuddy provides you a way to plan and organize all your internship details on a single application, with intuitive 
-UI to make your Job Seeking journey a smooth road.
+UI to make your Job Seeking journey a smooth road. 
+
+InternBuddy allows you to: 
 * Store and manage Companies
 * Manage Contacts 
   * For example:  Hiring Manager Contact Details
@@ -27,7 +29,7 @@ For more detailed information on how to use the application, click on [User Guid
   * Edward Alvin
   * Muhammad Radhya
   * Steven Gabriel Kho Chua
-* InterBuddy is a brown-field project which is forked from [Address Book 3](https://github.com/nus-cs2103-AY2122S2/tp), a software development project (around 6 KLoC) which provide a baseline for InternBuddy.
+* InternBuddy is a brown-field project which is forked from [Address Book 3](https://github.com/nus-cs2103-AY2122S2/tp), a software development project (around 6 KLoC) which provide a baseline for InternBuddy.
 * You can look into our [Developer Guide](docs/DeveloperGuide.md) for more details about the codebase. 
 
 ### Main Language and Tools used:

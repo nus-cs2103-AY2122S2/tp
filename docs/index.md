@@ -4,7 +4,7 @@ title: InternBuddy
 ---
 
 [![CI Status](https://github.com/AY2122S2-CS2103T-W14-3/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S2-CS2103T-W14-3/tp/actions)
-[![codecov](https://codecov.io/gh/CS2103T-W14-3/tp/branch/master/graph/badge.svg?token=IHVW9KCP82)](https://codecov.io/gh/CS2103T-W14-3/tp)
+[![codecov](https://codecov.io/gh/AY2122S2-CS2103T-W14-3/tp/branch/master/graph/badge.svg?token=IHVW9KCP82)](https://codecov.io/gh/AY2122S2-CS2103T-W14-3/tp)
 
 ![Ui](images/Ui.png)
 
