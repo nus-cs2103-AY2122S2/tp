@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.exceptions.DuplicateLabException;
 import seedu.address.model.person.exceptions.LabNotFoundException;
 import seedu.address.model.person.lab.Lab;
@@ -40,6 +41,18 @@ public class MasterLabList {
         if (!masterList.remove(toRemove)) {
             throw new LabNotFoundException(toRemove.labNumber);
         }
+    }
+
+    /**
+     * Returns the index of the Lab with {@code labNumber}
+     */
+    public Index indexOf(String labNumber) {
+        requireNonNull(labNumber);
+        Lab toIndex = new Lab(labNumber);
+        if (!masterList.contains(toIndex)) {
+            throw new LabNotFoundException(toIndex.labNumber);
+        }
+        return Index.fromZeroBased(masterList.indexOf(toIndex));
     }
 
     @Override
