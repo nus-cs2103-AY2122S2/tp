@@ -3,7 +3,7 @@ package seedu.contax.model;
 import java.util.ArrayList;
 
 public class OnboardingStory {
-    ArrayList<OnboardingStep> story;
+    private ArrayList<OnboardingStep> story;
 
     public OnboardingStory() {
         story = new ArrayList<>();

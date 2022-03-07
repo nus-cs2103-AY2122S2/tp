@@ -1,15 +1,12 @@
 package seedu.contax.model;
-import java.util.function.Consumer;
 
 import seedu.contax.model.person.Person;
-import seedu.contax.ui.OnboardingInstruction;
-import seedu.contax.ui.Overlay;
 
 public class OnboardingStep {
     private String displayMessage;
-    private int overlayOption; //0 - cover all. 1 menu bar and so on
-    private  int highlightOption;
-    private int eventType; //0 - mouse, 1 - enter
+    private int overlayOption;
+    private int highlightOption;
+    private int eventType;
     private double messageHeight;
     private double messageWidth;
     private int positionOption;
@@ -17,6 +14,19 @@ public class OnboardingStep {
     private Person person;
     private int pOperation;
 
+    /**
+     * Creates an OnboardingStep object
+     * @param message message to display
+     * @param option overlay option
+     * @param height height of label
+     * @param width width of label
+     * @param position position option for label
+     * @param highlight highlight option
+     * @param eventType trigger event type
+     * @param command command to validate
+     * @param p Person object involved
+     * @param op operation id
+     */
     public OnboardingStep(String message, int option, double height,
                           double width, int position, int highlight,
                           int eventType,

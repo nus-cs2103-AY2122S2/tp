@@ -28,14 +28,15 @@ public class Overlay extends UiPart<Region> {
         super(FXML);
     }
 
-    public void init() {
-        topOverlay.setStyle("-fx-background-color: rgb(0, 0, 0, 0.5)");
-        bottomOverlay.setStyle("-fx-background-color: rgb(0, 0, 0, 0.5)");
-//        leftOverlay.setStyle("-fx-background-color: rgb(0, 0, 0, 0.5)");
-//        rightOverlay.setStyle("-fx-background-color: rgb(0, 0, 0, 0.5)");
-    }
-
-    public void cover(DoubleProperty boundX, DoubleProperty boundY, ReadOnlyDoubleProperty height, ReadOnlyDoubleProperty width) {
+    /**
+     * Cast over the given bounds and dimensions
+     * @param boundX DoubleProperty to bind layoutX to
+     * @param boundY DoubleProperty to bind layoutY to
+     * @param height ReadOnlyDoubleProperty for height of window
+     * @param width ReadOnlyDoubleProperty for width o  window
+     */
+    public void cover(DoubleProperty boundX, DoubleProperty boundY,
+                      ReadOnlyDoubleProperty height, ReadOnlyDoubleProperty width) {
         showAll();
         topOverlay.setStyle("-fx-background-color: rgb(0, 0, 0, 0.5)");
         bottomOverlay.setStyle("-fx-background-color: rgb(0, 0, 0, 0)");
@@ -48,6 +49,13 @@ public class Overlay extends UiPart<Region> {
 
     }
 
+    /**
+     * Show only the given regio
+     * @param boundX DoubleProperty to bind layoutX to
+     * @param boundY DoubleProperty to bind layoutY to
+     * @param height ReadOnlyDoubleProperty for height of window
+     * @param width ReadOnlyDoubleProperty for width o  window
+     */
     public void showOnly(DoubleProperty boundX, DoubleProperty boundY,
                          ReadOnlyDoubleProperty height, ReadOnlyDoubleProperty width,
                          ReadOnlyDoubleProperty parentHeight, ReadOnlyDoubleProperty parentWidth) {
@@ -70,11 +78,17 @@ public class Overlay extends UiPart<Region> {
         bottomOverlay.maxWidthProperty().bind(parentWidth);
     }
 
+    /**
+     * Show all overlays
+     */
     private void showAll() {
         topOverlay.setVisible(true);
         bottomOverlay.setVisible(true);
     }
 
+    /**
+     * Hide all overlays
+     */
     private void hideAll() {
         topOverlay.setVisible(false);
         bottomOverlay.setVisible(false);

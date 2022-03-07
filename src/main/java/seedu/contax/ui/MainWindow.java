@@ -153,6 +153,9 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Sets and opens the onboarding guide window and hides the main window
+     */
     @FXML
     public void handleOnboarding() {
         onboardingWindow.setSize(primaryStage.getHeight(), primaryStage.getWidth());

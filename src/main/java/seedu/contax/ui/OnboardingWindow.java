@@ -1,17 +1,12 @@
 package seedu.contax.ui;
 
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
-import javafx.geometry.Bounds;
-import javafx.scene.Node;
 import javafx.scene.control.MenuBar;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import seedu.contax.logic.Logic;
 import seedu.contax.logic.OnboardingStoryManager;
 import seedu.contax.model.OnboardingStep;
 import seedu.contax.model.person.UniquePersonList;
@@ -52,7 +47,11 @@ public class OnboardingWindow extends UiPart<Stage> {
     @FXML
     private MenuBar menuBar;
 
-
+    /**
+     * Creates a OnboardingWindow
+     * @param root Stage to use as the root of the OnboardingWindow.
+     * @param mainWindow The window that OnboardingWindow was opened from
+     */
     public OnboardingWindow(Stage root, Stage mainWindow) {
         super(FXML, root);
         labelPlaceholder.setManaged(false);
@@ -73,9 +72,9 @@ public class OnboardingWindow extends UiPart<Stage> {
         }));
 
         commandBox.getRoot().setOnKeyPressed((event) -> {
-            if(event.getCode() == KeyCode.ENTER) {
+            if (event.getCode() == KeyCode.ENTER) {
                 OnboardingStep s = storyManager.handleEnter();
-                if(s != null) {
+                if (s != null) {
                     processStep(s);
                     processInstructionPosition(s.getPositionOption());
                 }
@@ -88,6 +87,9 @@ public class OnboardingWindow extends UiPart<Stage> {
         this(new Stage(), mainWindow);
     }
 
+    /**
+     * Shows the Onboarding window.
+     */
     public void show() {
         fillInner();
         getRoot().show();
@@ -95,27 +97,47 @@ public class OnboardingWindow extends UiPart<Stage> {
         processInstructionPosition(0);
     }
 
+    /**
+     * Set the size of Onboarding window
+     * @param height Height to set to
+     * @param width Width to set to
+     */
     public void setSize(double height, double width) {
         getRoot().setHeight(height);
         getRoot().setWidth(width);
     }
 
+    /**
+     * Translate Onboarding window
+     * @param x x to translate to
+     * @param y y to translate to
+     */
     public void translate(double x, double y) {
         getRoot().setX(x);
         getRoot().setY(y);
     }
 
+    /**
+     * Cast an overlap over the stage, except for the given node.
+     * @param node Node to be excluded from overlap
+     */
     public void showOnly(Region node) {
         overlay.showOnly(node.layoutXProperty(), node.layoutYProperty(),
                 node.heightProperty(), node.widthProperty(),
                 parentPane.heightProperty(), parentPane.widthProperty());
     }
 
+    /**
+     * Cast an overlap over the stage
+     */
     public void coverAll() {
         overlay.cover(parentPane.layoutXProperty(), parentPane.layoutYProperty(),
                 parentPane.heightProperty(), parentPane.widthProperty());
     }
 
+    /**
+     * Fills up the placeholders in this window.
+     */
     public void fillInner() {
         labelPlaceholder.getChildren().add(overlay.getRoot());
 
@@ -126,10 +148,15 @@ public class OnboardingWindow extends UiPart<Stage> {
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
+    /**
+     * Process the given OnboardingStep and translate it to stage
+     * @param step The OnboardingStep to be processed
+     */
     public void processStep(OnboardingStep step) {
         if (step != null) {
             instructionLabel.setText(step.getDisplayMessage());
-            instructionLabel.setSize(step.getMessageHeight(), step.getMessageWidth(), stage.heightProperty(), stage.widthProperty());
+            instructionLabel.setSize(step.getMessageHeight(),
+                    step.getMessageWidth(), stage.heightProperty(), stage.widthProperty());
             processOverlayOption(step.getOverlayOption());
             processHighlightOption(step.getHighlightOption());
             if (step.getPersonOperation() == 1) {
@@ -141,14 +168,14 @@ public class OnboardingWindow extends UiPart<Stage> {
 
             System.out.println(step.getCommand());
 
-            if(step.getCommand() != null) {
-                if(!commandBox.getText().equals(step.getCommand())) {
-                    if(!commandBox.getText().equals("")) {
+            if (step.getCommand() != null) {
+                if (!commandBox.getText().equals(step.getCommand())) {
+                    if (!commandBox.getText().equals("")) {
                         instructionLabel.setText("Please type: " + step.getCommand());
                     }
                     return;
                 } else {
-                    OnboardingStep s = storyManager.getNextStory();
+                    OnboardingStep s = storyManager.getNextStep();
                     processStep(s);
                     step.setEventType(s.getPositionOption());
                 }
@@ -158,8 +185,12 @@ public class OnboardingWindow extends UiPart<Stage> {
 
     }
 
+    /**
+     * Highlight the stage based on the given option
+     * @param option Highlight option
+     */
     public void processHighlightOption(int option) {
-        if(option == 0) {
+        if (option == 0) {
             commandBox.unhighlight();
             commandBox.clear();
             personList.setStyle("-fx-border-width: 0px");
@@ -172,8 +203,12 @@ public class OnboardingWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Overlay the stage based on the given option
+     * @param option Overlay option
+     */
     public void processOverlayOption(int option) {
-        if(option == 0) {
+        if (option == 0) {
             coverAll();
         } else if (option == 1) {
             showOnly(menuBar);
@@ -184,15 +219,21 @@ public class OnboardingWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Moves the InstructionLabel based on the given option
+     * @param option Position option
+     */
     public void processInstructionPosition(int option) {
         if (option == 0) {
             instructionLabel.setCenter(stage.heightProperty(), stage.widthProperty());
         } else if (option == 1) {
             instructionLabel.translate(menuBar.layoutXProperty(), menuBar.layoutYProperty());
         } else if (option == 2) {
-            instructionLabel.translate(commandBoxPlaceholder.layoutXProperty(), commandBoxPlaceholder.layoutYProperty());
+            instructionLabel.translate(commandBoxPlaceholder.layoutXProperty(),
+                    commandBoxPlaceholder.layoutYProperty());
         } else if (option == 3) {
-            instructionLabel.translate(resultDisplayPlaceholder.layoutXProperty(), resultDisplayPlaceholder.layoutYProperty());
+            instructionLabel.translate(resultDisplayPlaceholder.layoutXProperty(),
+                    resultDisplayPlaceholder.layoutYProperty());
         }
     }
 }
