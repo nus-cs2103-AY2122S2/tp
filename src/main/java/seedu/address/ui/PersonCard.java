@@ -17,11 +17,11 @@ import seedu.address.model.person.Person;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
-
+    public final Person person;
     // Credits to flaticon.com for the below two images
-    private Image favouriteImage = new Image(this.getClass().getResourceAsStream("/images/favourite.png"));
-    private Image blacklistImage = new Image(this.getClass().getResourceAsStream("/images/blacklist.png"));
-    private Image placeholderImage = new Image(this.getClass().getResourceAsStream("/images/placeholder.png"));
+    private final Image favouriteImage = new Image(this.getClass().getResourceAsStream("/images/favourite.png"));
+    private final Image blacklistImage = new Image(this.getClass().getResourceAsStream("/images/blacklist.png"));
+    private final Image placeholderImage = new Image(this.getClass().getResourceAsStream("/images/placeholder.png"));
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -30,8 +30,6 @@ public class PersonCard extends UiPart<Region> {
      *
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
-
-    public final Person person;
 
     @FXML
     private HBox cardPane;
