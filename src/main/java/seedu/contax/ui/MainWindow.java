@@ -34,12 +34,16 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private OnboardingWindow onboardingWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
 
     @FXML
     private MenuItem helpMenuItem;
+
+    @FXML
+    private MenuItem onboardingMenuItem;
 
     @FXML
     private StackPane personListPanelPlaceholder;
@@ -66,6 +70,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        onboardingWindow = new OnboardingWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -74,6 +79,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(onboardingMenuItem, KeyCombination.valueOf("F2"));
     }
 
     /**
@@ -145,6 +151,13 @@ public class MainWindow extends UiPart<Stage> {
         } else {
             helpWindow.focus();
         }
+    }
+
+    @FXML
+    public void handleOnboarding() {
+        onboardingWindow.setSize(primaryStage.getHeight(), primaryStage.getWidth());
+        onboardingWindow.translate(primaryStage.getX(), primaryStage.getY());
+        onboardingWindow.show();
     }
 
     void show() {
