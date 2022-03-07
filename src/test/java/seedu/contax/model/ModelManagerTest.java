@@ -73,6 +73,18 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void setScheduleFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setScheduleFilePath(null));
+    }
+
+    @Test
+    public void setScheduleFilePath_validPath_setsScheduleFilePath() {
+        Path path = Paths.get("address/schedule/file/path");
+        modelManager.setScheduleFilePath(path);
+        assertEquals(path, modelManager.getScheduleFilePath());
+    }
+
+    @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
     }

@@ -76,6 +76,17 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
+    @Override
+    public Path getScheduleFilePath() {
+        return userPrefs.getScheduleFilePath();
+    }
+
+    @Override
+    public void setScheduleFilePath(Path scheduleFilePath) {
+        requireNonNull(scheduleFilePath);
+        userPrefs.setScheduleFilePath(scheduleFilePath);
+    }
+
     //=========== AddressBook ================================================================================
 
     @Override
@@ -127,18 +138,6 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
-    }
-
-    // TODO [APPOINTMENTS] : Implement
-    @Override
-    public Path getScheduleFilePath() {
-        return null;
-    }
-
-    // TODO [APPOINTMENTS] : Implement
-    @Override
-    public void setScheduleFilePath(Path scheduleFilePath) {
-
     }
 
     // TODO [APPOINTMENTS] : Implement
