@@ -93,6 +93,8 @@ public class ModelManager implements Model {
         return companyList.hasCompany(company);
     }
 
+
+
     @Override
     public void deleteCompany(Company target) {
         companyList.removeCompany(target);

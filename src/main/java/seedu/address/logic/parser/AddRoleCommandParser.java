@@ -44,7 +44,7 @@ public class AddRoleCommandParser implements Parser<AddRoleCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(content, PREFIX_NAME, PREFIX_STATUS,
                         PREFIX_DEADLINE, PREFIX_DESCRIPTION, PREFIX_STIPEND);
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_STATUS, PREFIX_DEADLINE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddRoleCommand.MESSAGE_USAGE));
         }
