@@ -20,6 +20,8 @@ public class LabList implements Iterable<Lab> {
 
     /**
      * Returns true if the list contains an equivalent lab as the given argument.
+     *
+     * @param toCheck The Lab to be checked
      */
     public boolean contains(Lab toCheck) {
         requireNonNull(toCheck);
@@ -29,6 +31,8 @@ public class LabList implements Iterable<Lab> {
     /**
      * Adds a lab to the list.
      * The person must not already exist in the list.
+     *
+     * @param toAdd The Lab that you want to add.
      */
     public void add(Lab toAdd) {
         requireNonNull(toAdd);
@@ -61,6 +65,8 @@ public class LabList implements Iterable<Lab> {
     /**
      * Removes the equivalent lab from the list.
      * The lab must exist in the list.
+     *
+     * @param toRemove Lab you want to remove from the list.
      */
     public void remove(Lab toRemove) {
         requireNonNull(toRemove);

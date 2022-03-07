@@ -14,15 +14,19 @@ public class MasterLabList {
 
     /**
      * Returns true if the list contains an equivalent lab as the given argument.
+     *
+     * @param toCheck The Lab to be checked.
      */
     public boolean contains(Lab toCheck) {
         requireNonNull(toCheck);
-        return masterList.stream().anyMatch(toCheck::equals);
+        return masterList.stream().anyMatch(toCheck::isSameLab);
     }
 
     /**
      * Adds a lab to the list.
      * The person must not already exist in the list.
+     *
+     * @param toAdd The Lab that you want to add.
      */
     public void add(Lab toAdd) {
         requireNonNull(toAdd);
@@ -35,6 +39,8 @@ public class MasterLabList {
     /**
      * Removes the equivalent lab from the list.
      * The lab must exist in the list.
+     *
+     * @param toRemove Lab you want to remove from the list.
      */
     public void remove(Lab toRemove) {
         requireNonNull(toRemove);
@@ -45,6 +51,8 @@ public class MasterLabList {
 
     /**
      * Returns the index of the Lab with {@code labNumber}
+     *
+     * @param labNumber The lab number of the Lab you want to find.
      */
     public Index indexOf(String labNumber) {
         requireNonNull(labNumber);
