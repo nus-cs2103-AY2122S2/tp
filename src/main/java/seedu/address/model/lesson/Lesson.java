@@ -70,6 +70,10 @@ public abstract class Lesson {
         return subject;
     }
 
+    public LessonAddress getLessonAddress() {
+        return address;
+    }
+
     /**
      * Returns true if both lessons have overlapping timeslots.
      */

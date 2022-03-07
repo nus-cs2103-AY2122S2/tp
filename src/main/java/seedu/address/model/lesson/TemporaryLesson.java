@@ -53,6 +53,7 @@ public class TemporaryLesson extends Lesson {
 
         return otherLesson.getName().equals(getName())
                 && otherLesson.getSubject().equals(getSubject())
+                && otherLesson.getLessonAddress().equals(getLessonAddress())
                 && otherLesson.getTimeSlot().equals(getTimeSlot());
     }
 
