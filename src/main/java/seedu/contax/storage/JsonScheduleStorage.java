@@ -12,7 +12,7 @@ import seedu.contax.commons.exceptions.DataConversionException;
 import seedu.contax.commons.exceptions.IllegalValueException;
 import seedu.contax.commons.util.FileUtil;
 import seedu.contax.commons.util.JsonUtil;
-import seedu.contax.model.AddressBook;
+import seedu.contax.model.ReadOnlyAddressBook;
 import seedu.contax.model.ReadOnlySchedule;
 
 /**
@@ -33,20 +33,21 @@ public class JsonScheduleStorage implements ScheduleStorage {
     }
 
     @Override
-    public Optional<ReadOnlySchedule> readSchedule(AddressBook addressBook) throws DataConversionException {
+    public Optional<ReadOnlySchedule> readSchedule(ReadOnlyAddressBook addressBook)
+            throws DataConversionException {
         requireNonNull(addressBook);
         return readSchedule(filePath, addressBook);
     }
 
     /**
-     * Similar to {@link #readSchedule(AddressBook)}.
+     * Similar to {@link #readSchedule(ReadOnlyAddressBook)}.
      *
      * @param filePath location of the data. Cannot be null.
      * @param addressBook An up-to-date copy of the AddressBook for finding persons associated to
      *                    appointments.
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlySchedule> readSchedule(Path filePath, AddressBook addressBook)
+    public Optional<ReadOnlySchedule> readSchedule(Path filePath, ReadOnlyAddressBook addressBook)
             throws DataConversionException {
         requireNonNull(filePath);
         requireNonNull(addressBook);

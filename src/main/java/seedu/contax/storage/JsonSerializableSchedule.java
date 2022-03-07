@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.contax.commons.exceptions.IllegalValueException;
-import seedu.contax.model.AddressBook;
+import seedu.contax.model.ReadOnlyAddressBook;
 import seedu.contax.model.ReadOnlySchedule;
 import seedu.contax.model.Schedule;
 import seedu.contax.model.appointment.Appointment;
@@ -49,7 +49,7 @@ class JsonSerializableSchedule {
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public Schedule toModelType(AddressBook addressBook) throws IllegalValueException {
+    public Schedule toModelType(ReadOnlyAddressBook addressBook) throws IllegalValueException {
         Schedule schedule = new Schedule();
         for (JsonAdaptedAppointment jsonAdaptedAppointment : appointments) {
             Appointment appointment = jsonAdaptedAppointment.toModelType(addressBook);

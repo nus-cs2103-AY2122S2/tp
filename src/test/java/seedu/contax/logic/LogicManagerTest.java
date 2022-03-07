@@ -29,6 +29,7 @@ import seedu.contax.model.Schedule;
 import seedu.contax.model.UserPrefs;
 import seedu.contax.model.person.Person;
 import seedu.contax.storage.JsonAddressBookStorage;
+import seedu.contax.storage.JsonScheduleStorage;
 import seedu.contax.storage.JsonUserPrefsStorage;
 import seedu.contax.storage.StorageManager;
 import seedu.contax.testutil.PersonBuilder;
@@ -46,8 +47,10 @@ public class LogicManagerTest {
     public void setUp() {
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonScheduleStorage scheduleStorage =
+                new JsonScheduleStorage(temporaryFolder.resolve("schedule.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(addressBookStorage, scheduleStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -74,9 +77,11 @@ public class LogicManagerTest {
         // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
+        JsonScheduleStorage scheduleStorage =
+                new JsonScheduleStorage(temporaryFolder.resolve("ioExceptionSchedule.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(addressBookStorage, scheduleStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command

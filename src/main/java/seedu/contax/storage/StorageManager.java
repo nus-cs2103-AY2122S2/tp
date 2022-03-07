@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import seedu.contax.commons.core.LogsCenter;
 import seedu.contax.commons.exceptions.DataConversionException;
 import seedu.contax.model.ReadOnlyAddressBook;
+import seedu.contax.model.ReadOnlySchedule;
 import seedu.contax.model.ReadOnlyUserPrefs;
 import seedu.contax.model.UserPrefs;
 
@@ -18,13 +19,17 @@ public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
+    private ScheduleStorage scheduleStorage;
     private UserPrefsStorage userPrefsStorage;
 
     /**
-     * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
+     * Creates a {@code StorageManager} with the given {@code AddressBookStorage}, {@code ScheduleStorage}
+     * and {@code UserPrefStorage}.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(AddressBookStorage addressBookStorage, ScheduleStorage scheduleStorage,
+                          UserPrefsStorage userPrefsStorage) {
         this.addressBookStorage = addressBookStorage;
+        this.scheduleStorage = scheduleStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -60,7 +65,7 @@ public class StorageManager implements Storage {
 
     @Override
     public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException, IOException {
-        logger.fine("Attempting to read data from file: " + filePath);
+        logger.fine("Attempting to read data from address book file: " + filePath);
         return addressBookStorage.readAddressBook(filePath);
     }
 
@@ -71,8 +76,35 @@ public class StorageManager implements Storage {
 
     @Override
     public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
-        logger.fine("Attempting to write to data file: " + filePath);
+        logger.fine("Attempting to write to address book data file: " + filePath);
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
 
+    @Override
+    public Path getScheduleFilePath() {
+        return scheduleStorage.getScheduleFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlySchedule> readSchedule(ReadOnlyAddressBook addressBook)
+            throws DataConversionException, IOException {
+        return readSchedule(scheduleStorage.getScheduleFilePath(), addressBook);
+    }
+
+    @Override
+    public Optional<ReadOnlySchedule> readSchedule(Path filePath, ReadOnlyAddressBook addressBook)
+            throws DataConversionException, IOException {
+        logger.fine("Attempting to read data from schedule file: " + filePath);
+        return scheduleStorage.readSchedule(filePath, addressBook);
+    }
+
+    @Override
+    public void saveSchedule(ReadOnlySchedule schedule) throws IOException {
+        saveSchedule(schedule, scheduleStorage.getScheduleFilePath());
+    }
+
+    @Override
+    public void saveSchedule(ReadOnlySchedule schedule, Path filePath) throws IOException {
+        scheduleStorage.saveSchedule(schedule, filePath);
+    }
 }

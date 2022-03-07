@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.contax.commons.exceptions.IllegalValueException;
-import seedu.contax.model.AddressBook;
+import seedu.contax.model.ReadOnlyAddressBook;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.appointment.Duration;
 import seedu.contax.model.appointment.Name;
@@ -62,7 +62,7 @@ class JsonAdaptedAppointment {
      * @param addressBook The current up-to-date address book for matching the person field in appointments.
      * @throws IllegalValueException if there were any data constraints violated in the adapted appointment.
      */
-    public Appointment toModelType(AddressBook addressBook) throws IllegalValueException {
+    public Appointment toModelType(ReadOnlyAddressBook addressBook) throws IllegalValueException {
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,

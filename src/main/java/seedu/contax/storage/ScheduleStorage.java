@@ -5,7 +5,7 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.contax.commons.exceptions.DataConversionException;
-import seedu.contax.model.AddressBook;
+import seedu.contax.model.ReadOnlyAddressBook;
 import seedu.contax.model.ReadOnlySchedule;
 
 /**
@@ -27,13 +27,13 @@ public interface ScheduleStorage {
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlySchedule> readSchedule(AddressBook addressBook)
+    Optional<ReadOnlySchedule> readSchedule(ReadOnlyAddressBook addressBook)
             throws DataConversionException, IOException;
 
     /**
      * @see #getScheduleFilePath() FilePath()
      */
-    Optional<ReadOnlySchedule> readSchedule(Path filePath, AddressBook addressBook)
+    Optional<ReadOnlySchedule> readSchedule(Path filePath, ReadOnlyAddressBook addressBook)
             throws DataConversionException, IOException;
 
     /**
