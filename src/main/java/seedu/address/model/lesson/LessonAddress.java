@@ -3,8 +3,6 @@ package seedu.address.model.lesson;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import seedu.address.model.person.Address;
-
 /**
  * Represents the address of the location where the lesson will be held.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
