@@ -294,123 +294,170 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `ArchDuke` and the **Actor** is the `Student`, unless specified otherwise)
 
-**Use case: UC01 - List student contacts**
+**Use case: UC01 - Add a student contact**
 
-**MSS**
+**MSS:**
 
-1. User requests to list student contacts
-2. ArchDuke shows a list of student contacts
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-**Use case: UC02 - Add a student contact**
-
-**MSS**
-
-1. User requests to add a student contact in ArchDuke contact list
-2. ArchDuke adds the student contact to the system
-3. ArchDuke GUI displays and reflects the data of that specific student contact
+1. Student requests to add a student contact in ArchDuke contact list.
+2. ArchDuke adds the student contact to the contact list.
+3. ArchDuke updates the contact list and displays the student contact in the contact list.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The student contact attributes are in an invalid format
-  * 1a1. ArchDuke displays an error message
-    Use case resumes at step 1
+* 1a. The student contact attributes are in an invalid format.
+    * 1a1. ArchDuke displays an error message.
+  
+      Use case resumes from step 1.
 
-    Use case ends.
+**Use case: UC02 - Delete a student contact**
 
-**Use case: UC03 - Delete a student contact**
+**MSS:**
 
-**MSS**
+1. Student requests to delete a student in the contact list.
+2. ArchDuke deletes the particular student.
+3. ArchDuke updates the contact list and deletes that student contact from the contact list.
 
-1. User requests to delete a specific person in the list
-2. ArchDuke deletes the person
-3. ArchDuke GUI no longer displays the data of that specific student contact
+   Use case ends.
+
+**Extensions**
+
+* 1a. The given index of the student contact is invalid.
+    * 1a1. ArchDuke shows an error message.
+  
+       Use case resumes from step 1.
+
+**Use case: UC03 - List student contacts**
+
+**MSS:**
+
+1. User requests to list student contacts.
+2. ArchDuke displays a list of student contacts.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The given index is invalid
+* 2a. The student contact list is empty.
 
-    * 1a1. ArchDuke shows an error message
-    
-    Use case resumes at step 1
+   Use case ends.
 
 **Use case: UC04 - Add a student group**
 
-**MSS**
+**MSS:**
 
-1. User requests to add a student group
-2. ArchDuke adds the group
-3. ArchDuke GUI displays the group in the group list
+1. User requests to add a student group.
+2. ArchDuke adds the group.
+3. ArchDuke updates the group list and displays the group in the group list.
 
    Use case ends.
+
+**Extensions**
+
+* 1a. The group attributes are in an invalid format.
+  * 1a1. ArchDuke shows an error message.
+  
+    Use case resumes from step 1.
 
 **Use case: UC05 - Delete a student group**
 
-**MSS**
+**MSS:**
 
-1. User requests to delete a specific group in the list
-2. ArchDuke deletes the group
-3. ArchDuke GUI no longer displays the data of that specific group
+1. User requests to delete a group in the group list.
+2. ArchDuke deletes the group.
+3. ArchDuke updates the group list and removes the group from the group list.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The given index is invalid
+* 1a. The given index of the group is invalid.
+    * 1a1. ArchDuke shows an error message.
+  
+       Use case resumes from step 1.
 
-    * 1a1. ArchDuke shows an error message
+**Use case: UC06 - Assign a student to a group**
 
-  Use case resumes at step 1
+**MSS:**
 
-**Use case: UC06 - Add task in a group**
+1. User requests to add a student to a specific group.
+2. ArchDuke adds the student to the group.
+3. ArchDuke updates the student list in the group and displays the student in the group.
 
-**MSS**
-
-1. User requests to add a specific task to a specific group
-2. ArchDuke adds the specific task in the group
-3. ArchDuke GUI displays the specific task in the task list in that group
    Use case ends.
 
 **Extensions**
 
-* 1a. The given index is invalid
+* 1a. The group index is invalid.
+    * 1a1. ArchDuke shows an error message.
 
-    * 1a1. ArchDuke shows an error message
+      Use case resumes from step 1.
+  
+* 1b. The student index is invalid.
+    * 1b1. ArchDuke shows an error message.
 
-  Use case resumes at step 1
+       Use case resumes from step 1.
 
-**Use case: UC07 - Delete task in a group**
+**Use case: UC07 - Add a task in a group**
 
-**MSS**
+**MSS:**
 
-1. User requests to delete a specific task from a specific group
-2. ArchDuke deletes the specific task in the group
-3. ArchDuke GUI no longer displays the specific task in the task list in that group
+1. User requests to add a specific task to a specific group.
+2. ArchDuke adds the specific task in the group.
+3. ArchDuke updates the group task list and displays the task in the group.
+
    Use case ends.
 
 **Extensions**
 
-* 1a. The given index is invalid
+* 1a. The group index is invalid.
+    * 1a1. ArchDuke shows an error message.
 
-    * 1a1. ArchDuke shows an error message
+       Use case resumes from step 1.
 
-  Use case resumes at step 1
+**Use case: UC08 - Delete a task in a group**
 
+**MSS:**
 
+1. User requests to delete a specific task from a specific group.
+2. ArchDuke deletes the specific task in the group.
+3. ArchDuke updates the group task list and removes the task from the group.
+   
+   Use case ends.
 
+**Extensions**
+
+* 1a. The group task index is invalid.
+
+    * 1a1. ArchDuke shows an error message.
+
+      Use case resumes at step 1.
+  
+* 1b. The group index is invalid. 
+
+    * 1b1. ArchDuke shows an error message.
+  
+       Use case resumes from step 1.
+
+**Use case: UC09 - View tasks in a group**
+
+**MSS:**
+
+1. User requests to view tasks that belong to a specific group.
+2. ArchDuke displays all tasks in that group.
+   Use case ends.
+
+**Extensions**
+
+* 1a. The group index is invalid.
+
+    * 1a1. ArchDuke shows an error message.
+
+      Use case resumes from step 1.
+    
 *{More to be added}*
 
 ### Non-Functional Requirements
