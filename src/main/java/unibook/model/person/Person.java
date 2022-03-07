@@ -38,6 +38,15 @@ public class Person {
         this.modules.addAll(modules);
     }
 
+    /** Temporary overloaded before modules implemented*/
+    public Person(Name name, Phone phone, Email email, Set<Tag> tags) {
+        CollectionUtil.requireAllNonNull(name, phone, email, tags);
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.tags.addAll(tags);
+    }
+
     public Name getName() {
         return name;
     }
