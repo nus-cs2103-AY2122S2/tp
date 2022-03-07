@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.contax.commons.core.GuiSettings;
 import seedu.contax.model.appointment.Appointment;
+import seedu.contax.model.appointment.exceptions.AppointmentNotFoundException;
 import seedu.contax.model.person.NameContainsKeywordsPredicate;
 import seedu.contax.testutil.AddressBookBuilder;
 import seedu.contax.testutil.AppointmentBuilder;
@@ -111,6 +112,17 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void setSchedule_nullSchedule_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setSchedule(null));
+    }
+
+    @Test
+    public void getSchedule() {
+        modelManager.addAppointment(APPOINTMENT_ALICE);
+        assertEquals(1, modelManager.getSchedule().getAppointmentList().size());
+    }
+
+    @Test
     public void hasAppointment_nullAppointment_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasAppointment(null));
     }
@@ -137,6 +149,37 @@ public class ModelManagerTest {
     public void hasOverlappingAppointment_disjointAppointmentsInList_returnsFalse() {
         modelManager.addAppointment(APPOINTMENT_ALICE);
         assertFalse(modelManager.hasOverlappingAppointment(APPOINTMENT_ALONE));
+    }
+
+    @Test
+    public void setAppointment_nullArguments_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setAppointment(null, APPOINTMENT_ALICE));
+        assertThrows(NullPointerException.class, () -> modelManager.setAppointment(APPOINTMENT_ALICE, null));
+        assertThrows(NullPointerException.class, () -> modelManager.setAppointment(null, null));
+    }
+
+    @Test
+    public void setAppointment_targetNotInModel_throwsAppointmentNotFoundException() {
+        assertThrows(AppointmentNotFoundException.class, ()
+            -> modelManager.setAppointment(APPOINTMENT_ALICE, APPOINTMENT_ALONE));
+    }
+
+    @Test
+    public void setAppointment_sameAppointment_success() {
+        modelManager.addAppointment(APPOINTMENT_ALICE);
+        modelManager.setAppointment(APPOINTMENT_ALICE, APPOINTMENT_ALICE);
+
+        Schedule expectedSchedule = new ScheduleBuilder().withAppointment(APPOINTMENT_ALICE).build();
+        assertEquals(expectedSchedule, modelManager.getSchedule());
+    }
+
+    @Test
+    public void setAppointment_differentAppointment_success() {
+        modelManager.addAppointment(APPOINTMENT_ALICE);
+        modelManager.setAppointment(APPOINTMENT_ALICE, APPOINTMENT_ALONE);
+
+        Schedule expectedSchedule = new ScheduleBuilder().withAppointment(APPOINTMENT_ALONE).build();
+        assertEquals(expectedSchedule, modelManager.getSchedule());
     }
 
     @Test
