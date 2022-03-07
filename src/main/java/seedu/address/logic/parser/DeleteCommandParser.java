@@ -30,7 +30,8 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         if (!arePrefixesPresent(argMultimap, PREFIX_ID) // supplied neither index nor id
                 && argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
-        } else if (arePrefixesPresent(argMultimap, PREFIX_ID) && !argMultimap.getPreamble().isEmpty()) { // supplied both index and id
+        } else if (arePrefixesPresent(argMultimap, PREFIX_ID) && !argMultimap.getPreamble().isEmpty()) {
+            // supplied both index and id
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         } else if (arePrefixesPresent(argMultimap, PREFIX_ID)) { // supplied id only
             StudentId id = ParserUtil.parseStudentId(argMultimap.getValue(PREFIX_ID).get());
