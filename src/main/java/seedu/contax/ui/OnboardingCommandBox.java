@@ -26,6 +26,20 @@ public class OnboardingCommandBox extends UiPart<Region> {
         super(FXML);
     }
 
+    public void highlight() {
+        commandTextField.setStyle("-fx-border-color: yellow; -fx-border-width: 5px");
+    }
 
+    public void unhighlight() {
+        commandTextField.setStyle("-fx-border-width: 0px");
+    }
+
+    public void disable() {
+        commandTextField.setEditable(false);
+    }
+
+    public void enable() {
+        commandTextField.setEditable(true);
+    }
 
 }
