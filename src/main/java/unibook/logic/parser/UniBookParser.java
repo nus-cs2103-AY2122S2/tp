@@ -20,8 +20,6 @@ import unibook.logic.commands.ListCommand;
 import unibook.logic.LogicManager;
 import unibook.logic.parser.exceptions.ParseException;
 
-
-
 /**
  * Parses user input.
  */
