@@ -9,8 +9,8 @@ import seedu.address.model.OldReadOnlyUserPrefs;
 import seedu.address.model.OldUserPrefs;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyIBook;
-import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.UserPrefs;
+// import seedu.address.model.ReadOnlyUserPrefs;
+// import seedu.address.model.UserPrefs;
 
 /**
  * API of the Storage component
