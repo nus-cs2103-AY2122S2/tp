@@ -236,6 +236,7 @@ Sort all people within address book.
 Format: `sort [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STATUS] [t/TAG] [o/ORDER]​`
 
 * Sorts list with specified field(s). For any two persons, latter fields will only be considered if preceding fields are equal.​
+* Order of parameters is important except for that of `o/ORDER`.
 * At least one of the optional fields must be provided (excluding order).
 * Parameters are ignored except for order `o/asc`.
 * Orders are optional and default order is "asc". Parameters of order must be either "asc" or "desc" and is case-insensitive. 

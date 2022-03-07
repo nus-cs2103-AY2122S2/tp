@@ -34,7 +34,7 @@ public class SortCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PREFIX_TAG + " " + PREFIX_NAME
             + " " + PREFIX_ORDER + "desc" + "\n";
 
-    public static final String MESSAGE_SUCCESS = "Sorted Modules successfully";
+    public static final String MESSAGE_SUCCESS = "Sorted Modules successfully: %s";
 
     private final PersonComparator personComparator;
     private final List<Prefix> fields;
@@ -50,7 +50,7 @@ public class SortCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.sortPerson(personComparator);
-        return new CommandResult(MESSAGE_SUCCESS + ": " + fields.toString());
+        return new CommandResult(String.format(MESSAGE_SUCCESS, fields.toString()));
     }
 
 
