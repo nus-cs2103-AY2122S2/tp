@@ -63,7 +63,7 @@ public class Appointment {
      * @return The end DateTime of this appointment.
      */
     public LocalDateTime getEndDateTime() {
-        return getStartDateTime().dateTime.plusMinutes(getDuration().duration);
+        return getStartDateTime().value.plusMinutes(getDuration().value);
     }
 
     /**
@@ -79,8 +79,8 @@ public class Appointment {
             return true;
         }
 
-        final LocalDateTime otherStartDateTime = other.getStartDateTime().dateTime;
-        final LocalDateTime selfStartDateTime = getStartDateTime().dateTime;
+        final LocalDateTime otherStartDateTime = other.getStartDateTime().value;
+        final LocalDateTime selfStartDateTime = getStartDateTime().value;
 
         if (otherStartDateTime.isAfter(selfStartDateTime.minusSeconds(1))) {
             // In this case, other.startDateTime is after this.startDateTime.

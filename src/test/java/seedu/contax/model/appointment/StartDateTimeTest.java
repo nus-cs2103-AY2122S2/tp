@@ -41,7 +41,7 @@ public class StartDateTimeTest {
         assertTrue(reference1.equals(new StartDateTime(referenceTime1)));
         assertTrue(reference2.equals(new StartDateTime(referenceTime2)));
         assertTrue(reference1.equals(new StartDateTime(referenceTime3))); // Only differ in seconds
-        assertEquals(referenceTime4, reference1.dateTime);
+        assertEquals(referenceTime4, reference1.value);
         assertTrue(reference1.equals(reference1));
 
         assertFalse(reference1.equals("some string"));

@@ -22,6 +22,11 @@ public class TypicalAppointments {
             .withStartDateTime(LocalDateTime.parse("2022-10-07T22:50:00"))
             .withDuration(60).build();
 
+    public static final Appointment APPOINTMENT_EXTRA = new AppointmentBuilder()
+            .withName("Some extra appointment not in the typical schedule")
+            .withStartDateTime(LocalDateTime.parse("2022-09-07T22:50:00"))
+            .withDuration(30).build();
+
     /**
      * Returns an {@code Schedule} with all the typical appointments.
      */

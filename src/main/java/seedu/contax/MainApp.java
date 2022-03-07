@@ -91,7 +91,8 @@ public class MainApp extends Application {
             initialData = new AddressBook();
         }
 
-        return new ModelManager(initialData, new Schedule(), userPrefs); // TODO [APPOINTMENT]: Replace placeholder here.
+        // TODO [APPOINTMENT]: Replace placeholder schedule here.
+        return new ModelManager(initialData, new Schedule(), userPrefs);
     }
 
     private void initLogging(Config config) {

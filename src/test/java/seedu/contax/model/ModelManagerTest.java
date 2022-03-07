@@ -1,10 +1,8 @@
 package seedu.contax.model;
 
-import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.contax.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.contax.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.contax.testutil.Assert.assertThrows;
 import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALICE;
@@ -18,7 +16,6 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.contax.commons.core.GuiSettings;
-import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.person.NameContainsKeywordsPredicate;
 import seedu.contax.testutil.AddressBookBuilder;
 import seedu.contax.testutil.ScheduleBuilder;

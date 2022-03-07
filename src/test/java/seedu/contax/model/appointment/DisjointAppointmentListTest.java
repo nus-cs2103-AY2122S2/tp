@@ -56,7 +56,7 @@ public class DisjointAppointmentListTest {
 
         Appointment editedAppointment = new AppointmentBuilder(APPOINTMENT_ALICE)
                 .withName("Another Meeting")
-                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().dateTime.plusMinutes(1)).build();
+                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().value.plusMinutes(1)).build();
         assertThrows(OverlappingAppointmentException.class, () -> appointmentList.add(editedAppointment));
     }
 
@@ -92,7 +92,7 @@ public class DisjointAppointmentListTest {
         appointmentList.add(APPOINTMENT_ALICE);
         Appointment editedAppointment = new AppointmentBuilder(APPOINTMENT_ALICE)
                 .withName("Another Meeting")
-                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().dateTime.plusMinutes(1)).build();
+                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().value.plusMinutes(1)).build();
 
         appointmentList.setAppointment(APPOINTMENT_ALICE, editedAppointment);
         DisjointAppointmentList expectedAppointmentList = new DisjointAppointmentList();
@@ -105,7 +105,7 @@ public class DisjointAppointmentListTest {
         appointmentList.add(APPOINTMENT_ALICE);
         Appointment disjointAppointment = new AppointmentBuilder(APPOINTMENT_ALICE)
                 .withName("Another Meeting")
-                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().dateTime.plusYears(1)).build();
+                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().value.plusYears(1)).build();
 
         appointmentList.setAppointment(APPOINTMENT_ALICE, disjointAppointment);
         DisjointAppointmentList expectedAppointmentList = new DisjointAppointmentList();
@@ -117,7 +117,7 @@ public class DisjointAppointmentListTest {
     public void setAppointment_editedAppointmentOverlaps_throwsOverlappingAppointmentException() {
         Appointment disjointAppointment = new AppointmentBuilder(APPOINTMENT_ALICE)
                 .withName("Another Meeting")
-                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().dateTime.plusYears(1)).build();
+                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().value.plusYears(1)).build();
         appointmentList.add(APPOINTMENT_ALICE);
         appointmentList.add(disjointAppointment);
 

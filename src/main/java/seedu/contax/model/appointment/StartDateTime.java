@@ -13,7 +13,7 @@ public class StartDateTime {
     public static final String DATETIME_FORMAT = "dd-MM-yyyy HH:mm";
     public static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern(DATETIME_FORMAT);
 
-    public final LocalDateTime dateTime;
+    public final LocalDateTime value;
 
     /**
      * Constructs a {@code StartDateTime}
@@ -22,23 +22,23 @@ public class StartDateTime {
      */
     public StartDateTime(LocalDateTime dateTime) {
         requireNonNull(dateTime);
-        this.dateTime = dateTime.withSecond(0).withNano(0);
+        this.value = dateTime.withSecond(0).withNano(0);
     }
 
     @Override
     public String toString() {
-        return DATETIME_FORMATTER.format(dateTime);
+        return DATETIME_FORMATTER.format(value);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof StartDateTime // instanceof handles nulls
-                && dateTime.equals(((StartDateTime) other).dateTime)); // state check
+                && value.equals(((StartDateTime) other).value)); // state check
     }
 
     @Override
     public int hashCode() {
-        return dateTime.hashCode();
+        return value.hashCode();
     }
 }

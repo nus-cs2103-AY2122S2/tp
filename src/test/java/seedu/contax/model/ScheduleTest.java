@@ -45,7 +45,7 @@ public class ScheduleTest {
     public void resetData_withOverlappingAppointments_throwsOverlappingAppointmentException() {
         // Construct two appointments that have overlapping periods
         Appointment overlappingAppointment = new AppointmentBuilder(APPOINTMENT_ALICE)
-                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().dateTime.plusMinutes(1))
+                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().value.plusMinutes(1))
                 .build();
         List<Appointment> newAppointments = Arrays.asList(APPOINTMENT_ALICE, overlappingAppointment);
         ScheduleStub newData = new ScheduleStub(newAppointments);

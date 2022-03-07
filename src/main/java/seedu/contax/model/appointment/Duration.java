@@ -9,7 +9,7 @@ import static seedu.contax.commons.util.AppUtil.checkArgument;
 public class Duration {
     public static final String MESSAGE_CONSTRAINTS = "Duration should be a positive integer";
 
-    public final int duration;
+    public final int value;
 
     /**
      * Constructs a {@code Duration}
@@ -18,7 +18,7 @@ public class Duration {
      */
     public Duration(int duration) {
         checkArgument(isValidDuration(duration), MESSAGE_CONSTRAINTS);
-        this.duration = duration;
+        this.value = duration;
     }
 
     /**
@@ -34,18 +34,18 @@ public class Duration {
 
     @Override
     public String toString() {
-        return String.format("%d Minutes", duration);
+        return String.format("%d Minutes", value);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Duration // instanceof handles nulls
-                && duration == ((Duration) other).duration); // state check
+                && value == ((Duration) other).value); // state check
     }
 
     @Override
     public int hashCode() {
-        return Integer.hashCode(duration);
+        return Integer.hashCode(value);
     }
 }
