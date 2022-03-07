@@ -45,15 +45,15 @@ public class LabTest {
     @Test
     public void submitLab_alreadySubmitted_throwsLabAlreadySubmittedException() {
         Lab stub = new Lab("1");
-        stub.submitLab();
+        stub = stub.submitLab();
         assertThrows(LabAlreadySubmittedException.class, stub::submitLab);
     }
 
     @Test
     public void gradeLab_alreadyGraded_throwsLabAlreadyGradedException() {
         Lab stub = new Lab("1");
-        stub.submitLab();
-        stub.gradeLab();
+        stub = stub.submitLab();
+        stub = stub.gradeLab();
         assertThrows(LabAlreadyGradedException.class, stub::gradeLab);
     }
 

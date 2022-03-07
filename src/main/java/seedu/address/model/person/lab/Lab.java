@@ -9,8 +9,8 @@ import seedu.address.model.person.exceptions.LabNotSubmittedException;
 
 
 /**
- * Represents a Lab entry in the address book.
- * Is valid as declared in {@link #isValidLab(String)}
+ * Represents a Lab entry.
+ * Guarantees: immutable; is valid as declared in {@link #isValidLab(String)}
  */
 public class Lab {
 
@@ -24,7 +24,7 @@ public class Lab {
 
     public final int labNumber;
 
-    private LabStatus labStatus;
+    private final LabStatus labStatus;
 
     /**
      * Constructs an {@code Lab}.
@@ -32,10 +32,21 @@ public class Lab {
      * @param labNumber A valid lab number.
      */
     public Lab(String labNumber) {
+        // labStatus is always initialized to {@code LabStatus.UNSUBMITTED}
+        this(labNumber, LabStatus.UNSUBMITTED);
+    }
+
+    /**
+     * Constructs an {@code Lab}.
+     *
+     * @param labNumber A valid lab number.
+     * @param labStatus The status of the Lab to be created.
+     */
+    private Lab(String labNumber, LabStatus labStatus) {
         requireNonNull(labNumber);
         checkArgument(isValidLab(labNumber), MESSAGE_CONSTRAINTS);
         this.labNumber = Integer.parseInt(labNumber);
-        setLabStatus(LabStatus.UNSUBMITTED); // labStatus is always initialized to {@code LabStatus.UNSUBMITTED}
+        this.labStatus = labStatus;
     }
 
     /**
@@ -45,25 +56,21 @@ public class Lab {
         return test.matches(VALIDATION_REGEX);
     }
 
-    private void setLabStatus(LabStatus labStatus) {
-        this.labStatus = labStatus;
-    }
-
     /**
-     * Sets the lab status of the lab to {@code LabStatus.SUBMITTED}
+     * Returns a new immutable lab with labStatus equals to {@code LabStatus.SUBMITTED}
      */
-    public void submitLab() {
+    public Lab submitLab() {
         if (labStatus == LabStatus.SUBMITTED || labStatus == LabStatus.GRADED) {
             throw new LabAlreadySubmittedException(labNumber);
         }
 
-        setLabStatus(LabStatus.SUBMITTED);
+        return new Lab(String.valueOf(labNumber), LabStatus.SUBMITTED);
     }
 
     /**
-     * Sets the lab status of the lab to {@code LabStatus.GRADED}
+     * Returns a new immutable lab with labStatus equals to {@code LabStatus.GRADED}
      */
-    public void gradeLab() {
+    public Lab gradeLab() {
         if (labStatus == LabStatus.UNSUBMITTED) {
             throw new LabNotSubmittedException(labNumber);
         }
@@ -72,7 +79,7 @@ public class Lab {
             throw new LabAlreadyGradedException(labNumber);
         }
 
-        setLabStatus(LabStatus.GRADED);
+        return new Lab(String.valueOf(labNumber), LabStatus.GRADED);
     }
 
     @Override
@@ -84,7 +91,8 @@ public class Lab {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Lab // instanceof handles nulls
-                && labNumber == (((Lab) other).labNumber)); // state check
+                && labNumber == (((Lab) other).labNumber)) // state check
+                && labStatus == ((Lab) other).labStatus;
     }
 
     @Override
