@@ -23,7 +23,7 @@ public class LabList implements Iterable<Lab> {
      */
     public boolean contains(Lab toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::equals);
+        return internalList.stream().anyMatch(toCheck::isSameLab);
     }
 
     /**
@@ -117,7 +117,7 @@ public class LabList implements Iterable<Lab> {
     private boolean labsAreUnique(List<Lab> labs) {
         for (int i = 0; i < labs.size() - 1; i++) {
             for (int j = i + 1; j < labs.size(); j++) {
-                if (labs.get(i).equals(labs.get(j))) {
+                if (labs.get(i).isSameLab(labs.get(j))) {
                     return false;
                 }
             }

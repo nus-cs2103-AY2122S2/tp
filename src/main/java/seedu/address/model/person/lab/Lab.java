@@ -3,6 +3,7 @@ package seedu.address.model.person.lab;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.LabAlreadyGradedException;
 import seedu.address.model.person.exceptions.LabAlreadySubmittedException;
 import seedu.address.model.person.exceptions.LabNotSubmittedException;
@@ -82,6 +83,19 @@ public class Lab {
         return new Lab(String.valueOf(labNumber), LabStatus.GRADED);
     }
 
+    /**
+     * Returns true if both students have the same name.
+     * This defines a weaker notion of equality between two students.
+     */
+    public boolean isSameLab(Lab otherLab) {
+        if (otherLab == this) {
+            return true;
+        }
+
+        return otherLab != null
+                && otherLab.labNumber == this.labNumber;
+    }
+
     @Override
     public String toString() {
         return "Lab " + labNumber;
@@ -99,4 +113,5 @@ public class Lab {
     public int hashCode() {
         return ("Lab " + labNumber).hashCode();
     }
+
 }
