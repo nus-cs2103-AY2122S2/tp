@@ -4,11 +4,14 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+import seedu.address.model.entity.Entity;
+import seedu.address.model.entity.EntityType;
+
 /**
  * Represents a Student in the TAssist.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Student {
+public class Student implements Entity {
 
     // Identity fields
     private final StudentId studentId;
@@ -54,6 +57,11 @@ public class Student {
 
         return otherStudent != null
                 && otherStudent.getName().equals(getName());
+    }
+
+    @Override
+    public EntityType getEntityType() {
+        return EntityType.STUDENT;
     }
 
     /**
