@@ -29,7 +29,7 @@ public class TypicalPersons {
             .withGithubUsername("alice-paul").withEmail("alice@example.com")
             .withPhone("94351253")
             .withTags("friends")
-            .withSkillSet("C_50").build();
+            .withSkillSet("C_20").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withGithubUsername("benson-123")
             .withEmail("johnd@example.com").withPhone("98765432")
@@ -48,7 +48,7 @@ public class TypicalPersons {
             .withPhone("9482224")
             .withEmail("werner@example.com")
             .withGithubUsername("ellelle")
-            .withSkillSet("C_50").build();
+            .withSkillSet("C_80").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz")
             .withPhone("9482427")
             .withEmail("lydia@example.com")
@@ -58,7 +58,7 @@ public class TypicalPersons {
             .withPhone("9482442")
             .withEmail("anna@example.com")
             .withGithubUsername("best-coder")
-            .withSkillSet("C_50").build();
+            .withSkillSet("C_30").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")

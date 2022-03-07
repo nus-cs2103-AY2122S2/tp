@@ -49,6 +49,7 @@ public class SortCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof SortCommand // instanceof handles nulls
-                && predicate.equals(((SortCommand) other).predicate)); // state check
+                && predicate.equals(((SortCommand) other).predicate)
+                && comparator.equals(((SortCommand) other).comparator)); // state check
     }
 }
