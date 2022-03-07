@@ -24,6 +24,8 @@ public class OnboardingCommandBox extends UiPart<Region> {
      */
     public OnboardingCommandBox() {
         super(FXML);
+        commandTextField.setStyle("-fx-border-width: 5px");
+
     }
 
     public void highlight() {
@@ -31,15 +33,22 @@ public class OnboardingCommandBox extends UiPart<Region> {
     }
 
     public void unhighlight() {
-        commandTextField.setStyle("-fx-border-width: 0px");
+        commandTextField.setStyle("-fx-border-color: #383838; -fx-border-width: 5px");
     }
 
     public void disable() {
-        commandTextField.setEditable(false);
+        commandTextField.setDisable(true);
     }
 
     public void enable() {
-        commandTextField.setEditable(true);
+        commandTextField.setDisable(false);
     }
 
+    public void clear() {
+        commandTextField.setText("");
+    }
+
+    public String getText() {
+        return commandTextField.getText();
+    }
 }
