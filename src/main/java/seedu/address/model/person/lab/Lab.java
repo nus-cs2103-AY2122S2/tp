@@ -57,7 +57,7 @@ public class Lab {
             throw new LabAlreadySubmittedException(labNumber);
         }
 
-        setLabStatus(LabStatus.GRADED);
+        setLabStatus(LabStatus.SUBMITTED);
     }
 
     /**
