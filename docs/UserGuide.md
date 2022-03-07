@@ -141,7 +141,7 @@ Format: `edit o/OPTION [INDEX] [m/MODULE] [n/NAME] [p/PHONE] [e/EMAIL] [nm/NEWMO
 
 Examples:
 *  `edit 1 p/91234567 e/prof@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `prof@example.com` respectively.
-*  `edit o/module m/CS2103 n/Software Engineering nm/CS2103T ` Edits the module code of the module with code `CS2103` to be named as `Software Engineering` and have a new code `CS2103T`
+*  `edit o/module m/CS2103 n/Software Engineering  ` Edits the module code of the module with code `CS2103` to be named as `Software Engineering` and have a new code `CS2103T`
 
 ### Locating persons by name: `find`
 
@@ -250,7 +250,7 @@ Action | Format, Examples
 **Add** | `add o/OPTION n/NAME [p/PHONE_NUMBER] [e/EMAIL] [m/MODULE]… ​` <br> e.g., `add o/module n/Software Engineering m/cs2103`<br> e.g., `add o/module n/Computer Organisation m/cs2100`<br> e.g., `add o/professor n/James Ho p/22224444 e/jamesho@example.com a/123 Clementi Rd S123466 m/cs2103`<br> e.g., `add o/student n/Peter Ho p/81234567 e/peterho@u.nus.edu m/cs2103 m/cs2100`
 **Clear** | `clear`
 **Delete** | `delete m/MODULECODE [o/OPTION]` <br> e.g. `delete m/CS2103` <br> e.g. `delete m/CS2103 o/PROF` <br> `delete m/MODULECODE g/GROUPCODE [o/OPTION]` <br> e.g. `delete m/CS2105 g/G04` <br> e.g. `delete m/CS2105 g/04 o/ALL` <br> `delete n/STUDENTNAME` <br> e.g. `delete n/Alan Tan` <br> `delete n/PROFNAME` <br> e.g. `delete n/Ooi Wei Tsang`
-**Edit** | `edit o/OPTION [INDEX] [m/MODULE] [n/NAME] [p/PHONE] [e/EMAIL] [nm/NEWMODULE] `<br> e.g. `edit o/person 1 p/91234567 e/prof@email.com` <br> e.g. `edit o/module m/CS2103 n/Software Engineering nm/CS2103T`
+**Edit** | `edit o/OPTION [INDEX] [m/MODULE] [n/NAME] [p/PHONE] [e/EMAIL] `<br> e.g. `edit o/person 1 p/91234567 e/prof@email.com` <br> e.g. `edit o/module m/CS2103 n/Software Engineering`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list [o/LISTING_CRITERIA CRITERIA_INFORMATION]` <br>e.g., `list o/module CS2103`
 **Help** | `help`
