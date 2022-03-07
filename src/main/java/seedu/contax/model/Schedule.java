@@ -61,6 +61,14 @@ public class Schedule implements ReadOnlySchedule {
     }
 
     /**
+     * Returns true if an appointment with the same identity as {@code target} exists in the schedule.
+     */
+    public boolean hasOverlappingAppointment(Appointment target) {
+        requireNonNull(target);
+        return appointments.containsOverlapping(target);
+    }
+
+    /**
      * Adds an appointment to the schedule.
      * An overlapping appointment must not already exist in the schedule.
      */

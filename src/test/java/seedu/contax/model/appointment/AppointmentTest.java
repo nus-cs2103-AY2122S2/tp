@@ -149,4 +149,14 @@ public class AppointmentTest {
         assertFalse(appointment1.isOverlapping(appointment12));
         assertFalse(appointment12.isOverlapping(appointment1));
     }
+
+    @Test
+    public void withPerson() {
+        Appointment appointment1 = new AppointmentBuilder().withDuration(30).build();
+        Appointment appointment2 = new AppointmentBuilder().withDuration(30).withPerson(null).build();
+        Appointment appointment3 = new AppointmentBuilder().withDuration(30).withPerson(BOB).build();
+
+        assertTrue(appointment1.withPerson(null).equals(appointment2));
+        assertTrue(appointment3.equals(appointment1.withPerson(BOB)));
+    }
 }

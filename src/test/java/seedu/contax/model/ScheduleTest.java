@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.contax.testutil.Assert.assertThrows;
 import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALICE;
+import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALONE;
 import static seedu.contax.testutil.TypicalAppointments.getTypicalSchedule;
 
 import java.util.Arrays;
@@ -74,6 +75,19 @@ public class ScheduleTest {
         schedule.addAppointment(APPOINTMENT_ALICE);
         Appointment clonedAlice = new AppointmentBuilder(APPOINTMENT_ALICE).build();
         assertTrue(schedule.hasAppointment(clonedAlice));
+    }
+
+    @Test
+    public void hasOverlappingAppointment_duplicatedAppointmentInList_returnsTrue() {
+        schedule.addAppointment(APPOINTMENT_ALICE);
+        Appointment duplicate = new AppointmentBuilder(APPOINTMENT_ALICE).build();
+        assertTrue(schedule.hasOverlappingAppointment(duplicate));
+    }
+
+    @Test
+    public void hasOverlappingAppointment_disjointAppointmentsInList_returnsFalse() {
+        schedule.addAppointment(APPOINTMENT_ALICE);
+        assertFalse(schedule.hasOverlappingAppointment(APPOINTMENT_ALONE));
     }
 
     @Test

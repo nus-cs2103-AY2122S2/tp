@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.contax.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.contax.testutil.Assert.assertThrows;
 import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALICE;
+import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALONE;
 import static seedu.contax.testutil.TypicalPersons.ALICE;
 import static seedu.contax.testutil.TypicalPersons.BENSON;
 
@@ -16,8 +17,10 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.contax.commons.core.GuiSettings;
+import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.person.NameContainsKeywordsPredicate;
 import seedu.contax.testutil.AddressBookBuilder;
+import seedu.contax.testutil.AppointmentBuilder;
 import seedu.contax.testutil.ScheduleBuilder;
 
 public class ModelManagerTest {
@@ -121,6 +124,19 @@ public class ModelManagerTest {
     public void hasAppointment_appointmentInSchedule_returnsTrue() {
         modelManager.addAppointment(APPOINTMENT_ALICE);
         assertTrue(modelManager.hasAppointment(APPOINTMENT_ALICE));
+    }
+
+    @Test
+    public void hasOverlappingAppointment_duplicatedAppointmentInList_returnsTrue() {
+        modelManager.addAppointment(APPOINTMENT_ALICE);
+        Appointment duplicate = new AppointmentBuilder(APPOINTMENT_ALICE).build();
+        assertTrue(modelManager.hasOverlappingAppointment(duplicate));
+    }
+
+    @Test
+    public void hasOverlappingAppointment_disjointAppointmentsInList_returnsFalse() {
+        modelManager.addAppointment(APPOINTMENT_ALICE);
+        assertFalse(modelManager.hasOverlappingAppointment(APPOINTMENT_ALONE));
     }
 
     @Test

@@ -71,6 +71,21 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
     }
 
     /**
+     * Returns true if the list of appointments contains some overlapping appointment with {@code target}.
+     *
+     * @param target The {@code appointment} object to check.
+     * @return True if the list of appointments contains some appoint that overlaps with {@code target},
+     *         otherwise false.
+     */
+    public boolean containsOverlapping(Appointment target) {
+        requireNonNull(target);
+        long overlappingAppointmentCount = appointments.stream().filter((appointment) -> (
+                appointment.isOverlapping(target))).count();
+
+        return overlappingAppointmentCount > 0;
+    }
+
+    /**
      * Adds the appointment {@code target} to this list of appointments.
      *
      * @param target The {@code appointment} object to add to the list.

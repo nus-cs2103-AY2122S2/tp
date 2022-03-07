@@ -45,6 +45,38 @@ public class DisjointAppointmentListTest {
     }
 
     @Test
+    public void containsOverlapping_nullAppointment_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> appointmentList.containsOverlapping(null));
+    }
+
+    @Test
+    public void containsOverlapping_appointmentAlreadyInList_returnsTrue() {
+        appointmentList.add(APPOINTMENT_ALICE);
+        assertTrue(appointmentList.containsOverlapping(APPOINTMENT_ALICE));
+    }
+
+    @Test
+    public void containsOverlapping_duplicatedAppointmentInList_returnsTrue() {
+        appointmentList.add(APPOINTMENT_ALICE);
+        Appointment duplicate = new AppointmentBuilder(APPOINTMENT_ALICE).build();
+        assertTrue(appointmentList.containsOverlapping(duplicate));
+    }
+
+    @Test
+    public void containsOverlapping_overlappingAppointmentsInList_returnsTrue() {
+        appointmentList.add(APPOINTMENT_ALICE);
+        Appointment editedAppointment = new AppointmentBuilder(APPOINTMENT_ALICE)
+                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().value.plusMinutes(10)).build();
+        assertTrue(appointmentList.containsOverlapping(editedAppointment));
+    }
+
+    @Test
+    public void containsOverlapping_disjointAppointmentsInList_returnsFalse() {
+        appointmentList.add(APPOINTMENT_ALICE);
+        assertFalse(appointmentList.containsOverlapping(APPOINTMENT_ALONE));
+    }
+
+    @Test
     public void add_nullAppointment_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> appointmentList.add(null));
     }

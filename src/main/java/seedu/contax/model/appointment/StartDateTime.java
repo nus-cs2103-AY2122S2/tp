@@ -12,6 +12,7 @@ import java.time.format.DateTimeFormatter;
 public class StartDateTime {
     public static final String DATETIME_FORMAT = "dd-MM-yyyy HH:mm";
     public static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern(DATETIME_FORMAT);
+    public static final String MESSAGE_CONSTRAINTS = "DateTime has to be valid";
 
     public final LocalDateTime value;
 

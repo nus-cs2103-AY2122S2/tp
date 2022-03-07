@@ -58,6 +58,16 @@ public class Appointment {
     }
 
     /**
+     * Creates a new {@code Appointment} instance with the supplied {@code Person} object.
+     *
+     * @param newPerson The person object to replace the current associated person.
+     * @return A new immutable instance of Appointment with the updated Person.
+     */
+    public Appointment withPerson(Person newPerson) {
+        return new Appointment(name, startDateTime, duration, newPerson);
+    }
+
+    /**
      * Returns the ending DateTime of this appointment.
      *
      * @return The end DateTime of this appointment.

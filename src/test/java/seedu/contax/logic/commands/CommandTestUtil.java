@@ -3,12 +3,16 @@ package seedu.contax.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_DURATION;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.contax.testutil.Assert.assertThrows;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -37,9 +41,6 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
-    public static final String VALID_APPOINTMENT_NAME_AMELIA = "Meeting With Amelia";
-    public static final String VALID_APPOINTMENT_DURATION_HOUR = "60";
-
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
@@ -56,6 +57,18 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+
+    public static final String VALID_APPOINTMENT_NAME_AMELIA = "Meeting With Amelia";
+    public static final String VALID_APPOINTMENT_NAME_ALONE = "Do some work alone";
+    public static final String VALID_APPOINTMENT_DATE = "07-10-2022";
+    public static final String VALID_APPOINTMENT_TIME = "22:50";
+    public static final String VALID_APPOINTMENT_DURATION_HOUR = "60";
+
+    public static final String APPOINTMENT_NAME_AMELIA = " " + PREFIX_NAME + VALID_APPOINTMENT_NAME_AMELIA;
+    public static final String APPOINTMENT_NAME_ALONE = " " + PREFIX_NAME + VALID_APPOINTMENT_NAME_ALONE;
+    public static final String APPOINTMENT_DATE = " " + PREFIX_DATE + VALID_APPOINTMENT_DATE;
+    public static final String APPOINTMENT_TIME = " " + PREFIX_TIME + VALID_APPOINTMENT_TIME;
+    public static final String APPOINTMENT_DURATION = " " + PREFIX_DURATION + VALID_APPOINTMENT_DURATION_HOUR;
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
