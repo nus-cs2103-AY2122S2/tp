@@ -7,39 +7,39 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
+import seedu.address.model.OldModel;
+import seedu.address.model.OldModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code AddCommand}.
+ * Contains integration tests (interaction with the OldModel) for {@code AddCommand}.
  */
 public class AddCommandIntegrationTest {
 
-    private Model model;
+    private OldModel oldModel;
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        oldModel = new OldModelManager(getTypicalAddressBook(), new UserPrefs());
     }
 
     @Test
     public void execute_newPerson_success() {
         Person validPerson = new PersonBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addPerson(validPerson);
+        OldModel expectedOldModel = new OldModelManager(oldModel.getAddressBook(), new UserPrefs());
+        expectedOldModel.addPerson(validPerson);
 
-        assertCommandSuccess(new AddCommand(validPerson), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, validPerson), expectedModel);
+        assertCommandSuccess(new AddCommand(validPerson), oldModel,
+                String.format(AddCommand.MESSAGE_SUCCESS, validPerson), expectedOldModel);
     }
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Person personInList = model.getAddressBook().getPersonList().get(0);
-        assertCommandFailure(new AddCommand(personInList), model, AddCommand.MESSAGE_DUPLICATE_PERSON);
+        Person personInList = oldModel.getAddressBook().getPersonList().get(0);
+        assertCommandFailure(new AddCommand(personInList), oldModel, AddCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
 }
