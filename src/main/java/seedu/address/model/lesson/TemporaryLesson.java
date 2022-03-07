@@ -15,8 +15,8 @@ public class TemporaryLesson extends Lesson {
     /**
      * Every field must be present and not null.
      */
-    protected TemporaryLesson(LessonName name, Subject subject, DateTimeSlot dateTimeSlot) {
-        super(name, subject);
+    protected TemporaryLesson(LessonName name, Subject subject, LessonAddress address, DateTimeSlot dateTimeSlot) {
+        super(name, subject, address);
         requireAllNonNull(dateTimeSlot);
         this.dateTimeSlot = dateTimeSlot;
     }

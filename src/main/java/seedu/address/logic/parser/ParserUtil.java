@@ -13,6 +13,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lesson.DateTimeSlot;
+import seedu.address.model.lesson.LessonAddress;
 import seedu.address.model.lesson.LessonName;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.person.Address;
@@ -156,6 +157,22 @@ public class ParserUtil {
             throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
         }
         return trimmedSubject;
+    }
+
+    /**
+     * Parses a {@code String address} into a {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code address} is invalid.
+     */
+    public static String parseStartLessonAddress(String address) throws ParseException {
+        requireNonNull(address);
+        String trimmedAddress = address.trim();
+        if (!LessonAddress.isValidAddress(trimmedAddress)) {
+            throw new ParseException(LessonAddress.MESSAGE_CONSTRAINTS);
+        }
+
+        return trimmedAddress;
     }
 
     /**

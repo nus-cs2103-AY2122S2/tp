@@ -13,6 +13,7 @@ public abstract class Lesson {
     // Identity fields
     private final LessonName name;
     private final Subject subject;
+    private final LessonAddress address;
 
     // Data fields
     // no data fields in abstract class
@@ -20,10 +21,11 @@ public abstract class Lesson {
     /**
      * Every field must be present and not null.
      */
-    protected Lesson(LessonName name, Subject subject) {
+    protected Lesson(LessonName name, Subject subject, LessonAddress address) {
         requireAllNonNull(name, subject);
         this.name = name;
         this.subject = subject;
+        this.address = address;
     }
 
     /**
@@ -33,9 +35,9 @@ public abstract class Lesson {
      * @param startDateTime date and starting time of the lesson
      * @param hours how long the lesson would last
      */
-    public static TemporaryLesson makeTemporaryLesson(String name, String subject,
+    public static TemporaryLesson makeTemporaryLesson(String name, String subject, String address,
                                                       LocalDateTime startDateTime, int hours) {
-        return Lesson.makeTemporaryLesson(name, subject, startDateTime, hours, 0);
+        return Lesson.makeTemporaryLesson(name, subject, address, startDateTime, hours, 0);
     }
 
     /**
@@ -45,15 +47,17 @@ public abstract class Lesson {
      * @param startDateTime date and starting time of the lesson
      * @param hours how long the lesson would last
      */
-    public static TemporaryLesson makeTemporaryLesson(String name, String subject, LocalDateTime startDateTime,
-                                                      int hours, int minutes) {
+    public static TemporaryLesson makeTemporaryLesson(String name, String subject, String address,
+                                                      LocalDateTime startDateTime, int hours, int minutes) {
         LessonName lessonName = new LessonName(name);
         Subject lessonSubject = new Subject(subject);
         DateTimeSlot lessonDateTimeSlot = new DateTimeSlot(startDateTime, hours, minutes);
+        LessonAddress lessonAddress = new LessonAddress(address);
 
         return new TemporaryLesson(
                 lessonName,
                 lessonSubject,
+                lessonAddress,
                 lessonDateTimeSlot
         );
     }

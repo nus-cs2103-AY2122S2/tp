@@ -4,6 +4,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION_HOURS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION_MINUTES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
@@ -30,11 +31,12 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
      */
     public AddLessonCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_LESSON_NAME, PREFIX_SUBJECT, PREFIX_DATE, PREFIX_START_TIME,
-                        PREFIX_DURATION_HOURS, PREFIX_DURATION_MINUTES, PREFIX_RECURRING);
+                ArgumentTokenizer.tokenize(args, PREFIX_LESSON_NAME, PREFIX_SUBJECT, PREFIX_LESSON_ADDRESS,
+                        PREFIX_DATE, PREFIX_START_TIME, PREFIX_DURATION_HOURS,
+                        PREFIX_DURATION_MINUTES, PREFIX_RECURRING);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_LESSON_NAME, PREFIX_SUBJECT, PREFIX_DATE, PREFIX_START_TIME,
-                PREFIX_DURATION_HOURS, PREFIX_DURATION_MINUTES)
+        if (!arePrefixesPresent(argMultimap, PREFIX_LESSON_NAME, PREFIX_SUBJECT, PREFIX_LESSON_ADDRESS,
+                PREFIX_DATE, PREFIX_START_TIME, PREFIX_DURATION_HOURS, PREFIX_DURATION_MINUTES)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLessonCommand.MESSAGE_USAGE));
         }
@@ -43,6 +45,7 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
         String subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
         LocalDate date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
         String startTime = ParserUtil.parseStartTime(argMultimap.getValue(PREFIX_START_TIME).get());
+        String address = ParserUtil.parseStartLessonAddress(argMultimap.getValue(PREFIX_LESSON_ADDRESS).get());
 
         int durationHours = ParserUtil.parseDurationHours(argMultimap.getValue(PREFIX_DURATION_HOURS).get());
         int durationMinutes = ParserUtil.parseDurationMinutes(argMultimap.getValue(PREFIX_DURATION_MINUTES).get());
@@ -50,10 +53,10 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
         Lesson lesson;
         if (isRecurring(argMultimap)) {
             // TODO: change this to instantiate a recurring lesson here
-            lesson = Lesson.makeTemporaryLesson(lessonName, subject,
+            lesson = Lesson.makeTemporaryLesson(lessonName, subject, address,
                     getLessonDateTime(date, startTime), durationHours, durationMinutes);
         } else {
-            lesson = Lesson.makeTemporaryLesson(lessonName, subject,
+            lesson = Lesson.makeTemporaryLesson(lessonName, subject, address,
                     getLessonDateTime(date, startTime), durationHours, durationMinutes);
         }
 

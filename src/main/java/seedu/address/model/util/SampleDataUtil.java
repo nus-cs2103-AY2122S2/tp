@@ -50,9 +50,12 @@ public class SampleDataUtil {
         LocalDateTime thirdLessonDate = LocalDateTime.of(2022, 1, 9, 0, 50);
 
         return new Lesson[] {
-            Lesson.makeTemporaryLesson("Make up lesson for George", "Geography", firstLessonDate, 2),
-            Lesson.makeTemporaryLesson("Trial lesson for Jake", "Biology", secondLessonDate, 2),
-            Lesson.makeTemporaryLesson("Make up lesson for Henry", "Physics", thirdLessonDate, 2, 5)
+            Lesson.makeTemporaryLesson("Make up lesson for George", "Geography",
+                    "Blk 47 Tampines Street 20, #17-35", firstLessonDate, 2),
+            Lesson.makeTemporaryLesson("Trial lesson for Jake", "Biology",
+                    "Blk 47 Tampines Street 20, #17-35", secondLessonDate, 2),
+            Lesson.makeTemporaryLesson("Make up lesson for Henry", "Physics",
+                    "Blk 47 Tampines Street 20, #17-35", thirdLessonDate, 2, 5)
         };
     }
 
