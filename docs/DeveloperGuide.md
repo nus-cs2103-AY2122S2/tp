@@ -476,14 +476,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
+* **Group list**: Every existing groups in ArchDuke.
+* **Group name**: An identifier for a group that suggests the function of that group.
+* **Group task**: A piece of work to be done or undertaken by one or more student contacts in a group.
 * **Mainstream OS**: Windows, Linux, Unix, OS-X.
 * **Student contact**: A contact of a student.
-* **Student contact attribute**: A piece of information related to a student contact i.e. name, phone number, email, academic major.
-* **Task**: A piece of work to be done or undertaken by student contacts.
+* **Student contact attribute**: A piece of information related to a student contact i.e. name, phone number, email, academic major, optional tag.
+* **Student contact list**: Every existing student contacts in ArchDuke or in a group.
+* **Student group**: A number of student contact that are classed together. A group can have zero to any number of student contacts. A student contact can be assigned to a group.
+* **Student group attribute**: A piece of information related to a group i.e. group name.
 * **Tag**: An optional one-word identifier of a student contact. A student contact can have multiple tags.
-* **Student Group**: A number of student contact that are classed together. A group can have at least one student contact. A student contact can be assigned to a group.
-* **Student Group Attribute**: A piece of information related to a group i.e. group name.
-* **Group Name**: An identifier for a group that suggests the function of that group.
 
 --------------------------------------------------------------------------------------------------------------------
 
