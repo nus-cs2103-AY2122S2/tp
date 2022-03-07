@@ -9,7 +9,6 @@ import java.util.Set;
 import unibook.commons.core.index.Index;
 import unibook.commons.util.StringUtil;
 import unibook.logic.parser.exceptions.ParseException;
-import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
 import unibook.model.module.ModuleName;
 import unibook.model.person.Email;

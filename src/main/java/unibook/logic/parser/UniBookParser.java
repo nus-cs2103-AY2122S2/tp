@@ -1,6 +1,5 @@
 package unibook.logic.parser;
 
-import unibook.commons.core.LogsCenter;
 import static unibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static unibook.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
@@ -8,6 +7,8 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import unibook.commons.core.LogsCenter;
+import unibook.logic.LogicManager;
 import unibook.logic.commands.AddCommand;
 import unibook.logic.commands.ClearCommand;
 import unibook.logic.commands.Command;
@@ -17,7 +18,6 @@ import unibook.logic.commands.ExitCommand;
 import unibook.logic.commands.FindCommand;
 import unibook.logic.commands.HelpCommand;
 import unibook.logic.commands.ListCommand;
-import unibook.logic.LogicManager;
 import unibook.logic.parser.exceptions.ParseException;
 
 /**
@@ -78,5 +78,4 @@ public class UniBookParser {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }

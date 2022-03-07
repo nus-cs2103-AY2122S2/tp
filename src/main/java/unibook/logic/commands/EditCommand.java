@@ -1,14 +1,14 @@
 package unibook.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static unibook.logic.parser.CliSyntax.PREFIX_OPTION;
 import static unibook.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static unibook.logic.parser.CliSyntax.PREFIX_NAME;
-import static unibook.logic.parser.CliSyntax.PREFIX_PHONE;
 import static unibook.logic.parser.CliSyntax.PREFIX_MODULE;
+import static unibook.logic.parser.CliSyntax.PREFIX_NAME;
+import static unibook.logic.parser.CliSyntax.PREFIX_OPTION;
+import static unibook.logic.parser.CliSyntax.PREFIX_PHONE;
 import static unibook.logic.parser.CliSyntax.PREFIX_TAG;
-import static unibook.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static unibook.model.Model.PREDICATE_SHOW_ALL_MODULES;
+import static unibook.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -22,9 +22,15 @@ import unibook.commons.core.index.Index;
 import unibook.commons.util.CollectionUtil;
 import unibook.logic.commands.exceptions.CommandException;
 import unibook.model.Model;
-import unibook.model.module.*;
 import unibook.model.module.Module;
-import unibook.model.person.*;
+import unibook.model.module.ModuleCode;
+import unibook.model.module.ModuleName;
+import unibook.model.person.Email;
+import unibook.model.person.Name;
+import unibook.model.person.Person;
+import unibook.model.person.Phone;
+import unibook.model.person.Professor;
+import unibook.model.person.Student;
 import unibook.model.tag.Tag;
 
 /**

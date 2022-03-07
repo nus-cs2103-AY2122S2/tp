@@ -3,11 +3,11 @@ package unibook.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static unibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static unibook.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static unibook.logic.parser.CliSyntax.PREFIX_MODULE;
 import static unibook.logic.parser.CliSyntax.PREFIX_NAME;
+import static unibook.logic.parser.CliSyntax.PREFIX_OPTION;
 import static unibook.logic.parser.CliSyntax.PREFIX_PHONE;
 import static unibook.logic.parser.CliSyntax.PREFIX_TAG;
-import static unibook.logic.parser.CliSyntax.PREFIX_OPTION;
-import static unibook.logic.parser.CliSyntax.PREFIX_MODULE;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -19,8 +19,8 @@ import unibook.commons.core.LogsCenter;
 import unibook.commons.core.index.Index;
 import unibook.logic.LogicManager;
 import unibook.logic.commands.EditCommand;
-import unibook.logic.commands.EditCommand.EditPersonDescriptor;
 import unibook.logic.commands.EditCommand.EditModuleDescriptor;
+import unibook.logic.commands.EditCommand.EditPersonDescriptor;
 import unibook.logic.parser.exceptions.ParseException;
 import unibook.model.tag.Tag;
 
@@ -38,7 +38,12 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_OPTION, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TAG, PREFIX_MODULE);
+                ArgumentTokenizer.tokenize(args, PREFIX_OPTION,
+                                                 PREFIX_NAME,
+                                                 PREFIX_PHONE,
+                                                 PREFIX_EMAIL,
+                                                 PREFIX_TAG,
+                                                 PREFIX_MODULE);
 
         Index index;
 
@@ -46,9 +51,11 @@ public class EditCommandParser implements Parser<EditCommand> {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             if (argMultimap.getValue(PREFIX_OPTION).get().equals("person")) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.PERSON_MESSAGE_USAGE), pe);
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                                                        EditCommand.PERSON_MESSAGE_USAGE), pe);
             } else {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MODULE_MESSAGE_USAGE), pe);
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                                                        EditCommand.MODULE_MESSAGE_USAGE), pe);
             }
         }
 
@@ -77,7 +84,8 @@ public class EditCommandParser implements Parser<EditCommand> {
                 editModuleDescriptor.setModuleName(ParserUtil.parseModuleName(argMultimap.getValue(PREFIX_NAME).get()));
             }
             if (argMultimap.getValue(PREFIX_MODULE).isPresent()) {
-                editModuleDescriptor.setModuleCode(ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE).get()));
+                editModuleDescriptor.setModuleCode(ParserUtil.parseModuleCode(argMultimap
+                                                                              .getValue(PREFIX_MODULE).get()));
             }
 
             if (!editModuleDescriptor.isAnyFieldEdited()) {
