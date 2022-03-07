@@ -72,7 +72,7 @@ public class Log {
 
     @Override
     public String toString() {
-        return this.title + "\n" + this.description;
+        return this.title + "\n" + this.description + "\n\n";
     }
 
     @Override

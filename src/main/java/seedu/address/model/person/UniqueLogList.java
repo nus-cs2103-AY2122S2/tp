@@ -88,4 +88,43 @@ public class UniqueLogList {
         }
     }
 
+    /**
+     * Replaces the contents of the list with all of {@code logs}.
+     * {@code logs} must not contain duplicate log.
+     */
+    public void setLogs(List<Log> logs) {
+        requireAllNonNull(logs);
+        if (!this.logsAreUnique(logs)) {
+            throw new DuplicateLogException();
+        }
+        this.internalList.setAll(logs);
+    }
+
+    /**
+     * Returns true if and only if {@code logs} contains only unique (by title) logs.
+     */
+    public boolean logsAreUnique(List<Log> logs) {
+        int n = logs.size();
+        for (int i = 0; i < n- 1; i++) { // iterate like N choose 2
+            for (int j = i + 1; j < n; j++) {
+                if (logs.get(i).isSameLog(logs.get(j))) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Returns the list of logs as an unmodifiable {@code ObservableList}.
+     */
+    public ObservableList<Log> asUnmodifiableObservableList() {
+        return this.internalUnmodifiableList;
+    }
+
+    @Override
+    public int hashCode() {
+        return this.internalList.hashCode();
+    }
+
 }
