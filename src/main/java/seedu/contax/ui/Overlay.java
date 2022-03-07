@@ -55,7 +55,7 @@ public class Overlay extends UiPart<Region> {
         topOverlay.setStyle("-fx-background-color: rgb(0, 0, 0, 0.5)");
         bottomOverlay.setStyle("-fx-background-color: rgb(0, 0, 0, 0.5)");
         topOverlay.layoutXProperty().bind(boundX);
-        topOverlay.setLayoutY(0.0);
+        topOverlay.layoutYProperty().bind(new SimpleDoubleProperty(0));
         topOverlay.minHeightProperty().bind(boundY);
         topOverlay.minWidthProperty().bind(parentWidth);
         topOverlay.maxHeightProperty().bind(boundY);
