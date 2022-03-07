@@ -22,14 +22,14 @@ public class ModuleCode {
      */
     public ModuleCode(String moduleCode) {
         requireNonNull(moduleCode);
-        checkArgument(isValidModuleName(moduleCode), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidModuleCode(moduleCode), MESSAGE_CONSTRAINTS);
         this.moduleCode = moduleCode;
     }
 
     /**
      * Returns true if a given string is a valid module name.
      */
-    public static boolean isValidModuleName(String test) {
+    public static boolean isValidModuleCode(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 

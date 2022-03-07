@@ -9,6 +9,9 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.ModuleName;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -78,6 +81,38 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+
+    // find a way to find the module code inside the storage database then update
+    /**
+     * Parses a {@code String moduleName} into an {@code moduleName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code moduleName} is invalid.
+     */
+    public static ModuleName parseModuleName(String moduleName) throws ParseException {
+        requireNonNull(moduleName);
+        String trimmedModule = moduleName.trim();
+        if (!ModuleName.isValidModuleName(trimmedModule)) {
+            throw new ParseException(ModuleName.MESSAGE_CONSTRAINTS);
+        }
+        return new ModuleName(trimmedModule);
+    }
+
+    /**
+     * Parses a {@code String moduleCode} into an {@code moduleCode}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code moduleCode} is invalid.
+     */
+    public static ModuleCode parseModuleCode(String moduleCode) throws ParseException {
+        requireNonNull(moduleCode);
+        String trimmedCode = moduleCode.trim();
+        if (!ModuleCode.isValidModuleCode(trimmedCode)) {
+            throw new ParseException(ModuleCode.MESSAGE_CONSTRAINTS);
+        }
+        return new ModuleCode(trimmedCode);
     }
 
     /**

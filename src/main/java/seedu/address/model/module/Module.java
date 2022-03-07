@@ -128,6 +128,8 @@ public class Module {
         builder.append(getModuleCode())
                 .append("; Name: ")
                 .append(getModuleName())
+                .append("; Module Code: ")
+                .append(getModuleCode())
                 .append("; Professors: ")
                 .append(getProfessors());
         return builder.toString();
