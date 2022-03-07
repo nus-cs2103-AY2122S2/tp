@@ -12,14 +12,13 @@ import seedu.address.model.tag.Tag;
  */
 public class AddTagCommand extends Command {
 
-    public static final String COMMAND_WORD = "add_Tag";
+    public static final String COMMAND_WORD = "add_tag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a tag to the address book. "
             + "Parameters: "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_TAG + "friends ";
 
     public static final String MESSAGE_SUCCESS = "New tag added: %1$s";
     public static final String MESSAGE_DUPLICATE_TAG = "This tag already exists in the address book";
@@ -27,7 +26,7 @@ public class AddTagCommand extends Command {
     private final Tag toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddTagCommand to add the specified {@code Tag}
      */
     public AddTagCommand(Tag tag) {
         requireNonNull(tag);
