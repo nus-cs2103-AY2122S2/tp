@@ -1,5 +1,5 @@
 package seedu.address.logic.commands;
-
+/*
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
@@ -20,6 +20,8 @@ import seedu.address.model.OldModel;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+
+ */
 
 /**
  * Contains helper methods for testing commands.
