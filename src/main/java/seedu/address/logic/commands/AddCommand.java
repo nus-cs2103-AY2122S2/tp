@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPIRY_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 
-
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.product.Product;
@@ -31,7 +30,7 @@ public class AddCommand extends Command {
             + PREFIX_CATEGORY + "Bread "
             + PREFIX_EXPIRY_DATE + "01/01/2022 "
             + PREFIX_PRICE + "3.00 "
-            + PREFIX_DESCRIPTION + "Very Tasty"
+            + PREFIX_DESCRIPTION + "Very Tasty";
 
     public static final String MESSAGE_SUCCESS = "New product added: %1$s";
 
@@ -47,8 +46,8 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(OldModel oldModel) throws CommandException {
-        requireNonNull(oldModel);
+    public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
 
         model.addProduct(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));

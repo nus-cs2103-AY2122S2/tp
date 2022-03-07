@@ -45,6 +45,7 @@ public class DeleteCommand extends Command {
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
 
          */
+        return new CommandResult(null);
     }
 
     @Override
