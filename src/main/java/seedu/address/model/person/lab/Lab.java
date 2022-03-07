@@ -3,7 +3,8 @@ package seedu.address.model.person.lab;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import seedu.address.model.person.Person;
+import java.util.Objects;
+
 import seedu.address.model.person.exceptions.LabAlreadyGradedException;
 import seedu.address.model.person.exceptions.LabAlreadySubmittedException;
 import seedu.address.model.person.exceptions.LabNotSubmittedException;
@@ -118,7 +119,7 @@ public class Lab {
 
     @Override
     public int hashCode() {
-        return ("Lab " + labNumber).hashCode();
+        return Objects.hash(labNumber, labStatus);
     }
 
 }
