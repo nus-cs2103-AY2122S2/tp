@@ -23,6 +23,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class MainWindow extends UiPart<Stage> {
 
+    // This is also a Ui part in MainWindow.
+    protected static ResultDisplay resultDisplay;
     private static final String FXML = "MainWindow.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
@@ -32,8 +34,8 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
-    private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private AddWindow addWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -66,6 +68,9 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
+        // Pass the logic into AddWindow so we can use it to execute commands as well
+        addWindow = new AddWindow(logic);
     }
 
     public Stage getPrimaryStage() {
@@ -147,6 +152,18 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the add window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleAdd() {
+        if (!addWindow.isShowing()) {
+            addWindow.show();
+        } else {
+            addWindow.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -160,6 +177,7 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        addWindow.hide();
         primaryStage.hide();
     }
 
