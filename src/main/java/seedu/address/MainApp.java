@@ -16,11 +16,11 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
+import seedu.address.model.OldModel;
+import seedu.address.model.OldModelManager;
+import seedu.address.model.OldReadOnlyUserPrefs;
+import seedu.address.model.OldUserPrefs;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
@@ -43,7 +43,7 @@ public class MainApp extends Application {
     protected Ui ui;
     protected Logic logic;
     protected Storage storage;
-    protected Model model;
+    protected OldModel oldModel;
     protected Config config;
 
     @Override
@@ -55,25 +55,25 @@ public class MainApp extends Application {
         config = initConfig(appParameters.getConfigPath());
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
-        UserPrefs userPrefs = initPrefs(userPrefsStorage);
+        OldUserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
         initLogging(config);
 
-        model = initModelManager(storage, userPrefs);
+        oldModel = initModelManager(storage, userPrefs);
 
-        logic = new LogicManager(model, storage);
+        logic = new LogicManager(oldModel, storage);
 
         ui = new UiManager(logic);
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
+     * Returns a {@code OldModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
      * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
-    private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
+    private OldModel initModelManager(Storage storage, OldReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlyAddressBook> addressBookOptional;
         ReadOnlyAddressBook initialData;
         try {
@@ -90,7 +90,7 @@ public class MainApp extends Application {
             initialData = new AddressBook();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        return new OldModelManager(initialData, userPrefs);
     }
 
     private void initLogging(Config config) {
@@ -138,21 +138,21 @@ public class MainApp extends Application {
      * or a new {@code UserPrefs} with default configuration if errors occur when
      * reading from the file.
      */
-    protected UserPrefs initPrefs(UserPrefsStorage storage) {
+    protected OldUserPrefs initPrefs(UserPrefsStorage storage) {
         Path prefsFilePath = storage.getUserPrefsFilePath();
         logger.info("Using prefs file : " + prefsFilePath);
 
-        UserPrefs initializedPrefs;
+        OldUserPrefs initializedPrefs;
         try {
-            Optional<UserPrefs> prefsOptional = storage.readUserPrefs();
-            initializedPrefs = prefsOptional.orElse(new UserPrefs());
+            Optional<OldUserPrefs> prefsOptional = storage.readUserPrefs();
+            initializedPrefs = prefsOptional.orElse(new OldUserPrefs());
         } catch (DataConversionException e) {
             logger.warning("UserPrefs file at " + prefsFilePath + " is not in the correct format. "
                     + "Using default user prefs");
-            initializedPrefs = new UserPrefs();
+            initializedPrefs = new OldUserPrefs();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initializedPrefs = new UserPrefs();
+            initializedPrefs = new OldUserPrefs();
         }
 
         //Update prefs file in case it was missing to begin with or there are new/unused fields
@@ -175,7 +175,7 @@ public class MainApp extends Application {
     public void stop() {
         logger.info("============================ [ Stopping Address Book ] =============================");
         try {
-            storage.saveUserPrefs(model.getUserPrefs());
+            storage.saveUserPrefs(oldModel.getUserPrefs());
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }

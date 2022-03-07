@@ -11,20 +11,20 @@ import seedu.address.commons.core.GuiSettings;
 /**
  * Represents User's preferences.
  */
-public class UserPrefs implements ReadOnlyUserPrefs {
+public class OldUserPrefs implements OldReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
-    private Path iBookFilePath = Paths.get("data" , "ibook.json");
+    private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
      */
-    public UserPrefs() {}
+    public OldUserPrefs() {}
 
     /**
      * Creates a {@code UserPrefs} with the prefs in {@code userPrefs}.
      */
-    public UserPrefs(ReadOnlyUserPrefs userPrefs) {
+    public OldUserPrefs(OldReadOnlyUserPrefs userPrefs) {
         this();
         resetData(userPrefs);
     }
@@ -32,10 +32,10 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     /**
      * Resets the existing data of this {@code UserPrefs} with {@code newUserPrefs}.
      */
-    public void resetData(ReadOnlyUserPrefs newUserPrefs) {
+    public void resetData(OldReadOnlyUserPrefs newUserPrefs) {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
-        setIBookFilePath(newUserPrefs.getIBookFilePath());
+        setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
     }
 
     public GuiSettings getGuiSettings() {
@@ -47,13 +47,13 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.guiSettings = guiSettings;
     }
 
-    public Path getIBookFilePath() {
-        return iBookFilePath;
+    public Path getAddressBookFilePath() {
+        return addressBookFilePath;
     }
 
-    public void setIBookFilePath(Path iBookFilePath) {
-        requireNonNull(iBookFilePath);
-        this.iBookFilePath = iBookFilePath;
+    public void setAddressBookFilePath(Path addressBookFilePath) {
+        requireNonNull(addressBookFilePath);
+        this.addressBookFilePath = addressBookFilePath;
     }
 
     @Override
@@ -61,26 +61,26 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         if (other == this) {
             return true;
         }
-        if (!(other instanceof UserPrefs)) { //this handles null as well.
+        if (!(other instanceof OldUserPrefs)) { //this handles null as well.
             return false;
         }
 
-        UserPrefs o = (UserPrefs) other;
+        OldUserPrefs o = (OldUserPrefs) other;
 
         return guiSettings.equals(o.guiSettings)
-                && iBookFilePath.equals(o.iBookFilePath);
+                && addressBookFilePath.equals(o.addressBookFilePath);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, iBookFilePath);
+        return Objects.hash(guiSettings, addressBookFilePath);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings);
-        sb.append("\nLocal data file location : " + iBookFilePath);
+        sb.append("\nLocal data file location : " + addressBookFilePath);
         return sb.toString();
     }
 

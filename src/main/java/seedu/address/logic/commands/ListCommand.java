@@ -1,9 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.OldModel.PREDICATE_SHOW_ALL_PERSONS;
 
-import seedu.address.model.Model;
+import seedu.address.model.OldModel;
 
 /**
  * Lists all persons in the address book to the user.
@@ -16,9 +16,9 @@ public class ListCommand extends Command {
 
 
     @Override
-    public CommandResult execute(Model model) {
-        requireNonNull(model);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public CommandResult execute(OldModel oldModel) {
+        requireNonNull(oldModel);
+        oldModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

@@ -12,8 +12,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.AddressBook;
+import seedu.address.model.OldUserPrefs;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.UserPrefs;
 
 public class StorageManagerTest {
 
@@ -40,10 +40,10 @@ public class StorageManagerTest {
          * {@link JsonUserPrefsStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link JsonUserPrefsStorageTest} class.
          */
-        UserPrefs original = new UserPrefs();
+        OldUserPrefs original = new OldUserPrefs();
         original.setGuiSettings(new GuiSettings(300, 600, 4, 6));
         storageManager.saveUserPrefs(original);
-        UserPrefs retrieved = storageManager.readUserPrefs().get();
+        OldUserPrefs retrieved = storageManager.readUserPrefs().get();
         assertEquals(original, retrieved);
     }
 
