@@ -57,7 +57,7 @@ public class TypicalPersons {
             .withEmail("kk@example.com").withAddress("some street")
             .withLogs(TypicalLogs.LONG_LOG).build(); // single log
 
-    public static final Person LAUREN = new PersonBuilder().withName("Luaren Wong").withPhone("93829384")
+    public static final Person LAUREN = new PersonBuilder().withName("Lauren Wong").withPhone("93829384")
             .withEmail("laurenwong@example.com").withAddress("queen st.")
             .withLogs(TypicalLogs.SHORT_LOG).build(); // single log
 
@@ -88,6 +88,8 @@ public class TypicalPersons {
     }
 
     public static List<Person> getTypicalPersons() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE,
+                FIONA, GEORGE, JAMES, KAREN, LAUREN, MAVIS
+        ));
     }
 }

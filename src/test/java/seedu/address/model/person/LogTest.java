@@ -21,9 +21,6 @@ public class LogTest {
         for (int i = 0; i < Log.TITLE_LENGTH_CONSTRAINT - 1; i++) {
             longTitle += "c";
         }
-        System.out.println(longTitle.length());
-        System.out.println(Log.TITLE_LENGTH_CONSTRAINT);
-        System.out.println(longTitle.length() < Log.TITLE_LENGTH_CONSTRAINT);
         assertTrue(Log.isValidTitle(longTitle)); // exactly as many characters
         assertFalse(Log.isValidTitle(longTitle + "c")); // >limit characters
 

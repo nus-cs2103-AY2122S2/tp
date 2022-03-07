@@ -16,7 +16,7 @@ public class Log {
 
     // constraints
     public static final int TITLE_LENGTH_CONSTRAINT = 50;
-    private static final String TITLE_CONSTRAINTS = "Titles of logs must satisfy:\n"
+    public static final String TITLE_CONSTRAINTS = "Titles of logs must satisfy:\n"
             + "1. Not be trivial (i.e. not empty or contain only spaces\n"
             + "2. Be at most " + Log.TITLE_LENGTH_CONSTRAINT + " characters long. "
             + "This is because of display limitations.";
