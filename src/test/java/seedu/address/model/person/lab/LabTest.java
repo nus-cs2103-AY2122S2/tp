@@ -6,6 +6,10 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.person.exceptions.LabAlreadyGradedException;
+import seedu.address.model.person.exceptions.LabAlreadySubmittedException;
+import seedu.address.model.person.exceptions.LabNotSubmittedException;
+
 
 public class LabTest {
 
@@ -36,5 +40,26 @@ public class LabTest {
         assertTrue(Lab.isValidLab("1")); // valid integer
         assertTrue(Lab.isValidLab("2")); // valid integer
         assertTrue(Lab.isValidLab("123456789")); // valid integer
+    }
+
+    @Test
+    public void submitLab_alreadySubmitted_throwsLabAlreadySubmittedException() {
+        Lab stub = new Lab("1");
+        stub.submitLab();
+        assertThrows(LabAlreadySubmittedException.class, stub::submitLab);
+    }
+
+    @Test
+    public void gradeLab_alreadyGraded_throwsLabAlreadyGradedException() {
+        Lab stub = new Lab("1");
+        stub.submitLab();
+        stub.gradeLab();
+        assertThrows(LabAlreadyGradedException.class, stub::gradeLab);
+    }
+
+    @Test
+    public void gradeLab_notYetSubmitted_throwsLabNotSubmittedException() {
+        Lab stub = new Lab("1");
+        assertThrows(LabNotSubmittedException.class, stub::gradeLab);
     }
 }
