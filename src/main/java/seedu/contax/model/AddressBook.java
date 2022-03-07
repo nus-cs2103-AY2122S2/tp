@@ -51,6 +51,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.persons.setPersons(persons);
     }
 
+    public void setTags(List<Tag> tags) {
+        this.tags.setTags(tags);
+    }
+
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
@@ -58,6 +62,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setTags(newData.getTagList());
     }
 
     //// person-level operations
@@ -112,7 +117,10 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
+        String numPersons = persons.asUnmodifiableObservableList().size() + " presons";
+        String numTags = tags.asUnmodifiableObservableList().size() + " tags";
+        return numPersons + " | " + numTags;
+        // return persons.asUnmodifiableObservableList().size() + " persons";
         // TODO: refine later
     }
 

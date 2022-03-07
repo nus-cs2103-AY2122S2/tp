@@ -98,7 +98,7 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String tag} into a {@code Tag}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Leading and trailing whitespaces will be trimmed and converted to lowercase.
      *
      * @throws ParseException if the given {@code tag} is invalid.
      */
