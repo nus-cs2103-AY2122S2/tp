@@ -8,6 +8,7 @@ import static seedu.contax.logic.parser.CliSyntax.PREFIX_PERSON;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_TIME;
 
 import java.util.List;
+import java.util.Objects;
 
 import seedu.contax.commons.core.Messages;
 import seedu.contax.commons.core.index.Index;
@@ -81,6 +82,7 @@ public class AddAppointmentCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddAppointmentCommand // instanceof handles nulls
-                && toAdd.equals(((AddAppointmentCommand) other).toAdd));
+                && toAdd.equals(((AddAppointmentCommand) other).toAdd)
+                && Objects.equals(personIndex, ((AddAppointmentCommand) other).personIndex));
     }
 }

@@ -11,7 +11,6 @@ import java.util.stream.Stream;
 
 import seedu.contax.commons.core.index.Index;
 import seedu.contax.logic.commands.AddAppointmentCommand;
-import seedu.contax.logic.commands.AddCommand;
 import seedu.contax.logic.parser.exceptions.ParseException;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.appointment.Duration;
@@ -35,7 +34,8 @@ public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DATE, PREFIX_TIME, PREFIX_DURATION)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddAppointmentCommand.MESSAGE_USAGE));
         }
 
         Name name = ParserUtil.parseAppointmentName(argMultimap.getValue(PREFIX_NAME).get());
