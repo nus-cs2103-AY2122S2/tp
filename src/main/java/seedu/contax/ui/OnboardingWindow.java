@@ -67,12 +67,13 @@ public class OnboardingWindow extends UiPart<Stage> {
                 parentPane.heightProperty(), parentPane.widthProperty());
     }
 
+    public void coverAll() {
+        overlay.cover(parentPane.layoutXProperty(), parentPane.layoutYProperty(),
+                parentPane.heightProperty(), parentPane.widthProperty());
+    }
+
     public void fillInner() {
-//        overlay.init();
-//        cover(parentPane);
         parentPane.getChildren().add(overlay.getRoot());
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
-        overlay.init();
-        showOnly(commandBoxPlaceholder);
     }
 }
