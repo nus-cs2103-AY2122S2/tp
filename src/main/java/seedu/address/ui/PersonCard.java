@@ -46,8 +46,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
-    private Label status;
-    @FXML
     private ImageView statusImage;
 
     /**
@@ -59,12 +57,11 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
-        status.setText(person.getStatus().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
 
         // Get the image to display
-        Image imageToDisplay = getImageToDisplay(status.getText());
+        Image imageToDisplay = getImageToDisplay(person.getStatus().value);
         // Then set the image
         statusImage.setImage(imageToDisplay);
 
