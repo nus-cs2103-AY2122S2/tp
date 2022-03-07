@@ -12,4 +12,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
 
+    /* Prefix definition for import CSV */
+    public static final Prefix PREFIX_FILE = new Prefix("f/");
 }

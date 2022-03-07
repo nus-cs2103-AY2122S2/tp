@@ -9,6 +9,7 @@ import java.util.Set;
 import seedu.contax.commons.core.index.Index;
 import seedu.contax.commons.util.StringUtil;
 import seedu.contax.logic.parser.exceptions.ParseException;
+import seedu.contax.model.ImportCsv;
 import seedu.contax.model.person.Address;
 import seedu.contax.model.person.Email;
 import seedu.contax.model.person.Name;
@@ -120,5 +121,24 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@String position} into an {@code integer}.
+     *
+     * @throws ParseException
+     */
+    public static int parseCsvPositions(String position) throws ParseException {
+        requireNonNull(position);
+        String trimmedPosition = position.trim();
+        try {
+            int finalPosition = Integer.parseInt(trimmedPosition);
+            if (finalPosition < 1) {
+                throw new ParseException(ImportCsv.MESSAGE_CONSTRAINTS);
+            }
+            return finalPosition;
+        } catch (NumberFormatException e) {
+            throw new ParseException(ImportCsv.MESSAGE_CONSTRAINTS);
+        }
     }
 }
