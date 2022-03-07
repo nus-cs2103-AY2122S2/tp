@@ -9,25 +9,25 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Desmond Tan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/mazx4960.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/mazx4960)]
+[[portfolio](team/mazx4960.md)]
 
-* Role: Project Advisor
+* Role: Integration, Testing, Code quality
 
-### Jane Doe
+### Lai Mei Tin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/1001mei.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/1001mei)]
+[[portfolio](team/1001mei.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer
+* Responsibilities: Documentation
 
 ### Loo Xin Wei
 
@@ -38,22 +38,22 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Tan Kel Zin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/mechfrog88.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/mechfrog88)]
+[[portfolio](team/mechfrog88.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: In charge of UI, JavaFX expert
+
+### Tan Weiu Cheng
+
+<img src="images/davidtan0527.png" width="200px">
+
+[[github](http://github.com/DavidTan0527)]
+[[portfolio](team/weiucheng.md)]
+
+* Role: Developer
+* Responsibilities: Integration, Code Quality, Git expert
