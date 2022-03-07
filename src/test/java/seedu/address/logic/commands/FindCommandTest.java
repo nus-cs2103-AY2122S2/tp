@@ -17,15 +17,15 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.OldModel;
 import seedu.address.model.OldModelManager;
-import seedu.address.model.UserPrefs;
+import seedu.address.model.OldUserPrefs;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the OldModel) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private OldModel oldModel = new OldModelManager(getTypicalAddressBook(), new UserPrefs());
-    private OldModel expectedOldModel = new OldModelManager(getTypicalAddressBook(), new UserPrefs());
+    private OldModel oldModel = new OldModelManager(getTypicalAddressBook(), new OldUserPrefs());
+    private OldModel expectedOldModel = new OldModelManager(getTypicalAddressBook(), new OldUserPrefs());
 
     @Test
     public void equals() {

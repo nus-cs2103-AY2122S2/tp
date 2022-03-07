@@ -19,9 +19,10 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.*;
+import seedu.address.model.AddressBook;
 import seedu.address.model.OldModel;
 import seedu.address.model.OldModelManager;
+import seedu.address.model.OldUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -31,7 +32,7 @@ import seedu.address.testutil.PersonBuilder;
  */
 public class EditCommandTest {
 
-    private OldModel oldModel = new OldModelManager(getTypicalAddressBook(), new UserPrefs());
+    private OldModel oldModel = new OldModelManager(getTypicalAddressBook(), new OldUserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -41,7 +42,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
-        OldModel expectedOldModel = new OldModelManager(new AddressBook(oldModel.getAddressBook()), new UserPrefs());
+        OldModel expectedOldModel = new OldModelManager(new AddressBook(oldModel.getAddressBook()), new OldUserPrefs());
         expectedOldModel.setPerson(oldModel.getFilteredPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editCommand, oldModel, expectedMessage, expectedOldModel);
@@ -62,7 +63,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
-        OldModel expectedOldModel = new OldModelManager(new AddressBook(oldModel.getAddressBook()), new UserPrefs());
+        OldModel expectedOldModel = new OldModelManager(new AddressBook(oldModel.getAddressBook()), new OldUserPrefs());
         expectedOldModel.setPerson(lastPerson, editedPerson);
 
         assertCommandSuccess(editCommand, oldModel, expectedMessage, expectedOldModel);
@@ -75,7 +76,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
-        OldModel expectedOldModel = new OldModelManager(new AddressBook(oldModel.getAddressBook()), new UserPrefs());
+        OldModel expectedOldModel = new OldModelManager(new AddressBook(oldModel.getAddressBook()), new OldUserPrefs());
 
         assertCommandSuccess(editCommand, oldModel, expectedMessage, expectedOldModel);
     }
@@ -91,7 +92,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
-        OldModel expectedOldModel = new OldModelManager(new AddressBook(oldModel.getAddressBook()), new UserPrefs());
+        OldModel expectedOldModel = new OldModelManager(new AddressBook(oldModel.getAddressBook()), new OldUserPrefs());
         expectedOldModel.setPerson(oldModel.getFilteredPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editCommand, oldModel, expectedMessage, expectedOldModel);

@@ -22,9 +22,10 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.*;
 import seedu.address.model.OldModel;
 import seedu.address.model.OldModelManager;
+import seedu.address.model.OldUserPrefs;
+import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
@@ -128,7 +129,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        OldModel expectedOldModel = new OldModelManager(oldModel.getAddressBook(), new UserPrefs());
+        OldModel expectedOldModel = new OldModelManager(oldModel.getAddressBook(), new OldUserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedOldModel);
     }
 

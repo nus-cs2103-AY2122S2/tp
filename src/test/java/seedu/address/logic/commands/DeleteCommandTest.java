@@ -15,7 +15,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.OldModel;
 import seedu.address.model.OldModelManager;
-import seedu.address.model.UserPrefs;
+import seedu.address.model.OldUserPrefs;
 import seedu.address.model.person.Person;
 
 /**
@@ -24,7 +24,7 @@ import seedu.address.model.person.Person;
  */
 public class DeleteCommandTest {
 
-    private OldModel oldModel = new OldModelManager(getTypicalAddressBook(), new UserPrefs());
+    private OldModel oldModel = new OldModelManager(getTypicalAddressBook(), new OldUserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -33,7 +33,7 @@ public class DeleteCommandTest {
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
 
-        OldModelManager expectedModel = new OldModelManager(oldModel.getAddressBook(), new UserPrefs());
+        OldModelManager expectedModel = new OldModelManager(oldModel.getAddressBook(), new OldUserPrefs());
         expectedModel.deletePerson(personToDelete);
 
         assertCommandSuccess(deleteCommand, oldModel, expectedMessage, expectedModel);
@@ -56,7 +56,7 @@ public class DeleteCommandTest {
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
 
-        OldModel expectedOldModel = new OldModelManager(oldModel.getAddressBook(), new UserPrefs());
+        OldModel expectedOldModel = new OldModelManager(oldModel.getAddressBook(), new OldUserPrefs());
         expectedOldModel.deletePerson(personToDelete);
         showNoPerson(expectedOldModel);
 

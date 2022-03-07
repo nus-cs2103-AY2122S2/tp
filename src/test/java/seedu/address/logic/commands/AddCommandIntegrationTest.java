@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.OldModel;
 import seedu.address.model.OldModelManager;
-import seedu.address.model.UserPrefs;
+import seedu.address.model.OldUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -22,14 +22,14 @@ public class AddCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        oldModel = new OldModelManager(getTypicalAddressBook(), new UserPrefs());
+        oldModel = new OldModelManager(getTypicalAddressBook(), new OldUserPrefs());
     }
 
     @Test
     public void execute_newPerson_success() {
         Person validPerson = new PersonBuilder().build();
 
-        OldModel expectedOldModel = new OldModelManager(oldModel.getAddressBook(), new UserPrefs());
+        OldModel expectedOldModel = new OldModelManager(oldModel.getAddressBook(), new OldUserPrefs());
         expectedOldModel.addPerson(validPerson);
 
         assertCommandSuccess(new AddCommand(validPerson), oldModel,

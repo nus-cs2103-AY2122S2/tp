@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.OldModel;
 import seedu.address.model.OldModelManager;
-import seedu.address.model.UserPrefs;
+import seedu.address.model.OldUserPrefs;
 
 /**
  * Contains integration tests (interaction with the OldModel) and unit tests for ListCommand.
@@ -22,8 +22,8 @@ public class ListCommandTest {
 
     @BeforeEach
     public void setUp() {
-        oldModel = new OldModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedOldModel = new OldModelManager(oldModel.getAddressBook(), new UserPrefs());
+        oldModel = new OldModelManager(getTypicalAddressBook(), new OldUserPrefs());
+        expectedOldModel = new OldModelManager(oldModel.getAddressBook(), new OldUserPrefs());
     }
 
     @Test
