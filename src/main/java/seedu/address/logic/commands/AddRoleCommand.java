@@ -34,7 +34,7 @@ public class AddRoleCommand extends Command {
             + PREFIX_STATUS + "STATUS "
             + PREFIX_DEADLINE + "DEADLINE "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
-            + PREFIX_STIPEND + "STIPEND "
+            + PREFIX_STIPEND + "STIPEND\n"
             + "Example: " + COMMAND_WORD + " " + "1 "
             + PREFIX_NAME + "Software Engineer "
             + PREFIX_STATUS + "pending "
