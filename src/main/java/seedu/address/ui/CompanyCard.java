@@ -29,7 +29,7 @@ public class CompanyCard extends UiPart<Region> {
 
     public final Company company;
     public final ObservableList<Role> roleList;
-    public final RoleListPanel roleListPanel;
+    private RoleListPanel roleListPanel;
 
     @FXML
     private HBox cardPane;
@@ -78,8 +78,7 @@ public class CompanyCard extends UiPart<Region> {
         }
         setRoleTags();
         roleList = company.getRoleManager().getRoles();
-        roleListPanel = new RoleListPanel(roleList);
-        roleListPanelPlaceholder.getChildren().add(roleListPanel.getRoot());
+        setRoleListPanelPlaceholder();
 
         roleList.addListener((ListChangeListener<Role>) change -> {
             roleTags.getChildren().clear();
@@ -87,8 +86,7 @@ public class CompanyCard extends UiPart<Region> {
             if (roleList.isEmpty()) {
                 roleListPanelPlaceholder.getChildren().clear();
             } else {
-                roleListPanelPlaceholder.getChildren().add(roleListPanel.getRoot());
-                roleListPanelPlaceholder.setManaged(true);
+                setRoleListPanelPlaceholder();
             }
         });
     }
@@ -100,6 +98,14 @@ public class CompanyCard extends UiPart<Region> {
     public void setRoleTags() {
         company.getRoleManager().getSetRoles().stream()
                 .forEach(roleTag -> roleTags.getChildren().add(new Label(roleTag.getName().fullName)));
+    }
+
+    /**
+     * Update <code>roleListPanelPlaceholder</code> to reflect the contents of the current <code>roleList</code>
+     */
+    public void setRoleListPanelPlaceholder() {
+        roleListPanel = new RoleListPanel(roleList);
+        roleListPanelPlaceholder.getChildren().add(roleListPanel.getRoot());
     }
 
     @Override
