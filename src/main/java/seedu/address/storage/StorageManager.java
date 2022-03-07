@@ -11,8 +11,8 @@ import seedu.address.model.OldReadOnlyUserPrefs;
 import seedu.address.model.OldUserPrefs;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyIBook;
-import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.UserPrefs;
+// import seedu.address.model.ReadOnlyUserPrefs;
+// import seedu.address.model.UserPrefs;
 
 /**
  * Manages storage of IBook data in local storage.
