@@ -29,7 +29,7 @@ public class StatusCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_STATUS + "[STATUS]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_STATUS + "Likes to swim.";
+            + PREFIX_STATUS + "blacklist";
 
     private final Index index;
     private final Status status;

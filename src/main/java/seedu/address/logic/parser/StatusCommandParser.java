@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 
+import java.util.NoSuchElementException;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.StatusCommand;
@@ -29,8 +31,13 @@ public class StatusCommandParser implements Parser<StatusCommand> {
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, StatusCommand.MESSAGE_USAGE), ive);
         }
-        Status status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
 
-        return new StatusCommand(index, status);
+        try {
+            Status status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
+            return new StatusCommand(index, status);
+        } catch (NoSuchElementException nsee) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, StatusCommand.MESSAGE_USAGE), nsee);
+        }
+
     }
 }
