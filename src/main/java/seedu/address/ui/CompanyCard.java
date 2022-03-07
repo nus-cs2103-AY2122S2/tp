@@ -86,6 +86,9 @@ public class CompanyCard extends UiPart<Region> {
             setRoleTags();
             if (roleList.isEmpty()) {
                 roleListPanelPlaceholder.getChildren().clear();
+            } else {
+                roleListPanelPlaceholder.getChildren().add(roleListPanel.getRoot());
+                roleListPanelPlaceholder.setManaged(true);
             }
         });
     }
