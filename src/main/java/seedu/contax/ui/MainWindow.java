@@ -70,7 +70,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
-        onboardingWindow = new OnboardingWindow();
+        onboardingWindow = new OnboardingWindow(primaryStage);
     }
 
     public Stage getPrimaryStage() {
@@ -158,6 +158,7 @@ public class MainWindow extends UiPart<Stage> {
         onboardingWindow.setSize(primaryStage.getHeight(), primaryStage.getWidth());
         onboardingWindow.translate(primaryStage.getX(), primaryStage.getY());
         onboardingWindow.show();
+        primaryStage.hide();
     }
 
     void show() {
