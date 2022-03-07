@@ -58,9 +58,15 @@ public class RoleManager {
     }
 
     /**
-     * Delete <code>Role</code> from list of roles tagged to a company
-     * @param index 1-based index of <code>Role</code> in the list of roles
+     * Checks if this role exists in the roleList
+     * @param role role to check if it is duplicated
+     * @return Boolean representing if this role is already stored
      */
+    public boolean hasRole(Role role) {
+        requireNonNull(role);
+        return roleList.contains(role);
+    }
+
     public void deleteRole(int index) {
         this.roleList.remove(index);
     }
