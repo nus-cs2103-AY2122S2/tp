@@ -32,8 +32,8 @@ public class PersonBuilder {
     private Phone phone;
     private Email email;
     private Address address;
-    private MatriculationNumber number;
-    private CovidStatus status;
+    private MatriculationNumber matriculationNumber;
+    private CovidStatus covidStatus;
     private Set<Tag> tags;
 
     /**
@@ -41,9 +41,12 @@ public class PersonBuilder {
      */
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
+        faculty = new Faculty(DEFAULT_FACULTY);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        matriculationNumber = new MatriculationNumber(DEFAULT_MATRICULATION_NUMBER);
+        covidStatus = new CovidStatus(DEFAULT_COVID_STATUS);
         tags = new HashSet<>();
     }
 
@@ -52,9 +55,12 @@ public class PersonBuilder {
      */
     public PersonBuilder(Person personToCopy) {
         name = personToCopy.getName();
+        faculty = personToCopy.getFaculty();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        matriculationNumber = personToCopy.getMatriculationNumber();
+        covidStatus = personToCopy.getStatus();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -98,8 +104,35 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@Code Faculty} of the {@Code Person} that we are building
+     * This method is to be used in future tests
+     */
+    public PersonBuilder withFaculty(String faculty) {
+        this.faculty = new Faculty(faculty);
+        return this;
+    }
+
+    /**
+     * Sets the {@Code MatriculationNumber} of the {@Code Person} that we are building
+     * This method is to be used in future tests
+     */
+    public PersonBuilder withMatricNumber(String matriculationNumber) {
+        this.matriculationNumber = new MatriculationNumber(matriculationNumber);
+        return this;
+    }
+
+    /**
+     * Sets the {@Code CovidStatus} of the {@Code Person} that we are building
+     * This method is to be used in future tests
+     */
+    public PersonBuilder withCovidStatus(String covidStatus) {
+        this.covidStatus = new CovidStatus(covidStatus);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, faculty, phone, email, address, number, status, tags);
+        return new Person(name, faculty, phone, email, address, matriculationNumber, covidStatus, tags);
     }
 
 }

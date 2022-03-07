@@ -2,7 +2,10 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COVID_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FACULTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MATRICULATION_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -41,9 +44,12 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_FACULTY + "FACULTY]"
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_MATRICULATION_NUMBER + "MATRICULATIONNUMBER] "
+            + "[" + PREFIX_COVID_STATUS + "COVIDSTATUS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -97,13 +103,18 @@ public class EditCommand extends Command {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
+        Faculty updatedFaculty = editPersonDescriptor.getFaculty().orElse(personToEdit.getFaculty());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        MatriculationNumber updatedMatriculationNumber = editPersonDescriptor.getMatriculationNumber()
+                .orElse(personToEdit.getMatriculationNumber());
+        CovidStatus updatedCovidStatus = editPersonDescriptor.getCovidStatus()
+                .orElse(personToEdit.getStatus());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, new Faculty("test"), updatedPhone, updatedEmail, updatedAddress,
-                new MatriculationNumber("a0123456m"), new CovidStatus("positive"), updatedTags);
+        return new Person(updatedName, updatedFaculty, updatedPhone, updatedEmail, updatedAddress,
+                updatedMatriculationNumber, updatedCovidStatus, updatedTags);
     }
 
     @Override
@@ -130,9 +141,12 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Name name;
+        private Faculty faculty;
         private Phone phone;
         private Email email;
         private Address address;
+        private MatriculationNumber matriculationNumber;
+        private CovidStatus covidStatus;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -143,9 +157,12 @@ public class EditCommand extends Command {
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
+            setFaculty(toCopy.faculty);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setMatriculationNumber(toCopy.matriculationNumber);
+            setCovidStatus(toCopy.covidStatus);
             setTags(toCopy.tags);
         }
 
@@ -153,7 +170,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, faculty, phone, email, address,
+                    matriculationNumber, covidStatus, tags);
         }
 
         public void setName(Name name) {
@@ -162,6 +180,14 @@ public class EditCommand extends Command {
 
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
+        }
+
+        public void setFaculty(Faculty faculty) {
+            this.faculty = faculty;
+        }
+
+        public Optional<Faculty> getFaculty() {
+            return Optional.ofNullable(faculty);
         }
 
         public void setPhone(Phone phone) {
@@ -186,6 +212,22 @@ public class EditCommand extends Command {
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
+        }
+
+        public void setMatriculationNumber(MatriculationNumber matriculationNumber) {
+            this.matriculationNumber = matriculationNumber;
+        }
+
+        public Optional<MatriculationNumber> getMatriculationNumber() {
+            return Optional.ofNullable(matriculationNumber);
+        }
+
+        public void setCovidStatus(CovidStatus covidStatus) {
+            this.covidStatus = covidStatus;
+        }
+
+        public Optional<CovidStatus> getCovidStatus() {
+            return Optional.ofNullable(covidStatus);
         }
 
         /**
@@ -222,8 +264,11 @@ public class EditCommand extends Command {
 
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
+                    && getFaculty().equals(e.getFaculty())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
+                    && getMatriculationNumber().equals(e.getMatriculationNumber())
+                    && getCovidStatus().equals(e.getCovidStatus())
                     && getTags().equals(e.getTags());
         }
     }
