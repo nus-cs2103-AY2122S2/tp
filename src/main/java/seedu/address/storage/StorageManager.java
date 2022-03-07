@@ -10,21 +10,36 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.OldReadOnlyUserPrefs;
 import seedu.address.model.OldUserPrefs;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyIBook;
+import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.UserPrefs;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of IBook data in local storage.
  */
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
+    // TODO :  remove variable addressBookStorage
     private AddressBookStorage addressBookStorage;
+    private IBookStorage iBookStorage;
     private UserPrefsStorage userPrefsStorage;
 
+    // TODO : delete start
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
     public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
         this.addressBookStorage = addressBookStorage;
+        this.userPrefsStorage = userPrefsStorage;
+    }
+    // TODO : delete end
+
+    /**
+     * Creates a {@code StorageManager} with the given {@code IBookStorage} and {@code UserPrefStorage}.
+     */
+    public StorageManager(IBookStorage iBookStorage, UserPrefsStorage userPrefsStorage) {
+        this.iBookStorage = iBookStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -45,7 +60,7 @@ public class StorageManager implements Storage {
         userPrefsStorage.saveUserPrefs(userPrefs);
     }
 
-
+    // TODO : delete start
     // ================ AddressBook methods ==============================
 
     @Override
@@ -74,5 +89,34 @@ public class StorageManager implements Storage {
         logger.fine("Attempting to write to data file: " + filePath);
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
+    // TODO : delete end
 
+    // ================ IBook methods ==============================
+
+    @Override
+    public Path getIBookFilePath() {
+        return iBookStorage.getIBookFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlyIBook> readIBook() throws DataConversionException, IOException {
+        return readIBook(iBookStorage.getIBookFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlyIBook> readIBook(Path filePath) throws DataConversionException, IOException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return iBookStorage.readIBook(filePath);
+    }
+
+    @Override
+    public void saveIBook(ReadOnlyIBook iBook) throws IOException {
+        saveIBook(iBook, iBookStorage.getIBookFilePath());
+    }
+
+    @Override
+    public void saveIBook(ReadOnlyIBook iBook, Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        iBookStorage.saveIBook(iBook, filePath);
+    }
 }
