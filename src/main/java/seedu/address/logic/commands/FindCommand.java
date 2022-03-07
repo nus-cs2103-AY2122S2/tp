@@ -26,11 +26,17 @@ public class FindCommand extends Command {
     private final NameContainsKeywordsPredicate namePredicate;
     private final StudentIdContainsKeywordsPredicate idPredicate;
 
+    /**
+     * Creates a FindCommand to find the specified {@code Person} using the person's name.
+     */
     public FindCommand(NameContainsKeywordsPredicate predicate) {
         this.namePredicate = predicate;
         this.idPredicate = null;
     }
 
+    /**
+     * Creates a FindCommand to find the specified {@code Person} using the person's student id.
+     */
     public FindCommand(StudentIdContainsKeywordsPredicate predicate) {
         this.idPredicate = predicate;
         this.namePredicate = null;
