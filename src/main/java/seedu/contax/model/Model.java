@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.contax.commons.core.GuiSettings;
+import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.person.Person;
 
 /**
@@ -84,4 +85,52 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Returns the user prefs' schedule file path.
+     */
+    Path getScheduleFilePath();
+
+    /**
+     * Sets the user prefs' schedule file path.
+     */
+    void setScheduleFilePath(Path scheduleFilePath);
+
+    /**
+     * Replaces schedule data with the data in {@code schedule}.
+     */
+    void setSchedule(ReadOnlySchedule schedule);
+
+    /** Returns the Schedule */
+    ReadOnlySchedule getSchedule();
+
+    /**
+     * Returns true if a matching {@code appointment} exists in the schedule.
+     */
+    boolean hasAppointment(Appointment appointment);
+
+    /**
+     * Returns true if an appointment in the schedule overlaps with {@code appointment}.
+     */
+    boolean hasOverlappingAppointment(Appointment appointment);
+
+    /**
+     * Deletes the given appointment into the schedule.
+     * The supplied appointment must exist in the schedule.
+     */
+    void deleteAppointment(Appointment appointment);
+
+    /**
+     * Adds the given appointment into the schedule.
+     * An overlapping {@code appointment} must not already exist in the schedule.
+     */
+    void addAppointment(Appointment appointment);
+
+    /**
+     * Replaces the given appointment {@code target} with {@code editedAppointment}.
+     * {@code target} must exist in the appointment.
+     * The appointment {@code editedAppointment} must not overlap with an existing appointment in the
+     * schedule.
+     */
+    void setAppointment(Appointment target, Appointment editedAppointment);
 }

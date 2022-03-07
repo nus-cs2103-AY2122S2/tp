@@ -66,4 +66,17 @@ public class AppointmentTest {
         editedAliceAppt = new AppointmentBuilder(APPOINTMENT_ALICE).withPerson(BOB).build();
         assertFalse(APPOINTMENT_ALICE.equals(editedAliceAppt));
     }
+
+    @Test
+    public void getEndDateTime() {
+        Appointment appointment1 = new AppointmentBuilder()
+                .withDuration(30)
+                .withStartDateTime(LocalDateTime.parse("2020-04-23T12:34:44")).build();
+        Appointment appointment2 = new AppointmentBuilder()
+                .withDuration(1)
+                .withStartDateTime(LocalDateTime.parse("2020-04-23T23:59:22")).build();
+
+        appointment1.getEndDateTime().equals(LocalDateTime.parse("2020-04-23T13:04:00"));
+        appointment2.getEndDateTime().equals(LocalDateTime.parse("2020-04-24T00:00:00"));
+    }
 }

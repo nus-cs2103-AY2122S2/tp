@@ -32,12 +32,14 @@ public class StartDateTimeTest {
     public void objectEquality() {
         LocalDateTime referenceTime1 = LocalDateTime.parse("2020-10-30T12:34:56");
         LocalDateTime referenceTime2 = LocalDateTime.now();
+        LocalDateTime referenceTime3 = LocalDateTime.parse("2020-10-30T12:34:46");
 
         StartDateTime reference1 = new StartDateTime(referenceTime1);
         StartDateTime reference2 = new StartDateTime(referenceTime2);
 
         assertTrue(reference1.equals(new StartDateTime(referenceTime1)));
         assertTrue(reference2.equals(new StartDateTime(referenceTime2)));
+        assertTrue(reference1.equals(new StartDateTime(referenceTime3))); // Only differ in seconds
         assertTrue(reference1.equals(reference1));
 
         assertFalse(reference1.equals("some string"));

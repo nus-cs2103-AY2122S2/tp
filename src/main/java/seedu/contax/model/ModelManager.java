@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.contax.commons.core.GuiSettings;
 import seedu.contax.commons.core.LogsCenter;
+import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.person.Person;
 
 /**
@@ -128,6 +129,61 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    // TODO [APPOINTMENTS] : Implement
+    @Override
+    public Path getScheduleFilePath() {
+        return null;
+    }
+
+    // TODO [APPOINTMENTS] : Implement
+    @Override
+    public void setScheduleFilePath(Path scheduleFilePath) {
+
+    }
+
+    // TODO [APPOINTMENTS] : Implement
+    @Override
+    public void setSchedule(ReadOnlySchedule schedule) {
+
+    }
+
+    // TODO [APPOINTMENTS] : Implement
+    @Override
+    public ReadOnlySchedule getSchedule() {
+        return null;
+    }
+
+    // TODO [APPOINTMENTS] : Implement
+    @Override
+    public boolean hasAppointment(Appointment appointment) {
+        return false;
+    }
+
+    // TODO [APPOINTMENTS] : Implement
+    @Override
+    public boolean hasOverlappingAppointment(Appointment appointment) {
+        return false;
+    }
+
+    // TODO [APPOINTMENTS] : Implement
+    @Override
+    public void deleteAppointment(Appointment appointment) {
+
+    }
+
+    // TODO [APPOINTMENTS] : Implement
+    @Override
+    public void addAppointment(Appointment appointment) {
+
+    }
+
+    // TODO [APPOINTMENTS] : Implement
+    @Override
+    public void setAppointment(Appointment target, Appointment editedAppointment) {
+
+    }
+
+    // TODO [APPOINTMENTS] : Add check for appointments
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object

@@ -1,7 +1,9 @@
 package seedu.contax.model.appointment;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.contax.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import seedu.contax.model.person.Person;
@@ -53,6 +55,32 @@ public class Appointment {
 
     public Person getPerson() {
         return person;
+    }
+
+    /**
+     * Returns the ending DateTime of this appointment.
+     *
+     * @return The end DateTime of this appointment.
+     */
+    public LocalDateTime getEndDateTime() {
+        return getStartDateTime().dateTime.plusMinutes(getDuration().duration);
+    }
+
+    /**
+     * Returns true if both appointments overlap, that is, the start time of an appointment is before the
+     * (start time + duration) of the other appointment.
+     *
+     * @param other The other {@code Appointment} to compare against.
+     * @return True if both appointments overlap, otherwise false.
+     */
+    public boolean isOverlapping(Appointment other) {
+        requireNonNull(other);
+        if (this.equals(other)) {
+            return true;
+        }
+
+        return (getEndDateTime().isBefore(other.getStartDateTime().dateTime)
+                || other.getEndDateTime().isBefore(getStartDateTime().dateTime));
     }
 
     /**

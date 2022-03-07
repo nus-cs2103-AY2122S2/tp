@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * Represents an {@link Appointment}'s starting DateTime in the schedule.
- * Guarantees: Immutable; is always a valid {@link LocalDateTime}.
+ * Guarantees: Immutable; is always a valid {@link LocalDateTime}; Seconds field is always zeroed.
  */
 public class StartDateTime {
     public static final String DATETIME_FORMAT = "dd-MM-yyyy HH:mm";
@@ -22,7 +22,7 @@ public class StartDateTime {
      */
     public StartDateTime(LocalDateTime dateTime) {
         requireNonNull(dateTime);
-        this.dateTime = dateTime;
+        this.dateTime = dateTime.withSecond(0).withNano(0);
     }
 
     @Override
