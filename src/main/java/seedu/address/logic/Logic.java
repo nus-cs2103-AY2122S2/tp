@@ -26,7 +26,6 @@ public interface Logic {
     /**
      * Returns the list of products.
      *
-     * @see OldModel#getAddressBook()
      */
     ReadOnlyIBook getIBook();
 
