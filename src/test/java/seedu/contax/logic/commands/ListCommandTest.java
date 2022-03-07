@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.contax.model.Model;
 import seedu.contax.model.ModelManager;
+import seedu.contax.model.Schedule;
 import seedu.contax.model.UserPrefs;
 
 /**
@@ -22,8 +23,8 @@ public class ListCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalAddressBook(), new Schedule(), new UserPrefs());
+        expectedModel = new ModelManager(model.getAddressBook(), new Schedule(), new UserPrefs());
     }
 
     @Test

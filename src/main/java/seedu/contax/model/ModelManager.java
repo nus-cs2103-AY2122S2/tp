@@ -21,24 +21,29 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
+    private final Schedule schedule;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlySchedule schedule,
+                        ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(addressBook, schedule, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + addressBook
+                + " , schedule: " + schedule
+                + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
+        this.schedule = new Schedule(schedule);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new Schedule(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -140,28 +145,21 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
-    // TODO [APPOINTMENTS] : Implement
+    //=========== Schedule ===================================================================================
     @Override
     public void setSchedule(ReadOnlySchedule schedule) {
-
+        this.schedule.resetData(schedule);
     }
 
-    // TODO [APPOINTMENTS] : Implement
     @Override
     public ReadOnlySchedule getSchedule() {
-        return null;
+        return schedule;
     }
 
-    // TODO [APPOINTMENTS] : Implement
     @Override
     public boolean hasAppointment(Appointment appointment) {
-        return false;
-    }
-
-    // TODO [APPOINTMENTS] : Implement
-    @Override
-    public boolean hasOverlappingAppointment(Appointment appointment) {
-        return false;
+        requireNonNull(appointment);
+        return schedule.hasAppointment(appointment);
     }
 
     // TODO [APPOINTMENTS] : Implement
@@ -170,19 +168,18 @@ public class ModelManager implements Model {
 
     }
 
-    // TODO [APPOINTMENTS] : Implement
     @Override
     public void addAppointment(Appointment appointment) {
-
+        requireNonNull(appointment);
+        schedule.addAppointment(appointment);
     }
 
-    // TODO [APPOINTMENTS] : Implement
     @Override
     public void setAppointment(Appointment target, Appointment editedAppointment) {
-
+        requireAllNonNull(target, editedAppointment);
+        schedule.setAppointment(target, editedAppointment);
     }
 
-    // TODO [APPOINTMENTS] : Add check for appointments
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -198,6 +195,7 @@ public class ModelManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
+                && schedule.equals(other.schedule)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons);
     }

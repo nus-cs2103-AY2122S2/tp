@@ -1,10 +1,13 @@
 package seedu.contax.model;
 
+import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.contax.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.contax.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.contax.testutil.Assert.assertThrows;
+import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALICE;
 import static seedu.contax.testutil.TypicalPersons.ALICE;
 import static seedu.contax.testutil.TypicalPersons.BENSON;
 
@@ -15,8 +18,10 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.contax.commons.core.GuiSettings;
+import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.person.NameContainsKeywordsPredicate;
 import seedu.contax.testutil.AddressBookBuilder;
+import seedu.contax.testutil.ScheduleBuilder;
 
 public class ModelManagerTest {
 
@@ -106,14 +111,32 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasAppointment_nullAppointment_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasAppointment(null));
+    }
+
+    @Test
+    public void hasAppointment_appointmentNotInSchedule_returnsFalse() {
+        assertFalse(modelManager.hasAppointment(APPOINTMENT_ALICE));
+    }
+
+    @Test
+    public void hasAppointment_appointmentInSchedule_returnsTrue() {
+        modelManager.addAppointment(APPOINTMENT_ALICE);
+        assertTrue(modelManager.hasAppointment(APPOINTMENT_ALICE));
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
+        Schedule schedule = new ScheduleBuilder().withAppointment(APPOINTMENT_ALICE).build();
+        Schedule differentSchedule = new Schedule();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        modelManager = new ModelManager(addressBook, schedule, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(addressBook, schedule, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -126,12 +149,15 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, schedule, userPrefs)));
+
+        // different schedule -> returns false
+        assertFalse(modelManager.equals(new ModelManager(addressBook, differentSchedule, userPrefs)));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, schedule, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -139,6 +165,6 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, schedule, differentUserPrefs)));
     }
 }

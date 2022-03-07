@@ -20,6 +20,7 @@ import seedu.contax.model.Model;
 import seedu.contax.model.ModelManager;
 import seedu.contax.model.ReadOnlyAddressBook;
 import seedu.contax.model.ReadOnlyUserPrefs;
+import seedu.contax.model.Schedule;
 import seedu.contax.model.UserPrefs;
 import seedu.contax.model.util.SampleDataUtil;
 import seedu.contax.storage.AddressBookStorage;
@@ -90,7 +91,7 @@ public class MainApp extends Application {
             initialData = new AddressBook();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        return new ModelManager(initialData, new Schedule(), userPrefs); // TODO [APPOINTMENT]: Replace placeholder here.
     }
 
     private void initLogging(Config config) {

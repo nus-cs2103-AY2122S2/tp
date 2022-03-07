@@ -74,7 +74,7 @@ public class Schedule implements ReadOnlySchedule {
      * The appointment {@code editedAppointment} must not overlap with an existing appointment in the
      * schedule.
      */
-    public void setPerson(Appointment target, Appointment editedAppointment) {
+    public void setAppointment(Appointment target, Appointment editedAppointment) {
         requireNonNull(target);
         requireNonNull(editedAppointment);
 

@@ -110,11 +110,6 @@ public interface Model {
     boolean hasAppointment(Appointment appointment);
 
     /**
-     * Returns true if an appointment in the schedule overlaps with {@code appointment}.
-     */
-    boolean hasOverlappingAppointment(Appointment appointment);
-
-    /**
      * Deletes the given appointment into the schedule.
      * The supplied appointment must exist in the schedule.
      */
