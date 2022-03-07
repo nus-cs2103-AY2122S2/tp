@@ -12,6 +12,6 @@ public interface ReadOnlySchedule {
      * Returns an unmodifiable view of the list of appointments.
      * This list will not contain any overlapping appointments.
      */
-    ObservableList<Appointment> getAppointmentsList();
+    ObservableList<Appointment> getAppointmentList();
 
 }

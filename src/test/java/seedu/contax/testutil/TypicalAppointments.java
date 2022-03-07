@@ -4,6 +4,7 @@ import static seedu.contax.testutil.TypicalPersons.ALICE;
 
 import java.time.LocalDateTime;
 
+import seedu.contax.model.Schedule;
 import seedu.contax.model.appointment.Appointment;
 
 /**
@@ -20,4 +21,16 @@ public class TypicalAppointments {
             .withName("Do some work alone")
             .withStartDateTime(LocalDateTime.parse("2022-10-07T22:50:00"))
             .withDuration(60).build();
+
+    /**
+     * Returns an {@code Schedule} with all the typical appointments.
+     */
+    public static Schedule getTypicalSchedule() {
+        Schedule schedule = new Schedule();
+
+        schedule.addAppointment(APPOINTMENT_ALICE);
+        schedule.addAppointment(APPOINTMENT_ALONE);
+
+        return schedule;
+    }
 }

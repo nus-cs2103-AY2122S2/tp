@@ -47,7 +47,7 @@ public class Schedule implements ReadOnlySchedule {
     public void resetData(ReadOnlySchedule newData) {
         requireNonNull(newData);
 
-        setAppointments(newData.getAppointmentsList());
+        setAppointments(newData.getAppointmentList());
     }
 
     //// appointment-level operations
@@ -64,7 +64,7 @@ public class Schedule implements ReadOnlySchedule {
      * Adds an appointment to the schedule.
      * An overlapping appointment must not already exist in the schedule.
      */
-    public void addPerson(Appointment target) {
+    public void addAppointment(Appointment target) {
         appointments.add(target);
     }
 
@@ -93,11 +93,10 @@ public class Schedule implements ReadOnlySchedule {
 
     @Override
     public String toString() {
-        return appointments.size() + " persons";
+        return appointments.size() + " appointments";
     }
 
-    @Override
-    public ObservableList<Appointment> getAppointmentsList() {
+    public ObservableList<Appointment> getAppointmentList() {
         return appointments.asUnmodifiableObservableList();
     }
 
