@@ -152,10 +152,12 @@ public class Module {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getModuleCode())
-            .append("; Name: ")
-            .append(getModuleName())
-            .append("; Professors: ")
-            .append(getProfessors());
+                .append("; Name: ")
+                .append(getModuleName())
+                .append("; Module Code: ")
+                .append(getModuleCode())
+                .append("; Professors: ")
+                .append(getProfessors());
         return builder.toString();
     }
 
