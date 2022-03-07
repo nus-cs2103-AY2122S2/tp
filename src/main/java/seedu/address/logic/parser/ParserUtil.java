@@ -191,7 +191,7 @@ public class ParserUtil {
         requireNonNull(status);
         String trimmedStatus = status.trim();
         if (!Status.isValidStatus(trimmedStatus)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Status.MESSAGE_CONSTRAINTS);
         }
         return new Status(trimmedStatus);
     }
@@ -206,7 +206,7 @@ public class ParserUtil {
         requireNonNull(deadline);
         String trimmedDeadline = deadline.trim();
         if (!Deadline.isValidDeadline(trimmedDeadline)) {
-            throw new ParseException(Status.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Deadline.MESSAGE_CONSTRAINTS);
         }
         return new Deadline(trimmedDeadline);
     }
