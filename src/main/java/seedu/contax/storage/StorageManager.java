@@ -80,6 +80,9 @@ public class StorageManager implements Storage {
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
 
+
+    // ================ Schedule methods ==============================
+
     @Override
     public Path getScheduleFilePath() {
         return scheduleStorage.getScheduleFilePath();
