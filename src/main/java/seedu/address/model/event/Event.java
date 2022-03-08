@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
+
 import seedu.address.model.person.Name;
 
 public class Event {
@@ -16,6 +17,12 @@ public class Event {
     private final LocalDateTime localDateTime;
     private final String description;
 
+    /**
+     * Constructor for event.
+     * @param name name of event
+     * @param description description of event
+     * @param localDateTime date and time of event
+     */
     public Event(Name name, String description, LocalDateTime localDateTime) {
         requireAllNonNull(name, localDateTime);
         this.name = name;
