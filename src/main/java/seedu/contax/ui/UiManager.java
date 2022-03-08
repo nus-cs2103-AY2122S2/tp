@@ -87,7 +87,7 @@ public class UiManager implements Ui {
         System.exit(1);
     }
 
-    public void showOnboardingPrompt() {
+    public void setFirstRun() {
         isFirstRun = true;
     }
 

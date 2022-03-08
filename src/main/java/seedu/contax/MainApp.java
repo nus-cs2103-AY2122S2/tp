@@ -68,8 +68,8 @@ public class MainApp extends Application {
 
         ui = new UiManager(logic);
 
-        if(isFirstRun) {
-            ((UiManager)ui).showOnboardingPrompt();
+        if (isFirstRun) {
+            ui.setFirstRun();
         }
 
     }
