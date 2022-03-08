@@ -250,7 +250,7 @@ public class EditCommand extends Command {
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
                     && getStatus().equals(e.getStatus())
-                    && getStatus().equals(e.getClassCode())
+                    && getClassCode().equals(e.getClassCode())
                     && getTags().equals(e.getTags());
         }
     }
