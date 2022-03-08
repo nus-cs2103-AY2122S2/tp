@@ -81,7 +81,7 @@ public class FindCommandTest {
         // null -> returns false
         assertFalse(findFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different keyword -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 
@@ -108,7 +108,7 @@ public class FindCommandTest {
         // null -> returns false
         assertFalse(findFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different keyword -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 
@@ -135,7 +135,7 @@ public class FindCommandTest {
         // null -> returns false
         assertFalse(findFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different keyword -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 
@@ -212,13 +212,13 @@ public class FindCommandTest {
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFoundAddress() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
         AddressContainsKeywordsPredicate predicate = prepareAddressPredicate(
-                "wall");
+                "wall michegan");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(CARL, ELLE), model.getFilteredPersonList());
     }
 
     /**
@@ -229,21 +229,21 @@ public class FindCommandTest {
     }
 
     /**
-     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
+     * Parses {@code userInput} into a {@code PhoneContainsKeywordsPredicate}.
      */
     private PhoneContainsKeywordsPredicate preparePhonePredicate(String userInput) {
         return new PhoneContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 
     /**
-     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
+     * Parses {@code userInput} into a {@code EmailContainsKeywordsPredicate}.
      */
     private EmailContainsKeywordsPredicate prepareEmailPredicate(String userInput) {
         return new EmailContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 
     /**
-     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
+     * Parses {@code userInput} into a {@code AddressContainsKeywordsPredicate}.
      */
     private AddressContainsKeywordsPredicate prepareAddressPredicate(String userInput) {
         return new AddressContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
