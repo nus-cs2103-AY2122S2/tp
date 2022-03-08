@@ -26,7 +26,7 @@ public class Lab {
 
     public final int labNumber;
 
-    private final LabStatus labStatus;
+    public final LabStatus labStatus;
 
     /**
      * Constructs an {@code Lab}.
