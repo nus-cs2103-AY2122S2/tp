@@ -6,7 +6,6 @@ import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
-import javafx.scene.paint.Color;
 import seedu.contax.ui.UiPart;
 
 public class OnboardingInstruction extends UiPart<Region> {
