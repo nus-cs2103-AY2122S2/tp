@@ -1,8 +1,12 @@
 package seedu.address.model.lesson;
 
+import seedu.address.model.person.Person;
+
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a Lesson in the Lesson book.
@@ -16,7 +20,7 @@ public abstract class Lesson {
     private final LessonAddress address;
 
     // Data fields
-    // no data fields in abstract class
+    private final List<Person> assignedStudents;
 
     /**
      * Every field must be present and not null.
@@ -26,6 +30,7 @@ public abstract class Lesson {
         this.name = name;
         this.subject = subject;
         this.address = address;
+        this.assignedStudents = new ArrayList<>();
     }
 
     /**
@@ -74,6 +79,8 @@ public abstract class Lesson {
         return address;
     }
 
+    public List<Person> getAssignedStudents() { return assignedStudents; }
+
     /**
      * Returns true if both lessons have overlapping timeslots.
      */
@@ -83,4 +90,9 @@ public abstract class Lesson {
      * Returns the date and time that the lesson starts and ends.
      */
     public abstract DateTimeSlot getTimeSlot();
+
+    /**
+     * Adds a given Person to the list of students assigned to this lesson.
+     */
+    public abstract void addStudent(Person person);
 }

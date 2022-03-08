@@ -1,5 +1,7 @@
 package seedu.address.model.lesson;
 
+import seedu.address.model.person.Person;
+
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
@@ -34,6 +36,14 @@ public class TemporaryLesson extends Lesson {
         }
 
         return dateTimeSlot.isConflictingWith(otherLesson.getTimeSlot());
+    }
+
+    /**
+     * Adds a given Person to the list of students assigned to this lesson.
+     */
+    @Override
+    public void addStudent(Person person) {
+        this.getAssignedStudents().add(person);
     }
 
     /**
