@@ -3,10 +3,14 @@ package seedu.contax.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_DURATION;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_PERSON;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.contax.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -53,6 +57,39 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+
+    public static final String VALID_APPOINTMENT_NAME_AMELIA = "Meeting With Amelia";
+    public static final String VALID_APPOINTMENT_NAME_ALONE = "Do some work alone";
+    public static final String VALID_DATE = "07-10-2022";
+    public static final String VALID_DATE2 = "05-10-2022";
+    public static final String VALID_TIME = "22:50";
+    public static final String VALID_TIME2 = "21:50";
+    public static final String VALID_APPOINTMENT_DURATION_HOUR = "60";
+    public static final String VALID_APPOINTMENT_DURATION_MINUTE = "1";
+
+    public static final String INVALID_APPOINTMENT_NAME = "Meeting!!";
+    public static final String INVALID_DATE = "32-10-2022";
+    public static final String INVALID_TIME = "25:30";
+    public static final String INVALID_APPOINTMENT_DURATION = "-1";
+
+    public static final String APPOINTMENT_NAME_AMELIA = " " + PREFIX_NAME + VALID_APPOINTMENT_NAME_AMELIA;
+    public static final String APPOINTMENT_NAME_ALONE = " " + PREFIX_NAME + VALID_APPOINTMENT_NAME_ALONE;
+    public static final String APPOINTMENT_DATE = " " + PREFIX_DATE + VALID_DATE;
+    public static final String APPOINTMENT_DATE2 = " " + PREFIX_DATE + VALID_DATE2;
+    public static final String APPOINTMENT_TIME = " " + PREFIX_TIME + VALID_TIME;
+    public static final String APPOINTMENT_TIME2 = " " + PREFIX_TIME + VALID_TIME2;
+    public static final String APPOINTMENT_DURATION = " " + PREFIX_DURATION + VALID_APPOINTMENT_DURATION_HOUR;
+    public static final String APPOINTMENT_DURATION2 = " " + PREFIX_DURATION
+            + VALID_APPOINTMENT_DURATION_MINUTE;
+    public static final String APPOINTMENT_FIRST_PERSON = " " + PREFIX_PERSON + "1";
+    public static final String APPOINTMENT_SECOND_PERSON = " " + PREFIX_PERSON + "2";
+
+    public static final String INVALID_APPOINTMENT_NAME_DESC = " " + PREFIX_NAME + INVALID_APPOINTMENT_NAME;
+    public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + INVALID_DATE;
+    public static final String INVALID_TIME_DESC = " " + PREFIX_TIME + INVALID_TIME;
+    public static final String INVALID_APPOINTMENT_DURATION_DESC = " " + PREFIX_DURATION
+            + INVALID_APPOINTMENT_DURATION;
+    public static final String INVALID_APPOINTMENT_PERSON = " " + PREFIX_PERSON + "-1";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
