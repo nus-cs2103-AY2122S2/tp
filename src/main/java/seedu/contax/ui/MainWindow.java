@@ -35,6 +35,9 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
+    // Flag indicating the type of model currently being displayed in the contentList
+    private ListContentType currentListType;
+
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -42,7 +45,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane contentListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -66,6 +69,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        currentListType = ListContentType.PERSON;
     }
 
     public Stage getPrimaryStage() {
@@ -111,7 +115,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        changeListContentType(ListContentType.PERSON);
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -132,6 +136,24 @@ public class MainWindow extends UiPart<Stage> {
         if (guiSettings.getWindowCoordinates() != null) {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
             primaryStage.setY(guiSettings.getWindowCoordinates().getY());
+        }
+    }
+
+    /**
+     * Changes the type of model being displayed in the content list.
+     *
+     * @param contentType The type of content the UI should display.
+     */
+    private void changeListContentType(ListContentType contentType) {
+        contentListPanelPlaceholder.getChildren().removeAll();
+
+        if (contentType == null) {
+            return;
+        }
+
+        currentListType = contentType;
+        if (contentType == ListContentType.PERSON) {
+            contentListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
         }
     }
 
