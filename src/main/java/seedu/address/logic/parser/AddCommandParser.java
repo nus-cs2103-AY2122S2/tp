@@ -50,7 +50,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<UserType> userTypeList = new HashSet<>();
         userTypeList.add(userType);
 
-        Person person = new Person(name, phone, email, address, userTypeList);
+        Person person = new Person(name, phone, email, address, userType);
 
         return new AddCommand(person);
     }

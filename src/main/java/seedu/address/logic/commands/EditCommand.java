@@ -8,11 +8,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -97,9 +94,10 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<UserType> updatedUserTypes = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        //Set<UserType> updatedUserTypes = editPersonDescriptor.getTags().orElse(personToEdit.getTag());
+        UserType updatedUserType = editPersonDescriptor.getUserType().orElse(personToEdit.getUserType());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedUserTypes);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedUserType);
     }
 
     @Override
@@ -129,7 +127,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
-        private Set<UserType> userTypes;
+        private UserType userType;
 
         public EditPersonDescriptor() {}
 
@@ -142,14 +140,14 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setTags(toCopy.userTypes);
+            setUserType(toCopy.userType);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, userTypes);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, userType);
         }
 
         public void setName(Name name) {
@@ -187,18 +185,20 @@ public class EditCommand extends Command {
         /**
          * Sets {@code userTypes} to this object's {@code userTypes}.
          * A defensive copy of {@code userTypes} is used internally.
+         * @param userType
          */
-        public void setTags(Set<UserType> userTypes) {
-            this.userTypes = (userTypes != null) ? new HashSet<>(userTypes) : null;
+        public void setUserType(UserType userType) {
+            this.userType = userType;
         }
 
         /**
          * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code userTypes} is null.
+         * @return
          */
-        public Optional<Set<UserType>> getTags() {
-            return (userTypes != null) ? Optional.of(Collections.unmodifiableSet(userTypes)) : Optional.empty();
+        public Optional<UserType> getUserType() {
+            return Optional.ofNullable(userType);
         }
 
         @Override
@@ -220,7 +220,7 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
-                    && getTags().equals(e.getTags());
+                    && getUserType().equals(e.getUserType());
         }
     }
 }

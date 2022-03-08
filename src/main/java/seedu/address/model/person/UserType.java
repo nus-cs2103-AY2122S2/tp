@@ -12,17 +12,17 @@ public class UserType {
     public static final String VALIDATION_REGEX = "buyer|seller"; //"\\p{Alnum}+";
     public static final String MESSAGE_CONSTRAINTS = "Tag names should be " + VALIDATION_REGEX;
 
-    public final String tagName;
+    public final String value;
 
     /**
      * Constructs a {@code Tag}.
      *
-     * @param tagName A valid tag name.
+     * @param value A valid tag name.
      */
-    public UserType(String tagName) {
-        requireNonNull(tagName);
-        checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
-        this.tagName = tagName;
+    public UserType(String value) {
+        requireNonNull(value);
+        checkArgument(isValidTagName(value), MESSAGE_CONSTRAINTS);
+        this.value = value;
     }
 
     /**
@@ -36,19 +36,19 @@ public class UserType {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof UserType // instanceof handles nulls
-                && tagName.equals(((UserType) other).tagName)); // state check
+                && value.equals(((UserType) other).value)); // state check
     }
 
     @Override
     public int hashCode() {
-        return tagName.hashCode();
+        return value.hashCode();
     }
 
     /**
      * Format state as text for viewing.
      */
     public String toString() {
-        return tagName;
+        return value;
     }
 
 }

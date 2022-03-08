@@ -2,10 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 /**
  * Represents a Person in the address book.
@@ -20,18 +17,18 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final Set<UserType> userTypes = new HashSet<>();
+    private final UserType userType;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<UserType> userTypes) {
-        requireAllNonNull(name, phone, email, address, userTypes);
+    public Person(Name name, Phone phone, Email email, Address address, UserType userType) {
+        requireAllNonNull(name, phone, email, address, userType);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.userTypes.addAll(userTypes);
+        this.userType = userType;
     }
 
     public Name getName() {
@@ -50,12 +47,8 @@ public class Person {
         return address;
     }
 
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<UserType> getTags() {
-        return Collections.unmodifiableSet(userTypes);
+    public UserType getUserType() {
+        return userType;
     }
 
     /**
@@ -90,13 +83,13 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getUserType().equals(getUserType());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, userTypes);
+        return Objects.hash(name, phone, email, address, userType);
     }
 
     @Override
@@ -108,13 +101,10 @@ public class Person {
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Address: ")
-                .append(getAddress());
+                .append(getAddress())
+                .append("; UserType: ")
+                .append(getUserType());
 
-        Set<UserType> userTypes = getTags();
-        if (!userTypes.isEmpty()) {
-            builder.append("; UserType: ");
-            userTypes.forEach(builder::append);
-        }
         return builder.toString();
     }
 

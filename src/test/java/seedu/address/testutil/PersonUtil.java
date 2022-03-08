@@ -34,7 +34,7 @@ public class PersonUtil {
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
-        person.getTags().stream().forEach(
+        person.getUserType().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
         return sb.toString();
@@ -49,12 +49,12 @@ public class PersonUtil {
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
-        if (descriptor.getTags().isPresent()) {
-            Set<UserType> userTypes = descriptor.getTags().get();
+        if (descriptor.getUserType().isPresent()) {
+            Set<UserType> userTypes = descriptor.getUserType().get();
             if (userTypes.isEmpty()) {
                 sb.append(PREFIX_TAG);
             } else {
-                userTypes.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
+                userTypes.forEach(s -> sb.append(PREFIX_TAG).append(s.value).append(" "));
             }
         }
         return sb.toString();
