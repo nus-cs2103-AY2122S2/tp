@@ -4,12 +4,15 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
+import seedu.contax.ui.ListContentType;
+
 /**
  * Represents the result of a command execution.
  */
 public class CommandResult {
 
     private final String feedbackToUser;
+    private final ListContentType uiContentType;
 
     /** Help information should be shown to the user. */
     private final boolean showHelp;
@@ -20,22 +23,43 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, ListContentType contentType, boolean showHelp, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.uiContentType = requireNonNull(contentType);
     }
 
     /**
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
-     * and other fields set to their default value.
+     * and other fields set to their default value. The contents the list shows defaults to {@code UNCHANGED}.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, ListContentType.UNCHANGED, false, false);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser} and the
+     * {@code contentType} to display in the content list.
+     */
+    public CommandResult(String feedbackToUser, ListContentType contentType) {
+        this(feedbackToUser, contentType, false, false);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser}, {@code showHelp} and
+     * {@code exit}. The contents the list shows defaults to {@code UNCHANGED}.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+        this(feedbackToUser, ListContentType.UNCHANGED, showHelp, exit);
     }
 
     public String getFeedbackToUser() {
         return feedbackToUser;
+    }
+
+    public ListContentType getUiContentType() {
+        return uiContentType;
     }
 
     public boolean isShowHelp() {
@@ -58,13 +82,14 @@ public class CommandResult {
 
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
+                && uiContentType.equals(otherCommandResult.uiContentType)
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, uiContentType, showHelp, exit);
     }
 
 }

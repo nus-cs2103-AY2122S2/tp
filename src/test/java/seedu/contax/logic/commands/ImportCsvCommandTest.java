@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import seedu.contax.model.ImportCsv;
 import seedu.contax.model.Model;
 import seedu.contax.model.ModelManager;
+import seedu.contax.model.Schedule;
 import seedu.contax.model.UserPrefs;
 import seedu.contax.testutil.ImportCsvObjectBuilder;
 import seedu.contax.testutil.PersonBuilder;
@@ -31,7 +32,7 @@ public class ImportCsvCommandTest {
     private static final String PERSON5_EMAIL = "example5@example.com";
     private static final String PERSON5_ADDRESS = "Example address 5";
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new Schedule(), new UserPrefs());
 
     @Test
     public void constructor_nullImportCsv_throwsNullPointerException() {
@@ -45,7 +46,7 @@ public class ImportCsvCommandTest {
         ImportCsvCommand importCsvCommand = new ImportCsvCommand(validCsvFormat);
 
         //Build expecting model with Person 1 and 2
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new Schedule(), new UserPrefs());
         PersonBuilder personBuilder1 = new PersonBuilder().withName(PERSON1_NAME)
                 .withPhone(PERSON1_PHONE).withEmail(PERSON1_EMAIL)
                 .withAddress(PERSON1_ADDRESS).withTags("tag1", "tag2");
@@ -65,7 +66,7 @@ public class ImportCsvCommandTest {
         ImportCsvCommand importCsvCommand = new ImportCsvCommand(validCsvFormat);
 
         //Build expecting model with Person 1, 2 and 5
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new Schedule(), new UserPrefs());
         PersonBuilder personBuilder1 = new PersonBuilder().withName(PERSON1_NAME)
                 .withPhone(PERSON1_PHONE).withEmail(PERSON1_EMAIL)
                 .withAddress(PERSON1_ADDRESS).withTags("tag1", "tag2");
@@ -91,7 +92,7 @@ public class ImportCsvCommandTest {
         //Use csv file with valid Person 1 and Person 2
         ImportCsv validCsvFormat = new ImportCsvObjectBuilder().build();
         ImportCsvCommand importCsvCommand = new ImportCsvCommand(validCsvFormat);
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new Schedule(), new UserPrefs());
 
         //Build initial model with person 1 inside
         PersonBuilder personBuilder1 = new PersonBuilder().withName(PERSON1_NAME)
