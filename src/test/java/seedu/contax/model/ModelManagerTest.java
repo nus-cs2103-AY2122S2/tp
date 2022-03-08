@@ -7,6 +7,7 @@ import static seedu.contax.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.contax.testutil.Assert.assertThrows;
 import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALICE;
 import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALONE;
+import static seedu.contax.testutil.TypicalAppointments.getTypicalSchedule;
 import static seedu.contax.testutil.TypicalPersons.ALICE;
 import static seedu.contax.testutil.TypicalPersons.BENSON;
 
@@ -114,6 +115,12 @@ public class ModelManagerTest {
     @Test
     public void setSchedule_nullSchedule_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.setSchedule(null));
+    }
+
+    @Test
+    public void setSchedule_validSchedule_success() {
+        modelManager.setSchedule(getTypicalSchedule());
+        assertEquals(getTypicalSchedule(), modelManager.getSchedule());
     }
 
     @Test

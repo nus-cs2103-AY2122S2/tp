@@ -10,6 +10,8 @@ import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALONE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -253,5 +255,21 @@ public class DisjointAppointmentListTest {
         assertEquals(list2.hashCode(), list3.hashCode());
 
         assertNotEquals(refList.hashCode(), list2.hashCode());
+    }
+
+    @Test
+    public void iterator() {
+        DisjointAppointmentList refList = new DisjointAppointmentList();
+
+        refList.add(APPOINTMENT_ALICE);
+        refList.add(APPOINTMENT_ALONE);
+
+        HashSet<Appointment> result = new HashSet<>();
+        for (Appointment x : refList) {
+            result.add(x);
+        }
+
+        assertTrue(result.contains(APPOINTMENT_ALONE));
+        assertTrue(result.contains(APPOINTMENT_ALICE));
     }
 }

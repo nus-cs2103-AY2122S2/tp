@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.contax.logic.commands.AddCommand;
 import seedu.contax.logic.commands.ClearCommand;
+import seedu.contax.logic.commands.DeleteAppointmentCommand;
 import seedu.contax.logic.commands.DeleteCommand;
 import seedu.contax.logic.commands.EditCommand;
 import seedu.contax.logic.commands.EditCommand.EditPersonDescriptor;
@@ -86,6 +87,12 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_deleteAppointment() throws Exception {
+        assertTrue(parser.parseCommand(DeleteAppointmentCommand.COMMAND_WORD + " 1")
+                instanceof DeleteAppointmentCommand);
     }
 
     @Test
