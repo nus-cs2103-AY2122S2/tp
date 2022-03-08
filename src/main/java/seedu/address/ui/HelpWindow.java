@@ -15,9 +15,6 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class HelpWindow extends UiPart<Stage> {
 
-
-    private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
-    private static final String FXML = "HelpWindow.fxml";
     public static final String USERGUIDE_URL = "https://ay2122s2-cs2103t-t12-3.github.io/tp/UserGuide.html";
     public static final String NEWLINE_AND_INDENTATION = "\n     ";
     public static final String HELP_MESSAGE = "Tracey supports the following features: Find, Add, Delete, Edit, Clear, "
@@ -78,6 +75,9 @@ public class HelpWindow extends UiPart<Stage> {
             + "\n9. FILTER student based on health statuses"
             + NEWLINE_AND_INDENTATION
             + "Format: filter covid-positive";
+
+    private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
+    private static final String FXML = "HelpWindow.fxml";
 
 
     @FXML
