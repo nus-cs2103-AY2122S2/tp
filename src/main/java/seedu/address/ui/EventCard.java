@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.event.Event;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -41,8 +42,8 @@ public class EventCard extends UiPart<Region> {
         this.event = event;
         id.setText(displayedIndex + ". ");
         name.setText(event.getName().fullName);
-        dateTime.setText(event.getPhone().value);
-        description.setText(event.getAddress().value);
+        dateTime.setText(event.getLocalDateTime().toString());
+        description.setText(event.getDescription());
     }
 
     @Override

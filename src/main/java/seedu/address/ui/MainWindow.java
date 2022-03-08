@@ -32,6 +32,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private EventListPanel eventListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -43,6 +44,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private StackPane eventListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -113,6 +117,9 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
+        eventListPanel = new EventListPanel(logic.getEventsList());
+        eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -163,8 +170,17 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    private void changeInterface(CommandResult commandResult) {
+        boolean event = commandResult.isEvent();
+        if (event) {
+            eventListPanelPlaceholder.setVisible(true);
+            eventListPanelPlaceholder.requestFocus();
+            personListPanelPlaceholder.setVisible(false);
+        } else {
+            personListPanelPlaceholder.setVisible(true);
+            personListPanelPlaceholder.requestFocus();
+            eventListPanelPlaceholder.setVisible(false);
+        }
     }
 
     /**
@@ -177,6 +193,7 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            changeInterface(commandResult);
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
