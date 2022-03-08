@@ -16,7 +16,7 @@ import java.util.Set;
 import seedu.contax.commons.core.index.Index;
 import seedu.contax.commons.util.StringUtil;
 import seedu.contax.logic.parser.exceptions.ParseException;
-import seedu.contax.model.ImportCsv;
+import seedu.contax.model.IndexedCsvFile;
 import seedu.contax.model.appointment.Duration;
 import seedu.contax.model.appointment.StartDateTime;
 import seedu.contax.model.person.Address;
@@ -138,13 +138,13 @@ public class ParserUtil {
      * Parses a {@code String filePath} into a {@code Path}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code phone} is invalid.
+     * @throws ParseException if the given {@code filePath} is invalid.
      */
     public static File parseCsvFilePath(String filePath) throws ParseException {
         requireNonNull(filePath);
         String trimmedFilePath = filePath.trim();
-        if (!ImportCsv.isValidFilePath(trimmedFilePath)) {
-            throw new ParseException(ImportCsv.FILE_PATH_CONSTRAINTS);
+        if (!IndexedCsvFile.isValidFilePath(trimmedFilePath)) {
+            throw new ParseException(IndexedCsvFile.FILE_PATH_CONSTRAINTS);
         }
         return new File(trimmedFilePath);
     }
@@ -161,11 +161,11 @@ public class ParserUtil {
         try {
             int finalPosition = Integer.parseInt(trimmedPosition);
             if (finalPosition < 1) {
-                throw new ParseException(ImportCsv.MESSAGE_CONSTRAINTS);
+                throw new ParseException(IndexedCsvFile.MESSAGE_CONSTRAINTS);
             }
             return finalPosition;
         } catch (NumberFormatException e) {
-            throw new ParseException(ImportCsv.MESSAGE_CONSTRAINTS);
+            throw new ParseException(IndexedCsvFile.MESSAGE_CONSTRAINTS);
         }
     }
     /**

@@ -6,7 +6,7 @@ import static seedu.contax.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.contax.model.ImportCsv;
+import seedu.contax.model.IndexedCsvFile;
 import seedu.contax.model.Model;
 import seedu.contax.model.ModelManager;
 import seedu.contax.model.Schedule;
@@ -41,7 +41,7 @@ public class ImportCsvCommandTest {
     @Test
     public void execute_validPersonsInFile_addSucessful() throws Exception {
         //Valid CSV file, adds successfully to list
-        ImportCsv validCsvFormat = new ImportCsvObjectBuilder().build();
+        IndexedCsvFile validCsvFormat = new ImportCsvObjectBuilder().build();
         ImportCsvCommand importCsvCommand = new ImportCsvCommand(validCsvFormat);
 
         //Build expecting model with Person 1 and 2
@@ -61,7 +61,7 @@ public class ImportCsvCommandTest {
     @Test
     public void execute_someBadFormatPersonsInFile_badFormatSkipped() throws Exception {
         //CSV contains Person 3 and Person 4 with invalid params, these two are skipped
-        ImportCsv skipLinesCsvFile = new ImportCsvObjectBuilder(ImportCsvObjectBuilder.SKIP_CSV_FILEPATH).build();
+        IndexedCsvFile skipLinesCsvFile = new ImportCsvObjectBuilder(ImportCsvObjectBuilder.SKIP_CSV_FILEPATH).build();
         ImportCsvCommand importCsvCommand = new ImportCsvCommand(skipLinesCsvFile);
 
         //Build expecting model with Person 1, 2 and 5
@@ -89,7 +89,7 @@ public class ImportCsvCommandTest {
         //result should be only person 2 imported
 
         //Use csv file with valid Person 1 and Person 2
-        ImportCsv duplicatePersonCsvFile = new ImportCsvObjectBuilder().build();
+        IndexedCsvFile duplicatePersonCsvFile = new ImportCsvObjectBuilder().build();
         ImportCsvCommand importCsvCommand = new ImportCsvCommand(duplicatePersonCsvFile);
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getSchedule(), new UserPrefs());
 
@@ -112,7 +112,7 @@ public class ImportCsvCommandTest {
 
     @Test
     public void execute_emptyFile_nothingImportedButSuccess() throws Exception {
-        ImportCsv emptyCsvFile = new ImportCsvObjectBuilder(ImportCsvObjectBuilder.EMPTY_CSV_FILEPATH).build();
+        IndexedCsvFile emptyCsvFile = new ImportCsvObjectBuilder(ImportCsvObjectBuilder.EMPTY_CSV_FILEPATH).build();
         ImportCsvCommand importCsvCommand = new ImportCsvCommand(emptyCsvFile);
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getSchedule(), new UserPrefs());
         assertCommandSuccess(importCsvCommand, model, ImportCsvCommand.MESSAGE_SUCCESS, expectedModel);
@@ -120,7 +120,7 @@ public class ImportCsvCommandTest {
 
     @Test
     public void execute_customColumnsSpecified_success() throws Exception {
-        ImportCsv specifiedColumnsCsvFile = new ImportCsvObjectBuilder(
+        IndexedCsvFile specifiedColumnsCsvFile = new ImportCsvObjectBuilder(
                 ImportCsvObjectBuilder.CUSTOM_COLUMNS_CSV_FILEPATH,
                 2, 3, 4, 5, 6).build();
         ImportCsvCommand importCsvCommand = new ImportCsvCommand(specifiedColumnsCsvFile);

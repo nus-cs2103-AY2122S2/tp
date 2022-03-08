@@ -2,7 +2,7 @@ package seedu.contax.testutil;
 
 import java.io.File;
 
-import seedu.contax.model.ImportCsv;
+import seedu.contax.model.IndexedCsvFile;
 
 public class ImportCsvObjectBuilder {
     public static final String DEFAULT_FILEPATH = "./src/test/data/ImportCsvTest/ValidContaXFormat.csv";
@@ -60,7 +60,7 @@ public class ImportCsvObjectBuilder {
         this.tagPosition = tagPosition;
     }
 
-    public ImportCsv build() {
-        return new ImportCsv(filePath, namePosition, phonePosition, emailPosition, addressPosition, tagPosition);
+    public IndexedCsvFile build() {
+        return new IndexedCsvFile(filePath, namePosition, phonePosition, emailPosition, addressPosition, tagPosition);
     }
 }

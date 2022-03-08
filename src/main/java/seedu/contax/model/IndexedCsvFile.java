@@ -5,7 +5,7 @@ import static seedu.contax.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.io.File;
 
-public class ImportCsv {
+public class IndexedCsvFile {
 
     public static final String FILE_PATH_CONSTRAINTS = "File path should point to a .csv file";
     public static final String MESSAGE_CONSTRAINTS = "Positions should be integers above 0";
@@ -24,8 +24,8 @@ public class ImportCsv {
     /**
      * Creates a new ImportCsv object to contain import parameters
      */
-    public ImportCsv(File filePath, int namePosition, int phonePosition, int emailPosition,
-                     int addressPosition, int tagPosition) {
+    public IndexedCsvFile(File filePath, int namePosition, int phonePosition, int emailPosition,
+                          int addressPosition, int tagPosition) {
         requireAllNonNull(filePath, namePosition, phonePosition, emailPosition, addressPosition, tagPosition);
         checkArgument(isValidFilePath(filePath.getPath()), FILE_VALIDATION_REGEX);
         this.filePath = filePath;
@@ -74,11 +74,11 @@ public class ImportCsv {
             return true;
         }
 
-        if (!(other instanceof ImportCsv)) {
+        if (!(other instanceof IndexedCsvFile)) {
             return false;
         }
 
-        ImportCsv otherObject = (ImportCsv) other;
+        IndexedCsvFile otherObject = (IndexedCsvFile) other;
         return otherObject.getFilePath().equals(getFilePath())
                 && otherObject.getNamePositionIndex() == getNamePositionIndex()
                 && otherObject.getPhonePositionIndex() == getPhonePositionIndex()

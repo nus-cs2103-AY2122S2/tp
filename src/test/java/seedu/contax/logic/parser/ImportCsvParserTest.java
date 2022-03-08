@@ -36,7 +36,7 @@ import static seedu.contax.logic.parser.CommandParserTestUtil.assertParseSuccess
 import org.junit.jupiter.api.Test;
 
 import seedu.contax.logic.commands.ImportCsvCommand;
-import seedu.contax.model.ImportCsv;
+import seedu.contax.model.IndexedCsvFile;
 import seedu.contax.testutil.ImportCsvObjectBuilder;
 
 public class ImportCsvParserTest {
@@ -45,22 +45,22 @@ public class ImportCsvParserTest {
     @Test
     public void parse_onlyFilePathPresent_success() {
         //Default positions for columns
-        ImportCsv expectedImportCsvObject = new ImportCsvObjectBuilder().build();
+        IndexedCsvFile expectedIndexedCsvFileObject = new ImportCsvObjectBuilder().build();
 
-        assertParseSuccess(parser, COMMAND_VALID_CSV_FILEPATH, new ImportCsvCommand(expectedImportCsvObject));
+        assertParseSuccess(parser, COMMAND_VALID_CSV_FILEPATH, new ImportCsvCommand(expectedIndexedCsvFileObject));
     }
 
     @Test
     public void parse_customParams_success() {
         //All columns shifted by 1
-        ImportCsv expectedImportCsvObject = new ImportCsvObjectBuilder(
+        IndexedCsvFile expectedIndexedCsvFileObject = new ImportCsvObjectBuilder(
                 ImportCsvObjectBuilder.CUSTOM_COLUMNS_CSV_FILEPATH,
                 2, 3, 4, 5, 6).build();
 
         assertParseSuccess(parser, " " + PREFIX_FILE
                 + ImportCsvObjectBuilder.CUSTOM_COLUMNS_CSV_FILEPATH + " "
                 + PREFIX_NAME + "2 " + PREFIX_PHONE + "3 " + PREFIX_EMAIL + "4 "
-                + PREFIX_ADDRESS + "5 " + PREFIX_TAG + "6", new ImportCsvCommand(expectedImportCsvObject));
+                + PREFIX_ADDRESS + "5 " + PREFIX_TAG + "6", new ImportCsvCommand(expectedIndexedCsvFileObject));
     }
 
     @Test
@@ -79,53 +79,53 @@ public class ImportCsvParserTest {
     public void parse_invalidFields_failure() {
         //invalid filename
         //bad extension
-        assertParseFailure(parser, COMMAND_INVALID_BAD_EXTENSION_FILEPATH, ImportCsv.FILE_PATH_CONSTRAINTS);
+        assertParseFailure(parser, COMMAND_INVALID_BAD_EXTENSION_FILEPATH, IndexedCsvFile.FILE_PATH_CONSTRAINTS);
         //no extension
-        assertParseFailure(parser, COMMAND_INVALID_NO_EXTENSION_FILEPATH, ImportCsv.FILE_PATH_CONSTRAINTS);
+        assertParseFailure(parser, COMMAND_INVALID_NO_EXTENSION_FILEPATH, IndexedCsvFile.FILE_PATH_CONSTRAINTS);
 
         //invalid position numbers
         //letters as position numbers
         assertParseFailure(parser, COMMAND_VALID_CSV_FILEPATH + COMMAND_CSV_INVALID_NAMEPOSITION,
-                ImportCsv.MESSAGE_CONSTRAINTS);
+                IndexedCsvFile.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, COMMAND_VALID_CSV_FILEPATH + COMMAND_CSV_INVALID_PHONEPOSITION,
-                ImportCsv.MESSAGE_CONSTRAINTS);
+                IndexedCsvFile.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, COMMAND_VALID_CSV_FILEPATH + COMMAND_CSV_INVALID_EMAILPOSITION,
-                ImportCsv.MESSAGE_CONSTRAINTS);
+                IndexedCsvFile.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, COMMAND_VALID_CSV_FILEPATH + COMMAND_CSV_INVALID_ADDRESSPOSITION,
-                ImportCsv.MESSAGE_CONSTRAINTS);
+                IndexedCsvFile.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, COMMAND_VALID_CSV_FILEPATH + COMMAND_CSV_INVALID_TAGPOSITION,
-                ImportCsv.MESSAGE_CONSTRAINTS);
+                IndexedCsvFile.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, COMMAND_VALID_CSV_FILEPATH + COMMAND_CSV_INVALID_NAMEPOSITION
                         + COMMAND_CSV_INVALID_PHONEPOSITION + COMMAND_CSV_INVALID_EMAILPOSITION
                         + COMMAND_CSV_INVALID_ADDRESSPOSITION + COMMAND_CSV_INVALID_TAGPOSITION,
-                ImportCsv.MESSAGE_CONSTRAINTS);
+                IndexedCsvFile.MESSAGE_CONSTRAINTS);
 
         //negative position numbers
         assertParseFailure(parser, COMMAND_VALID_CSV_FILEPATH + COMMAND_CSV_NEGATIVE_NAMEPOSITION,
-                ImportCsv.MESSAGE_CONSTRAINTS);
+                IndexedCsvFile.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, COMMAND_VALID_CSV_FILEPATH + COMMAND_CSV_NEGATIVE_PHONEPOSITION,
-                ImportCsv.MESSAGE_CONSTRAINTS);
+                IndexedCsvFile.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, COMMAND_VALID_CSV_FILEPATH + COMMAND_CSV_NEGATIVE_EMAILPOSITION,
-                ImportCsv.MESSAGE_CONSTRAINTS);
+                IndexedCsvFile.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, COMMAND_VALID_CSV_FILEPATH + COMMAND_CSV_NEGATIVE_ADDRESSPOSITION,
-                ImportCsv.MESSAGE_CONSTRAINTS);
+                IndexedCsvFile.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, COMMAND_VALID_CSV_FILEPATH + COMMAND_CSV_NEGATIVE_TAGPOSITION,
-                ImportCsv.MESSAGE_CONSTRAINTS);
+                IndexedCsvFile.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, COMMAND_VALID_CSV_FILEPATH + COMMAND_CSV_NEGATIVE_NAMEPOSITION
                         + COMMAND_CSV_NEGATIVE_PHONEPOSITION + COMMAND_CSV_NEGATIVE_EMAILPOSITION
                         + COMMAND_CSV_NEGATIVE_ADDRESSPOSITION + COMMAND_CSV_NEGATIVE_TAGPOSITION,
-                ImportCsv.MESSAGE_CONSTRAINTS);
+                IndexedCsvFile.MESSAGE_CONSTRAINTS);
 
         //clashing position numbers
         assertParseFailure(parser, COMMAND_VALID_CSV_FILEPATH + COMMAND_CSV_NAMEPOSITION_CLASH,
-                ImportCsv.MESSAGE_CLASHING_POSITIONS);
+                IndexedCsvFile.MESSAGE_CLASHING_POSITIONS);
         assertParseFailure(parser, COMMAND_VALID_CSV_FILEPATH + COMMAND_CSV_PHONEPOSITION_CLASH,
-                ImportCsv.MESSAGE_CLASHING_POSITIONS);
+                IndexedCsvFile.MESSAGE_CLASHING_POSITIONS);
         assertParseFailure(parser, COMMAND_VALID_CSV_FILEPATH + COMMAND_CSV_EMAILPOSITION_CLASH,
-                ImportCsv.MESSAGE_CLASHING_POSITIONS);
+                IndexedCsvFile.MESSAGE_CLASHING_POSITIONS);
         assertParseFailure(parser, COMMAND_VALID_CSV_FILEPATH + COMMAND_CSV_ADDRESSPOSITION_CLASH,
-                ImportCsv.MESSAGE_CLASHING_POSITIONS);
+                IndexedCsvFile.MESSAGE_CLASHING_POSITIONS);
         assertParseFailure(parser, COMMAND_VALID_CSV_FILEPATH + COMMAND_CSV_TAGPOSITION_CLASH,
-                ImportCsv.MESSAGE_CLASHING_POSITIONS);
+                IndexedCsvFile.MESSAGE_CLASHING_POSITIONS);
     }
 }

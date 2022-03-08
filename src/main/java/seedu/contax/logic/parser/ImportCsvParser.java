@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 
 import seedu.contax.logic.commands.ImportCsvCommand;
 import seedu.contax.logic.parser.exceptions.ParseException;
-import seedu.contax.model.ImportCsv;
+import seedu.contax.model.IndexedCsvFile;
 
 public class ImportCsvParser implements Parser<ImportCsvCommand> {
 
@@ -63,10 +63,10 @@ public class ImportCsvParser implements Parser<ImportCsvCommand> {
         checkDuplicateAndAdd(positionHashSet, addressPosition);
         checkDuplicateAndAdd(positionHashSet, tagPosition);
 
-        ImportCsv importCsvObject = new ImportCsv(file, namePosition, phonePosition,
+        IndexedCsvFile indexedCsvFileObject = new IndexedCsvFile(file, namePosition, phonePosition,
                 emailPosition, addressPosition, tagPosition);
 
-        return new ImportCsvCommand(importCsvObject);
+        return new ImportCsvCommand(indexedCsvFileObject);
 
     }
     /**
@@ -85,7 +85,7 @@ public class ImportCsvParser implements Parser<ImportCsvCommand> {
         if (!hashSet.contains(position)) {
             hashSet.add(position);
         } else {
-            throw new ParseException(ImportCsv.MESSAGE_CLASHING_POSITIONS);
+            throw new ParseException(IndexedCsvFile.MESSAGE_CLASHING_POSITIONS);
         }
     }
 
