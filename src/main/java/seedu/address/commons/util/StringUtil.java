@@ -65,4 +65,39 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Returns true if {@code s} contains multiple entries, does not check for validness.
+     * Returns false if {@code s} is only a single entry.
+     * e.g. "1", "2" returns false, "1 2 3", "5    10" (multiple whitespaces) returns true
+     *
+     * @param s trimmed string of arguments
+     * @throws NullPointerException if {@code s} is null.
+     */
+    public static boolean containsMultipleIndex(String s) {
+        requireNonNull(s);
+        String[] indexes = s.split(" ");
+
+        return indexes.length != 1;
+    }
+
+    /**
+     * Returns true if every entry in {@code s} represents a non-zero unsigned integer
+     * e.g. "5 6 7 8"
+     * Will return false for any other non-null string input
+     * e.g. empty string, "-1", "0", "+1", and " 2 " (untrimmed), "1 a" (contains letters)
+     * "1, 2 3" (contains comma), "1   2 3" (multiple whitespaces between adjacent integers)
+     *
+     * @throws NullPointerException if {@code s} is null.
+     */
+    public static boolean isAllNonZeroUnsignedInteger(String s) {
+        requireNonNull(s);
+        String[] indexes = s.split(" ");
+        boolean result = true;
+
+        for (String t : indexes) {
+            result = result && isNonZeroUnsignedInteger(t);
+        }
+        return result;
+    }
 }

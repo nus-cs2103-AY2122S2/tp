@@ -32,6 +32,13 @@ public class Index {
     }
 
     /**
+     * Decreases the index by 1
+     */
+    public void decreaseIndex() {
+        zeroBasedIndex--;
+    }
+
+    /**
      * Creates a new {@code Index} using a zero-based index.
      */
     public static Index fromZeroBased(int zeroBasedIndex) {

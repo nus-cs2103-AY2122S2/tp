@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+//import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -38,6 +39,27 @@ public class DeleteCommandTest {
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
+
+    //    @Test
+    //    public void execute_validIndexUnfilteredListMultipleInOrder_success() {
+    //        Person personToDelete1 = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+    //        Person personToDelete2 = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+    //        Person personToDelete3 = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
+    //        String personsToDelete = personToDelete1 + "\n" + personToDelete2 + "\n" + personToDelete3;
+    //
+    //        DeleteCommand deleteCommand = new DeleteCommand(
+    //                new Index[]{INDEX_FIRST_PERSON, INDEX_SECOND_PERSON, INDEX_THIRD_PERSON});
+    //
+    //        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_MULTIPLE_PERSON_SUCCESS,
+    //                personsToDelete);
+    //
+    //        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+    //        expectedModel.deletePerson(personToDelete1);
+    //        expectedModel.deletePerson(personToDelete2);
+    //        expectedModel.deletePerson(personToDelete3);
+    //
+    //        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    //    }
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
@@ -75,6 +97,27 @@ public class DeleteCommandTest {
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
+
+    //    @Test
+    //    public void execute_validIndexUnfilteredListMultipleOutOfOrder_success() {
+    //        Person personToDelete1 = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+    //        Person personToDelete2 = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+    //        Person personToDelete3 = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+    //        String personsToDelete = personToDelete3 + "\n" + personToDelete2 + "\n" + personToDelete1;
+    //
+    //        DeleteCommand deleteCommand = new DeleteCommand(
+    //                new Index[]{INDEX_THIRD_PERSON, INDEX_FIRST_PERSON, INDEX_SECOND_PERSON});
+    //
+    //        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_MULTIPLE_PERSON_SUCCESS,
+    //        personsToDelete);
+    //
+    //        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+    //        expectedModel.deletePerson(personToDelete3);
+    //        expectedModel.deletePerson(personToDelete2);
+    //        expectedModel.deletePerson(personToDelete1);
+    //
+    //        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    //    }
 
     @Test
     public void equals() {
