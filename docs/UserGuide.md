@@ -59,10 +59,13 @@ NUSocials is a **desktop app for university students to maintain a professional 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[m/MODULES]…​` can be used as ` ` (i.e. 0 times), `m/CS2040S`, `m/CS2030S m/CS2100` etc.
 
+* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+  e.g. if you specify `p/12345678 p/87654321`, onbly `p/87654321` will be taken.
+* 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* All commands are case-insensitive.
+* All commands are case-sensitive.
 
 </div>
 
@@ -79,10 +82,6 @@ Format: `help`
 Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
 
 Examples:
 * `add n/Kim Lai p/12345678 e/kimlai222@example.com a/KL street, block 123, #01-01`
