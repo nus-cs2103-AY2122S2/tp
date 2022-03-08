@@ -39,4 +39,5 @@ public class FindClassCodeCommand extends Command {
                 || (other instanceof FindClassCodeCommand // instanceof handles nulls
                 && predicate.equals(((FindClassCodeCommand) other).predicate)); // state check
     }
+
 }
