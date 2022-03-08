@@ -4,26 +4,27 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+import seedu.address.model.person.Person;
+
 /**
  * Represents a temporary lesson in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class TemporaryLesson extends Lesson {
-
     // Data fields
-    private final TimeSlot timeSlot;
+    private final DateTimeSlot dateTimeSlot;
 
     /**
      * Every field must be present and not null.
      */
-    protected TemporaryLesson(Name name, Subject subject, TimeSlot timeSlot) {
-        super(name, subject);
-        requireAllNonNull(timeSlot);
-        this.timeSlot = timeSlot;
+    protected TemporaryLesson(LessonName name, Subject subject, LessonAddress address, DateTimeSlot dateTimeSlot) {
+        super(name, subject, address);
+        requireAllNonNull(dateTimeSlot);
+        this.dateTimeSlot = dateTimeSlot;
     }
 
-    public TimeSlot getTimeSlot() {
-        return timeSlot;
+    public DateTimeSlot getTimeSlot() {
+        return dateTimeSlot;
     }
 
     /**
@@ -34,7 +35,15 @@ public class TemporaryLesson extends Lesson {
             return true;
         }
 
-        return timeSlot.isConflictingWith(otherLesson.getTimeSlot());
+        return dateTimeSlot.isConflictingWith(otherLesson.getTimeSlot());
+    }
+
+    /**
+     * Adds a given Person to the list of students assigned to this lesson.
+     */
+    @Override
+    public void addStudent(Person person) {
+        this.getAssignedStudents().add(person);
     }
 
     /**
@@ -54,13 +63,14 @@ public class TemporaryLesson extends Lesson {
 
         return otherLesson.getName().equals(getName())
                 && otherLesson.getSubject().equals(getSubject())
+                && otherLesson.getLessonAddress().equals(getLessonAddress())
                 && otherLesson.getTimeSlot().equals(getTimeSlot());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(this.getName(), this.getSubject(), timeSlot);
+        return Objects.hash(this.getName(), this.getSubject(), dateTimeSlot);
     }
 
     @Override

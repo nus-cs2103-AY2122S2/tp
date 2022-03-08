@@ -1,8 +1,7 @@
 package seedu.address.model.util;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -46,25 +45,17 @@ public class SampleDataUtil {
     }
 
     public static Lesson[] getSampleLessons() {
-        Calendar calendar = Calendar.getInstance();
-
-        Date firstLessonDate;
-        Date secondLessonDate;
-        Date thirdLessonDate;
-
-        calendar.add(Calendar.DATE, 10);
-        firstLessonDate = calendar.getTime();
-
-        calendar.add(Calendar.DATE, 10);
-        secondLessonDate = calendar.getTime();
-
-        calendar.add(Calendar.DATE, 10);
-        thirdLessonDate = calendar.getTime();
+        LocalDateTime firstLessonDate = LocalDateTime.of(2022, 1, 5, 17, 50, 0);
+        LocalDateTime secondLessonDate = LocalDateTime.of(2022, 1, 7, 18, 0, 0);
+        LocalDateTime thirdLessonDate = LocalDateTime.of(2022, 1, 9, 0, 50);
 
         return new Lesson[] {
-            Lesson.makeTemporaryLesson("Make up lesson for George", "Geography", firstLessonDate, 2),
-            Lesson.makeTemporaryLesson("Trial lesson for Jake", "Biology", secondLessonDate, 2),
-            Lesson.makeTemporaryLesson("Make up lesson for Henry", "Physics", thirdLessonDate, 2)
+            Lesson.makeTemporaryLesson("Make up lesson for George", "Geography",
+                    "Blk 47 Tampines Street 20, #17-35", firstLessonDate, 2),
+            Lesson.makeTemporaryLesson("Trial lesson for Jake", "Biology",
+                    "Blk 47 Tampines Street 20, #17-35", secondLessonDate, 2),
+            Lesson.makeTemporaryLesson("Make up lesson for Henry", "Physics",
+                    "Blk 47 Tampines Street 20, #17-35", thirdLessonDate, 2, 5)
         };
     }
 

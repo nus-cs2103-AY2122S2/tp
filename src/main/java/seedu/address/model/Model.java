@@ -15,6 +15,9 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Person> PREDICATE_SHOW_ALL_LESSONS = unused -> true;
+
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -86,12 +89,31 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+    //=========== LessonBook =================================================================================
+
     /** Returns the LessonBook */
     ReadOnlyLessonBook getLessonBook();
 
     /** Returns an unmodifiable view of the filtered lesson list */
     ObservableList<Lesson> getFilteredLessonList();
 
+    /**
+     * Returns true if a lesson that conflicts with {@code lesson} exists in the list of lessons.
+     */
+    boolean hasConflictingLesson(Lesson lesson);
+
+    /**
+     * Adds the given lesson.
+     * The lesson must not already exist in the lesson book.
+     */
+    void addLesson(Lesson lesson);
+
+    /**
+     * Updates the filter of the filtered lesson list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredLessonList(Predicate<Lesson> predicate);
+    
     /**
      * Sets the selected {@code Person} with the given {@code Person} for UI use.
      * @param person The given {@code Person}.
