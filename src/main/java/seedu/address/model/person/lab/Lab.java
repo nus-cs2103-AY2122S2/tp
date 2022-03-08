@@ -3,8 +3,6 @@ package seedu.address.model.person.lab;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.util.Objects;
-
 import seedu.address.model.person.exceptions.LabAlreadyGradedException;
 import seedu.address.model.person.exceptions.LabAlreadySubmittedException;
 import seedu.address.model.person.exceptions.LabNotSubmittedException;
@@ -129,13 +127,7 @@ public class Lab {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Lab // instanceof handles nulls
-                && labNumber == (((Lab) other).labNumber) // state check
-                && labStatus == ((Lab) other).labStatus);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(labNumber, labStatus);
+                && labNumber == (((Lab) other).labNumber)); // state check
     }
 
 }
