@@ -4,10 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.contax.testutil.Assert.assertThrows;
 
-import org.junit.jupiter.api.Test;
-import seedu.contax.model.person.Email;
-
 import java.io.File;
+
+import org.junit.jupiter.api.Test;
 
 public class ImportCsvTest {
     @Test
