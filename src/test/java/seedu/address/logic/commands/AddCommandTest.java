@@ -159,6 +159,21 @@ public class AddCommandTest {
         public ReadOnlyLessonBook getLessonBook() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean hasConflictingLesson(Lesson lesson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addLesson(Lesson lesson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredLessonList(Predicate<Lesson> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
