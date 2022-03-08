@@ -6,7 +6,7 @@
     "email" : "alice@example.com",
     "username" : "alice-paul",
     "tagged" : [ "friends" ],
-    "skillSet" : [ "C_50" ]
+    "skillSet" : [ "C_20" ]
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
@@ -34,7 +34,7 @@
     "email" : "werner@example.com",
     "username" : "ellelle",
     "tagged" : [ ],
-    "skillSet" : [ "C_50" ]
+    "skillSet" : [ "C_80" ]
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
@@ -48,6 +48,6 @@
     "email" : "anna@example.com",
     "username" : "best-coder",
     "tagged" : [ ],
-    "skillSet" : [ "C_50" ]
+    "skillSet" : [ "C_30" ]
   } ]
 }

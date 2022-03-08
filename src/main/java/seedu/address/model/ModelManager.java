@@ -4,11 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
@@ -21,7 +23,10 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
+    /** Internal list of filtered persons, wrapped by sortedPersons */
     private final FilteredList<Person> filteredPersons;
+    /** The sorted, filtered list to be shown in the GUI. */
+    private final SortedList<Person> displayPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +39,8 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        // A sorted list wrapping over the internal filtered list
+        displayPersons = new SortedList<>(filteredPersons);
     }
 
     public ModelManager() {
@@ -101,7 +108,7 @@ public class ModelManager implements Model {
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        updateDisplayPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
@@ -111,21 +118,37 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered & Sorted Person List Accessors ==========================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Person> getDisplayPersonList() {
+        return displayPersons;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateDisplayPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+        // Remove sort criteria on new filter
+        displayPersons.setComparator(null);
+    }
+
+    @Override
+    public void updateDisplayPersonList(Comparator<Person> comparator) {
+        requireNonNull(comparator);
+        displayPersons.setComparator(comparator);
+    }
+
+    @Override
+    public void updateDisplayPersonList(Predicate<Person> predicate, Comparator<Person> comparator) {
+        requireNonNull(predicate);
+        requireNonNull(comparator);
+        filteredPersons.setPredicate(predicate);
+        displayPersons.setComparator(comparator);
     }
 
     @Override
