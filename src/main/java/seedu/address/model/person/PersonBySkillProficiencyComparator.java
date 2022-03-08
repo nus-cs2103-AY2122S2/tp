@@ -28,7 +28,7 @@ public class PersonBySkillProficiencyComparator implements Comparator<Person> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof PersonBySkillProficiencyComparator // instanceof handles nulls
-                && skill.equals(((PersonBySkillProficiencyComparator) other).skill)); // state check
+                && skill.isSameSkill(((PersonBySkillProficiencyComparator) other).skill)); // check if same skill name
     }
 
 }
