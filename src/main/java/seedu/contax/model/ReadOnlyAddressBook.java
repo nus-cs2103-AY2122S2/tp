@@ -2,6 +2,7 @@ package seedu.contax.model;
 
 import javafx.collections.ObservableList;
 import seedu.contax.model.person.Person;
+import seedu.contax.model.tag.Tag;
 
 /**
  * Unmodifiable view of an address book
@@ -14,4 +15,5 @@ public interface ReadOnlyAddressBook {
      */
     ObservableList<Person> getPersonList();
 
+    ObservableList<Tag> getTagList();
 }
