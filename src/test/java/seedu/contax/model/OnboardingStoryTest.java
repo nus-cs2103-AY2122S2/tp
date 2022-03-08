@@ -1,8 +1,10 @@
 package seedu.contax.model;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 public class OnboardingStoryTest {
 
@@ -52,7 +54,7 @@ public class OnboardingStoryTest {
         story1.addStory(step1);
 
         // Size of story with 1 step
-        assertEquals(story1.getSize(),1);
+        assertEquals(story1.getSize(), 1);
 
         assertEquals(story1.getStep(0), step1);
     }
