@@ -1,12 +1,12 @@
 package seedu.address.logic.commands;
-
+/*
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPIRY_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -21,11 +21,14 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
+ */
+
 /**
  * Contains helper methods for testing commands.
  */
 public class CommandTestUtil {
 
+    /*
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "11111111";
@@ -57,8 +60,11 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
+    /*
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
+
+
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -73,7 +79,7 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - the returned {@link CommandResult} matches {@code expectedCommandResult} <br>
      * - the {@code actualOldModel} matches {@code expectedOldModel}
-     */
+
     public static void assertCommandSuccess(Command command, OldModel actualOldModel,
                                             CommandResult expectedCommandResult,
                                             OldModel expectedOldModel) {
@@ -89,7 +95,7 @@ public class CommandTestUtil {
     /**
      * Convenience wrapper to {@link #assertCommandSuccess(Command, OldModel, CommandResult, OldModel)}
      * that takes a string {@code expectedMessage}.
-     */
+
     public static void assertCommandSuccess(Command command, OldModel actualOldModel, String expectedMessage,
                                             OldModel expectedOldModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
@@ -101,7 +107,7 @@ public class CommandTestUtil {
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
      * - the address book, filtered person list and selected person in {@code actualOldModel} remain unchanged
-     */
+
     public static void assertCommandFailure(Command command, OldModel actualOldModel, String expectedMessage) {
         // we are unable to defensively copy the oldModel for comparison later, so we can
         // only do so by copying its components.
@@ -115,7 +121,7 @@ public class CommandTestUtil {
     /**
      * Updates {@code oldModel}'s filtered list to show only the person at the given {@code targetIndex} in the
      * {@code oldModel}'s address book.
-     */
+
     public static void showPersonAtIndex(OldModel oldModel, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < oldModel.getFilteredPersonList().size());
 
@@ -125,5 +131,7 @@ public class CommandTestUtil {
 
         assertEquals(1, oldModel.getFilteredPersonList().size());
     }
+
+     */
 
 }

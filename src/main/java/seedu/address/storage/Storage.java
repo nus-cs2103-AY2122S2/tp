@@ -5,12 +5,10 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.OldReadOnlyUserPrefs;
-import seedu.address.model.OldUserPrefs;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyIBook;
-// import seedu.address.model.ReadOnlyUserPrefs;
-// import seedu.address.model.UserPrefs;
+import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.UserPrefs;
 
 /**
  * API of the Storage component
@@ -19,10 +17,10 @@ import seedu.address.model.ReadOnlyIBook;
 public interface Storage extends AddressBookStorage, IBookStorage, UserPrefsStorage {
 
     @Override
-    Optional<OldUserPrefs> readUserPrefs() throws DataConversionException, IOException;
+    Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
 
     @Override
-    void saveUserPrefs(OldReadOnlyUserPrefs userPrefs) throws IOException;
+    void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException;
 
     // TODO : delete start
     @Override

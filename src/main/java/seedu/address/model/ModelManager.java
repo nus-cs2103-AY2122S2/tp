@@ -75,7 +75,7 @@ public class ModelManager implements Model {
         userPrefs.setIBookFilePath(iBookFilePath);
     }
 
-    //=========== IBook ================================================================================
+    //=========== iBook ================================================================================
 
     @Override
     public void setIBook(ReadOnlyIBook iBook) {

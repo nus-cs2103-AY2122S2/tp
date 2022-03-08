@@ -1,10 +1,13 @@
 package seedu.address.logic.commands;
-
+/*
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+
+
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -13,10 +16,11 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.model.OldModel;
 import seedu.address.model.OldModelManager;
 import seedu.address.model.OldUserPrefs;
 import seedu.address.model.person.Person;
+
+ */
 
 /**
  * Contains integration tests (interaction with the OldModel) and unit tests for
@@ -24,6 +28,7 @@ import seedu.address.model.person.Person;
  */
 public class DeleteCommandTest {
 
+    /*
     private OldModel oldModel = new OldModelManager(getTypicalAddressBook(), new OldUserPrefs());
 
     @Test
@@ -100,10 +105,12 @@ public class DeleteCommandTest {
 
     /**
      * Updates {@code oldModel}'s filtered list to show no one.
-     */
+
     private void showNoPerson(OldModel oldModel) {
         oldModel.updateFilteredPersonList(p -> false);
 
         assertTrue(oldModel.getFilteredPersonList().isEmpty());
     }
+
+     */
 }
