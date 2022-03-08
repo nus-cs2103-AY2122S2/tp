@@ -84,12 +84,12 @@ Examples:
 
 Adds a class group to TAssist.
 
-Format: `add class id/CLASSGROUP_ID t/CLASSGROUP_TYPE m/MODULE_CODE`
+Format: `add class id/CLASSGROUP_ID t/CLASSGROUP_TYPE m/MODULE_INDEX`
 
 * TAssist supports the following class group types: lab, recitation, sectional and tutorial.
 
 Examples:
-* `add class id/T13 t/tutorial m/CS2103T`
+* `add class id/T13 t/tutorial m/1` creates a new class group that is tied to the 1st module shown when `list module` is run. 
 
 ### Listing entries
 
@@ -214,8 +214,8 @@ _Details coming soon ..._
         <td>class group</td>
         <td>
             <ul>
-                <li>syntax: <code>add class id/CLASSGROUP_ID t/CLASSGROUP_TYPE m/MODULE_CODE</code></li>
-                <li>e.g., <code>add class id/T13 t/tutorial m/CS2103T</code></li>
+                <li>syntax: <code>add class id/CLASSGROUP_ID t/CLASSGROUP_TYPE m/MODULE_INDEX</code></li>
+                <li>e.g., <code>add class id/T13 t/tutorial m/1</code></li>
             </ul>
         </td>
     </tr>
