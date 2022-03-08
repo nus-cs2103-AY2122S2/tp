@@ -1,10 +1,10 @@
 package seedu.address.model.lesson;
 
-import seedu.address.model.person.Person;
-
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
+
+import seedu.address.model.person.Person;
 
 /**
  * Represents a temporary lesson in the address book.

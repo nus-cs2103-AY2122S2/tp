@@ -1,12 +1,12 @@
 package seedu.address.model.lesson;
 
-import seedu.address.model.person.Person;
-
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import seedu.address.model.person.Person;
 
 /**
  * Represents a Lesson in the Lesson book.
@@ -79,7 +79,9 @@ public abstract class Lesson {
         return address;
     }
 
-    public List<Person> getAssignedStudents() { return assignedStudents; }
+    public List<Person> getAssignedStudents() {
+        return assignedStudents;
+    }
 
     /**
      * Returns true if both lessons have overlapping timeslots.
