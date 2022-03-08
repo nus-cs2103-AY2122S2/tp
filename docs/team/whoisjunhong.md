@@ -1,6 +1,5 @@
----
-layout: page
-title: Jun Hong's Project Portfolio Page
+
+Wee Jun Hong's Project Portfolio Page
 ---
 
 ### Project: Ultimate Divoc Tracker
@@ -9,7 +8,7 @@ This project is based on the AddressBook-Level3 project created by the SE-EDU in
 
 Given below are my contributions to the project.
 
-* **New Feature**: Status attribute for persons -- (Pull Request [\#37](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/37))
+* **New Feature**: Status attribute for Person -- (Pull Request [\#37](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/37))
   * What it does: Gives each person in the list a class code attribute denoting class number/code.
   * Justification: Track COVID-19 close contact using class code
   * Highlights: Class Code follows the convention of an integer followed by an alphabet
@@ -41,5 +40,3 @@ Given below are my contributions to the project.
 * **Tools**:
   * -- ([\#--]())
   * --
-
-* _{you can add/remove categories in the list above}_
