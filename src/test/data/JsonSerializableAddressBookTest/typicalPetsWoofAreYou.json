@@ -1,0 +1,46 @@
+{
+  "_comment": "WoofAreYou save file which contains the same Pet values as in TypicalPets#getTypicalWoofAreYou()",
+  "pets" : [ {
+    "name" : "Boba",
+    "phone" : "94351253",
+    "ownerName" : "Alice Pauline",
+    "address" : "123, Jurong West Ave 6, #08-111",
+    "tagged" : [ "friends" ]
+  }, {
+    "name" : "Pizza",
+    "phone" : "98765432",
+    "ownerName" : "Benson Meier",
+    "address" : "311, Clementi Ave 2, #02-25",
+    "tagged" : [ "owesMoney", "friends" ]
+  }, {
+    "name" : "Bagel",
+    "phone" : "95352563",
+    "ownerName" : "Carl Kurz",
+    "address" : "wall street",
+    "tagged" : [ ]
+  }, {
+    "name" : "Peepee",
+    "phone" : "87652533",
+    "ownerName" : "Daniel Meier",
+    "address" : "10th street",
+    "tagged" : [ "friends" ]
+  }, {
+    "name" : "Pancake",
+    "phone" : "9482224",
+    "ownerName" : "Elle Meyer",
+    "address" : "michegan ave",
+    "tagged" : [ ]
+  }, {
+    "name" : "Waffle",
+    "phone" : "9482427",
+    "ownerName" : "Fiona Kunz",
+    "address" : "little tokyo",
+    "tagged" : [ ]
+  }, {
+    "name" : "Tofu",
+    "phone" : "9482442",
+    "ownerName" : "George Best",
+    "address" : "4th street",
+    "tagged" : [ ]
+  } ]
+}
