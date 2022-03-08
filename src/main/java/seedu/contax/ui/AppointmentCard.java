@@ -28,9 +28,13 @@ public class AppointmentCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
-    private Label date;
+    private Label startDate;
     @FXML
-    private Label time;
+    private Label startTime;
+    @FXML
+    private Label endDate;
+    @FXML
+    private Label endTime;
     @FXML
     private Label personName;
     @FXML
@@ -44,12 +48,15 @@ public class AppointmentCard extends UiPart<Region> {
         this.appointmentModel = appointmentModel;
         this.displayedIndex = displayedIndex;
 
-        id.setText(displayedIndex + " ");
+        id.setText(displayedIndex + ". ");
         name.setText(appointmentModel.getName().name);
 
         LocalDateTime startDateTime = appointmentModel.getStartDateTime().value;
-        date.setText(startDateTime.format(DATE_FORMATTER));
-        time.setText(startDateTime.format(TIME_FORMATTER));
+        LocalDateTime endDateTime = appointmentModel.getEndDateTime();
+        startDate.setText(startDateTime.format(DATE_FORMATTER));
+        startTime.setText(startDateTime.format(TIME_FORMATTER));
+        endDate.setText(endDateTime.format(DATE_FORMATTER));
+        endTime.setText(endDateTime.format(TIME_FORMATTER));
 
         if (appointmentModel.getPerson() != null) {
             Person p = appointmentModel.getPerson();
