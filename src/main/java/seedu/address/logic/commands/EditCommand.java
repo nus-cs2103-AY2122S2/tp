@@ -96,7 +96,7 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        AcademicMajor updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAcademicMajor());
+        AcademicMajor updatedAddress = editPersonDescriptor.getAcademicMajor().orElse(personToEdit.getAcademicMajor());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
@@ -128,7 +128,7 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
-        private AcademicMajor address;
+        private AcademicMajor academicMajor;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -141,7 +141,7 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            setAddress(toCopy.address);
+            setAcademicMajor(toCopy.academicMajor);
             setTags(toCopy.tags);
         }
 
@@ -149,7 +149,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, academicMajor, tags);
         }
 
         public void setName(Name name) {
@@ -176,12 +176,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setAddress(AcademicMajor address) {
-            this.address = address;
+        public void setAcademicMajor(AcademicMajor academicMajor) {
+            this.academicMajor = academicMajor;
         }
 
-        public Optional<AcademicMajor> getAddress() {
-            return Optional.ofNullable(address);
+        public Optional<AcademicMajor> getAcademicMajor() {
+            return Optional.ofNullable(academicMajor);
         }
 
         /**
@@ -219,7 +219,7 @@ public class EditCommand extends Command {
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
-                    && getAddress().equals(e.getAddress())
+                    && getAcademicMajor().equals(e.getAcademicMajor())
                     && getTags().equals(e.getTags());
         }
     }
