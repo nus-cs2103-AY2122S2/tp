@@ -71,7 +71,7 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code address} is invalid.
      */
-    public static AcademicMajor parseAddress(String academicMajor) throws ParseException {
+    public static AcademicMajor parseAcademicMajor(String academicMajor) throws ParseException {
         requireNonNull(academicMajor);
         String trimmedAddress = academicMajor.trim();
         if (!AcademicMajor.isValidAddress(trimmedAddress)) {
