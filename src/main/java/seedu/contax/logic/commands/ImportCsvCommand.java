@@ -89,4 +89,11 @@ public class ImportCsvCommand extends Command {
 
         //load the content into the current list
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ImportCsvCommand // instanceof handles nulls
+                && toImport.equals(((ImportCsvCommand) other).toImport));
+    }
 }

@@ -1,5 +1,7 @@
 package seedu.contax.model;
 
+import seedu.contax.model.person.Person;
+
 import static seedu.contax.commons.util.AppUtil.checkArgument;
 import static seedu.contax.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -59,5 +61,28 @@ public class ImportCsv {
 
     public int getTagPositionIndex() {
         return tagPosition - 1;
+    }
+
+    /**
+     * Returns true if both ImportCsv have the same filepath and position fields.
+     * This defines a stronger notion of equality between two ImportCsv objects.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof ImportCsv)) {
+            return false;
+        }
+
+        ImportCsv otherObject = (ImportCsv) other;
+        return otherObject.getFilePath().equals(getFilePath())
+                && otherObject.getNamePositionIndex() == getNamePositionIndex()
+                && otherObject.getPhonePositionIndex() == getPhonePositionIndex()
+                && otherObject.getEmailPositionIndex() == (getEmailPositionIndex())
+                && otherObject.getAddressPositionIndex() == (getAddressPositionIndex())
+                && otherObject.getTagPositionIndex() == (getTagPositionIndex());
     }
 }
