@@ -38,15 +38,6 @@ public class Person {
         this.modules.addAll(modules);
     }
 
-    /** Temporary overloaded before modules implemented*/
-    public Person(Name name, Phone phone, Email email, Set<Tag> tags) {
-        CollectionUtil.requireAllNonNull(name, phone, email, tags);
-        this.name = name;
-        this.email = email;
-        this.phone = phone;
-        this.tags.addAll(tags);
-    }
-
     public Name getName() {
         return name;
     }
@@ -108,13 +99,14 @@ public class Person {
         return otherPerson.getName().equals(getName())
             && otherPerson.getPhone().equals(getPhone())
             && otherPerson.getEmail().equals(getEmail())
-            && otherPerson.getTags().equals(getTags());
+            && otherPerson.getTags().equals(getTags())
+            && otherPerson.getModules().equals(getModules());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, tags);
+        return Objects.hash(name, phone, email, tags, modules);
     }
 
     @Override
@@ -130,6 +122,12 @@ public class Person {
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
+        }
+
+        Set<Module> modules = getModules();
+        if (!modules.isEmpty()) {
+            builder.append("; Modules: ");
+            modules.forEach(builder::append);
         }
         return builder.toString();
     }

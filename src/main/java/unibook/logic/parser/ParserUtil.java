@@ -9,6 +9,7 @@ import java.util.Set;
 import unibook.commons.core.index.Index;
 import unibook.commons.util.StringUtil;
 import unibook.logic.parser.exceptions.ParseException;
+import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
 import unibook.model.module.ModuleName;
 import unibook.model.person.Email;
@@ -114,6 +115,7 @@ public class ParserUtil {
         return new ModuleCode(trimmedCode);
     }
 
+
     /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
@@ -139,5 +141,23 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses {@code Collection<String> modules} into a {@code Set<Module>}.
+     */
+    public static Set<Module> parseModules(Collection<String> modules) throws ParseException {
+        requireNonNull(modules);
+        final Set<Module> moduleSet = new HashSet<Module>();
+        if (modules.toArray().length == 0) {
+            return moduleSet;
+        }
+        String moduleName = (String) modules.toArray()[0];
+        ModuleName modName = new ModuleName(moduleName);
+        String moduleCode = (String) modules.toArray()[1];
+        ModuleCode modCode = new ModuleCode(moduleCode);
+        Module newmod = new Module(modName, modCode);
+        moduleSet.add(newmod);
+        return moduleSet;
     }
 }

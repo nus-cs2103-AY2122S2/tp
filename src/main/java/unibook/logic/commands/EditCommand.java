@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static unibook.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static unibook.logic.parser.CliSyntax.PREFIX_MODULE;
 import static unibook.logic.parser.CliSyntax.PREFIX_NAME;
+import static unibook.logic.parser.CliSyntax.PREFIX_NEWMOD;
 import static unibook.logic.parser.CliSyntax.PREFIX_OPTION;
 import static unibook.logic.parser.CliSyntax.PREFIX_PHONE;
 import static unibook.logic.parser.CliSyntax.PREFIX_TAG;
@@ -25,6 +26,7 @@ import unibook.model.Model;
 import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
 import unibook.model.module.ModuleName;
+import unibook.model.module.exceptions.ModuleNotFoundException;
 import unibook.model.person.Email;
 import unibook.model.person.Name;
 import unibook.model.person.Person;
@@ -61,6 +63,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_OPTION + "OPTION] "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_MODULE + "MODULECODE] "
+            + "[" + PREFIX_NEWMOD + "NEWMODULECODE] "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_OPTION + "module "
             + PREFIX_NAME + "Software Engineering "
@@ -103,17 +106,24 @@ public class EditCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model) throws CommandException, ModuleNotFoundException {
         requireNonNull(model);
 
         if (this.editModuleDescriptor == null) {
             List<Person> lastShownList = model.getFilteredPersonList();
+            List<Module> latestModList = model.getFilteredModuleList();
 
             if (index.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
 
             Person personToEdit = lastShownList.get(index.getZeroBased());
+            if (!editPersonDescriptor.getModules().equals(Optional.empty()) && latestModList.size() != 0) {
+                Module checkMod = editPersonDescriptor.getModules().get().iterator().next();
+                if (!latestModList.contains(checkMod)) {
+                    throw new ModuleNotFoundException();
+                }
+            }
             Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
             if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
@@ -156,8 +166,9 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
 
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<Module> updatedModules = editPersonDescriptor.getModules().orElse(personToEdit.getModules());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedTags, updatedModules);
     }
 
     /**
@@ -202,6 +213,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Set<Tag> tags;
+        private Set<Module> modules;
 
         public EditPersonDescriptor() {}
 
@@ -214,13 +226,14 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setTags(toCopy.tags);
+            setModules(toCopy.modules);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, tags, modules);
         }
 
         public void setName(Name name) {
@@ -264,6 +277,29 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        /**
+         * Sets {@code modules} to this object's {@code modules}.
+         * A defensive copy of {@code modules} is used internally.
+         */
+        public void setModules(Set<Module> modules) {
+            if (modules == null) {
+                this.modules = null;
+            } else {
+                Set<Module> modulesCopy = new HashSet<>(modules);
+                modulesCopy.addAll(modules);
+                this.modules = modulesCopy;
+            }
+        }
+
+        /**
+         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code modules} is null.
+         */
+        public Optional<Set<Module>> getModules() {
+            return (modules != null) ? Optional.of(Collections.unmodifiableSet(modules)) : Optional.empty();
+        }
+
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -282,7 +318,8 @@ public class EditCommand extends Command {
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
-                    && getTags().equals(e.getTags());
+                    && getTags().equals(e.getTags())
+                    && getModules().equals(e.getModules());
         }
     }
 

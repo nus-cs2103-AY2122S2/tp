@@ -53,7 +53,6 @@ public class UniBookParser {
             return new AddCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
-            logger.info(arguments);
             return new EditCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:

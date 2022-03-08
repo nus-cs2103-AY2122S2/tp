@@ -5,6 +5,7 @@ import static unibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static unibook.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static unibook.logic.parser.CliSyntax.PREFIX_MODULE;
 import static unibook.logic.parser.CliSyntax.PREFIX_NAME;
+import static unibook.logic.parser.CliSyntax.PREFIX_NEWMOD;
 import static unibook.logic.parser.CliSyntax.PREFIX_OPTION;
 import static unibook.logic.parser.CliSyntax.PREFIX_PHONE;
 import static unibook.logic.parser.CliSyntax.PREFIX_TAG;
@@ -22,6 +23,7 @@ import unibook.logic.commands.EditCommand;
 import unibook.logic.commands.EditCommand.EditModuleDescriptor;
 import unibook.logic.commands.EditCommand.EditPersonDescriptor;
 import unibook.logic.parser.exceptions.ParseException;
+import unibook.model.module.Module;
 import unibook.model.tag.Tag;
 
 /**
@@ -43,7 +45,8 @@ public class EditCommandParser implements Parser<EditCommand> {
                                                  PREFIX_PHONE,
                                                  PREFIX_EMAIL,
                                                  PREFIX_TAG,
-                                                 PREFIX_MODULE);
+                                                 PREFIX_MODULE,
+                                                 PREFIX_NEWMOD);
 
         Index index;
 
@@ -74,6 +77,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             }
 
             parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
+            parseModulesForEdit(argMultimap.getAllValues(PREFIX_NEWMOD)).ifPresent(editPersonDescriptor::setModules);
             if (!editPersonDescriptor.isAnyFieldEdited()) {
                 throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
             }
@@ -108,5 +112,20 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
+    }
+
+    /**
+     * Parses {@code Collection<String> modules} into a {@code Set<Module>} if {@code modules} is non-empty.
+     * If {@code modules} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Module>} containing zero modules.
+     */
+    private Optional<Set<Module>> parseModulesForEdit(Collection<String> modules) throws ParseException {
+        assert modules != null;
+
+        if (modules.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> moduleSet = modules.size() == 1 && modules.contains("") ? Collections.emptySet() : modules;
+        return Optional.of(ParserUtil.parseModules(moduleSet));
     }
 }

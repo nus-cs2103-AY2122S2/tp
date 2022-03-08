@@ -140,8 +140,8 @@ Format: `edit o/OPTION [INDEX] [m/MODULE] [n/NAME] [p/PHONE] [e/EMAIL] [nm/NEWMO
 * Existing values will be updated to the input values.
 
 Examples:
-*  `edit 1 p/91234567 e/prof@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `prof@example.com` respectively.
-*  `edit o/module m/CS2103 n/Software Engineering  ` Edits the module code of the module with code `CS2103` to be named as `Software Engineering` and have a new code `CS2103T`
+*  `edit 1 o/person p/91234567 e/prof@example.com nm/CS2103` Edits the phone number and email address of the 1st person to be `91234567` and `prof@example.com` respectively. Adds module CS2103 to the list of modules that this person is taking. 
+*  `edit 1 o/module m/CS2103 n/Software Engineering  ` Edits the module code of the 1st module with code `CS2103` to be named as `Software Engineering` and have a new code `CS2103T`
 
 ### Locating persons by name: `find`
 
