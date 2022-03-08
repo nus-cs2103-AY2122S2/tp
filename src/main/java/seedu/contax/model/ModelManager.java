@@ -168,10 +168,10 @@ public class ModelManager implements Model {
         return schedule.hasOverlappingAppointment(appointment);
     }
 
-    // TODO [APPOINTMENTS] : Implement
     @Override
     public void deleteAppointment(Appointment appointment) {
-
+        requireNonNull(appointment);
+        schedule.removeAppointment(appointment);
     }
 
     @Override

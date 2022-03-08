@@ -183,6 +183,25 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void deleteAppointment_nullAppointment_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.deleteAppointment(null));
+    }
+
+    @Test
+    public void deleteAppointment_appointmentNotInList_throwsAppointmentNotFoundException() {
+        assertThrows(AppointmentNotFoundException.class, ()
+                -> modelManager.deleteAppointment(APPOINTMENT_ALICE));
+    }
+
+    @Test
+    public void deleteAppointment_appointmentInList_success() {
+        modelManager.addAppointment(APPOINTMENT_ALONE);
+        modelManager.deleteAppointment(APPOINTMENT_ALONE);
+        assertEquals(new ModelManager(), modelManager);
+    }
+
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
