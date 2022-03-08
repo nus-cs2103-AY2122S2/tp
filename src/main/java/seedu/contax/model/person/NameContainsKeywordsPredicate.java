@@ -20,4 +20,10 @@ public class NameContainsKeywordsPredicate extends ContainsKeywordsPredicate imp
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword));
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof NameContainsKeywordsPredicate // instanceof handles nulls
+                && super.getKeywords().equals(((NameContainsKeywordsPredicate) other).getKeywords())); // state check
+    }
 }

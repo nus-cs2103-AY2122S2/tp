@@ -19,4 +19,11 @@ public class PhoneContainsKeywordsPredicate extends ContainsKeywordsPredicate im
         return super.getKeywords().stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getPhone().toString(), keyword));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof PhoneContainsKeywordsPredicate // instanceof handles nulls
+                && super.getKeywords().equals(((PhoneContainsKeywordsPredicate) other).getKeywords())); // state check
+    }
 }

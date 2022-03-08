@@ -6,7 +6,7 @@ import static seedu.contax.commons.util.AppUtil.checkArgument;
 import java.util.Arrays;
 
 /**
- * Represents a Person's name in the address book.
+ * Represents a Utility of search type.
  * Guarantees: immutable; is valid as declared in {@link #isValidType(String)} (String)}
  */
 public class SearchType {
@@ -33,7 +33,7 @@ public class SearchType {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidType(String test) {
-        return Arrays.stream(VALIDATION_TYPE).anyMatch(test::contains);
+        return Arrays.asList(VALIDATION_TYPE).contains(test);
     }
 
 

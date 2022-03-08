@@ -149,7 +149,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noPersonFound_phone() {
+    public void execute_zeroKeywords_noPersonFoundPhone() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         PhoneContainsKeywordsPredicate predicate = preparePhonePredicate(" ");
         FindCommand command = new FindCommand(predicate);
@@ -159,7 +159,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noPersonFound_email() {
+    public void execute_zeroKeywords_noPersonFoundEmail() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         EmailContainsKeywordsPredicate predicate = prepareEmailPredicate(" ");
         FindCommand command = new FindCommand(predicate);
@@ -169,7 +169,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noPersonFound_address() {
+    public void execute_zeroKeywords_noPersonFoundAddress() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         AddressContainsKeywordsPredicate predicate = prepareAddressPredicate(" ");
         FindCommand command = new FindCommand(predicate);
@@ -189,7 +189,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_multipleKeywords_multiplePersonsFound_phone() {
+    public void execute_multipleKeywords_multiplePersonsFoundPhone() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         PhoneContainsKeywordsPredicate predicate = preparePhonePredicate("95352563 9482224 9482427");
         FindCommand command = new FindCommand(predicate);
@@ -199,7 +199,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_multipleKeywords_multiplePersonsFound_email() {
+    public void execute_multipleKeywords_multiplePersonsFoundEmail() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         EmailContainsKeywordsPredicate predicate = prepareEmailPredicate(
                 "heinz@example.com werner@example.com lydia@example.com");
@@ -210,7 +210,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_multipleKeywords_multiplePersonsFound_address() {
+    public void execute_multipleKeywords_multiplePersonsFoundAddress() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
         AddressContainsKeywordsPredicate predicate = prepareAddressPredicate(
                 "wall");

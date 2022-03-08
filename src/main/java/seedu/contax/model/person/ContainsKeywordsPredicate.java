@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 /**
- * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
+ * Tests that an attribute of a {@code Person} matches any of the keywords given.
  */
 public abstract class ContainsKeywordsPredicate implements Predicate<Person> {
 
@@ -16,13 +16,6 @@ public abstract class ContainsKeywordsPredicate implements Predicate<Person> {
 
     public List<String> getKeywords() {
         return keywords;
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof ContainsKeywordsPredicate // instanceof handles nulls
-                && keywords.equals(((ContainsKeywordsPredicate) other).keywords)); // state check
     }
 
 }
