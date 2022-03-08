@@ -131,6 +131,10 @@ public class UpdateCommand extends Command {
          */
         public UpdateProductDescriptor(UpdateProductDescriptor toCopy) {
             setName(toCopy.name);
+            setCategory(toCopy.category);
+            setExpiryDate(toCopy.expiryDate);
+            setDescription(toCopy.description);
+            setPrice(toCopy.price);
         }
 
         /**
