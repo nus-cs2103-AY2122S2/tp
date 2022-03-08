@@ -11,6 +11,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.lab.Lab;
+import seedu.address.model.person.lab.LabList;
 
 /**
  * Adds a person to the address book.
@@ -52,6 +54,12 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        LabList plainLabList = new LabList();
+        for (Lab l : model.getAddressBook().getMasterLabList().getMasterList()) {
+            plainLabList.add(l.createCopy());
+        }
+        toAdd.setLabs(plainLabList);
 
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);

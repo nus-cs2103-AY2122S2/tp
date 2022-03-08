@@ -73,7 +73,7 @@ public class MasterLabList {
     }
 
     /**
-     * Replaces the contents of this list with {@code persons}.
+     * Replaces the contents of this list with {@code labs}.
      * {@code persons} must not contain duplicate persons.
      */
     public void setLabs(List<Lab> labs) {
@@ -83,6 +83,13 @@ public class MasterLabList {
         }
         masterList.clear();
         masterList.addAll(labs);
+    }
+
+    /**
+     * Returns a copy of the {@code masterList}.
+     */
+    public ArrayList<Lab> getMasterList() {
+        return new ArrayList<>(masterList);
     }
 
     @Override
