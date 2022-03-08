@@ -96,18 +96,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String userType} into a {@code UserType}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code userType} is invalid.
      */
-    public static UserType parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!UserType.isValidTagName(trimmedTag)) {
+    public static UserType parseUserType(String userType) throws ParseException {
+        requireNonNull(userType);
+        String trimmedUserType = userType.trim();
+        if (!UserType.isValidUserType(trimmedUserType)) {
             throw new ParseException(UserType.MESSAGE_CONSTRAINTS);
         }
-        return new UserType(trimmedTag);
+        return new UserType(trimmedUserType);
     }
 
     /**
@@ -117,7 +117,7 @@ public class ParserUtil {
         requireNonNull(tags);
         final Set<UserType> userTypeSet = new HashSet<>();
         for (String tagName : tags) {
-            userTypeSet.add(parseTag(tagName));
+            userTypeSet.add(parseUserType(tagName));
         }
         return userTypeSet;
     }

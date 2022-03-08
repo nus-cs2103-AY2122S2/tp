@@ -4,31 +4,31 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Tag in the address book.
- * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
+ * Represents a USer Type in the address book.
+ * Guarantees: immutable; name is valid as declared in {@link #isValidUserType(String)}
  */
 public class UserType {
 
-    public static final String VALIDATION_REGEX = "buyer|seller"; //"\\p{Alnum}+";
-    public static final String MESSAGE_CONSTRAINTS = "Tag names should be " + VALIDATION_REGEX;
+    public static final String VALIDATION_REGEX = "buyer|seller";
+    public static final String MESSAGE_CONSTRAINTS = "User type name should either be \"buyer\" or \"seller\" ";
 
     public final String value;
 
     /**
-     * Constructs a {@code Tag}.
+     * Constructs a {@code UserType}.
      *
-     * @param value A valid tag name.
+     * @param value A valid User Type name.
      */
     public UserType(String value) {
         requireNonNull(value);
-        checkArgument(isValidTagName(value), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidUserType(value), MESSAGE_CONSTRAINTS);
         this.value = value;
     }
 
     /**
-     * Returns true if a given string is a valid tag name.
+     * Returns true if a given string is a valid User Type name.
      */
-    public static boolean isValidTagName(String test) {
+    public static boolean isValidUserType(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 

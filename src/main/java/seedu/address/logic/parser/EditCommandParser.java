@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_USERTYPE;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -32,7 +32,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_USERTYPE);
 
         Index index;
 
@@ -55,9 +55,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
-        //parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTag);
-        if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
-            editPersonDescriptor.setUserType(ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).get()));
+        if (argMultimap.getValue(PREFIX_USERTYPE).isPresent()) {
+            editPersonDescriptor.setUserType(ParserUtil.parseUserType(argMultimap.getValue(PREFIX_USERTYPE).get()));
         }
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {

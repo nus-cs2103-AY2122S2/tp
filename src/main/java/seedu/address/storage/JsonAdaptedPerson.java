@@ -30,7 +30,7 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tagged") String userType) {
+            @JsonProperty("userType") String userType) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -55,10 +55,6 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-//        final List<UserType> personUserTypes = new ArrayList<>();
-//        for (JsonAdaptedTag tag : userType) {
-//            personUserTypes.add(tag.toModelType());
-//        }
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -93,11 +89,14 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         if (userType == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, UserType.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    UserType.class.getSimpleName()));
+        }
+        if (!UserType.isValidUserType(userType)) {
+            throw new IllegalValueException(UserType.MESSAGE_CONSTRAINTS);
         }
         final UserType modelUserType = new UserType(userType);
 
-//        final Set<UserType> modelUserType = new HashSet<>(personUserTypes);
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelUserType);
     }
 

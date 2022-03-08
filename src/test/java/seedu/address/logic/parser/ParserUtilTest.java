@@ -150,25 +150,25 @@ public class ParserUtilTest {
 
     @Test
     public void parseTag_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseTag(null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseUserType(null));
     }
 
     @Test
     public void parseTag_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_TAG));
+        assertThrows(ParseException.class, () -> ParserUtil.parseUserType(INVALID_TAG));
     }
 
     @Test
     public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
         UserType expectedUserType = new UserType(VALID_TAG_1);
-        assertEquals(expectedUserType, ParserUtil.parseTag(VALID_TAG_1));
+        assertEquals(expectedUserType, ParserUtil.parseUserType(VALID_TAG_1));
     }
 
     @Test
     public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
         String tagWithWhitespace = WHITESPACE + VALID_TAG_1 + WHITESPACE;
         UserType expectedUserType = new UserType(VALID_TAG_1);
-        assertEquals(expectedUserType, ParserUtil.parseTag(tagWithWhitespace));
+        assertEquals(expectedUserType, ParserUtil.parseUserType(tagWithWhitespace));
     }
 
     @Test

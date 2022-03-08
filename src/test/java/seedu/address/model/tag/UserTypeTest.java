@@ -22,7 +22,7 @@ public class UserTypeTest {
     @Test
     public void isValidTagName() {
         // null tag name
-        assertThrows(NullPointerException.class, () -> UserType.isValidTagName(null));
+        assertThrows(NullPointerException.class, () -> UserType.isValidUserType(null));
     }
 
 }

@@ -102,7 +102,7 @@ public class Person {
                 .append(getEmail())
                 .append("; Address: ")
                 .append(getAddress())
-                .append("; UserType: ")
+                .append("; User Type: ")
                 .append(getUserType());
 
         return builder.toString();
