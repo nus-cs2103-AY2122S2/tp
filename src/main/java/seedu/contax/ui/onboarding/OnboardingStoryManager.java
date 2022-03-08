@@ -1,4 +1,4 @@
-package seedu.contax.logic;
+package seedu.contax.ui.onboarding;
 
 import java.util.ArrayList;
 import java.util.HashSet;

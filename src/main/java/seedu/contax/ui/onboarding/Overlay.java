@@ -1,4 +1,4 @@
-package seedu.contax.ui;
+package seedu.contax.ui.onboarding;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ReadOnlyDoubleProperty;
@@ -6,6 +6,7 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
+import seedu.contax.ui.UiPart;
 
 public class Overlay extends UiPart<Region> {
 

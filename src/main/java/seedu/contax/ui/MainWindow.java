@@ -16,6 +16,7 @@ import seedu.contax.logic.Logic;
 import seedu.contax.logic.commands.CommandResult;
 import seedu.contax.logic.commands.exceptions.CommandException;
 import seedu.contax.logic.parser.exceptions.ParseException;
+import seedu.contax.ui.onboarding.OnboardingPrompt;
 
 /**
  * The Main Window. Provides the basic application layout containing

@@ -1,8 +1,9 @@
-package seedu.contax.ui;
+package seedu.contax.ui.onboarding;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
+import seedu.contax.ui.UiPart;
 
 /**
  * The UI component that is responsible for receiving user command inputs.

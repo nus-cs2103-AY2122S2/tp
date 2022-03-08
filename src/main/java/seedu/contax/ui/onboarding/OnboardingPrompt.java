@@ -1,13 +1,14 @@
-package seedu.contax.ui;
+package seedu.contax.ui.onboarding;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import seedu.contax.commons.core.LogsCenter;
+import seedu.contax.ui.HelpWindow;
+import seedu.contax.ui.UiPart;
 
 import java.util.logging.Logger;
 

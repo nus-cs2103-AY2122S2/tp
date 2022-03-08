@@ -1,16 +1,16 @@
-package seedu.contax.ui;
+package seedu.contax.ui.onboarding;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuBar;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import seedu.contax.logic.OnboardingStoryManager;
 import seedu.contax.model.OnboardingStep;
 import seedu.contax.model.person.UniquePersonList;
+import seedu.contax.ui.PersonListPanel;
+import seedu.contax.ui.UiPart;
 
 public class OnboardingWindow extends UiPart<Stage> {
 

@@ -1,4 +1,4 @@
-package seedu.contax.ui;
+package seedu.contax.ui.onboarding;
 
 import javafx.beans.binding.DoubleBinding;
 import javafx.beans.property.DoubleProperty;
@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
+import seedu.contax.ui.UiPart;
 
 import java.util.function.DoubleBinaryOperator;
 
