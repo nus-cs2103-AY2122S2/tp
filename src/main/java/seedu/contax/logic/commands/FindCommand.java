@@ -4,11 +4,13 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.contax.commons.core.Messages;
 import seedu.contax.model.Model;
+import seedu.contax.model.person.ContainsKeywordsPredicate;
 import seedu.contax.model.person.NameContainsKeywordsPredicate;
+import seedu.contax.model.person.PhoneContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Keyword matching is case-insensitive.
  */
 public class FindCommand extends Command {
 
@@ -19,9 +21,9 @@ public class FindCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final ContainsKeywordsPredicate predicate;
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
+    public FindCommand(ContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 

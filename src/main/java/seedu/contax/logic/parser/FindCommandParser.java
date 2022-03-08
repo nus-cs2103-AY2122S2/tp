@@ -1,12 +1,18 @@
 package seedu.contax.logic.parser;
 
 import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_SEARCH_TYPE;
 
 import java.util.Arrays;
+import java.util.stream.Stream;
 
 import seedu.contax.logic.commands.FindCommand;
 import seedu.contax.logic.parser.exceptions.ParseException;
+import seedu.contax.model.person.AddressContainsKeywordsPredicate;
+import seedu.contax.model.person.EmailContainsKeywordsPredicate;
 import seedu.contax.model.person.NameContainsKeywordsPredicate;
+import seedu.contax.model.person.PhoneContainsKeywordsPredicate;
+import seedu.contax.model.util.SearchType;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -24,10 +30,30 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
-
-        String[] nameKeywords = trimmedArgs.split("\\s+");
-
-        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(trimmedArgs, PREFIX_SEARCH_TYPE);
+        String[] outputKeywords = args.trim().split("\\s+");
+        if (!arePrefixesPresent(argMultimap, PREFIX_SEARCH_TYPE)) {
+            return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(outputKeywords)));
+        } else {
+            SearchType type = ParserUtil.parseSearchType(argMultimap.getValue(PREFIX_SEARCH_TYPE).get());
+            if (type.toString().equals("phone")) {
+                return new FindCommand(new PhoneContainsKeywordsPredicate(Arrays.asList(outputKeywords)));
+            } else if (type.toString().equals("email")) {
+                return new FindCommand(new EmailContainsKeywordsPredicate(Arrays.asList(outputKeywords)));
+            } else if (type.toString().equals("address")) {
+                return new FindCommand(new AddressContainsKeywordsPredicate(Arrays.asList(outputKeywords)));
+            } else {
+                return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(outputKeywords)));
+            }
+        }
     }
 
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
 }
