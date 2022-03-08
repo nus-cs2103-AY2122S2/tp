@@ -28,8 +28,9 @@ public class UiManager implements Ui {
     /**
      * Creates a {@code UiManager} with the given {@code Logic}.
      */
-    public UiManager(Logic logic) {
+    public UiManager(Logic logic, boolean isFirstRun) {
         this.logic = logic;
+        this.isFirstRun = isFirstRun;
     }
 
     @Override

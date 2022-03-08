@@ -66,11 +66,8 @@ public class MainApp extends Application {
 
         logic = new LogicManager(model, storage);
 
-        ui = new UiManager(logic);
-
-        if (model.getAddressBook().equals(SampleDataUtil.getSampleAddressBook())) {
-            ui.setFirstRun();
-        }
+        boolean isFirstRun = model.getAddressBook().equals(SampleDataUtil.getSampleAddressBook());
+        ui = new UiManager(logic, isFirstRun);
     }
 
     /**
