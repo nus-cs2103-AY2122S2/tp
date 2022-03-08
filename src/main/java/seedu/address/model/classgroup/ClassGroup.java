@@ -2,7 +2,7 @@ package seedu.address.model.classgroup;
 
 import java.util.Objects;
 
-import seedu.address.model.tamodule.ModuleCode;
+import seedu.address.model.tamodule.TaModule;
 
 /**
  * Represents a ClassGroup in the TAssist.
@@ -12,7 +12,7 @@ public class ClassGroup {
     // Identity fields
     private final ClassGroupId classGroupId;
     private final ClassGroupType classGroupType;
-    private final ModuleCode moduleCode;
+    private final TaModule taModule;
 
     /**
      * Constructs a {@code ClassGroup}.
@@ -20,12 +20,12 @@ public class ClassGroup {
      *
      * @param classGroupId A valid class group ID.
      * @param classGroupType A valid class group type.
-     * @param moduleCode A valid module code.
+     * @param taModule A valid module.
      */
-    public ClassGroup(ClassGroupId classGroupId, ClassGroupType classGroupType, ModuleCode moduleCode) {
+    public ClassGroup(ClassGroupId classGroupId, ClassGroupType classGroupType, TaModule taModule) {
         this.classGroupId = classGroupId;
         this.classGroupType = classGroupType;
-        this.moduleCode = moduleCode;
+        this.taModule = taModule;
     }
 
     public ClassGroupId getClassGroupId() {
@@ -36,8 +36,8 @@ public class ClassGroup {
         return classGroupType;
     }
 
-    public ModuleCode getModuleCode() {
-        return moduleCode;
+    public TaModule getModule() {
+        return taModule;
     }
 
     /**
@@ -56,12 +56,12 @@ public class ClassGroup {
         ClassGroup otherClassGroup = (ClassGroup) other;
         return otherClassGroup.getClassGroupId().equals(getClassGroupId())
                 && otherClassGroup.getClassGroupType().equals(getClassGroupType())
-                && otherClassGroup.getModuleCode().equals(getModuleCode());
+                && otherClassGroup.getModule().equals(getModule());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(classGroupId, classGroupType, moduleCode);
+        return Objects.hash(classGroupId, classGroupType, taModule);
     }
 
     @Override
@@ -70,8 +70,8 @@ public class ClassGroup {
         builder.append(getClassGroupId())
                 .append("; Type: ")
                 .append(getClassGroupType())
-                .append("; Module Code: ")
-                .append(getModuleCode());
+                .append("; Module: ")
+                .append(getModule());
         return builder.toString();
     }
 }
