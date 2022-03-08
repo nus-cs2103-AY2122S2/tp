@@ -47,22 +47,22 @@
             <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
         </StackPane>
-            <TabPane fx:id="tabs" tabClosingPolicy="UNAVAILABLE">
+            <TabPane fx:id="tabs" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
               <tabs>
                 <Tab fx:id="personListTab" text="Friends">
                   <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" styleClass="background">
+                    <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" styleClass="background">
                            <children>
-                         <StackPane fx:id="personListPanelPlaceholder" />
+                         <StackPane fx:id="personListPanelPlaceholder" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="0.0" prefWidth="199.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children>
                         </AnchorPane>
                   </content>
                 </Tab>
                 <Tab fx:id="eventsListTab" text="Events">
                   <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" nodeOrientation="LEFT_TO_RIGHT" styleClass="background">
+                    <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" nodeOrientation="LEFT_TO_RIGHT" styleClass="background">
                            <children>
-                              <StackPane fx:id="eventListPanelPlaceholder" />
+                              <StackPane fx:id="eventListPanelPlaceholder" prefHeight="0.0" prefWidth="199.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children>
                         </AnchorPane>
                   </content>
