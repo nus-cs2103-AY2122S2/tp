@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import seedu.contax.logic.commands.AddAppointmentCommand;
 import seedu.contax.logic.commands.AddCommand;
+import seedu.contax.logic.commands.BatchCommand;
 import seedu.contax.logic.commands.ClearCommand;
 import seedu.contax.logic.commands.Command;
 import seedu.contax.logic.commands.DeleteCommand;
@@ -75,6 +76,9 @@ public class AddressBookParser {
 
         case ListAppointmentCommand.COMMAND_WORD:
             return new ListAppointmentCommand();
+
+        case BatchCommand.COMMAND_WORD:
+            return new BatchCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
