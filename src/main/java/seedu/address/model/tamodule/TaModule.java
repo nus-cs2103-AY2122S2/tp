@@ -17,14 +17,16 @@ public class TaModule implements Entity {
     // Identity fields
     private final ModuleName moduleName;
     private final ModuleCode moduleCode;
+    private final AcademicYear academicYear;
 
     /**
      * Every field must be present and not null.
      */
-    public TaModule(ModuleName moduleName, ModuleCode moduleCode) {
+    public TaModule(ModuleName moduleName, ModuleCode moduleCode, AcademicYear academicYear) {
         requireAllNonNull(moduleName, moduleCode);
         this.moduleName = moduleName;
         this.moduleCode = moduleCode;
+        this.academicYear = academicYear;
     }
 
     public ModuleName getModuleName() {
@@ -35,8 +37,12 @@ public class TaModule implements Entity {
         return moduleCode;
     }
 
+    public AcademicYear getAcademicYear() {
+        return academicYear;
+    }
+
     /**
-     * Returns true if both modules have the same moduleCode.
+     * Returns true if both modules have the same moduleCode and academicYear.
      * This defines a weaker notion of equality between two modules.
      */
     public boolean isSameModule(TaModule otherTaModule) {
@@ -45,7 +51,8 @@ public class TaModule implements Entity {
         }
 
         return otherTaModule != null
-                && otherTaModule.getModuleCode().equals(getModuleCode());
+                && otherTaModule.getModuleCode().equals(getModuleCode())
+                && otherTaModule.getAcademicYear().equals(getAcademicYear());
     }
 
     @Override
@@ -69,13 +76,14 @@ public class TaModule implements Entity {
 
         TaModule otherTaModule = (TaModule) other;
         return otherTaModule.getModuleName().equals(getModuleName())
+                && otherTaModule.getAcademicYear().equals(getAcademicYear())
                 && otherTaModule.getModuleCode().equals(getModuleCode());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(moduleName, moduleCode);
+        return Objects.hash(moduleName, moduleCode, academicYear);
     }
 
     @Override
@@ -83,7 +91,9 @@ public class TaModule implements Entity {
         final StringBuilder builder = new StringBuilder();
         builder.append(getModuleCode())
                 .append("; Module Name: ")
-                .append(getModuleName());
+                .append(getModuleName())
+                .append("; Academic Year: ")
+                .append(getAcademicYear());
         return builder.toString();
     }
 
