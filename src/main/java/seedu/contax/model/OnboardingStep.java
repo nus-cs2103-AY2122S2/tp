@@ -4,6 +4,9 @@ import seedu.contax.model.person.Person;
 
 import java.util.Objects;
 
+/**
+ * The model that is responsible for storing actions for the OnbordingWindow
+ */
 public class OnboardingStep {
     private String displayMessage;
     private int overlayOption;
