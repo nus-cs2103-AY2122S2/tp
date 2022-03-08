@@ -8,6 +8,9 @@ import seedu.contax.model.Model;
 import seedu.contax.model.tag.Tag;
 
 
+/**
+ * Adds a tag to the address book.
+ */
 public class AddTagCommand extends Command {
     public static final String COMMAND_WORD = "addtag";
 

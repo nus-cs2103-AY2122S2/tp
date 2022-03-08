@@ -92,6 +92,8 @@ public interface Model {
 
     void addTag(Tag tag);
 
+    ObservableList<Tag> getTagList();
+
     // Appointments
     /**
      * Returns the user prefs' schedule file path.
