@@ -37,13 +37,14 @@ public class FindCommandParser implements Parser<FindCommand> {
             return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(outputKeywords)));
         } else {
             SearchType type = ParserUtil.parseSearchType(argMultimap.getValue(PREFIX_SEARCH_TYPE).get());
-            if (type.toString().equals("phone")) {
+            switch (type.toString()) {
+            case "phone":
                 return new FindCommand(new PhoneContainsKeywordsPredicate(Arrays.asList(outputKeywords)));
-            } else if (type.toString().equals("email")) {
+            case "email":
                 return new FindCommand(new EmailContainsKeywordsPredicate(Arrays.asList(outputKeywords)));
-            } else if (type.toString().equals("address")) {
+            case "address":
                 return new FindCommand(new AddressContainsKeywordsPredicate(Arrays.asList(outputKeywords)));
-            } else {
+            default:
                 return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(outputKeywords)));
             }
         }
