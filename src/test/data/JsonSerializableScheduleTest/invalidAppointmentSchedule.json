@@ -1,7 +1,7 @@
 {
   "appointments": [
     {
-      "name": "Meeting With Non-Alphanumeric character!",
+      "name": "Meeting With forbidden character?",
       "startDateTime": "2022-11-11T12:34:00",
       "duration": 10
     }

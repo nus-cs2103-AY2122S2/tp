@@ -42,7 +42,7 @@ public class ParserUtilTest {
     private static final String INVALID_BAD_EXTENSION_CSV_FILEPATH = "wrongFile.txt";
     private static final String INVALID_NO_EXTENSION_CSV_FILEPATH = "./src/test/data/ImportCsvTest/ValidContaXFormat";
 
-    private static final String INVALID_APPOINTMENT_NAME = "MEETING!";
+    private static final String INVALID_APPOINTMENT_NAME = "MEETING?";
     private static final String INVALID_DATE_SYNTAX = "2022-10-20";
     private static final String INVALID_DATE_VALUE = "32-01-2022";
     private static final String INVALID_TIME_SYNTAX = "12-22";
