@@ -13,8 +13,8 @@ import seedu.address.commons.core.Version;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.AB3Logic;
-import seedu.address.logic.AB3LogicManager;
+import seedu.address.logic.Logic;
+import seedu.address.logic.LogicManager;
 import seedu.address.model.AB3Model;
 import seedu.address.model.AB3ModelManager;
 import seedu.address.model.AddressBook;
@@ -41,7 +41,7 @@ public class MainApp extends Application {
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
     protected Ui ui;
-    protected AB3Logic logic;
+    protected Logic logic;
     protected Storage storage;
     protected AB3Model model;
     protected Config config;
@@ -63,7 +63,7 @@ public class MainApp extends Application {
 
         model = initModelManager(storage, userPrefs);
 
-        logic = new AB3LogicManager(model, storage);
+        logic = new LogicManager(model, storage);
 
         ui = new UiManager(logic);
     }

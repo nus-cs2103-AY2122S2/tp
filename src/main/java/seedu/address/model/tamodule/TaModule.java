@@ -4,12 +4,15 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+import seedu.address.model.entity.Entity;
+import seedu.address.model.entity.EntityType;
+
 /**
  * Represents a Module in the TAssist.
  * It is named TaModule as it conflicts with the class java.lang.Module.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class TaModule {
+public class TaModule implements Entity {
 
     // Identity fields
     private final ModuleName moduleName;
@@ -43,6 +46,11 @@ public class TaModule {
 
         return otherTaModule != null
                 && otherTaModule.getModuleCode().equals(getModuleCode());
+    }
+
+    @Override
+    public EntityType getEntityType() {
+        return EntityType.TA_MODULE;
     }
 
     /**

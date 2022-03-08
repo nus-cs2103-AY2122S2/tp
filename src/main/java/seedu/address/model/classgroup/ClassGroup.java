@@ -2,13 +2,15 @@ package seedu.address.model.classgroup;
 
 import java.util.Objects;
 
+import seedu.address.model.entity.Entity;
+import seedu.address.model.entity.EntityType;
 import seedu.address.model.tamodule.TaModule;
 
 /**
  * Represents a ClassGroup in the TAssist.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class ClassGroup {
+public class ClassGroup implements Entity {
     // Identity fields
     private final ClassGroupId classGroupId;
     private final ClassGroupType classGroupType;
@@ -38,6 +40,11 @@ public class ClassGroup {
 
     public TaModule getModule() {
         return taModule;
+    }
+
+    @Override
+    public EntityType getEntityType() {
+        return EntityType.CLASS_GROUP;
     }
 
     /**
