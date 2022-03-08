@@ -22,15 +22,15 @@ public class AddressTest {
     @Test
     public void isValidAddress() {
         // null address
-        assertThrows(NullPointerException.class, () -> AcademicMajor.isValidAddress(null));
+        assertThrows(NullPointerException.class, () -> AcademicMajor.isValidAcademicMajor(null));
 
         // invalid addresses
-        assertFalse(AcademicMajor.isValidAddress("")); // empty string
-        assertFalse(AcademicMajor.isValidAddress(" ")); // spaces only
+        assertFalse(AcademicMajor.isValidAcademicMajor("")); // empty string
+        assertFalse(AcademicMajor.isValidAcademicMajor(" ")); // spaces only
 
         // valid addresses
-        assertTrue(AcademicMajor.isValidAddress("Blk 456, Den Road, #01-355"));
-        assertTrue(AcademicMajor.isValidAddress("-")); // one character
-        assertTrue(AcademicMajor.isValidAddress("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
+        assertTrue(AcademicMajor.isValidAcademicMajor("Blk 456, Den Road, #01-355"));
+        assertTrue(AcademicMajor.isValidAcademicMajor("-")); // one character
+        assertTrue(AcademicMajor.isValidAcademicMajor("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
     }
 }

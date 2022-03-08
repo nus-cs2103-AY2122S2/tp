@@ -73,11 +73,11 @@ public class ParserUtil {
      */
     public static AcademicMajor parseAcademicMajor(String academicMajor) throws ParseException {
         requireNonNull(academicMajor);
-        String trimmedAddress = academicMajor.trim();
-        if (!AcademicMajor.isValidAddress(trimmedAddress)) {
+        String trimmedAcademicMajor = academicMajor.trim();
+        if (!AcademicMajor.isValidAcademicMajor(trimmedAcademicMajor)) {
             throw new ParseException(AcademicMajor.MESSAGE_CONSTRAINTS);
         }
-        return new AcademicMajor(trimmedAddress);
+        return new AcademicMajor(trimmedAcademicMajor);
     }
 
     /**

@@ -21,7 +21,7 @@ public class Person {
     private final Email email;
 
     // Data fields
-    private final AcademicMajor address;
+    private final AcademicMajor academicMajor;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -32,7 +32,7 @@ public class Person {
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
+        this.academicMajor = address;
         this.tags.addAll(tags);
     }
 
@@ -48,8 +48,8 @@ public class Person {
         return email;
     }
 
-    public AcademicMajor getAddress() {
-        return address;
+    public AcademicMajor getAcademicMajor() {
+        return academicMajor;
     }
 
     /**
@@ -91,14 +91,14 @@ public class Person {
         return otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getAcademicMajor().equals(getAcademicMajor())
                 && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, academicMajor, tags);
     }
 
     @Override
@@ -110,7 +110,7 @@ public class Person {
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Address: ")
-                .append(getAddress());
+                .append(getAcademicMajor());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
