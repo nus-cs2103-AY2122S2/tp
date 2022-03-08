@@ -3,8 +3,6 @@ package seedu.address.model.person.lab;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.util.Objects;
-
 import seedu.address.model.person.exceptions.LabAlreadyGradedException;
 import seedu.address.model.person.exceptions.LabAlreadySubmittedException;
 import seedu.address.model.person.exceptions.LabNotSubmittedException;
