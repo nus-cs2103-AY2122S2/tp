@@ -1,8 +1,8 @@
 package seedu.contax.model;
 
-import seedu.contax.model.person.Person;
-
 import java.util.Objects;
+
+import seedu.contax.model.person.Person;
 
 /**
  * The model that is responsible for storing actions for the OnbordingWindow
@@ -49,7 +49,7 @@ public class OnboardingStep {
         this.command = command;
     }
 
-    public int eventType() {
+    public int getEventType() {
         return eventType;
     }
 
@@ -96,7 +96,7 @@ public class OnboardingStep {
     public boolean isValid() {
         return overlayOption >= 0 && overlayOption <= 3
                 && highlightOption >= 0 && highlightOption <= 2
-                && positionOption >=0 && positionOption <= 4;
+                && positionOption >= 0 && positionOption <= 4;
     }
 
     @Override
@@ -110,16 +110,22 @@ public class OnboardingStep {
         }
 
         OnboardingStep otherStep = (OnboardingStep) other;
-        return otherStep.eventType() == eventType()
+
+        boolean result = otherStep.getEventType() == getEventType()
                 && otherStep.getDisplayMessage().equals(getDisplayMessage())
                 && otherStep.getOverlayOption() == getHighlightOption()
                 && otherStep.getMessageHeight() == getMessageHeight()
                 && otherStep.getMessageWidth() == getMessageWidth()
                 && otherStep.getHighlightOption() == getHighlightOption()
                 && otherStep.getPositionOption() == getPositionOption()
-                && otherStep.person.equals(getPerson())
                 && otherStep.getCommand().equals(getCommand())
                 && otherStep.getPersonOperation() == getPersonOperation();
+
+        if (otherStep.getPerson() == null && person == null) {
+            return result;
+        } else {
+            return result && otherStep.getPerson().equals(person);
+        }
     }
 
     @Override
