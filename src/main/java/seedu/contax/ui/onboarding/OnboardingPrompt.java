@@ -1,5 +1,7 @@
 package seedu.contax.ui.onboarding;
 
+import java.util.logging.Logger;
+
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -9,8 +11,6 @@ import javafx.stage.Stage;
 import seedu.contax.commons.core.LogsCenter;
 import seedu.contax.ui.HelpWindow;
 import seedu.contax.ui.UiPart;
-
-import java.util.logging.Logger;
 
 public class OnboardingPrompt extends UiPart<Stage> {
 
@@ -32,7 +32,11 @@ public class OnboardingPrompt extends UiPart<Stage> {
     @FXML
     private Button noButton;
 
-
+    /**
+     * Creates a prompt to onboarding guide
+     * @param root stage to use as for root of prompt
+     * @param mainWindow stage of the mainWindow
+     */
     public OnboardingPrompt(Stage root, Stage mainWindow) {
         super(FXML, root);
         displayMessage.setText(DISPLAY_MESSAGE);
@@ -47,21 +51,25 @@ public class OnboardingPrompt extends UiPart<Stage> {
     }
 
     /**
-     * Creates a new HelpWindow.
+     * Creates a new onboarding guide.
      */
     public OnboardingPrompt(Stage mainWindow) {
         this(new Stage(), mainWindow);
     }
 
+    /**
+     * Show the onboarding guide prompt
+     */
     public void show() {
         logger.fine("Showing onboarding prompt.");
         getRoot().show();
-//        getRoot().centerOnScreen();
         getRoot().setX(mainWindow.getX() + (mainWindow.getWidth() - getRoot().getWidth()) / 2);
         getRoot().setY(mainWindow.getY() + (mainWindow.getHeight() - getRoot().getHeight()) / 2);
     }
 
-
+    /**
+     * Handles the event when the yes button is clicked
+     */
     public void handleYes() {
         onboardingWindow.setSize(mainWindow.getHeight(), mainWindow.getWidth());
         onboardingWindow.translate(mainWindow.getX(), mainWindow.getY());
@@ -70,6 +78,9 @@ public class OnboardingPrompt extends UiPart<Stage> {
         getRoot().hide();
     }
 
+    /**
+     * Handles the event when the no button is clicked
+     */
     public void handleNo() {
         getRoot().hide();
     }

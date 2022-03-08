@@ -28,7 +28,6 @@
                      <Label fx:id="displayMessage" styleClass="label-bright" text="Label" />
                   </children>
                </StackPane>
-      
             <HBox fx:id="helpMessageContainer" alignment="CENTER" style="-fx-background-color: #383838;">
               <children>
                      <AnchorPane>

@@ -161,10 +161,6 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleOnboarding() {
-//        onboardingWindow.setSize(primaryStage.getHeight(), primaryStage.getWidth());
-//        onboardingWindow.translate(primaryStage.getX(), primaryStage.getY());
-//        onboardingWindow.show();
-//        primaryStage.hide();
         onboardingPrompt.show();
     }
 

@@ -9,8 +9,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import seedu.contax.ui.UiPart;
 
-import java.util.function.DoubleBinaryOperator;
-
 public class OnboardingInstruction extends UiPart<Region> {
 
     private static final String FXML = "onboarding/OnboardingInstruction.fxml";
@@ -43,7 +41,7 @@ public class OnboardingInstruction extends UiPart<Region> {
     }
 
     /**
-     * Translate and bind the instructionLabel to the given x and y
+     * Translate and bind the instructionLabel to the given DoubleProperty x and y
      * @param x x to translate to
      * @param y y to translate to
      */
@@ -53,6 +51,11 @@ public class OnboardingInstruction extends UiPart<Region> {
         instruction.layoutYProperty().bind(y);
     }
 
+    /**
+     * Translate and bind the instructionLabel to the given DoubleBinding x and y
+     * @param x x to translate to
+     * @param y y to translate to
+     */
     public void translate(DoubleBinding x, DoubleBinding y) {
         instruction.setManaged(false);
         instruction.layoutXProperty().bind(x);
