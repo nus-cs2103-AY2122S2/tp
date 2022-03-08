@@ -9,6 +9,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentId;
 import seedu.address.model.person.Telegram;
+import seedu.address.model.person.lab.LabList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -29,6 +30,7 @@ public class PersonBuilder {
     private GithubUsername githubUsername;
     private Telegram telegram;
     private StudentId studentId;
+    private LabList labs;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -40,6 +42,7 @@ public class PersonBuilder {
         githubUsername = new GithubUsername(DEFAULT_GITHUB);
         telegram = new Telegram(DEFAULT_TELEGRAM);
         studentId = new StudentId(DEFAULT_STUDENTID);
+        labs = new LabList();
     }
 
     /**
@@ -52,6 +55,7 @@ public class PersonBuilder {
         githubUsername = personToCopy.getGithubUsername();
         telegram = personToCopy.getTelegram();
         studentId = personToCopy.getStudentId();
+        labs = personToCopy.getLabs();
     }
 
     /**
@@ -102,8 +106,21 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code labs} into a {@code LabList} and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withLabs(String ... labs) {
+        this.labs = SampleDataUtil.getLabSet(labs);
+        return this;
+    }
+
+    /**
+     * Parses the {@code Person}.
+     */
     public Person build() {
-        return new Person(name, email, tags, githubUsername, telegram, studentId);
+        Person p = new Person(name, email, tags, githubUsername, telegram, studentId);
+        p.setLabs(labs);
+        return p;
     }
 
 }

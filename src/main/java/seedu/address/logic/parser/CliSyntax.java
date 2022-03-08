@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+
 /**
  * Contains Command Line Interface (CLI) syntax definitions common to multiple commands
  */
@@ -12,4 +13,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_GITHUB = new Prefix("g/");
     public static final Prefix PREFIX_TELEGRAM = new Prefix("tl/"); // need to change this in the future
     public static final Prefix PREFIX_STUDENTID = new Prefix("s/");
+    public static final Prefix PREFIX_LAB = new Prefix("l/");
 }

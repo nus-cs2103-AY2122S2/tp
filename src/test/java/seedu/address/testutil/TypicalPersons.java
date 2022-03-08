@@ -30,51 +30,60 @@ public class TypicalPersons {
             .withTags("friends")
             .withGithub("aliceP")
             .withTelegram("alice_P")
-            .withStudentId("A0123456B").build();
+            .withStudentId("A0123456B")
+            .withLabs("1").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withEmail("johnd@example.com")
             .withTags("owesMoney", "friends")
             .withGithub("bensonM")
             .withTelegram("benson_M")
-            .withStudentId("A0123457C").build();
+            .withStudentId("A0123457C")
+            .withLabs("1").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz")
             .withEmail("heinz@example.com")
             .withGithub("carlK")
             .withTelegram("carl_K")
-            .withStudentId("A0123458D").build();
+            .withStudentId("A0123458D")
+            .withLabs("1").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier")
             .withEmail("cornelia@example.com")
             .withTags("friends")
             .withGithub("danielM")
             .withTelegram("daniel_M")
-            .withStudentId("A0123459E").build();
+            .withStudentId("A0123459E")
+            .withLabs("1").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer")
             .withEmail("werner@example.com")
             .withGithub("elleM")
             .withTelegram("elle_M")
-            .withStudentId("A0123411A").build();
+            .withStudentId("A0123411A")
+            .withLabs("1").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz")
             .withEmail("lydia@example.com")
             .withGithub("fionaK")
             .withTelegram("fiona_K")
-            .withStudentId("A0123412B").build();
+            .withStudentId("A0123412B")
+            .withLabs("1").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best")
             .withEmail("anna@example.com")
             .withGithub("georgeB")
             .withTelegram("george_B")
-            .withStudentId("A0123413C").build();
+            .withStudentId("A0123413C")
+            .withLabs("1").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier")
             .withEmail("stefan@example.com")
             .withGithub("hoonM")
             .withTelegram("hoon_M")
-            .withStudentId("A0123414D").build();
+            .withStudentId("A0123414D")
+            .withLabs("1").build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller")
             .withEmail("hans@example.com")
             .withGithub("idaM")
             .withTelegram("ida_M")
-            .withStudentId("A0123415E").build();
+            .withStudentId("A0123415E")
+            .withLabs("1").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY)
@@ -82,13 +91,15 @@ public class TypicalPersons {
             .withTags(VALID_TAG_FRIEND)
             .withGithub(VALID_GITHUB_AMY)
             .withTelegram(VALID_TELEGRAM_AMY)
-            .withStudentId(VALID_STUDENTID_AMY).build();
+            .withStudentId(VALID_STUDENTID_AMY)
+            .withLabs("1").build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB)
             .withEmail(VALID_EMAIL_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .withGithub(VALID_GITHUB_BOB)
             .withTelegram(VALID_TELEGRAM_BOB)
-            .withStudentId(VALID_STUDENTID_BOB).build();
+            .withStudentId(VALID_STUDENTID_BOB)
+            .withLabs("1").build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

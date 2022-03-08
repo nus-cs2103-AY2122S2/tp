@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.person.lab.Lab;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
@@ -95,6 +96,16 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.setAll(persons);
+    }
+
+    /**
+     * Adds the given {@code lab} to every person in the {@code internalList}.
+     *
+     * @param lab The given Lab that you want to add.
+     */
+    public void addLabToAll(Lab lab) {
+        requireNonNull(lab);
+        internalList.forEach(person -> person.addLab(lab));
     }
 
     /**

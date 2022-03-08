@@ -42,6 +42,8 @@ public class PersonCard extends UiPart<Region> {
     private Label studentId;
     @FXML
     private FlowPane tags;
+    @FXML
+    private FlowPane labCard;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -58,6 +60,11 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        person.getLabs()
+                .asUnmodifiableObservableList().stream()
+                .sorted(Comparator.comparing(lab -> lab.labNumber))
+                .forEach(lab -> labCard.getChildren().add(new LabLabel(lab)));
+        //labCard.setPadding(new Insets(5, 5, 5, 5));
     }
 
     @Override

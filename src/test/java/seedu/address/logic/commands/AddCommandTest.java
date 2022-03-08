@@ -20,7 +20,9 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.person.MasterLabList;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.lab.Lab;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -46,7 +48,6 @@ public class AddCommandTest {
         Person validPerson = new PersonBuilder().build();
         AddCommand addCommand = new AddCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
-
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
     }
 
@@ -147,6 +148,16 @@ public class AddCommandTest {
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean hasLab(Lab lab) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addLab(Lab lab) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -161,9 +172,29 @@ public class AddCommandTest {
         }
 
         @Override
+        public ReadOnlyAddressBook getAddressBook() {
+            return new ReadOnlyAddressBook() {
+                @Override
+                public ObservableList<Person> getPersonList() {
+                    return null;
+                }
+
+                @Override
+                public MasterLabList getMasterLabList() {
+                    return new MasterLabList();
+                }
+            };
+        }
+
+        @Override
         public boolean hasPerson(Person person) {
             requireNonNull(person);
             return this.person.isSamePerson(person);
+        }
+
+        @Override
+        public void addLab(Lab lab) {
+            requireNonNull(lab);
         }
     }
 
