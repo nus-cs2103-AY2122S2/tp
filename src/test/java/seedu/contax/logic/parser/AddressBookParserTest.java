@@ -16,7 +16,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.contax.logic.commands.AddAppointmentCommand;
 import seedu.contax.logic.commands.AddCommand;
+import seedu.contax.logic.commands.AddTagCommand;
 import seedu.contax.logic.commands.ClearCommand;
+import seedu.contax.logic.commands.DeleteAppointmentCommand;
 import seedu.contax.logic.commands.DeleteCommand;
 import seedu.contax.logic.commands.EditCommand;
 import seedu.contax.logic.commands.EditCommand.EditPersonDescriptor;
@@ -29,11 +31,14 @@ import seedu.contax.logic.parser.exceptions.ParseException;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.person.NameContainsKeywordsPredicate;
 import seedu.contax.model.person.Person;
+import seedu.contax.model.tag.Tag;
 import seedu.contax.testutil.AppointmentBuilder;
 import seedu.contax.testutil.AppointmentUtil;
 import seedu.contax.testutil.EditPersonDescriptorBuilder;
 import seedu.contax.testutil.PersonBuilder;
 import seedu.contax.testutil.PersonUtil;
+import seedu.contax.testutil.TagBuilder;
+import seedu.contax.testutil.TagUtil;
 
 public class AddressBookParserTest {
 
@@ -94,6 +99,14 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
     }
 
+    // Tag management commands
+    @Test
+    public void parseCommand_addTag() throws Exception {
+        Tag tag = new TagBuilder().build();
+        AddTagCommand command = (AddTagCommand) parser.parseCommand(TagUtil.getAddTagCommand(tag));
+        assertEquals(command, new AddTagCommand(tag));
+    }
+
     @Test
     public void parseCommand_addAppointment() throws Exception {
         Appointment appointment = new AppointmentBuilder(APPOINTMENT_ALONE).build();
@@ -105,6 +118,12 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_listAppointments() throws Exception {
         assertTrue(parser.parseCommand(ListAppointmentCommand.COMMAND_WORD) instanceof ListAppointmentCommand);
+    }
+
+    @Test
+    public void parseCommand_deleteAppointment() throws Exception {
+        assertTrue(parser.parseCommand(DeleteAppointmentCommand.COMMAND_WORD + " 1")
+                instanceof DeleteAppointmentCommand);
     }
 
     @Test

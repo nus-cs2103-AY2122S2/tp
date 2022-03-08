@@ -20,6 +20,8 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.contax.commons.core.GuiSettings;
+import seedu.contax.commons.core.Messages;
+import seedu.contax.commons.core.index.Index;
 import seedu.contax.logic.commands.exceptions.CommandException;
 import seedu.contax.model.Model;
 import seedu.contax.model.ReadOnlyAddressBook;
@@ -28,6 +30,7 @@ import seedu.contax.model.ReadOnlyUserPrefs;
 import seedu.contax.model.Schedule;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.person.Person;
+import seedu.contax.model.tag.Tag;
 import seedu.contax.testutil.AppointmentBuilder;
 import seedu.contax.testutil.TypicalIndexes;
 
@@ -56,7 +59,7 @@ public class AddAppointmentCommandTest {
         ModelStubAcceptingAppointmentAdded modelStub = new ModelStubAcceptingAppointmentAdded();
         Appointment validAppointment = new AppointmentBuilder(APPOINTMENT_ALICE).build();
 
-        CommandResult commandResult = new AddAppointmentCommand(validAppointment, null)
+        CommandResult commandResult = new AddAppointmentCommand(validAppointment, Index.fromZeroBased(0))
                 .execute(modelStub);
 
         assertEquals(String.format(AddAppointmentCommand.MESSAGE_SUCCESS, validAppointment),
@@ -73,6 +76,18 @@ public class AddAppointmentCommandTest {
         ModelStub modelStub = new ModelStubWithAppointment(validAppointment);
 
         assertThrows(CommandException.class, AddAppointmentCommand.MESSAGE_OVERLAPPING_APPOINTMENT, ()
+            -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_appointmentWithInvalidPersonIndex_throwsCommandException() throws Exception {
+        ModelStubAcceptingAppointmentAdded modelStub = new ModelStubAcceptingAppointmentAdded();
+        Appointment validAppointment = new AppointmentBuilder(APPOINTMENT_ALICE).build();
+
+        AddAppointmentCommand addCommand = new AddAppointmentCommand(validAppointment,
+                Index.fromZeroBased(100));
+
+        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, ()
             -> addCommand.execute(modelStub));
     }
 
@@ -176,6 +191,16 @@ public class AddAppointmentCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasTag(Tag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addTag(Tag tag) {
             throw new AssertionError("This method should not be called.");
         }
 

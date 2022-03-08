@@ -7,8 +7,11 @@ import static seedu.contax.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.contax.testutil.Assert.assertThrows;
 import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALICE;
 import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALONE;
+import static seedu.contax.testutil.TypicalAppointments.getTypicalSchedule;
 import static seedu.contax.testutil.TypicalPersons.ALICE;
 import static seedu.contax.testutil.TypicalPersons.BENSON;
+import static seedu.contax.testutil.TypicalTags.CLIENTS;
+import static seedu.contax.testutil.TypicalTags.FAMILY;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -111,9 +114,32 @@ public class ModelManagerTest {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
     }
 
+    // Tag Management Related tests
+    @Test
+    public void hasTag_nullTag_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasTag(null));
+    }
+
+    @Test
+    public void hasTag_tagNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasTag(CLIENTS));
+    }
+
+    @Test
+    public void hasTag_tagInAddressBook_returnsTrue() {
+        modelManager.addTag(FAMILY);
+        assertTrue(modelManager.hasTag(FAMILY));
+    }
+
     @Test
     public void setSchedule_nullSchedule_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.setSchedule(null));
+    }
+
+    @Test
+    public void setSchedule_validSchedule_success() {
+        modelManager.setSchedule(getTypicalSchedule());
+        assertEquals(getTypicalSchedule(), modelManager.getSchedule());
     }
 
     @Test
@@ -181,6 +207,25 @@ public class ModelManagerTest {
         Schedule expectedSchedule = new ScheduleBuilder().withAppointment(APPOINTMENT_ALONE).build();
         assertEquals(expectedSchedule, modelManager.getSchedule());
     }
+
+    @Test
+    public void deleteAppointment_nullAppointment_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.deleteAppointment(null));
+    }
+
+    @Test
+    public void deleteAppointment_appointmentNotInList_throwsAppointmentNotFoundException() {
+        assertThrows(AppointmentNotFoundException.class, ()
+            -> modelManager.deleteAppointment(APPOINTMENT_ALICE));
+    }
+
+    @Test
+    public void deleteAppointment_appointmentInList_success() {
+        modelManager.addAppointment(APPOINTMENT_ALONE);
+        modelManager.deleteAppointment(APPOINTMENT_ALONE);
+        assertEquals(new ModelManager(), modelManager);
+    }
+
 
     @Test
     public void equals() {

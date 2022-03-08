@@ -12,6 +12,7 @@ import seedu.contax.commons.exceptions.IllegalValueException;
 import seedu.contax.model.AddressBook;
 import seedu.contax.model.ReadOnlyAddressBook;
 import seedu.contax.model.person.Person;
+import seedu.contax.model.tag.Tag;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -20,8 +21,10 @@ import seedu.contax.model.person.Person;
 class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_TAG = "Tag list contains duplicate tag(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given persons.
@@ -38,6 +41,7 @@ class JsonSerializableAddressBook {
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        tags.addAll(source.getTagList().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
     }
 
     /**
@@ -47,14 +51,34 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
+
+        for (JsonAdaptedTag jsonAdaptedTag: tags) {
+            Tag tag = jsonAdaptedTag.toModelType();
+            if (addressBook.hasTag(tag)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_TAG);
+            }
+            addressBook.addTag(tag);
+        }
+
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
             Person person = jsonAdaptedPerson.toModelType();
             if (addressBook.hasPerson(person)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
+
+            // Load tags that were not added from tag list
+            addMissingTags(person, addressBook);
             addressBook.addPerson(person);
         }
         return addressBook;
     }
 
+    public void addMissingTags(Person person, AddressBook addressbook) {
+        for (Tag personTag : person.getTags()) {
+            boolean isTagMissing = !addressbook.hasTag(personTag);
+            if (isTagMissing) {
+                addressbook.addTag(new Tag(personTag.getTagName()));
+            }
+        }
+    }
 }
