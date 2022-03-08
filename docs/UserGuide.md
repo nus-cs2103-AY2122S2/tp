@@ -98,13 +98,22 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 ### Onboarding guide
-When you run the program for the first time, you will be prompted to take a quick tour of the ContaX's basic functions guided through a series of step-by-step instructions.
 
-Example of instructions:
-* Input command
-![](images/OnboardingCommand.png)
-* List contacts
-![](images/OnboardingList.png)
+#### Prompt on first run
+
+When you run the program for the first time, you will be prompted to take a quick tour of the ContaX's basic functions guided through a series of step-by-step instructions. You will be taken to the onboarding guide window if you select yes. If you choose no, the prompt will just close.
+
+![](images/OnboardingPrompt.png)
+
+<br>
+When going through the onboarding guide, instructions such as the one shown below will be displayed, and important areas will be highlighted.
+
+![](images/OnboardingInstruction.jpg)
+
+#### Basic features covered
+The onboarding guide will teach to do the folowing:
+- Add person
+- List person
 
 ### Adding a person: `add`
 
