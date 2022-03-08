@@ -72,7 +72,7 @@ Broadly speaking, ContaX consists of an *Address Book* for managing Contacts, an
 
 **:information_source: This section details the format(s) that date and time inputs are expected to be in.**<br>
 
-* All date inputs must conform to the following format: `dd-mm-yyyy`.
+   * All date inputs must conform to the following format: `dd-mm-yyyy`.
 
 | Field | Description |
 | - | - |
@@ -98,13 +98,17 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 ### Onboarding guide
-When you run the program for the first time, you will be prompted to take a quick tour of the ContaX's basic functions guided through a series of step-by-step instructions.
 
-Example of instructions:
-* Input command
-![](images/OnboardingCommand.png)
-* List contacts
-![](images/OnboardingList.png)
+#### Prompt on first run
+
+When you run the program for the first time, you will be prompted to take a quick tour of the ContaX's basic functions guided through a series of step-by-step instructions. You will be taken to the onboarding guide window if you select yes. If you choose no, the prompt will just close.
+
+![](images/OnboardingPrompt.png)
+
+#### Basic features covered
+The onboarding guide will teach to do the folowing:
+- Add person
+- List person
 
 ### Adding a person: `add`
 
