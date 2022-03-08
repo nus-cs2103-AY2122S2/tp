@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPets.ALICE;
+import static seedu.address.testutil.TypicalPets.BOBA;
 import static seedu.address.testutil.TypicalPets.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -46,9 +46,9 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicatePets_throwsDuplicatePetException() {
         // Two pets with the same identity fields
-        Pet editedAlice = new PetBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Pet editedAlice = new PetBuilder(BOBA).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        List<Pet> newPets = Arrays.asList(ALICE, editedAlice);
+        List<Pet> newPets = Arrays.asList(BOBA, editedAlice);
         AddressBookStub newData = new AddressBookStub(newPets);
 
         assertThrows(DuplicatePetException.class, () -> addressBook.resetData(newData));
@@ -61,19 +61,19 @@ public class AddressBookTest {
 
     @Test
     public void hasPet_petNotInWoofAreYou_returnsFalse() {
-        assertFalse(addressBook.hasPet(ALICE));
+        assertFalse(addressBook.hasPet(BOBA));
     }
 
     @Test
     public void hasPet_petInWoofAreYou_returnsTrue() {
-        addressBook.addPet(ALICE);
-        assertTrue(addressBook.hasPet(ALICE));
+        addressBook.addPet(BOBA);
+        assertTrue(addressBook.hasPet(BOBA));
     }
 
     @Test
     public void hasPet_petWithSameIdentityFieldsInWoofAreYoureturnsTrue() {
-        addressBook.addPet(ALICE);
-        Pet editedAlice = new PetBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        addressBook.addPet(BOBA);
+        Pet editedAlice = new PetBuilder(BOBA).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(addressBook.hasPet(editedAlice));
     }

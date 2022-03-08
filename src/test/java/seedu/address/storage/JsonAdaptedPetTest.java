@@ -3,7 +3,7 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.JsonAdaptedPet.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPets.BENSON;
+import static seedu.address.testutil.TypicalPets.PIZZA;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,18 +24,18 @@ public class JsonAdaptedPetTest {
     private static final String INVALID_OWNERNAME = "S@arah";
     private static final String INVALID_TAG = "#friend";
 
-    private static final String VALID_NAME = BENSON.getName().toString();
-    private static final String VALID_PHONE = BENSON.getPhone().toString();
-    private static final String VALID_OWNERNAME = BENSON.getOwnerName().toString();
-    private static final String VALID_ADDRESS = BENSON.getAddress().toString();
-    private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
+    private static final String VALID_NAME = PIZZA.getName().toString();
+    private static final String VALID_PHONE = PIZZA.getPhone().toString();
+    private static final String VALID_OWNERNAME = PIZZA.getOwnerName().toString();
+    private static final String VALID_ADDRESS = PIZZA.getAddress().toString();
+    private static final List<JsonAdaptedTag> VALID_TAGS = PIZZA.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
 
     @Test
     public void toModelType_validPetDetails_returnsPet() throws Exception {
-        JsonAdaptedPet pet = new JsonAdaptedPet(BENSON);
-        assertEquals(BENSON, pet.toModelType());
+        JsonAdaptedPet pet = new JsonAdaptedPet(PIZZA);
+        assertEquals(PIZZA, pet.toModelType());
     }
 
     @Test

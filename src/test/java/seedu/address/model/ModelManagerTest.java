@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PETS;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPets.ALICE;
-import static seedu.address.testutil.TypicalPets.BENSON;
+import static seedu.address.testutil.TypicalPets.BOBA;
+import static seedu.address.testutil.TypicalPets.PIZZA;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -79,13 +79,13 @@ public class ModelManagerTest {
 
     @Test
     public void hasPet_petNotInWoofAreYou_returnsFalse() {
-        assertFalse(modelManager.hasPet(ALICE));
+        assertFalse(modelManager.hasPet(BOBA));
     }
 
     @Test
     public void hasPet_petInWoofAreYou_returnsTrue() {
-        modelManager.addPet(ALICE);
-        assertTrue(modelManager.hasPet(ALICE));
+        modelManager.addPet(BOBA);
+        assertTrue(modelManager.hasPet(BOBA));
     }
 
     @Test
@@ -95,7 +95,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        AddressBook addressBook = new AddressBookBuilder().withPerson(BOBA).withPerson(PIZZA).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -117,7 +117,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = ALICE.getName().fullName.split("\\s+");
+        String[] keywords = BOBA.getName().fullName.split("\\s+");
         modelManager.updateFilteredPetList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 

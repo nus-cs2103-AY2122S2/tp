@@ -3,7 +3,7 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPets.ALICE;
+import static seedu.address.testutil.TypicalPets.BOBA;
 import static seedu.address.testutil.TypicalPets.HOON;
 import static seedu.address.testutil.TypicalPets.IDA;
 import static seedu.address.testutil.TypicalPets.getTypicalAddressBook;
@@ -52,12 +52,12 @@ public class JsonAddressBookStorageTest {
 
     @Test
     public void readAddressBook_invalidPetAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("invalidPetsWoofAreYou.json"));
+        assertThrows(DataConversionException.class, () -> readAddressBook("invalidPetsAddressBook.json"));
     }
 
     @Test
     public void readAddressBook_invalidAndValidPetAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("invalidAndValidPetWoofAreYou.json"));
+        assertThrows(DataConversionException.class, () -> readAddressBook("invalidAndValidPetAddressBook.json"));
     }
 
     @Test
@@ -73,7 +73,7 @@ public class JsonAddressBookStorageTest {
 
         // Modify data, overwrite exiting file, and read back
         original.addPet(HOON);
-        original.removePet(ALICE);
+        original.removePet(BOBA);
         jsonAddressBookStorage.saveAddressBook(original, filePath);
         readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
         assertEquals(original, new AddressBook(readBack));

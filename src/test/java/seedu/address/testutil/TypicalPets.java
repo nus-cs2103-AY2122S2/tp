@@ -23,24 +23,24 @@ import seedu.address.model.pet.Pet;
  */
 public class TypicalPets {
 
-    public static final Pet ALICE = new PetBuilder().withName("Alice Pauline")
-            .withAddress("123, Jurong West Ave 6, #08-111").withOwnerName("Alicia Siew")
+    public static final Pet BOBA = new PetBuilder().withName("Boba")
+            .withAddress("123, Jurong West Ave 6, #08-111").withOwnerName("Alice Pauline")
             .withPhone("94351253")
             .withTags("friends").build();
-    public static final Pet BENSON = new PetBuilder().withName("Benson Meier")
+    public static final Pet PIZZA = new PetBuilder().withName("Pizza")
             .withAddress("311, Clementi Ave 2, #02-25")
-            .withOwnerName("John Again").withPhone("98765432")
+            .withOwnerName("Benson Meier").withPhone("98765432")
             .withTags("owesMoney", "friends").build();
-    public static final Pet CARL = new PetBuilder().withName("Carl Kurz").withPhone("95352563")
+    public static final Pet BAGEL = new PetBuilder().withName("Bagel").withPhone("95352563")
             .withOwnerName("Heinz Ketchup").withAddress("wall street").build();
-    public static final Pet DANIEL = new PetBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withOwnerName("Cornelia Li").withAddress("10th street").withTags("friends").build();
-    public static final Pet ELLE = new PetBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withOwnerName("Werner Wright").withAddress("michegan ave").build();
-    public static final Pet FIONA = new PetBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withOwnerName("Lydia Poon").withAddress("little tokyo").build();
-    public static final Pet GEORGE = new PetBuilder().withName("George Best").withPhone("9482442")
-            .withOwnerName("Anna Lee").withAddress("4th street").build();
+    public static final Pet DANIEL = new PetBuilder().withName("Peepee").withPhone("87652533")
+            .withOwnerName("Daniel Meier").withAddress("10th street").withTags("friends").build();
+    public static final Pet PANCAKE = new PetBuilder().withName("Pancake").withPhone("9482224")
+            .withOwnerName("Elle Meyer").withAddress("michegan ave").build();
+    public static final Pet WAFFLE = new PetBuilder().withName("Waffle").withPhone("9482427")
+            .withOwnerName("Fiona Kunz").withAddress("little tokyo").build();
+    public static final Pet TOFU = new PetBuilder().withName("Tofu").withPhone("9482442")
+            .withOwnerName("George Best").withAddress("4th street").build();
 
     // Manually added
     public static final Pet HOON = new PetBuilder().withName("Hoon Meier").withPhone("8482424")
@@ -72,6 +72,6 @@ public class TypicalPets {
     }
 
     public static List<Pet> getTypicalPets() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(BOBA, PIZZA, BAGEL, DANIEL, PANCAKE, WAFFLE, TOFU));
     }
 }

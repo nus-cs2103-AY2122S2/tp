@@ -8,8 +8,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_OWNERNAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPets.ALICE;
 import static seedu.address.testutil.TypicalPets.BOB;
+import static seedu.address.testutil.TypicalPets.BOBA;
 
 import org.junit.jupiter.api.Test;
 
@@ -26,19 +26,19 @@ public class PetTest {
     @Test
     public void isSamePet() {
         // same object -> returns true
-        assertTrue(ALICE.isSamePet(ALICE));
+        assertTrue(BOBA.isSamePet(BOBA));
 
         // null -> returns false
-        assertFalse(ALICE.isSamePet(null));
+        assertFalse(BOBA.isSamePet(null));
 
         // same name, all other attributes different -> returns true
-        Pet editedAlice = new PetBuilder(ALICE).withPhone(VALID_PHONE_BOB).withOwnerName(VALID_OWNERNAME_BOB)
+        Pet editedAlice = new PetBuilder(BOBA).withPhone(VALID_PHONE_BOB).withOwnerName(VALID_OWNERNAME_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALICE.isSamePet(editedAlice));
+        assertTrue(BOBA.isSamePet(editedAlice));
 
         // different name, all other attributes same -> returns false
-        editedAlice = new PetBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.isSamePet(editedAlice));
+        editedAlice = new PetBuilder(BOBA).withName(VALID_NAME_BOB).build();
+        assertFalse(BOBA.isSamePet(editedAlice));
 
         // name differs in case, all other attributes same -> returns false
         Pet editedBob = new PetBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
@@ -53,39 +53,39 @@ public class PetTest {
     @Test
     public void equals() {
         // same values -> returns true
-        Pet aliceCopy = new PetBuilder(ALICE).build();
-        assertTrue(ALICE.equals(aliceCopy));
+        Pet aliceCopy = new PetBuilder(BOBA).build();
+        assertTrue(BOBA.equals(aliceCopy));
 
         // same object -> returns true
-        assertTrue(ALICE.equals(ALICE));
+        assertTrue(BOBA.equals(BOBA));
 
         // null -> returns false
-        assertFalse(ALICE.equals(null));
+        assertFalse(BOBA.equals(null));
 
         // different type -> returns false
-        assertFalse(ALICE.equals(5));
+        assertFalse(BOBA.equals(5));
 
         // different pet -> returns false
-        assertFalse(ALICE.equals(BOB));
+        assertFalse(BOBA.equals(BOB));
 
         // different name -> returns false
-        Pet editedAlice = new PetBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        Pet editedAlice = new PetBuilder(BOBA).withName(VALID_NAME_BOB).build();
+        assertFalse(BOBA.equals(editedAlice));
 
         // different phone -> returns false
-        editedAlice = new PetBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        editedAlice = new PetBuilder(BOBA).withPhone(VALID_PHONE_BOB).build();
+        assertFalse(BOBA.equals(editedAlice));
 
         // different email -> returns false
-        editedAlice = new PetBuilder(ALICE).withOwnerName(VALID_OWNERNAME_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        editedAlice = new PetBuilder(BOBA).withOwnerName(VALID_OWNERNAME_BOB).build();
+        assertFalse(BOBA.equals(editedAlice));
 
         // different address -> returns false
-        editedAlice = new PetBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        editedAlice = new PetBuilder(BOBA).withAddress(VALID_ADDRESS_BOB).build();
+        assertFalse(BOBA.equals(editedAlice));
 
         // different tags -> returns false
-        editedAlice = new PetBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
-        assertFalse(ALICE.equals(editedAlice));
+        editedAlice = new PetBuilder(BOBA).withTags(VALID_TAG_HUSBAND).build();
+        assertFalse(BOBA.equals(editedAlice));
     }
 }

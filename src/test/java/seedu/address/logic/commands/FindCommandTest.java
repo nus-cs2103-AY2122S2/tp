@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_PETS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPets.CARL;
-import static seedu.address.testutil.TypicalPets.ELLE;
-import static seedu.address.testutil.TypicalPets.FIONA;
+import static seedu.address.testutil.TypicalPets.BAGEL;
+import static seedu.address.testutil.TypicalPets.PANCAKE;
+import static seedu.address.testutil.TypicalPets.WAFFLE;
 import static seedu.address.testutil.TypicalPets.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -67,11 +67,11 @@ public class FindCommandTest {
     @Test
     public void execute_multipleKeywords_multiplePetsFound() {
         String expectedMessage = String.format(MESSAGE_PETS_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+        NameContainsKeywordsPredicate predicate = preparePredicate("Bagel Pancake Waffle");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPetList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPetList());
+        assertEquals(Arrays.asList(BAGEL, PANCAKE, WAFFLE), model.getFilteredPetList());
     }
 
     /**
