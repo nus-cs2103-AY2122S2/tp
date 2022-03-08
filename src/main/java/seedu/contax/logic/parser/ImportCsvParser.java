@@ -28,7 +28,7 @@ public class ImportCsvParser implements Parser<ImportCsvCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCsvCommand.MESSAGE_USAGE));
         }
 
-        String fileName = argMultimap.getValue(PREFIX_FILE).get();
+        String fileName = ParserUtil.parseCsvFilePath(argMultimap.getValue(PREFIX_FILE).get());
 
         //check if file exists, else throw exception
 

@@ -123,6 +123,15 @@ public class ParserUtil {
         return tagSet;
     }
 
+    public static String parseCsvFilePath(String filePath) throws ParseException {
+        requireNonNull(filePath);
+        String trimmedFilePath = filePath.trim();
+        if (!ImportCsv.isValidFilePath(trimmedFilePath)) {
+            throw new ParseException(ImportCsv.FILE_PATH_CONSTRAINTS);
+        }
+        return trimmedFilePath;
+    }
+
     /**
      * Parses a {@String position} into an {@code integer}.
      *
