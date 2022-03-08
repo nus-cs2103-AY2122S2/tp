@@ -78,8 +78,7 @@ public class CompanyCard extends UiPart<Region> {
         }
         setRoleTags();
         roleList = company.getRoleManager().getFilteredRoles();
-        roleListPanel = new RoleListPanel(roleList);
-        roleListPanelPlaceholder.getChildren().add(roleListPanel.getRoot());
+        setRoleListPanelPlaceholder();
 
         roleList.addListener((ListChangeListener<Role>) change -> {
             roleTags.getChildren().clear();
@@ -88,8 +87,7 @@ public class CompanyCard extends UiPart<Region> {
                 roleListPanelPlaceholder.getChildren().clear();
             } else {
                 roleListPanel = new RoleListPanel(roleList);
-                roleListPanelPlaceholder.getChildren().add(roleListPanel.getRoot());
-                roleListPanelPlaceholder.setManaged(true);
+                setRoleListPanelPlaceholder();
             }
         });
     }
@@ -101,6 +99,14 @@ public class CompanyCard extends UiPart<Region> {
     public void setRoleTags() {
         company.getRoleManager().getSetRoles().stream()
                 .forEach(roleTag -> roleTags.getChildren().add(new Label(roleTag.getName().fullName)));
+    }
+
+    /**
+     * Update <code>roleListPanelPlaceholder</code> to reflect the contents of the current <code>roleList</code>
+     */
+    public void setRoleListPanelPlaceholder() {
+        roleListPanel = new RoleListPanel(roleList);
+        roleListPanelPlaceholder.getChildren().add(roleListPanel.getRoot());
     }
 
     @Override
