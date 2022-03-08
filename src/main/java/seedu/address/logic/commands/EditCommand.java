@@ -76,7 +76,7 @@ public class EditCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-        ObservableList<Person> studentList = model.getAddressBook().getPersonList();
+//        ObservableList<Person> studentList = model.getAddressBook().getPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -90,17 +90,6 @@ public class EditCommand extends Command {
         }
 
         model.setPerson(personToEdit, editedPerson);
-//              After updating a student's information, now I need to check all of his/her classmates.
-//              In doing so, need to retrieve a list of students who matches the same classcode.
-
-//              Proposed Steps:
-//              1. Add new method -> isStatusFieldEdited (Adapted from isAnyFieldEdited -> check toCopy.status)
-//              2. if toCopy.status is not null/empty && is "Positive", iterate through lastShownList for each
-//              student that exist in the same class as the COVID-19 Positive student
-//              3. for (Person student : lastShownList):
-//              if toCopy.name != currentStudent && student.getClassCode == currentStudent.getClassCode:
-//              edit the student's status to Close Contact
-//              end
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
