@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.address.ui.listpanel;
 
 import java.util.logging.Logger;
 
@@ -6,14 +6,14 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.ui.PersonCard;
 
 /**
  * Panel containing the list of persons.
  */
-public class PersonListPanel extends UiPart<Region> {
+public class PersonListPanel extends ListPanel {
     private static final String FXML = "PersonListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
 
