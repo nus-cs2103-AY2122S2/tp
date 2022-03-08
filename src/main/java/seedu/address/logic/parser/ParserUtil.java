@@ -14,6 +14,7 @@ import seedu.address.model.person.GithubUsername;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.StudentId;
 import seedu.address.model.person.Telegram;
+import seedu.address.model.person.lab.Lab;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -154,6 +155,23 @@ public class ParserUtil {
         }
 
         return new StudentId(capitalId);
+    }
+
+    /**
+     * Parses a {@code String labNumber} into an {@code Lab}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code labNumber} is invalid.
+     */
+    public static Lab parseLab(String labNumber) throws ParseException {
+        requireNonNull(labNumber);
+        String trimmedLab = labNumber.trim();
+
+        if (!Lab.isValidLab(trimmedLab)) {
+            throw new ParseException(Lab.MESSAGE_CONSTRAINTS);
+        }
+
+        return new Lab(trimmedLab);
     }
 
 }
