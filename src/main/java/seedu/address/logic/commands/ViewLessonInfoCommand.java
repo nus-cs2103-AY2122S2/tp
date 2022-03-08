@@ -14,10 +14,10 @@ import seedu.address.model.lesson.Lesson;
 /**
  * Views the details of a class identified using it's displayed index.
  */
-public class ViewClassInfoCommand extends Command {
-    public static final String COMMAND_WORD = "class";
+public class ViewLessonInfoCommand extends Command {
+    public static final String COMMAND_WORD = "lesson";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": View details of a selected Class.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": View details of a selected Lesson.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
@@ -25,7 +25,7 @@ public class ViewClassInfoCommand extends Command {
 
     private final Index targetIndex;
 
-    public ViewClassInfoCommand(Index targetIndex) {
+    public ViewLessonInfoCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -35,7 +35,7 @@ public class ViewClassInfoCommand extends Command {
         List<Lesson> lastShownList = model.getFilteredLessonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_CLASS_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         }
 
         Lesson lessonToSelect = lastShownList.get(targetIndex.getZeroBased());
@@ -47,7 +47,7 @@ public class ViewClassInfoCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this
-                || (other instanceof ViewClassInfoCommand
-                && targetIndex.equals(((ViewClassInfoCommand) other).targetIndex));
+                || (other instanceof ViewLessonInfoCommand
+                && targetIndex.equals(((ViewLessonInfoCommand) other).targetIndex));
     }
 }

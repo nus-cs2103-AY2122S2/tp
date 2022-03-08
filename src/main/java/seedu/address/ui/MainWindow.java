@@ -123,13 +123,13 @@ public class MainWindow extends UiPart<Stage> {
         //populateListPanelWithPeople(logic.getFilteredPersonList());
         populateListPanelWithLessons(logic.getFilteredLessonList());
 
-        // Temporary person placeholder
-        //Person tempPerson = logic.getFilteredPersonList().get(0);
-        //tempPopulateInfoPanelWithPersonAndList(tempPerson, logic.getFilteredLessonList());
+        // Load first person in list
+        Person tempPerson = logic.getFilteredPersonList().get(0);
+        tempPopulateInfoPanelWithPersonAndList(tempPerson, logic.getFilteredLessonList());
 
         // Temporary lesson placeholder
-        Lesson tempLesson = logic.getFilteredLessonList().get(0);
-        tempPopulateInfoPanelWithLessonAndList(tempLesson, logic.getFilteredPersonList());
+        //Lesson tempLesson = logic.getFilteredLessonList().get(0);
+        //tempPopulateInfoPanelWithLessonAndList(tempLesson, logic.getFilteredPersonList());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -281,6 +281,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void populateInfoPanel(InfoPanel newInfoPanel) {
+        infoPanelPlaceholder.getChildren().clear();
         infoPanelPlaceholder.getChildren().add(newInfoPanel.getRoot());
     }
 }
