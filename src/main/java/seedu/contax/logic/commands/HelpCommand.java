@@ -1,6 +1,7 @@
 package seedu.contax.logic.commands;
 
 import seedu.contax.model.Model;
+import seedu.contax.ui.ListContentType;
 
 /**
  * Format full help instructions for every command for display.
@@ -16,6 +17,6 @@ public class HelpCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
+        return new CommandResult(SHOWING_HELP_MESSAGE, ListContentType.UNCHANGED, true, false);
     }
 }
