@@ -106,7 +106,7 @@ When you run the program for the first time, you will be prompted to take a quic
 ![](images/OnboardingPrompt.png)
 
 <br>
-When going through the onboarding guide, instructions such as the one shown below will be displayed.
+When going through the onboarding guide, instructions such as the one shown below will be displayed, and important areas will be highlighted.
 
 ![](images/OnboardingInstruction.jpg)
 
