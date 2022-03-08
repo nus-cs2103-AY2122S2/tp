@@ -4,16 +4,20 @@ import static unibook.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import unibook.model.person.Professor;
 import unibook.model.person.Student;
-
-
 /**
  * Represents a Module in the UniBook.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
+//Todo: add support for students and professors for JSON/storage
+@JsonIgnoreProperties(value = {"students", "professors"})
 public class Module {
 
     // Identity fields
@@ -25,6 +29,17 @@ public class Module {
     private final ObservableList<Professor> professors;
     private final ObservableList<Student> students;
 
+    /**
+     * Default constructor taking in String for Jackson
+     */
+    @JsonCreator
+    public Module(@JsonProperty("moduleName") String moduleName, @JsonProperty("moduleCode") String moduleCode) {
+        requireAllNonNull(moduleName, moduleCode);
+        this.moduleName = new ModuleName(moduleName);
+        this.moduleCode = new ModuleCode(moduleCode);
+        this.professors = FXCollections.observableArrayList();
+        this.students = FXCollections.observableArrayList();
+    }
     /**
      * Constructor for a Module, assuming no students and no professor initially.
      * can add if necessary.
