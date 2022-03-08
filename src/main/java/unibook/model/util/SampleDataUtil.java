@@ -76,6 +76,9 @@ public class SampleDataUtil {
         sampleAb.addPerson(s2);
         sampleAb.addPerson(s3);
 
+        //Add modules to sample Unibook
+        sampleAb.addModule(modules[0]);
+        sampleAb.addModule(modules[1]);
         return sampleAb;
     }
 
