@@ -105,6 +105,11 @@ When you run the program for the first time, you will be prompted to take a quic
 
 ![](images/OnboardingPrompt.png)
 
+<br>
+When going through the onboarding guide, instructions such as the one shown below will be displayed.
+
+![](images/OnboardingInstruction.jpg)
+
 #### Basic features covered
 The onboarding guide will teach to do the folowing:
 - Add person
