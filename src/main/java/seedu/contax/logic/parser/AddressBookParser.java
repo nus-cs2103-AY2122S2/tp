@@ -70,18 +70,18 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
-        
+
         // Appointment commands
         case AddAppointmentCommand.COMMAND_WORD:
             return new AddAppointmentCommandParser().parse(arguments);
 
         case ListAppointmentCommand.COMMAND_WORD:
             return new ListAppointmentCommand();
-        
+
         // Tag management commands
         case AddTagCommand.COMMAND_WORD:
             return new AddTagCommandParser().parse(arguments);
-            
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

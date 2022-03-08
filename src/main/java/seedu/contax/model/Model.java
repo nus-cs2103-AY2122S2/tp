@@ -91,7 +91,7 @@ public interface Model {
     boolean hasTag(Tag tag);
 
     void addTag(Tag tag);
-  
+
     // Appointments
     /**
      * Returns the user prefs' schedule file path.
