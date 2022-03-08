@@ -1,56 +1,55 @@
 package seedu.ibook.testutil;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.time.LocalDate;
 
-import seedu.ibook.model.person.Address;
-import seedu.ibook.model.person.Email;
-import seedu.ibook.model.person.Name;
-import seedu.ibook.model.person.Person;
-import seedu.ibook.model.person.Phone;
-import seedu.ibook.model.tag.Tag;
-import seedu.ibook.model.util.SampleDataUtil;
+import seedu.ibook.model.product.Category;
+import seedu.ibook.model.product.Description;
+import seedu.ibook.model.product.ExpiryDate;
+import seedu.ibook.model.product.Name;
+import seedu.ibook.model.product.Price;
+import seedu.ibook.model.product.Product;
 
 /**
- * A utility class to help with building Person objects.
+ * A utility class to help with building Product objects.
  */
 public class ProductBuilder {
 
-    public static final String DEFAULT_NAME = "Amy Bee";
-    public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_NAME = "Maggie Mee";
+    public static final String DEFAULT_CATEGORY = "Noodles";
+    public static final LocalDate DEFAULT_EXPIRY_DATE = LocalDate.now();
+    public static final String DEFAULT_DESCRIPTION = "";
+    public static final Double DEFAULT_PRICE = 1.99;
 
     private Name name;
-    private Phone phone;
-    private Email email;
-    private Address address;
-    private Set<Tag> tags;
+    private Category category;
+    private ExpiryDate expiryDate;
+    private Description description;
+    private Price price;
 
     /**
-     * Creates a {@code PersonBuilder} with the default details.
+     * Creates a {@code ProductBuilder} with the default details.
      */
     public ProductBuilder() {
         name = new Name(DEFAULT_NAME);
-        phone = new Phone(DEFAULT_PHONE);
-        email = new Email(DEFAULT_EMAIL);
-        address = new Address(DEFAULT_ADDRESS);
-        tags = new HashSet<>();
+        category = new Category(DEFAULT_CATEGORY);
+        expiryDate = new ExpiryDate(DEFAULT_EXPIRY_DATE);
+        description = new Description(DEFAULT_DESCRIPTION);
+        price = new Price(DEFAULT_PRICE);
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code personToCopy}.
+     * Initializes the ProductBuilder with the data of {@code productToCopy}.
      */
-    public ProductBuilder(Person personToCopy) {
-        name = personToCopy.getName();
-        phone = personToCopy.getPhone();
-        email = personToCopy.getEmail();
-        address = personToCopy.getAddress();
-        tags = new HashSet<>(personToCopy.getTags());
+    public ProductBuilder(Product productToCopy) {
+        name = productToCopy.getName();
+        category = productToCopy.getCategory();
+        expiryDate = productToCopy.getExpiryDate();
+        description = productToCopy.getDescription();
+        price = productToCopy.getPrice();
     }
 
     /**
-     * Sets the {@code Name} of the {@code Person} that we are building.
+     * Sets the {@code Name} of the {@code Product} that we are building.
      */
     public ProductBuilder withName(String name) {
         this.name = new Name(name);
@@ -58,39 +57,31 @@ public class ProductBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Sets the {@code Description} of the {@code Product} that we are building.
      */
-    public ProductBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+    public ProductBuilder withDescription(String description) {
+        this.description = new Description(description);
         return this;
     }
 
     /**
-     * Sets the {@code Address} of the {@code Person} that we are building.
+     * Sets the {@code Category} of the {@code Product} that we are building.
      */
-    public ProductBuilder withAddress(String address) {
-        this.address = new Address(address);
+    public ProductBuilder withCategory(String category) {
+        this.category = new Category(category);
         return this;
     }
 
     /**
-     * Sets the {@code Phone} of the {@code Person} that we are building.
+     * Sets the {@code ExpiryDate} of the {@code Product} that we are building.
      */
-    public ProductBuilder withPhone(String phone) {
-        this.phone = new Phone(phone);
+    public ProductBuilder withExpiryDate(String expiryDate) {
+        this.expiryDate = new ExpiryDate(LocalDate.parse(expiryDate));
         return this;
     }
 
-    /**
-     * Sets the {@code Email} of the {@code Person} that we are building.
-     */
-    public ProductBuilder withEmail(String email) {
-        this.email = new Email(email);
-        return this;
-    }
-
-    public Person build() {
-        return new Person(name, phone, email, address, tags);
+    public Product build() {
+        return new Product(name, category, expiryDate, description, price);
     }
 
 }

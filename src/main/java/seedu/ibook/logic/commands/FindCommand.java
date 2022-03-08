@@ -7,7 +7,7 @@ import seedu.ibook.commons.core.Messages;
 
  */
 import seedu.ibook.model.Model;
-import seedu.ibook.model.person.NameContainsKeywordsPredicate;
+import seedu.ibook.model.product.NameContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in ibook whose name contains any of the argument keywords.
