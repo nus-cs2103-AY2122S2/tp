@@ -3,10 +3,15 @@ package seedu.contax.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_DURATION;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_FILE;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_PERSON;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.contax.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -37,6 +42,10 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
+    public static final String VALID_CSV_FILEPATH = "./src/test/data/ImportCsvTest/ValidContaXFormat.csv";
+    public static final String INVALID_BAD_EXTENSION_CSV_FILEPATH = "wrongFile.txt";
+    public static final String INVALID_NO_EXTENSION_CSV_FILEPATH = "./src/test/data/ImportCsvTest/ValidContaXFormat";
+
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
@@ -54,8 +63,69 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
+    public static final String VALID_APPOINTMENT_NAME_AMELIA = "Meeting With Amelia";
+    public static final String VALID_APPOINTMENT_NAME_ALONE = "Do some work alone";
+    public static final String VALID_DATE = "07-10-2022";
+    public static final String VALID_DATE2 = "05-10-2022";
+    public static final String VALID_TIME = "22:50";
+    public static final String VALID_TIME2 = "21:50";
+    public static final String VALID_APPOINTMENT_DURATION_HOUR = "60";
+    public static final String VALID_APPOINTMENT_DURATION_MINUTE = "1";
+
+    public static final String INVALID_APPOINTMENT_NAME = "Meeting??";
+    public static final String INVALID_DATE = "32-10-2022";
+    public static final String INVALID_TIME = "25:30";
+    public static final String INVALID_APPOINTMENT_DURATION = "-1";
+
+    public static final String APPOINTMENT_NAME_AMELIA = " " + PREFIX_NAME + VALID_APPOINTMENT_NAME_AMELIA;
+    public static final String APPOINTMENT_NAME_ALONE = " " + PREFIX_NAME + VALID_APPOINTMENT_NAME_ALONE;
+    public static final String APPOINTMENT_DATE = " " + PREFIX_DATE + VALID_DATE;
+    public static final String APPOINTMENT_DATE2 = " " + PREFIX_DATE + VALID_DATE2;
+    public static final String APPOINTMENT_TIME = " " + PREFIX_TIME + VALID_TIME;
+    public static final String APPOINTMENT_TIME2 = " " + PREFIX_TIME + VALID_TIME2;
+    public static final String APPOINTMENT_DURATION = " " + PREFIX_DURATION + VALID_APPOINTMENT_DURATION_HOUR;
+    public static final String APPOINTMENT_DURATION2 = " " + PREFIX_DURATION
+            + VALID_APPOINTMENT_DURATION_MINUTE;
+    public static final String APPOINTMENT_FIRST_PERSON = " " + PREFIX_PERSON + "1";
+    public static final String APPOINTMENT_SECOND_PERSON = " " + PREFIX_PERSON + "2";
+
+    public static final String INVALID_APPOINTMENT_NAME_DESC = " " + PREFIX_NAME + INVALID_APPOINTMENT_NAME;
+    public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + INVALID_DATE;
+    public static final String INVALID_TIME_DESC = " " + PREFIX_TIME + INVALID_TIME;
+    public static final String INVALID_APPOINTMENT_DURATION_DESC = " " + PREFIX_DURATION
+            + INVALID_APPOINTMENT_DURATION;
+    public static final String INVALID_APPOINTMENT_PERSON = " " + PREFIX_PERSON + "-1";
+
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
+
+    public static final String COMMAND_VALID_CSV_FILEPATH = " " + PREFIX_FILE + VALID_CSV_FILEPATH;
+    public static final String COMMAND_INVALID_BAD_EXTENSION_FILEPATH = " " + PREFIX_FILE
+            + INVALID_BAD_EXTENSION_CSV_FILEPATH;
+    public static final String COMMAND_INVALID_NO_EXTENSION_FILEPATH = " " + PREFIX_FILE
+            + INVALID_NO_EXTENSION_CSV_FILEPATH;
+    public static final String COMMAND_CSV_NAMEPOSITION = " " + PREFIX_NAME + "1";
+    public static final String COMMAND_CSV_NAMEPOSITION_CLASH = " " + PREFIX_NAME + "2";
+    public static final String COMMAND_CSV_PHONEPOSITION = " " + PREFIX_PHONE + "2";
+    public static final String COMMAND_CSV_PHONEPOSITION_CLASH = " " + PREFIX_PHONE + "1";
+    public static final String COMMAND_CSV_EMAILPOSITION = " " + PREFIX_EMAIL + "3";
+    public static final String COMMAND_CSV_EMAILPOSITION_CLASH = " " + PREFIX_EMAIL + "1";
+    public static final String COMMAND_CSV_ADDRESSPOSITION = " " + PREFIX_ADDRESS + "4";
+    public static final String COMMAND_CSV_ADDRESSPOSITION_CLASH = " " + PREFIX_ADDRESS + "1";
+    public static final String COMMAND_CSV_TAGPOSITION = " " + PREFIX_TAG + "5";
+    public static final String COMMAND_CSV_TAGPOSITION_CLASH = " " + PREFIX_TAG + "1";
+
+    public static final String COMMAND_CSV_INVALID_NAMEPOSITION = " " + PREFIX_NAME + "text";
+    public static final String COMMAND_CSV_INVALID_PHONEPOSITION = " " + PREFIX_PHONE + "text";
+    public static final String COMMAND_CSV_INVALID_EMAILPOSITION = " " + PREFIX_EMAIL + "text";
+    public static final String COMMAND_CSV_INVALID_ADDRESSPOSITION = " " + PREFIX_ADDRESS + "text";
+    public static final String COMMAND_CSV_INVALID_TAGPOSITION = " " + PREFIX_TAG + "text";
+
+    public static final String COMMAND_CSV_NEGATIVE_NAMEPOSITION = " " + PREFIX_NAME + "-1";
+    public static final String COMMAND_CSV_NEGATIVE_PHONEPOSITION = " " + PREFIX_PHONE + "-1";
+    public static final String COMMAND_CSV_NEGATIVE_EMAILPOSITION = " " + PREFIX_EMAIL + "-1";
+    public static final String COMMAND_CSV_NEGATIVE_ADDRESSPOSITION = " " + PREFIX_ADDRESS + "-1";
+    public static final String COMMAND_CSV_NEGATIVE_TAGPOSITION = " " + PREFIX_TAG + "-1";
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;

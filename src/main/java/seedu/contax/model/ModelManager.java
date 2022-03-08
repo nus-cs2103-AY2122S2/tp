@@ -11,7 +11,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.contax.commons.core.GuiSettings;
 import seedu.contax.commons.core.LogsCenter;
+import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.person.Person;
+import seedu.contax.model.tag.Tag;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -20,24 +22,29 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
+    private final Schedule schedule;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlySchedule schedule,
+                        ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(addressBook, schedule, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + addressBook
+                + " , schedule: " + schedule
+                + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
+        this.schedule = new Schedule(schedule);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new Schedule(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -73,6 +80,17 @@ public class ModelManager implements Model {
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
+    }
+
+    @Override
+    public Path getScheduleFilePath() {
+        return userPrefs.getScheduleFilePath();
+    }
+
+    @Override
+    public void setScheduleFilePath(Path scheduleFilePath) {
+        requireNonNull(scheduleFilePath);
+        userPrefs.setScheduleFilePath(scheduleFilePath);
     }
 
     //=========== AddressBook ================================================================================
@@ -111,6 +129,23 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    // Tag management
+    @Override
+    public boolean hasTag(Tag tag) {
+        requireNonNull(tag);
+        return addressBook.hasTag(tag);
+    }
+
+    @Override
+    public void addTag(Tag tag) {
+        addressBook.addTag(tag);
+    }
+
+    @Override
+    public ObservableList<Tag> getTagList() {
+        return addressBook.getTagList();
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -128,6 +163,47 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //=========== Schedule ===================================================================================
+    @Override
+    public void setSchedule(ReadOnlySchedule schedule) {
+        this.schedule.resetData(schedule);
+    }
+
+    @Override
+    public ReadOnlySchedule getSchedule() {
+        return schedule;
+    }
+
+    @Override
+    public boolean hasAppointment(Appointment appointment) {
+        requireNonNull(appointment);
+        return schedule.hasAppointment(appointment);
+    }
+
+    @Override
+    public boolean hasOverlappingAppointment(Appointment appointment) {
+        requireNonNull(appointment);
+        return schedule.hasOverlappingAppointment(appointment);
+    }
+
+    @Override
+    public void deleteAppointment(Appointment appointment) {
+        requireNonNull(appointment);
+        schedule.removeAppointment(appointment);
+    }
+
+    @Override
+    public void addAppointment(Appointment appointment) {
+        requireNonNull(appointment);
+        schedule.addAppointment(appointment);
+    }
+
+    @Override
+    public void setAppointment(Appointment target, Appointment editedAppointment) {
+        requireAllNonNull(target, editedAppointment);
+        schedule.setAppointment(target, editedAppointment);
+    }
+
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -143,6 +219,7 @@ public class ModelManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
+                && schedule.equals(other.schedule)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons);
     }

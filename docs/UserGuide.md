@@ -98,13 +98,22 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 ### Onboarding guide
-When you run the program for the first time, you will be prompted to take a quick tour of the ContaX's basic functions guided through a series of step-by-step instructions.
 
-Example of instructions:
-* Input command
-![](images/OnboardingCommand.png)
-* List contacts
-![](images/OnboardingList.png)
+#### Prompt on first run
+
+When you run the program for the first time, you will be prompted to take a quick tour of the ContaX's basic functions guided through a series of step-by-step instructions. You will be taken to the onboarding guide window if you select yes. If you choose no, the prompt will just close.
+
+![](images/OnboardingPrompt.png)
+
+<br>
+When going through the onboarding guide, instructions such as the one shown below will be displayed, and important areas will be highlighted.
+
+![](images/OnboardingInstruction.jpg)
+
+#### Basic features covered
+The onboarding guide will teach to do the folowing:
+- Add person
+- List person
 
 ### Adding a person: `add`
 
@@ -262,7 +271,7 @@ Format: `addAppointment n/NAME d/DATE t/TIME l/DURATION [p/PERSON]`
 
 * Creates a new appointment with the specified parameters.
 * All parameters except `PERSON` **must** be specified.
-* The `NAME` parameter must be **non-empty**.
+* The `NAME` parameter must be **non-empty**, and can only contain alphanumeric characters and the symbols `.,!@#$%&*()-_=+`.
 * The `DATE` parameter denotes the starting date, and **must conform to the [Common Date Formats](#common-date-and-time-syntax)**.
 * The `TIME` parameter denotes the starting time, and **must conform to the [Common Time Formats](#common-date-and-time-syntax)**.
 * The `DURATION` parameter is the duration of the appointment in *minutes*, and **must be a positive number**.
@@ -283,7 +292,7 @@ Format: `listAppointments`
 
 **Example output**
 
-![List Appointments Wireframe](images/wireframes/ListAppointments.png)
+![List Appointments Result](images/ListAppointments.png)
 
 ### Deleting an Appointment : `deleteAppointment`
 
@@ -307,7 +316,7 @@ Format: `editAppointment INDEX [n/NAME] [d/DATE] [t/TIME] [p/PERSON] [l/DURATION
 * The `INDEX` parameter **must be a positive integer**, and refers to the index number shown in the **displayed appointment list**.
 * At least one of the optional parameters must be supplied, otherwise the command will be ignored.
 * If supplied, the optional parameters must conform to the following rules:
-    * The `NAME` parameter must be non-empty.
+    * The `NAME` parameter must be non-empty, and can only contain alphanumeric characters and the symbols `.,!@#$%&*()-_=+`..
     * The `DATE` parameter denotes the starting date, and **must conform to the [Common Date Formats](#common-date-and-time-syntax)**.
     * The `TIME` parameter denotes the starting time, and **must conform to the [Common Time Formats](#common-date-and-time-syntax)**.
     * The `PERSON` parameter must be a positive integer, and refers to the index number shown in the displayed person list.
