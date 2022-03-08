@@ -10,7 +10,7 @@ import static seedu.contax.commons.util.AppUtil.checkArgument;
 public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String VALIDATION_REGEX = "(\\p{Alnum}+[ ]?)+";
 
     public final String tagName;
 
@@ -25,11 +25,29 @@ public class Tag {
         this.tagName = tagName;
     }
 
+    public String getTagName() {
+        return tagName;
+    }
+
     /**
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidTagName(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Checks if both tags have the same name.
+     * This defines a weaker notion of equality between two tags.
+     * @param otherTag The specified tag to check.
+     * @return true if both tags are the same.
+     */
+    public boolean isSameTag(Tag otherTag) {
+        if (otherTag == this) {
+            return true;
+        }
+
+        return otherTag != null && otherTag.getTagName().equals(tagName);
     }
 
     @Override

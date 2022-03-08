@@ -15,6 +15,9 @@ public class CliSyntax {
     /* Prefix definition for import CSV */
     public static final Prefix PREFIX_FILE = new Prefix("f/");
 
+    /* Prefix definition for advanced commands */
+    public static final Prefix PREFIX_SEARCH_TYPE = new Prefix("by/");
+
     /* Prefix definitions for Appointments */
     public static final Prefix PREFIX_DATE = new Prefix("d/");
     public static final Prefix PREFIX_TIME = new Prefix("t/");

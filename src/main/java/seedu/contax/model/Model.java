@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.contax.commons.core.GuiSettings;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.person.Person;
+import seedu.contax.model.tag.Tag;
 
 /**
  * The API of the Model component.
@@ -86,6 +87,12 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+    // Tag management
+    boolean hasTag(Tag tag);
+
+    void addTag(Tag tag);
+
+    // Appointments
     /**
      * Returns the user prefs' schedule file path.
      */
@@ -134,4 +141,5 @@ public interface Model {
      * schedule.
      */
     void setAppointment(Appointment target, Appointment editedAppointment);
+
 }

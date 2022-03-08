@@ -28,6 +28,7 @@ import seedu.contax.model.ReadOnlyUserPrefs;
 import seedu.contax.model.Schedule;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.person.Person;
+import seedu.contax.model.tag.Tag;
 import seedu.contax.testutil.AppointmentBuilder;
 import seedu.contax.testutil.TypicalIndexes;
 
@@ -176,6 +177,16 @@ public class AddAppointmentCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasTag(Tag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addTag(Tag tag) {
             throw new AssertionError("This method should not be called.");
         }
 
