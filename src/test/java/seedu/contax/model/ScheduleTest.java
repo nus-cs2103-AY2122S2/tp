@@ -140,15 +140,15 @@ public class ScheduleTest {
         assertThrows(NullPointerException.class, ()
             -> schedule.setAppointment(null, null));
         assertThrows(NullPointerException.class, ()
-                -> schedule.setAppointment(APPOINTMENT_ALICE, null));
+            -> schedule.setAppointment(APPOINTMENT_ALICE, null));
         assertThrows(NullPointerException.class, ()
-                -> schedule.setAppointment(null, APPOINTMENT_ALICE));
+            -> schedule.setAppointment(null, APPOINTMENT_ALICE));
     }
 
     @Test
     public void setAppointment_targetAppointmentNotInList_throwsAppointmentNotFoundException() {
         assertThrows(AppointmentNotFoundException.class, ()
-                -> schedule.setAppointment(APPOINTMENT_ALICE, APPOINTMENT_ALONE));
+            -> schedule.setAppointment(APPOINTMENT_ALICE, APPOINTMENT_ALONE));
     }
 
     @Test
@@ -193,7 +193,7 @@ public class ScheduleTest {
         schedule.addAppointment(disjointAppointment);
 
         assertThrows(OverlappingAppointmentException.class, ()
-                -> schedule.setAppointment(APPOINTMENT_ALICE, disjointAppointment));
+            -> schedule.setAppointment(APPOINTMENT_ALICE, disjointAppointment));
     }
 
     @Test
@@ -204,7 +204,7 @@ public class ScheduleTest {
     @Test
     public void removeAppointment_appointmentNotInList_throwsAppointmentNotFoundException() {
         assertThrows(AppointmentNotFoundException.class, ()
-                -> schedule.removeAppointment(APPOINTMENT_ALICE));
+            -> schedule.removeAppointment(APPOINTMENT_ALICE));
     }
 
     @Test

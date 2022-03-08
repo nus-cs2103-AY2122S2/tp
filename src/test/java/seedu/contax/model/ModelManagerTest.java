@@ -190,7 +190,7 @@ public class ModelManagerTest {
     @Test
     public void deleteAppointment_appointmentNotInList_throwsAppointmentNotFoundException() {
         assertThrows(AppointmentNotFoundException.class, ()
-                -> modelManager.deleteAppointment(APPOINTMENT_ALICE));
+            -> modelManager.deleteAppointment(APPOINTMENT_ALICE));
     }
 
     @Test
