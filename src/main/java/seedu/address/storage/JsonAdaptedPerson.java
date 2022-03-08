@@ -95,7 +95,7 @@ class JsonAdaptedPerson {
         }
         final List<Lab> personLabs = new ArrayList<>();
         for (int i = 0; i < labNumbers.size(); i++) {
-            personLabs.add(labNumbers.get(i).toModelType());
+            personLabs.add(labNumbers.get(i).toModelType().of(labStatuses.get(i).getLabStatus()));
         }
 
         if (name == null) {

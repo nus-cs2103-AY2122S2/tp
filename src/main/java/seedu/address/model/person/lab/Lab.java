@@ -44,7 +44,7 @@ public class Lab {
      * @param labNumber A valid lab number.
      * @param labStatus The status of the Lab to be created.
      */
-    public Lab(String labNumber, LabStatus labStatus) {
+    private Lab(String labNumber, LabStatus labStatus) {
         requireNonNull(labNumber);
         checkArgument(isValidLab(labNumber), MESSAGE_CONSTRAINTS);
         this.labNumber = Integer.parseInt(labNumber);
@@ -89,6 +89,22 @@ public class Lab {
      */
     public Lab createCopy() {
         return new Lab(String.valueOf(labNumber), labStatus);
+    }
+
+    /**
+     * Returns a new immutable lab with the same attributes as this.
+     */
+    public Lab of(String labStatusString) {
+        switch (labStatusString) {
+        case "UNSUBMITTED":
+            return new Lab(String.valueOf(labNumber), LabStatus.UNSUBMITTED);
+        case "SUBMITTED":
+            return new Lab(String.valueOf(labNumber), LabStatus.SUBMITTED);
+        case "GRADED":
+            return new Lab(String.valueOf(labNumber), LabStatus.GRADED);
+        default:
+            throw new IllegalArgumentException("Did not expect " + labStatusString);
+        }
     }
 
     /**

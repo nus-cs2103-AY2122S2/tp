@@ -24,7 +24,7 @@ public class LabLabel extends Label {
             this.setStyle("-fx-background-color: red;");
             break;
         case SUBMITTED:
-            this.setStyle("-fx-background-color: yellow;");
+            this.setStyle("-fx-background-color: orange;");
             break;
         case GRADED:
             this.setStyle("-fx-background-color: green;");
