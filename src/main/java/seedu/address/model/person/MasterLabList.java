@@ -1,11 +1,14 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.exceptions.DuplicateLabException;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.LabNotFoundException;
 import seedu.address.model.person.lab.Lab;
 
@@ -63,6 +66,25 @@ public class MasterLabList {
         return Index.fromZeroBased(masterList.indexOf(toIndex));
     }
 
+    public void setLabs(MasterLabList replacement) {
+        requireNonNull(replacement);
+        masterList.clear();
+        masterList.addAll(replacement.masterList);
+    }
+
+    /**
+     * Replaces the contents of this list with {@code persons}.
+     * {@code persons} must not contain duplicate persons.
+     */
+    public void setLabs(List<Lab> labs) {
+        requireAllNonNull(labs);
+        if (!labsAreUnique(labs)) {
+            throw new DuplicatePersonException();
+        }
+        masterList.clear();
+        masterList.addAll(labs);
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -73,5 +95,19 @@ public class MasterLabList {
     @Override
     public int hashCode() {
         return masterList.hashCode();
+    }
+
+    /**
+     * Returns true if {@code labs} contains only unique labs.
+     */
+    private boolean labsAreUnique(List<Lab> labs) {
+        for (int i = 0; i < labs.size() - 1; i++) {
+            for (int j = i + 1; j < labs.size(); j++) {
+                if (labs.get(i).isSameLab(labs.get(j))) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

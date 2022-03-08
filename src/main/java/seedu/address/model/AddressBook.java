@@ -5,8 +5,10 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.person.MasterLabList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.person.lab.Lab;
 
 /**
  * Wraps all data at the address-book level
@@ -15,6 +17,8 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+
+    private final MasterLabList labs;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,6 +29,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        labs = new MasterLabList();
     }
 
     public AddressBook() {}
@@ -93,6 +98,22 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    /**
+     * Returns true if a lab with the same identity as {@code lab} exists in the address book.
+     */
+    public boolean hasLab(Lab lab) {
+        requireNonNull(lab);
+        return labs.contains(lab);
+    }
+
+    /**
+     * Adds a lab to the address book.
+     * The lab must not already exist in the address book.
+     */
+    public void addLab(Lab lab) {
+        labs.add(lab);
+    }
+
     //// util methods
 
     @Override
@@ -104,6 +125,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public MasterLabList getMasterLabList() {
+        return labs;
     }
 
     @Override

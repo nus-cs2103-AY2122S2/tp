@@ -12,9 +12,10 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.lab.Lab;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the TAddressBook data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -75,7 +76,7 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== TAddressBook ================================================================================
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
@@ -109,6 +110,20 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    //=========== Lab Related methods ========================================================================
+
+    @Override
+    public boolean hasLab(Lab lab) {
+        requireNonNull(lab);
+        return addressBook.hasLab(lab);
+    }
+
+    @Override
+    public void addLab(Lab lab) {
+        requireNonNull(lab);
+        addressBook.addLab(lab);
     }
 
     //=========== Filtered Person List Accessors =============================================================
