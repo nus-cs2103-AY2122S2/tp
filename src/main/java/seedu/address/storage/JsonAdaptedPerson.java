@@ -32,7 +32,8 @@ class JsonAdaptedPerson {
     private final String telegram;
     private final String studentId;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
-    private final List<JsonAdaptedLab> labs = new ArrayList<>();
+    private final List<JsonAdaptedLabNumber> labNumbers = new ArrayList<>();
+    private final List<JsonAdaptedLabStatus> labStatuses = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -41,7 +42,8 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("email") String email,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("github") String githubUsername,
             @JsonProperty("telegram") String telegram, @JsonProperty("studentId") String studentId,
-            @JsonProperty("labs") List<JsonAdaptedLab> labs) {
+            @JsonProperty("labNames") List<JsonAdaptedLabNumber> labNumbers,
+            @JsonProperty("labStatuses") List<JsonAdaptedLabStatus> labStatuses) {
         this.name = name;
         this.email = email;
         this.githubUsername = githubUsername;
@@ -52,8 +54,12 @@ class JsonAdaptedPerson {
             this.tagged.addAll(tagged);
         }
 
-        if (labs != null) {
-            this.labs.addAll(labs);
+        if (labNumbers != null) {
+            this.labNumbers.addAll(labNumbers);
+        }
+
+        if (labStatuses != null) {
+            this.labStatuses.addAll(labStatuses);
         }
     }
 
@@ -69,8 +75,11 @@ class JsonAdaptedPerson {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        labs.addAll(source.getLabs().asUnmodifiableObservableList().stream()
-                .map(JsonAdaptedLab::new)
+        labNumbers.addAll(source.getLabs().asUnmodifiableObservableList().stream()
+                .map(JsonAdaptedLabNumber::new)
+                .collect(Collectors.toList()));
+        labStatuses.addAll(source.getLabs().asUnmodifiableObservableList().stream()
+                .map(JsonAdaptedLabStatus::new)
                 .collect(Collectors.toList()));
     }
 
@@ -85,8 +94,8 @@ class JsonAdaptedPerson {
             personTags.add(tag.toModelType());
         }
         final List<Lab> personLabs = new ArrayList<>();
-        for (JsonAdaptedLab lab : labs) {
-            personLabs.add(lab.toModelType());
+        for (int i = 0; i < labNumbers.size(); i++) {
+            personLabs.add(labNumbers.get(i).toModelType());
         }
 
         if (name == null) {

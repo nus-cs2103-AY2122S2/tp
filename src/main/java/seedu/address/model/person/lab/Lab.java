@@ -44,7 +44,7 @@ public class Lab {
      * @param labNumber A valid lab number.
      * @param labStatus The status of the Lab to be created.
      */
-    private Lab(String labNumber, LabStatus labStatus) {
+    public Lab(String labNumber, LabStatus labStatus) {
         requireNonNull(labNumber);
         checkArgument(isValidLab(labNumber), MESSAGE_CONSTRAINTS);
         this.labNumber = Integer.parseInt(labNumber);
