@@ -63,6 +63,10 @@ public class Person {
         return this.logs.asUnmodifiableObservableList();
     }
 
+    public boolean containsLog(Log log) {
+        return this.logs.contains(log);
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.

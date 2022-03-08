@@ -9,10 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -25,6 +22,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -121,4 +119,23 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses a String title.
+     *
+     * @throws ParseException if the given {@code title} is invalid.
+     */
+    public static String parseTitle(String title) throws ParseException { // TODO: 8/3/2022 refactor into Title object next time
+        requireNonNull(title);
+        if (!Log.isValidTitle(title)) {
+            throw new ParseException(Log.TITLE_CONSTRAINTS);
+        }
+        return title;
+    }
+
+    public static String parseDescription(String description) throws ParseException { // TODO: 8/3/2022  refactor into Description object
+        return description; // no restrictions on description at the moment
+    }
+
+
 }

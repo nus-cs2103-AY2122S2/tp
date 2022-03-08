@@ -129,18 +129,18 @@ Amigos provides functionality to manage logs, which are essentially detailed not
 
 ### Adding a log: `addlog`
 
-Adds a log to an existing friend in Amigos.
+Adds a log to an existing friend at the specified `INDEX` in Amigos.
+The `INDEX` refers to the index number shown in the displayed person's list.
+Format: `addlog INDEX t/[TITLE] d/[DESCRIPTION]`
 
-Format: `addlog n/[NAME] t/[TITLE] d/[DESCRIPTION]`
-
-* The `NAME` field is compulsory.
+* The `INDEX` field is compulsory.
 * If the `TITLE` argument is provided, then the `DESCRIPTON` argument is optional.
 * If neither `TITLE` nor `DESCRIPTION` arguments are provided, then a GUI
   pop up will prompt the user to key in the title and longer-form text as the description.
 
 Examples:
-* `addlog n/John doe t/has a pet named poki`
-* `addlog n/Andrew Tan t/recommended movies d/the martian, interstellar, three idiots`
+* `addlog 1 t/has a pet named poki`
+* `addlog 2 t/recommended movies d/the martian, interstellar, three idiots`
 
 ### Editing a log: `editlog`
 

@@ -141,7 +141,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
-
+            setLogs(toCopy.logs);
         }
 
         /**
