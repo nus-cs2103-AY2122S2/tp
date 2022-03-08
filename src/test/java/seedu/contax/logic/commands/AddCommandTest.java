@@ -21,6 +21,7 @@ import seedu.contax.model.Model;
 import seedu.contax.model.ReadOnlyAddressBook;
 import seedu.contax.model.ReadOnlyUserPrefs;
 import seedu.contax.model.person.Person;
+import seedu.contax.model.tag.Tag;
 import seedu.contax.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -146,6 +147,17 @@ public class AddCommandTest {
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        // TODO Check if this method needs to be called
+        @Override
+        public boolean hasTag(Tag tag) {
+            return false;
+        }
+
+        @Override
+        public void addTag(Tag tag) {
+
         }
     }
 

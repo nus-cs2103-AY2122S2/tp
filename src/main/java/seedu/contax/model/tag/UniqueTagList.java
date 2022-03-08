@@ -7,6 +7,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.contax.model.tag.exceptions.DuplicateTagException;
 
 public class UniqueTagList implements Iterable<Tag> {
     private final ObservableList<Tag> internalList = FXCollections.observableArrayList();
@@ -32,6 +33,11 @@ public class UniqueTagList implements Iterable<Tag> {
             throw new DuplicateTagException();
         }
         internalList.add(toAdd);
+    }
+
+    public void setTags(UniqueTagList replacement) {
+        requireNonNull(replacement);
+        internalList.setAll(replacement.internalList);
     }
 
     public void setTags(List<Tag> tags) {
@@ -63,5 +69,18 @@ public class UniqueTagList implements Iterable<Tag> {
         }
 
         return true;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (o instanceof UniqueTagList) {
+            return ((UniqueTagList) o).internalList.equals(internalList);
+        }
+
+        return false;
     }
 }

@@ -1,4 +1,4 @@
-package seedu.contax.model.tag;
+package seedu.contax.model.tag.exceptions;
 
 public class DuplicateTagException extends RuntimeException {
     public DuplicateTagException() {
