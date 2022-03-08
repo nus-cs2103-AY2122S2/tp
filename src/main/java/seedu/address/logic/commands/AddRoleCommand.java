@@ -15,18 +15,16 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.company.Company;
+import seedu.address.model.company.RoleManager;
 import seedu.address.model.role.Role;
-import seedu.address.model.role.RoleManager;
 
 /**
  * Adds a Role to the company.
  */
 public class AddRoleCommand extends Command {
 
-    //
     public static final String COMMAND_WORD = "addRole";
 
-    //
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a role to the company listed. "
             + "Parameters: "
             + "companyIndex "
@@ -42,9 +40,8 @@ public class AddRoleCommand extends Command {
             + PREFIX_DESCRIPTION + "Frontend "
             + PREFIX_STIPEND + "1000 ";
 
-    ////
     public static final String MESSAGE_SUCCESS = "New role added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This role has a duplicate already stored in this company";
+    public static final String MESSAGE_DUPLICATE_ROLE = "This role already exists in this company's role list";
 
     private final Index companyIndex;
     private final Role toAddRole;
@@ -62,15 +59,18 @@ public class AddRoleCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Company> companyList = model.getFilteredCompanyList();
+
         if (companyIndex.getZeroBased() >= companyList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX);
         }
 
         Company currCompany = companyList.get(companyIndex.getZeroBased());
         RoleManager roleManager = currCompany.getRoleManager();
+
         if (roleManager.hasRole(toAddRole)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_ROLE);
         }
+
         roleManager.addRole(toAddRole);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAddRole));
     }

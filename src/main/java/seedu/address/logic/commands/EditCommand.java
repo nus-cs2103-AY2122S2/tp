@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_COMPANIES;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -25,7 +24,7 @@ import seedu.address.model.company.Company;
 import seedu.address.model.company.CompanyName;
 import seedu.address.model.company.Email;
 import seedu.address.model.company.Phone;
-import seedu.address.model.role.Role;
+import seedu.address.model.company.RoleList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -104,10 +103,9 @@ public class EditCommand extends Command {
         Address updatedAddress =
                 editCompanyDescriptor.getAddress().orElse(companyToEdit.getAddress());
         Set<Tag> updatedTags = editCompanyDescriptor.getTags().orElse(companyToEdit.getTags());
-        ArrayList<Role> roles = new ArrayList<>(); // Dummy placeholder, will update in v1.2b
+        RoleList roles = new RoleList(); // Dummy placeholder, will update in v1.2b
 
-        return new Company(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-                roles);
+        return new Company(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, roles);
     }
 
     @Override
