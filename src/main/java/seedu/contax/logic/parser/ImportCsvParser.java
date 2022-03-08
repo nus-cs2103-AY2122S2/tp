@@ -9,6 +9,7 @@ import static seedu.contax.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.io.File;
+import java.util.HashSet;
 import java.util.stream.Stream;
 
 import seedu.contax.logic.commands.ImportCsvCommand;
@@ -54,7 +55,13 @@ public class ImportCsvParser implements Parser<ImportCsvCommand> {
             tagPosition = ParserUtil.parseCsvPositions(argMultimap.getValue(PREFIX_TAG).get());
         }
 
-        //remember to add check whether all the positions are distinct, otherwise throw exception
+        //Check if all the positions are distinct
+        HashSet<Integer> positionHashSet = new HashSet<>();
+        positionHashSet.add(namePosition);
+        checkDuplicateAndAdd(positionHashSet, phonePosition);
+        checkDuplicateAndAdd(positionHashSet, emailPosition);
+        checkDuplicateAndAdd(positionHashSet, addressPosition);
+        checkDuplicateAndAdd(positionHashSet, tagPosition);
 
         ImportCsv importCsvObject = new ImportCsv(file, namePosition, phonePosition,
                 emailPosition, addressPosition, tagPosition);
@@ -69,4 +76,17 @@ public class ImportCsvParser implements Parser<ImportCsvCommand> {
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
+
+    /**
+     * Checks if the integer doesn't exist, add to {@code HashSet}, else throw {@code ParseException}
+     * Used to check for duplicate positions
+     */
+    private void checkDuplicateAndAdd(HashSet<Integer> hashSet, int position) throws ParseException {
+        if (!hashSet.contains(position)) {
+            hashSet.add(position);
+        } else {
+            throw new ParseException(ImportCsv.MESSAGE_CLASHING_POSITIONS);
+        }
+    }
+
 }

@@ -44,7 +44,6 @@ public class ImportCsvCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Imported successfully";
     public static final String MESSAGE_SKIPPED_LINES = "Lines skipped (either bad formatting or duplicates): %s";
 
-
     private final ImportCsv toImport;
 
     /**
@@ -92,7 +91,6 @@ public class ImportCsvCommand extends Command {
                         skippedLinesString += ", ";
                     }
                 }
-
                 return new CommandResult(String.format("%s\n%s", MESSAGE_SUCCESS,
                         String.format(MESSAGE_SKIPPED_LINES, skippedLinesString)));
             } else {
@@ -101,8 +99,6 @@ public class ImportCsvCommand extends Command {
         } catch (IOException e) {
             throw new CommandException(String.format(MESSAGE_NO_FILE_FOUND, toImport.getFilePath()));
         }
-
-        //load the content into the current list
     }
 
     @Override

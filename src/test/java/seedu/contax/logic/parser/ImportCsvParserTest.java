@@ -2,20 +2,25 @@ package seedu.contax.logic.parser;
 
 import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.contax.logic.commands.CommandTestUtil.COMMAND_CSV_ADDRESSPOSITION;
+import static seedu.contax.logic.commands.CommandTestUtil.COMMAND_CSV_ADDRESSPOSITION_CLASH;
 import static seedu.contax.logic.commands.CommandTestUtil.COMMAND_CSV_EMAILPOSITION;
+import static seedu.contax.logic.commands.CommandTestUtil.COMMAND_CSV_EMAILPOSITION_CLASH;
 import static seedu.contax.logic.commands.CommandTestUtil.COMMAND_CSV_INVALID_ADDRESSPOSITION;
 import static seedu.contax.logic.commands.CommandTestUtil.COMMAND_CSV_INVALID_EMAILPOSITION;
 import static seedu.contax.logic.commands.CommandTestUtil.COMMAND_CSV_INVALID_NAMEPOSITION;
 import static seedu.contax.logic.commands.CommandTestUtil.COMMAND_CSV_INVALID_PHONEPOSITION;
 import static seedu.contax.logic.commands.CommandTestUtil.COMMAND_CSV_INVALID_TAGPOSITION;
 import static seedu.contax.logic.commands.CommandTestUtil.COMMAND_CSV_NAMEPOSITION;
+import static seedu.contax.logic.commands.CommandTestUtil.COMMAND_CSV_NAMEPOSITION_CLASH;
 import static seedu.contax.logic.commands.CommandTestUtil.COMMAND_CSV_NEGATIVE_ADDRESSPOSITION;
 import static seedu.contax.logic.commands.CommandTestUtil.COMMAND_CSV_NEGATIVE_EMAILPOSITION;
 import static seedu.contax.logic.commands.CommandTestUtil.COMMAND_CSV_NEGATIVE_NAMEPOSITION;
 import static seedu.contax.logic.commands.CommandTestUtil.COMMAND_CSV_NEGATIVE_PHONEPOSITION;
 import static seedu.contax.logic.commands.CommandTestUtil.COMMAND_CSV_NEGATIVE_TAGPOSITION;
 import static seedu.contax.logic.commands.CommandTestUtil.COMMAND_CSV_PHONEPOSITION;
+import static seedu.contax.logic.commands.CommandTestUtil.COMMAND_CSV_PHONEPOSITION_CLASH;
 import static seedu.contax.logic.commands.CommandTestUtil.COMMAND_CSV_TAGPOSITION;
+import static seedu.contax.logic.commands.CommandTestUtil.COMMAND_CSV_TAGPOSITION_CLASH;
 import static seedu.contax.logic.commands.CommandTestUtil.COMMAND_INVALID_BAD_EXTENSION_FILEPATH;
 import static seedu.contax.logic.commands.CommandTestUtil.COMMAND_INVALID_NO_EXTENSION_FILEPATH;
 import static seedu.contax.logic.commands.CommandTestUtil.COMMAND_VALID_CSV_FILEPATH;
@@ -98,6 +103,15 @@ public class ImportCsvParserTest {
                 ImportCsv.MESSAGE_CONSTRAINTS);
 
         //clashing position numbers
+        assertParseFailure(parser, COMMAND_VALID_CSV_FILEPATH + COMMAND_CSV_NAMEPOSITION_CLASH,
+                ImportCsv.MESSAGE_CLASHING_POSITIONS);
+        assertParseFailure(parser, COMMAND_VALID_CSV_FILEPATH + COMMAND_CSV_PHONEPOSITION_CLASH,
+                ImportCsv.MESSAGE_CLASHING_POSITIONS);
+        assertParseFailure(parser, COMMAND_VALID_CSV_FILEPATH + COMMAND_CSV_EMAILPOSITION_CLASH,
+                ImportCsv.MESSAGE_CLASHING_POSITIONS);
+        assertParseFailure(parser, COMMAND_VALID_CSV_FILEPATH + COMMAND_CSV_ADDRESSPOSITION_CLASH,
+                ImportCsv.MESSAGE_CLASHING_POSITIONS);
+        assertParseFailure(parser, COMMAND_VALID_CSV_FILEPATH + COMMAND_CSV_TAGPOSITION_CLASH,
+                ImportCsv.MESSAGE_CLASHING_POSITIONS);
     }
-
 }

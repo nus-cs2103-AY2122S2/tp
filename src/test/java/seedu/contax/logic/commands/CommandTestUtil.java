@@ -105,10 +105,15 @@ public class CommandTestUtil {
     public static final String COMMAND_INVALID_NO_EXTENSION_FILEPATH = " " + PREFIX_FILE
             + INVALID_NO_EXTENSION_CSV_FILEPATH;
     public static final String COMMAND_CSV_NAMEPOSITION = " " + PREFIX_NAME + 1;
+    public static final String COMMAND_CSV_NAMEPOSITION_CLASH = " " + PREFIX_NAME + 2;
     public static final String COMMAND_CSV_PHONEPOSITION = " " + PREFIX_PHONE + 2;
+    public static final String COMMAND_CSV_PHONEPOSITION_CLASH = " " + PREFIX_PHONE + 1;
     public static final String COMMAND_CSV_EMAILPOSITION = " " + PREFIX_EMAIL + 3;
+    public static final String COMMAND_CSV_EMAILPOSITION_CLASH = " " + PREFIX_EMAIL + 1;
     public static final String COMMAND_CSV_ADDRESSPOSITION = " " + PREFIX_ADDRESS + 4;
+    public static final String COMMAND_CSV_ADDRESSPOSITION_CLASH = " " + PREFIX_ADDRESS + 1;
     public static final String COMMAND_CSV_TAGPOSITION = " " + PREFIX_TAG + 5;
+    public static final String COMMAND_CSV_TAGPOSITION_CLASH = " " + PREFIX_TAG + 1;
 
     public static final String COMMAND_CSV_INVALID_NAMEPOSITION = " " + PREFIX_NAME + "text";
     public static final String COMMAND_CSV_INVALID_PHONEPOSITION = " " + PREFIX_PHONE + "text";
