@@ -249,8 +249,15 @@ public class ParserUtil {
         try {
             minutes = Integer.parseInt(trimmedDurationString);
         } catch (NumberFormatException exception) {
-            // TODO: figure out how to better handle exception for parsing duration of lesson (minutes)
-            throw new ParseException("TODO: figure out how to better handle exception for parsing duration of lesson");
+            throw new ParseException("Minutes must be a non-negative integer.");
+        }
+
+        if (minutes < 0) {
+            throw new ParseException("Minutes cannot be lesser than 0.");
+        }
+
+        if (minutes > 60) {
+            throw new ParseException("Minutes cannot be greater than 60.");
         }
 
         return minutes;
