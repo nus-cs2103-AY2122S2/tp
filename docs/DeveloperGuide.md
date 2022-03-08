@@ -49,7 +49,6 @@ The rest of the App consists of four components.
 * [**`Model`**](#model-component): Holds the data of the App in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
-
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
@@ -147,6 +146,22 @@ The `Storage` component,
 ### Common classes
 
 Classes used by multiple components are in the `seedu.contax.commons` package.
+
+### AddressBook and Schedule Subsystems
+
+Departing from the 4-component architectural view of the system, the App can also be logically partitioned into 3 distinct subsystems based on functionality.
+These subsystems are namely the:
+
+* Address Book Subsystem
+* Schedule Subsystem
+* Command Parsing, Processing and Display Subsystem
+
+<img src="images/FunctionalSubsystemDiagram.png" width="600" />
+
+Functionally, the Address Book and Schedule subsystem are near identical copies of each other, with the exception being the type of data being managed and the
+logic specific to each type of data. They serve the the same purpose of storing and managing data related to Contacts and Appointments respectively, and are hence structured similarly across the 4 architectural components, with similar flows for equivalent operations (E.g. `deletePerson` and `deleteAppointment`).
+
+As such, the detailed descriptions for the Address Book subsystem above can be translated to equivalents for the Schedule subsystem.
 
 --------------------------------------------------------------------------------------------------------------------
 
