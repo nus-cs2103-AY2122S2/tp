@@ -12,6 +12,7 @@ import seedu.contax.model.Model;
 import seedu.contax.model.ModelManager;
 import seedu.contax.model.Schedule;
 import seedu.contax.model.UserPrefs;
+import seedu.contax.ui.ListContentType;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
@@ -29,12 +30,14 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListCommand(), model, new CommandResult(ListCommand.MESSAGE_SUCCESS,
+                ListContentType.PERSON), expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListCommand(), model, new CommandResult(ListCommand.MESSAGE_SUCCESS,
+                ListContentType.PERSON), expectedModel);
     }
 }
