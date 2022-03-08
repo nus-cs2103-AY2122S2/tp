@@ -257,7 +257,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* Professor in from NUS School of Computing
+* Professor from NUS School of Computing
 * Needs to manage a significant number of TA applications
 * Prefers desktop apps to other platform apps
 * Possesses fast typing speed
