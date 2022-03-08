@@ -29,7 +29,7 @@ public class CompanyCard extends UiPart<Region> {
 
     public final Company company;
     public final ObservableList<Role> roleList;
-    public final RoleListPanel roleListPanel;
+    private RoleListPanel roleListPanel;
 
     @FXML
     private HBox cardPane;
@@ -77,7 +77,7 @@ public class CompanyCard extends UiPart<Region> {
             email.setManaged(false);
         }
         setRoleTags();
-        roleList = company.getRoleManager().getRoles();
+        roleList = company.getRoleManager().getFilteredRoles();
         roleListPanel = new RoleListPanel(roleList);
         roleListPanelPlaceholder.getChildren().add(roleListPanel.getRoot());
 
@@ -87,6 +87,7 @@ public class CompanyCard extends UiPart<Region> {
             if (roleList.isEmpty()) {
                 roleListPanelPlaceholder.getChildren().clear();
             } else {
+                roleListPanel = new RoleListPanel(roleList);
                 roleListPanelPlaceholder.getChildren().add(roleListPanel.getRoot());
                 roleListPanelPlaceholder.setManaged(true);
             }

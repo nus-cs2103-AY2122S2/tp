@@ -12,6 +12,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -19,12 +20,15 @@ import seedu.address.model.CompanyList;
 import seedu.address.model.Model;
 import seedu.address.model.company.Company;
 import seedu.address.model.company.CompanyNameContainsKeywordsPredicate;
+import seedu.address.model.role.Role;
 import seedu.address.testutil.EditCompanyDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
  */
 public class CommandTestUtil {
+
+    public static final Predicate<Role> PREDICATE_SHOW_ALL_ROLES = unused -> true;
 
     public static final String VALID_DEADLINE_SOFTWARE_ENGINEER = "01-01-2021 00:00";
     public static final String VALID_NAME_SOFTWARE_ENGINEER = "Software engineer";
@@ -129,7 +133,8 @@ public class CommandTestUtil {
 
         Company company = model.getFilteredCompanyList().get(targetIndex.getZeroBased());
         final String[] splitName = company.getName().fullName.split("\\s+");
-        model.updateFilteredCompanyList(new CompanyNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredCompanyList(new CompanyNameContainsKeywordsPredicate(Arrays.asList(splitName[0]),
+                Arrays.asList("")), PREDICATE_SHOW_ALL_ROLES);
 
         assertEquals(1, model.getFilteredCompanyList().size());
     }
