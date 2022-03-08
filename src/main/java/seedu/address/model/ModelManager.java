@@ -40,10 +40,6 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         eventList = FXCollections.observableArrayList();
-        eventList.add(new Event(new Name("Test"), "Test desc", LocalDateTime.now()));
-        eventList.add(new Event(new Name("Test2"), "Test desc2", LocalDateTime.now()));
-        eventList.add(new Event(new Name("Test3"), "Test desc3", LocalDateTime.now()));
-        eventList.add(new Event(new Name("Test4"), "Test desc4", LocalDateTime.now()));
     }
 
     public ModelManager() {
