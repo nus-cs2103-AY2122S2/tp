@@ -141,6 +141,11 @@ public class ModelManager implements Model {
         addressBook.addTag(tag);
     }
 
+    @Override
+    public ObservableList<Tag> getTagList() {
+        return addressBook.getTagList();
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**

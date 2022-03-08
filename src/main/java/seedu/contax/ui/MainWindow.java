@@ -34,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private AppointmentListPanel appointmentListPanel;
+    private TagListPanel tagListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -124,6 +125,7 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         appointmentListPanel = new AppointmentListPanel(logic.getAppointmentList());
+        tagListPanel = new TagListPanel(logic.getTagList());
         changeListContentType(ListContentType.PERSON);
 
         resultDisplay = new ResultDisplay();
@@ -170,6 +172,8 @@ public class MainWindow extends UiPart<Stage> {
             contentListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
         } else if (contentType == ListContentType.APPOINTMENT) {
             contentListPanelPlaceholder.getChildren().add(appointmentListPanel.getRoot());
+        } else if (contentType == ListContentType.TAG) {
+            contentListPanelPlaceholder.getChildren().add(tagListPanel.getRoot());
         }
     }
 

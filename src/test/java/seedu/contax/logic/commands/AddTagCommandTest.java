@@ -172,6 +172,11 @@ class AddTagCommandTest {
         public void addTag(Tag tag) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public ObservableList<Tag> getTagList() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     private class ModelStubWithTag extends ModelStub {

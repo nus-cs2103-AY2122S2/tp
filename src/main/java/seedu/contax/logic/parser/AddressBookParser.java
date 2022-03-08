@@ -20,6 +20,7 @@ import seedu.contax.logic.commands.HelpCommand;
 import seedu.contax.logic.commands.ImportCsvCommand;
 import seedu.contax.logic.commands.ListAppointmentCommand;
 import seedu.contax.logic.commands.ListCommand;
+import seedu.contax.logic.commands.ListTagCommand;
 import seedu.contax.logic.parser.exceptions.ParseException;
 
 /**
@@ -90,6 +91,9 @@ public class AddressBookParser {
         // Tag management commands
         case AddTagCommand.COMMAND_WORD:
             return new AddTagCommandParser().parse(arguments);
+
+        case ListTagCommand.COMMAND_WORD:
+            return new ListTagCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

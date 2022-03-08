@@ -162,6 +162,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Tag> getTagList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public Path getScheduleFilePath() {
             throw new AssertionError("This method should not be called.");
         }
