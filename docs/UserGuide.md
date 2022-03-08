@@ -1,192 +1,130 @@
 ---
-layout: page
+layout: page 
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+<img src = "images/user-guide/icon.png" width = "250" alt="Unable to load image! Try again later.">
 
-* Table of Contents
-{:toc}
+
+MedBook is a **desktop app fir health monitoring system for healthcare professionals via a Command Line Interface** (
+CLI)  that simplifies tracking a patient’s medical details and scheduling appointments. MedBook delivers a seamless
+workflow for doctors and healthcare professionals to search for or update patients' medical information, billing and
+appointments through a simple and easy-to-use platform.
+
+
+* Table of Contents {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+### Requirement
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+- Ensure you have Java 11 or above installed on your computer.
+- Download the latest medbook.jar from [here](https://github.com/AY2122S2-CS2103T-T11-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+### Setup
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
-
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
-
-   * **`list`** : Lists all contacts.
-
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
-
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
-
-   * **`clear`** : Deletes all contacts.
-
-   * **`exit`** : Exits the app.
-
-1. Refer to the [Features](#features) below for details of each command.
+1. Copy the file to the folder you want to use as the home folder for your MedBook.
+2. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
+3. Type the command in the command box and press Enter to execute it. e.g. typing help and pressing Enter will open the help window. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+=======
+## 2.0 Features
 
-## Features
+### 2.1 Create Contact Information: / create -t contact
 
-<div markdown="block" class="alert alert-info">
+Adds a patient's contact to the Medbook
 
-**:information_source: Notes about the command format:**<br>
-
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
-
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-
-</div>
-
-### Viewing help : `help`
-
-Shows a message explaning how to access the help page.
-
-![help message](images/helpMessage.png)
-
-Format: `help`
-
-
-### Adding a person: `add`
-
-Adds a person to the address book.
-
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+Format: / create -t contact -i NRIC -n NAME -p PHONE_NUMBER -e EMAIL -a ADDRESS
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* /create -t contact -i S12345678P -n John Doe -p 80008000 -e johndoe@gmail.com -a COM1
 
-### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+<img src = "images/user-guide/feature2_1.png" width = "350" alt="Unable to load image! Try again later.">
 
-Format: `list`
 
-### Editing a person : `edit`
+### 2.2 View Contact Information: /view -t contact
 
-Edits an existing person in the address book.
+Views a patient’s details from the MedBook
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: /view -t contact [-i NRIC] [-n NAME] [-p PHONE_NUMBER] [-e EMAIL]
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+Note: Optional fields allow users to have a more refined search.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* /view -t contact to show all patients’ contact information
+* /view -t contact -i S12345678P to view the contact information of the patient with this NRIC
+* /view -t contact -n John Smith to view all contact information of patients with this name
 
-### Locating persons by name: `find`
+<img src = "images/user-guide/feature2_2.png" width = "350" alt="Unable to load image! Try again later.">
 
-Finds persons whose names contain any of the given keywords.
+### 2.3 Delete Contact Information: /delete -t contact
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Deletes a patient from the MedBook
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+Format: /delete -t contact -i NRIC
+
+Note: Only NRIC can be used to uniquely identify the contact owner.
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* /delete -t contact -i S12345678P
 
-### Deleting a person : `delete`
+### 2.7	Create Consultation Information: /create -t consultation
+Adds a consultation report of a patient to the MedBook.
 
-Deletes the specified person from the address book.
+Format: /create -t consultation -i S12345678P [-dt DATE] [-tm TIME] [-n NOTES] [-p PRESCRIPTION] [-tt TESTS TAKEN AND RESULTS]
 
-Format: `delete INDEX`
+NOTE:  [-dt DATE][-tm TIME] are in the form dd-MM-yyyy, HH-mm (24 hour) respectively.
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+Examples:  
+* /create -t consultation -i S12345678P -dt 15-09-2021 -tm 18-00 -n Inflammation in the throat and windpipe, short and shallow breath, laboured breathing. Most likely has Upper Respiratory Infection. -p Augmentin Antibiotics 625mg - twice a day; Paracetamol 500mg - twice a day. -tt Stethoscope. Found short and laboured breathing.
+
+### 2.8	View Past Consultations: /view -t consultation
+View all past consultations in the MedBook that fit search parameters. All fields are optional.
+
+Format: /view -t consultation  -i S12345678P [-dt DATE][-tm TIME]
+
+NOTE:  [-dt DATE][-tm TIME] are in the form dd-MM-yyyy, HH-mm (24 hour) respectively.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* /view -t consultation
+  * Shows all the consultations for all patients
+* /view -t consultation -i S12345678P
+  * Shows all the consultations for patient with id S12345678P
+* /view -t consultation -i S12345678P -dt -09-2021
+  * Shows all consultations for patients with id S12345678P that occurred in Sept 2021
+* /view -t consultation -dt 15-09-2021 -tm 18-00
+  * Shows consultation that occurred on Sept 15 2021 1800hrs
+    
+<img src = "images/user-guide/feature2_8_1.png" width = "350" alt="Unable to load image! Try again later.">
+<img src = "images/user-guide/feature2_8_2.png" width = "350" alt="Unable to load image! Try again later.">
+<div style="font-style: italic"; align="center">View Consultation Information User Interface</div>
 
-### Clearing all entries : `clear`
+### 2.9	Delete Consultation Information: /delete -t consultation
+Deletes a consultation of a patient from the MedBook.
 
-Clears all entries from the address book.
+Format: /delete -t consultation -i S12345678P [-dt DATE] [-tm TIME]
 
-Format: `clear`
+Examples:
+* /delete -t consultation -i S12345678P  -dt 15-09-2021 -tm 18-00
 
-### Exiting the program : `exit`
+## 3.0	FAQ
+Q: How do I transfer my data to another Computer?  
+A: Install the app on the other computer and overwrite the empty data file it creates with the file that contains the data of your previous MedBook folder.  
 
-Exits the program.
+## 4.0 Command Summary
 
-Format: `exit`
-
-### Saving the data
-
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-### Editing the data file
-
-AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
-</div>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
---------------------------------------------------------------------------------------------------------------------
-
-## FAQ
-
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
-
---------------------------------------------------------------------------------------------------------------------
-
-## Command summary
-
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+| Action | Format Example |
+| :----- | :------------- |
+| Add Contact Info | /create -t contact -i NRIC -n NAME -p PHONE_NUMBER -e EMAIL -a ADDRESS |
+| View Contact Info | /view -t contact [-i NRIC] [-n NAME] [-p PHONE_NUMBER] [-e EMAIL] |
+| Delete Contact Info | /delete -t contact -i NRIC |
+| Add Medical Info | /create -t medical -i S12345678P [-a AGE] [-bt BLOOD_TYPE] [-md MEDICATION]... |
+| View Medical Info | /view -t medical [-i NRIC] |
+| Delete Medical Info | /delete -t medical -i NRIC |
+| Add Consultation Info | /create -t consultation -i S12345678P [-dt DATE] [-tm TIME] [-n NOTES] [-p PRESCRIPTION] [-tt TESTS TAKEN AND RESULTS] |
+| View Consultation Info | /view -t consultation  -i S12345678P [-dt DATE][-tm TIME] |
+| Delete Consultation Info | /delete -t consultation -i S12345678P [-dt DATE] [-tm TIME] |
