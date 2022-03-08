@@ -15,7 +15,7 @@
 
 ## Quick Overview
 
---- 
+---
 ClientConnect is a simple desktop application that stores all your clients' information for you!
 
 Manage your clients with ease!
