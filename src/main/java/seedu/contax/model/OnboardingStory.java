@@ -31,17 +31,17 @@ public class OnboardingStory {
             return true;
         }
 
-        if (!(other instanceof OnboardingStep)) {
+        if (!(other instanceof OnboardingStory)) {
             return false;
         }
-
         OnboardingStory otherStory = (OnboardingStory) other;
+
         if (otherStory.getSize() != getSize()) {
             return false;
         }
 
-        for(int i = 0; i < getSize(); i++) {
-            if (otherStory.getStep(i) != getStep(i)) {
+        for (int i = 0; i < getSize(); i++) {
+            if (!otherStory.getStep(i).equals(getStep(i))) {
                 return false;
             }
         }
