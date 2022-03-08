@@ -76,7 +76,7 @@ public class TeachWhatParser {
 
         case ViewLessonInfoCommand.COMMAND_WORD:
             return new ViewLessonInfoCommandParser().parse(arguments);
-            
+
         case AddLessonCommand.COMMAND_WORD:
             return new AddLessonCommandParser().parse(arguments);
 
