@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.contax.logic.commands.AddCommand;
+import seedu.contax.logic.commands.AddTagCommand;
 import seedu.contax.logic.commands.ClearCommand;
 import seedu.contax.logic.commands.DeleteCommand;
 import seedu.contax.logic.commands.EditCommand;
@@ -25,9 +26,12 @@ import seedu.contax.logic.commands.ListCommand;
 import seedu.contax.logic.parser.exceptions.ParseException;
 import seedu.contax.model.person.NameContainsKeywordsPredicate;
 import seedu.contax.model.person.Person;
+import seedu.contax.model.tag.Tag;
 import seedu.contax.testutil.EditPersonDescriptorBuilder;
 import seedu.contax.testutil.PersonBuilder;
 import seedu.contax.testutil.PersonUtil;
+import seedu.contax.testutil.TagBuilder;
+import seedu.contax.testutil.TagUtil;
 
 public class AddressBookParserTest {
 
@@ -86,6 +90,14 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    // Tag management commands
+    @Test
+    public void parseCommand_addTag() throws Exception {
+        Tag tag = new TagBuilder().build();
+        AddTagCommand command = (AddTagCommand) parser.parseCommand(TagUtil.getAddTagCommand(tag));
+        assertEquals(command, new AddTagCommand(tag));
     }
 
     @Test
