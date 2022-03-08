@@ -11,7 +11,7 @@ public class Phone {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain numbers and country code (optional), and it should be "
+            "Phone numbers should only contain numbers and country code (optional), and "
                     + "at least 3 digits long";
     public static final String VALIDATION_REGEX = "^([0|\\+[0-9]{1,5}])?([1-9][0-9]{2,})$";
     public final String value;

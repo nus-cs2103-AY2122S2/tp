@@ -155,9 +155,9 @@ public class ParserUtil {
      *
      * @throws ParseException
      */
-    public static int parseCsvPositions(String position) throws ParseException {
-        requireNonNull(position);
-        String trimmedPosition = position.trim();
+    public static int parseCsvPositions(String positionString) throws ParseException {
+        requireNonNull(positionString);
+        String trimmedPosition = positionString.trim();
         try {
             int finalPosition = Integer.parseInt(trimmedPosition);
             if (finalPosition < 1) {
