@@ -1,5 +1,7 @@
 package seedu.contax.testutil;
 
+import java.io.File;
+
 import seedu.contax.model.ImportCsv;
 
 public class ImportCsvObjectBuilder {
@@ -10,7 +12,7 @@ public class ImportCsvObjectBuilder {
     public static final int DEFAULT_ADDRESSPOSITION = 4;
     public static final int DEFAULT_TAGPOSITION = 5;
 
-    private String filePath;
+    private File filePath;
     private int namePosition;
     private int phonePosition;
     private int emailPosition;
@@ -21,7 +23,7 @@ public class ImportCsvObjectBuilder {
      * Creates a {@code ImportCsvObjectBuilder} with the default details.
      */
     public ImportCsvObjectBuilder() {
-        filePath = DEFAULT_FILEPATH;
+        filePath = new File(DEFAULT_FILEPATH);
         namePosition = DEFAULT_NAMEPOSITION;
         phonePosition = DEFAULT_PHONEPOSITION;
         emailPosition = DEFAULT_EMAILPOSITION;
