@@ -6,6 +6,7 @@ import static seedu.contax.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.contax.testutil.Assert.assertThrows;
 import static seedu.contax.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collections;
@@ -25,7 +26,7 @@ import seedu.contax.model.tag.Tag;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
-    private static final String INVALID_PHONE = "+651234";
+    private static final String INVALID_PHONE = "+sg42344";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
@@ -36,6 +37,10 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+
+    private static final String VALID_CSV_FILEPATH = "./src/test/data/ImportCsvTest/ValidContaXFormat.csv";
+    private static final String INVALID_BAD_EXTENSION_CSV_FILEPATH = "wrongFile.txt";
+    private static final String INVALID_NO_EXTENSION_CSV_FILEPATH = "./src/test/data/ImportCsvTest/ValidContaXFormat";
 
     private static final String INVALID_APPOINTMENT_NAME = "MEETING!";
     private static final String INVALID_DATE_SYNTAX = "2022-10-20";
@@ -209,6 +214,44 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseImportCsvFilePath_validFilePathWithoutWhitespace_returnsFile() throws Exception {
+        File expectedFile = new File(VALID_CSV_FILEPATH);
+        assertEquals(expectedFile, ParserUtil.parseCsvFilePath(VALID_CSV_FILEPATH));
+    }
+
+    @Test
+    public void parseImportCsvFilePath_validFilePathWithWhitespace_returnsFile() throws Exception {
+        String filePathWithWhitespace = WHITESPACE + VALID_CSV_FILEPATH + WHITESPACE;
+        File expectedFile = new File(VALID_CSV_FILEPATH);
+        assertEquals(expectedFile, ParserUtil.parseCsvFilePath(VALID_CSV_FILEPATH));
+    }
+
+    @Test
+    public void parseImportCsvFilePath_invalidExtension_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseCsvFilePath(INVALID_BAD_EXTENSION_CSV_FILEPATH));
+    }
+
+    @Test
+    public void parseImportCsvFilePath_noExtension_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseCsvFilePath(INVALID_NO_EXTENSION_CSV_FILEPATH));
+    }
+
+    @Test
+    public void parseImportCsvPositions_validPosition_returnsInt() throws Exception {
+        assertEquals(1, ParserUtil.parseCsvPositions("1"));
+    }
+
+    @Test
+    public void parseImportCsvPositions_negativePosition_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseCsvPositions("-1"));
+    }
+
+    @Test
+    public void parseImportCsvPositions_lettersInPosition_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseCsvPositions("test"));
     }
 
     @Test
