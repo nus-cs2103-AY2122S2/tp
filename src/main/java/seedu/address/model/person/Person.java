@@ -116,14 +116,13 @@ public class Person {
                 && otherPerson.getTags().equals(getTags())
                 && otherPerson.getGithubUsername().equals(getGithubUsername())
                 && otherPerson.getTelegram().equals(getTelegram())
-                && otherPerson.getStudentId().equals(getStudentId())
-                && otherPerson.getLabs().equals(getLabs());
+                && otherPerson.getStudentId().equals(getStudentId());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, email, tags, githubUsername, telegram, studentId, labs);
+        return Objects.hash(name, email, tags, githubUsername, telegram, studentId);
     }
 
     @Override
