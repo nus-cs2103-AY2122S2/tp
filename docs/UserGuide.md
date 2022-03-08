@@ -75,16 +75,18 @@ Examples:
 
 Adds a module to TAssist.
 
-Format: `add module n/MODULE_NAME c/MODULE_CODE`
+Format: `add module n/MODULE_NAME c/MODULE_CODE a/ACAD_YEAR`
 
 Examples:
-* `add module n/Software Engineering Project c/CS2103T`
+* `add module n/Software Engineering Project c/CS2103T a/21S1`
 
 #### Adding a class group: `add class`
 
 Adds a class group to TAssist.
 
 Format: `add class id/CLASSGROUP_ID t/CLASSGROUP_TYPE m/MODULE_CODE`
+
+* TAssist supports the following class group types: lab, recitation, sectional and tutorial.
 
 Examples:
 * `add class id/T13 t/tutorial m/CS2103T`
@@ -203,8 +205,8 @@ _Details coming soon ..._
         <td>module</td>
         <td>
             <ul>
-                <li>syntax: <code>add module n/MODULE_NAME c/MODULE_CODE</code></li>
-                <li>e.g., <code>add module n/Software Engineering Project c/CS2103T</code></li>
+                <li>syntax: <code>add module n/MODULE_NAME c/MODULE_CODE a/ACAD_YEAR</code></li>
+                <li>e.g., <code>add module n/Software Engineering Project c/CS2103T a/21S1</code></li>
             </ul>
         </td>
     </tr>
