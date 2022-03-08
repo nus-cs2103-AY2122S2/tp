@@ -16,6 +16,7 @@ import seedu.contax.logic.Logic;
 import seedu.contax.logic.commands.CommandResult;
 import seedu.contax.logic.commands.exceptions.CommandException;
 import seedu.contax.logic.parser.exceptions.ParseException;
+import seedu.contax.ui.onboarding.OnboardingPrompt;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -36,6 +37,7 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
+    private OnboardingPrompt onboardingPrompt;
     // Flag indicating the type of model currently being displayed in the contentList
     private ListContentType currentListType;
 
@@ -44,6 +46,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private MenuItem helpMenuItem;
+
+    @FXML
+    private MenuItem onboardingMenuItem;
 
     @FXML
     private StackPane contentListPanelPlaceholder;
@@ -70,6 +75,8 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        onboardingPrompt = new OnboardingPrompt(primaryStage);
+        currentListType = ListContentType.PERSON;
     }
 
     public Stage getPrimaryStage() {
@@ -78,6 +85,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(onboardingMenuItem, KeyCombination.valueOf("F2"));
     }
 
     /**
@@ -175,6 +183,14 @@ public class MainWindow extends UiPart<Stage> {
         } else {
             helpWindow.focus();
         }
+    }
+
+    /**
+     * Sets and opens the onboarding guide window and hides the main window
+     */
+    @FXML
+    public void handleOnboarding() {
+        onboardingPrompt.show();
     }
 
     void show() {
