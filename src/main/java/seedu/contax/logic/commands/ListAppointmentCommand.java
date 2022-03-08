@@ -1,7 +1,6 @@
 package seedu.contax.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.contax.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.contax.model.Model;
 import seedu.contax.ui.ListContentType;

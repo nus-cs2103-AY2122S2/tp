@@ -32,10 +32,10 @@ public class CommandResult {
 
     /**
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
-     * and other fields set to their default value. The contents the list shows defaults to {@code PERSON}.
+     * and other fields set to their default value. The contents the list shows defaults to {@code UNCHANGED}.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, ListContentType.PERSON, false, false);
+        this(feedbackToUser, ListContentType.UNCHANGED, false, false);
     }
 
     /**
@@ -44,6 +44,14 @@ public class CommandResult {
      */
     public CommandResult(String feedbackToUser, ListContentType contentType) {
         this(feedbackToUser, contentType, false, false);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser}, {@code showHelp} and
+     * {@code exit}. The contents the list shows defaults to {@code UNCHANGED}.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+        this(feedbackToUser, ListContentType.UNCHANGED, showHelp, exit);
     }
 
     public String getFeedbackToUser() {

@@ -1,7 +1,6 @@
 package seedu.contax.logic.commands;
 
 import seedu.contax.model.Model;
-import seedu.contax.ui.ListContentType;
 
 /**
  * Terminates the program.
@@ -14,7 +13,7 @@ public class ExitCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT, ListContentType.UNCHANGED, false, true);
+        return new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT, false, true);
     }
 
 }
