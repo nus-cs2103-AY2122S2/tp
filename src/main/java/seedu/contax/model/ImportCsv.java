@@ -3,13 +3,15 @@ package seedu.contax.model;
 import static seedu.contax.commons.util.AppUtil.checkArgument;
 import static seedu.contax.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.io.File;
+
 public class ImportCsv {
 
     public static final String FILE_PATH_CONSTRAINTS = "File path should point to a .csv file";
     public static final String MESSAGE_CONSTRAINTS = "Positions should be integers above 0";
     public static final String FILE_VALIDATION_REGEX = "^.*\\.(csv)$";
 
-    private final String filePath;
+    private final File filePath;
     private final int namePosition;
     private final int phonePosition;
     private final int emailPosition;
@@ -19,10 +21,10 @@ public class ImportCsv {
     /**
      * Creates a new ImportCsv object to contain import parameters
      */
-    public ImportCsv(String filePath, int namePosition, int phonePosition, int emailPosition,
+    public ImportCsv(File filePath, int namePosition, int phonePosition, int emailPosition,
                      int addressPosition, int tagPosition) {
         requireAllNonNull(filePath, namePosition, phonePosition, emailPosition, addressPosition, tagPosition);
-        checkArgument(isValidFilePath(filePath), FILE_VALIDATION_REGEX);
+        checkArgument(isValidFilePath(filePath.getPath()), FILE_VALIDATION_REGEX);
         this.filePath = filePath;
         this.namePosition = namePosition;
         this.phonePosition = phonePosition;
@@ -32,7 +34,7 @@ public class ImportCsv {
     }
 
     public String getFilePath() {
-        return filePath;
+        return filePath.getPath();
     }
 
     public static boolean isValidFilePath(String test) {

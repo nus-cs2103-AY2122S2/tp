@@ -2,6 +2,7 @@ package seedu.contax.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.File;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -123,17 +124,24 @@ public class ParserUtil {
         return tagSet;
     }
 
-    public static String parseCsvFilePath(String filePath) throws ParseException {
+    /**
+     * Parses a {@code String filePath} into a {@code Path}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code phone} is invalid.
+     */
+    public static File parseCsvFilePath(String filePath) throws ParseException {
         requireNonNull(filePath);
         String trimmedFilePath = filePath.trim();
         if (!ImportCsv.isValidFilePath(trimmedFilePath)) {
             throw new ParseException(ImportCsv.FILE_PATH_CONSTRAINTS);
         }
-        return trimmedFilePath;
+        return new File(trimmedFilePath);
     }
 
     /**
      * Parses a {@String position} into an {@code integer}.
+     * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException
      */

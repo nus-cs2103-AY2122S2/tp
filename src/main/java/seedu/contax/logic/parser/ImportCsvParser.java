@@ -8,6 +8,7 @@ import static seedu.contax.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.io.File;
 import java.util.stream.Stream;
 
 import seedu.contax.logic.commands.ImportCsvCommand;
@@ -28,7 +29,7 @@ public class ImportCsvParser implements Parser<ImportCsvCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCsvCommand.MESSAGE_USAGE));
         }
 
-        String fileName = ParserUtil.parseCsvFilePath(argMultimap.getValue(PREFIX_FILE).get());
+        File file = ParserUtil.parseCsvFilePath(argMultimap.getValue(PREFIX_FILE).get());
 
         //check if file exists, else throw exception
 
@@ -55,7 +56,7 @@ public class ImportCsvParser implements Parser<ImportCsvCommand> {
 
         //remember to add check whether all the positions are distinct, otherwise throw exception
 
-        ImportCsv importCsvObject = new ImportCsv(fileName, namePosition, phonePosition,
+        ImportCsv importCsvObject = new ImportCsv(file, namePosition, phonePosition,
                 emailPosition, addressPosition, tagPosition);
 
         return new ImportCsvCommand(importCsvObject);
