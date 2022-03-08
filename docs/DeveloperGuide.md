@@ -257,14 +257,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* Professor in charge of CS2103
+* Professor from NUS School of Computing
 * Needs to manage a significant number of TA applications
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Prefers desktop apps to other platform apps
+* Possesses fast typing speed
+* Prefers typing to mouse interactions
+* Reasonably comfortable using CLI apps
 
-**Value proposition**: TAlent Assistant creates a centralized management system for professors to manage TA 
+**Value proposition**: TAlent Assistant™ creates a centralized management system for professors to manage TA 
 applications by providing access to various application data such as qualifications, experience and 
 interview availability dates.
 
@@ -273,13 +273,13 @@ interview availability dates.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                         | So that I can…​                                                              |
-| ----- |--------------------------------------------|--------------------------------------|------------------------------------------------------------------------------|
-| `* * *` | user                                       | add an applicant to the system       | keep track of their application details for consideration.                   |
-| `* * *` | user                                       | delete an applicant from the system  | remove entries that I no longer need.                                        |
-| `* * *` | user                                       | search for an applicant in the system | access details of the applicant without having to go through the entire list. |
-| `* * *` | user                                       | list all applicants in the system    | monitor the application pool.                                                |
-| `* *` | new user                                   | view all available commands          | get familiarised with the system.                                            |
+| Priority | As a …​  | I want to …​                          | So that I can…​                                                               |
+|----------|----------|---------------------------------------|-------------------------------------------------------------------------------|
+| `* * *`  | user     | add an applicant to the system        | keep track of their application details for consideration.                    |
+| `* * *`  | user     | delete an applicant from the system   | remove entries that I no longer need.                                         |
+| `* * *`  | user     | search for an applicant in the system | access details of the applicant without having to go through the entire list. |
+| `* * *`  | user     | list all applicants in the system     | monitor the application pool.                                                 |
+| `* *`    | new user | view all available commands           | get familiarised with the system.                                             |
 
 *{More to be added}*
 
@@ -289,6 +289,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 > Note: TA - Teaching Assistant
 
+<br>
 
 **Use case: List all TA applicants**
 
@@ -308,7 +309,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <hr>
 
-**Use case: Adds a TA**
+**Use case: Add a TA into the system**
 
 **MSS**
 
@@ -322,10 +323,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 3a. The given format is invalid.
-
     * 3a1. AddressBook shows an error message.
 
-      Use case resumes at step 2.
+    Use case resumes at step 2.
 
 <hr>
 
