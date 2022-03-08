@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.contax.model.Model;
 import seedu.contax.model.ModelManager;
+import seedu.contax.model.Schedule;
 import seedu.contax.model.UserPrefs;
 import seedu.contax.model.person.NameContainsKeywordsPredicate;
 
@@ -24,8 +25,8 @@ import seedu.contax.model.person.NameContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new Schedule(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new Schedule(), new UserPrefs());
 
     @Test
     public void equals() {
