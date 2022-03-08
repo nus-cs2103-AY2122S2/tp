@@ -37,7 +37,7 @@ public class AddTagCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_TAG);
         }
 
-        // Add person to the model
+        // Add tag to the model
         model.addTag(toAdd);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
@@ -49,10 +49,10 @@ public class AddTagCommand extends Command {
             return true;
         }
 
-        if (o instanceof AddTagCommand) {
-            return ((AddTagCommand) o).toAdd.equals(toAdd);
+        if (!(o instanceof AddTagCommand)) {
+            return false;
         }
 
-        return false;
+        return ((AddTagCommand) o).toAdd.equals(toAdd);
     }
 }

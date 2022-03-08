@@ -75,8 +75,8 @@ class JsonSerializableAddressBook {
 
     public void addMissingTags(Person person, AddressBook addressbook) {
         for (Tag personTag : person.getTags()) {
-            boolean hasTag = !addressbook.hasTag(personTag);
-            if (hasTag) {
+            boolean isTagMissing = !addressbook.hasTag(personTag);
+            if (isTagMissing) {
                 addressbook.addTag(new Tag(personTag.getTagName()));
             }
         }

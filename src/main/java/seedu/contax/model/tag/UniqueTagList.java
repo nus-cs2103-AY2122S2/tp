@@ -77,10 +77,10 @@ public class UniqueTagList implements Iterable<Tag> {
             return true;
         }
 
-        if (o instanceof UniqueTagList) {
-            return ((UniqueTagList) o).internalList.equals(internalList);
+        if (!(o instanceof UniqueTagList)) {
+            return false;
         }
 
-        return false;
+        return ((UniqueTagList) o).internalList.equals(internalList);
     }
 }

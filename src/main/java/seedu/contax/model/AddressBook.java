@@ -125,8 +125,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         String numPersons = persons.asUnmodifiableObservableList().size() + " presons";
         String numTags = tags.asUnmodifiableObservableList().size() + " tags";
         return numPersons + " | " + numTags;
-        // return persons.asUnmodifiableObservableList().size() + " persons";
-        // TODO: refine later
     }
 
     @Override

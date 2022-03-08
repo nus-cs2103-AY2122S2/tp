@@ -51,10 +51,10 @@ class JsonAdaptedTag {
             return true;
         }
 
-        if (o instanceof JsonAdaptedTag) {
-            return ((JsonAdaptedTag) o).getTagName().equals(tagName);
+        if (!(o instanceof JsonAdaptedTag)) {
+            return false;
         }
 
-        return false;
+        return ((JsonAdaptedTag) o).getTagName().equals(tagName);
     }
 }
