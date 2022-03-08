@@ -21,6 +21,10 @@ public class OnboardingStory {
         return story.get(index);
     }
 
+    public ArrayList<OnboardingStep> getStory() {
+        return story;
+    }
+
     public int getSize() {
         return story.size();
     }
@@ -35,18 +39,7 @@ public class OnboardingStory {
             return false;
         }
         OnboardingStory otherStory = (OnboardingStory) other;
-
-        if (otherStory.getSize() != getSize()) {
-            return false;
-        }
-
-        for (int i = 0; i < getSize(); i++) {
-            if (!otherStory.getStep(i).equals(getStep(i))) {
-                return false;
-            }
-        }
-
-        return true;
+        return story.equals(otherStory.getStory());
     }
 
     @Override
