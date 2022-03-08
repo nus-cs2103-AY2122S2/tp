@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.time.LocalDateTime;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -14,7 +13,6 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.event.Event;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
