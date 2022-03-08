@@ -68,10 +68,9 @@ public class MainApp extends Application {
 
         ui = new UiManager(logic);
 
-        if (isFirstRun) {
+        if(model.getAddressBook().equals(SampleDataUtil.getSampleAddressBook())) {
             ui.setFirstRun();
         }
-
     }
 
     /**
@@ -86,7 +85,6 @@ public class MainApp extends Application {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
-                isFirstRun = true;
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
 
