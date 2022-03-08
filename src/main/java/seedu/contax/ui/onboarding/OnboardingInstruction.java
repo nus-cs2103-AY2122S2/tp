@@ -22,10 +22,6 @@ public class OnboardingInstruction extends UiPart<Region> {
     public OnboardingInstruction() {
         super(FXML);
         instruction.setStyle("-fx-background-color: rgba(25, 25, 25, 1)");
-        instruction.setTextFill(Color.WHITE);
-        instruction.setMinHeight(Region.USE_PREF_SIZE);
-        instruction.setMinWidth(Region.USE_PREF_SIZE);
-        instruction.setWrapText(true);
     }
 
     public void show() {
