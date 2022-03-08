@@ -2,7 +2,6 @@ package seedu.address.storage;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -22,8 +21,10 @@ import seedu.address.model.tag.Tag;
 class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    private static final String MESSAGE_DUPLICATE_TAG = "Tags list contains duplicate tag(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given persons.
@@ -40,6 +41,7 @@ class JsonSerializableAddressBook {
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        tags.addAll(source.getTagList().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
     }
 
     /**
@@ -55,12 +57,14 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             addressBook.addPerson(person);
-            Set<Tag> newTags = person.getTags();
-            for (Tag newTag : newTags) {
-                if (!addressBook.hasTag(newTag)) {
-                    addressBook.addTag(newTag);
-                }
+        }
+
+        for (JsonAdaptedTag jsonAdaptedTag : tags) {
+            Tag tag = jsonAdaptedTag.toModelType();
+            if (addressBook.hasTag(tag)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_TAG);
             }
+            addressBook.addTag(tag);
         }
         return addressBook;
     }
