@@ -1,5 +1,6 @@
 ---
-layout: page title: User Guide
+layout: page
+title: User Guide
 ---
 
 Tinner (Anagram of Intern) is a desktop app for managing internship applications, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Tinner allows you to easily sort through and retrieve relevant information faster than traditional GUI apps.
@@ -8,12 +9,12 @@ Tinner (Anagram of Intern) is a desktop app for managing internship applications
 
 * [Quick start](#quick-start)
 * [Features](#features)
-    * [Viewing help: `help`](#c-help)
-    * [Viewing all companies and roles: `list`](#c-list)
-    * [Adding a company: `addCompany`](#c-add-c)
-    * [Adding a role: `addRole`](#c-add-c-r)
-    * [Deleting a company: `deleteCompany`](#c-delete-c)
-    * [Deleting a role: `deleteRole`](#c-delete-c-r)
+* [Viewing help: `help`](#c-help)
+* [Viewing all companies and roles: `list`](#c-list)
+* [Adding a company: `addCompany`](#c-add-c)
+* [Adding a role: `addRole`](#c-add-c-r)
+* [Deleting a company: `deleteCompany`](#c-delete-c)
+* [Deleting a role: `deleteRole`](#c-delete-c-r)
 * [Command summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -27,18 +28,19 @@ Tinner (Anagram of Intern) is a desktop app for managing internship applications
 
 ![Ui](images/Ui.png)
 
-6. Type the command in the command box and press Enter to execute it. e.g. typing help and pressing Enter will open the help window.  
-   Some example commands you can try:
-    * **`list`** : Lists all companies and internship roles.
-    * **`addCompany`**`n/Google p/98765432 e/hr_google@gmail.com a/70 Pasir Panjang Rd, #03-71 Mapletree Business City II, Singapore 117371` :
-      Adds a company named `Google` to Tinner.
-    * **`addRole`**`1 n/Software Engineering Intern s/applying b/31-03-2022 23:59 d/Write mobile applications $/5000` :
-      Adds a software engineering intern role to the company at index 1.
-    * **`deleteCompany`**`1` : Deletes the 1st company shown in the current list.
-    * **`deleteRole`**`1 1` : Deletes the 1st role of the 1st company shown in the current list.
-    * **`exit`** : Exits the app.
+5. Type the command in the command box and press Enter to execute it. e.g. typing help and pressing Enter will open the help window.
 
-7. Refer to the [Features](#features) below for details of each command.
+   Some example commands you can try:
+   * **`list`** : Lists all companies and internship roles.
+   * **`addCompany`**`n/Google p/98765432 e/hr_google@gmail.com a/70 Pasir Panjang Rd, #03-71 Mapletree Business City II, Singapore 117371` :
+    Adds a company named `Google` to Tinner.
+   * **`addRole`**`1 n/Software Engineering Intern s/applying b/31-03-2022 23:59 d/Write mobile applications $/5000` :
+    Adds a software engineering intern role to the company at index 1.
+   * **`deleteCompany`**`1` : Deletes the 1st company shown in the current list.
+   * **`deleteRole`**`1 1` : Deletes the 1st role of the 1st company shown in the current list.
+   * **`exit`** : Exits the app.
+
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -60,8 +62,7 @@ Tinner (Anagram of Intern) is a desktop app for managing internship applications
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`)
-  will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
