@@ -3,6 +3,7 @@ package seedu.contax.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.contax.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -15,6 +16,7 @@ import java.util.Set;
 import seedu.contax.commons.core.index.Index;
 import seedu.contax.commons.util.StringUtil;
 import seedu.contax.logic.parser.exceptions.ParseException;
+import seedu.contax.model.IndexedCsvFile;
 import seedu.contax.model.appointment.Duration;
 import seedu.contax.model.appointment.StartDateTime;
 import seedu.contax.model.person.Address;
@@ -106,13 +108,14 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String tag} into a {@code Tag}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Leading and trailing whitespaces will be trimmed and converted to lowercase.
      *
      * @throws ParseException if the given {@code tag} is invalid.
      */
     public static Tag parseTag(String tag) throws ParseException {
         requireNonNull(tag);
-        String trimmedTag = tag.trim();
+        // All tags will be in lowercase
+        String trimmedTag = tag.trim().toLowerCase();
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
@@ -131,6 +134,40 @@ public class ParserUtil {
         return tagSet;
     }
 
+    /**
+     * Parses a {@code String filePath} into a {@code Path}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code filePath} is invalid.
+     */
+    public static File parseCsvFilePath(String filePath) throws ParseException {
+        requireNonNull(filePath);
+        String trimmedFilePath = filePath.trim();
+        if (!IndexedCsvFile.isValidFilePath(trimmedFilePath)) {
+            throw new ParseException(IndexedCsvFile.FILE_PATH_CONSTRAINTS);
+        }
+        return new File(trimmedFilePath);
+    }
+
+    /**
+     * Parses a {@String position} into an {@code integer}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException
+     */
+    public static int parseCsvPositions(String positionString) throws ParseException {
+        requireNonNull(positionString);
+        String trimmedPosition = positionString.trim();
+        try {
+            int finalPosition = Integer.parseInt(trimmedPosition);
+            if (finalPosition < 1) {
+                throw new ParseException(IndexedCsvFile.MESSAGE_CONSTRAINTS);
+            }
+            return finalPosition;
+        } catch (NumberFormatException e) {
+            throw new ParseException(IndexedCsvFile.MESSAGE_CONSTRAINTS);
+        }
+    }
     /**
      * Parses a {@code String searchType} into an {@code type}.
      * Leading and trailing whitespaces will be trimmed.

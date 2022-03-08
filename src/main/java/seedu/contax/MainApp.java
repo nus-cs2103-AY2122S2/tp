@@ -49,6 +49,7 @@ public class MainApp extends Application {
     protected Storage storage;
     protected Model model;
     protected Config config;
+    private boolean isFirstRun;
 
     @Override
     public void init() throws Exception {
@@ -70,7 +71,8 @@ public class MainApp extends Application {
 
         logic = new LogicManager(model, storage);
 
-        ui = new UiManager(logic);
+        boolean isFirstRun = model.getAddressBook().equals(SampleDataUtil.getSampleAddressBook());
+        ui = new UiManager(logic, isFirstRun);
     }
 
     /**

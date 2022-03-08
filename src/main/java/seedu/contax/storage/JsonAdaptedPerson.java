@@ -59,6 +59,10 @@ class JsonAdaptedPerson {
                 .collect(Collectors.toList()));
     }
 
+    public List<JsonAdaptedTag> getTagList() {
+        return this.tagged;
+    }
+
     /**
      * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
      *
