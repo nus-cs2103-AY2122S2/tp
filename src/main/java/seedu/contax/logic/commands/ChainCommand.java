@@ -8,17 +8,17 @@ import seedu.contax.logic.commands.exceptions.CommandException;
 import seedu.contax.model.Model;
 
 /**
- * Adds batch command.
+ * Adds chain command.
  */
-public class BatchCommand extends Command {
-    public static final String COMMAND_WORD = "batch";
+public class ChainCommand extends Command {
+    public static final String COMMAND_WORD = "chain";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": [Command] && [Command]";
 
     private final List<Command> commands;
     /**
      * Creates Commands list
      */
-    public BatchCommand(List<Command> userCommands) {
+    public ChainCommand(List<Command> userCommands) {
         requireNonNull(userCommands);
         commands = userCommands;
     }
