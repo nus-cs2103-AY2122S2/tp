@@ -34,7 +34,8 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-    private OnboardingWindow onboardingWindow;
+
+    private OnboardingPrompt onboardingPrompt;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -70,7 +71,8 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
-        onboardingWindow = new OnboardingWindow(primaryStage);
+
+        onboardingPrompt = new OnboardingPrompt(primaryStage);
     }
 
     public Stage getPrimaryStage() {
@@ -158,10 +160,11 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleOnboarding() {
-        onboardingWindow.setSize(primaryStage.getHeight(), primaryStage.getWidth());
-        onboardingWindow.translate(primaryStage.getX(), primaryStage.getY());
-        onboardingWindow.show();
-        primaryStage.hide();
+//        onboardingWindow.setSize(primaryStage.getHeight(), primaryStage.getWidth());
+//        onboardingWindow.translate(primaryStage.getX(), primaryStage.getY());
+//        onboardingWindow.show();
+//        primaryStage.hide();
+        onboardingPrompt.show();
     }
 
     void show() {

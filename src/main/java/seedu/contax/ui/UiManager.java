@@ -24,7 +24,7 @@ public class UiManager implements Ui {
 
     private Logic logic;
     private MainWindow mainWindow;
-
+    private boolean isFirstRun;
     /**
      * Creates a {@code UiManager} with the given {@code Logic}.
      */
@@ -43,6 +43,8 @@ public class UiManager implements Ui {
             mainWindow = new MainWindow(primaryStage, logic);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
+            mainWindow.handleOnboarding();
+
 
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
@@ -83,6 +85,11 @@ public class UiManager implements Ui {
         showAlertDialogAndWait(Alert.AlertType.ERROR, title, e.getMessage(), e.toString());
         Platform.exit();
         System.exit(1);
+    }
+
+    public void showOnboardingPrompt() {
+//        mainWindow.handleOnboarding();
+        isFirstRun = true;
     }
 
 }

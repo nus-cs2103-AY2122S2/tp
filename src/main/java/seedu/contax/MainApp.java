@@ -45,6 +45,7 @@ public class MainApp extends Application {
     protected Storage storage;
     protected Model model;
     protected Config config;
+    private boolean isFirstRun;
 
     @Override
     public void init() throws Exception {
@@ -66,6 +67,11 @@ public class MainApp extends Application {
         logic = new LogicManager(model, storage);
 
         ui = new UiManager(logic);
+
+        if(isFirstRun) {
+            ((UiManager)ui).showOnboardingPrompt();
+        }
+
     }
 
     /**
@@ -80,8 +86,10 @@ public class MainApp extends Application {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
+                isFirstRun = true;
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
             initialData = new AddressBook();
