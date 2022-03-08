@@ -1,0 +1,8 @@
+{
+  "pets": [ {
+    "name": "Tofu",
+    "phone": "9482424",
+    "ownerName": "invalid@name",
+    "address": "4th street"
+  } ]
+}

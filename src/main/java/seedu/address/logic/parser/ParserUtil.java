@@ -9,10 +9,10 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.pet.Address;
+import seedu.address.model.pet.Name;
+import seedu.address.model.pet.OwnerName;
+import seedu.address.model.pet.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -81,18 +81,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String email} into an {@code Email}.
+     * Parses a {@code String ownerNmae} into an {@code OwnerName}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code email} is invalid.
+     * @throws ParseException if the given {@code ownerName} is invalid.
      */
-    public static Email parseEmail(String email) throws ParseException {
-        requireNonNull(email);
-        String trimmedEmail = email.trim();
-        if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+    public static OwnerName parseOwnerName(String ownerName) throws ParseException {
+        requireNonNull(ownerName);
+        String trimmedOwnerName = ownerName.trim();
+        if (!OwnerName.isValidOwnerName(trimmedOwnerName)) {
+            throw new ParseException(OwnerName.MESSAGE_CONSTRAINTS);
         }
-        return new Email(trimmedEmail);
+        return new OwnerName(trimmedOwnerName);
     }
 
     /**
