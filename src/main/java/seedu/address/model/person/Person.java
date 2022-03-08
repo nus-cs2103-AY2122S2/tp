@@ -67,6 +67,10 @@ public class Person {
         return labs;
     }
 
+    public void setLabs(LabList ll) {
+        labs.setLabs(ll);
+    }
+
     public void addLab(Lab lab) {
         labs.add(lab);
     }
