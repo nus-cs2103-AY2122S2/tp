@@ -12,9 +12,14 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.AB3Model;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ModelManager;
+import seedu.address.model.ReadOnlyTAssist;
+import seedu.address.model.classgroup.ClassGroup;
 import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
+import seedu.address.model.tamodule.TaModule;
 import seedu.address.storage.Storage;
 
 /**
@@ -25,14 +30,17 @@ public class LogicManager implements Logic {
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
+    private final AB3Model ab3model;
     private final Storage storage;
     private final AddressBookParser addressBookParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
      */
-    public LogicManager(Model model, Storage storage) {
-        this.model = model;
+    public LogicManager(AB3Model model, Storage storage) {
+        this.ab3model = model;
+        // to be updated
+        this.model = new ModelManager();
         this.storage = storage;
         addressBookParser = new AddressBookParser();
     }
@@ -43,10 +51,10 @@ public class LogicManager implements Logic {
 
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
-        commandResult = command.execute(model);
+        commandResult = command.execute(ab3model);
 
         try {
-            storage.saveAddressBook(model.getAddressBook());
+            storage.saveAddressBook(ab3model.getAddressBook());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
@@ -55,18 +63,34 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return model.getAddressBook();
+    public ReadOnlyTAssist getTAssist() {
+        return model.getTAssist();
     }
 
+    @Override
+    public ObservableList<Student> getFilteredStudentList() {
+        return model.getFilteredStudentList();
+    }
+
+    @Override
+    public ObservableList<TaModule> getFilteredModuleList() {
+        return model.getFilteredModuleList();
+    }
+
+    @Override
+    public ObservableList<ClassGroup> getFilteredClassGroupList() {
+        return model.getFilteredClassGroupList();
+    }
+
+    /** TODO: to be removed*/
     @Override
     public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+        return ab3model.getFilteredPersonList();
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+    public Path getTAssistFilePath() {
+        return model.getTAssistFilePath();
     }
 
     @Override

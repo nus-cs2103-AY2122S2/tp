@@ -5,14 +5,17 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.Person;
+import seedu.address.model.classgroup.ClassGroup;
+import seedu.address.model.entity.Entity;
+import seedu.address.model.student.Student;
+import seedu.address.model.tamodule.TaModule;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    /** {@code Predicate} that always evaluate to true. */
+    Predicate<Entity> PREDICATE_SHOW_ALL = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -35,53 +38,71 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' TAssist file path.
      */
-    Path getAddressBookFilePath();
+    Path getTAssistFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' TAssist file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setTAssistFilePath(Path tAssistFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces TAssist data with the data in {@code TAssist}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setTAssist(ReadOnlyTAssist tAssist);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the TAssist. */
+    ReadOnlyTAssist getTAssist();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if an entity with the same identity as {@code entity} exists in the TAssist.
      */
-    boolean hasPerson(Person person);
+    boolean hasEntity(Entity entity);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given entity.
+     * The entity must exist in the TAssist.
      */
-    void deletePerson(Person target);
+    void deleteEntity(Entity target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given entity.
+     * {@code entity} must not already exist in the TAssist.
      */
-    void addPerson(Person person);
+    void addEntity(Entity entity);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Replaces the given entity {@code target} with {@code editedEntity}.
+     * {@code target} must exist in the TAssist.
+     * The entity identity of {@code editedEntity} must not be the same as another existing entity in the TAssist.
      */
-    void setPerson(Person target, Person editedPerson);
+    void setEntity(Entity target, Entity editedEntity);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered student list. */
+    ObservableList<Student> getFilteredStudentList();
+
+    /** Returns an unmodifiable view of the filtered module list. */
+    ObservableList<TaModule> getFilteredModuleList();
+
+    /** Returns an unmodifiable view of the filtered class group list. */
+    ObservableList<ClassGroup> getFilteredClassGroupList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered student list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredStudentList(Predicate<? super Student> predicate);
+
+    /**
+     * Updates the filter of the filtered module list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredModuleList(Predicate<? super TaModule> predicate);
+
+    /**
+     * Updates the filter of the filtered class group list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredClassGroupList(Predicate<? super ClassGroup> predicate);
 }

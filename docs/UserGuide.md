@@ -4,7 +4,7 @@ title: User Guide
 ---
 
 TAssist is a **desktop app for managing students and their participation in lessons, optimized for use via a Command Line Interface** (CLI). If you are a TA  who prefer CLI to GUI while having a GUI to view the student data, TAssist is the app for you.
- 
+
 * Table of Contents
 {:toc}
 
@@ -55,18 +55,10 @@ TAssist is a **desktop app for managing students and their participation in less
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* Extraneous parameters for commands that do not take in parameters will be ignored.<br>
+  e.g. if the command specifies `list student 123`, it will be interpreted as `list student`.
 
 </div>
-
-### Viewing help : `help`
-
-Shows a message explaining how to access the help page.
-
-![help message](images/helpMessage.png)
-
-Format: `help`
 
 ### Adding entries
 
@@ -99,46 +91,23 @@ Examples:
 
 ### Listing entries
 
-#### Listing all persons : `list`
+#### Listing all students : `list student`
 
-Shows a list of all persons in the address book.
+Shows a list of all students.
 
-Format: `list`
+Format: `list student`
 
-### Editing entries : `edit` [coming soon]
+#### Listing all modules : `list module`
 
-Edits an existing entry in TAssist.
+Shows a list of all modules.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `list module`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+#### Listing all students : `list class`
 
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+Shows a list of all class groups.
 
-### Locating entries: `find` [coming soon]
-
-Finds persons whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g. `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+Format: `list class`
 
 ### Deleting entries
 
@@ -181,12 +150,6 @@ Format: `delete class INDEX`
 Examples:
 * `list class` followed by `delete class 2` deletes the 2nd class group in TAssist.
 
-### Clearing all entries : `clear`
-
-Clears all entries from the address book.
-
-Format: `clear`
-
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -220,8 +183,92 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | Adding student<ul><li>syntax: `add student id/STUDENT_ID n/NAME p/PHONE_NUMBER e/EMAIL` </li><li>e.g., `add student id/E0123456 n/John Doe p/98765432 e/johnd@example.com`</li></ul>Adding module<ul><li>syntax: `add module n/MODULE_NAME c/MODULE_CODE` </li><li>e.g., `add module n/Software Engineering Project c/CS2103T`</li></ul>Adding class group<ul><li>syntax: `add class id/CLASSGROUP_ID t/CLASSGROUP_TYPE m/MODULE_CODE` </li><li>e.g., `add class id/T13 t/tutorial m/CS2103T`</li></ul>
-**Delete** | Deleting student<ul><li>syntax: `delete student INDEX` </li><li>e.g., `delete student 2`</li></ul>Deleting module<ul><li>syntax: `delete module INDEX` </li><li>e.g., `delete module 2`</li></ul>Deleting class group<ul><li>syntax: `delete class INDEX` </li><li>e.g., `delete class 2`</li></ul>
-**List** | Listing students<ul><li>syntax: `list student` </li></ul>Listing modules<ul><li>syntax: `list module` </li></ul>Listing class groups<ul><li>syntax: `list class` </li></ul>
+<table>
+<tbody>
+    <tr>
+        <th colspan="2">Action</th>
+        <th>Format, Examples</th>
+    </tr>
+    <tr>
+        <td rowspan="3">Add</td>
+        <td>student</td>
+        <td>
+            <ul>
+                <li>syntax: <code>add student id/STUDENT_ID n/NAME p/PHONE_NUMBER e/EMAIL</code></li>
+                <li>e.g., <code>add student id/E0123456 n/John Doe p/98765432 e/johnd@example.com</code></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>module</td>
+        <td>
+            <ul>
+                <li>syntax: <code>add module n/MODULE_NAME c/MODULE_CODE</code></li>
+                <li>e.g., <code>add module n/Software Engineering Project c/CS2103T</code></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>class group</td>
+        <td>
+            <ul>
+                <li>syntax: <code>add class id/CLASSGROUP_ID t/CLASSGROUP_TYPE m/MODULE_CODE</code></li>
+                <li>e.g., <code>add class id/T13 t/tutorial m/CS2103T</code></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td rowspan="3">Delete</td>
+        <td>student</td>
+        <td>
+            <ul>
+                <li>syntax: <code>delete student INDEX</code></li>
+                <li>e.g., <code>delete student 2</code></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>module</td>
+        <td>
+            <ul>
+                <li>syntax: <code>delete module INDEX</code></li>
+                <li>e.g., <code>delete module 2</code></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>class group</td>
+        <td>
+            <ul>
+                <li>syntax: <code>delete class INDEX</code></li>
+                <li>e.g., <code>delete class 2</code></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td rowspan="3">List</td>
+        <td>students</td>
+        <td>
+            <ul>
+                <li>syntax: <code>list student</code></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>modules</td>
+        <td>
+            <ul>
+                <li>syntax: <code>list module</code></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>class groups</td>
+        <td>
+            <ul>
+                <li>syntax: <code>list class</code></li>
+            </ul>
+        </td>
+    </tr>
+</tbody>
+</table>
