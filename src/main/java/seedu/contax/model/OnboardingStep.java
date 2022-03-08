@@ -2,6 +2,8 @@ package seedu.contax.model;
 
 import seedu.contax.model.person.Person;
 
+import java.util.Objects;
+
 public class OnboardingStep {
     private String displayMessage;
     private int overlayOption;
@@ -88,5 +90,39 @@ public class OnboardingStep {
         positionOption = type;
     }
 
+    public boolean isValid() {
+        return overlayOption >= 0 && overlayOption <= 3
+                && highlightOption >= 0 && highlightOption <= 2
+                && positionOption >=0 && positionOption <= 4;
+    }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof OnboardingStep)) {
+            return false;
+        }
+
+        OnboardingStep otherStep = (OnboardingStep) other;
+        return otherStep.eventType() == eventType()
+                && otherStep.getDisplayMessage().equals(getDisplayMessage())
+                && otherStep.getOverlayOption() == getHighlightOption()
+                && otherStep.getMessageHeight() == getMessageHeight()
+                && otherStep.getMessageWidth() == getMessageWidth()
+                && otherStep.getHighlightOption() == getHighlightOption()
+                && otherStep.getPositionOption() == getPositionOption()
+                && otherStep.person.equals(getPerson())
+                && otherStep.getCommand().equals(getCommand())
+                && otherStep.getPersonOperation() == getPersonOperation();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(eventType, displayMessage, overlayOption,
+                messageHeight, messageWidth, highlightOption,
+                positionOption, person, command, getPersonOperation());
+    }
 }
