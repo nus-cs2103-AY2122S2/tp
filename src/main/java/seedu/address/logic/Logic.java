@@ -51,4 +51,14 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Returns the selected person from {@code Model}.
+     */
+    Person getSelectedPerson();
+
+    /**
+     * Returns the selected lesson from {@code Model}.
+     */
+    Lesson getSelectedLesson();
 }
