@@ -102,6 +102,9 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     InsurancePackage.class.getSimpleName()));
         }
+        if (!InsurancePackage.isValidInsurancePackage(insurancePackage)) {
+            throw new IllegalValueException(InsurancePackage.MESSAGE_CONSTRAINTS);
+        }
         final InsurancePackage modelInsurancePackage = new InsurancePackage(insurancePackage);
 
         if (address == null) {
