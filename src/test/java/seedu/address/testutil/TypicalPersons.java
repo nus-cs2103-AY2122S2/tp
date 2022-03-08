@@ -24,29 +24,29 @@ import seedu.address.model.person.Person;
 public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
-            .withAcademicMajor("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
+            .withAcademicMajor("Computer Science").withEmail("alice@u.nus.edu")
             .withPhone("94351253")
             .withTags("friends").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
-            .withAcademicMajor("311, Clementi Ave 2, #02-25")
-            .withEmail("johnd@example.com").withPhone("98765432")
+            .withAcademicMajor("Business Analytics")
+            .withEmail("johnd@u.nus.edu").withPhone("98765432")
             .withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").withAcademicMajor("wall street").build();
+            .withEmail("heinz@u.nus.edu").withAcademicMajor("Computer Engineering").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withAcademicMajor("10th street").withTags("friends").build();
+            .withEmail("cornelia@u.nus.edu").withAcademicMajor("Information Systems").withTags("friends").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withEmail("werner@example.com").withAcademicMajor("michegan ave").build();
+            .withEmail("werner@u.nus.edu").withAcademicMajor("Electrical Engineering").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withEmail("lydia@example.com").withAcademicMajor("little tokyo").build();
+            .withEmail("lydia@u.nus.edu").withAcademicMajor("Economics").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
-            .withEmail("anna@example.com").withAcademicMajor("4th street").build();
+            .withEmail("anna@u.nus.edu").withAcademicMajor("Chemical Engineering").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
-            .withEmail("stefan@example.com").withAcademicMajor("little india").build();
+            .withEmail("stefan@u.nus.edu").withAcademicMajor("Computer Science").build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
-            .withEmail("hans@example.com").withAcademicMajor("chicago ave").build();
+            .withEmail("hans@u.nus.edu").withAcademicMajor("Information Security").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
