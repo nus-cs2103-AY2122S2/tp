@@ -1,10 +1,11 @@
 
-| Layout | Page |
-| --- | --- |
-| User Guide | Link |
-| Quick start | Link |
-| Features | Link |
-| Command Summary | Link |
+| Quick Links     |
+|-----------------|
+| Glossary        |
+| User Guide      |
+| Quick start     |
+| Features        |
+| Command Summary |
 
 
 Ultimate DivocTracker is a desktop app for managing COVID-19 contacts in school admin, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Ultimate DivocTracker can get your contact management tasks done faster than traditional GUI apps.
@@ -15,8 +16,8 @@ Ultimate DivocTracker is a desktop app for managing COVID-19 contacts in school 
   - Adding a student: add
   - Listing all students: list
   - Find students by name: find_by_name
-  - Find student by status:  find_by_status
-  - Find student by class: find_by_class
+  - Find student by status:  findstatus
+  - Find student by class: findclasscode
   - Deleting a student: delete_student
   - Update COVID-19 status: update_status
   - Exiting the program : exit
@@ -53,22 +54,22 @@ Find an existing student in the application by their name
 - Example:
   - `find_by_name john`
 
-## Find a student by status: `find_by_status`
+## Find a student by status: `findstatus`
 Find an existing student in the application by their Covid-19 Status
-- Format: `find_by_status STATUS`
+- Format: `findstatus STATUS`
   - Returns a list of students with the specified `STATUS`
   - `STATUS` is case-insensitive
 - Example:
-  - `find_by_status positive`
-  - `find_by_status negative`
+  - `findstatus positive`
+  - `findstatus negative`
 
-## Find student by class: `find_by_class`
+## Find student by class: `findclasscode`
 Finds an existing student in the address book by their class.
-- Format: `find_by_class CLASS`
+- Format: `findclasscode CLASS`
   - Returns a list of students with the specified `CLASS`.
   - `CLASS` is case-insensitive
 - Example:
-  - `find_by_class 4A`
+  - `findclasscode 4A`
 
 ## Updating persons status: `update_status`
 Updates persons status to the given status.
@@ -111,8 +112,8 @@ AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.
 | Delete a student | `delete_student INDEX`<br/>e.g., `delete_student 3`                                                                                                                       |
 | Edit             | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br/>e.g., `edit 2 n/James Lee e/jameslee@example.com`                                                        |
 | Find by name     | `find_by_name NAME [MORE_NAME]`<br/>e.g., `find_by_name James Jake`                                                                                                       |
-| Find by status   | `find_by_status STATUS`<br/>e.g., `find_by_status positive`                                                                                                               |
-| Find by class    | `find_by_class CLASS`<br/>e.g., `find_by_class 4A`                                                                                                                        |
+| Find by status   | `findstatus STATUS`<br/>e.g., `find_by_status positive`                                                                                                                   |
+| Find by class    | `findclasscode CLASS`<br/>e.g., `find_by_class 4A`                                                                                                                        |
 | List             | `list`                                                                                                                                                                    |
 | Update status    | `update_status INDEX STATUS`<br/>e.g., `update_status 54 positive`                                                                                                        |
-| Exit             | `exit`
+| Exit             | `exit`                                                                                                                                                                    |
