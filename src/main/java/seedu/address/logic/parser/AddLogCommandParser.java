@@ -49,12 +49,12 @@ public class AddLogCommandParser implements Parser<AddLogCommand> {
         AddLogDescriptor addLogDescriptor = new AddLogDescriptor();
 
         if (argMultimap.getValue(PREFIX_TITLE).isPresent()) {
-            addLogDescriptor.setNewTitle(ParserUtil.parseTitle(argMultimap.
-                    getValue(PREFIX_TITLE).get()));
+            addLogDescriptor.setNewTitle(ParserUtil.parseTitle(argMultimap
+                    .getValue(PREFIX_TITLE).get()));
         }
         if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
-            addLogDescriptor.setNewDescription(ParserUtil.parseDescription(argMultimap.
-                    getValue(PREFIX_DESCRIPTION).get()));
+            addLogDescriptor.setNewDescription(ParserUtil.parseDescription(argMultimap
+                    .getValue(PREFIX_DESCRIPTION).get()));
         }
 
         // check validity

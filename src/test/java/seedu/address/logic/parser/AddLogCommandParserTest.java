@@ -6,7 +6,6 @@ import seedu.address.logic.commands.AddLogCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.model.person.Log;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.AddLogCommandParser.MESSAGE_INVALID_FORMAT;
@@ -40,8 +39,6 @@ public class AddLogCommandParserTest {
         // no index and no title specified
         args = LOG_DESCRIPTION_DESC;
         assertParseFailure(parser, args, MESSAGE_INVALID_FORMAT);
-
-
     }
 
     @Test
