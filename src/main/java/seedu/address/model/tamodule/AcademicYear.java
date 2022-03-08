@@ -33,8 +33,8 @@ public class AcademicYear {
     private static final Map<String, String> semesters = new HashMap<>() {{
             put("S1", "Semester 1");
             put("S2", "Semester 2");
-            put("S3", "Special Term I");
-            put("S4", "Special Term II");
+            put("S3", "Special Term (Part 1)");
+            put("S4", "Special Term (Part 2)");
             put("S5", "Mini-Semester 1A");
             put("S6", "Mini-Semester 1B");
             put("S7", "Mini-Semester 2A");
