@@ -9,7 +9,7 @@ public class ImportCsv {
 
     public static final String FILE_PATH_CONSTRAINTS = "File path should point to a .csv file";
     public static final String MESSAGE_CONSTRAINTS = "Positions should be integers above 0";
-    public static final String FILE_VALIDATION_REGEX = "^.*\\.(csv)$";
+    public static final String FILE_VALIDATION_REGEX = "(.*?)\\.(csv)$";
 
     private final File filePath;
     private final int namePosition;
