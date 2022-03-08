@@ -1,11 +1,14 @@
 package seedu.contax.ui;
 
+import javafx.beans.binding.DoubleBinding;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
+
+import java.util.function.DoubleBinaryOperator;
 
 public class OnboardingInstruction extends UiPart<Region> {
 
@@ -21,6 +24,9 @@ public class OnboardingInstruction extends UiPart<Region> {
         super(FXML);
         instruction.setStyle("-fx-background-color: rgba(25, 25, 25, 1)");
         instruction.setTextFill(Color.WHITE);
+        instruction.setMinHeight(Region.USE_PREF_SIZE);
+        instruction.setMinWidth(Region.USE_PREF_SIZE);
+        instruction.setWrapText(true);
     }
 
     public void show() {
@@ -41,6 +47,12 @@ public class OnboardingInstruction extends UiPart<Region> {
      * @param y y to translate to
      */
     public void translate(DoubleProperty x, DoubleProperty y) {
+        instruction.setManaged(false);
+        instruction.layoutXProperty().bind(x);
+        instruction.layoutYProperty().bind(y);
+    }
+
+    public void translate(DoubleBinding x, DoubleBinding y) {
         instruction.setManaged(false);
         instruction.layoutXProperty().bind(x);
         instruction.layoutYProperty().bind(y);

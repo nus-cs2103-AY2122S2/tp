@@ -3,6 +3,7 @@ package seedu.contax.ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuBar;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -166,8 +167,6 @@ public class OnboardingWindow extends UiPart<Stage> {
                 stage.hide();
             }
 
-            System.out.println(step.getCommand());
-
             if (step.getCommand() != null) {
                 if (!commandBox.getText().equals(step.getCommand())) {
                     if (!commandBox.getText().equals("")) {
@@ -234,6 +233,13 @@ public class OnboardingWindow extends UiPart<Stage> {
         } else if (option == 3) {
             instructionLabel.translate(resultDisplayPlaceholder.layoutXProperty(),
                     resultDisplayPlaceholder.layoutYProperty());
+        } else if (option == 4) {
+            System.out.println(resultDisplayPlaceholder.getMaxHeight());
+            instructionLabel.translate(
+                    personList.layoutXProperty().add(0),
+                    personList.layoutYProperty().add(
+                            resultDisplayPlaceholder.heightProperty().multiply(1.5)
+                    ));
         }
     }
 }
