@@ -32,7 +32,6 @@ public class Price {
         return test >= 0;
     }
 
-
     @Override
     public String toString() {
         return String.format("$%.2f", price);
