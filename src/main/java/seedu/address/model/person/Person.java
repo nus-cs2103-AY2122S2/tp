@@ -122,6 +122,7 @@ public class Person {
                 .append(getAddress());
 
         if (getProperty().isPresent()) {
+            builder.append("; Property: ");
             builder.append(getProperty().get());
         }
 

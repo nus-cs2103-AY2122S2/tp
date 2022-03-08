@@ -3,7 +3,6 @@ package seedu.address.model.property;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
-import java.util.StringJoiner;
 
 import seedu.address.model.person.Address;
 
@@ -14,7 +13,7 @@ import seedu.address.model.person.Address;
 public class Property {
 
     public static final String MESSAGE_CONSTRAINTS =
-        "Property must have have the format: [region, address, size, price]";
+            "Property must have have the format: [region, address, size, price]";
 
     private final Region region;
     private final Address address;
@@ -50,9 +49,16 @@ public class Property {
 
     @Override
     public String toString() {
-        StringJoiner joiner = new StringJoiner(", ");
-        joiner.add(region.toString()).add(address.toString()).add(size.toString()).add(price.toString());
-        return "Property: " + joiner;
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getAddress())
+                .append("; Region: ")
+                .append(getRegion())
+                .append("; Size: ")
+                .append(getSize())
+                .append("; Price: ")
+                .append(getPrice());
+
+        return '[' + builder.toString() + ']';
     }
 
     /**
@@ -70,9 +76,9 @@ public class Property {
 
         Property otherProperty = (Property) other;
         return otherProperty.getRegion().equals(getRegion())
-            && otherProperty.getAddress().equals(getAddress())
-            && otherProperty.getSize().equals(getSize())
-            && otherProperty.getPrice().equals(getPrice());
+                && otherProperty.getAddress().equals(getAddress())
+                && otherProperty.getSize().equals(getSize())
+                && otherProperty.getPrice().equals(getPrice());
     }
 
     @Override
