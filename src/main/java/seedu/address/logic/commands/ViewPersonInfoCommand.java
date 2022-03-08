@@ -14,7 +14,7 @@ import seedu.address.model.person.Person;
 /**
  * Views the details of a student identified using it's displayed index.
  */
-public class ViewStudentInfoCommand extends Command {
+public class ViewPersonInfoCommand extends Command {
     public static final String COMMAND_WORD = "student";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": View details of a selected Student.\n"
@@ -25,7 +25,7 @@ public class ViewStudentInfoCommand extends Command {
 
     private final Index targetIndex;
 
-    public ViewStudentInfoCommand(Index targetIndex) {
+    public ViewPersonInfoCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -47,7 +47,7 @@ public class ViewStudentInfoCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this
-                || (other instanceof ViewStudentInfoCommand
-                && targetIndex.equals(((ViewStudentInfoCommand) other).targetIndex));
+                || (other instanceof ViewPersonInfoCommand
+                && targetIndex.equals(((ViewPersonInfoCommand) other).targetIndex));
     }
 }

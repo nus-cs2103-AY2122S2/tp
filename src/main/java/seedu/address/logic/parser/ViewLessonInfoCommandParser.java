@@ -9,7 +9,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments and creates a new ViewClassInfoCommand object.
  */
-public class ViewLessonInfoParser implements Parser<ViewLessonInfoCommand> {
+public class ViewLessonInfoCommandParser implements Parser<ViewLessonInfoCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the ViewStudentInfoCommand
