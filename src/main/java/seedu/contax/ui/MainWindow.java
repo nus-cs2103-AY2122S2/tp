@@ -115,7 +115,6 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        System.out.println(logic.getAppointmentList());
         appointmentListPanel = new AppointmentListPanel(logic.getAppointmentList());
         changeListContentType(ListContentType.PERSON);
 
