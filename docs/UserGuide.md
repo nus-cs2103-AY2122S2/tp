@@ -75,7 +75,7 @@ Examples:
 
 Adds a module to TAssist.
 
-Format: `add module n/MODULE_NAME c/MODULE_CODE a/ACAD_YEAR`
+Format: `add module n/MODULE_NAME c/MODULE_CODE a/ACADEMIC_YEAR`
 
 Examples:
 * `add module n/Software Engineering Project c/CS2103T a/21S1`
@@ -205,7 +205,7 @@ _Details coming soon ..._
         <td>module</td>
         <td>
             <ul>
-                <li>syntax: <code>add module n/MODULE_NAME c/MODULE_CODE a/ACAD_YEAR</code></li>
+                <li>syntax: <code>add module n/MODULE_NAME c/MODULE_CODE a/ACADEMIC_YEAR</code></li>
                 <li>e.g., <code>add module n/Software Engineering Project c/CS2103T a/21S1</code></li>
             </ul>
         </td>
