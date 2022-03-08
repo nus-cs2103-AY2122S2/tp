@@ -1,0 +1,14 @@
+{
+  "appointments": [
+    {
+      "name": "First meeting with alice",
+      "startDateTime": "2022-11-20T10:25:00",
+      "duration": 30
+    },
+    {
+      "name": "Do some work alone",
+      "startDateTime": "2022-11-20T10:20:00",
+      "duration": 60
+    }
+  ]
+}

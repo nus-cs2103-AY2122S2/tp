@@ -32,8 +32,12 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private AppointmentListPanel appointmentListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+
+    // Flag indicating the type of model currently being displayed in the contentList
+    private ListContentType currentListType;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -42,7 +46,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane contentListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -111,7 +115,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        appointmentListPanel = new AppointmentListPanel(logic.getAppointmentList());
+        changeListContentType(ListContentType.PERSON);
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -132,6 +137,31 @@ public class MainWindow extends UiPart<Stage> {
         if (guiSettings.getWindowCoordinates() != null) {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
             primaryStage.setY(guiSettings.getWindowCoordinates().getY());
+        }
+    }
+
+    /**
+     * Changes the type of model being displayed in the content list.
+     *
+     * @param contentType The type of content the UI should display.
+     */
+    private void changeListContentType(ListContentType contentType) {
+        if (contentType == null) {
+            contentListPanelPlaceholder.getChildren().clear();
+            return;
+        }
+
+        if (contentType.equals(ListContentType.UNCHANGED) || contentType.equals(currentListType)) {
+            return;
+        }
+
+        contentListPanelPlaceholder.getChildren().clear();
+        currentListType = contentType;
+
+        if (contentType == ListContentType.PERSON) {
+            contentListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        } else if (contentType == ListContentType.APPOINTMENT) {
+            contentListPanelPlaceholder.getChildren().add(appointmentListPanel.getRoot());
         }
     }
 
@@ -177,6 +207,7 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            changeListContentType(commandResult.getUiContentType());
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
