@@ -3,6 +3,7 @@ package seedu.address.ui;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -64,6 +65,7 @@ public class PersonCard extends UiPart<Region> {
                 .asUnmodifiableObservableList().stream()
                 .sorted(Comparator.comparing(lab -> lab.labNumber))
                 .forEach(lab -> labCard.getChildren().add(new LabLabel(lab)));
+        //labCard.setPadding(new Insets(5, 5, 5, 5));
     }
 
     @Override

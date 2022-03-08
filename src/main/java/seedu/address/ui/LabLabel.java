@@ -1,23 +1,11 @@
 package seedu.address.ui;
 
 
-import javafx.geometry.Insets;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.paint.Color;
 import seedu.address.model.person.exceptions.InvalidLabStatusException;
 import seedu.address.model.person.lab.Lab;
 
 public class LabLabel extends Label {
-
-    private static final Background RED = new Background(
-            new BackgroundFill(Color.RED, new CornerRadii(0), new Insets(0)));
-    private static final Background GREEN = new Background(
-            new BackgroundFill(Color.GREEN, new CornerRadii(0), new Insets(0)));
-    private static final Background YELLOW = new Background(
-            new BackgroundFill(Color.YELLOW, new CornerRadii(0), new Insets(0)));
 
     private final Lab lab;
 
@@ -33,13 +21,13 @@ public class LabLabel extends Label {
     private void setColor() {
         switch (lab.labStatus) {
         case UNSUBMITTED:
-            this.setBackground(RED);
+            this.setStyle("-fx-background-color: red;");
             break;
         case SUBMITTED:
-            this.setBackground(YELLOW);
+            this.setStyle("-fx-background-color: yellow;");
             break;
         case GRADED:
-            this.setBackground(GREEN);
+            this.setStyle("-fx-background-color: green;");
             break;
         default:
             throw new InvalidLabStatusException();
