@@ -37,7 +37,7 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        this.event = false;
+        this.event = true;
     }
 
     /**

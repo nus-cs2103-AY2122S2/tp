@@ -5,6 +5,8 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -53,6 +55,15 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private TabPane tabs;
+
+    @FXML
+    private Tab personListTab;
+
+    @FXML
+    private Tab eventsListTab;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -173,13 +184,11 @@ public class MainWindow extends UiPart<Stage> {
     private void changeInterface(CommandResult commandResult) {
         boolean event = commandResult.isEvent();
         if (event) {
-            eventListPanelPlaceholder.setVisible(true);
+            tabs.getSelectionModel().select(eventsListTab);
             eventListPanelPlaceholder.requestFocus();
-            personListPanelPlaceholder.setVisible(false);
         } else {
-            personListPanelPlaceholder.setVisible(true);
+            tabs.getSelectionModel().select(personListTab);
             personListPanelPlaceholder.requestFocus();
-            eventListPanelPlaceholder.setVisible(false);
         }
     }
 

@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Scene?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
@@ -43,16 +47,34 @@
             <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
         </StackPane>
+            <TabPane fx:id="tabs" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab fx:id="personListTab" text="Friends">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" styleClass="background">
+                           <children>
+                         <StackPane fx:id="personListPanelPlaceholder" />
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab fx:id="eventsListTab" text="Events">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" nodeOrientation="LEFT_TO_RIGHT" styleClass="background">
+                           <children>
+                              <StackPane fx:id="eventListPanelPlaceholder" />
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+              </tabs>
+               <styleClass>
+                  <String fx:value="column-header-background" />
+                  <String fx:value="background" />
+               </styleClass>
+            </TabPane>
 
-        <VBox fx:id="personList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
-          <padding>
-            <Insets bottom="10" left="10" right="10" top="10" />
-          </padding>
-          <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
-               <StackPane fx:id="eventListPanelPlaceholder" layoutX="21.0" layoutY="21.0" />
-        </VBox>
-
-        <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
+        <StackPane fx:id="statusbarPlaceholder" prefHeight="0.0" prefWidth="200.0" VBox.vgrow="NEVER" />
       </VBox>
     </Scene>
   </scene>
