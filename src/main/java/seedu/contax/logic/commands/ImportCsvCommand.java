@@ -25,7 +25,7 @@ import seedu.contax.model.tag.Tag;
 public class ImportCsvCommand extends Command {
     public static final String COMMAND_WORD = "importcsv";
     public static final String MESSAGE_USAGE = "to be entered";
-    public static final String MESSAGE_NO_FILE_FOUND = "File not found: ";
+    public static final String MESSAGE_NO_FILE_FOUND = "File not found: %s";
     public static final String MESSAGE_SUCCESS = "Imported successfully";
     public static final String MESSAGE_SKIPPED_LINES = "Lines skipped (either bad formatting or duplicates): %s";
 
@@ -51,6 +51,7 @@ public class ImportCsvCommand extends Command {
 
             //skip first line by default as it contains headers
             importedCsv.readLine();
+
             while ((line = importedCsv.readLine()) != null) {
                 lineCounter++;
                 String[] importedPerson = line.split(",");
@@ -83,10 +84,8 @@ public class ImportCsvCommand extends Command {
                 return new CommandResult(MESSAGE_SUCCESS);
             }
         } catch (IOException e) {
-            throw new CommandException(MESSAGE_NO_FILE_FOUND);
+            throw new CommandException(String.format(MESSAGE_NO_FILE_FOUND, toImport.getFilePath()));
         }
-
-        //use params to read the file
 
         //load the content into the current list
     }
