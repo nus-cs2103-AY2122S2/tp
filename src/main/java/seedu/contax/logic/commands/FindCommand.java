@@ -5,8 +5,6 @@ import static java.util.Objects.requireNonNull;
 import seedu.contax.commons.core.Messages;
 import seedu.contax.model.Model;
 import seedu.contax.model.person.ContainsKeywordsPredicate;
-import seedu.contax.model.person.NameContainsKeywordsPredicate;
-import seedu.contax.model.person.PhoneContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.

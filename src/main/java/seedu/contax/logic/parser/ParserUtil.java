@@ -123,6 +123,12 @@ public class ParserUtil {
         return tagSet;
     }
 
+    /**
+     * Parses a {@code String searchType} into an {@code type}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code type} is invalid.
+     */
     public static SearchType parseSearchType(String type) throws ParseException {
         requireNonNull(type);
         String trimmedName = type.trim();

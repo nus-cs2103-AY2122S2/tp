@@ -6,7 +6,8 @@ import java.util.function.Predicate;
 /**
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
  */
-abstract public class ContainsKeywordsPredicate implements Predicate<Person> {
+public abstract class ContainsKeywordsPredicate implements Predicate<Person> {
+
     private final List<String> keywords;
 
     public ContainsKeywordsPredicate(List<String> keywords) {

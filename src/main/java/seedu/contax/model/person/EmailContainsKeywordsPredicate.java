@@ -8,7 +8,7 @@ import seedu.contax.commons.util.StringUtil;
 /**
  * Tests that a {@code Person}'s {@code Email} matches any of the keywords given.
  */
-public class EmailContainsKeywordsPredicate extends ContainsKeywordsPredicate  implements Predicate<Person> {
+public class EmailContainsKeywordsPredicate extends ContainsKeywordsPredicate implements Predicate<Person> {
 
     public EmailContainsKeywordsPredicate(List<String> keywords) {
         super(keywords);

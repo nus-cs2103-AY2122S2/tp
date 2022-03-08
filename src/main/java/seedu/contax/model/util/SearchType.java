@@ -1,9 +1,9 @@
 package seedu.contax.model.util;
 
-import java.util.Arrays;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.contax.commons.util.AppUtil.checkArgument;
+
+import java.util.Arrays;
 
 /**
  * Represents a Person's name in the address book.
