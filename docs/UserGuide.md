@@ -70,17 +70,36 @@ Shows a message explaining how to access the ClientConnect help page.
 
 Format: `help`
 
+Alternatively, click the Help button on the toolbar to view a dropdown window displaying a "Help ... F1" button.
+
+This also shows that you can press F1 on your keyboard to open the help message.
+
+![Help button image](images/helpButtonUG.png)
+
+On clicking Help, you will see this as a result:
+
+![Help window image](images/helpWindowUG.png)
+
 ### Adding a person: `add`
 
 Adds a person, as well as any details, to ClientConnect.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS i/INSURANCE_PACKAGE [t/TAG]…`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [i/INSURANCE_PACKAGE] [t/TAG]…​`
 
 Examples:
-* `add n/Damith p/99998888 e/damith@damith.com`
+* `add n/Damith p/99998888 e/damith@damith.com a/Blk 123 i/package 1`
 * `add n/Jackson p/92341888 e/jackson5@example.com a/laney street, block 123, #01-01, i/package1 t/important`
 
-Note: Any tags are **optional**, and anyone can have any number of tags, even 0
+Before adding:
+
+![result before 'add n/Damith p/99998888 e/damith@damith.com a/Blk 123 i/package 1'](images/beforeAddDamithUG.png)
+
+After adding:
+
+![result after 'add n/Damith p/99998888 e/damith@damith.com a/Blk 123 i/package 1'](images/afterAddDamithUG.png)
+
+Notes: 
+* Any tags are optional.
 
 ### Listing all persons : `list`
 
@@ -88,14 +107,25 @@ Displays all your clients in ClientConnect.
 
 Format: `list`
 
+![result for 'list'](images/listAllClientsUG.png)
+
 ### Editing a person : `edit`
 
 Edits an existing client in ClientConnect, similar to adding a new client.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [i/INSURANCE_PACKAGE] [t/TAG]…`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [i/INSURANCE_PACKAGE] [t/TAG]…​`
 
 Examples:
 * `edit 1 p/123456 will edit the phone number of the client listed as #1 to 123456`
+
+Before editing:
+
+![result before 'edit 1 p/123456'](images/beforeEditUG.png)
+
+After editing:
+
+![result after 'edit 1 p/123456'](images/afterEditUG.png)
+
 
 Notes:
 * Edits the person at the specified `INDEX`.
@@ -127,10 +157,11 @@ Examples:
 * `find p/91234567` returns the client that is associated to the number
 * `find a/street` returns the client associated with the address
 
-![result for 'find alex david'](images/findAlexDavidResult.png)
-* `find n/alex david` returns `Alex Yeoh`, `David Li`
+After a `find` command:
 
-![result for 'find alex david'](images/findAlexDavidResult.png)
+![result for 'find alex david'](images/findAlexDavidResultUG.png)
+* `find n/ alex david` returns `Alex Yeoh`, `David Li`
+
 
 ### Deleting a person : `delete`
 
@@ -145,6 +176,14 @@ Format: `delete INDEX`
 Examples:
 1. `delete 1`
 2. `find n/John` followed by `delete 1` deletes the 1st person in the results provided by ClientConnect after finding by the `John` keyword
+
+Before a delete command:
+
+![result before 'delete 2'](images/beforeDeleteUG.png)
+
+After `delete 2`:
+
+![result after 'delete 2'](images/afterDeleteUG.png)
 
 ### Clearing all entries : `clear`
 
@@ -164,10 +203,18 @@ Format: `exit`
 
 | Action     | Format, Examples|
 |------------|------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS i/INSURANCE_PACKAGE [t/TAG]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 i/package1 t/friend t/colleague`|
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS i/INSURANCE_PACKAGE [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 i/package1 t/friend t/colleague`|
  | **Delete** | `delete INDEX`<br> e.g., `delete 3`|
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [i/INSURANCE_PACKAGE] [t/TAG]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`|
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [i/INSURANCE_PACKAGE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`|
  | **Find**   | `find FIELD KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/James Jake`|
 | **List**   | `list`|
  | **Help**   | `help`|
  | **Exit**   | `exit`|
+
+Fields:
+* `n/`: name
+* `p/`: phone number
+* `e/`: email
+* `a/`: address
+* `i/`: insurance package
+* `t/`: tags
