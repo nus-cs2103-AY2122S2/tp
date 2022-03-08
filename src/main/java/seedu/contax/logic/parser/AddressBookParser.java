@@ -78,8 +78,8 @@ public class AddressBookParser {
         case ListAppointmentCommand.COMMAND_WORD:
             return new ListAppointmentCommand();
 
-        case BatchCommand.COMMAND_WORD:
-            return new BatchCommandParser().parse(arguments);
+        case ChainCommand.COMMAND_WORD:
+            return new ChainCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
