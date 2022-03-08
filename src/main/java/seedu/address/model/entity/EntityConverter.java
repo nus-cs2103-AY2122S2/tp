@@ -13,7 +13,7 @@ public class EntityConverter {
     /**
      * Converts the entity to a {@code Student} class.
      *
-     * @param entity the entity to convert
+     * @param entity The entity to convert.
      * @return The {@code Student} class that the entity represent.
      */
     public static Student entityToStudent(Entity entity) {
@@ -26,7 +26,7 @@ public class EntityConverter {
     /**
      * Converts the entity to a {@code TaModule} class.
      *
-     * @param entity the entity to convert
+     * @param entity The entity to convert.
      * @return The {@code TaModule} class that the entity represent.
      */
     public static TaModule entityToTaModule(Entity entity) {
@@ -39,7 +39,7 @@ public class EntityConverter {
     /**
      * Converts the entity to a {@code ClassGroup} class.
      *
-     * @param entity the entity to convert
+     * @param entity The entity to convert.
      * @return The {@code ClassGroup} class that the entity represent.
      */
     public static ClassGroup entityToClassGroup(Entity entity) {

@@ -14,8 +14,8 @@ import seedu.address.model.tamodule.TaModule;
 import seedu.address.model.tamodule.UniqueModuleList;
 
 /**
- * Wraps all data at the TAssist level
- * Duplicates are not allowed (by .isSameX comparison, where X is the corresponding entity)
+ * Wraps all data at the TAssist level.
+ * Duplicates are not allowed (by .isSameX comparison, where X is the corresponding entity).
  */
 public class TAssist implements ReadOnlyTAssist {
 
@@ -40,7 +40,7 @@ public class TAssist implements ReadOnlyTAssist {
     }
 
     /**
-     * Creates an TAssist using the lists in the {@code toBeCopied}
+     * Creates a TAssist using the lists in the {@code toBeCopied}.
      */
     public TAssist(ReadOnlyTAssist toBeCopied) {
         this();

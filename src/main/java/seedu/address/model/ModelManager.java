@@ -75,13 +75,13 @@ public class ModelManager implements Model {
     }
 
 
-    /** To update method and change user pref method into getTAssistFilePath */
+    /** TODO: update method and change user pref method into getTAssistFilePath. */
     @Override
     public Path getTAssistFilePath() {
         return userPrefs.getAddressBookFilePath();
     }
 
-    /** To update method and change user pref method into setTAssistFilePath */
+    /** TODO: update method and change user pref method into setTAssistFilePath. */
     @Override
     public void setTAssistFilePath(Path tAssistFilePath) {
         requireNonNull(tAssistFilePath);
@@ -182,7 +182,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of the various entities backed by the internal list of
-     * {@code versionedTAssist}
+     * {@code versionedTAssist}.
      */
 
 

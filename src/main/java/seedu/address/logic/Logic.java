@@ -15,13 +15,14 @@ import seedu.address.model.student.Student;
 import seedu.address.model.tamodule.TaModule;
 
 /**
- * API of the Logic component
+ * API of the Logic component.
  */
 public interface Logic {
     /**
      * Executes the command and returns the result.
+     *
      * @param commandText The command as entered by the user.
-     * @return the result of the command execution.
+     * @return The result of the command execution.
      * @throws CommandException If an error occurs during command execution.
      * @throws ParseException If an error occurs during parsing.
      */
@@ -34,16 +35,16 @@ public interface Logic {
      */
     ReadOnlyTAssist getTAssist();
 
-    /** Returns an unmodifiable view of the filtered list of students */
+    /** Returns an unmodifiable view of the filtered list of students. */
     ObservableList<Student> getFilteredStudentList();
 
-    /** Returns an unmodifiable view of the filtered list of modules */
+    /** Returns an unmodifiable view of the filtered list of modules. */
     ObservableList<TaModule> getFilteredModuleList();
 
-    /** Returns an unmodifiable view of the filtered list of class groups */
+    /** Returns an unmodifiable view of the filtered list of class groups. */
     ObservableList<ClassGroup> getFilteredClassGroupList();
 
-    /** to be removed */
+    /** TODO: to be removed */
     ObservableList<Person> getFilteredPersonList();
 
     /**

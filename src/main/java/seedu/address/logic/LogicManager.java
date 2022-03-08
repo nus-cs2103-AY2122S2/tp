@@ -82,7 +82,7 @@ public class LogicManager implements Logic {
         return model.getFilteredClassGroupList();
     }
 
-    /** to be removed*/
+    /** TODO: to be removed*/
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return ab3model.getFilteredPersonList();

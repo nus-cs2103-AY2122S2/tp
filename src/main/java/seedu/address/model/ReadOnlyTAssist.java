@@ -6,7 +6,7 @@ import seedu.address.model.student.Student;
 import seedu.address.model.tamodule.TaModule;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of an address book.
  */
 public interface ReadOnlyTAssist {
 

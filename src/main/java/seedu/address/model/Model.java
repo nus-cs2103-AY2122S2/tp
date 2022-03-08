@@ -14,7 +14,7 @@ import seedu.address.model.tamodule.TaModule;
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
+    /** {@code Predicate} that always evaluate to true. */
     Predicate<Entity> PREDICATE_SHOW_ALL = unused -> true;
 
     /**
@@ -52,7 +52,7 @@ public interface Model {
      */
     void setTAssist(ReadOnlyTAssist tAssist);
 
-    /** Returns the TAssist */
+    /** Returns the TAssist. */
     ReadOnlyTAssist getTAssist();
 
     /**
@@ -79,13 +79,13 @@ public interface Model {
      */
     void setEntity(Entity target, Entity editedEntity);
 
-    /** Returns an unmodifiable view of the filtered student list */
+    /** Returns an unmodifiable view of the filtered student list. */
     ObservableList<Student> getFilteredStudentList();
 
-    /** Returns an unmodifiable view of the filtered module list */
+    /** Returns an unmodifiable view of the filtered module list. */
     ObservableList<TaModule> getFilteredModuleList();
 
-    /** Returns an unmodifiable view of the filtered class group list */
+    /** Returns an unmodifiable view of the filtered class group list. */
     ObservableList<ClassGroup> getFilteredClassGroupList();
 
     /**
