@@ -112,6 +112,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addLab(Lab lab) {
         labs.add(lab);
+        persons.addLabToAll(lab);
     }
 
     //// util methods

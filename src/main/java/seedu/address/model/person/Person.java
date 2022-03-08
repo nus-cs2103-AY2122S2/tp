@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.person.lab.Lab;
+import seedu.address.model.person.lab.LabList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -21,6 +23,7 @@ public class Person {
     private final GithubUsername githubUsername;
     private final Telegram telegram;
     private final StudentId studentId;
+    private final LabList labs;
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
@@ -37,6 +40,7 @@ public class Person {
         this.githubUsername = githubUsername;
         this.telegram = telegram;
         this.studentId = studentId;
+        this.labs = new LabList();
     }
 
     public Name getName() {
@@ -57,6 +61,14 @@ public class Person {
 
     public StudentId getStudentId() {
         return studentId;
+    }
+
+    public LabList getLabs() {
+        return labs;
+    }
+
+    public void addLab(Lab lab) {
+        labs.add(lab);
     }
 
     /**
@@ -100,13 +112,14 @@ public class Person {
                 && otherPerson.getTags().equals(getTags())
                 && otherPerson.getGithubUsername().equals(getGithubUsername())
                 && otherPerson.getTelegram().equals(getTelegram())
-                && otherPerson.getStudentId().equals(getStudentId());
+                && otherPerson.getStudentId().equals(getStudentId())
+                && otherPerson.getLabs().equals(getLabs());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, email, tags, githubUsername, telegram, studentId);
+        return Objects.hash(name, email, tags, githubUsername, telegram, studentId, labs);
     }
 
     @Override
