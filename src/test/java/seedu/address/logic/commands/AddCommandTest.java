@@ -85,6 +85,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Event> getEventsList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ReadOnlyUserPrefs getUserPrefs() {
             throw new AssertionError("This method should not be called.");
         }
@@ -97,11 +102,6 @@ public class AddCommandTest {
         @Override
         public void setGuiSettings(GuiSettings guiSettings) {
             throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Event> getEventsList() {
-            throw new AssertionError("This method should not be called");
         }
 
         @Override
