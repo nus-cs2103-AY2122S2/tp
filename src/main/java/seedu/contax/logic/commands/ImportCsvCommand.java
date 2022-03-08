@@ -19,6 +19,7 @@ import seedu.contax.model.person.Email;
 import seedu.contax.model.person.Name;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.person.Phone;
+import seedu.contax.model.person.exceptions.DuplicatePersonException;
 import seedu.contax.model.tag.Tag;
 
 public class ImportCsvCommand extends Command {
@@ -26,7 +27,7 @@ public class ImportCsvCommand extends Command {
     public static final String MESSAGE_USAGE = "to be entered";
     public static final String MESSAGE_NO_FILE_FOUND = "File not found: ";
     public static final String MESSAGE_SUCCESS = "Imported successfully";
-    public static final String MESSAGE_SKIPPED_LINES = "Lines skipped due to invalid formatting: %s";
+    public static final String MESSAGE_SKIPPED_LINES = "Lines skipped (either bad formatting or duplicates): %s";
 
 
     private final ImportCsv toImport;
@@ -62,7 +63,7 @@ public class ImportCsvCommand extends Command {
                     Set<Tag> toAddTag = ParserUtil.parseTags(Arrays.asList(tags));
                     Person toAddPerson = new Person(toAddName, toAddPhone, toAddEmail, toAddAddress, toAddTag);
                     model.addPerson(toAddPerson);
-                } catch (ParseException e) {
+                } catch (ParseException | DuplicatePersonException e) {
                     skippedLines.add(lineCounter);
                     continue;
                 }
@@ -76,7 +77,7 @@ public class ImportCsvCommand extends Command {
                     }
                 }
 
-                return new CommandResult(String.format("%s %s", MESSAGE_SUCCESS,
+                return new CommandResult(String.format("%s\n%s", MESSAGE_SUCCESS,
                         String.format(MESSAGE_SKIPPED_LINES, skippedLinesString)));
             } else {
                 return new CommandResult(MESSAGE_SUCCESS);
