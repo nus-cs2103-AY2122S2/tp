@@ -33,6 +33,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private AppointmentListPanel appointmentListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -76,7 +77,6 @@ public class MainWindow extends UiPart<Stage> {
         helpWindow = new HelpWindow();
         onboardingPrompt = new OnboardingPrompt(primaryStage);
         currentListType = ListContentType.PERSON;
-
     }
 
     public Stage getPrimaryStage() {
@@ -123,6 +123,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        appointmentListPanel = new AppointmentListPanel(logic.getAppointmentList());
         changeListContentType(ListContentType.PERSON);
 
         resultDisplay = new ResultDisplay();
@@ -153,15 +154,22 @@ public class MainWindow extends UiPart<Stage> {
      * @param contentType The type of content the UI should display.
      */
     private void changeListContentType(ListContentType contentType) {
-        contentListPanelPlaceholder.getChildren().removeAll();
-
         if (contentType == null) {
+            contentListPanelPlaceholder.getChildren().clear();
             return;
         }
 
+        if (contentType.equals(ListContentType.UNCHANGED) || contentType.equals(currentListType)) {
+            return;
+        }
+
+        contentListPanelPlaceholder.getChildren().clear();
         currentListType = contentType;
+
         if (contentType == ListContentType.PERSON) {
             contentListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        } else if (contentType == ListContentType.APPOINTMENT) {
+            contentListPanelPlaceholder.getChildren().add(appointmentListPanel.getRoot());
         }
     }
 
@@ -215,6 +223,7 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            changeListContentType(commandResult.getUiContentType());
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

@@ -1,0 +1,14 @@
+{
+  "appointments": [
+    {
+      "name": "Valid appointment",
+      "startDateTime": "2022-11-11T12:34:00",
+      "duration": 10
+    },
+    {
+      "name": "Meeting With Non-Alphanumeric character!",
+      "startDateTime": "2022-11-11T12:34:00",
+      "duration": 10
+    }
+  ]
+}

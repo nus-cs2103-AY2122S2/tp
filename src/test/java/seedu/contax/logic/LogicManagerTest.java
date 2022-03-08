@@ -4,10 +4,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.contax.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.contax.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
+import static seedu.contax.logic.commands.CommandTestUtil.APPOINTMENT_DATE;
+import static seedu.contax.logic.commands.CommandTestUtil.APPOINTMENT_DURATION;
+import static seedu.contax.logic.commands.CommandTestUtil.APPOINTMENT_NAME_ALONE;
+import static seedu.contax.logic.commands.CommandTestUtil.APPOINTMENT_TIME;
 import static seedu.contax.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.contax.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.contax.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.contax.testutil.Assert.assertThrows;
+import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALONE;
 import static seedu.contax.testutil.TypicalPersons.AMY;
 
 import java.io.IOException;
@@ -17,6 +22,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import seedu.contax.logic.commands.AddAppointmentCommand;
 import seedu.contax.logic.commands.AddCommand;
 import seedu.contax.logic.commands.CommandResult;
 import seedu.contax.logic.commands.ListCommand;
@@ -25,9 +31,12 @@ import seedu.contax.logic.parser.exceptions.ParseException;
 import seedu.contax.model.Model;
 import seedu.contax.model.ModelManager;
 import seedu.contax.model.ReadOnlyAddressBook;
+import seedu.contax.model.ReadOnlySchedule;
+import seedu.contax.model.Schedule;
 import seedu.contax.model.UserPrefs;
 import seedu.contax.model.person.Person;
 import seedu.contax.storage.JsonAddressBookStorage;
+import seedu.contax.storage.JsonScheduleStorage;
 import seedu.contax.storage.JsonUserPrefsStorage;
 import seedu.contax.storage.StorageManager;
 import seedu.contax.testutil.PersonBuilder;
@@ -45,8 +54,10 @@ public class LogicManagerTest {
     public void setUp() {
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonScheduleStorage scheduleStorage =
+                new JsonScheduleStorage(temporaryFolder.resolve("schedule.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(addressBookStorage, scheduleStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -73,9 +84,11 @@ public class LogicManagerTest {
         // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
+        JsonScheduleStorage scheduleStorage =
+                new JsonScheduleStorage(temporaryFolder.resolve("ioExceptionSchedule.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(addressBookStorage, scheduleStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command
@@ -86,11 +99,30 @@ public class LogicManagerTest {
         expectedModel.addPerson(expectedPerson);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
+
+        // Setup LogicManager with JsonScheduleIoExceptionThrowingStub
+        addressBookStorage = new JsonAddressBookStorage(temporaryFolder.resolve("ioExceptionAddressBook.json"));
+        scheduleStorage =
+                new JsonScheduleIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionSchedule.json"));
+        userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
+        storage = new StorageManager(addressBookStorage, scheduleStorage, userPrefsStorage);
+        logic = new LogicManager(model, storage);
+
+        // Execute add command
+        String addAppointmentCommand = AddAppointmentCommand.COMMAND_WORD + APPOINTMENT_NAME_ALONE
+                + APPOINTMENT_DATE + APPOINTMENT_TIME + APPOINTMENT_DURATION;
+        expectedModel.addAppointment(APPOINTMENT_ALONE);
+        assertCommandFailure(addAppointmentCommand, CommandException.class, expectedMessage, expectedModel);
     }
 
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void getAppointmentList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getAppointmentList().remove(0));
     }
 
     /**
@@ -129,7 +161,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new Schedule(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -156,6 +188,20 @@ public class LogicManagerTest {
 
         @Override
         public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+            throw DUMMY_IO_EXCEPTION;
+        }
+    }
+
+    /**
+     * A stub class to throw an {@code IOException} when the save method is called.
+     */
+    private static class JsonScheduleIoExceptionThrowingStub extends JsonScheduleStorage {
+        private JsonScheduleIoExceptionThrowingStub(Path filePath) {
+            super(filePath);
+        }
+
+        @Override
+        public void saveSchedule(ReadOnlySchedule schedule, Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }

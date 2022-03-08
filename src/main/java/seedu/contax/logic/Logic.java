@@ -8,6 +8,7 @@ import seedu.contax.logic.commands.CommandResult;
 import seedu.contax.logic.commands.exceptions.CommandException;
 import seedu.contax.logic.parser.exceptions.ParseException;
 import seedu.contax.model.ReadOnlyAddressBook;
+import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.person.Person;
 
 /**
@@ -32,6 +33,9 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
+
+    /** Returns an unmodifiable view of the list of appointments */
+    ObservableList<Appointment> getAppointmentList();
 
     /**
      * Returns the user prefs' address book file path.

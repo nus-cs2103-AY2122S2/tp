@@ -6,6 +6,7 @@ import static seedu.contax.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.contax.logic.commands.AddAppointmentCommand;
 import seedu.contax.logic.commands.AddCommand;
 import seedu.contax.logic.commands.ClearCommand;
 import seedu.contax.logic.commands.Command;
@@ -14,6 +15,7 @@ import seedu.contax.logic.commands.EditCommand;
 import seedu.contax.logic.commands.ExitCommand;
 import seedu.contax.logic.commands.FindCommand;
 import seedu.contax.logic.commands.HelpCommand;
+import seedu.contax.logic.commands.ListAppointmentCommand;
 import seedu.contax.logic.commands.ListCommand;
 import seedu.contax.logic.parser.exceptions.ParseException;
 
@@ -67,6 +69,12 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case AddAppointmentCommand.COMMAND_WORD:
+            return new AddAppointmentCommandParser().parse(arguments);
+
+        case ListAppointmentCommand.COMMAND_WORD:
+            return new ListAppointmentCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
