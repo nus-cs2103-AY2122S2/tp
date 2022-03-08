@@ -87,7 +87,7 @@ public class AddAppointmentCommandTest {
                 Index.fromZeroBased(100));
 
         assertThrows(CommandException.class, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, ()
-                -> addCommand.execute(modelStub));
+            -> addCommand.execute(modelStub));
     }
 
     @Test
