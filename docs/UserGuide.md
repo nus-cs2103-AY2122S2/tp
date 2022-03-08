@@ -98,7 +98,7 @@ After adding:
 
 ![result after 'add n/Damith p/99998888 e/damith@damith.com a/Blk 123 i/package 1'](images/afterAddDamithUG.png)
 
-Notes: 
+Notes:
 * Any tags are optional.
 
 ### Listing all persons : `list`

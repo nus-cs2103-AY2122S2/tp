@@ -311,12 +311,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user with many clients in the address book   | search for clients           | obtain information about a client easily                                            |
 | `* *`    | user with many clients in the address book   | filter clients           | obtain information about a group of clients easily                                            |
 | `* *`    | user with many clients in the address book   | pin certain clients           | easily access them |
-| `* *`    | anxious user                                 | set reminders                 | be alerted for upcoming meetings, deadlines etc. 
+| `* *`    | anxious user                                 | set reminders                 | be alerted for upcoming meetings, deadlines etc.
 | `* *`    | user                                         | see relationships between my clients  | manage entire families/groups of friends at the same time and tailor pacakages specifically for them |
 | `*`      | user                                         | export my data into other formats such as Excel | visualise and share information with others |
 | `*`      | user                                         | import and view the data of others' using this app | help out my colleagues when needed |
 | `*`      | night-owl user                               | turn on dark mode           | strain my eyes less when working at night |
-| `*`      | artsy user                                   | artsy mode                      | enjoy different visuals on the app 
+| `*`      | artsy user                                   | artsy mode                      | enjoy different visuals on the app
 
 *{More to be added}*
 
