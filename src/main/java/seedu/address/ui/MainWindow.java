@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -16,6 +17,14 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.lesson.Lesson;
+import seedu.address.model.person.Person;
+import seedu.address.ui.infopanel.InfoPanel;
+import seedu.address.ui.infopanel.LessonInfoPanel;
+import seedu.address.ui.infopanel.PersonInfoPanel;
+import seedu.address.ui.listpanel.LessonListPanel;
+import seedu.address.ui.listpanel.ListPanel;
+import seedu.address.ui.listpanel.PersonListPanel;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -31,26 +40,22 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
-    private LessonListPanel lessonListPanel;
+    private ListPanel listPanel;
+    //    private LessonListPanel lessonListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private InfoPanel infoPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
-
     @FXML
     private MenuItem helpMenuItem;
-
     @FXML
-    private StackPane personListPanelPlaceholder;
-
+    private StackPane listPanelPlaceholder;
     @FXML
-    private StackPane lessonListPanelPlaceholder;
-
+    private StackPane infoPanelPlaceholder;
     @FXML
     private StackPane resultDisplayPlaceholder;
-
     @FXML
     private StackPane statusbarPlaceholder;
 
@@ -114,11 +119,16 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        //populateListPanelWithPeople(logic.getFilteredPersonList());
+        populateListPanelWithLessons(logic.getFilteredLessonList());
 
-        lessonListPanel = new LessonListPanel(logic.getFilteredLessonList());
-        lessonListPanelPlaceholder.getChildren().add(lessonListPanel.getRoot());
+        // Temporary person placeholder
+        //Person tempPerson = logic.getFilteredPersonList().get(0);
+        //tempPopulateInfoPanelWithPersonAndList(tempPerson, logic.getFilteredLessonList());
+
+        // Temporary lesson placeholder
+        Lesson tempLesson = logic.getFilteredLessonList().get(0);
+        tempPopulateInfoPanelWithLessonAndList(tempLesson, logic.getFilteredPersonList());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -170,8 +180,8 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public ListPanel getListPanel() {
+        return listPanel;
     }
 
     /**
@@ -199,5 +209,53 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    private void populateListPanelWithPeople(ObservableList<Person> list) {
+        listPanel = new PersonListPanel(list);
+        populateListPanel(listPanel);
+    }
+
+    private void populateListPanelWithLessons(ObservableList<Lesson> list) {
+        listPanel = new LessonListPanel(list);
+        populateListPanel(listPanel);
+    }
+
+    private void populateListPanel(ListPanel newListPanel) {
+        listPanelPlaceholder.getChildren().add(newListPanel.getRoot());
+    }
+
+    private void populateInfoPanelWithPerson(Person selectedPerson) {
+        infoPanel = new PersonInfoPanel(selectedPerson);
+        PersonInfoPanel personInfoPanel = (PersonInfoPanel) infoPanel;
+        populateInfoPanel(personInfoPanel);
+    }
+
+    private void populateInfoPanelWithLesson(Lesson selectedLesson) {
+        infoPanel = new LessonInfoPanel(selectedLesson);
+        LessonInfoPanel lessonInfoPanel = (LessonInfoPanel) infoPanel;
+        populateInfoPanel(lessonInfoPanel);
+    }
+
+    // TODO: Temporary test method as Person does not contain list of lessons yet
+    private void tempPopulateInfoPanelWithPersonAndList(Person selectedPerson, ObservableList<Lesson> lessonList) {
+        infoPanel = new PersonInfoPanel(selectedPerson);
+        PersonInfoPanel personInfoPanel = (PersonInfoPanel) infoPanel;
+        personInfoPanel.setAssignedLessons(lessonList);
+        populateInfoPanel(personInfoPanel);
+    }
+
+    // TODO: Temporary test method as Lesson does not contain list of students yet
+    private void tempPopulateInfoPanelWithLessonAndList(Lesson selectedLesson,
+                                                        ObservableList<Person> enrolledStudents) {
+        infoPanel = new LessonInfoPanel(selectedLesson);
+        LessonInfoPanel lessonInfoPanel = (LessonInfoPanel) infoPanel;
+        lessonInfoPanel.setEnrolledStudents(enrolledStudents);
+        populateInfoPanel(lessonInfoPanel);
+    }
+
+    private void populateInfoPanel(InfoPanel newInfoPanel) {
+        infoPanelPlaceholder.getChildren().clear();
+        infoPanelPlaceholder.getChildren().add(newInfoPanel.getRoot());
     }
 }
