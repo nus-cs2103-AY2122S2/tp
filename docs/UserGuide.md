@@ -51,16 +51,16 @@ Format: `add n/NAME_OF_PET o/OWNER_NAME p/PHONE_NUMBER a/ADDRESS`
 Examples:
 * `add n/Mojo n/John Doe p/98765432 a/523 Woodlands ave 5, #01-01`
 
-### Get pet Id: `getId`
+### Find pet Id: `find`
 
 Retrieve and return a list of all pet Ids corresponding to the specified name from the database. 
 
-Format: `getId NAME_OF_PET`
+Format: `find NAME_OF_PET`
 * The name of pet is case-insensitive.`e.g: Mojo will match mojo`
 * Only the name is searched.
 
 Examples:
-* `getId Mojo`
+* `find Mojo`
 
 ### Viewing pets' dietary requirements : `food`
 
@@ -122,7 +122,7 @@ Format: `exit`
 |------------|------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**    | `add n/NAME_OF_PET o/OWNER_NAME p/PHONE_NUMBER a/ADDRESS` <br> e.g., `add n/Peepee o/Peter p/98648252 a/13 Computing Drive, Singapore 117417`  |
 | **Delete** | `delete id` <br> e.g., `delete 3` (where 3 is the id of the pet in the system)                                                                 |
-| **Get ID** | `getId nameOfPet `<br> e.g., `getId PeePee` (returns id of all pets called PeePee)                                                             |
+| **Find**   | `find nameOfPet `<br> e.g., `find PeePee` (returns id of all pets called PeePee)                                                               |
 | **Time**   | `time id `<br> e.g.,`pickup 3 0900 1200` (where 3 is the id of the pet in the system)                                                          |
 | **Food**   | `food id `<br> e.g., `food 3` (where 3 is the id of the pet in the system)                                                                     |
 | **Owner**  | `owner o/OWNER_NAME` <br> e.g., `owner o/Jeff Lin`                                                                                             |
