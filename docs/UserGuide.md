@@ -72,7 +72,7 @@ Broadly speaking, ContaX consists of an *Address Book* for managing Contacts, an
 
 **:information_source: This section details the format(s) that date and time inputs are expected to be in.**<br>
 
-   * All date inputs must conform to the following format: `dd-mm-yyyy`.
+* All date inputs must conform to the following format: `dd-mm-yyyy`.
 
 | Field | Description |
 | - | - |
