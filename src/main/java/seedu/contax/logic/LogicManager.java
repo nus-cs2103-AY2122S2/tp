@@ -14,6 +14,7 @@ import seedu.contax.logic.parser.AddressBookParser;
 import seedu.contax.logic.parser.exceptions.ParseException;
 import seedu.contax.model.Model;
 import seedu.contax.model.ReadOnlyAddressBook;
+import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.person.Person;
 import seedu.contax.storage.Storage;
 
@@ -63,6 +64,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return model.getFilteredPersonList();
+    }
+
+    @Override
+    public ObservableList<Appointment> getAppointmentList() {
+        return model.getSchedule().getAppointmentList();
     }
 
     @Override
