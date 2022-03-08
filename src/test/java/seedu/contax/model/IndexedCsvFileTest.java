@@ -46,4 +46,36 @@ public class IndexedCsvFileTest {
         //file with no name has the extension, no such file will exist anyway so it doesn't matter if it is valid
         assertTrue(IndexedCsvFile.isValidFilePath(".csv"));
     }
+
+    @Test
+    public void equals() {
+        //same object -> returns true
+        IndexedCsvFile csvFile1 = new IndexedCsvFile(new File("/data/file.csv"), 1,
+                2, 3, 4, 5);
+        assertTrue(csvFile1.equals(csvFile1));
+
+        //same values -> returns true
+        IndexedCsvFile csvFile2 = new IndexedCsvFile(new File("/data/file.csv"), 1,
+                2, 3, 4, 5);
+        assertTrue(csvFile1.equals(csvFile2));
+
+        //null -> returns false
+        assertFalse(csvFile1.equals(null));
+
+        //different filename -> returns false
+        assertFalse(csvFile1.equals(new IndexedCsvFile(new File("file.csv"), 1,
+                2, 3, 4, 5)));
+
+        //different positions -> returns false
+        assertFalse(csvFile1.equals(new IndexedCsvFile(new File("file.csv"), 6,
+                2, 3, 4, 5)));
+        assertFalse(csvFile1.equals(new IndexedCsvFile(new File("file.csv"), 1,
+                6, 3, 4, 5)));
+        assertFalse(csvFile1.equals(new IndexedCsvFile(new File("file.csv"), 1,
+                2, 6, 4, 5)));
+        assertFalse(csvFile1.equals(new IndexedCsvFile(new File("file.csv"), 1,
+                2, 3, 6, 5)));
+        assertFalse(csvFile1.equals(new IndexedCsvFile(new File("file.csv"), 1,
+                2, 3, 4, 6)));
+    }
 }
