@@ -44,7 +44,7 @@ public class UiManager implements Ui {
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
 
-            if(isFirstRun) {
+            if (isFirstRun) {
                 mainWindow.handleOnboarding();
             }
 

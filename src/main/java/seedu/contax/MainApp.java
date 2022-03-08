@@ -68,7 +68,7 @@ public class MainApp extends Application {
 
         ui = new UiManager(logic);
 
-        if(model.getAddressBook().equals(SampleDataUtil.getSampleAddressBook())) {
+        if (model.getAddressBook().equals(SampleDataUtil.getSampleAddressBook())) {
             ui.setFirstRun();
         }
     }
