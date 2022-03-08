@@ -4,15 +4,15 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's address in the address book.
+ * Represents a Person's academic major in ArchDuke.
  * Guarantees: immutable; is valid as declared in {@link #isValidAcademicMajor(String)}
  */
 public class AcademicMajor {
 
-    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Academic major can take any values, and it should not be blank";
 
     /*
-     * The first character of the address must not be a whitespace,
+     * The first character of the academic major must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[^\\s].*";
@@ -20,14 +20,14 @@ public class AcademicMajor {
     public final String value;
 
     /**
-     * Constructs an {@code Address}.
+     * Constructs an {@code AcademicMajor}.
      *
-     * @param address A valid address.
+     * @param academicMajor A valid academic major.
      */
-    public AcademicMajor(String address) {
-        requireNonNull(address);
-        checkArgument(isValidAcademicMajor(address), MESSAGE_CONSTRAINTS);
-        value = address;
+    public AcademicMajor(String academicMajor) {
+        requireNonNull(academicMajor);
+        checkArgument(isValidAcademicMajor(academicMajor), MESSAGE_CONSTRAINTS);
+        value = academicMajor;
     }
 
     /**
