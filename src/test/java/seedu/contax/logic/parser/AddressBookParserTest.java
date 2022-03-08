@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.contax.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.contax.testutil.Assert.assertThrows;
+import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALONE;
 import static seedu.contax.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
@@ -13,6 +14,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.contax.logic.commands.AddAppointmentCommand;
 import seedu.contax.logic.commands.AddCommand;
 import seedu.contax.logic.commands.ClearCommand;
 import seedu.contax.logic.commands.DeleteAppointmentCommand;
@@ -22,10 +24,14 @@ import seedu.contax.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.contax.logic.commands.ExitCommand;
 import seedu.contax.logic.commands.FindCommand;
 import seedu.contax.logic.commands.HelpCommand;
+import seedu.contax.logic.commands.ListAppointmentCommand;
 import seedu.contax.logic.commands.ListCommand;
 import seedu.contax.logic.parser.exceptions.ParseException;
+import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.person.NameContainsKeywordsPredicate;
 import seedu.contax.model.person.Person;
+import seedu.contax.testutil.AppointmentBuilder;
+import seedu.contax.testutil.AppointmentUtil;
 import seedu.contax.testutil.EditPersonDescriptorBuilder;
 import seedu.contax.testutil.PersonBuilder;
 import seedu.contax.testutil.PersonUtil;
@@ -87,6 +93,19 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_addAppointment() throws Exception {
+        Appointment appointment = new AppointmentBuilder(APPOINTMENT_ALONE).build();
+        AddAppointmentCommand command = (AddAppointmentCommand) parser.parseCommand(AppointmentUtil
+                .getAddCommand(appointment, null));
+        assertEquals(new AddAppointmentCommand(appointment, null), command);
+    }
+
+    @Test
+    public void parseCommand_listAppointments() throws Exception {
+        assertTrue(parser.parseCommand(ListAppointmentCommand.COMMAND_WORD) instanceof ListAppointmentCommand);
     }
 
     @Test

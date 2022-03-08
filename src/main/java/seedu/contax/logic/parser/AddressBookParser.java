@@ -16,6 +16,7 @@ import seedu.contax.logic.commands.EditCommand;
 import seedu.contax.logic.commands.ExitCommand;
 import seedu.contax.logic.commands.FindCommand;
 import seedu.contax.logic.commands.HelpCommand;
+import seedu.contax.logic.commands.ListAppointmentCommand;
 import seedu.contax.logic.commands.ListCommand;
 import seedu.contax.logic.parser.exceptions.ParseException;
 
@@ -72,6 +73,9 @@ public class AddressBookParser {
 
         case AddAppointmentCommand.COMMAND_WORD:
             return new AddAppointmentCommandParser().parse(arguments);
+
+        case ListAppointmentCommand.COMMAND_WORD:
+            return new ListAppointmentCommand();
 
         case DeleteAppointmentCommand.COMMAND_WORD:
             return new DeleteAppointmentCommandParser().parse(arguments);

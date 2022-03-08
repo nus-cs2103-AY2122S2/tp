@@ -22,6 +22,7 @@ import seedu.contax.model.person.Email;
 import seedu.contax.model.person.Name;
 import seedu.contax.model.person.Phone;
 import seedu.contax.model.tag.Tag;
+import seedu.contax.model.util.SearchType;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -128,6 +129,21 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String searchType} into an {@code type}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code type} is invalid.
+     */
+    public static SearchType parseSearchType(String type) throws ParseException {
+        requireNonNull(type);
+        String trimmedName = type.trim();
+        if (!SearchType.isValidType(trimmedName)) {
+            throw new ParseException(SearchType.SEARCH_TYPE_CONSTRAINTS);
+        }
+        return new SearchType(trimmedName);
     }
 
     /**
