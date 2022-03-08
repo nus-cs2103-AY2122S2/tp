@@ -13,7 +13,7 @@ import java.util.function.DoubleBinaryOperator;
 
 public class OnboardingInstruction extends UiPart<Region> {
 
-    private static final String FXML = "OnboardingInstruction.fxml";
+    private static final String FXML = "onboarding/OnboardingInstruction.fxml";
 
     @FXML
     private Label instruction;

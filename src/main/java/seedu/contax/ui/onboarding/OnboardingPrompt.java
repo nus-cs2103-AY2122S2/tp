@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 public class OnboardingPrompt extends UiPart<Stage> {
 
 
-    private static final String FXML = "OnboardingPrompt.fxml";
+    private static final String FXML = "onboarding/OnboardingPrompt.fxml";
     private static final String DISPLAY_MESSAGE = "Welcome to ContaX!\nWill you like to take a quick tour?";
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
 

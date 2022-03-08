@@ -14,7 +14,7 @@ import seedu.contax.ui.UiPart;
 
 public class OnboardingWindow extends UiPart<Stage> {
 
-    private static final String FXML = "OnboardingWindow.fxml";
+    private static final String FXML = "onboarding/OnboardingWindow.fxml";
     private Stage stage;
     private Stage mainWindow;
     private PersonListPanel personListPanel;

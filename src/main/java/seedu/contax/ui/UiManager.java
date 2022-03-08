@@ -88,7 +88,6 @@ public class UiManager implements Ui {
     }
 
     public void showOnboardingPrompt() {
-//        mainWindow.handleOnboarding();
         isFirstRun = true;
     }
 

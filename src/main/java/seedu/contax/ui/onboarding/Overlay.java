@@ -10,7 +10,7 @@ import seedu.contax.ui.UiPart;
 
 public class Overlay extends UiPart<Region> {
 
-    private static final String FXML = "Overlay.fxml";
+    private static final String FXML = "onboarding/Overlay.fxml";
 
     @FXML
     private Pane topOverlay;

@@ -11,7 +11,7 @@ import seedu.contax.ui.UiPart;
 public class OnboardingCommandBox extends UiPart<Region> {
 
     public static final String ERROR_STYLE_CLASS = "error";
-    private static final String FXML = "OnboardingCommandBox.fxml";
+    private static final String FXML = "onboarding/OnboardingCommandBox.fxml";
 
     @FXML
     private TextField commandTextField;
