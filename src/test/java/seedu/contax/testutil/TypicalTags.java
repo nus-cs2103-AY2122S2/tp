@@ -23,6 +23,6 @@ public class TypicalTags {
     }
 
     public static List<Tag> getTypicalTags() {
-       return new ArrayList<>(Arrays.asList(CLIENTS, FAMILY, COLLEAGUES, NEIGHBOURS));
+        return new ArrayList<>(Arrays.asList(CLIENTS, FAMILY, COLLEAGUES, NEIGHBOURS));
     }
 }
