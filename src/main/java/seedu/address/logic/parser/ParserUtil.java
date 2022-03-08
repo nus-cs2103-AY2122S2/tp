@@ -125,15 +125,16 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code title} is invalid.
      */
-    public static String parseTitle(String title) throws ParseException { // TODO: 8/3/2022 refactor into Title object next time
+    public static String parseTitle(String title) throws ParseException {
         requireNonNull(title);
         if (!Log.isValidTitle(title)) {
             throw new ParseException(Log.TITLE_CONSTRAINTS);
         }
-        return title;
+        return title; // TODO: 8/3/2022 refactor into Title object next time
     }
 
-    public static String parseDescription(String description) throws ParseException { // TODO: 8/3/2022  refactor into Description object
+    // TODO: 8/3/2022  refactor into Description object
+    public static String parseDescription(String description) throws ParseException {
         return description; // no restrictions on description at the moment
     }
 

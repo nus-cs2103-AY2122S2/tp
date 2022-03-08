@@ -4,10 +4,12 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddLogCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.model.person.Log;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.AddLogCommandParser.MESSAGE_INVALID_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -16,8 +18,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 public class AddLogCommandParserTest {
 
     private AddLogCommandParser parser = new AddLogCommandParser();
-    private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLogCommand.MESSAGE_USAGE);
+    private static final String MESSAGE_INVALID_TITLE = Log.TITLE_CONSTRAINTS;
 
     @Test
     public void parse_missingParts_failure() {
@@ -83,17 +84,17 @@ public class AddLogCommandParserTest {
 
         // invalid titles
         args = "1" + INVALID_LOG_TITLE_EMPTY_STRING_DESC;
-        assertParseFailure(parser, args, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, args, MESSAGE_INVALID_TITLE);
         args = "1" + INVALID_LOG_TITLE_ONLY_SPACES_DESC;
-        assertParseFailure(parser, args, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, args, MESSAGE_INVALID_TITLE);
         args = "1" + INVALID_LOG_TITLE_TOO_LONG_DESC;
-        assertParseFailure(parser, args, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, args, MESSAGE_INVALID_TITLE);
 
         // prefixes without actual arguments
         args = "1" + " " + PREFIX_TITLE;
-        assertParseFailure(parser, args, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, args, MESSAGE_INVALID_TITLE);
         args = "1" + " " + PREFIX_TITLE + " " + PREFIX_DESCRIPTION;
-        assertParseFailure(parser, args, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, args, MESSAGE_INVALID_TITLE);
 
     }
 
@@ -112,9 +113,9 @@ public class AddLogCommandParserTest {
         assertParseSuccess(parser, args, expectedCommand);
 
         // another valid title
-        args = targetIndex.getOneBased() + VALID_LOG_TITLE_PRECEDING_SPACE;
+        args = targetIndex.getOneBased() + LOG_TITLE_DESC_PRECEDING_SPACE;
         descriptor = new AddLogCommand.AddLogDescriptor();
-        descriptor.setNewTitle(VALID_LOG_TITLE_PRECEDING_SPACE);
+        descriptor.setNewTitle(VALID_LOG_TITLE_PRECEDING_SPACE_TRIMMED);
         expectedCommand = new AddLogCommand(targetIndex, descriptor);
         assertParseSuccess(parser, args, expectedCommand);
 
@@ -133,7 +134,7 @@ public class AddLogCommandParserTest {
         String args = targetIndex.getOneBased() + LOG_TITLE_DESC + LOG_TITLE_DESC_PRECEDING_SPACE
                 + LOG_DESCRIPTION_DESC + LOG_DESCRIPTION_DIFFERENT_DESC;
         AddLogCommand.AddLogDescriptor descriptor = new AddLogCommand.AddLogDescriptor();
-        descriptor.setNewTitle(VALID_LOG_TITLE_PRECEDING_SPACE);
+        descriptor.setNewTitle(VALID_LOG_TITLE_PRECEDING_SPACE_TRIMMED);
         descriptor.setNewDescription(VALID_LOG_DESCRIPTION_OTHER);
         AddLogCommand expectedCommand = new AddLogCommand(targetIndex, descriptor);
         assertParseSuccess(parser, args, expectedCommand);
@@ -145,7 +146,7 @@ public class AddLogCommandParserTest {
         String args = targetIndex.getOneBased() + INVALID_LOG_TITLE_EMPTY_STRING_DESC + LOG_TITLE_DESC_PRECEDING_SPACE
                 + LOG_DESCRIPTION_DESC + LOG_DESCRIPTION_DIFFERENT_DESC;
         AddLogCommand.AddLogDescriptor descriptor = new AddLogCommand.AddLogDescriptor();
-        descriptor.setNewTitle(VALID_LOG_TITLE_PRECEDING_SPACE);
+        descriptor.setNewTitle(VALID_LOG_TITLE_PRECEDING_SPACE_TRIMMED);
         descriptor.setNewDescription(VALID_LOG_DESCRIPTION_OTHER);
         AddLogCommand expectedCommand = new AddLogCommand(targetIndex, descriptor);
         assertParseSuccess(parser, args, expectedCommand);

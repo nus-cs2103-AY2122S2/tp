@@ -3,15 +3,13 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Iterator;
+
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.exceptions.DuplicateLogException;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.LogNotFoundException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
  * A list of Logs that enforces the uniqueness between its elements and does not
@@ -28,7 +26,8 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
  */
 public class UniqueLogList {
 
-    private final ObservableList<Log> internalList = FXCollections.observableArrayList(); // observable list allows Java FX listeners to track changes
+    // observable list allows Java FX listeners to track changes
+    private final ObservableList<Log> internalList = FXCollections.observableArrayList();
     private final ObservableList<Log> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
@@ -40,6 +39,10 @@ public class UniqueLogList {
         return this.internalList.stream().anyMatch(log::isSameLog);
     }
 
+    /**
+     * Returns true if the list contains a log that matches exactly the
+     * given {@code Log}. A stronger form of contains.
+     */
     public boolean containsExactly(Log log) {
         requireAllNonNull(log);
         return this.internalList.stream().anyMatch(log::equals);
@@ -105,7 +108,7 @@ public class UniqueLogList {
      */
     public boolean logsAreUnique(List<Log> logs) {
         int n = logs.size();
-        for (int i = 0; i < n- 1; i++) { // iterate like N choose 2
+        for (int i = 0; i < n - 1; i++) { // iterate like N choose 2
             for (int j = i + 1; j < n; j++) {
                 if (logs.get(i).isSameLog(logs.get(j))) {
                     return false;

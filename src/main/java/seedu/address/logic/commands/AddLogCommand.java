@@ -1,19 +1,22 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.AddLogCommandParser;
 import seedu.address.model.Model;
 import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 /**
  * Adds a log to a person in the address book.
@@ -24,16 +27,15 @@ public class AddLogCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a log to an existing friend in Amigos. "
             + "Parameters: "
-            +  "INDEX "
+            + "INDEX "
             + PREFIX_TITLE + "TITLE"
-            + "[" + PREFIX_DESCRIPTION + "DESCRIPTION]\n"
+            + " [" + PREFIX_DESCRIPTION + "DESCRIPTION]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_TITLE + "Likes apples";
 
     public static final String MESSAGE_ADD_LOG_SUCCESS = "New log added!";
     public static final String MESSAGE_DUPLICATE_LOG = "This log already exists for this friend.";
-    public static final String MESSAGE_TITLE_NOT_INCLUDED = "Title of new log must be provided.";
 
     private final Index index;
     private final AddLogDescriptor addLogDescriptor;
@@ -71,8 +73,12 @@ public class AddLogCommand extends Command {
     /**
      * Creates a {@code Person} with the details of {@code personToEdit}, with logs modified by
      * {@code editPersonLogsDescriptor}.
+     *
+     * @throws CommandException if {@code addLogDescriptor} results in an invalid {@code Log}
+     *                          being created.
      */
-    private static Person createAddedLogPerson(Person personToEdit, AddLogDescriptor addLogDescriptor) throws CommandException {
+    private static Person createAddedLogPerson(Person personToEdit, AddLogDescriptor addLogDescriptor)
+            throws CommandException {
         requireAllNonNull(personToEdit, addLogDescriptor);
         Name name = personToEdit.getName();
         Phone phone = personToEdit.getPhone();
@@ -97,8 +103,13 @@ public class AddLogCommand extends Command {
 
         // cast
         AddLogCommand a = (AddLogCommand) other;
-        return this.index.equals(a.index) &&
-                this.addLogDescriptor.equals(a.addLogDescriptor);
+        return this.index.equals(a.index)
+                && this.addLogDescriptor.equals(a.addLogDescriptor);
+    }
+
+    @Override
+    public String toString() {
+        return "Index: " + this.index.toString() + "\nContent:\n" + this.addLogDescriptor.toString();
     }
 
     /**
@@ -138,13 +149,20 @@ public class AddLogCommand extends Command {
          * as well as the new logs.
          */
         public List<Log> getLogs(Person personToEdit) throws CommandException {
-            Log toAdd = new Log(this.newTitle, this.newDescription); // create log to be added
-            if (personToEdit.containsLog(toAdd)) {
-                throw new CommandException(MESSAGE_DUPLICATE_LOG); // ensure not a duplicate log being inserted
+            try {
+                Log toAdd = new Log(this.newTitle, this.newDescription); // create log to be added
+                if (personToEdit.containsLog(toAdd)) {
+                    throw new CommandException(MESSAGE_DUPLICATE_LOG); // ensure not a duplicate log being inserted
+                }
+                List<Log> newLogs = new ArrayList<Log>(personToEdit.getLogs());
+                newLogs.add(toAdd); // add log
+                return newLogs;
+
+            } catch (IllegalArgumentException ie) {
+                throw new CommandException(Log.TITLE_CONSTRAINTS); // illegal title
+            } catch (NullPointerException ne) {
+                throw new CommandException(AddLogCommandParser.MESSAGE_INVALID_FORMAT);
             }
-            List<Log> newLogs = personToEdit.getLogs();
-            newLogs.add(toAdd); // add log
-            return newLogs;
         }
 
         @Override
@@ -164,6 +182,11 @@ public class AddLogCommand extends Command {
             Log thisLog = new Log(this.newTitle, this.newDescription);
             Log otherLog = new Log(a.newTitle, a.newDescription);
             return thisLog.equals(otherLog);
+        }
+
+        @Override
+        public String toString() {
+            return "Title: " + this.newTitle + "\nDescription: \n" + this.newDescription;
         }
     }
 

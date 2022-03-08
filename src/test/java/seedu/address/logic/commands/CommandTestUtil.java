@@ -34,6 +34,8 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_LOG_TITLE = "some valid title";
     public static final String VALID_LOG_TITLE_PRECEDING_SPACE = " still a valid title";
+    public static final String VALID_LOG_TITLE_PRECEDING_SPACE_TRIMMED = "still a valid title";
+
     public static final String VALID_LOG_DESCRIPTION = "some description!";
     public static final String VALID_LOG_DESCRIPTION_OTHER = "some other description!";
 
@@ -49,6 +51,7 @@ public class CommandTestUtil {
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String LOG_TITLE_DESC = " " + PREFIX_TITLE + VALID_LOG_TITLE;
     public static final String LOG_TITLE_DESC_PRECEDING_SPACE = " " + PREFIX_TITLE + VALID_LOG_TITLE_PRECEDING_SPACE;
+    public static final String LOG_TITLE_DESC_PRECEDING_SPACE_TRIMMED = " " + PREFIX_TITLE + VALID_LOG_TITLE_PRECEDING_SPACE_TRIMMED;
     public static final String LOG_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION + VALID_LOG_DESCRIPTION;
     public static final String LOG_DESCRIPTION_DIFFERENT_DESC = " " + PREFIX_DESCRIPTION + VALID_LOG_DESCRIPTION_OTHER;
 
