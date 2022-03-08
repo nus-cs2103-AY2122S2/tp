@@ -50,5 +50,6 @@
       "email": "anna@example.com",
       "tagged": []
     }
-  ]
+  ],
+  "modules" : [ ]
 }

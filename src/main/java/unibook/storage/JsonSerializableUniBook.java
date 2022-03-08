@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import unibook.commons.exceptions.IllegalValueException;
 import unibook.model.ReadOnlyUniBook;
 import unibook.model.UniBook;
+import unibook.model.module.Module;
 import unibook.model.person.Person;
 
 /**
@@ -20,15 +21,18 @@ import unibook.model.person.Person;
 class JsonSerializableUniBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
-
+    public static final String MESSAGE_DUPLICATE_MODULE = "Module list contains duplicate module(s).";
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedModule> modules = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableUniBook} with the given persons.
      */
     @JsonCreator
-    public JsonSerializableUniBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
+    public JsonSerializableUniBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
+                                   @JsonProperty("modules") List<JsonAdaptedModule> modules) {
         this.persons.addAll(persons);
+        this.modules.addAll(modules);
     }
 
     /**
@@ -38,6 +42,7 @@ class JsonSerializableUniBook {
      */
     public JsonSerializableUniBook(ReadOnlyUniBook source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        modules.addAll(source.getModuleList().stream().map(JsonAdaptedModule::new).collect(Collectors.toList()));
     }
 
     /**
@@ -53,6 +58,14 @@ class JsonSerializableUniBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             uniBook.addPerson(person);
+        }
+
+        for (JsonAdaptedModule jsonAdaptedModule : modules) {
+            Module module = jsonAdaptedModule.toModelType();
+            if (uniBook.hasModule(module)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_MODULE);
+            }
+            uniBook.addModule(module);
         }
         return uniBook;
     }
