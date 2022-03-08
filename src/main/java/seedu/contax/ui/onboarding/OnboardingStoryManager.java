@@ -92,7 +92,7 @@ public class OnboardingStoryManager {
         if (currStep > story.getSize() - 1) {
             return null;
         }
-        if (previousStep.eventType() == 0) {
+        if (previousStep.getEventType() == 0) {
             previousStep = story.getStep(currStep);
             return story.getStep(currStep);
         }
@@ -107,7 +107,7 @@ public class OnboardingStoryManager {
         if (currStep > story.getSize() - 1) {
             return null;
         }
-        if (previousStep.eventType() == 1) {
+        if (previousStep.getEventType() == 1) {
             previousStep = story.getStep(currStep);
             return story.getStep(currStep);
         }
