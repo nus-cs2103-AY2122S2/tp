@@ -522,18 +522,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  TA requests to add a new class group with the specified details.
-2.  TAssist adds the new class group and displays its details.
+1. TA requests to <ins>list modules (UC02)</ins>.
+2. TA requests to add a new class group with the specified details.
+3. TAssist adds the new class group and displays its details.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. TAssist detects an error in the entered command.
+* 2a. TAssist detects an error in the entered command.
 
-    * 1a1. TAssist prompts for the correct command.
+    * 2a1. TAssist prompts for the correct command.
 
-    * 1a2. TA enters a new command.
+    * 2a2. TA enters a new command.
 
       Steps 1a1-1a2 are repeated until the command entered is correct.
 
