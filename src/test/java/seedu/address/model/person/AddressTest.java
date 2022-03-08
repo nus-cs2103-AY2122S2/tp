@@ -29,8 +29,8 @@ public class AddressTest {
         assertFalse(AcademicMajor.isValidAcademicMajor(" ")); // spaces only
 
         // valid addresses
-        assertTrue(AcademicMajor.isValidAcademicMajor("Blk 456, Den Road, #01-355"));
+        assertTrue(AcademicMajor.isValidAcademicMajor("Computer Science"));
         assertTrue(AcademicMajor.isValidAcademicMajor("-")); // one character
-        assertTrue(AcademicMajor.isValidAcademicMajor("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
+        assertTrue(AcademicMajor.isValidAcademicMajor("Computer Science and Economics DDP")); // long major
     }
 }
