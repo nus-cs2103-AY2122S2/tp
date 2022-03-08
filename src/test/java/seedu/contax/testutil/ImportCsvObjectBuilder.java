@@ -31,6 +31,18 @@ public class ImportCsvObjectBuilder {
         tagPosition = DEFAULT_TAGPOSITION;
     }
 
+    /**
+     * Creates a {@code ImportCsvObjectBuilder} with the specified file path, and default positions.
+     */
+    public ImportCsvObjectBuilder(String filePath) {
+        this.filePath = new File(filePath);
+        namePosition = DEFAULT_NAMEPOSITION;
+        phonePosition = DEFAULT_PHONEPOSITION;
+        emailPosition = DEFAULT_EMAILPOSITION;
+        addressPosition = DEFAULT_ADDRESSPOSITION;
+        tagPosition = DEFAULT_TAGPOSITION;
+    }
+
     public ImportCsv build() {
         return new ImportCsv(filePath, namePosition, phonePosition, emailPosition, addressPosition, tagPosition);
     }

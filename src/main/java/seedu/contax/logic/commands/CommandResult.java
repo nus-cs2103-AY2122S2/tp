@@ -51,7 +51,6 @@ public class CommandResult {
         if (other == this) {
             return true;
         }
-
         // instanceof handles nulls
         if (!(other instanceof CommandResult)) {
             return false;

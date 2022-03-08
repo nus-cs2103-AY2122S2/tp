@@ -1,6 +1,12 @@
 package seedu.contax.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_FILE;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -24,7 +30,16 @@ import seedu.contax.model.tag.Tag;
 
 public class ImportCsvCommand extends Command {
     public static final String COMMAND_WORD = "importcsv";
-    public static final String MESSAGE_USAGE = "to be entered";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Imports contacts from CSV file"
+            + "Parameters: "
+            + PREFIX_FILE + "FILEPATH "
+            + "[" + PREFIX_NAME + "NAME_POSITION]"
+            + "[" + PREFIX_PHONE + "PHONE_POSITION]"
+            + "[" + PREFIX_EMAIL + "EMAIL_POSITION]"
+            + "[" + PREFIX_ADDRESS + "ADDRESS_POSITION]"
+            + "[" + PREFIX_TAG + "TAG_POSITION]...\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_FILE + "/data/file.csv";
     public static final String MESSAGE_NO_FILE_FOUND = "File not found: %s";
     public static final String MESSAGE_SUCCESS = "Imported successfully";
     public static final String MESSAGE_SKIPPED_LINES = "Lines skipped (either bad formatting or duplicates): %s";
@@ -74,7 +89,7 @@ public class ImportCsvCommand extends Command {
                 for (int i = 0; i < skippedLines.size(); i++) {
                     skippedLinesString += skippedLines.get(i);
                     if (i != skippedLines.size() - 1) {
-                        skippedLinesString += " ";
+                        skippedLinesString += ", ";
                     }
                 }
 
