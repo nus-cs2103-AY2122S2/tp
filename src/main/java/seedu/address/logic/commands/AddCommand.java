@@ -60,11 +60,9 @@ public class AddCommand extends Command {
             plainLabList.add(l.createCopy());
         }
         toAdd.setLabs(plainLabList);
-
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
-
         model.addPerson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }

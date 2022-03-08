@@ -20,7 +20,7 @@ import seedu.address.model.person.lab.Lab;
  */
 public class AddLabCommand extends Command {
 
-    public static final String COMMAND_WORD = "labAdd";
+    public static final String COMMAND_WORD = "labadd";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a lab to all students in the TAddressBook. "
             + "Parameters: "

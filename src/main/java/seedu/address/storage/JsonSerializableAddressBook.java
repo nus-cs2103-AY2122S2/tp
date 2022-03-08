@@ -29,7 +29,7 @@ class JsonSerializableAddressBook {
      * Constructs a {@code JsonSerializableAddressBook} with the given persons.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("masterlist") List<JsonAdaptedLabNumber> masterList,
+    public JsonSerializableAddressBook(@JsonProperty("masterList") List<JsonAdaptedLabNumber> masterList,
             @JsonProperty("persons") List<JsonAdaptedPerson> persons) {
         this.persons.addAll(persons);
         this.masterList.addAll(masterList);
@@ -66,7 +66,7 @@ class JsonSerializableAddressBook {
             if (addressBook.hasLab(lab)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            addressBook.addLab(lab);
+            addressBook.getMasterLabList().add(lab);
         }
         return addressBook;
     }

@@ -89,7 +89,9 @@ public class MasterLabList {
      * Returns a copy of the {@code masterList}.
      */
     public ArrayList<Lab> getMasterList() {
-        return new ArrayList<>(masterList);
+        ArrayList<Lab> t = new ArrayList<>();
+        t.addAll(masterList);
+        return t;
     }
 
     @Override

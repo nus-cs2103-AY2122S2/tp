@@ -29,10 +29,11 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
-        labs = new MasterLabList();
     }
 
-    public AddressBook() {}
+    public AddressBook() {
+        labs = new MasterLabList();
+    }
 
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
@@ -53,12 +54,21 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the person list with {@code labs}.
+     * {@code labs} must not contain duplicate persons.
+     */
+    public void setLabs(MasterLabList labs) {
+        this.labs.setLabs(labs);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setLabs(newData.getMasterLabList());
     }
 
     //// person-level operations
