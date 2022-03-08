@@ -11,6 +11,7 @@ import seedu.contax.logic.commands.AddCommand;
 import seedu.contax.logic.commands.AddTagCommand;
 import seedu.contax.logic.commands.ClearCommand;
 import seedu.contax.logic.commands.Command;
+import seedu.contax.logic.commands.DeleteAppointmentCommand;
 import seedu.contax.logic.commands.DeleteCommand;
 import seedu.contax.logic.commands.EditCommand;
 import seedu.contax.logic.commands.ExitCommand;
@@ -82,6 +83,9 @@ public class AddressBookParser {
 
         case ListAppointmentCommand.COMMAND_WORD:
             return new ListAppointmentCommand();
+
+        case DeleteAppointmentCommand.COMMAND_WORD:
+            return new DeleteAppointmentCommandParser().parse(arguments);
 
         // Tag management commands
         case AddTagCommand.COMMAND_WORD:

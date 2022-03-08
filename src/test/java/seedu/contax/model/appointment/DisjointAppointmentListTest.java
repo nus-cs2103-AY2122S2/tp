@@ -2,6 +2,7 @@ package seedu.contax.model.appointment;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.contax.testutil.Assert.assertThrows;
 import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALICE;
@@ -9,6 +10,7 @@ import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALONE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -202,5 +204,71 @@ public class DisjointAppointmentListTest {
             -> appointmentList.asUnmodifiableObservableList().remove(0));
         assertThrows(UnsupportedOperationException.class, ()
             -> appointmentList.asUnmodifiableObservableList().add(APPOINTMENT_ALICE));
+    }
+
+    @Test
+    public void removeAppointment_nullAppointment_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> appointmentList.remove(null));
+    }
+
+    @Test
+    public void removeAppointment_appointmentNotInList_throwsAppointmentNotFoundException() {
+        assertThrows(AppointmentNotFoundException.class, ()
+            -> appointmentList.remove(APPOINTMENT_ALICE));
+    }
+
+    @Test
+    public void removeAppointment_appointmentInList_success() {
+        appointmentList.add(APPOINTMENT_ALONE);
+        appointmentList.remove(APPOINTMENT_ALONE);
+        assertEquals(new DisjointAppointmentList(), appointmentList);
+    }
+
+    @Test
+    public void equals() {
+        DisjointAppointmentList refList = new DisjointAppointmentList();
+        DisjointAppointmentList list2 = new DisjointAppointmentList();
+        list2.add(APPOINTMENT_ALICE);
+        DisjointAppointmentList list3 = new DisjointAppointmentList();
+        list3.add(APPOINTMENT_ALICE);
+
+        assertTrue(refList.equals(refList));
+        assertTrue(refList.equals(new DisjointAppointmentList()));
+        assertTrue(list2.equals(list3));
+
+        assertFalse(refList.equals(null));
+        assertFalse(refList.equals(0));
+        assertFalse(refList.equals(list2));
+    }
+
+    @Test
+    public void hashCodeTest() {
+        DisjointAppointmentList refList = new DisjointAppointmentList();
+        DisjointAppointmentList list2 = new DisjointAppointmentList();
+        list2.add(APPOINTMENT_ALICE);
+        DisjointAppointmentList list3 = new DisjointAppointmentList();
+        list3.add(APPOINTMENT_ALICE);
+
+        assertEquals(refList.hashCode(), refList.hashCode());
+        assertEquals(refList.hashCode(), new DisjointAppointmentList().hashCode());
+        assertEquals(list2.hashCode(), list3.hashCode());
+
+        assertNotEquals(refList.hashCode(), list2.hashCode());
+    }
+
+    @Test
+    public void iterator() {
+        DisjointAppointmentList refList = new DisjointAppointmentList();
+
+        refList.add(APPOINTMENT_ALICE);
+        refList.add(APPOINTMENT_ALONE);
+
+        HashSet<Appointment> result = new HashSet<>();
+        for (Appointment x : refList) {
+            result.add(x);
+        }
+
+        assertTrue(result.contains(APPOINTMENT_ALONE));
+        assertTrue(result.contains(APPOINTMENT_ALICE));
     }
 }

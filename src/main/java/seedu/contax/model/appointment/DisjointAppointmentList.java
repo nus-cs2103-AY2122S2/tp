@@ -114,6 +114,7 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
      *
      * @param target The {@code appointment} to replace.
      * @param newAppointment The {@code appointment} to replace {@code target} with.
+     * @throws AppointmentNotFoundException If {@code target} cannot be found in the list.
      */
     public void setAppointment(Appointment target, Appointment newAppointment) {
         requireAllNonNull(target, newAppointment);
@@ -133,9 +134,21 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
         appointments.set(indexOfTarget, newAppointment);
     }
 
-    // TODO [APPOINTMENT V1.2] : Implement removal
+    /**
+     * Removes the appointment {@code target} from the list of appointments.
+     *
+     * @param target The appointment to remove from the list.
+     * @throws AppointmentNotFoundException If {@code target} cannot be found in the list.
+     */
     public void remove(Appointment target) {
-        throw new UnsupportedOperationException("Not implemented yet.");
+        requireNonNull(target);
+
+        int indexOfTarget = appointments.indexOf(target);
+        if (indexOfTarget < 0) {
+            throw new AppointmentNotFoundException();
+        }
+
+        appointments.remove(indexOfTarget);
     }
 
     /**

@@ -2,6 +2,7 @@ package seedu.contax.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.contax.testutil.Assert.assertThrows;
 import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALICE;
@@ -18,8 +19,10 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.contax.model.appointment.Appointment;
+import seedu.contax.model.appointment.exceptions.AppointmentNotFoundException;
 import seedu.contax.model.appointment.exceptions.OverlappingAppointmentException;
 import seedu.contax.testutil.AppointmentBuilder;
+import seedu.contax.testutil.ScheduleBuilder;
 
 public class ScheduleTest {
 
@@ -31,12 +34,48 @@ public class ScheduleTest {
     }
 
     @Test
+    public void constructor_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new Schedule(null));
+    }
+
+    @Test
+    public void constructor_validScheduleInput_throwsNullPointerException() {
+        Schedule schedule = getTypicalSchedule();
+        Schedule createdSchedule = new Schedule(schedule);
+
+        assertEquals(schedule, createdSchedule);
+    }
+
+    @Test
+    public void setAppointments_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new Schedule().setAppointments(null));
+    }
+
+    @Test
+    public void setAppointments_emptyList_returnsEmptySchedule() {
+        Schedule createdSchedule = new Schedule();
+        createdSchedule.setAppointments(List.of());
+
+        assertEquals(new Schedule(), createdSchedule);
+    }
+
+    @Test
+    public void setAppointments_validList_returnsSchedule() {
+        Schedule createdSchedule = new Schedule();
+        Schedule expectedSchedule = new ScheduleBuilder().withAppointment(APPOINTMENT_ALICE)
+                .withAppointment(APPOINTMENT_ALONE).build();
+
+        createdSchedule.setAppointments(List.of(APPOINTMENT_ALICE, APPOINTMENT_ALONE));
+        assertEquals(expectedSchedule, createdSchedule);
+    }
+
+    @Test
     public void resetData_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> schedule.resetData(null));
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
+    public void resetData_withValidReadOnlySchedule_replacesData() {
         Schedule newData = getTypicalSchedule();
         schedule.resetData(newData);
         assertEquals(newData, schedule);
@@ -94,6 +133,111 @@ public class ScheduleTest {
     public void getAppointmentsList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
             -> schedule.getAppointmentList().remove(0));
+    }
+
+    @Test
+    public void setAppointment_nullArguments_throwsNullPointException() {
+        assertThrows(NullPointerException.class, ()
+            -> schedule.setAppointment(null, null));
+        assertThrows(NullPointerException.class, ()
+            -> schedule.setAppointment(APPOINTMENT_ALICE, null));
+        assertThrows(NullPointerException.class, ()
+            -> schedule.setAppointment(null, APPOINTMENT_ALICE));
+    }
+
+    @Test
+    public void setAppointment_targetAppointmentNotInList_throwsAppointmentNotFoundException() {
+        assertThrows(AppointmentNotFoundException.class, ()
+            -> schedule.setAppointment(APPOINTMENT_ALICE, APPOINTMENT_ALONE));
+    }
+
+    @Test
+    public void setAppointment_editedAppointmentIsSameAppointment_success() {
+        schedule.addAppointment(APPOINTMENT_ALICE);
+        schedule.setAppointment(APPOINTMENT_ALICE, APPOINTMENT_ALICE);
+        Schedule expectedSchedule = new ScheduleBuilder().withAppointment(APPOINTMENT_ALICE).build();
+
+        assertEquals(expectedSchedule, schedule);
+    }
+
+    @Test
+    public void setAppointment_editedAppointmentIsOverlappingWithOnlyTarget_success() {
+        schedule.addAppointment(APPOINTMENT_ALICE);
+        Appointment editedAppointment = new AppointmentBuilder(APPOINTMENT_ALICE)
+                .withName("Another Meeting")
+                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().value.plusMinutes(1)).build();
+
+        schedule.setAppointment(APPOINTMENT_ALICE, editedAppointment);
+        Schedule expectedSchedule = new ScheduleBuilder().withAppointment(editedAppointment).build();
+        assertEquals(expectedSchedule, schedule);
+    }
+
+    @Test
+    public void setAppointment_editedAppointmentDisjoint_success() {
+        schedule.addAppointment(APPOINTMENT_ALICE);
+        Appointment disjointAppointment = new AppointmentBuilder(APPOINTMENT_ALICE)
+                .withName("Another Meeting")
+                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().value.plusYears(1)).build();
+
+        schedule.setAppointment(APPOINTMENT_ALICE, disjointAppointment);
+        Schedule expectedSchedule = new ScheduleBuilder().withAppointment(disjointAppointment).build();
+        assertEquals(expectedSchedule, schedule);
+    }
+
+    @Test
+    public void setAppointment_editedAppointmentOverlaps_throwsOverlappingAppointmentException() {
+        Appointment disjointAppointment = new AppointmentBuilder(APPOINTMENT_ALICE)
+                .withName("Another Meeting")
+                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().value.plusYears(1)).build();
+        schedule.addAppointment(APPOINTMENT_ALICE);
+        schedule.addAppointment(disjointAppointment);
+
+        assertThrows(OverlappingAppointmentException.class, ()
+            -> schedule.setAppointment(APPOINTMENT_ALICE, disjointAppointment));
+    }
+
+    @Test
+    public void removeAppointment_nullAppointment_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> schedule.removeAppointment(null));
+    }
+
+    @Test
+    public void removeAppointment_appointmentNotInList_throwsAppointmentNotFoundException() {
+        assertThrows(AppointmentNotFoundException.class, ()
+            -> schedule.removeAppointment(APPOINTMENT_ALICE));
+    }
+
+    @Test
+    public void removeAppointment_appointmentInList_success() {
+        schedule.addAppointment(APPOINTMENT_ALONE);
+        schedule.removeAppointment(APPOINTMENT_ALONE);
+        assertEquals(new Schedule(), schedule);
+    }
+
+    @Test
+    public void equals() {
+        Schedule refSchedule = new Schedule();
+        Schedule otherSchedule = getTypicalSchedule();
+
+        assertTrue(refSchedule.equals(refSchedule));
+        assertTrue(refSchedule.equals(new Schedule()));
+        assertTrue(otherSchedule.equals(new ScheduleBuilder(getTypicalSchedule()).build()));
+
+        assertFalse(refSchedule.equals(null));
+        assertFalse(refSchedule.equals(0));
+        assertFalse(refSchedule.equals(otherSchedule));
+    }
+
+    @Test
+    public void hashCodeTest() {
+        Schedule refSchedule = new Schedule();
+        Schedule otherSchedule = getTypicalSchedule();
+
+        assertEquals(refSchedule.hashCode(), refSchedule.hashCode());
+        assertEquals(refSchedule.hashCode(), new Schedule().hashCode());
+        assertEquals(otherSchedule.hashCode(), getTypicalSchedule().hashCode());
+
+        assertNotEquals(refSchedule.hashCode(), otherSchedule.hashCode());
     }
 
     /**

@@ -7,6 +7,7 @@ import static seedu.contax.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.contax.testutil.Assert.assertThrows;
 import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALICE;
 import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALONE;
+import static seedu.contax.testutil.TypicalAppointments.getTypicalSchedule;
 import static seedu.contax.testutil.TypicalPersons.ALICE;
 import static seedu.contax.testutil.TypicalPersons.BENSON;
 import static seedu.contax.testutil.TypicalTags.CLIENTS;
@@ -136,6 +137,12 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void setSchedule_validSchedule_success() {
+        modelManager.setSchedule(getTypicalSchedule());
+        assertEquals(getTypicalSchedule(), modelManager.getSchedule());
+    }
+
+    @Test
     public void getSchedule() {
         modelManager.addAppointment(APPOINTMENT_ALICE);
         assertEquals(1, modelManager.getSchedule().getAppointmentList().size());
@@ -200,6 +207,25 @@ public class ModelManagerTest {
         Schedule expectedSchedule = new ScheduleBuilder().withAppointment(APPOINTMENT_ALONE).build();
         assertEquals(expectedSchedule, modelManager.getSchedule());
     }
+
+    @Test
+    public void deleteAppointment_nullAppointment_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.deleteAppointment(null));
+    }
+
+    @Test
+    public void deleteAppointment_appointmentNotInList_throwsAppointmentNotFoundException() {
+        assertThrows(AppointmentNotFoundException.class, ()
+            -> modelManager.deleteAppointment(APPOINTMENT_ALICE));
+    }
+
+    @Test
+    public void deleteAppointment_appointmentInList_success() {
+        modelManager.addAppointment(APPOINTMENT_ALONE);
+        modelManager.deleteAppointment(APPOINTMENT_ALONE);
+        assertEquals(new ModelManager(), modelManager);
+    }
+
 
     @Test
     public void equals() {
