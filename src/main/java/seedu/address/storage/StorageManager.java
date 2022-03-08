@@ -7,6 +7,8 @@ import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
@@ -75,4 +77,15 @@ public class StorageManager implements Storage {
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
 
+    @Override
+    public void saveAddressBookToCsv(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+        logger.fine("Attempting to write to CSV file: " + filePath);
+        addressBookStorage.saveAddressBookToCsv(addressBook, filePath);
+    }
+
+    @Override
+    public Optional<ReadOnlyAddressBook> readAddressBookFromCsvFile(Path filePath) throws IOException, IllegalValueException {
+        logger.fine("Attempting to load from CSV file: " + filePath);
+        return addressBookStorage.readAddressBookFromCsvFile(filePath);
+    }
 }

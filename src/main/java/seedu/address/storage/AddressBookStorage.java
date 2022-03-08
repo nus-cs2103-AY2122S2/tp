@@ -5,6 +5,8 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 
 /**
@@ -42,4 +44,7 @@ public interface AddressBookStorage {
      */
     void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException;
 
+    void saveAddressBookToCsv(ReadOnlyAddressBook addressBook, Path filePath) throws IOException;
+
+    Optional<ReadOnlyAddressBook> readAddressBookFromCsvFile(Path filePath) throws IOException, IllegalValueException;
 }

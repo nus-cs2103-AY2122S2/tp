@@ -4,14 +4,20 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.CsvUtil;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.JsonUtil;
+import seedu.address.model.AddressBook;
+import seedu.address.model.person.Person;
 import seedu.address.model.ReadOnlyAddressBook;
 
 /**
@@ -77,4 +83,45 @@ public class JsonAddressBookStorage implements AddressBookStorage {
         JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), filePath);
     }
 
+    /**
+     * Similar to {@link #saveAddressBook(ReadOnlyAddressBook)}, but for CSV.
+     *
+     * @param filePath location of the data. Cannot be null.
+     */
+    public void saveAddressBookToCsv(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+        requireNonNull(addressBook);
+        requireNonNull(filePath);
+
+        FileUtil.createIfMissing(filePath);
+
+        // get the people in the addressbok
+        List<CsvAdaptedPerson> persons = new ArrayList<>();
+        persons.addAll(addressBook.getPersonList().stream().map(CsvAdaptedPerson::new).collect(Collectors.toList()));
+
+        CsvUtil.saveCsvFile(persons, filePath);
+    }
+
+    /**
+     * Similar to {@link #readAddressBook()}, but for CSV.
+     *
+     * @param filePath location of the data. Cannot be null.
+//     * @throws DataConversionException if the file is not in the correct format.
+     */
+    public Optional<ReadOnlyAddressBook> readAddressBookFromCsvFile(Path filePath) throws IOException, IllegalValueException {
+        requireNonNull(filePath);
+        FileUtil.createIfMissing(filePath);
+
+        // get the people in the addressbok
+        List<Person> persons = CsvUtil.loadCsvFile(filePath);
+//        return Optional.empty();
+
+        AddressBook addressBook = new AddressBook();
+        for (Person singlePerson : persons) {
+            if (addressBook.hasPerson(singlePerson)) {
+                throw new IllegalValueException("Persons list contains duplicate person(s).");
+            }
+            addressBook.addPerson(singlePerson);
+        }
+        return Optional.of(addressBook);
+    }
 }

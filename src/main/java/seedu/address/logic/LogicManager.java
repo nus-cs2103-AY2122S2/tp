@@ -2,11 +2,13 @@ package seedu.address.logic;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -77,5 +79,37 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public boolean saveAddressBookToCsv(Path csvFilePath) {
+        boolean result;
+        try {
+            storage.saveAddressBookToCsv(model.getAddressBook(), csvFilePath);
+            result = true;
+        } catch (IOException ioe) {
+            // throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);  // TODO
+            result = false;
+        }
+        return result;
+    }
+
+    @Override
+    public boolean loadAddressBookFromCsv(Path csvFilePath) {
+        boolean result;
+        try {
+            Optional<ReadOnlyAddressBook> ab = storage.readAddressBookFromCsvFile(csvFilePath);
+            if (ab.isPresent()) {
+                model.setAddressBook(ab.get());
+                result = true;
+            } else {
+                System.out.println("Error");
+                result = false;
+            }
+        } catch (IOException | IllegalValueException ioe) {
+            // throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);  // TODO
+            result = false;
+        }
+        return result;
     }
 }

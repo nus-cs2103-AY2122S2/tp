@@ -1,6 +1,13 @@
 package seedu.address.ui;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.logging.Logger;
+
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,6 +41,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private MessageWindow messageWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -66,6 +74,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        messageWindow = new MessageWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -147,6 +156,102 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Handles the tasks associated with allowing the user to load a file from CSV.
+     */
+    @FXML
+    public void handleLoadFromCsv() {
+        if (!Desktop.isDesktopSupported()) {
+            messageWindow.show("Desktop not supported.");
+            return;
+        }
+
+        logger.info("Loading from csv");
+        Path inputCsvFilePath = handleLoadFile();
+
+        if (inputCsvFilePath == null) {
+            return;
+        }
+        boolean isSuccess = logic.loadAddressBookFromCsv(inputCsvFilePath);
+        if (isSuccess) {
+            messageWindow.show("Loaded successfully.");
+        } else {
+            messageWindow.show("Error in loading.");
+        }
+    }
+
+    /**
+     * OHandles the tasks associated with allowing the user to save a file to CSV.
+     */
+    @FXML
+    public void handleSaveToCsv() {
+        if (!Desktop.isDesktopSupported()) {
+            messageWindow.show("Desktop not supported.");
+            return;
+        }
+
+        logger.info("Saving to csv");
+        Path outputCsvFilePath = handleSaveFile();
+
+        if (outputCsvFilePath == null) {
+            return;
+        }
+        boolean isSuccess = logic.saveAddressBookToCsv(outputCsvFilePath);
+        if (isSuccess) {
+            messageWindow.show("Saved successfully.");
+        } else {
+            messageWindow.show("Error in saving.");
+        }
+    }
+
+    public Path handleLoadFile() {
+
+        // initialise the file chooser
+        JFileChooser chooser = new JFileChooser();
+
+        // current working directory
+        File cwd = new java.io.File(".");
+
+        // chooser settings
+        chooser.setCurrentDirectory(cwd);
+        chooser.setDialogTitle("Select a ClientConnect CSV file...");
+        chooser.setAcceptAllFileFilterUsed(false);  // disable allowing acceptance of all files
+
+        // only allow CSV files
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("ClientConnect CSV files", "csv");
+        chooser.setFileFilter(filter);
+
+        // opens the dialog
+        int returnVal = chooser.showOpenDialog(null);
+        Path chosenFilePath = null;
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            chosenFilePath = chooser.getSelectedFile().toPath().toAbsolutePath();
+        }
+        return chosenFilePath;
+
+    }
+
+    public Path handleSaveFile() {
+
+        // initialise the file chooser
+        JFileChooser chooser = new JFileChooser();
+
+        chooser.setSelectedFile(new File("ClientConnectData.csv"));
+
+        // chooser settings
+        chooser.setCurrentDirectory(new java.io.File("."));
+        chooser.setDialogTitle("Save CSV file to ...");
+        chooser.setSelectedFile(new File("ClientConnectData.csv"));
+
+        // opens the dialog
+        int returnVal = chooser.showSaveDialog(null);
+        Path chosenDirectoryPath = null;
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            chosenDirectoryPath = chooser.getSelectedFile().toPath().toAbsolutePath();
+        }
+        return chosenDirectoryPath;
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -160,6 +265,7 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        messageWindow.hide();
         primaryStage.hide();
     }
 
