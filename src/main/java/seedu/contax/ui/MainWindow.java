@@ -147,14 +147,18 @@ public class MainWindow extends UiPart<Stage> {
      * @param contentType The type of content the UI should display.
      */
     private void changeListContentType(ListContentType contentType) {
-        contentListPanelPlaceholder.getChildren().clear();
-
-        if (contentType == null || contentType.equals(ListContentType.UNCHANGED)
-                || contentType.equals(currentListType)) {
+        if (contentType == null) {
+            contentListPanelPlaceholder.getChildren().clear();
             return;
         }
 
+        if (contentType.equals(ListContentType.UNCHANGED) || contentType.equals(currentListType)) {
+            return;
+        }
+
+        contentListPanelPlaceholder.getChildren().clear();
         currentListType = contentType;
+
         if (contentType == ListContentType.PERSON) {
             contentListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
         } else if (contentType == ListContentType.APPOINTMENT) {
