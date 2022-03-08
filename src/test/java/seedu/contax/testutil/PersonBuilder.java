@@ -81,7 +81,7 @@ public class PersonBuilder {
         return this;
     }
 
-    /** new Person
+    /**
      * Sets the {@code Email} of the {@code Person} that we are building.
      */
     public PersonBuilder withEmail(String email) {
