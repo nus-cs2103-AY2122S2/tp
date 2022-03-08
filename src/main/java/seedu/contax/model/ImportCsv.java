@@ -1,7 +1,5 @@
 package seedu.contax.model;
 
-import seedu.contax.model.person.Person;
-
 import static seedu.contax.commons.util.AppUtil.checkArgument;
 import static seedu.contax.commons.util.CollectionUtil.requireAllNonNull;
 

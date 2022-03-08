@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_FILE;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_TAG;
@@ -37,6 +38,10 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
+    public static final String VALID_CSV_FILEPATH = "./src/test/data/ImportCsvTest/ValidContaXFormat.csv";
+    public static final String INVALID_BAD_EXTENSION_CSV_FILEPATH = "wrongFile.txt";
+    public static final String INVALID_NO_EXTENSION_CSV_FILEPATH = "./src/test/data/ImportCsvTest/ValidContaXFormat";
+
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
@@ -56,6 +61,29 @@ public class CommandTestUtil {
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
+
+    public static final String COMMAND_VALID_CSV_FILEPATH = " " + PREFIX_FILE + VALID_CSV_FILEPATH;
+    public static final String COMMAND_INVALID_BAD_EXTENSION_FILEPATH = " " + PREFIX_FILE
+            + INVALID_BAD_EXTENSION_CSV_FILEPATH;
+    public static final String COMMAND_INVALID_NO_EXTENSION_FILEPATH = " " + PREFIX_FILE
+            + INVALID_NO_EXTENSION_CSV_FILEPATH;
+    public static final String COMMAND_CSV_NAMEPOSITION = " " + PREFIX_NAME + 1;
+    public static final String COMMAND_CSV_PHONEPOSITION = " " + PREFIX_PHONE + 2;
+    public static final String COMMAND_CSV_EMAILPOSITION = " " + PREFIX_EMAIL + 3;
+    public static final String COMMAND_CSV_ADDRESSPOSITION = " " + PREFIX_ADDRESS + 4;
+    public static final String COMMAND_CSV_TAGPOSITION = " " + PREFIX_TAG + 5;
+
+    public static final String COMMAND_CSV_INVALID_NAMEPOSITION = " " + PREFIX_NAME + "text";
+    public static final String COMMAND_CSV_INVALID_PHONEPOSITION = " " + PREFIX_PHONE + "text";
+    public static final String COMMAND_CSV_INVALID_EMAILPOSITION = " " + PREFIX_EMAIL + "text";
+    public static final String COMMAND_CSV_INVALID_ADDRESSPOSITION = " " + PREFIX_ADDRESS + "text";
+    public static final String COMMAND_CSV_INVALID_TAGPOSITION = " " + PREFIX_TAG + "text";
+
+    public static final String COMMAND_CSV_NEGATIVE_NAMEPOSITION = " " + PREFIX_NAME + -1;
+    public static final String COMMAND_CSV_NEGATIVE_PHONEPOSITION = " " + PREFIX_PHONE + -1;
+    public static final String COMMAND_CSV_NEGATIVE_EMAILPOSITION = " " + PREFIX_EMAIL + -1;
+    public static final String COMMAND_CSV_NEGATIVE_ADDRESSPOSITION = " " + PREFIX_ADDRESS + -1;
+    public static final String COMMAND_CSV_NEGATIVE_TAGPOSITION = " " + PREFIX_TAG + -1;
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
