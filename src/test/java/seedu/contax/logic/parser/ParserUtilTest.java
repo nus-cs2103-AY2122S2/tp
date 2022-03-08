@@ -37,7 +37,7 @@ public class ParserUtilTest {
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
-    private static final String INVALID_APPOINTMENT_NAME = "MEETING!";
+    private static final String INVALID_APPOINTMENT_NAME = "MEETING?";
     private static final String INVALID_DATE_SYNTAX = "2022-10-20";
     private static final String INVALID_DATE_VALUE = "32-01-2022";
     private static final String INVALID_TIME_SYNTAX = "12-22";

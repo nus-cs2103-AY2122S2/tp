@@ -67,7 +67,7 @@ public class CommandTestUtil {
     public static final String VALID_APPOINTMENT_DURATION_HOUR = "60";
     public static final String VALID_APPOINTMENT_DURATION_MINUTE = "1";
 
-    public static final String INVALID_APPOINTMENT_NAME = "Meeting!!";
+    public static final String INVALID_APPOINTMENT_NAME = "Meeting??";
     public static final String INVALID_DATE = "32-10-2022";
     public static final String INVALID_TIME = "25:30";
     public static final String INVALID_APPOINTMENT_DURATION = "-1";
