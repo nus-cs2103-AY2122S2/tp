@@ -15,8 +15,6 @@ import seedu.contax.testutil.ImportCsvObjectBuilder;
 import seedu.contax.testutil.PersonBuilder;
 
 public class ImportCsvCommandTest {
-    public static final String SKIP_CSV_FILEPATH = "./src/test/data/ImportCsvTest/SkipLineContaXFormat.csv";
-    public static final String EMPTY_CSV_FILEPATH = "./src/test/data/ImportCsvTest/EmptyFile.csv";
 
     private static final String PERSON1_NAME = "Person 1";
     private static final String PERSON1_PHONE = "12345678";
@@ -63,7 +61,7 @@ public class ImportCsvCommandTest {
     @Test
     public void execute_someBadFormatPersonsInFile_badFormatSkipped() throws Exception {
         //CSV contains Person 3 and Person 4 with invalid params, these two are skipped
-        ImportCsv skipLinesCsvFile = new ImportCsvObjectBuilder(SKIP_CSV_FILEPATH).build();
+        ImportCsv skipLinesCsvFile = new ImportCsvObjectBuilder(ImportCsvObjectBuilder.SKIP_CSV_FILEPATH).build();
         ImportCsvCommand importCsvCommand = new ImportCsvCommand(skipLinesCsvFile);
 
         //Build expecting model with Person 1, 2 and 5
@@ -114,9 +112,30 @@ public class ImportCsvCommandTest {
 
     @Test
     public void execute_emptyFile_nothingImportedButSuccess() throws Exception {
-        ImportCsv emptyCsvFile = new ImportCsvObjectBuilder(EMPTY_CSV_FILEPATH).build();
+        ImportCsv emptyCsvFile = new ImportCsvObjectBuilder(ImportCsvObjectBuilder.EMPTY_CSV_FILEPATH).build();
         ImportCsvCommand importCsvCommand = new ImportCsvCommand(emptyCsvFile);
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getSchedule(), new UserPrefs());
+        assertCommandSuccess(importCsvCommand, model, ImportCsvCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void execute_customColumnsSpecified_success() throws Exception {
+        ImportCsv specifiedColumnsCsvFile = new ImportCsvObjectBuilder(
+                ImportCsvObjectBuilder.CUSTOM_COLUMNS_CSV_FILEPATH,
+                2, 3, 4, 5, 6).build();
+        ImportCsvCommand importCsvCommand = new ImportCsvCommand(specifiedColumnsCsvFile);
+
+        //Build expecting model with Person 1 and 2
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getSchedule(), new UserPrefs());
+        PersonBuilder personBuilder1 = new PersonBuilder().withName(PERSON1_NAME)
+                .withPhone(PERSON1_PHONE).withEmail(PERSON1_EMAIL)
+                .withAddress(PERSON1_ADDRESS).withTags("tag1", "tag2");
+        expectedModel.addPerson(personBuilder1.build());
+        PersonBuilder personBuilder2 = new PersonBuilder().withName(PERSON2_NAME)
+                .withPhone(PERSON2_PHONE).withEmail(PERSON2_EMAIL)
+                .withAddress(PERSON2_ADDRESS).withTags("tag1");
+        expectedModel.addPerson(personBuilder2.build());
+
         assertCommandSuccess(importCsvCommand, model, ImportCsvCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }

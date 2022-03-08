@@ -6,6 +6,10 @@ import seedu.contax.model.ImportCsv;
 
 public class ImportCsvObjectBuilder {
     public static final String DEFAULT_FILEPATH = "./src/test/data/ImportCsvTest/ValidContaXFormat.csv";
+    public static final String SKIP_CSV_FILEPATH = "./src/test/data/ImportCsvTest/SkipLineContaXFormat.csv";
+    public static final String EMPTY_CSV_FILEPATH = "./src/test/data/ImportCsvTest/EmptyFile.csv";
+    public static final String CUSTOM_COLUMNS_CSV_FILEPATH = "./src/test/data/ImportCsvTest/CustomColumnFormat.csv";
+
     public static final int DEFAULT_NAMEPOSITION = 1;
     public static final int DEFAULT_PHONEPOSITION = 2;
     public static final int DEFAULT_EMAILPOSITION = 3;
@@ -41,6 +45,19 @@ public class ImportCsvObjectBuilder {
         emailPosition = DEFAULT_EMAILPOSITION;
         addressPosition = DEFAULT_ADDRESSPOSITION;
         tagPosition = DEFAULT_TAGPOSITION;
+    }
+
+    /**
+     * Creates a {@code ImportCsvObjectBuilder} with the specified file path, and specified positions.
+     */
+    public ImportCsvObjectBuilder(String filePath, int namePosition, int phonePosition, int emailPosition,
+                                  int addressPosition, int tagPosition) {
+        this.filePath = new File(filePath);
+        this.namePosition = namePosition;
+        this.phonePosition = phonePosition;
+        this.emailPosition = emailPosition;
+        this.addressPosition = addressPosition;
+        this.tagPosition = tagPosition;
     }
 
     public ImportCsv build() {

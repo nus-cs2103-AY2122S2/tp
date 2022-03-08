@@ -24,6 +24,12 @@ import static seedu.contax.logic.commands.CommandTestUtil.COMMAND_CSV_TAGPOSITIO
 import static seedu.contax.logic.commands.CommandTestUtil.COMMAND_INVALID_BAD_EXTENSION_FILEPATH;
 import static seedu.contax.logic.commands.CommandTestUtil.COMMAND_INVALID_NO_EXTENSION_FILEPATH;
 import static seedu.contax.logic.commands.CommandTestUtil.COMMAND_VALID_CSV_FILEPATH;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_FILE;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.contax.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.contax.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -38,7 +44,7 @@ public class ImportCsvParserTest {
 
     @Test
     public void parse_onlyFilePathPresent_success() {
-        //default positions for columns
+        //Default positions for columns
         ImportCsv expectedImportCsvObject = new ImportCsvObjectBuilder().build();
 
         assertParseSuccess(parser, COMMAND_VALID_CSV_FILEPATH, new ImportCsvCommand(expectedImportCsvObject));
@@ -46,7 +52,15 @@ public class ImportCsvParserTest {
 
     @Test
     public void parse_customParams_success() {
-        //TO-DO once the custom thing is done
+        //All columns shifted by 1
+        ImportCsv expectedImportCsvObject = new ImportCsvObjectBuilder(
+                ImportCsvObjectBuilder.CUSTOM_COLUMNS_CSV_FILEPATH,
+                2, 3, 4, 5, 6).build();
+
+        assertParseSuccess(parser, " " + PREFIX_FILE
+                + ImportCsvObjectBuilder.CUSTOM_COLUMNS_CSV_FILEPATH + " "
+                + PREFIX_NAME + "2 " + PREFIX_PHONE + "3 " + PREFIX_EMAIL + "4 "
+                + PREFIX_ADDRESS + "5 " + PREFIX_TAG + "6", new ImportCsvCommand(expectedImportCsvObject));
     }
 
     @Test
