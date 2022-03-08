@@ -129,8 +129,8 @@ public class Lab {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Lab // instanceof handles nulls
-                && labNumber == (((Lab) other).labNumber)) // state check
-                && labStatus == ((Lab) other).labStatus;
+                && labNumber == (((Lab) other).labNumber) // state check
+                && labStatus == ((Lab) other).labStatus);
     }
 
     @Override

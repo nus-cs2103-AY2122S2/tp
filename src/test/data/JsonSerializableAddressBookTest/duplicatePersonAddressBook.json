@@ -1,16 +1,20 @@
-{
+{ "masterList" : [ "1" ],
   "persons": [ {
     "name": "Alice Pauline",
     "email": "alice@example.com",
     "github": "aliceP",
     "telegram": "alice_P",
     "studentId": "A0123457C",
-    "tagged": [ "friends" ]
+    "tagged": [ "friends" ],
+    "labStatuses" : [ "UNSUBMITTED" ],
+    "labNumbers" : [ "1" ]
   }, {
     "name": "Alice Pauline",
     "email": "pauline@example.com",
     "github": "aliceP",
     "telegram": "alice_P",
-    "studentId": "A0123457C"
+    "studentId": "A0123457C",
+    "labStatuses" : [ "UNSUBMITTED" ],
+    "labNumbers" : [ "1" ]
   } ]
 }

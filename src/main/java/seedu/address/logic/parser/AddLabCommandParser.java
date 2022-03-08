@@ -1,18 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GITHUB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LAB;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
-import java.util.stream.Stream;
-
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddLabCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.lab.Lab;
@@ -31,7 +21,7 @@ public class AddLabCommandParser implements Parser<AddLabCommand> {
         try {
             ArgumentMultimap argMultimap =
                     ArgumentTokenizer.tokenize(args, PREFIX_LAB);
-            if(!isPrefixPresent(argMultimap) || !argMultimap.getPreamble().isEmpty()) {
+            if (!isPrefixPresent(argMultimap) || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLabCommand.MESSAGE_USAGE));
             }
             Lab toAdd = ParserUtil.parseLab(argMultimap.getValue(PREFIX_LAB).get());

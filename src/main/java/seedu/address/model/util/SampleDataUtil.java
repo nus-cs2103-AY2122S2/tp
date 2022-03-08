@@ -12,6 +12,8 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentId;
 import seedu.address.model.person.Telegram;
+import seedu.address.model.person.lab.Lab;
+import seedu.address.model.person.lab.LabList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -52,6 +54,18 @@ public class SampleDataUtil {
         return Arrays.stream(strings)
                 .map(Tag::new)
                 .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns a LabList containing the list of strings given.
+     */
+    public static LabList getLabSet(String... strings) {
+        LabList ll = new LabList();
+
+        ll.setLabs(Arrays.stream(strings)
+                .map(Lab::new)
+                .collect(Collectors.toList()));
+        return ll;
     }
 
 }
