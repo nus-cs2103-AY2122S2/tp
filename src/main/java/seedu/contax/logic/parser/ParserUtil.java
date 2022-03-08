@@ -144,7 +144,8 @@ public class ParserUtil {
             throw new ParseException(SearchType.SEARCH_TYPE_CONSTRAINTS);
         }
         return new SearchType(trimmedName);
-    
+    }
+
     /**
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
