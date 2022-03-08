@@ -12,7 +12,9 @@ import java.time.format.DateTimeParseException;
  */
 public class DateTimeSlot {
     private static final String MESSAGE_CONSTRAINTS =
-            "Lessons can only be created with a valid date.\nHours and minutes must be non-negative integers.";
+            "Lessons can only be created with a valid date."
+                    + "\nHours and minutes must be non-negative integer."
+                    + "\nMinutes cannot be more than 60.";
     private static final DateTimeFormatter acceptedDateFormat = DateTimeFormatter.ofPattern("d-M-y");
     private static final DateTimeFormatter acceptedStartTimeFormat = DateTimeFormatter.ofPattern("HH:mm");
 
@@ -32,7 +34,8 @@ public class DateTimeSlot {
      */
     public DateTimeSlot(LocalDateTime date, int hours, int minutes) {
         requireNonNull(date);
-        checkArgument((hours > 0 && minutes >= 0) || (hours == 0 && minutes > 0),
+        checkArgument((hours > 0 && minutes >= 0 && minutes <= 60)
+                        || (hours == 0 && minutes > 0 && minutes <= 60),
                 MESSAGE_CONSTRAINTS);
 
         dateOfLesson = date;

@@ -47,6 +47,13 @@ public class LessonTest {
     }
 
     @Test
+    public void makeTemporaryLesson_minutesMoreThan60_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () ->
+                Lesson.makeTemporaryLesson("Test Lesson", "Biology",
+                        "Blk 11 Ang Mo Kio Street 74, #11-04", d, 0, 61));
+    }
+
+    @Test
     public void makeTemporaryLesson_zeroHoursAndPositiveMinutes_instantiatesSuccessfully() {
         assertNotNull(Lesson.makeTemporaryLesson("Test Lesson", "Biology",
                 "Blk 11 Ang Mo Kio Street 74, #11-04", d, 0, 50));
