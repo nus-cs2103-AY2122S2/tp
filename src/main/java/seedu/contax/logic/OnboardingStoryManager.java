@@ -55,12 +55,12 @@ public class OnboardingStoryManager {
                 0, 0.2, 0.5, 0, 0, 0, null, null, 0));
         test.addStory(new OnboardingStep("Type 'list' and hit enter",
                 2, 0.1, 0.5, 3, 1, 1, "list", null, 0));
-        test.addStory(new OnboardingStep("Great!",
-                3, 0.2, 0.5, 1, 2, 0, null, personList.get(0), 1));
+        test.addStory(new OnboardingStep("Great! Here is Johnny's record.",
+                3, 0.2, 0.5, 4, 2, 0, null, personList.get(0), 1));
         test.addStory(new OnboardingStep("End of Quick Tour!" + CLICK_EXIT,
                 0, 0.2, 0.5, 0, 0, 0, null, null, 0));
         test.addStory(new OnboardingStep("End of Quick Tour!" + CLICK_EXIT,
-                0, 0.2, 0.5, 0, 0, 0, null, null, 2));
+                0, 0.1, 0.5, 0, 0, 0, null, null, 2));
         story = test;
     }
 
