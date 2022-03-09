@@ -7,17 +7,14 @@ import static manageezpz.logic.parser.CliSyntax.PREFIX_NAME;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_PHONE;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Set;
 import java.util.stream.Stream;
 
 import manageezpz.logic.commands.AddCommand;
 import manageezpz.logic.parser.exceptions.ParseException;
-import manageezpz.model.person.Address;
 import manageezpz.model.person.Email;
 import manageezpz.model.person.Name;
 import manageezpz.model.person.Person;
 import manageezpz.model.person.Phone;
-import manageezpz.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -41,10 +38,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, tagList);
+        Person person = new Person(name, phone, email);
 
         return new AddCommand(person);
     }
