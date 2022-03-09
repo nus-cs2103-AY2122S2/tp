@@ -1,5 +1,14 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PRICE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PRICE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REGION_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REGION_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SIZE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SIZE_BOB;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,20 +20,31 @@ import seedu.address.model.property.Property;
  */
 public class TypicalProperties {
 
-    public static final Property NORTH_1_ROOM = new PropertyBuilder().withAddress("123, Woodlands Ave 6, #08-111")
-            .withRegion("North").withSize("1-room").withPrice("$300000").build();
-    public static final Property SOUTH_2_ROOM = new PropertyBuilder().withAddress("123, Pasir Panjang Ave 6, #08-111")
-            .withRegion("South").withSize("2-room").withPrice("$400000").build();
-    public static final Property EAST_3_ROOM = new PropertyBuilder().withAddress("123, Changi Ave 6, #08-111")
+    public static final Property PROPERTY_ALICE = new PropertyBuilder().withAddress("123, Jurong West Ave 6, #08-111")
+            .withRegion("West").withSize("1-room").withPrice("$300000").build();
+    public static final Property PROPERTY_BENSON = new PropertyBuilder().withAddress("311, Clementi Ave 2, #02-25")
+            .withRegion("West").withSize("2-room").withPrice("$400000").build();
+    public static final Property PROPERTY_CARL = new PropertyBuilder().withAddress("wall street")
             .withRegion("East").withSize("3-room").withPrice("$500000").build();
-    public static final Property WEST_4_ROOM = new PropertyBuilder().withAddress("123, Jurong West Ave 6, #08-111")
-            .withRegion("West").withSize("4-room").withPrice("$600000").build();
-    public static final Property CENTRAL_5_ROOM = new PropertyBuilder().withAddress("123, Bukit Timah Ave 6, #08-111")
-            .withRegion("West").withSize("5-room").withPrice("$700000").build();
+    public static final Property PROPERTY_DANIEL = new PropertyBuilder().withAddress("10th street")
+            .withRegion("South").withSize("4-room").withPrice("$600000").build();
+    public static final Property PROPERTY_ELLE = new PropertyBuilder().withAddress("michegan ave")
+            .withRegion("North").withSize("5-room").withPrice("$700000").build();
+    public static final Property PROPERTY_FIONA = new PropertyBuilder().withAddress("little tokyo")
+            .withRegion("East").withSize("5-room").withPrice("$800000").build();
+    public static final Property PROPERTY_GEORGE = new PropertyBuilder().withAddress("4th street")
+            .withRegion("Central").withSize("5-room").withPrice("$900000").build();
+
+    // Manually added - Property's details found in {@code CommandTestUtil}
+    public static final Property PROPERTY_AMY = new PropertyBuilder().withAddress(VALID_ADDRESS_AMY)
+            .withRegion(VALID_REGION_AMY).withSize(VALID_SIZE_AMY).withPrice(VALID_PRICE_AMY).build();
+    public static final Property PROPERTY_BOB = new PropertyBuilder().withAddress(VALID_ADDRESS_BOB)
+            .withRegion(VALID_REGION_BOB).withSize(VALID_SIZE_BOB).withPrice(VALID_PRICE_BOB).build();
 
     private TypicalProperties() {} // prevents instantiation
 
     public static List<Property> getTypicalProperties() {
-        return new ArrayList<>(Arrays.asList(NORTH_1_ROOM, SOUTH_2_ROOM, EAST_3_ROOM, WEST_4_ROOM, CENTRAL_5_ROOM));
+        return new ArrayList<>(Arrays.asList(PROPERTY_ALICE, PROPERTY_BENSON, PROPERTY_CARL, PROPERTY_DANIEL,
+                        PROPERTY_ELLE, PROPERTY_FIONA, PROPERTY_GEORGE));
     }
 }
