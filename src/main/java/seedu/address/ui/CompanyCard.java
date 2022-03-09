@@ -106,6 +106,7 @@ public class CompanyCard extends UiPart<Region> {
         } else {
             roleListPanel = new RoleListPanel(roleList);
             roleListPanelPlaceholder.getChildren().add(roleListPanel.getRoot());
+            roleListPanelPlaceholder.setManaged(true);
         }
     }
 
