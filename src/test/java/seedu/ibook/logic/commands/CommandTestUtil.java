@@ -10,15 +10,14 @@ import static seedu.ibook.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.ibook.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import seedu.ibook.commons.core.index.Index;
 import seedu.ibook.logic.commands.exceptions.CommandException;
 import seedu.ibook.model.IBook;
 import seedu.ibook.model.Model;
-import seedu.ibook.model.product.NameContainsKeywordsPredicate;
 import seedu.ibook.model.product.Product;
+import seedu.ibook.model.product.ProductFulfillsFiltersPredicate;
 
 /**
  * Contains helper methods for testing commands.
@@ -125,8 +124,9 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredProductList().size());
 
         Product product = model.getFilteredProductList().get(targetIndex.getZeroBased());
-        final String[] splitName = product.getName().fullName.split("\\s+");
-        model.updateFilteredProductList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredProductList(
+                new ProductFulfillsFiltersPredicate(product.getName(), product.getCategory(),
+                        product.getExpiryDate(), product.getDescription(), product.getPrice()));
 
         assertEquals(1, model.getFilteredProductList().size());
     }

@@ -4,12 +4,17 @@ import static seedu.ibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ibook.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.ibook.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
-import java.util.Arrays;
+import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.ibook.logic.commands.FindCommand;
-import seedu.ibook.model.product.NameContainsKeywordsPredicate;
+import seedu.ibook.model.product.Category;
+import seedu.ibook.model.product.Description;
+import seedu.ibook.model.product.ExpiryDate;
+import seedu.ibook.model.product.Name;
+import seedu.ibook.model.product.Price;
+import seedu.ibook.model.product.ProductFulfillsFiltersPredicate;
 
 public class FindCommandParserTest {
 
@@ -17,18 +22,35 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_validArgs_returnsFindCommand() {
+
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
-                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
-        assertParseSuccess(parser, "Alice Bob", expectedFindCommand);
+                new FindCommand(new ProductFulfillsFiltersPredicate(
+                        new Name("Maggi"),
+                        new Category("noodles"),
+                        new ExpiryDate(LocalDate.parse("2022-01-01")),
+                        new Description("tasty"),
+                        new Price(3.00)));
+        assertParseSuccess(parser, " n: Maggi c: noodles e: 2022-01-01 d: tasty p: 3.00", expectedFindCommand);
 
-        // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindCommand);
+        // with null values
+        FindCommand expectedFindCommand2 =
+                new FindCommand(new ProductFulfillsFiltersPredicate(
+                        new Name("Maggi"),
+                        null,
+                        new ExpiryDate(LocalDate.parse("2022-01-01")),
+                        null,
+                        new Price(3.00))
+                );
+
+        assertParseSuccess(parser, " n: Maggi e: 2022-01-01 p: 3.00", expectedFindCommand2);
+
+
     }
 
 }
