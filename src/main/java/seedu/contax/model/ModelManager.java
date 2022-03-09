@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.contax.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
