@@ -26,15 +26,15 @@ public class ClassGroupCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    private Label name;
-    @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private Label classId;
     @FXML
-    private Label address;
+    private Label classType;
     @FXML
-    private Label email;
+    private Label moduleCode;
+    @FXML
+    private Label moduleName;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -43,10 +43,10 @@ public class ClassGroupCard extends UiPart<Region> {
         super(FXML);
         this.classGroup = classGroup;
         id.setText(displayedIndex + ". ");
-        name.setText("name");
-        phone.setText("phone");
-        address.setText("address");
-        email.setText("email");
+        classId.setText(classGroup.getClassGroupId().value);
+        classType.setText(classGroup.getClassGroupType().toString());
+        moduleCode.setText(classGroup.getModule().getModuleCode().value);
+        moduleName.setText(classGroup.getModule().getModuleName().value);
     }
 
     @Override

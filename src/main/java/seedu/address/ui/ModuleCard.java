@@ -30,11 +30,7 @@ public class ModuleCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
-    @FXML
-    private Label address;
-    @FXML
-    private Label email;
+    private Label code;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -43,10 +39,8 @@ public class ModuleCard extends UiPart<Region> {
         super(FXML);
         this.module = module;
         id.setText(displayedIndex + ". ");
-        name.setText("name");
-        phone.setText("phone");
-        address.setText("address");
-        email.setText("email");
+        code.setText(module.getModuleCode().value);
+        name.setText(module.getModuleName().value);
     }
 
     @Override
