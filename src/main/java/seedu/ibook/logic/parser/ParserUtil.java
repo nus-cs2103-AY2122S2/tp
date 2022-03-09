@@ -2,7 +2,7 @@ package seedu.ibook.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Optional;
+import java.time.format.DateTimeParseException;
 
 import seedu.ibook.commons.core.index.Index;
 import seedu.ibook.commons.util.StringUtil;
@@ -54,13 +54,9 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code category} is invalid.
      */
-    public static Category parseCategory(Optional<String> category) throws ParseException {
-        // An empty category would be classified as miscellaneous
-        if (category.isEmpty()) {
-            return new Category("Miscellaneous");
-        }
-
-        String trimmedCategory = category.get().trim();
+    public static Category parseCategory(String category) throws ParseException {
+        requireNonNull(category);
+        String trimmedCategory = category.trim();
         if (!Category.isValidCategoryName(trimmedCategory)) {
             throw new ParseException(Category.MESSAGE_CONSTRAINTS);
         }
@@ -90,11 +86,15 @@ public class ParserUtil {
      */
     public static ExpiryDate parseExpiryDate(String expiryDate) throws ParseException {
         requireNonNull(expiryDate);
-        String trimmedExpiryDate = expiryDate.trim();
-        if (!ExpiryDate.isValidExpiryDate(trimmedExpiryDate)) {
+        try {
+            if (!ExpiryDate.isValidExpiryDate(expiryDate)) {
+                throw new ParseException(ExpiryDate.MESSAGE_CONSTRAINTS);
+            }
+            return new ExpiryDate(expiryDate);
+        } catch (DateTimeParseException e) {
             throw new ParseException(ExpiryDate.MESSAGE_CONSTRAINTS);
         }
-        return new ExpiryDate(trimmedExpiryDate);
+
     }
 
     /**
@@ -106,11 +106,10 @@ public class ParserUtil {
     public static Price parsePrice(String price) throws ParseException {
         requireNonNull(price);
         try {
-            Double parsedPrice = Double.parseDouble(price);
-            if (!Price.isValidPrice(parsedPrice)) {
+            if (!Price.isValidPrice(price)) {
                 throw new ParseException(Price.MESSAGE_CONSTRAINTS);
             }
-            return new Price(parsedPrice);
+            return new Price(price);
         } catch (NumberFormatException e) {
             throw new ParseException(Price.MESSAGE_CONSTRAINTS);
         }

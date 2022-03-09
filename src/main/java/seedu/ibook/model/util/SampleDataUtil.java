@@ -20,8 +20,9 @@ import seedu.ibook.model.tag.Tag;
 public class SampleDataUtil {
     public static Product[] getSampleProducts() {
         return new Product[] {
-            new Product(new Name("Maggie Mee"), new Category("Noodles"), new ExpiryDate("2022-01-01"),
-                new Description("noodles for all"), new Price(1.99))
+            new Product(new Name("Maggie Mee"), new Category("Noodles"),
+                new ExpiryDate("2022-12-13"),
+                new Description(""), new Price("1.99"))
         };
     }
 
