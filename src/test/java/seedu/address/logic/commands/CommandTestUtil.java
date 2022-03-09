@@ -3,9 +3,13 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STIPEND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -30,7 +34,7 @@ public class CommandTestUtil {
 
     public static final Predicate<Role> PREDICATE_SHOW_ALL_ROLES = unused -> true;
 
-    public static final String VALID_DEADLINE_SOFTWARE_ENGINEER = "01-01-2021 00:00";
+    public static final String VALID_DEADLINE_SOFTWARE_ENGINEER = "01-01-2023 00:00";
     public static final String VALID_NAME_SOFTWARE_ENGINEER = "Software engineer";
     public static final String VALID_STIPEND_SOFTWARE_ENGINEER = "8888";
     public static final String VALID_STATUS_SOFTWARE_ENGINEER = "offered";
@@ -57,6 +61,26 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_WHATSAPP = " " + PREFIX_ADDRESS + VALID_ADDRESS_WHATSAPP;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+
+    public static final String INDEX_DESC_SOFTWARE_ENGINEER = " 1";
+    public static final String NAME_DESC_SOFTWARE_ENGINEER = " " + PREFIX_NAME + VALID_NAME_SOFTWARE_ENGINEER;
+    public static final String STATUS_DESC_SOFTWARE_ENGINEER = " " + PREFIX_STATUS + VALID_STATUS_SOFTWARE_ENGINEER;
+    public static final String DEADLINE_DESC_SOFTWARE_ENGINEER =
+            " " + PREFIX_DEADLINE + VALID_DEADLINE_SOFTWARE_ENGINEER;
+    public static final String DESCRIPTION_DESC_SOFTWARE_ENGINEER =
+            " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_SOFTWARE_ENGINEER;
+    public static final String STIPEND_DESC_SOFTWARE_ENGINEER =
+            " " + PREFIX_STIPEND + VALID_STIPEND_SOFTWARE_ENGINEER;
+
+    public static final String INVALID_INDEX_DESC = " "; // '@' not allowed in names
+    public static final String INVALID_RNAME_DESC = " " + PREFIX_NAME + "Softw@re Engineer"; // '@' not allowed in names
+    public static final String INVALID_STATUS_DESC = " " + PREFIX_STATUS + "dont know"; // only predefined are allowed
+    public static final String INVALID_DEADLINE_DESC =
+            " " + PREFIX_DEADLINE + "01-01-1999 00:00"; // datelines that are in the past are not allowed
+    public static final String INVALID_DESCRIPTION_DESC =
+            " " + PREFIX_DESCRIPTION + "Fronte^d"; // '^' not allowed in description
+    public static final String INVALID_STIPEND_DESC = " " + PREFIX_STIPEND + "one thousand"; // non-integers not allowed
+
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones

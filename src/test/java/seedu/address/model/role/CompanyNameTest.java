@@ -1,10 +1,12 @@
-package seedu.address.model.company;
+package seedu.address.model.role;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.address.model.company.CompanyName;
 
 public class CompanyNameTest {
 

@@ -1,8 +1,10 @@
-package seedu.address.model.company;
+package seedu.address.model.role;
 
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.address.model.company.Address;
 
 public class AddressTest {
 
