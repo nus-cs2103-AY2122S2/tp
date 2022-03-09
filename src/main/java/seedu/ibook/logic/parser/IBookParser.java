@@ -1,6 +1,5 @@
 package seedu.ibook.logic.parser;
 
-//import static seedu.ibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ibook.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.regex.Matcher;
@@ -12,6 +11,7 @@ import seedu.ibook.logic.commands.DeleteCommand;
 import seedu.ibook.logic.commands.ExitCommand;
 import seedu.ibook.logic.commands.FindCommand;
 import seedu.ibook.logic.commands.ListCommand;
+import seedu.ibook.logic.commands.UpdateCommand;
 import seedu.ibook.logic.parser.exceptions.ParseException;
 
 /**
@@ -33,12 +33,10 @@ public class IBookParser {
      */
     public Command parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
-        /*
-        if (!matcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
-        }
 
-         */
+        if (!matcher.matches()) {
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+        }
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
@@ -49,6 +47,9 @@ public class IBookParser {
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
+
+        case UpdateCommand.COMMAND_WORD:
+            return new UpdateCommandParser().parse(arguments);
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
