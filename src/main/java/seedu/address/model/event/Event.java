@@ -6,7 +6,6 @@ import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.model.person.Description;
@@ -15,7 +14,7 @@ import seedu.address.model.person.Person;
 
 /**
  * Represents an Event in Amigos.
- * Guarantees: compulsory fields are present and not null, field values are validated, immutable.
+ * Guarantees: fields are present and not null, field values are validated, immutable.
  */
 public class Event {
 
@@ -28,31 +27,18 @@ public class Event {
     private final Set<Person> friends = new HashSet<>();
 
     /**
-     * Constructor for event with a description field.
+     * Constructor for event.
      *
      * @param name        name of event
      * @param description description of event
      * @param dateTime    date and time of event
+     * @param friends     set of friends linked with the event.
      */
     public Event(Name name, DateTime dateTime, Description description, Set<Person> friends) {
         requireAllNonNull(name, dateTime, description, friends);
         this.name = name;
         this.dateTime = dateTime;
         this.description = description;
-        this.friends.addAll(friends);
-    }
-
-    /**
-     * Constructor for event without a description field.
-     *
-     * @param name     name of event
-     * @param dateTime date and time of event
-     */
-    public Event(Name name, DateTime dateTime, Set<Person> friends) {
-        requireAllNonNull(name, dateTime, friends);
-        this.name = name;
-        this.dateTime = dateTime;
-        this.description = null;
         this.friends.addAll(friends);
     }
 
@@ -68,8 +54,8 @@ public class Event {
         return dateTime;
     }
 
-    public Optional<Description> getDescription() {
-        return Optional.ofNullable(description);
+    public Description getDescription() {
+        return description;
     }
 
     /**
@@ -130,10 +116,9 @@ public class Event {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
                 .append("; DateTime: ")
-                .append(getDateTime());
-        if (description != null) {
-            builder.append("; Description: ").append(getDescription());
-        }
+                .append(getDateTime())
+                .append("; Description: ")
+                .append(getDescription());
         Set<Person> friends = getFriends();
         if (!friends.isEmpty()) {
             builder.append("; Friends: ");
