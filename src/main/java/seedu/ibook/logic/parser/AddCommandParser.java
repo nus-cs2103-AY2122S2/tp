@@ -1,6 +1,5 @@
 package seedu.ibook.logic.parser;
 
-/*
 import static seedu.ibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
@@ -8,21 +7,17 @@ import static seedu.ibook.logic.parser.CliSyntax.PREFIX_EXPIRY_DATE;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_PRICE;
 
-import java.util.Set;
-
- */
 import java.util.stream.Stream;
 
 import seedu.ibook.logic.commands.AddCommand;
 import seedu.ibook.logic.parser.exceptions.ParseException;
-/*
 import seedu.ibook.model.product.Category;
 import seedu.ibook.model.product.Description;
 import seedu.ibook.model.product.ExpiryDate;
 import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Price;
+import seedu.ibook.model.product.Product;
 
- */
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -35,26 +30,24 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
-        /*
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+            ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_CATEGORY, PREFIX_EXPIRY_DATE, PREFIX_DESCRIPTION,
+                PREFIX_PRICE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
-                || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_EXPIRY_DATE, PREFIX_DESCRIPTION, PREFIX_PRICE)
+            || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Category category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
+        ExpiryDate expiryDate = ParserUtil.parseExpiryDate(argMultimap.getValue(PREFIX_EXPIRY_DATE).get());
+        Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
+        Price price = ParserUtil.parsePrice(argMultimap.getValue(PREFIX_PRICE).get());
 
-        Person person = new Person(name, phone, email, address, tagList);
+        Product product = new Product(name, category, expiryDate, description, price);
 
-        return new AddCommand(person);
-         */
-        return new AddCommand(null);
+        return new AddCommand(product);
     }
 
     /**

@@ -1,53 +1,44 @@
 package seedu.ibook.testutil;
 
-/*
-import static seedu.ibook.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.ibook.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.ibook.logic.parser.CliSyntax.PREFIX_CATEGORY;
+import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.ibook.logic.parser.CliSyntax.PREFIX_EXPIRY_DATE;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.ibook.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.ibook.logic.parser.CliSyntax.PREFIX_TAG;
-
-
-
-import java.util.Set;
+import static seedu.ibook.logic.parser.CliSyntax.PREFIX_PRICE;
 
 import seedu.ibook.logic.commands.AddCommand;
-import seedu.ibook.model.person.Person;
-import seedu.ibook.model.tag.Tag;
-
- */
+import seedu.ibook.model.product.Product;
 
 /**
- * A utility class for Person.
+ * A utility class for Product.
  */
 public class ProductUtil {
-/*
     /**
-     * Returns an add command string for adding the {@code person}.
+     * Returns an add command string for adding the {@code product}.
+     */
 
-    public static String getAddCommand(Person person) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(person);
+    public static String getAddCommand(Product product) {
+        return AddCommand.COMMAND_WORD + " " + getProductDetails(product);
     }
 
     /**
-     * Returns the part of command string for the given {@code person}'s details.
+     * Returns the part of command string for the given {@code product}'s details.
+     */
 
-    public static String getPersonDetails(Person person) {
+    public static String getProductDetails(Product product) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + person.getName().fullName + " ");
-        sb.append(PREFIX_PHONE + person.getPhone().value + " ");
-        sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
-        sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
-        person.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.tagName + " ")
-        );
+        sb.append(PREFIX_NAME + product.getName().toString() + " ");
+        sb.append(PREFIX_CATEGORY + product.getCategory().toString() + " ");
+        sb.append(PREFIX_EXPIRY_DATE + product.getExpiryDate().toString() + " ");
+        sb.append(PREFIX_DESCRIPTION + product.getDescription().toString() + " ");
+        sb.append(PREFIX_PRICE + product.getPrice().toString() + " ");
         return sb.toString();
     }
-
+    /*
     /**
-     * Returns the part of command string for the given {@code EditPersonDescriptor}'s details.
+     * Returns the part of command string for the given {@code EditProductDescriptor}'s details.
 
-    public static String getEditPersonDescriptorDetails(EditPersonDescriptor descriptor) {
+    public static String getEditProductDescriptorDetails(EditProductDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));

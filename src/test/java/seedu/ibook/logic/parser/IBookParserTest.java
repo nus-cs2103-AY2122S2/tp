@@ -19,23 +19,21 @@ import seedu.ibook.logic.commands.ExitCommand;
 import seedu.ibook.logic.commands.FindCommand;
 import seedu.ibook.logic.commands.ListCommand;
 import seedu.ibook.logic.parser.exceptions.ParseException;
-import seedu.ibook.model.person.NameContainsKeywordsPredicate;
-import seedu.ibook.model.person.Person;
-import seedu.ibook.testutil.EditPersonDescriptorBuilder;
-import seedu.ibook.testutil.PersonBuilder;
-import seedu.ibook.testutil.PersonUtil;
-
+import seedu.ibook.model.product.NameContainsKeywordsPredicate;
+import seedu.ibook.model.product.Product;
+import seedu.ibook.testutil.EditProductDescriptorBuilder;
+import seedu.ibook.testutil.ProductBuilder;
+import seedu.ibook.testutil.ProductUtil;
  */
 
-public class AddressBookParserTest {
+public class IBookParserTest {
+    private final IBookParser parser = new IBookParser();
     /*
-    private final AddressBookParser parser = new AddressBookParser();
-
     @Test
     public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddCommand(person), command);
+        Product product = new ProductBuilder().build();
+        AddCommand command = (AddCommand) parser.parseCommand(ProductUtil.getAddCommand(product));
+        assertEquals(new AddCommand(product), command);
     }
 
     @Test
@@ -53,10 +51,10 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Person person = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        Product product = new ProductBuilder().build();
+        EditProductDescriptor descriptor = new EditProductDescriptorBuilder(product).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+                + INDEX_FIRST_PERSON.getOneBased() + " " + ProductUtil.getEditProductDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 

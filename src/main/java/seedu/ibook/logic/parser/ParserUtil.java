@@ -2,11 +2,9 @@ package seedu.ibook.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-/*
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
- */
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import seedu.ibook.commons.core.index.Index;
 import seedu.ibook.commons.util.StringUtil;
 import seedu.ibook.logic.parser.exceptions.ParseException;
@@ -88,15 +86,17 @@ public class ParserUtil {
      * @throws ParseException if the given {@code expiryDate} is invalid.
      */
     public static ExpiryDate parseExpiryDate(String expiryDate) throws ParseException {
-        /*
         requireNonNull(expiryDate);
-        LocalDate trimmedExpiryDate = expiryDate.trim();
-        if (!ExpiryDate.isValidExpiryDate(trimmedExpiryDate)) {
+        try {
+            LocalDate parsedExpiryDate = LocalDate.parse(expiryDate);
+            if (!ExpiryDate.isValidExpiryDate(parsedExpiryDate)) {
+                throw new ParseException(ExpiryDate.MESSAGE_CONSTRAINTS);
+            }
+            return new ExpiryDate(parsedExpiryDate);
+        } catch (DateTimeParseException e) {
             throw new ParseException(ExpiryDate.MESSAGE_CONSTRAINTS);
         }
 
-         */
-        return new ExpiryDate(null);
     }
 
     /**
@@ -106,14 +106,15 @@ public class ParserUtil {
      * @throws ParseException if the given {@code price} is invalid.
      */
     public static Price parsePrice(String price) throws ParseException {
-        /*
         requireNonNull(price);
-        String trimmedPrice = price.trim();
-        if (!Price.isValidPrice(trimmedPrice)) {
+        try {
+            Double parsedPrice = Double.parseDouble(price);
+            if (!Price.isValidPrice(parsedPrice)) {
+                throw new ParseException(Price.MESSAGE_CONSTRAINTS);
+            }
+            return new Price(parsedPrice);
+        } catch (NumberFormatException e) {
             throw new ParseException(Price.MESSAGE_CONSTRAINTS);
         }
-
-         */
-        return new Price(null);
     }
 }
