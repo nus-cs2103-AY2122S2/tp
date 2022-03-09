@@ -11,6 +11,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -25,7 +27,17 @@ import seedu.address.model.person.Person;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model;
+
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    }
+
+    @AfterEach
+    public void tearDown() {
+        model = null;
+    }
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -110,8 +122,7 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(
                 new Index[]{INDEX_FIRST_PERSON, INDEX_SECOND_PERSON, INDEX_THIRD_PERSON});
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_MULTIPLE_PERSON_SUCCESS,
-                personsToDelete);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_MULTIPLE_PERSON_SUCCESS, personsToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         // Order below does not affect deletion, it is done by name of person.
