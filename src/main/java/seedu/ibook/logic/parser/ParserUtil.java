@@ -4,7 +4,9 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.Optional;
 
+import seedu.ibook.commons.core.Version;
 import seedu.ibook.commons.core.index.Index;
 import seedu.ibook.commons.util.StringUtil;
 import seedu.ibook.logic.parser.exceptions.ParseException;
@@ -55,9 +57,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code category} is invalid.
      */
-    public static Category parseCategory(String category) throws ParseException {
-        requireNonNull(category);
-        String trimmedCategory = category.trim();
+    public static Category parseCategory(Optional<String> category) throws ParseException {
+        // An empty category would be classified as miscellaneous
+        if (category.isEmpty()) {
+            return new Category("Miscellaneous");
+        }
+
+        String trimmedCategory = category.get().trim();
         if (!Category.isValidCategoryName(trimmedCategory)) {
             throw new ParseException(Category.MESSAGE_CONSTRAINTS);
         }
