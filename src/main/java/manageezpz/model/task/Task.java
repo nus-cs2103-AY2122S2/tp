@@ -1,23 +1,23 @@
 package manageezpz.model.task;
 
-import manageezpz.model.person.Person;
+import static manageezpz.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 import java.util.Objects;
 
-import static manageezpz.commons.util.CollectionUtil.requireAllNonNull;
+import manageezpz.model.person.Person;
 
 /**
  * Represents the Tasks a user could create. A <code> Task </code> object would correspond to a task
  * inputted by a user either a Todo, Deadline or Event.
  */
 public class Task {
+    protected boolean isDone;
 
     // Identity fields
     private final Description taskDescription;
 
     // Data fields
-    protected boolean isDone;
     private List<Person> assignees; //List of Strings as of now, V1.3 will incorporate Persons (assign tasks to Persons)
 
     /**

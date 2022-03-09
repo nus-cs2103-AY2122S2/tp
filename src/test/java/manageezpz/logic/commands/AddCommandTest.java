@@ -21,6 +21,7 @@ import manageezpz.model.Model;
 import manageezpz.model.ReadOnlyAddressBook;
 import manageezpz.model.ReadOnlyUserPrefs;
 import manageezpz.model.person.Person;
+import manageezpz.model.task.Task;
 import manageezpz.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -147,6 +148,32 @@ public class AddCommandTest {
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void addTask(Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteTask(Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void markTask(Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void unmarkTask(Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void findTask(Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**

@@ -67,6 +67,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /// task-level operations
+
+    /**
+     * Returns true if a task with the same identity as {@code task} exists in the task list.
+     * @param task the task to be checked.
+     * @return true if same identity otherwise false
+     */
     public boolean hasTask(Task task) {
         requireNonNull(task);
         return tasks.contains(task);
