@@ -24,10 +24,10 @@ import seedu.ibook.model.product.Product;
 public class TypicalProducts {
     public static final Product KAYA_BREAD = new ProductBuilder().withName("Kaya Bread")
         .withCategory("Bread").withExpiryDate("2022-03-08")
-        .withCategory("Bread").withExpiryDate("2022-03-08")
         .withDescription("Kaya on bread")
         .withPrice("1.99").build();
     public static final Product PEANUT_BUTTER_BREAD = new ProductBuilder().withName("Peanut Butter Bread")
+        .withCategory("Bread").withExpiryDate("2022-03-08")
         .withDescription("Peanut Butter on bread")
         .withPrice("1.99").build();
     public static final Product CHOCOLATE_BREAD = new ProductBuilder().withName("Chocolate Bread")

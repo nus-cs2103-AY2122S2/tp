@@ -1,0 +1,15 @@
+{
+  "products" : [ {
+    "name" : "Valid product",
+    "category" : "Bread",
+    "expiryDate" : "2022-03-08",
+    "description" : "Valid product",
+    "price" : "1.99"
+  }, {
+    "name" : "Invalid product with negative price",
+    "category" : "Bread",
+    "expiryDate" : "2022-03-08",
+    "description" : "Negative price",
+    "price" : "-3.99"
+  } ]
+}
