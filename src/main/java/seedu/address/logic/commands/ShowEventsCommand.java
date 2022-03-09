@@ -19,4 +19,14 @@ public class ShowEventsCommand extends Command {
         requireNonNull(model);
         return new CommandResult(MESSAGE_SUCCESS, false, false, true);
     }
+
+    @Override
+    public String toString() {
+        return COMMAND_WORD;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return (other instanceof ShowEventsCommand);
+    }
 }
