@@ -50,15 +50,6 @@ public class PersonTest {
         assertFalse(BOB.isSamePerson(editedBob));
     }
 
-    // @Test
-    // public void updateTags() {
-    //     Person modifiedAlice = ALICE.updateTags(new HashSet<>());
-    //
-    //     Person expectedAlice = new PersonBuilder(ALICE).withTags().build();
-    //
-    //     assertEquals(modifiedAlice, expectedAlice);
-    // }
-
     @Test
     public void equals() {
         // same values -> returns true
