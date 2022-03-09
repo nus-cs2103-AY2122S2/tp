@@ -29,14 +29,15 @@ public class NameTest {
         // invalid name
         assertFalse(Name.isValidName("")); // empty string
         assertFalse(Name.isValidName(" ")); // spaces only
-        assertFalse(Name.isValidName("^")); // only non-alphanumeric characters
-        assertFalse(Name.isValidName("work*")); // contains non-alphanumeric characters
+        assertFalse(Name.isValidName("^")); // invalid non-alphanumeric characters
+        assertFalse(Name.isValidName("work?")); // contains invalid non-alphanumeric characters
 
         // valid name
         assertTrue(Name.isValidName("work meeting")); // alphabets only
         assertTrue(Name.isValidName("12345")); // numbers only
         assertTrue(Name.isValidName("2nd work meeting")); // alphanumeric characters
         assertTrue(Name.isValidName("IMPORTANT work meeting")); // with capital letters
+        assertTrue(Name.isValidName(".,!@#$%&*() aB1")); // Contains only valid symbols
         assertTrue(Name.isValidName("Very important meeting with some Client 2")); // long names
     }
 

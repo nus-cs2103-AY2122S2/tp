@@ -16,6 +16,7 @@ import seedu.contax.logic.Logic;
 import seedu.contax.logic.commands.CommandResult;
 import seedu.contax.logic.commands.exceptions.CommandException;
 import seedu.contax.logic.parser.exceptions.ParseException;
+import seedu.contax.ui.onboarding.OnboardingPrompt;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -33,9 +34,11 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private AppointmentListPanel appointmentListPanel;
+    private TagListPanel tagListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
+    private OnboardingPrompt onboardingPrompt;
     // Flag indicating the type of model currently being displayed in the contentList
     private ListContentType currentListType;
 
@@ -44,6 +47,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private MenuItem helpMenuItem;
+
+    @FXML
+    private MenuItem onboardingMenuItem;
 
     @FXML
     private StackPane contentListPanelPlaceholder;
@@ -70,6 +76,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        onboardingPrompt = new OnboardingPrompt(primaryStage);
     }
 
     public Stage getPrimaryStage() {
@@ -78,6 +85,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(onboardingMenuItem, KeyCombination.valueOf("F2"));
     }
 
     /**
@@ -116,6 +124,7 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         appointmentListPanel = new AppointmentListPanel(logic.getAppointmentList());
+        tagListPanel = new TagListPanel(logic.getTagList());
         changeListContentType(ListContentType.PERSON);
 
         resultDisplay = new ResultDisplay();
@@ -162,6 +171,8 @@ public class MainWindow extends UiPart<Stage> {
             contentListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
         } else if (contentType == ListContentType.APPOINTMENT) {
             contentListPanelPlaceholder.getChildren().add(appointmentListPanel.getRoot());
+        } else if (contentType == ListContentType.TAG) {
+            contentListPanelPlaceholder.getChildren().add(tagListPanel.getRoot());
         }
     }
 
@@ -175,6 +186,14 @@ public class MainWindow extends UiPart<Stage> {
         } else {
             helpWindow.focus();
         }
+    }
+
+    /**
+     * Sets and opens the onboarding guide window and hides the main window
+     */
+    @FXML
+    public void handleOnboarding() {
+        onboardingPrompt.show();
     }
 
     void show() {

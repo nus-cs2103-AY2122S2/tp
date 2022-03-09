@@ -2,6 +2,7 @@ package seedu.contax.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+import static seedu.contax.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_NAME;
 import static seedu.contax.storage.JsonAdaptedAppointment.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.contax.testutil.Assert.assertThrows;
 import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALICE;
@@ -20,7 +21,6 @@ import seedu.contax.model.appointment.StartDateTime;
 public class JsonAdaptedAppointmentTest {
     private static final AddressBook addressBook = getTypicalAddressBook();
 
-    private static final String INVALID_NAME = "Meeting!!!";
     private static final String INVALID_START_DATETIME = "2022-12-2212:39";
     private static final int INVALID_DURATION = -1;
     private static final String INVALID_PERSON = "Bobby";
@@ -40,8 +40,8 @@ public class JsonAdaptedAppointmentTest {
 
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
-        JsonAdaptedAppointment appointment =
-                new JsonAdaptedAppointment(INVALID_NAME, VALID_START_DATETIME, VALID_DURATION, VALID_PERSON);
+        JsonAdaptedAppointment appointment = new JsonAdaptedAppointment(INVALID_APPOINTMENT_NAME,
+                VALID_START_DATETIME, VALID_DURATION, VALID_PERSON);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, ()
             -> appointment.toModelType(addressBook));

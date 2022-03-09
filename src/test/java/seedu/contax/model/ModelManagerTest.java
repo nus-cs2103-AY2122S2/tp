@@ -7,8 +7,11 @@ import static seedu.contax.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.contax.testutil.Assert.assertThrows;
 import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALICE;
 import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALONE;
+import static seedu.contax.testutil.TypicalAppointments.getTypicalSchedule;
 import static seedu.contax.testutil.TypicalPersons.ALICE;
 import static seedu.contax.testutil.TypicalPersons.BENSON;
+import static seedu.contax.testutil.TypicalPersons.BOB;
+import static seedu.contax.testutil.TypicalPersons.CARL;
 import static seedu.contax.testutil.TypicalTags.CLIENTS;
 import static seedu.contax.testutil.TypicalTags.FAMILY;
 
@@ -22,6 +25,7 @@ import seedu.contax.commons.core.GuiSettings;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.appointment.exceptions.AppointmentNotFoundException;
 import seedu.contax.model.person.NameContainsKeywordsPredicate;
+import seedu.contax.model.person.exceptions.PersonNotFoundException;
 import seedu.contax.testutil.AddressBookBuilder;
 import seedu.contax.testutil.AppointmentBuilder;
 import seedu.contax.testutil.ScheduleBuilder;
@@ -109,6 +113,87 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void deletePerson_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.deletePerson(null));
+    }
+
+    @Test
+    public void deletePerson_personNotInAddressBook_throwsPersonNotFoundException() {
+        assertThrows(PersonNotFoundException.class, () -> modelManager.deletePerson(ALICE));
+    }
+
+    @Test
+    public void deletePerson_personInAddressBookNoAppointments_success() {
+        modelManager.addPerson(ALICE);
+        modelManager.addPerson(BOB);
+        modelManager.deletePerson(ALICE);
+
+        ModelManager expectedModel = new ModelManager();
+        expectedModel.addPerson(BOB);
+        assertEquals(expectedModel, modelManager);
+    }
+
+    @Test
+    public void deletePerson_personInAddressBookHasAppointments_success() {
+        modelManager.addPerson(ALICE);
+        modelManager.addPerson(BOB);
+        modelManager.addAppointment(APPOINTMENT_ALICE);
+        Appointment appointment2 = new AppointmentBuilder(APPOINTMENT_ALONE).withPerson(BOB).build();
+        modelManager.addAppointment(appointment2);
+
+        modelManager.deletePerson(ALICE);
+
+        ModelManager expectedModel = new ModelManager();
+        expectedModel.addPerson(BOB);
+        expectedModel.addAppointment(new AppointmentBuilder(APPOINTMENT_ALICE).withPerson(null).build());
+        expectedModel.addAppointment(appointment2);
+        assertEquals(expectedModel, modelManager);
+    }
+
+    @Test
+    public void setPerson_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setPerson(null, null));
+        assertThrows(NullPointerException.class, () -> modelManager.setPerson(ALICE, null));
+        assertThrows(NullPointerException.class, () -> modelManager.setPerson(null, ALICE));
+    }
+
+    @Test
+    public void setPerson_personNotInAddressBook_throwsPersonNotFoundException() {
+        assertThrows(PersonNotFoundException.class, () -> modelManager.setPerson(ALICE, ALICE));
+    }
+
+    @Test
+    public void setPerson_personInAddressBookNoAppointments_success() {
+        modelManager.addPerson(ALICE);
+        modelManager.addPerson(BOB);
+
+        modelManager.setPerson(ALICE, CARL);
+
+        ModelManager expectedModel = new ModelManager();
+        expectedModel.addPerson(CARL);
+        expectedModel.addPerson(BOB);
+        assertEquals(expectedModel, modelManager);
+    }
+
+    @Test
+    public void setPerson_personInAddressBookHasAppointments_success() {
+        modelManager.addPerson(ALICE);
+        modelManager.addPerson(BOB);
+        modelManager.addAppointment(APPOINTMENT_ALICE);
+        Appointment appointment2 = new AppointmentBuilder(APPOINTMENT_ALONE).withPerson(BOB).build();
+        modelManager.addAppointment(appointment2);
+
+        modelManager.setPerson(ALICE, CARL);
+
+        ModelManager expectedModel = new ModelManager();
+        expectedModel.addPerson(CARL);
+        expectedModel.addPerson(BOB);
+        expectedModel.addAppointment(new AppointmentBuilder(APPOINTMENT_ALICE).withPerson(CARL).build());
+        expectedModel.addAppointment(appointment2);
+        assertEquals(expectedModel, modelManager);
+    }
+
+    @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
     }
@@ -133,6 +218,12 @@ public class ModelManagerTest {
     @Test
     public void setSchedule_nullSchedule_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.setSchedule(null));
+    }
+
+    @Test
+    public void setSchedule_validSchedule_success() {
+        modelManager.setSchedule(getTypicalSchedule());
+        assertEquals(getTypicalSchedule(), modelManager.getSchedule());
     }
 
     @Test
@@ -200,6 +291,25 @@ public class ModelManagerTest {
         Schedule expectedSchedule = new ScheduleBuilder().withAppointment(APPOINTMENT_ALONE).build();
         assertEquals(expectedSchedule, modelManager.getSchedule());
     }
+
+    @Test
+    public void deleteAppointment_nullAppointment_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.deleteAppointment(null));
+    }
+
+    @Test
+    public void deleteAppointment_appointmentNotInList_throwsAppointmentNotFoundException() {
+        assertThrows(AppointmentNotFoundException.class, ()
+            -> modelManager.deleteAppointment(APPOINTMENT_ALICE));
+    }
+
+    @Test
+    public void deleteAppointment_appointmentInList_success() {
+        modelManager.addAppointment(APPOINTMENT_ALONE);
+        modelManager.deleteAppointment(APPOINTMENT_ALONE);
+        assertEquals(new ModelManager(), modelManager);
+    }
+
 
     @Test
     public void equals() {

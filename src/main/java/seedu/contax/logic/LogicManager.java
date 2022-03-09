@@ -16,6 +16,7 @@ import seedu.contax.model.Model;
 import seedu.contax.model.ReadOnlyAddressBook;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.person.Person;
+import seedu.contax.model.tag.Tag;
 import seedu.contax.storage.Storage;
 
 /**
@@ -69,6 +70,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Appointment> getAppointmentList() {
         return model.getSchedule().getAppointmentList();
+    }
+
+    @Override
+    public ObservableList<Tag> getTagList() {
+        return model.getTagList();
     }
 
     @Override

@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.contax.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -114,6 +116,16 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+
+        // Delete Successful, dissociate target with any appointments.
+        // The list of matching appointments is cloned because the list iterator is destroyed upon
+        // any modification to the list.
+        List<Appointment> oldAppointments = new ArrayList<>(
+                schedule.getAppointmentList()
+                        .filtered(appointment -> appointment.getPerson().equals(target)));
+        oldAppointments.forEach(appointment -> {
+            setAppointment(appointment, appointment.withPerson(null));
+        });
     }
 
     @Override
@@ -127,6 +139,17 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+
+        // Update success, update appointments with target.
+        // The list of matching appointments is cloned because the list iterator is destroyed upon
+        // any modification to the list.
+        List<Appointment> oldAppointments = new ArrayList<>(
+                schedule.getAppointmentList()
+                        .filtered(appointment -> appointment.getPerson().equals(target)));
+
+        oldAppointments.forEach(appointment -> {
+            setAppointment(appointment, appointment.withPerson(editedPerson));
+        });
     }
 
     // Tag management
@@ -139,6 +162,11 @@ public class ModelManager implements Model {
     @Override
     public void addTag(Tag tag) {
         addressBook.addTag(tag);
+    }
+
+    @Override
+    public ObservableList<Tag> getTagList() {
+        return addressBook.getTagList();
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -181,10 +209,10 @@ public class ModelManager implements Model {
         return schedule.hasOverlappingAppointment(appointment);
     }
 
-    // TODO [APPOINTMENTS] : Implement
     @Override
     public void deleteAppointment(Appointment appointment) {
-
+        requireNonNull(appointment);
+        schedule.removeAppointment(appointment);
     }
 
     @Override

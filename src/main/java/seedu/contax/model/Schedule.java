@@ -10,7 +10,7 @@ import seedu.contax.model.appointment.DisjointAppointmentList;
 
 /**
  * Wraps all data at the Schedule level.
- * Overlapping appointments are not allowed, and is checked by .isOverlapping
+ * Overlapping appointments are not allowed, which is enforced by {@link DisjointAppointmentList}.
  */
 public class Schedule implements ReadOnlySchedule {
 
@@ -31,8 +31,6 @@ public class Schedule implements ReadOnlySchedule {
         resetData(toBeCopied);
     }
 
-    //// list overwrite operations
-
     /**
      * Replaces the contents of the appointment list with {@code appointments}.
      * {@code appointments} must not contain overlapping appointments.
@@ -49,8 +47,6 @@ public class Schedule implements ReadOnlySchedule {
 
         setAppointments(newData.getAppointmentList());
     }
-
-    //// appointment-level operations
 
     /**
      * Returns true if an appointment with the same identity as {@code target} exists in the schedule.
@@ -97,7 +93,7 @@ public class Schedule implements ReadOnlySchedule {
         appointments.remove(target);
     }
 
-    //// util methods
+    // ====== Util Methods ===================================================================================
 
     @Override
     public String toString() {

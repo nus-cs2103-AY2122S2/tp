@@ -6,6 +6,7 @@ package seedu.contax.ui;
 public enum ListContentType {
     PERSON,
     APPOINTMENT,
+    TAG,
     /* Special value indicating that the content list should retain its current configuration */
     UNCHANGED
 }
