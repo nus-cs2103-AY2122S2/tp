@@ -2,6 +2,7 @@ package seedu.contax.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.contax.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.contax.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -9,6 +10,7 @@ import static seedu.contax.testutil.Assert.assertThrows;
 import static seedu.contax.testutil.TypicalPersons.ALICE;
 import static seedu.contax.testutil.TypicalPersons.BOB;
 import static seedu.contax.testutil.TypicalPersons.CARL;
+import static seedu.contax.testutil.TypicalPersons.FRIENDS;
 import static seedu.contax.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.contax.testutil.TypicalTags.CLIENTS;
 
@@ -143,9 +145,12 @@ public class AddressBookTest {
     @Test
     public void equals() {
         AddressBook refAddressBook = new AddressBook();
-        AddressBook addedPersonAddressBook = new AddressBookBuilder().withPerson(ALICE).build();
+        AddressBook addedPersonAddressBook = new AddressBookBuilder().withPerson(ALICE).withTag(FRIENDS).build();
+        AddressBook otherAddressBook = new AddressBookBuilder().withPerson(ALICE).withTag(FRIENDS).build();
 
         assertTrue(refAddressBook.equals(new AddressBook()));
+        assertTrue(refAddressBook.equals(refAddressBook));
+        assertTrue(addedPersonAddressBook.equals(otherAddressBook));
 
         assertFalse(refAddressBook.equals(null));
         assertFalse(refAddressBook.equals(2));
@@ -155,11 +160,14 @@ public class AddressBookTest {
     @Test
     public void hashCodeTest() {
         AddressBook refAddressBook = new AddressBook();
-        AddressBook addedPersonAddressBook = new AddressBookBuilder().withPerson(ALICE).build();
+        AddressBook addedPersonAddressBook = new AddressBookBuilder().withPerson(ALICE).withTag(FRIENDS).build();
+        AddressBook otherAddressBook = new AddressBookBuilder().withPerson(ALICE).withTag(FRIENDS).build();
 
         assertEquals(refAddressBook.hashCode(), (new AddressBook()).hashCode());
+        assertEquals(refAddressBook.hashCode(), refAddressBook.hashCode());
+        assertEquals(addedPersonAddressBook, otherAddressBook);
 
-        assertFalse(refAddressBook.hashCode() == addedPersonAddressBook.hashCode());
+        assertNotEquals(refAddressBook.hashCode(), addedPersonAddressBook.hashCode());
     }
 
     /**

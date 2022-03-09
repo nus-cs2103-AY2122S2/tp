@@ -3,6 +3,7 @@ package seedu.contax.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Objects;
 
 import javafx.collections.ObservableList;
 import seedu.contax.model.person.Person;
@@ -118,6 +119,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         tags.add(tag);
     }
 
+    public void removeTag(Tag tagToDelete) {
+        tags.remove(tagToDelete);
+    }
+
     //// util methods
 
     @Override
@@ -141,11 +146,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons));
+                && persons.equals(((AddressBook) other).persons)
+                && tags.equals(((AddressBook) other).tags));
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return Objects.hash(persons, tags);
     }
 }

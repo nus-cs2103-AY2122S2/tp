@@ -12,6 +12,7 @@ import static seedu.contax.testutil.TypicalPersons.ALICE;
 import static seedu.contax.testutil.TypicalPersons.BENSON;
 import static seedu.contax.testutil.TypicalPersons.BOB;
 import static seedu.contax.testutil.TypicalPersons.CARL;
+import static seedu.contax.testutil.TypicalPersons.FRIENDS;
 import static seedu.contax.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.contax.testutil.TypicalTags.CLIENTS;
 import static seedu.contax.testutil.TypicalTags.FAMILY;
@@ -26,9 +27,12 @@ import seedu.contax.commons.core.GuiSettings;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.appointment.exceptions.AppointmentNotFoundException;
 import seedu.contax.model.person.NameContainsKeywordsPredicate;
+import seedu.contax.model.person.Person;
 import seedu.contax.model.person.exceptions.PersonNotFoundException;
+import seedu.contax.model.tag.exceptions.TagNotFoundException;
 import seedu.contax.testutil.AddressBookBuilder;
 import seedu.contax.testutil.AppointmentBuilder;
+import seedu.contax.testutil.PersonBuilder;
 import seedu.contax.testutil.ScheduleBuilder;
 
 public class ModelManagerTest {
@@ -225,6 +229,42 @@ public class ModelManagerTest {
     public void hasTag_tagInAddressBook_returnsTrue() {
         modelManager.addTag(FAMILY);
         assertTrue(modelManager.hasTag(FAMILY));
+    }
+
+    @Test
+    public void deleteTag_nullTag_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.deleteTag(null));
+    }
+
+    @Test
+    public void deleteTag_tagInList_success() {
+        modelManager.addTag(FRIENDS);
+        modelManager.deleteTag(FRIENDS);
+        assertEquals(new ModelManager(), modelManager);
+    }
+
+    @Test
+    public void deleteTag_tagNotInList_throwsTagNotFoundException() {
+        assertThrows(TagNotFoundException.class, () -> modelManager.deleteTag(FAMILY));
+    }
+
+    @Test
+    public void removeTagFromPersons_nullTag_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.deleteTag(null));
+    }
+
+    @Test
+    public void removeTagFromPersons_tagExistsInPerson_success() {
+        modelManager.addPerson(ALICE);
+        modelManager.addTag(FRIENDS);
+
+
+        Person modifiedAlice = new PersonBuilder(ALICE).withTags().build();
+        AddressBook expectedAddressBook = new AddressBookBuilder().withPerson(modifiedAlice).build();
+        ModelManager expectedModel = new ModelManager(expectedAddressBook, new Schedule(), new UserPrefs());
+
+        modelManager.deleteTag(FRIENDS);
+        assertEquals(expectedModel, modelManager);
     }
 
     @Test
