@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.util.Comparator;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -37,7 +39,13 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private FlowPane tags;
+    private FlowPane educations;
+    @FXML
+    private FlowPane internships;
+    @FXML
+    private FlowPane modules;
+    @FXML
+    private FlowPane ccas;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -50,6 +58,19 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        person.getEducations().stream()
+                .sorted(Comparator.comparing(edu -> edu.tagName))
+                .forEach(edu -> educations.getChildren().add(new Label((edu.tagName))));
+        person.getInternships().stream()
+                .sorted(Comparator.comparing(intern -> intern.tagName))
+                .forEach(intern -> internships.getChildren().add(new Label((intern.tagName))));
+        person.getModules().stream()
+                .sorted(Comparator.comparing(module -> module.tagName))
+                .forEach(module -> modules.getChildren().add(new Label((module.tagName))));
+        person.getCcas().stream()
+                .sorted(Comparator.comparing(cca -> cca.tagName))
+                .forEach(cca -> ccas.getChildren().add(new Label((cca.tagName))));
+
     }
 
     @Override

@@ -88,11 +88,12 @@ Tags additional information to an existing contact.
 Format: `tag INDEX [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`
 
 * Tags the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
+* At least one of the prefixes must be provided.
+* If tagging more than one value for a field, separate each value with a `,`.
 * Input tag values will be accumulated to the existing tags.
 
 Examples:
-* `tag 1 i/abc-company m/CS2100 m/CS2030S` Tags the internship company and 2 modules to the 1st person.
+* `tag 1 i/abc-company m/CS2100,CS2030S` Tags the internship company and 2 modules to the 1st person.
 
 ### Listing all persons : `list` [coming in V1.2]
 Shows a list of all persons in the address book.

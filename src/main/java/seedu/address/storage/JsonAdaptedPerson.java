@@ -1,5 +1,10 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -9,6 +14,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -21,17 +27,37 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final List<JsonAdaptedTag> ccas = new ArrayList<>();
+    private final List<JsonAdaptedTag> educations = new ArrayList<>();
+    private final List<JsonAdaptedTag> internships = new ArrayList<>();
+    private final List<JsonAdaptedTag> modules = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address) {
+            @JsonProperty("email") String email, @JsonProperty("address") String address,
+            @JsonProperty("educations") List<JsonAdaptedTag> educations,
+            @JsonProperty("internships") List<JsonAdaptedTag> internships,
+            @JsonProperty("modules") List<JsonAdaptedTag> modules,
+            @JsonProperty("ccas") List<JsonAdaptedTag> ccas) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        if (educations != null) {
+            this.educations.addAll(educations);
+        }
+        if (internships != null) {
+            this.internships.addAll(internships);
+        }
+        if (modules != null) {
+            this.modules.addAll(modules);
+        }
+        if (ccas != null) {
+            this.ccas.addAll(ccas);
+        }
     }
 
     /**
@@ -42,6 +68,18 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        educations.addAll(new HashSet<>(source.getEducations()).stream()
+                .map(JsonAdaptedTag::new)
+                .collect(Collectors.toList()));
+        internships.addAll(new HashSet<>(source.getInternships()).stream()
+                .map(JsonAdaptedTag::new)
+                .collect(Collectors.toList()));
+        modules.addAll(new HashSet<>(source.getModules()).stream()
+                .map(JsonAdaptedTag::new)
+                .collect(Collectors.toList()));
+        ccas.addAll(new HashSet<>(source.getCcas()).stream()
+                .map(JsonAdaptedTag::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -50,6 +88,26 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
+        final List<Tag> modelCcas = new ArrayList<>();
+        final List<Tag> modelEducations = new ArrayList<>();
+        final List<Tag> modelInternships = new ArrayList<>();
+        final List<Tag> modelModules = new ArrayList<>();
+
+        for (JsonAdaptedTag curr : educations) {
+            modelEducations.add(curr.toModelType("education"));
+        }
+
+        for (JsonAdaptedTag curr : ccas) {
+            modelCcas.add(curr.toModelType("cca"));
+        }
+
+        for (JsonAdaptedTag curr : internships) {
+            modelInternships.add(curr.toModelType("internship"));
+        }
+
+        for (JsonAdaptedTag curr : modules) {
+            modelModules.add(curr.toModelType("module"));
+        }
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -83,7 +141,7 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelEducations, modelInternships,
+                modelModules, modelCcas);
     }
-
 }
