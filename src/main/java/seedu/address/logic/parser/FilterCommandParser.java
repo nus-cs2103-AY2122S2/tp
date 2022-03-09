@@ -34,7 +34,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
 
         if (!Tag.isValidTagName(tagKeywords[0])) {
             throw new ParseException(
-                    String.format(FilterCommand.MESSAGE_CONSTRAINTS)
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_CONSTRAINTS)
             );
         }
 
