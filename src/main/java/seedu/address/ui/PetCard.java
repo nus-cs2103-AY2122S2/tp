@@ -29,15 +29,15 @@ public class PetCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
+    private Label id;
+    @FXML
     private Label name;
     @FXML
-    private Label id;
+    private Label ownerName;
     @FXML
     private Label phone;
     @FXML
     private Label address;
-    @FXML
-    private Label ownerName;
     @FXML
     private FlowPane tags;
 
@@ -49,9 +49,9 @@ public class PetCard extends UiPart<Region> {
         this.pet = pet;
         id.setText(displayedIndex + ". ");
         name.setText(pet.getName().fullName);
+        ownerName.setText(pet.getOwnerName().value);
         phone.setText(pet.getPhone().value);
         address.setText(pet.getAddress().value);
-        ownerName.setText(pet.getOwnerName().value);
         pet.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

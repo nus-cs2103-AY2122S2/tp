@@ -17,8 +17,8 @@ public class Pet {
 
     // Identity fields
     private final Name name;
-    private final Phone phone;
     private final OwnerName ownerName;
+    private final Phone phone;
 
     // Data fields
     private final Address address;
@@ -27,11 +27,11 @@ public class Pet {
     /**
      * Every field must be present and not null.
      */
-    public Pet(Name name, Phone phone, OwnerName ownerName, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, ownerName, address, tags);
+    public Pet(Name name, OwnerName ownerName, Phone phone, Address address, Set<Tag> tags) {
+        requireAllNonNull(name, ownerName, phone, address, tags);
         this.name = name;
-        this.phone = phone;
         this.ownerName = ownerName;
+        this.phone = phone;
         this.address = address;
         this.tags.addAll(tags);
     }
@@ -40,12 +40,12 @@ public class Pet {
         return name;
     }
 
-    public Phone getPhone() {
-        return phone;
-    }
-
     public OwnerName getOwnerName() {
         return ownerName;
+    }
+
+    public Phone getPhone() {
+        return phone;
     }
 
     public Address getAddress() {
@@ -89,8 +89,8 @@ public class Pet {
 
         Pet otherPet = (Pet) other;
         return otherPet.getName().equals(getName())
-                && otherPet.getPhone().equals(getPhone())
                 && otherPet.getOwnerName().equals(getOwnerName())
+                && otherPet.getPhone().equals(getPhone())
                 && otherPet.getAddress().equals(getAddress())
                 && otherPet.getTags().equals(getTags());
     }
@@ -98,17 +98,17 @@ public class Pet {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, ownerName, address, tags);
+        return Objects.hash(name, ownerName, phone, address, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append("; Phone: ")
-                .append(getPhone())
                 .append("; OwnerName: ")
                 .append(getOwnerName())
+                .append("; Phone: ")
+                .append(getPhone())
                 .append("; Address: ")
                 .append(getAddress());
 

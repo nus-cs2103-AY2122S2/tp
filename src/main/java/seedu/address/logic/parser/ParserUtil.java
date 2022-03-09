@@ -81,7 +81,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String ownerNmae} into an {@code OwnerName}.
+     * Parses a {@code String ownerName} into an {@code OwnerName}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code ownerName} is invalid.

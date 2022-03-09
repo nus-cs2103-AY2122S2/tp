@@ -9,8 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class OwnerName {
 
-    public static final String MESSAGE_CONSTRAINTS = "Owner names should only contain alphanumeric characters and "
-            + "spaces, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Owner names should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -18,15 +18,13 @@ public class OwnerName {
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    private static final String SPECIAL_CHARACTERS = "+_.-";
-
     public final String value;
 
 
     /**
      * Constructs an {@code OwnerName}.
      *
-     * @param ownerName A valid ownerName address.
+     * @param ownerName A valid ownerName.
      */
     public OwnerName(String ownerName) {
         requireNonNull(ownerName);
