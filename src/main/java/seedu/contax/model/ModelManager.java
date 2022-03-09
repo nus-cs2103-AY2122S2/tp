@@ -165,6 +165,22 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteTag(Tag tagToDelete) {
+        requireNonNull(tagToDelete);
+        removeTagFromPersons(tagToDelete);
+        addressBook.removeTag(tagToDelete);
+    }
+
+    private void removeTagFromPersons(Tag tagToDelete) {
+        requireNonNull(tagToDelete);
+        List<Person> persons = addressBook.getPersonList().filtered(person -> person.getTags().contains(tagToDelete));
+        for (int i = 0; i < persons.size(); i++) {
+            Person oldPerson = persons.get(i);
+            setPerson(oldPerson, oldPerson.withoutTag(tagToDelete));
+        }
+    }
+
+    @Override
     public ObservableList<Tag> getTagList() {
         return addressBook.getTagList();
     }
