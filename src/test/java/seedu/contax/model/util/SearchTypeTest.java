@@ -27,13 +27,13 @@ public class SearchTypeTest {
         assertFalse(SearchType.isValidType("peter*")); // contains non-alphanumeric characters
 
         // valid name
-        assertEquals( new SearchType("name").searchType, "name");
+        assertEquals(new SearchType("name").searchType, "name");
         assertTrue(SearchType.isValidType("name")); // name
-        assertEquals( new SearchType("phone").searchType, "phone");
+        assertEquals(new SearchType("phone").searchType, "phone");
         assertTrue(SearchType.isValidType("phone")); // phone
-        assertEquals( new SearchType("email").searchType, "email");
+        assertEquals(new SearchType("email").searchType, "email");
         assertTrue(SearchType.isValidType("email")); // email
-        assertEquals( new SearchType("address").searchType, "address");
+        assertEquals(new SearchType("address").searchType, "address");
         assertTrue(SearchType.isValidType("address")); // address
     }
 }
