@@ -8,7 +8,7 @@ import seedu.address.model.AB3Model;
 /**
  * Lists all persons in the address book to the user.
  */
-public class ListCommand extends Command {
+public class ListCommand extends AB3Command {
 
     public static final String COMMAND_WORD = "list";
 

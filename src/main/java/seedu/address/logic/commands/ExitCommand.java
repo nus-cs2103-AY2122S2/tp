@@ -5,7 +5,7 @@ import seedu.address.model.AB3Model;
 /**
  * Terminates the program.
  */
-public class ExitCommand extends Command {
+public class ExitCommand extends AB3Command {
 
     public static final String COMMAND_WORD = "exit";
 

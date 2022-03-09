@@ -82,7 +82,7 @@ public class CommandTestUtil {
      * - the returned {@link CommandResult} matches {@code expectedCommandResult} <br>
      * - the {@code actualModel} matches {@code expectedModel}
      */
-    public static void assertCommandSuccess(Command command, AB3Model actualModel, CommandResult expectedCommandResult,
+    public static void assertCommandSuccess(AB3Command command, AB3Model actualModel, CommandResult expectedCommandResult,
                                             AB3Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
@@ -94,10 +94,10 @@ public class CommandTestUtil {
     }
 
     /**
-     * Convenience wrapper to {@link #assertCommandSuccess(Command, AB3Model, CommandResult, AB3Model)}
+     * Convenience wrapper to {@link #assertCommandSuccess(AB3Command, AB3Model, CommandResult, AB3Model)}
      * that takes a string {@code expectedMessage}.
      */
-    public static void assertCommandSuccess(Command command, AB3Model actualModel, String expectedMessage,
+    public static void assertCommandSuccess(AB3Command command, AB3Model actualModel, String expectedMessage,
                                             AB3Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
@@ -109,7 +109,7 @@ public class CommandTestUtil {
      * - the CommandException message matches {@code expectedMessage} <br>
      * - the address book, filtered person list and selected person in {@code actualModel} remain unchanged
      */
-    public static void assertCommandFailure(Command command, AB3Model actualModel, String expectedMessage) {
+    public static void assertCommandFailure(AB3Command command, AB3Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());

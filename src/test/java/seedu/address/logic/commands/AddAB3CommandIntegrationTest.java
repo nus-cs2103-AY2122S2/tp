@@ -16,7 +16,7 @@ import seedu.address.testutil.PersonBuilder;
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.
  */
-public class AddCommandIntegrationTest {
+public class AddAB3CommandIntegrationTest {
 
     private AB3Model model;
 
@@ -32,14 +32,14 @@ public class AddCommandIntegrationTest {
         AB3Model expectedModel = new AB3ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addPerson(validPerson);
 
-        assertCommandSuccess(new AddCommand(validPerson), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, validPerson), expectedModel);
+        assertCommandSuccess(new AddAB3Command(validPerson), model,
+                String.format(AddAB3Command.MESSAGE_SUCCESS, validPerson), expectedModel);
     }
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Person personInList = model.getAddressBook().getPersonList().get(0);
-        assertCommandFailure(new AddCommand(personInList), model, AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(new AddAB3Command(personInList), model, AddAB3Command.MESSAGE_DUPLICATE_PERSON);
     }
 
 }
