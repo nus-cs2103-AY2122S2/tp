@@ -109,6 +109,12 @@ public interface Model {
     void addLesson(Lesson lesson);
 
     /**
+     * Deletes the given lesson.
+     * The lesson must exist in the lesson book.
+     */
+    void deleteLesson(Lesson lesson);
+
+    /**
      * Updates the filter of the filtered lesson list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
