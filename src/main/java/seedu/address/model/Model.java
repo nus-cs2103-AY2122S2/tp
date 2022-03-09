@@ -113,4 +113,10 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredLessonList(Predicate<Lesson> predicate);
+
+    /**
+     * Deletes the given lesson.
+     * The lesson must exist in the lesson book.
+     */
+    void deleteLesson(Lesson lesson);
 }

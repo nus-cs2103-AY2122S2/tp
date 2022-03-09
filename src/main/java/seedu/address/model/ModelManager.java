@@ -143,6 +143,12 @@ public class ModelManager implements Model {
         updateFilteredPersonList(PREDICATE_SHOW_ALL_LESSONS);
     }
 
+    @Override
+    public void deleteLesson(Lesson lesson) {
+        lessonBook.deleteLesson(lesson);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_LESSONS);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
