@@ -5,8 +5,6 @@ import static seedu.ibook.storage.JsonAdaptedProduct.MISSING_FIELD_MESSAGE_FORMA
 import static seedu.ibook.testutil.Assert.assertThrows;
 import static seedu.ibook.testutil.TypicalProducts.KAYA_BREAD;
 
-import java.time.LocalDate;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.ibook.commons.exceptions.IllegalValueException;
@@ -20,15 +18,15 @@ public class JsonAdaptedProductTest {
 
     private static final String INVALID_NAME = " ";
     private static final String INVALID_CATEGORY = " ";
-    private static final LocalDate INVALID_EXPIRY_DATE = LocalDate.parse("0999-10-10");
+    private static final String INVALID_EXPIRY_DATE = "1234-56";
     private static final String INVALID_DESCRIPTION = " ";
-    private static final Double INVALID_PRICE = -42.00;
+    private static final String INVALID_PRICE = "-42.00";
 
     private static final String VALID_NAME = KAYA_BREAD.getName().fullName;
     private static final String VALID_CATEGORY = KAYA_BREAD.getCategory().fullCategoryName;
-    private static final LocalDate VALID_EXPIRY_DATE = KAYA_BREAD.getExpiryDate().expiryDate;
+    private static final String VALID_EXPIRY_DATE = KAYA_BREAD.getExpiryDate().toString();
     private static final String VALID_DESCRIPTION = KAYA_BREAD.getDescription().fullDescription;
-    private static final Double VALID_PRICE = KAYA_BREAD.getPrice().price;
+    private static final String VALID_PRICE = KAYA_BREAD.getPrice().toString();
 
     @Test
     public void toModelType_validProductDetails_returnsProduct() throws Exception {

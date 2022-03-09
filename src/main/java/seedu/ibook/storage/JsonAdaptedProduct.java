@@ -32,14 +32,14 @@ class JsonAdaptedProduct {
     @JsonCreator
     public JsonAdaptedProduct(@JsonProperty("name") String name,
                               @JsonProperty("category") String category,
-                              @JsonProperty("expiryDate") LocalDate expiryDate,
+                              @JsonProperty("expiryDate") String expiryDate,
                               @JsonProperty("description") String description,
-                              @JsonProperty("price") Double price) {
+                              @JsonProperty("price") String price) {
         this.name = name;
         this.category = category;
-        this.expiryDate = expiryDate.toString();
+        this.expiryDate = expiryDate;
         this.description = description;
-        this.price = price.toString();
+        this.price = price;
     }
 
     /**
