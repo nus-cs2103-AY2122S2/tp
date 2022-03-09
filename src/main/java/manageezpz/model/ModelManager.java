@@ -11,7 +11,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import manageezpz.commons.core.GuiSettings;
 import manageezpz.commons.core.LogsCenter;
-import manageezpz.commons.util.CollectionUtil;
 import manageezpz.model.person.Person;
 
 /**

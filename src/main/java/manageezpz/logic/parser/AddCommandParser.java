@@ -12,12 +12,12 @@ import java.util.stream.Stream;
 
 import manageezpz.logic.commands.AddCommand;
 import manageezpz.logic.parser.exceptions.ParseException;
-import manageezpz.model.tag.Tag;
 import manageezpz.model.person.Address;
 import manageezpz.model.person.Email;
 import manageezpz.model.person.Name;
 import manageezpz.model.person.Person;
 import manageezpz.model.person.Phone;
+import manageezpz.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new AddCommand object

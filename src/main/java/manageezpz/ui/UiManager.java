@@ -9,8 +9,8 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import manageezpz.commons.core.LogsCenter;
 import manageezpz.commons.util.StringUtil;
-import manageezpz.logic.Logic;
 import manageezpz.MainApp;
+import manageezpz.logic.Logic;
 
 /**
  * The manager of the UI component.

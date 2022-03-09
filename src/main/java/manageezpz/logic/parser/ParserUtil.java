@@ -8,12 +8,12 @@ import java.util.Set;
 
 import manageezpz.commons.core.index.Index;
 import manageezpz.commons.util.StringUtil;
+import manageezpz.logic.parser.exceptions.ParseException;
 import manageezpz.model.person.Address;
 import manageezpz.model.person.Email;
 import manageezpz.model.person.Name;
 import manageezpz.model.person.Phone;
 import manageezpz.model.tag.Tag;
-import manageezpz.logic.parser.exceptions.ParseException;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.

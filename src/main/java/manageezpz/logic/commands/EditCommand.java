@@ -19,12 +19,12 @@ import manageezpz.commons.core.index.Index;
 import manageezpz.commons.util.CollectionUtil;
 import manageezpz.logic.commands.exceptions.CommandException;
 import manageezpz.model.Model;
-import manageezpz.model.tag.Tag;
 import manageezpz.model.person.Address;
 import manageezpz.model.person.Email;
 import manageezpz.model.person.Name;
 import manageezpz.model.person.Person;
 import manageezpz.model.person.Phone;
+import manageezpz.model.tag.Tag;
 
 /**
  * Edits the details of an existing person in the address book.

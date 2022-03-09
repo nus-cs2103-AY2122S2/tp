@@ -16,8 +16,6 @@ import manageezpz.commons.util.StringUtil;
 import manageezpz.logic.Logic;
 import manageezpz.logic.LogicManager;
 import manageezpz.model.util.SampleDataUtil;
-import manageezpz.ui.Ui;
-import manageezpz.ui.UiManager;
 import manageezpz.model.AddressBook;
 import manageezpz.model.Model;
 import manageezpz.model.ModelManager;
@@ -30,6 +28,8 @@ import manageezpz.storage.JsonUserPrefsStorage;
 import manageezpz.storage.Storage;
 import manageezpz.storage.StorageManager;
 import manageezpz.storage.UserPrefsStorage;
+import manageezpz.ui.Ui;
+import manageezpz.ui.UiManager;
 
 /**
  * Runs the application.

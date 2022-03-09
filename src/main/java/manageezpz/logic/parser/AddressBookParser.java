@@ -6,7 +6,6 @@ import static manageezpz.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import manageezpz.logic.parser.exceptions.ParseException;
 import manageezpz.logic.commands.AddCommand;
 import manageezpz.logic.commands.ClearCommand;
 import manageezpz.logic.commands.Command;
@@ -16,6 +15,7 @@ import manageezpz.logic.commands.ExitCommand;
 import manageezpz.logic.commands.FindCommand;
 import manageezpz.logic.commands.HelpCommand;
 import manageezpz.logic.commands.ListCommand;
+import manageezpz.logic.parser.exceptions.ParseException;
 
 /**
  * Parses user input.
