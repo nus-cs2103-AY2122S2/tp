@@ -62,6 +62,8 @@ CinnamonBun is a **desktop app for managing contacts, optimized for use via a Co
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+* Multiple commands can be chained by separating each command with the '|' character. Each command is run sequentially from first to last. Invalid commands and special commands `help` and `exit` will break the chain and stop further command execution.<br>
+  e.g `add n/John Doe e/johndoe@email.com | edit 5 p/999 | delete 2`
 </div>
 
 ### Viewing help : `help`

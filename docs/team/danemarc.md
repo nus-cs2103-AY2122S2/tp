@@ -15,11 +15,13 @@ Given below are my contributions to the project.
   * To be added soon
 
 * **Enhancements to existing features**:
-  * Expanded the find feature (Pull request [\#1]())
+  * Expanded the find feature to include all Person attributes (Pull request [\#7](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/7))
+  * Added the ability to issue multiple commands in a single line (Pull request [\#35](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/35))
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the `find` feature [\#1]()
+    * Added documentation for the `find` feature [\#7](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/7)
+    * Added documentation for command chaining [\#35](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/35)
   * Developer Guide:
     * Added implementation details of the `find` feature
 
