@@ -1,11 +1,9 @@
 package manageezpz.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static manageezpz.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_NAME;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_PHONE;
-import static manageezpz.logic.parser.CliSyntax.PREFIX_TAG;
 
 import manageezpz.logic.commands.exceptions.CommandException;
 import manageezpz.model.Model;
