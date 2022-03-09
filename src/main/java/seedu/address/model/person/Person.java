@@ -55,8 +55,12 @@ public class Person {
         return address;
     }
 
+    /**
+     * Returns an immutable property set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
     public Set<Property> getProperties() {
-        return properties;
+        return Collections.unmodifiableSet(properties);
     }
 
     /**
