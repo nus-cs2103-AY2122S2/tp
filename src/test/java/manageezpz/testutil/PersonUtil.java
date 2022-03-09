@@ -4,12 +4,9 @@ import static manageezpz.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_NAME;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_PHONE;
 
-import java.util.Set;
-
 import manageezpz.logic.commands.AddEmployeeCommand;
 import manageezpz.logic.commands.EditCommand.EditPersonDescriptor;
 import manageezpz.model.person.Person;
-import manageezpz.model.tag.Tag;
 
 /**
  * A utility class for Person.

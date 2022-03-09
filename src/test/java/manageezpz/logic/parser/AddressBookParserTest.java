@@ -11,11 +11,17 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import manageezpz.logic.commands.*;
 import org.junit.jupiter.api.Test;
 
 import manageezpz.logic.commands.AddEmployeeCommand;
+import manageezpz.logic.commands.ClearCommand;
+import manageezpz.logic.commands.DeleteCommand;
+import manageezpz.logic.commands.EditCommand;
 import manageezpz.logic.commands.EditCommand.EditPersonDescriptor;
+import manageezpz.logic.commands.ExitCommand;
+import manageezpz.logic.commands.FindCommand;
+import manageezpz.logic.commands.HelpCommand;
+import manageezpz.logic.commands.ListCommand;
 import manageezpz.logic.parser.exceptions.ParseException;
 import manageezpz.model.person.NameContainsKeywordsPredicate;
 import manageezpz.model.person.Person;

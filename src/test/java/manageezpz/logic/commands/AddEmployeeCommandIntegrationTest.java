@@ -16,7 +16,7 @@ import manageezpz.testutil.PersonBuilder;
 /**
  * Contains integration tests (interaction with the Model) for {@code AddEmployeeCommand}.
  */
-public class AddCommandIntegrationTest {
+public class AddEmployeeCommandIntegrationTest {
 
     private Model model;
 

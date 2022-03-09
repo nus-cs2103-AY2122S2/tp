@@ -23,7 +23,7 @@ import manageezpz.model.ReadOnlyUserPrefs;
 import manageezpz.model.person.Person;
 import manageezpz.testutil.PersonBuilder;
 
-public class AddCommandTest {
+public class AddEmployeeCommandTest {
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
@@ -47,7 +47,8 @@ public class AddCommandTest {
         AddEmployeeCommand addCommand = new AddEmployeeCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        assertThrows(CommandException.class, AddEmployeeCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class,
+                AddEmployeeCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
     }
 
     @Test
