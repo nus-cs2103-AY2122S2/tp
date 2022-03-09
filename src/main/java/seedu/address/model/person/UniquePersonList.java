@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -133,5 +134,30 @@ public class UniquePersonList implements Iterable<Person> {
             }
         }
         return true;
+    }
+
+    /**
+     * Sorts the list of persons in ascending order of their names.
+     */
+    public void sortList() {
+        internalList.sort(new SortAlphabetically());
+    }
+
+    /**
+     * SortAlphabetically implements a comparator class, to sort the list of persons in alphabetical order.
+     */
+    class SortAlphabetically implements Comparator<Person> {
+
+        /**
+         * Sorts in ascending order of the names of persons.
+         *
+         * @param a the first person.
+         * @param b the second person.
+         * @return an int value after comparing the names of the two persons.
+         */
+        @Override
+        public int compare(Person a, Person b) {
+            return a.getName().fullName.compareTo(b.getName().fullName);
+        }
     }
 }
