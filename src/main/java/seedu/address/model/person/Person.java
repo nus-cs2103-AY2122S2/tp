@@ -5,8 +5,10 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.model.property.Property;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,18 +25,19 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final Optional<Property> property;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      * This constructor is used for adding a new Client, thus default status is unfavourited(false)
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Favourite favourite, Address address, Optional<Property> property, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, favourite, address, property, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.favourite = new Favourite(false);
+        this.favourite = favourite;
         this.address = address;
         this.tags.addAll(tags);
     }
@@ -43,13 +46,14 @@ public class Person {
      * This constructor is used when editing a Client.
      * Favourited clients will remain favourited & unfavourited clients will remain unfavourited
      */
-    public Person(Name name, Phone phone, Email email, Favourite favourite, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.favourite = favourite;
         this.address = address;
+        this.property = property;
         this.tags.addAll(tags);
     }
 
@@ -76,6 +80,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Optional<Property> getProperty() {
+        return property;
     }
 
     /**
@@ -118,13 +126,14 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getProperty().equals(getProperty())
                 && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, favourite, address, tags);
+        return Objects.hash(name, phone, email, favourite address, property, tags);
     }
 
     @Override
@@ -139,6 +148,11 @@ public class Person {
                 .append(getFavourite())
                 .append("; Address: ")
                 .append(getAddress());
+
+        if (getProperty().isPresent()) {
+            builder.append("; Property: ");
+            builder.append(getProperty().get());
+        }
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
