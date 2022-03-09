@@ -34,7 +34,7 @@ public interface LogicTrackermon {
     ObservableList<Show> getFilteredShowList();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' show list file path.
      */
     Path getShowListFilePath();
 
