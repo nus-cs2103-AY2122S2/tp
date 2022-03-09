@@ -7,10 +7,9 @@ import java.util.List;
  * inputted by a user either a Todo, Deadline or Event.
  */
 public class Task {
-
+    protected boolean isDone;
     private List<String> assignees; //List of Strings as of now, V1.3 will incorporate Persons (assign tasks to Persons)
     private String taskDescription;
-    protected boolean isDone;
 
     /**
      * Constructor for the Task class.
