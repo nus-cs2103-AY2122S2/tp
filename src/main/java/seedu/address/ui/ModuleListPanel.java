@@ -8,37 +8,33 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
+import seedu.address.model.tamodule.TaModule;
 
 /**
  * Panel containing the list of persons.
  */
-public class ModuleListPanel {
-    private static final String FXML = "ClassListPanel.fxml";
+public class ModuleListPanel extends UiPart<Region> {
+    private static final String FXML = "ModuleListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(ModuleListPanel.class);
 
     @FXML
-    private ListView<Module> moduleListView;
+    private ListView<TaModule> moduleListView;
 
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    // public ModuleListPanel(ObservableList<Module> moduleList) {
-    //     super(FXML);
-    //     moduleListView.setItems(moduleList);
-    //     moduleListView.setCellFactory(listView -> new ModuleListViewCell());
-    // }
-
-    public ModuleListPanel() {
-        
+    public ModuleListPanel(ObservableList<TaModule> moduleList) {
+        super(FXML);
+        moduleListView.setItems(moduleList);
+        moduleListView.setCellFactory(listView -> new ModuleListViewCell());
     }
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */
-    class ModuleListViewCell extends ListCell<Module> {
+    class ModuleListViewCell extends ListCell<TaModule> {
         @Override
-        protected void updateItem(Module module, boolean empty) {
+        protected void updateItem(TaModule module, boolean empty) {
             super.updateItem(module, empty);
 
             if (empty || module == null) {

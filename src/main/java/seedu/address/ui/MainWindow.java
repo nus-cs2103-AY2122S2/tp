@@ -209,10 +209,9 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void showModuleList() {
-        // moduleListPanel = new ModuleListPanel(logic.getFilteredModuleList());
-        moduleListPanel = new ModuleListPanel();
+        moduleListPanel = new ModuleListPanel(logic.getFilteredModuleList());
         listPanelPlaceholder.getChildren().clear();
-        // listPanelPlaceholder.getChildren().add(moduleListPanel.getRoot());
+        listPanelPlaceholder.getChildren().add(moduleListPanel.getRoot());
     }
 
     /**
@@ -220,10 +219,9 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void showClassGroupList() {
-        // classGroupListPanel = new ClassGroupListPanel(logic.getFilteredClassGroupList());
-        classGroupListPanel = new ClassGroupListPanel();
+        classGroupListPanel = new ClassGroupListPanel(logic.getFilteredClassGroupList());
         listPanelPlaceholder.getChildren().clear();
-        // listPanelPlaceholder.getChildren().add(classGroupListPanel.getRoot());\
+        listPanelPlaceholder.getChildren().add(classGroupListPanel.getRoot());
     }
 
     /**

@@ -8,30 +8,25 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.ClassGroup;
-import seedu.address.model.person.Person;
+import seedu.address.model.classgroup.ClassGroup;
 
 /**
  * Panel containing the list of persons.
  */
-public class ClassGroupListPanel {
-    private static final String FXML = "ClassListPanel.fxml";
+public class ClassGroupListPanel extends UiPart<Region> {
+    private static final String FXML = "ClassGroupListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(ClassGroupListPanel.class);
 
     @FXML
     private ListView<ClassGroup> classGroupListView;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code ClassGroupListPanel} with the given {@code ObservableList}.
      */
-    // public ClassGroupListPanel(ObservableList<ClassGroup> classGroupList) {
-    //     super(FXML);
-    //     classGroupListView.setItems(classGroupList);
-    //     classGroupListView.setCellFactory(listView -> new ClassGroupListViewCell());
-    // }
-
-    public ClassGroupListPanel() {
-        
+    public ClassGroupListPanel(ObservableList<ClassGroup> classGroupList) {
+        super(FXML);
+        classGroupListView.setItems(classGroupList);
+        classGroupListView.setCellFactory(listView -> new ClassGroupListViewCell());
     }
 
     /**

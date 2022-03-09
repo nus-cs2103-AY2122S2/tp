@@ -1,12 +1,10 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.tamodule.TaModule;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -23,7 +21,7 @@ public class ModuleCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Module module;
+    public final TaModule module;
 
     @FXML
     private HBox cardPane;
@@ -41,7 +39,7 @@ public class ModuleCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public ModuleCard(Module module, int displayedIndex) {
+    public ModuleCard(TaModule module, int displayedIndex) {
         super(FXML);
         this.module = module;
         id.setText(displayedIndex + ". ");
