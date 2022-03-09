@@ -16,7 +16,7 @@ public interface TrackBeauStorage {
     /**
      * Returns the file path of the data file.
      */
-    Path getAddressBookFilePath();
+    Path getTrackBeauFilePath();
 
     /**
      * Returns TrackBeau data as a {@link ReadOnlyTrackBeau}.
@@ -24,23 +24,23 @@ public interface TrackBeauStorage {
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyTrackBeau> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyTrackBeau> readTrackBeau() throws DataConversionException, IOException;
 
     /**
-     * @see #getAddressBookFilePath()
+     * @see #getTrackBeauFilePath()
      */
-    Optional<ReadOnlyTrackBeau> readAddressBook(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyTrackBeau> readTrackBeau(Path filePath) throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlyTrackBeau} to the storage.
-     * @param addressBook cannot be null.
+     * @param trackBeau cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAddressBook(ReadOnlyTrackBeau addressBook) throws IOException;
+    void saveTrackBeau(ReadOnlyTrackBeau trackBeau) throws IOException;
 
     /**
-     * @see #saveAddressBook(ReadOnlyTrackBeau)
+     * @see #saveTrackBeau(ReadOnlyTrackBeau)
      */
-    void saveAddressBook(ReadOnlyTrackBeau addressBook, Path filePath) throws IOException;
+    void saveTrackBeau(ReadOnlyTrackBeau trackBeau, Path filePath) throws IOException;
 
 }

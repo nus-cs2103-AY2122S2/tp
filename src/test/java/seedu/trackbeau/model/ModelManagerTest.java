@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.trackbeau.commons.core.GuiSettings;
 import seedu.trackbeau.model.customer.NameContainsKeywordsPredicate;
-import seedu.trackbeau.testutil.AddressBookBuilder;
+import seedu.trackbeau.testutil.TrackBeauBuilder;
 
 public class ModelManagerTest {
 
@@ -37,14 +37,14 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAddressBookFilePath(Paths.get("trackbeau/book/file/path"));
+        userPrefs.setTrackBeauFilePath(Paths.get("trackbeau/book/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setAddressBookFilePath(Paths.get("new/trackbeau/book/file/path"));
+        userPrefs.setTrackBeauFilePath(Paths.get("new/trackbeau/book/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -95,7 +95,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        TrackBeau addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        TrackBeau addressBook = new TrackBeauBuilder().withCustomer(ALICE).withCustomer(BENSON).build();
         TrackBeau differentAddressBook = new TrackBeau();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -126,7 +126,7 @@ public class ModelManagerTest {
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
+        differentUserPrefs.setTrackBeauFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
     }
 }

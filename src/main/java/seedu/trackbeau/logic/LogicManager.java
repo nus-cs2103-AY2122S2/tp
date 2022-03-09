@@ -46,7 +46,7 @@ public class LogicManager implements Logic {
         commandResult = command.execute(model);
 
         try {
-            storage.saveAddressBook(model.getTrackBeau());
+            storage.saveTrackBeau(model.getTrackBeau());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
@@ -55,17 +55,17 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyTrackBeau getAddressBook() {
+    public ReadOnlyTrackBeau getTrackBeau() {
         return model.getTrackBeau();
     }
 
     @Override
-    public ObservableList<Customer> getFilteredPersonList() {
+    public ObservableList<Customer> getFilteredCustomerList() {
         return model.getFilteredCustomerList();
     }
 
     @Override
-    public Path getAddressBookFilePath() {
+    public Path getTrackBeauFilePath() {
         return model.getTrackBeauFilePath();
     }
 

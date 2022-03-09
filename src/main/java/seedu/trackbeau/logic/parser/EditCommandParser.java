@@ -3,10 +3,14 @@ package seedu.trackbeau.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.trackbeau.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_ALLERGIES;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_HAIRTYPE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SERVICES;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SKINTYPE;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_STAFFS;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -32,7 +36,8 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                        PREFIX_SKINTYPE, PREFIX_HAIRTYPE, PREFIX_STAFFS, PREFIX_SERVICES, PREFIX_ALLERGIES);
 
         Index index;
 
@@ -55,7 +60,15 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
+        if (argMultimap.getValue(PREFIX_SKINTYPE).isPresent()) {
+            editPersonDescriptor.setSkinType(ParserUtil.parseSkinType(argMultimap.getValue(PREFIX_SKINTYPE).get()));
+        }
+        if (argMultimap.getValue(PREFIX_HAIRTYPE).isPresent()) {
+            editPersonDescriptor.setHairType(ParserUtil.parseHairType(argMultimap.getValue(PREFIX_HAIRTYPE).get()));
+        }
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_STAFFS)).ifPresent(editPersonDescriptor::setStaffs);
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_SERVICES)).ifPresent(editPersonDescriptor::setStaffs);
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_ALLERGIES)).ifPresent(editPersonDescriptor::setStaffs);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);

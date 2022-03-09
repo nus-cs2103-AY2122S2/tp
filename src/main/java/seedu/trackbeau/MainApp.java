@@ -74,14 +74,14 @@ public class MainApp extends Application {
      * or an empty trackbeau book will be used instead if errors occur when reading {@code storage}'s trackbeau book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyTrackBeau> addressBookOptional;
+        Optional<ReadOnlyTrackBeau> trackBeauOptional;
         ReadOnlyTrackBeau initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
+            trackBeauOptional = storage.readTrackBeau();
+            if (!trackBeauOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample TrackBeau");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = trackBeauOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty TrackBeau");
             initialData = new TrackBeau();

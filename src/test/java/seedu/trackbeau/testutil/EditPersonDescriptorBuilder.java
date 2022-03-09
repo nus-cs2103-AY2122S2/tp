@@ -8,8 +8,10 @@ import seedu.trackbeau.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.trackbeau.model.customer.Address;
 import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.model.customer.Email;
+import seedu.trackbeau.model.customer.Hair;
 import seedu.trackbeau.model.customer.Name;
 import seedu.trackbeau.model.customer.Phone;
+import seedu.trackbeau.model.customer.Skin;
 import seedu.trackbeau.model.tag.Tag;
 
 /**
@@ -36,7 +38,11 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(customer.getPhone());
         descriptor.setEmail(customer.getEmail());
         descriptor.setAddress(customer.getAddress());
-        descriptor.setTags(customer.getTags());
+        descriptor.setSkinType(customer.getSkinType());
+        descriptor.setHairType(customer.getHairType());
+        descriptor.setStaffs(customer.getStaffs());
+        descriptor.setServices(customer.getServices());
+        descriptor.setAllergies(customer.getAllergies());
     }
 
     /**
@@ -72,12 +78,48 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * Sets the {@code Skin Type} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withSkinType(String skinType) {
+        descriptor.setSkinType(new Skin(skinType));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Hair Type} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withHairType(String hairType) {
+        descriptor.setHairType(new Hair(hairType));
+        return this;
+    }
+
+    /**
+     * Parses the {@code staffs} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
      * that we are building.
      */
-    public EditPersonDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
+    public EditPersonDescriptorBuilder withStaffs(String... staffs) {
+        Set<Tag> tagSet = Stream.of(staffs).map(Tag::new).collect(Collectors.toSet());
+        descriptor.setStaffs(tagSet);
+        return this;
+    }
+
+    /**
+     * Parses the {@code services} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withServices(String... services) {
+        Set<Tag> tagSet = Stream.of(services).map(Tag::new).collect(Collectors.toSet());
+        descriptor.setServices(tagSet);
+        return this;
+    }
+
+    /**
+     * Parses the {@code allergies} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withAllergies(String... allergies) {
+        Set<Tag> tagSet = Stream.of(allergies).map(Tag::new).collect(Collectors.toSet());
+        descriptor.setAllergies(tagSet);
         return this;
     }
 

@@ -21,7 +21,7 @@ public class AddressTest {
 
     @Test
     public void isValidAddress() {
-        // null trackbeau
+        // null address
         assertThrows(NullPointerException.class, () -> Address.isValidAddress(null));
 
         // invalid addresses

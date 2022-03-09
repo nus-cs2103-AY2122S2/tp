@@ -72,7 +72,7 @@ public class ModelManager implements Model {
     @Override
     public void setTrackBeauFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+        userPrefs.setTrackBeauFilePath(addressBookFilePath);
     }
 
     //=========== TrackBeau ================================================================================
@@ -90,7 +90,7 @@ public class ModelManager implements Model {
     @Override
     public boolean hasCustomer(Customer customer) {
         requireNonNull(customer);
-        return addressBook.hasPerson(customer);
+        return addressBook.hasCustomer(customer);
     }
 
     @Override
@@ -100,7 +100,7 @@ public class ModelManager implements Model {
 
     @Override
     public void addCustomer(Customer customer) {
-        addressBook.addPerson(customer);
+        addressBook.addCustomer(customer);
         updateFilteredCustomerList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -108,7 +108,7 @@ public class ModelManager implements Model {
     public void setCustomer(Customer target, Customer editedCustomer) {
         requireAllNonNull(target, editedCustomer);
 
-        addressBook.setPerson(target, editedCustomer);
+        addressBook.setCustomer(target, editedCustomer);
     }
 
     //=========== Filtered Person List Accessors =============================================================

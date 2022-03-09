@@ -22,18 +22,27 @@ public class Customer {
 
     // Data fields
     private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Skin skin;
+    private final Hair hair;
+    private final Set<Tag> staffs = new HashSet<>();
+    private final Set<Tag> services = new HashSet<>();
+    private final Set<Tag> allergies = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Customer(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Customer(Name name, Phone phone, Email email, Address address,
+                    Skin skin, Hair hair, Set<Tag> staffs, Set<Tag> services, Set<Tag> allergies) {
+        requireAllNonNull(name, phone, email, address);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.tags.addAll(tags);
+        this.skin = skin;
+        this.hair = hair;
+        this.staffs.addAll(staffs);
+        this.services.addAll(services);
+        this.allergies.addAll(allergies);
     }
 
     public Name getName() {
@@ -52,12 +61,28 @@ public class Customer {
         return address;
     }
 
+    public Skin getSkinType() {
+        return skin;
+    }
+
+    public Hair getHairType() {
+        return hair;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<Tag> getStaffs() {
+        return Collections.unmodifiableSet(staffs);
+    }
+
+    public Set<Tag> getServices() {
+        return Collections.unmodifiableSet(services);
+    }
+
+    public Set<Tag> getAllergies() {
+        return Collections.unmodifiableSet(allergies);
     }
 
     /**
@@ -92,13 +117,15 @@ public class Customer {
                 && otherCustomer.getPhone().equals(getPhone())
                 && otherCustomer.getEmail().equals(getEmail())
                 && otherCustomer.getAddress().equals(getAddress())
-                && otherCustomer.getTags().equals(getTags());
+                && otherCustomer.getStaffs().equals(getStaffs())
+                && otherCustomer.getServices().equals(getServices())
+                && otherCustomer.getAllergies().equals(getAllergies());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, skin, hair, staffs, services, allergies);
     }
 
     @Override
@@ -110,13 +137,30 @@ public class Customer {
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Address: ")
-                .append(getAddress());
+                .append(getAddress())
+                .append("; Skin Type: ")
+                .append(getSkinType())
+                .append("; Hair Type: ")
+                .append(getHairType());
 
-        Set<Tag> tags = getTags();
-        if (!tags.isEmpty()) {
-            builder.append("; Tags: ");
-            tags.forEach(builder::append);
+        Set<Tag> staffs = getStaffs();
+        if (!staffs.isEmpty()) {
+            builder.append("; Favourite staffs: ");
+            staffs.forEach(builder::append);
         }
+
+        Set<Tag> services = getServices();
+        if (!services.isEmpty()) {
+            builder.append("; Favourite Services: ");
+            services.forEach(builder::append);
+        }
+
+        Set<Tag> allergies = getAllergies();
+        if (!allergies.isEmpty()) {
+            builder.append("; allergies: ");
+            allergies.forEach(builder::append);
+        }
+
         return builder.toString();
     }
 

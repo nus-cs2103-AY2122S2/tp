@@ -6,7 +6,7 @@ import static seedu.trackbeau.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_STAFF_JANE;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -55,10 +55,10 @@ public class EditCommandTest {
 
         PersonBuilder personInList = new PersonBuilder(lastCustomer);
         Customer editedCustomer = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+                .withStaffs(VALID_STAFF_JANE).build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withPhone(VALID_PHONE_BOB).withStaffs(VALID_STAFF_JANE).build();
         EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedCustomer);

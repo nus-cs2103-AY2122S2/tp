@@ -11,8 +11,10 @@ import seedu.trackbeau.commons.util.StringUtil;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
 import seedu.trackbeau.model.customer.Address;
 import seedu.trackbeau.model.customer.Email;
+import seedu.trackbeau.model.customer.Hair;
 import seedu.trackbeau.model.customer.Name;
 import seedu.trackbeau.model.customer.Phone;
+import seedu.trackbeau.model.customer.Skin;
 import seedu.trackbeau.model.tag.Tag;
 
 /**
@@ -66,7 +68,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String trackbeau} into an {@code Address}.
+     * Parses a {@code String address} into an {@code Address}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code trackbeau} is invalid.
@@ -93,6 +95,36 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String skinType } into an {@code SkinType}.
+     * Leading and trailing whitespaces will be trimmed.
+     * Skin type input must fit existing categories.
+     * @throws ParseException if the given {@code trackbeau} is invalid.
+     */
+    public static Skin parseSkinType(String skinType) throws ParseException {
+        requireNonNull(skinType);
+        String trimmedSkinType = skinType.trim();
+        if (!Skin.isValidSkinType(trimmedSkinType)) {
+            throw new ParseException(Skin.MESSAGE_CONSTRAINTS);
+        }
+        return new Skin(trimmedSkinType);
+    }
+
+    /**
+     * Parses a {@code String hairType} into an {@code HairType}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code trackbeau} is invalid.
+     */
+    public static Hair parseHairType(String hairType) throws ParseException {
+        requireNonNull(hairType);
+        String trimmedHairType = hairType.trim();
+        if (!Address.isValidAddress(trimmedHairType)) {
+            throw new ParseException(Hair.MESSAGE_CONSTRAINTS);
+        }
+        return new Hair(trimmedHairType);
     }
 
     /**

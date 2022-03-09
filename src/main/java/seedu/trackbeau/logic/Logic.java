@@ -28,15 +28,15 @@ public interface Logic {
      *
      * @see seedu.trackbeau.model.Model#getTrackBeau()
      */
-    ReadOnlyTrackBeau getAddressBook();
+    ReadOnlyTrackBeau getTrackBeau();
 
     /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Customer> getFilteredPersonList();
+    ObservableList<Customer> getFilteredCustomerList();
 
     /**
      * Returns the user prefs' trackbeau book file path.
      */
-    Path getAddressBookFilePath();
+    Path getTrackBeauFilePath();
 
     /**
      * Returns the user prefs' GUI settings.
