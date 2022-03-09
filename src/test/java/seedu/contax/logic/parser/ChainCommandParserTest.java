@@ -31,7 +31,7 @@ import seedu.contax.testutil.EditPersonDescriptorBuilder;
 import seedu.contax.testutil.PersonBuilder;
 
 
-public class ChainCommandParseTest {
+public class ChainCommandParserTest {
 
     private final ChainCommandParser parser = new ChainCommandParser();
 
