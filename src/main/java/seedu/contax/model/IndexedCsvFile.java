@@ -65,8 +65,8 @@ public class IndexedCsvFile {
     }
 
     /**
-     * Returns true if both ImportCsv have the same filepath and position fields.
-     * This defines a stronger notion of equality between two ImportCsv objects.
+     * Returns true if both IndexedCsvFile have the same filepath and position fields.
+     * This defines a stronger notion of equality between two IndexedCsvFile objects.
      */
     @Override
     public boolean equals(Object other) {
