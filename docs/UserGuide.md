@@ -15,7 +15,7 @@ type fast, WoofAreYou can get your contact management tasks done faster than tra
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `WoofForYou.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `WoofAreYou.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
@@ -28,7 +28,7 @@ type fast, WoofAreYou can get your contact management tasks done faster than tra
 
    * **`delete 3`** : Deletes the 3rd pet shown in list.
 
-   * **`food 3`** : Returns pet 3's dietary requirements.
+   * **`find Peepee`** : Returns a list of pets with similar name as keywords and their corresponding information.
 
    * **`exit`** : Exits the app.
 
@@ -53,36 +53,14 @@ Examples:
 
 ### Find pet Id: `find`
 
-Retrieve and return a list of all pet Ids corresponding to the specified name from the database. 
+Retrieve and return a list of all pet with similar name to keywords and their corresponding details from the database. 
 
-Format: `find NAME_OF_PET`
-* The name of pet is case-insensitive.`e.g: Mojo will match mojo`
+Format: `find n/NAME_OF_PET [Keywords]`
+* The name of pet is case-insensitive e.g: `find Mojo` will match `find mojo`
 * Only the name is searched.
 
 Examples:
-* `find Mojo`
-
-### Viewing pets' dietary requirements : `food`
-
-View pets' dietary preference.
-
-Format: `food INDEX`
-* The index refers to the index number shown in the displayed `getId` list.
-* The index must be a positive number
-
-Example:
-* `food 12` returns pet 12's dietary requirements.
-
-### Viewing pets' owner data: `owner`
-
-View pets' owner data.
-
-Format: `owner INDEX`
-* The index refers to the index number shown in the displayed `getId` list.
-* The index must be a positive number
-
-Example: 
-* `owner 12` returns pet 12's owner's name, phone number, address and pets registered.
+* `find Peepee Waffle Bagel`
 
 ### Viewing pets’ pick-up and drop-off time: `time`
 
@@ -118,12 +96,10 @@ Format: `exit`
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                               |
-|------------|------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME_OF_PET o/OWNER_NAME p/PHONE_NUMBER a/ADDRESS` <br> e.g., `add n/Peepee o/Peter p/98648252 a/13 Computing Drive, Singapore 117417`  |
-| **Delete** | `delete id` <br> e.g., `delete 3` (where 3 is the id of the pet in the system)                                                                 |
-| **Find**   | `find nameOfPet `<br> e.g., `find PeePee` (returns id of all pets called PeePee)                                                               |
-| **Time**   | `time id `<br> e.g.,`pickup 3 0900 1200` (where 3 is the id of the pet in the system)                                                          |
-| **Food**   | `food id `<br> e.g., `food 3` (where 3 is the id of the pet in the system)                                                                     |
-| **Owner**  | `owner o/OWNER_NAME` <br> e.g., `owner o/Jeff Lin`                                                                                             |
-| **Exit**   | `exit`                                                                                                                                         |
+| Action     | Format, Examples                                                                                                                              |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME_OF_PET o/OWNER_NAME p/PHONE_NUMBER a/ADDRESS` <br> e.g., `add n/Peepee o/Peter p/98648252 a/13 Computing Drive, Singapore 117417` |
+| **Delete** | `delete id` <br> e.g., `delete 3` (where 3 is the id of the pet in the system)                                                                |
+| **Find**   | `find n/NAME_OF_PET [Keywords]` <br> e.g., `find PeePee` (returns information of all pets called PeePee)                                      |
+| **Time**   | `time id `<br> e.g.,`pickup 3 0900 1200` (where 3 is the id of the pet in the system)                                                         |
+| **Exit**   | `exit`                                                                                                                                        |
