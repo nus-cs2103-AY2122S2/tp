@@ -1,19 +1,17 @@
 package seedu.address.model;
 
+import java.nio.file.Path;
+import java.util.function.Predicate;
+
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Customer;
-
-import java.nio.file.Path;
-import java.util.function.Predicate;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
-    /**
-     * {@code Predicate} that always evaluate to true
-     */
+    /** {@code Predicate} that always evaluate to true */
     Predicate<Customer> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     /**
@@ -51,9 +49,7 @@ public interface Model {
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
-    /**
-     * Returns the AddressBook
-     */
+    /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
 
     /**
@@ -80,14 +76,11 @@ public interface Model {
      */
     void setPerson(Customer target, Customer editedPerson);
 
-    /**
-     * Returns an unmodifiable view of the filtered person list
-     */
+    /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Customer> getFilteredPersonList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
-     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Customer> predicate);
