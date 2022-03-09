@@ -1,5 +1,7 @@
 package seedu.ibook.storage;
 
+import java.time.LocalDate;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -22,7 +24,7 @@ class JsonAdaptedProduct {
     private final String category;
     private final String expiryDate;
     private final String description;
-    private final Double price;
+    private final String price;
 
     /**
      * Constructs a {@code JsonAdaptedProduct} with the given product details.
@@ -30,14 +32,14 @@ class JsonAdaptedProduct {
     @JsonCreator
     public JsonAdaptedProduct(@JsonProperty("name") String name,
                               @JsonProperty("category") String category,
-                              @JsonProperty("expiryDate") String expiryDate,
+                              @JsonProperty("expiryDate") LocalDate expiryDate,
                               @JsonProperty("description") String description,
                               @JsonProperty("price") Double price) {
         this.name = name;
         this.category = category;
-        this.expiryDate = expiryDate;
+        this.expiryDate = expiryDate.toString();
         this.description = description;
-        this.price = price;
+        this.price = price.toString();
     }
 
     /**
@@ -46,9 +48,9 @@ class JsonAdaptedProduct {
     public JsonAdaptedProduct(Product source) {
         name = source.getName().fullName;
         category = source.getCategory().fullCategoryName;
-        expiryDate = source.getExpiryDate().expiryDateString;
+        expiryDate = source.getExpiryDate().expiryDate.toString();
         description = source.getDescription().fullDescription;
-        price = source.getPrice().price;
+        price = source.getPrice().price.toString();
     }
 
     /**

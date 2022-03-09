@@ -14,9 +14,9 @@ public class ProductBuilder {
 
     public static final String DEFAULT_NAME = "Maggie Mee";
     public static final String DEFAULT_CATEGORY = "Noodles";
-    public static final String DEFAULT_EXPIRY_DATE = "2022-01-01";
+    public static final String DEFAULT_EXPIRY_DATE = "2022-12-13";
     public static final String DEFAULT_DESCRIPTION = "Delicious noodles";
-    public static final Double DEFAULT_PRICE = 1.99;
+    public static final String DEFAULT_PRICE = "1.99";
 
     private Name name;
     private Category category;
@@ -82,7 +82,7 @@ public class ProductBuilder {
      * Sets the {@code Price} of the {@code Product} that we are building.
      */
     public ProductBuilder withPrice(String price) {
-        this.price = new Price(Double.parseDouble(price));
+        this.price = new Price(price);
         return this;
     }
 
