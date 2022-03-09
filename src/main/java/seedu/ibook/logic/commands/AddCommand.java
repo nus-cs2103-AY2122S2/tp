@@ -28,7 +28,7 @@ public class AddCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Tasty Bread "
             + PREFIX_CATEGORY + "Bread "
-            + PREFIX_EXPIRY_DATE + "01/01/2022 "
+            + PREFIX_EXPIRY_DATE + "2022-01-01 "
             + PREFIX_PRICE + "3.00 "
             + PREFIX_DESCRIPTION + "Very Tasty";
 
