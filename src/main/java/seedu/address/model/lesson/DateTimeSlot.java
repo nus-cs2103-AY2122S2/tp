@@ -1,7 +1,6 @@
 package seedu.address.model.lesson;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -11,10 +10,10 @@ import java.time.format.DateTimeParseException;
  * Represents the time in which a lesson takes place in the LessonBook.
  */
 public class DateTimeSlot {
-    private static final String MESSAGE_CONSTRAINTS =
-            "Lessons can only be created with a valid date."
+    private static final String MESSAGE_CONSTRAINTS = "Lessons can only be created with a valid date."
                     + "\nHours and minutes must be non-negative integer."
                     + "\nMinutes cannot be more than 60.";
+
     private static final DateTimeFormatter acceptedDateFormat = DateTimeFormatter.ofPattern("d-M-y");
     private static final DateTimeFormatter acceptedStartTimeFormat = DateTimeFormatter.ofPattern("HH:mm");
 
@@ -34,9 +33,6 @@ public class DateTimeSlot {
      */
     public DateTimeSlot(LocalDateTime date, int hours, int minutes) {
         requireNonNull(date);
-        checkArgument((hours > 0 && minutes >= 0 && minutes <= 60)
-                        || (hours == 0 && minutes > 0 && minutes <= 60),
-                MESSAGE_CONSTRAINTS);
 
         dateOfLesson = date;
         this.hours = hours;

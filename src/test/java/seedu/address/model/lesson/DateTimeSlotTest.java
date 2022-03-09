@@ -17,21 +17,6 @@ public class DateTimeSlotTest {
     }
 
     @Test
-    public void constructor_negativeHours_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new DateTimeSlot(d, -2));
-    }
-
-    @Test
-    public void constructor_negativeMinutes_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new DateTimeSlot(d, 0, -5));
-    }
-
-    @Test
-    public void constructor_zeroHoursAndZeroMinutes_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new DateTimeSlot(d, 0, 0));
-    }
-
-    @Test
     public void constructor_zeroHoursAndPositiveMinutes_instantiatesSuccessfully() {
         assertNotNull(new DateTimeSlot(d, 0, 50));
     }
