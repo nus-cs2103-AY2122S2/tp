@@ -9,12 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.junit.jupiter.api.Test;
+
 import manageezpz.commons.exceptions.IllegalValueException;
 import manageezpz.model.person.Address;
 import manageezpz.model.person.Email;
 import manageezpz.model.person.Name;
 import manageezpz.model.person.Phone;
-import org.junit.jupiter.api.Test;
 
 public class JsonAdaptedPersonTest {
     private static final String INVALID_NAME = "R@chel";

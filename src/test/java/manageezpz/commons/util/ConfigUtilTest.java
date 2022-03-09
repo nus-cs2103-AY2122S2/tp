@@ -1,8 +1,8 @@
 package manageezpz.commons.util;
 
+import static manageezpz.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static manageezpz.testutil.Assert.assertThrows;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -10,10 +10,11 @@ import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.logging.Level;
 
-import manageezpz.commons.core.Config;
-import manageezpz.commons.exceptions.DataConversionException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+
+import manageezpz.commons.core.Config;
+import manageezpz.commons.exceptions.DataConversionException;
 
 public class ConfigUtilTest {
 

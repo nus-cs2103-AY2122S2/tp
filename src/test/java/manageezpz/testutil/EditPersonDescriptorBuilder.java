@@ -5,12 +5,12 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import manageezpz.logic.commands.EditCommand.EditPersonDescriptor;
-import manageezpz.model.tag.Tag;
 import manageezpz.model.person.Address;
 import manageezpz.model.person.Email;
 import manageezpz.model.person.Name;
 import manageezpz.model.person.Person;
 import manageezpz.model.person.Phone;
+import manageezpz.model.tag.Tag;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.

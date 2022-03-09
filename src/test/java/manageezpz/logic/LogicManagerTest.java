@@ -1,11 +1,11 @@
 package manageezpz.logic;
 
+import static manageezpz.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static manageezpz.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static manageezpz.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static manageezpz.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static manageezpz.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static manageezpz.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static manageezpz.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
-import static manageezpz.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static manageezpz.testutil.Assert.assertThrows;
 import static manageezpz.testutil.TypicalPersons.AMY;
 import static org.junit.jupiter.api.Assertions.assertEquals;

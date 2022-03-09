@@ -1,14 +1,14 @@
 package manageezpz.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static manageezpz.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static manageezpz.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static manageezpz.testutil.TypicalPersons.CARL;
 import static manageezpz.testutil.TypicalPersons.ELLE;
 import static manageezpz.testutil.TypicalPersons.FIONA;
 import static manageezpz.testutil.TypicalPersons.getTypicalAddressBook;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;

@@ -6,13 +6,14 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.nio.file.Path;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
 import manageezpz.commons.core.GuiSettings;
 import manageezpz.model.AddressBook;
 import manageezpz.model.ReadOnlyAddressBook;
 import manageezpz.model.UserPrefs;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
 
 public class StorageManagerTest {
 

@@ -3,13 +3,13 @@ package manageezpz.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import manageezpz.model.tag.Tag;
-import manageezpz.model.util.SampleDataUtil;
 import manageezpz.model.person.Address;
 import manageezpz.model.person.Email;
 import manageezpz.model.person.Name;
 import manageezpz.model.person.Person;
 import manageezpz.model.person.Phone;
+import manageezpz.model.tag.Tag;
+import manageezpz.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Person objects.

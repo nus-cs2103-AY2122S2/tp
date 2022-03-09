@@ -1,19 +1,20 @@
 package manageezpz.storage;
 
+import static manageezpz.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static manageezpz.testutil.Assert.assertThrows;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
 
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
 import manageezpz.commons.core.GuiSettings;
 import manageezpz.commons.exceptions.DataConversionException;
 import manageezpz.model.UserPrefs;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
 
 public class JsonUserPrefsStorageTest {
 

@@ -1,6 +1,13 @@
 package manageezpz.logic.commands;
 
-import static manageezpz.logic.commands.CommandTestUtil.*;
+import static manageezpz.logic.commands.CommandTestUtil.DESC_AMY;
+import static manageezpz.logic.commands.CommandTestUtil.DESC_BOB;
+import static manageezpz.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static manageezpz.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static manageezpz.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static manageezpz.logic.commands.CommandTestUtil.assertCommandFailure;
+import static manageezpz.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static manageezpz.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static manageezpz.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static manageezpz.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static manageezpz.testutil.TypicalPersons.getTypicalAddressBook;

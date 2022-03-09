@@ -6,11 +6,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import org.junit.jupiter.api.Test;
+
 import manageezpz.commons.exceptions.IllegalValueException;
 import manageezpz.commons.util.JsonUtil;
 import manageezpz.model.AddressBook;
 import manageezpz.testutil.TypicalPersons;
-import org.junit.jupiter.api.Test;
 
 public class JsonSerializableAddressBookTest {
 
