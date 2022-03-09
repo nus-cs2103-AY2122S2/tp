@@ -77,7 +77,6 @@ public class MainWindow extends UiPart<Stage> {
 
         helpWindow = new HelpWindow();
         onboardingPrompt = new OnboardingPrompt(primaryStage);
-        currentListType = ListContentType.PERSON;
     }
 
     public Stage getPrimaryStage() {
