@@ -11,6 +11,9 @@ public class CommandResult {
 
     private final String feedbackToUser;
 
+    /** The application should switch tab to selected tab. **/
+    private final ViewTab viewTab;
+
     /** Help information should be shown to the user. */
     private final boolean showHelp;
 
@@ -24,6 +27,7 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.viewTab = ViewTab.NONE;
     }
 
     /**
@@ -34,8 +38,22 @@ public class CommandResult {
         this(feedbackToUser, false, false);
     }
 
+    /**
+     * Constructs a {@code CommandResult} with the specified fields.
+     */
+    public CommandResult(String feedbackToUser, ViewTab viewTab) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = false;
+        this.exit = false;
+        this.viewTab = viewTab;
+    }
+
     public String getFeedbackToUser() {
         return feedbackToUser;
+    }
+
+    public ViewTab toggleTo() {
+        return viewTab;
     }
 
     public boolean isShowHelp() {
