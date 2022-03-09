@@ -32,14 +32,14 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddCustomerCommand;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Customer;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.CustomerBuilder;
 
 public class AddCustomerCommandParserTest {
-    private AddCustomerCommandParser parser = new AddCustomerCommandParser();
+    private final AddCustomerCommandParser parser = new AddCustomerCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
