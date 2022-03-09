@@ -113,7 +113,7 @@ public class OnboardingStep {
 
         boolean result = otherStep.getEventType() == getEventType()
                 && otherStep.getDisplayMessage().equals(getDisplayMessage())
-                && otherStep.getOverlayOption() == getHighlightOption()
+                && otherStep.getOverlayOption() == getOverlayOption()
                 && otherStep.getMessageHeight() == getMessageHeight()
                 && otherStep.getMessageWidth() == getMessageWidth()
                 && otherStep.getHighlightOption() == getHighlightOption()
@@ -124,7 +124,7 @@ public class OnboardingStep {
         if (otherStep.getPerson() == null && person == null) {
             return result;
         } else {
-            return result && otherStep.getPerson().equals(person);
+            return result && Objects.equals(otherStep.getPerson(), getPerson());
         }
     }
 

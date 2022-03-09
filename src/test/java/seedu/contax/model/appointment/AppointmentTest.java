@@ -1,11 +1,13 @@
 package seedu.contax.model.appointment;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.contax.logic.commands.CommandTestUtil.VALID_APPOINTMENT_NAME_AMELIA;
 import static seedu.contax.testutil.Assert.assertThrows;
 import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALICE;
 import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALONE;
+import static seedu.contax.testutil.TypicalPersons.ALICE;
 import static seedu.contax.testutil.TypicalPersons.BOB;
 
 import java.time.LocalDateTime;
@@ -158,5 +160,20 @@ public class AppointmentTest {
 
         assertTrue(appointment1.withPerson(null).equals(appointment2));
         assertTrue(appointment3.equals(appointment1.withPerson(BOB)));
+    }
+
+    @Test
+    public void toStringTest() {
+        LocalDateTime startDate = LocalDateTime.parse("2022-02-11T12:30:00");
+        Appointment appointment = new AppointmentBuilder().withName("Test Meeting")
+                .withStartDateTime(startDate).withDuration(20).withPerson(ALICE).build();
+        assertEquals(appointment.getName()
+                + "; Start Date Time: "
+                + appointment.getStartDateTime()
+                + "; Duration: "
+                + appointment.getDuration()
+                + "; Person: "
+                + appointment.getPerson(),
+                appointment.toString());
     }
 }

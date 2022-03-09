@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.contax.testutil.TypicalPersons.ALICE;
+import static seedu.contax.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,8 +19,6 @@ public class OnboardingStepTest {
                 0, 0, 0, "", null, 1);
         OnboardingStep step2 = new OnboardingStep("message 1", 0, 0, 0,
                 0, 0, 0, "", null, 1);
-        OnboardingStep step3 = new OnboardingStep("message 1", 2, 0, 0,
-                0, 1, 0, "", null, 1);
 
         // same object -> returns true
         assertTrue(step1.equals(step1));
@@ -26,14 +26,44 @@ public class OnboardingStepTest {
         // all values same -> returns true
         assertTrue(step1.equals(step2));
 
-        // same message, some of other attributes different
-        assertFalse(step1.equals(step3));
-
         // different type -> returns false
         assertFalse(step1.equals(5));
 
         // null -> returns false
         assertFalse(step1.equals(null));
+
+        // attribute difference checks
+        assertFalse(step1.equals(new OnboardingStep("message 2", 0, 0, 0,
+                0, 0, 0, "", null, 1)));
+        assertFalse(step1.equals(new OnboardingStep("message 1", 1, 0, 0,
+                0, 0, 0, "", null, 1)));
+        assertFalse(step1.equals(new OnboardingStep("message 1", 0, 1, 0,
+                0, 0, 0, "", null, 1)));
+        assertFalse(step1.equals(new OnboardingStep("message 1", 0, 0, 1,
+                0, 0, 0, "", null, 1)));
+        assertFalse(step1.equals(new OnboardingStep("message 1", 0, 0, 0,
+                1, 0, 0, "", null, 1)));
+        assertFalse(step1.equals(new OnboardingStep("message 1", 0, 0, 0,
+                0, 1, 0, "", null, 1)));
+        assertFalse(step1.equals(new OnboardingStep("message 1", 0, 0, 0,
+                0, 0, 1, "", null, 1)));
+        assertFalse(step1.equals(new OnboardingStep("message 1", 0, 0, 0,
+                0, 0, 0, "1", null, 1)));
+        assertFalse(step1.equals(new OnboardingStep("message 1", 0, 0, 0,
+                0, 0, 0, "", null, 2)));
+
+        OnboardingStep step4 = new OnboardingStep("message 1", 2, 0, 0,
+                0, 1, 0, "", ALICE, 1);
+        OnboardingStep step5 = new OnboardingStep("message 1", 2, 0, 0,
+                0, 1, 0, "", BOB, 1);
+        OnboardingStep step6 = new OnboardingStep("message 1", 2, 0, 0,
+                0, 1, 0, "", ALICE, 1);
+        
+        // different person
+        assertFalse(step4.equals(step5));
+
+        // same person, with same attributes
+        assertTrue(step4.equals(step6));
     }
 
     @Test
