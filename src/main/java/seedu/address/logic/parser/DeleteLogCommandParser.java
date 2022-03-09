@@ -33,11 +33,11 @@ public class DeleteLogCommandParser implements Parser<DeleteLogCommand> {
 
         // sanity check
         if (!(arePrefixesPresent(argMultimap, PREFIX_LOG_INDEX)
-            || arePrefixesPresent(argMultimap, FLAG_ALL))) {
+                || arePrefixesPresent(argMultimap, FLAG_ALL))) {
             throw new ParseException(MESSAGE_INVALID_FORMAT);
         }
 
-            // initialize
+        // initialize
         Index personIndex = null;
         Index logIndex = null;
         boolean isForOnePerson = false;
