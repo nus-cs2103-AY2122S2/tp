@@ -83,12 +83,7 @@ public class CompanyCard extends UiPart<Region> {
         roleList.addListener((ListChangeListener<Role>) change -> {
             roleTags.getChildren().clear();
             setRoleTags();
-            if (roleList.isEmpty()) {
-                roleListPanelPlaceholder.getChildren().clear();
-            } else {
-                roleListPanel = new RoleListPanel(roleList);
-                setRoleListPanelPlaceholder();
-            }
+            setRoleListPanelPlaceholder();
         });
     }
 
@@ -105,8 +100,13 @@ public class CompanyCard extends UiPart<Region> {
      * Update <code>roleListPanelPlaceholder</code> to reflect the contents of the current <code>roleList</code>
      */
     public void setRoleListPanelPlaceholder() {
-        roleListPanel = new RoleListPanel(roleList);
-        roleListPanelPlaceholder.getChildren().add(roleListPanel.getRoot());
+        if (roleList.isEmpty()) {
+            roleListPanelPlaceholder.getChildren().clear();
+            roleListPanelPlaceholder.setManaged(false);
+        } else {
+            roleListPanel = new RoleListPanel(roleList);
+            roleListPanelPlaceholder.getChildren().add(roleListPanel.getRoot());
+        }
     }
 
     @Override
