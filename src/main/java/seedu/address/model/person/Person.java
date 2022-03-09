@@ -25,6 +25,16 @@ public class Person {
     private final Description description;
     private final Set<Tag> tags = new HashSet<>();
 
+    /**
+     * Constructs a Person
+     *
+     * @param name Name of person
+     * @param phone Phone of person
+     * @param email Email of person
+     * @param address Address of person
+     * @param description Description of person
+     * @param tags Tag(s) of person
+     */
     public Person(Name name, Phone phone, Email email, Address address, Description description, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;

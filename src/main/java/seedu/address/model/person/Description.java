@@ -1,17 +1,17 @@
 package seedu.address.model.person;
 
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import java.util.Objects;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's description in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidDescription(String)}
  */
 public class Description {
-    public static final String MESSAGE_CONSTRAINTS = "Description can take any values, " +
-            "and it should not be empty if the /d flag has been input by user";
+    public static final String MESSAGE_CONSTRAINTS = "Description can take any values, "
+            + "and it should not be empty if the /d flag has been input by user";
 
     /*
      * The first character of the description must not be a whitespace,

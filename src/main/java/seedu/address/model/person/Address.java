@@ -1,9 +1,9 @@
 package seedu.address.model.person;
 
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import java.util.Objects;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's address in the address book.
@@ -11,8 +11,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Address {
 
-    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, " +
-            "and it should not be empty if the /a flag has been entered by user. ";
+    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, "
+            + "and it should not be empty if the /a flag has been entered by user. ";
 
     /*
      * The first character of the address must not be a whitespace,
