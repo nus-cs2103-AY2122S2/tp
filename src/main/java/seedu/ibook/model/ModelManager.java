@@ -101,7 +101,7 @@ public class ModelManager implements Model {
     @Override
     public void addProduct(Product product) {
         iBook.addProduct(product);
-        updateFilteredProductList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredProductList(PREDICATE_SHOW_ALL_PRODUCTS);
     }
 
     @Override
