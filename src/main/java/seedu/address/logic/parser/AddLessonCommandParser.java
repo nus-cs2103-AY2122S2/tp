@@ -23,7 +23,7 @@ import seedu.address.model.lesson.Lesson;
  * Parses input arguments and creates a new AddCommand object
  */
 public class AddLessonCommandParser implements Parser<AddLessonCommand> {
-    public static final String INVALID_DURATION_MESSAGE = "Duration of lesson must cannot be zero.";
+    public static final String INVALID_DURATION_MESSAGE = "Duration of lesson cannot be zero.";
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
