@@ -1,13 +1,17 @@
 package seedu.address.model.show;
 
-public enum Status {
+import java.util.Locale;
 
-    COMPLETED("completed"),
-    WATCHING("watching");
+public class Status {
+
+    private static final String COMPLETED = "completed";
+    private static final String WATCHING = "watching";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Status should only be completed or watching!!!";
 
     private final String status;
 
-    Status(String status) {
+    public Status(String status) {
         this.status = status;
     }
 
@@ -21,9 +25,15 @@ public enum Status {
      * @return true if the show status is completed.
      */
     public Boolean isCompleted() {
-        if (status.equals("completed")) {
-            return true;
-        }
-        return false;
+        return status.equals(COMPLETED);
     }
+
+    /**
+     * Returns true if a given string is a valid status.
+     */
+    public static boolean isValidStatus(String test) {
+        String stest = test.toLowerCase().trim();
+        return (stest.equals(COMPLETED) || stest.equals(WATCHING));
+    }
+
 }
