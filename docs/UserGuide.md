@@ -30,8 +30,6 @@ ManageEZPZ is a **desktop app for that allows managers or supervisors to manage 
 
    * **`clear`** : Deletes all Tasks.
    
-   * **`deleteTask`**`3` : Deletes the 3rd task in the current Task list.
-
    * **`addTask /todo read book`** : Adds a todo task with a description of `read book` to the Task list.
 
    * **`exit`** : Exits the app.
