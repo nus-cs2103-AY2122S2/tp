@@ -238,15 +238,13 @@ Format: `listtags`
 
 Deletes the specified tag in ContaX.
 
-Format: `deletetag n/TAGNAME`
+Format: `deletetag INDEX`
 
-* The `TAGNAME` parameter **must** be specified.
-* Deletion is case-insensitive e.g. `students` is the same as `Students`.
+* The `INDEX` parameter **must be a positive integer**, and refers to the index number shown in the **displayed tag list**.
 * When the tag is deleted, contacts that contain this tag will have the tag removed.
-* An error will be thrown if the specified `TAGNAME` cannot be found.
 
 Examples:
-* `deletetag n/friends` Deletes the tag named *friends* and disassociates any contacts that have the *friends* tag.
+* `deletetag 1` Deletes the first tag in the tag list and disassociates any contacts that contain the specified tag.
 
 ### Finding Contacts by Tag : `findByTag`
 
