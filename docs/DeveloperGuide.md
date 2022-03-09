@@ -279,7 +279,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user     | delete an applicant from the system   | remove entries that I no longer need.                                         |
 | `* * *`  | user     | search for an applicant in the system | access details of the applicant without having to go through the entire list. |
 | `* * *`  | user     | list all applicants in the system     | monitor the application pool.                                                 |
-| `* *`    | new user | view all available commands           | get familiarised with the system.                                             |
+| `* * *`  | new user | view all available commands           | get familiarised with the system.                                             |
 
 *{More to be added}*
 
@@ -378,7 +378,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list available commands
-2.  TAlent Assistant™ returns list of commands detailing example usage
+2.  TAlent Assistant™ returns list of available commands and example usages
 
     Use case ends.
 
