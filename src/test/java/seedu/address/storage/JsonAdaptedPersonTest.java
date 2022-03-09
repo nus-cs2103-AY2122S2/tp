@@ -149,7 +149,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_nullMatriculationNumber_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_FACULTY, VALID_PHONE, VALID_EMAIL,
                 VALID_ADDRESS, null, VALID_COVID_STATUS, VALID_TAGS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Faculty.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, MatriculationNumber.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
@@ -166,7 +166,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_nullCovidStatus_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_FACULTY, VALID_PHONE, VALID_EMAIL,
                 VALID_ADDRESS, VALID_MATRICULATION_NUMBER, null, VALID_TAGS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Faculty.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, CovidStatus.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
