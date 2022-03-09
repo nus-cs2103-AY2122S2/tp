@@ -21,7 +21,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Albert Sutiono
 
-<img src="images/albertsutiono.png" width="200px">
+<img src="images/albertsutz.png" width="200px">
 
 [[github](https://github.com/albertsutz)]
 [[linkedin](https://www.linkedin.com/in/albert-sutiono/)]
