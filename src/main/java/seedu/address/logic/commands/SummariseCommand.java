@@ -33,10 +33,10 @@ public class SummariseCommand extends Command {
 
     private static final List<String> FACULTIES = Faculty.getFacultyEnumAsList();
 
-    private static final Predicate<Person> BYPOSITIVE = person -> person.getStatusAsString().equals("POSITIVE");
-    private static final Predicate<Person> BYNEGATIVE = person -> person.getStatusAsString().equals("NEGATIVE");
-    private static final Predicate<Person> BYHRW = person -> person.getStatusAsString().equals("HRW");
-    private static final Predicate<Person> BYHRN = person -> person.getStatusAsString().equals("HRN");
+    private static final Predicate<Person> BY_POSITIVE = person -> person.getStatusAsString().equals("POSITIVE");
+    private static final Predicate<Person> BY_NEGATIVE = person -> person.getStatusAsString().equals("NEGATIVE");
+    private static final Predicate<Person> BY_HRW = person -> person.getStatusAsString().equals("HRW");
+    private static final Predicate<Person> BY_HRN = person -> person.getStatusAsString().equals("HRN");
 
 
     @Override
@@ -57,12 +57,19 @@ public class SummariseCommand extends Command {
         return new CommandResult(answer.toString());
     }
 
+    /**
+     * Returns a standardised form with the breakdown of students by covid status within a specified faculty.
+     *
+     * @param result a list of students in said faculty
+     * @param facultyName the faculty in which students are from
+     * @return a string form containing the respective number of students with certain covid status
+     */
     private String summariseByFaculty(List<Person> result, String facultyName) {
         int totalNumberOfStudents = result.size();
-        int numberOfPositive = (int) result.stream().filter(BYPOSITIVE).count();
-        int numberOfNegative = (int) result.stream().filter(BYNEGATIVE).count();
-        int numberOfHrw = (int) result.stream().filter(BYHRW).count();
-        int numberOfHrn = (int) result.stream().filter(BYHRN).count();
+        int numberOfPositive = (int) result.stream().filter(BY_POSITIVE).count();
+        int numberOfNegative = (int) result.stream().filter(BY_NEGATIVE).count();
+        int numberOfHrw = (int) result.stream().filter(BY_HRW).count();
+        int numberOfHrn = (int) result.stream().filter(BY_HRN).count();
         double percentagePositive = (double) numberOfPositive / totalNumberOfStudents * 100;
 
         return String.format(FACULTY_SUMMARY_FORM, facultyName, totalNumberOfStudents, numberOfPositive,
