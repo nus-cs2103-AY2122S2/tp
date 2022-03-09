@@ -2,11 +2,8 @@ package seedu.ibook.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
-import seedu.ibook.commons.core.Version;
 import seedu.ibook.commons.core.index.Index;
 import seedu.ibook.commons.util.StringUtil;
 import seedu.ibook.logic.parser.exceptions.ParseException;
@@ -93,16 +90,11 @@ public class ParserUtil {
      */
     public static ExpiryDate parseExpiryDate(String expiryDate) throws ParseException {
         requireNonNull(expiryDate);
-        try {
-            LocalDate parsedExpiryDate = LocalDate.parse(expiryDate);
-            if (!ExpiryDate.isValidExpiryDate(parsedExpiryDate)) {
-                throw new ParseException(ExpiryDate.MESSAGE_CONSTRAINTS);
-            }
-            return new ExpiryDate(parsedExpiryDate);
-        } catch (DateTimeParseException e) {
+        String trimmedExpiryDate = expiryDate.trim();
+        if (!ExpiryDate.isValidExpiryDate(trimmedExpiryDate)) {
             throw new ParseException(ExpiryDate.MESSAGE_CONSTRAINTS);
         }
-
+        return new ExpiryDate(trimmedExpiryDate);
     }
 
     /**

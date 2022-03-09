@@ -1,6 +1,5 @@
 package seedu.ibook.model.util;
 
-import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -21,7 +20,7 @@ import seedu.ibook.model.tag.Tag;
 public class SampleDataUtil {
     public static Product[] getSampleProducts() {
         return new Product[] {
-            new Product(new Name("Maggie Mee"), new Category("Noodles"), new ExpiryDate(LocalDate.now()),
+            new Product(new Name("Maggie Mee"), new Category("Noodles"), new ExpiryDate("2022-01-01"),
                 new Description("noodles for all"), new Price(1.99))
         };
     }

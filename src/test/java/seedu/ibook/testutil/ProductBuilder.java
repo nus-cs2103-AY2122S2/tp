@@ -1,7 +1,5 @@
 package seedu.ibook.testutil;
 
-import java.time.LocalDate;
-
 import seedu.ibook.model.product.Category;
 import seedu.ibook.model.product.Description;
 import seedu.ibook.model.product.ExpiryDate;
@@ -16,7 +14,7 @@ public class ProductBuilder {
 
     public static final String DEFAULT_NAME = "Maggie Mee";
     public static final String DEFAULT_CATEGORY = "Noodles";
-    public static final LocalDate DEFAULT_EXPIRY_DATE = LocalDate.now();
+    public static final String DEFAULT_EXPIRY_DATE = "2022-01-01";
     public static final String DEFAULT_DESCRIPTION = "Delicious noodles";
     public static final Double DEFAULT_PRICE = 1.99;
 
@@ -76,7 +74,7 @@ public class ProductBuilder {
      * Sets the {@code ExpiryDate} of the {@code Product} that we are building.
      */
     public ProductBuilder withExpiryDate(String expiryDate) {
-        this.expiryDate = new ExpiryDate(LocalDate.parse(expiryDate));
+        this.expiryDate = new ExpiryDate(expiryDate);
         return this;
     }
 
