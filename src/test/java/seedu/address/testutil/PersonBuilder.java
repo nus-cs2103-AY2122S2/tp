@@ -28,6 +28,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Optional<Property> property;
+    private Optional<Property> preference;
     private Set<Tag> tags;
 
     /**
@@ -39,6 +40,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         property = Optional.empty();
+        preference = Optional.empty();
         tags = new HashSet<>();
     }
 
@@ -51,6 +53,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         property = personToCopy.getProperty();
+        preference = personToCopy.getPreference();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -95,7 +98,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, property, tags);
+        return new Person(name, phone, email, address, property, preference, tags);
     }
 
 }

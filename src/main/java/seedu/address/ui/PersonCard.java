@@ -41,6 +41,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label property;
     @FXML
+    private Label preference;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -59,6 +61,12 @@ public class PersonCard extends UiPart<Region> {
             property.setText(person.getProperty().get().toString());
         } else {
             property.setVisible(false);
+        }
+
+        if (person.getPreference().isPresent()) {
+            preference.setText(person.getPreference().get().toString());
+        } else {
+            preference.setVisible(false);
         }
 
         person.getTags().stream()

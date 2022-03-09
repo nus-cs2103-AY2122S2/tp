@@ -25,18 +25,21 @@ public class Person {
     // Data fields
     private final Address address;
     private final Optional<Property> property;
+    private final Optional<Property> preference;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Optional<Property> property, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, property, tags);
+    public Person(Name name, Phone phone, Email email, Address address
+            , Optional<Property> property, Optional<Property> preference, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, property, preference, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.property = property;
+        this.preference = preference;
         this.tags.addAll(tags);
     }
 
@@ -58,6 +61,10 @@ public class Person {
 
     public Optional<Property> getProperty() {
         return property;
+    }
+
+    public Optional<Property> getPreference() {
+        return preference;
     }
 
     /**
@@ -101,13 +108,14 @@ public class Person {
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getProperty().equals(getProperty())
+                && otherPerson.getPreference().equals(getPreference())
                 && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, property, tags);
+        return Objects.hash(name, phone, email, address, property, preference, tags);
     }
 
     @Override
@@ -126,6 +134,11 @@ public class Person {
             builder.append(getProperty().get());
         }
 
+        if (getPreference().isPresent()) {
+            builder.append("; Preference: ");
+            builder.append(getPreference().get());
+        }
+
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
@@ -133,5 +146,4 @@ public class Person {
         }
         return builder.toString();
     }
-
 }
