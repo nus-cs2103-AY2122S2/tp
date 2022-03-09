@@ -2,18 +2,18 @@
 
 # Reference
 
-Original AB3 User Guide: [link](https://se-education.org/addressbook-level3/UserGuide.html) 
+Original AB3 User Guide: [link](https://se-education.org/addressbook-level3/UserGuide.html)
 
 # User Guide
 
-RealEstatePro is a desktop app for managing contacts, optimized for real estate agents to manage their clients’ contacts and sales of properties. 
+RealEstatePro is a desktop app for managing contacts, optimized for real estate agents to manage their clients’ contacts and sales of properties.
 
 ## Quick start
 
 1. Ensure you have Java `11` or above installed on your computer.
 2. Download the latest `realestatepro.jar` from here **(add link)**.
 3. Copy the file to the folder you want to use as the *home folder* for your RealEstatePro.
-4. Double-click the file to start the app. The GUI should appear in a few seconds. 
+4. Double-click the file to start the app. The GUI should appear in a few seconds.
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.
 Some example commands you can try:
     - **`list`** : Lists all contacts.
@@ -50,9 +50,9 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pr/PROPERTY_SIZE, PROPERTY_LOCATION, PROPERTY_PRICE, t/USER_TYPE` 
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pr/PROPERTY_SIZE, PROPERTY_LOCATION, PROPERTY_PRICE, t/USER_TYPE`
 
-**Tip**: A person can be tagged as either a `Buyer`, or `Seller`. 
+**Tip**: A person can be tagged as either a `Buyer`, or `Seller`.
 
 Examples:
 
@@ -69,7 +69,7 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PROPERTY_SIZE, PROPERTY_LOCATION, PROPERTY_PRICE] [t/USER_TYPE]`   
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PROPERTY_SIZE, PROPERTY_LOCATION, PROPERTY_PRICE] [t/USER_TYPE]`
 
 - Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …
 - At least one of the optional fields must be provided.
@@ -98,9 +98,8 @@ Examples:
 
 - `find John` returns `john` and `John Doe`
 - `find alex david` returns `Alex Yeoh`, `David Li`
-    
+
     ![https://se-education.org/addressbook-level3/images/findAlexDavidResult.png](https://se-education.org/addressbook-level3/images/findAlexDavidResult.png)
-    
 
 ### Deleting a person: `delete`
 
