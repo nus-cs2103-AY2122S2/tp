@@ -52,6 +52,7 @@ I'm always looking for ways to improve my skills and widen my knowledge.
 
 [[github](https://github.com/mradhyaf)]
 [[linkedin](https://www.linkedin.com/in/mradhyaf/)]
+[[portofolio](./team/mradhyaf.md)]
 
 * Role: Developer
 * Responsibilities: TBD
