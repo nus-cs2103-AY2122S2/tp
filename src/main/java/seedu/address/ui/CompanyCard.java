@@ -77,7 +77,7 @@ public class CompanyCard extends UiPart<Region> {
             email.setManaged(false);
         }
         setRoleTags();
-        roleList = company.getRoleManager().getRoles();
+        roleList = company.getRoleManager().getFilteredRoles();
         setRoleListPanelPlaceholder();
 
         roleList.addListener((ListChangeListener<Role>) change -> {
@@ -86,6 +86,7 @@ public class CompanyCard extends UiPart<Region> {
             if (roleList.isEmpty()) {
                 roleListPanelPlaceholder.getChildren().clear();
             } else {
+                roleListPanel = new RoleListPanel(roleList);
                 setRoleListPanelPlaceholder();
             }
         });

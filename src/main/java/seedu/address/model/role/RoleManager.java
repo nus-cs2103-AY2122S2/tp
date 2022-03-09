@@ -5,22 +5,28 @@ import static java.util.Objects.requireNonNull;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 
 /**
  * Represents the list of all roles tagged to a Company found in the address book.
  */
 public class RoleManager {
+
+    private static final Predicate<Role> PREDICATE_SHOW_ALL_ROLES = unused -> true;
+
     private ObservableList<Role> roleList;
+    private FilteredList<Role> filteredRoleList;
 
+    /**
+     * Initializes a <code>RoleManager</code> with an empty list of <code>Role</code>
+     */
     public RoleManager() {
-        this.roleList = FXCollections.observableArrayList();
-    }
-
-    public RoleManager(ObservableList<Role> roleList) {
-        this.roleList = roleList;
+        roleList = FXCollections.observableArrayList();
+        filteredRoleList = roleList.filtered(PREDICATE_SHOW_ALL_ROLES);
     }
 
     /**
@@ -33,13 +39,29 @@ public class RoleManager {
     }
 
     /**
-     * Obtains the unmodifiable set of roles tagged to a Company
+     * Obtains the filtered list of roles tagged to a Company
+     *
+     * @return <code>FilteredList</code> representing the list of roles
+     */
+    public ObservableList<Role> getFilteredRoles() {
+        return filteredRoleList;
+    }
+
+    /**
+     * Obtains the unmodifiable set of roles tagged to a <code>Company</code>
      *
      * @return <code>Set</code> representing the set of roles
      */
     public Set<Role> getSetRoles() {
-        Set<Role> roleSet = new HashSet<Role>(this.roleList);
+        Set<Role> roleSet = new HashSet<Role>(this.filteredRoleList);
         return Collections.unmodifiableSet(roleSet);
+    }
+
+    /**
+     * Filters the list of roles tagged to a <code>Company</code> given a predicate
+     */
+    public void filterRoles(Predicate<Role> predicate) {
+        filteredRoleList.setPredicate(predicate);
     }
 
     /**
@@ -69,7 +91,12 @@ public class RoleManager {
         return roleList.contains(role);
     }
 
+    /**
+     * Deletes <code>Role</code> given the index within the <code>Company</code>
+     * @param index of <code>Role</code> to be deleted
+     */
     public void deleteRole(int index) {
         this.roleList.remove(index);
+
     }
 }
