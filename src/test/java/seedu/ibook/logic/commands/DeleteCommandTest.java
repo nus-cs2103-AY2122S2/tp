@@ -1,26 +1,22 @@
 package seedu.ibook.logic.commands;
-/*
+
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import static seedu.ibook.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.ibook.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.ibook.logic.commands.CommandTestUtil.showPersonAtIndex;
-
-
-import static seedu.ibook.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.ibook.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.ibook.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.ibook.logic.commands.CommandTestUtil.showProductAtIndex;
+import static seedu.ibook.testutil.TypicalIndexes.INDEX_FIRST_PRODUCT;
+import static seedu.ibook.testutil.TypicalIndexes.INDEX_SECOND_PRODUCT;
+import static seedu.ibook.testutil.TypicalProducts.getTypicalIBook;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.ibook.commons.core.Messages;
 import seedu.ibook.commons.core.index.Index;
+import seedu.ibook.model.Model;
 import seedu.ibook.model.ModelManager;
-import seedu.ibook.model.OldUserPrefs;
-import seedu.ibook.model.person.Person;
-
- */
+import seedu.ibook.model.UserPrefs;
+import seedu.ibook.model.product.Product;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -28,69 +24,68 @@ import seedu.ibook.model.person.Person;
  */
 public class DeleteCommandTest {
 
-    /*
-    private Model model = new ModelManager(getTypicalAddressBook(), new OldUserPrefs());
+    private Model model = new ModelManager(getTypicalIBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        Product productToDelete = model.getFilteredProductList().get(INDEX_FIRST_PRODUCT.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PRODUCT);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PRODUCT_SUCCESS, productToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new OldUserPrefs());
-        expectedModel.deletePerson(personToDelete);
+        ModelManager expectedModel = new ModelManager(model.getIBook(), new UserPrefs());
+        expectedModel.deleteProduct(productToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredProductList().size() + 1);
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PRODUCT_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showProductAtIndex(model, INDEX_FIRST_PRODUCT);
 
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        Product productToDelete = model.getFilteredProductList().get(INDEX_FIRST_PRODUCT.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PRODUCT);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PRODUCT_SUCCESS, productToDelete);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new OldUserPrefs());
-        expectedModel.deletePerson(personToDelete);
-        showNoPerson(expectedModel);
+        Model expectedModel = new ModelManager(model.getIBook(), new UserPrefs());
+        expectedModel.deleteProduct(productToDelete);
+        showNoProduct(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showProductAtIndex(model, INDEX_FIRST_PRODUCT);
 
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        Index outOfBoundIndex = INDEX_SECOND_PRODUCT;
         // ensures that outOfBoundIndex is still in bounds of ibook list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getIBook().getProductList().size());
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PRODUCT_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON);
+        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PRODUCT);
+        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PRODUCT);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_PERSON);
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_PRODUCT);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
@@ -99,18 +94,17 @@ public class DeleteCommandTest {
         // null -> returns false
         assertFalse(deleteFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different product -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
     }
 
     /**
      * Updates {@code model}'s filtered list to show no one.
-
-    private void showNoPerson(Model model) {
-        model.updateFilteredPersonList(p -> false);
-
-        assertTrue(model.getFilteredPersonList().isEmpty());
-    }
-
      */
+
+    private void showNoProduct(Model model) {
+        model.updateFilteredProductList(p -> false);
+
+        assertTrue(model.getFilteredProductList().isEmpty());
+    }
 }
