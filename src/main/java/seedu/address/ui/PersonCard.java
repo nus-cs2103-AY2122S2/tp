@@ -57,6 +57,14 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
+    @FXML
+    public void handleViewProfile() {
+        if (Profile.person == null) {
+            Profile.setPerson(person);
+        }
+        System.out.println(person.getName());
+    }
+
     @Override
     public boolean equals(Object other) {
         // short circuit if same object
