@@ -3,7 +3,6 @@
 
 ![Ui](docs/images/Ui.png)
 
-{Ui to be updated}
 
 ### NUSocials
 

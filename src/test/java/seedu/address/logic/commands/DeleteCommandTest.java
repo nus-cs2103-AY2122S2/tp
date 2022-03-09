@@ -7,8 +7,11 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
@@ -24,7 +27,17 @@ import seedu.address.model.person.Person;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model;
+
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    }
+
+    @AfterEach
+    public void tearDown() {
+        model = null;
+    }
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -67,8 +80,9 @@ public class DeleteCommandTest {
     public void execute_invalidIndexFilteredList_throwsCommandException() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        Index outOfBoundIndex = INDEX_SECOND_PERSON.getOriginalZeroBasedAsIndex();
         // ensures that outOfBoundIndex is still in bounds of address book list
+
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
@@ -77,10 +91,84 @@ public class DeleteCommandTest {
     }
 
     @Test
+    public void execute_validIndexUnfilteredListMultipleOutOfOrder_success() {
+        Person personToDelete1 = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToDelete2 = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Person personToDelete3 = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
+        StringBuilder personsToDelete = new StringBuilder();
+        personsToDelete.append(personToDelete3)
+                .append(System.lineSeparator()).append(personToDelete1)
+                .append(System.lineSeparator()).append(personToDelete2);
+
+        DeleteCommand deleteCommand = new DeleteCommand(
+                new Index[]{INDEX_THIRD_PERSON, INDEX_FIRST_PERSON, INDEX_SECOND_PERSON});
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_MULTIPLE_PERSON_SUCCESS, personsToDelete);
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        // Order below does not affect deletion, it is done by name of person.
+        // Order of deletion decided by constructor of deleteCommand.
+        expectedModel.deletePerson(personToDelete1);
+        expectedModel.deletePerson(personToDelete2);
+        expectedModel.deletePerson(personToDelete3);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validIndexUnfilteredListMultipleInOrder_success() {
+        Person personToDelete1 = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToDelete2 = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Person personToDelete3 = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
+        StringBuilder personsToDelete = new StringBuilder();
+        personsToDelete.append(personToDelete1)
+                    .append(System.lineSeparator()).append(personToDelete2)
+                    .append(System.lineSeparator()).append(personToDelete3);
+
+        DeleteCommand deleteCommand = new DeleteCommand(
+                new Index[]{INDEX_FIRST_PERSON, INDEX_SECOND_PERSON, INDEX_THIRD_PERSON});
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_MULTIPLE_PERSON_SUCCESS, personsToDelete);
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        // Order below does not affect deletion, it is done by name of person.
+        // Order of deletion decided by constructor of deleteCommand.
+        expectedModel.deletePerson(personToDelete1);
+        expectedModel.deletePerson(personToDelete2);
+        expectedModel.deletePerson(personToDelete3);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validIndexUnfilteredListMultipleReverseOrder_success() {
+        Person personToDelete1 = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToDelete2 = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Person personToDelete3 = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
+        StringBuilder personsToDelete = new StringBuilder();
+        personsToDelete.append(personToDelete3)
+                .append(System.lineSeparator()).append(personToDelete2)
+                .append(System.lineSeparator()).append(personToDelete1);
+
+        DeleteCommand deleteCommand = new DeleteCommand(
+                new Index[]{INDEX_THIRD_PERSON, INDEX_SECOND_PERSON, INDEX_FIRST_PERSON});
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_MULTIPLE_PERSON_SUCCESS, personsToDelete);
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        // Order below does not affect deletion, it is done by name of person.
+        // Order of deletion decided by constructor of deleteCommand.
+        expectedModel.deletePerson(personToDelete1);
+        expectedModel.deletePerson(personToDelete2);
+        expectedModel.deletePerson(personToDelete3);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void equals() {
         DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON);
         DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON);
-
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
