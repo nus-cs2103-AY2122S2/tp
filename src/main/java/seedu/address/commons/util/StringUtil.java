@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
+import java.util.HashSet;
 
 /**
  * Helper functions for handling strings.
@@ -79,6 +80,31 @@ public class StringUtil {
         String[] indexes = s.split(" ");
 
         return indexes.length != 1;
+    }
+
+    /**
+     * Returns true if {@code s} contains multiple all unique entries (integers), does not check for validness.
+     * Returns false if {@code s} contains duplicate entries (integers).
+     * e.g.:
+     * "1 1", "1 2 1 3" returns false
+     * "1 2 3", "5 10 2 3" (multiple whitespaces) returns true
+     *
+     * @param s trimmed string of arguments
+     * @throws NullPointerException if {@code s} is null.
+     */
+    public static boolean isAllUniqueIntegers(String s) {
+        requireNonNull(s);
+        String[] indexes = s.split(" ");
+        HashSet<Integer> hashSet = new HashSet<>();
+        for (String t : indexes) {
+            int n = Integer.parseInt(t);
+            if (!hashSet.contains(n)) {
+                hashSet.add(n);
+            } else {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**

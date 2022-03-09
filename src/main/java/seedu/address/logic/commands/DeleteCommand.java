@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
@@ -22,7 +23,7 @@ public class DeleteCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1\n"
             + "OR\n"
-            + "Parameters: INDEX...INDEX (must be a positive integer)\n"
+            + "Parameters: INDEX... (all indexes must be unique and positive integers)\n"
             + "Example: " + COMMAND_WORD + " 1 3 5";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person:%n%1$s";
@@ -66,18 +67,25 @@ public class DeleteCommand extends Command {
         return result;
     }
 
-    /**
-     * Updates the targetIndexArr for correctness during deletion of multiple contacts.
-     * Checks subsequent indexes if it is more than current index, decrement if it is more than.
-     *
-     * @param currentIndex the last deleted index.
-     * @param currentPos the current position of currentIndex in the array.
-     */
-    private void updateTargetIndexArr(int currentIndex, int currentPos) {
-        for (int i = currentPos + 1; i < targetIndexArr.length; i++) {
-            if (targetIndexArr[i].getZeroBased() > currentIndex) {
-                targetIndexArr[i].decreaseIndex();
+    private String extractDeletedInfo(List<Person> lastShownList) {
+        final StringBuilder deletedPersonOrPersons = new StringBuilder();
+        for (int i = 0; i < targetIndexArr.length; i++) {
+            Index target = targetIndexArr[i];
+            Person personToDelete = lastShownList.get(target.getZeroBased());
+            if (i > 0) {
+                deletedPersonOrPersons.append(System.lineSeparator());
             }
+            deletedPersonOrPersons.append(personToDelete.toString());
+        }
+        return deletedPersonOrPersons.toString();
+    }
+
+    private void deleteFromList(Model model, List<Person> lastShownList) {
+        Index[] targetIndexArrClone = targetIndexArr.clone();
+        Arrays.sort(targetIndexArrClone);
+        for (Index target : targetIndexArrClone) {
+            Person personToDelete = lastShownList.get(target.getZeroBased());
+            model.deletePerson(personToDelete);
         }
     }
 
@@ -86,25 +94,12 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
         int lastShownListSize = lastShownList.size();
-        final StringBuilder deletedPersonOrPersons = new StringBuilder();
 
         if (!checkIndexRange(lastShownListSize)) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-
-        for (int i = 0; i < targetIndexArr.length; i++) {
-            Index target = targetIndexArr[i];
-            if (target.getZeroBased() >= lastShownListSize) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-            }
-            Person personToDelete = lastShownList.get(target.getZeroBased());
-            model.deletePerson(personToDelete);
-            if (i > 0) {
-                deletedPersonOrPersons.append(System.lineSeparator());
-            }
-            deletedPersonOrPersons.append(personToDelete.toString());
-            updateTargetIndexArr(target.getZeroBased(), i);
-        }
+        String deletedPersonOrPersons = extractDeletedInfo(lastShownList);
+        deleteFromList(model, lastShownList);
 
         return targetIndexArr.length == 1
                 ? new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedPersonOrPersons))
