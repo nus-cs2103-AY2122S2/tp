@@ -21,7 +21,7 @@ public class DeleteTagCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " n/friends";
 
-    private static final String MESSAGE_DELETE_TAG_SUCCESS = "Deleted Tag: %s";
+    public static final String MESSAGE_DELETE_TAG_SUCCESS = "Deleted Tag: %s";
 
     private final Index targetIndex;
 
@@ -43,5 +43,18 @@ public class DeleteTagCommand extends Command {
         model.deleteTag(tagToDelete);
 
         return new CommandResult(String.format(MESSAGE_DELETE_TAG_SUCCESS, tagToDelete));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (!(o instanceof DeleteTagCommand)) {
+            return false;
+        }
+
+        return ((DeleteTagCommand) o).targetIndex.equals(targetIndex);
     }
 }

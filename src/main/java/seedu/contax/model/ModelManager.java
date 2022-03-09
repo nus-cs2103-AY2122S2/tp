@@ -145,6 +145,27 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteTag(Tag tagToDelete) {
+        requireNonNull(tagToDelete);
+        removeTagFromPersons(tagToDelete);
+        addressBook.removeTag(tagToDelete);
+    }
+
+    @Override
+    public void removeTagFromPersons(Tag tagToDelete) {
+        requireNonNull(tagToDelete);
+        List<Person> persons = addressBook.getPersonList();
+        for (Person oldPerson : persons) {
+            Set<Tag> updatedTags = new HashSet<>(Set.copyOf(oldPerson.getTags()));
+            boolean isRemoved = updatedTags.remove(tagToDelete);
+            if (isRemoved) {
+                Person updatedPerson = oldPerson.updateTags(updatedTags);
+                setPerson(oldPerson, updatedPerson);
+            }
+        }
+    }
+
+    @Override
     public ObservableList<Tag> getTagList() {
         return addressBook.getTagList();
     }
@@ -205,27 +226,6 @@ public class ModelManager implements Model {
     public void setAppointment(Appointment target, Appointment editedAppointment) {
         requireAllNonNull(target, editedAppointment);
         schedule.setAppointment(target, editedAppointment);
-    }
-
-    @Override
-    public void deleteTag(Tag tagToDelete) {
-        requireNonNull(tagToDelete);
-        removeTagFromPersons(tagToDelete);
-        addressBook.removeTag(tagToDelete);
-    }
-
-    @Override
-    public void removeTagFromPersons(Tag tagToDelete) {
-        requireNonNull(tagToDelete);
-        List<Person> persons = addressBook.getPersonList();
-        for (Person oldPerson : persons) {
-            Set<Tag> updatedTags = new HashSet<>(Set.copyOf(oldPerson.getTags()));
-            boolean isRemoved = updatedTags.remove(tagToDelete);
-            if (isRemoved) {
-                Person updatedPerson = oldPerson.updateTags(updatedTags);
-                setPerson(oldPerson, updatedPerson);
-            }
-        }
     }
 
     @Override

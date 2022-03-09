@@ -174,6 +174,16 @@ class AddTagCommandTest {
         }
 
         @Override
+        public void deleteTag(Tag tagToDelete) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeTagFromPersons(Tag tagToDelete) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Tag> getTagList() {
             throw new AssertionError("This method should not be called.");
         }

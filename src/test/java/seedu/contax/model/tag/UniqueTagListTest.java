@@ -63,4 +63,15 @@ class UniqueTagListTest {
         List<Tag> listWithDuplicateTags = Arrays.asList(CLIENTS, CLIENTS);
         assertThrows(DuplicateTagException.class, () -> uniqueTagList.setTags(listWithDuplicateTags));
     }
+
+    @Test
+    public void equals() {
+        UniqueTagList tagList = new UniqueTagList();
+
+        // Same tag list
+        assertTrue(tagList.equals(tagList));
+
+        // Null checking
+        assertFalse(tagList.equals(null));
+    }
 }

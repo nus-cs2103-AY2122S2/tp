@@ -43,6 +43,10 @@ public class UniqueTagList implements Iterable<Tag> {
         internalList.add(toAdd);
     }
 
+    /**
+     * Removes a tag from the list. If the tag does not exist in the list, a {@code TagNotFoundException} is thrown.
+     * @param toRemove The specified tag to remove.
+     */
     public void remove(Tag toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
@@ -97,6 +101,11 @@ public class UniqueTagList implements Iterable<Tag> {
         }
 
         return ((UniqueTagList) o).internalList.equals(internalList);
+    }
+
+    @Override
+    public int hashCode() {
+        return internalList.hashCode();
     }
 
 }
