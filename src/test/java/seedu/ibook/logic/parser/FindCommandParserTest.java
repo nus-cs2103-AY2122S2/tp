@@ -14,6 +14,7 @@ import seedu.ibook.model.product.Description;
 import seedu.ibook.model.product.ExpiryDate;
 import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Price;
+import seedu.ibook.model.product.Product;
 import seedu.ibook.model.product.ProductFulfillsFiltersPredicate;
 
 public class FindCommandParserTest {
@@ -30,22 +31,22 @@ public class FindCommandParserTest {
 
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
-                new FindCommand(new ProductFulfillsFiltersPredicate(
+                new FindCommand(new ProductFulfillsFiltersPredicate(new Product(
                         new Name("Maggi"),
                         new Category("noodles"),
                         new ExpiryDate(LocalDate.parse("2022-01-01")),
                         new Description("tasty"),
-                        new Price(3.00)));
+                        new Price(3.00))));
         assertParseSuccess(parser, " n: Maggi c: noodles e: 2022-01-01 d: tasty p: 3.00", expectedFindCommand);
 
         // with null values
         FindCommand expectedFindCommand2 =
-                new FindCommand(new ProductFulfillsFiltersPredicate(
+                new FindCommand(new ProductFulfillsFiltersPredicate(new Product (
                         new Name("Maggi"),
-                        null,
+                        Category.WILDCATEGORY,
                         new ExpiryDate(LocalDate.parse("2022-01-01")),
-                        null,
-                        new Price(3.00))
+                        Description.WILDDESCRIPTION,
+                        new Price(3.00)))
                 );
 
         assertParseSuccess(parser, " n: Maggi e: 2022-01-01 p: 3.00", expectedFindCommand2);

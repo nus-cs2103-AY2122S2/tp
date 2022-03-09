@@ -9,9 +9,24 @@ import static seedu.ibook.commons.util.AppUtil.checkArgument;
  */
 public class Category {
 
+
+    private static class WildCategory extends Category {
+        private WildCategory() {};
+
+        @Override
+        public boolean equals(Object other) {
+            if (other instanceof Category) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+    public static final Category WILDCATEGORY = new WildCategory();
     /**
      * A {@code Category} singleton representing no categorization.
      */
+
     public static final Category NONE = new Category();
 
     public static final String MESSAGE_CONSTRAINTS =

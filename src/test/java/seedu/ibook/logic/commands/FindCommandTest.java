@@ -1,44 +1,49 @@
 package seedu.ibook.logic.commands;
-/*
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+//import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.ibook.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.ibook.testutil.TypicalProducts.getTypicalIBook;
 
-import static seedu.ibook.logic.commands.CommandTestUtil.assertCommandSuccess;
-
-
-import static seedu.ibook.testutil.TypicalPersons.CARL;
-import static seedu.ibook.testutil.TypicalPersons.ELLE;
-import static seedu.ibook.testutil.TypicalPersons.FIONA;
-import static seedu.ibook.testutil.TypicalPersons.getTypicalAddressBook;
-
-
-
-import java.util.Arrays;
-import java.util.Collections;
+import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.ibook.model.Model;
 import seedu.ibook.model.ModelManager;
-import seedu.ibook.model.OldUserPrefs;
-import seedu.ibook.model.person.NameContainsKeywordsPredicate;
+import seedu.ibook.model.UserPrefs;
+import seedu.ibook.model.product.Category;
+import seedu.ibook.model.product.Description;
+import seedu.ibook.model.product.ExpiryDate;
+import seedu.ibook.model.product.Name;
+import seedu.ibook.model.product.Price;
+import seedu.ibook.model.product.Product;
+import seedu.ibook.model.product.ProductFulfillsFiltersPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    /*
-    private Model model = new ModelManager(getTypicalAddressBook(), new OldUserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new OldUserPrefs());
+
+    private Model model = new ModelManager(getTypicalIBook(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalIBook(), new UserPrefs());
 
     @Test
     public void equals() {
-        NameContainsKeywordsPredicate firstPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("first"));
-        NameContainsKeywordsPredicate secondPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("second"));
+        ProductFulfillsFiltersPredicate firstPredicate =
+                new ProductFulfillsFiltersPredicate(new Product (
+                        new Name("Maggi"),
+                        new Category("noodles"),
+                        new ExpiryDate(LocalDate.parse("2020-01-01")),
+                        new Description("tasty"),
+                        new Price(3.00)));
+        ProductFulfillsFiltersPredicate secondPredicate =
+                new ProductFulfillsFiltersPredicate(new Product(
+                        new Name("Maggi"),
+                        new Category("noodles"),
+                        new ExpiryDate(LocalDate.parse("2020-01-01")),
+                        new Description("tasty"),
+                        new Price(4.00)));
 
         FindCommand findFirstCommand = new FindCommand(firstPredicate);
         FindCommand findSecondCommand = new FindCommand(secondPredicate);
@@ -60,6 +65,7 @@ public class FindCommandTest {
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 
+    /*
     @Test
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);

@@ -125,8 +125,7 @@ public class CommandTestUtil {
 
         Product product = model.getFilteredProductList().get(targetIndex.getZeroBased());
         model.updateFilteredProductList(
-                new ProductFulfillsFiltersPredicate(product.getName(), product.getCategory(),
-                        product.getExpiryDate(), product.getDescription(), product.getPrice()));
+                new ProductFulfillsFiltersPredicate(product));
 
         assertEquals(1, model.getFilteredProductList().size());
     }

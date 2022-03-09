@@ -14,6 +14,7 @@ import seedu.ibook.model.product.Description;
 import seedu.ibook.model.product.ExpiryDate;
 import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Price;
+import seedu.ibook.model.product.Product;
 import seedu.ibook.model.product.ProductFulfillsFiltersPredicate;
 
 /**
@@ -30,39 +31,57 @@ public class FindCommandParser implements Parser<FindCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_CATEGORY, PREFIX_EXPIRY_DATE, PREFIX_DESCRIPTION,
                         PREFIX_PRICE);
-        Name name = null;
-        Category category = null;
-        ExpiryDate expiryDate = null;
-        Description description = null;
-        Price price = null;
+        Name name;
+        Category category;
+        ExpiryDate expiryDate;
+        Description description;
+        Price price;
+
+        int wildCard = 5;
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        } else {
+            name = Name.WILDNAME;
+            wildCard--;
         }
 
         if (argMultimap.getValue(PREFIX_CATEGORY).isPresent()) {
             category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
+        } else {
+            category = Category.WILDCATEGORY;
+            wildCard--;
         }
 
         if (argMultimap.getValue(PREFIX_EXPIRY_DATE).isPresent()) {
             expiryDate = ParserUtil.parseExpiryDate(argMultimap.getValue(PREFIX_EXPIRY_DATE).get());
+        } else {
+            expiryDate = ExpiryDate.WILDEXPIRYDATE;
+            wildCard--;
         }
 
         if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
             description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
+        } else {
+            description = Description.WILDDESCRIPTION;
+            wildCard--;
         }
 
         if (argMultimap.getValue(PREFIX_PRICE).isPresent()) {
             price = ParserUtil.parsePrice(argMultimap.getValue(PREFIX_PRICE).get());
+        } else {
+            price = Price.WILDPRICE;
+            wildCard--;
         }
 
-        if (name == null && category == null && expiryDate == null && description == null && price == null) {
+        if (wildCard == 0) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE)
             );
         }
 
-        return new FindCommand(new ProductFulfillsFiltersPredicate(name, category, expiryDate, description, price));
+        return new FindCommand(
+                new ProductFulfillsFiltersPredicate(new Product(name, category, expiryDate, description, price)));
     }
 
 }

@@ -9,6 +9,20 @@ import java.time.format.DateTimeFormatter;
  */
 public class ExpiryDate {
 
+    private static class WildExpiryDate extends ExpiryDate {
+        private WildExpiryDate() {};
+
+        @Override
+        public boolean equals(Object other) {
+            if (other instanceof ExpiryDate) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    public static final ExpiryDate WILDEXPIRYDATE = new WildExpiryDate();
     // TODO : Add a message constraint
     public static final String MESSAGE_CONSTRAINTS = "";
 
@@ -16,6 +30,10 @@ public class ExpiryDate {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT);
 
     public final LocalDate expiryDate;
+
+    private ExpiryDate() {
+        expiryDate = LocalDate.parse("0000-01-01");
+    }
 
     /**
      * Constructs a {@code ExpiryDate}.
