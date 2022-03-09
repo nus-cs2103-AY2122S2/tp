@@ -41,5 +41,6 @@ class FavouriteCommandTest {
         FavouriteCommand favouriteCommand = new FavouriteCommand(outOfBoundIndex);
 
         assertCommandFailure(favouriteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+
     }
 }

@@ -29,12 +29,12 @@ public class Person {
      * Every field must be present and not null.
      * This constructor is used for adding a new Client, thus default status is unfavourited(false)
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Favourite favourite, Address address, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, favourite, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.favourite = new Favourite(false);
+        this.favourite = favourite;
         this.address = address;
         this.tags.addAll(tags);
     }
@@ -43,7 +43,7 @@ public class Person {
      * This constructor is used when editing a Client.
      * Favourited clients will remain favourited & unfavourited clients will remain unfavourited
      */
-    public Person(Name name, Phone phone, Email email, Favourite favourite, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
