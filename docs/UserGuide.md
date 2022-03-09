@@ -111,7 +111,7 @@ When going through the onboarding guide, instructions such as the one shown belo
 ![](images/OnboardingInstruction.jpg)
 
 #### Basic features covered
-The onboarding guide will teach to do the folowing:
+The onboarding guide will teach to do the following:
 - Add person
 - List person
 
@@ -204,11 +204,12 @@ Creates a new tag in ContaX.
 
 Format: `addtag n/TAGNAME`
 
-* The `TAGNAME` parameter **must** be specified.
+* The `TAGNAME` parameter **must** be specified, and can only contain alphanumeric characters and whitespaces.
 * If the `TAGNAME` already exists (case-insensitive), the tag will not be created.
+* All tag names will be converted to lowercase characters.
 
 Examples:
-* `addtag n/Potential Clients` Creates a tag named *Potential Clients* in the address book (if it does not exist).
+* `addtag n/Potential Clients` Creates a tag named *potential clients* in the address book (if it does not exist).
 
 ### Editing a Tag : `edittag`
 
