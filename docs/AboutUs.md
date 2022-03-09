@@ -40,15 +40,15 @@ I am an eager Y2 computer science undergraduate with the desire to learn and imp
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Muhammad Radhya Fawza
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/mradhyaf.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/mradhyaf)]
+[[linkedin](https://www.linkedin.com/in/mradhyaf/)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: TBD
 
 ### James Doe
 
