@@ -9,7 +9,7 @@ import seedu.contax.logic.commands.ChainCommand;
 import seedu.contax.logic.commands.Command;
 import seedu.contax.logic.parser.exceptions.ParseException;
 
-public class ChainCommandParser {
+public class ChainCommandParser implements Parser<ChainCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the multiple commands
      * and returns a Command object for execution.
