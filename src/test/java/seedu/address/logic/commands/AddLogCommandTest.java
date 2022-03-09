@@ -246,7 +246,6 @@ public class AddLogCommandTest {
         descriptor = new AddLogCommand.AddLogDescriptor();
         descriptor.setNewTitle(invalidTitle);
         command = new AddLogCommand(targetIndex, descriptor);
-        System.out.println(descriptor);
         assertCommandFailure(command, model, MESSAGE_INVALID_TITLE);
 
         // ===== MISSING TITLE =====

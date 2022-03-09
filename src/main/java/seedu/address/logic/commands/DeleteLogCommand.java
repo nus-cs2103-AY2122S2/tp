@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ALL_FLAG;
+import static seedu.address.logic.parser.CliSyntax.FLAG_ALL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOG_INDEX;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -32,9 +32,9 @@ public class DeleteLogCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a log from an existing friend in Amigos. "
             + "Parameters: "
-            + "INDEX "
-            + PREFIX_LOG_INDEX + "LOG_INDEX"
-            + " [" + PREFIX_ALL_FLAG + "]\n"
+            + "[INDEX] ["
+            + PREFIX_LOG_INDEX + "LOG_INDEX]"
+            + " [" + FLAG_ALL + "]\n"
             + "Example: " + COMMAND_WORD + " "
             + "1 "
             + PREFIX_LOG_INDEX + "2";
@@ -282,6 +282,45 @@ public class DeleteLogCommand extends Command {
             logs.remove(toDeleteIndex.getZeroBased());
 
             return logs;
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            // short circuit if same object
+            if (other == this) {
+                return true;
+            }
+
+            // instanceof handles nulls
+            if (!(other instanceof DeleteLogDescriptor)) {
+                return false;
+            }
+
+            // cast
+            DeleteLogDescriptor d = (DeleteLogDescriptor) other;
+
+            // person index must be same
+            boolean isSamePerson;
+            if ((this.personIndex == null && d.personIndex != null)
+                    || this.personIndex != null && d.personIndex == null) {
+                return false;
+            }
+            isSamePerson = (this.personIndex == null && d.personIndex == null
+                    || this.personIndex.equals(d.personIndex));
+
+            // log index must be same
+            boolean isSameLog;
+            if ((this.logIndex == null && d.logIndex != null)
+                    || this.logIndex != null && d.logIndex == null) {
+                return false;
+            }
+            isSameLog = (this.logIndex == null && d.logIndex == null
+                    || this.logIndex.equals(d.logIndex));
+
+            // remaining must be same
+            return (isSameLog && isSamePerson
+                    && this.isForOnePerson == d.isForOnePerson
+                    && this.isForDeletingAllLogs == d.isForDeletingAllLogs);
         }
     }
 

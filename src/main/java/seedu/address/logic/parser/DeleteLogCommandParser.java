@@ -3,7 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.ArgumentMultimap.arePrefixesPresent;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ALL_FLAG;
+import static seedu.address.logic.parser.CliSyntax.FLAG_ALL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOG_INDEX;
 
 import seedu.address.commons.core.index.Index;
@@ -29,9 +29,15 @@ public class DeleteLogCommandParser implements Parser<DeleteLogCommand> {
 
         // tokenize
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_LOG_INDEX, PREFIX_ALL_FLAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_LOG_INDEX, FLAG_ALL);
 
-        // initialize
+        // sanity check
+        if (!(arePrefixesPresent(argMultimap, PREFIX_LOG_INDEX)
+            || arePrefixesPresent(argMultimap, FLAG_ALL))) {
+            throw new ParseException(MESSAGE_INVALID_FORMAT);
+        }
+
+            // initialize
         Index personIndex = null;
         Index logIndex = null;
         boolean isForOnePerson = false;
@@ -45,7 +51,7 @@ public class DeleteLogCommandParser implements Parser<DeleteLogCommand> {
         if (argMultimap.getValue(PREFIX_LOG_INDEX).isPresent()) {
             logIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_LOG_INDEX).get());
         }
-        if (arePrefixesPresent(argMultimap, PREFIX_ALL_FLAG)) {
+        if (arePrefixesPresent(argMultimap, FLAG_ALL)) {
             isForDeletingAllLogs = true;
         }
 
@@ -56,6 +62,7 @@ public class DeleteLogCommandParser implements Parser<DeleteLogCommand> {
                 && personIndex != null && logIndex == null) // case 2: delete all logs of specific person
                 || (isForDeletingAllLogs && !isForOnePerson
                 && personIndex == null && logIndex == null))) { // case 3: delete all logs all persons
+
             throw new ParseException(MESSAGE_INVALID_FORMAT);
         }
         return new DeleteLogCommand(isForOnePerson, isForDeletingAllLogs, personIndex, logIndex);

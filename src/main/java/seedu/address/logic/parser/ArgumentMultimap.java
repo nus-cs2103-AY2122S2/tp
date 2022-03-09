@@ -66,4 +66,17 @@ public class ArgumentMultimap {
     public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
+
+    /**
+     * Returns true if all of the prefixes are provided, regardless of whether a value was present.
+     */ // TODO can consider refactoring to wrap Flags and Prefixes as separate objects
+    public static boolean arePrefixesProvided(ArgumentMultimap argumentMultimap, Prefix ... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+
+    }
+
+    @Override
+    public String toString() {
+        return this.argMultimap.toString();
+    }
 }
