@@ -118,6 +118,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         tags.add(tag);
     }
 
+    public void removeTag(Tag tagToDelete) {
+        tags.remove(tagToDelete);
+    }
+
     //// util methods
 
     @Override

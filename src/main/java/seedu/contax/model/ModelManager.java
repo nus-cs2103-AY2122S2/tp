@@ -4,6 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.contax.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -202,6 +205,27 @@ public class ModelManager implements Model {
     public void setAppointment(Appointment target, Appointment editedAppointment) {
         requireAllNonNull(target, editedAppointment);
         schedule.setAppointment(target, editedAppointment);
+    }
+
+    @Override
+    public void deleteTag(Tag tagToDelete) {
+        requireNonNull(tagToDelete);
+        removeTagFromPersons(tagToDelete);
+        addressBook.removeTag(tagToDelete);
+    }
+
+    @Override
+    public void removeTagFromPersons(Tag tagToDelete) {
+        requireNonNull(tagToDelete);
+        List<Person> persons = addressBook.getPersonList();
+        for (Person oldPerson : persons) {
+            Set<Tag> updatedTags = new HashSet<>(Set.copyOf(oldPerson.getTags()));
+            boolean isRemoved = updatedTags.remove(tagToDelete);
+            if (isRemoved) {
+                Person updatedPerson = oldPerson.updateTags(updatedTags);
+                setPerson(oldPerson, updatedPerson);
+            }
+        }
     }
 
     @Override

@@ -92,6 +92,10 @@ public interface Model {
 
     void addTag(Tag tag);
 
+    void deleteTag(Tag tagToDelete);
+
+    void removeTagFromPersons(Tag tagToDelete);
+
     ObservableList<Tag> getTagList();
 
     // Appointments

@@ -60,6 +60,10 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+    public Person updateTags(Set<Tag> newTags) {
+        return new Person(name, phone, email, address, newTags);
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
