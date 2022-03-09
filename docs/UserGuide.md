@@ -111,7 +111,7 @@ When going through the onboarding guide, instructions such as the one shown belo
 ![](images/OnboardingInstruction.jpg)
 
 #### Basic features covered
-The onboarding guide will teach to do the folowing:
+The onboarding guide will cover the following:
 - Add person
 - List person
 
@@ -204,11 +204,12 @@ Creates a new tag in ContaX.
 
 Format: `addtag n/TAGNAME`
 
-* The `TAGNAME` parameter **must** be specified.
+* The `TAGNAME` parameter **must** be specified, and can only contain alphanumeric characters and whitespaces.
 * If the `TAGNAME` already exists (case-insensitive), the tag will not be created.
+* All tag names will be converted to lowercase characters.
 
 Examples:
-* `addtag n/Potential Clients` Creates a tag named *Potential Clients* in the address book (if it does not exist).
+* `addtag n/Potential Clients` Creates a tag named *potential clients* in the address book (if it does not exist).
 
 ### Editing a Tag : `edittag`
 
@@ -238,15 +239,13 @@ Format: `listtags`
 
 Deletes the specified tag in ContaX.
 
-Format: `deletetag n/TAGNAME`
+Format: `deletetag INDEX`
 
-* The `TAGNAME` parameter **must** be specified.
-* Deletion is case-insensitive e.g. `students` is the same as `Students`.
+* The `INDEX` parameter **must be a positive integer**, and refers to the index number shown in the **displayed tag list**.
 * When the tag is deleted, contacts that contain this tag will have the tag removed.
-* An error will be thrown if the specified `TAGNAME` cannot be found.
 
 Examples:
-* `deletetag n/friends` Deletes the tag named *friends* and disassociates any contacts that have the *friends* tag.
+* `deletetag 1` Deletes the first tag in the tag list and disassociates any contacts that contain the specified tag.
 
 ### Finding Contacts by Tag : `findByTag`
 
