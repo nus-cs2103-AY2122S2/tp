@@ -90,7 +90,7 @@ class JsonAdaptedProduct {
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()));
         }
         if (!Description.isValidDescription(description)) {
-            throw new IllegalValueException(Category.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
         }
         final Description modelDescription = new Description(description);
 

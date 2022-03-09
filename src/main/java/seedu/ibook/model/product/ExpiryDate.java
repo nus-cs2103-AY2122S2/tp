@@ -31,7 +31,7 @@ public class ExpiryDate {
      */
     public static boolean isValidExpiryDate(LocalDate expiryDate) {
         // TODO : implement this method
-        return true;
+        return expiryDate.isAfter(LocalDate.parse("1000-01-01"));
     }
 
     public boolean isPast() {
