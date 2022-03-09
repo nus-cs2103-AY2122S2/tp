@@ -4,10 +4,12 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
@@ -32,6 +34,8 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
+    private ModuleListPanel moduleListPanel;
+    private ClassGroupListPanel classGroupListPanel;
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -43,7 +47,19 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane listPanelPlaceholder;
+
+    @FXML
+    private HBox listButtons;
+
+    @FXML
+    private Button moduleListButton;
+
+    @FXML
+    private Button classGroupListButton;
+
+    @FXML
+    private Button personListButton;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -112,7 +128,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -162,6 +178,68 @@ public class MainWindow extends UiPart<Stage> {
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
+    }
+
+    @FXML
+    private void handleModuleListButtonPress() {
+        moduleListButton.getStyleClass().add("active");
+        classGroupListButton.getStyleClass().remove("active");
+        personListButton.getStyleClass().remove("active");
+        showModuleList();
+    }
+
+    @FXML
+    private void handleClassGroupListButtonPress() {
+        moduleListButton.getStyleClass().remove("active");
+        classGroupListButton.getStyleClass().add("active");
+        personListButton.getStyleClass().remove("active");
+        showClassGroupList();
+    }
+
+    @FXML
+    private void handlePersonListButtonPress() {
+        moduleListButton.getStyleClass().remove("active");
+        classGroupListButton.getStyleClass().remove("active");
+        personListButton.getStyleClass().add("active");
+        showPersonList();
+    }
+
+    /**
+     * Displays module list in list panel.
+     */
+    @FXML
+    private void showModuleList() {
+        moduleListPanel = new ModuleListPanel(logic.getFilteredModuleList());
+        listPanelPlaceholder.getChildren().clear();
+        listPanelPlaceholder.getChildren().add(moduleListPanel.getRoot());
+    }
+
+    /**
+     * Displays class group list in list panel.
+     */
+    @FXML
+    private void showClassGroupList() {
+        classGroupListPanel = new ClassGroupListPanel(logic.getFilteredClassGroupList());
+        listPanelPlaceholder.getChildren().clear();
+        listPanelPlaceholder.getChildren().add(classGroupListPanel.getRoot());
+    }
+
+    /**
+     * Displays person list in list panel.
+     */
+    @FXML
+    private void showPersonList() {
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        listPanelPlaceholder.getChildren().clear();
+        listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+    }
+
+    public ModuleListPanel getModuleListPanel() {
+        return moduleListPanel;
+    }
+
+    public ClassGroupListPanel getClassGroupListPanel() {
+        return classGroupListPanel;
     }
 
     public PersonListPanel getPersonListPanel() {
