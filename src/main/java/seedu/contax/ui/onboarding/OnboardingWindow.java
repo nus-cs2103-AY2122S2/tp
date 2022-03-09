@@ -234,7 +234,6 @@ public class OnboardingWindow extends UiPart<Stage> {
             instructionLabel.translate(resultDisplayPlaceholder.layoutXProperty(),
                     resultDisplayPlaceholder.layoutYProperty());
         } else if (option == 4) {
-            System.out.println(resultDisplayPlaceholder.getMaxHeight());
             instructionLabel.translate(
                     personList.layoutXProperty().add(0),
                     personList.layoutYProperty().add(
