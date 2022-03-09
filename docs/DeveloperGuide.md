@@ -279,7 +279,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user     | delete an applicant from the system   | remove entries that I no longer need.                                         |
 | `* * *`  | user     | search for an applicant in the system | access details of the applicant without having to go through the entire list. |
 | `* * *`  | user     | list all applicants in the system     | monitor the application pool.                                                 |
-| `* *`    | new user | view all available commands           | get familiarised with the system.                                             |
+| `* * *`  | new user | view all available commands           | get familiarised with the system.                                             |
 
 *{More to be added}*
 
@@ -329,24 +329,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <hr>
 
-**Use case: Delete a TA**
+**Use case: Delete a TA from the system**
 
 **MSS**
 
 1.  User requests to list TA applicants
-2.  TAlent Assistant™ shows the list of TA applicants
-3.  User requests to delete an existing TA from the list
+2.  TAlent Assistant™ displays the list of TA applicants
+3.  User requests to delete a specific TA in the list
 4.  TAlent Assistant™ deletes the TA from the list and displays the deleted entry
 
     Use case ends.
 
 **Extensions**
 
-* 3a. The given reference, i.e. Student Number, is invalid.
+* 3a. The list is empty.
+    
+    Use case ends
+* 3b. The given student number is invalid or does not exist in the system
 
-    * 3a1. TAlent Assistant™ shows an error message.
+    * 3a1. TAlent Assistant™ displays an error message
 
-  Use case resumes at step 2.
+  Use case resumes at Step 2.
 
 <hr>
 
@@ -401,7 +404,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 * **TA**: Teaching Assistant
 * **32/64-bit environment**: A system that uses a 32/64-bit processor
 * **System admin commands**: Commands that are used on the terminal interface
