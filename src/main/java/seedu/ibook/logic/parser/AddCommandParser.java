@@ -34,14 +34,13 @@ public class AddCommandParser implements Parser<AddCommand> {
             ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_CATEGORY, PREFIX_EXPIRY_DATE, PREFIX_DESCRIPTION,
                 PREFIX_PRICE);
 
-        // Category is not a required argument, defaults to Miscellaneous
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_EXPIRY_DATE, PREFIX_DESCRIPTION, PREFIX_PRICE)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_CATEGORY, PREFIX_EXPIRY_DATE, PREFIX_DESCRIPTION, PREFIX_PRICE)
             || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Category category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY));
+        Category category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
         ExpiryDate expiryDate = ParserUtil.parseExpiryDate(argMultimap.getValue(PREFIX_EXPIRY_DATE).get());
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         Price price = ParserUtil.parsePrice(argMultimap.getValue(PREFIX_PRICE).get());
