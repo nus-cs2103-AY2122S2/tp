@@ -96,6 +96,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    public void setFavouriteStatus(Person personToFavourite) {
+        persons.setFavouriteStatus(personToFavourite);
+    }
+
     //// util methods
 
     @Override
@@ -107,11 +111,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
-    }
-
-    @Override
-    public ObservableList<Person> getFavouritedPersonList() {
-        return persons.asUnmodifiableFavouritedObservableList();
     }
 
     @Override

@@ -19,7 +19,7 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
-    private final Favourite favourite;
+    private Favourite favourite;
 
     // Data fields
     private final Address address;
@@ -67,6 +67,11 @@ public class Person {
 
     public Favourite getFavourite() {
         return favourite;
+    }
+
+    public void toggleFavourite() {
+        boolean toggledStatus = !favourite.getStatus();
+        favourite.setStatus(toggledStatus);
     }
 
     public Address getAddress() {
@@ -142,5 +147,4 @@ public class Person {
         }
         return builder.toString();
     }
-
 }

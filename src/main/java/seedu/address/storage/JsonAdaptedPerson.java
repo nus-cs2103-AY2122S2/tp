@@ -102,7 +102,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Favourite.class.getSimpleName()));
         }
         final Favourite modelFavourite;
-        if (favourite.equals("favourited")) {
+        if (favourite.equals("Favourited")) {
             modelFavourite = new Favourite(true);
         } else {
             modelFavourite = new Favourite(false);

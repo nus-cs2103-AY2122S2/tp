@@ -10,6 +10,14 @@ public class Favourite {
         this.value = status;
     }
 
+    public boolean getStatus() {
+        return value;
+    }
+
+    public void setStatus(boolean status) {
+        value = status;
+    }
+
     @Override
     public String toString() {
         return value

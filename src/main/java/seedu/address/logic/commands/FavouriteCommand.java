@@ -20,12 +20,14 @@ public class FavouriteCommand extends Command {
 
     public static final String COMMAND_WORD = "favourite";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Favourites a client selected "
-            + "by the index number used in the last client listing. "
-            + "Parameters: INDEX (must be a positive integer) "
+            + ": Favourites a client selected\n"
+            + "by the index number used in the last client listing.\n"
+            + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 ";
     public static final String MESSAGE_FAVOURITE_PERSON_SUCCESS =
-            "Favourited Client! Check your favourites list by navigating to it from the toolbar!";
+            "Favourited Client %1$s! Check if he/she exists in the Favourite Window!";
+    public static final String MESSAGE_UNFAVOURITE_PERSON_SUCCESS =
+            "Unfavourited Client %1$s! Check that he/she is removed from the Favourite Window!";
 
     public FavouriteCommand(Index index) {
         requireAllNonNull(index);
@@ -40,11 +42,9 @@ public class FavouriteCommand extends Command {
         }
 
         Person personToFavourite = lastShownList.get(index.getZeroBased());
-        Person favouritedPerson = new Person(personToFavourite.getName(), personToFavourite.getPhone(), personToFavourite.getEmail(),
-                new Favourite(true), personToFavourite.getAddress(), personToFavourite.getTags());
-        model.setPerson(personToFavourite, favouritedPerson);
+        model.setFavouriteStatus(personToFavourite);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(generateSuccessMessage(favouritedPerson));
+        return new CommandResult(generateSuccessMessage(personToFavourite));
     }
 
     /**
@@ -54,10 +54,12 @@ public class FavouriteCommand extends Command {
      */
     private String generateSuccessMessage(Person personToFavourite) {
         String message = "";
-        if (personToFavourite.getFavourite().toString().equals("favourited")) {
+        if (personToFavourite.getFavourite().getStatus()) {
             message = MESSAGE_FAVOURITE_PERSON_SUCCESS;
+        } else {
+            message = MESSAGE_UNFAVOURITE_PERSON_SUCCESS;
         }
-        return String.format(message);
+        return String.format(message, personToFavourite.getName());
     }
 
     @Override

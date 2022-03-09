@@ -27,8 +27,6 @@ public class UniquePersonList implements Iterable<Person> {
     private final ObservableList<Person> internalList = FXCollections.observableArrayList();
     private final ObservableList<Person> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
-    private final ObservableList<Person> internalFavouritedList =
-            FXCollections.observableArrayList();
 
     /**
      * Returns true if the list contains an equivalent person as the given argument.
@@ -99,6 +97,16 @@ public class UniquePersonList implements Iterable<Person> {
         internalList.setAll(persons);
     }
 
+    public void setFavouriteStatus(Person personToFavourite) {
+        requireNonNull(personToFavourite);
+        for (Person p : internalList) {
+            if (p.isSamePerson(personToFavourite)) {
+                p.toggleFavourite();
+                break;
+            }
+        }
+    }
+
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
@@ -106,13 +114,6 @@ public class UniquePersonList implements Iterable<Person> {
         return internalUnmodifiableList;
     }
 
-    /**
-     * Returns the backing list as an unmodifiable favourited persons' list {@code ObservableList}.
-     */
-    public ObservableList<Person> asUnmodifiableFavouritedObservableList() {
-        addFavouritedPersons();
-        return internalFavouritedList;
-    }
 
     @Override
     public Iterator<Person> iterator() {
@@ -143,14 +144,5 @@ public class UniquePersonList implements Iterable<Person> {
             }
         }
         return true;
-    }
-
-    /**
-     * Adds Person that is favourited into internalFavouritedList.
-     */
-    private void addFavouritedPersons() {
-        for (Person p : internalUnmodifiableList) {
-            internalFavouritedList.add(p);
-        }
     }
 }

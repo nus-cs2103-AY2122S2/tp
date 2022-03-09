@@ -65,11 +65,15 @@ public class LogicManager implements Logic {
         return model.getFilteredPersonList();
     }
 
+    /**
+     * Iterate through the list of Persons and only add those that are favourited into
+     * favouritedList to be returned.
+     */
     @Override
     public ObservableList<Person> getFavouritedPersonList() {
         ObservableList<Person> favouritedList = FXCollections.observableArrayList();
         for (Person person : getFilteredPersonList()) {
-            if (person.getFavourite().toString().equals("Favourited")) {
+            if (person.getFavourite().getStatus()) {
                 favouritedList.add(person);
             }
         }
