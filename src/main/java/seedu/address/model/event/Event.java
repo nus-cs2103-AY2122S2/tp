@@ -9,6 +9,8 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.model.person.Description;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -18,7 +20,7 @@ import seedu.address.model.person.Person;
 public class Event {
 
     // Identity fields
-    private final EventName name;
+    private final Name name;
     private final DateTime dateTime;
 
     // Data fields
@@ -32,7 +34,7 @@ public class Event {
      * @param description description of event
      * @param dateTime    date and time of event
      */
-    public Event(EventName name, DateTime dateTime, Description description, Set<Person> friends) {
+    public Event(Name name, DateTime dateTime, Description description, Set<Person> friends) {
         requireAllNonNull(name, dateTime, description, friends);
         this.name = name;
         this.dateTime = dateTime;
@@ -46,7 +48,7 @@ public class Event {
      * @param name     name of event
      * @param dateTime date and time of event
      */
-    public Event(EventName name, DateTime dateTime, Set<Person> friends) {
+    public Event(Name name, DateTime dateTime, Set<Person> friends) {
         requireAllNonNull(name, dateTime, friends);
         this.name = name;
         this.dateTime = dateTime;
@@ -54,7 +56,7 @@ public class Event {
         this.friends.addAll(friends);
     }
 
-    public EventName getName() {
+    public Name getName() {
         return name;
     }
 
