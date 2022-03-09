@@ -501,7 +501,7 @@ Action | Format, Examples
 **Add Tag** | `addtag n/TAGNAME` <br> e.g., `addtag n/Potential Clients`
 **Edit Tag** | `edittag f/OLD_TAGNAME t/NEW_TAGNAME` <br> e.g., `edittag f/New Clients t/Prospective Clients`
 **List Tags** | `listtags`
-**Delete Tag** | `deletetag IDNEX` <br> e.g., `deletetag 1`
+**Delete Tag** | `deletetag INDEX` <br> e.g., `deletetag 1`
 **Find Contacts By Tag** | `findByTag t/TAGNAME` <br> e.g., `findByTag t/friends`
 **Add Appointment** | `addAppointment n/NAME d/DATE t/TIME l/DURATION p/PERSON`<br> e.g., `addAppointment n/Call Bob d/14-02-2022 t/11:00 p/2 l/60`
 **List Appointments** | `listAppointments`
