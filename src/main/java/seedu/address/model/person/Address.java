@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import java.util.Objects;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -9,7 +11,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Address {
 
-    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, " +
+            "and it should not be empty if the /a flag has been entered by user. ";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -25,9 +28,12 @@ public class Address {
      * @param address A valid address.
      */
     public Address(String address) {
-        requireNonNull(address);
-        checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
-        value = address;
+        if (address == null) {
+            value = null;
+        } else {
+            checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
+            value = address;
+        }
     }
 
     /**
@@ -44,9 +50,19 @@ public class Address {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof Address // instanceof handles nulls
-                && value.equals(((Address) other).value)); // state check
+        if (other == this) {
+            return true;
+        } else if (other instanceof Address) {
+            if (value == null) {
+                return Objects.isNull(((Address) other).value);
+            } else if (Objects.isNull(((Address) other).value)) {
+                return false;
+            } else {
+                return value.equals(((Address) other).value);
+            }
+        } else {
+            return false;
+        }
     }
 
     @Override

@@ -22,9 +22,21 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final Description description;
     private final Set<Tag> tags = new HashSet<>();
 
+    public Person(Name name, Phone phone, Email email, Address address, Description description, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.description = description;
+        this.tags.addAll(tags);
+    }
+
     /**
+     * Overloaded method for backward compatibility.
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
@@ -33,6 +45,7 @@ public class Person {
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.description = new Description(null);
         this.tags.addAll(tags);
     }
 
@@ -50,6 +63,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Description getDescription() {
+        return description;
     }
 
     /**
@@ -92,25 +109,25 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getDescription().equals(getDescription())
                 && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, description, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append("; Phone: ")
-                .append(getPhone())
-                .append("; Email: ")
-                .append(getEmail())
-                .append("; Address: ")
-                .append(getAddress());
+                .append(getPhone().value == null ? "" : ("; Phone: " + getPhone()))
+                .append(getEmail().value == null ? "" : ("; Email: " + getEmail()))
+                .append(getAddress().value == null ? "" : ("; Address: " + getAddress()))
+                .append(getDescription().value == null ? ""
+                        : ("; Description: " + getDescription()));
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
