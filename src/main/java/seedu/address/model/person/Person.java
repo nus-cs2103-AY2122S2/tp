@@ -5,7 +5,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.model.property.Property;
@@ -24,19 +23,19 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final Optional<Property> property;
+    private final Set<Property> properties;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Optional<Property> property, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, property, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Set<Property> properties, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, properties, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.property = property;
+        this.properties = properties;
         this.tags.addAll(tags);
     }
 
@@ -56,8 +55,8 @@ public class Person {
         return address;
     }
 
-    public Optional<Property> getProperty() {
-        return property;
+    public Set<Property> getProperties() {
+        return properties;
     }
 
     /**
@@ -100,14 +99,14 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getProperty().equals(getProperty())
+                && otherPerson.getProperties().equals(getProperties())
                 && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, property, tags);
+        return Objects.hash(name, phone, email, address, properties, tags);
     }
 
     @Override
@@ -121,9 +120,10 @@ public class Person {
                 .append("; Address: ")
                 .append(getAddress());
 
-        if (getProperty().isPresent()) {
-            builder.append("; Property: ");
-            builder.append(getProperty().get());
+        Set<Property> properties = getProperties();
+        if (!properties.isEmpty()) {
+            builder.append("; Properties: ");
+            properties.forEach(builder::append);
         }
 
         Set<Tag> tags = getTags();

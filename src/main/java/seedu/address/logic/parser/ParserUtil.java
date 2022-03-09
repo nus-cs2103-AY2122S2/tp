@@ -138,6 +138,18 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code Collection<String> properties} into a {@code Set<Property>}.
+     */
+    public static Set<Property> parseProperties(Collection<String> properties) throws ParseException {
+        requireNonNull(properties);
+        Set<Property> propertySet = new HashSet<>();
+        for (String property : properties) {
+            propertySet.add(parseProperty(property));
+        }
+        return propertySet;
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *

@@ -3,7 +3,6 @@ package seedu.address.storage;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -30,7 +29,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
-    private final JsonAdaptedProperty property;
+    private final List<JsonAdaptedProperty> properties = new ArrayList<>();
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -39,13 +38,17 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("property") JsonAdaptedProperty property,
+            @JsonProperty("property") List<JsonAdaptedProperty> properties,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.property = property;
+
+        if (properties != null) {
+            this.properties.addAll(properties);
+        }
+
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -59,7 +62,9 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        property = source.getProperty().isPresent() ? new JsonAdaptedProperty(source.getProperty().get()) : null;
+        properties.addAll(source.getProperties().stream()
+                .map(JsonAdaptedProperty::new)
+                .collect(Collectors.toList()));
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -76,8 +81,10 @@ class JsonAdaptedPerson {
             personTags.add(tag.toModelType());
         }
 
-        final Optional<Property> modelProperty =
-                property != null ? Optional.of(property.toModelType()) : Optional.empty();
+        final Set<Property> modelProperties = new HashSet<>();
+        for (JsonAdaptedProperty property : properties) {
+            modelProperties.add(property.toModelType());
+        }
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -112,7 +119,7 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelProperty, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelProperties, modelTags);
     }
 
 }
