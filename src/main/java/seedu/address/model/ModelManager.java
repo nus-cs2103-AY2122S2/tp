@@ -28,7 +28,7 @@ public class ModelManager implements Model {
     private final ObservableList<Event> eventList;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given addressBook, eventBook and userPrefs.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyEventBook eventBook, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, eventBook, userPrefs);
@@ -41,6 +41,13 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         eventList = this.eventBook.getEventList();
+    }
+
+    /**
+     * Initializes a ModelManager with the given addressBook and userPrefs.
+     */
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+        this(addressBook, new EventBook(), userPrefs);
     }
 
     public ModelManager() {
