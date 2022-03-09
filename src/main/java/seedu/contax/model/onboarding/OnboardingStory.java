@@ -1,4 +1,4 @@
-package seedu.contax.model;
+package seedu.contax.model.onboarding;
 
 import java.util.ArrayList;
 import java.util.Objects;

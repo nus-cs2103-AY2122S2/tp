@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.contax.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -117,6 +119,16 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+
+        // Delete Successful, dissociate target with any appointments.
+        // The list of matching appointments is cloned because the list iterator is destroyed upon
+        // any modification to the list.
+        List<Appointment> oldAppointments = new ArrayList<>(
+                schedule.getAppointmentList()
+                        .filtered(appointment -> appointment.getPerson().equals(target)));
+        oldAppointments.forEach(appointment -> {
+            setAppointment(appointment, appointment.withPerson(null));
+        });
     }
 
     @Override
@@ -130,6 +142,17 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+
+        // Update success, update appointments with target.
+        // The list of matching appointments is cloned because the list iterator is destroyed upon
+        // any modification to the list.
+        List<Appointment> oldAppointments = new ArrayList<>(
+                schedule.getAppointmentList()
+                        .filtered(appointment -> appointment.getPerson().equals(target)));
+
+        oldAppointments.forEach(appointment -> {
+            setAppointment(appointment, appointment.withPerson(editedPerson));
+        });
     }
 
     // Tag management
