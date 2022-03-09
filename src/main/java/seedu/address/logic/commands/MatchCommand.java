@@ -9,12 +9,12 @@ public class MatchCommand extends Command {
 
     public static final String COMMAND_WORD = "match";
 
-    public static final String MESSAGE_SUCCESS = "Matched all properties and preferences.";
+    public static final String SHOWING_MATCH_MESSAGE = "Matched all preferences with properties. Opened Match Window";
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(MESSAGE_SUCCESS);
+        model.updateMatchList();
+        return new CommandResult(SHOWING_MATCH_MESSAGE, false, true, false);
     }
 }

@@ -89,6 +89,19 @@ public class Person {
     }
 
     /**
+     * Returns true if the given {@code preference}'s preference matches with this person's property.
+     */
+    public boolean matches(Person preference) {
+        if (property.isEmpty()) {
+            return false;
+        }
+        if (preference.preference.isEmpty()) {
+            return false;
+        }
+        return property.get().equals(preference.preference.get());
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
