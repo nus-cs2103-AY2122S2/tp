@@ -2,7 +2,7 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_OWNERNAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OWNER_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -32,7 +32,7 @@ public class PetUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + pet.getName().fullName + " ");
         sb.append(PREFIX_PHONE + pet.getPhone().value + " ");
-        sb.append(PREFIX_OWNERNAME + pet.getOwnerName().value + " ");
+        sb.append(PREFIX_OWNER_NAME + pet.getOwnerName().value + " ");
         sb.append(PREFIX_ADDRESS + pet.getAddress().value + " ");
         pet.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
@@ -47,7 +47,7 @@ public class PetUtil {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
-        descriptor.getOwnerName().ifPresent(ownerName -> sb.append(PREFIX_OWNERNAME).append(ownerName.value)
+        descriptor.getOwnerName().ifPresent(ownerName -> sb.append(PREFIX_OWNER_NAME).append(ownerName.value)
                 .append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         if (descriptor.getTags().isPresent()) {

@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_OWNERNAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_OWNER_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -32,7 +32,7 @@ public class PetTest {
         assertFalse(BOBA.isSamePet(null));
 
         // same name, all other attributes different -> returns true
-        Pet editedAlice = new PetBuilder(BOBA).withPhone(VALID_PHONE_BOB).withOwnerName(VALID_OWNERNAME_BOB)
+        Pet editedAlice = new PetBuilder(BOBA).withPhone(VALID_PHONE_BOB).withOwnerName(VALID_OWNER_NAME_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(BOBA.isSamePet(editedAlice));
 
@@ -77,7 +77,7 @@ public class PetTest {
         assertFalse(BOBA.equals(editedAlice));
 
         // different email -> returns false
-        editedAlice = new PetBuilder(BOBA).withOwnerName(VALID_OWNERNAME_BOB).build();
+        editedAlice = new PetBuilder(BOBA).withOwnerName(VALID_OWNER_NAME_BOB).build();
         assertFalse(BOBA.equals(editedAlice));
 
         // different address -> returns false
