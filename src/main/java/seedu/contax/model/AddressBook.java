@@ -122,7 +122,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public String toString() {
-        String numPersons = persons.asUnmodifiableObservableList().size() + " presons";
+        String numPersons = persons.asUnmodifiableObservableList().size() + " persons";
         String numTags = tags.asUnmodifiableObservableList().size() + " tags";
         return numPersons + " | " + numTags;
     }
