@@ -20,7 +20,6 @@ public class TableContent extends UiPart<ScrollPane> {
         super(FXML);
         this.filteredIBook = filteredIBook;
         this.filteredIBook.addListener(new Listener());
-        populateField();
     }
 
     void populateField() {
