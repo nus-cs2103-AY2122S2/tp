@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class ClassGroupId {
     public static final String MESSAGE_CONSTRAINTS =
             "CLass Group ID should start with a letter followed by 2 numbers";
-    public static final String VALIDATION_REGEX = "^[A-Z]{1}\\d{2}";
+    public static final String VALIDATION_REGEX = "^[A-Z]{1}\\d{2}[A-Z]?";
     public final String value;
 
     /**
