@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -82,34 +83,25 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public boolean saveAddressBookToCsv(Path csvFilePath) {
-        boolean result;
+    public void saveAddressBookToCsv(Path csvFilePath) throws CommandException {
         try {
             storage.saveAddressBookToCsv(model.getAddressBook(), csvFilePath);
-            result = true;
         } catch (IOException ioe) {
-            // throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);  // TODO
-            result = false;
+            throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
-        return result;
     }
 
     @Override
-    public boolean loadAddressBookFromCsv(Path csvFilePath) {
-        boolean result;
+    public void readAddressBookFromCsv(Path csvFilePath) throws CommandException {
         try {
-            Optional<ReadOnlyAddressBook> ab = storage.readAddressBookFromCsvFile(csvFilePath);
+            Optional<ReadOnlyAddressBook> ab = storage.readAddressBookFromCsv(csvFilePath);
             if (ab.isPresent()) {
                 model.setAddressBook(ab.get());
-                result = true;
             } else {
                 System.out.println("Error");
-                result = false;
             }
-        } catch (IOException | IllegalValueException ioe) {
-            // throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);  // TODO
-            result = false;
+        } catch (DataConversionException | IOException ioe) {
+            throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
-        return result;
     }
 }

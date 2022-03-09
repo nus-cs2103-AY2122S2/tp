@@ -52,10 +52,10 @@ public interface Logic {
     /**
      * Saves the AddressBook to CSV.
      */
-    boolean saveAddressBookToCsv(Path csvFilePath);
+    void saveAddressBookToCsv(Path csvFilePath) throws CommandException;
 
     /**
      * Loads the AddressBook from CSV.
      */
-    boolean loadAddressBookFromCsv(Path csvFilePath);
+    void readAddressBookFromCsv(Path csvFilePath) throws CommandException;
 }

@@ -7,52 +7,71 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
-import seedu.address.model.person.Person;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.storage.CsvAdaptedPerson;
 
+/**
+ * A class that handles the conversion of a list of Person to a CSV file, and vice versa.
+ */
 public class CsvUtil {
 
+    private static final Logger logger = LogsCenter.getLogger(CsvUtil.class);
+
+    public static FileWriter fw;
+    public static Scanner s;
+
+    /**
+     * The headers to be used for the CSV file.
+     */
     public static String headers = "Name,Phone Number,Email,Insurance Package,Address,Tags";
 
-    public static void saveCsvFile(List<CsvAdaptedPerson> persons, Path filePath) {
+    /**
+     * Takes in a List of CsvAdaptedPerson, and the Path of the CSV file to be saved to,
+     * and saves this list to a CSV file.
+     *
+     * @param persons a list of CsvAdaptedPerson to save to CSV to.
+     * @param filePath the given Path to the CSV file.
+     * @throws IOException if there are errors with file handling.
+     */
+    public static void saveCsvFile(List<CsvAdaptedPerson> persons, Path filePath) throws IOException {
 
-        try {
-            FileWriter fw = new FileWriter(filePath.toString());
-            fw.write(headers + "\n");
-            for (CsvAdaptedPerson p : persons) {
-               fw.write(p.toCsvString() + "\n");
-            }
-            fw.close();
-            System.out.println("Done");
-        } catch (IOException err) {
-            System.out.println("Error");
+        fw = new FileWriter(filePath.toString());
+        fw.write(headers + "\n");
+        for (CsvAdaptedPerson p : persons) {
+           fw.write(p.toCsvString() + "\n");
         }
+        fw.close();
     }
 
-    public static List<Person> loadCsvFile(Path filePath) {
+    /**
+     * Takes in the Path of an existing CSV file, and reads the CSV file to produce a List of CsvAdaptedPerson.
+     * @param filePath the Path to the existing CSV file.
+     * @return a List of CsvAdaptedPerson.
+     * @throws IOException if there are errors with file handling.
+     */
+    public static List<CsvAdaptedPerson> loadCsvFile(Path filePath) throws DataConversionException {
 
-        ArrayList<Person> persons = new ArrayList<>();
-        Scanner s;
+        ArrayList<CsvAdaptedPerson> persons = new ArrayList<>();
         String personString;
-        Person p;
+        CsvAdaptedPerson p;
 
         try {
             s = new Scanner(new File(filePath.toString())); // create a Scanner using the File as the source
-        } catch (IOException err) {
-            System.out.println("Error");
+            s.nextLine();  // headers
+            while (s.hasNext()) {
+                personString = s.nextLine();
+                p = new CsvAdaptedPerson(personString);
+                persons.add(p);
+            }
             return persons;
+        } catch (IOException e) {
+            logger.warning("Error reading from jsonFile file " + filePath + ": " + e);
+            throw new DataConversionException(e);
         }
 
-        s.nextLine();  // headers
-        System.out.println("hello");
-        while (s.hasNext()) {
-            personString = s.nextLine();
-            p = CsvAdaptedPerson.fromCsvString(personString);
-            persons.add(p);
-        }
 
-        return persons;
     }
-
 }

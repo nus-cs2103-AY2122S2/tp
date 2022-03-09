@@ -39,5 +39,4 @@ class CsvAdaptedTag {
         }
         return new Tag(tagName);
     }
-
 }

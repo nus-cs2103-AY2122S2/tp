@@ -172,11 +172,13 @@ public class MainWindow extends UiPart<Stage> {
         if (inputCsvFilePath == null) {
             return;
         }
-        boolean isSuccess = logic.loadAddressBookFromCsv(inputCsvFilePath);
-        if (isSuccess) {
-            messageWindow.show("Loaded successfully.");
-        } else {
-            messageWindow.show("Error in loading.");
+
+        try {
+            logic.readAddressBookFromCsv(inputCsvFilePath);
+            messageWindow.show("Loaded successfully. " +
+                    "Type a command (e.g. list) to save this permanently.");
+        } catch (CommandException err) {
+            messageWindow.show("Error in loading: " + err.getMessage());
         }
     }
 
@@ -196,11 +198,12 @@ public class MainWindow extends UiPart<Stage> {
         if (outputCsvFilePath == null) {
             return;
         }
-        boolean isSuccess = logic.saveAddressBookToCsv(outputCsvFilePath);
-        if (isSuccess) {
+
+        try {
+            logic.saveAddressBookToCsv(outputCsvFilePath);
             messageWindow.show("Saved successfully.");
-        } else {
-            messageWindow.show("Error in saving.");
+        } catch (CommandException err) {
+            messageWindow.show("Error in saving: " + err.getMessage());
         }
     }
 

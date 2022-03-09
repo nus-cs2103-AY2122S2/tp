@@ -1,9 +1,9 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -17,6 +17,9 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
+/**
+ * CSV-friendly version of {@link Person}.
+ */
 public class CsvAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
@@ -26,10 +29,11 @@ public class CsvAdaptedPerson {
     private final String email;
     private final String insurancePackage;
     private final String address;
-    private final List<CsvAdaptedTag> tagged = new ArrayList<>();
+    private final List<CsvAdaptedTag> tagged;
 
     /**
      * Converts a given {@code Person} into this class for CSV use.
+     * @param source The Person object to convert from.
      */
     public CsvAdaptedPerson(Person source) {
         name = source.getName().fullName;
@@ -37,9 +41,41 @@ public class CsvAdaptedPerson {
         email = source.getEmail().value;
         insurancePackage = source.getInsurancePackage().packageName;
         address = source.getAddress().value;
+        tagged = new ArrayList<>();
         tagged.addAll(source.getTags().stream()
                 .map(CsvAdaptedTag::new)
                 .collect(Collectors.toList()));
+    }
+
+    /**
+     * A constructor that takes in a comma-separated string to a CsvAdaptedPerson.
+     * @param s The String representation of this person.
+     */
+    public CsvAdaptedPerson(String s) {
+
+        String[] personDetails = s.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
+
+        name = cleanup(personDetails[0]);
+        phone = cleanup(personDetails[1]);
+        email = cleanup(personDetails[2]);
+        insurancePackage = cleanup(personDetails[3]);
+        address = cleanup(personDetails[4]);
+        tagged = new ArrayList<>();
+
+        // if the tags column in the CSV is empty, personDetails.length == 5
+        // checking is needed to ensure that there are tags in the CSV for this person
+        if (personDetails.length > 5 && personDetails[5].length() > 0) {
+            String allTagsString = cleanup(personDetails[5]);
+
+            // tags are internally separated by |
+            String[] tags = allTagsString.split("\\|");
+            for (String tagString : tags) {
+                if (tagString.length() > 0) {
+                    tagged.add(new CsvAdaptedTag(tagString));
+                }
+            }
+        }
+
     }
 
     /**
@@ -98,18 +134,10 @@ public class CsvAdaptedPerson {
         return new Person(modelName, modelPhone, modelEmail, modelInsurancePackage, modelAddress, modelTags);
     }
 
-//    public String escapeSpecialCharacters(String data) {
-//        String escapedData = data.replaceAll("\\R", " ");
-//        if (data.contains(",") || data.contains("\"") || data.contains("'")) {
-//            data = data.replace("\"", "\"\"");
-//            escapedData = "\"" + data + "\"";
-//        }
-//        return escapedData;
-//    }
-
 
     /**
      * Converts this CsvAdaptedPerson to a comma-separated string.
+     * To be used for storing a CsvAdaptedPerson into a CSV file.
      *
      * @return The String representation of this person.
      */
@@ -121,50 +149,67 @@ public class CsvAdaptedPerson {
     }
 
     /**
-     * Converts a comma-separated string to a Person.
+     * Converts the List of Tags into a single string, to be stored in the CSV file/
      *
-     * @return The String representation of this person.
+     * @return a single String representing the tags associated with this CsvAdaptedPerson.
      */
-    public static Person fromCsvString(String s) {
-
-        String[] personDetails = s.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
-        Set<Tag> tagsSet = new HashSet<>();
-
-        if (personDetails.length > 5 && personDetails[5].length() > 0) {
-            String allTagsString = cleanup(personDetails[5]);
-
-            String[] tags = allTagsString.split("\\|");
-            for (String tagString : tags) {
-                if (tagString.length() > 0) {
-                    tagsSet.add(new Tag(tagString));
-                }
-            }
-        }
-        return new Person(
-                new Name(cleanup(personDetails[0])),
-                new Phone(cleanup(personDetails[1])),
-                new Email(cleanup(personDetails[2])),
-                new InsurancePackage(cleanup(personDetails[3])),
-                new Address(cleanup(personDetails[4])),
-                tagsSet);
-    }
-
-
     public String getTagsAsString() {
         return tagged.stream()
                 .map(CsvAdaptedTag::getTagName)
                 .collect(Collectors.joining("|"));
     }
 
+    /**
+     * Adds quotes around a CsvAdaptedPerson's field, for the purposes of storing it into CSV.
+     * This is necessary in case the existing field value has commas inside.
+     *
+     * @param s the String to add double quotes around.
+     * @return the CSV-friendly version of the string.
+     */
     public String addQuotes(String s) {
         return '"' + s + '"';
     }
 
+    /**
+     * Removes quotes around the field read from the CSV file, if exists.
+     *
+     * @param s the raw String read from the CSV file.
+     * @return the actual value of the field.
+     */
     public static String cleanup(String s) {
-        if (s.length() > 0 && s.charAt(0) == '"' && s.charAt(s.length() - 1) == '"') {
+        if (s.length() > 0  // if the string has characters
+                && s.charAt(0) == '"'  // if the string starts with "
+                && s.charAt(s.length() - 1) == '"') {  // if the string ends with "
             return s.substring(1, s.length() - 1);
         } else {
             return s;
         }
+    }
+
+    /**
+     * Returns true if both CsvAdaptedPersons have the same identity and data fields.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof CsvAdaptedPerson)) {
+            return false;
+        }
+
+        CsvAdaptedPerson otherPerson = (CsvAdaptedPerson) other;
+        return otherPerson.name.equals(name)
+                && otherPerson.phone.equals(phone)
+                && otherPerson.email.equals(email)
+                && otherPerson.insurancePackage.equals(insurancePackage)
+                && otherPerson.address.equals(address)
+                && new HashSet<>(otherPerson.tagged).equals(new HashSet<>(tagged));
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, phone, email, address, tagged);
     }
 }
