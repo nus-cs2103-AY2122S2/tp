@@ -20,6 +20,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.pet.Address;
+import seedu.address.model.pet.Diet;
 import seedu.address.model.pet.Name;
 import seedu.address.model.pet.OwnerName;
 import seedu.address.model.pet.Pet;
@@ -98,8 +99,9 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPetDescriptor.getPhone().orElse(petToEdit.getPhone());
         Address updatedAddress = editPetDescriptor.getAddress().orElse(petToEdit.getAddress());
         Set<Tag> updatedTags = editPetDescriptor.getTags().orElse(petToEdit.getTags());
+        Diet updatedDiet = editPetDescriptor.getDiet().orElse(petToEdit.getDiet());
 
-        return new Pet(updatedName, updatedOwnerName, updatedPhone, updatedAddress, updatedTags);
+        return new Pet(updatedName, updatedOwnerName, updatedPhone, updatedAddress, updatedTags, updatedDiet);
     }
 
     @Override
@@ -130,6 +132,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Address address;
         private Set<Tag> tags;
+        private Diet diet;
 
         public EditPetDescriptor() {}
 
@@ -143,6 +146,7 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setDiet(toCopy.diet);
         }
 
         /**
@@ -190,6 +194,18 @@ public class EditCommand extends Command {
          */
         public void setTags(Set<Tag> tags) {
             this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        }
+
+        /**
+         * Sets {@code diet} to this object's {@code diet}.
+         * A defensive copy of {@code diet} is used internally.
+         */
+        public void setDiet(Diet diet) {
+            this.diet = diet;
+        }
+
+        public Optional<Diet> getDiet() {
+            return Optional.ofNullable(diet);
         }
 
         /**

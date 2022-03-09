@@ -13,11 +13,14 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.pet.Address;
+import seedu.address.model.pet.Diet;
 import seedu.address.model.pet.Name;
 import seedu.address.model.pet.OwnerName;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.pet.Phone;
 import seedu.address.model.tag.Tag;
+
+
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -44,8 +47,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Diet diet = new Diet("");
 
-        Pet pet = new Pet(name, ownerName, phone, address, tagList);
+        Pet pet = new Pet(name, ownerName, phone, address, tagList, diet);
 
         return new AddCommand(pet);
     }

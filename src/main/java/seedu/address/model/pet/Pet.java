@@ -23,16 +23,18 @@ public class Pet {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Diet diet;
 
     /**
      * Every field must be present and not null.
      */
-    public Pet(Name name, OwnerName ownerName, Phone phone, Address address, Set<Tag> tags) {
+    public Pet(Name name, OwnerName ownerName, Phone phone, Address address, Set<Tag> tags, Diet diet) {
         requireAllNonNull(name, ownerName, phone, address, tags);
         this.name = name;
         this.ownerName = ownerName;
         this.phone = phone;
         this.address = address;
+        this.diet = diet;
         this.tags.addAll(tags);
     }
 
@@ -50,6 +52,10 @@ public class Pet {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Diet getDiet() {
+        return diet;
     }
 
     /**
@@ -92,13 +98,14 @@ public class Pet {
                 && otherPet.getOwnerName().equals(getOwnerName())
                 && otherPet.getPhone().equals(getPhone())
                 && otherPet.getAddress().equals(getAddress())
+                && otherPet.getDiet().equals(getDiet())
                 && otherPet.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, ownerName, phone, address, tags);
+        return Objects.hash(name, ownerName, phone, address, tags, diet);
     }
 
     @Override
@@ -110,7 +117,9 @@ public class Pet {
                 .append("; Phone: ")
                 .append(getPhone())
                 .append("; Address: ")
-                .append(getAddress());
+                .append(getAddress())
+                .append("; Address: ")
+                .append(getDiet());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
