@@ -2,15 +2,11 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
-import javafx.collections.ObservableArray;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
-import seedu.address.model.person.Person;
 
 /**
  * The Favourite Window. Provides the basic application layout containing
@@ -37,6 +33,7 @@ public class FavouriteWindow extends UiPart<Stage> {
         this.logic = logic;
     }
 
+    /* Calls methods to fill in all parts of the window and displays window */
     public void show() {
         logger.fine("Showing Favourite Window.");
         fillInnerParts();

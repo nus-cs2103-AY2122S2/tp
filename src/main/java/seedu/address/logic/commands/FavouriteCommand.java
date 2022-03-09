@@ -9,7 +9,6 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Favourite;
 import seedu.address.model.person.Person;
 
 /**
@@ -19,16 +18,19 @@ public class FavouriteCommand extends Command {
     private final Index index;
 
     public static final String COMMAND_WORD = "favourite";
+    public static final String MESSAGE_FAVOURITE_PERSON_SUCCESS =
+            "Favourited Client %1$s! Check if he/she exists in the Favourite Window!";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Favourites a client selected\n"
             + "by the index number used in the last client listing.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 ";
-    public static final String MESSAGE_FAVOURITE_PERSON_SUCCESS =
-            "Favourited Client %1$s! Check if he/she exists in the Favourite Window!";
     public static final String MESSAGE_UNFAVOURITE_PERSON_SUCCESS =
             "Unfavourited Client %1$s! Check that he/she is removed from the Favourite Window!";
 
+    /**
+     * @param index of the person in the filtered person list to favourite
+     */
     public FavouriteCommand(Index index) {
         requireAllNonNull(index);
         this.index = index;

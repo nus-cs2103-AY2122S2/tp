@@ -32,7 +32,8 @@ public class Person {
      * This constructor is used when editing a Client.
      * Favourited clients will remain favourited & unfavourited clients will remain unfavourited
      */
-    public Person(Name name, Phone phone, Email email, Favourite favourite, Address address, Optional<Property> property, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Favourite favourite, Address address,
+                  Optional<Property> property, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, favourite, address, property, tags);
         this.name = name;
         this.phone = phone;
@@ -74,6 +75,7 @@ public class Person {
         return favourite;
     }
 
+    /* Toggles the favourite status of Person */
     public void toggleFavourite() {
         boolean toggledStatus = !favourite.getStatus();
         favourite.setStatus(toggledStatus);

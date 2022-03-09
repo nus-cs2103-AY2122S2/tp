@@ -40,8 +40,8 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("favourite") String favourite, @JsonProperty("address") String address,
-            @JsonProperty("property") JsonAdaptedProperty property,
+            @JsonProperty("email") String email, @JsonProperty("favourite") String favourite,
+            @JsonProperty("address") String address, @JsonProperty("property") JsonAdaptedProperty property,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
@@ -108,7 +108,8 @@ class JsonAdaptedPerson {
         final Email modelEmail = new Email(email);
 
         if (favourite == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Favourite.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Favourite.class.getSimpleName()));
         }
         final Favourite modelFavourite;
         if (favourite.equals("Favourited")) {

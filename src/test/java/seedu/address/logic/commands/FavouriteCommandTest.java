@@ -1,6 +1,6 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -29,9 +29,13 @@ class FavouriteCommandTest {
 
         /* Runs test based on the starting favourite status of the first person in the address book */
         if (!personToFavourite.getFavourite().getStatus()) {
-            assertEquals(String.format(FavouriteCommand.MESSAGE_UNFAVOURITE_PERSON_SUCCESS, personToFavourite.getName()), commandResult.getFeedbackToUser());
+            assertEquals(
+                    String.format(FavouriteCommand.MESSAGE_UNFAVOURITE_PERSON_SUCCESS, personToFavourite.getName()),
+                    commandResult.getFeedbackToUser());
         } else {
-            assertEquals(String.format(FavouriteCommand.MESSAGE_FAVOURITE_PERSON_SUCCESS, personToFavourite.getName()), commandResult.getFeedbackToUser());
+            assertEquals(
+                    String.format(FavouriteCommand.MESSAGE_FAVOURITE_PERSON_SUCCESS, personToFavourite.getName()),
+                    commandResult.getFeedbackToUser());
         }
     }
 
