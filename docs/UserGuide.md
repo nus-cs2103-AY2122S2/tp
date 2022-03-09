@@ -111,7 +111,7 @@ When going through the onboarding guide, instructions such as the one shown belo
 ![](images/OnboardingInstruction.jpg)
 
 #### Basic features covered
-The onboarding guide will teach to do the following:
+The onboarding guide will cover the following:
 - Add person
 - List person
 
