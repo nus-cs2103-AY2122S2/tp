@@ -17,13 +17,13 @@ import seedu.address.model.util.SampleDataUtil;
 public class PetBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
+    public static final String DEFAULT_OWNER_NAME = "Emma Lee";
     public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_OWNERNAME = "Emma Lee";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
-    private Phone phone;
     private OwnerName ownerName;
+    private Phone phone;
     private Address address;
     private Set<Tag> tags;
 
@@ -32,8 +32,8 @@ public class PetBuilder {
      */
     public PetBuilder() {
         name = new Name(DEFAULT_NAME);
+        ownerName = new OwnerName(DEFAULT_OWNER_NAME);
         phone = new Phone(DEFAULT_PHONE);
-        ownerName = new OwnerName(DEFAULT_OWNERNAME);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
     }
@@ -43,8 +43,8 @@ public class PetBuilder {
      */
     public PetBuilder(Pet petToCopy) {
         name = petToCopy.getName();
-        phone = petToCopy.getPhone();
         ownerName = petToCopy.getOwnerName();
+        phone = petToCopy.getPhone();
         address = petToCopy.getAddress();
         tags = new HashSet<>(petToCopy.getTags());
     }
@@ -90,7 +90,7 @@ public class PetBuilder {
     }
 
     public Pet build() {
-        return new Pet(name, phone, ownerName, address, tags);
+        return new Pet(name, ownerName, phone, address, tags);
     }
 
 }

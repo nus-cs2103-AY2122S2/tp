@@ -25,8 +25,8 @@ class JsonAdaptedPet {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Pet's %s field is missing!";
 
     private final String name;
-    private final String phone;
     private final String ownerName;
+    private final String phone;
     private final String address;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
@@ -34,12 +34,12 @@ class JsonAdaptedPet {
      * Constructs a {@code JsonAdaptedPet} with the given pet details.
      */
     @JsonCreator
-    public JsonAdaptedPet(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                          @JsonProperty("ownerName") String ownerName, @JsonProperty("address") String address,
+    public JsonAdaptedPet(@JsonProperty("name") String name, @JsonProperty("ownerName") String ownerName,
+                          @JsonProperty("phone") String phone, @JsonProperty("address") String address,
                           @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
-        this.phone = phone;
         this.ownerName = ownerName;
+        this.phone = phone;
         this.address = address;
         if (tagged != null) {
             this.tagged.addAll(tagged);
@@ -51,8 +51,8 @@ class JsonAdaptedPet {
      */
     public JsonAdaptedPet(Pet source) {
         name = source.getName().fullName;
-        phone = source.getPhone().value;
         ownerName = source.getOwnerName().value;
+        phone = source.getPhone().value;
         address = source.getAddress().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -78,14 +78,6 @@ class JsonAdaptedPet {
         }
         final Name modelName = new Name(name);
 
-        if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
-        }
-        if (!Phone.isValidPhone(phone)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
-        }
-        final Phone modelPhone = new Phone(phone);
-
         if (ownerName == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     OwnerName.class.getSimpleName()));
@@ -94,6 +86,14 @@ class JsonAdaptedPet {
             throw new IllegalValueException(OwnerName.MESSAGE_CONSTRAINTS);
         }
         final OwnerName modelOwnerName = new OwnerName(ownerName);
+
+        if (phone == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
+        }
+        if (!Phone.isValidPhone(phone)) {
+            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+        }
+        final Phone modelPhone = new Phone(phone);
 
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
@@ -104,7 +104,7 @@ class JsonAdaptedPet {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(petTags);
-        return new Pet(modelName, modelPhone, modelOwnerName, modelAddress, modelTags);
+        return new Pet(modelName, modelOwnerName, modelPhone, modelAddress, modelTags);
     }
 
 }
