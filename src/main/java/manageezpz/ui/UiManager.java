@@ -7,9 +7,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import manageezpz.MainApp;
 import manageezpz.commons.core.LogsCenter;
 import manageezpz.commons.util.StringUtil;
-import manageezpz.MainApp;
 import manageezpz.logic.Logic;
 
 /**

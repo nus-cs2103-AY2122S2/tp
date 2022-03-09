@@ -1,7 +1,8 @@
 package manageezpz.model.person;
 
-import static manageezpz.commons.util.AppUtil.checkArgument;
 import static java.util.Objects.requireNonNull;
+
+import static manageezpz.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's name in the address book.
