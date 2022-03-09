@@ -96,7 +96,7 @@ Format:
 For deadline and event, the DATE must be in this format: DD-MM-YYYY HHmm (in 24 hr format)
 </div>
 
-### Listing all persons : `list`
+### Listing all Tasks : `list`
 
 View all tasks, all todo tasks, all deadline tasks, all event tasks or tasks for today
 
