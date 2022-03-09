@@ -13,7 +13,8 @@ import seedu.address.model.person.NameContainsTagPredicate;
 public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
-
+    public static final String MESSAGE_CONSTRAINTS = "Tags names should have 2-3 letters prefix "
+            + "followed by 4 digits and an optional letter\n";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose tags contain any of "
             + "the specified keyword (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD \n"
