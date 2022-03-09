@@ -5,12 +5,12 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyTAssist;
-import seedu.address.model.TAssist;
 import seedu.address.model.classgroup.ClassGroup;
 import seedu.address.model.classgroup.ClassGroupId;
 import seedu.address.model.classgroup.ClassGroupType;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyTAssist;
+import seedu.address.model.TAssist;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Person;
 import seedu.address.model.student.Email;
@@ -61,6 +61,12 @@ public class SampleDataUtil {
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }
+        for (TaModule sampleModule : getSampleModules()) {
+            sampleAb.addModule(sampleModule);
+        }
+        for (ClassGroup sampleClassGroup : getSampleClassGroups()) {
+            sampleAb.addClassGroup(sampleClassGroup);
+        }
         return sampleAb;
     }
 
@@ -73,7 +79,7 @@ public class SampleDataUtil {
                 .collect(Collectors.toSet());
     }
 
-    public static Student[] getSampleStudent() {
+    public static Student[] getSampleStudents() {
         return new Student[] {
             new Student(new StudentId("E0123456"), new Name("Alex Yeoh"),
                     new Phone("87438807"), new Email("alexyeoh@example.com")),
@@ -90,7 +96,7 @@ public class SampleDataUtil {
         };
     }
 
-    public static TaModule[] getSampleModule() {
+    public static TaModule[] getSampleModules() {
         return new TaModule[] {
             new TaModule(new ModuleName("Software Engineering"),
                     new ModuleCode("CS2103T"), new AcademicYear("21S1")),
@@ -101,8 +107,8 @@ public class SampleDataUtil {
         };
     }
 
-    public static ClassGroup[] getSampleClassGroup() {
-        TaModule[] taModules = getSampleModule();
+    public static ClassGroup[] getSampleClassGroups() {
+        TaModule[] taModules = getSampleModules();
         return new ClassGroup[] {
             new ClassGroup(new ClassGroupId("G01"),
                     ClassGroupType.TUTORIAL, taModules[0]),
@@ -117,13 +123,13 @@ public class SampleDataUtil {
 
     public static ReadOnlyTAssist getSampleTAssist() {
         TAssist sampleTAssist = new TAssist();
-        for (Student sampleStudent : getSampleStudent()) {
+        for (Student sampleStudent : getSampleStudents()) {
             sampleTAssist.addStudent(sampleStudent);
         }
-        for (TaModule sampleModule : getSampleModule()) {
+        for (TaModule sampleModule : getSampleModules()) {
             sampleTAssist.addModule(sampleModule);
         }
-        for (ClassGroup sampleClassGroup : getSampleClassGroup()) {
+        for (ClassGroup sampleClassGroup : getSampleClassGroups()) {
             sampleTAssist.addClassGroup(sampleClassGroup);
         }
         return sampleTAssist;
