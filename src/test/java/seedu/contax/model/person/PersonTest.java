@@ -1,6 +1,5 @@
 package seedu.contax.model.person;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.contax.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
@@ -11,8 +10,6 @@ import static seedu.contax.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.contax.testutil.Assert.assertThrows;
 import static seedu.contax.testutil.TypicalPersons.ALICE;
 import static seedu.contax.testutil.TypicalPersons.BOB;
-
-import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 

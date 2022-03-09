@@ -60,12 +60,22 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+    /**
+     * Adds a tag to the person.
+     * @param tag The specified tag to add.
+     * @return The updated person with the added tag.
+     */
     public Person withTag(Tag tag) {
         HashSet<Tag> updatedTag = new HashSet<>(Set.copyOf(tags));
         updatedTag.add(tag);
         return new Person(name, phone, email, address, updatedTag);
     }
 
+    /**
+     * Removes a tag from the person.
+     * @param tag The specified tag to remove.
+     * @return The updated person with the removed tag.
+     */
     public Person withoutTag(Tag tag) {
         HashSet<Tag> updatedTag = new HashSet<>(Set.copyOf(tags));
         updatedTag.remove(tag);
