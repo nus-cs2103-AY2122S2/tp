@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.contax.model.OnboardingStep;
-import seedu.contax.model.OnboardingStory;
+import seedu.contax.model.onboarding.OnboardingStep;
+import seedu.contax.model.onboarding.OnboardingStory;
 import seedu.contax.model.person.Address;
 import seedu.contax.model.person.Email;
 import seedu.contax.model.person.Name;

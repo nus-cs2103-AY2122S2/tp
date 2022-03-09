@@ -7,7 +7,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import seedu.contax.model.OnboardingStep;
+import seedu.contax.model.onboarding.OnboardingStep;
 import seedu.contax.model.person.UniquePersonList;
 import seedu.contax.ui.PersonListPanel;
 import seedu.contax.ui.UiPart;
