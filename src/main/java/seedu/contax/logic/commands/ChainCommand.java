@@ -33,7 +33,7 @@ public class ChainCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        if (other instanceof ChainCommand ) {
+        if (other instanceof ChainCommand) {
             for (int i = 0; i < commands.size(); i++) {
                 if (!commands.get(i).equals(((ChainCommand) other).commands.get(i))) {
                     return false;
