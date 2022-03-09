@@ -349,7 +349,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 3a1. TAlent Assistant™ displays an error message
 
-  Use case resumes at Step 2.
+  Use case resumes at step 2.
 
 <hr>
 
