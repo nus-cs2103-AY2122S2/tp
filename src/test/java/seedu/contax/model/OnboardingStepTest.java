@@ -58,7 +58,7 @@ public class OnboardingStepTest {
                 0, 1, 0, "", BOB, 1);
         OnboardingStep step6 = new OnboardingStep("message 1", 2, 0, 0,
                 0, 1, 0, "", ALICE, 1);
-        
+
         // different person
         assertFalse(step4.equals(step5));
 

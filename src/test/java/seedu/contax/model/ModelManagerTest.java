@@ -12,6 +12,7 @@ import static seedu.contax.testutil.TypicalPersons.ALICE;
 import static seedu.contax.testutil.TypicalPersons.BENSON;
 import static seedu.contax.testutil.TypicalPersons.BOB;
 import static seedu.contax.testutil.TypicalPersons.CARL;
+import static seedu.contax.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.contax.testutil.TypicalTags.CLIENTS;
 import static seedu.contax.testutil.TypicalTags.FAMILY;
 
@@ -94,6 +95,17 @@ public class ModelManagerTest {
         Path path = Paths.get("address/schedule/file/path");
         modelManager.setScheduleFilePath(path);
         assertEquals(path, modelManager.getScheduleFilePath());
+    }
+
+    @Test
+    public void setAddressBook_nullAddressBook_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setAddressBook(null));
+    }
+
+    @Test
+    public void setAddressBook_validAddressBook_success() {
+        modelManager.setAddressBook(getTypicalAddressBook());
+        assertEquals(getTypicalAddressBook(), modelManager.getAddressBook());
     }
 
     @Test
