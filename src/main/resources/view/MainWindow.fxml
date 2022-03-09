@@ -48,14 +48,14 @@
           </padding>
         </StackPane>
             <StackPane minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
-               <TabPane fx:id= "listPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+               <TabPane fx:id="listPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
                  <tabs>
                    <Tab fx:id="lessonTab" style="-fx-background-color: dimgrey; -fx-text-base-color: white;" text="Lessons">
                      <content>
                        <AnchorPane>
                               <children>
                                 <SplitPane dividerPositions="0.35">
-                                  <VBox fx:id="lessonListPanel" VBox.vgrow="ALWAYS">
+                                  <VBox fx:id="lessonListPanel" maxHeight="375.0" maxWidth="350.0" minHeight="375.0" minWidth="350.0" VBox.vgrow="ALWAYS">
                                     <padding>
                                       <Insets bottom="10" left="10" right="10" top="10" />
                                     </padding>
@@ -78,7 +78,7 @@
                               <children>
                                  <SplitPane dividerPositions="0.35">
                                     <items>
-                                       <VBox fx:id="personListPanel" VBox.vgrow="ALWAYS">
+                                       <VBox fx:id="personListPanel" maxHeight="375.0" maxWidth="350.0" minHeight="375.0" minWidth="350.0" VBox.vgrow="ALWAYS">
                                           <padding>
                                              <Insets bottom="10" left="10" right="10" top="10" />
                                           </padding>

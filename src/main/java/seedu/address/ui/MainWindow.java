@@ -154,14 +154,14 @@ public class MainWindow extends UiPart<Stage> {
         populateListPanelWithPeople(logic.getFilteredPersonList());
         // Temporary person placeholder
         Person tempPerson = logic.getFilteredPersonList().get(0);
-        tempPopulateInfoPanelWithPersonAndList(tempPerson, logic.getFilteredLessonList());
+        // tempPopulateInfoPanelWithPersonAndList(tempPerson, logic.getFilteredLessonList());
     }
 
     private void updateAndPopulateLessonList() {
         populateListPanelWithLessons(logic.getFilteredLessonList());
         // Temporary lesson placeholder
         Lesson tempLesson = logic.getFilteredLessonList().get(0);
-        tempPopulateInfoPanelWithLessonAndList(tempLesson, logic.getFilteredPersonList());
+        // tempPopulateInfoPanelWithLessonAndList(tempLesson, logic.getFilteredPersonList());
     }
 
     /**
