@@ -67,3 +67,4 @@ I'm always looking for ways to improve my skills and widen my knowledge.
 
 * Role: Developer
 * Responsibilities: TBD
+
