@@ -61,12 +61,12 @@ public class SummariseCommand extends Command {
         int totalNumberOfStudents = result.size();
         int numberOfPositive = (int) result.stream().filter(BYPOSITIVE).count();
         int numberOfNegative = (int) result.stream().filter(BYNEGATIVE).count();
-        int numberOfHRW = (int) result.stream().filter(BYHRW).count();
-        int numberOfHRN = (int) result.stream().filter(BYHRN).count();
+        int numberOfHrw = (int) result.stream().filter(BYHRW).count();
+        int numberOfHrn = (int) result.stream().filter(BYHRN).count();
         double percentagePositive = (double) numberOfPositive / totalNumberOfStudents * 100;
 
         return String.format(FACULTY_SUMMARY_FORM, facultyName, totalNumberOfStudents, numberOfPositive,
-                numberOfNegative, numberOfHRW, numberOfHRN, percentagePositive);
+                numberOfNegative, numberOfHrw, numberOfHrn, percentagePositive);
     }
 
 }
