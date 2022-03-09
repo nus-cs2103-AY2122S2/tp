@@ -34,7 +34,7 @@ InternBuddy is a **desktop app for managing companies for internships, optimized
 
    * **`exit`** : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+1. Refer to the [Features](#current-features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
