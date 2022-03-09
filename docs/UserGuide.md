@@ -156,7 +156,7 @@ Examples:
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS] [t/SEARCH_TYPE]`
+Format: `find KEYWORD [MORE_KEYWORDS] [by/SEARCH_TYPE]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -173,8 +173,8 @@ Format: `find KEYWORD [MORE_KEYWORDS] [t/SEARCH_TYPE]`
 
 Examples:
 * `find John` returns `john` and `John Doe`
-* `find t/Address k/Garden` lists all persons whose address contain the keyword "Garden"
-* `find t/Phone k/87438807` lists all persons whose phone number matches "87438807"
+* `find Garden by/address` lists all persons whose address contain the keyword "Garden"
+* `find 87438807 by/phone` lists all persons whose phone number matches "87438807"
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
@@ -497,7 +497,7 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find** | `find KEYWORD [MORE_KEYWORDS] [by/SEARCH_TYPE]`<br> e.g., `find James Jake by/name`
 **List** | `list`
 **Add Tag** | `addtag n/TAGNAME` <br> e.g., `addtag n/Potential Clients`
 **Edit Tag** | `edittag f/OLD_TAGNAME t/NEW_TAGNAME` <br> e.g., `edittag f/New Clients t/Prospective Clients`
@@ -514,4 +514,4 @@ Action | Format, Examples
 **Import CSV** | `importcsv f/FILEPATH [n/COLUMNNUM] [p/COLUMN_PERSON] [e/COLUMN_EMAIL] [a/COLUMN_ADDRESS] [t/COLUMN_TAGS]` <br> e.g., `importCSV n/2 p/3 e/5 a/6 t/4`
 **Operate on Contacts by Conditional Clause** | `batch COMMAND where/CONDITION` <br> e.g., `batch Edit p/87438806 where/ p/Phone = 87438807`
 **Operate on Contacts within Range** | `range COMMAND from/INDEX to/INDEX` <br> e.g., `range edit e/johndoe@example.com from/6 to/10`
-**Chaining Commands** | `COMMAND_A && COMMAND_B` <br> e.g., `editAppointment 6 l/360 && listAppointments`
+**Chaining Commands** | `chain COMMAND_A && COMMAND_B` <br> e.g., `chain editAppointment 6 l/360 && listAppointments`
