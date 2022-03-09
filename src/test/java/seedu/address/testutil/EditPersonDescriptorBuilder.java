@@ -68,13 +68,11 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code userTypes} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * Parses the {@code userType} into a {@code UserType} and set it to the {@code EditPersonDescriptor}
      * that we are building.
      * @param userType
      */
     public EditPersonDescriptorBuilder withTag(String userType) {
-        //        Set<UserType> userTypeSet = Stream.of(userType).map(UserType::new).collect(Collectors.toSet());
-        //        descriptor.setTag(userTypeSet);
         descriptor.setUserType(new UserType(userType));
         return this;
     }
