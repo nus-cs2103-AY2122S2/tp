@@ -18,3 +18,27 @@
 .tooltip-text {
     -fx-text-fill: white;
 }
+
+.module-code {
+    -fx-font-family: "Segoe UI Bold";
+    -fx-font-size: 32px;
+    -fx-text-fill: #010504;
+}
+
+.module-name {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 20px;
+    -fx-text-fill: #010504;
+}
+
+.module-professor-list-heading {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 24px;
+    -fx-text-fill: #010504;
+}
+
+.module-student-list-heading {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 24px;
+    -fx-text-fill: #010504;
+}
