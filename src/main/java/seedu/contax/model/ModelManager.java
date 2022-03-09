@@ -173,17 +173,12 @@ public class ModelManager implements Model {
         addressBook.removeTag(tagToDelete);
     }
 
-    @Override
-    public void removeTagFromPersons(Tag tagToDelete) {
+    private void removeTagFromPersons(Tag tagToDelete) {
         requireNonNull(tagToDelete);
-        List<Person> persons = addressBook.getPersonList();
-        for (Person oldPerson : persons) {
-            Set<Tag> updatedTags = new HashSet<>(Set.copyOf(oldPerson.getTags()));
-            boolean isRemoved = updatedTags.remove(tagToDelete);
-            if (isRemoved) {
-                Person updatedPerson = oldPerson.updateTags(updatedTags);
-                setPerson(oldPerson, updatedPerson);
-            }
+        List<Person> persons = addressBook.getPersonList().filtered(person -> person.getTags().contains(tagToDelete));
+        for (int i = 0; i < persons.size(); i++) {
+            Person oldPerson = persons.get(i);
+            setPerson(oldPerson, oldPerson.withoutTag(tagToDelete));
         }
     }
 

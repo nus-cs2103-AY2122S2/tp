@@ -94,8 +94,6 @@ public interface Model {
 
     void deleteTag(Tag tagToDelete);
 
-    void removeTagFromPersons(Tag tagToDelete);
-
     ObservableList<Tag> getTagList();
 
     // Appointments

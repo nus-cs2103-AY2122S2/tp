@@ -33,6 +33,7 @@ import seedu.contax.model.person.exceptions.PersonNotFoundException;
 import seedu.contax.model.tag.exceptions.TagNotFoundException;
 import seedu.contax.testutil.AddressBookBuilder;
 import seedu.contax.testutil.AppointmentBuilder;
+import seedu.contax.testutil.PersonBuilder;
 import seedu.contax.testutil.ScheduleBuilder;
 
 public class ModelManagerTest {
@@ -259,7 +260,7 @@ public class ModelManagerTest {
         modelManager.addTag(FRIENDS);
 
 
-        Person modifiedAlice = ALICE.updateTags(new HashSet<>());
+        Person modifiedAlice = new PersonBuilder(ALICE).withTags().build();
         AddressBook expectedAddressBook = new AddressBookBuilder().withPerson(modifiedAlice).build();
         ModelManager expectedModel = new ModelManager(expectedAddressBook, new Schedule(), new UserPrefs());
 

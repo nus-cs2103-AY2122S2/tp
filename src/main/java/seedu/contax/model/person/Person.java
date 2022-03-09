@@ -60,8 +60,16 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
-    public Person updateTags(Set<Tag> newTags) {
-        return new Person(name, phone, email, address, newTags);
+    public Person withTag(Tag tag) {
+        HashSet<Tag> updatedTag = new HashSet<>(Set.copyOf(tags));
+        updatedTag.add(tag);
+        return new Person(name, phone, email, address, updatedTag);
+    }
+
+    public Person withoutTag(Tag tag) {
+        HashSet<Tag> updatedTag = new HashSet<>(Set.copyOf(tags));
+        updatedTag.remove(tag);
+        return new Person(name, phone, email, address, updatedTag);
     }
 
     /**
