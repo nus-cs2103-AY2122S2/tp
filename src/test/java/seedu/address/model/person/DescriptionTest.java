@@ -25,9 +25,9 @@ public class DescriptionTest {
         // valid addresses
         assertTrue(Description.isValidDescription("tE394 !!11    descrIptioe394~!"));
         assertTrue(Description.isValidDescription("-")); // one character
-        assertTrue(Description.isValidDescription("this is going to be a looooooooooooooooooojjiïirjdorirth" +
-                "looooooooooooooooooooooooooontg description with special characterS~~!3$54^&*((peoœø!! and" +
-                "punctuations ++2049.....!!!  !! == :>> :)")); // long address
+        assertTrue(Description.isValidDescription("this is going to be a looooooooooooooooooojjiïirjdorirth"
+                + "looooooooooooooooooooooooooontg description with special characterS~~!3$54^&*((peoœø!! and"
+                + "punctuations ++2049.....!!!  !! == :>> :)")); // long address
     }
 }
 
