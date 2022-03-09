@@ -1,5 +1,7 @@
 package seedu.contax.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.contax.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.contax.testutil.Assert.assertThrows;
 import static seedu.contax.testutil.TypicalPersons.getTypicalAddressBook;
@@ -137,5 +139,35 @@ public class ImportCsvCommandTest {
         expectedModel.addPerson(personBuilder2.build());
 
         assertCommandSuccess(importCsvCommand, model, ImportCsvCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void equals() {
+        IndexedCsvFile csvFile1 = new ImportCsvObjectBuilder().build();
+        IndexedCsvFile csvFile2 = new ImportCsvObjectBuilder(ImportCsvObjectBuilder.SKIP_CSV_FILEPATH).build();
+        IndexedCsvFile csvFile3 = new ImportCsvObjectBuilder(ImportCsvObjectBuilder.SKIP_CSV_FILEPATH, 2,
+                3, 4, 5, 6).build();
+        ImportCsvCommand importCsvCommand1 = new ImportCsvCommand(csvFile1);
+        ImportCsvCommand importCsvCommand2 = new ImportCsvCommand(csvFile2);
+        ImportCsvCommand importCsvCommand3 = new ImportCsvCommand(csvFile3);
+
+        //same object -> returns true
+        assertTrue(importCsvCommand1.equals(importCsvCommand1));
+
+        //same values -> returns true
+        ImportCsvCommand duplicateOfCommand1 = new ImportCsvCommand(csvFile1);
+        assertTrue(importCsvCommand1.equals(duplicateOfCommand1));
+
+        //different types -> returns false
+        assertFalse(importCsvCommand1.equals(1));
+
+        //null -> returns false
+        assertFalse(importCsvCommand1.equals(null));
+
+        //different file opened -> returns false
+        assertFalse(importCsvCommand1.equals(importCsvCommand2));
+
+        //same file but different positions -> returns false
+        assertFalse(importCsvCommand2.equals(importCsvCommand3));
     }
 }
