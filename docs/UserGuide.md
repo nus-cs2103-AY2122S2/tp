@@ -28,9 +28,9 @@ Note how the app contains some sample data.<br> ![Ui](images/Ui.png)
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`ls -c`** : Lists all lessons.
+   * **`listlessons`** : Lists all lessons.
 
-   * **`ls -s`** : Lists all students.
+   * **`liststudents`** : Lists all students.
 
    * **`student <STUDENT_ID>`** : Displays the details of the student with the provided `STUDENT_ID`.
    
@@ -109,7 +109,7 @@ The `LESSON_ID` corresponds to the number in the displayed lesson list.
 The `LESSON_ID` must be a positive integer.
 
 Example:
-`ls -c` to list the lessons and display their `LESSON_ID`, 
+`listlessons` to list the lessons and display their `LESSON_ID`, 
 followed by `rm -c 5` to delete the lesson with the id 5.
 
 ---
@@ -120,24 +120,24 @@ Assigns the specified student to the specified lesson.
 
 Format: `assign -s <STUDENT_ID> -c <LESSON_ID>`
 
-Example: `ls -s` followed by `assign -s 5 -c 11` assigns the student with `STUDENT_ID` of **5**
+Example: `liststudents` followed by `assign -s 5 -c 11` assigns the student with `STUDENT_ID` of **5**
 to the lesson with `LESSON_ID` of **11**.
 
 ---
 
 ### Viewing all lessons
 
-Format: `ls -c`
+Format: `listlessons`
 
-Example: `ls -c` would display a list of all the lessons that a tutor has.
+Example: `listlessons` would display a list of all the lessons that a tutor has.
 
 ---
 
 ### Viewing all students
 
-Format: `ls -s`
+Format: `liststudents`
 
-Example: `ls -s` would display a list of all the students that a tutor has.
+Example: `liststudents` would display a list of all the students that a tutor has.
 
 ---
 
@@ -185,8 +185,8 @@ the data of your previous TeachWhat! folder.
 | **Delete Student** | `rm -s <STUDENT_ID>`<br> e.g. `rm -s 13`                                                                                                                                                                                                                                                                                      |
 | **Delete lesson**  | `rm -c <LESSON_ID>`<br> e.g.`rm -c 5`                                                                                                                                                                                                                                                                                         |
 | **Assign Student** | `assign -s <STUDENT_ID> -c <LESSON_ID>`<br> e.g.`assign -s 5 -c 11`                                                                                                                                                                                                                                                           |
-| **List Students**  | `ls -s`                                                                                                                                                                                                                                                                                                                       |
-| **List lesson**    | `ls -c`                                                                                                                                                                                                                                                                                                                       |
+| **List Students**  | `liststudents`                                                                                                                                                                                                                                                                                                                |
+| **List lesson**    | `listlessons`                                                                                                                                                                                                                                                                                                                 |
 | **View Student**   | `student <STUDENT_ID>` <br> e.g. `student 5`                                                                                                                                                                                                                                                                                  |
 | **View lesson**    | `lesson <LESSON_ID>`<br> e.g. `lesson 2`                                                                                                                                                                                                                                                                                      |
 | **Exit**           | `quit`                                                                                                                                                                                                                                                                                                                        |
