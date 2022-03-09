@@ -161,12 +161,37 @@ public class AddCommandTest {
         }
 
         @Override
+        public void setSelectedPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Person getSelectedPerson() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setSelectedLesson(Lesson lesson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Lesson getSelectedLesson() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasConflictingLesson(Lesson lesson) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void addLesson(Lesson lesson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteLesson(Lesson lesson) {
             throw new AssertionError("This method should not be called.");
         }
 

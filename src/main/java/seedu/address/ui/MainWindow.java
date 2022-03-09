@@ -16,6 +16,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.misc.InfoPanelTypes;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
@@ -122,13 +123,13 @@ public class MainWindow extends UiPart<Stage> {
         //populateListPanelWithPeople(logic.getFilteredPersonList());
         populateListPanelWithLessons(logic.getFilteredLessonList());
 
-        // Temporary person placeholder
-        //Person tempPerson = logic.getFilteredPersonList().get(0);
-        //tempPopulateInfoPanelWithPersonAndList(tempPerson, logic.getFilteredLessonList());
+        // Load first person in list
+        Person tempPerson = logic.getFilteredPersonList().get(0);
+        tempPopulateInfoPanelWithPersonAndList(tempPerson, logic.getFilteredLessonList());
 
         // Temporary lesson placeholder
-        Lesson tempLesson = logic.getFilteredLessonList().get(0);
-        tempPopulateInfoPanelWithLessonAndList(tempLesson, logic.getFilteredPersonList());
+        //Lesson tempLesson = logic.getFilteredLessonList().get(0);
+        //tempPopulateInfoPanelWithLessonAndList(tempLesson, logic.getFilteredPersonList());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -180,6 +181,26 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Updates the InfoPanel.
+     */
+    private void handleInfoPanelUpdate(InfoPanelTypes infoPanelTypes) {
+        switch (infoPanelTypes) {
+        case PERSON:
+            logger.info("INFO: Updating InfoPanel with selected person");
+            Person selectedPerson = logic.getSelectedPerson();
+            populateInfoPanelWithPerson(selectedPerson);
+            break;
+        case LESSON:
+            logger.info("INFO: Updating InfoPanel with selected lesson");
+            Lesson selectedLesson = logic.getSelectedLesson();
+            populateInfoPanelWithLesson(selectedLesson);
+            break;
+        default:
+            logger.severe("WARNING: Something went wrong with handling the InfoPanels");
+        }
+    }
+
     public ListPanel getListPanel() {
         return listPanel;
     }
@@ -201,6 +222,11 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isUpdateInfoPanel()) {
+                InfoPanelTypes infoPanelType = commandResult.getInfoPanelType();
+                handleInfoPanelUpdate(infoPanelType);
             }
 
             return commandResult;

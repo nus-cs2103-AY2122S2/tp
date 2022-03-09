@@ -109,14 +109,32 @@ public interface Model {
     void addLesson(Lesson lesson);
 
     /**
+     * Deletes the given lesson.
+     * The lesson must exist in the lesson book.
+     */
+    void deleteLesson(Lesson lesson);
+
+    /**
      * Updates the filter of the filtered lesson list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredLessonList(Predicate<Lesson> predicate);
 
     /**
-     * Deletes the given lesson.
-     * The lesson must exist in the lesson book.
+     * Sets the selected {@code Person} with the given {@code Person} for UI use.
+     * @param person The given {@code Person}.
      */
-    void deleteLesson(Lesson lesson);
+    void setSelectedPerson(Person person);
+
+    /** Returns the selected {@code Person} */
+    Person getSelectedPerson();
+
+    /**
+     * Sets the selected {@code Lesson} with the given {@code Lesson} for UI use.
+     * @param lesson The given {@code Lesson}.
+     */
+    void setSelectedLesson(Lesson lesson);
+
+    /** Returns the selected {@code Lesson} */
+    Lesson getSelectedLesson();
 }
