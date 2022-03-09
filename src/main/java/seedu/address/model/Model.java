@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.company.Company;
+import seedu.address.model.role.Role;
 
 /**
  * The API of the Model component.
@@ -13,6 +14,7 @@ import seedu.address.model.company.Company;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Company> PREDICATE_SHOW_ALL_COMPANIES = unused -> true;
+    Predicate<Role> PREDICATE_SHOW_ALL_ROLES = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -84,5 +86,5 @@ public interface Model {
      * Updates the filter of the filtered company list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredCompanyList(Predicate<Company> predicate);
+    void updateFilteredCompanyList(Predicate<Company> companyPredicate, Predicate<Role> rolePredicate);
 }
