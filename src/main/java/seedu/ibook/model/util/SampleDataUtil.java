@@ -22,7 +22,7 @@ public class SampleDataUtil {
     public static Product[] getSampleProducts() {
         return new Product[] {
             new Product(new Name("Maggie Mee"), new Category("Noodles"), new ExpiryDate(LocalDate.now()),
-                new Description(""), new Price(1.99))
+                new Description("noodles for all"), new Price(1.99))
         };
     }
 
