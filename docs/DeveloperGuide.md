@@ -285,14 +285,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a new event for a company**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to add a new event with details given
+2.  InternBuddy creates and add a new event to the list of events
+3.  InternBuddy shows successful feedback to the user
+4.  InternBuddy displays the updated list of events with the new event
+5.  User requests to add a new tag to the event with the company name as the tag
+6.  InternBuddy adds the tag to the event
+7.  InternBuddy shows successful feedback to the user
+
+    Use case ends.
+
+**Use case: Hide events that have passed or has been cancelled**
+
+**MSS**
+
+1. User requests to view list of events
+2. InternBuddy shows list of events
+3. User requests to archive the event
+4. InternBuddy archives and hides the event
+5. InternBuddy shows successful feedback to the user
+6. InternBuddy update list of events
+7. InternBuddy display the updated list of events
+8. Repeat steps 3-8 for all events to be hidden
 
     Use case ends.
 
@@ -304,7 +322,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. InternBuddy shows an error feedback to the user
 
       Use case resumes at step 2.
 
