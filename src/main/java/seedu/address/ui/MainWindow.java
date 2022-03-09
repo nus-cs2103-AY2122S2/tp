@@ -4,6 +4,9 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -34,6 +37,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private FavouriteWindow favouriteWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -65,6 +69,7 @@ public class MainWindow extends UiPart<Stage> {
 
         setAccelerators();
 
+        favouriteWindow = new FavouriteWindow(logic);
         helpWindow = new HelpWindow();
     }
 
@@ -161,6 +166,14 @@ public class MainWindow extends UiPart<Stage> {
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
+    }
+
+    /**
+     * Opens up FavouriteWindow by setting up the fxml scene and opening it
+     */
+    @FXML
+    private void handleFavourite(ActionEvent event) {
+        favouriteWindow.show();
     }
 
     public PersonListPanel getPersonListPanel() {

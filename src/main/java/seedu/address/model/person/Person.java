@@ -19,6 +19,7 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private Favourite favourite;
 
     // Data fields
     private final Address address;
@@ -26,12 +27,28 @@ public class Person {
 
     /**
      * Every field must be present and not null.
+     * This constructor is used for adding a new Client, thus default status is unfavourited(false)
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.favourite = new Favourite(false);
+        this.address = address;
+        this.tags.addAll(tags);
+    }
+
+    /**
+     * This constructor is used when editing a Client.
+     * Favourited clients will remain favourited & unfavourited clients will remain unfavourited
+     */
+    public Person(Name name, Phone phone, Email email, Favourite favourite, Address address, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.favourite = favourite;
         this.address = address;
         this.tags.addAll(tags);
     }
@@ -46,6 +63,15 @@ public class Person {
 
     public Email getEmail() {
         return email;
+    }
+
+    public Favourite getFavourite() {
+        return favourite;
+    }
+
+    public void toggleFavourite() {
+        boolean toggledStatus = !favourite.getStatus();
+        favourite.setStatus(toggledStatus);
     }
 
     public Address getAddress() {
@@ -98,7 +124,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, favourite, address, tags);
     }
 
     @Override
@@ -109,6 +135,8 @@ public class Person {
                 .append(getPhone())
                 .append("; Email: ")
                 .append(getEmail())
+                .append("; Favourite: ")
+                .append(getFavourite())
                 .append("; Address: ")
                 .append(getAddress());
 
@@ -119,5 +147,4 @@ public class Person {
         }
         return builder.toString();
     }
-
 }
