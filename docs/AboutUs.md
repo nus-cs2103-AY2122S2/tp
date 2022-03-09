@@ -57,12 +57,14 @@ Computer Science undergraduate passionate about software engineering and game de
 I'm a Year 2 Computer Science undergraduate science with a passion for technology, games, and cybersecurity.
 I'm always looking for ways to improve my skills and widen my knowledge.
 
-### James Doe
+### Muhammad Radhya Fawza
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/mradhyaf.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/mradhyaf)]
+[[linkedin](https://www.linkedin.com/in/mradhyaf/)]
+[[portofolio](./team/mradhyaf.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: TBD
+
