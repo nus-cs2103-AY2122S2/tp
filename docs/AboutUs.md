@@ -33,9 +33,9 @@ I am an eager Y2 computer science undergraduate with the desire to learn and imp
 
 ### Edward Alvin
 
-<img src="images/Edward_Alvin.jpeg" width="200px">
+<img src="images/theprevailingone.jpeg" width="200px">
 
-[[github](http://github.com/theprevailingone)] [[linkedin](https://www.linkedin.com/in/edwardalvin/)]
+[[github](http://github.com/theprevailingone)] [[portfolio](team/theprevailingone.md)]
 
 * Role: Developer
 * Responsibilities: TBD
