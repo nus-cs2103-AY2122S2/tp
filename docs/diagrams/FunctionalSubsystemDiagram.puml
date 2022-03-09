@@ -1,0 +1,35 @@
+@startuml
+!include <office/Concepts/globe_internet>
+!include <office/Concepts/documents>
+!include <office/Users/user>
+!include style.puml
+
+Package " "<<Rectangle>>{
+    Class "Command Parsing, \nProcessing and\n Display Subsystem" UI_COLOR
+    Class "LogicManager" LOGIC_COLOR
+    package "Address Book Subsystem"{
+        Class "AddressBook" MODEL_COLOR
+        Class "SerializableAddressBook" STORAGE_COLOR
+        Class "Person" MODEL_COLOR
+    }
+    package "Schedule Subsystem"{
+        Class " Schedule " MODEL_COLOR
+        Class "SerializableSchedule" STORAGE_COLOR
+        Class "Appointment" MODEL_COLOR
+    }
+}
+
+Class "<$user>" as User MODEL_COLOR_T2
+Class "<$documents>" as File UI_COLOR_T2
+
+"AddressBook" -[MODEL_COLOR]-> "Person"
+"AddressBook" -[STORAGE_COLOR]-> "SerializableAddressBook"
+" Schedule " -[MODEL_COLOR]-> "Appointment"
+" Schedule " -[STORAGE_COLOR]-> "SerializableSchedule"
+"SerializableAddressBook" -down[STORAGE_COLOR].> File
+"SerializableSchedule" .down[STORAGE_COLOR].>File
+User ..> "Command Parsing, \nProcessing and\n Display Subsystem"
+"Command Parsing, \nProcessing and\n Display Subsystem" -left[#blue]-> "LogicManager"
+"LogicManager" -[#blue]-> "Schedule Subsystem"
+"LogicManager" -[#blue]-> "Address Book Subsystem"
+@enduml

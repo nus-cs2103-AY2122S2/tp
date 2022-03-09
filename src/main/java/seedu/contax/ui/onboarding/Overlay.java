@@ -18,13 +18,6 @@ public class Overlay extends UiPart<Region> {
     @FXML
     private Pane bottomOverlay;
 
-    @FXML
-    private Pane leftOverlay;
-
-    @FXML
-    private Pane rightOverlay;
-
-
     Overlay() {
         super(FXML);
     }

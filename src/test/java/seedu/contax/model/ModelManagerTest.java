@@ -10,6 +10,9 @@ import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALONE;
 import static seedu.contax.testutil.TypicalAppointments.getTypicalSchedule;
 import static seedu.contax.testutil.TypicalPersons.ALICE;
 import static seedu.contax.testutil.TypicalPersons.BENSON;
+import static seedu.contax.testutil.TypicalPersons.BOB;
+import static seedu.contax.testutil.TypicalPersons.CARL;
+import static seedu.contax.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.contax.testutil.TypicalTags.CLIENTS;
 import static seedu.contax.testutil.TypicalTags.FAMILY;
 
@@ -23,6 +26,7 @@ import seedu.contax.commons.core.GuiSettings;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.appointment.exceptions.AppointmentNotFoundException;
 import seedu.contax.model.person.NameContainsKeywordsPredicate;
+import seedu.contax.model.person.exceptions.PersonNotFoundException;
 import seedu.contax.testutil.AddressBookBuilder;
 import seedu.contax.testutil.AppointmentBuilder;
 import seedu.contax.testutil.ScheduleBuilder;
@@ -94,6 +98,17 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void setAddressBook_nullAddressBook_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setAddressBook(null));
+    }
+
+    @Test
+    public void setAddressBook_validAddressBook_success() {
+        modelManager.setAddressBook(getTypicalAddressBook());
+        assertEquals(getTypicalAddressBook(), modelManager.getAddressBook());
+    }
+
+    @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
     }
@@ -107,6 +122,87 @@ public class ModelManagerTest {
     public void hasPerson_personInAddressBook_returnsTrue() {
         modelManager.addPerson(ALICE);
         assertTrue(modelManager.hasPerson(ALICE));
+    }
+
+    @Test
+    public void deletePerson_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.deletePerson(null));
+    }
+
+    @Test
+    public void deletePerson_personNotInAddressBook_throwsPersonNotFoundException() {
+        assertThrows(PersonNotFoundException.class, () -> modelManager.deletePerson(ALICE));
+    }
+
+    @Test
+    public void deletePerson_personInAddressBookNoAppointments_success() {
+        modelManager.addPerson(ALICE);
+        modelManager.addPerson(BOB);
+        modelManager.deletePerson(ALICE);
+
+        ModelManager expectedModel = new ModelManager();
+        expectedModel.addPerson(BOB);
+        assertEquals(expectedModel, modelManager);
+    }
+
+    @Test
+    public void deletePerson_personInAddressBookHasAppointments_success() {
+        modelManager.addPerson(ALICE);
+        modelManager.addPerson(BOB);
+        modelManager.addAppointment(APPOINTMENT_ALICE);
+        Appointment appointment2 = new AppointmentBuilder(APPOINTMENT_ALONE).withPerson(BOB).build();
+        modelManager.addAppointment(appointment2);
+
+        modelManager.deletePerson(ALICE);
+
+        ModelManager expectedModel = new ModelManager();
+        expectedModel.addPerson(BOB);
+        expectedModel.addAppointment(new AppointmentBuilder(APPOINTMENT_ALICE).withPerson(null).build());
+        expectedModel.addAppointment(appointment2);
+        assertEquals(expectedModel, modelManager);
+    }
+
+    @Test
+    public void setPerson_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setPerson(null, null));
+        assertThrows(NullPointerException.class, () -> modelManager.setPerson(ALICE, null));
+        assertThrows(NullPointerException.class, () -> modelManager.setPerson(null, ALICE));
+    }
+
+    @Test
+    public void setPerson_personNotInAddressBook_throwsPersonNotFoundException() {
+        assertThrows(PersonNotFoundException.class, () -> modelManager.setPerson(ALICE, ALICE));
+    }
+
+    @Test
+    public void setPerson_personInAddressBookNoAppointments_success() {
+        modelManager.addPerson(ALICE);
+        modelManager.addPerson(BOB);
+
+        modelManager.setPerson(ALICE, CARL);
+
+        ModelManager expectedModel = new ModelManager();
+        expectedModel.addPerson(CARL);
+        expectedModel.addPerson(BOB);
+        assertEquals(expectedModel, modelManager);
+    }
+
+    @Test
+    public void setPerson_personInAddressBookHasAppointments_success() {
+        modelManager.addPerson(ALICE);
+        modelManager.addPerson(BOB);
+        modelManager.addAppointment(APPOINTMENT_ALICE);
+        Appointment appointment2 = new AppointmentBuilder(APPOINTMENT_ALONE).withPerson(BOB).build();
+        modelManager.addAppointment(appointment2);
+
+        modelManager.setPerson(ALICE, CARL);
+
+        ModelManager expectedModel = new ModelManager();
+        expectedModel.addPerson(CARL);
+        expectedModel.addPerson(BOB);
+        expectedModel.addAppointment(new AppointmentBuilder(APPOINTMENT_ALICE).withPerson(CARL).build());
+        expectedModel.addAppointment(appointment2);
+        assertEquals(expectedModel, modelManager);
     }
 
     @Test

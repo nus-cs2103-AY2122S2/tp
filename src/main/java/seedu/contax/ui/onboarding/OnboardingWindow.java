@@ -7,7 +7,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import seedu.contax.model.OnboardingStep;
+import seedu.contax.model.onboarding.OnboardingStep;
 import seedu.contax.model.person.UniquePersonList;
 import seedu.contax.ui.PersonListPanel;
 import seedu.contax.ui.UiPart;
@@ -234,7 +234,6 @@ public class OnboardingWindow extends UiPart<Stage> {
             instructionLabel.translate(resultDisplayPlaceholder.layoutXProperty(),
                     resultDisplayPlaceholder.layoutYProperty());
         } else if (option == 4) {
-            System.out.println(resultDisplayPlaceholder.getMaxHeight());
             instructionLabel.translate(
                     personList.layoutXProperty().add(0),
                     personList.layoutYProperty().add(

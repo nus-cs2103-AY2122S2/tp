@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import seedu.contax.logic.commands.AddAppointmentCommand;
 import seedu.contax.logic.commands.AddCommand;
 import seedu.contax.logic.commands.AddTagCommand;
+import seedu.contax.logic.commands.ChainCommand;
 import seedu.contax.logic.commands.ClearCommand;
 import seedu.contax.logic.commands.Command;
 import seedu.contax.logic.commands.DeleteAppointmentCommand;
@@ -91,6 +92,9 @@ public class AddressBookParser {
         // Tag management commands
         case AddTagCommand.COMMAND_WORD:
             return new AddTagCommandParser().parse(arguments);
+
+        case ChainCommand.COMMAND_WORD:
+            return new ChainCommandParser().parse(arguments);
 
         case ListTagCommand.COMMAND_WORD:
             return new ListTagCommand();

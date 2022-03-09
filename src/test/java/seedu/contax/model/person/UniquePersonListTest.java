@@ -2,6 +2,7 @@ package seedu.contax.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.contax.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.contax.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -11,6 +12,7 @@ import static seedu.contax.testutil.TypicalPersons.BOB;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -167,4 +169,36 @@ public class UniquePersonListTest {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniquePersonList.asUnmodifiableObservableList().remove(0));
     }
+
+    @Test
+    public void hashCodeTest() {
+        UniquePersonList refList = new UniquePersonList();
+        UniquePersonList list2 = new UniquePersonList();
+        list2.add(ALICE);
+        UniquePersonList list3 = new UniquePersonList();
+        list3.add(ALICE);
+
+        assertEquals(refList.hashCode(), refList.hashCode());
+        assertEquals(refList.hashCode(), new UniquePersonList().hashCode());
+        assertEquals(list2.hashCode(), list3.hashCode());
+
+        assertNotEquals(refList.hashCode(), list2.hashCode());
+    }
+
+    @Test
+    public void iterator() {
+        UniquePersonList refList = new UniquePersonList();
+
+        refList.add(ALICE);
+        refList.add(BOB);
+
+        HashSet<Person> result = new HashSet<>();
+        for (Person x : refList) {
+            result.add(x);
+        }
+
+        assertTrue(result.contains(BOB));
+        assertTrue(result.contains(ALICE));
+    }
+
 }
