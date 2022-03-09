@@ -14,7 +14,7 @@ import manageezpz.model.person.Person;
 import manageezpz.testutil.PersonBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code AddCommand}.
+ * Contains integration tests (interaction with the Model) for {@code AddEmployeeCommand}.
  */
 public class AddCommandIntegrationTest {
 
@@ -32,14 +32,14 @@ public class AddCommandIntegrationTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addPerson(validPerson);
 
-        assertCommandSuccess(new AddCommand(validPerson), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, validPerson), expectedModel);
+        assertCommandSuccess(new AddEmployeeCommand(validPerson), model,
+                String.format(AddEmployeeCommand.MESSAGE_SUCCESS, validPerson), expectedModel);
     }
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Person personInList = model.getAddressBook().getPersonList().get(0);
-        assertCommandFailure(new AddCommand(personInList), model, AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(new AddEmployeeCommand(personInList), model, AddEmployeeCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
 }
