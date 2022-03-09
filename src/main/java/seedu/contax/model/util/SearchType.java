@@ -33,13 +33,8 @@ public class SearchType {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidType(String test) {
+        requireNonNull(test);
         return Arrays.asList(VALIDATION_TYPE).contains(test);
-    }
-
-
-    @Override
-    public String toString() {
-        return searchType;
     }
 
 }
