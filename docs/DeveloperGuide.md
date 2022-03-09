@@ -291,7 +291,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br>
 
-**Use case: List all TA applicants**
+**Use case: List all TA applicants in the system**
 
 **MSS**
 
@@ -305,7 +305,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list is empty
     * 2a1. TAlent Assistant™ feedbacks no TAs in system
 
-      Use case ends.
+    Use case ends.
 
 <hr>
 
