@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
@@ -9,6 +10,7 @@ import seedu.address.model.person.Favourite;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.property.Property;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -27,6 +29,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Favourite favourite;
+    private Optional<Property> property;
     private Set<Tag> tags;
 
     /**
@@ -38,6 +41,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         favourite = new Favourite(false);
         address = new Address(DEFAULT_ADDRESS);
+        property = Optional.empty();
         tags = new HashSet<>();
     }
 
@@ -50,6 +54,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         favourite = personToCopy.getFavourite();
         address = personToCopy.getAddress();
+        property = personToCopy.getProperty();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -102,7 +107,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, favourite, address, tags);
+        return new Person(name, phone, email, favourite, address, property, tags);
     }
 
 }
