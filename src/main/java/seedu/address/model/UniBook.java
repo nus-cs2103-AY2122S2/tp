@@ -9,7 +9,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the uni-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
 public class UniBook implements ReadOnlyUniBook {
@@ -30,7 +30,7 @@ public class UniBook implements ReadOnlyUniBook {
     public UniBook() {}
 
     /**
-     * Creates an UniBook using the Persons in the {@code toBeCopied}
+     * Creates a UniBook using the Persons in the {@code toBeCopied}
      */
     public UniBook(ReadOnlyUniBook toBeCopied) {
         this();
