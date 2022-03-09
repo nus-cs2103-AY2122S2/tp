@@ -21,6 +21,8 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEX_MULTIPLE = "All indexes must be unique"
+                + " and a non-zero unsigned integer.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -33,6 +35,38 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if the specified any of the indexes are invalid (not non-zero unsigned integer).
+     */
+    public static Index[] parseIndexes(String oneBasedIndex) throws ParseException {
+        String trimmedIndex = oneBasedIndex.trim();
+        boolean isMultipleIndex = StringUtil.containsMultipleIndex(trimmedIndex);
+        boolean isAllValidIntegers = isMultipleIndex && StringUtil.isAllNonZeroUnsignedInteger(trimmedIndex);
+        boolean isValidMultipleIndex = isAllValidIntegers && StringUtil.isAllUniqueIntegers(trimmedIndex);
+
+        if (!isMultipleIndex && !StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        } else if (isMultipleIndex && !isValidMultipleIndex) {
+            throw new ParseException(MESSAGE_INVALID_INDEX_MULTIPLE);
+        }
+
+        return getIndexes(trimmedIndex);
+    }
+
+    /**
+     * Transforms a string of valid one-based indexes into an array of {@code Index}.
+     */
+    private static Index[] getIndexes(String trimmedIndex) {
+        String[] oneBasedArr = trimmedIndex.split(" ");
+        Index[] indexArr = new Index[oneBasedArr.length];
+        for (int i = 0; i < oneBasedArr.length; i++) {
+            indexArr[i] = Index.fromOneBased(Integer.parseInt(oneBasedArr[i]));
+        }
+        return indexArr;
     }
 
     /**
