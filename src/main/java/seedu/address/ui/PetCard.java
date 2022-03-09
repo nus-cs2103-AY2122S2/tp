@@ -29,15 +29,15 @@ public class PetCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
+    private Label id;
+    @FXML
     private Label name;
     @FXML
-    private Label id;
+    private Label ownerName;
     @FXML
     private Label phone;
     @FXML
     private Label address;
-    @FXML
-    private Label ownerName;
     @FXML
     private FlowPane tags;
 
