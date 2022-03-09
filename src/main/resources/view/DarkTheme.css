@@ -330,11 +330,9 @@
 
 #commandTextField {
     -fx-background-color: #37393e;
-    -fx-pref-height: 90;
-    -fx-border-radius: 50;
+    -fx-min-height: 40;
     -fx-background-insets: 0;
     -fx-border-insets: 0;
-    -fx-border-width: 1;
     -fx-font-family: "Roboto Mono Regular";
     -fx-font-size: 13pt;
     -fx-text-fill: white;
