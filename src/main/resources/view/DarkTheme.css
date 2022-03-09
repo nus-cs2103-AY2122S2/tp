@@ -177,7 +177,7 @@
 }
 
 .status-bar .label {
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-family: "Rubik Regular";
     -fx-text-fill: white;
     -fx-padding: 4px;
     -fx-pref-height: 30px;
