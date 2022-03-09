@@ -7,7 +7,5 @@
    <children>
       <Pane fx:id="topOverlay" prefHeight="200.0" prefWidth="200.0" />
       <Pane fx:id="bottomOverlay" prefHeight="200.0" prefWidth="200.0" />
-      <Pane fx:id="leftOverlay" prefHeight="200.0" prefWidth="200.0" />
-      <Pane fx:id="rightOverlay" prefHeight="200.0" prefWidth="200.0" />
    </children>
 </Pane>
