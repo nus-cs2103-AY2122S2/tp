@@ -1,9 +1,9 @@
 package manageezpz.model.task;
 
-import manageezpz.model.person.Name;
 import manageezpz.model.person.Person;
 
 import java.util.List;
+import java.util.Objects;
 
 import static manageezpz.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -18,7 +18,7 @@ public class Task {
 
     // Data fields
     protected boolean isDone;
-    private List<String> assignees; //List of Strings as of now, V1.3 will incorporate Persons (assign tasks to Persons)
+    private List<Person> assignees; //List of Strings as of now, V1.3 will incorporate Persons (assign tasks to Persons)
 
     /**
      * Constructor for the Task class.
@@ -64,15 +64,22 @@ public class Task {
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both Task have the same name.
+     * This defines a weaker notion of equality between two Task.
      */
-    public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
+    public boolean isSameTask(Task otherTask) {
+        if (otherTask == this) {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        return otherTask != null
+                && otherTask.getDescription().equals(getDescription());
     }
+
+    @Override
+    public int hashCode() {
+        // use this method for custom fields hashing instead of implementing your own
+        return Objects.hash(taskDescription);
+    }
+
 }

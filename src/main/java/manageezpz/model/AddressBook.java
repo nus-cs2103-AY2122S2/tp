@@ -7,6 +7,8 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import manageezpz.model.person.Person;
 import manageezpz.model.person.UniquePersonList;
+import manageezpz.model.task.Task;
+import manageezpz.model.task.UniqueTaskList;
 
 /**
  * Wraps all data at the address-book level
@@ -15,6 +17,7 @@ import manageezpz.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UniqueTaskList tasks;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,6 +28,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        tasks = new UniqueTaskList();
     }
 
     public AddressBook() {}
@@ -47,6 +51,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.persons.setPersons(persons);
     }
 
+    public void setTasks(List<Task> task) {
+        this.tasks.setTasks(task);
+    }
+
+
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
@@ -54,7 +63,19 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setTasks(newData.getTaskList());
     }
+
+    /// task-level operations
+    public boolean hasTask(Task task) {
+        requireNonNull(task);
+        return tasks.contains(task);
+    }
+
+    public void addTask(Task t) {
+        tasks.add(t);
+    }
+
 
     //// person-level operations
 
@@ -104,6 +125,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Task> getTaskList() {
+        return tasks.asUnmodifiableObservableList();
     }
 
     @Override

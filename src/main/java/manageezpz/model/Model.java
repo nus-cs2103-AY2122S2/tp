@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import manageezpz.commons.core.GuiSettings;
 import manageezpz.model.person.Person;
+import manageezpz.model.task.Task;
 
 /**
  * The API of the Model component.
@@ -84,4 +85,19 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+
+    //=========== ManageEZPZ ==================================================================================
+
+    void addTask(Task task);
+
+    void deleteTask(Task task);
+
+    void markTask(Task task);
+
+    void unmarkTask(Task task);
+
+    void findTask(Task task);
+
+
 }

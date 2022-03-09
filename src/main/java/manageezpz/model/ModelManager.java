@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import manageezpz.commons.core.GuiSettings;
 import manageezpz.commons.core.LogsCenter;
 import manageezpz.model.person.Person;
+import manageezpz.model.task.Task;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -147,4 +148,31 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(other.filteredPersons);
     }
 
+
+    //=========== ManageEZPZ ==================================================================================
+
+    @Override
+    public void addTask(Task task) {
+
+    }
+
+    @Override
+    public void deleteTask(Task task) {
+
+    }
+
+    @Override
+    public void markTask(Task task) {
+
+    }
+
+    @Override
+    public void unmarkTask(Task task) {
+
+    }
+
+    @Override
+    public void findTask(Task task) {
+
+    }
 }
