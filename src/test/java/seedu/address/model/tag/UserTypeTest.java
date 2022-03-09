@@ -14,14 +14,14 @@ public class UserTypeTest {
     }
 
     @Test
-    public void constructor_invalidTagName_throwsIllegalArgumentException() {
+    public void constructor_invalidUserType_throwsIllegalArgumentException() {
         String invalidTagName = "";
         assertThrows(IllegalArgumentException.class, () -> new UserType(invalidTagName));
     }
 
     @Test
-    public void isValidTagName() {
-        // null tag name
+    public void isValidUserType() {
+        // null user type
         assertThrows(NullPointerException.class, () -> UserType.isValidUserType(null));
     }
 

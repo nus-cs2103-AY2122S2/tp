@@ -116,7 +116,7 @@ public class EditCommandParserTest {
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTag(VALID_USERTYPE_SELLER).build();
+                .withUserType(VALID_USERTYPE_SELLER).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -163,7 +163,7 @@ public class EditCommandParserTest {
 
         // tags
         userInput = targetIndex.getOneBased() + USERTYPE_DESC_SELLER;
-        descriptor = new EditPersonDescriptorBuilder().withTag(VALID_USERTYPE_SELLER).build();
+        descriptor = new EditPersonDescriptorBuilder().withUserType(VALID_USERTYPE_SELLER).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -176,7 +176,7 @@ public class EditCommandParserTest {
                 + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB + USERTYPE_DESC_BUYER;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB)
-                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTag(VALID_USERTYPE_BUYER)
+                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withUserType(VALID_USERTYPE_BUYER)
                 .build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -206,7 +206,7 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = targetIndex.getOneBased() + USERTYPE_DESC_SELLER;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withTag(VALID_USERTYPE_SELLER).build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withUserType(VALID_USERTYPE_SELLER).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

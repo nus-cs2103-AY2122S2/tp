@@ -148,13 +148,13 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseUserType_validValueWithoutWhitespace_returnsTag() throws Exception {
+    public void parseUserType_validValueWithoutWhitespace_returnsUserType() throws Exception {
         UserType expectedUserType = new UserType(VALID_USERTYPE_2);
         assertEquals(expectedUserType, ParserUtil.parseUserType(VALID_USERTYPE_2));
     }
 
     @Test
-    public void parseUserType_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
+    public void parseUserType_validValueWithWhitespace_returnsTrimmedUserType() throws Exception {
         String tagWithWhitespace = WHITESPACE + VALID_USERTYPE_1 + WHITESPACE;
         UserType expectedUserType = new UserType(VALID_USERTYPE_1);
         assertEquals(expectedUserType, ParserUtil.parseUserType(tagWithWhitespace));

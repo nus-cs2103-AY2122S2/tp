@@ -52,7 +52,7 @@ public class EditPersonDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTag(VALID_USERTYPE_BUYER).build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withUserType(VALID_USERTYPE_BUYER).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 }

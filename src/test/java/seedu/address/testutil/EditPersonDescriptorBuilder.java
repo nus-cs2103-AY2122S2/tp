@@ -72,7 +72,7 @@ public class EditPersonDescriptorBuilder {
      * that we are building.
      * @param userType
      */
-    public EditPersonDescriptorBuilder withTag(String userType) {
+    public EditPersonDescriptorBuilder withUserType(String userType) {
         descriptor.setUserType(new UserType(userType));
         return this;
     }
