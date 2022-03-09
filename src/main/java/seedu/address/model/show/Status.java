@@ -1,13 +1,11 @@
 package seedu.address.model.show;
 
-import java.util.Locale;
-
 public class Status {
 
-    private static final String COMPLETED = "completed";
-    private static final String WATCHING = "watching";
     public static final String MESSAGE_CONSTRAINTS =
             "Status should only be completed or watching!!!";
+    private static final String COMPLETED = "completed";
+    private static final String WATCHING = "watching";
 
     private final String status;
 

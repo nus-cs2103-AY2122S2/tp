@@ -1,13 +1,18 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.*;
-import seedu.address.logic.parser.exceptions.ParseException;
+import static seedu.address.commons.core.MessagesTrackermon.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.MessagesTrackermon.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static seedu.address.commons.core.MessagesTrackermon.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.MessagesTrackermon.MESSAGE_UNKNOWN_COMMAND;
+import seedu.address.logic.commands.AddCommandTrackermon;
+import seedu.address.logic.commands.CommandTrackermon;
+import seedu.address.logic.commands.DeleteCommandTrackermon;
+import seedu.address.logic.commands.ExitCommandTrackermon;
+import seedu.address.logic.commands.HelpCommandTrackermon;
+import seedu.address.logic.commands.ListCommandTrackermon;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Parses user input.
@@ -29,7 +34,8 @@ public class TrackermonParser {
     public CommandTrackermon parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    HelpCommandTrackermon.MESSAGE_USAGE));
         }
 
         final String commandWord = matcher.group("commandWord");

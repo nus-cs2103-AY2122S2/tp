@@ -1,10 +1,13 @@
 package seedu.address.logic;
 
+import java.nio.file.Path;
+import java.util.logging.Logger;
+
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.CommandTrackermon;
 import seedu.address.logic.commands.CommandResultTrackermon;
+import seedu.address.logic.commands.CommandTrackermon;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.TrackermonParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -13,9 +16,8 @@ import seedu.address.model.ReadOnlyShowList;
 import seedu.address.model.show.Show;
 import seedu.address.storage.Storage;
 
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.logging.Logger;
+//import java.io.IOException;
+
 
 /**
  * The main LogicManager of the app.
@@ -26,7 +28,7 @@ public class LogicManagerTrackermon implements LogicTrackermon {
 
     private final ModelTrackermon model;
     private final Storage storage;
-    private final TrackermonParser Parser;
+    private final TrackermonParser parser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -34,7 +36,7 @@ public class LogicManagerTrackermon implements LogicTrackermon {
     public LogicManagerTrackermon(ModelTrackermon model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        Parser = new TrackermonParser();
+        parser = new TrackermonParser();
     }
 
     @Override
@@ -42,7 +44,7 @@ public class LogicManagerTrackermon implements LogicTrackermon {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResultTrackermon commandResult;
-        CommandTrackermon command = Parser.parseCommand(commandText);
+        CommandTrackermon command = parser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         /* I'll edit this part once storge methods have been morphed

@@ -1,17 +1,19 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.AddCommandTrackermon;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.show.Name;
-import seedu.address.model.show.Status;
-import seedu.address.model.show.Show;
-import seedu.address.model.tag.Tag;
+import static seedu.address.commons.core.MessagesTrackermon.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntaxTrackermon.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntaxTrackermon.PREFIX_STATUS;
+import static seedu.address.logic.parser.CliSyntaxTrackermon.PREFIX_TAG;
 
 import java.util.Set;
 import java.util.stream.Stream;
 
-import static seedu.address.commons.core.MessagesTrackermon.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntaxTrackermon.*;
+import seedu.address.logic.commands.AddCommandTrackermon;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.show.Name;
+import seedu.address.model.show.Show;
+import seedu.address.model.show.Status;
+import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new AddCommand object
