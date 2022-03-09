@@ -46,11 +46,11 @@ public class CommandTestUtil {
     public static final String PRICE_FULL_A = " " + PREFIX_PRICE + VALID_PRICE_A;
     public static final String PRICE_FULL_B = " " + PREFIX_PRICE + VALID_PRICE_B;
 
-    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
-    public static final String INVALID_CATEGORY_DESC = " " + PREFIX_CATEGORY + "911&"; // 'a' not allowed in phones
-    public static final String INVALID_EXPIRY_DATE_DESC = " " + PREFIX_EXPIRY_DATE + "bob!yahoo"; // missing '@' symbol
+    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "Bread&"; // '&' not allowed in names
+    public static final String INVALID_CATEGORY_DESC = " " + PREFIX_CATEGORY + "Bread&"; // '&' not allowed in category
+    public static final String INVALID_EXPIRY_DATE_DESC = " " + PREFIX_EXPIRY_DATE + "2022 03 08"; // incorrect format
     public static final String INVALID_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION; // empty string not allowed for desc
-    public static final String INVALID_PRICE_DESC = " " + PREFIX_PRICE + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_PRICE_DESC = " " + PREFIX_PRICE + "-1"; // price must be a positive amount
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
