@@ -19,6 +19,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ViewTab;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.misc.InfoPanelTypes;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
@@ -231,6 +232,25 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Updates the InfoPanel.
+     */
+    private void handleInfoPanelUpdate(InfoPanelTypes infoPanelTypes) {
+        switch (infoPanelTypes) {
+        case PERSON:
+            logger.info("INFO: Updating InfoPanel with selected person");
+            Person selectedPerson = logic.getSelectedPerson();
+            populateInfoPanelWithPerson(selectedPerson);
+            break;
+        case LESSON:
+            logger.info("INFO: Updating InfoPanel with selected lesson");
+            Lesson selectedLesson = logic.getSelectedLesson();
+            populateInfoPanelWithLesson(selectedLesson);
+            break;
+        default:
+            logger.severe("WARNING: Something went wrong with handling the InfoPanels");
+        }
+    }
     public ListPanel getLessonListPanel() {
         return lessonListPanel;
     }
@@ -256,6 +276,11 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isUpdateInfoPanel()) {
+                InfoPanelTypes infoPanelType = commandResult.getInfoPanelType();
+                handleInfoPanelUpdate(infoPanelType);
             }
 
             return commandResult;
