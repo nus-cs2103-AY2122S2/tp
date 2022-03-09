@@ -113,4 +113,22 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredLessonList(Predicate<Lesson> predicate);
+
+    /**
+     * Sets the selected {@code Person} with the given {@code Person} for UI use.
+     * @param person The given {@code Person}.
+     */
+    void setSelectedPerson(Person person);
+
+    /** Returns the selected {@code Person} */
+    Person getSelectedPerson();
+
+    /**
+     * Sets the selected {@code Lesson} with the given {@code Lesson} for UI use.
+     * @param lesson The given {@code Lesson}.
+     */
+    void setSelectedLesson(Lesson lesson);
+
+    /** Returns the selected {@code Lesson} */
+    Lesson getSelectedLesson();
 }
