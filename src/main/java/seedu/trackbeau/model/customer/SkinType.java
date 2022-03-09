@@ -7,7 +7,7 @@ import static seedu.trackbeau.commons.util.AppUtil.checkArgument;
  * Represents a Person's skin type in the trackbeau book.
  * Guarantees: immutable; is valid as declared in {@link #isValidSkinType(String)}
  */
-public class Skin {
+public class SkinType {
 
     public static final String MESSAGE_CONSTRAINTS = "SkinTypes can be any values and it should not be blank";
 
@@ -24,7 +24,7 @@ public class Skin {
      *
      * @param skinType a valid skin type.
      */
-    public Skin(String skinType) {
+    public SkinType(String skinType) {
         requireNonNull(skinType);
         checkArgument(isValidSkinType(skinType), MESSAGE_CONSTRAINTS);
         value = skinType;
@@ -45,8 +45,8 @@ public class Skin {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Skin // instanceof handles nulls
-                && value.equals(((Skin) other).value)); // state check
+                || (other instanceof SkinType // instanceof handles nulls
+                && value.equals(((SkinType) other).value)); // state check
     }
 
     @Override

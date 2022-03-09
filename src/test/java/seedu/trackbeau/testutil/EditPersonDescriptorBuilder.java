@@ -8,10 +8,10 @@ import seedu.trackbeau.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.trackbeau.model.customer.Address;
 import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.model.customer.Email;
-import seedu.trackbeau.model.customer.Hair;
+import seedu.trackbeau.model.customer.HairType;
 import seedu.trackbeau.model.customer.Name;
 import seedu.trackbeau.model.customer.Phone;
-import seedu.trackbeau.model.customer.Skin;
+import seedu.trackbeau.model.customer.SkinType;
 import seedu.trackbeau.model.tag.Tag;
 
 /**
@@ -81,7 +81,7 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code Skin Type} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withSkinType(String skinType) {
-        descriptor.setSkinType(new Skin(skinType));
+        descriptor.setSkinType(new SkinType(skinType));
         return this;
     }
 
@@ -89,7 +89,7 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code Hair Type} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withHairType(String hairType) {
-        descriptor.setHairType(new Hair(hairType));
+        descriptor.setHairType(new HairType(hairType));
         return this;
     }
 

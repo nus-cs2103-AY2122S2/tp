@@ -13,10 +13,10 @@ import seedu.trackbeau.commons.exceptions.IllegalValueException;
 import seedu.trackbeau.model.customer.Address;
 import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.model.customer.Email;
-import seedu.trackbeau.model.customer.Hair;
+import seedu.trackbeau.model.customer.HairType;
 import seedu.trackbeau.model.customer.Name;
 import seedu.trackbeau.model.customer.Phone;
-import seedu.trackbeau.model.customer.Skin;
+import seedu.trackbeau.model.customer.SkinType;
 import seedu.trackbeau.model.tag.Tag;
 
 /**
@@ -146,26 +146,26 @@ class JsonAdaptedCustomer {
 
         if (skinType == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Skin.class.getSimpleName()));
+                    SkinType.class.getSimpleName()));
         }
-        if (!Skin.isValidSkinType(skinType)) {
-            throw new IllegalValueException(Skin.MESSAGE_CONSTRAINTS);
+        if (!SkinType.isValidSkinType(skinType)) {
+            throw new IllegalValueException(SkinType.MESSAGE_CONSTRAINTS);
         }
 
-        final Skin modelSkin = new Skin(skinType);
+        final SkinType modelSkinType = new SkinType(skinType);
 
         if (hairType == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Hair.class.getSimpleName()));
+                    HairType.class.getSimpleName()));
         }
-        if (!Hair.isValidHairType(hairType)) {
-            throw new IllegalValueException(Hair.MESSAGE_CONSTRAINTS);
+        if (!HairType.isValidHairType(hairType)) {
+            throw new IllegalValueException(HairType.MESSAGE_CONSTRAINTS);
         }
 
-        final Hair modelHair = new Hair(hairType);
+        final HairType modelHairType = new HairType(hairType);
 
         return new Customer(modelName, modelPhone, modelEmail,
-                modelAddress, modelSkin, modelHair, modelStaffs, modelServices, modelAllergies);
+                modelAddress, modelSkinType, modelHairType, modelStaffs, modelServices, modelAllergies);
     }
 
 }

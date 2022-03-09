@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
 import seedu.trackbeau.model.customer.Address;
 import seedu.trackbeau.model.customer.Email;
-import seedu.trackbeau.model.customer.Hair;
+import seedu.trackbeau.model.customer.HairType;
 import seedu.trackbeau.model.customer.Name;
 import seedu.trackbeau.model.customer.Phone;
 import seedu.trackbeau.model.tag.Tag;
@@ -179,8 +179,8 @@ public class ParserUtilTest {
 
     public void parseHairType_validValueWithWhitespace_returnsTrimmedHairType() throws Exception {
         String hairTypeWithWhitespace = WHITESPACE + VALID_HAIR_TYPE + WHITESPACE;
-        Hair expectedHair = new Hair(VALID_HAIR_TYPE);
-        assertEquals(expectedHair, ParserUtil.parseAddress(hairTypeWithWhitespace));
+        HairType expectedHairType = new HairType(VALID_HAIR_TYPE);
+        assertEquals(expectedHairType, ParserUtil.parseAddress(hairTypeWithWhitespace));
     }
 
     @Test

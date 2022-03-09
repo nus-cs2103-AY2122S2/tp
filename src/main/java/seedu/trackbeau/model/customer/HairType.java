@@ -7,7 +7,7 @@ import static seedu.trackbeau.commons.util.AppUtil.checkArgument;
  * Represents a Person's hair type in the trackbeau book.
  * Guarantees: immutable; is valid as declared in {@link #isValidHairType(String)}
  */
-public class Hair {
+public class HairType {
 
     public static final String MESSAGE_CONSTRAINTS = "HairTypes can be any values and it should not be blank";
 
@@ -24,7 +24,7 @@ public class Hair {
      *
      * @param hairType A valid hair type.
      */
-    public Hair(String hairType) {
+    public HairType(String hairType) {
         requireNonNull(hairType);
         checkArgument(isValidHairType(hairType), MESSAGE_CONSTRAINTS);
         value = hairType;
@@ -45,8 +45,8 @@ public class Hair {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Hair // instanceof handles nulls
-                && value.equals(((Hair) other).value)); // state check
+                || (other instanceof HairType // instanceof handles nulls
+                && value.equals(((HairType) other).value)); // state check
     }
 
     @Override

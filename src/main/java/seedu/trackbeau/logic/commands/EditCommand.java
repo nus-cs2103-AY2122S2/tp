@@ -26,10 +26,10 @@ import seedu.trackbeau.model.Model;
 import seedu.trackbeau.model.customer.Address;
 import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.model.customer.Email;
-import seedu.trackbeau.model.customer.Hair;
+import seedu.trackbeau.model.customer.HairType;
 import seedu.trackbeau.model.customer.Name;
 import seedu.trackbeau.model.customer.Phone;
-import seedu.trackbeau.model.customer.Skin;
+import seedu.trackbeau.model.customer.SkinType;
 import seedu.trackbeau.model.tag.Tag;
 
 /**
@@ -107,13 +107,13 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(customerToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(customerToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(customerToEdit.getAddress());
-        Skin updatedSkin = editPersonDescriptor.getSkinType().orElse(customerToEdit.getSkinType());
-        Hair updatedHair = editPersonDescriptor.getHairType().orElse(customerToEdit.getHairType());
+        SkinType updatedSkinType = editPersonDescriptor.getSkinType().orElse(customerToEdit.getSkinType());
+        HairType updatedHairType = editPersonDescriptor.getHairType().orElse(customerToEdit.getHairType());
         Set<Tag> updatedStaffs = editPersonDescriptor.getStaffs().orElse(customerToEdit.getStaffs());
         Set<Tag> updatedServices = editPersonDescriptor.getServices().orElse(customerToEdit.getServices());
         Set<Tag> updatedAllergies = editPersonDescriptor.getAllergies().orElse(customerToEdit.getAllergies());
 
-        return new Customer(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedSkin, updatedHair,
+        return new Customer(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedSkinType, updatedHairType,
                 updatedStaffs, updatedServices, updatedAllergies);
     }
 
@@ -144,8 +144,8 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
-        private Skin skin;
-        private Hair hair;
+        private SkinType skinType;
+        private HairType hairType;
         private Set<Tag> staffs;
         private Set<Tag> services;
         private Set<Tag> allergies;
@@ -171,7 +171,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, address,
-                    skin, hair, staffs, services, allergies);
+                    skinType, hairType, staffs, services, allergies);
         }
 
         public void setName(Name name) {
@@ -206,20 +206,20 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
-        public void setSkinType(Skin skin) {
-            this.skin = skin;
+        public void setSkinType(SkinType skinType) {
+            this.skinType = skinType;
         }
 
-        public Optional<Skin> getSkinType() {
-            return Optional.ofNullable(skin);
+        public Optional<SkinType> getSkinType() {
+            return Optional.ofNullable(skinType);
         }
 
-        public void setHairType(Hair hair) {
-            this.hair = hair;
+        public void setHairType(HairType hairType) {
+            this.hairType = hairType;
         }
 
-        public Optional<Hair> getHairType() {
-            return Optional.ofNullable(hair);
+        public Optional<HairType> getHairType() {
+            return Optional.ofNullable(hairType);
         }
 
         /**

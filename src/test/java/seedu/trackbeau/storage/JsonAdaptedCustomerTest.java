@@ -13,10 +13,10 @@ import org.junit.jupiter.api.Test;
 import seedu.trackbeau.commons.exceptions.IllegalValueException;
 import seedu.trackbeau.model.customer.Address;
 import seedu.trackbeau.model.customer.Email;
-import seedu.trackbeau.model.customer.Hair;
+import seedu.trackbeau.model.customer.HairType;
 import seedu.trackbeau.model.customer.Name;
 import seedu.trackbeau.model.customer.Phone;
-import seedu.trackbeau.model.customer.Skin;
+import seedu.trackbeau.model.customer.SkinType;
 
 public class JsonAdaptedCustomerTest {
     private static final String INVALID_NAME = "R@chel";
@@ -133,7 +133,7 @@ public class JsonAdaptedCustomerTest {
                 new JsonAdaptedCustomer(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                         VALID_ADDRESS, INVALID_SKIN_TYPE, VALID_HAIR_TYPE, VALID_STAFFS,
                         VALID_SERVICES, VALID_ALLERGIES);
-        String expectedMessage = Skin.MESSAGE_CONSTRAINTS;
+        String expectedMessage = SkinType.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
@@ -143,7 +143,7 @@ public class JsonAdaptedCustomerTest {
                 new JsonAdaptedCustomer(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                         VALID_ADDRESS, VALID_SKIN_TYPE, INVALID_HAIR_TYPE, VALID_STAFFS,
                         VALID_SERVICES, VALID_ALLERGIES);
-        String expectedMessage = Hair.MESSAGE_CONSTRAINTS;
+        String expectedMessage = HairType.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 

@@ -6,10 +6,10 @@ import java.util.Set;
 import seedu.trackbeau.model.customer.Address;
 import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.model.customer.Email;
-import seedu.trackbeau.model.customer.Hair;
+import seedu.trackbeau.model.customer.HairType;
 import seedu.trackbeau.model.customer.Name;
 import seedu.trackbeau.model.customer.Phone;
-import seedu.trackbeau.model.customer.Skin;
+import seedu.trackbeau.model.customer.SkinType;
 import seedu.trackbeau.model.tag.Tag;
 import seedu.trackbeau.model.util.SampleDataUtil;
 
@@ -29,8 +29,8 @@ public class PersonBuilder {
     private Phone phone;
     private Email email;
     private Address address;
-    private Skin skin;
-    private Hair hair;
+    private SkinType skinType;
+    private HairType hairType;
     private Set<Tag> staffs;
     private Set<Tag> services;
     private Set<Tag> allergies;
@@ -43,8 +43,8 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        skin = new Skin(DEFAULT_SKIN_TYPE);
-        hair = new Hair(DEFAULT_HAIR_TYPE);
+        skinType = new SkinType(DEFAULT_SKIN_TYPE);
+        hairType = new HairType(DEFAULT_HAIR_TYPE);
         staffs = new HashSet<>();
         services = new HashSet<>();
         allergies = new HashSet<>();
@@ -58,8 +58,8 @@ public class PersonBuilder {
         phone = customerToCopy.getPhone();
         email = customerToCopy.getEmail();
         address = customerToCopy.getAddress();
-        skin = customerToCopy.getSkinType();
-        hair = customerToCopy.getHairType();
+        skinType = customerToCopy.getSkinType();
+        hairType = customerToCopy.getHairType();
         staffs = new HashSet<>(customerToCopy.getStaffs());
         services = new HashSet<>(customerToCopy.getServices());
         allergies = new HashSet<>(customerToCopy.getAllergies());
@@ -125,7 +125,7 @@ public class PersonBuilder {
      * Sets the {@code Skin Type} of the {@code Person} that we are building.
      */
     public PersonBuilder withSkinType(String skinType) {
-        this.skin = new Skin(skinType);
+        this.skinType = new SkinType(skinType);
         return this;
     }
 
@@ -133,12 +133,12 @@ public class PersonBuilder {
      * Sets the {@code Hair Type} of the {@code Person} that we are building.
      */
     public PersonBuilder withHairType(String hairType) {
-        this.hair = new Hair(hairType);
+        this.hairType = new HairType(hairType);
         return this;
     }
 
     public Customer build() {
-        return new Customer(name, phone, email, address, skin, hair, staffs, services, allergies);
+        return new Customer(name, phone, email, address, skinType, hairType, staffs, services, allergies);
     }
 
 }

@@ -22,8 +22,8 @@ public class Customer {
 
     // Data fields
     private final Address address;
-    private final Skin skin;
-    private final Hair hair;
+    private final SkinType skinType;
+    private final HairType hairType;
     private final Set<Tag> staffs = new HashSet<>();
     private final Set<Tag> services = new HashSet<>();
     private final Set<Tag> allergies = new HashSet<>();
@@ -32,14 +32,14 @@ public class Customer {
      * Every field must be present and not null.
      */
     public Customer(Name name, Phone phone, Email email, Address address,
-                    Skin skin, Hair hair, Set<Tag> staffs, Set<Tag> services, Set<Tag> allergies) {
+                    SkinType skinType, HairType hairType, Set<Tag> staffs, Set<Tag> services, Set<Tag> allergies) {
         requireAllNonNull(name, phone, email, address);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.skin = skin;
-        this.hair = hair;
+        this.skinType = skinType;
+        this.hairType = hairType;
         this.staffs.addAll(staffs);
         this.services.addAll(services);
         this.allergies.addAll(allergies);
@@ -61,12 +61,12 @@ public class Customer {
         return address;
     }
 
-    public Skin getSkinType() {
-        return skin;
+    public SkinType getSkinType() {
+        return skinType;
     }
 
-    public Hair getHairType() {
-        return hair;
+    public HairType getHairType() {
+        return hairType;
     }
 
     /**
@@ -125,7 +125,7 @@ public class Customer {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, skin, hair, staffs, services, allergies);
+        return Objects.hash(name, phone, email, address, skinType, hairType, staffs, services, allergies);
     }
 
     @Override

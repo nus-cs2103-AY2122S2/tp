@@ -11,10 +11,10 @@ import seedu.trackbeau.commons.util.StringUtil;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
 import seedu.trackbeau.model.customer.Address;
 import seedu.trackbeau.model.customer.Email;
-import seedu.trackbeau.model.customer.Hair;
+import seedu.trackbeau.model.customer.HairType;
 import seedu.trackbeau.model.customer.Name;
 import seedu.trackbeau.model.customer.Phone;
-import seedu.trackbeau.model.customer.Skin;
+import seedu.trackbeau.model.customer.SkinType;
 import seedu.trackbeau.model.tag.Tag;
 
 /**
@@ -103,13 +103,13 @@ public class ParserUtil {
      * Skin type input must fit existing categories.
      * @throws ParseException if the given {@code trackbeau} is invalid.
      */
-    public static Skin parseSkinType(String skinType) throws ParseException {
+    public static SkinType parseSkinType(String skinType) throws ParseException {
         requireNonNull(skinType);
         String trimmedSkinType = skinType.trim();
-        if (!Skin.isValidSkinType(trimmedSkinType)) {
-            throw new ParseException(Skin.MESSAGE_CONSTRAINTS);
+        if (!SkinType.isValidSkinType(trimmedSkinType)) {
+            throw new ParseException(SkinType.MESSAGE_CONSTRAINTS);
         }
-        return new Skin(trimmedSkinType);
+        return new SkinType(trimmedSkinType);
     }
 
     /**
@@ -118,13 +118,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code trackbeau} is invalid.
      */
-    public static Hair parseHairType(String hairType) throws ParseException {
+    public static HairType parseHairType(String hairType) throws ParseException {
         requireNonNull(hairType);
         String trimmedHairType = hairType.trim();
         if (!Address.isValidAddress(trimmedHairType)) {
-            throw new ParseException(Hair.MESSAGE_CONSTRAINTS);
+            throw new ParseException(HairType.MESSAGE_CONSTRAINTS);
         }
-        return new Hair(trimmedHairType);
+        return new HairType(trimmedHairType);
     }
 
     /**

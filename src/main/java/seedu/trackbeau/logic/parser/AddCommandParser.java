@@ -19,10 +19,10 @@ import seedu.trackbeau.logic.parser.exceptions.ParseException;
 import seedu.trackbeau.model.customer.Address;
 import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.model.customer.Email;
-import seedu.trackbeau.model.customer.Hair;
+import seedu.trackbeau.model.customer.HairType;
 import seedu.trackbeau.model.customer.Name;
 import seedu.trackbeau.model.customer.Phone;
-import seedu.trackbeau.model.customer.Skin;
+import seedu.trackbeau.model.customer.SkinType;
 import seedu.trackbeau.model.tag.Tag;
 
 /**
@@ -51,20 +51,20 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Skin skin = new Skin(EMPTY_SKIN_TYPE);
+        SkinType skinType = new SkinType(EMPTY_SKIN_TYPE);
         if (argMultimap.getValue(PREFIX_SKINTYPE).isPresent()) {
-            skin = ParserUtil.parseSkinType(argMultimap.getValue(PREFIX_SKINTYPE).get());
+            skinType = ParserUtil.parseSkinType(argMultimap.getValue(PREFIX_SKINTYPE).get());
         }
-        Hair hair = new Hair((EMPTY_HAIR_TYPE));
+        HairType hairType = new HairType((EMPTY_HAIR_TYPE));
         if (argMultimap.getValue(PREFIX_HAIRTYPE).isPresent()) {
-            hair = ParserUtil.parseHairType(argMultimap.getValue(PREFIX_HAIRTYPE).get());
+            hairType = ParserUtil.parseHairType(argMultimap.getValue(PREFIX_HAIRTYPE).get());
         }
         Set<Tag> staffList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_STAFFS));
         Set<Tag> serviceList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_SERVICES));
         Set<Tag> allergyList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_ALLERGIES));
 
         Customer customer = new Customer(name, phone, email,
-                address, skin, hair, staffList,
+                address, skinType, hairType, staffList,
                 serviceList, allergyList);
 
         return new AddCommand(customer);
