@@ -413,7 +413,7 @@ Examples:
 * `importcsv f/file.csv n/2 p/3 e/5 a/6 t/4`
   * Reads from a CSV file treating the 2nd column as names, 3rd column as phone numbers, 5th column as email addresses, 4th column as tags.
 * `importcsv f/file.csv n/2`
-  * Reads from CSV treating the 2nd column as names, 3rd column as phone numbers, 4th column as email address, 5th column as tags.
+  * Reads from CSV treating the 2nd column as names, 3rd column as phone numbers, 4th column as email addresses, 5th column as tags.
 * `importcsv f/file.csv`
   * Reads from CSV with default ContaX format positions
 
