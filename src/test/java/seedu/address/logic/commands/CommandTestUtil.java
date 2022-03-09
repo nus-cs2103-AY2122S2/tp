@@ -36,6 +36,12 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_REGION_AMY = "North";
+    public static final String VALID_REGION_BOB = "South";
+    public static final String VALID_SIZE_AMY = "1-room";
+    public static final String VALID_SIZE_BOB = "2-room";
+    public static final String VALID_PRICE_AMY = "$300000";
+    public static final String VALID_PRICE_BOB = "$500000";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
