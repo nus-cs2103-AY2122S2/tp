@@ -1,5 +1,8 @@
 package seedu.address.ui;
 
+import java.awt.Desktop;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -15,8 +18,13 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String USERGUIDE_URL =
+            "https://github.com/AY2122S2-CS2103-F11-2/tp/blob/master/docs/UserGuide.md";
+    public static final String HELP_MESSAGE = "Available functions on this version: \n\n"
+            + "-add n/NAME id/STUDENT_ID c/COURSE \n-delete STUDENT_ID\n"
+            + "-find k/KEYWORD [k/MORE_KEYWORDS] f/ATTRIBUTE_FIELD\n"
+            + "-exit\n\n"
+            + "The full guide is available on our User Guide";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -93,10 +101,32 @@ public class HelpWindow extends UiPart<Stage> {
      * Copies the URL to the user guide to the clipboard.
      */
     @FXML
-    private void copyUrl() {
+    private void copyUrl() throws URISyntaxException {
         final Clipboard clipboard = Clipboard.getSystemClipboard();
         final ClipboardContent url = new ClipboardContent();
         url.putString(USERGUIDE_URL);
         clipboard.setContent(url);
+        openWebpage(USERGUIDE_URL);
+    }
+
+    /**
+     * Opens the URL given in the user's default browser.
+     *
+     * @param url the url of the link provided.
+     * @return boolean to show if link is successfully opened.
+     * @throws URISyntaxException when URI cannot be opened.
+     */
+    public boolean openWebpage(String url) throws URISyntaxException {
+        URI link = new URI(url);
+        Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+        if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+            try {
+                desktop.browse(link);
+                return true;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
     }
 }
