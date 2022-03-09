@@ -63,6 +63,9 @@ public class AddressBookParser {
         case AddLogCommand.COMMAND_WORD:
             return new AddLogCommandParser().parse(arguments);
 
+        case DeleteLogCommand.COMMAND_WORD:
+            return new DeleteLogCommandParser().parse(arguments);
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
