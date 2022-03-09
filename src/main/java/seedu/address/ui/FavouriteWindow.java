@@ -33,7 +33,9 @@ public class FavouriteWindow extends UiPart<Stage> {
         this.logic = logic;
     }
 
-    /* Calls methods to fill in all parts of the window and displays window */
+    /**
+     * Calls methods to fill in all parts of the window and displays window
+     */
     public void show() {
         logger.fine("Showing Favourite Window.");
         fillInnerParts();

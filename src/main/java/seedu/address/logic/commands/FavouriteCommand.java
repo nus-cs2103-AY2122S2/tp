@@ -15,18 +15,18 @@ import seedu.address.model.person.Person;
  * Favourites an existing client in the address book by their index number
  */
 public class FavouriteCommand extends Command {
-    private final Index index;
-
     public static final String COMMAND_WORD = "favourite";
     public static final String MESSAGE_FAVOURITE_PERSON_SUCCESS =
             "Favourited Client %1$s! Check if he/she exists in the Favourite Window!";
+    public static final String MESSAGE_UNFAVOURITE_PERSON_SUCCESS =
+            "Unfavourited Client %1$s! Check that he/she is removed from the Favourite Window!";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Favourites a client selected\n"
             + "by the index number used in the last client listing.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 ";
-    public static final String MESSAGE_UNFAVOURITE_PERSON_SUCCESS =
-            "Unfavourited Client %1$s! Check that he/she is removed from the Favourite Window!";
+
+    private final Index index;
 
     /**
      * @param index of the person in the filtered person list to favourite

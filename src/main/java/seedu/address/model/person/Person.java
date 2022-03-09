@@ -75,7 +75,9 @@ public class Person {
         return favourite;
     }
 
-    /* Toggles the favourite status of Person */
+    /**
+     * Toggles the favourite status of Person
+     */
     public void toggleFavourite() {
         boolean toggledStatus = !favourite.getStatus();
         favourite.setStatus(toggledStatus);
