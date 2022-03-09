@@ -1,7 +1,6 @@
 package manageezpz.model.person;
 
 import static java.util.Objects.requireNonNull;
-
 import static manageezpz.commons.util.AppUtil.checkArgument;
 
 /**
