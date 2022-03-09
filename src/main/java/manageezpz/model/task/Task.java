@@ -1,21 +1,31 @@
-package manageezpz.tasks;
+package manageezpz.model.task;
+
+import manageezpz.model.person.Name;
+import manageezpz.model.person.Person;
 
 import java.util.List;
+
+import static manageezpz.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * Represents the Tasks a user could create. A <code> Task </code> object would correspond to a task
  * inputted by a user either a Todo, Deadline or Event.
  */
 public class Task {
+
+    // Identity fields
+    private final Description taskDescription;
+
+    // Data fields
     protected boolean isDone;
     private List<String> assignees; //List of Strings as of now, V1.3 will incorporate Persons (assign tasks to Persons)
-    private String taskDescription;
 
     /**
      * Constructor for the Task class.
      * @param taskDescription information about the task.
      */
-    public Task(String taskDescription) {
+    public Task(Description taskDescription) {
+        requireAllNonNull(taskDescription);
         this.taskDescription = taskDescription;
         this.isDone = false;
     }
@@ -40,7 +50,7 @@ public class Task {
         this.isDone = false;
     }
 
-    public String getDescription() {
+    public Description getDescription() {
         return this.taskDescription;
     }
 
@@ -51,5 +61,18 @@ public class Task {
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + getDescription();
+    }
+
+    /**
+     * Returns true if both persons have the same name.
+     * This defines a weaker notion of equality between two persons.
+     */
+    public boolean isSamePerson(Person otherPerson) {
+        if (otherPerson == this) {
+            return true;
+        }
+
+        return otherPerson != null
+                && otherPerson.getName().equals(getName());
     }
 }
