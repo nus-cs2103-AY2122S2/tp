@@ -26,7 +26,7 @@ public class Item {
         requireAllNonNull(product, expiryDate);
         this.product = product;
         this.expiryDate = expiryDate;
-        this.quantity = new Quantity("1");
+        this.quantity = new Quantity(1);
     }
 
     /**
