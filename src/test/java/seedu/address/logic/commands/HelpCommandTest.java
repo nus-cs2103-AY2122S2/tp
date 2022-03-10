@@ -26,10 +26,4 @@ public class HelpCommandTest {
         CommandResult expectedCommandResult = new CommandResult(SHOWING_HELP_MESSAGE, true, false);
         assertCommandSuccess(new HelpCommand(), model, expectedCommandResult, expectedModel);
     }
-
-
-    @Test
-    public void execute_openUserGuide_success() throws URISyntaxException, IOException {
-        HelpWindow helpWindow = new HelpWindow(new Stage());
-    }
 }
