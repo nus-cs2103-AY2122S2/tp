@@ -40,7 +40,7 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         // Optional Fields
         Description description;
         if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
-            description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
+            description = ParserUtil.parsePersonDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         } else {
             description = new Description(null);
         }

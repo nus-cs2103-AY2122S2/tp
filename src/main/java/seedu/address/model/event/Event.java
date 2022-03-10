@@ -3,6 +3,7 @@ package seedu.address.model.event;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -81,7 +82,8 @@ public class Event {
         final Email dummyEmail = new Email("dummyemail@gmail.com");
         final Address dummyAddress = new Address("Dummy Address");
         for (Name name : getFriendNames()) {
-            Person dummyPerson = new Person(name, dummyPhone, dummyEmail, dummyAddress, new HashSet<>());
+            Person dummyPerson = new Person(name, dummyPhone, dummyEmail, dummyAddress, new HashSet<>(),
+                    new ArrayList<>());
             if (!addressBook.hasPerson(dummyPerson)) {
                 return false;
             }
