@@ -8,11 +8,13 @@ import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import unibook.commons.exceptions.IllegalValueException;
 import unibook.model.UniBook;
-import unibook.model.module.exceptions.ModuleNotFoundException;
 import unibook.model.module.Module;
+import unibook.model.module.exceptions.ModuleNotFoundException;
 import unibook.model.person.Email;
 import unibook.model.person.Name;
 import unibook.model.person.Person;
@@ -22,10 +24,19 @@ import unibook.model.tag.Tag;
 /**
  * Jackson-friendly version of {@link Person}.
  */
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    include = JsonTypeInfo.As.PROPERTY,
+    property = "type")
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = JsonAdaptedProfessor.class, name = "Professor"),
+    @JsonSubTypes.Type(value = JsonAdaptedStudent.class, name = "Student")
+})
 public class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
-    public static final String MODULE_DOES_NOT_EXIST_MESSAGE = "Module this person is associated with is not in unibook!";
+    public static final String MODULE_DOES_NOT_EXIST_MESSAGE =
+        "Module this person is associated with is not in unibook!";
 
     private final String name;
     private final String phone;
@@ -80,7 +91,6 @@ public class JsonAdaptedPerson {
         for (JsonAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
         }
-
 
 
         if (name == null) {

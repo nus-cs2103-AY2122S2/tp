@@ -17,14 +17,11 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.deser.std.FromStringDeserializer;
-import com.fasterxml.jackson.databind.jsontype.NamedType;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
 import unibook.commons.core.LogsCenter;
 import unibook.commons.exceptions.DataConversionException;
-import unibook.storage.adaptedmodeltypes.JsonAdaptedProfessor;
-import unibook.storage.adaptedmodeltypes.JsonAdaptedStudent;
 
 /**
  * Converts a Java object instance to JSON and vice versa
@@ -41,15 +38,6 @@ public class JsonUtil {
         .registerModule(new SimpleModule("SimpleModule")
             .addSerializer(Level.class, new ToStringSerializer())
             .addDeserializer(Level.class, new LevelDeserializer(Level.class)));
-
-    /**
-     * Set the subtypes for object mapper so jackson can handle inheritance of Student and Professor from
-     * Person properly.
-     */
-    static {
-        objectMapper.registerSubtypes(new NamedType(JsonAdaptedStudent.class, "Student"));
-        objectMapper.registerSubtypes(new NamedType(JsonAdaptedProfessor.class, "Professor"));
-    }
 
     static <T> void serializeObjectToJsonFile(Path jsonFile, T objectToSerialize) throws IOException {
         FileUtil.writeToFile(jsonFile, toJsonString(objectToSerialize));

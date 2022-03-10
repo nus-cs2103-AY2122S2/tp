@@ -29,6 +29,7 @@ public class ModuleList implements Iterable<Module> {
 
     /**
      * Returns true if the list contains a module with given module code.
+     *
      * @param moduleCode code to search for
      * @return boolean variable indicating presence of this module with the moduleCode
      */
@@ -101,11 +102,12 @@ public class ModuleList implements Iterable<Module> {
 
     /**
      * Returns the module thats equivalent to the given module object.
+     *
      * @param searchModule
      * @return module object
      * @throws ModuleNotFoundException
      */
-    public Module getModule(Module searchModule) throws ModuleNotFoundException{
+    public Module getModule(Module searchModule) throws ModuleNotFoundException {
         requireNonNull(searchModule);
         for (Module module : internalList) {
             if (module.equals(searchModule)) {
@@ -118,11 +120,10 @@ public class ModuleList implements Iterable<Module> {
     /**
      * Returns the module with given moduleCode if it exists in module list.
      * If not, throws ModuleNotExistException.
+     *
      * @param moduleCode moudleCode of intended module
      * @return the module with matching moduleCode
-     * @throws ModuleNotFoundException
-     *
-     * TODO write tests
+     * @throws ModuleNotFoundException TODO write tests
      */
     public Module getModuleByCode(ModuleCode moduleCode) throws ModuleNotFoundException {
         requireAllNonNull(moduleCode);

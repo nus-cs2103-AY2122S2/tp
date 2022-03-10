@@ -59,15 +59,15 @@ public class SampleDataUtil {
 
         //Initialising student objects
         Student s1 = new Student(new Name("Alex Yeoh"),
-                new Phone("87438807"), new Email("alexyeoh@example.com"),
-                getTagSet("friends"), testModuleSet1);
+            new Phone("87438807"), new Email("alexyeoh@example.com"),
+            getTagSet("friends"), testModuleSet1);
         Student s2 = new Student(new Name("Bernice Yu"),
-                new Phone("99272758"), new Email("berniceyu@example.com"),
-                getTagSet("colleagues", "friends"), testModuleSet2);
+            new Phone("99272758"), new Email("berniceyu@example.com"),
+            getTagSet("colleagues", "friends"), testModuleSet2);
         Professor s3 = new Professor(new Name("Charlotte Oliveiro"),
-                new Phone("93210283"), new Email("charlotte@example.com"),
-                getTagSet("neighbours"), new Office("COM1 02-10"),
-                testModuleSet3);
+            new Phone("93210283"), new Email("charlotte@example.com"),
+            getTagSet("neighbours"), new Office("COM1 02-10"),
+            testModuleSet3);
 
         //Add students to module's student list
         modules[1].addStudent(s1);

@@ -11,7 +11,6 @@ import unibook.model.person.Name;
 import unibook.model.person.Phone;
 
 
-
 /**
  * Jackson-friendly version of {@link Module}.
  */
@@ -22,6 +21,11 @@ public class JsonAdaptedModule {
     private final String moduleName;
     private final String moduleCode;
 
+    /**
+     * Creates a JsonAdaptedModule object using json properties.
+     * @param moduleName
+     * @param moduleCode
+     */
     @JsonCreator
     public JsonAdaptedModule(@JsonProperty("moduleName") String moduleName,
                              @JsonProperty("moduleCode") String moduleCode) {
@@ -29,6 +33,10 @@ public class JsonAdaptedModule {
         this.moduleCode = moduleCode;
     }
 
+    /**
+     * Creates a JsonAdaptedModule object using module object.
+     * @param source
+     */
     public JsonAdaptedModule(Module source) {
         this.moduleName = source.getModuleName().toString();
         this.moduleCode = source.getModuleCode().toString();

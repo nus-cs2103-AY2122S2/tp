@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import unibook.commons.exceptions.IllegalValueException;
 import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
 import unibook.model.module.ModuleList;
@@ -13,6 +12,7 @@ import unibook.model.person.Person;
 import unibook.model.person.Professor;
 import unibook.model.person.Student;
 import unibook.model.person.UniquePersonList;
+import unibook.model.person.exceptions.PersonNoSubtypeException;
 
 /**
  * Wraps all data at the address-book level
@@ -29,8 +29,7 @@ public class UniBook implements ReadOnlyUniBook {
      *
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
-     */
-    {
+     */ {
         persons = new UniquePersonList();
         modules = new ModuleList();
     }
@@ -98,18 +97,18 @@ public class UniBook implements ReadOnlyUniBook {
      * Adds this person to all the modules that they are associated with, into the
      * correct personnel list (professor/student) in module depending on the runtime type
      * of this person.
+     *
      * @param p person whos modules to add them to
-     * @throws IllegalValueException if person is neither of the available subtypes of person
      */
-    public void addPersonToAllTheirModules(Person p) throws IllegalValueException{
+    public void addPersonToAllTheirModules(Person p) throws PersonNoSubtypeException {
         for (Module personsModule : p.getModules()) {
             Module module = modules.getModule(personsModule);
             if (p instanceof Student) {
                 module.addStudent((Student) p);
-            } else if (p instanceof Professor){
+            } else if (p instanceof Professor) {
                 module.addProfessor((Professor) p);
             } else {
-                throw new IllegalValueException("Person is not a professor or student!");
+                throw new PersonNoSubtypeException();
             }
         }
     }
@@ -145,6 +144,7 @@ public class UniBook implements ReadOnlyUniBook {
 
     /**
      * Returns true if a module with the given moduleCode exists in unibook.
+     *
      * @param moduleCode moduleCode to check for
      * @return boolean variable indicating presence of module with given moduleCode
      */
@@ -155,6 +155,7 @@ public class UniBook implements ReadOnlyUniBook {
 
     /**
      * Returns module with given code that is in unibook.
+     *
      * @param moduleCode
      * @return
      */

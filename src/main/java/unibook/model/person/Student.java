@@ -21,6 +21,7 @@ public class Student extends Person {
 
     /**
      * Another constructor to create a student from a given person.
+     *
      * @param person person to create student from
      */
     public Student(Person person) {

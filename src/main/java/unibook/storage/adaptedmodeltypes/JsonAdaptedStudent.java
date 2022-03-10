@@ -10,7 +10,7 @@ import unibook.model.UniBook;
 import unibook.model.person.Person;
 import unibook.model.person.Student;
 
-public class JsonAdaptedStudent extends JsonAdaptedPerson{
+public class JsonAdaptedStudent extends JsonAdaptedPerson {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Professor's %s field is missing!";
 
     /**
@@ -18,10 +18,10 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson{
      */
     @JsonCreator
     public JsonAdaptedStudent(@JsonProperty("name") String name,
-                                @JsonProperty("phone") String phone,
-                                @JsonProperty("email") String email,
-                                @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
-                                @JsonProperty("modules") List<JsonAdaptedModuleCode> modules) {
+                              @JsonProperty("phone") String phone,
+                              @JsonProperty("email") String email,
+                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+                              @JsonProperty("modules") List<JsonAdaptedModuleCode> modules) {
         super(name, phone, email, tagged, modules);
     }
 
@@ -38,7 +38,7 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson{
      * @throws IllegalValueException if there were any data constraints violated in the adapted student.
      */
     public Student toModelType(UniBook uniBook) throws IllegalValueException {
-        Person person =  super.toModelType(uniBook);
+        Person person = super.toModelType(uniBook);
         return new Student(person);
     }
 }

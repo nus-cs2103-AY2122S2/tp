@@ -17,6 +17,7 @@ import unibook.model.module.Module;
 import unibook.model.person.Person;
 import unibook.model.person.Professor;
 import unibook.model.person.Student;
+import unibook.model.person.exceptions.PersonNoSubtypeException;
 import unibook.storage.adaptedmodeltypes.JsonAdaptedModule;
 import unibook.storage.adaptedmodeltypes.JsonAdaptedPerson;
 import unibook.storage.adaptedmodeltypes.JsonAdaptedProfessor;
@@ -67,7 +68,7 @@ class JsonSerializableUniBook {
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public UniBook toModelType() throws IllegalValueException {
+    public UniBook toModelType() throws IllegalValueException, PersonNoSubtypeException {
         UniBook uniBook = new UniBook();
 
         //set to use for adding person to correct module object

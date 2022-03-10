@@ -1,2 +1,4 @@
-package unibook.storage;public class JsonAdaptedProfessorTest {
+package unibook.storage;
+
+public class JsonAdaptedProfessorTest {
 }

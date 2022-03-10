@@ -11,7 +11,7 @@ import unibook.model.person.Office;
 import unibook.model.person.Person;
 import unibook.model.person.Professor;
 
-public class JsonAdaptedProfessor extends JsonAdaptedPerson{
+public class JsonAdaptedProfessor extends JsonAdaptedPerson {
     private final String office;
 
     /**
@@ -19,13 +19,13 @@ public class JsonAdaptedProfessor extends JsonAdaptedPerson{
      */
     @JsonCreator
     public JsonAdaptedProfessor(@JsonProperty("name") String name,
-                             @JsonProperty("phone") String phone,
-                             @JsonProperty("email") String email,
-                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
-                             @JsonProperty("modules") List<JsonAdaptedModuleCode> modules,
-                             @JsonProperty("office") String office) {
-       super(name, phone, email, tagged, modules);
-       this.office = office;
+                                @JsonProperty("phone") String phone,
+                                @JsonProperty("email") String email,
+                                @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+                                @JsonProperty("modules") List<JsonAdaptedModuleCode> modules,
+                                @JsonProperty("office") String office) {
+        super(name, phone, email, tagged, modules);
+        this.office = office;
     }
 
     /**

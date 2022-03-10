@@ -24,6 +24,7 @@ public class Professor extends Person {
 
     /**
      * Constructor for creating a professor from a person class with additional field office.
+     *
      * @param person person to create this professor from
      * @param office office that this professor is located at
      */

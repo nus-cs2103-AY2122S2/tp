@@ -154,6 +154,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Utility method for checking if person list currently being shown.
+     *
      * @return boolean value indicating if person list being shown
      */
     public boolean isPersonListShowing() {
@@ -162,6 +163,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Utility method for checking if module list currently being shown.
+     *
      * @return boolean value indicating if module list being shown
      */
     public boolean isModuleListShowing() {
