@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 
 /**
@@ -76,6 +77,40 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    //=========== EventBook =============================================================
+
+    /**
+     * Replaces event book data with the data in {@code eventBook}.
+     */
+    void setEventBook(ReadOnlyEventBook eventBook);
+
+    /** Returns the EventBook */
+    ReadOnlyEventBook getEventBook();
+
+    /**
+     * Returns true if an event with the same identity as {@code event} exists in the event book.
+     */
+    boolean hasEvent(Event event);
+
+    /**
+     * Adds the given event.
+     * {@code event} must not already exist in the event book.
+     */
+    void addEvent(Event event);
+
+    /**
+     * Deletes the given event.
+     * The event must exist in the event book.
+     */
+    void deleteEvent(Event target);
+
+    /**
+     * Returns true if all friend names in Event correspond to actual Friend objects.
+     */
+    boolean areEventFriendsValid(Event toAdd);
+
+    //=========== List Accessors =============================================================
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
@@ -84,4 +119,7 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /** Returns an unmodifiable view of the events list */
+    ObservableList<Event> getEventsList();
 }

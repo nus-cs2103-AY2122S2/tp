@@ -16,4 +16,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_LOG_INDEX = new Prefix("id/");
     public static final Prefix FLAG_ALL = new Prefix("-a");
 
+    public static final Prefix PREFIX_DATETIME = new Prefix("dt/");
+    public static final Prefix PREFIX_FRIEND_NAME = new Prefix("f/");
 }
