@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" styleClass="profileCard" >
+   <VBox alignment="CENTER" spacing="10">
+      <Label fx:id="name" styleClass="profile_big_label" text="\$name"/>
+      <FlowPane fx:id="tags" alignment="CENTER"/>
+      <Label fx:id="phone" styleClass="profile_small_label" text="\$phone"/>
+      <Label fx:id="address" styleClass="profile_small_label" text="\$address"/>
+      <Label fx:id="email" styleClass="profile_small_label" text="\$email"/>
+   </VBox>
+</StackPane>

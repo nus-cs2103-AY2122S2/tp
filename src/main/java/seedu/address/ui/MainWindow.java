@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -16,6 +17,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -24,6 +26,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static Profile profile;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -49,6 +52,12 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane searchBarPlaceholder;
+
+    @FXML
+    private StackPane profileDisplayPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -121,6 +130,13 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        SearchBar searchBar = new SearchBar();
+        searchBarPlaceholder.getChildren().add(searchBar.getRoot());
+
+        profile = new Profile();
+        profile.setProfile(personListPanel.getPersonListView().getItems().get(0));
+        profileDisplayPlaceholder.getChildren().add(profile.getRoot());
     }
 
     /**
@@ -192,5 +208,15 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    /**
+     * Whenever the selected person card changes, set the profile with the selected person.
+     *
+     */
+    public static void setSelectedProfile(ListView<Person> listView) {
+        Person person = listView.getSelectionModel().getSelectedItem();
+        profile.clearPreviousTags();
+        profile.setProfile(person);
     }
 }
