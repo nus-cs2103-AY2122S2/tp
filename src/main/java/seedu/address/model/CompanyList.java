@@ -23,13 +23,11 @@ public class CompanyList implements ReadOnlyCompanyList {
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
      */
-
     {
         companies = new UniqueCompanyList();
     }
 
-    public CompanyList() {
-    }
+    public CompanyList() {}
 
     /**
      * Creates an CompanyList using the Companies in the {@code toBeCopied}
@@ -99,13 +97,8 @@ public class CompanyList implements ReadOnlyCompanyList {
     //// util methods
 
     @Override
-    public int size() {
-        return getCompanyList().size();
-    }
-
-    @Override
     public String toString() {
-        return size() + " companies";
+        return companies.asUnmodifiableObservableList().size() + " companies";
         // TODO: refine later
     }
 

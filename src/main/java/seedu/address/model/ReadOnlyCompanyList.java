@@ -14,10 +14,4 @@ public interface ReadOnlyCompanyList {
      */
     ObservableList<Company> getCompanyList();
 
-    /**
-     * Returns the size of the company list.
-     *
-     * @return the size of the internal company list.
-     */
-    int size();
 }

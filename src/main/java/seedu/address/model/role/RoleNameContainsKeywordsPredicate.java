@@ -10,7 +10,6 @@ import seedu.address.commons.util.StringUtil;
  * stored {@code Role}.
  */
 public class RoleNameContainsKeywordsPredicate implements Predicate<Role> {
-
     private final List<String> roleNameKeywords;
 
     /**
@@ -21,10 +20,6 @@ public class RoleNameContainsKeywordsPredicate implements Predicate<Role> {
      */
     public RoleNameContainsKeywordsPredicate(List<String> roleNameKeywords) {
         this.roleNameKeywords = roleNameKeywords;
-    }
-
-    public List<String> getRoleNameKeywords() {
-        return roleNameKeywords;
     }
 
     @Override
@@ -39,6 +34,6 @@ public class RoleNameContainsKeywordsPredicate implements Predicate<Role> {
                 // instanceof handles nulls
                 || (other instanceof RoleNameContainsKeywordsPredicate
                 // state check
-                && getRoleNameKeywords().equals(((RoleNameContainsKeywordsPredicate) other).getRoleNameKeywords()));
+                && roleNameKeywords.equals(((RoleNameContainsKeywordsPredicate) other).roleNameKeywords));
     }
 }

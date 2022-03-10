@@ -102,7 +102,7 @@ public class DeleteCompanyCommandTest {
      * Updates {@code model}'s filtered list to show no one.
      */
     private void showNoCompany(Model model) {
-        model.updateFilteredCompanyList(p -> false, p -> false);
+        model.updateFilteredCompanyList(p -> false, r -> false);
 
         assertTrue(model.getFilteredCompanyList().isEmpty());
     }

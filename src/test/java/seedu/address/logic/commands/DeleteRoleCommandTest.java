@@ -30,7 +30,7 @@ public class DeleteRoleCommandTest {
     @Test
     public void execute_validIndexList_success() {
         Company company = model.getFilteredCompanyList().get(INDEX_FIRST_COMPANY.getZeroBased());
-        Role roleToDelete = company.getRoleManager().getFilteredRoleList().get(INDEX_FIRST_COMPANY.getZeroBased());
+        Role roleToDelete = company.getRoleManager().getRoles().get(INDEX_FIRST_COMPANY.getZeroBased());
         DeleteRoleCommand deleteRoleCommand = new DeleteRoleCommand(INDEX_FIRST_COMPANY, INDEX_FIRST_ROLE);
 
         String expectedMessage = String.format(DeleteRoleCommand.MESSAGE_DELETE_ROLE_SUCCESS, roleToDelete);
@@ -47,7 +47,7 @@ public class DeleteRoleCommandTest {
 
         // test invalid role index
         Company company = model.getFilteredCompanyList().get(INDEX_FIRST_COMPANY.getZeroBased());
-        Index outOfRoleBoundIndex = Index.fromOneBased(company.getRoleManager().getFilteredRoleList().size() + 1);
+        Index outOfRoleBoundIndex = Index.fromOneBased(company.getRoleManager().getRoles().size() + 1);
         DeleteRoleCommand deleteRoleCommand2 = new DeleteRoleCommand(INDEX_FIRST_COMPANY, outOfRoleBoundIndex);
         assertCommandFailure(deleteRoleCommand2, model, Messages.MESSAGE_INVALID_ROLE_DISPLAYED_INDEX);
 
