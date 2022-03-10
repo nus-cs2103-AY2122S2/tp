@@ -2,23 +2,18 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION_HOURS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION_MINUTES;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
