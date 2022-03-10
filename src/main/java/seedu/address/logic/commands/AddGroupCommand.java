@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -14,9 +15,9 @@ public class AddGroupCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student group to ArchDuke. "
             + "Parameters: "
-            + "g/" + "GROUP_NAME \n"
+            + PREFIX_GROUP_NAME + "GROUP_NAME \n"
             + "Example: " + COMMAND_WORD + " "
-            + "g/" + "CS2103-W16-3";
+            + PREFIX_GROUP_NAME + "CS2103-W16-3";
 
     public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Addgroup command not implemented yet";
 
