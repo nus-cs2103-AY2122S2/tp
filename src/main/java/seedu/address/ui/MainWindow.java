@@ -34,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private MatchWindow matchWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -66,6 +67,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        matchWindow = new MatchWindow(logic.getMatchList());
     }
 
     public Stage getPrimaryStage() {
@@ -147,6 +149,18 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the match window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleMatch() {
+        if (!matchWindow.isShowing()) {
+            matchWindow.show();
+        } else {
+            matchWindow.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -160,6 +174,7 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        matchWindow.hide();
         primaryStage.hide();
     }
 
@@ -180,6 +195,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
+            }
+
+            if (commandResult.isShowMatch()) {
+                handleMatch();
             }
 
             if (commandResult.isExit()) {
