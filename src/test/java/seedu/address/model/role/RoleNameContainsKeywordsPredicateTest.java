@@ -2,6 +2,7 @@ package seedu.address.model.role;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -72,5 +73,11 @@ public class RoleNameContainsKeywordsPredicateTest {
         // Keyword not matching exactly
         predicate = new RoleNameContainsKeywordsPredicate(Arrays.asList("Soffware"));
         assertFalse(predicate.test(new RoleBuilder().withName("Software developer").build()));
+    }
+
+    @Test
+    public void test_rolePredicateIsEmpty_throwsAssertionError() {
+        //empty string in keywords
+        assertThrows(AssertionError.class, () -> new RoleNameContainsKeywordsPredicate(Arrays.asList("")));
     }
 }

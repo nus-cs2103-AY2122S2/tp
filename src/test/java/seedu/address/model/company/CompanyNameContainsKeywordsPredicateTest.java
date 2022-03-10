@@ -2,6 +2,7 @@ package seedu.address.model.company;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -89,5 +90,12 @@ public class CompanyNameContainsKeywordsPredicateTest {
                 + ".com", "Main", "Street"), Arrays.asList("12345", "alice@email" + ".com", "Main", "Street"));
         assertFalse(predicate.test(new CompanyBuilder().withName("Alice").withPhone("12345")
                 .withEmail("alice@email.com").withAddress("Main Street").build()));
+    }
+
+    @Test
+    public void test_companyPredicateIsEmpty_throwsAssertionError() {
+        //empty strings in keywords
+        assertThrows(AssertionError.class, () -> new CompanyNameContainsKeywordsPredicate(Arrays.asList(""),
+                Arrays.asList("")));
     }
 }

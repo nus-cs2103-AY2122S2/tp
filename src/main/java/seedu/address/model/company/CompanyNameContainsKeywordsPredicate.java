@@ -32,6 +32,8 @@ public class CompanyNameContainsKeywordsPredicate implements Predicate<Company> 
      * @param companyNameKeywords List of strings representing company name keywords entered by user
      */
     public CompanyNameContainsKeywordsPredicate(List<String> roleNameKeywords, List<String> companyNameKeywords) {
+        assert(!roleNameKeywords.contains(""));
+        assert(!companyNameKeywords.contains(""));
         this.roleNameKeywords = roleNameKeywords;
         this.companyNameKeywords = companyNameKeywords;
     }
