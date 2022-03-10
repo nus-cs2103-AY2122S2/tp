@@ -3,6 +3,14 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.Label?>
+
 <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <StackPane fx:id="currentlyDisplayingPlaceholder" styleClass="currently_displaying_pane">
+        <children>
+            <Label fx:id="currentlyDisplaying" styleClass="currently_displaying" text="\$currently_displaying" />
+        </children>
+    </StackPane>
   <ListView fx:id="personListView" VBox.vgrow="ALWAYS" />
 </VBox>
