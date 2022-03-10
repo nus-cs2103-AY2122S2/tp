@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.stage.Stage?>
+
+<fx:root resizable="false" title="Add Profile" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <scene>
+        <Scene>
+            <stylesheets>
+                <URL value="@AddProfileWindow.css" />
+            </stylesheets>
+            <HBox alignment="CENTER" prefHeight="546.0" prefWidth="491.0">
+                <children>
+                    <AnchorPane prefHeight="546.0" prefWidth="494.0" style="-fx-background-color: derive(#1d1d1d, 20%)derive(#1d1d1d, 20%);">
+                        <children>
+                     <StackPane layoutY="421.0" prefHeight="44.0" prefWidth="491.0" />
+                            <Button layoutX="146.0" layoutY="473.0" mnemonicParsing="false" text="Save" />
+                            <Button layoutX="259.0" layoutY="473.0" mnemonicParsing="false" text="Cancel" />
+                            <TextField fx:id="nameInput" layoutX="131.0" layoutY="141.0" prefHeight="37.0" prefWidth="230.0" promptText="Enter name..." />
+                     <TextField fx:id="phoneNumberInput" layoutX="131.0" layoutY="199.0" prefHeight="37.0" prefWidth="230.0" promptText="Enter phone number..." />
+                     <TextField fx:id="emailInput" layoutX="131.0" layoutY="252.0" prefHeight="37.0" prefWidth="230.0" promptText="Enter email..." />
+                     <TextField fx:id="addressInput" layoutX="131.0" layoutY="311.0" prefHeight="37.0" prefWidth="230.0" promptText="Enter address..." />
+                     <TextField fx:id="tagInput" layoutX="131.0" layoutY="368.0" prefHeight="37.0" prefWidth="230.0" promptText="Enter tag..." />
+                     <Circle fill="WHITE" layoutX="246.0" layoutY="67.0" radius="53.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                     <Circle fill="#6b88a4" layoutX="246.0" layoutY="81.0" radius="32.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                     <Circle fill="#cad0d7" layoutX="246.0" layoutY="41.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                        </children>
+                    </AnchorPane>
+                </children>
+            </HBox>
+        </Scene>
+    </scene>
+</fx:root>
