@@ -64,7 +64,7 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-                -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
     @Test
@@ -321,8 +321,8 @@ public class ParserUtilTest {
 
     @Test
     public void parseProperties_collectionWithInvalidProperties_throwsParseException() {
-        assertThrows(ParseException.class,
-                () -> ParserUtil.parseProperties(Arrays.asList(VALID_PROPERTY_1, INVALID_PROPERTY)));
+        assertThrows(ParseException.class, ()
+            -> ParserUtil.parseProperties(Arrays.asList(VALID_PROPERTY_1, INVALID_PROPERTY)));
     }
 
     @Test
