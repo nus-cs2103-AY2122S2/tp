@@ -99,6 +99,9 @@ public class UniquePersonList implements Iterable<Person> {
         internalList.setAll(persons);
     }
 
+    /**
+     * Returns a list of persons with matching properties and preferences.
+     */
     public List<Pair<Person>> match() {
         List<Pair<Person>> result = new ArrayList<>();
         for (int i = 0; i < internalList.size(); i++) {
