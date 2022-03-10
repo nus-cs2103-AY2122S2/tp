@@ -5,8 +5,13 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.EventBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyEventBook;
+import seedu.address.model.event.DateTime;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -40,12 +45,32 @@ public class SampleDataUtil {
         };
     }
 
+    public static Event[] getSampleEvents() {
+        return new Event[] {
+            new Event(new Name("Alex's Birthday"), new DateTime("10-03-2022 1430"),
+                    new Description("Remember to bring cake."), getNameSet("Alex Yeoh, David Li")),
+            new Event(new Name("Weekends at Bernice's"), new DateTime("10-04-2022 1835"),
+                    new Description(null), getNameSet("Bernice Yu")),
+            new Event(new Name("Boardgame Night"), new DateTime("12-04-2022 1945"),
+                    new Description("We will be playing Monopoly."),
+                    getNameSet("Roy Balakrishnan, Irfan Ibrahim"))
+        };
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }
         return sampleAb;
+    }
+
+    public static ReadOnlyEventBook getSampleEventBook() {
+        EventBook sampleEb = new EventBook();
+        for (Event sampleEvent : getSampleEvents()) {
+            sampleEb.addEvent(sampleEvent);
+        }
+        return sampleEb;
     }
 
     /**
@@ -57,4 +82,12 @@ public class SampleDataUtil {
                 .collect(Collectors.toSet());
     }
 
+    /**
+     * Returns a name set containing the list of strings given.
+     */
+    public static Set<Name> getNameSet(String... strings) {
+        return Arrays.stream(strings)
+                .map(Name::new)
+                .collect(Collectors.toSet());
+    }
 }
