@@ -7,7 +7,7 @@ import java.util.Objects;
 /**
  * Represents the result of a command execution.
  */
-public class CommandResultTrackermon {
+public class CommandResult {
 
     private final String feedbackToUser;
 
@@ -20,7 +20,7 @@ public class CommandResultTrackermon {
     /**
      * Constructs a {@code CommandResultTrackermon} with the specified fields.
      */
-    public CommandResultTrackermon(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
@@ -30,7 +30,7 @@ public class CommandResultTrackermon {
      * Constructs a {@code CommandResultTrackermon} with the specified {@code feedbackToUser},
      * and other fields set to their default value.
      */
-    public CommandResultTrackermon(String feedbackToUser) {
+    public CommandResult(String feedbackToUser) {
         this(feedbackToUser, false, false);
     }
 
@@ -53,11 +53,11 @@ public class CommandResultTrackermon {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof CommandResultTrackermon)) {
+        if (!(other instanceof CommandResult)) {
             return false;
         }
 
-        CommandResultTrackermon otherCommandResult = (CommandResultTrackermon) other;
+        CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit;

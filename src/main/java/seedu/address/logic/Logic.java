@@ -4,16 +4,17 @@ import java.nio.file.Path;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.commands.CommandResultTrackermon;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyShowList;
 import seedu.address.model.show.Show;
 
 /**
  * API of the Logic component
  */
-public interface LogicTrackermon {
+public interface Logic {
     /**
      * Executes the command and returns the result.
      * @param commandText The command as entered by the user.
@@ -21,12 +22,12 @@ public interface LogicTrackermon {
      * @throws CommandException If an error occurs during command execution.
      * @throws ParseException If an error occurs during parsing.
      */
-    CommandResultTrackermon execute(String commandText) throws CommandException, ParseException;
+    CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
      * Returns the ShowList.
      *
-     * @see seedu.address.model.ModelTrackermon#getShowList()
+     * @see Model#getShowList()
      */
     ReadOnlyShowList getShowList();
 

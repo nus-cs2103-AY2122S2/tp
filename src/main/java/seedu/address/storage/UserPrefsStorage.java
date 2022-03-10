@@ -1,4 +1,4 @@
-package seedu.address.logic.storage;
+package seedu.address.storage;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -11,7 +11,7 @@ import seedu.address.model.UserPrefs;
 /**
  * Represents a storage for {@link UserPrefs}.
  */
-public interface UserPrefsStorageTrackermon {
+public interface UserPrefsStorage {
 
     /**
      * Returns the file path of the UserPrefs data file.

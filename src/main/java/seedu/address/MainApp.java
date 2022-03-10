@@ -13,21 +13,21 @@ import seedu.address.commons.core.Version;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.LogicManagerTrackermon;
-import seedu.address.logic.LogicTrackermon;
-import seedu.address.model.ModelManagerTrackermon;
-import seedu.address.model.ModelTrackermon;
+import seedu.address.logic.LogicManager;
+import seedu.address.logic.Logic;
+import seedu.address.model.ModelManager;
+import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyShowList;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.ShowList;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.util.SampleDataUtilTrackermon;
-import seedu.address.logic.storage.JsonShowListStorage;
-import seedu.address.logic.storage.JsonUserPrefsStorageTrackermon;
-import seedu.address.logic.storage.ShowListStorage;
-import seedu.address.logic.storage.StorageManagerTrackermon;
-import seedu.address.logic.storage.StorageTrackermon;
-import seedu.address.logic.storage.UserPrefsStorageTrackermon;
+import seedu.address.model.util.SampleDataUtil;
+import seedu.address.storage.JsonShowListStorage;
+import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.ShowListStorage;
+import seedu.address.storage.StorageManager;
+import seedu.address.storage.Storage;
+import seedu.address.storage.UserPrefsStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
@@ -41,9 +41,9 @@ public class MainApp extends Application {
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
     protected Ui ui;
-    protected LogicTrackermon logic;
-    protected StorageTrackermon storage;
-    protected ModelTrackermon model;
+    protected Logic logic;
+    protected Storage storage;
+    protected Model model;
     protected Config config;
 
     @Override
@@ -54,16 +54,16 @@ public class MainApp extends Application {
         AppParameters appParameters = AppParameters.parse(getParameters());
         config = initConfig(appParameters.getConfigPath());
 
-        UserPrefsStorageTrackermon userPrefsStorage = new JsonUserPrefsStorageTrackermon(config.getUserPrefsFilePath());
+        UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         ShowListStorage showListStorage = new JsonShowListStorage(userPrefs.getShowListFilePath());
-        storage = new StorageManagerTrackermon(showListStorage, userPrefsStorage);
+        storage = new StorageManager(showListStorage, userPrefsStorage);
 
         initLogging(config);
 
         model = initModelManager(storage, userPrefs);
 
-        logic = new LogicManagerTrackermon(model, storage);
+        logic = new LogicManager(model, storage);
 
         ui = new UiManager(logic);
     }
@@ -73,7 +73,7 @@ public class MainApp extends Application {
      * The data from the sample show liost will be used instead if {@code storage}'s show list is not found,
      * or an empty show list will be used instead if errors occur when reading {@code storage}'s show list.
      */
-    private ModelTrackermon initModelManager(StorageTrackermon storage, ReadOnlyUserPrefs userPrefs) {
+    private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlyShowList> showListOptional;
         ReadOnlyShowList initialData;
         try {
@@ -81,7 +81,7 @@ public class MainApp extends Application {
             if (!showListOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample ShowList");
             }
-            initialData = showListOptional.orElseGet(SampleDataUtilTrackermon::getSampleShowList);
+            initialData = showListOptional.orElseGet(SampleDataUtil::getSampleShowList);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty ShowList");
             initialData = new ShowList();
@@ -90,7 +90,7 @@ public class MainApp extends Application {
             initialData = new ShowList();
         }
 
-        return new ModelManagerTrackermon(initialData, userPrefs);
+        return new ModelManager(initialData, userPrefs);
     }
 
     private void initLogging(Config config) {
@@ -138,7 +138,7 @@ public class MainApp extends Application {
      * or a new {@code UserPrefs} with default configuration if errors occur when
      * reading from the file.
      */
-    protected UserPrefs initPrefs(UserPrefsStorageTrackermon storage) {
+    protected UserPrefs initPrefs(UserPrefsStorage storage) {
         Path prefsFilePath = storage.getUserPrefsFilePath();
         logger.info("Using prefs file : " + prefsFilePath);
 

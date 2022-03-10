@@ -1,4 +1,4 @@
-package seedu.address.logic.storage;
+package seedu.address.storage;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -12,7 +12,7 @@ import seedu.address.model.UserPrefs;
 /**
  * API of the Storage component
  */
-public interface StorageTrackermon extends ShowListStorage, UserPrefsStorageTrackermon {
+public interface Storage extends ShowListStorage, UserPrefsStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;

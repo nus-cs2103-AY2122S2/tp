@@ -40,3 +40,4 @@
 //                && predicate.equals(((FindCommand) other).predicate)); // state check
 //    }
 //}
+

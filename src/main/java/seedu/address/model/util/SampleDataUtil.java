@@ -14,7 +14,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Contains utility methods for populating {@code ShowList} with sample data.
  */
-public class SampleDataUtilTrackermon {
+public class SampleDataUtil {
     public static Show[] getSampleShows() {
         return new Show[] {
             new Show(new Name("Attack on Titan"), Status.WATCHING, getTagSet("Anime")),

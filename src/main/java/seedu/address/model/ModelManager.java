@@ -13,9 +13,9 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.show.Show;
 
-public class ModelManagerTrackermon implements ModelTrackermon {
+public class ModelManager implements Model {
 
-    private static final Logger logger = LogsCenter.getLogger(ModelManagerTrackermon.class);
+    private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final ShowList showList;
     private final UserPrefs userPrefs;
@@ -24,7 +24,7 @@ public class ModelManagerTrackermon implements ModelTrackermon {
     /**
      * Initializes a ModelManager with the given showList and userPrefs.
      */
-    public ModelManagerTrackermon(ReadOnlyShowList showList, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyShowList showList, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(showList, userPrefs);
 
         logger.fine("Initializing with address book: " + showList + " and user prefs " + userPrefs);
@@ -34,7 +34,7 @@ public class ModelManagerTrackermon implements ModelTrackermon {
         filteredShows = new FilteredList<>(this.showList.getShowList());
     }
 
-    public ModelManagerTrackermon() {
+    public ModelManager() {
         this(new ShowList(), new UserPrefs());
     }
 
@@ -134,12 +134,12 @@ public class ModelManagerTrackermon implements ModelTrackermon {
         }
 
         // instanceof handles nulls
-        if (!(obj instanceof ModelManagerTrackermon)) {
+        if (!(obj instanceof ModelManager)) {
             return false;
         }
 
         // state check
-        ModelManagerTrackermon other = (ModelManagerTrackermon) obj;
+        ModelManager other = (ModelManager) obj;
         return showList.equals(other.showList)
                 && userPrefs.equals(other.userPrefs)
                 && filteredShows.equals(other.filteredShows);

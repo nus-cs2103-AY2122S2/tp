@@ -7,44 +7,44 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.CommandResultTrackermon;
-import seedu.address.logic.commands.CommandTrackermon;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.TrackermonParser;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.ModelTrackermon;
+import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyShowList;
 import seedu.address.model.show.Show;
-import seedu.address.logic.storage.StorageTrackermon;
+import seedu.address.storage.Storage;
 
 
 
 /**
  * The main LogicManager of the app.
  */
-public class LogicManagerTrackermon implements LogicTrackermon {
+public class LogicManager implements Logic {
     public static final String FILE_OPS_ERROR_MESSAGE = "Could not save data to file: ";
-    private final Logger logger = LogsCenter.getLogger(LogicManagerTrackermon.class);
+    private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
-    private final ModelTrackermon model;
-    private final StorageTrackermon storage;
+    private final Model model;
+    private final Storage storage;
     private final TrackermonParser parser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
      */
-    public LogicManagerTrackermon(ModelTrackermon model, StorageTrackermon storage) {
+    public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
         parser = new TrackermonParser();
     }
 
     @Override
-    public CommandResultTrackermon execute(String commandText) throws CommandException, ParseException {
+    public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
-        CommandResultTrackermon commandResult;
-        CommandTrackermon command = parser.parseCommand(commandText);
+        CommandResult commandResult;
+        Command command = parser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         try {

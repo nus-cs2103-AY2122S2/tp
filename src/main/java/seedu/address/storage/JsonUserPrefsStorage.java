@@ -1,4 +1,4 @@
-package seedu.address.logic.storage;
+package seedu.address.storage;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -13,11 +13,11 @@ import seedu.address.model.UserPrefs;
 /**
  * A class to access UserPrefs stored in the hard disk as a json file
  */
-public class JsonUserPrefsStorageTrackermon implements UserPrefsStorageTrackermon {
+public class JsonUserPrefsStorage implements UserPrefsStorage {
 
     private Path filePath;
 
-    public JsonUserPrefsStorageTrackermon(Path filePath) {
+    public JsonUserPrefsStorage(Path filePath) {
         this.filePath = filePath;
     }
 

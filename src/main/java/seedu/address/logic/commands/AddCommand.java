@@ -1,18 +1,18 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntaxTrackermon.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntaxTrackermon.PREFIX_STATUS;
-import static seedu.address.logic.parser.CliSyntaxTrackermon.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.ModelTrackermon;
+import seedu.address.model.Model;
 import seedu.address.model.show.Show;
 
 /**
  * Adds a show to Trackermon.
  */
-public class AddCommandTrackermon extends CommandTrackermon {
+public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
@@ -35,13 +35,13 @@ public class AddCommandTrackermon extends CommandTrackermon {
     /**
      * Creates an AddCommand to add the specified {@code Show}
      */
-    public AddCommandTrackermon(Show show) {
+    public AddCommand(Show show) {
         requireNonNull(show);
         toAdd = show;
     }
 
     @Override
-    public CommandResultTrackermon execute(ModelTrackermon model) throws CommandException {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
         if (model.hasShow(toAdd)) {
@@ -49,14 +49,14 @@ public class AddCommandTrackermon extends CommandTrackermon {
         }
 
         model.addShow(toAdd);
-        return new CommandResultTrackermon(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddCommandTrackermon // instanceof handles nulls
-                && toAdd.equals(((AddCommandTrackermon) other).toAdd));
+                || (other instanceof AddCommand // instanceof handles nulls
+                && toAdd.equals(((AddCommand) other).toAdd));
     }
 }
 

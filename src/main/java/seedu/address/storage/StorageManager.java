@@ -1,4 +1,4 @@
-package seedu.address.logic.storage;
+package seedu.address.storage;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -14,16 +14,16 @@ import seedu.address.model.UserPrefs;
 /**
  * Manages storage of ShowList data in local storage.
  */
-public class StorageManagerTrackermon implements StorageTrackermon {
+public class StorageManager implements Storage {
 
-    private static final Logger logger = LogsCenter.getLogger(StorageManagerTrackermon.class);
+    private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private ShowListStorage showListStorage;
-    private UserPrefsStorageTrackermon userPrefsStorage;
+    private UserPrefsStorage userPrefsStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
-    public StorageManagerTrackermon(ShowListStorage showListStorage, UserPrefsStorageTrackermon userPrefsStorage) {
+    public StorageManager(ShowListStorage showListStorage, UserPrefsStorage userPrefsStorage) {
         this.showListStorage = showListStorage;
         this.userPrefsStorage = userPrefsStorage;
     }

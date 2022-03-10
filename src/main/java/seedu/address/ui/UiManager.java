@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.LogicTrackermon;
+import seedu.address.logic.Logic;
 
 
 /**
@@ -23,13 +23,13 @@ public class UiManager implements Ui {
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
     private static final String ICON_APPLICATION = "/images/address_book_32.png";
 
-    private LogicTrackermon logic;
+    private Logic logic;
     private MainWindow mainWindow;
 
     /**
      * Creates a {@code UiManager} with the given {@code Logic}.
      */
-    public UiManager(LogicTrackermon logic) {
+    public UiManager(Logic logic) {
         this.logic = logic;
     }
 

@@ -12,8 +12,8 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.LogicTrackermon;
-import seedu.address.logic.commands.CommandResultTrackermon;
+import seedu.address.logic.Logic;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -29,7 +29,7 @@ public class MainWindow extends UiPart<Stage> {
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
-    private LogicTrackermon logic;
+    private Logic logic;
 
     // Independent Ui parts residing in this Ui container
     private ShowListPanel showListPanel;
@@ -54,7 +54,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Creates a {@code MainWindowTrackermon} with the given {@code Stage} and {@code LogicTrackermon}.
      */
-    public MainWindow(Stage primaryStage, LogicTrackermon logic) {
+    public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
 
         // Set dependencies
@@ -171,11 +171,11 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Executes the command and returns the result.
      *
-     * @see LogicTrackermon#execute(String)
+     * @see Logic#execute(String)
      */
-    private CommandResultTrackermon executeCommand(String commandText) throws CommandException, ParseException {
+    private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
-            CommandResultTrackermon commandResult = logic.execute(commandText);
+            CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 

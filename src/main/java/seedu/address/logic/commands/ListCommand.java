@@ -1,14 +1,14 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.ModelTrackermon.PREDICATE_SHOW_ALL_SHOWS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SHOWS;
 
-import seedu.address.model.ModelTrackermon;
+import seedu.address.model.Model;
 
 /**
  * Lists all shows in Trackermon to the user.
  */
-public class ListCommandTrackermon extends CommandTrackermon {
+public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
@@ -16,9 +16,9 @@ public class ListCommandTrackermon extends CommandTrackermon {
 
 
     @Override
-    public CommandResultTrackermon execute(ModelTrackermon model) {
+    public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredShowList(PREDICATE_SHOW_ALL_SHOWS);
-        return new CommandResultTrackermon(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 }
