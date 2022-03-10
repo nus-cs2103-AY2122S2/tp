@@ -343,6 +343,8 @@
 }
 
 .result-display {
+    -fx-wrap-text: true;
+    -fx-min-height: 100;
     -fx-background-color: transparent;
     -fx-font-family: "Rubik Regular";
     -fx-font-size: 13pt;
@@ -365,9 +367,10 @@
 }
 
 #roleTags .label {
+    -fx-font-family: "Rubik Regular";
     -fx-text-fill: white;
     -fx-background-color: #9b84ec;
-    -fx-padding: 0 10 0 10;
+    -fx-padding: 1 10 1 10;
     -fx-background-radius: 20;
     -fx-font-size: 10;
 }
