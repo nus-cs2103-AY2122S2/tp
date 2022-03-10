@@ -41,7 +41,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         eventList = this.eventBook.getEventList();
     }
-    
+
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
