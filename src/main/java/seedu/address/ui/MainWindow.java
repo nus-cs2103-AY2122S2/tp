@@ -164,11 +164,6 @@ public class MainWindow extends UiPart<Stage> {
         } else {
             helpWindow.focus();
         }
-//        if (!addTagWindow.isShowing()) {
-//            addTagWindow.show();
-//        } else {
-//            addTagWindow.focus();
-//        }
     }
 
     /**
