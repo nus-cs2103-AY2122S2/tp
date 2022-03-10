@@ -79,7 +79,7 @@ public class EditCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
         // Update fields.
-        Person editedPerson = new Person(personToEdit.getFields(), personToEdit.getTags());
+        Person editedPerson = personToEdit;
         for (Field f : fields) {
             editedPerson = editedPerson.setField(f);
         }
