@@ -13,7 +13,6 @@ import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
 
@@ -21,7 +20,7 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
-    private Favourite favourite;
+    private final Favourite favourite;
 
     // Data fields
     private final Address address;
@@ -49,7 +48,7 @@ public class Person {
      * This constructor is used for adding a new Client, thus default status is unfavourited(false)
      */
     public Person(Name name, Phone phone, Email email, Address address, Optional<Property> property, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+        requireAllNonNull(name, phone, email, address, property, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
