@@ -1,10 +1,11 @@
 package seedu.address.model.team;
 
 import java.util.ArrayList;
+
 import seedu.address.model.person.Person;
 
 public class TeamList {
-    ArrayList<Person> list;
+    private ArrayList<Person> list;
 
     TeamList() {
         this.list = new ArrayList<Person>();
