@@ -16,4 +16,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_ACADEMIC_YEAR = new Prefix("a/");
     public static final Prefix PREFIX_TYPE = new Prefix("t/");
     public static final Prefix PREFIX_MODULE_INDEX = new Prefix("m/");
+    public static final String TYPE_STUDENT = "student";
+    public static final String TYPE_MODULE = "module";
+    public static final String TYPE_CLASS = "class";
 }

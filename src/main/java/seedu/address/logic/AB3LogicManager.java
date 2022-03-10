@@ -10,7 +10,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AB3Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.logic.parser.TAssistParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.AB3Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -26,7 +26,7 @@ public class AB3LogicManager implements AB3Logic {
 
     private final AB3Model model;
     private final Storage storage;
-    private final AddressBookParser addressBookParser;
+    private final TAssistParser AssistParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -34,7 +34,7 @@ public class AB3LogicManager implements AB3Logic {
     public AB3LogicManager(AB3Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new AddressBookParser();
+        AssistParser = new TAssistParser();
     }
 
     @Override
@@ -42,7 +42,7 @@ public class AB3LogicManager implements AB3Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        AB3Command command = addressBookParser.parseCommand(commandText);
+        AB3Command command = AssistParser.parseCommand(commandText, model);
         commandResult = command.execute(model);
 
         try {

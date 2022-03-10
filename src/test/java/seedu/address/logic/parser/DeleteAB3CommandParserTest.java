@@ -18,7 +18,7 @@ import seedu.address.logic.commands.DeleteAB3Command;
  */
 public class DeleteAB3CommandParserTest {
 
-    private DeleteCommandParser parser = new DeleteCommandParser();
+    private DeleteAB3CommandParser parser = new DeleteAB3CommandParser();
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
