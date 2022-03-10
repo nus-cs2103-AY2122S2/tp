@@ -6,8 +6,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.model.person.Person;
-import seedu.address.ui.PersonCard;
+import seedu.address.model.student.Student;
+import seedu.address.ui.StudentCard;
 
 public class LessonInfoPanel extends InfoPanel {
     private static final String FXML = "LessonInfoPanel.fxml";
@@ -23,7 +23,7 @@ public class LessonInfoPanel extends InfoPanel {
     @FXML
     private Label time;
     @FXML
-    private ListView<Person> enrolledStudentsList;
+    private ListView<Student> enrolledStudentsList;
 
     /**
      * Creates a {@code LessonInfoPanel} filled with information of the given {@code Lesson}.
@@ -44,28 +44,28 @@ public class LessonInfoPanel extends InfoPanel {
     }
 
     /**
-     * Sets the enrolled students list to the provided {@code Person} list.
+     * Sets the enrolled students list to the provided {@code Student} list.
      *
      * @param enrolledStudents Provided lesson list.
      */
-    public void setEnrolledStudents(ObservableList<Person> enrolledStudents) {
+    public void setEnrolledStudents(ObservableList<Student> enrolledStudents) {
         enrolledStudentsList.setItems(enrolledStudents);
-        enrolledStudentsList.setCellFactory(listView -> new PersonListViewCell());
+        enrolledStudentsList.setCellFactory(listView -> new StudentListViewCell());
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Student} using a {@code StudentCard}.
      */
-    class PersonListViewCell extends ListCell<Person> {
+    class StudentListViewCell extends ListCell<Student> {
         @Override
-        protected void updateItem(Person person, boolean empty) {
-            super.updateItem(person, empty);
+        protected void updateItem(Student student, boolean empty) {
+            super.updateItem(student, empty);
 
-            if (empty || person == null) {
+            if (empty || student == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
+                setGraphic(new StudentCard(student, getIndex() + 1).getRoot());
             }
         }
     }
