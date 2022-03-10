@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.HashSet;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -24,12 +26,19 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the friend identified by name.\n"
-            + "Parameters: n/NAME (must be name of a friend who exists in Amigos)\n"
-            + "Example: " + COMMAND_WORD + " n/John Doe";
+            + "Parameters: "
+            + PREFIX_NAME + "NAME (must be name of a friend who exists in Amigos)\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "John Doe";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted friend: %1$s";
 
     private final Name nameOfPersonToDelete;
+
+    //these dummy fields are needed to instantiate a person to be used to check if such a name entered exists
+    // in the address book
+    private static final Phone dummyPhone = new Phone("12345678");
+    private static final Email dummyEmail = new Email("dummyemail@gmail.com");
+    private static final Address dummyAddress = new Address("Dummy Address");
 
     public DeleteCommand(Name nameOfPersonToDelete) {
         this.nameOfPersonToDelete = nameOfPersonToDelete;
@@ -37,11 +46,11 @@ public class DeleteCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
-        //List<Person> lastShownList = model.getFilteredPersonList();
 
-        Person personWithNameToDelete = new Person(nameOfPersonToDelete, new Phone("12345678"),
-                new Email("dummyemail@gmail.com"), new Address("Dummy address"), new HashSet<>());
+        requireNonNull(model);
+
+        Person personWithNameToDelete = new Person(nameOfPersonToDelete, dummyPhone,
+                dummyEmail, dummyAddress, new HashSet<>());
 
         if (!model.hasPerson(personWithNameToDelete)) { //model.hasPerson considers 2 Persons with same name
             //to be the same Person
