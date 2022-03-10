@@ -48,12 +48,14 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         // property is optional since it should not be present if the person being added is a not a seller.
         Optional<String> propertyArg = argMultimap.getValue(PREFIX_PROPERTY);
-        Optional<Property> property =
-                propertyArg.isPresent() ? Optional.of(ParserUtil.parseProperty(propertyArg.get())) : Optional.empty();
+        Optional<Property> property = propertyArg.isPresent()
+                ? Optional.of(ParserUtil.parseProperty(propertyArg.get()))
+                : Optional.empty();
         // preference is optional since it should not be present if the person being added is a not a buyer.
         Optional<String> preferenceArg = argMultimap.getValue(PREFIX_PREFERENCE);
-        Optional<Property> preference =
-                preferenceArg.isPresent() ? Optional.of(ParserUtil.parseProperty(propertyArg.get())) : Optional.empty();
+        Optional<Property> preference = preferenceArg.isPresent()
+                ? Optional.of(ParserUtil.parseProperty(preferenceArg.get()))
+                : Optional.empty();
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Person person = new Person(name, phone, email, address, property, preference, tagList);
