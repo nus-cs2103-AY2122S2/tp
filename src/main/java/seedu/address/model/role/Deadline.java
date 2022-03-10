@@ -14,7 +14,7 @@ import java.time.format.DateTimeParseException;
 public class Deadline {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Deadlines should be not have already been over and in the following format: dd-MM-yyyy HH:mm";
+            "Deadlines should not have passed and must be in the following format: dd-MM-yyyy HH:mm";
 
     public static final DateTimeFormatter VALIDATION_FORMATTER =
             DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
@@ -53,10 +53,7 @@ public class Deadline {
      * @return true if user input is after current time.
      */
     public static boolean isDeadlineAfter(String test) {
-        if (LocalDateTime.parse(test, VALIDATION_FORMATTER).isAfter(LocalDateTime.now())) {
-            return true;
-        }
-        return false;
+        return LocalDateTime.parse(test, VALIDATION_FORMATTER).isAfter(LocalDateTime.now());
     }
 
     @Override

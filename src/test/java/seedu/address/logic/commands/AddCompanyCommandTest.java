@@ -7,13 +7,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.CompanyList;
@@ -35,11 +35,13 @@ public class AddCompanyCommandTest {
     public void execute_companyAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingCompanyAdded modelStub = new ModelStubAcceptingCompanyAdded();
         Company validCompany = new CompanyBuilder().build();
+        CompanyList companyListWithValidCompany = new CompanyList();
+        companyListWithValidCompany.addCompany(validCompany);
 
         CommandResult commandResult = new AddCompanyCommand(validCompany).execute(modelStub);
 
         assertEquals(String.format(AddCompanyCommand.MESSAGE_SUCCESS, validCompany), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validCompany), modelStub.companiesAdded);
+        assertEquals(companyListWithValidCompany, modelStub.companyList);
     }
 
     @Test
@@ -147,6 +149,7 @@ public class AddCompanyCommandTest {
 
         @Override
         public void updateFilteredCompanyList(Predicate<Company> companyPredicate, Predicate<Role> rolePredicate) {
+            throw new AssertionError("This method should not be called.");
         }
     }
 
@@ -154,17 +157,22 @@ public class AddCompanyCommandTest {
      * A Model stub that contains a single company.
      */
     private class ModelStubWithCompany extends ModelStub {
-        private final Company company;
+
+        private final CompanyList companyList;
+        private final FilteredList<Company> filteredCompanies;
 
         ModelStubWithCompany(Company company) {
             requireNonNull(company);
-            this.company = company;
+            CompanyList companyList = new CompanyList();
+            companyList.setCompanies(List.of(company));
+            this.companyList = companyList;
+            filteredCompanies = new FilteredList<>(this.companyList.getCompanyList());
         }
 
         @Override
         public boolean hasCompany(Company company) {
             requireNonNull(company);
-            return this.company.isSameCompany(company);
+            return companyList.hasCompany(company);
         }
     }
 
@@ -172,18 +180,23 @@ public class AddCompanyCommandTest {
      * A Model stub that always accept the company being added.
      */
     private class ModelStubAcceptingCompanyAdded extends ModelStub {
-        final ArrayList<Company> companiesAdded = new ArrayList<>();
+
+        private final CompanyList companyList = new CompanyList();
 
         @Override
         public boolean hasCompany(Company company) {
             requireNonNull(company);
-            return companiesAdded.stream().anyMatch(company::isSameCompany);
+            return companyList.hasCompany(company);
         }
 
         @Override
         public void addCompany(Company company) {
             requireNonNull(company);
-            companiesAdded.add(company);
+            companyList.addCompany(company);
+        }
+
+        @Override
+        public void updateFilteredCompanyList(Predicate<Company> companyPredicate, Predicate<Role> rolePredicate) {
         }
 
         @Override

@@ -6,7 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_SOFT
 import static seedu.address.logic.commands.CommandTestUtil.INDEX_DESC_SOFTWARE_ENGINEER;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DEADLINE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_INDEX_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_RNAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ROLE_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_STATUS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_STIPEND_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_SOFTWARE_ENGINEER;
@@ -37,8 +37,8 @@ public class AddRoleCommandParserTest {
     public void parse_allFieldsPresent_success() {
         Role expectedRole = new RoleBuilder(SOFTWARE_ENGINEER).build();
         assertParseSuccess(parser, INDEX_DESC_SOFTWARE_ENGINEER + NAME_DESC_SOFTWARE_ENGINEER
-                + STATUS_DESC_SOFTWARE_ENGINEER + DEADLINE_DESC_SOFTWARE_ENGINEER
-                + DESCRIPTION_DESC_SOFTWARE_ENGINEER + STIPEND_DESC_SOFTWARE_ENGINEER,
+                        + STATUS_DESC_SOFTWARE_ENGINEER + DEADLINE_DESC_SOFTWARE_ENGINEER
+                        + DESCRIPTION_DESC_SOFTWARE_ENGINEER + STIPEND_DESC_SOFTWARE_ENGINEER,
                 new AddRoleCommand(INDEX_FIRST_COMPANY, expectedRole));
     }
 
@@ -75,7 +75,7 @@ public class AddRoleCommandParserTest {
 
         // missing name field
         assertParseFailure(parser, INDEX_DESC_SOFTWARE_ENGINEER + STATUS_DESC_SOFTWARE_ENGINEER
-                        + DEADLINE_DESC_SOFTWARE_ENGINEER, expectedMessage);
+                + DEADLINE_DESC_SOFTWARE_ENGINEER, expectedMessage);
 
         // missing status field
         assertParseFailure(parser, INDEX_DESC_SOFTWARE_ENGINEER + NAME_DESC_SOFTWARE_ENGINEER
@@ -87,19 +87,19 @@ public class AddRoleCommandParserTest {
 
         // all prefixes missing
         assertParseFailure(parser, VALID_NAME_SOFTWARE_ENGINEER + VALID_STATUS_SOFTWARE_ENGINEER
-                        + VALID_DESCRIPTION_SOFTWARE_ENGINEER, expectedMessage);
+                + VALID_DESCRIPTION_SOFTWARE_ENGINEER, expectedMessage);
     }
 
     @Test
     public void parse_invalidValue_failure() {
         // invalid index
         assertParseFailure(parser, INVALID_INDEX_DESC + NAME_DESC_SOFTWARE_ENGINEER
-                + STATUS_DESC_SOFTWARE_ENGINEER + DEADLINE_DESC_SOFTWARE_ENGINEER + DESCRIPTION_DESC_SOFTWARE_ENGINEER
-                + STIPEND_DESC_SOFTWARE_ENGINEER,
+                        + STATUS_DESC_SOFTWARE_ENGINEER + DEADLINE_DESC_SOFTWARE_ENGINEER
+                        + DESCRIPTION_DESC_SOFTWARE_ENGINEER + STIPEND_DESC_SOFTWARE_ENGINEER,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddRoleCommand.MESSAGE_USAGE));
 
         // invalid name
-        assertParseFailure(parser, INDEX_DESC_SOFTWARE_ENGINEER + INVALID_RNAME_DESC
+        assertParseFailure(parser, INDEX_DESC_SOFTWARE_ENGINEER + INVALID_ROLE_NAME_DESC
                 + STATUS_DESC_SOFTWARE_ENGINEER + DEADLINE_DESC_SOFTWARE_ENGINEER + DESCRIPTION_DESC_SOFTWARE_ENGINEER
                 + STIPEND_DESC_SOFTWARE_ENGINEER, RoleName.MESSAGE_CONSTRAINTS);
 

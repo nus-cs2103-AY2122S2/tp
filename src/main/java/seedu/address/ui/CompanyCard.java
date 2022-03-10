@@ -4,7 +4,6 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -28,7 +27,7 @@ public class CompanyCard extends UiPart<Region> {
      */
 
     public final Company company;
-    public final ObservableList<Role> roleList;
+
     private RoleListPanel roleListPanel;
 
     @FXML
@@ -45,8 +44,6 @@ public class CompanyCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane roleTags;
-    @FXML
-    private ListView<Role> rolesListView;
     @FXML
     private StackPane roleListPanelPlaceholder;
 
@@ -76,38 +73,43 @@ public class CompanyCard extends UiPart<Region> {
         if (emailField == "") {
             email.setManaged(false);
         }
-        setRoleTags();
-        roleList = company.getRoleManager().getFilteredRoles();
-        setRoleListPanelPlaceholder();
 
-        roleList.addListener((ListChangeListener<Role>) change -> {
-            roleTags.getChildren().clear();
-            setRoleTags();
-            setRoleListPanelPlaceholder();
-        });
+        ObservableList<Role> roleList = company.getRoleManager().getFilteredRoleList();
+
+        setRoleTags(roleList);
+        setRoleListPanelPlaceholder(roleList);
+        updateView(roleList);
+
+        roleList.addListener((ListChangeListener<Role>) change -> updateView(roleList));
     }
 
     /**
-     * Populate <code>roleTags</code> with names of roles tagged to the company represented by this
+     * Updates <code>roleListPanelPlaceholder</code> to reflect the contents of the current <code>roleList</code>
+     */
+    public void setRoleListPanelPlaceholder(ObservableList<Role> roleList) {
+        roleListPanel = new RoleListPanel(roleList);
+        roleListPanelPlaceholder.getChildren().add(roleListPanel.getRoot());
+    }
+
+    /**
+     * Populates <code>roleTags</code> with names of roles tagged to the company represented by this
      * <code>CompanyCard</code>
      */
-    public void setRoleTags() {
-        company.getRoleManager().getSetRoles().stream()
-                .forEach(roleTag -> roleTags.getChildren().add(new Label(roleTag.getName().fullName)));
+    public void setRoleTags(ObservableList<Role> roleList) {
+        roleTags.getChildren().clear();
+        roleList.forEach(roleTag -> roleTags.getChildren().add(new Label(roleTag.getName().fullName)));
     }
 
     /**
-     * Update <code>roleListPanelPlaceholder</code> to reflect the contents of the current <code>roleList</code>
+     * Updates the <code>roleListPanelPlaceholder</code> and <code>roleTags</code> with the given
+     * <code>roleList</code>
      */
-    public void setRoleListPanelPlaceholder() {
-        if (roleList.isEmpty()) {
-            roleListPanelPlaceholder.getChildren().clear();
-            roleListPanelPlaceholder.setManaged(false);
-        } else {
-            roleListPanel = new RoleListPanel(roleList);
-            roleListPanelPlaceholder.getChildren().add(roleListPanel.getRoot());
-            roleListPanelPlaceholder.setManaged(true);
-        }
+    public void updateView(ObservableList<Role> roleList) {
+        boolean roleListIsNotEmpty = !roleList.isEmpty();
+
+        setRoleTags(roleList);
+        roleTags.setManaged(roleListIsNotEmpty);
+        roleListPanelPlaceholder.setManaged(roleListIsNotEmpty);
     }
 
     @Override

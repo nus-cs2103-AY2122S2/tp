@@ -12,9 +12,10 @@ import seedu.address.model.role.Role;
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
+    /**
+     * {@code Predicate} that always evaluate to true, for filtering companies.
+     */
     Predicate<Company> PREDICATE_SHOW_ALL_COMPANIES = unused -> true;
-    Predicate<Role> PREDICATE_SHOW_ALL_ROLES = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -51,7 +52,9 @@ public interface Model {
      */
     void setCompanyList(ReadOnlyCompanyList companyList);
 
-    /** Returns the CompanyList */
+    /**
+     * Returns the CompanyList
+     */
     ReadOnlyCompanyList getCompanyList();
 
     /**
@@ -79,13 +82,15 @@ public interface Model {
      */
     void setCompany(Company target, Company editedCompany);
 
-    /** Returns an unmodifiable view of the filtered company list */
+    /**
+     * Returns an unmodifiable view of the filtered company list
+     */
     ObservableList<Company> getFilteredCompanyList();
 
     /**
-     * Updates the filter of the filtered company list to filter by the given {@code companyPredicate}
-     * and {@code rolePredicate}.
+     * Updates the filter of the filtered company list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredCompanyList(Predicate<Company> companyPredicate, Predicate<Role> rolePredicate);
+    void updateFilteredCompanyList(Predicate<Company> predicate, Predicate<Role> rolePredicate);
 }
