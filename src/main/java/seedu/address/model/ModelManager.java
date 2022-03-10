@@ -7,7 +7,6 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
@@ -151,6 +150,11 @@ public class ModelManager implements Model {
     @Override
     public void deleteEvent(Event target) {
         eventBook.removeEvent(target);
+    }
+
+    @Override
+    public boolean areEventFriendsValid(Event toAdd) {
+        return toAdd.areFriendNamesValid(addressBook);
     }
 
     //=========== List Accessors ===========================================================================

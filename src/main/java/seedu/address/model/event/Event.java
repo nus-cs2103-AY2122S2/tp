@@ -8,8 +8,13 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.AddressBook;
+import seedu.address.model.person.Address;
 import seedu.address.model.person.Description;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 
 /**
  * Represents an Event in Amigos.
@@ -63,6 +68,25 @@ public class Event {
      */
     public Set<Name> getFriendNames() {
         return Collections.unmodifiableSet(friendNames);
+    }
+
+    /**
+     * Returns true if all friend names correspond to actual Friends in the AddressBook.
+     *
+     * @return true if all friend names correspond to actual Friends in the AddressBook.
+     */
+    public boolean areFriendNamesValid(AddressBook addressBook) {
+        // There ought to be a better way of doing this - search AddressBook by name perhaps?
+        final Phone dummyPhone = new Phone("12345678");
+        final Email dummyEmail = new Email("dummyemail@gmail.com");
+        final Address dummyAddress = new Address("Dummy Address");
+        for (Name name : getFriendNames()) {
+            Person dummyPerson = new Person(name, dummyPhone, dummyEmail, dummyAddress, new HashSet<>());
+            if (!addressBook.hasPerson(dummyPerson)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
