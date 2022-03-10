@@ -8,8 +8,8 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyShowList;
-import seedu.address.model.ReadOnlyUserPrefsTrackermon;
-import seedu.address.model.UserPrefsTrackermon;
+import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.UserPrefs;
 
 /**
  * Manages storage of ShowList data in local storage.
@@ -36,12 +36,12 @@ public class StorageManagerTrackermon implements StorageTrackermon {
     }
 
     @Override
-    public Optional<UserPrefsTrackermon> readUserPrefs() throws DataConversionException, IOException {
+    public Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException {
         return userPrefsStorage.readUserPrefs();
     }
 
     @Override
-    public void saveUserPrefs(ReadOnlyUserPrefsTrackermon userPrefs) throws IOException {
+    public void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException {
         userPrefsStorage.saveUserPrefs(userPrefs);
     }
 

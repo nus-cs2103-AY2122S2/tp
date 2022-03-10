@@ -18,9 +18,9 @@ import seedu.address.logic.LogicTrackermon;
 import seedu.address.model.ModelManagerTrackermon;
 import seedu.address.model.ModelTrackermon;
 import seedu.address.model.ReadOnlyShowList;
-import seedu.address.model.ReadOnlyUserPrefsTrackermon;
+import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.ShowList;
-import seedu.address.model.UserPrefsTrackermon;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtilTrackermon;
 import seedu.address.logic.storage.JsonShowListStorage;
 import seedu.address.logic.storage.JsonUserPrefsStorageTrackermon;
@@ -29,16 +29,16 @@ import seedu.address.logic.storage.StorageManagerTrackermon;
 import seedu.address.logic.storage.StorageTrackermon;
 import seedu.address.logic.storage.UserPrefsStorageTrackermon;
 import seedu.address.ui.Ui;
-import seedu.address.ui.UiManagerTrackermon;
+import seedu.address.ui.UiManager;
 
 /**
  * Runs the application.
  */
-public class MainAppTrackermon extends Application {
+public class MainApp extends Application {
 
     public static final Version VERSION = new Version(0, 2, 0, true);
 
-    private static final Logger logger = LogsCenter.getLogger(MainAppTrackermon.class);
+    private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
     protected Ui ui;
     protected LogicTrackermon logic;
@@ -55,7 +55,7 @@ public class MainAppTrackermon extends Application {
         config = initConfig(appParameters.getConfigPath());
 
         UserPrefsStorageTrackermon userPrefsStorage = new JsonUserPrefsStorageTrackermon(config.getUserPrefsFilePath());
-        UserPrefsTrackermon userPrefs = initPrefs(userPrefsStorage);
+        UserPrefs userPrefs = initPrefs(userPrefsStorage);
         ShowListStorage showListStorage = new JsonShowListStorage(userPrefs.getShowListFilePath());
         storage = new StorageManagerTrackermon(showListStorage, userPrefsStorage);
 
@@ -65,7 +65,7 @@ public class MainAppTrackermon extends Application {
 
         logic = new LogicManagerTrackermon(model, storage);
 
-        ui = new UiManagerTrackermon(logic);
+        ui = new UiManager(logic);
     }
 
     /**
@@ -73,7 +73,7 @@ public class MainAppTrackermon extends Application {
      * The data from the sample show liost will be used instead if {@code storage}'s show list is not found,
      * or an empty show list will be used instead if errors occur when reading {@code storage}'s show list.
      */
-    private ModelTrackermon initModelManager(StorageTrackermon storage, ReadOnlyUserPrefsTrackermon userPrefs) {
+    private ModelTrackermon initModelManager(StorageTrackermon storage, ReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlyShowList> showListOptional;
         ReadOnlyShowList initialData;
         try {
@@ -138,21 +138,21 @@ public class MainAppTrackermon extends Application {
      * or a new {@code UserPrefs} with default configuration if errors occur when
      * reading from the file.
      */
-    protected UserPrefsTrackermon initPrefs(UserPrefsStorageTrackermon storage) {
+    protected UserPrefs initPrefs(UserPrefsStorageTrackermon storage) {
         Path prefsFilePath = storage.getUserPrefsFilePath();
         logger.info("Using prefs file : " + prefsFilePath);
 
-        UserPrefsTrackermon initializedPrefs;
+        UserPrefs initializedPrefs;
         try {
-            Optional<UserPrefsTrackermon> prefsOptional = storage.readUserPrefs();
-            initializedPrefs = prefsOptional.orElse(new UserPrefsTrackermon());
+            Optional<UserPrefs> prefsOptional = storage.readUserPrefs();
+            initializedPrefs = prefsOptional.orElse(new UserPrefs());
         } catch (DataConversionException e) {
             logger.warning("UserPrefs file at " + prefsFilePath + " is not in the correct format. "
                     + "Using default user prefs");
-            initializedPrefs = new UserPrefsTrackermon();
+            initializedPrefs = new UserPrefs();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty ShowList");
-            initializedPrefs = new UserPrefsTrackermon();
+            initializedPrefs = new UserPrefs();
         }
 
         //Update prefs file in case it was missing to begin with or there are new/unused fields
@@ -167,7 +167,7 @@ public class MainAppTrackermon extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting ShowList " + MainAppTrackermon.VERSION);
+        logger.info("Starting ShowList " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 

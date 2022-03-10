@@ -18,36 +18,36 @@ public class ModelManagerTrackermon implements ModelTrackermon {
     private static final Logger logger = LogsCenter.getLogger(ModelManagerTrackermon.class);
 
     private final ShowList showList;
-    private final UserPrefsTrackermon userPrefs;
+    private final UserPrefs userPrefs;
     private final FilteredList<Show> filteredShows;
 
     /**
      * Initializes a ModelManager with the given showList and userPrefs.
      */
-    public ModelManagerTrackermon(ReadOnlyShowList showList, ReadOnlyUserPrefsTrackermon userPrefs) {
+    public ModelManagerTrackermon(ReadOnlyShowList showList, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(showList, userPrefs);
 
         logger.fine("Initializing with address book: " + showList + " and user prefs " + userPrefs);
 
         this.showList = new ShowList(showList);
-        this.userPrefs = new UserPrefsTrackermon(userPrefs);
+        this.userPrefs = new UserPrefs(userPrefs);
         filteredShows = new FilteredList<>(this.showList.getShowList());
     }
 
     public ModelManagerTrackermon() {
-        this(new ShowList(), new UserPrefsTrackermon());
+        this(new ShowList(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
 
     @Override
-    public void setUserPrefs(ReadOnlyUserPrefsTrackermon userPrefs) {
+    public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
         requireNonNull(userPrefs);
         this.userPrefs.resetData(userPrefs);
     }
 
     @Override
-    public ReadOnlyUserPrefsTrackermon getUserPrefs() {
+    public ReadOnlyUserPrefs getUserPrefs() {
         return userPrefs;
     }
 

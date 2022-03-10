@@ -7,7 +7,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import seedu.address.MainAppTrackermon;
+import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.LogicTrackermon;
@@ -16,11 +16,11 @@ import seedu.address.logic.LogicTrackermon;
 /**
  * The manager of the UI component.
  */
-public class UiManagerTrackermon implements Ui {
+public class UiManager implements Ui {
 
     public static final String ALERT_DIALOG_PANE_FIELD_ID = "alertDialogPane";
 
-    private static final Logger logger = LogsCenter.getLogger(UiManagerTrackermon.class);
+    private static final Logger logger = LogsCenter.getLogger(UiManager.class);
     private static final String ICON_APPLICATION = "/images/address_book_32.png";
 
     private LogicTrackermon logic;
@@ -29,7 +29,7 @@ public class UiManagerTrackermon implements Ui {
     /**
      * Creates a {@code UiManager} with the given {@code Logic}.
      */
-    public UiManagerTrackermon(LogicTrackermon logic) {
+    public UiManager(LogicTrackermon logic) {
         this.logic = logic;
     }
 
@@ -52,7 +52,7 @@ public class UiManagerTrackermon implements Ui {
     }
 
     private Image getImage(String imagePath) {
-        return new Image(MainAppTrackermon.class.getResourceAsStream(imagePath));
+        return new Image(MainApp.class.getResourceAsStream(imagePath));
     }
 
     void showAlertDialogAndWait(AlertType type, String title, String headerText, String contentText) {

@@ -6,8 +6,8 @@ import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.JsonUtil;
-import seedu.address.model.ReadOnlyUserPrefsTrackermon;
-import seedu.address.model.UserPrefsTrackermon;
+import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.UserPrefs;
 
 
 /**
@@ -27,7 +27,7 @@ public class JsonUserPrefsStorageTrackermon implements UserPrefsStorageTrackermo
     }
 
     @Override
-    public Optional<UserPrefsTrackermon> readUserPrefs() throws DataConversionException {
+    public Optional<UserPrefs> readUserPrefs() throws DataConversionException {
         return readUserPrefs(filePath);
     }
 
@@ -36,12 +36,12 @@ public class JsonUserPrefsStorageTrackermon implements UserPrefsStorageTrackermo
      * @param prefsFilePath location of the data. Cannot be null.
      * @throws DataConversionException if the file format is not as expected.
      */
-    public Optional<UserPrefsTrackermon> readUserPrefs(Path prefsFilePath) throws DataConversionException {
-        return JsonUtil.readJsonFile(prefsFilePath, UserPrefsTrackermon.class);
+    public Optional<UserPrefs> readUserPrefs(Path prefsFilePath) throws DataConversionException {
+        return JsonUtil.readJsonFile(prefsFilePath, UserPrefs.class);
     }
 
     @Override
-    public void saveUserPrefs(ReadOnlyUserPrefsTrackermon userPrefs) throws IOException {
+    public void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException {
         JsonUtil.saveJsonFile(userPrefs, filePath);
     }
 

@@ -14,12 +14,12 @@ public interface ModelTrackermon {
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
-    void setUserPrefs(ReadOnlyUserPrefsTrackermon userPrefs);
+    void setUserPrefs(ReadOnlyUserPrefs userPrefs);
 
     /**
      * Returns the user prefs.
      */
-    ReadOnlyUserPrefsTrackermon getUserPrefs();
+    ReadOnlyUserPrefs getUserPrefs();
 
     /**
      * Returns the user prefs' GUI settings.

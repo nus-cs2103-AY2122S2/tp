@@ -8,7 +8,7 @@ import java.util.Objects;
 
 import seedu.address.commons.core.GuiSettings;
 
-public class UserPrefsTrackermon implements ReadOnlyUserPrefsTrackermon {
+public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path showListFilePath = Paths.get("data" , "addressbook.json");
@@ -16,12 +16,12 @@ public class UserPrefsTrackermon implements ReadOnlyUserPrefsTrackermon {
     /**
      * Creates a {@code UserPrefs} with default values.
      */
-    public UserPrefsTrackermon() {}
+    public UserPrefs() {}
 
     /**
      * Creates a {@code UserPrefs} with the prefs in {@code userPrefs}.
      */
-    public UserPrefsTrackermon(ReadOnlyUserPrefsTrackermon userPrefs) {
+    public UserPrefs(ReadOnlyUserPrefs userPrefs) {
         this();
         resetData(userPrefs);
     }
@@ -29,7 +29,7 @@ public class UserPrefsTrackermon implements ReadOnlyUserPrefsTrackermon {
     /**
      * Resets the existing data of this {@code UserPrefs} with {@code newUserPrefs}.
      */
-    public void resetData(ReadOnlyUserPrefsTrackermon newUserPrefs) {
+    public void resetData(ReadOnlyUserPrefs newUserPrefs) {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
         setShowListFilePath(newUserPrefs.getShowListFilePath());
@@ -58,11 +58,11 @@ public class UserPrefsTrackermon implements ReadOnlyUserPrefsTrackermon {
         if (other == this) {
             return true;
         }
-        if (!(other instanceof UserPrefsTrackermon)) { //this handles null as well.
+        if (!(other instanceof UserPrefs)) { //this handles null as well.
             return false;
         }
 
-        UserPrefsTrackermon o = (UserPrefsTrackermon) other;
+        UserPrefs o = (UserPrefs) other;
 
         return guiSettings.equals(o.guiSettings)
                 && showListFilePath.equals(o.showListFilePath);

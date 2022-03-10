@@ -5,11 +5,11 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.ReadOnlyUserPrefsTrackermon;
-import seedu.address.model.UserPrefsTrackermon;
+import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.UserPrefs;
 
 /**
- * Represents a storage for {@link UserPrefsTrackermon}.
+ * Represents a storage for {@link UserPrefs}.
  */
 public interface UserPrefsStorageTrackermon {
 
@@ -24,13 +24,13 @@ public interface UserPrefsStorageTrackermon {
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<UserPrefsTrackermon> readUserPrefs() throws DataConversionException, IOException;
+    Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
 
     /**
-     * Saves the given {@link ReadOnlyUserPrefsTrackermon} to the storage.
+     * Saves the given {@link ReadOnlyUserPrefs} to the storage.
      * @param userPrefs cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveUserPrefs(ReadOnlyUserPrefsTrackermon userPrefs) throws IOException;
+    void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException;
 
 }

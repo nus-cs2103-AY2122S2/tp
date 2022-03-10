@@ -6,8 +6,8 @@ import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyShowList;
-import seedu.address.model.ReadOnlyUserPrefsTrackermon;
-import seedu.address.model.UserPrefsTrackermon;
+import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.UserPrefs;
 
 /**
  * API of the Storage component
@@ -15,10 +15,10 @@ import seedu.address.model.UserPrefsTrackermon;
 public interface StorageTrackermon extends ShowListStorage, UserPrefsStorageTrackermon {
 
     @Override
-    Optional<UserPrefsTrackermon> readUserPrefs() throws DataConversionException, IOException;
+    Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
 
     @Override
-    void saveUserPrefs(ReadOnlyUserPrefsTrackermon userPrefs) throws IOException;
+    void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException;
 
     @Override
     Path getShowListFilePath();
