@@ -13,7 +13,8 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
-import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.LogicTrackermon;
+import seedu.address.logic.commands.CommandResultTrackermon;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -29,7 +30,7 @@ public class MainWindowTrackermon extends UiPart<Stage> {
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
-    private Logic logic;
+    private LogicTrackermon logic;
 
     // Independent Ui parts residing in this Ui container
     private ShowListPanel showListPanel;
@@ -54,7 +55,7 @@ public class MainWindowTrackermon extends UiPart<Stage> {
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
-    public MainWindowTrackermon(Stage primaryStage, Logic logic) {
+    public MainWindowTrackermon(Stage primaryStage, LogicTrackermon logic) {
         super(FXML, primaryStage);
 
         // Set dependencies
@@ -120,7 +121,7 @@ public class MainWindowTrackermon extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getShowListFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        CommandBoxTrackermon commandBox = new CommandBoxTrackermon(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -173,9 +174,9 @@ public class MainWindowTrackermon extends UiPart<Stage> {
      *
      * @see Logic#execute(String)
      */
-    private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
+    private CommandResultTrackermon executeCommand(String commandText) throws CommandException, ParseException {
         try {
-            CommandResult commandResult = logic.execute(commandText);
+            CommandResultTrackermon commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
