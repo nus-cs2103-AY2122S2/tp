@@ -16,6 +16,8 @@ public class Category {
         }
     };
 
+    public static final String DEFAULT_CATEGORY = "Miscellaneous";
+
     public static final String MESSAGE_CONSTRAINTS =
             "Categories (if given) should only contain alphanumeric characters and spaces";
 
@@ -31,7 +33,7 @@ public class Category {
      * Constructs a {@code Category} representing no categorization.
      */
     private Category() {
-        fullCategoryName = "";
+        fullCategoryName = DEFAULT_CATEGORY;
     }
 
     /**

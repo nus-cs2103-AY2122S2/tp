@@ -27,8 +27,6 @@ public class Name {
 
     public final String fullName;
 
-
-
     private Name() {
         fullName = "???";
     }
