@@ -41,18 +41,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         eventList = this.eventBook.getEventList();
     }
-
-    public static boolean isEventDataInSync(ReadOnlyAddressBook readOnlyAddressBook, ReadOnlyEventBook readOnlyEventBook) {
-        ObservableList<Event> eventList = readOnlyEventBook.getEventList();
-        AddressBook addressBook = new AddressBook(readOnlyAddressBook);
-        for (Event event : eventList) {
-            if (!event.areFriendNamesValid(addressBook)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
+    
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -62,6 +51,25 @@ public class ModelManager implements Model {
 
     public ModelManager() {
         this(new AddressBook(), new EventBook(), new UserPrefs());
+    }
+
+    /**
+     * Returns true if the eventBook data is compatible with the addressBook data.
+     *
+     * @param readOnlyAddressBook AddressBook to use when checking.
+     * @param readOnlyEventBook EventBook to use when checking.
+     * @return True if eventBook data is compatible with addressBook data.
+     */
+    public static boolean isEventDataInSync(ReadOnlyAddressBook readOnlyAddressBook,
+                                            ReadOnlyEventBook readOnlyEventBook) {
+        ObservableList<Event> eventList = readOnlyEventBook.getEventList();
+        AddressBook addressBook = new AddressBook(readOnlyAddressBook);
+        for (Event event : eventList) {
+            if (!event.areFriendNamesValid(addressBook)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     //=========== UserPrefs ==================================================================================

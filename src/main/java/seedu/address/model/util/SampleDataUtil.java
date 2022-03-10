@@ -47,13 +47,13 @@ public class SampleDataUtil {
 
     public static Event[] getSampleEvents() {
         return new Event[] {
-                new Event(new Name("Alex Birthday"), new DateTime("10-03-2022 1430"),
-                        new Description("Remember to bring cake."), getNameSet("Alex Yeoh", "David Li")),
-                new Event(new Name("Weekends at Bernice"), new DateTime("10-04-2022 1835"),
-                     new Description(null), getNameSet("Bernice Yu")),
-                new Event(new Name("Boardgame Night"), new DateTime("12-04-2022 1945"),
-                     new Description("We will be playing Monopoly."),
-                    getNameSet("Roy Balakrishnan", "Irfan Ibrahim"))
+            new Event(new Name("Alex Birthday"), new DateTime("10-03-2022 1430"),
+                    new Description("Remember to bring cake."), getNameSet("Alex Yeoh", "David Li")),
+            new Event(new Name("Weekends at Bernice"), new DateTime("10-04-2022 1835"),
+                 new Description(null), getNameSet("Bernice Yu")),
+            new Event(new Name("Boardgame Night"), new DateTime("12-04-2022 1945"),
+                 new Description("We will be playing Monopoly."),
+                 getNameSet("Roy Balakrishnan", "Irfan Ibrahim"))
         };
     }
 
