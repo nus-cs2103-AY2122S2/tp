@@ -139,8 +139,8 @@ public class StringUtilTest {
 
     @Test
     public void containsStringIgnoreCase_emptyString_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, "Word parameter cannot be empty", ()
-                -> StringUtil.containsStringIgnoreCase("typical sentence", "  "));
+        assertThrows(IllegalArgumentException.class, "String parameter cannot be empty", ()
+            -> StringUtil.containsStringIgnoreCase("typical sentence", "  "));
     }
 
     @Test
