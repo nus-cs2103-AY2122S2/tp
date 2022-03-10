@@ -32,8 +32,8 @@ public class AddProfileWindow extends UiPart<Stage> {
     public AddProfileWindow(Stage root, Logic logic) {
         super(FXML, root);
         this.logic = logic;
-//        resultDisplay = new ResultDisplay();
-//        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+        //        resultDisplay = new ResultDisplay();
+        //        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
     }
 
     /**
@@ -105,9 +105,5 @@ public class AddProfileWindow extends UiPart<Stage> {
     private void handleClose() {
         getRoot().hide();
     }
-
-
-
-
 
 }

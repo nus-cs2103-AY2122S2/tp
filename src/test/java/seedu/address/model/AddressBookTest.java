@@ -18,12 +18,9 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-<<<<<<< HEAD
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
-=======
 import seedu.address.model.tag.Tag;
->>>>>>> master
 import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {

@@ -24,7 +24,6 @@ import seedu.address.model.tag.Tag;
  * Parses input arguments and creates a new AddCommand object
  */
 public class AddCommandParser implements Parser<AddCommand> {
-//    int counter = 0;
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
@@ -33,18 +32,6 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
 
-//        if (counter == 0) {
-//            System.out.println(counter);
-//            System.out.println(args);
-//            String[] test = new String[]{"jun jie", "123123", "junjiete@gmail.com", "asdwda"};
-//            Collection<String> cs = new ArrayList<String>();
-//            cs.add("tset123");
-//            cs.add("avd");
-//            counter = 1;
-//            String s  = this.concatAddCommand(test,cs);
-//            System.out.println(s);
-//        }
-//        System.out.println(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
 
@@ -81,8 +68,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      *
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AddCommand concatAddCommand(String[] args, Collection<String> collectionOfTag) throws ParseException{
-//        System.out.println(args);
+    public AddCommand concatAddCommand(String[] args, Collection<String> collectionOfTag) throws ParseException {
 
         Name name = ParserUtil.parseName(args[0]);
         Phone phone = ParserUtil.parsePhone(args[1]);
@@ -96,13 +82,11 @@ public class AddCommandParser implements Parser<AddCommand> {
                 + PREFIX_EMAIL + email + " "
                 + PREFIX_ADDRESS + address + " ";
 
-        if(!tagList.isEmpty()) {
+        if (!tagList.isEmpty()) {
             for (String tag : collectionOfTag) {
                 combinedAddCommand += PREFIX_TAG + tag;
             }
         }
-//        System.out.println("fnal ");
-//        System.out.println(combinedAddCommand);
         return this.parse(combinedAddCommand);
     }
 

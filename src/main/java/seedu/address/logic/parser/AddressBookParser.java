@@ -3,8 +3,6 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -48,11 +46,6 @@ public class AddressBookParser {
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
-//            String[] test = new String[]{"jun jie", "123123", "junjiete@gmail.com", "asd"};
-//            Collection<String> cs = new ArrayList<String>();
-//            cs.add("tse123");
-
-//            return new AddCommandParser().concatAddCommand(test,cs);
             return new AddCommandParser().parse(arguments);
 
         case AddTagCommand.COMMAND_WORD:
