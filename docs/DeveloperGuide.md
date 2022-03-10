@@ -270,14 +270,55 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                                    | I want to …​                                                 | So that I can…​                                                                                                    |
+|----------|------------------------------------------------------------|--------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------|
+| `* * *`  | new user                                                   | see usage instructions                                       | refer to instructions when I forget how to use the App                                                             |
+| `* * *`  | user                                                       | add companies                                                |                                                                                                                    |
+| `* * *`  | user                                                       | add events related to a company                              | keep track of all of a company’s events                                                                            |
+| `* * *`  | user                                                       | add contact people relared to a company                      | easily look up their contact details                                                                               |
+| `* * *`  | user                                                       | delete companies                                             | remove companies that I am no longer considering                                                                   |
+| `* * *`  | user                                                       | delete events                                                | remove events that have passed or been canceled                                                                    |
+| `* * *`  | user                                                       | delete contact people                                        | remove people who are no longer related to companies I'm looking at                                                |
+| `* * *`  | user                                                       | view the list of companies                                   |                                                                                                                    |
+| `* * *`  | user                                                       | view the list of events                                      |                                                                                                                    |
+| `* * *`  | user                                                       | view the list of contact people                              |                                                                                                                    |
+| `* * *`  | user                                                       | save my list                                                 | maintain my list across different sessions                                                                         |
+| `* * *`  | user considering many companies                            | find companies by name                                       | locate details of companies without having to go through the whole list                                            |
+| `* * *`  | user keeping track of many events                          | find events by name                                          | locate details of events without having to go through the whole list                                               |
+| `* * *`  | user keeping track of many contact people                  | find contact people by name                                  | locate their details without having to go through the whole list                                                   |
+| `* * *`  | user keeping track of events from many different companies | find events related to a certain company                     | locate details of eventts from a certain company without having to go through the whole list                       |
+| `* * *`  | user                                                       | edit the details of a company                                | keep the company details accurate and up to date                                                                   |
+| `* * *`  | user                                                       | edit the details of an event                                 | keep the event details accurate and up to date                                                                     |
+| `* * *`  | user                                                       | edit the details of a contact person                         | keep their details accurate and up to date                                                                         |
+| `* * *`  | user                                                       | receive feedback on whether my command was successful or not | rectify the error in the command if any occurred                                                                   |
+| `* *`    | user                                                       | add tags to an entry                                         |                                                                                                                    |
+| `* *`    | user                                                       | edit tags of an entry                                        |                                                                                                                    |
+| `* *`    | user                                                       | delete tags from an entry                                    |                                                                                                                    |
+| `* *`    | user keeping track of many entries                         | find entries by tags                                         | locate that entry without having to go through the whole list                                                      |
+| `* *`    | user                                                       | archive companies                                            | ignore companies I am no longer focusing on but can still view their details if necessary                          |
+| `* *`    | user                                                       | archive events                                               | ignore events that have passed or been canceled but can still view their details if necessary                      |
+| `* *`    | user                                                       | archive contact people                                       | ignore contact people no longer connected to a company I’m looking at but can still view their details if necessary |
+| `* *`    | user                                                       | view all events in a certain time frame                      | see all the events within that time frame without going through the whole list                                     |
+| `* *`    | user                                                       | view all upcoming events within a certain time frame         | see all important events that will be coming up soon                                                               |
+| `* *`    | user keeping track of many events                          | sort events by date                                          | locate an event easily and view their chronological order                                                          |
+| `* *`    | user keeping track of many contact people                  | sort persons by name                                         | locate a person easily                                                                                             |
+| `* *`    | user considering many companies                            | sort companies by name                                       | locate a company easily                                                                                            |
+| `* *`    | new user                                                   | go through a guided tutorial of the app                      | quickly learn how to use the app                                                                                   |
+| `* *`    | user                                                       | undo the previous command                                    | undo any mistakes I make                                                                                           |
+| `* *`    | user                                                       | redo the previously undone command                           | redo a command I accidentally undid                                                                                |
+| `* *`    | user keeping track of many events                          | delete all past events                                       | avoid having to delete them one by one                                                                             |
+| `* *`    | user keeping track of many events                          | archive all past events                                      | avoid having to archive them one by one                                                                            |
+| `*`      | user                                                       | choose to save or not save the changes made                  | avoid having changes I don't want get saved to the file                                                            |
+| `*`      | forgetful user                                             | receive reminders for events happening soon                  | remember them                                                                                                      |
+| `*`      | user with multiple computers                               | download the list of contacts                                | send the list to other computers                                                                                   |
+| `*`      | user with multiple computers                               | import the list of contacts                                  | maintain my list between different computers                                                                       |
+| `*`      | applicant                                                  | send emails directly                                         | send applications without having to open a web browser                                                             |
+| `*`      | applicant                                                  | store my resume, cover letter & academic transcript          | easily retrieve them when sending an email                                                                         |
+| `*`      | calendar user                                              | download my events in ics format                             | import them into my calendar apps                                                                                  |
+| `*`      | LinkedIn user                                              | add contact information from a LinkedIn url                  | easily add LinkedIn contact information to an entry                                                                |
+| `*`      | expert user                                                | remap the commands                                           | use commands I am more comfortable with                                                                            |
+| `*`      | expert user                                                | add key bindings/shortcuts                                   | use shortcuts I am comfortable with for efficient usage                                                            |
+| `*`      | expert user                                                | add simple scripts                                           | I can automate common tasks                                                                                        |
 
 *{More to be added}*
 
@@ -312,9 +353,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold up to 1000 entries without noticeable lag in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Entries and their details should be displayed in an intuitive, easy-to-understand manner.
+5. The majority of the interactions the user makes with the app should be through the keyboard.
+6. Should not use more than 300 MB of RAM memory while in operation.
 
 *{More to be added}*
 
