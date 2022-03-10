@@ -3,8 +3,6 @@ package seedu.address.model.group;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import seedu.address.logic.commands.AddGroupCommand;
-
 /**
  * Represents a Group's name in ArchDuke.
  * Guarantees: immutable; is valid as declared in {@link #isValidGroupName(String)}
