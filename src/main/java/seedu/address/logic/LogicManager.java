@@ -97,8 +97,9 @@ public class LogicManager implements Logic {
             Optional<ReadOnlyAddressBook> ab = storage.readAddressBookFromCsv(csvFilePath);
             if (ab.isPresent()) {
                 model.setAddressBook(ab.get());
+                logger.info("Successfully set address book, without saving.");
             } else {
-                System.out.println("Error");
+                logger.info("No change to address book after attempting to read from CSV.");
             }
         } catch (DataConversionException | IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);

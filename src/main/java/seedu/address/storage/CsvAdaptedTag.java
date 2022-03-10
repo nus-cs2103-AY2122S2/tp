@@ -39,4 +39,23 @@ class CsvAdaptedTag {
         }
         return new Tag(tagName);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof CsvAdaptedTag)) {
+            return false;
+        }
+
+        CsvAdaptedTag otherTag = (CsvAdaptedTag) other;
+        return tagName.equals(otherTag.tagName);
+    }
+
+    @Override
+    public int hashCode() {
+        return tagName.hashCode();
+    }
 }

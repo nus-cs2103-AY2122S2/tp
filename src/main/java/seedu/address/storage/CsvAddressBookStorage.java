@@ -3,6 +3,7 @@ package seedu.address.storage;
 import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -61,6 +62,10 @@ public class CsvAddressBookStorage implements AddressBookStorage {
      */
     public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
+
+        if (!Files.exists(filePath)) {
+            return Optional.empty();
+        }
 
         // get the people in the addressbook
         List<CsvAdaptedPerson> persons = CsvUtil.loadCsvFile(filePath);

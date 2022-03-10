@@ -1,12 +1,15 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
@@ -29,7 +32,22 @@ public class CsvAdaptedPerson {
     private final String email;
     private final String insurancePackage;
     private final String address;
-    private final List<CsvAdaptedTag> tagged;
+    private final List<CsvAdaptedTag> tagged = new ArrayList<>();
+
+    /**
+     * Constructs a {@code CsvAdaptedPerson} with the given person details.
+     */
+    public CsvAdaptedPerson(String name, String phone, String email, String insurancePackage, String address,
+                            List<CsvAdaptedTag> tagged) {
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.insurancePackage = insurancePackage;
+        this.address = address;
+        if (tagged != null) {
+            this.tagged.addAll(tagged);
+        }
+    }
 
     /**
      * Converts a given {@code Person} into this class for CSV use.
@@ -41,7 +59,6 @@ public class CsvAdaptedPerson {
         email = source.getEmail().value;
         insurancePackage = source.getInsurancePackage().packageName;
         address = source.getAddress().value;
-        tagged = new ArrayList<>();
         tagged.addAll(source.getTags().stream()
                 .map(CsvAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -60,7 +77,6 @@ public class CsvAdaptedPerson {
         email = cleanup(personDetails[2]);
         insurancePackage = cleanup(personDetails[3]);
         address = cleanup(personDetails[4]);
-        tagged = new ArrayList<>();
 
         // if the tags column in the CSV is empty, personDetails.length == 5
         // checking is needed to ensure that there are tags in the CSV for this person
@@ -142,19 +158,20 @@ public class CsvAdaptedPerson {
      * @return The String representation of this person.
      */
     public String toCsvString() {
-        String tags = getTagsAsString();
+        String tags = getTagsAsString(tagged);
         return Stream.of(name, phone, email, insurancePackage, address, tags)
-                .map(this::addQuotes)
+                .map(CsvAdaptedPerson::addQuotes)
                 .collect(Collectors.joining(","));
     }
 
     /**
      * Converts the List of Tags into a single string, to be stored in the CSV file/
      *
+     * @param tags the tags to convert to String.
      * @return a single String representing the tags associated with this CsvAdaptedPerson.
      */
-    public String getTagsAsString() {
-        return tagged.stream()
+    public static String getTagsAsString(List<CsvAdaptedTag> tags) {
+        return tags.stream()
                 .map(CsvAdaptedTag::getTagName)
                 .collect(Collectors.joining("|"));
     }
@@ -166,7 +183,7 @@ public class CsvAdaptedPerson {
      * @param s the String to add double quotes around.
      * @return the CSV-friendly version of the string.
      */
-    public String addQuotes(String s) {
+    public static String addQuotes(String s) {
         return '"' + s + '"';
     }
 

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -37,11 +38,33 @@ public class CsvUtil {
      * @throws IOException if there are errors with file handling.
      */
     public static void saveCsvFile(List<CsvAdaptedPerson> persons, Path filePath) throws IOException {
+        writeHeaders(filePath);
+        writePeople(persons, filePath);
+    }
 
+    /**
+     * Method that handles the writing of headers of the CSV file.
+     *
+     * @param filePath the given Path to the CSV file.
+     * @throws IOException if there are errors with file handling.
+     */
+    public static void writeHeaders(Path filePath) throws IOException {
         fw = new FileWriter(filePath.toString());
         fw.write(headers + "\n");
+        fw.close();
+    }
+
+    /**
+     * Method that handles the writing of the List of CsvAdaptedPerson to CSV.
+     *
+     * @param persons a list of CsvAdaptedPerson to save to CSV to.
+     * @param filePath the given Path to the CSV file.
+     * @throws IOException if there are errors with file handling.
+     */
+    public static void writePeople(List<CsvAdaptedPerson> persons, Path filePath) throws IOException {
+        fw = new FileWriter(filePath.toString(), true);
         for (CsvAdaptedPerson p : persons) {
-           fw.write(p.toCsvString() + "\n");
+            fw.write(p.toCsvString() + "\n");
         }
         fw.close();
     }
@@ -60,15 +83,20 @@ public class CsvUtil {
 
         try {
             s = new Scanner(new File(filePath.toString())); // create a Scanner using the File as the source
-            s.nextLine();  // headers
+            if (!s.hasNext()) {
+                logger.warning("Empty CSV File");
+                throw new IOException("Empty CSV file");
+            }
+             s.nextLine();  // headers
             while (s.hasNext()) {
                 personString = s.nextLine();
                 p = new CsvAdaptedPerson(personString);
                 persons.add(p);
             }
+            s.close();
             return persons;
         } catch (IOException e) {
-            logger.warning("Error reading from jsonFile file " + filePath + ": " + e);
+            logger.warning("Error reading from CSV file " + filePath + ": " + e);
             throw new DataConversionException(e);
         }
 
