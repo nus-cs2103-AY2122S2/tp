@@ -1,10 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.HashSet;
-
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
@@ -32,13 +31,14 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted friend: %1$s";
 
-    private final Name nameOfPersonToDelete;
-
     //these dummy fields are needed to instantiate a person to be used to check if such a name entered exists
     // in the address book
     private static final Phone dummyPhone = new Phone("12345678");
     private static final Email dummyEmail = new Email("dummyemail@gmail.com");
     private static final Address dummyAddress = new Address("Dummy Address");
+
+    private final Name nameOfPersonToDelete;
+
 
     public DeleteCommand(Name nameOfPersonToDelete) {
         this.nameOfPersonToDelete = nameOfPersonToDelete;
