@@ -36,7 +36,7 @@ task coverage(type: JacocoReport) {
     }
     tasks.withType(Test) {
         scanForTestClasses = false
-        include "**/*Test.class"
+        include "**/*Test*.class"
     }
     reports {
         html.enabled = true

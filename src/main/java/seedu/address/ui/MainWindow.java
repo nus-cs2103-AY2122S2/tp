@@ -170,7 +170,11 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleFavourite(ActionEvent event) {
-        favouriteWindow.show();
+        if (!favouriteWindow.getRoot().isShowing()) {
+            favouriteWindow.show();
+        } else {
+            favouriteWindow.getRoot().requestFocus();
+        }
     }
 
     public PersonListPanel getPersonListPanel() {
