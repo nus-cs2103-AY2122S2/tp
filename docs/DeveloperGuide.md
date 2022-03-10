@@ -257,14 +257,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* Professor in charge of CS2103
+* Professor from NUS School of Computing
 * Needs to manage a significant number of TA applications
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Prefers desktop apps to other platform apps
+* Possesses fast typing speed
+* Prefers typing to mouse interactions
+* Reasonably comfortable using CLI apps
 
-**Value proposition**: TAlent Assistant creates a centralized management system for professors to manage TA 
+**Value proposition**: TAlent Assistant™ creates a centralized management system for professors to manage TA 
 applications by providing access to various application data such as qualifications, experience and 
 interview availability dates.
 
@@ -273,13 +273,13 @@ interview availability dates.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                         | So that I can…​                                                              |
-| ----- |--------------------------------------------|--------------------------------------|------------------------------------------------------------------------------|
-| `* * *` | user                                       | add an applicant to the system       | keep track of their application details for consideration.                   |
-| `* * *` | user                                       | delete an applicant from the system  | remove entries that I no longer need.                                        |
-| `* * *` | user                                       | search for an applicant in the system | access details of the applicant without having to go through the entire list. |
-| `* * *` | user                                       | list all applicants in the system    | monitor the application pool.                                                |
-| `* *` | new user                                   | view all available commands          | get familiarised with the system.                                            |
+| Priority | As a …​  | I want to …​                          | So that I can…​                                                               |
+|----------|----------|---------------------------------------|-------------------------------------------------------------------------------|
+| `* * *`  | user     | add an applicant to the system        | keep track of their application details for consideration.                    |
+| `* * *`  | user     | delete an applicant from the system   | remove entries that I no longer need.                                         |
+| `* * *`  | user     | search for an applicant in the system | access details of the applicant without having to go through the entire list. |
+| `* * *`  | user     | list all applicants in the system     | monitor the application pool.                                                 |
+| `* * *`  | new user | view all available commands           | get familiarised with the system.                                             |
 
 *{More to be added}*
 
@@ -289,8 +289,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 > Note: TA - Teaching Assistant
 
+<br>
 
-**Use case: List all TA applicants**
+**Use case: List all TA applicants in the system**
 
 **MSS**
 
@@ -304,11 +305,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list is empty
     * 2a1. TAlent Assistant™ feedbacks no TAs in system
 
-      Use case ends.
+    Use case ends.
 
 <hr>
 
-**Use case: Adds a TA**
+**Use case: Add a TA into the system**
 
 **MSS**
 
@@ -322,29 +323,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 3a. The given format is invalid.
-
     * 3a1. AddressBook shows an error message.
 
-      Use case resumes at step 2.
+    Use case resumes at step 2.
 
 <hr>
 
-**Use case: Delete a TA**
+**Use case: Delete a TA from the system**
 
 **MSS**
 
 1.  User requests to list TA applicants
-2.  TAlent Assistant™ shows the list of TA applicants
-3.  User requests to delete an existing TA from the list
+2.  TAlent Assistant™ displays the list of TA applicants
+3.  User requests to delete a specific TA in the list
 4.  TAlent Assistant™ deletes the TA from the list and displays the deleted entry
 
     Use case ends.
 
 **Extensions**
 
-* 3a. The given reference, i.e. Student Number, is invalid.
+* 3a. The list is empty.
+    
+    Use case ends
+* 3b. The given student number is invalid or does not exist in the system
 
-    * 3a1. TAlent Assistant™ shows an error message.
+    * 3a1. TAlent Assistant™ displays an error message
 
   Use case resumes at step 2.
 
@@ -378,7 +381,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list available commands
-2.  TAlent Assistant™ returns list of commands detailing example usage
+2.  TAlent Assistant™ returns list of available commands and example usages
 
     Use case ends.
 
@@ -401,7 +404,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 * **TA**: Teaching Assistant
 * **32/64-bit environment**: A system that uses a 32/64-bit processor
 * **System admin commands**: Commands that are used on the terminal interface
