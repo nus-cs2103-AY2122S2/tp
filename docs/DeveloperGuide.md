@@ -301,7 +301,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  User selects a profile in the list
 4.  UNite shows detail of the profile
 5.  User request to attach tag to the selected profile
-6. UNite adds tag to profile
+6.  UNite adds tag to profile
 
     Use case ends.
 
@@ -327,13 +327,48 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
       Use case resumes at step 5.
 
+
+**Use case: Edit an existing user profile**
+
+**MSS**
+
+1. User requests to list persons
+2. UNite shows a list of persons
+3. User selects a profile in the list
+4. UNite shows detail of the profile
+5. User request to edit the selected profile
+6. UNite shows panel for editing
+7. User make edits to the profile
+8. User saves the profile
+9. UNite updates and saves the profile
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 7a. User makes invalid edits
+
+  UNite prompts user with the invalid edit.
+
+  Use case repeats at step 7 until user edits are valid.
+
+* 8a. User cancels the editing
+
+  User case ends.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3. Should not require internet connection
+4. All operations should be completed within 1 second
+5. Should be intuitive for new user to navigate
 
 *{More to be added}*
 

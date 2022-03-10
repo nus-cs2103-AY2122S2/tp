@@ -32,6 +32,22 @@ public class Tag {
         return test.matches(VALIDATION_REGEX);
     }
 
+    public String getTagName() {
+        return tagName;
+    }
+    /**
+     * Returns true if both tags have the same description.
+     * This defines a weaker notion of equality between two persons.
+     */
+    public boolean isSameTag(Tag otherTag) {
+        if (otherTag == this) {
+            return true;
+        }
+
+        return otherTag != null
+                && otherTag.getTagName().equals(getTagName());
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
