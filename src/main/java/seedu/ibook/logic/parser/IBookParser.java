@@ -51,7 +51,7 @@ public class IBookParser {
             return new UpdateCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
-            if (arguments == null) {
+            if (arguments.isEmpty()) {
                 return new ListCommand();
             } else {
                 return new FindCommandParser().parse(arguments);
