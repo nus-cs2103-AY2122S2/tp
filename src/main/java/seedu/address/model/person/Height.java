@@ -6,7 +6,7 @@ package seedu.address.model.person;
  */
 public class Height {
 
-    String height;
+    private String height;
 
     /**
      * Constructs a {@code Height}.

@@ -5,7 +5,7 @@ package seedu.address.model.person;
  * Currently hard coded - to be further developed.
  */
 public class Age {
-    String age;
+    private String age;
 
     /**
      * Constructs a {@code Age}.

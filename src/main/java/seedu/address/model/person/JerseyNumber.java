@@ -5,7 +5,8 @@ package seedu.address.model.person;
  * Currently hard coded - to be further developed.
  */
 public class JerseyNumber {
-    String jerseyNumber;
+
+    private String jerseyNumber;
 
     /**
      * Constructs a {@code JerseyNumber}.

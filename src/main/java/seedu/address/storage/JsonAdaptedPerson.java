@@ -49,7 +49,7 @@ class JsonAdaptedPerson {
         this.phone = phone;
         this.email = email;
         this.age = age;
-        this.height= height;
+        this.height = height;
         this.jerseyNumber = jerseyNumber;
         this.weight = weight;
         if (tagged != null) {

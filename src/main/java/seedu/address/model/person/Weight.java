@@ -5,7 +5,8 @@ package seedu.address.model.person;
  * Currently hard coded - to be further developed.
  */
 public class Weight {
-    String weight;
+
+    private String weight;
 
     /**
      * Constructs a {@code Weight}.
