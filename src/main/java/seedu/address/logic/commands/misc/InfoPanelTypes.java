@@ -4,7 +4,7 @@ package seedu.address.logic.commands.misc;
  * Enumerator representing the different types of InfoPanels, used in {@code CommandResult}
  */
 public enum InfoPanelTypes {
-    PERSON("Person Info Panel"),
+    STUDENT("Student Info Panel"),
     LESSON("Lesson Info Panel");
 
     private final String str;

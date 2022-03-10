@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 
 /**
  * Represents a Lesson in the Lesson book.
@@ -20,7 +20,7 @@ public abstract class Lesson {
     private final LessonAddress address;
 
     // Data fields
-    private final List<Person> assignedStudents;
+    private final List<Student> assignedStudents;
 
     /**
      * Every field must be present and not null.
@@ -79,7 +79,7 @@ public abstract class Lesson {
         return address;
     }
 
-    public List<Person> getAssignedStudents() {
+    public List<Student> getAssignedStudents() {
         return assignedStudents;
     }
 
@@ -94,7 +94,7 @@ public abstract class Lesson {
     public abstract DateTimeSlot getTimeSlot();
 
     /**
-     * Adds a given Person to the list of students assigned to this lesson.
+     * Adds a given Student to the list of students assigned to this lesson.
      */
-    public abstract void addStudent(Person person);
+    public abstract void addStudent(Student student);
 }

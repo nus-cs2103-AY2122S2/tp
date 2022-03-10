@@ -6,19 +6,19 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddLessonCommand;
+import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteLessonCommand;
+import seedu.address.logic.commands.DeleteStudentCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ViewLessonInfoCommand;
-import seedu.address.logic.commands.ViewPersonInfoCommand;
+import seedu.address.logic.commands.ViewStudentInfoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -48,14 +48,14 @@ public class TeachWhatParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+        case AddStudentCommand.COMMAND_WORD:
+            return new AddStudentCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+        case DeleteStudentCommand.COMMAND_WORD:
+            return new DeleteStudentCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
@@ -72,8 +72,8 @@ public class TeachWhatParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
-        case ViewPersonInfoCommand.COMMAND_WORD:
-            return new ViewPersonInfoCommandParser().parse(arguments);
+        case ViewStudentInfoCommand.COMMAND_WORD:
+            return new ViewStudentInfoCommandParser().parse(arguments);
 
         case ViewLessonInfoCommand.COMMAND_WORD:
             return new ViewLessonInfoCommandParser().parse(arguments);
