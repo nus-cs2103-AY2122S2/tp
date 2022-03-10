@@ -1,7 +1,8 @@
 package seedu.address.model.person;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.util.Objects;
 
 /**
  * Represents a Person's phone number in the address book.
@@ -21,9 +22,12 @@ public class Phone {
      * @param phone A valid phone number.
      */
     public Phone(String phone) {
-        requireNonNull(phone);
-        checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
-        value = phone;
+        if (phone == null) {
+            value = null;
+        } else {
+            checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
+            value = phone;
+        }
     }
 
     /**
@@ -40,9 +44,19 @@ public class Phone {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof Phone // instanceof handles nulls
-                && value.equals(((Phone) other).value)); // state check
+        if (other == this) {
+            return true;
+        } else if (other instanceof Phone) {
+            if (value == null) {
+                return Objects.isNull(((Phone) other).value);
+            } else if (Objects.isNull(((Phone) other).value)) {
+                return false;
+            } else {
+                return value.equals(((Phone) other).value);
+            }
+        } else {
+            return false;
+        }
     }
 
     @Override
