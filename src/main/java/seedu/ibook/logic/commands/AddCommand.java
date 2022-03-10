@@ -34,7 +34,7 @@ public class AddCommand extends Command {
             + PREFIX_DESCRIPTION + "Very Tasty";
 
     public static final String MESSAGE_SUCCESS = "New product added: %1$s";
-
+    public static final String MESSAGE_DUPLICATE_PRODUCT = "This product already exists in the ibook.";
 
     private final Product toAdd;
 
@@ -49,6 +49,10 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        if (model.hasProduct(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PRODUCT);
+        }
 
         model.addProduct(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));

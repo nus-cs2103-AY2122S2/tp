@@ -1,15 +1,14 @@
 package seedu.ibook.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-/*
+
 import java.util.List;
 
 import seedu.ibook.commons.core.Messages;
- */
 import seedu.ibook.commons.core.index.Index;
 import seedu.ibook.logic.commands.exceptions.CommandException;
 import seedu.ibook.model.Model;
-//import seedu.ibook.model.product.Product;
+import seedu.ibook.model.product.Product;
 
 /**
  * Deletes a person identified using it's displayed index from the ibook.
@@ -23,7 +22,7 @@ public class DeleteCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Product: %1$s";
+    public static final String MESSAGE_DELETE_PRODUCT_SUCCESS = "Deleted Product: %1$s";
 
     private final Index targetIndex;
 
@@ -34,19 +33,16 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        /*
-        List<Product> lastShownList = model.getFilteredPersonList();
+
+        List<Product> lastShownList = model.getFilteredProductList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_PRODUCT_DISPLAYED_INDEX);
         }
 
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
-
-         */
-        return new CommandResult(null);
+        Product personToDelete = lastShownList.get(targetIndex.getZeroBased());
+        model.deleteProduct(personToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_PRODUCT_SUCCESS, personToDelete));
     }
 
     @Override
