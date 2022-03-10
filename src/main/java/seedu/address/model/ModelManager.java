@@ -42,6 +42,17 @@ public class ModelManager implements Model {
         eventList = this.eventBook.getEventList();
     }
 
+    public static boolean isEventDataInSync(ReadOnlyAddressBook readOnlyAddressBook, ReadOnlyEventBook readOnlyEventBook) {
+        ObservableList<Event> eventList = readOnlyEventBook.getEventList();
+        AddressBook addressBook = new AddressBook(readOnlyAddressBook);
+        for (Event event : eventList) {
+            if (!event.areFriendNamesValid(addressBook)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */

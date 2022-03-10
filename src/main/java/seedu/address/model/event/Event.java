@@ -145,7 +145,7 @@ public class Event {
         Set<Name> friendNames = getFriendNames();
         if (!friendNames.isEmpty()) {
             builder.append("; Friends: ");
-            friendNames.forEach(builder::append);
+            friendNames.forEach(name -> builder.append(name + " "));
         }
         return builder.toString();
     }

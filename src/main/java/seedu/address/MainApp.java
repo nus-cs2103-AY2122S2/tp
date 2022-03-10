@@ -11,6 +11,7 @@ import seedu.address.commons.core.Config;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
 import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
@@ -110,7 +111,10 @@ public class MainApp extends Application {
             logger.warning("Problem while reading from the file. Will be starting with an empty EventBook");
             initialEventBookData = new EventBook();
         }
-
+        if (!ModelManager.isEventDataInSync(initialAddressBookData, initialEventBookData)) {
+            logger.warning("Data file has invalid values. Will be starting with an empty EventBook");
+            initialEventBookData = new EventBook();
+        }
         return new ModelManager(initialAddressBookData, initialEventBookData, userPrefs);
     }
 

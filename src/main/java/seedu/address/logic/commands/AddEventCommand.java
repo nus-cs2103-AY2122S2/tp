@@ -16,6 +16,7 @@ import seedu.address.model.event.Event;
 public class AddEventCommand extends Command {
 
     public static final String COMMAND_WORD = "addevent";
+    public static final String MESSAGE_EVENT_FRIENDS_INVALID = "An event contains friend names that do not exist!";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to the event book. "
             + "Parameters: "
@@ -32,7 +33,6 @@ public class AddEventCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New event added: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the event book!";
-    public static final String MESSAGE_EVENT_FRIENDS_INVALID = "This event contains friend names that do not exist!";
 
     private final Event toAdd;
 
