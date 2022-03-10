@@ -10,13 +10,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class GroupName {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Group names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Group name can take any values, and it should not be blank";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "[^\\s].*";
 
     public final String groupName;
 
