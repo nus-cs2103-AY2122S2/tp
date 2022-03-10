@@ -63,7 +63,8 @@ class JsonAdaptedCompany {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        roles.addAll(source.getRoleManager().getFilteredRoleList().stream()
+        roles.addAll(source.getRoleManager().getRoleList()
+                .getRoles().stream()
                 .map(JsonAdaptedRole::new)
                 .collect(Collectors.toList()));
     }
