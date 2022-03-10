@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -22,6 +23,7 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final EnrolledLessons enrolledLessons;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -34,6 +36,7 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.enrolledLessons = new EnrolledLessons();
     }
 
     public Name getName() {
@@ -50,6 +53,14 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public EnrolledLessons getEnrolledLessons() {
+        return enrolledLessons;
+    }
+
+    public boolean assignLesson(Lesson lesson) {
+        return enrolledLessons.addLesson(lesson);
     }
 
     /**

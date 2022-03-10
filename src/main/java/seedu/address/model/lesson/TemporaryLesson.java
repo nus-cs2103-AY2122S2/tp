@@ -39,14 +39,6 @@ public class TemporaryLesson extends Lesson {
     }
 
     /**
-     * Adds a given Person to the list of students assigned to this lesson.
-     */
-    @Override
-    public void addStudent(Person person) {
-        this.getAssignedStudents().add(person);
-    }
-
-    /**
      * Returns true if both lessons have the same identity and data fields.
      */
     @Override

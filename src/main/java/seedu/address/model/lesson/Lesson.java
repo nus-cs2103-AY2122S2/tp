@@ -20,7 +20,7 @@ public abstract class Lesson {
     private final LessonAddress address;
 
     // Data fields
-    private final List<Person> assignedStudents;
+    private final EnrolledStudents enrolledStudents;
 
     /**
      * Every field must be present and not null.
@@ -30,7 +30,7 @@ public abstract class Lesson {
         this.name = name;
         this.subject = subject;
         this.address = address;
-        this.assignedStudents = new ArrayList<>();
+        this.enrolledStudents = new EnrolledStudents();
     }
 
     /**
@@ -79,8 +79,12 @@ public abstract class Lesson {
         return address;
     }
 
-    public List<Person> getAssignedStudents() {
-        return assignedStudents;
+    public EnrolledStudents getEnrolledStudents() {
+        return enrolledStudents;
+    }
+
+    public boolean assignStudent(Person student) {
+        return enrolledStudents.addStudent(student);
     }
 
     /**
@@ -92,9 +96,4 @@ public abstract class Lesson {
      * Returns the date and time that the lesson starts and ends.
      */
     public abstract DateTimeSlot getTimeSlot();
-
-    /**
-     * Adds a given Person to the list of students assigned to this lesson.
-     */
-    public abstract void addStudent(Person person);
 }
