@@ -10,10 +10,10 @@ import java.util.Set;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Applicant in the address book.
+ * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Applicant {
+public class Person {
 
     // Identity fields
     private final Name name;
@@ -27,7 +27,7 @@ public class Applicant {
     /**
      * Every field must be present and not null.
      */
-    public Applicant(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -64,13 +64,13 @@ public class Applicant {
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
-    public boolean isSamePerson(Applicant otherApplicant) {
-        if (otherApplicant == this) {
+    public boolean isSamePerson(Person otherPerson) {
+        if (otherPerson == this) {
             return true;
         }
 
-        return otherApplicant != null
-                && otherApplicant.getName().equals(getName());
+        return otherPerson != null
+                && otherPerson.getName().equals(getName());
     }
 
     /**
@@ -83,16 +83,16 @@ public class Applicant {
             return true;
         }
 
-        if (!(other instanceof Applicant)) {
+        if (!(other instanceof Person)) {
             return false;
         }
 
-        Applicant otherApplicant = (Applicant) other;
-        return otherApplicant.getName().equals(getName())
-                && otherApplicant.getPhone().equals(getPhone())
-                && otherApplicant.getEmail().equals(getEmail())
-                && otherApplicant.getAddress().equals(getAddress())
-                && otherApplicant.getTags().equals(getTags());
+        Person otherPerson = (Person) other;
+        return otherPerson.getName().equals(getName())
+                && otherPerson.getPhone().equals(getPhone())
+                && otherPerson.getEmail().equals(getEmail())
+                && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getTags().equals(getTags());
     }
 
     @Override
