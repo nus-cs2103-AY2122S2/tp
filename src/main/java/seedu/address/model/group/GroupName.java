@@ -67,7 +67,7 @@ public class GroupName {
         if (!(other instanceof GroupName)) {
             return false;
         }
-        
+
         // state check
         GroupName e = (GroupName) other;
         return groupName.equals(e.groupName);
