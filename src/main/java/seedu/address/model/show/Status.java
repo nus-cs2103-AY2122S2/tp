@@ -5,6 +5,9 @@ public enum Status {
     COMPLETED("completed"),
     WATCHING("watching");
 
+    public static final String MESSAGE_CONSTRAINTS =
+            "Status should only be either completed or watching!";
+
     private final String status;
 
     Status(String status) {
@@ -21,9 +24,15 @@ public enum Status {
      * @return true if the show status is completed.
      */
     public Boolean isCompleted() {
-        if (status.equals("completed")) {
-            return true;
-        }
-        return false;
+        return status.equals(COMPLETED);
+    }
+
+    /**
+     * Checks the status of the show.
+     * Returns true if a given string is a valid name.
+     */
+    public static boolean isValidStatus(String test) {
+        String uppercaseTest = test.toUpperCase();
+        return uppercaseTest.equals(COMPLETED.name()) || uppercaseTest.equals(WATCHING.name());
     }
 }
