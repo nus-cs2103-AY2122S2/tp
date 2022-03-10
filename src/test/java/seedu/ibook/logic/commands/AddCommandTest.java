@@ -41,23 +41,23 @@ public class AddCommandTest {
 
     @Test
     public void equals() {
-        Product alice = new ProductBuilder().withName("Alice").build();
-        Product bob = new ProductBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        Product productA = new ProductBuilder().withName("Product A").build();
+        Product productB = new ProductBuilder().withName("Product B").build();
+        AddCommand addProductACommand = new AddCommand(productA);
+        AddCommand addProductBCommand = new AddCommand(productB);
 
         // same object -> returns true
-        assertEquals(addAliceCommand, addAliceCommand);
+        assertEquals(addProductACommand, addProductACommand);
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertEquals(addAliceCommand, addAliceCommandCopy);
+        AddCommand addProductACommandCopy = new AddCommand(productA);
+        assertEquals(addProductACommand, addProductACommandCopy);
 
         // null -> returns false
-        assertNotEquals(null, addAliceCommand);
+        assertNotEquals(null, addProductACommand);
 
         // different product -> returns false
-        assertNotEquals(addAliceCommand, addBobCommand);
+        assertNotEquals(addProductACommand, addProductBCommand);
     }
 
     /**
