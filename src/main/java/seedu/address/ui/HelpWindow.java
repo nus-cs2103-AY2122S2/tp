@@ -101,32 +101,15 @@ public class HelpWindow extends UiPart<Stage> {
      * Copies the URL to the user guide to the clipboard.
      */
     @FXML
-    private void copyUrl() throws URISyntaxException {
-        final Clipboard clipboard = Clipboard.getSystemClipboard();
-        final ClipboardContent url = new ClipboardContent();
-        url.putString(USERGUIDE_URL);
-        clipboard.setContent(url);
-        openWebpage(USERGUIDE_URL);
-    }
-
-    /**
-     * Opens the URL given in the user's default browser.
-     *
-     * @param url the url of the link provided.
-     * @return boolean to show if link is successfully opened.
-     * @throws URISyntaxException when URI cannot be opened.
-     */
-    public boolean openWebpage(String url) throws URISyntaxException {
-        URI link = new URI(url);
+    private void goToUrl() throws URISyntaxException {
+        URI link = new URI(USERGUIDE_URL);
         Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
         if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
             try {
                 desktop.browse(link);
-                return true;
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        return false;
     }
 }
