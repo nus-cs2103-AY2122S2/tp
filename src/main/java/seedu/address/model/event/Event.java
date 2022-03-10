@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-//import seedu.address.model.person.Description;
+import seedu.address.model.person.Description;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
@@ -23,7 +23,7 @@ public class Event {
     private final DateTime dateTime;
 
     // Data fields
-    private final String description; // optional field
+    private final Description description; // optional field
     private final Set<Person> friends = new HashSet<>();
 
     /**
@@ -34,7 +34,7 @@ public class Event {
      * @param dateTime    date and time of event
      * @param friends     set of friends linked with the event.
      */
-    public Event(Name name, DateTime dateTime, String description, Set<Person> friends) {
+    public Event(Name name, DateTime dateTime, Description description, Set<Person> friends) {
         requireAllNonNull(name, dateTime, description, friends);
         this.name = name;
         this.dateTime = dateTime;
@@ -54,7 +54,7 @@ public class Event {
         return dateTime;
     }
 
-    public String getDescription() {
+    public Description getDescription() {
         return description;
     }
 
