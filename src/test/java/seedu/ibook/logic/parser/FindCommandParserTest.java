@@ -4,8 +4,6 @@ import static seedu.ibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ibook.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.ibook.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
-import java.time.LocalDate;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.ibook.logic.commands.FindCommand;
@@ -34,9 +32,9 @@ public class FindCommandParserTest {
                 new FindCommand(new ProductFulfillsFiltersPredicate(new Product(
                         new Name("Maggi"),
                         new Category("noodles"),
-                        new ExpiryDate(LocalDate.parse("2022-01-01")),
+                        new ExpiryDate("2022-01-01"),
                         new Description("tasty"),
-                        new Price(3.00))));
+                        new Price("3.00"))));
         assertParseSuccess(parser, " n: Maggi c: noodles e: 2022-01-01 d: tasty p: 3.00", expectedFindCommand);
 
         // with null values
@@ -44,9 +42,9 @@ public class FindCommandParserTest {
                 new FindCommand(new ProductFulfillsFiltersPredicate(new Product (
                         new Name("Maggi"),
                         Category.WILDCATEGORY,
-                        new ExpiryDate(LocalDate.parse("2022-01-01")),
+                        new ExpiryDate("2022-01-01"),
                         Description.WILDDESCRIPTION,
-                        new Price(3.00)))
+                        new Price("3.00")))
                 );
 
         assertParseSuccess(parser, " n: Maggi e: 2022-01-01 p: 3.00", expectedFindCommand2);

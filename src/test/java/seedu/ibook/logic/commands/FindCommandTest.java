@@ -1,11 +1,21 @@
 package seedu.ibook.logic.commands;
 
-//import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.ibook.commons.core.Messages.MESSAGE_PRODUCTS_LISTED_OVERVIEW;
+import static seedu.ibook.logic.commands.CommandTestUtil.VALID_CATEGORY_A;
+import static seedu.ibook.logic.commands.CommandTestUtil.VALID_DESCRIPTION_A;
+import static seedu.ibook.logic.commands.CommandTestUtil.VALID_EXPIRY_DATE_A;
+import static seedu.ibook.logic.commands.CommandTestUtil.VALID_NAME_A;
+import static seedu.ibook.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.ibook.testutil.TypicalProducts.KAYA_BREAD;
+import static seedu.ibook.testutil.TypicalProducts.PRODUCT_A;
+import static seedu.ibook.testutil.TypicalProducts.PRODUCT_B;
 import static seedu.ibook.testutil.TypicalProducts.getTypicalIBook;
 
-import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,6 +30,7 @@ import seedu.ibook.model.product.Price;
 import seedu.ibook.model.product.Product;
 import seedu.ibook.model.product.ProductFulfillsFiltersPredicate;
 
+
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
@@ -28,22 +39,25 @@ public class FindCommandTest {
     private Model model = new ModelManager(getTypicalIBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalIBook(), new UserPrefs());
 
+    private ProductFulfillsFiltersPredicate firstPredicate =
+            new ProductFulfillsFiltersPredicate(PRODUCT_A);
+    private ProductFulfillsFiltersPredicate secondPredicate =
+            new ProductFulfillsFiltersPredicate(PRODUCT_B);
+
+    private ProductFulfillsFiltersPredicate thirdPredicate =
+            new ProductFulfillsFiltersPredicate(new Product(
+                    new Name(VALID_NAME_A),
+                    new Category(VALID_CATEGORY_A),
+                    new ExpiryDate(VALID_EXPIRY_DATE_A),
+                    new Description(VALID_DESCRIPTION_A),
+                    Price.WILDPRICE));
+
+    private ProductFulfillsFiltersPredicate kayaPredicate =
+            new ProductFulfillsFiltersPredicate(KAYA_BREAD);
+
     @Test
     public void equals() {
-        ProductFulfillsFiltersPredicate firstPredicate =
-                new ProductFulfillsFiltersPredicate(new Product (
-                        new Name("Maggi"),
-                        new Category("noodles"),
-                        new ExpiryDate(LocalDate.parse("2020-01-01")),
-                        new Description("tasty"),
-                        new Price(3.00)));
-        ProductFulfillsFiltersPredicate secondPredicate =
-                new ProductFulfillsFiltersPredicate(new Product(
-                        new Name("Maggi"),
-                        new Category("noodles"),
-                        new ExpiryDate(LocalDate.parse("2020-01-01")),
-                        new Description("tasty"),
-                        new Price(4.00)));
+
 
         FindCommand findFirstCommand = new FindCommand(firstPredicate);
         FindCommand findSecondCommand = new FindCommand(secondPredicate);
@@ -65,16 +79,27 @@ public class FindCommandTest {
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 
-    /*
     @Test
-    public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        NameContainsKeywordsPredicate predicate = preparePredicate(" ");
+    public void execute_noKeywords_noProductFound() {
+        String expectedMessage = String.format(MESSAGE_PRODUCTS_LISTED_OVERVIEW, 0);
+        ProductFulfillsFiltersPredicate predicate = firstPredicate;
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        expectedModel.updateFilteredProductList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.EMPTY_LIST, model.getFilteredProductList());
     }
+
+    @Test
+    public void execute_oneKeyword_oneProductFound() {
+        String expectedMessage = String.format(MESSAGE_PRODUCTS_LISTED_OVERVIEW, 1);
+        ProductFulfillsFiltersPredicate predicate = kayaPredicate;
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredProductList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(KAYA_BREAD), model.getFilteredProductList());
+    }
+
+    /*
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
