@@ -27,14 +27,14 @@ import seedu.address.testutil.PetBuilder;
 
 class DietCommandTest {
 
-    private static final String REMARK_STUB = "Some remark";
+    private static final String DIET_STUB = "Some diet";
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_addDietUnfilteredList_success() {
         Pet firstPerson = model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
-        Pet editedPerson = new PetBuilder(firstPerson).withDiet(REMARK_STUB).build();
+        Pet editedPerson = new PetBuilder(firstPerson).withDiet(DIET_STUB).build();
 
         DietCommand dietCommand = new DietCommand(INDEX_FIRST_PET, new Diet(editedPerson.getDiet().value));
 
@@ -68,7 +68,7 @@ class DietCommandTest {
 
         Pet firstPerson = model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
         Pet editedPerson = new PetBuilder(model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased()))
-                .withDiet(REMARK_STUB).build();
+                .withDiet(DIET_STUB).build();
 
         DietCommand dietCommand = new DietCommand(INDEX_FIRST_PET, new Diet(editedPerson.getDiet().value));
 

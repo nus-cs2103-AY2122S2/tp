@@ -55,6 +55,7 @@ public class PetCard extends UiPart<Region> {
         ownerName.setText(pet.getOwnerName().value);
         phone.setText(pet.getPhone().value);
         address.setText(pet.getAddress().value);
+        diet.setText(pet.getDiet().value);
         pet.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

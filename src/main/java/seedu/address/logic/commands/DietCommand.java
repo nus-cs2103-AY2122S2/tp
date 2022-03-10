@@ -25,7 +25,7 @@ public class DietCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "d/ [diet]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "d/ Likes to swim.";
+            + "d/ No seafood.";
 
     public static final String MESSAGE_ADD_DIET_SUCCESS = "Added diet to Pet: %1$s";
     public static final String MESSAGE_DELETE_DIET_SUCCESS = "Removed diet from Pet: %1$s";
