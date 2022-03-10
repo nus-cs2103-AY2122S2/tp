@@ -76,6 +76,12 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /**
+     * Toggles the Favourite status of the given person {@code personToFavourite}.
+     * {@code personToFavourite} must exist in the address book.
+     */
+    void setFavouriteStatus(Person personToFavourite);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 

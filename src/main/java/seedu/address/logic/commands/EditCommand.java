@@ -21,6 +21,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Favourite;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -97,11 +98,13 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
+        //Favourite status for a client will remain unchanged when edited if not, the FavouriteCommand is redundant.
+        Favourite noChangeFavourite = editPersonDescriptor.getFavourite().orElse(personToEdit.getFavourite());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Optional<Property> updatedProperty = personToEdit.getProperty();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedProperty, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail,
+                noChangeFavourite, updatedAddress, updatedProperty, updatedTags);
     }
 
     @Override
@@ -130,6 +133,7 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
+        private Favourite favourite;
         private Address address;
         private Set<Tag> tags;
 
@@ -143,6 +147,7 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
+            setFavourite(toCopy.favourite);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
         }
@@ -176,6 +181,14 @@ public class EditCommand extends Command {
 
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
+        }
+
+        public void setFavourite(Favourite favourite) {
+            this.favourite = favourite;
+        }
+
+        public Optional<Favourite> getFavourite() {
+            return Optional.ofNullable(favourite);
         }
 
         public void setAddress(Address address) {
