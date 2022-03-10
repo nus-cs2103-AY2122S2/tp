@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.awt.Desktop;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.logging.Logger;
@@ -100,16 +101,11 @@ public class HelpWindow extends UiPart<Stage> {
      * @return
      */
     @FXML
-    private boolean goToUrl() throws URISyntaxException {
-        URI link = new URI(USERGUIDE_URL);
+    private boolean goToUrl() throws URISyntaxException, IOException {
         Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
         if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
-            try {
-                desktop.browse(link);
-                return true;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            desktop.browse(URI.create(USERGUIDE_URL));
+            return true;
         }
         return false;
     }
