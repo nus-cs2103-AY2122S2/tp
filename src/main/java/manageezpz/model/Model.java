@@ -15,6 +15,8 @@ import manageezpz.model.task.Todo;
  * The API of the Model component.
  */
 public interface Model {
+    /** {@code Predicate} that always evaluate to true to show all tasks */
+    Predicate<Task> PREDICATE_SHOW_ALL_TASKS = unused -> true;
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
@@ -91,9 +93,6 @@ public interface Model {
 
 
     //=========== ManageEZPZ (Tasks) ==================================================================================
-
-    /** {@code Predicate} that always evaluate to true to show all tasks */
-    Predicate<Task> PREDICATE_SHOW_ALL_TASKS = unused -> true;
 
     /**
      * Deletes the given task.

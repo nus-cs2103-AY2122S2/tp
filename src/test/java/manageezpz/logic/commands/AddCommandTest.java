@@ -158,10 +158,14 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addTodo(Todo todo) { throw new AssertionError("This method should not be called."); }
+        public void addTodo(Todo todo) {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
-        public void addEvent(Event event) { throw new AssertionError("This method should not be called."); }
+        public void addEvent(Event event) {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public void addDeadline(Deadline deadline) {

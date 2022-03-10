@@ -3,8 +3,8 @@ package manageezpz.model;
 import static manageezpz.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static manageezpz.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static manageezpz.testutil.Assert.assertThrows;
-import static manageezpz.testutil.TypicalPersons.ALICE;
 import static manageezpz.testutil.TypcialTasks.READ_BOOK;
+import static manageezpz.testutil.TypicalPersons.ALICE;
 import static manageezpz.testutil.TypicalPersons.getTypicalAddressBook;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -24,7 +24,6 @@ import manageezpz.model.person.exceptions.DuplicatePersonException;
 import manageezpz.model.task.Task;
 import manageezpz.model.task.exceptions.DuplicateTaskException;
 import manageezpz.testutil.PersonBuilder;
-import manageezpz.testutil.TaskBuilder;
 
 public class AddressBookTest {
 

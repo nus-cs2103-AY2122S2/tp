@@ -1,6 +1,6 @@
 package manageezpz.model.task;
 
-public class Event extends Task{
+public class Event extends Task {
     /**
      * Constructor for the Task class.
      *

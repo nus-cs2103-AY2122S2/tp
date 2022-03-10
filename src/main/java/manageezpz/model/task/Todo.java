@@ -1,6 +1,6 @@
 package manageezpz.model.task;
 
-public class Todo extends Task{
+public class Todo extends Task {
     /**
      * Constructor for the Task class.
      *
