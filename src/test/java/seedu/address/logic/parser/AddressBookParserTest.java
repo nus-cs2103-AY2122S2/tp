@@ -4,6 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.LOG_DESCRIPTION_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.LOG_TITLE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LOG_DESCRIPTION;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LOG_TITLE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -13,7 +17,9 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddLogCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -86,6 +92,24 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_addLog() throws Exception {
+        Index targetIndex = INDEX_FIRST_PERSON;
+
+        // command
+        String validAddLogCommand = AddLogCommand.COMMAND_WORD + " "
+                + targetIndex.getOneBased() + LOG_TITLE_DESC + LOG_DESCRIPTION_DESC;
+
+        // expected command
+        AddLogCommand.AddLogDescriptor descriptor = new AddLogCommand.AddLogDescriptor();
+        descriptor.setNewTitle(VALID_LOG_TITLE);
+        descriptor.setNewDescription(VALID_LOG_DESCRIPTION);
+        AddLogCommand command = new AddLogCommand(INDEX_FIRST_PERSON, descriptor);
+
+        assertEquals(command, parser.parseCommand(validAddLogCommand));
+        assertTrue(parser.parseCommand(validAddLogCommand) instanceof AddLogCommand);
     }
 
     @Test
