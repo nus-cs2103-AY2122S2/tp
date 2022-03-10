@@ -89,7 +89,7 @@ public class LessonBook implements ReadOnlyLessonBook {
      * Removes {@code key} from this {@code LessonBook}.
      * {@code key} must exist in the lesson book.
      */
-    public void removeLesson(Lesson key) {
+    public void deleteLesson(Lesson key) {
         lessons.remove(key);
     }
 

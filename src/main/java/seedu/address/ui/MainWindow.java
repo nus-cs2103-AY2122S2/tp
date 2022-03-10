@@ -139,6 +139,16 @@ public class MainWindow extends UiPart<Stage> {
         updateAndPopulateLessonList();
         updateAndPopulatePersonList();
 
+        // Load first person in list
+        if (logic.getFilteredPersonList().size() > 0) {
+            Person tempPerson = logic.getFilteredPersonList().get(0);
+            tempPopulateInfoPanelWithPersonAndList(tempPerson, logic.getFilteredLessonList());
+        }
+
+        // Temporary lesson placeholder
+        //Lesson tempLesson = logic.getFilteredLessonList().get(0);
+        //tempPopulateInfoPanelWithLessonAndList(tempLesson, logic.getFilteredPersonList());
+
         // change tab accordingly
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
