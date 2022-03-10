@@ -2,25 +2,22 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LOG;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalLogs.SHORT_LOG;
 import static seedu.address.testutil.TypicalPersons.KAREN;
-import static seedu.address.testutil.TypicalPersons.MAVIS;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import seedu.address.commons.core.index.Index;
-
 import org.junit.jupiter.api.Test;
+
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Log;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
+
 
 /**
  * Contains integration tests (interaction with Model) and unit tests for
@@ -28,9 +25,9 @@ import seedu.address.testutil.PersonBuilder;
  */
 public class DeleteLogCommandTest {
 
-    private final String MESSAGE_SUCCESS = DeleteLogCommand.MESSAGE_DELETE_LOG_SUCCESS;
-    private final String MESSAGE_PERSON_NOT_FOUND = DeleteLogCommand.MESSAGE_PERSON_NOT_FOUND;
-    private final String MESSAGE_LOG_NOT_FOUND = DeleteLogCommand.MESSAGE_LOG_NOT_FOUND;
+    private static final String MESSAGE_SUCCESS = DeleteLogCommand.MESSAGE_DELETE_LOG_SUCCESS;
+    private static final String MESSAGE_PERSON_NOT_FOUND = DeleteLogCommand.MESSAGE_PERSON_NOT_FOUND;
+    private static final String MESSAGE_LOG_NOT_FOUND = DeleteLogCommand.MESSAGE_LOG_NOT_FOUND;
 
     // ===== UNIT TESTS =====
     @Test

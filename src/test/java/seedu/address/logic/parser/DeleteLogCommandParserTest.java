@@ -1,23 +1,24 @@
 package seedu.address.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.DeleteLogCommand;
-
 import static seedu.address.logic.parser.CliSyntax.FLAG_ALL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOG_INDEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.logic.parser.DeleteLogCommandParser.MESSAGE_INVALID_FORMAT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LOG;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.logic.parser.DeleteLogCommandParser.MESSAGE_INVALID_FORMAT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_LOG;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
+import org.junit.jupiter.api.Test;
+
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.DeleteLogCommand;
+
 public class DeleteLogCommandParserTest {
 
-    private final DeleteLogCommandParser parser = new DeleteLogCommandParser();
-    private final String MESSAGE_INVALID_INDEX = ParserUtil.MESSAGE_INVALID_INDEX;
+    private static final DeleteLogCommandParser parser = new DeleteLogCommandParser();
+    private static final String MESSAGE_INVALID_INDEX = ParserUtil.MESSAGE_INVALID_INDEX;
 
     @Test
     public void parse_invalidFormat_failure() {

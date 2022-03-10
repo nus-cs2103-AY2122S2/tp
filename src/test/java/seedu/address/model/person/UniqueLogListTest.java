@@ -1,14 +1,13 @@
 package seedu.address.model.person;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.model.person.exceptions.DuplicateLogException;
 import seedu.address.model.person.exceptions.LogNotFoundException;
-
-import static seedu.address.testutil.Assert.assertThrows;
 
 public class UniqueLogListTest {
 
@@ -92,7 +91,7 @@ public class UniqueLogListTest {
 
 
     @Test
-    public void setLog_validEdit_contains_returnsTrue() {
+    public void setLog_validEditContains_returnsTrue() {
         // target is inside, and edited log are identical
         Log target = new Log("target", "description");
         Log editedLog = new Log("target", "description");
@@ -134,7 +133,7 @@ public class UniqueLogListTest {
     }
 
     @Test
-    public void removeLog_valid_contains_returnsFalse() {
+    public void removeLog_validContains_returnsFalse() {
 
         Log target = new Log("not target", "description");
         UniqueLogList uniqueLogList = new UniqueLogList(); // initially empty

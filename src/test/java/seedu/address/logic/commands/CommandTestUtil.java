@@ -2,7 +2,13 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -51,7 +57,6 @@ public class CommandTestUtil {
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String LOG_TITLE_DESC = " " + PREFIX_TITLE + VALID_LOG_TITLE;
     public static final String LOG_TITLE_DESC_PRECEDING_SPACE = " " + PREFIX_TITLE + VALID_LOG_TITLE_PRECEDING_SPACE;
-    public static final String LOG_TITLE_DESC_PRECEDING_SPACE_TRIMMED = " " + PREFIX_TITLE + VALID_LOG_TITLE_PRECEDING_SPACE_TRIMMED;
     public static final String LOG_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION + VALID_LOG_DESCRIPTION;
     public static final String LOG_DESCRIPTION_DIFFERENT_DESC = " " + PREFIX_DESCRIPTION + VALID_LOG_DESCRIPTION_OTHER;
 

@@ -1,10 +1,10 @@
 package seedu.address.testutil;
 
-import seedu.address.model.person.Log;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import seedu.address.model.person.Log;
 
 public class TypicalLogs {
 
