@@ -125,9 +125,10 @@ public class ModelManager implements Model {
 
     @Override
     public void updateFilteredCompanyList(Predicate<Company> companyPredicate, Predicate<Role> rolePredicate) {
-        requireNonNull(companyPredicate);
-        filteredCompanies.setPredicate(companyPredicate);
+        requireAllNonNull(companyPredicate, rolePredicate);
+        filteredCompanies.setPredicate(PREDICATE_SHOW_ALL_COMPANIES);
         filteredCompanies.forEach(company -> company.getRoleManager().updateFilteredRoleList(rolePredicate));
+        filteredCompanies.setPredicate(companyPredicate);
     }
 
     @Override

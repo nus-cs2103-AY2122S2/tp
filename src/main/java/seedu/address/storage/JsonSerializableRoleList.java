@@ -37,7 +37,7 @@ class JsonSerializableRoleList {
      * @param source future changes to this will not affect the created {@code JsonSerializableRoleList}.
      */
     public JsonSerializableRoleList(ReadOnlyRoleList source) {
-        roles.addAll(source.getRoleList().stream().map(JsonAdaptedRole::new).collect(Collectors.toList()));
+        roles.addAll(source.getRoles().stream().map(JsonAdaptedRole::new).collect(Collectors.toList()));
     }
 
     /**
