@@ -28,13 +28,16 @@ public class ShowEventsCommandTests {
     }
 
     /**
-     * Checks whether Showevents exeucute properly
+     * Checks whether showevents executes properly.
      */
     @Test
     public void execute_showfriends_showsSameList() {
         assertCommandSuccess(new ShowEventsCommand(), model, ShowEventsCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
+    /**
+     * If model has no events but persons showevents should have an empty list.
+     */
     @Test
     public void execute_noevents_showsEmptyList() {
         Model noEventModel = new ModelManager(getTypicalAddressBook(), new EventBook(), new UserPrefs());
@@ -43,13 +46,5 @@ public class ShowEventsCommandTests {
         // Model has persons but no events, thus event list should be empty.
         assertFalse(noEventModel.getFilteredPersonList().isEmpty());
         assertTrue(noEventModel.getEventsList().isEmpty());
-    }
-
-    @Test
-    public void execute_noEntries_showsEmptyPersonEventLists() {
-        Model PersonEventModel = new ModelManager(getTypicalAddressBook(), new EventBook(), new UserPrefs());
-
-        // Should display the same Events list.
-        assertCommandSuccess(new ShowEventsCommand(), PersonEventModel, ShowEventsCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }
