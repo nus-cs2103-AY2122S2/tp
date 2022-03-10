@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.Set;
 
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.DateTime;
@@ -32,15 +31,22 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
 
         if (!argMultimap.arePrefixesPresent(PREFIX_NAME, PREFIX_DATETIME)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         DateTime dateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get());
-        Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
+
+        // Optional Fields
+        Description description;
+        if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
+            description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
+        } else {
+            description = ParserUtil.parseDescription(null);
+        }
         Set<Name> friendNames = ParserUtil.parseNames(argMultimap.getAllValues(PREFIX_FRIEND_NAME));
 
-        Event event = new Event(name, dateTime,description, friendNames);
+        Event event = new Event(name, dateTime, description, friendNames);
 
         return new AddEventCommand(event);
     }

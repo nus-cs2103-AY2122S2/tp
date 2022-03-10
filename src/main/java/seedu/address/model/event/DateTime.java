@@ -13,14 +13,14 @@ import java.time.format.DateTimeParseException;
  * Guarantees: immutable; is valid as declared in {@link #isValidDateTime(String)}
  */
 public class DateTime {
-    private static final DateTimeFormatter INPUT_FORMATTER =
-            DateTimeFormatter.ofPattern("d-M-yyyy Hmm");
-    private static final DateTimeFormatter OUTPUT_FORMATTER =
-            DateTimeFormatter.ofPattern("MMM d yyyy hh:mma");
     public static final String MESSAGE_CONSTRAINTS = "The date & time needs to be in the following format: "
             + "DD-MM-YYYY hhmm\n"
             + "Tip: 0s can be omitted where ambiguity will not be created.\n"
             + "e.g. 5-5-2021 instead of 05-05-2021 is a valid input.";
+    private static final DateTimeFormatter INPUT_FORMATTER =
+            DateTimeFormatter.ofPattern("d-M-yyyy Hmm");
+    private static final DateTimeFormatter OUTPUT_FORMATTER =
+            DateTimeFormatter.ofPattern("MMM d yyyy hh:mma");
 
     private final LocalDateTime value;
 
