@@ -10,7 +10,7 @@ public class StudentID {
     /*
      * The format of Student ID should be E followed by 7 digits without spacing.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alpha}][\\p{Digit}]{7}";
+    public static final String VALIDATION_REGEX = "E[\\p{Digit}]{7}";
 
     public final String studentID;
 
