@@ -12,17 +12,23 @@ public class DescriptionTest {
     @Test
     public void constructor_invalidDescription_throwsIllegalArgumentException() {
         String invalidDescription = "";
-        assertThrows(IllegalArgumentException.class, () -> new Address(invalidDescription));
+        assertThrows(IllegalArgumentException.class, () -> new Description(invalidDescription));
+    }
+
+    @Test
+    public void constructor_invalidDescription_emptySpaces_throwsIllegalArgumentException() {
+        String invalidDescription = " ";
+        assertThrows(IllegalArgumentException.class, () -> new Description(invalidDescription));
     }
 
     @Test
     public void isValidDescription() {
 
-        // invalid addresses
+        // invalid description
         assertFalse(Description.isValidDescription("")); // empty string
         assertFalse(Description.isValidDescription(" ")); // spaces only
 
-        // valid addresses
+        // valid description
         assertTrue(Description.isValidDescription("tE394 !!11    descrIptioe394~!"));
         assertTrue(Description.isValidDescription("-")); // one character
         assertTrue(Description.isValidDescription("this is going to be a looooooooooooooooooojjiïirjdorirth"
