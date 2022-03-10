@@ -322,8 +322,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 3a. The given format is invalid.
-    * 3a1. AddressBook shows an error message.
+* 3a. The given format is invalid
+    * 3a1. TAlent Assistant™ shows an error message
 
     Use case resumes at step 2.
 
@@ -342,12 +342,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 3a. The list is empty.
+* 3a. The list is empty
     
-    Use case ends
+    Use case ends.
 * 3b. The given student number is invalid or does not exist in the system
 
-    * 3a1. TAlent Assistant™ displays an error message
+    * 3b1. TAlent Assistant™ displays an error message
 
   Use case resumes at step 2.
 
