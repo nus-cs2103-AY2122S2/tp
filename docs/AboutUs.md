@@ -23,7 +23,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/howardwhw2.png" width="200px">
 
-[[github](http://github.com/howardwhw2)] 
+[[github](http://github.com/howardwhw2)]
 [[portfolio](team/howardwhw2.md)]
 
 * Role: Developer
@@ -33,7 +33,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/ashuh.png" width="200px">
 
-[[github](http://github.com/ashuh)] 
+[[github](http://github.com/ashuh)]
 [[portfolio](team/ashuh.md)]
 
 * Role: Developer
