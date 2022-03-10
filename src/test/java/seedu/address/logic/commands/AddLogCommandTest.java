@@ -125,7 +125,6 @@ public class AddLogCommandTest {
         descriptor.setNewDescription(description);
         command = new AddLogCommand(targetIndex, descriptor);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-
     }
 
     @Test

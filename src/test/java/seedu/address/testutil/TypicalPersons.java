@@ -63,7 +63,7 @@ public class TypicalPersons {
 
     public static final Person MAVIS = new PersonBuilder().withName("Mavis Tan").withPhone("96382727")
             .withEmail("mavis.tan@example.com").withAddress("king st.")
-            .withLogs(TypicalLogs.getTypicalLogs()).build(); // single log
+            .withLogs(TypicalLogs.getTypicalLogs()).build(); // 3 logs
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)

@@ -77,7 +77,7 @@ public class AddLogCommand extends Command {
 
     /**
      * Creates a {@code Person} with the details of {@code personToEdit}, with logs modified by
-     * {@code editPersonLogsDescriptor}.
+     * {@code addLogDescriptor}.
      *
      * @throws CommandException if {@code addLogDescriptor} results in an invalid {@code Log}
      *                          being created.

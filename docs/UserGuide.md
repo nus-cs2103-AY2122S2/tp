@@ -164,14 +164,14 @@ Examples:
 
 Deletes an existing log of an existing friend in Amigos.
 
-Format: `deletelog n/[NAME] id/[LOG_INDEX] -a`
+Format: `deletelog INDEX id/LOG_INDEX -a`
 
-* The `NAME` field is compulsory.
-* If `NAME` is provided as well as a `-a` flag, then all logs of tht person will
+* The `INDEX` field is compulsory.
+* If `INDEX` is provided as well as a `-a` flag, then all logs of tht person will
   be deleted.
 * If `LOG_INDEX` is not provided and there is no `-a` flat, then all logs, each with an
   accompanying index, will allow a user to choose one log to delete.
-* If no `NAME` or `LOG_INDEX` is provided, but `-a` is provided, then all possible logs
+* If no `INDEX` or `LOG_INDEX` is provided, but `-a` is provided, then all possible logs
   of all friends will be deleted.
 
 ## Event Management [Coming Soon!]
