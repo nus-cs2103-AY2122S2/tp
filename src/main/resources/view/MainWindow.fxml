@@ -73,6 +73,11 @@
                   <String fx:value="background" />
                </styleClass>
             </TabPane>
+            <StackPane fx:id="statusbarPlaceholder" layoutX="10.0" layoutY="45.0" styleClass="pane-with-border">
+               <padding>
+                  <Insets bottom="5" left="10" right="10" top="5" />
+               </padding>
+            </StackPane>
       </VBox>
     </Scene>
   </scene>
