@@ -7,19 +7,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EDUCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERNSHIP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Cca;
-import seedu.address.model.person.Education;
-import seedu.address.model.person.Internship;
-import seedu.address.model.person.Module;
 import seedu.address.model.tag.Tag;
 
 
@@ -45,50 +38,11 @@ public class TagCommandParser implements Parser<TagCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE), ive);
         }
 
-        String education = argMultimap.getValue(PREFIX_EDUCATION).orElse("");
-        String cca = argMultimap.getValue(PREFIX_CCA).orElse("");
-        String internship = argMultimap.getValue(PREFIX_INTERNSHIP).orElse("");
-        String module = argMultimap.getValue(PREFIX_MODULE).orElse("");
+        List<Tag> education = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_EDUCATION), Tag.EDUCATION);
+        List<Tag> internship = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_INTERNSHIP), Tag.INTERNSHIP);
+        List<Tag> module = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_MODULE), Tag.MODULE);
+        List<Tag> cca = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_CCA), Tag.CCA);
 
-        return new TagCommand(index, convertToList(education, "education"), convertToList(internship, "internship"),
-                convertToList(module, "module"), convertToList(cca, "cca"));
-    }
-
-    /**
-     * Converts a string of tag args into a list of tags.
-     * @param args that contains all the tags
-     * @param tag the instance type of the tag
-     * @return list of tags
-     */
-    public static List<Tag> convertToList(String args, String tag) {
-        List<Tag> output = new ArrayList<>();
-
-        if (args.isEmpty()) {
-            return output;
-        }
-
-        String[] temp = args.split(",");
-        for (String curr : temp) {
-            curr = curr.trim().toLowerCase();
-            switch (tag) {
-            case "education":
-                output.add(new Education(curr));
-                break;
-            case "internship":
-                output.add(new Internship(curr));
-                break;
-            case "module":
-                output.add(new Module(curr));
-                break;
-            default:
-                output.add(new Cca(curr));
-                break;
-            }
-        }
-
-        Set<Tag> set = new HashSet<>(output);
-        output.clear();
-        output.addAll(set);
-        return output;
+        return new TagCommand(index, education, internship, module, cca);
     }
 }
