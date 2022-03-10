@@ -2,13 +2,24 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Cca;
+import seedu.address.model.person.Education;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Internship;
+import seedu.address.model.person.Module;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -18,6 +29,7 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_INDEX_MULTIPLE = "All indexes must be unique"
                 + " and a non-zero unsigned integer.";
+    public static final String INVALID_TAGTYPE = "The tag type is invalid!";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -124,30 +136,51 @@ public class ParserUtil {
         return new Email(trimmedEmail);
     }
 
-    //    /**
-    //     * Parses a {@code String tag} into a {@code Tag}.
-    //     * Leading and trailing whitespaces will be trimmed.
-    //     *
-    //     * @throws ParseException if the given {@code tag} is invalid.
-    //     */
-    //    public static Tag parseTag(String tag) throws ParseException {
-    //        requireNonNull(tag);
-    //        String trimmedTag = tag.trim();
-    //        if (!Tag.isValidTagName(trimmedTag)) {
-    //            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
-    //        }
-    //        return new Tag(trimmedTag);
-    //    }
-    //
-    //    /**
-    //     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
-    //     */
-    //    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-    //        requireNonNull(tags);
-    //        final Set<Tag> tagSet = new HashSet<>();
-    //        for (String tagName : tags) {
-    //            tagSet.add(parseTag(tagName));
-    //        }
-    //        return tagSet;
-    //    }
+    /**
+    * Parses a {@code String tag} into a {@code Tag}.
+    * Leading and trailing whitespaces will be trimmed.
+    *
+    * @throws ParseException if the given {@code tag} is invalid.
+    */
+    public static Tag parseTag(String tag, String type) throws ParseException {
+        requireNonNull(tag);
+        String trimmedTag = tag.trim();
+
+        switch (type) {
+        case Tag.EDUCATION:
+            if (!Education.isValidTagName(trimmedTag)) {
+                throw new ParseException(Education.MESSAGE_CONSTRAINTS);
+            }
+            return new Education(trimmedTag);
+        case Tag.INTERNSHIP:
+            if (!Internship.isValidTagName(trimmedTag)) {
+                throw new ParseException(Internship.MESSAGE_CONSTRAINTS);
+            }
+            return new Internship(trimmedTag);
+        case Tag.MODULE:
+            if (!Module.isValidTagName(trimmedTag)) {
+                throw new ParseException(Module.MESSAGE_CONSTRAINTS);
+            }
+            return new Module(trimmedTag);
+        case Tag.CCA:
+            if (!Cca.isValidTagName(trimmedTag)) {
+                throw new ParseException(Cca.MESSAGE_CONSTRAINTS);
+            }
+            return new Cca(trimmedTag);
+        default:
+            throw new ParseException(INVALID_TAGTYPE);
+        }
+    }
+
+    /**
+    * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+    */
+    public static List<Tag> parseTags(Collection<String> tags, String type) throws ParseException {
+        requireNonNull(tags);
+        final Set<Tag> tagSet = new HashSet<>();
+        for (String tagName : tags) {
+            tagSet.add(parseTag(tagName, type));
+        }
+        return new ArrayList<>(tagSet);
+    }
 }

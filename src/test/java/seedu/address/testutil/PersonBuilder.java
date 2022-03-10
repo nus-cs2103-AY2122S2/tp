@@ -3,9 +3,12 @@ package seedu.address.testutil;
 import java.util.ArrayList;
 import java.util.List;
 
-import seedu.address.logic.parser.TagCommandParser;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Cca;
+import seedu.address.model.person.Education;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Internship;
+import seedu.address.model.person.Module;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -94,32 +97,32 @@ public class PersonBuilder {
     /**
      * Sets the {@code Education} of the {@code Person} that we are building.
      */
-    public PersonBuilder withEducations(String educations) {
-        this.educations = TagCommandParser.convertToList(educations, "education");
+    public PersonBuilder withEducation(String education) {
+        educations.add(new Education(education));
         return this;
     }
 
     /**
      * Sets the {@code Internship} of the {@code Person} that we are building.
      */
-    public PersonBuilder withInternships(String internships) {
-        this.internships = TagCommandParser.convertToList(internships, "internship");
+    public PersonBuilder withInternship(String internship) {
+        internships.add(new Internship(internship));
         return this;
     }
 
     /**
      * Sets the {@code Module} of the {@code Person} that we are building.
      */
-    public PersonBuilder withModules(String modules) {
-        this.modules = TagCommandParser.convertToList(modules, "module");
+    public PersonBuilder withModule(String module) {
+        modules.add(new Module(module));
         return this;
     }
 
     /**
      * Sets the {@code Cca} of the {@code Person} that we are building.
      */
-    public PersonBuilder withCcas(String ccas) {
-        this.ccas = TagCommandParser.convertToList(ccas, "cca");
+    public PersonBuilder withCca(String cca) {
+        ccas.add(new Cca(cca));
         return this;
     }
 

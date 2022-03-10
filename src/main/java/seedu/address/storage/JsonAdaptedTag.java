@@ -15,6 +15,8 @@ import seedu.address.model.tag.Tag;
  */
 class JsonAdaptedTag {
 
+    public static final String INVALID_TAGTYPE = "The tag type is invalid!";
+
     private final String tagName;
 
     /**
@@ -43,17 +45,18 @@ class JsonAdaptedTag {
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
     public Tag toModelType(String tagType) throws IllegalValueException {
+
         switch (tagType) {
-        case "cca":
+        case Tag.CCA:
             return new Cca(tagName);
-        case "education":
+        case Tag.EDUCATION:
             return new Education(tagName);
-        case "internship":
+        case Tag.INTERNSHIP:
             return new Internship(tagName);
-        case "module":
+        case Tag.MODULE:
             return new Module(tagName);
         default:
-            throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(INVALID_TAGTYPE);
         }
     }
 
