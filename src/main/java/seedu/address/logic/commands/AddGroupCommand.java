@@ -1,10 +1,6 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ACADEMIC_MAJOR;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -24,9 +20,39 @@ public class AddGroupCommand extends Command {
 
     public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Addgroup command not implemented yet";
 
-    @Override
-    public CommandResult execute(Model model) throws CommandException {
-        throw new CommandException(MESSAGE_NOT_IMPLEMENTED_YET);
+    public static final String MESSAGE_ARGUMENTS = "Group name: %s";
+
+    private final String toAdd;
+
+    /**
+     * Creates an AddGroupCommand to add the specified {@code Group}
+     *
+     * @param groupName of the group to be added to ArchDuke.
+     */
+    public AddGroupCommand(String groupName) {
+        requireAllNonNull(groupName);
+        toAdd = groupName;
     }
 
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+        throw new CommandException(String.format(MESSAGE_ARGUMENTS, toAdd));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof AddGroupCommand)) {
+            return false;
+        }
+
+        // state check
+        AddGroupCommand e = (AddGroupCommand) other;
+        return toAdd.equals(e.toAdd);
+    }
 }
