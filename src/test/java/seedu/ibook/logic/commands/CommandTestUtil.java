@@ -49,7 +49,7 @@ public class CommandTestUtil {
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "Bread&"; // '&' not allowed in names
     public static final String INVALID_CATEGORY_DESC = " " + PREFIX_CATEGORY + "Bread&"; // '&' not allowed in category
     public static final String INVALID_EXPIRY_DATE_DESC = " " + PREFIX_EXPIRY_DATE + "2022 03 08"; // incorrect format
-    public static final String INVALID_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION + "Bread&"; // '&' not allowed for desc
+    public static final String INVALID_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION + "Bread&"; // '&' not allowed
     public static final String INVALID_PRICE_DESC = " " + PREFIX_PRICE + "-1"; // price must be a positive amount
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
