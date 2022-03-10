@@ -25,7 +25,7 @@ import seedu.address.model.company.Company;
 import seedu.address.model.company.CompanyName;
 import seedu.address.model.company.Email;
 import seedu.address.model.company.Phone;
-import seedu.address.model.company.RoleList;
+import seedu.address.model.company.ReadOnlyRoleList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -104,7 +104,7 @@ public class EditCommand extends Command {
         Address updatedAddress =
                 editCompanyDescriptor.getAddress().orElse(companyToEdit.getAddress());
         Set<Tag> updatedTags = editCompanyDescriptor.getTags().orElse(companyToEdit.getTags());
-        RoleList roles = new RoleList(); // Dummy placeholder, will update in v1.2b
+        ReadOnlyRoleList roles = companyToEdit.getRoleManager().getRoleList();
 
         return new Company(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, roles);
     }

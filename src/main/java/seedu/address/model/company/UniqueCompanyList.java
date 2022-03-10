@@ -65,6 +65,7 @@ public class UniqueCompanyList implements Iterable<Company> {
             throw new DuplicateCompanyException();
         }
 
+
         internalList.set(index, editedCompany);
     }
 
