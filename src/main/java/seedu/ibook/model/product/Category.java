@@ -33,7 +33,7 @@ public class Category {
     public static final String VALIDATION_REGEX = "(|[\\p{Alnum}][\\p{Alnum} ]*)";
 
     public final String fullCategoryName;
-    
+
     /**
      * Constructs a {@code Category} representing no categorization.
      */
