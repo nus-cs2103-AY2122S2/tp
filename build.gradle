@@ -34,10 +34,6 @@ task coverage(type: JacocoReport) {
             fileTree(dir: it, exclude: ['**/*.jar'])
         })
     }
-    tasks.withType(Test) {
-        scanForTestClasses = false
-        include "**/*Test*.class"
-    }
     reports {
         html.enabled = true
         xml.enabled = true

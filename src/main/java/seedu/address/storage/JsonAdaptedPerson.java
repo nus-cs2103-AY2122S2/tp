@@ -30,7 +30,7 @@ class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final String email;
-    private final String favourite;
+    private final boolean favourite;
     private final String address;
     private final JsonAdaptedProperty property;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
@@ -40,7 +40,7 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("favourite") String favourite,
+            @JsonProperty("email") String email, @JsonProperty("favourite") boolean favourite,
             @JsonProperty("address") String address, @JsonProperty("property") JsonAdaptedProperty property,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
@@ -61,7 +61,7 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
-        favourite = source.getFavourite().toString();
+        favourite = source.getFavourite().getStatus();
         address = source.getAddress().value;
         property = source.getProperty().isPresent() ? new JsonAdaptedProperty(source.getProperty().get()) : null;
         tagged.addAll(source.getTags().stream()
@@ -107,16 +107,8 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
-        if (favourite == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Favourite.class.getSimpleName()));
-        }
         final Favourite modelFavourite;
-        if (favourite.equals("Favourited")) {
-            modelFavourite = new Favourite(true);
-        } else {
-            modelFavourite = new Favourite(false);
-        }
+        modelFavourite = new Favourite(favourite);
 
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));

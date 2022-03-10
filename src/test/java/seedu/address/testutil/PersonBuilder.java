@@ -99,7 +99,7 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code Person} that we are building.
+     * Sets the {@code Favourite} of the {@code Person} that we are building.
      */
     public PersonBuilder withFavourite(boolean status) {
         this.favourite = new Favourite(status);

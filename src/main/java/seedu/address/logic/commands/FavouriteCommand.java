@@ -21,7 +21,7 @@ public class FavouriteCommand extends Command {
     public static final String MESSAGE_UNFAVOURITE_PERSON_SUCCESS =
             "Unfavourited Client %1$s! Check that he/she is removed from the Favourite Window!";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Favourites a client selected\n"
+            + ": Favourites a client selected "
             + "by the index number used in the last client listing.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 ";
