@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+
+<MenuBar style="-fx-background-color: #9F93Ed;">
+    <Menu mnemonicParsing="false" style="-fx-text-fill: white;" text="File">
+        <MenuItem mnemonicParsing="false" text="Close"/>
+    </Menu>
+    <Menu mnemonicParsing="false" text="Edit">
+        <MenuItem mnemonicParsing="false" text="Delete"/>
+    </Menu>
+    <Menu mnemonicParsing="false" text="Help">
+        <MenuItem mnemonicParsing="false" text="About"/>
+    </Menu>
+</MenuBar>
