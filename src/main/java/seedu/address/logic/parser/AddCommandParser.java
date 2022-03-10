@@ -46,7 +46,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 //            String s  = this.concatAddCommand(test,cs);
 //            System.out.println(s);
 //        }
-        System.out.println(args);
+//        System.out.println(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
 
