@@ -1,5 +1,6 @@
 package seedu.address.model.property;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -60,5 +61,31 @@ public class PriceTest {
         assertTrue(Price.isValidPrice("$10000000")); // 10^7
         assertTrue(Price.isValidPrice("$100000000")); // 10^8
         assertTrue(Price.isValidPrice("$1000000000")); // 10^9
+    }
+
+    @Test
+    public void toString_underAThousand_returnsUnformattedPrice() {
+        Price price = new Price("$999");
+        assertEquals("$999", price.toString());
+    }
+
+    @Test
+    public void toString_betweenThousandAndMillion_returnsPriceInThousands() {
+        Price price = new Price("$1000");
+        assertEquals("$1.0K", price.toString());
+        price = new Price("$999900");
+        assertEquals("$999.9K", price.toString());
+        price = new Price("$999999");
+        assertEquals("$1000.0K", price.toString());
+    }
+
+    @Test
+    public void toString_overAMillion_returnsPriceInMillions() {
+        Price price = new Price("$1000000");
+        assertEquals("$1.0M", price.toString());
+        price = new Price("$999900000");
+        assertEquals("$999.9M", price.toString());
+        price = new Price("$999999999");
+        assertEquals("$1000.0M", price.toString());
     }
 }
