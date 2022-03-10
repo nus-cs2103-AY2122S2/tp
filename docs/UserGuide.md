@@ -51,7 +51,7 @@ Format: `add n/NAME_OF_PET o/OWNER_NAME p/PHONE_NUMBER a/ADDRESS`
 Examples:
 * `add n/Mojo n/John Doe p/98765432 a/523 Woodlands ave 5, #01-01`
 
-### Find pet Id: `find`
+### Find pet details: `find`
 
 Retrieve and return a list of all pet with similar name to keywords and their corresponding details from the database. 
 
@@ -61,6 +61,18 @@ Format: `find n/NAME_OF_PET [Keywords]`
 
 Examples:
 * `find Peepee Waffle Bagel`
+
+### Adding pets' dietary requirements: `diet` ###
+
+Given a pet ID, add any dietary requirement the pet may have to database.
+
+Format: `diet INDEX d/remark`
+
+* Adds `d/remark` as a dietary requirement for pet with `INDEX`.
+* ID is a unique identifier that each pet has in the database.
+
+Examples:
+`diet 12 Only feed dry kibble` will store a dietary remark for pet 12 saying "Only feed dry kibble".
 
 ### Viewing pets’ pick-up and drop-off time: `time`
 
