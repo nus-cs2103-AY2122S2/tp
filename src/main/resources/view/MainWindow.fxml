@@ -73,8 +73,6 @@
                   <String fx:value="background" />
                </styleClass>
             </TabPane>
-
-        <StackPane fx:id="statusbarPlaceholder" prefHeight="0.0" prefWidth="200.0" VBox.vgrow="NEVER" />
       </VBox>
     </Scene>
   </scene>
