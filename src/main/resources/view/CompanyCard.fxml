@@ -9,16 +9,17 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<HBox id="companyCardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="companyCardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8"
+      xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150"/>
     </columnConstraints>
     <VBox alignment="CENTER_LEFT" GridPane.columnIndex="0" spacing="10">
       <padding>
-        <Insets top="5" right="15" bottom="5" left="15"/>
+        <Insets top="15" right="15" bottom="15" left="15"/>
       </padding>
-      <VBox spacing="1">
+      <VBox spacing="4">
         <HBox spacing="5" alignment="CENTER_LEFT">
           <Label fx:id="id" styleClass="cell_big_label">
             <minWidth>
@@ -29,10 +30,12 @@
           <Label fx:id="name" text="\$first" styleClass="cell_big_label"/>
         </HBox>
         <FlowPane fx:id="roleTags"/>
-        <Label fx:id="phone" styleClass="cell_small_label" text="\$phone"/>
-        <Label fx:id="address" styleClass="cell_small_label" text="\$address"/>
-        <Label fx:id="email" styleClass="cell_small_label" text="\$email"/>
-      <StackPane fx:id="roleListPanelPlaceholder" styleClass="roles_list" maxHeight="100"/>
+        <VBox>
+          <Label fx:id="phone" styleClass="cell_small_label" text="\$phone"/>
+          <Label fx:id="address" styleClass="cell_small_label" text="\$address"/>
+          <Label fx:id="email" styleClass="cell_small_label" text="\$email"/>
+        </VBox>
+        <StackPane fx:id="roleListPanelPlaceholder" styleClass="roles_list" maxHeight="105"/>
       </VBox>
     </VBox>
   </GridPane>
