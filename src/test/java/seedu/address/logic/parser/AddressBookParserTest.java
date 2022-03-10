@@ -4,6 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CCA;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EDUCATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERNSHIP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -22,6 +26,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -86,6 +91,25 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_tag() throws Exception {
+        final String education = "Some education";
+        final String cca = "Some cca";
+        final String internship = "Some internship";
+        final String module = "Some module";
+
+        TagCommand command = (TagCommand) parser.parseCommand(TagCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " "
+                + PREFIX_EDUCATION + education + " "
+                + PREFIX_INTERNSHIP + internship + " "
+                + PREFIX_MODULE + module + " "
+                + PREFIX_CCA + cca);
+        assertEquals(new TagCommand(INDEX_FIRST_PERSON, TagCommandParser.convertToList(education, "education"),
+                TagCommandParser.convertToList(internship, "internship"),
+                TagCommandParser.convertToList(module, "module"),
+                TagCommandParser.convertToList(cca, "cca")), command);
     }
 
     @Test

@@ -2,7 +2,11 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
@@ -17,6 +21,10 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final List<Tag> educations;
+    private final List<Tag> internships;
+    private final List<Tag> modules;
+    private final List<Tag> ccas;
 
     /**
      * Every field must be present and not null.
@@ -27,6 +35,26 @@ public class Person {
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.educations = new ArrayList<>();
+        this.internships = new ArrayList<>();
+        this.modules = new ArrayList<>();
+        this.ccas = new ArrayList<>();
+    }
+
+    /**
+     * Second constructor for Person.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, List<Tag> educations, List<Tag> internships,
+                  List<Tag> modules, List<Tag> ccas) {
+        requireAllNonNull(name, phone, email, address, educations, internships, modules, ccas);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.educations = educations;
+        this.internships = internships;
+        this.modules = modules;
+        this.ccas = ccas;
     }
 
     public Name getName() {
@@ -43,6 +71,22 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public List<Tag> getEducations() {
+        return educations;
+    }
+
+    public List<Tag> getInternships() {
+        return internships;
+    }
+
+    public List<Tag> getModules() {
+        return modules;
+    }
+
+    public List<Tag> getCcas() {
+        return ccas;
     }
 
     /**
@@ -76,13 +120,17 @@ public class Person {
         return otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress());
+                && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getEducations().equals(getEducations())
+                && otherPerson.getInternships().equals(getInternships())
+                && otherPerson.getModules().equals(getModules())
+                && otherPerson.getCcas().equals(getCcas());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address);
+        return Objects.hash(name, phone, email, address, educations, internships, modules, ccas);
     }
 
     @Override
@@ -94,7 +142,15 @@ public class Person {
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Address: ")
-                .append(getAddress());
+                .append(getAddress())
+                .append("; Educations: ")
+                .append(getEducations())
+                .append("; Internships: ")
+                .append(getInternships())
+                .append("; Modules: ")
+                .append(getModules())
+                .append("; Ccas: ")
+                .append(getCcas());
 
         return builder.toString();
     }
