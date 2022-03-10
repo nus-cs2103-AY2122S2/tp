@@ -10,7 +10,6 @@ import java.util.Set;
 
 import seedu.address.model.person.Description;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
 
 /**
  * Represents an Event in Amigos.
@@ -23,8 +22,8 @@ public class Event {
     private final DateTime dateTime;
 
     // Data fields
-    private final Description description; // optional field
-    private final Set<Person> friends = new HashSet<>();
+    private final Description description;
+    private final Set<Name> friendNames = new HashSet<>();
 
     /**
      * Constructor for event.
@@ -32,14 +31,14 @@ public class Event {
      * @param name        name of event
      * @param description description of event
      * @param dateTime    date and time of event
-     * @param friends     set of friends linked with the event.
+     * @param friendNames     set of friend's Names linked with the event.
      */
-    public Event(Name name, DateTime dateTime, Description description, Set<Person> friends) {
-        requireAllNonNull(name, dateTime, description, friends);
+    public Event(Name name, DateTime dateTime, Description description, Set<Name> friendNames) {
+        requireAllNonNull(name, dateTime, description, friendNames);
         this.name = name;
         this.dateTime = dateTime;
         this.description = description;
-        this.friends.addAll(friends);
+        this.friendNames.addAll(friendNames);
     }
 
     public Name getName() {
@@ -62,8 +61,8 @@ public class Event {
      * Returns an immutable person set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Person> getFriends() {
-        return Collections.unmodifiableSet(friends);
+    public Set<Name> getFriendNames() {
+        return Collections.unmodifiableSet(friendNames);
     }
 
     /**
@@ -102,13 +101,13 @@ public class Event {
         return otherEvent.getName().equals(getName())
                 && otherEvent.getDateTime().equals(getDateTime())
                 && otherEvent.getDescription().equals(getDescription())
-                && otherEvent.getFriends().equals(getFriends());
+                && otherEvent.getFriendNames().equals(getFriendNames());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, dateTime, description, friends);
+        return Objects.hash(name, dateTime, description, friendNames);
     }
 
     @Override
@@ -119,10 +118,10 @@ public class Event {
                 .append(getDateTime())
                 .append("; Description: ")
                 .append(getDescription());
-        Set<Person> friends = getFriends();
-        if (!friends.isEmpty()) {
+        Set<Name> friendNames = getFriendNames();
+        if (!friendNames.isEmpty()) {
             builder.append("; Friends: ");
-            friends.forEach(builder::append);
+            friendNames.forEach(builder::append);
         }
         return builder.toString();
     }

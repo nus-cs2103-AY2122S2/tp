@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FRIEND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FRIEND_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -22,13 +22,13 @@ public class AddEventCommand extends Command {
             + PREFIX_NAME + "EVENT_NAME "
             + PREFIX_DATETIME + "DATE_TIME "
             + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
-            + "[" + PREFIX_FRIEND + "FRIEND_NAME]...\n"
+            + "[" + PREFIX_FRIEND_NAME + "FRIEND_NAME]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John's Birthday "
             + PREFIX_DATETIME + "15-08-2021 1700 "
             + PREFIX_DESCRIPTION + "Remember to get a present! "
-            + PREFIX_FRIEND + "John Low "
-            + PREFIX_FRIEND + "Amy Lim";
+            + PREFIX_FRIEND_NAME + "John Low "
+            + PREFIX_FRIEND_NAME + "Amy Lim";
 
     public static final String MESSAGE_SUCCESS = "New event added: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the event book";
