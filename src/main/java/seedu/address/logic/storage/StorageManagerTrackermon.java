@@ -1,4 +1,4 @@
-package seedu.address.storage;
+package seedu.address.logic.storage;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -16,7 +16,7 @@ import seedu.address.model.UserPrefsTrackermon;
  */
 public class StorageManagerTrackermon implements StorageTrackermon {
 
-    private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
+    private static final Logger logger = LogsCenter.getLogger(StorageManagerTrackermon.class);
     private ShowListStorage showListStorage;
     private UserPrefsStorageTrackermon userPrefsStorage;
 
