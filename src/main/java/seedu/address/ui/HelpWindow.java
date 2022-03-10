@@ -97,17 +97,20 @@ public class HelpWindow extends UiPart<Stage> {
 
     /**
      * Copies the URL to the user guide to the clipboard.
+     * @return
      */
     @FXML
-    private void goToUrl() throws URISyntaxException {
+    private boolean goToUrl() throws URISyntaxException {
         URI link = new URI(USERGUIDE_URL);
         Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
         if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
             try {
                 desktop.browse(link);
+                return true;
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+        return false;
     }
 }
