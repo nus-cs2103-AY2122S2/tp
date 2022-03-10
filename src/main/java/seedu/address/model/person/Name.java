@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 /**
  * Represents a Person's name in the address book.
+ * The input (person's name) will converted to "title case" when creating a Name object.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class Name {
