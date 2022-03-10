@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -23,6 +24,7 @@ import seedu.address.model.tag.Tag;
  * Parses input arguments and creates a new AddCommand object
  */
 public class AddCommandParser implements Parser<AddCommand> {
+//    int counter = 0;
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
@@ -30,6 +32,19 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
+
+//        if (counter == 0) {
+//            System.out.println(counter);
+//            System.out.println(args);
+//            String[] test = new String[]{"jun jie", "123123", "junjiete@gmail.com", "asdwda"};
+//            Collection<String> cs = new ArrayList<String>();
+//            cs.add("tset123");
+//            cs.add("avd");
+//            counter = 1;
+//            String s  = this.concatAddCommand(test,cs);
+//            System.out.println(s);
+//        }
+//        System.out.println(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
 
@@ -56,5 +71,40 @@ public class AddCommandParser implements Parser<AddCommand> {
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
+
+    /**
+     * Parses the given arguments containing information needed to add profile
+     * and send this command to be parsed as a AddComand.
+     *
+     * @param args contains all compulsory information needed to add a new profile (Name, Phone Number, Email, Address)
+     * @param collectionOfTag contains all tags tied to this profile (this can be an empty collection)
+     *
+     * @throws ParseException if the user input does not conform the expected format
+     */
+    public AddCommand concatAddCommand(String[] args, Collection<String> collectionOfTag) throws ParseException{
+//        System.out.println(args);
+
+        Name name = ParserUtil.parseName(args[0]);
+        Phone phone = ParserUtil.parsePhone(args[1]);
+        Email email = ParserUtil.parseEmail(args[2]);
+        Address address = ParserUtil.parseAddress(args[3]);
+        Set<Tag> tagList = ParserUtil.parseTags(collectionOfTag);
+
+        String combinedAddCommand = "add "
+                + PREFIX_NAME + name + " "
+                + PREFIX_PHONE + phone + " "
+                + PREFIX_EMAIL + email + " "
+                + PREFIX_ADDRESS + address + " ";
+
+        if(!tagList.isEmpty()) {
+            for (String tag : collectionOfTag) {
+                combinedAddCommand += PREFIX_TAG + tag;
+            }
+        }
+//        System.out.println("fnal ");
+//        System.out.println(combinedAddCommand);
+        return this.parse(combinedAddCommand);
+    }
+
 
 }
