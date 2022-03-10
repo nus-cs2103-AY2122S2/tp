@@ -12,7 +12,6 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.Logic;
 import seedu.address.logic.LogicTrackermon;
 import seedu.address.logic.commands.CommandResultTrackermon;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -53,7 +52,7 @@ public class MainWindowTrackermon extends UiPart<Stage> {
     private StackPane statusbarPlaceholder;
 
     /**
-     * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
+     * Creates a {@code MainWindowTrackermon} with the given {@code Stage} and {@code LogicTrackermon}.
      */
     public MainWindowTrackermon(Stage primaryStage, LogicTrackermon logic) {
         super(FXML, primaryStage);
@@ -172,7 +171,7 @@ public class MainWindowTrackermon extends UiPart<Stage> {
     /**
      * Executes the command and returns the result.
      *
-     * @see Logic#execute(String)
+     * @see LogicTrackermon#execute(String)
      */
     private CommandResultTrackermon executeCommand(String commandText) throws CommandException, ParseException {
         try {
