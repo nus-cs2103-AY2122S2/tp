@@ -11,7 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.role.Role;
 
 /**
- * Panel containing the list of companies.
+ * Panel containing the list of roles.
  */
 public class RoleListPanel extends UiPart<Region> {
     private static final String FXML = "RoleListPanel.fxml";
@@ -21,21 +21,17 @@ public class RoleListPanel extends UiPart<Region> {
     private ListView<Role> roleListView;
 
     /**
-     * Creates a {@code CompanyListPanel} with the given {@code ObservableList}.
+     * Creates a {@code RoleListPanel} with the given {@code ObservableList}.
      */
     public RoleListPanel(ObservableList<Role> roleList) {
         super(FXML);
         roleListView.setItems(roleList);
         roleListView.setCellFactory(listView -> new RoleListViewCell());
-
-        if (roleList.isEmpty()) {
-            roleListView.setManaged(false);
-        }
     }
 
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Company} using a {@code CompanyCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Role} using a {@code RoleCard}.
      */
     static class RoleListViewCell extends ListCell<Role> {
         @Override

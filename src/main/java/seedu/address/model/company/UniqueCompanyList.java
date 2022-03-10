@@ -17,7 +17,7 @@ import seedu.address.model.company.exceptions.DuplicateCompanyException;
  * updating of companies uses Company#isSameCompany(Company) for equality so as to ensure that the company being added
  * or updated is unique in terms of identity in the UniqueCompanyList. However, the removal of a company uses
  * Company#equals(Object) so as to ensure that the company with exactly the same fields will be removed.
- *
+ * <p>
  * Supports a minimal set of list operations.
  *
  * @see Company#isSameCompany(Company)
@@ -64,6 +64,7 @@ public class UniqueCompanyList implements Iterable<Company> {
         if (!target.isSameCompany(editedCompany) && contains(editedCompany)) {
             throw new DuplicateCompanyException();
         }
+
 
         internalList.set(index, editedCompany);
     }
@@ -113,12 +114,17 @@ public class UniqueCompanyList implements Iterable<Company> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof UniqueCompanyList // instanceof handles nulls
-                        && internalList.equals(((UniqueCompanyList) other).internalList));
+                && internalList.equals(((UniqueCompanyList) other).internalList));
     }
 
     @Override
     public int hashCode() {
         return internalList.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return internalList.toString();
     }
 
     /**

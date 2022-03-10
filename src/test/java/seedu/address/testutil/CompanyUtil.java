@@ -34,9 +34,7 @@ public class CompanyUtil {
         sb.append(PREFIX_PHONE + company.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + company.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + company.getAddress().value + " ");
-        company.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.tagName + " ")
-        );
+        company.getTags().stream().forEach(s -> sb.append(PREFIX_TAG + s.tagName + " "));
         return sb.toString();
     }
 
