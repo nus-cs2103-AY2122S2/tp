@@ -41,6 +41,7 @@ public class DeleteLogCommand extends Command {
 
     public static final String MESSAGE_DELETE_LOG_SUCCESS = "Log deleted.";
     public static final String MESSAGE_LOG_NOT_FOUND = "The specified log does not exist!";
+    public static final String MESSAGE_PERSON_NOT_FOUND = Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 
     // data fields
     private final DeleteLogDescriptor descriptor;
@@ -124,9 +125,13 @@ public class DeleteLogCommand extends Command {
             this.logIndex = logIndex;
 
             // assert valid cases
-            // specified log for one specified person, else cannot have specified log
-            assert ((logIndex == null
-                    || (!isForDeletingAllLogs && isForOnePerson)));
+            // if log is present, flags cannot be for deleting all, and must be single person
+            // if person is present, person index must be present
+            assert (((logIndex == null
+                    || (!isForDeletingAllLogs && isForOnePerson && personIndex != null)))
+                    && ((!isForOnePerson && personIndex == null)
+                    || isForOnePerson && personIndex != null));
+
         }
 
         /**
