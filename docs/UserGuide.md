@@ -74,12 +74,20 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+## Add
+General command to add different types into HireLah.
 
-### Adding an Applicant: `appladd`
+Format: `add -TYPE`
+* TYPE must take the form of `a`, `i`, `p`
+* -a will add an applicant
+* -i will add an interview
+* -p will add a position
+
+### Adding an Applicant: `add -a`
 
 Adds a new applicant to HireLah
 
-Format: `appladd n/APPLICANT_NAME d/DOB g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add -a n/APPLICANT_NAME d/DOB g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 An applicant can have any number of tags (including 0)
@@ -91,6 +99,29 @@ An applicant can have any number of tags (including 0)
 Examples:
 * `appladd n/Benedict d/1998-02-03 g/M p/98123456 e/ben@gmail.com a/12 Kent Ridge Drive, 119243`
 * `appladd n/Max d/2000-01-01 g/M p/97123456 e/max@yahoo.com a/12 Kent Ridge Drive, 119243 t/Data Analyst`
+
+### Adding Interview : `add -i`
+
+Adds a new interview to HireLah.
+
+Format: `add -i n/CANDIDATE_INDEX d/DATE r/ROLE`
+* Date provided must be in format YYYY-MM-DD HH:MM.
+* Role *must* currently exist in position.
+
+Examples:
+* `add -a n/1 d/2022-01-01 14:00 r/Senior Frontend Software Engineer`
+
+### Adding positions : `add -p`
+
+Adds a new open position to HireLah.
+Format: `posadd POSITION_NAME n/NUM_OPENINGS [d/DESCRIPTION] [r/REQUIREMENTS]`
+* Positions must have a **unique name**.
+* Name provided is case-insensitive.
+* Number of openings in the position must be **0 or more** 0, 1, 2, …​
+
+Examples:
+* `add -p Senior Software Engineer n/3 d/More than 5 years experience r/JavaScript r/HTML r/CSS`
+
 
 ### Listing all Applicants : `appllist`
 
@@ -132,16 +163,7 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Adding positions : `posadd`
 
-Adds a new open position to HireLah.
-Format: `posadd POSITION_NAME n/NUM_OPENINGS [d/DESCRIPTION] [r/REQUIREMENTS]`
-* Positions must have a **unique name**.
-* Name provided is case-insensitive.
-* Number of openings in the position must be **0 or more** 0, 1, 2, …​
-
-Examples:
-* `posadd Senior Software Engineer n/3 d/More than 5 years experience r/JavaScript r/HTML r/CSS`
 
 ### Edit positions : `posedit`
 
@@ -175,16 +197,7 @@ Examples:
 Lists all existing positions in HireLah.
 Format: `poslist`
 
-### Adding Interview : `intvwadd`
 
-Adds a new interview to HireLah.
-
-Format: `intvwadd n/CANDIDATE_INDEX d/DATE r/ROLE`
-* Date provided must be in format YYYY-MM-DD HH:MM.
-* Role *must* currently exist in position.
-
-Examples:
-* `intvwadd n/1 d/2022-01-01 14:00 r/Senior Frontend Software Engineer`
 
 ### Editing an Interview : `intvwedit`
 

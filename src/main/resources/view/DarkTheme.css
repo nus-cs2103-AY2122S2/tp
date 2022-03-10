@@ -1,3 +1,7 @@
+* {
+    -fx-font-family: 'sans-serif';
+}
+
 .background {
     -fx-background-color: derive(#1d1d1d, 20%);
     background-color: #383838; /* Used in the default.html file */
@@ -127,9 +131,20 @@
 }
 
 .cell_small_label {
-    -fx-font-family: "Segoe UI";
+    -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 13px;
     -fx-text-fill: #010504;
+}
+
+.currently_displaying {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 16px;
+    -fx-text-fill: #b6b6b6;
+}
+
+.currently_displaying_pane {
+    -fx-padding: 0 0 10 0;
+    -fx-alignment: center-left;
 }
 
 .stack-pane {
