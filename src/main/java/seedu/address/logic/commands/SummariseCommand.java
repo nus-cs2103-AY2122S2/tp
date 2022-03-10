@@ -44,17 +44,28 @@ public class SummariseCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         List<Person> lastShownList = model.getFilteredPersonList();
-        StringBuilder answer = new StringBuilder(MESSAGE_SUMMARISE_PERSON_SUCCESS);
+        String answer = MESSAGE_SUMMARISE_PERSON_SUCCESS + filterByFaculty(lastShownList);
+        return new CommandResult(answer);
+    }
+
+    /**
+     * Filter entire list by faculties to provide overview of covid situation in each faculty.
+     *
+     * @param list the unfiltered entire list in the database
+     * @return the summarised overview for all students by faculties
+     */
+    private String filterByFaculty(List<Person> list) {
+        StringBuilder ans = new StringBuilder();
 
         for (String facultyName : FACULTIES) {
             Predicate<Person> byFaculty = person -> person.getFacultyAsString().equals(facultyName);
-            List<Person> students = lastShownList.stream().filter(byFaculty).collect(Collectors.toList());
+            List<Person> students = list.stream().filter(byFaculty).collect(Collectors.toList());
             if (students.size() <= 0) {
                 continue;
             }
-            answer.append(summariseByFaculty(students, facultyName));
+            ans.append(summariseFaculty(students, facultyName));
         }
-        return new CommandResult(answer.toString());
+        return ans.toString();
     }
 
     /**
@@ -64,7 +75,7 @@ public class SummariseCommand extends Command {
      * @param facultyName the faculty in which students are from
      * @return a string form containing the respective number of students with certain covid status
      */
-    private String summariseByFaculty(List<Person> result, String facultyName) {
+    private String summariseFaculty(List<Person> result, String facultyName) {
         int totalNumberOfStudents = result.size();
         int numberOfPositive = (int) result.stream().filter(BY_POSITIVE).count();
         int numberOfNegative = (int) result.stream().filter(BY_NEGATIVE).count();
