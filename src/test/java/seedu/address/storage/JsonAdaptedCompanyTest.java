@@ -32,7 +32,7 @@ public class JsonAdaptedCompanyTest {
     private static final List<JsonAdaptedTag> VALID_TAGS = AMAZON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
-    private static final List<JsonAdaptedRole> VALID_ROLES = AMAZON.getRoleManager().getRoles().stream()
+    private static final List<JsonAdaptedRole> VALID_ROLES = AMAZON.getRoleManager().getFilteredRoleList().stream()
             .map(JsonAdaptedRole::new)
             .collect(Collectors.toList());
 

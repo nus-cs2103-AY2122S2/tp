@@ -1,8 +1,7 @@
 package seedu.address.testutil;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import seedu.address.model.company.Address;
@@ -10,6 +9,8 @@ import seedu.address.model.company.Company;
 import seedu.address.model.company.CompanyName;
 import seedu.address.model.company.Email;
 import seedu.address.model.company.Phone;
+import seedu.address.model.company.ReadOnlyRoleList;
+import seedu.address.model.company.RoleList;
 import seedu.address.model.role.Role;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -29,7 +30,7 @@ public class CompanyBuilder {
     private Email email;
     private Address address;
     private Set<Tag> tags;
-    private List<Role> roles;
+    private ReadOnlyRoleList roles;
 
     /**
      * Creates a {@code CompanyBuilder} with the default details.
@@ -40,7 +41,7 @@ public class CompanyBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
-        roles = new ArrayList<>();
+        roles = new RoleList();
     }
 
     /**
@@ -52,7 +53,7 @@ public class CompanyBuilder {
         email = companyToCopy.getEmail();
         address = companyToCopy.getAddress();
         tags = new HashSet<>(companyToCopy.getTags());
-        roles = new ArrayList<>(companyToCopy.getRoleManager().getRoles());
+        roles = companyToCopy.getRoleManager().getRoleList();
     }
 
     /**
@@ -75,7 +76,9 @@ public class CompanyBuilder {
      * Parses the {@code roles} into a {@code ArrayList<Role>} and set it to the {@code Company}  that we are building.
      */
     public CompanyBuilder withRoles(Role... roles) {
-        this.roles = SampleDataUtil.getRoleList(roles);
+        RoleList roleList = new RoleList();
+        roleList.setRoles(Arrays.asList(roles));
+        this.roles = roleList;
         return this;
     }
 

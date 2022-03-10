@@ -71,7 +71,6 @@ public class RoleBuilder {
         return this;
     }
 
-
     /**
      * Sets the {@code Description} of the {@code Role} that we are building.
      */
@@ -81,18 +80,18 @@ public class RoleBuilder {
     }
 
     /**
-     * Sets the {@code Description} of the {@code Role} to be empty.
-     */
-    public RoleBuilder withoutDescription() {
-        this.description = new Description("");
-        return this;
-    }
-
-    /**
      * Sets the {@code Stipend} of the {@code Role} that we are building.
      */
     public RoleBuilder withStipend(String stipend) {
         this.stipend = new Stipend(stipend);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Description} of the {@code Role} to be empty.
+     */
+    public RoleBuilder withoutDescription() {
+        this.description = new Description("");
         return this;
     }
 

@@ -6,14 +6,15 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_COMPANIES;
+import static seedu.address.model.company.RoleManager.PREDICATE_SHOW_ALL_ROLES;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -24,7 +25,7 @@ import seedu.address.model.company.Company;
 import seedu.address.model.company.CompanyName;
 import seedu.address.model.company.Email;
 import seedu.address.model.company.Phone;
-import seedu.address.model.role.Role;
+import seedu.address.model.company.ReadOnlyRoleList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -71,7 +72,7 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Company> lastShownList = model.getFilteredCompanyList();
+        ObservableList<Company> lastShownList = model.getFilteredCompanyList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX);
@@ -85,6 +86,7 @@ public class EditCommand extends Command {
         }
 
         model.setCompany(companyToEdit, editedCompany);
+        model.updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES, PREDICATE_SHOW_ALL_ROLES);
         return new CommandResult(String.format(MESSAGE_EDIT_COMPANY_SUCCESS, editedCompany));
     }
 
@@ -102,10 +104,9 @@ public class EditCommand extends Command {
         Address updatedAddress =
                 editCompanyDescriptor.getAddress().orElse(companyToEdit.getAddress());
         Set<Tag> updatedTags = editCompanyDescriptor.getTags().orElse(companyToEdit.getTags());
-        ArrayList<Role> roles = new ArrayList<>(); // Dummy placeholder, will update in v1.2b
+        ReadOnlyRoleList roles = companyToEdit.getRoleManager().getRoleList();
 
-        return new Company(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-                roles);
+        return new Company(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, roles);
     }
 
     @Override

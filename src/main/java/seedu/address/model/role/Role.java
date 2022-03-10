@@ -52,7 +52,22 @@ public class Role {
     }
 
     /**
-     * Returns true if both roles have the same fields.
+     * Returns true if both roles have the same name.
+     * This defines a weaker notion of equality between two roles.
+     */
+    public boolean isSameRole(Role otherRole) {
+        if (otherRole == this) {
+            return true;
+        }
+
+        return otherRole != null
+                && otherRole.getName().equals(getName())
+                && otherRole.getDescription().equals(getDescription());
+    }
+
+    /**
+     * Returns true if both roles have the same identity and data fields.
+     * This defines a stronger notion of equality between two roles.
      */
     @Override
     public boolean equals(Object other) {
