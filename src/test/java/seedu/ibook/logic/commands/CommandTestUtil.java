@@ -10,15 +10,15 @@ import static seedu.ibook.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.ibook.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import seedu.ibook.commons.core.index.Index;
 import seedu.ibook.logic.commands.exceptions.CommandException;
 import seedu.ibook.model.IBook;
 import seedu.ibook.model.Model;
-import seedu.ibook.model.product.NameContainsKeywordsPredicate;
 import seedu.ibook.model.product.Product;
+import seedu.ibook.model.product.ProductFulfillsFiltersPredicate;
+import seedu.ibook.testutil.UpdateProductDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -29,7 +29,7 @@ public class CommandTestUtil {
     public static final String VALID_CATEGORY_A = "Category A";
     public static final String VALID_CATEGORY_B = "Category B";
     public static final String VALID_EXPIRY_DATE_A = "2022-03-08";
-    public static final String VALID_EXPIRY_DATE_B = "2022-03-08";
+    public static final String VALID_EXPIRY_DATE_B = "2022-03-18";
     public static final String VALID_DESCRIPTION_A = "A";
     public static final String VALID_DESCRIPTION_B = "B";
     public static final String VALID_PRICE_A = "1.99";
@@ -55,19 +55,17 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    /*
-    public static final EditCommand.EditProductDescriptor DESC_A;
-    public static final EditCommand.EditProductDescriptor DESC_B;
+    public static final UpdateCommand.UpdateProductDescriptor DESC_A;
+    public static final UpdateCommand.UpdateProductDescriptor DESC_B;
 
     static {
-        DESC_A = new EditProductDescriptorBuilder().withName(VALID_NAME_A)
-                .withPhone(VALID_CATEGORY_A).withEmail(VALID_EXPIRY_DATE_A).withAddress(VALID_DESCRIPTION_A)
-                .withTags(VALID_TAG_FRIEND).build();
-        DESC_B = new EditProductDescriptorBuilder().withName(VALID_NAME_B)
-                .withPhone(VALID_CATEGORY_B).withEmail(VALID_EXPIRY_DATE_B).withAddress(VALID_DESCRIPTION_B)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_A = new UpdateProductDescriptorBuilder().withName(VALID_NAME_A)
+                .withCategory(VALID_CATEGORY_A).withExpiryDate(VALID_EXPIRY_DATE_A)
+                .withDescription(VALID_DESCRIPTION_A).withPrice(VALID_PRICE_A).build();
+        DESC_B = new UpdateProductDescriptorBuilder().withName(VALID_NAME_B)
+                .withCategory(VALID_CATEGORY_B).withExpiryDate(VALID_EXPIRY_DATE_B)
+                .withDescription(VALID_DESCRIPTION_B).withPrice(VALID_PRICE_B).build();
     }
-    */
 
     /**
      * Executes the given {@code command}, confirms that <br>
@@ -125,8 +123,8 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredProductList().size());
 
         Product product = model.getFilteredProductList().get(targetIndex.getZeroBased());
-        final String[] splitName = product.getName().fullName.split("\\s+");
-        model.updateFilteredProductList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredProductList(
+                new ProductFulfillsFiltersPredicate(product));
 
         assertEquals(1, model.getFilteredProductList().size());
     }

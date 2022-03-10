@@ -12,7 +12,7 @@ import seedu.ibook.model.product.Product;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Product> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Product> PREDICATE_SHOW_ALL_PRODUCTS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.

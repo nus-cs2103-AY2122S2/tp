@@ -9,19 +9,28 @@ import static seedu.ibook.commons.util.AppUtil.checkArgument;
  */
 public class Category {
 
-    /**
-     * A {@code Category} singleton representing no categorization.
-     */
-    public static final Category NONE = new Category();
+    private static class WildCategory extends Category {
+        private WildCategory() {};
+
+        @Override
+        public boolean equals(Object other) {
+            if (other instanceof Category) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+    public static final WildCategory WILDCATEGORY = new WildCategory();
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Categories should only contain alphanumeric characters and spaces";
+            "Categories (if given) should only contain alphanumeric characters and spaces";
 
     /*
-     * The first character of the category must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * Empty strings are allowed. Otherwise, the first character of the description
+     * must not be a whitespace
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "(|[\\p{Alnum}][\\p{Alnum} ]*)";
 
     public final String fullCategoryName;
 

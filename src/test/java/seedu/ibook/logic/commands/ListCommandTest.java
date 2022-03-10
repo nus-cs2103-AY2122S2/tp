@@ -1,33 +1,31 @@
 package seedu.ibook.logic.commands;
 
-/*
+
 import static seedu.ibook.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.ibook.logic.commands.CommandTestUtil.showPersonAtIndex;
-
-
-import static seedu.ibook.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-//import static seedu.ibook.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.ibook.logic.commands.CommandTestUtil.showProductAtIndex;
+import static seedu.ibook.testutil.TypicalIndexes.INDEX_FIRST_PRODUCT;
+import static seedu.ibook.testutil.TypicalProducts.getTypicalIBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.ibook.model.Model;
 import seedu.ibook.model.ModelManager;
-import seedu.ibook.model.OldUserPrefs;
+import seedu.ibook.model.UserPrefs;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
  */
 public class ListCommandTest {
 
-    /*
+
     private Model model;
     private Model expectedModel;
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new OldUserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new OldUserPrefs());
+        model = new ModelManager(getTypicalIBook(), new UserPrefs());
+        expectedModel = new ModelManager(model.getIBook(), new UserPrefs());
     }
 
 
@@ -38,9 +36,8 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showProductAtIndex(model, INDEX_FIRST_PRODUCT);
         assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
-
-     */
 }
+

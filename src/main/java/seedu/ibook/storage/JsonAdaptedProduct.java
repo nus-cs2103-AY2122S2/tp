@@ -1,7 +1,5 @@
 package seedu.ibook.storage;
 
-import java.time.LocalDate;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -22,9 +20,9 @@ class JsonAdaptedProduct {
 
     private final String name;
     private final String category;
-    private final LocalDate expiryDate;
+    private final String expiryDate;
     private final String description;
-    private final Double price;
+    private final String price;
 
     /**
      * Constructs a {@code JsonAdaptedProduct} with the given product details.
@@ -32,9 +30,9 @@ class JsonAdaptedProduct {
     @JsonCreator
     public JsonAdaptedProduct(@JsonProperty("name") String name,
                               @JsonProperty("category") String category,
-                              @JsonProperty("expiryDate") LocalDate expiryDate,
+                              @JsonProperty("expiryDate") String expiryDate,
                               @JsonProperty("description") String description,
-                              @JsonProperty("price") Double price) {
+                              @JsonProperty("price") String price) {
         this.name = name;
         this.category = category;
         this.expiryDate = expiryDate;
@@ -48,9 +46,9 @@ class JsonAdaptedProduct {
     public JsonAdaptedProduct(Product source) {
         name = source.getName().fullName;
         category = source.getCategory().fullCategoryName;
-        expiryDate = source.getExpiryDate().expiryDate;
+        expiryDate = source.getExpiryDate().expiryDate.toString();
         description = source.getDescription().fullDescription;
-        price = source.getPrice().price;
+        price = source.getPrice().price.toString();
     }
 
     /**
@@ -90,7 +88,7 @@ class JsonAdaptedProduct {
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()));
         }
         if (!Description.isValidDescription(description)) {
-            throw new IllegalValueException(Category.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
         }
         final Description modelDescription = new Description(description);
 

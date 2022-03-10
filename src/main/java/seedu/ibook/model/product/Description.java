@@ -9,15 +9,33 @@ import static seedu.ibook.commons.util.AppUtil.checkArgument;
  */
 public class Description {
 
+    private static class WildDescription extends Description {
+        private WildDescription() {};
+
+        @Override
+        public boolean equals(Object other) {
+            if (other instanceof Description) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+    public static final WildDescription WILDDESCRIPTION = new WildDescription();
     public static final String MESSAGE_CONSTRAINTS =
             "Descriptions should only contain alphanumeric characters and spaces";
 
     /*
-     * The first character of the description must not be a whitespace
+     * Empty strings are allowed. Otherwise, the first character of the description
+     * must not be a whitespace
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "(|[\\p{Alnum}][\\p{Alnum} ]*)";
 
     public final String fullDescription;
+
+    private Description() {
+        fullDescription = "???";
+    };
 
     /**
      * Constructs a {@code Description}.
