@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -23,10 +24,34 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final Description description;
     private final Set<Tag> tags = new HashSet<>();
     private final UniqueLogList logs = new UniqueLogList();
 
     /**
+     * Constructs a Person
+     *
+     * @param name Name of person
+     * @param phone Phone of person
+     * @param email Email of person
+     * @param address Address of person
+     * @param description Description of person
+     * @param tags Tag(s) of person
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Description description, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.description = description;
+        this.tags.addAll(tags);
+        this.logs.setLogs(new ArrayList<>());
+
+    }
+
+    /**
+     * Overloaded method to construct a person to have a description with null value.
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, List<Log> logs) {
@@ -35,6 +60,23 @@ public class Person {
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.description = new Description(null);
+        this.tags.addAll(tags);
+        this.logs.setLogs(logs);
+    }
+
+    /**
+     * Overloaded method to construct a person to have an empty list of logs.
+     * Every field must be present and not null.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Description description, Set<Tag> tags,
+                  List<Log> logs) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.description = description;
         this.tags.addAll(tags);
         this.logs.setLogs(logs);
     }
@@ -53,6 +95,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Description getDescription() {
+        return description;
     }
 
     /**
@@ -103,6 +149,7 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getDescription().equals(getDescription())
                 && otherPerson.getTags().equals(getTags())
                 && otherPerson.getLogs().equals(getLogs());
     }
@@ -110,19 +157,18 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, logs);
+        return Objects.hash(name, phone, email, address, description, tags, logs);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append("; Phone: ")
-                .append(getPhone())
-                .append("; Email: ")
-                .append(getEmail())
-                .append("; Address: ")
-                .append(getAddress());
+                .append(getPhone().value == null ? "" : ("; Phone: " + getPhone()))
+                .append(getEmail().value == null ? "" : ("; Email: " + getEmail()))
+                .append(getAddress().value == null ? "" : ("; Address: " + getAddress()))
+                .append(getDescription().value == null ? ""
+                        : ("; Description: " + getDescription()));
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

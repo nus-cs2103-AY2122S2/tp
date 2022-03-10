@@ -55,7 +55,7 @@ public class AddLogCommandParser implements Parser<AddLogCommand> {
                     .getValue(PREFIX_TITLE).get()));
         }
         if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
-            addLogDescriptor.setNewDescription(ParserUtil.parseDescription(argMultimap
+            addLogDescriptor.setNewDescription(ParserUtil.parseLogDescription(argMultimap
                     .getValue(PREFIX_DESCRIPTION).get()));
         }
 
