@@ -102,7 +102,7 @@ public class HelpWindow extends UiPart<Stage> {
      */
     @FXML
     public boolean goToUrl() throws URISyntaxException, IOException {
-        Desktop.getDesktop().browse(URI.create(USERGUIDE_URL));
+        //Desktop.getDesktop().browse(URI.create(USERGUIDE_URL));
         return true;
     }
 }
