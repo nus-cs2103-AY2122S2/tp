@@ -6,17 +6,19 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 
 /**
- * Requests for confirmation to clear the address book.
+ * Clears the address book.
  */
-public class ClearCommand extends Command {
+public class ConfirmClearCommand extends Command {
 
-    public static final String COMMAND_WORD = "clear";
+    public static final String COMMAND_WORD = "confirm";
     //public static final String MESSAGE_FAILED_CONFIRMATION = "Clear command not confirmed. TAPA will not be cleared.";
-    public static final String MESSAGE_REQUEST_CONFIRMATION = "Please enter \"confirm\" to clear all students from TAPA.";
+    public static final String MESSAGE_CLEAR_ACKNOWLEDGEMENT = "All students cleared from TAPA as requested.";
+
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        return new CommandResult(MESSAGE_REQUEST_CONFIRMATION);
+        model.setAddressBook(new AddressBook());
+        return new CommandResult(MESSAGE_CLEAR_ACKNOWLEDGEMENT);
     }
 }
