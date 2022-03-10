@@ -15,6 +15,7 @@ import manageezpz.logic.commands.ExitCommand;
 import manageezpz.logic.commands.FindCommand;
 import manageezpz.logic.commands.HelpCommand;
 import manageezpz.logic.commands.ListCommand;
+import manageezpz.logic.commands.AddTaskCommand;
 import manageezpz.logic.parser.exceptions.ParseException;
 
 /**
@@ -67,6 +68,9 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case AddTaskCommand.COMMAND_WORD:
+            return new AddTaskCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
