@@ -23,7 +23,7 @@ public class Name {
 
     }
 
-    public static final Name WILDNAME = new WildName();
+    public static final WildName WILDNAME = new WildName();
 
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters and spaces, and it should not be blank";

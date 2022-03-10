@@ -14,8 +14,8 @@ public class ProductFulfillsFiltersPredicate implements Predicate<Product> {
     }
 
     @Override
-    public boolean test(Product product) {
-        return this.product.equals(product);
+    public boolean test(Product otherProduct) {
+        return this.product.equals(otherProduct);
     }
 
     @Override

@@ -85,11 +85,11 @@ public class Product {
         }
 
         Product otherProduct = (Product) other;
-        return otherProduct.getName().equals(getName())
-                && otherProduct.getCategory().equals(getCategory())
-                && otherProduct.getExpiryDate().equals(getExpiryDate())
-                && otherProduct.getDescription().equals(getDescription())
-                && otherProduct.getPrice().equals(getPrice());
+        return getName().equals(otherProduct.getName())
+                && getCategory().equals(otherProduct.getCategory())
+                && getExpiryDate().equals(otherProduct.getExpiryDate())
+                && getDescription().equals(otherProduct.getDescription())
+                && getPrice().equals(otherProduct.getPrice());
     }
 
     @Override

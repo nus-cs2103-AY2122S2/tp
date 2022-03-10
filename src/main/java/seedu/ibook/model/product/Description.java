@@ -21,7 +21,7 @@ public class Description {
             }
         }
     }
-    public static final Description WILDDESCRIPTION = new WildDescription();
+    public static final WildDescription WILDDESCRIPTION = new WildDescription();
     public static final String MESSAGE_CONSTRAINTS =
             "Descriptions should only contain alphanumeric characters and spaces";
 

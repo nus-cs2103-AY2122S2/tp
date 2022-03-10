@@ -23,7 +23,7 @@ public class Price {
 
     }
 
-    public static final Price WILDPRICE = new WildPrice();
+    public static final WildPrice WILDPRICE = new WildPrice();
     public static final String MESSAGE_CONSTRAINTS =
             "Prices should only be of type double, and should not be negative";
 

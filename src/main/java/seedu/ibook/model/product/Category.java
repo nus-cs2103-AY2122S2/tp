@@ -21,7 +21,7 @@ public class Category {
             }
         }
     }
-    public static final Category WILDCATEGORY = new WildCategory();
+    public static final WildCategory WILDCATEGORY = new WildCategory();
 
     public static final String MESSAGE_CONSTRAINTS =
             "Categories (if given) should only contain alphanumeric characters and spaces";

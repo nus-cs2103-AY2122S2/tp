@@ -27,7 +27,7 @@ public class ExpiryDate {
         }
     }
 
-    public static final ExpiryDate WILDEXPIRYDATE = new WildExpiryDate();
+    public static final WildExpiryDate WILDEXPIRYDATE = new WildExpiryDate();
 
     public static final String MESSAGE_CONSTRAINTS =
             "Expiry dates should have format such as 03 May 2022, 3 May 2022 or 2022-05-03";
@@ -45,6 +45,7 @@ public class ExpiryDate {
 
     private ExpiryDate() {
         expiryDate = LocalDate.parse("0000-01-01");
+        dateStringManager = null;
     }
 
     /**
