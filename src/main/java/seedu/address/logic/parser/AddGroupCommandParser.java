@@ -8,6 +8,8 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddGroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupName;
 
 public class AddGroupCommandParser implements Parser<AddGroupCommand> {
 
@@ -25,9 +27,11 @@ public class AddGroupCommandParser implements Parser<AddGroupCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGroupCommand.MESSAGE_USAGE));
         }
 
-        String groupName = argMultimap.getValue(PREFIX_GROUP_NAME).orElse("");
+        String groupNameString = argMultimap.getValue(PREFIX_GROUP_NAME).orElse("");
+        GroupName groupName = new GroupName(groupNameString);
+        Group group = new Group(groupName);
 
-        return new AddGroupCommand(groupName);
+        return new AddGroupCommand(group);
     }
 
     /**
