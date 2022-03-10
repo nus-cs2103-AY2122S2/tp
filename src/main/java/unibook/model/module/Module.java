@@ -16,7 +16,6 @@ import unibook.model.person.Student;
  * Represents a Module in the UniBook.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-//Todo: add support for students and professors for JSON/storage
 @JsonIgnoreProperties(value = {"students", "professors"})
 public class Module {
 
@@ -132,6 +131,16 @@ public class Module {
         return otherModule != null
             && otherModule.getModuleCode().equals(getModuleCode())
             && otherModule.getModuleName().equals(getModuleName());
+    }
+
+    /**
+     * Returns true if the module code this module has is equal to the given module code.
+     * @param otherCode other module code to check equality to
+     * @return boolean variable indicating if the module codes are equal
+     */
+    public boolean hasModuleCode(ModuleCode otherCode) {
+        return otherCode != null
+            && otherCode.equals(moduleCode);
     }
 
     /**

@@ -1,7 +1,7 @@
 package unibook.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static unibook.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
+import static unibook.storage.adaptedmodeltypes.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +13,8 @@ import unibook.commons.exceptions.IllegalValueException;
 import unibook.model.person.Email;
 import unibook.model.person.Name;
 import unibook.model.person.Phone;
+import unibook.storage.adaptedmodeltypes.JsonAdaptedPerson;
+import unibook.storage.adaptedmodeltypes.JsonAdaptedTag;
 import unibook.testutil.Assert;
 import unibook.testutil.TypicalPersons;
 

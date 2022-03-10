@@ -1,4 +1,4 @@
-package unibook.storage;
+package unibook.storage.adaptedmodeltypes;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,14 +15,12 @@ import unibook.model.person.Phone;
 /**
  * Jackson-friendly version of {@link Module}.
  */
-class JsonAdaptedModule {
+public class JsonAdaptedModule {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
     private final String moduleName;
     private final String moduleCode;
-    //todo: add support for list of students/professors in module
-
 
     @JsonCreator
     public JsonAdaptedModule(@JsonProperty("moduleName") String moduleName,
@@ -31,7 +29,6 @@ class JsonAdaptedModule {
         this.moduleCode = moduleCode;
     }
 
-    @JsonCreator
     public JsonAdaptedModule(Module source) {
         this.moduleName = source.getModuleName().toString();
         this.moduleCode = source.getModuleCode().toString();
@@ -52,7 +49,6 @@ class JsonAdaptedModule {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
         }
 
-        //Todo add support for existing list and student/professor list functionality
         return new Module(new ModuleName(moduleName), new ModuleCode(moduleCode));
     }
 

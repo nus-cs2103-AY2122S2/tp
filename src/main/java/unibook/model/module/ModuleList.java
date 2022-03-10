@@ -28,6 +28,16 @@ public class ModuleList implements Iterable<Module> {
     }
 
     /**
+     * Returns true if the list contains a module with given module code.
+     * @param moduleCode code to search for
+     * @return boolean variable indicating presence of this module with the moduleCode
+     */
+    public boolean contains(ModuleCode moduleCode) {
+        requireNonNull(moduleCode);
+        return internalList.stream().anyMatch(module -> module.hasModuleCode(moduleCode));
+    }
+
+    /**
      * Adds a Module to the list.
      * The Module must not already exist in the list.
      */
@@ -49,7 +59,7 @@ public class ModuleList implements Iterable<Module> {
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new ModuleNotFoundException();
+            throw new ModuleNotFoundException(target);
         }
 
         if (!target.isSameModule(editedModule) && contains(editedModule)) {
@@ -66,7 +76,7 @@ public class ModuleList implements Iterable<Module> {
     public void remove(Module toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            throw new ModuleNotFoundException();
+            throw new ModuleNotFoundException(toRemove);
         }
     }
 
@@ -86,6 +96,42 @@ public class ModuleList implements Iterable<Module> {
         }
 
         internalList.setAll(modules);
+    }
+
+
+    /**
+     * Returns the module thats equivalent to the given module object.
+     * @param searchModule
+     * @return module object
+     * @throws ModuleNotFoundException
+     */
+    public Module getModule(Module searchModule) throws ModuleNotFoundException{
+        requireNonNull(searchModule);
+        for (Module module : internalList) {
+            if (module.equals(searchModule)) {
+                return module;
+            }
+        }
+        throw new ModuleNotFoundException(searchModule);
+    }
+
+    /**
+     * Returns the module with given moduleCode if it exists in module list.
+     * If not, throws ModuleNotExistException.
+     * @param moduleCode moudleCode of intended module
+     * @return the module with matching moduleCode
+     * @throws ModuleNotFoundException
+     *
+     * TODO write tests
+     */
+    public Module getModuleByCode(ModuleCode moduleCode) throws ModuleNotFoundException {
+        requireAllNonNull(moduleCode);
+        for (Module module : internalList) {
+            if (module.hasModuleCode(moduleCode)) {
+                return module;
+            }
+        }
+        throw new ModuleNotFoundException(moduleCode);
     }
 
     /**

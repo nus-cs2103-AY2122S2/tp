@@ -12,8 +12,10 @@ import unibook.model.module.ModuleCode;
 import unibook.model.module.ModuleName;
 import unibook.model.person.Email;
 import unibook.model.person.Name;
+import unibook.model.person.Office;
 import unibook.model.person.Person;
 import unibook.model.person.Phone;
+import unibook.model.person.Professor;
 import unibook.model.person.Student;
 import unibook.model.tag.Tag;
 
@@ -62,14 +64,15 @@ public class SampleDataUtil {
         Student s2 = new Student(new Name("Bernice Yu"),
                 new Phone("99272758"), new Email("berniceyu@example.com"),
                 getTagSet("colleagues", "friends"), testModuleSet2);
-        Student s3 = new Student(new Name("Charlotte Oliveiro"),
+        Professor s3 = new Professor(new Name("Charlotte Oliveiro"),
                 new Phone("93210283"), new Email("charlotte@example.com"),
-                getTagSet("neighbours"), testModuleSet3);
+                getTagSet("neighbours"), new Office("COM1 02-10"),
+                testModuleSet3);
 
         //Add students to module's student list
         modules[1].addStudent(s1);
         modules[0].addStudent(s2);
-        modules[0].addStudent(s3);
+        modules[0].addProfessor(s3);
 
         //Add students to sample Unibook
         sampleAb.addPerson(s1);
