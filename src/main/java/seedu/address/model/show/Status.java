@@ -1,15 +1,16 @@
 package seedu.address.model.show;
 
-public class Status {
+public enum Status {
+
+    COMPLETED("completed"),
+    WATCHING("watching");
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Status should only be completed or watching!!!";
-    private static final String COMPLETED = "completed";
-    private static final String WATCHING = "watching";
+            "Status should only be either completed or watching!";
 
     private final String status;
 
-    public Status(String status) {
+    Status(String status) {
         this.status = status;
     }
 
@@ -27,11 +28,11 @@ public class Status {
     }
 
     /**
-     * Returns true if a given string is a valid status.
+     * Checks the status of the show.
+     * Returns true if a given string is a valid name.
      */
     public static boolean isValidStatus(String test) {
-        String stest = test.toLowerCase().trim();
-        return (stest.equals(COMPLETED) || stest.equals(WATCHING));
+        String uppercaseTest = test.toUpperCase();
+        return uppercaseTest.equals(COMPLETED.name()) || uppercaseTest.equals(WATCHING.name());
     }
-
 }

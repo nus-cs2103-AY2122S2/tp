@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -56,11 +57,11 @@ public class ParserUtilTrackermon {
      */
     public static Status parseStatus(String status) throws ParseException {
         requireNonNull(status);
-        String trimmedStatus = status.trim();
+        String trimmedStatus = status.trim().toUpperCase();
         if (!Status.isValidStatus(trimmedStatus)) {
             throw new ParseException(Status.MESSAGE_CONSTRAINTS);
         }
-        return new Status(trimmedStatus);
+        return Status.valueOf(trimmedStatus);
     }
 
 
