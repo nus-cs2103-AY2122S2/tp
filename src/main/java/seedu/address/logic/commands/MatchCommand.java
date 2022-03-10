@@ -8,7 +8,7 @@ public class MatchCommand extends Command {
 
     public static final String COMMAND_WORD = "match";
 
-    public static final String SHOWING_MATCH_MESSAGE = "Matched all preferences with properties. Opened Match Window";
+    public static final String SHOWING_MATCH_MESSAGE = "Matched all preferences with properties. Opened Match Window.";
 
     @Override
     public CommandResult execute(Model model) {

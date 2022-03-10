@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
@@ -10,6 +9,7 @@ import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Pair;
+import seedu.address.logic.Logic;
 import seedu.address.model.person.Person;
 
 public class MatchWindow extends UiPart<Stage> {
@@ -17,25 +17,26 @@ public class MatchWindow extends UiPart<Stage> {
     private static final String FXML = "MatchWindow.fxml";
     private static final Logger logger = LogsCenter.getLogger(MatchWindow.class);
 
+    private Logic logic;
+
     @FXML
     private ListView<Pair<Person>> matchListView;
 
     /**
-     * Creates a {@code MatchWindow} with the given {@code matchList}.
+     * Creates a new MatchWindow.
      *
      * @param root Stage to use as the root of the MatchWindow.
      */
-    public MatchWindow(List<Pair<Person>> matchList, Stage root) {
+    public MatchWindow(Logic logic, Stage root) {
         super(FXML, root);
-        matchListView.setItems(FXCollections.observableArrayList(matchList));
-        matchListView.setCellFactory(listView -> new MatchWindow.MatchListViewCell());
+        this.logic = logic;
     }
 
     /**
-     * Creates a {@code MatchWindow} with the given {@code matchList}.
+     * Creates a new HelpWindow.
      */
-    public MatchWindow(List<Pair<Person>> matchList) {
-        this(matchList, new Stage());
+    public MatchWindow(Logic logic) {
+        this(logic, new Stage());
     }
 
     /**
@@ -43,6 +44,8 @@ public class MatchWindow extends UiPart<Stage> {
      */
     public void show() {
         logger.fine("Showing match page about the application.");
+        matchListView.setItems(FXCollections.observableArrayList(logic.getMatchList()));
+        matchListView.setCellFactory(listView -> new MatchWindow.MatchListViewCell());
         getRoot().show();
         getRoot().centerOnScreen();
     }
@@ -80,7 +83,7 @@ public class MatchWindow extends UiPart<Stage> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new DoublePersonCard(match.getFirst(), match.getSecond(), getIndex() + 1).getRoot());
+                setGraphic(new DoublePersonCard(match.getFirst(), match.getSecond()).getRoot());
             }
         }
     }

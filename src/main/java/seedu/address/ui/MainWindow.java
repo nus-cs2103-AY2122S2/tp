@@ -67,7 +67,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
-        matchWindow = new MatchWindow(logic.getMatchList());
+        matchWindow = new MatchWindow(logic);
     }
 
     public Stage getPrimaryStage() {

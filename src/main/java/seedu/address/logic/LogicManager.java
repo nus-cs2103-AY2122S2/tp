@@ -68,6 +68,7 @@ public class LogicManager implements Logic {
 
     @Override
     public List<Pair<Person>> getMatchList() {
+        model.updateMatchList();
         return model.getMatchList();
     }
 

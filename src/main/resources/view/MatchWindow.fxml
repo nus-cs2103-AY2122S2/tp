@@ -3,8 +3,25 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <ListView prefHeight="413.0" prefWidth="600.0" />
-   </children>
-</VBox>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.Scene?>
+<?import java.net.URL?>
+
+<fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+         title="Match Window" minWidth="450" minHeight="600" >
+<icons>
+   <Image url="@/images/address_book_32.png" />
+</icons>
+<scene>
+   <Scene>
+      <stylesheets>
+         <URL value="@DarkTheme.css" />
+         <URL value="@Extensions.css" />
+      </stylesheets>
+
+      <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+         <ListView fx:id="matchListView" VBox.vgrow="ALWAYS" />
+      </VBox>
+   </Scene>
+</scene>
+</fx:root>
