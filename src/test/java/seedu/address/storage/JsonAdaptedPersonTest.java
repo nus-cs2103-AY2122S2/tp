@@ -43,7 +43,8 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_invalidStudentID_throwsIllegalValueException() {
         JsonAdaptedPerson person =
-                new JsonAdaptedPerson(INVALID_STUDENT_ID, VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_COURSE, VALID_TAGS);
+                new JsonAdaptedPerson(INVALID_STUDENT_ID, VALID_NAME, VALID_PHONE,
+                        VALID_EMAIL, VALID_COURSE, VALID_TAGS);
         String expectedMessage = StudentID.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -59,7 +60,8 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedPerson person =
-                new JsonAdaptedPerson(VALID_STUDENT_ID, INVALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_COURSE, VALID_TAGS);
+                new JsonAdaptedPerson(VALID_STUDENT_ID, INVALID_NAME, VALID_PHONE,
+                        VALID_EMAIL, VALID_COURSE, VALID_TAGS);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -75,7 +77,8 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_invalidPhone_throwsIllegalValueException() {
         JsonAdaptedPerson person =
-                new JsonAdaptedPerson(VALID_STUDENT_ID, VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_COURSE, VALID_TAGS);
+                new JsonAdaptedPerson(VALID_STUDENT_ID, VALID_NAME, INVALID_PHONE,
+                        VALID_EMAIL, VALID_COURSE, VALID_TAGS);
         String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -91,7 +94,8 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_invalidEmail_throwsIllegalValueException() {
         JsonAdaptedPerson person =
-                new JsonAdaptedPerson(VALID_STUDENT_ID, VALID_NAME, VALID_PHONE, INVALID_EMAIL, VALID_COURSE, VALID_TAGS);
+                new JsonAdaptedPerson(VALID_STUDENT_ID, VALID_NAME, VALID_PHONE,
+                        INVALID_EMAIL, VALID_COURSE, VALID_TAGS);
         String expectedMessage = Email.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
