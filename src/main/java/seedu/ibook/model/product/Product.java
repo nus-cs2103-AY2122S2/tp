@@ -4,6 +4,8 @@ import static seedu.ibook.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+import seedu.ibook.model.product.item.ExpiryDate;
+
 /**
  * Represents a Product in the ibook.
  * Guarantees: details are present and not null, field values are validated, immutable.

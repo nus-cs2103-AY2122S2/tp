@@ -11,11 +11,11 @@ import seedu.ibook.logic.commands.FindCommand;
 import seedu.ibook.logic.parser.exceptions.ParseException;
 import seedu.ibook.model.product.Category;
 import seedu.ibook.model.product.Description;
-import seedu.ibook.model.product.ExpiryDate;
 import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Price;
 import seedu.ibook.model.product.Product;
 import seedu.ibook.model.product.ProductFulfillsFiltersPredicate;
+import seedu.ibook.model.product.item.ExpiryDate;
 
 /**
  * Parses input arguments and creates a new FindCommand object

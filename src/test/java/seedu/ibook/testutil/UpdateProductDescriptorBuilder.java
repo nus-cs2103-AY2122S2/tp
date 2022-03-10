@@ -3,10 +3,10 @@ package seedu.ibook.testutil;
 import seedu.ibook.logic.commands.UpdateCommand.UpdateProductDescriptor;
 import seedu.ibook.model.product.Category;
 import seedu.ibook.model.product.Description;
-import seedu.ibook.model.product.ExpiryDate;
 import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Price;
 import seedu.ibook.model.product.Product;
+import seedu.ibook.model.product.item.ExpiryDate;
 
 /**
  * A utility class to help with building UpdateProductDescriptor objects.
