@@ -113,5 +113,6 @@ Format: `exit`
 | **Add**    | `add n/NAME_OF_PET o/OWNER_NAME p/PHONE_NUMBER a/ADDRESS` <br> e.g., `add n/Peepee o/Peter p/98648252 a/13 Computing Drive, Singapore 117417` |
 | **Delete** | `delete id` <br> e.g., `delete 3` (where 3 is the id of the pet in the system)                                                                |
 | **Find**   | `find n/NAME_OF_PET [Keywords]` <br> e.g., `find PeePee` (returns information of all pets called PeePee)                                      |
+| **Diet**   | `diet INDEX d/remark` <br> e.g. `diet 12 Only feed dry kibble` (stores remark in pet 12's database)                                           |
 | **Time**   | `time id `<br> e.g.,`pickup 3 0900 1200` (where 3 is the id of the pet in the system)                                                         |
 | **Exit**   | `exit`                                                                                                                                        |
