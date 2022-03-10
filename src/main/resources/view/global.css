@@ -1,3 +1,11 @@
+@font-face {
+    src: url('NotoSans-Regular.ttf');
+}
+
+* {
+    -fx-font-family: 'Noto Sans';
+}
+
 .grid-title {
     -fx-border-width: 0 0 0 0.1;
     -fx-border-style: solid;
@@ -32,6 +40,18 @@
     -fx-background-color: #E0E0E0;
 }
 
+.command {
+    -fx-background-color: #F1F2F3;
+    -fx-background-radius: 8px;
+    -fx-padding: 15;
+}
+
+.command:focused {
+    -fx-background-color: white;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 3.5, 0.4, 0, 1);
+    -fx-prompt-text-fill: derive(-fx-control-inner-background,-30%);
+}
+
 .text-area {
     -fx-background-insets: 0;
     -fx-background-color: white;
@@ -39,4 +59,17 @@
 
 .text-area .content {
     -fx-background-color: white;
+}
+
+.primary-button {
+    -fx-background-color: #9F93Ed;
+    -fx-background-radius: 8;
+}
+
+.primary-button:hover {
+    -fx-background-color: #8373e7;
+}
+
+.primary-button:pressed {
+    -fx-background-color: #7d6de0;
 }

@@ -62,7 +62,7 @@
         <Button mnemonicParsing="false" style="-fx-background-color: transparent;">
             <graphic>
                 <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
-                           style="-fx-background-color: # ffd970;">
+                           style="-fx-background-color: #ffd970;">
                     <Image url="@../images/edit.png"/>
                 </ImageView>
             </graphic>
@@ -71,7 +71,7 @@
                 style="-fx-background-color: transparent;">
             <graphic>
                 <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
-                           style="-fx-background-color: # ffd970;">
+                           style="-fx-background-color: #ffd970;">
                     <Image url="@../images/trash-2.png"/>
                 </ImageView>
             </graphic>

@@ -30,6 +30,7 @@ public class MainWindow extends UiPart<Stage> {
     private CommandBox commandBox;
     private ResultWindow resultWindow;
     private Table table;
+    private PopupAdd popupAdd;
 
     @FXML
     private VBox mainContent;
@@ -43,6 +44,8 @@ public class MainWindow extends UiPart<Stage> {
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+
+        popupAdd = new PopupAdd(this::executeCommand);
     }
 
     void show() {
@@ -70,7 +73,7 @@ public class MainWindow extends UiPart<Stage> {
         menuToolbar = new MenuToolbar();
         children.add(menuToolbar.getRoot());
 
-        commandBox = new CommandBox(this::executeCommand);
+        commandBox = new CommandBox(this::executeCommand, this::showPopupAdd);
         children.add(commandBox.getRoot());
 
         resultWindow = new ResultWindow();
@@ -95,9 +98,44 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            if (popupAdd.isShowing()) {
+                popupAdd.hide();
+            }
+
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
-            resultWindow.setFeedbackToUser(e.getMessage());
+            if (popupAdd.isShowing()) {
+                popupAdd.setFeedbackToUser(e.getMessage());
+            } else {
+                resultWindow.setFeedbackToUser(e.getMessage());
+            }
+
         }
+    }
+
+    private void showPopupAdd() {
+        if (popupAdd.isShowing()) {
+            popupAdd.focus();
+        } else {
+            popupAdd.show();
+        }
+    }
+
+    /**
+     * Represents a function that can execute commands.
+     */
+    @FunctionalInterface
+    public interface CommandExecutor {
+        /**
+         * Executes the command and returns the result.
+         *
+         * @see seedu.ibook.logic.Logic#execute(String)
+         */
+        void execute(String commandText);
+    }
+
+    @FunctionalInterface
+    public interface Popup {
+        void show();
     }
 }

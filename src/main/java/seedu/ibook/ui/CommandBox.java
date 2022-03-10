@@ -8,7 +8,8 @@ public class CommandBox extends UiPart<HBox> {
 
     private static final String FXML = "CommandBox.fxml";
 
-    private final CommandExecutor commandExecutor;
+    private final MainWindow.CommandExecutor commandExecutor;
+    private final MainWindow.Popup popup;
 
     @FXML
     private TextField commandTextField;
@@ -16,9 +17,11 @@ public class CommandBox extends UiPart<HBox> {
     /**
      * Creates a {@code CommandBox} with the given {@code CommandExecutor}.
      */
-    public CommandBox(CommandExecutor commandExecutor) {
+    public CommandBox(MainWindow.CommandExecutor commandExecutor,
+                      MainWindow.Popup popup) {
         super(FXML);
         this.commandExecutor = commandExecutor;
+        this.popup = popup;
     }
 
     /**
@@ -35,16 +38,9 @@ public class CommandBox extends UiPart<HBox> {
         commandTextField.setText("");
     }
 
-    /**
-     * Represents a function that can execute commands.
-     */
-    @FunctionalInterface
-    public interface CommandExecutor {
-        /**
-         * Executes the command and returns the result.
-         *
-         * @see seedu.ibook.logic.Logic#execute(String)
-         */
-        void execute(String commandText);
+    @FXML
+    private void openPopup() {
+        popup.show();
     }
+
 }
