@@ -227,12 +227,18 @@ Format: `del -a INDEX`
 
 Examples:
 <<<<<<< HEAD
+<<<<<<< HEAD
 * `list` followed by `delete 2` deletes the 2nd applicant in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st applicant in the results of the `find` command.
 =======
 * `list` followed by `delete -a 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete -a 1` deletes the 1st person in the results of the `find` command.
 >>>>>>> ba1f565e346e96db5cba7f27690755202cd69f37
+=======
+
+* `list` followed by `delete -a 2` deletes the 2nd person in the address book.
+* `find Betsy` followed by `delete -a 1` deletes the 1st person in the results of the `find` command.
+>>>>>>> d31fe563e59a76dc2c92c377808b21254db15f40
 
 ### Delete positions : `del -p`
 
