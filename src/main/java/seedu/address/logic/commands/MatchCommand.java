@@ -4,6 +4,10 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.model.Model;
 
+/**
+ * Searches for all matching properties and preferences
+ * and opens a new window to display respective sellers and buyers.
+ */
 public class MatchCommand extends Command {
 
     public static final String COMMAND_WORD = "match";

@@ -89,16 +89,17 @@ public class Person {
     }
 
     /**
-     * Returns true if the given {@code preference}'s preference matches with this person's property.
+     * Returns true if the given {@code buyer}'s {@code preference}
+     * matches with {@code this} person's {@code property}.
      */
-    public boolean matches(Person preference) {
+    public boolean matches(Person buyer) {
         if (property.isEmpty()) {
             return false;
         }
-        if (preference.preference.isEmpty()) {
+        if (buyer.preference.isEmpty()) {
             return false;
         }
-        return property.get().equals(preference.preference.get());
+        return property.get().equals(buyer.preference.get());
     }
 
     /**

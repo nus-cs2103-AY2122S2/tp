@@ -50,7 +50,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Optional<String> propertyArg = argMultimap.getValue(PREFIX_PROPERTY);
         Optional<Property> property =
                 propertyArg.isPresent() ? Optional.of(ParserUtil.parseProperty(propertyArg.get())) : Optional.empty();
-        // property is optional since it should not be present if the person being added is a not a buyer.
+        // preference is optional since it should not be present if the person being added is a not a buyer.
         Optional<String> preferenceArg = argMultimap.getValue(PREFIX_PREFERENCE);
         Optional<Property> preference =
                 preferenceArg.isPresent() ? Optional.of(ParserUtil.parseProperty(propertyArg.get())) : Optional.empty();

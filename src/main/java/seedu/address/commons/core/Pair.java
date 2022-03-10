@@ -1,5 +1,8 @@
 package seedu.address.commons.core;
 
+/**
+ * Represents a pair of two objects of type {@code T}.
+ */
 public class Pair<T> {
 
     private final T first;
