@@ -1,7 +1,5 @@
 package seedu.ibook.storage;
 
-import java.time.LocalDate;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -32,14 +30,14 @@ class JsonAdaptedProduct {
     @JsonCreator
     public JsonAdaptedProduct(@JsonProperty("name") String name,
                               @JsonProperty("category") String category,
-                              @JsonProperty("expiryDate") LocalDate expiryDate,
+                              @JsonProperty("expiryDate") String expiryDate,
                               @JsonProperty("description") String description,
-                              @JsonProperty("price") Double price) {
+                              @JsonProperty("price") String price) {
         this.name = name;
         this.category = category;
-        this.expiryDate = expiryDate.toString();
+        this.expiryDate = expiryDate;
         this.description = description;
-        this.price = price.toString();
+        this.price = price;
     }
 
     /**
@@ -90,7 +88,7 @@ class JsonAdaptedProduct {
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()));
         }
         if (!Description.isValidDescription(description)) {
-            throw new IllegalValueException(Category.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
         }
         final Description modelDescription = new Description(description);
 
