@@ -41,6 +41,10 @@
           <Menu mnemonicParsing="false" text="New tag">
             <MenuItem fx:id="newTagMenuItem" mnemonicParsing="false" text="New Tag" />
           </Menu>
+          <Menu mnemonicParsing="false" text="Theme">
+            <MenuItem fx:id="lightThemeMenuItem" mnemonicParsing="false" onAction="#handleLightTheme" text="Light" />
+            <MenuItem fx:id="darkThemeMenuItem" mnemonicParsing="false" onAction="#handleDarkTheme" text="Dark" />
+          </Menu>
         </MenuBar>
 
         <StackPane VBox.vgrow="NEVER" fx:id="searchBarPlaceholder" minHeight="40" prefHeight="40" maxHeight="40"

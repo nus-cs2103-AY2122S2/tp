@@ -1,7 +1,7 @@
 package seedu.address.ui;
 
+import java.util.Objects;
 import java.util.logging.Logger;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
@@ -184,6 +184,26 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Switch to light theme.
+     */
+    @FXML
+    public void handleLightTheme() {
+        String lightThemeUrl = Objects.requireNonNull(getClass().getResource("/view/LightTheme.css")).toExternalForm();
+        this.primaryStage.getScene().getStylesheets().clear();
+        this.primaryStage.getScene().getStylesheets().add(lightThemeUrl);
+    }
+
+    /**
+     * Switch to dark theme.
+     */
+    @FXML
+    public void handleDarkTheme() {
+        String darkThemeUrl = Objects.requireNonNull(getClass().getResource("/view/DarkTheme.css")).toExternalForm();
+        this.primaryStage.getScene().getStylesheets().clear();
+        this.primaryStage.getScene().getStylesheets().add(darkThemeUrl);
+    }
+
+    /**
      * Executes the command and returns the result.
      *
      * @see seedu.address.logic.Logic#execute(String)
@@ -212,7 +232,6 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Whenever the selected person card changes, set the profile with the selected person.
-     *
      */
     public static void setSelectedProfile(ListView<Person> listView) {
         Person person = listView.getSelectionModel().getSelectedItem();

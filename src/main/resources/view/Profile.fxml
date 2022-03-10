@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" styleClass="profileCard" >
+<StackPane xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
    <VBox alignment="CENTER" spacing="10">
       <Label fx:id="name" styleClass="profile_big_label" text="\$name"/>
       <FlowPane fx:id="tags" alignment="CENTER"/>
