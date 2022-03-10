@@ -5,13 +5,17 @@ package seedu.address.model.person;
  * Currently hard coded - to be further developed.
  */
 public class Weight {
-    int weight;
+    String weight;
 
     /**
-     * Constructs a {@code Weight}
+     * Constructs a {@code Weight}.
      */
     public Weight() {
-        this.weight = 80;
+        this.weight = "80";
+    }
+
+    public Weight(String weight) {
+        this.weight = weight;
     }
 
     @Override

@@ -5,17 +5,21 @@ package seedu.address.model.person;
  * Currently hard coded - to be further developed.
  */
 public class JerseyNumber {
-    int jerseyNumber;
+    String jerseyNumber;
 
     /**
-     * Constructs a {@code JerseyNumber}
+     * Constructs a {@code JerseyNumber}.
      */
     public JerseyNumber() {
-        this.jerseyNumber = 23;
+        this.jerseyNumber = "23";
+    }
+
+    public JerseyNumber(String jerseryNumber) {
+        this.jerseyNumber = jerseryNumber;
     }
 
     @Override
     public String toString() {
-        return String.valueOf(this.jerseyNumber);
+        return this.jerseyNumber;
     }
 }

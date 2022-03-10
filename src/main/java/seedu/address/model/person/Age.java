@@ -5,13 +5,18 @@ package seedu.address.model.person;
  * Currently hard coded - to be further developed.
  */
 public class Age {
-    int age;
+    String age;
 
     /**
-     * Constructs a {@code Age}
+     * Constructs a {@code Age}.
+     * Hardcoded, to be further developed.
      */
     public Age() {
-        this.age = 23;
+        this.age = "23";
+    }
+
+    public Age(String age) {
+        this.age = age;
     }
 
     @Override

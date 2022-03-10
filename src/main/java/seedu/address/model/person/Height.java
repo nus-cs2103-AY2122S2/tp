@@ -6,13 +6,17 @@ package seedu.address.model.person;
  */
 public class Height {
 
-    int height;
+    String height;
 
     /**
-     * Constructs a {@code Height}
+     * Constructs a {@code Height}.
      */
     public Height() {
-        this.height = 180;
+        this.height = "180";
+    }
+
+    public Height(String height) {
+        this.height = height;
     }
 
     @Override
