@@ -10,6 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Log;
 import seedu.address.model.person.Name;
@@ -44,7 +45,7 @@ public class ParserUtil {
      * @throws ParseException if the given {@code name} is invalid.
      */
     public static Name parseName(String name) throws ParseException {
-        requireNonNull(name);
+        requireNonNull(name); //when a name is entered by user, it should not be null
         String trimmedName = name.trim();
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
@@ -59,7 +60,7 @@ public class ParserUtil {
      * @throws ParseException if the given {@code phone} is invalid.
      */
     public static Phone parsePhone(String phone) throws ParseException {
-        requireNonNull(phone);
+        requireNonNull(phone); //when a phone number is entered by user, it should not be null
         String trimmedPhone = phone.trim();
         if (!Phone.isValidPhone(trimmedPhone)) {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
@@ -74,7 +75,7 @@ public class ParserUtil {
      * @throws ParseException if the given {@code address} is invalid.
      */
     public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
+        requireNonNull(address); //when an address is entered by user, it should not be null
         String trimmedAddress = address.trim();
         if (!Address.isValidAddress(trimmedAddress)) {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
@@ -89,12 +90,27 @@ public class ParserUtil {
      * @throws ParseException if the given {@code email} is invalid.
      */
     public static Email parseEmail(String email) throws ParseException {
-        requireNonNull(email);
+        requireNonNull(email); //when an email is entered by user, it should not be null
         String trimmedEmail = email.trim();
         if (!Email.isValidEmail(trimmedEmail)) {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String description} into an {@code Description}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code description} is invalid.
+     */
+    public static Description parsePersonDescription(String description) throws ParseException {
+        requireNonNull(description); //when a description is entered by user, it should not be null
+        String trimmedDescription = description.trim();
+        if (!Description.isValidDescription(trimmedDescription)) {
+            throw new ParseException(Description.MESSAGE_CONSTRAINTS);
+        }
+        return new Description(trimmedDescription);
     }
 
     /**
@@ -138,7 +154,7 @@ public class ParserUtil {
     }
 
     // TODO: 8/3/2022  refactor into Description object
-    public static String parseDescription(String description) throws ParseException {
+    public static String parseLogDescription(String description) throws ParseException {
         return description; // no restrictions on description at the moment
     }
 

@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
 
 import java.util.ArrayList;
@@ -36,7 +35,7 @@ public class AddLogCommand extends Command {
             + PREFIX_TITLE + "TITLE"
             + " [" + PREFIX_DESCRIPTION + "DESCRIPTION]\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
+            + "1 "
             + PREFIX_TITLE + "Likes apples";
 
     public static final String MESSAGE_ADD_LOG_SUCCESS = "New log added!";
