@@ -15,7 +15,7 @@ import seedu.address.model.show.Show;
 
 public class ModelManagerTrackermon implements ModelTrackermon {
 
-    private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+    private static final Logger logger = LogsCenter.getLogger(ModelManagerTrackermon.class);
 
     private final ShowList showList;
     private final UserPrefsTrackermon userPrefs;

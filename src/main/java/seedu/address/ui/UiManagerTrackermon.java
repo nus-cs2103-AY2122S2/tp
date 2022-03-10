@@ -24,7 +24,7 @@ public class UiManagerTrackermon implements Ui {
     private static final String ICON_APPLICATION = "/images/address_book_32.png";
 
     private LogicTrackermon logic;
-    private MainWindowTrackermon mainWindow;
+    private MainWindow mainWindow;
 
     /**
      * Creates a {@code UiManager} with the given {@code Logic}.
@@ -41,7 +41,7 @@ public class UiManagerTrackermon implements Ui {
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
         try {
-            mainWindow = new MainWindowTrackermon(primaryStage, logic);
+            mainWindow = new MainWindow(primaryStage, logic);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
 
