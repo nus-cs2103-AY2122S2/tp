@@ -16,7 +16,7 @@ public class DescriptionTest {
     }
 
     @Test
-    public void constructor_invalidDescription_emptySpaces_throwsIllegalArgumentException() {
+    public void constructor_invalidDescriptionEmptySpaces_throwsIllegalArgumentException() {
         String invalidDescription = " ";
         assertThrows(IllegalArgumentException.class, () -> new Description(invalidDescription));
     }
