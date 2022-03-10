@@ -1,11 +1,14 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JERSEYNUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -19,15 +22,18 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
+import seedu.address.model.person.Age;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Height;
+import seedu.address.model.person.JerseyNumber;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Weight;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing person in MyGM.
  */
 public class EditCommand extends Command {
 
@@ -40,7 +46,10 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_AGE + "AGE] "
+            + "[" + PREFIX_HEIGHT + "HEIGHT] "
+            + "[" + PREFIX_WEIGHT + "WEIGHT] "
+            + "[" + PREFIX_JERSEYNUMBER + "JERSEYNUMBER] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -96,10 +105,15 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Age updatedAge = editPersonDescriptor.getAge().orElse(personToEdit.getAge());
+        Height updatedHeight = editPersonDescriptor.getHeight().orElse(personToEdit.getHeight());
+        Weight updatedWeight = editPersonDescriptor.getWeight().orElse(personToEdit.getWeight());
+        JerseyNumber updatedJerseyNumber = editPersonDescriptor.getJerseyNumber()
+                .orElse(personToEdit.getJerseyNumber());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAge,
+                updatedHeight, updatedJerseyNumber, updatedTags, updatedWeight);
     }
 
     @Override
@@ -128,8 +142,11 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
-        private Address address;
+        private Age age;
+        private Height height;
+        private JerseyNumber jerseyNumber;
         private Set<Tag> tags;
+        private Weight weight;
 
         public EditPersonDescriptor() {}
 
@@ -141,15 +158,18 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            setAddress(toCopy.address);
+            setAge(toCopy.age);
+            setHeight(toCopy.height);
+            setJerseyNumber(toCopy.jerseyNumber);
             setTags(toCopy.tags);
+            setWeight(toCopy.weight);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, age, height, jerseyNumber, tags, weight);
         }
 
         public void setName(Name name) {
@@ -176,12 +196,36 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setAddress(Address address) {
-            this.address = address;
+        public void setAge(Age age) {
+            this.age = age;
         }
 
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
+        public Optional<Age> getAge() {
+            return Optional.ofNullable(age);
+        }
+
+        public void setHeight(Height height) {
+            this.height = height;
+        }
+
+        public Optional<Height> getHeight() {
+            return Optional.ofNullable(height);
+        }
+
+        public void setJerseyNumber(JerseyNumber jerseyNumber) {
+            this.jerseyNumber = jerseyNumber;
+        }
+
+        public Optional<JerseyNumber> getJerseyNumber() {
+            return Optional.ofNullable(jerseyNumber);
+        }
+
+        public void setWeight(Weight weight) {
+            this.weight = weight;
+        }
+
+        public Optional<Weight> getWeight() {
+            return Optional.ofNullable(weight);
         }
 
         /**
@@ -219,7 +263,10 @@ public class EditCommand extends Command {
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
-                    && getAddress().equals(e.getAddress())
+                    && getAge().equals(e.getAge())
+                    && getHeight().equals(e.getHeight())
+                    && getJerseyNumber().equals(e.getJerseyNumber())
+                    && getWeight().equals(e.getWeight())
                     && getTags().equals(e.getTags());
         }
     }
