@@ -122,32 +122,89 @@ Format: `posadd POSITION_NAME n/NUM_OPENINGS [d/DESCRIPTION] [r/REQUIREMENTS]`
 Examples:
 * `add -p Senior Software Engineer n/3 d/More than 5 years experience r/JavaScript r/HTML r/CSS`
 
+### Adding positions : `add -p`
+
+Adds a new open position to HireLah.
+Format: `posadd POSITION_NAME n/NUM_OPENINGS [d/DESCRIPTION] [r/REQUIREMENTS]`
+* Positions must have a **unique name**.
+* Name provided is case-insensitive.
+* Number of openings in the position must be **0 or more** 0, 1, 2, …​
+
+Examples:
+* `add -p Senior Software Engineer n/3 d/More than 5 years experience r/JavaScript r/HTML r/CSS`
+
+## Edit
+General command to edit different types into HireLah.
+
+Format: `edit -TYPE`
+* TYPE must take the form of `a`, `i`, `p`
+* -a will edit an applicant
+* -i will edit an interview
+* -p will edit a position
+
+### Editing an Applicant : `edit -a`
+
+Edits an existing Applicant in HireLah.
+
+Format: `edit -a INDEX [n/APPLICANT_NAME] [d/DOB] [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+
+* Edits the Applicant at the specified `INDEX`. The index refers to the index number shown in the displayed Applicant
+  list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* You can remove all the Applicant’s tags by typing `t/` without
+  specifying any tags after it.
+
+Examples:
+*  `edit -a 1 n/Belle d/1960-03-04 g/F p/81234567` Edits the name, DOB, gender and phone number of the 1st person
+   to be `Belle`, `1960-03-04`, `F` and `81234567` respectively.
+*  `edit -a 2 e/belle@yahoo.com a/13 Computing Drive 612345 t/` Edits the email and address of the 2nd person to be
+   `belle@yahoo.com` and `13 Computing Drive 612345` respectively, and clears all existing tags.
+
+### Editing an Interview : `edit -i`
+
+Edit an existing interview in HireLah.
+
+Format: `edit -i CANDIDATE_INDEX ROLE [d/DATE] [r/NEWROLE]`
+* Edits the interview with CANDIDATE_INDEX and ROLE.
+* At least one optional field must be provided.
+* Existing attribute of the interview will be updated to the input value.
+* When editing requirements, the existing requirements of the interview will be removed. i.e.
+  adding requirements is not cumulative.
+
+Examples:
+* `edit -i 1 Senior Frontend Software Engineer d/2022-01-01 15:00`
+* `edit -i 1 Senior Frontend Software Engineer r/Senior FullStack Developer`
+
+
+### Edit positions : `edit -p`
+
+Edit an existing position in HireLah.
+Format: `edit -p POSITION_NAME [n/NUM_OPENINGS] [d/DESCRIPTION] [r/REQUIREMENTS]`
+
+* Edits the available position with POSITION_NAME.
+* Position name provided is case-insensitive.
+* At least one optional field must be provided.
+* Existing attributes of the position will be updated to the input value.
+* When editing requirements, the existing requirements of the position will be removed. i.e. adding requirements is not cumulative.
+* Requirements can be removed by providing an empty requirement field. i.e. r/
+
+Examples:
+* `edit -p Senior Frontend Software Engineer n/5`
+* `edit -p Senior Frontend Software Engineer r/JavaScript r/React`
+
+### List Positions : `poslist`
+
+Lists all existing positions in HireLah.
+Format: `poslist`
+
 
 ### Listing all Applicants : `appllist`
 
 Shows a list of all Applicants in HireLah.
 
 Format: `appllist`
-
-### Editing an Applicant : `appledit`
-
-Edits an existing Applicant in HireLah.
-
-Format: `appledit INDEX [n/APPLICANT_NAME] [d/DOB] [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
-
-* Edits the Applicant at the specified `INDEX`. The index refers to the index number shown in the displayed Applicant 
-  list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the Applicant’s tags by typing `t/` without
-    specifying any tags after it.
-
-Examples:
-*  `appledit 1 n/Belle d/1960-03-04 g/F p/81234567` Edits the name, DOB, gender and phone number of the 1st person 
-   to be `Belle`, `1960-03-04`, `F` and `81234567` respectively.
-*  `appledit 2 e/belle@yahoo.com a/13 Computing Drive 612345 t/` Edits the email and address of the 2nd person to be 
-   `belle@yahoo.com` and `13 Computing Drive 612345` respectively, and clears all existing tags.
 
 ### Deleting an Applicant : `appldel`
 
@@ -163,28 +220,10 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-
-
-### Edit positions : `posedit`
-
-Edit an existing position in HireLah.
-Format: `posedit POSITION_NAME [n/NUM_OPENINGS] [d/DESCRIPTION] [r/REQUIREMENTS]`
-
-* Edits the available position with POSITION_NAME.
-* Position name provided is case-insensitive.
-* At least one optional field must be provided.
-* Existing attributes of the position will be updated to the input value.
-* When editing requirements, the existing requirements of the position will be removed. i.e. adding requirements is not cumulative. 
-* Requirements can be removed by providing an empty requirement field. i.e. r/
-
-Examples:
-* `posedit Senior Frontend Software Engineer n/5`
-* `posedit Senior Frontend Software Engineer r/JavaScript r/React`
-
-### Delete positions : `posdel`
+### Delete positions : `del -p`
 
 Deletes an existing position in HireLah.
-Format: `posdel POSITION_NAME`
+Format: `del -p POSITION_NAME`
 * Existing position with the specified name is deleted.
 * The position name has to match with the position that is to be deleted.
 * Position name provided is case-insensitive.
@@ -196,23 +235,6 @@ Examples:
 
 Lists all existing positions in HireLah.
 Format: `poslist`
-
-
-
-### Editing an Interview : `intvwedit`
-
-Edit an existing interview in HireLah.
-
-Format: `intvwedit CANDIDATE_INDEX ROLE [d/DATE] [r/NEWROLE]`
-* Edits the interview with CANDIDATE_INDEX and ROLE.
-* At least one optional field must be provided.
-* Existing attribute of the interview will be updated to the input value.
-* When editing requirements, the existing requirements of the interview will be removed. i.e. 
-adding requirements is not cumulative.
-
-Examples:
-* `intvwedit 1 Senior Frontend Software Engineer d/2022-01-01 15:00`
-* `intvwedit 1 Senior Frontend Software Engineer r/Senior FullStack Developer`
 
 ### Deleting an Interview: `intvwdel`
 
