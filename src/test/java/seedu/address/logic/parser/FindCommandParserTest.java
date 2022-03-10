@@ -1,25 +1,36 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.model.company.CompanyNameContainsKeywordsPredicate;
+import seedu.address.model.role.RoleNameContainsKeywordsPredicate;
+
 public class FindCommandParserTest {
 
     private FindCommandParser parser = new FindCommandParser();
 
-    /* @Test
+    @Test
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-    } */
+    }
 
-    /* @Test
+    @Test
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
-        FindCommand expectedFindCommand
-                = new FindCommand(new CompanyNameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")
-                , Arrays.asList("Alice", "Bob"))
-                , new RoleNameContainsKeywordsPredicate(Arrays.asList("Test", "Test")));
-        assertParseSuccess(parser, "Alice Bob", expectedFindCommand);
+        FindCommand expectedFindCommand =
+                new FindCommand(new CompanyNameContainsKeywordsPredicate(new ArrayList<>(),
+                Arrays.asList("Square", "Enix")), new RoleNameContainsKeywordsPredicate(new ArrayList<>()));
+        assertParseSuccess(parser, " c/Square Enix", expectedFindCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindCommand);
-    } */
-
+        assertParseSuccess(parser, " c/ \n Square  \t Enix  \t", expectedFindCommand);
+    }
 }

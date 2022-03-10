@@ -5,7 +5,7 @@ import static seedu.address.logic.commands.CommandTestUtil.DEADLINE_DESC_SOFTWAR
 import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_SOFTWARE_ENGINEER;
 import static seedu.address.logic.commands.CommandTestUtil.INDEX_DESC_SOFTWARE_ENGINEER;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DEADLINE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_INDEX_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_RNAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_STATUS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_STIPEND_DESC;
@@ -24,7 +24,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddRoleCommand;
 import seedu.address.model.role.Deadline;
-import seedu.address.model.role.Description;
 import seedu.address.model.role.Role;
 import seedu.address.model.role.RoleName;
 import seedu.address.model.role.Status;
@@ -93,11 +92,11 @@ public class AddRoleCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        //// invalid index
-        //assertParseFailure(parser, INVALID_INDEX_DESC + NAME_DESC_SOFTWARE_ENGINEER
-        //        + STATUS_DESC_SOFTWARE_ENGINEER + DEADLINE_DESC_SOFTWARE_ENGINEER + DESCRIPTION_DESC_SOFTWARE_ENGINEER
-        //        + STIPEND_DESC_SOFTWARE_ENGINEER,
-        //        String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddRoleCommand.MESSAGE_USAGE));
+        // invalid index
+        assertParseFailure(parser, INVALID_INDEX_DESC + NAME_DESC_SOFTWARE_ENGINEER
+                + STATUS_DESC_SOFTWARE_ENGINEER + DEADLINE_DESC_SOFTWARE_ENGINEER + DESCRIPTION_DESC_SOFTWARE_ENGINEER
+                + STIPEND_DESC_SOFTWARE_ENGINEER,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddRoleCommand.MESSAGE_USAGE));
 
         // invalid name
         assertParseFailure(parser, INDEX_DESC_SOFTWARE_ENGINEER + INVALID_RNAME_DESC
@@ -113,11 +112,6 @@ public class AddRoleCommandParserTest {
         assertParseFailure(parser, INDEX_DESC_SOFTWARE_ENGINEER + NAME_DESC_SOFTWARE_ENGINEER
                 + STATUS_DESC_SOFTWARE_ENGINEER + INVALID_DEADLINE_DESC + DESCRIPTION_DESC_SOFTWARE_ENGINEER
                 + STIPEND_DESC_SOFTWARE_ENGINEER, Deadline.MESSAGE_CONSTRAINTS);
-
-//        // invalid description
-//        assertParseFailure(parser, INDEX_DESC_SOFTWARE_ENGINEER + NAME_DESC_SOFTWARE_ENGINEER
-//                + STATUS_DESC_SOFTWARE_ENGINEER + DEADLINE_DESC_SOFTWARE_ENGINEER + INVALID_DESCRIPTION_DESC
-//                + STIPEND_DESC_SOFTWARE_ENGINEER, Description.MESSAGE_CONSTRAINTS);
 
         // invalid stipend
         assertParseFailure(parser, INDEX_DESC_SOFTWARE_ENGINEER + NAME_DESC_SOFTWARE_ENGINEER

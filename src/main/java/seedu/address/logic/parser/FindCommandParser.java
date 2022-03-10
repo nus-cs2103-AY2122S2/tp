@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE_NAME;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.AddCompanyCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.company.CompanyNameContainsKeywordsPredicate;
@@ -31,7 +30,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         if ((!arePrefixesPresent(argMultimap, PREFIX_COMPANY_NAME)
                 && !arePrefixesPresent(argMultimap, PREFIX_ROLE_NAME)) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddCompanyCommand.MESSAGE_USAGE));
+                    FindCommand.MESSAGE_USAGE));
         }
 
         String companyName = argMultimap.getOptionalValue(PREFIX_COMPANY_NAME).get();

@@ -25,6 +25,7 @@ import seedu.address.model.Model;
 import seedu.address.model.company.Company;
 import seedu.address.model.company.CompanyNameContainsKeywordsPredicate;
 import seedu.address.model.role.Role;
+import seedu.address.model.role.RoleNameContainsKeywordsPredicate;
 import seedu.address.testutil.EditCompanyDescriptorBuilder;
 
 /**
@@ -157,8 +158,8 @@ public class CommandTestUtil {
 
         Company company = model.getFilteredCompanyList().get(targetIndex.getZeroBased());
         final String[] splitName = company.getName().fullName.split("\\s+");
-        model.updateFilteredCompanyList(new CompanyNameContainsKeywordsPredicate(Arrays.asList(splitName[0]),
-                Arrays.asList("")), PREDICATE_SHOW_ALL_ROLES);
+        model.updateFilteredCompanyList(new CompanyNameContainsKeywordsPredicate(new ArrayList<>(),
+                Arrays.asList(splitName)), new RoleNameContainsKeywordsPredicate(new ArrayList<>()));
 
         assertEquals(1, model.getFilteredCompanyList().size());
     }

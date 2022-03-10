@@ -10,7 +10,8 @@ import seedu.address.model.company.CompanyNameContainsKeywordsPredicate;
 import seedu.address.model.role.RoleNameContainsKeywordsPredicate;
 
 /**
- * Finds and lists all companies in address book whose name contains any of the argument keywords.
+ * Finds and lists all companies or roles whose name contains any of the argument keywords.
+ * Search type of search conducted depends on the format of user input.
  * Keyword matching is case insensitive.
  */
 public class FindCommand extends Command {
