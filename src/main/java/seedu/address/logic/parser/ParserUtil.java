@@ -123,6 +123,12 @@ public class ParserUtil {
         return tagSet;
     }
 
+    /**
+     * Parses a {@code String groupName} into a {@code GroupName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code groupName} is invalid.
+     */
     public static GroupName parseGroupName(String groupName) throws ParseException {
         requireNonNull(groupName);
         String trimmedName = groupName.trim();
