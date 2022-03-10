@@ -23,6 +23,7 @@ import seedu.address.model.tag.Tag;
  */
 public class Person {
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<Membership> memberships = new HashSet<>();
     private final Map<Prefix, Field> fields = new HashMap<>();
 
     /**
@@ -53,16 +54,23 @@ public class Person {
     }
 
     /**
-     * Placeholder
-     * @param fields placeholder
-     * @param tags placeholder
+     * Person constructor
+     * @param fields A collection of all the person's attributes
+     * @param tags A collection of all the person's tags
+     * @param memberships A collection of all the person's memberships
      */
-    public Person(Collection<Field> fields, Collection<Tag> tags) {
+    public Person(Collection<Field> fields, Collection<Tag> tags, Collection<Membership> memberships) {
         requireAllNonNull(tags, fields);
         // Add tags.
         for (Tag t : tags) {
             checkArgument(t != null, "All tags in Person constructor cannot be null.");
             this.tags.add(t);
+        }
+
+        // Add memberships.
+        for (Membership m : memberships) {
+            checkArgument(m != null, "All Memberships in Person constructor cannot be null.");
+            this.memberships.add(m);
         }
 
         // Add fields.
@@ -78,7 +86,7 @@ public class Person {
     }
 
     public Person(Person otherPerson) {
-        this(otherPerson.getFields(), otherPerson.getTags());
+        this(otherPerson.getFields(), otherPerson.getTags(), otherPerson.getMemberships());
     }
 
     public Person setField(Field field) {
@@ -88,7 +96,7 @@ public class Person {
         } else {
             updatedFields.put(field.prefix, field);
         }
-        return new Person(updatedFields.values(), tags);
+        return new Person(updatedFields.values(), tags, memberships);
     }
 
     public Optional<Field> getField(Prefix prefix) {
@@ -124,7 +132,25 @@ public class Person {
     }
 
     public Person setTags(Collection<Tag> tags) {
-        return new Person(this.fields.values(), tags);
+        return new Person(this.fields.values(), tags, this.memberships);
+    }
+
+    /**
+     * Returns an immutable membership set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Membership> getMemberships() {
+        return Collections.unmodifiableSet(memberships);
+    }
+
+    public Person setMemberships(Collection<Membership> memberships) {
+        return new Person(this.fields.values(), tags, memberships);
+    }
+
+    public Person addMembership(Membership membership) {
+        Set<Membership> newMembers = new HashSet<>(memberships);
+        newMembers.add(membership);
+        return new Person(this.fields.values(), tags, newMembers);
     }
 
     /**
@@ -157,13 +183,14 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getMemberships().equals(getMemberships());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(getName(), getPhone(), getEmail(), getAddress(), tags);
+        return Objects.hash(getName(), getPhone(), getEmail(), getAddress(), tags, memberships);
     }
 
     @Override
@@ -181,6 +208,10 @@ public class Person {
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
+        }
+        if (!memberships.isEmpty()) {
+            builder.append("; Memberships: ");
+            memberships.forEach(builder::append);
         }
         return builder.toString();
     }
