@@ -31,6 +31,14 @@ public class CommandTestUtil {
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
+    public static final String VALID_AGE_AMY = "18";
+    public static final String VALID_AGE_BOB = "19";
+    public static final String VALID_HEIGHT_AMY = "165";
+    public static final String VALID_HEIGHT_BOB = "172";
+    public static final String VALID_JERSEYNUMBER_AMY = "0";
+    public static final String VALID_JERSEYNUMBER_BOB = "1";
+    public static final String VALID_WEIGHT_AMY = "48";
+    public static final String VALID_WEIGHT_BOB = "58";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 

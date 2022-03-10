@@ -57,6 +57,10 @@ public class PersonBuilder {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
+        age = personToCopy.getAge();
+        height = personToCopy.getHeight();
+        jerseyNumber = personToCopy.getJerseyNumber();
+        weight = personToCopy.getWeight();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
