@@ -54,6 +54,39 @@ public class Person {
     }
 
     /**
+     * Overloaded Person constructor with an additonal memberships parameter
+     * @param name the person's name
+     * @param phone the person's phone
+     * @param email the person's email
+     * @param address the person's address
+     * @param tags the person's tags
+     * @param memberships the person's memberships
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Set<Membership> memberships) {
+        requireAllNonNull(name, phone, email, address, tags, memberships);
+
+        // Add fields.
+        fields.put(name.prefix, name);
+        fields.put(phone.prefix, phone);
+        fields.put(email.prefix, email);
+        fields.put(address.prefix, address);
+        Remark remark = new Remark("");
+        fields.put(remark.prefix, remark);
+
+        // Add tags.
+        for (Tag t : tags) {
+            checkArgument(t != null, "All tags in Person constructor cannot be null.");
+            this.tags.add(t);
+        }
+
+        // Add memberships.
+        for (Membership m : memberships) {
+            checkArgument(m != null, "All Memberships in Person constructor cannot be null.");
+            this.memberships.add(m);
+        }
+    }
+
+    /**
      * Person constructor
      * @param fields A collection of all the person's attributes
      * @param tags A collection of all the person's tags

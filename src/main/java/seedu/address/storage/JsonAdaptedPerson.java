@@ -17,6 +17,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Membership;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -31,6 +32,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final String remark;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final List<JsonAdaptedMembership> memberships = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -38,7 +40,8 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("remark") String remark, @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("remark") String remark, @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+                             @JsonProperty("memberships") List<JsonAdaptedMembership> memberships) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -46,6 +49,9 @@ class JsonAdaptedPerson {
         this.remark = remark;
         if (tagged != null) {
             this.tagged.addAll(tagged);
+        }
+        if (memberships != null) {
+            this.memberships.addAll(memberships);
         }
     }
 
@@ -61,6 +67,9 @@ class JsonAdaptedPerson {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        memberships.addAll(source.getMemberships().stream()
+                .map(JsonAdaptedMembership::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -72,6 +81,11 @@ class JsonAdaptedPerson {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
+        }
+
+        final List<Membership> personMemberships = new ArrayList<>();
+        for (JsonAdaptedMembership membership : memberships) {
+            personMemberships.add(membership.toModelType());
         }
 
         if (name == null) {
@@ -109,7 +123,10 @@ class JsonAdaptedPerson {
         final Remark modelRemark = new Remark(remark);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags).setField(modelRemark);
+
+        final Set<Membership> modelMemberships = new HashSet<>(personMemberships);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelMemberships)
+                .setField(modelRemark);
     }
 
 }

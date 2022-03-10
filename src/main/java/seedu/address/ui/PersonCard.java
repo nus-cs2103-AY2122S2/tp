@@ -70,8 +70,8 @@ public class PersonCard extends UiPart<Region> {
 
         // Memberships.
         person.getMemberships().stream()
-                .sorted(Comparator.comparing(membership -> membership.getValue()))
-                .forEach(membership -> memberships.getChildren().add(new Label(membership.getValue())));
+                .sorted(Comparator.comparing(membership -> membership.toString()))
+                .forEach(membership -> memberships.getChildren().add(new Label(membership.toString())));
     }
 
     @Override

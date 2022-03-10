@@ -5,14 +5,20 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import seedu.address.logic.parser.Prefix;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 /**
  * Represents a Person's Membership in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
-public class Membership extends Field {
+public class Membership {
     public static final Prefix PREFIX = new Prefix("m/", true);
+    public static final Prefix DATE_PREFIX = new Prefix("d/", false);
     public static final String MESSAGE_CONSTRAINTS =
             "Membership names should only contain alphanumeric characters and spaces, and it should not be blank";
+    public static final String MESSAGE_DATE_CONSTRAINTS =
+            "Date is in an invalid format";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -21,6 +27,7 @@ public class Membership extends Field {
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     private final String value;
+    private final LocalDate date;
 
     /**
      * Constructs a {@code Membership}.
@@ -28,10 +35,23 @@ public class Membership extends Field {
      * @param name A valid membership.
      */
     public Membership(String name) {
-        super(PREFIX);
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
         value = name;
+        date = null;
+    }
+
+    /**
+     * Overloaded Constructs a {@code Membership}.
+     *
+     * @param name A valid membership name.
+     * @param date A valid date.
+     */
+    public Membership(String name, LocalDate date) {
+        requireNonNull(name);
+        checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
+        value = name;
+        this.date = date;
     }
 
     /**
@@ -41,21 +61,41 @@ public class Membership extends Field {
         return test.matches(VALIDATION_REGEX);
     }
 
-    @Override
+    /**
+     * Returns true if a given date is a valid date.
+     */
+    public static boolean isValidDate(String test) {
+        try {
+            LocalDate.parse(test);
+        }
+        catch (DateTimeParseException e) {
+            return false;
+        }
+        return true;
+    }
+
     public String getValue() {
         return value;
     }
 
+    public LocalDate getDate() {
+        return date;
+    }
+
     @Override
     public String toString() {
-        return value;
+        String date_postFix = "";
+        if (date != null) {
+            date_postFix = " since " + date.toString();
+        }
+        return value + date_postFix;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Membership // instanceof handles nulls
-                && value.equals(((Membership) other).value)); // state check
+                && value.equals(((Membership) other).value) && date.equals(((Membership) other).date)); // state check
     }
 
     @Override

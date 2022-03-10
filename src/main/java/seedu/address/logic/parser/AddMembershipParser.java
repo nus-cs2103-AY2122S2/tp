@@ -9,6 +9,8 @@ import seedu.address.logic.commands.AddMembershipCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Membership;
 
+import java.time.LocalDate;
+
 /**
  * Parses input arguments and creates a new AddCommand object
  */
@@ -21,16 +23,30 @@ public class AddMembershipParser implements Parser<AddMembershipCommand> {
      */
     public AddMembershipCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, Membership.PREFIX);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, Membership.PREFIX, Membership.DATE_PREFIX);
 
         Index index;
         try {
             index = IndexParser.parse(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMembershipCommand.MESSAGE_USAGE), ive);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddMembershipCommand.MESSAGE_USAGE), ive);
+        }
+        String membershipName = argMultimap.getValue(Membership.PREFIX).orElse("");
+        if (!Membership.isValidName(membershipName)) {
+            throw new ParseException(Membership.MESSAGE_CONSTRAINTS);
         }
 
-        Membership membership = new Membership(argMultimap.getValue(Membership.PREFIX).orElse(""));
+        Membership membership;
+        String date = argMultimap.getValue(Membership.DATE_PREFIX).orElse("");
+        if (!date.equals("")) {
+            if (!Membership.isValidDate(date)) {
+                throw new ParseException(Membership.MESSAGE_DATE_CONSTRAINTS);
+            }
+            membership = new Membership(membershipName, LocalDate.parse(date));
+        } else {
+            membership = new Membership(membershipName);
+        }
 
         return new AddMembershipCommand(index, membership);
     }
