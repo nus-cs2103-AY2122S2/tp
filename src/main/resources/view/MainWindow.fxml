@@ -39,7 +39,7 @@
             <MenuItem fx:id="addMenuItem" mnemonicParsing="false" text="Add" />
           </Menu>
           <Menu mnemonicParsing="false" text="New tag">
-            <MenuItem fx:id="newTagMenuItem" mnemonicParsing="false" text="New Tag" />
+            <MenuItem fx:id="newTagMenuItem" mnemonicParsing="false" onAction="#handleAddTag" text="New Tag" />
           </Menu>
         </MenuBar>
 

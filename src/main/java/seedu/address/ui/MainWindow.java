@@ -37,6 +37,8 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private AddTagWindow addTagWindow;
+
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -75,6 +77,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        addTagWindow = new AddTagWindow(logic);
     }
 
     public Stage getPrimaryStage() {
@@ -161,6 +164,23 @@ public class MainWindow extends UiPart<Stage> {
         } else {
             helpWindow.focus();
         }
+//        if (!addTagWindow.isShowing()) {
+//            addTagWindow.show();
+//        } else {
+//            addTagWindow.focus();
+//        }
+    }
+
+    /**
+     * Opens the help window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleAddTag() {
+        if (!addTagWindow.isShowing()) {
+            addTagWindow.show();
+        } else {
+            addTagWindow.focus();
+        }
     }
 
     void show() {
@@ -175,7 +195,7 @@ public class MainWindow extends UiPart<Stage> {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
-        helpWindow.hide();
+        //helpWindow.hide();
         primaryStage.hide();
     }
 
