@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.company.RoleManager.PREDICATE_SHOW_ALL_ROLES;
 
 import java.nio.file.Path;
 import java.util.function.Predicate;
@@ -12,6 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.company.Company;
+import seedu.address.model.role.Role;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -101,13 +103,12 @@ public class ModelManager implements Model {
     @Override
     public void addCompany(Company company) {
         companyList.addCompany(company);
-        updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);
+        updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES, PREDICATE_SHOW_ALL_ROLES);
     }
 
     @Override
     public void setCompany(Company target, Company editedCompany) {
         requireAllNonNull(target, editedCompany);
-
         companyList.setCompany(target, editedCompany);
     }
 
@@ -123,9 +124,10 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateFilteredCompanyList(Predicate<Company> predicate) {
-        requireNonNull(predicate);
-        filteredCompanies.setPredicate(predicate);
+    public void updateFilteredCompanyList(Predicate<Company> companyPredicate, Predicate<Role> rolePredicate) {
+        requireNonNull(companyPredicate);
+        filteredCompanies.setPredicate(companyPredicate);
+        filteredCompanies.forEach(company -> company.getRoleManager().updateFilteredRoleList(rolePredicate));
     }
 
     @Override

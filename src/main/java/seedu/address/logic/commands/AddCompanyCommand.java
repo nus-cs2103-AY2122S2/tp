@@ -6,6 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_COMPANIES;
+import static seedu.address.model.company.RoleManager.PREDICATE_SHOW_ALL_ROLES;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -55,6 +57,7 @@ public class AddCompanyCommand extends Command {
         }
 
         model.addCompany(toAdd);
+        model.updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES, PREDICATE_SHOW_ALL_ROLES);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

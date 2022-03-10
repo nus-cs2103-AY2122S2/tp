@@ -6,18 +6,37 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.StringUtil;
 
 /**
- * Tests that a {@code Company}'s {@code Name} matches any of the keywords given.
+ * Holds the keywords {@code roleNameKeywords} and {@code companyNameKeywords} in
+ * order to look for matches with stored {@code Company} and its {@code Role}.
+ * <p></p>
+ * If {@code companyNameKeywords} is empty, look for matches only on {@code Role}
+ * with {@code roleNameKeywords}.
+ * <br>
+ * If {@code roleNameKeywords} is empty, look for matches only on {@code Company}
+ * with {@code companyNameKeywords}.
+ * <br>
+ * If both {@code companyNameKeywords} and {@code roleNameKeywords} are available,
+ * within those {@code Company} that matches {@code companyNameKeywords}, look for
+ * matches on {@code Role} with {@code roleNameKeywords}
  */
 public class CompanyNameContainsKeywordsPredicate implements Predicate<Company> {
-    private final List<String> keywords;
 
-    public CompanyNameContainsKeywordsPredicate(List<String> keywords) {
-        this.keywords = keywords;
+    private final List<String> companyNameKeywords;
+
+    /**
+     * Constructor for {@code CompanyNamecontainsKeywordsPredicate} that stores keywords
+     * {@code roleNameKeywords} and {@code companyNameKeywords}.
+     *
+     * @param companyNameKeywords List of strings representing company name keywords entered by user
+     */
+    public CompanyNameContainsKeywordsPredicate(List<String> companyNameKeywords) {
+        this.companyNameKeywords = companyNameKeywords;
     }
+
 
     @Override
     public boolean test(Company company) {
-        return keywords.stream()
+        return companyNameKeywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(company.getName().fullName, keyword));
     }
 
@@ -27,7 +46,7 @@ public class CompanyNameContainsKeywordsPredicate implements Predicate<Company> 
                 // instanceof handles nulls
                 || (other instanceof CompanyNameContainsKeywordsPredicate
                 // state check
-                && keywords.equals(((CompanyNameContainsKeywordsPredicate) other).keywords));
+                && companyNameKeywords.equals(((CompanyNameContainsKeywordsPredicate) other).companyNameKeywords));
     }
 
 }

@@ -17,7 +17,7 @@ public class RoleManager {
     /**
      * {@code Predicate} that always evaluate to true
      */
-    private static final Predicate<Role> PREDICATE_SHOW_ALL_ROLES = unused -> true;
+    public static final Predicate<Role> PREDICATE_SHOW_ALL_ROLES = unused -> true;
 
     private final RoleList roleList;
     private final FilteredList<Role> filteredRoles;
@@ -95,6 +95,7 @@ public class RoleManager {
     /**
      * Updates the filter of the filtered role list to filter by the given {@code predicate}.
      *
+     * @param predicate Predicate to be tested against.
      * @throws NullPointerException if {@code predicate} is null.
      */
     public void updateFilteredRoleList(Predicate<Role> predicate) {

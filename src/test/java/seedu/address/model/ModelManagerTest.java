@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_COMPANIES;
+import static seedu.address.model.company.RoleManager.PREDICATE_SHOW_ALL_ROLES;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalCompanies.AMAZON;
 import static seedu.address.testutil.TypicalCompanies.META;
@@ -16,6 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.company.CompanyNameContainsKeywordsPredicate;
+import seedu.address.model.role.RoleNameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -120,11 +122,12 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         String[] keywords = META.getName().fullName.split("\\s+");
-        modelManager.updateFilteredCompanyList(new CompanyNameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        modelManager.updateFilteredCompanyList(new CompanyNameContainsKeywordsPredicate(Arrays.asList(keywords)),
+                new RoleNameContainsKeywordsPredicate(Arrays.asList("")));
         assertFalse(modelManager.equals(new ModelManager(companyList, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);
+        modelManager.updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES, PREDICATE_SHOW_ALL_ROLES);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();

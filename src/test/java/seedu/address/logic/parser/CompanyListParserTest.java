@@ -9,7 +9,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_COMPANY;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,6 +24,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.company.Company;
 import seedu.address.model.company.CompanyNameContainsKeywordsPredicate;
+import seedu.address.model.role.RoleNameContainsKeywordsPredicate;
 import seedu.address.testutil.CompanyBuilder;
 import seedu.address.testutil.CompanyUtil;
 import seedu.address.testutil.EditCompanyDescriptorBuilder;
@@ -73,9 +73,10 @@ public class CompanyListParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(FindCommand.COMMAND_WORD + " "
-                + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new CompanyNameContainsKeywordsPredicate(keywords)), command);
+        FindCommand command = (FindCommand) parser.parseCommand(FindCommand.COMMAND_WORD + " c/"
+                + String.join(" ", keywords) + " r/" + String.join(" ", keywords));
+        assertEquals(new FindCommand(new CompanyNameContainsKeywordsPredicate(keywords),
+                new RoleNameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test

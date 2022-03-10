@@ -3,10 +3,15 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STIPEND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.company.RoleManager.PREDICATE_SHOW_ALL_ROLES;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -26,7 +31,7 @@ import seedu.address.testutil.EditCompanyDescriptorBuilder;
  */
 public class CommandTestUtil {
 
-    public static final String VALID_DEADLINE_SOFTWARE_ENGINEER = "01-01-2021 00:00";
+    public static final String VALID_DEADLINE_SOFTWARE_ENGINEER = "01-01-2023 00:00";
     public static final String VALID_NAME_SOFTWARE_ENGINEER = "Software engineer";
     public static final String VALID_STIPEND_SOFTWARE_ENGINEER = "8888";
     public static final String VALID_STATUS_SOFTWARE_ENGINEER = "offered";
@@ -54,11 +59,30 @@ public class CommandTestUtil {
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
-    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
-    public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
-    public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
-    public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INDEX_DESC_SOFTWARE_ENGINEER = " 1";
+    public static final String NAME_DESC_SOFTWARE_ENGINEER = " " + PREFIX_NAME + VALID_NAME_SOFTWARE_ENGINEER;
+    public static final String STATUS_DESC_SOFTWARE_ENGINEER = " " + PREFIX_STATUS + VALID_STATUS_SOFTWARE_ENGINEER;
+    public static final String DEADLINE_DESC_SOFTWARE_ENGINEER =
+            " " + PREFIX_DEADLINE + VALID_DEADLINE_SOFTWARE_ENGINEER;
+    public static final String DESCRIPTION_DESC_SOFTWARE_ENGINEER =
+            " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_SOFTWARE_ENGINEER;
+    public static final String STIPEND_DESC_SOFTWARE_ENGINEER =
+            " " + PREFIX_STIPEND + VALID_STIPEND_SOFTWARE_ENGINEER;
+
+    public static final String INVALID_INDEX_DESC = " ";
+    public static final String INVALID_ROLE_NAME_DESC = " " + PREFIX_NAME + "Softw@re Engineer";
+    public static final String INVALID_STATUS_DESC = " " + PREFIX_STATUS + "dont know";
+    public static final String INVALID_DEADLINE_DESC =
+            " " + PREFIX_DEADLINE + "01-01-1999 00:00";
+    public static final String INVALID_DESCRIPTION_DESC =
+            " " + PREFIX_DESCRIPTION + "Fronte^d";
+    public static final String INVALID_STIPEND_DESC = " " + PREFIX_STIPEND + "one thousand";
+
+    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&";
+    public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a";
+    public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo";
+    public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS;
+    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*";
 
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
@@ -129,7 +153,8 @@ public class CommandTestUtil {
 
         Company company = model.getFilteredCompanyList().get(targetIndex.getZeroBased());
         final String[] splitName = company.getName().fullName.split("\\s+");
-        model.updateFilteredCompanyList(new CompanyNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredCompanyList(new CompanyNameContainsKeywordsPredicate(Arrays.asList(splitName)),
+                PREDICATE_SHOW_ALL_ROLES);
 
         assertEquals(1, model.getFilteredCompanyList().size());
     }

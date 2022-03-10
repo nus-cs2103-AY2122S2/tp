@@ -15,7 +15,7 @@ public class StipendTest {
 
     @Test
     public void constructor_invalidStipend_throwsIllegalArgumentException() {
-        String invalidStipend = "";
+        String invalidStipend = "invalid";
         assertThrows(IllegalArgumentException.class, () -> new Stipend(invalidStipend));
     }
 
@@ -25,7 +25,6 @@ public class StipendTest {
         assertThrows(NullPointerException.class, () -> Stipend.isValidStipend(null));
 
         // invalid stipends
-        assertFalse(Stipend.isValidStipend("")); // empty string
         assertFalse(Stipend.isValidStipend(" ")); // spaces only
         assertFalse(Stipend.isValidStipend("22222222222")); // more than 10 numbers
         assertFalse(Stipend.isValidStipend("stipend")); // non-numeric
@@ -33,6 +32,7 @@ public class StipendTest {
         assertFalse(Stipend.isValidStipend("22 22")); // spaces within digits
 
         // valid stipends
+        assertTrue(Stipend.isValidStipend("")); // empty string
         assertTrue(Stipend.isValidStipend("1000"));
         assertTrue(Stipend.isValidStipend("1")); // one number
         assertTrue(Stipend.isValidStipend("100000000")); // ten numbers

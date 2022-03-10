@@ -78,6 +78,7 @@ public class CompanyCard extends UiPart<Region> {
 
         setRoleTags(roleList);
         setRoleListPanelPlaceholder(roleList);
+        updateView(roleList);
 
         roleList.addListener((ListChangeListener<Role>) change -> updateView(roleList));
     }
@@ -88,10 +89,6 @@ public class CompanyCard extends UiPart<Region> {
     public void setRoleListPanelPlaceholder(ObservableList<Role> roleList) {
         roleListPanel = new RoleListPanel(roleList);
         roleListPanelPlaceholder.getChildren().add(roleListPanel.getRoot());
-
-        if (roleList.isEmpty()) {
-            roleListPanelPlaceholder.setManaged(false);
-        }
     }
 
     /**

@@ -6,13 +6,14 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.company.Company;
+import seedu.address.model.role.Role;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /**
-     * {@code Predicate} that always evaluate to true
+     * {@code Predicate} that always evaluate to true, for filtering companies.
      */
     Predicate<Company> PREDICATE_SHOW_ALL_COMPANIES = unused -> true;
 
@@ -91,5 +92,5 @@ public interface Model {
      *
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredCompanyList(Predicate<Company> predicate);
+    void updateFilteredCompanyList(Predicate<Company> predicate, Predicate<Role> rolePredicate);
 }

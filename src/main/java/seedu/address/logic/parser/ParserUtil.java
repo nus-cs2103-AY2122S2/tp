@@ -65,6 +65,7 @@ public class ParserUtil {
 
     /**
      * Parses two {@code oneBasedIndex} into an array of {@code Index} of length two and returns it.
+     *
      * @param content String representation of user input.
      * @return Pair containing company index and role information.
      * @throws ParseException if either index or role information is absent or index is invalide.
@@ -205,7 +206,7 @@ public class ParserUtil {
     public static Deadline parseDeadline(String deadline) throws ParseException {
         requireNonNull(deadline);
         String trimmedDeadline = deadline.trim();
-        if (!Deadline.isValidDeadline(trimmedDeadline)) {
+        if (!Deadline.isValidDeadline(trimmedDeadline) || !Deadline.isDeadlineAfter(trimmedDeadline)) {
             throw new ParseException(Deadline.MESSAGE_CONSTRAINTS);
         }
         return new Deadline(trimmedDeadline);
