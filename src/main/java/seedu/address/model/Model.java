@@ -104,6 +104,11 @@ public interface Model {
      */
     void deleteEvent(Event target);
 
+    /**
+     * Returns true if all friend names in Event correspond to actual Friend objects.
+     */
+    boolean areEventFriendsValid(Event toAdd);
+
     //=========== List Accessors =============================================================
 
     /** Returns an unmodifiable view of the filtered person list */
