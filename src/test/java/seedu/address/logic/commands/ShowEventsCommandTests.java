@@ -43,7 +43,7 @@ public class ShowEventsCommandTests {
     }
 
     @Test
-    public void execute_noevents() {
+    public void execute_noevents_showsEmptyList() {
         Model noEventModel = new ModelManager(getTypicalAddressBook(), new EventBook(), new UserPrefs());
         assertCommandSuccess(new ShowEventsCommand(), noEventModel, ShowEventsCommand.MESSAGE_SUCCESS, noEventModel);
 
@@ -53,7 +53,7 @@ public class ShowEventsCommandTests {
     }
 
     @Test
-    public void execute_noPeople_noEvents() {
+    public void execute_noEntries_showsEmptyPersonEventLists() {
         Model PersonEventModel = new ModelManager(getTypicalAddressBook(), new EventBook(), new UserPrefs());
         Set<Person> tempSet = new HashSet<>(PersonEventModel.getFilteredPersonList());
         Event temp = new Event(new Name("RandomName"), new DateTime("10-10-12 1430"), new Description("blah"), tempSet);
