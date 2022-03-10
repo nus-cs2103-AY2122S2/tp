@@ -24,7 +24,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class MainWindowTrackermon extends UiPart<Stage> {
 
-    private static final String FXML = "MainWindow.fxml";
+    private static final String FXML = "MainWindowTrackermon.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 

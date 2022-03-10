@@ -8,8 +8,8 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyShowList;
-import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.UserPrefs;
+import seedu.address.model.ReadOnlyUserPrefsTrackermon;
+import seedu.address.model.UserPrefsTrackermon;
 
 /**
  * Manages storage of ShowList data in local storage.
@@ -18,12 +18,12 @@ public class StorageManagerTrackermon implements StorageTrackermon {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private ShowListStorage showListStorage;
-    private UserPrefsStorage userPrefsStorage;
+    private UserPrefsStorageTrackermon userPrefsStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
-    public StorageManagerTrackermon(ShowListStorage showListStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManagerTrackermon(ShowListStorage showListStorage, UserPrefsStorageTrackermon userPrefsStorage) {
         this.showListStorage = showListStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
@@ -36,12 +36,12 @@ public class StorageManagerTrackermon implements StorageTrackermon {
     }
 
     @Override
-    public Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException {
+    public Optional<UserPrefsTrackermon> readUserPrefs() throws DataConversionException, IOException {
         return userPrefsStorage.readUserPrefs();
     }
 
     @Override
-    public void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException {
+    public void saveUserPrefs(ReadOnlyUserPrefsTrackermon userPrefs) throws IOException {
         userPrefsStorage.saveUserPrefs(userPrefs);
     }
 
