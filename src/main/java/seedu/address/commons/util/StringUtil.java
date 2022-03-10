@@ -38,6 +38,31 @@ public class StringUtil {
                 .anyMatch(preppedWord::equalsIgnoreCase);
     }
 
+
+    /**
+     * Returns true if the {@code sentence} contains the {@code string}.
+     *   Ignores case, and {@code sentence} needs to contain the full {@code string}.
+     *   <br>examples:<pre>
+     *       containsStringIgnoreCase("ABc def", "abc") == true
+     *       containsStringIgnoreCase("ABc def", "DE") == true
+     *       containsStringIgnoreCase("ABc def", "AB") == true //full word match not required
+     *       containsStringIgnoreCase("ABc def", "ABc De") == true
+     *       </pre>
+     * @param sentence cannot be null
+     * @param string cannot be null, cannot be empty, can have white spaces
+     */
+    public static boolean containsStringIgnoreCase(String sentence, String string) {
+        requireNonNull(sentence);
+        requireNonNull(string);
+
+        String preppedString = string.trim().toLowerCase();
+        checkArgument(!preppedString.isEmpty(), "String parameter cannot be empty");
+
+        String preppedSentence = sentence.toLowerCase();
+
+        return preppedSentence.contains(preppedString);
+    }
+
     /**
      * Returns a detailed message of the t, including the stack trace.
      */
