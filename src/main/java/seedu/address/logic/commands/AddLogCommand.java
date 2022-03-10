@@ -2,8 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,9 +13,13 @@ import java.util.Set;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.AddLogCommandParser;
 import seedu.address.model.Model;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Log;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 
@@ -36,6 +41,7 @@ public class AddLogCommand extends Command {
 
     public static final String MESSAGE_ADD_LOG_SUCCESS = "New log added!";
     public static final String MESSAGE_DUPLICATE_LOG = "This log already exists for this friend.";
+    public static final String MESSAGE_INVALID_INDEX = Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 
     private final Index index;
     private final AddLogDescriptor addLogDescriptor;
@@ -59,14 +65,13 @@ public class AddLogCommand extends Command {
 
         // get person and modify
         if (this.index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_INDEX);
         }
         Person personToEdit = lastShownList.get(this.index.getZeroBased());
         Person addedLogPerson = createAddedLogPerson(personToEdit, this.addLogDescriptor);
 
         // add to address book
         model.setPerson(personToEdit, addedLogPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(MESSAGE_ADD_LOG_SUCCESS);
     }
 
@@ -85,7 +90,7 @@ public class AddLogCommand extends Command {
         Email email = personToEdit.getEmail();
         Address address = personToEdit.getAddress();
         Set<Tag> tags = personToEdit.getTags();
-        List<Log> updatedLogs = addLogDescriptor.getLogs(personToEdit); // main logic encompassed here
+        List<Log> updatedLogs = addLogDescriptor.getLogsAfterAdd(personToEdit); // main logic encompassed here
         return new Person(name, phone, email, address, tags, updatedLogs);
     }
 
@@ -148,21 +153,21 @@ public class AddLogCommand extends Command {
          * Returns a list of {@code Log} objects that include the {@code Person}'s original logs
          * as well as the new logs.
          */
-        public List<Log> getLogs(Person personToEdit) throws CommandException {
-            try {
-                Log toAdd = new Log(this.newTitle, this.newDescription); // create log to be added
-                if (personToEdit.containsLog(toAdd)) {
-                    throw new CommandException(MESSAGE_DUPLICATE_LOG); // ensure not a duplicate log being inserted
-                }
-                List<Log> newLogs = new ArrayList<Log>(personToEdit.getLogs());
-                newLogs.add(toAdd); // add log
-                return newLogs;
+        public List<Log> getLogsAfterAdd(Person personToEdit) throws CommandException {
 
-            } catch (IllegalArgumentException ie) {
-                throw new CommandException(Log.TITLE_CONSTRAINTS); // illegal title
-            } catch (NullPointerException ne) {
-                throw new CommandException(AddLogCommandParser.MESSAGE_INVALID_FORMAT);
+            // sanity checks
+            assert (this.newTitle != null);
+            assert (Log.isValidTitle(this.newTitle));
+
+            Log toAdd = new Log(this.newTitle, this.newDescription); // create log to be added
+            if (personToEdit.containsLog(toAdd)) {
+                throw new CommandException(MESSAGE_DUPLICATE_LOG); // ensure not a duplicate log being inserted
             }
+
+            List<Log> newLogs = new ArrayList<>(personToEdit.getLogs());
+            newLogs.add(toAdd); // add log
+
+            return newLogs;
         }
 
         @Override

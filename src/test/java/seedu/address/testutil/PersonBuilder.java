@@ -5,7 +5,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Log;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.UniqueLogList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -90,6 +96,9 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Log} of the {@code Person} that we are building.
+     */
     public PersonBuilder withLogs(Log ... logs) {
         UniqueLogList uniqueLogList = new UniqueLogList();
         uniqueLogList.setLogs(List.of(logs));
@@ -97,14 +106,15 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Log} of the {@code Person} that we are building.
+     */
     public PersonBuilder withLogs(List<Log> logs) {
         UniqueLogList uniqueLogList = new UniqueLogList();
         uniqueLogList.setLogs(logs);
         this.logs = uniqueLogList.asUnmodifiableObservableList();
         return this;
     }
-
-
 
     public Person build() {
         return new Person(name, phone, email, address, tags, logs);

@@ -1,6 +1,19 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LOG_DESCRIPTION;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LOG_TITLE;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -8,16 +21,6 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-
-import org.junit.jupiter.api.Test;
 import seedu.address.model.person.Log;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
@@ -29,7 +32,6 @@ public class AddLogCommandTest {
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLogCommand.MESSAGE_USAGE);
-    private static final String MESSAGE_INVALID_TITLE = Log.TITLE_CONSTRAINTS;
     private static final String MESSAGE_INVALID_INDEX = Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 
     // ===== UNIT TESTS =====
@@ -83,7 +85,7 @@ public class AddLogCommandTest {
     data state of the model.
      */
     @Test
-    public void execute_validIInput_unfilteredList_success() {
+    public void execute_validIInputUnfilteredList_success() {
 
         String title = VALID_LOG_TITLE;
         String description = VALID_LOG_DESCRIPTION;
@@ -127,7 +129,7 @@ public class AddLogCommandTest {
     }
 
     @Test
-    public void execute_validIInput_filteredList_success() {
+    public void execute_validInputFilteredList_success() {
 
         String title = VALID_LOG_TITLE;
         String description = VALID_LOG_DESCRIPTION;
@@ -143,10 +145,12 @@ public class AddLogCommandTest {
 
         // only title
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        log = new Log(title, null);
         showPersonAtIndex(model, INDEX_FIRST_PERSON); // apply filter
 
+        log = new Log(title, null);
         expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON); // apply filter
+
         basePerson = expectedModel.getFilteredPersonList().get(targetIndex.getZeroBased());
         addedLogPerson = new PersonBuilder(basePerson).withLogs(log).build();
         expectedModel.setPerson(basePerson, addedLogPerson);
@@ -158,10 +162,12 @@ public class AddLogCommandTest {
 
         // title and description
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        log = new Log(title, description);
         showPersonAtIndex(model, INDEX_FIRST_PERSON); // apply filter
 
+        log = new Log(title, description);
         expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON); // apply filter
+
         basePerson = expectedModel.getFilteredPersonList().get(targetIndex.getZeroBased());
         addedLogPerson = new PersonBuilder(basePerson).withLogs(log).build();
         expectedModel.setPerson(basePerson, addedLogPerson);
@@ -171,7 +177,6 @@ public class AddLogCommandTest {
         descriptor.setNewDescription(description);
         command = new AddLogCommand(targetIndex, descriptor);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-
     }
 
     @Test
@@ -218,12 +223,11 @@ public class AddLogCommandTest {
     }
 
     @Test
-    public void execute_invalidInput_unfilteredList_failure() {
+    public void execute_invalidInputUnfilteredList_failure() {
 
         String title = VALID_LOG_TITLE;
         String invalidTitle = "";
         AddLogCommand command;
-        Index targetIndex = INDEX_FIRST_PERSON;
         Index outOfBoundIndex;
         AddLogCommand.AddLogDescriptor descriptor;
         Model model;
@@ -232,7 +236,6 @@ public class AddLogCommandTest {
 
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        showPersonAtIndex(model, INDEX_FIRST_PERSON); // apply filter
 
         descriptor = new AddLogCommand.AddLogDescriptor();
         descriptor.setNewTitle(title);
@@ -240,22 +243,23 @@ public class AddLogCommandTest {
         assertCommandFailure(command, model, MESSAGE_INVALID_INDEX);
 
         // ===== INVALID TITLE =====
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         showPersonAtIndex(model, INDEX_FIRST_PERSON); // apply filter
 
-        descriptor = new AddLogCommand.AddLogDescriptor();
-        descriptor.setNewTitle(invalidTitle);
-        command = new AddLogCommand(targetIndex, descriptor);
-        System.out.println(descriptor);
-        assertCommandFailure(command, model, MESSAGE_INVALID_TITLE);
+        assertThrows(AssertionError.class, () -> {
+            Model m = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+            AddLogCommand.AddLogDescriptor d = new AddLogCommand.AddLogDescriptor();
+            d.setNewTitle(invalidTitle);
+            Command c = new AddLogCommand(INDEX_FIRST_PERSON, d);
+            c.execute(m);
+        });
 
         // ===== MISSING TITLE =====
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        showPersonAtIndex(model, INDEX_FIRST_PERSON); // apply filter
+        assertThrows(AssertionError.class, () -> {
+            Command c = new AddLogCommand(INDEX_FIRST_PERSON, new AddLogCommand.AddLogDescriptor());
+            Model m = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+            c.execute(m);
 
-        descriptor = new AddLogCommand.AddLogDescriptor();
-        command = new AddLogCommand(targetIndex, descriptor);
-        assertCommandFailure(command, model, MESSAGE_INVALID_FORMAT);
+        });
     }
 }
 
