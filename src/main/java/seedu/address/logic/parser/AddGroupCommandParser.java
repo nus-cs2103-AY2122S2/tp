@@ -29,7 +29,7 @@ public class AddGroupCommandParser implements Parser<AddGroupCommand> {
 
         GroupName groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUP_NAME).orElse(""));
         Group group = new Group(groupName);
-        
+
         return new AddGroupCommand(group);
     }
 
