@@ -21,14 +21,14 @@ public class Course {
      */
     public Course(String course) {
         requireNonNull(course);
-        checkArgument(isValidId(course), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidCourse(course), MESSAGE_CONSTRAINTS);
         this.course = course;
     }
 
     /**
      * Returns true if a given string is a valid course.
      */
-    public static boolean isValidId(String test) {
+    public static boolean isValidCourse(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
