@@ -124,8 +124,10 @@ public class MainWindow extends UiPart<Stage> {
         populateListPanelWithLessons(logic.getFilteredLessonList());
 
         // Load first person in list
-        Person tempPerson = logic.getFilteredPersonList().get(0);
-        tempPopulateInfoPanelWithPersonAndList(tempPerson, logic.getFilteredLessonList());
+        if (logic.getFilteredPersonList().size() > 0) {
+            Person tempPerson = logic.getFilteredPersonList().get(0);
+            tempPopulateInfoPanelWithPersonAndList(tempPerson, logic.getFilteredLessonList());
+        }
 
         // Temporary lesson placeholder
         //Lesson tempLesson = logic.getFilteredLessonList().get(0);
