@@ -137,3 +137,4 @@ public class HelpWindow extends UiPart<Stage> {
         helpPanePlaceHolder.getChildren().setAll(helpImage.getRoot());
     }
 }
+
