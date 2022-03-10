@@ -1,24 +1,24 @@
 package seedu.address.logic.commands;
-
-import javafx.collections.ObservableList;
-import org.junit.jupiter.api.Test;
-import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.CompanyList;
-import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyCompanyList;
-import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.company.Company;
-import seedu.address.testutil.CompanyBuilder;
-
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.function.Predicate;
-
-import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.testutil.Assert.assertThrows;
+//
+//import javafx.collections.ObservableList;
+//import org.junit.jupiter.api.Test;
+//import seedu.address.commons.core.GuiSettings;
+//import seedu.address.logic.commands.exceptions.CommandException;
+//import seedu.address.model.CompanyList;
+//import seedu.address.model.Model;
+//import seedu.address.model.ReadOnlyCompanyList;
+//import seedu.address.model.ReadOnlyUserPrefs;
+//import seedu.address.model.company.Company;
+//import seedu.address.testutil.CompanyBuilder;
+//
+//import java.nio.file.Path;
+//import java.util.ArrayList;
+//import java.util.Arrays;
+//import java.util.function.Predicate;
+//
+//import static java.util.Objects.requireNonNull;
+//import static org.junit.jupiter.api.Assertions.*;
+//import static seedu.address.testutil.Assert.assertThrows;
 
 public class AddRoleCommandTest {
 //
@@ -34,7 +34,8 @@ public class AddRoleCommandTest {
 //
 //        CommandResult commandResult = new AddCompanyCommand(validCompany).execute(modelStub);
 //
-//        assertEquals(String.format(AddCompanyCommand.MESSAGE_SUCCESS, validCompany), commandResult.getFeedbackToUser());
+//        assertEquals(String.format(AddCompanyCommand.MESSAGE_SUCCESS, validCompany),
+//                commandResult.getFeedbackToUser());
 //        assertEquals(Arrays.asList(validCompany), modelStub.companiesAdded);
 //    }
 //

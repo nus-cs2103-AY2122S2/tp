@@ -24,7 +24,7 @@ import seedu.address.model.company.Company;
 import seedu.address.model.role.Role;
 import seedu.address.testutil.CompanyBuilder;
 
-public class giAddCompanyCommandTest {
+public class AddCompanyCommandTest {
 
     @Test
     public void constructor_nullCompany_throwsNullPointerException() {
