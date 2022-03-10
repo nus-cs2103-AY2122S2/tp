@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.person;
+package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 

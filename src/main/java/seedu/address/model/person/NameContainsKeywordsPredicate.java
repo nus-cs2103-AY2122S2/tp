@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.person;
+package seedu.address.model.person;
 
 import java.util.List;
 import java.util.function.Predicate;
