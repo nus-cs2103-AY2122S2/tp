@@ -11,6 +11,11 @@ import seedu.address.logic.parser.exceptions.ParseException;
 
 public class AddGroupCommandParser implements Parser<AddGroupCommand> {
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the {@code AddGroupCommand}
+     * and returns an {@code AddGroupCommand} object for execution.
+     * @throws ParseException if the user input does not conform the expected format.
+     */
     public AddGroupCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_GROUP_NAME);
