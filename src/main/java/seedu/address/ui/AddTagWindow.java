@@ -1,12 +1,12 @@
 package seedu.address.ui;
 
 import javafx.fxml.FXML;
-import javafx.scene.layout.StackPane;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.Logic;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 
