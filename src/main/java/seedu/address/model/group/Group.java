@@ -1,2 +1,4 @@
-package seedu.address.model.group;public class Group {
+package seedu.address.model.group;
+
+public class Group {
 }
