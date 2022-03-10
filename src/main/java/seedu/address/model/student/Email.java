@@ -30,6 +30,7 @@ public class Email {
     private static final String DOMAIN_LAST_PART_REGEX = "(" + DOMAIN_PART_REGEX + "){2,}$"; // At least two chars
     private static final String DOMAIN_REGEX = "(" + DOMAIN_PART_REGEX + "\\.)*" + DOMAIN_LAST_PART_REGEX;
     public static final String VALIDATION_REGEX = LOCAL_PART_REGEX + "@" + DOMAIN_REGEX;
+    public static final Email EMPTY_EMAIL = new Email();
 
     public final String value;
 
@@ -45,10 +46,17 @@ public class Email {
     }
 
     /**
+     * Constructs an empty {@code Email}.
+     */
+    private Email() {
+        value = "";
+    }
+
+    /**
      * Returns if a given string is a valid email.
      */
     public static boolean isValidEmail(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) || test.equals(EMPTY_EMAIL.value);
     }
 
     @Override

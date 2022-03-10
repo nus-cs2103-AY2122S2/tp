@@ -34,17 +34,20 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_STUDENT_NAME, PREFIX_STUDENT_PHONE, PREFIX_STUDENT_EMAIL,
                         PREFIX_STUDENT_ADDRESS, PREFIX_STUDENT_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_STUDENT_NAME, PREFIX_STUDENT_ADDRESS, PREFIX_STUDENT_PHONE,
-                PREFIX_STUDENT_EMAIL)
+        if (!arePrefixesPresent(argMultimap, PREFIX_STUDENT_NAME, PREFIX_STUDENT_PHONE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentCommand.MESSAGE_USAGE));
         }
-
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_STUDENT_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_STUDENT_PHONE).get());
-        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_STUDENT_EMAIL).get());
-        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_STUDENT_ADDRESS).get());
+        Email email = argMultimap.getValue(PREFIX_STUDENT_EMAIL).isPresent() ?
+                ParserUtil.parseEmail(argMultimap.getValue(PREFIX_STUDENT_EMAIL).get())
+                : Email.EMPTY_EMAIL;
+        Address address = argMultimap.getValue(PREFIX_STUDENT_ADDRESS).isPresent()
+                ?   ParserUtil.parseAddress(argMultimap.getValue(PREFIX_STUDENT_ADDRESS).get())
+                : Address.EMPTY_ADDRESS;
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_STUDENT_TAG));
+
 
         Student student = new Student(name, phone, email, address, tagList);
 

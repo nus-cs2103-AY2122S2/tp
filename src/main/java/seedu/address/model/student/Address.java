@@ -9,7 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Address {
 
-    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values";
+    public static final Address EMPTY_ADDRESS = new Address();
 
     /*
      * The first character of the address must not be a whitespace,
@@ -31,10 +32,18 @@ public class Address {
     }
 
     /**
-     * Returns true if a given string is a valid email.
+     * Constructs an empty {@code Address}.
+     *
+     */
+    private Address() {
+        value = "";
+    }
+
+    /**
+     * Returns true if a given string is a valid address.
      */
     public static boolean isValidAddress(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) || test.equals("");
     }
 
     @Override
