@@ -101,8 +101,8 @@ public class PersonBuilder {
     /**
      * Sets the {@code Email} of the {@code Person} that we are building.
      */
-    public PersonBuilder withFavourite(boolean favourite) {
-        this.favourite = new Favourite(favourite);
+    public PersonBuilder withFavourite(boolean status) {
+        this.favourite = new Favourite(status);
         return this;
     }
 
