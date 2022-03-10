@@ -20,7 +20,7 @@ public class AddGroupCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_GROUP_NAME + "CS2103-W16-3";
 
-    public static final String MESSAGE_ARGUMENTS = "Group name: %s";
+    public static final String MESSAGE_ARGUMENTS = "Group added: %s";
 
     private final Group toAdd;
 
