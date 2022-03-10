@@ -21,7 +21,10 @@ import manageezpz.model.Model;
 import manageezpz.model.ReadOnlyAddressBook;
 import manageezpz.model.ReadOnlyUserPrefs;
 import manageezpz.model.person.Person;
+import manageezpz.model.task.Deadline;
+import manageezpz.model.task.Event;
 import manageezpz.model.task.Task;
+import manageezpz.model.task.Todo;
 import manageezpz.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -151,6 +154,47 @@ public class AddCommandTest {
 
         @Override
         public void addTask(Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addTodo(Todo todo) { throw new AssertionError("This method should not be called."); }
+
+        @Override
+        public void addEvent(Event event) { throw new AssertionError("This method should not be called."); }
+
+        @Override
+        public void addDeadline(Deadline deadline) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredTaskList(Predicate<Task> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Task> getFilteredTaskList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasTodo(Todo todo) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasEvent(Event event) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasDeadline(Deadline deadline) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasTask(Task task) {
             throw new AssertionError("This method should not be called.");
         }
 

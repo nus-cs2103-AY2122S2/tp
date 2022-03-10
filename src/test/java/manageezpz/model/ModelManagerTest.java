@@ -4,6 +4,8 @@ import static manageezpz.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static manageezpz.testutil.Assert.assertThrows;
 import static manageezpz.testutil.TypicalPersons.ALICE;
 import static manageezpz.testutil.TypicalPersons.BENSON;
+import static manageezpz.testutil.TypcialTasks.READ_BOOK;
+import static manageezpz.testutil.TypcialTasks.RETURN_BOOK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -129,4 +131,29 @@ public class ModelManagerTest {
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
     }
+
+    //==================== Test for ManageEZPZ (Tasks)=============================
+
+    @Test
+    public void hasTask_nullTask_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasTask(null));
+    }
+
+    @Test
+    public void hasTask_taskNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasTask(READ_BOOK));
+    }
+
+    @Test
+    public void hasTask_taskInAddressBook_returnsTrue() {
+        modelManager.addTask(RETURN_BOOK);
+        assertTrue(modelManager.hasTask(RETURN_BOOK));
+    }
+
+    @Test
+    public void getFilteredTaskList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredTaskList().remove(0));
+    }
+
+
 }
