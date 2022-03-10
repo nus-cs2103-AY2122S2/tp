@@ -15,7 +15,6 @@ import javafx.collections.transformation.FilteredList;
  * Represents the list of all roles tagged to a Company found in the address book.
  */
 public class RoleManager {
-
     private static final Predicate<Role> PREDICATE_SHOW_ALL_ROLES = unused -> true;
 
     private ObservableList<Role> roleList;
@@ -59,6 +58,8 @@ public class RoleManager {
 
     /**
      * Filters the list of roles tagged to a <code>Company</code> given a predicate
+     *
+     * @param predicate Predicate to be checked against
      */
     public void filterRoles(Predicate<Role> predicate) {
         filteredRoleList.setPredicate(predicate);
@@ -75,6 +76,7 @@ public class RoleManager {
 
     /**
      * Add <code>Role</code> to list of roles tagged to a company
+     *
      * @param role Role to be added to the list of roles
      */
     public void addRole(Role role) {
@@ -83,6 +85,7 @@ public class RoleManager {
 
     /**
      * Checks if this role exists in the roleList
+     *
      * @param role role to check if it is duplicated
      * @return Boolean representing if this role is already stored
      */
@@ -93,6 +96,7 @@ public class RoleManager {
 
     /**
      * Deletes <code>Role</code> given the index within the <code>Company</code>
+     *
      * @param index of <code>Role</code> to be deleted
      */
     public void deleteRole(int index) {

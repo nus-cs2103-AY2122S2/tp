@@ -1,12 +1,14 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -29,7 +31,7 @@ public class AddCompanyCommandTest {
         assertThrows(NullPointerException.class, () -> new AddCompanyCommand(null));
     }
 
-    /* @Test
+    @Test
     public void execute_companyAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingCompanyAdded modelStub = new ModelStubAcceptingCompanyAdded();
         Company validCompany = new CompanyBuilder().build();
@@ -38,7 +40,7 @@ public class AddCompanyCommandTest {
 
         assertEquals(String.format(AddCompanyCommand.MESSAGE_SUCCESS, validCompany), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validCompany), modelStub.companiesAdded);
-    } */
+    }
 
     @Test
     public void execute_duplicateCompany_throwsCommandException() {
@@ -145,7 +147,6 @@ public class AddCompanyCommandTest {
 
         @Override
         public void updateFilteredCompanyList(Predicate<Company> companyPredicate, Predicate<Role> rolePredicate) {
-            throw new AssertionError("This method should not be called.");
         }
     }
 

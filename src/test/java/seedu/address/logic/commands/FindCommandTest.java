@@ -6,8 +6,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_COMPANIES_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.PREDICATE_SHOW_ALL_ROLES;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalCompanies.APPLE;
+import static seedu.address.testutil.TypicalCompanies.GOVTECH;
+import static seedu.address.testutil.TypicalCompanies.ZOOM;
 import static seedu.address.testutil.TypicalCompanies.getTypicalAddressBook;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -71,7 +75,7 @@ public class FindCommandTest {
         assertEquals(Collections.emptyList(), model.getFilteredCompanyList());
     }
 
-    /* @Test
+    @Test
     public void execute_multipleKeywords_multipleCompaniesFound() {
         String expectedMessage = String.format(MESSAGE_COMPANIES_LISTED_OVERVIEW, 3);
         CompanyNameContainsKeywordsPredicate companyPredicate = prepareCompanyPredicate("zoom apple tech");
@@ -80,13 +84,13 @@ public class FindCommandTest {
         expectedModel.updateFilteredCompanyList(companyPredicate, PREDICATE_SHOW_ALL_ROLES);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ZOOM, APPLE, GOVTECH), model.getFilteredCompanyList());
-    } */
+    }
 
     /**
      * Parses {@code userInput} into a {@code CompanyNameContainsKeywordsPredicate}.
      */
     private CompanyNameContainsKeywordsPredicate prepareCompanyPredicate(String userInput) {
-        return new CompanyNameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")),
+        return new CompanyNameContainsKeywordsPredicate(new ArrayList<>(),
                 Arrays.asList(userInput.split("\\s+")));
     }
 

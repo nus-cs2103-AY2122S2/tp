@@ -26,10 +26,10 @@ public class Stipend {
     }
 
     /**
-     * Returns true if a given string is a valid phone number.
+     * Returns true if a given string is a valid phone number or is empty.
      */
     public static boolean isValidStipend(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) || test.isEmpty();
     }
 
     @Override

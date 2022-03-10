@@ -15,4 +15,8 @@ public class TypicalRoles {
             .withDeadline("01-01-2020 00:00").withDescription("Develop machine learning algorithms.")
             .withStatus("offered")
             .withStipend("3000").build();
+    public static final Role SOFTWARE_ENGINEER = new RoleBuilder().withName("Software engineer")
+            .withDeadline("01-01-2023 00:00").withDescription("Develop web applications.")
+            .withStatus("offered")
+            .withStipend("8888").build();
 }

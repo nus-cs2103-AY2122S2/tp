@@ -83,7 +83,8 @@ public interface Model {
     ObservableList<Company> getFilteredCompanyList();
 
     /**
-     * Updates the filter of the filtered company list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered company list to filter by the given {@code companyPredicate}
+     * and {@code rolePredicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredCompanyList(Predicate<Company> companyPredicate, Predicate<Role> rolePredicate);

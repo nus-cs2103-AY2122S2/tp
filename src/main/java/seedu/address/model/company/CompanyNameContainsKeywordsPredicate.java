@@ -7,15 +7,29 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.model.role.Role;
 
 /**
- * Tests that a {@code Company}'s {@code Name} matches any of the keywords given.
+ * Holds the keywords {@code roleNameKeywords} and {@code companyNameKeywords} in
+ * order to look for matches with stored {@code Company} and its {@code Role}.
+ * <p></p>
+ * If {@code companyNameKeywords} is empty, look for matches only on {@code Role}
+ * with {@code roleNameKeywords}.
+ * <br>
+ * If {@code roleNameKeywords} is empty, look for matches only on {@code Company}
+ * with {@code companyNameKeywords}.
+ * <br>
+ * If both {@code companyNameKeywords} and {@code roleNameKeywords} are available,
+ * within those {@code Company} that matches {@code companyNameKeywords}, look for
+ * matches on {@code Role} with {@code roleNameKeywords}
  */
 public class CompanyNameContainsKeywordsPredicate implements Predicate<Company> {
     private final List<String> roleNameKeywords;
     private final List<String> companyNameKeywords;
 
     /**
-     * @param roleNameKeywords List of strings representing role name keywords entered by user input
-     * @param companyNameKeywords List of strings representing company name keywords entered by user input
+     * Constructor for {@code CompanyNamecontainsKeywordsPredicate} that stores keywords
+     * {@code roleNameKeywords} and {@code companyNameKeywords}.
+     *
+     * @param roleNameKeywords List of strings representing role name keywords entered by user
+     * @param companyNameKeywords List of strings representing company name keywords entered by user
      */
     public CompanyNameContainsKeywordsPredicate(List<String> roleNameKeywords, List<String> companyNameKeywords) {
         this.roleNameKeywords = roleNameKeywords;
@@ -23,10 +37,11 @@ public class CompanyNameContainsKeywordsPredicate implements Predicate<Company> 
     }
 
     /**
-     * Returns true when the <code>Company</code> contains <code>Role</code> with
-     * a name that matches one of the Strings in <code>roleNameKeywords</code>
-     * @param company <code>Company</code> to be evaluated
-     * @return
+     * Returns a boolean value if the {@code Company} contains {@code Role} with
+     * a name that matches one of the Strings in {@code roleNameKeywords}.
+     *
+     * @param company {@code Company} to be evaluated
+     * @return Boolean if {@code Role} matches any of the {@code roleNameKeywords}
      */
     public boolean hasRoleNameKeywords(Company company) {
         List<Role> roles = company.getRoleManager().getRoles();
@@ -36,9 +51,11 @@ public class CompanyNameContainsKeywordsPredicate implements Predicate<Company> 
     }
 
     /**
-     * Returns true when the <code>Company</code> name matches one of the Strings in <code>companyNameKeywords</code>
-     * @param company <code>Company</code> to be evaluated
-     * @return
+     * Returns a boolean value when the {@code Company} name matches
+     * one of the Strings in {@code companyNameKeywords}.
+     *
+     * @param company {@code Company} to be evaluated
+     * @return Boolean if {@code Company} matches any of the {@code companyNameKeywords}
      */
     public boolean hasCompanyNameKeywords(Company company) {
         return companyNameKeywords.stream()

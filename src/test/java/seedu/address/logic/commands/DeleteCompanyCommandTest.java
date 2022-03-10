@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showCompanyAtIndex;
 import static seedu.address.testutil.TypicalCompanies.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_COMPANY;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_COMPANY;
@@ -46,7 +47,7 @@ public class DeleteCompanyCommandTest {
         assertCommandFailure(deleteCompanyCommand, model, Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX);
     }
 
-    /* @Test
+    @Test
     public void execute_validIndexFilteredList_success() {
         showCompanyAtIndex(model, INDEX_FIRST_COMPANY);
 
@@ -60,9 +61,9 @@ public class DeleteCompanyCommandTest {
         showNoCompany(expectedModel);
 
         assertCommandSuccess(deleteCompanyCommand, model, expectedMessage, expectedModel);
-    } */
+    }
 
-    /* @Test
+    @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
         showCompanyAtIndex(model, INDEX_FIRST_COMPANY);
 
@@ -73,7 +74,7 @@ public class DeleteCompanyCommandTest {
         DeleteCompanyCommand deleteCompanyCommand = new DeleteCompanyCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteCompanyCommand, model, Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX);
-    } */
+    }
 
     @Test
     public void equals() {

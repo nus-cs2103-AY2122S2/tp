@@ -15,7 +15,7 @@ public class DescriptionTest {
 
     @Test
     public void constructor_invalidDescription_throwsIllegalArgumentException() {
-        String invalidDescription = "";
+        String invalidDescription = " ";
         assertThrows(IllegalArgumentException.class, () -> new Description(invalidDescription));
     }
 
@@ -25,10 +25,10 @@ public class DescriptionTest {
         assertThrows(NullPointerException.class, () -> Description.isValidDescription(null));
 
         // invalid descriptions
-        assertFalse(Description.isValidDescription((""))); // empty string
         assertFalse(Description.isValidDescription((" "))); // spaces only
 
         // valid descriptions
+        assertTrue(Description.isValidDescription((""))); // no input
         assertTrue(Description.isValidDescription(("Work-from-home conditions.")));
         assertTrue(Description.isValidDescription(("-"))); // one character
         assertTrue(Description.isValidDescription(("Based in the States; consider work visa")));
