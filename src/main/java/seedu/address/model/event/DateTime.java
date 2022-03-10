@@ -54,6 +54,15 @@ public class DateTime {
         return value.toLocalDate();
     }
 
+    /**
+     * Returns the dateTime in the correct input format for the DateTime constructor.
+     *
+     * @return dateTime in the correct input format for the DateTime constructor.
+     */
+    public String toInputFormat() {
+        return value.format(INPUT_FORMATTER);
+    }
+
     @Override
     public String toString() {
         return value.format(OUTPUT_FORMATTER);

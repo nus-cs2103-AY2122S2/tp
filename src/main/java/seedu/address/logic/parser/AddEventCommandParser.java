@@ -42,7 +42,7 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
             description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         } else {
-            description = ParserUtil.parseDescription(null);
+            description = new Description(null);
         }
         Set<Name> friendNames = ParserUtil.parseNames(argMultimap.getAllValues(PREFIX_FRIEND_NAME));
 
