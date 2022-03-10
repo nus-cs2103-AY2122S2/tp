@@ -1,9 +1,13 @@
 package seedu.address.model.show;
 
+
 public enum Status {
 
     COMPLETED("completed"),
     WATCHING("watching");
+
+    public static final String MESSAGE_CONSTRAINTS =
+            "Status should only be either completed or watching!";
 
     private final String status;
 
@@ -25,5 +29,13 @@ public enum Status {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Returns true if a given string is a valid name.
+     */
+    public static boolean isValidStatus(String test) {
+        String uppercaseTest = test.toUpperCase();
+        return uppercaseTest.equals(COMPLETED.name()) || uppercaseTest.equals(WATCHING.name());
     }
 }
