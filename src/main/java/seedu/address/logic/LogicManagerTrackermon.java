@@ -1,5 +1,6 @@
 package seedu.address.logic;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
 
@@ -14,9 +15,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ModelTrackermon;
 import seedu.address.model.ReadOnlyShowList;
 import seedu.address.model.show.Show;
-import seedu.address.storage.Storage;
+import seedu.address.storage.StorageTrackermon;
 
-//import java.io.IOException;
 
 
 /**
@@ -27,13 +27,13 @@ public class LogicManagerTrackermon implements LogicTrackermon {
     private final Logger logger = LogsCenter.getLogger(LogicManagerTrackermon.class);
 
     private final ModelTrackermon model;
-    private final Storage storage;
+    private final StorageTrackermon storage;
     private final TrackermonParser parser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
      */
-    public LogicManagerTrackermon(ModelTrackermon model, Storage storage) {
+    public LogicManagerTrackermon(ModelTrackermon model, StorageTrackermon storage) {
         this.model = model;
         this.storage = storage;
         parser = new TrackermonParser();
@@ -47,12 +47,11 @@ public class LogicManagerTrackermon implements LogicTrackermon {
         CommandTrackermon command = parser.parseCommand(commandText);
         commandResult = command.execute(model);
 
-        /* I'll edit this part once storge methods have been morphed
         try {
-            //storage.save(model.getShowList());
+            storage.saveShowList(model.getShowList());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
-        }*/
+        }
 
         return commandResult;
     }
