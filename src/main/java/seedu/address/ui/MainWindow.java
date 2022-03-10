@@ -135,6 +135,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+
         updateAndPopulateLessonList();
         updateAndPopulatePersonList();
 
@@ -143,6 +144,10 @@ public class MainWindow extends UiPart<Stage> {
             Person tempPerson = logic.getFilteredPersonList().get(0);
             tempPopulateInfoPanelWithPersonAndList(tempPerson, logic.getFilteredLessonList());
         }
+
+        // Temporary lesson placeholder
+        //Lesson tempLesson = logic.getFilteredLessonList().get(0);
+        //tempPopulateInfoPanelWithLessonAndList(tempLesson, logic.getFilteredPersonList());
 
         // change tab accordingly
         resultDisplay = new ResultDisplay();
