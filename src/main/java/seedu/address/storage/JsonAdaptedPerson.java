@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import java.util.Optional;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -10,6 +12,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.UserType;
+import seedu.address.model.property.Property;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -22,6 +25,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final JsonAdaptedProperty property;
     private final String userType;
 
     /**
@@ -30,11 +34,12 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("userType") String userType) {
+            @JsonProperty("property") JsonAdaptedProperty property, @JsonProperty("userType") String userType) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.property = property;
         this.userType = userType;
     }
 
@@ -46,6 +51,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        property = source.getProperty().isPresent() ? new JsonAdaptedProperty(source.getProperty().get()) : null;
         userType = source.getUserType().value;
     }
 
@@ -55,6 +61,9 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
+
+        final Optional<Property> modelProperty =
+                property != null ? Optional.of(property.toModelType()) : Optional.empty();
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -97,7 +106,7 @@ class JsonAdaptedPerson {
         }
         final UserType modelUserType = new UserType(userType);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelUserType);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelProperty, modelUserType);
     }
 
 }

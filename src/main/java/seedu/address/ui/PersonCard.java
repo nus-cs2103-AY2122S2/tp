@@ -37,6 +37,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label property;
+    @FXML
     private FlowPane userType;
 
     /**
@@ -51,6 +53,11 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         userType.getChildren().add(new Label(person.getUserType().value));
+        if (person.getProperty().isPresent()) {
+            property.setText(person.getProperty().get().toString());
+        } else {
+            property.setVisible(false);
+        }
     }
 
     @Override

@@ -1,11 +1,14 @@
 package seedu.address.testutil;
 
+import java.util.Optional;
+
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.UserType;
+import seedu.address.model.property.Property;
 
 /**
  * A utility class to help with building Person objects.
@@ -22,6 +25,7 @@ public class PersonBuilder {
     private Phone phone;
     private Email email;
     private Address address;
+    private Optional<Property> property;
     private UserType userType;
 
     /**
@@ -32,6 +36,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        property = Optional.empty();
         userType = new UserType(DEFAULT_USERTYPE);
     }
 
@@ -43,6 +48,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        property = personToCopy.getProperty();
         userType = personToCopy.getUserType();
     }
 
@@ -88,7 +94,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, userType);
+        return new Person(name, phone, email, address, property, userType);
     }
 
 }

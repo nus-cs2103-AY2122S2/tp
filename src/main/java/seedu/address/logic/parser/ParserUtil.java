@@ -10,6 +10,10 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.UserType;
+import seedu.address.model.property.Price;
+import seedu.address.model.property.Property;
+import seedu.address.model.property.Region;
+import seedu.address.model.property.Size;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -89,6 +93,44 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String property} into an {@code Property}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code property} is invalid.
+     */
+    public static Property parseProperty(String property) throws ParseException {
+        requireNonNull(property);
+        String trimmedProperty = property.trim();
+        String[] propertySplit = trimmedProperty.split(",");
+
+        if (propertySplit.length != 4) {
+            throw new ParseException(Property.MESSAGE_CONSTRAINTS);
+        }
+
+        if (!Region.isValidRegion(propertySplit[0].trim())) {
+            throw new ParseException(Region.MESSAGE_CONSTRAINTS);
+        }
+
+        if (!Address.isValidAddress(propertySplit[1].trim())) {
+            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+        }
+
+        if (!Size.isValidSize(propertySplit[2].trim())) {
+            throw new ParseException(Size.MESSAGE_CONSTRAINTS);
+        }
+
+        if (!Price.isValidPrice(propertySplit[3].trim())) {
+            throw new ParseException(Price.MESSAGE_CONSTRAINTS);
+        }
+
+        Region region = Region.fromString(propertySplit[0].trim());
+        Address address = new Address(propertySplit[1].trim());
+        Size size = Size.fromString(propertySplit[2].trim());
+        Price price = new Price(propertySplit[3].trim());
+        return new Property(region, address, size, price);
     }
 
     /**

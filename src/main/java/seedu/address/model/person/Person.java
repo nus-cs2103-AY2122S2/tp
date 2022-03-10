@@ -3,6 +3,9 @@ package seedu.address.model.person;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
+import java.util.Optional;
+
+import seedu.address.model.property.Property;
 
 /**
  * Represents a Person in the address book.
@@ -17,17 +20,21 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final Optional<Property> property;
     private final UserType userType;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, UserType userType) {
-        requireAllNonNull(name, phone, email, address, userType);
+
+    public Person(Name name, Phone phone, Email email, Address address, Optional<Property> property,
+                  UserType userType) {
+        requireAllNonNull(name, phone, email, address, property, userType);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.property = property;
         this.userType = userType;
     }
 
@@ -45,6 +52,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Optional<Property> getProperty() {
+        return property;
     }
 
     public UserType getUserType() {
@@ -83,13 +94,14 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getProperty().equals(getProperty())
                 && otherPerson.getUserType().equals(getUserType());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, userType);
+        return Objects.hash(name, phone, email, address, property, userType);
     }
 
     @Override
@@ -101,9 +113,14 @@ public class Person {
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Address: ")
-                .append(getAddress())
-                .append("; User Type: ")
-                .append(getUserType());
+                .append(getAddress());
+
+        if (getProperty().isPresent()) {
+            builder.append("; Property: ");
+            builder.append(getProperty().get());
+        }
+
+        builder.append("; User Type: ").append(getUserType());
 
         return builder.toString();
     }
