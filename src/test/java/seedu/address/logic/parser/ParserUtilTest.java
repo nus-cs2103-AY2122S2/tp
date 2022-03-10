@@ -18,17 +18,20 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.StudentID;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
+    private static final String INVALID_STUDENT_ID = "A0123456";
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
 
+    private static final String VALID_STUDENT_ID = "E0123456";
     private static final String VALID_NAME = "Rachel Walker";
-    private static final String VALID_PHONE = "123456";
+    private static final String VALID_PHONE = "98765432";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
@@ -54,6 +57,29 @@ public class ParserUtilTest {
 
         // Leading and trailing whitespaces
         assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+    }
+
+    @Test
+    public void parseId_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseName((String) null));
+    }
+
+    @Test
+    public void parseId_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseStudentID(INVALID_STUDENT_ID));
+    }
+
+    @Test
+    public void parseId_validValueWithoutWhitespace_returnsName() throws Exception {
+        StudentID expectedId = new StudentID(VALID_STUDENT_ID);
+        assertEquals(expectedId, ParserUtil.parseStudentID(VALID_STUDENT_ID));
+    }
+
+    @Test
+    public void parseId_validValueWithWhitespace_returnsTrimmedName() throws Exception {
+        String idWithWhitespace = WHITESPACE + VALID_STUDENT_ID + WHITESPACE;
+        StudentID expectedId = new StudentID(VALID_STUDENT_ID);
+        assertEquals(expectedId, ParserUtil.parseStudentID(idWithWhitespace));
     }
 
     @Test
