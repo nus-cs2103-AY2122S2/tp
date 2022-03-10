@@ -134,13 +134,12 @@ public class EditCommand extends Command {
             // Need to change the EditPersonDescriptor to include type of person, maybe EditProfDescriptor etc
             String editedPersonType = null;
 
-            if (editedPersonType == null) {
-                throw new PersonTagNotFoundException();
-            }
-
             // When adding new module with nm/, adds prof/student to person list in each mod
             if (checkMod != null) {
                 editedPersonType = editPersonDescriptor.getTags().get().iterator().next().tagName.toLowerCase();
+                if (editedPersonType == null) {
+                    throw new PersonTagNotFoundException();
+                }
                 int modIdx = latestModList.indexOf(checkMod);
                 if (editedPersonType.equals("professor")) {
                     latestModList.get(modIdx).addProfessor((Professor) editedPerson);
