@@ -14,6 +14,21 @@ import java.util.Arrays;
  */
 public class ExpiryDate {
 
+    private static class WildExpiryDate extends ExpiryDate {
+        private WildExpiryDate() {};
+
+        @Override
+        public boolean equals(Object other) {
+            if (other instanceof ExpiryDate) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    public static final WildExpiryDate WILDEXPIRYDATE = new WildExpiryDate();
+
     public static final String MESSAGE_CONSTRAINTS =
             "Expiry dates should have format such as 03 May 2022, 3 May 2022 or 2022-05-03";
 
@@ -27,6 +42,11 @@ public class ExpiryDate {
 
     public final LocalDate expiryDate;
     private final DateStringManager dateStringManager;
+
+    private ExpiryDate() {
+        expiryDate = LocalDate.parse("0000-01-01");
+        dateStringManager = null;
+    }
 
     /**
      * Constructs a {@code ExpiryDate}.

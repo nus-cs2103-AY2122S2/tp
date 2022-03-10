@@ -1,42 +1,40 @@
 package seedu.ibook.logic.commands;
 
-/*
 import static java.util.Objects.requireNonNull;
+import static seedu.ibook.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.ibook.logic.parser.CliSyntax.PREFIX_PRICE;
 
 import seedu.ibook.commons.core.Messages;
-
- */
 import seedu.ibook.model.Model;
-import seedu.ibook.model.product.NameContainsKeywordsPredicate;
+import seedu.ibook.model.product.ProductFulfillsFiltersPredicate;
 
 /**
- * Finds and lists all persons in ibook whose name contains any of the argument keywords.
+ * Finds and lists all persons in Ibook whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
 public class FindCommand extends Command {
 
-    public static final String COMMAND_WORD = "find";
+    public static final String COMMAND_WORD = "list";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Lists all products that matches with the key value pair "
+            + "and displays them as a list with index numbers.\n"
+            + "Parameters: PREFIX: VALUE [MORE_PREFIX: VALUE]...\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + ": bottle " + PREFIX_PRICE + ": 3.00";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final ProductFulfillsFiltersPredicate predicate;
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
+    public FindCommand(ProductFulfillsFiltersPredicate predicate) {
         this.predicate = predicate;
     }
 
     @Override
     public CommandResult execute(Model model) {
-        /*
+
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+        model.updateFilteredProductList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
-         */
-        return new CommandResult(null);
+                String.format(Messages.MESSAGE_PRODUCTS_LISTED_OVERVIEW, model.getFilteredProductList().size()));
     }
 
     @Override

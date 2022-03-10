@@ -9,6 +9,20 @@ import static seedu.ibook.commons.util.AppUtil.checkArgument;
  */
 public class Category {
 
+    private static class WildCategory extends Category {
+        private WildCategory() {};
+
+        @Override
+        public boolean equals(Object other) {
+            if (other instanceof Category) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+    public static final WildCategory WILDCATEGORY = new WildCategory();
+
     public static final String MESSAGE_CONSTRAINTS =
             "Categories (if given) should only contain alphanumeric characters and spaces";
 
@@ -19,6 +33,13 @@ public class Category {
     public static final String VALIDATION_REGEX = "(|[\\p{Alnum}][\\p{Alnum} ]*)";
 
     public final String fullCategoryName;
+
+    /**
+     * Constructs a {@code Category} representing no categorization.
+     */
+    private Category() {
+        fullCategoryName = "";
+    }
 
     /**
      * Constructs a {@code Category}.
