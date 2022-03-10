@@ -34,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private FavouriteWindow favouriteWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -65,6 +66,7 @@ public class MainWindow extends UiPart<Stage> {
 
         setAccelerators();
 
+        favouriteWindow = new FavouriteWindow(logic);
         helpWindow = new HelpWindow();
     }
 
@@ -161,6 +163,18 @@ public class MainWindow extends UiPart<Stage> {
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
+    }
+
+    /**
+     * Opens up FavouriteWindow by setting up the fxml scene and opening it
+     */
+    @FXML
+    private void handleFavourite(ActionEvent event) {
+        if (!favouriteWindow.getRoot().isShowing()) {
+            favouriteWindow.show();
+        } else {
+            favouriteWindow.getRoot().requestFocus();
+        }
     }
 
     public PersonListPanel getPersonListPanel() {

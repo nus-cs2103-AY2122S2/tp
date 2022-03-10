@@ -24,6 +24,7 @@ public class UiManager implements Ui {
 
     private Logic logic;
     private MainWindow mainWindow;
+    private FavouriteWindow favouriteWindow;
 
     /**
      * Creates a {@code UiManager} with the given {@code Logic}.

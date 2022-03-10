@@ -12,7 +12,6 @@ import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
 
@@ -20,6 +19,7 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final Favourite favourite;
 
     // Data fields
     private final Address address;
@@ -27,13 +27,31 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
 
     /**
+     * This constructor is used when editing a Client.
+     * Favourited clients will remain favourited & unfavourited clients will remain unfavourited
+     */
+    public Person(Name name, Phone phone, Email email, Favourite favourite, Address address,
+            Set<Property> properties, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, favourite, address, properties, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.favourite = favourite;
+        this.properties = properties;
+        this.address = address;
+        this.tags.addAll(tags);
+    }
+
+    /**
      * Every field must be present and not null.
+     * This constructor is used for adding a new Client, thus default status is unfavourited(false)
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Property> properties, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, properties, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.favourite = new Favourite(false);
         this.address = address;
         this.properties = properties;
         this.tags.addAll(tags);
@@ -49,6 +67,18 @@ public class Person {
 
     public Email getEmail() {
         return email;
+    }
+
+    public Favourite getFavourite() {
+        return favourite;
+    }
+
+    /**
+     * Toggles the favourite status of Person
+     */
+    public void toggleFavourite() {
+        boolean toggledStatus = !favourite.getStatus();
+        favourite.setStatus(toggledStatus);
     }
 
     public Address getAddress() {
@@ -110,7 +140,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, properties, tags);
+        return Objects.hash(name, phone, email, favourite, address, properties, tags);
     }
 
     @Override
@@ -121,6 +151,8 @@ public class Person {
                 .append(getPhone())
                 .append("; Email: ")
                 .append(getEmail())
+                .append("; Favourite: ")
+                .append(getFavourite())
                 .append("; Address: ")
                 .append(getAddress());
 
@@ -137,5 +169,4 @@ public class Person {
         }
         return builder.toString();
     }
-
 }

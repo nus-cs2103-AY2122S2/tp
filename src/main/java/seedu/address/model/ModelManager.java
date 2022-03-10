@@ -111,6 +111,11 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public void setFavouriteStatus(Person personToFavourite) {
+        addressBook.setFavouriteStatus(personToFavourite);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -121,6 +126,7 @@ public class ModelManager implements Model {
     public ObservableList<Person> getFilteredPersonList() {
         return filteredPersons;
     }
+
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
