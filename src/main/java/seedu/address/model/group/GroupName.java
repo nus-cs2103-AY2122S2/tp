@@ -41,9 +41,9 @@ public class GroupName {
     }
 
     /**
-     * Returns a String representation of group name.
+     * Returns a String representation of a group name.
      *
-     * @return String representation of group name.
+     * @return String representation of a group name.
      */
     @Override
     public String toString() {
