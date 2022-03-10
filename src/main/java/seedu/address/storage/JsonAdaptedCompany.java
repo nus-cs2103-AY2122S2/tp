@@ -15,7 +15,7 @@ import seedu.address.model.company.Company;
 import seedu.address.model.company.CompanyName;
 import seedu.address.model.company.Email;
 import seedu.address.model.company.Phone;
-import seedu.address.model.company.RoleList;
+import seedu.address.model.role.Role;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -63,7 +63,7 @@ class JsonAdaptedCompany {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        roles.addAll(source.getRoleManager().getFilteredRoleList().stream()
+        roles.addAll(source.getRoleManager().getRoles().stream()
                 .map(JsonAdaptedRole::new)
                 .collect(Collectors.toList()));
     }
@@ -79,9 +79,9 @@ class JsonAdaptedCompany {
             companyTags.add(tag.toModelType());
         }
 
-        final RoleList companyRoles = new RoleList();
+        final List<Role> companyRoles = new ArrayList<>();
         for (JsonAdaptedRole role : roles) {
-            companyRoles.addRole(role.toModelType());
+            companyRoles.add(role.toModelType());
         }
 
         if (name == null) {
@@ -122,7 +122,7 @@ class JsonAdaptedCompany {
 
         final Set<Tag> modelTags = new HashSet<>(companyTags);
 
-        final RoleList modelRoles = new RoleList(companyRoles);
+        final List<Role> modelRoles = new ArrayList<>(companyRoles);
 
         return new Company(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelRoles);
     }

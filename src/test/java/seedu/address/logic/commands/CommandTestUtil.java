@@ -11,12 +11,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STIPEND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.company.RoleManager.PREDICATE_SHOW_ALL_ROLES;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -24,12 +24,16 @@ import seedu.address.model.CompanyList;
 import seedu.address.model.Model;
 import seedu.address.model.company.Company;
 import seedu.address.model.company.CompanyNameContainsKeywordsPredicate;
+import seedu.address.model.role.Role;
+import seedu.address.model.role.RoleNameContainsKeywordsPredicate;
 import seedu.address.testutil.EditCompanyDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
  */
 public class CommandTestUtil {
+
+    public static final Predicate<Role> PREDICATE_SHOW_ALL_ROLES = unused -> true;
 
     public static final String VALID_DEADLINE_SOFTWARE_ENGINEER = "01-01-2023 00:00";
     public static final String VALID_NAME_SOFTWARE_ENGINEER = "Software engineer";
@@ -69,20 +73,21 @@ public class CommandTestUtil {
     public static final String STIPEND_DESC_SOFTWARE_ENGINEER =
             " " + PREFIX_STIPEND + VALID_STIPEND_SOFTWARE_ENGINEER;
 
-    public static final String INVALID_INDEX_DESC = " ";
-    public static final String INVALID_ROLE_NAME_DESC = " " + PREFIX_NAME + "Softw@re Engineer";
-    public static final String INVALID_STATUS_DESC = " " + PREFIX_STATUS + "dont know";
+    public static final String INVALID_INDEX_DESC = " "; // '@' not allowed in names
+    public static final String INVALID_RNAME_DESC = " " + PREFIX_NAME + "Softw@re Engineer"; // '@' not allowed in names
+    public static final String INVALID_STATUS_DESC = " " + PREFIX_STATUS + "dont know"; // only predefined are allowed
     public static final String INVALID_DEADLINE_DESC =
-            " " + PREFIX_DEADLINE + "01-01-1999 00:00";
+            " " + PREFIX_DEADLINE + "01-01-1999 00:00"; // datelines that are in the past are not allowed
     public static final String INVALID_DESCRIPTION_DESC =
-            " " + PREFIX_DESCRIPTION + "Fronte^d";
-    public static final String INVALID_STIPEND_DESC = " " + PREFIX_STIPEND + "one thousand";
+            " " + PREFIX_DESCRIPTION + "Fronte^d"; // '^' not allowed in description
+    public static final String INVALID_STIPEND_DESC = " " + PREFIX_STIPEND + "one thousand"; // non-integers not allowed
 
-    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&";
-    public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a";
-    public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo";
-    public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS;
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*";
+
+    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
+    public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
+    public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
+    public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
+    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
@@ -153,8 +158,8 @@ public class CommandTestUtil {
 
         Company company = model.getFilteredCompanyList().get(targetIndex.getZeroBased());
         final String[] splitName = company.getName().fullName.split("\\s+");
-        model.updateFilteredCompanyList(new CompanyNameContainsKeywordsPredicate(Arrays.asList(splitName)),
-                PREDICATE_SHOW_ALL_ROLES);
+        model.updateFilteredCompanyList(new CompanyNameContainsKeywordsPredicate(new ArrayList<>(),
+                Arrays.asList(splitName)), new RoleNameContainsKeywordsPredicate(new ArrayList<>()));
 
         assertEquals(1, model.getFilteredCompanyList().size());
     }

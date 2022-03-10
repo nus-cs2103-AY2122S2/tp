@@ -97,11 +97,6 @@ public class CompanyListTest {
         public ObservableList<Company> getCompanyList() {
             return companies;
         }
-
-        @Override
-        public int size() {
-            return companies.size();
-        }
     }
 
 }

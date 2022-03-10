@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -17,7 +18,7 @@ import seedu.address.model.company.Company;
 import seedu.address.model.company.CompanyName;
 import seedu.address.model.company.Email;
 import seedu.address.model.company.Phone;
-import seedu.address.model.company.RoleList;
+import seedu.address.model.role.Role;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -47,7 +48,7 @@ public class AddCompanyCommandParser implements Parser<AddCompanyCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getOptionalValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getOptionalValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        RoleList roles = new RoleList(); // Dummy placeholder, will update in v1.2b
+        ArrayList<Role> roles = new ArrayList<>(); // Dummy placeholder, will update in v1.2b
 
         Company company = new Company(name, phone, email, address, tagList, roles);
 

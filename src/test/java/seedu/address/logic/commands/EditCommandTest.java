@@ -81,7 +81,7 @@ public class EditCommandTest {
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
-    @Test
+    /* @Test
     public void execute_filteredList_success() {
         showCompanyAtIndex(model, INDEX_FIRST_COMPANY);
 
@@ -96,7 +96,7 @@ public class EditCommandTest {
         expectedModel.setCompany(model.getFilteredCompanyList().get(0), editedCompany);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
-    }
+    } */
 
     @Test
     public void execute_duplicateCompanyUnfilteredList_failure() {
@@ -129,10 +129,6 @@ public class EditCommandTest {
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX);
     }
 
-    /**
-     * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of address book
-     */
     @Test
     public void execute_invalidCompanyIndexFilteredList_failure() {
         showCompanyAtIndex(model, INDEX_FIRST_COMPANY);

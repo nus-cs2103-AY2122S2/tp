@@ -61,8 +61,8 @@ public class StringUtilTest {
 
     @Test
     public void containsWordIgnoreCase_multipleWords_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, "Word parameter should be a single word", () ->
-                StringUtil.containsWordIgnoreCase("typical sentence", "aaa BBB"));
+        assertThrows(IllegalArgumentException.class, "Word parameter should be a single word", ()
+            -> StringUtil.containsWordIgnoreCase("typical sentence", "aaa BBB"));
     }
 
     @Test
@@ -126,7 +126,7 @@ public class StringUtilTest {
     @Test
     public void getDetails_exceptionGiven() {
         assertTrue(StringUtil.getDetails(new FileNotFoundException("file not found"))
-                .contains("java.io.FileNotFoundException: file not found"));
+            .contains("java.io.FileNotFoundException: file not found"));
     }
 
     @Test

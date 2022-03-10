@@ -10,12 +10,11 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.company.Company;
-import seedu.address.model.company.RoleManager;
 import seedu.address.model.role.Role;
+import seedu.address.model.role.RoleManager;
 
 
 public class DeleteRoleCommand extends Command {
-
     public static final String COMMAND_WORD = "deleteRole";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -31,7 +30,7 @@ public class DeleteRoleCommand extends Command {
 
     /**
      * @param companyIndex of the company in the company list
-     * @param roleIndex    of the role in the specified company
+     * @param roleIndex of the role in the specified company
      */
     public DeleteRoleCommand(Index companyIndex, Index roleIndex) {
         requireAllNonNull(companyIndex, roleIndex);
@@ -42,22 +41,17 @@ public class DeleteRoleCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Company> lastShownCompanyList = model.getFilteredCompanyList();
-
-        if (companyIndex.getZeroBased() >= lastShownCompanyList.size()) {
+        List<Company> lastShownList = model.getFilteredCompanyList();
+        if (companyIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX);
         }
-
-        Company company = lastShownCompanyList.get(companyIndex.getZeroBased());
+        Company company = lastShownList.get(companyIndex.getZeroBased());
         RoleManager roleManager = company.getRoleManager();
-        List<Role> lastShownRoleList = roleManager.getFilteredRoleList();
-
-        if (roleIndex.getZeroBased() >= lastShownRoleList.size()) {
+        if (roleIndex.getZeroBased() >= roleManager.getRoles().size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ROLE_DISPLAYED_INDEX);
         }
-
-        Role roleToDelete = lastShownRoleList.get(roleIndex.getZeroBased());
-        roleManager.deleteRole(roleToDelete);
+        Role roleToDelete = roleManager.getRoles().get(roleIndex.getZeroBased());
+        roleManager.deleteRole(roleIndex.getZeroBased());
         return new CommandResult(String.format(MESSAGE_DELETE_ROLE_SUCCESS, roleToDelete));
     }
 

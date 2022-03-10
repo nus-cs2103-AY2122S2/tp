@@ -4,13 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_COMPANIES_LISTED_OVERVIEW;
+import static seedu.address.logic.commands.CommandTestUtil.PREDICATE_SHOW_ALL_ROLES;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.model.company.RoleManager.PREDICATE_SHOW_ALL_ROLES;
 import static seedu.address.testutil.TypicalCompanies.APPLE;
 import static seedu.address.testutil.TypicalCompanies.GOVTECH;
 import static seedu.address.testutil.TypicalCompanies.ZOOM;
 import static seedu.address.testutil.TypicalCompanies.getTypicalAddressBook;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -32,9 +33,12 @@ public class FindCommandTest {
     @Test
     public void equals() {
         CompanyNameContainsKeywordsPredicate firstCompanyPredicate =
-                new CompanyNameContainsKeywordsPredicate(Collections.singletonList("first"));
+                new CompanyNameContainsKeywordsPredicate(Collections.singletonList("first"),
+                        Collections.singletonList("first"));
         CompanyNameContainsKeywordsPredicate secondCompanyPredicate =
-                new CompanyNameContainsKeywordsPredicate(Collections.singletonList("second"));
+                new CompanyNameContainsKeywordsPredicate(Collections.singletonList("second"),
+                        Collections.singletonList("second"));
+
         RoleNameContainsKeywordsPredicate firstRolePredicate =
                 new RoleNameContainsKeywordsPredicate(Collections.singletonList("first"));
         RoleNameContainsKeywordsPredicate secondRolePredicate =
@@ -75,9 +79,9 @@ public class FindCommandTest {
     public void execute_multipleKeywords_multipleCompaniesFound() {
         String expectedMessage = String.format(MESSAGE_COMPANIES_LISTED_OVERVIEW, 3);
         CompanyNameContainsKeywordsPredicate companyPredicate = prepareCompanyPredicate("zoom apple tech");
-        RoleNameContainsKeywordsPredicate rolePredicate = prepareRolePredicate("zoom apple tech");
+        RoleNameContainsKeywordsPredicate rolePredicate = prepareRolePredicate("software mobile");
         FindCommand command = new FindCommand(companyPredicate, rolePredicate);
-        expectedModel.updateFilteredCompanyList(companyPredicate, rolePredicate);
+        expectedModel.updateFilteredCompanyList(companyPredicate, PREDICATE_SHOW_ALL_ROLES);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ZOOM, APPLE, GOVTECH), model.getFilteredCompanyList());
     }
@@ -86,9 +90,13 @@ public class FindCommandTest {
      * Parses {@code userInput} into a {@code CompanyNameContainsKeywordsPredicate}.
      */
     private CompanyNameContainsKeywordsPredicate prepareCompanyPredicate(String userInput) {
-        return new CompanyNameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+        return new CompanyNameContainsKeywordsPredicate(new ArrayList<>(),
+                Arrays.asList(userInput.split("\\s+")));
     }
 
+    /**
+     * Parses {@code userInput} into a {@code RoleContainsKeywordsPredicate}.
+     */
     private RoleNameContainsKeywordsPredicate prepareRolePredicate(String userInput) {
         return new RoleNameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }

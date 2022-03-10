@@ -13,7 +13,6 @@ import seedu.address.model.company.Company;
 import seedu.address.model.company.CompanyName;
 import seedu.address.model.company.Email;
 import seedu.address.model.company.Phone;
-import seedu.address.model.company.RoleList;
 import seedu.address.model.role.Deadline;
 import seedu.address.model.role.Description;
 import seedu.address.model.role.Role;
@@ -26,24 +25,18 @@ import seedu.address.model.tag.Tag;
  */
 public class SampleDataUtil {
 
-    private static final Role SAMPLE_ROLE_1 = new Role(
-            new seedu.address.model.role.RoleName("Backend engineer"),
+    private static final Role SAMPLE_ROLE_1 = new Role(new seedu.address.model.role.RoleName("Software engineer"),
             new Status("pending"), new Deadline("27-02-2022 18:00"),
             new Description("Backend engineer"), new Stipend("1000"));
-    private static final Role SAMPLE_ROLE_2 = new Role(
-            new seedu.address.model.role.RoleName("Frontend engineer"),
+    private static final Role SAMPLE_ROLE_2 = new Role(new seedu.address.model.role.RoleName("Software engineer"),
             new Status("pending"), new Deadline("28-02-2022 22:00"),
             new Description("Frontend engineer"), new Stipend("1000"));
 
-    private static final RoleList SAMPLE_ROLES_1 = new RoleList();
-    private static final RoleList SAMPLE_ROLES_2 = new RoleList();
-    private static final RoleList SAMPLE_ROLES_3 = new RoleList();
+    private static final List<Role> SAMPLE_ROLES_1 = Arrays.asList(SAMPLE_ROLE_1);
+    private static final List<Role> SAMPLE_ROLES_2 = Arrays.asList(SAMPLE_ROLE_2);
+    private static final List<Role> SAMPLE_ROLES_3 = Arrays.asList(SAMPLE_ROLE_1, SAMPLE_ROLE_2);
 
     public static Company[] getSampleCompanies() {
-        SAMPLE_ROLES_1.setRoles(Arrays.asList(SAMPLE_ROLE_1));
-        SAMPLE_ROLES_2.setRoles(Arrays.asList(SAMPLE_ROLE_2));
-        SAMPLE_ROLES_3.setRoles(Arrays.asList(SAMPLE_ROLE_1, SAMPLE_ROLE_2));
-
         return new Company[]{
                 new Company(new CompanyName("Meta"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                         new Address("Blk 30 Geylang Street 29, #06-40"),

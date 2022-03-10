@@ -28,7 +28,7 @@ public class DescriptionTest {
         assertFalse(Description.isValidDescription((" "))); // spaces only
 
         // valid descriptions
-        assertTrue(Description.isValidDescription((""))); // empty string
+        assertTrue(Description.isValidDescription((""))); // no input
         assertTrue(Description.isValidDescription(("Work-from-home conditions.")));
         assertTrue(Description.isValidDescription(("-"))); // one character
         assertTrue(Description.isValidDescription(("Based in the States; consider work visa")));
