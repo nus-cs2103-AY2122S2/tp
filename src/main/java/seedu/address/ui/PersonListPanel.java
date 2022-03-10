@@ -46,4 +46,19 @@ public class PersonListPanel extends UiPart<Region> {
         }
     }
 
+    /**
+     * Handles the event whenever the selected person card changes.
+     */
+    public void handleSelect() {
+        MainWindow.setSelectedProfile(getPersonListView());
+    }
+
+    /**
+     * Gets person list view.
+     *
+     * @return the person list view
+     */
+    public ListView<Person> getPersonListView() {
+        return this.personListView;
+    }
 }

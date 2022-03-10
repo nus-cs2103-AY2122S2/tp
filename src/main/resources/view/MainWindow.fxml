@@ -2,18 +2,16 @@
 
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.TilePane?>
-<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.Scene?>
+<?import javafx.stage.Stage?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
          title="Address App" minWidth="680" minHeight="600" onCloseRequest="#handleExit">
   <icons>
@@ -40,6 +38,9 @@
           <Menu mnemonicParsing="false" text="Add">
             <MenuItem fx:id="addMenuItem" mnemonicParsing="false" text="Add" />
           </Menu>
+          <Menu mnemonicParsing="false" text="New tag">
+            <MenuItem fx:id="newTagMenuItem" mnemonicParsing="false" text="New Tag" />
+          </Menu>
         </MenuBar>
 
         <StackPane VBox.vgrow="NEVER" fx:id="searchBarPlaceholder" minHeight="40" prefHeight="40" maxHeight="40"
@@ -47,8 +48,8 @@
 
         </StackPane>
 
-        <HBox HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" prefWidth="NaN">
-          <StackPane VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" styleClass="pane-with-border" minWidth="306">
+        <HBox HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" prefWidth="400">
+          <StackPane VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" styleClass="pane-with-border" minWidth="307" prefWidth="NaN">
             <VBox fx:id="personList">
               <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
             </VBox>
@@ -58,7 +59,7 @@
           </StackPane>
 
           <StackPane fx:id="profileDisplayPlaceholder"
-                     VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" styleClass="pane-with-border" minWidth="340">
+                     VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" styleClass="pane-with-border" minWidth="340" prefWidth="NaN">
             <padding>
               <Insets top="5" right="10" bottom="5"/>
             </padding>
