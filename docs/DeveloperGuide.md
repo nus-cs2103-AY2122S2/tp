@@ -391,19 +391,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3. Should work regardless of connection to the Internet.
+2. Should be able to hold up to 1000 entries in the local database with at most 5 seconds delay in performance for typical usage.
+3. Should work even without Internet connection.
 4. Should work on both 32-bit and 64-bit environments.
 5. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-6. The user interface should be intuitive enough for users even if they are not IT-savvy.
-7. The response to any user action should become visible within 3 seconds.
-8. Colors used for the user interface should be pleasant and not straining on the eyes.
+6. The response to any user action should become visible within 3 seconds.
+7. Colors used for the user interface should be pleasant and not straining on the eyes.
 
 *{More to be added}*
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **Mainstream OS**: Windows, Linux, Unix, macOS
 * **TA**: Teaching Assistant
 * **32/64-bit environment**: A system that uses a 32/64-bit processor
 * **System admin commands**: Commands that are used on the terminal interface
