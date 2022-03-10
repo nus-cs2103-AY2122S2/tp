@@ -9,19 +9,13 @@ import static seedu.ibook.commons.util.AppUtil.checkArgument;
  */
 public class Description {
 
-    private static class WildDescription extends Description {
-        private WildDescription() {};
-
+    public static final Description WILD_DESCRIPTION = new Description() {
         @Override
         public boolean equals(Object other) {
-            if (other instanceof Description) {
-                return true;
-            } else {
-                return false;
-            }
+            return other instanceof Description;
         }
-    }
-    public static final WildDescription WILDDESCRIPTION = new WildDescription();
+    };
+
     public static final String MESSAGE_CONSTRAINTS =
             "Descriptions should only contain alphanumeric characters and spaces";
 
@@ -35,7 +29,7 @@ public class Description {
 
     private Description() {
         fullDescription = "???";
-    };
+    }
 
     /**
      * Constructs a {@code Description}.

@@ -42,35 +42,35 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         } else {
-            name = Name.WILDNAME;
+            name = Name.WILD_NAME;
             wildCard--;
         }
 
         if (argMultimap.getValue(PREFIX_CATEGORY).isPresent()) {
             category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
         } else {
-            category = Category.WILDCATEGORY;
+            category = Category.WILD_CATEGORY;
             wildCard--;
         }
 
         if (argMultimap.getValue(PREFIX_EXPIRY_DATE).isPresent()) {
             expiryDate = ParserUtil.parseExpiryDate(argMultimap.getValue(PREFIX_EXPIRY_DATE).get());
         } else {
-            expiryDate = ExpiryDate.WILDEXPIRYDATE;
+            expiryDate = ExpiryDate.WILD_EXPIRY_DATE;
             wildCard--;
         }
 
         if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
             description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         } else {
-            description = Description.WILDDESCRIPTION;
+            description = Description.WILD_DESCRIPTION;
             wildCard--;
         }
 
         if (argMultimap.getValue(PREFIX_PRICE).isPresent()) {
             price = ParserUtil.parsePrice(argMultimap.getValue(PREFIX_PRICE).get());
         } else {
-            price = Price.WILDPRICE;
+            price = Price.WILD_PRICE;
             wildCard--;
         }
 

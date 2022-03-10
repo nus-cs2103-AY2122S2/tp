@@ -9,21 +9,13 @@ import static seedu.ibook.commons.util.AppUtil.checkArgument;
  */
 public class Price {
 
-    private static class WildPrice extends Price {
-        private WildPrice() {};
-
+    public static final Price WILD_PRICE = new Price() {
         @Override
         public boolean equals(Object other) {
-            if (other instanceof Price) {
-                return true;
-            } else {
-                return false;
-            }
+            return other instanceof Price;
         }
+    };
 
-    }
-
-    public static final WildPrice WILDPRICE = new WildPrice();
     public static final String MESSAGE_CONSTRAINTS =
             "Prices should only be of type double, and should not be negative";
 

@@ -47,11 +47,6 @@ public class AddCommandParserTest {
             VALID_NAME_B + CATEGORY_FULL_B + EXPIRY_DATE_FULL_B + DESCRIPTION_FULL_B + PRICE_FULL_B,
             expectedMessage);
 
-        // missing category prefix
-        assertParseFailure(parser,
-            NAME_FULL_B + VALID_CATEGORY_B + EXPIRY_DATE_FULL_B + DESCRIPTION_FULL_B + PRICE_FULL_B,
-            expectedMessage);
-
         // missing expiry date prefix
         assertParseFailure(parser,
             NAME_FULL_B + CATEGORY_FULL_B + VALID_EXPIRY_DATE_B + DESCRIPTION_FULL_B + PRICE_FULL_B,
@@ -71,6 +66,14 @@ public class AddCommandParserTest {
         assertParseFailure(parser,
             VALID_NAME_B + VALID_CATEGORY_B + VALID_EXPIRY_DATE_B + VALID_DESCRIPTION_B + VALID_PRICE_B,
             expectedMessage);
+    }
+
+    @Test
+    public void parse_setDefaultCategory_success() {
+        // missing category
+        Product expectedProduct = new ProductBuilder(PRODUCT_A).withCategory("Miscellaneous").build();
+        assertParseSuccess(parser, NAME_FULL_A + EXPIRY_DATE_FULL_A + DESCRIPTION_FULL_A + PRICE_FULL_A,
+            new AddCommand(expectedProduct));
     }
 
     @Test

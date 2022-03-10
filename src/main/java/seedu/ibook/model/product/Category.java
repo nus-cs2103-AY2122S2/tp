@@ -9,19 +9,12 @@ import static seedu.ibook.commons.util.AppUtil.checkArgument;
  */
 public class Category {
 
-    private static class WildCategory extends Category {
-        private WildCategory() {};
-
+    public static final Category WILD_CATEGORY = new Category() {
         @Override
         public boolean equals(Object other) {
-            if (other instanceof Category) {
-                return true;
-            } else {
-                return false;
-            }
+            return other instanceof Category;
         }
-    }
-    public static final WildCategory WILDCATEGORY = new WildCategory();
+    };
 
     public static final String MESSAGE_CONSTRAINTS =
             "Categories (if given) should only contain alphanumeric characters and spaces";
