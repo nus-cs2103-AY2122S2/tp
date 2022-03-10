@@ -100,6 +100,7 @@ public class RoleManager {
      */
     public void updateFilteredRoleList(Predicate<Role> predicate) {
         requireNonNull(predicate);
+        filteredRoles.setPredicate(PREDICATE_SHOW_ALL_ROLES);
         filteredRoles.setPredicate(predicate);
     }
 

@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_COMPANIES_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.model.company.RoleManager.PREDICATE_SHOW_ALL_ROLES;
 import static seedu.address.testutil.TypicalCompanies.APPLE;
 import static seedu.address.testutil.TypicalCompanies.GOVTECH;
 import static seedu.address.testutil.TypicalCompanies.ZOOM;
@@ -58,17 +57,6 @@ public class FindCommandTest {
 
         // different company -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
-    }
-
-    @Test
-    public void execute_zeroKeywords_noCompanyFound() {
-        String expectedMessage = String.format(MESSAGE_COMPANIES_LISTED_OVERVIEW, 0);
-        CompanyNameContainsKeywordsPredicate companyPredicate = prepareCompanyPredicate(" ");
-        RoleNameContainsKeywordsPredicate rolePredicate = prepareRolePredicate(" ");
-        FindCommand command = new FindCommand(companyPredicate, rolePredicate);
-        expectedModel.updateFilteredCompanyList(companyPredicate, PREDICATE_SHOW_ALL_ROLES);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredCompanyList());
     }
 
     @Test

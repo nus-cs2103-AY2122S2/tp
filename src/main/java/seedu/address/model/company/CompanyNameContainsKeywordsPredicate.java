@@ -36,8 +36,12 @@ public class CompanyNameContainsKeywordsPredicate implements Predicate<Company> 
 
     @Override
     public boolean test(Company company) {
-        return companyNameKeywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(company.getName().fullName, keyword));
+        if (!companyNameKeywords.isEmpty()) {
+            return companyNameKeywords.stream()
+                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(company.getName().fullName, keyword));
+        }
+        // r/ must exist at this point in find command
+        return !company.getRoleManager().getFilteredRoleList().isEmpty();
     }
 
     @Override
