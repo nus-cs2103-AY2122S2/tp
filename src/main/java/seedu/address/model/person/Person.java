@@ -82,7 +82,7 @@ public class Person {
     }
 
     public Person setField(Field field) {
-        Map<Prefix, Field> updatedFields = fields;
+        Map<Prefix, Field> updatedFields = new HashMap<>(fields);
         if (field == null) {
             updatedFields.remove(field.prefix);
         } else {
