@@ -100,6 +100,51 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String region} into an {@code Region}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code region} is invalid.
+     */
+    public static Region parseRegion(String region) throws ParseException {
+        requireNonNull(region);
+        String trimmedRegion = region.trim();
+        if (!Region.isValidRegion(trimmedRegion)) {
+            throw new ParseException(Region.MESSAGE_CONSTRAINTS);
+        }
+        return Region.fromString(trimmedRegion);
+    }
+
+    /**
+     * Parses a {@code String size} into an {@code Size}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code size} is invalid.
+     */
+    public static Size parseSize(String size) throws ParseException {
+        requireNonNull(size);
+        String trimmedSize = size.trim();
+        if (!Size.isValidSize(trimmedSize)) {
+            throw new ParseException(Size.MESSAGE_CONSTRAINTS);
+        }
+        return Size.fromString(trimmedSize);
+    }
+
+    /**
+     * Parses a {@code String price} into an {@code Price}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code email} is invalid.
+     */
+    public static Price parsePrice(String price) throws ParseException {
+        requireNonNull(price);
+        String trimmedPrice = price.trim();
+        if (!Price.isValidPrice(trimmedPrice)) {
+            throw new ParseException(Price.MESSAGE_CONSTRAINTS);
+        }
+        return new Price(trimmedPrice);
+    }
+
+    /**
      * Parses a {@code String property} into an {@code Property}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -114,26 +159,10 @@ public class ParserUtil {
             throw new ParseException(Property.MESSAGE_CONSTRAINTS);
         }
 
-        if (!Region.isValidRegion(propertySplit[0].trim())) {
-            throw new ParseException(Region.MESSAGE_CONSTRAINTS);
-        }
-
-        if (!Address.isValidAddress(propertySplit[1].trim())) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
-        }
-
-        if (!Size.isValidSize(propertySplit[2].trim())) {
-            throw new ParseException(Size.MESSAGE_CONSTRAINTS);
-        }
-
-        if (!Price.isValidPrice(propertySplit[3].trim())) {
-            throw new ParseException(Price.MESSAGE_CONSTRAINTS);
-        }
-
-        Region region = Region.fromString(propertySplit[0].trim());
-        Address address = new Address(propertySplit[1].trim());
-        Size size = Size.fromString(propertySplit[2].trim());
-        Price price = new Price(propertySplit[3].trim());
+        Region region = parseRegion(propertySplit[0]);
+        Address address = parseAddress(propertySplit[1]);
+        Size size = parseSize(propertySplit[2]);
+        Price price = parsePrice(propertySplit[3]);
         return new Property(region, address, size, price);
     }
 
