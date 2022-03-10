@@ -133,6 +133,7 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
+        private Favourite favourite;
         private Address address;
         private Set<Tag> tags;
 
@@ -146,6 +147,7 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
+            setFavourite(toCopy.favourite);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
         }
@@ -179,6 +181,14 @@ public class EditCommand extends Command {
 
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
+        }
+
+        public void setFavourite(Favourite favourite) {
+            this.favourite = favourite;
+        }
+
+        public Optional<Favourite> getFavourite() {
+            return Optional.ofNullable(favourite);
         }
 
         public void setAddress(Address address) {
