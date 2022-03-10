@@ -9,10 +9,10 @@ import org.junit.jupiter.api.Test;
 
 public class ArgumentTokenizerTest {
 
-    private final Prefix unknownPrefix = new Prefix("--u");
-    private final Prefix pSlash = new Prefix("p/");
-    private final Prefix dashT = new Prefix("-t");
-    private final Prefix hatQ = new Prefix("^Q");
+    private final Prefix unknownPrefix = new Prefix("--u", "unknown");
+    private final Prefix pSlash = new Prefix("p/", "pSlash");
+    private final Prefix dashT = new Prefix("-t", "dashT");
+    private final Prefix hatQ = new Prefix("^Q", "hatQ");
 
     @Test
     public void tokenize_emptyArgsString_noValues() {
@@ -138,13 +138,13 @@ public class ArgumentTokenizerTest {
 
     @Test
     public void equalsMethod() {
-        Prefix aaa = new Prefix("aaa");
+        Prefix aaa = new Prefix("aaa", "tripleA");
 
         assertEquals(aaa, aaa);
-        assertEquals(aaa, new Prefix("aaa"));
+        assertEquals(aaa, new Prefix("aaa", "tripleA"));
 
         assertNotEquals(aaa, "aaa");
-        assertNotEquals(aaa, new Prefix("aab"));
+        assertNotEquals(aaa, new Prefix("aab", "DoubleASingleB"));
     }
 
 }
