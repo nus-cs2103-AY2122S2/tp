@@ -20,28 +20,28 @@
         </padding>
     </Label>
     <Label fx:id="name" contentDisplay="CENTER" maxHeight="1.7976931348623157E308"
-           maxWidth="1.7976931348623157E308"
+           maxWidth="1.7976931348623157E308" textOverrun="CLIP" wrapText="true"
            prefWidth="100.0">
         <padding>
             <Insets left="10.0" right="10.0"/>
         </padding>
     </Label>
     <Label fx:id="category" contentDisplay="CENTER" maxHeight="1.7976931348623157E308"
-           maxWidth="1.7976931348623157E308"
+           maxWidth="1.7976931348623157E308" textOverrun="CLIP" wrapText="true"
            prefWidth="100.0">
         <padding>
             <Insets left="10.0" right="10.0"/>
         </padding>
     </Label>
     <Label fx:id="expiryDate" contentDisplay="CENTER" maxHeight="1.7976931348623157E308"
-           maxWidth="1.7976931348623157E308"
+           maxWidth="1.7976931348623157E308" textOverrun="CLIP" wrapText="true"
            prefWidth="100.0">
         <padding>
             <Insets left="10.0" right="10.0"/>
         </padding>
     </Label>
     <Label fx:id="price" contentDisplay="CENTER" maxHeight="1.7976931348623157E308"
-           maxWidth="1.7976931348623157E308"
+           maxWidth="1.7976931348623157E308" textOverrun="CLIP" wrapText="true"
            prefWidth="100.0">
         <padding>
             <Insets left="10.0" right="10.0"/>

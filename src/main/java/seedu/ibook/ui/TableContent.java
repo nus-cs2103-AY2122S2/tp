@@ -20,9 +20,11 @@ public class TableContent extends UiPart<ScrollPane> {
         super(FXML);
         this.filteredIBook = filteredIBook;
         this.filteredIBook.addListener(new Listener());
+        populateField();
     }
 
     void populateField() {
+        content.getChildren().clear();
         for (int i = 0; i < filteredIBook.size(); i++) {
             Product product = filteredIBook.get(i);
             ProductCard productCard = new ProductCard(i + 1, product);
