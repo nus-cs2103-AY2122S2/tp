@@ -30,21 +30,21 @@ public class UniqueGroupList implements Iterable<Group> {
     /**
      * Returns true if the list contains an equivalent group as the given argument.
      */
-    public boolean contains(Group toCheck) {
-        requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSameGroup);
+    public boolean contains(Group grouptoCheck) {
+        requireNonNull(grouptoCheck);
+        return internalList.stream().anyMatch(grouptoCheck::isSameGroup);
     }
 
     /**
      * Adds a group to the list.
      * The group must not already exist in the list.
      */
-    public void add(Group toAdd) {
-        requireNonNull(toAdd);
-        if (contains(toAdd)) {
+    public void add(Group groupToAdd) {
+        requireNonNull(groupToAdd);
+        if (contains(groupToAdd)) {
             throw new DuplicatePersonException();
         }
-        internalList.add(toAdd);
+        internalList.add(groupToAdd);
     }
 
     /**
