@@ -2,7 +2,11 @@ package seedu.address.model.group;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
+import seedu.address.model.person.Person;
 
 /**
  * Represents a Group in ArchDuke.
@@ -12,6 +16,9 @@ public class Group {
 
     // Identity fields
     private final GroupName groupName;
+
+    // Data fields
+    private final List<Person> persons = new ArrayList<>();
 
     /**
      * Constructs a {@code Group}.
