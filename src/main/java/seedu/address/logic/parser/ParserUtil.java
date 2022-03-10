@@ -12,6 +12,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Log;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -26,6 +27,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -102,7 +104,7 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code description} is invalid.
      */
-    public static Description parseDescription(String description) throws ParseException {
+    public static Description parsePersonDescription(String description) throws ParseException {
         requireNonNull(description); //when a description is entered by user, it should not be null
         String trimmedDescription = description.trim();
         if (!Description.isValidDescription(trimmedDescription)) {
@@ -137,4 +139,24 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses a String title.
+     *
+     * @throws ParseException if the given {@code title} is invalid.
+     */
+    public static String parseTitle(String title) throws ParseException {
+        requireNonNull(title);
+        if (!Log.isValidTitle(title)) {
+            throw new ParseException(Log.TITLE_CONSTRAINTS);
+        }
+        return title; // TODO: 8/3/2022 refactor into Title object next time
+    }
+
+    // TODO: 8/3/2022  refactor into Description object
+    public static String parseLogDescription(String description) throws ParseException {
+        return description; // no restrictions on description at the moment
+    }
+
+
 }
