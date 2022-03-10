@@ -206,47 +206,61 @@ Shows a list of all Applicants in HireLah.
 
 Format: `appllist`
 
-### Deleting an Applicant : `appldel`
+## Delete
+General command to delete different data type in HireLah.
+
+Format: `delete -TYPE`
+* TYPE must take the form of `a`, `i`, `p`
+* -a will edit an applicant
+* -i will edit an interview
+* -p will edit a position
+
+### Deleting an Applicant : `del -a`
 
 Deletes the specified Applicant from HireLah.
 
-Format: `appdel INDEX`
+Format: `del -a INDEX`
 
 * Deletes the Applicant at the specified `INDEX`.
 * The index refers to the index number shown in the displayed Applicant list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
+<<<<<<< HEAD
 * `list` followed by `delete 2` deletes the 2nd applicant in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st applicant in the results of the `find` command.
+=======
+* `list` followed by `delete -a 2` deletes the 2nd person in the address book.
+* `find Betsy` followed by `delete -a 1` deletes the 1st person in the results of the `find` command.
+>>>>>>> ba1f565e346e96db5cba7f27690755202cd69f37
 
 ### Delete positions : `del -p`
 
 Deletes an existing position in HireLah.
+
 Format: `del -p POSITION_NAME`
 * Existing position with the specified name is deleted.
 * The position name has to match with the position that is to be deleted.
 * Position name provided is case-insensitive.
 
 Examples:
-* `posdel Senior Frontend Software Engineer`
+* `del -p Senior Frontend Software Engineer`
+
+### Deleting an Interview: `del -i`
+
+Deletes an existing interview in HireLah.
+
+Format: `del -i CANDIDATE_INDEX ROLE`
+* Existing interview with the matching CANDIDATE_INDEX and ROLE is deleted.
+* Role provided is case-insensitive.
+
+Examples:
+* `del -i 1 Senior Frontend Software Engineer`
 
 ### List Positions : `poslist`
 
 Lists all existing positions in HireLah.
 Format: `poslist`
-
-### Deleting an Interview: `intvwdel`
-
-Deletes an existing interview in HireLah.
-
-Format: `intvwdel CANDIDATE_INDEX ROLE`
-* Date provided must be in format YYYY-MM-DD HH:MM. 
-* Existing interview with the matching CANDIDATE_INDEX and ROLE is deleted. 
-* Role provided is case-insensitive.
-
-Examples:
-* `intvwdel 1 Senior Frontend Software Engineer`
 
 ### Listing interviews: `intvwlist`
 
@@ -264,13 +278,13 @@ Format: `filter DATA_TYPE b/FILTER_TYPE [ARGUMENT]`
 
 * Different data has different filters available, thus requiring different arguments, as listed:
 
-DATA_TYPE | FILTER_TYPE | ARGUMENT(S)           | Description
-----|-------------|-----------------------|---
-`appl` | `name`      | `n/KEYWORD`           | View applicants whose name contains the keyword
-`appl` | `tag`       | `t/TAG1, [t/TAG2, …]` | View applicants who have all the tags specified
-`intvw` | `appl`      | `n/NAME`              | View interviews for applicants whose name is specified
-`intvw` | `date`      | `d/DATE`              | View interviews happening on the specified date (Date provided must be in format YYYY-MM-DD)
-`pos` | `name`      | `n/KEYWORD`           | View positions which has the specified keyword in the position name
+| DATA_TYPE | FILTER_TYPE | ARGUMENT(S)           | Description                                                                                  |
+|-----------|-------------|-----------------------|----------------------------------------------------------------------------------------------|
+| `appl`    | `name`      | `n/KEYWORD`           | View applicants whose name contains the keyword                                              |
+| `appl`    | `tag`       | `t/TAG1, [t/TAG2, …]` | View applicants who have all the tags specified                                              |
+| `intvw`   | `appl`      | `n/NAME`              | View interviews for applicants whose name is specified                                       |
+| `intvw`   | `date`      | `d/DATE`              | View interviews happening on the specified date (Date provided must be in format YYYY-MM-DD) |
+| `pos`     | `name`      | `n/KEYWORD`           | View positions which has the specified keyword in the position name                          |
 
 Examples:
 * `filter appl name n/john`
