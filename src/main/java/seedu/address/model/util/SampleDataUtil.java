@@ -1,8 +1,6 @@
 package seedu.address.model.util;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -11,7 +9,6 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Log;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;

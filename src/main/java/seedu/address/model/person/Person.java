@@ -2,7 +2,12 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 import seedu.address.model.tag.Tag;
 
@@ -46,7 +51,7 @@ public class Person {
     }
 
     /**
-     * Overloaded method for backward compatibility.
+     * Overloaded method to construct a person to have a description with null value.
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, List<Log> logs) {
@@ -60,6 +65,10 @@ public class Person {
         this.logs.setLogs(logs);
     }
 
+    /**
+     * Overloaded method to construct a person to have an empty list of logs.
+     * Every field must be present and not null.
+     */
     public Person(Name name, Phone phone, Email email, Address address, Description description, Set<Tag> tags,
                   List<Log> logs) {
         requireAllNonNull(name, phone, email, address, tags);
