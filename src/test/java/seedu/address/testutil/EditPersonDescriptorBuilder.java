@@ -6,10 +6,12 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Course;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.StudentID;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -32,11 +34,20 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder(Person person) {
         descriptor = new EditPersonDescriptor();
+        descriptor.setStudentID(person.getStudentID());
         descriptor.setName(person.getName());
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
-        descriptor.setAddress(person.getAddress());
+        descriptor.setCourse(person.getCourse());
         descriptor.setTags(person.getTags());
+    }
+
+    /**
+     * Sets the {@code StudentID} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withStudentID(String id) {
+        descriptor.setStudentID(new StudentID(id));
+        return this;
     }
 
     /**
@@ -64,10 +75,10 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Course} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withAddress(String address) {
-        descriptor.setAddress(new Address(address));
+    public EditPersonDescriptorBuilder withCourse(String course) {
+        descriptor.setCourse(new Course(course));
         return this;
     }
 

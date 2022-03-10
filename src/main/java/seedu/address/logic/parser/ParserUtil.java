@@ -10,9 +10,11 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Course;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.StudentID;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -33,6 +35,21 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses a {@code String id} into a {@code StudentID}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code id} is invalid.
+     */
+    public static StudentID parseStudentID(String id) throws ParseException {
+        requireNonNull(id);
+        String trimmedId = id.trim();
+        if (!Course.isValidCourse(trimmedId)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        return new StudentID(trimmedId);
     }
 
     /**
@@ -93,6 +110,21 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String course} into a {@code Course}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code course} is invalid.
+     */
+    public static Course parseCourse(String course) throws ParseException {
+        requireNonNull(course);
+        String trimmedCourse = course.trim();
+        if (!Course.isValidCourse(trimmedCourse)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        return new Course(trimmedCourse);
     }
 
     /**
