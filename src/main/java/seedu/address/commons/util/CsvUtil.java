@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -20,14 +19,13 @@ import seedu.address.storage.CsvAdaptedPerson;
 public class CsvUtil {
 
     private static final Logger logger = LogsCenter.getLogger(CsvUtil.class);
-
-    public static FileWriter fw;
-    public static Scanner s;
+    private static FileWriter fw;
+    private static Scanner s;
 
     /**
      * The headers to be used for the CSV file.
      */
-    public static String headers = "Name,Phone Number,Email,Insurance Package,Address,Tags";
+    private static String headers = "Name,Phone Number,Email,Insurance Package,Address,Tags";
 
     /**
      * Takes in a List of CsvAdaptedPerson, and the Path of the CSV file to be saved to,
@@ -87,7 +85,7 @@ public class CsvUtil {
                 logger.warning("Empty CSV File");
                 throw new IOException("Empty CSV file");
             }
-             s.nextLine();  // headers
+            s.nextLine(); // headers
             while (s.hasNext()) {
                 personString = s.nextLine();
                 p = new CsvAdaptedPerson(personString);

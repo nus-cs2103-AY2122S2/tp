@@ -6,7 +6,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -155,8 +154,8 @@ public class CsvAdaptedPersonTest {
 
     @Test
     public void cleanUpTests() {
-        assertEquals("", CsvAdaptedPerson.cleanup(""));  // empty string
-        assertEquals("", CsvAdaptedPerson.cleanup("\"\""));  // string with just quotes
+        assertEquals("", CsvAdaptedPerson.cleanup("")); // empty string
+        assertEquals("", CsvAdaptedPerson.cleanup("\"\"")); // string with just quotes
         assertEquals("John Doe", CsvAdaptedPerson.cleanup("\"John Doe\""));
     }
 }

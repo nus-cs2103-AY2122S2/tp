@@ -3,9 +3,7 @@ package seedu.address.ui;
 import java.awt.Desktop;
 import java.io.File;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.logging.Logger;
-
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -175,8 +173,8 @@ public class MainWindow extends UiPart<Stage> {
 
         try {
             logic.readAddressBookFromCsv(inputCsvFilePath);
-            messageWindow.show("Loaded successfully. " +
-                    "Type a command (e.g. list) to save this permanently.");
+            messageWindow.show(
+                    "Loaded successfully. Type a command (e.g. list) to save this permanently.");
         } catch (CommandException err) {
             messageWindow.show("Error in loading: " + err.getMessage());
         }
@@ -207,6 +205,11 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Method that handles the GUI aspect of allowing the user to select a path to load CSV file from.
+     *
+     * @return the Path of the CSV file.
+     */
     public Path handleLoadFile() {
 
         // initialise the file chooser
@@ -218,7 +221,7 @@ public class MainWindow extends UiPart<Stage> {
         // chooser settings
         chooser.setCurrentDirectory(cwd);
         chooser.setDialogTitle("Select a ClientConnect CSV file...");
-        chooser.setAcceptAllFileFilterUsed(false);  // disable allowing acceptance of all files
+        chooser.setAcceptAllFileFilterUsed(false); // disable allowing acceptance of all files
 
         // only allow CSV files
         FileNameExtensionFilter filter = new FileNameExtensionFilter("ClientConnect CSV files", "csv");
@@ -234,6 +237,11 @@ public class MainWindow extends UiPart<Stage> {
 
     }
 
+    /**
+     * Method that handles the GUI aspect of allowing the user to select a path to save a CSV file to.
+     *
+     * @return the Path of the CSV file.
+     */
     public Path handleSaveFile() {
 
         // initialise the file chooser

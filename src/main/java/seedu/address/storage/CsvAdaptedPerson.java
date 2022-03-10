@@ -1,15 +1,12 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
@@ -194,9 +191,9 @@ public class CsvAdaptedPerson {
      * @return the actual value of the field.
      */
     public static String cleanup(String s) {
-        if (s.length() > 0  // if the string has characters
-                && s.charAt(0) == '"'  // if the string starts with "
-                && s.charAt(s.length() - 1) == '"') {  // if the string ends with "
+        if (s.length() > 0 // if the string has characters
+                && s.charAt(0) == '"' // if the string starts with "
+                && s.charAt(s.length() - 1) == '"') { // if the string ends with "
             return s.substring(1, s.length() - 1);
         } else {
             return s;

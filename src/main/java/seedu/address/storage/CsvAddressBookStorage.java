@@ -17,8 +17,8 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CsvUtil;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.model.AddressBook;
-import seedu.address.model.person.Person;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.person.Person;
 
 /**
  * A class to access AddressBook data stored as a CSV file on the hard disk.
@@ -35,18 +35,17 @@ public class CsvAddressBookStorage implements AddressBookStorage {
         this.filePath = null;
     }
 
-    public void setFilePath(Path p) {
-        this.filePath = p;
-    }
-
     public CsvAddressBookStorage(Path filePath) {
         this.filePath = filePath;
+    }
+
+    public void setFilePath(Path p) {
+        this.filePath = p;
     }
 
     public Path getAddressBookFilePath() {
         return filePath;
     }
-
 
     @Override
     public Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException {
