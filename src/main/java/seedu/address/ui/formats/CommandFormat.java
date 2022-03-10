@@ -7,6 +7,12 @@ public class CommandFormat {
     private String commandType;
     private String commandFormat;
 
+    /**
+     * constructs an object to represent a type of command and its format
+     *
+     * @param type type of command
+     * @param format format of command
+     */
     public CommandFormat(String type, String format) {
         commandType = type;
         commandFormat = format;

@@ -20,7 +20,7 @@ public class HelpText extends UiPart<Region> {
      *
      * @param text image file to be displayed
      */
-    public HelpText(String text){
+    public HelpText(String text) {
         super(FXML);
         helpMessage.setText(text);
     }

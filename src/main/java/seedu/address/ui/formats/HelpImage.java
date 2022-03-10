@@ -20,7 +20,7 @@ public class HelpImage extends UiPart<Region> {
      *
      * @param guideImage image file to be displayed
      */
-    public HelpImage(Image guideImage){
+    public HelpImage(Image guideImage) {
         super(FXML);
         helpImage.setImage(guideImage);
     }
