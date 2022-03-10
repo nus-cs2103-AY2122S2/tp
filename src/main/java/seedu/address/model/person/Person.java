@@ -67,6 +67,24 @@ public class Person {
         return status;
     }
 
+    /**
+     * Returns the Covid Status as a String instead of type CovidStatus.
+     *
+     * @return a string of the covidStatus
+     */
+    public String getStatusAsString() {
+        return status.toString();
+    }
+
+    /**
+     * Returns the Faculty of this person as a String instead of type Faculty.
+     *
+     * @return a string of the faculty
+     */
+    public String getFacultyAsString() {
+        return faculty.toString();
+    }
+
     public Address getAddress() {
         return address;
     }
