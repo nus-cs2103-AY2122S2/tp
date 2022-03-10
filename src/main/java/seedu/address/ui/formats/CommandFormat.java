@@ -1,5 +1,8 @@
 package seedu.address.ui.formats;
 
+/**
+ * Format for populating command list table
+ */
 public class CommandFormat {
     private String commandType;
     private String commandFormat;
@@ -9,10 +12,16 @@ public class CommandFormat {
         commandFormat = format;
     }
 
+    /**
+     * Returns command type
+     */
     public String getCommandType() {
         return commandType;
     }
 
+    /**
+     * return command format
+     */
     public String getCommandFormat() {
         return commandFormat;
     }

@@ -23,9 +23,9 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String USERGUIDE_URL = "https://ay2122s2-cs2103-w16-4.github.io/tp/UserGuide.html";
     public static final String HELP_MESSAGE = "For more details: " + USERGUIDE_URL;
     public static final String WELCOME_MESSAGE = "Welcome to RealEstatePro\n\n"
-      + "To access the user guide please access it via the URL above.\n"
-      + "For a simple guide on how to use the app you may access it "
-      + "by clicking any of the buttons on the left.";
+                                                + "To access the user guide please access it via the URL above.\n"
+                                                + "For a simple guide on how to use the app you may access it "
+                                                + "by clicking any of the buttons on the left.";
     public static final String COMMAND_LIST = "Add add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS "
                                             + "pr/PROPERTY_SIZE, PROPERTY_LOCATION, PROPERTY_PRICE, t/USER_TYPE\n";
 
@@ -115,6 +115,9 @@ public class HelpWindow extends UiPart<Stage> {
         clipboard.setContent(url);
     }
 
+    /**
+     * Changes the contents of pane in help window to home page
+     */
     @FXML
     public void onHomeClick() {
         HelpText helpText = new HelpText(WELCOME_MESSAGE);
@@ -122,6 +125,9 @@ public class HelpWindow extends UiPart<Stage> {
         helpPanePlaceHolder.getChildren().setAll(helpText.getRoot());
     }
 
+    /**
+     * Changes the contents of pane in help window to command list page
+     */
     @FXML
     public void onCommandClick() {
         HelpTable helpTable = new HelpTable();
@@ -129,6 +135,10 @@ public class HelpWindow extends UiPart<Stage> {
         helpPanePlaceHolder.getChildren().setAll(helpTable.getRoot());
     }
 
+
+    /**
+     * Changes the contents of pane in help window to ui guide page
+     */
     @FXML
     public void onUiClick() {
         Image guideImage = new Image(this.getClass().getResourceAsStream("/images/UI_Guide.png"));
