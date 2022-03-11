@@ -70,7 +70,7 @@ Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY]…, t/USER_TYPE`
 
-**Tip**: A person can be tagged as either a `buyer`, or `seller`. 
+**Tip**: A person can be tagged as either a `buyer`, or `seller`.
 
 Examples:
 
@@ -189,14 +189,14 @@ RealEstatePro data are saved as a JSON file `[JAR file location]/data/realestat
 
 | Action | Format, Examples  |
 | --- | --- |
-| Add | add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY], t/USER_TYPE 
+| Add | add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY], t/USER_TYPE
 e.g., add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 pr/2-room, East, SGD$200K, t/Buyer    |
 | Clear | clear  |
-| Delete | delete INDEX 
+| Delete | delete INDEX
 e.g., delete 3  |
 | Edit | edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PROPERTY]… [t/USER_TYPE]    ​
 e.g., edit 2 n/James Lee e/jameslee@example.com |
-| Find | find KEYWORD [MORE_KEYWORDS] 
+| Find | find KEYWORD [MORE_KEYWORDS]
 e.g., find James Jake  |
 | List | list  |
 | Help | help  |
