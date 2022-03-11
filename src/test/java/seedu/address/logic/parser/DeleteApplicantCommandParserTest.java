@@ -29,7 +29,7 @@ public class DeleteApplicantCommandParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser,FLAG_APPLICANT + "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, 
-                DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser,FLAG_APPLICANT + "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT
+                                                                      , DeleteCommand.MESSAGE_USAGE));
     }
 }
