@@ -1,5 +1,11 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.TypeFlags.FLAG_APPLICANT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_FLAG;
+import static seedu.address.commons.core.Messages.MESSAGE_NO_FLAG;
+
+import seedu.address.logic.parser.exceptions.ParseException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -145,4 +151,35 @@ public class ArgumentTokenizer {
         }
     }
 
+    /**
+     * Gets the type flag from the given argument.
+     *
+     * @param argsString Arguments string of the form: {@code preamble <prefix>value <prefix>value ...}
+     * @return The flag of the command
+     * @throws ParseException When a flag is not found or when the flag is invalid;
+     */
+    public static char getFlag(String argsString) throws ParseException {
+        if (argsString.charAt(0) != '-') {
+            throw new ParseException(MESSAGE_NO_FLAG);
+        }
+
+        char flag = argsString.charAt(1);
+        char whitespace = argsString.charAt(2);
+
+        if (whitespace != ' ' || flag != FLAG_APPLICANT) {
+            throw new ParseException(MESSAGE_INVALID_FLAG);
+        }
+
+        return flag;
+    }
+
+    /**
+     * Removes the type flag from the given argument.
+     *
+     * @param argsString Arguments string of the form: {@code preamble <prefix>value <prefix>value ...}
+     * @return The same argument without the type flag.
+     */
+    public static String removeFlag(String argsString) {
+        return argsString.substring(2);
+    }
 }
