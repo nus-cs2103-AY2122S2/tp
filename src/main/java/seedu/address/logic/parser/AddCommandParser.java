@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.TypeFlags.FLAG_APPLICANT;
+import static seedu.address.commons.core.TypeFlags.FLAG_INTERVIEW;
+import static seedu.address.commons.core.TypeFlags.FLAG_POSITION;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.applicants.AddApplicantCommandParser;
@@ -19,13 +21,16 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         char flag = ArgumentTokenizer.getFlag(args.trim());
-        String args_without_flag = ArgumentTokenizer.removeFlag(args.trim());
+        String argsWithoutFlag = ArgumentTokenizer.removeFlag(args.trim());
 
         if (flag == FLAG_APPLICANT) {
-            return new AddApplicantCommandParser().parse(args_without_flag);
+            return new AddApplicantCommandParser().parse(argsWithoutFlag);
+        } else if (flag == FLAG_INTERVIEW) {
+            // calls add interview command parser
+        } else if (flag == FLAG_POSITION) {
+            // calls add position command parser
         }
 
         return null;
     }
-
 }

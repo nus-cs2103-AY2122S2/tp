@@ -57,6 +57,10 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
+    public static final String FLAG_APPLICANT = " -a";
+    public static final String FLAG_POSITION = " -p";
+    public static final String FLAG_INTERVIEW = " -i";
+
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
