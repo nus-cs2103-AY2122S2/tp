@@ -376,7 +376,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Entry**: A single entry stored in a list of entries (Contact person/Event/Company)
+* **Contact person**: An entry representing a contact person that consists of a name, phone number, email address, and a list of tags
+* **Event**: An entry representing an event that consists of a name, date, time, location, and a list of tags
+* **Company**: An entry representing a company that consists of a name and a list of tags
 
 --------------------------------------------------------------------------------------------------------------------
 
