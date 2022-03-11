@@ -26,6 +26,8 @@
       <VBox>
         <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
           <Menu mnemonicParsing="false" text="File">
+            <MenuItem mnemonicParsing="false" onAction="#handleLoadFromCsv" text="Load from CSV" />
+            <MenuItem mnemonicParsing="false" onAction="#handleSaveToCsv" text="Save to CSV" />
             <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
