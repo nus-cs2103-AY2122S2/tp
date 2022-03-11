@@ -153,8 +153,8 @@ public class CommandTestUtil {
 
         Company company = model.getFilteredCompanyList().get(targetIndex.getZeroBased());
         final String[] splitName = company.getName().fullName.split("\\s+");
-        model.updateFilteredCompanyList(new CompanyNameContainsKeywordsPredicate(Arrays.asList(splitName)),
-                PREDICATE_SHOW_ALL_ROLES);
+        model.updateFilteredCompanyList(new CompanyNameContainsKeywordsPredicate(new ArrayList<>(),
+                        Arrays.asList(splitName)), PREDICATE_SHOW_ALL_ROLES);
 
         assertEquals(1, model.getFilteredCompanyList().size());
     }

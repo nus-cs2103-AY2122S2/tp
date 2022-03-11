@@ -75,7 +75,7 @@ public class CompanyListParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(FindCommand.COMMAND_WORD + " c/"
                 + String.join(" ", keywords) + " r/" + String.join(" ", keywords));
-        assertEquals(new FindCommand(new CompanyNameContainsKeywordsPredicate(keywords),
+        assertEquals(new FindCommand(new CompanyNameContainsKeywordsPredicate(keywords, keywords),
                 new RoleNameContainsKeywordsPredicate(keywords)), command);
     }
 

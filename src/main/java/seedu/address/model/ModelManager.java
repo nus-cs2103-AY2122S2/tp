@@ -125,10 +125,10 @@ public class ModelManager implements Model {
 
     @Override
     public void updateFilteredCompanyList(Predicate<Company> companyPredicate, Predicate<Role> rolePredicate) {
-        requireNonNull(companyPredicate);
+        requireAllNonNull(companyPredicate, rolePredicate);
         filteredCompanies.setPredicate(companyPredicate);
-        assert(filteredCompanies.stream().allMatch(companyPredicate));
         filteredCompanies.forEach(company -> company.getRoleManager().updateFilteredRoleList(rolePredicate));
+        assert(filteredCompanies.stream().allMatch(companyPredicate));
         assert(filteredCompanies.stream().allMatch(company -> company.getRoleManager().getFilteredRoleList()
                 .stream().allMatch(rolePredicate)));
     }

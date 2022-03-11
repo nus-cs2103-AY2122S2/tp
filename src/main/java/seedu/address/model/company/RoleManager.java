@@ -29,7 +29,7 @@ public class RoleManager {
         requireAllNonNull(roleList);
 
         this.roleList = new RoleList(roleList);
-        this.filteredRoles = new FilteredList<>(this.roleList.getRoleList());
+        this.filteredRoles = new FilteredList<>(this.roleList.getRoles());
     }
 
     public RoleManager() {
@@ -100,6 +100,7 @@ public class RoleManager {
      */
     public void updateFilteredRoleList(Predicate<Role> predicate) {
         requireNonNull(predicate);
+        filteredRoles.setPredicate(PREDICATE_SHOW_ALL_ROLES);
         filteredRoles.setPredicate(predicate);
     }
 
