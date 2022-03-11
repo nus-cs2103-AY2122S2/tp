@@ -54,8 +54,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             companyNameKeywords = new String[0];
         }
 
-        return new FindCommand(new CompanyNameContainsKeywordsPredicate(Arrays.asList(roleNameKeywords),
-                Arrays.asList(companyNameKeywords)),
+        return new FindCommand(new CompanyNameContainsKeywordsPredicate(Arrays.asList(companyNameKeywords)),
                 new RoleNameContainsKeywordsPredicate(Arrays.asList(roleNameKeywords)));
     }
 

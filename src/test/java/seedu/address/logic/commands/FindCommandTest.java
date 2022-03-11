@@ -31,12 +31,9 @@ public class FindCommandTest {
     @Test
     public void equals() {
         CompanyNameContainsKeywordsPredicate firstCompanyPredicate =
-                new CompanyNameContainsKeywordsPredicate(Collections.singletonList("first"),
-                        Collections.singletonList("first"));
+                new CompanyNameContainsKeywordsPredicate(Collections.singletonList("first"));
         CompanyNameContainsKeywordsPredicate secondCompanyPredicate =
-                new CompanyNameContainsKeywordsPredicate(Collections.singletonList("second"),
-                        Collections.singletonList("second"));
-
+                new CompanyNameContainsKeywordsPredicate(Collections.singletonList("second"));
         RoleNameContainsKeywordsPredicate firstRolePredicate =
                 new RoleNameContainsKeywordsPredicate(Collections.singletonList("first"));
         RoleNameContainsKeywordsPredicate secondRolePredicate =
@@ -66,7 +63,7 @@ public class FindCommandTest {
     public void execute_multipleKeywords_noCompanyFound() {
         String expectedMessage = String.format(MESSAGE_COMPANIES_LISTED_OVERVIEW, 0);
         CompanyNameContainsKeywordsPredicate companyPredicate =
-                prepareCompanyPredicate("ML mobile", "zoom govtech slack");
+                prepareCompanyPredicate("zoom govtech slack");
         RoleNameContainsKeywordsPredicate rolePredicate = prepareRolePredicate("ML mobile");
         FindCommand command = new FindCommand(companyPredicate, rolePredicate);
         expectedModel.updateFilteredCompanyList(companyPredicate, rolePredicate);
@@ -77,9 +74,8 @@ public class FindCommandTest {
     @Test
     public void execute_multipleKeywords_multipleCompaniesFound() {
         String expectedMessage = String.format(MESSAGE_COMPANIES_LISTED_OVERVIEW, 3);
-        CompanyNameContainsKeywordsPredicate companyPredicate =
-                prepareCompanyPredicate("software mobile engineer", "zoom apple tech");
-        RoleNameContainsKeywordsPredicate rolePredicate = prepareRolePredicate("software mobile engineer");
+        CompanyNameContainsKeywordsPredicate companyPredicate = prepareCompanyPredicate("zoom apple tech");
+        RoleNameContainsKeywordsPredicate rolePredicate = prepareRolePredicate("zoom apple tech");
         FindCommand command = new FindCommand(companyPredicate, rolePredicate);
         expectedModel.updateFilteredCompanyList(companyPredicate, rolePredicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -89,15 +85,10 @@ public class FindCommandTest {
     /**
      * Parses {@code userInput} into a {@code CompanyNameContainsKeywordsPredicate}.
      */
-    private CompanyNameContainsKeywordsPredicate prepareCompanyPredicate(String userInputRole,
-                                                                         String userInputCompany) {
-        return new CompanyNameContainsKeywordsPredicate(Arrays.asList(userInputRole.split("\\s+")),
-                Arrays.asList(userInputCompany.split("\\s+")));
+    private CompanyNameContainsKeywordsPredicate prepareCompanyPredicate(String userInput) {
+        return new CompanyNameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 
-    /**
-     * Parses {@code userInput} into a {@code RoleContainsKeywordsPredicate}.
-     */
     private RoleNameContainsKeywordsPredicate prepareRolePredicate(String userInput) {
         return new RoleNameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }

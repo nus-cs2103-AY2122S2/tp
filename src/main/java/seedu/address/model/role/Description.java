@@ -31,7 +31,7 @@ public class Description {
     }
 
     /**
-     * Returns true if a given string is a valid email or is empty.
+     * Returns true if a given string is a valid description or is empty.
      */
     public static boolean isValidDescription(String test) {
         return test.matches(VALIDATION_REGEX) || test.isEmpty();

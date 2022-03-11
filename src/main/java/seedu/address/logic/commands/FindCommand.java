@@ -12,7 +12,7 @@ import seedu.address.model.role.RoleNameContainsKeywordsPredicate;
 /**
  * Finds and lists all companies or roles whose name contains any of the argument keywords.
  * Search type of search conducted depends on the format of user input.
- * Keyword matching is case insensitive.
+ * Keyword matching is case-insensitive.
  */
 public class FindCommand extends Command {
 
@@ -24,9 +24,9 @@ public class FindCommand extends Command {
             + "(case-insensitive) displays them as a list with index numbers.\n"
             + "Parameters: "
             + PREFIX_COMPANY_NAME
-            + "COMPANYNAME "
+            + "COMPANY_NAME "
             + PREFIX_ROLE_NAME
-            + "ROLENAME"
+            + "ROLE_NAME"
             + "\n"
             + "Example: " + COMMAND_WORD + " c/amazon r/engineer";
 
@@ -35,7 +35,7 @@ public class FindCommand extends Command {
 
     /**
      * @param companyPredicate Predicate provided to filter through companies
-     * @param rolePredicate Predicate provided to filter through roles
+     * @param rolePredicate    Predicate provided to filter through roles
      */
     public FindCommand(CompanyNameContainsKeywordsPredicate companyPredicate,
                        RoleNameContainsKeywordsPredicate rolePredicate) {

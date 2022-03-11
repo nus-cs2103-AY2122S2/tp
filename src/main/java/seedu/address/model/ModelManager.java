@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.company.RoleManager.PREDICATE_SHOW_ALL_ROLES;
 
 import java.nio.file.Path;
 import java.util.function.Predicate;
@@ -108,7 +109,6 @@ public class ModelManager implements Model {
     @Override
     public void setCompany(Company target, Company editedCompany) {
         requireAllNonNull(target, editedCompany);
-
         companyList.setCompany(target, editedCompany);
     }
 
@@ -128,8 +128,8 @@ public class ModelManager implements Model {
         requireNonNull(companyPredicate);
         filteredCompanies.setPredicate(companyPredicate);
         assert(filteredCompanies.stream().allMatch(companyPredicate));
-        filteredCompanies.stream().forEach(company -> company.getRoleManager().filterRoles(rolePredicate));
-        assert(filteredCompanies.stream().allMatch(company -> company.getRoleManager().getFilteredRoles()
+        filteredCompanies.forEach(company -> company.getRoleManager().updateFilteredRoleList(rolePredicate));
+        assert(filteredCompanies.stream().allMatch(company -> company.getRoleManager().getFilteredRoleList()
                 .stream().allMatch(rolePredicate)));
     }
 
