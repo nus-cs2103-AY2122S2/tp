@@ -13,6 +13,10 @@
     src: url("../fonts/roboto_mono/static/RobotoMono-Regular.ttf");
 }
 
+.text {
+    -fx-font-smoothing-type: gray;
+}
+
 .background {
     -fx-background-color: #2f3136;
     background-color: #2f3136; /* Used in the default.html file */
