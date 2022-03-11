@@ -49,6 +49,6 @@ public class AssignCommand extends Command {
         if (!assign(student, lesson)) {
             throw new CommandException(MESSAGE_ALREADY_ENROLLED);
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, studentIndex, lessonIndex));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, student.getName(), lesson.getName()));
     }
 }
