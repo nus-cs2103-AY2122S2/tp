@@ -68,7 +68,7 @@ from offering positions to scheduling interviews with candidates. It is optimise
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -194,26 +194,14 @@ Examples:
 * `edit -p Senior Frontend Software Engineer n/5`
 * `edit -p Senior Frontend Software Engineer r/JavaScript r/React`
 
-### List Positions : `poslist`
-
-Lists all existing positions in HireLah.
-Format: `poslist`
-
-
-### Listing all Applicants : `appllist`
-
-Shows a list of all Applicants in HireLah.
-
-Format: `appllist`
-
 ## Delete
 General command to delete different data type in HireLah.
 
 Format: `delete -TYPE`
 * TYPE must take the form of `a`, `i`, `p`
-* -a will edit an applicant
-* -i will edit an interview
-* -p will edit a position
+* -a will delete an applicant
+* -i will delete an interview
+* -p will delete a position
 
 ### Deleting an Applicant : `del -a`
 
@@ -226,19 +214,9 @@ Format: `del -a INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-<<<<<<< HEAD
-<<<<<<< HEAD
-* `list` followed by `delete 2` deletes the 2nd applicant in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st applicant in the results of the `find` command.
-=======
 * `list` followed by `delete -a 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete -a 1` deletes the 1st person in the results of the `find` command.
->>>>>>> ba1f565e346e96db5cba7f27690755202cd69f37
-=======
 
-* `list` followed by `delete -a 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete -a 1` deletes the 1st person in the results of the `find` command.
->>>>>>> d31fe563e59a76dc2c92c377808b21254db15f40
 
 ### Delete positions : `del -p`
 
@@ -263,19 +241,33 @@ Format: `del -i CANDIDATE_INDEX ROLE`
 Examples:
 * `del -i 1 Senior Frontend Software Engineer`
 
-### List Positions : `poslist`
+## List
+General command to list different data type in HireLah.
 
-Lists all existing positions in HireLah.
-Format: `poslist`
+Format: `list -TYPE`
+* TYPE must take the form of `a`, `i`, `p`
+* -a will list all applicants
+* -i will list all interview for an applicant
+* -p will list all position
 
-### Listing interviews: `intvwlist`
+### List Applicants: `list -a`
+Lists all existing applicants
+
+Format: `list -a`
+
+### Listing interviews: `list -i`
 
 Lists all existing interviews for the candidate in HireLah.
 
-Format: `intvwlist CANDIDATE_INDEX`
+Format: `list -i CANDIDATE_INDEX`
 
 Examples:
-* `intvwlist 1`
+* `list -i 1`
+### List Positions : `list -p`
+
+Lists all existing positions in HireLah.
+Format: `list -p`
+
 
 ### Filter data: `filter`
 View different applicants, interviews and positions in HireLah through various filters. It alters the current display of HireLah and changes the index of the relevant data.
