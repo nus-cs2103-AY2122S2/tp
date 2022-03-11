@@ -64,8 +64,7 @@ class AddToClipboardCommandTest {
     public void execute_emptyNameInput() {
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
 
-        assertThrows(IllegalArgumentException.class, expectedMessage, 
-                () -> preparePredicate(" "));
+        assertThrows(IllegalArgumentException.class, expectedMessage, () -> preparePredicate(" "));
     }
 
     /**
@@ -75,9 +74,7 @@ class AddToClipboardCommandTest {
     @Test
     public void execute_invalidNameInput() {
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
-        
-        assertThrows(IllegalArgumentException.class, expectedMessage, 
-                () -> preparePredicate("##"));
+        assertThrows(IllegalArgumentException.class, expectedMessage, () -> preparePredicate("##"));
     }
 
     /**

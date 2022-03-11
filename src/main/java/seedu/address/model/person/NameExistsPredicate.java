@@ -11,7 +11,7 @@ public class NameExistsPredicate implements Predicate<Person> {
     public NameExistsPredicate(Name keyword) {
         this.keyword = keyword;
     }
-    
+
     @Override
     public boolean test(Person person) {
         return keyword.equalsIgnoreCasing(person.getName());

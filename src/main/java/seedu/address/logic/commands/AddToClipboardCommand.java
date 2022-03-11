@@ -2,21 +2,19 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.awt.datatransfer.StringSelection;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 
 import javafx.collections.ObservableList;
-
 import seedu.address.model.Model;
 import seedu.address.model.person.NameExistsPredicate;
 import seedu.address.model.person.Person;
 
 /**
- * Adds the information of a given contact to the user's clipboard.
+ * Copies the information of a given contact to the user's clipboard.
  */
 public class AddToClipboardCommand extends Command {
-    
     public static final String COMMAND_WORD = "clip";
 
     public static final String MESSAGE_SUCCESS = "Added the following contact's information to clipboard!";
@@ -30,6 +28,9 @@ public class AddToClipboardCommand extends Command {
 
     private final NameExistsPredicate predicate;
 
+    /**
+     * Creates an AddToClipboardCommand to copy information of the person specified in {@code NameExistsPredicate}
+     */
     public AddToClipboardCommand(NameExistsPredicate predicate) {
         requireNonNull(predicate);
         this.predicate = predicate;
