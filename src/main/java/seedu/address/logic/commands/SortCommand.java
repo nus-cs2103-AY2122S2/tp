@@ -7,13 +7,17 @@ import seedu.address.model.person.Person;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
     private final List<FieldSortOrder> fieldSortOrderList;
+
+    public static final String MESSAGE_SUCCESS = "List is sorted accordingly!";
 
     public static class FieldSortOrder {
         private final Prefix fieldPrefix;
@@ -46,8 +50,6 @@ public class SortCommand extends Command {
 
         for (FieldSortOrder fieldSortOrder : fieldSortOrderList) {
             Comparator<Person> comparator = getComparator(fieldSortOrder.getFieldPrefix());
-            //grab the list, and sort them based on the order
-            //get field, in place sort
             if (fieldSortOrder.getIsDescendingOrder()) {
                 comparator = comparator.reversed();
             }
@@ -55,10 +57,8 @@ public class SortCommand extends Command {
             model.sortPersonList(comparator);
         }
 
-        return null;
-        //return new CommandResult();
-        //model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        //return new CommandResult();
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 
     private Comparator<Person> getComparator(Prefix fieldPrefix) {
@@ -75,7 +75,10 @@ public class SortCommand extends Command {
                 return -1;
             }
 
-            return p1Field.get().getValue().compareTo(p2Field.get().getValue());
+            String p1Value = p1Field.get().getValue().toLowerCase(Locale.ROOT);
+            String p2Value = p2Field.get().getValue().toLowerCase(Locale.ROOT);
+
+            return p1Value.compareTo(p2Value);
         };
     }
 }

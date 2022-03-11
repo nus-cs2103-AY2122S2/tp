@@ -24,8 +24,8 @@ public class SortCommandParser implements Parser<SortCommand> {
 
         Prefix[] allPrefixes = Arrays.copyOf(FieldRegistry.PREFIXES, FieldRegistry.PREFIXES.length);
         Map<String, Prefix> prefixMap = Arrays.stream(allPrefixes).collect(Collectors.toMap(Prefix::getPrefix, prefix -> prefix));
-        String delimiters = "\\s|" + Arrays.stream(allPrefixes).map(Prefix::getPrefix).collect(
-                Collectors.joining("|"));
+        String delimiters = "\\s|((?=" + Arrays.stream(allPrefixes).map(Prefix::getPrefix).collect(
+                Collectors.joining("))|((?=")) + "))";
 
         String[] values = args.split(delimiters);
         return new SortCommand(getFieldSortOrderList(values, prefixMap));
@@ -34,15 +34,21 @@ public class SortCommandParser implements Parser<SortCommand> {
     private  List<SortCommand.FieldSortOrder> getFieldSortOrderList(String[] values, Map<String, Prefix> prefixMap) {
         List<SortCommand.FieldSortOrder> fieldSortOrderList = new ArrayList<SortCommand.FieldSortOrder>();
 
-        for (int i = 1; i < values.length; ++i) {
+        for (int i = 0; i < values.length; ++i) {
+            if (values[i].equals("")) {
+                continue;
+            }
+
             if (!prefixMap.containsKey(values[i])) {
-                //TODO:: throw error here that this delimiter doesnt exist
+                continue;
             }
 
             boolean isDescending = false;
             if (i + 1 < values.length) {
-                isDescending = values[i].equals("desc");
+                isDescending = values[i + 1].equals("desc");
             }
+
+            Prefix prefixTest = prefixMap.get(values[i]);
 
             fieldSortOrderList.add(new SortCommand.FieldSortOrder(prefixMap.get(values[i]), isDescending));
         }

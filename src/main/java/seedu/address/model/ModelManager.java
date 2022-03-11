@@ -24,7 +24,6 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    //private final SortedList<Person> sortedPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -133,7 +132,9 @@ public class ModelManager implements Model {
 
     @Override
     public void sortPersonList(Comparator<Person> comparator) {
+        requireNonNull(comparator);
 
+        addressBook.sortPersonList(comparator);
     }
 
     @Override
