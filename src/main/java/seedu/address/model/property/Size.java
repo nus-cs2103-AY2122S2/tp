@@ -17,7 +17,7 @@ public enum Size {
     FIVE_ROOM("5-room");
 
     public static final String MESSAGE_CONSTRAINTS = "Size must be one of " + Arrays.toString(Size.values());
-    public static final String VALIDATION_REGEX = "^(1-room|2-room|3-room|4-room|5-room)$";
+    public static final String VALIDATION_REGEX = "^(?i)[12345]-room$";
 
     public final String value;
 

@@ -6,12 +6,19 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PROPERTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USERTYPE;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.property.Property;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -26,8 +33,8 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_ADDRESS, PREFIX_USERTYPE);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                        PREFIX_PROPERTY, PREFIX_USERTYPE);
 
         Index index;
 
@@ -53,6 +60,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_USERTYPE).isPresent()) {
             editPersonDescriptor.setUserType(ParserUtil.parseUserType(argMultimap.getValue(PREFIX_USERTYPE).get()));
         }
+        parsePropertiesForEdit(argMultimap.getAllValues(PREFIX_PROPERTY)).ifPresent(
+                editPersonDescriptor::setProperties);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
@@ -61,4 +70,19 @@ public class EditCommandParser implements Parser<EditCommand> {
         return new EditCommand(index, editPersonDescriptor);
     }
 
+    /**
+     * Parses {@code Collection<String> properties} into a {@code Set<Property>} if {@code properties} is non-empty.
+     * If {@code properties} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Property>} containing zero properties.
+     */
+    private Optional<Set<Property>> parsePropertiesForEdit(Collection<String> properties) throws ParseException {
+        assert properties != null;
+
+        if (properties.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> propertySet =
+                properties.size() == 1 && properties.contains("") ? Collections.emptySet() : properties;
+        return Optional.of(ParserUtil.parseProperties(propertySet));
+    }
 }

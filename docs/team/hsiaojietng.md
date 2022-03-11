@@ -40,9 +40,11 @@ Given below are my contributions to the project.
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#5](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/5), [\#11](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/11/)
+  * Created UI mockup for RealEstatePro
   * Contributed to forum discussions:
   * Reported bugs and suggestions for other teams in the class:
   * Some parts of the history feature I added was adopted by several other class mates:
 
 * **Tools**:
   * Introduced Trello for brainstorming process of User Stories
+

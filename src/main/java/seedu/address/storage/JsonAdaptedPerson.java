@@ -1,6 +1,11 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -8,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Favourite;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -24,8 +30,10 @@ class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final String email;
+    private final boolean favourite;
     private final String address;
-    private final JsonAdaptedProperty property;
+    private final List<JsonAdaptedProperty> properties = new ArrayList<>();
+    private final JsonAdaptedProperty preference;
     private final String userType;
 
     /**
@@ -33,14 +41,21 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("property") JsonAdaptedProperty property, @JsonProperty("userType") String userType) {
+            @JsonProperty("email") String email, @JsonProperty("favourite") boolean favourite,
+            @JsonProperty("address") String address, @JsonProperty("properties") List<JsonAdaptedProperty> properties,
+            @JsonProperty("preference") JsonAdaptedProperty preference,
+            @JsonProperty("userType") String userType) {
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.favourite = favourite;
         this.address = address;
-        this.property = property;
+        this.preference = preference;
         this.userType = userType;
+
+        if (properties != null) {
+            this.properties.addAll(properties);
+        }
     }
 
     /**
@@ -50,8 +65,12 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
+        favourite = source.getFavourite().getStatus();
         address = source.getAddress().value;
-        property = source.getProperty().isPresent() ? new JsonAdaptedProperty(source.getProperty().get()) : null;
+        properties.addAll(source.getProperties().stream()
+                .map(JsonAdaptedProperty::new)
+                .collect(Collectors.toList()));
+        preference = source.getPreference().isPresent() ? new JsonAdaptedProperty(source.getPreference().get()) : null;
         userType = source.getUserType().value;
     }
 
@@ -62,8 +81,13 @@ class JsonAdaptedPerson {
      */
     public Person toModelType() throws IllegalValueException {
 
-        final Optional<Property> modelProperty =
-                property != null ? Optional.of(property.toModelType()) : Optional.empty();
+        final Set<Property> modelProperties = new HashSet<>();
+        for (JsonAdaptedProperty property : properties) {
+            modelProperties.add(property.toModelType());
+        }
+
+        final Optional<Property> modelPreference =
+                preference != null ? Optional.of(preference.toModelType()) : Optional.empty();
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -89,6 +113,9 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
+        final Favourite modelFavourite;
+        modelFavourite = new Favourite(favourite);
+
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
@@ -106,7 +133,8 @@ class JsonAdaptedPerson {
         }
         final UserType modelUserType = new UserType(userType);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelProperty, modelUserType);
+        return new Person(modelName, modelPhone, modelEmail, modelFavourite, modelAddress, modelProperties,
+                modelPreference, modelUserType);
     }
 
 }
