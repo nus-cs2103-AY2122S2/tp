@@ -124,7 +124,7 @@ public class EditCommand extends Command {
             if (!editPersonDescriptor.getModules().equals(Optional.empty()) && latestModList.size() != 0) {
                 checkMod = editPersonDescriptor.getModules().get().iterator().next();
                 if (!latestModList.contains(checkMod)) {
-                    throw new ModuleNotFoundException();
+                    throw new ModuleNotFoundException(checkMod.toString());
                 }
             }
 
