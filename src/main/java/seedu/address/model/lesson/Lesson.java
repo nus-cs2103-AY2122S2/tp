@@ -4,7 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
 
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 
 /**
  * Represents a Lesson in the Lesson book.
@@ -94,4 +94,9 @@ public abstract class Lesson {
      * Returns the date and time that the lesson starts and ends.
      */
     public abstract DateTimeSlot getTimeSlot();
+
+    /**
+     * Adds a given Student to the list of students assigned to this lesson.
+     */
+    public abstract void addStudent(Student student);
 }

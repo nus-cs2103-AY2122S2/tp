@@ -19,13 +19,13 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.misc.InfoPanelTypes;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 import seedu.address.ui.infopanel.InfoPanel;
 import seedu.address.ui.infopanel.LessonInfoPanel;
-import seedu.address.ui.infopanel.PersonInfoPanel;
+import seedu.address.ui.infopanel.StudentInfoPanel;
 import seedu.address.ui.listpanel.LessonListPanel;
 import seedu.address.ui.listpanel.ListPanel;
-import seedu.address.ui.listpanel.PersonListPanel;
+import seedu.address.ui.listpanel.StudentListPanel;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -120,16 +120,18 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        //populateListPanelWithPeople(logic.getFilteredPersonList());
+        //populateListPanelWithPeople(logic.getFilteredStudentList());
         populateListPanelWithLessons(logic.getFilteredLessonList());
 
-        // Load first person in list
-        Person tempPerson = logic.getFilteredPersonList().get(0);
-        tempPopulateInfoPanelWithPersonAndList(tempPerson, logic.getFilteredLessonList());
+        // Load first student in list
+        if (logic.getFilteredStudentList().size() > 0) {
+            Student tempStudent = logic.getFilteredStudentList().get(0);
+            tempPopulateInfoPanelWithStudentAndList(tempStudent, logic.getFilteredLessonList());
+        }
 
         // Temporary lesson placeholder
         //Lesson tempLesson = logic.getFilteredLessonList().get(0);
-        //tempPopulateInfoPanelWithLessonAndList(tempLesson, logic.getFilteredPersonList());
+        //tempPopulateInfoPanelWithLessonAndList(tempLesson, logic.getFilteredStudentList());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -186,10 +188,10 @@ public class MainWindow extends UiPart<Stage> {
      */
     private void handleInfoPanelUpdate(InfoPanelTypes infoPanelTypes) {
         switch (infoPanelTypes) {
-        case PERSON:
-            logger.info("INFO: Updating InfoPanel with selected person");
-            Person selectedPerson = logic.getSelectedPerson();
-            populateInfoPanelWithPerson(selectedPerson);
+        case STUDENT:
+            logger.info("INFO: Updating InfoPanel with selected student");
+            Student selectedStudent = logic.getSelectedStudent();
+            populateInfoPanelWithStudent(selectedStudent);
             break;
         case LESSON:
             logger.info("INFO: Updating InfoPanel with selected lesson");
@@ -237,8 +239,8 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    private void populateListPanelWithPeople(ObservableList<Person> list) {
-        listPanel = new PersonListPanel(list);
+    private void populateListPanelWithPeople(ObservableList<Student> list) {
+        listPanel = new StudentListPanel(list);
         populateListPanel(listPanel);
     }
 
@@ -251,10 +253,10 @@ public class MainWindow extends UiPart<Stage> {
         listPanelPlaceholder.getChildren().add(newListPanel.getRoot());
     }
 
-    private void populateInfoPanelWithPerson(Person selectedPerson) {
-        infoPanel = new PersonInfoPanel(selectedPerson);
-        PersonInfoPanel personInfoPanel = (PersonInfoPanel) infoPanel;
-        populateInfoPanel(personInfoPanel);
+    private void populateInfoPanelWithStudent(Student selectedStudent) {
+        infoPanel = new StudentInfoPanel(selectedStudent);
+        StudentInfoPanel studentInfoPanel = (StudentInfoPanel) infoPanel;
+        populateInfoPanel(studentInfoPanel);
     }
 
     private void populateInfoPanelWithLesson(Lesson selectedLesson) {
@@ -263,17 +265,17 @@ public class MainWindow extends UiPart<Stage> {
         populateInfoPanel(lessonInfoPanel);
     }
 
-    // TODO: Temporary test method as Person does not contain list of lessons yet
-    private void tempPopulateInfoPanelWithPersonAndList(Person selectedPerson, ObservableList<Lesson> lessonList) {
-        infoPanel = new PersonInfoPanel(selectedPerson);
-        PersonInfoPanel personInfoPanel = (PersonInfoPanel) infoPanel;
-        personInfoPanel.setAssignedLessons(lessonList);
-        populateInfoPanel(personInfoPanel);
+    // TODO: Temporary test method as Student does not contain list of lessons yet
+    private void tempPopulateInfoPanelWithStudentAndList(Student selectedStudent, ObservableList<Lesson> lessonList) {
+        infoPanel = new StudentInfoPanel(selectedStudent);
+        StudentInfoPanel studentInfoPanel = (StudentInfoPanel) infoPanel;
+        studentInfoPanel.setAssignedLessons(lessonList);
+        populateInfoPanel(studentInfoPanel);
     }
 
     // TODO: Temporary test method as Lesson does not contain list of students yet
     private void tempPopulateInfoPanelWithLessonAndList(Lesson selectedLesson,
-                                                        ObservableList<Person> enrolledStudents) {
+                                                        ObservableList<Student> enrolledStudents) {
         infoPanel = new LessonInfoPanel(selectedLesson);
         LessonInfoPanel lessonInfoPanel = (LessonInfoPanel) infoPanel;
         lessonInfoPanel.setEnrolledStudents(enrolledStudents);

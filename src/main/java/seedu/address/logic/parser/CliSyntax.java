@@ -6,13 +6,13 @@ package seedu.address.logic.parser;
 public class CliSyntax {
 
     /* Prefix definitions */
-    public static final Prefix PREFIX_NAME = new Prefix("n/", "name");
-    public static final Prefix PREFIX_PHONE = new Prefix("p/", "phone");
-    public static final Prefix PREFIX_EMAIL = new Prefix("e/", "email");
-    public static final Prefix PREFIX_ADDRESS = new Prefix("a/", "address");
-    public static final Prefix PREFIX_TAG = new Prefix("t/", "tag");
+    public static final Prefix PREFIX_STUDENT_NAME = new Prefix("-n", "studentName");
+    public static final Prefix PREFIX_STUDENT_PHONE = new Prefix("-p", "studentPhone");
+    public static final Prefix PREFIX_STUDENT_EMAIL = new Prefix("-e", "studentEmail");
+    public static final Prefix PREFIX_STUDENT_ADDRESS = new Prefix("-a", "studentAddress");
+    public static final Prefix PREFIX_STUDENT_TAG = new Prefix("-t", "studentTag");
 
-    public static final Prefix PREFIX_LESSON_NAME = new Prefix("-n", "name");
+    public static final Prefix PREFIX_LESSON_NAME = new Prefix("-n", "lessonName");
     public static final Prefix PREFIX_SUBJECT = new Prefix("-s", "subject");
     public static final Prefix PREFIX_LESSON_ADDRESS = new Prefix("-a", "address");
     public static final Prefix PREFIX_DATE = new Prefix("-d", "date");
@@ -21,6 +21,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_DURATION_MINUTES = new Prefix("-m", "minutes");
     public static final Prefix PREFIX_RECURRING = new Prefix("-r", "recurring");
 
-    public static final Prefix PREFIX_STUDENT = new Prefix("-s", "student");
-    public static final Prefix PREFIX_LESSON = new Prefix("-l", "lesson");
+    public static final Prefix PREFIX_STUDENT = new Prefix("-s", "studentID");
+    public static final Prefix PREFIX_LESSON = new Prefix("-l", "lessonID");
 }

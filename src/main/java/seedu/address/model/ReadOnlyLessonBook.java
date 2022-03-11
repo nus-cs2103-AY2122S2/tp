@@ -9,8 +9,8 @@ import seedu.address.model.lesson.Lesson;
 public interface ReadOnlyLessonBook {
 
     /**
-     * Returns an unmodifiable view of the persons list.
-     * This list will not contain any duplicate persons.
+     * Returns an unmodifiable view of the students list.
+     * This list will not contain any duplicate students.
      */
     ObservableList<Lesson> getLessonList();
 }

@@ -30,7 +30,7 @@ public class LessonBook implements ReadOnlyLessonBook {
     public LessonBook() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an AddressBook using the Students in the {@code toBeCopied}
      */
     public LessonBook(ReadOnlyLessonBook toBeCopied) {
         this();
@@ -41,7 +41,7 @@ public class LessonBook implements ReadOnlyLessonBook {
 
     /**
      * Replaces the contents of the lesson list with {@code lessons}.
-     * {@code persons} must not contain duplicate lessons.
+     * {@code students} must not contain duplicate lessons.
      */
     public void setLessons(List<Lesson> lessons) {
         this.lessons.setLessons(lessons);
@@ -89,7 +89,7 @@ public class LessonBook implements ReadOnlyLessonBook {
      * Removes {@code key} from this {@code LessonBook}.
      * {@code key} must exist in the lesson book.
      */
-    public void removeLesson(Lesson key) {
+    public void deleteLesson(Lesson key) {
         lessons.remove(key);
     }
 
