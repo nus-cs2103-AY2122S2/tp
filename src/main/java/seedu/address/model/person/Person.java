@@ -24,7 +24,7 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final Optional<Property> property;
+    private final Set<Property> properties;
     private final Optional<Property> preference;
     private final Set<Tag> tags = new HashSet<>();
 
@@ -33,13 +33,13 @@ public class Person {
      * Favourited clients will remain favourited & unfavourited clients will remain unfavourited
      */
     public Person(Name name, Phone phone, Email email, Favourite favourite, Address address,
-                  Optional<Property> property, Optional<Property> preference, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, favourite, address, property, preference, tags);
+            Set<Property> properties, Optional<Property> preference, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, favourite, address, properties, preference, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.favourite = favourite;
-        this.property = property;
+        this.properties = properties;
         this.preference = preference;
         this.address = address;
         this.tags.addAll(tags);
@@ -49,15 +49,15 @@ public class Person {
      * Every field must be present and not null.
      * This constructor is used for adding a new Client, thus default status is unfavourited(false)
      */
-    public Person(Name name, Phone phone, Email email, Address address,
-                  Optional<Property> property, Optional<Property> preference, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, property, preference, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Set<Property> properties,
+            Optional<Property> preference, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, properties, preference, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.favourite = new Favourite(false);
         this.address = address;
-        this.property = property;
+        this.properties = properties;
         this.preference = preference;
         this.tags.addAll(tags);
     }
@@ -90,8 +90,12 @@ public class Person {
         return address;
     }
 
-    public Optional<Property> getProperty() {
-        return property;
+    /**
+     * Returns an immutable property set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Property> getProperties() {
+        return Collections.unmodifiableSet(properties);
     }
 
     public Optional<Property> getPreference() {
@@ -124,13 +128,20 @@ public class Person {
      * matches with {@code this} person's {@code property}.
      */
     public boolean matches(Person buyer) {
-        if (property.isEmpty()) {
+        if (properties.isEmpty()) {
             return false;
         }
         if (buyer.preference.isEmpty()) {
             return false;
         }
-        return property.get().matches(buyer.preference.get());
+
+        for (Property p : properties) {
+            if (p.matches(buyer.preference.get())) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -152,7 +163,7 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getProperty().equals(getProperty())
+                && otherPerson.getProperties().equals(getProperties())
                 && otherPerson.getPreference().equals(getPreference())
                 && otherPerson.getTags().equals(getTags());
     }
@@ -160,7 +171,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, favourite, address, property, preference, tags);
+        return Objects.hash(name, phone, email, favourite, address, properties, preference, tags);
     }
 
     @Override
@@ -176,9 +187,10 @@ public class Person {
                 .append("; Address: ")
                 .append(getAddress());
 
-        if (getProperty().isPresent()) {
-            builder.append("; Property: ");
-            builder.append(getProperty().get());
+        Set<Property> properties = getProperties();
+        if (!properties.isEmpty()) {
+            builder.append("; Properties: ");
+            properties.forEach(builder::append);
         }
 
         if (getPreference().isPresent()) {

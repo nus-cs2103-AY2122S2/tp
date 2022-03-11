@@ -64,8 +64,8 @@ public class DoublePersonCard extends UiPart<Region> {
         address.setText(seller.getAddress().value);
         email.setText(seller.getEmail().value);
 
-        if (seller.getProperty().isPresent()) {
-            property.setText(seller.getProperty().get().toString());
+        if (!seller.getProperties().isEmpty()) {
+            property.setText(seller.getProperties().toString());
         } else {
             property.setVisible(false);
         }
@@ -86,8 +86,8 @@ public class DoublePersonCard extends UiPart<Region> {
         address2.setText(buyer.getAddress().value);
         email2.setText(buyer.getEmail().value);
 
-        if (buyer.getProperty().isPresent()) {
-            property2.setText(buyer.getProperty().get().toString());
+        if (!buyer.getProperties().isEmpty()) {
+            property2.setText(buyer.getProperties().toString());
         } else {
             property2.setVisible(false);
         }

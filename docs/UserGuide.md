@@ -16,29 +16,47 @@ RealEstatePro is a desktop app for managing contacts, optimized for real estate 
 4. Double-click the file to start the app. The GUI should appear in a few seconds.
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.
 Some example commands you can try:
-    - **`list`** : Lists all contacts.
-    - **`add**n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` , contact number `98765432`, email `johnd@example.com` and address `street, block 123, #01-01` to the RealEstatePro app.
-    - **`delete**3` : Deletes the 3rd contact shown in the current list.
-    - **`clear`** : Deletes all contacts.
-    - **`exit`** : Exits the app.
+    - `list` : Lists all contacts.
+    - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` , contact number `98765432`, email `johnd@example.com` and address `street, block 123, #01-01` to the RealEstatePro app.
+    - `delete 3` : Deletes the 3rd contact shown in the current list.
+    - `clear` : Deletes all contacts.
+    - `exit` : Exits the app.
 6. Refer to the Features below for details of each command.
 
 ## Features
 
 Notes about the command format:
 
-- Words in `UPPER_CASE` are the parameters to be supplied by the user.
+- Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
 e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-- Inputting information after `pr/` & `t/` indicates the type of property a user is selling or buying.
-e.g. `pr/PROPERTY_REGION, PROPERTY_ADDRESS, PROPERTY_SIZE, PROPERTY_PRICE, t/userType` can be used as `pr/East, Block 123, 2-room, $550000, t/seller` means this user is a seller looking to sell a 2-room property at Block 123 which is located in the East, with a price of $550000.
-- Parameters can be in any order.
-e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-- If a parameter is expected only once in the command but you
-specified it multiple times, only the last occurrence of the parameter
-will be taken.
+
+- Items in square brackets are optional.<br>
+  e.g. `n/NAME [pr/PROPERTY]` can be used as `n/John Doe pr/north,123 Street,1-room,$300000` or as `n/John Doe`.
+
+- Items with `…` after them can be used multiple times including zero times.<br>
+  e.g. `[p/PHONE_NUMBER]…` can be used as ` ` (i.e. 0 times), `p/12345`, `p/12345 p/54321` etc.
+
+- Inputting information after `pr/` & `t/` indicates the type of property a user is selling or buying.<br>
+e.g. `pr/PROPERTY, t/USER_TYPE` can be used as `pr/East, Block 123, 2-room, $550000, t/seller` means this person is a seller looking to sell a 2-room property at Block 123 which is located in the East, with a price of $550000.<br>More information about the required format of properties can be found in the next section.
+
+- Person parameters can be in any order.<br>
+e.g. if the command specifies `n/NAME p/PHONE_NUMBER pr/PROPERTY`, `p/PHONE_NUMBER pr/PROPERTY n/NAME` is also acceptable.
+
+- If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
 e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
-- Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.
+
+- Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
 e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+Notes about the property format:
+- Properties must be specified in the following format: `pr/REGION,ADDRESS,SIZE,PRICE`. Whitespace between parameters is ignored.<br>
+  e.g. Both `pr/East,Block 123,2-room,$550000` and `pr/East, Block 123, 2-room, $550000` are acceptable. `pr/Block 123, East, 2-room, $550000` is not acceptable.
+
+Parameter formats:
+- REGION: One of [`North`, `South`, `East`, `West`, `Central`] (Non case-sensitive).
+- ADDRESS: Any non-empty string that does not contain `,`. e.g. `Block 123`
+- SIZE: One of [`1-room`,`2-room`, `3-room`, `4-room`, `5-room`] (Non case-sensitive).
+- PRICE: `$` followed by a positive integer. e.g. `$150000`
 
 ### Viewing help : `help`
 
@@ -50,14 +68,14 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pr/PROPERTY_SIZE, PROPERTY_LOCATION, PROPERTY_PRICE, t/USER_TYPE`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY]…, t/USER_TYPE`
 
 **Tip**: A person can be tagged as either a `Buyer`, or `Seller`.
 
 Examples:
 
-- `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01, pr/2-room, East, SGD$200K, t/Buyer`
-- `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 pr/Studio, West, SGD100K, t/Seller`
+- `add n/John Doe p/98765432 e/johnd@example.com a/John street block 123 #01-01, pr/East, John street block 123 #01-01, 2-room, $200000, t/Buyer`
+- `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 pr/West, Newgate Prison, 1-room, $100000, t/Seller`
 
 ### Listing all persons : `list`
 
@@ -69,18 +87,20 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PROPERTY_SIZE, PROPERTY_LOCATION, PROPERTY_PRICE] [t/USER_TYPE]`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PROPERTY]… [t/USER_TYPE]`
 
 - Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 - When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 - You can remove all the person’s tags by typing `t/` without specifying any tags after it.
+- You can remove all the person’s properties by typing `pr/` without specifying any properties after it.
 
 Examples:
 
 - `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 - `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+- `edit 2 n/Betsy Crower pr/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing properties.
 
 ### Locating persons by name: `find`
 
@@ -169,12 +189,12 @@ RealEstatePro data are saved as a JSON file `[JAR file location]/data/realestat
 
 | Action | Format, Examples  |
 | --- | --- |
-| Add | add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pr/PROPERTY_SIZE, PROPERTY_LOCATION, PROPERTY_PRICE, t/USER_TYPE 
+| Add | add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY], t/USER_TYPE 
 e.g., add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 pr/2-room, East, SGD$200K, t/Buyer    |
 | Clear | clear  |
 | Delete | delete INDEX 
 e.g., delete 3  |
-| Edit | edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PROPERTY_SIZE, PROPERTY_LOCATION, PROPERTY_PRICE] [t/USER_TYPE]    ​
+| Edit | edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PROPERTY]… [t/USER_TYPE]    ​
 e.g., edit 2 n/James Lee e/jameslee@example.com |
 | Find | find KEYWORD [MORE_KEYWORDS] 
 e.g., find James Jake  |

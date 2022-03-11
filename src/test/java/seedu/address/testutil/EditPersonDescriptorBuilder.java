@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -11,6 +12,10 @@ import seedu.address.model.person.Favourite;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.property.Price;
+import seedu.address.model.property.Property;
+import seedu.address.model.property.Region;
+import seedu.address.model.property.Size;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -39,6 +44,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setFavourite(person.getFavourite());
         descriptor.setAddress(person.getAddress());
         descriptor.setTags(person.getTags());
+        descriptor.setProperties(person.getProperties());
     }
 
     /**
@@ -88,6 +94,26 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
+        return this;
+    }
+
+    /**
+     * Parses the {@code properties} into a {@code Set<Property>} and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withProperties(String... properties) {
+        Set<Property> propertySet = new HashSet<>();
+
+        for (String s : properties) {
+            String[] propertySplit = s.split(",");
+            Region region = Region.fromString(propertySplit[0]);
+            Address address = new Address(propertySplit[1]);
+            Size size = Size.fromString(propertySplit[2]);
+            Price price = new Price(propertySplit[3]);
+            propertySet.add(new Property(region, address, size, price));
+        }
+
+        descriptor.setProperties(propertySet);
         return this;
     }
 

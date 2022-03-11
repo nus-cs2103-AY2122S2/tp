@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PROPERTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -43,7 +44,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG]... "
+            + "[" + PREFIX_PROPERTY + "PROPERTY]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -101,12 +103,12 @@ public class EditCommand extends Command {
         //Favourite status for a client will remain unchanged when edited if not, the FavouriteCommand is redundant.
         Favourite noChangeFavourite = editPersonDescriptor.getFavourite().orElse(personToEdit.getFavourite());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Optional<Property> updatedProperty = personToEdit.getProperty();
+        Set<Property> updatedProperties = editPersonDescriptor.getProperties().orElse(personToEdit.getProperties());
         Optional<Property> updatedPreference = personToEdit.getPreference();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, noChangeFavourite,
-                updatedAddress, updatedProperty, updatedPreference, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, noChangeFavourite, updatedAddress, updatedProperties,
+                updatedPreference, updatedTags);
     }
 
     @Override
@@ -138,8 +140,10 @@ public class EditCommand extends Command {
         private Favourite favourite;
         private Address address;
         private Set<Tag> tags;
+        private Set<Property> properties;
 
-        public EditPersonDescriptor() {}
+        public EditPersonDescriptor() {
+        }
 
         /**
          * Copy constructor.
@@ -152,13 +156,14 @@ public class EditCommand extends Command {
             setFavourite(toCopy.favourite);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setProperties(toCopy.properties);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, properties);
         }
 
         public void setName(Name name) {
@@ -218,6 +223,23 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        /**
+         * Sets {@code properties} to this object's {@code properties}.
+         * A defensive copy of {@code properties} is used internally.
+         */
+        public void setProperties(Set<Property> properties) {
+            this.properties = (properties != null) ? new HashSet<>(properties) : null;
+        }
+
+        /**
+         * Returns an unmodifiable property set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code properties} is null.
+         */
+        public Optional<Set<Property>> getProperties() {
+            return (properties != null) ? Optional.of(Collections.unmodifiableSet(properties)) : Optional.empty();
+        }
+
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -237,7 +259,8 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
-                    && getTags().equals(e.getTags());
+                    && getTags().equals(e.getTags())
+                    && getProperties().equals(e.getProperties());
         }
     }
 }

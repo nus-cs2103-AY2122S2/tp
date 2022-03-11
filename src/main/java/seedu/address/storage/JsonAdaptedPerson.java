@@ -32,7 +32,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final boolean favourite;
     private final String address;
-    private final JsonAdaptedProperty property;
+    private final List<JsonAdaptedProperty> properties = new ArrayList<>();
     private final JsonAdaptedProperty preference;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
@@ -42,8 +42,7 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("favourite") boolean favourite,
-            @JsonProperty("address") String address,
-            @JsonProperty("property") JsonAdaptedProperty property,
+            @JsonProperty("address") String address, @JsonProperty("property") List<JsonAdaptedProperty> properties,
             @JsonProperty("preference") JsonAdaptedProperty preference,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
@@ -51,7 +50,11 @@ class JsonAdaptedPerson {
         this.email = email;
         this.favourite = favourite;
         this.address = address;
-        this.property = property;
+
+        if (properties != null) {
+            this.properties.addAll(properties);
+        }
+
         this.preference = preference;
         if (tagged != null) {
             this.tagged.addAll(tagged);
@@ -67,7 +70,9 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         favourite = source.getFavourite().getStatus();
         address = source.getAddress().value;
-        property = source.getProperty().isPresent() ? new JsonAdaptedProperty(source.getProperty().get()) : null;
+        properties.addAll(source.getProperties().stream()
+                .map(JsonAdaptedProperty::new)
+                .collect(Collectors.toList()));
         preference = source.getPreference().isPresent() ? new JsonAdaptedProperty(source.getPreference().get()) : null;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -85,8 +90,10 @@ class JsonAdaptedPerson {
             personTags.add(tag.toModelType());
         }
 
-        final Optional<Property> modelProperty =
-                property != null ? Optional.of(property.toModelType()) : Optional.empty();
+        final Set<Property> modelProperties = new HashSet<>();
+        for (JsonAdaptedProperty property : properties) {
+            modelProperties.add(property.toModelType());
+        }
 
         final Optional<Property> modelPreference =
                 preference != null ? Optional.of(preference.toModelType()) : Optional.empty();
@@ -127,9 +134,8 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-
-        return new Person(modelName, modelPhone, modelEmail, modelFavourite,
-                modelAddress, modelProperty, modelPreference, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelFavourite, modelAddress, modelProperties,
+                modelPreference, modelTags);
     }
 
 }

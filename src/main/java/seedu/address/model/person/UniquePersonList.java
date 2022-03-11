@@ -116,7 +116,7 @@ public class UniquePersonList implements Iterable<Person> {
         List<Pair<Person>> result = new ArrayList<>();
         for (int i = 0; i < internalList.size(); i++) {
             Person property = internalList.get(i);
-            if (property.getProperty().isEmpty()) {
+            if (property.getProperties().isEmpty()) {
                 continue;
             }
             for (int j = 0; j < internalList.size(); j++) {
