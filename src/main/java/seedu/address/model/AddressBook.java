@@ -99,6 +99,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.match();
     }
 
+    public void setFavouriteStatus(Person personToFavourite) {
+        persons.setFavouriteStatus(personToFavourite);
+    }
+
     //// util methods
 
     @Override

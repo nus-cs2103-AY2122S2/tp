@@ -99,6 +99,16 @@ public class UniquePersonList implements Iterable<Person> {
         internalList.setAll(persons);
     }
 
+    public void setFavouriteStatus(Person personToFavourite) {
+        requireNonNull(personToFavourite);
+        for (Person p : internalList) {
+            if (p.isSamePerson(personToFavourite)) {
+                p.toggleFavourite();
+                break;
+            }
+        }
+    }
+
     /**
      * Returns a list of persons with matching properties and preferences.
      */
@@ -127,6 +137,7 @@ public class UniquePersonList implements Iterable<Person> {
     public ObservableList<Person> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
     }
+
 
     @Override
     public Iterator<Person> iterator() {

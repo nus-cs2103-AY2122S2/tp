@@ -149,6 +149,10 @@ public class AddCommandTest {
         public void updateMatchList() {
             throw new AssertionError("This method should not be called.");
         }
+        
+        public void setFavouriteStatus(Person personToFavourite) {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public ObservableList<Person> getFilteredPersonList() {

@@ -38,6 +38,9 @@ public interface Logic {
     /** Returns the match list */
     List<Pair<Person>> getMatchList();
 
+    /** Returns an unmodifiable view of the filtered list of favourited persons */
+    ObservableList<Person> getFavouritedPersonList();
+
     /**
      * Returns the user prefs' address book file path.
      */

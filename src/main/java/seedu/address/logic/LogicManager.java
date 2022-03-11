@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -64,6 +65,21 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return model.getFilteredPersonList();
+    }
+
+    /**
+     * Iterate through the list of Persons and only add those that are favourited into
+     * favouritedList to be returned.
+     */
+    @Override
+    public ObservableList<Person> getFavouritedPersonList() {
+        ObservableList<Person> favouritedList = FXCollections.observableArrayList();
+        for (Person person : getFilteredPersonList()) {
+            if (person.getFavourite().getStatus()) {
+                favouritedList.add(person);
+            }
+        }
+        return favouritedList;
     }
 
     @Override
