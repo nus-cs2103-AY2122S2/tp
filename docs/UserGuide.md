@@ -223,7 +223,7 @@ Format: `exit`
  | **Delete** | `delete INDEX`<br> e.g., `delete 3`|
 | **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [i/INSURANCE_PACKAGE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`|
  | **Find**   | `find FIELD KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/James Jake`|
- | **Clip**    | `clip n/NAME`|
+ | **Clip**    | `clip n/NAME`<br> e.g., `find n/John Doe`|
 | **List**   | `list`|
  | **Help**   | `help`|
  | **Exit**   | `exit`|
