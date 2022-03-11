@@ -5,8 +5,19 @@ package seedu.address.model.classgroup;
  * Only these 4 types are acceptable.
  */
 public enum ClassGroupType {
-    LAB,
-    RECITATION,
-    SECTIONAL,
-    TUTORIAL
+    LAB("Lab"),
+    RECITATION("Recitation"),
+    SECTIONAL("Sectional"),
+    TUTORIAL("Tutorial");
+
+    private final String value;
+
+    ClassGroupType(String classGroupType) {
+        this.value = classGroupType;
+    }
+
+    @Override
+    public String toString() {
+        return value;
+    }
 }

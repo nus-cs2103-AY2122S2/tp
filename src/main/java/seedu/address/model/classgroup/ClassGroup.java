@@ -77,8 +77,10 @@ public class ClassGroup implements Entity {
         builder.append(getClassGroupId())
                 .append("; Type: ")
                 .append(getClassGroupType())
-                .append("; Module: ")
-                .append(getModule());
+                .append("; Module Code: ")
+                .append(getModule().getModuleCode())
+                .append("; Academic Year: ")
+                .append(getModule().getAcademicYear());
         return builder.toString();
     }
 }
