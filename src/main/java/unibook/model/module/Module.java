@@ -12,11 +12,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import unibook.model.person.Professor;
 import unibook.model.person.Student;
+
 /**
  * Represents a Module in the UniBook.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-//Todo: add support for students and professors for JSON/storage
 @JsonIgnoreProperties(value = {"students", "professors"})
 public class Module {
 
@@ -40,6 +40,7 @@ public class Module {
         this.professors = FXCollections.observableArrayList();
         this.students = FXCollections.observableArrayList();
     }
+
     /**
      * Constructor for a Module, assuming no students and no professor initially.
      * can add if necessary.
@@ -74,6 +75,7 @@ public class Module {
 
     /**
      * Returns the module name.
+     *
      * @return the name of the module.
      */
     public ModuleName getModuleName() {
@@ -82,6 +84,7 @@ public class Module {
 
     /**
      * Returns the module code.
+     *
      * @return the code of the module.
      */
     public ModuleCode getModuleCode() {
@@ -90,6 +93,7 @@ public class Module {
 
     /**
      * Returns the current list of professors.
+     *
      * @return The observable list containing all professor objects.
      */
     public ObservableList<Professor> getProfessors() {
@@ -98,6 +102,7 @@ public class Module {
 
     /**
      * Returns the current list of students.
+     *
      * @return The observable list containing all student objects.
      */
     public ObservableList<Student> getStudents() {
@@ -106,6 +111,7 @@ public class Module {
 
     /**
      * Adds a student {@code s} to the list of the students.
+     *
      * @param s
      */
     public void addStudent(Student s) {
@@ -114,6 +120,7 @@ public class Module {
 
     /**
      * Adds a professor {@code p} to the list of the professors.
+     *
      * @param p
      */
     public void addProfessor(Professor p) {
@@ -132,6 +139,17 @@ public class Module {
         return otherModule != null
             && otherModule.getModuleCode().equals(getModuleCode())
             && otherModule.getModuleName().equals(getModuleName());
+    }
+
+    /**
+     * Returns true if the module code this module has is equal to the given module code.
+     *
+     * @param otherCode other module code to check equality to
+     * @return boolean variable indicating if the module codes are equal
+     */
+    public boolean hasModuleCode(ModuleCode otherCode) {
+        return otherCode != null
+            && otherCode.equals(moduleCode);
     }
 
     /**
