@@ -1,7 +1,9 @@
 package unibook.storage;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -13,6 +15,13 @@ import unibook.model.ReadOnlyUniBook;
 import unibook.model.UniBook;
 import unibook.model.module.Module;
 import unibook.model.person.Person;
+import unibook.model.person.Professor;
+import unibook.model.person.Student;
+import unibook.model.person.exceptions.PersonNoSubtypeException;
+import unibook.storage.adaptedmodeltypes.JsonAdaptedModule;
+import unibook.storage.adaptedmodeltypes.JsonAdaptedPerson;
+import unibook.storage.adaptedmodeltypes.JsonAdaptedProfessor;
+import unibook.storage.adaptedmodeltypes.JsonAdaptedStudent;
 
 /**
  * An Immutable UniBook that is serializable to JSON format.
@@ -41,7 +50,16 @@ class JsonSerializableUniBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableUniBook}.
      */
     public JsonSerializableUniBook(ReadOnlyUniBook source) {
-        persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        for (Person p : source.getPersonList()) {
+            if (p instanceof Student) {
+                persons.add(new JsonAdaptedStudent((Student) p));
+            } else if (p instanceof Professor) {
+                persons.add(new JsonAdaptedProfessor((Professor) p));
+            } else {
+                //regular person, just add to unibook as JsonAdaptedPerson
+                persons.add(new JsonAdaptedPerson(p));
+            }
+        }
         modules.addAll(source.getModuleList().stream().map(JsonAdaptedModule::new).collect(Collectors.toList()));
     }
 
@@ -50,23 +68,36 @@ class JsonSerializableUniBook {
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public UniBook toModelType() throws IllegalValueException {
+    public UniBook toModelType() throws IllegalValueException, PersonNoSubtypeException {
         UniBook uniBook = new UniBook();
-        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Person person = jsonAdaptedPerson.toModelType();
-            if (uniBook.hasPerson(person)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
-            }
-            uniBook.addPerson(person);
-        }
 
+        //set to use for adding person to correct module object
+        Set<Module> moduleSet = new HashSet<>();
+
+        //add all stored modules to unibook first
         for (JsonAdaptedModule jsonAdaptedModule : modules) {
             Module module = jsonAdaptedModule.toModelType();
             if (uniBook.hasModule(module)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_MODULE);
             }
             uniBook.addModule(module);
+            moduleSet.add(module);
         }
+
+        //add all stored people to unibook
+        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
+            Person person = jsonAdaptedPerson.toModelType(uniBook);
+            if (uniBook.hasPerson(person)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+            }
+            uniBook.addPerson(person);
+        }
+
+        //add all stored people to their associated modules in unibook
+        for (Person p : uniBook.getPersonList()) {
+            uniBook.addPersonToAllTheirModules(p);
+        }
+
         return uniBook;
     }
 

@@ -19,6 +19,16 @@ public class Student extends Person {
         super(name, phone, email, tags, modules);
     }
 
+    /**
+     * Another constructor to create a student from a given person.
+     *
+     * @param person person to create student from
+     */
+    public Student(Person person) {
+        this(person.getName(), person.getPhone(), person.getEmail(),
+            person.getTags(), person.getModules());
+    }
+
 
     @Override
     public boolean equals(Object other) {

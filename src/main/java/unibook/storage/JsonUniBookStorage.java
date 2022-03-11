@@ -13,6 +13,7 @@ import unibook.commons.exceptions.IllegalValueException;
 import unibook.commons.util.FileUtil;
 import unibook.commons.util.JsonUtil;
 import unibook.model.ReadOnlyUniBook;
+import unibook.model.person.exceptions.PersonNoSubtypeException;
 
 /**
  * A class to access UniBook data stored as a json file on the hard disk.
@@ -56,6 +57,9 @@ public class JsonUniBookStorage implements UniBookStorage {
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);
+        } catch (PersonNoSubtypeException pe) {
+            logger.info("Stored person(s) found in " + filePath + ": " + "have no specific Person subtype.");
+            throw new DataConversionException(pe);
         }
     }
 

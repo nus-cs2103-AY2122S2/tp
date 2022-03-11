@@ -22,6 +22,17 @@ public class Professor extends Person {
         this.office = office;
     }
 
+    /**
+     * Constructor for creating a professor from a person class with additional field office.
+     *
+     * @param person person to create this professor from
+     * @param office office that this professor is located at
+     */
+    public Professor(Person person, Office office) {
+        this(person.getName(), person.getPhone(), person.getEmail(),
+            person.getTags(), office, person.getModules());
+    }
+
     public Office getOffice() {
         return this.office;
     }
