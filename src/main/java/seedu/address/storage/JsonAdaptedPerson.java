@@ -42,7 +42,7 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("favourite") boolean favourite,
-            @JsonProperty("address") String address, 
+            @JsonProperty("address") String address,
             @JsonProperty("property") JsonAdaptedProperty property,
             @JsonProperty("preference") JsonAdaptedProperty preference,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
@@ -128,7 +128,8 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        return new Person(modelName, modelPhone, modelEmail, modelFavourite, modelAddress, modelProperty, modelPreference, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelFavourite,
+                modelAddress, modelProperty, modelPreference, modelTags);
     }
 
 }

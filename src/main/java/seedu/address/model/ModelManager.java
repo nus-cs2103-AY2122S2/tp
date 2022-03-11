@@ -126,7 +126,7 @@ public class ModelManager implements Model {
     public void updateMatchList() {
         matchList = addressBook.match();
     }
-    
+
     @Override
     public void setFavouriteStatus(Person personToFavourite) {
         addressBook.setFavouriteStatus(personToFavourite);

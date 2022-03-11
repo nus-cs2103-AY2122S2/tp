@@ -83,7 +83,7 @@ public interface Model {
 
     /** Updates the match list. */
     void updateMatchList();
-    
+
     /**
      * Toggles the Favourite status of the given person {@code personToFavourite}.
      * {@code personToFavourite} must exist in the address book.

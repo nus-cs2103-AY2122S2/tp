@@ -59,13 +59,13 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         favourite.setText(person.getFavourite().toString());
-        
+
         if (person.getProperty().isPresent()) {
             property.setText(person.getProperty().get().toString());
         } else {
             property.setVisible(false);
         }
-        
+
         if (person.getPreference().isPresent()) {
             preference.setText(person.getPreference().get().toString());
         } else {

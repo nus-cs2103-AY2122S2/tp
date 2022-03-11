@@ -33,13 +33,14 @@ public class Person {
      * Favourited clients will remain favourited & unfavourited clients will remain unfavourited
      */
     public Person(Name name, Phone phone, Email email, Favourite favourite, Address address,
-                  Optional<Property> property, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, favourite, address, property, tags);
+                  Optional<Property> property, Optional<Property> preference, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, favourite, address, property, preference, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.favourite = favourite;
         this.property = property;
+        this.preference = preference;
         this.address = address;
         this.tags.addAll(tags);
     }
