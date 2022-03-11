@@ -14,7 +14,6 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.AB3Model;
 import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyTAssist;
 import seedu.address.model.classgroup.ClassGroup;
 import seedu.address.model.person.Person;
@@ -37,10 +36,10 @@ public class LogicManager implements Logic {
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
      */
-    public LogicManager(AB3Model model, Storage storage) {
-        this.ab3model = model;
-        // to be updated
-        this.model = new ModelManager();
+    public LogicManager(Model model, AB3Model ab3model, Storage storage) {
+        // TODO: to be removed
+        this.ab3model = ab3model;
+        this.model = model;
         this.storage = storage;
         addressBookParser = new AddressBookParser();
     }

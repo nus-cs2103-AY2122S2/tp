@@ -18,7 +18,10 @@ import seedu.address.logic.LogicManager;
 import seedu.address.model.AB3Model;
 import seedu.address.model.AB3ModelManager;
 import seedu.address.model.AddressBook;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyTAssist;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
@@ -43,7 +46,7 @@ public class MainApp extends Application {
     protected Ui ui;
     protected Logic logic;
     protected Storage storage;
-    protected AB3Model model;
+    protected AB3Model ab3model;
     protected Config config;
 
     @Override
@@ -61,9 +64,9 @@ public class MainApp extends Application {
 
         initLogging(config);
 
-        model = initModelManager(storage, userPrefs);
-
-        logic = new LogicManager(model, storage);
+        ab3model = initModelManager(storage, userPrefs);
+        Model model = initModelManager(userPrefs);
+        logic = new LogicManager(model, ab3model, storage);
 
         ui = new UiManager(logic);
     }
@@ -72,6 +75,7 @@ public class MainApp extends Application {
      * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
      * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
+     * TODO: to be updated.
      */
     private AB3Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlyAddressBook> addressBookOptional;
@@ -91,6 +95,14 @@ public class MainApp extends Application {
         }
 
         return new AB3ModelManager(initialData, userPrefs);
+    }
+
+    /**
+     * TODO: Temporary method, to be removed.
+     */
+    private Model initModelManager(ReadOnlyUserPrefs userPrefs) {
+        ReadOnlyTAssist initialData = SampleDataUtil.getSampleTAssist();
+        return new ModelManager(initialData, userPrefs);
     }
 
     private void initLogging(Config config) {
@@ -175,7 +187,7 @@ public class MainApp extends Application {
     public void stop() {
         logger.info("============================ [ Stopping Address Book ] =============================");
         try {
-            storage.saveUserPrefs(model.getUserPrefs());
+            storage.saveUserPrefs(ab3model.getUserPrefs());
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }
