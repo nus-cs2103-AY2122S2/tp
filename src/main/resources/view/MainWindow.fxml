@@ -47,62 +47,58 @@
             <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
         </StackPane>
-            <StackPane minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
-               <TabPane fx:id="listPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
-                 <tabs>
-                   <Tab fx:id="lessonTab" style="-fx-background-color: dimgrey; -fx-text-base-color: white;" text="Lessons">
-                     <content>
-                       <AnchorPane>
-                              <children>
-                                <SplitPane dividerPositions="0.35">
-                                  <VBox fx:id="lessonListPanel" maxHeight="375.0" maxWidth="350.0" minHeight="375.0" minWidth="350.0" VBox.vgrow="ALWAYS">
-                                    <padding>
-                                      <Insets bottom="10" left="10" right="10" top="10" />
-                                    </padding>
-                                    <StackPane fx:id="lessonListPanelPlaceholder" maxHeight="300.0" VBox.vgrow="ALWAYS" />
-                                  </VBox>
-                                  <VBox fx:id="lessonInfoPanel" VBox.vgrow="ALWAYS">
-                                    <padding>
-                                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                    </padding>
-                                    <StackPane fx:id="lessonInfoPanelPlaceholder" maxHeight="300.0" maxWidth="435.0" VBox.vgrow="ALWAYS" />
-                                  </VBox>
-                                </SplitPane>
-                              </children>
-                           </AnchorPane>
-                     </content>
-                   </Tab>
-                   <Tab fx:id="studentTab" style="-fx-background-color: dimgrey; -fx-text-base-color: white;" text="Students">
-                     <content>
-                       <AnchorPane>
-                              <children>
-                                 <SplitPane dividerPositions="0.35">
-                                    <items>
-                                       <VBox fx:id="personListPanel" maxHeight="375.0" maxWidth="350.0" minHeight="375.0" minWidth="350.0" VBox.vgrow="ALWAYS">
-                                          <padding>
-                                             <Insets bottom="10" left="10" right="10" top="10" />
-                                          </padding>
-                                          <children>
-                                             <StackPane fx:id="personListPanelPlaceholder" maxHeight="300.0" VBox.vgrow="ALWAYS" />
-                                          </children>
-                                       </VBox>
-                                       <VBox fx:id="peronInfoPanel" VBox.vgrow="ALWAYS">
-                                          <padding>
-                                             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                          </padding>
-                                          <children>
-                                             <StackPane fx:id="personInfoPanelPlaceholder" maxHeight="300.0" maxWidth="435.0" VBox.vgrow="ALWAYS" />
-                                          </children>
-                                       </VBox>
-                                    </items>
-                                 </SplitPane>
-                              </children>
-                           </AnchorPane>
-                     </content>
-                   </Tab>
-                 </tabs>
-               </TabPane>
-            </StackPane>
+            <SplitPane dividerPositions="0.5">
+              <items>
+                <AnchorPane>
+                     <children>
+                        <TabPane fx:id="listPane" minWidth="325.0" tabClosingPolicy="UNAVAILABLE">
+                          <tabs>
+                            <Tab fx:id="lessonTab" style="-fx-background-color: dimgrey; -fx-text-base-color: white;" text="Lessons">
+                              <content>
+                                <AnchorPane>
+                                       <children>
+                                        <VBox fx:id="lessonListPanel" alignment="TOP_CENTER" maxHeight="350.0" minWidth="325.0">
+                                          <StackPane fx:id="lessonListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                                             <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                             </padding>
+                                        </VBox>
+                                       </children>
+                                    </AnchorPane>
+                              </content>
+                            </Tab>
+                            <Tab fx:id="studentTab" style="-fx-background-color: dimgrey; -fx-text-base-color: white;" text="Students">
+                              <content>
+                                <AnchorPane>
+                                       <children>
+                                          <VBox fx:id="personListPanel" alignment="CENTER_RIGHT" maxHeight="350.0" minWidth="325.0">
+                                             <padding>
+                                                <Insets bottom="10" left="10" right="10" top="10" />
+                                             </padding>
+                                             <children>
+                                                <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </AnchorPane>
+                              </content>
+                            </Tab>
+                          </tabs>
+                        </TabPane>
+                     </children>
+                  </AnchorPane>
+                <AnchorPane maxHeight="400.0" maxWidth="400.0">
+                     <children>
+                      <VBox fx:id="infoPanel" alignment="BOTTOM_CENTER" maxHeight="400.0" maxWidth="400.0">
+                        <padding>
+                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        </padding>
+                        <StackPane fx:id="infoPanelPlaceholder" alignment="TOP_CENTER" maxHeight="350.0" maxWidth="375.0" VBox.vgrow="ALWAYS" />
+                      </VBox>
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
 
 
 

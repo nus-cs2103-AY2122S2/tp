@@ -49,8 +49,7 @@ public class MainWindow extends UiPart<Stage> {
     //    private LessonListPanel lessonListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-    private InfoPanel lessonInfoPanel;
-    private InfoPanel personInfoPanel;
+    private InfoPanel infoPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -61,9 +60,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane personListPanelPlaceholder;
     @FXML
-    private StackPane lessonInfoPanelPlaceholder;
-    @FXML
-    private StackPane personInfoPanelPlaceholder;
+    private StackPane infoPanelPlaceholder;
     @FXML
     private StackPane resultDisplayPlaceholder;
     @FXML
@@ -321,32 +318,32 @@ public class MainWindow extends UiPart<Stage> {
 
 
     private void populateInfoPanelWithPerson(Person selectedPerson) {
-        personInfoPanel = new PersonInfoPanel(selectedPerson);
-        PersonInfoPanel personInfoPanel = (PersonInfoPanel) this.personInfoPanel;
-        populateInfoPanel(personInfoPanelPlaceholder, personInfoPanel);
+        infoPanel = new PersonInfoPanel(selectedPerson);
+        PersonInfoPanel personInfoPanel = (PersonInfoPanel) this.infoPanel;
+        populateInfoPanel(infoPanelPlaceholder, personInfoPanel);
     }
 
     private void populateInfoPanelWithLesson(Lesson selectedLesson) {
-        personInfoPanel = new LessonInfoPanel(selectedLesson);
-        LessonInfoPanel lessonInfoPanel = (LessonInfoPanel) personInfoPanel;
-        populateInfoPanel(lessonInfoPanelPlaceholder, lessonInfoPanel);
+        infoPanel = new LessonInfoPanel(selectedLesson);
+        LessonInfoPanel lessonInfoPanel = (LessonInfoPanel) this.infoPanel;
+        populateInfoPanel(infoPanelPlaceholder, lessonInfoPanel);
     }
 
     // TODO: Temporary test method as Person does not contain list of lessons yet
     private void tempPopulateInfoPanelWithPersonAndList(Person selectedPerson, ObservableList<Lesson> lessonList) {
-        personInfoPanel = new PersonInfoPanel(selectedPerson);
-        PersonInfoPanel personInfoPanel = (PersonInfoPanel) this.personInfoPanel;
+        infoPanel = new PersonInfoPanel(selectedPerson);
+        PersonInfoPanel personInfoPanel = (PersonInfoPanel) this.infoPanel;
         personInfoPanel.setAssignedLessons(lessonList);
-        populateInfoPanel(personInfoPanelPlaceholder, personInfoPanel);
+        populateInfoPanel(infoPanelPlaceholder, personInfoPanel);
     }
 
     // TODO: Temporary test method as Lesson does not contain list of students yet
     private void tempPopulateInfoPanelWithLessonAndList(Lesson selectedLesson,
                                                         ObservableList<Person> enrolledStudents) {
-        lessonInfoPanel = new LessonInfoPanel(selectedLesson);
-        LessonInfoPanel lessonInfoPanel = (LessonInfoPanel) this.lessonInfoPanel;
+        infoPanel = new LessonInfoPanel(selectedLesson);
+        LessonInfoPanel lessonInfoPanel = (LessonInfoPanel) this.infoPanel;
         lessonInfoPanel.setEnrolledStudents(enrolledStudents);
-        populateInfoPanel(lessonInfoPanelPlaceholder, lessonInfoPanel);
+        populateInfoPanel(infoPanelPlaceholder, lessonInfoPanel);
     }
 
     private void populateInfoPanel(StackPane infoPanelPlaceholder, InfoPanel newInfoPanel) {
