@@ -43,12 +43,14 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label property;
     @FXML
+    private Label preference;
+    @FXML
     private FlowPane tags;
     @FXML
     private Label favourite;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code PersonCard} with the given {@code Person} and index to display.
      */
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
@@ -63,6 +65,12 @@ public class PersonCard extends UiPart<Region> {
         StringJoiner propertyJoiner = new StringJoiner("\n");
         person.getProperties().stream().map(Property::toString).forEach(propertyJoiner::add);
         property.setText(propertyJoiner.toString());
+
+        if (person.getPreference().isPresent()) {
+            preference.setText(person.getPreference().get().toString());
+        } else {
+            preference.setVisible(false);
+        }
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

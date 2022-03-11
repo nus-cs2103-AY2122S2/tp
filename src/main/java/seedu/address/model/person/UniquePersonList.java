@@ -3,11 +3,13 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.Pair;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -105,6 +107,28 @@ public class UniquePersonList implements Iterable<Person> {
                 break;
             }
         }
+    }
+
+    /**
+     * Returns a list of persons with matching properties and preferences.
+     */
+    public List<Pair<Person>> match() {
+        List<Pair<Person>> result = new ArrayList<>();
+        for (int i = 0; i < internalList.size(); i++) {
+            Person property = internalList.get(i);
+            if (property.getProperties().isEmpty()) {
+                continue;
+            }
+            for (int j = 0; j < internalList.size(); j++) {
+                if (i == j) {
+                    continue;
+                }
+                if (property.matches(internalList.get(j))) {
+                    result.add(new Pair<>(property, internalList.get(j)));
+                }
+            }
+        }
+        return result;
     }
 
     /**
