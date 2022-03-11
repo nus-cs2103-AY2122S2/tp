@@ -3,7 +3,6 @@ package seedu.address.ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
 
@@ -14,8 +13,6 @@ public class DoublePersonCard extends UiPart<Region> {
     private Person seller;
     private Person buyer;
 
-    @FXML
-    private HBox cardPane;
     @FXML
     private Label name;
     @FXML
@@ -31,8 +28,6 @@ public class DoublePersonCard extends UiPart<Region> {
     @FXML
     private FlowPane userType;
 
-    @FXML
-    private HBox cardPane2;
     @FXML
     private Label name2;
     @FXML
