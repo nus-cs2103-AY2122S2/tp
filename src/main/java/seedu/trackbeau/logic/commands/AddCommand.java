@@ -41,7 +41,7 @@ public class AddCommand extends Command {
             + PREFIX_SKINTYPE + "oily "
             + PREFIX_HAIRTYPE + "coiled "
             + PREFIX_STAFFS + "Jason "
-            + PREFIX_SERVICES + "Acne treatment"
+            + PREFIX_SERVICES + "Acne treatment "
             + PREFIX_ALLERGIES + "Nickel";
 
     public static final String MESSAGE_SUCCESS = "New customer added: %1$s";

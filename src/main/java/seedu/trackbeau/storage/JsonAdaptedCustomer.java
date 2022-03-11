@@ -85,30 +85,31 @@ class JsonAdaptedCustomer {
                 .collect(Collectors.toList()));
     }
 
-    /**
-     * Converts this Jackson-friendly adapted customer object into the model's {@code Person} object.
-     *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted customer.
-     */
-    public Customer toModelType() throws IllegalValueException {
+    Set<Tag> getModelStaffs() throws IllegalValueException {
         final List<Tag> staffTags = new ArrayList<>();
         for (JsonAdaptedTag staff : staffs) {
             staffTags.add(staff.toModelType());
         }
-        final Set<Tag> modelStaffs = new HashSet<>(staffTags);
+        return new HashSet<>(staffTags);
+    }
 
+    Set<Tag> getModelServices() throws IllegalValueException {
         final List<Tag> serviceTags = new ArrayList<>();
         for (JsonAdaptedTag service : services) {
             serviceTags.add(service.toModelType());
         }
-        final Set<Tag> modelServices = new HashSet<>(serviceTags);
+        return new HashSet<>(serviceTags);
+    }
 
+    Set<Tag> getModelAllergies() throws IllegalValueException {
         final List<Tag> allergyTags = new ArrayList<>();
         for (JsonAdaptedTag allergy : allergies) {
             allergyTags.add(allergy.toModelType());
         }
-        final Set<Tag> modelAllergies = new HashSet<>(allergyTags);
+        return new HashSet<>(allergyTags);
+    }
 
+    Name getModelName() throws IllegalValueException {
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Name.class.getSimpleName()));
@@ -116,24 +117,30 @@ class JsonAdaptedCustomer {
         if (!Name.isValidName(name)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
-        final Name modelName = new Name(name);
+        return new Name(name);
+    }
 
+    Phone getModelPhone() throws IllegalValueException {
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
         }
         if (!Phone.isValidPhone(phone)) {
             throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
         }
-        final Phone modelPhone = new Phone(phone);
+        return new Phone(phone);
+    }
 
+    Email getModelEmail() throws IllegalValueException {
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
         }
         if (!Email.isValidEmail(email)) {
             throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
         }
-        final Email modelEmail = new Email(email);
+        return new Email(email);
+    }
 
+    Address getModelAddress() throws IllegalValueException {
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Address.class.getSimpleName()));
@@ -141,9 +148,10 @@ class JsonAdaptedCustomer {
         if (!Address.isValidAddress(address)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
+        return new Address(address);
+    }
 
-        final Address modelAddress = new Address(address);
-
+    SkinType getModelSkinType() throws IllegalValueException {
         if (skinType == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     SkinType.class.getSimpleName()));
@@ -151,9 +159,10 @@ class JsonAdaptedCustomer {
         if (!SkinType.isValidSkinType(skinType)) {
             throw new IllegalValueException(SkinType.MESSAGE_CONSTRAINTS);
         }
+        return new SkinType(skinType);
+    }
 
-        final SkinType modelSkinType = new SkinType(skinType);
-
+    HairType getModelHairType() throws IllegalValueException {
         if (hairType == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     HairType.class.getSimpleName()));
@@ -161,9 +170,24 @@ class JsonAdaptedCustomer {
         if (!HairType.isValidHairType(hairType)) {
             throw new IllegalValueException(HairType.MESSAGE_CONSTRAINTS);
         }
+        return new HairType(hairType);
+    }
 
-        final HairType modelHairType = new HairType(hairType);
-
+    /**
+     * Converts this Jackson-friendly adapted customer object into the model's {@code Person} object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated in the adapted customer.
+     */
+    public Customer toModelType() throws IllegalValueException {
+        final Set<Tag> modelStaffs = this.getModelStaffs();
+        final Set<Tag> modelServices = this.getModelServices();
+        final Set<Tag> modelAllergies = this.getModelAllergies();
+        final Name modelName = this.getModelName();
+        final Phone modelPhone = this.getModelPhone();
+        final Email modelEmail = this.getModelEmail();
+        final Address modelAddress = this.getModelAddress();
+        final SkinType modelSkinType = this.getModelSkinType();
+        final HairType modelHairType = this.getModelHairType();
         return new Customer(modelName, modelPhone, modelEmail,
                 modelAddress, modelSkinType, modelHairType, modelStaffs, modelServices, modelAllergies);
     }

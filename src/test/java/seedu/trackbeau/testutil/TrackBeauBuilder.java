@@ -21,7 +21,7 @@ public class TrackBeauBuilder {
     }
 
     /**
-     * Adds a new {@code Person} to the {@code TrackBeau} that we are building.
+     * Adds a new {@code Customer} to the {@code TrackBeau} that we are building.
      */
     public TrackBeauBuilder withCustomer(Customer customer) {
         trackBeau.addCustomer(customer);

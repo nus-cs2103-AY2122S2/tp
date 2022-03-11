@@ -60,7 +60,7 @@ public class CustomerCard extends UiPart<Region> {
         phone.setText(customer.getPhone().value);
         address.setText(customer.getAddress().value);
         email.setText(customer.getEmail().value);
-        skinType.setText("Skin Type : " + customer.getSkinType().value);
+        skinType.setText("Skin Type: " + customer.getSkinType().value);
         hairType.setText("Hair Type: " + customer.getHairType().value);
         customer.getServices().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
