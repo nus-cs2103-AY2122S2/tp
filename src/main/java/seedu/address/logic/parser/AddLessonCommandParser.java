@@ -23,6 +23,7 @@ import seedu.address.model.lesson.Lesson;
  * Parses input arguments and creates a new AddStudentCommand object
  */
 public class AddLessonCommandParser implements Parser<AddLessonCommand> {
+    public static final String INVALID_DURATION_MESSAGE = "Duration of lesson cannot be zero.";
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddStudentCommand
@@ -49,6 +50,7 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
 
         int durationHours = ParserUtil.parseDurationHours(argMultimap.getValue(PREFIX_DURATION_HOURS).get());
         int durationMinutes = ParserUtil.parseDurationMinutes(argMultimap.getValue(PREFIX_DURATION_MINUTES).get());
+        checkDurationIsValid(durationHours, durationMinutes);
 
         Lesson lesson;
         if (isRecurring(argMultimap)) {
@@ -80,6 +82,18 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
         boolean hasSpecifiedLessonToBeRecurring = !argumentMultimap.getValue(PREFIX_RECURRING).isEmpty();
 
         return hasSpecifiedLessonToBeRecurring;
+    }
+
+    /**
+     * Checks that the lesson has does not have a total duration of zero minutes.
+     */
+    private static void checkDurationIsValid(int hours, int minutes) throws ParseException {
+        boolean isValidHoursAndMinutes = ((hours > 0 && minutes >= 0 && minutes <= 60)
+                || (hours == 0 && minutes > 0 && minutes <= 60));
+
+        if (!isValidHoursAndMinutes) {
+            throw new ParseException(INVALID_DURATION_MESSAGE);
+        }
     }
 
     /**

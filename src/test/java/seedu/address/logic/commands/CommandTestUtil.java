@@ -2,11 +2,18 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION_HOURS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION_MINUTES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -54,6 +61,45 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = "  "
             + PREFIX_STUDENT_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_STUDENT_TAG + "hubby*"; // '*' not allowed in tags
+
+    public static final String VALID_LESSON_NAME = "Trial lesson for Henry";
+    public static final String VALID_LESSON_SUBJECT = "Biology";
+    public static final String VALID_LESSON_START_TIME = "18:00";
+    public static final String VALID_LESSON_DURATION_HOURS = "2";
+    public static final String VALID_LESSON_DURATION_MINUTES = "30";
+    public static final String VALID_LESSON_ADDRESS = "Blk 11 Ang Mo Kio Street 74, #11-04";
+    // TODO: create a function to generate valid lesson date for next Monday as logic will be implemented to
+    //       prevent new lessons from being created in past dates
+    public static final String VALID_LESSON_DATE = "1-12-2022";
+
+    public static final String LESSON_NAME_DESC_TRIAL_LESSON = " " + PREFIX_LESSON_NAME + VALID_LESSON_NAME;
+    public static final String LESSON_SUBJECT_DESC_BIOLOGY = " " + PREFIX_SUBJECT + VALID_LESSON_SUBJECT;
+    public static final String LESSON_ADDRESS_DESC_AMK = " " + PREFIX_LESSON_ADDRESS + VALID_LESSON_ADDRESS;
+    public static final String LESSON_DATE_DESC = " " + PREFIX_DATE + VALID_LESSON_DATE;
+    public static final String LESSON_START_TIME_DESC_6PM = " " + PREFIX_START_TIME + VALID_LESSON_START_TIME;
+    public static final String LESSON_DURATION_HOURS_DESC_2HOUR = " "
+            + PREFIX_DURATION_HOURS + VALID_LESSON_DURATION_HOURS;
+    public static final String LESSON_DURATION_MINUTES_DESC_30MIN = " "
+            + PREFIX_DURATION_MINUTES + VALID_LESSON_DURATION_MINUTES;
+
+    public static final String INVALID_DURATION_MINUTES_NEGATIVE_DESC = " " // negative minutes
+            + PREFIX_DURATION_MINUTES + "-1";
+    public static final String INVALID_DURATION_MINUTES_EXCEEDS_59_DESC = " " // minutes exceeding 59 not allowed
+            + PREFIX_DURATION_MINUTES + "60";
+    public static final String INVALID_DURATION_HOURS_NEGATIVE_DESC = " " // negative hours
+            + PREFIX_DURATION_HOURS + "-1";
+    public static final String INVALID_LESSON_DATE_FORMAT_DESC = " " // date must be given in "DD-MM-YYYY" format
+            + PREFIX_DATE + "25 March 2022";
+    public static final String INVALID_LESSON_START_TIME_FORMAT_DESC = " " // start time must be given in "HH:mm" format
+            + PREFIX_START_TIME + "6pm";
+    public static final String INVALID_LESSON_DATE_PASTDATE_DESC = " " // cannot create new lessons in the past
+            + PREFIX_DATE + "1-12-2020";
+
+    // hours and minutes cannot both be zero as the duration of a lesson should not be zero
+    public static final String INVALID_DURATION_MINUTES_ZERO_DESC = " "
+            + PREFIX_DURATION_MINUTES + "0";
+    public static final String INVALID_DURATION_HOURS_ZERO_DESC = " "
+            + PREFIX_DURATION_HOURS + "0";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
