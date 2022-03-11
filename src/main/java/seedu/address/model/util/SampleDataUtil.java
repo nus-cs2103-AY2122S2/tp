@@ -44,8 +44,8 @@ public class SampleDataUtil {
 
     public static Group[] getSampleGroups() {
         return new Group[] {
-                new Group(new GroupName("NUS Fintech Society")),
-                new Group(new GroupName("NUS Data Science Society"))
+            new Group(new GroupName("NUS Fintech Society")),
+            new Group(new GroupName("NUS Data Science Society"))
         };
     }
 
