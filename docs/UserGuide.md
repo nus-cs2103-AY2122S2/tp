@@ -95,6 +95,7 @@ Format: `tag INDEX [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDU
 
 * Tags the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the prefixes must be provided.
+* If a prefix is used, the input after must not be blank.
 * Input tag values will be accumulated to the existing tags.
 
 Examples:
@@ -104,6 +105,11 @@ Examples:
 Shows a list of all persons in the address book.
 
 Format: `list`
+
+* All existing persons are automatically rendered when the application is launched
+* The different tags are listed as follows: yellow for education, blue for modules, orange for CCAs and red for internships
+* Personal details are listed in the following order: Phone number, Address, Email
+
 
 ### Editing a person : `edit` [coming in V1.2]
 
