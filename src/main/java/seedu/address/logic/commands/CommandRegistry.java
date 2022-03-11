@@ -10,6 +10,7 @@ import seedu.address.logic.parser.EditCommandParser;
 import seedu.address.logic.parser.FindCommandParser;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.RemarkCommandParser;
+import seedu.address.logic.parser.SortCommandParser;
 
 public class CommandRegistry {
     public static final Map<String, Parser<? extends Command>> PARSERS;
@@ -27,6 +28,7 @@ public class CommandRegistry {
         parsers.put(HelpCommand.COMMAND_WORD, (String args) -> new HelpCommand());
         parsers.put(DeleteFilteredCommand.COMMAND_WORD, (String args) -> new DeleteFilteredCommand());
         parsers.put(RemarkCommand.COMMAND_WORD, new RemarkCommandParser());
+        parsers.put(SortCommand.COMMAND_WORD, new SortCommandParser());
 
         // --- Do not modify below this line unless you know what you're doing. (Trust me, you don't.) ---
         PARSERS = Collections.unmodifiableMap(parsers);
