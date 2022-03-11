@@ -29,11 +29,11 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
 public class TagCommandTest {
+    private static final String EDUCATION_STRING = "NUS";
+    private static final String INTERNSHIP_STRING = "Twitter";
+    private static final String MODULE_STRING = "CS2040S";
+    private static final String CCA_STRING = "Greyhats";
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private final String EDUCATION_STRING = "NUS";
-    private final String INTERNSHIP_STRING = "Twitter";
-    private final String MODULE_STRING = "CS2040S";
-    private final String CCA_STRING = "Greyhats";
     private final List<Tag> emptyList = new ArrayList<>();
     private final List<Tag> eduList = Arrays.asList(new Education(EDUCATION_STRING));
     private final List<Tag> internshipList = Arrays.asList(new Internship(INTERNSHIP_STRING));
@@ -64,7 +64,7 @@ public class TagCommandTest {
 
         String expectedMessageEdu = String.format(TagCommand.MESSAGE_ARGUMENTS,
                 personToTag1.getName(),
-                "[]", "[" + INTERNSHIP_STRING +"]", "[" + MODULE_STRING + "]", "[" + CCA_STRING + "]");
+                "[]", "[" + INTERNSHIP_STRING + "]", "[" + MODULE_STRING + "]", "[" + CCA_STRING + "]");
 
         Person editedPersonEdu = new Person(
                 personToTag1.getName(), personToTag1.getPhone(), personToTag1.getEmail(), personToTag1.getAddress(),
@@ -108,7 +108,7 @@ public class TagCommandTest {
 
         String expectedMessageModule = String.format(TagCommand.MESSAGE_ARGUMENTS,
                 personToTag1.getName(),
-                "[" + EDUCATION_STRING + "]", "[" + INTERNSHIP_STRING +"]", "[]", "[" + CCA_STRING + "]");
+                "[" + EDUCATION_STRING + "]", "[" + INTERNSHIP_STRING + "]", "[]", "[" + CCA_STRING + "]");
 
         Person editedPersonModule = new Person(
                 personToTag1.getName(), personToTag1.getPhone(), personToTag1.getEmail(), personToTag1.getAddress(),
@@ -129,7 +129,7 @@ public class TagCommandTest {
 
         String expectedMessageCca = String.format(TagCommand.MESSAGE_ARGUMENTS,
                 personToTag1.getName(),
-                "[" + EDUCATION_STRING + "]", "[" + INTERNSHIP_STRING +"]", "[" + MODULE_STRING + "]", "[]");
+                "[" + EDUCATION_STRING + "]", "[" + INTERNSHIP_STRING + "]", "[" + MODULE_STRING + "]", "[]");
 
         Person editedPersonCca = new Person(
                 personToTag1.getName(), personToTag1.getPhone(), personToTag1.getEmail(), personToTag1.getAddress(),

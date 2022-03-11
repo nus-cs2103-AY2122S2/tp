@@ -204,7 +204,7 @@ public class ParserUtilTest {
     public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
         String tagCcaWithWhitespace = WHITESPACE + VALID_TAG_CCA_1 + WHITESPACE;
         String tagEducationWithWhitespace = WHITESPACE + VALID_TAG_EDUCATION_1 + WHITESPACE;
-        String TagInternshipWithWhitespace = WHITESPACE + VALID_TAG_INTERNSHIP_1 + WHITESPACE;
+        String tagInternshipWithWhitespace = WHITESPACE + VALID_TAG_INTERNSHIP_1 + WHITESPACE;
         String tagModuleWithWhitespace = WHITESPACE + VALID_TAG_MODULE_1 + WHITESPACE;
 
         Tag expectedTagCca = new Cca(VALID_TAG_CCA_1);
@@ -214,7 +214,7 @@ public class ParserUtilTest {
 
         assertEquals(expectedTagCca, ParserUtil.parseTag(tagCcaWithWhitespace, Tag.CCA));
         assertEquals(expectedTagEducation, ParserUtil.parseTag(tagEducationWithWhitespace, Tag.EDUCATION));
-        assertEquals(expectedTagInternship, ParserUtil.parseTag(TagInternshipWithWhitespace, Tag.INTERNSHIP));
+        assertEquals(expectedTagInternship, ParserUtil.parseTag(tagInternshipWithWhitespace, Tag.INTERNSHIP));
         assertEquals(expectedTagModule, ParserUtil.parseTag(tagModuleWithWhitespace, Tag.MODULE));
     }
 
@@ -228,16 +228,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseTags_collectionWithInvalidTags_throwsParseException() {
-        assertThrows(ParseException.class,
-                    () -> ParserUtil.parseTags(Arrays.asList(VALID_TAG_CCA_1, INVALID_TAG_CCA), Tag.CCA));
-        assertThrows(ParseException.class,
-                    () -> ParserUtil.parseTags(Arrays.asList(VALID_TAG_INTERNSHIP_1, INVALID_TAG_INTERNSHIP),
-                                Tag.INTERNSHIP));
-        assertThrows(ParseException.class,
-                    () -> ParserUtil.parseTags(Arrays.asList(VALID_TAG_EDUCATION_1, INVALID_TAG_EDUCATION),
-                                Tag.EDUCATION));
-        assertThrows(ParseException.class,
-                    () -> ParserUtil.parseTags(Arrays.asList(VALID_TAG_MODULE_1, INVALID_TAG_MODULE), Tag.MODULE));
+        assertThrows(ParseException.class, () -> ParserUtil.parseTags(
+                    Arrays.asList(VALID_TAG_CCA_1, INVALID_TAG_CCA), Tag.CCA));
+        assertThrows(ParseException.class, () -> ParserUtil.parseTags(
+                    Arrays.asList(VALID_TAG_INTERNSHIP_1, INVALID_TAG_INTERNSHIP), Tag.INTERNSHIP));
+        assertThrows(ParseException.class, () -> ParserUtil.parseTags(
+                    Arrays.asList(VALID_TAG_EDUCATION_1, INVALID_TAG_EDUCATION), Tag.EDUCATION));
+        assertThrows(ParseException.class, () -> ParserUtil.parseTags(
+                    Arrays.asList(VALID_TAG_MODULE_1, INVALID_TAG_MODULE), Tag.MODULE));
     }
 
     @Test
@@ -260,13 +258,17 @@ public class ParserUtilTest {
                     ParserUtil.parseTags(Arrays.asList(VALID_TAG_MODULE_1, VALID_TAG_MODULE_2), Tag.MODULE));
 
         HashSet<Tag> expectedTagsCca = new HashSet<>(Arrays.asList(
-                    new Cca(VALID_TAG_CCA_1), new Cca(VALID_TAG_CCA_2)));
+                    new Cca(VALID_TAG_CCA_1.toLowerCase()),
+                    new Cca(VALID_TAG_CCA_2.toLowerCase())));
         HashSet<Tag> expectedTagsEducation = new HashSet<>(Arrays.asList(
-                    new Education(VALID_TAG_EDUCATION_1), new Education(VALID_TAG_EDUCATION_2)));
+                    new Education(VALID_TAG_EDUCATION_1.toLowerCase()),
+                    new Education(VALID_TAG_EDUCATION_2.toLowerCase())));
         HashSet<Tag> expectedTagsInternship = new HashSet<>(Arrays.asList(
-                    new Internship(VALID_TAG_INTERNSHIP_1), new Internship(VALID_TAG_INTERNSHIP_2)));
+                    new Internship(VALID_TAG_INTERNSHIP_1.toLowerCase()),
+                    new Internship(VALID_TAG_INTERNSHIP_2.toLowerCase())));
         HashSet<Tag> expectedTagsModule = new HashSet<>(Arrays.asList(
-                    new Module(VALID_TAG_MODULE_1), new Module(VALID_TAG_MODULE_2)));
+                    new Module(VALID_TAG_MODULE_1.toLowerCase()),
+                    new Module(VALID_TAG_MODULE_2.toLowerCase())));
 
         assertEquals(expectedTagsCca, actualTagsCca);
         assertEquals(expectedTagsEducation, actualTagsEducation);
