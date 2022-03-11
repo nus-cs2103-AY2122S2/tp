@@ -13,8 +13,14 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Cca;
+import seedu.address.model.person.Education;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Internship;
 import seedu.address.model.person.Module;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Phone;
 
 public class JsonAdaptedPersonTest {
     private static final String INVALID_NAME = "R@chel";
@@ -22,8 +28,8 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final List<JsonAdaptedTag> INVALID_CCAS = Arrays.asList(new JsonAdaptedTag("track & field"));
-    private static final List<JsonAdaptedTag> INVALID_EDUCATIONS = Arrays.asList(new JsonAdaptedTag("computer " +
-            "science 2nd " + "year!"));
+    private static final List<JsonAdaptedTag> INVALID_EDUCATIONS = Arrays.asList(new JsonAdaptedTag("computer "
+            + "science 2nd " + "year!"));
     private static final List<JsonAdaptedTag> INVALID_INTERNSHIPS = Arrays.asList(new JsonAdaptedTag("bosch*"));
     private static final List<JsonAdaptedTag> INVALID_MODULES = Arrays.asList(new JsonAdaptedTag("cs2040s~"));
 
