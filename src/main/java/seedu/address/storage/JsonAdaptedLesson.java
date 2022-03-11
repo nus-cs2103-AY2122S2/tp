@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 /**
  * Jackson-friendly version of {@link TemporaryLesson}.
  */
-class JsonAdaptedTemporaryLesson {
+class JsonAdaptedLesson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Lesson's %s field is missing!";
 
@@ -30,11 +30,11 @@ class JsonAdaptedTemporaryLesson {
      * Constructs a {@code JsonAdaptedLesson} with the given lesson details.
      */
     @JsonCreator
-    public JsonAdaptedTemporaryLesson(@JsonProperty("lessonName") String lessonName,
-                                      @JsonProperty("subject") String subject,
-                                      @JsonProperty("address") String address,
-                                      @JsonProperty("dateTimeSlot") JsonAdaptedDateTimeSlot dateTimeSlot,
-                                      @JsonProperty("assignedStudents") List<JsonAdaptedStudent> assignedStudents) {
+    public JsonAdaptedLesson(@JsonProperty("lessonName") String lessonName,
+                             @JsonProperty("subject") String subject,
+                             @JsonProperty("address") String address,
+                             @JsonProperty("dateTimeSlot") JsonAdaptedDateTimeSlot dateTimeSlot,
+                             @JsonProperty("assignedStudents") List<JsonAdaptedStudent> assignedStudents) {
         this.lessonName = lessonName;
         this.subject = subject;
         this.lessonAddress = address;
@@ -47,7 +47,7 @@ class JsonAdaptedTemporaryLesson {
     /**
      * Converts a given {@code TemporaryLesson} into this class for Jackson use.
      */
-    public JsonAdaptedTemporaryLesson(TemporaryLesson source) {
+    public JsonAdaptedLesson(Lesson source) {
         this.lessonName = source.getName().fullName;
         this.subject = source.getSubject().subjectName;
         this.lessonAddress = source.getLessonAddress().value;
@@ -57,18 +57,12 @@ class JsonAdaptedTemporaryLesson {
                 .collect(Collectors.toList()));
     }
 
-
     /**
      * Converts this Jackson-friendly adapted temporary lesson object into the model's {@code TemporaryLesson} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted temporary lesson.
      */
     public TemporaryLesson toModelType() throws IllegalValueException {
-        final List<Student> modelAssignedStudents = new ArrayList<>();
-        for (JsonAdaptedStudent student : assignedStudents) {
-            modelAssignedStudents.add(student.toModelType());
-        }
-
         if (lessonName == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, LessonName.class.getSimpleName()));
         }
@@ -98,7 +92,12 @@ class JsonAdaptedTemporaryLesson {
         }
         final DateTimeSlot modelDateTimeSlot = dateTimeSlot.toModelType();
 
-        return Lesson.makeTemporaryLesson(modelLessonName, modelSubject, modelLessonAddress, modelDateTimeSlot);
-    }
+        final List<Student> modelAssignedStudents = new ArrayList<>();
+        for (JsonAdaptedStudent student : assignedStudents) {
+            modelAssignedStudents.add(student.toModelType());
+        }
 
+        return Lesson.makeTemporaryLesson(modelLessonName, modelSubject, modelLessonAddress,
+                modelDateTimeSlot, modelAssignedStudents);
+    }
 }

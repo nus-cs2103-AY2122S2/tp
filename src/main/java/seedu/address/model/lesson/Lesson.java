@@ -22,16 +22,30 @@ public abstract class Lesson {
 
     // Data fields
     private final List<Student> assignedStudents;
+    private final DateTimeSlot dateTimeSlot;
 
     /**
      * Every field must be present and not null.
      */
-    protected Lesson(LessonName name, Subject subject, LessonAddress address) {
-        requireAllNonNull(name, subject);
+    protected Lesson(LessonName name, Subject subject, LessonAddress address, DateTimeSlot dateTimeSlot) {
+        requireAllNonNull(name, subject, address);
         this.name = name;
         this.subject = subject;
         this.address = address;
+        this.dateTimeSlot = dateTimeSlot;
         this.assignedStudents = new ArrayList<>();
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    protected Lesson(LessonName name, Subject subject, LessonAddress address, DateTimeSlot dateTimeSlot, List<Student> assignedStudents) {
+        requireAllNonNull(name, subject, address);
+        this.name = name;
+        this.subject = subject;
+        this.address = address;
+        this.dateTimeSlot = dateTimeSlot;
+        this.assignedStudents = assignedStudents;
     }
 
     /**
@@ -122,16 +136,16 @@ public abstract class Lesson {
      * @param dateTimeSlot an object encapsulating a lesson's date, starting time and duration.
      */
     public static TemporaryLesson makeTemporaryLesson(LessonName name, Subject subject, LessonAddress address,
-                                                      DateTimeSlot dateTimeSlot) {
+                                                      DateTimeSlot dateTimeSlot, List<Student> assignedStudents) {
 
         return new TemporaryLesson(
                 name,
                 subject,
                 address,
-                dateTimeSlot
+                dateTimeSlot,
+                assignedStudents
         );
     }
-
 
     public LessonName getName() {
         return name;
@@ -150,14 +164,16 @@ public abstract class Lesson {
     }
 
     /**
+     * Returns the date and time that the lesson starts and ends.
+     */
+    public DateTimeSlot getDateTimeSlot() {
+        return dateTimeSlot;
+    }
+
+    /**
      * Returns true if both lessons have overlapping timeslots.
      */
     public abstract boolean isConflictingWithLesson(Lesson otherLesson);
-
-    /**
-     * Returns the date and time that the lesson starts and ends.
-     */
-    public abstract DateTimeSlot getDateTimeSlot();
 
     /**
      * Adds a given Student to the list of students assigned to this lesson.
