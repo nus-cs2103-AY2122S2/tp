@@ -1,7 +1,12 @@
 package seedu.address.model.lesson;
 
-import static java.util.Objects.requireNonNull;
+import seedu.address.logic.parser.exceptions.ParseException;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -10,7 +15,7 @@ import java.time.format.DateTimeParseException;
  * Represents the time in which a lesson takes place in the LessonBook.
  */
 public class DateTimeSlot {
-    private static final String MESSAGE_CONSTRAINTS = "Lessons can only be created with a valid date."
+    public static final String MESSAGE_CONSTRAINTS = "Lessons can only be created with a valid date."
                     + "\nHours and minutes must be non-negative integer."
                     + "\nMinutes cannot be more than 60.";
 
@@ -27,7 +32,7 @@ public class DateTimeSlot {
     /**
      * Constructs a {@code DateTimeSlot}.
      *
-     * @param date Date of the lesson.
+     * @param date Date and starting time of the lesson.
      * @param hours Duration of the lesson, hours.
      * @param minutes Duration of the lesson, minutes.
      */
@@ -42,11 +47,39 @@ public class DateTimeSlot {
     /**
      * Constructs a {@code DateTimeSlot}.
      *
-     * @param date Date of the lesson.
+     * @param date Date and starting time of the lesson.
      * @param hours Duration of the lesson.
      */
     public DateTimeSlot(LocalDateTime date, int hours) {
         this(date, hours, 0);
+    }
+
+    /**
+     * Constructs a {@code DateTimeSlot}.
+     *
+     * @param date Date of the lesson.
+     * @param startTime Starting time of the lesson.
+     * @param hours Duration of the lesson, hours.
+     * @param minutes Duration of the lesson, minutes.
+     */
+    public DateTimeSlot(LocalDate date, String startTime, int hours, int minutes) {
+        requireNonNull(date);
+        checkArgument((hours > 0 && minutes >= 0 && minutes <= 60)
+                        || (hours == 0 && minutes > 0 && minutes <= 60),
+                MESSAGE_CONSTRAINTS);
+
+        String[] hourAndMinuteOfStartTime = startTime.split(":");
+        Integer hour;
+        Integer minute;
+        LocalDateTime lessonDateTime;
+
+        hour = Integer.parseInt(hourAndMinuteOfStartTime[0]);
+        minute = Integer.parseInt(hourAndMinuteOfStartTime[1]);
+        lessonDateTime = date.atTime(hour, minute);
+
+        dateOfLesson = lessonDateTime;
+        this.hours = hours;
+        this.minutes = minutes;
     }
 
     public static DateTimeFormatter getAcceptedDateFormat() {
@@ -113,6 +146,93 @@ public class DateTimeSlot {
         }
 
         return true;
+    }
+
+    /**
+     * Returns true if hours field of duration is valid
+     */
+    public static boolean isValidDurationHours(String durationHoursString) {
+        Integer durationHours;
+
+        try {
+            durationHours = Integer.parseInt(durationHoursString);
+        } catch (NumberFormatException exception) {
+            return false;
+        }
+
+        if (durationHours < 0) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Returns true if minutes field of duration is valid
+     */
+    public static boolean isValidDurationMinutes(String durationMinutesString) {
+        Integer durationMinutes;
+
+        try {
+            durationMinutes = Integer.parseInt(durationMinutesString);
+        } catch (NumberFormatException exception) {
+            return false;
+        }
+
+        if (durationMinutes < 0) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Parses a date String into a LocalDate.
+     */
+    public static LocalDate parseLessonDate(String lessonDateString) throws DateTimeParseException {
+        return LocalDate.parse(lessonDateString, acceptedDateFormat);
+    }
+
+    /**
+     * Parses a duration hour String into an Integer
+     */
+    public static Integer parseLessonDurationHours(String lessonDurationHoursString) throws NumberFormatException {
+        return Integer.parseInt(lessonDurationHoursString);
+    }
+
+    /**
+     * Parses a duration minute String into an Integer
+     */
+    public static Integer parseLessonDurationMinutes(String lessonDurationMinutesString) throws NumberFormatException {
+        return Integer.parseInt(lessonDurationMinutesString);
+    }
+
+    /**
+     * Returns JSON-serializable version of the Date field
+     */
+    public String getJsonDate() {
+        return acceptedDateFormat.format(this.dateOfLesson);
+    }
+
+    /**
+     * Returns JSON-serializable version of the starting time field
+     */
+    public String getJsonStartTime() {
+        return acceptedStartTimeFormat.format(this.dateOfLesson);
+    }
+
+    /**
+     * Returns JSON-serializable version of the duration hours field
+     */
+    public String getJsonDurationHours() {
+        return Integer.toString(this.hours);
+    }
+
+    /**
+     * Returns JSON-serializable version of the duration minutes field
+     */
+    public String getJsonDurationMinutes() {
+        return Integer.toString(this.minutes);
     }
 
     @Override

@@ -23,7 +23,7 @@ public class TemporaryLesson extends Lesson {
         this.dateTimeSlot = dateTimeSlot;
     }
 
-    public DateTimeSlot getTimeSlot() {
+    public DateTimeSlot getDateTimeSlot() {
         return dateTimeSlot;
     }
 
@@ -35,7 +35,7 @@ public class TemporaryLesson extends Lesson {
             return true;
         }
 
-        return dateTimeSlot.isConflictingWith(otherLesson.getTimeSlot());
+        return dateTimeSlot.isConflictingWith(otherLesson.getDateTimeSlot());
     }
 
     /**
@@ -64,7 +64,7 @@ public class TemporaryLesson extends Lesson {
         return otherLesson.getName().equals(getName())
                 && otherLesson.getSubject().equals(getSubject())
                 && otherLesson.getLessonAddress().equals(getLessonAddress())
-                && otherLesson.getTimeSlot().equals(getTimeSlot());
+                && otherLesson.getDateTimeSlot().equals(getDateTimeSlot());
     }
 
     @Override
