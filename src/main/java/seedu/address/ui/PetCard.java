@@ -39,7 +39,10 @@ public class PetCard extends UiPart<Region> {
     @FXML
     private Label address;
     @FXML
+    private Label diet;
+    @FXML
     private FlowPane tags;
+
 
     /**
      * Creates a {@code PetCode} with the given {@code Pet} and index to display.
@@ -52,6 +55,7 @@ public class PetCard extends UiPart<Region> {
         ownerName.setText(pet.getOwnerName().value);
         phone.setText(pet.getPhone().value);
         address.setText(pet.getAddress().value);
+        diet.setText(pet.getDiet().value);
         pet.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

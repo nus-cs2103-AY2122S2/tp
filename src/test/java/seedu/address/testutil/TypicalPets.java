@@ -26,21 +26,21 @@ public class TypicalPets {
     public static final Pet BOBA = new PetBuilder().withName("Boba")
             .withAddress("123, Jurong West Ave 6, #08-111").withOwnerName("Alice Pauline")
             .withPhone("94351253")
-            .withTags("friends").build();
+            .withTags("friends").withDiet("").build();
     public static final Pet PIZZA = new PetBuilder().withName("Pizza")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withOwnerName("Benson Meier").withPhone("98765432")
-            .withTags("owesMoney", "friends").build();
+            .withTags("owesMoney", "friends").withDiet("").build();
     public static final Pet BAGEL = new PetBuilder().withName("Bagel").withPhone("95352563")
-            .withOwnerName("Heinz Ketchup").withAddress("wall street").build();
+            .withOwnerName("Heinz Ketchup").withAddress("wall street").withDiet("").build();
     public static final Pet DANIEL = new PetBuilder().withName("Peepee").withPhone("87652533")
-            .withOwnerName("Daniel Meier").withAddress("10th street").withTags("friends").build();
+            .withOwnerName("Daniel Meier").withAddress("10th street").withTags("friends").withDiet("").build();
     public static final Pet PANCAKE = new PetBuilder().withName("Pancake").withPhone("9482224")
-            .withOwnerName("Elle Meyer").withAddress("michegan ave").build();
+            .withOwnerName("Elle Meyer").withAddress("michegan ave").withDiet("").build();
     public static final Pet WAFFLE = new PetBuilder().withName("Waffle").withPhone("9482427")
-            .withOwnerName("Fiona Kunz").withAddress("little tokyo").build();
+            .withOwnerName("Fiona Kunz").withAddress("little tokyo").withDiet("").build();
     public static final Pet TOFU = new PetBuilder().withName("Tofu").withPhone("9482442")
-            .withOwnerName("George Best").withAddress("4th street").build();
+            .withOwnerName("George Best").withAddress("4th street").withDiet("").build();
 
     // Manually added
     public static final Pet HOON = new PetBuilder().withName("Hoon Meier").withPhone("8482424")

@@ -5,42 +5,49 @@
     "phone" : "94351253",
     "ownerName" : "Alice Pauline",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "tagged" : [ "friends" ]
+    "tagged" : [ "friends" ],
+    "diet" : ""
   }, {
     "name" : "Pizza",
     "phone" : "98765432",
     "ownerName" : "Benson Meier",
     "address" : "311, Clementi Ave 2, #02-25",
-    "tagged" : [ "owesMoney", "friends" ]
+    "tagged" : [ "owesMoney", "friends" ],
+    "diet": ""
   }, {
     "name" : "Bagel",
     "phone" : "95352563",
     "ownerName" : "Heinz Ketchup",
     "address" : "wall street",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "diet": ""
   }, {
     "name" : "Peepee",
     "phone" : "87652533",
     "ownerName" : "Daniel Meier",
     "address" : "10th street",
-    "tagged" : [ "friends" ]
+    "tagged" : [ "friends" ],
+    "diet": ""
   }, {
     "name" : "Pancake",
     "phone" : "9482224",
     "ownerName" : "Elle Meyer",
     "address" : "michegan ave",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "diet": ""
   }, {
     "name" : "Waffle",
     "phone" : "9482427",
     "ownerName" : "Fiona Kunz",
     "address" : "little tokyo",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "diet": ""
   }, {
     "name" : "Tofu",
     "phone" : "9482442",
     "ownerName" : "George Best",
     "address" : "4th street",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "diet": ""
   } ]
 }

@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.pet.Address;
+import seedu.address.model.pet.Diet;
 import seedu.address.model.pet.Name;
 import seedu.address.model.pet.OwnerName;
 import seedu.address.model.pet.Pet;
@@ -28,6 +29,7 @@ class JsonAdaptedPet {
     private final String ownerName;
     private final String phone;
     private final String address;
+    private final String diet;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -36,7 +38,7 @@ class JsonAdaptedPet {
     @JsonCreator
     public JsonAdaptedPet(@JsonProperty("name") String name, @JsonProperty("ownerName") String ownerName,
                           @JsonProperty("phone") String phone, @JsonProperty("address") String address,
-                          @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+                          @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("diet") String diet) {
         this.name = name;
         this.ownerName = ownerName;
         this.phone = phone;
@@ -44,6 +46,7 @@ class JsonAdaptedPet {
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
+        this.diet = diet;
     }
 
     /**
@@ -54,6 +57,7 @@ class JsonAdaptedPet {
         ownerName = source.getOwnerName().value;
         phone = source.getPhone().value;
         address = source.getAddress().value;
+        diet = source.getDiet().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -103,8 +107,13 @@ class JsonAdaptedPet {
         }
         final Address modelAddress = new Address(address);
 
+        if (diet == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Diet.class.getSimpleName()));
+        }
+        final Diet modelDiet = new Diet(diet);
+
         final Set<Tag> modelTags = new HashSet<>(petTags);
-        return new Pet(modelName, modelOwnerName, modelPhone, modelAddress, modelTags);
+        return new Pet(modelName, modelOwnerName, modelPhone, modelAddress, modelTags, modelDiet);
     }
 
 }
