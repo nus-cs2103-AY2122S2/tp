@@ -3,9 +3,12 @@ package unibook.logic.parser;
 import static unibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static unibook.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import unibook.commons.core.LogsCenter;
+import unibook.logic.LogicManager;
 import unibook.logic.commands.AddCommand;
 import unibook.logic.commands.ClearCommand;
 import unibook.logic.commands.Command;
@@ -26,6 +29,8 @@ public class UniBookParser {
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+
+    private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     /**
      * Parses user input into command for execution.
@@ -72,5 +77,4 @@ public class UniBookParser {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }

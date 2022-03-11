@@ -5,6 +5,7 @@ import java.util.Set;
 import unibook.logic.commands.AddCommand;
 import unibook.logic.commands.EditCommand.EditPersonDescriptor;
 import unibook.logic.parser.CliSyntax;
+import unibook.model.module.Module;
 import unibook.model.person.Person;
 import unibook.model.tag.Tag;
 
@@ -31,6 +32,9 @@ public class PersonUtil {
         person.getTags().stream().forEach(
             s -> sb.append(CliSyntax.PREFIX_TAG + s.tagName + " ")
         );
+        person.getModules().stream().forEach(
+            s -> sb.append(CliSyntax.PREFIX_MODULE + s.getModuleCode().toString() + " ")
+        );
         return sb.toString();
     }
 
@@ -45,9 +49,20 @@ public class PersonUtil {
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
-                sb.append(CliSyntax.PREFIX_TAG);
+                sb.append(CliSyntax.PREFIX_TAG).append(" ");
             } else {
                 tags.forEach(s -> sb.append(CliSyntax.PREFIX_TAG).append(s.tagName).append(" "));
+            }
+        }
+
+        if (descriptor.getModules().isPresent()) {
+            Set<Module> modules = descriptor.getModules().get();
+            if (modules.isEmpty()) {
+                sb.append(CliSyntax.PREFIX_NEWMOD).append(" ");
+            } else {
+                modules.forEach(s -> sb.append(CliSyntax.PREFIX_NEWMOD)
+                                       .append(s.getModuleCode().toString())
+                                       .append(" "));
             }
         }
         return sb.toString();
