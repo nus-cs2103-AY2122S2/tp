@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,7 +23,7 @@ public class SortCommandParser implements Parser<SortCommand> {
      *
      * @param args Arguments for sorting.
      * @return SortCommand object for execution.
-     * @throws ParseException
+     * @throws ParseException if there is invalid input or arguments given are empty.
      */
     @Override
     public SortCommand parse(String args) throws ParseException {
@@ -45,7 +46,8 @@ public class SortCommandParser implements Parser<SortCommand> {
      * @param prefixMap hashmap on the prefix and it's corresponding object.
      * @return list on how the fields should be sorted based on the arguments provided.
      */
-    private List<SortCommand.FieldSortOrder> getFieldSortOrderList(String[] arguments, Map<String, Prefix> prefixMap) {
+    private List<SortCommand.FieldSortOrder> getFieldSortOrderList(String[] arguments, Map<String, Prefix> prefixMap)
+            throws ParseException {
         List<SortCommand.FieldSortOrder> fieldSortOrderList = new ArrayList<SortCommand.FieldSortOrder>();
 
         for (int i = 0; i < arguments.length; ++i) {
@@ -53,17 +55,20 @@ public class SortCommandParser implements Parser<SortCommand> {
                 continue;
             }
 
-            if (!prefixMap.containsKey(arguments[i])) {
-                //TODO:: SHOW ERROR
-                continue;
+            if (!prefixMap.containsKey(arguments[i]) && !arguments[i].equals(SortCommand.DESCENDING_KEYWORD)) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
             }
 
             boolean isDescending = false;
             if (i + 1 < arguments.length) {
-                isDescending = arguments[i + 1].equals("desc");
+                isDescending = arguments[i + 1].equals(SortCommand.DESCENDING_KEYWORD);
             }
 
             fieldSortOrderList.add(new SortCommand.FieldSortOrder(prefixMap.get(arguments[i]), isDescending));
+        }
+
+        if (fieldSortOrderList.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
 
         return fieldSortOrderList;

@@ -11,8 +11,14 @@ import java.util.Optional;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.Model;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.Field;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
+import seedu.address.model.tag.Tag;
 
 /**
  * Sorts the person list in address book based on fields given.
@@ -20,6 +26,18 @@ import seedu.address.model.person.Person;
 public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
     public static final String MESSAGE_SUCCESS = "List is sorted accordingly!";
+    public static final String DESCENDING_KEYWORD = "desc";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": sorts the person list in the field order specified.\n"
+            + "Parameters: Any field prefix "
+            + "[" + Name.PREFIX + "] "
+            + "[" + Phone.PREFIX + "] "
+            + "[" + Email.PREFIX + "] "
+            + "[" + Address.PREFIX + "] "
+            + "[" + Remark.PREFIX + "] "
+            + "[" + Tag.PREFIX + "]...\n"
+            + "Add keyword" + DESCENDING_KEYWORD + " after a field if it's to be sorted in descending order.\n"
+            + "Example: " + COMMAND_WORD + " n/ e/ desc a/ n/";
 
     private final List<FieldSortOrder> fieldSortOrderList;
 
