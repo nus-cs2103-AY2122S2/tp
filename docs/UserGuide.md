@@ -95,11 +95,11 @@ Format: `tag INDEX [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDU
 
 * Tags the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the prefixes must be provided.
-* If tagging more than one value for a field, separate each value with a `,`.
+* If a prefix is used, the input after must not be blank.
 * Input tag values will be accumulated to the existing tags.
 
 Examples:
-* `tag 1 i/abc-company m/CS2100,CS2030S` Tags the internship company and 2 modules to the 1st person.
+* `tag 1 i/abc-company m/CS2100 m/CS2030S` Tags the internship company and 2 modules to the 1st person.
 
 ### Listing all persons : `list` [coming in V1.2]
 Shows a list of all persons in the address book.
@@ -137,7 +137,7 @@ Format: `find [n/NAME]…​ [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…�
 
 Examples:
 * `find n/John` returns `john` 
-* `find i/Shopee m/cs2040s cs2030s` returns `Alex Yeoh` (i.e Alex Yeoh is tagged with Shopee), `David Li` (i.e. David Li is tagged with cs2040s, cs2030s)<br>
+* `find i/Shopee m/cs2040s m/cs2030s` returns `Alex Yeoh` (i.e Alex Yeoh is tagged with Shopee), `David Li` (i.e. David Li is tagged with cs2040s, cs2030s)<br>
   ![result for 'find i/Shopee m/cs2040s cs2030s']()
 
 ### Locating specific persons: `find -s` [coming in v1.2]
@@ -154,7 +154,7 @@ Format: `find -s [n/NAME]…​ [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]�
 
 Examples:
 * `find -s n/John Doe` returns `John Doe`
-* `find -s n/David Li m/cs2040s cs2030s` returns `David Li` (i.e. David Li is tagged with cs2040s, cs2030s)<br>
+* `find -s n/David Li m/cs2040s m/cs2030s` returns `David Li` (i.e. David Li is tagged with cs2040s, cs2030s)<br>
   ![result for 'find -s n/David Li m/cs2040s cs2030s']()
  
 ### Deleting a person : `delete` [coming in V1.2]
