@@ -1,17 +1,20 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.lesson.*;
-import seedu.address.model.student.Student;
-import seedu.address.model.tag.Tag;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.lesson.DateTimeSlot;
+import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.LessonAddress;
+import seedu.address.model.lesson.LessonName;
+import seedu.address.model.lesson.Subject;
+import seedu.address.model.lesson.TemporaryLesson;
+import seedu.address.model.student.Student;
 
 /**
  * Jackson-friendly version of {@link TemporaryLesson}.
@@ -64,7 +67,8 @@ class JsonAdaptedLesson {
      */
     public TemporaryLesson toModelType() throws IllegalValueException {
         if (lessonName == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, LessonName.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    LessonName.class.getSimpleName()));
         }
         if (!LessonName.isValidName(lessonName)) {
             throw new IllegalValueException(LessonName.MESSAGE_CONSTRAINTS);
@@ -72,7 +76,8 @@ class JsonAdaptedLesson {
         final LessonName modelLessonName = new LessonName(lessonName);
 
         if (subject == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Subject.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Subject.class.getSimpleName()));
         }
         if (!Subject.isValidSubject(subject)) {
             throw new IllegalValueException(Subject.MESSAGE_CONSTRAINTS);
@@ -80,7 +85,8 @@ class JsonAdaptedLesson {
         final Subject modelSubject = new Subject(subject);
 
         if (lessonAddress == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, LessonAddress.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    LessonAddress.class.getSimpleName()));
         }
         if (!LessonAddress.isValidAddress(lessonAddress)) {
             throw new IllegalValueException(LessonAddress.MESSAGE_CONSTRAINTS);
@@ -88,7 +94,8 @@ class JsonAdaptedLesson {
         final LessonAddress modelLessonAddress = new LessonAddress(lessonAddress);
 
         if (dateTimeSlot == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, DateTimeSlot.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    DateTimeSlot.class.getSimpleName()));
         }
         final DateTimeSlot modelDateTimeSlot = dateTimeSlot.toModelType();
 

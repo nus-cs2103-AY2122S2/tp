@@ -39,7 +39,8 @@ public abstract class Lesson {
     /**
      * Every field must be present and not null.
      */
-    protected Lesson(LessonName name, Subject subject, LessonAddress address, DateTimeSlot dateTimeSlot, List<Student> assignedStudents) {
+    protected Lesson(LessonName name, Subject subject, LessonAddress address,
+                     DateTimeSlot dateTimeSlot, List<Student> assignedStudents) {
         requireAllNonNull(name, subject, address);
         this.name = name;
         this.subject = subject;

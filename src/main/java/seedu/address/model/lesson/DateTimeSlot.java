@@ -1,11 +1,8 @@
 package seedu.address.model.lesson;
 
-import seedu.address.logic.parser.exceptions.ParseException;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

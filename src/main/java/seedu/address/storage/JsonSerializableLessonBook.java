@@ -1,32 +1,34 @@
 package seedu.address.storage;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.LessonBook;
-import seedu.address.model.ReadOnlyLessonBook;
-import seedu.address.model.lesson.TemporaryLesson;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
+
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.LessonBook;
+import seedu.address.model.ReadOnlyLessonBook;
+import seedu.address.model.lesson.Lesson;
+
 /**
- * An Immutable LessonBook that is serializable to JSON format.
+ * An Immutable AddressBook that is serializable to JSON format.
  */
 @JsonRootName(value = "lessonbook")
 class JsonSerializableLessonBook {
 
-    public static final String MESSAGE_CONFLICTING_LESSON = "Lessons list contains conflicting lesson(s).";
+    public static final String MESSAGE_CONFLICTING_LESSONS = "Students list contains duplicate student(s).";
 
     private final List<JsonAdaptedLesson> lessons = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given students.
+     * Constructs a {@code JsonSerializableLessonBook} with the given lessons.
      */
     @JsonCreator
-    public JsonSerializableLessonBook(@JsonProperty("temporarylessons") List<JsonAdaptedLesson> lessons) {
+    public JsonSerializableLessonBook(
+            @JsonProperty("lessons") List<JsonAdaptedLesson> lessons) {
         this.lessons.addAll(lessons);
     }
 
@@ -48,12 +50,15 @@ class JsonSerializableLessonBook {
         LessonBook lessonBook = new LessonBook();
 
         for (JsonAdaptedLesson jsonAdaptedLesson : lessons) {
-            TemporaryLesson lesson = jsonAdaptedLesson.toModelType();
+            Lesson lesson = jsonAdaptedLesson.toModelType();
+
             if (lessonBook.hasConflictingLesson(lesson)) {
-                throw new IllegalValueException(MESSAGE_CONFLICTING_LESSON);
+                throw new IllegalValueException(MESSAGE_CONFLICTING_LESSONS);
             }
+
             lessonBook.addLesson(lesson);
         }
+
         return lessonBook;
     }
 }
