@@ -48,14 +48,20 @@ public class SortCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
+        Comparator<Person> comparator = null;
         for (FieldSortOrder fieldSortOrder : fieldSortOrderList) {
-            Comparator<Person> comparator = getComparator(fieldSortOrder.getFieldPrefix());
+            Comparator<Person> currComperator = getComparator(fieldSortOrder.getFieldPrefix());
             if (fieldSortOrder.getIsDescendingOrder()) {
-                comparator = comparator.reversed();
+                currComperator = currComperator.reversed();
             }
 
-            model.sortPersonList(comparator);
+            if (comparator == null) {
+                comparator = currComperator;
+            } else {
+                comparator = comparator.thenComparing(currComperator);
+            }
         }
+        model.sortPersonList(comparator);
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(MESSAGE_SUCCESS);
