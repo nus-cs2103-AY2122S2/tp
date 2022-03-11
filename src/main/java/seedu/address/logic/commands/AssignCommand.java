@@ -6,9 +6,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.misc.InfoPanelTypes;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 
 public class AssignCommand extends Command {
     public static final String COMMAND_WORD = "assign";
@@ -37,7 +38,7 @@ public class AssignCommand extends Command {
         this.lessonIndex = lessonIndex;
     }
 
-    private boolean assign(Person student, Lesson lesson) {
+    private boolean assign(Student student, Lesson lesson) {
         return student.assignLesson(lesson) && lesson.assignStudent(student);
     }
 
@@ -45,10 +46,13 @@ public class AssignCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         Lesson lesson = model.getFilteredLessonList().get(lessonIndex.getZeroBased());
-        Person student = model.getFilteredPersonList().get(studentIndex.getZeroBased());
+        Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
+        model.setSelectedStudent(student);
         if (!assign(student, lesson)) {
-            throw new CommandException(MESSAGE_ALREADY_ENROLLED);
+            throw new CommandException(String.format(MESSAGE_ALREADY_ENROLLED, student.getName(), lesson.getName()));
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, student.getName(), lesson.getName()));
+        return new CommandResult(
+                String.format(MESSAGE_SUCCESS, student.getName(), lesson.getName()),
+                true, InfoPanelTypes.STUDENT);
     }
 }

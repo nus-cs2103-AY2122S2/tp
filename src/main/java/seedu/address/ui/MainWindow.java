@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -122,16 +123,6 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         //populateListPanelWithPeople(logic.getFilteredStudentList());
         populateListPanelWithLessons(logic.getFilteredLessonList());
-
-        // Load first student in list
-        if (logic.getFilteredStudentList().size() > 0) {
-            Student tempStudent = logic.getFilteredStudentList().get(0);
-            tempPopulateInfoPanelWithStudentAndList(tempStudent, logic.getFilteredLessonList());
-        }
-
-        // Temporary lesson placeholder
-        //Lesson tempLesson = logic.getFilteredLessonList().get(0);
-        //tempPopulateInfoPanelWithLessonAndList(tempLesson, logic.getFilteredStudentList());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -256,29 +247,18 @@ public class MainWindow extends UiPart<Stage> {
     private void populateInfoPanelWithStudent(Student selectedStudent) {
         infoPanel = new StudentInfoPanel(selectedStudent);
         StudentInfoPanel studentInfoPanel = (StudentInfoPanel) infoPanel;
+        ObservableList<Lesson> fxEnrolledLessons = FXCollections.observableList(logic.getSelectedStudent()
+                .getEnrolledLessons().getLessonsList());
+        studentInfoPanel.setAssignedLessons(fxEnrolledLessons);
         populateInfoPanel(studentInfoPanel);
     }
 
     private void populateInfoPanelWithLesson(Lesson selectedLesson) {
         infoPanel = new LessonInfoPanel(selectedLesson);
         LessonInfoPanel lessonInfoPanel = (LessonInfoPanel) infoPanel;
-        populateInfoPanel(lessonInfoPanel);
-    }
-
-    // TODO: Temporary test method as Student does not contain list of lessons yet
-    private void tempPopulateInfoPanelWithStudentAndList(Student selectedStudent, ObservableList<Lesson> lessonList) {
-        infoPanel = new StudentInfoPanel(selectedStudent);
-        StudentInfoPanel studentInfoPanel = (StudentInfoPanel) infoPanel;
-        studentInfoPanel.setAssignedLessons(lessonList);
-        populateInfoPanel(studentInfoPanel);
-    }
-
-    // TODO: Temporary test method as Lesson does not contain list of students yet
-    private void tempPopulateInfoPanelWithLessonAndList(Lesson selectedLesson,
-                                                        ObservableList<Student> enrolledStudents) {
-        infoPanel = new LessonInfoPanel(selectedLesson);
-        LessonInfoPanel lessonInfoPanel = (LessonInfoPanel) infoPanel;
-        lessonInfoPanel.setEnrolledStudents(enrolledStudents);
+        ObservableList<Student> fxEnrolledStudents = FXCollections.observableList(logic.getSelectedLesson()
+                .getEnrolledStudents().getStudentsList());
+        lessonInfoPanel.setEnrolledStudents(fxEnrolledStudents);
         populateInfoPanel(lessonInfoPanel);
     }
 

@@ -5,20 +5,20 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 
 public class EnrolledStudents {
-    private final List<Person> enrolledStudents;
+    private final List<Student> enrolledStudents;
 
     public EnrolledStudents() {
         this.enrolledStudents = new ArrayList<>();
     }
 
-    public List<Person> getEnrolledStudents() {
+    public List<Student> getStudentsList() {
         return enrolledStudents;
     }
 
-    public boolean addStudent(Person student) {
+    public boolean addStudent(Student student) {
         return this.enrolledStudents.add(student);
     }
 
@@ -31,10 +31,10 @@ public class EnrolledStudents {
             return false;
         }
         EnrolledStudents otherEnrolledStudents = (EnrolledStudents) o;
-        List<Person> otherStudentsList = otherEnrolledStudents.getEnrolledStudents();
+        List<Student> otherStudentsList = otherEnrolledStudents.getStudentsList();
         if (this.enrolledStudents.size() == otherStudentsList.size()) {
-            HashSet<Person> compareMap = new HashSet<>(enrolledStudents);
-            for (Person student: otherStudentsList) {
+            HashSet<Student> compareMap = new HashSet<>(enrolledStudents);
+            for (Student student: otherStudentsList) {
                 if (compareMap.add(student)) { // if returns true, a new Person is being added
                     return false;
                 }

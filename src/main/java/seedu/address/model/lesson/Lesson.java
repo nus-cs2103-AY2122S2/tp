@@ -81,7 +81,7 @@ public abstract class Lesson {
         return enrolledStudents;
     }
 
-    public boolean assignStudent(Person student) {
+    public boolean assignStudent(Student student) {
         return enrolledStudents.addStudent(student);
     }
 
@@ -94,9 +94,4 @@ public abstract class Lesson {
      * Returns the date and time that the lesson starts and ends.
      */
     public abstract DateTimeSlot getTimeSlot();
-
-    /**
-     * Adds a given Student to the list of students assigned to this lesson.
-     */
-    public abstract void addStudent(Student student);
 }
