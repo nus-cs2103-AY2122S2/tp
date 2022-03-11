@@ -12,7 +12,7 @@ import seedu.address.model.person.Person;
 /**
  * An UI component that displays information of a {@code Person}.
  */
-public class PersonCard extends UiPart<Region> {
+public class PersonCardComponent extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
 
@@ -46,11 +46,12 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane modules;
     @FXML
     private FlowPane ccas;
-
+    @FXML
+    private Label l;
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex) {
+    public PersonCardComponent(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
@@ -58,18 +59,26 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        educations.setHgap(8);
+        educations.setVgap(8);
+        internships.setHgap(8);
+        internships.setVgap(8);
+        modules.setHgap(8);
+        modules.setVgap(8);
+        ccas.setHgap(8);
+        ccas.setVgap(8);
         person.getEducations().stream()
                 .sorted(Comparator.comparing(edu -> edu.tagName))
-                .forEach(edu -> educations.getChildren().add(new Label((edu.tagName))));
+                .forEach(edu -> educations.getChildren().add(new TagComponent(edu).getTagLabel()));
         person.getInternships().stream()
                 .sorted(Comparator.comparing(intern -> intern.tagName))
-                .forEach(intern -> internships.getChildren().add(new Label((intern.tagName))));
+                .forEach(intern -> internships.getChildren().add(new TagComponent(intern).getTagLabel()));
         person.getModules().stream()
                 .sorted(Comparator.comparing(module -> module.tagName))
-                .forEach(module -> modules.getChildren().add(new Label((module.tagName))));
+                .forEach(module -> modules.getChildren().add(new TagComponent(module).getTagLabel()));
         person.getCcas().stream()
                 .sorted(Comparator.comparing(cca -> cca.tagName))
-                .forEach(cca -> ccas.getChildren().add(new Label((cca.tagName))));
+                .forEach(cca -> ccas.getChildren().add(new TagComponent(cca).getTagLabel()));
 
     }
 
@@ -81,12 +90,12 @@ public class PersonCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PersonCard)) {
+        if (!(other instanceof PersonCardComponent)) {
             return false;
         }
 
         // state check
-        PersonCard card = (PersonCard) other;
+        PersonCardComponent card = (PersonCardComponent) other;
         return id.getText().equals(card.id.getText())
                 && person.equals(card.person);
     }
