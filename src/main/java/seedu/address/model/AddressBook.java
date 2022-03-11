@@ -124,7 +124,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Replaces the given classGroup {@code target} in the list with {@code editedClassGroup}.
      * {@code target} must exist in the address book.
-     * The classGroup identity of {@code editedClassGroup} must not be the same as another existing classGroup in the address book.
+     * The classGroup identity of {@code editedClassGroup} must not be the same as
+     * another existing classGroup in the address book.
      */
     public void setClassGroup(ClassGroup target, ClassGroup editedClassGroup) {
         requireNonNull(editedClassGroup);
