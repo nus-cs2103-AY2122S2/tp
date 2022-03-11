@@ -4,7 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 
 /**
  * Represents a temporary lesson in the address book.
@@ -39,11 +39,11 @@ public class TemporaryLesson extends Lesson {
     }
 
     /**
-     * Adds a given Person to the list of students assigned to this lesson.
+     * Adds a given Student to the list of students assigned to this lesson.
      */
     @Override
-    public void addStudent(Person person) {
-        this.getAssignedStudents().add(person);
+    public void addStudent(Student student) {
+        this.getAssignedStudents().add(student);
     }
 
     /**

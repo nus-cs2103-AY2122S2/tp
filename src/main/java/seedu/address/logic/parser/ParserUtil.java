@@ -16,18 +16,42 @@ import seedu.address.model.lesson.DateTimeSlot;
 import seedu.address.model.lesson.LessonAddress;
 import seedu.address.model.lesson.LessonName;
 import seedu.address.model.lesson.Subject;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.student.Address;
+import seedu.address.model.student.Email;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
-
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+
+    public static final String INVALID_DATE_FORMAT_MESSAGE = "Invalid date format! Date must be in DD-MM-YYYY\n"
+            + "[EXAMPLE]: to specify that a lesson is on 25th March 2022, include the following\n"
+            + "-d 25-03-2022";
+    public static final String INVALID_DATE_PASTDATE_MESSAGE = "Retroactively creating lessons "
+            + "for past dates is not allowed!";
+
+    public static final String INVALID_HOURS_FORMAT_MESSAGE = "Invalid duration in hours format!"
+            + "Hours must be a non-negative integer.\n"
+            + "[EXAMPLE] to specify that the hours field in the lesson's duration is 2 hours,"
+            + "include the following\n"
+            + "-h 2";
+    public static final String NEGATIVE_HOURS_MESSAGE = "Hours cannot be lesser than 0.";
+
+    public static final String INVALID_START_TIME_MESSAGE = "Invalid start time format! Start time must be in HH:mm\n"
+            + "[EXAMPLE] to specify that a lesson starts at 6:30PM, include the following\n"
+            + "-t 18:30";
+
+    public static final String INVALID_MINUTES_FORMAT_MESSAGE = "Invalid duration in minutes format!"
+            + "Minutes must be a non-negative integer.\n"
+            + "[EXAMPLE] to specify that the minutes field in the lesson's duration is 25 minutes,"
+            + "include the following\n"
+            + "-m 25";
+    public static final String NEGATIVE_MINUTES_MESSAGE = "Minutes cannot be lesser than 0.";
+    public static final String MINUTES_GREATER_THAN_59_MESSAGE = "Minutes cannot be greater than 59.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -185,19 +209,23 @@ public class ParserUtil {
         String trimmedDateString = dateOfLesson.trim();
 
         if (!DateTimeSlot.isValidDate(dateOfLesson)) {
-            throw new ParseException("TODO: figure out how to better handle exception for parsing date of lesson");
+            throw new ParseException(INVALID_DATE_FORMAT_MESSAGE);
         }
 
-        LocalDate date;
+        LocalDate lessonDate;
         try {
             DateTimeFormatter acceptedDateTimeFormat = DateTimeSlot.getAcceptedDateFormat();
-            date = LocalDate.parse(trimmedDateString, acceptedDateTimeFormat);
+            lessonDate = LocalDate.parse(trimmedDateString, acceptedDateTimeFormat);
         } catch (DateTimeParseException exception) {
-            // TODO: figure out how to better handle exception for parsing date of lesson
-            throw new ParseException("TODO: figure out how to better handle exception for parsing date of lesson");
+            throw new ParseException(INVALID_DATE_FORMAT_MESSAGE);
         }
 
-        return date;
+        LocalDate today = LocalDate.now();
+        if (lessonDate.isBefore(today)) {
+            throw new ParseException(INVALID_DATE_PASTDATE_MESSAGE);
+        }
+
+        return lessonDate;
     }
 
     /**
@@ -210,7 +238,7 @@ public class ParserUtil {
         String trimmedStartTimeString = startTime.trim();
 
         if (!DateTimeSlot.isValidStartTime(trimmedStartTimeString)) {
-            throw new ParseException("TODO: figure out how to better handle exception for parsing date of lesson");
+            throw new ParseException(INVALID_START_TIME_MESSAGE);
         }
 
         return trimmedStartTimeString;
@@ -229,8 +257,11 @@ public class ParserUtil {
         try {
             hours = Integer.parseInt(trimmedDurationString);
         } catch (NumberFormatException exception) {
-            // TODO: figure out how to better handle exception for parsing duration of lesson (hours)
-            throw new ParseException("TODO: figure out how to better handle exception for parsing duration of lesson");
+            throw new ParseException(INVALID_HOURS_FORMAT_MESSAGE);
+        }
+
+        if (hours < 0) {
+            throw new ParseException(NEGATIVE_HOURS_MESSAGE);
         }
 
         return hours;
@@ -249,15 +280,15 @@ public class ParserUtil {
         try {
             minutes = Integer.parseInt(trimmedDurationString);
         } catch (NumberFormatException exception) {
-            throw new ParseException("Minutes must be a non-negative integer.");
+            throw new ParseException(INVALID_MINUTES_FORMAT_MESSAGE);
         }
 
         if (minutes < 0) {
-            throw new ParseException("Minutes cannot be lesser than 0.");
+            throw new ParseException(NEGATIVE_MINUTES_MESSAGE);
         }
 
-        if (minutes > 60) {
-            throw new ParseException("Minutes cannot be greater than 60.");
+        if (minutes > 59) {
+            throw new ParseException(MINUTES_GREATER_THAN_59_MESSAGE);
         }
 
         return minutes;
