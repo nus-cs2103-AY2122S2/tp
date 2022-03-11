@@ -15,7 +15,7 @@ type fast, WoofAreYou can get your contact management tasks done faster than tra
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `WoofForYou.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `WoofAreYou.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
@@ -28,7 +28,7 @@ type fast, WoofAreYou can get your contact management tasks done faster than tra
 
    * **`delete 3`** : Deletes the 3rd pet shown in list.
 
-   * **`food 3`** : Returns pet 3's dietary requirements.
+   * **`find Peepee`** : Returns a list of pets with similar name as keywords and their corresponding information.
 
    * **`exit`** : Exits the app.
 
@@ -51,38 +51,28 @@ Format: `add n/NAME_OF_PET o/OWNER_NAME p/PHONE_NUMBER a/ADDRESS`
 Examples:
 * `add n/Mojo n/John Doe p/98765432 a/523 Woodlands ave 5, #01-01`
 
-### Find pet Id: `find`
+### Find pet details: `find`
 
-Retrieve and return a list of all pet Ids corresponding to the specified name from the database. 
+Retrieve and return a list of all pet with similar name to keywords and their corresponding details from the database. 
 
-Format: `find NAME_OF_PET`
-* The name of pet is case-insensitive.`e.g: Mojo will match mojo`
+Format: `find n/NAME_OF_PET [Keywords]`
+* The name of pet is case-insensitive e.g: `find Mojo` will match `find mojo`
 * Only the name is searched.
 
 Examples:
-* `find Mojo`
+* `find Peepee Waffle Bagel`
 
-### Viewing pets' dietary requirements : `food`
+### Adding pets' dietary requirements: `diet` ###
 
-View pets' dietary preference.
+Given a pet ID, add any dietary requirement the pet may have to database.
 
-Format: `food INDEX`
-* The index refers to the index number shown in the displayed `getId` list.
-* The index must be a positive number
+Format: `diet INDEX d/remark`
 
-Example:
-* `food 12` returns pet 12's dietary requirements.
+* Adds `d/remark` as a dietary requirement for pet with `INDEX`.
+* ID is a unique identifier that each pet has in the database.
 
-### Viewing pets' owner data: `owner`
-
-View pets' owner data.
-
-Format: `owner INDEX`
-* The index refers to the index number shown in the displayed `getId` list.
-* The index must be a positive number
-
-Example: 
-* `owner 12` returns pet 12's owner's name, phone number, address and pets registered.
+Examples:
+`diet 12 Only feed dry kibble` will store a dietary remark for pet 12 saying "Only feed dry kibble".
 
 ### Viewing pets’ pick-up and drop-off time: `time`
 
@@ -118,12 +108,11 @@ Format: `exit`
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                               |
-|------------|------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME_OF_PET o/OWNER_NAME p/PHONE_NUMBER a/ADDRESS` <br> e.g., `add n/Peepee o/Peter p/98648252 a/13 Computing Drive, Singapore 117417`  |
-| **Delete** | `delete id` <br> e.g., `delete 3` (where 3 is the id of the pet in the system)                                                                 |
-| **Find**   | `find nameOfPet `<br> e.g., `find PeePee` (returns id of all pets called PeePee)                                                               |
-| **Time**   | `time id `<br> e.g.,`pickup 3 0900 1200` (where 3 is the id of the pet in the system)                                                          |
-| **Food**   | `food id `<br> e.g., `food 3` (where 3 is the id of the pet in the system)                                                                     |
-| **Owner**  | `owner o/OWNER_NAME` <br> e.g., `owner o/Jeff Lin`                                                                                             |
-| **Exit**   | `exit`                                                                                                                                         |
+| Action     | Format, Examples                                                                                                                              |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME_OF_PET o/OWNER_NAME p/PHONE_NUMBER a/ADDRESS` <br> e.g., `add n/Peepee o/Peter p/98648252 a/13 Computing Drive, Singapore 117417` |
+| **Delete** | `delete id` <br> e.g., `delete 3` (where 3 is the id of the pet in the system)                                                                |
+| **Find**   | `find n/NAME_OF_PET [Keywords]` <br> e.g., `find PeePee` (returns information of all pets called PeePee)                                      |
+| **Diet**   | `diet INDEX d/remark` <br> e.g. `diet 12 Only feed dry kibble` (stores remark in pet 12's database)                                           |
+| **Time**   | `time id `<br> e.g.,`pickup 3 0900 1200` (where 3 is the id of the pet in the system)                                                         |
+| **Exit**   | `exit`                                                                                                                                        |
