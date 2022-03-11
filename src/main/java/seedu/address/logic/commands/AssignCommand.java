@@ -4,8 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT;
 
-import java.util.List;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -27,6 +25,11 @@ public class AssignCommand extends Command {
     private final Index lessonIndex;
     private final Index studentIndex;
 
+    /**
+     * Constructor for AssignCommand class. This class handles the enrollment of a student to a lesson.
+     * @param studentIndex the index of the student to be added
+     * @param lessonIndex the index of the lesson that the student should be added to
+     */
     public AssignCommand(Index studentIndex, Index lessonIndex) {
         requireNonNull(studentIndex);
         requireNonNull(lessonIndex);

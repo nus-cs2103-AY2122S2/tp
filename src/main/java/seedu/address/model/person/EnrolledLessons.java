@@ -8,7 +8,7 @@ import java.util.Objects;
 import seedu.address.model.lesson.Lesson;
 
 public class EnrolledLessons {
-    public List<Lesson> lessonsList;
+    private final List<Lesson> lessonsList;
 
     public EnrolledLessons() {
         lessonsList = new ArrayList<>();
@@ -18,6 +18,11 @@ public class EnrolledLessons {
         return this.lessonsList;
     }
 
+    /**
+     * Adds a lesson to the list of lessons.
+     * @param lesson a lesson
+     * @return a boolean stating if the lesson was successfully added
+     */
     public boolean addLesson(Lesson lesson) {
         if (isEnrolled(lesson)) {
             return false;

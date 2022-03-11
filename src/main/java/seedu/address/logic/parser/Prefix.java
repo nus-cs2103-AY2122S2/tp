@@ -8,6 +8,11 @@ public class Prefix {
     private final String prefix;
     private final String prefixFor;
 
+    /**
+     * Constructor for the Prefix class.
+     * @param prefix the prefix of an argument
+     * @param prefixFor the argument that the prefix is for
+     */
     public Prefix(String prefix, String prefixFor) {
         this.prefix = prefix;
         this.prefixFor = prefixFor;
