@@ -45,19 +45,20 @@ Add a pet to the database.
 
 Format: `add n/NAME_OF_PET o/OWNER_NAME p/PHONE_NUMBER a/ADDRESS`
 * Each particular field is compulsory.
-* Each particular entered must strictly correspond to its legal prefix.`e.g: p/Address is considered illegal`
+* Each particular entered must strictly correspond to its legal prefix.`e.g: p/Address is considered illegal`.
 * Phone number **must only contain numbers**.
 
 Examples:
-* `add n/Mojo n/John Doe p/98765432 a/523 Woodlands ave 5, #01-01`
+* `add n/Mojo n/John Doe p/98765432 a/523 Woodlands ave 5, #01-01`.
 
 ### Find pet details: `find`
 
 Retrieve and return a list of all pet with similar name to keywords and their corresponding details from the database. 
 
 Format: `find n/NAME_OF_PET [Keywords]`
-* The name of pet is case-insensitive e.g: `find Mojo` will match `find mojo`
+* The name of pet is case-insensitive e.g: `find Mojo` will match `find mojo`.
 * Only the name is searched.
+* Search returns partial name matches e.g.: `find mo` will return Mojo as a result.
 
 Examples:
 * `find Peepee Waffle Bagel`
