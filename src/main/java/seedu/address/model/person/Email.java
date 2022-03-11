@@ -41,8 +41,12 @@ public class Email {
      */
     public Email(String email) {
         requireNonNull(email);
-        //        checkArgument(isValidEmail(emailWithDomain), MESSAGE_CONSTRAINTS);
-        value = email + NUS_DOMAIN;
+
+        String emailWithDomain = email.contains("@")
+                ? email : email + NUS_DOMAIN;
+
+        checkArgument(isValidEmail(emailWithDomain), MESSAGE_CONSTRAINTS);
+        value = emailWithDomain;
     }
 
     /**
