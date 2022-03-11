@@ -21,6 +21,11 @@ public class FilterCommand extends Command {
 
     private CovidStatus status;
 
+    /**
+     * Constructor for this class to create a FilterCommand object.
+     *
+     * @param status input String to create a CovidStatus object and store it in the instance
+     */
     public FilterCommand(String status) {
         requireNonNull(status);
 
