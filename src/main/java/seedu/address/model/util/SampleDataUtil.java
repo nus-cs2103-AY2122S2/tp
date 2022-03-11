@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.person.AcademicMajor;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -40,11 +42,23 @@ public class SampleDataUtil {
         };
     }
 
+    public static Group[] getSampleGroups() {
+        return new Group[] {
+                new Group(new GroupName("NUS Fintech Society")),
+                new Group(new GroupName("NUS Data Science Society"))
+        };
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }
+
+        for (Group sampleGroup : getSampleGroups()) {
+            sampleAb.addGroup(sampleGroup);
+        }
+
         return sampleAb;
     }
 
