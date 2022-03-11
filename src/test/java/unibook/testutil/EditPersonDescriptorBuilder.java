@@ -35,6 +35,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setTags(person.getTags());
+        descriptor.setModules(person.getModules());
     }
 
     /**

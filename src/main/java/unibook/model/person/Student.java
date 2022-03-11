@@ -44,13 +44,14 @@ public class Student extends Person {
         return otherPerson.getName().equals(getName())
             && otherPerson.getPhone().equals(getPhone())
             && otherPerson.getEmail().equals(getEmail())
-            && otherPerson.getTags().equals(getTags());
+            && otherPerson.getTags().equals(getTags())
+            && otherPerson.getModules().equals(getModules());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(getName(), getPhone(), getEmail(), getTags());
+        return Objects.hash(getName(), getPhone(), getEmail(), getTags(), getModules());
     }
 
     @Override
@@ -66,6 +67,12 @@ public class Student extends Person {
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
+        }
+
+        Set<Module> modules = getModules();
+        if (!modules.isEmpty()) {
+            builder.append("; Modules: ");
+            modules.forEach(builder::append);
         }
         return builder.toString();
     }
