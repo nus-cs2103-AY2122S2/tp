@@ -1,0 +1,9 @@
+{
+  "pets": [ {
+    "name": "Pet with invalid name field: Ha!ns Mu@ster",
+    "phone": "9482424",
+    "ownerName": "Hannah Lee",
+    "address": "4th street",
+    "diet": "octopus"
+  } ]
+}

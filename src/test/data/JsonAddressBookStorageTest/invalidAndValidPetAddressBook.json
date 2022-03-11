@@ -1,0 +1,15 @@
+{
+  "pets": [ {
+    "name": "Valid Pet",
+    "phone": "9482424",
+    "ownerName": "John Doe",
+    "address": "4th street",
+    "diet": "no dietary restrictions"
+  }, {
+    "name": "Pet With Invalid Phone Field",
+    "phone": "948asdf2424",
+    "ownerName": "John Doe",
+    "address": "4th street",
+    "diet": "vegetarian only"
+  } ]
+}

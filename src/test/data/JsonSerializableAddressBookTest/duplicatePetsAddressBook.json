@@ -1,0 +1,16 @@
+{
+  "pets": [ {
+    "name": "Waffle",
+    "phone": "94351253",
+    "ownerName": "Alice Pauline",
+    "address": "123, Jurong West Ave 6, #08-111",
+    "tagged": [ "friends" ],
+    "diet": "cute oranges"
+  }, {
+    "name": "Waffle",
+    "phone": "94351253",
+    "ownerName": "Alice Pauline",
+    "address": "4th street",
+    "diet": "cute apples"
+  } ]
+}
