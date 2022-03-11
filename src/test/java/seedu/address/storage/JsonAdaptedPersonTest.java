@@ -3,42 +3,47 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
+import seedu.address.model.person.Module;
 
 public class JsonAdaptedPersonTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
+    private static final List<JsonAdaptedTag> INVALID_CCAS = Arrays.asList(new JsonAdaptedTag("track & field"));
+    private static final List<JsonAdaptedTag> INVALID_EDUCATIONS = Arrays.asList(new JsonAdaptedTag("computer " +
+            "science 2nd " + "year!"));
+    private static final List<JsonAdaptedTag> INVALID_INTERNSHIPS = Arrays.asList(new JsonAdaptedTag("bosch*"));
+    private static final List<JsonAdaptedTag> INVALID_MODULES = Arrays.asList(new JsonAdaptedTag("cs2040s~"));
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
     private static final String VALID_ADDRESS = BENSON.getAddress().toString();
     private static final List<JsonAdaptedTag> VALID_EDUCATIONS =
-            BENSON.getEducations().stream().map(JsonAdaptedTag::new).collect(Collectors.toList());
+            AMY.getEducations().stream().map(JsonAdaptedTag::new).collect(Collectors.toList());
     private static final List<JsonAdaptedTag> VALID_INTERNSHIPS =
-            BENSON.getEducations().stream().map(JsonAdaptedTag::new).collect(Collectors.toList());
+            AMY.getEducations().stream().map(JsonAdaptedTag::new).collect(Collectors.toList());
     private static final List<JsonAdaptedTag> VALID_MODULES =
-            BENSON.getEducations().stream().map(JsonAdaptedTag::new).collect(Collectors.toList());
+            AMY.getEducations().stream().map(JsonAdaptedTag::new).collect(Collectors.toList());
     private static final List<JsonAdaptedTag> VALID_CCAS =
-            BENSON.getEducations().stream().map(JsonAdaptedTag::new).collect(Collectors.toList());
+            AMY.getEducations().stream().map(JsonAdaptedTag::new).collect(Collectors.toList());
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(BENSON);
-        assertEquals(BENSON, person.toModelType());
+        JsonAdaptedPerson person = new JsonAdaptedPerson(AMY);
+        assertEquals(AMY, person.toModelType());
     }
 
     @Test
@@ -109,4 +114,39 @@ public class JsonAdaptedPersonTest {
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
+    @Test
+    public void toModelType_invalidEducation_throwsIllegalValueException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, INVALID_EDUCATIONS,
+                        VALID_INTERNSHIPS, VALID_MODULES, VALID_CCAS);
+        String expectedMessage = Education.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidInternship_throwsIllegalValueException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_EDUCATIONS,
+                        INVALID_INTERNSHIPS, VALID_MODULES, VALID_CCAS);
+        String expectedMessage = Internship.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidModule_throwsIllegalValueException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_EDUCATIONS,
+                        VALID_INTERNSHIPS, INVALID_MODULES, VALID_CCAS);
+        String expectedMessage = Module.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidCca_throwsIllegalValueException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_EDUCATIONS,
+                        VALID_INTERNSHIPS, VALID_MODULES, INVALID_CCAS);
+        String expectedMessage = Cca.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
 }

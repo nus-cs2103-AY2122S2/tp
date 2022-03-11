@@ -9,11 +9,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
+import seedu.address.model.person.Module;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -94,18 +91,30 @@ class JsonAdaptedPerson {
         final List<Tag> modelModules = new ArrayList<>();
 
         for (JsonAdaptedTag curr : educations) {
+            if (!Education.isValidTagName(curr.getTagName())) {
+                throw new IllegalValueException(Education.MESSAGE_CONSTRAINTS);
+            }
             modelEducations.add(curr.toModelType("education"));
         }
 
         for (JsonAdaptedTag curr : ccas) {
+            if (!Cca.isValidTagName(curr.getTagName())) {
+                throw new IllegalValueException(Cca.MESSAGE_CONSTRAINTS);
+            }
             modelCcas.add(curr.toModelType("cca"));
         }
 
         for (JsonAdaptedTag curr : internships) {
+            if (!Internship.isValidTagName(curr.getTagName())) {
+                throw new IllegalValueException(Internship.MESSAGE_CONSTRAINTS);
+            }
             modelInternships.add(curr.toModelType("internship"));
         }
 
         for (JsonAdaptedTag curr : modules) {
+            if (!Module.isValidTagName(curr.getTagName())) {
+                throw new IllegalValueException(Module.MESSAGE_CONSTRAINTS);
+            }
             modelModules.add(curr.toModelType("module"));
         }
 
