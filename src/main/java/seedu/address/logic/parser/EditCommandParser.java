@@ -17,6 +17,7 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -59,26 +60,22 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
-        Set<Tag> tags = new HashSet<>();
         if (argMultimap.getValue(PREFIX_CCA).isPresent()) {
-            String ccaTags = argMultimap.getValue(PREFIX_CCA).orElse("");
-            tags.addAll(TagCommandParser.convertToList(ccaTags, "cca"));
+            List<Tag> cca = ParserUtil.parseTagsForEdit(argMultimap.getAllValues(PREFIX_CCA), Tag.CCA);
+            editPersonDescriptor.setCcas(cca);
         }
         if (argMultimap.getValue(PREFIX_EDUCATION).isPresent()) {
-            String eduTags = argMultimap.getValue(PREFIX_EDUCATION).orElse("");
-            tags.addAll(TagCommandParser.convertToList(eduTags, "education"));
+            List<Tag> education = ParserUtil.parseTagsForEdit(argMultimap.getAllValues(PREFIX_EDUCATION), Tag.EDUCATION);
+            editPersonDescriptor.setEducations(education);
         }
         if (argMultimap.getValue(PREFIX_MODULE).isPresent()) {
-            String modTags = argMultimap.getValue(PREFIX_MODULE).orElse("");
-            tags.addAll(TagCommandParser.convertToList(modTags, "module"));
+            List<Tag> module = ParserUtil.parseTagsForEdit(argMultimap.getAllValues(PREFIX_MODULE), Tag.MODULE);
+            editPersonDescriptor.setModules(module);
         }
         if (argMultimap.getValue(PREFIX_INTERNSHIP).isPresent()) {
-            String internTags = argMultimap.getValue(PREFIX_INTERNSHIP).orElse("");
-            tags.addAll(TagCommandParser.convertToList(internTags, "internship"));
+            List<Tag> internship = ParserUtil.parseTagsForEdit(argMultimap.getAllValues(PREFIX_INTERNSHIP), Tag.INTERNSHIP);
+            editPersonDescriptor.setInternships(internship);
         }
-        List<Tag> list = new ArrayList<>();
-        list.addAll(tags);
-        editPersonDescriptor.setTags(list);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);

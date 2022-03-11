@@ -1,10 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -14,6 +11,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -92,8 +90,13 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        List<Tag> updatedEducation = editPersonDescriptor.getEducations().orElse(personToEdit.getEducations());
+        List<Tag> updatedInternship = editPersonDescriptor.getInternships().orElse(personToEdit.getInternships());
+        List<Tag> updatedModule = editPersonDescriptor.getModules().orElse(personToEdit.getModules());
+        List<Tag> updatedCca = editPersonDescriptor.getCcas().orElse(personToEdit.getCcas());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
+                updatedEducation, updatedInternship, updatedModule, updatedCca);
     }
 
     @Override
@@ -123,7 +126,10 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
-        private List<Tag> tags;
+        private List<Tag> educations;
+        private List<Tag> internships;
+        private List<Tag> modules;
+        private List<Tag> ccas;
 
         public EditPersonDescriptor() {}
 
@@ -136,14 +142,18 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setTags(toCopy.tags);
+            setEducations(toCopy.educations);
+            setInternships(toCopy.internships);
+            setModules(toCopy.modules);
+            setCcas(toCopy.ccas);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address,
+                    educations, internships, modules, ccas);
         }
 
         public void setName(Name name) {
@@ -178,9 +188,37 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
-        public void setTags(List<Tag> tags) { this.tags = tags; }
+        public void setEducations(List<Tag> tags) {
+            this.educations = tags;
+        }
 
-        public Optional<List<Tag>> getTags() { return Optional.ofNullable(tags); }
+        public Optional<List<Tag>> getEducations() {
+            return Optional.ofNullable(educations);
+        }
+
+        public void setInternships(List<Tag> tags) {
+            this.internships = tags;
+        }
+
+        public Optional<List<Tag>> getInternships() {
+            return Optional.ofNullable(internships);
+        }
+
+        public void setModules(List<Tag> tags) {
+            this.modules = tags;
+        }
+
+        public Optional<List<Tag>> getModules() {
+            return Optional.ofNullable(modules);
+        }
+
+        public void setCcas(List<Tag> tags) {
+            this.ccas = tags;
+        }
+
+        public Optional<List<Tag>> getCcas() {
+            return Optional.ofNullable(ccas);
+        }
 
         @Override
         public boolean equals(Object other) {
@@ -201,8 +239,10 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
-                    //Need to check if equals is implemented correctly in the hashset
-                    && getTags().equals(e.getTags());
+                    && getEducations().equals(e.getEducations())
+                    && getInternships().equals(e.getInternships())
+                    && getModules().equals(e.getModules())
+                    && getCcas().equals(e.getCcas());
         }
     }
 }

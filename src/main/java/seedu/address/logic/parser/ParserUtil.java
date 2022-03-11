@@ -183,4 +183,21 @@ public class ParserUtil {
         }
         return new ArrayList<>(tagSet);
     }
+
+    /**
+     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Returns an empty
+     */
+    public static List<Tag> parseTagsForEdit(Collection<String> tags, String type) throws ParseException {
+        requireNonNull(tags);
+        final Set<Tag> tagSet = new HashSet<>();
+        // This is the case that the tag list is meant to be cleared
+        if (tags.size() == 1 && tags.contains("")) {
+            return new ArrayList<>();
+        }
+        for (String tagName : tags) {
+            tagSet.add(parseTag(tagName, type));
+        }
+        return new ArrayList<>(tagSet);
+    }
 }
