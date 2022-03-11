@@ -325,16 +325,71 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `InternBuddy` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a new event for a company**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to add a new event with details given
+2.  InternBuddy creates and add a new event to the list of events
+3.  InternBuddy shows successful feedback to the user
+4.  InternBuddy displays the updated list of events with the new event
+5.  User requests to add a new tag to the event with the company name as the tag
+6.  InternBuddy adds the tag to the event
+7.  InternBuddy shows successful feedback to the user
+
+    Use case ends.
+
+**Use case: Add a new contact person details**
+
+**MSS**
+
+1.  User requests to add a new contact person with details given
+2.  InternBuddy creates a new contact person
+3.  InternBuddy add the new contact person to the list of contact persons
+4.  InternBuddy displays the updated list of contact persons with the new contact person
+5.  InternBuddy shows successful feedback to the user
+
+   Use case ends.
+
+**Extensions**
+* 5a. User wants to add a company to the contact person
+  * 5a1. User requests to add a new tag to the contact person with the company name as the tag
+  * 5a2. InternBuddy adds the tag to the contact person
+  * 5a3. InternBuddy shows successful feedback to the user
+
+      Use case ends.
+
+* 5a2. contact person not found
+
+   Use case ends.
+
+**Use case: Add a new company**
+
+**MSS**
+
+1.  User requests to add a new company with details given
+2.  InternBuddy creates a new company
+3.  InternBuddy assign a tag to the company with the company name as the tag
+4.  InternBuddy add the new company to the list of companies
+5.  InternBuddy displays the updated list of companies with the new company
+6.  InternBuddy shows successful feedback to the user
+
+   Use case ends.
+
+**Use case: Hide events that have passed or has been cancelled**
+
+**MSS**
+
+1. User requests to view list of events
+2. InternBuddy shows list of events
+3. User requests to archive the event
+4. InternBuddy archives and hides the event
+5. InternBuddy shows successful feedback to the user
+6. InternBuddy update list of events
+7. InternBuddy display the updated list of events
+8. Repeat steps 3-8 for all events to be hidden
 
     Use case ends.
 
@@ -346,7 +401,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. InternBuddy shows an error feedback to the user
 
       Use case resumes at step 2.
 
@@ -366,7 +421,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Entry**: A single entry stored in a list of entries (Contact person/Event/Company)
+* **Contact person**: An entry representing a contact person that consists of a name, phone number, email address, and a list of tags
+* **Event**: An entry representing an event that consists of a name, date, time, location, and a list of tags
+* **Company**: An entry representing a company that consists of a name and a list of tags
 
 --------------------------------------------------------------------------------------------------------------------
 
