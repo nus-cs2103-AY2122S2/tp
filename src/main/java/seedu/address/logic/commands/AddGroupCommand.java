@@ -20,23 +20,29 @@ public class AddGroupCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_GROUP_NAME + "CS2103-W16-3";
 
-    public static final String MESSAGE_ARGUMENTS = "Group added: %s";
+    public static final String MESSAGE_SUCCESS = "New student group added: %1$s";
+    public static final String MESSAGE_DUPLICATE_GROUP = "This student group already exists in ArchDuke";
 
     private final Group toAdd;
 
     /**
      * Creates an AddGroupCommand to add the specified {@code Group}
      *
-     * @param groupName of the group to be added to ArchDuke.
+     * @param group group to be added to ArchDuke.
      */
-    public AddGroupCommand(Group groupName) {
-        requireAllNonNull(groupName);
-        toAdd = groupName;
+    public AddGroupCommand(Group group) {
+        requireAllNonNull(group);
+        toAdd = group;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        throw new CommandException(String.format(MESSAGE_ARGUMENTS, toAdd));
+        if (model.hasGroup(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_GROUP);
+        }
+
+        model.addGroup(toAdd);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
     @Override
