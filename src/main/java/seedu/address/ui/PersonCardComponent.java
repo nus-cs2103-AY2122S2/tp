@@ -8,12 +8,11 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
-import javafx.scene.paint.Color;
 
 /**
  * An UI component that displays information of a {@code Person}.
  */
-public class PersonCard extends UiPart<Region> {
+public class PersonCardComponent extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
 
@@ -52,7 +51,7 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex) {
+    public PersonCardComponent(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
@@ -70,16 +69,16 @@ public class PersonCard extends UiPart<Region> {
         ccas.setVgap(8);
         person.getEducations().stream()
                 .sorted(Comparator.comparing(edu -> edu.tagName))
-                .forEach(edu -> educations.getChildren().add(new TagLabel(edu).getTagLabel()));
+                .forEach(edu -> educations.getChildren().add(new TagComponent(edu).getTagLabel()));
         person.getInternships().stream()
                 .sorted(Comparator.comparing(intern -> intern.tagName))
-                .forEach(intern -> internships.getChildren().add(new TagLabel(intern).getTagLabel()));
+                .forEach(intern -> internships.getChildren().add(new TagComponent(intern).getTagLabel()));
         person.getModules().stream()
                 .sorted(Comparator.comparing(module -> module.tagName))
-                .forEach(module -> modules.getChildren().add(new TagLabel(module).getTagLabel()));
+                .forEach(module -> modules.getChildren().add(new TagComponent(module).getTagLabel()));
         person.getCcas().stream()
                 .sorted(Comparator.comparing(cca -> cca.tagName))
-                .forEach(cca -> ccas.getChildren().add(new TagLabel(cca).getTagLabel()));
+                .forEach(cca -> ccas.getChildren().add(new TagComponent(cca).getTagLabel()));
 
     }
 
@@ -91,12 +90,12 @@ public class PersonCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PersonCard)) {
+        if (!(other instanceof PersonCardComponent)) {
             return false;
         }
 
         // state check
-        PersonCard card = (PersonCard) other;
+        PersonCardComponent card = (PersonCardComponent) other;
         return id.getText().equals(card.id.getText())
                 && person.equals(card.person);
     }
