@@ -14,17 +14,30 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Field;
 import seedu.address.model.person.Person;
 
+/**
+ * Sorts the person list in address book based on fields given.
+ */
 public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
     public static final String MESSAGE_SUCCESS = "List is sorted accordingly!";
 
     private final List<FieldSortOrder> fieldSortOrderList;
 
+    /**
+     *  Creates a SortCommand to sort the person list in address book based on fields given.
+     * @param fieldSortOrderList a list of information about the fields to be sorted in the order of the list.
+     */
     public SortCommand(List<FieldSortOrder> fieldSortOrderList) {
         requireNonNull(fieldSortOrderList);
         this.fieldSortOrderList = fieldSortOrderList;
     }
 
+    /**
+     * Sorts the person list based on fields and information provided.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return CommandResult stating whether it has been successful.
+     */
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
@@ -48,6 +61,12 @@ public class SortCommand extends Command {
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
+    /**
+     * Get Comparator lambda function on how the people are to be sorted based on certain fields.
+     *
+     * @param fieldPrefix the field to be sorted by
+     * @return Comparator lambda function.
+     */
     private Comparator<Person> getComparator(Prefix fieldPrefix) {
         return (p1, p2) -> {
             Optional<Field> p1Field = p1.getField(fieldPrefix);
@@ -69,10 +88,19 @@ public class SortCommand extends Command {
         };
     }
 
+    /**
+     * Stores the details on how a field is to be sorted.
+     */
     public static class FieldSortOrder {
         private final Prefix fieldPrefix;
         private final boolean isDescendingOrder;
 
+        /**
+         * Constructor of FieldSortOrder.
+         *
+         * @param fieldPrefix the field.
+         * @param isDescendingOrder whether the field should be sorted in descending order.
+         */
         public FieldSortOrder(Prefix fieldPrefix, boolean isDescendingOrder) {
             requireAllNonNull(fieldPrefix, isDescendingOrder);
 

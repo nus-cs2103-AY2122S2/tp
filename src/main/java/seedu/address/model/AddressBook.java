@@ -95,8 +95,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
-    public void sortPersonList(Comparator<Person> comperator) {
-        persons.sortPersonList(comperator);
+    /**
+     * Sorts the person list based on the comparator provided.
+     *
+     * @param comparator use to sort the person list.
+     */
+    public void sortPersonList(Comparator<Person> comparator) {
+        persons.sortPersonList(comparator);
     }
 
     //// util methods
