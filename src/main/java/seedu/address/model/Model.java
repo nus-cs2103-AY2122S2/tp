@@ -7,6 +7,9 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.show.Show;
 
+/**
+ * The API of the Model component.
+ */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Show> PREDICATE_SHOW_ALL_SHOWS = unused -> true;

@@ -18,7 +18,7 @@ public class CommandResult {
     private final boolean exit;
 
     /**
-     * Constructs a {@code CommandResultTrackermon} with the specified fields.
+     * Constructs a {@code CommandResult} with the specified fields.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
@@ -27,7 +27,7 @@ public class CommandResult {
     }
 
     /**
-     * Constructs a {@code CommandResultTrackermon} with the specified {@code feedbackToUser},
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {

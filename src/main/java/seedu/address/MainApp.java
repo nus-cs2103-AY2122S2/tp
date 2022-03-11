@@ -70,7 +70,7 @@ public class MainApp extends Application {
 
     /**
      * Returns a {@code ModelManager} with the data from {@code storage}'s show list and {@code userPrefs}. <br>
-     * The data from the sample show liost will be used instead if {@code storage}'s show list is not found,
+     * The data from the sample show list will be used instead if {@code storage}'s show list is not found,
      * or an empty show list will be used instead if errors occur when reading {@code storage}'s show list.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {

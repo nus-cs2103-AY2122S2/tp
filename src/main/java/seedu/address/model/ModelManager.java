@@ -13,6 +13,9 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.show.Show;
 
+/**
+ * Represents the in-memory model of the address book data.
+ */
 public class ModelManager implements Model {
 
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -61,7 +64,7 @@ public class ModelManager implements Model {
         requireNonNull(guiSettings);
         userPrefs.setGuiSettings(guiSettings);
     }
-    //Done
+
     @Override
     public Path getShowListFilePath() {
         return userPrefs.getShowListFilePath();
