@@ -106,6 +106,11 @@ Shows a list of all persons in the address book.
 
 Format: `list`
 
+* All existing persons are automatically rendered when the application is launched
+* The different tags are listed as follows: yellow for education, blue for modules, orange for CCAs and red for internships
+* Personal details are listed in the following order: Phone number, Address, Email
+
+
 ### Editing a person : `edit` [coming in V1.2]
 
 Edits an existing person in the address book.
