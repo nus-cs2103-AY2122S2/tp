@@ -1,5 +1,5 @@
 @font-face {
-    src: url('NotoSans-Regular.ttf');
+    src: url('font/NotoSans-Regular.ttf');
 }
 
 * {
@@ -72,4 +72,28 @@
 
 .primary-button:pressed {
     -fx-background-color: #7d6de0;
+}
+
+.edit-button {
+    -fx-background-color: transparent;
+}
+
+.edit-button:hover {
+    -fx-background-color: #f4f5f6;
+}
+
+.edit-button:pressed {
+    -fx-background-color: #f1f2f3;
+}
+
+.delete-button {
+    -fx-background-color: transparent;
+}
+
+.delete-button:hover {
+    -fx-background-color: #f4f5f6;
+}
+
+.delete-button:pressed {
+    -fx-background-color: #f1f2f3;
 }

@@ -1,9 +1,9 @@
 @font-face {
-    src: url('NotoSans-Thin.ttf');
+    src: url('../font/NotoSans-Thin.ttf');
 }
 
 @font-face {
-    src: url('NotoSans-Regular.ttf');
+    src: url('../font/NotoSans-Regular.ttf');
 }
 
 .alert {
@@ -65,4 +65,32 @@
 
 .primary-button:pressed {
     -fx-background-color: #7d6de0;
+}
+
+.edit-button {
+    -fx-background-color: #FFE08A;
+    -fx-background-radius: 8;
+    -fx-text-fill: #000000b3;
+}
+
+.edit-button:hover {
+    -fx-background-color: #FFDC76;
+}
+
+.edit-button:pressed {
+    -fx-background-color: #ffd970;
+}
+
+.delete-button {
+    -fx-background-color: #f6416c;
+    -fx-background-radius: 8;
+    -fx-text-fill: #FFFFFF;
+}
+
+.delete-button:hover {
+    -fx-background-color: #e6315c;
+}
+
+.delete-button:pressed {
+    -fx-background-color: #e03957;
 }

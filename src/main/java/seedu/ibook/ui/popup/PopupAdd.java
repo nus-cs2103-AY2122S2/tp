@@ -1,24 +1,16 @@
-package seedu.ibook.ui;
+package seedu.ibook.ui.popup;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import seedu.ibook.logic.commands.AddCommand;
 import seedu.ibook.logic.parser.CliSyntax;
+import seedu.ibook.ui.MainWindow;
 
-import static java.util.Objects.requireNonNull;
 
-public class PopupAdd extends UiPart<Stage> {
+public class PopupAdd extends Popup {
 
-    private static final String FXML = "PopupAdd.fxml";
-
-    private final MainWindow.CommandExecutor commandExecutor;
-
-    @FXML
-    private Text error;
+    private static final String FXML = "popup/PopupAdd.fxml";
 
     @FXML
     private TextField name;
@@ -32,34 +24,9 @@ public class PopupAdd extends UiPart<Stage> {
     private TextArea description;
 
     public PopupAdd(MainWindow.CommandExecutor commandExecutor) {
-        super(FXML, new Stage());
-        this.commandExecutor = commandExecutor;
+        super(FXML, commandExecutor);
     }
 
-    void show() {
-        getRoot().show();
-    }
-
-    void hide() {
-        getRoot().hide();
-    }
-
-    boolean isShowing() {
-        return getRoot().isShowing();
-    }
-
-    void focus() {
-        getRoot().requestFocus();
-    }
-
-    void setFeedbackToUser(String feedbackToUser) {
-        requireNonNull(feedbackToUser);
-        error.setText(feedbackToUser);
-    }
-
-    /**
-     * Handles the Enter button pressed event.
-     */
     @FXML
     private void handleCreateProduct() {
         String commandText = AddCommand.COMMAND_WORD
@@ -74,7 +41,7 @@ public class PopupAdd extends UiPart<Stage> {
                 + " " + CliSyntax.PREFIX_DESCRIPTION.getPrefix()
                 + description.getText();
 
-        commandExecutor.execute(commandText);
+        execute(commandText);
     }
 
 }

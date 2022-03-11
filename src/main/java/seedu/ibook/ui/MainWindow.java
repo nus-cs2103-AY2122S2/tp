@@ -12,6 +12,9 @@ import seedu.ibook.logic.Logic;
 import seedu.ibook.logic.commands.CommandResult;
 import seedu.ibook.logic.commands.exceptions.CommandException;
 import seedu.ibook.logic.parser.exceptions.ParseException;
+import seedu.ibook.ui.popup.PopupAdd;
+import seedu.ibook.ui.popup.PopupDelete;
+import seedu.ibook.ui.popup.PopupUpdate;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -30,7 +33,10 @@ public class MainWindow extends UiPart<Stage> {
     private CommandBox commandBox;
     private ResultWindow resultWindow;
     private Table table;
+
     private PopupAdd popupAdd;
+    private PopupUpdate popupUpdate;
+    private PopupDelete popupDelete;
 
     @FXML
     private VBox mainContent;
@@ -44,8 +50,6 @@ public class MainWindow extends UiPart<Stage> {
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
-
-        popupAdd = new PopupAdd(this::executeCommand);
     }
 
     void show() {
@@ -70,16 +74,20 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         ObservableList<Node> children = mainContent.getChildren();
 
+        popupAdd = new PopupAdd(this::executeCommand);
+        popupUpdate = new PopupUpdate(this::executeCommand);
+        popupDelete = new PopupDelete(this::executeCommand);
+
         menuToolbar = new MenuToolbar();
         children.add(menuToolbar.getRoot());
 
-        commandBox = new CommandBox(this::executeCommand, this::showPopupAdd);
+        commandBox = new CommandBox(this::executeCommand, popupAdd);
         children.add(commandBox.getRoot());
 
         resultWindow = new ResultWindow();
         children.add(resultWindow.getRoot());
 
-        table = new Table(logic.getFilteredIBook());
+        table = new Table(logic.getFilteredIBook(), popupUpdate, popupDelete);
         children.add(table.getRoot());
     }
 
@@ -102,22 +110,25 @@ public class MainWindow extends UiPart<Stage> {
                 popupAdd.hide();
             }
 
+            if (popupUpdate.isShowing()) {
+                popupUpdate.hide();
+            }
+
+            if (popupDelete.isShowing()) {
+                popupDelete.hide();
+            }
+
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
             if (popupAdd.isShowing()) {
                 popupAdd.setFeedbackToUser(e.getMessage());
+            } else if (popupUpdate.isShowing()) {
+                popupUpdate.setFeedbackToUser(e.getMessage());
+            } else if (popupDelete.isShowing()) {
+                popupDelete.setFeedbackToUser(e.getMessage());
             } else {
                 resultWindow.setFeedbackToUser(e.getMessage());
             }
-
-        }
-    }
-
-    private void showPopupAdd() {
-        if (popupAdd.isShowing()) {
-            popupAdd.focus();
-        } else {
-            popupAdd.show();
         }
     }
 
@@ -134,8 +145,4 @@ public class MainWindow extends UiPart<Stage> {
         void execute(String commandText);
     }
 
-    @FunctionalInterface
-    public interface Popup {
-        void show();
-    }
 }

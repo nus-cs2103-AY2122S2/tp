@@ -3,13 +3,14 @@ package seedu.ibook.ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import seedu.ibook.ui.popup.PopupAdd;
 
 public class CommandBox extends UiPart<HBox> {
 
     private static final String FXML = "CommandBox.fxml";
 
     private final MainWindow.CommandExecutor commandExecutor;
-    private final MainWindow.Popup popup;
+    private final PopupAdd popupAdd;
 
     @FXML
     private TextField commandTextField;
@@ -18,10 +19,10 @@ public class CommandBox extends UiPart<HBox> {
      * Creates a {@code CommandBox} with the given {@code CommandExecutor}.
      */
     public CommandBox(MainWindow.CommandExecutor commandExecutor,
-                      MainWindow.Popup popup) {
+                      PopupAdd popupAdd) {
         super(FXML);
         this.commandExecutor = commandExecutor;
-        this.popup = popup;
+        this.popupAdd = popupAdd;
     }
 
     /**
@@ -39,8 +40,12 @@ public class CommandBox extends UiPart<HBox> {
     }
 
     @FXML
-    private void openPopup() {
-        popup.show();
+    private void handlePopupAdd() {
+        if (popupAdd.isShowing()) {
+            popupAdd.focus();
+        } else {
+            popupAdd.show();
+        }
     }
 
 }
