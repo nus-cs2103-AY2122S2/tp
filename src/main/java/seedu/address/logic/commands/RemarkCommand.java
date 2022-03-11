@@ -57,7 +57,7 @@ public class RemarkCommand extends Command {
         Client personToEdit = lastShownList.get(index.getZeroBased());
         Client editedPerson = new Client(
                 personToEdit.getName(), personToEdit.getDescription(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), remark, personToEdit.getTags());
+                personToEdit.getAddress(), remark, personToEdit.getAppointment(), personToEdit.getTags());
 
         model.setClient(personToEdit, editedPerson);
         model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);

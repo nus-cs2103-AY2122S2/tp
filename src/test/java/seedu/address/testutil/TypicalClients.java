@@ -2,6 +2,8 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
@@ -30,12 +32,12 @@ public class TypicalClients {
     public static final Client ALICE = new ClientBuilder().withName("Alice Pauline")
             .withDescription("A desc")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-            .withPhone("94351253").withRemark("Alice remark")
+            .withPhone("94351253").withRemark("Alice remark").withAppointment("2022-05-01-12-00")
             .withTags("friends").build();
     public static final Client BENSON = new ClientBuilder().withName("Benson Meier")
             .withDescription("B desc")
             .withAddress("311, Clementi Ave 2, #02-25").withEmail("johnd@example.com")
-            .withPhone("98765432").withRemark("Benson remark")
+            .withPhone("98765432").withRemark("Benson remark").withAppointment("2022-05-04-09-00")
             .withTags("owesMoney", "friends").build();
     public static final Client CARL = new ClientBuilder().withName("Carl Kurz")
             .withDescription("C desc").withPhone("95352563")
@@ -68,11 +70,11 @@ public class TypicalClients {
     public static final Client AMY = new ClientBuilder().withDescription(VALID_DESCRIPTION_AMY)
             .withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withRemark(VALID_REMARK_AMY)
-            .withTags(VALID_TAG_FRIEND).build();
+            .withAppointment(VALID_APPOINTMENT_AMY).withTags(VALID_TAG_FRIEND).build();
     public static final Client BOB = new ClientBuilder().withDescription(VALID_DESCRIPTION_BOB)
             .withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withRemark(VALID_REMARK_BOB)
-            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+            .withAppointment(VALID_APPOINTMENT_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

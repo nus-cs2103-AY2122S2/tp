@@ -43,6 +43,9 @@ public class CommandTestUtil {
     public static final String VALID_REMARK_AMY = "A remark";
     public static final String VALID_REMARK_BOB = "B remark";
 
+    public static final String VALID_APPOINTMENT_AMY = "2022-09-08-12-00";
+    public static final String VALID_APPOINTMENT_BOB = "2022-09-03-09-10";
+
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String DESC_DESC_AMY = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_AMY;
@@ -73,10 +76,11 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditClientDescriptorBuilder().withName(VALID_NAME_AMY).withDescription(VALID_DESCRIPTION_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_FRIEND).withRemark(VALID_REMARK_AMY).withAppointment(VALID_APPOINTMENT_AMY).build();
         DESC_BOB = new EditClientDescriptorBuilder().withName(VALID_NAME_BOB).withDescription(VALID_DESCRIPTION_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withRemark(VALID_REMARK_BOB)
+                .withAppointment(VALID_APPOINTMENT_BOB).build();
     }
 
     /**
