@@ -21,18 +21,22 @@ public class Applicant {
     private final Email email;
 
     // Data fields
+    private final Age age;
     private final Address address;
+    private final Gender gender;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Applicant(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Applicant(Name name, Phone phone, Email email, Age age, Address address, Gender gender,Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.age = age;
         this.address = address;
+        this.gender = gender;
         this.tags.addAll(tags);
     }
 
@@ -48,8 +52,16 @@ public class Applicant {
         return email;
     }
 
+    public Age getAge() {
+        return age;
+    }
+
     public Address getAddress() {
         return address;
+    }
+
+    public Gender getGender() {
+        return gender;
     }
 
     /**
@@ -91,7 +103,9 @@ public class Applicant {
         return otherApplicant.getName().equals(getName())
                 && otherApplicant.getPhone().equals(getPhone())
                 && otherApplicant.getEmail().equals(getEmail())
+                && otherApplicant.getAge().equals(getAge())
                 && otherApplicant.getAddress().equals(getAddress())
+                && otherApplicant.getGender().equals(getGender())
                 && otherApplicant.getTags().equals(getTags());
     }
 
