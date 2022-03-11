@@ -32,6 +32,7 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.parser.applicants.AddApplicantCommandParser;
 import seedu.address.model.applicant.Address;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.Email;
@@ -40,8 +41,8 @@ import seedu.address.model.applicant.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
-public class AddCommandParserTest {
-    private AddCommandParser parser = new AddCommandParser();
+public class AddApplicantCommandParserTest {
+    private AddApplicantCommandParser parser = new AddApplicantCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
