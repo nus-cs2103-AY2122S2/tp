@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EDUCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERNSHIP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -37,7 +38,7 @@ public class TagCommand extends Command {
             + PREFIX_INTERNSHIP + "GIC "
             + PREFIX_MODULE + "CS2040S";
     public static final String MESSAGE_ADD_TAG_SUCCESS = "Added tag to Person: %1$s";
-    public static final String MESSAGE_NO_PARAMETERS = "No fields specified! At least 1 field must be used.";
+    public static final String MESSAGE_NO_PARAMETERS = "At least 1 field must be used and not blank.";
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Education: %2$s, Internship: %3$s, Module: %4$s, "
             + "CCA: %5$s";
 
@@ -80,9 +81,8 @@ public class TagCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        if (educations.isEmpty() && internships.isEmpty() && modules.isEmpty() && ccas.isEmpty()) {
-            throw new CommandException(String.format(MESSAGE_ARGUMENTS, index.getOneBased(),
-                    educations, internships, modules, ccas));
+        if (isAllEmpty()) {
+            throw new CommandException(MESSAGE_NO_PARAMETERS);
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
@@ -91,19 +91,24 @@ public class TagCommand extends Command {
         Set<Tag> currModules = new HashSet<>(personToEdit.getModules());
         Set<Tag> currCcas = new HashSet<>(personToEdit.getCcas());
 
-        educations.addAll(currEducations);
-        internships.addAll(currInternships);
-        modules.addAll(currModules);
-        ccas.addAll(currCcas);
+        currEducations.addAll(educations);
+        currInternships.addAll(internships);
+        currModules.addAll(modules);
+        currCcas.addAll(ccas);
 
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(), personToEdit.getAddress(),
-                educations, internships, modules, ccas);
+                new ArrayList<>(currEducations), new ArrayList<>(currInternships),
+                new ArrayList<>(currModules), new ArrayList<>(currCcas));
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(generateSuccessMessage(editedPerson));
+    }
+
+    private boolean isAllEmpty() {
+        return educations.isEmpty() && internships.isEmpty() && modules.isEmpty() && ccas.isEmpty();
     }
 
     /**
