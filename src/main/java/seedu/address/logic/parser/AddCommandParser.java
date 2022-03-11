@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PREFERENCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROPERTY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_USERTYPE;
 
 import java.util.Optional;
 import java.util.Set;
@@ -20,8 +20,8 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.UserType;
 import seedu.address.model.property.Property;
-import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -36,9 +36,9 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_PROPERTY, PREFIX_PREFERENCE, PREFIX_TAG);
+                        PREFIX_PROPERTY, PREFIX_PREFERENCE, PREFIX_USERTYPE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_USERTYPE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -52,9 +52,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Optional<Property> preference = preferenceArg.isPresent()
                 ? Optional.of(ParserUtil.parseProperty(preferenceArg.get()))
                 : Optional.empty();
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        UserType userType = ParserUtil.parseUserType(argMultimap.getValue(PREFIX_USERTYPE).get());
 
-        Person person = new Person(name, phone, email, address, properties, preference, tagList);
+        Person person = new Person(name, phone, email, address, properties, preference, userType);
 
         return new AddCommand(person);
     }

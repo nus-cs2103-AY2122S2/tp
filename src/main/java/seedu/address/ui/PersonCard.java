@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
 import java.util.StringJoiner;
 
 import javafx.fxml.FXML;
@@ -45,9 +44,9 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label preference;
     @FXML
-    private FlowPane tags;
-    @FXML
     private Label favourite;
+    @FXML
+    private FlowPane userType;
 
     /**
      * Creates a {@code PersonCard} with the given {@code Person} and index to display.
@@ -61,6 +60,7 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         favourite.setText(person.getFavourite().toString());
+        userType.getChildren().add(new Label(person.getUserType().value));
 
         StringJoiner propertyJoiner = new StringJoiner("\n");
         person.getProperties().stream().map(Property::toString).forEach(propertyJoiner::add);
@@ -71,10 +71,6 @@ public class PersonCard extends UiPart<Region> {
         } else {
             preference.setVisible(false);
         }
-
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
     @Override

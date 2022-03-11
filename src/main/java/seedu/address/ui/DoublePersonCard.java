@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -28,7 +26,7 @@ public class DoublePersonCard extends UiPart<Region> {
     @FXML
     private Label preference;
     @FXML
-    private FlowPane tags;
+    private FlowPane userType;
 
     @FXML
     private Label name2;
@@ -43,7 +41,7 @@ public class DoublePersonCard extends UiPart<Region> {
     @FXML
     private Label preference2;
     @FXML
-    private FlowPane tags2;
+    private FlowPane userType2;
 
     /**
      * Creates a {@code DoublePersonCard} with the given two persons.
@@ -71,9 +69,7 @@ public class DoublePersonCard extends UiPart<Region> {
             preference.setVisible(false);
         }
 
-        seller.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        userType.getChildren().add(new Label(seller.getUserType().value));
 
         // buyer card
         name2.setText(buyer.getName().fullName);
@@ -93,8 +89,6 @@ public class DoublePersonCard extends UiPart<Region> {
             preference2.setVisible(false);
         }
 
-        buyer.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        userType2.getChildren().add(new Label(buyer.getUserType().value));
     }
 }

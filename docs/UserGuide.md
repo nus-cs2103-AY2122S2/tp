@@ -17,7 +17,7 @@ RealEstatePro is a desktop app for managing contacts, optimized for real estate 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.
 Some example commands you can try:
     - `list` : Lists all contacts.
-    - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` , contact number `98765432`, email `johnd@example.com` and address `street, block 123, #01-01` to the RealEstatePro app.
+    - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/buyer` : Adds a contact named `John Doe` , contact number `98765432`, email `johnd@example.com`, address `street, block 123, #01-01` and is a buyer to the RealEstatePro app.
     - `delete 3` : Deletes the 3rd contact shown in the current list.
     - `clear` : Deletes all contacts.
     - `exit` : Exits the app.
@@ -70,12 +70,12 @@ Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY]…, t/USER_TYPE`
 
-**Tip**: A person can be tagged as either a `Buyer`, or `Seller`.
+**Tip**: A person can be tagged as either a `buyer`, or `seller`.
 
 Examples:
 
-- `add n/John Doe p/98765432 e/johnd@example.com a/John street block 123 #01-01, pr/East, John street block 123 #01-01, 2-room, $200000, t/Buyer`
-- `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 pr/West, Newgate Prison, 1-room, $100000, t/Seller`
+- `add n/John Doe p/98765432 e/johnd@example.com a/John street block 123 #01-01, pr/East, John street block 123 #01-01, 2-room, $200000, t/buyer`
+- `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 pr/West, Newgate Prison, 1-room, $100000, t/seller`
 
 ### Listing all persons : `list`
 
@@ -189,14 +189,14 @@ RealEstatePro data are saved as a JSON file `[JAR file location]/data/realestat
 
 | Action | Format, Examples  |
 | --- | --- |
-| Add | add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY], t/USER_TYPE 
+| Add | add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY], t/USER_TYPE
 e.g., add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 pr/2-room, East, SGD$200K, t/Buyer    |
 | Clear | clear  |
-| Delete | delete INDEX 
+| Delete | delete INDEX
 e.g., delete 3  |
 | Edit | edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PROPERTY]… [t/USER_TYPE]    ​
 e.g., edit 2 n/James Lee e/jameslee@example.com |
-| Find | find KEYWORD [MORE_KEYWORDS] 
+| Find | find KEYWORD [MORE_KEYWORDS]
 e.g., find James Jake  |
 | List | list  |
 | Help | help  |

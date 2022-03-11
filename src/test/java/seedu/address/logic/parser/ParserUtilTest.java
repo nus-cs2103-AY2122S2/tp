@@ -18,18 +18,18 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.UserType;
 import seedu.address.model.property.Price;
 import seedu.address.model.property.Property;
 import seedu.address.model.property.Region;
 import seedu.address.model.property.Size;
-import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_USERTYPE = "client";
     private static final String INVALID_REGION = "northwest";
     private static final String INVALID_SIZE = "6-room";
     private static final String INVALID_PRICE = "100000";
@@ -41,8 +41,8 @@ public class ParserUtilTest {
     private static final String VALID_ADDRESS_1 = "123 Main Street #0505";
     private static final String VALID_ADDRESS_2 = "123 Main Avenue #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
-    private static final String VALID_TAG_1 = "friend";
-    private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_USERTYPE_1 = "buyer";
+    private static final String VALID_USERTYPE_2 = "seller";
     private static final String VALID_REGION_1 = "north";
     private static final String VALID_SIZE_1 = "1-room";
     private static final String VALID_PRICE_1 = "$100000";
@@ -169,49 +169,26 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTag_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseTag(null));
+    public void parseUserType_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseUserType(INVALID_USERTYPE));
     }
 
     @Test
-    public void parseTag_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_TAG));
+    public void parseUserType_validValueWithoutWhitespace_returnsUserType() throws Exception {
+        UserType expectedUserType = new UserType(VALID_USERTYPE_2);
+        assertEquals(expectedUserType, ParserUtil.parseUserType(VALID_USERTYPE_2));
     }
 
     @Test
-    public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
-        Tag expectedTag = new Tag(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseTag(VALID_TAG_1));
+    public void parseUserType_validValueWithWhitespace_returnsTrimmedUserType() throws Exception {
+        String tagWithWhitespace = WHITESPACE + VALID_USERTYPE_1 + WHITESPACE;
+        UserType expectedUserType = new UserType(VALID_USERTYPE_1);
+        assertEquals(expectedUserType, ParserUtil.parseUserType(tagWithWhitespace));
     }
 
     @Test
-    public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
-        String tagWithWhitespace = WHITESPACE + VALID_TAG_1 + WHITESPACE;
-        Tag expectedTag = new Tag(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseTag(tagWithWhitespace));
-    }
-
-    @Test
-    public void parseTags_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseTags(null));
-    }
-
-    @Test
-    public void parseTags_collectionWithInvalidTags_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, INVALID_TAG)));
-    }
-
-    @Test
-    public void parseTags_emptyCollection_returnsEmptySet() throws Exception {
-        assertTrue(ParserUtil.parseTags(Collections.emptyList()).isEmpty());
-    }
-
-    @Test
-    public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
-        Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
-
-        assertEquals(expectedTagSet, actualTagSet);
+    public void parseUserType_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseUserType(null));
     }
 
     @Test

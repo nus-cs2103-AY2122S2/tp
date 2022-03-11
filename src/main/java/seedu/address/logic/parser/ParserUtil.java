@@ -13,11 +13,11 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.UserType;
 import seedu.address.model.property.Price;
 import seedu.address.model.property.Property;
 import seedu.address.model.property.Region;
 import seedu.address.model.property.Size;
-import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -179,29 +179,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String userType} into a {@code UserType}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code userType} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+    public static UserType parseUserType(String userType) throws ParseException {
+        requireNonNull(userType);
+        String trimmedUserType = userType.trim();
+        if (!UserType.isValidUserType(trimmedUserType)) {
+            throw new ParseException(UserType.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return new UserType(trimmedUserType);
     }
 
-    /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
-     */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
-        }
-        return tagSet;
-    }
 }

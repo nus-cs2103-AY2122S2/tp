@@ -9,7 +9,7 @@
    <VBox prefWidth="200.0" HBox.hgrow="ALWAYS">
       <children>
          <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
-         <FlowPane fx:id="tags" />
+         <FlowPane fx:id="userType" />
          <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
          <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
          <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
@@ -20,7 +20,7 @@
    <VBox prefWidth="200.0" HBox.hgrow="ALWAYS">
       <children>
          <Label fx:id="name2" styleClass="cell_big_label" text="\$first" />
-         <FlowPane fx:id="tags2" />
+         <FlowPane fx:id="userType2" />
          <Label fx:id="phone2" styleClass="cell_small_label" text="\$phone" />
          <Label fx:id="address2" styleClass="cell_small_label" text="\$address" />
          <Label fx:id="email2" styleClass="cell_small_label" text="\$email" />

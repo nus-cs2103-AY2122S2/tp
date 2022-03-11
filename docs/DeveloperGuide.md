@@ -42,7 +42,7 @@ Step 3. User can access the `Favourite`Window by navigating to the menu item as 
 ## Property
 The `Property` is a new attribute that can be added to a `Person` that represents a real estate property listing. A `Person` is able to hold multiple properties including none.
 
-The `Property` itself consists of the following attributes: `Region`, `Address`, `Size`, `Price`. 
+The `Property` itself consists of the following attributes: `Region`, `Address`, `Size`, `Price`.
 
 - `Region` represents the general location of the `Address` of the `Property`. It is an enum that can be one of the following: `NORTH`, `SOUTH`, `EAST`, `WEST`, `CENTRAL`.
 
