@@ -136,12 +136,6 @@ public class MainWindow extends UiPart<Stage> {
         updateAndPopulateLessonList();
         updateAndPopulatePersonList();
 
-        // Load first student in list
-        if (logic.getFilteredStudentList().size() > 0) {
-            Student tempStudent = logic.getFilteredStudentList().get(0);
-            tempPopulateInfoPanelWithStudentAndList(tempStudent, logic.getFilteredLessonList());
-        }
-
         // Temporary lesson placeholder
         //Lesson tempLesson = logic.getFilteredLessonList().get(0);
         //tempPopulateInfoPanelWithLessonAndList(tempLesson, logic.getFilteredStudentList());
@@ -157,9 +151,9 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void updateAndPopulatePersonList() {
-        populateListPanelWithPeople(logic.getFilteredPersonList());
+        populateListPanelWithStudents(logic.getFilteredStudentList());
         // Temporary person placeholder
-        Person tempPerson = logic.getFilteredPersonList().get(0);
+        Student tempPerson = logic.getFilteredStudentList().get(0);
         // tempPopulateInfoPanelWithPersonAndList(tempPerson, logic.getFilteredLessonList());
     }
 
@@ -306,8 +300,8 @@ public class MainWindow extends UiPart<Stage> {
         lessonListPanelPlaceholder.getChildren().add(newListPanel.getRoot());
     }
 
-    private void populateListPanelWithPeople(ObservableList<Person> list) {
-        personListPanel = new PersonListPanel(list);
+    private void populateListPanelWithStudents(ObservableList<Student> list) {
+        personListPanel = new StudentListPanel(list);
         populatePersonListPanel(personListPanel);
     }
 
@@ -318,30 +312,13 @@ public class MainWindow extends UiPart<Stage> {
 
     private void populateInfoPanelWithStudent(Student selectedStudent) {
         infoPanel = new StudentInfoPanel(selectedStudent);
-        StudentInfoPanel studentInfoPanel = (StudentInfoPanel) infoPanel;
-        populateInfoPanel(studentInfoPanel);
+        StudentInfoPanel studentInfoPanel = (StudentInfoPanel) this.infoPanel;
+        populateInfoPanel(infoPanelPlaceholder, studentInfoPanel);
     }
 
     private void populateInfoPanelWithLesson(Lesson selectedLesson) {
         infoPanel = new LessonInfoPanel(selectedLesson);
         LessonInfoPanel lessonInfoPanel = (LessonInfoPanel) this.infoPanel;
-        populateInfoPanel(infoPanelPlaceholder, lessonInfoPanel);
-    }
-
-    // TODO: Temporary test method as Student does not contain list of lessons yet
-    private void tempPopulateInfoPanelWithStudentAndList(Student selectedStudent, ObservableList<Lesson> lessonList) {
-        infoPanel = new StudentInfoPanel(selectedStudent);
-        StudentInfoPanel studentInfoPanel = (StudentInfoPanel) infoPanel;
-        studentInfoPanel.setAssignedLessons(lessonList);
-        populateInfoPanel(studentInfoPanel);
-    }
-
-    // TODO: Temporary test method as Lesson does not contain list of students yet
-    private void tempPopulateInfoPanelWithLessonAndList(Lesson selectedLesson,
-                                                        ObservableList<Student> enrolledStudents) {
-        infoPanel = new LessonInfoPanel(selectedLesson);
-        LessonInfoPanel lessonInfoPanel = (LessonInfoPanel) this.infoPanel;
-        lessonInfoPanel.setEnrolledStudents(enrolledStudents);
         populateInfoPanel(infoPanelPlaceholder, lessonInfoPanel);
     }
 
