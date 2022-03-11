@@ -30,6 +30,7 @@ public class Email {
     private static final String DOMAIN_LAST_PART_REGEX = "(" + DOMAIN_PART_REGEX + "){2,}$"; // At least two chars
     private static final String DOMAIN_REGEX = "(" + DOMAIN_PART_REGEX + "\\.)*" + DOMAIN_LAST_PART_REGEX;
     public static final String VALIDATION_REGEX = LOCAL_PART_REGEX + "@" + DOMAIN_REGEX;
+    private static final String NUS_DOMAIN = "@u.nus.edu";
 
     public final String value;
 
@@ -40,8 +41,8 @@ public class Email {
      */
     public Email(String email) {
         requireNonNull(email);
-        checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
-        value = email;
+        //        checkArgument(isValidEmail(emailWithDomain), MESSAGE_CONSTRAINTS);
+        value = email + NUS_DOMAIN;
     }
 
     /**
