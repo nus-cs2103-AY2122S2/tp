@@ -20,6 +20,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Tag;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -122,6 +123,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
+        private List<Tag> tags;
 
         public EditPersonDescriptor() {}
 
@@ -134,6 +136,7 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setTags(toCopy.tags);
         }
 
         /**
@@ -175,6 +178,10 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
+        public void setTags(List<Tag> tags) { this.tags = tags; }
+
+        public Optional<List<Tag>> getTags() { return Optional.ofNullable(tags); }
+
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -193,7 +200,9 @@ public class EditCommand extends Command {
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
-                    && getAddress().equals(e.getAddress());
+                    && getAddress().equals(e.getAddress())
+                    //Need to check if equals is implemented correctly in the hashset
+                    && getTags().equals(e.getTags());
         }
     }
 }
