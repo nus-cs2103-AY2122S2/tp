@@ -39,6 +39,7 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private AddTagWindow addTagWindow;
+    private AddProfileWindow addProfileWindow;
 
 
     @FXML
@@ -79,6 +80,7 @@ public class MainWindow extends UiPart<Stage> {
 
         helpWindow = new HelpWindow();
         addTagWindow = new AddTagWindow(logic);
+        addProfileWindow = new AddProfileWindow(logic);
     }
 
     public Stage getPrimaryStage() {
@@ -178,6 +180,21 @@ public class MainWindow extends UiPart<Stage> {
             addTagWindow.focus();
         }
     }
+
+    /**
+     * Opens the add profile window or focuses on it if it's already opened
+     */
+    @FXML
+    public void handleAddProfile() {
+        if (!addProfileWindow.isShowing()) {
+            addProfileWindow.show();
+        } else {
+            addProfileWindow.focus();
+        }
+    }
+
+
+
 
     void show() {
         primaryStage.show();

@@ -36,7 +36,7 @@
             <MenuItem fx:id="editMenuItem" mnemonicParsing="false" text="Edit" />
           </Menu>
           <Menu mnemonicParsing="false" text="Add">
-            <MenuItem fx:id="addMenuItem" mnemonicParsing="false" text="Add" />
+            <MenuItem fx:id="addMenuItem" mnemonicParsing="false" onAction="#handleAddProfile" text="Add Profile" />
           </Menu>
           <Menu mnemonicParsing="false" text="New tag">
             <MenuItem fx:id="newTagMenuItem" mnemonicParsing="false" onAction="#handleAddTag" text="New Tag" />
