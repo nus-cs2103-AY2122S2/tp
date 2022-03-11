@@ -12,7 +12,8 @@ import seedu.address.model.group.Group;
  */
 public class TypicalGroups {
     public static final Group NUS_FINTECH_SOCIETY = new GroupBuilder().withGroupName("NUS Fintech Society").build();
-    public static final Group NUS_DATA_SCIENCE_SOCIETY = new GroupBuilder().withGroupName("NUS Data Science Society").build();
+    public static final Group NUS_DATA_SCIENCE_SOCIETY =
+            new GroupBuilder().withGroupName("NUS Data Science Society").build();
 
     /**
      * Returns an {@code AddressBook} with all the typical groups.

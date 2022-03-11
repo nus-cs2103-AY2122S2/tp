@@ -20,17 +20,17 @@ public class GroupTest {
         assertFalse(NUS_FINTECH_SOCIETY.isSameGroup(null));
 
         // same name -> returns true
-        Group editedNUSFintechSociety = new GroupBuilder(NUS_FINTECH_SOCIETY).build();
-        assertTrue(NUS_FINTECH_SOCIETY.isSameGroup(editedNUSFintechSociety));
+        Group editedNusFintechSociety = new GroupBuilder(NUS_FINTECH_SOCIETY).build();
+        assertTrue(NUS_FINTECH_SOCIETY.isSameGroup(editedNusFintechSociety));
 
         // different name -> returns false
-        editedNUSFintechSociety = new GroupBuilder(NUS_FINTECH_SOCIETY)
+        editedNusFintechSociety = new GroupBuilder(NUS_FINTECH_SOCIETY)
                 .withGroupName(VALID_GROUP_NAME_NUS_DATA_SCIENCE_SOCIETY).build();
-        assertFalse(NUS_FINTECH_SOCIETY.isSameGroup(editedNUSFintechSociety));
+        assertFalse(NUS_FINTECH_SOCIETY.isSameGroup(editedNusFintechSociety));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_GROUP_NAME_NUS_FINTECH_SOCIETY + " ";
-        editedNUSFintechSociety = new GroupBuilder(NUS_FINTECH_SOCIETY).withGroupName(nameWithTrailingSpaces).build();
-        assertFalse(NUS_FINTECH_SOCIETY.isSameGroup(editedNUSFintechSociety));
+        editedNusFintechSociety = new GroupBuilder(NUS_FINTECH_SOCIETY).withGroupName(nameWithTrailingSpaces).build();
+        assertFalse(NUS_FINTECH_SOCIETY.isSameGroup(editedNusFintechSociety));
     }
 }
