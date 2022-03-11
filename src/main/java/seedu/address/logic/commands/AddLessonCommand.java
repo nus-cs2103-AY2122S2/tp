@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION_MINUTES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -34,7 +33,7 @@ public class AddLessonCommand extends Command {
             + "[EXAMPLE]: "
             + "\n     "
             + COMMAND_WORD + " "
-            + PREFIX_STUDENT_NAME + " Sec 2 Biology Group Tuition "
+            + PREFIX_LESSON_NAME + " Sec 2 Biology Group Tuition "
             + PREFIX_SUBJECT + " Biology "
             + PREFIX_DATE + "19-12-2022 "
             + PREFIX_START_TIME + " 1800 "
