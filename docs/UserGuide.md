@@ -108,7 +108,7 @@ A student contact can have any number of tags (including 0)
 
 Example: 
 
-* `add n/John Doe p/12345678 e/johndoe@u.nus.edu a/Y2 Computer Science [t/optional]`
+* `add n/John Doe p/12345678 e/johndoe@u.nus.edu a/Computer Science [t/optional]`
 
 Expected outcome:
 
@@ -239,7 +239,7 @@ Action | Format, Examples
 
 Action | Format, Examples
 --------|------------------
-**Add student contact information** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ACADEMIC MAJOR [t/TAG]` <br> e.g., `add n/John Doe p/12345678 e/johndoe@u.nus.edu a/Y2 Computer Science [t/optional]`
+**Add student contact information** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ACADEMIC MAJOR [t/TAG]` <br> e.g., `add n/John Doe p/12345678 e/johndoe@u.nus.edu a/Computer Science [t/optional]`
 
 ### Student group management
 
