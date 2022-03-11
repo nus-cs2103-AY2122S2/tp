@@ -91,11 +91,11 @@ class AddToClipboardCommandTest {
             //This has to be implemented as automated testing on github does not have a "clipboard" to copy to,
             //so this test will be skipped.
             expectedModel.updateFilteredPersonList(predicate);
+            assertCommandSuccess(command, model, expectedMessage, expectedModel);
+            assertEquals(Arrays.asList(ELLE), model.getFilteredPersonList());
         } catch (HeadlessException e) {
             return;
         }
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ELLE), model.getFilteredPersonList());
     }
 
     /**
@@ -111,11 +111,11 @@ class AddToClipboardCommandTest {
             //This has to be implemented as automated testing on github does not have a "clipboard" to copy to,
             //so this test will be skipped.
             expectedModel.updateFilteredPersonList(predicate);
+            assertCommandSuccess(command, model, expectedMessage, expectedModel);
+            assertEquals(Collections.emptyList(), model.getFilteredPersonList());
         } catch (HeadlessException e) {
             return;
         }
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
 
     /**
