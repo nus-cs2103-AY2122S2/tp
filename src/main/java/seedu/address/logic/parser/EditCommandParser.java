@@ -2,26 +2,22 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CCA;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EDUCATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERNSHIP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+
+import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
-
-import java.sql.Array;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -65,7 +61,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setCcas(cca);
         }
         if (argMultimap.getValue(PREFIX_EDUCATION).isPresent()) {
-            List<Tag> education = ParserUtil.parseTagsForEdit(argMultimap.getAllValues(PREFIX_EDUCATION), Tag.EDUCATION);
+            List<Tag> education = ParserUtil.parseTagsForEdit(argMultimap.getAllValues(PREFIX_EDUCATION),
+                    Tag.EDUCATION);
             editPersonDescriptor.setEducations(education);
         }
         if (argMultimap.getValue(PREFIX_MODULE).isPresent()) {
@@ -73,7 +70,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setModules(module);
         }
         if (argMultimap.getValue(PREFIX_INTERNSHIP).isPresent()) {
-            List<Tag> internship = ParserUtil.parseTagsForEdit(argMultimap.getAllValues(PREFIX_INTERNSHIP), Tag.INTERNSHIP);
+            List<Tag> internship = ParserUtil.parseTagsForEdit(argMultimap.getAllValues(PREFIX_INTERNSHIP),
+                    Tag.INTERNSHIP);
             editPersonDescriptor.setInternships(internship);
         }
 
