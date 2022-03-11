@@ -39,7 +39,7 @@ public class TagCommand extends Command {
             + PREFIX_MODULE + "CS2040S";
     public static final String MESSAGE_ADD_TAG_SUCCESS = "Added tag to Person: %1$s";
     public static final String MESSAGE_NO_PARAMETERS = "At least 1 field must be used and not blank.";
-    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Education: %2$s, Internship: %3$s, Module: %4$s, "
+    public static final String MESSAGE_ARGUMENTS = "Name: %1$s, Education: %2$s, Internship: %3$s, Module: %4$s, "
             + "CCA: %5$s";
 
     private final Index index;
@@ -63,14 +63,6 @@ public class TagCommand extends Command {
         this.internships = internship;
         this.modules = module;
         this.ccas = cca;
-    }
-
-    private static String convertToString(List<Tag> lst) {
-        if (lst.size() == 0) {
-            return "";
-        } else {
-            return Arrays.toString(lst.toArray());
-        }
     }
 
     @Override
@@ -117,8 +109,12 @@ public class TagCommand extends Command {
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        String message = MESSAGE_ADD_TAG_SUCCESS;
-        return String.format(message, personToEdit);
+        return String.format(MESSAGE_ARGUMENTS,
+                    personToEdit.getName(),
+                    personToEdit.getEducations(),
+                    personToEdit.getInternships(),
+                    personToEdit.getModules(),
+                    personToEdit.getCcas());
     }
 
     @Override
