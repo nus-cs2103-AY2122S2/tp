@@ -130,7 +130,7 @@ public class Person {
         if (buyer.preference.isEmpty()) {
             return false;
         }
-        return property.get().equals(buyer.preference.get());
+        return property.get().matches(buyer.preference.get());
     }
 
     /**
