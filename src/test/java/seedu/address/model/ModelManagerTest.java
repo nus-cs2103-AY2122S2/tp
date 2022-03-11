@@ -95,7 +95,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(BOBA).withPerson(PIZZA).build();
+        AddressBook addressBook = new AddressBookBuilder().withPet(BOBA).withPet(PIZZA).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
