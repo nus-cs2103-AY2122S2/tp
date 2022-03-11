@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.client.Address;
+import seedu.address.model.client.Appointment;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.Description;
 import seedu.address.model.client.Email;
@@ -24,6 +25,7 @@ public class ClientBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_REMARK = "Amy remark";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_APPOINTMENT = "2022-05-01-12-00";
 
     private Name name;
     private Description description;
@@ -32,6 +34,7 @@ public class ClientBuilder {
     private Address address;
     private Remark remark;
     private Set<Tag> tags;
+    private Appointment appointment;
 
     /**
      * Creates a {@code clientBuilder} with the default details.
@@ -43,6 +46,7 @@ public class ClientBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         remark = new Remark(DEFAULT_REMARK);
+        appointment = new Appointment(DEFAULT_APPOINTMENT);
         tags = new HashSet<>();
     }
 
@@ -56,6 +60,7 @@ public class ClientBuilder {
         email = clientToCopy.getEmail();
         address = clientToCopy.getAddress();
         remark = clientToCopy.getRemark();
+        appointment = clientToCopy.getAppointment();
         tags = new HashSet<>(clientToCopy.getTags());
     }
 
@@ -115,8 +120,16 @@ public class ClientBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Appointment} of the {@code client} that we are building.
+     */
+    public ClientBuilder withAppointment(String appointment) {
+        this.appointment = new Appointment(appointment);
+        return this;
+    }
+
     public Client build() {
-        return new Client(name, description, phone, email, address, remark, tags);
+        return new Client(name, description, phone, email, address, remark, appointment, tags);
     }
 
 }

@@ -41,10 +41,9 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_CLIENT, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CLIENT_SUCCESS, editedClient);
-
+        System.out.println(expectedMessage);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setClient(model.getFilteredClientList().get(0), editedClient);
-
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 

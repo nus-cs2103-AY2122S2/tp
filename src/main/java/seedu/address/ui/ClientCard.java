@@ -44,6 +44,8 @@ public class ClientCard extends UiPart<Region> {
     private Label remark;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label appointment;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -58,6 +60,7 @@ public class ClientCard extends UiPart<Region> {
         address.setText(client.getAddress().value);
         email.setText(client.getEmail().value);
         remark.setText(client.getRemark().value);
+        appointment.setText(client.getAppointment().getTimeInString());
         client.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

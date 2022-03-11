@@ -24,13 +24,14 @@ public class Client {
     // Data fields
     private final Address address;
     private final Remark remark;
+    private final Appointment appointment;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Client(Name name, Description description, Phone phone, Email email, Address address, Remark remark,
-                  Set<Tag> tags) {
+                  Appointment appointment, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, remark, tags);
         this.name = name;
         this.description = description;
@@ -39,6 +40,7 @@ public class Client {
         this.address = address;
         this.remark = remark;
         this.tags.addAll(tags);
+        this.appointment = appointment;
     }
 
     public Name getName() {
@@ -63,6 +65,10 @@ public class Client {
 
     public Remark getRemark() {
         return remark;
+    }
+
+    public Appointment getAppointment() {
+        return appointment;
     }
 
     /**
@@ -129,7 +135,9 @@ public class Client {
                 .append("; Address: ")
                 .append(getAddress())
                 .append("; Remark")
-                .append(getRemark());
+                .append(getRemark())
+                .append("; Appointment: ")
+                .append(getAppointment());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

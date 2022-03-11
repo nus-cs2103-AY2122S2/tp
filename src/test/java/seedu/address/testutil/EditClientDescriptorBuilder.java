@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditclientDescriptor;
 import seedu.address.model.client.Address;
+import seedu.address.model.client.Appointment;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.Description;
 import seedu.address.model.client.Email;
@@ -41,6 +42,7 @@ public class EditClientDescriptorBuilder {
         descriptor.setAddress(client.getAddress());
         descriptor.setRemark(client.getRemark());
         descriptor.setTags(client.getTags());
+        descriptor.setAppointment(client.getAppointment());
     }
 
     /**
@@ -88,6 +90,14 @@ public class EditClientDescriptorBuilder {
      */
     public EditClientDescriptorBuilder withRemark(String remark) {
         descriptor.setRemark(new Remark(remark));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Appointment} of the {@code EditclientDescriptor} that we are building.
+     */
+    public EditClientDescriptorBuilder withAppointment(String appointment) {
+        descriptor.setAppointment(new Appointment(appointment));
         return this;
     }
 

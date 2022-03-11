@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.client.Address;
+import seedu.address.model.client.Appointment;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.Description;
 import seedu.address.model.client.Email;
@@ -32,6 +33,7 @@ class JsonAdaptedClient {
     private final String email;
     private final String address;
     private final String remark;
+    private final String appointment;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -41,7 +43,8 @@ class JsonAdaptedClient {
     public JsonAdaptedClient(@JsonProperty("name") String name, @JsonProperty("description") String description,
             @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("remark") String remark, @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("remark") String remark, @JsonProperty("appointment") String appointment,
+            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.description = description;
         this.phone = phone;
@@ -50,6 +53,7 @@ class JsonAdaptedClient {
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
+        this.appointment = appointment;
         this.remark = remark;
     }
 
@@ -66,6 +70,7 @@ class JsonAdaptedClient {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         remark = source.getRemark().value;
+        appointment = source.getAppointment().value;
     }
 
     /**
@@ -127,8 +132,16 @@ class JsonAdaptedClient {
         final Address modelAddress = new Address(address);
         final Remark modelRemark = new Remark(remark);
 
+        if (appointment == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Appointment.class.getSimpleName()));
+        }
+
+        final Appointment modelAppointment = new Appointment(appointment);
+
         final Set<Tag> modelTags = new HashSet<>(clientTags);
-        return new Client(modelName, modelDescription, modelPhone, modelEmail, modelAddress, modelRemark, modelTags);
+        return new Client(modelName, modelDescription, modelPhone,
+                modelEmail, modelAddress, modelRemark, modelAppointment, modelTags);
     }
 
 }
