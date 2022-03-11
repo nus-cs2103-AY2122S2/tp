@@ -2,10 +2,14 @@ package seedu.trackbeau.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_ALLERGIES;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_HAIRTYPE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SERVICES;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SKINTYPE;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_STAFFS;
 
 import seedu.trackbeau.logic.commands.exceptions.CommandException;
 import seedu.trackbeau.model.Model;
@@ -24,14 +28,21 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_SKINTYPE + "SKIN TYPE]\n"
+            + "[" + PREFIX_HAIRTYPE + "HAIR TYPE]\n"
+            + "[" + PREFIX_STAFFS + "STAFFS]...\n"
+            + "[" + PREFIX_SERVICES + "SERVICES]...\n"
+            + "[" + PREFIX_ALLERGIES + "ALLERGIES]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_SKINTYPE + "oily "
+            + PREFIX_HAIRTYPE + "coiled "
+            + PREFIX_STAFFS + "Jason "
+            + PREFIX_SERVICES + "Acne treatment "
+            + PREFIX_ALLERGIES + "Nickel";
 
     public static final String MESSAGE_SUCCESS = "New customer added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This customer already exists in TrackBeau";

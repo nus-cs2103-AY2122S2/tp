@@ -55,14 +55,14 @@ public class StorageManagerTest {
          * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
          */
         TrackBeau original = getTypicalAddressBook();
-        storageManager.saveAddressBook(original);
-        ReadOnlyTrackBeau retrieved = storageManager.readAddressBook().get();
+        storageManager.saveTrackBeau(original);
+        ReadOnlyTrackBeau retrieved = storageManager.readTrackBeau().get();
         assertEquals(original, new TrackBeau(retrieved));
     }
 
     @Test
     public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+        assertNotNull(storageManager.getTrackBeauFilePath());
     }
 
 }

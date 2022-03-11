@@ -2,10 +2,14 @@ package seedu.trackbeau.logic.parser;
 
 import static seedu.trackbeau.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_ALLERGIES;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_HAIRTYPE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SERVICES;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SKINTYPE;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_STAFFS;
 
 import java.util.Set;
 import java.util.stream.Stream;
@@ -15,14 +19,18 @@ import seedu.trackbeau.logic.parser.exceptions.ParseException;
 import seedu.trackbeau.model.customer.Address;
 import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.model.customer.Email;
+import seedu.trackbeau.model.customer.HairType;
 import seedu.trackbeau.model.customer.Name;
 import seedu.trackbeau.model.customer.Phone;
+import seedu.trackbeau.model.customer.SkinType;
 import seedu.trackbeau.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new AddCommand object
  */
 public class AddCommandParser implements Parser<AddCommand> {
+    protected static final String EMPTY_SKIN_TYPE = "Skin type data not available";
+    protected static final String EMPTY_HAIR_TYPE = "Hair type data not available";
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
@@ -31,7 +39,8 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                        PREFIX_SKINTYPE, PREFIX_HAIRTYPE, PREFIX_STAFFS, PREFIX_SERVICES, PREFIX_ALLERGIES);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -42,9 +51,21 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        SkinType skinType = new SkinType(EMPTY_SKIN_TYPE);
+        if (argMultimap.getValue(PREFIX_SKINTYPE).isPresent()) {
+            skinType = ParserUtil.parseSkinType(argMultimap.getValue(PREFIX_SKINTYPE).get());
+        }
+        HairType hairType = new HairType((EMPTY_HAIR_TYPE));
+        if (argMultimap.getValue(PREFIX_HAIRTYPE).isPresent()) {
+            hairType = ParserUtil.parseHairType(argMultimap.getValue(PREFIX_HAIRTYPE).get());
+        }
+        Set<Tag> staffList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_STAFFS));
+        Set<Tag> serviceList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_SERVICES));
+        Set<Tag> allergyList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_ALLERGIES));
 
-        Customer customer = new Customer(name, phone, email, address, tagList);
+        Customer customer = new Customer(name, phone, email,
+                address, skinType, hairType, staffList,
+                serviceList, allergyList);
 
         return new AddCommand(customer);
     }

@@ -49,30 +49,30 @@ public class StorageManager implements Storage {
     // ================ TrackBeau methods ==============================
 
     @Override
-    public Path getAddressBookFilePath() {
-        return trackBeauStorage.getAddressBookFilePath();
+    public Path getTrackBeauFilePath() {
+        return trackBeauStorage.getTrackBeauFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyTrackBeau> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(trackBeauStorage.getAddressBookFilePath());
+    public Optional<ReadOnlyTrackBeau> readTrackBeau() throws DataConversionException, IOException {
+        return readTrackBeau(trackBeauStorage.getTrackBeauFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyTrackBeau> readAddressBook(Path filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyTrackBeau> readTrackBeau(Path filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return trackBeauStorage.readAddressBook(filePath);
+        return trackBeauStorage.readTrackBeau(filePath);
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyTrackBeau addressBook) throws IOException {
-        saveAddressBook(addressBook, trackBeauStorage.getAddressBookFilePath());
+    public void saveTrackBeau(ReadOnlyTrackBeau trackBeau) throws IOException {
+        saveTrackBeau(trackBeau, trackBeauStorage.getTrackBeauFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyTrackBeau addressBook, Path filePath) throws IOException {
+    public void saveTrackBeau(ReadOnlyTrackBeau trackBeau, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        trackBeauStorage.saveAddressBook(addressBook, filePath);
+        trackBeauStorage.saveTrackBeau(trackBeau, filePath);
     }
 
 }

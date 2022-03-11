@@ -17,17 +17,17 @@ import seedu.trackbeau.model.customer.Customer;
  * An Immutable TrackBeau that is serializable to JSON format.
  */
 @JsonRootName(value = "addressbook")
-class JsonSerializableAddressBook {
+class JsonSerializableTrackBeau {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate customer(s).";
 
-    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedCustomer> persons = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given persons.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
+    public JsonSerializableTrackBeau(@JsonProperty("persons") List<JsonAdaptedCustomer> persons) {
         this.persons.addAll(persons);
     }
 
@@ -36,8 +36,8 @@ class JsonSerializableAddressBook {
      *
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
-    public JsonSerializableAddressBook(ReadOnlyTrackBeau source) {
-        persons.addAll(source.getCustomerList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+    public JsonSerializableTrackBeau(ReadOnlyTrackBeau source) {
+        persons.addAll(source.getCustomerList().stream().map(JsonAdaptedCustomer::new).collect(Collectors.toList()));
     }
 
     /**
@@ -46,15 +46,15 @@ class JsonSerializableAddressBook {
      * @throws IllegalValueException if there were any data constraints violated.
      */
     public TrackBeau toModelType() throws IllegalValueException {
-        TrackBeau addressBook = new TrackBeau();
-        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Customer customer = jsonAdaptedPerson.toModelType();
-            if (addressBook.hasPerson(customer)) {
+        TrackBeau trackBeau = new TrackBeau();
+        for (JsonAdaptedCustomer jsonAdaptedCustomer : persons) {
+            Customer customer = jsonAdaptedCustomer.toModelType();
+            if (trackBeau.hasCustomer(customer)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            addressBook.addPerson(customer);
+            trackBeau.addCustomer(customer);
         }
-        return addressBook;
+        return trackBeau;
     }
 
 }

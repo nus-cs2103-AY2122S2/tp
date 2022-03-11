@@ -61,7 +61,7 @@ public class TrackBeau implements ReadOnlyTrackBeau {
     /**
      * Returns true if a customer with the same identity as {@code customer} exists in trackbeau.
      */
-    public boolean hasPerson(Customer customer) {
+    public boolean hasCustomer(Customer customer) {
         requireNonNull(customer);
         return customers.contains(customer);
     }
@@ -70,7 +70,7 @@ public class TrackBeau implements ReadOnlyTrackBeau {
      * Adds a customer to trackbeau.
      * The customer must not already exist in trackbeau.
      */
-    public void addPerson(Customer p) {
+    public void addCustomer(Customer p) {
         customers.add(p);
     }
 
@@ -79,7 +79,7 @@ public class TrackBeau implements ReadOnlyTrackBeau {
      * {@code target} must exist in trackbeau.
      * The customer identity of {@code editedCustomer} must not be the same as another existing customer in trackbeau.
      */
-    public void setPerson(Customer target, Customer editedCustomer) {
+    public void setCustomer(Customer target, Customer editedCustomer) {
         requireNonNull(editedCustomer);
 
         customers.setCustomer(target, editedCustomer);

@@ -27,32 +27,32 @@ public class JsonTrackBeauStorage implements TrackBeauStorage {
         this.filePath = filePath;
     }
 
-    public Path getAddressBookFilePath() {
+    public Path getTrackBeauFilePath() {
         return filePath;
     }
 
     @Override
-    public Optional<ReadOnlyTrackBeau> readAddressBook() throws DataConversionException {
-        return readAddressBook(filePath);
+    public Optional<ReadOnlyTrackBeau> readTrackBeau() throws DataConversionException {
+        return readTrackBeau(filePath);
     }
 
     /**
-     * Similar to {@link #readAddressBook()}.
+     * Similar to {@link #readTrackBeau()}.
      *
      * @param filePath location of the data. Cannot be null.
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyTrackBeau> readAddressBook(Path filePath) throws DataConversionException {
+    public Optional<ReadOnlyTrackBeau> readTrackBeau(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableAddressBook> jsonAddressBook = JsonUtil.readJsonFile(
-                filePath, JsonSerializableAddressBook.class);
-        if (!jsonAddressBook.isPresent()) {
+        Optional<JsonSerializableTrackBeau> jsonTrackBeau = JsonUtil.readJsonFile(
+                filePath, JsonSerializableTrackBeau.class);
+        if (!jsonTrackBeau.isPresent()) {
             return Optional.empty();
         }
 
         try {
-            return Optional.of(jsonAddressBook.get().toModelType());
+            return Optional.of(jsonTrackBeau.get().toModelType());
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);
@@ -60,21 +60,21 @@ public class JsonTrackBeauStorage implements TrackBeauStorage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyTrackBeau addressBook) throws IOException {
-        saveAddressBook(addressBook, filePath);
+    public void saveTrackBeau(ReadOnlyTrackBeau addressBook) throws IOException {
+        saveTrackBeau(addressBook, filePath);
     }
 
     /**
-     * Similar to {@link #saveAddressBook(ReadOnlyTrackBeau)}.
+     * Similar to {@link #saveTrackBeau(ReadOnlyTrackBeau)}.
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveAddressBook(ReadOnlyTrackBeau addressBook, Path filePath) throws IOException {
+    public void saveTrackBeau(ReadOnlyTrackBeau addressBook, Path filePath) throws IOException {
         requireNonNull(addressBook);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableTrackBeau(addressBook), filePath);
     }
 
 }

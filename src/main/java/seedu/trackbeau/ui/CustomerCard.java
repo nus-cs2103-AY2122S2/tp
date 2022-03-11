@@ -39,7 +39,15 @@ public class CustomerCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private FlowPane tags;
+    private Label skinType;
+    @FXML
+    private Label hairType;
+    @FXML
+    private FlowPane staffs;
+    @FXML
+    private FlowPane services;
+    @FXML
+    private FlowPane allergies;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -52,9 +60,17 @@ public class CustomerCard extends UiPart<Region> {
         phone.setText(customer.getPhone().value);
         address.setText(customer.getAddress().value);
         email.setText(customer.getEmail().value);
-        customer.getTags().stream()
+        skinType.setText("Skin Type: " + customer.getSkinType().value);
+        hairType.setText("Hair Type: " + customer.getHairType().value);
+        customer.getServices().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> services.getChildren().add(new Label(tag.tagName)));
+        customer.getStaffs().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> staffs.getChildren().add(new Label(tag.tagName)));
+        customer.getAllergies().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> allergies.getChildren().add(new Label(tag.tagName)));
     }
 
     @Override

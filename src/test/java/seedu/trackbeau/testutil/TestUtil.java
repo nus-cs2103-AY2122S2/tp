@@ -49,7 +49,7 @@ public class TestUtil {
     /**
      * Returns the customer in the {@code model}'s customer list at {@code index}.
      */
-    public static Customer getPerson(Model model, Index index) {
+    public static Customer getCustomer(Model model, Index index) {
         return model.getFilteredCustomerList().get(index.getZeroBased());
     }
 }

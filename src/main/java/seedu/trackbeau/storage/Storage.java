@@ -21,12 +21,12 @@ public interface Storage extends TrackBeauStorage, UserPrefsStorage {
     void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException;
 
     @Override
-    Path getAddressBookFilePath();
+    Path getTrackBeauFilePath();
 
     @Override
-    Optional<ReadOnlyTrackBeau> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyTrackBeau> readTrackBeau() throws DataConversionException, IOException;
 
     @Override
-    void saveAddressBook(ReadOnlyTrackBeau addressBook) throws IOException;
+    void saveTrackBeau(ReadOnlyTrackBeau addressBook) throws IOException;
 
 }

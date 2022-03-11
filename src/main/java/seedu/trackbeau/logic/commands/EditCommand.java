@@ -2,10 +2,14 @@ package seedu.trackbeau.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_ALLERGIES;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_HAIRTYPE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SERVICES;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SKINTYPE;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_STAFFS;
 import static seedu.trackbeau.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -22,8 +26,10 @@ import seedu.trackbeau.model.Model;
 import seedu.trackbeau.model.customer.Address;
 import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.model.customer.Email;
+import seedu.trackbeau.model.customer.HairType;
 import seedu.trackbeau.model.customer.Name;
 import seedu.trackbeau.model.customer.Phone;
+import seedu.trackbeau.model.customer.SkinType;
 import seedu.trackbeau.model.tag.Tag;
 
 /**
@@ -41,7 +47,11 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_SKINTYPE + "SKIN TYPE]\n"
+            + "[" + PREFIX_HAIRTYPE + "HAIR TYPE]\n"
+            + "[" + PREFIX_STAFFS + "STAFFS]...\n"
+            + "[" + PREFIX_SERVICES + "SERVICES]...\n"
+            + "[" + PREFIX_ALLERGIES + "ALLERGIES]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -97,9 +107,14 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(customerToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(customerToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(customerToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(customerToEdit.getTags());
+        SkinType updatedSkinType = editPersonDescriptor.getSkinType().orElse(customerToEdit.getSkinType());
+        HairType updatedHairType = editPersonDescriptor.getHairType().orElse(customerToEdit.getHairType());
+        Set<Tag> updatedStaffs = editPersonDescriptor.getStaffs().orElse(customerToEdit.getStaffs());
+        Set<Tag> updatedServices = editPersonDescriptor.getServices().orElse(customerToEdit.getServices());
+        Set<Tag> updatedAllergies = editPersonDescriptor.getAllergies().orElse(customerToEdit.getAllergies());
 
-        return new Customer(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Customer(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedSkinType, updatedHairType,
+                updatedStaffs, updatedServices, updatedAllergies);
     }
 
     @Override
@@ -129,7 +144,11 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
-        private Set<Tag> tags;
+        private SkinType skinType;
+        private HairType hairType;
+        private Set<Tag> staffs;
+        private Set<Tag> services;
+        private Set<Tag> allergies;
 
         public EditPersonDescriptor() {}
 
@@ -142,14 +161,17 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setTags(toCopy.tags);
+            setStaffs(toCopy.staffs);
+            setServices(toCopy.services);
+            setAllergies(toCopy.allergies);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address,
+                    skinType, hairType, staffs, services, allergies);
         }
 
         public void setName(Name name) {
@@ -184,21 +206,71 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
+        public void setSkinType(SkinType skinType) {
+            this.skinType = skinType;
+        }
+
+        public Optional<SkinType> getSkinType() {
+            return Optional.ofNullable(skinType);
+        }
+
+        public void setHairType(HairType hairType) {
+            this.hairType = hairType;
+        }
+
+        public Optional<HairType> getHairType() {
+            return Optional.ofNullable(hairType);
+        }
+
         /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
+         * Sets {@code staffs} to this object's {@code staffs}.
+         * A defensive copy of {@code staffs} is used internally.
          */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setStaffs(Set<Tag> staffs) {
+            this.staffs = (staffs != null) ? new HashSet<>(staffs) : null;
         }
 
         /**
          * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns {@code Optional#empty()} if {@code staffs} is null.
          */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public Optional<Set<Tag>> getStaffs() {
+            return (staffs != null) ? Optional.of(Collections.unmodifiableSet(staffs)) : Optional.empty();
+        }
+
+        /**
+         * Sets {@code services} to this object's {@code services}.
+         * A defensive copy of {@code services} is used internally.
+         */
+        public void setServices(Set<Tag> services) {
+            this.services = (services != null) ? new HashSet<>(services) : null;
+        }
+
+        /**
+         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code services} is null.
+         */
+        public Optional<Set<Tag>> getServices() {
+            return (services != null) ? Optional.of(Collections.unmodifiableSet(services)) : Optional.empty();
+        }
+
+        /**
+         * Sets {@code allergies} to this object's {@code allergies}.
+         * A defensive copy of {@code services} is used internally.
+         */
+        public void setAllergies(Set<Tag> allergies) {
+            this.allergies = (allergies != null) ? new HashSet<>(allergies) : null;
+        }
+
+        /**
+         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code allergies} is null.
+         */
+        public Optional<Set<Tag>> getAllergies() {
+            return (allergies != null) ? Optional.of(Collections.unmodifiableSet(allergies)) : Optional.empty();
         }
 
         @Override
@@ -220,7 +292,11 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
-                    && getTags().equals(e.getTags());
+                    && getSkinType().equals(e.getSkinType())
+                    && getHairType().equals(e.getHairType())
+                    && getStaffs().equals(e.getStaffs())
+                    && getServices().equals(e.getServices())
+                    && getAllergies().equals(e.getAllergies());
         }
     }
 }
