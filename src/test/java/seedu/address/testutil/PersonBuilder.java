@@ -30,6 +30,7 @@ public class PersonBuilder {
     private Address address;
     private Favourite favourite;
     private Optional<Property> property;
+    private Optional<Property> preference;
     private Set<Tag> tags;
 
     /**
@@ -42,6 +43,7 @@ public class PersonBuilder {
         favourite = new Favourite(false);
         address = new Address(DEFAULT_ADDRESS);
         property = Optional.empty();
+        preference = Optional.empty();
         tags = new HashSet<>();
     }
 
@@ -55,6 +57,7 @@ public class PersonBuilder {
         favourite = personToCopy.getFavourite();
         address = personToCopy.getAddress();
         property = personToCopy.getProperty();
+        preference = personToCopy.getPreference();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -107,7 +110,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, favourite, address, property, tags);
+        return new Person(name, phone, email, favourite, address, property, preference, tags);
     }
 
 }

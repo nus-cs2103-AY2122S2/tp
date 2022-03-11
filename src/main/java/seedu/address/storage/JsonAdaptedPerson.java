@@ -33,6 +33,7 @@ class JsonAdaptedPerson {
     private final boolean favourite;
     private final String address;
     private final JsonAdaptedProperty property;
+    private final JsonAdaptedProperty preference;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -41,7 +42,9 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("favourite") boolean favourite,
-            @JsonProperty("address") String address, @JsonProperty("property") JsonAdaptedProperty property,
+            @JsonProperty("address") String address,
+            @JsonProperty("property") JsonAdaptedProperty property,
+            @JsonProperty("preference") JsonAdaptedProperty preference,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
@@ -49,6 +52,7 @@ class JsonAdaptedPerson {
         this.favourite = favourite;
         this.address = address;
         this.property = property;
+        this.preference = preference;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -64,6 +68,7 @@ class JsonAdaptedPerson {
         favourite = source.getFavourite().getStatus();
         address = source.getAddress().value;
         property = source.getProperty().isPresent() ? new JsonAdaptedProperty(source.getProperty().get()) : null;
+        preference = source.getPreference().isPresent() ? new JsonAdaptedProperty(source.getPreference().get()) : null;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -82,6 +87,9 @@ class JsonAdaptedPerson {
 
         final Optional<Property> modelProperty =
                 property != null ? Optional.of(property.toModelType()) : Optional.empty();
+
+        final Optional<Property> modelPreference =
+                preference != null ? Optional.of(preference.toModelType()) : Optional.empty();
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -119,7 +127,9 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelFavourite, modelAddress, modelProperty, modelTags);
+
+        return new Person(modelName, modelPhone, modelEmail, modelFavourite,
+                modelAddress, modelProperty, modelPreference, modelTags);
     }
 
 }

@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PREFERENCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROPERTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -35,7 +36,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_PROPERTY, PREFIX_TAG);
+                        PREFIX_PROPERTY, PREFIX_PREFERENCE, PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -45,13 +46,19 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        // property is optional since it should not be present if the person being added is a buyer
+        // property is optional since it should not be present if the person being added is a not a seller.
         Optional<String> propertyArg = argMultimap.getValue(PREFIX_PROPERTY);
-        Optional<Property> property =
-                propertyArg.isPresent() ? Optional.of(ParserUtil.parseProperty(propertyArg.get())) : Optional.empty();
+        Optional<Property> property = propertyArg.isPresent()
+                ? Optional.of(ParserUtil.parseProperty(propertyArg.get()))
+                : Optional.empty();
+        // preference is optional since it should not be present if the person being added is a not a buyer.
+        Optional<String> preferenceArg = argMultimap.getValue(PREFIX_PREFERENCE);
+        Optional<Property> preference = preferenceArg.isPresent()
+                ? Optional.of(ParserUtil.parseProperty(preferenceArg.get()))
+                : Optional.empty();
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, property, tagList);
+        Person person = new Person(name, phone, email, address, property, preference, tagList);
 
         return new AddCommand(person);
     }

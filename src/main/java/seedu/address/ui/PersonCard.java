@@ -41,12 +41,14 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label property;
     @FXML
+    private Label preference;
+    @FXML
     private FlowPane tags;
     @FXML
     private Label favourite;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code PersonCard} with the given {@code Person} and index to display.
      */
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
@@ -57,11 +59,19 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         favourite.setText(person.getFavourite().toString());
+
         if (person.getProperty().isPresent()) {
             property.setText(person.getProperty().get().toString());
         } else {
             property.setVisible(false);
         }
+
+        if (person.getPreference().isPresent()) {
+            preference.setText(person.getPreference().get().toString());
+        } else {
+            preference.setVisible(false);
+        }
+
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
