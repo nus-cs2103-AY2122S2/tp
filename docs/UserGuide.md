@@ -1,4 +1,7 @@
-#HackNet
+---
+layout: page
+title: User Guide
+---
 
 **HackNet** is a desktop application used for people to manage contact details of potential team members to work on a technical project or hackathon with. It has a simple Graphical User Interface (GUI) which displays details of your potential teammates, and works mainly via a Command Line Interface (GUI) through text commands.
 
@@ -167,6 +170,20 @@ Examples:
 * `filter python` returns `Alex Yeoh`<br>
   ![result for 'filter C'](images/filterCResult.png)
 
+### Sorting persons by skill proficiency: `sort`
+
+Sort persons in descending level of proficiency of specified skill.
+
+Format: `sort SKILL`
+
+* Only persons with the specified `SKILL` will be listed
+* The search is case-insensitive. e.g `java` will match `Java`
+* Only full words will be matched e.g. `C` will not match `C#`
+* The list will be shown in descending level of skill proficiency
+
+Examples:
+* `sort Python` shows persons with `Python` as a skill in descending order of proficiency <br>
+
 ### Clearing all entries : `clear`
 
 Clears all entries from HackNet.
@@ -213,5 +230,6 @@ Action | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [g/GITHUB_USERNAME] [t/TAG]…​ [s/SKILLNAME_SKILLPROFICENCY]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Sort** | `sort SKILL`<br> e.g., `sort Python`
 **List** | `list`
 **Help** | `help`
