@@ -6,9 +6,13 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import unibook.model.module.Module;
+import unibook.model.module.ModuleCode;
 import unibook.model.module.ModuleList;
 import unibook.model.person.Person;
+import unibook.model.person.Professor;
+import unibook.model.person.Student;
 import unibook.model.person.UniquePersonList;
+import unibook.model.person.exceptions.PersonNoSubtypeException;
 
 /**
  * Wraps all data at the uni-book level
@@ -83,11 +87,31 @@ public class UniBook implements ReadOnlyUniBook {
     }
 
     /**
-     * Adds a person to the UniBook.
+     * Adds a person to UniBook.
      * The person must not already exist in the UniBook.
      */
     public void addPerson(Person p) {
         persons.add(p);
+    }
+
+    /**
+     * Adds this person to all the modules that they are associated with, into the
+     * correct personnel list (professor/student) in module depending on the runtime type
+     * of this person.
+     *
+     * @param p person whos modules to add them to
+     */
+    public void addPersonToAllTheirModules(Person p) throws PersonNoSubtypeException {
+        for (Module personsModule : p.getModules()) {
+            Module module = modules.getModule(personsModule);
+            if (p instanceof Student) {
+                module.addStudent((Student) p);
+            } else if (p instanceof Professor) {
+                module.addProfessor((Professor) p);
+            } else {
+                throw new PersonNoSubtypeException();
+            }
+        }
     }
 
     /**
@@ -112,11 +136,33 @@ public class UniBook implements ReadOnlyUniBook {
     //// module-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the UniBook.
+     * Returns true if an equivalent module to the one given exists in unibook.
      */
     public boolean hasModule(Module module) {
         requireNonNull(module);
         return modules.contains(module);
+    }
+
+    /**
+     * Returns true if a module with the given moduleCode exists in unibook.
+     *
+     * @param moduleCode moduleCode to check for
+     * @return boolean variable indicating presence of module with given moduleCode
+     */
+    public boolean hasModule(ModuleCode moduleCode) {
+        requireNonNull(moduleCode);
+        return modules.contains(moduleCode);
+    }
+
+    /**
+     * Returns module with given code that is in unibook.
+     *
+     * @param moduleCode
+     * @return
+     */
+    public Module getModuleByCode(ModuleCode moduleCode) {
+        requireNonNull(moduleCode);
+        return modules.getModuleByCode(moduleCode);
     }
 
     /**

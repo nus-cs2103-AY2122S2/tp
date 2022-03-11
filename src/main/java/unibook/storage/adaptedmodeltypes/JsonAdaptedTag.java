@@ -1,4 +1,4 @@
-package unibook.storage;
+package unibook.storage.adaptedmodeltypes;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -9,7 +9,7 @@ import unibook.model.tag.Tag;
 /**
  * Jackson-friendly version of {@link Tag}.
  */
-class JsonAdaptedTag {
+public class JsonAdaptedTag {
 
     private final String tagName;
 
