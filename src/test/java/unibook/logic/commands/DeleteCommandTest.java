@@ -23,6 +23,11 @@ import unibook.testutil.TypicalPersons;
  */
 public class DeleteCommandTest {
 
+    public static final Boolean PERSON_LIST_SHOWING = true;
+    public static final Boolean PERSON_LIST_NOT_SHOWING = false;
+    public static final Boolean MODULE_LIST_SHOWING = true;
+    public static final Boolean MODULE_LIST_NOT_SHOWING = false;
+
     private Model model = new ModelManager(TypicalPersons.getTypicalUniBook(), new UserPrefs());
 
     @Test
@@ -36,6 +41,28 @@ public class DeleteCommandTest {
         expectedModel.deletePerson(personToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validIndexWrongPage_throwsCommandException() {
+        Person personToDelete = model.getFilteredPersonList().get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(TypicalIndexes.INDEX_FIRST_PERSON);
+
+        String expectedMessage = Messages.MESSAGE_CHANGE_TO_PERSON_PAGE;
+
+        assertCommandFailure(deleteCommand, model, expectedMessage,
+                PERSON_LIST_NOT_SHOWING, MODULE_LIST_SHOWING);
+    }
+
+    @Test
+    public void execute_validModuleWrongPage_throwsCommandException() {
+        Person moduleToDelete = model.getFilteredPersonList().get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(TypicalIndexes.INDEX_FIRST_PERSON);
+
+        String expectedMessage = Messages.MESSAGE_CHANGE_TO_PERSON_PAGE;
+
+        assertCommandFailure(deleteCommand, model, expectedMessage,
+                PERSON_LIST_NOT_SHOWING, MODULE_LIST_SHOWING);
     }
 
     @Test

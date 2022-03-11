@@ -191,6 +191,18 @@ public class UniBook implements ReadOnlyUniBook {
         modules.remove(key);
     }
 
+    public void removeByModuleCode(ModuleCode key) {
+        modules.removeByModuleCode(key);
+    }
+
+    public void removeModuleFromAllPersons(ModuleCode moduleCode) {
+        persons.removeModuleFromAllPersons(moduleCode);
+    }
+
+    public void removePersonFromModules(Person person) {
+        modules.removePersonFromModule(person);
+    }
+
     //// util methods
 
     @Override

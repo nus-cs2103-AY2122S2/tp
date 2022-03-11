@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import unibook.commons.core.GuiSettings;
 import unibook.model.module.Module;
+import unibook.model.module.ModuleCode;
 import unibook.model.person.Person;
 
 
@@ -97,8 +98,13 @@ public interface Model {
 
     boolean hasModule(Module module);
 
-    void deleteModule(Module target);
+    void deleteByModuleCode(ModuleCode moduleCode);
 
+    void deleteModule(Module module);
+
+    void removeModuleFromAllPersons(ModuleCode moduleCode);
+
+    void removePersonFromAllModules(Person person);
 
     void addModule(Module module);
 

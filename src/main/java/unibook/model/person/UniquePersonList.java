@@ -8,6 +8,7 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import unibook.commons.util.CollectionUtil;
+import unibook.model.module.ModuleCode;
 import unibook.model.person.exceptions.DuplicatePersonException;
 import unibook.model.person.exceptions.PersonNotFoundException;
 
@@ -76,6 +77,16 @@ public class UniquePersonList implements Iterable<Person> {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
             throw new PersonNotFoundException();
+        }
+    }
+
+    /**
+     * Remove module that matches with moduleCode from every person in UniquePersonList
+     * @param moduleCode
+     */
+    public void removeModuleFromAllPersons(ModuleCode moduleCode) {
+        for (Person person : internalList) {
+            person.removeModule(moduleCode);
         }
     }
 

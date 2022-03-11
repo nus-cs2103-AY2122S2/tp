@@ -7,6 +7,7 @@ import java.util.Set;
 
 import unibook.commons.util.CollectionUtil;
 import unibook.model.module.Module;
+import unibook.model.module.ModuleCode;
 import unibook.model.tag.Tag;
 
 /**
@@ -66,6 +67,19 @@ public class Person {
      */
     public Set<Module> getModules() {
         return Collections.unmodifiableSet(modules);
+    }
+
+    /**
+     * Deletes a module from the set of modules the person has by checking through each module
+     * in the set and removing it from the set if the module code matches.
+     * @param other
+     */
+    public void removeModule(ModuleCode other) {
+        for (Module module : modules) {
+            if (module.hasModuleCode(other)) {
+                modules.remove(other);
+            }
+        }
     }
 
     /**

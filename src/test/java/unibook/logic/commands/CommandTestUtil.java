@@ -54,6 +54,11 @@ public class CommandTestUtil {
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
+    public static final Boolean PERSON_LIST_SHOWING = true;
+    public static final Boolean PERSON_LIST_NOT_SHOWING = false;
+    public static final Boolean MODULE_LIST_SHOWING = true;
+    public static final Boolean MODULE_LIST_NOT_SHOWING = false;
+
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
             .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
@@ -71,7 +76,7 @@ public class CommandTestUtil {
     public static void assertCommandSuccess(Command command, Model actualModel, CommandResult expectedCommandResult,
                                             Model expectedModel) {
         try {
-            CommandResult result = command.execute(actualModel);
+            CommandResult result = command.execute(actualModel, PERSON_LIST_SHOWING, MODULE_LIST_SHOWING);
             assertEquals(expectedCommandResult, result);
             assertEquals(expectedModel, actualModel);
         } catch (CommandException ce) {
@@ -91,6 +96,34 @@ public class CommandTestUtil {
 
     /**
      * Executes the given {@code command}, confirms that <br>
+     * - the returned {@link CommandResult} matches {@code expectedCommandResult} <br>
+     * - the {@code actualModel} matches {@code expectedModel}
+     */
+    public static void assertCommandSuccessPage(Command command, Model actualModel, CommandResult expectedCommandResult,
+                                            Model expectedModel, boolean personListShowing, boolean moduleListShowing) {
+        try {
+            CommandResult result = command.execute(actualModel, personListShowing, moduleListShowing);
+            assertEquals(expectedCommandResult, result);
+            assertEquals(expectedModel, actualModel);
+        } catch (CommandException ce) {
+            throw new AssertionError("Execution of command should not fail.", ce);
+        }
+    }
+
+    /**
+     * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)}
+     * Able to modify page showing
+     * that takes a string {@code expectedMessage}.
+     */
+    public static void assertCommandSuccessPage(Command command, Model actualModel, String expectedMessage,
+                                            Model expectedModel, boolean personListShowing, boolean moduleListShowing) {
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage);
+        assertCommandSuccessPage(command, actualModel, expectedCommandResult,
+                expectedModel, personListShowing, moduleListShowing);
+    }
+
+    /**
+     * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
      * - the unibook, filtered person list and selected person in {@code actualModel} remain unchanged
@@ -101,7 +134,27 @@ public class CommandTestUtil {
         UniBook expectedUniBook = new UniBook(actualModel.getUniBook());
         List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
 
-        Assert.assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
+        Assert.assertThrows(CommandException.class,
+                expectedMessage, () -> command.execute(actualModel, PERSON_LIST_SHOWING, MODULE_LIST_SHOWING));
+        assertEquals(expectedUniBook, actualModel.getUniBook());
+        assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
+    }
+
+    /**
+     * Executes the given {@code command}, confirms that <br>
+     * - a {@code CommandException} is thrown <br>
+     * - the CommandException message matches {@code expectedMessage} <br>
+     * - the unibook, filtered person list and selected person in {@code actualModel} remain unchanged
+     */
+    public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage,
+                                            Boolean personListShowing, Boolean moduleListShowing) {
+        // we are unable to defensively copy the model for comparison later, so we can
+        // only do so by copying its components.
+        UniBook expectedUniBook = new UniBook(actualModel.getUniBook());
+        List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
+
+        Assert.assertThrows(CommandException.class,
+                expectedMessage, () -> command.execute(actualModel, personListShowing, moduleListShowing));
         assertEquals(expectedUniBook, actualModel.getUniBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
