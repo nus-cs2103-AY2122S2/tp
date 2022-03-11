@@ -1,46 +1,27 @@
 package seedu.address.logic.commands;
 
-import seedu.address.logic.parser.Prefix;
-import seedu.address.model.Model;
-import seedu.address.model.person.Field;
-import seedu.address.model.person.Person;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import seedu.address.logic.parser.Prefix;
+import seedu.address.model.Model;
+import seedu.address.model.person.Field;
+import seedu.address.model.person.Person;
 
 public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
-    private final List<FieldSortOrder> fieldSortOrderList;
-
     public static final String MESSAGE_SUCCESS = "List is sorted accordingly!";
 
-    public static class FieldSortOrder {
-        private final Prefix fieldPrefix;
-        private final boolean isDescendingOrder;
-
-        public FieldSortOrder(Prefix fieldPrefix, boolean isDescendingOrder) {
-            this.fieldPrefix = fieldPrefix;
-            this.isDescendingOrder = isDescendingOrder;
-        }
-
-        public Prefix getFieldPrefix() {
-            return fieldPrefix;
-        }
-
-        public boolean getIsDescendingOrder() {
-            return isDescendingOrder;
-        }
-    }
-
+    private final List<FieldSortOrder> fieldSortOrderList;
 
     public SortCommand(List<FieldSortOrder> fieldSortOrderList) {
         requireNonNull(fieldSortOrderList);
-
         this.fieldSortOrderList = fieldSortOrderList;
     }
 
@@ -61,8 +42,8 @@ public class SortCommand extends Command {
                 comparator = comparator.thenComparing(currComperator);
             }
         }
-        model.sortPersonList(comparator);
 
+        model.sortPersonList(comparator);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
@@ -87,4 +68,25 @@ public class SortCommand extends Command {
             return p1Value.compareTo(p2Value);
         };
     }
+
+    public static class FieldSortOrder {
+        private final Prefix fieldPrefix;
+        private final boolean isDescendingOrder;
+
+        public FieldSortOrder(Prefix fieldPrefix, boolean isDescendingOrder) {
+            requireAllNonNull(fieldPrefix, isDescendingOrder);
+
+            this.fieldPrefix = fieldPrefix;
+            this.isDescendingOrder = isDescendingOrder;
+        }
+
+        public Prefix getFieldPrefix() {
+            return fieldPrefix;
+        }
+
+        public boolean getIsDescendingOrder() {
+            return isDescendingOrder;
+        }
+    }
 }
+
