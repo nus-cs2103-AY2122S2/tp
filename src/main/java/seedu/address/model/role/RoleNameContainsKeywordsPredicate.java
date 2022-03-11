@@ -20,6 +20,7 @@ public class RoleNameContainsKeywordsPredicate implements Predicate<Role> {
      * @param roleNameKeywords List of strings representing role name keywords entered by user
      */
     public RoleNameContainsKeywordsPredicate(List<String> roleNameKeywords) {
+        assert(!roleNameKeywords.contains(""));
         this.roleNameKeywords = roleNameKeywords;
     }
 

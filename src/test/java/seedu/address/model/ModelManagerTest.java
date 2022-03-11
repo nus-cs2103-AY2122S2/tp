@@ -122,8 +122,8 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         String[] keywords = META.getName().fullName.split("\\s+");
-        modelManager.updateFilteredCompanyList(new CompanyNameContainsKeywordsPredicate(Arrays.asList(keywords)),
-                new RoleNameContainsKeywordsPredicate(Arrays.asList("")));
+        modelManager.updateFilteredCompanyList(new CompanyNameContainsKeywordsPredicate(Arrays.asList(keywords),
+                        Arrays.asList(keywords)), new RoleNameContainsKeywordsPredicate(Arrays.asList(" ")));
         assertFalse(modelManager.equals(new ModelManager(companyList, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
