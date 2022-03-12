@@ -8,6 +8,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Birthday;
+import seedu.address.model.person.Membership;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
 
@@ -46,6 +47,8 @@ public class PersonCard extends UiPart<Region> {
     private Label remark;
     @FXML
     private FlowPane tags;
+    @FXML
+    private FlowPane memberships;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -69,6 +72,19 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.value))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.value)));
+
+        /*
+        // Memberships.
+        person.getMemberships().getList().stream()
+                .sorted(Comparator.comparing(membership -> membership.toString()))
+                .forEach(membership -> memberships.getChildren().add(new Label(membership.toString())));
+
+         */
+        Membership membership = person.getMembership();
+        if (membership != null) {
+            memberships.getChildren().add(new Label(membership.toString()));
+        }
+
     }
 
     @Override

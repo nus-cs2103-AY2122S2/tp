@@ -54,9 +54,9 @@ public class Person implements Serializable {
     }
 
     /**
-     * Placeholder
-     * @param fields placeholder
-     * @param tags placeholder
+     * Person constructor
+     * @param fields A collection of all the person's attributes
+     * @param tags A collection of all the person's tags
      */
     public Person(Collection<Field> fields, Collection<Tag> tags) {
         requireAllNonNull(tags, fields);
@@ -128,6 +128,10 @@ public class Person implements Serializable {
         return (Address) this.fields.get(Address.PREFIX);
     }
 
+    public Membership getMembership() {
+        return (Membership) this.fields.get(Membership.PREFIX);
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -139,6 +143,19 @@ public class Person implements Serializable {
     public Person setTags(Collection<Tag> tags) {
         return new Person(this.fields.values(), tags);
     }
+
+    /**
+     * Adds a membership to the person
+     *
+     * @param membership Membership to add
+     * @return A new person
+     */
+    public Person addMembership(Membership membership) {
+        HashMap<Prefix, Field> newFields = new HashMap<>(this.fields);
+        newFields.put(Membership.PREFIX, membership);
+        return new Person(newFields.values(), tags);
+    }
+
 
     /**
      * Returns true if both persons have the same name.
@@ -195,6 +212,7 @@ public class Person implements Serializable {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
         }
+
         return builder.toString();
     }
 }

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import seedu.address.logic.parser.AddCommandParser;
+import seedu.address.logic.parser.AddMembershipParser;
 import seedu.address.logic.parser.DeleteCommandParser;
 import seedu.address.logic.parser.EditCommandParser;
 import seedu.address.logic.parser.FindCommandParser;
@@ -28,6 +29,7 @@ public class CommandRegistry {
         parsers.put(HelpCommand.COMMAND_WORD, (String args) -> new HelpCommand());
         parsers.put(DeleteFilteredCommand.COMMAND_WORD, (String args) -> new DeleteFilteredCommand());
         parsers.put(RemarkCommand.COMMAND_WORD, new RemarkCommandParser());
+        parsers.put(AddMembershipCommand.COMMAND_WORD, new AddMembershipParser());
         parsers.put(SortCommand.COMMAND_WORD, new SortCommandParser());
 
         // --- Do not modify below this line unless you know what you're doing. (Trust me, you don't.) ---
