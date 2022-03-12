@@ -31,7 +31,7 @@ public class ModuleCode {
     }
 
     /**
-     * Returns true if a given string is a valid module name.
+     * Returns true if a given string is a valid module code.
      */
     public static boolean isValidModuleCode(String test) {
         return test.matches(VALIDATION_REGEX);

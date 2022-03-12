@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import unibook.commons.core.GuiSettings;
 import unibook.model.module.Module;
+import unibook.model.module.ModuleCode;
 import unibook.model.person.Person;
 
 
@@ -99,10 +100,21 @@ public interface Model {
 
     void deleteModule(Module target);
 
-
+    /**
+     * Adds the given module.
+     * {@code module} must not already exist in the UniBook.
+     */
     void addModule(Module module);
 
     void setModule(Module target, Module editedModule);
+
+    boolean isModuleExist(Person person);
+
+    /**
+     * Finds the corresponding module to the module code.
+     * @return Module belonging to the ModuleCode
+     */
+    Module getModule(ModuleCode moduleCode);
 
     ObservableList<Module> getFilteredModuleList();
 

@@ -20,6 +20,7 @@ import unibook.model.ReadOnlyUniBook;
 import unibook.model.ReadOnlyUserPrefs;
 import unibook.model.UniBook;
 import unibook.model.module.Module;
+import unibook.model.module.ModuleCode;
 import unibook.model.person.Person;
 import unibook.testutil.Assert;
 import unibook.testutil.PersonBuilder;
@@ -38,7 +39,7 @@ public class AddCommandTest {
 
         CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPerson), commandResult.getFeedbackToUser());
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS_PERSON, validPerson), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
     }
 
@@ -171,6 +172,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean isModuleExist(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Module getModule(ModuleCode moduleCode) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Module> getFilteredModuleList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -220,6 +231,12 @@ public class AddCommandTest {
         @Override
         public ReadOnlyUniBook getUniBook() {
             return new UniBook();
+        }
+
+        @Override
+        public boolean isModuleExist(Person person) {
+            requireNonNull(person);
+            return true;
         }
     }
 
