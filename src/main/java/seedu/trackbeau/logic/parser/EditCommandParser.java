@@ -67,8 +67,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setHairType(ParserUtil.parseHairType(argMultimap.getValue(PREFIX_HAIRTYPE).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_STAFFS)).ifPresent(editPersonDescriptor::setStaffs);
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_SERVICES)).ifPresent(editPersonDescriptor::setStaffs);
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_ALLERGIES)).ifPresent(editPersonDescriptor::setStaffs);
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_SERVICES)).ifPresent(editPersonDescriptor::setServices);
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_ALLERGIES)).ifPresent(editPersonDescriptor::setAllergies);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
