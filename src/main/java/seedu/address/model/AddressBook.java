@@ -34,8 +34,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
-        this();
         resetData(toBeCopied);
+    }
+
+    /**
+     * Creates an AddressBook using the Persons in the {@code persons}
+     */
+    public AddressBook(List<Person> persons) {
+        setPersons(persons);
     }
 
     //// list overwrite operations
