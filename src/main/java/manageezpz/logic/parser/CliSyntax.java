@@ -12,5 +12,4 @@ public class CliSyntax {
     public static final Prefix PREFIX_TODO = new Prefix("/todo");
     public static final Prefix PREFIX_EVENT = new Prefix("/event");
     public static final Prefix PREFIX_DEADLINE = new Prefix("/deadline");
-  
 }
