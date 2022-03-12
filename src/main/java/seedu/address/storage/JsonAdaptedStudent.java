@@ -22,7 +22,7 @@ class JsonAdaptedStudent {
     private final String studentId;
     private final String name;
     private final String email;
-    private final String telegram;
+    private final Optional<String> telegram;
 
     /**
      * Constructs a {@code JsonAdaptedStudent} with the given student details.
@@ -33,7 +33,7 @@ class JsonAdaptedStudent {
         this.studentId = studentId;
         this.name = name;
         this.email = email;
-        this.telegram = telegram;
+        this.telegram = Optional.ofNullable(telegram);
     }
 
     /**
@@ -43,7 +43,7 @@ class JsonAdaptedStudent {
         studentId = source.getStudentId().value;
         name = source.getName().fullName;
         email = source.getEmail().value;
-        telegram = source.getTelegram().get().value;
+        telegram = source.getTelegram().map(x -> x.value);
     }
 
     /**
@@ -52,7 +52,6 @@ class JsonAdaptedStudent {
      * @throws IllegalValueException if there were any data constraints violated in the adapted student.
      */
     public Student toModelType() throws IllegalValueException {
-
         if (studentId == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     StudentId.class.getSimpleName()));
@@ -78,13 +77,15 @@ class JsonAdaptedStudent {
         }
         final Email modelEmail = new Email(email);
 
-        if (!Telegram.isValidTelegram(telegram)) {
-            throw new IllegalValueException(Telegram.MESSAGE_CONSTRAINTS);
+        if (telegram.isPresent()) {
+            if (!Telegram.isValidTelegram(telegram.get())) {
+                throw new IllegalValueException(Telegram.MESSAGE_CONSTRAINTS);
+            }
+            final Telegram modelTelegram = new Telegram(telegram.get());
+            return new Student(modelStudentId, modelName, modelEmail, Optional.of(modelTelegram));
         }
-        final Telegram modelTelegram = new Telegram(telegram);
 
-        return new Student(modelStudentId, modelName, modelEmail, Optional.of(modelTelegram));
+        return new Student(modelStudentId, modelName, modelEmail);
     }
-
 }
 
