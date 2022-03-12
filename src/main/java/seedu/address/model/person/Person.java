@@ -122,7 +122,18 @@ public class Person {
         this(otherPerson.getFields(), otherPerson.getTags(), otherPerson.getMemberships());
     }
 
+    /**
+     * Returns true if the person contains the specified field.
+     * @param prefix the field prefix
+     * @return return true if the person contains the specified field
+     */
+    public boolean hasField(Prefix prefix) {
+        requireAllNonNull(prefix);
+        return fields.containsKey(prefix);
+    }
+
     public Person setField(Field field) {
+        requireAllNonNull(field);
         Map<Prefix, Field> updatedFields = new HashMap<>(fields);
         if (field == null) {
             updatedFields.remove(field.prefix);
@@ -133,6 +144,7 @@ public class Person {
     }
 
     public Optional<Field> getField(Prefix prefix) {
+        requireAllNonNull(prefix);
         return Optional.ofNullable(fields.get(prefix));
     }
 

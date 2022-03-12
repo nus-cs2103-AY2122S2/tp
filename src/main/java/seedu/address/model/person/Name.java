@@ -7,7 +7,7 @@ import seedu.address.logic.parser.Prefix;
 
 /**
  * Represents a Person's name in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValid(String)}
  */
 public class Name extends Field {
     public static final Prefix PREFIX = new Prefix("n/", true);
@@ -30,15 +30,15 @@ public class Name extends Field {
     public Name(String name) {
         super(PREFIX);
         requireNonNull(name);
-        checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        value = name;
+        value = name.trim();
+        checkArgument(isValid(value), MESSAGE_CONSTRAINTS);
     }
 
     /**
      * Returns true if a given string is a valid name.
      */
-    public static boolean isValidName(String test) {
-        return test.matches(VALIDATION_REGEX);
+    public static boolean isValid(String str) {
+        return str.matches(VALIDATION_REGEX);
     }
 
     @Override

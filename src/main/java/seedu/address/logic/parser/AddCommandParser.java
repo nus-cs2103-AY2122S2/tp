@@ -42,7 +42,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         // Parse tags.
-        Set<Tag> tags = TagParser.parseCollection(argMultimap.getAllValues(Tag.PREFIX));
+        Set<Tag> tags = Tag.createSet(argMultimap.getAllValues(Tag.PREFIX));
 
         // Parse memberships.
         Set<Membership> memberships = MembershipParser.parseCollection(argMultimap.getAllValues(Membership.PREFIX));
