@@ -15,6 +15,7 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.contax.commons.core.GuiListContentType;
 import seedu.contax.model.Model;
 import seedu.contax.model.ModelManager;
 import seedu.contax.model.Schedule;
@@ -23,7 +24,6 @@ import seedu.contax.model.person.AddressContainsKeywordsPredicate;
 import seedu.contax.model.person.EmailContainsKeywordsPredicate;
 import seedu.contax.model.person.NameContainsKeywordsPredicate;
 import seedu.contax.model.person.PhoneContainsKeywordsPredicate;
-import seedu.contax.commons.core.GuiListContentType;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.

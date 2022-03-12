@@ -8,11 +8,11 @@ import static seedu.contax.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.contax.commons.core.GuiListContentType;
 import seedu.contax.model.Model;
 import seedu.contax.model.ModelManager;
 import seedu.contax.model.Schedule;
 import seedu.contax.model.UserPrefs;
-import seedu.contax.commons.core.GuiListContentType;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.

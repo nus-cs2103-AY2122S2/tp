@@ -10,6 +10,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.contax.commons.core.GuiListContentType;
 import seedu.contax.model.AddressBook;
 import seedu.contax.model.Model;
 import seedu.contax.model.ModelManager;
@@ -18,7 +19,6 @@ import seedu.contax.model.UserPrefs;
 import seedu.contax.model.person.Person;
 import seedu.contax.testutil.EditPersonDescriptorBuilder;
 import seedu.contax.testutil.PersonBuilder;
-import seedu.contax.commons.core.GuiListContentType;
 
 public class ChainCommandTest {
     private Model model;

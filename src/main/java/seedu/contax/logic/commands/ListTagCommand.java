@@ -2,9 +2,9 @@ package seedu.contax.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.contax.commons.core.GuiListContentType;
 import seedu.contax.logic.commands.exceptions.CommandException;
 import seedu.contax.model.Model;
-import seedu.contax.commons.core.GuiListContentType;
 
 /**
  * Lists all tags in the address book to the user.
