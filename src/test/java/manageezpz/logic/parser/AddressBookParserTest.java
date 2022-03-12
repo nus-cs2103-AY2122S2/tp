@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import manageezpz.logic.commands.AddCommand;
+import manageezpz.logic.commands.AddEmployeeCommand;
 import manageezpz.logic.commands.ClearCommand;
 import manageezpz.logic.commands.DeleteCommand;
 import manageezpz.logic.commands.EditCommand;
@@ -36,8 +36,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddCommand(person), command);
+        AddEmployeeCommand command = (AddEmployeeCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
+        assertEquals(new AddEmployeeCommand(person), command);
     }
 
     @Test

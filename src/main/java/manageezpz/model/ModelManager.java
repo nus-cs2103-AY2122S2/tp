@@ -12,6 +12,10 @@ import javafx.collections.transformation.FilteredList;
 import manageezpz.commons.core.GuiSettings;
 import manageezpz.commons.core.LogsCenter;
 import manageezpz.model.person.Person;
+import manageezpz.model.task.Deadline;
+import manageezpz.model.task.Event;
+import manageezpz.model.task.Task;
+import manageezpz.model.task.Todo;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,6 +26,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Task> filteredTasks;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +39,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
     }
 
     public ModelManager() {
@@ -147,4 +153,83 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(other.filteredPersons);
     }
 
+
+    //=========== ManageEZPZ ==================================================================================
+
+    @Override
+    public void addTask(Task task) {
+        requireNonNull(task);
+        addressBook.addTask(task);
+        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+    }
+
+    @Override
+    public void addTodo(Todo todo) {
+        addressBook.addTodo(todo);
+    }
+
+    @Override
+    public void addEvent(Event event) {
+        addressBook.addEvent(event);
+    }
+
+    @Override
+    public void addDeadline(Deadline deadline) {
+        addressBook.addDeadline(deadline);
+    }
+
+    @Override
+    public void deleteTask(Task task) {
+        addressBook.removeTask(task);
+    }
+
+    @Override
+    public void markTask(Task task) {
+        addressBook.markTask(task);
+    }
+
+    @Override
+    public void unmarkTask(Task task) {
+        addressBook.unmarkTask(task);
+    }
+
+    @Override
+    public void findTask(Task task) {
+        addressBook.findTask(task);
+    }
+
+    @Override
+    public void updateFilteredTaskList(Predicate<Task> predicate) {
+        requireNonNull(predicate);
+        filteredTasks.setPredicate(predicate);
+    }
+
+    @Override
+    public ObservableList<Task> getFilteredTaskList() {
+        return filteredTasks;
+    }
+
+    @Override
+    public boolean hasEvent(Event event) {
+        requireNonNull(event);
+        return addressBook.hasEvent(event);
+    }
+
+    @Override
+    public boolean hasDeadline(Deadline deadline) {
+        requireNonNull(deadline);
+        return addressBook.hasDeadline(deadline);
+    }
+
+    @Override
+    public boolean hasTodo(Todo todo) {
+        requireNonNull(todo);
+        return addressBook.hasTodo(todo);
+    }
+
+    @Override
+    public boolean hasTask(Task task) {
+        requireNonNull(task);
+        return addressBook.hasTask(task);
+    }
 }

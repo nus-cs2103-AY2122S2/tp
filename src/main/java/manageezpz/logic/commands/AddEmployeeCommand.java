@@ -1,11 +1,9 @@
 package manageezpz.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static manageezpz.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_NAME;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_PHONE;
-import static manageezpz.logic.parser.CliSyntax.PREFIX_TAG;
 
 import manageezpz.logic.commands.exceptions.CommandException;
 import manageezpz.model.Model;
@@ -14,24 +12,19 @@ import manageezpz.model.person.Person;
 /**
  * Adds a person to the address book.
  */
-public class AddCommand extends Command {
+public class AddEmployeeCommand extends Command {
 
-    public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_WORD = "addEmployee";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an Employee to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
-            + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
-            + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_EMAIL + "johnd@example.com ";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
@@ -39,9 +32,9 @@ public class AddCommand extends Command {
     private final Person toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddEmployeeCommand to add the specified {@code Person}
      */
-    public AddCommand(Person person) {
+    public AddEmployeeCommand(Person person) {
         requireNonNull(person);
         toAdd = person;
     }
@@ -61,7 +54,7 @@ public class AddCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddCommand // instanceof handles nulls
-                && toAdd.equals(((AddCommand) other).toAdd));
+                || (other instanceof AddEmployeeCommand // instanceof handles nulls
+                && toAdd.equals(((AddEmployeeCommand) other).toAdd));
     }
 }
