@@ -36,6 +36,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.parser.applicants.EditApplicantCommandParser;
 import seedu.address.model.applicant.Address;
 import seedu.address.model.applicant.Email;
 import seedu.address.model.applicant.Name;
@@ -43,14 +44,14 @@ import seedu.address.model.applicant.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
-public class EditCommandParserTest {
+public class EditApplicantCommandParserTest {
 
     private static final String TAG_EMPTY = " " + PREFIX_TAG;
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
 
-    private EditCommandParser parser = new EditCommandParser();
+    private EditApplicantCommandParser parser = new EditApplicantCommandParser();
 
     @Test
     public void parse_missingParts_failure() {
