@@ -5,6 +5,8 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -40,7 +42,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         // Parse tags.
-        Set<Tag> tags = TagParser.parseCollection(argMultimap.getAllValues(Tag.PREFIX));
+        Set<Tag> tags = Tag.createSet(argMultimap.getAllValues(Tag.PREFIX));
 
         // Parse all fields.
         ArrayList<Field> fields = new ArrayList<>();

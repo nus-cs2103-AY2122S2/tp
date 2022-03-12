@@ -21,7 +21,7 @@ public class Remark extends Field {
     public Remark(String remark) {
         super(PREFIX);
         requireNonNull(remark);
-        value = remark;
+        value = remark.trim();
     }
 
     @Override
