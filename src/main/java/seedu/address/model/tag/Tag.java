@@ -3,6 +3,7 @@ package seedu.address.model.tag;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,7 +14,7 @@ import seedu.address.logic.parser.Prefix;
  * Represents a Tag in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValid(String)}
  */
-public class Tag {
+public class Tag implements Serializable {
     public static final Prefix PREFIX = new Prefix("t/", false);
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
