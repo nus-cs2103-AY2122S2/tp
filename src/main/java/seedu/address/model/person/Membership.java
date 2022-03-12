@@ -37,6 +37,7 @@ public class Membership extends Field {
     public Membership(String name) {
         super(PREFIX);
         requireNonNull(name);
+        name = name.trim();
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
         value = name;
         date = null;
@@ -51,6 +52,7 @@ public class Membership extends Field {
     public Membership(String name, LocalDate date) {
         super(PREFIX);
         requireNonNull(name);
+        name = name.trim();
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
         value = name;
         this.date = date;

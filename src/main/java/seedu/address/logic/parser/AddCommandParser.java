@@ -13,7 +13,6 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Field;
 import seedu.address.model.person.FieldRegistry;
-import seedu.address.model.person.Membership;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -43,9 +42,6 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         // Parse tags.
         Set<Tag> tags = Tag.createSet(argMultimap.getAllValues(Tag.PREFIX));
-
-        // Parse memberships.
-        Set<Membership> memberships = MembershipParser.parseCollection(argMultimap.getAllValues(Membership.PREFIX));
 
         // Parse all fields.
         ArrayList<Field> fields = new ArrayList<>();
