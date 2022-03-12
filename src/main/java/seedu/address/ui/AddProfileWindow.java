@@ -9,8 +9,6 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-
-
 public class AddProfileWindow extends UiPart<Stage> {
 
     private static final String FXML = "addProfileWindow.fxml";
@@ -19,7 +17,15 @@ public class AddProfileWindow extends UiPart<Stage> {
 
 
     @FXML
-    private TextField tagNameInput;
+    private TextField nameInput;
+    @FXML
+    private TextField phoneNumberInput;
+    @FXML
+    private TextField emailInput;
+    @FXML
+    private TextField addressInput;
+    @FXML
+    private TextField tagInput;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -32,12 +38,12 @@ public class AddProfileWindow extends UiPart<Stage> {
     public AddProfileWindow(Stage root, Logic logic) {
         super(FXML, root);
         this.logic = logic;
-        //        resultDisplay = new ResultDisplay();
-        //        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+        resultDisplay = new ResultDisplay();
+        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
     }
 
     /**
-     * Creates a new HelpWindow.
+     * Creates a new addProfile Window.
      */
     public AddProfileWindow(Logic logic) {
         this(new Stage(), logic);
@@ -87,20 +93,44 @@ public class AddProfileWindow extends UiPart<Stage> {
         getRoot().requestFocus();
     }
 
-
+    /**
+     * Handle the add profile action by collating all the inputs from the form and execute the action
+     */
     @FXML
-    private void addTagHandler() throws CommandException, ParseException {
-        String tagName = tagNameInput.getText();
-        String fullCommand = "add_tag t/" + tagName;
+    private void handleAddProfile() throws CommandException, ParseException {
+        String profileName = nameInput.getText();
+        String profilePhoneNumber = phoneNumberInput.getText();
+        String profileEmail = emailInput.getText();
+        String profileAddress = addressInput.getText();
+        String profileTag = tagInput.getText();
+
+        String[] arrayOfProfileTag = profileTag.split(", ");
+
+        String fullCommand = "add "
+                + "n/" + profileName + " "
+                + "p/" + profilePhoneNumber + " "
+                + "e/" + profileEmail + " "
+                + "a/" + profileAddress + " ";
+
+        if (!profileTag.equals("")) {
+            for (String tag : arrayOfProfileTag) {
+                fullCommand += "t/" + tag + " ";
+            }
+        }
+
         try {
             CommandResult result = logic.execute(fullCommand);
             resultDisplay.setFeedbackToUser(result.getFeedbackToUser());
+            handleClose();
         } catch (ParseException | CommandException e) {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
     }
 
+    /**
+     * Handle close
+     */
     @FXML
     private void handleClose() {
         getRoot().hide();
