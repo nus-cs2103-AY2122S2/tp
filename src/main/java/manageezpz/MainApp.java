@@ -15,7 +15,6 @@ import manageezpz.commons.util.ConfigUtil;
 import manageezpz.commons.util.StringUtil;
 import manageezpz.logic.Logic;
 import manageezpz.logic.LogicManager;
-import manageezpz.logic.commands.exceptions.CommandException;
 import manageezpz.model.AddressBook;
 import manageezpz.model.Model;
 import manageezpz.model.ModelManager;
