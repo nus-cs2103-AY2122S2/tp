@@ -1,40 +1,35 @@
 package seedu.address.storage;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
-
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Tag;
 
 /**
- * Jackson-friendly version of {@link Tag}.
+ * CSV-friendly version of {@link Tag}.
  */
-class JsonAdaptedTag {
+class CsvAdaptedTag {
 
     private final String tagName;
 
     /**
-     * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
+     * Constructs a {@code CsvAdaptedTag} with the given {@code tagName}.
      */
-    @JsonCreator
-    public JsonAdaptedTag(String tagName) {
+    public CsvAdaptedTag(String tagName) {
         this.tagName = tagName;
     }
 
     /**
-     * Converts a given {@code Tag} into this class for Jackson use.
+     * Converts a given {@code Tag} into this class for CSV use.
      */
-    public JsonAdaptedTag(Tag source) {
+    public CsvAdaptedTag(Tag source) {
         tagName = source.tagName;
     }
 
-    @JsonValue
     public String getTagName() {
         return tagName;
     }
 
     /**
-     * Converts this Jackson-friendly adapted tag object into the model's {@code Tag} object.
+     * Converts this CSV-friendly adapted tag object into the model's {@code Tag} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
@@ -51,11 +46,11 @@ class JsonAdaptedTag {
             return true;
         }
 
-        if (!(other instanceof JsonAdaptedTag)) {
+        if (!(other instanceof CsvAdaptedTag)) {
             return false;
         }
 
-        JsonAdaptedTag otherTag = (JsonAdaptedTag) other;
+        CsvAdaptedTag otherTag = (CsvAdaptedTag) other;
         return tagName.equals(otherTag.tagName);
     }
 

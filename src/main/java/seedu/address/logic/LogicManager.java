@@ -2,11 +2,13 @@ package seedu.address.logic;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -77,5 +79,29 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public void saveAddressBookToCsv(Path csvFilePath) throws CommandException {
+        try {
+            storage.saveAddressBookToCsv(model.getAddressBook(), csvFilePath);
+        } catch (IOException ioe) {
+            throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
+        }
+    }
+
+    @Override
+    public void readAddressBookFromCsv(Path csvFilePath) throws CommandException {
+        try {
+            Optional<ReadOnlyAddressBook> ab = storage.readAddressBookFromCsv(csvFilePath);
+            if (ab.isPresent()) {
+                model.setAddressBook(ab.get());
+                logger.info("Successfully set address book, without saving.");
+            } else {
+                logger.info("No change to address book after attempting to read from CSV.");
+            }
+        } catch (DataConversionException | IOException ioe) {
+            throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
+        }
     }
 }

@@ -19,6 +19,7 @@ public class StorageManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
     private UserPrefsStorage userPrefsStorage;
+    private AddressBookStorage csvAddressBookStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
@@ -26,6 +27,7 @@ public class StorageManager implements Storage {
     public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
+        this.csvAddressBookStorage = new CsvAddressBookStorage();
     }
 
     // ================ UserPrefs methods ==============================
@@ -75,4 +77,16 @@ public class StorageManager implements Storage {
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
 
+    @Override
+    public void saveAddressBookToCsv(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+        logger.fine("Attempting to write to CSV file: " + filePath);
+        csvAddressBookStorage.saveAddressBook(addressBook, filePath);
+    }
+
+    @Override
+    public Optional<ReadOnlyAddressBook> readAddressBookFromCsv(Path filePath)
+            throws DataConversionException, IOException {
+        logger.fine("Attempting to load from CSV file: " + filePath);
+        return csvAddressBookStorage.readAddressBook(filePath);
+    }
 }

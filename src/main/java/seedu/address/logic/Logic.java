@@ -47,4 +47,15 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+
+    /**
+     * Saves the AddressBook to CSV.
+     */
+    void saveAddressBookToCsv(Path csvFilePath) throws CommandException;
+
+    /**
+     * Loads the AddressBook from CSV.
+     */
+    void readAddressBookFromCsv(Path csvFilePath) throws CommandException;
 }
