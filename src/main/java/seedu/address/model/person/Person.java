@@ -152,8 +152,6 @@ public class Person implements Serializable {
      */
     public Person addMembership(Membership membership) {
         HashMap<Prefix, Field> newFields = new HashMap<>(this.fields);
-        // MembershipList newMemberships = getMemberships();
-        // newMemberships.getList().add(membership);
         newFields.put(Membership.PREFIX, membership);
         return new Person(newFields.values(), tags);
     }
@@ -189,8 +187,7 @@ public class Person implements Serializable {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags())
-                && otherPerson.getMembership().equals(getMembership());
+                && otherPerson.getTags().equals(getTags());
     }
 
     @Override
