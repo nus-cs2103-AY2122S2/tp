@@ -14,7 +14,7 @@ Given below are my contributions to the project.
   * Justification: This feature improves the product significantly because a user can tag important information to their own contacts for future references.
   * Highlights: This enhancement affects the existing UI layout. It required an in-depth analysis of how the tagged information should be displayed alongside with their respective contacts.
 
-* **New Feature**: Added the ability to delete multiple contacts.
+* **Feature Enhancement**: Added the ability to delete multiple contacts.
   * What it does: allows the user to delete multiple contacts in a single command.
   * Justification: This feature improves the product as a user can efficiently delete many contacts at once instead of inputting a delete command for each contact that he or she wants to delete.
 
@@ -23,10 +23,9 @@ Given below are my contributions to the project.
 * **Documentation**:
   * User Guide:
     * Added documentation for the features `add` and `tag`
+    * Added documentation for feature `delete` enhancement 
   * Developer Guide:
     * {to be added}
-  * README:
-    * Updated the README page
 
 * **Tools**:
   * Integrated Codecov into team repo

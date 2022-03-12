@@ -144,7 +144,7 @@ public class ParserUtil {
     */
     public static Tag parseTag(String tag, String type) throws ParseException {
         requireNonNull(tag);
-        String trimmedTag = tag.trim();
+        String trimmedTag = tag.trim().toLowerCase();
 
         switch (type) {
         case Tag.EDUCATION:
