@@ -101,7 +101,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @param studentId the student id of the person to be assigned.
      * @param task the task to be assigned.
      */
-    public void assignTaskToPerson(StudentId studentId, Task task){
+    public void assignTaskToPerson(StudentId studentId, Task task) {
         requireNonNull(studentId);
         requireNonNull(task);
 

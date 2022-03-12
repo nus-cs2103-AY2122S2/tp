@@ -14,9 +14,6 @@ import seedu.address.model.person.Task;
 import seedu.address.model.person.TaskList;
 import seedu.address.model.person.TelegramHandle;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Jackson-friendly version of {@link Person}.
  */
