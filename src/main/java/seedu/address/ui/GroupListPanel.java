@@ -26,7 +26,7 @@ public class GroupListPanel extends UiPart<Region> {
     public GroupListPanel(ObservableList<Group> groupList) {
         super(FXML);
         groupListView.setItems(groupList);
-        groupListView.setCellFactory(listView -> new GroupListPanel.GroupListViewCell());
+        groupListView.setCellFactory(listView -> new GroupListViewCell());
     }
 
     /**
