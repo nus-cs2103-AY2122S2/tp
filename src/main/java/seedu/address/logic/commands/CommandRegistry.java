@@ -5,12 +5,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import seedu.address.logic.parser.AddCommandParser;
+import seedu.address.logic.parser.AddMembershipParser;
 import seedu.address.logic.parser.DeleteCommandParser;
 import seedu.address.logic.parser.EditCommandParser;
 import seedu.address.logic.parser.FindCommandParser;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.RemarkCommandParser;
-import seedu.address.logic.parser.AddMembershipParser;
 
 public class CommandRegistry {
     public static final Map<String, Parser<? extends Command>> PARSERS;

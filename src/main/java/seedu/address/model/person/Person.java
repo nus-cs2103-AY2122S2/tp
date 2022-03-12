@@ -54,7 +54,7 @@ public class Person {
     }
 
     /**
-     * Overloaded Person constructor with an additonal memberships parameter
+     * Overloaded Person constructor with an additional memberships parameter
      * @param name the person's name
      * @param phone the person's phone
      * @param email the person's email
@@ -180,6 +180,12 @@ public class Person {
         return new Person(this.fields.values(), tags, memberships);
     }
 
+    /**
+     * Adds a membership to the person
+     *
+     * @param membership Membership to add
+     * @return A new person
+     */
     public Person addMembership(Membership membership) {
         Set<Membership> newMembers = new HashSet<>(memberships);
         newMembers.add(membership);

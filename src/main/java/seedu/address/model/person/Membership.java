@@ -3,10 +3,10 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import seedu.address.logic.parser.Prefix;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
+import seedu.address.logic.parser.Prefix;
 
 /**
  * Represents a Person's Membership in the address book.
@@ -67,8 +67,7 @@ public class Membership {
     public static boolean isValidDate(String test) {
         try {
             LocalDate.parse(test);
-        }
-        catch (DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
             return false;
         }
         return true;
@@ -84,11 +83,11 @@ public class Membership {
 
     @Override
     public String toString() {
-        String date_postFix = "";
+        String datePostFix = "";
         if (date != null) {
-            date_postFix = " since " + date.toString();
+            datePostFix = " since " + date.toString();
         }
-        return value + date_postFix;
+        return value + datePostFix;
     }
 
     @Override
