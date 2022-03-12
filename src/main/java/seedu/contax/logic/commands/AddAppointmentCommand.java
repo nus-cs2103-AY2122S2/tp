@@ -30,7 +30,7 @@ public class AddAppointmentCommand extends Command {
             + PREFIX_DATE + "DATE "
             + PREFIX_TIME + "TIME "
             + PREFIX_DURATION + "DURATION "
-            + PREFIX_PERSON + "PERSON "
+            + "[" + PREFIX_PERSON + "PERSON] "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Contract Signing With Charlie "
             + PREFIX_DATE + "22-10-2022 "
