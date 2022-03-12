@@ -26,7 +26,7 @@ class JsonAdaptedTaModule {
     @JsonCreator
     public JsonAdaptedTaModule(@JsonProperty("moduleName") String moduleName,
                                @JsonProperty("moduleCode") String moduleCode,
-                               @JsonProperty("email") String academicYear) {
+                               @JsonProperty("academicYear") String academicYear) {
         this.moduleName = moduleName;
         this.moduleCode = moduleCode;
         this.academicYear = academicYear;
@@ -41,8 +41,8 @@ class JsonAdaptedTaModule {
         academicYear = source.getAcademicYear().value;
     }
 
-    /**
-     * Converts this Jackson-friendly adapted tamodule object into the model's {@code TaModule} object.
+    /*
+     * Converts this Jackson-friendly adapted TAModule object into the model's {@code TaModule} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted module.
      */
