@@ -59,14 +59,14 @@ public class AddAppointmentCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastShownPersonList = model.getFilteredPersonList();
         Appointment updatedAppointment = toAdd;
 
         if (personIndex != null) {
-            if (personIndex.getZeroBased() >= lastShownList.size()) {
+            if (personIndex.getZeroBased() >= lastShownPersonList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
-            Person person = lastShownList.get(personIndex.getZeroBased());
+            Person person = lastShownPersonList.get(personIndex.getZeroBased());
             updatedAppointment = toAdd.withPerson(person);
         }
 
