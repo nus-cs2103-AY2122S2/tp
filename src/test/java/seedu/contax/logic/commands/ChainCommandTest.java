@@ -10,6 +10,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.contax.commons.core.GuiListContentType;
 import seedu.contax.model.AddressBook;
 import seedu.contax.model.Model;
 import seedu.contax.model.ModelManager;
@@ -18,7 +19,6 @@ import seedu.contax.model.UserPrefs;
 import seedu.contax.model.person.Person;
 import seedu.contax.testutil.EditPersonDescriptorBuilder;
 import seedu.contax.testutil.PersonBuilder;
-import seedu.contax.ui.ListContentType;
 
 public class ChainCommandTest {
     private Model model;
@@ -34,7 +34,7 @@ public class ChainCommandTest {
     public void execute_chainedList_success() {
         assertCommandSuccess(new ChainCommand(List.of(new ListCommand())), model,
                 new CommandResult(ListCommand.MESSAGE_SUCCESS,
-                ListContentType.PERSON), expectedModel);
+                GuiListContentType.PERSON), expectedModel);
     }
 
     @Test
@@ -54,6 +54,6 @@ public class ChainCommandTest {
 
         assertCommandSuccess(new ChainCommand(commandList),
                 model, new CommandResult(ListCommand.MESSAGE_SUCCESS,
-                ListContentType.PERSON), expectedModel);
+                GuiListContentType.PERSON), expectedModel);
     }
 }

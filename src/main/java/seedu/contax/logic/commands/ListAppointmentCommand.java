@@ -2,8 +2,8 @@ package seedu.contax.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.contax.commons.core.GuiListContentType;
 import seedu.contax.model.Model;
-import seedu.contax.ui.ListContentType;
 
 /**
  * Lists all persons in the address book to the user.
@@ -18,6 +18,6 @@ public class ListAppointmentCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        return new CommandResult(MESSAGE_SUCCESS, ListContentType.APPOINTMENT);
+        return new CommandResult(MESSAGE_SUCCESS, GuiListContentType.APPOINTMENT);
     }
 }

@@ -10,6 +10,7 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import seedu.contax.commons.core.GuiListContentType;
 import seedu.contax.commons.core.GuiSettings;
 import seedu.contax.commons.core.LogsCenter;
 import seedu.contax.logic.Logic;
@@ -40,7 +41,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private OnboardingPrompt onboardingPrompt;
     // Flag indicating the type of model currently being displayed in the contentList
-    private ListContentType currentListType;
+    private GuiListContentType currentListType;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -125,7 +126,7 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         appointmentListPanel = new AppointmentListPanel(logic.getAppointmentList());
         tagListPanel = new TagListPanel(logic.getTagList());
-        changeListContentType(ListContentType.PERSON);
+        changeListContentType(GuiListContentType.PERSON);
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -154,24 +155,24 @@ public class MainWindow extends UiPart<Stage> {
      *
      * @param contentType The type of content the UI should display.
      */
-    private void changeListContentType(ListContentType contentType) {
+    private void changeListContentType(GuiListContentType contentType) {
         if (contentType == null) {
             contentListPanelPlaceholder.getChildren().clear();
             return;
         }
 
-        if (contentType.equals(ListContentType.UNCHANGED) || contentType.equals(currentListType)) {
+        if (contentType.equals(GuiListContentType.UNCHANGED) || contentType.equals(currentListType)) {
             return;
         }
 
         contentListPanelPlaceholder.getChildren().clear();
         currentListType = contentType;
 
-        if (contentType == ListContentType.PERSON) {
+        if (contentType == GuiListContentType.PERSON) {
             contentListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
-        } else if (contentType == ListContentType.APPOINTMENT) {
+        } else if (contentType == GuiListContentType.APPOINTMENT) {
             contentListPanelPlaceholder.getChildren().add(appointmentListPanel.getRoot());
-        } else if (contentType == ListContentType.TAG) {
+        } else if (contentType == GuiListContentType.TAG) {
             contentListPanelPlaceholder.getChildren().add(tagListPanel.getRoot());
         }
     }

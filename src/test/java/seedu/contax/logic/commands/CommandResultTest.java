@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.contax.ui.ListContentType;
+import seedu.contax.commons.core.GuiListContentType;
 
 public class CommandResultTest {
     @Test
@@ -16,7 +16,7 @@ public class CommandResultTest {
 
         // same values -> returns true
         assertTrue(commandResult.equals(new CommandResult("feedback")));
-        assertTrue(commandResult.equals(new CommandResult("feedback", ListContentType.UNCHANGED,
+        assertTrue(commandResult.equals(new CommandResult("feedback", GuiListContentType.UNCHANGED,
                 false, false)));
 
         // same object -> returns true
@@ -32,15 +32,15 @@ public class CommandResultTest {
         assertFalse(commandResult.equals(new CommandResult("different")));
 
         // different content type -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", ListContentType.PERSON,
+        assertFalse(commandResult.equals(new CommandResult("feedback", GuiListContentType.PERSON,
                 false, false)));
 
         // different showHelp value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", ListContentType.UNCHANGED,
+        assertFalse(commandResult.equals(new CommandResult("feedback", GuiListContentType.UNCHANGED,
                 true, false)));
 
         // different exit value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", ListContentType.UNCHANGED,
+        assertFalse(commandResult.equals(new CommandResult("feedback", GuiListContentType.UNCHANGED,
                 false, true)));
     }
 
@@ -55,15 +55,15 @@ public class CommandResultTest {
         assertNotEquals(commandResult.hashCode(), new CommandResult("different").hashCode());
 
         // different content type -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", ListContentType.PERSON,
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", GuiListContentType.PERSON,
                 false, false).hashCode());
 
         // different showHelp value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", ListContentType.UNCHANGED,
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", GuiListContentType.UNCHANGED,
                 true, false).hashCode());
 
         // different exit value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", ListContentType.UNCHANGED,
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", GuiListContentType.UNCHANGED,
                 false, true).hashCode());
     }
 }
