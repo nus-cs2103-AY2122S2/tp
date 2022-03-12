@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.add.AddApplicantCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -23,11 +24,11 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.testutil.PersonBuilder;
 
-public class AddCommandTest {
+public class AddApplicantCommandTest {
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+        assertThrows(NullPointerException.class, () -> new AddApplicantCommand(null));
     }
 
     @Test
@@ -35,33 +36,35 @@ public class AddCommandTest {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
         Applicant validApplicant = new PersonBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validApplicant).execute(modelStub);
+        CommandResult commandResult = new AddApplicantCommand(validApplicant).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validApplicant), commandResult.getFeedbackToUser());
+        assertEquals(String.format(AddApplicantCommand.MESSAGE_SUCCESS, validApplicant),
+                commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validApplicant), modelStub.personsAdded);
     }
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Applicant validApplicant = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validApplicant);
+        AddApplicantCommand addApplicantCommand = new AddApplicantCommand(validApplicant);
         ModelStub modelStub = new ModelStubWithPerson(validApplicant);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class,
+                AddApplicantCommand.MESSAGE_DUPLICATE_PERSON, () -> addApplicantCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
         Applicant alice = new PersonBuilder().withName("Alice").build();
         Applicant bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        AddApplicantCommand addAliceCommand = new AddApplicantCommand(alice);
+        AddApplicantCommand addBobCommand = new AddApplicantCommand(bob);
 
         // same object -> returns true
         assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
+        AddApplicantCommand addAliceCommandCopy = new AddApplicantCommand(alice);
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false

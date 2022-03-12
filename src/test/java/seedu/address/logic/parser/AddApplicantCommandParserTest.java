@@ -32,7 +32,7 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.add.AddApplicantCommand;
 import seedu.address.model.applicant.Address;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.Email;
@@ -51,29 +51,29 @@ public class AddApplicantCommandParserTest {
         // whitespace only preamble
         assertParseSuccess(parser,
                 PREAMBLE_WHITESPACE + FLAG_APPLICANT + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedApplicant));
+                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddApplicantCommand(expectedApplicant));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, FLAG_APPLICANT + NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedApplicant));
+                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddApplicantCommand(expectedApplicant));
 
         // multiple phones - last phone accepted
         assertParseSuccess(parser, FLAG_APPLICANT + NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedApplicant));
+                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddApplicantCommand(expectedApplicant));
 
         // multiple emails - last email accepted
         assertParseSuccess(parser, FLAG_APPLICANT + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedApplicant));
+                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddApplicantCommand(expectedApplicant));
 
         // multiple addresses - last address accepted
         assertParseSuccess(parser, FLAG_APPLICANT + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_AMY
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedApplicant));
+                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddApplicantCommand(expectedApplicant));
 
         // multiple tags - all accepted
         Applicant expectedApplicantMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         assertParseSuccess(parser, FLAG_APPLICANT + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedApplicantMultipleTags));
+                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddApplicantCommand(expectedApplicantMultipleTags));
     }
 
     @Test
@@ -81,12 +81,12 @@ public class AddApplicantCommandParserTest {
         // zero tags
         Applicant expectedApplicant = new PersonBuilder(AMY).withTags().build();
         assertParseSuccess(parser, FLAG_APPLICANT + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
-                new AddCommand(expectedApplicant));
+                new AddApplicantCommand(expectedApplicant));
     }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddApplicantCommand.MESSAGE_USAGE);
 
         // missing name prefix
         assertParseFailure(parser, FLAG_APPLICANT + VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
@@ -145,6 +145,6 @@ public class AddApplicantCommandParserTest {
         // non-empty preamble
         assertParseFailure(parser, FLAG_APPLICANT + PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB
                         + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddApplicantCommand.MESSAGE_USAGE));
     }
 }
