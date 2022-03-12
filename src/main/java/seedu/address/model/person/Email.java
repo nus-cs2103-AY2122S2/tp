@@ -7,7 +7,7 @@ import seedu.address.logic.parser.Prefix;
 
 /**
  * Represents a Person's email in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValid(String)}
  */
 public class Email extends Field {
     public static final Prefix PREFIX = new Prefix("e/", true);
@@ -43,15 +43,15 @@ public class Email extends Field {
     public Email(String email) {
         super(PREFIX);
         requireNonNull(email);
-        checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
-        value = email;
+        value = email.trim();
+        checkArgument(isValid(value), MESSAGE_CONSTRAINTS);
     }
 
     /**
      * Returns if a given string is a valid email.
      */
-    public static boolean isValidEmail(String test) {
-        return test.matches(VALIDATION_REGEX);
+    public static boolean isValid(String str) {
+        return str.matches(VALIDATION_REGEX);
     }
 
     @Override

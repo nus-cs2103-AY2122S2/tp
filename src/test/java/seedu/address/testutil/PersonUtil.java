@@ -27,7 +27,7 @@ public class PersonUtil {
             sb.append(f.prefix).append(f.toString()).append(" ");
         }
         person.getTags().stream().forEach(
-            s -> sb.append(Tag.PREFIX).append(s.tagName).append(" ")
+            s -> sb.append(Tag.PREFIX).append(s.value).append(" ")
         );
         return sb.toString();
     }
