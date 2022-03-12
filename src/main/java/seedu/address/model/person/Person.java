@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -23,9 +24,28 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final PrevDateMet prevDateMet;
+    private final Info info;
 
     /**
-     * Every field must be present and not null.
+     * Constructor for Person object where every field is present and not null.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+                  PrevDateMet prevDateMet, Info info) {
+        requireAllNonNull(name, phone, email, address, tags, prevDateMet, info);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.prevDateMet = prevDateMet;
+        this.info = info;
+    }
+
+    /**
+     * Constructor for Person object where every field is present and not null except prevDateMet.
+     * Previous date met will be set to the current date as the user might meet up with the client
+     * for the first time.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
@@ -34,6 +54,8 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.prevDateMet = new PrevDateMet(LocalDate.now().toString());
+        this.info = new Info("");
     }
 
     public Name getName() {
@@ -50,6 +72,14 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public PrevDateMet getPrevDateMet() {
+        return prevDateMet;
+    }
+
+    public Info getInfo() {
+        return info;
     }
 
     /**
@@ -93,12 +123,14 @@ public class Person {
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getTags().equals(getTags());
+//                && otherPerson.getPrevDateMet().equals(getPrevDateMet())
+//                && otherPerson.getInfo().equals(getInfo());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, prevDateMet, info);
     }
 
     @Override
@@ -110,7 +142,11 @@ public class Person {
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Address: ")
-                .append(getAddress());
+                .append(getAddress())
+                .append("; Previous Date Met: ")
+                .append(getPrevDateMet())
+                .append("; Info: ")
+                .append(getInfo());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
