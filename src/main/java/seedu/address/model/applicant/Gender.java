@@ -11,6 +11,7 @@ public class Gender {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Gender should be exactly one character and only M or F (case sensitive)";
+
     public static final String VALIDATION_REGEX = "M|F";
     public final String value;
 
