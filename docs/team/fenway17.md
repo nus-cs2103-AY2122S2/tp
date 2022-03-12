@@ -15,7 +15,11 @@ Given below are my contributions to the project.
   * Highlights: Status can be `"Positive"`, `"Negative"` or `"Close-Contact"`
   * Credits: *{Collaborators: Yong Rui, Zi Foong}*
 
-* **New Feature**: --
+* **New Feature**: Command to find persons by Class Code (Pull request [\#56](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/56))
+  * What it does: Find a list of persons that match the Class Code given.
+  * Justification: Allows admins and users to find all persons in the same class
+  * Highlights: Given Class Code can be part of the full Class Code
+  * Credits: *{}*
 
 * **Code contributed**: [RepoSense link]()
 
@@ -23,7 +27,7 @@ Given below are my contributions to the project.
   * Managed releases `--` - `--` (-- releases) on GitHub
 
 * **Enhancements to existing features**:
-  * -- (Pull requests [\#--](), [\#--]())
+  * Fixed multiple checkstyle errors (Pull request [\#49](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/49))
   * -- (Pull requests [\#--](), [\#--]())
 
 * **Documentation**:
@@ -36,7 +40,7 @@ Given below are my contributions to the project.
     * Added use cases for developer guide [\#27](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/27)
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#32](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/32)
+  * PRs reviewed (with non-trivial review comments): [\#32](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/32) [\#63](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/63)
   * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
   * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
   * Some parts of the -- feature I added was adopted by several other class mates ([1](), [2]())
