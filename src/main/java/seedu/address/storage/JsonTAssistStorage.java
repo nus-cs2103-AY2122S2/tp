@@ -60,8 +60,8 @@ public class JsonTAssistStorage implements TAssistStorage {
     }
 
     @Override
-    public void saveTAssist(ReadOnlyTAssist addressBook) throws IOException {
-        saveTAssist(addressBook, filePath);
+    public void saveTAssist(ReadOnlyTAssist tAssist) throws IOException {
+        saveTAssist(tAssist, filePath);
     }
 
     /**
@@ -69,12 +69,12 @@ public class JsonTAssistStorage implements TAssistStorage {
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveTAssist(ReadOnlyTAssist addressBook, Path filePath) throws IOException {
-        requireNonNull(addressBook);
+    public void saveTAssist(ReadOnlyTAssist tAssist, Path filePath) throws IOException {
+        requireNonNull(tAssist);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableTAssist(addressBook), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableTAssist(tAssist), filePath);
     }
 
 }

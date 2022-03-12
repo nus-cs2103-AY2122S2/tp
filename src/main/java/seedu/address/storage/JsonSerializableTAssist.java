@@ -54,7 +54,7 @@ class JsonSerializableTAssist {
     }
 
     /**
-     * Converts this address book into the model's {@code TAssist} object.
+     * Converts this TAssist into the model's {@code TAssist} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
