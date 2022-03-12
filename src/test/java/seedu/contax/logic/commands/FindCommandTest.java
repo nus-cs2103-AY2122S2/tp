@@ -23,7 +23,7 @@ import seedu.contax.model.person.AddressContainsKeywordsPredicate;
 import seedu.contax.model.person.EmailContainsKeywordsPredicate;
 import seedu.contax.model.person.NameContainsKeywordsPredicate;
 import seedu.contax.model.person.PhoneContainsKeywordsPredicate;
-import seedu.contax.ui.ListContentType;
+import seedu.contax.commons.core.GuiListContentType;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -143,7 +143,7 @@ public class FindCommandTest {
     @Test
     public void execute_zeroKeywords_noPersonFound() {
         CommandResult expectedResult = new CommandResult(String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0),
-                ListContentType.PERSON);
+                GuiListContentType.PERSON);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -154,7 +154,7 @@ public class FindCommandTest {
     @Test
     public void execute_zeroKeywords_noPersonFoundPhone() {
         CommandResult expectedResult = new CommandResult(String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0),
-                ListContentType.PERSON);
+                GuiListContentType.PERSON);
         PhoneContainsKeywordsPredicate predicate = preparePhonePredicate(" ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -165,7 +165,7 @@ public class FindCommandTest {
     @Test
     public void execute_zeroKeywords_noPersonFoundEmail() {
         CommandResult expectedResult = new CommandResult(String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0),
-                ListContentType.PERSON);
+                GuiListContentType.PERSON);
         EmailContainsKeywordsPredicate predicate = prepareEmailPredicate(" ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -176,7 +176,7 @@ public class FindCommandTest {
     @Test
     public void execute_zeroKeywords_noPersonFoundAddress() {
         CommandResult expectedResult = new CommandResult(String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0),
-                ListContentType.PERSON);
+                GuiListContentType.PERSON);
         AddressContainsKeywordsPredicate predicate = prepareAddressPredicate(" ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -187,7 +187,7 @@ public class FindCommandTest {
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
         CommandResult expectedResult = new CommandResult(String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3),
-                ListContentType.PERSON);
+                GuiListContentType.PERSON);
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -198,7 +198,7 @@ public class FindCommandTest {
     @Test
     public void execute_multipleKeywords_multiplePersonsFoundPhone() {
         CommandResult expectedResult = new CommandResult(String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3),
-                ListContentType.PERSON);
+                GuiListContentType.PERSON);
         PhoneContainsKeywordsPredicate predicate = preparePhonePredicate("95352563 9482224 9482427");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -209,7 +209,7 @@ public class FindCommandTest {
     @Test
     public void execute_multipleKeywords_multiplePersonsFoundEmail() {
         CommandResult expectedResult = new CommandResult(String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3),
-                ListContentType.PERSON);
+                GuiListContentType.PERSON);
         EmailContainsKeywordsPredicate predicate = prepareEmailPredicate(
                 "heinz@example.com werner@example.com lydia@example.com");
         FindCommand command = new FindCommand(predicate);
@@ -221,7 +221,7 @@ public class FindCommandTest {
     @Test
     public void execute_multipleKeywords_multiplePersonsFoundAddress() {
         CommandResult expectedResult = new CommandResult(String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2),
-                ListContentType.PERSON);
+                GuiListContentType.PERSON);
         AddressContainsKeywordsPredicate predicate = prepareAddressPredicate(
                 "wall michegan");
         FindCommand command = new FindCommand(predicate);

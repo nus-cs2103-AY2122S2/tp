@@ -10,7 +10,7 @@ import seedu.contax.model.Model;
 import seedu.contax.model.ModelManager;
 import seedu.contax.model.Schedule;
 import seedu.contax.model.UserPrefs;
-import seedu.contax.ui.ListContentType;
+import seedu.contax.commons.core.GuiListContentType;
 
 /**
  * Contains integration tests (interaction with Model) and units tests for ListTagCommand
@@ -28,6 +28,6 @@ public class ListTagCommandTest {
     @Test
     public void execute_valid_listAllTags() {
         assertCommandSuccess(new ListTagCommand(), model, new CommandResult(ListTagCommand.MESSAGE_SUCCESS,
-                ListContentType.TAG), expectedModel);
+                GuiListContentType.TAG), expectedModel);
     }
 }
