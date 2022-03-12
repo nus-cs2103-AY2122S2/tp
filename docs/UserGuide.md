@@ -5,7 +5,7 @@ title: User Guide
 
 TAlent Assistant™ is a **desktop, lightweight and centralized management system** catered to professors for managing
 the process of hiring undergraduate/graduate Teaching Assistants (TA). They will be able to access the TAs’ application
-data easily and review qualifications or availability for scheduling interviews. It is **optimized for use via a 
+data easily and review qualifications or availability for scheduling interviews. It is **optimized for use via a
 Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, this application will be able to help you manage all things under the hood of the TA initiative faster than traditional GUI applications.
 
 
@@ -29,7 +29,7 @@ Command Line Interface (CLI)** while still having the benefits of a Graphical Us
 
    * **`list`** : Lists all TAs.
 
-   * **`add n/John Doe id/A0123456H c/Computer Science`** Adds a new TA into the system. 
+   * **`add n/John Doe id/A0123456H c/Computer Science`** Adds a new TA into the system.
 
    * **`delete A0123456H`** : Deletes the TA with ID A0213456H from the system.
 
