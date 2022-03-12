@@ -26,10 +26,19 @@ public class Task {
 
     /**
      * Constructs a {@code Task}.
+     * Default constructor, to be used only by {@code JsonAdaptedPerson}.
+     */
+    public Task() {
+        super();
+        this.taskName = null;
+    }
+
+    /**
+     * Constructs a {@code Task}.
      *
      * @param taskName a valid taskName.
      */
-    public Task (String taskName) {
+    public Task(String taskName) {
         requireNonNull(taskName);
         checkArgument(isValidTaskName(taskName), MESSAGE_CONSTRAINTS);
         this.taskName = convertToTitleCase(taskName);

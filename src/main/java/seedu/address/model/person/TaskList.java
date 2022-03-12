@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import seedu.address.commons.exceptions.IllegalValueException;
+
 import java.util.ArrayList;
 
 /**
@@ -12,8 +14,17 @@ public class TaskList {
     /**
      * Constructs a {@code Task}.
      */
-    TaskList() {
+    public TaskList() {
         taskList = new ArrayList<>();
+    }
+
+    /**
+     * Retrieves the taskList.
+     *
+     * @return the taskList that is in the form of an ArrayList.
+     */
+    public ArrayList<Task> getTaskList() {
+        return taskList;
     }
 
     /**
@@ -23,6 +34,15 @@ public class TaskList {
      */
     public void addTask(Task task) {
         taskList.add(task);
+    }
+
+    /**
+     * Adds all tasks from an existing taskList to the list of tasks.
+     *
+     * @param taskList the target taskList to be copied from.
+     */
+    public void addAllTask(TaskList taskList) {
+        this.taskList.addAll(taskList.getTaskList());
     }
 
     /**

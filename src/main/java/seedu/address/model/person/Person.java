@@ -22,7 +22,8 @@ public class Person {
     private final TaskList taskList;
 
     /**
-     * Every field must be present and not null.
+     * Constructs a new Person.
+     * Only the studentId, name, moduleCode are compulsory fields.
      */
     public Person(StudentId studentId, Name name, ModuleCode moduleCode, Phone phone,
                   TelegramHandle telegramHandle, Email email) {
@@ -37,10 +38,10 @@ public class Person {
     }
 
     /**
-     * Overloaded constructor for use within {@code Person} methods only.
-     * Every field must be present and not null.
+     * Constructs a new Person, with an existing taskList.
+     * Only the studentId, name, moduleCode are compulsory fields.
      */
-    private Person(StudentId studentId, Name name, ModuleCode moduleCode, Phone phone,
+    public Person(StudentId studentId, Name name, ModuleCode moduleCode, Phone phone,
                   TelegramHandle telegramHandle, Email email, TaskList taskList) {
         requireAllNonNull(studentId, name, moduleCode); // Compulsory fields
         this.studentId = studentId;

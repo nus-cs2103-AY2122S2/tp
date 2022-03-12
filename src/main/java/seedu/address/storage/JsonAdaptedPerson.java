@@ -10,7 +10,12 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.StudentId;
+import seedu.address.model.person.Task;
+import seedu.address.model.person.TaskList;
 import seedu.address.model.person.TelegramHandle;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -25,6 +30,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String telegramHandle;
     private final String email;
+    private final TaskList taskList = new TaskList();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -33,13 +39,16 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("studentId") String studentId, @JsonProperty("name") String name,
                              @JsonProperty("moduleCode") String moduleCode, @JsonProperty("phone") String phone,
                              @JsonProperty("telegramHandle") String telegramHandle,
-                             @JsonProperty("email") String email) {
+                             @JsonProperty("email") String email, @JsonProperty("taskList") TaskList taskList) {
         this.studentId = studentId;
         this.name = name;
         this.moduleCode = moduleCode;
         this.phone = phone;
         this.telegramHandle = telegramHandle;
         this.email = email;
+        if (taskList != null) {
+            this.taskList.addAllTask(taskList);
+        }
     }
 
     /**
@@ -69,6 +78,8 @@ class JsonAdaptedPerson {
         } else {
             email = currEmail.value;
         }
+
+        taskList.addAllTask(source.getTaskList());
     }
 
     /**
@@ -130,7 +141,16 @@ class JsonAdaptedPerson {
             modelEmail = new Email(email);
         }
 
-        return new Person(modelStudentId, modelName, modelModuleCode, modelPhone, modelTelegramHandle, modelEmail);
+        final TaskList modelTaskList;
+        for (Task i : taskList.getTaskList()) {
+            if (!Task.isValidTaskName(i.getTaskName())) {
+                throw new IllegalValueException(Task.MESSAGE_CONSTRAINTS);
+            }
+        }
+        modelTaskList = taskList;
+
+        return new Person(modelStudentId, modelName, modelModuleCode,
+                modelPhone, modelTelegramHandle, modelEmail, modelTaskList);
     }
 
 }
