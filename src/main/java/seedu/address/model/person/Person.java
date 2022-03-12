@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -21,9 +22,9 @@ import seedu.address.model.tag.Tag;
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
-    private final Set<Tag> tags = new HashSet<>();
-    private final Map<Prefix, Field> fields = new HashMap<>();
+public class Person implements Serializable {
+    private final HashSet<Tag> tags = new HashSet<>();
+    private final HashMap<Prefix, Field> fields = new HashMap<>();
 
     /**
      * Deprecated constructor.
