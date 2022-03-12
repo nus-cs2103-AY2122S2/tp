@@ -31,9 +31,11 @@ public class FindCommandTest {
     @Test
     public void equals() {
         CompanyNameContainsKeywordsPredicate firstCompanyPredicate =
-                new CompanyNameContainsKeywordsPredicate(Collections.singletonList("first"));
+                new CompanyNameContainsKeywordsPredicate(Collections.singletonList("first"),
+                        Collections.singletonList("first"));
         CompanyNameContainsKeywordsPredicate secondCompanyPredicate =
-                new CompanyNameContainsKeywordsPredicate(Collections.singletonList("second"));
+                new CompanyNameContainsKeywordsPredicate(Collections.singletonList("second"),
+                        Collections.singletonList("second"));
         RoleNameContainsKeywordsPredicate firstRolePredicate =
                 new RoleNameContainsKeywordsPredicate(Collections.singletonList("first"));
         RoleNameContainsKeywordsPredicate secondRolePredicate =
@@ -62,8 +64,9 @@ public class FindCommandTest {
     @Test
     public void execute_multipleKeywords_multipleCompaniesFound() {
         String expectedMessage = String.format(MESSAGE_COMPANIES_LISTED_OVERVIEW, 3);
-        CompanyNameContainsKeywordsPredicate companyPredicate = prepareCompanyPredicate("zoom apple tech");
-        RoleNameContainsKeywordsPredicate rolePredicate = prepareRolePredicate("zoom apple tech");
+        CompanyNameContainsKeywordsPredicate companyPredicate =
+                prepareCompanyPredicate("zoom apple tech", "engineer");
+        RoleNameContainsKeywordsPredicate rolePredicate = prepareRolePredicate("engineer");
         FindCommand command = new FindCommand(companyPredicate, rolePredicate);
         expectedModel.updateFilteredCompanyList(companyPredicate, rolePredicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -71,12 +74,16 @@ public class FindCommandTest {
     }
 
     /**
-     * Parses {@code userInput} into a {@code CompanyNameContainsKeywordsPredicate}.
+     * Parses {@code roleUserInput} and {@code companyUserInput} into a {@code CompanyNameContainsKeywordsPredicate}.
      */
-    private CompanyNameContainsKeywordsPredicate prepareCompanyPredicate(String userInput) {
-        return new CompanyNameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    private CompanyNameContainsKeywordsPredicate prepareCompanyPredicate(String companyUserInput,
+                                                                         String roleUserInput) {
+        return new CompanyNameContainsKeywordsPredicate(Arrays.asList(roleUserInput.split("\\s+")),
+                Arrays.asList(companyUserInput.split("\\s+")));
     }
-
+    /**
+     * Parses {@code userInput} into a {@code RoleNameContainsKeywordsPredicate}.
+     */
     private RoleNameContainsKeywordsPredicate prepareRolePredicate(String userInput) {
         return new RoleNameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
