@@ -77,6 +77,15 @@ public class DeleteCommandTest {
     }
 
     @Test
+    public void execute_emptyList_throwsCommandException() {
+        Index outOfBoundIndex = INDEX_FIRST_PERSON;
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_EMPTY_LIST);
+        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_NO_CANDIDATES_IN_SYSTEM);
+    }
+
+    @Test
     public void equals() {
         DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON);
         DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON);

@@ -8,6 +8,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -42,6 +43,6 @@ public class ListCommandTest {
     public void execute_listIsEmpty_showsEmptyMessage() {
         model = new ModelManager(new AddressBook(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_NO_CANDIDATES_IN_SYSTEM, expectedModel);
+        assertCommandSuccess(new ListCommand(), model, Messages.MESSAGE_NO_CANDIDATES_IN_SYSTEM, expectedModel);
     }
 }

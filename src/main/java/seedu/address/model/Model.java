@@ -14,8 +14,11 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
+    /** {@code Predicate} that always evaluate to false */
+    Predicate<Person> PREDICATE_SHOW_EMPTY_LIST = unused -> false;
+
     /**
-     * Replaces user prefs data with the data in {@code userPrefs}.
+     * * Replaces user prefs data with the data in {@code userPrefs}.
      */
     void setUserPrefs(ReadOnlyUserPrefs userPrefs);
 
