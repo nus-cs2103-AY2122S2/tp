@@ -9,7 +9,12 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.predicate.CourseContainsKeywordsPredicate;
+import seedu.address.model.person.predicate.EmailContainsKeywordsPredicate;
+import seedu.address.model.person.predicate.NameContainsKeywordsPredicate;
+import seedu.address.model.person.predicate.PersonContainsKeywordsPredicate;
+import seedu.address.model.person.predicate.PhoneContainsKeywordsPredicate;
+import seedu.address.model.person.predicate.StudentIdContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
 
@@ -21,14 +26,74 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_returnsFindCommand() {
+    public void parse_validArgs_returnsFindNameCommand() {
         // no leading and trailing whitespaces
-        FindCommand expectedFindCommand =
+        FindCommand expectedFindNameCommand =
                 new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Amy", "Bob")));
-        assertParseSuccess(parser, " k/Amy k/Bob f/name", expectedFindCommand);
+        assertParseSuccess(parser, " k/Amy k/Bob f/name", expectedFindNameCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, "    k/Amy \t  k/Bob  \t  f/name \t", expectedFindCommand);
+        assertParseSuccess(parser, "    k/Amy \t  k/Bob  \t  f/name \t", expectedFindNameCommand);
     }
 
+    @Test
+    public void parse_validArgs_returnsFindCourseCommand() {
+        // no leading and trailing whitespaces
+        FindCommand expectedFindCourseCommand =
+                new FindCommand(new CourseContainsKeywordsPredicate(Arrays.asList("info", "Computer science")));
+        assertParseSuccess(parser, " k/info k/Computer science f/course", expectedFindCourseCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, "  \t  k/info \t  k/Computer science \t \t  f/course \t", expectedFindCourseCommand);
+    }
+
+    @Test
+    public void parse_validArgs_returnsFindPhoneCommand() {
+        // no leading and trailing whitespaces
+        FindCommand expectedFindPhoneCommand =
+                new FindCommand(new PhoneContainsKeywordsPredicate(Arrays.asList("987", "923")));
+        assertParseSuccess(parser, " k/987 k/923 f/phone", expectedFindPhoneCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, "  k/987 \t \t k/923  \t  f/phone \t", expectedFindPhoneCommand);
+    }
+
+    @Test
+    public void parse_validArgs_returnsFindEmailCommand() {
+        // no leading and trailing whitespaces
+        FindCommand expectedFindEmailCommand =
+                new FindCommand(new EmailContainsKeywordsPredicate(Arrays.asList("@gmail", "we@mail.com")));
+        assertParseSuccess(parser, " k/@gmail k/we@mail.com f/email", expectedFindEmailCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, "    k/@gmail \t  k/we@mail.com  \t  f/email \t", expectedFindEmailCommand);
+    }
+
+    @Test
+    public void parse_validArgs_returnsFindStudentIdCommand() {
+        // no leading and trailing whitespaces
+        FindCommand expectedFindStudentIdCommand =
+                new FindCommand(new StudentIdContainsKeywordsPredicate(Arrays.asList("E0324", "149")));
+        assertParseSuccess(parser, " k/E0324 k/149 f/studentid", expectedFindStudentIdCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, "    k/E0324 \t \t  k/149  \t  f/studentid \t", expectedFindStudentIdCommand);
+    }
+
+    @Test
+    public void parse_validArgs_returnsFindPersonCommand() {
+        // no leading and trailing whitespaces
+        FindCommand expectedFindPersonCommand =
+                new FindCommand(new PersonContainsKeywordsPredicate(Arrays.asList("Amy", "computer science")));
+        assertParseSuccess(parser, " k/Amy k/computer science f/person", expectedFindPersonCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, "    k/Amy \t  k/computer science  \t  f/person \t", expectedFindPersonCommand);
+
+        // no field specified
+        assertParseSuccess(parser, "    k/Amy \t  k/computer science  \t  f/ \t", expectedFindPersonCommand);
+
+        // no field specified
+        assertParseSuccess(parser, "    k/Amy \t  k/computer science  \t  \t", expectedFindPersonCommand);
+    }
 }
