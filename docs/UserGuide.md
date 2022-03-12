@@ -77,6 +77,20 @@ Adds a module to TAssist.
 
 Format: `add module n/MODULE_NAME c/MODULE_CODE a/ACADEMIC_YEAR`
 
+* `ACADEMIC_YEAR` is represented by the year (last 2 digits) and a semester.
+* Semester value ranges from S1 to S8. The table below shows the representation of each value:
+
+| Key | Semester               |
+|-----|------------------------|
+| S1  | Semester 1             |
+| S2  | Semester 2             |
+| S3  | Special Term (Part 1)  |
+| S4  | Special Term (Part 2)  |
+| S5  | Mini-Semester 1A       |
+| S6  | Mini-Semester 1B       |
+| S7  | Mini-Semester 2A       |
+| S8  | Mini-Semester 2B       |
+
 Examples:
 * `add module n/Software Engineering Project c/CS2103T a/21S1`
 
