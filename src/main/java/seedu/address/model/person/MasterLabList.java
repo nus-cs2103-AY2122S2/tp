@@ -79,7 +79,7 @@ public class MasterLabList {
     public void setLabs(List<Lab> labs) {
         requireAllNonNull(labs);
         if (!labsAreUnique(labs)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateLabException();
         }
         masterList.clear();
         masterList.addAll(labs);

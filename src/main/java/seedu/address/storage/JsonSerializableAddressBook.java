@@ -21,6 +21,7 @@ import seedu.address.model.person.lab.Lab;
 class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_LAB = "Persons list contains duplicate lab(s).";
 
     private final List<JsonAdaptedLabNumber> masterList = new ArrayList<>();
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
@@ -64,7 +65,7 @@ class JsonSerializableAddressBook {
         for (JsonAdaptedLabNumber jsonAdaptedLabNumber : masterList) {
             Lab lab = jsonAdaptedLabNumber.toModelType();
             if (addressBook.hasLab(lab)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+                throw new IllegalValueException(MESSAGE_DUPLICATE_LAB);
             }
             addressBook.getMasterLabList().add(lab);
         }
