@@ -75,11 +75,14 @@ public class Person {
      * @param other
      */
     public void removeModule(ModuleCode other) {
+        Module toRemove = null; // necessary to prevent concurrent modification exception
         for (Module module : modules) {
             if (module.hasModuleCode(other)) {
-                modules.remove(other);
+                toRemove = module;
+                break;
             }
         }
+        modules.remove(toRemove);
     }
 
     /**

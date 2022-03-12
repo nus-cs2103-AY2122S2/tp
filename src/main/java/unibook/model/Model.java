@@ -98,6 +98,8 @@ public interface Model {
 
     boolean hasModule(Module module);
 
+    boolean hasModule(ModuleCode moduleCode);
+
     void deleteByModuleCode(ModuleCode moduleCode);
 
     void deleteModule(Module module);

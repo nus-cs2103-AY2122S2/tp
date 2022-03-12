@@ -13,8 +13,11 @@ import unibook.commons.core.index.Index;
 import unibook.model.Model;
 import unibook.model.ModelManager;
 import unibook.model.UserPrefs;
+import unibook.model.module.ModuleCode;
 import unibook.model.person.Person;
 import unibook.testutil.TypicalIndexes;
+import unibook.testutil.TypicalModuleCodes;
+import unibook.testutil.TypicalModules;
 import unibook.testutil.TypicalPersons;
 
 /**
@@ -29,6 +32,7 @@ public class DeleteCommandTest {
     public static final Boolean MODULE_LIST_NOT_SHOWING = false;
 
     private Model model = new ModelManager(TypicalPersons.getTypicalUniBook(), new UserPrefs());
+    private Model moduleModel = new ModelManager(TypicalModules.getTypicalUniBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -41,6 +45,20 @@ public class DeleteCommandTest {
         expectedModel.deletePerson(personToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validModuleUnfilteredList_success() {
+        ModuleCode moduleToDelete = moduleModel.getFilteredModuleList()
+                .get(TypicalModules.FIRST_MODULE).getModuleCode();
+        DeleteCommand deleteCommand = new DeleteCommand(TypicalModuleCodes.CS2103);
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_MODULE_SUCCESS, moduleToDelete);
+
+        ModelManager expectedModel = new ModelManager(moduleModel.getUniBook(), new UserPrefs());
+        expectedModel.deleteByModuleCode(moduleToDelete);
+
+        assertCommandSuccess(deleteCommand, moduleModel, expectedMessage, expectedModel);
     }
 
     @Test

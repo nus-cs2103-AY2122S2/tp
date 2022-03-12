@@ -86,6 +86,11 @@ public class DeleteCommand extends Command {
                 throw new CommandException(Messages.MESSAGE_CHANGE_TO_MODULE_PAGE);
             }
 
+            // check if module code is valid
+            if (!model.hasModule(moduleCode)) {
+                throw new CommandException(String.format(Messages.MESSAGE_MODULE_CODE_NOT_EXIST, moduleCode));
+            }
+
             // Bi-directionality
             model.deleteByModuleCode(moduleCode); // delete module from ModuleList
             model.removeModuleFromAllPersons(moduleCode); // delete module from each person in UniquePersonList

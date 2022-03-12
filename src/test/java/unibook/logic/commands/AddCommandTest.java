@@ -168,6 +168,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasModule(ModuleCode moduleCode) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deleteModule(Module target) {
             throw new AssertionError("This method should not be called.");
         }

@@ -98,6 +98,7 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - the returned {@link CommandResult} matches {@code expectedCommandResult} <br>
      * - the {@code actualModel} matches {@code expectedModel}
+     * Meant to test result on calling Methods on a certain correct page
      */
     public static void assertCommandSuccessPage(Command command, Model actualModel, CommandResult expectedCommandResult,
                                             Model expectedModel, boolean personListShowing, boolean moduleListShowing) {

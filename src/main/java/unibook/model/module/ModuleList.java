@@ -88,11 +88,13 @@ public class ModuleList implements Iterable<Module> {
      */
     public void removeByModuleCode(ModuleCode toRemove) {
         requireNonNull(toRemove);
+        Module remove = null; // necessary to prevent concurrent modification exception
         for (Module module : internalList) {
             if (module.hasModuleCode(toRemove)) {
-                internalList.remove(module);
+                remove = module;
             }
         }
+        internalList.remove(remove);
     }
 
     /**

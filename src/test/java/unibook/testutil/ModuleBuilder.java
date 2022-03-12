@@ -22,6 +22,9 @@ public class ModuleBuilder {
     public static final String DEFAULT_CODE = "CS2103";
     public static final String DEFAULT_NAME = "Software Engineering";
     public static final String DEFAULT_PROFESSOR = "Damith";
+    public static final Phone DEFAULT_PHONE_NUMBER = new Phone("12345678");
+    public static final Email DEFAULT_EMAIL = new Email("damith@nus.edu.sg");
+    public static final Office DEFAULT_OFFICE = new Office("COM1-1");
 
     private ModuleName moduleName;
     private ModuleCode moduleCode;
@@ -71,7 +74,8 @@ public class ModuleBuilder {
      */
     public ModuleBuilder withProfessor(String profName) {
         this.professors = FXCollections.observableArrayList();
-        professors.add(new Professor(new Name(profName), null, null, new HashSet<>(), null, new HashSet<>()));
+        professors.add(new Professor(new Name(profName), DEFAULT_PHONE_NUMBER,
+                DEFAULT_EMAIL, new HashSet<>(), DEFAULT_OFFICE, new HashSet<>()));
         return this;
     }
 

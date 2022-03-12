@@ -124,6 +124,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasModule(ModuleCode moduleCode) {
+        requireNonNull(moduleCode);
+        return uniBook.hasModule(moduleCode);
+    }
+
+    @Override
     public void deleteByModuleCode(ModuleCode moduleCode) {
         uniBook.removeByModuleCode(moduleCode);
     }
