@@ -1,7 +1,5 @@
 package manageezpz.model;
 
-import static manageezpz.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static manageezpz.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static manageezpz.testutil.Assert.assertThrows;
 import static manageezpz.testutil.TypcialTasks.READ_BOOK;
 import static manageezpz.testutil.TypicalPersons.ALICE;
@@ -49,8 +47,7 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
+        Person editedAlice = new PersonBuilder(ALICE).build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newPersons);
 
@@ -76,8 +73,7 @@ public class AddressBookTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
+        Person editedAlice = new PersonBuilder(ALICE).build();
         assertTrue(addressBook.hasPerson(editedAlice));
     }
 
