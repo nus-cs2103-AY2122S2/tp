@@ -44,6 +44,5 @@ public class EditPersonDescriptorTest {
         // different email -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
-
     }
 }

@@ -14,7 +14,6 @@ import static manageezpz.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static manageezpz.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static manageezpz.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static manageezpz.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static manageezpz.logic.parser.CliSyntax.PREFIX_TAG;
 import static manageezpz.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static manageezpz.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static manageezpz.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -32,8 +31,6 @@ import manageezpz.model.person.Phone;
 import manageezpz.testutil.EditPersonDescriptorBuilder;
 
 public class EditCommandParserTest {
-
-    private static final String TAG_EMPTY = " " + PREFIX_TAG;
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
@@ -91,8 +88,7 @@ public class EditCommandParserTest {
                 + EMAIL_DESC_AMY + NAME_DESC_AMY;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY)
-                .build();
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -156,12 +152,10 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // other valid values specified
-        userInput = targetIndex.getOneBased() + EMAIL_DESC_BOB + INVALID_PHONE_DESC
-                + PHONE_DESC_BOB;
-        descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .build();
+        userInput = targetIndex.getOneBased() + EMAIL_DESC_BOB + INVALID_PHONE_DESC + PHONE_DESC_BOB;
+        descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_BOB).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
-
 }

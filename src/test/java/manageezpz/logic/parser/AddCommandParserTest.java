@@ -3,7 +3,6 @@ package manageezpz.logic.parser;
 import static manageezpz.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static manageezpz.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static manageezpz.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static manageezpz.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static manageezpz.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static manageezpz.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static manageezpz.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
@@ -23,15 +22,16 @@ import static manageezpz.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
-import manageezpz.logic.commands.AddCommand;
+import manageezpz.logic.commands.AddEmployeeCommand;
 import manageezpz.model.person.Email;
 import manageezpz.model.person.Name;
 import manageezpz.model.person.Person;
 import manageezpz.model.person.Phone;
 import manageezpz.testutil.PersonBuilder;
 
+
 public class AddCommandParserTest {
-    private AddCommandParser parser = new AddCommandParser();
+    private AddEmployeeCommandParser parser = new AddEmployeeCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
@@ -39,28 +39,20 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB,
-                new AddCommand(expectedPerson));
+                new AddEmployeeCommand(expectedPerson));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB,
-                new AddCommand(expectedPerson));
+                new AddEmployeeCommand(expectedPerson));
 
         // multiple phones - last phone accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB,
-                new AddCommand(expectedPerson));
+                new AddEmployeeCommand(expectedPerson));
 
         // multiple emails - last email accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB,
-                new AddCommand(expectedPerson));
+                new AddEmployeeCommand(expectedPerson));
 
-        // multiple addresses - last address accepted
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB,
-                new AddCommand(expectedPerson));
-
-        // multiple tags - all accepted
-        Person expectedPersonMultipleTags = new PersonBuilder(BOB).build();
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB,
-                new AddCommand(expectedPersonMultipleTags));
     }
 
     @Test
@@ -68,12 +60,12 @@ public class AddCommandParserTest {
         // zero tags
         Person expectedPerson = new PersonBuilder(AMY).build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY,
-                new AddCommand(expectedPerson));
+                new AddEmployeeCommand(expectedPerson));
     }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEmployeeCommand.MESSAGE_USAGE);
 
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB,
@@ -95,7 +87,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         // invalid name
-        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB ,
+        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB,
                 Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
@@ -107,11 +99,11 @@ public class AddCommandParserTest {
                 Email.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
-        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC,
+        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB,
                 Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEmployeeCommand.MESSAGE_USAGE));
     }
 }

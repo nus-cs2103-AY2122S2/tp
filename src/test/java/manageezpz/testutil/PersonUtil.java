@@ -4,7 +4,7 @@ import static manageezpz.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_NAME;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_PHONE;
 
-import manageezpz.logic.commands.AddCommand;
+import manageezpz.logic.commands.AddEmployeeCommand;
 import manageezpz.logic.commands.EditCommand.EditPersonDescriptor;
 import manageezpz.model.person.Person;
 
@@ -17,7 +17,7 @@ public class PersonUtil {
      * Returns an add command string for adding the {@code person}.
      */
     public static String getAddCommand(Person person) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(person);
+        return AddEmployeeCommand.COMMAND_WORD + " " + getPersonDetails(person);
     }
 
     /**

@@ -1,11 +1,9 @@
 package manageezpz.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static manageezpz.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_NAME;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_PHONE;
-import static manageezpz.logic.parser.CliSyntax.PREFIX_TAG;
 import static manageezpz.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -35,8 +33,6 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
