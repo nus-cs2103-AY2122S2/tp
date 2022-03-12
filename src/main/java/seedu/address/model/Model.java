@@ -18,7 +18,7 @@ public interface Model {
     Predicate<Person> PREDICATE_SHOW_EMPTY_LIST = unused -> false;
 
     /**
-     * * Replaces user prefs data with the data in {@code userPrefs}.
+     * Replaces user prefs data with the data in {@code userPrefs}.
      */
     void setUserPrefs(ReadOnlyUserPrefs userPrefs);
 
