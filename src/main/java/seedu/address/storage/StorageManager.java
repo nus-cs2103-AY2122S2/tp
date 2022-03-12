@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyTAssist;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 
@@ -18,12 +19,23 @@ public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
+    private TAssistStorage tAssistStorage;
     private UserPrefsStorage userPrefsStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
+     * TODO: to be updated
      */
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(TAssistStorage tAssistStorage, AddressBookStorage addressBookStorage,
+                          UserPrefsStorage userPrefsStorage) {
+        this.addressBookStorage = addressBookStorage;
+        this.userPrefsStorage = userPrefsStorage;
+        this.tAssistStorage = tAssistStorage;
+    }
+
+    /** TODO: To be removed */
+    public StorageManager(AddressBookStorage addressBookStorage,
+                          UserPrefsStorage userPrefsStorage) {
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
@@ -46,6 +58,7 @@ public class StorageManager implements Storage {
     }
 
 
+    /** TODO: To be removed */
     // ================ AddressBook methods ==============================
 
     @Override
@@ -73,6 +86,35 @@ public class StorageManager implements Storage {
     public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
         addressBookStorage.saveAddressBook(addressBook, filePath);
+    }
+
+    // ================ TAssist methods ==============================
+
+    @Override
+    public Path getTAssistFilePath() {
+        return tAssistStorage.getTAssistFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlyTAssist> readTAssist() throws DataConversionException, IOException {
+        return readTAssist(tAssistStorage.getTAssistFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlyTAssist> readTAssist(Path filePath) throws DataConversionException, IOException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return tAssistStorage.readTAssist(filePath);
+    }
+
+    @Override
+    public void saveTAssist(ReadOnlyTAssist tAssist) throws IOException {
+        saveTAssist(tAssist, tAssistStorage.getTAssistFilePath());
+    }
+
+    @Override
+    public void saveTAssist(ReadOnlyTAssist tAssist, Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        tAssistStorage.saveTAssist(tAssist, filePath);
     }
 
 }
