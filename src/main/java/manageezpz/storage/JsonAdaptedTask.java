@@ -41,5 +41,4 @@ class JsonAdaptedTask {
         }
         return new Task(description);
     }
-
 }
