@@ -130,7 +130,6 @@ public class Task {
 
     @Override
     public boolean equals(Object other) {
-
         return this == other // short circuit if same object
                 || (other instanceof Task
                 && getTaskName().equals(((Task) other).getTaskName()));

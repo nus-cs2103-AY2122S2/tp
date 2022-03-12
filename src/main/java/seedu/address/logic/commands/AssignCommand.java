@@ -14,7 +14,7 @@ import seedu.address.model.person.Task;
 
 
 /**
- * Assigns a task to a person in address book.
+ * Assigns a task to a student in TAPA.
  */
 public class AssignCommand extends Command {
 
@@ -29,7 +29,7 @@ public class AssignCommand extends Command {
             + PREFIX_TASK_NAME + "assignment 1";
 
     public static final String MESSAGE_SUCCESS = "Task Assigned: %1$s";
-    public static final String MESSAGE_DUPLICATE_TASK = "This task is already assigned to person.";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task is already assigned to a specified person.";
     public static final String MESSAGE_PERSON_NOT_FOUND = "There is no person with the given studentId";
 
     private final StudentId studentId;

@@ -81,7 +81,6 @@ public class Person {
         return taskList;
     }
 
-
     /**
      * Adds a {@code task} to list of tasks.
      *
@@ -141,6 +140,11 @@ public class Person {
                 && otherPerson.getStudentId().equals(getStudentId());
     }
 
+    /**
+     * Returns a copy of the person.
+     *
+     * @return a copy of the person object.
+     */
     public Person getCopy() {
         return new Person(getStudentId(), getName(), getModuleCode(), getPhone(),
                 getTelegramHandle(), getEmail(), getTaskList());

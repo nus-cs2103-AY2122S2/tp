@@ -44,7 +44,7 @@ public class AssignCommandParser implements Parser<AssignCommand> {
         } else {
             task = ParserUtil.parseTask(currTask.get());
         }
-        
+
         return new AssignCommand(studentId, task);
     }
 

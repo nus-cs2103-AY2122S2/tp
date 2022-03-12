@@ -12,7 +12,7 @@ public class TaskList {
     private final ArrayList<Task> taskList;
 
     /**
-     * Constructs a {@code Task}.
+     * Constructs a {@code TaskList}.
      */
     public TaskList() {
         taskList = new ArrayList<>();
@@ -39,7 +39,7 @@ public class TaskList {
     /**
      * Adds all tasks from an existing taskList to the list of tasks.
      *
-     * @param taskList the target taskList to be copied from.
+     * @param taskList the target TaskList to be copied from.
      */
     public void addAllTask(TaskList taskList) {
         this.taskList.addAll(taskList.getTaskList());
