@@ -17,6 +17,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.storage.CommandStorage;
 import seedu.address.storage.Storage;
 
 /**
@@ -28,20 +29,24 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
+    private final CommandStorage commandStorage;
     private final AddressBookParser addressBookParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
      */
-    public LogicManager(Model model, Storage storage) {
+    public LogicManager(Model model, Storage storage, CommandStorage commandStorage) {
         this.model = model;
         this.storage = storage;
+        this.commandStorage = commandStorage;
         addressBookParser = new AddressBookParser();
     }
 
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
+
+        commandStorage.addCommand(commandText);
 
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
@@ -103,5 +108,15 @@ public class LogicManager implements Logic {
         } catch (DataConversionException | IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
+    }
+
+    @Override
+    public String getPreviousCommand() {
+        return commandStorage.getPreviousCommand();
+    }
+
+    @Override
+    public String getNextCommand() {
+        return commandStorage.getNextCommand();
     }
 }
