@@ -1,6 +1,7 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -15,9 +16,9 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Person;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
-import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
+import seedu.address.model.student.Telegram;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tamodule.AcademicYear;
 import seedu.address.model.tamodule.ModuleCode;
@@ -76,17 +77,17 @@ public class SampleDataUtil {
     public static Student[] getSampleStudent() {
         return new Student[] {
             new Student(new StudentId("E0123456"), new Name("Alex Yeoh"),
-                    new Phone("87438807"), new Email("alexyeoh@example.com")),
+                    new Email("alexyeoh@example.com"), Optional.of(new Telegram("alexyeoh"))),
             new Student(new StudentId("E0123457"), new Name("Bernice Yu"),
-                    new Phone("99272758"), new Email("berniceyu@example.com")),
+                    new Email("berniceyu@example.com"), Optional.of(new Telegram("bernice_yu"))),
             new Student(new StudentId("E0123458"), new Name("Charlotte Oliveiro"),
-                    new Phone("93210283"), new Email("charlotte@example.com")),
+                    new Email("charlotte@example.com"), Optional.of(new Telegram("Char_Oliverio"))),
             new Student(new StudentId("E0123459"), new Name("David Li"),
-                    new Phone("91031282"), new Email("lidavid@example.com")),
+                    new Email("lidavid@example.com"), Optional.of(new Telegram("David12Li"))),
             new Student(new StudentId("E0123460"), new Name("Irfan Ibrahim"),
-                    new Phone("92492021"), new Email("irfan@example.com")),
+                    new Email("irfan@example.com"), Optional.of(new Telegram("_irfanIbrahim_"))),
             new Student(new StudentId("E0123461"), new Name("Roy Balakrishnan"),
-                    new Phone("92624417"), new Email("royb@example.com"))
+                    new Email("royb@example.com"))
         };
     }
 
