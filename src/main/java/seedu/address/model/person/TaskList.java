@@ -59,7 +59,7 @@ public class TaskList {
      * @return true if the task is already present ;false otherwise.
      */
     public boolean isTaskAlreadyPresent(Task task) {
-        return taskList.stream().map(x -> x.isTaskNameEqual(task.getTaskName())).anyMatch(y -> y == true);
+        return taskList.stream().map(x -> x.isTaskNameEqual(task.getTaskName())).anyMatch(y -> y);
     }
 
     /**
@@ -85,10 +85,10 @@ public class TaskList {
         String taskStr = "";
 
         int idxNum = 1;
-        String period = ".";
+        String separate = ". ";
 
         for (Task task: taskList) {
-            taskStr += idxNum + period + task + "\n";
+            taskStr += idxNum + separate + task + "\n";
             idxNum++;
         }
 

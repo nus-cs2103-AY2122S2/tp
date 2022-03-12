@@ -83,7 +83,7 @@ public class PersonCard extends UiPart<Region> {
         if (currentTasks == null || currentTasks.isEmpty()) {
             tasks.setText("Tasks: ");
         } else {
-            tasks.setText("Tasks: \n" + currentTasks);
+            tasks.setText("Tasks: \n" + currentTasks.toString());
         }
 
     }

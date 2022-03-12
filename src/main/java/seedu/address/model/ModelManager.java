@@ -116,8 +116,8 @@ public class ModelManager implements Model {
     @Override
     public void assignTaskToPerson(StudentId studentId, Task task) {
         requireAllNonNull(studentId, task);
-
         addressBook.assignTaskToPerson(studentId, task);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     //=========== Filtered Person List Accessors =============================================================

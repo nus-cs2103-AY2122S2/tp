@@ -79,9 +79,9 @@ public interface Model {
     void setPerson(Person target, Person editedPerson);
 
     /**
-     * Assigns {@code Task} to the person with {@code studentId}.
+     * Assigns {@code Task} to {@code person} with {@code studentId}.
      * A person with {@code studentId} must exist in the address book.
-     * The {@code task} should be unique and not a duplicate of already assigned  task.
+     * The {@code task} should be unique and not a duplicate of already assigned task.
      */
     void assignTaskToPerson(StudentId studentId, Task task);
 

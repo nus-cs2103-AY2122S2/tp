@@ -36,6 +36,22 @@ public class Person {
         this.taskList = new TaskList();
     }
 
+    /**
+     * Overloaded constructor for use within {@code Person} methods only.
+     * Every field must be present and not null.
+     */
+    private Person(StudentId studentId, Name name, ModuleCode moduleCode, Phone phone,
+                  TelegramHandle telegramHandle, Email email, TaskList taskList) {
+        requireAllNonNull(studentId, name, moduleCode); // Compulsory fields
+        this.studentId = studentId;
+        this.name = name;
+        this.moduleCode = moduleCode;
+        this.phone = phone;
+        this.telegramHandle = telegramHandle;
+        this.email = email;
+        this.taskList = taskList;
+    }
+
     public StudentId getStudentId() {
         return studentId;
     }
@@ -66,7 +82,7 @@ public class Person {
 
 
     /**
-     * Adds a task to list of tasks.
+     * Adds a {@code task} to list of tasks.
      *
      * @param task the task to be added.
      */
@@ -122,6 +138,11 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getStudentId().equals(getStudentId());
+    }
+
+    public Person getCopy() {
+        return new Person(getStudentId(), getName(), getModuleCode(), getPhone(),
+                getTelegramHandle(), getEmail(), getTaskList());
     }
 
     /**

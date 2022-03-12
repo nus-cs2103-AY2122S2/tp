@@ -112,12 +112,13 @@ public class UniquePersonList implements Iterable<Person> {
             if (currPerson.getStudentId().equals(studentId)) {
                 isPersonFound = true;
                 if (!currPerson.isTaskAlreadyPresent(task)) {
-                    currPerson.addTask(task);
+                    Person updatedPerson = currPerson.getCopy();
+                    updatedPerson.addTask(task);
+                    setPerson(currPerson, updatedPerson);
                 } else {
                     throw new DuplicateTaskException();
                 }
             }
-
         }
 
         if (!isPersonFound) {
