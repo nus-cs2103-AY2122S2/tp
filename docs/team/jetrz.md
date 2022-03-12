@@ -10,7 +10,7 @@ ClientConnect is a desktop client address book application for insurance agents 
 Given below are my contributions to the project.
 
 * **New Feature**:
-  * To be added soon
+  * "clip" feature to allow efficient copying of a contact's information onto the user's clipboard.
 
 * **Code contributed**: [RepoSense link]()
 

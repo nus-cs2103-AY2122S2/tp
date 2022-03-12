@@ -191,6 +191,22 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+### Clipping a client's information to clipboard : `clip`
+
+Copies a client's information onto the system's clipboard.
+
+Format: `clip n/NAME`
+
+* Copies the information of the client with the specified NAME.
+* You can look for a client’s name by using the `list` command.
+
+Examples:
+1. `clip n/John Doe`
+
+Information copied using `clip n/John Doe`:
+
+![info copied using 'clip n/John Doe'](images/clipJohnDoe.PNG)
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -207,6 +223,7 @@ Format: `exit`
  | **Delete** | `delete INDEX`<br> e.g., `delete 3`|
 | **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [i/INSURANCE_PACKAGE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`|
  | **Find**   | `find FIELD KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/James Jake`|
+ | **Clip**    | `clip n/NAME`<br> e.g., `find n/John Doe`|
 | **List**   | `list`|
  | **Help**   | `help`|
  | **Exit**   | `exit`|
