@@ -7,18 +7,18 @@ import seedu.address.model.person.Person;
 public class TeamList {
     private ArrayList<Person> list;
 
-    TeamList() {
+    public TeamList() {
         this.list = new ArrayList<Person>();
     }
 
-    TeamList(Person[] teamMembers) {
+    public TeamList(Person[] teamMembers) {
         this.list = new ArrayList<Person>();
         for (int i = 0; i < teamMembers.length; i++) {
             this.list.add(teamMembers[i]);
         }
     }
 
-    void addToTeamList(Person person) {
+    public void addToTeamList(Person person) {
         this.list.add(person);
     }
 
