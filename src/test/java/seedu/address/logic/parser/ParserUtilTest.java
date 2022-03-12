@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
@@ -14,6 +15,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.util.Pair;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.company.Address;
@@ -21,6 +23,7 @@ import seedu.address.model.company.CompanyName;
 import seedu.address.model.company.Email;
 import seedu.address.model.company.Phone;
 import seedu.address.model.tag.Tag;
+
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
@@ -76,6 +79,32 @@ public class ParserUtilTest {
         Index[] indexesWhiteSpaceInput = ParserUtil.parseDoubleIndex("  1     1  ");
         assertEquals(INDEX_FIRST_COMPANY, indexesWhiteSpaceInput[0]);
         assertEquals(INDEX_FIRST_ROLE, indexesWhiteSpaceInput[1]);
+    }
+
+    @Test
+    public void parseDoubleIndexWithContent_invalidInput_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDoubleIndexWithContent("1 0"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDoubleIndex("10 a"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDoubleIndex("1 1 1"));
+    }
+
+    @Test
+    public void parseDoubleIndexWithContent_validInput_success() throws Exception {
+        // No whitespaces
+        Pair<Index[], String> parsedInput = ParserUtil.parseDoubleIndexWithContent("1 1 test");
+        Index[] indexes = parsedInput.getKey();
+        String info = parsedInput.getValue();
+        assertEquals(INDEX_FIRST_COMPANY, indexes[0]);
+        assertEquals(INDEX_FIRST_ROLE, indexes[1]);
+        assertEquals(info, " test");
+
+        // Leading and trailing whitespaces
+        Pair<Index[], String> whiteSpaceInput = ParserUtil.parseDoubleIndexWithContent("  1     1   test");
+        indexes = parsedInput.getKey();
+        info = parsedInput.getValue();
+        assertEquals(INDEX_FIRST_COMPANY, indexes[0]);
+        assertEquals(INDEX_FIRST_ROLE, indexes[1]);
+        assertEquals(info, " test");
     }
 
     @Test

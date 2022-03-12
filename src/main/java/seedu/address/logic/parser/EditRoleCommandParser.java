@@ -61,7 +61,7 @@ public class EditRoleCommandParser implements Parser<EditRoleCommand> {
             editRoleDescriptor.setStipend(ParserUtil.parseStipend(argMultimap.getValue(PREFIX_STIPEND).get()));
         }
         if (!editRoleDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditRoleCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditRoleCommand.MESSAGE_USAGE));
         }
 
         return new EditRoleCommand(companyIndex, roleIndex, editRoleDescriptor);
