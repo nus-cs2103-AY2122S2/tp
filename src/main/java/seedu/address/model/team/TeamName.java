@@ -3,6 +3,9 @@ package seedu.address.model.team;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a Team's name in MyGM
+ * Guarantees: immutable; is valid as declared in {@link #isValidTeamName(String)} */
 public class TeamName {
     public static final String MESSAGE_CONSTRAINTS =
             "Team Names should only contain alphanumeric characters and spaces, and it should not be blank";
