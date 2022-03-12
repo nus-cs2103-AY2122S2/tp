@@ -25,7 +25,7 @@ public class GroupCard extends UiPart<Region> {
     /**
      * Creates a {@code GroupCode} with the given {@code Group} and index to display.
      */
-    GroupCard(Group group, int displayedIndex) {
+    public GroupCard(Group group, int displayedIndex) {
         super(FXML);
         this.group = group;
         id.setText(displayedIndex + ". ");
