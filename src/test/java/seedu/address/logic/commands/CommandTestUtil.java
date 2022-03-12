@@ -33,8 +33,8 @@ public class CommandTestUtil {
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "91111111";
     public static final String VALID_PHONE_BOB = "92222222";
-    public static final String VALID_EMAIL_AMY = "amy@example.com";
-    public static final String VALID_EMAIL_BOB = "bob@example.com";
+    public static final String VALID_EMAIL_AMY = "E0123456@u.nus.edu";
+    public static final String VALID_EMAIL_BOB = "E0234567@u.nus.edu";
     public static final String VALID_COURSE_AMY = "Business Analytics";
     public static final String VALID_COURSE_BOB = "Computer Engineering";
     public static final String VALID_TAG_HUSBAND = "husband";
