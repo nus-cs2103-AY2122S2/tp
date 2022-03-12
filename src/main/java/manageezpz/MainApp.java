@@ -15,6 +15,7 @@ import manageezpz.commons.util.ConfigUtil;
 import manageezpz.commons.util.StringUtil;
 import manageezpz.logic.Logic;
 import manageezpz.logic.LogicManager;
+import manageezpz.logic.commands.exceptions.CommandException;
 import manageezpz.model.AddressBook;
 import manageezpz.model.Model;
 import manageezpz.model.ModelManager;
@@ -82,6 +83,7 @@ public class MainApp extends Application {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            storage.saveAddressBook(initialData);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
             initialData = new AddressBook();
