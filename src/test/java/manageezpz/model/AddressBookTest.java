@@ -1,6 +1,7 @@
 package manageezpz.model;
 
 import static manageezpz.testutil.Assert.assertThrows;
+import static manageezpz.testutil.TypcialTasks.READ_BOOK;
 import static manageezpz.testutil.TypicalPersons.ALICE;
 import static manageezpz.testutil.TypicalPersons.getTypicalAddressBook;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -18,6 +19,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import manageezpz.model.person.Person;
 import manageezpz.model.person.exceptions.DuplicatePersonException;
+import manageezpz.model.task.Task;
+import manageezpz.model.task.exceptions.DuplicateTaskException;
 import manageezpz.testutil.PersonBuilder;
 
 public class AddressBookTest {
@@ -84,15 +87,59 @@ public class AddressBookTest {
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Task> tasks = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons) {
+
+        AddressBookStub(List<Person> persons) {
             this.persons.setAll(persons);
+        }
+
+        AddressBookStub(Collection<Task> tasks) {
+            this.tasks.setAll(tasks);
         }
 
         @Override
         public ObservableList<Person> getPersonList() {
             return persons;
         }
+
+        @Override
+        public ObservableList<Task> getTaskList() {
+            return tasks;
+        }
     }
+
+    //====================== Task Tests for ManageEZPZ ======================
+
+    @Test
+    public void resetData_withDuplicateTasks_throwsDuplicateTaskException() {
+        // Two tasks with the same description fields
+        List<Task> newTasks = Arrays.asList(READ_BOOK, READ_BOOK);
+        AddressBookStub newData = new AddressBookStub(newTasks);
+
+        assertThrows(DuplicateTaskException.class, () -> addressBook.resetData(newData));
+    }
+
+    @Test
+    public void hasTask_nullTask_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasTask(null));
+    }
+
+    @Test
+    public void hasTask_taskNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasTask(READ_BOOK));
+    }
+
+    @Test
+    public void hasTask_taskInAddressBook_returnsTrue() {
+        addressBook.addTask(READ_BOOK);
+        assertTrue(addressBook.hasTask(READ_BOOK));
+    }
+
+    @Test
+    public void getTaskList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getTaskList().remove(0));
+    }
+
 
 }

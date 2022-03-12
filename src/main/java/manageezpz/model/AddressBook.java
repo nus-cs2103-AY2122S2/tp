@@ -7,6 +7,11 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import manageezpz.model.person.Person;
 import manageezpz.model.person.UniquePersonList;
+import manageezpz.model.task.Deadline;
+import manageezpz.model.task.Event;
+import manageezpz.model.task.Task;
+import manageezpz.model.task.Todo;
+import manageezpz.model.task.UniqueTaskList;
 
 /**
  * Wraps all data at the address-book level
@@ -15,6 +20,7 @@ import manageezpz.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UniqueTaskList tasks;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,6 +31,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        tasks = new UniqueTaskList();
     }
 
     public AddressBook() {}
@@ -47,6 +54,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.persons.setPersons(persons);
     }
 
+
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
@@ -54,7 +62,90 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setTasks(newData.getTaskList());
     }
+
+    /// task-level operations
+
+    /**
+     * Returns true if a task with the same identity as {@code task} exists in the task list.
+     * @param task the task to be checked.
+     * @return true if same identity otherwise false
+     */
+    public boolean hasTask(Task task) {
+        requireNonNull(task);
+        return tasks.contains(task);
+    }
+
+    public void addTask(Task t) {
+        tasks.add(t);
+    }
+
+    public void setTasks(List<Task> task) {
+        this.tasks.setTasks(task);
+    }
+
+    public void removeTask(Task key) {
+        tasks.remove(key);
+    }
+
+    /**
+     * Returns true if a todo with the same identity as {@code todo} exists in the task list.
+     */
+    public boolean hasTodo(Todo todo) {
+        requireNonNull(todo);
+        return tasks.contains(todo);
+    }
+
+    /**
+     * Adds a todo to the task list.
+     * The todo must not already exist in the task list.
+     */
+    public void addTodo(Todo todo) {
+        this.tasks.add(todo);
+    }
+
+    /**
+     * Returns true if a event with the same identity as {@code event} exists in the task list.
+     */
+    public boolean hasEvent(Event event) {
+        requireNonNull(event);
+        return tasks.contains(event);
+    }
+
+    /**
+     * Adds an event to the task list.
+     * The event must not already exist in the task list.
+     */
+    public void addEvent(Event event) {
+        this.tasks.add(event);
+    }
+
+    /**
+     * Returns true if a deadline with the same identity as {@code deadline} exists in the task list.
+     */
+    public boolean hasDeadline(Deadline deadline) {
+        requireNonNull(deadline);
+        return tasks.contains(deadline);
+    }
+
+    /**
+     * Adds a deadline to the task list.
+     * The deadline must not already exist in the task list.
+     */
+    public void addDeadline(Deadline deadline) {
+        this.tasks.add(deadline);
+    }
+
+    public void markTask(Task task) {
+    }
+
+    public void unmarkTask(Task task) {
+    }
+
+    public void findTask(Task task) {
+    }
+
 
     //// person-level operations
 
@@ -107,6 +198,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
+    public ObservableList<Task> getTaskList() {
+        return tasks.asUnmodifiableObservableList();
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
@@ -117,4 +213,5 @@ public class AddressBook implements ReadOnlyAddressBook {
     public int hashCode() {
         return persons.hashCode();
     }
+
 }

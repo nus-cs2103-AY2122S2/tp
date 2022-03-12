@@ -6,11 +6,17 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import manageezpz.commons.core.GuiSettings;
 import manageezpz.model.person.Person;
+import manageezpz.model.task.Deadline;
+import manageezpz.model.task.Event;
+import manageezpz.model.task.Task;
+import manageezpz.model.task.Todo;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
+    /** {@code Predicate} that always evaluate to true to show all tasks */
+    Predicate<Task> PREDICATE_SHOW_ALL_TASKS = unused -> true;
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
@@ -84,4 +90,84 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+
+    //=========== ManageEZPZ (Tasks) ==================================================================================
+
+    /**
+     * Deletes the given task.
+     * The task must exist in the task list.
+     */
+    void deleteTask(Task task);
+
+    /**
+     * Marks the given task.
+     * The task must exist in the task list.
+     */
+    void markTask(Task task);
+
+    /**
+     * unMarks the given task.
+     * The task must exist in the task list.
+     */
+    void unmarkTask(Task task);
+
+    /**
+     * Finds the given task.
+     * The task must exist in the task list.
+     */
+    void findTask(Task task);
+
+    /**
+     * Adds the given task.
+     * {@code task} must not already exist in the task list
+     */
+    void addTask(Task task);
+
+    /**
+     * Adds the given todo.
+     * {@code todo} must not already exist in the task list
+     */
+    void addTodo(Todo todo);
+
+    /**
+     * Adds the given event.
+     * {@code event} must not already exist in the task list
+     */
+    void addEvent(Event event);
+
+    /**
+     * Adds the given deadline.
+     * {@code deadline} must not already exist in the task list
+     */
+    void addDeadline(Deadline deadline);
+
+    /**
+     * Updates the filter of the filtered task list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredTaskList(Predicate<Task> predicate);
+
+    /** Returns an unmodifiable view of the filtered task list. */
+    ObservableList<Task> getFilteredTaskList();
+
+    /**
+     * Returns true if a todo with the same identity as {@code todo} exists in the task list.
+     */
+    boolean hasTodo(Todo todo);
+
+    /**
+     * Returns true if an event with the same identity as {@code event} exists in the task list.
+     */
+    boolean hasEvent(Event event);
+
+    /**
+     * Returns true if a deadline with the same identity as {@code deadline} exists in the task list.
+     */
+    boolean hasDeadline(Deadline deadline);
+
+    /**
+     * Returns true if a task with the same identity as {@code deadline} exists in the task list.
+     */
+    boolean hasTask(Task task);
 }
