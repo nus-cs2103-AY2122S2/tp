@@ -100,7 +100,13 @@ public class EditCommand extends Command {
                             && !student.isSamePerson(editedPerson))
                     .collect(Collectors.toList());
 
-            // TODO - Update students' status in filtered list
+            for (int i = 0; i < filteredByClassCodeList.size(); i++) {
+                Person currentPerson = filteredByClassCodeList.get(i);
+                EditPersonDescriptor tempDescriptor = new EditPersonDescriptor();
+                tempDescriptor.setStatus(new Status(Status.CLOSE_CONTACT));
+                Person editedPersonStatus = createEditedPerson(currentPerson, tempDescriptor);
+                model.setPerson(currentPerson, editedPersonStatus);
+            }
         }
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
