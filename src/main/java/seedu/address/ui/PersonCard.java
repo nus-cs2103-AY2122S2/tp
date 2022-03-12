@@ -7,6 +7,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.TaskList;
 import seedu.address.model.person.TelegramHandle;
 
 /**
@@ -42,6 +43,8 @@ public class PersonCard extends UiPart<Region> {
     private Label telegramHandle;
     @FXML
     private Label email;
+    @FXML
+    private Label tasks;
 
 
     /**
@@ -75,6 +78,14 @@ public class PersonCard extends UiPart<Region> {
         } else {
             email.setText("Email: " + currentEmail.value);
         }
+
+        TaskList currentTasks = person.getTaskList();
+        if (currentTasks == null || currentTasks.isEmpty()) {
+            tasks.setText("Tasks: ");
+        } else {
+            tasks.setText("Tasks: \n" + currentTasks);
+        }
+
     }
 
     @Override

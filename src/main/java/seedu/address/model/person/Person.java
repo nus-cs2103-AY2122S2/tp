@@ -19,6 +19,7 @@ public class Person {
     private final Phone phone;
     private final TelegramHandle telegramHandle;
     private final Email email;
+    private final TaskList taskList;
 
     /**
      * Every field must be present and not null.
@@ -32,6 +33,7 @@ public class Person {
         this.phone = phone;
         this.telegramHandle = telegramHandle;
         this.email = email;
+        this.taskList = new TaskList();
     }
 
     public StudentId getStudentId() {
@@ -56,6 +58,57 @@ public class Person {
 
     public Email getEmail() {
         return email;
+    }
+
+    public TaskList getTaskList() {
+        return taskList;
+    }
+
+
+    /**
+     * Adds a task to list of tasks.
+     *
+     * @param task the task to be added.
+     */
+    public void addTask(Task task) {
+        taskList.addTask(task);
+    }
+
+    /**
+     * Removes the task at {@code index} from the list of tasks.
+     *
+     * @param index the index of the task to be removed.
+     */
+    public void removeTask(int index) {
+        taskList.removeTask(index);
+    }
+
+    /**
+     * Marks the task at {@code index} from the list of tasks as complete.
+     *
+     * @param index the index of the task to be marked complete.
+     */
+    public void markTaskAsComplete(int index) {
+        taskList.markTaskAsComplete(index);
+    }
+
+    /**
+     * Marks the task at {@code index} from the list of tasks as not complete.
+     *
+     * @param index the index of the task to be marked not complete.
+     */
+    public void markTaskAsNotComplete(int index) {
+        taskList.markTaskAsNotComplete(index);
+    }
+
+    /**
+     * Checks if the {@code task} is already present in the list of tasks.
+     *
+     * @param task the task name to be checked.
+     * @return true if the task is already present ;false otherwise.
+     */
+    public boolean isTaskAlreadyPresent(Task task) {
+        return taskList.isTaskAlreadyPresent(task);
     }
 
     /**
@@ -91,7 +144,8 @@ public class Person {
                 && otherPerson.getModuleCode().equals(getModuleCode())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getTelegramHandle().equals(getTelegramHandle())
-                && otherPerson.getEmail().equals(getEmail());
+                && otherPerson.getEmail().equals(getEmail())
+                && otherPerson.getTaskList().equals(getTaskList());
     }
 
     @Override
@@ -122,6 +176,11 @@ public class Person {
         Email currentEmail = getEmail();
         if (currentEmail != null) {
             builder.append("; Email: ").append(currentEmail);
+        }
+
+        TaskList currentTaskList = getTaskList();
+        if (currentTaskList != null) {
+            builder.append("; Tasks: ").append(currentTaskList);
         }
 
         return builder.toString();

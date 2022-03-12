@@ -6,6 +6,8 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.StudentId;
+import seedu.address.model.person.Task;
 
 /**
  * The API of the Model component.
@@ -75,6 +77,13 @@ public interface Model {
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
     void setPerson(Person target, Person editedPerson);
+
+    /**
+     * Assigns {@code Task} to the person with {@code studentId}.
+     * A person with {@code studentId} must exist in the address book.
+     * The {@code task} should be unique and not a duplicate of already assigned  task.
+     */
+    void assignTaskToPerson(StudentId studentId, Task task);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
