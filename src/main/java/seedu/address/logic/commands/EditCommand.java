@@ -22,6 +22,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.client.Address;
+import seedu.address.model.client.Appointment;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.Description;
 import seedu.address.model.client.Email;
@@ -105,9 +106,10 @@ public class EditCommand extends Command {
         Address updatedAddress = editclientDescriptor.getAddress().orElse(clientToEdit.getAddress());
         Remark updatedRemark = editclientDescriptor.getRemark().orElse(clientToEdit.getRemark());
         Set<Tag> updatedTags = editclientDescriptor.getTags().orElse(clientToEdit.getTags());
+        Appointment updatedAppointment = editclientDescriptor.getAppointment().orElse(clientToEdit.getAppointment());
 
         return new Client(updatedName, updatedDescription, updatedPhone, updatedEmail, updatedAddress, updatedRemark,
-                updatedTags);
+                updatedAppointment, updatedTags);
     }
 
     @Override
@@ -140,6 +142,7 @@ public class EditCommand extends Command {
         private Address address;
         private Remark remark;
         private Set<Tag> tags;
+        private Appointment appointment;
 
         public EditclientDescriptor() {}
 
@@ -203,6 +206,14 @@ public class EditCommand extends Command {
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
+        }
+
+        public void setAppointment(Appointment appointment) {
+            this.appointment = appointment;
+        }
+
+        public Optional<Appointment> getAppointment() {
+            return Optional.ofNullable(appointment);
         }
 
         public void setRemark(Remark remark) {

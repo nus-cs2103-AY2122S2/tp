@@ -168,6 +168,15 @@ Examples:
 * `find n/John` returns `john` and `John Doe`
 * `find e/alex david` returns `alex123@gmail.com`, `david456@abc.com`<br>
 
+### Creating an appointment: `appointment`
+
+Create an appointment with a certain client.
+
+Format: `appointment INDEX time/yyyy-mm-dd-hh-mm`
+
+* Create an appointment with the client with `index` and a time of `yyyy-mm-dd-hh-mm`
+* The index must be a positive integer
+
 ### Deleting a client : `delete`
 
 Deletes the specified client from the contact list.
@@ -230,3 +239,5 @@ Action | Format, Examples
 **Find** | `find prefix/ KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/ James Jake`
 **List** | `list`
 **Help** | `help`
+**Sort** | `sort`
+**Make Appointment** | `appointment Index [time/TIME]`
