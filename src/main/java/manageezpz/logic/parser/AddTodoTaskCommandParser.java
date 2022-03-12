@@ -1,8 +1,8 @@
 package manageezpz.logic.parser;
 
 import static manageezpz.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static manageezpz.logic.parser.CliSyntax.PREFIX_TODO;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static manageezpz.logic.parser.CliSyntax.PREFIX_TODO;
 
 import java.util.stream.Stream;
 
