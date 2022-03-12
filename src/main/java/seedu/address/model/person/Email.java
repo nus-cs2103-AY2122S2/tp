@@ -43,7 +43,7 @@ public class Email extends Field {
     public Email(String email) {
         super(PREFIX);
         requireNonNull(email);
-        value = email.trim();
+        value = email.trim().toLowerCase();
         checkArgument(isValid(value), MESSAGE_CONSTRAINTS);
     }
 

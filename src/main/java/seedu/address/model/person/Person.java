@@ -27,33 +27,6 @@ public class Person implements Serializable {
     private final HashMap<Prefix, Field> fields = new HashMap<>();
 
     /**
-     * Deprecated constructor.
-     * @param name the person's name
-     * @param phone the person's phone
-     * @param email the person's email
-     * @param address the person's address
-     * @param tags the person's tags
-     */
-    @Deprecated
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
-
-        // Add fields.
-        fields.put(name.prefix, name);
-        fields.put(phone.prefix, phone);
-        fields.put(email.prefix, email);
-        fields.put(address.prefix, address);
-        Remark remark = new Remark("");
-        fields.put(remark.prefix, remark);
-
-        // Add tags.
-        for (Tag t : tags) {
-            checkArgument(t != null, "All tags in Person constructor cannot be null.");
-            this.tags.add(t);
-        }
-    }
-
-    /**
      * Person constructor
      * @param fields A collection of all the person's attributes
      * @param tags A collection of all the person's tags
@@ -142,6 +115,10 @@ public class Person implements Serializable {
 
     public Person setTags(Collection<Tag> tags) {
         return new Person(this.fields.values(), tags);
+    }
+
+    public Person setTags(Tag... tags) {
+        return setTags(List.of(tags));
     }
 
     /**

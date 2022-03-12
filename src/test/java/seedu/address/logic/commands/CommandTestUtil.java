@@ -7,74 +7,18 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.PersonContainsKeywordsPredicate;
 
 /**
  * Contains helper methods for testing commands.
  */
 public class CommandTestUtil {
-
-    public static final String VALID_NAME_AMY = "Amy Bee";
-    public static final String VALID_NAME_BOB = "Bob Choo";
-    public static final String VALID_PHONE_AMY = "11111111";
-    public static final String VALID_PHONE_BOB = "22222222";
-    public static final String VALID_EMAIL_AMY = "amy@example.com";
-    public static final String VALID_EMAIL_BOB = "bob@example.com";
-    public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
-    public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
-    public static final String VALID_REMARK_BOB = "Likes rock climbing.";
-    public static final String VALID_REMARK_AMY = "Likes adventure.";
-    public static final String VALID_TAG_HUSBAND = "husband";
-    public static final String VALID_TAG_FRIEND = "friend";
-
-    public static final String NAME_DESC_AMY = " " + Name.PREFIX + VALID_NAME_AMY;
-    public static final String NAME_DESC_BOB = " " + Name.PREFIX + VALID_NAME_BOB;
-    public static final String PHONE_DESC_AMY = " " + Phone.PREFIX + VALID_PHONE_AMY;
-    public static final String PHONE_DESC_BOB = " " + Phone.PREFIX + VALID_PHONE_BOB;
-    public static final String EMAIL_DESC_AMY = " " + Email.PREFIX + VALID_EMAIL_AMY;
-    public static final String EMAIL_DESC_BOB = " " + Email.PREFIX + VALID_EMAIL_BOB;
-    public static final String ADDRESS_DESC_AMY = " " + Address.PREFIX + VALID_ADDRESS_AMY;
-    public static final String ADDRESS_DESC_BOB = " " + Address.PREFIX + VALID_ADDRESS_BOB;
-    public static final String REMARK_DESC_AMY = " " + Remark.PREFIX + VALID_REMARK_AMY;
-    public static final String REMARK_DESC_BOB = " " + Remark.PREFIX + VALID_REMARK_BOB;
-    public static final String TAG_DESC_FRIEND = " " + Tag.PREFIX + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + Tag.PREFIX + VALID_TAG_HUSBAND;
-
-    public static final String INVALID_NAME_DESC = " " + Name.PREFIX + "James&"; // '&' not allowed in names
-    public static final String INVALID_PHONE_DESC = " " + Phone.PREFIX + "911a"; // 'a' not allowed in phones
-    public static final String INVALID_EMAIL_DESC = " " + Email.PREFIX + "bob!yahoo"; // missing '@' symbol
-    public static final String INVALID_ADDRESS_DESC = " " + Address.PREFIX; // empty string not allowed for addresses
-    public static final String INVALID_TAG_DESC = " " + Tag.PREFIX + "hubby*"; // '*' not allowed in tags
-
-    public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
-    public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
-
-    public static final Person DESC_AMY = new Person(new Name(VALID_NAME_AMY),
-            new Phone(VALID_PHONE_AMY),
-            new Email(VALID_EMAIL_AMY),
-            new Address(VALID_ADDRESS_AMY),
-            buildTagSet(VALID_TAG_FRIEND)).setField(new Remark(VALID_REMARK_AMY));
-    public static final Person DESC_BOB = new Person(new Name(VALID_NAME_BOB),
-            new Phone(VALID_PHONE_BOB),
-            new Email(VALID_EMAIL_BOB),
-            new Address(VALID_ADDRESS_BOB),
-            buildTagSet(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)).setField(new Remark(VALID_REMARK_BOB));
-
     /**
      * Executes the given {@code command}, confirms that <br>
      * - the returned {@link CommandResult} matches {@code expectedCommandResult} <br>
@@ -126,12 +70,8 @@ public class CommandTestUtil {
 
         Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
         final String[] splitName = person.getName().getValue().split("\\s+");
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredPersonList(new PersonContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
-    }
-
-    public static Set<Tag> buildTagSet(String... tags) {
-        return Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
     }
 }
