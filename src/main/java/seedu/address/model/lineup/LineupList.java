@@ -1,10 +1,10 @@
 package seedu.address.model.lineup;
 
-import seedu.address.model.person.Person;
-
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.stream.Collectors;
+
+import seedu.address.model.person.Person;
 
 public class LineupList {
     private ArrayList<Person> players;

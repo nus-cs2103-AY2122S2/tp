@@ -1,11 +1,10 @@
 package seedu.address.model.lineup;
 
-import seedu.address.model.person.Person;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
+import seedu.address.model.person.Person;
 /**
  * Represents a lineup in a team.
  * Guarantees: lineupName is present and not null, up to 5 players per lineup
