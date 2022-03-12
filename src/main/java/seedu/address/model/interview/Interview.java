@@ -2,10 +2,9 @@ package seedu.address.model.interview;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.*;
+import java.util.Date;
 
-import seedu.address.model.applicant.*;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.applicant.Applicant;
 
 
 /**
@@ -37,9 +36,9 @@ public class Interview {
         return date;
     }
 
-//    public Position getPosition() {
-//        return email;
-//    }
+    //    public Position getPosition() {
+    //        return email;
+    //    }
 
     /**
      * Returns true if both interviews have the same data fields.
@@ -58,7 +57,7 @@ public class Interview {
         Interview otherInterview = (Interview) other;
         return otherInterview.getApplicant().equals(getApplicant())
                 && otherInterview.getDate().equals(getDate());
-                //&& otherInterview.getPosition().equals(getPosition());
+        //&& otherInterview.getPosition().equals(getPosition());
     }
 
     @Override
@@ -67,8 +66,8 @@ public class Interview {
         builder.append(applicant.getName())
                 .append("; Date: ")
                 .append(getDate());
-                //.append("; Position: ")
-                //.append(getEmail());
+        //.append("; Position: ")
+        //.append(getEmail());
         return builder.toString();
     }
 
