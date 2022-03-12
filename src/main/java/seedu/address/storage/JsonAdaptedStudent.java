@@ -43,7 +43,7 @@ class JsonAdaptedStudent {
         studentId = source.getStudentId().value;
         name = source.getName().fullName;
         email = source.getEmail().value;
-        telegram = String.valueOf(source.getTelegram());
+        telegram = source.getTelegram().get().value;
     }
 
     /**
