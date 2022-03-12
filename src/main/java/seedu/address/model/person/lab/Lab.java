@@ -15,7 +15,7 @@ import seedu.address.model.person.exceptions.LabNotSubmittedException;
 public class Lab {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Lab number should be a valid Integer";
+            "Lab number should be a valid postitive Integer";
 
     /*
      * Lab number has to be an Integer.
