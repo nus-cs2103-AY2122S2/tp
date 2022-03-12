@@ -42,7 +42,7 @@ class JsonAdaptedTaModule {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code TaModule} object.
+     * Converts this Jackson-friendly adapted tamodule object into the model's {@code TaModule} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted module.
      */
