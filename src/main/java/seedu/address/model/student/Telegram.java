@@ -17,7 +17,7 @@ public class Telegram {
     public final String value;
 
     /**
-     * Constructs a {@code tele}.
+     * Constructs a {@code Telegram}.
      *
      * @param telegram A valid Telegram handle.
      */
