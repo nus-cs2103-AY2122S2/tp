@@ -63,7 +63,7 @@ public class PersonCard extends UiPart<Region> {
 
         // Optional fields.
         remark.setText(person.getField(Remark.PREFIX).orElse(Remark.EMPTY_REMARK).getValue());
-        birthday.setText(person.getField(Birthday.PREFIX).isPresent() ? person.getField(Birthday.PREFIX).get().getValue() : "");
+        birthday.setText(person.hasField(Birthday.PREFIX) ? person.getField(Birthday.PREFIX).get().getValue() : "");
 
         // Tags.
         person.getTags().stream()
