@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import java.util.HashMap;
+
 import seedu.address.model.Model;
 
 /**
@@ -16,6 +18,8 @@ public class HelpCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
+        HashMap<String, Boolean> settings = new HashMap<>();
+        settings.put("help", true);
+        return new CommandResult(SHOWING_HELP_MESSAGE, settings);
     }
 }
