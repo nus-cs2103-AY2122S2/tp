@@ -43,7 +43,7 @@ public class LabList implements Iterable<Lab> {
      *
      * @param toAdd The Lab that you want to add.
      */
-    public void add(Lab toAdd) {
+    public void add(Lab toAdd) throws DuplicateLabException {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
             throw new DuplicateLabException();
@@ -57,7 +57,7 @@ public class LabList implements Iterable<Lab> {
      * {@code target} must exist in the list.
      * The lab identity of {@code editedLab} must not be the same as another existing lab in the list.
      */
-    public void setLab(Lab target, Lab editedLab) {
+    public void setLab(Lab target, Lab editedLab) throws LabNotFoundException, DuplicateLabException {
         requireAllNonNull(target, editedLab);
 
         int index = internalList.indexOf(target);
@@ -78,7 +78,7 @@ public class LabList implements Iterable<Lab> {
      *
      * @param toRemove Lab you want to remove from the list.
      */
-    public void remove(Lab toRemove) {
+    public void remove(Lab toRemove) throws LabNotFoundException {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
             throw new LabNotFoundException(toRemove.labNumber);
@@ -94,7 +94,7 @@ public class LabList implements Iterable<Lab> {
      * Replaces the contents of this list with {@code labs}.
      * {@code labs} must not contain duplicate labs.
      */
-    public void setLabs(List<Lab> labs) {
+    public void setLabs(List<Lab> labs) throws DuplicateLabException {
         requireAllNonNull(labs);
         if (!labsAreUnique(labs)) {
             throw new DuplicateLabException();

@@ -16,7 +16,7 @@ public class MasterLabList extends LabList {
      *
      * @param labNumber The lab number of the Lab you want to find.
      */
-    public Index indexOf(String labNumber) {
+    public Index indexOf(String labNumber) throws LabNotFoundException {
         requireNonNull(labNumber);
         Lab toIndex = new Lab(labNumber);
         if (!super.asUnmodifiableObservableList().contains(toIndex)) {
