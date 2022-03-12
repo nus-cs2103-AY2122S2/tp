@@ -5,16 +5,19 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 
 import seedu.address.model.person.Person;
+
 /**
  * Represents a lineup in a team.
- * Guarantees: lineupName is present and not null, up to 5 players per lineup
+ * Guarantees: lineupName is present and not null, up to 5 players per lineup.
  */
-
 public class Lineup {
-    private final LineupName lineupName;
 
+    private final LineupName lineupName;
     private final LineupList players;
 
+    /**
+     * lineupName must be present and not null.
+     */
     public Lineup(LineupName lineupName, LineupList players) {
         requireAllNonNull(lineupName);
         this.lineupName = lineupName;
@@ -29,7 +32,10 @@ public class Lineup {
         return players;
     }
 
-    public Person get(int index) {
+    /**
+     * Get the player at specific index of the lineupList.
+     */
+    public Person getPlayer(int index) {
         return players.get(index);
     }
 
