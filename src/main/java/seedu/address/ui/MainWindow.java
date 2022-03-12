@@ -2,7 +2,6 @@ package seedu.address.ui;
 
 import java.util.Objects;
 import java.util.logging.Logger;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
@@ -40,7 +39,6 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
     private AddTagWindow addTagWindow;
     private AddProfileWindow addProfileWindow;
-
 
     @FXML
     private StackPane commandBoxPlaceholder;
