@@ -50,11 +50,11 @@ e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 Notes about the property format:
 - Properties must be specified in the following format: `pr/REGION,ADDRESS,SIZE,PRICE`. Whitespace between parameters is ignored.<br>
-  e.g. Both `pr/East,Block 123,2-room,$550000` and `pr/East, Block 123, 2-room, $550000` are acceptable. `pr/Block 123, East, 2-room, $550000` is not acceptable.
+  e.g. Both `pr/East,Pasir Ris Drive 1 Block 123,2-room,$550000` and `pr/East, Pasir Ris Drive 1 Block 123, 2-room, $550000` are acceptable. `pr/Pasir Ris Drive 1 Block 123, East, 2-room, $550000` is not acceptable.
 
 Parameter formats:
 - REGION: One of [`North`, `South`, `East`, `West`, `Central`] (Non case-sensitive).
-- ADDRESS: Any non-empty string that does not contain `,`. e.g. `Block 123`
+- ADDRESS: Any non-empty string that does not contain `,`. e.g. `Pasir Ris Drive 1 Block 123`
 - SIZE: One of [`1-room`,`2-room`, `3-room`, `4-room`, `5-room`] (Non case-sensitive).
 - PRICE: `$` followed by a positive integer. e.g. `$150000`
 
@@ -77,6 +77,8 @@ Examples:
 - `add n/John Doe p/98765432 e/johnd@example.com a/John street block 123 #01-01, pr/East, John street block 123 #01-01, 2-room, $200000, t/buyer`
 - `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 pr/West, Newgate Prison, 1-room, $100000, t/seller`
 
+    ![images/user-guide/addBetsyCroweResult.png](images/user-guide/addBetsyCroweResult.png)
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
@@ -92,14 +94,13 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PROPERTY]… [
 - Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
-- When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-- You can remove all the person’s tags by typing `t/` without specifying any tags after it.
+- You may change the type of the user, from `buyer` to `seller` & vice versa
 - You can remove all the person’s properties by typing `pr/` without specifying any properties after it.
 
 Examples:
 
 - `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-- `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+- `edit 2 n/Betsy Crower t/seller` Edits the name of the 2nd person to be `Betsy Crower` and updates teh 2nd person's user type to `seller`.
 - `edit 2 n/Betsy Crower pr/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing properties.
 
 ### Locating persons by name: `find`
@@ -117,9 +118,9 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 
 - `find John` returns `john` and `John Doe`
-- `find alex david` returns `Alex Yeoh`, `David Li`
+- `find sam elon` returns `Sam Yeo`, `Elon Musk`
 
-    ![https://se-education.org/addressbook-level3/images/findAlexDavidResult.png](https://se-education.org/addressbook-level3/images/findAlexDavidResult.png)
+    ![images/user-guide/findSamElonResult.png](images/user-guide/findSamElonResult.png)
 
 ### Deleting a person: `delete`
 
@@ -148,13 +149,13 @@ Exits the program.
 
 Format: `exit`
 
-### Favourite a person: `favorite`
+### Favourite a person: `favourite`
 
-Favorites the specified person from the application. The user (real estate agent) will be able to view the more compact list of favorited persons in a new window that can be opened up through the ‘Favourite’ menu item.
+Favourites the specified person from the application. The user (real estate agent) will be able to view the more compact list of favorited persons in a new window that can be opened up through the ‘Favourite’ menu item.
 
 Format: `favourite INDEX`
 
-- Favorites the person at the specified `INDEX`.
+- Favourites the person at the specified `INDEX`.
 - The index refers to the index number shown in the displayed person list.
 - The index **must be a positive integer** 1, 2, 3, …
 
@@ -189,8 +190,8 @@ RealEstatePro data are saved as a JSON file `[JAR file location]/data/realestat
 
 | Action | Format, Examples  |
 | --- | --- |
-| Add | add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY], t/USER_TYPE
-e.g., add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 pr/2-room, East, SGD$200K, t/Buyer    |
+| Add | add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY]..., t/USER_TYPE
+e.g., add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 pr/2-room, East, SGD$200K, t/buyer    |
 | Clear | clear  |
 | Delete | delete INDEX
 e.g., delete 3  |
