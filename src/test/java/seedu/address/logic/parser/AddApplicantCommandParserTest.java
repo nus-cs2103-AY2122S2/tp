@@ -33,7 +33,6 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.parser.applicants.AddApplicantCommandParser;
 import seedu.address.model.applicant.Address;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.Email;
@@ -43,7 +42,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddApplicantCommandParserTest {
-    private AddApplicantCommandParser parser = new AddApplicantCommandParser();
+    private AddCommandParser parser = new AddCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
@@ -144,7 +143,7 @@ public class AddApplicantCommandParserTest {
                 Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
-        assertParseFailure(parser, PREAMBLE_NON_EMPTY + FLAG_APPLICANT + NAME_DESC_BOB + PHONE_DESC_BOB
+        assertParseFailure(parser, FLAG_APPLICANT + PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB
                         + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
