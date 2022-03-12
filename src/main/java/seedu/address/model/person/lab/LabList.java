@@ -4,6 +4,7 @@ package seedu.address.model.person.lab;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -17,6 +18,14 @@ public class LabList implements Iterable<Lab> {
     private final ObservableList<Lab> internalList = FXCollections.observableArrayList();
     private final ObservableList<Lab> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
+
+    private final Comparator<Lab> sortByLabNumber = new Comparator<>() {
+        @Override
+        public int compare(Lab l1, Lab l2) {
+            // Ignoring the case when l1.labNumber == l2.labNumber as there shouldn't be duplicate labs in the list.
+            return l1.labNumber - l2.labNumber;
+        }
+    };
 
     /**
      * Returns true if the list contains an equivalent lab as the given argument.
@@ -40,6 +49,7 @@ public class LabList implements Iterable<Lab> {
             throw new DuplicateLabException();
         }
         internalList.add(toAdd);
+        internalList.sort(sortByLabNumber);
     }
 
     /**
