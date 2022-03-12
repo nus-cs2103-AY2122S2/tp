@@ -94,6 +94,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+//    public boolean hasInterview(Interview interview) {
+//
+//    }
+
     //// util methods
 
     @Override
