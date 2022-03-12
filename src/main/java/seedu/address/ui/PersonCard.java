@@ -8,6 +8,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Birthday;
+import seedu.address.model.person.Membership;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
 
@@ -72,10 +73,18 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.value))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.value)));
 
+        /*
         // Memberships.
-        person.getMemberships().stream()
+        person.getMemberships().getList().stream()
                 .sorted(Comparator.comparing(membership -> membership.toString()))
                 .forEach(membership -> memberships.getChildren().add(new Label(membership.toString())));
+
+         */
+        Membership membership = person.getMembership();
+        if (membership != null) {
+            memberships.getChildren().add(new Label(membership.toString()));
+        }
+
     }
 
     @Override

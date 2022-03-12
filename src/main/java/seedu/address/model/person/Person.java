@@ -54,56 +54,16 @@ public class Person implements Serializable {
     }
 
     /**
-     * Overloaded Person constructor with an additional memberships parameter
-     * @param name the person's name
-     * @param phone the person's phone
-     * @param email the person's email
-     * @param address the person's address
-     * @param tags the person's tags
-     * @param memberships the person's memberships
-     */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Set<Membership> memberships) {
-        requireAllNonNull(name, phone, email, address, tags, memberships);
-
-        // Add fields.
-        fields.put(name.prefix, name);
-        fields.put(phone.prefix, phone);
-        fields.put(email.prefix, email);
-        fields.put(address.prefix, address);
-        Remark remark = new Remark("");
-        fields.put(remark.prefix, remark);
-
-        // Add tags.
-        for (Tag t : tags) {
-            checkArgument(t != null, "All tags in Person constructor cannot be null.");
-            this.tags.add(t);
-        }
-
-        // Add memberships.
-        for (Membership m : memberships) {
-            checkArgument(m != null, "All Memberships in Person constructor cannot be null.");
-            this.memberships.add(m);
-        }
-    }
-
-    /**
      * Person constructor
      * @param fields A collection of all the person's attributes
      * @param tags A collection of all the person's tags
-     * @param memberships A collection of all the person's memberships
      */
-    public Person(Collection<Field> fields, Collection<Tag> tags, Collection<Membership> memberships) {
+    public Person(Collection<Field> fields, Collection<Tag> tags) {
         requireAllNonNull(tags, fields);
         // Add tags.
         for (Tag t : tags) {
             checkArgument(t != null, "All tags in Person constructor cannot be null.");
             this.tags.add(t);
-        }
-
-        // Add memberships.
-        for (Membership m : memberships) {
-            checkArgument(m != null, "All Memberships in Person constructor cannot be null.");
-            this.memberships.add(m);
         }
 
         // Add fields.
@@ -119,7 +79,7 @@ public class Person implements Serializable {
     }
 
     public Person(Person otherPerson) {
-        this(otherPerson.getFields(), otherPerson.getTags(), otherPerson.getMemberships());
+        this(otherPerson.getFields(), otherPerson.getTags());
     }
 
     /**
@@ -140,7 +100,7 @@ public class Person implements Serializable {
         } else {
             updatedFields.put(field.prefix, field);
         }
-        return new Person(updatedFields.values(), tags, memberships);
+        return new Person(updatedFields.values(), tags);
     }
 
     public Optional<Field> getField(Prefix prefix) {
@@ -168,6 +128,10 @@ public class Person implements Serializable {
         return (Address) this.fields.get(Address.PREFIX);
     }
 
+    public Membership getMembership() {
+        return (Membership) this.fields.get(Membership.PREFIX);
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -177,19 +141,7 @@ public class Person implements Serializable {
     }
 
     public Person setTags(Collection<Tag> tags) {
-        return new Person(this.fields.values(), tags, this.memberships);
-    }
-
-    /**
-     * Returns an immutable membership set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Membership> getMemberships() {
-        return Collections.unmodifiableSet(memberships);
-    }
-
-    public Person setMemberships(Collection<Membership> memberships) {
-        return new Person(this.fields.values(), tags, memberships);
+        return new Person(this.fields.values(), tags);
     }
 
     /**
@@ -199,10 +151,13 @@ public class Person implements Serializable {
      * @return A new person
      */
     public Person addMembership(Membership membership) {
-        Set<Membership> newMembers = new HashSet<>(memberships);
-        newMembers.add(membership);
-        return new Person(this.fields.values(), tags, newMembers);
+        HashMap<Prefix, Field> newFields = new HashMap<>(this.fields);
+        // MembershipList newMemberships = getMemberships();
+        // newMemberships.getList().add(membership);
+        newFields.put(Membership.PREFIX, membership);
+        return new Person(newFields.values(), tags);
     }
+
 
     /**
      * Returns true if both persons have the same name.
@@ -235,13 +190,13 @@ public class Person implements Serializable {
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getTags().equals(getTags())
-                && otherPerson.getMemberships().equals(getMemberships());
+                && otherPerson.getMembership().equals(getMembership());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(getName(), getPhone(), getEmail(), getAddress(), tags, memberships);
+        return Objects.hash(getName(), getPhone(), getEmail(), getAddress(), tags);
     }
 
     @Override
@@ -260,10 +215,7 @@ public class Person implements Serializable {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
         }
-        if (!memberships.isEmpty()) {
-            builder.append("; Memberships: ");
-            memberships.forEach(builder::append);
-        }
+
         return builder.toString();
     }
 }

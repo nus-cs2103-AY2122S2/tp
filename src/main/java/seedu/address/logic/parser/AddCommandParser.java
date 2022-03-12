@@ -58,7 +58,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             }
         }
 
-        Person person = new Person(fields, tags, memberships);
+        Person person = new Person(fields, tags);
         return new AddCommand(person);
     }
 

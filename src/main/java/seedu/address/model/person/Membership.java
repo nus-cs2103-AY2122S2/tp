@@ -12,7 +12,7 @@ import seedu.address.logic.parser.Prefix;
  * Represents a Person's Membership in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
-public class Membership {
+public class Membership extends Field {
     public static final Prefix PREFIX = new Prefix("m/", true);
     public static final Prefix DATE_PREFIX = new Prefix("d/", false);
     public static final String MESSAGE_CONSTRAINTS =
@@ -35,6 +35,7 @@ public class Membership {
      * @param name A valid membership.
      */
     public Membership(String name) {
+        super(PREFIX);
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
         value = name;
@@ -48,6 +49,7 @@ public class Membership {
      * @param date A valid date.
      */
     public Membership(String name, LocalDate date) {
+        super(PREFIX);
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
         value = name;
