@@ -3,12 +3,12 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 
+import java.util.stream.Stream;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.StudentId;
-
-import java.util.stream.Stream;
 
 /**
  * Parses input arguments and creates a new DeleteCommand object
@@ -35,11 +35,11 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         } else if (arePrefixesPresent(argMultimap, PREFIX_ID)) { // supplied id only
             StudentId id = ParserUtil.parseStudentId(argMultimap.getValue(PREFIX_ID).get());
-            deleteCommand =  new DeleteCommand(id);
+            deleteCommand = new DeleteCommand(id);
         } else { // supplied index only
             try {
                 Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
-                deleteCommand =  new DeleteCommand(index);
+                deleteCommand = new DeleteCommand(index);
             } catch (ParseException pe) {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
