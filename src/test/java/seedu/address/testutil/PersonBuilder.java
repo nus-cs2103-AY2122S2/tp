@@ -3,7 +3,14 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Flag;
+import seedu.address.model.person.Info;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.PrevDateMet;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -17,6 +24,8 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_FLAG = "false";
+    public static final String DEFAULT_PREV_DATE_MET = "2022-01-15";
+    public static final String DEFAULT_INFO = "High risk tolerance.";
 
     private Name name;
     private Phone phone;
@@ -24,6 +33,8 @@ public class PersonBuilder {
     private Address address;
     private Flag flag;
     private Set<Tag> tags;
+    private PrevDateMet prevDateMet;
+    private Info info;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -35,6 +46,8 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         flag = new Flag(DEFAULT_FLAG);
         tags = new HashSet<>();
+        prevDateMet = new PrevDateMet(DEFAULT_PREV_DATE_MET);
+        info = new Info(DEFAULT_INFO);
     }
 
     /**
@@ -47,6 +60,8 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         flag = personToCopy.getFlag();
         tags = new HashSet<>(personToCopy.getTags());
+        prevDateMet = personToCopy.getPrevDateMet();
+        info = personToCopy.getInfo();
     }
 
     /**
@@ -94,6 +109,22 @@ public class PersonBuilder {
      */
     public PersonBuilder withFlag(String flag) {
         this.flag = new Flag(flag);
+        return this;
+    }
+
+    /**
+     * Sets the {@code PrevDateMet} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withPrevDateMet(String prevDateMet) {
+        this.prevDateMet = new PrevDateMet(prevDateMet);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Info} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withInfo(String info) {
+        this.info = new Info(info);
         return this;
     }
 

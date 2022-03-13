@@ -10,7 +10,14 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Flag;
+import seedu.address.model.person.Info;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.PrevDateMet;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -25,6 +32,9 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final String flag;
+    private String prevDateMet;
+    private String info;
+
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -33,12 +43,16 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address, @JsonProperty("flag") String flag,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("prevDateMet") String prevDateMet,
+            @JsonProperty("info") String info) {
+
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.flag = flag;
+        this.prevDateMet = prevDateMet;
+        this.info = info;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -53,6 +67,8 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         flag = source.getFlag().toString();
+        prevDateMet = source.getPrevDateMet().toString();
+        info = source.getInfo().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -110,7 +126,24 @@ class JsonAdaptedPerson {
         final Flag modelFlag = new Flag(flag);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelFlag, modelTags);
+
+        if (prevDateMet == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Person.class.getSimpleName()));
+        }
+        if (!PrevDateMet.isValidPrevDateMet(prevDateMet)) {
+            throw new IllegalValueException(PrevDateMet.MESSAGE_CONSTRAINTS);
+        }
+        final PrevDateMet modelPrevDateMet = new PrevDateMet(prevDateMet);
+
+        if (info == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Person.class.getSimpleName()));
+        }
+        if (!Info.isValidInfo(info)) {
+            throw new IllegalValueException(PrevDateMet.MESSAGE_CONSTRAINTS);
+        }
+        final Info modelInfo = new Info(info);
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelFlag, modelTags, modelPrevDateMet, modelInfo);
     }
 
 }
