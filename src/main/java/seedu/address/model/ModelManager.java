@@ -12,6 +12,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.applicant.Applicant;
+import seedu.address.model.interview.Interview;
+import seedu.address.model.position.Position;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -111,11 +113,17 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedApplicant);
     }
 
-    //    @Override
-    //    public boolean hasInterview(Interview interview) {
-    //        requireNonNull(interview);
-    //        return addressBook.hasInterview(interview);
-    //    }
+    @Override
+    public boolean hasInterview(Interview interview) {
+        requireNonNull(interview);
+        return addressBook.hasInterview(interview);
+    }
+
+    @Override
+    public void addInterview(Interview interview) {
+        addressBook.addInterview(interview);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
 
     //=========== Filtered Applicant List Accessors =============================================================
 
@@ -151,6 +159,12 @@ public class ModelManager implements Model {
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredApplicants.equals(other.filteredApplicants);
+    }
+
+    //=========== Filtered Position List Accessors =============================================================
+    @Override
+    public ObservableList<Position> getFilteredPositionList() {
+        return null; //TODO
     }
 
 }

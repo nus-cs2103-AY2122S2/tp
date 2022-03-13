@@ -6,6 +6,8 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.applicant.Applicant;
+import seedu.address.model.interview.Interview;
+import seedu.address.model.position.Position;
 
 /**
  * The API of the Model component.
@@ -86,10 +88,18 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Applicant> predicate);
 
-    //    /**
-    //     * Returns true if an interview already exists in the address book.
-    //     */
-    //    boolean hasInterview(Interview interview);
+    /**
+     * Returns true if an interview already exists in the address book.
+     */
+    boolean hasInterview(Interview interview);
 
+    /**
+     * Adds the given interview.
+     * {@code interview} must not already exist in the address book.
+     */
+    void addInterview(Interview interview);
+
+    /** Returns an unmodifiable view of the filtered applicant list */
+    ObservableList<Position> getFilteredPositionList();
 
 }

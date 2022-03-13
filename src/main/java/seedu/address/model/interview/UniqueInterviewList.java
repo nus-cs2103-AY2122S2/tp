@@ -72,8 +72,8 @@ public class UniqueInterviewList implements Iterable<Interview> {
     }
 
     /**
-     * Replaces the contents of this list with {@code applicants}.
-     * {@code applicants} must not contain duplicate applicants.
+     * Replaces the contents of this list with {@code interview}.
+     * {@code interview} must not contain duplicate interview.
      */
     public void setPersons(List<Interview> interview) {
         requireAllNonNull(interview);

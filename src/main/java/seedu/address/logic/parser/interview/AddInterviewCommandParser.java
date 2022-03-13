@@ -2,13 +2,13 @@ package seedu.address.logic.parser.interview;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
 
 import java.util.Date;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.interview.AddInterviewCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
@@ -30,24 +30,26 @@ public class AddInterviewCommandParser {
      */
     public AddInterviewCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_INDEX, PREFIX_DATE, PREFIX_POSITION);
+                ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_POSITION);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_INDEX, PREFIX_DATE, PREFIX_POSITION)
-                || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddInterviewCommand.MESSAGE_USAGE));
+        Index applicantIndex;
+
+        // Find applicant index, to be converted into actual applicant in AddInterviewCommand. This is because we need
+        // the model class to help us match the index to the actual applicant
+        try {
+            applicantIndex = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddInterviewCommand.MESSAGE_USAGE), pe);
         }
 
-        Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
-
-        // TODO: convert the candidate index into the actual applicant. How do we do this without taking in model?
-
+        // Can find actual date and do error checking here
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-        //Position position = ParserUtil.parsePosition(argMultimap.getValue(PREFIX_POSITION).get());
 
-        Interview interview = new Interview(null, date);
-        //Interview interview = new Interview(index, date);
+        // Find position index, to be converted into actual position in AddInterviewCommand. This is because we need
+        // the model class to help us match the index to the actual applicant
+        Index positionIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_POSITION).get());
 
-        return new AddInterviewCommand(interview);
+        return new AddInterviewCommand(applicantIndex, date, positionIndex);
     }
 
     /**
