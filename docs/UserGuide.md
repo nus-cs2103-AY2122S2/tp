@@ -85,14 +85,16 @@ Example:
 
 Deletes a student from TAPA.
 
-Format: `delete STUDENT_INDEX`
+Format: `delete STUDENT_INDEX` (or) `delete i/STUDENT_ID`
 
-* The student corresponding to the index (specified after the `delete` command) will be removed from TAPA.
-* An error message will be displayed to the user if the specified index is a negative number or larger than the number of students in TAPA.
+* The student corresponding to the index or matriculation number (specified after the `delete` command) will be removed from TAPA.
+* An error message will be displayed to the user if the specified index is a negative number or larger than the number of students in TAPA, or there is no student with the specified matriculation number.
 
 Example:
 * `delete 10`
     * A student named John (whose list index is “10”) is deleted from TAPA.
+* `delete i/A0123456Z`
+    * A student named John whose matriculation number is "A0123456Z" is deleted from TAPA.
 
 ### Finding a student: `find`
 
@@ -252,7 +254,7 @@ Format: `exit`
 Action      | Format, Examples
 ------------|------------------
 **Add**     | `add i/MATRICULATION_NO n/STUDENT_NAME m/MODULE_CODE [p/PHONE_NUMBER] [h/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] ` <br> e.g., `add i/AXXXXXXXR n/john m/CS2103T p/98765432 t/johnnn e/e0123456@u.nus.edu`
-**Delete**  | `delete STUDENT_INDEX` <br> e.g., `delete 10`
+**Delete**  | `delete STUDENT_INDEX` (or) `delete i/STUDENT_ID` <br> e.g., `delete 10`, `delete i/AXXXXXXXR`
 **Find**    | `find n/STUDENT_NAME` (or) `find i/STUDENT_ID` <br> e.g., `find n/john`, `find i/AXXXXXXXR`
 **Manual**  | `manual COMMAND_NAME` <br> e.g., `manual add`
 **Exit**    | `exit`
