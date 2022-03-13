@@ -2,11 +2,9 @@ package manageezpz.model.task;
 
 import static manageezpz.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
-import manageezpz.model.person.Date;
 import manageezpz.model.person.Person;
 
 /**
@@ -18,7 +16,6 @@ public class Task {
 
     // Identity fields
     private final Description taskDescription;
-    private final Date taskDate;
 
     // Data fields
     private List<Person> assignees; //List of Strings as of now, V1.3 will incorporate Persons (assign tasks to Persons)
@@ -33,8 +30,6 @@ public class Task {
         requireAllNonNull(taskDescription);
         this.taskDescription = taskDescription;
         this.isDone = false;
-        LocalDate defaultDate = LocalDate.parse("1977-01-01");
-        taskDate = new Date(defaultDate);
     }
 
     /**
