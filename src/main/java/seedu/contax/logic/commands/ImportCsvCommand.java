@@ -61,12 +61,6 @@ public class ImportCsvCommand extends Command {
                 try {
                     Person toAddPerson = personParser(importedPerson);
                     model.addPerson(toAddPerson);
-                    Set<Tag> tags = toAddPerson.getTags();
-                    for (Tag tag : tags) {
-                        if (!model.hasTag(tag)) {
-                            model.addTag(tag);
-                        }
-                    }
                     return true;
                 } catch (ParseException | DuplicatePersonException e) {
                     return false;
