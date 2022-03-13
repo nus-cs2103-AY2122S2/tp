@@ -31,7 +31,7 @@ import seedu.address.model.person.predicates.TagsContainsKeywordsPredicate;
 public class FindCommandParser implements Parser<FindCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the FindCommand
+     * Parses the given {@code String} of fields and arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
@@ -44,6 +44,11 @@ public class FindCommandParser implements Parser<FindCommand> {
                 PREFIX_INSURANCE_PACKAGE, PREFIX_TAG)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+
+        if (noKeywordsPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL,
+                PREFIX_INSURANCE_PACKAGE, PREFIX_TAG)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_NO_KEYWORD));
         }
 
         FindPersonDescriptor findPersonDescriptor = new FindPersonDescriptor();
@@ -120,5 +125,17 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     private static boolean aPrefixPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Returns true if any of the values mapped to the field prefix is empty
+     */
+    private static boolean noKeywordsPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).anyMatch(prefix -> {
+            if (argumentMultimap.getValue(prefix).isPresent()) {
+                return argumentMultimap.getValue(prefix).get().isBlank();
+            }
+            return false;
+        });
     }
 }
