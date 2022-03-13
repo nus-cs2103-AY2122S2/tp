@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.contact;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -15,13 +15,13 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.contact.exceptions.DuplicatePersonException;
+import seedu.address.model.contact.exceptions.PersonNotFoundException;
 import seedu.address.testutil.PersonBuilder;
 
 public class UniquePersonListTest {
 
-    private final UniquePersonList uniquePersonList = new UniquePersonList();
+    private final UniqueContactList uniquePersonList = new UniqueContactList();
 
     @Test
     public void contains_nullPerson_throwsNullPointerException() {
@@ -77,7 +77,7 @@ public class UniquePersonListTest {
     public void setPerson_editedPersonIsSamePerson_success() {
         uniquePersonList.add(ALICE);
         uniquePersonList.setPerson(ALICE, ALICE);
-        UniquePersonList expectedUniquePersonList = new UniquePersonList();
+        UniqueContactList expectedUniquePersonList = new UniqueContactList();
         expectedUniquePersonList.add(ALICE);
         assertEquals(expectedUniquePersonList, uniquePersonList);
     }
@@ -88,7 +88,7 @@ public class UniquePersonListTest {
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         uniquePersonList.setPerson(ALICE, editedAlice);
-        UniquePersonList expectedUniquePersonList = new UniquePersonList();
+        UniqueContactList expectedUniquePersonList = new UniqueContactList();
         expectedUniquePersonList.add(editedAlice);
         assertEquals(expectedUniquePersonList, uniquePersonList);
     }
@@ -97,7 +97,7 @@ public class UniquePersonListTest {
     public void setPerson_editedPersonHasDifferentIdentity_success() {
         uniquePersonList.add(ALICE);
         uniquePersonList.setPerson(ALICE, BOB);
-        UniquePersonList expectedUniquePersonList = new UniquePersonList();
+        UniqueContactList expectedUniquePersonList = new UniqueContactList();
         expectedUniquePersonList.add(BOB);
         assertEquals(expectedUniquePersonList, uniquePersonList);
     }
@@ -123,19 +123,19 @@ public class UniquePersonListTest {
     public void remove_existingPerson_removesPerson() {
         uniquePersonList.add(ALICE);
         uniquePersonList.remove(ALICE);
-        UniquePersonList expectedUniquePersonList = new UniquePersonList();
+        UniqueContactList expectedUniquePersonList = new UniqueContactList();
         assertEquals(expectedUniquePersonList, uniquePersonList);
     }
 
     @Test
     public void setPersons_nullUniquePersonList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniquePersonList.setPersons((UniquePersonList) null));
+        assertThrows(NullPointerException.class, () -> uniquePersonList.setPersons((UniqueContactList) null));
     }
 
     @Test
     public void setPersons_uniquePersonList_replacesOwnListWithProvidedUniquePersonList() {
         uniquePersonList.add(ALICE);
-        UniquePersonList expectedUniquePersonList = new UniquePersonList();
+        UniqueContactList expectedUniquePersonList = new UniqueContactList();
         expectedUniquePersonList.add(BOB);
         uniquePersonList.setPersons(expectedUniquePersonList);
         assertEquals(expectedUniquePersonList, uniquePersonList);
@@ -151,7 +151,7 @@ public class UniquePersonListTest {
         uniquePersonList.add(ALICE);
         List<Person> personList = Collections.singletonList(BOB);
         uniquePersonList.setPersons(personList);
-        UniquePersonList expectedUniquePersonList = new UniquePersonList();
+        UniqueContactList expectedUniquePersonList = new UniqueContactList();
         expectedUniquePersonList.add(BOB);
         assertEquals(expectedUniquePersonList, uniquePersonList);
     }

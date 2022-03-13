@@ -7,15 +7,21 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.contact.Address;
+import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.Email;
+import seedu.address.model.contact.Phone;
+import seedu.address.model.contact.UniqueContactList;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Person in Medbook.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
 
     // Identity fields
+    private final Nric nric;
     private final Name name;
     private final Phone phone;
     private final Email email;
@@ -23,12 +29,14 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final UniqueContactList contacts = new UniqueContactList();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+        requireAllNonNull(nric, name, phone, email, address, tags);
+        this.nric = nric;
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -38,6 +46,10 @@ public class Person {
 
     public Name getName() {
         return name;
+    }
+
+    public Nric getNric() {
+        return nric;
     }
 
     public Phone getPhone() {
@@ -52,6 +64,14 @@ public class Person {
         return address;
     }
 
+    public void setContact(Contact contact) {
+        contacts.add(contact);
+    }
+
+    public boolean hasContact(Contact contact) {
+        return contacts.contains(contact);
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -61,7 +81,7 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Returns true if both persons have the same nric.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
@@ -70,7 +90,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getNric().equals(getNric());
     }
 
     /**
@@ -89,6 +109,7 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return otherPerson.getName().equals(getName())
+                && otherPerson.getNric().equals(getNric())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
@@ -104,7 +125,9 @@ public class Person {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
+        builder.append(getNric())
+                .append("; Name: ")
+                .append(getName())
                 .append("; Phone: ")
                 .append(getPhone())
                 .append("; Email: ")

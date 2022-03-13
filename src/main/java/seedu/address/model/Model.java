@@ -5,14 +5,14 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.Person;
+import seedu.address.model.consultation.Consultation;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Consultation> PREDICATE_SHOW_ALL_CONSULTATIONS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -37,7 +37,7 @@ public interface Model {
     /**
      * Returns the user prefs' address book file path.
      */
-    Path getAddressBookFilePath();
+    Path getConsultationBookFilePath();
 
     /**
      * Sets the user prefs' address book file path.
