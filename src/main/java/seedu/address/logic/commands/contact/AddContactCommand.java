@@ -19,8 +19,6 @@ import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.ContactWithNricPredicate;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.NricPredicate;
-import seedu.address.model.person.Person;
-
 
 public class AddContactCommand extends Command {
     public static final String COMMAND_WORD = "add";
@@ -61,16 +59,6 @@ public class AddContactCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> personList = model.getAddressBook().getPersonList();
-
-        int index = IntStream.range(0, personList.size())
-                .filter(i -> personList.get(i).getNric().equals(ownerNric))
-                .findFirst()
-                .orElse(-1);
-
-        if (index == -1) {
-            throw new CommandException(MESSAGE_MISSING_PATIENT);
-        }
 
         if (!model.hasPerson(new NricPredicate(ownerNric))) {
             throw new CommandException(MESSAGE_MISSING_PATIENT);

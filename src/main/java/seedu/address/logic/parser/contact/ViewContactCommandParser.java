@@ -33,7 +33,7 @@ public class ViewContactCommandParser {
 
         Nric ownerNric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
 
-        return new ViewContactCommand(new ContactWithNricPredicate(ownerNric));
+        return new ViewContactCommand(ownerNric);
     }
 
     /**
