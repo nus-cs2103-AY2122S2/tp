@@ -44,6 +44,7 @@ class JsonAdaptedTask {
      */
     // Note to self: Do I need to convert String to LocalTime, so that toModelType can be able to create the task?
     public JsonAdaptedTask(Task source) {
+        // For future reference, this.marked = source.getMark()?
         description = source.getDescription().toString(); // Generally for all tasks
         type = source.getType(); // Generally for all tasks
         this.date = "Placeholder for source.getDate()"; // For Deadline
