@@ -19,11 +19,7 @@ public class HelpWindowUtil {
      */
     public void goToUrl() throws IOException {
         Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
-        try {
-            desktop.browse(convertToUrl());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        desktop.browse(convertToUrl());
     }
 
 
