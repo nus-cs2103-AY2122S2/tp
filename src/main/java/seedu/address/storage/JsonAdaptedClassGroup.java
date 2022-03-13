@@ -10,7 +10,6 @@ import seedu.address.model.classgroup.ClassGroup;
 import seedu.address.model.classgroup.ClassGroupId;
 import seedu.address.model.classgroup.ClassGroupType;
 import seedu.address.model.tamodule.TaModule;
-import seedu.address.model.tamodule.exceptions.ModuleNotFoundException;
 
 /**
  * Jackson-friendly version of {@link ClassGroup}.
@@ -88,7 +87,7 @@ class JsonAdaptedClassGroup {
         }
         final TaModule modelModule = module.toModelType();
         if (!taModuleList.contains(modelModule)) {
-            throw new ModuleNotFoundException();
+            throw new IllegalValueException("Module does not exist!");
         }
 
         return new ClassGroup(modelClassGroupId, modelClassGroupType, modelModule);
