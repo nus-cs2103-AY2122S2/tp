@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Date;
 
 import seedu.address.model.applicant.Applicant;
+import seedu.address.model.position.Position;
 
 
 /**
@@ -16,16 +17,16 @@ public class Interview {
     //Data fields
     private final Applicant applicant;
     private final Date date;
-    //private final Position position;
+    private final Position position;
 
     /**
      * Every field must be present and not null.
      */
-    public Interview(Applicant applicant, Date date) {
+    public Interview(Applicant applicant, Date date, Position position) {
         requireAllNonNull(applicant, date);
         this.applicant = applicant;
         this.date = date;
-        //this.position = position;
+        this.position = position;
     }
 
     public Applicant getApplicant() {
@@ -36,9 +37,9 @@ public class Interview {
         return date;
     }
 
-    //    public Position getPosition() {
-    //        return email;
-    //    }
+    public Position getPosition() {
+        return position;
+    }
 
     /**
      * Returns true if both interviews have the same data fields.
@@ -56,8 +57,8 @@ public class Interview {
 
         Interview otherInterview = (Interview) other;
         return otherInterview.getApplicant().equals(getApplicant())
-                && otherInterview.getDate().equals(getDate());
-        //&& otherInterview.getPosition().equals(getPosition());
+                && otherInterview.getDate().equals(getDate())
+                && otherInterview.getPosition().equals(getPosition());
     }
 
     @Override
@@ -65,9 +66,9 @@ public class Interview {
         final StringBuilder builder = new StringBuilder();
         builder.append(applicant.getName())
                 .append("; Date: ")
-                .append(getDate());
-        //.append("; Position: ")
-        //.append(getEmail());
+                .append(getDate())
+                .append("; Position: ")
+                .append(getPosition());
         return builder.toString();
     }
 
