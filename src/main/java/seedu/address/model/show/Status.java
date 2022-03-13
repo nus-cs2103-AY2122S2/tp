@@ -13,11 +13,10 @@ public enum Status {
     Status(String status) {
         this.status = status;
     }
-    
     public static Status getStatus(String status) {
         System.out.println(status.toUpperCase());
         return Status.valueOf(status.toUpperCase());
-    } 
+    }
 
     @Override
     public String toString() {
@@ -40,5 +39,4 @@ public enum Status {
         String uppercaseTest = test.toUpperCase();
         return uppercaseTest.equals(COMPLETED.name()) || uppercaseTest.equals(WATCHING.name());
     }
-    
 }

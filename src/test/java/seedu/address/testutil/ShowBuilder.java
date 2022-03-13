@@ -10,7 +10,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
 public class ShowBuilder {
-    
+
     public static final String DEFAULT_NAME = "Track Me";
     public static final String DEFAULT_STATUS = "completed";
     public static final String DEFAULT_TAG = "Anime";
@@ -36,7 +36,6 @@ public class ShowBuilder {
         status = showToCopy.getStatus();
         tags = new HashSet<>(showToCopy.getTags());
     }
-    
 
     /**
      * Sets the {@code Name} of the {@code Show} that we are building.
@@ -45,7 +44,10 @@ public class ShowBuilder {
         this.name = new Name(name);
         return this;
     }
-    
+
+    /**
+     * Sets the {@code status} of the {@code Show} that we are building.
+     */
     public ShowBuilder withStatus(String status) {
         this.status = Status.getStatus(status);
         return this;
