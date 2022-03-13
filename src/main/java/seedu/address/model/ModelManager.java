@@ -24,6 +24,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Applicant> filteredApplicants;
+    private final FilteredList<Position> filteredPositions;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -36,6 +37,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredApplicants = new FilteredList<>(this.addressBook.getPersonList());
+        filteredPositions = new FilteredList<>(this.addressBook.getPositionList());
     }
 
     public ModelManager() {
@@ -125,6 +127,23 @@ public class ModelManager implements Model {
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
+    @Override
+    public boolean hasPosition(Position position) {
+        requireNonNull(position);
+        return addressBook.hasPosition(position);
+    }
+
+    @Override
+    public void addPosition(Position position) {
+        addressBook.addPosition(position);
+        updateFilteredPositionList(PREDICATE_SHOW_ALL_POSITIONS);
+    }
+
+    @Override
+    public void deletePosition(Position target) {
+        addressBook.removePosition(target);
+    }
+
     //=========== Filtered Applicant List Accessors =============================================================
 
     /**
@@ -142,6 +161,19 @@ public class ModelManager implements Model {
         filteredApplicants.setPredicate(predicate);
     }
 
+    //=========== Filtered Position List Accessors =============================================================
+    @Override
+    public ObservableList<Position> getFilteredPositionList() {
+        return filteredPositions;
+    }
+
+    @Override
+    public void updateFilteredPositionList(Predicate<Position> predicate) {
+        requireNonNull(predicate);
+        filteredPositions.setPredicate(predicate);
+    }
+
+    //=========== Utility methods =============================================================
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -160,11 +192,4 @@ public class ModelManager implements Model {
                 && userPrefs.equals(other.userPrefs)
                 && filteredApplicants.equals(other.filteredApplicants);
     }
-
-    //=========== Filtered Position List Accessors =============================================================
-    @Override
-    public ObservableList<Position> getFilteredPositionList() {
-        return null; //TODO
-    }
-
 }

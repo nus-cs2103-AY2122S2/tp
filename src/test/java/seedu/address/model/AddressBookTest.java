@@ -20,6 +20,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.exceptions.DuplicatePersonException;
+import seedu.address.model.position.Position;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
@@ -88,14 +89,21 @@ public class AddressBookTest {
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Applicant> applicants = FXCollections.observableArrayList();
+        private final ObservableList<Position> positions = FXCollections.observableArrayList();
 
         AddressBookStub(Collection<Applicant> applicants) {
             this.applicants.setAll(applicants);
+            // Add positions to constructor for unit testing
         }
 
         @Override
         public ObservableList<Applicant> getPersonList() {
             return applicants;
+        }
+
+        @Override
+        public ObservableList<Position> getPositionList() {
+            return positions;
         }
     }
 

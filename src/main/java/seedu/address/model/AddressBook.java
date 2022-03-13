@@ -9,6 +9,8 @@ import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.UniquePersonList;
 import seedu.address.model.interview.Interview;
 import seedu.address.model.interview.UniqueInterviewList;
+import seedu.address.model.position.Position;
+import seedu.address.model.position.UniquePositionList;
 
 /**
  * Wraps all data at the address-book level
@@ -18,6 +20,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
     private final UniqueInterviewList interviews;
+    private final UniquePositionList positions;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -29,6 +32,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         persons = new UniquePersonList();
         interviews = new UniqueInterviewList();
+        positions = new UniquePositionList();
     }
 
     public AddressBook() {}
@@ -116,6 +120,32 @@ public class AddressBook implements ReadOnlyAddressBook {
         interviews.add(i);
     }
 
+    //// position-level operations
+
+    /**
+     * Returns true if a position that is the same as {@code position} exists in the address book.
+     */
+    public boolean hasPosition(Position position) {
+        requireNonNull(position);
+        return positions.contains(position);
+    }
+
+    /**
+     * Adds a position to the address book.
+     * The position must not already exist in the address book.
+     */
+    public void addPosition(Position position) {
+        positions.add(position);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removePosition(Position key) {
+        positions.remove(key);
+    }
+
     //// util methods
 
     @Override
@@ -127,6 +157,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Applicant> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Position> getPositionList() {
+        return positions.asUnmodifiableObservableList();
     }
 
     @Override
