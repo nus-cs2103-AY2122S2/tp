@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
@@ -23,13 +23,13 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list "
+            + ": Deletes the student identified by the index number used in the displayed student list "
             + "or matriculation number.\n"
             + "Parameters: INDEX (must be a positive integer) or STUDENT_ID\n"
             + "Example: " + COMMAND_WORD + " 1"
-            + " or " + COMMAND_WORD + " " + PREFIX_ID + "A0123456Z \n";
+            + " or " + COMMAND_WORD + " " + PREFIX_ID + "A0123456Z\n";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Student: %1$s";
 
     private final Index targetIndex;
     private final StudentId targetId;
@@ -63,8 +63,8 @@ public class DeleteCommand extends Command {
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
         } else { // student id was used for the command
             assert targetId != null;
-            String[] idKeywords = targetId.toString().split("\\s+");
-            StudentIdContainsKeywordsPredicate pred = new StudentIdContainsKeywordsPredicate(Arrays.asList(idKeywords));
+            StudentIdContainsKeywordsPredicate pred =
+                    new StudentIdContainsKeywordsPredicate(Collections.singletonList(targetId.toString()));
             model.updateFilteredPersonList(pred);
             if (model.getFilteredPersonList().size() > 0) { // person with specified id exists
                 Person personToDelete = lastShownList.get(Index.fromZeroBased(0).getZeroBased());
