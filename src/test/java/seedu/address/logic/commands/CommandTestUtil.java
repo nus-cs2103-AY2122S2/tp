@@ -36,8 +36,9 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
-    public static final String VALID_STATUS_AMY = "Negative";
-    public static final String VALID_STATUS_BOB = "Negative";
+    public static final String VALID_STATUS_POSITIVE = "Positive";
+    public static final String VALID_STATUS_NEGATIVE = "Negative";
+    public static final String VALID_STATUS_CLOSE_CONTACT = "Close-Contact";
     public static final String VALID_CLASSCODE_AMY = "5A";
     public static final String VALID_CLASSCODE_BOB = "2B";
     public static final String VALID_TAG_HUSBAND = "husband";
@@ -51,8 +52,8 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
-    public static final String STATUS_DESC_AMY = " " + PREFIX_STATUS + VALID_STATUS_AMY;
-    public static final String STATUS_DESC_BOB = " " + PREFIX_STATUS + VALID_STATUS_BOB;
+    public static final String STATUS_DESC_AMY = " " + PREFIX_STATUS + VALID_STATUS_POSITIVE;
+    public static final String STATUS_DESC_BOB = " " + PREFIX_STATUS + VALID_STATUS_NEGATIVE;
     public static final String CLASSCODE_DESC_AMY = " " + PREFIX_CLASSCODE + VALID_CLASSCODE_AMY;
     public static final String CLASSCODE_DESC_BOB = " " + PREFIX_CLASSCODE + VALID_CLASSCODE_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;

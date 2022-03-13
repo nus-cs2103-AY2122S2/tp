@@ -6,13 +6,19 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_CLOSE_CONTACT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_POSITIVE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,9 +29,11 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.ClassCodeContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
+
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -65,6 +73,40 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(lastPerson, editedPerson);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_batchUpdateWhenPositive_success() {
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+
+        PersonBuilder personInList = new PersonBuilder(firstPerson);
+        Person editedPerson = personInList.withStatus(VALID_STATUS_POSITIVE).build();
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withStatus(VALID_STATUS_POSITIVE).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(firstPerson, editedPerson);
+
+        String[] classCodeKeywords = new String[1];
+        classCodeKeywords[0] = editedPerson.getClassCode().toString();
+        expectedModel.updateFilteredPersonList(
+                new ClassCodeContainsKeywordsPredicate(Arrays.asList(classCodeKeywords)));
+
+        List<Person> filteredByClassCodeList = expectedModel.getFilteredPersonList();
+
+        for (Person classmate : filteredByClassCodeList) {
+            if (!classmate.isSamePerson(editedPerson)) {
+                Person editedClassmate = new PersonBuilder(classmate).withStatus(VALID_STATUS_CLOSE_CONTACT).build();
+                expectedModel.setPerson(classmate, editedClassmate);
+            }
+        }
+
+        expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
