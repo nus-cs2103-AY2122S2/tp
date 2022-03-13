@@ -55,6 +55,7 @@ public class CommandTestUtil {
     public static final String TAG_DESC_FRIEND = " " + PREFIX_STUDENT_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_STUDENT_TAG + VALID_TAG_HUSBAND;
 
+    public static final String INVALID_DUPLICATE_PREFIX = "Duplicate prefix "; // Duplicates except tag not allowed
     public static final String INVALID_NAME_DESC = " " + PREFIX_STUDENT_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_STUDENT_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_STUDENT_EMAIL + "bob!yahoo"; // missing '@' symbol
