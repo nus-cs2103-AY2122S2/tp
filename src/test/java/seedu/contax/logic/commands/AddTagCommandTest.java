@@ -164,6 +164,16 @@ class AddTagCommandTest {
         }
 
         @Override
+        public ObservableList<Appointment> getFilteredAppointmentList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredAppointmentList(Predicate<Appointment> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasTag(Tag tag) {
             throw new AssertionError("This method should not be called.");
         }

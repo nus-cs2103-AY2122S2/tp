@@ -48,7 +48,7 @@ public class EditAppointmentCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(), new Schedule(model.getSchedule()),
                 new UserPrefs());
-        expectedModel.setAppointment(model.getSchedule().getAppointmentList().get(0), editedAppointment);
+        expectedModel.setAppointment(model.getFilteredAppointmentList().get(0), editedAppointment);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -67,16 +67,15 @@ public class EditAppointmentCommandTest {
 
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new Schedule(model.getSchedule()),
                 new UserPrefs());
-        expectedModel.setAppointment(model.getSchedule().getAppointmentList().get(0), editedAppointment);
+        expectedModel.setAppointment(model.getFilteredAppointmentList().get(0), editedAppointment);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_someFieldsSpecified_success() {
-        Index indexLastPosition = Index.fromOneBased(model.getSchedule().getAppointmentList().size());
-        Appointment lastAppointment = model.getSchedule().getAppointmentList()
-                .get(indexLastPosition.getZeroBased());
+        Index indexLastPosition = Index.fromOneBased(model.getFilteredAppointmentList().size());
+        Appointment lastAppointment = model.getFilteredAppointmentList().get(indexLastPosition.getZeroBased());
 
         Appointment editedAppointment = new AppointmentBuilder(lastAppointment)
                 .withName(VALID_APPOINTMENT_NAME_EXTRA).build();
@@ -99,8 +98,7 @@ public class EditAppointmentCommandTest {
     public void execute_noFieldSpecified_success() {
         EditAppointmentCommand editCommand = new EditAppointmentCommand(INDEX_FIRST_PERSON,
                 new EditAppointmentDescriptor());
-        Appointment targetAppointment = model.getSchedule().getAppointmentList()
-                .get(INDEX_FIRST_PERSON.getZeroBased());
+        Appointment targetAppointment = model.getFilteredAppointmentList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         String expectedMessage = String.format(EditAppointmentCommand.MESSAGE_NOT_EDITED, targetAppointment);
 
@@ -113,7 +111,7 @@ public class EditAppointmentCommandTest {
     @Test
     public void execute_overlappingAppointment_failure() {
         Index targetIndex = Index.fromOneBased(1);
-        Appointment firstAppointment = model.getSchedule().getAppointmentList().get(targetIndex.getZeroBased());
+        Appointment firstAppointment = model.getFilteredAppointmentList().get(targetIndex.getZeroBased());
         LocalTime modifiedOverlappingTime = firstAppointment.getStartDateTime().value.toLocalTime()
                 .minusMinutes(1);
         EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder(firstAppointment)
@@ -126,7 +124,7 @@ public class EditAppointmentCommandTest {
 
     @Test
     public void execute_invalidAppointmentIndex_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getSchedule().getAppointmentList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredAppointmentList().size() + 1);
         EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder()
                 .withName(VALID_APPOINTMENT_NAME_ALONE).build();
         EditAppointmentCommand editCommand = new EditAppointmentCommand(outOfBoundIndex, descriptor);

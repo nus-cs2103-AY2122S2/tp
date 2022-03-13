@@ -26,7 +26,7 @@ public class DeleteAppointmentCommandTest {
 
     @Test
     public void execute_validIndex_success() {
-        Appointment appointmentToDelete = model.getSchedule().getAppointmentList().get(0);
+        Appointment appointmentToDelete = model.getFilteredAppointmentList().get(0);
         DeleteAppointmentCommand deleteCommand = new DeleteAppointmentCommand(Index.fromZeroBased(0));
 
         String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS,
@@ -40,7 +40,7 @@ public class DeleteAppointmentCommandTest {
 
     @Test
     public void execute_invalidIndex_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getSchedule().getAppointmentList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredAppointmentList().size() + 1);
         DeleteAppointmentCommand deleteCommand = new DeleteAppointmentCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX);

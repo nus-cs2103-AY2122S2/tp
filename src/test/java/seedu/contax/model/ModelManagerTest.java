@@ -281,7 +281,8 @@ public class ModelManagerTest {
     @Test
     public void getSchedule() {
         modelManager.addAppointment(APPOINTMENT_ALICE);
-        assertEquals(1, modelManager.getSchedule().getAppointmentList().size());
+        assertEquals(1, modelManager.getFilteredAppointmentList().size());
+        assertEquals(APPOINTMENT_ALICE, modelManager.getFilteredAppointmentList().get(0));
     }
 
     @Test

@@ -72,7 +72,7 @@ public class EditAppointmentCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Appointment> appointmentsList = model.getSchedule().getAppointmentList();
+        List<Appointment> appointmentsList = model.getFilteredAppointmentList();
         List<Person> personsList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= appointmentsList.size()) {
