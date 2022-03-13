@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,12 +24,6 @@ class HelpWindowUtilTest {
     public void userGuide_checkInvalidLink_throwsIoException() throws IOException {
         HelpWindowUtil helpWindowUtil = new HelpWindowUtil(invalidLink);
         assertThrows(IllegalArgumentException.class, () -> helpWindowUtil.convertToUrl());
-    }
-
-    @Test
-    public void userGuide_cannotOpenBrowser_throwsIoException() throws IOException {
-        HelpWindowUtil helpWindowUtil = new HelpWindowUtil(invalidLink);
-        assertThrows(IllegalArgumentException.class, () -> helpWindowUtil.goToUrl());
     }
 
     @Test

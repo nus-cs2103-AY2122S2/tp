@@ -3,6 +3,7 @@ package seedu.address.commons.util;
 import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
 
 public class HelpWindowUtil {
 
@@ -19,7 +20,6 @@ public class HelpWindowUtil {
      */
     public void goToUrl() throws IOException {
         Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
-
         try {
             desktop.browse(convertToUrl());
         } catch (Exception e) {
@@ -27,12 +27,14 @@ public class HelpWindowUtil {
         }
     }
 
+
     /**
-     * Converts string to the URI class.
+     * Converts string into URI.
      *
-     * @return URI of the new link.
+     * @return the URI given.
+     * @throws IllegalArgumentException if wrong input given.
      */
-    public URI convertToUrl() {
+    public URI convertToUrl() throws IllegalArgumentException {
         return URI.create(this.url);
     }
 
