@@ -15,7 +15,6 @@ public class HelpWindowUtil {
     /**
      * Converts string into URI, and opens in User's default web browser.
      *
-     * @return boolean if website is successfully opened.
      * @throws IOException when there is an error opening the website.
      */
     public void goToUrl() throws IOException {
