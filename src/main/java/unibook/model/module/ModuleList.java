@@ -44,6 +44,7 @@ public class ModuleList implements Iterable<Module> {
      */
     public void add(Module toAdd) {
         requireNonNull(toAdd);
+
         if (contains(toAdd)) {
             throw new DuplicateModuleException();
         }

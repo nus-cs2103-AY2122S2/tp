@@ -84,12 +84,13 @@ public class AddCommand extends Command {
             } else if (!model.isModuleExist(personToAdd)) {
                 throw new CommandException(MESSAGE_MODULE_DOES_NOT_EXIST);
             }
-            Set<ModuleCode> moduleCodes = personToAdd.getModuleCodes();
-            Set<Module> modules = personToAdd.getModulesModifiable();
-            for (ModuleCode moduleCode : moduleCodes) {
-                modules.add(model.getModule(moduleCode));
+            Set<ModuleCode> personModuleCodes = personToAdd.getModuleCodes();
+            Set<Module> personModules = personToAdd.getModulesModifiable();
+            for (ModuleCode moduleCode : personModuleCodes) {
+                Module toAdd = model.getModuleByCode(moduleCode);
+                personModules.add(toAdd);
             }
-
+            model.addPersonToTheirModules(personToAdd);
             model.addPerson(personToAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS_PERSON, personToAdd));
         }

@@ -117,6 +117,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addPersonToTheirModules(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ReadOnlyUniBook getUniBook() {
             throw new AssertionError("This method should not be called.");
         }
@@ -177,7 +182,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public Module getModule(ModuleCode moduleCode) {
+        public Module getModuleByCode(ModuleCode moduleCode) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -237,6 +242,10 @@ public class AddCommandTest {
         public boolean isModuleExist(Person person) {
             requireNonNull(person);
             return true;
+        }
+
+        @Override
+        public void addPersonToTheirModules(Person person) {
         }
     }
 

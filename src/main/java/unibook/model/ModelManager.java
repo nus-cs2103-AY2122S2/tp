@@ -15,6 +15,7 @@ import unibook.commons.util.CollectionUtil;
 import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
 import unibook.model.person.Person;
+import unibook.model.person.exceptions.PersonNoSubtypeException;
 
 
 /**
@@ -111,6 +112,15 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addPersonToTheirModules(Person person) {
+        try {
+            uniBook.addPersonToAllTheirModuleCodes(person);
+        } catch (PersonNoSubtypeException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         CollectionUtil.requireAllNonNull(target, editedPerson);
 
@@ -154,7 +164,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Module getModule(ModuleCode moduleCode) {
+    public Module getModuleByCode(ModuleCode moduleCode) {
         return uniBook.getModuleByCode(moduleCode);
     }
 
