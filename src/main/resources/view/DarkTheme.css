@@ -132,6 +132,15 @@
     -fx-text-fill: #010504;
 }
 
+.cell_hyperlink {
+    -fx-underline: true;
+    -fx-text-fill: #00C9FF;
+}
+
+.cell_hyperlink:visited {
+    -fx-text-fill: #0080FF;
+}
+
 .stack-pane {
      -fx-background-color: derive(#1d1d1d, 20%);
 }

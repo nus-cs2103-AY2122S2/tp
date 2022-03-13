@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
@@ -30,8 +31,8 @@
       <FlowPane fx:id="tags" />
       <FlowPane fx:id="skillSet" />
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-      <Label fx:id="githubUsername" styleClass="cell_small_label" text="\$githubUsername" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+      <Hyperlink fx:id="githubUsername" styleClass="cell_hyperlink" text="\$githubUsername" />
     </VBox>
   </GridPane>
 </HBox>

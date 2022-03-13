@@ -1,11 +1,14 @@
 package seedu.address;
 
+import static java.util.Objects.requireNonNull;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.application.Application;
+import javafx.application.HostServices;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.LogsCenter;
@@ -40,6 +43,8 @@ public class MainApp extends Application {
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
+    private static HostServices hostServices = null;
+
     protected Ui ui;
     protected Logic logic;
     protected Storage storage;
@@ -50,6 +55,8 @@ public class MainApp extends Application {
     public void init() throws Exception {
         logger.info("=============================[ Initializing AddressBook ]===========================");
         super.init();
+
+        hostServices = getHostServices();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
         config = initConfig(appParameters.getConfigPath());
@@ -163,6 +170,15 @@ public class MainApp extends Application {
         }
 
         return initializedPrefs;
+    }
+
+    /**
+     * Returns HostServices for current application instance,
+     * and is guaranteed to be non-null.
+     */
+    public static HostServices getHS() {
+        requireNonNull(hostServices);
+        return hostServices;
     }
 
     @Override
