@@ -49,14 +49,14 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Age age = ParserUtil.parseAge(argMultimap.getValue(PREFIX_AGE).get());
-        JerseyNumber jerseyNumber = ParserUtil.parseNumber(argMultimap.getValue(PREFIX_JERSEY_NUMBER).get());
+        JerseyNumber jerseyNumber = ParserUtil.parseJerseyNumber(argMultimap.getValue(PREFIX_JERSEY_NUMBER).get());
         Weight weight = ParserUtil.parseWeight(argMultimap.getValue(PREFIX_WEIGHT).get());
         Height height = ParserUtil.parseHeight(argMultimap.getValue(PREFIX_HEIGHT).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, age, height, tagList, weight);
+        Person person = new Person(name, phone, email, age, height, jerseyNumber, tagList, weight);
 
         return new AddCommand(person);
     }

@@ -10,10 +10,15 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Age;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Height;
+import seedu.address.model.person.JerseyNumber;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Weight;
 import seedu.address.model.tag.Tag;
+
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -81,6 +86,23 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String age} into an {@code Age}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param age
+     * @return
+     * @throws ParseException
+     */
+    public static Age parseAge(String age) throws ParseException {
+        requireNonNull(age);
+        String trimmedAge = age.trim();
+        if (!Age.isValidAge()) {
+            throw new ParseException(Age.MESSAGE_CONSTRAINTS);
+        }
+        return new Age(trimmedAge);
+    }
+
+    /**
      * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -93,6 +115,57 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String height} into an {@code Height}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param height
+     * @return
+     * @throws ParseException
+     */
+    public static Height parseHeight(String height) throws ParseException {
+        requireNonNull(height);
+        String trimmedHeight = height.trim();
+        if (!Height.isValidHeight()) {
+            throw new ParseException(Height.MESSAGE_CONSTRAINTS);
+        }
+        return new Height(trimmedHeight);
+    }
+
+    /**
+     * Parses a {@code String weight} into an {@code Weight}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param weight
+     * @return
+     * @throws ParseException
+     */
+    public static Weight parseWeight(String weight) throws ParseException {
+        requireNonNull(weight);
+        String trimmedHeight = weight.trim();
+        if (!Weight.isValidWeight()) {
+            throw new ParseException(Weight.MESSAGE_CONSTRAINTS);
+        }
+        return new Weight(trimmedWeight);
+    }
+
+    /**
+     * Parses a {@code String jerseyNumber} into an {@code JerseyNumber}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param jerseyNumber
+     * @return
+     * @throws ParseException
+     */
+    public static JerseyNumber parseJerseyNumber(String jerseyNumber) throws ParseException {
+        requireNonNull(jerseyNumber);
+        String trimmedHeight = jerseyNumber.trim();
+        if (!JerseyNumber.isValidJerseyNumber()) {
+            throw new ParseException(JerseyNumber.MESSAGE_CONSTRAINTS);
+        }
+        return new JerseyNumber(trimmedJerseyNumber);
     }
 
     /**
