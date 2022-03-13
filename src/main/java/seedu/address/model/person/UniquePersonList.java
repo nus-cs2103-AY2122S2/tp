@@ -3,12 +3,14 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.exceptions.DuplicateTaskException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
@@ -98,6 +100,34 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Assigns {@code task} to a person with {@code studentId}.
+     *
+     * @param studentId the student id of the person to be assigned.
+     * @param task the task to be assigned.
+     */
+    public void assignTaskToPerson(StudentId studentId, Task task) {
+        requireAllNonNull(studentId, task);
+        boolean isPersonFound = false;
+
+        for (Person currPerson: internalList) {
+            if (currPerson.getStudentId().equals(studentId)) {
+                isPersonFound = true;
+                if (!currPerson.isTaskAlreadyPresent(task)) {
+                    Person updatedPerson = currPerson.getCopy();
+                    updatedPerson.addTask(task);
+                    setPerson(currPerson, updatedPerson);
+                } else {
+                    throw new DuplicateTaskException();
+                }
+            }
+        }
+
+        if (!isPersonFound) {
+            throw new PersonNotFoundException();
+        }
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Person> asUnmodifiableObservableList() {
@@ -133,5 +163,32 @@ public class UniquePersonList implements Iterable<Person> {
             }
         }
         return true;
+    }
+
+    /**
+     * Sorts the list of persons in ascending order of their names.
+     */
+    public void sortList() {
+        internalList.sort(new SortAlphabetically());
+    }
+
+    /**
+     * SortAlphabetically implements a comparator class, to sort the list of persons in alphabetical order.
+     */
+    class SortAlphabetically implements Comparator<Person> {
+
+        /**
+         * Sorts in ascending order of the names of persons.
+         *
+         * @param a the first person.
+         * @param b the second person.
+         * @return an int value after comparing the names of the two persons.
+         */
+        @Override
+        public int compare(Person a, Person b) {
+            String personAFullName = a.getName().fullName;
+            String personBFullName = b.getName().fullName;
+            return personAFullName.compareTo(personBFullName);
+        }
     }
 }

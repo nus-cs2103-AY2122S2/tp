@@ -9,12 +9,12 @@ TAPA is a desktop contact management application used to manage students' contac
 
 Given below are my contributions to the project.
 
-* **New Feature**: 
+* **New Feature**:
   * to be added soon
 
-* **New Feature**: 
+* **New Feature**:
   * to be added soon
-  
+
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=benjykoh&breakdown=true)
 
 * **Project management**:

@@ -56,8 +56,21 @@ public class FindCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof FindCommand // instanceof handles nulls
-                && namePredicate.equals(((FindCommand) other).namePredicate)); // state check
+        if (other == this) { // short circuit if same object
+            return true;
+        } else {
+            boolean isInstanceOf = other instanceof FindCommand;
+            if (!isInstanceOf) { // instanceof handles nulls
+                return false;
+            }
+            FindCommand commandToCompare = (FindCommand) other;
+            if (this.namePredicate == null && this.idPredicate != null) { // only idPredicate present
+                return idPredicate.equals(commandToCompare.idPredicate); // state check
+            } else if (this.idPredicate == null && this.namePredicate != null) { // only namePredicate present
+                return namePredicate.equals(commandToCompare.namePredicate); // state check
+            } else {
+                return false;
+            }
+        }
     }
 }
