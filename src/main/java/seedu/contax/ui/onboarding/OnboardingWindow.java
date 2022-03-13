@@ -89,7 +89,7 @@ public class OnboardingWindow extends UiPart<Stage> {
     }
 
     /**
-     * Shows the Onboarding window.
+     * Shows this window
      */
     public void show() {
         fillInner();
@@ -99,9 +99,9 @@ public class OnboardingWindow extends UiPart<Stage> {
     }
 
     /**
-     * Set the size of Onboarding window
-     * @param height Height to set to
-     * @param width Width to set to
+     * Set this window size to the given height and width.
+     * @param height height to set to
+     * @param width width to set to
      */
     public void setSize(double height, double width) {
         getRoot().setHeight(height);
@@ -109,7 +109,7 @@ public class OnboardingWindow extends UiPart<Stage> {
     }
 
     /**
-     * Translate Onboarding window
+     * Translate the this window to the given x and y.
      * @param x x to translate to
      * @param y y to translate to
      */
@@ -119,8 +119,8 @@ public class OnboardingWindow extends UiPart<Stage> {
     }
 
     /**
-     * Cast an overlap over the stage, except for the given node.
-     * @param node Node to be excluded from overlap
+     * Displays an overlay over this window which covers every Node, except the given Node.
+     * @param node Node to be excluded from the overlay
      */
     public void showOnly(Region node) {
         overlay.showOnly(node.layoutXProperty(), node.layoutYProperty(),
@@ -129,7 +129,7 @@ public class OnboardingWindow extends UiPart<Stage> {
     }
 
     /**
-     * Cast an overlap over the stage
+     * Displays an overlay over this window which covers every Node.
      */
     public void coverAll() {
         overlay.cover(parentPane.layoutXProperty(), parentPane.layoutYProperty(),
@@ -150,8 +150,8 @@ public class OnboardingWindow extends UiPart<Stage> {
     }
 
     /**
-     * Process the given OnboardingStep and translate it to stage
-     * @param step The OnboardingStep to be processed
+     * Process the given onboarding step, and translate it to a set of actions taken in this window
+     * @param step the OnboardingStep to be processed
      */
     public void processStep(OnboardingStep step) {
         if (step != null) {
@@ -185,7 +185,12 @@ public class OnboardingWindow extends UiPart<Stage> {
     }
 
     /**
-     * Highlight the stage based on the given option
+     * Highlights a node in this window the stage based on the given option
+     * <br><br>
+     * Options are as follows:
+     * <br>- 0: clear all highlights
+     * <br>- 1: highlight only the command box
+     * <br>- 2: highlight only the person list
      * @param option Highlight option
      */
     public void processHighlightOption(int option) {
@@ -203,8 +208,14 @@ public class OnboardingWindow extends UiPart<Stage> {
     }
 
     /**
-     * Overlay the stage based on the given option
-     * @param option Overlay option
+     * Displays an overlay on this window, whose position is dependant on the given option
+     * <br><br>
+     * Options are as follows:
+     * <br>- 0: cover all
+     * <br>- 1: cover all, showing only the menu bar
+     * <br>- 2: cover all, showing only the command box
+     * <br>- 3: cover all, showing only the person list
+     * @param option the overlay option
      */
     public void processOverlayOption(int option) {
         if (option == 0) {
@@ -219,7 +230,14 @@ public class OnboardingWindow extends UiPart<Stage> {
     }
 
     /**
-     * Moves the InstructionLabel based on the given option
+     * Moves the InstructionLabel to a position based on the given option.
+     * <br><br>
+     * Options are as follows:
+     * <br>- 0: center of window
+     * <br>- 1: top right of menu bar
+     * <br>- 2: top right of command box
+     * <br>- 3: top right of result display
+     * <br>- 4: middle right of result display
      * @param option Position option
      */
     public void processInstructionPosition(int option) {
