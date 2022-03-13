@@ -28,6 +28,7 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_DOUBLE_INDEX = "Double indexes are missing.";
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_CONTENT = "Index[es] and/or content are missing.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing
@@ -54,7 +55,7 @@ public class ParserUtil {
      */
     public static Index[] parseDoubleIndex(String oneBasedIndexes) throws ParseException {
         String[] splitTrimmedIndexes = oneBasedIndexes.trim().split("\\s+");
-        if (!(splitTrimmedIndexes.length == 2)) {
+        if (splitTrimmedIndexes.length != 2) {
             throw new ParseException(MESSAGE_INVALID_DOUBLE_INDEX);
         }
         Index firstIndex = parseIndex(splitTrimmedIndexes[0]);
@@ -64,7 +65,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses two {@code oneBasedIndex} into an array of {@code Index} of length two and returns it.
+     * Parses  {@code oneBasedIndex} and content into an {@code Index} and string.
      *
      * @param content String representation of user input.
      * @return Pair containing company index and role information.
@@ -72,12 +73,30 @@ public class ParserUtil {
      */
     public static Pair<Index, String> parseIndexWithContent(String content) throws ParseException {
         String[] splitTrimmedContent = content.trim().split("\\s+", 2);
-        if (!(splitTrimmedContent.length == 2)) {
-            throw new ParseException(MESSAGE_INVALID_DOUBLE_INDEX);
+        if (splitTrimmedContent.length != 2) {
+            throw new ParseException(MESSAGE_INVALID_CONTENT);
         }
         Index index = parseIndex(splitTrimmedContent[0]);
         String info = " " + splitTrimmedContent[1];
         return new Pair<>(index, info);
+    }
+
+    /**
+     * Parses two {@code oneBasedIndex} and content into an array of {@code Index} and string.
+     *
+     * @param content String representation of user input.
+     * @return Pair containing company index, role index and role information.
+     * @throws ParseException if either index or role information is absent or index is invalide.
+     */
+    public static Pair<Index[], String> parseDoubleIndexWithContent(String content) throws ParseException {
+        String[] splitTrimmedContent = content.trim().split("\\s+", 3);
+        if (splitTrimmedContent.length != 3) {
+            throw new ParseException(MESSAGE_INVALID_CONTENT);
+        }
+        Index[] indexes = parseDoubleIndex(splitTrimmedContent[0] + " "
+                + splitTrimmedContent[1]);
+        String info = " " + splitTrimmedContent[2];
+        return new Pair<>(indexes, info);
     }
 
     /**
