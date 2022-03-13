@@ -97,6 +97,7 @@ public class Person {
     /**
      * Deletes a module from the set of modules the person has by checking through each module
      * in the set and removing it from the set if the module code matches.
+     *
      * @param other
      */
     public void removeModule(ModuleCode other) {
@@ -109,7 +110,7 @@ public class Person {
         }
         modules.remove(toRemove);
     }
-  
+
     /**
      * Returns a mutable module set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
