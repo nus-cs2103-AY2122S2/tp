@@ -18,16 +18,13 @@ public class HelpWindowUtil {
      * @return boolean if website is successfully opened.
      * @throws IOException when there is an error opening the website.
      */
-    public boolean goToUrl() throws IOException {
+    public void goToUrl() throws IOException {
         Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
-        URI newLink = convertToUrl();
 
         try {
-            desktop.browse(newLink);
-            return true;
+            desktop.browse(convertToUrl());
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
         }
     }
 
