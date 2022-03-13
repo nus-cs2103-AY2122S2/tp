@@ -98,6 +98,12 @@ public class ParserUtil {
         return new Email(trimmedEmail);
     }
 
+    /**
+     * Parses a {@code String flag} into an {@code Flag}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code flag} is invalid.
+     */
     public static Flag parseFlag(String flag) throws ParseException {
         requireNonNull(flag);
         String trimmedFlag = flag.trim().toLowerCase();

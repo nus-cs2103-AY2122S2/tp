@@ -68,6 +68,10 @@ public class UniquePersonList implements Iterable<Person> {
         internalList.set(index, editedPerson);
     }
 
+    /**
+     * Replaces the flag of the person {@code target} in the list with {@code flag}.
+     * {@code target} must exist in the list.
+     */
     public void flagPerson(Person target, Flag flag) {
         requireAllNonNull(target, flag);
         target.setFlag(flag);

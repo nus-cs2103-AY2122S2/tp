@@ -29,6 +29,10 @@ public class FlagCommand extends Command {
     private final Index targetIndex;
     private final Flag flag;
 
+    /**
+     * @param targetIndex Index of person whose flag to replace.
+     * @param flag Flag to replace with.
+     */
     public FlagCommand(Index targetIndex, Flag flag) {
         this.targetIndex = targetIndex;
         this.flag = flag;

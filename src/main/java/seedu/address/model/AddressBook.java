@@ -86,6 +86,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.setPerson(target, editedPerson);
     }
 
+    /**
+     * Replaces the flag of the given person {@code target} in the list with {@code flag}.
+     * {@code target} must exist in the address book.
+     */
     public void flagPerson(Person target, Flag flag) {
         requireNonNull(flag);
 
