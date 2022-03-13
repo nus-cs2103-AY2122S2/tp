@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.HelpWindowUtil;
 
 /**
  * Controller for a help page
@@ -100,7 +101,8 @@ public class HelpWindow extends UiPart<Stage> {
      */
     @FXML
     public void goToUrl() throws URISyntaxException, IOException {
-        //Desktop.getDesktop().browse(URI.create(USERGUIDE_URL));
+        HelpWindowUtil helpWindowUtil = new HelpWindowUtil(USERGUIDE_URL);
+        helpWindowUtil.goToUrl();
     }
 }
 
