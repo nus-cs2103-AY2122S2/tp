@@ -17,7 +17,9 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import javafx.collections.ObservableList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
@@ -32,9 +34,6 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -95,7 +94,8 @@ public class EditCommandTest {
 
         String[] classCodeKeywords = new String[1];
         classCodeKeywords[0] = editedPerson.getClassCode().toString();
-        expectedModel.updateFilteredPersonList(new ClassCodeContainsKeywordsPredicate(Arrays.asList(classCodeKeywords)));
+        expectedModel.updateFilteredPersonList(
+                new ClassCodeContainsKeywordsPredicate(Arrays.asList(classCodeKeywords)));
 
         List<Person> filteredByClassCodeList = expectedModel.getFilteredPersonList();
 
