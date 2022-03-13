@@ -8,10 +8,8 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.contact.Address;
-import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Email;
 import seedu.address.model.contact.Phone;
-import seedu.address.model.contact.UniqueContactList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -29,7 +27,6 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private final UniqueContactList contacts = new UniqueContactList();
 
     /**
      * Every field must be present and not null.
@@ -62,14 +59,6 @@ public class Person {
 
     public Address getAddress() {
         return address;
-    }
-
-    public void setContact(Contact contact) {
-        contacts.add(contact);
-    }
-
-    public boolean hasContact(Contact contact) {
-        return contacts.contains(contact);
     }
 
     /**
