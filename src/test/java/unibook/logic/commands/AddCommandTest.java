@@ -45,7 +45,7 @@ public class AddCommandTest {
         CommandResult commandResult = new AddCommand(validPerson).execute(modelStub,
                 PERSON_LIST_SHOWING, MODULE_LIST_NOT_SHOWING);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPerson), commandResult.getFeedbackToUser());
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS_PERSON, validPerson), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
     }
 
@@ -119,6 +119,11 @@ public class AddCommandTest {
 
         @Override
         public void addPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addPersonToTheirModules(Person person) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -198,6 +203,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean isModuleExist(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Module getModuleByCode(ModuleCode moduleCode) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Module> getFilteredModuleList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -247,6 +262,16 @@ public class AddCommandTest {
         @Override
         public ReadOnlyUniBook getUniBook() {
             return new UniBook();
+        }
+
+        @Override
+        public boolean isModuleExist(Person person) {
+            requireNonNull(person);
+            return true;
+        }
+
+        @Override
+        public void addPersonToTheirModules(Person person) {
         }
     }
 

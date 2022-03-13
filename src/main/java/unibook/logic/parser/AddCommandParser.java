@@ -7,16 +7,23 @@ import java.util.stream.Stream;
 import unibook.commons.core.Messages;
 import unibook.logic.commands.AddCommand;
 import unibook.logic.parser.exceptions.ParseException;
+import unibook.model.module.Module;
+import unibook.model.module.ModuleCode;
+import unibook.model.module.ModuleName;
 import unibook.model.person.Email;
 import unibook.model.person.Name;
-import unibook.model.person.Person;
+import unibook.model.person.Office;
 import unibook.model.person.Phone;
+import unibook.model.person.Professor;
+import unibook.model.person.Student;
 import unibook.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new AddCommand object
  */
 public class AddCommandParser implements Parser<AddCommand> {
+    public static final String MESSAGE_CONSTRAINTS_OPTION =
+            "Options can take only 3 values, module/student/professor.";
 
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
@@ -34,23 +41,62 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_PHONE, CliSyntax.PREFIX_EMAIL,
-                CliSyntax.PREFIX_TAG);
+            ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_OPTION, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_PHONE,
+                    CliSyntax.PREFIX_EMAIL, CliSyntax.PREFIX_OFFICE, CliSyntax.PREFIX_TAG, CliSyntax.PREFIX_MODULE);
 
-        if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_PHONE, CliSyntax.PREFIX_EMAIL)
+        if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_OPTION, CliSyntax.PREFIX_NAME)
             || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        Name name = ParserUtil.parseName(argMultimap.getValue(CliSyntax.PREFIX_NAME).get());
-        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(CliSyntax.PREFIX_PHONE).get());
-        Email email = ParserUtil.parseEmail(argMultimap.getValue(CliSyntax.PREFIX_EMAIL).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(CliSyntax.PREFIX_TAG));
+        String option = argMultimap.getValue(CliSyntax.PREFIX_OPTION).get().trim();
+        ModuleName moduleName;
+        ModuleCode moduleCode;
+        Name name;
+        Phone phone;
+        Email email;
+        Office office;
+        Set<Tag> tagList;
+        Set<Module> moduleList = new HashSet<>();
+        Set<ModuleCode> moduleCodes;
 
-        //TODO give modules to the new person, leaving as empty set for now
-        Person person = new Person(name, phone, email, tagList, new HashSet<>());
-
-        return new AddCommand(person);
+        switch (option) {
+        case "module":
+            if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_MODULE)) {
+                throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                        AddCommand.MESSAGE_USAGE));
+            }
+            moduleName = ParserUtil.parseModuleName(argMultimap.getValue(CliSyntax.PREFIX_NAME).get());
+            moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(CliSyntax.PREFIX_MODULE).get());
+            return new AddCommand(moduleName, moduleCode);
+        case "student":
+            if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_PHONE, CliSyntax.PREFIX_EMAIL)) {
+                throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                        AddCommand.MESSAGE_USAGE));
+            }
+            name = ParserUtil.parseName(argMultimap.getValue(CliSyntax.PREFIX_NAME).get());
+            phone = ParserUtil.parsePhone(argMultimap.getValue(CliSyntax.PREFIX_PHONE).get());
+            email = ParserUtil.parseEmail(argMultimap.getValue(CliSyntax.PREFIX_EMAIL).get());
+            tagList = ParserUtil.parseTags(argMultimap.getAllValues(CliSyntax.PREFIX_TAG));
+            moduleCodes = ParserUtil.parseMultipleModules(argMultimap.getAllValues(CliSyntax.PREFIX_MODULE));
+            Student student = new Student(name, phone, email, tagList, moduleList, moduleCodes);
+            return new AddCommand(student);
+        case "professor":
+            if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_PHONE,
+                    CliSyntax.PREFIX_EMAIL, CliSyntax.PREFIX_OFFICE)) {
+                throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                        AddCommand.MESSAGE_USAGE));
+            }
+            name = ParserUtil.parseName(argMultimap.getValue(CliSyntax.PREFIX_NAME).get());
+            phone = ParserUtil.parsePhone(argMultimap.getValue(CliSyntax.PREFIX_PHONE).get());
+            email = ParserUtil.parseEmail(argMultimap.getValue(CliSyntax.PREFIX_EMAIL).get());
+            office = ParserUtil.parseOffice(argMultimap.getValue(CliSyntax.PREFIX_OFFICE).get());
+            tagList = ParserUtil.parseTags(argMultimap.getAllValues(CliSyntax.PREFIX_TAG));
+            moduleCodes = ParserUtil.parseMultipleModules(argMultimap.getAllValues(CliSyntax.PREFIX_MODULE));
+            Professor professor = new Professor(name, phone, email, tagList, office, moduleList, moduleCodes);
+            return new AddCommand(professor);
+        default:
+            throw new ParseException(MESSAGE_CONSTRAINTS_OPTION);
+        }
     }
-
 }
