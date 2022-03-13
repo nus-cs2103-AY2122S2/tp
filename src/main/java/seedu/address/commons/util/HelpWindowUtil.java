@@ -18,12 +18,7 @@ public class HelpWindowUtil {
      * @throws IOException when there is an error opening the website.
      */
     public void goToUrl() throws IOException {
-        Desktop desktop;
-        if (isDesktopUsable()) {
-            desktop = getDesktop();
-        } else {
-            desktop = null;
-        }
+        Desktop desktop = isDesktopUsable() ? getDesktop() : null;
         desktop.browse(convertToUrl());
     }
 
