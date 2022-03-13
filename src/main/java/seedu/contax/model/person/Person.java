@@ -82,6 +82,9 @@ public class Person {
         return new Person(name, phone, email, address, updatedTag);
     }
 
+    /**
+     * Returns true if the specified tag exists in the {@code person}.
+     */
     public boolean hasTag(Tag tag) {
         return tags.contains(tag);
     }

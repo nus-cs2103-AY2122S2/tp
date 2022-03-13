@@ -69,9 +69,17 @@ public class UniqueTagList implements Iterable<Tag> {
         internalList.setAll(tags);
     }
 
+    /**
+     * Replaces the specified {@code target} tag with {@code editedTag}.
+     */
     public void setTag(Tag target, Tag editedTag) {
         requireNonNull(target);
         requireNonNull(editedTag);
+
+        // Checks if Tags are the same
+        if (target.equals(editedTag)) {
+            return;
+        }
 
         // Checks if edited Tag exists
         if (contains(editedTag)) {

@@ -172,6 +172,9 @@ public class ModelManager implements Model {
 
     @Override
     public void setTag(Tag target, Tag editedTag) {
+        requireNonNull(target);
+        requireNonNull(editedTag);
+
         addressBook.setTag(target, editedTag);
     }
 

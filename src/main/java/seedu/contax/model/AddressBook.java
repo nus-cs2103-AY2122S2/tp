@@ -130,7 +130,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The supplied tag must already exist in the address book.
      */
     public void removeTag(Tag tagToDelete) {
-        removePersonsWithTag(tagToDelete);
+        removeTagFromPersons(tagToDelete);
         tags.remove(tagToDelete);
     }
 
@@ -147,9 +147,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Disassociates the specified tag from all persons in the address book.
      */
-    private void removePersonsWithTag(Tag tagToDelete) {
+    private void removeTagFromPersons(Tag tagToDelete) {
         requireNonNull(tagToDelete);
-        List<Person> persons = getPersonList().filtered(person -> person.getTags().contains(tagToDelete));
+        List<Person> persons = getPersonList().filtered(person -> person.hasTag(tagToDelete));
         for (int i = 0; i < persons.size(); i++) {
             Person oldPerson = persons.get(i);
             setPerson(oldPerson, oldPerson.withoutTag(tagToDelete));
