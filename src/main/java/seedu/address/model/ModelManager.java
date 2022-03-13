@@ -147,8 +147,4 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(other.filteredPersons);
     }
 
-    @Override
-    public String toString() {
-        return filteredPersons.toString();
-    }
 }
