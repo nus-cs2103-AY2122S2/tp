@@ -165,16 +165,22 @@ public class OnboardingWindow extends UiPart<Stage> {
      * @param option Highlight option
      */
     public void processHighlightOption(int option) {
-        if (option == 0) {
+        switch (option) {
+        case 0:
             commandBox.unhighlight();
             commandBox.clear();
             personList.setStyle("-fx-border-width: 0px");
-        } else if (option == 1) {
+            break;
+        case 1:
             commandBox.highlight();
-        } else if (option == 2) {
+            break;
+        case 2:
             commandBox.unhighlight();
             commandBox.clear();
             personList.setStyle("-fx-border-color: yellow; -fx-border-width: 5px");
+            break;
+        default:
+            break;
         }
     }
 
@@ -189,14 +195,21 @@ public class OnboardingWindow extends UiPart<Stage> {
      * @param option the overlay option
      */
     public void processOverlayOption(int option) {
-        if (option == 0) {
+        switch (option) {
+        case 0:
             coverAll();
-        } else if (option == 1) {
+            break;
+        case 1:
             showOnly(menuBar);
-        } else if (option == 2) {
+            break;
+        case 2:
             showOnly(commandBoxPlaceholder);
-        } else if (option == 3) {
+            break;
+        case 3:
             showOnly(personList);
+            break;
+        default:
+            break;
         }
     }
 
@@ -212,22 +225,30 @@ public class OnboardingWindow extends UiPart<Stage> {
      * @param option Position option
      */
     public void processInstructionPosition(int option) {
-        if (option == 0) {
+        switch (option) {
+        case 0:
             instructionLabel.setCenter(stage.heightProperty(), stage.widthProperty());
-        } else if (option == 1) {
+            break;
+        case 1:
             instructionLabel.translate(menuBar.layoutXProperty(), menuBar.layoutYProperty());
-        } else if (option == 2) {
+            break;
+        case 2:
             instructionLabel.translate(commandBoxPlaceholder.layoutXProperty(),
                     commandBoxPlaceholder.layoutYProperty());
-        } else if (option == 3) {
+            break;
+        case 3:
             instructionLabel.translate(resultDisplayPlaceholder.layoutXProperty(),
                     resultDisplayPlaceholder.layoutYProperty());
-        } else if (option == 4) {
+            break;
+        case 4:
             instructionLabel.translate(
                     personList.layoutXProperty().add(0),
                     personList.layoutYProperty().add(
                             resultDisplayPlaceholder.heightProperty().multiply(1.5)
                     ));
+            break;
+        default:
+            break;
         }
     }
 
