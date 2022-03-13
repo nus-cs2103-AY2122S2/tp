@@ -55,7 +55,6 @@ public class OnboardingWindow extends UiPart<Stage> {
      */
     public OnboardingWindow(Stage root, Stage mainWindow) {
         super(FXML, root);
-        labelPlaceholder.setManaged(false);
         stage = root;
         this.mainWindow = mainWindow;
         this.overlay = new Overlay();
