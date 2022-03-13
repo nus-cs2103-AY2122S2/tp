@@ -13,6 +13,10 @@ import seedu.contax.model.person.UniquePersonList;
 import seedu.contax.ui.PersonListPanel;
 import seedu.contax.ui.UiPart;
 
+/**
+ * The Onboarding Window. Provides a step-by-step guide for first time users
+ * on the basic functions of ContaX.
+ */
 public class OnboardingWindow extends UiPart<Stage> {
 
     private static final String FXML = "onboarding/OnboardingWindow.fxml";
