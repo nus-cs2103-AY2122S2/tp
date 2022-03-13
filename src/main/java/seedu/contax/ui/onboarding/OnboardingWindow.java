@@ -102,7 +102,7 @@ public class OnboardingWindow extends UiPart<Stage> {
     /**
      * Fills up the placeholders in this window.
      */
-    public void fillInner() {
+    private void fillInner() {
         labelPlaceholder.getChildren().add(overlay.getRoot());
         labelPlaceholder.getChildren().add(instructionLabel.getRoot());
         personListPanel = new PersonListPanel(persons.asUnmodifiableObservableList());
@@ -114,7 +114,7 @@ public class OnboardingWindow extends UiPart<Stage> {
      * Displays an overlay over this window which covers every Node, except the given Node.
      * @param node Node to be excluded from the overlay
      */
-    public void showOnly(Region node) {
+    private void showOnly(Region node) {
         overlay.showOnly(node.layoutXProperty(), node.layoutYProperty(),
                 node.heightProperty(), node.widthProperty(),
                 parentPane.heightProperty(), parentPane.widthProperty());
@@ -123,7 +123,7 @@ public class OnboardingWindow extends UiPart<Stage> {
     /**
      * Displays an overlay over this window which covers every Node.
      */
-    public void coverAll() {
+    private void coverAll() {
         overlay.cover(parentPane.layoutXProperty(), parentPane.layoutYProperty(),
                 parentPane.heightProperty(), parentPane.widthProperty());
     }
@@ -162,7 +162,7 @@ public class OnboardingWindow extends UiPart<Stage> {
      * <br>- 2: highlight only the person list
      * @param option Highlight option
      */
-    public void processHighlightOption(int option) {
+    private void processHighlightOption(int option) {
         switch (option) {
         case 0:
             commandBox.unhighlight();
@@ -192,7 +192,7 @@ public class OnboardingWindow extends UiPart<Stage> {
      * <br>- 3: cover all, showing only the person list
      * @param option the overlay option
      */
-    public void processOverlayOption(int option) {
+    private void processOverlayOption(int option) {
         switch (option) {
         case 0:
             coverAll();
@@ -222,10 +222,10 @@ public class OnboardingWindow extends UiPart<Stage> {
      * <br>- 4: middle right of result display
      * @param option Position option
      */
-    public void processInstructionPosition(int option) {
+    private void processInstructionPosition(int option) {
         switch (option) {
         case 0:
-            instructionLabel.setCenter(stage.heightProperty(),stage.widthProperty());
+            instructionLabel.setCenter(stage.heightProperty(), stage.widthProperty());
             break;
         case 1:
             instructionLabel.translate(menuBar.layoutXProperty(), menuBar.layoutYProperty());
@@ -258,7 +258,7 @@ public class OnboardingWindow extends UiPart<Stage> {
      * <br>- 1: add a person
      *
      */
-    public void processOperation(int option, Person person) {
+    private void processOperation(int option, Person person) {
         switch (option) {
         case 0:
             mainWindow.show();
@@ -272,7 +272,7 @@ public class OnboardingWindow extends UiPart<Stage> {
         }
     }
 
-    public int enforceUserInput(OnboardingStep step) {
+    private int enforceUserInput(OnboardingStep step) {
         if (!commandBox.getText().equals(step.getCommand())) {
             if (!commandBox.getText().equals("")) {
                 instructionLabel.setText("Please type: " + step.getCommand());
@@ -289,7 +289,7 @@ public class OnboardingWindow extends UiPart<Stage> {
      * Process the given onboarding step, and translate it to a set of actions taken in this window
      * @param step the OnboardingStep to be processed
      */
-    public void processStep(OnboardingStep step) {
+    private void processStep(OnboardingStep step) {
         if (step == null) {
             return;
         }
