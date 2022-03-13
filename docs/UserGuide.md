@@ -68,7 +68,7 @@ from offering positions to scheduling interviews with candidates. It is optimise
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -152,14 +152,14 @@ Format: `edit -a INDEX [n/APPLICANT_NAME] [d/DOB] [g/GENDER] [p/PHONE_NUMBER] [e
   list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the applicant will be removed i.e adding of tags is not cumulative.
 * You can remove all the Applicant’s tags by typing `t/` without
   specifying any tags after it.
 
 Examples:
-*  `edit -a 1 n/Belle d/1960-03-04 g/F p/81234567` Edits the name, DOB, gender and phone number of the 1st person
+*  `edit -a 1 n/Belle d/1960-03-04 g/F p/81234567` Edits the name, DOB, gender and phone number of the 1st applicant
    to be `Belle`, `1960-03-04`, `F` and `81234567` respectively.
-*  `edit -a 2 e/belle@yahoo.com a/13 Computing Drive 612345 t/` Edits the email and address of the 2nd person to be
+*  `edit -a 2 e/belle@yahoo.com a/13 Computing Drive 612345 t/` Edits the email and address of the 2nd applicant to be
    `belle@yahoo.com` and `13 Computing Drive 612345` respectively, and clears all existing tags.
 
 ### Editing an Interview : `edit -i`
@@ -194,68 +194,80 @@ Examples:
 * `edit -p Senior Frontend Software Engineer n/5`
 * `edit -p Senior Frontend Software Engineer r/JavaScript r/React`
 
-### List Positions : `poslist`
+## Delete
+General command to delete different data type in HireLah.
 
-Lists all existing positions in HireLah.
-Format: `poslist`
+Format: `delete -TYPE`
+* TYPE must take the form of `a`, `i`, `p`
+* -a will delete an applicant
+* -i will delete an interview
+* -p will delete a position
 
-
-### Listing all Applicants : `appllist`
-
-Shows a list of all Applicants in HireLah.
-
-Format: `appllist`
-
-### Deleting an Applicant : `appldel`
+### Deleting an Applicant : `del -a`
 
 Deletes the specified Applicant from HireLah.
 
-Format: `appdel INDEX`
+Format: `del -a INDEX`
 
 * Deletes the Applicant at the specified `INDEX`.
 * The index refers to the index number shown in the displayed Applicant list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete -a 2` deletes the 2nd person in the address book.
+* `find Betsy` followed by `delete -a 1` deletes the 1st person in the results of the `find` command.
+
 
 ### Delete positions : `del -p`
 
 Deletes an existing position in HireLah.
+
 Format: `del -p POSITION_NAME`
 * Existing position with the specified name is deleted.
 * The position name has to match with the position that is to be deleted.
 * Position name provided is case-insensitive.
 
 Examples:
-* `posdel Senior Frontend Software Engineer`
+* `del -p Senior Frontend Software Engineer`
 
-### List Positions : `poslist`
-
-Lists all existing positions in HireLah.
-Format: `poslist`
-
-### Deleting an Interview: `intvwdel`
+### Deleting an Interview: `del -i`
 
 Deletes an existing interview in HireLah.
 
-Format: `intvwdel CANDIDATE_INDEX ROLE`
-* Date provided must be in format YYYY-MM-DD HH:MM. 
-* Existing interview with the matching CANDIDATE_INDEX and ROLE is deleted. 
+Format: `del -i CANDIDATE_INDEX ROLE`
+* Existing interview with the matching CANDIDATE_INDEX and ROLE is deleted.
 * Role provided is case-insensitive.
 
 Examples:
-* `intvwdel 1 Senior Frontend Software Engineer`
+* `del -i 1 Senior Frontend Software Engineer`
 
-### Listing interviews: `intvwlist`
+## List
+General command to list different data type in HireLah.
+
+Format: `list -TYPE`
+* TYPE must take the form of `a`, `i`, `p`
+* -a will list all applicants
+* -i will list all interview for an applicant
+* -p will list all position
+
+### List Applicants: `list -a`
+Lists all existing applicants
+
+Format: `list -a`
+
+### Listing interviews: `list -i`
 
 Lists all existing interviews for the candidate in HireLah.
 
-Format: `intvwlist CANDIDATE_INDEX`
+Format: `list -i CANDIDATE_INDEX`
 
 Examples:
-* `intvwlist 1`
+* `list -i 1`
+### List Positions : `list -p`
+
+Lists all existing positions in HireLah.
+Format: `list -p`
+
 
 ### Filter data: `filter`
 View different applicants, interviews and positions in HireLah through various filters. It alters the current display of HireLah and changes the index of the relevant data.
@@ -264,13 +276,13 @@ Format: `filter DATA_TYPE b/FILTER_TYPE [ARGUMENT]`
 
 * Different data has different filters available, thus requiring different arguments, as listed:
 
-DATA_TYPE | FILTER_TYPE | ARGUMENT(S)           | Description
-----|-------------|-----------------------|---
-`appl` | `name`      | `n/KEYWORD`           | View applicants whose name contains the keyword
-`appl` | `tag`       | `t/TAG1, [t/TAG2, …]` | View applicants who have all the tags specified
-`intvw` | `appl`      | `n/NAME`              | View interviews for applicants whose name is specified
-`intvw` | `date`      | `d/DATE`              | View interviews happening on the specified date (Date provided must be in format YYYY-MM-DD)
-`pos` | `name`      | `n/KEYWORD`           | View positions which has the specified keyword in the position name
+| DATA_TYPE | FILTER_TYPE | ARGUMENT(S)           | Description                                                                                  |
+|-----------|-------------|-----------------------|----------------------------------------------------------------------------------------------|
+| `appl`    | `name`      | `n/KEYWORD`           | View applicants whose name contains the keyword                                              |
+| `appl`    | `tag`       | `t/TAG1, [t/TAG2, …]` | View applicants who have all the tags specified                                              |
+| `intvw`   | `appl`      | `n/NAME`              | View interviews for applicants whose name is specified                                       |
+| `intvw`   | `date`      | `d/DATE`              | View interviews happening on the specified date (Date provided must be in format YYYY-MM-DD) |
+| `pos`     | `name`      | `n/KEYWORD`           | View positions which has the specified keyword in the position name                          |
 
 Examples:
 * `filter appl name n/john`

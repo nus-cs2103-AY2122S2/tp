@@ -1,3 +1,7 @@
+* {
+    -fx-font-family: 'sans-serif';
+}
+
 #copyButton, #helpMessage {
     -fx-text-fill: white;
 }

@@ -6,15 +6,17 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.add.AddCommand;
+import seedu.address.logic.commands.delete.DeleteCommand;
+import seedu.address.logic.commands.list.ListApplicantCommand;
+import seedu.address.logic.commands.list.ListCommand;
+import seedu.address.logic.parser.applicants.EditApplicantCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -48,7 +50,7 @@ public class AddressBookParser {
             return new AddCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+            return new EditApplicantCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
@@ -60,7 +62,7 @@ public class AddressBookParser {
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            return new ListApplicantCommand(); //TODO: Create list parser to call different ListCommands
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
