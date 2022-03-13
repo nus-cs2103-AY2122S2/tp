@@ -84,6 +84,12 @@ Shows a list of all shows in Trackermon.
 
 Format: `list`
 
+### Requesting help URL : `help`
+
+Shows a URL that redirects the user to Trackermon's user guide.
+
+Format: `help`
+
 ### Finding a show : `find`
 
 Finds the specified show in Trackermon.
