@@ -8,6 +8,7 @@ import seedu.contax.commons.core.GuiSettings;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.tag.Tag;
+import seedu.contax.model.tag.exceptions.DuplicateTagException;
 
 /**
  * The API of the Model component.
@@ -88,11 +89,29 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     // Tag management
+    /**
+     * Returns true if a matching {@code tag} exists in the address book.
+     */
     boolean hasTag(Tag tag);
 
+    /**
+     * Adds the given tag into the address book.
+     * Tag must not already exist in the address book.
+     */
     void addTag(Tag tag);
 
+    /**
+     * Deletes the given tag from the address book.
+     * The supplied tag must already exist in the address book.
+     */
     void deleteTag(Tag tagToDelete);
+
+    /**
+     * Replaces the given {@code target} with {@code editedTag}.
+     * {@code target} must exist in the address book.
+     * {@code editedTag} must not be the same as another existing tag in the address book.
+     */
+    void setTag(Tag target, Tag editedTag);
 
     ObservableList<Tag> getTagList();
 

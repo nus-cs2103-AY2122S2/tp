@@ -57,8 +57,6 @@ public class ImportCsvCommandTest {
                 .withPhone(PERSON2_PHONE).withEmail(PERSON2_EMAIL)
                 .withAddress(PERSON2_ADDRESS).withTags("tag1");
         expectedModel.addPerson(personBuilder2.build());
-        expectedModel.addTag(new Tag("tag1"));
-        expectedModel.addTag(new Tag("tag2"));
         assertCommandSuccess(importCsvCommand, model, ImportCsvCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
@@ -82,9 +80,6 @@ public class ImportCsvCommandTest {
                 .withPhone(PERSON5_PHONE).withEmail(PERSON5_EMAIL)
                 .withAddress(PERSON5_ADDRESS).withTags("tag2", "tag3");
         expectedModel.addPerson(personBuilder5.build());
-        expectedModel.addTag(new Tag("tag1"));
-        expectedModel.addTag(new Tag("tag2"));
-        expectedModel.addTag(new Tag("tag3"));
 
         assertCommandSuccess(importCsvCommand, model, String.format("%s\n%s", ImportCsvCommand.MESSAGE_SUCCESS,
                 String.format(ImportCsvCommand.MESSAGE_SKIPPED_LINES, "3, 4")), expectedModel);
@@ -105,17 +100,12 @@ public class ImportCsvCommandTest {
                 .withPhone(PERSON1_PHONE).withEmail(PERSON1_EMAIL)
                 .withAddress(PERSON1_ADDRESS).withTags("tag1", "tag2");
         model.addPerson(personBuilder1.build());
-        model.addTag(new Tag("tag1"));
-        model.addTag(new Tag("tag2"));
         //Build expecting model with person 1 and 2
         expectedModel.addPerson(personBuilder1.build());
         PersonBuilder personBuilder2 = new PersonBuilder().withName(PERSON2_NAME)
                 .withPhone(PERSON2_PHONE).withEmail(PERSON2_EMAIL)
                 .withAddress(PERSON2_ADDRESS).withTags("tag1");
         expectedModel.addPerson(personBuilder2.build());
-
-        expectedModel.addTag(new Tag("tag1"));
-        expectedModel.addTag(new Tag("tag2"));
 
         assertCommandSuccess(importCsvCommand, model, String.format("%s\n%s", ImportCsvCommand.MESSAGE_SUCCESS,
                 String.format(ImportCsvCommand.MESSAGE_SKIPPED_LINES, "1")), expectedModel);
@@ -146,8 +136,6 @@ public class ImportCsvCommandTest {
                 .withPhone(PERSON2_PHONE).withEmail(PERSON2_EMAIL)
                 .withAddress(PERSON2_ADDRESS).withTags("tag1");
         expectedModel.addPerson(personBuilder2.build());
-        expectedModel.addTag(new Tag("tag1"));
-        expectedModel.addTag(new Tag("tag2"));
 
         assertCommandSuccess(importCsvCommand, model, ImportCsvCommand.MESSAGE_SUCCESS, expectedModel);
     }

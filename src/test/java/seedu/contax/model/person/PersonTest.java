@@ -10,6 +10,7 @@ import static seedu.contax.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.contax.testutil.Assert.assertThrows;
 import static seedu.contax.testutil.TypicalPersons.ALICE;
 import static seedu.contax.testutil.TypicalPersons.BOB;
+import static seedu.contax.testutil.TypicalPersons.COLLEAGUES;
 
 import org.junit.jupiter.api.Test;
 
@@ -48,6 +49,12 @@ public class PersonTest {
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
         assertFalse(BOB.isSamePerson(editedBob));
+    }
+
+    @Test
+    public void withTag() {
+        Person editedAlice = new PersonBuilder(ALICE).withTags("colleagues").build();
+        assertEquals(ALICE.withTag(COLLEAGUES), edite)
     }
 
     @Test

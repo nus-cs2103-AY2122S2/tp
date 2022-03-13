@@ -69,6 +69,19 @@ public class UniqueTagList implements Iterable<Tag> {
         internalList.setAll(tags);
     }
 
+    public void setTag(Tag target, Tag editedTag) {
+        requireNonNull(target);
+        requireNonNull(editedTag);
+
+        // Checks if edited Tag exists
+        if (contains(editedTag)) {
+            throw new DuplicateTagException();
+        }
+
+        int targetIndex = internalList.indexOf(target);
+        internalList.set(targetIndex, editedTag);
+    }
+
     public ObservableList<Tag> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
     }

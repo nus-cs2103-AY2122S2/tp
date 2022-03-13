@@ -82,6 +82,10 @@ public class Person {
         return new Person(name, phone, email, address, updatedTag);
     }
 
+    public boolean hasTag(Tag tag) {
+        return tags.contains(tag);
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
