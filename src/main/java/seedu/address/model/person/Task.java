@@ -29,7 +29,6 @@ public class Task {
      * Default constructor, to be used only by {@code JsonAdaptedPerson}.
      */
     public Task() {
-        super();
         this.taskName = null;
     }
 
