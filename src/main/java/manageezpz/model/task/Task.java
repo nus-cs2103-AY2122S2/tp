@@ -22,6 +22,8 @@ public class Task {
 
     /**
      * Constructor for the Task class.
+     * {@code Date taskDate} has a default value that will be changed if the object inheriting the Task object
+     * is a Deadline or Event object. If object is a Todo object, this field will be ignored.
      * @param taskDescription information about the task.
      */
     public Task(Description taskDescription) {

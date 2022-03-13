@@ -2,9 +2,13 @@ package manageezpz.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import manageezpz.commons.core.index.Index;
 import manageezpz.commons.util.StringUtil;
 import manageezpz.logic.parser.exceptions.ParseException;
+import manageezpz.model.person.Date;
 import manageezpz.model.person.Email;
 import manageezpz.model.person.Name;
 import manageezpz.model.person.Phone;
@@ -75,6 +79,31 @@ public class ParserUtil {
         return new Email(trimmedEmail);
     }
 
+    /**
+     * Parses a {@code String date} into a {@code Date}.
+     * Supports multiple formatted patterns.
+     * @param date
+     * @return a {@code Date} object.
+     * @throws ParseException
+     */
+    public static Date parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        //@@author vishandi-reused
+        //Reused from https://github.com/vishandi/ip/blob/master/src/main/java/parser/Parser.java
+        //with minor modifications
+        String[] patterns = {"yyyy-MM-dd", "yyyy/MM/dd", "dd-MM-yyyy", "dd/MM/yyyy"};
+        for (String pattern : patterns) {
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+                LocalDate parsedDate = LocalDate.parse(date, formatter);
+                return new Date(parsedDate);
+            } catch (Exception e) {
+                System.out.println("Currently chosen pattern did not fit the given input pattern. "
+                        + "Moving on to the next option...");
+            }
+        }
+        throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+    }
     /**
      * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.

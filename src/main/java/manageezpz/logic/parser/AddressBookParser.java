@@ -6,7 +6,9 @@ import static manageezpz.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import manageezpz.logic.commands.AddDeadlineTaskCommand;
 import manageezpz.logic.commands.AddEmployeeCommand;
+import manageezpz.logic.commands.AddEventTaskCommand;
 import manageezpz.logic.commands.AddTodoTaskCommand;
 import manageezpz.logic.commands.ClearCommand;
 import manageezpz.logic.commands.Command;
@@ -71,6 +73,12 @@ public class AddressBookParser {
 
         case AddTodoTaskCommand.COMMAND_WORD:
             return new AddTodoTaskCommandParser().parse(arguments);
+
+        case AddEventTaskCommand.COMMAND_WORD:
+            return new AddEventTaskCommandParser().parse(arguments);
+
+        case AddDeadlineTaskCommand.COMMAND_WORD:
+            return new AddDeadlineTaskCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
