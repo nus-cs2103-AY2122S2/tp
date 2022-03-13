@@ -59,7 +59,7 @@ public class OnboardingStoryManager {
                 3, 0.2, 0.5, 4, 2, 0, null, personList.get(0), 1));
         test.addStory(new OnboardingStep("End of Quick Tour!" + CLICK_EXIT,
                 0, 0.2, 0.5, 0, 0, 0, null, null, -1));
-        test.addStory(new OnboardingStep("End of Quick Tour!" + CLICK_EXIT,
+        test.addStory(new OnboardingStep(null,
                 0, 0.1, 0.5, 0, 0, 0, null, null, 0));
         story = test;
     }
