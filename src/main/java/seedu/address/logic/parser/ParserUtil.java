@@ -55,7 +55,7 @@ public class ParserUtil {
      */
     public static Index[] parseDoubleIndex(String oneBasedIndexes) throws ParseException {
         String[] splitTrimmedIndexes = oneBasedIndexes.trim().split("\\s+");
-        if (!(splitTrimmedIndexes.length == 2)) {
+        if (splitTrimmedIndexes.length != 2) {
             throw new ParseException(MESSAGE_INVALID_DOUBLE_INDEX);
         }
         Index firstIndex = parseIndex(splitTrimmedIndexes[0]);
@@ -73,7 +73,7 @@ public class ParserUtil {
      */
     public static Pair<Index, String> parseIndexWithContent(String content) throws ParseException {
         String[] splitTrimmedContent = content.trim().split("\\s+", 2);
-        if (!(splitTrimmedContent.length == 2)) {
+        if (splitTrimmedContent.length != 2) {
             throw new ParseException(MESSAGE_INVALID_CONTENT);
         }
         Index index = parseIndex(splitTrimmedContent[0]);
@@ -90,7 +90,7 @@ public class ParserUtil {
      */
     public static Pair<Index[], String> parseDoubleIndexWithContent(String content) throws ParseException {
         String[] splitTrimmedContent = content.trim().split("\\s+", 3);
-        if (!(splitTrimmedContent.length == 3)) {
+        if (splitTrimmedContent.length != 3) {
             throw new ParseException(MESSAGE_INVALID_CONTENT);
         }
         Index[] indexes = parseDoubleIndex(splitTrimmedContent[0] + " "
