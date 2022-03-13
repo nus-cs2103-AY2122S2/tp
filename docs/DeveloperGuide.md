@@ -263,8 +263,8 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**:  better manage the student’s contact and progress, 
-especially for those who are teaching multiple classes/modules at the same time. 
+**Value proposition**:  better manage the student’s contact and progress,
+especially for those who are teaching multiple classes/modules at the same time.
 It is optimised for use on CLI.
 
 
@@ -326,9 +326,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. A student with the same matriculation number already exist.
-  
+
     * 1a1. TAPA shows an error message
-    
+
         Use case ends.
 
 * 1b. The matriculation number of the student is not in the input command.
@@ -378,7 +378,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The list is empty.
-  
+
     Use case ends.
 
 * 3a. The given index is invalid.
@@ -386,7 +386,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. TAPA shows an error message.
 
       Use case resumes from step 2.
-    
+
 **Use case: UC04 - Edit a student**
 
 **MSS**
@@ -395,7 +395,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. TAPA shows a list of students.
 3. User requests edits to the supplied details of a specific student in the list.
 4. TAPA updates the details of the student with the supplied details.
-   
+
    Use case ends.
 
 **Extensions**
