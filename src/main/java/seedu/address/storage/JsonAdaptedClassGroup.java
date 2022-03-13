@@ -17,7 +17,7 @@ import seedu.address.model.tamodule.TaModule;
 class JsonAdaptedClassGroup {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "ClassGroup's %s field is missing!";
-
+    public static final String NONEXISTENT_MODULE = "Module does not exist!";
     private final String classGroupId;
     private final String classGroupType;
     private final JsonAdaptedTaModule module;
@@ -87,7 +87,7 @@ class JsonAdaptedClassGroup {
         }
         final TaModule modelModule = module.toModelType();
         if (!taModuleList.contains(modelModule)) {
-            throw new IllegalValueException("Module does not exist!");
+            throw new IllegalValueException(NONEXISTENT_MODULE);
         }
 
         return new ClassGroup(modelClassGroupId, modelClassGroupType, modelModule);
