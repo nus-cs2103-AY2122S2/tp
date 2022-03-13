@@ -21,16 +21,16 @@
                     <AnchorPane prefHeight="546.0" prefWidth="450.0" style="-fx-background-color: derive(#1d1d1d, 20%)derive(#1d1d1d, 20%);">
                         <children>
                             <TextField fx:id="nameInput" layoutX="114.0" layoutY="152.0" prefHeight="37.0" prefWidth="230.0" promptText="Enter name..." />
-                     <TextField fx:id="phoneNumberInput" layoutX="114.0" layoutY="210.0" prefHeight="37.0" prefWidth="230.0" promptText="Enter phone number..." />
-                     <TextField fx:id="emailInput" layoutX="114.0" layoutY="263.0" prefHeight="37.0" prefWidth="230.0" promptText="Enter email..." />
-                     <TextField fx:id="addressInput" layoutX="114.0" layoutY="322.0" prefHeight="37.0" prefWidth="230.0" promptText="Enter address..." />
-                     <TextField fx:id="tagInput" layoutX="114.0" layoutY="379.0" prefHeight="37.0" prefWidth="230.0" promptText="Enter tag (seperated by ', ')" />
-                     <StackPane fx:id="resultDisplayPlaceholder" layoutX="37.0" layoutY="510.0" prefHeight="162.0" prefWidth="368.0" />
+                            <TextField fx:id="phoneNumberInput" layoutX="114.0" layoutY="210.0" prefHeight="37.0" prefWidth="230.0" promptText="Enter phone number..." />
+                            <TextField fx:id="emailInput" layoutX="114.0" layoutY="263.0" prefHeight="37.0" prefWidth="230.0" promptText="Enter email..." />
+                            <TextField fx:id="addressInput" layoutX="114.0" layoutY="322.0" prefHeight="37.0" prefWidth="230.0" promptText="Enter address..." />
+                            <TextField fx:id="tagInput" layoutX="114.0" layoutY="379.0" prefHeight="37.0" prefWidth="230.0" promptText="Enter tag (seperated by ', ')" />
+                            <StackPane fx:id="resultDisplayPlaceholder" layoutX="37.0" layoutY="510.0" prefHeight="162.0" prefWidth="368.0" />
                             <Button layoutX="117.0" layoutY="446.0" mnemonicParsing="false" onAction="#handleAddProfile" text="Save" />
                             <Button layoutX="235.0" layoutY="446.0" mnemonicParsing="false" onAction="#handleClose" text="Cancel" />
-                     <Circle fill="WHITE" layoutX="229.0" layoutY="75.0" radius="53.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                     <Circle fill="#6b88a4" layoutX="229.0" layoutY="89.0" radius="32.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                     <Circle fill="#cad0d7" layoutX="229.0" layoutY="49.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                            <Circle fill="WHITE" layoutX="229.0" layoutY="75.0" radius="53.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                            <Circle fill="#6b88a4" layoutX="229.0" layoutY="89.0" radius="32.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                            <Circle fill="#cad0d7" layoutX="229.0" layoutY="49.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
                         </children>
                     </AnchorPane>
                 </children>
