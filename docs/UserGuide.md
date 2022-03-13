@@ -255,7 +255,7 @@ Examples:
 
 Views the summarised information of a team, lineup or player.
 
-####To view a team
+**To view a team:**<br>
 
 Format: `view T/[TEAM]`
 * Displays the aggregated data of the team of the specified `TEAM`. The summary contains information such as all players in the team, number of players in each position.
@@ -266,7 +266,7 @@ Examples:
 * `view T/Lakaka` Displays the team summary of `Lakaka`.
 * `view T/` Displays all existing teams.
 
-####To view a lineup
+**To view a lineup:**<br>
 
 Format: `view T/TEAM L/[LINEUP]`
 * Displays the summary of the specified `LINEUP` in the specified `TEAM`.
@@ -277,7 +277,7 @@ Examples:
 * `view T/Lakaka L/Starting Five` Displays the lineup summary of `Start Five` lineup in `Lakaka`.
 * `view T/Lakaka L/` Displays the lineup summary of all lineups in `Lakaka`.
 
-####To view a player
+**To view a player:**<br>
 
 Format: `view P/[PLAYER]`
 * Displays the information of the specified `PLAYER`.
@@ -287,7 +287,7 @@ Examples:
 * `view P/Kelvin Darent` Displays the information of `Kelvin Darent`.
 * `view P/` Displays all players in the system.
 
-###To view a schedule
+**To view a schedule:**<br>
 
 Format: `view T/TEAM i/[INDEX]`
 * Displays the schedule of the specified `TEAM` numbered with the specified `INDEX`.
@@ -342,48 +342,48 @@ Example:
 * `filter T/Sandama t/PF` Displays all the players with the tag PF in the team Sandama.
 
 
-### Update a player/team/lineup/schedule information : `update`
+### Edit a player/team/lineup/schedule information : `edit`
 
 Update the details of a player, team, lineup or schedule
 
-**To update a player:**
+**To edit a player:**
 
-Format: `update P/NAME [n/NAME] [p/PHONE_NUMBER] [a/AGE] [w/WEIGHT] [h/HEIGHT] [j/JERSY_NUMBER]`
+Format: `edit P/NAME [n/NAME] [p/PHONE_NUMBER] [a/AGE] [w/WEIGHT] [h/HEIGHT] [j/JERSY_NUMBER]`
 
-* Update the details of a player from the player list
+* edit the details of a player from the player list
 * If any fields are specified, it will change accordingly
 * Multiple fields can be changed at once
 
 Example:
-* `update P/James Soften p/8888888` will change the phone number of player James Soften to 88888888
+* `edit P/James Soften p/8888888` will change the phone number of player James Soften to 88888888
 
-**To update a team:**
+**To edit a team:**
 
 Format: `update T/TEAM_NAME n/NEW_TEAM_NAME`
 
-* Update the team name of team TEAM_NAME to NEW_TEAM_NAME
+* edit the team name of team TEAM_NAME to NEW_TEAM_NAME
 
 Example:
-* `update T/Lokers n/Lakers` will change team Lokers to team Lakers
+* `edit T/Lokers n/Lakers` will change team Lokers to team Lakers
 
-**To update a lineup:**
+**To edit a lineup:**
 
-Format: `update T/TEAM_NAME L/LINEUP n/NEW_LINEUP_NAME`
+Format: `edit T/TEAM_NAME L/LINEUP n/NEW_LINEUP_NAME`
 
-* Update the lineup name of lineup LINEUP of team TEAM_NAME to NEW_LINEUP_NAME
+* Edit the lineup name of lineup LINEUP of team TEAM_NAME to NEW_LINEUP_NAME
 
 Example:
-* `update T/Lakers L/Starting5 n/Worst5` will change name of the lineup Starting5 of team Lakers to Worst5
+* `edit T/Lakers L/Starting5 n/Worst5` will change name of the lineup Starting5 of team Lakers to Worst5
 
-**To update a schedule:**
+**To edit a schedule:**
 
-Format: `update T/TEAM i/INDEX_SCHEDULE [n/DESCRIPTION] [d/DATETIME]`
+Format: `edit T/TEAM i/INDEX_SCHEDULE [n/DESCRIPTION] [d/DATETIME]`
 
-* Update the details of the i-th schedule of a team
+* Edit the details of the i-th schedule of a team
 * If any fields are specified, it will be changed accordingly
 
 Example:
-* `update T/Wizards i/1 n/Training` will change the description of first event in the schedule for team Wizards to Training
+* `edit T/Wizards i/1 n/Training` will change the description of first event in the schedule for team Wizards to Training
 
 ### Clearing all entries : `clear`
 
