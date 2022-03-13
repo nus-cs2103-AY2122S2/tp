@@ -84,7 +84,7 @@ Shows a list of all shows in Trackermon.
 
 Format: `list`
 
-### Finding a person : `find`
+### Finding a show : `find`
 
 Finds the specified show in Trackermon.
 
