@@ -38,7 +38,7 @@ public class Flag {
 
     @Override
     public String toString() {
-        return isFlagged ? "Flagged" : "Unflagged";
+        return isFlagged ? "true" : "false";
     }
 
     @Override
