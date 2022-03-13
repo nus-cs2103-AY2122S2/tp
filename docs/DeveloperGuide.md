@@ -257,13 +257,17 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+CS2030S Teaching Assistants (TAs) who
+* have to keep track of students' details
+* have to keep track of students' performance and progress on labs
+* have to keep track of their own progress on grading labs
 * prefer desktop apps over other types
 * can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* prefer typing to mouse interactions
+* are reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: provides CS2030S TAs with a systematic way to keep track of students, including who he/she
+has graded and what grade was given for every lab.
 
 
 ### User stories
@@ -285,45 +289,123 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TAddressBook` and the **Actor** is the `Teaching Assistant (TA)`, unless specified otherwise)
 
 **Use case: Add Labs**
+
+**MSS**
+1. TA request to add new lab
+2. TAB adds a new lab to every student
+3. TAB shows updated list of labs
+4. TAB displays success message
+
+   Use case ends.
+
+**Extensions**
+* 2a. TAB detects that the student list is empty
+    * 2a1. TAB displays warning message to user (that there are no students yet)
+
+      Use case ends
+* 2b. TAB detects that an identical lab already exists.
+    * 2b1. TAB displays error message (that lab already exists)
+
+      Use case ends
+
 **Use case: Filter Students**
-**Use case: Grade Student Lab**
-**Use case: Mark Student Lab as Submitted**
-
-
-
-**Use case: Delete a person**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  TA requests to filter students by a specific lab 
+2.  TAB displays list of students based on filter criteria
 
-    Use case ends.
+    Use case ends
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. TA provides non-existent lab
+  
+    * 1a1. TAB shows error message
+    * 1a2. TAB requests for valid lab
 
-  Use case ends.
+      Use case resumes from step 1
 
-* 3a. The given index is invalid.
+* 1b. TA tries to filter an empty list
 
-    * 3a1. AddressBook shows an error message.
+    * 1b1. TAB shows error message
+  
+      Use case ends
 
-      Use case resumes at step 2.
+**Use case: Mark Student Lab as Graded**
+
+**MSS**
+1. TA requests to change a student’s lab status to “Graded”
+2. TAB changes the student’s lab status from “Submitted” to “Graded”
+3. TAB shows updated lab status
+4. TAB displays success message
+
+   Use case ends.
+
+**Extensions**
+
+- 1a. TA provides invalid student index
+    - 1a1. TAB shows error message that student index is invalid
+    - 1a2. TAB requests for valid student index
+
+  Use case resumes from step 1
+- 1b. TA provides lab that is already "Graded"
+    - 1b1. TAB shows error message stating that lab is already "Graded"
+    - 1b2. TAB requests for valid lab
+
+  Use case resumes from step 1
+- 1c. TA provides lab that has not been "Submitted"
+    - 1c1. TAB shows error message that lab status has to be “Submitted” first
+    - 1c2. TAB requests for valid lab
+
+  Use case resumes from step 1
+- 1d. TA provides lab that does not exist
+    - 1d1. TAB shows error message stating that lab does not exist
+    - 1d2. TAB requests for valid lab
+
+  Use case resumes from step 1
+
+**Use case: Mark Student Lab as Submitted**
+
+**MSS**
+
+1. TA requests to change a student’s lab status to “Submitted”
+2. TAB changes the student’s lab status from “Unsubmitted” to “Submitted”
+3. TAB shows updated lab status
+4. TAB displays success message
+
+   Use case ends.
+
+**Extensions**
+
+- 1a. TA provides invalid student index
+    - 1a1. TAB shows error message that student index is invalid
+    - 1a2. TAB requests for valid student index
+
+  Use case resumes from step 1.
+- 1b. TA provides lab that is already "Submitted"
+    - 1b1. TAB shows error message stating that the lab for the particular student has already been "Submitted"
+    - 1b2. TAB requests for valid lab and student
+
+  Use case resumes from step 1
+
+- 1c. TA provides lab that does not exist
+    - 1c1. TAB shows error message stating that lab does not exist
+    - 1c2. TAB requests for valid lab
+
+  Use case resumes from step 1
 
 *{More to be added}*
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
+3. A TA with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Should be intuitive for both new users and experienced users.
 
 *{More to be added}*
 
@@ -331,6 +413,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Unsubmiited**: Status to indicate that the student has not submitted the lab assignment or it is overdue.
+* **Submitted**: Status to indicate that the student has submitted the lab assignment to his github repository.
+* **Graded**: Status to indicate that the User (TA) has graded the student's lab assignment.
+* **Lab**: Refers to Lab assignments from the module CS2030S offered by The National University of Singapore.
 
 --------------------------------------------------------------------------------------------------------------------
 
