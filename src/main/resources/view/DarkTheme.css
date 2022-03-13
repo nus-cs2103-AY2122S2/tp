@@ -296,6 +296,36 @@
     -fx-text-fill: white;
 }
 
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-opacity: 0;
+}
+
+.tab-pane {
+    -fx-tab-min-width: 95px;
+    -fx-tab-min-height: 25px;
+}
+
+.tab-pane .tab {
+    -fx-background-color: derive(#1d1d1d, 10%);
+    -fx-background-radius: 8 8 0 0;
+    -fx-focus-color: transparent;
+}
+
+.tab-pane .tab:selected {
+    -fx-background-color: derive(#1d1d1d, 40%);
+}
+
+.tab-label {
+    -fx-font-size: 12pt;
+    -fx-font-family: "sans-serif";
+    -fx-text-fill: derive(#1d1d1d, 90%);
+    -fx-opacity: 0.9;
+}
+
+.tab:selected .tab-label {
+    -fx-text-fill: white;
+}
+
 .scroll-bar {
     -fx-background-color: derive(#1d1d1d, 20%);
 }

@@ -64,7 +64,7 @@
                  <content>
                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                           <children>
-                             <Label text="Positions list here" />
+                             <Label text="Positions list here" style="-fx-text-fill: white;"/>
                           </children>
                        </AnchorPane>
                  </content>
@@ -73,7 +73,7 @@
                    <content>
                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                           <children>
-                             <Label text="Interview list here" />
+                             <Label text="Interview list here" style="-fx-text-fill: white;"/>
                           </children>
                        </AnchorPane>
                    </content>
