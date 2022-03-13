@@ -19,7 +19,7 @@ import seedu.address.model.ReadOnlyShowList;
  */
 public class JsonShowListStorage implements ShowListStorage {
 
-    private static final Logger logger = LogsCenter.getLogger(JsonAddressBookStorage.class);
+    private static final Logger logger = LogsCenter.getLogger(JsonShowListStorage.class);
 
     private Path filePath;
 
