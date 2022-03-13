@@ -7,17 +7,21 @@ import seedu.address.model.person.Internship;
 import seedu.address.model.person.Module;
 import seedu.address.model.tag.Tag;
 
+import static java.util.Objects.requireNonNull;
+
 public class TagComponent {
 
 
     private final Tag tag;
 
     public TagComponent(Tag tag) {
+        requireNonNull(tag);
         this.tag = tag;
     }
 
     public Label getTagLabel() {
         Label l = new Label(tag.tagName);
+
         if (tag instanceof Internship) {
             l.setStyle("-fx-padding:2;"
                     + "-fx-border-width: 0;"
