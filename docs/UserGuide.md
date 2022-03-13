@@ -22,7 +22,7 @@ ManageEZPZ is a **desktop app for that allows managers or supervisors to manage 
 6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list /all`** : Lists all Tasks.
+   * **`list all/`** : Lists all Tasks.
 
    * **`addEmployee`**`n/John Doe p/98765432 e/johnd@example.com` : Adds a contact named `John Doe` to ManageEZPZ.
 
@@ -30,7 +30,7 @@ ManageEZPZ is a **desktop app for that allows managers or supervisors to manage 
 
    * **`clear`** : Deletes all Tasks.
    
-   * **`addTask /todo read book`** : Adds a todo task with a description of `read book` to the Task list.
+   * **`addTask todo/ desc/read book`** : Adds a todo task with a description of `read book` to the Task list.
 
    * **`exit`** : Exits the app.
    
@@ -51,16 +51,13 @@ ManageEZPZ is a **desktop app for that allows managers or supervisors to manage 
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * Task related Commands must be strictly lower case.
 
-* Task related parameters always start with /.
-
 * Task related parameters must be in sequence as shown in the instruction.
 
-* Task related parameters must be lowercase.
 </div>
 
 ### Viewing help : `help`
@@ -80,7 +77,7 @@ Format: `addEmployee n/NAME p/PHONE_NUMBER e/EMAIL`
 
 Examples:
 * `addEmployee n/John Doe p/98765432 e/johnd@example.com`
-* `addEmployee n/Betsy Crowe t/friend e/betsycrowe@example.com`
+* `addEmployee p/98754123 n/Betsy Crowe e/betsycrowe@example.com`
 
 ### Adding a Task: `addTask`
 
@@ -88,9 +85,9 @@ Adds a Task into the Task list.
 
 Format:
 
-* `addTask /todo TASK_DESCRIPTION`
-* `addTask /deadline TASK_DESCRIPTION /by DATETIME`
-* `addTask /event TASK_DESCRIPTION /at DATE START_TIME END_TIME`
+* `addTask todo/ desc/TASK_DESCRIPTION`
+* `addTask deadline/ desc/TASK_DESCRIPTION by/DATE TIME`
+* `addTask event/ desc/TASK_DESCRIPTION at/DATE START_TIME END_TIME`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Take Note:**
 For deadline and event, the DATE must be in this format: DD-MM-YYYY HHmm (in 24 hr format)
@@ -102,11 +99,11 @@ View all tasks, all todo tasks, all deadline tasks, all event tasks or tasks for
 
 Format:
 
-* `list /all`
-* `list /todo`
-* `list /deadline`
-* `list /event`
-* `list /today`
+* `list all/`
+* `list todo/`
+* `list deadline/`
+* `list event/`
+* `list today/`
 
 ### Marking a task as done : `mark`
 Mark a task in the Task list as done :
@@ -143,12 +140,12 @@ Examples:
 Find tasks based on the task description or date in the format of (DD-MM-YYYY).
 
 Format: 
-* `find /task TASK_DESCRIPTION`
-* `find /date DD-MM-YYYY`
+* `find task/ desc/TASK_DESCRIPTION`
+* `find date/DD-MM-YYYY`
 
 Examples:
-* `find /task homework`
-* `find /date 02-02-2022`
+* `find task/ desc/homework`
+* `find date/02-02-2022`
 
 ### Clearing all entries : `clear`
 
@@ -192,9 +189,9 @@ _Details coming soon ..._
 Action | Format, Examples
 --------|------------------
 **Add Employee** | `addEmployee n/NAME p/PHONE_NUMBER e/EMAIL` <br> e.g., `addEmployee n/James Ho p/22224444 e/jamesho@example.com`
-**Add Task** | `addTask /TASK_TYPE TASK_DESCRIPTION` <br> e.g., `addTask /todo read book`
+**Add Task** | `addTask TASK_TYPE/ desc/TASK_DESCRIPTION` <br> e.g., `addTask todo/  desc/read book`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Find** | `find /task TASK_DESCRIPTION` <br> e.g., `find /task homework`
-**List** | `list` <br> e.g. `list /all` or `list /event` or `list /deadline`
+**Find** | `find task/TASK_DESCRIPTION` <br> e.g., `find task/homework`
+**List** | `list` <br> e.g. `list all/` or `list event/` or `list deadline/`
 **Help** | `help`
