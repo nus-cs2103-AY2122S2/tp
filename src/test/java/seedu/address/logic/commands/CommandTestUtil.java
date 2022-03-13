@@ -37,6 +37,15 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
+    public static final String VALID_POSITION_NAME_JR_SWE = "Junior Software Engineer";
+    public static final String VALID_POSITION_NAME_SR_FE_SWE = "Senior Front-end Software Engineer";
+    public static final String VALID_DESCRIPTION_NAME_JR_SWE = "Flexible role. Must be hardworking.";
+    public static final String VALID_DESCRIPTION_NAME_SR_FE_SWE = "In-charged of managing an entire frontend feature.";
+    public static final String VALID_POSITION_OPENINGS_JR_SWE = "6";
+    public static final String VALID_POSITION_OPENINGS_SR_FE_SWE = "2";
+    public static final String VALID_REQUIREMENT_EXPERIENCE = ">=5 years of experience";
+    public static final String VALID_REQUIREMENT_SKILL = "Expert in JavaScript";
+
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;

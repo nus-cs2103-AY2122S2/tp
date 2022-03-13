@@ -11,6 +11,7 @@ import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.Email;
 import seedu.address.model.applicant.Name;
 import seedu.address.model.applicant.Phone;
+import seedu.address.model.position.Requirement;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -57,4 +58,12 @@ public class SampleDataUtil {
                 .collect(Collectors.toSet());
     }
 
+    /**
+     * Returns a requirement set containing the list of strings given.
+     */
+    public static Set<Requirement> getRequirementSet(String... strings) {
+        return Arrays.stream(strings)
+                .map(Requirement::new)
+                .collect(Collectors.toSet());
+    }
 }
