@@ -6,7 +6,7 @@ import static manageezpz.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import manageezpz.logic.commands.AddCommand;
+import manageezpz.logic.commands.AddEmployeeCommand;
 import manageezpz.logic.commands.AddTaskCommand;
 import manageezpz.logic.commands.ClearCommand;
 import manageezpz.logic.commands.Command;
@@ -45,8 +45,8 @@ public class AddressBookParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+        case AddEmployeeCommand.COMMAND_WORD:
+            return new AddEmployeeCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
