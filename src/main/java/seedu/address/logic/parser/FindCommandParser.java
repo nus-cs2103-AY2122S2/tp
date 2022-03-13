@@ -11,7 +11,12 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.predicate.CourseContainsKeywordsPredicate;
+import seedu.address.model.person.predicate.EmailContainsKeywordsPredicate;
+import seedu.address.model.person.predicate.NameContainsKeywordsPredicate;
+import seedu.address.model.person.predicate.PersonContainsKeywordsPredicate;
+import seedu.address.model.person.predicate.PhoneContainsKeywordsPredicate;
+import seedu.address.model.person.predicate.StudentIdContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -27,18 +32,39 @@ public class FindCommandParser implements Parser<FindCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_KEYWORD, PREFIX_FIELD);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_KEYWORD, PREFIX_FIELD)
+        // throws exception if no keywords are specified
+        if (!arePrefixesPresent(argMultimap, PREFIX_KEYWORD)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
         List<String> keywords = argMultimap.getAllValues(PREFIX_KEYWORD);
         Optional<String> field = argMultimap.getValue(PREFIX_FIELD);
+        String fieldString;
 
-        if (field.get().equalsIgnoreCase("name")) {
-            return new FindCommand(new NameContainsKeywordsPredicate(keywords));
+        if (field.isEmpty()) {
+            fieldString = "";
+        } else {
+            fieldString = field.get().toLowerCase();
         }
-        return new FindCommand(new NameContainsKeywordsPredicate(Collections.<String>emptyList()));
+
+        switch (fieldString) {
+        case "email":
+            return new FindCommand(new EmailContainsKeywordsPredicate(keywords));
+        case "course":
+            return new FindCommand(new CourseContainsKeywordsPredicate(keywords));
+        case "name":
+            return new FindCommand(new NameContainsKeywordsPredicate(keywords));
+        case "person":
+        case "":
+            return new FindCommand(new PersonContainsKeywordsPredicate(keywords));
+        case "phone":
+            return new FindCommand(new PhoneContainsKeywordsPredicate(keywords));
+        case "studentid":
+            return new FindCommand(new StudentIdContainsKeywordsPredicate(keywords));
+        default:
+            return new FindCommand(new PersonContainsKeywordsPredicate(Collections.<String>emptyList()));
+        }
     }
 
     /**

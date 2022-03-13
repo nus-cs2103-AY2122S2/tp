@@ -27,11 +27,11 @@ Given below are my contributions to the project.
 
 
 * **Documentation**:
-  * User Guide: 
+  * User Guide:
     * Added documentation for Motivation and Quick Start [\#18]()
     * Added documentation for the feature `delete` [\#33]()
   * Developer Guide:
-    * To be added 
+    * To be added
 
 
 * **Community**:

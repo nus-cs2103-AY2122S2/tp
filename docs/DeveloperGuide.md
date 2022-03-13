@@ -264,8 +264,8 @@ _{Explain here how the data archiving feature will be implemented}_
 * Prefers typing to mouse interactions
 * Reasonably comfortable using CLI apps
 
-**Value proposition**: TAlent Assistant™ creates a centralized management system for professors to manage TA 
-applications by providing access to various application data such as qualifications, experience and 
+**Value proposition**: TAlent Assistant™ creates a centralized management system for professors to manage TA
+applications by providing access to various application data such as qualifications, experience and
 interview availability dates.
 
 
@@ -343,7 +343,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 3a. The list is empty
-    
+
     Use case ends.
 * 3b. The given student number is invalid or does not exist in the system
 
