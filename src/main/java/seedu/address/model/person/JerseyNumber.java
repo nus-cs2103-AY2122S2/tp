@@ -36,7 +36,7 @@ public class JerseyNumber {
             return false;
         }
 
-        if (jerseyNumber < 0 || jerseyNumber > 400) {
+        if (jerseyNumber < 0 || jerseyNumber > 100) {
             return false;
         }
 
