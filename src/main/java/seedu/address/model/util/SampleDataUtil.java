@@ -61,12 +61,6 @@ public class SampleDataUtil {
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }
-        for (TaModule sampleModule : getSampleModules()) {
-            sampleAb.addModule(sampleModule);
-        }
-        for (ClassGroup sampleClassGroup : getSampleClassGroups()) {
-            sampleAb.addClassGroup(sampleClassGroup);
-        }
         return sampleAb;
     }
 
