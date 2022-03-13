@@ -16,6 +16,8 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Applicant> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
+    Predicate<Position> PREDICATE_SHOW_ALL_POSITIONS = unused -> true;
+
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -99,7 +101,30 @@ public interface Model {
      */
     void addInterview(Interview interview);
 
+    /**
+     * Updates the filter of the filtered position list to filter by the given {@code predicate}.
+     *
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredPositionList(Predicate<Position> predicate);
+
+    /**
+     * Deletes the given position.
+     * The position must exist in the address book.
+     */
+    void deletePosition(Position target);
+
+    /**
+     * Returns true if a position already exists in the address book.
+     */
+    boolean hasPosition(Position position);
+
+    /**
+     * Adds the given position.
+     * {@code position} must not already exist in the address book.
+     */
+    void addPosition(Position position);
+
     /** Returns an unmodifiable view of the filtered applicant list */
     ObservableList<Position> getFilteredPositionList();
-
 }
