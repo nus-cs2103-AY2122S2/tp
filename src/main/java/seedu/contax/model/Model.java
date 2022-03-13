@@ -8,7 +8,6 @@ import seedu.contax.commons.core.GuiSettings;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.tag.Tag;
-import seedu.contax.model.tag.exceptions.DuplicateTagException;
 
 /**
  * The API of the Model component.

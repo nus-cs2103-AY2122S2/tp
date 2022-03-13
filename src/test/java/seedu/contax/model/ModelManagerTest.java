@@ -27,12 +27,10 @@ import seedu.contax.commons.core.GuiSettings;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.appointment.exceptions.AppointmentNotFoundException;
 import seedu.contax.model.person.NameContainsKeywordsPredicate;
-import seedu.contax.model.person.Person;
 import seedu.contax.model.person.exceptions.PersonNotFoundException;
 import seedu.contax.model.tag.exceptions.TagNotFoundException;
 import seedu.contax.testutil.AddressBookBuilder;
 import seedu.contax.testutil.AppointmentBuilder;
-import seedu.contax.testutil.PersonBuilder;
 import seedu.contax.testutil.ScheduleBuilder;
 
 public class ModelManagerTest {

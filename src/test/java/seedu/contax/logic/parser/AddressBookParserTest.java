@@ -14,12 +14,14 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.contax.commons.core.index.Index;
 import seedu.contax.logic.commands.AddAppointmentCommand;
 import seedu.contax.logic.commands.AddCommand;
 import seedu.contax.logic.commands.AddTagCommand;
 import seedu.contax.logic.commands.ClearCommand;
 import seedu.contax.logic.commands.DeleteAppointmentCommand;
 import seedu.contax.logic.commands.DeleteCommand;
+import seedu.contax.logic.commands.DeleteTagCommand;
 import seedu.contax.logic.commands.EditCommand;
 import seedu.contax.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.contax.logic.commands.ExitCommand;
@@ -27,6 +29,7 @@ import seedu.contax.logic.commands.FindCommand;
 import seedu.contax.logic.commands.HelpCommand;
 import seedu.contax.logic.commands.ListAppointmentCommand;
 import seedu.contax.logic.commands.ListCommand;
+import seedu.contax.logic.commands.ListTagCommand;
 import seedu.contax.logic.parser.exceptions.ParseException;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.person.NameContainsKeywordsPredicate;
@@ -107,6 +110,20 @@ public class AddressBookParserTest {
         assertEquals(command, new AddTagCommand(tag));
     }
 
+    @Test
+    public void parseCommand_listTag() throws Exception {
+        assertTrue(parser.parseCommand(ListTagCommand.COMMAND_WORD) instanceof ListTagCommand);
+    }
+
+    @Test
+    public void parseCommand_deleteTag() throws Exception {
+        Index firstIndex = Index.fromOneBased(1);
+        String deleteCommand = String.format("%s %s", DeleteTagCommand.COMMAND_WORD, 1);
+        DeleteTagCommand command = (DeleteTagCommand) parser.parseCommand(deleteCommand);
+        assertEquals(command, new DeleteTagCommand(firstIndex));
+    }
+
+    // Appointment related commands
     @Test
     public void parseCommand_addAppointment() throws Exception {
         Appointment appointment = new AppointmentBuilder(APPOINTMENT_ALONE).build();

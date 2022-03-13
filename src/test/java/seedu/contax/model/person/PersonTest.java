@@ -1,5 +1,6 @@
 package seedu.contax.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.contax.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
@@ -9,8 +10,11 @@ import static seedu.contax.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.contax.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.contax.testutil.Assert.assertThrows;
 import static seedu.contax.testutil.TypicalPersons.ALICE;
+import static seedu.contax.testutil.TypicalPersons.BENSON;
 import static seedu.contax.testutil.TypicalPersons.BOB;
+import static seedu.contax.testutil.TypicalPersons.CARL;
 import static seedu.contax.testutil.TypicalPersons.COLLEAGUES;
+import static seedu.contax.testutil.TypicalPersons.FRIENDS;
 
 import org.junit.jupiter.api.Test;
 
@@ -53,8 +57,30 @@ public class PersonTest {
 
     @Test
     public void withTag() {
-        Person editedAlice = new PersonBuilder(ALICE).withTags("colleagues").build();
-        assertEquals(ALICE.withTag(COLLEAGUES), edite)
+        // Unique tag added to person
+        Person editedAlice = new PersonBuilder(ALICE).withTags("colleagues", "friends").build();
+        assertEquals(ALICE.withTag(COLLEAGUES), editedAlice);
+
+        // Adding a tag that already exists in person
+        assertEquals(BENSON, BENSON.withTag(FRIENDS));
+    }
+
+    @Test
+    public void withoutTag() {
+        Person editedAlice = new PersonBuilder(ALICE).withTags().build();
+        assertEquals(ALICE.withoutTag(FRIENDS), editedAlice);
+    }
+
+    @Test
+    public void hasTag() {
+        // Tag does exist in person
+        assertTrue(ALICE.hasTag(FRIENDS));
+
+        // Tag does not exist in person
+        assertFalse(ALICE.hasTag(COLLEAGUES));
+
+        // Person does not have any tags
+        assertFalse(CARL.hasTag(FRIENDS));
     }
 
     @Test

@@ -13,7 +13,6 @@ import seedu.contax.model.Model;
 import seedu.contax.model.ModelManager;
 import seedu.contax.model.Schedule;
 import seedu.contax.model.UserPrefs;
-import seedu.contax.model.tag.Tag;
 import seedu.contax.testutil.ImportCsvObjectBuilder;
 import seedu.contax.testutil.PersonBuilder;
 
