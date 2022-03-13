@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import unibook.model.person.Person;
 import unibook.model.person.Professor;
 import unibook.model.person.Student;
 
@@ -160,6 +161,19 @@ public class Module {
     public boolean hasModuleCode(ModuleCode otherCode) {
         return otherCode != null
             && otherCode.equals(moduleCode);
+    }
+
+    /**
+     * Remove a person from students or professors list depending on whether person is a student or professor
+     * and if present
+     * @param person
+     */
+    public void removePerson(Person person) {
+        if (person instanceof Student) {
+            students.remove(person);
+        } else {
+            professors.remove(person);
+        }
     }
 
     /**

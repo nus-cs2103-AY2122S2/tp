@@ -27,6 +27,11 @@ import unibook.testutil.PersonBuilder;
 
 public class AddCommandTest {
 
+    public static final Boolean PERSON_LIST_SHOWING = true;
+    public static final Boolean PERSON_LIST_NOT_SHOWING = false;
+    public static final Boolean MODULE_LIST_SHOWING = true;
+    public static final Boolean MODULE_LIST_NOT_SHOWING = false;
+
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, () -> new AddCommand(null));
@@ -37,7 +42,8 @@ public class AddCommandTest {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
         Person validPerson = new PersonBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub,
+                PERSON_LIST_SHOWING, MODULE_LIST_NOT_SHOWING);
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS_PERSON, validPerson), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
@@ -50,7 +56,7 @@ public class AddCommandTest {
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
         Assert.assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, ()
-            -> addCommand.execute(modelStub));
+            -> addCommand.execute(modelStub, PERSON_LIST_SHOWING, MODULE_LIST_NOT_SHOWING));
     }
 
     @Test
@@ -167,7 +173,27 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasModule(ModuleCode moduleCode) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deleteModule(Module target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeModuleFromAllPersons(ModuleCode moduleCode) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removePersonFromAllModules(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteByModuleCode(ModuleCode moduleCode) {
             throw new AssertionError("This method should not be called.");
         }
 

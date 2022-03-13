@@ -104,7 +104,15 @@ public interface Model {
 
     boolean hasModule(Module module);
 
-    void deleteModule(Module target);
+    boolean hasModule(ModuleCode moduleCode);
+
+    void deleteByModuleCode(ModuleCode moduleCode);
+
+    void deleteModule(Module module);
+
+    void removeModuleFromAllPersons(ModuleCode moduleCode);
+
+    void removePersonFromAllModules(Person person);
 
     /**
      * Adds the given module.

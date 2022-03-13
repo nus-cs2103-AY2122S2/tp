@@ -26,7 +26,8 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model, Boolean isPersonListShowing,
+                                 Boolean isModuleListShowing) {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
         return new CommandResult(

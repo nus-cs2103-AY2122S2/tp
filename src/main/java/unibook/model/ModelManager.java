@@ -135,9 +135,31 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteModule(Module target) {
-        uniBook.removeModule(target);
+    public boolean hasModule(ModuleCode moduleCode) {
+        requireNonNull(moduleCode);
+        return uniBook.hasModule(moduleCode);
     }
+
+    @Override
+    public void deleteByModuleCode(ModuleCode moduleCode) {
+        uniBook.removeByModuleCode(moduleCode);
+    }
+
+    @Override
+    public void deleteModule(Module module) {
+        uniBook.removeModule(module);
+    }
+
+    @Override
+    public void removeModuleFromAllPersons(ModuleCode moduleCode) {
+        uniBook.removeModuleFromAllPersons(moduleCode);
+    }
+
+    @Override
+    public void removePersonFromAllModules(Person person) {
+        uniBook.removePersonFromModules(person);
+    }
+
 
     @Override
     public void addModule(Module module) {

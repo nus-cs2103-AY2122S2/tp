@@ -8,6 +8,7 @@ import unibook.commons.core.Messages;
 import unibook.commons.core.index.Index;
 import unibook.logic.commands.exceptions.CommandException;
 import unibook.model.Model;
+import unibook.model.module.ModuleCode;
 import unibook.model.person.Person;
 
 /**
@@ -18,30 +19,89 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": Deletes the person identified by the index number used in the displayed person list.\n"
-        + "Parameters: INDEX (must be a positive integer)\n"
-        + "Example: " + COMMAND_WORD + " 1";
+        + ": Deletes the person identified by the index number used in the displayed person list or "
+        + "deletes a module that matches the given module code\n"
+        + "Parameters: INDEX (must be a positive integer) or m/MODULECODE\n"
+        + "Example: " + COMMAND_WORD + " 1 or m/CS2103\n";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_MODULE_SUCCESS = "Deleted Module: %1$s";
+    public static final String MESSAGE_DELETE_UNSUCCESSFUL = "Delete Unsuccessful";
 
     private final Index targetIndex;
+    private final ModuleCode moduleCode;
 
+    /**
+     * Creates a Delete Command Object that will delete a person at targetIndex.
+     * @param targetIndex Index object that describes the person at that index to delete
+     */
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
+        this.moduleCode = null;
     }
 
-    @Override
-    public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+    /**
+     * Creates a Delete Command Object that will delete a module that has moduleCode
+     * @param moduleCode
+     */
+    public DeleteCommand(ModuleCode moduleCode) {
+        this.moduleCode = moduleCode;
+        this.targetIndex = null;
+    }
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    // execute will delete the specified index of person or module depending on what is currently showing
+    @Override
+    public CommandResult execute(Model model,
+                                 Boolean isPersonListShowing,
+                                 Boolean isModuleListShowing) throws CommandException {
+        requireNonNull(model);
+
+        // delete person by index case
+        if (targetIndex != null && moduleCode == null) {
+
+            // if not on person page, throw exception telling user to change pages
+            if (!isPersonListShowing) {
+                throw new CommandException(Messages.MESSAGE_CHANGE_TO_PERSON_PAGE);
+            }
+
+            List<Person> lastShownList = model.getFilteredPersonList();
+
+            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+
+            Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+
+            // Bi-directionality
+            model.deletePerson(personToDelete); // delete person from UniquePersonList
+            model.removePersonFromAllModules(personToDelete); // delete person from each module in ModuleList
+
+            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+
+        // delete module by code case
+        } else if (targetIndex == null && moduleCode != null) {
+
+            // if not on module page, throw exception telling users to change page
+            if (!isModuleListShowing) {
+                throw new CommandException(Messages.MESSAGE_CHANGE_TO_MODULE_PAGE);
+            }
+
+            // check if module code is valid
+            if (!model.hasModule(moduleCode)) {
+                throw new CommandException(String.format(Messages.MESSAGE_MODULE_CODE_NOT_EXIST, moduleCode));
+            }
+
+            // Bi-directionality
+            model.deleteByModuleCode(moduleCode); // delete module from ModuleList
+            model.removeModuleFromAllPersons(moduleCode); // delete module from each person in UniquePersonList
+
+            return new CommandResult(String.format(MESSAGE_DELETE_MODULE_SUCCESS, moduleCode));
+
         }
 
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_UNSUCCESSFUL, moduleCode));
+
+
     }
 
     @Override
