@@ -36,7 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private ModuleListPanel moduleListPanel;
     private ClassGroupListPanel classGroupListPanel;
-    private PersonListPanel personListPanel;
+    private StudentListPanel studentListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -59,7 +59,7 @@ public class MainWindow extends UiPart<Stage> {
     private Button classGroupListButton;
 
     @FXML
-    private Button personListButton;
+    private Button studentListButton;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -127,8 +127,8 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        studentListPanel = new StudentListPanel(logic.getFilteredStudentList());
+        listPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -184,7 +184,7 @@ public class MainWindow extends UiPart<Stage> {
     private void handleModuleListButtonPress() {
         moduleListButton.getStyleClass().add("active");
         classGroupListButton.getStyleClass().remove("active");
-        personListButton.getStyleClass().remove("active");
+        studentListButton.getStyleClass().remove("active");
         showModuleList();
     }
 
@@ -192,16 +192,16 @@ public class MainWindow extends UiPart<Stage> {
     private void handleClassGroupListButtonPress() {
         moduleListButton.getStyleClass().remove("active");
         classGroupListButton.getStyleClass().add("active");
-        personListButton.getStyleClass().remove("active");
+        studentListButton.getStyleClass().remove("active");
         showClassGroupList();
     }
 
     @FXML
-    private void handlePersonListButtonPress() {
+    private void handleStudentListButtonPress() {
         moduleListButton.getStyleClass().remove("active");
         classGroupListButton.getStyleClass().remove("active");
-        personListButton.getStyleClass().add("active");
-        showPersonList();
+        studentListButton.getStyleClass().add("active");
+        showStudentList();
     }
 
     /**
@@ -228,10 +228,10 @@ public class MainWindow extends UiPart<Stage> {
      * Displays person list in list panel.
      */
     @FXML
-    private void showPersonList() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+    private void showStudentList() {
+        studentListPanel = new StudentListPanel(logic.getFilteredStudentList());
         listPanelPlaceholder.getChildren().clear();
-        listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        listPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
     }
 
     public ModuleListPanel getModuleListPanel() {
@@ -242,8 +242,8 @@ public class MainWindow extends UiPart<Stage> {
         return classGroupListPanel;
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public StudentListPanel getStudentListPanel() {
+        return studentListPanel;
     }
 
     /**

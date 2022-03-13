@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -18,8 +19,10 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.classgroup.ClassGroup;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.tamodule.TaModule;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
@@ -49,7 +52,9 @@ public class AddressBookTest {
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons);
+        List<ClassGroup> newClassGroups = new ArrayList<ClassGroup>();
+        List<TaModule> newModules = new ArrayList<TaModule>();
+        AddressBookStub newData = new AddressBookStub(newPersons, newClassGroups, newModules);
 
         assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
     }
@@ -88,14 +93,32 @@ public class AddressBookTest {
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<ClassGroup> classGroups = FXCollections.observableArrayList();
+        private final ObservableList<TaModule> modules = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons) {
+        AddressBookStub(
+            Collection<Person> persons,
+            Collection<ClassGroup> classGroups,
+            Collection<TaModule> modules
+        ) {
             this.persons.setAll(persons);
+            this.classGroups.setAll(classGroups);
+            this.modules.setAll(modules);
         }
 
         @Override
         public ObservableList<Person> getPersonList() {
             return persons;
+        }
+
+        @Override
+        public ObservableList<ClassGroup> getClassGroupList() {
+            return classGroups;
+        }
+
+        @Override
+        public ObservableList<TaModule> getModuleList() {
+            return modules;
         }
     }
 

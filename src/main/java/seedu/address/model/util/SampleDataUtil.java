@@ -74,7 +74,7 @@ public class SampleDataUtil {
                 .collect(Collectors.toSet());
     }
 
-    public static Student[] getSampleStudent() {
+    public static Student[] getSampleStudents() {
         return new Student[] {
             new Student(new StudentId("E0123456"), new Name("Alex Yeoh"),
                     new Email("alexyeoh@example.com"), Optional.of(new Telegram("alexyeoh"))),
@@ -91,7 +91,7 @@ public class SampleDataUtil {
         };
     }
 
-    public static TaModule[] getSampleModule() {
+    public static TaModule[] getSampleModules() {
         return new TaModule[] {
             new TaModule(new ModuleName("Software Engineering"),
                     new ModuleCode("CS2103T"), new AcademicYear("21S1")),
@@ -102,8 +102,8 @@ public class SampleDataUtil {
         };
     }
 
-    public static ClassGroup[] getSampleClassGroup() {
-        TaModule[] taModules = getSampleModule();
+    public static ClassGroup[] getSampleClassGroups() {
+        TaModule[] taModules = getSampleModules();
         return new ClassGroup[] {
             new ClassGroup(new ClassGroupId("G01"),
                     ClassGroupType.TUTORIAL, taModules[0]),
@@ -118,13 +118,13 @@ public class SampleDataUtil {
 
     public static ReadOnlyTAssist getSampleTAssist() {
         TAssist sampleTAssist = new TAssist();
-        for (Student sampleStudent : getSampleStudent()) {
+        for (Student sampleStudent : getSampleStudents()) {
             sampleTAssist.addStudent(sampleStudent);
         }
-        for (TaModule sampleModule : getSampleModule()) {
+        for (TaModule sampleModule : getSampleModules()) {
             sampleTAssist.addModule(sampleModule);
         }
-        for (ClassGroup sampleClassGroup : getSampleClassGroup()) {
+        for (ClassGroup sampleClassGroup : getSampleClassGroups()) {
             sampleTAssist.addClassGroup(sampleClassGroup);
         }
         return sampleTAssist;
