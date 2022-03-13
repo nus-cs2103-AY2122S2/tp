@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.logic.parser.Prefix;
@@ -69,5 +70,14 @@ public class Tag implements Serializable {
             tags.add(new Tag(str));
         }
         return tags;
+    }
+
+    /**
+     * Create a set of tags using a list of tag names.
+     * @param tagNames the list of tag names.
+     * @return a set of tags
+     */
+    public static Set<Tag> createSet(String... tagNames) {
+        return createSet(List.of(tagNames));
     }
 }

@@ -12,16 +12,14 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
-import seedu.address.testutil.PersonBuilder;
 
 class RemarkCommandTest {
-    private static final String REMARK_STUB = "Some remark";
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     void execute_addRemarkUnfilteredList_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(firstPerson).withRemark(REMARK_STUB).build();
+        Person editedPerson = firstPerson.setField(new Remark("Some remark."));
 
         RemarkCommand remarkCommand = new RemarkCommand(INDEX_FIRST_PERSON,
                 new Remark(editedPerson.getField(Remark.PREFIX).orElse(Remark.EMPTY_REMARK).getValue()));

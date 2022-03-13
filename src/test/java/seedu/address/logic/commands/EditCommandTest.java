@@ -2,14 +2,8 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.buildTagSet;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -32,7 +26,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.PersonUtil;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -43,7 +37,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Person editedPerson = new PersonBuilder().build();
+        Person editedPerson = PersonUtil.AMY;
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, editedPerson.getFields(), editedPerson.getTags());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
@@ -59,15 +53,16 @@ public class EditCommandTest {
         Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
         Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
 
-        PersonBuilder personInList = new PersonBuilder(lastPerson);
-        Person editedPerson =
-            personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+        Person editedPerson = lastPerson
+                .setField(new Name(PersonUtil.VALID_NAME_BOB))
+                .setField(new Phone(PersonUtil.VALID_PHONE_BOB))
+                .setTags(new Tag(PersonUtil.VALID_TAG_COWORKER));
 
         ArrayList<Field> fields = new ArrayList<>();
-        fields.add(new Name(VALID_NAME_BOB));
-        fields.add(new Phone(VALID_PHONE_BOB));
+        fields.add(new Name(PersonUtil.VALID_NAME_BOB));
+        fields.add(new Phone(PersonUtil.VALID_PHONE_BOB));
 
-        Set<Tag> tags = buildTagSet(VALID_TAG_HUSBAND);
+        Set<Tag> tags = Tag.createSet(PersonUtil.VALID_TAG_COWORKER);
 
         EditCommand editCommand = new EditCommand(indexLastPerson, fields, tags);
 
@@ -96,10 +91,10 @@ public class EditCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(personInFilteredList).withName(VALID_NAME_BOB).build();
+        Person editedPerson = personInFilteredList.setField(new Name(PersonUtil.VALID_NAME_BOB));
 
         ArrayList<Field> fields = new ArrayList<>();
-        fields.add(new Name(VALID_NAME_BOB));
+        fields.add(new Name(PersonUtil.VALID_NAME_BOB));
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, fields, null);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
@@ -133,7 +128,7 @@ public class EditCommandTest {
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         ArrayList<Field> fields = new ArrayList<>();
-        fields.add(new Name(VALID_NAME_BOB));
+        fields.add(new Name(PersonUtil.VALID_NAME_BOB));
         EditCommand editCommand = new EditCommand(outOfBoundIndex, fields, new HashSet<>());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -151,7 +146,7 @@ public class EditCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
         ArrayList<Field> fields = new ArrayList<>();
-        fields.add(new Name(VALID_NAME_BOB));
+        fields.add(new Name(PersonUtil.VALID_NAME_BOB));
         EditCommand editCommand = new EditCommand(outOfBoundIndex, fields, new HashSet<>());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -160,11 +155,11 @@ public class EditCommandTest {
     @Test
     public void equals() {
         final EditCommand standardCommand =
-            new EditCommand(INDEX_FIRST_PERSON, DESC_AMY.getFields(), DESC_AMY.getTags());
+            new EditCommand(INDEX_FIRST_PERSON, PersonUtil.AMY.getFields(), PersonUtil.AMY.getTags());
 
         // same values -> returns true
         EditCommand commandWithSameValues =
-            new EditCommand(INDEX_FIRST_PERSON, DESC_AMY.getFields(), DESC_AMY.getTags());
+            new EditCommand(INDEX_FIRST_PERSON, PersonUtil.AMY.getFields(), PersonUtil.AMY.getTags());
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -177,13 +172,11 @@ public class EditCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(
-            standardCommand.equals(new EditCommand(INDEX_SECOND_PERSON, DESC_AMY.getFields(), DESC_AMY.getTags())));
+        assertFalse(standardCommand.equals(
+                new EditCommand(INDEX_SECOND_PERSON, PersonUtil.AMY.getFields(), PersonUtil.AMY.getTags())));
 
         // different descriptor -> returns false
-        assertFalse(
-            standardCommand.equals(new EditCommand(INDEX_FIRST_PERSON, DESC_BOB.getFields(), DESC_BOB.getTags())));
+        assertFalse(standardCommand.equals(
+                new EditCommand(INDEX_FIRST_PERSON, PersonUtil.BOB.getFields(), PersonUtil.BOB.getTags())));
     }
-
 }
-
