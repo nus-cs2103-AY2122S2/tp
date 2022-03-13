@@ -1,5 +1,7 @@
 package seedu.contax.commons.util;
 
+import static java.util.Objects.requireNonNull;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -23,9 +25,11 @@ public class DateUtil {
      *         Optional container if parsing was unsuccessful.
      */
     public static Optional<LocalDate> parseDate(String input) {
+        requireNonNull(input);
+
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(DATE_PATTERN);
         try {
-            return Optional.of(LocalDate.parse(input, dateFormatter));
+            return Optional.ofNullable(LocalDate.parse(input, dateFormatter));
         } catch (DateTimeParseException ex) {
             return Optional.empty();
         }
@@ -39,6 +43,8 @@ public class DateUtil {
      *         Optional container if parsing was unsuccessful.
      */
     public static Optional<LocalTime> parseTime(String input) {
+        requireNonNull(input);
+
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern(TIME_PATTERN);
         try {
             return Optional.of(LocalTime.parse(input, timeFormatter));
@@ -56,6 +62,9 @@ public class DateUtil {
      * @return A LocalDateTime object with both the fields of {@code date} and {@code time}.
      */
     public static LocalDateTime combineDateTime(LocalDate date, LocalTime time) {
+        requireNonNull(date);
+        requireNonNull(time);
+
         LocalDateTime dateWithZeroedTime = date.atStartOfDay();
         return dateWithZeroedTime.withHour(time.getHour()).withMinute(time.getMinute());
     }
@@ -69,6 +78,9 @@ public class DateUtil {
      * @return A LocalDateTime object with the date fields of {@code date}.
      */
     public static LocalDateTime updateDate(LocalDateTime baselineDateTime, LocalDate date) {
+        requireNonNull(baselineDateTime);
+        requireNonNull(date);
+
         LocalDateTime baselineWithDateRemoved =
                 baselineDateTime.withDayOfMonth(1).withMonth(1).withYear(1970);
         return baselineWithDateRemoved.withYear(date.getYear())
@@ -84,6 +96,9 @@ public class DateUtil {
      * @return A LocalDateTime object with the hour and minute fields of {@code time}.
      */
     public static LocalDateTime updateTime(LocalDateTime baselineDateTime, LocalTime time) {
+        requireNonNull(baselineDateTime);
+        requireNonNull(time);
+
         return baselineDateTime.withHour(time.getHour()).withMinute(time.getMinute());
     }
 
