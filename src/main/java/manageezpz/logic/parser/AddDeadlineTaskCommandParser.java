@@ -26,7 +26,8 @@ public class AddDeadlineTaskCommandParser implements Parser<AddDeadlineTaskComma
 
         if (!arePrefixesPresent(argMultimapDeadline, PREFIX_DESCRIPTION, PREFIX_DATETIME)
                 || !argMultimapDeadline.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddDeadlineTaskCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddDeadlineTaskCommand.MESSAGE_USAGE));
         }
 
         Description desc = ParserUtil.parseDescription(argMultimapDeadline.getValue(PREFIX_DESCRIPTION).get());

@@ -1,7 +1,7 @@
 package manageezpz.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static manageezpz.logic.parser.CliSyntax.*;
+import static manageezpz.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_TIME;
 
 import manageezpz.logic.commands.exceptions.CommandException;
