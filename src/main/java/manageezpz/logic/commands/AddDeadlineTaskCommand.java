@@ -26,7 +26,7 @@ public class AddDeadlineTaskCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
-        model.addTask(toAdd);
+        model.addDeadline(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 }
