@@ -75,7 +75,6 @@ public class OnboardingWindow extends UiPart<Stage> {
      */
     public void show() {
         getRoot().show();
-        getRoot().centerOnScreen();
         processInstructionPosition(0);
     }
 
