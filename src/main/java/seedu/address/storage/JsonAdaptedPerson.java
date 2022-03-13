@@ -136,23 +136,20 @@ class JsonAdaptedPerson {
         }
         final JerseyNumber modelJerseyNumber = new JerseyNumber(jerseyNumber);
 
-        /*
-        // to be changed
         // weight
         if (weight == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Weight.class.getSimpleName()));
         }
-        if (!Weight.isValidEmail(weight)) {
+        if (!Weight.isValidWeight(weight)) {
             throw new IllegalValueException(Weight.MESSAGE_CONSTRAINTS);
         }
         final Weight modelWeight = new Weight(weight);
-        */
+
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        // age, height, jersey number, weight to be edited
         return new Person(modelName, modelPhone, modelEmail, modelAge,
-                modelHeight, modelJerseyNumber, modelTags, new Weight());
+                modelHeight, modelJerseyNumber, modelTags, modelWeight);
     }
 
 }

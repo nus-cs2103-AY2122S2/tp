@@ -35,7 +35,7 @@ public class HeightTest {
 
         // valid height
         assertTrue(Height.isValidHeight("200")); // between 1 and 300
-        assertTrue(Height.isValidHeight("300")); // inclusive 100
+        assertTrue(Height.isValidHeight("300")); // inclusive 300
         assertTrue(Height.isValidHeight("1")); // inclusive 1
     }
 }
