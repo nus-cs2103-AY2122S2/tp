@@ -1,17 +1,18 @@
 package manageezpz.logic.parser;
 
+import static manageezpz.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static manageezpz.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static manageezpz.logic.parser.CliSyntax.PREFIX_EVENT;
+import static manageezpz.logic.parser.CliSyntax.PREFIX_TIME;
+
+import java.time.LocalTime;
+import java.util.stream.Stream;
+
 import manageezpz.logic.commands.AddEventTaskCommand;
 import manageezpz.logic.parser.exceptions.ParseException;
 import manageezpz.model.person.Date;
 import manageezpz.model.task.Description;
 import manageezpz.model.task.Event;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.stream.Stream;
-
-import static manageezpz.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static manageezpz.logic.parser.CliSyntax.*;
 
 public class AddEventTaskCommandParser {
 

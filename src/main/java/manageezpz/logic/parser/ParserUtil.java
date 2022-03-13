@@ -2,6 +2,9 @@ package manageezpz.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import manageezpz.commons.core.index.Index;
 import manageezpz.commons.util.StringUtil;
 import manageezpz.logic.parser.exceptions.ParseException;
@@ -9,9 +12,6 @@ import manageezpz.model.person.Date;
 import manageezpz.model.person.Email;
 import manageezpz.model.person.Name;
 import manageezpz.model.person.Phone;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.

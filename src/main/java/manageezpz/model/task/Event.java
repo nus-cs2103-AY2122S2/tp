@@ -1,8 +1,8 @@
 package manageezpz.model.task;
 
-import manageezpz.model.person.Date;
-
 import java.time.LocalTime;
+
+import manageezpz.model.person.Date;
 
 public class Event extends Task {
     private Date date;
