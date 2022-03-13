@@ -23,6 +23,8 @@ import seedu.contax.logic.parser.exceptions.ParseException;
  */
 public class EditAppointmentCommandParser implements Parser<EditAppointmentCommand> {
 
+    public static String KEYWORD_REMOVE_PERSON = "none";
+
     /**
      * Parses the given {@code String} of arguments in the context of the EditAppointmentCommand
      * and returns an EditAppointmentCommand object for execution.
@@ -62,8 +64,9 @@ public class EditAppointmentCommandParser implements Parser<EditAppointmentComma
                     ParserUtil.parseDuration(argMultimap.getValue(PREFIX_DURATION).get()));
         }
         if (argMultimap.getValue(PREFIX_PERSON).isPresent()) {
-            editAppointmentDescriptor.setPersonIndex(
-                    ParserUtil.parseIndex(argMultimap.getValue(PREFIX_PERSON).get()));
+            String newPersonValue = argMultimap.getValue(PREFIX_PERSON).get();
+            editAppointmentDescriptor.setPersonIndex(newPersonValue.equalsIgnoreCase(KEYWORD_REMOVE_PERSON)
+                    ? null : ParserUtil.parseIndex(newPersonValue));
         }
 
         if (!editAppointmentDescriptor.isAnyFieldEdited()) {

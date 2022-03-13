@@ -71,6 +71,7 @@ public class EditAppointmentCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Appointment> appointmentsList = model.getSchedule().getAppointmentList();
+        List<Person> personsList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= appointmentsList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX);
@@ -80,8 +81,15 @@ public class EditAppointmentCommand extends Command {
             return new CommandResult(MESSAGE_NOT_EDITED);
         }
 
+        boolean isPersonIndexInvalid = editAppointmentDescriptor.getPersonIndex()
+                .map(index -> index.getZeroBased() >= personsList.size()).orElse(false);
+        if (isPersonIndexInvalid) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
         Appointment appointmentToEdit = appointmentsList.get(index.getZeroBased());
-        Appointment editedAppointment = createEditedAppointment(appointmentToEdit, model, editAppointmentDescriptor);
+        Appointment editedAppointment = createEditedAppointment(appointmentToEdit,
+                model.getFilteredPersonList(), editAppointmentDescriptor);
 
         try {
             model.setAppointment(appointmentToEdit, editedAppointment);
@@ -95,9 +103,10 @@ public class EditAppointmentCommand extends Command {
     /**
      * Creates and returns an {@code Appointment} with the details of {@code appointmentToEdit}
      * edited with {@code editAppointmentDescriptor}.
+     * Relies on the execute method to check that editAppointmentDescriptor's person index is valid.
      */
     private static Appointment createEditedAppointment(Appointment appointmentToEdit,
-                                                  Model model,
+                                                  List<Person> personList,
                                                   EditAppointmentDescriptor editAppointmentDescriptor) {
         assert appointmentToEdit != null;
 
@@ -105,31 +114,22 @@ public class EditAppointmentCommand extends Command {
         Duration updatedDuration = editAppointmentDescriptor.getDuration()
                 .orElse(appointmentToEdit.getDuration());
 
-        // Build StartDateTime - TODO: Tidy up this section
         StartDateTime updatedStartDateTime = appointmentToEdit.getStartDateTime();
         if (editAppointmentDescriptor.isDateTimeUpdated()) {
-            LocalDateTime updatedDateTime = updatedStartDateTime.value;
-            if (editAppointmentDescriptor.getStartDate().isPresent()) {
-                updatedDateTime = DateUtil.updateDate(updatedDateTime,
-                        editAppointmentDescriptor.getStartDate().get());
-            }
-            if (editAppointmentDescriptor.getStartTime().isPresent()) {
-                updatedDateTime = DateUtil.updateTime(updatedDateTime,
-                        editAppointmentDescriptor.getStartTime().get());
-            }
+            // Final modifier is required for lambda expressions
+            final LocalDateTime originalDateTime = appointmentToEdit.getStartDateTime().value;
+            final LocalDateTime updatedDate = editAppointmentDescriptor.getStartDate()
+                    .map(date -> DateUtil.updateDate(originalDateTime, date)).orElse(originalDateTime);
+            LocalDateTime updatedDateTime = editAppointmentDescriptor.getStartTime()
+                    .map(time -> DateUtil.updateTime(updatedDate, time)).orElse(updatedDate);
             updatedStartDateTime = new StartDateTime(updatedDateTime);
         }
 
-        List<Person> lastShownPersonList = model.getFilteredPersonList();
-
-        Person updatedPerson = editAppointmentDescriptor.getPersonIndex()
-                .map(personIndex -> {
-                    if (personIndex.getZeroBased() >= lastShownPersonList.size()) {
-                        return null;
-                    }
-                    return lastShownPersonList.get(personIndex.getZeroBased());
-                })
-                .orElse(appointmentToEdit.getPerson());
+        Person updatedPerson = appointmentToEdit.getPerson();
+        if (editAppointmentDescriptor.isPersonModified()) {
+            updatedPerson = editAppointmentDescriptor.getPersonIndex()
+                    .map(index -> personList.get(index.getZeroBased())).orElse(null);
+        }
 
         return new Appointment(updatedName, updatedStartDateTime, updatedDuration, updatedPerson);
     }
@@ -162,8 +162,11 @@ public class EditAppointmentCommand extends Command {
         private LocalTime startTime;
         private Duration duration;
         private Index personIndex;
+        private boolean isPersonModified;
 
-        public EditAppointmentDescriptor() { }
+        public EditAppointmentDescriptor() {
+            this.isPersonModified = false;
+        }
 
         /**
          * Copy constructor.
@@ -173,14 +176,17 @@ public class EditAppointmentCommand extends Command {
             setStartDate(toCopy.startDate);
             setStartTime(toCopy.startTime);
             setDuration(toCopy.duration);
-            setPersonIndex(toCopy.personIndex);
+
+            // Does not use setPersonIndex to prevent incorrectly setting the isPersonModified flag
+            this.personIndex = toCopy.personIndex;
+            this.isPersonModified = toCopy.isPersonModified;
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, startDate, startTime, duration, personIndex);
+            return CollectionUtil.isAnyNonNull(name, startDate, startTime, duration) || isPersonModified;
         }
 
         /**
@@ -190,6 +196,15 @@ public class EditAppointmentCommand extends Command {
          */
         public boolean isDateTimeUpdated() {
             return startDate != null || startTime != null;
+        }
+
+        /**
+         * Returns true if {@code setPersonIndex} has been called after this object was created.
+         *
+         * @return true is setPersonIndex has been called.
+         */
+        public boolean isPersonModified() {
+            return isPersonModified;
         }
 
         public void setName(Name name) {
@@ -226,6 +241,7 @@ public class EditAppointmentCommand extends Command {
 
         public void setPersonIndex(Index person) {
             this.personIndex = person;
+            this.isPersonModified = true;
         }
 
         public Optional<Index> getPersonIndex() {
@@ -251,7 +267,8 @@ public class EditAppointmentCommand extends Command {
                     && getStartDate().equals(e.getStartDate())
                     && getStartTime().equals(e.getStartTime())
                     && getDuration().equals(e.getDuration())
-                    && getPersonIndex().equals(e.getPersonIndex());
+                    && getPersonIndex().equals(e.getPersonIndex())
+                    && (isPersonModified == e.isPersonModified);
         }
     }
 }
