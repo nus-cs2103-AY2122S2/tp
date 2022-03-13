@@ -4,7 +4,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_JERSEYNUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JERSEY_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -38,25 +38,21 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_AGE,
-                        PREFIX_HEIGHT, PREFIX_JERSEYNUMBER, PREFIX_TAG, PREFIX_WEIGHT);
+                        PREFIX_HEIGHT, PREFIX_JERSEY_NUMBER, PREFIX_TAG, PREFIX_WEIGHT);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_AGE,
-                PREFIX_JERSEYNUMBER, PREFIX_HEIGHT, PREFIX_WEIGHT)
+                PREFIX_JERSEY_NUMBER, PREFIX_HEIGHT, PREFIX_WEIGHT)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        Age age = ParserUtil.parseAge(argMultimap.getValue(PREFIX_AGE).get());
+        JerseyNumber jerseyNumber = ParserUtil.parseJerseyNumber(argMultimap.getValue(PREFIX_JERSEY_NUMBER).get());
+        Weight weight = ParserUtil.parseWeight(argMultimap.getValue(PREFIX_WEIGHT).get());
+        Height height = ParserUtil.parseHeight(argMultimap.getValue(PREFIX_HEIGHT).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        Age age = new Age();
-        //ParserUtil.parseAge(argMultimap.getValue(PREFIX_AGE).get());
-        Height height = new Height();
-        //ParserUtil.parseHeight(argMultimap.getValue(PREFIX_WEIGHT).get());
-        JerseyNumber jerseyNumber = new JerseyNumber();
-        //ParserUtil.parseJerseyNumber(argMultimap.getValue(PREFIX_JERSEYNUMBER).get());
-        Weight weight = new Weight();
-        //ParserUtil.parseWeight(argMultimap.getValue(PREFIX_EMAIL).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Person person = new Person(name, phone, email, age, height, jerseyNumber, tagList, weight);

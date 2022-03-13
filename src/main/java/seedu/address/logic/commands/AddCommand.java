@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_JERSEYNUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JERSEY_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -28,7 +28,7 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_AGE + "AGE "
             + PREFIX_HEIGHT + "HEIGHT "
-            + PREFIX_JERSEYNUMBER + "JERSEYNUMBER "
+            + PREFIX_JERSEY_NUMBER + "JERSEYNUMBER "
             + PREFIX_WEIGHT + "WEIGHT "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
@@ -37,7 +37,7 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_AGE + "23 "
             + PREFIX_HEIGHT + "180 "
-            + PREFIX_JERSEYNUMBER + "23 "
+            + PREFIX_JERSEY_NUMBER + "23 "
             + PREFIX_WEIGHT + "80 "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";

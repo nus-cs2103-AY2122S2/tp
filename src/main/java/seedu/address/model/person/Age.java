@@ -5,6 +5,11 @@ package seedu.address.model.person;
  * Currently hard coded - to be further developed.
  */
 public class Age {
+    public static final String MESSAGE_CONSTRAINTS = "Ages should be of the format local-part@domain "
+            + "and adhere to the following constraints:\n"
+            + "1. The local-part should only contain numeric characters.\n"
+            + "2. Age should be between 0 and 100 (inclusive).\n";
+
     private String age;
 
     /**
@@ -17,6 +22,25 @@ public class Age {
 
     public Age(String age) {
         this.age = age;
+    }
+
+    /**
+     * Checks if the given age is valid.
+     */
+    public static boolean isValidAge(String ageString) {
+        int age = -1;
+
+        try {
+            age = Integer.parseInt(ageString);
+        } catch (Exception e) {
+            return false;
+        }
+
+        if (age < 0 || age > 100) {
+            return false;
+        }
+
+        return true;
     }
 
     @Override
