@@ -23,7 +23,7 @@ public class Age {
         this.age = age;
     }
 
-    public static boolean isValid(String ageString) {
+    public static boolean isValidAge(String ageString) {
         int age = -1;
 
         try {

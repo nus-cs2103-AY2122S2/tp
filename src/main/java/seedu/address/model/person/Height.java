@@ -23,7 +23,7 @@ public class Height {
         this.height = height;
     }
 
-    public static boolean isValid(String heightString) {
+    public static boolean isValidHeight(String heightString) {
         int height = -1;
 
         try {
