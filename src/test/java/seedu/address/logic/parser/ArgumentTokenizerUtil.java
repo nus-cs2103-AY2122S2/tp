@@ -1,6 +1,6 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.parser.ArgumentTokenizer.*;
+import static seedu.address.logic.parser.ArgumentTokenizer.tokenize;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 

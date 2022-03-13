@@ -167,6 +167,11 @@ public class AddStudentCommandTest {
         }
 
         @Override
+        public void updateBothLists() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public Student getSelectedStudent() {
             throw new AssertionError("This method should not be called.");
         }

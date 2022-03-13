@@ -40,6 +40,14 @@ public class Student {
         this.enrolledLessons = enrolledLessons;
     }
 
+    /**
+     * Constructor for the Student class.
+     * @param name name of the student
+     * @param phone phone number of the student
+     * @param email email of the student
+     * @param address address of the student
+     * @param tags tags of the student
+     */
     public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;

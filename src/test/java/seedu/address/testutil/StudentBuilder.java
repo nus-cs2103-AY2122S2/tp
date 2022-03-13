@@ -1,6 +1,5 @@
 package seedu.address.testutil;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -72,6 +71,9 @@ public class StudentBuilder {
         return this;
     }
 
+    /**
+     * Adds the sample lessons from {@code SampleDataUtil} and set it to the {@code Student} that we are building.
+     */
     public StudentBuilder withLessons(Lesson... lessons) {
         this.enrolledLessons = new EnrolledLessons(Arrays.asList(SampleDataUtil.getSampleLessons()));
         return this;
