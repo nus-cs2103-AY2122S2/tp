@@ -9,10 +9,22 @@ import static seedu.contax.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 
 import seedu.contax.logic.commands.exceptions.CommandException;
+import seedu.contax.logic.parser.ParserUtil;
+import seedu.contax.logic.parser.exceptions.ParseException;
 import seedu.contax.model.IndexedCsvFile;
 import seedu.contax.model.Model;
+import seedu.contax.model.person.Address;
+import seedu.contax.model.person.Email;
+import seedu.contax.model.person.Name;
+import seedu.contax.model.person.Person;
+import seedu.contax.model.person.Phone;
+import seedu.contax.model.person.exceptions.DuplicatePersonException;
+import seedu.contax.model.tag.Tag;
 import seedu.contax.storage.CsvManager;
 
 public class ImportCsvCommand extends Command {
@@ -45,10 +57,50 @@ public class ImportCsvCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         //process file
         try {
-            CsvManager manager = new CsvManager(model);
-            return manager.importCsv(toImport);
+            CsvManager manager = new CsvManager(model, (integer, strings) -> {
+                try {
+                    Person toAddPerson = personParser(strings);
+                    model.addPerson(toAddPerson);
+                    Set<Tag> tags = toAddPerson.getTags();
+                    for (Tag tag : tags) {
+                        if (!model.hasTag(tag)) {
+                            model.addTag(tag);
+                        }
+                    }
+                    return true;
+                } catch (ParseException | DuplicatePersonException e) {
+                    return false;
+                }
+            });
+            return outputStringBuilder(manager.importCsv(toImport));
         } catch (IOException e) {
             throw new CommandException(String.format(MESSAGE_NO_FILE_FOUND, toImport.getFilePath()));
+        }
+    }
+
+    private Person personParser(String[] importedPerson) throws ParseException {
+        Name toAddName = ParserUtil.parseName(importedPerson[toImport.getNamePositionIndex()]);
+        Phone toAddPhone = ParserUtil.parsePhone(importedPerson[toImport.getPhonePositionIndex()]);
+        Email toAddEmail = ParserUtil.parseEmail(importedPerson[toImport.getEmailPositionIndex()]);
+        Address toAddAddress = ParserUtil.parseAddress(importedPerson[toImport.getAddressPositionIndex()]);
+        String[] tags = importedPerson[toImport.getTagPositionIndex()].split(";");
+        Set<Tag> toAddTag = ParserUtil.parseTags(Arrays.asList(tags));
+
+        return new Person(toAddName, toAddPhone, toAddEmail, toAddAddress, toAddTag);
+    }
+    private CommandResult outputStringBuilder(List<Integer> skippedLines) {
+        if (skippedLines.size() > 0) {
+            String skippedLinesString = "";
+            for (int i = 0; i < skippedLines.size(); i++) {
+                skippedLinesString += skippedLines.get(i);
+                if (i != skippedLines.size() - 1) {
+                    skippedLinesString += ", ";
+                }
+            }
+            return new CommandResult(String.format("%s\n%s", ImportCsvCommand.MESSAGE_SUCCESS,
+                    String.format(ImportCsvCommand.MESSAGE_SKIPPED_LINES, skippedLinesString)));
+        } else {
+            return new CommandResult(ImportCsvCommand.MESSAGE_SUCCESS);
         }
     }
 
