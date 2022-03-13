@@ -91,14 +91,14 @@ public class ParserUtil {
         //@@author vishandi-reused
         //Reused from https://github.com/vishandi/ip/blob/master/src/main/java/parser/Parser.java
         //with minor modifications
-        String[] patterns = {"yyyy-MM-dd", "yyyy/MM/dd", "yyyy MMM dd", "dd MMM yyyy", "dd-MM-yyyy", "dd/MM/yyyy"};
+        String[] patterns = {"yyyy-MM-dd", "yyyy/MM/dd", "dd-MM-yyyy", "dd/MM/yyyy"};
         for (String pattern : patterns) {
             try {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
                 LocalDate parsedDate = LocalDate.parse(date, formatter);
                 return new Date(parsedDate);
             } catch (Exception e) {
-                throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+
             }
         }
         throw new ParseException(Date.MESSAGE_CONSTRAINTS);
