@@ -52,7 +52,7 @@
           <children>
             <Button fx:id="moduleListButton" styleClass="list-button" text="Modules" onAction="#handleModuleListButtonPress"/>
             <Button fx:id="classGroupListButton" styleClass="list-button" text="Classes" onAction="#handleClassGroupListButtonPress"/>
-            <Button fx:id="personListButton" styleClass="list-button, active" text="Students" onAction="#handlePersonListButtonPress"/>
+            <Button fx:id="studentListButton" styleClass="list-button, active" text="Students" onAction="#handleStudentListButtonPress"/>
           </children>
         </HBox>
 
