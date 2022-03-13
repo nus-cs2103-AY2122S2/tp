@@ -1,6 +1,6 @@
 ---
 layout: page
-title: AddressBook Level-3
+title: TAddressBook
 ---
 
 [![CI Status](https://github.com/AY2122S2-CS2103-F10-1/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S2-CS2103-F10-1/tp/actions)
