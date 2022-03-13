@@ -108,8 +108,7 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
-        /*
-        // to be changed
+
         // age
         if (age == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Age.class.getSimpleName()));
@@ -119,6 +118,8 @@ class JsonAdaptedPerson {
         }
         final Age modelAge = new Age(age);
 
+        /*
+        // to be changed
         // height
         if (height == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Height.class.getSimpleName()));
@@ -151,7 +152,7 @@ class JsonAdaptedPerson {
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         // age, height, jersey number, weight to be edited
-        return new Person(modelName, modelPhone, modelEmail, new Age(),
+        return new Person(modelName, modelPhone, modelEmail, modelAge,
                 new Height(), new JerseyNumber(), modelTags, new Weight());
     }
 
