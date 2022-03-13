@@ -3,6 +3,7 @@ package seedu.address.commons.util;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 
@@ -36,5 +37,21 @@ class HelpWindowUtilTest {
     public void constructorTest() {
         HelpWindowUtil helpWindowUtil = new HelpWindowUtil(validLink);
         assertEquals(helpWindowUtil.getUrl(), validLink);
+    }
+
+    @Test
+    public void desktopCheckTest() {
+        HelpWindowUtil helpWindowUtil = new HelpWindowUtil(validLink);
+        assertEquals(helpWindowUtil.isDesktopUsable(), Desktop.isDesktopSupported());
+    }
+
+    @Test
+    public void getDesktopTest() {
+        HelpWindowUtil helpWindowUtil = new HelpWindowUtil(validLink);
+        if (Desktop.isDesktopSupported()) {
+            assertEquals(helpWindowUtil.getDesktop(), Desktop.getDesktop());
+        } else {
+            assertEquals(helpWindowUtil.getDesktop(), null);
+        }
     }
 }

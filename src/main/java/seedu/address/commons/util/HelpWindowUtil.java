@@ -18,7 +18,12 @@ public class HelpWindowUtil {
      * @throws IOException when there is an error opening the website.
      */
     public void goToUrl() throws IOException {
-        Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+        Desktop desktop;
+        if (isDesktopUsable()) {
+            desktop = getDesktop();
+        } else {
+            desktop = null;
+        }
         desktop.browse(convertToUrl());
     }
 
@@ -34,5 +39,23 @@ public class HelpWindowUtil {
 
     public String getUrl() {
         return url;
+    }
+
+    /**
+     * Check if the desktop system the user is using is supported.
+     *
+     * @return status of Desktop.
+     */
+    public boolean isDesktopUsable() {
+        return Desktop.isDesktopSupported();
+    }
+
+    /**
+     * Returns the desktop of the user.
+     *
+     * @return returns the desktop of the user.
+     */
+    public Desktop getDesktop() {
+        return Desktop.getDesktop();
     }
 }
