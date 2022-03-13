@@ -1,4 +1,4 @@
-package manageezpz.model.person;
+package manageezpz.model.task;
 
 import java.time.LocalDate;
 

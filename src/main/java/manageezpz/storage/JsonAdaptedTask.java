@@ -14,13 +14,15 @@ class JsonAdaptedTask {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
     private final String description;
+    private final String type;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedTask(@JsonProperty("description") String description) {
+    public JsonAdaptedTask(@JsonProperty("type") String type, @JsonProperty("description") String description) {
         this.description = new Description(description).toString();
+        this.type = type;
     }
 
     /**
@@ -28,6 +30,7 @@ class JsonAdaptedTask {
      */
     public JsonAdaptedTask(Task source) {
         description = source.getDescription().toString();
+        type = source.getType();
     }
 
     /**

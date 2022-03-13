@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 import manageezpz.commons.core.index.Index;
 import manageezpz.commons.util.StringUtil;
 import manageezpz.logic.parser.exceptions.ParseException;
-import manageezpz.model.person.Date;
+import manageezpz.model.task.Date;
 import manageezpz.model.person.Email;
 import manageezpz.model.person.Name;
 import manageezpz.model.person.Phone;

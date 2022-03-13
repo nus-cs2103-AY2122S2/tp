@@ -2,8 +2,6 @@ package manageezpz.model.task;
 
 import java.time.LocalTime;
 
-import manageezpz.model.person.Date;
-
 public class Event extends Task {
     private Date date;
     private LocalTime startTime;
@@ -19,6 +17,7 @@ public class Event extends Task {
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
+        super.setType("event");
     }
 
     public LocalTime getStartTime() {

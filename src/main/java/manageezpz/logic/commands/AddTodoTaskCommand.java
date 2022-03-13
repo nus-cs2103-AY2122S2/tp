@@ -1,8 +1,7 @@
 package manageezpz.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static manageezpz.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static manageezpz.logic.parser.CliSyntax.PREFIX_TODO;
+import static manageezpz.logic.parser.CliSyntax.*;
 
 import manageezpz.logic.commands.exceptions.CommandException;
 import manageezpz.model.Model;
@@ -11,17 +10,14 @@ import manageezpz.model.task.Task;
 
 
 public class AddTodoTaskCommand extends Command {
-    public static final String COMMAND_WORD = "addTask";
-    public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Add Task command not implemented yet";
+    public static final String COMMAND_WORD = "addTodo";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an Task to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a Todo Task to the address book. "
             + "Parameters: "
-            + PREFIX_TODO + " "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
+            + "\r\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TODO + " "
             + PREFIX_DESCRIPTION + "Play Genshin Impact.";
-
     public static final String MESSAGE_SUCCESS = "New Task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This Task already exists in the address book";
 

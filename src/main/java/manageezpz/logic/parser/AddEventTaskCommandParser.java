@@ -9,11 +9,11 @@ import java.util.stream.Stream;
 
 import manageezpz.logic.commands.AddEventTaskCommand;
 import manageezpz.logic.parser.exceptions.ParseException;
-import manageezpz.model.person.Date;
+import manageezpz.model.task.Date;
 import manageezpz.model.task.Description;
 import manageezpz.model.task.Event;
 
-public class AddEventTaskCommandParser {
+public class AddEventTaskCommandParser implements Parser<AddEventTaskCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddEventTaskCommand
@@ -29,7 +29,7 @@ public class AddEventTaskCommandParser {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventTaskCommand.MESSAGE_USAGE));
         }
 
-        Description desc = new Description(argMultimapEvent.getValue(PREFIX_DESCRIPTION).get());
+        Description desc = ParserUtil.parseDescription(argMultimapEvent.getValue(PREFIX_DESCRIPTION).get());
 
         String atDateTime = argMultimapEvent.getValue(PREFIX_TIME).get();
         String[] parseAtDateTime = atDateTime.split(" ");

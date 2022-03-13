@@ -2,7 +2,6 @@ package manageezpz.logic.parser;
 
 import static manageezpz.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static manageezpz.logic.parser.CliSyntax.PREFIX_TODO;
 
 import java.util.stream.Stream;
 
@@ -19,9 +18,9 @@ public class AddTodoTaskCommandParser implements Parser<AddTodoTaskCommand> {
      */
     public AddTodoTaskCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimapTodo =
-                ArgumentTokenizer.tokenize(args, PREFIX_TODO, PREFIX_DESCRIPTION);
+                ArgumentTokenizer.tokenize(args, PREFIX_DESCRIPTION);
 
-        if (!arePrefixesPresent(argMultimapTodo, PREFIX_TODO, PREFIX_DESCRIPTION)
+        if (!arePrefixesPresent(argMultimapTodo, PREFIX_DESCRIPTION)
                 || !argMultimapTodo.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTodoTaskCommand.MESSAGE_USAGE));
         }

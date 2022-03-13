@@ -13,6 +13,7 @@ import manageezpz.model.person.Person;
  */
 public class Task {
     protected boolean isDone;
+    protected String type;
 
     // Identity fields
     private final Description taskDescription;
@@ -30,6 +31,7 @@ public class Task {
         requireAllNonNull(taskDescription);
         this.taskDescription = taskDescription;
         this.isDone = false;
+        this.type = "";
     }
 
     /**
@@ -56,6 +58,13 @@ public class Task {
         return this.taskDescription;
     }
 
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getType() {
+        return this.type;
+    }
     /**
      * Returns the string representation of the task.
      * @return a string representation of the task, consisting of its description and whether its done or not.
