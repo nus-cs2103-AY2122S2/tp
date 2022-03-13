@@ -167,7 +167,7 @@ Format: `filter KEYWORD`
 
 Examples:
 * `find C` returns `Alex Yeoh`, `Bernice Yu` and `Irfan Ibrahim`
-* `filter python` returns `Alex Yeoh`<br>
+* `filter java` returns `David Li`<br>
   ![result for 'filter C'](images/filterCResult.png)
 
 ### Sorting persons by skill proficiency: `sort`
@@ -214,8 +214,9 @@ _Details coming soon ..._
 
 ### Future updates
 
-Input validation for skills
-update skills 
+Input validation for skills<br>
+update skills<br>
+filter by multiple skills<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -235,6 +236,7 @@ Action | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [g/GITHUB_USERNAME] [t/TAG]…​ [s/SKILLNAME_SKILLPROFICENCY]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Filter** | `filter SKILL`<br> e.g. `filter c`
 **Sort** | `sort SKILL`<br> e.g., `sort Python`
 **List** | `list`
 **Help** | `help`
