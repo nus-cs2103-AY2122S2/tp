@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.person.MasterLabList;
 import seedu.address.model.person.Person;
 
 /**
@@ -13,5 +14,11 @@ public interface ReadOnlyAddressBook {
      * This list will not contain any duplicate persons.
      */
     ObservableList<Person> getPersonList();
+
+    /**
+     * Returns a MasterLabList containing all the Labs.
+     * This list will not contain any duplicate persons.
+     */
+    MasterLabList getMasterLabList();
 
 }

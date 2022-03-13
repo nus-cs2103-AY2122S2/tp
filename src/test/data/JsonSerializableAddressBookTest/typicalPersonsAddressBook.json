@@ -1,4 +1,4 @@
-{
+{ "masterList" : [ "1" ],
   "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
   "persons" : [ {
     "name" : "Alice Pauline",
@@ -6,48 +6,62 @@
     "github": "aliceP",
     "telegram": "alice_P",
     "studentId": "A0123456B",
-    "tagged" : [ "friends" ]
+    "tagged" : [ "friends" ],
+    "labStatuses" : [ "UNSUBMITTED" ],
+    "labNumbers" : [ "1" ]
   }, {
     "name" : "Benson Meier",
     "email" : "johnd@example.com",
     "github": "bensonM",
     "telegram": "benson_M",
     "studentId": "A0123457C",
-    "tagged" : [ "owesMoney", "friends" ]
+    "tagged" : [ "owesMoney", "friends" ],
+    "labStatuses" : [ "UNSUBMITTED" ],
+    "labNumbers" : [ "1" ]
   }, {
     "name" : "Carl Kurz",
     "email" : "heinz@example.com",
     "github": "carlK",
     "telegram": "carl_K",
     "studentId": "A0123458D",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "labStatuses" : [ "UNSUBMITTED" ],
+    "labNumbers" : [ "1" ]
   }, {
     "name" : "Daniel Meier",
     "email" : "cornelia@example.com",
     "github": "danielM",
     "telegram": "daniel_M",
     "studentId": "A0123459E",
-    "tagged" : [ "friends" ]
+    "tagged" : [ "friends" ],
+    "labStatuses" : [ "UNSUBMITTED" ],
+    "labNumbers" : [ "1" ]
   }, {
     "name" : "Elle Meyer",
     "email" : "werner@example.com",
     "github": "elleM",
     "telegram": "elle_M",
     "studentId": "A0123411A",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "labStatuses" : [ "UNSUBMITTED" ],
+    "labNumbers" : [ "1" ]
   }, {
     "name" : "Fiona Kunz",
     "email" : "lydia@example.com",
     "github": "fionaK",
     "telegram": "fiona_K",
     "studentId": "A0123412B",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "labStatuses" : [ "UNSUBMITTED" ],
+    "labNumbers" : [ "1" ]
   }, {
     "name" : "George Best",
     "email" : "anna@example.com",
     "github": "georgeB",
     "telegram": "george_B",
     "studentId": "A0123413C",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "labStatuses" : [ "UNSUBMITTED" ],
+    "labNumbers" : [ "1" ]
   } ]
 }

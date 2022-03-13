@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.lab.Lab;
 
 /**
  * The API of the Model component.
@@ -84,4 +85,15 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Returns true if a lab with the same identity as {@code lab} exists in the address book.
+     */
+    boolean hasLab(Lab lab);
+
+    /**
+     * Adds the given lab.
+     * {@code lab} must not already exist in the TAddressbook.
+     */
+    void addLab(Lab lab);
 }

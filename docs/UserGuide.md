@@ -106,11 +106,11 @@ Format: `filter l/LAB s/STATUS`
 
 ### Lab-related features
 
-#### Adding a Lab : `labAdd [Labx]` [coming soon]
+#### Adding a Lab : `labadd [Labx]` [coming soon]
 Adds a Lab to every student. Shows up as a tag on each student’s entry.
 By default, the tag will be colored grey for “unsubmitted”. The tags can subsequently be colored different colors to represent different statuses e.g. unsubmitted = grey, submitted = yellow, graded = green, overdue = red.
 
-Format: `labAdd l/LAB`
+Format: `labadd l/LAB`
 
 #### Marking/unmarking individual Labs as “submitted” `labSubmit [Student Index] [Labx]` [coming soon]
 Changes the status for the student with the specified INDEX from “unsubmitted” to “submitted”.  MARK can be either M or U (mark or unmark)
