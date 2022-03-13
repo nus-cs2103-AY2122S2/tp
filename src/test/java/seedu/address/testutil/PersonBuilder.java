@@ -4,8 +4,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.applicant.Address;
+import seedu.address.model.applicant.Age;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.Email;
+import seedu.address.model.applicant.Gender;
 import seedu.address.model.applicant.Name;
 import seedu.address.model.applicant.Phone;
 import seedu.address.model.tag.Tag;
@@ -19,12 +21,16 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
+    public static final String DEFAULT_AGE = "18";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_GENDER = "F";
 
     private Name name;
     private Phone phone;
     private Email email;
+    private Age age;
     private Address address;
+    private Gender gender;
     private Set<Tag> tags;
 
     /**
@@ -66,10 +72,26 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Age} of the {@code Applicant} that we are building.
+     */
+    public PersonBuilder withAge(String age) {
+        this.age = new Age(age);
+        return this;
+    }
+
+    /**
      * Sets the {@code Address} of the {@code Applicant} that we are building.
      */
     public PersonBuilder withAddress(String address) {
         this.address = new Address(address);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Gender} of the {@code Applicant} that we are building.
+     */
+    public PersonBuilder withGender(String gender) {
+        this.gender = new Gender(gender);
         return this;
     }
 
@@ -90,7 +112,7 @@ public class PersonBuilder {
     }
 
     public Applicant build() {
-        return new Applicant(name, phone, email, address, tags);
+        return new Applicant(name, phone, email, age, address, gender, tags);
     }
 
 }

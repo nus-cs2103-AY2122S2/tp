@@ -29,7 +29,7 @@ public class Applicant {
     /**
      * Every field must be present and not null.
      */
-    public Applicant(Name name, Phone phone, Email email, Age age, Address address, Gender gender,Set<Tag> tags) {
+    public Applicant(Name name, Phone phone, Email email, Age age, Address address, Gender gender, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;

@@ -1,7 +1,13 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -16,8 +22,10 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.applicant.Address;
+import seedu.address.model.applicant.Age;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.Email;
+import seedu.address.model.applicant.Gender;
 import seedu.address.model.applicant.Name;
 import seedu.address.model.applicant.Phone;
 import seedu.address.model.tag.Tag;
@@ -38,7 +46,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_AGE + "AGE] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_ADDRESS + "GENDER] "
+            + "[" + PREFIX_GENDER + "GENDER] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -94,10 +102,13 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(applicantToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(applicantToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(applicantToEdit.getEmail());
+        Age updatedAge = editPersonDescriptor.getAge().orElse(applicantToEdit.getAge());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(applicantToEdit.getAddress());
+        Gender updatedGender = editPersonDescriptor.getGender().orElse(applicantToEdit.getGender());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(applicantToEdit.getTags());
 
-        return new Applicant(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Applicant(updatedName, updatedPhone, updatedEmail, updatedAge, updatedAddress,
+                updatedGender, updatedTags);
     }
 
     @Override
@@ -126,7 +137,9 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
+        private Age age;
         private Address address;
+        private Gender gender;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -139,7 +152,9 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
+            setAge(toCopy.age);
             setAddress(toCopy.address);
+            setGender(toCopy.gender);
             setTags(toCopy.tags);
         }
 
@@ -174,6 +189,13 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
+        public void setAge(Age age) {
+            this.age = age;
+        }
+
+        public Optional<Age> getAge() {
+            return Optional.ofNullable(age);
+        }
 
         public void setAddress(Address address) {
             this.address = address;
@@ -181,6 +203,14 @@ public class EditCommand extends Command {
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
+        }
+
+        public void setGender(Gender address) {
+            this.gender = gender;
+        }
+
+        public Optional<Gender> getGender() {
+            return Optional.ofNullable(gender);
         }
 
         /**

@@ -156,8 +156,7 @@ public class ParserUtil {
         return new Gender(trimmedGender);
     }
 
-}
-=======
+    /**
      * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -174,4 +173,3 @@ public class ParserUtil {
         return new Date();
     }
 }
->>>>>>> cec50a33095f163bd5f5c603ffefb5a0550e3cdf
