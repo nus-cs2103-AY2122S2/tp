@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.Collections;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -11,8 +13,6 @@ import seedu.address.model.person.StudentId;
 import seedu.address.model.person.StudentIdContainsKeywordsPredicate;
 import seedu.address.model.person.Task;
 import seedu.address.model.person.TaskList;
-
-import java.util.Collections;
 
 /**
  * Displays the list of task that a particular student currently has.
@@ -50,8 +50,8 @@ public class TaskCommand extends Command {
 
         // Checks if a student with the specified studentId exist.
         assert studentId != null;
-        StudentIdContainsKeywordsPredicate pred
-                = new StudentIdContainsKeywordsPredicate(Collections.singletonList(studentId.toString()));
+        StudentIdContainsKeywordsPredicate pred =
+                new StudentIdContainsKeywordsPredicate(Collections.singletonList(studentId.toString()));
         model.updateFilteredPersonList(pred);
         if (model.getFilteredPersonList().size() == 0) { // Student with specified studentId does not exist
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
