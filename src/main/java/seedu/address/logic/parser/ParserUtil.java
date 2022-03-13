@@ -11,8 +11,10 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Info;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.PrevDateMet;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -120,5 +122,39 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String prevDateMet} into a {@code PrevDateMet}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param date The last met up date.
+     * @return PrevDateMet object that is parsed.
+     * @throws ParseException if the given {@code prevDateMet} is invalid.
+     */
+    public static PrevDateMet parsePrevDateMet(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!PrevDateMet.isValidPrevDateMet(trimmedDate)) {
+            throw new ParseException(PrevDateMet.MESSAGE_CONSTRAINTS);
+        }
+        return new PrevDateMet(trimmedDate);
+    }
+
+    /**
+     * Parses a {@code String info} into a {@code Info}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param info A string of information about the person.
+     * @return Info object that is parsed.
+     * @throws ParseException if the given {@code info} is invalid.
+     */
+    public static Info parseInfo(String info) throws ParseException {
+        requireNonNull(info);
+        String trimmedInfo = info.trim();
+        if (!PrevDateMet.isValidPrevDateMet(trimmedInfo)) {
+            throw new ParseException(Info.MESSAGE_CONSTRAINTS);
+        }
+        return new Info(trimmedInfo);
     }
 }
