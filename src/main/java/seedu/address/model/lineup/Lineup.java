@@ -13,44 +13,44 @@ import seedu.address.model.person.Person;
 public class Lineup {
 
     private final LineupName lineupName;
-    private final LineupList players;
+    private final LineupPlayersList playersList;
 
     /**
      * lineupName must be present and not null.
      */
-    public Lineup(LineupName lineupName, LineupList players) {
+    public Lineup(LineupName lineupName, LineupPlayersList playersList) {
         requireAllNonNull(lineupName);
         this.lineupName = lineupName;
-        this.players = players;
+        this.playersList = playersList;
     }
 
     public LineupName getLineupName() {
         return lineupName;
     }
 
-    public LineupList getPlayers() {
-        return players;
+    public LineupPlayersList getPlayers() {
+        return playersList;
     }
 
     /**
      * Get the player at specific index of the lineupList.
      */
     public Person getPlayer(int index) {
-        return players.get(index);
+        return playersList.get(index);
     }
 
     public void addPlayer(Person player) {
-        players.add(player);
+        playersList.add(player);
     }
 
     public void removePlayer(int index) {
-        players.remove(index);
+        playersList.remove(index);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(lineupName, players);
+        return Objects.hash(lineupName, playersList);
     }
 
     @Override
