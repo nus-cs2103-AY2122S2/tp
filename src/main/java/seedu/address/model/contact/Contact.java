@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.contact;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -7,21 +7,16 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.contact.Address;
-import seedu.address.model.contact.Contact;
-import seedu.address.model.contact.Email;
-import seedu.address.model.contact.Phone;
-import seedu.address.model.contact.UniqueContactList;
+import seedu.address.model.person.Name;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Person in Medbook.
+ * Represents a Contact in Medbook.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Contact {
 
     // Identity fields
-    private final Nric nric;
     private final Name name;
     private final Phone phone;
     private final Email email;
@@ -29,14 +24,12 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private final UniqueContactList contacts = new UniqueContactList();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(nric, name, phone, email, address, tags);
-        this.nric = nric;
+    public Contact(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -44,16 +37,12 @@ public class Person {
         this.tags.addAll(tags);
     }
 
-    public Name getName() {
-        return name;
-    }
-
-    public Nric getNric() {
-        return nric;
-    }
-
     public Phone getPhone() {
         return phone;
+    }
+
+    public Name getName() {
+        return name;
     }
 
     public Email getEmail() {
@@ -62,14 +51,6 @@ public class Person {
 
     public Address getAddress() {
         return address;
-    }
-
-    public void setContact(Contact contact) {
-        contacts.add(contact);
-    }
-
-    public boolean hasContact(Contact contact) {
-        return contacts.contains(contact);
     }
 
     /**
@@ -81,21 +62,22 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same nric.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both contacts have the same name.
+     * This defines a weaker notion of equality between two contacts.
      */
-    public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
+    public boolean isSameContact(Contact otherContact) {
+        if (otherContact == this) {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getNric().equals(getNric());
+        return otherContact != null
+                && otherContact.getPhone().equals(getPhone())
+                && otherContact.getName().equals(getName());
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both contacts have the same identity and data fields.
+     * This defines a stronger notion of equality between two contacts.
      */
     @Override
     public boolean equals(Object other) {
@@ -103,30 +85,28 @@ public class Person {
             return true;
         }
 
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Contact)) {
             return false;
         }
 
-        Person otherPerson = (Person) other;
-        return otherPerson.getName().equals(getName())
-                && otherPerson.getNric().equals(getNric())
-                && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+        Contact otherContact = (Contact) other;
+        return otherContact.getName().equals(getName())
+                && otherContact.getPhone().equals(getPhone())
+                && otherContact.getEmail().equals(getEmail())
+                && otherContact.getAddress().equals(getAddress())
+                && otherContact.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(phone, email, address, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getNric())
-                .append("; Name: ")
+        builder.append("; Name: ")
                 .append(getName())
                 .append("; Phone: ")
                 .append(getPhone())
