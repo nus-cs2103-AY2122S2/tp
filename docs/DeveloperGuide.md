@@ -295,7 +295,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Preconditions: Trackermon application is started.**
 
-**Guarantees: Show will be added into Trackermon only if the user input matches the `add` format.**
+**Guarantees: Show will be added into Trackermon only if the user input matches the command format.**
 
 **MSS**
 
@@ -318,7 +318,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 3.
 
-* 3b. User uses `add` command with the wrong syntax.
+* 3b. User enters command with the wrong syntax.
 
     * 3b1. Trackermon shows an error message to user, indicating the format for adding shows is incorrect, and attaches the correct syntax format.
 
@@ -330,7 +330,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Preconditions: Trackermon application is started.**
 
-**Guarantees: Show will be deleted from Trackermon only if the user input matches the `delete` format.**
+**Guarantees: Show will be deleted from Trackermon only if the user input matches the command format.**
 
 **MSS**
 
@@ -370,12 +370,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. There is further input after the user enters list. E.g. `list shows`
-
-    * 1a1. Trackermon will only register the `list` command.
-
-      Use case resumes at step 2.
-
 * 2a. The list is empty.
 
   Use case ends.
@@ -386,7 +380,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Preconditions: Trackermon application is started.**
 
-**Guarantees: Show will be marked in Trackermon only if the user input matches the `mark` format.**
+**Guarantees: Show will be marked in Trackermon only if the user input matches the command format.**
 
 **MSS**
 
@@ -415,7 +409,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Preconditions: Trackermon application is started.**
 
-**Guarantees: Show will be unmarked in Trackermon only if the user input matches the `unmark` format.**
+**Guarantees: Show will be unmarked in Trackermon only if the user input matches the command format.**
 
 **MSS**
 
@@ -440,11 +434,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: UC06 - Tag a show**
+**Use case: UC06 - Tag a show** (coming in v1.3)
 
 **Preconditions: Trackermon application is started.**
 
-**Guarantees: Show will be tagged in Trackermon only if the user input matches the `add` format.**
+**Guarantees: Show will be tagged in Trackermon only if the user input matches the command format.**
 
 **MSS**
 
@@ -461,7 +455,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. User uses `add` command with the wrong syntax.
+* 3a. User uses the command with the wrong syntax.
 
     * 3a1. Trackermon shows an error message to user, indicating the format for adding shows is incorrect, and attaches the correct syntax format.
 
@@ -477,19 +471,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User enters `exit` command in Trackermon.
+1. User enters the command in Trackermon.
 2. Trackermon saves all changes into the disk.
 3. Trackermon displays a message to tell the user that the app has successfully closed.
 
    Use case ends.
-
-**Extensions**
-
-* 1a. There is further input after the user enters exit. E.g. `exit now`
-
-    * 1a1. Trackermon will only register the `exit` command.
-
-      Use case resumes at step 2.
 
 ---  
     

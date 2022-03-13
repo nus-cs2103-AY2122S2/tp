@@ -33,7 +33,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Low Kaiwei
 
-<img src="images/Lowkaiwei98.png" width="200px">
+<img src="images/lowkaiwei98.png" width="200px">
 
 [<img src="images/github-icon.png" width="50px">](http://github.com/lowkaiwei98) &nbsp; &nbsp; &nbsp;
 [<img src="images/portfolio-icon.png" width="50px">](team/lowkaiwei98.md)
