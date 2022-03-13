@@ -104,7 +104,6 @@ public class ParserUtil {
         }
         throw new ParseException(Date.MESSAGE_CONSTRAINTS);
     }
-  
     /**
      * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
