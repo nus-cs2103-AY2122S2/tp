@@ -23,8 +23,8 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person implements Serializable {
-    private final HashSet<Tag> tags = new HashSet<>();
     private final HashMap<Prefix, Field> fields = new HashMap<>();
+    private final HashSet<Tag> tags = new HashSet<>();
 
     /**
      * Person constructor
@@ -65,15 +65,31 @@ public class Person implements Serializable {
         return fields.containsKey(prefix);
     }
 
-    public Person setField(Field field) {
+    /**
+     * Add a field to the person. If the field already exists, it is replaced.
+     * @param field the field to add
+     * @return a person with the field added
+     */
+    public Person addField(Field field) {
         requireAllNonNull(field);
         Map<Prefix, Field> updatedFields = new HashMap<>(fields);
-        if (field == null) {
-            updatedFields.remove(field.prefix);
-        } else {
-            updatedFields.put(field.prefix, field);
-        }
+        updatedFields.put(field.prefix, field);
         return new Person(updatedFields.values(), tags);
+    }
+
+    /**
+     * Remove a field from the person. If the field does not exists, this does nothing.
+     * @param prefix the prefix of the field to remove
+     * @return a person with the field removed
+     */
+    public Person removeField(Prefix prefix) {
+        requireAllNonNull(prefix);
+        if (hasField(prefix)) {
+            Map<Prefix, Field> updatedFields = new HashMap<>(fields);
+            updatedFields.remove(prefix);
+            return new Person(updatedFields.values(), tags);
+        }
+        return this;
     }
 
     public Optional<Field> getField(Prefix prefix) {
@@ -122,6 +138,51 @@ public class Person implements Serializable {
     }
 
     /**
+     * Add tags to the person.
+     * @param tags the tags to add
+     * @return a person with the tags added
+     */
+    public Person addTags(Collection<Tag> tags) {
+        HashSet<Tag> updatedTags = new HashSet<>(this.tags);
+        for (Tag t : tags) {
+            checkArgument(t != null, "Cannot add null tags!");
+            updatedTags.add(t);
+        }
+        return new Person(this.fields.values(), updatedTags);
+    }
+
+    /**
+     * Add tags to the person.
+     * @param tags the tags to add
+     * @return a person with the tags added
+     */
+    public Person addTags(Tag... tags) {
+        return addTags(List.of(tags));
+    }
+
+    /**
+     * Remove tags from the person.
+     * @param tags the tags to remove
+     * @return a person with the tags remove
+     */
+    public Person removeTags(Collection<Tag> tags) {
+        HashSet<Tag> updatedTags = new HashSet<>(this.tags);
+        for (Tag t : tags) {
+            updatedTags.remove(t);
+        }
+        return new Person(this.fields.values(), updatedTags);
+    }
+
+    /**
+     * Remove tags from the person.
+     * @param tags the tags to remove
+     * @return a person with the tags remove
+     */
+    public Person removeTags(Tag... tags) {
+        return removeTags(tags);
+    }
+
+    /**
      * Adds a membership to the person
      *
      * @param membership Membership to add
@@ -132,7 +193,6 @@ public class Person implements Serializable {
         newFields.put(Membership.PREFIX, membership);
         return new Person(newFields.values(), tags);
     }
-
 
     /**
      * Returns true if both persons have the same name.
