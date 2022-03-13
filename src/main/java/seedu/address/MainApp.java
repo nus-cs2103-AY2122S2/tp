@@ -26,7 +26,9 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonLessonBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.LessonBookStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
@@ -59,7 +61,8 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        LessonBookStorage lessonBookStorage = new JsonLessonBookStorage(userPrefs.getLessonBookFilePath());
+        storage = new StorageManager(addressBookStorage, lessonBookStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -84,14 +87,16 @@ public class MainApp extends Application {
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with sample data.");
+                logger.info("Data file for students not found. Will be starting with sample data.");
             }
 
             initialDataAddressBook = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
 
-            // TODO: add code to load LessonBook from storage
-            lessonBookOptional = Optional.empty();
-            initialDataLessonBook = SampleDataUtil.getSampleLessonBook();
+            lessonBookOptional = storage.readLessonBook();
+            if (!lessonBookOptional.isPresent()) {
+                logger.info("Data file for lessons not found. Will be starting with sample data.");
+            }
+            initialDataLessonBook = lessonBookOptional.orElseGet(SampleDataUtil::getSampleLessonBook);
 
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty record.");

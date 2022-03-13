@@ -39,8 +39,8 @@ public class LessonInfoPanel extends InfoPanel {
     private void setDetails(Lesson lesson) {
         name.setText(lesson.getName().fullName);
         subject.setText(lesson.getSubject().subjectName);
-        date.setText(lesson.getTimeSlot().getDateString());
-        time.setText(lesson.getTimeSlot().getTimeString());
+        date.setText(lesson.getDateTimeSlot().getDateString());
+        time.setText(lesson.getDateTimeSlot().getTimeString());
     }
 
     /**
