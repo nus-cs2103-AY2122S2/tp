@@ -6,6 +6,9 @@ import manageezpz.model.person.Email;
 import manageezpz.model.person.Name;
 import manageezpz.model.person.Person;
 import manageezpz.model.person.Phone;
+import manageezpz.model.task.Description;
+import manageezpz.model.task.Task;
+import manageezpz.model.task.Todo;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -22,10 +25,21 @@ public class SampleDataUtil {
         };
     }
 
+    public static Task[] getSampleTasks() {
+        return new Task[] {
+            new Todo(new Description("Read Book")),
+            new Todo(new Description("Return Book")),
+            new Todo(new Description("Read Genshin Guides")),
+            new Todo(new Description("Do Daily Commissions")),
+        };
+    }
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
+        }
+        for (Task sampleTask : getSampleTasks()) {
+            sampleAb.addTask(sampleTask);
         }
         return sampleAb;
     }
