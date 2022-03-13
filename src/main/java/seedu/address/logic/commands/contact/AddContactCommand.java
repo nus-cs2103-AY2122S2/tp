@@ -4,26 +4,31 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 import java.util.stream.IntStream;
 
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.ContactWithNricPredicate;
 import seedu.address.model.person.Nric;
+import seedu.address.model.person.NricPredicate;
 import seedu.address.model.person.Person;
 
 
 public class AddContactCommand extends Command {
-    public static final String COMMAND_WORD = "create";
+    public static final String COMMAND_WORD = "add";
+    public static final CommandType COMMAND_TYPE = CommandType.CONTACT;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a contact to patient in Medbook. "
             + "Parameters: "
+            + PREFIX_NRIC + "OWNER_NRIC "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
@@ -39,18 +44,18 @@ public class AddContactCommand extends Command {
     public static final String MESSAGE_MISSING_PATIENT = "This patient does not exists in Medbook";
 
     // Identifier
-    private final Nric nric;
+    private final Nric ownerNric;
 
     private final Contact toAdd;
 
     /**
      * Creates an AddContactCommand to add the specified {@code Patient}
      */
-    public AddContactCommand(Nric nric, Contact contact) {
-        requireNonNull(nric);
+    public AddContactCommand(Nric ownerNric, Contact contact) {
+        requireNonNull(ownerNric);
         requireNonNull(contact);
         toAdd = contact;
-        this.nric = nric;
+        this.ownerNric = ownerNric;
     }
 
     @Override
@@ -59,7 +64,7 @@ public class AddContactCommand extends Command {
         List<Person> personList = model.getAddressBook().getPersonList();
 
         int index = IntStream.range(0, personList.size())
-                .filter(i -> personList.get(i).getNric().equals(nric))
+                .filter(i -> personList.get(i).getNric().equals(ownerNric))
                 .findFirst()
                 .orElse(-1);
 
@@ -67,15 +72,17 @@ public class AddContactCommand extends Command {
             throw new CommandException(MESSAGE_MISSING_PATIENT);
         }
 
-        Person person = personList.get(index);
+        if (!model.hasPerson(new NricPredicate(ownerNric))) {
+            throw new CommandException(MESSAGE_MISSING_PATIENT);
+        }
 
-        if (person.hasContact(toAdd)) {
+        if (model.hasContact(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_CONTACT);
         }
 
-        person.setContact(toAdd);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.addContact(toAdd);
+        model.updateFilteredContactList(new ContactWithNricPredicate(ownerNric));
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), COMMAND_TYPE);
     }
 }
