@@ -14,10 +14,9 @@ package seedu.address.logic.commands;
 //import seedu.address.model.Model;
 //import seedu.address.testutil.EditPersonDescriptorBuilder;
 //
-///**
-// * Contains helper methods for testing commands.
-// */
-@SuppressWarnings("checkstyle:CommentsIndentation")
+/**
+ * Contains helper methods for testing commands.
+ */
 public class CommandTestUtil {
     public static final String VALID_NAME_YOU = "You";
     public static final String VALID_NAME_ME = "ME";
