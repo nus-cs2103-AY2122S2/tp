@@ -126,7 +126,7 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        CommandBox commandBox = new CommandBox(this::executeCommand, this::accessHistory);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -303,11 +303,30 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            if (commandResult.isImportFromCsv()) {
+                handleLoadFromCsv();
+            }
+
+            if (commandResult.isExportToCsv()) {
+                handleSaveToCsv();
+            }
+
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    /**
+     * Depending on whether the user pressed UP or DOWN, retrieve the previous or next user input.
+     * This seeks to emulate the command line ability to scroll through the history of typed commands.
+     *
+     * @param isUp True if the button pressed is Up, False if it's Down.
+     * @return The relevant command in history.
+     */
+    private String accessHistory(boolean isUp) {
+        return isUp ? logic.getPreviousCommand() : logic.getNextCommand();
     }
 }

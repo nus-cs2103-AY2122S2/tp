@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.HashMap;
 import java.util.Objects;
 
 /**
@@ -17,13 +18,27 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** The application should display the window allowing the user to import a CSV file. */
+    private final boolean importFromCsv;
+
+    /** The application should display the window allowing the user to export to a CSV file. */
+    private final boolean exportToCsv;
+
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
+     * The HashMap can have keys for "showHelp", "exit", "importFromCsv", "exportToCsv".
+     * The default values are false.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, HashMap<String, Boolean> settings) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.showHelp = showHelp;
-        this.exit = exit;
+
+        boolean hasSettings = Objects.nonNull(settings);
+
+        this.showHelp = hasSettings && settings.getOrDefault("showHelp", false);
+        this.exit = hasSettings && settings.getOrDefault("exit", false);
+        this.importFromCsv = hasSettings && settings.getOrDefault("importFromCsv", false);
+        this.exportToCsv = hasSettings && settings.getOrDefault("exportToCsv", false);
     }
 
     /**
@@ -31,7 +46,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, null);
     }
 
     public String getFeedbackToUser() {
@@ -44,6 +59,14 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public boolean isImportFromCsv() {
+        return importFromCsv;
+    }
+
+    public boolean isExportToCsv() {
+        return exportToCsv;
     }
 
     @Override

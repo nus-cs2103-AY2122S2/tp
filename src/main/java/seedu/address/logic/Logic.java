@@ -58,4 +58,14 @@ public interface Logic {
      * Loads the AddressBook from CSV.
      */
     void readAddressBookFromCsv(Path csvFilePath) throws CommandException;
+
+    /**
+     * Retrieves the previous command in history.
+     */
+    String getPreviousCommand();
+
+    /**
+     * Retrieves the next command in history.
+     */
+    String getNextCommand();
 }

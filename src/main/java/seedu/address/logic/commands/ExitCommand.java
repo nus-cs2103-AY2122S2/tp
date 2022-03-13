@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import java.util.HashMap;
+
 import seedu.address.model.Model;
 
 /**
@@ -13,7 +15,9 @@ public class ExitCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT, false, true);
+        HashMap<String, Boolean> settings = new HashMap<>();
+        settings.put("exit", true);
+        return new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT, settings);
     }
 
 }
