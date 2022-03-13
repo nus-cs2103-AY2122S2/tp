@@ -27,7 +27,7 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
  */
 public class CommandTestUtil {
 
-    public static final String VALID_NRIC_AMY = "S1234567L";
+    public static final String VALID_NRIC_AMY = "S7654321T";
     public static final String VALID_NRIC_BOB = "S1234568G";
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";

@@ -29,31 +29,31 @@ public class TypicalPersons {
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253")
             .withTags("friends").build();
-    public static final Person BENSON = new PersonBuilder().withNric("F1234567L").withName("Benson Meier")
+    public static final Person BENSON = new PersonBuilder().withNric("F3918974L").withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withTags("owesMoney", "friends").build();
-    public static final Person CARL = new PersonBuilder().withNric("S1234567L")
+    public static final Person CARL = new PersonBuilder().withNric("S9535256L")
             .withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").build();
-    public static final Person DANIEL = new PersonBuilder().withNric("G1234567A")
+    public static final Person DANIEL = new PersonBuilder().withNric("G8765253A")
             .withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends").build();
-    public static final Person ELLE = new PersonBuilder().withNric("G1234567C")
+    public static final Person ELLE = new PersonBuilder().withNric("G9482221C")
             .withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withAddress("michegan ave").build();
-    public static final Person FIONA = new PersonBuilder().withNric("G1234567A")
+    public static final Person FIONA = new PersonBuilder().withNric("G9482423A")
             .withName("Fiona Kunz").withPhone("9482427")
             .withEmail("lydia@example.com").withAddress("little tokyo").build();
-    public static final Person GEORGE = new PersonBuilder().withNric("M1234567C")
+    public static final Person GEORGE = new PersonBuilder().withNric("M9482441C")
             .withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street").build();
 
     // Manually added
-    public static final Person HOON = new PersonBuilder().withNric("G1023456L")
+    public static final Person HOON = new PersonBuilder().withNric("G8482424L")
             .withName("Hoon Meier").withPhone("8482424")
             .withEmail("stefan@example.com").withAddress("little india").build();
-    public static final Person IDA = new PersonBuilder().withNric("G1023456T")
+    public static final Person IDA = new PersonBuilder().withNric("G8482131T")
             .withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withAddress("chicago ave").build();
 
