@@ -32,13 +32,13 @@ public class SampleDataUtil {
                     new Age("20"), new Height("175"), new JerseyNumber("0"),
                 getTagSet("neighbours"), new Weight()),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                    new Age("22"), new Height(), new JerseyNumber("15"),
+                    new Age("22"), new Height("190"), new JerseyNumber("15"),
                 getTagSet("family"), new Weight()),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                    new Age("24"), new Height(), new JerseyNumber("1"),
+                    new Age("24"), new Height("213"), new JerseyNumber("1"),
                 getTagSet("classmates"), new Weight()),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                    new Age("18"), new Height(), new JerseyNumber("3"),
+                    new Age("18"), new Height("188"), new JerseyNumber("3"),
                 getTagSet("colleagues"), new Weight())
         };
     }

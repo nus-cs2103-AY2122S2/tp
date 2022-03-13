@@ -117,6 +117,15 @@ class JsonAdaptedPerson {
         }
         final Age modelAge = new Age(age);
 
+        // height
+        if (height == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Height.class.getSimpleName()));
+        }
+        if (!Height.isValidHeight(height)) {
+            throw new IllegalValueException(Height.MESSAGE_CONSTRAINTS);
+        }
+        final Height modelHeight = new Height(height);
+
         // jersey
         if (jerseyNumber == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -129,15 +138,6 @@ class JsonAdaptedPerson {
 
         /*
         // to be changed
-        // height
-        if (height == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Height.class.getSimpleName()));
-        }
-        if (!Height.isValidHeight(height)) {
-            throw new IllegalValueException(Height.MESSAGE_CONSTRAINTS);
-        }
-        final Height modelHeight = new Height(height);
-
         // weight
         if (weight == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Weight.class.getSimpleName()));
@@ -152,7 +152,7 @@ class JsonAdaptedPerson {
 
         // age, height, jersey number, weight to be edited
         return new Person(modelName, modelPhone, modelEmail, modelAge,
-                new Height(), modelJerseyNumber, modelTags, new Weight());
+                modelHeight, modelJerseyNumber, modelTags, new Weight());
     }
 
 }

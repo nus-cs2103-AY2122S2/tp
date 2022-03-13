@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 public class JerseyNumberTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Age(null));
+        assertThrows(NullPointerException.class, () -> new JerseyNumber(null));
     }
 
     @Test
