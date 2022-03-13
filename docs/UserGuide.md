@@ -46,7 +46,7 @@ Some example commands you can try:
   e.g. in `add n/<NAME>`, `<NAME>` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/<NAME> [s/<STATUS>] [t/<TAG>]` can be used as `n/ReZero t/Anime` or as `n/ReZero`.
+  e.g `n/<NAME> s/<STATUS> [t/<TAG>]` can be used as `n/ReZero t/Anime` or as `n/ReZero`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/<TAG>]…​` can be used as ` ` (i.e. 0 times), `t/Anime`, `t/Sitcom t/Kdrama` etc.
@@ -65,7 +65,7 @@ Some example commands you can try:
 
 ### Adding a show: `add`
 
-Adds a new show to trackermon. Note that the name of the show can only contain alphanumeric characters.
+Adds a new show to Trackermon. Note that the name of the show can only contain alphanumeric characters.
 
 Format: `add n/<NAME> [s/<STATUS>] [t/<TAG>]…​`
 
@@ -84,9 +84,22 @@ Shows a list of all shows in Trackermon.
 
 Format: `list`
 
-### Deleting a person : `delete`
+### Finding a person : `find`
 
-Deletes the specified person from the address book.
+Finds the specified show in Trackermon.
+
+Format: `find <KEYWORD>`
+* Finds the show with the specified `<KEYWORD>`.
+* The keyword refers to the input entered by the user after `find`.
+* The keyword **can be a word or number** such as hero, S1,..
+
+Examples:
+* `find` followed by `attack` displays all the shows in the list that contain the keyword `attack`.
+* `find attack` followed by `delete 1` removes 1st show in results of `find` command.
+
+### Deleting a show : `delete`
+
+Deletes the specified show from Trackermon.
 
 Format: `delete <INDEX>`
 * Deletes the show at the specified `<INDEX>`.
@@ -94,9 +107,8 @@ Format: `delete <INDEX>`
 * The index **must be a positive integer** 1,2,3,..
 
 Examples:
-* `list` followed by `delete 2` removes 2nd show in Trackermon
-* `find ghibli` followed by `delete 1` removes 1st show in results of `find` command
-
+* `list` followed by `delete 2` removes 2nd show in Trackermon.
+* `find ghibli` followed by `delete 1` removes 1st show in results of `find` command.
 
 ### Exiting the program : `exit`
 
