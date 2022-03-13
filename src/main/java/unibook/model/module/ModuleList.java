@@ -20,7 +20,7 @@ public class ModuleList implements Iterable<Module> {
         FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent module as the given argument.
      */
     public boolean contains(Module toCheck) {
         requireNonNull(toCheck);
@@ -44,6 +44,7 @@ public class ModuleList implements Iterable<Module> {
      */
     public void add(Module toAdd) {
         requireNonNull(toAdd);
+
         if (contains(toAdd)) {
             throw new DuplicateModuleException();
         }

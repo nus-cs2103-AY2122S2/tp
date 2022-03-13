@@ -3,6 +3,7 @@ package unibook.model;
 import static java.util.Objects.requireNonNull;
 
 import java.nio.file.Path;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -12,7 +13,9 @@ import unibook.commons.core.GuiSettings;
 import unibook.commons.core.LogsCenter;
 import unibook.commons.util.CollectionUtil;
 import unibook.model.module.Module;
+import unibook.model.module.ModuleCode;
 import unibook.model.person.Person;
+import unibook.model.person.exceptions.PersonNoSubtypeException;
 
 
 /**
@@ -109,6 +112,15 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addPersonToTheirModules(Person person) {
+        try {
+            uniBook.addPersonToAllTheirModuleCodes(person);
+        } catch (PersonNoSubtypeException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         CollectionUtil.requireAllNonNull(target, editedPerson);
 
@@ -138,6 +150,22 @@ public class ModelManager implements Model {
         CollectionUtil.requireAllNonNull(target, editedModule);
 
         uniBook.setModule(target, editedModule);
+    }
+
+    @Override
+    public boolean isModuleExist(Person person) {
+        Set<ModuleCode> moduleCodes = person.getModuleCodes();
+        for (ModuleCode moduleCode : moduleCodes) {
+            if (!uniBook.hasModule(moduleCode)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public Module getModuleByCode(ModuleCode moduleCode) {
+        return uniBook.getModuleByCode(moduleCode);
     }
 
     //=========== Filtered Person List Accessors =============================================================

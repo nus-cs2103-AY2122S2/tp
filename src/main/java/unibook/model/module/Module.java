@@ -74,6 +74,16 @@ public class Module {
     }
 
     /**
+     * Empty constructor for a null module.
+     */
+    public Module() {
+        this.moduleName = null;
+        this.moduleCode = null;
+        this.professors = null;
+        this.students = null;
+    }
+
+    /**
      * Returns the module name.
      *
      * @return the name of the module.
