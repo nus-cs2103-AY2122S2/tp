@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -15,7 +17,7 @@ import seedu.address.model.tamodule.TaModule;
 class JsonAdaptedClassGroup {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "ClassGroup's %s field is missing!";
-
+    public static final String NONEXISTENT_MODULE = "Module does not exist!";
     private final String classGroupId;
     private final String classGroupType;
     private final JsonAdaptedTaModule module;
@@ -43,10 +45,11 @@ class JsonAdaptedClassGroup {
 
     /**
      * Converts this Jackson-friendly adapted class group object into the model's {@code ClassGroup} object.
+     * Checks that the module the class group is added to already exists.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted class group.
      */
-    public ClassGroup toModelType() throws IllegalValueException {
+    public ClassGroup toModelType(List<TaModule> taModuleList) throws IllegalValueException {
         if (classGroupId == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, ClassGroupId.class.getSimpleName()));
@@ -83,6 +86,9 @@ class JsonAdaptedClassGroup {
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, Module.class.getSimpleName()));
         }
         final TaModule modelModule = module.toModelType();
+        if (!taModuleList.contains(modelModule)) {
+            throw new IllegalValueException(NONEXISTENT_MODULE);
+        }
 
         return new ClassGroup(modelClassGroupId, modelClassGroupType, modelModule);
     }
