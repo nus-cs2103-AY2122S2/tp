@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.awt.Desktop;
+import java.awt.HeadlessException;
 import java.io.IOException;
 import java.net.URI;
 
@@ -51,7 +52,7 @@ class HelpWindowUtilTest {
         if (Desktop.isDesktopSupported()) {
             assertEquals(helpWindowUtil.getDesktop(), Desktop.getDesktop());
         } else {
-            assertEquals(helpWindowUtil.getDesktop(), null);
+            assertThrows(HeadlessException.class, () -> helpWindowUtil.getDesktop());
         }
     }
 }
