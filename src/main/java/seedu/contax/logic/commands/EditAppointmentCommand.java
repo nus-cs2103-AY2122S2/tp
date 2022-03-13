@@ -56,6 +56,8 @@ public class EditAppointmentCommand extends Command {
     private final EditAppointmentDescriptor editAppointmentDescriptor;
 
     /**
+     * Creates an {@code EditAppointmentCommand} object.
+     *
      * @param index of the appointment in the list of appointments to edit.
      * @param editAppointmentDescriptor details to edit the person with.
      */

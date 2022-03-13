@@ -28,6 +28,7 @@ public class EditAppointmentCommandParser implements Parser<EditAppointmentComma
     /**
      * Parses the given {@code String} of arguments in the context of the EditAppointmentCommand
      * and returns an EditAppointmentCommand object for execution.
+     * 
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditAppointmentCommand parse(String args) throws ParseException {
