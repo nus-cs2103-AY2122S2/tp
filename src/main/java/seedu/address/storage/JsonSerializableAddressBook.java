@@ -27,7 +27,8 @@ class JsonSerializableAddressBook {
      * Constructs a {@code JsonSerializableAddressBook} with the given students.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("students") List<JsonAdaptedStudent> students) {
+    public JsonSerializableAddressBook(
+            @JsonProperty("students") List<JsonAdaptedStudent> students) {
         this.students.addAll(students);
     }
 
@@ -47,6 +48,7 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
+
         for (JsonAdaptedStudent jsonAdaptedStudent : students) {
             Student student = jsonAdaptedStudent.toModelType();
             if (addressBook.hasStudent(student)) {
@@ -54,7 +56,8 @@ class JsonSerializableAddressBook {
             }
             addressBook.addStudent(student);
         }
+
+
         return addressBook;
     }
-
 }

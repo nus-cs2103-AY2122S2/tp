@@ -2,6 +2,7 @@ package seedu.address.model.lesson;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -9,20 +10,23 @@ import java.util.Objects;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class TemporaryLesson extends Lesson {
-    // Data fields
-    private final DateTimeSlot dateTimeSlot;
 
     /**
      * Every field must be present and not null.
      */
-    protected TemporaryLesson(LessonName name, Subject subject, LessonAddress address, DateTimeSlot dateTimeSlot) {
-        super(name, subject, address);
+    protected TemporaryLesson(LessonName name, Subject subject, LessonAddress address,
+                              DateTimeSlot dateTimeSlot, List<Student> assignedStudents) {
+        super(name, subject, address, dateTimeSlot, assignedStudents);
         requireAllNonNull(dateTimeSlot);
-        this.dateTimeSlot = dateTimeSlot;
     }
 
-    public DateTimeSlot getTimeSlot() {
-        return dateTimeSlot;
+    /**
+     * Every field must be present and not null.
+     */
+    protected TemporaryLesson(LessonName name, Subject subject, LessonAddress address,
+                              DateTimeSlot dateTimeSlot) {
+        super(name, subject, address, dateTimeSlot);
+        requireAllNonNull(dateTimeSlot);
     }
 
     /**
@@ -33,7 +37,7 @@ public class TemporaryLesson extends Lesson {
             return true;
         }
 
-        return dateTimeSlot.isConflictingWith(otherLesson.getTimeSlot());
+        return getDateTimeSlot().isConflictingWith(otherLesson.getDateTimeSlot());
     }
 
     /**
@@ -54,13 +58,13 @@ public class TemporaryLesson extends Lesson {
         return otherLesson.getName().equals(getName())
                 && otherLesson.getSubject().equals(getSubject())
                 && otherLesson.getLessonAddress().equals(getLessonAddress())
-                && otherLesson.getTimeSlot().equals(getTimeSlot());
+                && otherLesson.getDateTimeSlot().equals(getDateTimeSlot());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(this.getName(), this.getSubject(), dateTimeSlot);
+        return Objects.hash(this.getName(), this.getSubject(), this.getDateTimeSlot());
     }
 
     @Override

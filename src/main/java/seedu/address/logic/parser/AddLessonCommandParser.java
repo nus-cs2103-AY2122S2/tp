@@ -59,8 +59,11 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
 
             throw new RuntimeException("Not implemented yet");
         } else {
-            lesson = Lesson.makeTemporaryLesson(lessonName, subject, address,
-                    getLessonDateTime(date, startTime), durationHours, durationMinutes);
+            // lesson = Lesson.makeTemporaryLesson(lessonName, subject, address,
+            //      getLessonDateTime(date, startTime), durationHours, durationMinutes);
+
+            lesson = Lesson.makeTemporaryLesson(lessonName, subject, address, date,
+                    startTime, durationHours, durationMinutes);
         }
 
         return new AddLessonCommand(lesson);
