@@ -45,6 +45,6 @@ public class Age {
 
     @Override
     public String toString() {
-        return this.age + "y/o";
+        return this.age + " y/o";
     }
 }
