@@ -5,11 +5,10 @@ import static java.util.Objects.requireNonNull;
 import java.util.Optional;
 
 import seedu.address.commons.core.Messages;
-import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.Model;
 import seedu.address.model.person.predicates.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.EmailContainsKeywordsPredicate;
-import seedu.address.model.person.predicates.FieldContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.CombineContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.InsurancePackageContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.PhoneContainsKeywordsPredicate;
@@ -25,12 +24,16 @@ public class FindCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose fields contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: FIELD KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " n/alice bob charlie";
+            + "Parameters: FIELD KEYWORD [MORE_FIELD] [MORE_KEYWORDS]...\n"
+            + "Example: " + COMMAND_WORD + " n/alice bob i/Undecided";
 
-    private final FieldContainsKeywordsPredicate predicate;
+    public static final String MESSAGE_NO_KEYWORD = "Field must contain a keyword. \n"
+            + "Parameters: FIELD KEYWORD [MORE_FIELD] [MORE_KEYWORDS]...\n"
+            + "Example: " + COMMAND_WORD + " n/alice bob i/Undecided";
 
-    public FindCommand(FieldContainsKeywordsPredicate predicate) {
+    private final CombineContainsKeywordsPredicate predicate;
+
+    public FindCommand(CombineContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -74,14 +77,6 @@ public class FindCommand extends Command {
             setInsurancePackagePredicate(toCopy.insurancePackagePredicate);
             setAddressPredicate(toCopy.addressPredicate);
             setTagsPredicate(toCopy.tagsPredicate);
-        }
-
-        /**
-         * Returns true if at least one field is applied to find
-         */
-        public boolean isAnyFieldFind() {
-            return CollectionUtil.isAnyNonNull(namePredicate, phonePredicate,
-                    emailPredicate, insurancePackagePredicate, addressPredicate, tagsPredicate);
         }
 
         public void setNamePredicate(NameContainsKeywordsPredicate namePredicate) {

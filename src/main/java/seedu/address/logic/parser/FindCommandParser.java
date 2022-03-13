@@ -51,72 +51,46 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_NO_KEYWORD));
         }
 
-        FindPersonDescriptor findPersonDescriptor = new FindPersonDescriptor();
+        List<FieldContainsKeywordsPredicate> predicatesList = new ArrayList<>();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            String[] nameKeywords = argMultimap.getValue(PREFIX_NAME).get().split("\\s+");
-            NameContainsKeywordsPredicate namePredicate =
-                    new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords));
-            findPersonDescriptor.setNamePredicate(namePredicate);
+            List<String> nameKeywords = parseKeywords(argMultimap.getValue(PREFIX_NAME).get());
+            NameContainsKeywordsPredicate namePredicate = new NameContainsKeywordsPredicate(nameKeywords);
+            predicatesList.add(namePredicate);
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            String[] phoneKeywords = argMultimap.getValue(PREFIX_PHONE).get().split("\\s+");
-            PhoneContainsKeywordsPredicate phonePredicate =
-                    new PhoneContainsKeywordsPredicate(Arrays.asList(phoneKeywords));
-            findPersonDescriptor.setPhonePredicate(phonePredicate);
+            List<String> phoneKeywords = parseKeywords(argMultimap.getValue(PREFIX_PHONE).get());
+            PhoneContainsKeywordsPredicate phonePredicate = new PhoneContainsKeywordsPredicate(phoneKeywords);
+            predicatesList.add(phonePredicate);
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            String[] emailKeywords = argMultimap.getValue(PREFIX_EMAIL).get().split("\\s+");
-            EmailContainsKeywordsPredicate emailPredicate =
-                    new EmailContainsKeywordsPredicate(Arrays.asList(emailKeywords));
-            findPersonDescriptor.setEmailPredicate(emailPredicate);
+            List<String> emailKeywords = parseKeywords(argMultimap.getValue(PREFIX_EMAIL).get());
+            EmailContainsKeywordsPredicate emailPredicate = new EmailContainsKeywordsPredicate(emailKeywords);
+            predicatesList.add(emailPredicate);
         }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            String[] addressKeywords = argMultimap.getValue(PREFIX_ADDRESS).get().split("\\s+");
-            AddressContainsKeywordsPredicate addressPredicate =
-                    new AddressContainsKeywordsPredicate(Arrays.asList(addressKeywords));
-            findPersonDescriptor.setAddressPredicate(addressPredicate);
+            List<String> addressKeywords = parseKeywords(argMultimap.getValue(PREFIX_ADDRESS).get());
+            AddressContainsKeywordsPredicate addressPredicate = new AddressContainsKeywordsPredicate(addressKeywords);
+            predicatesList.add(addressPredicate);
         }
         if (argMultimap.getValue(PREFIX_INSURANCE_PACKAGE).isPresent()) {
-            String[] insurancePackageKeywords = argMultimap.getValue(PREFIX_INSURANCE_PACKAGE).get().split("\\s+");
+            List<String> insurancePackageKeywords = parseKeywords(argMultimap.getValue(PREFIX_INSURANCE_PACKAGE).get());
             InsurancePackageContainsKeywordsPredicate insurancePackagePredicate =
-                    new InsurancePackageContainsKeywordsPredicate(Arrays.asList(insurancePackageKeywords));
-            findPersonDescriptor.setInsurancePackagePredicate(insurancePackagePredicate);
+                    new InsurancePackageContainsKeywordsPredicate(insurancePackageKeywords);
+            predicatesList.add(insurancePackagePredicate);
         }
         if (!argMultimap.getAllValues(PREFIX_TAG).isEmpty()) {
-            String[] tagsKeywords = String.join(" ", argMultimap.getAllValues(PREFIX_TAG)).split("\\s+");
-            TagsContainsKeywordsPredicate tagsPredicate =
-                    new TagsContainsKeywordsPredicate(Arrays.asList(tagsKeywords));
-            findPersonDescriptor.setTagsPredicate((tagsPredicate));
+            List<String> tagsKeywords = parseKeywords(String.join(" ", argMultimap.getAllValues(PREFIX_TAG)));
+            TagsContainsKeywordsPredicate tagsPredicate = new TagsContainsKeywordsPredicate(tagsKeywords);
+            predicatesList.add(tagsPredicate);
         }
-        return new FindCommand(createCombineContainsKeywordsPredicate(findPersonDescriptor));
+        return new FindCommand(new CombineContainsKeywordsPredicate(predicatesList));
     }
 
     /**
-     * Creates and returns a {@code CombineContainsKeywordsPredicate } that contains all the predicates
-     * of the fields given by the user put into the {@code FindPersonDescriptor }
+     * Parses the arguments given for the find field into a List of String
      */
-    private static CombineContainsKeywordsPredicate createCombineContainsKeywordsPredicate(
-            FindPersonDescriptor findPersonDescriptor) {
-        List<FieldContainsKeywordsPredicate> predicatesList = new ArrayList<>();
-        if (findPersonDescriptor.getNamePredicate().isPresent()) {
-            predicatesList.add(findPersonDescriptor.getNamePredicate().get());
-        }
-        if (findPersonDescriptor.getPhonePredicate().isPresent()) {
-            predicatesList.add(findPersonDescriptor.getPhonePredicate().get());
-        }
-        if (findPersonDescriptor.getEmailPredicate().isPresent()) {
-            predicatesList.add(findPersonDescriptor.getEmailPredicate().get());
-        }
-        if (findPersonDescriptor.getAddressPredicate().isPresent()) {
-            predicatesList.add(findPersonDescriptor.getAddressPredicate().get());
-        }
-        if (findPersonDescriptor.getInsurancePackagePredicate().isPresent()) {
-            predicatesList.add(findPersonDescriptor.getInsurancePackagePredicate().get());
-        }
-        if (findPersonDescriptor.getTagsPredicate().isPresent()) {
-            predicatesList.add(findPersonDescriptor.getTagsPredicate().get());
-        }
-        return new CombineContainsKeywordsPredicate(predicatesList);
+    private static List<String> parseKeywords(String input) {
+        return Arrays.asList(input.split("\\s+"));
     }
 
     /**
