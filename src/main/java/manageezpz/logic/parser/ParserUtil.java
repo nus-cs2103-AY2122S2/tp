@@ -98,7 +98,8 @@ public class ParserUtil {
                 LocalDate parsedDate = LocalDate.parse(date, formatter);
                 return new Date(parsedDate);
             } catch (Exception e) {
-
+                System.out.println("Currently chosen pattern did not fit the given input pattern. "
+                        + "Moving on to the next option...");
             }
         }
         throw new ParseException(Date.MESSAGE_CONSTRAINTS);
