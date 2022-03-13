@@ -11,7 +11,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Description {
 
     public static final String MESSAGE_CONSTRAINTS = "Description text should be alphanumeric";
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+
+    /*
+     * The first character of the description must not be a whitespace,
+     * otherwise " " (a blank string) becomes a valid input.
+     * After the first non-whitespace character, all characters are valid, including newline character.
+     */
+    public static final String VALIDATION_REGEX = "[^\\s][\\s\\S]*";
 
     public final String descriptionText;
 
