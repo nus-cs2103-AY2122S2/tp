@@ -4,8 +4,10 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import seedu.address.model.student.Student;
+
 
 /**
  * Represents a Lesson in the Lesson book.
@@ -135,14 +137,14 @@ public abstract class Lesson {
      * @param dateTimeSlot an object encapsulating a lesson's date, starting time and duration.
      */
     public static TemporaryLesson makeTemporaryLesson(LessonName name, Subject subject, LessonAddress address,
-                                                      DateTimeSlot dateTimeSlot, List<Student> assignedStudents) {
+                                                      DateTimeSlot dateTimeSlot, List<Student> enrolledStudents) {
 
         return new TemporaryLesson(
                 name,
                 subject,
                 address,
                 dateTimeSlot,
-                assignedStudents
+                new EnrolledStudents()
         );
     }
 
@@ -178,8 +180,4 @@ public abstract class Lesson {
      */
     public abstract boolean isConflictingWithLesson(Lesson otherLesson);
 
-    /**
-     * Returns the date and time that the lesson starts and ends.
-     */
-    public abstract DateTimeSlot getTimeSlot();
 }

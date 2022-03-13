@@ -15,8 +15,8 @@ public class TemporaryLesson extends Lesson {
      * Every field must be present and not null.
      */
     protected TemporaryLesson(LessonName name, Subject subject, LessonAddress address,
-                              DateTimeSlot dateTimeSlot, List<Student> assignedStudents) {
-        super(name, subject, address, dateTimeSlot, assignedStudents);
+                              DateTimeSlot dateTimeSlot, EnrolledStudents enrolledStudents) {
+        super(name, subject, address, dateTimeSlot, enrolledStudents);
         requireAllNonNull(dateTimeSlot);
     }
 

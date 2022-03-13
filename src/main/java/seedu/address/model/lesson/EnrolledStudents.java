@@ -14,6 +14,10 @@ public class EnrolledStudents {
         this.enrolledStudents = new ArrayList<>();
     }
 
+    public EnrolledStudents(List<Student> enrolledStudents) {
+        this.enrolledStudents = enrolledStudents;
+    }
+
     public List<Student> getStudentsList() {
         return enrolledStudents;
     }
