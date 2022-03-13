@@ -3,47 +3,55 @@ package seedu.address.model.student;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import seedu.address.model.entity.Entity;
 import seedu.address.model.entity.EntityType;
 
 /**
  * Represents a Student in the TAssist.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Guarantees: details are present and not null (except Telegram handle), field values are validated, immutable.
  */
 public class Student implements Entity {
 
     // Identity fields
     private final StudentId studentId;
     private final Name name;
-    private final Phone phone;
     private final Email email;
+    private final Optional<Telegram> telegram;
+
+    /**
+     * Every field except Telegram handle must be present and not null.
+     */
+    public Student(StudentId studentId, Name name, Email email) {
+        this(studentId, name, email, Optional.empty());
+    }
 
     /**
      * Every field must be present and not null.
      */
-    public Student(StudentId studentId, Name name, Phone phone, Email email) {
-        requireAllNonNull(studentId, name, phone, email);
+    public Student(StudentId studentId, Name name, Email email, Optional<Telegram> telegram) {
+        requireAllNonNull(studentId, name, email, telegram);
         this.studentId = studentId;
         this.name = name;
-        this.phone = phone;
         this.email = email;
+        this.telegram = telegram;
+    }
+
+    public StudentId getStudentId() {
+        return studentId;
     }
 
     public Name getName() {
         return name;
     }
 
-    public Phone getPhone() {
-        return phone;
-    }
-
     public Email getEmail() {
         return email;
     }
 
-    public StudentId getStudentId() {
-        return studentId;
+    public Optional<Telegram> getTelegram() {
+        return telegram;
     }
 
     /**
@@ -81,14 +89,14 @@ public class Student implements Entity {
         Student otherStudent = (Student) other;
         return otherStudent.getStudentId().equals(getStudentId())
                 && otherStudent.getName().equals(getName())
-                && otherStudent.getPhone().equals(getPhone())
-                && otherStudent.getEmail().equals(getEmail());
+                && otherStudent.getEmail().equals(getEmail())
+                && otherStudent.getTelegram().equals(getTelegram());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(studentId, name, phone, email);
+        return Objects.hash(studentId, name, email, telegram);
     }
 
     @Override
@@ -97,10 +105,10 @@ public class Student implements Entity {
         builder.append(getStudentId())
                 .append("; Name: ")
                 .append(getName())
-                .append("; Phone: ")
-                .append(getPhone())
                 .append("; Email: ")
-                .append(getEmail());
+                .append(getEmail())
+                .append("; Telegram: ")
+                .append(getTelegram());
 
         return builder.toString();
     }
