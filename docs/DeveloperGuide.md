@@ -386,6 +386,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. TAPA shows an error message.
 
       Use case resumes from step 2.
+      
+* 3b. The given student id is invalid.
+
+    * 3b1. TAPA shows an error message.
+
+      Use case resumes from step 2.
 
 **Use case: UC04 - Edit a student**
 
