@@ -8,6 +8,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.contax.model.onboarding.OnboardingStep;
+import seedu.contax.model.person.Person;
 import seedu.contax.model.person.UniquePersonList;
 import seedu.contax.ui.PersonListPanel;
 import seedu.contax.ui.UiPart;
@@ -224,7 +225,7 @@ public class OnboardingWindow extends UiPart<Stage> {
     public void processInstructionPosition(int option) {
         switch (option) {
         case 0:
-            instructionLabel.setCenter(stage.heightProperty(), stage.widthProperty());
+            instructionLabel.setCenter(stage.heightProperty(),stage.widthProperty());
             break;
         case 1:
             instructionLabel.translate(menuBar.layoutXProperty(), menuBar.layoutYProperty());
@@ -250,36 +251,67 @@ public class OnboardingWindow extends UiPart<Stage> {
     }
 
     /**
+     * Processes an operation on this window based on the given operation id
+     * <br><br>
+     * Options are as follows:
+     * <br>- 0: close this window and open main window
+     * <br>- 1: add a person
+     *
+     */
+    public void processOperation(int option, Person person) {
+        switch (option) {
+        case 0:
+            mainWindow.show();
+            stage.hide();
+            break;
+        case 1:
+            persons.add(person);
+            break;
+        default:
+            break;
+        }
+    }
+
+    public int enforceUserInput(OnboardingStep step) {
+        if (!commandBox.getText().equals(step.getCommand())) {
+            if (!commandBox.getText().equals("")) {
+                instructionLabel.setText("Please type: " + step.getCommand());
+            }
+            return 0;
+        } else {
+            OnboardingStep s = storyManager.getNextStep();
+            processStep(s);
+            step.setEventType(s.getPositionOption());
+            return 1;
+        }
+    }
+    /**
      * Process the given onboarding step, and translate it to a set of actions taken in this window
      * @param step the OnboardingStep to be processed
      */
     public void processStep(OnboardingStep step) {
-        if (step != null) {
-            instructionLabel.setText(step.getDisplayMessage());
-            instructionLabel.setSize(step.getMessageHeight(),
-                    step.getMessageWidth(), stage.heightProperty(), stage.widthProperty());
-            processOverlayOption(step.getOverlayOption());
-            processHighlightOption(step.getHighlightOption());
-            if (step.getPersonOperation() == 1) {
-                persons.add(step.getPerson());
-            } else if (step.getPersonOperation() == 2) {
-                mainWindow.show();
-                stage.hide();
-            }
-
-            if (step.getCommand() != null) {
-                if (!commandBox.getText().equals(step.getCommand())) {
-                    if (!commandBox.getText().equals("")) {
-                        instructionLabel.setText("Please type: " + step.getCommand());
-                    }
-                    return;
-                } else {
-                    OnboardingStep s = storyManager.getNextStep();
-                    processStep(s);
-                    step.setEventType(s.getPositionOption());
-                }
-            }
-            storyManager.stepFront();
+        if (step == null) {
+            return;
         }
+        String displayMessage = step.getDisplayMessage();
+        double messageHeight = step.getMessageHeight();
+        double messageWidth = step.getMessageWidth();
+        int overlayOption = step.getOverlayOption();
+        int highlightOption = step.getHighlightOption();
+        int operationId = step.getOperationId();
+
+        instructionLabel.setText(displayMessage);
+        instructionLabel.setSize(messageHeight, messageWidth, stage.heightProperty(), stage.widthProperty());
+        processOverlayOption(overlayOption);
+        processHighlightOption(highlightOption);
+        processOperation(operationId, step.getPerson());
+
+        if (step.getCommand() != null) {
+            if (enforceUserInput(step) == 0) {
+                return;
+            }
+        }
+
+        storyManager.stepFront();
     }
 }
