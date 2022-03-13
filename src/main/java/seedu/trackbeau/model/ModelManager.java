@@ -14,26 +14,26 @@ import seedu.trackbeau.commons.core.LogsCenter;
 import seedu.trackbeau.model.customer.Customer;
 
 /**
- * Represents the in-memory model of the trackbeau book data.
+ * Represents the in-memory model of TrackBeau data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final TrackBeau addressBook;
+    private final TrackBeau trackBeau;
     private final UserPrefs userPrefs;
     private final FilteredList<Customer> filteredCustomers;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given trackBeau and userPrefs.
      */
-    public ModelManager(ReadOnlyTrackBeau addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyTrackBeau trackBeau, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(trackBeau, userPrefs);
 
-        logger.fine("Initializing with trackbeau book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with trackBeau: " + trackBeau + " and user prefs " + userPrefs);
 
-        this.addressBook = new TrackBeau(addressBook);
+        this.trackBeau = new TrackBeau(trackBeau);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredCustomers = new FilteredList<>(this.addressBook.getCustomerList());
+        filteredCustomers = new FilteredList<>(this.trackBeau.getCustomerList());
     }
 
     public ModelManager() {
@@ -70,52 +70,52 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setTrackBeauFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setTrackBeauFilePath(addressBookFilePath);
+    public void setTrackBeauFilePath(Path trackBeauFilePath) {
+        requireNonNull(trackBeauFilePath);
+        userPrefs.setTrackBeauFilePath(trackBeauFilePath);
     }
 
     //=========== TrackBeau ================================================================================
 
     @Override
-    public void setTrackBeau(ReadOnlyTrackBeau addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setTrackBeau(ReadOnlyTrackBeau trackBeau) {
+        this.trackBeau.resetData(trackBeau);
     }
 
     @Override
     public ReadOnlyTrackBeau getTrackBeau() {
-        return addressBook;
+        return trackBeau;
     }
 
     @Override
     public boolean hasCustomer(Customer customer) {
         requireNonNull(customer);
-        return addressBook.hasCustomer(customer);
+        return trackBeau.hasCustomer(customer);
     }
 
     @Override
     public void deleteCustomer(Customer target) {
-        addressBook.removePerson(target);
+        trackBeau.removeCustomer(target);
     }
 
     @Override
     public void addCustomer(Customer customer) {
-        addressBook.addCustomer(customer);
-        updateFilteredCustomerList(PREDICATE_SHOW_ALL_PERSONS);
+        trackBeau.addCustomer(customer);
+        updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
     }
 
     @Override
     public void setCustomer(Customer target, Customer editedCustomer) {
         requireAllNonNull(target, editedCustomer);
 
-        addressBook.setCustomer(target, editedCustomer);
+        trackBeau.setCustomer(target, editedCustomer);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Customer List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * Returns an unmodifiable view of the list of {@code Customer} backed by the internal list of
+     * {@code versionedTrackBeau}
      */
     @Override
     public ObservableList<Customer> getFilteredCustomerList() {
@@ -142,7 +142,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return trackBeau.equals(other.trackBeau)
                 && userPrefs.equals(other.userPrefs)
                 && filteredCustomers.equals(other.filteredCustomers);
     }

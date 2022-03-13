@@ -10,7 +10,7 @@ import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SERVICES;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SKINTYPE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_STAFFS;
-import static seedu.trackbeau.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.trackbeau.model.Model.PREDICATE_SHOW_ALL_CUSTOMERS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -33,7 +33,7 @@ import seedu.trackbeau.model.customer.SkinType;
 import seedu.trackbeau.model.tag.Tag;
 
 /**
- * Edits the details of an existing customer in the trackbeau book.
+ * Edits the details of an existing customer in trackBeau.
  */
 public class EditCommand extends Command {
 
@@ -56,23 +56,23 @@ public class EditCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_CUSTOMER_SUCCESS = "Edited Customer: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This customer already exists in the trackbeau book.";
+    public static final String MESSAGE_DUPLICATE_CUSTOMER = "This customer already exists in trackBeau.";
 
     private final Index index;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final EditCustomerDescriptor editCustomerDescriptor;
 
     /**
      * @param index of the customer in the filtered customer list to edit
-     * @param editPersonDescriptor details to edit the customer with
+     * @param editCustomerDescriptor details to edit the customer with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditCommand(Index index, EditCustomerDescriptor editCustomerDescriptor) {
         requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
+        requireNonNull(editCustomerDescriptor);
 
         this.index = index;
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.editCustomerDescriptor = new EditCustomerDescriptor(editCustomerDescriptor);
     }
 
     @Override
@@ -81,37 +81,38 @@ public class EditCommand extends Command {
         List<Customer> lastShownList = model.getFilteredCustomerList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
         }
 
         Customer customerToEdit = lastShownList.get(index.getZeroBased());
-        Customer editedCustomer = createEditedPerson(customerToEdit, editPersonDescriptor);
+        Customer editedCustomer = createEditedCustomer(customerToEdit, editCustomerDescriptor);
 
         if (!customerToEdit.isSameCustomer(editedCustomer) && model.hasCustomer(editedCustomer)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_CUSTOMER);
         }
 
         model.setCustomer(customerToEdit, editedCustomer);
-        model.updateFilteredCustomerList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedCustomer));
+        model.updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
+        return new CommandResult(String.format(MESSAGE_EDIT_CUSTOMER_SUCCESS, editedCustomer));
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Customer} with the details of {@code customerToEdit}
+     * edited with {@code editCustomerDescriptor}.
      */
-    private static Customer createEditedPerson(Customer customerToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Customer createEditedCustomer(Customer customerToEdit,
+                                                 EditCustomerDescriptor editCustomerDescriptor) {
         assert customerToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(customerToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(customerToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(customerToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(customerToEdit.getAddress());
-        SkinType updatedSkinType = editPersonDescriptor.getSkinType().orElse(customerToEdit.getSkinType());
-        HairType updatedHairType = editPersonDescriptor.getHairType().orElse(customerToEdit.getHairType());
-        Set<Tag> updatedStaffs = editPersonDescriptor.getStaffs().orElse(customerToEdit.getStaffs());
-        Set<Tag> updatedServices = editPersonDescriptor.getServices().orElse(customerToEdit.getServices());
-        Set<Tag> updatedAllergies = editPersonDescriptor.getAllergies().orElse(customerToEdit.getAllergies());
+        Name updatedName = editCustomerDescriptor.getName().orElse(customerToEdit.getName());
+        Phone updatedPhone = editCustomerDescriptor.getPhone().orElse(customerToEdit.getPhone());
+        Email updatedEmail = editCustomerDescriptor.getEmail().orElse(customerToEdit.getEmail());
+        Address updatedAddress = editCustomerDescriptor.getAddress().orElse(customerToEdit.getAddress());
+        SkinType updatedSkinType = editCustomerDescriptor.getSkinType().orElse(customerToEdit.getSkinType());
+        HairType updatedHairType = editCustomerDescriptor.getHairType().orElse(customerToEdit.getHairType());
+        Set<Tag> updatedStaffs = editCustomerDescriptor.getStaffs().orElse(customerToEdit.getStaffs());
+        Set<Tag> updatedServices = editCustomerDescriptor.getServices().orElse(customerToEdit.getServices());
+        Set<Tag> updatedAllergies = editCustomerDescriptor.getAllergies().orElse(customerToEdit.getAllergies());
 
         return new Customer(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedSkinType, updatedHairType,
                 updatedStaffs, updatedServices, updatedAllergies);
@@ -132,14 +133,14 @@ public class EditCommand extends Command {
         // state check
         EditCommand e = (EditCommand) other;
         return index.equals(e.index)
-                && editPersonDescriptor.equals(e.editPersonDescriptor);
+                && editCustomerDescriptor.equals(e.editCustomerDescriptor);
     }
 
     /**
      * Stores the details to edit the customer with. Each non-empty field value will replace the
      * corresponding field value of the customer.
      */
-    public static class EditPersonDescriptor {
+    public static class EditCustomerDescriptor {
         private Name name;
         private Phone phone;
         private Email email;
@@ -150,13 +151,13 @@ public class EditCommand extends Command {
         private Set<Tag> services;
         private Set<Tag> allergies;
 
-        public EditPersonDescriptor() {}
+        public EditCustomerDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+        public EditCustomerDescriptor(EditCustomerDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
@@ -281,12 +282,12 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof EditCustomerDescriptor)) {
                 return false;
             }
 
             // state check
-            EditPersonDescriptor e = (EditPersonDescriptor) other;
+            EditCustomerDescriptor e = (EditCustomerDescriptor) other;
 
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())

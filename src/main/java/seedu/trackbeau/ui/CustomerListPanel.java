@@ -18,21 +18,21 @@ public class CustomerListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(CustomerListPanel.class);
 
     @FXML
-    private ListView<Customer> personListView;
+    private ListView<Customer> customerListView;
 
     /**
      * Creates a {@code CustomerListPanel} with the given {@code ObservableList}.
      */
     public CustomerListPanel(ObservableList<Customer> customerList) {
         super(FXML);
-        personListView.setItems(customerList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
+        customerListView.setItems(customerList);
+        customerListView.setCellFactory(listView -> new CustomerListViewCell());
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code CustomerCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Customer} using a {@code CustomerCard}.
      */
-    class PersonListViewCell extends ListCell<Customer> {
+    class CustomerListViewCell extends ListCell<Customer> {
         @Override
         protected void updateItem(Customer customer, boolean empty) {
             super.updateItem(customer, empty);

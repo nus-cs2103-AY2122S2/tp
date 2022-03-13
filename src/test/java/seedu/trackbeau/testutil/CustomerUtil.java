@@ -13,26 +13,26 @@ import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_STAFFS;
 import java.util.Set;
 
 import seedu.trackbeau.logic.commands.AddCommand;
-import seedu.trackbeau.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.trackbeau.logic.commands.EditCommand;
 import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.model.tag.Tag;
 
 /**
- * A utility class for Person.
+ * A utility class for Customer.
  */
-public class PersonUtil {
+public class CustomerUtil {
 
     /**
      * Returns an add command string for adding the {@code customer}.
      */
     public static String getAddCommand(Customer customer) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(customer);
+        return AddCommand.COMMAND_WORD + " " + getCustomerDetails(customer);
     }
 
     /**
      * Returns the part of command string for the given {@code customer}'s details.
      */
-    public static String getPersonDetails(Customer customer) {
+    public static String getCustomerDetails(Customer customer) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + customer.getName().fullName + " ");
         sb.append(PREFIX_PHONE + customer.getPhone().value + " ");
@@ -51,9 +51,9 @@ public class PersonUtil {
     }
 
     /**
-     * Returns the part of command string for the given {@code EditPersonDescriptor}'s details.
+     * Returns the part of command string for the given {@code EditCustomerDescriptor}'s details.
      */
-    public static String getEditPersonDescriptorDetails(EditPersonDescriptor descriptor) {
+    public static String getEditCustomerDescriptorDetails(EditCommand.EditCustomerDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));

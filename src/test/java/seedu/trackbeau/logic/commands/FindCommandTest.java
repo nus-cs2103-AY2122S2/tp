@@ -3,12 +3,12 @@ package seedu.trackbeau.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.trackbeau.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.trackbeau.commons.core.Messages.MESSAGE_CUSTOMERS_LISTED_OVERVIEW;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.trackbeau.testutil.TypicalPersons.CARL;
-import static seedu.trackbeau.testutil.TypicalPersons.ELLE;
-import static seedu.trackbeau.testutil.TypicalPersons.FIONA;
-import static seedu.trackbeau.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.trackbeau.testutil.TypicalCustomers.CARL;
+import static seedu.trackbeau.testutil.TypicalCustomers.ELLE;
+import static seedu.trackbeau.testutil.TypicalCustomers.FIONA;
+import static seedu.trackbeau.testutil.TypicalCustomers.getTypicalTrackBeau;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -24,8 +24,8 @@ import seedu.trackbeau.model.customer.NameContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalTrackBeau(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalTrackBeau(), new UserPrefs());
 
     @Test
     public void equals() {
@@ -55,8 +55,8 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+    public void execute_zeroKeywords_noCustomerFound() {
+        String expectedMessage = String.format(MESSAGE_CUSTOMERS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredCustomerList(predicate);
@@ -65,8 +65,8 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_multipleKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+    public void execute_multipleKeywords_multipleCustomersFound() {
+        String expectedMessage = String.format(MESSAGE_CUSTOMERS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredCustomerList(predicate);

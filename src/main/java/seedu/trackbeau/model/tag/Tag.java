@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.trackbeau.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Tag in the trackbeau book.
+ * Represents a Tag in trackBeau.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
 public class Tag {
