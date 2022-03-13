@@ -7,6 +7,8 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.UniquePersonList;
+import seedu.address.model.interview.Interview;
+import seedu.address.model.interview.UniqueInterviewList;
 
 /**
  * Wraps all data at the address-book level
@@ -15,6 +17,7 @@ import seedu.address.model.applicant.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UniqueInterviewList interviews;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,6 +28,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        interviews = new UniqueInterviewList();
     }
 
     public AddressBook() {}
@@ -92,6 +96,24 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Applicant key) {
         persons.remove(key);
+    }
+
+    //// interview-level operations
+
+    /**
+     * Returns true if an interview that is the same as {@code interview} exists in the address book.
+     */
+    public boolean hasInterview(Interview i) {
+        requireNonNull(i);
+        return interviews.contains(i);
+    }
+
+    /**
+     * Adds an interview to the address book.
+     * The interview must not already exist in the address book.
+     */
+    public void addInterview(Interview i) {
+        interviews.add(i);
     }
 
     //// util methods

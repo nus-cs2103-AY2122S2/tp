@@ -22,6 +22,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.applicant.Applicant;
+import seedu.address.model.interview.Interview;
+import seedu.address.model.position.Position;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddApplicantCommandTest {
@@ -147,9 +149,25 @@ public class AddApplicantCommandTest {
         }
 
         @Override
+        public ObservableList<Position> getFilteredPositionList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredPersonList(Predicate<Applicant> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void addInterview(Interview interview) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasInterview(Interview interview) {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**
