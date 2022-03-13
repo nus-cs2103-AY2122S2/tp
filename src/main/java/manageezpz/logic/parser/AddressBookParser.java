@@ -66,6 +66,9 @@ public class AddressBookParser {
         case AddEventTaskCommand.COMMAND_WORD:
             return new AddEventTaskCommandParser().parse(arguments);
 
+        case AddDeadlineTaskCommand.COMMAND_WORD:
+            return new AddDeadlineTaskCommandParser().parse(arguments);
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

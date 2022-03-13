@@ -2,7 +2,6 @@ package manageezpz.logic.parser;
 
 import static manageezpz.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static manageezpz.logic.parser.CliSyntax.PREFIX_EVENT;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_TIME;
 
 import java.time.LocalTime;
@@ -23,9 +22,9 @@ public class AddEventTaskCommandParser {
      */
     public AddEventTaskCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimapEvent =
-                ArgumentTokenizer.tokenize(args, PREFIX_EVENT, PREFIX_DESCRIPTION, PREFIX_TIME);
+                ArgumentTokenizer.tokenize(args, PREFIX_DESCRIPTION, PREFIX_TIME);
 
-        if (!arePrefixesPresent(argMultimapEvent, PREFIX_EVENT, PREFIX_DESCRIPTION, PREFIX_TIME)
+        if (!arePrefixesPresent(argMultimapEvent, PREFIX_DESCRIPTION, PREFIX_TIME)
                 || !argMultimapEvent.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventTaskCommand.MESSAGE_USAGE));
         }

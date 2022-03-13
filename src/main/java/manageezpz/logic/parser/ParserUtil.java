@@ -80,7 +80,7 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String date} into a {@code Date}.
-     * Supports multiple formatting patterns.
+     * Supports multiple formatted patterns.
      * @param date
      * @return a {@code Date} object.
      * @throws ParseException
