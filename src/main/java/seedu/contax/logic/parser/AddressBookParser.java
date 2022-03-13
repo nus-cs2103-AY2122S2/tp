@@ -94,14 +94,16 @@ public class AddressBookParser {
         case AddTagCommand.COMMAND_WORD:
             return new AddTagCommandParser().parse(arguments);
 
-        case ChainCommand.COMMAND_WORD:
-            return new ChainCommandParser().parse(arguments);
-
         case ListTagCommand.COMMAND_WORD:
             return new ListTagCommand();
 
         case DeleteTagCommand.COMMAND_WORD:
             return new DeleteTagCommandParser().parse(arguments);
+
+        // Command chaining
+        case ChainCommand.COMMAND_WORD:
+            return new ChainCommandParser().parse(arguments);
+
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

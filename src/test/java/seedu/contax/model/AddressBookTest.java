@@ -89,7 +89,8 @@ public class AddressBookTest {
         addressBook.addPerson(BOB);
         addressBook.setPerson(ALICE, CARL);
 
-        AddressBook expectedAddressBook = new AddressBookBuilder().withPerson(CARL).withPerson(BOB).build();
+        AddressBook expectedAddressBook =
+                new AddressBookBuilder().withTag(FRIENDS).withPerson(CARL).withPerson(BOB).build();
         assertEquals(expectedAddressBook, addressBook);
     }
 
@@ -138,15 +139,15 @@ public class AddressBookTest {
         addressBook.addPerson(BOB);
         addressBook.removePerson(ALICE);
 
-        AddressBook expectedAddressBook = new AddressBookBuilder().withPerson(BOB).build();
+        AddressBook expectedAddressBook = new AddressBookBuilder().withTag(FRIENDS).withPerson(BOB).build();
         assertEquals(expectedAddressBook, addressBook);
     }
 
     @Test
     public void equals() {
         AddressBook refAddressBook = new AddressBook();
-        AddressBook addedPersonAddressBook = new AddressBookBuilder().withPerson(ALICE).withTag(FRIENDS).build();
-        AddressBook otherAddressBook = new AddressBookBuilder().withPerson(ALICE).withTag(FRIENDS).build();
+        AddressBook addedPersonAddressBook = new AddressBookBuilder().withPerson(ALICE).build();
+        AddressBook otherAddressBook = new AddressBookBuilder().withPerson(ALICE).build();
 
         assertTrue(refAddressBook.equals(new AddressBook()));
         assertTrue(refAddressBook.equals(refAddressBook));
@@ -160,8 +161,8 @@ public class AddressBookTest {
     @Test
     public void hashCodeTest() {
         AddressBook refAddressBook = new AddressBook();
-        AddressBook addedPersonAddressBook = new AddressBookBuilder().withPerson(ALICE).withTag(FRIENDS).build();
-        AddressBook otherAddressBook = new AddressBookBuilder().withPerson(ALICE).withTag(FRIENDS).build();
+        AddressBook addedPersonAddressBook = new AddressBookBuilder().withPerson(ALICE).build();
+        AddressBook otherAddressBook = new AddressBookBuilder().withPerson(ALICE).build();
 
         assertEquals(refAddressBook.hashCode(), (new AddressBook()).hashCode());
         assertEquals(refAddressBook.hashCode(), refAddressBook.hashCode());

@@ -1,5 +1,7 @@
 package seedu.contax.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.contax.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.contax.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.contax.testutil.TypicalPersons.getTypicalAddressBook;
@@ -67,5 +69,18 @@ public class DeleteTagCommandTest {
         expectedModel.deleteTag(tagToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void equals() {
+        DeleteTagCommand deleteCommand = new DeleteTagCommand(Index.fromZeroBased(0));
+        DeleteTagCommand deleteCommand2 = new DeleteTagCommand(Index.fromZeroBased(1));
+
+        assertTrue(deleteCommand.equals(deleteCommand));
+        assertTrue(deleteCommand.equals(new DeleteTagCommand(Index.fromZeroBased(0))));
+
+        assertFalse(deleteCommand.equals(deleteCommand2));
+        assertFalse(deleteCommand.equals(null));
+        assertFalse(deleteCommand.equals(0));
     }
 }
