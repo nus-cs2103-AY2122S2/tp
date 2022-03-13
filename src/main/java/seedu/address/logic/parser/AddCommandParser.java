@@ -39,19 +39,19 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_AGE,
-                        PREFIX_HEIGHT, PREFIX_JERSEYNUMBER, PREFIX_TAG, PREFIX_WEIGHT);
+                        PREFIX_HEIGHT, PREFIX_JERSEY_NUMBER, PREFIX_TAG, PREFIX_WEIGHT);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_AGE,
-                PREFIX_JERSEYNUMBER, PREFIX_HEIGHT, PREFIX_WEIGHT)
+                PREFIX_JERSEY_NUMBER, PREFIX_HEIGHT, PREFIX_WEIGHT)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Age age = ParserUtil.parseName(argMultimap.getValue(PREFIX_AGE).get());
-        JerseyNumber jerseyNumber = ParserUtil.parseName(argMultimap.getValue(PREFIX_JERSEY_NUMBER).get());
-        Weight weight = ParserUtil.parseName(argMultimap.getValue(PREFIX_WEIGHT).get());
-        Height height = ParserUtil.parseName(argMultimap.getValue(PREFIX_HEIGHT).get());
+        Age age = ParserUtil.parseAge(argMultimap.getValue(PREFIX_AGE).get());
+        JerseyNumber jerseyNumber = ParserUtil.parseNumber(argMultimap.getValue(PREFIX_JERSEY_NUMBER).get());
+        Weight weight = ParserUtil.parseWeight(argMultimap.getValue(PREFIX_WEIGHT).get());
+        Height height = ParserUtil.parseHeight(argMultimap.getValue(PREFIX_HEIGHT).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));

@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_JERSEYNUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JERSEY_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;

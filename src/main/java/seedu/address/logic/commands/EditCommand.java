@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_JERSEYNUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JERSEY_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -49,7 +49,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_AGE + "AGE] "
             + "[" + PREFIX_HEIGHT + "HEIGHT] "
             + "[" + PREFIX_WEIGHT + "WEIGHT] "
-            + "[" + PREFIX_JERSEYNUMBER + "JERSEYNUMBER] "
+            + "[" + PREFIX_JERSEY_NUMBER + "JERSEY_NUMBER] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
