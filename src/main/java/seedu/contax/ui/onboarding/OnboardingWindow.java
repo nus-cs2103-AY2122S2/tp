@@ -80,6 +80,17 @@ public class OnboardingWindow extends UiPart<Stage> {
     }
 
     /**
+     * Hides this window
+     */
+    public void hide() {
+        storyManager.reset();
+        processStep(storyManager.start());
+        clearPersonList();
+        mainWindow.show();
+        stage.hide();
+    }
+
+    /**
      * Set this window size to the given height and width.
      * @param height height to set to
      * @param width width to set to
@@ -108,6 +119,13 @@ public class OnboardingWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(persons.asUnmodifiableObservableList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    private void clearPersonList() {
+        persons = new UniquePersonList();
+        personListPanelPlaceholder.getChildren().remove(0);
+        personListPanel = new PersonListPanel(persons.asUnmodifiableObservableList());
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
     }
 
     /**
@@ -261,8 +279,7 @@ public class OnboardingWindow extends UiPart<Stage> {
     private void processOperation(int option, Person person) {
         switch (option) {
         case 0:
-            mainWindow.show();
-            stage.hide();
+            hide();
             break;
         case 1:
             persons.add(person);

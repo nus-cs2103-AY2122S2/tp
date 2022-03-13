@@ -84,6 +84,11 @@ public class OnboardingStoryManager {
         return story.getStep(currStep);
     }
 
+    public void reset() {
+        currStep = 0;
+        createStories();
+    }
+
     /**
      * Handler for mouse click event.
      * @return Returns the OnboardingStep object at the current step
