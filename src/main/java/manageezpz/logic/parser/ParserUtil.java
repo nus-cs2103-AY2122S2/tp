@@ -2,6 +2,8 @@ package manageezpz.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,10 +11,7 @@ import java.util.Set;
 import manageezpz.commons.core.index.Index;
 import manageezpz.commons.util.StringUtil;
 import manageezpz.logic.parser.exceptions.ParseException;
-import manageezpz.model.person.Address;
-import manageezpz.model.person.Email;
-import manageezpz.model.person.Name;
-import manageezpz.model.person.Phone;
+import manageezpz.model.person.*;
 import manageezpz.model.tag.Tag;
 
 /**
@@ -93,6 +92,33 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String date} into a {@code Date}.
+     * Supports multiple formatting patterns.
+     * @param date
+     * @return a {@code Date} object.
+     * @throws ParseException
+     */
+
+    public static Date parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        //@@author vishandi-reused
+        //Reused from https://github.com/vishandi/ip/blob/master/src/main/java/parser/Parser.java
+        //with minor modifications
+        String[] patterns = {"yyyy-MM-dd", "yyyy/MM/dd", "yyyy MMM dd", "dd MMM yyyy", "dd-MM-yyyy", "dd/MM/yyyy"};
+        for (String pattern : patterns) {
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+                LocalDate parsedDate = LocalDate.parse(date, formatter);
+                return new Date(parsedDate);
+            } catch (Exception e) {
+                throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+            }
+        }
+        throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        //@@author vishandi
     }
 
     /**
