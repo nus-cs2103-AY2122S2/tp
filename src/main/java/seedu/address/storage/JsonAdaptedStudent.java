@@ -10,8 +10,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
+import seedu.address.model.student.EnrolledLessons;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
@@ -29,6 +31,7 @@ class JsonAdaptedStudent {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final List<JsonAdaptedLesson> enrolledLessons = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedStudent} with the given student details.
@@ -36,13 +39,17 @@ class JsonAdaptedStudent {
     @JsonCreator
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+            @JsonProperty("enrolledLessons") List<JsonAdaptedLesson> enrolledLessons) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         if (tagged != null) {
             this.tagged.addAll(tagged);
+        }
+        if (enrolledLessons != null) {
+            this.enrolledLessons.addAll(enrolledLessons);
         }
     }
 
@@ -56,6 +63,11 @@ class JsonAdaptedStudent {
         address = source.getAddress().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
+                .collect(Collectors.toList()));
+        enrolledLessons.addAll(source.getEnrolledLessons()
+                .getLessonsList()
+                .stream()
+                .map(JsonAdaptedLesson::new)
                 .collect(Collectors.toList()));
     }
 
@@ -103,7 +115,12 @@ class JsonAdaptedStudent {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(studentTags);
-        return new Student(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        List<Lesson> lessons = new ArrayList<>();
+        for (JsonAdaptedLesson jsonAdaptedLesson : enrolledLessons) {
+            lessons.add(jsonAdaptedLesson.toModelType());
+        }
+        final EnrolledLessons modelEnrolledLessons = new EnrolledLessons(lessons);
+        return new Student(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelEnrolledLessons);
     }
 
 }

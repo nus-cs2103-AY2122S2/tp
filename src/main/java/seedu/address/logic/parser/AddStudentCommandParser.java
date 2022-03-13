@@ -14,6 +14,7 @@ import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
+import seedu.address.model.student.EnrolledLessons;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
@@ -47,7 +48,6 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
                 ? ParserUtil.parseAddress(argMultimap.getValue(PREFIX_STUDENT_ADDRESS).get())
                 : Address.EMPTY_ADDRESS;
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_STUDENT_TAG));
-
 
         Student student = new Student(name, phone, email, address, tagList);
 

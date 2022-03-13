@@ -142,13 +142,13 @@ public class ModelManager implements Model {
     @Override
     public void addLesson(Lesson lesson) {
         lessonBook.addLesson(lesson);
-        updateFilteredStudentList(PREDICATE_SHOW_ALL_LESSONS);
+        updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
     }
 
     @Override
     public void deleteLesson(Lesson lesson) {
         lessonBook.deleteLesson(lesson);
-        updateFilteredStudentList(PREDICATE_SHOW_ALL_LESSONS);
+        updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
     }
 
     //=========== Filtered Student List Accessors =============================================================
@@ -205,7 +205,11 @@ public class ModelManager implements Model {
     }
 
     // TODO: add the remaining functions for LessonList too
-
+    @Override
+    public void updateBothLists() {
+        updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
+        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+    }
 
     //=========== Selected Student and Lesson Accessors and Setter ============================================
 

@@ -48,6 +48,7 @@ public class AssignCommand extends Command {
         Lesson lesson = model.getFilteredLessonList().get(lessonIndex.getZeroBased());
         Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
         model.setSelectedStudent(student);
+        model.updateBothLists();
         if (!assign(student, lesson)) {
             throw new CommandException(String.format(MESSAGE_ALREADY_ENROLLED, student.getName(), lesson.getName()));
         }

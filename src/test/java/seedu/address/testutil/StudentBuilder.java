@@ -1,10 +1,14 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
+import seedu.address.model.student.EnrolledLessons;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
@@ -26,6 +30,7 @@ public class StudentBuilder {
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private EnrolledLessons enrolledLessons;
 
     /**
      * Creates a {@code StudentBuilder} with the default details.
@@ -36,6 +41,7 @@ public class StudentBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        enrolledLessons = new EnrolledLessons();
     }
 
     /**
@@ -47,6 +53,7 @@ public class StudentBuilder {
         email = studentToCopy.getEmail();
         address = studentToCopy.getAddress();
         tags = new HashSet<>(studentToCopy.getTags());
+        enrolledLessons = studentToCopy.getEnrolledLessons();
     }
 
     /**
@@ -62,6 +69,11 @@ public class StudentBuilder {
      */
     public StudentBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    public StudentBuilder withLessons(Lesson... lessons) {
+        this.enrolledLessons = new EnrolledLessons(Arrays.asList(SampleDataUtil.getSampleLessons()));
         return this;
     }
 

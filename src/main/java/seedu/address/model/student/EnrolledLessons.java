@@ -14,6 +14,10 @@ public class EnrolledLessons {
         lessonsList = new ArrayList<>();
     }
 
+    public EnrolledLessons(List<Lesson> enrolledLessons) {
+        lessonsList = enrolledLessons;
+    }
+
     public List<Lesson> getLessonsList() {
         return this.lessonsList;
     }
