@@ -288,6 +288,8 @@ public class OnboardingWindow extends UiPart<Stage> {
         case 1:
             persons.add(person);
             break;
+        case 2:
+            persons.remove(person);
         default:
             break;
         }
