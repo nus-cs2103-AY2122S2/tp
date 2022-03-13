@@ -57,9 +57,9 @@ public class ImportCsvCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         //process file
         try {
-            CsvManager manager = new CsvManager(model, (integer, strings) -> {
+            CsvManager manager = new CsvManager(model, (currentLineNumber, importedPerson) -> {
                 try {
-                    Person toAddPerson = personParser(strings);
+                    Person toAddPerson = personParser(importedPerson);
                     model.addPerson(toAddPerson);
                     Set<Tag> tags = toAddPerson.getTags();
                     for (Tag tag : tags) {
@@ -97,10 +97,10 @@ public class ImportCsvCommand extends Command {
                     skippedLinesString += ", ";
                 }
             }
-            return new CommandResult(String.format("%s\n%s", ImportCsvCommand.MESSAGE_SUCCESS,
-                    String.format(ImportCsvCommand.MESSAGE_SKIPPED_LINES, skippedLinesString)));
+            return new CommandResult(String.format("%s\n%s", MESSAGE_SUCCESS,
+                    String.format(MESSAGE_SKIPPED_LINES, skippedLinesString)));
         } else {
-            return new CommandResult(ImportCsvCommand.MESSAGE_SUCCESS);
+            return new CommandResult(MESSAGE_SUCCESS);
         }
     }
 

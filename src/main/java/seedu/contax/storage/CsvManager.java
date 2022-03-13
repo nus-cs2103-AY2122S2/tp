@@ -45,6 +45,7 @@ public class CsvManager {
                 skippedLines.add(lineCounter);
             }
         }
+        importedCsv.close();
         return skippedLines;
     }
 }
