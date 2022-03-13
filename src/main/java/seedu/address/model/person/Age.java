@@ -32,7 +32,7 @@ public class Age {
             return false;
         }
 
-        if (age < 0 || age >= 100) {
+        if (age < 0 || age > 100) {
             return false;
         }
 
