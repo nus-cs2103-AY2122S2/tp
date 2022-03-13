@@ -6,11 +6,12 @@ package seedu.address.model.person;
  */
 public class Weight {
 
-    private String weight;
     public static final String MESSAGE_CONSTRAINTS = "Weights should be of the format local-part@domain "
             + "and adhere to the following constraints:\n"
             + "1. The local-part should only contain numeric characters.\n"
             + "2. Weight should be between 0 and 400 (inclusive).\n";
+
+    private String weight;
 
     /**
      * Constructs a {@code Weight}.
@@ -23,6 +24,9 @@ public class Weight {
         this.weight = weight;
     }
 
+    /**
+     * Checks if the given weight is valid.
+     */
     public static boolean isValidWeight(String weightString) {
         int weight = -1;
 

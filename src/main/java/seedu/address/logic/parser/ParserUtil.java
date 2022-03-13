@@ -89,14 +89,12 @@ public class ParserUtil {
      * Parses a {@code String age} into an {@code Age}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @param age
-     * @return
      * @throws ParseException
      */
     public static Age parseAge(String age) throws ParseException {
         requireNonNull(age);
         String trimmedAge = age.trim();
-        if (!Age.isValidAge()) {
+        if (!Age.isValidAge(age)) {
             throw new ParseException(Age.MESSAGE_CONSTRAINTS);
         }
         return new Age(trimmedAge);
@@ -121,14 +119,12 @@ public class ParserUtil {
      * Parses a {@code String height} into an {@code Height}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @param height
-     * @return
      * @throws ParseException
      */
     public static Height parseHeight(String height) throws ParseException {
         requireNonNull(height);
         String trimmedHeight = height.trim();
-        if (!Height.isValidHeight()) {
+        if (!Height.isValidHeight(height)) {
             throw new ParseException(Height.MESSAGE_CONSTRAINTS);
         }
         return new Height(trimmedHeight);
@@ -138,14 +134,12 @@ public class ParserUtil {
      * Parses a {@code String weight} into an {@code Weight}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @param weight
-     * @return
      * @throws ParseException
      */
     public static Weight parseWeight(String weight) throws ParseException {
         requireNonNull(weight);
-        String trimmedHeight = weight.trim();
-        if (!Weight.isValidWeight()) {
+        String trimmedWeight = weight.trim();
+        if (!Weight.isValidWeight(weight)) {
             throw new ParseException(Weight.MESSAGE_CONSTRAINTS);
         }
         return new Weight(trimmedWeight);
@@ -155,14 +149,12 @@ public class ParserUtil {
      * Parses a {@code String jerseyNumber} into an {@code JerseyNumber}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @param jerseyNumber
-     * @return
      * @throws ParseException
      */
     public static JerseyNumber parseJerseyNumber(String jerseyNumber) throws ParseException {
         requireNonNull(jerseyNumber);
-        String trimmedHeight = jerseyNumber.trim();
-        if (!JerseyNumber.isValidJerseyNumber()) {
+        String trimmedJerseyNumber = jerseyNumber.trim();
+        if (!JerseyNumber.isValidJerseyNumber(trimmedJerseyNumber)) {
             throw new ParseException(JerseyNumber.MESSAGE_CONSTRAINTS);
         }
         return new JerseyNumber(trimmedJerseyNumber);

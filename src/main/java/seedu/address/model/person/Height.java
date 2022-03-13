@@ -6,11 +6,12 @@ package seedu.address.model.person;
  */
 public class Height {
 
-    private String height;
     public static final String MESSAGE_CONSTRAINTS = "Heights should be of the format local-part@domain "
             + "and adhere to the following constraints:\n"
             + "1. The local-part should only contain numeric characters.\n"
             + "2. Height should be between 0 and 300 (inclusive).\n";
+
+    private String height;
 
     /**
      * Constructs a {@code Height}.
@@ -23,6 +24,12 @@ public class Height {
         this.height = height;
     }
 
+    /**
+     * Checks if the given height is valid.
+     *
+     * @param heightString Input height.
+     * @return True if the height is valid.
+     */
     public static boolean isValidHeight(String heightString) {
         int height = -1;
 

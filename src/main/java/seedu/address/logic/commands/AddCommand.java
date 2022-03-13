@@ -28,7 +28,7 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_AGE + "AGE "
             + PREFIX_HEIGHT + "HEIGHT "
-            + PREFIX_JERSEYNUMBER + "JERSEYNUMBER "
+            + PREFIX_JERSEY_NUMBER + "JERSEYNUMBER "
             + PREFIX_WEIGHT + "WEIGHT "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
@@ -37,7 +37,7 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_AGE + "23 "
             + PREFIX_HEIGHT + "180 "
-            + PREFIX_JERSEYNUMBER + "23 "
+            + PREFIX_JERSEY_NUMBER + "23 "
             + PREFIX_WEIGHT + "80 "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";

@@ -6,11 +6,12 @@ package seedu.address.model.person;
  */
 public class JerseyNumber {
 
-    private String jerseyNumber;
     public static final String MESSAGE_CONSTRAINTS = "Jersey numbers should be of the format local-part@domain "
             + "and adhere to the following constraints:\n"
             + "1. The local-part should only contain numeric characters.\n"
             + "2. Jersey number should be between 0 and 100 (inclusive).\n";
+
+    private String jerseyNumber;
 
     /**
      * Constructs a {@code JerseyNumber}.
@@ -23,6 +24,9 @@ public class JerseyNumber {
         this.jerseyNumber = jerseryNumber;
     }
 
+    /**
+     * Checks if the given jersey number is valid.
+     */
     public static boolean isValidJerseyNumber(String jerseyNumberString) {
         int jerseyNumber = -1;
 
