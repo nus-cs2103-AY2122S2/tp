@@ -84,7 +84,7 @@ class JsonAdaptedPerson {
         final Name modelName = new Name(name);
 
         if (nric == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Nric.class.getSimpleName()));
         }
         if (!Nric.isValidNric(nric)) {
             throw new IllegalValueException(Nric.MESSAGE_CONSTRAINTS);
