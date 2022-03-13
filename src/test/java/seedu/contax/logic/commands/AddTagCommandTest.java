@@ -56,7 +56,7 @@ class AddTagCommandTest {
         AddTagCommand addCommand = new AddTagCommand(FRIENDS);
         AddTagCommand addCommand2 = new AddTagCommand(COLLEAGUES);
 
-        assertTrue(addCommand.equals(addCommand2));
+        assertTrue(addCommand.equals(addCommand));
         assertTrue(addCommand.equals(new AddTagCommand(FRIENDS)));
 
         assertFalse(addCommand.equals(addCommand2));
