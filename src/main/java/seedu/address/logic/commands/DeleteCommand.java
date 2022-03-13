@@ -79,8 +79,21 @@ public class DeleteCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof DeleteCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteCommand) other).targetIndex)); // state check
+        if (other == this) { // short circuit if same object
+            return true;
+        } else {
+            boolean isInstanceOf = other instanceof DeleteCommand;
+            if (!isInstanceOf) { // instanceof handles nulls
+                return false;
+            }
+            DeleteCommand commandToCompare = (DeleteCommand) other;
+            if (this.targetId == null && this.targetIndex != null) { // only targetIndex present
+                return targetIndex.equals(commandToCompare.targetIndex); // state check
+            } else if (this.targetIndex == null && this.targetId != null) { // only targetId present
+                return targetId.equals(commandToCompare.targetId); // state check
+            } else {
+                return false;
+            }
+        }
     }
 }
