@@ -212,6 +212,11 @@ If your changes to the data file makes its format invalid, HackNet will discard 
 
 _Details coming soon ..._
 
+### Future updates
+
+Input validation for skills
+update skills 
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
