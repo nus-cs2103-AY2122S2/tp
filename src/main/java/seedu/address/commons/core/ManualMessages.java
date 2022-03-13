@@ -49,12 +49,11 @@ public class ManualMessages {
             + "Format : exit \n"
             + "Example: exit";
 
-    /* These commands have yet to be implemented. Will add them back once commands have been implemented.
-
     public static final String MANUAL_MESSAGE_TASK_COMMAND = "Displays all the tasks that are allocated to a "
             + "particular student. \n"
             + "Format: task i/STUDENT_ID \n"
             + "Example: task i/A6942069R";
+    /* These commands have yet to be implemented. Will add them back once commands have been implemented.
 
     public static final String MANUAL_MESSAGE_MARK_COMMAND = "Marks a specific undone task as done for a particular "
             + "student. \n"
