@@ -103,11 +103,9 @@ public class OnboardingWindow extends UiPart<Stage> {
      */
     public void fillInner() {
         labelPlaceholder.getChildren().add(overlay.getRoot());
-
         labelPlaceholder.getChildren().add(instructionLabel.getRoot());
         personListPanel = new PersonListPanel(persons.asUnmodifiableObservableList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
-
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
