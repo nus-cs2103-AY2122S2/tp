@@ -62,6 +62,7 @@ public class OnboardingWindow extends UiPart<Stage> {
         this.instructionLabel = new OnboardingInstruction();
         this.storyManager = new OnboardingStoryManager();
         this.persons = new UniquePersonList();
+        fillInner();
         initStoryManager(storyManager);
     }
 
@@ -73,7 +74,6 @@ public class OnboardingWindow extends UiPart<Stage> {
      * Shows this window
      */
     public void show() {
-        fillInner();
         getRoot().show();
         getRoot().centerOnScreen();
         processInstructionPosition(0);
