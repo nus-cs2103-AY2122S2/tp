@@ -6,7 +6,8 @@ import java.util.List;
 import seedu.address.model.person.Person;
 
 /**
- * Tests all of a {@code Person}'s fields to match the respective fields keywords given.
+ * Tests all of a {@code Person}'s fields to match the respective keywords in {@code FieldContainsKeywordsPredicate}
+ * in the predicates list
  */
 public class CombineContainsKeywordsPredicate extends FieldContainsKeywordsPredicate {
     private final List<FieldContainsKeywordsPredicate> predicates;

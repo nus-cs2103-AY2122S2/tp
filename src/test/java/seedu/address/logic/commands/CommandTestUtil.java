@@ -18,8 +18,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -42,10 +42,10 @@ public class CommandTestUtil {
 
     public static final String NAME_FIND_ALICE_BOB = " " + PREFIX_NAME + "Alice Bob";
     public static final String NAME_FIND_ALICE_BOB_WHITESPACE = " " + PREFIX_NAME + "  \n Alice \n \t Bob  \t";
-    public static final String MULTIPLE_FIELDS_FIND = " " + PREFIX_NAME + "Alice Bob" + " " +
-            PREFIX_ADDRESS + "Jurong Clementi";
-    public static final String MULTIPLE_FIELDS_FIND_WHITESPACE = " " + PREFIX_NAME + "\n Alice \n \t Bob \t" +
-            " " + PREFIX_ADDRESS + " \n Jurong \n \t Clementi   \t";
+    public static final String MULTIPLE_FIELDS_FIND = " " + PREFIX_NAME + "Alice Bob"
+            + " " + PREFIX_ADDRESS + "Jurong Clementi";
+    public static final String MULTIPLE_FIELDS_FIND_WHITESPACE = " " + PREFIX_NAME + "\n Alice \n \t Bob \t"
+            + " " + PREFIX_ADDRESS + " \n Jurong \n \t Clementi   \t";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;

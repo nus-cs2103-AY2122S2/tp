@@ -134,7 +134,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_multipleKeywords_multipleFields_multiplePersonsFound() {
+    public void execute_multipleKeywords_multipleFieldsMultiplePersonsFound() {
         PredicatesListBuilder predicatesListBuilder = new PredicatesListBuilder();
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate namePredicate = prepareNamePredicate("Kurz Elle Kunz");

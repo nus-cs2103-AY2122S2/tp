@@ -1,14 +1,14 @@
 package seedu.address.testutil;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
+import seedu.address.model.person.predicates.AddressContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.FieldContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.InsurancePackageContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.PhoneContainsKeywordsPredicate;
-import seedu.address.model.person.predicates.EmailContainsKeywordsPredicate;
-import seedu.address.model.person.predicates.InsurancePackageContainsKeywordsPredicate;
-import seedu.address.model.person.predicates.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.TagsContainsKeywordsPredicate;
 
 /**
@@ -25,8 +25,8 @@ public class PredicatesListBuilder {
      * Adds the {@code NameContainsKeywordsPredicate} of the {@code List} that we are building.
      */
     public PredicatesListBuilder addNamePredicate(NameContainsKeywordsPredicate namePredicate) {
-         predicatesList.add(namePredicate);
-         return this;
+        predicatesList.add(namePredicate);
+        return this;
     }
     /**
      * Adds the {@code PhoneContainsKeywordsPredicate} of the {@code List} that we are building.

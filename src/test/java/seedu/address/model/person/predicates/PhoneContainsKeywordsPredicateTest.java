@@ -48,8 +48,8 @@ public class PhoneContainsKeywordsPredicateTest {
 
         // Multiple keywords
         predicate = new PhoneContainsKeywordsPredicate(Arrays.asList("94351253", "22222222"));
-        assertTrue(predicate.test(new PersonBuilder().withPhone("94351253").build()) &&
-                predicate.test(new PersonBuilder().withPhone("22222222").build()));
+        assertTrue(predicate.test(new PersonBuilder().withPhone("94351253").build())
+                && predicate.test(new PersonBuilder().withPhone("22222222").build()));
     }
 
     @Test

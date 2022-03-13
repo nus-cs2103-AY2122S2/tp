@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.FindCommand.FindPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.predicates.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.CombineContainsKeywordsPredicate;
@@ -31,7 +30,7 @@ import seedu.address.model.person.predicates.TagsContainsKeywordsPredicate;
 public class FindCommandParser implements Parser<FindCommand> {
 
     /**
-     * Parses the given {@code String} of fields and arguments in the context of the FindCommand
+     * Parses the given {@code String} of prefixes and arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */

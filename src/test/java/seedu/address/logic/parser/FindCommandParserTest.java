@@ -1,22 +1,22 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.MULTIPLE_FIELDS_FIND_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.MULTIPLE_FIELDS_FIND;
+import static seedu.address.logic.commands.CommandTestUtil.MULTIPLE_FIELDS_FIND_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_FIND_ALICE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_FIND_ALICE_BOB_WHITESPACE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
-import java.util.List;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.model.person.predicates.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.CombineContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
-import seedu.address.model.person.predicates.AddressContainsKeywordsPredicate;
 import seedu.address.testutil.PredicatesListBuilder;
 
 public class FindCommandParserTest {
