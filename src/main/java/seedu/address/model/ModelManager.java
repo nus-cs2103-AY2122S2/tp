@@ -111,11 +111,11 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedApplicant);
     }
 
-//    @Override
-//    public boolean hasInterview(Interview interview) {
-//        requireNonNull(interview);
-//        return addressBook.hasInterview(interview);
-//    }
+    //    @Override
+    //    public boolean hasInterview(Interview interview) {
+    //        requireNonNull(interview);
+    //        return addressBook.hasInterview(interview);
+    //    }
 
     //=========== Filtered Applicant List Accessors =============================================================
 

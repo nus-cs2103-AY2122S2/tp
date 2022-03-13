@@ -6,11 +6,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
 
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.add.AddApplicantCommand;
 import seedu.address.logic.commands.add.AddCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.applicant.Applicant;
 import seedu.address.model.interview.Interview;
 
 public class AddInterviewCommand extends AddCommand {
@@ -38,11 +36,10 @@ public class AddInterviewCommand extends AddCommand {
         requireNonNull(model);
 
         // TODO: Check duplicated persons
-//        if (model.hasPerson(toAdd)) {
-//            throw new CommandException(MESSAGE_DUPLICATE_INTERVIEW);
-//        }
-
-        //model.addInterview(toAdd);
+        // if (model.hasPerson(toAdd)) {
+        //   throw new CommandException(MESSAGE_DUPLICATE_INTERVIEW);
+        // }
+        // model.addInterview(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
