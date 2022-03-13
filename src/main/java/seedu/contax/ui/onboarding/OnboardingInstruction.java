@@ -20,7 +20,6 @@ public class OnboardingInstruction extends UiPart<Region> {
      */
     public OnboardingInstruction() {
         super(FXML);
-        instruction.setStyle("-fx-background-color: rgba(25, 25, 25, 1)");
     }
 
     public void show() {

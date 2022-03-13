@@ -49,7 +49,6 @@ The rest of the App consists of four components.
 * [**`Model`**](#model-component): Holds the data of the App in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
-
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
@@ -116,13 +115,15 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S2-CS2103-W17-1/tp/tree/master/src/main/java/seedu/contax/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="600" />
 
 
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the schedule data i.e., all `Appointment` objects (which are contained in a `DisjointAppointmentList` object).
+* store the tag data i.e., all `Tag` objects (which are contained in a `UniqueTagList` object).
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -147,6 +148,22 @@ The `Storage` component,
 ### Common classes
 
 Classes used by multiple components are in the `seedu.contax.commons` package.
+
+### AddressBook and Schedule Subsystems
+
+Departing from the 4-component architectural view of the system, the App can also be logically partitioned into 3 distinct subsystems based on functionality.
+These subsystems are namely the:
+
+* Address Book Subsystem
+* Schedule Subsystem
+* Command Parsing, Processing and Display Subsystem
+
+<img src="images/FunctionalSubsystemDiagram.png" width="600" />
+
+Functionally, the Address Book and Schedule subsystem are near identical copies of each other, with the exception being the type of data being managed and the
+logic specific to each type of data. They serve the the same purpose of storing and managing data related to Contacts and Appointments respectively, and are hence structured similarly across the 4 architectural components, with similar flows for equivalent operations (E.g. `deletePerson` and `deleteAppointment`).
+
+As such, the detailed descriptions for the Address Book subsystem above can be translated to equivalents for the Schedule subsystem.
 
 --------------------------------------------------------------------------------------------------------------------
 

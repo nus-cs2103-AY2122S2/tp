@@ -9,10 +9,12 @@ import java.util.regex.Pattern;
 import seedu.contax.logic.commands.AddAppointmentCommand;
 import seedu.contax.logic.commands.AddCommand;
 import seedu.contax.logic.commands.AddTagCommand;
+import seedu.contax.logic.commands.ChainCommand;
 import seedu.contax.logic.commands.ClearCommand;
 import seedu.contax.logic.commands.Command;
 import seedu.contax.logic.commands.DeleteAppointmentCommand;
 import seedu.contax.logic.commands.DeleteCommand;
+import seedu.contax.logic.commands.DeleteTagCommand;
 import seedu.contax.logic.commands.EditCommand;
 import seedu.contax.logic.commands.ExitCommand;
 import seedu.contax.logic.commands.FindCommand;
@@ -92,8 +94,14 @@ public class AddressBookParser {
         case AddTagCommand.COMMAND_WORD:
             return new AddTagCommandParser().parse(arguments);
 
+        case ChainCommand.COMMAND_WORD:
+            return new ChainCommandParser().parse(arguments);
+
         case ListTagCommand.COMMAND_WORD:
             return new ListTagCommand();
+
+        case DeleteTagCommand.COMMAND_WORD:
+            return new DeleteTagCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
