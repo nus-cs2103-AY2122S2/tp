@@ -18,7 +18,7 @@ public class PredicatesListBuilder {
     private final List<FieldContainsKeywordsPredicate> predicatesList;
 
     public PredicatesListBuilder() {
-        this.predicatesList = new ArrayList<>();
+        predicatesList = new ArrayList<>();
     }
 
     /**
