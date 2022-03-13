@@ -12,7 +12,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.add.AddApplicantCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
@@ -29,23 +29,23 @@ import seedu.address.model.applicant.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new AddApplicantCommand object
  */
-public class AddApplicantCommandParser implements Parser<AddCommand> {
+public class AddApplicantCommandParser implements Parser<AddApplicantCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddApplicantCommand
      * and returns an AddApplicantCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AddCommand parse(String args) throws ParseException {
+    public AddApplicantCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_AGE, PREFIX_ADDRESS,
                         PREFIX_GENDER, PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddApplicantCommand.MESSAGE_USAGE));
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
@@ -58,7 +58,7 @@ public class AddApplicantCommandParser implements Parser<AddCommand> {
 
         Applicant applicant = new Applicant(name, phone, email, age, address, gender, tagList);
 
-        return new AddCommand(applicant);
+        return new AddApplicantCommand(applicant);
     }
 
     /**

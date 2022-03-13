@@ -4,7 +4,7 @@ import static seedu.address.commons.core.TypeFlags.FLAG_APPLICANT;
 import static seedu.address.commons.core.TypeFlags.FLAG_INTERVIEW;
 import static seedu.address.commons.core.TypeFlags.FLAG_POSITION;
 
-import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.delete.DeleteCommand;
 import seedu.address.logic.parser.applicants.DeleteApplicantCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -14,9 +14,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class DeleteCommandParser implements Parser<DeleteCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the DeleteCommand,
+     * Parses the given {@code String} of arguments in the context of the DeleteApplicantCommand,
      * calls the respective DeleteXCommandParsers according to the flag specified
-     * and returns an DeleteCommand object for execution.
+     * and returns an DeleteApplicantCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteCommand parse(String args) throws ParseException {
