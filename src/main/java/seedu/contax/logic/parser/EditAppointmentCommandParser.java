@@ -23,7 +23,7 @@ import seedu.contax.logic.parser.exceptions.ParseException;
  */
 public class EditAppointmentCommandParser implements Parser<EditAppointmentCommand> {
 
-    public static String KEYWORD_REMOVE_PERSON = "none";
+    public static final String KEYWORD_REMOVE_PERSON = "none";
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditAppointmentCommand
@@ -33,7 +33,7 @@ public class EditAppointmentCommandParser implements Parser<EditAppointmentComma
     public EditAppointmentCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATE,
-                PREFIX_TIME, PREFIX_DURATION,PREFIX_PERSON);
+                PREFIX_TIME, PREFIX_DURATION, PREFIX_PERSON);
 
         Index index;
 
