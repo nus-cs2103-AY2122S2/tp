@@ -19,9 +19,6 @@ public class PersonListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
 
     @FXML
-    private Label currentlyDisplaying;
-
-    @FXML
     private ListView<Applicant> personListView;
 
     /**
@@ -29,7 +26,6 @@ public class PersonListPanel extends UiPart<Region> {
      */
     public PersonListPanel(ObservableList<Applicant> applicantList) {
         super(FXML);
-        currentlyDisplaying.setText("Currently Displaying: Applicants");
         personListView.setItems(applicantList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
     }
