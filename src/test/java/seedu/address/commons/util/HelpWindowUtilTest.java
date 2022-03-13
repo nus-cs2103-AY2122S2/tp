@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
 
 import org.junit.jupiter.api.Test;
 
