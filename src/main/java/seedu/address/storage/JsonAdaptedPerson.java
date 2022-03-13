@@ -42,9 +42,9 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address, @JsonProperty("flag") String flag,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("prevDateMet") String prevDateMet,
-            @JsonProperty("info") String info) {
+            @JsonProperty("email") String email, @JsonProperty("address") String address,
+            @JsonProperty("flag") String flag, @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+            @JsonProperty("prevDateMet") String prevDateMet, @JsonProperty("info") String info) {
 
         this.name = name;
         this.phone = phone;
@@ -143,7 +143,8 @@ class JsonAdaptedPerson {
         }
         final Info modelInfo = new Info(info);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelFlag, modelTags, modelPrevDateMet, modelInfo);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelFlag,
+                modelTags, modelPrevDateMet, modelInfo);
     }
 
 }

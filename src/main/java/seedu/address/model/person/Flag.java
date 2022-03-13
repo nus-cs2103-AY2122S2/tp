@@ -5,7 +5,7 @@ public class Flag {
     public static final String MESSAGE_CONSTRAINTS =
             "Flag should only be 'true' or 'false'.";
     public static final String VALIDATION_REGEX = "(true|false)";
-    public boolean isFlagged;
+    private boolean isFlagged;
 
     /**
      * Constructs a false {@code Flag}.

@@ -70,13 +70,7 @@ public class UniquePersonList implements Iterable<Person> {
 
     public void flagPerson(Person target, Flag flag) {
         requireAllNonNull(target, flag);
-
-//        int index = internalList.indexOf(target);
-//        if (index == -1) {
-//            throw new PersonNotFoundException();
-//        }
         target.setFlag(flag);
-//        internalList.set(index, flag);
     }
 
 
