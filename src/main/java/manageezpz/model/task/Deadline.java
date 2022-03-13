@@ -2,8 +2,6 @@ package manageezpz.model.task;
 
 import java.time.LocalTime;
 
-import manageezpz.model.person.Date;
-
 public class Deadline extends Task {
     private Date date;
     private LocalTime time;
@@ -16,5 +14,7 @@ public class Deadline extends Task {
         super(taskDescription);
         this.date = date;
         this.time = time;
+        super.setType("deadline");
     }
+
 }

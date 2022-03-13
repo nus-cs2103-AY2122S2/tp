@@ -8,5 +8,6 @@ public class Todo extends Task {
      */
     public Todo(Description taskDescription) {
         super(taskDescription);
+        super.setType("todo");
     }
 }

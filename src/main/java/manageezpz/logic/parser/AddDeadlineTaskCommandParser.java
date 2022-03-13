@@ -8,13 +8,12 @@ import java.time.LocalTime;
 import java.util.stream.Stream;
 
 import manageezpz.logic.commands.AddDeadlineTaskCommand;
-import manageezpz.logic.commands.AddEventTaskCommand;
 import manageezpz.logic.parser.exceptions.ParseException;
-import manageezpz.model.person.Date;
+import manageezpz.model.task.Date;
 import manageezpz.model.task.Deadline;
 import manageezpz.model.task.Description;
 
-public class AddDeadlineTaskCommandParser {
+public class AddDeadlineTaskCommandParser implements Parser<AddDeadlineTaskCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddDeadlineTaskCommand
@@ -27,10 +26,11 @@ public class AddDeadlineTaskCommandParser {
 
         if (!arePrefixesPresent(argMultimapDeadline, PREFIX_DESCRIPTION, PREFIX_DATETIME)
                 || !argMultimapDeadline.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventTaskCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddDeadlineTaskCommand.MESSAGE_USAGE));
         }
 
-        Description desc = new Description(argMultimapDeadline.getValue(PREFIX_DESCRIPTION).get());
+        Description desc = ParserUtil.parseDescription(argMultimapDeadline.getValue(PREFIX_DESCRIPTION).get());
         String byDateTime = argMultimapDeadline.getValue(PREFIX_DATETIME).get();
 
         String[] parseByDateTime = byDateTime.split(" ");
