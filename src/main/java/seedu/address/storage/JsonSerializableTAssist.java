@@ -77,7 +77,7 @@ class JsonSerializableTAssist {
         }
 
         for (JsonAdaptedClassGroup jsonAdaptedClassGroup : classGroups) {
-            ClassGroup classGroup = jsonAdaptedClassGroup.toModelType();
+            ClassGroup classGroup = jsonAdaptedClassGroup.toModelType(tAssist.getModuleList());
             if (tAssist.hasClassGroup(classGroup)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_CLASS_GROUP);
             }
