@@ -22,7 +22,6 @@ public class HelpWindowUtil {
         desktop.browse(convertToUrl());
     }
 
-
     /**
      * Converts string into URI.
      *
