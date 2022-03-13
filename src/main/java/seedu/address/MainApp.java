@@ -17,19 +17,20 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AB3Model;
 import seedu.address.model.AB3ModelManager;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyTAssist;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.TAssist;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonTAssistStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
+import seedu.address.storage.TAssistStorage;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
@@ -47,11 +48,12 @@ public class MainApp extends Application {
     protected Logic logic;
     protected Storage storage;
     protected AB3Model ab3model;
+    protected Model model;
     protected Config config;
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing TAssist ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -59,49 +61,45 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
+        TAssistStorage tAssistStorage = new JsonTAssistStorage(userPrefs.getTAssistFilePath());
+
+        // TODO: remove AddressBookStorage from StorageManager
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        storage = new StorageManager(tAssistStorage, addressBookStorage, userPrefsStorage);
 
         initLogging(config);
 
-        ab3model = initModelManager(storage, userPrefs);
-        Model model = initModelManager(userPrefs);
+        ab3model = new AB3ModelManager();
+        model = initModelManager(storage, userPrefs);
+        // TODO: remove AddressBookStorage from LogicManager
         logic = new LogicManager(model, ab3model, storage);
 
         ui = new UiManager(logic);
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
-     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
-     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
-     * TODO: to be updated.
+     * Returns a {@code ModelManager} with the data from {@code storage}'s TAssist and {@code userPrefs}. <br>
+     * The data from the sample TAssist will be used instead if {@code storage}'s TAssist is not found,
+     * or an empty TAssist will be used instead if errors occur when reading {@code storage}'s TAssist.
+     *
      */
-    private AB3Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+    private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
+        Optional<ReadOnlyTAssist> tAssistOptional;
+        ReadOnlyTAssist initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
+            tAssistOptional = storage.readTAssist();
+            if (!tAssistOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample TAssist");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = tAssistOptional.orElseGet(SampleDataUtil::getSampleTAssist);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            logger.warning("Data file not in the correct format. Will be starting with an empty TAssist");
+            initialData = new TAssist();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            logger.warning("Problem while reading from the file. Will be starting with an empty TAssist");
+            initialData = new TAssist();
         }
 
-        return new AB3ModelManager(initialData, userPrefs);
-    }
-
-    /**
-     * TODO: Temporary method, to be removed.
-     */
-    private Model initModelManager(ReadOnlyUserPrefs userPrefs) {
-        ReadOnlyTAssist initialData = SampleDataUtil.getSampleTAssist();
         return new ModelManager(initialData, userPrefs);
     }
 
@@ -179,15 +177,15 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting TAssist " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping TAssist ] =============================");
         try {
-            storage.saveUserPrefs(ab3model.getUserPrefs());
+            storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }

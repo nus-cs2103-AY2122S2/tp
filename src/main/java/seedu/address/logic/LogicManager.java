@@ -53,7 +53,7 @@ public class LogicManager implements Logic {
         commandResult = command.execute(ab3model);
 
         try {
-            storage.saveAddressBook(ab3model.getAddressBook());
+            storage.saveTAssist(model.getTAssist());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }

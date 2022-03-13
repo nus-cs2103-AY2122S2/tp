@@ -75,17 +75,15 @@ public class ModelManager implements Model {
     }
 
 
-    /** TODO: update method and change user pref method into getTAssistFilePath. */
     @Override
     public Path getTAssistFilePath() {
-        return userPrefs.getAddressBookFilePath();
+        return userPrefs.getTAssistFilePath();
     }
 
-    /** TODO: update method and change user pref method into setTAssistFilePath. */
     @Override
     public void setTAssistFilePath(Path tAssistFilePath) {
         requireNonNull(tAssistFilePath);
-        userPrefs.setAddressBookFilePath(tAssistFilePath);
+        userPrefs.setTAssistFilePath(tAssistFilePath);
     }
 
     //=========== TAssist ================================================================================
