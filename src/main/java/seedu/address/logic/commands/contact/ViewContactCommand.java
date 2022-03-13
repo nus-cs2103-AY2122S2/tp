@@ -27,6 +27,9 @@ public class ViewContactCommand extends Command {
 
     private final Nric ownerNric;
 
+    /**
+     * Creates an ViewContactCommand to view the specified {@code Patient}
+     */
     public ViewContactCommand(Nric ownerNric) {
         requireNonNull(ownerNric);
         this.ownerNric = ownerNric;

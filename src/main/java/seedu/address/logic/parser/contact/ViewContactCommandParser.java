@@ -13,7 +13,6 @@ import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.contact.ContactWithNricPredicate;
 import seedu.address.model.person.Nric;
 
 public class ViewContactCommandParser {
