@@ -2,9 +2,11 @@ package manageezpz.model.task;
 
 import static manageezpz.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
+import manageezpz.model.person.Date;
 import manageezpz.model.person.Person;
 
 /**
@@ -16,18 +18,23 @@ public class Task {
 
     // Identity fields
     private final Description taskDescription;
+    private final Date taskDate;
 
     // Data fields
     private List<Person> assignees; //List of Strings as of now, V1.3 will incorporate Persons (assign tasks to Persons)
 
     /**
      * Constructor for the Task class.
+     * {@code Date taskDate} has a default value that will be changed if the object inheriting the Task object
+     * is a Deadline or Event object. If object is a Todo object, this field will be ignored.
      * @param taskDescription information about the task.
      */
     public Task(Description taskDescription) {
         requireAllNonNull(taskDescription);
         this.taskDescription = taskDescription;
         this.isDone = false;
+        LocalDate defaultDate = LocalDate.parse("1977-01-01");
+        taskDate = new Date(defaultDate);
     }
 
     /**

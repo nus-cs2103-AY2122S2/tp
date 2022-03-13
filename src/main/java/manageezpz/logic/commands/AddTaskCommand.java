@@ -6,6 +6,7 @@ import manageezpz.model.Model;
 public class AddTaskCommand extends Command {
     public static final String COMMAND_WORD = "addTask";
     public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Add Task command not implemented yet";
+    public static final String MESSAGE_USAGE = "add message usage for addTask here";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
