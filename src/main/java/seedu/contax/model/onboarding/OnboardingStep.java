@@ -85,7 +85,7 @@ public class OnboardingStep {
         return command;
     }
 
-    public int getPersonOperation() {
+    public int getOperationId() {
         return pOperation;
     }
 
@@ -119,7 +119,7 @@ public class OnboardingStep {
                 && otherStep.getHighlightOption() == getHighlightOption()
                 && otherStep.getPositionOption() == getPositionOption()
                 && otherStep.getCommand().equals(getCommand())
-                && otherStep.getPersonOperation() == getPersonOperation();
+                && otherStep.getOperationId() == getOperationId();
 
         if (otherStep.getPerson() == null && person == null) {
             return result;
@@ -132,6 +132,6 @@ public class OnboardingStep {
     public int hashCode() {
         return Objects.hash(eventType, displayMessage, overlayOption,
                 messageHeight, messageWidth, highlightOption,
-                positionOption, person, command, getPersonOperation());
+                positionOption, person, command, getOperationId());
     }
 }

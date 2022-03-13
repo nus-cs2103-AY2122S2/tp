@@ -36,31 +36,31 @@ public class OnboardingStoryManager {
     private void createStories() {
         OnboardingStory test = new OnboardingStory();
         test.addStory(new OnboardingStep("Welcome to a quick tour of ContaX" + CLICK_CONTINUE,
-                0, 0.2, 0.5, 0, 0, 0, null, null, 0));
+                0, 0.2, 0.5, 0, 0, 0, null, null, -1));
         test.addStory(new OnboardingStep(
                 "You will now be guided through\nthe basic features of ContaX" + CLICK_CONTINUE,
-                0, 0.2, 0.5, 0, 0, 0, null, null, 0));
+                0, 0.2, 0.5, 0, 0, 0, null, null, -1));
         test.addStory(new OnboardingStep("This is the command box.\nYour commands will go here" + CLICK_CONTINUE,
-                2, 0.2, 0.5, 3, 1, 0, null, null, 0));
+                2, 0.2, 0.5, 3, 1, 0, null, null, -1));
         test.addStory(new OnboardingStep("Now lets try adding a person." + CLICK_CONTINUE,
-                0, 0.2, 0.5, 0, 0, 0, null, null, 0));
+                0, 0.2, 0.5, 0, 0, 0, null, null, -1));
         test.addStory(new OnboardingStep(
                 "Type 'add n/Johnny p/91234567 e/Johnny@j.com a/Johnny street'\n\n Hit enter when you are done",
                 2, 0.2, 0.5, 3, 1, 1,
-                "add n/Johnny p/91234567 e/Johnny@j.com a/Johnny street", null, 0));
+                "add n/Johnny p/91234567 e/Johnny@j.com a/Johnny street", null, -1));
         test.addStory(new OnboardingStep(
                 "Great! Johnny is now added into the system!" + CLICK_CONTINUE,
-                0, 0.2, 0.5, 0, 0, 0, null, null, 0));
+                0, 0.2, 0.5, 0, 0, 0, null, null, -1));
         test.addStory(new OnboardingStep("Lets try to see Johnny's record!" + CLICK_CONTINUE,
-                0, 0.2, 0.5, 0, 0, 0, null, null, 0));
+                0, 0.2, 0.5, 0, 0, 0, null, null, -1));
         test.addStory(new OnboardingStep("Type 'list' and hit enter",
-                2, 0.1, 0.5, 3, 1, 1, "list", null, 0));
+                2, 0.1, 0.5, 3, 1, 1, "list", null, -1));
         test.addStory(new OnboardingStep("Great! Here is Johnny's record.",
                 3, 0.2, 0.5, 4, 2, 0, null, personList.get(0), 1));
         test.addStory(new OnboardingStep("End of Quick Tour!" + CLICK_EXIT,
-                0, 0.2, 0.5, 0, 0, 0, null, null, 0));
+                0, 0.2, 0.5, 0, 0, 0, null, null, -1));
         test.addStory(new OnboardingStep("End of Quick Tour!" + CLICK_EXIT,
-                0, 0.1, 0.5, 0, 0, 0, null, null, 2));
+                0, 0.1, 0.5, 0, 0, 0, null, null, 0));
         story = test;
     }
 
