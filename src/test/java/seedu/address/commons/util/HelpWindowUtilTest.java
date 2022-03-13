@@ -35,23 +35,31 @@ class HelpWindowUtilTest {
     }
 
     @Test
-    public void constructorTest() {
+    public void helpWindowUtil_constructorTest() {
         HelpWindowUtil helpWindowUtil = new HelpWindowUtil(validLink);
         assertEquals(helpWindowUtil.getUrl(), validLink);
     }
 
     @Test
-    public void desktopCheckTest() {
+    public void helpWindowUtil_desktopCheckTest() {
         HelpWindowUtil helpWindowUtil = new HelpWindowUtil(validLink);
         assertEquals(helpWindowUtil.isDesktopUsable(), Desktop.isDesktopSupported());
     }
 
     @Test
-    public void getDesktopTest() {
+    public void helpWindowUtil_getDesktopTest() {
         HelpWindowUtil helpWindowUtil = new HelpWindowUtil(validLink);
         if (Desktop.isDesktopSupported()) {
             assertEquals(helpWindowUtil.getDesktop(), Desktop.getDesktop());
         } else {
+            assertThrows(HeadlessException.class, () -> helpWindowUtil.getDesktop());
+        }
+    }
+
+    @Test
+    public void helpWindowUtil_getDesktopExceptionTest_throwsHeadlessException() {
+        HelpWindowUtil helpWindowUtil = new HelpWindowUtil(validLink);
+        if (!Desktop.isDesktopSupported()) {
             assertThrows(HeadlessException.class, () -> helpWindowUtil.getDesktop());
         }
     }
