@@ -98,6 +98,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    //// interview-level operations
+
+    /**
+     * Returns true if an interview that is the same as {@code interview} exists in the address book.
+     */
     public boolean hasInterview(Interview i) {
         requireNonNull(i);
         return interviews.contains(i);
