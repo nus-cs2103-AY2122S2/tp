@@ -41,7 +41,7 @@ public class ViewStudentInfoCommand extends Command {
         Student studentToSelect = lastShownList.get(targetIndex.getZeroBased());
         model.setSelectedStudent(studentToSelect);
         return new CommandResult(String.format(MESSAGE_VIEW_SUCCESS, studentToSelect.getName()),
-                true, InfoPanelTypes.STUDENT);
+                true, InfoPanelTypes.STUDENT, ViewTab.STUDENT);
     }
 
     @Override

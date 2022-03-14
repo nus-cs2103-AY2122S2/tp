@@ -55,14 +55,16 @@ public class CommandResult {
      * @param feedbackToUser Feedback given to user from the command.
      * @param updateInfoPanel Boolean indicating if the {@code InfoPanel} of the UI is updated.
      * @param infoPanelType {@code InfoPanelTypes} value representing the type of {@code InfoPanel} that is updated.
+     * @param viewTab {@code viewTab} value representing the type of {@code ViewTab} that will be switched.
      */
-    public CommandResult(String feedbackToUser, boolean updateInfoPanel, InfoPanelTypes infoPanelType) {
+    public CommandResult(String feedbackToUser, boolean updateInfoPanel,
+                         InfoPanelTypes infoPanelType, ViewTab viewTab) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = false;
         this.exit = false;
         this.updateInfoPanel = updateInfoPanel;
         this.infoPanelType = infoPanelType;
-        this.viewTab = ViewTab.NONE;
+        this.viewTab = viewTab;
     }
 
     /**
