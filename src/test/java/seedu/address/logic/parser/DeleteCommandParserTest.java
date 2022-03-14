@@ -28,12 +28,17 @@ public class DeleteCommandParserTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void parse_validArgs_returnsDeleteCommand() {
+    public void parse_validArgsName_returnsDeleteCommand() {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Name name = personToDelete.getName();
         DeleteCommand deleteCommand = new DeleteCommand(personToDelete.getName());
 
         assertParseSuccess(parser, " n/" + name.fullName, deleteCommand);
+    }
+
+    @Test
+    public void parse_validArgsIndex_returnsDeleteCommand() {
+        assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_PERSON));
     }
 
     @Test
