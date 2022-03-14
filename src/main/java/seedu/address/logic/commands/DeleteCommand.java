@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.TYPE_MODULE;
 import static seedu.address.logic.parser.CliSyntax.TYPE_STUDENT;
 
 import java.util.List;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -47,6 +48,10 @@ public class DeleteCommand extends Command {
     private final Index targetIndex;
     private final EntityType entityType;
 
+    /**
+     * Creates a DeleteCommand to delete the specified entity by {@code Index}
+     * and {@code EntityType}
+     */
     public DeleteCommand(Index targetIndex, EntityType entityType) {
         this.targetIndex = targetIndex;
         this.entityType = entityType;

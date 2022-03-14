@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ACADEMIC_YEAR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
@@ -61,7 +61,7 @@ public class AddCommand extends Command {
     private final Entity toAdd;
 
     /**
-     * Creates an AddStudentCommand to add the specified {@code Student}
+     * Creates an AddCommand to add the specified {@code Entity}
      */
     public AddCommand(Entity entity) {
         requireNonNull(entity);
