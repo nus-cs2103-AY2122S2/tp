@@ -363,19 +363,14 @@ Appointment data are saved in the hard disk automatically after any command that
 
 ### Exporting the data: `exportcsv`
 
-Exports the current list of contacts as a CSV file that can be imported through ContaX or other contact software such as Google/Outlook
+Exports the current list of contacts as a CSV file that can be imported through ContaX or viewed separately via Microsoft Excel
 
-Format: `exportcsv [EXPORTTYPE]`
-* Exports CSV as per the specified format.
-* If `EXPORTTYPE` is left empty, it will default to `EXPORTTYPE = 1` and export in custom ContaX format
-* `EXPORTTYPE` options are
-   * `EXPORTTYPE=1` for ContaX format
-   * `EXPORTTYPE=2` for Google Contacts format
-   * `EXPORTTYPE=3` for Microsoft Outlook format
+Format: `exportcsv`
+* Exports CSV as per ContaX format. This file can be imported by other instances of ContaX
 * File will be saved on the directory `[JAR file location]/data/addressbook.csv`
 
 Examples:
-* `exportcsv 2`: Exports the current address book as a CSV file ready to be uploaded onto Google Contacts
+* `exportcsv`: Exports the current address book as a CSV file at `[JAR file location]/data/addressbook.csv`
 ### Editing the data file
 
 ContaX contacts and appointments data are saved in the hard disk automatically after any command that changes contact data in JSON format at `[JAR file location]/data/addressbook.json` and `[JAR file location]/data/schedule.json`. Advanced users are welcome to update data directly by editing that data file.
@@ -510,7 +505,7 @@ Action | Format, Examples
 **Edit Appointment** | `editappointment INDEX [n/NAME] [d/DATE] [t/TIME] [p/PERSON] [l/DURATION]`<br> e.g., `editappointment 2 n/Call Juliet t/13:45`
 **List Appointments Within Period** | `appointmentsbetween sd/STARTDATE st/STARTTIME ed/ENDDATE et/ENDTIME` <br> e.g. `appointmentsbetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00`
 **Help** | `help`
-**Export CSV** | `exportcsv [EXPORTTYPE]`<br> e.g., `exportcsv 2`
+**Export CSV** | `exportcsv`
 **Import CSV** | `importcsv f/FILEPATH [n/COLUMNNUM] [p/COLUMN_PERSON] [e/COLUMN_EMAIL] [a/COLUMN_ADDRESS] [t/COLUMN_TAGS]` <br> e.g., `importCSV n/2 p/3 e/5 a/6 t/4`
 **Operate on Contacts by Conditional Clause** | `batch COMMAND where/CONDITION` <br> e.g., `batch Edit p/87438806 where/ p/Phone = 87438807`
 **Operate on Contacts within Range** | `range COMMAND from/INDEX to/INDEX` <br> e.g., `range edit e/johndoe@example.com from/6 to/10`
