@@ -9,13 +9,13 @@ Tracey is a desktop app for managing health statuses of NUS students by administ
 
 Given below are my contributions to the project.
 
-* **Add entry**: Added the ability to add an entry.
-    * What it does: allows the user to add the details of a student.
-    * Justification: This feature is fundamental to the product because a user can add the details of a new student.
-    * Highlights: This enhancement increases the ease of adding entries. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
+* **Add entry**: Added the ability to edit an entry.
+    * What it does: allows the user to edit the details of a student.
+    * Justification: This feature is fundamental to the product because a user can edit the details of an existing student.
+    * Highlights: This enhancement increases the ease of editing entries. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
     * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
 
-* **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
+* **New Feature**: Added an edit command that allows the user to edit previous records by indicating the student index.
 
 * **Code contributed**: [RepoSense link]()
 

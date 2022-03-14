@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -58,6 +59,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_SAME_STATUS = "Edited covid status is same as the current one";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -98,8 +100,9 @@ public class EditCommand extends Command {
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
+     * @throws exception if the edited status is same as the current status of the student
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) throws CommandException{
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
@@ -111,6 +114,12 @@ public class EditCommand extends Command {
                 .orElse(personToEdit.getMatriculationNumber());
         CovidStatus updatedCovidStatus = editPersonDescriptor.getCovidStatus()
                 .orElse(personToEdit.getStatus());
+
+        if(editPersonDescriptor.getCovidStatus().isPresent()){
+            if(updatedCovidStatus.equals(personToEdit.getStatus())){
+                throw new CommandException(MESSAGE_SAME_STATUS);
+            }
+        }
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedFaculty, updatedPhone, updatedEmail, updatedAddress,
@@ -222,6 +231,10 @@ public class EditCommand extends Command {
             return Optional.ofNullable(matriculationNumber);
         }
 
+        /**
+         * Set the covid status of a student
+         * @param covidStatus
+         */
         public void setCovidStatus(CovidStatus covidStatus) {
             this.covidStatus = covidStatus;
         }
