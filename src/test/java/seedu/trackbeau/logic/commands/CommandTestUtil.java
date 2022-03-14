@@ -22,7 +22,7 @@ import seedu.trackbeau.logic.commands.exceptions.CommandException;
 import seedu.trackbeau.model.Model;
 import seedu.trackbeau.model.TrackBeau;
 import seedu.trackbeau.model.customer.Customer;
-import seedu.trackbeau.model.customer.NameContainsKeywordsPredicate;
+import seedu.trackbeau.model.customer.SearchContainsKeywordsPredicate;
 import seedu.trackbeau.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -158,7 +158,7 @@ public class CommandTestUtil {
 
         Customer customer = model.getFilteredCustomerList().get(targetIndex.getZeroBased());
         final String[] splitName = customer.getName().fullName.split("\\s+");
-        model.updateFilteredCustomerList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredCustomerList(new SearchContainsKeywordsPredicate("getName", Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredCustomerList().size());
     }
