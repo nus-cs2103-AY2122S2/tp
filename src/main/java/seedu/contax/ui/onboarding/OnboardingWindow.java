@@ -272,56 +272,7 @@ public class OnboardingWindow extends UiPart<Stage> {
             break;
         }
     }
-
-    private void processCommandType() {
-
-    }
-
-    /**
-     * Processes an operation on this window based on the given operation id
-     * <br><br>
-     * Options are as follows:
-     * <br>- 0: close this window and open main window
-     * <br>- 1: format the given message
-     * <br>- 2: find the latest person
-     * <br>- 3: format command for enforcement of  user input
-     * <br>- 5: remove latest person
-     * <br>- 6: list all persons
-     */
-    private void processOperation(int option, OnboardingStep step) {
-        switch (option) {
-        case 0:
-            hide();
-            break;
-        case 1:
-            instructionLabel.setText(String.format(step.getDisplayMessage(),
-                    OnboardingUtil.getLatestPersonName(model)));
-            break;
-        case 2:
-            instructionLabel.setText(String.format(step.getDisplayMessage(),
-                    OnboardingUtil.getLatestPersonName(model)));
-            model.updateFilteredPersonList((p) -> p.isSamePerson(OnboardingUtil.getLatestPerson(model)));
-            break;
-        case 3:
-            step.setDisplayMessage(String.format(step.getDisplayMessage(),
-                    OnboardingUtil.getLatestPersonName(model)));
-            instructionLabel.setText(step.getDisplayMessage());
-            step.setCommand(String.format(step.getCommand(),
-                    OnboardingUtil.getLatestPersonName(model)));
-            break;
-        case 4:
-            instructionLabel.setText(String.format(step.getDisplayMessage(),
-                    OnboardingUtil.getLatestPersonName(model)));
-            model.deletePerson(OnboardingUtil.getLatestPerson(model));
-            break;
-        case 5:
-            model.updateFilteredPersonList(unused -> true);
-            break;
-        default:
-            break;
-        }
-    }
-
+    
     /**
      * Enforces the user input to be equals to be given step's command.
      * Returns 0 when the user input does not satisfy the given condition, and 1 if it does.
