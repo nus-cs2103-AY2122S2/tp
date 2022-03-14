@@ -189,7 +189,7 @@ Format: `delete -TYPE`
 
 Deletes the specified Applicant from HireLah.
 
-Format: `del -a CANDIDATE_INDEX`
+Format: `delete -a CANDIDATE_INDEX`
 
 * Deletes the Applicant at the specified `CANDIDATE_INDEX`.
 * The index refers to the index number shown in the displayed Applicant list.
@@ -203,25 +203,25 @@ Examples:
 
 Deletes an existing interview in HireLah.
 
-Format: `del -i CANDIDATE_INDEX ROLE`
+Format: `delete -i CANDIDATE_INDEX ROLE`
 * Existing interview with the matching CANDIDATE_INDEX and ROLE is deleted.
 * Role provided is case-insensitive.
 
 Examples:
-* `del -i 1 Senior Frontend Software Engineer`
+* `delete -i 1 Senior Frontend Software Engineer`
 
 
 ### Delete positions : `del -p`
 
 Deletes an existing position in HireLah.
 
-Format: `del -p ROLE`
+Format: `delete -p ROLE`
 * Existing position with the specified name is deleted.
 * The position name has to match with the position that is to be deleted.
 * Position name provided is case-insensitive.
 
 Examples:
-* `del -p Senior Frontend Software Engineer`
+* `delete -p Senior Frontend Software Engineer`
 
 ## List
 General command to list different data type in HireLah.
