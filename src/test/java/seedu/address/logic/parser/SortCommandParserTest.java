@@ -41,18 +41,33 @@ public class SortCommandParserTest {
         // multiple fields specified
         assertParseFailure(parser, PREFIX_SORTKEY + "name course", MESSAGE_INVALID_FORMAT);
 
+        // no whitespace before prefix
+        assertParseFailure(parser, PREFIX_SORTKEY + "name", MESSAGE_INVALID_FORMAT);
+
         // invalid prefix being parsed as preamble
         assertParseFailure(parser, PREFIX_TAG + "course", MESSAGE_INVALID_FORMAT);
     }
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        Comparator<Person> sortComparator = Comparator.comparing(l -> l.getName().toString().toLowerCase());
-        SortCommand expectedCommand = new SortCommand(sortComparator, "name");
+        Comparator<Person> sortComparatorName = Comparator.comparing(l -> l.getName().toString().toLowerCase());
+        Comparator<Person> sortComparatorCourse = Comparator.comparing(l -> l.getName().toString().toLowerCase());
+        Comparator<Person> sortComparatorStudentId = Comparator.comparing(l -> l.getName().toString().toLowerCase());
+        Comparator<Person> sortComparatorPhone = Comparator.comparing(l -> l.getName().toString().toLowerCase());
+        Comparator<Person> sortComparatorEmail = Comparator.comparing(l -> l.getName().toString().toLowerCase());
 
-        assertParseSuccess(parser, " " + SORT_EMPTY + "name", expectedCommand);
-        assertParseSuccess(parser, " " + PREFIX_SORTKEY + "name", expectedCommand);
+        SortCommand expectedCommandName = new SortCommand(sortComparatorName, "name");
+        SortCommand expectedCommandCourse = new SortCommand(sortComparatorCourse, "course");
+        SortCommand expectedCommandStudentId = new SortCommand(sortComparatorStudentId, "studentid");
+        SortCommand expectedCommandPhone = new SortCommand(sortComparatorPhone, "phone");
+        SortCommand expectedCommandEmail = new SortCommand(sortComparatorEmail, "email");
 
+        assertParseSuccess(parser, SORT_EMPTY + "name", expectedCommandName);
+        assertParseSuccess(parser, " " + PREFIX_SORTKEY + "name", expectedCommandName);
+        assertParseSuccess(parser, SORT_EMPTY + "course", expectedCommandCourse);
+        assertParseSuccess(parser, SORT_EMPTY + "studentid", expectedCommandStudentId);
+        assertParseSuccess(parser, SORT_EMPTY + "phone", expectedCommandPhone);
+        assertParseSuccess(parser, SORT_EMPTY + "email", expectedCommandEmail);
     }
 
     @Test
