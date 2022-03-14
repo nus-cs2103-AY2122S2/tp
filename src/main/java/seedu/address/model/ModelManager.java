@@ -111,6 +111,7 @@ public class ModelManager implements Model {
         addressBook.setPet(target, editedPet);
     }
 
+    /** Method that sorts the pet list via the sortPets() command in addressBook. **/
     @Override
     public void sortPetList() {
         addressBook.sortPets();

@@ -38,7 +38,7 @@ public class UniquePetList implements Iterable<Pet> {
     }
 
     /**
-     * Sort list of pets by name
+     * Sort list of pets by name using the comparator in the Name class.
      */
     public void sortPetList() {
         Comparator<Pet> petNameComparator = Comparator.comparing(Pet::getName);

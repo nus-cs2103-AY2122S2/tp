@@ -15,12 +15,18 @@ public class SortCommandTest {
     private Model model;
     private Model expectedModel;
 
+    /**
+     * Initializes the model and expectedModel before running each test.
+     */
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
     }
 
+    /**
+     * Test method that checks if the pet list gets sorted after calling the sort command.
+     */
     @Test
     public void execute_listIsNotFiltered_showsSortedList() {
         expectedModel.sortPetList();

@@ -59,7 +59,7 @@ public class Name implements Comparable<Name> {
     /**
      * Compare two {@code name} in lexicographical order
      * @param other {@code name} to be compared with
-     * @return an Integer (-1 <= x <= 1)
+     * @return an Integer
      */
     @Override
     public int compareTo(Name other) {
