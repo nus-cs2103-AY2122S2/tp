@@ -21,6 +21,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_DATE = new Prefix("dt/");
     public static final Prefix PREFIX_TIME = new Prefix("tm/");
     public static final Prefix PREFIX_NOTES = new Prefix("n/");
-    public static final Prefix PREFIX_PRESCRIPTION = new Prefix("p/");
+    public static final Prefix PREFIX_PRESCRIPTION = new Prefix("pn/");
     public static final Prefix PREFIX_TESTS_TAKEN_AND_RESULTS = new Prefix("tt/");
 }

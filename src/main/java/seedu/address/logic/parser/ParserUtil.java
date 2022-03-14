@@ -9,6 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.consultation.*;
 import seedu.address.model.contact.Address;
 import seedu.address.model.contact.Email;
 import seedu.address.model.contact.Phone;
@@ -137,4 +138,38 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    // Starts here
+    public static Time parseTime(String time) throws ParseException {
+        requireNonNull(time);
+        if (!Time.isValidTime(time)) {
+            throw new ParseException(Time.MESSAGE_CONSTRAINTS);
+        }
+        return new Time(time);
+    }
+
+    public static Date parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        if (!Date.isValidDate(date)) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        }
+        return new Date(date);
+    }
+
+    public static Notes parseNotes(String notes) throws ParseException {
+        requireNonNull(notes);
+        if (!Notes.isValid(notes)) {
+            throw new ParseException(Notes.MESSAGE_CONSTRAINTS);
+        }
+        return new Notes(notes);
+    }
+
+    public static Prescription parsePrescription(String prescription) {
+        return new Prescription(prescription);
+    }
+
+    public static TestsTakenAndResults parseTestsTakenAndResults(String testsTakenAndResults) {
+        return new TestsTakenAndResults(testsTakenAndResults);
+    }
+
 }

@@ -17,6 +17,8 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.consultation.Consultation;
+import seedu.address.ui.consultation.ConsultationListPanel;
 import seedu.address.ui.contact.ContactListPanel;
 
 /**
@@ -35,6 +37,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private ContactListPanel contactListPanel;
+    private ConsultationListPanel consultationListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -115,6 +118,7 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         contactListPanel = new ContactListPanel(logic.getFilteredContactList());
+        consultationListPanel = new ConsultationListPanel(logic.getFilteredConsultationList());
 
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
@@ -148,6 +152,14 @@ public class MainWindow extends UiPart<Stage> {
             case CONTACT:
                 personListPanelPlaceholder.getChildren().remove(0);
                 personListPanelPlaceholder.getChildren().add(contactListPanel.getRoot());
+                return;
+            case CONSULTATION:
+                if (consultationListPanel == null) {
+                    personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+                } else {
+                    personListPanelPlaceholder.getChildren().remove(0);
+                    personListPanelPlaceholder.getChildren().add(consultationListPanel.getRoot());
+                }
                 return;
             default:
                 personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());

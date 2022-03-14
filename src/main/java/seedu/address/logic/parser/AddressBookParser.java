@@ -50,11 +50,13 @@ public class AddressBookParser {
                 ArgumentTokenizer.tokenize(arguments, PREFIX_TYPE);
 
         switch (commandWord) {
-            case AddCommand.COMMAND_WORD:
+            case "add":
                 if (argMultimap.getValue(PREFIX_TYPE).isPresent()) {
                     return parseAddCommandType(argMultimap.getValue(PREFIX_TYPE).get(), arguments);
                 }
                 return new AddCommandParser().parse(arguments);
+
+
             case EditCommand.COMMAND_WORD:
                 return new EditCommandParser().parse(arguments);
 

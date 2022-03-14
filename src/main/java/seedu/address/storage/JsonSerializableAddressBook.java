@@ -40,7 +40,9 @@ class JsonSerializableAddressBook {
         if (!contacts.isEmpty()) {
             this.contacts.addAll(contacts);
         }
-        this.consultations.addAll(consultations);
+        if (!consultations.isEmpty()) {
+            this.consultations.addAll(consultations);
+        }
     }
 
     /**

@@ -17,8 +17,8 @@ import seedu.address.ui.consultation.ConsultationCard;
  * Panel containing the list of persons.
  */
 public class ConsultationListPanel extends UiPart<Region> {
-    private static final String FXML = "PersonListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+    private static final String FXML = "ConsultationListPanel.fxml";
+    private final Logger logger = LogsCenter.getLogger(ConsultationListPanel.class);
 
     @FXML
     private ListView<Consultation> consultationListView;
