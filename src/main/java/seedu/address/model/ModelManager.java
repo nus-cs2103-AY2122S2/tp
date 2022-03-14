@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.consultation.Consultation;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.person.Person;
 
@@ -24,6 +25,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Contact> filteredContacts;
+    private final FilteredList<Consultation> filteredConsultations;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -37,6 +39,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredContacts = new FilteredList<>(this.addressBook.getContactList());
+        filteredConsultations = new FilteredList<>(this.addressBook.getConsultationList());
     }
 
     public ModelManager() {
@@ -184,6 +187,52 @@ public class ModelManager implements Model {
         filteredContacts.setPredicate(predicate);
     }
 
+    //=========== Consultation ================================================================================
+
+    @Override
+    public boolean hasConsultation(Consultation consultation) {
+        requireNonNull(consultation);
+        return addressBook.hasConsultation(consultation);
+    }
+
+    @Override
+    public void deleteConsultation(Consultation target) {
+        addressBook.removeConsultation(target);
+    }
+
+    @Override
+    public void addConsultation(Consultation consultation) {
+        addressBook.addConsultation(consultation);
+        updateFilteredConsultationList(PREDICATE_SHOW_ALL_CONSULTATIONS);
+    }
+
+    @Override
+    public void setConsultation(Consultation target, Consultation editedConsultation) {
+        requireAllNonNull(target, editedConsultation);
+
+        addressBook.setConsultation(target, editedConsultation);
+    }
+
+
+    //=========== Filtered Contact List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Contact} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Consultation> getFilteredConsultationList() {
+        return filteredConsultations;
+    }
+
+    @Override
+    public void updateFilteredConsultationList(Predicate<Consultation> predicate) {
+        requireNonNull(predicate);
+        filteredConsultations.setPredicate(predicate);
+    }
+
+    //=========== Other Accessors ==============================================================================
+
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -201,7 +250,8 @@ public class ModelManager implements Model {
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons)
-                && filteredContacts.equals(other.filteredContacts);
+                && filteredContacts.equals(other.filteredContacts)
+                && filteredConsultations.equals(other.filteredConsultations);
     }
 
 }

@@ -142,13 +142,13 @@ public interface Model {
      * Deletes the given contact.
      * The contact must exist in the address book.
      */
-    void deleteContact(Contact target);
+    void deleteConsultation(Consultation target);
 
     /**
      * Adds the given contact.
      * {@code contact} must not already exist in the address book.
      */
-    void addContact(Contact contact);
+    void addConsultation(Consultation consultation);
 
     /**
      * Replaces the given contact {@code target} with {@code editedContact}.
@@ -156,14 +156,14 @@ public interface Model {
      * The contact identity of {@code editedContact} must not be the same
      * as another existing contact in the address book.
      */
-    void setContact(Contact target, Contact editedContact);
+    void setConsultation(Consultation target, Consultation editedConsultation);
 
     /** Returns an unmodifiable view of the filtered contact list */
-    ObservableList<Contact> getFilteredContactList();
+    ObservableList<Consultation> getFilteredConsultationList();
 
     /**
      * Updates the filter of the filtered contact list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredContactList(Predicate<Contact> predicate);
+    void updateFilteredConsultationList(Predicate<Consultation> predicate);
 }
