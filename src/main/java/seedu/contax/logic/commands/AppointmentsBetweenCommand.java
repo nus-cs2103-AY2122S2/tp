@@ -7,6 +7,7 @@ import static seedu.contax.logic.parser.CliSyntax.PREFIX_TIME_END;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_TIME_START;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import seedu.contax.commons.core.GuiListContentType;
 import seedu.contax.model.Model;
@@ -17,7 +18,7 @@ import seedu.contax.model.appointment.DateRangePredicate;
  */
 public class AppointmentsBetweenCommand extends Command {
 
-    public static final String COMMAND_WORD = "appointmentsBetween";
+    public static final String COMMAND_WORD = "appointmentsbetween";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists appointments within a period. "
             + "Parameters: "
             + PREFIX_DATE_START + "STARTDATE "
@@ -30,13 +31,14 @@ public class AppointmentsBetweenCommand extends Command {
             + PREFIX_DATE_END + "22-10-2022 "
             + PREFIX_TIME_END + "16:30";
 
-    public static final String MESSAGE_SUCCESS = "Listed appointments within the requested range.";
+    public static final String MESSAGE_SUCCESS = "Listed appointments from %s to %s.";
     public static final String MESSAGE_START_DATE_INVALID = "The start date provided is invalid!";
     public static final String MESSAGE_START_TIME_INVALID = "The start time provided is invalid!";
     public static final String MESSAGE_END_DATE_INVALID = "The end date provided is invalid!";
     public static final String MESSAGE_END_TIME_INVALID = "The end time provided is invalid!";
     public static final String MESSAGE_END_BEFORE_START = "The end date time provided is before the"
             + " start date time!";
+    private static final String DATETIME_DISPLAY_FORMAT = "dd LLL yyyy hh:mm a";
 
     private final LocalDateTime rangeStart;
     private final LocalDateTime rangeEnd;
@@ -59,7 +61,10 @@ public class AppointmentsBetweenCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredAppointmentList(new DateRangePredicate(rangeStart, rangeEnd));
-        return new CommandResult(MESSAGE_SUCCESS, GuiListContentType.APPOINTMENT);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_DISPLAY_FORMAT);
+        return new CommandResult(
+                String.format(MESSAGE_SUCCESS, rangeStart.format(formatter), rangeEnd.format(formatter)),
+                GuiListContentType.APPOINTMENT);
     }
 
     @Override

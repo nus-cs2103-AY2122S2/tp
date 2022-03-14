@@ -11,7 +11,7 @@ import seedu.contax.model.Model;
  */
 public class ListAppointmentCommand extends Command {
 
-    public static final String COMMAND_WORD = "listAppointments";
+    public static final String COMMAND_WORD = "listappointments";
 
     public static final String MESSAGE_SUCCESS = "Listed all appointments";
 
