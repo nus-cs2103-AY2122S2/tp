@@ -1,0 +1,11 @@
+.command {
+    -fx-background-color: #F1F2F3;
+    -fx-background-radius: 8;
+    -fx-padding: 15;
+}
+
+.command:focused {
+    -fx-background-color: white;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 3.5, 0.4, 0, 1);
+    -fx-prompt-text-fill: derive(-fx-control-inner-background,-30%);
+}
