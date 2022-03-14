@@ -32,7 +32,7 @@ public class DeleteTagCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Tag> tagList = model.getTagList();
+        List<Tag> tagList = model.getFilteredTagList();
 
         if (targetIndex.getZeroBased() >= tagList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TAG_DISPLAYED_INDEX);

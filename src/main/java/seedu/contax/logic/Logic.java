@@ -38,8 +38,6 @@ public interface Logic {
     /** Returns an unmodifiable view of the list of appointments */
     ObservableList<Appointment> getAppointmentList();
 
-    ObservableList<Tag> getTagList();
-
     /** Returns an unmodifiable view of the filtered list of tags */
     ObservableList<Tag> getFilteredTagList();
 

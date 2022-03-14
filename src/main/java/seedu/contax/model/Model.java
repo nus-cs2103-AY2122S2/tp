@@ -118,8 +118,6 @@ public interface Model {
      */
     void setTag(Tag target, Tag editedTag);
 
-    ObservableList<Tag> getTagList();
-
     void updateFilteredTagList(Predicate<Tag> predicate);
 
     ObservableList<Tag> getFilteredTagList();
