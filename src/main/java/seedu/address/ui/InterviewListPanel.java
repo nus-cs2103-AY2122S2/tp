@@ -35,7 +35,7 @@ public class InterviewListPanel extends UiPart<Region> {
     private ListView<Interview> interviewListView;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code ApplicantListPanel} with the given {@code ObservableList}.
      */
     public InterviewListPanel(ObservableList<Interview> interviewList) {
         super(FXML);
