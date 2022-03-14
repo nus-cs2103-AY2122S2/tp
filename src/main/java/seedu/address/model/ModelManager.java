@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
 
@@ -142,13 +143,13 @@ public class ModelManager implements Model {
     @Override
     public void addLesson(Lesson lesson) {
         lessonBook.addLesson(lesson);
-        updateFilteredStudentList(PREDICATE_SHOW_ALL_LESSONS);
+        updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
     }
 
     @Override
     public void deleteLesson(Lesson lesson) {
         lessonBook.deleteLesson(lesson);
-        updateFilteredStudentList(PREDICATE_SHOW_ALL_LESSONS);
+        updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
     }
 
     //=========== Filtered Student List Accessors =============================================================
@@ -159,6 +160,13 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Student> getFilteredStudentList() {
+        filteredStudents.stream().forEach(student -> {
+            for (Lesson lesson: filteredLessons) {
+                if (lesson.hasAlreadyAssigned(student)) {
+                    student.assignLesson(lesson);
+                }
+            }
+        });
         return filteredStudents;
     }
 
@@ -205,7 +213,15 @@ public class ModelManager implements Model {
     }
 
     // TODO: add the remaining functions for LessonList too
-
+    @Override
+    public void updateAssignment(Index studentId, Index lessonId) {
+        Student studentToAssign = addressBook.getStudentList().get(studentId.getZeroBased());
+        Lesson lessonToAssign = lessonBook.getLessonList().get(lessonId.getZeroBased());
+        lessonBook.assignStudent(studentToAssign, lessonId);
+        addressBook.assignLesson(lessonToAssign, studentId);
+        updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
+        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+    }
 
     //=========== Selected Student and Lesson Accessors and Setter ============================================
 

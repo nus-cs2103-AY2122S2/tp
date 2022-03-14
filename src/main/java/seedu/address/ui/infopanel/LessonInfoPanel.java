@@ -1,5 +1,6 @@
 package seedu.address.ui.infopanel;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -34,6 +35,7 @@ public class LessonInfoPanel extends InfoPanel {
         super(FXML);
         this.lesson = lesson;
         setDetails(lesson);
+        setEnrolledStudents(FXCollections.observableList(lesson.getEnrolledStudents().getStudentsList()));
     }
 
     private void setDetails(Lesson lesson) {

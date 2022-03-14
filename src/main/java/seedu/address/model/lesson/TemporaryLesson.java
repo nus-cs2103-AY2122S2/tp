@@ -2,10 +2,7 @@ package seedu.address.model.lesson;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.List;
 import java.util.Objects;
-
-import seedu.address.model.student.Student;
 
 /**
  * Represents a temporary lesson in the address book.
@@ -17,8 +14,8 @@ public class TemporaryLesson extends Lesson {
      * Every field must be present and not null.
      */
     protected TemporaryLesson(LessonName name, Subject subject, LessonAddress address,
-                              DateTimeSlot dateTimeSlot, List<Student> assignedStudents) {
-        super(name, subject, address, dateTimeSlot, assignedStudents);
+                              DateTimeSlot dateTimeSlot, EnrolledStudents enrolledStudents) {
+        super(name, subject, address, dateTimeSlot, enrolledStudents);
         requireAllNonNull(dateTimeSlot);
     }
 
@@ -40,14 +37,6 @@ public class TemporaryLesson extends Lesson {
         }
 
         return getDateTimeSlot().isConflictingWith(otherLesson.getDateTimeSlot());
-    }
-
-    /**
-     * Adds a given Student to the list of students assigned to this lesson.
-     */
-    @Override
-    public void addStudent(Student student) {
-        this.getAssignedStudents().add(student);
     }
 
     /**

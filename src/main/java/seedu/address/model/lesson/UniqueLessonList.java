@@ -9,8 +9,10 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.lesson.exceptions.ConflictsWithLessonException;
 import seedu.address.model.lesson.exceptions.LessonNotFoundException;
+import seedu.address.model.student.Student;
 
 /**
  * A list of lessons that enforces uniqueness between its elements and does not allow nulls.
@@ -65,6 +67,16 @@ public class UniqueLessonList implements Iterable<Lesson> {
             throw new ConflictsWithLessonException(findLessonConflictingWith(toAdd), toAdd);
         }
         internalList.add(toAdd);
+    }
+
+    /**
+     * Assigns the lesson to the student's enrolled lessons.
+     * @param student the lesson that the student is enrolling in
+     * @param lessonId the STUDENT_ID of the student being enrolled
+     */
+    public void assignStudent(Student student, Index lessonId) {
+        requireAllNonNull(student, lessonId);
+        internalList.get(lessonId.getZeroBased()).assignStudent(student);
     }
 
     /**

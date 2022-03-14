@@ -55,7 +55,7 @@ class JsonAdaptedLesson {
         this.subject = source.getSubject().subjectName;
         this.lessonAddress = source.getLessonAddress().value;
         this.dateTimeSlot = new JsonAdaptedDateTimeSlot(source.getDateTimeSlot());
-        this.assignedStudents.addAll(source.getAssignedStudents().stream()
+        this.assignedStudents.addAll(source.getEnrolledStudents().getStudentsList().stream()
                 .map(JsonAdaptedStudent::new)
                 .collect(Collectors.toList()));
     }

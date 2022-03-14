@@ -5,8 +5,10 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.UniqueLessonList;
+import seedu.address.model.student.Student;
 
 /**
  * Wraps all data at the address-book level
@@ -72,6 +74,10 @@ public class LessonBook implements ReadOnlyLessonBook {
      */
     public void addLesson(Lesson lesson) {
         lessons.add(lesson);
+    }
+
+    public void assignStudent(Student student, Index lessonId) {
+        lessons.assignStudent(student, lessonId);
     }
 
     /**

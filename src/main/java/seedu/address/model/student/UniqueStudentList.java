@@ -8,6 +8,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.exceptions.DuplicateStudentException;
 import seedu.address.model.student.exceptions.StudentNotFoundException;
 
@@ -77,6 +79,16 @@ public class UniqueStudentList implements Iterable<Student> {
         if (!internalList.remove(toRemove)) {
             throw new StudentNotFoundException();
         }
+    }
+
+    /**
+     * Assigns the lesson to the student's enrolled lessons.
+     * @param lesson the lesson that the student is enrolling in
+     * @param studentId the STUDENT_ID of the student being enrolled
+     */
+    public void assignLesson(Lesson lesson, Index studentId) {
+        requireAllNonNull(lesson, studentId);
+        internalList.get(studentId.getZeroBased()).assignLesson(lesson);
     }
 
     public void setStudents(UniqueStudentList replacement) {

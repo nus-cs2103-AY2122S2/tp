@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -22,10 +23,30 @@ public class Student {
 
     // Data fields
     private final Address address;
+    private final EnrolledLessons enrolledLessons;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
+     */
+    public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+                   EnrolledLessons enrolledLessons) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.enrolledLessons = enrolledLessons;
+    }
+
+    /**
+     * Constructor for the Student class.
+     * @param name name of the student
+     * @param phone phone number of the student
+     * @param email email of the student
+     * @param address address of the student
+     * @param tags tags of the student
      */
     public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
@@ -34,6 +55,7 @@ public class Student {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.enrolledLessons = new EnrolledLessons();
     }
 
     public Name getName() {
@@ -50,6 +72,18 @@ public class Student {
 
     public Address getAddress() {
         return address;
+    }
+
+    public EnrolledLessons getEnrolledLessons() {
+        return enrolledLessons;
+    }
+
+    public boolean isEnrolledIn(Lesson lesson) {
+        return enrolledLessons.isEnrolled(lesson);
+    }
+
+    public void assignLesson(Lesson lesson) {
+        enrolledLessons.addLesson(lesson);
     }
 
     /**

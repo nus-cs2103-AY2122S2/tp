@@ -4,10 +4,10 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.model.student.Student;
+
 
 /**
  * Represents a Lesson in the Lesson book.
@@ -21,7 +21,7 @@ public abstract class Lesson {
     private final LessonAddress address;
 
     // Data fields
-    private final List<Student> assignedStudents;
+    private final EnrolledStudents enrolledStudents;
     private final DateTimeSlot dateTimeSlot;
 
     /**
@@ -32,21 +32,21 @@ public abstract class Lesson {
         this.name = name;
         this.subject = subject;
         this.address = address;
+        this.enrolledStudents = new EnrolledStudents();
         this.dateTimeSlot = dateTimeSlot;
-        this.assignedStudents = new ArrayList<>();
     }
 
     /**
      * Every field must be present and not null.
      */
     protected Lesson(LessonName name, Subject subject, LessonAddress address,
-                     DateTimeSlot dateTimeSlot, List<Student> assignedStudents) {
+                     DateTimeSlot dateTimeSlot, EnrolledStudents enrolledStudents) {
         requireAllNonNull(name, subject, address);
         this.name = name;
         this.subject = subject;
         this.address = address;
         this.dateTimeSlot = dateTimeSlot;
-        this.assignedStudents = assignedStudents;
+        this.enrolledStudents = enrolledStudents;
     }
 
     /**
@@ -137,14 +137,14 @@ public abstract class Lesson {
      * @param dateTimeSlot an object encapsulating a lesson's date, starting time and duration.
      */
     public static TemporaryLesson makeTemporaryLesson(LessonName name, Subject subject, LessonAddress address,
-                                                      DateTimeSlot dateTimeSlot, List<Student> assignedStudents) {
+                                                      DateTimeSlot dateTimeSlot, List<Student> enrolledStudents) {
 
         return new TemporaryLesson(
                 name,
                 subject,
                 address,
                 dateTimeSlot,
-                assignedStudents
+                new EnrolledStudents(enrolledStudents)
         );
     }
 
@@ -160,8 +160,16 @@ public abstract class Lesson {
         return address;
     }
 
-    public List<Student> getAssignedStudents() {
-        return assignedStudents;
+    public EnrolledStudents getEnrolledStudents() {
+        return enrolledStudents;
+    }
+
+    public void assignStudent(Student student) {
+        enrolledStudents.addStudent(student);
+    }
+
+    public boolean hasAlreadyAssigned(Student student) {
+        return enrolledStudents.hasEnrolled(student);
     }
 
     /**
@@ -176,8 +184,4 @@ public abstract class Lesson {
      */
     public abstract boolean isConflictingWithLesson(Lesson otherLesson);
 
-    /**
-     * Adds a given Student to the list of students assigned to this lesson.
-     */
-    public abstract void addStudent(Student student);
 }

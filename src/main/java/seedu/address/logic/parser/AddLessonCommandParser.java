@@ -13,7 +13,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddLessonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -36,7 +35,7 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
                         PREFIX_DATE, PREFIX_START_TIME, PREFIX_DURATION_HOURS,
                         PREFIX_DURATION_MINUTES, PREFIX_RECURRING);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_LESSON_NAME, PREFIX_SUBJECT, PREFIX_LESSON_ADDRESS,
+        if (CheckPrefixes.arePrefixesAbsent(argMultimap, PREFIX_LESSON_NAME, PREFIX_SUBJECT, PREFIX_LESSON_ADDRESS,
                 PREFIX_DATE, PREFIX_START_TIME, PREFIX_DURATION_HOURS, PREFIX_DURATION_MINUTES)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLessonCommand.MESSAGE_USAGE));
@@ -68,14 +67,6 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
         }
 
         return new AddLessonCommand(lesson);
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
     /**
