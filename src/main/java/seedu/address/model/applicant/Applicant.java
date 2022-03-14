@@ -123,8 +123,12 @@ public class Applicant {
                 .append(getPhone())
                 .append("; Email: ")
                 .append(getEmail())
+                .append("; Age: ")
+                .append(getAge())
                 .append("; Address: ")
-                .append(getAddress());
+                .append(getAddress())
+                .append("; Gender: ")
+                .append(getGender());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
