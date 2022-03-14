@@ -15,6 +15,7 @@ import seedu.address.model.interview.Interview;
 public class InterviewCard extends UiPart<Region> {
 
     private static final String FXML = "InterviewListCard.fxml";
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE dd MMM yyyy, HH:mma");
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -49,10 +50,7 @@ public class InterviewCard extends UiPart<Region> {
         this.interview = interview;
 
         id.setText(displayedIndex + ". ");
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE dd MMM yyyy, HH:mma");
         date.setText(interview.getDate().format(formatter));
-
         role.setText(interview.getPosition().getPositionName().positionName);
 
         Applicant applicant = interview.getApplicant();
