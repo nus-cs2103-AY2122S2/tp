@@ -1,9 +1,9 @@
 package seedu.address.model.prescription;
 
-import java.time.LocalDate;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.time.LocalDate;
 
 public class PrescriptionDate {
 
@@ -14,6 +14,11 @@ public class PrescriptionDate {
 
     public final LocalDate date;
 
+    /**
+     * Constructs an {@code PrescriptionDate}.
+     *
+     * @param value A valid date.
+     */
     public PrescriptionDate(String value) {
         requireNonNull(value);
         checkArgument(isValidDate(value), MESSAGE_CONSTRAINTS);

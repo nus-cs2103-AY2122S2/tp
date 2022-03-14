@@ -1,8 +1,8 @@
 package seedu.address.model.prescription;
 
-import seedu.address.model.patient.Nric;
-
 import java.util.Objects;
+
+import seedu.address.model.patient.Nric;
 
 public class Prescription {
 
@@ -11,6 +11,9 @@ public class Prescription {
     private final PrescriptionDate date;
     private final Instruction instruction;
 
+    /**
+     * Every field must be present and not null.
+     */
     public Prescription(Nric patient, DrugName name, PrescriptionDate date, Instruction instruction) {
         this.patient = patient;
         this.name = name;

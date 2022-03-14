@@ -1,8 +1,8 @@
 package seedu.address.model.prescription;
 
-import seedu.address.model.patient.Nric;
-
 import java.util.function.Predicate;
+
+import seedu.address.model.patient.Nric;
 
 public class PrescriptionWithNricPredicate implements Predicate<Prescription> {
 

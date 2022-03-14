@@ -11,6 +11,11 @@ public class Instruction {
 
     public final String value;
 
+    /**
+     * Constructs an {@code Instruction}.
+     *
+     * @param instruction A valid instruction.
+     */
     public Instruction(String instruction) {
         requireNonNull(instruction);
         checkArgument(isValidInstruction(instruction), MESSAGE_CONSTRAINTS);

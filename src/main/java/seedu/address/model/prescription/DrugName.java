@@ -16,6 +16,11 @@ public class DrugName {
 
     public final String drugName;
 
+    /**
+     * Constructs a {@code DrugName}.
+     *
+     * @param name A valid name.
+     */
     public DrugName(String name) {
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
