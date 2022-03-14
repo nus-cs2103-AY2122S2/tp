@@ -53,6 +53,8 @@ public class PersonTest {
     public void equals() {
         // same values -> returns true
         Person aliceCopy = new PersonBuilder(ALICE).build();
+        System.out.println(ALICE);
+        System.out.println(aliceCopy);
         assertTrue(ALICE.equals(aliceCopy));
 
         // same object -> returns true
@@ -79,9 +81,6 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different address -> returns false
-        //editedAlice = new PersonBuilder(ALICE).build();
-        //assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();

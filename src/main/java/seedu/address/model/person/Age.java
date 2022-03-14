@@ -1,50 +1,49 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 /**
  * Represents a Person's age in the MyGM.
- * Currently hard coded - to be further developed.
  */
 public class Age {
     public static final String MESSAGE_CONSTRAINTS = "Ages should be of the format local-part@domain "
             + "and adhere to the following constraints:\n"
             + "1. The local-part should only contain numeric characters.\n"
             + "2. Age should be between 0 and 100 (inclusive).\n";
-
-    private String age;
+    public static final String VALIDATION_REGEX = "^[1-9][0-9]?$|^100$";
+    public final String value;
 
     /**
      * Constructs a {@code Age}.
-     * Hardcoded, to be further developed.
      */
-    public Age() {
-        this.age = "23";
-    }
-
     public Age(String age) {
-        this.age = age;
+        requireNonNull(age);
+        checkArgument(isValidAge(age), MESSAGE_CONSTRAINTS);
+        this.value = age;
     }
 
     /**
      * Checks if the given age is valid.
      */
     public static boolean isValidAge(String ageString) {
-        int age = -1;
-
-        try {
-            age = Integer.parseInt(ageString);
-        } catch (Exception e) {
-            return false;
-        }
-
-        if (age < 0 || age > 100) {
-            return false;
-        }
-
-        return true;
+        return ageString.matches(VALIDATION_REGEX);
     }
 
     @Override
     public String toString() {
-        return this.age + " y/o";
+        return this.value;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Age // instanceof handles nulls
+                && value.equals(((Age) other).value)); // state check
+    }
+
+    @Override
+    public int hashCode() {
+        return value.hashCode();
     }
 }
