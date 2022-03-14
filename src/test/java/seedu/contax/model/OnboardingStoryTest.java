@@ -20,15 +20,12 @@ public class OnboardingStoryTest {
         // both empty stories -> returns true
         assertTrue(story1.equals(story2));
 
-
-        new OnboardingStep("message 1",
-                0.25, 0.5, OnboardingStoryManager.OverlayOption.All, OnboardingStoryManager.PositionOption.Center, OnboardingStoryManager.HighlightOption.ClearAll,
-                0, null, -1, null, false));
-
-        OnboardingStep step1 = new OnboardingStep("message 1", 0, 0, 0,
-                0, 0, 0, "", null, 1, false);
-        OnboardingStep step2 = new OnboardingStep("message 2", 0, 0, 0,
-                0, 0, 0, "", null, 1, false);
+        OnboardingStep step1 = new OnboardingStep("message 1",
+                0.2, 0.5, OnboardingStoryManager.OverlayOption.ShowCommandBox, OnboardingStoryManager.PositionOption.ResultDisplayTop, OnboardingStoryManager.HighlightOption.CommandBox,
+                0, "null", null, null, false);
+        OnboardingStep step2 = new OnboardingStep("message 2",
+                0.2, 0.5, OnboardingStoryManager.OverlayOption.ShowCommandBox, OnboardingStoryManager.PositionOption.ResultDisplayTop, OnboardingStoryManager.HighlightOption.CommandBox,
+                0, "null", null, null, false);
 
 
 
@@ -58,8 +55,9 @@ public class OnboardingStoryTest {
     @Test
     public void addStory() {
         OnboardingStory story1 = new OnboardingStory();
-        OnboardingStep step1 = new OnboardingStep("message 1", 0, 0, 0,
-                0, 0, 0, "", null, 1, false);
+        OnboardingStep step1 = new OnboardingStep("message 1",
+                0.2, 0.5, OnboardingStoryManager.OverlayOption.ShowCommandBox, OnboardingStoryManager.PositionOption.ResultDisplayTop, OnboardingStoryManager.HighlightOption.CommandBox,
+                0, "null", null, null, false);
         story1.addStory(step1);
 
         // Size of story with 1 step
