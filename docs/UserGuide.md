@@ -496,10 +496,10 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS] [by/SEARCH_TYPE]`<br> e.g., `find James Jake by/name`
 **List** | `list`
 **Add Tag** | `addtag n/TAGNAME` <br> e.g., `addtag n/Potential Clients`
-**Edit Tag** | `edittag INDEX t/NEW_TAGNAME` <br> e.g., `edittag f/OLD_TAGNAME t/NEW_TAGNAME`
+**Edit Tag** | `edittag INDEX t/NEW_TAGNAME` <br> e.g., `edittag 1 t/Prospective Clients`
 **List Tags** | `listtags`
 **Delete Tag** | `deletetag INDEX` <br> e.g., `deletetag 1`
-**Find Contacts By Tag** | `findByTag t/TAGNAME` <br> e.g., `findByTag t/friends`
+**Find Contacts By Tag** | `findbytag t/TAGNAME` <br> e.g., `findbytag t/friends`
 **Add Appointment** | `addappointment n/NAME d/DATE t/TIME l/DURATION p/PERSON`<br> e.g., `addappointment n/Call Bob d/14-02-2022 t/11:00 p/2 l/60`
 **List Appointments** | `listappointments`
 **Delete Appointment** | `deleteappointment INDEX`<br> e.g., `deleteappointment 2`
