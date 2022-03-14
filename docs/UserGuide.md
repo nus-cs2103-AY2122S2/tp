@@ -248,18 +248,18 @@ Format: `deletetag INDEX`
 Examples:
 * `deletetag 1` Deletes the first tag in the tag list and disassociates any contacts that contain the specified tag.
 
-### Finding Contacts by Tag : `findByTag`
+### Finding Contacts by Tag : `findbytag`
 
 Finds persons whose tags match the given tag names.
 
-Format: `findByTag t/TAGNAME`
+Format: `findbytag t/TAGNAME`
 
 * The `TAGNAME` parameter **must** be specified.
 * Search is case-insensitive e.g. `clients` is the same as `Clients`.
 * An error will be thrown if the specified `TAGNAME` does not exist.
 
 Examples:
-* `findByTag t/friends` Displays the contact information of contacts who have the *friends* tag.
+* `findbytag t/friends` Displays the contact information of contacts who have the *friends* tag.
 
 ![Find Tags](images/FindTag.png)
 
@@ -503,7 +503,7 @@ Action | Format, Examples
 **Edit Tag** | `edittag INDEX t/NEW_TAGNAME` <br> e.g., `edittag f/OLD_TAGNAME t/NEW_TAGNAME`
 **List Tags** | `listtags`
 **Delete Tag** | `deletetag n/TAGNAME` <br> e.g., `deletetag n/friends`
-**Find Contacts By Tag** | `findByTag t/TAGNAME` <br> e.g., `findByTag t/friends`
+**Find Contacts By Tag** | `findbytag t/TAGNAME` <br> e.g., `findbytag t/friends`
 **Add Appointment** | `addAppointment n/NAME d/DATE t/TIME l/DURATION p/PERSON`<br> e.g., `addAppointment n/Call Bob d/14-02-2022 t/11:00 p/2 l/60`
 **List Appointments** | `listAppointments`
 **Delete Appointment** | `deleteAppointment INDEX`<br> e.g., `deleteAppointment 2`
