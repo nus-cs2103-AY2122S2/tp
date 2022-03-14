@@ -124,7 +124,6 @@ public class JsonAdaptedPersonTest {
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
-
     @Test
     public void toModelType_nullHeight_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_AGE,
@@ -142,7 +141,6 @@ public class JsonAdaptedPersonTest {
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
-
     @Test
     public void toModelType_nullJerseyNumber_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_AGE,
@@ -159,7 +157,6 @@ public class JsonAdaptedPersonTest {
         String expectedMessage = Weight.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
-
 
     @Test
     public void toModelType_nullWeight_throwsIllegalValueException() {
