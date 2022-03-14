@@ -2,14 +2,13 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -19,7 +18,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Person;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
-import seedu.address.model.student.Phone;
+import seedu.address.model.student.Telegram;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tamodule.AcademicYear;
@@ -85,13 +84,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code phone} is invalid.
      */
-    public static Phone parsePhone(String phone) throws ParseException {
+    public static Optional<Telegram> parseTelegram(String phone) throws ParseException {
         requireNonNull(phone);
-        String trimmedPhone = phone.trim();
-        if (!Phone.isValidPhone(trimmedPhone)) {
-            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+        String trimmedTelegram = phone.trim();
+        if (!Telegram.isValidTelegram(trimmedTelegram)) {
+            throw new ParseException(Telegram.MESSAGE_CONSTRAINTS);
         }
-        return new Phone(trimmedPhone);
+        return Optional.of(new Telegram(trimmedTelegram));
     }
 
     /**
@@ -183,6 +182,8 @@ public class ParserUtil {
         if (targetIndex.getZeroBased() >= lastShownModuleList.size()) {
             throw new ParseException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
+
+        LogsCenter.getLogger(LogicManager.class).info("TAModule: " + lastShownModuleList.get(targetIndex.getZeroBased()));
 
         return lastShownModuleList.get(targetIndex.getZeroBased());
     }

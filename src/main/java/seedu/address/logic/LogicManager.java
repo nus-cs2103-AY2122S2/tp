@@ -15,7 +15,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyTAssist;
 import seedu.address.model.classgroup.ClassGroup;
-import seedu.address.model.person.Person;
 import seedu.address.model.student.Student;
 import seedu.address.model.tamodule.TaModule;
 import seedu.address.storage.Storage;
@@ -29,7 +28,7 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final TAssistParser AssistParser;
+    private final TAssistParser tAssistParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -37,7 +36,7 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        AssistParser = new TAssistParser();
+        tAssistParser = new TAssistParser();
     }
 
     @Override
@@ -45,7 +44,7 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = AssistParser.parseCommand(commandText, model);
+        Command command = tAssistParser.parseCommand(commandText, model);
         commandResult = command.execute(model);
 
         try {
@@ -75,12 +74,6 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<ClassGroup> getFilteredClassGroupList() {
         return model.getFilteredClassGroupList();
-    }
-
-    /** TODO: to be removed*/
-    @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return ab3model.getFilteredPersonList();
     }
 
     @Override

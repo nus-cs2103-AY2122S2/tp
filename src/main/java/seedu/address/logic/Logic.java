@@ -44,9 +44,6 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of class groups. */
     ObservableList<ClassGroup> getFilteredClassGroupList();
 
-    /** TODO: to be removed */
-    ObservableList<Person> getFilteredPersonList();
-
     /**
      * Returns the user prefs' address book file path.
      */

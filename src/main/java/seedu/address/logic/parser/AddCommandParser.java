@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
-
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -15,6 +14,7 @@ import seedu.address.model.tamodule.ModuleCode;
 import seedu.address.model.tamodule.ModuleName;
 import seedu.address.model.tamodule.TaModule;
 
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
@@ -48,19 +48,19 @@ public class AddCommandParser implements Parser<AddCommand> {
         switch(entityType) {
 
         case TYPE_STUDENT:
-            argMultimap = ArgumentTokenizer.tokenize(arguments, PREFIX_ID, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL);
+            argMultimap = ArgumentTokenizer.tokenize(arguments, PREFIX_ID, PREFIX_NAME, PREFIX_TELEGRAM, PREFIX_EMAIL);
 
-            if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL)
+            if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_NAME, PREFIX_TELEGRAM, PREFIX_EMAIL)
                     || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
             }
 
             StudentId id = ParserUtil.parseStudentId(argMultimap.getValue(PREFIX_ID).get());
             Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-            Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+            Optional<Telegram> telegram = ParserUtil.parseTelegram(argMultimap.getValue(PREFIX_TELEGRAM).get());
             Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
 
-            Student student = new Student(id, name, phone, email);
+            Student student = new Student(id, name, email, telegram);
 
             return new AddCommand(student);
 
@@ -88,8 +88,8 @@ public class AddCommandParser implements Parser<AddCommand> {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
             }
 
-            ClassGroupId classGroupId = ParserUtil.parseClassGroupId(argMultimap.getValue(PREFIX_NAME).get());
-            ClassGroupType classGroupType = ParserUtil.parseClassGroupType(argMultimap.getValue(PREFIX_MODULE_CODE).get());
+            ClassGroupId classGroupId = ParserUtil.parseClassGroupId(argMultimap.getValue(PREFIX_ID).get());
+            ClassGroupType classGroupType = ParserUtil.parseClassGroupType(argMultimap.getValue(PREFIX_TYPE).get());
             TaModule taModule = ParserUtil.parseTaModule(argMultimap.getValue(PREFIX_MODULE_INDEX).get(), model);
 
             ClassGroup classGroup = new ClassGroup(classGroupId, classGroupType, taModule);
