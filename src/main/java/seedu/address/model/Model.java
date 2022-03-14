@@ -15,7 +15,7 @@ import seedu.address.model.position.Position;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Applicant> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
-
+    Predicate<Interview> PREDICATE_SHOW_ALL_INTERVIEWS = unused -> true;
     Predicate<Position> PREDICATE_SHOW_ALL_POSITIONS = unused -> true;
 
     /**
@@ -101,6 +101,15 @@ public interface Model {
      */
     void addInterview(Interview interview);
 
+    /** Returns an unmodifiable view of the filtered interview list */
+    ObservableList<Interview> getFilteredInterviewList();
+
+    /**
+     * Updates the filter of the filtered interview list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredInterviewList(Predicate<Interview> predicate);
+
     /**
      * Updates the filter of the filtered position list to filter by the given {@code predicate}.
      *
@@ -125,6 +134,6 @@ public interface Model {
      */
     void addPosition(Position position);
 
-    /** Returns an unmodifiable view of the filtered applicant list */
+    /** Returns an unmodifiable view of the filtered position list */
     ObservableList<Position> getFilteredPositionList();
 }
