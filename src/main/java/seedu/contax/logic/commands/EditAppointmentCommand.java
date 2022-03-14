@@ -31,7 +31,7 @@ import seedu.contax.model.person.Person;
  */
 public class EditAppointmentCommand extends Command {
 
-    public static final String COMMAND_WORD = "editAppointment";
+    public static final String COMMAND_WORD = "editappointment";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the appointment identified "
             + "by the index number used in the displayed appointment list. "
