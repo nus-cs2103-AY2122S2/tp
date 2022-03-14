@@ -147,11 +147,11 @@ Filter student based on health statuses
 
 Format:`find HEALTH_STATUS`
 
-* Returns a list of students with the given health status: `covid-positive`, `covid-negative`, `close-contact`
-* The search is case-sensitive. e.g `Covid-Positive` will not match `covid-positive`
+* Returns a list of students with the given health status: `positive`, `negative`, `hrw`, `hrn`
+* The search is case-insensitive. e.g `Positive` will match `positive`
 
 Examples of usage:
-* `find covid-positive` returna all student that are tagged as covid-positive
+* `find positive` returns all student that are tagged as covid-positive
 
 ### Saving
 Saving in the application is automatic. The data in the file will be saved accordingly whenever
