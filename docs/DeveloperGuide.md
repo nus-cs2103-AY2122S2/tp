@@ -263,9 +263,9 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: 
-With many customers, it is hard for beauty salons to provide personalized customer service. 
-Our product allows the user to keep track of customer information and group their customers to provide targeted services every time they return. 
+**Value proposition**:
+With many customers, it is hard for beauty salons to provide personalized customer service.
+Our product allows the user to keep track of customer information and group their customers to provide targeted services every time they return.
 It can also keep track of performance metrics, like total new memberships.
 
 
@@ -317,7 +317,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4.  TrackBeau shows information about customer
 
     Use case ends.
-    
+
 **Extensions**
 
 * 2a. The list is empty.
@@ -329,7 +329,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. TrackBeau shows an error message.
 
       Use case resumes at step 3.
-    
+
 **Use case: find customer's detail by their name**
 
 1.  User requests to find a customer by name using a keyword
@@ -350,7 +350,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. TrackBeau shows an error message.
 
       Use case resumes at step 3.
-      
+
 **Use case: Add a customer**
 
 **MSS**
@@ -366,7 +366,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The input format is wrong.
     * 2a1. TrackBeau shows an error message.
-    
+
       Use case resumes at step 3.
 
 **Use case: Edit a customer**
@@ -384,9 +384,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The input format is wrong.
     * 2a1. TrackBeau shows an error message.
-    
+
       Use case resumes at step 3.
-      
+  
 *{More to be added}*
 
 **Use case: user wishes to exit the application**
@@ -405,7 +405,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5.  The product should be for a single user i.e. (not a multi-user product).
 6.  The data should be stored locally and should be in a human editable text file.
 7.  Does not use a DBMS to store data.
-8.  The software should work without requiring an installer. 
+8.  The software should work without requiring an installer.
 9.  The file sizes of the deliverables should be reasonable and not exceed the limits given below:
     -   Product (i.e., the JAR/ZIP file)): 100MB
     -   Documents (i.e., PDF files): 15MB/file

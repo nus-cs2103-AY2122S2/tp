@@ -10,7 +10,7 @@ title: TrackBeau
 * This is application that is designed for busy beauty salons with diverse customer bases that want to personalise service. While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface). <br>
   Example usages:
   * Track customer profiles like their skin type or hair type so that appropriate products can be recommended for return customers
-  * Track booking time slots to organise manpower and facilities 
+  * Track booking time slots to organise manpower and facilities
   * Obtain overall statistics on new customers gained to adjust sales plans
 * If you are interested in using TrackBeau, head over to the [_Quick Start_ section of the **User Guide**](https://ay2122s2-cs2103-f11-3.github.io/tp/UserGuide.html).
 * If you are interested about developing TrackBeau, the [**Developer Guide**](https://ay2122s2-cs2103-f11-3.github.io/tp/DeveloperGuide.html) is a good place to start.

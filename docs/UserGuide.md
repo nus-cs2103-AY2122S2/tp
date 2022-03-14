@@ -140,7 +140,7 @@ Format: delete INDEX
 * The index must be a positive integer 1, 2, 3, …
 
 Examples:
-* `delete 2` : Removes the 2nd customer from the application. 
+* `delete 2` : Removes the 2nd customer from the application.
 
 ### Clearing all entries : `clear`
 
