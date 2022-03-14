@@ -69,7 +69,7 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s trackBeau book and {@code userPrefs}. <br>
+     * Returns a {@code ModelManager} with the data from {@code storage}'s trackBeau and {@code userPrefs}. <br>
      * The data from the sample trackBeau will be used instead if {@code storage}'s trackBeau is not found,
      * or an empty trackBeau will be used instead if errors occur when reading {@code storage}'s trackBeau.
      */

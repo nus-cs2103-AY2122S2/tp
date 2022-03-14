@@ -47,7 +47,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
-        EditCommand.EditCustomerDescriptor editCustomerDescriptor = new EditCustomerDescriptor();
+        EditCustomerDescriptor editCustomerDescriptor = new EditCustomerDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editCustomerDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
