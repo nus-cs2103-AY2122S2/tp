@@ -24,6 +24,7 @@ title: Developer Guide
     * [Launch and shutdown](#launch-and-shutdown)
     * [Deleting a show](#deleting-a-show)
     * [Saving data](#saving-data)
+  
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
