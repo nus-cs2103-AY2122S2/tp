@@ -175,7 +175,7 @@
             </HBox.margin>
           </Label>
         </HBox>
-        <HBox fx:id="addTAskCommandContainer">
+        <HBox fx:id="addTaskCommandContainer">
           <padding>
             <Insets top="5" right="5" bottom="5" left="15" />
           </padding>
@@ -197,6 +197,33 @@
             <Insets top="5" right="5" bottom="5" left="15" />
           </padding>
           <Label fx:id="addTaskCommandExample" text="Label" style="-fx-font-weight: bold">
+            <HBox.margin>
+              <Insets right="10.0" />
+            </HBox.margin>
+          </Label>
+        </HBox>
+        <HBox fx:id="viewTaskCommandContainer">
+          <padding>
+            <Insets top="5" right="5" bottom="5" left="15" />
+          </padding>
+          <children>
+            <Label fx:id="viewTaskCommandDesc" text="Label" style="-fx-font-weight: bold">
+              <HBox.margin>
+                <Insets right="10.0" />
+              </HBox.margin>
+            </Label>
+            <Label fx:id="viewTaskCommand" text="Label" style="-fx-font-weight: bold">
+              <HBox.margin>
+                <Insets right="10.0" />
+              </HBox.margin>
+            </Label>
+          </children>
+        </HBox>
+        <HBox>
+          <padding>
+            <Insets top="5" right="5" bottom="5" left="15" />
+          </padding>
+          <Label fx:id="viewTaskCommandExample" text="Label" style="-fx-font-weight: bold">
             <HBox.margin>
               <Insets right="10.0" />
             </HBox.margin>

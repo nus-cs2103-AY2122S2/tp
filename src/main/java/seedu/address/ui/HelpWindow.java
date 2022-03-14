@@ -42,6 +42,10 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String ADD_TASK_COMMAND = "addtask t/TASK_NAME g/GROUP_NAME";
     public static final String ADD_TASK_COMMAND_EXAMPLE = "Adds a task to the specified existing group.";
 
+    public static final String VIEW_TASK_COMMAND_DESC = "Displays the tasks in a group: ";
+    public static final String VIEW_TASK_COMMAND = "viewtask g/GROUP_NAME";
+    public static final String VIEW_TASK_COMMAND_EXAMPLE = "Displays the tasks from the specified existing group.";
+
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
@@ -105,6 +109,15 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     private Label addTaskCommandExample;
 
+    @FXML
+    private Label viewTaskCommandDesc;
+
+    @FXML
+    private Label viewTaskCommand;
+
+    @FXML
+    private Label viewTaskCommandExample;
+
     /**
      * Creates a new HelpWindow.
      *
@@ -131,6 +144,9 @@ public class HelpWindow extends UiPart<Stage> {
         addTaskCommandDesc.setText(ADD_TASK_COMMAND_DESC);
         addTaskCommand.setText(ADD_TASK_COMMAND);
         addTaskCommandExample.setText(ADD_TASK_COMMAND_EXAMPLE);
+        viewTaskCommandDesc.setText(VIEW_TASK_COMMAND_DESC);
+        viewTaskCommand.setText(VIEW_TASK_COMMAND);
+        viewTaskCommandExample.setText(VIEW_TASK_COMMAND_EXAMPLE);
     }
 
     /**

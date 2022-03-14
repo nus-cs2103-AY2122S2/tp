@@ -24,7 +24,7 @@
 }
 
 #listCommand.label, #exitCommand.label ,#addCommand.label, #addGroupCommand.label
-, #assignCommand.label, #addTaskCommand.label {
+, #assignCommand.label, #addTaskCommand.label, #viewTaskCommand.label {
     -fx-text-fill: white;
     -fx-background-color: #8A88FF;
     -fx-padding: 2 10 2 10;
