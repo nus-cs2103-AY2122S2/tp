@@ -1,7 +1,38 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.AGE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.AGE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.FLAG_APPLICANT;
+import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_AGE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_GENDER_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AGE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalPersons.AMY;
@@ -13,8 +44,8 @@ import seedu.address.logic.commands.add.AddApplicantCommand;
 import seedu.address.model.applicant.Address;
 import seedu.address.model.applicant.Age;
 import seedu.address.model.applicant.Applicant;
-import seedu.address.model.applicant.Gender;
 import seedu.address.model.applicant.Email;
+import seedu.address.model.applicant.Gender;
 import seedu.address.model.applicant.Name;
 import seedu.address.model.applicant.Phone;
 import seedu.address.model.tag.Tag;
@@ -134,11 +165,23 @@ public class AddApplicantCommandParserTest {
                         + AGE_DESC_BOB + ADDRESS_DESC_BOB + GENDER_DESC_BOB + TAG_DESC_HUSBAND
                         + TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
 
+        // invalid age
+        assertParseFailure(parser,
+                FLAG_APPLICANT + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                        + INVALID_AGE_DESC + ADDRESS_DESC_BOB + GENDER_DESC_BOB + TAG_DESC_HUSBAND
+                        + TAG_DESC_FRIEND, Age.MESSAGE_CONSTRAINTS);
+
         // invalid address
         assertParseFailure(parser,
                 FLAG_APPLICANT + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + AGE_DESC_BOB + INVALID_ADDRESS_DESC + GENDER_DESC_BOB + TAG_DESC_HUSBAND
                         + TAG_DESC_FRIEND, Address.MESSAGE_CONSTRAINTS);
+
+        // invalid gender
+        assertParseFailure(parser,
+                FLAG_APPLICANT + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                        + AGE_DESC_BOB + ADDRESS_DESC_BOB + INVALID_GENDER_DESC + TAG_DESC_HUSBAND
+                        + TAG_DESC_FRIEND, Gender.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser,
