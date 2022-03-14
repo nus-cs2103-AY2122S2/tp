@@ -4,8 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.stream.Stream;
-
 import seedu.contax.commons.core.index.Index;
 import seedu.contax.logic.commands.EditTagCommand;
 import seedu.contax.logic.commands.EditTagCommand.EditTagDescriptor;
@@ -49,9 +47,5 @@ public class EditTagCommandParser implements Parser<EditTagCommand> {
         editTagDescriptor.setTagName(argumentMultimap.getValue(PREFIX_TAG).get());
 
         return new EditTagCommand(index, editTagDescriptor);
-    }
-
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
