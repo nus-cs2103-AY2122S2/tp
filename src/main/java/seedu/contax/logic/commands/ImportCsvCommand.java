@@ -28,6 +28,9 @@ import seedu.contax.model.person.exceptions.DuplicatePersonException;
 import seedu.contax.model.tag.Tag;
 import seedu.contax.storage.CsvManager;
 
+/**
+ * Imports CSV files into the address book based on specified column indicators
+ */
 public class ImportCsvCommand extends Command {
     public static final String COMMAND_WORD = "importcsv";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Imports contacts from CSV file"

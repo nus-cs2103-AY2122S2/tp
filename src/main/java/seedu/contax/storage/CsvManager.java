@@ -16,7 +16,9 @@ import seedu.contax.model.Model;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.tag.Tag;
 
-
+/**
+ * Manager to handle import/export csv logic
+ */
 public class CsvManager {
     private static final String CSV_HEADER = "Name,Phone,Email,Address,Tagged";
 

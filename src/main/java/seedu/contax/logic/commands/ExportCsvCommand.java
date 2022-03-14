@@ -3,6 +3,9 @@ package seedu.contax.logic.commands;
 import seedu.contax.model.Model;
 import seedu.contax.storage.CsvManager;
 
+/**
+ * Exports current address book manually to data/addressbook.csv
+ */
 public class ExportCsvCommand extends Command {
     public static final String COMMAND_WORD = "exportcsv";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exports contacts to CSV file"
