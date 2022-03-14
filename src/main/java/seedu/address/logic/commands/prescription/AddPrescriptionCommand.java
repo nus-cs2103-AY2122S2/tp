@@ -1,5 +1,12 @@
 package seedu.address.logic.commands.prescription;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INSTRUCTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
+
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
@@ -9,9 +16,6 @@ import seedu.address.model.patient.Nric;
 import seedu.address.model.patient.NricPredicate;
 import seedu.address.model.prescription.Prescription;
 import seedu.address.model.prescription.PrescriptionWithNricPredicate;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
 
 public class AddPrescriptionCommand extends Command {
 
@@ -40,6 +44,9 @@ public class AddPrescriptionCommand extends Command {
 
     private final Prescription toAdd;
 
+    /**
+     * Creates an AddPrescriptionCommand to add the specified {@code Patient}
+     */
     public AddPrescriptionCommand(Nric nric, Prescription prescription) {
         requireNonNull(nric);
         requireNonNull(prescription);

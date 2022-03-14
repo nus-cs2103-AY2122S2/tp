@@ -22,7 +22,7 @@ public class ContactListPanel extends UiPart<Region> {
     private ListView<Contact> contactListView;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code ContactListPanel} with the given {@code ObservableList}.
      */
     public ContactListPanel(ObservableList<Contact> contactList) {
         super(FXML);

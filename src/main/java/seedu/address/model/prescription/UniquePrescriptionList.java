@@ -1,5 +1,11 @@
 package seedu.address.model.prescription;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.Iterator;
+import java.util.List;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.patient.exceptions.DuplicatePersonException;
@@ -7,23 +13,24 @@ import seedu.address.model.patient.exceptions.PersonNotFoundException;
 import seedu.address.model.prescription.exceptions.DuplicatePrescriptionException;
 import seedu.address.model.prescription.exceptions.PrescriptionNotFoundException;
 
-import java.util.Iterator;
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
-public class UniquePrescriptionList implements Iterable<Prescription>{
+public class UniquePrescriptionList implements Iterable<Prescription> {
 
     private final ObservableList<Prescription> internalList = FXCollections.observableArrayList();
     private final ObservableList<Prescription> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
+    /**
+     * Returns true if the list contains same prescription as the given argument.
+     */
     public boolean contains(Prescription toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::equals);
     }
 
+    /**
+     * Adds a prescription to the list.
+     * The prescription must not already exist in the list.
+     */
     public void add(Prescription toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
@@ -47,6 +54,10 @@ public class UniquePrescriptionList implements Iterable<Prescription>{
         internalList.set(index, editedPrescription);
     }
 
+    /**
+     * Removes the equivalent prescription from the list.
+     * The prescription must exist in the list.
+     */
     public void remove(Prescription toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
@@ -59,7 +70,7 @@ public class UniquePrescriptionList implements Iterable<Prescription>{
         internalList.setAll(replacement.internalList);
     }
 
-    public void setPrescription(List<Prescription> prescriptions) {
+    public void setPrescriptions(List<Prescription> prescriptions) {
         requireAllNonNull(prescriptions);
         if (!prescriptionAreUnique(prescriptions)) {
             throw new DuplicatePersonException();

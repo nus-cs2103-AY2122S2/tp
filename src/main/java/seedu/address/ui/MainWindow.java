@@ -155,6 +155,7 @@ public class MainWindow extends UiPart<Stage> {
         case PRESCRIPTION:
             personListPanelPlaceholder.getChildren().remove(0);
             personListPanelPlaceholder.getChildren().add(prescriptionListPanel.getRoot());
+            return;
         default:
             personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 

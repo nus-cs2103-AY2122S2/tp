@@ -114,6 +114,12 @@ public class ParserUtil {
         return new Email(trimmedEmail);
     }
 
+    /**
+     * Parses a {@code String name} into an {@code DrugName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
     public static DrugName parseDrugName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
@@ -123,6 +129,12 @@ public class ParserUtil {
         return new DrugName(trimmedName);
     }
 
+    /**
+     * Parses a {@code String date} into an {@code PrescriptionDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
     public static PrescriptionDate parsePrescriptionDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
@@ -131,6 +143,13 @@ public class ParserUtil {
         }
         return new PrescriptionDate(trimmedDate);
     }
+
+    /**
+     * Parses a {@code String instruction} into an {@code Instruction}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code instruction} is invalid.
+     */
     public static Instruction parseInstruction(String instruction) throws ParseException {
         requireNonNull(instruction);
         String trimmedInstruction = instruction.trim();

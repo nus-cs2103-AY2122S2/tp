@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.contact.Phone;
 import seedu.address.model.patient.Name;
@@ -20,6 +21,9 @@ public class JsonAdaptedPrescription {
     private final String date;
     private final String instruction;
 
+    /**
+     * Constructs a {@code JsonAdaptedPrescription} with the given prescription details.
+     */
     @JsonCreator
     public JsonAdaptedPrescription(@JsonProperty("nric") String nric, @JsonProperty("drugname") String drugname,
                               @JsonProperty("date") String date, @JsonProperty("instruction") String instruction) {
@@ -30,6 +34,9 @@ public class JsonAdaptedPrescription {
         this.instruction = instruction;
     }
 
+    /**
+     * Converts a given {@code Prescription} into this class for Jackson use.
+     */
     public JsonAdaptedPrescription(Prescription source) {
         nric = source.getPrescriptionTarget().value;
         drugname = source.getDrugName().drugName;
@@ -37,6 +44,11 @@ public class JsonAdaptedPrescription {
         instruction = source.getInstruction().value;
     }
 
+    /**
+     * Converts this Jackson-friendly adapted prescription object into the model's {@code Prescription} object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated in the adapted prescription.
+     */
     public Prescription toModelType() throws IllegalValueException {
 
         if (nric == null) {
@@ -48,7 +60,8 @@ public class JsonAdaptedPrescription {
         final Nric modelNric = new Nric(nric);
 
         if (drugname == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, DrugName.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    DrugName.class.getSimpleName()));
         }
         if (!DrugName.isValidName(drugname)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);

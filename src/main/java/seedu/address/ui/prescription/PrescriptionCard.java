@@ -3,9 +3,9 @@ package seedu.address.ui.prescription;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import seedu.address.model.prescription.Prescription;
 import seedu.address.ui.UiPart;
-import javafx.scene.layout.Region;
 
 
 public class PrescriptionCard extends UiPart<Region> {
@@ -26,6 +26,9 @@ public class PrescriptionCard extends UiPart<Region> {
     @FXML
     private Label instruction;
 
+    /**
+     * Creates a {@code PrescriptionCode} with the given {@code Prescription} and index to display.
+     */
     public PrescriptionCard(Prescription prescription, int displayedIndex) {
         super(FXML);
         this.prescription = prescription;
