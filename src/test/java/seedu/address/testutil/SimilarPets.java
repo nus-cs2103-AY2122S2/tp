@@ -24,7 +24,7 @@ public class SimilarPets {
     private SimilarPets() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical pets.
+     * Returns an {@code AddressBook} with all the similar pets.
      */
     public static AddressBook getSimilarAddressBook() {
         AddressBook ab = new AddressBook();
