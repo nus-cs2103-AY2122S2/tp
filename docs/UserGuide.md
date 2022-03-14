@@ -1,12 +1,13 @@
-# User Guide
+---
+layout: page
+title: User Guide
+---
+
+RealEstatePro is a desktop app for managing contacts, optimized for real estate agents to manage their clients’ contacts and sales of properties.
 
 # Reference
 
 Original AB3 User Guide: [link](https://se-education.org/addressbook-level3/UserGuide.html)
-
-# User Guide
-
-RealEstatePro is a desktop app for managing contacts, optimized for real estate agents to manage their clients’ contacts and sales of properties.
 
 ## Quick start
 
@@ -137,6 +138,20 @@ Format: `favourite INDEX`
 - Favorites the person at the specified `INDEX`.
 - The index refers to the index number shown in the displayed person list.
 - The index **must be a positive integer** 1, 2, 3, …
+
+### Open Help Window: `help`
+
+Opens a new window that displays information on how to use the app and a URL to the user guide of the app.
+
+Format: `help`
+
+## Navigating the help window
+
+<img src="images/user-guide/helpWindowUi.png" width="600px">
+
+1. Link to the full user guide
+2. Buttons to access the different help sections
+3. Help contents
 
 ### Open Favourite Window:
 
