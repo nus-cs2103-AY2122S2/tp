@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.contax.testutil.Assert.assertThrows;
 import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALICE;
 import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALONE;
-import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_EXTRA;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
