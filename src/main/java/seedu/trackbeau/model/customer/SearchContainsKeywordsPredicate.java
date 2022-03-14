@@ -7,7 +7,7 @@ import java.util.function.Predicate;
 import seedu.trackbeau.commons.util.StringUtil;
 
 /**
- * Tests that a {@code Person}'s {@code Data} matches any of the keywords given.
+ * Tests that a {@code Customer's}'s {@code Data} matches any of the keywords given.
  */
 public class SearchContainsKeywordsPredicate implements Predicate<Customer> {
     private final String searchArea;
