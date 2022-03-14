@@ -7,7 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.contax.testutil.Assert.assertThrows;
 import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALICE;
 import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALONE;
+import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_EXTRA;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -95,6 +97,26 @@ public class DisjointAppointmentListTest {
     }
 
     @Test
+    public void add_unsortedNewAppointment_successSortsPosition() {
+        LocalDateTime baseDateTime = APPOINTMENT_ALONE.getStartDateTime().value;
+        appointmentList.add(APPOINTMENT_ALONE);
+
+        Appointment beforeAppointment = new AppointmentBuilder(APPOINTMENT_ALONE)
+                .withStartDateTime(baseDateTime.minusDays(2)).build();
+        Appointment afterAppointment = new AppointmentBuilder(APPOINTMENT_ALONE)
+                .withStartDateTime(baseDateTime.plusDays(2)).build();
+
+        appointmentList.add(beforeAppointment);
+        assertEquals(beforeAppointment, appointmentList.asUnmodifiableObservableList().get(0));
+        assertEquals(APPOINTMENT_ALONE, appointmentList.asUnmodifiableObservableList().get(1));
+
+        appointmentList.add(afterAppointment);
+        assertEquals(beforeAppointment, appointmentList.asUnmodifiableObservableList().get(0));
+        assertEquals(APPOINTMENT_ALONE, appointmentList.asUnmodifiableObservableList().get(1));
+        assertEquals(afterAppointment, appointmentList.asUnmodifiableObservableList().get(2));
+    }
+
+    @Test
     public void setAppointment_nullTargetAppointment_throwsNullPointerException() {
         assertThrows(NullPointerException.class, ()
             -> appointmentList.setAppointment(null, APPOINTMENT_ALICE));
@@ -148,6 +170,37 @@ public class DisjointAppointmentListTest {
     }
 
     @Test
+    public void setAppointment_editedAppointmentDisjointDifferentOrdering_successSortsPosition() {
+        LocalDateTime baseDateTime = APPOINTMENT_ALONE.getStartDateTime().value;
+        Appointment modifiedAloneAppointment = new AppointmentBuilder(APPOINTMENT_ALONE)
+                .withStartDateTime(baseDateTime.minusDays(1)).build();
+
+        appointmentList.add(modifiedAloneAppointment);
+        appointmentList.add(APPOINTMENT_ALONE);
+
+        Appointment beforeAppointment = new AppointmentBuilder(APPOINTMENT_ALONE)
+                .withName("Another Meeting")
+                .withStartDateTime(baseDateTime.minusDays(2)).build();
+        Appointment afterAppointment = new AppointmentBuilder(APPOINTMENT_ALONE)
+                .withName("Another Meeting")
+                .withStartDateTime(baseDateTime.plusDays(2)).build();
+
+        appointmentList.setAppointment(APPOINTMENT_ALONE, beforeAppointment);
+        assertEquals(beforeAppointment, appointmentList.asUnmodifiableObservableList().get(0));
+        assertEquals(modifiedAloneAppointment, appointmentList.asUnmodifiableObservableList().get(1));
+
+        appointmentList.setAppointment(beforeAppointment, afterAppointment);
+        assertEquals(modifiedAloneAppointment, appointmentList.asUnmodifiableObservableList().get(0));
+        assertEquals(afterAppointment, appointmentList.asUnmodifiableObservableList().get(1));
+
+        appointmentList.add(beforeAppointment);
+        appointmentList.setAppointment(modifiedAloneAppointment, modifiedAloneAppointment);
+        assertEquals(beforeAppointment, appointmentList.asUnmodifiableObservableList().get(0));
+        assertEquals(modifiedAloneAppointment, appointmentList.asUnmodifiableObservableList().get(1));
+        assertEquals(afterAppointment, appointmentList.asUnmodifiableObservableList().get(2));
+    }
+
+    @Test
     public void setAppointment_editedAppointmentOverlaps_throwsOverlappingAppointmentException() {
         Appointment disjointAppointment = new AppointmentBuilder(APPOINTMENT_ALICE)
                 .withName("Another Meeting")
@@ -188,6 +241,31 @@ public class DisjointAppointmentListTest {
         appointmentList.setAppointments(appointmentArrayList);
 
         DisjointAppointmentList expectedAppointmentList = new DisjointAppointmentList();
+        expectedAppointmentList.add(APPOINTMENT_ALONE);
+        assertEquals(expectedAppointmentList, appointmentList);
+    }
+
+    @Test
+    public void setAppointments_unsortedList_sortsListUponSetting() {
+        appointmentList.add(APPOINTMENT_ALICE);
+        List<Appointment> appointmentArrayList = new ArrayList<>();
+        LocalDateTime baseDateTime = APPOINTMENT_ALONE.getStartDateTime().value;
+        appointmentArrayList.add(APPOINTMENT_ALONE);
+        appointmentArrayList.add(new AppointmentBuilder(APPOINTMENT_ALONE)
+                .withStartDateTime(baseDateTime.minusDays(1)).build());
+        appointmentArrayList.add(new AppointmentBuilder(APPOINTMENT_ALONE)
+                .withStartDateTime(baseDateTime.minusDays(2)).build());
+        appointmentArrayList.add(new AppointmentBuilder(APPOINTMENT_ALONE)
+                .withStartDateTime(baseDateTime.minusDays(3)).build());
+        appointmentList.setAppointments(appointmentArrayList);
+
+        DisjointAppointmentList expectedAppointmentList = new DisjointAppointmentList();
+        expectedAppointmentList.add(new AppointmentBuilder(APPOINTMENT_ALONE)
+                .withStartDateTime(baseDateTime.minusDays(3)).build());
+        expectedAppointmentList.add(new AppointmentBuilder(APPOINTMENT_ALONE)
+                .withStartDateTime(baseDateTime.minusDays(2)).build());
+        expectedAppointmentList.add(new AppointmentBuilder(APPOINTMENT_ALONE)
+                .withStartDateTime(baseDateTime.minusDays(1)).build());
         expectedAppointmentList.add(APPOINTMENT_ALONE);
         assertEquals(expectedAppointmentList, appointmentList);
     }

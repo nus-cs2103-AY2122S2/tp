@@ -14,8 +14,11 @@ import seedu.contax.model.appointment.exceptions.OverlappingAppointmentException
 /**
  * A list of appointments that enforces that its elements cannot have overlapping periods and does not allow
  * nulls. This check is performed using {@link Appointment#isOverlapping(Appointment)}, and will be performed
- * upon any modification to the list. Note that {@link #remove(Appointment)} uses Appointment#equals(Object)
- * to find the target appointment to remove.
+ * upon any modification to the list. It also enforces a chronological ordering of the appointments in the
+ * list, done by sorting {@link Appointment#getStartDateTime()} since appointments are disjoint.
+ *
+ * Note that {@link #remove(Appointment)} uses Appointment#equals(Object) to find the target appointment to
+ * remove.
  *
  * Supports a minimal set of list operations.
  */
@@ -46,6 +49,7 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
         }
 
         this.appointments.setAll(appointments);
+        this.appointments.sort(Appointment::compareTo);
     }
 
     /**
@@ -105,6 +109,7 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
         }
 
         appointments.add(target);
+        shiftAppointmentToPosition(appointments.size() - 1);
     }
 
     /**
@@ -132,6 +137,7 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
         }
 
         appointments.set(indexOfTarget, newAppointment);
+        shiftAppointmentToPosition(indexOfTarget);
     }
 
     /**
@@ -201,5 +207,40 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
             }
         }
         return true;
+    }
+
+    /**
+     * Performs the shifting operation in insertion sort, omitting the insert into list component of
+     * insertion sort, and shifts the appointment at the given {@code index} into its sorted position.
+     * Note that this function may only be called if only the given appointment at {@code index} is out
+     * of position.
+     *
+     * @param index The appointment to shift into place.
+     */
+    private void shiftAppointmentToPosition(int index) {
+        if (index < 0 || index >= appointments.size()) {
+            return;
+        }
+        Appointment target = appointments.get(index);
+        int otherIndex = index;
+
+        // Determine direction
+        if (index - 1 >= 0 && target.compareTo(appointments.get(index - 1)) < 0) {
+            // target < index - 1, shift left
+            otherIndex = index - 1;
+            while (otherIndex >= 0 && target.compareTo(appointments.get(otherIndex)) < 0) {
+                appointments.set(otherIndex + 1, appointments.get(otherIndex)); // Right Shift
+                otherIndex--;
+            }
+            appointments.set(otherIndex + 1, target);
+        } else if (index + 1 < appointments.size() && target.compareTo(appointments.get(index + 1)) > 0) {
+            // target > index + 1
+            otherIndex = index + 1;
+            while (otherIndex < appointments.size() && target.compareTo(appointments.get(otherIndex)) > 0) {
+                appointments.set(otherIndex - 1, appointments.get(otherIndex)); // Left Shift
+                otherIndex++;
+            }
+            appointments.set(otherIndex - 1, target);
+        }
     }
 }
