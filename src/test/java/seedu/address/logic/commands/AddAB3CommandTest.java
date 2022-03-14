@@ -47,7 +47,8 @@ public class AddAB3CommandTest {
         AddAB3Command addAB3Command = new AddAB3Command(validPerson);
         AB3ModelStub modelStub = new AB3ModelStubWithPerson(validPerson);
 
-        assertThrows(CommandException.class, AddAB3Command.MESSAGE_DUPLICATE_PERSON, () -> addAB3Command.execute(modelStub));
+        assertThrows(CommandException.class,
+                AddAB3Command.MESSAGE_DUPLICATE_PERSON, () -> addAB3Command.execute(modelStub));
     }
 
     @Test

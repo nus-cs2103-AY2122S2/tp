@@ -82,7 +82,9 @@ public class CommandTestUtil {
      * - the returned {@link CommandResult} matches {@code expectedCommandResult} <br>
      * - the {@code actualModel} matches {@code expectedModel}
      */
-    public static void assertCommandSuccess(AB3Command command, AB3Model actualModel, CommandResult expectedCommandResult,
+    public static void assertCommandSuccess(AB3Command command,
+                                            AB3Model actualModel,
+                                            CommandResult expectedCommandResult,
                                             AB3Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
