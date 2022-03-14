@@ -12,6 +12,6 @@ public class TagUtil {
     }
 
     public static String getTagDetails(Tag tag) {
-        return PREFIX_NAME + tag.getTagName();
+        return PREFIX_NAME + tag.getTagNameString();
     }
 }

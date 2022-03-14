@@ -116,7 +116,7 @@ public class ParserUtil {
         // All tags will be in lowercase
         String trimmedTag = tag.trim().toLowerCase();
         if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+            throw new ParseException(seedu.contax.model.tag.Name.MESSAGE_CONSTRAINTS);
         }
         return new Tag(trimmedTag);
     }
