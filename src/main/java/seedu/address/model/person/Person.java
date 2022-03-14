@@ -134,9 +134,9 @@ public class Person {
                 .append("; Age: ")
                 .append(getAge())
                 .append("; Height: ")
-                .append(getAge())
+                .append(getHeight())
                 .append("; Weight: ")
-                .append(getAge())
+                .append(getWeight())
                 .append("; JerseyNumber: ")
                 .append(getJerseyNumber());
 

@@ -40,8 +40,8 @@ public class Weight {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Email // instanceof handles nulls
-                && value.equals(((Age) other).value)); // state check
+                || (other instanceof Weight // instanceof handles nulls
+                && value.equals(((Weight) other).value)); // state check
     }
 
     @Override
