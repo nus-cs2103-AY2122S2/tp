@@ -16,6 +16,8 @@ import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
 import unibook.model.person.Person;
 import unibook.model.person.exceptions.PersonNoSubtypeException;
+import unibook.ui.Ui;
+import unibook.ui.UiManager;
 
 
 /**
@@ -28,6 +30,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Module> filteredModules;
+    private Ui ui;
 
     /**
      * Initializes a ModelManager with the given uniBook and userPrefs.
@@ -220,6 +223,14 @@ public class ModelManager implements Model {
         logger.info("Updating filtered module list...");
         requireNonNull(predicate);
         filteredModules.setPredicate(predicate);
+    }
+
+    public void setUi(Ui ui) {
+        this.ui = ui;
+    }
+
+    public UiManager getUi() {
+        return (UiManager) this.ui;
     }
 
     @Override
