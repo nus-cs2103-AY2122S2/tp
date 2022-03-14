@@ -17,6 +17,8 @@ Take a look at our design which is mostly based off on [AddressBook Level 3 (AB3
 
 
 ##Architecture
+
+##UI Component
 <img src="images/developer-guide/UiArchitecture.png" width="800px">
 
 # Implementation
