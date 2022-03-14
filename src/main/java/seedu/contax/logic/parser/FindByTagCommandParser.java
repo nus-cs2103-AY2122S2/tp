@@ -19,7 +19,7 @@ public class FindByTagCommandParser implements Parser<FindByTagCommand> {
     public FindByTagCommand parse(String args) throws ParseException {
         ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG);
 
-        if (argumentMultimap.getValue(PREFIX_TAG).isEmpty()) {
+        if (argumentMultimap.getValue(PREFIX_TAG).isEmpty() || !argumentMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindByTagCommand.MESSAGE_USAGE));
         }
 

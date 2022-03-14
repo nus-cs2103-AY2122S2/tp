@@ -42,6 +42,11 @@ public class FindByTagCommandParserTest {
     }
 
     @Test
+    public void parse_hasPreamble_failure() {
+        assertParseFailure(parser, "hello t/friends", MESSAGE_ERROR);
+    }
+
+    @Test
     public void parse_validName_success() {
         TagNameContainsKeywordsPredicate predicate = new TagNameContainsKeywordsPredicate("friends");
         FindByTagCommand command = new FindByTagCommand(predicate);

@@ -118,8 +118,12 @@ public interface Model {
      */
     void setTag(Tag target, Tag editedTag);
 
+    /**
+     * Updates the filter of the filtered tag list to the filter given by {@code predicate}.
+     */
     void updateFilteredTagList(Predicate<Tag> predicate);
 
+    /** Returns an unmodifiable view of the filtered tag list. */
     ObservableList<Tag> getFilteredTagList();
 
     // Appointments
