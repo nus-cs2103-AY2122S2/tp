@@ -1,6 +1,7 @@
 package seedu.contax.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.contax.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.contax.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
@@ -123,6 +124,13 @@ public class LogicManagerTest {
     @Test
     public void getAppointmentList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getAppointmentList().remove(0));
+    }
+
+    @Test
+    public void userPrefGetters_noInput_notNull() {
+        assertNotNull(logic.getAddressBookFilePath());
+        assertNotNull(logic.getScheduleFilePath());
+        assertNotNull(logic.getGuiSettings());
     }
 
     /**
