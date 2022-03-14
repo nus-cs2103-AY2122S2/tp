@@ -33,6 +33,7 @@ title: Developer Guide
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
 ---
 
 ## **Setting up, getting started**
@@ -40,6 +41,7 @@ title: Developer Guide
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
 ---
 
 ## **Design**
@@ -92,6 +94,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 The sections below give more details of each component.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
 ---
 ### UI component
 
@@ -111,6 +114,7 @@ The `UI` component,
 * depends on some classes in the `Model` component, as it displays `Show` object residing in the `Model`.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
 ---
 ### Logic component
 
@@ -142,6 +146,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
 ---
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
@@ -163,6 +168,7 @@ The `Model` component,
 </div>
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
 ---
 ### Storage component
 
@@ -176,12 +182,14 @@ The `Storage` component,
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
 ---
 ### Common classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
 ---
 
 ## **Implementation**
@@ -274,6 +282,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
 ---
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -285,6 +294,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * [DevOps guide](DevOps.md)
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
 ---
 
 ## **Appendix: Requirements**
@@ -306,6 +316,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * Clean and minimal user interface.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
 ---
 ### User stories
 
@@ -323,12 +334,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 *{More to be added}*
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
 ---
 ### Use cases
 
 (For all use cases below, the **System** is `Trackermon` and the **Actor** is the `user`, unless specified otherwise)
 
-[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 ---
 
 **Use case: UC01 - Add a show**
@@ -365,6 +376,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 3.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
 ---
 
 **Use case: UC02 - Delete a show**
@@ -395,6 +407,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 3.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
 ---
 
 **Use case: UC03 - List a show**
@@ -417,6 +430,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
 ---
 
 **Use case: UC04 - Tag a show** (coming in v1.3)
@@ -447,6 +461,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 3.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
 ---
 
 **Use case: UC05 - Request a list of commands**
@@ -463,6 +478,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
 ---
 
 **Use case: UC06 - Exiting Trackermon**
@@ -480,11 +496,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    Use case ends.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
 ---  
     
 *{More to be added}*
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
 ---
 
 ### Non-Functional Requirements
@@ -496,6 +514,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 *{More to be added}*
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
 ---
 ### Glossary
 
@@ -503,6 +522,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
 ---
 
 ## **Appendix: Instructions for manual testing**
@@ -515,6 +535,7 @@ testers are expected to do more *exploratory* testing.
 </div>
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
 ---
 ### Launch and shutdown
 
@@ -534,6 +555,7 @@ testers are expected to do more *exploratory* testing.
 1. _{ more test cases …​ }_
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
 ---
 ### Deleting a show
 
@@ -553,6 +575,7 @@ testers are expected to do more *exploratory* testing.
 1. _{ more test cases …​ }_
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
 ---
 ### Saving data
 
