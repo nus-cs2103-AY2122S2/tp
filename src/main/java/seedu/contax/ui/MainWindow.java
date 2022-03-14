@@ -38,6 +38,7 @@ public class MainWindow extends UiPart<Stage> {
     private TagListPanel tagListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private StatusBarFooter statusBarFooter;
 
     private OnboardingPrompt onboardingPrompt;
     // Flag indicating the type of model currently being displayed in the contentList
@@ -123,6 +124,9 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         appointmentListPanel = new AppointmentListPanel(logic.getAppointmentList());
         tagListPanel = new TagListPanel(logic.getTagList());
@@ -130,9 +134,6 @@ public class MainWindow extends UiPart<Stage> {
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
-
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
-        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
@@ -174,6 +175,21 @@ public class MainWindow extends UiPart<Stage> {
             contentListPanelPlaceholder.getChildren().add(appointmentListPanel.getRoot());
         } else if (contentType == GuiListContentType.TAG) {
             contentListPanelPlaceholder.getChildren().add(tagListPanel.getRoot());
+        }
+        changeFooterContentType(contentType);
+    }
+
+    /**
+     * Changes the footer save file location path to the corresponding file path for the type of model being
+     * displayed in the content list.
+     *
+     * @param contentType The type of content the UI is currently displaying.
+     */
+    private void changeFooterContentType(GuiListContentType contentType) {
+        if (contentType == GuiListContentType.PERSON || contentType == GuiListContentType.TAG) {
+            statusBarFooter.setSaveLocation(logic.getAddressBookFilePath());
+        } else if (contentType == GuiListContentType.APPOINTMENT) {
+            statusBarFooter.setSaveLocation(logic.getScheduleFilePath());
         }
     }
 

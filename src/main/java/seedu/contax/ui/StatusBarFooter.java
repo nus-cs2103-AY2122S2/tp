@@ -22,6 +22,15 @@ public class StatusBarFooter extends UiPart<Region> {
      */
     public StatusBarFooter(Path saveLocation) {
         super(FXML);
+        setSaveLocation(saveLocation);
+    }
+
+    /**
+     * Sets the content of the {@code saveLocationStatus} label.
+     *
+     * @param saveLocation The path that should be displayed in the footer.
+     */
+    public void setSaveLocation(Path saveLocation) {
         saveLocationStatus.setText(Paths.get(".").resolve(saveLocation).toString());
     }
 

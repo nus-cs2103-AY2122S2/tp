@@ -83,6 +83,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public Path getScheduleFilePath() {
+        return model.getScheduleFilePath();
+    }
+
+    @Override
     public GuiSettings getGuiSettings() {
         return model.getGuiSettings();
     }
