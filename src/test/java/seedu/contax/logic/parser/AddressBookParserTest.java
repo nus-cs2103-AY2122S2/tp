@@ -19,9 +19,12 @@ import seedu.contax.logic.commands.AddAppointmentCommand;
 import seedu.contax.logic.commands.AddCommand;
 import seedu.contax.logic.commands.AddTagCommand;
 import seedu.contax.logic.commands.ClearCommand;
+import seedu.contax.logic.commands.Command;
 import seedu.contax.logic.commands.DeleteAppointmentCommand;
 import seedu.contax.logic.commands.DeleteCommand;
 import seedu.contax.logic.commands.DeleteTagCommand;
+import seedu.contax.logic.commands.EditAppointmentCommand;
+import seedu.contax.logic.commands.EditAppointmentCommand.EditAppointmentDescriptor;
 import seedu.contax.logic.commands.EditCommand;
 import seedu.contax.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.contax.logic.commands.ExitCommand;
@@ -37,6 +40,7 @@ import seedu.contax.model.person.Person;
 import seedu.contax.model.tag.Tag;
 import seedu.contax.testutil.AppointmentBuilder;
 import seedu.contax.testutil.AppointmentUtil;
+import seedu.contax.testutil.EditAppointmentDescriptorBuilder;
 import seedu.contax.testutil.EditPersonDescriptorBuilder;
 import seedu.contax.testutil.PersonBuilder;
 import seedu.contax.testutil.PersonUtil;
@@ -135,6 +139,17 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_listAppointments() throws Exception {
         assertTrue(parser.parseCommand(ListAppointmentCommand.COMMAND_WORD) instanceof ListAppointmentCommand);
+    }
+
+    @Test
+    public void parseCommand_editAppointment() throws Exception {
+        EditAppointmentDescriptor editDescriptor = new EditAppointmentDescriptorBuilder()
+                .withName("Name Change").build();
+        Command command = parser.parseCommand(EditAppointmentCommand.COMMAND_WORD
+                + " " + Index.fromOneBased(1).getOneBased() + " "
+                + AppointmentUtil.getAppointmentEditDescriptorDetails(editDescriptor));
+        assertTrue(command instanceof EditAppointmentCommand);
+        assertEquals(new EditAppointmentCommand(Index.fromOneBased(1), editDescriptor), command);
     }
 
     @Test

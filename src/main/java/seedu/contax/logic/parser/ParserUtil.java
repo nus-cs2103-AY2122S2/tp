@@ -7,13 +7,12 @@ import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.contax.commons.core.index.Index;
+import seedu.contax.commons.util.DateUtil;
 import seedu.contax.commons.util.StringUtil;
 import seedu.contax.logic.parser.exceptions.ParseException;
 import seedu.contax.model.IndexedCsvFile;
@@ -209,19 +208,13 @@ public class ParserUtil {
     public static StartDateTime parseStartDateTime(String date, String time) throws ParseException {
         requireAllNonNull(date, time);
 
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        LocalDate dateObject = DateUtil.parseDate(date)
+                .orElseThrow(() -> new ParseException(StartDateTime.MESSAGE_CONSTRAINTS));
+        LocalTime timeObject = DateUtil.parseTime(time)
+                .orElseThrow(() -> new ParseException(StartDateTime.MESSAGE_CONSTRAINTS));
+        LocalDateTime combinedDateTime = DateUtil.combineDateTime(dateObject, timeObject);
 
-        LocalDateTime dateTime;
-        try {
-            dateTime = LocalDate.parse(date, dateFormatter).atStartOfDay();
-            LocalTime timeObject = LocalTime.parse(time, timeFormatter);
-            dateTime = dateTime.withHour(timeObject.getHour()).withMinute(timeObject.getMinute());
-        } catch (DateTimeParseException ex) {
-            throw new ParseException(StartDateTime.MESSAGE_CONSTRAINTS);
-        }
-
-        return new StartDateTime(dateTime);
+        return new StartDateTime(combinedDateTime);
     }
 
     /**
