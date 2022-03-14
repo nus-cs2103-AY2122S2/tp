@@ -36,7 +36,7 @@ public class ListCommandParser implements Parser<ListCommand> {
                     return new ListCommand(ListCommand.ListView.PEOPLE);
                 } else {
                     throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                            ListCommand.MESSAGE_USAGE));
+                            ListCommand.MESSAGE_USAGE_VIEW));
                 }
             }
 
@@ -51,7 +51,7 @@ public class ListCommandParser implements Parser<ListCommand> {
             case "module":
                 if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_MODULE)) {
                     throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                            ListCommand.MESSAGE_USAGE));
+                            ListCommand.MESSAGE_MODULE_MISSING));
                 }
 
                 ModuleCode moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(CliSyntax.PREFIX_MODULE).get()
@@ -65,24 +65,21 @@ public class ListCommandParser implements Parser<ListCommand> {
             case "type":
                 if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_TYPE)) {
                     throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                            ListCommand.MESSAGE_USAGE));
+                            ListCommand.MESSAGE_TYPE_MISSING));
                 }
                 String type = argMultimap.getValue(CliSyntax.PREFIX_TYPE).get().toLowerCase();
-                if (type.equals("students") || type.equals("professors")) {
-                    return new ListCommand(type);
-                } else {
-                    throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                            ListCommand.MESSAGE_USAGE));
+                if (!(type.equals("professors") || type.equals("students"))) {
+                    throw new ParseException(
+                            String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE_TYPE));
                 }
+                return new ListCommand(type);
             default:
                 throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                        ListCommand.MESSAGE_USAGE));
-
+                        ListCommand.MESSAGE_USAGE_OPTION));
 
             }
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE), pe);
+            throw pe;
         }
 
     }

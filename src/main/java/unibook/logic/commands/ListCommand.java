@@ -31,12 +31,14 @@ public class ListCommand extends Command {
     public static final String MESSAGE_MODULE_DOES_NOT_EXIST = "The module entered"
             + " does not exist in the UniBook";
 
+    public static final String MESSAGE_USAGE_TYPE = "The acceptable arguments for type are students/professors.";
     public static final String MESSAGE_WRONG_VIEW = "The command requires you to switch views.";
+    public static final String MESSAGE_USAGE_OPTION = "The acceptable arguments for option are module/type.";
+    public static final String MESSAGE_TYPE_MISSING = "You did not enter a type argument. The acceptable"
+            + " arguments for type are students/professors.";
+    public static final String MESSAGE_MODULE_MISSING = "You did not enter a Module argument.";
+    public static final String MESSAGE_USAGE_VIEW = "The acceptable arguments for view are modules/people.";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Lists according to the given criteria\n "
-            + "Parameters: option (either module or type) \n"
-            + "Example: list o/module m/cs2103\n";
 
     private enum ListCommandType {
         ALL, MODULE, TYPE, MODULEANDTYPE, VIEW
@@ -143,8 +145,10 @@ public class ListCommand extends Command {
             if (modelManager.getUi().isPersonListShowing()) {
                 if (type.equals("professors")) {
                     model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PROFESSORS);
-                } else {
+                } else if (type.equals("students")) {
                     model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_STUDENTS);
+                } else {
+                    return new CommandResult(MESSAGE_USAGE_TYPE);
                 }
             } else {
                 return new CommandResult(MESSAGE_WRONG_VIEW);
@@ -160,16 +164,17 @@ public class ListCommand extends Command {
                     Predicate<Person> showSpecificProfessorPredicate = p -> p.hasModule(this.moduleCode)
                             && (p instanceof Professor);
                     model.updateFilteredPersonList(showSpecificProfessorPredicate);
-                } else {
+                } else if (type.equals("students")) {
                     Predicate<Person> showSpecificStudentPredicate = p -> p.hasModule(this.moduleCode)
                             && (p instanceof Student);
                     model.updateFilteredPersonList(showSpecificStudentPredicate);
+                } else {
+                    return new CommandResult(MESSAGE_USAGE_TYPE);
                 }
                 return new CommandResult(MESSAGE_SUCCESS_MODULEANDTYPE);
             } else {
                 return new CommandResult(MESSAGE_WRONG_VIEW);
             }
-
         case VIEW:
             if (this.viewType == ListView.MODULES) {
                 modelManager.getUi().setModuleListPanel();
@@ -178,7 +183,7 @@ public class ListCommand extends Command {
             }
             return new CommandResult(MESSAGE_SUCCESS_VIEW);
         default:
-            return new CommandResult(MESSAGE_USAGE);
+            return new CommandResult("");
         }
     }
 }
