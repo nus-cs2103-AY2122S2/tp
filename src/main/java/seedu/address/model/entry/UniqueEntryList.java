@@ -12,7 +12,7 @@ import seedu.address.model.entry.exceptions.DuplicateEntryException;
 import seedu.address.model.entry.exceptions.EntryNotFoundException;
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
+ * A list of entries that enforces uniqueness between its elements and does not allow nulls.
  * An entry is considered unique by comparing using {@code Entry#isSameEntry(Entry)}. As such, adding and updating of
  * entries uses Entry#isSameEntry(Entry) for equality so as to ensure that the entry being added or updated is
  * unique in terms of identity in the UniqueEntryList. However, the removal of an entry uses Entry#equals(Object) so
@@ -29,7 +29,7 @@ public class UniqueEntryList<T extends Entry> implements Iterable<T> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent entry as the given argument.
      */
     public boolean contains(T toCheck) {
         requireNonNull(toCheck);
@@ -37,8 +37,8 @@ public class UniqueEntryList<T extends Entry> implements Iterable<T> {
     }
 
     /**
-     * Adds a person to the list.
-     * The person must not already exist in the list.
+     * Adds an entry to the list.
+     * The entry must not already exist in the list.
      */
     public void add(T toAdd) {
         requireNonNull(toAdd);
@@ -51,7 +51,7 @@ public class UniqueEntryList<T extends Entry> implements Iterable<T> {
     /**
      * Replaces the entry {@code target} in the list with {@code editedEntry}.
      * {@code target} must exist in the list.
-     * The person identity of {@code editedEntry} must not be the same as another existing entry in the list.
+     * The entry identity of {@code editedEntry} must not be the same as another existing entry in the list.
      */
     public void setEntry(T target, T editedEntry) {
         requireAllNonNull(target, editedEntry);
