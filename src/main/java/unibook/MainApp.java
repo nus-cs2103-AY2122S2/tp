@@ -66,6 +66,9 @@ public class MainApp extends Application {
         logic = new LogicManager(model, storage);
 
         ui = new UiManager(logic);
+
+        ModelManager modelManager = (ModelManager) model;
+        modelManager.setUi(ui);
     }
 
     /**

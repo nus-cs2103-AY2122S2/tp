@@ -25,7 +25,22 @@ public class ListCommandParser implements Parser<ListCommand> {
         try {
             ArgumentMultimap argMultimap =
                     ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_OPTION, CliSyntax.PREFIX_TYPE,
-                            CliSyntax.PREFIX_MODULE);
+                            CliSyntax.PREFIX_MODULE, CliSyntax.PREFIX_VIEW);
+
+            //Change View command
+            if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_VIEW)) {
+                String view = argMultimap.getValue(CliSyntax.PREFIX_VIEW).get().toLowerCase();
+                if (view.equals("modules")) {
+                    return new ListCommand(ListCommand.ListView.MODULES);
+                } else if (view.equals("people")) {
+                    return new ListCommand(ListCommand.ListView.PEOPLE);
+                } else {
+                    throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                            ListCommand.MESSAGE_USAGE));
+                }
+            }
+
+            //List all (empty list command)
             if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_OPTION)) {
                 return new ListCommand();
             }

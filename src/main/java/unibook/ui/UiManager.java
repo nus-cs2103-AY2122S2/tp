@@ -90,6 +90,15 @@ public class UiManager implements Ui {
         return mainWindow.isModuleListShowing();
     }
 
+
+    public void setModuleListPanel() {
+        mainWindow.setModuleListPanel();
+    }
+
+    public void setPersonListPanel() {
+        mainWindow.setPersonListPanel();
+    }
+
     private Image getImage(String imagePath) {
         return new Image(MainApp.class.getResourceAsStream(imagePath));
     }

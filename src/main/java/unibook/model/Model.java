@@ -138,4 +138,5 @@ public interface Model {
     ObservableList<Module> getFilteredModuleList();
 
     void updateFilteredModuleList(Predicate<Module> predicate);
+
 }

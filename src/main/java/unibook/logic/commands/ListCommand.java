@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.function.Predicate;
 
 import unibook.model.Model;
+import unibook.model.ModelManager;
 import unibook.model.module.ModuleCode;
 import unibook.model.person.Person;
 import unibook.model.person.Professor;
@@ -22,6 +23,7 @@ public class ListCommand extends Command {
     public static final String MESSAGE_SUCCESS_TYPE = "Listed all persons with specified type.";
     public static final String MESSAGE_SUCCESS_MODULEANDTYPE = "Listed all persons with specified type "
             + "in specified module.";
+    public static final String MESSAGE_SUCCESS_VIEW = "Switched view successfully.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Lists according to the given criteria\n "
@@ -29,18 +31,32 @@ public class ListCommand extends Command {
             + "Example: list o/module m/cs2103\n";
 
     private enum ListCommandType {
-        ALL, MODULE, TYPE, MODULEANDTYPE
+        ALL, MODULE, TYPE, MODULEANDTYPE, VIEW
+    };
+
+    public enum ListView {
+        PEOPLE, MODULES
     };
 
     private ModuleCode moduleCode;
     private String type;
     private ListCommandType commandType;
+    private ListView viewType;
 
     /**
      * Constructor for a ListCommand to list everything.
      */
     public ListCommand() {
         this.commandType = ListCommandType.ALL;
+    }
+
+    /**
+     * Constructor for a ListCommand to change the current view.
+     * @param viewType
+     */
+    public ListCommand(ListView viewType) {
+        this.commandType = ListCommandType.VIEW;
+        this.viewType = viewType;
     }
 
     /**
@@ -113,6 +129,14 @@ public class ListCommand extends Command {
                 model.updateFilteredPersonList(showSpecificStudentPredicate);
             }
             return new CommandResult(MESSAGE_SUCCESS_MODULEANDTYPE);
+        case VIEW:
+            ModelManager modelManager = (ModelManager) model;
+            if (this.viewType == ListView.MODULES) {
+                modelManager.getUi().setModuleListPanel();
+            } else {
+                modelManager.getUi().setPersonListPanel();
+            }
+            return new CommandResult(MESSAGE_SUCCESS_VIEW);
         default:
             return new CommandResult(MESSAGE_USAGE);
         }
