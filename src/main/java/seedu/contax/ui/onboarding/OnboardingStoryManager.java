@@ -63,11 +63,6 @@ public class OnboardingStoryManager {
         ShowPersonList
     }
 
-    public enum CommandOption {
-        Add,
-        Delete
-    }
-
     /**
      * Adds a general display step, where the instruction label with the give message,
      * which is centered and the overlay covers everything.
