@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.contact.Contact;
 import seedu.address.model.person.Person;
 
 /**
@@ -22,6 +23,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Contact> filteredContacts;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +36,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredContacts = new FilteredList<>(this.addressBook.getContactList());
     }
 
     public ModelManager() {
@@ -87,10 +90,19 @@ public class ModelManager implements Model {
         return addressBook;
     }
 
+
+    //=========== Person ================================================================================
+
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return addressBook.hasPerson(person);
+    }
+
+    @Override
+    public boolean hasPerson(Predicate<Person> predicate) {
+        requireNonNull(predicate);
+        return !filteredPersons.filtered(predicate).isEmpty();
     }
 
     @Override
@@ -128,6 +140,50 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //=========== Contact ================================================================================
+
+    @Override
+    public boolean hasContact(Contact contact) {
+        requireNonNull(contact);
+        return addressBook.hasContact(contact);
+    }
+
+    @Override
+    public void deleteContact(Contact target) {
+        addressBook.removeContact(target);
+    }
+
+    @Override
+    public void addContact(Contact contact) {
+        addressBook.addContact(contact);
+        updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
+    }
+
+    @Override
+    public void setContact(Contact target, Contact editedContact) {
+        requireAllNonNull(target, editedContact);
+
+        addressBook.setContact(target, editedContact);
+    }
+
+
+    //=========== Filtered Contact List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Contact} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Contact> getFilteredContactList() {
+        return filteredContacts;
+    }
+
+    @Override
+    public void updateFilteredContactList(Predicate<Contact> predicate) {
+        requireNonNull(predicate);
+        filteredContacts.setPredicate(predicate);
+    }
+
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -144,7 +200,8 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPersons.equals(other.filteredPersons)
+                && filteredContacts.equals(other.filteredContacts);
     }
 
 }

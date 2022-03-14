@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -21,6 +22,9 @@ public class Contact {
     private final Phone phone;
     private final Email email;
 
+    // Relationship fields - owner nric
+    private final Nric ownerNric;
+
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
@@ -28,8 +32,9 @@ public class Contact {
     /**
      * Every field must be present and not null.
      */
-    public Contact(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Contact(Nric ownerNric, Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+        requireAllNonNull(ownerNric, name, phone, email, address, tags);
+        this.ownerNric = ownerNric;
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -39,6 +44,10 @@ public class Contact {
 
     public Phone getPhone() {
         return phone;
+    }
+
+    public Nric getOwnerNric() {
+        return ownerNric;
     }
 
     public Name getName() {
@@ -62,7 +71,7 @@ public class Contact {
     }
 
     /**
-     * Returns true if both contacts have the same name.
+     * Returns true if both contacts have the same name, number and owner.
      * This defines a weaker notion of equality between two contacts.
      */
     public boolean isSameContact(Contact otherContact) {
@@ -71,6 +80,7 @@ public class Contact {
         }
 
         return otherContact != null
+                && otherContact.getOwnerNric().equals(getOwnerNric())
                 && otherContact.getPhone().equals(getPhone())
                 && otherContact.getName().equals(getName());
     }
@@ -91,6 +101,7 @@ public class Contact {
 
         Contact otherContact = (Contact) other;
         return otherContact.getName().equals(getName())
+                && otherContact.getOwnerNric().equals(getOwnerNric())
                 && otherContact.getPhone().equals(getPhone())
                 && otherContact.getEmail().equals(getEmail())
                 && otherContact.getAddress().equals(getAddress())
@@ -108,6 +119,8 @@ public class Contact {
         final StringBuilder builder = new StringBuilder();
         builder.append("; Name: ")
                 .append(getName())
+                .append("; Owner NRIC: ")
+                .append(getOwnerNric())
                 .append("; Phone: ")
                 .append(getPhone())
                 .append("; Email: ")
