@@ -9,8 +9,8 @@ The app allows the user to track and remember what shows they have watched or cu
 They can easily look up the list of shows if they need to.
 
 ### Table of Contents
-* [**Quick Start**](#quick-start)
-* [**Features**](#features)
+* [Quick Start](#quick-start)
+* [Features](#features)
   * [Adding a show: `add`](#adding-a-show-add)
   * [Listing a show: `list`](#listing-all-shows-list)
   * [Requesting help URL: `help`](#requesting-help-url-help)
@@ -19,8 +19,8 @@ They can easily look up the list of shows if they need to.
   * [Exiting the program: `exit`](#exiting-the-program-exit)
   * [Saving the data](#saving-the-data)
   * [Better Find [coming in v1.3]](#better-find-coming-in-v13)
-* [**FAQ**](#faq)
-* [**Command Summary**](#command-summary)
+  * [FAQ](#faq)
+  * [Command Summary](#command-summary)
 
 
 --------------------------------------------------------------------------------------------------------------------
