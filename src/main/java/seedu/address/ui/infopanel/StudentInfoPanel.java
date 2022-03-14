@@ -40,7 +40,6 @@ public class StudentInfoPanel extends InfoPanel {
         super(FXML);
         this.student = student;
         setDetails(student);
-
     }
 
     private void setDetails(Student student) {
