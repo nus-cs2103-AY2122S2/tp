@@ -80,18 +80,18 @@ Format: `add -TYPE`
 
 Adds a new applicant to HireLah
 
-Format: `add -a n/APPLICANT_NAME d/DOB g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add -a n/APPLICANT_NAME ag/AGE g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 An applicant can have any number of tags (including 0)
 </div>
 
-* DOB provided must be in format YYYY-MM-DD
+* Age provided must be at least two digits eg: “23”
 * Gender must be M/F
 
 Examples:
-* `add -a n/Benedict d/1998-02-03 g/M p/98123456 e/ben@gmail.com a/12 Kent Ridge Drive, 119243`
-* `add -a n/Max d/2000-01-01 g/M p/97123456 e/max@yahoo.com a/12 Kent Ridge Drive, 119243 t/Data Analyst`
+* `add -a n/Benedict ag/20 g/M p/98123456 e/ben@gmail.com a/12 Kent Ridge Drive, 119243`
+* `add -a n/Max ag/15 g/M p/97123456 e/max@yahoo.com a/12 Kent Ridge Drive, 119243 t/Data Analyst`
 
 ### Adding Interview : `add -i`
 
@@ -128,7 +128,7 @@ Format: `edit -TYPE`
 
 Edits an existing Applicant in HireLah.
 
-Format: `edit -a INDEX [n/APPLICANT_NAME] [d/DOB] [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit -a INDEX [n/APPLICANT_NAME] [ag/AGE] [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the Applicant at the specified `INDEX`. The index refers to the index number shown in the displayed Applicant
   list. The index **must be a positive integer** 1, 2, 3, …​
@@ -139,7 +139,7 @@ Format: `edit -a INDEX [n/APPLICANT_NAME] [d/DOB] [g/GENDER] [p/PHONE_NUMBER] [e
   specifying any tags after it.
 
 Examples:
-*  `edit -a 1 n/Belle d/1960-03-04 g/F p/81234567` Edits the name, DOB, gender and phone number of the 1st applicant
+*  `edit -a 1 n/Belle ag/43 g/F p/81234567` Edits the name, age, gender and phone number of the 1st applicant
    to be `Belle`, `1960-03-04`, `F` and `81234567` respectively.
 *  `edit -a 2 e/belle@yahoo.com a/13 Computing Drive 612345 t/` Edits the email and address of the 2nd applicant to be
    `belle@yahoo.com` and `13 Computing Drive 612345` respectively, and clears all existing tags.
