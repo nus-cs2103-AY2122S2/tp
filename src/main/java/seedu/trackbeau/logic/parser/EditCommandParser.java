@@ -66,6 +66,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_HAIRTYPE).isPresent()) {
             editCustomerDescriptor.setHairType(ParserUtil.parseHairType(argMultimap.getValue(PREFIX_HAIRTYPE).get()));
         }
+
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_STAFFS)).ifPresent(editCustomerDescriptor::setStaffs);
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_SERVICES)).ifPresent(editCustomerDescriptor::setStaffs);
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_ALLERGIES)).ifPresent(editCustomerDescriptor::setStaffs);
