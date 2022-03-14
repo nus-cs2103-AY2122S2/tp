@@ -106,7 +106,7 @@ public class Lab {
     }
 
     /**
-     * Returns true if both students have the same name.
+     * Returns true if both students have the same lab.
      * This defines a weaker notion of equality between two students.
      */
     public boolean isSameLab(Lab otherLab) {
@@ -127,7 +127,8 @@ public class Lab {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Lab // instanceof handles nulls
-                && labNumber == (((Lab) other).labNumber)); // state check
+                && labNumber == (((Lab) other).labNumber)   // labNumber check
+                && labStatus == (((Lab) other).labStatus)); // labStatus check
     }
 
 }
