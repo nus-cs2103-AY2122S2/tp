@@ -87,11 +87,7 @@ public class CsvManager {
             List<String[]> csvData = new ArrayList<>();
             csvData = csvLines.apply(csvData);
             for (String[] line : csvData) {
-                exportedCsvWriter.write(line[0] + ",");
-                exportedCsvWriter.write(line[1] + ",");
-                exportedCsvWriter.write(line[2] + ",");
-                exportedCsvWriter.write(line[3] + ",");
-                exportedCsvWriter.write(line[4]);
+                exportedCsvWriter.write(String.join(",", line));
                 exportedCsvWriter.newLine();
             }
             exportedCsvWriter.flush();
