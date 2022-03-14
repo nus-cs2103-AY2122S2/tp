@@ -29,7 +29,6 @@ public class DeleteTagCommand extends Command {
         this.targetIndex = targetIndex;
     }
 
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);

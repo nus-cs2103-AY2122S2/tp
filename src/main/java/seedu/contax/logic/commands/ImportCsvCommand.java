@@ -8,11 +8,9 @@ import static seedu.contax.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 import seedu.contax.logic.commands.exceptions.CommandException;
@@ -27,6 +25,7 @@ import seedu.contax.model.person.Person;
 import seedu.contax.model.person.Phone;
 import seedu.contax.model.person.exceptions.DuplicatePersonException;
 import seedu.contax.model.tag.Tag;
+import seedu.contax.storage.CsvManager;
 
 public class ImportCsvCommand extends Command {
     public static final String COMMAND_WORD = "importcsv";
@@ -58,17 +57,7 @@ public class ImportCsvCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         //process file
         try {
-            String line = "";
-            ArrayList<Integer> skippedLines = new ArrayList<>();
-            int lineCounter = 0;
-            BufferedReader importedCsv = new BufferedReader(new FileReader(toImport.getFilePath()));
-
-            //skip first line by default as it contains headers
-            importedCsv.readLine();
-
-            while ((line = importedCsv.readLine()) != null) {
-                lineCounter++;
-                String[] importedPerson = line.split(",");
+            CsvManager manager = new CsvManager(model, (currentLineNumber, importedPerson) -> {
                 try {
                     Person toAddPerson = personParser(importedPerson);
                     model.addPerson(toAddPerson);
@@ -78,16 +67,17 @@ public class ImportCsvCommand extends Command {
                             model.addTag(tag);
                         }
                     }
+                    return true;
                 } catch (ParseException | DuplicatePersonException e) {
-                    skippedLines.add(lineCounter);
-                    continue;
+                    return false;
                 }
-            }
-            return outputStringBuilder(skippedLines);
+            });
+            return outputStringBuilder(manager.importCsv(toImport));
         } catch (IOException e) {
             throw new CommandException(String.format(MESSAGE_NO_FILE_FOUND, toImport.getFilePath()));
         }
     }
+
     private Person personParser(String[] importedPerson) throws ParseException {
         Name toAddName = ParserUtil.parseName(importedPerson[toImport.getNamePositionIndex()]);
         Phone toAddPhone = ParserUtil.parsePhone(importedPerson[toImport.getPhonePositionIndex()]);
@@ -98,8 +88,7 @@ public class ImportCsvCommand extends Command {
 
         return new Person(toAddName, toAddPhone, toAddEmail, toAddAddress, toAddTag);
     }
-
-    private CommandResult outputStringBuilder(ArrayList<Integer> skippedLines) {
+    private CommandResult outputStringBuilder(List<Integer> skippedLines) {
         if (skippedLines.size() > 0) {
             String skippedLinesString = "";
             for (int i = 0; i < skippedLines.size(); i++) {

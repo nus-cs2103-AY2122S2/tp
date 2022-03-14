@@ -27,12 +27,10 @@ import seedu.contax.commons.core.GuiSettings;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.appointment.exceptions.AppointmentNotFoundException;
 import seedu.contax.model.person.NameContainsKeywordsPredicate;
-import seedu.contax.model.person.Person;
 import seedu.contax.model.person.exceptions.PersonNotFoundException;
 import seedu.contax.model.tag.exceptions.TagNotFoundException;
 import seedu.contax.testutil.AddressBookBuilder;
 import seedu.contax.testutil.AppointmentBuilder;
-import seedu.contax.testutil.PersonBuilder;
 import seedu.contax.testutil.ScheduleBuilder;
 
 public class ModelManagerTest {
@@ -145,6 +143,7 @@ public class ModelManagerTest {
         modelManager.deletePerson(ALICE);
 
         ModelManager expectedModel = new ModelManager();
+        expectedModel.addTag(FRIENDS);
         expectedModel.addPerson(BOB);
         assertEquals(expectedModel, modelManager);
     }
@@ -160,6 +159,7 @@ public class ModelManagerTest {
         modelManager.deletePerson(ALICE);
 
         ModelManager expectedModel = new ModelManager();
+        expectedModel.addTag(FRIENDS);
         expectedModel.addPerson(BOB);
         expectedModel.addAppointment(new AppointmentBuilder(APPOINTMENT_ALICE).withPerson(null).build());
         expectedModel.addAppointment(appointment2);
@@ -186,6 +186,7 @@ public class ModelManagerTest {
         modelManager.setPerson(ALICE, CARL);
 
         ModelManager expectedModel = new ModelManager();
+        expectedModel.addTag(FRIENDS);
         expectedModel.addPerson(CARL);
         expectedModel.addPerson(BOB);
         assertEquals(expectedModel, modelManager);
@@ -202,6 +203,7 @@ public class ModelManagerTest {
         modelManager.setPerson(ALICE, CARL);
 
         ModelManager expectedModel = new ModelManager();
+        expectedModel.addTag(FRIENDS);
         expectedModel.addPerson(CARL);
         expectedModel.addPerson(BOB);
         expectedModel.addAppointment(new AppointmentBuilder(APPOINTMENT_ALICE).withPerson(CARL).build());
@@ -246,25 +248,6 @@ public class ModelManagerTest {
     @Test
     public void deleteTag_tagNotInList_throwsTagNotFoundException() {
         assertThrows(TagNotFoundException.class, () -> modelManager.deleteTag(FAMILY));
-    }
-
-    @Test
-    public void removeTagFromPersons_nullTag_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.deleteTag(null));
-    }
-
-    @Test
-    public void removeTagFromPersons_tagExistsInPerson_success() {
-        modelManager.addPerson(ALICE);
-        modelManager.addTag(FRIENDS);
-
-
-        Person modifiedAlice = new PersonBuilder(ALICE).withTags().build();
-        AddressBook expectedAddressBook = new AddressBookBuilder().withPerson(modifiedAlice).build();
-        ModelManager expectedModel = new ModelManager(expectedAddressBook, new Schedule(), new UserPrefs());
-
-        modelManager.deleteTag(FRIENDS);
-        assertEquals(expectedModel, modelManager);
     }
 
     @Test

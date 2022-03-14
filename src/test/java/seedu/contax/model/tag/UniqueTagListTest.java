@@ -61,6 +61,34 @@ class UniqueTagListTest {
     }
 
     @Test
+    public void setTag_uniqueTag_success() {
+        uniqueTagList.add(FAMILY);
+        UniqueTagList expectedUniqueTagList = new UniqueTagList();
+        expectedUniqueTagList.add(CLIENTS);
+
+        uniqueTagList.setTag(FAMILY, CLIENTS);
+        assertEquals(expectedUniqueTagList, uniqueTagList);
+    }
+
+    @Test
+    public void setTag_tagsAreSame_success() {
+        uniqueTagList.add(FAMILY);
+        UniqueTagList expectedUniqueTagList = new UniqueTagList();
+        expectedUniqueTagList.add(FAMILY);
+
+        uniqueTagList.setTag(FAMILY, FAMILY);
+        assertEquals(expectedUniqueTagList, uniqueTagList);
+    }
+
+    @Test
+    public void setTag_duplicateTag_throwsDuplicateTagException() {
+        uniqueTagList.add(FAMILY);
+        uniqueTagList.add(CLIENTS);
+
+        assertThrows(DuplicateTagException.class, () -> uniqueTagList.setTag(FAMILY, CLIENTS));
+    }
+
+    @Test
     public void setTags_duplicateTagList_throwsDuplicateTagException() {
         List<Tag> listWithDuplicateTags = Arrays.asList(CLIENTS, CLIENTS);
         assertThrows(DuplicateTagException.class, () -> uniqueTagList.setTags(listWithDuplicateTags));
