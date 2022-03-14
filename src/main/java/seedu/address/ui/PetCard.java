@@ -41,6 +41,8 @@ public class PetCard extends UiPart<Region> {
     @FXML
     private Label diet;
     @FXML
+    private Label appointment;
+    @FXML
     private FlowPane tags;
 
 
@@ -56,6 +58,7 @@ public class PetCard extends UiPart<Region> {
         phone.setText(pet.getPhone().value);
         address.setText(pet.getAddress().value);
         diet.setText(pet.getDiet().value);
+        appointment.setText(pet.getAppointment().value);
         pet.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
