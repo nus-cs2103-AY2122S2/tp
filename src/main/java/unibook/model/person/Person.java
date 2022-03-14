@@ -128,6 +128,19 @@ public class Person {
     }
 
     /**
+     * Returns true if the specified Module exists in the person's
+     * module list, otherwise returns false.
+     */
+    public boolean hasModule(ModuleCode moduleCode) {
+        for (Module m : modules) {
+            if (m.hasModuleCode(moduleCode)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Adds a module to the module set
      */
     public void addModule(Module module) {
