@@ -1,19 +1,24 @@
 package seedu.trackbeau.model.customer;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.function.Predicate;
-
-import java.lang.reflect.*;
 
 import seedu.trackbeau.commons.util.StringUtil;
 
 /**
- * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code Person}'s {@code Data} matches any of the keywords given.
  */
 public class SearchContainsKeywordsPredicate implements Predicate<Customer> {
     private final String searchArea;
     private final List<String> keywords;
 
+    /**
+     * Constructs a {@code Predicate}.
+     *
+     * @param searchArea Data field of customer to search at.
+     * @param keywords User input keywords to search with.
+     */
     public SearchContainsKeywordsPredicate(String searchArea, List<String> keywords) {
         this.searchArea = searchArea;
         this.keywords = keywords;

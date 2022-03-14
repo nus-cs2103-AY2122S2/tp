@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.trackbeau.logic.commands.*;
+import seedu.trackbeau.logic.commands.FindCommand;
+import seedu.trackbeau.logic.commands.HelpCommand;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
 import seedu.trackbeau.model.customer.SearchContainsKeywordsPredicate;
 
