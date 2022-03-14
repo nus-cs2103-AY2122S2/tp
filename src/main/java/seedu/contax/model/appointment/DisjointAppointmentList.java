@@ -49,7 +49,7 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
     }
 
     /**
-     * Replaces the entire list of appointments with {@code appointments}.
+     * Replaces the entire list of appointments with {@code toCopy}.
      *
      * @param toCopy The {@code DisjointAppointmentList} from which the list of appointments should be
      *               created from.
@@ -71,10 +71,10 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
     }
 
     /**
-     * Returns true if the list of appointments contains some overlapping appointment with {@code target}.
+     * Returns true if the list of appointments contains some appointment that overlaps with {@code target}.
      *
-     * @param target The {@code appointment} object to check.
-     * @return True if the list of appointments contains some appoint that overlaps with {@code target},
+     * @param target The {@code appointment} object to check against.
+     * @return True if the list of appointments contains some appointment that overlaps with {@code target},
      *         otherwise false.
      */
     public boolean containsOverlapping(Appointment target) {
@@ -109,11 +109,11 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
 
     /**
      * Replaces the appointment {@code target} in the list with {@code newAppointment}.
-     *  {@code target} must exist in the list.
-     *  {@code newAppointment} must not overlap with any appointment in the list excluding {@code target}.
+     * {@code target} must exist in the list.
+     * {@code newAppointment} must not overlap with any appointment in the list excluding {@code target}.
      *
-     * @param target The {@code appointment} to replace.
-     * @param newAppointment The {@code appointment} to replace {@code target} with.
+     * @param target The {@code Appointment} to replace.
+     * @param newAppointment The {@code Appointment} to replace {@code target} with.
      * @throws AppointmentNotFoundException If {@code target} cannot be found in the list.
      */
     public void setAppointment(Appointment target, Appointment newAppointment) {

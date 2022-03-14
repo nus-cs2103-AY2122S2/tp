@@ -2,10 +2,10 @@ package seedu.contax.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.contax.commons.core.GuiListContentType;
 import seedu.contax.commons.core.Messages;
 import seedu.contax.model.Model;
 import seedu.contax.model.person.ContainsKeywordsPredicate;
-import seedu.contax.ui.ListContentType;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -32,7 +32,7 @@ public class FindCommand extends Command {
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()),
-                ListContentType.PERSON);
+                GuiListContentType.PERSON);
     }
 
     @Override

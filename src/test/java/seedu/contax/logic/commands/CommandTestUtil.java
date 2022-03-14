@@ -65,6 +65,7 @@ public class CommandTestUtil {
 
     public static final String VALID_APPOINTMENT_NAME_AMELIA = "Meeting With Amelia";
     public static final String VALID_APPOINTMENT_NAME_ALONE = "Do some work alone";
+    public static final String VALID_APPOINTMENT_NAME_EXTRA = "Some extra meeting";
     public static final String VALID_DATE = "07-10-2022";
     public static final String VALID_DATE2 = "05-10-2022";
     public static final String VALID_TIME = "22:50";
@@ -88,6 +89,7 @@ public class CommandTestUtil {
             + VALID_APPOINTMENT_DURATION_MINUTE;
     public static final String APPOINTMENT_FIRST_PERSON = " " + PREFIX_PERSON + "1";
     public static final String APPOINTMENT_SECOND_PERSON = " " + PREFIX_PERSON + "2";
+    public static final String APPOINTMENT_REMOVE_PERSON = " " + PREFIX_PERSON + "none";
 
     public static final String INVALID_APPOINTMENT_NAME_DESC = " " + PREFIX_NAME + INVALID_APPOINTMENT_NAME;
     public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + INVALID_DATE;

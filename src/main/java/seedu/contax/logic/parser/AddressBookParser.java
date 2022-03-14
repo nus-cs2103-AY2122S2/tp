@@ -9,13 +9,18 @@ import java.util.regex.Pattern;
 import seedu.contax.logic.commands.AddAppointmentCommand;
 import seedu.contax.logic.commands.AddCommand;
 import seedu.contax.logic.commands.AddTagCommand;
+import seedu.contax.logic.commands.AppointmentsBetweenCommand;
 import seedu.contax.logic.commands.ChainCommand;
 import seedu.contax.logic.commands.ClearCommand;
 import seedu.contax.logic.commands.Command;
 import seedu.contax.logic.commands.DeleteAppointmentCommand;
 import seedu.contax.logic.commands.DeleteCommand;
+import seedu.contax.logic.commands.DeleteTagCommand;
+import seedu.contax.logic.commands.EditAppointmentCommand;
 import seedu.contax.logic.commands.EditCommand;
+import seedu.contax.logic.commands.EditTagCommand;
 import seedu.contax.logic.commands.ExitCommand;
+import seedu.contax.logic.commands.ExportCsvCommand;
 import seedu.contax.logic.commands.FindCommand;
 import seedu.contax.logic.commands.HelpCommand;
 import seedu.contax.logic.commands.ImportCsvCommand;
@@ -79,6 +84,10 @@ public class AddressBookParser {
         case ImportCsvCommand.COMMAND_WORD:
             return new ImportCsvParser().parse(arguments);
 
+        // Export CSV Command
+        case ExportCsvCommand.COMMAND_WORD:
+            return new ExportCsvCommand();
+
         // Appointment commands
         case AddAppointmentCommand.COMMAND_WORD:
             return new AddAppointmentCommandParser().parse(arguments);
@@ -86,18 +95,32 @@ public class AddressBookParser {
         case ListAppointmentCommand.COMMAND_WORD:
             return new ListAppointmentCommand();
 
+        case EditAppointmentCommand.COMMAND_WORD:
+            return new EditAppointmentCommandParser().parse(arguments);
+
         case DeleteAppointmentCommand.COMMAND_WORD:
             return new DeleteAppointmentCommandParser().parse(arguments);
+
+        case AppointmentsBetweenCommand.COMMAND_WORD:
+            return new AppointmentsBetweenCommandParser().parse(arguments);
 
         // Tag management commands
         case AddTagCommand.COMMAND_WORD:
             return new AddTagCommandParser().parse(arguments);
 
+        case ListTagCommand.COMMAND_WORD:
+            return new ListTagCommand();
+
+        case EditTagCommand.COMMAND_WORD:
+            return new EditTagCommandParser().parse(arguments);
+
+        case DeleteTagCommand.COMMAND_WORD:
+            return new DeleteTagCommandParser().parse(arguments);
+
+        // Command chaining
         case ChainCommand.COMMAND_WORD:
             return new ChainCommandParser().parse(arguments);
 
-        case ListTagCommand.COMMAND_WORD:
-            return new ListTagCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

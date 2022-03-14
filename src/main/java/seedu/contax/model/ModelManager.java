@@ -27,9 +27,10 @@ public class ModelManager implements Model {
     private final Schedule schedule;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Appointment> filteredAppointments;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given addressBook, schedule and userPrefs.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlySchedule schedule,
                         ReadOnlyUserPrefs userPrefs) {
@@ -43,8 +44,12 @@ public class ModelManager implements Model {
         this.schedule = new Schedule(schedule);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredAppointments = new FilteredList<>(this.schedule.getAppointmentList());
     }
 
+    /**
+     * Initializes an empty ModelManager.
+     */
     public ModelManager() {
         this(new AddressBook(), new Schedule(), new UserPrefs());
     }
@@ -165,6 +170,20 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteTag(Tag tagToDelete) {
+        requireNonNull(tagToDelete);
+        addressBook.removeTag(tagToDelete);
+    }
+
+    @Override
+    public void setTag(Tag target, Tag editedTag) {
+        requireNonNull(target);
+        requireNonNull(editedTag);
+
+        addressBook.setTag(target, editedTag);
+    }
+
+    @Override
     public ObservableList<Tag> getTagList() {
         return addressBook.getTagList();
     }
@@ -227,6 +246,23 @@ public class ModelManager implements Model {
         schedule.setAppointment(target, editedAppointment);
     }
 
+    //=========== Filtered Appointment List Accessors ========================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Appointments} backed by the internal list of
+     * {@code schedule}
+     */
+    @Override
+    public ObservableList<Appointment> getFilteredAppointmentList() {
+        return filteredAppointments;
+    }
+
+    @Override
+    public void updateFilteredAppointmentList(Predicate<Appointment> predicate) {
+        requireNonNull(predicate);
+        filteredAppointments.setPredicate(predicate);
+    }
+
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -244,7 +280,8 @@ public class ModelManager implements Model {
         return addressBook.equals(other.addressBook)
                 && schedule.equals(other.schedule)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPersons.equals(other.filteredPersons)
+                && filteredAppointments.equals(other.filteredAppointments);
     }
 
 }

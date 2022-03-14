@@ -61,6 +61,35 @@ public class Person {
     }
 
     /**
+     * Adds a tag to the person.
+     * @param tag The specified tag to add.
+     * @return The updated person with the added tag.
+     */
+    public Person withTag(Tag tag) {
+        HashSet<Tag> updatedTag = new HashSet<>(Set.copyOf(tags));
+        updatedTag.add(tag);
+        return new Person(name, phone, email, address, updatedTag);
+    }
+
+    /**
+     * Removes a tag from the person.
+     * @param tag The specified tag to remove.
+     * @return The updated person with the removed tag.
+     */
+    public Person withoutTag(Tag tag) {
+        HashSet<Tag> updatedTag = new HashSet<>(Set.copyOf(tags));
+        updatedTag.remove(tag);
+        return new Person(name, phone, email, address, updatedTag);
+    }
+
+    /**
+     * Returns true if the specified tag exists in the {@code person}.
+     */
+    public boolean hasTag(Tag tag) {
+        return tags.contains(tag);
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */

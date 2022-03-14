@@ -27,7 +27,7 @@ class JsonSerializableSchedule {
     private final List<JsonAdaptedAppointment> appointments = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given appointments.
+     * Constructs a {@code JsonSerializableSchedule} with the given appointments.
      */
     @JsonCreator
     public JsonSerializableSchedule(@JsonProperty("appointments") List<JsonAdaptedAppointment> appointments) {
@@ -37,7 +37,7 @@ class JsonSerializableSchedule {
     /**
      * Converts a given {@code ReadOnlySchedule} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableSchedule}.
+     * @param source Future changes to this will not affect the created {@code JsonSerializableSchedule}.
      */
     public JsonSerializableSchedule(ReadOnlySchedule source) {
         appointments.addAll(source.getAppointmentList().stream().map(JsonAdaptedAppointment::new)
@@ -47,7 +47,9 @@ class JsonSerializableSchedule {
     /**
      * Converts this schedule into the model's {@code Schedule} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated.
+     * @param addressBook An up-to-date {@code AddressBook} address for looking up Persons associated with
+     *                    Appointments.
+     * @throws IllegalValueException If there were any data constraints violated.
      */
     public Schedule toModelType(ReadOnlyAddressBook addressBook) throws IllegalValueException {
         Schedule schedule = new Schedule();

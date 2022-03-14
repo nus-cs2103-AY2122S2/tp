@@ -2,6 +2,7 @@ package seedu.contax.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.contax.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.contax.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.contax.testutil.Assert.assertThrows;
 import static seedu.contax.testutil.TypicalPersons.getTypicalAddressBook;
@@ -56,7 +57,6 @@ public class ImportCsvCommandTest {
                 .withPhone(PERSON2_PHONE).withEmail(PERSON2_EMAIL)
                 .withAddress(PERSON2_ADDRESS).withTags("tag1");
         expectedModel.addPerson(personBuilder2.build());
-
         assertCommandSuccess(importCsvCommand, model, ImportCsvCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
@@ -100,7 +100,6 @@ public class ImportCsvCommandTest {
                 .withPhone(PERSON1_PHONE).withEmail(PERSON1_EMAIL)
                 .withAddress(PERSON1_ADDRESS).withTags("tag1", "tag2");
         model.addPerson(personBuilder1.build());
-
         //Build expecting model with person 1 and 2
         expectedModel.addPerson(personBuilder1.build());
         PersonBuilder personBuilder2 = new PersonBuilder().withName(PERSON2_NAME)
@@ -118,6 +117,14 @@ public class ImportCsvCommandTest {
         ImportCsvCommand importCsvCommand = new ImportCsvCommand(emptyCsvFile);
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getSchedule(), new UserPrefs());
         assertCommandSuccess(importCsvCommand, model, ImportCsvCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void execute_invalidFile_errorMessage() throws Exception {
+        IndexedCsvFile invalidCsvFile = new ImportCsvObjectBuilder(ImportCsvObjectBuilder.INVALID_FILEPATH).build();
+        ImportCsvCommand importCsvCommand = new ImportCsvCommand(invalidCsvFile);
+        assertCommandFailure(importCsvCommand, model, String.format(ImportCsvCommand.MESSAGE_NO_FILE_FOUND,
+                invalidCsvFile.getFilePath()));
     }
 
     @Test

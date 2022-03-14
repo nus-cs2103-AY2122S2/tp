@@ -17,6 +17,7 @@ import java.util.List;
 
 import seedu.contax.model.AddressBook;
 import seedu.contax.model.person.Person;
+import seedu.contax.model.tag.Tag;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
@@ -55,6 +56,11 @@ public class TypicalPersons {
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .build();
 
+    public static final Tag FRIENDS = new TagBuilder().withName("friends").build();
+    public static final Tag OWES_MONEY = new TagBuilder().withName("owesmoney").build();
+    // Tag which is not associated with any contact
+    public static final Tag COLLEAGUES = new TagBuilder().withName("colleagues").build();
+
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalPersons() {} // prevents instantiation
@@ -64,13 +70,22 @@ public class TypicalPersons {
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
+        for (Tag tag : getTypicalTags()) {
+            ab.addTag(tag);
+        }
+
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
         }
+
         return ab;
     }
 
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    public static List<Tag> getTypicalTags() {
+        return new ArrayList<>(Arrays.asList(FRIENDS, OWES_MONEY, COLLEAGUES));
     }
 }

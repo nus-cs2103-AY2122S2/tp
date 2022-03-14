@@ -4,7 +4,7 @@ import javafx.collections.ObservableList;
 import seedu.contax.model.appointment.Appointment;
 
 /**
- * Unmodifiable view of a schedule
+ * Unmodifiable view of a schedule.
  */
 public interface ReadOnlySchedule {
 

@@ -31,7 +31,7 @@ public class TagCard extends UiPart<Region> {
         this.tagModel = tagModel;
 
         id.setText(displayedIndex + ". ");
-        tagName.setText(tagModel.getTagName());
+        tagName.setText(tagModel.getTagNameString());
     }
 
     @Override

@@ -1,9 +1,9 @@
-package seedu.contax.ui;
+package seedu.contax.commons.core;
 
 /**
  * Represents the types of models that can be displayed by the UI.
  */
-public enum ListContentType {
+public enum GuiListContentType {
     PERSON,
     APPOINTMENT,
     TAG,

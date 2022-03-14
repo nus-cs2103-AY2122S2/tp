@@ -3,15 +3,18 @@ package seedu.contax.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.contax.model.Model.PREDICATE_SHOW_ALL_APPOINTMENTS;
 import static seedu.contax.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.contax.testutil.Assert.assertThrows;
 import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALICE;
 import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALONE;
+import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_EXTRA;
 import static seedu.contax.testutil.TypicalAppointments.getTypicalSchedule;
 import static seedu.contax.testutil.TypicalPersons.ALICE;
 import static seedu.contax.testutil.TypicalPersons.BENSON;
 import static seedu.contax.testutil.TypicalPersons.BOB;
 import static seedu.contax.testutil.TypicalPersons.CARL;
+import static seedu.contax.testutil.TypicalPersons.FRIENDS;
 import static seedu.contax.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.contax.testutil.TypicalTags.CLIENTS;
 import static seedu.contax.testutil.TypicalTags.FAMILY;
@@ -27,6 +30,7 @@ import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.appointment.exceptions.AppointmentNotFoundException;
 import seedu.contax.model.person.NameContainsKeywordsPredicate;
 import seedu.contax.model.person.exceptions.PersonNotFoundException;
+import seedu.contax.model.tag.exceptions.TagNotFoundException;
 import seedu.contax.testutil.AddressBookBuilder;
 import seedu.contax.testutil.AppointmentBuilder;
 import seedu.contax.testutil.ScheduleBuilder;
@@ -141,6 +145,7 @@ public class ModelManagerTest {
         modelManager.deletePerson(ALICE);
 
         ModelManager expectedModel = new ModelManager();
+        expectedModel.addTag(FRIENDS);
         expectedModel.addPerson(BOB);
         assertEquals(expectedModel, modelManager);
     }
@@ -156,6 +161,7 @@ public class ModelManagerTest {
         modelManager.deletePerson(ALICE);
 
         ModelManager expectedModel = new ModelManager();
+        expectedModel.addTag(FRIENDS);
         expectedModel.addPerson(BOB);
         expectedModel.addAppointment(new AppointmentBuilder(APPOINTMENT_ALICE).withPerson(null).build());
         expectedModel.addAppointment(appointment2);
@@ -182,6 +188,7 @@ public class ModelManagerTest {
         modelManager.setPerson(ALICE, CARL);
 
         ModelManager expectedModel = new ModelManager();
+        expectedModel.addTag(FRIENDS);
         expectedModel.addPerson(CARL);
         expectedModel.addPerson(BOB);
         assertEquals(expectedModel, modelManager);
@@ -198,6 +205,7 @@ public class ModelManagerTest {
         modelManager.setPerson(ALICE, CARL);
 
         ModelManager expectedModel = new ModelManager();
+        expectedModel.addTag(FRIENDS);
         expectedModel.addPerson(CARL);
         expectedModel.addPerson(BOB);
         expectedModel.addAppointment(new AppointmentBuilder(APPOINTMENT_ALICE).withPerson(CARL).build());
@@ -228,6 +236,23 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void deleteTag_nullTag_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.deleteTag(null));
+    }
+
+    @Test
+    public void deleteTag_tagInList_success() {
+        modelManager.addTag(FRIENDS);
+        modelManager.deleteTag(FRIENDS);
+        assertEquals(new ModelManager(), modelManager);
+    }
+
+    @Test
+    public void deleteTag_tagNotInList_throwsTagNotFoundException() {
+        assertThrows(TagNotFoundException.class, () -> modelManager.deleteTag(FAMILY));
+    }
+
+    @Test
     public void setSchedule_nullSchedule_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.setSchedule(null));
     }
@@ -241,7 +266,8 @@ public class ModelManagerTest {
     @Test
     public void getSchedule() {
         modelManager.addAppointment(APPOINTMENT_ALICE);
-        assertEquals(1, modelManager.getSchedule().getAppointmentList().size());
+        assertEquals(1, modelManager.getFilteredAppointmentList().size());
+        assertEquals(APPOINTMENT_ALICE, modelManager.getFilteredAppointmentList().get(0));
     }
 
     @Test
@@ -322,6 +348,22 @@ public class ModelManagerTest {
         assertEquals(new ModelManager(), modelManager);
     }
 
+    @Test
+    public void getFilteredAppointmentList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, ()
+            -> modelManager.getFilteredAppointmentList().remove(0));
+    }
+
+    @Test
+    public void updateFilteredAppointmentList_predicateChange_throwsUnsupportedOperationException() {
+        modelManager.addAppointment(APPOINTMENT_ALICE);
+        modelManager.addAppointment(APPOINTMENT_ALONE);
+        modelManager.addAppointment(APPOINTMENT_EXTRA);
+
+        modelManager.updateFilteredAppointmentList(appointment -> !appointment.equals(APPOINTMENT_ALONE));
+        assertEquals(APPOINTMENT_ALICE, modelManager.getFilteredAppointmentList().get(0));
+        assertEquals(APPOINTMENT_EXTRA, modelManager.getFilteredAppointmentList().get(1));
+    }
 
     @Test
     public void equals() {
@@ -351,13 +393,18 @@ public class ModelManagerTest {
         // different schedule -> returns false
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentSchedule, userPrefs)));
 
-        // different filteredList -> returns false
+        // different person filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, schedule, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        // different appointment filteredList -> returns false
+        modelManager.updateFilteredAppointmentList(appointment -> !appointment.equals(APPOINTMENT_ALICE));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, schedule, userPrefs)));
+        modelManager.updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();

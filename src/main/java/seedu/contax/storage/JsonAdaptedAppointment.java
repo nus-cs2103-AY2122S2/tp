@@ -60,7 +60,7 @@ class JsonAdaptedAppointment {
      * Converts this Jackson-friendly adapted appointment object into the model's {@code Appointment} object.
      *
      * @param addressBook The current up-to-date address book for matching the person field in appointments.
-     * @throws IllegalValueException if there were any data constraints violated in the adapted appointment.
+     * @throws IllegalValueException If there were any data constraints violated in the adapted appointment.
      */
     public Appointment toModelType(ReadOnlyAddressBook addressBook) throws IllegalValueException {
 
@@ -82,11 +82,6 @@ class JsonAdaptedAppointment {
         try {
             dateTime = LocalDateTime.parse(startDateTime, DATETIME_FORMATTER);
         } catch (DateTimeParseException ex) {
-            ex.printStackTrace();
-            throw new IllegalValueException(INVALID_DATETIME_MESSAGE);
-        }
-
-        if (dateTime == null) {
             throw new IllegalValueException(INVALID_DATETIME_MESSAGE);
         }
 
@@ -95,6 +90,7 @@ class JsonAdaptedAppointment {
         if (duration <= 0) {
             throw new IllegalValueException(INVALID_DURATION_MESSAGE);
         }
+
         final Duration modelDuration = new Duration(duration);
 
         Person modelPerson = null;

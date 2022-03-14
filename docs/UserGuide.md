@@ -263,11 +263,11 @@ Examples:
 
 ![Find Tags](images/FindTag.png)
 
-### Creating an Appointment : `addAppointment`
+### Creating an Appointment : `addappointment`
 
 Creates an appointment in the schedule.
 
-Format: `addAppointment n/NAME d/DATE t/TIME l/DURATION [p/PERSON]`
+Format: `addappointment n/NAME d/DATE t/TIME l/DURATION [p/PERSON]`
 
 * Creates a new appointment with the specified parameters.
 * All parameters except `PERSON` **must** be specified.
@@ -281,36 +281,36 @@ The operation will fail if the appointment **overlaps** with another appointment
 </div>
 
 Examples:
-* `addAppointment n/Bi-Weekly Meeting d/14-02-2022 t/11:00 l/60` Creates a *one-hour* appointment named *"Bi-Weekly Meeting"* on *14th Feb 2022* at *11:00 AM*, associated with nobody in the contact list.
-* `addAppointment n/Contract Signing With Charlie d/22-10-2022 t/16:30 p/1 l/300` Creates a *5-hour* appointment named *"Contract Signing With Charlie"* on *22nd Oct 2022* at *4:30 PM*, associated with the *first* person in the contact list.
+* `addappointment n/Bi-Weekly Meeting d/14-02-2022 t/11:00 l/60` Creates a *one-hour* appointment named *"Bi-Weekly Meeting"* on *14th Feb 2022* at *11:00 AM*, associated with nobody in the contact list.
+* `addappointment n/Contract Signing With Charlie d/22-10-2022 t/16:30 p/1 l/300` Creates a *5-hour* appointment named *"Contract Signing With Charlie"* on *22nd Oct 2022* at *4:30 PM*, associated with the *first* person in the contact list.
 
-### Listing All Appointments : `listAppointments`
+### Listing All Appointments : `listappointments`
 
 Shows a list of all appointments in the schedule.
 
-Format: `listAppointments`
+Format: `listappointments`
 
 **Example output**
 
 ![List Appointments Result](images/ListAppointments.png)
 
-### Deleting an Appointment : `deleteAppointment`
+### Deleting an Appointment : `deleteappointment`
 
 Deletes an appointment previously created in the schedule.
 
-Format: `deleteAppointment INDEX`
+Format: `deleteappointment INDEX`
 
 * Deletes the appointment that is at `INDEX` in the appointment list.
 * The `INDEX` parameter **must be a positive integer**, and refers to the index number shown in the **displayed appointment list**.
 
 Examples:
-* `deleteAppointment 2` Deletes the *second* appointment in the list of appointments.
+* `deleteappointment 2` Deletes the *second* appointment in the list of appointments.
 
-### Editing an Appointment : `editAppointment`
+### Editing an Appointment : `editappointment`
 
 Edits an appointment previously created in the schedule.
 
-Format: `editAppointment INDEX [n/NAME] [d/DATE] [t/TIME] [p/PERSON] [l/DURATION]`
+Format: `editappointment INDEX [n/NAME] [d/DATE] [t/TIME] [p/PERSON] [l/DURATION]`
 
 * Edits the appointment that is at `INDEX` in the appointment list, setting the supplied parameter(s) to the supplied value(s).
 * The `INDEX` parameter **must be a positive integer**, and refers to the index number shown in the **displayed appointment list**.
@@ -319,21 +319,22 @@ Format: `editAppointment INDEX [n/NAME] [d/DATE] [t/TIME] [p/PERSON] [l/DURATION
     * The `NAME` parameter must be non-empty, and can only contain alphanumeric characters and the symbols `.,!@#$%&*()-_=+`..
     * The `DATE` parameter denotes the starting date, and **must conform to the [Common Date Formats](#common-date-and-time-syntax)**.
     * The `TIME` parameter denotes the starting time, and **must conform to the [Common Time Formats](#common-date-and-time-syntax)**.
-    * The `PERSON` parameter must be a positive integer, and refers to the index number shown in the displayed person list.
+    * The `PERSON` parameter must be a positive integer or the String `none`. If a positive integer is provided, it refers to the index number shown in the displayed person list. The string `none` is used to dissociate the person associated to the appointment.
     * The `DURATION` parameter is the duration of the appointment in *minutes*, and **must be a positive number**.
 <div markdown="span" class="alert alert-warning">:rotating_light: **Important Note:**
 The operation will fail if the modified appointment **overlaps** with another appointment.
 </div>
 
 Examples:
-* `editAppointment 6 l/300` Edits the *6th* appointment in the list of appointments to have a duration of *5 hours*. No other properties are changed.
-* `editAppointment 2 n/Call Juliet t/13:45` Edits the *second* appointment in the list of appointments to have the name *"Call Juliet"* and changes the time to *1:45 PM*. No other properties are changed.
+* `editappointment 6 l/300 p/none` Edits the *6th* appointment in the list of appointments to have a duration of *5 hours*, and removes the person associated with the appointment. No other properties are changed.
+* `editappointment 2 n/Call Juliet t/13:45 p/1` Edits the *second* appointment in the list of appointments to have the name *"Call Juliet"*, changes the time to *1:45 PM* and associates the appointment to the first person in the displayed persons list. No other properties are changed.
 
-### Listing Appointments Within A Period : `appointmentsBetween`
+### Listing Appointments Within A Period : `appointmentsbetween`
 
-Lists all the appointments between a starting time and ending time.
+Lists all appointments from a starting time to an ending time inclusive of both ends of the range.
+It will list all appointments that contain any sub-range of the provided period.
 
-Format: `appointmentsBetween sd/STARTDATE st/STARTTIME ed/ENDDATE et/ENDTIME`
+Format: `appointmentsbetween sd/STARTDATE st/STARTTIME ed/ENDDATE et/ENDTIME`
 
 * The starting time **must be before** the ending time.
 * The `STARTDATE` parameter denotes the *starting date* of the period.
@@ -344,11 +345,11 @@ Format: `appointmentsBetween sd/STARTDATE st/STARTTIME ed/ENDDATE et/ENDTIME`
 * Both `STARTTIME` and `ENDTIME` **must conform to the [Common Time Formats](#common-date-and-time-syntax)**.
 
 Example:
-* `appointmentsBetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00` Lists all appointments between *21 October 2022, 12 PM* and *23 October 2022, 5PM*.
+* `appointmentsbetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00` Lists all appointments from *21 October 2022, 12 PM* to *23 October 2022, 5PM*.
 
 **Example Output:**
 
-![Appointments Between Wireframe](images/wireframes/AppointmentsBetween.png)
+![Appointments Between Wireframe](images/AppointmentsBetween.png)
 
 ### Exiting the program : `exit`
 
@@ -363,19 +364,14 @@ Appointment data are saved in the hard disk automatically after any command that
 
 ### Exporting the data: `exportcsv`
 
-Exports the current list of contacts as a CSV file that can be imported through ContaX or other contact software such as Google/Outlook
+Exports the current list of contacts as a CSV file that can be imported through ContaX or viewed separately via Microsoft Excel
 
-Format: `exportcsv [EXPORTTYPE]`
-* Exports CSV as per the specified format.
-* If `EXPORTTYPE` is left empty, it will default to `EXPORTTYPE = 1` and export in custom ContaX format
-* `EXPORTTYPE` options are
-   * `EXPORTTYPE=1` for ContaX format
-   * `EXPORTTYPE=2` for Google Contacts format
-   * `EXPORTTYPE=3` for Microsoft Outlook format
+Format: `exportcsv`
+* Exports CSV as per ContaX format. This file can be imported by other instances of ContaX
 * File will be saved on the directory `[JAR file location]/data/addressbook.csv`
 
 Examples:
-* `exportcsv 2`: Exports the current address book as a CSV file ready to be uploaded onto Google Contacts
+* `exportcsv`: Exports the current address book as a CSV file at `[JAR file location]/data/addressbook.csv`
 ### Editing the data file
 
 ContaX contacts and appointments data are saved in the hard disk automatically after any command that changes contact data in JSON format at `[JAR file location]/data/addressbook.json` and `[JAR file location]/data/schedule.json`. Advanced users are welcome to update data directly by editing that data file.
@@ -473,9 +469,9 @@ Format: `COMMAND_A && COMMAND_B`
 * A valid command must be supplied before and after the `&&` operator, otherwise the command will fail
 
 Examples:
-* `editAppointment 6 l/360 && listAppointments`
+* `editappointment 6 l/360 && listappointments`
     * Edits the 6th appointment in the list of appointments to have a duration of 6 hours. Then list all appointments in the Schedule
-* `deleteAppointment 2 && addAppointment n/Contract Signing With Charlie d/22-10-2022 t/16:30 p/1 l/300`
+* `deleteappointment 2 && addappointment n/Contract Signing With Charlie d/22-10-2022 t/16:30 p/1 l/300`
     * Deletes the 2nd appointment in the list of appointments.
     * Then, create a 5-hour appointment named "Contract Signing With Charlie" on 22nd Oct 2022 at 4:30 PM, associated with the first person in the contact list
 
@@ -502,16 +498,16 @@ Action | Format, Examples
 **Add Tag** | `addtag n/TAGNAME` <br> e.g., `addtag n/Potential Clients`
 **Edit Tag** | `edittag INDEX t/NEW_TAGNAME` <br> e.g., `edittag f/OLD_TAGNAME t/NEW_TAGNAME`
 **List Tags** | `listtags`
-**Delete Tag** | `deletetag n/TAGNAME` <br> e.g., `deletetag n/friends`
-**Find Contacts By Tag** | `findbytag t/TAGNAME` <br> e.g., `findbytag t/friends`
-**Add Appointment** | `addAppointment n/NAME d/DATE t/TIME l/DURATION p/PERSON`<br> e.g., `addAppointment n/Call Bob d/14-02-2022 t/11:00 p/2 l/60`
-**List Appointments** | `listAppointments`
-**Delete Appointment** | `deleteAppointment INDEX`<br> e.g., `deleteAppointment 2`
-**Edit Appointment** | `editAppointment INDEX [n/NAME] [d/DATE] [t/TIME] [p/PERSON] [l/DURATION]`<br> e.g., `editAppointment 2 n/Call Juliet t/13:45`
-**List Appointments Within Period** | `appointmentsBetween sd/STARTDATE st/STARTTIME ed/ENDDATE et/ENDTIME` <br> e.g. `appointmentsBetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00`
+**Delete Tag** | `deletetag INDEX` <br> e.g., `deletetag 1`
+**Find Contacts By Tag** | `findByTag t/TAGNAME` <br> e.g., `findByTag t/friends`
+**Add Appointment** | `addappointment n/NAME d/DATE t/TIME l/DURATION p/PERSON`<br> e.g., `addappointment n/Call Bob d/14-02-2022 t/11:00 p/2 l/60`
+**List Appointments** | `listappointments`
+**Delete Appointment** | `deleteappointment INDEX`<br> e.g., `deleteappointment 2`
+**Edit Appointment** | `editappointment INDEX [n/NAME] [d/DATE] [t/TIME] [p/PERSON] [l/DURATION]`<br> e.g., `editappointment 2 n/Call Juliet t/13:45`
+**List Appointments Within Period** | `appointmentsbetween sd/STARTDATE st/STARTTIME ed/ENDDATE et/ENDTIME` <br> e.g. `appointmentsbetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00`
 **Help** | `help`
-**Export CSV** | `exportcsv [EXPORTTYPE]`<br> e.g., `exportcsv 2`
+**Export CSV** | `exportcsv`
 **Import CSV** | `importcsv f/FILEPATH [n/COLUMNNUM] [p/COLUMN_PERSON] [e/COLUMN_EMAIL] [a/COLUMN_ADDRESS] [t/COLUMN_TAGS]` <br> e.g., `importCSV n/2 p/3 e/5 a/6 t/4`
 **Operate on Contacts by Conditional Clause** | `batch COMMAND where/CONDITION` <br> e.g., `batch Edit p/87438806 where/ p/Phone = 87438807`
 **Operate on Contacts within Range** | `range COMMAND from/INDEX to/INDEX` <br> e.g., `range edit e/johndoe@example.com from/6 to/10`
-**Chaining Commands** | `chain COMMAND_A && COMMAND_B` <br> e.g., `chain editAppointment 6 l/360 && listAppointments`
+**Chaining Commands** | `chain COMMAND_A && COMMAND_B` <br> e.g., `chain editappointment 6 l/360 && listappointments`

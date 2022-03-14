@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
-import seedu.contax.ui.ListContentType;
+import seedu.contax.commons.core.GuiListContentType;
 
 /**
  * Represents the result of a command execution.
@@ -12,7 +12,7 @@ import seedu.contax.ui.ListContentType;
 public class CommandResult {
 
     private final String feedbackToUser;
-    private final ListContentType uiContentType;
+    private final GuiListContentType uiContentType;
 
     /** Help information should be shown to the user. */
     private final boolean showHelp;
@@ -23,7 +23,7 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, ListContentType contentType, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, GuiListContentType contentType, boolean showHelp, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
@@ -35,14 +35,14 @@ public class CommandResult {
      * and other fields set to their default value. The contents the list shows defaults to {@code UNCHANGED}.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, ListContentType.UNCHANGED, false, false);
+        this(feedbackToUser, GuiListContentType.UNCHANGED, false, false);
     }
 
     /**
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser} and the
      * {@code contentType} to display in the content list.
      */
-    public CommandResult(String feedbackToUser, ListContentType contentType) {
+    public CommandResult(String feedbackToUser, GuiListContentType contentType) {
         this(feedbackToUser, contentType, false, false);
     }
 
@@ -51,14 +51,14 @@ public class CommandResult {
      * {@code exit}. The contents the list shows defaults to {@code UNCHANGED}.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
-        this(feedbackToUser, ListContentType.UNCHANGED, showHelp, exit);
+        this(feedbackToUser, GuiListContentType.UNCHANGED, showHelp, exit);
     }
 
     public String getFeedbackToUser() {
         return feedbackToUser;
     }
 
-    public ListContentType getUiContentType() {
+    public GuiListContentType getUiContentType() {
         return uiContentType;
     }
 

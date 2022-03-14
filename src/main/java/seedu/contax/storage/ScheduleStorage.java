@@ -20,18 +20,18 @@ public interface ScheduleStorage {
 
     /**
      * Returns Schedule data as a {@link ReadOnlySchedule}.
-     *   Returns {@code Optional.empty()} if storage file is not found.
+     * Returns {@code Optional.empty()} if storage file is not found.
      *
      * @param addressBook An up-to-date copy of the AddressBook for finding persons associated to
      *                    appointments.
-     * @throws DataConversionException if the data in storage is not in the expected format.
-     * @throws IOException if there was any problem when reading from the storage.
+     * @throws DataConversionException If the data in storage is not in the expected format.
+     * @throws IOException If there was any problem when reading from the storage.
      */
     Optional<ReadOnlySchedule> readSchedule(ReadOnlyAddressBook addressBook)
             throws DataConversionException, IOException;
 
     /**
-     * @see #getScheduleFilePath() FilePath()
+     * @see #getScheduleFilePath()
      */
     Optional<ReadOnlySchedule> readSchedule(Path filePath, ReadOnlyAddressBook addressBook)
             throws DataConversionException, IOException;
@@ -39,8 +39,8 @@ public interface ScheduleStorage {
     /**
      * Saves the given {@link ReadOnlySchedule} to the storage.
      *
-     * @param schedule cannot be null.
-     * @throws IOException if there was any problem writing to the file.
+     * @param schedule Cannot be null.
+     * @throws IOException If there was any problem writing to the file.
      */
     void saveSchedule(ReadOnlySchedule schedule) throws IOException;
 

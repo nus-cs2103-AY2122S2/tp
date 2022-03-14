@@ -17,7 +17,7 @@ public class StartDateTime {
     public final LocalDateTime value;
 
     /**
-     * Constructs a {@code StartDateTime}
+     * Constructs a {@code StartDateTime}.
      *
      * @param dateTime Any non-null DateTime object.
      */

@@ -8,6 +8,7 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.contax.model.tag.exceptions.DuplicateTagException;
+import seedu.contax.model.tag.exceptions.TagNotFoundException;
 
 /**
  * A list of tags that enforces uniqueness between its elements and does not allow nulls.
@@ -42,6 +43,17 @@ public class UniqueTagList implements Iterable<Tag> {
         internalList.add(toAdd);
     }
 
+    /**
+     * Removes a tag from the list. If the tag does not exist in the list, a {@code TagNotFoundException} is thrown.
+     * @param toRemove The specified tag to remove.
+     */
+    public void remove(Tag toRemove) {
+        requireNonNull(toRemove);
+        if (!internalList.remove(toRemove)) {
+            throw new TagNotFoundException();
+        }
+    }
+
     public void setTags(UniqueTagList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
@@ -55,6 +67,27 @@ public class UniqueTagList implements Iterable<Tag> {
         }
 
         internalList.setAll(tags);
+    }
+
+    /**
+     * Replaces the specified {@code target} tag with {@code editedTag}.
+     */
+    public void setTag(Tag target, Tag editedTag) {
+        requireNonNull(target);
+        requireNonNull(editedTag);
+
+        // Checks if Tags are the same
+        if (target.equals(editedTag)) {
+            return;
+        }
+
+        // Checks if edited Tag exists
+        if (contains(editedTag)) {
+            throw new DuplicateTagException();
+        }
+
+        int targetIndex = internalList.indexOf(target);
+        internalList.set(targetIndex, editedTag);
     }
 
     public ObservableList<Tag> asUnmodifiableObservableList() {
@@ -90,4 +123,10 @@ public class UniqueTagList implements Iterable<Tag> {
 
         return ((UniqueTagList) o).internalList.equals(internalList);
     }
+
+    @Override
+    public int hashCode() {
+        return internalList.hashCode();
+    }
+
 }

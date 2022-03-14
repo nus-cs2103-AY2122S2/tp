@@ -2,9 +2,9 @@ package seedu.contax.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.contax.commons.core.GuiListContentType;
 import seedu.contax.logic.commands.exceptions.CommandException;
 import seedu.contax.model.Model;
-import seedu.contax.ui.ListContentType;
 
 /**
  * Lists all tags in the address book to the user.
@@ -17,6 +17,6 @@ public class ListTagCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        return new CommandResult(MESSAGE_SUCCESS, ListContentType.TAG);
+        return new CommandResult(MESSAGE_SUCCESS, GuiListContentType.TAG);
     }
 }

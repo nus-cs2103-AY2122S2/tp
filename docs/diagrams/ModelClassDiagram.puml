@@ -26,6 +26,8 @@ Class Appointment
 Class " Name "
 Class StartDateTime
 Class Duration
+
+Class UniqueTagList
 }
 
 Class HiddenOutside #FFFFFF
@@ -42,7 +44,9 @@ ModelManager -right-> "1" Schedule
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
+AddressBook *--> "1" UniqueTagList
 UniquePersonList --> "~* all" Person
+UniqueTagList --> "~*" Tag
 Person *--> Name
 Person *--> Phone
 Person *--> Email

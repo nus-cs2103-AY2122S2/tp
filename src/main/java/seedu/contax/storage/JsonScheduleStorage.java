@@ -16,7 +16,7 @@ import seedu.contax.model.ReadOnlyAddressBook;
 import seedu.contax.model.ReadOnlySchedule;
 
 /**
- * A class to access AddressBook data stored as a json file on the hard disk.
+ * A class to access Schedule data stored as a json file on the hard disk.
  */
 public class JsonScheduleStorage implements ScheduleStorage {
 
@@ -42,10 +42,10 @@ public class JsonScheduleStorage implements ScheduleStorage {
     /**
      * Similar to {@link #readSchedule(ReadOnlyAddressBook)}.
      *
-     * @param filePath location of the data. Cannot be null.
+     * @param filePath The Location of the data. Cannot be null.
      * @param addressBook An up-to-date copy of the AddressBook for finding persons associated to
      *                    appointments.
-     * @throws DataConversionException if the file is not in the correct format.
+     * @throws DataConversionException If the file is not in the correct format.
      */
     public Optional<ReadOnlySchedule> readSchedule(Path filePath, ReadOnlyAddressBook addressBook)
             throws DataConversionException {

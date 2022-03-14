@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 
 import seedu.contax.logic.commands.AddTagCommand;
 import seedu.contax.logic.parser.exceptions.ParseException;
+import seedu.contax.model.tag.Name;
 import seedu.contax.model.tag.Tag;
 
 /**
@@ -25,6 +26,10 @@ public class AddTagCommandParser implements Parser<AddTagCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE));
+        }
+
+        if (!Name.isValidName(argMultimap.getValue(PREFIX_NAME).get())) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
 
         Tag tag = ParserUtil.parseTag(argMultimap.getValue(PREFIX_NAME).get());
