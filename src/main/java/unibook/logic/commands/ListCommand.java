@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import unibook.commons.core.Messages;
 import unibook.model.Model;
 import unibook.model.ModelManager;
 import unibook.model.module.Module;
@@ -12,6 +13,7 @@ import unibook.model.module.ModuleCode;
 import unibook.model.person.Person;
 import unibook.model.person.Professor;
 import unibook.model.person.Student;
+
 /**
  * Lists all persons in the UniBook according to the user specified criteria.
  */
@@ -27,10 +29,6 @@ public class ListCommand extends Command {
     public static final String MESSAGE_SUCCESS_MODULEANDTYPE = "Listed all persons with specified type "
             + "in specified module.";
     public static final String MESSAGE_SUCCESS_VIEW = "Switched view successfully.";
-
-    public static final String MESSAGE_MODULE_DOES_NOT_EXIST = "The module entered"
-            + " does not exist in the UniBook";
-
     public static final String MESSAGE_USAGE_TYPE = "The acceptable arguments for type are students/professors.";
     public static final String MESSAGE_WRONG_VIEW = "The command requires you to switch views.";
     public static final String MESSAGE_USAGE_OPTION = "The acceptable arguments for option are module/type.";
@@ -129,7 +127,7 @@ public class ListCommand extends Command {
             return new CommandResult(MESSAGE_SUCCESS);
         case MODULE:
             if (!moduleCodeExists(model.getUniBook().getModuleList())) {
-                return new CommandResult(MESSAGE_MODULE_DOES_NOT_EXIST);
+                return new CommandResult(String.format(Messages.MESSAGE_MODULE_CODE_NOT_EXIST, moduleCode));
             }
             if (modelManager.getUi().isPersonListShowing()) {
                 Predicate<Person> showSpecificPeoplePredicate = p -> p.hasModule(this.moduleCode);
@@ -158,7 +156,7 @@ public class ListCommand extends Command {
         case MODULEANDTYPE:
             if (modelManager.getUi().isPersonListShowing()) {
                 if (!moduleCodeExists(model.getUniBook().getModuleList())) {
-                    return new CommandResult(MESSAGE_MODULE_DOES_NOT_EXIST);
+                    return new CommandResult(String.format(Messages.MESSAGE_MODULE_CODE_NOT_EXIST, moduleCode));
                 }
                 if (type.equals("professors")) {
                     Predicate<Person> showSpecificProfessorPredicate = p -> p.hasModule(this.moduleCode)

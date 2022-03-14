@@ -58,6 +58,10 @@ public class ListCommandParser implements Parser<ListCommand> {
                     .toUpperCase());
                 if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_TYPE)) {
                     String type = argMultimap.getValue(CliSyntax.PREFIX_TYPE).get().toLowerCase();
+                    if (!(type.equals("professors") || type.equals("students"))) {
+                        throw new ParseException(
+                                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE_TYPE));
+                    }
                     return new ListCommand(moduleCode, type);
                 } else {
                     return new ListCommand(moduleCode);
