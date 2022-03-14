@@ -1,5 +1,6 @@
 package seedu.contax.ui.onboarding;
 
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuBar;
 import javafx.scene.input.KeyCode;
@@ -7,6 +8,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import seedu.contax.logic.parser.*;
 import seedu.contax.model.onboarding.OnboardingStep;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.person.UniquePersonList;
@@ -28,6 +30,10 @@ public class OnboardingWindow extends UiPart<Stage> {
     private OnboardingCommandBox commandBox;
     private OnboardingInstruction instructionLabel;
     private UniquePersonList persons;
+    private FilteredList<Person> filteredPersons;
+
+    private AddCommandParser p;
+    private String errorMessage;
 
     @FXML
     private StackPane parentPane;
@@ -67,6 +73,8 @@ public class OnboardingWindow extends UiPart<Stage> {
         this.instructionLabel = new OnboardingInstruction();
         this.storyManager = new OnboardingStoryManager();
         this.persons = new UniquePersonList();
+        OnboardingUtil.populateWithSample(persons);
+        filteredPersons = persons.asUnmodifiableObservableList().filtered(null);
         fillInner();
         initStoryManager(storyManager);
     }
@@ -120,7 +128,7 @@ public class OnboardingWindow extends UiPart<Stage> {
     private void fillInner() {
         labelPlaceholder.getChildren().add(overlay.getRoot());
         labelPlaceholder.getChildren().add(instructionLabel.getRoot());
-        personListPanel = new PersonListPanel(persons.asUnmodifiableObservableList());
+        personListPanel = new PersonListPanel(filteredPersons);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
@@ -277,37 +285,77 @@ public class OnboardingWindow extends UiPart<Stage> {
      * <br><br>
      * Options are as follows:
      * <br>- 0: close this window and open main window
-     * <br>- 1: add a person
-     *
+     * <br>- 1: format the given message
+     * <br>- 2: find the latest person
+     * <br>- 3: format command for enforcement of  user input
+     * <br>- 5: remove latest person
+     * <br>- 6: list all persons
      */
-    private void processOperation(int option, Person person) {
+    private void processOperation(int option, OnboardingStep step) {
         switch (option) {
         case 0:
             hide();
             break;
         case 1:
-            persons.add(person);
+            instructionLabel.setText(String.format(step.getDisplayMessage(),
+                    OnboardingUtil.getLastestPersonName(persons)));
             break;
         case 2:
-            persons.remove(person);
+            instructionLabel.setText(String.format(step.getDisplayMessage(),
+                    OnboardingUtil.getLastestPersonName(persons)));
+            filteredPersons.setPredicate((p) -> p.isSamePerson(OnboardingUtil.getLatestPerson(persons)));
+            break;
+        case 3:
+            step.setDisplayMessage(String.format(step.getDisplayMessage(),
+                    OnboardingUtil.getLastestPersonName(persons)));
+            instructionLabel.setText(step.getDisplayMessage());
+            step.setCommand(String.format(step.getCommand(),
+                    OnboardingUtil.getLastestPersonName(persons)));
+            break;
+        case 4:
+            instructionLabel.setText(String.format(step.getDisplayMessage(),
+                    OnboardingUtil.getLastestPersonName(persons)));
+            persons.remove(OnboardingUtil.getLatestPerson(persons));
+            break;
+        case 5:
+            filteredPersons.setPredicate(null);
+            break;
         default:
             break;
         }
     }
 
-    private int enforceUserInput(OnboardingStep step) {
+    private int enforceUserInput(OnboardingStep step, boolean isCustom) {
         if (!commandBox.getText().equals(step.getCommand())) {
-            if (!commandBox.getText().equals("")) {
-                instructionLabel.setText("Please type: " + step.getCommand());
+            if (commandBox.getText().equals("")) {
+                return 0;
             }
-            return 0;
+
+            if (!isCustom) {
+                instructionLabel.setText("Please type: " + step.getCommand());
+                return 0;
+            }
+
+            if (!OnboardingUtil.isCommandValid(commandBox.getText(), instructionLabel)) {
+                System.out.println("INVALID");
+                return 0;
+            }
+            if (OnboardingUtil.processCommand(step, commandBox.getText(),
+                    instructionLabel, persons) == -1) {
+                return 0;
+            };
+
+            OnboardingStep s = storyManager.getNextStep();
+            processStep(s);
+            step.setEventType(s.getPositionOption());
         } else {
             OnboardingStep s = storyManager.getNextStep();
             processStep(s);
             step.setEventType(s.getPositionOption());
-            return 1;
         }
+        return 1;
     }
+
     /**
      * Process the given onboarding step, and translate it to a set of actions taken in this window
      * @param step the OnboardingStep to be processed
@@ -327,10 +375,10 @@ public class OnboardingWindow extends UiPart<Stage> {
         instructionLabel.setSize(messageHeight, messageWidth, stage.heightProperty(), stage.widthProperty());
         processOverlayOption(overlayOption);
         processHighlightOption(highlightOption);
-        processOperation(operationId, step.getPerson());
+        processOperation(operationId, step);
 
         if (step.getCommand() != null) {
-            if (enforceUserInput(step) == 0) {
+            if (enforceUserInput(step, step.isCommandCustom()) == 0) {
                 return;
             }
         }

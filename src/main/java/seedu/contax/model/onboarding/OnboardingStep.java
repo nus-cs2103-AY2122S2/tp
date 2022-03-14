@@ -16,6 +16,7 @@ public class OnboardingStep {
     private double messageWidth;
     private int positionOption;
     private String command;
+    private boolean isCommandCustom;
     private Person person;
     private int pOperation;
 
@@ -36,7 +37,7 @@ public class OnboardingStep {
                           double width, int position, int highlight,
                           int eventType,
                           String command,
-                          Person p, int op) {
+                          Person p, int op, boolean isCommandCustom) {
         this.displayMessage = message;
         this.overlayOption = option;
         this.eventType = eventType;
@@ -47,6 +48,7 @@ public class OnboardingStep {
         this.person = p;
         this.pOperation = op;
         this.command = command;
+        this.isCommandCustom = isCommandCustom;
     }
 
     public int getEventType() {
@@ -89,8 +91,20 @@ public class OnboardingStep {
         return pOperation;
     }
 
+    public boolean isCommandCustom() {
+        return isCommandCustom;
+    }
+
     public void setEventType(int type) {
         positionOption = type;
+    }
+
+    public void setDisplayMessage(String msg) {
+        displayMessage = msg;
+    }
+
+    public void setCommand(String cmd) {
+        command = cmd;
     }
 
     public boolean isValid() {
@@ -119,7 +133,8 @@ public class OnboardingStep {
                 && otherStep.getHighlightOption() == getHighlightOption()
                 && otherStep.getPositionOption() == getPositionOption()
                 && otherStep.getCommand().equals(getCommand())
-                && otherStep.getOperationId() == getOperationId();
+                && otherStep.getOperationId() == getOperationId()
+                && otherStep.isCommandCustom() == isCommandCustom();
 
         if (otherStep.getPerson() == null && person == null) {
             return result;
@@ -132,6 +147,6 @@ public class OnboardingStep {
     public int hashCode() {
         return Objects.hash(eventType, displayMessage, overlayOption,
                 messageHeight, messageWidth, highlightOption,
-                positionOption, person, command, getOperationId());
+                positionOption, person, command, getOperationId(), isCommandCustom);
     }
 }
