@@ -18,7 +18,7 @@ public class OnboardingStep {
     private String command;
     private boolean isCommandCustom;
     private Person person;
-    private int pOperation;
+    private int operationId;
 
     /**
      * Creates an OnboardingStep object
@@ -46,7 +46,7 @@ public class OnboardingStep {
         this.positionOption = position;
         this.highlightOption = highlight;
         this.person = p;
-        this.pOperation = op;
+        this.operationId = op;
         this.command = command;
         this.isCommandCustom = isCommandCustom;
     }
@@ -88,10 +88,10 @@ public class OnboardingStep {
     }
 
     public int getOperationId() {
-        return pOperation;
+        return operationId;
     }
 
-    public boolean isCommandCustom() {
+    public boolean getIsCommandCustom() {
         return isCommandCustom;
     }
 
@@ -134,7 +134,7 @@ public class OnboardingStep {
                 && otherStep.getPositionOption() == getPositionOption()
                 && otherStep.getCommand().equals(getCommand())
                 && otherStep.getOperationId() == getOperationId()
-                && otherStep.isCommandCustom() == isCommandCustom();
+                && otherStep.getIsCommandCustom() == getIsCommandCustom();
 
         if (otherStep.getPerson() == null && person == null) {
             return result;
@@ -147,6 +147,6 @@ public class OnboardingStep {
     public int hashCode() {
         return Objects.hash(eventType, displayMessage, overlayOption,
                 messageHeight, messageWidth, highlightOption,
-                positionOption, person, command, getOperationId(), isCommandCustom);
+                positionOption, person, command, operationId, isCommandCustom);
     }
 }
