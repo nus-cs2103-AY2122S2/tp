@@ -15,7 +15,7 @@ public class Date {
     /*
      * TODO VALIDATION REGEX
      */
-//    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    //public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String date;
 

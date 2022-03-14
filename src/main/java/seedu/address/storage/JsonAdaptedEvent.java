@@ -14,8 +14,9 @@ import seedu.address.model.entry.Date;
 import seedu.address.model.entry.Event;
 import seedu.address.model.entry.Name;
 import seedu.address.model.entry.Platform;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.entry.Time;
+import seedu.address.model.tag.Tag;
+
 
 /**
  * Jackson-friendly version of {@link Event}.
@@ -112,7 +113,8 @@ class JsonAdaptedEvent {
 
         //=========================== Platform ==========================================================
         if (platform == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Platform.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Platform.class.getSimpleName()));
         }
         if (!Platform.isValidPlatform(platform)) {
             throw new IllegalValueException(Platform.MESSAGE_CONSTRAINTS);

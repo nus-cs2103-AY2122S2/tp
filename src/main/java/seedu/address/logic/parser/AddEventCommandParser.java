@@ -17,8 +17,8 @@ import seedu.address.model.entry.Date;
 import seedu.address.model.entry.Event;
 import seedu.address.model.entry.Name;
 import seedu.address.model.entry.Platform;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.entry.Time;
+import seedu.address.model.tag.Tag;
 
 
 /**

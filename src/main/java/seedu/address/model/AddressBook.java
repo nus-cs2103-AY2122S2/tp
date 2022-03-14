@@ -125,25 +125,48 @@ public class AddressBook implements ReadOnlyAddressBook {
         return Objects.hash(persons, events);
     }
 
-
+    /**
+     * Replaces the contents of the event list with {@code events}.
+     * {@code events} must not contain duplicate events.
+     */
     public void setEvents(List<Event> events) {
         this.events.setEntries(events);
     }
+
+    /**
+     * Returns true if an event with the same identity as {@code event} exists in the address book.
+     */
     public boolean hasEvent(Event event) {
         requireNonNull(event);
         return events.contains(event);
     }
+
+    /**
+     * Adds an event to the address book.
+     * The event must not already exist in the address book.
+     */
     public void addEvent(Event e) {
         events.add(e);
     }
+
+    /**
+     * Replaces the contents of the event list with {@code events}.
+     * {@code events} must not contain duplicate events.
+     */
     public void setEvent(Event target, Event editedEvent) {
         requireNonNull(editedEvent);
 
         events.setEntry(target, editedEvent);
     }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
     public void removeEvent(Event key) {
         events.remove(key);
     }
+
     @Override
     public ObservableList<Event> getEventList() {
         return events.asUnmodifiableObservableList();
