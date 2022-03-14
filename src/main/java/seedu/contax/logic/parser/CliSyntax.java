@@ -17,6 +17,9 @@ public class CliSyntax {
 
     /* Prefix definition for advanced commands */
     public static final Prefix PREFIX_SEARCH_TYPE = new Prefix("by/");
+    public static final Prefix PREFIX_RANGE_FROM = new Prefix("from/");
+    public static final Prefix PREFIX_RANGE_TO = new Prefix("to/");
+
 
     /* Prefix definitions for Appointments */
     public static final Prefix PREFIX_DATE = new Prefix("d/");
