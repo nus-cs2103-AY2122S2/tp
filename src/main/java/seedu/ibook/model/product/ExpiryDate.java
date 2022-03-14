@@ -14,20 +14,12 @@ import java.util.Arrays;
  */
 public class ExpiryDate {
 
-    private static class WildExpiryDate extends ExpiryDate {
-        private WildExpiryDate() {};
-
+    public static final ExpiryDate WILD_EXPIRY_DATE = new ExpiryDate() {
         @Override
         public boolean equals(Object other) {
-            if (other instanceof ExpiryDate) {
-                return true;
-            } else {
-                return false;
-            }
+            return other instanceof ExpiryDate;
         }
-    }
-
-    public static final WildExpiryDate WILDEXPIRYDATE = new WildExpiryDate();
+    };
 
     public static final String MESSAGE_CONSTRAINTS =
             "Expiry dates should have format such as 03 May 2022, 3 May 2022 or 2022-05-03";
