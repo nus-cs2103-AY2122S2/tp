@@ -32,13 +32,13 @@ public class Age {
 
     @Override
     public String toString() {
-        return this.value + " y/o";
+        return this.value;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Email // instanceof handles nulls
+                || (other instanceof Age // instanceof handles nulls
                 && value.equals(((Age) other).value)); // state check
     }
 

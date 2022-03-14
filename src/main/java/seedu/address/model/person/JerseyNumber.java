@@ -39,8 +39,8 @@ public class JerseyNumber {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Email // instanceof handles nulls
-                && value.equals(((Age) other).value)); // state check
+                || (other instanceof JerseyNumber // instanceof handles nulls
+                && value.equals(((JerseyNumber) other).value)); // state check
     }
 
     @Override

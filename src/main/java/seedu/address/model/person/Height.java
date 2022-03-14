@@ -37,14 +37,14 @@ public class Height {
 
     @Override
     public String toString() {
-        return this.value + "cm";
+        return this.value;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Email // instanceof handles nulls
-                && value.equals(((Age) other).value)); // state check
+                || (other instanceof Height // instanceof handles nulls
+                && value.equals(((Height) other).value)); // state check
     }
 
     @Override
