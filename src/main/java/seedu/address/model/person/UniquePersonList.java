@@ -15,6 +15,7 @@ import seedu.address.model.person.exceptions.DuplicateTaskException;
 import seedu.address.model.person.exceptions.InvalidTaskIndexException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.person.exceptions.TaskAlreadyCompleteException;
+import seedu.address.model.person.exceptions.TaskAlreadyNotCompleteException;
 
 
 /**
@@ -134,7 +135,7 @@ public class UniquePersonList implements Iterable<Person> {
     /**
      * Mark {@code task} task belonging to a person {@code studentId} as done.
      *
-     * @param studentId the student id of the person's whose task is to be marked.
+     * @param studentId the student id of the person's whose task is to be marked as done.
      * @param index the index of he task to be marked as complete.
      */
 
@@ -157,6 +158,40 @@ public class UniquePersonList implements Iterable<Person> {
                     }
                 } else {
                     throw new TaskAlreadyCompleteException();
+                }
+            }
+        }
+
+        if (!isPersonFound) {
+            throw new PersonNotFoundException();
+        }
+    }
+
+    /**
+     * Mark {@code task} task belonging to a person {@code studentId} as undone.
+     *
+     * @param studentId the student id of the person's whose task is to be marked as undone.
+     * @param index the index of he task to be marked as incomplete.
+     */
+    public void unmarkTaskOfPerson(StudentId studentId, Index index) {
+        requireAllNonNull(studentId, index);
+        boolean isPersonFound = false;
+
+        for (Person currPerson: internalList) {
+            if (currPerson.getStudentId().equals(studentId)) {
+                isPersonFound = true;
+                Person updatedPerson = currPerson.getCopy();
+                TaskList updatedPersonTaskList = updatedPerson.getTaskList();
+                int numberOfTasks = updatedPersonTaskList.getNumberOfTasks();
+                if (updatedPersonTaskList.getTaskList().get(index.getZeroBased()).isTaskComplete()) {
+                    if (index.getZeroBased() < numberOfTasks && index.getOneBased() > 0) {
+                        updatedPersonTaskList.markTaskAsNotComplete(index.getZeroBased());
+                        setPerson(currPerson, updatedPerson);
+                    } else {
+                        throw new InvalidTaskIndexException();
+                    }
+                } else {
+                    throw new TaskAlreadyNotCompleteException();
                 }
             }
         }

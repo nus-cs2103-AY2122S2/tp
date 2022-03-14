@@ -92,6 +92,12 @@ public interface Model {
      * The {@code task} should be an existing unmarked assigned task.
      */
     void markTaskOfPerson(StudentId studentId, Index index);
+    /**
+     * Unmarks {@code Task} to {@code person} with {@code studentId}.
+     * A person with {@code studentId} must exist in the address book.
+     * The {@code task} should be an existing marked assigned task.
+     */
+    void unmarkTaskOfPerson(StudentId studentId, Index index);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

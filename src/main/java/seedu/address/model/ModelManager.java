@@ -128,6 +128,13 @@ public class ModelManager implements Model {
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
+    @Override
+    public void unmarkTaskOfPerson(StudentId studentId, Index index) {
+        requireAllNonNull(studentId, index);
+        addressBook.unmarkTaskOfPerson(studentId, index);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
