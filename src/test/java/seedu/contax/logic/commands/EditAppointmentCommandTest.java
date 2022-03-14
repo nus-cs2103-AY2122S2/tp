@@ -6,6 +6,7 @@ import static seedu.contax.logic.commands.CommandTestUtil.VALID_APPOINTMENT_NAME
 import static seedu.contax.logic.commands.CommandTestUtil.VALID_APPOINTMENT_NAME_EXTRA;
 import static seedu.contax.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.contax.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALICE;
 import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_EXTRA;
 import static seedu.contax.testutil.TypicalAppointments.getTypicalSchedule;
 import static seedu.contax.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -13,6 +14,7 @@ import static seedu.contax.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.contax.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.time.LocalTime;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
@@ -123,7 +125,38 @@ public class EditAppointmentCommandTest {
     }
 
     @Test
+    public void execute_overlappingAppointmentFilteredList_failure() {
+        model.addAppointment(APPOINTMENT_EXTRA);
+        Predicate<Appointment> testPredicate = appointment -> !appointment.equals(APPOINTMENT_ALICE);
+        model.updateFilteredAppointmentList(testPredicate);
+
+        Index targetIndex = Index.fromOneBased(1);
+        Appointment firstAppointment = model.getFilteredAppointmentList().get(targetIndex.getZeroBased());
+        LocalTime modifiedOverlappingTime = firstAppointment.getStartDateTime().value.toLocalTime()
+                .minusMinutes(1);
+        EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder(firstAppointment)
+                .withStartTime(DateInputUtil.formatTimeToInputString(modifiedOverlappingTime))
+                .build();
+        EditAppointmentCommand editCommand = new EditAppointmentCommand(Index.fromOneBased(2), descriptor);
+
+        assertCommandFailure(editCommand, model, EditAppointmentCommand.MESSAGE_OVERLAPPING_APPOINTMENT);
+    }
+
+    @Test
     public void execute_invalidAppointmentIndex_failure() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredAppointmentList().size() + 1);
+        EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder()
+                .withName(VALID_APPOINTMENT_NAME_ALONE).build();
+        EditAppointmentCommand editCommand = new EditAppointmentCommand(outOfBoundIndex, descriptor);
+
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_invalidAppointmentIndexFilteredList_failure() {
+        Predicate<Appointment> testPredicate = appointment -> !appointment.equals(APPOINTMENT_ALICE);
+        model.updateFilteredAppointmentList(testPredicate);
+
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredAppointmentList().size() + 1);
         EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder()
                 .withName(VALID_APPOINTMENT_NAME_ALONE).build();

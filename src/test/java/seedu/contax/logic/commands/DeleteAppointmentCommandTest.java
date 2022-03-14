@@ -4,7 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.contax.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.contax.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALICE;
+import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALONE;
 import static seedu.contax.testutil.TypicalAppointments.getTypicalSchedule;
+
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,7 +29,7 @@ public class DeleteAppointmentCommandTest {
     private Model model = new ModelManager(new AddressBook(), getTypicalSchedule(), new UserPrefs());
 
     @Test
-    public void execute_validIndex_success() {
+    public void execute_validIndexUnfilteredList_success() {
         Appointment appointmentToDelete = model.getFilteredAppointmentList().get(0);
         DeleteAppointmentCommand deleteCommand = new DeleteAppointmentCommand(Index.fromZeroBased(0));
 
@@ -39,12 +43,39 @@ public class DeleteAppointmentCommandTest {
     }
 
     @Test
-    public void execute_invalidIndex_throwsCommandException() {
+    public void execute_validIndexFilteredList_success() {
+        Predicate<Appointment> testFilter = appointment -> appointment.equals(APPOINTMENT_ALONE);
+        model.updateFilteredAppointmentList(testFilter);
+        Appointment appointmentToDelete = model.getFilteredAppointmentList().get(0);
+        DeleteAppointmentCommand deleteCommand = new DeleteAppointmentCommand(Index.fromZeroBased(0));
+
+        String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS,
+                appointmentToDelete);
+
+        ModelManager expectedModel = new ModelManager(new AddressBook(), model.getSchedule(), new UserPrefs());
+        expectedModel.updateFilteredAppointmentList(testFilter);
+        expectedModel.deleteAppointment(appointmentToDelete);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredAppointmentList().size() + 1);
         DeleteAppointmentCommand deleteCommand = new DeleteAppointmentCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX);
     }
+
+    @Test
+    public void execute_invalidIndexFilteredList_throwsCommandException() {
+        model.updateFilteredAppointmentList(appointment -> !appointment.equals(APPOINTMENT_ALICE));
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredAppointmentList().size() + 1);
+        DeleteAppointmentCommand deleteCommand = new DeleteAppointmentCommand(outOfBoundIndex);
+
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX);
+    }
+
 
     @Test
     public void equals() {
