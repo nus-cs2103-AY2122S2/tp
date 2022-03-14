@@ -1,9 +1,9 @@
 package seedu.trackbeau.logic.commands;
 
 import static seedu.trackbeau.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.trackbeau.logic.commands.CommandTestUtil.showCustomerAtIndex;
-import static seedu.trackbeau.testutil.TypicalCustomers.getTypicalTrackBeau;
-import static seedu.trackbeau.testutil.TypicalIndexes.INDEX_FIRST_CUSTOMER;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.trackbeau.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.trackbeau.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,7 +22,7 @@ public class ListCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalTrackBeau(), new UserPrefs());
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel = new ModelManager(model.getTrackBeau(), new UserPrefs());
     }
 
@@ -33,7 +33,7 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        showCustomerAtIndex(model, INDEX_FIRST_CUSTOMER);
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
         assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }

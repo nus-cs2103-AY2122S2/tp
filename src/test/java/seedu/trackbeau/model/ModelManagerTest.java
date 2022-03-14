@@ -3,10 +3,10 @@ package seedu.trackbeau.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.trackbeau.model.Model.PREDICATE_SHOW_ALL_CUSTOMERS;
+import static seedu.trackbeau.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.trackbeau.testutil.Assert.assertThrows;
-import static seedu.trackbeau.testutil.TypicalCustomers.ALICE;
-import static seedu.trackbeau.testutil.TypicalCustomers.BENSON;
+import static seedu.trackbeau.testutil.TypicalPersons.ALICE;
+import static seedu.trackbeau.testutil.TypicalPersons.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -15,7 +15,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.trackbeau.commons.core.GuiSettings;
-import seedu.trackbeau.model.customer.NameContainsKeywordsPredicate;
+import seedu.trackbeau.model.customer.SearchContainsKeywordsPredicate;
 import seedu.trackbeau.testutil.TrackBeauBuilder;
 
 public class ModelManagerTest {
@@ -61,47 +61,47 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setTrackBeauFilePath_nullPath_throwsNullPointerException() {
+    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.setTrackBeauFilePath(null));
     }
 
     @Test
-    public void setTrackBeauFilePath_validPath_setsTrackBeauFilePath() {
+    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
         Path path = Paths.get("trackbeau/book/file/path");
         modelManager.setTrackBeauFilePath(path);
         assertEquals(path, modelManager.getTrackBeauFilePath());
     }
 
     @Test
-    public void hasCustomer_nullCustomer_throwsNullPointerException() {
+    public void hasPerson_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasCustomer(null));
     }
 
     @Test
-    public void hasCustomer_customerNotInTrackBeau_returnsFalse() {
+    public void hasPerson_personNotInAddressBook_returnsFalse() {
         assertFalse(modelManager.hasCustomer(ALICE));
     }
 
     @Test
-    public void hasCustomer_customerInTrackBeau_returnsTrue() {
+    public void hasPerson_personInAddressBook_returnsTrue() {
         modelManager.addCustomer(ALICE);
         assertTrue(modelManager.hasCustomer(ALICE));
     }
 
     @Test
-    public void getFilteredCustomerList_modifyList_throwsUnsupportedOperationException() {
+    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredCustomerList().remove(0));
     }
 
     @Test
     public void equals() {
-        TrackBeau trackBeau = new TrackBeauBuilder().withCustomer(ALICE).withCustomer(BENSON).build();
-        TrackBeau differentTrackBeau = new TrackBeau();
+        TrackBeau addressBook = new TrackBeauBuilder().withCustomer(ALICE).withCustomer(BENSON).build();
+        TrackBeau differentAddressBook = new TrackBeau();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(trackBeau, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(trackBeau, userPrefs);
+        modelManager = new ModelManager(addressBook, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -113,20 +113,21 @@ public class ModelManagerTest {
         // different types -> returns false
         assertFalse(modelManager.equals(5));
 
-        // different trackBeau -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentTrackBeau, userPrefs)));
+        // different addressBook -> returns false
+        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredCustomerList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(trackBeau, userPrefs)));
+        modelManager.updateFilteredCustomerList(new SearchContainsKeywordsPredicate("getName",
+                Arrays.asList(keywords)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
+        modelManager.updateFilteredCustomerList(PREDICATE_SHOW_ALL_PERSONS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setTrackBeauFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(trackBeau, differentUserPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
     }
 }

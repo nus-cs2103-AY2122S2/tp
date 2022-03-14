@@ -37,7 +37,7 @@ class JsonAdaptedCustomer {
     private final List<JsonAdaptedTag> allergies = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonAdaptedCustomer} with the given customer details.
+     * Constructs a {@code JsonAdaptedPerson} with the given customer details.
      */
     @JsonCreator
     public JsonAdaptedCustomer(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
@@ -65,7 +65,7 @@ class JsonAdaptedCustomer {
     }
 
     /**
-     * Converts a given {@code Customer} into this class for Jackson use.
+     * Converts a given {@code Person} into this class for Jackson use.
      */
     public JsonAdaptedCustomer(Customer source) {
         name = source.getName().fullName;
@@ -174,7 +174,7 @@ class JsonAdaptedCustomer {
     }
 
     /**
-     * Converts this Jackson-friendly adapted customer object into the model's {@code Customer} object.
+     * Converts this Jackson-friendly adapted customer object into the model's {@code Person} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted customer.
      */

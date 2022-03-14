@@ -3,10 +3,10 @@ package seedu.trackbeau.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.trackbeau.testutil.Assert.assertThrows;
-import static seedu.trackbeau.testutil.TypicalCustomers.ALICE;
-import static seedu.trackbeau.testutil.TypicalCustomers.HOON;
-import static seedu.trackbeau.testutil.TypicalCustomers.IDA;
-import static seedu.trackbeau.testutil.TypicalCustomers.getTypicalTrackBeau;
+import static seedu.trackbeau.testutil.TypicalPersons.ALICE;
+import static seedu.trackbeau.testutil.TypicalPersons.HOON;
+import static seedu.trackbeau.testutil.TypicalPersons.IDA;
+import static seedu.trackbeau.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -25,11 +25,11 @@ public class JsonTrackBeauStorageTest {
     public Path testFolder;
 
     @Test
-    public void readTrackBeau_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> readTrackBeau(null));
+    public void readAddressBook_nullFilePath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> readAddressBook(null));
     }
 
-    private java.util.Optional<ReadOnlyTrackBeau> readTrackBeau(String filePath) throws Exception {
+    private java.util.Optional<ReadOnlyTrackBeau> readAddressBook(String filePath) throws Exception {
         return new JsonTrackBeauStorage(Paths.get(filePath)).readTrackBeau(addToTestDataPathIfNotNull(filePath));
     }
 
@@ -41,7 +41,7 @@ public class JsonTrackBeauStorageTest {
 
     @Test
     public void read_missingFile_emptyResult() throws Exception {
-        assertFalse(readTrackBeau("NonExistentFile.json").isPresent());
+        assertFalse(readAddressBook("NonExistentFile.json").isPresent());
     }
 
     /*
@@ -62,33 +62,33 @@ public class JsonTrackBeauStorageTest {
     }
 */
     @Test
-    public void readAndSaveTrackBeau_allInOrder_success() throws Exception {
-        Path filePath = testFolder.resolve("TempTrackBeau.json");
-        TrackBeau original = getTypicalTrackBeau();
-        JsonTrackBeauStorage jsonTrackBeauStorage = new JsonTrackBeauStorage(filePath);
+    public void readAndSaveAddressBook_allInOrder_success() throws Exception {
+        Path filePath = testFolder.resolve("TempAddressBook.json");
+        TrackBeau original = getTypicalAddressBook();
+        JsonTrackBeauStorage jsonAddressBookStorage = new JsonTrackBeauStorage(filePath);
 
         // Save in new file and read back
-        jsonTrackBeauStorage.saveTrackBeau(original, filePath);
-        ReadOnlyTrackBeau readBack = jsonTrackBeauStorage.readTrackBeau(filePath).get();
+        jsonAddressBookStorage.saveTrackBeau(original, filePath);
+        ReadOnlyTrackBeau readBack = jsonAddressBookStorage.readTrackBeau(filePath).get();
         assertEquals(original, new TrackBeau(readBack));
 
         // Modify data, overwrite exiting file, and read back
         original.addCustomer(HOON);
-        original.removeCustomer(ALICE);
-        jsonTrackBeauStorage.saveTrackBeau(original, filePath);
-        readBack = jsonTrackBeauStorage.readTrackBeau(filePath).get();
+        original.removePerson(ALICE);
+        jsonAddressBookStorage.saveTrackBeau(original, filePath);
+        readBack = jsonAddressBookStorage.readTrackBeau(filePath).get();
         assertEquals(original, new TrackBeau(readBack));
 
         // Save and read without specifying file path
         original.addCustomer(IDA);
-        jsonTrackBeauStorage.saveTrackBeau(original); // file path not specified
-        readBack = jsonTrackBeauStorage.readTrackBeau().get(); // file path not specified
+        jsonAddressBookStorage.saveTrackBeau(original); // file path not specified
+        readBack = jsonAddressBookStorage.readTrackBeau().get(); // file path not specified
         assertEquals(original, new TrackBeau(readBack));
 
     }
 
     @Test
-    public void saveTrackBeau_nullTrackBeau_throwsNullPointerException() {
+    public void saveAddressBook_nullAddressBook_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> saveTrackBeau(null, "SomeFile.json"));
     }
 

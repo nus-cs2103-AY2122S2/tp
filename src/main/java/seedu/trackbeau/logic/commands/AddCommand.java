@@ -16,7 +16,7 @@ import seedu.trackbeau.model.Model;
 import seedu.trackbeau.model.customer.Customer;
 
 /**
- * Adds a customer to trackBeau.
+ * Adds a customer to the trackbeau book.
  */
 public class AddCommand extends Command {
 
@@ -45,7 +45,7 @@ public class AddCommand extends Command {
             + PREFIX_ALLERGIES + "Nickel";
 
     public static final String MESSAGE_SUCCESS = "New customer added: %1$s";
-    public static final String MESSAGE_DUPLICATE_CUSTOMER = "This customer already exists in TrackBeau";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This customer already exists in TrackBeau";
 
     private final Customer toAdd;
 
@@ -62,7 +62,7 @@ public class AddCommand extends Command {
         requireNonNull(model);
 
         if (model.hasCustomer(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_CUSTOMER);
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
         model.addCustomer(toAdd);

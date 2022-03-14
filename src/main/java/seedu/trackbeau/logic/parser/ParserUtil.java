@@ -71,7 +71,7 @@ public class ParserUtil {
      * Parses a {@code String address} into an {@code Address}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code address} is invalid.
+     * @throws ParseException if the given {@code trackbeau} is invalid.
      */
     public static Address parseAddress(String address) throws ParseException {
         requireNonNull(address);
@@ -101,7 +101,7 @@ public class ParserUtil {
      * Parses a {@code String skinType } into an {@code SkinType}.
      * Leading and trailing whitespaces will be trimmed.
      * Skin type input must fit existing categories.
-     * @throws ParseException if the given {@code SkinType} is invalid.
+     * @throws ParseException if the given {@code trackbeau} is invalid.
      */
     public static SkinType parseSkinType(String skinType) throws ParseException {
         requireNonNull(skinType);
@@ -116,7 +116,7 @@ public class ParserUtil {
      * Parses a {@code String hairType} into an {@code HairType}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code HairType} is invalid.
+     * @throws ParseException if the given {@code trackbeau} is invalid.
      */
     public static HairType parseHairType(String hairType) throws ParseException {
         requireNonNull(hairType);

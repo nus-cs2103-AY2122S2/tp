@@ -4,10 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.trackbeau.logic.commands.CommandTestUtil.showCustomerAtIndex;
-import static seedu.trackbeau.testutil.TypicalCustomers.getTypicalTrackBeau;
-import static seedu.trackbeau.testutil.TypicalIndexes.INDEX_FIRST_CUSTOMER;
-import static seedu.trackbeau.testutil.TypicalIndexes.INDEX_SECOND_CUSTOMER;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.trackbeau.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.trackbeau.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.trackbeau.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,14 +24,14 @@ import seedu.trackbeau.model.customer.Customer;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalTrackBeau(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Customer customerToDelete = model.getFilteredCustomerList().get(INDEX_FIRST_CUSTOMER.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_CUSTOMER);
+        Customer customerToDelete = model.getFilteredCustomerList().get(INDEX_FIRST_PERSON.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_CUSTOMER_SUCCESS, customerToDelete);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, customerToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getTrackBeau(), new UserPrefs());
         expectedModel.deleteCustomer(customerToDelete);
@@ -44,48 +44,48 @@ public class DeleteCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredCustomerList().size() + 1);
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showCustomerAtIndex(model, INDEX_FIRST_CUSTOMER);
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Customer customerToDelete = model.getFilteredCustomerList().get(INDEX_FIRST_CUSTOMER.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_CUSTOMER);
+        Customer customerToDelete = model.getFilteredCustomerList().get(INDEX_FIRST_PERSON.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_CUSTOMER_SUCCESS, customerToDelete);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, customerToDelete);
 
         Model expectedModel = new ModelManager(model.getTrackBeau(), new UserPrefs());
         expectedModel.deleteCustomer(customerToDelete);
-        showNoCustomer(expectedModel);
+        showNoPerson(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showCustomerAtIndex(model, INDEX_FIRST_CUSTOMER);
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Index outOfBoundIndex = INDEX_SECOND_CUSTOMER;
+        Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of trackbeau book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getTrackBeau().getCustomerList().size());
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_CUSTOMER);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_CUSTOMER);
+        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_CUSTOMER);
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_PERSON);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
@@ -101,7 +101,7 @@ public class DeleteCommandTest {
     /**
      * Updates {@code model}'s filtered list to show no one.
      */
-    private void showNoCustomer(Model model) {
+    private void showNoPerson(Model model) {
         model.updateFilteredCustomerList(p -> false);
 
         assertTrue(model.getFilteredCustomerList().isEmpty());

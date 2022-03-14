@@ -39,8 +39,8 @@ import static seedu.trackbeau.logic.parser.AddCommandParser.EMPTY_HAIR_TYPE;
 import static seedu.trackbeau.logic.parser.AddCommandParser.EMPTY_SKIN_TYPE;
 import static seedu.trackbeau.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.trackbeau.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.trackbeau.testutil.TypicalCustomers.AMY;
-import static seedu.trackbeau.testutil.TypicalCustomers.BOB;
+import static seedu.trackbeau.testutil.TypicalPersons.AMY;
+import static seedu.trackbeau.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -50,14 +50,14 @@ import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.model.customer.Email;
 import seedu.trackbeau.model.customer.Name;
 import seedu.trackbeau.model.customer.Phone;
-import seedu.trackbeau.testutil.CustomerBuilder;
+import seedu.trackbeau.testutil.PersonBuilder;
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Customer expectedCustomer = new CustomerBuilder(BOB).withStaffs(VALID_STAFF_JOHN)
+        Customer expectedCustomer = new PersonBuilder(BOB).withStaffs(VALID_STAFF_JOHN)
                 .withServices(VALID_SERVICE_ACNE).withAllergies(VALID_ALLERGY_COCOA_BUTTER).build();
 
         // whitespace only preamble
@@ -97,8 +97,7 @@ public class AddCommandParserTest {
                 + STAFF_DESC_BOB + SERVICE_DESC_BOB + ALLERGY_DESC_BOB, new AddCommand(expectedCustomer));
 
         // multiple staffs tags - all accepted
-        Customer expectedCustomerMultipleStaffs = new CustomerBuilder(BOB)
-                .withStaffs(VALID_STAFF_JANE, VALID_STAFF_JOHN)
+        Customer expectedCustomerMultipleStaffs = new PersonBuilder(BOB).withStaffs(VALID_STAFF_JANE, VALID_STAFF_JOHN)
                 .withServices(VALID_SERVICE_ACNE).withAllergies(VALID_ALLERGY_COCOA_BUTTER)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
@@ -107,7 +106,7 @@ public class AddCommandParserTest {
                 + SERVICE_DESC_BOB + ALLERGY_DESC_BOB, new AddCommand(expectedCustomerMultipleStaffs));
 
         // multiple services tags - all accepted
-        Customer expectedCustomerMultipleServices = new CustomerBuilder(BOB)
+        Customer expectedCustomerMultipleServices = new PersonBuilder(BOB)
                 .withStaffs(VALID_STAFF_JOHN)
                 .withServices(VALID_SERVICE_CHEMICAL_PEEL,
                 VALID_SERVICE_ACNE)
@@ -120,7 +119,7 @@ public class AddCommandParserTest {
 
 
         // multiple allergy tags - all accepted
-        Customer expectedCustomerMultipleAllergies = new CustomerBuilder(BOB)
+        Customer expectedCustomerMultipleAllergies = new PersonBuilder(BOB)
                 .withStaffs(VALID_STAFF_JOHN)
                 .withServices(VALID_SERVICE_ACNE)
                 .withAllergies(VALID_ALLERGY_NICKEL, VALID_ALLERGY_COCOA_BUTTER)
@@ -135,7 +134,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_optionalSkinTypeMissing_success() {
         // no skin type
-        Customer expectedCustomer = new CustomerBuilder(AMY).withSkinType(EMPTY_SKIN_TYPE).build();
+        Customer expectedCustomer = new PersonBuilder(AMY).withSkinType(EMPTY_SKIN_TYPE).build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY
                         + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
                         + HAIR_TYPE_DESC_AMY + STAFF_DESC_AMY
@@ -146,7 +145,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_optionalHairTypeMissing_success() {
         // no hair type
-        Customer expectedCustomer = new CustomerBuilder(AMY).withHairType(EMPTY_HAIR_TYPE).build();
+        Customer expectedCustomer = new PersonBuilder(AMY).withHairType(EMPTY_HAIR_TYPE).build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY
                         + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
                         + SKIN_TYPE_DESC_AMY + STAFF_DESC_AMY
@@ -157,7 +156,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_optionalStaffsMissing_success() {
         // zero staffs
-        Customer expectedCustomer = new CustomerBuilder(AMY).withStaffs().build();
+        Customer expectedCustomer = new PersonBuilder(AMY).withStaffs().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY
                         + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
                         + SKIN_TYPE_DESC_AMY + HAIR_TYPE_DESC_AMY
@@ -168,7 +167,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_optionalServicesMissing_success() {
         // zero services
-        Customer expectedCustomer = new CustomerBuilder(AMY).withServices().build();
+        Customer expectedCustomer = new PersonBuilder(AMY).withServices().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY
                         + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
                         + SKIN_TYPE_DESC_AMY + HAIR_TYPE_DESC_AMY
@@ -179,7 +178,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_optionalAllergiesMissing_success() {
         // zero allergies
-        Customer expectedCustomer = new CustomerBuilder(AMY).withAllergies().build();
+        Customer expectedCustomer = new PersonBuilder(AMY).withAllergies().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY
                         + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
                         + SKIN_TYPE_DESC_AMY + HAIR_TYPE_DESC_AMY

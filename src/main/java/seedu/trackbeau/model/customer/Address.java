@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.trackbeau.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Customer's address in trackBeau.
+ * Represents a Person's trackbeau in the trackbeau book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
 public class Address {
@@ -22,7 +22,7 @@ public class Address {
     /**
      * Constructs an {@code Address}.
      *
-     * @param address A valid address.
+     * @param address A valid trackbeau.
      */
     public Address(String address) {
         requireNonNull(address);

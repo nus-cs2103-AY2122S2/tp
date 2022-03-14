@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.trackbeau.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.trackbeau.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.trackbeau.testutil.Assert.assertThrows;
-import static seedu.trackbeau.testutil.TypicalIndexes.INDEX_FIRST_CUSTOMER;
+import static seedu.trackbeau.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,9 +22,9 @@ import seedu.trackbeau.logic.commands.HelpCommand;
 import seedu.trackbeau.logic.commands.ListCommand;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
 import seedu.trackbeau.model.customer.Customer;
-import seedu.trackbeau.model.customer.NameContainsKeywordsPredicate;
-import seedu.trackbeau.testutil.CustomerBuilder;
-import seedu.trackbeau.testutil.CustomerUtil;
+import seedu.trackbeau.model.customer.SearchContainsKeywordsPredicate;
+import seedu.trackbeau.testutil.PersonBuilder;
+import seedu.trackbeau.testutil.PersonUtil;
 
 public class TrackBeauParserTest {
 
@@ -32,8 +32,8 @@ public class TrackBeauParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Customer customer = new CustomerBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(CustomerUtil.getAddCommand(customer));
+        Customer customer = new PersonBuilder().build();
+        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(customer));
         assertEquals(new AddCommand(customer), command);
     }
 
@@ -46,17 +46,17 @@ public class TrackBeauParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_CUSTOMER.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_CUSTOMER), command);
+                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
     }
 
     /*ToDo uncomment when edit command is fixed
     @Test
     public void parseCommand_edit() throws Exception {
-        Customer customer = new CustomerBuilder().build();
-        EditCustomerDescriptor descriptor = new EditCustomerDescriptorBuilder(customer).build();
+        Customer customer = new PersonBuilder().build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(customer).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + CustomerUtil.getEditPersonDescriptorDetails(descriptor));
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
     */
@@ -72,7 +72,7 @@ public class TrackBeauParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        assertEquals(new FindCommand(new SearchContainsKeywordsPredicate("getName", keywords)), command);
     }
 
     @Test

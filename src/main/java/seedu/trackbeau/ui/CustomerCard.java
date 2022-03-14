@@ -10,7 +10,7 @@ import javafx.scene.layout.Region;
 import seedu.trackbeau.model.customer.Customer;
 
 /**
- * An UI component that displays information of a {@code Customer}.
+ * An UI component that displays information of a {@code Person}.
  */
 public class CustomerCard extends UiPart<Region> {
 
@@ -50,7 +50,7 @@ public class CustomerCard extends UiPart<Region> {
     private FlowPane allergies;
 
     /**
-     * Creates a {@code CustomerCard} with the given {@code Customer} and index to display.
+     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
     public CustomerCard(Customer customer, int displayedIndex) {
         super(FXML);

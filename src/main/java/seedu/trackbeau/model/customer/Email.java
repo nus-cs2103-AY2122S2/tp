@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.trackbeau.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Customer's email in trackBeau.
+ * Represents a Person's email in the trackbeau book.
  * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
  */
 public class Email {
@@ -36,7 +36,7 @@ public class Email {
     /**
      * Constructs an {@code Email}.
      *
-     * @param email A valid email.
+     * @param email A valid email trackbeau.
      */
     public Email(String email) {
         requireNonNull(email);

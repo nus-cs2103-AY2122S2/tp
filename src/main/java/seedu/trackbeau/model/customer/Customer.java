@@ -10,11 +10,10 @@ import java.util.Set;
 import seedu.trackbeau.model.tag.Tag;
 
 /**
- * Represents a Customer trackBeau.
+ * Represents a Customer in trackbeau.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Customer {
-
     // Identity fields
     private final Name name;
     private final Phone phone;

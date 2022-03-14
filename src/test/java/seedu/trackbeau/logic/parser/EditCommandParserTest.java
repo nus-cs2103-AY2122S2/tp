@@ -21,15 +21,15 @@ import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SERVICES;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_STAFFS;
 import static seedu.trackbeau.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.trackbeau.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.trackbeau.testutil.TypicalIndexes.INDEX_FIRST_CUSTOMER;
-import static seedu.trackbeau.testutil.TypicalIndexes.INDEX_THIRD_CUSTOMER;
+import static seedu.trackbeau.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.trackbeau.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.trackbeau.commons.core.index.Index;
 import seedu.trackbeau.logic.commands.EditCommand;
-import seedu.trackbeau.logic.commands.EditCommand.EditCustomerDescriptor;
-import seedu.trackbeau.testutil.EditCustomerDescriptorBuilder;
+import seedu.trackbeau.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.trackbeau.testutil.EditPersonDescriptorBuilder;
 
 public class EditCommandParserTest {
 
@@ -132,7 +132,7 @@ public class EditCommandParserTest {
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + STAFF_DESC_AMY + SERVICE_DESC_AMY
                 + ALLERGY_DESC_AMY;
 
-        EditCustomerDescriptor descriptor = new EditCustomerDescriptorBuilder().withName(VALID_NAME_AMY)
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withSkinType(VALID_SKIN_TYPE_BOB).withHairType(VALID_HAIR_TYPE_BOB)
                 .withStaffs(STAFF_DESC_BOB, STAFF_DESC_AMY)
@@ -147,10 +147,10 @@ public class EditCommandParserTest {
 */
     @Test
     public void parse_someFieldsSpecified_success() {
-        Index targetIndex = INDEX_FIRST_CUSTOMER;
+        Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + EMAIL_DESC_AMY;
 
-        EditCustomerDescriptor descriptor = new EditCustomerDescriptorBuilder().withPhone(VALID_PHONE_BOB)
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -160,58 +160,58 @@ public class EditCommandParserTest {
     @Test
     public void parse_oneFieldSpecified_success() {
         // name
-        Index targetIndex = INDEX_THIRD_CUSTOMER;
+        Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
-        EditCustomerDescriptor descriptor = new EditCustomerDescriptorBuilder().withName(VALID_NAME_AMY).build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // phone
         userInput = targetIndex.getOneBased() + PHONE_DESC_AMY;
-        descriptor = new EditCustomerDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
+        descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // email
         userInput = targetIndex.getOneBased() + EMAIL_DESC_AMY;
-        descriptor = new EditCustomerDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
+        descriptor = new EditPersonDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // address
         userInput = targetIndex.getOneBased() + ADDRESS_DESC_AMY;
-        descriptor = new EditCustomerDescriptorBuilder().withAddress(VALID_ADDRESS_AMY).build();
+        descriptor = new EditPersonDescriptorBuilder().withAddress(VALID_ADDRESS_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         /* Todo uncomment when edit command is fixed by Kai Qi
         // skin type
         userInput = targetIndex.getOneBased() + SKIN_TYPE_DESC_AMY;
-        descriptor = new EditCustomerDescriptorBuilder().withSkinType(VALID_SKIN_TYPE_AMY).build();
+        descriptor = new EditPersonDescriptorBuilder().withSkinType(VALID_SKIN_TYPE_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // hair type
         userInput = targetIndex.getOneBased() + HAIR_TYPE_DESC_AMY;
-        descriptor = new EditCustomerDescriptorBuilder().withHairType(VALID_HAIR_TYPE_AMY).build();
+        descriptor = new EditPersonDescriptorBuilder().withHairType(VALID_HAIR_TYPE_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // staff
         userInput = targetIndex.getOneBased() + VALID_STAFF_JANE;
-        descriptor = new EditCustomerDescriptorBuilder().withStaffs(VALID_STAFF_JANE).build();
+        descriptor = new EditPersonDescriptorBuilder().withStaffs(VALID_STAFF_JANE).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // service
         userInput = targetIndex.getOneBased() + VALID_SERVICE_ACNE;
-        descriptor = new EditCustomerDescriptorBuilder().withServices(VALID_SERVICE_ACNE).build();
+        descriptor = new EditPersonDescriptorBuilder().withServices(VALID_SERVICE_ACNE).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // allergy
         userInput = targetIndex.getOneBased() + VALID_ALLERGY_COCOA_BUTTER;
-        descriptor = new EditCustomerDescriptorBuilder().withAllergies(VALID_ALLERGY_COCOA_BUTTER).build();
+        descriptor = new EditPersonDescriptorBuilder().withAllergies(VALID_ALLERGY_COCOA_BUTTER).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
         */
@@ -227,7 +227,7 @@ public class EditCommandParserTest {
                 + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB + SKIN_TYPE_DESC_BOB
                 + HAIR_TYPE_DESC_BOB + STAFF_DESC_BOB;
 
-        EditCustomerDescriptor descriptor = new EditCustomerDescriptorBuilder().withPhone(VALID_PHONE_BOB)
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withSkinType(VALID_SKIN_TYPE_BOB).withHairType(VALID_HAIR_TYPE_BOB)
                 .withStaffs(STAFF_DESC_AMY, STAFF_DESC_BOB)
@@ -240,17 +240,16 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidValueFollowedByValidValue_success() {
         // no other valid values specified
-        Index targetIndex = INDEX_FIRST_CUSTOMER;
+        Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + PHONE_DESC_BOB;
-        EditCommand.EditCustomerDescriptor descriptor = new EditCustomerDescriptorBuilder()
-                .withPhone(VALID_PHONE_BOB).build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // other valid values specified
         userInput = targetIndex.getOneBased() + EMAIL_DESC_BOB + INVALID_PHONE_DESC + ADDRESS_DESC_BOB
                 + PHONE_DESC_BOB;
-        descriptor = new EditCustomerDescriptorBuilder().withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+        descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -258,10 +257,10 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_resetTags_success() {
-        Index targetIndex = INDEX_THIRD_CUSTOMER;
+        Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = targetIndex.getOneBased() + STAFFS_EMPTY;
 
-        EditCustomerDescriptor descriptor = new EditCustomerDescriptorBuilder().withStaffs().build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withStaffs().build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

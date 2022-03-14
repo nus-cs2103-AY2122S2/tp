@@ -26,13 +26,13 @@ public class CustomerListPanel extends UiPart<Region> {
     public CustomerListPanel(ObservableList<Customer> customerList) {
         super(FXML);
         customerListView.setItems(customerList);
-        customerListView.setCellFactory(listView -> new CustomerListViewCell());
+        customerListView.setCellFactory(listView -> new PersonListViewCell());
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Customer} using a {@code CustomerCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code CustomerCard}.
      */
-    class CustomerListViewCell extends ListCell<Customer> {
+    class PersonListViewCell extends ListCell<Customer> {
         @Override
         protected void updateItem(Customer customer, boolean empty) {
             super.updateItem(customer, empty);

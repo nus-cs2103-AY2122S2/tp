@@ -77,7 +77,7 @@ public class JsonUserPrefsStorageTest {
     private UserPrefs getTypicalUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setGuiSettings(new GuiSettings(1000, 500, 300, 100));
-        userPrefs.setTrackBeauFilePath(Paths.get("trackbeau.json"));
+        userPrefs.setTrackBeauFilePath(Paths.get("addressbook.json"));
         return userPrefs;
     }
 

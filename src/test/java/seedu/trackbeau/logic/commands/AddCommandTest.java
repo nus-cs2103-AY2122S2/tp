@@ -21,40 +21,39 @@ import seedu.trackbeau.model.ReadOnlyTrackBeau;
 import seedu.trackbeau.model.ReadOnlyUserPrefs;
 import seedu.trackbeau.model.TrackBeau;
 import seedu.trackbeau.model.customer.Customer;
-import seedu.trackbeau.testutil.CustomerBuilder;
+import seedu.trackbeau.testutil.PersonBuilder;
 
 public class AddCommandTest {
 
     @Test
-    public void constructor_nullCustomer_throwsNullPointerException() {
+    public void constructor_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
     }
 
     @Test
-    public void execute_customerAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingCustomerAdded modelStub = new ModelStubAcceptingCustomerAdded();
-        Customer validCustomer = new CustomerBuilder().build();
+    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        Customer validCustomer = new PersonBuilder().build();
 
         CommandResult commandResult = new AddCommand(validCustomer).execute(modelStub);
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validCustomer), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validCustomer), modelStub.customersAdded);
+        assertEquals(Arrays.asList(validCustomer), modelStub.personsAdded);
     }
 
     @Test
-    public void execute_duplicateCustomer_throwsCommandException() {
-        Customer validCustomer = new CustomerBuilder().build();
+    public void execute_duplicatePerson_throwsCommandException() {
+        Customer validCustomer = new PersonBuilder().build();
         AddCommand addCommand = new AddCommand(validCustomer);
-        ModelStub modelStub = new ModelStubWithCustomer(validCustomer);
+        ModelStub modelStub = new ModelStubWithPerson(validCustomer);
 
-        assertThrows(CommandException.class,
-                AddCommand.MESSAGE_DUPLICATE_CUSTOMER, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Customer alice = new CustomerBuilder().withName("Alice").build();
-        Customer bob = new CustomerBuilder().withName("Bob").build();
+        Customer alice = new PersonBuilder().withName("Alice").build();
+        Customer bob = new PersonBuilder().withName("Bob").build();
         AddCommand addAliceCommand = new AddCommand(alice);
         AddCommand addBobCommand = new AddCommand(bob);
 
@@ -153,10 +152,10 @@ public class AddCommandTest {
     /**
      * A Model stub that contains a single customer.
      */
-    private class ModelStubWithCustomer extends ModelStub {
+    private class ModelStubWithPerson extends ModelStub {
         private final Customer customer;
 
-        ModelStubWithCustomer(Customer customer) {
+        ModelStubWithPerson(Customer customer) {
             requireNonNull(customer);
             this.customer = customer;
         }
@@ -171,19 +170,19 @@ public class AddCommandTest {
     /**
      * A Model stub that always accept the customer being added.
      */
-    private class ModelStubAcceptingCustomerAdded extends ModelStub {
-        final ArrayList<Customer> customersAdded = new ArrayList<>();
+    private class ModelStubAcceptingPersonAdded extends ModelStub {
+        final ArrayList<Customer> personsAdded = new ArrayList<>();
 
         @Override
         public boolean hasCustomer(Customer customer) {
             requireNonNull(customer);
-            return customersAdded.stream().anyMatch(customer::isSameCustomer);
+            return personsAdded.stream().anyMatch(customer::isSameCustomer);
         }
 
         @Override
         public void addCustomer(Customer customer) {
             requireNonNull(customer);
-            customersAdded.add(customer);
+            personsAdded.add(customer);
         }
 
         @Override

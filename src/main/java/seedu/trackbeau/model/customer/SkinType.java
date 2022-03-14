@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.trackbeau.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Customer's skin type in trackBeau.
+ * Represents a Person's skin type in the trackbeau book.
  * Guarantees: immutable; is valid as declared in {@link #isValidSkinType(String)}
  */
 public class SkinType {
@@ -12,7 +12,7 @@ public class SkinType {
     public static final String MESSAGE_CONSTRAINTS = "SkinTypes can be any values and it should not be blank";
 
     /*
-     * The first character of skin type must not be a whitespace,
+     * The first character of the trackbeau must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[^\\s].*";

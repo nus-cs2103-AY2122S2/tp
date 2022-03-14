@@ -11,7 +11,7 @@ import seedu.trackbeau.model.Model;
 import seedu.trackbeau.model.customer.Customer;
 
 /**
- * Deletes a customer identified using it's displayed index from trackBeau.
+ * Deletes a customer identified using it's displayed index from the trackbeau book.
  */
 public class DeleteCommand extends Command {
 
@@ -22,7 +22,7 @@ public class DeleteCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_CUSTOMER_SUCCESS = "Deleted Customer: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
     private final Index targetIndex;
 
@@ -36,12 +36,12 @@ public class DeleteCommand extends Command {
         List<Customer> lastShownList = model.getFilteredCustomerList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Customer customerToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteCustomer(customerToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_CUSTOMER_SUCCESS, customerToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, customerToDelete));
     }
 
     @Override

@@ -341,7 +341,7 @@
     -fx-prompt-text-fill: #615b5b;
 }
 
-#filterField, #customerListPanel, #customerWebpage {
+#filterField, #personListPanel, #personWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 

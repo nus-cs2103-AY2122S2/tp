@@ -9,7 +9,7 @@ import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.model.customer.UniqueCustomerList;
 
 /**
- * Wraps all data at the trackBeau level
+ * Wraps all data at the trackbeau level
  * Duplicates are not allowed (by .isSameCustomer comparison)
  */
 public class TrackBeau implements ReadOnlyTrackBeau {
@@ -59,7 +59,7 @@ public class TrackBeau implements ReadOnlyTrackBeau {
     //// customer-level operations
 
     /**
-     * Returns true if a customer with the same identity as {@code customer} exists in trackBeau.
+     * Returns true if a customer with the same identity as {@code customer} exists in trackbeau.
      */
     public boolean hasCustomer(Customer customer) {
         requireNonNull(customer);
@@ -67,8 +67,8 @@ public class TrackBeau implements ReadOnlyTrackBeau {
     }
 
     /**
-     * Adds a customer to trackBeau.
-     * The customer must not already exist in trackBeau.
+     * Adds a customer to trackbeau.
+     * The customer must not already exist in trackbeau.
      */
     public void addCustomer(Customer p) {
         customers.add(p);
@@ -76,8 +76,8 @@ public class TrackBeau implements ReadOnlyTrackBeau {
 
     /**
      * Replaces the given customer {@code target} in the list with {@code editedCustomer}.
-     * {@code target} must exist in trackBeau.
-     * The customer identity of {@code editedCustomer} must not be the same as another existing customer in trackBeau.
+     * {@code target} must exist in trackbeau.
+     * The customer identity of {@code editedCustomer} must not be the same as another existing customer in trackbeau.
      */
     public void setCustomer(Customer target, Customer editedCustomer) {
         requireNonNull(editedCustomer);
@@ -87,9 +87,9 @@ public class TrackBeau implements ReadOnlyTrackBeau {
 
     /**
      * Removes {@code key} from this {@code TrackBeau}.
-     * {@code key} must exist in trackBeau.
+     * {@code key} must exist in trackbeau.
      */
-    public void removeCustomer(Customer key) {
+    public void removePerson(Customer key) {
         customers.remove(key);
     }
 

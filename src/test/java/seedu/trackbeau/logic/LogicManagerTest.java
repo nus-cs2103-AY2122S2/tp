@@ -1,14 +1,14 @@
 package seedu.trackbeau.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.trackbeau.commons.core.Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX;
+import static seedu.trackbeau.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.trackbeau.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.trackbeau.testutil.Assert.assertThrows;
-import static seedu.trackbeau.testutil.TypicalCustomers.AMY;
+import static seedu.trackbeau.testutil.TypicalPersons.AMY;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -30,7 +30,7 @@ import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.storage.JsonTrackBeauStorage;
 import seedu.trackbeau.storage.JsonUserPrefsStorage;
 import seedu.trackbeau.storage.StorageManager;
-import seedu.trackbeau.testutil.CustomerBuilder;
+import seedu.trackbeau.testutil.PersonBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
@@ -43,10 +43,10 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonTrackBeauStorage trackBeauStorage =
+        JsonTrackBeauStorage addressBookStorage =
                 new JsonTrackBeauStorage(temporaryFolder.resolve("trackbeau.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(trackBeauStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -59,7 +59,7 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
+        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
@@ -81,7 +81,7 @@ public class LogicManagerTest {
         // Execute add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + ADDRESS_DESC_AMY;
-        Customer expectedCustomer = new CustomerBuilder(AMY).withStaffs().withServices().withAllergies().build();
+        Customer expectedCustomer = new PersonBuilder(AMY).withStaffs().withServices().withAllergies().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addCustomer(expectedCustomer);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
@@ -89,7 +89,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getFilteredCustomerList_modifyList_throwsUnsupportedOperationException() {
+    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredCustomerList().remove(0));
     }
 
@@ -155,7 +155,7 @@ public class LogicManagerTest {
         }
 
         @Override
-        public void saveTrackBeau(ReadOnlyTrackBeau trackBeau, Path filePath) throws IOException {
+        public void saveTrackBeau(ReadOnlyTrackBeau addressBook, Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }

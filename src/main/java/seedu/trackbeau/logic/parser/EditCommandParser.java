@@ -19,7 +19,7 @@ import java.util.Set;
 
 import seedu.trackbeau.commons.core.index.Index;
 import seedu.trackbeau.logic.commands.EditCommand;
-import seedu.trackbeau.logic.commands.EditCommand.EditCustomerDescriptor;
+import seedu.trackbeau.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
 import seedu.trackbeau.model.tag.Tag;
 
@@ -47,35 +47,34 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
-        EditCustomerDescriptor editCustomerDescriptor = new EditCustomerDescriptor();
+        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editCustomerDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+            editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editCustomerDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
+            editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            editCustomerDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
+            editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            editCustomerDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
+            editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
         if (argMultimap.getValue(PREFIX_SKINTYPE).isPresent()) {
-            editCustomerDescriptor.setSkinType(ParserUtil.parseSkinType(argMultimap.getValue(PREFIX_SKINTYPE).get()));
+            editPersonDescriptor.setSkinType(ParserUtil.parseSkinType(argMultimap.getValue(PREFIX_SKINTYPE).get()));
         }
         if (argMultimap.getValue(PREFIX_HAIRTYPE).isPresent()) {
-            editCustomerDescriptor.setHairType(ParserUtil.parseHairType(argMultimap.getValue(PREFIX_HAIRTYPE).get()));
+            editPersonDescriptor.setHairType(ParserUtil.parseHairType(argMultimap.getValue(PREFIX_HAIRTYPE).get()));
         }
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_STAFFS)).ifPresent(editPersonDescriptor::setStaffs);
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_SERVICES)).ifPresent(editPersonDescriptor::setServices);
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_ALLERGIES)).ifPresent(editPersonDescriptor::setAllergies);
 
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_STAFFS)).ifPresent(editCustomerDescriptor::setStaffs);
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_SERVICES)).ifPresent(editCustomerDescriptor::setStaffs);
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_ALLERGIES)).ifPresent(editCustomerDescriptor::setStaffs);
-
-        if (!editCustomerDescriptor.isAnyFieldEdited()) {
+        if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index, editCustomerDescriptor);
+        return new EditCommand(index, editPersonDescriptor);
     }
 
     /**

@@ -30,11 +30,11 @@ public interface Logic {
      */
     ReadOnlyTrackBeau getTrackBeau();
 
-    /** Returns an unmodifiable view of the filtered list of customers */
+    /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Customer> getFilteredCustomerList();
 
     /**
-     * Returns the user prefs' trackBeau file path.
+     * Returns the user prefs' trackbeau book file path.
      */
     Path getTrackBeauFilePath();
 

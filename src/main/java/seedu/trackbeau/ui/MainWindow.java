@@ -220,7 +220,7 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public CustomerListPanel getCustomerListPanel() {
+    public CustomerListPanel getPersonListPanel() {
         return customerListPanel;
     }
 
