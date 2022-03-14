@@ -8,7 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.contact.exceptions.ContactNotFoundException;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.contact.exceptions.DuplicateContactException;
 
 /**
@@ -59,7 +59,7 @@ public class UniqueContactList implements Iterable<Contact> {
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new ContactNotFoundException();
+            throw new PersonNotFoundException();
         }
 
         if (!target.isSameContact(editedContact) && contains(editedContact)) {
@@ -76,11 +76,11 @@ public class UniqueContactList implements Iterable<Contact> {
     public void remove(Contact toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            throw new ContactNotFoundException();
+            throw new PersonNotFoundException();
         }
     }
 
-    public void setContacts(seedu.address.model.contact.UniqueContactList replacement) {
+    public void setContacts(UniqueContactList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
