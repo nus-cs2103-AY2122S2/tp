@@ -18,7 +18,6 @@ import seedu.contax.model.tag.Tag;
 
 
 public class CsvManager {
-    private static final String EXPORT_FILEPATH = "data/addressbook.csv";
     private static final String CSV_HEADER = "Name,Phone,Email,Address,Tagged";
 
     private Model model;
@@ -68,9 +67,9 @@ public class CsvManager {
      *
      * @return True if operation is successful, false otherwise
      */
-    public boolean exportCsv() {
+    public boolean exportCsv(String filePath) {
         try {
-            File exportedCsvFile = new File(EXPORT_FILEPATH);
+            File exportedCsvFile = new File(filePath);
             exportedCsvFile.createNewFile();
             List<Person> listOfPersons = model.getFilteredPersonList();
             BufferedWriter exportedCsvWriter = new BufferedWriter(new FileWriter(exportedCsvFile));

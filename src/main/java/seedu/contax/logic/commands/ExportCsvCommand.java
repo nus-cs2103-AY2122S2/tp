@@ -9,11 +9,12 @@ public class ExportCsvCommand extends Command {
             + "Example: " + COMMAND_WORD;
     public static final String MESSAGE_SUCCESS = "Exported successfully";
     public static final String MESSAGE_FAILURE = "Export failed. Please try again";
+    private static final String EXPORT_FILEPATH = "data/addressbook.csv";
 
     @Override
     public CommandResult execute(Model model) {
         CsvManager csvManager = new CsvManager(model);
-        boolean exportCsv = csvManager.exportCsv();
+        boolean exportCsv = csvManager.exportCsv(EXPORT_FILEPATH);
         if (exportCsv) {
             return new CommandResult(MESSAGE_SUCCESS);
         } else {
