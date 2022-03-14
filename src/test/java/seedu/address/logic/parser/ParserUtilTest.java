@@ -25,14 +25,14 @@ public class ParserUtilTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_ACTIVITY = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
-    private static final String VALID_TAG_1 = "friend";
-    private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_ACTIVITY_1 = "badminton";
+    private static final String VALID_ACTIVITY_2 = "choir";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -149,50 +149,50 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTag_null_throwsNullPointerException() {
+    public void parseActivity_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseActivity(null));
     }
 
     @Test
-    public void parseTag_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseActivity(INVALID_TAG));
+    public void parseActivity_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseActivity(INVALID_ACTIVITY));
     }
 
     @Test
-    public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
-        Activity expectedTag = new Activity(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseActivity(VALID_TAG_1));
+    public void parseActivity_validValueWithoutWhitespace_returnsActivity() throws Exception {
+        Activity expectedActivity = new Activity(VALID_ACTIVITY_1);
+        assertEquals(expectedActivity, ParserUtil.parseActivity(VALID_ACTIVITY_1));
     }
 
     @Test
-    public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
-        String tagWithWhitespace = WHITESPACE + VALID_TAG_1 + WHITESPACE;
-        Activity expectedTag = new Activity(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseActivity(tagWithWhitespace));
+    public void parseActivity_validValueWithWhitespace_returnsTrimmedActivity() throws Exception {
+        String tagWithWhitespace = WHITESPACE + VALID_ACTIVITY_1 + WHITESPACE;
+        Activity expectedActivity = new Activity(VALID_ACTIVITY_1);
+        assertEquals(expectedActivity, ParserUtil.parseActivity(tagWithWhitespace));
     }
 
     @Test
-    public void parseTags_null_throwsNullPointerException() {
+    public void parseActivities_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseActivities(null));
     }
 
     @Test
-    public void parseTags_collectionWithInvalidTags_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseActivities(Arrays.asList(VALID_TAG_1, INVALID_TAG)));
+    public void parseActivities_collectionWithInvalidActivities_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseActivities(Arrays.asList(VALID_ACTIVITY_1, INVALID_ACTIVITY)));
     }
 
     @Test
-    public void parseTags_emptyCollection_returnsEmptySet() throws Exception {
+    public void parseActivities_emptyCollection_returnsEmptySet() throws Exception {
         assertTrue(ParserUtil.parseActivities(Collections.emptyList()).isEmpty());
     }
 
     @Test
-    public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<Activity> actualTagSet = ParserUtil.parseActivities(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
-        Set<Activity> expectedTagSet = new HashSet<Activity>(Arrays
-                .asList(new Activity(VALID_TAG_1),
-                        new Activity(VALID_TAG_2)));
+    public void parseActivities_collectionWithValidActivities_returnsActivitySet() throws Exception {
+        Set<Activity> actualActivitySet = ParserUtil.parseActivities(Arrays.asList(VALID_ACTIVITY_1, VALID_ACTIVITY_2));
+        Set<Activity> expectedActivitySet = new HashSet<Activity>(Arrays
+                .asList(new Activity(VALID_ACTIVITY_1),
+                        new Activity(VALID_ACTIVITY_2)));
 
-        assertEquals(expectedTagSet, actualTagSet);
+        assertEquals(expectedActivitySet, actualActivitySet);
     }
 }
