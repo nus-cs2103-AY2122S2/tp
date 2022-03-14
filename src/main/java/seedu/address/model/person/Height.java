@@ -13,7 +13,7 @@ public class Height {
             + "1. The local-part should only contain numeric characters.\n"
             + "2. Height should be between 1 and 300 (inclusive).\n"
             + "3. Height should be a whole number.\n";
-    public static final String VALIDATION_REGEX = "^([1-9]|[1-9][0-9]|[2][0-9][0-9]|30[0-0])$";
+    public static final String VALIDATION_REGEX = "^([1-9]|[1-9][0-9]|[1-2][0-9][0-9]|30[0-0])$";
     public final String value;
 
     /**
