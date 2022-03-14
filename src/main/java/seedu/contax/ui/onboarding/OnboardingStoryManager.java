@@ -50,7 +50,8 @@ public class OnboardingStoryManager {
      */
     private void addGeneralDisplayStep(OnboardingStory story, String message) {
         story.addStory(new OnboardingStep(message,
-                0.25, 0.5, OnboardingStory.OverlayOption.ALL, OnboardingStory.PositionOption.CENTER, OnboardingStory.HighlightOption.CLEAR_ALL,
+                0.25, 0.5, OnboardingStory.OverlayOption.ALL, OnboardingStory.PositionOption.CENTER,
+                OnboardingStory.HighlightOption.CLEAR_ALL,
                 0, null, null, null, false));
     }
 
@@ -62,7 +63,8 @@ public class OnboardingStoryManager {
 
         test.addStory(new OnboardingStep("This is the command box.\nYour commands will go here" + CLICK_CONTINUE,
 
-                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX, OnboardingStory.PositionOption.RESULT_DISPLAY_TOP, OnboardingStory.HighlightOption.COMMAND_BOX,
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP, OnboardingStory.HighlightOption.COMMAND_BOX,
                 0, null, null, null, false));
 
         addGeneralDisplayStep(test, "Now lets try adding a person." + CLICK_CONTINUE);
@@ -102,18 +104,21 @@ public class OnboardingStoryManager {
 
         test.addStory(new OnboardingStep(
                 "Great! %s is now added into the system!" + CLICK_CONTINUE,
-                0.2, 0.5, OnboardingStory.OverlayOption.ALL, OnboardingStory.PositionOption.CENTER, OnboardingStory.HighlightOption.CLEAR_ALL,
+                0.2, 0.5, OnboardingStory.OverlayOption.ALL, OnboardingStory.PositionOption.CENTER,
+                OnboardingStory.HighlightOption.CLEAR_ALL,
                 0, null, null, (model) -> String.format("Great! %s is now added into the system!" + CLICK_CONTINUE,
                         OnboardingUtil.getLatestPersonName(model)), false));
 
         test.addStory(new OnboardingStep("Lets try to find %s's record!" + CLICK_CONTINUE,
-                0.2, 0.5, OnboardingStory.OverlayOption.ALL, OnboardingStory.PositionOption.CENTER, OnboardingStory.HighlightOption.CLEAR_ALL, 0,
+                0.2, 0.5, OnboardingStory.OverlayOption.ALL, OnboardingStory.PositionOption.CENTER,
+                OnboardingStory.HighlightOption.CLEAR_ALL, 0,
                 null, null, (model) -> String.format("Lets try to find %s's record!" + CLICK_CONTINUE,
                         OnboardingUtil.getLatestPersonName(model)), false));
 
 
         test.addStory(new OnboardingStep("Type 'find %s' and hit enter",
-                0.1, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX, OnboardingStory.PositionOption.RESULT_DISPLAY_TOP, OnboardingStory.HighlightOption.COMMAND_BOX,
+                0.1, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP, OnboardingStory.HighlightOption.COMMAND_BOX,
                 1, "find %s", null, (model) -> {
             this.modifyCurrentStepCommand(String.format("find %s", OnboardingUtil.getLatestPersonName(model)));
             return String.format("Type 'find %s' and hit enter!" + CLICK_CONTINUE,
@@ -121,7 +126,8 @@ public class OnboardingStoryManager {
         }, false));
 
         test.addStory(new OnboardingStep("Great! Here is %s's record!",
-                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_PERSON_LIST, OnboardingStory.PositionOption.PERSON_LIST_MIDDLE, OnboardingStory.HighlightOption.PERSON_LIST,
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_PERSON_LIST,
+                OnboardingStory.PositionOption.PERSON_LIST_MIDDLE, OnboardingStory.HighlightOption.PERSON_LIST,
                 0, null, (model, commandBox) -> {
             Person lastPerson = OnboardingUtil.getLatestPerson(model);
             model.updateFilteredPersonList((p) -> p.isSamePerson(lastPerson));
@@ -130,42 +136,50 @@ public class OnboardingStoryManager {
                 OnboardingUtil.getLatestPersonName(model)), false));
 
         test.addStory(new OnboardingStep("Now lets try to remove %s's record!" + CLICK_CONTINUE,
-                0.2, 0.5, OnboardingStory.OverlayOption.ALL, OnboardingStory.PositionOption.CENTER, OnboardingStory.HighlightOption.CLEAR_ALL, 0, null, null, (
+                0.2, 0.5, OnboardingStory.OverlayOption.ALL, OnboardingStory.PositionOption.CENTER,
+                OnboardingStory.HighlightOption.CLEAR_ALL, 0, null, null, (
                         model) -> String.format("Now lets try to remove %s's record!!" + CLICK_CONTINUE,
                                 OnboardingUtil.getLatestPersonName(model)), false));
 
         test.addStory(new OnboardingStep("Type 'delete 1' and hit enter",
-                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX, OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
                 OnboardingStory.HighlightOption.COMMAND_BOX, 1, "delete 1", null, null, false));
 
         test.addStory(new OnboardingStep("Great, the record is gone!",
-                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_PERSON_LIST, OnboardingStory.PositionOption.PERSON_LIST_MIDDLE, OnboardingStory.HighlightOption.PERSON_LIST,
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_PERSON_LIST,
+                OnboardingStory.PositionOption.PERSON_LIST_MIDDLE, OnboardingStory.HighlightOption.PERSON_LIST,
                 0, null, (model, commandBox) -> {
             Person lastPerson = OnboardingUtil.getLatestPerson(model);
             model.deletePerson(lastPerson);
             return null; }, null, false));
 
         test.addStory(new OnboardingStep("Now lets try to list all persons." + CLICK_CONTINUE,
-                0.2, 0.5, OnboardingStory.OverlayOption.ALL, OnboardingStory.PositionOption.CENTER, OnboardingStory.HighlightOption.CLEAR_ALL,
+                0.2, 0.5, OnboardingStory.OverlayOption.ALL, OnboardingStory.PositionOption.CENTER,
+                OnboardingStory.HighlightOption.CLEAR_ALL,
                 0, null, null, null, false));
 
         test.addStory(new OnboardingStep("Type 'list' and hit enter",
-                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX, OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
                 OnboardingStory.HighlightOption.COMMAND_BOX, 1, "list", null, null, false));
 
         test.addStory(new OnboardingStep("Great!" + CLICK_CONTINUE,
-                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_PERSON_LIST, OnboardingStory.PositionOption.MENU_BAR_TOP,
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_PERSON_LIST,
+                OnboardingStory.PositionOption.MENU_BAR_TOP,
                 OnboardingStory.HighlightOption.PERSON_LIST, 0, null, (model, commandBox) -> {
             model.updateFilteredPersonList(unused -> true);
             return null;
         }, null, false));
 
         test.addStory(new OnboardingStep("End of Quick Tour!" + CLICK_EXIT,
-                0.2, 0.5, OnboardingStory.OverlayOption.ALL, OnboardingStory.PositionOption.CENTER, OnboardingStory.HighlightOption.CLEAR_ALL,
+                0.2, 0.5, OnboardingStory.OverlayOption.ALL,
+                OnboardingStory.PositionOption.CENTER, OnboardingStory.HighlightOption.CLEAR_ALL,
                 0, null, null, null, false));
 
         test.addStory(new OnboardingStep(null,
-                0, 0.1, null, OnboardingStory.PositionOption.CENTER, null, 0, null,
+                0, 0.1, null,
+                OnboardingStory.PositionOption.CENTER, null, 0, null,
                 null, null, false));
 
         story = test;

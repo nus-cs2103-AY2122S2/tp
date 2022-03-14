@@ -18,7 +18,7 @@ public class Overlay extends UiPart<Region> {
     @FXML
     private Pane bottomOverlay;
 
-    public enum showOverlay {
+    public enum ShowOverlay {
         BOTH,
         TOP,
         BOTTOM,
@@ -62,7 +62,7 @@ public class Overlay extends UiPart<Region> {
     public void showOnly(DoubleProperty boundX, DoubleProperty boundY,
                          ReadOnlyDoubleProperty height, ReadOnlyDoubleProperty width,
                          ReadOnlyDoubleProperty parentHeight, ReadOnlyDoubleProperty parentWidth,
-                         showOverlay option) {
+                         ShowOverlay option) {
 
         switch (option) {
         case BOTH:

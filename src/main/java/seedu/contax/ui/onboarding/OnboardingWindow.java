@@ -137,7 +137,7 @@ public class OnboardingWindow extends UiPart<Stage> {
      * <br>- Overlay.showOverlay.TOP: shows only the top overlay
      * @param node Node to be excluded from the overlay
      */
-    private void showOnly(Region node, Overlay.showOverlay option) {
+    private void showOnly(Region node, Overlay.ShowOverlay option) {
         overlay.showOnly(node.layoutXProperty(), node.layoutYProperty(),
                 node.heightProperty(), node.widthProperty(),
                 parentPane.heightProperty(), parentPane.widthProperty(), option);
@@ -221,13 +221,13 @@ public class OnboardingWindow extends UiPart<Stage> {
             coverAll();
             break;
         case SHOW_MENU_BAR:
-            showOnly(menuBar, Overlay.showOverlay.BOTH);
+            showOnly(menuBar, Overlay.ShowOverlay.BOTH);
             break;
         case SHOW_COMMAND_BOX:
-            showOnly(commandBoxPlaceholder, Overlay.showOverlay.BOTH);
+            showOnly(commandBoxPlaceholder, Overlay.ShowOverlay.BOTH);
             break;
         case SHOW_PERSON_LIST:
-            showOnly(personList, Overlay.showOverlay.TOP);
+            showOnly(personList, Overlay.ShowOverlay.TOP);
             break;
         default:
             break;
