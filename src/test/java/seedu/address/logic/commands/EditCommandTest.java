@@ -94,7 +94,7 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
 
-        ObservableList<Person> studentList = model.getAddressBook().getPersonList();
+        ObservableList<Person> studentList = expectedModel.getAddressBook().getPersonList();
 
         List<Person> filteredByClassCodeList = studentList.stream()
                 .filter(student -> student.getClassCode().toString().equals(editedPerson.getClassCode().toString())
