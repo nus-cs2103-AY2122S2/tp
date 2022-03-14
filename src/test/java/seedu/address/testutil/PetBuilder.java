@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.pet.Address;
+import seedu.address.model.pet.Appointment;
 import seedu.address.model.pet.Diet;
 import seedu.address.model.pet.Name;
 import seedu.address.model.pet.OwnerName;
@@ -22,6 +23,7 @@ public class PetBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_DIET = "";
+    public static final String DEFAULT_APPOINTMENT = "";
 
     private Name name;
     private OwnerName ownerName;
@@ -29,6 +31,7 @@ public class PetBuilder {
     private Address address;
     private Set<Tag> tags;
     private Diet diet;
+    private Appointment appointment;
 
     /**
      * Creates a {@code PetBuilder} with the default details.
@@ -40,6 +43,7 @@ public class PetBuilder {
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         diet = new Diet(DEFAULT_DIET);
+        appointment = new Appointment(DEFAULT_APPOINTMENT);
     }
 
     /**
@@ -51,6 +55,7 @@ public class PetBuilder {
         phone = petToCopy.getPhone();
         address = petToCopy.getAddress();
         diet = petToCopy.getDiet();
+        appointment = petToCopy.getAppointment();
         tags = new HashSet<>(petToCopy.getTags());
     }
 
@@ -102,8 +107,16 @@ public class PetBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Diet} of the {@code Pet} that we are building.
+     */
+    public PetBuilder withAppointment(String appointment) {
+        this.appointment = new Appointment(appointment);
+        return this;
+    }
+
     public Pet build() {
-        return new Pet(name, ownerName, phone, address, tags, diet);
+        return new Pet(name, ownerName, phone, address, tags, diet, appointment);
     }
 
 }

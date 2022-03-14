@@ -20,6 +20,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.pet.Address;
+import seedu.address.model.pet.Appointment;
 import seedu.address.model.pet.Diet;
 import seedu.address.model.pet.Name;
 import seedu.address.model.pet.OwnerName;
@@ -100,8 +101,10 @@ public class EditCommand extends Command {
         Address updatedAddress = editPetDescriptor.getAddress().orElse(petToEdit.getAddress());
         Set<Tag> updatedTags = editPetDescriptor.getTags().orElse(petToEdit.getTags());
         Diet updatedDiet = editPetDescriptor.getDiet().orElse(petToEdit.getDiet());
+        Appointment updatedAppointment = editPetDescriptor.getAppointment().orElse(petToEdit.getAppointment());
 
-        return new Pet(updatedName, updatedOwnerName, updatedPhone, updatedAddress, updatedTags, updatedDiet);
+        return new Pet(updatedName, updatedOwnerName, updatedPhone, updatedAddress,
+                updatedTags, updatedDiet, updatedAppointment);
     }
 
     @Override
@@ -133,6 +136,7 @@ public class EditCommand extends Command {
         private Address address;
         private Set<Tag> tags;
         private Diet diet;
+        private Appointment appointment;
 
         public EditPetDescriptor() {}
 
@@ -147,6 +151,7 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setTags(toCopy.tags);
             setDiet(toCopy.diet);
+            setAppointment(toCopy.appointment);
         }
 
         /**
@@ -206,6 +211,18 @@ public class EditCommand extends Command {
 
         public Optional<Diet> getDiet() {
             return Optional.ofNullable(diet);
+        }
+
+        /**
+         * Sets {@code appointment} to this object's {@code appointment}.
+         * A defensive copy of {@code appointment} is used internally.
+         */
+        public void setAppointment(Appointment appointment) {
+            this.appointment = appointment;
+        }
+
+        public Optional<Appointment> getAppointment() {
+            return Optional.ofNullable(appointment);
         }
 
         /**

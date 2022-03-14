@@ -14,9 +14,11 @@ import seedu.address.model.pet.Pet;
 
 
 
-//...
+/**
+ * Adds diet details to a pet identified using it's displayed index from the address book.
+ */
 public class DietCommand extends Command {
-    //...
+
     public static final String COMMAND_WORD = "diet";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edits the diet of the pet identified "
@@ -54,7 +56,7 @@ public class DietCommand extends Command {
         Pet petToEdit = lastShownList.get(index.getZeroBased());
         Pet editedPet = new Pet(
                 petToEdit.getName(), petToEdit.getOwnerName(), petToEdit.getPhone(),
-                petToEdit.getAddress(), petToEdit.getTags(), diet);
+                petToEdit.getAddress(), petToEdit.getTags(), diet, petToEdit.getAppointment());
 
         model.setPet(petToEdit, editedPet);
         model.updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
