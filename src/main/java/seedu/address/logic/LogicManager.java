@@ -10,9 +10,8 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.logic.parser.TAssistParser;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.AB3Model;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyTAssist;
 import seedu.address.model.classgroup.ClassGroup;
@@ -29,19 +28,16 @@ public class LogicManager implements Logic {
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
-    private final AB3Model ab3model;
     private final Storage storage;
-    private final AddressBookParser addressBookParser;
+    private final TAssistParser AssistParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
      */
-    public LogicManager(Model model, AB3Model ab3model, Storage storage) {
-        // TODO: to be removed
-        this.ab3model = ab3model;
+    public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new AddressBookParser();
+        AssistParser = new TAssistParser();
     }
 
     @Override
@@ -49,8 +45,8 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
-        commandResult = command.execute(ab3model);
+        Command command = AssistParser.parseCommand(commandText, model);
+        commandResult = command.execute(model);
 
         try {
             storage.saveTAssist(model.getTAssist());

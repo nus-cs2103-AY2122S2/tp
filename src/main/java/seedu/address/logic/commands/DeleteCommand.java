@@ -1,53 +1,97 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-
-import java.util.List;
-
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AB3Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.Model;
+import seedu.address.model.classgroup.ClassGroup;
+import seedu.address.model.entity.Entity;
+import seedu.address.model.entity.EntityType;
+import seedu.address.model.entity.exceptions.UnknownEntityException;
+import seedu.address.model.student.Student;
+import seedu.address.model.tamodule.TaModule;
 
-/**
- * Deletes a person identified using it's displayed index from the address book.
- */
-public class DeleteCommand extends Command {
+import java.util.List;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.*;
+
+public class DeleteCommand extends Command{
 
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + ": Deletes an entity identified by the index number used in the displayed list\n"
+            + "1. Deletes a student: "
+            + "Parameters: " + TYPE_STUDENT
+            +  " INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD
+            + TYPE_STUDENT + " 1\n"
+            + "2. Adds a module: "
+            + "Parameter: " + TYPE_MODULE
+            + " INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD
+            + TYPE_MODULE + " 1\n"
+            + "3. Adds a class group: "
+            + "Parameters: " + TYPE_CLASS
+            + " INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD
+            + TYPE_CLASS + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Entity: %1$s";
 
     private final Index targetIndex;
+    private final EntityType entityType;
 
-    public DeleteCommand(Index targetIndex) {
+    public DeleteCommand(Index targetIndex, EntityType entityType) {
         this.targetIndex = targetIndex;
+        this.entityType = entityType;
     }
 
     @Override
-    public CommandResult execute(AB3Model model) throws CommandException {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Student> lastShownStudentList = model.getFilteredStudentList();
+        List<TaModule> lastShownModuleList = model.getFilteredModuleList();
+        List<ClassGroup> lastShownClassGroupList = model.getFilteredClassGroupList();
+        Entity entityToDelete;
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        switch(entityType) {
+
+        case STUDENT:
+            if (targetIndex.getZeroBased() >= lastShownStudentList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+            entityToDelete = lastShownStudentList.get(targetIndex.getZeroBased());
+            break;
+
+        case TA_MODULE:
+            if (targetIndex.getZeroBased() >= lastShownModuleList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+            entityToDelete = lastShownStudentList.get(targetIndex.getZeroBased());
+            break;
+
+        case CLASS_GROUP:
+            if (targetIndex.getZeroBased() >= lastShownClassGroupList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+            entityToDelete = lastShownStudentList.get(targetIndex.getZeroBased());
+            break;
+
+        default:
+            throw new UnknownEntityException();
         }
 
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+        model.deleteEntity(entityToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, entityToDelete));
     }
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof DeleteCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteCommand) other).targetIndex)); // state check
+        return other == this
+                || (other instanceof DeleteCommand
+                && targetIndex.equals(((DeleteCommand) other).targetIndex)
+                && entityType.equals(((DeleteCommand) other).entityType));
     }
 }
