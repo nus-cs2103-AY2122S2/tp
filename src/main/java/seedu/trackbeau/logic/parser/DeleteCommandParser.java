@@ -2,11 +2,12 @@ package seedu.trackbeau.logic.parser;
 
 import static seedu.trackbeau.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.util.ArrayList;
+
 import seedu.trackbeau.commons.core.index.Index;
 import seedu.trackbeau.logic.commands.DeleteCommand;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
 
-import java.util.ArrayList;
 
 /**
  * Parses input arguments and creates a new DeleteCommand object

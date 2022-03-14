@@ -49,7 +49,11 @@ public class TrackBeauParserTest {
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_CUSTOMER.getOneBased());
-        ArrayList<Index> firstCustomer = new ArrayList<>(){{add(INDEX_FIRST_CUSTOMER);}};
+        ArrayList<Index> firstCustomer = new ArrayList<>() {
+            {
+                add(INDEX_FIRST_CUSTOMER);
+            }
+        };
         assertEquals(new DeleteCommand(firstCustomer), command);
     }
 

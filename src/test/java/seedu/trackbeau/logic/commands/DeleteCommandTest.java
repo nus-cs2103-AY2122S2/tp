@@ -9,6 +9,8 @@ import static seedu.trackbeau.testutil.TypicalCustomers.getTypicalTrackBeau;
 import static seedu.trackbeau.testutil.TypicalIndexes.INDEX_FIRST_CUSTOMER;
 import static seedu.trackbeau.testutil.TypicalIndexes.INDEX_SECOND_CUSTOMER;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.trackbeau.commons.core.Messages;
@@ -18,7 +20,7 @@ import seedu.trackbeau.model.ModelManager;
 import seedu.trackbeau.model.UserPrefs;
 import seedu.trackbeau.model.customer.Customer;
 
-import java.util.ArrayList;
+
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -31,7 +33,11 @@ public class DeleteCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Customer customerToDelete = model.getFilteredCustomerList().get(INDEX_FIRST_CUSTOMER.getZeroBased());
-        ArrayList<Index> firstCustomer = new ArrayList<>(){{add(INDEX_FIRST_CUSTOMER);}};
+        ArrayList<Index> firstCustomer = new ArrayList<>() {
+            {
+                add(INDEX_FIRST_CUSTOMER);
+            }
+        };
         DeleteCommand deleteCommand = new DeleteCommand(firstCustomer);
 
         StringBuilder sb = new StringBuilder();
@@ -47,7 +53,9 @@ public class DeleteCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         ArrayList<Index> outOfBoundIndex = new ArrayList<>() {
-            {add(Index.fromOneBased(model.getFilteredCustomerList().size() + 1));}
+            {
+                add(Index.fromOneBased(model.getFilteredCustomerList().size() + 1));
+            }
         };
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
@@ -60,7 +68,11 @@ public class DeleteCommandTest {
         showCustomerAtIndex(model, INDEX_FIRST_CUSTOMER);
 
         Customer customerToDelete = model.getFilteredCustomerList().get(INDEX_FIRST_CUSTOMER.getZeroBased());
-        ArrayList<Index> firstCustomer = new ArrayList<>(){{add(INDEX_FIRST_CUSTOMER);}};
+        ArrayList<Index> firstCustomer = new ArrayList<>() {
+            {
+                add(INDEX_FIRST_CUSTOMER);
+            }
+        };
         DeleteCommand deleteCommand = new DeleteCommand(firstCustomer);
 
         StringBuilder sb = new StringBuilder();
@@ -78,7 +90,11 @@ public class DeleteCommandTest {
     public void execute_invalidIndexFilteredList_throwsCommandException() {
         showCustomerAtIndex(model, INDEX_FIRST_CUSTOMER);
 
-        ArrayList<Index> outOfBoundIndex = new ArrayList<>(){{add(INDEX_SECOND_CUSTOMER);}};
+        ArrayList<Index> outOfBoundIndex = new ArrayList<>() {
+            {
+                add(INDEX_SECOND_CUSTOMER);
+            }
+        };
         // ensures that outOfBoundIndex is still in bounds of trackBeau list
         assertTrue(outOfBoundIndex.get(0).getZeroBased() < model.getTrackBeau().getCustomerList().size());
 
@@ -89,8 +105,16 @@ public class DeleteCommandTest {
 
     @Test
     public void equals() {
-        ArrayList<Index> firstCustomer = new ArrayList<>(){{add(INDEX_FIRST_CUSTOMER);}};
-        ArrayList<Index> secondCustomer = new ArrayList<>(){{add(INDEX_SECOND_CUSTOMER);}};
+        ArrayList<Index> firstCustomer = new ArrayList<>() {
+            {
+                add(INDEX_FIRST_CUSTOMER);
+            }
+        };
+        ArrayList<Index> secondCustomer = new ArrayList<>() {
+            {
+                add(INDEX_SECOND_CUSTOMER);
+            }
+        };
         DeleteCommand deleteFirstCommand = new DeleteCommand(firstCustomer);
         DeleteCommand deleteSecondCommand = new DeleteCommand(secondCustomer);
 
