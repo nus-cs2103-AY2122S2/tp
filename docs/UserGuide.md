@@ -256,7 +256,7 @@ Format: `findbytag t/TAGNAME`
 
 * The `TAGNAME` parameter **must** be specified.
 * Search is case-insensitive e.g. `clients` is the same as `Clients`.
-* If there are no tags that contain that keyword, display an empty list.
+* If there are no tags that contain that keyword, an empty list will be displayed.
 
 Examples:
 * `findbytag t/friends` Displays the contact information of contacts who have the *friends* tag.
