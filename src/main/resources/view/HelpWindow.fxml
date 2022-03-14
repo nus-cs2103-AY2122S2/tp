@@ -175,6 +175,33 @@
             </HBox.margin>
           </Label>
         </HBox>
+        <HBox fx:id="addTAskCommandContainer">
+          <padding>
+            <Insets top="5" right="5" bottom="5" left="15" />
+          </padding>
+          <children>
+            <Label fx:id="addTaskCommandDesc" text="Label" style="-fx-font-weight: bold">
+              <HBox.margin>
+                <Insets right="10.0" />
+              </HBox.margin>
+            </Label>
+            <Label fx:id="addTaskCommand" text="Label" style="-fx-font-weight: bold">
+              <HBox.margin>
+                <Insets right="10.0" />
+              </HBox.margin>
+            </Label>
+          </children>
+        </HBox>
+        <HBox>
+          <padding>
+            <Insets top="5" right="5" bottom="5" left="15" />
+          </padding>
+          <Label fx:id="addTaskCommandExample" text="Label" style="-fx-font-weight: bold">
+            <HBox.margin>
+              <Insets right="10.0" />
+            </HBox.margin>
+          </Label>
+        </HBox>
       </VBox>
     </Scene>
   </scene>
