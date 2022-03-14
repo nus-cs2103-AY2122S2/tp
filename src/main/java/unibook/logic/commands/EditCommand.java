@@ -27,6 +27,7 @@ import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
 import unibook.model.module.ModuleName;
 import unibook.model.module.exceptions.ModuleNotFoundException;
+import unibook.model.module.exceptions.PersonTagNotFoundException;
 import unibook.model.person.Email;
 import unibook.model.person.Name;
 import unibook.model.person.Person;
@@ -106,7 +107,9 @@ public class EditCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException, ModuleNotFoundException {
+    public CommandResult execute(Model model, Boolean isPersonListShowing,
+                                 Boolean isModuleListShowing) throws CommandException,
+                                                     ModuleNotFoundException, PersonTagNotFoundException {
         requireNonNull(model);
 
         if (this.editModuleDescriptor == null) {
@@ -134,7 +137,10 @@ public class EditCommand extends Command {
 
             // When adding new module with nm/, adds prof/student to person list in each mod
             if (checkMod != null) {
-                editedPersonType = editPersonDescriptor.getTags().get().iterator().next().tagName;
+                editedPersonType = editPersonDescriptor.getTags().get().iterator().next().tagName.toLowerCase();
+                if (editedPersonType == null) {
+                    throw new PersonTagNotFoundException();
+                }
                 int modIdx = latestModList.indexOf(checkMod);
                 if (editedPersonType.equals("professor")) {
                     latestModList.get(modIdx).addProfessor((Professor) editedPerson);

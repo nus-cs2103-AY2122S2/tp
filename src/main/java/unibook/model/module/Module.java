@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import unibook.model.person.Person;
 import unibook.model.person.Professor;
 import unibook.model.person.Student;
 
@@ -71,6 +72,16 @@ public class Module {
         this.moduleCode = moduleCode;
         this.professors = professors;
         this.students = students;
+    }
+
+    /**
+     * Empty constructor for a null module.
+     */
+    public Module() {
+        this.moduleName = null;
+        this.moduleCode = null;
+        this.professors = null;
+        this.students = null;
     }
 
     /**
@@ -153,6 +164,19 @@ public class Module {
     }
 
     /**
+     * Remove a person from students or professors list depending on whether person is a student or professor
+     * and if present
+     * @param person
+     */
+    public void removePerson(Person person) {
+        if (person instanceof Student) {
+            students.remove(person);
+        } else {
+            professors.remove(person);
+        }
+    }
+
+    /**
      * Returns true if both modules have the same identity and data fields.
      * This defines a stronger notion of equality between two modules.
      */
@@ -178,7 +202,7 @@ public class Module {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(moduleName, moduleCode, professors, students);
+        return Objects.hash(moduleName, moduleCode);
     }
 
     @Override

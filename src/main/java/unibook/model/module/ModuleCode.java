@@ -27,11 +27,11 @@ public class ModuleCode {
     public ModuleCode(String moduleCode) {
         requireNonNull(moduleCode);
         checkArgument(isValidModuleCode(moduleCode), MESSAGE_CONSTRAINTS);
-        this.moduleCode = moduleCode;
+        this.moduleCode = moduleCode.toUpperCase();
     }
 
     /**
-     * Returns true if a given string is a valid module name.
+     * Returns true if a given string is a valid module code.
      */
     public static boolean isValidModuleCode(String test) {
         return test.matches(VALIDATION_REGEX);

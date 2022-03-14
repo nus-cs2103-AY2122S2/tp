@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import unibook.model.module.exceptions.DuplicateModuleException;
 import unibook.model.module.exceptions.ModuleNotFoundException;
+import unibook.model.person.Person;
 
 /**
  * Represents a list of Modules in the UniBook.
@@ -20,7 +21,7 @@ public class ModuleList implements Iterable<Module> {
         FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent module as the given argument.
      */
     public boolean contains(Module toCheck) {
         requireNonNull(toCheck);
@@ -44,6 +45,7 @@ public class ModuleList implements Iterable<Module> {
      */
     public void add(Module toAdd) {
         requireNonNull(toAdd);
+
         if (contains(toAdd)) {
             throw new DuplicateModuleException();
         }
@@ -78,6 +80,32 @@ public class ModuleList implements Iterable<Module> {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
             throw new ModuleNotFoundException(toRemove);
+        }
+    }
+
+    /**
+     * Removes a module from ModuleList if it matches toRemove.
+     * @param toRemove
+     */
+    public void removeByModuleCode(ModuleCode toRemove) {
+        requireNonNull(toRemove);
+        Module remove = null; // necessary to prevent concurrent modification exception
+        for (Module module : internalList) {
+            if (module.hasModuleCode(toRemove)) {
+                remove = module;
+            }
+        }
+        internalList.remove(remove);
+    }
+
+    /**
+     * Remove person from every module in ModuleList if present
+     * @param person
+     */
+    public void removePersonFromModule(Person person) {
+        requireNonNull(person);
+        for (Module module : internalList) {
+            module.removePerson(person);
         }
     }
 

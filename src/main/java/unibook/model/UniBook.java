@@ -15,7 +15,7 @@ import unibook.model.person.UniquePersonList;
 import unibook.model.person.exceptions.PersonNoSubtypeException;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the uni-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
 public class UniBook implements ReadOnlyUniBook {
@@ -39,7 +39,7 @@ public class UniBook implements ReadOnlyUniBook {
     }
 
     /**
-     * Creates an UniBook using the Persons in the {@code toBeCopied}
+     * Creates a UniBook using the Persons in the {@code toBeCopied}
      */
     public UniBook(ReadOnlyUniBook toBeCopied) {
         this();
@@ -104,6 +104,26 @@ public class UniBook implements ReadOnlyUniBook {
     public void addPersonToAllTheirModules(Person p) throws PersonNoSubtypeException {
         for (Module personsModule : p.getModules()) {
             Module module = modules.getModule(personsModule);
+            if (p instanceof Student) {
+                module.addStudent((Student) p);
+            } else if (p instanceof Professor) {
+                module.addProfessor((Professor) p);
+            } else {
+                throw new PersonNoSubtypeException();
+            }
+        }
+    }
+
+    /**
+     * Adds this person to all the module codes that they are associated with, into the
+     * correct personnel list (professor/student) in module depending on the runtime type
+     * of this person.
+     *
+     * @param p person whos modules to add them to
+     */
+    public void addPersonToAllTheirModuleCodes(Person p) throws PersonNoSubtypeException {
+        for (ModuleCode personsModuleCodes : p.getModuleCodes()) {
+            Module module = modules.getModuleByCode(personsModuleCodes);
             if (p instanceof Student) {
                 module.addStudent((Student) p);
             } else if (p instanceof Professor) {
@@ -189,6 +209,18 @@ public class UniBook implements ReadOnlyUniBook {
      */
     public void removeModule(Module key) {
         modules.remove(key);
+    }
+
+    public void removeByModuleCode(ModuleCode key) {
+        modules.removeByModuleCode(key);
+    }
+
+    public void removeModuleFromAllPersons(ModuleCode moduleCode) {
+        persons.removeModuleFromAllPersons(moduleCode);
+    }
+
+    public void removePersonFromModules(Person person) {
+        modules.removePersonFromModule(person);
     }
 
     //// util methods

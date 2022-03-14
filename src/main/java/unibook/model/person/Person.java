@@ -7,6 +7,7 @@ import java.util.Set;
 
 import unibook.commons.util.CollectionUtil;
 import unibook.model.module.Module;
+import unibook.model.module.ModuleCode;
 import unibook.model.tag.Tag;
 
 /**
@@ -26,6 +27,9 @@ public class Person {
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
 
+    // Temporary field to store module codes that a person is associated with.
+    private final Set<ModuleCode> moduleCodes = new HashSet<>();
+
     /**
      * Every field must be present and not null.
      */
@@ -36,6 +40,29 @@ public class Person {
         this.phone = phone;
         this.tags.addAll(tags);
         this.modules.addAll(modules);
+    }
+
+    /**
+     * Constructor of Person with extra ModuleCode parameter.
+     */
+    public Person(Name name, Phone phone, Email email, Set<Tag> tags,
+                  Set<Module> modules, Set<ModuleCode> moduleCodes) {
+        CollectionUtil.requireAllNonNull(name, phone, email, tags);
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.tags.addAll(tags);
+        this.modules.addAll(modules);
+        this.moduleCodes.addAll(moduleCodes);
+    }
+
+    /**
+     * Empty constructor of a null person.
+     */
+    public Person() {
+        this.name = null;
+        this.phone = null;
+        this.email = null;
     }
 
     public Name getName() {
@@ -49,7 +76,6 @@ public class Person {
     public Email getEmail() {
         return email;
     }
-
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -66,6 +92,46 @@ public class Person {
      */
     public Set<Module> getModules() {
         return Collections.unmodifiableSet(modules);
+    }
+
+    /**
+     * Deletes a module from the set of modules the person has by checking through each module
+     * in the set and removing it from the set if the module code matches.
+     *
+     * @param other
+     */
+    public void removeModule(ModuleCode other) {
+        Module toRemove = null; // necessary to prevent concurrent modification exception
+        for (Module module : modules) {
+            if (module.hasModuleCode(other)) {
+                toRemove = module;
+                break;
+            }
+        }
+        modules.remove(toRemove);
+    }
+
+    /**
+     * Returns a mutable module set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Module> getModulesModifiable() {
+        return modules;
+    }
+
+    /**
+     * Returns an immutable modulecode set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<ModuleCode> getModuleCodes() {
+        return Collections.unmodifiableSet(moduleCodes);
+    }
+
+    /**
+     * Adds a module to the module set
+     */
+    public void addModule(Module module) {
+        modules.add(module);
     }
 
     /**
@@ -106,7 +172,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, tags, modules);
+        return Objects.hash(name, phone, email, tags);
     }
 
     @Override
