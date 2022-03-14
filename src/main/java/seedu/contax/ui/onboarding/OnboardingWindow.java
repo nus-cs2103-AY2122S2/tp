@@ -339,10 +339,6 @@ public class OnboardingWindow extends UiPart<Stage> {
                 return 0;
             }
 
-//            if (OnboardingUtil.processCommand(step, commandBox.getText(), instructionLabel, model) == -1) {
-//                return 0;
-//            }
-
             OnboardingStep s = storyManager.getNextStep();
             processStep(s);
             step.setEventType(s.getPositionOption());
@@ -377,7 +373,9 @@ public class OnboardingWindow extends UiPart<Stage> {
         }
 
         if (step.getCommandType() == 1 && commandBox.getText().length() > 0) {
-            OnboardingUtil.processCommand(commandBox.getText(), instructionLabel, model, 6);
+            if (OnboardingUtil.processCommand(commandBox.getText(), instructionLabel, model, 6) == -1) {
+                return;
+            }
         }
 
         if (step.getCommand() != null) {
