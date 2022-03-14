@@ -43,7 +43,10 @@ public class Name {
     }
 
     /**
-     * Returns true if a given string is a valid name.
+     * Checks if the string is valid as per {@code VALIDATION_REGEX}.
+     *
+     * @param test String to test.
+     * @return Result of test.
      */
     public static boolean isValidName(String test) {
         return test.matches(VALIDATION_REGEX);
