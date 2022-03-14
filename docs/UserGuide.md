@@ -49,7 +49,7 @@ Some example commands you can try:
 * **`exit`** : Exits the app.
 
 
-[<img src="images/toc-icon.png" width="25px">](#table-of-contents)
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -79,7 +79,7 @@ Some example commands you can try:
 
 </div>
 
-[<img src="images/toc-icon.png" width="25px">](#table-of-contents)
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
 
@@ -98,7 +98,7 @@ Examples:
 * `add n/All of us are dead s/completed t/Kdrama`
 * `add n/All of us are dead`
 
-[<img src="images/toc-icon.png" width="25px">](#table-of-contents)
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
 
@@ -108,7 +108,7 @@ Shows a list of all shows in Trackermon.
 
 Format: `list`
 
-[<img src="images/toc-icon.png" width="25px">](#table-of-contents)
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
 
@@ -118,7 +118,7 @@ Shows a URL that redirects the user to Trackermon's user guide.
 
 Format: `help`
 
-[<img src="images/toc-icon.png" width="25px">](#table-of-contents)
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
 
@@ -135,7 +135,7 @@ Examples:
 * `find` followed by `attack` displays all the shows in the list that contain the keyword `attack`.
 * `find attack` followed by `delete 1` removes 1st show in results of `find` command.
 
-[<img src="images/toc-icon.png" width="25px">](#table-of-contents)
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
 
@@ -152,7 +152,7 @@ Examples:
 * `list` followed by `delete 2` removes 2nd show in Trackermon.
 * `find ghibli` followed by `delete 1` removes 1st show in results of `find` command.
 
-[<img src="images/toc-icon.png" width="25px">](#table-of-contents)
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
 
@@ -164,7 +164,7 @@ Format: `exit`
 
 * Displays error message and exits the program after 3 seconds.
 
-[<img src="images/toc-icon.png" width="25px">](#table-of-contents)
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
 
@@ -172,7 +172,7 @@ Format: `exit`
 
 Trackermon data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-[<img src="images/toc-icon.png" width="25px">](#table-of-contents)
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
 
@@ -180,7 +180,7 @@ Trackermon data are saved in the hard disk automatically after any command that 
 
 _Details coming soon ..._
 
-[<img src="images/toc-icon.png" width="25px">](#table-of-contents)
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
 
