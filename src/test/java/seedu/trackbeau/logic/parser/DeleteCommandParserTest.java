@@ -7,7 +7,10 @@ import static seedu.trackbeau.testutil.TypicalIndexes.INDEX_FIRST_CUSTOMER;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.trackbeau.commons.core.index.Index;
 import seedu.trackbeau.logic.commands.DeleteCommand;
+
+import java.util.ArrayList;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -22,7 +25,8 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_CUSTOMER));
+        ArrayList<Index> firstCustomer = new ArrayList<>(){{add(INDEX_FIRST_CUSTOMER);}};
+        assertParseSuccess(parser, "1", new DeleteCommand(firstCustomer));
     }
 
     @Test

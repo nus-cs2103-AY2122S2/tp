@@ -6,6 +6,8 @@ import seedu.trackbeau.commons.core.index.Index;
 import seedu.trackbeau.logic.commands.DeleteCommand;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
 
+import java.util.ArrayList;
+
 /**
  * Parses input arguments and creates a new DeleteCommand object
  */
@@ -18,8 +20,13 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      */
     public DeleteCommand parse(String args) throws ParseException {
         try {
-            Index index = ParserUtil.parseIndex(args);
-            return new DeleteCommand(index);
+            String[] split = args.split(",");
+            ArrayList<Index> indexes = new ArrayList<>();
+            for (String s : split) {
+                indexes.add(ParserUtil.parseIndex(s));
+            }
+            //Index index = ParserUtil.parseIndex(split[0]);
+            return new DeleteCommand(indexes);
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);

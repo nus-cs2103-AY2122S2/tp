@@ -7,12 +7,14 @@ import static seedu.trackbeau.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.trackbeau.testutil.Assert.assertThrows;
 import static seedu.trackbeau.testutil.TypicalIndexes.INDEX_FIRST_CUSTOMER;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.trackbeau.commons.core.index.Index;
 import seedu.trackbeau.logic.commands.AddCommand;
 import seedu.trackbeau.logic.commands.ClearCommand;
 import seedu.trackbeau.logic.commands.DeleteCommand;
@@ -47,7 +49,8 @@ public class TrackBeauParserTest {
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_CUSTOMER.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_CUSTOMER), command);
+        ArrayList<Index> firstCustomer = new ArrayList<>(){{add(INDEX_FIRST_CUSTOMER);}};
+        assertEquals(new DeleteCommand(firstCustomer), command);
     }
 
     /*ToDo uncomment when edit command is fixed

@@ -2,6 +2,7 @@ package seedu.trackbeau.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import seedu.trackbeau.commons.core.Messages;
@@ -22,12 +23,14 @@ public class DeleteCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_CUSTOMER_SUCCESS = "Deleted Customer: %1$s";
+    public static final String MESSAGE_DELETE_CUSTOMER_SUCCESS = "Deleted Customer(s):\n%1$s";
 
-    private final Index targetIndex;
+    //private final Index targetIndex;
 
-    public DeleteCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
+    private final ArrayList<Index> targetIndexes;
+
+    public DeleteCommand(ArrayList<Index> targetIndexes) {
+        this.targetIndexes = targetIndexes;
     }
 
     @Override
@@ -35,19 +38,27 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Customer> lastShownList = model.getFilteredCustomerList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
+        ArrayList<Customer> customersToDelete = new ArrayList<>();
+        for (Index targetIndex : targetIndexes) {
+            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
+            }
+            customersToDelete.add(lastShownList.get(targetIndex.getZeroBased()));
         }
 
-        Customer customerToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deleteCustomer(customerToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_CUSTOMER_SUCCESS, customerToDelete));
+        StringBuilder sb = new StringBuilder();
+        for (Customer customerToDelete : customersToDelete) {
+            model.deleteCustomer(customerToDelete);
+            sb.append(customerToDelete).append("\n");
+        }
+
+        return new CommandResult(String.format(MESSAGE_DELETE_CUSTOMER_SUCCESS, sb));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeleteCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteCommand) other).targetIndex)); // state check
+                && targetIndexes.equals(((DeleteCommand) other).targetIndexes)); // state check
     }
 }
