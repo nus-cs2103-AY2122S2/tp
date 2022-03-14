@@ -1,16 +1,20 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LAB;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LABSTATUS;
+
+import java.util.stream.Stream;
+
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.lab.Lab;
 import seedu.address.model.person.lab.LabStatus;
 import seedu.address.model.person.lab.StudentHasLabPredicate;
 
-import java.util.stream.Stream;
-
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
-
+/**
+ * Parses input arguments and creates a FilterCommand object
+ */
 public class FilterCommandParser implements Parser<FilterCommand> {
 
     /**

@@ -112,12 +112,12 @@ public class Lab {
         switch (labStatus) {
         case UNSUBMITTED:
             return new Lab(String.valueOf(labNumber), LabStatus.UNSUBMITTED);
-            case SUBMITTED:
-                return new Lab(String.valueOf(labNumber), LabStatus.SUBMITTED);
-            case GRADED:
-                return new Lab(String.valueOf(labNumber), LabStatus.GRADED);
-            default:
-                throw new IllegalArgumentException();
+        case SUBMITTED:
+            return new Lab(String.valueOf(labNumber), LabStatus.SUBMITTED);
+        case GRADED:
+            return new Lab(String.valueOf(labNumber), LabStatus.GRADED);
+        default:
+            throw new IllegalArgumentException();
         }
     }
 
@@ -143,7 +143,7 @@ public class Lab {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Lab // instanceof handles nulls
-                && labNumber == (((Lab) other).labNumber)   // labNumber check
+                && labNumber == (((Lab) other).labNumber) // labNumber check
                 && labStatus == (((Lab) other).labStatus)); // labStatus check
     }
 

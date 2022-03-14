@@ -175,6 +175,12 @@ public class ParserUtil {
         return new Lab(trimmedLab);
     }
 
+    /**
+     * Parses a {@code String labStatus} into a {@code LabStatus}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException
+     */
     public static LabStatus parseLabStatus(String labStatus) throws ParseException {
         requireNonNull(labStatus);
         String trimmedLabStatus = labStatus.trim();
