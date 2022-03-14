@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_CLOSE_CONTACT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_NEGATIVE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_POSITIVE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -17,11 +18,12 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -29,8 +31,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.ClassCodeContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Status;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -92,16 +94,52 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
 
-        String[] classCodeKeywords = new String[1];
-        classCodeKeywords[0] = editedPerson.getClassCode().toString();
-        expectedModel.updateFilteredPersonList(
-                new ClassCodeContainsKeywordsPredicate(Arrays.asList(classCodeKeywords)));
+        ObservableList<Person> studentList = expectedModel.getAddressBook().getPersonList();
 
-        List<Person> filteredByClassCodeList = expectedModel.getFilteredPersonList();
+        List<Person> filteredByClassCodeList = studentList.stream()
+                .filter(student -> student.getClassCode().toString().equals(editedPerson.getClassCode().toString())
+                        && !student.isSamePerson(editedPerson))
+                .collect(Collectors.toList());
 
         for (Person classmate : filteredByClassCodeList) {
-            if (!classmate.isSamePerson(editedPerson)) {
-                Person editedClassmate = new PersonBuilder(classmate).withStatus(VALID_STATUS_CLOSE_CONTACT).build();
+            Person editedClassmate = new PersonBuilder(classmate).withStatus(VALID_STATUS_CLOSE_CONTACT).build();
+            expectedModel.setPerson(classmate, editedClassmate);
+        }
+
+        expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_batchUpdateWhenNegative_success() {
+        Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+
+        PersonBuilder personInList = new PersonBuilder(secondPerson);
+        Person editedPerson = personInList.withStatus(VALID_STATUS_NEGATIVE).build();
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withStatus(VALID_STATUS_NEGATIVE).build();
+        EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(secondPerson, editedPerson);
+
+        ObservableList<Person> studentList = expectedModel.getAddressBook().getPersonList();
+
+        List<Person> filteredByClassCodeList = studentList.stream()
+                .filter(student -> student.getClassCode().toString().equals(editedPerson.getClassCode().toString())
+                        && !student.isSamePerson(editedPerson))
+                .collect(Collectors.toList());
+
+        List<Person> filteredByPositiveStatusInClass = filteredByClassCodeList.stream()
+                .filter(student -> student.getStatus().toString().equals(Status.POSITIVE))
+                .collect(Collectors.toList());
+
+        if (filteredByPositiveStatusInClass.size() == 0) {
+            for (Person classmate : filteredByClassCodeList) {
+                Person editedClassmate = new PersonBuilder(classmate).withStatus(VALID_STATUS_NEGATIVE).build();
                 expectedModel.setPerson(classmate, editedClassmate);
             }
         }

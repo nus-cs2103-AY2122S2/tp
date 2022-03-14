@@ -110,6 +110,30 @@ public class EditCommand extends Command {
             }
         }
 
+        if (personToEdit.getStatus().toString().equals(Status.POSITIVE)
+                && editedPerson.getStatus().toString().equals(Status.NEGATIVE)) {
+
+            List<Person> filteredByClassCodeList = studentList.stream()
+                    .filter(student -> student.getClassCode().toString().equals(editedPerson.getClassCode().toString())
+                            && !student.isSamePerson(editedPerson))
+                    .collect(Collectors.toList());
+
+            List<Person> filteredByPositiveStatusInClass = filteredByClassCodeList.stream()
+                    .filter(student -> student.getStatus().toString().equals(Status.POSITIVE))
+                    .collect(Collectors.toList());
+
+            if (filteredByPositiveStatusInClass.size() == 0) {
+                for (int i = 0; i < filteredByClassCodeList.size(); i++) {
+                    Person currentPerson = filteredByClassCodeList.get(i);
+                    EditPersonDescriptor tempDescriptor = new EditPersonDescriptor();
+                    tempDescriptor.setStatus(new Status(Status.NEGATIVE));
+                    Person editedPersonStatus = createEditedPerson(currentPerson, tempDescriptor);
+                    model.setPerson(currentPerson, editedPersonStatus);
+                }
+            }
+
+        }
+
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
