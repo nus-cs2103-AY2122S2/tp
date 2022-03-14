@@ -124,7 +124,11 @@ public class Task {
 
     @Override
     public String toString() {
-        return taskName;
+        if (isComplete) {
+            return "[X] " + taskName;
+        } else {
+            return "[ ] " + taskName;
+        }
     }
 
     @Override
