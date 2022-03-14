@@ -101,12 +101,8 @@ public class UniquePersonList implements Iterable<Person> {
 
     public void setFavouriteStatus(Person personToFavourite) {
         requireNonNull(personToFavourite);
-        for (Person p : internalList) {
-            if (p.isSamePerson(personToFavourite)) {
-                p.toggleFavourite();
-                break;
-            }
-        }
+        personToFavourite.toggleFavourite();
+        setPerson(personToFavourite, personToFavourite);
     }
 
     /**
