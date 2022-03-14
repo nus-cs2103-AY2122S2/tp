@@ -23,9 +23,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-[//]: # (:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams]&#40;https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/&#41; folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides]&#40;https://se-education.org/guides/tutorials/plantUml.html&#41; to learn how to create and edit diagrams.)
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S2-CS2103T-T09-3/tp/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 
-[//]: # (</div>)
+</div>
 
 ### Architecture
 
