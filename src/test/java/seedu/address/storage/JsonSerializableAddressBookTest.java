@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.AddressBook;
+import seedu.address.testutil.SimilarPets;
 import seedu.address.testutil.TypicalPets;
 
 public class JsonSerializableAddressBookTest {
@@ -18,7 +19,7 @@ public class JsonSerializableAddressBookTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableAddressBookTest");
     private static final Path TYPICAL_PETS_FILE = TEST_DATA_FOLDER.resolve("typicalPetsAddressBook.json");
     private static final Path INVALID_PET_FILE = TEST_DATA_FOLDER.resolve("invalidPetsAddressBook.json");
-    private static final Path DUPLICATE_PET_FILE = TEST_DATA_FOLDER.resolve("duplicatePetsAddressBook.json");
+    private static final Path SIMILAR_PET_FILE = TEST_DATA_FOLDER.resolve("similarPetsAddressBook.json");
 
     @Test
     public void toModelType_typicalPetsFile_success() throws Exception {
@@ -37,11 +38,12 @@ public class JsonSerializableAddressBookTest {
     }
 
     @Test
-    public void toModelType_duplicatePets_throwsIllegalValueException() throws Exception {
-        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_PET_FILE,
+    public void toModelType_sameNamePetsDifferentOwner_success() throws Exception {
+        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(SIMILAR_PET_FILE,
                 JsonSerializableAddressBook.class).get();
-        assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_DUPLICATE_PET,
-                dataFromFile::toModelType);
+        AddressBook addressBookFromFile = dataFromFile.toModelType();
+        AddressBook similarPetsAddressBook = SimilarPets.getSimilarAddressBook();
+        assertEquals(addressBookFromFile, similarPetsAddressBook);
     }
 
 }
