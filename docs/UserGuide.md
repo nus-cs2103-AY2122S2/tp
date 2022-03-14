@@ -126,28 +126,28 @@ Example:
 
 Marks a specific undone task as done for a particular student.
 
-Format : `mark i/STUDENT_ID UNDONE_TASK_INDEX`
+Format : `mark i/STUDENT_ID idx/UNDONE_TASK_INDEX`
 
 * The undone task corresponding to the index or the particular student will be marked as done in the TAPA.
 * An error message will be displayed to the user if the specified index is a negative number or larger than the number of tasks for that particular student.
 * An error message will be displayed to the user if the task with that specified index for the particular student is already marked as done.
 
 Example:
-* `mark i/AXXXXXXXR 1`
+* `mark i/AXXXXXXXR idx/1`
     * Marks the first undone task for the student with student ID AXXXXXXXR as done.
 
 ### Marking a done task as undone for a student: `unmark`
 
 Marks a specific done task as undone for a particular student.
 
-Format : `unmark i/STUDENT_ID DONE_TASK_INDEX`
+Format : `unmark i/STUDENT_ID idx/DONE_TASK_INDEX`
 
 * The done task corresponding to the index for the particular student will be marked as undone in the TAPA.
 * An error message will be displayed to the user if the specified index is a negative number or larger than the number of tasks for that particular student.
 * An error message will be displayed to the user if the task with that specified index for the particular student is already marked as undone.
 
 Example:
-* `unmark i/AXXXXXXXR 1`
+* `unmark i/AXXXXXXXR idx/1`
     * Marks the first done task for the student with student ID AXXXXXXXR as undone.
 
 ### Editing a student's information: `edit`
@@ -259,8 +259,8 @@ Action      | Format, Examples
 **Manual**  | `manual COMMAND_NAME` <br> e.g., `manual add`
 **Exit**    | `exit`
 **Task**    | `task i/STUDENT_ID` <br> e.g., `task i/AXXXXXXXR`
-**Mark**    | `mark i/STUDENT_ID UNDONE_TASK_INDEX` <br> e.g., `mark i/AXXXXXXXR 1`
-**Unmark**  | `unmark i/STUDENT_ID DONE_TASK_INDEX` <br> e.g., `unmark i/AXXXXXXXR 1`
+**Mark**    | `mark i/STUDENT_ID idx/UNDONE_TASK_INDEX` <br> e.g., `mark i/AXXXXXXXR idx/1`
+**Unmark**  | `unmark i/STUDENT_ID idx/DONE_TASK_INDEX` <br> e.g., `unmark i/AXXXXXXXR idx/1`
 **list**    | `list`
 **Assign**  | `assign i/STUDENT_ID tn/TASK_NAME` <br> e.g., `task i/AXXXXXXXR tn/assignment 1`
 **Edit**    | `edit STUDENT_INDEX [i/MATRICULATION_NO] [n/STUDENT_NAME] [m/MODULE_CODE] [p/PHONE_NUMBER] [t/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] ` <br> e.g., `edit 10 m/CS2103T p/98765432 t/johnnn e/e0123456@nus.edu.sg`
