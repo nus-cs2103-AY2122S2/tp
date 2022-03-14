@@ -102,4 +102,34 @@ public class DateUtil {
         return baselineDateTime.withHour(time.getHour()).withMinute(time.getMinute());
     }
 
+    /**
+     * Returns true if {@code dateTime1} is chronologically before or equal to {@code dateTime2}.
+     *
+     * @param dateTime1 The date time to compare.
+     * @param dateTime2 The reference date time being compared against.
+     * @return True if {@code dateTime1} is chronologically before or equal to {@code dateTime2},
+     *         False otherwise.
+     */
+    public static boolean isBeforeOrEqual(LocalDateTime dateTime1, LocalDateTime dateTime2) {
+        requireNonNull(dateTime1);
+        requireNonNull(dateTime2);
+
+        return dateTime1.equals(dateTime2) || dateTime1.isBefore(dateTime2);
+    }
+
+    /**
+     * Returns true if {@code dateTime1} is chronologically after or equal to {@code dateTime2}.
+     *
+     * @param dateTime1 The date time to compare.
+     * @param dateTime2 The reference date time being compared against.
+     * @return True if {@code dateTime1} is chronologically after or equal to {@code dateTime2},
+     *         False otherwise.
+     */
+    public static boolean isAfterOrEqual(LocalDateTime dateTime1, LocalDateTime dateTime2) {
+        requireNonNull(dateTime1);
+        requireNonNull(dateTime2);
+
+        return dateTime1.equals(dateTime2) || dateTime1.isAfter(dateTime2);
+    }
+
 }
