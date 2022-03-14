@@ -84,12 +84,15 @@ class JsonAdaptedTask {
         if (type == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Task.class.getSimpleName()));
         }
+        if (status == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Task.class.getSimpleName()));
+        }
         Description desc = new Description(description);
         boolean isDone = status.equals("X");
 
         if (type.equals("todo")) {
             Todo newTodo = new Todo(desc);
-            if(isDone) {
+            if (isDone) {
                 newTodo.setTaskDone();
             }
             return newTodo;
@@ -97,7 +100,7 @@ class JsonAdaptedTask {
             Date currDeadlineDate = new Date(date);
             Time currDeadlineTime = new Time(deadlineTime);
             Deadline newDeadline = new Deadline(desc, currDeadlineDate, currDeadlineTime);
-            if(isDone) {
+            if (isDone) {
                 newDeadline.setTaskDone();
             }
             return newDeadline;
@@ -106,7 +109,7 @@ class JsonAdaptedTask {
             Time currEventStartTime = new Time(eventStartTime);
             Time currEventEndTime = new Time(eventEndTime);
             Event newEvent = new Event(desc, currEventDate, currEventStartTime, currEventEndTime);
-            if(isDone) {
+            if (isDone) {
                 newEvent.setTaskDone();
             }
             return newEvent;
