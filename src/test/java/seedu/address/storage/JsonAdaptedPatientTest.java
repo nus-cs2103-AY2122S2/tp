@@ -15,10 +15,10 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.contact.Address;
 import seedu.address.model.contact.Email;
 import seedu.address.model.contact.Phone;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Nric;
+import seedu.address.model.patient.Name;
+import seedu.address.model.patient.Nric;
 
-public class JsonAdaptedPersonTest {
+public class JsonAdaptedPatientTest {
     private static final String INVALID_NRIC = "L1231237L";
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";

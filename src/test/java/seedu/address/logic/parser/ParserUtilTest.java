@@ -17,7 +17,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.contact.Address;
 import seedu.address.model.contact.Email;
 import seedu.address.model.contact.Phone;
-import seedu.address.model.person.Name;
+import seedu.address.model.patient.Name;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {

@@ -1,6 +1,6 @@
 package seedu.address.model.prescription;
 
-import seedu.address.model.person.Nric;
+import seedu.address.model.patient.Nric;
 
 import java.util.Objects;
 

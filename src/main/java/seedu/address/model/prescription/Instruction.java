@@ -13,11 +13,11 @@ public class Instruction {
 
     public Instruction(String instruction) {
         requireNonNull(instruction);
-        checkArgument(isValidAddress(instruction), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidInstruction(instruction), MESSAGE_CONSTRAINTS);
         value = instruction;
     }
 
-    public static boolean isValidAddress(String test) {
+    public static boolean isValidInstruction(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 

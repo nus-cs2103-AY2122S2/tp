@@ -12,8 +12,11 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.contact.Address;
 import seedu.address.model.contact.Email;
 import seedu.address.model.contact.Phone;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Nric;
+import seedu.address.model.patient.Name;
+import seedu.address.model.patient.Nric;
+import seedu.address.model.prescription.DrugName;
+import seedu.address.model.prescription.Instruction;
+import seedu.address.model.prescription.PrescriptionDate;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -109,6 +112,32 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    public static DrugName parseDrugName(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!DrugName.isValidName(trimmedName)) {
+            throw new ParseException(DrugName.MESSAGE_CONSTRAINTS);
+        }
+        return new DrugName(trimmedName);
+    }
+
+    public static PrescriptionDate parsePrescriptionDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!PrescriptionDate.isValidDate(trimmedDate)) {
+            throw new ParseException(PrescriptionDate.MESSAGE_CONSTRAINTS);
+        }
+        return new PrescriptionDate(trimmedDate);
+    }
+    public static Instruction parseInstruction(String instruction) throws ParseException {
+        requireNonNull(instruction);
+        String trimmedInstruction = instruction.trim();
+        if (!Instruction.isValidInstruction(trimmedInstruction)) {
+            throw new ParseException(Instruction.MESSAGE_CONSTRAINTS);
+        }
+        return new Instruction(Instruction.MESSAGE_CONSTRAINTS);
     }
 
     /**

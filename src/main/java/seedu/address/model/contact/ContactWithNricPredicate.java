@@ -2,7 +2,7 @@ package seedu.address.model.contact;
 
 import java.util.function.Predicate;
 
-import seedu.address.model.person.Nric;
+import seedu.address.model.patient.Nric;
 
 public class ContactWithNricPredicate implements Predicate<Contact> {
     private final Nric nric;

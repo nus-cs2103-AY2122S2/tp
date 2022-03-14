@@ -13,13 +13,13 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.contact.Address;
 import seedu.address.model.contact.Email;
 import seedu.address.model.contact.Phone;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Nric;
-import seedu.address.model.person.Person;
+import seedu.address.model.patient.Name;
+import seedu.address.model.patient.Nric;
+import seedu.address.model.patient.Patient;
 import seedu.address.model.tag.Tag;
 
 /**
- * Jackson-friendly version of {@link Person}.
+ * Jackson-friendly version of {@link Patient}.
  */
 class JsonAdaptedPerson {
 
@@ -55,7 +55,7 @@ class JsonAdaptedPerson {
     /**
      * Converts a given {@code Person} into this class for Jackson use.
      */
-    public JsonAdaptedPerson(Person source) {
+    public JsonAdaptedPerson(Patient source) {
         nric = source.getNric().value;
         name = source.getName().fullName;
         phone = source.getPhone().value;
@@ -71,7 +71,7 @@ class JsonAdaptedPerson {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
-    public Person toModelType() throws IllegalValueException {
+    public Patient toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
@@ -118,9 +118,9 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        Person person = new Person(modelNric, modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        Patient patient = new Patient(modelNric, modelName, modelPhone, modelEmail, modelAddress, modelTags);
 
-        return person;
+        return patient;
     }
 
 }

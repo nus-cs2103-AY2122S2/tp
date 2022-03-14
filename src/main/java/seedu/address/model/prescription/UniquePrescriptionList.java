@@ -2,9 +2,8 @@ package seedu.address.model.prescription;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.patient.exceptions.DuplicatePersonException;
+import seedu.address.model.patient.exceptions.PersonNotFoundException;
 import seedu.address.model.prescription.exceptions.DuplicatePrescriptionException;
 import seedu.address.model.prescription.exceptions.PrescriptionNotFoundException;
 
