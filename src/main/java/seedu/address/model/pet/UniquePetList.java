@@ -33,7 +33,7 @@ public class UniquePetList implements Iterable<Pet> {
      */
     public boolean contains(Pet toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSamePet);
+        return internalList.stream().anyMatch(toCheck::equals);
     }
 
     /**
