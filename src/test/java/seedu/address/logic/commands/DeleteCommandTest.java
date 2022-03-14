@@ -7,8 +7,8 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalNames.FULL_NAME_FIRST_PERSON;
-import static seedu.address.testutil.TypicalNames.NAME_SECOND_PERSON;
 import static seedu.address.testutil.TypicalNames.NAME_INVALID_PERSON;
+import static seedu.address.testutil.TypicalNames.NAME_SECOND_PERSON;
 import static seedu.address.testutil.TypicalNames.SHORT_NAME_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
