@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LAB;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LABSTATUS;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
@@ -10,9 +12,10 @@ public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students who labs contain the specified lab"
-            + " and displats them as a list with index numbers.\n"
-            + "Example: " + COMMAND_WORD + "filter lab1";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Finds all students with the specified lab"
+            + " and displays them as a list with index numbers.\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_LAB + "1" + " " + PREFIX_LABSTATUS + "s";
 
     private final StudentHasLabPredicate predicate;
 
