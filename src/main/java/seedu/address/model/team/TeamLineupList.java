@@ -1,13 +1,10 @@
 package seedu.address.model.team;
-
-import javax.sound.sampled.Line;
-
 import java.util.ArrayList;
+
 import seedu.address.model.lineup.Lineup;
-import seedu.address.model.person.Person;
 
 public class TeamLineupList {
-    ArrayList<Lineup> list;
+    private ArrayList<Lineup> list;
 
     /**
      * Constructs a {@code TeamLineupList}

@@ -49,7 +49,7 @@ public class Team {
      * @param person The player to be added
      */
     public void putPersonToLineup(Lineup lineup, Person person) {
-        if (this.teamLineupList.containsLineup(lineup) && this.teamMemberList.containsPerson(person)){
+        if (this.teamLineupList.containsLineup(lineup) && this.teamMemberList.containsPerson(person)) {
             lineup.addPlayer(person);
         }
     }
