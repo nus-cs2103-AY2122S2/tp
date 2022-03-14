@@ -38,22 +38,18 @@ public class AssignCommand extends Command {
         this.lessonIndex = lessonIndex;
     }
 
-    private boolean assign(Student student, Lesson lesson) {
-        return student.assignLesson(lesson) && lesson.assignStudent(student);
-    }
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         Lesson lesson = model.getFilteredLessonList().get(lessonIndex.getZeroBased());
         Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
-        model.setSelectedStudent(student);
-        // model.updateBothLists();
-        if (!assign(student, lesson)) {
+        if (student.isEnrolledIn(lesson) || lesson.hasAlreadyAssigned(student)) {
             throw new CommandException(String.format(MESSAGE_ALREADY_ENROLLED, student.getName(), lesson.getName()));
         }
+        model.setSelectedStudent(student);
+        model.updateAssignment(studentIndex, lessonIndex);
         return new CommandResult(
                 String.format(MESSAGE_SUCCESS, student.getName(), lesson.getName()),
-                true, InfoPanelTypes.STUDENT);
+                true, InfoPanelTypes.STUDENT, ViewTab.STUDENT);
     }
 }

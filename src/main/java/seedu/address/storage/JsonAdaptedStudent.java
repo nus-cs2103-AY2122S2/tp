@@ -64,11 +64,11 @@ class JsonAdaptedStudent {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        enrolledLessons.addAll(source.getEnrolledLessons()
-                .getLessonsList()
-                .stream()
-                .map(JsonAdaptedLesson::new)
-                .collect(Collectors.toList()));
+//        enrolledLessons.addAll(source.getEnrolledLessons()
+//                .getLessonsList()
+//                .stream()
+//                .map(JsonAdaptedLesson::new)
+//                .collect(Collectors.toList()));
     }
 
     /**

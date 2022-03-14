@@ -5,6 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.UniqueStudentList;
 
@@ -94,6 +96,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         students.remove(key);
     }
 
+    public void assignLesson(Lesson lesson, Index studentId) {
+        students.assignLesson(lesson, studentId);
+    }
     //// util methods
 
     @Override

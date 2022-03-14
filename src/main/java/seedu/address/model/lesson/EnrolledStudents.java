@@ -26,6 +26,10 @@ public class EnrolledStudents {
         return this.enrolledStudents.add(student);
     }
 
+    public boolean hasEnrolled(Student student) {
+        return enrolledStudents.contains(student);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

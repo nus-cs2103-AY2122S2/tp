@@ -78,8 +78,12 @@ public class Student {
         return enrolledLessons;
     }
 
-    public boolean assignLesson(Lesson lesson) {
-        return enrolledLessons.addLesson(lesson);
+    public boolean isEnrolledIn(Lesson lesson) {
+        return enrolledLessons.isEnrolled(lesson);
+    }
+
+    public void assignLesson(Lesson lesson) {
+        enrolledLessons.addLesson(lesson);
     }
 
     /**

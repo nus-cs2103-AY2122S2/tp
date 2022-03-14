@@ -144,7 +144,7 @@ public abstract class Lesson {
                 subject,
                 address,
                 dateTimeSlot,
-                new EnrolledStudents()
+                new EnrolledStudents(enrolledStudents)
         );
     }
 
@@ -164,8 +164,12 @@ public abstract class Lesson {
         return enrolledStudents;
     }
 
-    public boolean assignStudent(Student student) {
-        return enrolledStudents.addStudent(student);
+    public void assignStudent(Student student) {
+        enrolledStudents.addStudent(student);
+    }
+
+    public boolean hasAlreadyAssigned(Student student) {
+        return enrolledStudents.hasEnrolled(student);
     }
 
     /**
