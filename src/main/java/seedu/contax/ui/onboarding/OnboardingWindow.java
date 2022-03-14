@@ -1,6 +1,5 @@
 package seedu.contax.ui.onboarding;
 
-import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuBar;
 import javafx.scene.input.KeyCode;
@@ -11,8 +10,6 @@ import javafx.stage.Stage;
 import seedu.contax.model.Model;
 import seedu.contax.model.ModelManager;
 import seedu.contax.model.onboarding.OnboardingStep;
-import seedu.contax.model.person.Person;
-import seedu.contax.model.person.UniquePersonList;
 import seedu.contax.ui.PersonListPanel;
 import seedu.contax.ui.UiPart;
 
@@ -339,7 +336,6 @@ public class OnboardingWindow extends UiPart<Stage> {
             }
 
             if (!OnboardingUtil.isCommandValid(commandBox.getText(), instructionLabel)) {
-                System.out.println("INVALID");
                 return 0;
             }
 
