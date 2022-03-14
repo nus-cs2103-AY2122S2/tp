@@ -33,6 +33,7 @@ import seedu.contax.logic.commands.EditTagCommand;
 import seedu.contax.logic.commands.EditTagCommand.EditTagDescriptor;
 import seedu.contax.logic.commands.ExitCommand;
 import seedu.contax.logic.commands.ExportCsvCommand;
+import seedu.contax.logic.commands.FindByTagCommand;
 import seedu.contax.logic.commands.FindCommand;
 import seedu.contax.logic.commands.HelpCommand;
 import seedu.contax.logic.commands.ImportCsvCommand;
@@ -44,6 +45,7 @@ import seedu.contax.model.IndexedCsvFile;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.person.NameContainsKeywordsPredicate;
 import seedu.contax.model.person.Person;
+import seedu.contax.model.person.TagNameContainsKeywordsPredicate;
 import seedu.contax.model.tag.Tag;
 import seedu.contax.testutil.AppointmentBuilder;
 import seedu.contax.testutil.AppointmentUtil;
@@ -145,6 +147,14 @@ public class AddressBookParserTest {
         EditTagCommand command = (EditTagCommand) parser.parseCommand(EditTagCommand.COMMAND_WORD + " 1 "
                 + "t/clients");
         assertEquals(command, new EditTagCommand(index, editTagDescriptor));
+    }
+
+    @Test
+    public void parseCommand_findByTag() throws Exception {
+        TagNameContainsKeywordsPredicate predicate = new TagNameContainsKeywordsPredicate("friends");
+        FindByTagCommand command = (FindByTagCommand) parser.parseCommand(FindByTagCommand.COMMAND_WORD
+                + " t/friends");
+        assertEquals(command, new FindByTagCommand(predicate));
     }
 
     // Appointment related commands

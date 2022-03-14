@@ -19,6 +19,9 @@ public interface Model {
     /** {@code Predicate} that always evaluates to true */
     Predicate<Appointment> PREDICATE_SHOW_ALL_APPOINTMENTS = unused -> true;
 
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Tag> PREDICATE_SHOW_ALL_TAGS = unused -> true;
+
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -115,7 +118,13 @@ public interface Model {
      */
     void setTag(Tag target, Tag editedTag);
 
-    ObservableList<Tag> getTagList();
+    /**
+     * Updates the filter of the filtered tag list to the filter given by {@code predicate}.
+     */
+    void updateFilteredTagList(Predicate<Tag> predicate);
+
+    /** Returns an unmodifiable view of the filtered tag list. */
+    ObservableList<Tag> getFilteredTagList();
 
     // Appointments
     /**

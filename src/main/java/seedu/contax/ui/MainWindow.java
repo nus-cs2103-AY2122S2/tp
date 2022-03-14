@@ -129,7 +129,7 @@ public class MainWindow extends UiPart<Stage> {
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         appointmentListPanel = new AppointmentListPanel(logic.getAppointmentList());
-        tagListPanel = new TagListPanel(logic.getTagList());
+        tagListPanel = new TagListPanel(logic.getFilteredTagList());
         changeListContentType(GuiListContentType.PERSON);
 
         resultDisplay = new ResultDisplay();
