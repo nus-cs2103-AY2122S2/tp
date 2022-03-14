@@ -112,6 +112,16 @@ public class OnboardingStepTest {
         assertEquals(step1.getDisplayMessage(), "54321");
     }
 
+    @Test
+    public void setCommand() {
+        OnboardingStep step1 = new OnboardingStep("message", 0, 0, 0,
+                0, 0, 0, "", null, 1, false);
+        step1.setCommand("54321");
+
+        // Value is set after setting -> returns true
+        assertEquals(step1.getCommand(), "54321");
+    }
+
     @Test void hashCodeTest() {
         OnboardingStep step1 = new OnboardingStep("message 1", 0, 0, 0,
                 0, 0, 0, "", null, 1, false);
