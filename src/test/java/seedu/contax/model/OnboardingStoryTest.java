@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.contax.model.onboarding.OnboardingStep;
 import seedu.contax.model.onboarding.OnboardingStory;
-import seedu.contax.ui.onboarding.OnboardingStoryManager;
 
 public class OnboardingStoryTest {
 
@@ -21,14 +20,14 @@ public class OnboardingStoryTest {
         assertTrue(story1.equals(story2));
 
         OnboardingStep step1 = new OnboardingStep("message 1",
-                0.2, 0.5, OnboardingStory.OverlayOption.ShowCommandBox,
-                OnboardingStory.PositionOption.ResultDisplayTop,
-                OnboardingStory.HighlightOption.CommandBox,
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                OnboardingStory.HighlightOption.COMMAND_BOX,
                 0, "null", null, null, false);
         OnboardingStep step2 = new OnboardingStep("message 2",
-                0.2, 0.5, OnboardingStory.OverlayOption.ShowCommandBox,
-                OnboardingStory.PositionOption.ResultDisplayTop,
-                OnboardingStory.HighlightOption.CommandBox,
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                OnboardingStory.HighlightOption.COMMAND_BOX,
                 0, "null", null, null, false);
 
 
@@ -60,9 +59,9 @@ public class OnboardingStoryTest {
     public void addStory() {
         OnboardingStory story1 = new OnboardingStory();
         OnboardingStep step1 = new OnboardingStep("message 1",
-                0.2, 0.5, OnboardingStory.OverlayOption.ShowCommandBox,
-                OnboardingStory.PositionOption.ResultDisplayTop,
-                OnboardingStory.HighlightOption.CommandBox,
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                OnboardingStory.HighlightOption.COMMAND_BOX,
                 0, "null", null, null, false);
         story1.addStory(step1);
 

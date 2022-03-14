@@ -84,7 +84,7 @@ public class OnboardingWindow extends UiPart<Stage> {
      */
     public void show() {
         getRoot().show();
-        processInstructionPosition(OnboardingStory.PositionOption.Center);
+        processInstructionPosition(OnboardingStory.PositionOption.CENTER);
     }
 
     /**
@@ -137,7 +137,7 @@ public class OnboardingWindow extends UiPart<Stage> {
      * <br>- 2: hide the bottom overlay
      * @param node Node to be excluded from the overlay
      */
-    private void showOnly(Region node, int option) {
+    private void showOnly(Region node, Overlay.showOverlay option) {
         overlay.showOnly(node.layoutXProperty(), node.layoutYProperty(),
                 node.heightProperty(), node.widthProperty(),
                 parentPane.heightProperty(), parentPane.widthProperty(), option);
@@ -187,15 +187,15 @@ public class OnboardingWindow extends UiPart<Stage> {
      */
     private void processHighlightOption(OnboardingStory.HighlightOption option) {
         switch (option) {
-        case ClearAll:
+        case CLEAR_ALL:
             commandBox.unhighlight();
             commandBox.clear();
             personList.setStyle("-fx-border-width: 0px");
             break;
-        case CommandBox:
+        case COMMAND_BOX:
             commandBox.highlight();
             break;
-        case PersonList:
+        case PERSON_LIST:
             commandBox.unhighlight();
             commandBox.clear();
             personList.setStyle("-fx-border-color: yellow; -fx-border-width: 5px");
@@ -217,17 +217,17 @@ public class OnboardingWindow extends UiPart<Stage> {
      */
     private void processOverlayOption(OnboardingStory.OverlayOption option) {
         switch (option) {
-        case All:
+        case ALL:
             coverAll();
             break;
-        case ShowMenuBar:
-            showOnly(menuBar, 0);
+        case SHOW_MENU_BAR:
+            showOnly(menuBar, Overlay.showOverlay.BOTH);
             break;
-        case ShowCommandBox:
-            showOnly(commandBoxPlaceholder, 0);
+        case SHOW_COMMAND_BOX:
+            showOnly(commandBoxPlaceholder, Overlay.showOverlay.BOTH);
             break;
-        case ShowPersonList:
-            showOnly(personList, 2);
+        case SHOW_PERSON_LIST:
+            showOnly(personList, Overlay.showOverlay.TOP);
             break;
         default:
             break;
@@ -247,21 +247,21 @@ public class OnboardingWindow extends UiPart<Stage> {
      */
     private void processInstructionPosition(OnboardingStory.PositionOption option) {
         switch (option) {
-        case Center:
+        case CENTER:
             instructionLabel.setCenter(stage.heightProperty(), stage.widthProperty());
             break;
-        case MenuBarTop:
+        case MENU_BAR_TOP:
             instructionLabel.translate(menuBar.layoutXProperty(), menuBar.layoutYProperty());
             break;
-        case CommandBoxTop:
+        case COMMAND_BOX_TOP:
             instructionLabel.translate(commandBoxPlaceholder.layoutXProperty(),
                     commandBoxPlaceholder.layoutYProperty());
             break;
-        case ResultDisplayTop:
+        case RESULT_DISPLAY_TOP:
             instructionLabel.translate(resultDisplayPlaceholder.layoutXProperty(),
                     resultDisplayPlaceholder.layoutYProperty());
             break;
-        case PersonListMiddle:
+        case PERSON_LIST_MIDDLE:
             instructionLabel.translate(
                     personList.layoutXProperty().add(0),
                     personList.layoutYProperty().add(

@@ -9,24 +9,24 @@ import java.util.Objects;
 public class OnboardingStory {
 
     public enum HighlightOption {
-        ClearAll,
-        CommandBox,
-        PersonList
+        CLEAR_ALL,
+        COMMAND_BOX,
+        PERSON_LIST
     }
 
     public enum PositionOption {
-        Center,
-        MenuBarTop,
-        CommandBoxTop,
-        ResultDisplayTop,
-        PersonListMiddle
+        CENTER,
+        MENU_BAR_TOP,
+        COMMAND_BOX_TOP,
+        RESULT_DISPLAY_TOP,
+        PERSON_LIST_MIDDLE
     }
 
     public enum OverlayOption {
-        All,
-        ShowMenuBar,
-        ShowCommandBox,
-        ShowPersonList
+        ALL,
+        SHOW_MENU_BAR,
+        SHOW_COMMAND_BOX,
+        SHOW_PERSON_LIST
     }
 
     private ArrayList<OnboardingStep> story;

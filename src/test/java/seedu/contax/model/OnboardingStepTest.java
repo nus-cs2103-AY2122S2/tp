@@ -9,22 +9,21 @@ import org.junit.jupiter.api.Test;
 
 import seedu.contax.model.onboarding.OnboardingStep;
 import seedu.contax.model.onboarding.OnboardingStory;
-import seedu.contax.ui.onboarding.OnboardingStoryManager;
 
 public class OnboardingStepTest {
 
     @Test
     public void equals() {
         OnboardingStep step1 = new OnboardingStep("message 1",
-                0.2, 0.5, OnboardingStory.OverlayOption.ShowCommandBox,
-                OnboardingStory.PositionOption.ResultDisplayTop,
-                OnboardingStory.HighlightOption.CommandBox,
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                OnboardingStory.HighlightOption.COMMAND_BOX,
                 0, "null", null, null, false);
 
         OnboardingStep step2 = new OnboardingStep("message 1",
-                0.2, 0.5, OnboardingStory.OverlayOption.ShowCommandBox,
-                OnboardingStory.PositionOption.ResultDisplayTop,
-                OnboardingStory.HighlightOption.CommandBox,
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                OnboardingStory.HighlightOption.COMMAND_BOX,
                 0, "null", null, null, false);
 
         // same object -> returns true
@@ -41,81 +40,81 @@ public class OnboardingStepTest {
 
         // attribute difference checks
         assertFalse(step1.equals(new OnboardingStep("message 2",
-                0.2, 0.5, OnboardingStory.OverlayOption.ShowCommandBox,
-                OnboardingStory.PositionOption.ResultDisplayTop,
-                OnboardingStory.HighlightOption.CommandBox,
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                OnboardingStory.HighlightOption.COMMAND_BOX,
                 0, "null", null, null, false)));
         assertFalse(step1.equals(new OnboardingStep("message 1",
-                0.3, 0.5, OnboardingStory.OverlayOption.ShowCommandBox,
-                OnboardingStory.PositionOption.ResultDisplayTop,
-                OnboardingStory.HighlightOption.CommandBox,
+                0.3, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                OnboardingStory.HighlightOption.COMMAND_BOX,
                 0, "null", null, null, false)));
         assertFalse(step1.equals(new OnboardingStep("message 1",
-                0.2, 0.45, OnboardingStory.OverlayOption.ShowCommandBox,
-                OnboardingStory.PositionOption.ResultDisplayTop,
-                OnboardingStory.HighlightOption.CommandBox,
+                0.2, 0.45, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                OnboardingStory.HighlightOption.COMMAND_BOX,
                 0, "null", null, null, false)));
         assertFalse(step1.equals(new OnboardingStep("message 1",
-                0.2, 0.5, OnboardingStory.OverlayOption.All,
-                OnboardingStory.PositionOption.ResultDisplayTop,
-                OnboardingStory.HighlightOption.CommandBox,
+                0.2, 0.5, OnboardingStory.OverlayOption.ALL,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                OnboardingStory.HighlightOption.COMMAND_BOX,
                 0, "null", null, null, false)));
         assertFalse(step1.equals(new OnboardingStep("message 1",
-                0.2, 0.5, OnboardingStory.OverlayOption.ShowCommandBox,
-                OnboardingStory.PositionOption.Center, OnboardingStory.HighlightOption.CommandBox,
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.CENTER, OnboardingStory.HighlightOption.COMMAND_BOX,
                 0, "null", null, null, false)));
         assertFalse(step1.equals(new OnboardingStep("message 1",
-                0.2, 0.5, OnboardingStory.OverlayOption.ShowCommandBox,
-                OnboardingStory.PositionOption.ResultDisplayTop,
-                OnboardingStory.HighlightOption.ClearAll,
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                OnboardingStory.HighlightOption.CLEAR_ALL,
                 0, "null", null, null, false)));
         assertFalse(step1.equals(new OnboardingStep("message 1",
-                0.2, 0.5, OnboardingStory.OverlayOption.ShowCommandBox,
-                OnboardingStory.PositionOption.ResultDisplayTop,
-                OnboardingStory.HighlightOption.CommandBox,
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                OnboardingStory.HighlightOption.COMMAND_BOX,
                 1, "null", null, null, false)));
         assertFalse(step1.equals(new OnboardingStep("message 2",
-                0.2, 0.5, OnboardingStory.OverlayOption.ShowCommandBox,
-                OnboardingStory.PositionOption.ResultDisplayTop,
-                OnboardingStory.HighlightOption.CommandBox,
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                OnboardingStory.HighlightOption.COMMAND_BOX,
                 0, "null11", null, null, false)));
         assertFalse(step1.equals(new OnboardingStep("message 2",
-                0.2, 0.5, OnboardingStory.OverlayOption.ShowCommandBox,
-                OnboardingStory.PositionOption.ResultDisplayTop,
-                OnboardingStory.HighlightOption.CommandBox,
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                OnboardingStory.HighlightOption.COMMAND_BOX,
                 0, "null", (o, a) -> "1", null, false)));
         assertFalse(step1.equals(new OnboardingStep("message 2",
-                0.2, 0.5, OnboardingStory.OverlayOption.ShowCommandBox,
-                OnboardingStory.PositionOption.ResultDisplayTop,
-                OnboardingStory.HighlightOption.CommandBox,
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                OnboardingStory.HighlightOption.COMMAND_BOX,
                 0, "null", null, (a) -> "2", false)));
         assertFalse(step1.equals(new OnboardingStep("message 2",
-                0.2, 0.5, OnboardingStory.OverlayOption.ShowCommandBox,
-                OnboardingStory.PositionOption.ResultDisplayTop,
-                OnboardingStory.HighlightOption.CommandBox,
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                OnboardingStory.HighlightOption.COMMAND_BOX,
                 0, "null", null, null, true)));
     }
 
     @Test
     public void setEventType() {
         OnboardingStep step1 = new OnboardingStep("message 1",
-                0.2, 0.5, OnboardingStory.OverlayOption.ShowCommandBox,
-                OnboardingStory.PositionOption.ResultDisplayTop,
-                OnboardingStory.HighlightOption.CommandBox,
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                OnboardingStory.HighlightOption.COMMAND_BOX,
                 0, "null", null, null, false);
 
-        step1.setEventType(OnboardingStory.PositionOption.Center);
+        step1.setEventType(OnboardingStory.PositionOption.CENTER);
 
         // Value is set after setting -> returns true
-        assertEquals(step1.getPositionOption(), OnboardingStory.PositionOption.Center);
+        assertEquals(step1.getPositionOption(), OnboardingStory.PositionOption.CENTER);
     }
 
     @Test
     public void setDisplayMessage() {
         OnboardingStep step1 = new OnboardingStep("message 1",
-                0.2, 0.5, OnboardingStory.OverlayOption.ShowCommandBox,
-                OnboardingStory.PositionOption.ResultDisplayTop,
-                OnboardingStory.HighlightOption.CommandBox,
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                OnboardingStory.HighlightOption.COMMAND_BOX,
                 0, "null", null, null, false);
         step1.setDisplayMessage("54321");
 
@@ -126,9 +125,9 @@ public class OnboardingStepTest {
     @Test
     public void setCommand() {
         OnboardingStep step1 = new OnboardingStep("message 1",
-                0.2, 0.5, OnboardingStory.OverlayOption.ShowCommandBox,
-                OnboardingStory.PositionOption.ResultDisplayTop,
-                OnboardingStory.HighlightOption.CommandBox,
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                OnboardingStory.HighlightOption.COMMAND_BOX,
                 0, "null", null, null, false);
         step1.setCommand("54321");
 
@@ -138,19 +137,19 @@ public class OnboardingStepTest {
 
     @Test void hashCodeTest() {
         OnboardingStep step1 = new OnboardingStep("message 1",
-                0.2, 0.5, OnboardingStory.OverlayOption.ShowCommandBox,
-                OnboardingStory.PositionOption.ResultDisplayTop,
-                OnboardingStory.HighlightOption.CommandBox,
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                OnboardingStory.HighlightOption.COMMAND_BOX,
                 0, "null", null, null, false);
         OnboardingStep step2 = new OnboardingStep("message 1",
-                0.2, 0.5, OnboardingStory.OverlayOption.ShowCommandBox,
-                OnboardingStory.PositionOption.ResultDisplayTop,
-                OnboardingStory.HighlightOption.CommandBox,
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                OnboardingStory.HighlightOption.COMMAND_BOX,
                 0, "null", null, null, false);
         OnboardingStep step3 = new OnboardingStep("message 123",
-                0.2, 0.5, OnboardingStory.OverlayOption.ShowCommandBox,
-                OnboardingStory.PositionOption.ResultDisplayTop,
-                OnboardingStory.HighlightOption.CommandBox,
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                OnboardingStory.HighlightOption.COMMAND_BOX,
                 0, "null", null, null, false);
 
         // same object -> returns true

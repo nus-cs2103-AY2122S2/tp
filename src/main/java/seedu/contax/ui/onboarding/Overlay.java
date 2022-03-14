@@ -18,6 +18,12 @@ public class Overlay extends UiPart<Region> {
     @FXML
     private Pane bottomOverlay;
 
+    public enum showOverlay {
+        BOTH,
+        TOP,
+        BOTTOM,
+    }
+
     Overlay() {
         super(FXML);
     }
@@ -53,17 +59,17 @@ public class Overlay extends UiPart<Region> {
     public void showOnly(DoubleProperty boundX, DoubleProperty boundY,
                          ReadOnlyDoubleProperty height, ReadOnlyDoubleProperty width,
                          ReadOnlyDoubleProperty parentHeight, ReadOnlyDoubleProperty parentWidth,
-                         int option) {
+                         showOverlay option) {
 
         switch (option) {
-        case 0:
+        case BOTH:
             showAll();
             break;
-        case 1:
+        case BOTTOM:
             hideAll();
             bottomOverlay.setVisible(true);
             break;
-        case 2:
+        case TOP:
             hideAll();
             topOverlay.setVisible(true);
             break;
