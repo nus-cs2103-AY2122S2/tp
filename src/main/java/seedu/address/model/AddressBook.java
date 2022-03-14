@@ -99,6 +99,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void assignLesson(Lesson lesson, Index studentId) {
         students.assignLesson(lesson, studentId);
     }
+
+    public void unassignLesson(Lesson lesson) {
+        students.unassignLesson(lesson);
+    }
     //// util methods
 
     @Override

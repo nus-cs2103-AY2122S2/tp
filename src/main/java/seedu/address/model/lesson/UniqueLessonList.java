@@ -79,6 +79,19 @@ public class UniqueLessonList implements Iterable<Lesson> {
     }
 
     /**
+     * Unassigns the student from the lesson's enrolled students.
+     * @param student the student that is being deleted
+     */
+    public void unassignStudent(Student student) {
+        requireNonNull(student);
+        for (Lesson lesson: internalList) {
+            if (lesson.hasAlreadyAssigned(student)) {
+                lesson.unassignStudent(student);
+            }
+        }
+    }
+
+    /**
      * Replaces the lesson {@code target} in the list with {@code editedLesson}.
      * {@code target} must exist in the list.
      * The lesson identity of {@code editedLesson} must not be the same as another existing lesson in the list.

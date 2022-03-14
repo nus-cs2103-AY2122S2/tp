@@ -109,6 +109,7 @@ public class ModelManager implements Model {
     @Override
     public void deleteStudent(Student target) {
         addressBook.removeStudent(target);
+        lessonBook.unasssignStudent(target);
     }
 
     @Override
@@ -149,6 +150,7 @@ public class ModelManager implements Model {
     @Override
     public void deleteLesson(Lesson lesson) {
         lessonBook.deleteLesson(lesson);
+        addressBook.unassignLesson(lesson);
         updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
     }
 

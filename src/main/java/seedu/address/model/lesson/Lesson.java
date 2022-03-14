@@ -220,6 +220,16 @@ public abstract class Lesson {
     }
 
     /**
+     * Unassigns the student from the lesson's enrolled students.
+     * @param student the student that is being deleted
+     */
+    public void unassignStudent(Student student) {
+        if (enrolledStudents.getStudentsList().contains(student)) {
+            enrolledStudents.getStudentsList().remove(student);
+        }
+    }
+
+    /**
      * Returns the date and time that the lesson starts and ends.
      */
     public DateTimeSlot getDateTimeSlot() {

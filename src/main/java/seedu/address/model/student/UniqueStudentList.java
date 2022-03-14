@@ -90,6 +90,18 @@ public class UniqueStudentList implements Iterable<Student> {
         requireAllNonNull(lesson, studentId);
         internalList.get(studentId.getZeroBased()).assignLesson(lesson);
     }
+    /**
+     * Unassigns the lesson from the student's enrolled lessons.
+     * @param lesson the lesson that is being deleted
+     */
+    public void unassignLesson(Lesson lesson) {
+        requireNonNull(lesson);
+        for (Student student: internalList) {
+            if (student.isEnrolledIn(lesson)) {
+                student.unassignLesson(lesson);
+            }
+        }
+    }
 
     public void setStudents(UniqueStudentList replacement) {
         requireNonNull(replacement);
