@@ -111,6 +111,11 @@ public class ModelManager implements Model {
         addressBook.setPet(target, editedPet);
     }
 
+    @Override
+    public void sortPetList() {
+        addressBook.sortPets();
+        updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
+    }
     //=========== Filtered Pet List Accessors =============================================================
 
     /**

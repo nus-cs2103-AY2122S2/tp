@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Pet's name in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
-public class Name {
+public class Name implements Comparable<Name> {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters and spaces, and it should not be blank";
@@ -56,4 +56,13 @@ public class Name {
         return fullName.hashCode();
     }
 
+    /**
+     * Compare two {@code name} in lexicographical order
+     * @param other {@code name} to be compared with
+     * @return an Integer (-1 <= x <= 1)
+     */
+    @Override
+    public int compareTo(Name other) {
+        return Integer.compare(this.fullName.compareToIgnoreCase(other.fullName), 0);
+    }
 }
