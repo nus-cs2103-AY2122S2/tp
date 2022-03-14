@@ -6,8 +6,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HEIGHT_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HEIGHT_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_JERSEYNUMBER_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_JERSEYNUMBER_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_JERSEY_NUMBER_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_JERSEY_NUMBER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
@@ -57,11 +57,11 @@ public class TypicalPersons {
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withTags(VALID_TAG_FRIEND)
             .withAge(VALID_AGE_AMY).withHeight(VALID_HEIGHT_AMY)
-            .withJerseyNumber(VALID_JERSEYNUMBER_AMY).withWeight(VALID_WEIGHT_AMY).build();
+            .withJerseyNumber(VALID_JERSEY_NUMBER_AMY).withWeight(VALID_WEIGHT_AMY).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .withAge(VALID_AGE_BOB).withHeight(VALID_HEIGHT_BOB)
-            .withJerseyNumber(VALID_JERSEYNUMBER_BOB).withWeight(VALID_WEIGHT_BOB).build();
+            .withJerseyNumber(VALID_JERSEY_NUMBER_BOB).withWeight(VALID_WEIGHT_BOB).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

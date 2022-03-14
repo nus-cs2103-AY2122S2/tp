@@ -64,10 +64,10 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
-        age = "23"; //source.getAge().value;
-        height = "180"; //source.getHeight().value;
-        jerseyNumber = "23"; //source.getJerseyNumber().value;
-        weight = "80"; //source.getWeight().value;
+        age = source.getAge().value;
+        height = source.getHeight().value;
+        jerseyNumber = source.getJerseyNumber().value;
+        weight = source.getWeight().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -108,8 +108,6 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
-        /*
-        // to be changed
         // age
         if (age == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Age.class.getSimpleName()));
@@ -133,7 +131,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     JerseyNumber.class.getSimpleName()));
         }
-        if (!Age.isValidJerseyNumber(age)) {
+        if (!JerseyNumber.isValidJerseyNumber(jerseyNumber)) {
             throw new IllegalValueException(JerseyNumber.MESSAGE_CONSTRAINTS);
         }
         final JerseyNumber modelJerseyNumber = new JerseyNumber(jerseyNumber);
@@ -142,17 +140,15 @@ class JsonAdaptedPerson {
         if (weight == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Weight.class.getSimpleName()));
         }
-        if (!Weight.isValidEmail(weight)) {
+        if (!Weight.isValidWeight(weight)) {
             throw new IllegalValueException(Weight.MESSAGE_CONSTRAINTS);
         }
         final Weight modelWeight = new Weight(weight);
-        */
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        // age, height, jersey number, weight to be edited
-        return new Person(modelName, modelPhone, modelEmail, new Age(),
-                new Height(), new JerseyNumber(), modelTags, new Weight());
+        return new Person(modelName, modelPhone, modelEmail, modelAge,
+                modelHeight, modelJerseyNumber, modelTags, modelWeight);
     }
 
 }

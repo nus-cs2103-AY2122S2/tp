@@ -24,7 +24,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_AGE = "23";
     public static final String DEFAULT_HEIGHT = "180";
-    public static final String DEFAULT_JERSYNUMBER = "23";
+    public static final String DEFAULT_JERSEY_NUMBER = "23";
     public static final String DEFAULT_WEIGHT = "80";
 
     private Name name;
@@ -45,7 +45,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         age = new Age(DEFAULT_AGE);
         height = new Height(DEFAULT_HEIGHT);
-        jerseyNumber = new JerseyNumber(DEFAULT_JERSYNUMBER);
+        jerseyNumber = new JerseyNumber(DEFAULT_JERSEY_NUMBER);
         weight = new Weight(DEFAULT_WEIGHT);
         tags = new HashSet<>();
     }
