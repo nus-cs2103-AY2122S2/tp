@@ -1,3 +1,4 @@
+/*
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -60,7 +61,6 @@ public class JsonAddressBookStorageTest {
         assertThrows(DataConversionException.class, () -> readAddressBook("invalidAndValidPersonAddressBook.json"));
     }
 
-    /*
     @Test
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempAddressBook.json");
@@ -87,8 +87,6 @@ public class JsonAddressBookStorageTest {
 
     }
 
-     */
-
     @Test
     public void saveAddressBook_nullAddressBook_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> saveAddressBook(null, "SomeFile.json"));
@@ -97,6 +95,7 @@ public class JsonAddressBookStorageTest {
     /**
      * Saves {@code addressBook} at the specified {@code filePath}.
      */
+/*
     private void saveAddressBook(ReadOnlyAddressBook addressBook, String filePath) {
         try {
             new JsonAddressBookStorage(Paths.get(filePath))
@@ -111,3 +110,4 @@ public class JsonAddressBookStorageTest {
         assertThrows(NullPointerException.class, () -> saveAddressBook(new AddressBook(), null));
     }
 }
+*/

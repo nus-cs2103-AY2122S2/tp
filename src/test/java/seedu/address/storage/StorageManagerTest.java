@@ -1,3 +1,4 @@
+/*
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -40,6 +41,7 @@ public class StorageManagerTest {
          * {@link JsonUserPrefsStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link JsonUserPrefsStorageTest} class.
          */
+/*
         UserPrefs original = new UserPrefs();
         original.setGuiSettings(new GuiSettings(300, 600, 4, 6));
         storageManager.saveUserPrefs(original);
@@ -47,7 +49,6 @@ public class StorageManagerTest {
         assertEquals(original, retrieved);
     }
 
-    /*
     @Test
     public void addressBookReadSave() throws Exception {
         /*
@@ -62,7 +63,6 @@ public class StorageManagerTest {
         assertEquals(original, new AddressBook(retrieved));
 
     }
-    */
 
     @Test
     public void getAddressBookFilePath() {
@@ -70,3 +70,4 @@ public class StorageManagerTest {
     }
 
 }
+*/
