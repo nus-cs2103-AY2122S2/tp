@@ -96,7 +96,7 @@ Examples:
 
 Adds an internship role to a company that already exists in the list.
 
-Format: `addRole COMPANY_INDEX n/ROLE_NAME s/STATUS b/DEADLINE d/DESCRIPTION $/STIPEND`
+Format: `addRole COMPANY_INDEX n/ROLE_NAME s/STATUS b/DEADLINE [d/DESCRIPTION] [$/STIPEND]`
 * Add internship role at the specified `COMPANY_INDEX`.
 * The `COMPANY_INDEX` must be a positive integer like 1, 2, 3, ...
 * The `ROLE_NAME` should only contain alphanumeric characters and spaces.
@@ -161,7 +161,7 @@ Action | Format, Examples
 --------|------------------
 **List companies** | `list`
 **Add company** | `addCompany n/COMPANY_NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` <br><br> e.g.,`addCompany n/Google p/98765432 e/hr_google@gmail.com a/70 Pasir Panjang Rd, #03-71 Mapletree Business City II, Singapore 117371`
-**Add role** | `addRole COMPANY_INDEX n/ROLE s/STATUS b/DEADLINE d/DESCRIPTION $/STIPEND` <br><br> e.g.,` addRole 1 n/Data Analyst s/Applying b/31 March 2022 23:59 d/Analyse marketing data $/5000`
+**Add role** | `addRole COMPANY_INDEX n/ROLE_NAME s/STATUS b/DEADLINE [d/DESCRIPTION] [$/STIPEND]` <br><br> e.g.,` addRole 1 n/Data Analyst s/applying b/31-03-2022 23:59 d/Analyse marketing data $/5000`
 **Delete company** | `deleteCompany COMPANY_INDEX `<br><br> e.g.,`deleteCompany 3 `
 **Delete role** | `deleteRole COMPANY_INDEX ROLE_INDEX` <br><br> e.g.,`deleteRole 3 1 `
 **Help** | `help`
