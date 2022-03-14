@@ -7,13 +7,13 @@ import seedu.address.model.person.Person;
 /**
  * Represents a team list in MyGM
  */
-public class TeamList {
+public class TeamMemberList {
     private ArrayList<Person> list;
 
     /**
      * Constructs an empty {@code TeamList}
      */
-    public TeamList() {
+    public TeamMemberList() {
         this.list = new ArrayList<Person>();
     }
 
@@ -22,7 +22,7 @@ public class TeamList {
      *
      * @param teamMembers An array of players to be added into the TeamList
      */
-    public TeamList(Person[] teamMembers) {
+    public TeamMemberList(Person[] teamMembers) {
         this.list = new ArrayList<Person>();
         for (int i = 0; i < teamMembers.length; i++) {
             this.list.add(teamMembers[i]);
@@ -30,11 +30,21 @@ public class TeamList {
     }
 
     /**
-     * Add a player into the teamList
+     * Adds a player into the teamList
      * @param person The player to be added
      */
-    public void addToTeamList(Person person) {
+    public void putToTeamList(Person person) {
         this.list.add(person);
+    }
+
+    /**
+     * Checks the existence of person
+     *
+     * @param person The person to be checked
+     * @return Boolean represents the existence of person
+     */
+    public boolean containsPerson(Person person) {
+        return this.list.contains(person);
     }
 
 }
