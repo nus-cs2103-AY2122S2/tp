@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.contax.model.person.Person;
@@ -81,6 +82,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The person must not already exist in the address book.
      */
     public void addPerson(Person p) {
+        addTagsNotInList(p);
         persons.add(p);
     }
 
@@ -91,7 +93,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
-
+        addTagsNotInList(editedPerson);
         persons.setPerson(target, editedPerson);
     }
 
@@ -106,7 +108,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// tag-level operations
 
     /**
-     * Returns true if there exists a {@code tag} with the same name in ContaX.
+     * Returns true if a matching {@code tag} exists in the address book.
      * @param tag The tag specified tag to search.
      * @return true if the tag exists in the tags list.
      */
@@ -115,12 +117,72 @@ public class AddressBook implements ReadOnlyAddressBook {
         return tags.contains(tag);
     }
 
+    /**
+     * Adds the given tag into the address book.
+     * Tag must not already exist in the address book.
+     */
     public void addTag(Tag tag) {
         tags.add(tag);
     }
 
+    /**
+     * Deletes the given tag from the address book.
+     * The supplied tag must already exist in the address book.
+     */
     public void removeTag(Tag tagToDelete) {
+        removeTagFromPersons(tagToDelete);
         tags.remove(tagToDelete);
+    }
+
+    /**
+     * Replaces the given {@code target} with {@code editedTag}.
+     * {@code target} must exist in the address book.
+     * {@code editedTag} must not be the same as another existing tag in the address book.
+     */
+    public void setTag(Tag target, Tag editedTag) {
+        tags.setTag(target, editedTag);
+        setPersonsWithTag(target, editedTag);
+    }
+
+    /**
+     * Disassociates the specified tag from all persons in the address book.
+     */
+    private void removeTagFromPersons(Tag tagToDelete) {
+        requireNonNull(tagToDelete);
+        List<Person> persons = getPersonList().filtered(person -> person.hasTag(tagToDelete));
+        for (int i = 0; i < persons.size(); i++) {
+            Person oldPerson = persons.get(i);
+            setPerson(oldPerson, oldPerson.withoutTag(tagToDelete));
+        }
+    }
+
+    /**
+     * Adds tags in {@code persons} that do not exist in the address book.
+     */
+    private void addTagsNotInList(Person person) {
+        requireNonNull(person);
+        Set<Tag> tagSet = person.getTags();
+        for (Tag personTag : tagSet) {
+            if (!tags.contains(personTag)) {
+                addTag(personTag);
+            }
+        }
+    }
+
+    /**
+     * Replaces {@code target} with {@code editedTag} in all persons of the address book.
+     */
+    private void setPersonsWithTag(Tag target, Tag editedTag) {
+        requireNonNull(target);
+        requireNonNull(editedTag);
+
+        List<Person> personsWithTag = getPersonList().filtered(person -> person.hasTag(target));
+
+        for (int i = 0; i < personsWithTag.size(); i++) {
+            Person person = personsWithTag.get(i);
+            Person editedPerson = person.withoutTag(target).withTag(editedTag);
+            setPerson(person, editedPerson);
+        }
     }
 
     //// util methods

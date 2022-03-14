@@ -2,7 +2,11 @@ package seedu.contax.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.contax.testutil.TypicalPersons.COLLEAGUES;
+import static seedu.contax.testutil.TypicalPersons.FRIENDS;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -45,6 +49,19 @@ class AddTagCommandTest {
         Tag duplicate = new TagBuilder().build();
 
         assertThrows(CommandException.class, () -> new AddTagCommand(duplicate).execute(modelStub));
+    }
+
+    @Test
+    public void equals() {
+        AddTagCommand addCommand = new AddTagCommand(FRIENDS);
+        AddTagCommand addCommand2 = new AddTagCommand(COLLEAGUES);
+
+        assertTrue(addCommand.equals(addCommand));
+        assertTrue(addCommand.equals(new AddTagCommand(FRIENDS)));
+
+        assertFalse(addCommand.equals(addCommand2));
+        assertFalse(addCommand.equals(null));
+        assertFalse(addCommand.equals(0));
     }
 
     private class ModelStub implements Model {
@@ -188,7 +205,8 @@ class AddTagCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        private void removeTagFromPersons(Tag tagToDelete) {
+        @Override
+        public void setTag(Tag target, Tag editedTag) {
             throw new AssertionError("This method should not be called.");
         }
 

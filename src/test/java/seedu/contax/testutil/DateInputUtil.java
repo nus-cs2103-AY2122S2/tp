@@ -6,6 +6,9 @@ import java.time.format.DateTimeFormatter;
 
 import seedu.contax.commons.util.DateUtil;
 
+/**
+ * Provides conversion service from java datetime objects to String inputs for parsing tests.
+ */
 public class DateInputUtil {
     /**
      * Returns {@code date} in a string that can be accepted as command inputs.

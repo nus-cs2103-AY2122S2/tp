@@ -83,6 +83,13 @@ public class Person {
     }
 
     /**
+     * Returns true if the specified tag exists in the {@code person}.
+     */
+    public boolean hasTag(Tag tag) {
+        return tags.contains(tag);
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
