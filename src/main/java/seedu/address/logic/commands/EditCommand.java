@@ -97,7 +97,8 @@ public class EditCommand extends Command {
 
             List<Person> filteredByClassCodeList = studentList.stream()
                     .filter(student -> student.getClassCode().toString().equals(editedPerson.getClassCode().toString())
-                            && !student.isSamePerson(editedPerson))
+                            && !student.isSamePerson(editedPerson)
+                            && !student.getStatus().toString().equals(Status.POSITIVE))
                     .collect(Collectors.toList());
 
             for (int i = 0; i < filteredByClassCodeList.size(); i++) {
