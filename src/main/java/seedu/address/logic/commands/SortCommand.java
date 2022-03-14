@@ -25,9 +25,11 @@ public class SortCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PREFIX_SORTKEY + "name";
 
     private final Comparator<Person> sortComparator;
+    private final String sortKey;
 
-    public SortCommand(Comparator<Person> sortComparator) {
+    public SortCommand(Comparator<Person> sortComparator, String sortKey) {
         this.sortComparator = sortComparator;
+        this.sortKey = sortKey;
     }
 
     @Override
@@ -41,7 +43,7 @@ public class SortCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof SortCommand // instanceof handles nulls
-                && sortComparator.equals(((SortCommand) other).sortComparator)); // state check
+                || (other instanceof SortCommand
+                && sortKey.equals(((SortCommand) other).sortKey)); // state check
     }
 }
