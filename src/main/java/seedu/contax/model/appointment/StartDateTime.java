@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
  * Represents an {@link Appointment}'s starting DateTime in the schedule.
  * Guarantees: Immutable; is always a valid {@link LocalDateTime}; Seconds field is always zeroed.
  */
-public class StartDateTime {
+public class StartDateTime implements Comparable<StartDateTime> {
     public static final String DATETIME_FORMAT = "dd-MM-yyyy HH:mm";
     public static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern(DATETIME_FORMAT);
     public static final String MESSAGE_CONSTRAINTS = "DateTime has to be valid";
@@ -41,5 +41,10 @@ public class StartDateTime {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    @Override
+    public int compareTo(StartDateTime o) {
+        return this.value.compareTo(o.value);
     }
 }

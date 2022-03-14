@@ -176,4 +176,21 @@ public class AppointmentTest {
                 + appointment.getPerson(),
                 appointment.toString());
     }
+
+    @Test
+    public void comparisonTest() {
+        Appointment refAppointment = new AppointmentBuilder()
+                .withStartDateTime(LocalDateTime.parse("2020-10-30T12:34:00")).build();
+        Appointment appointmentBefore = new AppointmentBuilder()
+                .withStartDateTime(LocalDateTime.parse("2020-10-30T12:33:00")).build();
+        Appointment appointmentAfter = new AppointmentBuilder()
+                .withStartDateTime(LocalDateTime.parse("2020-10-30T12:35:00")).build();
+        Appointment appointmentDifferentSeconds = new AppointmentBuilder()
+                .withStartDateTime(LocalDateTime.parse("2020-10-30T12:34:54")).build();
+
+        assertEquals(0, refAppointment.compareTo(refAppointment));
+        assertEquals(0, refAppointment.compareTo(appointmentDifferentSeconds));
+        assertEquals(1, refAppointment.compareTo(appointmentBefore));
+        assertEquals(-1, refAppointment.compareTo(appointmentAfter));
+    }
 }
