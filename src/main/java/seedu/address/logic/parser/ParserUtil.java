@@ -2,8 +2,10 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -156,19 +158,24 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String email} into an {@code Email}.
+     * Parses a {@code String date} into an {@code LocalDateTime}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code email} is invalid.
+     * @throws ParseException if the given {@code date} is invalid.
      */
-    public static Date parseDate(String date) throws ParseException {
+    public static LocalDateTime parseDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
 
-        // TODO: check whether date parsed is valid
-        //        if (!Email.isValidEmail(trimmedEmail)) {
-        //            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
-        //        }
-        return new Date();
+        // See whether date is valid
+        // consider abstracting into a separate class in Interview
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime dateParsed = LocalDateTime.parse(date, formatter);
+            return dateParsed;
+        } catch (DateTimeException e) {
+            throw new ParseException("Date time format should be yyyy-MM-dd HH:mm");
+        }
+
     }
 }
