@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.Flag;
 import seedu.address.model.person.Person;
 
 /**
@@ -62,6 +63,12 @@ public interface Model {
      * The person must exist in the address book.
      */
     void deletePerson(Person target);
+
+    /**
+     * Flags the given person.
+     * The person must exist in the address book.
+     */
+    void flagPerson(Person target, Flag flag);
 
     /**
      * Adds the given person.
