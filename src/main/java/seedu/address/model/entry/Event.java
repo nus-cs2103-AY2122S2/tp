@@ -54,7 +54,8 @@ public class Event extends Entry {
         }
 
         Event otherEvent = (Event) otherEntry;
-        return otherEvent.getName().equals(getName());
+        return otherEvent.getName().equals(getName())
+                && otherEvent.getCompany().equals(getCompany());
     }
 
     @Override
