@@ -133,6 +133,9 @@ public class OnboardingWindow extends UiPart<Stage> {
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
+    /**
+     * Clears the person list
+     */
     private void clearPersonList() {
         persons = new UniquePersonList();
         personListPanelPlaceholder.getChildren().remove(0);
@@ -325,6 +328,13 @@ public class OnboardingWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Enforces the user input to be equals to be given step's command.
+     * Returns 0 when the user input does not satisfy the given condition, and 1 if it does.
+     * @param step step to be checked with
+     * @param isCustom if the user input is to be matched with a hard coded string
+     * @return an integer denoting the result of check
+     */
     private int enforceUserInput(OnboardingStep step, boolean isCustom) {
         if (!commandBox.getText().equals(step.getCommand())) {
             if (commandBox.getText().equals("")) {
