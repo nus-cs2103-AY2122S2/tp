@@ -39,6 +39,8 @@ public class AppointmentCard extends UiPart<Region> {
     private Label personName;
     @FXML
     private Label personAddress;
+    @FXML
+    private Label withLabel;
 
     /**
      * Creates a {@code AppointmentCard} with the given {@code Appointment} and index to display.
@@ -59,10 +61,12 @@ public class AppointmentCard extends UiPart<Region> {
         endTime.setText(endDateTime.format(TIME_FORMATTER));
 
         if (appointmentModel.getPerson() != null) {
+            withLabel.setVisible(true);
             Person p = appointmentModel.getPerson();
             personName.setText(p.getName().fullName);
             personAddress.setText(p.getAddress().value);
         } else {
+            withLabel.setVisible(false);
             personName.setText("");
             personAddress.setText("");
         }
