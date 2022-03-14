@@ -7,7 +7,6 @@ import static seedu.contax.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_TAG;
 
-
 import java.io.File;
 
 import seedu.contax.logic.commands.ImportCsvCommand;
@@ -18,6 +17,8 @@ public class ImportCsvObjectBuilder {
     public static final String SKIP_CSV_FILEPATH = "./src/test/data/ImportCsvTest/SkipLineContaXFormat.csv";
     public static final String EMPTY_CSV_FILEPATH = "./src/test/data/ImportCsvTest/EmptyFile.csv";
     public static final String CUSTOM_COLUMNS_CSV_FILEPATH = "./src/test/data/ImportCsvTest/CustomColumnFormat.csv";
+    public static final String INVALID_FILEPATH = "./src/test/data/ImportCsvTest/InvalidFile.csv";
+
 
     public static final int DEFAULT_NAMEPOSITION = 1;
     public static final int DEFAULT_PHONEPOSITION = 2;
@@ -70,7 +71,7 @@ public class ImportCsvObjectBuilder {
     }
 
     public static String getImportCsvCommand(IndexedCsvFile indexedCsvFile) {
-        return ImportCsvCommand.COMMAND_WORD + " " +getIndexedCsvFileDetails(indexedCsvFile);
+        return ImportCsvCommand.COMMAND_WORD + " " + getIndexedCsvFileDetails(indexedCsvFile);
     }
 
     public static String getIndexedCsvFileDetails(IndexedCsvFile indexedCsvFile) {

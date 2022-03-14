@@ -10,6 +10,7 @@ import static seedu.contax.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -78,12 +79,14 @@ public class ImportCsvCommand extends Command {
         Email toAddEmail = ParserUtil.parseEmail(importedPerson[toImport.getEmailPositionIndex()]);
         Address toAddAddress = ParserUtil.parseAddress(importedPerson[toImport.getAddressPositionIndex()]
                 .replace("\"", ""));
-        String[] tags = importedPerson[toImport.getTagPositionIndex()].split(";");
-        for (String tag : tags) {
-            System.out.println(tag);
+        String[] tags;
+        Set<Tag> toAddTag;
+        try {
+            tags = importedPerson[toImport.getTagPositionIndex()].split(";");
+            toAddTag = ParserUtil.parseTags(Arrays.asList(tags));
+        } catch (ArrayIndexOutOfBoundsException e) {
+            toAddTag = new HashSet<>();
         }
-        Set<Tag> toAddTag = ParserUtil.parseTags(Arrays.asList(tags));
-
         return new Person(toAddName, toAddPhone, toAddEmail, toAddAddress, toAddTag);
     }
     private CommandResult outputStringBuilder(List<Integer> skippedLines) {
