@@ -1,7 +1,6 @@
 package seedu.trackbeau.ui;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -117,6 +116,9 @@ public class MainWindow extends UiPart<Stage> {
                 case "statisticsLabel":
                     statisticsPanel = new StatisticsPanel();
                     detailsPanelPlaceholder.getChildren().add(statisticsPanel.getRoot());
+                    break;
+                default:
+                    // nothing to add to details panel placeholder
                     break;
                 }
             }

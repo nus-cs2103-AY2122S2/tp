@@ -5,7 +5,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.trackbeau.model.customer.Customer;
 
-public class StatisticsPanel extends UiPart<Region>{
+public class StatisticsPanel extends UiPart<Region> {
     private static final String FXML = "StatisticsPanel.fxml";
 
     @FXML
