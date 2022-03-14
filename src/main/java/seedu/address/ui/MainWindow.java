@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputControl;
@@ -37,6 +38,7 @@ import seedu.address.ui.listpanel.StudentListPanel;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static final double MAX_DIVIDER_POSITION = 0.5;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -71,6 +73,8 @@ public class MainWindow extends UiPart<Stage> {
     private Tab studentTab;
     @FXML
     private Tab lessonTab;
+    @FXML
+    private SplitPane splitPane;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -88,6 +92,9 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
+        // Set max size for left list to 50% of the window
+        listPane.maxWidthProperty().bind(splitPane.widthProperty().multiply(MAX_DIVIDER_POSITION));
     }
 
     public Stage getPrimaryStage() {
