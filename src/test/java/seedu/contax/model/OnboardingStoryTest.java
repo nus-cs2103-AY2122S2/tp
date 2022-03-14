@@ -20,9 +20,9 @@ public class OnboardingStoryTest {
         assertTrue(story1.equals(story2));
 
         OnboardingStep step1 = new OnboardingStep("message 1", 0, 0, 0,
-                0, 0, 0, "", null, 1);
+                0, 0, 0, "", null, 1, false);
         OnboardingStep step2 = new OnboardingStep("message 2", 0, 0, 0,
-                0, 0, 0, "", null, 1);
+                0, 0, 0, "", null, 1, false);
 
 
 
@@ -53,7 +53,7 @@ public class OnboardingStoryTest {
     public void addStory() {
         OnboardingStory story1 = new OnboardingStory();
         OnboardingStep step1 = new OnboardingStep("message 1", 0, 0, 0,
-                0, 0, 0, "", null, 1);
+                0, 0, 0, "", null, 1, false);
         story1.addStory(step1);
 
         // Size of story with 1 step

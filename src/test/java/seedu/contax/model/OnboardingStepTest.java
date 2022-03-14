@@ -16,9 +16,9 @@ public class OnboardingStepTest {
     @Test
     public void equals() {
         OnboardingStep step1 = new OnboardingStep("message 1", 0, 0, 0,
-                0, 0, 0, "", null, 1);
+                0, 0, 0, "", null, 1, false);
         OnboardingStep step2 = new OnboardingStep("message 1", 0, 0, 0,
-                0, 0, 0, "", null, 1);
+                0, 0, 0, "", null, 1, false);
 
         // same object -> returns true
         assertTrue(step1.equals(step1));
@@ -34,30 +34,32 @@ public class OnboardingStepTest {
 
         // attribute difference checks
         assertFalse(step1.equals(new OnboardingStep("message 2", 0, 0, 0,
-                0, 0, 0, "", null, 1)));
+                0, 0, 0, "", null, 1, false)));
         assertFalse(step1.equals(new OnboardingStep("message 1", 1, 0, 0,
-                0, 0, 0, "", null, 1)));
+                0, 0, 0, "", null, 1, false)));
         assertFalse(step1.equals(new OnboardingStep("message 1", 0, 1, 0,
-                0, 0, 0, "", null, 1)));
+                0, 0, 0, "", null, 1, false)));
         assertFalse(step1.equals(new OnboardingStep("message 1", 0, 0, 1,
-                0, 0, 0, "", null, 1)));
+                0, 0, 0, "", null, 1, false)));
         assertFalse(step1.equals(new OnboardingStep("message 1", 0, 0, 0,
-                1, 0, 0, "", null, 1)));
+                1, 0, 0, "", null, 1, false)));
         assertFalse(step1.equals(new OnboardingStep("message 1", 0, 0, 0,
-                0, 1, 0, "", null, 1)));
+                0, 1, 0, "", null, 1, false)));
         assertFalse(step1.equals(new OnboardingStep("message 1", 0, 0, 0,
-                0, 0, 1, "", null, 1)));
+                0, 0, 1, "", null, 1, false)));
         assertFalse(step1.equals(new OnboardingStep("message 1", 0, 0, 0,
-                0, 0, 0, "1", null, 1)));
+                0, 0, 0, "1", null, 1, false)));
         assertFalse(step1.equals(new OnboardingStep("message 1", 0, 0, 0,
-                0, 0, 0, "", null, 2)));
+                0, 0, 0, "", null, 2, false)));
+        assertFalse(step1.equals(new OnboardingStep("message 1", 0, 0, 0,
+                0, 0, 0, "", null, 2, true)));
 
         OnboardingStep step4 = new OnboardingStep("message 1", 2, 0, 0,
-                0, 1, 0, "", ALICE, 1);
+                0, 1, 0, "", ALICE, 1, false);
         OnboardingStep step5 = new OnboardingStep("message 1", 2, 0, 0,
-                0, 1, 0, "", BOB, 1);
+                0, 1, 0, "", BOB, 1, false);
         OnboardingStep step6 = new OnboardingStep("message 1", 2, 0, 0,
-                0, 1, 0, "", ALICE, 1);
+                0, 1, 0, "", ALICE, 1, false);
 
         // different person
         assertFalse(step4.equals(step5));
@@ -69,13 +71,13 @@ public class OnboardingStepTest {
     @Test
     public void isValidStep() {
         OnboardingStep step1 = new OnboardingStep("message", 0, 0, 0,
-                0, 0, 0, "", null, 1);
+                0, 0, 0, "", null, 1, false);
         OnboardingStep step2 = new OnboardingStep("message", -1, 0, 0,
-                0, 0, 0, "", null, 1);
+                0, 0, 0, "", null, 1, false);
         OnboardingStep step3 = new OnboardingStep("message", 0, 0, 0,
-                0, 4, 0, "", null, 1);
+                0, 4, 0, "", null, 1, false);
         OnboardingStep step4 = new OnboardingStep("message", 0, 0, 0,
-                5, 0, 0, "", null, 1);
+                5, 0, 0, "", null, 1, false);
 
         // Position, highlight and overlay options are valid -> returns true
         assertTrue(step1.isValid());
@@ -93,20 +95,30 @@ public class OnboardingStepTest {
     @Test
     public void setEventType() {
         OnboardingStep step1 = new OnboardingStep("message", 0, 0, 0,
-                0, 0, 0, "", null, 1);
+                0, 0, 0, "", null, 1, false);
         step1.setEventType(1);
 
         // Value is set after setting -> returns true
         assertEquals(step1.getPositionOption(), 1);
     }
 
+    @Test
+    public void setDisplayMessage() {
+        OnboardingStep step1 = new OnboardingStep("message", 0, 0, 0,
+                0, 0, 0, "", null, 1, false);
+        step1.setDisplayMessage("54321");
+
+        // Value is set after setting -> returns true
+        assertEquals(step1.getDisplayMessage(), "54321");
+    }
+
     @Test void hashCodeTest() {
         OnboardingStep step1 = new OnboardingStep("message 1", 0, 0, 0,
-                0, 0, 0, "", null, 1);
+                0, 0, 0, "", null, 1, false);
         OnboardingStep step2 = new OnboardingStep("message 1", 0, 0, 0,
-                0, 0, 0, "", null, 1);
+                0, 0, 0, "", null, 1, false);
         OnboardingStep step3 = new OnboardingStep("message 1", 2, 0, 0,
-                0, 1, 0, "", null, 1);
+                0, 1, 0, "", null, 1, false);
 
         // same object -> returns true
         assertEquals(step1.hashCode(), step1.hashCode());
