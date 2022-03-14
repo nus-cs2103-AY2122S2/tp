@@ -8,6 +8,7 @@ import static seedu.contax.testutil.Assert.assertThrows;
 import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALONE;
 import static seedu.contax.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,6 +19,7 @@ import seedu.contax.commons.core.index.Index;
 import seedu.contax.logic.commands.AddAppointmentCommand;
 import seedu.contax.logic.commands.AddCommand;
 import seedu.contax.logic.commands.AddTagCommand;
+import seedu.contax.logic.commands.AppointmentsBetweenCommand;
 import seedu.contax.logic.commands.ClearCommand;
 import seedu.contax.logic.commands.Command;
 import seedu.contax.logic.commands.DeleteAppointmentCommand;
@@ -40,6 +42,7 @@ import seedu.contax.model.person.Person;
 import seedu.contax.model.tag.Tag;
 import seedu.contax.testutil.AppointmentBuilder;
 import seedu.contax.testutil.AppointmentUtil;
+import seedu.contax.testutil.DateInputUtil;
 import seedu.contax.testutil.EditAppointmentDescriptorBuilder;
 import seedu.contax.testutil.EditPersonDescriptorBuilder;
 import seedu.contax.testutil.PersonBuilder;
@@ -156,6 +159,14 @@ public class AddressBookParserTest {
     public void parseCommand_deleteAppointment() throws Exception {
         assertTrue(parser.parseCommand(DeleteAppointmentCommand.COMMAND_WORD + " 1")
                 instanceof DeleteAppointmentCommand);
+    }
+
+    @Test
+    public void parseCommand_appointmentsBetween() throws Exception {
+        LocalDateTime refDateTime = APPOINTMENT_ALONE.getStartDateTime().value;
+        assertTrue(parser.parseCommand(AppointmentsBetweenCommand.COMMAND_WORD
+                + DateInputUtil.getDateRangeInput(refDateTime, refDateTime.plusMinutes(50)))
+                instanceof AppointmentsBetweenCommand);
     }
 
     @Test

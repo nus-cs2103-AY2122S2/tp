@@ -35,6 +35,8 @@ public class AppointmentsBetweenCommand extends Command {
     public static final String MESSAGE_START_TIME_INVALID = "The start time provided is invalid!";
     public static final String MESSAGE_END_DATE_INVALID = "The end date provided is invalid!";
     public static final String MESSAGE_END_TIME_INVALID = "The end time provided is invalid!";
+    public static final String MESSAGE_END_BEFORE_START = "The end date time provided is before the"
+            + " start date time!";
 
     private final LocalDateTime rangeStart;
     private final LocalDateTime rangeEnd;
@@ -46,6 +48,9 @@ public class AppointmentsBetweenCommand extends Command {
      * @param rangeEnd
      */
     public AppointmentsBetweenCommand(LocalDateTime rangeStart, LocalDateTime rangeEnd) {
+        requireNonNull(rangeStart);
+        requireNonNull(rangeEnd);
+
         this.rangeStart = rangeStart;
         this.rangeEnd = rangeEnd;
     }
@@ -55,5 +60,13 @@ public class AppointmentsBetweenCommand extends Command {
         requireNonNull(model);
         model.updateFilteredAppointmentList(new DateRangePredicate(rangeStart, rangeEnd));
         return new CommandResult(MESSAGE_SUCCESS, GuiListContentType.APPOINTMENT);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof AppointmentsBetweenCommand // instanceof handles nulls
+                && rangeStart.equals(((AppointmentsBetweenCommand) other).rangeStart)
+                && rangeEnd.equals(((AppointmentsBetweenCommand) other).rangeEnd));
     }
 }
