@@ -50,11 +50,14 @@ public class Overlay extends UiPart<Region> {
     }
 
     /**
-     * Show only the given regio
+     * Show only the given region
      * @param boundX DoubleProperty to bind layoutX to
      * @param boundY DoubleProperty to bind layoutY to
      * @param height ReadOnlyDoubleProperty for height of window
      * @param width ReadOnlyDoubleProperty for width o  window
+     * @param parentHeight ReadOnlyDoubleProperty for height of parent window
+     * @param parentWidth ReadOnlyDoubleProperty for height of parent window
+     * @param option overlay option
      */
     public void showOnly(DoubleProperty boundX, DoubleProperty boundY,
                          ReadOnlyDoubleProperty height, ReadOnlyDoubleProperty width,
