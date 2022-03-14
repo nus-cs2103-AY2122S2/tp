@@ -11,6 +11,7 @@ import unibook.model.Model;
 import unibook.model.ReadOnlyUniBook;
 import unibook.model.module.Module;
 import unibook.model.person.Person;
+import unibook.model.person.exceptions.PersonNoSubtypeException;
 
 /**
  * API of the Logic component

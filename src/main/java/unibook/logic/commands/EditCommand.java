@@ -14,32 +14,33 @@ import static unibook.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.Optional;
 import java.util.Set;
 
+
 import javafx.collections.ObservableList;
+import unibook.commons.core.LogsCenter;
 import unibook.commons.core.Messages;
 import unibook.commons.core.index.Index;
 import unibook.commons.util.CollectionUtil;
+import unibook.logic.LogicManager;
 import unibook.logic.commands.exceptions.CommandException;
+import unibook.logic.parser.exceptions.ParseException;
 import unibook.model.Model;
 import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
 import unibook.model.module.ModuleName;
 import unibook.model.module.exceptions.ModuleNotFoundException;
-import unibook.model.module.exceptions.PersonTagNotFoundException;
-import unibook.model.person.Email;
-import unibook.model.person.Name;
-import unibook.model.person.Person;
-import unibook.model.person.Phone;
-import unibook.model.person.Professor;
-import unibook.model.person.Student;
+import unibook.model.person.*;
 import unibook.model.tag.Tag;
 
 /**
  * Edits the details of an existing person in the UniBook.
  */
 public class EditCommand extends Command {
+
+    private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     public static final String COMMAND_WORD = "edit";
 
@@ -75,6 +76,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the UniBook.";
     public static final String MESSAGE_DUPLICATE_MODULE = "This module already exists in the UniBook.";
+    public static final String MESSAGE_PERSON_NO_SUBTYPE = "Person must be a professor or student";
+
 
     private final Index index;
     private EditPersonDescriptor editPersonDescriptor;
@@ -108,10 +111,10 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, Boolean isPersonListShowing,
-                                 Boolean isModuleListShowing) throws CommandException,
-                                                     ModuleNotFoundException, PersonTagNotFoundException {
+                                 Boolean isModuleListShowing) throws CommandException, ModuleNotFoundException {
         requireNonNull(model);
 
+        // Edit person
         if (this.editModuleDescriptor == null) {
             List<Person> lastShownList = model.getFilteredPersonList();
             List<Module> latestModList = model.getFilteredModuleList();
@@ -122,6 +125,8 @@ public class EditCommand extends Command {
 
             Person personToEdit = lastShownList.get(index.getZeroBased());
             Module checkMod = null;
+
+            // Checks if module that want to add to person is valid
             if (!editPersonDescriptor.getModules().equals(Optional.empty()) && latestModList.size() != 0) {
                 checkMod = editPersonDescriptor.getModules().get().iterator().next();
                 if (!latestModList.contains(checkMod)) {
@@ -130,22 +135,18 @@ public class EditCommand extends Command {
             }
 
             Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
-
-            // Temporarily using tags to identify whether person is prof or student
-            // Need to change the EditPersonDescriptor to include type of person, maybe EditProfDescriptor etc
-            String editedPersonType = null;
+            logger.info(String.valueOf(editedPerson instanceof Professor));
+            logger.info(String.valueOf(editedPerson instanceof Student));
 
             // When adding new module with nm/, adds prof/student to person list in each mod
             if (checkMod != null) {
-                editedPersonType = editPersonDescriptor.getTags().get().iterator().next().tagName.toLowerCase();
-                if (editedPersonType == null) {
-                    throw new PersonTagNotFoundException();
-                }
                 int modIdx = latestModList.indexOf(checkMod);
-                if (editedPersonType.equals("professor")) {
+                if (editedPerson instanceof Professor) {
                     latestModList.get(modIdx).addProfessor((Professor) editedPerson);
-                } else {
+                } else if (editedPerson instanceof Student){
                     latestModList.get(modIdx).addStudent((Student) editedPerson);
+                } else {
+                    throw new CommandException(MESSAGE_PERSON_NO_SUBTYPE);
                 }
             }
 
@@ -155,18 +156,20 @@ public class EditCommand extends Command {
 
             // Change person in every module that has this person
             for (Module mod : latestModList) {
-                if (editedPersonType.equals("professor")) {
+                if (editedPerson instanceof Professor) {
                     ObservableList<Professor> profList = mod.getProfessors();
                     if (profList.contains(personToEdit)) {
                         int profIdx = profList.indexOf(personToEdit);
                         profList.set(profIdx, (Professor) editedPerson);
                     }
-                } else {
+                } else if(editedPerson instanceof Student) {
                     ObservableList<Student> studentList = mod.getStudents();
                     if (studentList.contains(personToEdit)) {
                         int studentIdx = studentList.indexOf(personToEdit);
                         studentList.set(studentIdx, (Student) editedPerson);
                     }
+                } else {
+                    throw new CommandException(MESSAGE_PERSON_NO_SUBTYPE);
                 }
             }
 
@@ -175,6 +178,8 @@ public class EditCommand extends Command {
             return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
 
         } else {
+
+            // Edit module
             List<Person> lastPersonList = model.getFilteredPersonList();
             List<Module> lastShownList = model.getFilteredModuleList();
 
@@ -191,10 +196,11 @@ public class EditCommand extends Command {
 
             // Find all profs and students with this module and will be edited
             for (Person person : lastPersonList) {
-                Set<Module> moduleSet = person.getModules();
+                Set<Module> moduleSet = person.getModulesModifiable();
                 if (moduleSet.contains(moduleToEdit)) {
                     moduleSet.remove(moduleToEdit);
                     moduleSet.add(editedModule);
+                    person.setModules(moduleSet);
                 }
             }
 
@@ -218,7 +224,11 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Set<Module> updatedModules = editPersonDescriptor.getModules().orElse(personToEdit.getModules());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedTags, updatedModules);
+        if (personToEdit instanceof Professor) {
+            Office updatedOffice = ((Professor) personToEdit).getOffice();
+            return new Professor(updatedName, updatedPhone, updatedEmail, updatedTags, updatedOffice, updatedModules);
+        }
+        return new Student(updatedName, updatedPhone, updatedEmail, updatedTags, updatedModules);
     }
 
     /**
@@ -277,6 +287,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setTags(toCopy.tags);
             setModules(toCopy.modules);
+
         }
 
         /**

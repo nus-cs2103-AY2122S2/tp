@@ -52,6 +52,7 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            logger.info(index.toString());
         } catch (ParseException pe) {
             if (argMultimap.getValue(PREFIX_OPTION).get().equals("person")) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
