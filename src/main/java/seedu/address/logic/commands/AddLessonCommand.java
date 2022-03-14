@@ -1,7 +1,14 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION_HOURS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION_MINUTES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
