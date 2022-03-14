@@ -4,8 +4,10 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.function.Predicate;
 
+import javafx.collections.ObservableList;
 import unibook.model.Model;
 import unibook.model.ModelManager;
+import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
 import unibook.model.person.Person;
 import unibook.model.person.Professor;
@@ -19,11 +21,17 @@ public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
 
     public static final String MESSAGE_SUCCESS = "Listed everything.";
-    public static final String MESSAGE_SUCCESS_MODULE = "Listed all persons with specified module.";
+    public static final String MESSAGE_SUCCESS_PEOPLE_MODULE = "Listed all persons with specified module.";
+    public static final String MESSAGE_SUCCESS_MODULE = "Listed all modules with specified code.";
     public static final String MESSAGE_SUCCESS_TYPE = "Listed all persons with specified type.";
     public static final String MESSAGE_SUCCESS_MODULEANDTYPE = "Listed all persons with specified type "
             + "in specified module.";
     public static final String MESSAGE_SUCCESS_VIEW = "Switched view successfully.";
+
+    public static final String MESSAGE_MODULE_DOES_NOT_EXIST = "The module entered"
+            + " does not exist in the UniBook";
+
+    public static final String MESSAGE_WRONG_VIEW = "The command requires you to switch views.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Lists according to the given criteria\n "
@@ -99,38 +107,70 @@ public class ListCommand extends Command {
         model.updateFilteredModuleList(Model.PREDICATE_SHOW_ALL_MODULES);
     }
 
+    private boolean moduleCodeExists(ObservableList<Module> modules) {
+        for (Module m : modules) {
+            if (m.hasModuleCode(this.moduleCode)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public CommandResult execute(Model model, Boolean isPersonListShowing,
                                  Boolean isModuleListShowing) {
         requireNonNull(model);
         showAll(model);
+        ModelManager modelManager = (ModelManager) model;
         switch (commandType) {
         case ALL:
             return new CommandResult(MESSAGE_SUCCESS);
         case MODULE:
-            Predicate<Person> showSpecificPeoplePredicate = p -> p.hasModule(this.moduleCode);
-            model.updateFilteredPersonList(showSpecificPeoplePredicate);
-            return new CommandResult(MESSAGE_SUCCESS_MODULE);
-        case TYPE:
-            if (type.equals("professors")) {
-                model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PROFESSORS);
-            } else {
-                model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_STUDENTS);
+            if (!moduleCodeExists(model.getUniBook().getModuleList())) {
+                return new CommandResult(MESSAGE_MODULE_DOES_NOT_EXIST);
             }
+            if (modelManager.getUi().isPersonListShowing()) {
+                Predicate<Person> showSpecificPeoplePredicate = p -> p.hasModule(this.moduleCode);
+                model.updateFilteredPersonList(showSpecificPeoplePredicate);
+                return new CommandResult(MESSAGE_SUCCESS_PEOPLE_MODULE);
+            } else {
+                Predicate<Module> showSpecificModulePredicate = m -> m.hasModuleCode(this.moduleCode);
+                model.updateFilteredModuleList(showSpecificModulePredicate);
+                return new CommandResult(MESSAGE_SUCCESS_MODULE);
+            }
+
+        case TYPE:
+            if (modelManager.getUi().isPersonListShowing()) {
+                if (type.equals("professors")) {
+                    model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PROFESSORS);
+                } else {
+                    model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_STUDENTS);
+                }
+            } else {
+                return new CommandResult(MESSAGE_WRONG_VIEW);
+            }
+
             return new CommandResult(MESSAGE_SUCCESS_TYPE);
         case MODULEANDTYPE:
-            if (type.equals("professors")) {
-                Predicate<Person> showSpecificProfessorPredicate = p -> p.hasModule(this.moduleCode)
-                        && (p instanceof Professor);
-                model.updateFilteredPersonList(showSpecificProfessorPredicate);
+            if (modelManager.getUi().isPersonListShowing()) {
+                if (!moduleCodeExists(model.getUniBook().getModuleList())) {
+                    return new CommandResult(MESSAGE_MODULE_DOES_NOT_EXIST);
+                }
+                if (type.equals("professors")) {
+                    Predicate<Person> showSpecificProfessorPredicate = p -> p.hasModule(this.moduleCode)
+                            && (p instanceof Professor);
+                    model.updateFilteredPersonList(showSpecificProfessorPredicate);
+                } else {
+                    Predicate<Person> showSpecificStudentPredicate = p -> p.hasModule(this.moduleCode)
+                            && (p instanceof Student);
+                    model.updateFilteredPersonList(showSpecificStudentPredicate);
+                }
+                return new CommandResult(MESSAGE_SUCCESS_MODULEANDTYPE);
             } else {
-                Predicate<Person> showSpecificStudentPredicate = p -> p.hasModule(this.moduleCode)
-                        && (p instanceof Student);
-                model.updateFilteredPersonList(showSpecificStudentPredicate);
+                return new CommandResult(MESSAGE_WRONG_VIEW);
             }
-            return new CommandResult(MESSAGE_SUCCESS_MODULEANDTYPE);
+
         case VIEW:
-            ModelManager modelManager = (ModelManager) model;
             if (this.viewType == ListView.MODULES) {
                 modelManager.getUi().setModuleListPanel();
             } else {
