@@ -41,7 +41,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        List argumentList = Arrays.asList(trimmedArgs.split("\\s+"));
+        List<String> argumentList = Arrays.asList(trimmedArgs.split("\\s+"));
 
         switch (searchAreaKeyWord.toLowerCase()) {
         case "name":
