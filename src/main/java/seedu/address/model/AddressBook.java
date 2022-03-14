@@ -160,6 +160,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
+    public ObservableList<Interview> getInterviewList() {
+        return interviews.asUnmodifiableObservableList();
+    }
+
+    @Override
     public ObservableList<Position> getPositionList() {
         return positions.asUnmodifiableObservableList();
     }

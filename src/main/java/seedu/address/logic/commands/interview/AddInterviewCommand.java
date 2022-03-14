@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
@@ -27,13 +27,13 @@ public class AddInterviewCommand extends AddCommand {
     public static final String MESSAGE_DUPLICATE_INTERVIEW = "This interview already exists in the address book";
 
     private final Index applicantIndex;
-    private final Date date;
+    private final LocalDateTime date;
     private final Index positionIndex;
 
     /**
      * Creates an AddApplicantCommand to add the specified {@code Interview}
      */
-    public AddInterviewCommand(Index applicantIndex, Date date, Index positionIndex) {
+    public AddInterviewCommand(Index applicantIndex, LocalDateTime date, Index positionIndex) {
         requireNonNull(applicantIndex);
         requireNonNull(date);
         requireNonNull(positionIndex);

@@ -24,6 +24,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Applicant> filteredApplicants;
+    private final FilteredList<Interview> filteredInterviews;
     private final FilteredList<Position> filteredPositions;
 
     /**
@@ -31,12 +32,12 @@ public class ModelManager implements Model {
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
-
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredApplicants = new FilteredList<>(this.addressBook.getPersonList());
+        filteredInterviews = new FilteredList<>(this.addressBook.getInterviewList());
         filteredPositions = new FilteredList<>(this.addressBook.getPositionList());
     }
 
@@ -124,7 +125,7 @@ public class ModelManager implements Model {
     @Override
     public void addInterview(Interview interview) {
         addressBook.addInterview(interview);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredInterviewList(PREDICATE_SHOW_ALL_INTERVIEWS);
     }
 
     @Override
@@ -159,6 +160,23 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Applicant> predicate) {
         requireNonNull(predicate);
         filteredApplicants.setPredicate(predicate);
+    }
+
+    //=========== Filtered Interview List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Interview} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Interview> getFilteredInterviewList() {
+        return filteredInterviews;
+    }
+
+    @Override
+    public void updateFilteredInterviewList(Predicate<Interview> predicate) {
+        requireNonNull(predicate);
+        filteredInterviews.setPredicate(predicate);
     }
 
     //=========== Filtered Position List Accessors =============================================================

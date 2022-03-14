@@ -149,6 +149,11 @@ public class AddApplicantCommandTest {
         }
 
         @Override
+        public ObservableList<Interview> getFilteredInterviewList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Position> getFilteredPositionList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -160,6 +165,11 @@ public class AddApplicantCommandTest {
 
         @Override
         public void addInterview(Interview interview) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredInterviewList(Predicate<Interview> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
