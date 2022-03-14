@@ -188,7 +188,7 @@ _Details coming soon ..._
 
 _Details coming soon ..._
 
-[<img src="images/toc-icon.png" width="25px">](#table-of-contents)
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
 
