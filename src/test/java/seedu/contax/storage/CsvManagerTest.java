@@ -4,6 +4,7 @@ import static seedu.contax.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.contax.logic.commands.ExportCsvCommand;
 import seedu.contax.logic.commands.ImportCsvCommand;
 import seedu.contax.logic.commands.exceptions.CommandException;
 import seedu.contax.model.AddressBook;
@@ -31,10 +32,11 @@ public class CsvManagerTest {
     private static final String PERSON3_EMAIL = "example3@example.com";
     private static final String PERSON3_ADDRESS = "Example address, with comma";
 
-    private String existingFilePath = "./src/test/data/ExportCsvTest/ValidAddressBook.csv";
-    private String nonExistentOutputFilePath = "./src/test/data/ExportCsvTest/nonExistentFile.csv";
+    private static final String EXISTING_FILEPATH = "./src/test/data/ExportCsvTest/ValidAddressBook.csv";
+    private static final String NONEXISTANT_FILEPATH = "./src/test/data/ExportCsvTest/nonExistentFile.csv";
+    private static final String COMMA_FILEPATH = "./src/test/data/ExportCsvTest/addressWithComma.csv";
+    private static final String NOTAG_FILEPATH = "./src/test/data/ExportCsvTest/noTags.csv";
 
-    private String addressWithComma = "./src/test/data/ExportCsvTest/addressWithComma.csv";
     private Model model = new ModelManager(new AddressBook(), new Schedule(), new UserPrefs());
 
 
@@ -51,9 +53,9 @@ public class CsvManagerTest {
                 .withAddress(PERSON2_ADDRESS).withTags("tag1");
         model.addPerson(personBuilder2.build());
 
-        CsvManager manager = new CsvManager(model);
-        manager.exportCsv(existingFilePath);
-        IndexedCsvFile importBack = new ImportCsvObjectBuilder(existingFilePath).build();
+        ExportCsvCommand exportCsvCommand = new ExportCsvCommand(EXISTING_FILEPATH);
+        exportCsvCommand.execute(model);
+        IndexedCsvFile importBack = new ImportCsvObjectBuilder(EXISTING_FILEPATH).build();
         ImportCsvCommand importCsvCommand = new ImportCsvCommand(importBack);
         //Build empty resultant model
         Model resultantModel = new ModelManager(new AddressBook(), new Schedule(), new UserPrefs());
@@ -74,9 +76,9 @@ public class CsvManagerTest {
                 .withAddress(PERSON2_ADDRESS).withTags("tag1");
         model.addPerson(personBuilder2.build());
 
-        CsvManager manager = new CsvManager(model);
-        manager.exportCsv(existingFilePath);
-        IndexedCsvFile importBack = new ImportCsvObjectBuilder(existingFilePath).build();
+        ExportCsvCommand exportCsvCommand = new ExportCsvCommand(NONEXISTANT_FILEPATH);
+        exportCsvCommand.execute(model);
+        IndexedCsvFile importBack = new ImportCsvObjectBuilder(NONEXISTANT_FILEPATH).build();
         ImportCsvCommand importCsvCommand = new ImportCsvCommand(importBack);
         //Build empty resultant model
         Model resultantModel = new ModelManager(new AddressBook(), new Schedule(), new UserPrefs());
@@ -97,9 +99,9 @@ public class CsvManagerTest {
                 .withAddress(PERSON3_ADDRESS).withTags("tag1");
         model.addPerson(personBuilder3.build());
 
-        CsvManager manager = new CsvManager(model);
-        manager.exportCsv(addressWithComma);
-        IndexedCsvFile importBack = new ImportCsvObjectBuilder(addressWithComma).build();
+        ExportCsvCommand exportCsvCommand = new ExportCsvCommand(COMMA_FILEPATH);
+        exportCsvCommand.execute(model);
+        IndexedCsvFile importBack = new ImportCsvObjectBuilder(COMMA_FILEPATH).build();
         ImportCsvCommand importCsvCommand = new ImportCsvCommand(importBack);
         //Build empty resultant model
         Model resultantModel = new ModelManager(new AddressBook(), new Schedule(), new UserPrefs());
@@ -120,9 +122,9 @@ public class CsvManagerTest {
                 .withAddress(PERSON2_ADDRESS);
         model.addPerson(personBuilder2.build());
 
-        CsvManager manager = new CsvManager(model);
-        manager.exportCsv(existingFilePath);
-        IndexedCsvFile importBack = new ImportCsvObjectBuilder(existingFilePath).build();
+        ExportCsvCommand exportCsvCommand = new ExportCsvCommand(NOTAG_FILEPATH);
+        exportCsvCommand.execute(model);
+        IndexedCsvFile importBack = new ImportCsvObjectBuilder(NOTAG_FILEPATH).build();
         ImportCsvCommand importCsvCommand = new ImportCsvCommand(importBack);
         //Build empty resultant model
         Model resultantModel = new ModelManager(new AddressBook(), new Schedule(), new UserPrefs());

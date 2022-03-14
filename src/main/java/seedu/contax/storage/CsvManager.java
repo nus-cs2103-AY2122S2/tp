@@ -8,13 +8,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.function.BiFunction;
+import java.util.function.UnaryOperator;
 
 import seedu.contax.model.IndexedCsvFile;
 import seedu.contax.model.Model;
-import seedu.contax.model.person.Person;
-import seedu.contax.model.tag.Tag;
 
 /**
  * Manager to handle import/export csv logic
@@ -24,6 +22,7 @@ public class CsvManager {
 
     private Model model;
     private BiFunction<Integer, String[], Boolean> lineAction;
+    private UnaryOperator<List<String[]>> csvLines;
 
     public CsvManager(Model model) {
         this.model = model;
@@ -35,6 +34,14 @@ public class CsvManager {
     public CsvManager(Model model, BiFunction<Integer, String[], Boolean> lineAction) {
         this.model = model;
         this.lineAction = lineAction;
+    }
+
+    /**
+     * Creates a CsvManager to import to specified {@code model}
+     */
+    public CsvManager(Model model, UnaryOperator<List<String[]>> csvLines) {
+        this.model = model;
+        this.csvLines = csvLines;
     }
 
     /**
@@ -73,23 +80,18 @@ public class CsvManager {
         try {
             File exportedCsvFile = new File(filePath);
             exportedCsvFile.createNewFile();
-            List<Person> listOfPersons = model.getFilteredPersonList();
             BufferedWriter exportedCsvWriter = new BufferedWriter(new FileWriter(exportedCsvFile));
             exportedCsvWriter.write(CSV_HEADER);
             exportedCsvWriter.newLine();
-            for (Person person : listOfPersons) {
-                exportedCsvWriter.write(person.getName().toString() + ",");
-                exportedCsvWriter.write(person.getPhone().toString() + ",");
-                exportedCsvWriter.write(person.getEmail().toString() + ",");
-                if (person.getAddress().toString().contains(",")) {
-                    exportedCsvWriter.write("\"" + person.getAddress().toString() + "\",");
-                } else {
-                    exportedCsvWriter.write(person.getAddress().toString() + ",");
-                }
-                Set<Tag> personTags = person.getTags();
-                for (Tag tag : personTags) {
-                    exportedCsvWriter.write(tag.getTagName() + ";");
-                }
+
+            List<String[]> csvData = new ArrayList<>();
+            csvData = csvLines.apply(csvData);
+            for (String[] line : csvData) {
+                exportedCsvWriter.write(line[0] + ",");
+                exportedCsvWriter.write(line[1] + ",");
+                exportedCsvWriter.write(line[2] + ",");
+                exportedCsvWriter.write(line[3] + ",");
+                exportedCsvWriter.write(line[4]);
                 exportedCsvWriter.newLine();
             }
             exportedCsvWriter.flush();
