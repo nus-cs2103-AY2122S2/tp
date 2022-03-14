@@ -4,7 +4,6 @@ import static manageezpz.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_TIME;
 
-import java.time.LocalTime;
 import java.util.stream.Stream;
 
 import manageezpz.logic.commands.AddEventTaskCommand;
@@ -12,6 +11,7 @@ import manageezpz.logic.parser.exceptions.ParseException;
 import manageezpz.model.task.Date;
 import manageezpz.model.task.Description;
 import manageezpz.model.task.Event;
+import manageezpz.model.task.Time;
 
 public class AddEventTaskCommandParser implements Parser<AddEventTaskCommand> {
 
@@ -34,8 +34,8 @@ public class AddEventTaskCommandParser implements Parser<AddEventTaskCommand> {
         String atDateTime = argMultimapEvent.getValue(PREFIX_TIME).get();
         String[] parseAtDateTime = atDateTime.split(" ");
         Date date = ParserUtil.parseDate(parseAtDateTime[0]);
-        LocalTime startTime = LocalTime.parse(parseAtDateTime[1]);
-        LocalTime endTime = LocalTime.parse(parseAtDateTime[2]);
+        Time startTime = ParserUtil.parseTime(parseAtDateTime[1]);
+        Time endTime = ParserUtil.parseTime(parseAtDateTime[2]);
         Event event = new Event(desc, date, startTime, endTime);
         return new AddEventTaskCommand(event);
     }
