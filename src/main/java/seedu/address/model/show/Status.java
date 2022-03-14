@@ -1,6 +1,5 @@
 package seedu.address.model.show;
 
-
 public enum Status {
 
     COMPLETED("completed"),
@@ -14,6 +13,10 @@ public enum Status {
     Status(String status) {
         this.status = status;
     }
+    public static Status getStatus(String status) {
+        System.out.println(status.toUpperCase());
+        return Status.valueOf(status.toUpperCase());
+    }
 
     @Override
     public String toString() {
@@ -25,13 +28,11 @@ public enum Status {
      * @return true if the show status is completed.
      */
     public Boolean isCompleted() {
-        if (status.equals("completed")) {
-            return true;
-        }
-        return false;
+        return status.equals(COMPLETED);
     }
 
     /**
+     * Checks the status of the show.
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidStatus(String test) {

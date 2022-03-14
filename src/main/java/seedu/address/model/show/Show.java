@@ -73,7 +73,8 @@ public class Show {
 
         Show otherShow = (Show) other;
         return otherShow.getName().equals(getName())
-                && otherShow.getTags().equals(getTags());
+                && otherShow.getTags().equals(getTags())
+                    && otherShow.getStatus().equals(getStatus());
     }
 
     @Override
@@ -95,7 +96,5 @@ public class Show {
         }
         return builder.toString();
     }
-
-
 
 }
