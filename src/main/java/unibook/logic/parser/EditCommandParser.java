@@ -54,7 +54,10 @@ public class EditCommandParser implements Parser<EditCommand> {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
             logger.info(index.toString());
         } catch (ParseException pe) {
-            if (argMultimap.getValue(PREFIX_OPTION).get().equals("person")) {
+            if (argMultimap.getValue(PREFIX_OPTION).get().equals(null)) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        EditCommand.MESSAGE_OPTION_NOT_FOUND, EditCommand.PERSON_MESSAGE_USAGE), pe);
+            } else if (argMultimap.getValue(PREFIX_OPTION).get().equals("person")) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                                                         EditCommand.PERSON_MESSAGE_USAGE), pe);
             } else {
