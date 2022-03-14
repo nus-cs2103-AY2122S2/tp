@@ -10,7 +10,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 public class CommandStorage {
 
     private ArrayList<String> history;
-    private int currentCommandNum = -1;
+    private int currentCommandNum = 0;
 
     public CommandStorage() {
         history = new ArrayList<>();
@@ -22,7 +22,7 @@ public class CommandStorage {
      */
     public void addCommand(String command) {
         history.add(command);
-        currentCommandNum = history.size() - 1;
+        currentCommandNum = history.size();
     }
 
     /**
@@ -30,10 +30,7 @@ public class CommandStorage {
      * @return The right command in history.
      */
     public String getPreviousCommand() {
-        if (currentCommandNum == -1) { // nothing typed
-            return "";
-        }
-        if (currentCommandNum == 0) { // already at the oldest String
+        if (currentCommandNum == 0) { // at the oldest String
             return history.get(0);
         }
         currentCommandNum--;
@@ -44,10 +41,7 @@ public class CommandStorage {
      * @return The right command in history.
      */
     public String getNextCommand() {
-        if (currentCommandNum == -1) { // nothing typed
-            return "";
-        }
-        if (currentCommandNum == history.size() - 1) { // already at the newest String
+        if (currentCommandNum >= history.size() - 1) { // already at the newest String
             return history.get(currentCommandNum);
         }
         currentCommandNum++;
