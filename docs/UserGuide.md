@@ -189,7 +189,7 @@ _Details coming soon ..._
 Action | Format, Examples
 --------|------------------
 **Add Employee** | `addEmployee n/NAME p/PHONE_NUMBER e/EMAIL` <br> e.g., `addEmployee n/James Ho p/22224444 e/jamesho@example.com`
-**Add Task** | `TASK_TYPE desc/TASK_DESCRIPTION` <br> e.g., `addTask desc/read book`
+**Add Task** | `TASK_TYPE desc/TASK_DESCRIPTION` <br> e.g., `addTodo desc/read book` <br>`addDeadline desc/Use up resin /by 2022-15-03 0400` 
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Find** | `find task/TASK_DESCRIPTION` <br> e.g., `find task/homework`
