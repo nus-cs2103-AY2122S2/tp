@@ -250,13 +250,13 @@ Examples:
 
 ### Finding Contacts by Tag : `findbytag`
 
-Finds persons whose tags match the given tag names.
+Finds persons whose tags match the given keyword.
 
 Format: `findbytag t/TAGNAME`
 
 * The `TAGNAME` parameter **must** be specified.
 * Search is case-insensitive e.g. `clients` is the same as `Clients`.
-* An error will be thrown if the specified `TAGNAME` does not exist.
+* If there are no tags that contain that keyword, display an empty list.
 
 Examples:
 * `findbytag t/friends` Displays the contact information of contacts who have the *friends* tag.
