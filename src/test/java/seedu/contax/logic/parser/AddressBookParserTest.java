@@ -27,6 +27,8 @@ import seedu.contax.logic.commands.EditAppointmentCommand;
 import seedu.contax.logic.commands.EditAppointmentCommand.EditAppointmentDescriptor;
 import seedu.contax.logic.commands.EditCommand;
 import seedu.contax.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.contax.logic.commands.EditTagCommand;
+import seedu.contax.logic.commands.EditTagCommand.EditTagDescriptor;
 import seedu.contax.logic.commands.ExitCommand;
 import seedu.contax.logic.commands.FindCommand;
 import seedu.contax.logic.commands.HelpCommand;
@@ -42,6 +44,7 @@ import seedu.contax.testutil.AppointmentBuilder;
 import seedu.contax.testutil.AppointmentUtil;
 import seedu.contax.testutil.EditAppointmentDescriptorBuilder;
 import seedu.contax.testutil.EditPersonDescriptorBuilder;
+import seedu.contax.testutil.EditTagDescriptorBuilder;
 import seedu.contax.testutil.PersonBuilder;
 import seedu.contax.testutil.PersonUtil;
 import seedu.contax.testutil.TagBuilder;
@@ -125,6 +128,16 @@ public class AddressBookParserTest {
         String deleteCommand = String.format("%s %s", DeleteTagCommand.COMMAND_WORD, 1);
         DeleteTagCommand command = (DeleteTagCommand) parser.parseCommand(deleteCommand);
         assertEquals(command, new DeleteTagCommand(firstIndex));
+    }
+
+    @Test
+    public void parseCommand_editTag() throws Exception {
+        Index index = Index.fromOneBased(1);
+        Tag tag = new TagBuilder().build();
+        EditTagDescriptor editTagDescriptor = new EditTagDescriptorBuilder(tag).build();
+        EditTagCommand command = (EditTagCommand) parser.parseCommand(EditTagCommand.COMMAND_WORD + " 1 "
+                + "t/clients");
+        assertEquals(command, new EditTagCommand(index, editTagDescriptor));
     }
 
     // Appointment related commands
