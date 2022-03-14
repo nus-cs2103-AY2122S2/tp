@@ -7,6 +7,28 @@ import java.util.Objects;
  * Represents an onboarding guide story, which is made up of a sequence of OnboardingSteps
  */
 public class OnboardingStory {
+
+    public enum HighlightOption {
+        ClearAll,
+        CommandBox,
+        PersonList
+    }
+
+    public enum PositionOption {
+        Center,
+        MenuBarTop,
+        CommandBoxTop,
+        ResultDisplayTop,
+        PersonListMiddle
+    }
+
+    public enum OverlayOption {
+        All,
+        ShowMenuBar,
+        ShowCommandBox,
+        ShowPersonList
+    }
+
     private ArrayList<OnboardingStep> story;
 
     public OnboardingStory() {

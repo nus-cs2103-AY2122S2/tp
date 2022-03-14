@@ -13,9 +13,9 @@ import seedu.contax.ui.onboarding.OnboardingStoryManager;
  */
 public class OnboardingStep {
     private String displayMessage;
-    private OnboardingStoryManager.OverlayOption overlayOption;
-    private OnboardingStoryManager.HighlightOption highlightOption;
-    private OnboardingStoryManager.PositionOption positionOption;
+    private OnboardingStory.OverlayOption overlayOption;
+    private OnboardingStory.HighlightOption highlightOption;
+    private OnboardingStory.PositionOption positionOption;
     private int eventType;
     private double messageHeight;
     private double messageWidth;
@@ -41,9 +41,9 @@ public class OnboardingStep {
     public OnboardingStep(String message,
                           double height,
                           double width,
-                          OnboardingStoryManager.OverlayOption overlay,
-                          OnboardingStoryManager.PositionOption position,
-                          OnboardingStoryManager.HighlightOption highlight,
+                          OnboardingStory.OverlayOption overlay,
+                          OnboardingStory.PositionOption position,
+                          OnboardingStory.HighlightOption highlight,
                           int eventType,
                           String command,
                           BiFunction<Model, OnboardingCommandBox, String> commandInstruction,
@@ -72,15 +72,15 @@ public class OnboardingStep {
     }
 
 
-    public OnboardingStoryManager.OverlayOption getOverlayOption() {
+    public OnboardingStory.OverlayOption getOverlayOption() {
         return overlayOption;
     }
 
-    public OnboardingStoryManager.HighlightOption getHighlightOption() {
+    public OnboardingStory.HighlightOption getHighlightOption() {
         return highlightOption;
     }
 
-    public OnboardingStoryManager.PositionOption getPositionOption() {
+    public OnboardingStory.PositionOption getPositionOption() {
         return positionOption;
     }
 
@@ -108,7 +108,7 @@ public class OnboardingStep {
         return isCommandCustom;
     }
 
-    public void setEventType(OnboardingStoryManager.PositionOption type) {
+    public void setEventType(OnboardingStory.PositionOption type) {
         positionOption = type;
     }
 

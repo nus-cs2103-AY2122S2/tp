@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import seedu.contax.model.Model;
 import seedu.contax.model.ModelManager;
 import seedu.contax.model.onboarding.OnboardingStep;
+import seedu.contax.model.onboarding.OnboardingStory;
 import seedu.contax.ui.PersonListPanel;
 import seedu.contax.ui.UiPart;
 
@@ -83,7 +84,7 @@ public class OnboardingWindow extends UiPart<Stage> {
      */
     public void show() {
         getRoot().show();
-        processInstructionPosition(OnboardingStoryManager.PositionOption.Center);
+        processInstructionPosition(OnboardingStory.PositionOption.Center);
     }
 
     /**
@@ -184,7 +185,7 @@ public class OnboardingWindow extends UiPart<Stage> {
      * <br>- 2: highlight only the person list
      * @param option Highlight option
      */
-    private void processHighlightOption(OnboardingStoryManager.HighlightOption option) {
+    private void processHighlightOption(OnboardingStory.HighlightOption option) {
         switch (option) {
         case ClearAll:
             commandBox.unhighlight();
@@ -214,7 +215,7 @@ public class OnboardingWindow extends UiPart<Stage> {
      * <br>- 3: cover all, showing only the person list
      * @param option the overlay option
      */
-    private void processOverlayOption(OnboardingStoryManager.OverlayOption option) {
+    private void processOverlayOption(OnboardingStory.OverlayOption option) {
         switch (option) {
         case All:
             coverAll();
@@ -244,7 +245,7 @@ public class OnboardingWindow extends UiPart<Stage> {
      * <br>- 4: middle right of result display
      * @param option Position option
      */
-    private void processInstructionPosition(OnboardingStoryManager.PositionOption option) {
+    private void processInstructionPosition(OnboardingStory.PositionOption option) {
         switch (option) {
         case Center:
             instructionLabel.setCenter(stage.heightProperty(), stage.widthProperty());
@@ -367,8 +368,8 @@ public class OnboardingWindow extends UiPart<Stage> {
         String displayMessage = step.getDisplayMessage();
         double messageHeight = step.getMessageHeight();
         double messageWidth = step.getMessageWidth();
-        OnboardingStoryManager.OverlayOption overlayOption = step.getOverlayOption();
-        OnboardingStoryManager.HighlightOption highlightOption = step.getHighlightOption();
+        OnboardingStory.OverlayOption overlayOption = step.getOverlayOption();
+        OnboardingStory.HighlightOption highlightOption = step.getHighlightOption();
 
         instructionLabel.setText(displayMessage);
         instructionLabel.setSize(messageHeight, messageWidth, stage.heightProperty(), stage.widthProperty());
