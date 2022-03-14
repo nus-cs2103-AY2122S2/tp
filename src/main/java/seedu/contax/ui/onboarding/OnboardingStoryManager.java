@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-import javafx.geometry.Pos;
+import seedu.contax.logic.commands.AddCommand;
+import seedu.contax.logic.commands.Command;
+import seedu.contax.logic.commands.exceptions.CommandException;
+import seedu.contax.logic.parser.AddressBookParser;
+import seedu.contax.logic.parser.exceptions.ParseException;
 import seedu.contax.model.onboarding.OnboardingStep;
 import seedu.contax.model.onboarding.OnboardingStory;
 import seedu.contax.model.person.Address;
@@ -15,8 +19,13 @@ import seedu.contax.model.person.Phone;
 import seedu.contax.model.tag.Tag;
 
 public class OnboardingStoryManager {
+
     private static final String CLICK_CONTINUE = "\n\nClick any where to continue...";
     private static final String CLICK_EXIT = "\n\nClick any where to exit Quick Tour...";
+    private static final String INVALID_COMMAND = "Invalid format! "
+            + "Follow the format 'add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS'"
+            + "\n\nExample: add n/Johnny p/91234567 e/Johnny@j.com a/Johnny street";
+    private static final AddressBookParser parser = new AddressBookParser();
 
     private OnboardingStory story;
     private OnboardingStep previousStep;
@@ -54,23 +63,34 @@ public class OnboardingStoryManager {
         ShowPersonList
     }
 
-    private void addDisplayStep(OnboardingStory story, String message) {
+    public enum CommandOption {
+        Add,
+        Delete
+    }
+
+    /**
+     * Adds a general display step, where the instruction label with the give message,
+     * which is centered and the overlay covers everything.
+     * @param story story to add to
+     * @param message display message
+     */
+    private void addGeneralDisplayStep(OnboardingStory story, String message) {
         story.addStory(new OnboardingStep(message,
                 0.25, 0.5, OverlayOption.All, PositionOption.Center, HighlightOption.ClearAll,
-                0, null, -1, null, false));
+                0, null, null, null, false));
     }
 
     private void createStories() {
         OnboardingStory test = new OnboardingStory();
 
-        addDisplayStep(test, "Welcome to a quick tour of ContaX" + CLICK_CONTINUE);
-        addDisplayStep(test, "You will now be guided through\nthe basic features of ContaX" + CLICK_CONTINUE);
+        addGeneralDisplayStep(test, "Welcome to a quick tour of ContaX" + CLICK_CONTINUE);
+        addGeneralDisplayStep(test, "You will now be guided through\nthe basic features of ContaX" + CLICK_CONTINUE);
 
         test.addStory(new OnboardingStep("This is the command box.\nYour commands will go here" + CLICK_CONTINUE,
                 0.2, 0.5, OverlayOption.ShowCommandBox, PositionOption.ResultDisplayTop, HighlightOption.CommandBox,
-                0, null, -1, null, false));
+                0, null, null, null, false));
 
-        addDisplayStep(test, "Now lets try adding a person." + CLICK_CONTINUE);
+        addGeneralDisplayStep(test, "Now lets try adding a person." + CLICK_CONTINUE);
 
         test.addStory(new OnboardingStep(
                 "Follow the format 'add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS'"
@@ -80,88 +100,98 @@ public class OnboardingStoryManager {
                 OverlayOption.ShowCommandBox,
                 PositionOption.ResultDisplayTop,
                 HighlightOption.CommandBox, 1,
-                "null123null123null", 1, null, true));
+                "null123null123null", ((model, commandBox) -> {
+                    if(commandBox.getText().length() > 0) {
+                        Command command = null;
+                        try {
+                            command = parser.parseCommand(commandBox.getText());
+                        } catch (ParseException e) {
+                            return INVALID_COMMAND;
+                        }
+
+                        if (!(command instanceof AddCommand)) {
+                            return "Please use a add command";
+                        }
+
+                        try {
+                            command.execute(model);
+                        } catch (CommandException e) {
+                            if (e.getMessage().equals(AddCommand.MESSAGE_DUPLICATE_PERSON)) {
+                                return "Person name already exists! Add someone else";
+                            }
+                        }
+                    }
+                    return null;
+                }), null, true));
 
         test.addStory(new OnboardingStep(
                 "Great! %s is now added into the system!" + CLICK_CONTINUE,
                 0.2, 0.5, OverlayOption.All, PositionOption.Center, HighlightOption.ClearAll,
-                0, null, -1, (model, instructionLabel) -> {
-                    instructionLabel.setText(
-                    String.format("Great! %s is now added into the system!" + CLICK_CONTINUE,
-                            OnboardingUtil.getLatestPersonName(model))
-                );}, false));
+                0, null, null, (model) -> String.format("Great! %s is now added into the system!" + CLICK_CONTINUE,
+                        OnboardingUtil.getLatestPersonName(model)), false));
 
         test.addStory(new OnboardingStep("Lets try to find %s's record!" + CLICK_CONTINUE,
                 0.2, 0.5, OverlayOption.All, PositionOption.Center, HighlightOption.ClearAll, 0,
-                null, -1, (model, instructionLabel) -> {
-                    instructionLabel.setText(
-                    String.format("Lets try to find %s's record!" + CLICK_CONTINUE,
-                            OnboardingUtil.getLatestPersonName(model))
-            );}, false));
+                null, null, (model) -> String.format("Lets try to find %s's record!" + CLICK_CONTINUE,
+                        OnboardingUtil.getLatestPersonName(model)), false));
 
 
         test.addStory(new OnboardingStep("Type 'find %s' and hit enter",
                 0.1, 0.5, OverlayOption.ShowCommandBox, PositionOption.ResultDisplayTop, HighlightOption.CommandBox,
-                1, "find %s", -1, ((model, instructionLabel) -> {
-                    instructionLabel.setText(
-                    String.format("Type 'find %s' and hit enter!" + CLICK_CONTINUE,
-                            OnboardingUtil.getLatestPersonName(model))
-            );
-            this.modifyCurrentStepCommand(String.format("find %s", OnboardingUtil.getLatestPersonName(model)));}),
-                false));
+                1, "find %s", null,(model) -> {
+                    this.modifyCurrentStepCommand(String.format("find %s", OnboardingUtil.getLatestPersonName(model)));
+                    return String.format("Type 'find %s' and hit enter!" + CLICK_CONTINUE,
+                            OnboardingUtil.getLatestPersonName(model));
+                    }, false));
 
         test.addStory(new OnboardingStep("Great! Here is %s's record!",
                 0.2, 0.5, OverlayOption.ShowPersonList, PositionOption.PersonListMiddle, HighlightOption.PersonList,
-                0, null, 2, ((model, instructionLabel) -> {
-                    instructionLabel.setText(
-                    String.format("Great! Here is %s's record!" + CLICK_CONTINUE,
-                            OnboardingUtil.getLatestPersonName(model))
-            );
-            System.out.println(model.getFilteredPersonList().size());
-            Person pp = OnboardingUtil.getLatestPerson(model);
-            model.updateFilteredPersonList((p) -> p.isSamePerson(pp));}), false));
+                0, null, (model, commandBox) -> {
+                    Person lastPerson = OnboardingUtil.getLatestPerson(model);
+                    model.updateFilteredPersonList((p) -> p.isSamePerson(lastPerson));
+                    return null;
+                }, (model) -> String.format("Great! Here is %s's record!" + CLICK_CONTINUE,
+                        OnboardingUtil.getLatestPersonName(model)), false));
 
         test.addStory(new OnboardingStep("Now lets try to remove %s's record!" + CLICK_CONTINUE,
-                0.2, 0.5, OverlayOption.All, PositionOption.Center, HighlightOption.ClearAll, 0, null, -1,
-                (model, instructionLabel) -> {
-                    instructionLabel.setText(
-                            String.format("Now lets try to remove %s's record!!" + CLICK_CONTINUE,
-                                    OnboardingUtil.getLatestPersonName(model))
-                    );
-                }, false));
+                0.2, 0.5, OverlayOption.All, PositionOption.Center, HighlightOption.ClearAll, 0, null, null,
+                (model) -> String.format("Now lets try to remove %s's record!!" + CLICK_CONTINUE,
+                                OnboardingUtil.getLatestPersonName(model)), false));
 
         test.addStory(new OnboardingStep("Type 'delete 1' and hit enter",
                 0.2, 0.5, OverlayOption.ShowCommandBox, PositionOption.ResultDisplayTop,
-                HighlightOption.CommandBox, 1, "delete 1", -1, null, false));
+                HighlightOption.CommandBox, 1, "delete 1", null, null, false));
 
-        test.addStory(new OnboardingStep("Great, %s is gone!",
+        test.addStory(new OnboardingStep("Great, the record is gone!",
                 0.2, 0.5, OverlayOption.ShowPersonList, PositionOption.PersonListMiddle, HighlightOption.PersonList,
-                0, null, -1, (model, instructionLabel) -> {
-                    instructionLabel.setText(
-                    String.format("Great, %s is gone!" + CLICK_CONTINUE,
-                            OnboardingUtil.getLatestPersonName(model))
-            );}, false));
+                0, null, (model, commandBox) -> {
+            Person lastPerson = OnboardingUtil.getLatestPerson(model);
+            model.deletePerson(lastPerson);
+            return null;},
+                null,false));
 
         test.addStory(new OnboardingStep("Now lets try to list all persons." + CLICK_CONTINUE,
                 0.2, 0.5, OverlayOption.All, PositionOption.Center, HighlightOption.ClearAll,
-                0, null, -1, null, false));
+                0, null, null, null, false));
 
         test.addStory(new OnboardingStep("Type 'list' and hit enter",
                 0.2, 0.5, OverlayOption.ShowCommandBox, PositionOption.ResultDisplayTop,
-                HighlightOption.CommandBox, 1, "list", -1, null, false));
+                HighlightOption.CommandBox, 1, "list", null, null, false));
 
         test.addStory(new OnboardingStep("Great!" + CLICK_CONTINUE,
                 0.2, 0.5, OverlayOption.ShowPersonList, PositionOption.MenuBarTop,
-                HighlightOption.PersonList, 0, null, -1, ((model, instructionLabel) -> {
-                    model.updateFilteredPersonList(unused -> true);}), false));
+                HighlightOption.PersonList, 0, null, (model, commandBox) -> {
+                    model.updateFilteredPersonList(unused -> true);
+                    return null;
+                }, null, false));
 
         test.addStory(new OnboardingStep("End of Quick Tour!" + CLICK_EXIT,
                 0.2, 0.5, OverlayOption.All, PositionOption.Center, HighlightOption.ClearAll,
-                0, null, -1, null, false));
+                0, null, null, null, false));
 
         test.addStory(new OnboardingStep(null,
-                0, 0.1, null, null, null, 0, null,
-                -1, null, false));
+                0, 0.1, null, PositionOption.Center, null, 0, null,
+                null, null, false));
 
         story = test;
     }

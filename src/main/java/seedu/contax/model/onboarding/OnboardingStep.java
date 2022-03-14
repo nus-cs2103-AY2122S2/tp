@@ -1,13 +1,12 @@
 package seedu.contax.model.onboarding;
 
 import java.util.Objects;
-import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 
 import seedu.contax.model.Model;
-import seedu.contax.model.person.Person;
-import seedu.contax.ui.onboarding.OnboardingInstruction;
+import seedu.contax.ui.onboarding.OnboardingCommandBox;
 import seedu.contax.ui.onboarding.OnboardingStoryManager;
-import seedu.contax.ui.onboarding.Overlay;
 
 /**
  * The model that is responsible for storing actions for the OnbordingWindow
@@ -22,8 +21,8 @@ public class OnboardingStep {
     private double messageWidth;
     private String command;
     private boolean isCommandCustom;
-    private int commandType;
-    private BiConsumer<Model, OnboardingInstruction> operationInstruction;
+    private BiFunction<Model, OnboardingCommandBox, String>  commandInstruction;
+    private Function<Model, String> labelInstruction;
 
     /**
      * Creates an OnboardingStep object
@@ -35,7 +34,7 @@ public class OnboardingStep {
      * @param highlight highlight option
      * @param eventType trigger event type
      * @param command command to validate
-     * @param commandType command type
+     * @param commandInstruction command instruction to run
      * @param instruction instruction to run
      * @param isCommandCustom if user input is allowed to be custom
      */
@@ -47,8 +46,8 @@ public class OnboardingStep {
                           OnboardingStoryManager.HighlightOption highlight,
                           int eventType,
                           String command,
-                          int commandType,
-                          BiConsumer<Model, OnboardingInstruction> instruction,
+                          BiFunction<Model, OnboardingCommandBox, String> commandInstruction,
+                          Function<Model, String> instruction,
                           boolean isCommandCustom) {
 
         this.displayMessage = message;
@@ -58,8 +57,8 @@ public class OnboardingStep {
         this.overlayOption = overlay;
         this.positionOption = position;
         this.highlightOption = highlight;
-        this.commandType = commandType;
-        this.operationInstruction = instruction;
+        this.commandInstruction = commandInstruction;
+        this.labelInstruction = instruction;
         this.command = command;
         this.isCommandCustom = isCommandCustom;
     }
@@ -93,16 +92,16 @@ public class OnboardingStep {
         return messageWidth;
     }
 
-    public int getCommandType() {
-        return commandType;
+    public BiFunction<Model, OnboardingCommandBox, String> getCommandInstruction() {
+        return commandInstruction;
     }
 
     public String getCommand() {
         return command;
     }
 
-    public BiConsumer<Model, OnboardingInstruction> getOperationInstruction() {
-        return operationInstruction;
+    public Function<Model, String> getLabelInstruction() {
+        return labelInstruction;
     }
 
     public boolean getIsCommandCustom() {
@@ -141,15 +140,15 @@ public class OnboardingStep {
                 && otherStep.getHighlightOption() == getHighlightOption()
                 && otherStep.getPositionOption() == getPositionOption()
                 && otherStep.getCommand().equals(getCommand())
-                && otherStep.getOperationInstruction() == getOperationInstruction()
+                && otherStep.getLabelInstruction() == getLabelInstruction()
                 && otherStep.getIsCommandCustom() == getIsCommandCustom()
-                && otherStep.getCommandType() == getCommandType();
+                && otherStep.getCommandInstruction() == getCommandInstruction();
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(eventType, displayMessage, overlayOption,
                 messageHeight, messageWidth, highlightOption,
-                positionOption, commandType, command, operationInstruction, isCommandCustom);
+                positionOption, commandInstruction, command, labelInstruction, isCommandCustom);
     }
 }

@@ -272,6 +272,10 @@ public class OnboardingWindow extends UiPart<Stage> {
         }
     }
 
+    private void processCommandType() {
+
+    }
+
     /**
      * Processes an operation on this window based on the given operation id
      * <br><br>
@@ -335,10 +339,6 @@ public class OnboardingWindow extends UiPart<Stage> {
                 return 0;
             }
 
-            if (!OnboardingUtil.isCommandValid(commandBox.getText(), instructionLabel)) {
-                return 0;
-            }
-
             OnboardingStep s = storyManager.getNextStep();
             processStep(s);
             step.setEventType(s.getPositionOption());
@@ -358,6 +358,7 @@ public class OnboardingWindow extends UiPart<Stage> {
 
         if(storyManager.isAtlast()) {
             hide();
+            return;
         }
 
         if (step == null) {
@@ -373,14 +374,17 @@ public class OnboardingWindow extends UiPart<Stage> {
         instructionLabel.setSize(messageHeight, messageWidth, stage.heightProperty(), stage.widthProperty());
         processOverlayOption(overlayOption);
         processHighlightOption(highlightOption);
-        if(step.getOperationInstruction() != null) {
-            step.getOperationInstruction().accept(model, instructionLabel);
-        }
 
-        if (step.getCommandType() == 1 && commandBox.getText().length() > 0) {
-            if (OnboardingUtil.processCommand(commandBox.getText(), instructionLabel, model, 6) == -1) {
+        if(step.getCommandInstruction() != null) {
+            String errorMessage = step.getCommandInstruction().apply(model, commandBox);
+            if(errorMessage != null) {
+                instructionLabel.setText(errorMessage);
                 return;
             }
+        }
+
+        if(step.getLabelInstruction() != null) {
+            instructionLabel.setText(step.getLabelInstruction().apply(model));
         }
 
         if (step.getCommand() != null) {
