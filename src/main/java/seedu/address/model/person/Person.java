@@ -119,7 +119,7 @@ public class Person {
 
     /**
      * Returns true if the given {@code buyer}'s {@code preference}
-     * matches with {@code this} person's {@code property}.
+     * matches with at least one of {@code this} person's {@code properties}.
      */
     public boolean matches(Person buyer) {
         if (properties.isEmpty()) {
