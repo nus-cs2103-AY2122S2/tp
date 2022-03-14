@@ -201,4 +201,4 @@ Action | Format, Examples
 **List** | `list`
 **Exit** | `exit`
 
-[<img src="images/toc-icon.png" width="25px">](#table-of-contents)
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
