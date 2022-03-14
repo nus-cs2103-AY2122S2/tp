@@ -9,9 +9,11 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -53,6 +55,19 @@ public class AddressBookTest {
 
         assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
     }
+
+    @Test
+    public void sortPersons_basedOnName_returnsSortedList() {
+        ObservableList<Person> newData = addressBook.getPersonList();
+        List<Person> personsCopy = new ArrayList<Person>(newData);
+        Comparator<Person> sortComparator = Comparator.comparing(l -> l.getName().toString().toLowerCase());
+        personsCopy.sort(sortComparator);
+        addressBook.setPersons(newData);
+        addressBook.sortPersons(newData, sortComparator);
+
+        assertEquals(personsCopy, addressBook.getPersonList());
+    }
+
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
