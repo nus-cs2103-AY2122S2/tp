@@ -13,6 +13,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.person.Person;
+import seedu.address.model.consultation.Consultation;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -22,20 +23,24 @@ class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
     public static final String MESSAGE_DUPLICATE_CONTACT = "Contact list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_CONSULTATION = "Consultation list contains duplicate consultation(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedContact> contacts = new ArrayList<>();
+    private final List<JsonAdaptedConsultation> consultations = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given persons and contacts.
      */
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
-                                       @JsonProperty("contacts") List<JsonAdaptedContact> contacts) {
+                                       @JsonProperty("contacts") List<JsonAdaptedContact> contacts,
+                                       @JsonProperty("consultation") List<JsonAdaptedConsultation> consultations) {
         this.persons.addAll(persons);
         if (!contacts.isEmpty()) {
             this.contacts.addAll(contacts);
         }
+        this.consultations.addAll(consultations);
     }
 
     /**
@@ -46,6 +51,7 @@ class JsonSerializableAddressBook {
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
         contacts.addAll(source.getContactList().stream().map(JsonAdaptedContact::new).collect(Collectors.toList()));
+        consultations.addAll(source.getConsultationList().stream().map(JsonAdaptedConsultation::new).collect(Collectors.toList()));
     }
 
     /**
@@ -68,6 +74,13 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_CONTACT);
             }
             addressBook.addContact(contact);
+        }
+        for (JsonAdaptedConsultation jsonAdaptedConsultation : consultations) {
+            Consultation consultation = jsonAdaptedConsultation.toModelType();
+            if (addressBook.hasConsultation(consultation)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_CONSULTATION);
+            }
+            addressBook.addConsultation(consultation);
         }
         return addressBook;
     }

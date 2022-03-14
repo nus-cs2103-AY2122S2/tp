@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -10,58 +12,56 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.contact.Address;
-import seedu.address.model.contact.Contact;
-import seedu.address.model.contact.Email;
-import seedu.address.model.contact.Phone;
-import seedu.address.model.person.Name;
+
 import seedu.address.model.person.Nric;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.consultation.Consultation;
+import seedu.address.model.consultation.Date;
+import seedu.address.model.consultation.Time;
+import seedu.address.model.consultation.Notes;
+import seedu.address.model.consultation.Prescription;
+import seedu.address.model.consultation.TestsTakenAndResults;
+
 
 /**
  * Jackson-friendly version of {@link Contact}.
  */
-class JsonAdaptedContact {
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Contact's %s field is missing!";
+class JsonAdaptedConsultation {
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Consultation's %s field is missing!";
 
-    private final String ownerNric;
-    private final String name;
-    private final String phone;
-    private final String email;
-    private final String address;
-    private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final Nric ownerNric;
+    private final Date date;
+    private final Time time;
+    private final Notes notes;
+    private final Prescription prescription;
+    private final TestsTakenAndResults testsTakenAndResults;
 
     /**
      * Constructs a {@code JsonAdaptedContact} with the given contact details.
      */
     @JsonCreator
-    public JsonAdaptedContact(@JsonProperty("ownerNric") String ownerNric, @JsonProperty("name") String name,
-                              @JsonProperty("phone") String phone, @JsonProperty("email") String email,
-                              @JsonProperty("address") String address, @JsonProperty("tagged")
-                                      List<JsonAdaptedTag> tagged) {
+    public JsonAdaptedConsultation(@JsonProperty("ownerNric") Nric ownerNric, @JsonProperty("date") Date date,
+                              @JsonProperty("time") Time time, @JsonProperty("notes") Notes notes,
+                              @JsonProperty("prescription") Prescription prescription, @JsonProperty("testsTakenAndResults")
+                                      TestsTakenAndResults testsTakenAndResults) {
 
         this.ownerNric = ownerNric;
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        if (tagged != null) {
-            this.tagged.addAll(tagged);
-        }
+        this.date = date;
+        this.time = time;
+        this.notes = notes;
+        this.prescription = prescription;
+        this.testsTakenAndResults = testsTakenAndResults;
     }
 
     /**
      * Converts a given {@code Contact} into this class for Jackson use.
      */
-    public JsonAdaptedContact(Contact source) {
-        ownerNric = source.getOwnerNric().value;
-        name = source.getName().fullName;
-        phone = source.getPhone().value;
-        email = source.getEmail().value;
-        address = source.getAddress().value;
-        tagged.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
+    public JsonAdaptedConsultation(Consultation source) {
+        ownerNric = source.getNric();
+        date = source.getDate();
+        time = source.getTime();
+        notes = source.getNotes();
+        prescription = source.getPrescription();
+        testsTakenAndResults = source.getTestAndResults();
     }
 
     /**
@@ -69,53 +69,49 @@ class JsonAdaptedContact {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted contact.
      */
-    public Contact toModelType() throws IllegalValueException {
-        final List<Tag> contactTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tagged) {
-            contactTags.add(tag.toModelType());
-        }
+    public Consultation toModelType() throws IllegalValueException {
 
         if (ownerNric == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Nric.class.getSimpleName()));
         }
-        if (!Nric.isValidNric(ownerNric)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        if (!Nric.isValidNric(ownerNric.toString())) {
+            throw new IllegalValueException(Nric.MESSAGE_CONSTRAINTS);
         }
-        final Nric modelOwnerNric = new Nric(ownerNric);
+        final Nric modelOwnerNric = ownerNric;
 
-        if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+        if (date == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
         }
-        if (!Name.isValidName(name)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        if (!Date.isValidDate(date.toString())) {
+            throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
         }
-        final Name modelName = new Name(name);
+        final Date modelDate = date;
 
-        if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
+        if (time == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Time.class.getSimpleName()));
         }
-        if (!Phone.isValidPhone(phone)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+        if (!Time.isValidTime(time.toString())) {
+            throw new IllegalValueException(Time.MESSAGE_CONSTRAINTS);
         }
-        final Phone modelPhone = new Phone(phone);
+        final Time modelTime = time;
 
-        if (email == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
+        if (notes == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Notes.class.getSimpleName()));
         }
-        if (!Email.isValidEmail(email)) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+        if (!Notes.isValid(notes.toString())) {
+            throw new IllegalValueException(Notes.MESSAGE_CONSTRAINTS);
         }
-        final Email modelEmail = new Email(email);
+        final Notes modelNotes = notes;
 
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+        if (prescription == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Prescription.class.getSimpleName()));
         }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
-        }
-        final Address modelAddress = new Address(address);
 
-        final Set<Tag> modelTags = new HashSet<>(contactTags);
-        return new Contact(modelOwnerNric, modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        final Prescription modelPrescription = prescription;
+
+        final TestsTakenAndResults modelTestsTakenAndResults = testsTakenAndResults;
+
+
+        return new Consultation(modelOwnerNric, modelDate, modelTime, modelNotes, modelPrescription, modelTestsTakenAndResults);
     }
 }

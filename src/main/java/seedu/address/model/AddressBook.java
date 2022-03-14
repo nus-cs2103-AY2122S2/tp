@@ -5,6 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.consultation.Consultation;
+import seedu.address.model.consultation.UniqueConsultationList;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.UniqueContactList;
 import seedu.address.model.person.Person;
@@ -18,6 +20,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
     private final UniqueContactList contacts;
+    private final UniqueConsultationList consultations;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -29,6 +32,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         persons = new UniquePersonList();
         contacts = new UniqueContactList();
+        consultations = new UniqueConsultationList();
     }
 
     public AddressBook() {}
@@ -106,6 +110,52 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.contacts.setContacts(contacts);
     }
 
+    //// consultation-level operations
+
+    /**
+     * Returns true if a contact with the same identity as {@code contact} exists in the address book.
+     */
+    public boolean hasConsultation(Consultation consultation) {
+        requireNonNull(consultation);
+        return consultations.contains(consultation);
+    }
+
+    /**
+     * Adds a contact to the address book.
+     * The contact must not already exist in the address book.
+     */
+    public void addConsultation(Consultation p) {
+        consultations.add(p);
+    }
+
+    /**
+     * Replaces the given contact {@code target} in the list with {@code editedContact}.
+     * {@code target} must exist in the address book.
+     * The contact identity of {@code editedContact} must not be the same
+     * as another existing contact in the address book.
+     */
+    public void setConsultation(Consultation target, Consultation editedConsultation) {
+        requireNonNull(editedConsultation);
+
+        consultations.setConsultation(target, editedConsultation);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeConsultation(Consultation key) {
+        consultations.remove(key);
+    }
+
+    /**
+     * Replaces the contents of the contact list with {@code contacts}.
+     * {@code contacts} must not contain duplicate contacts.
+     */
+    public void setConsultations(List<Consultation> consultations) {
+        this.consultations.setConsultations(consultations);
+    }
+
     //// contact-level operations
 
     /**
@@ -162,6 +212,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Contact> getContactList() {
         return contacts.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Consultation> getConsultationList() {
+        return consultations.asUnmodifiableObservableList();
     }
 
     @Override
