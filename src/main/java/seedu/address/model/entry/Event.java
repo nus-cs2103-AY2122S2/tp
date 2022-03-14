@@ -14,11 +14,11 @@ public class Event extends Entry {
     private final String company;
 
     // Data fields
-    private final String date;
-    private final String time;
-    private final String platform;
+    private final Date date;
+    private final Time time;
+    private final Platform platform;
 
-    public Event(Name name, String company, String date, String time, String platform, Set<Tag> tags) {
+    public Event(Name name, String company, Date date, Time time, Platform platform, Set<Tag> tags) {
         super(name, tags);
         requireAllNonNull(company, date, time, platform);
         this.company = company;
@@ -31,15 +31,15 @@ public class Event extends Entry {
         return this.company;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return this.date;
     }
 
-    public String getTime() {
+    public Time getTime() {
         return this.time;
     }
 
-    public String getPlatform() {
+    public Platform getPlatform() {
         return this.platform;
     }
 
