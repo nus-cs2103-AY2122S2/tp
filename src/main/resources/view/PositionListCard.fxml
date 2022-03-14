@@ -10,12 +10,12 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox id="applicantCardPane" fx:id="applicantCardPane" styleClass="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="positionCardPane" fx:id="positionCardPane" styleClass="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
     </columnConstraints>
-    <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
+    <VBox alignment="CENTER_LEFT" minHeight="80" GridPane.columnIndex="0">
       <padding>
         <Insets bottom="10" left="15" right="5" top="10" />
       </padding>
@@ -28,16 +28,9 @@
         </Label>
         <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
       </HBox>
-      <FlowPane fx:id="tags" />
-         <HBox alignment="CENTER_LEFT" spacing="15">
-            <children>
-               <Label fx:id="gender" styleClass="cell_small_label" text="\$gender" />
-               <Label fx:id="age" styleClass="cell_small_label" text="\$age" />
-            </children>
-         </HBox>
-      <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
-        <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-        <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
+      <FlowPane fx:id="requirements" />
+      <Label fx:id="description" styleClass="cell_medium_label" text="\$description" wrapText="true"/>
+        <Label fx:id="openings" styleClass="cell_small_label" text="\$openings" />
     </VBox>
       <rowConstraints>
          <RowConstraints />
