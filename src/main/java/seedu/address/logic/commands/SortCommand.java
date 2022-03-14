@@ -34,7 +34,7 @@ public class SortCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PREFIX_TAG + " " + PREFIX_NAME
             + " " + PREFIX_ORDER + "desc" + "\n";
 
-    public static final String MESSAGE_SUCCESS = "Sorted Modules successfully: %s";
+    public static final String MESSAGE_SUCCESS = "Sorted successfully by: %s";
 
     private final PersonComparator personComparator;
     private final List<Prefix> fields;

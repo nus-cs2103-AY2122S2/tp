@@ -36,7 +36,7 @@ public class SortCommandParser implements Parser<SortCommand> {
                 PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_STATUS, PREFIX_TAG);
 
         if (prefixes.size() == 0) {
-            throw new ParseException(MESSAGE_NO_PARAMETERS_SUPPLIED);
+            throw new ParseException(String.format(MESSAGE_NO_PARAMETERS_SUPPLIED, SortCommand.MESSAGE_USAGE));
         }
 
         if (!argMultimap.getPreamble().equals("")) {
