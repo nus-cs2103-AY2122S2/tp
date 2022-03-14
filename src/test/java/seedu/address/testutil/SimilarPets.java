@@ -26,15 +26,15 @@ public class SimilarPets {
     /**
      * Returns an {@code AddressBook} with all the typical pets.
      */
-    public static AddressBook getTypicalAddressBook() {
+    public static AddressBook getSimilarAddressBook() {
         AddressBook ab = new AddressBook();
-        for (Pet pet : getTypicalPets()) {
+        for (Pet pet : getSimilarPets()) {
             ab.addPet(pet);
         }
         return ab;
     }
 
-    public static List<Pet> getTypicalPets() {
+    public static List<Pet> getSimilarPets() {
         return new ArrayList<>(Arrays.asList(WAFFLE, ANOTHER_WAFFLE));
     }
 }

@@ -42,7 +42,7 @@ public class JsonSerializableAddressBookTest {
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(SIMILAR_PET_FILE,
                 JsonSerializableAddressBook.class).get();
         AddressBook addressBookFromFile = dataFromFile.toModelType();
-        AddressBook similarPetsAddressBook = SimilarPets.getTypicalAddressBook();
+        AddressBook similarPetsAddressBook = SimilarPets.getSimilarAddressBook();
         assertEquals(addressBookFromFile, similarPetsAddressBook);
     }
 
