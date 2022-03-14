@@ -31,12 +31,16 @@ public class TemporaryLesson extends Lesson {
     /**
      * Returns true if both lessons clash.
      */
+    @Override
     public boolean isConflictingWithLesson(Lesson otherLesson) {
         if (otherLesson == this) {
             return true;
         }
-
-        return getDateTimeSlot().isConflictingWith(otherLesson.getDateTimeSlot());
+        if (otherLesson instanceof RecurringLesson) {
+            return otherLesson.isConflictingWithLesson(this);
+        } else {
+            return getDateTimeSlot().isConflictingWith(otherLesson.getDateTimeSlot());
+        }
     }
 
     /**

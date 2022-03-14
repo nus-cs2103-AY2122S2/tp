@@ -53,15 +53,9 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
 
         Lesson lesson;
         if (isRecurring(argMultimap)) {
-            // TODO: change this to instantiate a recurring lesson here
-            lesson = Lesson.makeTemporaryLesson(lessonName, subject, address,
-                    getLessonDateTime(date, startTime), durationHours, durationMinutes);
-
-            throw new RuntimeException("Not implemented yet");
+            lesson = Lesson.makeRecurringLesson(lessonName, subject, address, date,
+                    startTime , durationHours, durationMinutes);
         } else {
-            // lesson = Lesson.makeTemporaryLesson(lessonName, subject, address,
-            //      getLessonDateTime(date, startTime), durationHours, durationMinutes);
-
             lesson = Lesson.makeTemporaryLesson(lessonName, subject, address, date,
                     startTime, durationHours, durationMinutes);
         }
@@ -73,9 +67,7 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
      * Returns true if the lesson is recurring.
      */
     private static boolean isRecurring(ArgumentMultimap argumentMultimap) {
-        boolean hasSpecifiedLessonToBeRecurring = !argumentMultimap.getValue(PREFIX_RECURRING).isEmpty();
-
-        return hasSpecifiedLessonToBeRecurring;
+        return !argumentMultimap.getValue(PREFIX_RECURRING).isEmpty();
     }
 
     /**

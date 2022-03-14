@@ -50,8 +50,7 @@ class JsonSerializableLessonBook {
         LessonBook lessonBook = new LessonBook();
 
         for (JsonAdaptedLesson jsonAdaptedLesson : lessons) {
-            Lesson lesson = jsonAdaptedLesson.toModelType();
-
+            Lesson lesson = jsonAdaptedLesson.toModelType(); //get boolean
             if (lessonBook.hasConflictingLesson(lesson)) {
                 throw new IllegalValueException(MESSAGE_CONFLICTING_LESSONS);
             }
