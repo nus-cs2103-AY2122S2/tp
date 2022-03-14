@@ -7,11 +7,17 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import seedu.contax.model.Model;
+import seedu.contax.model.ModelManager;
 import seedu.contax.model.onboarding.OnboardingStep;
-import seedu.contax.model.person.UniquePersonList;
+import seedu.contax.model.onboarding.OnboardingStory;
 import seedu.contax.ui.PersonListPanel;
 import seedu.contax.ui.UiPart;
 
+/**
+ * The Onboarding Window. Provides a step-by-step guide for first time users
+ * on the basic functions of ContaX.
+ */
 public class OnboardingWindow extends UiPart<Stage> {
 
     private static final String FXML = "onboarding/OnboardingWindow.fxml";
@@ -22,7 +28,9 @@ public class OnboardingWindow extends UiPart<Stage> {
     private Overlay overlay;
     private OnboardingCommandBox commandBox;
     private OnboardingInstruction instructionLabel;
-    private UniquePersonList persons;
+    private Model model;
+
+    private String errorMessage;
 
     @FXML
     private StackPane parentPane;
@@ -55,14 +63,99 @@ public class OnboardingWindow extends UiPart<Stage> {
      */
     public OnboardingWindow(Stage root, Stage mainWindow) {
         super(FXML, root);
-        labelPlaceholder.setManaged(false);
         stage = root;
         this.mainWindow = mainWindow;
         this.overlay = new Overlay();
         this.commandBox = new OnboardingCommandBox();
         this.instructionLabel = new OnboardingInstruction();
         this.storyManager = new OnboardingStoryManager();
-        this.persons = new UniquePersonList();
+        this.model = new ModelManager();
+        OnboardingUtil.populateWithSample(model);
+        fillInner();
+        initStoryManager(storyManager);
+    }
+
+    public OnboardingWindow(Stage mainWindow) {
+        this(new Stage(), mainWindow);
+    }
+
+    /**
+     * Shows this window
+     */
+    public void show() {
+        getRoot().show();
+        processInstructionPosition(OnboardingStory.PositionOption.CENTER);
+    }
+
+    /**
+     * Hides this window
+     */
+    public void hide() {
+        storyManager.reset();
+        processStep(storyManager.start());
+        mainWindow.show();
+        stage.hide();
+    }
+
+    /**
+     * Set this window size to the given height and width.
+     * @param height height to set to
+     * @param width width to set to
+     */
+    public void setSize(double height, double width) {
+        getRoot().setHeight(height);
+        getRoot().setWidth(width);
+    }
+
+    /**
+     * Translate the this window to the given x and y.
+     * @param x x to translate to
+     * @param y y to translate to
+     */
+    public void translate(double x, double y) {
+        getRoot().setX(x);
+        getRoot().setY(y);
+    }
+
+    /**
+     * Fills up the placeholders in this window.
+     */
+    private void fillInner() {
+        labelPlaceholder.getChildren().add(overlay.getRoot());
+        labelPlaceholder.getChildren().add(instructionLabel.getRoot());
+        personListPanel = new PersonListPanel(model.getFilteredPersonList());
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    /**
+     * Displays an overlay over this window which covers every Node, except the given Node.
+     * <br><br>
+     * Option as follows:
+     * <br>- Overlay.showOverlay.BOTH: both overlays visible
+     * <br>- Overlay.showOverlay.BOTTOM: shows only the bottom overlay
+     * <br>- Overlay.showOverlay.TOP: shows only the top overlay
+     * @param node Node to be excluded from the overlay
+     */
+    private void showOnly(Region node, Overlay.ShowOverlay option) {
+        overlay.showOnly(node.layoutXProperty(), node.layoutYProperty(),
+                node.heightProperty(), node.widthProperty(),
+                parentPane.heightProperty(), parentPane.widthProperty(), option);
+    }
+
+    /**
+     * Displays an overlay over this window which covers every Node.
+     */
+    private void coverAll() {
+        overlay.cover(parentPane.layoutXProperty(), parentPane.layoutYProperty(),
+                parentPane.heightProperty(), parentPane.widthProperty());
+    }
+
+    /**
+     * Initialize the onboarding story manager by processing the first step and settings up event listeners
+     * @param mng
+     */
+    private void initStoryManager(OnboardingStoryManager mng) {
         processStep(storyManager.start());
         parentPane.setOnMouseClicked((event -> {
             OnboardingStep s = storyManager.handleMouseClick();
@@ -83,162 +176,175 @@ public class OnboardingWindow extends UiPart<Stage> {
         });
     }
 
-
-    public OnboardingWindow(Stage mainWindow) {
-        this(new Stage(), mainWindow);
-    }
-
     /**
-     * Shows the Onboarding window.
-     */
-    public void show() {
-        fillInner();
-        getRoot().show();
-        getRoot().centerOnScreen();
-        processInstructionPosition(0);
-    }
-
-    /**
-     * Set the size of Onboarding window
-     * @param height Height to set to
-     * @param width Width to set to
-     */
-    public void setSize(double height, double width) {
-        getRoot().setHeight(height);
-        getRoot().setWidth(width);
-    }
-
-    /**
-     * Translate Onboarding window
-     * @param x x to translate to
-     * @param y y to translate to
-     */
-    public void translate(double x, double y) {
-        getRoot().setX(x);
-        getRoot().setY(y);
-    }
-
-    /**
-     * Cast an overlap over the stage, except for the given node.
-     * @param node Node to be excluded from overlap
-     */
-    public void showOnly(Region node) {
-        overlay.showOnly(node.layoutXProperty(), node.layoutYProperty(),
-                node.heightProperty(), node.widthProperty(),
-                parentPane.heightProperty(), parentPane.widthProperty());
-    }
-
-    /**
-     * Cast an overlap over the stage
-     */
-    public void coverAll() {
-        overlay.cover(parentPane.layoutXProperty(), parentPane.layoutYProperty(),
-                parentPane.heightProperty(), parentPane.widthProperty());
-    }
-
-    /**
-     * Fills up the placeholders in this window.
-     */
-    public void fillInner() {
-        labelPlaceholder.getChildren().add(overlay.getRoot());
-
-        labelPlaceholder.getChildren().add(instructionLabel.getRoot());
-        personListPanel = new PersonListPanel(persons.asUnmodifiableObservableList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
-
-        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
-    }
-
-    /**
-     * Process the given OnboardingStep and translate it to stage
-     * @param step The OnboardingStep to be processed
-     */
-    public void processStep(OnboardingStep step) {
-        if (step != null) {
-            instructionLabel.setText(step.getDisplayMessage());
-            instructionLabel.setSize(step.getMessageHeight(),
-                    step.getMessageWidth(), stage.heightProperty(), stage.widthProperty());
-            processOverlayOption(step.getOverlayOption());
-            processHighlightOption(step.getHighlightOption());
-            if (step.getPersonOperation() == 1) {
-                persons.add(step.getPerson());
-            } else if (step.getPersonOperation() == 2) {
-                mainWindow.show();
-                stage.hide();
-            }
-
-            if (step.getCommand() != null) {
-                if (!commandBox.getText().equals(step.getCommand())) {
-                    if (!commandBox.getText().equals("")) {
-                        instructionLabel.setText("Please type: " + step.getCommand());
-                    }
-                    return;
-                } else {
-                    OnboardingStep s = storyManager.getNextStep();
-                    processStep(s);
-                    step.setEventType(s.getPositionOption());
-                }
-            }
-            storyManager.stepFront();
-        }
-
-    }
-
-    /**
-     * Highlight the stage based on the given option
+     * Highlights a node in this window the stage based on the given option
+     * <br><br>
+     * Options are as follows:
+     * <br>- OnboardingStory.HighlightOption.CLEAR_ALL: clear all highlights
+     * <br>- OnboardingStory.HighlightOption.COMMAND_BOX: highlight only the command box
+     * <br>- OnboardingStory.HighlightOption.PERSON_LIST: highlight only the person list
      * @param option Highlight option
      */
-    public void processHighlightOption(int option) {
-        if (option == 0) {
+    private void processHighlightOption(OnboardingStory.HighlightOption option) {
+        switch (option) {
+        case CLEAR_ALL:
             commandBox.unhighlight();
             commandBox.clear();
             personList.setStyle("-fx-border-width: 0px");
-        } else if (option == 1) {
+            break;
+        case COMMAND_BOX:
             commandBox.highlight();
-        } else if (option == 2) {
+            break;
+        case PERSON_LIST:
             commandBox.unhighlight();
             commandBox.clear();
             personList.setStyle("-fx-border-color: yellow; -fx-border-width: 5px");
+            break;
+        default:
+            break;
         }
     }
 
     /**
-     * Overlay the stage based on the given option
-     * @param option Overlay option
+     * Displays an overlay on this window, whose position is dependant on the given option
+     * <br><br>
+     * Options are as follows:
+     * <br>- OnboardingStory.OverlayOption.ALL: cover all
+     * <br>- OnboardingStory.OverlayOption.SHOW_MENU_BAR: cover all, showing only the menu bar
+     * <br>- OnboardingStory.OverlayOption.SHOW_COMMAND_BOX: cover all, showing only the command box
+     * <br>- OnboardingStory.OverlayOption.SHOW_PERSON_LIST: cover all, showing only the person list
+     * @param option the overlay option
      */
-    public void processOverlayOption(int option) {
-        if (option == 0) {
+    private void processOverlayOption(OnboardingStory.OverlayOption option) {
+        switch (option) {
+        case ALL:
             coverAll();
-        } else if (option == 1) {
-            showOnly(menuBar);
-        } else if (option == 2) {
-            showOnly(commandBoxPlaceholder);
-        } else if (option == 3) {
-            showOnly(personList);
+            break;
+        case SHOW_MENU_BAR:
+            showOnly(menuBar, Overlay.ShowOverlay.BOTH);
+            break;
+        case SHOW_COMMAND_BOX:
+            showOnly(commandBoxPlaceholder, Overlay.ShowOverlay.BOTH);
+            break;
+        case SHOW_PERSON_LIST:
+            showOnly(personList, Overlay.ShowOverlay.TOP);
+            break;
+        default:
+            break;
         }
     }
 
     /**
-     * Moves the InstructionLabel based on the given option
+     * Moves the InstructionLabel to a position based on the given option.
+     * <br><br>
+     * Options are as follows:
+     * <br>- OnboardingStory.PositionOption.CENTER: center of window
+     * <br>- OnboardingStory.PositionOption.MENU_BAR_TOP: top right of menu bar
+     * <br>- OnboardingStory.PositionOption.COMMAND_BOX_TOP: top right of command box
+     * <br>- OnboardingStory.PositionOption.RESULT_DISPLAY_TOP: top right of result display
+     * <br>- OnboardingStory.PositionOption.PERSON_LIST_MIDDLE: middle right of result display
      * @param option Position option
      */
-    public void processInstructionPosition(int option) {
-        if (option == 0) {
+    private void processInstructionPosition(OnboardingStory.PositionOption option) {
+        switch (option) {
+        case CENTER:
             instructionLabel.setCenter(stage.heightProperty(), stage.widthProperty());
-        } else if (option == 1) {
+            break;
+        case MENU_BAR_TOP:
             instructionLabel.translate(menuBar.layoutXProperty(), menuBar.layoutYProperty());
-        } else if (option == 2) {
+            break;
+        case COMMAND_BOX_TOP:
             instructionLabel.translate(commandBoxPlaceholder.layoutXProperty(),
                     commandBoxPlaceholder.layoutYProperty());
-        } else if (option == 3) {
+            break;
+        case RESULT_DISPLAY_TOP:
             instructionLabel.translate(resultDisplayPlaceholder.layoutXProperty(),
                     resultDisplayPlaceholder.layoutYProperty());
-        } else if (option == 4) {
+            break;
+        case PERSON_LIST_MIDDLE:
             instructionLabel.translate(
                     personList.layoutXProperty().add(0),
                     personList.layoutYProperty().add(
                             resultDisplayPlaceholder.heightProperty().multiply(1.5)
                     ));
+            break;
+        default:
+            break;
         }
+    }
+
+    /**
+     * Enforces the user input to be equals to be given step's command.
+     * Returns 0 when the user input does not satisfy the given condition, and 1 if it does.
+     * @param step step to be checked with
+     * @param isCustom if the user input is to be matched with a hard coded string
+     * @return an integer denoting the result of check
+     */
+    private int enforceUserInput(OnboardingStep step, boolean isCustom) {
+        if (!commandBox.getText().equals(step.getCommand())) {
+            if (commandBox.getText().equals("")) {
+                return 0;
+            }
+
+            if (!isCustom) {
+                instructionLabel.setText("Please type: " + step.getCommand());
+                return 0;
+            }
+
+            OnboardingStep s = storyManager.getNextStep();
+            processStep(s);
+            step.setEventType(s.getPositionOption());
+        } else {
+            OnboardingStep s = storyManager.getNextStep();
+            processStep(s);
+            step.setEventType(s.getPositionOption());
+        }
+        return 1;
+    }
+
+    /**
+     * Process the given onboarding step, and translate it to a set of actions taken in this window
+     * @param step the OnboardingStep to be processed
+     */
+    private void processStep(OnboardingStep step) {
+
+        if (storyManager.isAtlast()) {
+            hide();
+            return;
+        }
+
+        if (step == null) {
+            return;
+        }
+        String displayMessage = step.getDisplayMessage();
+        double messageHeight = step.getMessageHeight();
+        double messageWidth = step.getMessageWidth();
+        OnboardingStory.OverlayOption overlayOption = step.getOverlayOption();
+        OnboardingStory.HighlightOption highlightOption = step.getHighlightOption();
+
+        instructionLabel.setText(displayMessage);
+        instructionLabel.setSize(messageHeight, messageWidth, stage.heightProperty(), stage.widthProperty());
+        processOverlayOption(overlayOption);
+        processHighlightOption(highlightOption);
+
+        if (step.getCommandInstruction() != null) {
+            String errorMessage = step.getCommandInstruction().apply(model, commandBox);
+            if (errorMessage != null) {
+                instructionLabel.setText(errorMessage);
+                return;
+            }
+        }
+
+        if (step.getLabelInstruction() != null) {
+            instructionLabel.setText(step.getLabelInstruction().apply(model));
+        }
+
+        if (step.getCommand() != null) {
+            if (enforceUserInput(step, step.isCommandCustom()) == 0) {
+                return;
+            }
+        }
+
+        storyManager.stepFront();
     }
 }

@@ -4,21 +4,27 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.contax.testutil.TypicalPersons.ALICE;
-import static seedu.contax.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.contax.model.onboarding.OnboardingStep;
+import seedu.contax.model.onboarding.OnboardingStory;
 
 public class OnboardingStepTest {
 
     @Test
     public void equals() {
-        OnboardingStep step1 = new OnboardingStep("message 1", 0, 0, 0,
-                0, 0, 0, "", null, 1);
-        OnboardingStep step2 = new OnboardingStep("message 1", 0, 0, 0,
-                0, 0, 0, "", null, 1);
+        OnboardingStep step1 = new OnboardingStep("message 1",
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                OnboardingStory.HighlightOption.COMMAND_BOX,
+                0, "null", null, null, false);
+
+        OnboardingStep step2 = new OnboardingStep("message 1",
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                OnboardingStory.HighlightOption.COMMAND_BOX,
+                0, "null", null, null, false);
 
         // same object -> returns true
         assertTrue(step1.equals(step1));
@@ -33,80 +39,118 @@ public class OnboardingStepTest {
         assertFalse(step1.equals(null));
 
         // attribute difference checks
-        assertFalse(step1.equals(new OnboardingStep("message 2", 0, 0, 0,
-                0, 0, 0, "", null, 1)));
-        assertFalse(step1.equals(new OnboardingStep("message 1", 1, 0, 0,
-                0, 0, 0, "", null, 1)));
-        assertFalse(step1.equals(new OnboardingStep("message 1", 0, 1, 0,
-                0, 0, 0, "", null, 1)));
-        assertFalse(step1.equals(new OnboardingStep("message 1", 0, 0, 1,
-                0, 0, 0, "", null, 1)));
-        assertFalse(step1.equals(new OnboardingStep("message 1", 0, 0, 0,
-                1, 0, 0, "", null, 1)));
-        assertFalse(step1.equals(new OnboardingStep("message 1", 0, 0, 0,
-                0, 1, 0, "", null, 1)));
-        assertFalse(step1.equals(new OnboardingStep("message 1", 0, 0, 0,
-                0, 0, 1, "", null, 1)));
-        assertFalse(step1.equals(new OnboardingStep("message 1", 0, 0, 0,
-                0, 0, 0, "1", null, 1)));
-        assertFalse(step1.equals(new OnboardingStep("message 1", 0, 0, 0,
-                0, 0, 0, "", null, 2)));
-
-        OnboardingStep step4 = new OnboardingStep("message 1", 2, 0, 0,
-                0, 1, 0, "", ALICE, 1);
-        OnboardingStep step5 = new OnboardingStep("message 1", 2, 0, 0,
-                0, 1, 0, "", BOB, 1);
-        OnboardingStep step6 = new OnboardingStep("message 1", 2, 0, 0,
-                0, 1, 0, "", ALICE, 1);
-
-        // different person
-        assertFalse(step4.equals(step5));
-
-        // same person, with same attributes
-        assertTrue(step4.equals(step6));
-    }
-
-    @Test
-    public void isValidStep() {
-        OnboardingStep step1 = new OnboardingStep("message", 0, 0, 0,
-                0, 0, 0, "", null, 1);
-        OnboardingStep step2 = new OnboardingStep("message", -1, 0, 0,
-                0, 0, 0, "", null, 1);
-        OnboardingStep step3 = new OnboardingStep("message", 0, 0, 0,
-                0, 4, 0, "", null, 1);
-        OnboardingStep step4 = new OnboardingStep("message", 0, 0, 0,
-                5, 0, 0, "", null, 1);
-
-        // Position, highlight and overlay options are valid -> returns true
-        assertTrue(step1.isValid());
-
-        // Position and highlight options are valid, overlay option is not -> return false
-        assertFalse(step2.isValid());
-
-        // Position and overlay options are valid, highlight option is not -> returns false
-        assertFalse(step3.isValid());
-
-        // Overlay and highlight options are valid, position option is not -> returns false
-        assertFalse(step4.isValid());
+        assertFalse(step1.equals(new OnboardingStep("message 2",
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                OnboardingStory.HighlightOption.COMMAND_BOX,
+                0, "null", null, null, false)));
+        assertFalse(step1.equals(new OnboardingStep("message 1",
+                0.3, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                OnboardingStory.HighlightOption.COMMAND_BOX,
+                0, "null", null, null, false)));
+        assertFalse(step1.equals(new OnboardingStep("message 1",
+                0.2, 0.45, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                OnboardingStory.HighlightOption.COMMAND_BOX,
+                0, "null", null, null, false)));
+        assertFalse(step1.equals(new OnboardingStep("message 1",
+                0.2, 0.5, OnboardingStory.OverlayOption.ALL,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                OnboardingStory.HighlightOption.COMMAND_BOX,
+                0, "null", null, null, false)));
+        assertFalse(step1.equals(new OnboardingStep("message 1",
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.CENTER, OnboardingStory.HighlightOption.COMMAND_BOX,
+                0, "null", null, null, false)));
+        assertFalse(step1.equals(new OnboardingStep("message 1",
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                OnboardingStory.HighlightOption.CLEAR_ALL,
+                0, "null", null, null, false)));
+        assertFalse(step1.equals(new OnboardingStep("message 1",
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                OnboardingStory.HighlightOption.COMMAND_BOX,
+                1, "null", null, null, false)));
+        assertFalse(step1.equals(new OnboardingStep("message 2",
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                OnboardingStory.HighlightOption.COMMAND_BOX,
+                0, "null11", null, null, false)));
+        assertFalse(step1.equals(new OnboardingStep("message 2",
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                OnboardingStory.HighlightOption.COMMAND_BOX,
+                0, "null", (o, a) -> "1", null, false)));
+        assertFalse(step1.equals(new OnboardingStep("message 2",
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                OnboardingStory.HighlightOption.COMMAND_BOX,
+                0, "null", null, (a) -> "2", false)));
+        assertFalse(step1.equals(new OnboardingStep("message 2",
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                OnboardingStory.HighlightOption.COMMAND_BOX,
+                0, "null", null, null, true)));
     }
 
     @Test
     public void setEventType() {
-        OnboardingStep step1 = new OnboardingStep("message", 0, 0, 0,
-                0, 0, 0, "", null, 1);
-        step1.setEventType(1);
+        OnboardingStep step1 = new OnboardingStep("message 1",
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                OnboardingStory.HighlightOption.COMMAND_BOX,
+                0, "null", null, null, false);
+
+        step1.setEventType(OnboardingStory.PositionOption.CENTER);
 
         // Value is set after setting -> returns true
-        assertEquals(step1.getPositionOption(), 1);
+        assertEquals(step1.getPositionOption(), OnboardingStory.PositionOption.CENTER);
+    }
+
+    @Test
+    public void setDisplayMessage() {
+        OnboardingStep step1 = new OnboardingStep("message 1",
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                OnboardingStory.HighlightOption.COMMAND_BOX,
+                0, "null", null, null, false);
+        step1.setDisplayMessage("54321");
+
+        // Value is set after setting -> returns true
+        assertEquals(step1.getDisplayMessage(), "54321");
+    }
+
+    @Test
+    public void setCommand() {
+        OnboardingStep step1 = new OnboardingStep("message 1",
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                OnboardingStory.HighlightOption.COMMAND_BOX,
+                0, "null", null, null, false);
+        step1.setCommand("54321");
+
+        // Value is set after setting -> returns true
+        assertEquals(step1.getCommand(), "54321");
     }
 
     @Test void hashCodeTest() {
-        OnboardingStep step1 = new OnboardingStep("message 1", 0, 0, 0,
-                0, 0, 0, "", null, 1);
-        OnboardingStep step2 = new OnboardingStep("message 1", 0, 0, 0,
-                0, 0, 0, "", null, 1);
-        OnboardingStep step3 = new OnboardingStep("message 1", 2, 0, 0,
-                0, 1, 0, "", null, 1);
+        OnboardingStep step1 = new OnboardingStep("message 1",
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                OnboardingStory.HighlightOption.COMMAND_BOX,
+                0, "null", null, null, false);
+        OnboardingStep step2 = new OnboardingStep("message 1",
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                OnboardingStory.HighlightOption.COMMAND_BOX,
+                0, "null", null, null, false);
+        OnboardingStep step3 = new OnboardingStep("message 123",
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                OnboardingStory.HighlightOption.COMMAND_BOX,
+                0, "null", null, null, false);
 
         // same object -> returns true
         assertEquals(step1.hashCode(), step1.hashCode());

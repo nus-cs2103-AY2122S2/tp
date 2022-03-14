@@ -30,6 +30,9 @@ public class OnboardingInstruction extends UiPart<Region> {
         instruction.setVisible(false);
     }
 
+    public String getText() {
+        return instruction.getText();
+    }
     public void setText(String text) {
         instruction.setText(text);
     }

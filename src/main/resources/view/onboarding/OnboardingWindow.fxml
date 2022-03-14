@@ -52,7 +52,7 @@
               <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
             </VBox>
             </children>
-           <StackPane fx:id="labelPlaceholder"/>
+           <StackPane fx:id="labelPlaceholder" managed="false"/>
          </StackPane>
     </Scene>
   </scene>
