@@ -2,9 +2,28 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-  {:toc}
-
+### Table of Contents
+* [**Acknowledgements**](#acknowledgements)
+* [**Setting up, getting started**](#setting-up-getting-started)
+* [**Design**](#design)
+    * [Architecture](#architecture)
+    * [UI component](#ui-component)
+    * [Logic component](#logic-component)
+    * [Model component](#model-component)
+    * [Storage component](#storage-component)
+    * [Common classes](#common-classes)
+* [**Implementation**](#implementation)
+* [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
+* [**Appendix: Requirements**](#appendix-requirements)
+    * [Product scope](#product-scope)
+    * [User stories](#user-stories)
+    * [Use cases](#use-cases)
+    * [Non-Functional Requirements](#non-functional-requirements)
+    * [Glossary](#glossary)
+* [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing)
+    * [Launch and shutdown](#launch-and-shutdown)
+    * [Deleting a show](#deleting-a-show)
+    * [Saving data](#saving-data)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
@@ -68,6 +87,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+---
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S2-CS2103T-T09-3/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -85,6 +105,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Show` object residing in the `Model`.
 
+---
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/AY2122S2-CS2103T-T09-3/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
@@ -114,6 +135,7 @@ How the parsing works:
 * When called upon to parse a user command, the `TrackermonParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `TrackermonParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+---
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
@@ -133,7 +155,7 @@ The `Model` component,
 
 </div>
 
-
+---
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2122S2-CS2103T-T09-3/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
@@ -145,6 +167,7 @@ The `Storage` component,
 * inherits from both `ShowListStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
+---
 ### Common classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
@@ -270,7 +293,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * Able to keep a local copy of their list of shows.
 * Clean and minimal user interface.
 
-
+---
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
@@ -286,6 +309,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
+---
 ### Use cases
 
 (For all use cases below, the **System** is `Trackermon` and the **Actor** is the `user`, unless specified otherwise)
@@ -449,6 +473,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
+---
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
@@ -465,6 +490,7 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
+---
 ### Launch and shutdown
 
 1. Initial launch
@@ -482,6 +508,7 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+---
 ### Deleting a show
 
 1. Deleting a show while all shows are being shown
@@ -499,6 +526,7 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+---
 ### Saving data
 
 1. Dealing with missing/corrupted data files
