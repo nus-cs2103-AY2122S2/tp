@@ -1,7 +1,16 @@
 package seedu.contax.testutil;
 
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_FILE;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_TAG;
+
+
 import java.io.File;
 
+import seedu.contax.logic.commands.ImportCsvCommand;
 import seedu.contax.model.IndexedCsvFile;
 
 public class ImportCsvObjectBuilder {
@@ -58,6 +67,22 @@ public class ImportCsvObjectBuilder {
         this.emailPosition = emailPosition;
         this.addressPosition = addressPosition;
         this.tagPosition = tagPosition;
+    }
+
+    public static String getImportCsvCommand(IndexedCsvFile indexedCsvFile) {
+        return ImportCsvCommand.COMMAND_WORD + " " +getIndexedCsvFileDetails(indexedCsvFile);
+    }
+
+    public static String getIndexedCsvFileDetails(IndexedCsvFile indexedCsvFile) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(PREFIX_FILE + indexedCsvFile.getFilePath() + " ");
+        sb.append(PREFIX_NAME + String.valueOf(indexedCsvFile.getNamePositionIndex() + 1) + " ");
+        sb.append(PREFIX_PHONE + String.valueOf(indexedCsvFile.getPhonePositionIndex() + 1) + " ");
+        sb.append(PREFIX_EMAIL + String.valueOf(indexedCsvFile.getEmailPositionIndex() + 1) + " ");
+        sb.append(PREFIX_ADDRESS + String.valueOf(indexedCsvFile.getAddressPositionIndex() + 1) + " ");
+        sb.append(PREFIX_TAG + String.valueOf(indexedCsvFile.getTagPositionIndex() + 1) + " ");
+
+        return sb.toString();
     }
 
     public IndexedCsvFile build() {

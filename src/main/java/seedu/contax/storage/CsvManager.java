@@ -94,7 +94,6 @@ public class CsvManager {
             exportedCsvWriter.close();
             return true;
         } catch (IOException e) {
-            e.printStackTrace();
             return false;
         }
     }

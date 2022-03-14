@@ -11,10 +11,20 @@ public class ExportCsvCommand extends Command {
     public static final String MESSAGE_FAILURE = "Export failed. Please try again";
     private static final String EXPORT_FILEPATH = "data/addressbook.csv";
 
+    private String filePath;
+
+    public ExportCsvCommand() {
+        this.filePath = EXPORT_FILEPATH;
+    }
+
+    public ExportCsvCommand(String filePath) {
+        this.filePath = filePath;
+    }
+
     @Override
     public CommandResult execute(Model model) {
         CsvManager csvManager = new CsvManager(model);
-        boolean exportCsv = csvManager.exportCsv(EXPORT_FILEPATH);
+        boolean exportCsv = csvManager.exportCsv(filePath);
         if (exportCsv) {
             return new CommandResult(MESSAGE_SUCCESS);
         } else {

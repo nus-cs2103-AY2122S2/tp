@@ -15,26 +15,12 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.contax.commons.core.index.Index;
-import seedu.contax.logic.commands.AddAppointmentCommand;
-import seedu.contax.logic.commands.AddCommand;
-import seedu.contax.logic.commands.AddTagCommand;
-import seedu.contax.logic.commands.ClearCommand;
-import seedu.contax.logic.commands.Command;
-import seedu.contax.logic.commands.DeleteAppointmentCommand;
-import seedu.contax.logic.commands.DeleteCommand;
-import seedu.contax.logic.commands.DeleteTagCommand;
-import seedu.contax.logic.commands.EditAppointmentCommand;
+import seedu.contax.logic.commands.*;
 import seedu.contax.logic.commands.EditAppointmentCommand.EditAppointmentDescriptor;
-import seedu.contax.logic.commands.EditCommand;
 import seedu.contax.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.contax.logic.commands.ExitCommand;
-import seedu.contax.logic.commands.FindCommand;
-import seedu.contax.logic.commands.HelpCommand;
-import seedu.contax.logic.commands.ListAppointmentCommand;
-import seedu.contax.logic.commands.ListCommand;
-import seedu.contax.logic.commands.ListTagCommand;
 import seedu.contax.logic.parser.exceptions.ParseException;
 import seedu.contax.model.appointment.Appointment;
+import seedu.contax.model.IndexedCsvFile;
 import seedu.contax.model.person.NameContainsKeywordsPredicate;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.tag.Tag;
@@ -42,6 +28,7 @@ import seedu.contax.testutil.AppointmentBuilder;
 import seedu.contax.testutil.AppointmentUtil;
 import seedu.contax.testutil.EditAppointmentDescriptorBuilder;
 import seedu.contax.testutil.EditPersonDescriptorBuilder;
+import seedu.contax.testutil.ImportCsvObjectBuilder;
 import seedu.contax.testutil.PersonBuilder;
 import seedu.contax.testutil.PersonUtil;
 import seedu.contax.testutil.TagBuilder;
@@ -156,6 +143,20 @@ public class AddressBookParserTest {
     public void parseCommand_deleteAppointment() throws Exception {
         assertTrue(parser.parseCommand(DeleteAppointmentCommand.COMMAND_WORD + " 1")
                 instanceof DeleteAppointmentCommand);
+    }
+
+    //Import/Export csv tests
+    @Test
+    public void parseCommand_importCsv() throws Exception {
+        IndexedCsvFile indexedCsvFile = new ImportCsvObjectBuilder().build();
+        ImportCsvCommand command = (ImportCsvCommand)
+                parser.parseCommand(ImportCsvObjectBuilder.getImportCsvCommand(indexedCsvFile));
+        assertEquals(new ImportCsvCommand(indexedCsvFile), command);
+    }
+
+    @Test
+    public void parseCommand_exportCsv() throws Exception {
+        assertTrue(parser.parseCommand(ExportCsvCommand.COMMAND_WORD) instanceof ExportCsvCommand);
     }
 
     @Test

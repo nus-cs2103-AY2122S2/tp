@@ -63,7 +63,6 @@ public class ImportCsvCommand extends Command {
                     model.addPerson(toAddPerson);
                     return true;
                 } catch (ParseException | DuplicatePersonException e) {
-                    //e.printStackTrace();
                     return false;
                 }
             });
