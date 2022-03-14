@@ -38,6 +38,35 @@ public class IndexTest {
     }
 
     @Test
+    public void testIncrement() {
+        final int INCREMENT_VALUE = 2;
+        final Index zeroBased = Index.fromZeroBased(2);
+        final Index oneBased = Index.fromOneBased(2);
+        final Index zeroBasedHigh = Index.fromZeroBased(6);
+        final Index oneBasedHigh = Index.fromOneBased(6);
+
+        // check equality for zero based low value
+        zeroBased.increment(INCREMENT_VALUE);
+        assertEquals(4, zeroBased.getZeroBased());
+        assertEquals(5, zeroBased.getOneBased());
+
+        // check equality for zero based high value
+        zeroBasedHigh.increment(INCREMENT_VALUE);
+        assertEquals(8, zeroBasedHigh.getZeroBased());
+        assertEquals(9, zeroBasedHigh.getOneBased());
+
+        // check equality for one based low value
+        oneBased.increment(INCREMENT_VALUE);
+        assertEquals(3, oneBased.getZeroBased());
+        assertEquals(4, oneBased.getOneBased());
+
+        // check equality for one based high value
+        oneBasedHigh.increment(INCREMENT_VALUE);
+        assertEquals(7, oneBasedHigh.getZeroBased());
+        assertEquals(8, oneBasedHigh.getOneBased());
+    }
+
+    @Test
     public void equals() {
         final Index fifthPersonIndex = Index.fromOneBased(5);
 

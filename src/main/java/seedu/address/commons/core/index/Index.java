@@ -32,6 +32,14 @@ public class Index {
     }
 
     /**
+     * Increments the index by the given specified value.
+     * @param value The value to be added to index value.
+     */
+    public void increment(int value) {
+        this.zeroBasedIndex += value;
+    }
+
+    /**
      * Creates a new {@code Index} using a zero-based index.
      */
     public static Index fromZeroBased(int zeroBasedIndex) {
