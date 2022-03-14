@@ -28,6 +28,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Appointment> filteredAppointments;
+    private final FilteredList<Tag> filteredTags;
 
     /**
      * Initializes a ModelManager with the given addressBook, schedule and userPrefs.
@@ -45,6 +46,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredAppointments = new FilteredList<>(this.schedule.getAppointmentList());
+        filteredTags = new FilteredList<>(this.addressBook.getTagList());
     }
 
     /**
@@ -183,11 +185,6 @@ public class ModelManager implements Model {
         addressBook.setTag(target, editedTag);
     }
 
-    @Override
-    public ObservableList<Tag> getTagList() {
-        return addressBook.getTagList();
-    }
-
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -203,6 +200,27 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    //=========== Filtered Tag List Accessors =============================================================
+
+    @Override
+    public ObservableList<Tag> getTagList() {
+        return addressBook.getTagList();
+    }
+
+    @Override
+    public void updateFilteredTagList(Predicate<Tag> predicate) {
+        requireNonNull(predicate);
+        filteredTags.setPredicate(predicate);
+    }
+
+    /**
+     * Returns an unmodifiable view of the {@code Tag} backed by the internal list of {@code versionedAddressBook}.
+     */
+    @Override
+    public ObservableList<Tag> getFilteredTagList() {
+        return filteredTags;
     }
 
     //=========== Schedule ===================================================================================
@@ -281,7 +299,8 @@ public class ModelManager implements Model {
                 && schedule.equals(other.schedule)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons)
-                && filteredAppointments.equals(other.filteredAppointments);
+                && filteredAppointments.equals(other.filteredAppointments)
+                && filteredTags.equals(other.filteredTags);
     }
 
 }

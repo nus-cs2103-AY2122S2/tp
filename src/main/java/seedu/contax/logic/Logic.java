@@ -40,6 +40,9 @@ public interface Logic {
 
     ObservableList<Tag> getTagList();
 
+    /** Returns an unmodifiable view of the filtered list of tags */
+    ObservableList<Tag> getFilteredTagList();
+
     /**
      * Returns the user prefs' address book file path.
      */
@@ -54,4 +57,5 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
 }
