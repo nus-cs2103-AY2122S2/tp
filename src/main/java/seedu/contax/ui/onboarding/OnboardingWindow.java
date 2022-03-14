@@ -83,7 +83,7 @@ public class OnboardingWindow extends UiPart<Stage> {
      */
     public void show() {
         getRoot().show();
-        processInstructionPosition(0);
+        processInstructionPosition(OnboardingStoryManager.PositionOption.Center);
     }
 
     /**
@@ -184,17 +184,17 @@ public class OnboardingWindow extends UiPart<Stage> {
      * <br>- 2: highlight only the person list
      * @param option Highlight option
      */
-    private void processHighlightOption(int option) {
+    private void processHighlightOption(OnboardingStoryManager.HighlightOption option) {
         switch (option) {
-        case 0:
+        case ClearAll:
             commandBox.unhighlight();
             commandBox.clear();
             personList.setStyle("-fx-border-width: 0px");
             break;
-        case 1:
+        case CommandBox:
             commandBox.highlight();
             break;
-        case 2:
+        case PersonList:
             commandBox.unhighlight();
             commandBox.clear();
             personList.setStyle("-fx-border-color: yellow; -fx-border-width: 5px");
@@ -214,18 +214,18 @@ public class OnboardingWindow extends UiPart<Stage> {
      * <br>- 3: cover all, showing only the person list
      * @param option the overlay option
      */
-    private void processOverlayOption(int option) {
+    private void processOverlayOption(OnboardingStoryManager.OverlayOption option) {
         switch (option) {
-        case 0:
+        case All:
             coverAll();
             break;
-        case 1:
+        case ShowMenuBar:
             showOnly(menuBar, 0);
             break;
-        case 2:
+        case ShowCommandBox:
             showOnly(commandBoxPlaceholder, 0);
             break;
-        case 3:
+        case ShowPersonList:
             showOnly(personList, 2);
             break;
         default:
@@ -244,23 +244,23 @@ public class OnboardingWindow extends UiPart<Stage> {
      * <br>- 4: middle right of result display
      * @param option Position option
      */
-    private void processInstructionPosition(int option) {
+    private void processInstructionPosition(OnboardingStoryManager.PositionOption option) {
         switch (option) {
-        case 0:
+        case Center:
             instructionLabel.setCenter(stage.heightProperty(), stage.widthProperty());
             break;
-        case 1:
+        case MenuBarTop:
             instructionLabel.translate(menuBar.layoutXProperty(), menuBar.layoutYProperty());
             break;
-        case 2:
+        case CommandBoxTop:
             instructionLabel.translate(commandBoxPlaceholder.layoutXProperty(),
                     commandBoxPlaceholder.layoutYProperty());
             break;
-        case 3:
+        case ResultDisplayTop:
             instructionLabel.translate(resultDisplayPlaceholder.layoutXProperty(),
                     resultDisplayPlaceholder.layoutYProperty());
             break;
-        case 4:
+        case PersonListMiddle:
             instructionLabel.translate(
                     personList.layoutXProperty().add(0),
                     personList.layoutYProperty().add(
@@ -355,14 +355,19 @@ public class OnboardingWindow extends UiPart<Stage> {
      * @param step the OnboardingStep to be processed
      */
     private void processStep(OnboardingStep step) {
+
+        if(storyManager.isAtlast()) {
+            hide();
+        }
+
         if (step == null) {
             return;
         }
         String displayMessage = step.getDisplayMessage();
         double messageHeight = step.getMessageHeight();
         double messageWidth = step.getMessageWidth();
-        int overlayOption = step.getOverlayOption();
-        int highlightOption = step.getHighlightOption();
+        OnboardingStoryManager.OverlayOption overlayOption = step.getOverlayOption();
+        OnboardingStoryManager.HighlightOption highlightOption = step.getHighlightOption();
 
         instructionLabel.setText(displayMessage);
         instructionLabel.setSize(messageHeight, messageWidth, stage.heightProperty(), stage.widthProperty());
@@ -382,10 +387,6 @@ public class OnboardingWindow extends UiPart<Stage> {
             if (enforceUserInput(step, step.getIsCommandCustom()) == 0) {
                 return;
             }
-        }
-
-        if(storyManager.isAtlast()) {
-            hide();
         }
 
         storyManager.stepFront();

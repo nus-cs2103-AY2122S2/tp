@@ -6,18 +6,20 @@ import java.util.function.BiConsumer;
 import seedu.contax.model.Model;
 import seedu.contax.model.person.Person;
 import seedu.contax.ui.onboarding.OnboardingInstruction;
+import seedu.contax.ui.onboarding.OnboardingStoryManager;
+import seedu.contax.ui.onboarding.Overlay;
 
 /**
  * The model that is responsible for storing actions for the OnbordingWindow
  */
 public class OnboardingStep {
     private String displayMessage;
-    private int overlayOption;
-    private int highlightOption;
+    private OnboardingStoryManager.OverlayOption overlayOption;
+    private OnboardingStoryManager.HighlightOption highlightOption;
+    private OnboardingStoryManager.PositionOption positionOption;
     private int eventType;
     private double messageHeight;
     private double messageWidth;
-    private int positionOption;
     private String command;
     private boolean isCommandCustom;
     private int commandType;
@@ -26,26 +28,34 @@ public class OnboardingStep {
     /**
      * Creates an OnboardingStep object
      * @param message message to display
-     * @param option overlay option
      * @param height height of label
      * @param width width of label
+     * @param overlay overlay option
      * @param position position option for label
      * @param highlight highlight option
      * @param eventType trigger event type
      * @param command command to validate
-     * @param p Person object involved
-     * @param op operation id
+     * @param commandType command type
+     * @param instruction instruction to run
+     * @param isCommandCustom if user input is allowed to be custom
      */
-    public OnboardingStep(String message, int option, double height,
-                          double width, int position, int highlight,
-                          int eventType, String command, int commandType,
-                          BiConsumer<Model, OnboardingInstruction> instruction, boolean isCommandCustom) {
+    public OnboardingStep(String message,
+                          double height,
+                          double width,
+                          OnboardingStoryManager.OverlayOption overlay,
+                          OnboardingStoryManager.PositionOption position,
+                          OnboardingStoryManager.HighlightOption highlight,
+                          int eventType,
+                          String command,
+                          int commandType,
+                          BiConsumer<Model, OnboardingInstruction> instruction,
+                          boolean isCommandCustom) {
 
         this.displayMessage = message;
-        this.overlayOption = option;
         this.eventType = eventType;
         this.messageHeight = height;
         this.messageWidth = width;
+        this.overlayOption = overlay;
         this.positionOption = position;
         this.highlightOption = highlight;
         this.commandType = commandType;
@@ -62,8 +72,17 @@ public class OnboardingStep {
         return displayMessage;
     }
 
-    public int getOverlayOption() {
+
+    public OnboardingStoryManager.OverlayOption getOverlayOption() {
         return overlayOption;
+    }
+
+    public OnboardingStoryManager.HighlightOption getHighlightOption() {
+        return highlightOption;
+    }
+
+    public OnboardingStoryManager.PositionOption getPositionOption() {
+        return positionOption;
     }
 
     public double getMessageHeight() {
@@ -72,14 +91,6 @@ public class OnboardingStep {
 
     public double getMessageWidth() {
         return messageWidth;
-    }
-
-    public int getHighlightOption() {
-        return highlightOption;
-    }
-
-    public int getPositionOption() {
-        return positionOption;
     }
 
     public int getCommandType() {
@@ -98,7 +109,7 @@ public class OnboardingStep {
         return isCommandCustom;
     }
 
-    public void setEventType(int type) {
+    public void setEventType(OnboardingStoryManager.PositionOption type) {
         positionOption = type;
     }
 
@@ -108,12 +119,6 @@ public class OnboardingStep {
 
     public void setCommand(String cmd) {
         command = cmd;
-    }
-
-    public boolean isValid() {
-        return overlayOption >= 0 && overlayOption <= 3
-                && highlightOption >= 0 && highlightOption <= 2
-                && positionOption >= 0 && positionOption <= 4;
     }
 
     @Override
