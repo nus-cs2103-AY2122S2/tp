@@ -1,6 +1,23 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ACADEMIC_YEAR;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
+import static seedu.address.logic.parser.CliSyntax.TYPE_CLASS;
+import static seedu.address.logic.parser.CliSyntax.TYPE_MODULE;
+import static seedu.address.logic.parser.CliSyntax.TYPE_STUDENT;
+
+import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -8,30 +25,15 @@ import seedu.address.model.Model;
 import seedu.address.model.classgroup.ClassGroup;
 import seedu.address.model.classgroup.ClassGroupId;
 import seedu.address.model.classgroup.ClassGroupType;
-import seedu.address.model.student.*;
+import seedu.address.model.student.Email;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentId;
+import seedu.address.model.student.Telegram;
 import seedu.address.model.tamodule.AcademicYear;
 import seedu.address.model.tamodule.ModuleCode;
 import seedu.address.model.tamodule.ModuleName;
 import seedu.address.model.tamodule.TaModule;
-
-import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Stream;
-
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.TYPE_MODULE;
-import static seedu.address.logic.parser.CliSyntax.TYPE_CLASS;
-import static seedu.address.logic.parser.CliSyntax.TYPE_STUDENT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ACADEMIC_YEAR;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_INDEX;
-
 
 /**
  * Parses input arguments and creates a new AddCommand object

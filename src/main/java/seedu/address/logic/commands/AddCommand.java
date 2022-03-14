@@ -1,17 +1,17 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ACADEMIC_YEAR;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 import static seedu.address.logic.parser.CliSyntax.TYPE_CLASS;
 import static seedu.address.logic.parser.CliSyntax.TYPE_MODULE;
 import static seedu.address.logic.parser.CliSyntax.TYPE_STUDENT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ACADEMIC_YEAR;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_INDEX;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -46,7 +46,7 @@ public class AddCommand extends Command {
             + PREFIX_ACADEMIC_YEAR + "21S1\n"
             + "3. Adds a class group: "
             + "Parameters: " + TYPE_CLASS + " "
-            + PREFIX_ID+ "CLASS_ID "
+            + PREFIX_ID + "CLASS_ID "
             + PREFIX_TYPE + "CLASS_TYPE "
             + PREFIX_MODULE_INDEX + "MODULE_INDEX "
             + "Example: " + COMMAND_WORD + " "

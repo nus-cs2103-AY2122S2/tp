@@ -2,7 +2,11 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
@@ -16,8 +20,8 @@ import seedu.address.model.classgroup.ClassGroupType;
 import seedu.address.model.person.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
-import seedu.address.model.student.Telegram;
 import seedu.address.model.student.StudentId;
+import seedu.address.model.student.Telegram;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tamodule.AcademicYear;
 import seedu.address.model.tamodule.ModuleCode;
@@ -50,7 +54,7 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code StudentId} is invalid.
      */
-    public static StudentId parseStudentId(String id) throws  ParseException {
+    public static StudentId parseStudentId(String id) throws ParseException {
         requireNonNull(id);
         String trimmedId = id.trim();
         if (!StudentId.isValidStudentId(trimmedId)) {
@@ -179,8 +183,6 @@ public class ParserUtil {
             throw new ParseException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        LogsCenter.getLogger(LogicManager.class).info("TAModule: " + lastShownModuleList.get(targetIndex.getZeroBased()));
-
         return lastShownModuleList.get(targetIndex.getZeroBased());
     }
 
@@ -199,6 +201,12 @@ public class ParserUtil {
         return new ClassGroupId(trimmedId);
     }
 
+    /**
+     * Parses a {@code String classGroupType} into an {@code ClassGroupType}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code classGroupType} is invalid.
+     */
     public static ClassGroupType parseClassGroupType(String classGroupType) throws ParseException {
         requireNonNull(classGroupType);
         String trimmedUpperCaseType = classGroupType.trim().toUpperCase();

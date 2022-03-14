@@ -1,9 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.TYPE_STUDENT;
-import static seedu.address.logic.parser.CliSyntax.TYPE_MODULE;
 import static seedu.address.logic.parser.CliSyntax.TYPE_CLASS;
+import static seedu.address.logic.parser.CliSyntax.TYPE_MODULE;
+import static seedu.address.logic.parser.CliSyntax.TYPE_STUDENT;
 
 import java.util.List;
 import seedu.address.commons.core.Messages;
@@ -17,7 +17,10 @@ import seedu.address.model.entity.exceptions.UnknownEntityException;
 import seedu.address.model.student.Student;
 import seedu.address.model.tamodule.TaModule;
 
-public class DeleteCommand extends Command{
+/**
+ * Deletes an entity identified using it's displayed index and entityType from TAssist.
+ */
+public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
@@ -25,7 +28,7 @@ public class DeleteCommand extends Command{
             + ": Deletes an entity identified by the index number used in the displayed list\n"
             + "1. Deletes a student: "
             + "Parameters: " + TYPE_STUDENT
-            +  " INDEX (must be a positive integer)\n"
+            + " INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD
             + TYPE_STUDENT + " 1\n"
             + "2. Adds a module: "
