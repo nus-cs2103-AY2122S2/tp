@@ -30,7 +30,7 @@ public class ModelManager implements Model {
     private final FilteredList<Appointment> filteredAppointments;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given addressBook, schedule and userPrefs.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlySchedule schedule,
                         ReadOnlyUserPrefs userPrefs) {
@@ -47,6 +47,9 @@ public class ModelManager implements Model {
         filteredAppointments = new FilteredList<>(this.schedule.getAppointmentList());
     }
 
+    /**
+     * Initializes an empty ModelManager.
+     */
     public ModelManager() {
         this(new AddressBook(), new Schedule(), new UserPrefs());
     }

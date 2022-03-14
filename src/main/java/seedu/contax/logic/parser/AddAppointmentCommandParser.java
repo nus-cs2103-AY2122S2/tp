@@ -18,14 +18,14 @@ import seedu.contax.model.appointment.Name;
 import seedu.contax.model.appointment.StartDateTime;
 
 /**
- * Parses input arguments and creates a new AddAppointmentCommand object
+ * Parses input arguments and creates a new AddAppointmentCommand object.
  */
 public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * Parses the given {@code String} of arguments in the context of the AddAppointmentCommand
+     * and returns an AddAppointmentCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public AddAppointmentCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =

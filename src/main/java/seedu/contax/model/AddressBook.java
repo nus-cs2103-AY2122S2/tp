@@ -13,8 +13,8 @@ import seedu.contax.model.tag.Tag;
 import seedu.contax.model.tag.UniqueTagList;
 
 /**
- * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Wraps all data at the address-book level.
+ * Duplicates are not allowed (by .isSamePerson comparison).
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
@@ -23,7 +23,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
-     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
+     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html.
      *
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
@@ -36,7 +36,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public AddressBook() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an AddressBook using the Persons in the {@code toBeCopied}.
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();

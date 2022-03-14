@@ -9,8 +9,7 @@ import seedu.contax.commons.util.DateUtil;
 
 /**
  * Tests that a {@code Appointment} falls between the given date time range.
- * It includes appointments that extend beyond the period, and will include all appointments that contain
- * some sub-range of the filtered date range.
+ * It returns true if the appointment being tested contains some sub-range of the predicate's date range.
  */
 public class DateRangePredicate implements Predicate<Appointment> {
     private final LocalDateTime start;

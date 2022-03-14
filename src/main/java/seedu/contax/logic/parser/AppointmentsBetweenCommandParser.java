@@ -17,14 +17,14 @@ import seedu.contax.logic.commands.AppointmentsBetweenCommand;
 import seedu.contax.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new AppointmentsBetween object.
+ * Parses input arguments and creates a new AppointmentsBetweenCommand object.
  */
 public class AppointmentsBetweenCommandParser implements Parser<AppointmentsBetweenCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AppointmentsBetweenCommand
      * and returns an AppointmentsBetweenCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public AppointmentsBetweenCommand parse(String args) throws ParseException {
         requireNonNull(args);

@@ -7,7 +7,7 @@ import seedu.contax.commons.core.GuiListContentType;
 import seedu.contax.model.Model;
 
 /**
- * Lists all persons in the address book to the user.
+ * Lists all appointments in the schedule to the user.
  */
 public class ListAppointmentCommand extends Command {
 

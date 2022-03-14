@@ -11,6 +11,19 @@ import seedu.contax.commons.core.GuiListContentType;
 
 public class CommandResultTest {
     @Test
+    public void constructorTests() {
+        CommandResult commandResult = new CommandResult("feedback");
+        assertEquals(GuiListContentType.UNCHANGED, commandResult.getUiContentType());
+
+        commandResult = new CommandResult("feedback", GuiListContentType.PERSON);
+        assertEquals(GuiListContentType.PERSON, commandResult.getUiContentType());
+
+        commandResult = new CommandResult("feedback", true, true);
+        assertTrue(commandResult.isExit());
+        assertTrue(commandResult.isShowHelp());
+    }
+
+    @Test
     public void equals() {
         CommandResult commandResult = new CommandResult("feedback");
 
