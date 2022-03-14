@@ -14,10 +14,9 @@ import static unibook.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.logging.Logger;
 import java.util.Optional;
 import java.util.Set;
-
+import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import unibook.commons.core.LogsCenter;
@@ -26,13 +25,18 @@ import unibook.commons.core.index.Index;
 import unibook.commons.util.CollectionUtil;
 import unibook.logic.LogicManager;
 import unibook.logic.commands.exceptions.CommandException;
-import unibook.logic.parser.exceptions.ParseException;
 import unibook.model.Model;
 import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
 import unibook.model.module.ModuleName;
 import unibook.model.module.exceptions.ModuleNotFoundException;
-import unibook.model.person.*;
+import unibook.model.person.Email;
+import unibook.model.person.Name;
+import unibook.model.person.Office;
+import unibook.model.person.Person;
+import unibook.model.person.Phone;
+import unibook.model.person.Professor;
+import unibook.model.person.Student;
 import unibook.model.tag.Tag;
 
 /**
@@ -40,11 +44,17 @@ import unibook.model.tag.Tag;
  */
 public class EditCommand extends Command {
 
-    private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     public static final String COMMAND_WORD = "edit";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the UniBook.";
+    public static final String MESSAGE_DUPLICATE_MODULE = "This module already exists in the UniBook.";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_MODULE_SUCCESS = "Edited Module: %1$s";
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_PERSON_NO_SUBTYPE = "Person must be a professor or student";
 
-    public static final String PERSON_MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
+    public static final String PERSON_MESSAGE_USAGE = COMMAND_WORD
+            + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
@@ -71,14 +81,9 @@ public class EditCommand extends Command {
             + PREFIX_NAME + "Software Engineering "
             + PREFIX_MODULE + "CS2103T";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
-    public static final String MESSAGE_EDIT_MODULE_SUCCESS = "Edited Module: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the UniBook.";
-    public static final String MESSAGE_DUPLICATE_MODULE = "This module already exists in the UniBook.";
-    public static final String MESSAGE_PERSON_NO_SUBTYPE = "Person must be a professor or student";
 
 
+    private final Logger logger = LogsCenter.getLogger(LogicManager.class);
     private final Index index;
     private EditPersonDescriptor editPersonDescriptor;
     private EditModuleDescriptor editModuleDescriptor;
@@ -116,6 +121,9 @@ public class EditCommand extends Command {
 
         // Edit person
         if (this.editModuleDescriptor == null) {
+            if (!isPersonListShowing) {
+                throw new CommandException(Messages.MESSAGE_CHANGE_TO_PERSON_PAGE);
+            }
             List<Person> lastShownList = model.getFilteredPersonList();
             List<Module> latestModList = model.getFilteredModuleList();
 
@@ -143,7 +151,7 @@ public class EditCommand extends Command {
                 int modIdx = latestModList.indexOf(checkMod);
                 if (editedPerson instanceof Professor) {
                     latestModList.get(modIdx).addProfessor((Professor) editedPerson);
-                } else if (editedPerson instanceof Student){
+                } else if (editedPerson instanceof Student) {
                     latestModList.get(modIdx).addStudent((Student) editedPerson);
                 } else {
                     throw new CommandException(MESSAGE_PERSON_NO_SUBTYPE);
@@ -162,7 +170,7 @@ public class EditCommand extends Command {
                         int profIdx = profList.indexOf(personToEdit);
                         profList.set(profIdx, (Professor) editedPerson);
                     }
-                } else if(editedPerson instanceof Student) {
+                } else if (editedPerson instanceof Student) {
                     ObservableList<Student> studentList = mod.getStudents();
                     if (studentList.contains(personToEdit)) {
                         int studentIdx = studentList.indexOf(personToEdit);
@@ -180,6 +188,11 @@ public class EditCommand extends Command {
         } else {
 
             // Edit module
+
+            if (!isModuleListShowing) {
+                throw new CommandException(Messages.MESSAGE_CHANGE_TO_MODULE_PAGE);
+            }
+
             List<Person> lastPersonList = model.getFilteredPersonList();
             List<Module> lastShownList = model.getFilteredModuleList();
 
