@@ -17,13 +17,25 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** The application should exit. */
+    private final boolean clearRequest;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean clearRequest) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.clearRequest = clearRequest;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code showHelp} and {@code exit},
+     * with clearRequest field set to false.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+        this(feedbackToUser, showHelp, exit, false);
     }
 
     /**
@@ -32,6 +44,14 @@ public class CommandResult {
      */
     public CommandResult(String feedbackToUser) {
         this(feedbackToUser, false, false);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code clearRequest},
+     * and other fields set to their default value.
+     */
+    public CommandResult(String feedbackToUser, boolean clearRequest) {
+        this(feedbackToUser, false, false, clearRequest);
     }
 
     public String getFeedbackToUser() {
@@ -45,6 +65,10 @@ public class CommandResult {
     public boolean isExit() {
         return exit;
     }
+
+    public boolean isClearRequest() {
+        return clearRequest;
+    };
 
     @Override
     public boolean equals(Object other) {
@@ -60,12 +84,13 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && clearRequest == otherCommandResult.clearRequest;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, showHelp, exit, clearRequest);
     }
 
 }
