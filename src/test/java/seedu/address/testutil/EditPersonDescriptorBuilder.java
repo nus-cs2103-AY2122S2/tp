@@ -92,12 +92,12 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * Parses the {@code activities} into a {@code Set<Activity>} and set it to the {@code EditPersonDescriptor}
      * that we are building.
      */
-    public EditPersonDescriptorBuilder withTags(String... tags) {
-        Set<Activity> tagSet = Stream.of(tags).map(Activity::new).collect(Collectors.toSet());
-        descriptor.setActivities(tagSet);
+    public EditPersonDescriptorBuilder withActivities(String... activities) {
+        Set<Activity> activitySet = Stream.of(activities).map(Activity::new).collect(Collectors.toSet());
+        descriptor.setActivities(activitySet);
         return this;
     }
 

@@ -70,8 +70,8 @@ public class PersonBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
-        this.activities = SampleDataUtil.getActivitySet(tags);
+    public PersonBuilder withActivities(String ... activities) {
+        this.activities = SampleDataUtil.getActivitySet(activities);
         return this;
     }
 
