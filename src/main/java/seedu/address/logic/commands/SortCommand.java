@@ -27,6 +27,12 @@ public class SortCommand extends Command {
     private final Comparator<Person> sortComparator;
     private final String sortKey;
 
+    /**
+     * Creates new SortCommand object.
+     *
+     * @param sortComparator contains the Comparator for sorting the list of candidates
+     * @param sortKey contains the valid sort key for equality state check
+     */
     public SortCommand(Comparator<Person> sortComparator, String sortKey) {
         this.sortComparator = sortComparator;
         this.sortKey = sortKey;
