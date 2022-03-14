@@ -1,7 +1,6 @@
 package seedu.address.ui;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -9,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.HelpWindowUtil;
 
 /**
  * Controller for a help page
@@ -99,8 +99,8 @@ public class HelpWindow extends UiPart<Stage> {
      * @return
      */
     @FXML
-    public void goToUrl() throws URISyntaxException, IOException {
-        //Desktop.getDesktop().browse(URI.create(USERGUIDE_URL));
+    public void goToUrl() throws IOException {
+        new HelpWindowUtil(USERGUIDE_URL).goToUrl();
     }
 }
 

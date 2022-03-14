@@ -45,11 +45,11 @@ public class ParserUtil {
      */
     public static StudentID parseStudentID(String id) throws ParseException {
         requireNonNull(id);
-        String trimmedId = id.trim();
-        if (!StudentID.isValidId(trimmedId)) {
+        String updatedId = id.trim().toUpperCase();
+        if (!StudentID.isValidId(updatedId)) {
             throw new ParseException(StudentID.MESSAGE_CONSTRAINTS);
         }
-        return new StudentID(trimmedId);
+        return new StudentID(updatedId);
     }
 
     /**
