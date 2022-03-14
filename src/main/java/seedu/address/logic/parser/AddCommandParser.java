@@ -51,13 +51,12 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Flag flag = ParserUtil.parseFlag(argMultimap.getValue(PREFIX_FLAG).orElse("false"));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        // TODO: tempory orElse() fix
         PrevDateMet prevDateMet = ParserUtil.parsePrevDateMet(argMultimap.getValue(PREFIX_PREV_DATE_MET)
-                .orElse("2022-03-14"));
-        Info info = ParserUtil.parseInfo(argMultimap.getValue(PREFIX_INFO).orElse(""));
+                .orElse(PrevDateMet.getTodaysDate()));
+        Info info = ParserUtil.parseInfo(argMultimap.getValue(PREFIX_INFO)
+                .orElse("No further info"));
 
         Person person = new Person(name, phone, email, address, flag, tagList, prevDateMet, info);
-
 
         return new AddCommand(person);
     }
