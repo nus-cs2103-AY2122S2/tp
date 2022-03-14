@@ -12,7 +12,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
 
-
     /* Prefix definition for tag management */
     public static final Prefix PREFIX_NEWTAGNAME = new Prefix("t/");
 
