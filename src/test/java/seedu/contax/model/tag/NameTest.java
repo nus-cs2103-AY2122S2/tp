@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 public class NameTest {
 
     @Test
-    public void isValidName(){
+    public void isValidName() {
         // only alphabets
         assertTrue(Name.isValidName("Friends"));
         // only digits
