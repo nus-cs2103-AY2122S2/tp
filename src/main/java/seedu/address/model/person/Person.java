@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.tag.Tag;
+import seedu.address.model.activity.Activity;
 
 /**
  * Represents a Person in the address book.
@@ -23,7 +23,7 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Set<Activity> activities = new HashSet<>();
     private Status status;
 
 
@@ -32,15 +32,15 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Status status,
-                  ClassCode classCode, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, status, classCode, tags);
+                  ClassCode classCode, Set<Activity> activities) {
+        requireAllNonNull(name, phone, email, address, status, classCode, activities);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.status = status;
         this.classCode = classCode;
-        this.tags.addAll(tags);
+        this.activities.addAll(activities);
     }
 
     public Name getName() {
@@ -68,11 +68,11 @@ public class Person {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable activity set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<Activity> getActivities() {
+        return Collections.unmodifiableSet(activities);
     }
 
     /**
@@ -107,7 +107,7 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getActivities().equals(getActivities())
                 && otherPerson.getStatus().equals(getStatus())
                 && otherPerson.getClassCode().equals(getClassCode());
     }
@@ -115,7 +115,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, status, classCode, tags);
+        return Objects.hash(name, phone, email, address, status, classCode, activities);
     }
 
     @Override
@@ -133,10 +133,10 @@ public class Person {
                 .append("; Class Code: ")
                 .append(getClassCode());
 
-        Set<Tag> tags = getTags();
-        if (!tags.isEmpty()) {
-            builder.append("; Tags: ");
-            tags.forEach(builder::append);
+        Set<Activity> activities = getActivities();
+        if (!activities.isEmpty()) {
+            builder.append("; Activities: ");
+            activities.forEach(builder::append);
         }
         return builder.toString();
     }

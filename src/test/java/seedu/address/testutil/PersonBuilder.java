@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.activity.Activity;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.ClassCode;
 import seedu.address.model.person.Email;
@@ -10,7 +11,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Status;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -31,7 +31,7 @@ public class PersonBuilder {
     private Address address;
     private Status status;
     private ClassCode classCode;
-    private Set<Tag> tags;
+    private Set<Activity> activities;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -43,7 +43,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         status = new Status(DEFAULT_STATUS);
         classCode = new ClassCode(DEFAULT_CLASSCODE);
-        tags = new HashSet<>();
+        activities = new HashSet<>();
     }
 
     /**
@@ -56,7 +56,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         status = personToCopy.getStatus();
         classCode = personToCopy.getClassCode();
-        tags = new HashSet<>(personToCopy.getTags());
+        activities = new HashSet<>(personToCopy.getActivities());
     }
 
     /**
@@ -71,7 +71,7 @@ public class PersonBuilder {
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
     public PersonBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+        this.activities = SampleDataUtil.getActivitySet(tags);
         return this;
     }
 
@@ -116,7 +116,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, status, classCode, tags);
+        return new Person(name, phone, email, address, status, classCode, activities);
     }
 
 }
