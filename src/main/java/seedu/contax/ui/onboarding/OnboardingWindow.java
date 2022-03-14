@@ -132,12 +132,17 @@ public class OnboardingWindow extends UiPart<Stage> {
 
     /**
      * Displays an overlay over this window which covers every Node, except the given Node.
+     * <br><br>
+     * Option as follows:
+     * <br>- 0: both overlays visible
+     * <br>- 1: hide the top overlay
+     * <br>- 2: hide the bottom overlay
      * @param node Node to be excluded from the overlay
      */
-    private void showOnly(Region node) {
+    private void showOnly(Region node, int option) {
         overlay.showOnly(node.layoutXProperty(), node.layoutYProperty(),
                 node.heightProperty(), node.widthProperty(),
-                parentPane.heightProperty(), parentPane.widthProperty());
+                parentPane.heightProperty(), parentPane.widthProperty(), option);
     }
 
     /**
@@ -218,13 +223,13 @@ public class OnboardingWindow extends UiPart<Stage> {
             coverAll();
             break;
         case 1:
-            showOnly(menuBar);
+            showOnly(menuBar, 0);
             break;
         case 2:
-            showOnly(commandBoxPlaceholder);
+            showOnly(commandBoxPlaceholder, 0);
             break;
         case 3:
-            showOnly(personList);
+            showOnly(personList, 2);
             break;
         default:
             break;

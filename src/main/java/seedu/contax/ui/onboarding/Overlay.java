@@ -52,8 +52,23 @@ public class Overlay extends UiPart<Region> {
      */
     public void showOnly(DoubleProperty boundX, DoubleProperty boundY,
                          ReadOnlyDoubleProperty height, ReadOnlyDoubleProperty width,
-                         ReadOnlyDoubleProperty parentHeight, ReadOnlyDoubleProperty parentWidth) {
-        showAll();
+                         ReadOnlyDoubleProperty parentHeight, ReadOnlyDoubleProperty parentWidth,
+                         int option) {
+
+        switch (option) {
+        case 0:
+            showAll();
+            break;
+        case 1:
+            hideAll();
+            bottomOverlay.setVisible(true);
+            break;
+        case 2:
+            hideAll();
+            topOverlay.setVisible(true);
+            break;
+        }
+
         topOverlay.setStyle("-fx-background-color: rgb(0, 0, 0, 0.5)");
         bottomOverlay.setStyle("-fx-background-color: rgb(0, 0, 0, 0.5)");
         topOverlay.layoutXProperty().bind(boundX);
@@ -87,4 +102,5 @@ public class Overlay extends UiPart<Region> {
         topOverlay.setVisible(false);
         bottomOverlay.setVisible(false);
     }
+
 }
