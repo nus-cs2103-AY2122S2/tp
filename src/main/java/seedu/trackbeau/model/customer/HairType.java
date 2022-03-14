@@ -9,10 +9,10 @@ import static seedu.trackbeau.commons.util.AppUtil.checkArgument;
  */
 public class HairType {
 
-    public static final String MESSAGE_CONSTRAINTS = "Hair type can be any values and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "HairTypes can be any values and it should not be blank";
 
     /*
-     * The first character of trackBeau must not be a whitespace,
+     * The first character of hair type must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[^\\s].*";

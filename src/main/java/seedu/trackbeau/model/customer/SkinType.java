@@ -9,10 +9,10 @@ import static seedu.trackbeau.commons.util.AppUtil.checkArgument;
  */
 public class SkinType {
 
-    public static final String MESSAGE_CONSTRAINTS = "Skin type can be any values and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "SkinTypes can be any values and it should not be blank";
 
     /*
-     * The first character of trackBeau must not be a whitespace,
+     * The first character of skin type must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[^\\s].*";
