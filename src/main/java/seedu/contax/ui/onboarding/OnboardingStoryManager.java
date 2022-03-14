@@ -56,7 +56,7 @@ public class OnboardingStoryManager {
 
     private void addDisplayStep(OnboardingStory story, String message) {
         story.addStory(new OnboardingStep(message,
-                0, 0.25, OverlayOption.All, PositionOption.Center, HighlightOption.ClearAll,
+                0.25, 0.5, OverlayOption.All, PositionOption.Center, HighlightOption.ClearAll,
                 0, null, -1, null, false));
     }
 
