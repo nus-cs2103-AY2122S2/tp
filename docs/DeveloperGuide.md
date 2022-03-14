@@ -251,12 +251,10 @@ _{Explain here how the data archiving feature will be implemented}_
 **Target user profile**: A storekeeper who
 
 * has a need to manage different products in the store
+* is comfortable with CLI but prefers GUI for certain occasions
 * is forgetful and easily loses track of expiry dates in  a store
+* is forgetful and sometimes forgets command syntax
 * prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
-
 
 **Value proposition**: manage products and their expiry dates with ease using CLI 
 
