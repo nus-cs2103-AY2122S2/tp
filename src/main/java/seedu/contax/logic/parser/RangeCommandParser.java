@@ -17,19 +17,21 @@ import java.util.Set;
 
 import seedu.contax.commons.core.index.Index;
 import seedu.contax.logic.commands.EditCommand;
-import seedu.contax.logic.commands.RangeEditCommand;
+import seedu.contax.logic.commands.RangeCommand;
 import seedu.contax.logic.parser.exceptions.ParseException;
 import seedu.contax.model.tag.Tag;
 
 
-
-public class RangeEditCommandParser {
+/**
+ * Parses input arguments and creates a new RangeCommandParser object
+ */
+public class RangeCommandParser {
     /**
      * Parses the given {@code String} of arguments in the context of the RangeEditCommandParser
      * and returns an RangeEditCommandParser object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public RangeEditCommand parse(String args) throws ParseException {
+    public RangeCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_RANGE_FROM, PREFIX_RANGE_TO,
@@ -37,37 +39,50 @@ public class RangeEditCommandParser {
 
         Index fromIndex;
         Index toIndex;
-        EditCommand.EditPersonDescriptor editPersonDescriptor = new EditCommand.EditPersonDescriptor();
         if (argMultimap.getValue(PREFIX_RANGE_FROM).isPresent()) {
             fromIndex = Index.fromOneBased(Integer.parseInt(argMultimap.getValue(PREFIX_RANGE_FROM).get()));
         } else {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RangeCommand.MESSAGE_EDIT_USAGE));
         }
-
         if (argMultimap.getValue(PREFIX_RANGE_TO).isPresent()) {
             toIndex = Index.fromOneBased(Integer.parseInt(argMultimap.getValue(PREFIX_RANGE_TO).get()));
         } else {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
-        }
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
-        }
-        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
-        }
-        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
-        }
-        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
-        }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
-
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RangeCommand.MESSAGE_EDIT_USAGE));
         }
 
-        return new RangeEditCommand(fromIndex, toIndex, editPersonDescriptor);
+        switch (argMultimap.getPreamble()) {
+
+        case "edit":
+            EditCommand.EditPersonDescriptor editPersonDescriptor = new EditCommand.EditPersonDescriptor();
+
+            if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, RangeCommand.MESSAGE_EDIT_USAGE));
+            }
+            if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
+                editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
+            }
+            if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+                editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
+            }
+            if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
+                editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
+            }
+            parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
+
+            if (!editPersonDescriptor.isAnyFieldEdited()) {
+                throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+            }
+
+            return new RangeCommand(fromIndex, toIndex, editPersonDescriptor);
+
+        case "delete":
+            return new RangeCommand(fromIndex, toIndex, null);
+
+        default:
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RangeCommand.MESSAGE_USAGE));
+        }
+
     }
 
     /**
@@ -77,12 +92,10 @@ public class RangeEditCommandParser {
      */
     private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
         assert tags != null;
-
         if (tags.isEmpty()) {
             return Optional.empty();
         }
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
-
 }

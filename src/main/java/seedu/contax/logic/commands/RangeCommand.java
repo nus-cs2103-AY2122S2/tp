@@ -23,11 +23,18 @@ import seedu.contax.model.person.Person;
 import seedu.contax.model.person.Phone;
 import seedu.contax.model.tag.Tag;
 
+/**
+ * Range edit or delete a person identified using it's displayed from index and to index from the address book.
+ */
+public class RangeCommand extends Command {
+    public static final String COMMAND_WORD = "range";
 
-public class RangeEditCommand extends Command {
-    public static final String COMMAND_WORD = "range-edit";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": command in range"
+            + "by the index number used in the displayed person list. "
+            + "Parameters: from/FROM_INDEX to/TO_INDEX (must be a positive integer) "
+            + "Example command range edit and range delete ";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified in range"
+    public static final String MESSAGE_EDIT_USAGE = COMMAND_WORD + ": Edits the details of the person in range"
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "[" + PREFIX_PHONE + "PHONE] "
@@ -42,7 +49,8 @@ public class RangeEditCommand extends Command {
             + PREFIX_RANGE_TO + "3";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
     private final Index fromIndex;
     private final Index toIndex;
@@ -52,37 +60,52 @@ public class RangeEditCommand extends Command {
      * @param toIndex                of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
-    public RangeEditCommand(Index fromIndex, Index toIndex, EditCommand.EditPersonDescriptor editPersonDescriptor) {
+    public RangeCommand(Index fromIndex, Index toIndex, EditCommand.EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(fromIndex);
         requireNonNull(toIndex);
-        requireNonNull(editPersonDescriptor);
-
+        if (editPersonDescriptor == null) {
+            this.editPersonDescriptor = null;
+        } else {
+            this.editPersonDescriptor = new EditCommand.EditPersonDescriptor(editPersonDescriptor);
+        }
         this.fromIndex = fromIndex;
         this.toIndex = toIndex;
-        this.editPersonDescriptor = new EditCommand.EditPersonDescriptor(editPersonDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (fromIndex.getZeroBased() > toIndex.getZeroBased() || toIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        List<Person> lastShownList = model.getFilteredPersonList();
+        if (this.editPersonDescriptor != null) {
+            if (fromIndex.getZeroBased() > toIndex.getZeroBased() || toIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+            List<Person> personToEditList = new ArrayList<>();
+            for (int i = fromIndex.getZeroBased(); i <= toIndex.getZeroBased(); i++) {
+                Person personToEdit = lastShownList.get(i);
+                personToEditList.add(personToEdit);
+            }
+            personToEditList = createEditedPerson(personToEditList, editPersonDescriptor);
+            for (int i = 0; i < personToEditList.size(); i++) {
+                Person personToEdit = lastShownList.get(fromIndex.getZeroBased() + i);
+                Person editedPerson = personToEditList.get(i);
+                model.setPerson(personToEdit, editedPerson);
+                model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            }
+            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, personToEditList));
+        } else {
+            if (fromIndex.getZeroBased() > toIndex.getZeroBased() || toIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+            List<Person> personToDeleteList = new ArrayList<>();
+            for (int i = fromIndex.getZeroBased(); i <= toIndex.getZeroBased(); i++) {
+                Person personToDelete = lastShownList.get(i);
+                personToDeleteList.add(personToDelete);
+                model.deletePerson(personToDelete);
+            }
+            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDeleteList));
         }
-        List<Person> personToEditList = new ArrayList<>();
-        for (int i = fromIndex.getZeroBased(); i <= toIndex.getZeroBased(); i++) {
-            Person personToEdit = lastShownList.get(i);
-            personToEditList.add(personToEdit);
-        }
-        personToEditList = createEditedPerson(personToEditList, editPersonDescriptor);
-        for (int i = 0; i < personToEditList.size(); i++) {
-            Person personToEdit = lastShownList.get(fromIndex.getZeroBased() + i);
-            Person editedPerson = personToEditList.get(i);
-            model.setPerson(personToEdit, editedPerson);
-            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        }
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, personToEditList));
     }
 
     /**
