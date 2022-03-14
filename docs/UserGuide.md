@@ -42,14 +42,14 @@ Some example commands you can try:
 
 * **`list`** : Lists all shows.
 
-* **`add`**`n/ReZero s/watching t/Anime` : Adds a show **named** `ReZero` with the **tag** `Anime` to Trackermon as **watching**.
+* **`add`** `n/ReZero s/watching t/Anime` : Adds a show **named** `ReZero` with the **tag** `Anime` to Trackermon as **watching**.
 
-* **`delete`**`3` : Deletes the 3rd show shown in the current list.
+* **`delete`** `3` : Deletes the **3rd show** shown in the current list.
 
 * **`exit`** : Exits the app.
 
 
-#### [return to top](#table-of-contents)
+[<img src="images/toc-icon.jpg" width="50px">](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -79,7 +79,7 @@ Some example commands you can try:
 
 </div>
 
-#### [return to top](#table-of-contents)
+[<img src="images/toc-icon.jpg" width="50px">](#table-of-contents)
 
 ---
 
@@ -98,7 +98,7 @@ Examples:
 * `add n/All of us are dead s/completed t/Kdrama`
 * `add n/All of us are dead`
 
-#### [return to top](#table-of-contents)
+[<img src="images/toc-icon.jpg" width="50px">](#table-of-contents)
 
 ---
 
@@ -108,6 +108,8 @@ Shows a list of all shows in Trackermon.
 
 Format: `list`
 
+[<img src="images/toc-icon.jpg" width="50px">](#table-of-contents)
+
 ---
 
 ### Requesting help URL: `help`
@@ -116,7 +118,7 @@ Shows a URL that redirects the user to Trackermon's user guide.
 
 Format: `help`
 
-#### [return to top](#table-of-contents)
+[<img src="images/toc-icon.jpg" width="50px">](#table-of-contents)
 
 ---
 
@@ -133,7 +135,7 @@ Examples:
 * `find` followed by `attack` displays all the shows in the list that contain the keyword `attack`.
 * `find attack` followed by `delete 1` removes 1st show in results of `find` command.
 
-#### [return to top](#table-of-contents)
+[<img src="images/toc-icon.jpg" width="50px">](#table-of-contents)
 
 ---
 
@@ -150,7 +152,7 @@ Examples:
 * `list` followed by `delete 2` removes 2nd show in Trackermon.
 * `find ghibli` followed by `delete 1` removes 1st show in results of `find` command.
 
-#### [return to top](#table-of-contents)
+[<img src="images/toc-icon.jpg" width="50px">](#table-of-contents)
 
 ---
 
@@ -162,7 +164,7 @@ Format: `exit`
 
 * Displays error message and exits the program after 3 seconds.
 
-#### [return to top](#table-of-contents)
+[<img src="images/toc-icon.jpg" width="50px">](#table-of-contents)
 
 ---
 
@@ -170,7 +172,7 @@ Format: `exit`
 
 Trackermon data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-#### [return to top](#table-of-contents)
+[<img src="images/toc-icon.jpg" width="50px">](#table-of-contents)
 
 ---
 
@@ -178,7 +180,7 @@ Trackermon data are saved in the hard disk automatically after any command that 
 
 _Details coming soon ..._
 
-#### [return to top](#table-of-contents)
+[<img src="images/toc-icon.jpg" width="50px">](#table-of-contents)
 
 ---
 
@@ -186,7 +188,7 @@ _Details coming soon ..._
 
 _Details coming soon ..._
 
-#### [return to top](#table-of-contents)
+[<img src="images/toc-icon.jpg" width="50px">](#table-of-contents)
 
 ---
 
@@ -199,4 +201,4 @@ Action | Format, Examples
 **List** | `list`
 **Exit** | `exit`
 
-#### [return to top](#table-of-contents)
+[<img src="images/toc-icon.jpg" width="50px">](#table-of-contents)
