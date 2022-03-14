@@ -142,7 +142,10 @@ Examples:
   
 ### Finding companies or internship roles from companies by name: `find` <a id="c-find-c-r"></a>
 
-Find companies whose names match any of the given company keywords and contain one or more roles matching any of the given role keywords.
+Find companies or/and roles depending on the format given.
+If only company keywords are entered, companies whose names match any of the given keywords will be displayed with all their roles.
+If only role keywords are entered, roles across all companies whose role names match any of the given keywords will be displayed.
+If both keywords are entered, only companies with names that match any of the company keywords while containing roles whose names match any of the role keywords are displayed.
 
 Format: `find c/COMPANY_KEYWORD [MORE_COMPANY_KEYWORDS] r/ROLE_KEYWORD [MORE_ROLE_KEYWORDS]`
 
@@ -153,9 +156,6 @@ Format: `find c/COMPANY_KEYWORD [MORE_COMPANY_KEYWORDS] r/ROLE_KEYWORD [MORE_ROL
 * Companies and roles matching at least one keyword will be returned e.g. `software engineer` will match `mobile engineer` and `software developer`
 * At least one role keyword or one company keyword must be provided in the user input. 
 * The prefixes `c/` and `r/` can be omitted or included if no corresponding keywords are meant to be entered  
-* If both keywords are entered, only companies with names that match any of the company keywords, containing roles whose names match any of the role keywords are displayed.
-* If no role keywords are entered, companies whose names match any of the given keywords will be displayed with all their roles.
-* If no company keywords are entered, roles whose role names match role keywords, belonging to all companies, are displayed. 
 
 Examples:
 
