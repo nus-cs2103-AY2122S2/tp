@@ -15,7 +15,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.trackbeau.commons.core.GuiSettings;
-import seedu.trackbeau.model.customer.NameContainsKeywordsPredicate;
+import seedu.trackbeau.model.customer.SearchContainsKeywordsPredicate;
 import seedu.trackbeau.testutil.TrackBeauBuilder;
 
 public class ModelManagerTest {
@@ -118,7 +118,8 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredCustomerList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        modelManager.updateFilteredCustomerList(new SearchContainsKeywordsPredicate("getName",
+                Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
