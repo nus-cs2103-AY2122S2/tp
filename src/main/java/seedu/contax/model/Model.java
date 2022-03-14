@@ -148,7 +148,7 @@ public interface Model {
     boolean hasOverlappingAppointment(Appointment appointment);
 
     /**
-     * Deletes the given appointment into the schedule.
+     * Deletes the given appointment from the schedule.
      * The supplied appointment must exist in the schedule.
      */
     void deleteAppointment(Appointment appointment);
@@ -161,7 +161,7 @@ public interface Model {
 
     /**
      * Replaces the given appointment {@code target} with {@code editedAppointment}.
-     * {@code target} must exist in the appointment.
+     * {@code target} must exist in the schedule.
      * The appointment {@code editedAppointment} must not overlap with an existing appointment in the
      * schedule.
      */

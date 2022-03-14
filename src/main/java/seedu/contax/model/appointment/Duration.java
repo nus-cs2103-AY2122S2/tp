@@ -4,7 +4,7 @@ import static seedu.contax.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents an {@link Appointment}'s duration in minutes in the schedule.
- * Guarantees: Immutable; is valid declared as in {@link #isValidDuration(int)}
+ * Guarantees: Immutable; is valid declared as in {@link #isValidDuration(int)}.
  */
 public class Duration {
     public static final String MESSAGE_CONSTRAINTS = "Duration should be a positive integer";
@@ -12,9 +12,9 @@ public class Duration {
     public final int value;
 
     /**
-     * Constructs a {@code Duration}
+     * Constructs a {@code Duration}.
      *
-     * @param duration A valid duration, as defined in {@link #isValidDuration(int)}
+     * @param duration A valid duration, as defined in {@link #isValidDuration(int)}.
      */
     public Duration(int duration) {
         checkArgument(isValidDuration(duration), MESSAGE_CONSTRAINTS);

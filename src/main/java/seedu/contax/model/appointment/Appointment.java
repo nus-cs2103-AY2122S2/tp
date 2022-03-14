@@ -10,7 +10,6 @@ import seedu.contax.model.person.Person;
 
 /**
  * Represents an appointment in the schedule.
- *
  */
 public class Appointment {
 
@@ -77,8 +76,9 @@ public class Appointment {
     }
 
     /**
-     * Returns true if both appointments overlap, that is, the start time of an appointment is before the
-     * (start time + duration) of the other appointment.
+     * Returns true if both appointments overlap, that is, the start time of an appointment is strictly before
+     * the (start time + duration) of the other appointment. Note that false will be returned if the start
+     * time of the other appointment is exactly the end time of this appointment.
      *
      * @param other The other {@code Appointment} to compare against.
      * @return True if both appointments overlap, otherwise false.
@@ -120,10 +120,7 @@ public class Appointment {
         return otherPerson.getName().equals(getName())
                 && otherPerson.getStartDateTime().equals(getStartDateTime())
                 && otherPerson.getDuration().equals(getDuration())
-                && (otherPerson.getPerson() == null
-                    ? getPerson() == null
-                    : otherPerson.getPerson().equals(getPerson())
-                );
+                && Objects.equals(otherPerson.getPerson(), getPerson());
     }
 
     @Override

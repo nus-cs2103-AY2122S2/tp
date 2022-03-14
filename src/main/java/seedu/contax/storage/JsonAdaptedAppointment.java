@@ -60,7 +60,7 @@ class JsonAdaptedAppointment {
      * Converts this Jackson-friendly adapted appointment object into the model's {@code Appointment} object.
      *
      * @param addressBook The current up-to-date address book for matching the person field in appointments.
-     * @throws IllegalValueException if there were any data constraints violated in the adapted appointment.
+     * @throws IllegalValueException If there were any data constraints violated in the adapted appointment.
      */
     public Appointment toModelType(ReadOnlyAddressBook addressBook) throws IllegalValueException {
 

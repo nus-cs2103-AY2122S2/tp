@@ -5,7 +5,7 @@ import static seedu.contax.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents an {@link Appointment}'s name in the schedule.
- * Guarantees: Immutable; is valid declared as in {@link #isValidName(String)}
+ * Guarantees: Immutable; is valid declared as in {@link #isValidName(String)}.
  */
 public class Name {
     public static final String MESSAGE_CONSTRAINTS =

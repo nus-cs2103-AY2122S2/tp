@@ -40,6 +40,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         setScheduleFilePath(newUserPrefs.getScheduleFilePath());
     }
 
+    @Override
     public GuiSettings getGuiSettings() {
         return guiSettings;
     }
@@ -49,6 +50,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.guiSettings = guiSettings;
     }
 
+    @Override
     public Path getAddressBookFilePath() {
         return addressBookFilePath;
     }
