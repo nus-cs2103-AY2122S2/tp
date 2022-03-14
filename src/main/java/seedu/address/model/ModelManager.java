@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.prescription.Prescription;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,6 +23,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Prescription> filteredPrescription;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +36,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredPrescription = new FilteredList<>(this.addressBook.getPrescriptionList());
     }
 
     public ModelManager() {
@@ -105,6 +108,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addPrescription(Prescription prescription) {
+        addressBook.addPrescription(prescription);
+        updateFilteredPrescriptionList(PREDICATE_SHOW_ALL_PRESCRIPTIONS);
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
@@ -126,6 +135,12 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredPrescriptionList(Predicate<Prescription> predicate) {
+        requireNonNull(predicate);
+        filteredPrescription.setPredicate(predicate);
     }
 
     @Override
