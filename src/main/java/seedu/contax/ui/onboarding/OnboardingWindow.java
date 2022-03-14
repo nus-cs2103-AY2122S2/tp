@@ -8,7 +8,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import seedu.contax.logic.parser.*;
 import seedu.contax.model.onboarding.OnboardingStep;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.person.UniquePersonList;
@@ -32,7 +31,6 @@ public class OnboardingWindow extends UiPart<Stage> {
     private UniquePersonList persons;
     private FilteredList<Person> filteredPersons;
 
-    private AddCommandParser p;
     private String errorMessage;
 
     @FXML
@@ -350,10 +348,10 @@ public class OnboardingWindow extends UiPart<Stage> {
                 System.out.println("INVALID");
                 return 0;
             }
-            if (OnboardingUtil.processCommand(step, commandBox.getText(),
-                    instructionLabel, persons) == -1) {
+
+            if (OnboardingUtil.processCommand(step, commandBox.getText(), instructionLabel, persons) == -1) {
                 return 0;
-            };
+            }
 
             OnboardingStep s = storyManager.getNextStep();
             processStep(s);

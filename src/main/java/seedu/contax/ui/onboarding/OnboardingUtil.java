@@ -1,5 +1,13 @@
 package seedu.contax.ui.onboarding;
 
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_TAG;
+
+import java.util.HashSet;
+
 import javafx.collections.ObservableList;
 import seedu.contax.logic.parser.AddressBookParser;
 import seedu.contax.logic.parser.ArgumentMultimap;
@@ -14,17 +22,15 @@ import seedu.contax.model.person.Phone;
 import seedu.contax.model.person.UniquePersonList;
 import seedu.contax.model.util.SampleDataUtil;
 
-import java.util.HashSet;
 
-import static seedu.contax.logic.parser.CliSyntax.*;
 
 /**
  * This class provides utilities functions for the onboarding window
  */
 public class OnboardingUtil {
 
-    private final static AddressBookParser parser = new AddressBookParser();
-    private final static String INVALID_COMMAND = "Invalid format! "
+    private static final AddressBookParser parser = new AddressBookParser();
+    private static final String INVALID_COMMAND = "Invalid format! "
             + "Follow the format 'add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS'"
             + "\n\nExample: add n/Johnny p/91234567 e/Johnny@j.com a/Johnny street";
 
@@ -34,7 +40,7 @@ public class OnboardingUtil {
      * @param persons the UniquePersonList to be populated
      */
     public static void populateWithSample(UniquePersonList persons) {
-        Person samplePersons[] = SampleDataUtil.getSamplePersons();
+        Person[] samplePersons = SampleDataUtil.getSamplePersons();
         for (Person p : samplePersons) {
             persons.add(p);
         }
@@ -109,7 +115,7 @@ public class OnboardingUtil {
             }
 
             Person p = makePerson(map);
-            if(persons.contains(p)) {
+            if (persons.contains(p)) {
                 instructionLabel.setText(p.getName() + " already exists! Add someone else");
                 return -1;
             }
