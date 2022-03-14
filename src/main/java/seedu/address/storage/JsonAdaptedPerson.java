@@ -64,10 +64,10 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
-        age = "23"; //source.getAge().value;
-        height = "180"; //source.getHeight().value;
-        jerseyNumber = "23"; //source.getJerseyNumber().value;
-        weight = "80"; //source.getWeight().value;
+        age = source.getAge().value;
+        height = source.getHeight().value;
+        jerseyNumber = source.getJerseyNumber().value;
+        weight = source.getWeight().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -144,7 +144,6 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Weight.MESSAGE_CONSTRAINTS);
         }
         final Weight modelWeight = new Weight(weight);
-
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
