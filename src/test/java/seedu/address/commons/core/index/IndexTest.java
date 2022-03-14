@@ -8,6 +8,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import org.junit.jupiter.api.Test;
 
 public class IndexTest {
+    private static final int INCREMENT_VALUE = 2;
 
     @Test
     public void createOneBasedIndex() {
@@ -39,7 +40,6 @@ public class IndexTest {
 
     @Test
     public void testIncrement() {
-        final int INCREMENT_VALUE = 2;
         final Index zeroBased = Index.fromZeroBased(2);
         final Index oneBased = Index.fromOneBased(2);
         final Index zeroBasedHigh = Index.fromZeroBased(6);
