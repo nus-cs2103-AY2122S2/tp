@@ -19,10 +19,16 @@ public class OnboardingStoryTest {
         // both empty stories -> returns true
         assertTrue(story1.equals(story2));
 
-        OnboardingStep step1 = new OnboardingStep("message 1", 0, 0, 0,
-                0, 0, 0, "", null, 1);
-        OnboardingStep step2 = new OnboardingStep("message 2", 0, 0, 0,
-                0, 0, 0, "", null, 1);
+        OnboardingStep step1 = new OnboardingStep("message 1",
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                OnboardingStory.HighlightOption.COMMAND_BOX,
+                0, "null", null, null, false);
+        OnboardingStep step2 = new OnboardingStep("message 2",
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                OnboardingStory.HighlightOption.COMMAND_BOX,
+                0, "null", null, null, false);
 
 
 
@@ -52,8 +58,11 @@ public class OnboardingStoryTest {
     @Test
     public void addStory() {
         OnboardingStory story1 = new OnboardingStory();
-        OnboardingStep step1 = new OnboardingStep("message 1", 0, 0, 0,
-                0, 0, 0, "", null, 1);
+        OnboardingStep step1 = new OnboardingStep("message 1",
+                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_COMMAND_BOX,
+                OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
+                OnboardingStory.HighlightOption.COMMAND_BOX,
+                0, "null", null, null, false);
         story1.addStory(step1);
 
         // Size of story with 1 step

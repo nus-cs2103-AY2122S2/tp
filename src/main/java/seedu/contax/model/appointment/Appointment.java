@@ -11,7 +11,7 @@ import seedu.contax.model.person.Person;
 /**
  * Represents an appointment in the schedule.
  */
-public class Appointment {
+public class Appointment implements Comparable<Appointment> {
 
     // Appointment identification fields
     private final StartDateTime startDateTime;
@@ -137,5 +137,10 @@ public class Appointment {
                 + getDuration()
                 + "; Person: "
                 + getPerson();
+    }
+
+    @Override
+    public int compareTo(Appointment o) {
+        return this.getStartDateTime().compareTo(o.getStartDateTime());
     }
 }

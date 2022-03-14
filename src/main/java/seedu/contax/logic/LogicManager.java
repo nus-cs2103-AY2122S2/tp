@@ -73,13 +73,18 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Tag> getTagList() {
-        return model.getTagList();
+    public ObservableList<Tag> getFilteredTagList() {
+        return model.getFilteredTagList();
     }
 
     @Override
     public Path getAddressBookFilePath() {
         return model.getAddressBookFilePath();
+    }
+
+    @Override
+    public Path getScheduleFilePath() {
+        return model.getScheduleFilePath();
     }
 
     @Override

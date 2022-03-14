@@ -215,15 +215,16 @@ Examples:
 
 Edits an existing tag in ContaX.
 
-Format: `edittag f/OLD_TAGNAME t/NEW_TAGNAME`
+Format: `edittag INDEX t/NEW_TAGNAME`
 
 * All parameters **must** be specified.
-* Changes the name of a tag`OLD_TAGNAME` to `NEW_TAGNAME`.
-* `OLD_TAGNAME` and `NEW_TAGNAME` are case-insensitive.
-* An error will be thrown if either `OLD_TAGNAME` cannot be found or `NEW_TAGNAME` already exists in ContaX.
+* The `INDEX` parameter **must be a positive integer**, and refers to the index number shown in the **displayed tag list**.
+* Changes the name of a tag at `INDEX` to `NEW_TAGNAME`.
+* An error will be thrown if either `INDEX` is invalid or `NEW_TAGNAME` already exists in ContaX.
+* An error will be thrown if the tag at `INDEX` has the same name as `NEW_TAGNAME`
 
 Examples:
-* `edittag f/New Clients t/Prospective Clients` Changes the name of the tag *New Clients* to *Prospective Clients*. Command will be ignored if the tag *New Clients* does not exist in the first place or *Prospective Clients* already exists in Contax.
+* `edittag 1 t/Prospective Clients` Changes the name of first tag in the list to *Prospective Clients*. 
 
 ### Listing All Tags : `listtags`
 
@@ -247,18 +248,18 @@ Format: `deletetag INDEX`
 Examples:
 * `deletetag 1` Deletes the first tag in the tag list and disassociates any contacts that contain the specified tag.
 
-### Finding Contacts by Tag : `findByTag`
+### Finding Contacts by Tag : `findbytag`
 
-Finds persons whose tags match the given tag names.
+Finds persons whose tags match the given keyword.
 
-Format: `findByTag t/TAGNAME`
+Format: `findbytag t/TAGNAME`
 
 * The `TAGNAME` parameter **must** be specified.
 * Search is case-insensitive e.g. `clients` is the same as `Clients`.
-* An error will be thrown if the specified `TAGNAME` does not exist.
+* If there are no tags that contain that keyword, an empty list will be displayed.
 
 Examples:
-* `findByTag t/friends` Displays the contact information of contacts who have the *friends* tag.
+* `findbytag t/friends` Displays the contact information of contacts who have the *friends* tag.
 
 ![Find Tags](images/FindTag.png)
 
@@ -363,19 +364,14 @@ Appointment data are saved in the hard disk automatically after any command that
 
 ### Exporting the data: `exportcsv`
 
-Exports the current list of contacts as a CSV file that can be imported through ContaX or other contact software such as Google/Outlook
+Exports the current list of contacts as a CSV file that can be imported through ContaX or viewed separately via Microsoft Excel
 
-Format: `exportcsv [EXPORTTYPE]`
-* Exports CSV as per the specified format.
-* If `EXPORTTYPE` is left empty, it will default to `EXPORTTYPE = 1` and export in custom ContaX format
-* `EXPORTTYPE` options are
-   * `EXPORTTYPE=1` for ContaX format
-   * `EXPORTTYPE=2` for Google Contacts format
-   * `EXPORTTYPE=3` for Microsoft Outlook format
+Format: `exportcsv`
+* Exports CSV as per ContaX format. This file can be imported by other instances of ContaX
 * File will be saved on the directory `[JAR file location]/data/addressbook.csv`
 
 Examples:
-* `exportcsv 2`: Exports the current address book as a CSV file ready to be uploaded onto Google Contacts
+* `exportcsv`: Exports the current address book as a CSV file at `[JAR file location]/data/addressbook.csv`
 ### Editing the data file
 
 ContaX contacts and appointments data are saved in the hard disk automatically after any command that changes contact data in JSON format at `[JAR file location]/data/addressbook.json` and `[JAR file location]/data/schedule.json`. Advanced users are welcome to update data directly by editing that data file.
@@ -500,17 +496,17 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS] [by/SEARCH_TYPE]`<br> e.g., `find James Jake by/name`
 **List** | `list`
 **Add Tag** | `addtag n/TAGNAME` <br> e.g., `addtag n/Potential Clients`
-**Edit Tag** | `edittag f/OLD_TAGNAME t/NEW_TAGNAME` <br> e.g., `edittag f/New Clients t/Prospective Clients`
+**Edit Tag** | `edittag INDEX t/NEW_TAGNAME` <br> e.g., `edittag 1 t/Prospective Clients`
 **List Tags** | `listtags`
 **Delete Tag** | `deletetag INDEX` <br> e.g., `deletetag 1`
-**Find Contacts By Tag** | `findByTag t/TAGNAME` <br> e.g., `findByTag t/friends`
+**Find Contacts By Tag** | `findbytag t/TAGNAME` <br> e.g., `findbytag t/friends`
 **Add Appointment** | `addappointment n/NAME d/DATE t/TIME l/DURATION p/PERSON`<br> e.g., `addappointment n/Call Bob d/14-02-2022 t/11:00 p/2 l/60`
 **List Appointments** | `listappointments`
 **Delete Appointment** | `deleteappointment INDEX`<br> e.g., `deleteappointment 2`
 **Edit Appointment** | `editappointment INDEX [n/NAME] [d/DATE] [t/TIME] [p/PERSON] [l/DURATION]`<br> e.g., `editappointment 2 n/Call Juliet t/13:45`
 **List Appointments Within Period** | `appointmentsbetween sd/STARTDATE st/STARTTIME ed/ENDDATE et/ENDTIME` <br> e.g. `appointmentsbetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00`
 **Help** | `help`
-**Export CSV** | `exportcsv [EXPORTTYPE]`<br> e.g., `exportcsv 2`
+**Export CSV** | `exportcsv`
 **Import CSV** | `importcsv f/FILEPATH [n/COLUMNNUM] [p/COLUMN_PERSON] [e/COLUMN_EMAIL] [a/COLUMN_ADDRESS] [t/COLUMN_TAGS]` <br> e.g., `importCSV n/2 p/3 e/5 a/6 t/4`
 **Operate on Contacts by Conditional Clause** | `batch COMMAND where/CONDITION` <br> e.g., `batch Edit p/87438806 where/ p/Phone = 87438807`
 **Operate on Contacts within Range** | `range COMMAND from/INDEX to/INDEX` <br> e.g., `range edit e/johndoe@example.com from/6 to/10`

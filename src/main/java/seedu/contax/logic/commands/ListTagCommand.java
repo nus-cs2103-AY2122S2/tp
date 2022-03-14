@@ -17,6 +17,7 @@ public class ListTagCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        model.updateFilteredTagList(Model.PREDICATE_SHOW_ALL_TAGS);
         return new CommandResult(MESSAGE_SUCCESS, GuiListContentType.TAG);
     }
 }

@@ -18,6 +18,12 @@ public class Overlay extends UiPart<Region> {
     @FXML
     private Pane bottomOverlay;
 
+    public enum ShowOverlay {
+        BOTH,
+        TOP,
+        BOTTOM,
+    }
+
     Overlay() {
         super(FXML);
     }
@@ -44,16 +50,36 @@ public class Overlay extends UiPart<Region> {
     }
 
     /**
-     * Show only the given regio
+     * Show only the given region
      * @param boundX DoubleProperty to bind layoutX to
      * @param boundY DoubleProperty to bind layoutY to
      * @param height ReadOnlyDoubleProperty for height of window
      * @param width ReadOnlyDoubleProperty for width o  window
+     * @param parentHeight ReadOnlyDoubleProperty for height of parent window
+     * @param parentWidth ReadOnlyDoubleProperty for height of parent window
+     * @param option overlay option
      */
     public void showOnly(DoubleProperty boundX, DoubleProperty boundY,
                          ReadOnlyDoubleProperty height, ReadOnlyDoubleProperty width,
-                         ReadOnlyDoubleProperty parentHeight, ReadOnlyDoubleProperty parentWidth) {
-        showAll();
+                         ReadOnlyDoubleProperty parentHeight, ReadOnlyDoubleProperty parentWidth,
+                         ShowOverlay option) {
+
+        switch (option) {
+        case BOTH:
+            showAll();
+            break;
+        case BOTTOM:
+            hideAll();
+            bottomOverlay.setVisible(true);
+            break;
+        case TOP:
+            hideAll();
+            topOverlay.setVisible(true);
+            break;
+        default:
+            break;
+        }
+
         topOverlay.setStyle("-fx-background-color: rgb(0, 0, 0, 0.5)");
         bottomOverlay.setStyle("-fx-background-color: rgb(0, 0, 0, 0.5)");
         topOverlay.layoutXProperty().bind(boundX);
@@ -87,4 +113,5 @@ public class Overlay extends UiPart<Region> {
         topOverlay.setVisible(false);
         bottomOverlay.setVisible(false);
     }
+
 }

@@ -26,7 +26,7 @@ public class DeleteTagCommandTest {
 
     @Test
     public void execute_invalidIndex_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getTagList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredTagList().size() + 1);
         DeleteTagCommand deleteCommand = new DeleteTagCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_TAG_DISPLAYED_INDEX);

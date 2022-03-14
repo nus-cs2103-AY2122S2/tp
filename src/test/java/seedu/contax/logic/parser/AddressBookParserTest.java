@@ -32,15 +32,20 @@ import seedu.contax.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.contax.logic.commands.EditTagCommand;
 import seedu.contax.logic.commands.EditTagCommand.EditTagDescriptor;
 import seedu.contax.logic.commands.ExitCommand;
+import seedu.contax.logic.commands.ExportCsvCommand;
+import seedu.contax.logic.commands.FindByTagCommand;
 import seedu.contax.logic.commands.FindCommand;
 import seedu.contax.logic.commands.HelpCommand;
+import seedu.contax.logic.commands.ImportCsvCommand;
 import seedu.contax.logic.commands.ListAppointmentCommand;
 import seedu.contax.logic.commands.ListCommand;
 import seedu.contax.logic.commands.ListTagCommand;
 import seedu.contax.logic.parser.exceptions.ParseException;
+import seedu.contax.model.IndexedCsvFile;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.person.NameContainsKeywordsPredicate;
 import seedu.contax.model.person.Person;
+import seedu.contax.model.person.TagNameContainsKeywordsPredicate;
 import seedu.contax.model.tag.Tag;
 import seedu.contax.testutil.AppointmentBuilder;
 import seedu.contax.testutil.AppointmentUtil;
@@ -48,6 +53,7 @@ import seedu.contax.testutil.DateInputUtil;
 import seedu.contax.testutil.EditAppointmentDescriptorBuilder;
 import seedu.contax.testutil.EditPersonDescriptorBuilder;
 import seedu.contax.testutil.EditTagDescriptorBuilder;
+import seedu.contax.testutil.ImportCsvObjectBuilder;
 import seedu.contax.testutil.PersonBuilder;
 import seedu.contax.testutil.PersonUtil;
 import seedu.contax.testutil.TagBuilder;
@@ -143,6 +149,14 @@ public class AddressBookParserTest {
         assertEquals(command, new EditTagCommand(index, editTagDescriptor));
     }
 
+    @Test
+    public void parseCommand_findByTag() throws Exception {
+        TagNameContainsKeywordsPredicate predicate = new TagNameContainsKeywordsPredicate("friends");
+        FindByTagCommand command = (FindByTagCommand) parser.parseCommand(FindByTagCommand.COMMAND_WORD
+                + " t/friends");
+        assertEquals(command, new FindByTagCommand(predicate));
+    }
+
     // Appointment related commands
     @Test
     public void parseCommand_addAppointment() throws Exception {
@@ -172,6 +186,20 @@ public class AddressBookParserTest {
     public void parseCommand_deleteAppointment() throws Exception {
         assertTrue(parser.parseCommand(DeleteAppointmentCommand.COMMAND_WORD + " 1")
                 instanceof DeleteAppointmentCommand);
+    }
+
+    //Import/Export csv tests
+    @Test
+    public void parseCommand_importCsv() throws Exception {
+        IndexedCsvFile indexedCsvFile = new ImportCsvObjectBuilder().build();
+        ImportCsvCommand command = (ImportCsvCommand)
+                parser.parseCommand(ImportCsvObjectBuilder.getImportCsvCommand(indexedCsvFile));
+        assertEquals(new ImportCsvCommand(indexedCsvFile), command);
+    }
+
+    @Test
+    public void parseCommand_exportCsv() throws Exception {
+        assertTrue(parser.parseCommand(ExportCsvCommand.COMMAND_WORD) instanceof ExportCsvCommand);
     }
 
     @Test

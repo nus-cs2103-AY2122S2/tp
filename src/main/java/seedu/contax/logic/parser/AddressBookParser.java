@@ -20,6 +20,8 @@ import seedu.contax.logic.commands.EditAppointmentCommand;
 import seedu.contax.logic.commands.EditCommand;
 import seedu.contax.logic.commands.EditTagCommand;
 import seedu.contax.logic.commands.ExitCommand;
+import seedu.contax.logic.commands.ExportCsvCommand;
+import seedu.contax.logic.commands.FindByTagCommand;
 import seedu.contax.logic.commands.FindCommand;
 import seedu.contax.logic.commands.HelpCommand;
 import seedu.contax.logic.commands.ImportCsvCommand;
@@ -87,6 +89,10 @@ public class AddressBookParser {
         case ImportCsvCommand.COMMAND_WORD:
             return new ImportCsvParser().parse(arguments);
 
+        // Export CSV Command
+        case ExportCsvCommand.COMMAND_WORD:
+            return new ExportCsvCommand();
+
         // Appointment commands
         case AddAppointmentCommand.COMMAND_WORD:
             return new AddAppointmentCommandParser().parse(arguments);
@@ -115,6 +121,9 @@ public class AddressBookParser {
 
         case DeleteTagCommand.COMMAND_WORD:
             return new DeleteTagCommandParser().parse(arguments);
+
+        case FindByTagCommand.COMMAND_WORD:
+            return new FindByTagCommandParser().parse(arguments);
 
         // Command chaining
         case ChainCommand.COMMAND_WORD:

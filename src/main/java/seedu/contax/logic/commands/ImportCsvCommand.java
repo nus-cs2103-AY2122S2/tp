@@ -10,6 +10,7 @@ import static seedu.contax.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -27,6 +28,9 @@ import seedu.contax.model.person.exceptions.DuplicatePersonException;
 import seedu.contax.model.tag.Tag;
 import seedu.contax.storage.CsvManager;
 
+/**
+ * Imports CSV files into the address book based on specified column indicators
+ */
 public class ImportCsvCommand extends Command {
     public static final String COMMAND_WORD = "importcsv";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Imports contacts from CSV file"
@@ -76,10 +80,16 @@ public class ImportCsvCommand extends Command {
         Name toAddName = ParserUtil.parseName(importedPerson[toImport.getNamePositionIndex()]);
         Phone toAddPhone = ParserUtil.parsePhone(importedPerson[toImport.getPhonePositionIndex()]);
         Email toAddEmail = ParserUtil.parseEmail(importedPerson[toImport.getEmailPositionIndex()]);
-        Address toAddAddress = ParserUtil.parseAddress(importedPerson[toImport.getAddressPositionIndex()]);
-        String[] tags = importedPerson[toImport.getTagPositionIndex()].split(";");
-        Set<Tag> toAddTag = ParserUtil.parseTags(Arrays.asList(tags));
-
+        Address toAddAddress = ParserUtil.parseAddress(importedPerson[toImport.getAddressPositionIndex()]
+                .replace("\"", ""));
+        String[] tags;
+        Set<Tag> toAddTag;
+        try {
+            tags = importedPerson[toImport.getTagPositionIndex()].split(";");
+            toAddTag = ParserUtil.parseTags(Arrays.asList(tags));
+        } catch (ArrayIndexOutOfBoundsException e) {
+            toAddTag = new HashSet<>();
+        }
         return new Person(toAddName, toAddPhone, toAddEmail, toAddAddress, toAddTag);
     }
     private CommandResult outputStringBuilder(List<Integer> skippedLines) {

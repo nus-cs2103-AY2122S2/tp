@@ -2,6 +2,7 @@ package seedu.contax.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.contax.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.contax.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.contax.testutil.Assert.assertThrows;
 import static seedu.contax.testutil.TypicalPersons.getTypicalAddressBook;
@@ -116,6 +117,14 @@ public class ImportCsvCommandTest {
         ImportCsvCommand importCsvCommand = new ImportCsvCommand(emptyCsvFile);
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getSchedule(), new UserPrefs());
         assertCommandSuccess(importCsvCommand, model, ImportCsvCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void execute_invalidFile_errorMessage() throws Exception {
+        IndexedCsvFile invalidCsvFile = new ImportCsvObjectBuilder(ImportCsvObjectBuilder.INVALID_FILEPATH).build();
+        ImportCsvCommand importCsvCommand = new ImportCsvCommand(invalidCsvFile);
+        assertCommandFailure(importCsvCommand, model, String.format(ImportCsvCommand.MESSAGE_NO_FILE_FOUND,
+                invalidCsvFile.getFilePath()));
     }
 
     @Test

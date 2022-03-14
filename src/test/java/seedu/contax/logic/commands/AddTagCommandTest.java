@@ -211,7 +211,12 @@ class AddTagCommandTest {
         }
 
         @Override
-        public ObservableList<Tag> getTagList() {
+        public void updateFilteredTagList(Predicate<Tag> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Tag> getFilteredTagList() {
             throw new AssertionError("This method should not be called.");
         }
     }

@@ -361,8 +361,8 @@ public class ModelManagerTest {
         modelManager.addAppointment(APPOINTMENT_EXTRA);
 
         modelManager.updateFilteredAppointmentList(appointment -> !appointment.equals(APPOINTMENT_ALONE));
-        assertEquals(APPOINTMENT_ALICE, modelManager.getFilteredAppointmentList().get(0));
-        assertEquals(APPOINTMENT_EXTRA, modelManager.getFilteredAppointmentList().get(1));
+        assertEquals(APPOINTMENT_EXTRA, modelManager.getFilteredAppointmentList().get(0));
+        assertEquals(APPOINTMENT_ALICE, modelManager.getFilteredAppointmentList().get(1));
     }
 
     @Test
