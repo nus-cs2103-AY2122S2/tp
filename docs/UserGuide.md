@@ -68,11 +68,6 @@ HustleBook (HB) is a **desktop app for managing client details and meetings, opt
 
 </div>
 
-### Clearing demo: `cleardemo` [coming soon]
-
-Clears all demo clients' data and starts with an empty HustleBook. 
-
-Format: `cleardemo`
 
 ### Viewing help : `help`
 
