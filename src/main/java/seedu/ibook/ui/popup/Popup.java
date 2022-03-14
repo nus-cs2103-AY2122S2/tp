@@ -8,6 +8,9 @@ import javafx.stage.Stage;
 import seedu.ibook.ui.MainWindow;
 import seedu.ibook.ui.UiPart;
 
+/**
+ * Abstract Class representing the skeleton of a popup.
+ */
 public abstract class Popup extends UiPart<Stage> {
 
     @FXML
@@ -15,6 +18,13 @@ public abstract class Popup extends UiPart<Stage> {
 
     private final MainWindow.CommandExecutor commandExecutor;
 
+    /**
+     * Initialize a new popup window with a {@code FXML} file path
+     * and a {@code CommandExecutor}.
+     *
+     * @param filePath FXML filepath.
+     * @param commandExecutor Function to execute command.
+     */
     Popup(String filePath, MainWindow.CommandExecutor commandExecutor) {
         super(filePath, new Stage());
         this.commandExecutor = commandExecutor;
@@ -37,6 +47,7 @@ public abstract class Popup extends UiPart<Stage> {
 
     /**
      * Check if the popup is showing.
+     *
      * @return A boolean indicating if the popup is showing.
      */
     public boolean isShowing() {
@@ -52,6 +63,7 @@ public abstract class Popup extends UiPart<Stage> {
 
     /**
      * Show feedback to user.
+     *
      * @param feedbackToUser The feedback string.
      */
     public void setFeedbackToUser(String feedbackToUser) {
@@ -59,6 +71,11 @@ public abstract class Popup extends UiPart<Stage> {
         error.setText(feedbackToUser);
     }
 
+    /**
+     * Execute the commandText with the {@code commandExecutor}.
+     *
+     * @param commandText The commandText.
+     */
     void execute(String commandText) {
         commandExecutor.execute(commandText);
     }

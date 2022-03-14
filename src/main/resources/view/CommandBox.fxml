@@ -8,15 +8,17 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox alignment="CENTER_LEFT" spacing="20.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<HBox xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1"
+      alignment="CENTER_LEFT" spacing="20.0" stylesheets="@css/commandBox.css">
     <VBox.margin>
         <Insets left="40.0" right="40.0" top="40.0"/>
     </VBox.margin>
-    <Button mnemonicParsing="false"
-            styleClass="primary-button"
-            text="Add Product" textFill="WHITE" onMouseClicked="#handlePopupAdd">
+    <Button mnemonicParsing="false" styleClass="primary-button"
+            text="Add Product" textFill="WHITE"
+            onMouseClicked="#handleAddProductClicked">
         <graphic>
-            <ImageView fitHeight="14.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="14.0" fitWidth="14.0"
+                       pickOnBounds="true" preserveRatio="true">
                 <Image url="@../images/plus-circle.png"/>
             </ImageView>
         </graphic>
@@ -25,7 +27,7 @@
         </padding>
     </Button>
     <TextField fx:id="commandTextField" onAction="#handleCommandEntered"
-               maxHeight="1.7976931348623157E308" promptText="Or Enter Command Here..."
+               maxHeight="Infinity" promptText="Or Enter Command Here..."
                styleClass="command" HBox.hgrow="ALWAYS" >
         <HBox.margin>
             <Insets right="10.0"/>

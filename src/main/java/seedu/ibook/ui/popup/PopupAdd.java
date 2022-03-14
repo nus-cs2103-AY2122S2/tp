@@ -7,7 +7,9 @@ import seedu.ibook.logic.commands.AddCommand;
 import seedu.ibook.logic.parser.CliSyntax;
 import seedu.ibook.ui.MainWindow;
 
-
+/**
+ * Popup responsible to add product.
+ */
 public class PopupAdd extends Popup {
 
     private static final String FXML = "popup/PopupAdd.fxml";
@@ -23,6 +25,11 @@ public class PopupAdd extends Popup {
     @FXML
     private TextArea description;
 
+    /**
+     * Initializes a new {@code popupAdd} window.
+     *
+     * @param commandExecutor Function to execute command.
+     */
     public PopupAdd(MainWindow.CommandExecutor commandExecutor) {
         super(FXML, commandExecutor);
     }

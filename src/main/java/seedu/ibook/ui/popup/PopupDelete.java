@@ -6,6 +6,9 @@ import seedu.ibook.logic.commands.DeleteCommand;
 import seedu.ibook.model.product.Product;
 import seedu.ibook.ui.MainWindow;
 
+/**
+ * Popup responsible to delete product.
+ */
 public class PopupDelete extends Popup {
 
     private static final String FXML = "popup/PopupDelete.fxml";
@@ -15,12 +18,18 @@ public class PopupDelete extends Popup {
     @FXML
     private Label message;
 
+    /**
+     * Initializes a new {@code popupDelete} window.
+     *
+     * @param commandExecutor Function to execute command.
+     */
     public PopupDelete(MainWindow.CommandExecutor commandExecutor) {
         super(FXML, commandExecutor);
     }
 
     /**
-     * Show the popup window.
+     * Shows the popup window.
+     *
      * @param index Index of the product.
      * @param product The product to be deleted.
      */

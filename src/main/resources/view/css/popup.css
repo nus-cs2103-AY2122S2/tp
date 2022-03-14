@@ -1,21 +1,11 @@
-@font-face {
-    src: url('../font/NotoSans-Thin.ttf');
-}
-
-@font-face {
-    src: url('../font/NotoSans-Regular.ttf');
+.title {
+    -fx-font-family: 'Noto Sans Thin';
+    -fx-min-width: 100;
+    -fx-font-size: 28;
 }
 
 .alert {
     -fx-text-fill: #D82148;
-}
-
-.root {
-    -fx-font-family: 'Noto Sans';
-}
-
-.title {
-    -fx-font-family: 'Noto Sans Thin';
 }
 
 .text-area .content {
@@ -26,51 +16,37 @@
     -fx-background-insets: 0;
     -fx-background-color: transparent;
     -fx-border-style: solid;
-    -fx-border-width: 1px;
-    -fx-border-radius: 3px;
+    -fx-border-width: 1;
+    -fx-border-radius: 3;
     -fx-padding : 4 2;
     -fx-border-color: #CCC;
 }
 
 .text-area:focused {
     -fx-border-color: #9F93Ed;
-    -fx-border-width: 1px;
+    -fx-border-width: 1;
     -fx-prompt-text-fill: derive(-fx-control-inner-background,-30%);
 }
 
 .text-field {
     -fx-background-color: transparent;
     -fx-border-style: solid;
-    -fx-border-width: 1px;
-    -fx-border-radius: 3px;
+    -fx-border-width: 1;
+    -fx-border-radius: 3;
     -fx-padding : 8 8;
     -fx-border-color: #CCC;
 }
 
 .text-field:focused {
     -fx-border-color: #9F93Ed;
-    -fx-border-width: 1px;
+    -fx-border-width: 1;
     -fx-prompt-text-fill: derive(-fx-control-inner-background,-30%);
-}
-
-.primary-button {
-    -fx-background-color: #9F93Ed;
-    -fx-background-radius: 8;
-    -fx-text-fill: #FFFFFF;
-}
-
-.primary-button:hover {
-    -fx-background-color: #8373e7;
-}
-
-.primary-button:pressed {
-    -fx-background-color: #7d6de0;
 }
 
 .edit-button {
     -fx-background-color: #FFE08A;
     -fx-background-radius: 8;
-    -fx-text-fill: #000000b3;
+    -fx-text-fill: #000000B3;
 }
 
 .edit-button:hover {
@@ -78,19 +54,19 @@
 }
 
 .edit-button:pressed {
-    -fx-background-color: #ffd970;
+    -fx-background-color: #FFD970;
 }
 
 .delete-button {
-    -fx-background-color: #f6416c;
+    -fx-background-color: #F6416C;
     -fx-background-radius: 8;
-    -fx-text-fill: #FFFFFF;
+    -fx-text-fill: white;
 }
 
 .delete-button:hover {
-    -fx-background-color: #e6315c;
+    -fx-background-color: #E6315C;
 }
 
 .delete-button:pressed {
-    -fx-background-color: #e03957;
+    -fx-background-color: #E03957;
 }

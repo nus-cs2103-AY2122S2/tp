@@ -1,0 +1,81 @@
+.table {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 18, 0, 0, 5);
+    -fx-background-insets: 15 20 20 20;
+    -fx-padding: 30 40 40 40;
+}
+
+.table-header {
+    -fx-border-style: solid;
+    -fx-border-width: 0 0 0.1 0;
+    -fx-spacing: 5;
+    -fx-padding: 10;
+}
+
+.table-header .table-column-long {
+    -fx-border-width: 0 0 0 0.1;
+    -fx-border-style: solid;
+    -fx-text-fill: #AEAEAE;
+}
+
+.table-header .table-column-short {
+    -fx-border-width: 0 0 0 0.1;
+    -fx-border-style: solid;
+    -fx-text-fill: #AEAEAE;
+}
+
+.table-column-short {
+    -fx-padding: 0 10;
+    -fx-pref-width: 70;
+    -fx-max-width: Infinity;
+    -fx-max-height: Infinity;
+    -fx-text-overrun: CLIP;
+    -fx-wrap-text: true;
+}
+
+.table-column-long {
+    -fx-padding: 0 10;
+    -fx-pref-width: 100;
+    -fx-max-width: Infinity;
+    -fx-max-height: Infinity;
+    -fx-text-overrun: CLIP;
+    -fx-wrap-text: true;
+}
+
+.table-content {
+    -fx-background-color: transparent;
+}
+
+.table-row {
+    -fx-max-width: Infinity;
+    -fx-max-height: Infinity;
+    -fx-border-style: solid;
+    -fx-border-width: 0 0 0.1 0;
+    -fx-spacing: 5;
+    -fx-padding: 10;
+}
+
+.table-row .edit {
+    -fx-background-color: transparent;
+}
+
+.table-row .edit:hover {
+    -fx-background-color: #F4F5F6;
+}
+
+.table-row .edit:pressed {
+    -fx-background-color: #F1F2F3;
+}
+
+.table-row .delete {
+    -fx-background-color: transparent;
+}
+
+.table-row .delete:hover {
+    -fx-background-color: #F4F5F6;
+}
+
+.table-row .delete:pressed {
+    -fx-background-color: #F1F2F3;
+}

@@ -1,15 +1,19 @@
-package seedu.ibook.ui;
+package seedu.ibook.ui.table;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import seedu.ibook.model.product.Product;
+import seedu.ibook.ui.UiPart;
 import seedu.ibook.ui.popup.PopupDelete;
 import seedu.ibook.ui.popup.PopupUpdate;
 
+/**
+ * A card showing the details of a {@code Product}.
+ */
 public class ProductCard extends UiPart<HBox> {
 
-    private static final String FXML = "ProductCard.fxml";
+    private static final String FXML = "Table/ProductCard.fxml";
 
     private final int index;
     private final Product product;
@@ -30,6 +34,14 @@ public class ProductCard extends UiPart<HBox> {
     @FXML
     private Label description;
 
+    /**
+     * Initializes a {@code ProductCard}.
+     *
+     * @param index Index of the {@code Product} in the filtered list.
+     * @param product The {@code Product}.
+     * @param popupUpdate The popup responsible for update.
+     * @param popupDelete The popup responsible for delete.
+     */
     ProductCard(int index, Product product,
                 PopupUpdate popupUpdate,
                 PopupDelete popupDelete) {
@@ -41,7 +53,7 @@ public class ProductCard extends UiPart<HBox> {
         populateField();
     }
 
-    void populateField() {
+    private void populateField() {
         indexLabel.setText(String.valueOf(index));
         name.setText(product.getName().toString());
         category.setText(product.getCategory().toString());

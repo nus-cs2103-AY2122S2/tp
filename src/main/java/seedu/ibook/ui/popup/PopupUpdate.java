@@ -8,6 +8,9 @@ import seedu.ibook.logic.parser.CliSyntax;
 import seedu.ibook.model.product.Product;
 import seedu.ibook.ui.MainWindow;
 
+/**
+ * Popup responsible to update product.
+ */
 public class PopupUpdate extends Popup {
 
     private static final String FXML = "popup/PopupUpdate.fxml";
@@ -25,12 +28,18 @@ public class PopupUpdate extends Popup {
     @FXML
     private TextArea description;
 
+    /**
+     * Initializes a new {@code popupUpdate} window.
+     *
+     * @param commandExecutor Function to execute command.
+     */
     public PopupUpdate(MainWindow.CommandExecutor commandExecutor) {
         super(FXML, commandExecutor);
     }
 
     /**
-     * Show the popup window.
+     * Shows the popup window.
+     *
      * @param index Index of the product.
      * @param product The product to be updated.
      */

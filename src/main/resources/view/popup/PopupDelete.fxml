@@ -13,20 +13,17 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.stage.Stage?>
 
-<fx:root resizable="false" title="Delete Product" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1"
+         type="javafx.stage.Stage" resizable="false" title="Delete Product">
     <scene>
-        <Scene stylesheets="@popup.css">
-           <AnchorPane style="-fx-background-color: #FFFFFF;">
-              <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                    AnchorPane.topAnchor="0.0">
+        <Scene stylesheets="@../css/popup.css">
+           <AnchorPane>
+              <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                    AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                  <padding>
                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
                  </padding>
-                 <Label text="Confirmation" styleClass="title" minWidth="100">
-                    <font>
-                       <Font size="28.0"/>
-                    </font>
-                 </Label>
+                 <Label text="Confirmation" styleClass="title"/>
                  <Label fx:id="message">
                     <VBox.margin>
                        <Insets top="20.0" bottom="10.0"/>
@@ -35,15 +32,16 @@
                        <Font size="16.0"/>
                     </font>
                  </Label>
-                 <HBox alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" spacing="20">
+                 <HBox alignment="CENTER_RIGHT" maxWidth="Infinity" spacing="20">
                     <VBox.margin>
                        <Insets top="20.0" bottom="10.0"/>
                     </VBox.margin>
                     <Text fx:id="error" wrappingWidth="445" fill="#F84748" />
-                    <Button onMouseClicked="#handleDeleteProduct" alignment="CENTER_RIGHT" mnemonicParsing="false"
-                            styleClass="delete-button" text="Delete">
+                    <Button onMouseClicked="#handleDeleteProduct" alignment="CENTER_RIGHT"
+                            mnemonicParsing="false" styleClass="delete-button" text="Delete">
                        <graphic>
-                          <ImageView fitHeight="14.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true">
+                          <ImageView fitHeight="14.0" fitWidth="14.0" pickOnBounds="true"
+                                     preserveRatio="true">
                              <Image url="@../../images/trash-2.png"/>
                           </ImageView>
                        </graphic>

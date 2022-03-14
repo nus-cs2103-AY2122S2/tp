@@ -15,6 +15,7 @@ import seedu.ibook.logic.parser.exceptions.ParseException;
 import seedu.ibook.ui.popup.PopupAdd;
 import seedu.ibook.ui.popup.PopupDelete;
 import seedu.ibook.ui.popup.PopupUpdate;
+import seedu.ibook.ui.table.Table;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -42,7 +43,10 @@ public class MainWindow extends UiPart<Stage> {
     private VBox mainContent;
 
     /**
-     * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
+     * Initializes a {@code MainWindow}.
+     *
+     * @param primaryStage The {@code Stage} of the application.
+     * @param logic The main code {@code Logic}.
      */
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
@@ -52,6 +56,9 @@ public class MainWindow extends UiPart<Stage> {
         this.logic = logic;
     }
 
+    /**
+     * Shows the stage.
+     */
     void show() {
         primaryStage.show();
     }
@@ -64,12 +71,16 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Gets the primary stage.
+     * @return The primary stage.
+     */
     Stage getPrimaryStage() {
         return primaryStage;
     }
 
     /**
-     * Fills up all the placeholders of this window.
+     * Fills up the inner part of this window.
      */
     void fillInnerParts() {
         ObservableList<Node> children = mainContent.getChildren();
