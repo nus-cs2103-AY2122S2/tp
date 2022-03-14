@@ -9,13 +9,11 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.LogicManager;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.classgroup.ClassGroupId;
 import seedu.address.model.classgroup.ClassGroupType;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Person;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Telegram;
@@ -25,8 +23,6 @@ import seedu.address.model.tamodule.AcademicYear;
 import seedu.address.model.tamodule.ModuleCode;
 import seedu.address.model.tamodule.ModuleName;
 import seedu.address.model.tamodule.TaModule;
-
-import javax.xml.parsers.ParserConfigurationException;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.

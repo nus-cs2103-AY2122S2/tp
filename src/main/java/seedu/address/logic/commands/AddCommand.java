@@ -1,7 +1,17 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.TYPE_CLASS;
+import static seedu.address.logic.parser.CliSyntax.TYPE_MODULE;
+import static seedu.address.logic.parser.CliSyntax.TYPE_STUDENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ACADEMIC_YEAR;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_INDEX;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;

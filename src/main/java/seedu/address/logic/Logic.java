@@ -10,7 +10,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyTAssist;
 import seedu.address.model.classgroup.ClassGroup;
-import seedu.address.model.person.Person;
 import seedu.address.model.student.Student;
 import seedu.address.model.tamodule.TaModule;
 

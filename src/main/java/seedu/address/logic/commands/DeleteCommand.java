@@ -1,5 +1,11 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.TYPE_STUDENT;
+import static seedu.address.logic.parser.CliSyntax.TYPE_MODULE;
+import static seedu.address.logic.parser.CliSyntax.TYPE_CLASS;
+
+import java.util.List;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -10,11 +16,6 @@ import seedu.address.model.entity.EntityType;
 import seedu.address.model.entity.exceptions.UnknownEntityException;
 import seedu.address.model.student.Student;
 import seedu.address.model.tamodule.TaModule;
-
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
 
 public class DeleteCommand extends Command{
 
