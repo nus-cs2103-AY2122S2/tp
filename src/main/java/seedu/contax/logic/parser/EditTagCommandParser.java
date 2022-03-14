@@ -2,7 +2,7 @@ package seedu.contax.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.contax.logic.parser.CliSyntax.PREFIX_NEWTAGNAME;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.stream.Stream;
 
@@ -25,15 +25,15 @@ public class EditTagCommandParser implements Parser<EditTagCommand> {
     public EditTagCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
-        ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NEWTAGNAME);
+        ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG);
 
         // Unlike the other edit commands, Tag only contains the tag name field. Hence, if the new tag name and/or
         // index is not present,the command must be wrong
-        if (!arePrefixesPresent(argumentMultimap, PREFIX_NEWTAGNAME) || argumentMultimap.getPreamble().isEmpty()) {
+        if (argumentMultimap.getValue(PREFIX_TAG).isEmpty() || argumentMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTagCommand.MESSAGE_USAGE));
         }
 
-        if (!Name.isValidName(argumentMultimap.getValue(PREFIX_NEWTAGNAME).get())) {
+        if (!Name.isValidName(argumentMultimap.getValue(PREFIX_TAG).get())) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
 
@@ -46,7 +46,7 @@ public class EditTagCommandParser implements Parser<EditTagCommand> {
         }
 
         EditTagDescriptor editTagDescriptor = new EditTagDescriptor();
-        editTagDescriptor.setTagName(argumentMultimap.getValue(PREFIX_NEWTAGNAME).get());
+        editTagDescriptor.setTagName(argumentMultimap.getValue(PREFIX_TAG).get());
 
         return new EditTagCommand(index, editTagDescriptor);
     }

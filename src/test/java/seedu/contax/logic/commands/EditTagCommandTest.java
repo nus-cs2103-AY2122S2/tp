@@ -44,7 +44,7 @@ public class EditTagCommandTest {
     }
 
     @Test
-    public void execute_sameTagChange_success() {
+    public void execute_sameTagChange_failure() {
         EditTagDescriptor descriptor = new EditTagDescriptorBuilder(FRIENDS).build();
         EditTagCommand command = new EditTagCommand(Index.fromOneBased(1), descriptor);
 
