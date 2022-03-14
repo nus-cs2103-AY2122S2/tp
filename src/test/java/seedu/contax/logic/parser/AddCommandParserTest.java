@@ -37,7 +37,6 @@ import seedu.contax.model.person.Email;
 import seedu.contax.model.person.Name;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.person.Phone;
-import seedu.contax.model.tag.Tag;
 import seedu.contax.testutil.PersonBuilder;
 
 public class AddCommandParserTest {
@@ -127,7 +126,7 @@ public class AddCommandParserTest {
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
+                + INVALID_TAG_DESC + VALID_TAG_FRIEND, seedu.contax.model.tag.Name.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC,

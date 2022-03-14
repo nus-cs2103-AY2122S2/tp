@@ -1,7 +1,6 @@
 package seedu.contax.model.tag;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.contax.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Tag in the address book.
@@ -9,10 +8,7 @@ import static seedu.contax.commons.util.AppUtil.checkArgument;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "(\\p{Alnum}+[ ]?)+";
-
-    public final String tagName;
+    public final Name tagName;
 
     /**
      * Constructs a {@code Tag}.
@@ -21,11 +17,28 @@ public class Tag {
      */
     public Tag(String tagName) {
         requireNonNull(tagName);
-        checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
-        this.tagName = tagName.toLowerCase();
+        this.tagName = new Name(tagName);
     }
 
-    public String getTagName() {
+    /**
+     * Constructs a {@code Tag} with a given {@code Name} object.
+     */
+    public Tag(Name tagName) {
+        requireNonNull(tagName);
+        this.tagName = tagName;
+    }
+
+    /**
+     * Returns the tag name in {@code String} form.
+     */
+    public String getTagNameString() {
+        return tagName.toString();
+    }
+
+    /**
+     * Returns the tag name as a {@code Name} object.
+     */
+    public Name getTagName() {
         return tagName;
     }
 
@@ -33,7 +46,7 @@ public class Tag {
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidTagName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return Name.isValidName(test);
     }
 
     /**
@@ -66,7 +79,7 @@ public class Tag {
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + tagName + ']';
+        return '[' + tagName.toString() + ']';
     }
 
 }

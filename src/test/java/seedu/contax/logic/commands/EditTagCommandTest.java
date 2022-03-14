@@ -9,11 +9,11 @@ import static seedu.contax.testutil.TypicalPersons.FRIENDS;
 import static seedu.contax.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.contax.commons.core.Messages;
 import seedu.contax.commons.core.index.Index;
-import seedu.contax.logic.commands.exceptions.CommandException;
+import seedu.contax.logic.commands.EditTagCommand.EditTagDescriptor;
 import seedu.contax.model.AddressBook;
-import seedu.contax.logic.commands.EditTagCommand.EditTagDescriptor ;
 import seedu.contax.model.Model;
 import seedu.contax.model.ModelManager;
 import seedu.contax.model.Schedule;

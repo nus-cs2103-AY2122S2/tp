@@ -6,9 +6,11 @@ import static seedu.contax.logic.parser.CommandParserTestUtil.assertParseFailure
 import static seedu.contax.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.contax.commons.core.index.Index;
 import seedu.contax.logic.commands.EditTagCommand;
 import seedu.contax.logic.commands.EditTagCommand.EditTagDescriptor;
+import seedu.contax.model.tag.Name;
 import seedu.contax.testutil.EditTagDescriptorBuilder;
 
 /**
@@ -16,9 +18,10 @@ import seedu.contax.testutil.EditTagDescriptorBuilder;
  */
 public class EditTagCommandParserTest {
 
-    private EditTagCommandParser parser = new EditTagCommandParser();
     private static final String MESSAGE_INVALID_FORMAT = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
             EditTagCommand.MESSAGE_USAGE);
+
+    private EditTagCommandParser parser = new EditTagCommandParser();
 
     @Test
     public void parse_invalidFields_failure() {
@@ -49,6 +52,8 @@ public class EditTagCommandParserTest {
 
     @Test
     public void parse_invalidTagName_failure() {
+        assertParseFailure(parser, "1 t/Hello!", Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1 t/Hello&", Name.MESSAGE_CONSTRAINTS);
     }
 
     @Test

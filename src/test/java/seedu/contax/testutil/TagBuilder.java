@@ -12,7 +12,7 @@ public class TagBuilder {
     }
 
     public TagBuilder(Tag tagToCopy) {
-        tagName = tagToCopy.getTagName();
+        tagName = tagToCopy.getTagNameString();
     }
 
     /**

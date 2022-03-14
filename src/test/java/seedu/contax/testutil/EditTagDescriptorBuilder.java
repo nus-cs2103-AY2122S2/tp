@@ -22,7 +22,7 @@ public class EditTagDescriptorBuilder {
      */
     public EditTagDescriptorBuilder(Tag tag) {
         this.descriptor = new EditTagDescriptor();
-        descriptor.setTagName(tag.getTagName());
+        descriptor.setTagName(tag.getTagNameString());
     }
 
     /**

@@ -9,6 +9,7 @@ import seedu.contax.commons.core.Messages;
 import seedu.contax.commons.core.index.Index;
 import seedu.contax.logic.commands.exceptions.CommandException;
 import seedu.contax.model.Model;
+import seedu.contax.model.tag.Name;
 import seedu.contax.model.tag.Tag;
 
 /**
@@ -45,10 +46,10 @@ public class EditTagCommand extends Command {
     private static Tag createEditedTag(Tag tagToEdit, EditTagDescriptor editTagDescriptor) {
         assert tagToEdit != null;
 
-        String newTagName = editTagDescriptor.getTagName().orElse(tagToEdit.getTagName());
+        Name newTagName = editTagDescriptor.getTagName().orElse(tagToEdit.getTagName());
 
         // If the names are the name, no need to create a new tag
-        if (newTagName.equals(tagToEdit.getTagName())) {
+        if (newTagName.equals(tagToEdit.getTagNameString())) {
             return tagToEdit;
         }
 
@@ -95,25 +96,18 @@ public class EditTagCommand extends Command {
      * Stores the details to edit the tag with.
      */
     public static class EditTagDescriptor {
-        private String tagName;
+        private Name tagName;
 
         public EditTagDescriptor() {
 
         }
 
-        /**
-         * Copies the fields from {@code toCopy} into this descriptor
-         */
-        public EditTagDescriptor(EditTagDescriptor toCopy) {
-            setTagName(toCopy.tagName);
-        }
-
-        public Optional<String> getTagName() {
+        public Optional<Name> getTagName() {
             return Optional.ofNullable(tagName);
         }
 
         public void setTagName(String tagName) {
-            this.tagName = tagName;
+            this.tagName = new Name(tagName);
         }
 
         @Override

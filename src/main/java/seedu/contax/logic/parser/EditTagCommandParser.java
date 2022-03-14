@@ -10,6 +10,7 @@ import seedu.contax.commons.core.index.Index;
 import seedu.contax.logic.commands.EditTagCommand;
 import seedu.contax.logic.commands.EditTagCommand.EditTagDescriptor;
 import seedu.contax.logic.parser.exceptions.ParseException;
+import seedu.contax.model.tag.Name;
 
 /**
  * Parses input arguments and creates a new EditTagCommand object.
@@ -30,6 +31,10 @@ public class EditTagCommandParser implements Parser<EditTagCommand> {
         // index is not present,the command must be wrong
         if (!arePrefixesPresent(argumentMultimap, PREFIX_NEWTAGNAME) || argumentMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTagCommand.MESSAGE_USAGE));
+        }
+
+        if (!Name.isValidName(argumentMultimap.getValue(PREFIX_NEWTAGNAME).get())) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
 
         Index index;
