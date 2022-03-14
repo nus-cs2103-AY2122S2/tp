@@ -51,6 +51,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_EDIT_MODULE_SUCCESS = "Edited Module: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_OPTION_NOT_FOUND = "Option tag must be provided. \n";
     public static final String MESSAGE_PERSON_NO_SUBTYPE = "Person must be a professor or student";
 
     public static final String PERSON_MESSAGE_USAGE = COMMAND_WORD
@@ -58,7 +59,7 @@ public class EditCommand extends Command {
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_OPTION + "OPTION] "
+            + PREFIX_OPTION + "OPTION "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
@@ -72,7 +73,7 @@ public class EditCommand extends Command {
             + "by the index number used in the displayed module list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_OPTION + "OPTION] "
+            + PREFIX_OPTION + "OPTION "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_MODULE + "MODULECODE] "
             + "[" + PREFIX_NEWMOD + "NEWMODULECODE] "
