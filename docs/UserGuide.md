@@ -110,14 +110,14 @@ Examples:
 
 Adds a module to an existing contact
 
-Format: `add INDEX -m c/CODE`
+Format: `addmodule INDEX -m c/CODE`
 
 * Adds a module represented by module code `CODE` to a contact at index `INDEX`
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `add 2 -m c/CS1231`
+* `addmodule 2 c/CS1231`
 
 ### Editing a person : `edit`
 
