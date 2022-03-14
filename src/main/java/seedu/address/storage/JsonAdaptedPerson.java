@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Flag;
 import seedu.address.model.person.Info;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -30,6 +31,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final String flag;
     private String prevDateMet;
     private String info;
 
@@ -41,15 +43,16 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("prevDateMet") String prevDateMet,
-            @JsonProperty("info") String info) {
+            @JsonProperty("flag") String flag, @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+            @JsonProperty("prevDateMet") String prevDateMet, @JsonProperty("info") String info) {
+
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.flag = flag;
         this.prevDateMet = prevDateMet;
         this.info = info;
-
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -63,6 +66,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        flag = source.getFlag().toString();
         prevDateMet = source.getPrevDateMet().toString();
         info = source.getInfo().value;
         tagged.addAll(source.getTags().stream()
@@ -113,6 +117,16 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        if (flag == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Flag.class.getSimpleName()));
+        }
+        if (!Flag.isValidFlag(flag)) {
+            throw new IllegalValueException(Flag.MESSAGE_CONSTRAINTS);
+        }
+        final Flag modelFlag = new Flag(flag);
+
+        final Set<Tag> modelTags = new HashSet<>(personTags);
+
         if (prevDateMet == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Person.class.getSimpleName()));
         }
@@ -129,8 +143,8 @@ class JsonAdaptedPerson {
         }
         final Info modelInfo = new Info(info);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelPrevDateMet, modelInfo);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelFlag,
+                modelTags, modelPrevDateMet, modelInfo);
     }
 
 }
