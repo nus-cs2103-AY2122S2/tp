@@ -27,16 +27,20 @@ class JsonAdaptedTask {
     private String deadlineTime;
     private String eventStartTime;
     private String eventEndTime;
+    private String status; // This status is for mark and unmark.
+
 
     /**
      * Constructs a {@code JsonAdaptedTask} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedTask(@JsonProperty("type") String type, @JsonProperty("description") String description,
+    public JsonAdaptedTask(@JsonProperty("type") String type, @JsonProperty("status") String status,
+                           @JsonProperty("description") String description,
                            @JsonProperty("date") String date, @JsonProperty("deadlineTime") String deadlineTime,
                            @JsonProperty("eventStartTime") String eventStartTime,
                            @JsonProperty("eventEndTime") String eventEndTime) {
         this.description = new Description(description).toString();
+        this.status = status;
         this.type = type;
         this.date = date;
         this.deadlineTime = deadlineTime;
@@ -52,7 +56,7 @@ class JsonAdaptedTask {
         // For future reference, this.marked = source.getMark()?
         description = source.getDescription().toString(); // Generally for all tasks
         type = source.getType(); // Generally for all tasks
-
+        status = source.getStatusIcon();
         if (source instanceof Deadline) {
             this.date = ((Deadline) source).getDate().getDate(); // For Deadline
             this.deadlineTime = ((Deadline) source).getTime().getTime(); // For Deadline
@@ -81,18 +85,31 @@ class JsonAdaptedTask {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Task.class.getSimpleName()));
         }
         Description desc = new Description(description);
+        boolean isDone = status.equals("X");
+
         if (type.equals("todo")) {
-            return new Todo(desc);
+            Todo newTodo = new Todo(desc);
+            if(isDone) {
+                newTodo.setTaskDone();
+            }
+            return newTodo;
         } else if (type.equals("deadline")) {
             Date currDeadlineDate = new Date(date);
             Time currDeadlineTime = new Time(deadlineTime);
-            return new Deadline(desc, currDeadlineDate, currDeadlineTime);
-        } else if (type.equals("event")) {
+            Deadline newDeadline = new Deadline(desc, currDeadlineDate, currDeadlineTime);
+            if(isDone) {
+                newDeadline.setTaskDone();
+            }
+            return newDeadline;
+        } else {
             Date currEventDate = new Date(date);
             Time currEventStartTime = new Time(eventStartTime);
             Time currEventEndTime = new Time(eventEndTime);
-            return new Event(desc, currEventDate, currEventStartTime, currEventEndTime);
+            Event newEvent = new Event(desc, currEventDate, currEventStartTime, currEventEndTime);
+            if(isDone) {
+                newEvent.setTaskDone();
+            }
+            return newEvent;
         }
-        return new Todo(desc);
     }
 }
