@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.trackbeau.testutil.Assert.assertThrows;
-import static seedu.trackbeau.testutil.TypicalPersons.ALICE;
-import static seedu.trackbeau.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.trackbeau.testutil.TypicalCustomers.ALICE;
+import static seedu.trackbeau.testutil.TypicalCustomers.getTypicalTrackBeau;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -16,7 +16,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.trackbeau.model.customer.Customer;
 
-public class AddressBookTest {
+public class TrackBeauTest {
 
     private final TrackBeau trackBeau = new TrackBeau();
 
@@ -31,8 +31,8 @@ public class AddressBookTest {
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        TrackBeau newData = getTypicalAddressBook();
+    public void resetData_withValidReadOnlyTrackBeau_replacesData() {
+        TrackBeau newData = getTypicalTrackBeau();
         trackBeau.resetData(newData);
         assertEquals(newData, trackBeau);
     }
@@ -41,7 +41,7 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
-        Customer editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withStaffs(STAFF_DESC_BOB)
+        Customer editedAlice = new CustomerBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withStaffs(STAFF_DESC_BOB)
                 .build();
         List<Customer> newCustomers = Arrays.asList(ALICE, editedAlice);
         TrackBeauStub newData = new TrackBeauStub(newCustomers);
@@ -50,17 +50,17 @@ public class AddressBookTest {
     }
 */
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasCustomer_nullCustomer_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> trackBeau.hasCustomer(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasCustomer_customerNotInTrackBeau_returnsFalse() {
         assertFalse(trackBeau.hasCustomer(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasCustomer_customerInTrackBeau_returnsTrue() {
         trackBeau.addCustomer(ALICE);
         assertTrue(trackBeau.hasCustomer(ALICE));
     }
@@ -69,19 +69,19 @@ public class AddressBookTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInTrackBeau_returnsTrue() {
         trackBeau.addCustomer(ALICE);
-        Customer editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withStaffs(STAFF_DESC_BOB)
+        Customer editedAlice = new CustomerBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withStaffs(STAFF_DESC_BOB)
                 .build();
         assertTrue(trackBeau.hasCustomer(editedAlice));
     }
     */
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getCustomerList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> trackBeau.getCustomerList().remove(0));
     }
 
     /**
-     * A stub ReadOnlyTrackBeau whose persons list can violate interface constraints.
+     * A stub ReadOnlyTrackBeau whose customer list can violate interface constraints.
      */
     private static class TrackBeauStub implements ReadOnlyTrackBeau {
         private final ObservableList<Customer> customers = FXCollections.observableArrayList();

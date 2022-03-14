@@ -19,7 +19,7 @@ import seedu.trackbeau.model.tag.Tag;
  * Contains utility methods for populating {@code TrackBeau} with sample data.
  */
 public class SampleDataUtil {
-    public static Customer[] getSamplePersons() {
+    public static Customer[] getSampleCustomers() {
         return new Customer[] {
             new Customer(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"), new SkinType("oily"), new HairType("dry"),
@@ -43,12 +43,12 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyTrackBeau getSampleAddressBook() {
-        TrackBeau sampleAb = new TrackBeau();
-        for (Customer sampleCustomer : getSamplePersons()) {
-            sampleAb.addCustomer(sampleCustomer);
+    public static ReadOnlyTrackBeau getSampleTrackBeau() {
+        TrackBeau sampleTb = new TrackBeau();
+        for (Customer sampleCustomer : getSampleCustomers()) {
+            sampleTb.addCustomer(sampleCustomer);
         }
-        return sampleAb;
+        return sampleTb;
     }
 
     /**

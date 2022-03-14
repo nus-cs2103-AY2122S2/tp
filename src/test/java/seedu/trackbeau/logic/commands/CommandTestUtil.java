@@ -23,7 +23,7 @@ import seedu.trackbeau.model.Model;
 import seedu.trackbeau.model.TrackBeau;
 import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.model.customer.SearchContainsKeywordsPredicate;
-import seedu.trackbeau.testutil.EditPersonDescriptorBuilder;
+import seedu.trackbeau.testutil.EditCustomerDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -83,11 +83,11 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditPersonDescriptor DESC_AMY;
-    public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final EditCommand.EditCustomerDescriptor DESC_AMY;
+    public static final EditCommand.EditCustomerDescriptor DESC_BOB;
 
     static {
-        DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
+        DESC_AMY = new EditCustomerDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
                 .withAddress(VALID_ADDRESS_AMY)
                 .withSkinType(VALID_SKIN_TYPE_AMY)
@@ -96,7 +96,7 @@ public class CommandTestUtil {
                 .withServices(VALID_SERVICE_CHEMICAL_PEEL)
                 .withAllergies(VALID_ALLERGY_NICKEL)
                 .build();
-        DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
+        DESC_BOB = new EditCustomerDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB)
                 .withSkinType(VALID_SKIN_TYPE_BOB)
@@ -137,7 +137,7 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the trackbeau book, filtered customer list and selected customer in {@code actualModel} remain unchanged
+     * - the trackBeau, filtered customer list and selected customer in {@code actualModel} remain unchanged
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
@@ -151,9 +151,9 @@ public class CommandTestUtil {
     }
     /**
      * Updates {@code model}'s filtered list to show only the customer at the given {@code targetIndex} in the
-     * {@code model}'s trackbeau book.
+     * {@code model}'s trackBeau.
      */
-    public static void showPersonAtIndex(Model model, Index targetIndex) {
+    public static void showCustomerAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredCustomerList().size());
 
         Customer customer = model.getFilteredCustomerList().get(targetIndex.getZeroBased());
