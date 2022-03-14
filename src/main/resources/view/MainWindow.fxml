@@ -86,11 +86,11 @@
                                     </padding>
                                 </StackPane>
 
-                                <VBox fx:id="customerList" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
+                                <VBox fx:id="detailsList" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
                                     <padding>
                                         <Insets bottom="10" left="10" right="10" top="10" />
                                     </padding>
-                                    <StackPane fx:id="customerListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                                    <StackPane fx:id="detailsPanelPlaceholder" VBox.vgrow="ALWAYS" />
                                 </VBox>
                             </children>
                         </VBox>

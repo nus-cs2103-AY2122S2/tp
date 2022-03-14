@@ -39,6 +39,8 @@ public class MainWindow extends UiPart<Stage> {
     private CustomerListPanel customerListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private BookingListPanel bookingListPanel;
+    private StatisticsPanel statisticsPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -47,7 +49,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane customerListPanelPlaceholder;
+    private StackPane detailsPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -102,6 +104,21 @@ public class MainWindow extends UiPart<Stage> {
                     l.getStyleClass().remove("selected");
                 }
                 label.getStyleClass().add("selected");
+                detailsPanelPlaceholder.getChildren().clear();
+                switch (label.getId()) {
+                case "customersLabel":
+                    customerListPanel = new CustomerListPanel(logic.getFilteredCustomerList());
+                    detailsPanelPlaceholder.getChildren().add(customerListPanel.getRoot());
+                    break;
+                case "bookingsLabel":
+                    bookingListPanel = new BookingListPanel();
+                    detailsPanelPlaceholder.getChildren().add(bookingListPanel.getRoot());
+                    break;
+                case "statisticsLabel":
+                    statisticsPanel = new StatisticsPanel();
+                    detailsPanelPlaceholder.getChildren().add(statisticsPanel.getRoot());
+                    break;
+                }
             }
         });
     }
@@ -149,7 +166,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         customerListPanel = new CustomerListPanel(logic.getFilteredCustomerList());
-        customerListPanelPlaceholder.getChildren().add(customerListPanel.getRoot());
+        detailsPanelPlaceholder.getChildren().add(customerListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
