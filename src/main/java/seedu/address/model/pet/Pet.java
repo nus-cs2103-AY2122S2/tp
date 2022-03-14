@@ -67,8 +67,8 @@ public class Pet {
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both pets have the same name.
+     * This defines a weaker notion of equality between two pets.
      */
     public boolean isSamePet(Pet otherPet) {
         if (otherPet == this) {
@@ -80,8 +80,8 @@ public class Pet {
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both pets have the same identity and data fields.
+     * This defines a stronger notion of equality between two pets.
      */
     @Override
     public boolean equals(Object other) {
