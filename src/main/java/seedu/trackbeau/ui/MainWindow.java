@@ -1,13 +1,17 @@
 package seedu.trackbeau.ui;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.trackbeau.commons.core.GuiSettings;
@@ -34,6 +38,8 @@ public class MainWindow extends UiPart<Stage> {
     private CustomerListPanel customerListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private BookingListPanel bookingListPanel;
+    private StatisticsPanel statisticsPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -42,13 +48,24 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane detailsPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private Label customersLabel;
+
+    @FXML
+    private Label bookingsLabel;
+
+    @FXML
+    private Label statisticsLabel;
+
+    private ArrayList<Label> labels;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -66,6 +83,46 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
+        this.labels = new ArrayList<>();
+        this.labels.add(customersLabel);
+        this.labels.add(bookingsLabel);
+        this.labels.add(statisticsLabel);
+
+        customersLabel.getStyleClass().add("selected");
+        for (Label l : this.labels) {
+            setLabelOnMouseClickEvent(l);
+        }
+    }
+
+    private void setLabelOnMouseClickEvent(Label label) {
+        label.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                for (Label l : labels) {
+                    l.getStyleClass().remove("selected");
+                }
+                label.getStyleClass().add("selected");
+                detailsPanelPlaceholder.getChildren().clear();
+                switch (label.getId()) {
+                case "customersLabel":
+                    customerListPanel = new CustomerListPanel(logic.getFilteredCustomerList());
+                    detailsPanelPlaceholder.getChildren().add(customerListPanel.getRoot());
+                    break;
+                case "bookingsLabel":
+                    bookingListPanel = new BookingListPanel();
+                    detailsPanelPlaceholder.getChildren().add(bookingListPanel.getRoot());
+                    break;
+                case "statisticsLabel":
+                    statisticsPanel = new StatisticsPanel();
+                    detailsPanelPlaceholder.getChildren().add(statisticsPanel.getRoot());
+                    break;
+                default:
+                    // nothing to add to details panel placeholder
+                    break;
+                }
+            }
+        });
     }
 
     public Stage getPrimaryStage() {
@@ -111,7 +168,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         customerListPanel = new CustomerListPanel(logic.getFilteredCustomerList());
-        personListPanelPlaceholder.getChildren().add(customerListPanel.getRoot());
+        detailsPanelPlaceholder.getChildren().add(customerListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
