@@ -1,7 +1,6 @@
 package seedu.address.model.person.lab;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -62,4 +61,12 @@ public class LabTest {
         Lab stub = new Lab("1");
         assertThrows(LabNotSubmittedException.class, stub::gradeLab);
     }
+
+    @Test
+    public void equals_success() {
+        Lab lab1 = (new Lab("1")).of("SUBMITTED");
+        Lab lab1copy = (new Lab("1")).of("SUBMITTED");
+        assertTrue(lab1.equals(lab1copy));
+    }
+
 }
