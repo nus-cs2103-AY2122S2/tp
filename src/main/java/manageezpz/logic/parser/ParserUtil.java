@@ -3,6 +3,7 @@ package manageezpz.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 import manageezpz.commons.core.index.Index;
@@ -13,6 +14,7 @@ import manageezpz.model.person.Name;
 import manageezpz.model.person.Phone;
 import manageezpz.model.task.Date;
 import manageezpz.model.task.Description;
+import manageezpz.model.task.Time;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -104,11 +106,28 @@ public class ParserUtil {
         }
         throw new ParseException(Date.MESSAGE_CONSTRAINTS);
     }
+
     /**
-     * Parses a {@code String email} into an {@code Email}.
+     * Parses a {@code String time} into a {@code Time}.
+     * @param time
+     * @return a {@code Time} object.
+     * @throws ParseException
+     */
+    public static Time parseTime(String time) throws ParseException {
+        requireNonNull(time);
+        if (!Time.isValidTime(time)) {
+            throw new ParseException(Time.MESSAGE_CONSTRAINTS);
+        }
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HHmm");
+        LocalTime parsedTime = LocalTime.parse(time, dtf);
+        return new Time(parsedTime);
+    }
+
+    /**
+     * Parses a {@code String description} into an {@code Description}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code email} is invalid.
+     * @throws ParseException if the given {@code description} is invalid.
      */
     public static Description parseDescription(String description) throws ParseException {
         requireNonNull(description);
