@@ -40,8 +40,8 @@ public class AddApplicantCommandParser implements Parser<AddApplicantCommand> {
      */
     public AddApplicantCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_AGE, PREFIX_ADDRESS,
-                        PREFIX_GENDER, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_AGE, PREFIX_ADDRESS, PREFIX_GENDER, PREFIX_PHONE,
+                        PREFIX_EMAIL, PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_AGE, PREFIX_ADDRESS, PREFIX_GENDER, PREFIX_PHONE,
                 PREFIX_EMAIL) || !argMultimap.getPreamble().isEmpty()) {
