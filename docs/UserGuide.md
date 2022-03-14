@@ -215,15 +215,16 @@ Examples:
 
 Edits an existing tag in ContaX.
 
-Format: `edittag f/OLD_TAGNAME t/NEW_TAGNAME`
+Format: `edittag INDEX t/NEW_TAGNAME`
 
 * All parameters **must** be specified.
-* Changes the name of a tag`OLD_TAGNAME` to `NEW_TAGNAME`.
-* `OLD_TAGNAME` and `NEW_TAGNAME` are case-insensitive.
-* An error will be thrown if either `OLD_TAGNAME` cannot be found or `NEW_TAGNAME` already exists in ContaX.
+* The `INDEX` parameter **must be a positive integer**, and refers to the index number shown in the **displayed tag list**.
+* Changes the name of a tag at `INDEX` to `NEW_TAGNAME`.
+* An error will be thrown if either `INDEX` is invalid or `NEW_TAGNAME` already exists in ContaX.
+* An error will be thrown if the tag at `INDEX` has the same name as `NEW_TAGNAME`
 
 Examples:
-* `edittag f/New Clients t/Prospective Clients` Changes the name of the tag *New Clients* to *Prospective Clients*. Command will be ignored if the tag *New Clients* does not exist in the first place or *Prospective Clients* already exists in Contax.
+* `edittag 1 t/Prospective Clients` Changes the name of first tag in the list to *Prospective Clients*. 
 
 ### Listing All Tags : `listtags`
 
@@ -499,7 +500,7 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS] [by/SEARCH_TYPE]`<br> e.g., `find James Jake by/name`
 **List** | `list`
 **Add Tag** | `addtag n/TAGNAME` <br> e.g., `addtag n/Potential Clients`
-**Edit Tag** | `edittag f/OLD_TAGNAME t/NEW_TAGNAME` <br> e.g., `edittag f/New Clients t/Prospective Clients`
+**Edit Tag** | `edittag INDEX t/NEW_TAGNAME` <br> e.g., `edittag f/OLD_TAGNAME t/NEW_TAGNAME`
 **List Tags** | `listtags`
 **Delete Tag** | `deletetag n/TAGNAME` <br> e.g., `deletetag n/friends`
 **Find Contacts By Tag** | `findByTag t/TAGNAME` <br> e.g., `findByTag t/friends`
