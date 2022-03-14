@@ -1,32 +1,14 @@
 package seedu.contax.ui.onboarding;
 
-import static seedu.contax.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.contax.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.contax.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.contax.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.contax.logic.parser.CliSyntax.PREFIX_TAG;
-
-import java.util.HashSet;
-
-import javafx.collections.ObservableList;
 import seedu.contax.logic.commands.AddCommand;
 import seedu.contax.logic.commands.Command;
-import seedu.contax.logic.commands.CommandResult;
 import seedu.contax.logic.commands.exceptions.CommandException;
 import seedu.contax.logic.parser.AddressBookParser;
-import seedu.contax.logic.parser.ArgumentMultimap;
-import seedu.contax.logic.parser.ArgumentTokenizer;
 import seedu.contax.logic.parser.exceptions.ParseException;
 import seedu.contax.model.Model;
 import seedu.contax.model.onboarding.OnboardingStep;
-import seedu.contax.model.person.Address;
-import seedu.contax.model.person.Email;
-import seedu.contax.model.person.Name;
 import seedu.contax.model.person.Person;
-import seedu.contax.model.person.Phone;
-import seedu.contax.model.person.UniquePersonList;
 import seedu.contax.model.util.SampleDataUtil;
-
 
 
 /**
@@ -39,10 +21,9 @@ public class OnboardingUtil {
             + "Follow the format 'add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS'"
             + "\n\nExample: add n/Johnny p/91234567 e/Johnny@j.com a/Johnny street";
 
-
     /**
-     * Populates the given UniquePersonList with the sample data
-     * @param persons the UniquePersonList to be populated
+     * Populates the given Model with the sample data
+     * @param model the Model to be populated
      */
     public static void populateWithSample(Model model) {
         Person[] samplePersons = SampleDataUtil.getSamplePersons();
@@ -52,8 +33,8 @@ public class OnboardingUtil {
     }
 
     /**
-     * Returns the name string of the last person in the given UniquepersonList
-     * @param persons the UniquePersonList to be searched
+     * Returns the name string of the last person in the given Model
+     * @param model the UniquePersonList to be searched
      * @return name of the last person
      */
     public static String getLastestPersonName(Model model) {
@@ -62,8 +43,8 @@ public class OnboardingUtil {
     }
 
     /**
-     * Returns the last Person in the given UniquePersonList
-     * @param persons the UniquePersonList to be searched
+     * Returns the last Person in the given Model
+     * @param model the Model to be searched
      * @return Person object of the last person
      */
     public static Person getLatestPerson(Model model) {
@@ -87,44 +68,29 @@ public class OnboardingUtil {
     }
 
     /**
-     * Tokenizer to be used for onboaring guide. Tokenizes the given command based on the given Onboarding step.
-     * @param step OnboardingStep to tokenize command on
-     * @param command command string to be tokenized
-     * @return
-     */
-    public static ArgumentMultimap tokenize(OnboardingStep step, String command) {
-        if (step.getOperationId() == 6) {
-            return ArgumentTokenizer.tokenize(command, PREFIX_NAME, PREFIX_PHONE,
-                    PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
-        }
-        return ArgumentTokenizer.tokenize(command);
-    }
-
-    /**
      * Processes a given user command
-     * @param step
-     * @param commandString
-     * @param instructionLabel
-     * @param persons
+     * @param step OnboardingStep containing details to be processed
+     * @param commandString commandString to be processd
+     * @param instructionLabel instructionLabel to be updated
+     * @param model model used in the onboarding window
      * @return
      */
     public static int processCommand(OnboardingStep step, String commandString,
                                      OnboardingInstruction instructionLabel, Model model) {
-        ArgumentMultimap map = tokenize(step, commandString);
         Command command = null;
-        try{
+        try {
             command = parser.parseCommand(commandString);
         } catch (ParseException e) {
             instructionLabel.setText(INVALID_COMMAND);
         }
 
         if (step.getOperationId() == 6) {
-            if (!map.getPreamble().equals("add")) {
+            if (!(command instanceof AddCommand)) {
                 instructionLabel.setText("Please use a add command");
                 return -1;
             }
 
-            try{
+            try {
                 command.execute(model);
             } catch (CommandException e) {
                 if (e.getMessage().equals(AddCommand.MESSAGE_DUPLICATE_PERSON)) {
