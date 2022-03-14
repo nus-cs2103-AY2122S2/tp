@@ -49,7 +49,6 @@ public class StudentHasLabPredicateTest {
         // Wrong LabNumber
         predicate = new StudentHasLabPredicate((new Lab("4").thatIs(LabStatus.UNSUBMITTED)));
         assertFalse(predicate.test(new PersonBuilder().withLabs("1", "2", "3").build()));
-        
     }
 
 }
