@@ -2,7 +2,7 @@ package seedu.address.model.interview;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.position.Position;
@@ -16,13 +16,13 @@ public class Interview {
 
     //Data fields
     private final Applicant applicant;
-    private final Date date;
+    private final LocalDateTime date;
     private final Position position;
 
     /**
      * Every field must be present and not null.
      */
-    public Interview(Applicant applicant, Date date, Position position) {
+    public Interview(Applicant applicant, LocalDateTime date, Position position) {
         requireAllNonNull(applicant, date);
         this.applicant = applicant;
         this.date = date;
@@ -33,7 +33,7 @@ public class Interview {
         return applicant;
     }
 
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
