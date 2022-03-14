@@ -17,6 +17,10 @@ public class Task {
 
     // Identity fields
     private final Description taskDescription;
+    private Date taskDate;
+    private Time deadlineTime;
+    private Time eventStartTime;
+    private Time eventEndTime;
 
     // Data fields
     private List<Person> assignees; //List of Strings as of now, V1.3 will incorporate Persons (assign tasks to Persons)
@@ -32,6 +36,10 @@ public class Task {
         this.taskDescription = taskDescription;
         this.isDone = false;
         this.type = "";
+        this.taskDate = null;
+        this.deadlineTime = null;
+        this.eventStartTime = null;
+        this.eventEndTime = null;
     }
 
     /**
@@ -65,6 +73,39 @@ public class Task {
     public String getType() {
         return this.type;
     }
+
+    public void setTaskDate(Date date) {
+        this.taskDate = date;
+    }
+
+    public Date getTaskDate() {
+        return this.taskDate;
+    }
+
+    public void setDeadlineTime(Time time) {
+        this.deadlineTime = time;
+    }
+
+    public Time getDeadlineTime() {
+        return this.deadlineTime;
+    }
+
+    public void setEventStartTime(Time time) {
+        this.eventEndTime = time;
+    }
+
+    public Time getEventStartTime() {
+        return this.eventStartTime;
+    }
+
+    public void setEventEndTime(Time time) {
+        this.eventEndTime = time;
+    }
+
+    public Time getEventEndTime() {
+        return this.eventEndTime;
+    }
+
     /**
      * Returns the string representation of the task.
      * @return a string representation of the task, consisting of its description and whether its done or not.

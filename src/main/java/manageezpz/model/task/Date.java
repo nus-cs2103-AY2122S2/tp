@@ -1,6 +1,7 @@
 package manageezpz.model.task;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Date {
     public static final String MESSAGE_CONSTRAINTS = "Date should be in the following formats: \"yyyy-MM-dd\", "
@@ -17,5 +18,9 @@ public class Date {
 
     public void setValue(LocalDate value) {
         this.value = value;
+    }
+
+    public String format(DateTimeFormatter dtf) {
+        return value.format(dtf);
     }
 }

@@ -4,7 +4,6 @@ import static manageezpz.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 
-import java.time.LocalTime;
 import java.util.stream.Stream;
 
 import manageezpz.logic.commands.AddDeadlineTaskCommand;
@@ -12,6 +11,7 @@ import manageezpz.logic.parser.exceptions.ParseException;
 import manageezpz.model.task.Date;
 import manageezpz.model.task.Deadline;
 import manageezpz.model.task.Description;
+import manageezpz.model.task.Time;
 
 public class AddDeadlineTaskCommandParser implements Parser<AddDeadlineTaskCommand> {
 
@@ -35,7 +35,8 @@ public class AddDeadlineTaskCommandParser implements Parser<AddDeadlineTaskComma
 
         String[] parseByDateTime = byDateTime.split(" ");
         Date date = ParserUtil.parseDate(parseByDateTime[0]);
-        LocalTime time = LocalTime.parse(parseByDateTime[1]);
+        Time time = ParserUtil.parseTime(parseByDateTime[1]);
+        //LocalTime time = LocalTime.parse(parseByDateTime[1]);
 
         Deadline deadline = new Deadline(desc, date, time);
 
