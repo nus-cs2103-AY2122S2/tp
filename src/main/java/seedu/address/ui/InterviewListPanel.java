@@ -1,7 +1,8 @@
 package seedu.address.ui;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.logging.Logger;
@@ -69,8 +70,9 @@ public class InterviewListPanel extends UiPart<Region> {
         );
 
         List<Interview> tempList = new ArrayList<>();
-        tempList.add(new Interview(tempApp1, new Date(), tempPos1));
-        tempList.add(new Interview(tempApp2, new Date(Long.MAX_VALUE / 5579999), tempPos2));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        tempList.add(new Interview(tempApp1, LocalDateTime.parse("2022-03-18 13:00", formatter), tempPos1));
+        tempList.add(new Interview(tempApp2, LocalDateTime.parse("2023-03-22 16:00", formatter), tempPos2));
         ObservableList<Interview> intList = FXCollections.observableList(tempList);
 
         interviewListView.setItems(intList); // TO REPLACE WITH REAL LIST

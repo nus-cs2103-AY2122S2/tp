@@ -1,6 +1,6 @@
 package seedu.address.ui;
 
-import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -50,8 +50,8 @@ public class InterviewCard extends UiPart<Region> {
 
         id.setText(displayedIndex + ". ");
 
-        SimpleDateFormat dt = new SimpleDateFormat("EEEE dd MMM yyyy, hh:mma");
-        date.setText(dt.format(interview.getDate()));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE dd MMM yyyy, HH:mma");
+        date.setText(interview.getDate().format(formatter));
 
         role.setText(interview.getPosition().getPositionName().positionName);
 
