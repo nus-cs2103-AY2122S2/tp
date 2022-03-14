@@ -24,9 +24,8 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      */
     public DeleteCommand parse(String args) throws ParseException {
 
-        Pattern p = Pattern.compile("-?\\d+(\\.\\d+)?"); //Regex to match all numeric Strings
+        Pattern p = Pattern.compile("^-?\\d*\\.{0,1}\\d+$"); //Regex to match all numeric Strings
         boolean isDeletionByIndex = isNumeric(p, args);
-        System.out.println(isDeletionByIndex);
 
         if (isDeletionByIndex) { //deletion by index
             try {
