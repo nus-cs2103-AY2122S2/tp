@@ -6,7 +6,6 @@ import java.util.function.Function;
 
 import seedu.contax.model.Model;
 import seedu.contax.ui.onboarding.OnboardingCommandBox;
-import seedu.contax.ui.onboarding.OnboardingStoryManager;
 
 /**
  * The model that is responsible for storing actions for the OnbordingWindow
@@ -104,7 +103,7 @@ public class OnboardingStep {
         return labelInstruction;
     }
 
-    public boolean getIsCommandCustom() {
+    public boolean isCommandCustom() {
         return isCommandCustom;
     }
 
@@ -141,7 +140,7 @@ public class OnboardingStep {
                 && otherStep.getPositionOption() == getPositionOption()
                 && otherStep.getCommand().equals(getCommand())
                 && otherStep.getLabelInstruction() == getLabelInstruction()
-                && otherStep.getIsCommandCustom() == getIsCommandCustom()
+                && otherStep.isCommandCustom() == isCommandCustom()
                 && otherStep.getCommandInstruction() == getCommandInstruction();
     }
 

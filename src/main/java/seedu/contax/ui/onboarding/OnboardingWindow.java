@@ -272,7 +272,7 @@ public class OnboardingWindow extends UiPart<Stage> {
             break;
         }
     }
-    
+
     /**
      * Enforces the user input to be equals to be given step's command.
      * Returns 0 when the user input does not satisfy the given condition, and 1 if it does.
@@ -340,7 +340,7 @@ public class OnboardingWindow extends UiPart<Stage> {
         }
 
         if (step.getCommand() != null) {
-            if (enforceUserInput(step, step.getIsCommandCustom()) == 0) {
+            if (enforceUserInput(step, step.isCommandCustom()) == 0) {
                 return;
             }
         }
