@@ -14,6 +14,9 @@ public class CommandResult {
 
     private final String feedbackToUser;
 
+    /** The application should switch tab to selected tab. **/
+    private final ViewTab viewTab;
+
     /** Help information should be shown to the user. */
     private final boolean showHelp;
 
@@ -22,6 +25,7 @@ public class CommandResult {
 
     /** If InfoPanel of the UI should be updated **/
     private final boolean updateInfoPanel;
+
     private final InfoPanelTypes infoPanelType;
 
     /**
@@ -31,6 +35,7 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.viewTab = ViewTab.NONE;
         this.updateInfoPanel = false;
         this.infoPanelType = null;
     }
@@ -50,17 +55,36 @@ public class CommandResult {
      * @param feedbackToUser Feedback given to user from the command.
      * @param updateInfoPanel Boolean indicating if the {@code InfoPanel} of the UI is updated.
      * @param infoPanelType {@code InfoPanelTypes} value representing the type of {@code InfoPanel} that is updated.
+     * @param viewTab {@code viewTab} value representing the type of {@code ViewTab} that will be switched.
      */
-    public CommandResult(String feedbackToUser, boolean updateInfoPanel, InfoPanelTypes infoPanelType) {
+    public CommandResult(String feedbackToUser, boolean updateInfoPanel,
+                         InfoPanelTypes infoPanelType, ViewTab viewTab) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = false;
         this.exit = false;
         this.updateInfoPanel = updateInfoPanel;
         this.infoPanelType = infoPanelType;
+        this.viewTab = viewTab;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields.
+     */
+    public CommandResult(String feedbackToUser, ViewTab viewTab) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = false;
+        this.exit = false;
+        this.viewTab = viewTab;
+        this.updateInfoPanel = false;
+        this.infoPanelType = null;
     }
 
     public String getFeedbackToUser() {
         return feedbackToUser;
+    }
+
+    public ViewTab toggleTo() {
+        return viewTab;
     }
 
     public boolean isShowHelp() {
