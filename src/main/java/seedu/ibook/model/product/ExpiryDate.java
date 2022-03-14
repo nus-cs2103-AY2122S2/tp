@@ -42,7 +42,10 @@ public class ExpiryDate {
     }
 
     /**
-     * Returns true if a given {@code LocalDate} is a valid expiry date.
+     * Checks if a given {@code LocalDate} is valid as per {@code VALIDATION_REGEX}.
+     *
+     * @param expiryDate Date to test.
+     * @return Result of test.
      */
     public static boolean isValidExpiryDate(String expiryDate) {
         return Arrays.stream(ACCEPTED_FORMATS)
