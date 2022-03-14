@@ -58,4 +58,17 @@ public class StartDateTimeTest {
         assertEquals(reference.hashCode(), new StartDateTime(referenceTime1).hashCode());
         assertNotEquals(reference.hashCode(), new StartDateTime(referenceTime2).hashCode());
     }
+
+    @Test
+    public void comparisonTest() {
+        StartDateTime refTime = new StartDateTime(LocalDateTime.parse("2020-10-30T12:34:00"));
+        StartDateTime timeBefore = new StartDateTime(LocalDateTime.parse("2020-10-30T12:33:00"));
+        StartDateTime timeAfter = new StartDateTime(LocalDateTime.parse("2020-10-30T12:35:00"));
+        StartDateTime refTimeDifferentSeconds = new StartDateTime(LocalDateTime.parse("2020-10-30T12:34:54"));
+
+        assertEquals(0, refTime.compareTo(refTime));
+        assertEquals(0, refTime.compareTo(refTimeDifferentSeconds));
+        assertEquals(1, refTime.compareTo(timeBefore));
+        assertEquals(-1, refTime.compareTo(timeAfter));
+    }
 }
