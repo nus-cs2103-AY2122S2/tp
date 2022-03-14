@@ -22,6 +22,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.patient.Patient;
+import seedu.address.model.prescription.Prescription;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -115,6 +116,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addPrescription(Prescription prescription) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasPrescription(Prescription prescription) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -150,7 +161,17 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Prescription> getFilteredPrescriptionList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredPersonList(Predicate<Patient> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredPrescriptionList(Predicate<Prescription> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
