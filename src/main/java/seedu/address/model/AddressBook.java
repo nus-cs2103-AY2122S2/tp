@@ -3,8 +3,10 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Objects;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.entry.Event;
 import seedu.address.model.entry.Person;
 import seedu.address.model.entry.UniqueEntryList;
 
@@ -15,6 +17,7 @@ import seedu.address.model.entry.UniqueEntryList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueEntryList<Person> persons;
+    private final UniqueEntryList<Event> events;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,6 +28,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniqueEntryList<Person>();
+        events = new UniqueEntryList<Event>();
     }
 
     public AddressBook() {}
@@ -54,6 +58,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setEvents(newData.getEventList());
     }
 
     //// person-level operations
@@ -97,7 +102,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
+        return persons.asUnmodifiableObservableList().size() + " persons "
+                + events.asUnmodifiableObservableList().size() + " events";
         // TODO: refine later
     }
 
@@ -110,11 +116,37 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons));
+                && persons.equals(((AddressBook) other).persons)
+                && events.equals(((AddressBook) other).events));
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return Objects.hash(persons, events);
     }
+
+
+    public void setEvents(List<Event> events) {
+        this.events.setEntries(events);
+    }
+    public boolean hasEvent(Event event) {
+        requireNonNull(event);
+        return events.contains(event);
+    }
+    public void addEvent(Event e) {
+        events.add(e);
+    }
+    public void setEvent(Event target, Event editedEvent) {
+        requireNonNull(editedEvent);
+
+        events.setEntry(target, editedEvent);
+    }
+    public void removeEvent(Event key) {
+        events.remove(key);
+    }
+    @Override
+    public ObservableList<Event> getEventList() {
+        return events.asUnmodifiableObservableList();
+    }
+
 }

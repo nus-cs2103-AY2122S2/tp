@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.entry.Event;
 import seedu.address.model.entry.Person;
 
 /**
@@ -84,4 +85,16 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+
+    Predicate<Event> PREDICATE_SHOW_ALL_EVENTS = unused -> true;
+    boolean hasEvent(Event event);
+    void deleteEvent(Event target);
+    void addEvent(Event event);
+    void setEvent(Event target, Event editedEvent);
+    ObservableList<Event> getFilteredEventList();
+    void updateFilteredEventList(Predicate<Event> predicate);
+
+
+
 }
