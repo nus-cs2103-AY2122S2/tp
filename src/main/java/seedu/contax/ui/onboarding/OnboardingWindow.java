@@ -132,9 +132,9 @@ public class OnboardingWindow extends UiPart<Stage> {
      * Displays an overlay over this window which covers every Node, except the given Node.
      * <br><br>
      * Option as follows:
-     * <br>- 0: both overlays visible
-     * <br>- 1: hide the top overlay
-     * <br>- 2: hide the bottom overlay
+     * <br>- Overlay.showOverlay.BOTH: both overlays visible
+     * <br>- Overlay.showOverlay.BOTTOM: shows only the bottom overlay
+     * <br>- Overlay.showOverlay.TOP: shows only the top overlay
      * @param node Node to be excluded from the overlay
      */
     private void showOnly(Region node, Overlay.showOverlay option) {
@@ -180,9 +180,9 @@ public class OnboardingWindow extends UiPart<Stage> {
      * Highlights a node in this window the stage based on the given option
      * <br><br>
      * Options are as follows:
-     * <br>- 0: clear all highlights
-     * <br>- 1: highlight only the command box
-     * <br>- 2: highlight only the person list
+     * <br>- OnboardingStory.HighlightOption.CLEAR_ALL: clear all highlights
+     * <br>- OnboardingStory.HighlightOption.COMMAND_BOX: highlight only the command box
+     * <br>- OnboardingStory.HighlightOption.PERSON_LIST: highlight only the person list
      * @param option Highlight option
      */
     private void processHighlightOption(OnboardingStory.HighlightOption option) {
@@ -209,10 +209,10 @@ public class OnboardingWindow extends UiPart<Stage> {
      * Displays an overlay on this window, whose position is dependant on the given option
      * <br><br>
      * Options are as follows:
-     * <br>- 0: cover all
-     * <br>- 1: cover all, showing only the menu bar
-     * <br>- 2: cover all, showing only the command box
-     * <br>- 3: cover all, showing only the person list
+     * <br>- OnboardingStory.OverlayOption.ALL: cover all
+     * <br>- OnboardingStory.OverlayOption.SHOW_MENU_BAR: cover all, showing only the menu bar
+     * <br>- OnboardingStory.OverlayOption.SHOW_COMMAND_BOX: cover all, showing only the command box
+     * <br>- OnboardingStory.OverlayOption.SHOW_PERSON_LIST: cover all, showing only the person list
      * @param option the overlay option
      */
     private void processOverlayOption(OnboardingStory.OverlayOption option) {
@@ -238,11 +238,11 @@ public class OnboardingWindow extends UiPart<Stage> {
      * Moves the InstructionLabel to a position based on the given option.
      * <br><br>
      * Options are as follows:
-     * <br>- 0: center of window
-     * <br>- 1: top right of menu bar
-     * <br>- 2: top right of command box
-     * <br>- 3: top right of result display
-     * <br>- 4: middle right of result display
+     * <br>- OnboardingStory.PositionOption.CENTER: center of window
+     * <br>- OnboardingStory.PositionOption.MENU_BAR_TOP: top right of menu bar
+     * <br>- OnboardingStory.PositionOption.COMMAND_BOX_TOP: top right of command box
+     * <br>- OnboardingStory.PositionOption.RESULT_DISPLAY_TOP: top right of result display
+     * <br>- OnboardingStory.PositionOption.PERSON_LIST_MIDDLE: middle right of result display
      * @param option Position option
      */
     private void processInstructionPosition(OnboardingStory.PositionOption option) {
