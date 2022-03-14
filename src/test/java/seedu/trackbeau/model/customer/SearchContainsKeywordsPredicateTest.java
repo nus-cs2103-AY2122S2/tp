@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.trackbeau.testutil.CustomerBuilder;
 
-public class NameContainsKeywordsPredicateTest {
+public class SearchContainsKeywordsPredicateTest {
 
     @Test
     public void equals() {
