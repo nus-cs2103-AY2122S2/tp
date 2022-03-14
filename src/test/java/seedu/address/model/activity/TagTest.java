@@ -1,4 +1,4 @@
-package seedu.address.model.tag;
+package seedu.address.model.activity;
 
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -8,19 +8,19 @@ public class TagTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Tag(null));
+        assertThrows(NullPointerException.class, () -> new Activity(null));
     }
 
     @Test
     public void constructor_invalidTagName_throwsIllegalArgumentException() {
-        String invalidTagName = "";
-        assertThrows(IllegalArgumentException.class, () -> new Tag(invalidTagName));
+        String invalidActivityName = "";
+        assertThrows(IllegalArgumentException.class, () -> new Activity(invalidActivityName));
     }
 
     @Test
     public void isValidTagName() {
         // null tag name
-        assertThrows(NullPointerException.class, () -> Tag.isValidTagName(null));
+        assertThrows(NullPointerException.class, () -> Activity.isValidActivityName(null));
     }
 
 }

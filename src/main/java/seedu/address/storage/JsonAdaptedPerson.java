@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.activity.Activity;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.ClassCode;
 import seedu.address.model.person.Email;
@@ -17,8 +18,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Status;
-import seedu.address.model.tag.Tag;
-
 /**
  * Jackson-friendly version of {@link Person}.
  */
@@ -32,7 +31,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final String status;
     private final String classCode;
-    private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final List<JsonAdaptedActivity> activity = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -42,15 +41,15 @@ class JsonAdaptedPerson {
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("status") String status,
             @JsonProperty("classCode") String classCode,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("activity") List<JsonAdaptedActivity> activity) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.status = status;
         this.classCode = classCode;
-        if (tagged != null) {
-            this.tagged.addAll(tagged);
+        if (activity != null) {
+            this.activity.addAll(activity);
         }
     }
 
@@ -64,8 +63,8 @@ class JsonAdaptedPerson {
         address = source.getAddress().value;
         status = source.getStatus().value;
         classCode = source.getClassCode().value;
-        tagged.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
+        activity.addAll(source.getActivities().stream()
+                .map(JsonAdaptedActivity::new)
                 .collect(Collectors.toList()));
     }
 
@@ -75,9 +74,9 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+        final List<Activity> personActivities = new ArrayList<>();
+        for (JsonAdaptedActivity activity : activity) {
+            personActivities.add(activity.toModelType());
         }
 
         if (name == null) {
@@ -129,8 +128,8 @@ class JsonAdaptedPerson {
         }
         final ClassCode modelClassCode = new ClassCode(classCode);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelStatus, modelClassCode, modelTags);
+        final Set<Activity> modelActivity = new HashSet<>(personActivities);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelStatus, modelClassCode, modelActivity);
     }
 
 }

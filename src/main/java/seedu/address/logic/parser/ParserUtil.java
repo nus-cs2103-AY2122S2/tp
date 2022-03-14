@@ -9,13 +9,13 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.activity.Activity;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.ClassCode;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Status;
-import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -128,29 +128,29 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String activity} into a {@code Activity}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code activity} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+    public static Activity parseActivity(String activity) throws ParseException {
+        requireNonNull(activity);
+        String trimmedActivity = activity.trim();
+        if (!Activity.isValidActivityName(trimmedActivity)) {
+            throw new ParseException(Activity.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return new Activity(trimmedActivity);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses {@code Collection<String> activities} into a {@code Set<Activity>}.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+    public static Set<Activity> parseActivities(Collection<String> activities) throws ParseException {
+        requireNonNull(activities);
+        final Set<Activity> activitySet = new HashSet<>();
+        for (String activityName : activities) {
+            activitySet.add(parseActivity(activityName));
         }
-        return tagSet;
+        return activitySet;
     }
 }

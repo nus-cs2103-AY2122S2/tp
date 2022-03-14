@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.activity.Activity;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.ClassCode;
 import seedu.address.model.person.Email;
@@ -13,7 +14,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Status;
-import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -23,22 +23,22 @@ public class SampleDataUtil {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"), new Status("Negative"), new ClassCode("4G"),
-                getTagSet("friends")),
+                    getActivitySet("friends")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), new Status("Positive"), new ClassCode("2H"),
-                getTagSet("colleagues", "friends")),
+                    getActivitySet("colleagues", "friends")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), new Status("Positive"), new ClassCode("6A"),
-                getTagSet("neighbours")),
+                    getActivitySet("neighbours")),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), new Status("Negative"), new ClassCode("2C"),
-                getTagSet("family")),
+                    getActivitySet("family")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                 new Address("Blk 47 Tampines Street 20, #17-35"), new Status("Close-Contact"), new ClassCode("6A"),
-                getTagSet("classmates")),
+                    getActivitySet("classmates")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"), new Status("Negative"), new ClassCode("4B"),
-                getTagSet("colleagues"))
+                    getActivitySet("colleagues"))
         };
     }
 
@@ -51,11 +51,11 @@ public class SampleDataUtil {
     }
 
     /**
-     * Returns a tag set containing the list of strings given.
+     * Returns a Activity set containing the list of strings given.
      */
-    public static Set<Tag> getTagSet(String... strings) {
+    public static Set<Activity> getActivitySet(String... strings) {
         return Arrays.stream(strings)
-                .map(Tag::new)
+                .map(Activity::new)
                 .collect(Collectors.toSet());
     }
 
