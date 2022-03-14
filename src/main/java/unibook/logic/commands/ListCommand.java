@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import unibook.commons.core.Messages;
+import unibook.logic.commands.exceptions.CommandException;
 import unibook.model.Model;
 import unibook.model.ModelManager;
 import unibook.model.module.Module;
@@ -118,7 +119,7 @@ public class ListCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, Boolean isPersonListShowing,
-                                 Boolean isModuleListShowing) {
+                                 Boolean isModuleListShowing) throws CommandException {
         requireNonNull(model);
         showAll(model);
         ModelManager modelManager = (ModelManager) model;
@@ -127,7 +128,7 @@ public class ListCommand extends Command {
             return new CommandResult(MESSAGE_SUCCESS);
         case MODULE:
             if (!moduleCodeExists(model.getUniBook().getModuleList())) {
-                return new CommandResult(String.format(Messages.MESSAGE_MODULE_CODE_NOT_EXIST, moduleCode));
+                throw new CommandException(String.format(Messages.MESSAGE_MODULE_CODE_NOT_EXIST, moduleCode));
             }
             if (modelManager.getUi().isPersonListShowing()) {
                 Predicate<Person> showSpecificPeoplePredicate = p -> p.hasModule(this.moduleCode);
@@ -156,7 +157,7 @@ public class ListCommand extends Command {
         case MODULEANDTYPE:
             if (modelManager.getUi().isPersonListShowing()) {
                 if (!moduleCodeExists(model.getUniBook().getModuleList())) {
-                    return new CommandResult(String.format(Messages.MESSAGE_MODULE_CODE_NOT_EXIST, moduleCode));
+                    throw new CommandException(String.format(Messages.MESSAGE_MODULE_CODE_NOT_EXIST, moduleCode));
                 }
                 if (type.equals("professors")) {
                     Predicate<Person> showSpecificProfessorPredicate = p -> p.hasModule(this.moduleCode)

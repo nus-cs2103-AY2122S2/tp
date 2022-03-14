@@ -56,6 +56,7 @@ public class ListCommandParser implements Parser<ListCommand> {
 
                 ModuleCode moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(CliSyntax.PREFIX_MODULE).get()
                     .toUpperCase());
+
                 if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_TYPE)) {
                     String type = argMultimap.getValue(CliSyntax.PREFIX_TYPE).get().toLowerCase();
                     if (!(type.equals("professors") || type.equals("students"))) {
