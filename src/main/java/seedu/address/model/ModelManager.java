@@ -24,18 +24,21 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Applicant> filteredApplicants;
+    private final FilteredList<Interview> filteredInterviews;
+    private final FilteredList<Position> filteredPositions;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
-
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredApplicants = new FilteredList<>(this.addressBook.getPersonList());
+        filteredInterviews = new FilteredList<>(this.addressBook.getInterviewList());
+        filteredPositions = new FilteredList<>(this.addressBook.getPositionList());
     }
 
     public ModelManager() {
@@ -122,7 +125,24 @@ public class ModelManager implements Model {
     @Override
     public void addInterview(Interview interview) {
         addressBook.addInterview(interview);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredInterviewList(PREDICATE_SHOW_ALL_INTERVIEWS);
+    }
+
+    @Override
+    public boolean hasPosition(Position position) {
+        requireNonNull(position);
+        return addressBook.hasPosition(position);
+    }
+
+    @Override
+    public void addPosition(Position position) {
+        addressBook.addPosition(position);
+        updateFilteredPositionList(PREDICATE_SHOW_ALL_POSITIONS);
+    }
+
+    @Override
+    public void deletePosition(Position target) {
+        addressBook.removePosition(target);
     }
 
     //=========== Filtered Applicant List Accessors =============================================================
@@ -142,6 +162,36 @@ public class ModelManager implements Model {
         filteredApplicants.setPredicate(predicate);
     }
 
+    //=========== Filtered Interview List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Interview} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Interview> getFilteredInterviewList() {
+        return filteredInterviews;
+    }
+
+    @Override
+    public void updateFilteredInterviewList(Predicate<Interview> predicate) {
+        requireNonNull(predicate);
+        filteredInterviews.setPredicate(predicate);
+    }
+
+    //=========== Filtered Position List Accessors =============================================================
+    @Override
+    public ObservableList<Position> getFilteredPositionList() {
+        return filteredPositions;
+    }
+
+    @Override
+    public void updateFilteredPositionList(Predicate<Position> predicate) {
+        requireNonNull(predicate);
+        filteredPositions.setPredicate(predicate);
+    }
+
+    //=========== Utility methods =============================================================
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -160,11 +210,4 @@ public class ModelManager implements Model {
                 && userPrefs.equals(other.userPrefs)
                 && filteredApplicants.equals(other.filteredApplicants);
     }
-
-    //=========== Filtered Position List Accessors =============================================================
-    @Override
-    public ObservableList<Position> getFilteredPositionList() {
-        return null; //TODO
-    }
-
 }
