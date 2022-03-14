@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.trackbeau.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's hair type in the trackbeau book.
+ * Represents a Customer's hair type in trackBeau.
  * Guarantees: immutable; is valid as declared in {@link #isValidHairType(String)}
  */
 public class HairType {
@@ -12,7 +12,7 @@ public class HairType {
     public static final String MESSAGE_CONSTRAINTS = "HairTypes can be any values and it should not be blank";
 
     /*
-     * The first character of the trackbeau must not be a whitespace,
+     * The first character of hair type must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[^\\s].*";

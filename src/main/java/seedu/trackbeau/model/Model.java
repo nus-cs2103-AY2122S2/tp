@@ -12,7 +12,7 @@ import seedu.trackbeau.model.customer.Customer;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Customer> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Customer> PREDICATE_SHOW_ALL_CUSTOMERS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -35,17 +35,17 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' trackbeau file path.
+     * Returns the user prefs' trackBeau file path.
      */
     Path getTrackBeauFilePath();
 
     /**
-     * Sets the user prefs' trackbeau file path.
+     * Sets the user prefs' trackBeau file path.
      */
     void setTrackBeauFilePath(Path addressBookFilePath);
 
     /**
-     * Replaces trackbeau data with the data in {@code addressBook}.
+     * Replaces trackBeau data with the data in {@code addressBook}.
      */
     void setTrackBeau(ReadOnlyTrackBeau addressBook);
 
@@ -53,26 +53,26 @@ public interface Model {
     ReadOnlyTrackBeau getTrackBeau();
 
     /**
-     * Returns true if a customer with the same identity as {@code customer} exists in trackbeau.
+     * Returns true if a customer with the same identity as {@code customer} exists in trackBeau.
      */
     boolean hasCustomer(Customer customer);
 
     /**
      * Deletes the given customer.
-     * The customer must exist in trackbeau.
+     * The customer must exist in trackBeau.
      */
     void deleteCustomer(Customer target);
 
     /**
      * Adds the given customer.
-     * {@code customer} must not already exist in trackbeau.
+     * {@code customer} must not already exist in trackBeau.
      */
     void addCustomer(Customer customer);
 
     /**
      * Replaces the given customer {@code target} with {@code editedCustomer}.
-     * {@code target} must exist in trackbeau.
-     * The customer identity of {@code editedCustomer} must not be the same as another existing customer in trackbeau.
+     * {@code target} must exist in trackBeau.
+     * The customer identity of {@code editedCustomer} must not be the same as another existing customer in trackBeau.
      */
     void setCustomer(Customer target, Customer editedCustomer);
 

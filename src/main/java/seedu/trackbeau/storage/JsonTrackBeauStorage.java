@@ -60,8 +60,8 @@ public class JsonTrackBeauStorage implements TrackBeauStorage {
     }
 
     @Override
-    public void saveTrackBeau(ReadOnlyTrackBeau addressBook) throws IOException {
-        saveTrackBeau(addressBook, filePath);
+    public void saveTrackBeau(ReadOnlyTrackBeau trackBeau) throws IOException {
+        saveTrackBeau(trackBeau, filePath);
     }
 
     /**
@@ -69,12 +69,12 @@ public class JsonTrackBeauStorage implements TrackBeauStorage {
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveTrackBeau(ReadOnlyTrackBeau addressBook, Path filePath) throws IOException {
-        requireNonNull(addressBook);
+    public void saveTrackBeau(ReadOnlyTrackBeau trackBeau, Path filePath) throws IOException {
+        requireNonNull(trackBeau);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableTrackBeau(addressBook), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableTrackBeau(trackBeau), filePath);
     }
 
 }

@@ -16,41 +16,41 @@ import seedu.trackbeau.model.customer.Customer;
 /**
  * An Immutable TrackBeau that is serializable to JSON format.
  */
-@JsonRootName(value = "addressbook")
+@JsonRootName(value = "trackBeau")
 class JsonSerializableTrackBeau {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate customer(s).";
+    public static final String MESSAGE_DUPLICATE_CUSTOMER = "Customers list contains duplicate customer(s).";
 
-    private final List<JsonAdaptedCustomer> persons = new ArrayList<>();
+    private final List<JsonAdaptedCustomer> customers = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     * Constructs a {@code JsonSerializableTrackBeau} with the given customers.
      */
     @JsonCreator
-    public JsonSerializableTrackBeau(@JsonProperty("persons") List<JsonAdaptedCustomer> persons) {
-        this.persons.addAll(persons);
+    public JsonSerializableTrackBeau(@JsonProperty("customers") List<JsonAdaptedCustomer> customers) {
+        this.customers.addAll(customers);
     }
 
     /**
      * Converts a given {@code ReadOnlyTrackBeau} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
+     * @param source future changes to this will not affect the created {@code JsonSerializableTrackBeau}.
      */
     public JsonSerializableTrackBeau(ReadOnlyTrackBeau source) {
-        persons.addAll(source.getCustomerList().stream().map(JsonAdaptedCustomer::new).collect(Collectors.toList()));
+        customers.addAll(source.getCustomerList().stream().map(JsonAdaptedCustomer::new).collect(Collectors.toList()));
     }
 
     /**
-     * Converts this trackbeau book into the model's {@code TrackBeau} object.
+     * Converts this trackBeau into the model's {@code TrackBeau} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
     public TrackBeau toModelType() throws IllegalValueException {
         TrackBeau trackBeau = new TrackBeau();
-        for (JsonAdaptedCustomer jsonAdaptedCustomer : persons) {
+        for (JsonAdaptedCustomer jsonAdaptedCustomer : customers) {
             Customer customer = jsonAdaptedCustomer.toModelType();
             if (trackBeau.hasCustomer(customer)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+                throw new IllegalValueException(MESSAGE_DUPLICATE_CUSTOMER);
             }
             trackBeau.addCustomer(customer);
         }

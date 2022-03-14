@@ -69,9 +69,9 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s trackbeau book and {@code userPrefs}. <br>
-     * The data from the sample trackbeau book will be used instead if {@code storage}'s trackbeau book is not found,
-     * or an empty trackbeau book will be used instead if errors occur when reading {@code storage}'s trackbeau book.
+     * Returns a {@code ModelManager} with the data from {@code storage}'s trackBeau and {@code userPrefs}. <br>
+     * The data from the sample trackBeau will be used instead if {@code storage}'s trackBeau is not found,
+     * or an empty trackBeau will be used instead if errors occur when reading {@code storage}'s trackBeau.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlyTrackBeau> trackBeauOptional;
@@ -81,7 +81,7 @@ public class MainApp extends Application {
             if (!trackBeauOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample TrackBeau");
             }
-            initialData = trackBeauOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = trackBeauOptional.orElseGet(SampleDataUtil::getSampleTrackBeau);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty TrackBeau");
             initialData = new TrackBeau();
@@ -173,7 +173,7 @@ public class MainApp extends Application {
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping TrackBeau ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {
