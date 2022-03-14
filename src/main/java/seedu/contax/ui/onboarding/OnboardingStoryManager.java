@@ -40,7 +40,7 @@ public class OnboardingStoryManager {
 
     private void createStories() {
         OnboardingStory test = new OnboardingStory();
-//        BiConsumer<Model, OnboardingInstruction> formatString =
+
         addDisplayStep(test, "Welcome to a quick tour of ContaX" + CLICK_CONTINUE);
         addDisplayStep(test, "You will now be guided through\nthe basic features of ContaX" + CLICK_CONTINUE);
 
