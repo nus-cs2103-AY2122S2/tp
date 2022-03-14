@@ -23,7 +23,7 @@ public class JsonSerializableTrackBeauTest {
         JsonSerializableTrackBeau dataFromFile = JsonUtil.readJsonFile(TYPICAL_CUSTOMERS_FILE,
                 JsonSerializableTrackBeau.class).get();
         TrackBeau addressBookFromFile = dataFromFile.toModelType();
-        TrackBeau typicalPersonsAddressBook = TypicalPersons.getTypicalAddressBook();
+        TrackBeau typicalPersonsAddressBook = TypicalCustomers.getTypicalAddressBook();
         assertEquals(addressBookFromFile, typicalPersonsAddressBook);
     }
     */

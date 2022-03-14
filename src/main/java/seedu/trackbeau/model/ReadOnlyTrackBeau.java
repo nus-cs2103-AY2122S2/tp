@@ -4,7 +4,7 @@ import javafx.collections.ObservableList;
 import seedu.trackbeau.model.customer.Customer;
 
 /**
- * Unmodifiable view of trackbeau.
+ * Unmodifiable view of trackBeau.
  */
 public interface ReadOnlyTrackBeau {
 

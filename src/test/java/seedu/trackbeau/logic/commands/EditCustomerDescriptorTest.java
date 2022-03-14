@@ -15,8 +15,8 @@ import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_STAFF_JANE;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.trackbeau.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.trackbeau.testutil.EditPersonDescriptorBuilder;
+import seedu.trackbeau.logic.commands.EditCommand.EditCustomerDescriptor;
+import seedu.trackbeau.testutil.EditCustomerDescriptorBuilder;
 */
 
 public class EditCustomerDescriptorTest {
@@ -25,7 +25,7 @@ public class EditCustomerDescriptorTest {
     @Test
     public void equals() {
         // same values -> returns true
-        EditPersonDescriptor descriptorWithSameValues = new EditPersonDescriptor(DESC_AMY);
+        EditCustomerDescriptor descriptorWithSameValues = new EditCustomerDescriptor(DESC_AMY);
         assertTrue(DESC_AMY.equals(descriptorWithSameValues));
 
         // same object -> returns true
@@ -41,36 +41,36 @@ public class EditCustomerDescriptorTest {
         assertFalse(DESC_AMY.equals(DESC_BOB));
 
         // different name -> returns false
-        EditPersonDescriptor editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
+        EditCustomerDescriptor editedAmy = new EditCustomerDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different phone -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withPhone(VALID_PHONE_BOB).build();
+        editedAmy = new EditCustomerDescriptorBuilder(DESC_AMY).withPhone(VALID_PHONE_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different email -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB).build();
+        editedAmy = new EditCustomerDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different address -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
+        editedAmy = new EditCustomerDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different staffs -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withStaffs(VALID_STAFF_JANE).build();
+        editedAmy = new EditCustomerDescriptorBuilder(DESC_AMY).withStaffs(VALID_STAFF_JANE).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different staffs -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withStaffs(VALID_STAFF_JANE).build();
+        editedAmy = new EditCustomerDescriptorBuilder(DESC_AMY).withStaffs(VALID_STAFF_JANE).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different services -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withServices(VALID_SERVICE_CHEMICAL_PEEL).build();
+        editedAmy = new EditCustomerDescriptorBuilder(DESC_AMY).withServices(VALID_SERVICE_CHEMICAL_PEEL).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         //different allergies -> return false
         // different services -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAllergies(VALID_ALLERGY_NICKEL).build();
+        editedAmy = new EditCustomerDescriptorBuilder(DESC_AMY).withAllergies(VALID_ALLERGY_NICKEL).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
     */

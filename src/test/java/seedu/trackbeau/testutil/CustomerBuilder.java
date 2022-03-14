@@ -14,9 +14,9 @@ import seedu.trackbeau.model.tag.Tag;
 import seedu.trackbeau.model.util.SampleDataUtil;
 
 /**
- * A utility class to help with building Person objects.
+ * A utility class to help with building Customer objects.
  */
-public class PersonBuilder {
+public class CustomerBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
@@ -36,9 +36,9 @@ public class PersonBuilder {
     private Set<Tag> allergies;
 
     /**
-     * Creates a {@code PersonBuilder} with the default details.
+     * Creates a {@code CustomerBuilder} with the default details.
      */
-    public PersonBuilder() {
+    public CustomerBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
@@ -51,9 +51,9 @@ public class PersonBuilder {
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code personToCopy}.
+     * Initializes the CustomerBuilder with the data of {@code customerToCopy}.
      */
-    public PersonBuilder(Customer customerToCopy) {
+    public CustomerBuilder(Customer customerToCopy) {
         name = customerToCopy.getName();
         phone = customerToCopy.getPhone();
         email = customerToCopy.getEmail();
@@ -66,73 +66,73 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code Person} that we are building.
+     * Sets the {@code Name} of the {@code Customer} that we are building.
      */
-    public PersonBuilder withName(String name) {
+    public CustomerBuilder withName(String name) {
         this.name = new Name(name);
         return this;
     }
 
     /**
-     * Parses the {@code staffs} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code staffs} into a {@code Set<Tag>} and set it to the {@code Customer} that we are building.
      */
-    public PersonBuilder withStaffs(String ... staffs) {
+    public CustomerBuilder withStaffs(String ... staffs) {
         this.staffs = SampleDataUtil.getTagSet(staffs);
         return this;
     }
 
     /**
-     * Parses the {@code services} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code services} into a {@code Set<Tag>} and set it to the {@code Customer} that we are building.
      */
-    public PersonBuilder withServices(String ... services) {
+    public CustomerBuilder withServices(String ... services) {
         this.services = SampleDataUtil.getTagSet(services);
         return this;
     }
 
     /**
-     * Parses the {@code allergies} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code allergies} into a {@code Set<Tag>} and set it to the {@code Customer} that we are building.
      */
-    public PersonBuilder withAllergies(String ... allergies) {
+    public CustomerBuilder withAllergies(String ... allergies) {
         this.allergies = SampleDataUtil.getTagSet(allergies);
         return this;
     }
 
     /**
-     * Sets the {@code Address} of the {@code Person} that we are building.
+     * Sets the {@code Address} of the {@code Customer} that we are building.
      */
-    public PersonBuilder withAddress(String address) {
+    public CustomerBuilder withAddress(String address) {
         this.address = new Address(address);
         return this;
     }
 
     /**
-     * Sets the {@code Phone} of the {@code Person} that we are building.
+     * Sets the {@code Phone} of the {@code Customer} that we are building.
      */
-    public PersonBuilder withPhone(String phone) {
+    public CustomerBuilder withPhone(String phone) {
         this.phone = new Phone(phone);
         return this;
     }
 
     /**
-     * Sets the {@code Email} of the {@code Person} that we are building.
+     * Sets the {@code Email} of the {@code Customer} that we are building.
      */
-    public PersonBuilder withEmail(String email) {
+    public CustomerBuilder withEmail(String email) {
         this.email = new Email(email);
         return this;
     }
 
     /**
-     * Sets the {@code Skin Type} of the {@code Person} that we are building.
+     * Sets the {@code Skin Type} of the {@code Customer} that we are building.
      */
-    public PersonBuilder withSkinType(String skinType) {
+    public CustomerBuilder withSkinType(String skinType) {
         this.skinType = new SkinType(skinType);
         return this;
     }
 
     /**
-     * Sets the {@code Hair Type} of the {@code Person} that we are building.
+     * Sets the {@code Hair Type} of the {@code Customer} that we are building.
      */
-    public PersonBuilder withHairType(String hairType) {
+    public CustomerBuilder withHairType(String hairType) {
         this.hairType = new HairType(hairType);
         return this;
     }
