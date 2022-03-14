@@ -37,7 +37,7 @@ public class Height {
 
     @Override
     public String toString() {
-        return this.value + "cm";
+        return this.value;
     }
 
     @Override

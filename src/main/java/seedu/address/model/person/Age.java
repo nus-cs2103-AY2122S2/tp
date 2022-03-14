@@ -32,7 +32,7 @@ public class Age {
 
     @Override
     public String toString() {
-        return this.value + " y/o";
+        return this.value;
     }
 
     @Override
