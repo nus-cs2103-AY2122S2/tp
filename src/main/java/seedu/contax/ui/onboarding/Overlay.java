@@ -67,6 +67,8 @@ public class Overlay extends UiPart<Region> {
             hideAll();
             topOverlay.setVisible(true);
             break;
+        default:
+            break;
         }
 
         topOverlay.setStyle("-fx-background-color: rgb(0, 0, 0, 0.5)");
