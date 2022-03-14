@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.contax.model.onboarding.OnboardingStep;
 import seedu.contax.model.onboarding.OnboardingStory;
+import seedu.contax.ui.onboarding.OnboardingStoryManager;
 
 public class OnboardingStoryTest {
 
@@ -18,6 +19,11 @@ public class OnboardingStoryTest {
 
         // both empty stories -> returns true
         assertTrue(story1.equals(story2));
+
+
+        new OnboardingStep("message 1",
+                0.25, 0.5, OnboardingStoryManager.OverlayOption.All, OnboardingStoryManager.PositionOption.Center, OnboardingStoryManager.HighlightOption.ClearAll,
+                0, null, -1, null, false));
 
         OnboardingStep step1 = new OnboardingStep("message 1", 0, 0, 0,
                 0, 0, 0, "", null, 1, false);
