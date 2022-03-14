@@ -1,8 +1,11 @@
 package seedu.contax.model.onboarding;
 
 import java.util.Objects;
+import java.util.function.BiConsumer;
 
+import seedu.contax.model.Model;
 import seedu.contax.model.person.Person;
+import seedu.contax.ui.onboarding.OnboardingInstruction;
 
 /**
  * The model that is responsible for storing actions for the OnbordingWindow
@@ -17,8 +20,8 @@ public class OnboardingStep {
     private int positionOption;
     private String command;
     private boolean isCommandCustom;
-    private Person person;
-    private int operationId;
+    private int commandType;
+    private BiConsumer<Model, OnboardingInstruction> operationInstruction;
 
     /**
      * Creates an OnboardingStep object
@@ -35,9 +38,9 @@ public class OnboardingStep {
      */
     public OnboardingStep(String message, int option, double height,
                           double width, int position, int highlight,
-                          int eventType,
-                          String command,
-                          Person p, int op, boolean isCommandCustom) {
+                          int eventType, String command, int commandType,
+                          BiConsumer<Model, OnboardingInstruction> instruction, boolean isCommandCustom) {
+
         this.displayMessage = message;
         this.overlayOption = option;
         this.eventType = eventType;
@@ -45,8 +48,8 @@ public class OnboardingStep {
         this.messageWidth = width;
         this.positionOption = position;
         this.highlightOption = highlight;
-        this.person = p;
-        this.operationId = op;
+        this.commandType = commandType;
+        this.operationInstruction = instruction;
         this.command = command;
         this.isCommandCustom = isCommandCustom;
     }
@@ -79,16 +82,16 @@ public class OnboardingStep {
         return positionOption;
     }
 
-    public Person getPerson() {
-        return person;
+    public int getCommandType() {
+        return commandType;
     }
 
     public String getCommand() {
         return command;
     }
 
-    public int getOperationId() {
-        return operationId;
+    public BiConsumer<Model, OnboardingInstruction> getOperationInstruction() {
+        return operationInstruction;
     }
 
     public boolean getIsCommandCustom() {
@@ -125,7 +128,7 @@ public class OnboardingStep {
 
         OnboardingStep otherStep = (OnboardingStep) other;
 
-        boolean result = otherStep.getEventType() == getEventType()
+        return otherStep.getEventType() == getEventType()
                 && otherStep.getDisplayMessage().equals(getDisplayMessage())
                 && otherStep.getOverlayOption() == getOverlayOption()
                 && otherStep.getMessageHeight() == getMessageHeight()
@@ -133,20 +136,15 @@ public class OnboardingStep {
                 && otherStep.getHighlightOption() == getHighlightOption()
                 && otherStep.getPositionOption() == getPositionOption()
                 && otherStep.getCommand().equals(getCommand())
-                && otherStep.getOperationId() == getOperationId()
-                && otherStep.getIsCommandCustom() == getIsCommandCustom();
-
-        if (otherStep.getPerson() == null && person == null) {
-            return result;
-        } else {
-            return result && Objects.equals(otherStep.getPerson(), getPerson());
-        }
+                && otherStep.getOperationInstruction() == getOperationInstruction()
+                && otherStep.getIsCommandCustom() == getIsCommandCustom()
+                && otherStep.getCommandType() == getCommandType();
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(eventType, displayMessage, overlayOption,
                 messageHeight, messageWidth, highlightOption,
-                positionOption, person, command, operationId, isCommandCustom);
+                positionOption, commandType, command, operationInstruction, isCommandCustom);
     }
 }

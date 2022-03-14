@@ -290,23 +290,23 @@ public class OnboardingWindow extends UiPart<Stage> {
             break;
         case 1:
             instructionLabel.setText(String.format(step.getDisplayMessage(),
-                    OnboardingUtil.getLastestPersonName(model)));
+                    OnboardingUtil.getLatestPersonName(model)));
             break;
         case 2:
             instructionLabel.setText(String.format(step.getDisplayMessage(),
-                    OnboardingUtil.getLastestPersonName(model)));
+                    OnboardingUtil.getLatestPersonName(model)));
             model.updateFilteredPersonList((p) -> p.isSamePerson(OnboardingUtil.getLatestPerson(model)));
             break;
         case 3:
             step.setDisplayMessage(String.format(step.getDisplayMessage(),
-                    OnboardingUtil.getLastestPersonName(model)));
+                    OnboardingUtil.getLatestPersonName(model)));
             instructionLabel.setText(step.getDisplayMessage());
             step.setCommand(String.format(step.getCommand(),
-                    OnboardingUtil.getLastestPersonName(model)));
+                    OnboardingUtil.getLatestPersonName(model)));
             break;
         case 4:
             instructionLabel.setText(String.format(step.getDisplayMessage(),
-                    OnboardingUtil.getLastestPersonName(model)));
+                    OnboardingUtil.getLatestPersonName(model)));
             model.deletePerson(OnboardingUtil.getLatestPerson(model));
             break;
         case 5:
@@ -339,9 +339,9 @@ public class OnboardingWindow extends UiPart<Stage> {
                 return 0;
             }
 
-            if (OnboardingUtil.processCommand(step, commandBox.getText(), instructionLabel, model) == -1) {
-                return 0;
-            }
+//            if (OnboardingUtil.processCommand(step, commandBox.getText(), instructionLabel, model) == -1) {
+//                return 0;
+//            }
 
             OnboardingStep s = storyManager.getNextStep();
             processStep(s);
@@ -367,18 +367,27 @@ public class OnboardingWindow extends UiPart<Stage> {
         double messageWidth = step.getMessageWidth();
         int overlayOption = step.getOverlayOption();
         int highlightOption = step.getHighlightOption();
-        int operationId = step.getOperationId();
 
         instructionLabel.setText(displayMessage);
         instructionLabel.setSize(messageHeight, messageWidth, stage.heightProperty(), stage.widthProperty());
         processOverlayOption(overlayOption);
         processHighlightOption(highlightOption);
-        processOperation(operationId, step);
+        if(step.getOperationInstruction() != null) {
+            step.getOperationInstruction().accept(model, instructionLabel);
+        }
+
+        if (step.getCommandType() == 1 && commandBox.getText().length() > 0) {
+            OnboardingUtil.processCommand(commandBox.getText(), instructionLabel, model, 6);
+        }
 
         if (step.getCommand() != null) {
             if (enforceUserInput(step, step.getIsCommandCustom()) == 0) {
                 return;
             }
+        }
+
+        if(storyManager.isAtlast()) {
+            hide();
         }
 
         storyManager.stepFront();

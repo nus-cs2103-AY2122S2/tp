@@ -6,7 +6,6 @@ import seedu.contax.logic.commands.exceptions.CommandException;
 import seedu.contax.logic.parser.AddressBookParser;
 import seedu.contax.logic.parser.exceptions.ParseException;
 import seedu.contax.model.Model;
-import seedu.contax.model.onboarding.OnboardingStep;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.util.SampleDataUtil;
 
@@ -38,8 +37,9 @@ public class OnboardingUtil {
      * @return Person object of the last person
      */
     public static Person getLatestPerson(Model model) {
+        System.out.println(model.getFilteredPersonList().size());
         return model.getFilteredPersonList()
-                .get(model.getAddressBook().getPersonList().size() - 1);
+                .get(model.getFilteredPersonList().size() - 1);
     }
 
     /**
@@ -47,7 +47,7 @@ public class OnboardingUtil {
      * @param model the UniquePersonList to be searched
      * @return name of the last person
      */
-    public static String getLastestPersonName(Model model) {
+    public static String getLatestPersonName(Model model) {
         return getLatestPerson(model).getName().toString();
     }
 
@@ -74,8 +74,8 @@ public class OnboardingUtil {
      * @param model model used in the onboarding window
      * @return
      */
-    public static int processCommand(OnboardingStep step, String commandString,
-                                     OnboardingInstruction instructionLabel, Model model) {
+    public static int processCommand(String commandString,
+                                     OnboardingInstruction instructionLabel, Model model, int option) {
         Command command = null;
         try {
             command = parser.parseCommand(commandString);
@@ -83,7 +83,7 @@ public class OnboardingUtil {
             instructionLabel.setText(INVALID_COMMAND);
         }
 
-        if (step.getOperationId() == 6) {
+        if (option == 6) {
             if (!(command instanceof AddCommand)) {
                 instructionLabel.setText("Please use a add command");
                 return -1;
@@ -97,6 +97,7 @@ public class OnboardingUtil {
                 }
             }
         }
+
         return 0;
     }
 
