@@ -33,23 +33,22 @@ public class OnboardingUtil {
     }
 
     /**
-     * Returns the name string of the last person in the given Model
-     * @param model the UniquePersonList to be searched
-     * @return name of the last person
-     */
-    public static String getLastestPersonName(Model model) {
-        return model.getAddressBook().getPersonList()
-                .get(model.getAddressBook().getPersonList().size() - 1).getName().toString();
-    }
-
-    /**
      * Returns the last Person in the given Model
      * @param model the Model to be searched
      * @return Person object of the last person
      */
     public static Person getLatestPerson(Model model) {
-        return model.getAddressBook().getPersonList()
+        return model.getFilteredPersonList()
                 .get(model.getAddressBook().getPersonList().size() - 1);
+    }
+
+    /**
+     * Returns the name string of the last person in the given Model
+     * @param model the UniquePersonList to be searched
+     * @return name of the last person
+     */
+    public static String getLastestPersonName(Model model) {
+        return getLatestPerson(model).getName().toString();
     }
 
     /**
