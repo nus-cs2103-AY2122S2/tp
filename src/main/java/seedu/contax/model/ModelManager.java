@@ -205,11 +205,6 @@ public class ModelManager implements Model {
     //=========== Filtered Tag List Accessors =============================================================
 
     @Override
-    public ObservableList<Tag> getTagList() {
-        return addressBook.getTagList();
-    }
-
-    @Override
     public void updateFilteredTagList(Predicate<Tag> predicate) {
         requireNonNull(predicate);
         filteredTags.setPredicate(predicate);
