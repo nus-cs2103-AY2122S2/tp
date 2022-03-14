@@ -31,7 +31,7 @@ class SortCommandParserTest {
     @Test
     public void parse_noArgs_returnsClearModulesCommand() {
         assertParseFailure(parser, "",
-                MESSAGE_NO_PARAMETERS_SUPPLIED);
+                String.format(MESSAGE_NO_PARAMETERS_SUPPLIED, SortCommand.MESSAGE_USAGE));
     }
 
     @Test
