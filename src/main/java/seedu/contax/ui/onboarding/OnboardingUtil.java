@@ -9,10 +9,15 @@ import static seedu.contax.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.HashSet;
 
 import javafx.collections.ObservableList;
+import seedu.contax.logic.commands.AddCommand;
+import seedu.contax.logic.commands.Command;
+import seedu.contax.logic.commands.CommandResult;
+import seedu.contax.logic.commands.exceptions.CommandException;
 import seedu.contax.logic.parser.AddressBookParser;
 import seedu.contax.logic.parser.ArgumentMultimap;
 import seedu.contax.logic.parser.ArgumentTokenizer;
 import seedu.contax.logic.parser.exceptions.ParseException;
+import seedu.contax.model.Model;
 import seedu.contax.model.onboarding.OnboardingStep;
 import seedu.contax.model.person.Address;
 import seedu.contax.model.person.Email;
@@ -25,7 +30,7 @@ import seedu.contax.model.util.SampleDataUtil;
 
 
 /**
- * This class provides utilities functions for the onboarding window
+ * This class provides utilities functions for the onboarding window.
  */
 public class OnboardingUtil {
 
@@ -39,10 +44,10 @@ public class OnboardingUtil {
      * Populates the given UniquePersonList with the sample data
      * @param persons the UniquePersonList to be populated
      */
-    public static void populateWithSample(UniquePersonList persons) {
+    public static void populateWithSample(Model model) {
         Person[] samplePersons = SampleDataUtil.getSamplePersons();
         for (Person p : samplePersons) {
-            persons.add(p);
+            model.addPerson(p);
         }
     }
 
@@ -51,10 +56,9 @@ public class OnboardingUtil {
      * @param persons the UniquePersonList to be searched
      * @return name of the last person
      */
-    public static String getLastestPersonName(UniquePersonList persons) {
-        ObservableList<Person> personObservableList = persons.asUnmodifiableObservableList();
-        String newPersonName = personObservableList.get(personObservableList.size() - 1).getName().toString();
-        return newPersonName;
+    public static String getLastestPersonName(Model model) {
+        return model.getAddressBook().getPersonList()
+                .get(model.getAddressBook().getPersonList().size() - 1).getName().toString();
     }
 
     /**
@@ -62,10 +66,9 @@ public class OnboardingUtil {
      * @param persons the UniquePersonList to be searched
      * @return Person object of the last person
      */
-    public static Person getLatestPerson(UniquePersonList persons) {
-        ObservableList<Person> personObservableList = persons.asUnmodifiableObservableList();
-        Person person = personObservableList.get(personObservableList.size() - 1);
-        return person;
+    public static Person getLatestPerson(Model model) {
+        return model.getAddressBook().getPersonList()
+                .get(model.getAddressBook().getPersonList().size() - 1);
     }
 
     /**
@@ -100,42 +103,36 @@ public class OnboardingUtil {
     /**
      * Processes a given user command
      * @param step
-     * @param command
+     * @param commandString
      * @param instructionLabel
      * @param persons
      * @return
      */
-    public static int processCommand(OnboardingStep step, String command,
-                                     OnboardingInstruction instructionLabel, UniquePersonList persons) {
-        ArgumentMultimap map = tokenize(step, command);
+    public static int processCommand(OnboardingStep step, String commandString,
+                                     OnboardingInstruction instructionLabel, Model model) {
+        ArgumentMultimap map = tokenize(step, commandString);
+        Command command = null;
+        try{
+            command = parser.parseCommand(commandString);
+        } catch (ParseException e) {
+            instructionLabel.setText(INVALID_COMMAND);
+        }
+
         if (step.getOperationId() == 6) {
             if (!map.getPreamble().equals("add")) {
                 instructionLabel.setText("Please use a add command");
                 return -1;
             }
 
-            Person p = makePerson(map);
-            if (persons.contains(p)) {
-                instructionLabel.setText(p.getName() + " already exists! Add someone else");
-                return -1;
+            try{
+                command.execute(model);
+            } catch (CommandException e) {
+                if (e.getMessage().equals(AddCommand.MESSAGE_DUPLICATE_PERSON)) {
+                    instructionLabel.setText("Person name already exists! Add someone else");
+                }
             }
-
-            persons.add(p);
         }
         return 0;
-    }
-
-    /**
-     * Person make adjusted to be used for onboarding guide Returns a person based on the given ArgumentMultiMap.
-     * @param map ArgumentMultimap containing the person parameters
-     * @return Person created from the given ArugmentMultiMap
-     */
-    public static Person makePerson(ArgumentMultimap map) {
-        Name name = new Name(map.getValue(PREFIX_NAME).get());
-        Phone phone = new Phone(map.getValue(PREFIX_PHONE).get());
-        Email email = new Email(map.getValue(PREFIX_EMAIL).get());
-        Address address = new Address(map.getValue(PREFIX_ADDRESS).get());
-        return new Person(name, phone, email, address, new HashSet<>());
     }
 
 }

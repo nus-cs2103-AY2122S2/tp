@@ -8,6 +8,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import seedu.contax.model.Model;
+import seedu.contax.model.ModelManager;
 import seedu.contax.model.onboarding.OnboardingStep;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.person.UniquePersonList;
@@ -28,8 +30,7 @@ public class OnboardingWindow extends UiPart<Stage> {
     private Overlay overlay;
     private OnboardingCommandBox commandBox;
     private OnboardingInstruction instructionLabel;
-    private UniquePersonList persons;
-    private FilteredList<Person> filteredPersons;
+    private Model model;
 
     private String errorMessage;
 
@@ -70,9 +71,8 @@ public class OnboardingWindow extends UiPart<Stage> {
         this.commandBox = new OnboardingCommandBox();
         this.instructionLabel = new OnboardingInstruction();
         this.storyManager = new OnboardingStoryManager();
-        this.persons = new UniquePersonList();
-        OnboardingUtil.populateWithSample(persons);
-        filteredPersons = persons.asUnmodifiableObservableList().filtered(null);
+        this.model = new ModelManager();
+        OnboardingUtil.populateWithSample(model);
         fillInner();
         initStoryManager(storyManager);
     }
@@ -95,7 +95,6 @@ public class OnboardingWindow extends UiPart<Stage> {
     public void hide() {
         storyManager.reset();
         processStep(storyManager.start());
-        clearPersonList();
         mainWindow.show();
         stage.hide();
     }
@@ -126,19 +125,9 @@ public class OnboardingWindow extends UiPart<Stage> {
     private void fillInner() {
         labelPlaceholder.getChildren().add(overlay.getRoot());
         labelPlaceholder.getChildren().add(instructionLabel.getRoot());
-        personListPanel = new PersonListPanel(filteredPersons);
+        personListPanel = new PersonListPanel(model.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
-    }
-
-    /**
-     * Clears the person list
-     */
-    private void clearPersonList() {
-        persons = new UniquePersonList();
-        personListPanelPlaceholder.getChildren().remove(0);
-        personListPanel = new PersonListPanel(persons.asUnmodifiableObservableList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
     }
 
     /**
@@ -299,27 +288,27 @@ public class OnboardingWindow extends UiPart<Stage> {
             break;
         case 1:
             instructionLabel.setText(String.format(step.getDisplayMessage(),
-                    OnboardingUtil.getLastestPersonName(persons)));
+                    OnboardingUtil.getLastestPersonName(model)));
             break;
         case 2:
             instructionLabel.setText(String.format(step.getDisplayMessage(),
-                    OnboardingUtil.getLastestPersonName(persons)));
-            filteredPersons.setPredicate((p) -> p.isSamePerson(OnboardingUtil.getLatestPerson(persons)));
+                    OnboardingUtil.getLastestPersonName(model)));
+            model.updateFilteredPersonList((p) -> p.isSamePerson(OnboardingUtil.getLatestPerson(model)));
             break;
         case 3:
             step.setDisplayMessage(String.format(step.getDisplayMessage(),
-                    OnboardingUtil.getLastestPersonName(persons)));
+                    OnboardingUtil.getLastestPersonName(model)));
             instructionLabel.setText(step.getDisplayMessage());
             step.setCommand(String.format(step.getCommand(),
-                    OnboardingUtil.getLastestPersonName(persons)));
+                    OnboardingUtil.getLastestPersonName(model)));
             break;
         case 4:
             instructionLabel.setText(String.format(step.getDisplayMessage(),
-                    OnboardingUtil.getLastestPersonName(persons)));
-            persons.remove(OnboardingUtil.getLatestPerson(persons));
+                    OnboardingUtil.getLastestPersonName(model)));
+            model.deletePerson(OnboardingUtil.getLatestPerson(model));
             break;
         case 5:
-            filteredPersons.setPredicate(null);
+            model.updateFilteredPersonList(unused -> true);
             break;
         default:
             break;
@@ -349,7 +338,7 @@ public class OnboardingWindow extends UiPart<Stage> {
                 return 0;
             }
 
-            if (OnboardingUtil.processCommand(step, commandBox.getText(), instructionLabel, persons) == -1) {
+            if (OnboardingUtil.processCommand(step, commandBox.getText(), instructionLabel, model) == -1) {
                 return 0;
             }
 
@@ -386,7 +375,7 @@ public class OnboardingWindow extends UiPart<Stage> {
         processOperation(operationId, step);
 
         if (step.getCommand() != null) {
-            if (enforceUserInput(step, step.isCommandCustom()) == 0) {
+            if (enforceUserInput(step, step.getIsCommandCustom()) == 0) {
                 return;
             }
         }
