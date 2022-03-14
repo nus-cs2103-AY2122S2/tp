@@ -197,6 +197,11 @@ public class DisjointAppointmentListTest {
         assertEquals(beforeAppointment, appointmentList.asUnmodifiableObservableList().get(0));
         assertEquals(modifiedAloneAppointment, appointmentList.asUnmodifiableObservableList().get(1));
         assertEquals(afterAppointment, appointmentList.asUnmodifiableObservableList().get(2));
+
+        appointmentList.setAppointment(afterAppointment, afterAppointment);
+        assertEquals(beforeAppointment, appointmentList.asUnmodifiableObservableList().get(0));
+        assertEquals(modifiedAloneAppointment, appointmentList.asUnmodifiableObservableList().get(1));
+        assertEquals(afterAppointment, appointmentList.asUnmodifiableObservableList().get(2));
     }
 
     @Test

@@ -215,12 +215,11 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
      * Note that this function may only be called if only the given appointment at {@code index} is out
      * of position.
      *
-     * @param index The appointment to shift into place.
+     * @param index The appointment to shift into place. This must be a valid index in the appointments list.
      */
     private void shiftAppointmentToPosition(int index) {
-        if (index < 0 || index >= appointments.size()) {
-            return;
-        }
+        assert (index >= 0 && index < appointments.size());
+
         Appointment target = appointments.get(index);
         int otherIndex = index;
 
