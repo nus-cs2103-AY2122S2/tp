@@ -60,19 +60,17 @@
                         <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
                     </content>
                </Tab>
+
                <Tab fx:id="positionsTab" text="Positions">
                  <content>
                      <StackPane fx:id="positionListPanelPlaceholder" VBox.vgrow="ALWAYS" />
                  </content>
                </Tab>
+
                  <Tab fx:id="interviewsTab" text="Interviews">
-                   <content>
-                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                          <children>
-                             <Label text="Interview list here" style="-fx-text-fill: white;"/>
-                          </children>
-                       </AnchorPane>
-                   </content>
+                     <content>
+                         <StackPane fx:id="interviewListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                     </content>
                  </Tab>
              </tabs>
            </TabPane>

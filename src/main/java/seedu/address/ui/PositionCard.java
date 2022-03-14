@@ -26,8 +26,8 @@ public class PositionCard extends UiPart<Region> {
 
     public final Position position;
 
-    @javafx.fxml.FXML
-    private HBox cardPane;
+    @FXML
+    private HBox positionCardPane;
     @FXML
     private Label name;
     @FXML
@@ -40,7 +40,7 @@ public class PositionCard extends UiPart<Region> {
     private FlowPane requirements;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Position} and index to display.
+     * Creates a {@code PositionCard} with the given {@code Position} and index to display.
      */
     public PositionCard(Position position, int displayedIndex) {
         super(FXML);

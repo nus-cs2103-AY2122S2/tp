@@ -30,7 +30,7 @@ public class PositionListPanel extends UiPart<Region> {
     private ListView<Position> positionListView;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code PositionListPanel} with the given {@code ObservableList}.
      */
     public PositionListPanel(ObservableList<Position> positionList) {
         super(FXML);
@@ -81,7 +81,7 @@ public class PositionListPanel extends UiPart<Region> {
         tempList.add(tempPos4);
         ObservableList<Position> posList = FXCollections.observableList(tempList);
 
-        positionListView.setItems(posList);
+        positionListView.setItems(posList); // TO REPLACE WITH REAL LIST
         positionListView.setCellFactory(listView -> new PositionListViewCell());
     }
 
