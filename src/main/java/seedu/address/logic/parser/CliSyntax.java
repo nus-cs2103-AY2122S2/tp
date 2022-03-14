@@ -14,4 +14,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_KEYWORD = new Prefix("k/");
     public static final Prefix PREFIX_FIELD = new Prefix("f/");
+    public static final Prefix PREFIX_SORTKEY = new Prefix("s/");
 }
