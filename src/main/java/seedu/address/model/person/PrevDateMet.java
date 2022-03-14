@@ -35,6 +35,16 @@ public class PrevDateMet {
         //return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Method to get today's date in the event where user does not
+     * specify the date last met when adding a client.
+     *
+     * @return String representation of today's date in YYYY-MM-DD format.
+     */
+    public static String getTodaysDate() {
+        return LocalDate.now().toString();
+    }
+
     @Override
     public String toString() {
         return value.toString();
