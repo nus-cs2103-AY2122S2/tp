@@ -2,6 +2,7 @@ package unibook.logic.commands;
 
 import unibook.logic.commands.exceptions.CommandException;
 import unibook.model.Model;
+import unibook.model.person.exceptions.PersonNoSubtypeException;
 
 /**
  * Represents a command with hidden internal logic and the ability to be executed.

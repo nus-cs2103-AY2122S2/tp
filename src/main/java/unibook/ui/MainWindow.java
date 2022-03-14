@@ -16,6 +16,7 @@ import unibook.logic.Logic;
 import unibook.logic.commands.CommandResult;
 import unibook.logic.commands.exceptions.CommandException;
 import unibook.logic.parser.exceptions.ParseException;
+import unibook.model.person.exceptions.PersonNoSubtypeException;
 import unibook.ui.listpanels.ModuleListPanel;
 import unibook.ui.listpanels.PersonListPanel;
 
