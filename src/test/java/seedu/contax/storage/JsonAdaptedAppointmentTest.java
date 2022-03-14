@@ -85,7 +85,7 @@ public class JsonAdaptedAppointmentTest {
         JsonAdaptedAppointment appointment2 =
                 new JsonAdaptedAppointment(VALID_NAME, VALID_START_DATETIME, 0, VALID_PERSON);
         assertThrows(IllegalValueException.class, expectedMessage, ()
-                -> appointment2.toModelType(addressBook));
+            -> appointment2.toModelType(addressBook));
     }
 
     @Test

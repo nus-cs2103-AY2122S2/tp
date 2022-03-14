@@ -31,7 +31,7 @@ public interface ScheduleStorage {
             throws DataConversionException, IOException;
 
     /**
-     * @see #getScheduleFilePath().
+     * @see #getScheduleFilePath()
      */
     Optional<ReadOnlySchedule> readSchedule(Path filePath, ReadOnlyAddressBook addressBook)
             throws DataConversionException, IOException;
