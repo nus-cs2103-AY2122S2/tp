@@ -18,9 +18,6 @@ public class Event extends Task {
         this.startTime = startTime;
         this.endTime = endTime;
         super.setType("event");
-        super.setTaskDate(date);
-        super.setEventStartTime(startTime);
-        super.setEventEndTime(endTime);
     }
     /**
      * Returns the string representation of an event.
@@ -34,20 +31,16 @@ public class Event extends Task {
                 + " " + endTime.format(DateTimeFormatter.ofPattern("h:mm a")) + ")";
     }
 
-    /*
-    public LocalTime getStartTime() {
+    public Time getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(LocalTime startTime) {
-        this.startTime = startTime;
-    }
-
-    public LocalTime getEndTime() {
+    public Time getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalTime endTime) {
-        this.endTime = endTime;
-    }*/
+    public Date getDate() {
+        return date;
+    }
+
 }

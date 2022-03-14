@@ -17,7 +17,7 @@ public class AddDeadlineTaskCommand extends Command {
             + "\r\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_DESCRIPTION + "Do Daily Commissions "
-            + PREFIX_DATETIME + "2022-03-15 04:00";
+            + PREFIX_DATETIME + "2022-03-15 0400";
     public static final String MESSAGE_SUCCESS = "New Deadline task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This Task already exists in the address book";
 

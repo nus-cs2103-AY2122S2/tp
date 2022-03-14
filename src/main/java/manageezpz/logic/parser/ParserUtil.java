@@ -2,10 +2,6 @@ package manageezpz.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-
 import manageezpz.commons.core.index.Index;
 import manageezpz.commons.util.StringUtil;
 import manageezpz.logic.parser.exceptions.ParseException;
@@ -90,21 +86,10 @@ public class ParserUtil {
      */
     public static Date parseDate(String date) throws ParseException {
         requireNonNull(date);
-        //@@author vishandi-reused
-        //Reused from https://github.com/vishandi/ip/blob/master/src/main/java/parser/Parser.java
-        //with minor modifications
-        String[] patterns = {"yyyy-MM-dd", "yyyy/MM/dd", "dd-MM-yyyy", "dd/MM/yyyy"};
-        for (String pattern : patterns) {
-            try {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
-                LocalDate parsedDate = LocalDate.parse(date, formatter);
-                return new Date(parsedDate);
-            } catch (Exception e) {
-                System.out.println("Currently chosen pattern did not fit the given input pattern. "
-                        + "Moving on to the next option...");
-            }
+        if (!Date.isValidDate(date)) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
         }
-        throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        return new Date(date);
     }
 
     /**
@@ -118,9 +103,7 @@ public class ParserUtil {
         if (!Time.isValidTime(time)) {
             throw new ParseException(Time.MESSAGE_CONSTRAINTS);
         }
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HHmm");
-        LocalTime parsedTime = LocalTime.parse(time, dtf);
-        return new Time(parsedTime);
+        return new Time(time);
     }
 
     /**

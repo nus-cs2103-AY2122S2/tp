@@ -9,14 +9,14 @@ public class Time {
 
     public static final String VALIDATION_REGEX = "\\d{4}";
 
-    private LocalTime time;
+    private String time;
 
     /**
      * Constructs a {@code Time}.
      *
      * @param time A valid time.
      */
-    public Time(LocalTime time) {
+    public Time(String time) {
         this.time = time;
     }
 
@@ -24,15 +24,17 @@ public class Time {
         return time.matches(VALIDATION_REGEX);
     }
 
-    public LocalTime getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(LocalTime time) {
-        this.time = time;
+    public LocalTime getParsedTime() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HHmm");
+        LocalTime parsedTime = LocalTime.parse(time, dtf);
+        return parsedTime;
     }
 
     public String format(DateTimeFormatter dtf) {
-        return time.format(dtf);
+        return getParsedTime().format(dtf);
     }
 }

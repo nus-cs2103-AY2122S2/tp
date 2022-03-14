@@ -4,23 +4,31 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Date {
-    public static final String MESSAGE_CONSTRAINTS = "Date should be in the following formats: \"yyyy-MM-dd\", "
-            + "\"yyyy/MM/dd\", \"yyyy MMM dd\", \"dd MMM yyyy\", \"dd-MM-yyyy\", \"dd/MM/yyyy\"";
+    public static final String MESSAGE_CONSTRAINTS = "Date should be in the following format : yyyy-MM-dd";
 
-    private LocalDate value;
+    public static final String VALIDATION_REGEX = "\\d{4}\\D\\d{2}\\D\\d{2}";
 
-    public Date(LocalDate date) {
-        value = date;
-    }
-    public LocalDate getValue() {
-        return value;
+    private String date;
+
+    public Date(String date) {
+        this.date = date;
     }
 
-    public void setValue(LocalDate value) {
-        this.value = value;
+    public String getDate() {
+        return date;
+    }
+
+    public static boolean isValidDate(String date) {
+        return date.matches(VALIDATION_REGEX);
+    }
+
+    public LocalDate getParsedDate() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate parsedDate = LocalDate.parse(date, dtf);
+        return parsedDate;
     }
 
     public String format(DateTimeFormatter dtf) {
-        return value.format(dtf);
+        return getParsedDate().format(dtf);
     }
 }
