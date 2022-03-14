@@ -19,7 +19,7 @@ import seedu.address.model.lesson.Lesson;
 @JsonRootName(value = "lessonbook")
 class JsonSerializableLessonBook {
 
-    public static final String MESSAGE_CONFLICTING_LESSONS = "Students list contains duplicate student(s).";
+    public static final String MESSAGE_CONFLICTING_LESSONS = "Lesson list contains duplicate lesson(s).";
 
     private final List<JsonAdaptedLesson> lessons = new ArrayList<>();
 

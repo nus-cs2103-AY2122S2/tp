@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION_HOURS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION_MINUTES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
@@ -21,6 +22,7 @@ public class AddLessonCommand extends Command {
             + "Parameters: "
             + PREFIX_LESSON_NAME + " NAME "
             + PREFIX_SUBJECT + " SUBJECT "
+            + PREFIX_LESSON_ADDRESS + " ADDRESS "
             + "\n     "
             + PREFIX_DATE + " DATE "
             + PREFIX_START_TIME + " START_TIME "
@@ -35,8 +37,11 @@ public class AddLessonCommand extends Command {
             + COMMAND_WORD + " "
             + PREFIX_LESSON_NAME + " Sec 2 Biology Group Tuition "
             + PREFIX_SUBJECT + " Biology "
+            + "\n     "
+            + PREFIX_LESSON_ADDRESS + " Blk 11 Ang Mo Kio Street 74, #11-04 "
+            + "\n     "
             + PREFIX_DATE + "19-12-2022 "
-            + PREFIX_START_TIME + " 1800 "
+            + PREFIX_START_TIME + " 18:00 "
             + PREFIX_DURATION_HOURS + " 2 "
             + PREFIX_DURATION_MINUTES + " 15 ";
 
