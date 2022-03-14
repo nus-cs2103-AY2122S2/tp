@@ -176,10 +176,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(target);
         requireNonNull(editedTag);
 
-        List<Person> personsWithTag = getPersonList().filtered(person -> person.hasTag(target));
+        List<Person> persons = getPersonList();
+        for (int i = 0; i < persons.size(); i++) {
+            Person person = persons.get(i);
 
-        for (int i = 0; i < personsWithTag.size(); i++) {
-            Person person = personsWithTag.get(i);
+            if (!person.hasTag(target)) {
+                continue;
+            }
+
             Person editedPerson = person.withoutTag(target).withTag(editedTag);
             setPerson(person, editedPerson);
         }

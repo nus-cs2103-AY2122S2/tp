@@ -10,6 +10,7 @@ import static seedu.contax.logic.parser.CommandParserTestUtil.assertParseSuccess
 import org.junit.jupiter.api.Test;
 
 import seedu.contax.logic.commands.AddTagCommand;
+import seedu.contax.model.tag.Name;
 import seedu.contax.model.tag.Tag;
 import seedu.contax.testutil.TagBuilder;
 
@@ -33,5 +34,12 @@ class AddTagCommandParserTest {
 
         // Token exists but empty field
         assertParseFailure(parser, "n/", expectedMessage);
+    }
+
+    @Test
+    public void parser_invalidValue_failure() {
+        assertParseFailure(parser, " n/friends&", Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " n/friends!", Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " n/friends(", Name.MESSAGE_CONSTRAINTS);
     }
 }
