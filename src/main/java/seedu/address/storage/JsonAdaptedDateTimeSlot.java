@@ -47,7 +47,7 @@ class JsonAdaptedDateTimeSlot {
     /**
      * Converts this Jackson-friendly adapted date-time slot object into the model's {@code DateTimeSlot} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted date timeslot.
      */
     public DateTimeSlot toModelType() throws IllegalValueException {
         // TODO: make specific error-messages here for each null or incorrect format field
