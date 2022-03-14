@@ -10,9 +10,12 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.entry.Address;
+import seedu.address.model.entry.Date;
 import seedu.address.model.entry.Email;
 import seedu.address.model.entry.Name;
 import seedu.address.model.entry.Phone;
+import seedu.address.model.entry.Platform;
+import seedu.address.model.entry.Time;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -120,5 +123,44 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    public static String parseCompanyName(String companyName) throws ParseException {
+        requireNonNull(companyName);
+        String trimmedCompanyName = companyName.trim();
+        if(trimmedCompanyName.equals("")) {
+            throw new ParseException("Company name cannot be empty");
+        }
+//        if (!Email.isValidEmail(trimmedEmail)) {
+//            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+//        }
+        return trimmedCompanyName;
+    }
+
+    public static Date parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmeddate = date.trim();
+        if (!Date.isValidDate(trimmeddate)) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        }
+        return new Date(trimmeddate);
+    }
+
+    public static Time parseTime(String time) throws ParseException {
+        requireNonNull(time);
+        String trimmedTime = time.trim();
+        if (!Time.isValidTime(trimmedTime)) {
+            throw new ParseException(Time.MESSAGE_CONSTRAINTS);
+        }
+        return new Time(time);
+    }
+
+    public static Platform parsePlatform(String platform) throws ParseException {
+        requireNonNull(platform);
+        String trimmedPlatform = platform.trim();
+        if (!Platform.isValidPlatform(trimmedPlatform)) {
+            throw new ParseException(Platform.MESSAGE_CONSTRAINTS);
+        }
+        return new Platform(trimmedPlatform);
     }
 }
