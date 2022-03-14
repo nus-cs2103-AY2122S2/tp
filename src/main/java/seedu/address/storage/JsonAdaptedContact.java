@@ -11,22 +11,20 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.contact.Address;
+import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Email;
 import seedu.address.model.contact.Phone;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
-import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
 /**
- * Jackson-friendly version of {@link Person}.
+ * Jackson-friendly version of {@link Contact}.
  */
-class JsonAdaptedPerson {
+class JsonAdaptedContact {
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Contact's %s field is missing!";
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
-    public static final String MESSAGE_DUPLICATE_CONTACT = "Contact list contains duplicate contact(s).";
-
-    private final String nric;
+    private final String ownerNric;
     private final String name;
     private final String phone;
     private final String email;
@@ -34,15 +32,15 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Constructs a {@code JsonAdaptedContact} with the given contact details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("nric") String nric, @JsonProperty("name") String name,
-                             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
-                             @JsonProperty("address") String address,
-                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+    public JsonAdaptedContact(@JsonProperty("ownerNric") String ownerNric, @JsonProperty("name") String name,
+          @JsonProperty("phone") String phone, @JsonProperty("email") String email,
+          @JsonProperty("address") String address, @JsonProperty("tagged")
+              List<JsonAdaptedTag> tagged) {
 
-        this.nric = nric;
+        this.ownerNric = ownerNric;
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -53,10 +51,10 @@ class JsonAdaptedPerson {
     }
 
     /**
-     * Converts a given {@code Person} into this class for Jackson use.
+     * Converts a given {@code Contact} into this class for Jackson use.
      */
-    public JsonAdaptedPerson(Person source) {
-        nric = source.getNric().value;
+    public JsonAdaptedContact(Contact source) {
+        ownerNric = source.getOwnerNric().value;
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
@@ -67,15 +65,23 @@ class JsonAdaptedPerson {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted person object into the model's {@code Contact} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted contact.
      */
-    public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+    public Contact toModelType() throws IllegalValueException {
+        final List<Tag> contactTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+            contactTags.add(tag.toModelType());
         }
+
+        if (ownerNric == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Nric.class.getSimpleName()));
+        }
+        if (!Nric.isValidNric(ownerNric)) {
+            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        }
+        final Nric modelOwnerNric = new Nric(ownerNric);
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -84,14 +90,6 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
         final Name modelName = new Name(name);
-
-        if (nric == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Nric.class.getSimpleName()));
-        }
-        if (!Nric.isValidNric(nric)) {
-            throw new IllegalValueException(Nric.MESSAGE_CONSTRAINTS);
-        }
-        final Nric modelNric = new Nric(nric);
 
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
@@ -117,10 +115,7 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        Person person = new Person(modelNric, modelName, modelPhone, modelEmail, modelAddress, modelTags);
-
-        return person;
+        final Set<Tag> modelTags = new HashSet<>(contactTags);
+        return new Contact(modelOwnerNric, modelName, modelPhone, modelEmail, modelAddress, modelTags);
     }
-
 }
