@@ -23,7 +23,7 @@
     -fx-vgap: 3;
 }
 
-#listCommand.label, #exitCommand.label ,#addCommand.label, #addGroupCommand.label {
+#listCommand.label, #exitCommand.label ,#addCommand.label, #addGroupCommand.label, #assignCommand.label {
     -fx-text-fill: white;
     -fx-background-color: #8A88FF;
     -fx-padding: 2 10 2 10;

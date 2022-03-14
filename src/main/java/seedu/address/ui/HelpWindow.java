@@ -34,6 +34,10 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String ADD_GROUP_COMMAND = "addgroup g/CS2103-W16-3";
     public static final String ADD_GROUP_COMMAND_EXAMPLE = "Creates a group in ArchDuke.";
 
+    public static final String ASSIGN_COMMAND_DESC = "Assign a student to a group: ";
+    public static final String ASSIGN_COMMAND = "assign INDEX g/GROUP_NAME";
+    public static final String ASSIGN_COMMAND_EXAMPLE = "Assigns a student to an existing group in ArchDuke.";
+
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
@@ -79,6 +83,15 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     private Label addGroupCommandExample;
 
+    @FXML
+    private Label assignCommandDesc;
+
+    @FXML
+    private Label assignCommand;
+
+    @FXML
+    private Label assignCommandExample;
+
     /**
      * Creates a new HelpWindow.
      *
@@ -99,6 +112,9 @@ public class HelpWindow extends UiPart<Stage> {
         addGroupCommandDesc.setText(ADD_GROUP_COMMAND_DESC);
         addGroupCommand.setText(ADD_GROUP_COMMAND);
         addGroupCommandExample.setText(ADD_GROUP_COMMAND_EXAMPLE);
+        assignCommandDesc.setText(ASSIGN_COMMAND_DESC);
+        assignCommand.setText(ASSIGN_COMMAND);
+        assignCommandExample.setText(ASSIGN_COMMAND_EXAMPLE);
     }
 
     /**
