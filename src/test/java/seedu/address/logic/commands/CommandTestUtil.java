@@ -27,7 +27,8 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
  * Contains helper methods for testing commands.
  */
 public class CommandTestUtil {
-
+    public static final String VALID_ACTIVITY_BADMINTON = "badminton";
+    public static final String VALID_ACTIVITY_CHOIR = "choir";
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "11111111";
@@ -41,9 +42,9 @@ public class CommandTestUtil {
     public static final String VALID_STATUS_CLOSE_CONTACT = "Close-Contact";
     public static final String VALID_CLASSCODE_AMY = "5A";
     public static final String VALID_CLASSCODE_BOB = "2B";
-    public static final String VALID_ACTIVITY_BADMINTON = "badminton";
-    public static final String VALID_ACTIVITY_CHOIR = "choir";
 
+    public static final String ACTIVITY_DESC_CHOIR = " " + PREFIX_ACTIVITY + VALID_ACTIVITY_CHOIR;
+    public static final String ACTIVITY_DESC_BADMINTON = " " + PREFIX_ACTIVITY + VALID_ACTIVITY_BADMINTON;
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
@@ -56,8 +57,7 @@ public class CommandTestUtil {
     public static final String STATUS_DESC_BOB = " " + PREFIX_STATUS + VALID_STATUS_NEGATIVE;
     public static final String CLASSCODE_DESC_AMY = " " + PREFIX_CLASSCODE + VALID_CLASSCODE_AMY;
     public static final String CLASSCODE_DESC_BOB = " " + PREFIX_CLASSCODE + VALID_CLASSCODE_BOB;
-    public static final String ACTIVITY_DESC_CHOIR = " " + PREFIX_ACTIVITY + VALID_ACTIVITY_CHOIR;
-    public static final String ACTIVITY_DESC_BADMINTON = " " + PREFIX_ACTIVITY + VALID_ACTIVITY_BADMINTON;
+
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones

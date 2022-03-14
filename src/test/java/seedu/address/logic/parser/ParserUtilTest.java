@@ -178,7 +178,8 @@ public class ParserUtilTest {
 
     @Test
     public void parseActivities_collectionWithInvalidActivities_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseActivities(Arrays.asList(VALID_ACTIVITY_1, INVALID_ACTIVITY)));
+        assertThrows(ParseException.class, () -> ParserUtil.parseActivities(Arrays.asList(VALID_ACTIVITY_1,
+                INVALID_ACTIVITY)));
     }
 
     @Test

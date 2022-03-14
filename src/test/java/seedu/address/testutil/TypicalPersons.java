@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ACTIVITY_BADMINTON;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ACTIVITY_CHOIR;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASSCODE_AMY;
@@ -12,8 +14,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_NEGATIVE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_POSITIVE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ACTIVITY_CHOIR;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ACTIVITY_BADMINTON;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -75,7 +75,8 @@ public class TypicalPersons {
             .withClassCode(VALID_CLASSCODE_AMY).withActivities(VALID_ACTIVITY_CHOIR).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withStatus(VALID_STATUS_NEGATIVE)
-            .withClassCode(VALID_CLASSCODE_BOB).withActivities(VALID_ACTIVITY_CHOIR).withActivities(VALID_ACTIVITY_BADMINTON,
+            .withClassCode(VALID_CLASSCODE_BOB).withActivities(VALID_ACTIVITY_CHOIR).withActivities(
+                    VALID_ACTIVITY_BADMINTON,
                     VALID_ACTIVITY_CHOIR)
             .build();
 
