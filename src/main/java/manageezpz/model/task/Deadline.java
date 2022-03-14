@@ -13,10 +13,16 @@ public class Deadline extends Task {
     public Deadline(Description taskDescription, Date date, Time time) {
         super(taskDescription);
         super.setType("deadline");
-        super.setDeadlineTime(time);
-        super.setTaskDate(date);
         this.date = date;
         this.time = time;
+    }
+
+    public Time getTime() {
+        return this.time;
+    }
+
+    public Date getDate() {
+        return this.date;
     }
 
     /**
