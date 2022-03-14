@@ -10,7 +10,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.pet.Address;
-import seedu.address.model.pet.Diet;
 import seedu.address.model.pet.Name;
 import seedu.address.model.pet.OwnerName;
 import seedu.address.model.pet.Phone;
@@ -123,15 +122,4 @@ public class ParserUtil {
         return tagSet;
     }
 
-    /**
-     * Parses a {@code String Diet} into an {@code Diet}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code Diet} is invalid.
-     */
-    public static Diet parseDiet(String diet) throws ParseException {
-        requireNonNull(diet);
-        String trimmedDiet = diet.trim();
-        return new Diet(trimmedDiet);
-    }
 }
