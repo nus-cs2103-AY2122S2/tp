@@ -7,8 +7,8 @@ import static seedu.contax.logic.parser.CommandParserTestUtil.assertParseSuccess
 import org.junit.jupiter.api.Test;
 
 import seedu.contax.logic.commands.FindByTagCommand;
+import seedu.contax.model.person.TagNameContainsKeywordsPredicate;
 import seedu.contax.model.tag.Name;
-import seedu.contax.model.tag.NameContainsKeywordsPredicate;
 
 /**
  * Unit tests which parses input and creates a new FindByTagCommand object.
@@ -43,7 +43,7 @@ public class FindByTagCommandParserTest {
 
     @Test
     public void parse_validName_success() {
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate("friends");
+        TagNameContainsKeywordsPredicate predicate = new TagNameContainsKeywordsPredicate("friends");
         FindByTagCommand command = new FindByTagCommand(predicate);
 
         assertParseSuccess(parser, " t/friends", command);

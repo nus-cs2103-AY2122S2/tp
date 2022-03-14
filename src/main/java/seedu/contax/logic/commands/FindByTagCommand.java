@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.contax.commons.core.GuiListContentType;
 import seedu.contax.commons.core.Messages;
 import seedu.contax.model.Model;
-import seedu.contax.model.tag.NameContainsKeywordsPredicate;
+import seedu.contax.model.person.TagNameContainsKeywordsPredicate;
 
 /**
  * Finds and lists all tags in address book whose name contains any of the argument keywords.
@@ -18,18 +18,18 @@ public class FindByTagCommand extends Command {
             + "Parameters: t/TAGNAME\n"
             + "Example: " + COMMAND_WORD + " t/friends";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final TagNameContainsKeywordsPredicate predicate;
 
-    public FindByTagCommand(NameContainsKeywordsPredicate predicate) {
+    public FindByTagCommand(TagNameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredTagList(predicate);
-        return new CommandResult(String.format(Messages.MESSAGE_TAGS_LISTED_OVERVIEW,
-                model.getFilteredTagList().size()), GuiListContentType.TAG);
+        model.updateFilteredPersonList(predicate);
+        return new CommandResult(String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW,
+                model.getFilteredPersonList().size()), GuiListContentType.PERSON);
     }
 
     @Override

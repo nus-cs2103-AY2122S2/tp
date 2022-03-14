@@ -5,8 +5,8 @@ import static seedu.contax.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.contax.logic.commands.FindByTagCommand;
 import seedu.contax.logic.parser.exceptions.ParseException;
+import seedu.contax.model.person.TagNameContainsKeywordsPredicate;
 import seedu.contax.model.tag.Name;
-import seedu.contax.model.tag.NameContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindByTagCommand object.
@@ -28,8 +28,8 @@ public class FindByTagCommandParser implements Parser<FindByTagCommand> {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
 
-        NameContainsKeywordsPredicate predicate =
-                new NameContainsKeywordsPredicate(argumentMultimap.getValue(PREFIX_TAG).get());
+        TagNameContainsKeywordsPredicate predicate =
+                new TagNameContainsKeywordsPredicate(argumentMultimap.getValue(PREFIX_TAG).get());
 
         return new FindByTagCommand(predicate);
     }
