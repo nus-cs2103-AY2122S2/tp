@@ -63,6 +63,7 @@ public class ImportCsvCommand extends Command {
                     model.addPerson(toAddPerson);
                     return true;
                 } catch (ParseException | DuplicatePersonException e) {
+                    //e.printStackTrace();
                     return false;
                 }
             });
@@ -76,8 +77,12 @@ public class ImportCsvCommand extends Command {
         Name toAddName = ParserUtil.parseName(importedPerson[toImport.getNamePositionIndex()]);
         Phone toAddPhone = ParserUtil.parsePhone(importedPerson[toImport.getPhonePositionIndex()]);
         Email toAddEmail = ParserUtil.parseEmail(importedPerson[toImport.getEmailPositionIndex()]);
-        Address toAddAddress = ParserUtil.parseAddress(importedPerson[toImport.getAddressPositionIndex()]);
+        Address toAddAddress = ParserUtil.parseAddress(importedPerson[toImport.getAddressPositionIndex()]
+                .replace("\"", ""));
         String[] tags = importedPerson[toImport.getTagPositionIndex()].split(";");
+        for (String tag : tags) {
+            System.out.println(tag);
+        }
         Set<Tag> toAddTag = ParserUtil.parseTags(Arrays.asList(tags));
 
         return new Person(toAddName, toAddPhone, toAddEmail, toAddAddress, toAddTag);
