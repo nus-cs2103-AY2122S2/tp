@@ -16,7 +16,7 @@ public class AssignCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns a student to a lesson"
             + "Parameters: "
             + PREFIX_STUDENT + " STUDENT_ID "
-            + PREFIX_LESSON + "LESSON_ID"
+            + PREFIX_LESSON + " LESSON_ID"
             + "\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_STUDENT + " 5"
