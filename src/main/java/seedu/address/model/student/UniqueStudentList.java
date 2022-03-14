@@ -81,6 +81,11 @@ public class UniqueStudentList implements Iterable<Student> {
         }
     }
 
+    /**
+     * Assigns the lesson to the student's enrolled lessons.
+     * @param lesson the lesson that the student is enrolling in
+     * @param studentId the STUDENT_ID of the student being enrolled
+     */
     public void assignLesson(Lesson lesson, Index studentId) {
         requireAllNonNull(lesson, studentId);
         internalList.get(studentId.getZeroBased()).assignLesson(lesson);
