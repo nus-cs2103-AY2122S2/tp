@@ -1,7 +1,5 @@
 package seedu.contax.ui.onboarding;
 
-import seedu.contax.logic.parser.AddressBookParser;
-import seedu.contax.logic.parser.exceptions.ParseException;
 import seedu.contax.model.Model;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.util.SampleDataUtil;

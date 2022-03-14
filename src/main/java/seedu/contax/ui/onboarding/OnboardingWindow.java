@@ -356,7 +356,7 @@ public class OnboardingWindow extends UiPart<Stage> {
      */
     private void processStep(OnboardingStep step) {
 
-        if(storyManager.isAtlast()) {
+        if (storyManager.isAtlast()) {
             hide();
             return;
         }
@@ -375,15 +375,15 @@ public class OnboardingWindow extends UiPart<Stage> {
         processOverlayOption(overlayOption);
         processHighlightOption(highlightOption);
 
-        if(step.getCommandInstruction() != null) {
+        if (step.getCommandInstruction() != null) {
             String errorMessage = step.getCommandInstruction().apply(model, commandBox);
-            if(errorMessage != null) {
+            if (errorMessage != null) {
                 instructionLabel.setText(errorMessage);
                 return;
             }
         }
 
-        if(step.getLabelInstruction() != null) {
+        if (step.getLabelInstruction() != null) {
             instructionLabel.setText(step.getLabelInstruction().apply(model));
         }
 

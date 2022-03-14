@@ -21,7 +21,7 @@ public class OnboardingStep {
     private double messageWidth;
     private String command;
     private boolean isCommandCustom;
-    private BiFunction<Model, OnboardingCommandBox, String>  commandInstruction;
+    private BiFunction<Model, OnboardingCommandBox, String> commandInstruction;
     private Function<Model, String> labelInstruction;
 
     /**
