@@ -15,8 +15,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.applicant.Address;
+import seedu.address.model.applicant.Age;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.Email;
+import seedu.address.model.applicant.Gender;
 import seedu.address.model.applicant.Name;
 import seedu.address.model.applicant.Phone;
 import seedu.address.model.interview.Interview;
@@ -51,9 +53,10 @@ public class InterviewListPanel extends UiPart<Region> {
                 new Name("Bobby Liu"),
                 new Phone("91234567"),
                 new Email("bobbyboy@gmail.com"),
+                new Age("42"),
                 new Address("12 Jurong West #03-45 Singapore 682930"),
-                new HashSet<>()
-        );
+                new Gender("M"),
+                new HashSet<>());
 
         Position tempPos2 = new Position(
                 new PositionName("Backend Engineer Intern"),
@@ -65,9 +68,10 @@ public class InterviewListPanel extends UiPart<Region> {
                 new Name("Christian Fernando"),
                 new Phone("83749234"),
                 new Email("christian_fernando@yahoo.com"),
+                new Age("24"),
                 new Address("12 Jurong West #03-45 Singapore 682930"),
-                new HashSet<>()
-        );
+                new Gender("M"),
+                new HashSet<>());
 
         List<Interview> tempList = new ArrayList<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
