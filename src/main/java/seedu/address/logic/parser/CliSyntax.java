@@ -14,4 +14,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_EMAIL = new Prefix("e/");
     public static final Prefix PREFIX_ADDRESS = new Prefix("a/"); // @Brandon: Delete this field
     public static final Prefix PREFIX_TAG = new Prefix("t/"); // @Brandon: Delete this field
+    public static final Prefix PREFIX_TASK_NAME = new Prefix("tn/");
 }

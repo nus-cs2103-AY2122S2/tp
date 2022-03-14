@@ -15,6 +15,7 @@ import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.StudentId;
+import seedu.address.model.person.Task;
 import seedu.address.model.person.TelegramHandle;
 import seedu.address.model.tag.Tag;
 
@@ -165,5 +166,20 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String task} into a {@code Task}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code task} is invalid.
+     */
+    public static Task parseTask(String task) throws ParseException {
+        requireNonNull(task);
+        String trimmedTask = task.trim();
+        if (!Task.isValidTaskName(trimmedTask)) {
+            throw new ParseException(Task.MESSAGE_CONSTRAINTS);
+        }
+        return new Task(trimmedTask);
     }
 }

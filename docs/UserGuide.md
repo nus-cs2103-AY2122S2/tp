@@ -3,8 +3,8 @@ layout: page
 title: User Guide
 ---
 
-TAPA (Teaching Assistant's Personal Assistant) is a desktop app that allows TAs to better manage their student’s progress, 
-especially for those 
+TAPA (Teaching Assistant's Personal Assistant) is a desktop app that allows TAs to better manage their student’s progress,
+especially for those
 who are teaching multiple classes/modules at the same time. It is optimised for use on a CLI.
 
 * Table of Contents
@@ -85,14 +85,16 @@ Example:
 
 Deletes a student from TAPA.
 
-Format: `delete STUDENT_INDEX`
+Format: `delete STUDENT_INDEX` (or) `delete i/STUDENT_ID`
 
-* The student corresponding to the index (specified after the `delete` command) will be removed from TAPA.
-* An error message will be displayed to the user if the specified index is a negative number or larger than the number of students in TAPA.
+* The student corresponding to the index or matriculation number (specified after the `delete` command) will be removed from TAPA.
+* An error message will be displayed to the user if the specified index is a negative number or larger than the number of students in TAPA, or there is no student with the specified matriculation number.
 
 Example:
 * `delete 10`
     * A student named John (whose list index is “10”) is deleted from TAPA.
+* `delete i/A0123456Z`
+    * A student named John whose matriculation number is "A0123456Z" is deleted from TAPA.
 
 ### Finding a student: `find`
 
@@ -119,7 +121,7 @@ Format: `task i/STUDENT_ID`
 Example:
 * `task i/AXXXXXXXR`
     * Lists out the tasks that student (AXXXXXXXR) has.
-    
+
 ### Marking an undone task as done for a student: `mark`
 
 Marks a specific undone task as done for a particular student.
@@ -129,7 +131,7 @@ Format : `mark i/STUDENT_ID UNDONE_TASK_INDEX`
 * The undone task corresponding to the index or the particular student will be marked as done in the TAPA.
 * An error message will be displayed to the user if the specified index is a negative number or larger than the number of tasks for that particular student.
 * An error message will be displayed to the user if the task with that specified index for the particular student is already marked as done.
-  
+
 Example:
 * `mark i/AXXXXXXXR 1`
     * Marks the first undone task for the student with student ID AXXXXXXXR as done.
@@ -252,15 +254,15 @@ Format: `exit`
 Action      | Format, Examples
 ------------|------------------
 **Add**     | `add i/MATRICULATION_NO n/STUDENT_NAME m/MODULE_CODE [p/PHONE_NUMBER] [h/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] ` <br> e.g., `add i/AXXXXXXXR n/john m/CS2103T p/98765432 t/johnnn e/e0123456@u.nus.edu`
-**Delete**  | `delete STUDENT_INDEX` <br> e.g., `delete 10`
+**Delete**  | `delete STUDENT_INDEX` (or) `delete i/STUDENT_ID` <br> e.g., `delete 10`, `delete i/AXXXXXXXR`
 **Find**    | `find n/STUDENT_NAME` (or) `find i/STUDENT_ID` <br> e.g., `find n/john`, `find i/AXXXXXXXR`
 **Manual**  | `manual COMMAND_NAME` <br> e.g., `manual add`
 **Exit**    | `exit`
 **Task**    | `task i/STUDENT_ID` <br> e.g., `task i/AXXXXXXXR`
 **Mark**    | `mark i/STUDENT_ID UNDONE_TASK_INDEX` <br> e.g., `mark i/AXXXXXXXR 1`
 **Unmark**  | `unmark i/STUDENT_ID DONE_TASK_INDEX` <br> e.g., `unmark i/AXXXXXXXR 1`
-**list**    | `list`                                                                                                                                                                                     
-**Assign**  | `assign i/STUDENT_ID tn/TASK_NAME` <br> e.g., `task i/AXXXXXXXR tn/assignment 1`                                                                                                           
+**list**    | `list`
+**Assign**  | `assign i/STUDENT_ID tn/TASK_NAME` <br> e.g., `task i/AXXXXXXXR tn/assignment 1`
 **Edit**    | `edit STUDENT_INDEX [i/MATRICULATION_NO] [n/STUDENT_NAME] [m/MODULE_CODE] [p/PHONE_NUMBER] [t/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] ` <br> e.g., `edit 10 m/CS2103T p/98765432 t/johnnn e/e0123456@nus.edu.sg`
 **Clear**   | `clear`
 **Archive** | `archive`

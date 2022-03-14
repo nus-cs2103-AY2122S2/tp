@@ -10,6 +10,7 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.exceptions.DuplicateTaskException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
@@ -96,6 +97,34 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.setAll(persons);
+    }
+
+    /**
+     * Assigns {@code task} to a person with {@code studentId}.
+     *
+     * @param studentId the student id of the person to be assigned.
+     * @param task the task to be assigned.
+     */
+    public void assignTaskToPerson(StudentId studentId, Task task) {
+        requireAllNonNull(studentId, task);
+        boolean isPersonFound = false;
+
+        for (Person currPerson: internalList) {
+            if (currPerson.getStudentId().equals(studentId)) {
+                isPersonFound = true;
+                if (!currPerson.isTaskAlreadyPresent(task)) {
+                    Person updatedPerson = currPerson.getCopy();
+                    updatedPerson.addTask(task);
+                    setPerson(currPerson, updatedPerson);
+                } else {
+                    throw new DuplicateTaskException();
+                }
+            }
+        }
+
+        if (!isPersonFound) {
+            throw new PersonNotFoundException();
+        }
     }
 
     /**
