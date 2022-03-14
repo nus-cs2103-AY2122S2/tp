@@ -66,13 +66,6 @@ from offering positions to scheduling interviews with candidates. It is optimise
 
 </div>
 
-### Viewing help : `help`
-
-Shows a message explaining how to access the help page.
-
-![help message](images/helpMessage.png)
-
-Format: `help`
 
 ## Add
 General command to add different types into HireLah.
@@ -87,18 +80,18 @@ Format: `add -TYPE`
 
 Adds a new applicant to HireLah
 
-Format: `add -a n/APPLICANT_NAME d/DOB g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add -a n/APPLICANT_NAME ag/AGE g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 An applicant can have any number of tags (including 0)
 </div>
 
-* DOB provided must be in format YYYY-MM-DD
+* Age provided must be at least two digits eg: “23”
 * Gender must be M/F
 
 Examples:
-* `appladd n/Benedict d/1998-02-03 g/M p/98123456 e/ben@gmail.com a/12 Kent Ridge Drive, 119243`
-* `appladd n/Max d/2000-01-01 g/M p/97123456 e/max@yahoo.com a/12 Kent Ridge Drive, 119243 t/Data Analyst`
+* `add -a n/Benedict ag/20 g/M p/98123456 e/ben@gmail.com a/12 Kent Ridge Drive, 119243`
+* `add -a n/Max ag/15 g/M p/97123456 e/max@yahoo.com a/12 Kent Ridge Drive, 119243 t/Data Analyst`
 
 ### Adding Interview : `add -i`
 
@@ -109,18 +102,7 @@ Format: `add -i n/CANDIDATE_INDEX d/DATE r/ROLE`
 * Role *must* currently exist in position.
 
 Examples:
-* `add -a n/1 d/2022-01-01 14:00 r/Senior Frontend Software Engineer`
-
-### Adding positions : `add -p`
-
-Adds a new open position to HireLah.
-Format: `posadd POSITION_NAME n/NUM_OPENINGS [d/DESCRIPTION] [r/REQUIREMENTS]`
-* Positions must have a **unique name**.
-* Name provided is case-insensitive.
-* Number of openings in the position must be **0 or more** 0, 1, 2, …​
-
-Examples:
-* `add -p Senior Software Engineer n/3 d/More than 5 years experience r/JavaScript r/HTML r/CSS`
+* `add -i n/1 d/2022-01-01 14:00 r/Senior Frontend Software Engineer`
 
 ### Adding positions : `add -p`
 
@@ -146,7 +128,7 @@ Format: `edit -TYPE`
 
 Edits an existing Applicant in HireLah.
 
-Format: `edit -a INDEX [n/APPLICANT_NAME] [d/DOB] [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit -a INDEX [n/APPLICANT_NAME] [ag/AGE] [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the Applicant at the specified `INDEX`. The index refers to the index number shown in the displayed Applicant
   list. The index **must be a positive integer** 1, 2, 3, …​
@@ -157,7 +139,7 @@ Format: `edit -a INDEX [n/APPLICANT_NAME] [d/DOB] [g/GENDER] [p/PHONE_NUMBER] [e
   specifying any tags after it.
 
 Examples:
-*  `edit -a 1 n/Belle d/1960-03-04 g/F p/81234567` Edits the name, DOB, gender and phone number of the 1st applicant
+*  `edit -a 1 n/Belle ag/43 g/F p/81234567` Edits the name, age, gender and phone number of the 1st applicant
    to be `Belle`, `1960-03-04`, `F` and `81234567` respectively.
 *  `edit -a 2 e/belle@yahoo.com a/13 Computing Drive 612345 t/` Edits the email and address of the 2nd applicant to be
    `belle@yahoo.com` and `13 Computing Drive 612345` respectively, and clears all existing tags.
@@ -207,9 +189,9 @@ Format: `delete -TYPE`
 
 Deletes the specified Applicant from HireLah.
 
-Format: `del -a INDEX`
+Format: `delete -a CANDIDATE_INDEX`
 
-* Deletes the Applicant at the specified `INDEX`.
+* Deletes the Applicant at the specified `CANDIDATE_INDEX`.
 * The index refers to the index number shown in the displayed Applicant list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
@@ -217,29 +199,29 @@ Examples:
 * `list` followed by `delete -a 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete -a 1` deletes the 1st person in the results of the `find` command.
 
+### Deleting an Interview: `del -i`
+
+Deletes an existing interview in HireLah.
+
+Format: `delete -i CANDIDATE_INDEX ROLE`
+* Existing interview with the matching CANDIDATE_INDEX and ROLE is deleted.
+* Role provided is case-insensitive.
+
+Examples:
+* `delete -i 1 Senior Frontend Software Engineer`
+
 
 ### Delete positions : `del -p`
 
 Deletes an existing position in HireLah.
 
-Format: `del -p POSITION_NAME`
+Format: `delete -p ROLE`
 * Existing position with the specified name is deleted.
 * The position name has to match with the position that is to be deleted.
 * Position name provided is case-insensitive.
 
 Examples:
-* `del -p Senior Frontend Software Engineer`
-
-### Deleting an Interview: `del -i`
-
-Deletes an existing interview in HireLah.
-
-Format: `del -i CANDIDATE_INDEX ROLE`
-* Existing interview with the matching CANDIDATE_INDEX and ROLE is deleted.
-* Role provided is case-insensitive.
-
-Examples:
-* `del -i 1 Senior Frontend Software Engineer`
+* `delete -p Senior Frontend Software Engineer`
 
 ## List
 General command to list different data type in HireLah.
@@ -266,6 +248,7 @@ Examples:
 ### List Positions : `list -p`
 
 Lists all existing positions in HireLah.
+
 Format: `list -p`
 
 

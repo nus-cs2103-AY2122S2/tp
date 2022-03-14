@@ -4,13 +4,14 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.interview.AddInterviewCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -19,7 +20,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments and creates a new AddInterviewCommand object
  */
-public class AddInterviewCommandParser {
+public class AddInterviewCommandParser implements Parser<AddInterviewCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddInterviewCommand
@@ -42,7 +43,7 @@ public class AddInterviewCommandParser {
         }
 
         // Can find actual date and do error checking here
-        Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+        LocalDateTime date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
 
         // Find position index, to be converted into actual position in AddInterviewCommand. This is because we need
         // the model class to help us match the index to the actual applicant
