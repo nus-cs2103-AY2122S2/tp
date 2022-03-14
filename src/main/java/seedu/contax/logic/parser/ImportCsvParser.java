@@ -16,6 +16,9 @@ import seedu.contax.logic.commands.ImportCsvCommand;
 import seedu.contax.logic.parser.exceptions.ParseException;
 import seedu.contax.model.IndexedCsvFile;
 
+/**
+ * Parses input arguments and creates a new ImportCsvCommand object
+ */
 public class ImportCsvParser implements Parser<ImportCsvCommand> {
 
     /**
