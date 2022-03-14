@@ -16,6 +16,9 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
+    /** {@code Predicate} that always evaluates to true */
+    Predicate<Appointment> PREDICATE_SHOW_ALL_APPOINTMENTS = unused -> true;
+
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -145,7 +148,7 @@ public interface Model {
     boolean hasOverlappingAppointment(Appointment appointment);
 
     /**
-     * Deletes the given appointment into the schedule.
+     * Deletes the given appointment from the schedule.
      * The supplied appointment must exist in the schedule.
      */
     void deleteAppointment(Appointment appointment);
@@ -158,10 +161,19 @@ public interface Model {
 
     /**
      * Replaces the given appointment {@code target} with {@code editedAppointment}.
-     * {@code target} must exist in the appointment.
+     * {@code target} must exist in the schedule.
      * The appointment {@code editedAppointment} must not overlap with an existing appointment in the
      * schedule.
      */
     void setAppointment(Appointment target, Appointment editedAppointment);
+
+    /** Returns an unmodifiable view of the filtered appointment list */
+    ObservableList<Appointment> getFilteredAppointmentList();
+
+    /**
+     * Updates the filter of the filtered appointment list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredAppointmentList(Predicate<Appointment> predicate);
 
 }

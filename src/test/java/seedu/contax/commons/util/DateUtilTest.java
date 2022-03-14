@@ -1,8 +1,10 @@
 package seedu.contax.commons.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -97,5 +99,41 @@ public class DateUtilTest {
                 DateUtil.updateTime(baselineDateTime2, refTime2));
         assertNotEquals(DateUtil.updateTime(baselineDateTime1, refTime1),
                 DateUtil.updateTime(baselineDateTime1, refTime2));
+    }
+
+    @Test
+    public void isBeforeOrEqualTest() {
+        LocalDateTime refDateTime = LocalDateTime.parse("2022-03-31T12:34:00");
+        LocalDateTime timeAfterDateTime = LocalDateTime.parse("2022-03-31T12:35:00");
+        LocalDateTime dayAfterDateTime = LocalDateTime.parse("2022-04-01T12:34:00");
+
+        assertThrows(NullPointerException.class, () -> DateUtil.isBeforeOrEqual(null, null));
+        assertThrows(NullPointerException.class, () -> DateUtil.isBeforeOrEqual(refDateTime, null));
+        assertThrows(NullPointerException.class, () -> DateUtil.isBeforeOrEqual(null, refDateTime));
+
+        assertTrue(DateUtil.isBeforeOrEqual(refDateTime, LocalDateTime.parse("2022-03-31T12:34:00")));
+        assertFalse(DateUtil.isBeforeOrEqual(timeAfterDateTime, refDateTime));
+        assertTrue(DateUtil.isBeforeOrEqual(refDateTime, timeAfterDateTime));
+
+        assertFalse(DateUtil.isBeforeOrEqual(dayAfterDateTime, refDateTime));
+        assertTrue(DateUtil.isBeforeOrEqual(refDateTime, dayAfterDateTime));
+    }
+
+    @Test
+    public void isAfterOrEqualTest() {
+        LocalDateTime refDateTime = LocalDateTime.parse("2022-03-31T12:34:00");
+        LocalDateTime timeAfterDateTime = LocalDateTime.parse("2022-03-31T12:35:00");
+        LocalDateTime dayAfterDateTime = LocalDateTime.parse("2022-04-01T12:34:00");
+
+        assertThrows(NullPointerException.class, () -> DateUtil.isAfterOrEqual(null, null));
+        assertThrows(NullPointerException.class, () -> DateUtil.isAfterOrEqual(refDateTime, null));
+        assertThrows(NullPointerException.class, () -> DateUtil.isAfterOrEqual(null, refDateTime));
+
+        assertTrue(DateUtil.isAfterOrEqual(refDateTime, LocalDateTime.parse("2022-03-31T12:34:00")));
+        assertTrue(DateUtil.isAfterOrEqual(timeAfterDateTime, refDateTime));
+        assertFalse(DateUtil.isAfterOrEqual(refDateTime, timeAfterDateTime));
+
+        assertTrue(DateUtil.isAfterOrEqual(dayAfterDateTime, refDateTime));
+        assertFalse(DateUtil.isAfterOrEqual(refDateTime, dayAfterDateTime));
     }
 }

@@ -8,6 +8,7 @@ import static seedu.contax.testutil.Assert.assertThrows;
 import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALONE;
 import static seedu.contax.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,6 +19,7 @@ import seedu.contax.commons.core.index.Index;
 import seedu.contax.logic.commands.AddAppointmentCommand;
 import seedu.contax.logic.commands.AddCommand;
 import seedu.contax.logic.commands.AddTagCommand;
+import seedu.contax.logic.commands.AppointmentsBetweenCommand;
 import seedu.contax.logic.commands.ClearCommand;
 import seedu.contax.logic.commands.Command;
 import seedu.contax.logic.commands.DeleteAppointmentCommand;
@@ -27,6 +29,8 @@ import seedu.contax.logic.commands.EditAppointmentCommand;
 import seedu.contax.logic.commands.EditAppointmentCommand.EditAppointmentDescriptor;
 import seedu.contax.logic.commands.EditCommand;
 import seedu.contax.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.contax.logic.commands.EditTagCommand;
+import seedu.contax.logic.commands.EditTagCommand.EditTagDescriptor;
 import seedu.contax.logic.commands.ExitCommand;
 import seedu.contax.logic.commands.ExportCsvCommand;
 import seedu.contax.logic.commands.FindCommand;
@@ -43,8 +47,10 @@ import seedu.contax.model.person.Person;
 import seedu.contax.model.tag.Tag;
 import seedu.contax.testutil.AppointmentBuilder;
 import seedu.contax.testutil.AppointmentUtil;
+import seedu.contax.testutil.DateInputUtil;
 import seedu.contax.testutil.EditAppointmentDescriptorBuilder;
 import seedu.contax.testutil.EditPersonDescriptorBuilder;
+import seedu.contax.testutil.EditTagDescriptorBuilder;
 import seedu.contax.testutil.ImportCsvObjectBuilder;
 import seedu.contax.testutil.PersonBuilder;
 import seedu.contax.testutil.PersonUtil;
@@ -131,6 +137,16 @@ public class AddressBookParserTest {
         assertEquals(command, new DeleteTagCommand(firstIndex));
     }
 
+    @Test
+    public void parseCommand_editTag() throws Exception {
+        Index index = Index.fromOneBased(1);
+        Tag tag = new TagBuilder().build();
+        EditTagDescriptor editTagDescriptor = new EditTagDescriptorBuilder(tag).build();
+        EditTagCommand command = (EditTagCommand) parser.parseCommand(EditTagCommand.COMMAND_WORD + " 1 "
+                + "t/clients");
+        assertEquals(command, new EditTagCommand(index, editTagDescriptor));
+    }
+
     // Appointment related commands
     @Test
     public void parseCommand_addAppointment() throws Exception {
@@ -174,6 +190,14 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_exportCsv() throws Exception {
         assertTrue(parser.parseCommand(ExportCsvCommand.COMMAND_WORD) instanceof ExportCsvCommand);
+    }
+
+    @Test
+    public void parseCommand_appointmentsBetween() throws Exception {
+        LocalDateTime refDateTime = APPOINTMENT_ALONE.getStartDateTime().value;
+        assertTrue(parser.parseCommand(AppointmentsBetweenCommand.COMMAND_WORD
+                + DateInputUtil.getDateRangeInput(refDateTime, refDateTime.plusMinutes(50)))
+                instanceof AppointmentsBetweenCommand);
     }
 
     @Test

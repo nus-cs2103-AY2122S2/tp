@@ -22,7 +22,7 @@ import seedu.contax.model.person.Person;
  */
 public class AddAppointmentCommand extends Command {
 
-    public static final String COMMAND_WORD = "addAppointment";
+    public static final String COMMAND_WORD = "addappointment";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an appointment to the schedule. "
             + "Parameters: "

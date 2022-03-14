@@ -40,7 +40,7 @@ public class Schedule implements ReadOnlySchedule {
     }
 
     /**
-     * Resets the existing data of this {@code Schedule} with {@code newData}.
+     * Resets the existing data of this {@code Schedule} to {@code newData}.
      */
     public void resetData(ReadOnlySchedule newData) {
         requireNonNull(newData);
@@ -49,7 +49,7 @@ public class Schedule implements ReadOnlySchedule {
     }
 
     /**
-     * Returns true if an appointment with the same identity as {@code target} exists in the schedule.
+     * Returns true if an appointment that is equals to {@code target} exists in the schedule.
      */
     public boolean hasAppointment(Appointment target) {
         requireNonNull(target);
@@ -57,7 +57,7 @@ public class Schedule implements ReadOnlySchedule {
     }
 
     /**
-     * Returns true if an appointment with the same identity as {@code target} exists in the schedule.
+     * Returns true if an appointment that overlaps with {@code target} exists in the schedule.
      */
     public boolean hasOverlappingAppointment(Appointment target) {
         requireNonNull(target);
@@ -66,7 +66,7 @@ public class Schedule implements ReadOnlySchedule {
 
     /**
      * Adds an appointment to the schedule.
-     * An overlapping appointment must not already exist in the schedule.
+     * There must not exist any appointment in the schedule that overlaps with {@code target}.
      */
     public void addAppointment(Appointment target) {
         appointments.add(target);

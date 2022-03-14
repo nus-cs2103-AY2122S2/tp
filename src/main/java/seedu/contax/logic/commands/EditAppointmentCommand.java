@@ -31,7 +31,7 @@ import seedu.contax.model.person.Person;
  */
 public class EditAppointmentCommand extends Command {
 
-    public static final String COMMAND_WORD = "editAppointment";
+    public static final String COMMAND_WORD = "editappointment";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the appointment identified "
             + "by the index number used in the displayed appointment list. "
@@ -59,7 +59,7 @@ public class EditAppointmentCommand extends Command {
      * Creates an {@code EditAppointmentCommand} object.
      *
      * @param index of the appointment in the list of appointments to edit.
-     * @param editAppointmentDescriptor details to edit the person with.
+     * @param editAppointmentDescriptor details to edit the appointment with.
      */
     public EditAppointmentCommand(Index index, EditAppointmentDescriptor editAppointmentDescriptor) {
         requireNonNull(index);
@@ -72,7 +72,7 @@ public class EditAppointmentCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Appointment> appointmentsList = model.getSchedule().getAppointmentList();
+        List<Appointment> appointmentsList = model.getFilteredAppointmentList();
         List<Person> personsList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= appointmentsList.size()) {

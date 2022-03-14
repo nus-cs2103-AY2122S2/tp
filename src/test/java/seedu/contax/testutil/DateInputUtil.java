@@ -1,6 +1,12 @@
 package seedu.contax.testutil;
 
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_DATE_END;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_DATE_START;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_TIME_END;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_TIME_START;
+
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
@@ -30,5 +36,21 @@ public class DateInputUtil {
     public static String formatTimeToInputString(LocalTime time) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DateUtil.TIME_PATTERN);
         return time.format(formatter);
+    }
+
+    /**
+     * Returns the parameterized inputs for a datetime range specified by {@start} and {@end}.
+     *
+     * @param start The start of the datetime range.
+     * @param end The end of the datetime range.
+     * @return A parameterized string for input into a command expecting a date range.
+     */
+    public static String getDateRangeInput(LocalDateTime start, LocalDateTime end) {
+        String startDate = " " + PREFIX_DATE_START + formatDateToInputString(start.toLocalDate());
+        String endDate = " " + PREFIX_DATE_END + formatDateToInputString(end.toLocalDate());
+        String startTime = " " + PREFIX_TIME_START + formatTimeToInputString(start.toLocalTime());
+        String endTime = " " + PREFIX_TIME_END + formatTimeToInputString(end.toLocalTime());
+
+        return startDate + endDate + startTime + endTime;
     }
 }

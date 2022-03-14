@@ -15,7 +15,7 @@ import seedu.contax.model.appointment.Appointment;
  */
 public class DeleteAppointmentCommand extends Command {
 
-    public static final String COMMAND_WORD = "deleteAppointment";
+    public static final String COMMAND_WORD = "deleteappointment";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the appointment identified by the index number used in the displayed appointment list.\n"
@@ -33,7 +33,7 @@ public class DeleteAppointmentCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Appointment> appointmentList = model.getSchedule().getAppointmentList();
+        List<Appointment> appointmentList = model.getFilteredAppointmentList();
 
         if (targetIndex.getZeroBased() >= appointmentList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX);
