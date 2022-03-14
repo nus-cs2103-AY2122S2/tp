@@ -35,7 +35,6 @@ public class LessonInfoPanel extends InfoPanel {
         super(FXML);
         this.lesson = lesson;
         setDetails(lesson);
-        setEnrolledStudents(FXCollections.observableList(lesson.getEnrolledStudents().getStudentsList()));
     }
 
     private void setDetails(Lesson lesson) {
@@ -43,6 +42,7 @@ public class LessonInfoPanel extends InfoPanel {
         subject.setText(lesson.getSubject().subjectName);
         date.setText(lesson.getDateTimeSlot().getDateString());
         time.setText(lesson.getDateTimeSlot().getTimeString());
+        setEnrolledStudents(FXCollections.observableList(lesson.getEnrolledStudents().getStudentsList()));
     }
 
     /**
@@ -50,7 +50,7 @@ public class LessonInfoPanel extends InfoPanel {
      *
      * @param enrolledStudents Provided lesson list.
      */
-    public void setEnrolledStudents(ObservableList<Student> enrolledStudents) {
+    private void setEnrolledStudents(ObservableList<Student> enrolledStudents) {
         enrolledStudentsList.setItems(enrolledStudents);
         enrolledStudentsList.setCellFactory(listView -> new StudentListViewCell());
     }

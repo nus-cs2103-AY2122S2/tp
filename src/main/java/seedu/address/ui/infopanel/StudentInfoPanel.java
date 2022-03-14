@@ -40,7 +40,7 @@ public class StudentInfoPanel extends InfoPanel {
         super(FXML);
         this.student = student;
         setDetails(student);
-        setAssignedLessons(FXCollections.observableList(student.getEnrolledLessons().getLessonsList()));
+
     }
 
     private void setDetails(Student student) {
@@ -51,17 +51,15 @@ public class StudentInfoPanel extends InfoPanel {
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        // TODO: Add function to list assigned classes after implementing assigned lesson list in Student
+        setAssignedLessons(FXCollections.observableList(student.getEnrolledLessons().getLessonsList()));
     }
-
-    // TODO: This is public temporarily (Student doesn't hold assigned lessons)
 
     /**
      * Sets the assigned lessons list to the provided {@code Lesson} list.
      *
      * @param lessonList Provided lesson list.
      */
-    public void setAssignedLessons(ObservableList<Lesson> lessonList) {
+    private void setAssignedLessons(ObservableList<Lesson> lessonList) {
         assignedLessonList.setItems(lessonList);
         assignedLessonList.setCellFactory(listView -> new LessonListViewCell());
     }

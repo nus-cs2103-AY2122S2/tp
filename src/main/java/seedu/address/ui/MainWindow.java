@@ -167,7 +167,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Toggles to the tab provided by the enum value.
-     * @param toggleTo
+     * @param toggleTo Provided {@code ViewTab} to toggle to
      */
     public void toggleTab(ViewTab toggleTo) {
         if (toggleTo.equals(ViewTab.LESSON)) {
@@ -314,16 +314,16 @@ public class MainWindow extends UiPart<Stage> {
     private void populateInfoPanelWithStudent(Student selectedStudent) {
         infoPanel = new StudentInfoPanel(selectedStudent);
         StudentInfoPanel studentInfoPanel = (StudentInfoPanel) this.infoPanel;
-        populateInfoPanel(infoPanelPlaceholder, studentInfoPanel);
+        populateInfoPanel(studentInfoPanel);
     }
 
     private void populateInfoPanelWithLesson(Lesson selectedLesson) {
         infoPanel = new LessonInfoPanel(selectedLesson);
         LessonInfoPanel lessonInfoPanel = (LessonInfoPanel) this.infoPanel;
-        populateInfoPanel(infoPanelPlaceholder, lessonInfoPanel);
+        populateInfoPanel(lessonInfoPanel);
     }
 
-    private void populateInfoPanel(StackPane infoPanelPlaceholder, InfoPanel newInfoPanel) {
+    private void populateInfoPanel(InfoPanel newInfoPanel) {
         infoPanelPlaceholder.getChildren().clear();
         infoPanelPlaceholder.getChildren().add(newInfoPanel.getRoot());
     }
