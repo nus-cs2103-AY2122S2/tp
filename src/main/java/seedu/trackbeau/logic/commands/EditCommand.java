@@ -47,10 +47,10 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_SKINTYPE + "SKIN TYPE]\n"
-            + "[" + PREFIX_HAIRTYPE + "HAIR TYPE]\n"
-            + "[" + PREFIX_STAFFS + "STAFFS]...\n"
-            + "[" + PREFIX_SERVICES + "SERVICES]...\n"
+            + "[" + PREFIX_SKINTYPE + "SKIN TYPE] "
+            + "[" + PREFIX_HAIRTYPE + "HAIR TYPE] "
+            + "[" + PREFIX_STAFFS + "STAFFS]... "
+            + "[" + PREFIX_SERVICES + "SERVICES]... "
             + "[" + PREFIX_ALLERGIES + "ALLERGIES]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -161,6 +161,8 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setSkinType(toCopy.skinType);
+            setHairType(toCopy.hairType);
             setStaffs(toCopy.staffs);
             setServices(toCopy.services);
             setAllergies(toCopy.allergies);

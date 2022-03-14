@@ -110,7 +110,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [e/EMAIL] [stp/STAFF_P
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing staff preferences, service preferences or allergies, the existing staff preferences, service preferences or allergies of the customer will be removed i.e adding of staff preferences, service preferences or allergies is not cumulative.
-* You can remove all the customer’s staff preferences, service preferences or allergies by typing `stp/`, `/sep` or `/al` without
+* You can remove all the customer’s staff preferences, service preferences or allergies by typing `stp/`, `sep/` or `al/` without
     specifying any staff preferences, service preferences or allergies after it.
 
 Examples:
@@ -140,7 +140,7 @@ Format: delete INDEX
 * The index must be a positive integer 1, 2, 3, …
 
 Examples:
-* `delete 2` : Removes the 2nd customer from the application. 
+* `delete 2` : Removes the 2nd customer from the application.
 
 ### Clearing all entries : `clear`
 
