@@ -18,6 +18,9 @@ import java.util.HashSet;
 
 import static seedu.contax.logic.parser.CliSyntax.*;
 
+/**
+ * This class provides utilities functions for the onboarding window
+ */
 public class OnboardingUtil {
 
     private final static AddressBookParser parser = new AddressBookParser();
@@ -26,7 +29,10 @@ public class OnboardingUtil {
             + "\n\nExample: add n/Johnny p/91234567 e/Johnny@j.com a/Johnny street";
 
 
-
+    /**
+     * Populates the given UniquePersonList with the sample data
+     * @param persons the UniquePersonList to be populated
+     */
     public static void populateWithSample(UniquePersonList persons) {
         Person samplePersons[] = SampleDataUtil.getSamplePersons();
         for (Person p : samplePersons) {
@@ -34,12 +40,22 @@ public class OnboardingUtil {
         }
     }
 
+    /**
+     * Returns the name string of the last person in the given UniquepersonList
+     * @param persons the UniquePersonList to be searched
+     * @return name of the last person
+     */
     public static String getLastestPersonName(UniquePersonList persons) {
         ObservableList<Person> personObservableList = persons.asUnmodifiableObservableList();
         String newPersonName = personObservableList.get(personObservableList.size() - 1).getName().toString();
         return newPersonName;
     }
 
+    /**
+     * Returns the last Person in the given UniquePersonList
+     * @param persons the UniquePersonList to be searched
+     * @return Person object of the last person
+     */
     public static Person getLatestPerson(UniquePersonList persons) {
         ObservableList<Person> personObservableList = persons.asUnmodifiableObservableList();
         Person person = personObservableList.get(personObservableList.size() - 1);
@@ -103,6 +119,11 @@ public class OnboardingUtil {
         return 0;
     }
 
+    /**
+     * Person make adjusted to be used for onboarding guide Returns a person based on the given ArgumentMultiMap.
+     * @param map ArgumentMultimap containing the person parameters
+     * @return Person created from the given ArugmentMultiMap
+     */
     public static Person makePerson(ArgumentMultimap map) {
         Name name = new Name(map.getValue(PREFIX_NAME).get());
         Phone phone = new Phone(map.getValue(PREFIX_PHONE).get());
