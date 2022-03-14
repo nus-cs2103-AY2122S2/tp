@@ -121,10 +121,10 @@ public class ImportCsvCommandTest {
 
     @Test
     public void execute_invalidFile_errorMessage() throws Exception {
-        IndexedCsvFile emptyCsvFile = new ImportCsvObjectBuilder(ImportCsvObjectBuilder.INVALID_FILEPATH).build();
-        ImportCsvCommand importCsvCommand = new ImportCsvCommand(emptyCsvFile);
+        IndexedCsvFile invalidCsvFile = new ImportCsvObjectBuilder(ImportCsvObjectBuilder.INVALID_FILEPATH).build();
+        ImportCsvCommand importCsvCommand = new ImportCsvCommand(invalidCsvFile);
         assertCommandFailure(importCsvCommand, model, String.format(ImportCsvCommand.MESSAGE_NO_FILE_FOUND,
-                ImportCsvObjectBuilder.INVALID_FILEPATH));
+                invalidCsvFile.getFilePath()));
     }
 
     @Test
