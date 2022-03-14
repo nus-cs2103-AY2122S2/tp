@@ -34,6 +34,9 @@ public class AddPositionCommand extends AddCommand {
 
     private final Position toAdd;
 
+    /**
+     * Creates an AddPositionCommand to add the specified {@code position}
+     */
     public AddPositionCommand(Position position) {
         requireNonNull(position);
         toAdd = position;
