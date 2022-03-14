@@ -259,12 +259,6 @@ _{Explain here how the data archiving feature will be implemented}_
 **Target user profile**:
 
 * wants to keep track of their shows
-<<<<<<< HEAD
-* prefers desktop applications to web applications
-
-**Value proposition**: track and remember what shows they have watched or are currently watching easily with a 
-list if they have to
-=======
 * prefer desktop apps over other interfaces
 * can type fast and prefers typing to mouse interactions.
 * wants to be able to maintain a local copy of their list of shows
@@ -275,24 +269,12 @@ list if they have to
 * No need to create an account unlike traditional web based services.
 * Able to keep a local copy of their list of shows.
 * Clean and minimal user interface.
->>>>>>> master
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-<<<<<<< HEAD
-| Priority | As a …​                                    | I want to …​             | So that I can…​                                                     |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | casual show watcher                        | add shows I want to watch      | get around to watching them                                            |
-| `* * *`  | casual show watcher                        | delete a show                  | remove incorrect entries                                               |
-| `* * *`  | casual show watcher                        | view watch status of shows     | check if I have completed a show                                       |
-| `* *`    | show critic                                | leave reviews of various shows | remember what was good or bad about the show                           |
-| `* *`    | casual show watcher                        | keep track of my favourite shows | recommend them to others                                             |
-| `*`      | forgetful user                             | keep track of where I stoppped a show | continue from the correct episode                               |
-=======
 | Priority | As a …​                                 | I want to …​                | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | user                                       | add new shows                  | add shows into the list                                                |
@@ -301,7 +283,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | list out all of my shows       | see the details of all  my show in the list                                         |
 | `* *`    | new user                                   | see usage instructions         | refer to instructions when user forget how to use the App                 |
 
->>>>>>> master
 
 *{More to be added}*
 
