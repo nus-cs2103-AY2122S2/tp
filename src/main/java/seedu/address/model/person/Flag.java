@@ -20,9 +20,9 @@ public class Flag {
      * @param bool If the person is flagged.
      */
     public Flag(String bool) {
-        if (bool.equals("false")) {
+        if (bool.equalsIgnoreCase("false")) {
             isFlagged = false;
-        } else if (bool.toLowerCase().equals("true")) {
+        } else if (bool.equalsIgnoreCase("true")) {
             isFlagged = true;
         } else {
             throw new RuntimeException("invalid bool");
@@ -33,7 +33,7 @@ public class Flag {
      * Returns true if a given string is a valid phone number.
      */
     public static boolean isValidFlag(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.toLowerCase().matches(VALIDATION_REGEX);
     }
 
     @Override
