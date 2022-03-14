@@ -82,11 +82,6 @@ class JsonAdaptedAppointment {
         try {
             dateTime = LocalDateTime.parse(startDateTime, DATETIME_FORMATTER);
         } catch (DateTimeParseException ex) {
-            ex.printStackTrace();
-            throw new IllegalValueException(INVALID_DATETIME_MESSAGE);
-        }
-
-        if (dateTime == null) {
             throw new IllegalValueException(INVALID_DATETIME_MESSAGE);
         }
 
@@ -95,6 +90,7 @@ class JsonAdaptedAppointment {
         if (duration <= 0) {
             throw new IllegalValueException(INVALID_DURATION_MESSAGE);
         }
+
         final Duration modelDuration = new Duration(duration);
 
         Person modelPerson = null;
