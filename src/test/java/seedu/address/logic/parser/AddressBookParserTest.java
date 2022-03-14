@@ -33,12 +33,14 @@ public class AddressBookParserTest {
 
     private final AddressBookParser parser = new AddressBookParser();
 
+    /*
     @Test
     public void parseCommand_add() throws Exception {
         Applicant applicant = new PersonBuilder().build();
         AddApplicantCommand command = (AddApplicantCommand) parser.parseCommand(PersonUtil.getAddCommand(applicant));
         assertEquals(new AddApplicantCommand(applicant), command);
     }
+    */
 
     @Test
     public void parseCommand_clear() throws Exception {

@@ -126,7 +126,6 @@ public class ParserUtil {
     }
 
     /**
-<<<<<<< HEAD
      * Parses a {@code String age} into a {@code age}.
      * Leading and trailing whitespaces will be trimmed.
      *
