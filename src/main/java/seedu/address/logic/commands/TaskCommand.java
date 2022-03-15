@@ -83,13 +83,14 @@ public class TaskCommand extends Command {
 
         if (incompleteTasks.isEmpty()) { // This means that all tasks are completed.
             return new CommandResult(String.format(MESSAGE_SUCCESS, studentId,
-                    "Completed tasks:\n" + completedTasks));
+                    "Completed tasks:\n" + completedTasks.display()));
         } else if (completedTasks.isEmpty()) { // This means that all tasks are incomplete.
             return new CommandResult(String.format(MESSAGE_SUCCESS, studentId,
-                    "Incomplete tasks:\n" + incompleteTasks));
+                    "Incomplete tasks:\n" + incompleteTasks.display()));
         } else { // Mixture of different types of tasks.
             return new CommandResult(String.format(MESSAGE_SUCCESS, studentId,
-                    "Incomplete tasks:\n" + incompleteTasks + "\n" + "Completed tasks:\n" + completedTasks));
+                    "Incomplete tasks:\n" + incompleteTasks.display() + "\n"
+                            + "Completed tasks:\n" + completedTasks.display()));
         }
     }
 

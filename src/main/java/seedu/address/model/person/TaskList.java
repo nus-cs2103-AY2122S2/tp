@@ -98,6 +98,25 @@ public class TaskList {
         return taskList.isEmpty();
     }
 
+    /**
+     * Displays all the tasks in the list (without the completion status)
+     *
+     * @return a string that represents the current TaskList.
+     */
+    public String display() {
+        String taskStr = "";
+
+        int idxNum = 1;
+        String separate = ". ";
+
+        for (Task task: taskList) {
+            taskStr += idxNum + separate + task.getTaskName() + "\n";
+            idxNum++;
+        }
+
+        return taskStr;
+    }
+
     @Override
     public String toString() {
         String taskStr = "";
