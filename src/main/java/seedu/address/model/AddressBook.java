@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.entry.Company;
 import seedu.address.model.entry.Person;
 import seedu.address.model.entry.UniqueEntryList;
 
@@ -15,6 +16,7 @@ import seedu.address.model.entry.UniqueEntryList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueEntryList<Person> persons;
+    private final UniqueEntryList<Company> companies;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -24,7 +26,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        persons = new UniqueEntryList<Person>();
+        persons = new UniqueEntryList<>();
+        companies = new UniqueEntryList<>();
     }
 
     public AddressBook() {}
@@ -48,6 +51,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the companies list with {@code companies}.
+     * {@code companies} must not contain duplicate companies.
+     */
+    public void setCompanies(List<Company> companies) { this.companies.setEntries(companies); }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
@@ -67,11 +76,27 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a company with the same identity as {@code company} exists in the address book.
+     */
+    public boolean hasCompany(Company company) {
+        requireNonNull(company);
+        return companies.contains(company);
+    }
+
+    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
     public void addPerson(Person p) {
         persons.add(p);
+    }
+
+    /**
+     * Adds a company to the address book.
+     * The company must not already exist in the address book.
+     */
+    public void addCompany(Company c) {
+        companies.add(c);
     }
 
     /**
@@ -86,6 +111,18 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the given company {@code target} in the list with {@code editedCompany}.
+     * {@code target} must exist in the address book.
+     * The company identity of {@code editedCompany} must not be the same as another existing company in the
+     * address book.
+     */
+    public void setCompany(Company target, Company editedCompany) {
+        requireNonNull(editedCompany);
+
+        companies.setEntry(target, editedCompany);
+    }
+
+    /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
@@ -93,11 +130,20 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeCompany(Company key) {
+        companies.remove(key);
+    }
+
     //// util methods
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
+        return persons.asUnmodifiableObservableList().size() + " persons,"
+                + companies.asUnmodifiableObservableList().size() + " companies";
         // TODO: refine later
     }
 
@@ -107,14 +153,27 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
+    public ObservableList<Company> getCompanyList() {
+        return companies.asUnmodifiableObservableList();
+    }
+
+    @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons));
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof AddressBook)) {
+            return false;
+        }
+
+        AddressBook otherAddressBook = (AddressBook) other;
+        return persons.equals(otherAddressBook.persons)
+                && companies.equals(otherAddressBook.companies);
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return persons.hashCode() + companies.hashCode();
     }
 }
