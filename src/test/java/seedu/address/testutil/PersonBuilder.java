@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import javafx.util.Pair;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.GithubUsername;
 import seedu.address.model.person.Name;
@@ -109,7 +110,8 @@ public class PersonBuilder {
     /**
      * Parses the {@code labs} into a {@code LabList} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withLabs(String ... labs) {
+    @SafeVarargs
+    public final PersonBuilder withLabs(Pair<String, String>... labs) {
         this.labs = SampleDataUtil.getLabSet(labs);
         return this;
     }
