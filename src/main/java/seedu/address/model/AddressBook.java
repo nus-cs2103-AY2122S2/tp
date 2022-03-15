@@ -16,7 +16,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueClientList clients;
 
-    private final UniqueBuyerList buyers;
+    // private final UniqueBuyerList buyers;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
