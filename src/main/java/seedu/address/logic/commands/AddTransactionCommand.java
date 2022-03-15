@@ -4,6 +4,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.transaction.Transaction;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 public class AddTransactionCommand extends Command {
     public static final String COMMAND_WORD = "addTransaction";
 //    public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -23,11 +25,21 @@ public class AddTransactionCommand extends Command {
     private final Transaction transaction;
 
     public AddTransactionCommand(Index index, Transaction transaction) {
+        requireAllNonNull(index, transaction);
         this.index = index;
         this.transaction = transaction;
     }
 
+    @Override
     public CommandResult execute(Model model) {
-        return new CommandResult();
+
+        return new CommandResult("test");
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof AddTransactionCommand // instanceof handles nulls
+                && transaction.equals(((AddTransactionCommand) other).transaction));
     }
 }
