@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.interview.Interview;
 import seedu.address.model.person.Person;
 
 /**
@@ -20,24 +21,27 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
+    private final InterviewList interviewList;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyInterviewList interviewList,
+                        ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.interviewList = new InterviewList(interviewList);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new InterviewList(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -75,6 +79,17 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
+    @Override
+    public Path getInterviewListFilePath() {
+        return userPrefs.getInterviewListFilePath();
+    }
+
+    @Override
+    public void setInterviewListFilePath(Path interviewListFilePath) {
+        requireNonNull(interviewListFilePath);
+        userPrefs.setAddressBookFilePath(interviewListFilePath);
+    }
+
     //=========== AddressBook ================================================================================
 
     @Override
@@ -85,6 +100,16 @@ public class ModelManager implements Model {
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return addressBook;
+    }
+
+    @Override
+    public void setInterviewList(ReadOnlyInterviewList interviewList) {
+        this.interviewList.resetData(interviewList);
+    }
+
+    @Override
+    public ReadOnlyInterviewList getInterviewList() {
+        return interviewList;
     }
 
     @Override
@@ -109,6 +134,32 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    //====Interview List=======
+
+    @Override
+    public boolean hasInterview(Interview interview) {
+        requireNonNull(interview);
+        return interviewList.hasInterview(interview);
+    }
+
+    @Override
+    public void deleteInterview(Interview target) {
+        interviewList.removeInterview(target);
+    }
+
+    @Override
+    public void addInterview(Interview interview) {
+        interviewList.addInterview(interview);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void setInterview(Interview target, Interview editedInterview) {
+        requireAllNonNull(target, editedInterview);
+
+        interviewList.setInterview(target, editedInterview);
     }
 
     //=========== Filtered Person List Accessors =============================================================

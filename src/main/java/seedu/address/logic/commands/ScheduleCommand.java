@@ -9,6 +9,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.interview.Interview;
 import seedu.address.model.person.Person;
 
 /**
@@ -25,7 +26,10 @@ public class ScheduleCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 23-03-2022 13:30";
 
     public static final String MESSAGE_SCHEDULED_CANDIDATE_SUCCESS =
-            "Successfully scheduled %1$s for interview on %2$s, %3$s";
+            "Successfully scheduled "; //%1$s for interview on %2$s, %3$s";
+
+    public static final String MESSAGE_DUPLICATE_INTERVIEW =
+            "Duplicate Interview found";
 
     private final Index targetIndex;
     private final LocalDateTime interviewDateTime;
@@ -46,7 +50,14 @@ public class ScheduleCommand extends Command {
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-        //action
+
+        Person candidateToInterview = lastShownList.get(targetIndex.getZeroBased());
+        Interview toAdd = new Interview(candidateToInterview, interviewDateTime);
+        if (model.hasInterview(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_INTERVIEW);
+        }
+
+        model.addInterview(toAdd);
         return new CommandResult(String.format(MESSAGE_SCHEDULED_CANDIDATE_SUCCESS));
     }
 

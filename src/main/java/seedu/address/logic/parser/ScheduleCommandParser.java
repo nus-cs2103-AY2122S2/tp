@@ -20,8 +20,8 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
      */
     public ScheduleCommand parse(String args) throws ParseException {
         try {
-            Index index = ParserUtil.parseIndex(args);
             final String[] input = this.parseDelimitedCommand(args, " /at ");
+            Index index = ParserUtil.parseIndex(input[0]);
             final LocalDateTime interviewSlot = ParserUtil.parseDateTime(input[1]);
             return new ScheduleCommand(index, interviewSlot);
         } catch (ParseException pe) {

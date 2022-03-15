@@ -160,10 +160,10 @@ public class ParserUtil {
     }
 
     public static LocalDateTime parseDateTime(String dateTime) throws ParseException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         LocalDateTime formattedDateTime;
         try {
-             formattedDateTime = LocalDateTime.parse(dateTime, formatter);
+            formattedDateTime = LocalDateTime.parse(dateTime, formatter);
         } catch (DateTimeParseException e) {
             throw new ParseException(MESSAGE_INVALID_DATETIME);
         }
