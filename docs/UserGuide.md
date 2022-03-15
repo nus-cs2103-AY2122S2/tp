@@ -97,34 +97,43 @@ Examples:
 
 ### Listing entries: `list`
 
-Lists entries in UniBook according listing criteria.
+Lists entries in UniBook according to a specified listing criteria.
 
-Format: list [o/LISTING_CRITERIA CRITERIA_INFORMATION]…
+Format: `list o/OPTION [m/MODULE] [ty/TYPE]`, `list v/VIEW`
 
-* lists all contacts in UniBook in ordered alphabetically by name if no optional field is provided
-* if [o/LISTING_CRITERIA CRITERIA_INFORMATION] is provided, then only contacts with fields (defined by LISTING\_CRITERIA) matching the CRITERIA\_INFORMATION provided will be shown to user
-* listing criteria stack - so multiple listing criteria will further narrow the listing shown to user
+* Lists all entries in the UniBook based on the user specified option and criteria.
+* If no argument is provided, UniBook simply lists every entry depending on the currently active view.
 
-LISTING_CRITERIA values:
+OPTION values:
 
-* "module" -  lists all contacts that are participants of that module
+* `module` -  lists all contacts that are participants of a module which is specified by entering 
+`/m <MODULECODE>`.
 
-* "group" - lists all contacts that are participants of that group
+* `type` - lists all contacts by their contact type, specified by entering `ty/<TYPE>` where
+`<TYPE>` is either `professors` or `students`.
 
-* "type" - lists all contacts by their contact type (professor or student)
+* [NOT READY] `group` - lists all contacts that are participants of that group
+
+VIEW values:
+* `people` - switches to people view, automatically lists all persons
+* `modules` - switches to modules view, automatically list all modules
 
 Examples:
 
-* `list o/module CS2103` lists all contacts related to the module CS2103
+* `list` displays every entry depending on currently active view.
 
-* `list o/group W16-T1` lists all contacts that are related to the group W16-T1
+* `list o/module m/CS2103` lists all contacts related to the module CS2103
 
-* `list o/type professors` lists all professors
+* `list o/type ty/professors` lists all professors
 
-* `list o/module CS2103 o/type professors` lists all professors of the module CS2103
+* `list o/module m/CS2103 ty/professors` lists all professors of the module CS2103
 
-* `list o/module CS2104 o/type students` lists all students of the module CS2103
+* `list o/module m/CS2103 ty/students` lists all students of the module CS2103
 
+* `list v/modules` switches the UniBook to `modules` view.
+
+  
+* [NOT READY] `list o/group W16-T1` lists all contacts that are related to the group W16-T1
 
 ### Editing a person : `edit`
 
