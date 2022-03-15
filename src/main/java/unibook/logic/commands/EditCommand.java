@@ -44,6 +44,7 @@ import unibook.model.tag.Tag;
  */
 public class EditCommand extends Command {
 
+
     public static final String COMMAND_WORD = "edit";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the UniBook.";
     public static final String MESSAGE_DUPLICATE_MODULE = "This module already exists in the UniBook.";
@@ -81,9 +82,6 @@ public class EditCommand extends Command {
             + PREFIX_NAME + "Software Engineering "
             + PREFIX_MODULE + "CS2103T";
 
-
-
-    private static final Logger logger = LogsCenter.getLogger(LogicManager.class);
     private final Index index;
     private ModuleCode modCode;
     private EditPersonDescriptor editPersonDescriptor;
@@ -173,8 +171,6 @@ public class EditCommand extends Command {
             }
 
             Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
-            logger.info(String.valueOf(editedPerson instanceof Professor));
-            logger.info(String.valueOf(editedPerson instanceof Student));
 
             // When adding new module with nm/, adds prof/student to person list in each mod
             if (checkMod != null) {
