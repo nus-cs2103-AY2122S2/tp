@@ -145,5 +145,5 @@ Format: `exit`
 | **Find**   | `find n/NAME_OF_PET [Keywords]` <br> e.g., `find PeePee` (returns information of all pets called PeePee)                                 |
 | **Diet**   | `diet INDEX d/remark` <br> e.g. `diet 12 Only feed dry kibble` (stores remark in pet 12's database)                                      |
 | **Time**   | `time id `<br> e.g.,`pickup 3 0900 1200` (where 3 is the id of the pet in the system)                                                    |
-| **App**    | `app INDEX date/[yyyy-MM-dd HH:mm] at/[location]` <br> e.g., `app 1 date/2022-03-04 09:30 at/ NUS Vet Clinic`                            | 
+| **App**    | `app INDEX date/[yyyy-MM-dd HH:mm] at/[location]` <br> e.g., `app 1 date/2022-03-04 09:30 at/ NUS Vet Clinic`                            |
 | **Exit**   | `exit`                                                                                                                                   |

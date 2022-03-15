@@ -343,7 +343,7 @@ Use case ends.
 * 1a. User keyed in missing/ invalid pet ID.
 
     * 1a1. System shows an error message.
-  
+
       Use case resumes at step 1.
 
 **Use case: Get pet ID**
@@ -382,8 +382,8 @@ Use case ends.
     * 1a1. System shows an error message.
 
       Use case resumes at step 1.
-      
-      
+    
+     
 **Use case: Get pet owner details**
 
 **MSS**
