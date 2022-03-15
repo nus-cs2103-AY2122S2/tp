@@ -114,4 +114,9 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredGroupList(Predicate<Group> predicate);
+
+    /**
+     * Assigns a person to a group
+     */
+    void assignPerson(Person personToAssign, Group group);
 }

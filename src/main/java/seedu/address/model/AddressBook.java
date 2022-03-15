@@ -115,6 +115,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.setPerson(target, editedPerson);
     }
 
+    public void setGroup(Group target, Group editedGroup) {
+        groups.setGroup(target, editedGroup);
+    }
+
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
@@ -160,5 +164,16 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public int hashCode() {
         return Objects.hash(persons.hashCode(), groups.hashCode());
+    }
+
+    /**
+     * Assigns a {@code Person} to a {@code Group} in this {@code AddressBook}
+     *
+     * @param personToAssign The {@code Person} being assigned
+     * @param group The {@code Group} that the {@code Person} is being assigned
+     */
+    public void assignPerson(Person personToAssign, Group group) {
+        group.assignPerson(personToAssign);
+        setGroup(new Group(group.getGroupName()), group);
     }
 }

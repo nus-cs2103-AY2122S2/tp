@@ -6,6 +6,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
+import seedu.address.model.person.Person;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Jackson-friendly version of {@link Group}.
@@ -15,13 +20,16 @@ public class JsonAdaptedGroup {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Group's %s field is missing!";
 
     private final String groupName;
+    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedGroup} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedGroup(@JsonProperty("groupName") String groupName) {
+    public JsonAdaptedGroup(@JsonProperty("groupName") String groupName,
+                            @JsonProperty("persons") List<JsonAdaptedPerson> persons) {
         this.groupName = groupName;
+        this.persons.addAll(persons);
     }
 
     /**
@@ -29,6 +37,9 @@ public class JsonAdaptedGroup {
      */
     public JsonAdaptedGroup(seedu.address.model.group.Group source) {
         groupName = String.valueOf(source.getGroupName());
+        persons.addAll(source.getPersons().stream()
+                .map(JsonAdaptedPerson::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -48,6 +59,11 @@ public class JsonAdaptedGroup {
         }
         final GroupName modelGroupName = new GroupName(groupName);
 
-        return new Group(modelGroupName);
+        Group modelGroup = new Group(modelGroupName);
+
+        for (JsonAdaptedPerson person: persons) {
+            modelGroup.assignPerson(person.toModelType());
+        }
+        return modelGroup;
     }
 }

@@ -137,4 +137,14 @@ public class ParserUtil {
         }
         return new GroupName(trimmedName);
     }
+
+    /**
+     * Parses {@code userInput} from an {@code AssignCommand} into an {@code Index} and returns it.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+    public static Index parseAssignIndex(String userInput) throws ParseException{
+        String trimmedInput = userInput.trim();
+        return parseIndex(trimmedInput.split(" ")[0]);
+    }
 }
