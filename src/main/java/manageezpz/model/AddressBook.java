@@ -57,11 +57,13 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public String listTask() {
         Iterator<Task> taskIterators = tasks.iterator();
-        String result = taskIterators.next().toString();
+        String result = "";
 
         while (taskIterators.hasNext()) {
-            result = String.join("\n", result, taskIterators.next().toString());
+            Task task = taskIterators.next();
+            result = String.join("\n", result, task.toString());
         }
+
         return result;
     }
 
