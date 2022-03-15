@@ -207,7 +207,7 @@ _Details coming soon ..._
 | **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [d/DATA]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 d/Salary-3400` |
 | **List**   | `list`                                                                                                                                                          |
 | **Clear**  | `clear`                                                                                                                                                         |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                             |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                     |
+| **Delete** | `delete NAME`<br> e.g., `delete John`                                                                                                                             |
+| **Edit**   | `edit NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit John n/James Lee e/jameslee@example.com`                                     |
 | **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                      |
 | **Help**   | `help`                                                                                                                                                          |
