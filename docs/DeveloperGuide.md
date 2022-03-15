@@ -273,33 +273,34 @@ It can also keep track of performance metrics, like total new memberships.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​           | I want to …​                                                                             | So that I can…​                                                                  |
-|----------|-------------------|------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
-| `* * *`  | new user          | view the user guide easily                                                               | refer to instructions when I forget how to use the App                           |
-| `* * *`  | new user          | see where to key in information easily                                                   |                                                                                  |
-| `* * *`  | new user          | easily see the format to follow for commands for the system to understand                | key in customer information easily                                               |
-| `* * *`  | new user          | add name of customer                                                                     |                                                                                  |
-| `* * *`  | new user          | add contact details of customer                                                          | contact them for their appointment or for follow up                              |
-| `* * *`  | new user          | add customer preference for staff                                                        | appoint the staff they prefer during their appointment                           |
-| `* * *`  | new user          | add allergy information of customer                                                      | make sure I do not affect their health by applying products they are allergic to |
-| `* * *`  | new user          | add hair type of customer                                                                | choose the correct products when treating their hairType                             |
-| `* * *`  | new user          | add skin type of customer                                                                | choose the appropriate products when treating their skinType                         |
-| `* * *`  | new user          | view a customer profile                                                                  |                                                                                  |
-| `* * *`  | new user          | delete a customer profile                                                                | get rid of sample data I used to explore the app                                 |
-| `* * *`  | new user          | edit a customer profile                                                                  | update details when needed                                                       |
-| `* * *`  | new user          | find a customer profile                                                                  | locate a customer easily                                                         |
-| `* *`    | intermediate user | view customers based on when they are coming to the salon                                | do appropriate preparations based on customer profile                            |
-| `* *`    | intermediate user | add the birth date of a customer                                                         | know when to sent birthday wishes to customers                                   |
-| `* *`    | intermediate user | view the customers that are having their birthday today                                  | be reminded to sent them birthday wishes                                         |
-| `*`      | new user          | add personal details of staff like birth date, contact number, part time/full timer, etc | know my staffs better                                                            |
-| `*`      | new user          | add services that customer prefers                                                       | better pitch new products and personalise their experience at the salon          |
-| `*`      | new user          | add photo of customer                                                                    | remember new customers more easily                                               |
-| `*`      | expert user       | add the feedback of the customer after been serviced for a booking                       | know how satisfied the customer is and know the areas of improvement if any      |
-| `*`      | expert user       | keep track of number of customers on a specific day                                      | better allocate manpower                                                         |
-| `*`      | expert user       | keep track of how many new customers gained                                              | review and improve my company's performance                                      |
-| `*`      | expert user       | keep track of expected spending of customer                                              | review and improve my company's performance                                      |
-| `*`      | expert user       | get summary statistics on my customer profile (age)                                      | review and improve my choice of services and products                            |
-| `*`      | expert user       | get summary statistics on my customer profile (preferred staff)                          | identify the best staff and let the team learn from them                         |
+| Priority   | As a …​           | I want to …​                                                                             | So that I can…​                                                                  |
+|------------|-------------------|------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
+| `* * *`    | new user          | view the user guide easily                                                               | refer to instructions when I forget how to use the App                           |
+| `* * *`    | new user          | see where to key in information easily                                                   | I am not confused by the interface                                               |
+| `* * *`    | new user          | easily see the format to follow for commands for the system to understand                | key in customer information easily                                               |
+| `* * *`    | new user          | add name of customer                                                                     |                                                                                  |
+| `* * *`    | new user          | add contact details of customer                                                          | contact them for their appointment or for follow up                              |
+| `* * *`    | new user          | add customer preference for staff                                                        | appoint the staff they prefer during their appointment                           |
+| `* * *`    | new user          | add allergy information of customer                                                      | make sure I do not affect their health by applying products they are allergic to |
+| `* * *`    | new user          | add hair type of customer                                                                | choose the correct products when treating their hairType                         |
+| `* * *`    | new user          | add skin type of customer                                                                | choose the appropriate products when treating their skinType                     |
+| `* * *`    | new user          | view a customer profile                                                                  |                                                                                  |
+| `* * *`    | new user          | delete a customer profile                                                                | get rid of sample data I used to explore the app                                 |
+| `* * *`    | new user          | edit a customer profile                                                                  | update details when needed                                                       |
+| `* * *`    | new user          | find a customer profile                                                                  | locate a customer easily                                                         |
+| `* * *`    | new user          | show all customers depending on a keyword                                                | filter the list of customers to only those I am interested in                    |
+| `* *`      | intermediate user | view customers based on when they are coming to the salon                                | do appropriate preparations based on customer profile                            |
+| `* *`      | intermediate user | add the birth date of a customer                                                         | know when to sent birthday wishes to customers                                   |
+| `* *`      | intermediate user | view the customers that are having their birthday today                                  | be reminded to sent them birthday wishes                                         |
+| `*`        | user              | add personal details of staff like birth date, contact number, part time/full timer, etc | know my staffs better                                                            |
+| `*`        | user              | add services that customer prefers                                                       | better pitch new products and personalise their experience at the salon          |
+| `*`        | user              | add photo of customer                                                                    | remember new customers more easily                                               |
+| `*`        | expert user       | add the feedback of the customer after been serviced for a booking                       | know how satisfied the customer is and know the areas of improvement if any      |
+| `*`        | expert user       | keep track of number of customers on a specific day                                      | better allocate manpower                                                         |
+| `*`        | expert user       | keep track of how many new customers gained                                              | review and improve my company's performance                                      |
+| `*`        | expert user       | keep track of expected spending of customer                                              | review and improve my company's performance                                      |
+| `*`        | expert user       | get summary statistics on my customer profile (age)                                      | review and improve my choice of services and products                            |
+| `*`        | expert user       | get summary statistics on my customer profile (preferred staff)                          | identify the best staff and let the team learn from them                         |
 
 *{More to be added}*
 
@@ -453,7 +454,7 @@ testers are expected to do more *exploratory* testing.
 
 ### showing customer's details
 
-1. showing customer customer
+1. showing customer
 
    1. Test case: `show 1`<br>
       Expected: Details of the first customer on the list will be shown.
