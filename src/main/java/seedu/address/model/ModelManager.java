@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.contact.Contact;
+import seedu.address.model.medical.Medical;
 import seedu.address.model.person.Person;
 
 /**
@@ -166,7 +167,6 @@ public class ModelManager implements Model {
         addressBook.setContact(target, editedContact);
     }
 
-
     //=========== Filtered Contact List Accessors =============================================================
 
     /**
@@ -204,4 +204,10 @@ public class ModelManager implements Model {
                 && filteredContacts.equals(other.filteredContacts);
     }
 
+    //=========== Medical ================================================================================
+    @Override
+    public void addMedical(Medical medical) {
+        addressBook.addMedical(medical);
+        updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
+    }
 }

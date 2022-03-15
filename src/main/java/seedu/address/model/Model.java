@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.contact.Contact;
+import seedu.address.model.medical.Medical;
 import seedu.address.model.person.Person;
 
 /**
@@ -125,4 +126,10 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredContactList(Predicate<Contact> predicate);
+
+    /**
+     * Adds the given medical information.
+     * {@code medical} must not already exist in the address book.
+     */
+    void addMedical(Medical medical);
 }
