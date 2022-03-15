@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import seedu.address.model.EventBook;
 import seedu.address.model.event.Event;
 

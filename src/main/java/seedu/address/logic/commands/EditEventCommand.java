@@ -96,11 +96,11 @@ public class EditEventCommand extends Command {
         Set<Name> removeFriendNames = editEventDescriptor.getRemoveFriendNames().orElse(null);
         Set<Name> currentFriendName = eventToEdit.getFriendNames();
         Set<Name> updatedFriendNames = new HashSet<>(currentFriendName);
-        if (addFriendNames != null) {
-            updatedFriendNames.addAll(addFriendNames);
-        }
         if (removeFriendNames != null) {
             updatedFriendNames.removeAll(removeFriendNames);
+        }
+        if (addFriendNames != null) {
+            updatedFriendNames.addAll(addFriendNames);
         }
 
         return new Event(updatedName, updatedDateTime, updatedDescription, updatedFriendNames);
@@ -140,7 +140,7 @@ public class EditEventCommand extends Command {
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * A defensive copy of {@code EventDescriptor} is used internally.
          */
         public EditEventDescriptor(EditEventDescriptor toCopy) {
             setName(toCopy.name);
@@ -148,7 +148,6 @@ public class EditEventCommand extends Command {
             setDescription(toCopy.description);
             setAddFriendNames(toCopy.addFriendNames);
             setRemoveFriendNames(toCopy.removeFriendNames);
-
         }
 
         /**

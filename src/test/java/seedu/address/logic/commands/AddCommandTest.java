@@ -23,7 +23,6 @@ import seedu.address.model.ReadOnlyEventBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.EventBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {

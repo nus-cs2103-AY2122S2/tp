@@ -98,13 +98,23 @@ public class CommandTestUtil {
             Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
-            System.out.println(expectedCommandResult.hashCode());
-            System.out.println(result.hashCode());
+            System.out.println(result.getFeedbackToUser());
+            System.out.println(expectedCommandResult.getFeedbackToUser());
             assertEquals(expectedCommandResult, result);
             assertEquals(expectedModel, actualModel);
         } catch (CommandException ce) {
             throw new AssertionError("Execution of command should not fail.", ce);
         }
+    }
+
+    /**
+     * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)}
+     * that takes a string {@code expectedMessage}.
+     */
+    public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
+                                            Model expectedModel) {
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage);
+        assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
 
     /**
@@ -117,15 +127,7 @@ public class CommandTestUtil {
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
 
-    /**
-     * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)}
-     * that takes a string {@code expectedMessage}.
-     */
-    public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
-                                            Model expectedModel) {
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage);
-        assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
-    }
+
 
     /**
      * Executes the given {@code command}, confirms that <br>

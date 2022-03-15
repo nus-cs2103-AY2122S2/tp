@@ -1,7 +1,5 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertEventCommandSuccess;
 import static seedu.address.testutil.TypicalEvents.getTypicalEventBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -29,6 +27,8 @@ public class EditEventCommandTest {
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Event editedEvent = new EventBuilder().build();
         EditEventDescriptor descriptor = new EditEventDescriptorBuilder(editedEvent).build();
+        descriptor.setRemoveFriendNames(model.getEventsList().get(0).getFriendNames());
+
         EditEventCommand editCommand = new EditEventCommand(INDEX_FIRST_PERSON, descriptor);
 
         String expectedMessage = String.format(EditEventCommand.MESSAGE_EDIT_EVENT_SUCCESS, editedEvent);

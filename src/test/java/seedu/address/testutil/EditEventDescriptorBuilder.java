@@ -33,6 +33,7 @@ public class EditEventDescriptorBuilder {
         descriptor.setName(event.getName());
         descriptor.setDateTime(event.getDateTime());
         descriptor.setDescription(event.getDescription());
+        descriptor.setAddFriendNames(event.getFriendNames());
     }
 
     /**

@@ -1,20 +1,13 @@
 package seedu.address.testutil;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import seedu.address.model.event.DateTime;
 import seedu.address.model.event.Event;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Description;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Log;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.UniqueLogList;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
