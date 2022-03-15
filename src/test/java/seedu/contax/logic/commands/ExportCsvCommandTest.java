@@ -1,9 +1,15 @@
 package seedu.contax.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.contax.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.contax.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.io.IOException;
+import java.nio.file.Path;
+
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import seedu.contax.model.Model;
 import seedu.contax.model.ModelManager;
@@ -22,9 +28,12 @@ public class ExportCsvCommandTest {
     private static final String PERSON2_EMAIL = "example2@example.com";
     private static final String PERSON2_ADDRESS = "Example address 2";
 
-    private static final String VALID_FILEPATH = "./src/test/data/ExportCsvTest/ValidAddressBook.csv";
+    private static final String VALID_FILEPATH = "./ValidAddressBook.csv";
 
     private Model model = new ModelManager(getTypicalAddressBook(), new Schedule(), new UserPrefs());
+
+    @TempDir
+    Path testFolder;
 
     @Test
     public void execute_validPersonsInAddressBook_exportSuccessful() {
@@ -40,15 +49,16 @@ public class ExportCsvCommandTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new Schedule(), new UserPrefs());
 
-        assertCommandSuccess(new ExportCsvCommand(VALID_FILEPATH), model,
+        String testFilePath = testFolder.resolve(VALID_FILEPATH).toAbsolutePath().toString();
+        assertCommandSuccess(new ExportCsvCommand(testFilePath), model,
                 new CommandResult(ExportCsvCommand.MESSAGE_SUCCESS), expectedModel);
     }
 
     @Test
     public void execute_noPersonsInAddressBook_exportSuccessful() {
         Model expectedModel = new ModelManager(model.getAddressBook(), new Schedule(), new UserPrefs());
-        assertCommandSuccess(new ExportCsvCommand(VALID_FILEPATH), model,
+        String testFilePath = testFolder.resolve(VALID_FILEPATH).toAbsolutePath().toString();
+        assertCommandSuccess(new ExportCsvCommand(testFilePath), model,
                 new CommandResult(ExportCsvCommand.MESSAGE_SUCCESS), expectedModel);
     }
-
 }
