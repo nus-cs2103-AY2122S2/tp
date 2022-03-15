@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ibook.commons.core.Messages.MESSAGE_PRODUCTS_LISTED_OVERVIEW;
 import static seedu.ibook.logic.commands.CommandTestUtil.VALID_CATEGORY_A;
 import static seedu.ibook.logic.commands.CommandTestUtil.VALID_DESCRIPTION_A;
-import static seedu.ibook.logic.commands.CommandTestUtil.VALID_EXPIRY_DATE_A;
 import static seedu.ibook.logic.commands.CommandTestUtil.VALID_NAME_A;
 import static seedu.ibook.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.ibook.testutil.TypicalProducts.KAYA_BREAD;
@@ -28,7 +27,6 @@ import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Price;
 import seedu.ibook.model.product.Product;
 import seedu.ibook.model.product.ProductFulfillsFiltersPredicate;
-import seedu.ibook.model.product.item.ExpiryDate;
 
 
 /**
@@ -48,7 +46,6 @@ public class FindCommandTest {
             new ProductFulfillsFiltersPredicate(new Product(
                     new Name(VALID_NAME_A),
                     new Category(VALID_CATEGORY_A),
-                    new ExpiryDate(VALID_EXPIRY_DATE_A),
                     new Description(VALID_DESCRIPTION_A),
                     Price.WILDPRICE));
 

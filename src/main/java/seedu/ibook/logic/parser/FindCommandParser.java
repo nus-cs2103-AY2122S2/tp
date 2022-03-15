@@ -81,7 +81,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         return new FindCommand(
-                new ProductFulfillsFiltersPredicate(new Product(name, category, expiryDate, description, price)));
+                new ProductFulfillsFiltersPredicate(new Product(name, category, description, price)));
     }
 
 }

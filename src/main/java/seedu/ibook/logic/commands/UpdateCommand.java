@@ -18,7 +18,6 @@ import seedu.ibook.model.product.Description;
 import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Price;
 import seedu.ibook.model.product.Product;
-import seedu.ibook.model.product.item.ExpiryDate;
 
 
 /**
@@ -86,13 +85,11 @@ public class UpdateCommand extends Command {
 
         Name updatedName = updateProductDescriptor.getName().orElse(productToUpdate.getName());
         Category updatedCategory = updateProductDescriptor.getCategory().orElse(productToUpdate.getCategory());
-        ExpiryDate updatedExpiryDate =
-                updateProductDescriptor.getExpiryDate().orElse(productToUpdate.getExpiryDate());
         Description updatedDescription =
                 updateProductDescriptor.getDescription().orElse(productToUpdate.getDescription());
         Price updatedPrice = updateProductDescriptor.getPrice().orElse(productToUpdate.getPrice());
 
-        return new Product(updatedName, updatedCategory, updatedExpiryDate, updatedDescription, updatedPrice);
+        return new Product(updatedName, updatedCategory, updatedDescription, updatedPrice);
     }
 
     @Override
@@ -120,7 +117,6 @@ public class UpdateCommand extends Command {
     public static class UpdateProductDescriptor {
         private Name name;
         private Category category;
-        private ExpiryDate expiryDate;
         private Description description;
         private Price price;
 
@@ -132,7 +128,6 @@ public class UpdateCommand extends Command {
         public UpdateProductDescriptor(UpdateProductDescriptor toCopy) {
             setName(toCopy.name);
             setCategory(toCopy.category);
-            setExpiryDate(toCopy.expiryDate);
             setDescription(toCopy.description);
             setPrice(toCopy.price);
         }
@@ -141,7 +136,7 @@ public class UpdateCommand extends Command {
          * Returns true if at least one field is updated.
          */
         public boolean isAnyFieldUpdated() {
-            return CollectionUtil.isAnyNonNull(name, category, expiryDate, description, price);
+            return CollectionUtil.isAnyNonNull(name, category, description, price);
         }
 
         public void setName(Name name) {
@@ -158,14 +153,6 @@ public class UpdateCommand extends Command {
 
         public Optional<Category> getCategory() {
             return Optional.ofNullable(category);
-        }
-
-        public void setExpiryDate(ExpiryDate expiryDate) {
-            this.expiryDate = expiryDate;
-        }
-
-        public Optional<ExpiryDate> getExpiryDate() {
-            return Optional.ofNullable(expiryDate);
         }
 
         public void setDescription(Description description) {
@@ -201,7 +188,6 @@ public class UpdateCommand extends Command {
 
             return getName().equals(e.getName())
                     && getCategory().equals(e.getCategory())
-                    && getExpiryDate().equals(e.getExpiryDate())
                     && getDescription().equals(e.getDescription())
                     && getPrice().equals(e.getPrice());
         }

@@ -9,7 +9,6 @@ import seedu.ibook.model.product.Description;
 import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Price;
 import seedu.ibook.model.product.Product;
-import seedu.ibook.model.product.item.ExpiryDate;
 
 /**
  * Jackson-friendly version of {@link Product}.
@@ -20,7 +19,6 @@ class JsonAdaptedProduct {
 
     private final String name;
     private final String category;
-    private final String expiryDate;
     private final String description;
     private final String price;
 
@@ -30,12 +28,10 @@ class JsonAdaptedProduct {
     @JsonCreator
     public JsonAdaptedProduct(@JsonProperty("name") String name,
                               @JsonProperty("category") String category,
-                              @JsonProperty("expiryDate") String expiryDate,
                               @JsonProperty("description") String description,
                               @JsonProperty("price") String price) {
         this.name = name;
         this.category = category;
-        this.expiryDate = expiryDate;
         this.description = description;
         this.price = price;
     }
@@ -46,7 +42,6 @@ class JsonAdaptedProduct {
     public JsonAdaptedProduct(Product source) {
         name = source.getName().fullName;
         category = source.getCategory().fullCategoryName;
-        expiryDate = source.getExpiryDate().expiryDate.toString();
         description = source.getDescription().fullDescription;
         price = source.getPrice().price.toString();
     }
@@ -74,15 +69,6 @@ class JsonAdaptedProduct {
         }
         final Category modelCategory = new Category(category);
 
-        if (expiryDate == null) {
-            throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, ExpiryDate.class.getSimpleName()));
-        }
-        if (!ExpiryDate.isValidExpiryDate(expiryDate)) {
-            throw new IllegalValueException(ExpiryDate.MESSAGE_CONSTRAINTS);
-        }
-        final ExpiryDate modelExpiryDate = new ExpiryDate(expiryDate);
-
         if (description == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()));
@@ -100,7 +86,7 @@ class JsonAdaptedProduct {
         }
         final Price modelPrice = new Price(price);
 
-        return new Product(modelName, modelCategory, modelExpiryDate, modelDescription, modelPrice);
+        return new Product(modelName, modelCategory, modelDescription, modelPrice);
     }
 
 }

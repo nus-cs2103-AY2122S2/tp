@@ -5,7 +5,6 @@ import seedu.ibook.model.product.Description;
 import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Price;
 import seedu.ibook.model.product.Product;
-import seedu.ibook.model.product.item.ExpiryDate;
 
 /**
  * A utility class to help with building Product objects.
@@ -20,7 +19,6 @@ public class ProductBuilder {
 
     private Name name;
     private Category category;
-    private ExpiryDate expiryDate;
     private Description description;
     private Price price;
 
@@ -30,7 +28,6 @@ public class ProductBuilder {
     public ProductBuilder() {
         name = new Name(DEFAULT_NAME);
         category = new Category(DEFAULT_CATEGORY);
-        expiryDate = new ExpiryDate(DEFAULT_EXPIRY_DATE);
         description = new Description(DEFAULT_DESCRIPTION);
         price = new Price(DEFAULT_PRICE);
     }
@@ -41,7 +38,6 @@ public class ProductBuilder {
     public ProductBuilder(Product productToCopy) {
         name = productToCopy.getName();
         category = productToCopy.getCategory();
-        expiryDate = productToCopy.getExpiryDate();
         description = productToCopy.getDescription();
         price = productToCopy.getPrice();
     }
@@ -71,14 +67,6 @@ public class ProductBuilder {
     }
 
     /**
-     * Sets the {@code ExpiryDate} of the {@code Product} that we are building.
-     */
-    public ProductBuilder withExpiryDate(String expiryDate) {
-        this.expiryDate = new ExpiryDate(expiryDate);
-        return this;
-    }
-
-    /**
      * Sets the {@code Price} of the {@code Product} that we are building.
      */
     public ProductBuilder withPrice(String price) {
@@ -87,7 +75,7 @@ public class ProductBuilder {
     }
 
     public Product build() {
-        return new Product(name, category, expiryDate, description, price);
+        return new Product(name, category, description, price);
     }
 
 }

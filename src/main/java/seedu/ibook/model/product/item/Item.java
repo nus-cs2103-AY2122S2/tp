@@ -69,9 +69,26 @@ public class Item {
         this.quantity.subtract(newItem.getQuantity());
     }
 
+    public boolean isExpired() {
+        return expiryDate.isPast();
+    }
+
     /**
      * Returns true if both items have the same product and expiry date.
      * This defines a weaker notion of equality between two items.
+     */
+    public boolean isSameItem(Item otherItem) {
+        if (otherItem == this) {
+            return true;
+        }
+
+        return otherItem.getProduct().equals(getProduct())
+            && otherItem.getExpiryDate().equals(getExpiryDate());
+    }
+
+    /**
+     * Returns true if both items have the same product and expiry date.
+     * This defines a stronger notion of equality between two items.
      */
     @Override
     public boolean equals(Object other) {
@@ -85,7 +102,8 @@ public class Item {
 
         Item otherItem = (Item) other;
         return otherItem.getProduct().equals(getProduct())
-            && otherItem.getExpiryDate().equals(getExpiryDate());
+            && otherItem.getExpiryDate().equals(getExpiryDate())
+            && otherItem.getQuantity().equals(getQuantity());
     }
 
     @Override

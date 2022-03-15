@@ -13,7 +13,6 @@ import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Price;
 import seedu.ibook.model.product.Product;
 import seedu.ibook.model.product.ProductFulfillsFiltersPredicate;
-import seedu.ibook.model.product.item.ExpiryDate;
 
 public class FindCommandParserTest {
 
@@ -32,7 +31,6 @@ public class FindCommandParserTest {
                 new FindCommand(new ProductFulfillsFiltersPredicate(new Product(
                         new Name("Maggi"),
                         new Category("noodles"),
-                        new ExpiryDate("2022-01-01"),
                         new Description("tasty"),
                         new Price("3.00"))));
         assertParseSuccess(parser, " n: Maggi c: noodles e: 2022-01-01 d: tasty p: 3.00", expectedFindCommand);
@@ -42,7 +40,6 @@ public class FindCommandParserTest {
                 new FindCommand(new ProductFulfillsFiltersPredicate(new Product (
                         new Name("Maggi"),
                         Category.WILDCATEGORY,
-                        new ExpiryDate("2022-01-01"),
                         Description.WILDDESCRIPTION,
                         new Price("3.00")))
                 );

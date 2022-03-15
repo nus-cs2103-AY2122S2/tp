@@ -2,7 +2,6 @@
   "products": [ {
     "name" : "Product with invalid price: negative price",
     "category" : "Bread",
-    "expiryDate" : "2022-03-08",
     "description" : "Negative price",
     "price" : "-3.99"
   } ]

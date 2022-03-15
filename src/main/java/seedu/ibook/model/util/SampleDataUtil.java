@@ -7,7 +7,6 @@ import seedu.ibook.model.product.Description;
 import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Price;
 import seedu.ibook.model.product.Product;
-import seedu.ibook.model.product.item.ExpiryDate;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -16,7 +15,6 @@ public class SampleDataUtil {
     public static Product[] getSampleProducts() {
         return new Product[] {
             new Product(new Name("Maggie Mee"), new Category("Noodles"),
-                new ExpiryDate("2022-12-13"),
                 new Description(""), new Price("1.99"))
         };
     }
