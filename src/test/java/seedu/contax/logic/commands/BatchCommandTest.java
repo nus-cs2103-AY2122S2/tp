@@ -49,7 +49,7 @@ public class BatchCommandTest {
     }
 
     @Test
-    public void execute_rangeEditSuccessful() throws Exception {
+    public void execute_rangeEditWithDifferentType_success() throws Exception {
         String sampleCommand = "range edit p/12345678 by/phone =/9 ";
         ArgumentMultimap argumentMultimap = new ArgumentMultimap();
 
@@ -78,7 +78,7 @@ public class BatchCommandTest {
     }
 
     @Test
-    public void parseAndCreateNewCommand_invalidValue_throwsParseException() throws CommandException {
+    public void execute_parseAndCreateNewCommandInvalidValue_throwsParseException() throws CommandException {
         BatchCommand expectedBatchCommand =
                 new BatchCommand("",
                         new SearchType(SearchType.TYPE_PHONE), "94351253");
