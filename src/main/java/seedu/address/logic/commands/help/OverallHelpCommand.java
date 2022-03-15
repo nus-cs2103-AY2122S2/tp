@@ -7,7 +7,7 @@ import seedu.address.model.Model;
 public class OverallHelpCommand extends HelpCommand {
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(SHOWING_HELP_MESSAGE, getCommandDataType(), true, false);
+        return new CommandResult(HelpDescription.OVERALL_HELPING_DESCRIPTION, getCommandDataType(), true, false);
     }
 
     @Override

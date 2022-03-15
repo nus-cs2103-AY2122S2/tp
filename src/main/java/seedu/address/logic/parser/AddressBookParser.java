@@ -14,11 +14,11 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.add.AddCommand;
 import seedu.address.logic.commands.delete.DeleteCommand;
 import seedu.address.logic.commands.help.HelpCommand;
-import seedu.address.logic.commands.help.OverallHelpCommand;
 import seedu.address.logic.commands.list.ListApplicantCommand;
 import seedu.address.logic.commands.list.ListCommand;
 import seedu.address.logic.parser.applicants.EditApplicantCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.help.HelpCommandParser;
 
 /**
  * Parses user input.
@@ -69,7 +69,7 @@ public class AddressBookParser {
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
-            return new OverallHelpCommand();
+            return new HelpCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

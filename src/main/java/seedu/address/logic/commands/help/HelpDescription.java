@@ -51,7 +51,7 @@ public class HelpDescription {
             + "Examples: \n"
             + "edit -a 2 e/belle@yahoo.com a/13 Computing Drive 612345 t/\n"
             + "Edits the name, DOB, gender and phone number of the 1st applicant to be Belle, 1960-03-04, "
-            + "F and 81234567 respectively."
+            + "F and 81234567 respectively. \n"
             + "\n 2. Editing an Interview: \n"
             + "Format: 'edit -i n/CANDIDATE_INDEX d/DATE r/ROLE' \n"
             + "Some notice: \n"
@@ -131,7 +131,7 @@ public class HelpDescription {
         + "(Date provided must be in format YYYY-MM-DD) \n"
         + "- Position (DATA_TYPE: pos): \n"
         + " + FILTER_TYPE: name, ARGUMENT: n/KEYWORD: View positions which has "
-        + "the specified keyword in the position name"
+        + "the specified keyword in the position name \n"
         + "Examples: \n"
         + "filter appl tag t/school t/friend \n"
         + "filter intvw date d/2022-03-20";
@@ -160,4 +160,7 @@ public class HelpDescription {
     public static final String EXIT_COMMAND_DESCRIPTION =
             "Well its an exit command, of course it going to terminate the program \n"
             + "Format: 'exit'";
+
+    public static final String COMMAND_NOT_FOUND_DESCRIPTION =
+            "Sorry, we don't have this command. Please try again.";
 }
