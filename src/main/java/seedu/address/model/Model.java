@@ -90,13 +90,13 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
-     * Returns true if a company with the same identity as {@code person} exists in the address book.
+     * Returns true if a company with the same identity as {@code company} exists in the address book.
      */
     boolean hasCompany(Company company);
 
     /**
      * Deletes the given company.
-     * The person must exist in the address book.
+     * The company must exist in the address book.
      */
     void deleteCompany(Company target);
 

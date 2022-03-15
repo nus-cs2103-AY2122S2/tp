@@ -8,7 +8,7 @@ import java.util.Set;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents an Entry in the address book.
+ * Represents a Company in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Company extends Entry {
@@ -45,7 +45,7 @@ public class Company extends Entry {
 
     /**
      * Returns true if both entries are a company and have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * This defines a weaker notion of equality between two companies.
      */
     public boolean isSameEntry(Entry otherEntry) {
         if (otherEntry == this) {
@@ -60,8 +60,8 @@ public class Company extends Entry {
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both companies have the same identity and data fields.
+     * This defines a stronger notion of equality between two companies.
      */
     @Override
     public boolean equals(Object other) {
