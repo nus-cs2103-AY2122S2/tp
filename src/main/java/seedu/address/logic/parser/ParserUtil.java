@@ -18,9 +18,6 @@ import seedu.address.model.prescription.DrugName;
 import seedu.address.model.prescription.Instruction;
 import seedu.address.model.prescription.PrescriptionDate;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.testresult.MedicalTest;
-import seedu.address.model.testresult.Result;
-import seedu.address.model.testresult.TestDate;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -187,50 +184,5 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
-    }
-
-    /**
-     * Parses a {@code String testDate} into a {@code TestDate}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code testDate} is invalid.
-     */
-    public static TestDate parseDate(String testDate) throws ParseException {
-        requireNonNull(testDate);
-        String trimmedName = testDate.trim();
-        if (!TestDate.isValidTestDate(trimmedName)) {
-            throw new ParseException(TestDate.MESSAGE_CONSTRAINTS);
-        }
-        return new TestDate(trimmedName);
-    }
-
-    /**
-     * Parses a {@code String medicalTest} into a {@code MedicalTest}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code medicalTest} is invalid.
-     */
-    public static MedicalTest parseMedicalTest(String medicalTest) throws ParseException {
-        requireNonNull(medicalTest);
-        String trimmedName = medicalTest.trim();
-        if (!MedicalTest.isValidMedicalTest(trimmedName)) {
-            throw new ParseException(MedicalTest.MESSAGE_CONSTRAINTS);
-        }
-        return new MedicalTest(trimmedName);
-    }
-
-    /**
-     * Parses a {@code String result} into a {@code Result}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code result} is invalid.
-     */
-    public static Result parseResult(String result) throws ParseException {
-        requireNonNull(result);
-        String trimmedName = result.trim();
-        if (!Result.isValidResult(trimmedName)) {
-            throw new ParseException(Result.MESSAGE_CONSTRAINTS);
-        }
-        return new Result(trimmedName);
     }
 }
