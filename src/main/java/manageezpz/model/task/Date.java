@@ -59,4 +59,16 @@ public class Date {
     public String format(DateTimeFormatter dtf) {
         return getParsedDate().format(dtf);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Date) {
+            return date.equals(((Date) obj).date);
+        } else {
+            return false;
+        }
+    }
 }

@@ -139,12 +139,23 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         while (taskIterators.hasNext()) {
             Task task = taskIterators.next();
-            if (task instanceof Deadline || task instanceof Event) {
+            Date date = getDateFromTask(task);
+            if (date != null && date.equals(todayDate)) {
                 result = String.join("\n", result, task.toString());
             }
         }
 
         return result;
+    }
+
+    private Date getDateFromTask(Task task) {
+        if (task instanceof Deadline) {
+            return ((Deadline) task).getDate();
+        } else if (task instanceof Event) {
+            return ((Event) task).getDate();
+        } else {
+            return null;
+        }
     }
 
     //// list overwrite operations
