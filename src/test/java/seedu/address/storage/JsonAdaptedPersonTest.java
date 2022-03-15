@@ -16,7 +16,7 @@ import seedu.address.model.person.Course;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.StudentID;
+import seedu.address.model.person.StudentId;
 
 public class JsonAdaptedPersonTest {
     private static final String INVALID_STUDENT_ID = "A0123456";
@@ -25,7 +25,7 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
 
-    private static final String VALID_STUDENT_ID = BENSON.getStudentID().toString();
+    private static final String VALID_STUDENT_ID = BENSON.getStudentId().toString();
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
@@ -41,19 +41,19 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
-    public void toModelType_invalidStudentID_throwsIllegalValueException() {
+    public void toModelType_invalidStudentId_throwsIllegalValueException() {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(INVALID_STUDENT_ID, VALID_NAME, VALID_PHONE,
                         VALID_EMAIL, VALID_COURSE, VALID_TAGS);
-        String expectedMessage = StudentID.MESSAGE_CONSTRAINTS;
+        String expectedMessage = StudentId.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
     @Test
-    public void toModelType_nullStudentID_throwsIllegalValueException() {
+    public void toModelType_nullStudentId_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(null, VALID_NAME, VALID_PHONE,
                 VALID_EMAIL, VALID_COURSE, VALID_TAGS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, StudentID.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, StudentId.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 

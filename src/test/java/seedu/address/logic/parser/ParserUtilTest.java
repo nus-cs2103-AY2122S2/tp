@@ -18,7 +18,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.StudentID;
+import seedu.address.model.person.StudentId;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -66,20 +66,20 @@ public class ParserUtilTest {
 
     @Test
     public void parseId_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseStudentID(INVALID_STUDENT_ID));
+        assertThrows(ParseException.class, () -> ParserUtil.parseStudentId(INVALID_STUDENT_ID));
     }
 
     @Test
     public void parseId_validValueWithoutWhitespace_returnsName() throws Exception {
-        StudentID expectedId = new StudentID(VALID_STUDENT_ID);
-        assertEquals(expectedId, ParserUtil.parseStudentID(VALID_STUDENT_ID));
+        StudentId expectedId = new StudentId(VALID_STUDENT_ID);
+        assertEquals(expectedId, ParserUtil.parseStudentId(VALID_STUDENT_ID));
     }
 
     @Test
     public void parseId_validValueWithWhitespace_returnsTrimmedName() throws Exception {
         String idWithWhitespace = WHITESPACE + VALID_STUDENT_ID + WHITESPACE;
-        StudentID expectedId = new StudentID(VALID_STUDENT_ID);
-        assertEquals(expectedId, ParserUtil.parseStudentID(idWithWhitespace));
+        StudentId expectedId = new StudentId(VALID_STUDENT_ID);
+        assertEquals(expectedId, ParserUtil.parseStudentId(idWithWhitespace));
     }
 
     @Test

@@ -15,7 +15,7 @@ public class Course {
     public final String course;
 
     /**
-     * Constructs a {@code StudentID}.
+     * Constructs a {@code StudentId}.
      *
      * @param course A valid course.
      */
