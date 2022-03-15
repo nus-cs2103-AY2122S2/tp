@@ -5,12 +5,12 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.person.Course;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.StudentID;
+import seedu.address.model.candidate.Course;
+import seedu.address.model.candidate.Email;
+import seedu.address.model.candidate.Name;
+import seedu.address.model.candidate.Candidate;
+import seedu.address.model.candidate.Phone;
+import seedu.address.model.candidate.StudentID;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -31,14 +31,14 @@ public class EditPersonDescriptorBuilder {
     /**
      * Returns an {@code EditPersonDescriptor} with fields containing {@code person}'s details
      */
-    public EditPersonDescriptorBuilder(Person person) {
+    public EditPersonDescriptorBuilder(Candidate candidate) {
         descriptor = new EditPersonDescriptor();
-        descriptor.setStudentID(person.getStudentID());
-        descriptor.setName(person.getName());
-        descriptor.setPhone(person.getPhone());
-        descriptor.setEmail(person.getEmail());
-        descriptor.setCourse(person.getCourse());
-        descriptor.setTags(person.getTags());
+        descriptor.setStudentID(candidate.getStudentID());
+        descriptor.setName(candidate.getName());
+        descriptor.setPhone(candidate.getPhone());
+        descriptor.setEmail(candidate.getEmail());
+        descriptor.setCourse(candidate.getCourse());
+        descriptor.setTags(candidate.getTags());
     }
 
     /**

@@ -12,12 +12,12 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Course;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.StudentID;
+import seedu.address.model.candidate.Course;
+import seedu.address.model.candidate.Email;
+import seedu.address.model.candidate.Name;
+import seedu.address.model.candidate.Candidate;
+import seedu.address.model.candidate.Phone;
+import seedu.address.model.candidate.StudentID;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -47,9 +47,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Course course = ParserUtil.parseCourse(argMultimap.getValue(PREFIX_COURSE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(id, name, phone, email, course, tagList);
+        Candidate candidate = new Candidate(id, name, phone, email, course, tagList);
 
-        return new AddCommand(person);
+        return new AddCommand(candidate);
     }
 
     /**

@@ -3,12 +3,12 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.person.Course;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.StudentID;
+import seedu.address.model.candidate.Candidate;
+import seedu.address.model.candidate.Course;
+import seedu.address.model.candidate.Email;
+import seedu.address.model.candidate.Name;
+import seedu.address.model.candidate.Phone;
+import seedu.address.model.candidate.StudentID;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -45,13 +45,13 @@ public class PersonBuilder {
     /**
      * Initializes the PersonBuilder with the data of {@code personToCopy}.
      */
-    public PersonBuilder(Person personToCopy) {
-        studentID = personToCopy.getStudentID();
-        name = personToCopy.getName();
-        phone = personToCopy.getPhone();
-        email = personToCopy.getEmail();
-        course = personToCopy.getCourse();
-        tags = new HashSet<>(personToCopy.getTags());
+    public PersonBuilder(Candidate candidateToCopy) {
+        studentID = candidateToCopy.getStudentID();
+        name = candidateToCopy.getName();
+        phone = candidateToCopy.getPhone();
+        email = candidateToCopy.getEmail();
+        course = candidateToCopy.getCourse();
+        tags = new HashSet<>(candidateToCopy.getTags());
     }
 
     /**
@@ -102,8 +102,8 @@ public class PersonBuilder {
         return this;
     }
 
-    public Person build() {
-        return new Person(studentID, name, phone, email, course, tags);
+    public Candidate build() {
+        return new Candidate(studentID, name, phone, email, course, tags);
     }
 
 }

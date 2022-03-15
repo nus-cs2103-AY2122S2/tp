@@ -8,7 +8,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.candidate.Candidate;
 
 /**
  * Deletes a candidate identified using it's displayed index from the address book.
@@ -33,7 +33,7 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Candidate> lastShownList = model.getFilteredPersonList();
         if (lastShownList.isEmpty()) {
             throw new CommandException(String.format(Messages.MESSAGE_NO_CANDIDATES_IN_SYSTEM));
         }
@@ -42,7 +42,7 @@ public class DeleteCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person candidateToDelete = lastShownList.get(targetIndex.getZeroBased());
+        Candidate candidateToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(candidateToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, candidateToDelete));
     }
