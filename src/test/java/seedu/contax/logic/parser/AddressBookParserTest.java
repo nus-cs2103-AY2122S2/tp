@@ -20,6 +20,7 @@ import seedu.contax.logic.commands.AddAppointmentCommand;
 import seedu.contax.logic.commands.AddCommand;
 import seedu.contax.logic.commands.AddTagCommand;
 import seedu.contax.logic.commands.AppointmentsBetweenCommand;
+import seedu.contax.logic.commands.BatchCommand;
 import seedu.contax.logic.commands.ChainCommand;
 import seedu.contax.logic.commands.ClearCommand;
 import seedu.contax.logic.commands.Command;
@@ -222,6 +223,12 @@ public class AddressBookParserTest {
     public void parseCommand_rangeCommand() throws Exception {
         assertTrue(parser.parseCommand(RangeCommand.COMMAND_WORD + " " + DeleteCommand.COMMAND_WORD
                 + " from/1 to/2") instanceof RangeCommand);
+    }
+
+    @Test
+    public void parseCommand_batchCommand() throws Exception {
+        assertTrue(parser.parseCommand(BatchCommand.COMMAND_WORD + " " + DeleteCommand.COMMAND_WORD
+                + " by/phone regex/123") instanceof BatchCommand);
     }
 
     @Test

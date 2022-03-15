@@ -353,4 +353,14 @@ public class ParserUtilTest {
         assertEquals(new SearchType(SearchType.TYPE_NAME),
                 ParserUtil.parseSearchType(SearchType.TYPE_NAME.toUpperCase()));
     }
+
+    @Test
+    public void parseAndCreateNewCommand_returnsCommand() throws ParseException {
+        assertEquals("test 1  command",
+                ParserUtil.parseAndCreateNewCommand("test command", "1"));
+    }
+    @Test
+    public void parseAndCreateNewCommand_invalidValue_throwsParseException() throws ParseException {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAndCreateNewCommand("", "1"));
+    }
 }
