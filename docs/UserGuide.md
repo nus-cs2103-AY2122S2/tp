@@ -112,6 +112,13 @@ Shows a list of all clients in the HustleBook.
 
 Format: `list`
 
+### Sorting all persons : `sort`
+
+Displays all clients in the HustleBook according to previous date met. 
+Flagged clients are displayed before unflaggeed clients.
+
+Format: `sort`
+
 ### Flagging a person : `flag`
 
 Flag a person in the HustleBook to mark them as important. Can also be used to unflag the person.
@@ -211,7 +218,8 @@ _Details coming soon ..._
 | Action     | Format, Examples                                                                                                                                                                 |
 |------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [d/DATE] [i/INFO] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 d/Salary-3400` |
-| **List**   | `list`                                                                                                                                                                           |
+| **List**   | `list`            
+| **Sort**   | `sort`            |
 | **Clear**  | `clear`                                                                                                                                                                          |
 | **Delete** | `delete NAME`<br> e.g., `delete John`                                                                                                                                              |
 | **Flag**   | `flag INDEX f/FLAG`<br> e.g., `flag 3 f/true`                                                                                                                                    |
