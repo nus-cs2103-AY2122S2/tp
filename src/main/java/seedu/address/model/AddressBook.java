@@ -63,12 +63,21 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the event list with {@code events}.
+     * {@code events} must not contain duplicate events.
+     */
+    public void setEvents(List<Event> events) {
+        this.events.setEntries(events);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setCompanies(newData.getCompanyList());
         setEvents(newData.getEventList());
     }
 
@@ -83,27 +92,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if a company with the same identity as {@code company} exists in the address book.
-     */
-    public boolean hasCompany(Company company) {
-        requireNonNull(company);
-        return companies.contains(company);
-    }
-
-    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
     public void addPerson(Person p) {
         persons.add(p);
-    }
-
-    /**
-     * Adds a company to the address book.
-     * The company must not already exist in the address book.
-     */
-    public void addCompany(Company c) {
-        companies.add(c);
     }
 
     /**
@@ -115,6 +108,32 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedPerson);
 
         persons.setEntry(target, editedPerson);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removePerson(Person key) {
+        persons.remove(key);
+    }
+
+    //// company-level operations
+
+    /**
+     * Returns true if a company with the same identity as {@code company} exists in the address book.
+     */
+    public boolean hasCompany(Company company) {
+        requireNonNull(company);
+        return companies.contains(company);
+    }
+
+    /**
+     * Adds a company to the address book.
+     * The company must not already exist in the address book.
+     */
+    public void addCompany(Company c) {
+        companies.add(c);
     }
 
     /**
@@ -133,16 +152,49 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removePerson(Person key) {
-        persons.remove(key);
+    public void removeCompany(Company key) {
+        companies.remove(key);
+    }
+
+    //// event-level operations
+
+    /**
+     * Returns true if an event with the same identity as {@code event} exists in the address book.
+     */
+    public boolean hasEvent(Event event) {
+        requireNonNull(event);
+        return events.contains(event);
+    }
+
+    /**
+     * Adds an event to the address book.
+     * The event must not already exist in the address book.
+     */
+    public void addEvent(Event e) {
+        events.add(e);
+    }
+
+    /**
+     * Replaces the contents of the event list with {@code events}.
+     * {@code events} must not contain duplicate events.
+     */
+    public void setEvent(Event target, Event editedEvent) {
+        requireNonNull(editedEvent);
+
+        events.setEntry(target, editedEvent);
     }
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removeCompany(Company key) {
-        companies.remove(key);
+    public void removeEvent(Event key) {
+        events.remove(key);
+    }
+
+    @Override
+    public ObservableList<Event> getEventList() {
+        return events.asUnmodifiableObservableList();
     }
 
     //// util methods
@@ -184,53 +236,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public int hashCode() {
         return Objects.hash(persons, companies, events);
-    }
-
-    /**
-     * Replaces the contents of the event list with {@code events}.
-     * {@code events} must not contain duplicate events.
-     */
-    public void setEvents(List<Event> events) {
-        this.events.setEntries(events);
-    }
-
-    /**
-     * Returns true if an event with the same identity as {@code event} exists in the address book.
-     */
-    public boolean hasEvent(Event event) {
-        requireNonNull(event);
-        return events.contains(event);
-    }
-
-    /**
-     * Adds an event to the address book.
-     * The event must not already exist in the address book.
-     */
-    public void addEvent(Event e) {
-        events.add(e);
-    }
-
-    /**
-     * Replaces the contents of the event list with {@code events}.
-     * {@code events} must not contain duplicate events.
-     */
-    public void setEvent(Event target, Event editedEvent) {
-        requireNonNull(editedEvent);
-
-        events.setEntry(target, editedEvent);
-    }
-
-    /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
-     */
-    public void removeEvent(Event key) {
-        events.remove(key);
-    }
-
-    @Override
-    public ObservableList<Event> getEventList() {
-        return events.asUnmodifiableObservableList();
     }
 
 }
