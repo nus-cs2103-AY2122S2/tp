@@ -88,6 +88,7 @@ public class ArgumentTokenizerTest {
         assertArgumentPresent(argMultimap, pSlash, "pSlash value");
         assertArgumentPresent(argMultimap, dashT, "dashT-Value");
         assertArgumentAbsent(argMultimap, hatQ);
+        assertFalse(argMultimap.arePrefixesPresent(pSlash, dashT, hatQ));
 
         // All three arguments are present
         argsString = "Different Preamble String ^Q111 -t dashT-Value p/pSlash value";
@@ -96,6 +97,7 @@ public class ArgumentTokenizerTest {
         assertArgumentPresent(argMultimap, pSlash, "pSlash value");
         assertArgumentPresent(argMultimap, dashT, "dashT-Value");
         assertArgumentPresent(argMultimap, hatQ, "111");
+        assertTrue(argMultimap.arePrefixesPresent(pSlash, dashT, hatQ));
 
         /* Also covers: Reusing of the tokenizer multiple times */
 
@@ -124,6 +126,7 @@ public class ArgumentTokenizerTest {
         assertArgumentPresent(argMultimap, pSlash, "pSlash value");
         assertArgumentPresent(argMultimap, dashT, "dashT-Value", "another dashT value", "");
         assertArgumentPresent(argMultimap, hatQ, "", "");
+        assertTrue(argMultimap.arePrefixesPresent(pSlash, dashT, hatQ));
     }
 
     @Test

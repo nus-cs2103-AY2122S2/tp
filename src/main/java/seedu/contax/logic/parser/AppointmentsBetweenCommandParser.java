@@ -32,7 +32,7 @@ public class AppointmentsBetweenCommandParser implements Parser<AppointmentsBetw
                 ArgumentTokenizer.tokenize(args, PREFIX_DATE_START, PREFIX_TIME_START,
                         PREFIX_DATE_END, PREFIX_TIME_END);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_DATE_START, PREFIX_TIME_START, PREFIX_DATE_END,
+        if (!argMultimap.arePrefixesPresent(PREFIX_DATE_START, PREFIX_TIME_START, PREFIX_DATE_END,
                 PREFIX_TIME_END) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AppointmentsBetweenCommand.MESSAGE_USAGE));
@@ -56,13 +56,4 @@ public class AppointmentsBetweenCommandParser implements Parser<AppointmentsBetw
 
         return new AppointmentsBetweenCommand(startDateTime, endDateTime);
     }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
-
 }
