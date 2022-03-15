@@ -9,6 +9,8 @@ import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.UniqueContactList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.testresult.TestResult;
+import seedu.address.model.testresult.UniqueTestResultList;
 
 /**
  * Wraps all data at the address-book level
@@ -18,6 +20,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
     private final UniqueContactList contacts;
+    private final UniqueTestResultList testResults;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -29,6 +32,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         persons = new UniquePersonList();
         contacts = new UniqueContactList();
+        testResults = new UniqueTestResultList();
     }
 
     public AddressBook() {}
@@ -59,6 +63,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         setPersons(newData.getPersonList());
         setContacts(newData.getContactList());
+        setTestResults(newData.getTestResultList());
     }
 
     //// person-level operations
@@ -146,10 +151,57 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     //// util methods
 
+    /**
+     * Replaces the contents of the test results list with {@code testResults}.
+     * {@code testResults} must not contain duplicate test results.
+     */
+    public void setTestResults(List<TestResult> testResults) {
+        this.testResults.setTestResults(testResults);
+    }
+
+    //// contact-level operations
+
+    /**
+     * Returns true if a test result with the same identity as {@code testResult} exists in the address book.
+     */
+    public boolean hasTestResult(TestResult testResult) {
+        requireNonNull(testResult);
+        return testResults.contains(testResult);
+    }
+
+    /**
+     * Adds a test result to the address book.
+     * The test result must not already exist in the address book.
+     */
+    public void addTestResult(TestResult testResult) {
+        testResults.add(testResult);
+    }
+
+    /**
+     * Replaces the given test result {@code target} in the list with {@code editedTestResults}.
+     * {@code target} must exist in the address book.
+     * The test result identity of {@code editedTestResults} must not be the same
+     * as another existing test result in the address book.
+     */
+    public void setTestResults(TestResult target, TestResult editedTestResults) {
+        requireNonNull(editedTestResults);
+
+        testResults.setTestResult(target, editedTestResults);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeTestResult(TestResult key) {
+        testResults.remove(key);
+    }
+
     @Override
     public String toString() {
         return persons.asUnmodifiableObservableList().size() + " persons"
-                + contacts.asUnmodifiableObservableList().size() + " contacts";
+                + contacts.asUnmodifiableObservableList().size() + " contacts"
+                + testResults.asUnmodifiableObservableList().size() + " test results";
         // TODO: refine later
     }
 
@@ -165,11 +217,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
+    public ObservableList<TestResult> getTestResultList() {
+        return testResults.asUnmodifiableObservableList();
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
                 && persons.equals(((AddressBook) other).persons))
-                && contacts.equals(((AddressBook) other).contacts);
+                && contacts.equals(((AddressBook) other).contacts)
+                && testResults.equals(((AddressBook) other).testResults);
     }
 
     @Override

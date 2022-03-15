@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.person.Person;
+import seedu.address.model.testresult.TestResult;
 
 /**
  * The API of the Model component.
@@ -15,6 +16,7 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
     Predicate<Contact> PREDICATE_SHOW_ALL_CONTACTS = unused -> true;
+    Predicate<TestResult> PREDICATE_SHOW_ALL_TEST_RESULTS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -125,4 +127,38 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredContactList(Predicate<Contact> predicate);
+
+    /**
+     * Returns true if a test result with the same identity as {@code testResult} exists in the address book.
+     */
+    boolean hasTestResult(TestResult testResult);
+
+    /**
+     * Deletes the given test result.
+     * The test result must exist in the address book.
+     */
+    void deleteTestResult(TestResult testResult);
+
+    /**
+     * Adds the given test result.
+     * {@code testResult} must not already exist in the address book.
+     */
+    void addTestResult(TestResult testResult);
+
+    /**
+     * Replaces the given testResult {@code target} with {@code editedTestResult}.
+     * {@code target} must exist in the address book.
+     * The test result identity of {@code editedTestResult} must not be the same
+     * as another existing test result in the address book.
+     */
+    void setTestResult(TestResult target, TestResult editedTestResult);
+
+    /** Returns an unmodifiable view of the filtered contact list */
+    ObservableList<TestResult> getFilteredTestResultList();
+
+    /**
+     * Updates the filter of the filtered test result list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredTestResultList(Predicate<TestResult> predicate);
 }
