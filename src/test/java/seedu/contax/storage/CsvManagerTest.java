@@ -2,7 +2,10 @@ package seedu.contax.storage;
 
 import static seedu.contax.logic.commands.CommandTestUtil.assertCommandSuccess;
 
+import java.nio.file.Path;
+
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import seedu.contax.logic.commands.ExportCsvCommand;
 import seedu.contax.logic.commands.ImportCsvCommand;
@@ -33,12 +36,14 @@ public class CsvManagerTest {
     private static final String PERSON3_ADDRESS = "Example address, with comma";
 
     private static final String EXISTING_FILEPATH = "./src/test/data/ExportCsvTest/ValidAddressBook.csv";
-    private static final String NONEXISTANT_FILEPATH = "./src/test/data/ExportCsvTest/nonExistentFile.csv";
+    private static final String NONEXISTANT_FILEPATH = "./nonExistentFile.csv";
     private static final String COMMA_FILEPATH = "./src/test/data/ExportCsvTest/addressWithComma.csv";
     private static final String NOTAG_FILEPATH = "./src/test/data/ExportCsvTest/noTags.csv";
 
     private Model model = new ModelManager(new AddressBook(), new Schedule(), new UserPrefs());
 
+    @TempDir
+    public Path testFolder;
 
     @Test
     public void exportThenImportCsv_validAddressBook_success() throws CommandException {
@@ -76,9 +81,10 @@ public class CsvManagerTest {
                 .withAddress(PERSON2_ADDRESS).withTags("tag1");
         model.addPerson(personBuilder2.build());
 
-        ExportCsvCommand exportCsvCommand = new ExportCsvCommand(NONEXISTANT_FILEPATH);
+        String tempFilePath = testFolder.resolve(NONEXISTANT_FILEPATH).toAbsolutePath().toString();
+        ExportCsvCommand exportCsvCommand = new ExportCsvCommand(tempFilePath);
         exportCsvCommand.execute(model);
-        IndexedCsvFile importBack = new ImportCsvObjectBuilder(NONEXISTANT_FILEPATH).build();
+        IndexedCsvFile importBack = new ImportCsvObjectBuilder(tempFilePath).build();
         ImportCsvCommand importCsvCommand = new ImportCsvCommand(importBack);
         //Build empty resultant model
         Model resultantModel = new ModelManager(new AddressBook(), new Schedule(), new UserPrefs());
