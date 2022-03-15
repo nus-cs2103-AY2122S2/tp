@@ -32,18 +32,18 @@ public class DeleteCommand extends Command {
             + " INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD
             + TYPE_STUDENT + " 1\n"
-            + "2. Adds a module: "
+            + "2. Deletes a module: "
             + "Parameter: " + TYPE_MODULE
             + " INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD
             + TYPE_MODULE + " 1\n"
-            + "3. Adds a class group: "
+            + "3. Deletes a class group: "
             + "Parameters: " + TYPE_CLASS
             + " INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD
             + TYPE_CLASS + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Entity: %1$s";
+    public static final String MESSAGE_DELETE_ENTITY_SUCCESS = "Deleted Entity: %1$s";
 
     private final Index targetIndex;
     private final EntityType entityType;
@@ -69,21 +69,21 @@ public class DeleteCommand extends Command {
 
         case STUDENT:
             if (targetIndex.getZeroBased() >= lastShownStudentList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
             }
             entityToDelete = lastShownStudentList.get(targetIndex.getZeroBased());
             break;
 
         case TA_MODULE:
             if (targetIndex.getZeroBased() >= lastShownModuleList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                throw new CommandException(Messages.MESSAGE_INVALID_TA_MODULE_DISPLAYED_INDEX);
             }
             entityToDelete = lastShownModuleList.get(targetIndex.getZeroBased());
             break;
 
         case CLASS_GROUP:
             if (targetIndex.getZeroBased() >= lastShownClassGroupList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                throw new CommandException(Messages.MESSAGE_INVALID_CLASS_GROUP_DISPLAYED_INDEX);
             }
             entityToDelete = lastShownClassGroupList.get(targetIndex.getZeroBased());
             break;
@@ -93,7 +93,7 @@ public class DeleteCommand extends Command {
         }
 
         model.deleteEntity(entityToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, entityToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_ENTITY_SUCCESS, entityToDelete));
     }
 
     @Override

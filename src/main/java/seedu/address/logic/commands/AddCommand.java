@@ -56,7 +56,7 @@ public class AddCommand extends Command {
             + PREFIX_MODULE_INDEX + "1 ";
 
     public static final String MESSAGE_SUCCESS = "New entity added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This entity already exists in TAssist";
+    public static final String MESSAGE_DUPLICATE_ENTITY = "This entity already exists in TAssist";
 
     private final Entity toAdd;
 
@@ -73,7 +73,7 @@ public class AddCommand extends Command {
         requireNonNull(model);
 
         if (model.hasEntity(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON); // TODO: Update Command Exception
+            throw new CommandException(MESSAGE_DUPLICATE_ENTITY); // TODO: Update Command Exception
         }
 
         model.addEntity(toAdd);
