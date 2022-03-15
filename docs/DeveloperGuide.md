@@ -566,3 +566,4 @@ testers are expected to do more *exploratory* testing.
 
 
 1. _{ more test cases …​ }_
+
