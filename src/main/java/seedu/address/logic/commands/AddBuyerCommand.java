@@ -54,11 +54,11 @@ public class AddBuyerCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasClient(toAdd)) {
+        if (model.hasBuyer(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_CLIENT);
         }
 
-        model.addClient(toAdd);
+        model.addBuyer(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
