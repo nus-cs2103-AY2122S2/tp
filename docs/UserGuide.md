@@ -97,6 +97,7 @@ A client's data can be added in the future through edit command
 </div>
 
 * `d/DATE` will be set to today's date by default if not specified.
+  * `DATE` has to be in the format **YYYY-MM-DD**.
 * `i/INFO` will be set to `No further info` by default if not specified.
 * `t/TAG` will be empty by default if not specified.
 * `f/FLAG` will be set to `false` by default if not specified.
@@ -118,38 +119,27 @@ Flag a person in the HustleBook to mark them as important. Can also be used to u
 Format: `flag INDEX f/FLAG`
 
 * `FLAG` input should either be true or false.
-* `True` or `False` is not case-sensitive
+* `True` or `False` is not case-sensitive.
 
 ### Editing a person : `edit`
 
 Edits an existing person in the HustleBook.
 
-* Using **Name**:
+Format: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [i/INFO] [d/DATE] [t/TAG]…​`
 
-  Format: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [i/INFO] [d/DATE] [t/TAG]…​`
+* Edits the person named `NAME`.
+  * `Name` is case-insensitive. E.g. `John` will match `john`.
+  * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
+  * Only full words will be matched e.g. `Han` will not match `Hans`.
+* `DATE` has to be in the format **YYYY-MM-DD**.
+* **At least one** of the optional fields must be provided.
+* Existing values will be updated with the input values.
+* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* You can remove all the person’s tags by typing `t/` without specifying any tags after it.
+* You can remove the person's info by typing `i/` without specifying any info after it.
 
-  * Edits the person named `NAME`.
-  * At least one of the optional fields must be provided.
-  * Existing values will be updated to the input values.
-  * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-  * You can remove all the person’s tags by typing `t/` without
-      specifying any tags after it.
-  * You can remove the person's info by typing `i/` without specifying any info after it.
-
-    Examples:
-    * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-    * `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-
-
-* Using **Name**:
-
-    Format: `edit n/NAME d/NEW_DATE`
-
-  * Edits the meeting date of the person with the specified name.
-  * Date has to be in the format **DD-MM-YYYY**.
-  
-    Examples:
-    * `edit n/John Doe d/04-12-2020` Edits the meeting date of the person with the name `John Doe` to `04-12-2020` which is 4th Dec 2020. 
+Example:
+* `edit n/John Doe d/2020-12-04` Edits the meeting date of the person with the name `John Doe` to `2020-12-04` which is 4th Dec 2020.
 
 ### Locating persons by name : `find`
 
@@ -157,10 +147,10 @@ Finds persons whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The search is case-insensitive. e.g `hans` will match `Hans`.
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Only full words will be matched e.g. `Han` will not match `Hans`.
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
@@ -178,9 +168,12 @@ Deletes the specified person from the HustleBook.
 Format: `delete NAME`
 
 * Deletes the person with the specified `NAME`.
+    * `Name` is case-insensitive. e.g. `John` will match `john`.
+    * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
+    * Only full words will be matched e.g. `Han` will not match `Hans`.
 * In the event of multiple clients found with the same `NAME`, the first occurrence of the client in the list will be deleted.
   
-Examples: 
+Example: 
 * `delete John` deletes the person named `John` in the HustleBook.
 
 ### Clearing all entries : `clear`
