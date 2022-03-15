@@ -31,6 +31,11 @@ public class Date {
         return parsedDate;
     }
 
+    /**
+     * Validates the format of date provided.
+     * @param date String representation of date.
+     * @return true if date is in the correct parsable format, false otherwise.
+     * */
     public static boolean validCheckDate(String date) {
         SimpleDateFormat sdfrmt = new SimpleDateFormat("yyyy-MM-dd");
         sdfrmt.setLenient(false);
