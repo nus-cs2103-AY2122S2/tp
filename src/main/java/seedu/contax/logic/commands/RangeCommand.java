@@ -14,6 +14,7 @@ import seedu.contax.commons.core.Messages;
 import seedu.contax.commons.core.index.Index;
 import seedu.contax.logic.commands.exceptions.CommandException;
 import seedu.contax.logic.parser.AddressBookParser;
+import seedu.contax.logic.parser.ParserUtil;
 import seedu.contax.logic.parser.exceptions.ParseException;
 import seedu.contax.model.Model;
 
@@ -39,7 +40,7 @@ public class RangeCommand extends Command {
     /**
      * @param fromIndex              of the person in the filtered person list to edit
      * @param toIndex                of the person in the filtered person list to edit
-     * @param commandInput            details to word of command
+     * @param commandInput           details to word of command
      */
     public RangeCommand(Index fromIndex, Index toIndex, String commandInput) {
         requireNonNull(fromIndex);
@@ -59,7 +60,7 @@ public class RangeCommand extends Command {
         for (int i = toIndex.getOneBased(); i >= fromIndex.getOneBased(); i--) {
             AddressBookParser addressBookParser = new AddressBookParser();
             try {
-                String commandText = createNewCommand(commandInput, Integer.toString(i));
+                String commandText = ParserUtil.parseAndCreateNewCommand(commandInput, Integer.toString(i));
                 Command command = addressBookParser.parseCommand(commandText);
                 commandResultList.add(command.execute(model));
             } catch (ParseException pe) {
@@ -73,16 +74,7 @@ public class RangeCommand extends Command {
         return new CommandResult(resultOutput.toString());
     }
 
-    private String createNewCommand(String commandInput, String index) {
-        StringBuilder output = new StringBuilder();
-        commandInput = commandInput.trim();
-        String[] splitCommand = commandInput.split(" ");
-        output.append(splitCommand[0]).append(" ").append(index).append(" ");
-        if (commandInput.contains(" ")) {
-            output.append(commandInput.substring(commandInput.indexOf(" ")));
-        }
-        return output.toString();
-    }
+
 
     @Override
     public boolean equals(Object other) {

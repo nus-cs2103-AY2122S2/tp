@@ -238,4 +238,23 @@ public class ParserUtil {
 
         return new Duration(convertedDuration);
     }
+
+    /**
+     * Parses a {@code String commandInput} into a {@code output} that command with index.
+     *
+     * @throws ParseException if the given {@code commandInput} is empty.
+     */
+    public static String parseAndCreateNewCommand(String commandInput, String index) throws ParseException {
+        if (commandInput.trim().isEmpty()) {
+            throw new ParseException(Duration.MESSAGE_CONSTRAINTS);
+        }
+        StringBuilder output = new StringBuilder();
+        commandInput = commandInput.trim();
+        String[] splitCommand = commandInput.split(" ");
+        output.append(splitCommand[0]).append(" ").append(index).append(" ");
+        if (commandInput.contains(" ")) {
+            output.append(commandInput.substring(splitCommand[0].length()));
+        }
+        return output.toString();
+    }
 }

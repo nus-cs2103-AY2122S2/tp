@@ -10,6 +10,7 @@ import seedu.contax.logic.commands.AddAppointmentCommand;
 import seedu.contax.logic.commands.AddCommand;
 import seedu.contax.logic.commands.AddTagCommand;
 import seedu.contax.logic.commands.AppointmentsBetweenCommand;
+import seedu.contax.logic.commands.BatchCommand;
 import seedu.contax.logic.commands.ChainCommand;
 import seedu.contax.logic.commands.ClearCommand;
 import seedu.contax.logic.commands.Command;
@@ -128,6 +129,10 @@ public class AddressBookParser {
         // Command chaining
         case ChainCommand.COMMAND_WORD:
             return new ChainCommandParser().parse(arguments);
+
+        // Batch Command
+        case BatchCommand.COMMAND_WORD:
+            return new BatchCommandParser().parse(arguments);
 
 
         default:
