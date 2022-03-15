@@ -8,7 +8,6 @@ import static seedu.contax.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
-import java.util.stream.Stream;
 
 import seedu.contax.logic.commands.AddCommand;
 import seedu.contax.logic.parser.exceptions.ParseException;

@@ -7,8 +7,6 @@ import static seedu.contax.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_PERSON;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_TIME;
 
-import java.util.stream.Stream;
-
 import seedu.contax.commons.core.index.Index;
 import seedu.contax.logic.commands.AddAppointmentCommand;
 import seedu.contax.logic.parser.exceptions.ParseException;

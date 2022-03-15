@@ -3,8 +3,6 @@ package seedu.contax.logic.parser;
 import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_NAME;
 
-import java.util.stream.Stream;
-
 import seedu.contax.logic.commands.AddTagCommand;
 import seedu.contax.logic.parser.exceptions.ParseException;
 import seedu.contax.model.tag.Name;

@@ -1,11 +1,8 @@
 package seedu.contax.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.contax.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.contax.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.io.IOException;
 import java.nio.file.Path;
 
 import org.junit.jupiter.api.Test;
@@ -30,10 +27,10 @@ public class ExportCsvCommandTest {
 
     private static final String VALID_FILEPATH = "./ValidAddressBook.csv";
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new Schedule(), new UserPrefs());
-
     @TempDir
     Path testFolder;
+
+    private Model model = new ModelManager(getTypicalAddressBook(), new Schedule(), new UserPrefs());
 
     @Test
     public void execute_validPersonsInAddressBook_exportSuccessful() {

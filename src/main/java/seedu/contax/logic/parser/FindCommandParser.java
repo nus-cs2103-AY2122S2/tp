@@ -4,7 +4,6 @@ import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_SEARCH_TYPE;
 
 import java.util.Arrays;
-import java.util.stream.Stream;
 
 import seedu.contax.logic.commands.FindCommand;
 import seedu.contax.logic.parser.exceptions.ParseException;

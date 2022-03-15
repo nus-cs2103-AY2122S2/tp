@@ -10,7 +10,6 @@ import static seedu.contax.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.io.File;
 import java.util.HashSet;
-import java.util.stream.Stream;
 
 import seedu.contax.logic.commands.ImportCsvCommand;
 import seedu.contax.logic.parser.exceptions.ParseException;

@@ -40,10 +40,10 @@ public class CsvManagerTest {
     private static final String COMMA_FILEPATH = "./src/test/data/ExportCsvTest/addressWithComma.csv";
     private static final String NOTAG_FILEPATH = "./src/test/data/ExportCsvTest/noTags.csv";
 
-    private Model model = new ModelManager(new AddressBook(), new Schedule(), new UserPrefs());
-
     @TempDir
     public Path testFolder;
+
+    private Model model = new ModelManager(new AddressBook(), new Schedule(), new UserPrefs());
 
     @Test
     public void exportThenImportCsv_validAddressBook_success() throws CommandException {

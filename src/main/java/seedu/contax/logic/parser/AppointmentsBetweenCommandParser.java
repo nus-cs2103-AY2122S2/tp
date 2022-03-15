@@ -10,7 +10,6 @@ import static seedu.contax.logic.parser.CliSyntax.PREFIX_TIME_START;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.stream.Stream;
 
 import seedu.contax.commons.util.DateUtil;
 import seedu.contax.logic.commands.AppointmentsBetweenCommand;
