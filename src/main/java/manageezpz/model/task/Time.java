@@ -21,7 +21,12 @@ public class Time {
     }
 
     public static boolean isValidTime(String time) {
-        return time.matches(VALIDATION_REGEX);
+        return time.matches(VALIDATION_REGEX) && checkTimeRange(time);
+    }
+
+    public static boolean checkTimeRange(String time) {
+        int timeInInt = Integer.parseInt(time);
+        return (timeInInt >= 0 && timeInInt <= 2359);
     }
 
     public String getTime() {
