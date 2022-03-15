@@ -11,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.logic.commands.SortCommand;
@@ -36,21 +37,55 @@ public class SortCommandParser implements Parser<SortCommand> {
                 PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_STATUS, PREFIX_TAG);
 
         if (prefixes.size() == 0) {
-            throw new ParseException(MESSAGE_NO_PARAMETERS_SUPPLIED);
+            throw new ParseException(String.format(MESSAGE_NO_PARAMETERS_SUPPLIED, SortCommand.MESSAGE_USAGE));
         }
 
         if (!argMultimap.getPreamble().equals("")) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
 
+        String successField = formatFields(prefixes);
+
         if (argMultimap.getValue(PREFIX_ORDER).isPresent()) {
             String order = argMultimap.getValue(PREFIX_ORDER).get().toLowerCase();
             if (!order.equals("asc") && !order.equals("desc")) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
             }
-            return new SortCommand(prefixes, order);
+            String formattedOrder = order.equals("asc") ? "ascending" : "descending";
+            return new SortCommand(prefixes, formattedOrder, successField);
         }
 
-        return new SortCommand(prefixes, "asc");
+        return new SortCommand(prefixes, "ascending", successField);
+    }
+
+    /**
+     * Formats the fields to be displayed in the success message
+     * @param fields the list of prefixes to be displayed
+     * @return the formatted success message
+     */
+    public static String formatFields(List<Prefix> fields) throws ParseException {
+        List<String> formattedFields = new ArrayList<>();
+        for (Prefix field : fields) {
+            formattedFields.add(formatPrefix(field));
+        }
+        return formattedFields.toString();
+    }
+
+    private static String formatPrefix(Prefix prefix) throws ParseException {
+        if (prefix.equals(PREFIX_NAME)) {
+            return "Name";
+        } else if (prefix.equals(PREFIX_PHONE)) {
+            return "Phone";
+        } else if (prefix.equals(PREFIX_EMAIL)) {
+            return "Email";
+        } else if (prefix.equals(PREFIX_ADDRESS)) {
+            return "Address";
+        } else if (prefix.equals(PREFIX_STATUS)) {
+            return "Status";
+        } else if (prefix.equals(PREFIX_TAG)) {
+            return "Module";
+        } else {
+            throw new ParseException("Prefix is not supported");
+        }
     }
 }

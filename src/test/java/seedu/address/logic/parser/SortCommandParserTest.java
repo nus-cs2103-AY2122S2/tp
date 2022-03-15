@@ -14,24 +14,30 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.SortCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 class SortCommandParserTest {
     private SortCommandParser parser = new SortCommandParser();
 
     @Test
     public void parse_validArgs_returnsClearModulesCommand() {
-        List<Prefix> prefixes = new ArrayList<>();
-        prefixes.add(PREFIX_NAME);
-        prefixes.add(PREFIX_EMAIL);
-        prefixes.add(PREFIX_PHONE);
-        SortCommand correctCommand = new SortCommand(prefixes, "desc");
-        assertParseSuccess(parser, " n/ e/ p/ o/desc", correctCommand);
+        try {
+            List<Prefix> prefixes = new ArrayList<>();
+            prefixes.add(PREFIX_NAME);
+            prefixes.add(PREFIX_EMAIL);
+            prefixes.add(PREFIX_PHONE);
+            SortCommand correctCommand = new SortCommand(prefixes,
+                    "descending", SortCommandParser.formatFields(prefixes));
+            assertParseSuccess(parser, " n/ e/ p/ o/desc", correctCommand);
+        } catch (ParseException e) {
+            assert false;
+        }
     }
 
     @Test
     public void parse_noArgs_returnsClearModulesCommand() {
         assertParseFailure(parser, "",
-                MESSAGE_NO_PARAMETERS_SUPPLIED);
+                String.format(MESSAGE_NO_PARAMETERS_SUPPLIED, SortCommand.MESSAGE_USAGE));
     }
 
     @Test
