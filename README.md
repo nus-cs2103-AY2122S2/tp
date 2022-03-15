@@ -9,7 +9,7 @@
   * keep track of pet dietary requirements
   * keep track of pet attendance
 * The project simulates an ongoing software project for a desktop application (called _WoofAreYou_) used for managing pet administrative details.
-  * It is **written in OOP fashion**. 
+  * It is **written in OOP fashion**.
   * It comes with a **reasonable level of user and developer documentation**.
 * For the detailed documentation of this project, see the **[WoofAreYou Product Website](https://ay2122s2-cs2103t-t13-1.github.io/tp/)**.
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).

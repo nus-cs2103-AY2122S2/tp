@@ -91,4 +91,5 @@ public class AppointmentCommand extends Command {
         return index.equals(e.index)
                 && appointment.equals(e.appointment);
     }
+
 }

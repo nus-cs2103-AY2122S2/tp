@@ -72,12 +72,12 @@ public class AddressBookParser {
 
         case DietCommand.COMMAND_WORD:
             return new DietCommandParser().parse(arguments);
-            
-        case AppointmentCommand.COMMAND_WORD:
-            return new AppointmentCommandParser().parse(arguments);
 
         case SortCommand.COMMAND_WORD:
             return new SortCommandParser().parse(arguments);
+
+        case AppointmentCommand.COMMAND_WORD:
+            return new AppointmentCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

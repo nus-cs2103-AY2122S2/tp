@@ -129,4 +129,5 @@ class AppointmentCommandTest {
         assertFalse(standardCommand.equals(new AppointmentCommand(INDEX_FIRST_PET,
                 new Appointment(VALID_APPOINTMENT_BOB))));
     }
+
 }
