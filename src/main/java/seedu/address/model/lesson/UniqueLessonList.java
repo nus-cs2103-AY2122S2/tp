@@ -46,13 +46,11 @@ public class UniqueLessonList implements Iterable<Lesson> {
      */
     public Lesson findLessonConflictingWith(Lesson toCheck) {
         requireNonNull(toCheck);
-
         for (Lesson existingLesson : internalList) {
             if (existingLesson.isConflictingWithLesson(toCheck)) {
                 return existingLesson;
             }
         }
-
         return null;
     }
 
@@ -77,6 +75,19 @@ public class UniqueLessonList implements Iterable<Lesson> {
     public void assignStudent(Student student, Index lessonId) {
         requireAllNonNull(student, lessonId);
         internalList.get(lessonId.getZeroBased()).assignStudent(student);
+    }
+
+    /**
+     * Unassigns the student from the lesson's enrolled students.
+     * @param student the student that is being deleted
+     */
+    public void unassignStudent(Student student) {
+        requireNonNull(student);
+        for (Lesson lesson: internalList) {
+            if (lesson.hasAlreadyAssigned(student)) {
+                lesson.unassignStudent(student);
+            }
+        }
     }
 
     /**

@@ -15,7 +15,7 @@ public class AssignCommandParser implements Parser<AssignCommand> {
 
         if (CheckPrefixes.arePrefixesAbsent(argMultiMap, PREFIX_STUDENT, PREFIX_LESSON)
                 || !argMultiMap.getPreamble().isEmpty()) {
-            throw new ParseException("test");
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignCommand.MESSAGE_USAGE));
         }
         try {
             Index lessonIndex = ParserUtil.parseIndex(argMultiMap.getValue(PREFIX_LESSON).get());

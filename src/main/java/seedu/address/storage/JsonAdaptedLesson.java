@@ -12,6 +12,7 @@ import seedu.address.model.lesson.DateTimeSlot;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonAddress;
 import seedu.address.model.lesson.LessonName;
+import seedu.address.model.lesson.RecurringLesson;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.lesson.TemporaryLesson;
 import seedu.address.model.student.Student;
@@ -27,6 +28,7 @@ class JsonAdaptedLesson {
     private final String subject;
     private final String lessonAddress;
     private final JsonAdaptedDateTimeSlot dateTimeSlot;
+    private final boolean isRecurring;
     private final List<JsonAdaptedStudent> assignedStudents = new ArrayList<>();
 
     /**
@@ -37,11 +39,13 @@ class JsonAdaptedLesson {
                              @JsonProperty("subject") String subject,
                              @JsonProperty("address") String address,
                              @JsonProperty("dateTimeSlot") JsonAdaptedDateTimeSlot dateTimeSlot,
+                             @JsonProperty("isRecurring") Boolean isRecurring,
                              @JsonProperty("assignedStudents") List<JsonAdaptedStudent> assignedStudents) {
         this.lessonName = lessonName;
         this.subject = subject;
         this.lessonAddress = address;
         this.dateTimeSlot = dateTimeSlot;
+        this.isRecurring = isRecurring;
         if (assignedStudents != null) {
             this.assignedStudents.addAll(assignedStudents);
         }
@@ -55,6 +59,7 @@ class JsonAdaptedLesson {
         this.subject = source.getSubject().subjectName;
         this.lessonAddress = source.getLessonAddress().value;
         this.dateTimeSlot = new JsonAdaptedDateTimeSlot(source.getDateTimeSlot());
+        this.isRecurring = source instanceof RecurringLesson;
         this.assignedStudents.addAll(source.getEnrolledStudents().getStudentsList().stream()
                 .map(JsonAdaptedStudent::new)
                 .collect(Collectors.toList()));
@@ -65,7 +70,7 @@ class JsonAdaptedLesson {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted temporary lesson.
      */
-    public TemporaryLesson toModelType() throws IllegalValueException {
+    public Lesson toModelType() throws IllegalValueException {
         if (lessonName == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     LessonName.class.getSimpleName()));
@@ -103,8 +108,12 @@ class JsonAdaptedLesson {
         for (JsonAdaptedStudent student : assignedStudents) {
             modelAssignedStudents.add(student.toModelType());
         }
-
-        return Lesson.makeTemporaryLesson(modelLessonName, modelSubject, modelLessonAddress,
-                modelDateTimeSlot, modelAssignedStudents);
+        if (this.isRecurring) {
+            return Lesson.makeRecurringLesson(modelLessonName, modelSubject, modelLessonAddress,
+                    modelDateTimeSlot, modelAssignedStudents);
+        } else {
+            return Lesson.makeTemporaryLesson(modelLessonName, modelSubject, modelLessonAddress,
+                    modelDateTimeSlot, modelAssignedStudents);
+        }
     }
 }

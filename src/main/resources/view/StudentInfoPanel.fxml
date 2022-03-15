@@ -15,7 +15,7 @@
    <Label fx:id="address" style="-fx-text-fill: WHITE;" styleClass="cell_small_label" text="\$address" />
    <Label fx:id="email" style="-fx-text-fill: WHITE;" styleClass="cell_small_label" text="\$email" />
    <VBox fx:id="class_list" prefHeight="200.0" prefWidth="100.0" spacing="2.0" VBox.vgrow="ALWAYS">
-      <Label style="-fx-text-fill: WHITE;" styleClass="cell_big_label" text="Assigned Lessons:" />
+      <Label style="-fx-text-fill: WHITE;" styleClass="cell_big_label" text="Lessons:" />
       <StackPane prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <ListView fx:id="assignedLessonList" prefHeight="50.0" prefWidth="50.0" />
       </StackPane>

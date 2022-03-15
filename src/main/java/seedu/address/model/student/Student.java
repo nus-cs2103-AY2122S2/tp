@@ -86,6 +86,9 @@ public class Student {
         enrolledLessons.addLesson(lesson);
     }
 
+    public void unassignLesson(Lesson lesson) {
+        enrolledLessons.getLessonsList().remove(lesson);
+    }
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.

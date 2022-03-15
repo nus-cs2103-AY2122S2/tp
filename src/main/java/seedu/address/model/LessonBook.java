@@ -80,6 +80,10 @@ public class LessonBook implements ReadOnlyLessonBook {
         lessons.assignStudent(student, lessonId);
     }
 
+    public void unasssignStudent(Student student) {
+        lessons.unassignStudent(student);
+    }
+
     /**
      * Replaces the given lesson {@code target} in the list with {@code editedLesson}.
      * {@code target} must exist in the address book.

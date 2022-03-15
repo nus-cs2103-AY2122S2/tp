@@ -96,6 +96,18 @@ public class DateTimeSlot {
                 && (currentTimeSlotEnd.isAfter(otherTimeSlotStart) || currentTimeSlotEnd.equals(otherTimeSlotStart));
     }
 
+    public LocalDateTime getDateOfLesson() {
+        return dateOfLesson;
+    }
+
+    public int getHours() {
+        return hours;
+    }
+
+    public int getMinutes() {
+        return minutes;
+    }
+
     /**
      * Get the date and time at which the lesson ends.
      */

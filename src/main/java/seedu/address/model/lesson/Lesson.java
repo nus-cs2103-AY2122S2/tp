@@ -114,6 +114,7 @@ public abstract class Lesson {
         );
     }
 
+
     /**
      * Creates a new instance of a non-recurring lesson.
      * @param name lesson name
@@ -148,6 +149,52 @@ public abstract class Lesson {
         );
     }
 
+    /**
+     * Creates a new instance of a recurring lesson.
+     * @param name lesson name
+     * @param subject what subject would be taught during the lesson
+     * @param address where the lesson would be conducted
+     * @param dateTimeSlot an object encapsulating a lesson's start date, starting time and duration.
+     */
+    public static RecurringLesson makeRecurringLesson(LessonName name, Subject subject, LessonAddress address,
+                                                      DateTimeSlot dateTimeSlot, List<Student> enrolledStudents) {
+
+        return new RecurringLesson(
+                name,
+                subject,
+                address,
+                dateTimeSlot,
+                new EnrolledStudents(enrolledStudents)
+        );
+    }
+
+
+    /**
+     * Creates a new instance of a recurring lesson.
+     * @param name lesson name
+     * @param subject what subject would be taught during the lesson
+     * @param address where the lesson would be conducted
+     * @param dateOfLesson start date of the lesson
+     * @param startTime starting time of the lesson
+     * @param hours how long the lesson would last
+     * @param minutes how long the lesson would last
+     */
+    public static RecurringLesson makeRecurringLesson(String name, String subject, String address,
+                                                      LocalDate dateOfLesson, String startTime,
+                                                      int hours, int minutes) {
+        LessonName lessonName = new LessonName(name);
+        Subject lessonSubject = new Subject(subject);
+        DateTimeSlot lessonDateTimeSlot = new DateTimeSlot(dateOfLesson, startTime, hours, minutes);
+        LessonAddress lessonAddress = new LessonAddress(address);
+
+        return new RecurringLesson(
+                lessonName,
+                lessonSubject,
+                lessonAddress,
+                lessonDateTimeSlot
+        );
+    }
+
     public LessonName getName() {
         return name;
     }
@@ -170,6 +217,16 @@ public abstract class Lesson {
 
     public boolean hasAlreadyAssigned(Student student) {
         return enrolledStudents.hasEnrolled(student);
+    }
+
+    /**
+     * Unassigns the student from the lesson's enrolled students.
+     * @param student the student that is being deleted
+     */
+    public void unassignStudent(Student student) {
+        if (enrolledStudents.getStudentsList().contains(student)) {
+            enrolledStudents.getStudentsList().remove(student);
+        }
     }
 
     /**
