@@ -27,7 +27,7 @@ public class Transaction implements Serializable {
      * Person constructor
      * @param fields A collection of all the person's attributes
      */
-    public Transaction(Collection<Field> fields) {
+    public Transaction(Collection<TransactionField> fields) {
         requireAllNonNull(fields);
 
         // Add fields.

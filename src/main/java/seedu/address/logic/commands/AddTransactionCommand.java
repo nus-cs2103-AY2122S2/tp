@@ -22,7 +22,7 @@ public class AddTransactionCommand extends Command {
     private final Index index;
     private final Transaction transaction;
 
-    AddTransactionCommand(Index index, Transaction transaction) {
+    public AddTransactionCommand(Index index, Transaction transaction) {
         this.index = index;
         this.transaction = transaction;
     }
