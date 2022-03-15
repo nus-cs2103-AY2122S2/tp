@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static java.util.Objects.requireNonNullElse;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SORTKEY;
 
 import java.util.Comparator;
@@ -34,6 +35,9 @@ public class SortCommand extends Command {
      * @param sortKey contains the valid sort key for equality state check
      */
     public SortCommand(Comparator<Person> sortComparator, String sortKey) {
+        requireNonNull(sortComparator);
+        requireNonNull(sortKey);
+
         this.sortComparator = sortComparator;
         this.sortKey = sortKey;
     }
