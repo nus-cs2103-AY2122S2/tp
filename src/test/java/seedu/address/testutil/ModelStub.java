@@ -109,4 +109,9 @@ public class ModelStub implements Model {
     public void updateFilteredGroupList(Predicate<Group> predicate) {
 
     }
+
+    @Override
+    public void assignPerson(Person personToAssign, Group group) {
+        throw new AssertionError("This method should not be called.");
+    }
 }

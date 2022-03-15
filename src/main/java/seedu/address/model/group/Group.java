@@ -53,7 +53,7 @@ public class Group {
         return persons.contains(person);
     }
 
-    public List<Person> getPersons() {
+    public Set<Person> getPersons() {
         return this.persons;
     }
 
