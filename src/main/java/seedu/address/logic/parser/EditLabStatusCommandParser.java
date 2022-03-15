@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LABSTATUS;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditLabStatusCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.lab.LabStatus;
@@ -30,7 +29,7 @@ public class EditLabStatusCommandParser implements Parser<EditLabStatusCommand> 
 
         if (!arePrefixesPresent(argMultimap, PREFIX_LAB, PREFIX_LABSTATUS)
                 || argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditLabStatusCommand.MESSAGE_USAGE));
         }
 
         Index index;

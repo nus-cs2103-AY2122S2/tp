@@ -35,8 +35,7 @@ public class EditLabStatusCommand extends Command {
 
     // Edited status of Lab {LAB_NUMBER} for {PERSON_NAME} to {NEW_STATUS}
     public static final String MESSAGE_EDIT_LAB_STATUS_SUCCESS = "Edited status of Lab %1$s for %2$s to %3$s";
-    public static final String MESSAGE_INVALID_STATUS_CHANGE =
-            "The lab status provided is identical to the previous one";
+    public static final String MESSAGE_INVALID_STATUS_CHANGE = "New lab status provided is identical to previous";
     // add this to commons.core.Messages if it also applies to other commands
     public static final String MESSAGE_INVALID_LAB_NUMBER = "The lab number provided is invalid";
 
@@ -70,8 +69,6 @@ public class EditLabStatusCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         LabList listToEdit = personToEdit.getLabs();
 
-        // currently this makes use of the LabList#contains method which uses LabList#isSameLab for equality checks
-        // checks are done based on equality of lab number only
         try {
             listToEdit.setLab(listToEdit.getLabByLabNumber(labNumber),
                     new Lab(String.valueOf(labNumber)).of(newStatus));
