@@ -47,11 +47,12 @@ public class AddCommandParser implements Parser<AddCommand> {
         ArrayList<Field> fields = new ArrayList<>();
         for (Prefix p : FieldRegistry.PREFIXES) {
             Optional<String> argOpt = argMultimap.getValue(p);
-            if (argOpt.isPresent()) {
-                FieldParser<? extends Field> parser = FieldRegistry.PARSERS.get(p);
-                Field field = parser.parse(argOpt.get());
-                fields.add(field);
-            }//refactor
+            if (!argOpt.isPresent()) {
+                continue;
+            }
+            FieldParser<? extends Field> parser = FieldRegistry.PARSERS.get(p);
+            Field field = parser.parse(argOpt.get());
+            fields.add(field);
         }
 
         Person person = new Person(fields, tags);
