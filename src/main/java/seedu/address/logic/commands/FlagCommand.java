@@ -21,8 +21,8 @@ public class FlagCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Flags the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Parameters: INDEX (must be a positive integer), FLAG (must be true or false)\n"
+            + "Example: " + COMMAND_WORD + " 1" + " f/true";
 
     public static final String MESSAGE_FLAG_PERSON_SUCCESS = "Flagged Person: %1$s";
 
