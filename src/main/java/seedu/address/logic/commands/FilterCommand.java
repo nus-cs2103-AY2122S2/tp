@@ -6,7 +6,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.CovidStatus;
 
 /**
- * Lists all persons in the address book to the user.
+ * Lists all persons with a specified covid status in the address book to the user.
  */
 public class FilterCommand extends Command {
 
@@ -35,7 +35,7 @@ public class FilterCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(p -> p.isStatus(status));
+        model.updateFilteredPersonList(person -> person.isStatus(status));
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
