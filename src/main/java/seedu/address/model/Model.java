@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.entry.Company;
 import seedu.address.model.entry.Event;
 import seedu.address.model.entry.Person;
 
@@ -14,6 +15,7 @@ import seedu.address.model.entry.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Company> PREDICATE_SHOW_ALL_COMPANIES = unused -> true;
     Predicate<Event> PREDICATE_SHOW_ALL_EVENTS = unused -> true;
 
     /**
@@ -88,6 +90,40 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
+     * Returns true if a company with the same identity as {@code company} exists in the address book.
+     */
+    boolean hasCompany(Company company);
+
+    /**
+     * Deletes the given company.
+     * The company must exist in the address book.
+     */
+    void deleteCompany(Company target);
+
+    /**
+     * Adds the given company.
+     * {@code company} must not already exist in the address book.
+     */
+    void addCompany(Company company);
+
+    /**
+     * Replaces the given company {@code target} with {@code editedCompany}.
+     * {@code target} must exist in the address book.
+     * The company identity of {@code editedCompany} must not be the same as another existing company
+     * in the address book.
+     */
+    void setCompany(Company target, Company editedCompany);
+
+    /** Returns an unmodifiable view of the filtered company list */
+    ObservableList<Company> getFilteredCompanyList();
+
+    /**
+     * Updates the filter of the filtered company list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredCompanyList(Predicate<Company> predicate);
+
+    /**
      * Returns true if an event with the same identity as {@code event} exists in the address book.
      */
     boolean hasEvent(Event event);
@@ -119,7 +155,4 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredEventList(Predicate<Event> predicate);
-
-
-
 }
