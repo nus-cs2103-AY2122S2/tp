@@ -13,7 +13,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 
 public class AddTagWindow extends UiPart<Stage> {
 
-    private static final String FXML = "addTagWindow.fxml";
+    private static final String FXML = "AddTagWindow.fxml";
     private Logic logic;
     private ResultDisplay resultDisplay;
 
