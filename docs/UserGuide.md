@@ -56,10 +56,10 @@ Examples:
 Retrieves a sorted list of pets. Users can choose to either sort them by owner name or pet name. 
 
 Format: `sort [FIRST_LETTER_OF_COLUMN]`
-* Since we can only sort the pet list by owner name or pet name, the only commands available currently are `sort o` and `sort n`.
+* Since we can only sort the pet list by owner name or pet name, the only commands available currently are `sort /o` and `sort /n`.
 
 Examples: 
-* `sort o`
+* `sort /o`
 
 
 ### Find pet details: `find`
