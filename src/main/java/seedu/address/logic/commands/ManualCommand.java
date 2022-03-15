@@ -53,10 +53,10 @@ public class ManualCommand extends Command {
         case ExitCommand.COMMAND_WORD:
             return new CommandResult(ManualMessages.MANUAL_MESSAGE_EXIT_COMMAND);
 
-        /* These commands have yet to be implemented. Will add them back once commands have been implemented.
-
         case TaskCommand.COMMAND_WORD:
             return new CommandResult(ManualMessages.MANUAL_MESSAGE_TASK_COMMAND);
+
+        /* These commands have yet to be implemented. Will add them back once commands have been implemented.
 
         case MarkCommand.COMMAND_WORD:
             return new CommandResult(ManualMessages.MANUAL_MESSAGE_MARK_COMMAND);
