@@ -31,7 +31,6 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-//    private EntryListPanel entryListPanel;
     private PersonListPanel personListPanel;
     private EventListPanel eventListPanel;
     private ResultDisplay resultDisplay;
@@ -43,10 +42,6 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private MenuItem helpMenuItem;
 
-//    @FXML
-//    private StackPane personListPanelPlaceholder;
-//    @FXML
-//    private StackPane eventListPanelPlaceholder;
     @FXML
     private StackPane entryListPanelPlaceholder;
 
@@ -113,11 +108,11 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Fills up all the placeholders of this window.
+     * Fills up all the placeholders of this window for the first initialization
+     * Always starts with Person first.
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-
         entryListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -131,21 +126,19 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Fills up all the placeholders of this window.
+     * Change the view to show Person.
      */
-    void fillInnerPartsForEvent() {
+    void fillPerson() {
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        entryListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+    }
+
+    /**
+     * Change the view to show Event
+     */
+    void fillEvent() {
         eventListPanel = new EventListPanel(logic.getFilteredEventList());
-
         entryListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
-
-        resultDisplay = new ResultDisplay();
-        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
-
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
-        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
-
-        CommandBox commandBox = new CommandBox(this::executeCommand);
-        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
     /**
@@ -208,11 +201,11 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowPerson()) {
-                fillInnerParts();
+                fillPerson();
             }
 
             if (commandResult.isShowEvent()) {
-                fillInnerPartsForEvent();
+                fillEvent();
             }
 
             if (commandResult.isShowHelp()) {
