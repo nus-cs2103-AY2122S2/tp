@@ -78,9 +78,17 @@ public class BatchCommandTest {
     }
 
     @Test
-    public void execute_parseAndCreateNewCommandInvalidValue_throwsParseException() throws CommandException {
+    public void execute_parseAndCreateNewCommandInvalidValue_throwsCommandException() throws CommandException {
         BatchCommand expectedBatchCommand =
                 new BatchCommand("",
+                        new SearchType(SearchType.TYPE_PHONE), "94351253");
+        assertThrows(CommandException.class, () -> expectedBatchCommand.execute(model));
+    }
+
+    @Test
+    public void execute_inValidCommand_throwsCommandException() throws CommandException {
+        BatchCommand expectedBatchCommand =
+                new BatchCommand("sample invalid",
                         new SearchType(SearchType.TYPE_PHONE), "94351253");
         assertThrows(CommandException.class, () -> expectedBatchCommand.execute(model));
     }

@@ -2,6 +2,7 @@ package seedu.contax.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_EQUALS;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_SEARCH_TYPE;
 
@@ -32,6 +33,7 @@ public class BatchCommand extends Command {
             + PREFIX_SEARCH_TYPE + "SEARCH_TYPE "
             + PREFIX_EQUALS + "VALUE \n"
             + "Example: " + COMMAND_WORD + " edit "
+            + PREFIX_ADDRESS + "new address "
             + PREFIX_SEARCH_TYPE + "phone "
             + PREFIX_EQUALS + "123 ";
 
