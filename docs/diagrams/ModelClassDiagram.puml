@@ -13,9 +13,9 @@ skinparam arrowColor MODEL_COLOR
 skinparam arrowFontSize 13
 
 Package Model {
-interface ReadOnlyIBook <<interface>>
-interface Model <<interface>>
-interface ReadOnlyUserPrefs <<interface>>
+interface "<<interface>>\nReadOnlyIBook" as ReadOnlyIBook
+interface "<<interface>>\nModel" as Model
+interface "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
 
 class IBook
 class ModelManager
