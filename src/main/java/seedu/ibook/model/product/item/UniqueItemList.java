@@ -72,6 +72,10 @@ public class UniqueItemList implements Iterable<Item> {
         }
     }
 
+    public Integer getTotalQuantity() {
+        return internalList.stream().mapToInt(o -> o.getQuantity().getQuantity()).sum();
+    }
+
     public void setItems(UniqueItemList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);

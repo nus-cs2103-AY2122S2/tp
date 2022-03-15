@@ -5,6 +5,7 @@ import static seedu.ibook.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 
 import seedu.ibook.model.product.item.Item;
+import seedu.ibook.model.product.item.Quantity;
 import seedu.ibook.model.product.item.UniqueItemList;
 
 /**
@@ -51,6 +52,10 @@ public class Product {
 
     public UniqueItemList getItems() {
         return items;
+    }
+
+    public Integer getTotalQuantity() {
+        return items.getTotalQuantity();
     }
 
     /**
