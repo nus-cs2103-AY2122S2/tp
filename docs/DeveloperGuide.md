@@ -284,7 +284,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | new user          | add allergy information of customer                                                      | make sure I do not affect their health by applying products they are allergic to |
 | `* * *`  | new user          | add hair type of customer                                                                | choose the correct products when treating their hairType                             |
 | `* * *`  | new user          | add skin type of customer                                                                | choose the appropriate products when treating their skinType                         |
-| `* * *`  | new user          | view a customer profile                                                                  |                                                                                  |
+| `* * *`  | new user          | view a customer profile                                                                  | know the details of a customer                         |
+| `* * *`  | new user          | view a list of customer profile associated with a keyword                                | view the profiles of customers that i am interest in                                               |
 | `* * *`  | new user          | delete a customer profile                                                                | get rid of sample data I used to explore the app                                 |
 | `* * *`  | new user          | edit a customer profile                                                                  | update details when needed                                                       |
 | `* * *`  | new user          | find a customer profile                                                                  | locate a customer easily                                                         |
@@ -307,35 +308,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is`TrackBeau` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: showing customer's detail by Index**
+**Use case: find customer's detail by their name**
 
 **MSS**
 
-1.  User requests to list customers
-2.  TrackBeau shows a list of customers with their customer Index
-3.  User requests to show information about customer using Index
-4.  TrackBeau shows information about customer
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3. The given index is invalid.
-
-    * 3a1. TrackBeau shows an error message.
-
-      Use case resumes at step 3.
-
-**Use case: find customer's detail by their name**
-
 1.  User requests to find a customer by name using a keyword
 2.  TrackBeau shows a list of customers with matching keyword with their customer Index
-3.  User requests to show information about customer using Index
-4.  TrackBeau shows information about customer
 
     Use case ends.
 
@@ -345,11 +323,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is invalid.
+**Use case: find customer's detail associated with a keyword**
 
-    * 3a1. TrackBeau shows an error message.
+**MSS**
 
-      Use case resumes at step 3.
+1.  User requests to find a customer related to a keyword
+2.  TrackBeau shows a list of customers with matching keyword with their customer Index
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
 
 **Use case: Add a customer**
 
@@ -451,27 +438,27 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### showing customer's details
+### finding customer by name
 
-1. showing customer customer
+1. finding customer by name
 
-   1. Test case: `show 1`<br>
-      Expected: Details of the first customer on the list will be shown.
+   1. Test case: `find name john`<br>
+      Expected: list of customers with john in their name will be shown
 
-   1. Test case: `show 0`<br>
-      Expected: Customer does not exist. Error details shown in the status message. Status bar remains the same.
+   1. Test case: `find name j0hn`<br>
+      Expected: Invalid keyword has been enter. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect show commands to try: `show`, `show x` (where x is larger than the list size or less than 1)<br>
+   1. Other incorrect show commands to try: `find name`, `find x` (where x only contains english characters)<br>
       Expected: Similar to previous.
 
 ### finding customer by keyword
 
-1. finding customer by keyword
+1. finding customer by keyword type and keyword
 
-   1. Test case: `find john`<br>
-      Expected: list of customers with john in their name will be shown
+   1. Test case: `find allergies nickle`<br>
+      Expected: list of customers with nickle in their allergy will be shown
 
-   1. Test case: `find j0hn`<br>
+   1. Test case: `find nickle`<br>
       Expected: Invalid keyword has been enter. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect show commands to try: `find`, `find x` (where x only contains english characters)<br>

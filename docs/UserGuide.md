@@ -87,19 +87,6 @@ Shows a list of all customers in the application.
 
 Format: `list`
 
-### Listing individual customer's profile: `show`
-
-Display all information about an individual customer.
-
-Format: `show INDEX`
-
-* Shows the customer profile at the specified INDEX.
-* Index refers to the index number shown in the displayed customer list.
-* Index must be a positive integer 1, 2, 3, …
-
-Examples:
-* `show 2` returns the profile of the 2nd customer in the application.
-
 ### Editing a customer : `edit`
 
 Edits an existing customer in the application.
@@ -121,14 +108,17 @@ Examples:
 
 Finds customers whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find KEYWORDTYPE KEYWORD [MORE_KEYWORDS]`
 
+* Keyword types available: name, phone, skintype, hairtype, staffpref, servicepref & allergies 
 * The search is case-insensitive. e.g `john` will match `john`
 * Only the name is searched.
 * Only full words will be matched e.g. `john` will not match `joh`
 
 Examples:
-* `find John` returns `john` and `John Doe`
+* `find name John` returns `john` and `John Doe`
+* `find allergies nickle` returns customer profiles with nickle allergies
+* `find hairtype oily dry` returns customer profiles that has the hair type of oily or dry
 
 ### Deleting a customer : `delete`
 
@@ -188,7 +178,6 @@ _Details coming soon ..._
 | **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                                                                 |
 | **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [e/EMAIL] [stp/STAFF_PREFERENCE]…​ [sep/SERVICE_PREFERENCE]…​ [h/HAIR_TYPE] [s/SKIN_TYPE] [al/ALLERGY]…​`<br>e.g.,`edit 1 p/91234567 e/johndoe@example.com`                                                       |
 | **Exit**   | `exit`                                                                                                                                                                                                                                                              |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find John`                                                                                                                                                                                                                |
+| **Find**   | `find KEYWORDTYPE KEYWORD [MORE_KEYWORDS]`<br> e.g., `find hairtype oily dry`                                                                                                                                                                                                                |
 | **Help**   | `help`                                                                                                                                                                                                                                                              |
 | **List**   | `list`                                                                                                                                                                                                                                                              |
-| **Show**   | `show INDEX`<br> e.g., `show 3`                                                                                                                                                                                                                                     |

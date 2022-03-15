@@ -12,6 +12,10 @@ Given below are my contributions to the project.
 * **New Feature**:
 
 * **Code contributed**:
+  * Pull Request:
+    * #35: Commands in User Guide
+    * #36: Update Instructions for manual testing and user stories in Developer Guide
+    * #72: added search by name, phone number, skin type and hairtype
 
 * **Project management**:
 
@@ -19,15 +23,13 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `list` and `show`
+    * Added documentation for the feature `find`
   * Developer Guide:
+    * Added user stories to view customer profile by name
+    * Added user stories to view customer profile keyword type and keyword
+    * Added Instructions for manual testing of `find`
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments):
-  * Contributed to forum discussions
-  * Reported bugs and suggestions for other teams in the class
-  * Some parts of the history feature I added was adopted by several other class mates
 
 * **Tools**:
-  * Integrated a third party library (Natty) to the project
-  * Integrated a new Github plugin (CircleCI) to the team repo
