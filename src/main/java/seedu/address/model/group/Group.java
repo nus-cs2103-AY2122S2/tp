@@ -7,6 +7,8 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.UniqueTaskList;
 
 /**
  * Represents a Group in ArchDuke.
@@ -19,6 +21,7 @@ public class Group {
 
     // Data fields
     private final Set<Person> persons = new HashSet<>();
+    private final UniqueTaskList tasks = new UniqueTaskList();
 
     /**
      * Constructs a {@code Group}.
@@ -70,6 +73,31 @@ public class Group {
 
         return otherGroup != null
                 && otherGroup.getGroupName().equals(getGroupName());
+    }
+
+    /**
+     * Adds a task into this specific group
+     *
+     * @param task Tasks to be added.
+     */
+    public void addTask(Task task) {
+        tasks.add(task);
+    }
+
+    /**
+     * Retrieves the UniqueTaskList from this specific group
+     *
+     */
+    public UniqueTaskList getTaskList() {
+        return tasks;
+    }
+
+    /**
+     * Returns true if a task with the same identity as {@code task} exists in the group.
+     */
+    public boolean hasTask(Task task) {
+        requireNonNull(task);
+        return tasks.contains(task);
     }
 
     /**

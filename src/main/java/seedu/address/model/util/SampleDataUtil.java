@@ -1,5 +1,6 @@
 package seedu.address.model.util;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -14,6 +15,8 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskName;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -42,11 +45,15 @@ public class SampleDataUtil {
         };
     }
 
-    public static Group[] getSampleGroups() {
-        return new Group[] {
-            new Group(new GroupName("NUS Fintech Society")),
-            new Group(new GroupName("NUS Data Science Society"))
-        };
+    public static ArrayList<Group> getSampleGroups() {
+        ArrayList<Group> groupList = new ArrayList<Group>();
+        groupList.add(new Group(new GroupName("NUS Fintech Society")));
+        groupList.add(new Group(new GroupName("NUS Data Science Society")));
+
+        groupList.get(0).addTask(new Task(new TaskName("Do Presentation for Open House")));
+        groupList.get(1).addTask(new Task(new TaskName("Electing the new president")));
+
+        return groupList;
     }
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
