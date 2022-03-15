@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.consultation.Consultation;
 import seedu.address.model.consultation.ConsultationWithPredicates;
 import seedu.address.model.person.Nric;
-import seedu.address.model.person.NricPredicate;
+import seedu.address.model.patient.NricPredicate;
 
 /**
  * Lists all persons in the address book to the user.

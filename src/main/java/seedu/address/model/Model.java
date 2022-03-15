@@ -71,11 +71,6 @@ public interface Model {
     boolean hasPerson(Predicate<Patient> predicate);
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
-     */
-    boolean hasPerson(Predicate<Person> predicate);
-
-    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */

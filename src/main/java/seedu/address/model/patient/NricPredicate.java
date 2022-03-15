@@ -1,8 +1,9 @@
-package seedu.address.model.person;
+package seedu.address.model.patient;
 
 import java.util.function.Predicate;
+import seedu.address.model.person.Nric;
 
-public class NricPredicate implements Predicate<Person> {
+public class NricPredicate implements Predicate<Patient> {
     private final Nric nric;
 
     public NricPredicate(Nric nric) {
@@ -10,7 +11,7 @@ public class NricPredicate implements Predicate<Person> {
     }
 
     @Override
-    public boolean test(Person person) {
+    public boolean test(Patient person) {
         return person.getNric().equals(nric);
     }
 

@@ -20,6 +20,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.consultation.Consultation;
 import seedu.address.ui.consultation.ConsultationListPanel;
 import seedu.address.ui.prescription.PrescriptionListPanel;
+import seedu.address.ui.contact.ContactListPanel;
 
 
 /**

@@ -10,8 +10,6 @@ import seedu.address.model.consultation.Consultation;
 import seedu.address.model.consultation.UniqueConsultationList;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.UniqueContactList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.UniquePersonList;
 import seedu.address.model.prescription.Prescription;

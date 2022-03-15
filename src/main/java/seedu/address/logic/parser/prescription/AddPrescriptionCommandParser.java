@@ -16,7 +16,7 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.patient.Nric;
+import seedu.address.model.person.Nric;
 import seedu.address.model.prescription.DrugName;
 import seedu.address.model.prescription.Instruction;
 import seedu.address.model.prescription.Prescription;

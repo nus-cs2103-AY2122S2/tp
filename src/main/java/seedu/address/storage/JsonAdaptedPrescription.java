@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.contact.Phone;
 import seedu.address.model.patient.Name;
-import seedu.address.model.patient.Nric;
+import seedu.address.model.person.Nric;
 import seedu.address.model.prescription.DrugName;
 import seedu.address.model.prescription.Instruction;
 import seedu.address.model.prescription.Prescription;

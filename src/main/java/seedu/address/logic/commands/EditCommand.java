@@ -24,7 +24,7 @@ import seedu.address.model.contact.Address;
 import seedu.address.model.contact.Email;
 import seedu.address.model.contact.Phone;
 import seedu.address.model.patient.Name;
-import seedu.address.model.patient.Nric;
+import seedu.address.model.person.Nric;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.tag.Tag;
 

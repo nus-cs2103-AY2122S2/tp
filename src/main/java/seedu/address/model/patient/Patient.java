@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.person.Nric;
 import seedu.address.model.contact.Address;
 import seedu.address.model.contact.Email;
 import seedu.address.model.contact.Phone;
@@ -31,11 +32,7 @@ public class Patient {
     /**
      * Every field must be present and not null.
      */
-<<<<<<< HEAD:src/main/java/seedu/address/model/person/Person.java
-    public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-=======
     public Patient(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
->>>>>>> origin/master:src/main/java/seedu/address/model/patient/Patient.java
         requireAllNonNull(nric, name, phone, email, address, tags);
         this.nric = nric;
         this.name = name;
@@ -82,13 +79,10 @@ public class Patient {
             return true;
         }
 
-<<<<<<< HEAD:src/main/java/seedu/address/model/person/Person.java
-        return otherPerson != null
-                && otherPerson.getNric().equals(getNric());
-=======
+
         return otherPatient != null
                 && otherPatient.getNric().equals(getNric());
->>>>>>> origin/master:src/main/java/seedu/address/model/patient/Patient.java
+
     }
 
     /**
@@ -105,15 +99,6 @@ public class Patient {
             return false;
         }
 
-<<<<<<< HEAD:src/main/java/seedu/address/model/person/Person.java
-        Person otherPerson = (Person) other;
-        return otherPerson.getName().equals(getName())
-                && otherPerson.getNric().equals(getNric())
-                && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
-=======
         Patient otherPatient = (Patient) other;
         return otherPatient.getName().equals(getName())
                 && otherPatient.getNric().equals(getNric())
@@ -121,7 +106,6 @@ public class Patient {
                 && otherPatient.getEmail().equals(getEmail())
                 && otherPatient.getAddress().equals(getAddress())
                 && otherPatient.getTags().equals(getTags());
->>>>>>> origin/master:src/main/java/seedu/address/model/patient/Patient.java
     }
 
     @Override
