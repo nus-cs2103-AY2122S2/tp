@@ -1,40 +1,52 @@
-package seedu.address.model.house;
+package seedu.address.model.property;
+
+import java.util.Objects;
 
 public class House {
 
     //identifiers of a house
-    private HouseType housetype;
+    private HouseType houseType;
     private Location location;
 
     /**
      * Constructor
-     * @param housetype
-     * @param address
+     * @param houseType the HouseType of a house.
+     * @param location the location of a house.
      */
-    public House(HouseType housetype, String address) {
-        this.housetype = housetype;
-        this.location = new Location(address);
+    public House(HouseType houseType, String location) {
+        this.houseType = houseType;
+        this.location = new Location(location);
+    }
+
+
+    public HouseType getHouseType() {
+        return houseType;
+    }
+
+    public Location getLocation() {
+        return location;
     }
 
     /**
-     * Update the address of a house
-     * @param address
+     * Updates the location of a house.
+     *
+     * @param location the location of a house.
      */
-    public void updateAddress(String address) {
-        this.location = new Location(address);
+    public void updateLocation(String location) {
+        this.location = new Location(location);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof House // instanceof handles nulls
-                && housetype.equals(((House) other).housetype)
+                && houseType.equals(((House) other).houseType)
                 && location.equals(((House) other).location)); // state check
     }
 
     @Override
     public int hashCode() {
-        return location.hashCode();
+        return Objects.hash(houseType, location);
     }
 
 }

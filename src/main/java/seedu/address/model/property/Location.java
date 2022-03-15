@@ -1,41 +1,32 @@
-package seedu.address.model.house;
+package seedu.address.model.property;
 
 import java.util.Objects;
 
 /**
- * Location of a place
+ * Location is an area in Singapore in the map, for example Serangoon, Kovan, Kent Ridge, etc.
  */
 public class Location {
 
-    private String address;
+    private String location;
 
-    public Location(String address) {
-        this.address = address;
-    }
-
-    public void updateAddress(String newAddress) {
-        this.address = newAddress;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Location location = (Location) o;
-        return address.equals(location.address);
+    public Location(String location) {
+        this.location = location;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(address);
+        return Objects.hash(location);
     }
 
     @Override
     public String toString() {
-        return address;
+        return location;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+            || (other instanceof Location // instanceof handles nulls
+            && location.equals(((Location) other).location)); // state check
     }
 }

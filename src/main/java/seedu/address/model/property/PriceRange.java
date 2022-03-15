@@ -1,29 +1,97 @@
-package seedu.address.model.house;
+package seedu.address.model.property;
+
+import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
- * Price range of a house, not associated with House class as the price is decided by seller
+ * Price range of a property, which includes the lower and upper bound that a buyer is willing to buy at or a seller
+ * is willing to sell at.
+ *
  */
 public class PriceRange {
-    private final int lower;
-    private final int upper;
+
+    /**
+     * The lower and upper bounds are inclusive, meaning the lower bound includes the lower and higher value itself,
+     * respectively.
+     */
+    private int lower;
+    private int upper;
 
     /**
      * Constructor
-     * @param lower
-     * @param upper
+     * @param lower lower bound of the PriceRange, inclusive.
+     * @param upper upper bound of the PriceRange, inclusive.
      */
-    public PriceRange(int lower, int upper) {
+    public PriceRange(int lower, int upper) throws IllegalValueException {
+        if (lower > upper || lower < 0 || upper < 0) {
+            // lower must be lower than upper, and the values should all be non-negative.
+            throw new IllegalValueException("lower should be lower than upper(inclusive)," +
+                     " and all values should be non-negative");
+        }
         this.lower = lower;
         this.upper = upper;
     }
 
+    public int getLower() {
+        return this.lower;
+    }
+
+    public int getUpper() {
+        return this.upper;
+    }
+
+    public void setLower(int lower) throws IllegalValueException {
+        if (lower < 0) {
+            throw new IllegalValueException("value should be non-negative");
+        }
+        if (lower > upper) {
+            throw new IllegalValueException("lower should be lower than higher");
+        }
+        this.lower = lower;
+    }
+
+    public void setUpper(int upper) throws IllegalValueException {
+        if (upper < 0) {
+            throw new IllegalValueException("value should be non-negative");
+        }
+        if (upper < this.lower) {
+            throw new IllegalValueException("upper should be higher than lower");
+        }
+        this.upper = upper;
+    }
     /**
      * update a new priceRange
-     * @param lower
-     * @param upper
+     * @param lower the lower bound of the priceRange.
+     * @param upper the upper bound od the priceRange.
      */
-    public PriceRange updatePrice(int lower, int upper) {
-        return new PriceRange(lower, upper);
+    public void updatePrice(int lower, int upper) throws IllegalValueException {
+        setLower(lower);
+        setUpper(upper);
+    }
+
+    /**
+     * Checks whether a value is within a PriceRange.
+     *
+     * @param value value to be checked if within the price range.
+     * @param priceRange the priceRange.
+     * @return True if the value falls within the PriceRange, false otherwise.
+     */
+    public static boolean isWithinRange(int value, PriceRange priceRange) {
+        return value >= priceRange.lower && value <= priceRange.upper;
+    }
+
+    /**
+     * Checks whether a Price Range is within another PriceRange, meaning whether any value in the toBuy priceRange
+     * is within the toSell PriceRange.
+     * @param buyRange the priceRange a buyer is willing to buy a Property for.
+     * @param sellRange the priceRange a seller is willing to sell a Property for.
+     * @return True if the a price in the buyRange can match one in the sellRange, false otherwise.
+     */
+    public static boolean canMatchPrice(PriceRange buyRange, PriceRange sellRange) {
+        // [50, 100] , [99, 200] should match.
+        // [100, 200] . [40, 99] should NOT match.
+        // [50, 60], [10, 100] should match.
+        // [10, 100], [50, 60] should match.
+        return isWithinRange(buyRange.getLower(), sellRange) || isWithinRange(buyRange.getUpper(), sellRange);
     }
 
     @Override
@@ -33,5 +101,13 @@ public class PriceRange {
                 + ','
                 + upper
                 + ']';
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+            || (other instanceof PriceRange // instanceof handles nulls
+            && lower == ((PriceRange) other).lower
+            && upper == ((PriceRange) other).upper); // state check
     }
 }
