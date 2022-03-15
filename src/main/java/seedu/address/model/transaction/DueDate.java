@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.transaction;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
@@ -13,7 +13,7 @@ import seedu.address.logic.parser.Prefix;
  * Represents a Person's birthday in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValid(String)}
  */
-public class DueDate extends Field {
+public class DueDate extends TransactionField {
     public static final Prefix PREFIX = new Prefix("dd/", true);
     public static final String MESSAGE_CONSTRAINTS =
             "Due date should be in YYYY-MM-DD format and must exist";
@@ -29,7 +29,7 @@ public class DueDate extends Field {
         super(PREFIX);
         requireNonNull(dueDate);
         dueDate = dueDate.trim(); // Wow, look at that, we don't need a whole fucking parser to do one line.
-        checkArgument(Birthday.isValid(dueDate), MESSAGE_CONSTRAINTS);
+        checkArgument(DueDate.isValid(dueDate), MESSAGE_CONSTRAINTS);
         value = LocalDate.parse(dueDate);
     }
 
@@ -37,9 +37,8 @@ public class DueDate extends Field {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValid(String str) {
-        LocalDate date;
         try {
-            date = LocalDate.parse(str);
+            LocalDate.parse(str);
         } catch (DateTimeParseException e) {
             return false;
         }
@@ -59,9 +58,9 @@ public class DueDate extends Field {
     @Override
     public boolean equals(Object other) {
         if (!(other instanceof DueDate)) {
-            return true;
+            return false;
         }
-        return
+        return ((DueDate) other).value.equals(getValue());
     }
 
     @Override
