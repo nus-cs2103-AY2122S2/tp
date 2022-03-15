@@ -1,9 +1,9 @@
 package seedu.address.model.transaction;
 
-import seedu.address.logic.parser.Prefix;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import seedu.address.logic.parser.Prefix;
 
 public class Amount extends TransactionField {
     public static final Prefix PREFIX = new Prefix("a/", true);
@@ -13,6 +13,11 @@ public class Amount extends TransactionField {
 
     private final double value;
 
+    /**
+     * Constructs the amount object
+     *
+     * @param value the value of the amount
+     */
     public Amount(String value) {
         super(PREFIX);
         requireNonNull(value);
@@ -30,6 +35,12 @@ public class Amount extends TransactionField {
         return "" + this.value;
     }
 
+    /**
+     *  Checks the validity of the amount inserted
+     *
+     * @param value of the transaction
+     * @return whether or not the amount is valid
+     */
     public static boolean isValid(String value) {
         try {
             return Double.parseDouble(value) > 0;

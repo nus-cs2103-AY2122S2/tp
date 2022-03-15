@@ -1,8 +1,10 @@
 package seedu.address.model.transaction;
 
+import java.io.Serializable;
+
 import seedu.address.logic.parser.Prefix;
 
-import java.io.Serializable;
+
 
 public abstract class TransactionField implements Serializable {
     public final Prefix prefix;
@@ -11,5 +13,5 @@ public abstract class TransactionField implements Serializable {
         this.prefix = prefix;
     }
 
-    abstract public String getValue();
+    public abstract String getValue();
 }

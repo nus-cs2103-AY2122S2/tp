@@ -27,7 +27,7 @@ public class TransactionDate extends TransactionField {
     public TransactionDate(String transactionDate) {
         super(PREFIX);
         requireNonNull(transactionDate);
-        transactionDate = transactionDate.trim(); // Wow, look at that, we don't need a whole fucking parser to do one line.
+        transactionDate = transactionDate.trim();
         checkArgument(DueDate.isValid(transactionDate), MESSAGE_CONSTRAINTS);
         value = LocalDate.parse(transactionDate);
     }

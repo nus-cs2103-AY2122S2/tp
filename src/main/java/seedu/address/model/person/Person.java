@@ -57,6 +57,13 @@ public class Person implements Serializable {
         this(otherPerson.getFields(), otherPerson.getTags());
     }
 
+    /**
+     * Constructs a Person object with fields, tags, and transactions
+     *
+     * @param fields fields of the person
+     * @param tags tags of the person
+     * @param transactions transactions of the person
+     */
     public Person(Collection<Field> fields, Collection<Tag> tags, Collection<Transaction> transactions) {
         this(fields, tags);
         this.transactions.addAll(transactions);
@@ -284,7 +291,7 @@ public class Person implements Serializable {
         }
 
         if (!transactions.isEmpty()) {
-            builder.append("; Transactions: " );
+            builder.append("; Transactions: ");
             transactions.forEach(builder::append);
         }
 

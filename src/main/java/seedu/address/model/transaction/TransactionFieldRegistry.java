@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import seedu.address.logic.parser.FieldParser;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.TransactionFieldParser;
 

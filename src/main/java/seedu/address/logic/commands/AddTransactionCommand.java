@@ -1,21 +1,20 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
+import java.util.List;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.*;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Person;
 import seedu.address.model.transaction.Amount;
 import seedu.address.model.transaction.DueDate;
 import seedu.address.model.transaction.Transaction;
 import seedu.address.model.transaction.TransactionDate;
-
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 public class AddTransactionCommand extends Command {
     public static final String COMMAND_WORD = "addTransaction";
@@ -37,6 +36,13 @@ public class AddTransactionCommand extends Command {
     private final Index index;
     private final Transaction transaction;
 
+    /**
+     * Constructs AddTransaction command with the specified index
+     * of the person and the transaction.
+     *
+     * @param index
+     * @param transaction
+     */
     public AddTransactionCommand(Index index, Transaction transaction) {
         requireAllNonNull(index, transaction);
         this.index = index;

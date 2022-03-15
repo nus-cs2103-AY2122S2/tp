@@ -1,5 +1,13 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Optional;
+import java.util.stream.Stream;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddTransactionCommand;
@@ -8,13 +16,6 @@ import seedu.address.model.transaction.Transaction;
 import seedu.address.model.transaction.TransactionField;
 import seedu.address.model.transaction.TransactionFieldRegistry;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Optional;
-import java.util.stream.Stream;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 public class AddTransactionParser implements Parser<AddTransactionCommand> {
     /**
@@ -26,12 +27,14 @@ public class AddTransactionParser implements Parser<AddTransactionCommand> {
     public AddTransactionCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
-        Prefix[] allPrefixes = Arrays.copyOf(TransactionFieldRegistry.PREFIXES, TransactionFieldRegistry.PREFIXES.length);
+        Prefix[] allPrefixes = Arrays.copyOf(TransactionFieldRegistry.PREFIXES,
+                TransactionFieldRegistry.PREFIXES.length);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, allPrefixes);
 
         // Ensure that all required fields are present.
         if (!arePrefixesPresent(argMultimap, TransactionFieldRegistry.REQUIRED_PREFIXES)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTransactionCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddTransactionCommand.MESSAGE_USAGE));
         }
 
         // Get the index of person we want to modify, throw error if there isn't one.
@@ -39,7 +42,8 @@ public class AddTransactionParser implements Parser<AddTransactionCommand> {
         try {
             index = IndexParser.parse(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTransactionCommand.MESSAGE_USAGE), ive);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddTransactionCommand.MESSAGE_USAGE), ive);
         }
 
         // Parse all transaction fields.
