@@ -134,6 +134,12 @@ public class AddProfileWindow extends UiPart<Stage> {
     @FXML
     private void handleClose() {
         getRoot().hide();
+        nameInput.clear();
+        phoneNumberInput.clear();
+        emailInput.clear();
+        addressInput.clear();
+        tagInput.clear();
+        resultDisplay.setFeedbackToUser(" ");
     }
 
 }
