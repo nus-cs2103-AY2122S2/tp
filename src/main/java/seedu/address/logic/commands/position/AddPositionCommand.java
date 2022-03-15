@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NUM_OPENINGS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REQUIREMENT;
 
+import seedu.address.commons.core.DataType;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.add.AddCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -51,7 +52,12 @@ public class AddPositionCommand extends AddCommand {
         }
 
         model.addPosition(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), getCommandDataType());
+    }
+
+    @Override
+    public DataType getCommandDataType() {
+        return DataType.POSITION;
     }
 
     @Override

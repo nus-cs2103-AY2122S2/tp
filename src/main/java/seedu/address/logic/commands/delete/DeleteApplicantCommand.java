@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import seedu.address.commons.core.DataType;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.CommandResult;
@@ -40,7 +41,13 @@ public class DeleteApplicantCommand extends DeleteCommand {
 
         Applicant applicantToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(applicantToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, applicantToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, applicantToDelete),
+                getCommandDataType());
+    }
+
+    @Override
+    public DataType getCommandDataType() {
+        return DataType.APPLICANT;
     }
 
     @Override

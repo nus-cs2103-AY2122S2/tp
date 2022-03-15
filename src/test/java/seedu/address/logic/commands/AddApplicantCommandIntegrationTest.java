@@ -26,6 +26,7 @@ public class AddApplicantCommandIntegrationTest {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     }
 
+
     @Test
     public void execute_newPerson_success() {
         Applicant validApplicant = new PersonBuilder().build();
