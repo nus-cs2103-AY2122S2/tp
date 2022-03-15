@@ -24,7 +24,7 @@ import seedu.trackbeau.logic.commands.HelpCommand;
 import seedu.trackbeau.logic.commands.ListCommand;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
 import seedu.trackbeau.model.customer.Customer;
-import seedu.trackbeau.model.customer.NameContainsKeywordsPredicate;
+import seedu.trackbeau.model.customer.SearchContainsKeywordsPredicate;
 import seedu.trackbeau.testutil.CustomerBuilder;
 import seedu.trackbeau.testutil.CustomerUtil;
 
@@ -78,8 +78,8 @@ public class TrackBeauParserTest {
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+                FindCommand.COMMAND_WORD + " name " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindCommand(new SearchContainsKeywordsPredicate("getName", keywords)), command);
     }
 
     @Test
