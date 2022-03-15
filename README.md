@@ -5,7 +5,7 @@
 * This app is **a contact book for university students, teaching assistants and school admin**. <br>
   Example usages:
   * Save up classmate's or student's contact information
-  * Categorize students by tags 
+  * Categorize students by tags
 * The application is for users who prefer to use a platform with a simplistic GUI
 * It is named `UNite` because the application is meant to be used in a university context, and we hope this can help improve communication within the campus and thus 'unite' everyone.
 * For the detailed documentation of this project, see the **[UNite Product Website](https://ay2122s2-cs2103t-w12-2.github.io/tp/)**.

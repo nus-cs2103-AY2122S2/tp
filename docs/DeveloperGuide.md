@@ -317,14 +317,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
     
-* 5a. Tag is already attached to the profile 
+* 5a. Tag is already attached to the profile
     * 5a1. UNite shows an error message
-    
+  
       Use case resumes at step 5.
-    
-* 5b. Tag does not exist 
+
+* 5b. Tag does not exist
     * 5b1. UNite shows an error message
-    
+
       Use case resumes at step 5.
 
 
