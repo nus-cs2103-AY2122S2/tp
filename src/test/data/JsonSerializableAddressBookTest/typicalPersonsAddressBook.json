@@ -27,12 +27,11 @@
   }, {
     "name" : "George Best",
     "phone" : "9482442",
-    "email" : "anna@example.com",
-    "address" : "4th street",
-    "tagged" : [ ]
+    "email" : "anna@example.com"
   } ],
   "tasks" : [ {
     "type" : "todo",
+    "status": "",
     "description" : "Play Genshin Impact",
     "date" : "",
     "deadlineTime" : "",
@@ -40,6 +39,7 @@
     "eventEndTime" : ""
   }, {
     "type" : "deadline",
+    "status": "",
     "description" : "Do Daily Commissions",
     "date" : "2022-03-15",
     "deadlineTime" : "0400",
@@ -47,6 +47,7 @@
     "eventEndTime" : null
   }, {
     "type" : "event",
+    "status": "",
     "description" : "Finish 160 Resins",
     "date" : "2022-03-15",
     "deadlineTime" : null,
@@ -54,6 +55,7 @@
     "eventEndTime" : "2000"
   }, {
     "type" : "deadline",
+    "status": "",
     "description" : "Do MY Commissions",
     "date" : "2022-03-15",
     "deadlineTime" : "0400",
