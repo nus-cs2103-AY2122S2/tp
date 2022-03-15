@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import seedu.address.commons.core.DataType;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.CommandResult;
@@ -66,7 +67,7 @@ public class AddInterviewCommand extends AddCommand {
             throw new CommandException(MESSAGE_DUPLICATE_INTERVIEW);
         }
         model.addInterview(interviewToAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, interviewToAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, interviewToAdd), DataType.INTERVIEW);
     }
 
     @Override

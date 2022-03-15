@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.commons.core.DataType;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -89,7 +90,7 @@ public class EditCommand extends Command {
 
         model.setPerson(applicantToEdit, editedApplicant);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedApplicant));
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedApplicant), DataType.APPLICANT);
     }
 
     /**
