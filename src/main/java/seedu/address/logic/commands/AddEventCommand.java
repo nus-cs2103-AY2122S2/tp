@@ -3,8 +3,8 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PLATFORM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
@@ -25,14 +25,14 @@ public class AddEventCommand extends Command {
             + PREFIX_COMPANY + "COMPANY "
             + PREFIX_DATE + "DATE "
             + PREFIX_TIME + "TIME "
-            + PREFIX_PLATFORM + "PLATFORM "
+            + PREFIX_LOCATION + "LOCATION "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Interview "
             + PREFIX_COMPANY + "ABC "
             + PREFIX_DATE + "12-12-2022 "
             + PREFIX_TIME + "13:30 "
-            + PREFIX_PLATFORM + "zoom "
+            + PREFIX_LOCATION + "zoom "
             + PREFIX_TAG + "technical "
             + PREFIX_TAG + "coding";
 

@@ -12,8 +12,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.entry.Date;
 import seedu.address.model.entry.Event;
+import seedu.address.model.entry.Location;
 import seedu.address.model.entry.Name;
-import seedu.address.model.entry.Platform;
 import seedu.address.model.entry.Time;
 import seedu.address.model.tag.Tag;
 
@@ -29,7 +29,7 @@ class JsonAdaptedEvent {
     private final String company;
     private final String date;
     private final String time;
-    private final String platform;
+    private final String location;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -38,13 +38,13 @@ class JsonAdaptedEvent {
     @JsonCreator
     public JsonAdaptedEvent(@JsonProperty("name") String name, @JsonProperty("company") String company,
                              @JsonProperty("date") String date, @JsonProperty("time") String time,
-                             @JsonProperty("platform") String platform,
+                             @JsonProperty("location") String location,
                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.company = company;
         this.date = date;
         this.time = time;
-        this.platform = time;
+        this.location = location;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -58,7 +58,7 @@ class JsonAdaptedEvent {
         company = source.getCompany();
         date = source.getDate().date;
         time = source.getTime().time;
-        platform = source.getPlatform().platform;
+        location = source.getLocation().location;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -111,18 +111,18 @@ class JsonAdaptedEvent {
         }
         final Time modelTime = new Time(time);
 
-        //=========================== Platform ==========================================================
-        if (platform == null) {
+        //=========================== Location ==========================================================
+        if (location == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Platform.class.getSimpleName()));
+                    Location.class.getSimpleName()));
         }
-        if (!Platform.isValidPlatform(platform)) {
-            throw new IllegalValueException(Platform.MESSAGE_CONSTRAINTS);
+        if (!Location.isValidLocation(location)) {
+            throw new IllegalValueException(Location.MESSAGE_CONSTRAINTS);
         }
-        final Platform modelPlatform = new Platform(platform);
+        final Location modelLocation = new Location(location);
 
         final Set<Tag> modelTags = new HashSet<>(eventTags);
-        return new Event(modelName, modelCompany, modelDate, modelTime, modelPlatform, modelTags);
+        return new Event(modelName, modelCompany, modelDate, modelTime, modelLocation, modelTags);
     }
 
 }

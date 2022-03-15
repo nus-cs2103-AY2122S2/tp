@@ -4,7 +4,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PLATFORM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
@@ -15,8 +15,8 @@ import seedu.address.logic.commands.AddEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.entry.Date;
 import seedu.address.model.entry.Event;
+import seedu.address.model.entry.Location;
 import seedu.address.model.entry.Name;
-import seedu.address.model.entry.Platform;
 import seedu.address.model.entry.Time;
 import seedu.address.model.tag.Tag;
 
@@ -34,10 +34,10 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
     public AddEventCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_COMPANY,
-                        PREFIX_DATE, PREFIX_TIME, PREFIX_PLATFORM, PREFIX_TAG);
+                        PREFIX_DATE, PREFIX_TIME, PREFIX_LOCATION, PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_COMPANY,
-                PREFIX_DATE, PREFIX_TIME, PREFIX_PLATFORM)
+                PREFIX_DATE, PREFIX_TIME, PREFIX_LOCATION)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
         }
@@ -46,10 +46,10 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         String company = ParserUtil.parseCompanyName(argMultimap.getValue(PREFIX_COMPANY).get());
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
         Time time = ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get());
-        Platform platform = ParserUtil.parsePlatform(argMultimap.getValue(PREFIX_PLATFORM).get());
+        Location location = ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Event event = new Event(name, company, date, time, platform, tagList);
+        Event event = new Event(name, company, date, time, location, tagList);
 
         return new AddEventCommand(event);
     }

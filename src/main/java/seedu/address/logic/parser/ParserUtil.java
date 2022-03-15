@@ -12,9 +12,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.entry.Address;
 import seedu.address.model.entry.Date;
 import seedu.address.model.entry.Email;
+import seedu.address.model.entry.Location;
 import seedu.address.model.entry.Name;
 import seedu.address.model.entry.Phone;
-import seedu.address.model.entry.Platform;
 import seedu.address.model.entry.Time;
 import seedu.address.model.tag.Tag;
 
@@ -180,12 +180,12 @@ public class ParserUtil {
      * @throws ParseException if the given {@code platform} is invalid.
      */
 
-    public static Platform parsePlatform(String platform) throws ParseException {
-        requireNonNull(platform);
-        String trimmedPlatform = platform.trim();
-        if (!Platform.isValidPlatform(trimmedPlatform)) {
-            throw new ParseException(Platform.MESSAGE_CONSTRAINTS);
+    public static Location parseLocation(String location) throws ParseException {
+        requireNonNull(location);
+        String trimmedLocation = location.trim();
+        if (!Location.isValidLocation(trimmedLocation)) {
+            throw new ParseException(Location.MESSAGE_CONSTRAINTS);
         }
-        return new Platform(trimmedPlatform);
+        return new Location(trimmedLocation);
     }
 }

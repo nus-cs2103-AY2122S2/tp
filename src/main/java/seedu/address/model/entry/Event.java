@@ -19,18 +19,18 @@ public class Event extends Entry {
     // Data fields
     private final Date date;
     private final Time time;
-    private final Platform platform;
+    private final Location location;
 
     /**
      * Every field must be present and not null.
      */
-    public Event(Name name, String company, Date date, Time time, Platform platform, Set<Tag> tags) {
+    public Event(Name name, String company, Date date, Time time, Location location, Set<Tag> tags) {
         super(name, tags);
-        requireAllNonNull(company, date, time, platform);
+        requireAllNonNull(company, date, time, location);
         this.company = company;
         this.date = date;
         this.time = time;
-        this.platform = platform;
+        this.location = location;
     }
 
     public String getCompany() {
@@ -45,12 +45,12 @@ public class Event extends Entry {
         return this.time;
     }
 
-    public Platform getPlatform() {
-        return this.platform;
+    public Location getLocation() {
+        return this.location;
     }
 
     /**
-     * Returns true if both entries are an event and have the same name.
+     * Returns true if both entries are an event and have the same name, company, date, and time.
      * This defines a weaker notion of equality between two events.
      */
     @Override
@@ -65,7 +65,9 @@ public class Event extends Entry {
 
         Event otherEvent = (Event) otherEntry;
         return otherEvent.getName().equals(getName())
-                && otherEvent.getCompany().equals(getCompany());
+                && otherEvent.getCompany().equals(getCompany())
+                && otherEvent.getDate().equals(getDate())
+                && otherEvent.getTime().equals(getTime());
     }
 
     /**
@@ -87,14 +89,14 @@ public class Event extends Entry {
                 && otherEvent.getCompany().equals(getCompany())
                 && otherEvent.getDate().equals(getDate())
                 && otherEvent.getTime().equals(getTime())
-                && otherEvent.getPlatform().equals(getPlatform())
+                && otherEvent.getLocation().equals((getLocation()))
                 && otherEvent.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // Use all Event's attributes to get a unique hashCode
-        return Objects.hash(getName(), company, date, time, platform, getTags());
+        return Objects.hash(getName(), company, date, time, location, getTags());
     }
 
     @Override
@@ -107,8 +109,8 @@ public class Event extends Entry {
                 .append(getDate())
                 .append("; Time: ")
                 .append(getTime())
-                .append("; Platform: ")
-                .append(getPlatform());
+                .append("; Location: ")
+                .append(getLocation());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
