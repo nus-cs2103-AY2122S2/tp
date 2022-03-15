@@ -1,8 +1,5 @@
 package seedu.address.logic.parser.help;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.help.DetailHelpCommand;
 import seedu.address.logic.commands.help.HelpCommand;
 import seedu.address.logic.commands.help.OverallHelpCommand;
