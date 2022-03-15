@@ -72,7 +72,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
         if (argMultimap.getValue(PREFIX_INFO).isPresent()) {
-            editPersonDescriptor.setInfo(ParserUtil.parseInfo(argMultimap.getValue(PREFIX_INFO).get()));
+            parseInfoForEdit(argMultimap, editPersonDescriptor);
         }
         if (argMultimap.getValue(PREFIX_PREV_DATE_MET).isPresent()) {
             editPersonDescriptor.setPrevDateMet(
@@ -83,6 +83,22 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
+    }
+
+    /**
+     * Helper function to parse info to check if it's updating new info or to clear info to set the default value.
+     *
+     * @param argMultimap ArgumentMultimap containing all the data to be edited.
+     * @param editPersonDescriptor EditPersonDescriptor to edit the person.
+     * @throws ParseException when info parsed is not valid.
+     */
+    private void parseInfoForEdit(ArgumentMultimap argMultimap,
+                                  EditPersonDescriptor editPersonDescriptor) throws ParseException {
+        String newInfo = argMultimap.getValue(PREFIX_INFO).get();
+        if (newInfo.isBlank()) {
+            newInfo = "No further info";
+        }
+        editPersonDescriptor.setInfo(ParserUtil.parseInfo(newInfo));
     }
 
     /**

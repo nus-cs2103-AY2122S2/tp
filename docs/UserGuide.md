@@ -134,6 +134,7 @@ Edits an existing person in the HustleBook.
   * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
   * You can remove all the person’s tags by typing `t/` without
       specifying any tags after it.
+  * You can remove the person's info by typing `i/` without specifying any info after it.
 
     Examples:
     * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
