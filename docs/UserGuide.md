@@ -146,8 +146,8 @@ Format: `edit INDEX o/OPTION [m/MODULE] [n/NAME] [p/PHONE] [e/EMAIL] [nm/NEWMODU
   * `list v/modules` : To display list of modules with respective indexes
   * `list v/people` : To display list of persons with respective indexes 
 * 2 values for `OPTION`:
-    * `module`: Edits the module specified by compulsory field `m/MODULE`. Optional fields `[n/NAME] [nm/NEWMODULE]` to specify the new name or module code of the module.
-    * `person`: Edits the person at the specified by the compulsory field INDEX. The index refers to the index number shown in the most recent list of contacts viewable on the GUI. The index must be a positive integer 1, 2, 3, …
+    * `module`: Edits the module specified by compulsory field `INDEX`. Optional fields `[n/NAME] [m/MODULECODE]` to specify the new name or module code of the module.
+    * `person`: Edits the person at the specified by the compulsory field `INDEX`. The index refers to the index number shown in the most recent list of contacts viewable on the GUI. The index must be a positive integer 1, 2, 3, …
 * Existing values will be updated to the input values.
 
 Examples:
