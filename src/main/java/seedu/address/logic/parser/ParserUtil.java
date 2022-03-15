@@ -1,19 +1,26 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.AppointmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.pet.Address;
+import seedu.address.model.pet.Appointment;
 import seedu.address.model.pet.Name;
 import seedu.address.model.pet.OwnerName;
 import seedu.address.model.pet.Phone;
 import seedu.address.model.tag.Tag;
+
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -120,6 +127,39 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String tag} into a {@code Tag}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param dateTime Date and time of appointment.
+     * @param location Location of appointment.
+     * @throws ParseException if the given {@code tag} is invalid.
+     */
+    public static Appointment parseAppointment(String dateTime, String location) throws ParseException {
+        requireAllNonNull(dateTime, location);
+        try {
+            String formattedDateTime = formatDateTime(dateTime.trim());
+            String trimmedLocation = location.trim();
+            String appointmentDetails = formattedDateTime + " at "+ trimmedLocation;
+
+            if (!Appointment.isValidAppointment(appointmentDetails)) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        AppointmentCommand.MESSAGE_USAGE));
+            }
+            
+            return new Appointment(appointmentDetails);
+        } catch (Exception e) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AppointmentCommand.MESSAGE_USAGE), e);
+        }
+    }
+
+    private static String formatDateTime(String input) {
+        DateTimeFormatter formatIn = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        DateTimeFormatter formatOut = DateTimeFormatter.ofPattern("MMM-dd-yyyy HH:mm a");
+        return LocalDateTime.parse(input, formatIn).format(formatOut);
     }
 
 }

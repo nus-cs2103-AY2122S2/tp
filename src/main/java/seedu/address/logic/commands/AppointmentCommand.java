@@ -21,12 +21,12 @@ public class AppointmentCommand extends Command {
     public static final String COMMAND_WORD = "app";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edits the appointment of the pet identified "
-            + "by the index number used in the last pet listing. "
+            + "by the index number used in the last pet listing.\n"
             + "Existing appointment will be overwritten by the input.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "ap/ [appointment]\n"
+            + "Parameters: INDEX (must be a positive integer)"
+            + "date/ [yyyy-MM-dd HH:mm] at/ [location]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "ap/ Every Tuesday";
+            + "date/2022-03-04 09:30 at/ NUS Vet Clinic";
 
     public static final String MESSAGE_ADD_APPOINTMENT_SUCCESS = "Added appointment to Pet: %1$s";
     public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS = "Removed appointment from Pet: %1$s";
