@@ -3,8 +3,8 @@ package seedu.ibook.model.product.item;
 import static java.util.Objects.requireNonNull;
 import static seedu.ibook.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Iterator;
 import java.util.List;
-import java.util.PriorityQueue;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,16 +21,30 @@ import seedu.ibook.model.product.exceptions.ItemNotFoundException;
  *
  * @see Item#isSameItem(Item)
  */
-public class UniqueItemList {
+public class UniqueItemList implements Iterable<Item> {
 
-    private final PriorityQueue<Item> internalList = new PriorityQueue<>();
+    private final ObservableList<Item> internalList = FXCollections.observableArrayList();
+    private final ObservableList<Item> internalUnmodifiableList =
+        FXCollections.unmodifiableObservableList(internalList);
 
     /**
      * Returns true if the list contains an equivalent item as the given argument.
      */
     public boolean contains(Item toCheck) {
         requireNonNull(toCheck);
-        return true;
+        return internalList.stream().anyMatch(toCheck::isSameItem);
+    }
+
+    /**
+     * Gets the item in the list that is similar to the item as the given argument.
+     */
+    public Item getExisting(Item toAdd) {
+        for (Item item: internalList) {
+            if (toAdd.isSameItem(item)) {
+                return item;
+            }
+        }
+        return null;
     }
 
     /**
@@ -40,11 +54,14 @@ public class UniqueItemList {
     public void add(Item toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            // TODO: combine both items
+            Item existingItem = getExisting(toAdd);
+            existingItem.add(toAdd);
         } else {
             internalList.add(toAdd);
         }
+        FXCollections.sort(internalList);
     }
+
     /**
      * Removes the equivalent item from the list.
      */
@@ -55,6 +72,11 @@ public class UniqueItemList {
         }
     }
 
+    public void setItems(UniqueItemList replacement) {
+        requireNonNull(replacement);
+        internalList.setAll(replacement.internalList);
+    }
+
     /**
      * Replaces the contents of this list with {@code items}.
      * @param items
@@ -63,15 +85,20 @@ public class UniqueItemList {
         requireAllNonNull(items);
         internalList.clear();
         for (Item item: items) {
-            internalList.add(item);
+            add(item);
         }
     }
 
     /**
      * Returns the backing queue as an unmodifiable list {@code ObservableList}.
      */
-    public ObservableList<Item> asObservableList() {
-        return FXCollections.observableArrayList(internalList);
+    public ObservableList<Item> asUnmodifiableObservableList() {
+        return internalUnmodifiableList;
+    }
+
+    @Override
+    public Iterator<Item> iterator() {
+        return internalList.iterator();
     }
 
     @Override

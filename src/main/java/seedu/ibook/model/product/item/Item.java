@@ -11,7 +11,7 @@ import seedu.ibook.model.product.Product;
  * Represents an Item in the ibook.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Item {
+public class Item implements Comparable<Item> {
 
     private static final String ITEMS_MUST_BE_EQUAL_CONSTRAINT = "Items must be equal";
 
@@ -122,5 +122,10 @@ public class Item {
             .append(getQuantity());
 
         return builder.toString();
+    }
+
+    @Override
+    public int compareTo(Item o) {
+        return expiryDate.compareTo(o.getExpiryDate());
     }
 }
