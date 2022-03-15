@@ -21,7 +21,7 @@ import seedu.contax.model.util.SearchType;
 
 
 /**
- * batch edit or delete a person identified using base on regex the address book.
+ * Batch edit or delete a person identified using base on string =/ provided.
  */
 public class BatchCommand extends Command {
     public static final String COMMAND_WORD = "batch";
@@ -40,6 +40,8 @@ public class BatchCommand extends Command {
     private final String userInput;
 
     /**
+     * Creates an BatchCommand base on specified {@code commandInput} {@code searchType} and {@code userInput}.
+     *
      * @param commandInput              details to word of command
      * @param searchType                search type of field apply matcher
      * @param userInput                 regex provided by user
@@ -84,9 +86,9 @@ public class BatchCommand extends Command {
             throws CommandException {
         List<Index> indexList = new ArrayList<>();
         List<Person> personList = model.getFilteredPersonList();
-        for (int i = 1; i < personList.size() + 1; i++) {
-            Person person = personList.get(i - 1);
-            Index index = Index.fromOneBased(i);
+        for (int i = 0; i < personList.size(); i++) {
+            Person person = personList.get(i);
+            Index index = Index.fromZeroBased(i);
 
             String targetField;
             switch (searchType.searchType) {

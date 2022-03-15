@@ -21,8 +21,9 @@ public class BatchCommandParser implements Parser<BatchCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_SEARCH_TYPE, PREFIX_EQUALS);
 
-        String commandInput = args.split("by/")[0];
-        if (!argMultimap.arePrefixesPresent(PREFIX_SEARCH_TYPE, PREFIX_EQUALS)) {
+        String commandInput = argMultimap.getPreamble();
+        if (!argMultimap.arePrefixesPresent(PREFIX_SEARCH_TYPE, PREFIX_EQUALS)
+            || argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     BatchCommand.MESSAGE_USAGE));
         }

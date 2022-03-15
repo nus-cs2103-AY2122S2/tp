@@ -44,12 +44,12 @@ public class BatchCommandTest {
         // null -> returns false
         assertFalse(expectedBatchCommand.equals(null));
 
-        // different person -> returns false
+        // different command -> returns false
         assertFalse(expectedBatchCommand.equals(expectedBatchCommand2));
     }
 
     @Test
-    public void execute_personAcceptedByModel_rangeEditSuccessful() throws Exception {
+    public void execute_rangeEditSuccessful() throws Exception {
         String sampleCommand = "range edit p/12345678 by/phone =/9 ";
         ArgumentMultimap argumentMultimap = new ArgumentMultimap();
 
