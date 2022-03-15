@@ -8,8 +8,16 @@ HustleBook (HB) is a **desktop app for managing client details and meetings, opt
 * Table of Contents
   * [Quick Start](#quick-start)
   * [Features](#features)
-    * [Adding a client: `add`](#adding-a-client-add)
+    * [Adding a client : `add`](#adding-a-client--add)
     * [Listing all persons : `list`](#listing-all-persons--list)
+    * [Flagging a person : `flag`](#flagging-a-person--flag)
+    * [Editing a person : `edit`](#editing-a-person--edit)
+    * [Locating persons by name : `find`](#locating-persons-by-name--find)
+    * [Deleting a person : `delete`](#deleting-a-person--delete)
+    * [Clearing all entries : `clear`](#clearing-all-entries--clear)
+    * [Exiting the program : `exit`](#exiting-the-program--exit)
+    * [Saving the data](#saving-the-data)
+    * [Editing the data file](#editing-the-data-file)
   * [Command Summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -32,7 +40,7 @@ HustleBook (HB) is a **desktop app for managing client details and meetings, opt
 
    * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the HustleBook.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+   * **`delete`**`John Doe` : Deletes `John Doe` from the list.
 
    * **`clear`** : Deletes all contacts.
 
@@ -78,32 +86,24 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 
-### Adding a client: `add`
+### Adding a client : `add`
 
 Adds a client to the HustleBook.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [d/DATA]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [f/FLAG] [i/INFO] [d/DATE] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A client's data can be added in the future
+A client's data can be added in the future through edit command
 </div>
 
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 d/Salary-3400`
-
-
-
-### Adding additional information: `addinfo`
-
-Adds additional information that is relevant to a client
-
-Format: `Format: addinfo n/NAME [INFO] [VALUE]`
-
+* `d/DATE` will be set to today's date by default if not specified.
+* `i/INFO` will be set to `No further info` by default if not specified.
+* `t/TAG` will be empty by default if not specified.
+* `f/FLAG` will be set to `false` by default if not specified.
 
 Examples:
-* `addinfo n/John Doe Preference CryptoCurrencies`
-* `addinfo n/Betsy Risk High`
+* `add n/John Doe p/98765432 e/johnd@example.com a/Blk 775 Pasir Ris Street 71 S510775`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/NUS School of Computing, COM1 p/1234567 i/Salary of $3400 f/true`
 
 ### Listing all persons : `list`
 
@@ -111,15 +111,24 @@ Shows a list of all clients in the HustleBook.
 
 Format: `list`
 
+### Flagging a person : `flag`
+
+Flag a person in the HustleBook to mark them as important. Can also be used to unflag the person.
+
+Format: `flag INDEX f/FLAG`
+
+* `FLAG` input should either be true or false.
+* `True` or `False` is not case-sensitive
+
 ### Editing a person : `edit`
 
 Edits an existing person in the HustleBook.
 
-* Using **Index**:
+* Using **Name**:
 
-  Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+  Format: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [i/INFO] [d/DATE] [t/TAG]…​`
 
-  * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+  * Edits the person named `NAME`.
   * At least one of the optional fields must be provided.
   * Existing values will be updated to the input values.
   * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
@@ -141,7 +150,7 @@ Edits an existing person in the HustleBook.
     Examples:
     * `edit n/John Doe d/04-12-2020` Edits the meeting date of the person with the name `John Doe` to `04-12-2020` which is 4th Dec 2020. 
 
-### Locating persons by name: `find`
+### Locating persons by name : `find`
 
 Finds persons whose names contain any of the given keywords.
 
@@ -157,6 +166,8 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
+
+
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a person : `delete`
@@ -165,7 +176,8 @@ Deletes the specified person from the HustleBook.
 
 Format: `delete NAME`
 
-Deletes the person with the specified `NAME`.
+* Deletes the person with the specified `NAME`.
+* In the event of multiple clients found with the same `NAME`, the first occurrence of the client in the list will be deleted.
   
 Examples: 
 * `delete John` deletes the person named `John` in the HustleBook.
@@ -202,12 +214,13 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                |
-|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [d/DATA]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 d/Salary-3400` |
-| **List**   | `list`                                                                                                                                                          |
-| **Clear**  | `clear`                                                                                                                                                         |
-| **Delete** | `delete NAME`<br> e.g., `delete John`                                                                                                                             |
-| **Edit**   | `edit NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit John n/James Lee e/jameslee@example.com`                                     |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                      |
-| **Help**   | `help`                                                                                                                                                          |
+| Action     | Format, Examples                                                                                                                                                                 |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [d/DATE] [i/INFO] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 d/Salary-3400` |
+| **List**   | `list`                                                                                                                                                                           |
+| **Clear**  | `clear`                                                                                                                                                                          |
+| **Delete** | `delete NAME`<br> e.g., `delete John`                                                                                                                                              |
+| **Flag**   | `flag INDEX f/FLAG`<br> e.g., `flag 3 f/true`                                                                                                                                    |
+| **Edit**   | `edit NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DATE] [i/INFO] [t/TAG]…​`<br> e.g.,`edit John n/James Lee e/jameslee@example.com`                                    |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                       |
+| **Help**   | `help`                                                                                                                                                                           |
