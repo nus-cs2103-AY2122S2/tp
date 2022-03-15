@@ -60,7 +60,7 @@ public class DueDate extends TransactionField {
         if (!(other instanceof DueDate)) {
             return false;
         }
-        return ((DueDate) other).value.equals(getValue());
+        return ((DueDate) other).value.equals(value);
     }
 
     @Override
