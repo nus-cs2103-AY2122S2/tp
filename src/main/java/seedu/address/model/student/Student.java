@@ -106,9 +106,11 @@ public class Student implements Entity {
                 .append("; Name: ")
                 .append(getName())
                 .append("; Email: ")
-                .append(getEmail())
-                .append("; Telegram: ")
-                .append(getTelegram());
+                .append(getEmail());
+        if (telegram.isPresent()) {
+            builder.append("; Telegram: ")
+                    .append(getTelegram().get().value);
+        }
 
         return builder.toString();
     }

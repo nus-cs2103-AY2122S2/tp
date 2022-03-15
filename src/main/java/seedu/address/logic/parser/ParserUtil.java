@@ -86,9 +86,11 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code phone} is invalid.
      */
-    public static Optional<Telegram> parseTelegram(String phone) throws ParseException {
-        requireNonNull(phone);
-        String trimmedTelegram = phone.trim();
+    public static Optional<Telegram> parseTelegram(Optional<String> telegram) throws ParseException {
+        if (telegram.isEmpty()) {
+            return Optional.empty();
+        }
+        String trimmedTelegram = telegram.get().trim();
         if (!Telegram.isValidTelegram(trimmedTelegram)) {
             throw new ParseException(Telegram.MESSAGE_CONSTRAINTS);
         }
