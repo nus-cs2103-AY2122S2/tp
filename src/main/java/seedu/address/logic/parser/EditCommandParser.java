@@ -2,9 +2,11 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPLICATION_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERVIEW_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -34,7 +36,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_NAME, PREFIX_PHONE,
-                        PREFIX_EMAIL, PREFIX_COURSE, PREFIX_TAG);
+                        PREFIX_EMAIL, PREFIX_COURSE, PREFIX_TAG, PREFIX_APPLICATION_STATUS, PREFIX_INTERVIEW_STATUS);
 
         Index index;
 
@@ -45,6 +47,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+
         if (argMultimap.getValue(PREFIX_ID).isPresent()) {
             editPersonDescriptor.setStudentID(ParserUtil.parseStudentID(argMultimap.getValue(PREFIX_ID).get()));
         }
@@ -60,7 +63,18 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_COURSE).isPresent()) {
             editPersonDescriptor.setCourse(ParserUtil.parseCourse(argMultimap.getValue(PREFIX_COURSE).get()));
         }
+
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
+
+        if (argMultimap.getValue(PREFIX_APPLICATION_STATUS).isPresent()) {
+            editPersonDescriptor.setApplicationStatus(
+                    ParserUtil.parseApplicationStatus(argMultimap.getValue(PREFIX_APPLICATION_STATUS).get()));
+        }
+
+        if (argMultimap.getValue(PREFIX_INTERVIEW_STATUS).isPresent()) {
+            editPersonDescriptor.setInterviewStatus(
+                    ParserUtil.parseInterviewStatus(argMultimap.getValue(PREFIX_INTERVIEW_STATUS).get()));
+        }
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
