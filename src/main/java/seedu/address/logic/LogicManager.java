@@ -17,6 +17,8 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.prescription.Prescription;
+import seedu.address.model.person.Person;
+import seedu.address.model.testresult.TestResult;
 import seedu.address.storage.Storage;
 
 /**
@@ -74,6 +76,10 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Prescription> getFilteredPrescriptionList() {
         return model.getFilteredPrescriptionList();
+
+    @Override
+    public ObservableList<TestResult> getFilteredTestResultList() {
+        return model.getFilteredTestResultList();
     }
 
     @Override

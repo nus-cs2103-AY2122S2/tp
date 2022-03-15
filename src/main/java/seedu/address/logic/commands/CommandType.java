@@ -2,10 +2,13 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.logic.commands.testresult.ViewTestResultCommand;
 import seedu.address.logic.parser.contact.AddContactCommandParser;
 import seedu.address.logic.parser.contact.ViewContactCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.prescription.AddPrescriptionCommandParser;
+import seedu.address.logic.parser.testresult.AddTestResultCommandParser;
+import seedu.address.logic.parser.testresult.ViewTestResultCommandParser;
 
 public enum CommandType {
     DEFAULT, CONTACT, MEDICAL, CONSULTATION, PRESCRIPTION, TEST;
@@ -65,7 +68,7 @@ public enum CommandType {
         case PRESCRIPTION:
             return new AddPrescriptionCommandParser().parse(arguments);
         case TEST:
-            throw new ParseException("WIP: Test type");
+            return new AddTestResultCommandParser().parse(arguments);
         default:
             throw new ParseException(MESSAGE_CONSTRAINTS);
         }
@@ -92,7 +95,7 @@ public enum CommandType {
         case PRESCRIPTION:
             throw new ParseException("WIP: Prescription type");
         case TEST:
-            throw new ParseException("WIP: Test type");
+            return new ViewTestResultCommandParser().parse(arguments);
         default:
             throw new ParseException(MESSAGE_CONSTRAINTS);
         }

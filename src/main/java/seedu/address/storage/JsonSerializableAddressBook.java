@@ -14,6 +14,8 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.prescription.Prescription;
+import seedu.address.model.person.Person;
+import seedu.address.model.testresult.TestResult;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -24,24 +26,26 @@ class JsonSerializableAddressBook {
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
     public static final String MESSAGE_DUPLICATE_CONTACT = "Contact list contains duplicate person(s).";
     public static final String MESSAGE_DUPLICATE_PRESCRIPTION = "Prescription list contains duplicate person(s).";
-
-    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
-    private final List<JsonAdaptedContact> contacts = new ArrayList<>();
+    public static final String MESSAGE_DUPLICATE_TEST_RESULT = "Test result list contains duplicate test(s).";
+    private final List<JsonAdaptedTestResult> testResults = new ArrayList<>();
     private final List<JsonAdaptedPrescription> prescriptions = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons and contacts.
+     * Constructs a {@code JsonSerializableAddressBook} with the given persons, contacts and test results.
      */
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
                                        @JsonProperty("contacts") List<JsonAdaptedContact> contacts,
-                                       @JsonProperty("prescriptions") List<JsonAdaptedPrescription> prescriptions) {
+                                       @JsonProperty("prescriptions") List<JsonAdaptedPrescription> prescriptions,
+                                       @JsonProperty("testResults") List<JsonAdaptedTestResult> testResults) {
         this.persons.addAll(persons);
         if (!contacts.isEmpty()) {
             this.contacts.addAll(contacts);
         }
         if (!prescriptions.isEmpty()) {
             this.prescriptions.addAll(prescriptions);
+        if (!testResults.isEmpty()) {
+            this.testResults.addAll(testResults);
         }
     }
 
@@ -55,6 +59,7 @@ class JsonSerializableAddressBook {
         contacts.addAll(source.getContactList().stream().map(JsonAdaptedContact::new).collect(Collectors.toList()));
         prescriptions.addAll(source.getPrescriptionList().stream().map(JsonAdaptedPrescription::new)
                 .collect(Collectors.toList()));
+        testResults.addAll(source.getTestResultList().stream().map(JsonAdaptedTestResult::new).collect(Collectors.toList()));
     }
 
     /**
@@ -84,6 +89,12 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PRESCRIPTION);
             }
             addressBook.addPrescription(prescription);
+        for (JsonAdaptedTestResult jsonAdaptedTestResult : testResults) {
+            TestResult testResult = jsonAdaptedTestResult.toModelType();
+            if (addressBook.hasTestResult(testResult)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_TEST_RESULT);
+            }
+            addressBook.addTestResult(testResult);
         }
         return addressBook;
     }

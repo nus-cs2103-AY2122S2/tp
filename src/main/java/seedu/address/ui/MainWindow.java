@@ -17,8 +17,10 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.testresult.TestResult;
 import seedu.address.ui.contact.ContactListPanel;
 import seedu.address.ui.prescription.PrescriptionListPanel;
+import seedu.address.ui.testresult.TestResultListPanel;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -37,6 +39,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ContactListPanel contactListPanel;
     private PrescriptionListPanel prescriptionListPanel;
+    private TestResultListPanel testResultListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -118,6 +121,7 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         contactListPanel = new ContactListPanel(logic.getFilteredContactList());
         prescriptionListPanel = new PrescriptionListPanel(logic.getFilteredPrescriptionList());
+        testResultListPanel = new TestResultListPanel(logic.getFilteredTestResultList());
 
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
@@ -155,6 +159,10 @@ public class MainWindow extends UiPart<Stage> {
         case PRESCRIPTION:
             personListPanelPlaceholder.getChildren().remove(0);
             personListPanelPlaceholder.getChildren().add(prescriptionListPanel.getRoot());
+            return;
+        case TEST:
+            personListPanelPlaceholder.getChildren().remove(0);
+            personListPanelPlaceholder.getChildren().add(testResultListPanel.getRoot());
             return;
         default:
             personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());

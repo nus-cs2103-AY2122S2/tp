@@ -1,0 +1,50 @@
+package seedu.address.ui.testresult;
+
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.scene.layout.Region;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.testresult.TestResult;
+import seedu.address.ui.UiPart;
+
+import java.util.logging.Logger;
+
+/**
+ * Panel containing the list of persons.
+ */
+public class TestResultListPanel extends UiPart<Region> {
+    private static final String FXML = "contact/ContactListPanel.fxml";
+    private final Logger logger = LogsCenter.getLogger(TestResultListPanel.class);
+
+    @FXML
+    private ListView<TestResult> contactTestResult;
+
+    /**
+     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     */
+    public TestResultListPanel(ObservableList<TestResult> testResultList) {
+        super(FXML);
+        contactTestResult.setItems(testResultList);
+        contactTestResult.setCellFactory(listView -> new TestResultListViewCell());
+    }
+
+    /**
+     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     */
+    class TestResultListViewCell extends ListCell<TestResult> {
+        @Override
+        protected void updateItem(TestResult testResult, boolean empty) {
+            super.updateItem(testResult, empty);
+
+            if (empty || testResult == null) {
+                setGraphic(null);
+                setText(null);
+            } else {
+                setGraphic(new TestResultCard(testResult, getIndex() + 1).getRoot());
+            }
+        }
+    }
+
+}
