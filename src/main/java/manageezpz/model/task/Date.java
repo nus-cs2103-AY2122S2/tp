@@ -32,6 +32,15 @@ public class Date {
     }
 
     /**
+     * Gets today's date.
+     * @return Today's date
+     */
+    public static Date getTodayDate() {
+        LocalDate todayDate = LocalDate.now();
+        return new Date(todayDate.toString());
+    }
+
+    /**
      * Validates the format of date provided.
      * @param date String representation of date.
      * @return true if date is in the correct parsable format, false otherwise.
@@ -49,5 +58,17 @@ public class Date {
 
     public String format(DateTimeFormatter dtf) {
         return getParsedDate().format(dtf);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Date) {
+            return date.equals(((Date) obj).date);
+        } else {
+            return false;
+        }
     }
 }

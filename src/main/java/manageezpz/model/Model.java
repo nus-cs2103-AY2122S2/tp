@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import manageezpz.commons.core.GuiSettings;
+import manageezpz.logic.parser.Prefix;
 import manageezpz.model.person.Person;
 import manageezpz.model.task.Deadline;
 import manageezpz.model.task.Event;
@@ -170,4 +171,14 @@ public interface Model {
      * Returns true if a task with the same identity as {@code deadline} exists in the task list.
      */
     boolean hasTask(Task task);
+
+    /**
+     * Returns a list of all tasks.
+     */
+    String listTasks();
+
+    /**
+     * Returns a list of tasks that satisfy the option given.
+     */
+    String listTasks(Prefix option);
 }
