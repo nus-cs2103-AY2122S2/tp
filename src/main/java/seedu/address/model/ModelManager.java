@@ -19,9 +19,13 @@ import seedu.address.model.person.Person;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
+    private static final String UNABLE_TO_UNDO = "Command cannot be undone";
+
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+
+    private AddressBook backup;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -79,6 +83,7 @@ public class ModelManager implements Model {
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
+        backup = copyAddressBook();
         this.addressBook.resetData(addressBook);
     }
 
@@ -95,20 +100,40 @@ public class ModelManager implements Model {
 
     @Override
     public void deletePerson(Person target) {
+        backup = copyAddressBook();
         addressBook.removePerson(target);
     }
 
     @Override
     public void addPerson(Person person) {
+        backup = copyAddressBook();
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
+        backup = copyAddressBook();
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public void undoCommand() {
+        setAddressBook(backup);
+    }
+
+    /**
+     * Makes a deep copy of an AddressBook
+     */
+    public AddressBook copyAddressBook() {
+        AddressBook copiedAddressBook = new AddressBook();
+        int currAddressBookSize = addressBook.getPersonList().size();
+        for (int i = 0; i < currAddressBookSize; i++) {
+            Person copiedPerson = Person.copyPerson(addressBook.getPersonList().get(i));
+            copiedAddressBook.addPerson(copiedPerson);
+        }
+        return copiedAddressBook;
     }
 
     //=========== Filtered Person List Accessors =============================================================

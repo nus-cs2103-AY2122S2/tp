@@ -41,6 +41,20 @@ public class Person {
         this.tags.addAll(tags);
     }
 
+    /**
+     * Copies a person object.
+     */
+    public static Person copyPerson(Person personToCopy) {
+        Name copiedName = personToCopy.getName();
+        Phone copiedPhone = personToCopy.getPhone();
+        Email copiedEmail = personToCopy.getEmail();
+        InsurancePackage copiedInsurancePackage = personToCopy.getInsurancePackage();
+        Address copiedAddress = personToCopy.getAddress();
+        Set<Tag> copiedTags = new HashSet<>();
+        copiedTags.addAll(personToCopy.getTags());
+        return new Person(copiedName, copiedPhone, copiedEmail, copiedInsurancePackage, copiedAddress, copiedTags);
+    }
+
     public Name getName() {
         return name;
     }
