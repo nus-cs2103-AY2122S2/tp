@@ -28,14 +28,14 @@ public enum LabStatus {
     public static LabStatus map(String toMap) throws ParseException {
 
         switch (toMap) {
-            case "u":
-                return LabStatus.UNSUBMITTED;
-            case "s":
-                return LabStatus.SUBMITTED;
-            case "g":
-                return LabStatus.GRADED;
-            default:
-                throw new IllegalArgumentException("Did not expect " + toMap);
+        case "u":
+            return LabStatus.UNSUBMITTED;
+        case "s":
+            return LabStatus.SUBMITTED;
+        case "g":
+            return LabStatus.GRADED;
+        default:
+            throw new IllegalArgumentException("Did not expect " + toMap);
         }
 
     }

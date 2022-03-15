@@ -1,5 +1,13 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LAB;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LABSTATUS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
+import java.util.List;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -10,14 +18,6 @@ import seedu.address.model.person.exceptions.LabNotFoundException;
 import seedu.address.model.person.lab.Lab;
 import seedu.address.model.person.lab.LabList;
 import seedu.address.model.person.lab.LabStatus;
-
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LAB;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LABSTATUS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 /**
  * Edits the status of a lab of a student in the TAddress Book.
@@ -35,7 +35,8 @@ public class EditLabStatusCommand extends Command {
 
     // Edited status of Lab {LAB_NUMBER} for {PERSON_NAME} to {NEW_STATUS}
     public static final String MESSAGE_EDIT_LAB_STATUS_SUCCESS = "Edited status of Lab %1$s for %2$s to %3$s";
-    public static final String MESSAGE_INVALID_STATUS_CHANGE = "The lab status provided is the same as the previous one";
+    public static final String MESSAGE_INVALID_STATUS_CHANGE =
+            "The lab status provided is identical to the previous one";
     // add this to commons.core.Messages if it also applies to other commands
     public static final String MESSAGE_INVALID_LAB_NUMBER = "The lab number provided is invalid";
 

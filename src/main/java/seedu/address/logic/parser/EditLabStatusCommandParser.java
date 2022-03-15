@@ -5,14 +5,13 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LAB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LABSTATUS;
 
+import java.util.stream.Stream;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditLabStatusCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.lab.Lab;
 import seedu.address.model.person.lab.LabStatus;
-
-import java.util.stream.Stream;
 
 /**
  * Parses input arguments and creates a new DeleteCommand object
