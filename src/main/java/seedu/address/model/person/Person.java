@@ -223,6 +223,9 @@ public class Person implements Serializable {
         return Collections.unmodifiableList(transactions);
     }
 
+    public boolean hasTransaction() {
+        return !getTransactions().isEmpty();
+    }
     /**
      * Returns true if both persons have the same email.
      * This defines a weaker notion of equality between two persons.
