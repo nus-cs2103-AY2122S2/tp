@@ -95,10 +95,20 @@ Shows a list of all products in the application.
 
 Format: `list`
 
-*Alternatively*, we are able to show only products that match one or more (tag, value) pairs.
+*Alternatively*, we are able to show only products that match one or more (tag, value) pairs. 
+Values are case-sensitive.
+
+Tags and their values: `n:NAME` `c:CATEGORY` `e:EXPIRY_DATE` `p:PRICE` `d:DESCRIPTION`
 
 Format: `list [TAG:VALUE ...]`
-Example: `list n:Water`
+
+Examples: 
+
+`list n:Water` lists all products that has Water as name.
+
+`list n:Bread e:01/04/2022` lists all products that has Bread as name and expiry date on 01/04/2022.
+
+`list e:01/05/2022` lists all products that has expiry date on 01/05/2022.
 
 ### Updating products : `update`
 
