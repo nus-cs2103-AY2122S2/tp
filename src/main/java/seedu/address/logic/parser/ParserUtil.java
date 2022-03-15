@@ -178,7 +178,7 @@ public class ParserUtil {
         List<TaModule> lastShownModuleList = model.getFilteredModuleList();
 
         if (targetIndex.getZeroBased() >= lastShownModuleList.size()) {
-            throw new ParseException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new ParseException(Messages.MESSAGE_INVALID_TA_MODULE_DISPLAYED_INDEX);
         }
 
         return lastShownModuleList.get(targetIndex.getZeroBased());
