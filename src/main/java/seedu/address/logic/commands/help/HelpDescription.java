@@ -160,4 +160,7 @@ public class HelpDescription {
     public static final String EXIT_COMMAND_DESCRIPTION =
             "Well its an exit command, of course it going to terminate the program \n"
             + "Format: 'exit'";
+
+    public static final String COMMAND_NOT_FOUND_DESCRIPTION =
+            "Sorry, we don't have this command. Please try again.";
 }

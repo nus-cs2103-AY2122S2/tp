@@ -16,6 +16,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.help.HelpDescription;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -77,7 +78,7 @@ public class MainWindow extends UiPart<Stage> {
 
         setAccelerators();
 
-        helpWindow = new HelpWindow();
+        helpWindow = new HelpWindow(HelpDescription.OVERALL_HELPING_DESCRIPTION);
     }
 
     public Stage getPrimaryStage() {
@@ -154,15 +155,23 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the help window or focuses on it if it's already opened.
+     * Handle help command based on command
      */
-    @FXML
-    public void handleHelp() {
+    private void handleHelp() {
         if (!helpWindow.isShowing()) {
             helpWindow.show();
         } else {
             helpWindow.focus();
         }
+    }
+
+    /**
+     * Opens the help window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleHelpTab() {
+        helpWindow.setHelpDescription(HelpDescription.OVERALL_HELPING_DESCRIPTION);
+        handleHelp();
     }
 
     void show() {
@@ -197,6 +206,8 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowHelp()) {
+                resultDisplay.setFeedbackToUser("Display help");
+                helpWindow.setHelpDescription(commandResult.getFeedbackToUser());
                 handleHelp();
             }
 

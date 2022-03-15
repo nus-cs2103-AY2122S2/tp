@@ -16,7 +16,6 @@ import seedu.address.commons.core.LogsCenter;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2122s2-cs2103-w17-4.github.io/tp/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -27,21 +26,25 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     private Label helpMessage;
 
+    private String helpDescription;
+
+
     /**
      * Creates a new HelpWindow.
      *
      * @param root Stage to use as the root of the HelpWindow.
      */
-    public HelpWindow(Stage root) {
+    public HelpWindow(Stage root, String helpDescription) {
         super(FXML, root);
-        helpMessage.setText(HELP_MESSAGE);
+        this.helpDescription = helpDescription;
+        helpMessage.setText(this.helpDescription);
     }
 
     /**
      * Creates a new HelpWindow.
      */
-    public HelpWindow() {
-        this(new Stage());
+    public HelpWindow(String helpDescription) {
+        this(new Stage(), helpDescription);
     }
 
     /**
@@ -98,5 +101,10 @@ public class HelpWindow extends UiPart<Stage> {
         final ClipboardContent url = new ClipboardContent();
         url.putString(USERGUIDE_URL);
         clipboard.setContent(url);
+    }
+
+    public void setHelpDescription(String helpDescription) {
+        this.helpDescription = helpDescription;
+        helpMessage.setText(this.helpDescription);
     }
 }
