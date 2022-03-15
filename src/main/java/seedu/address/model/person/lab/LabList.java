@@ -37,6 +37,22 @@ public class LabList implements Iterable<Lab> {
         return internalList.stream().anyMatch(toCheck::isSameLab);
     }
 
+    public Lab getLab(Lab labToGet) {
+        requireNonNull(labToGet);
+
+        if (!contains(labToGet)) {
+            throw new LabNotFoundException(labToGet.labNumber);
+        }
+
+        for (Lab l : internalList) {
+            if (l.isSameLab(labToGet)) {
+                return l;
+            }
+        }
+
+        throw new LabNotFoundException(labToGet.labNumber);
+    }
+
     public Lab getLabByLabNumber(int labNumberToGet) throws LabNotFoundException {
         requireNonNull(labNumberToGet);
 
