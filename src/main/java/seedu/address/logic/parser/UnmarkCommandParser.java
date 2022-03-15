@@ -21,6 +21,7 @@ public class UnmarkCommandParser implements Parser<UnmarkCommand> {
      * object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
+    @SuppressWarnings("OptionalGetWithoutIsPresent") // This is checked using our custom function (arePrefixesPresent).
     public UnmarkCommand parse(String args) throws ParseException {
         UnmarkCommand unmarkCommand;
 
