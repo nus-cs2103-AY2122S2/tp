@@ -97,17 +97,18 @@ public class RangeCommandTest {
     @Test
     public void execute_personAcceptedByModel_invalidIndex() throws Exception {
         RangeCommandTest.ModelStubRanged modelStub = new RangeCommandTest.ModelStubRanged();
-        String sampleCommand = "range delete from/2 to/1 ";
+        String sampleCommand = "delete from/2 to/1";
         ArgumentMultimap argumentMultimap = new ArgumentMultimap();
         argumentMultimap.put(new Prefix(""), "delete");
+        argumentMultimap.put(new Prefix("/from"), "2");
+        argumentMultimap.put(new Prefix("/to"), "1");
         RangeCommand rangeCommand =
-                new RangeCommand(Index.fromZeroBased(1), Index.fromZeroBased(3), argumentMultimap, sampleCommand);
+                new RangeCommand(Index.fromZeroBased(2), Index.fromZeroBased(1), argumentMultimap, sampleCommand);
         assertCommandFailure(rangeCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that have all the methods failing.
      */
     private class ModelStub implements Model {
         @Override

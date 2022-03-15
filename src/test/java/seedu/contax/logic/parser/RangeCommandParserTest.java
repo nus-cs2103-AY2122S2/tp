@@ -8,6 +8,7 @@ import static seedu.contax.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.contax.commons.core.Messages;
 import seedu.contax.commons.core.index.Index;
 import seedu.contax.logic.commands.RangeCommand;
 
@@ -17,7 +18,7 @@ import seedu.contax.logic.commands.RangeCommand;
  */
 public class RangeCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-            RangeCommand.MESSAGE_EDIT_USAGE);
+            RangeCommand.MESSAGE_USAGE);
 
     private RangeCommandParser parser = new RangeCommandParser();
 
@@ -35,6 +36,20 @@ public class RangeCommandParserTest {
 
         // field name is provided
         assertParseFailure(parser, "range edit n/name", MESSAGE_INVALID_FORMAT);
+    }
+
+    @Test
+    public void parse_someFieldsSpecified_invalidIndex() {
+        Index fromIndex = INDEX_FIRST_PERSON;
+        Index toIndex = INDEX_SECOND_PERSON;
+        String sampleUserInput = "range delete from/2 to/1";
+        ArgumentMultimap argumentMultimap = new ArgumentMultimap();
+        argumentMultimap.put(new Prefix(""), "range delete");
+        argumentMultimap.put(new Prefix("/from"), "2");
+        argumentMultimap.put(new Prefix("/to"), "1");
+        RangeCommand expectedRangeCommand =
+                new RangeCommand(fromIndex, toIndex, argumentMultimap, "range delete");
+        assertParseFailure(parser, sampleUserInput, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test

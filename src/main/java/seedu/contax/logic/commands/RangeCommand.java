@@ -3,11 +3,9 @@ package seedu.contax.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.contax.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_RANGE_FROM;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_RANGE_TO;
-import static seedu.contax.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,24 +24,15 @@ import seedu.contax.model.Model;
 public class RangeCommand extends Command {
     public static final String COMMAND_WORD = "range";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": command in range"
-            + "by the index number used in the displayed person list. "
-            + "Parameters: from/FROM_INDEX to/TO_INDEX (must be a positive integer) "
-            + "Example command range edit and range delete ";
-
-    public static final String MESSAGE_EDIT_USAGE = COMMAND_WORD + ": Edits the details of the person in range"
-            + "by the index number used in the displayed person list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Parameters: from/FROM_INDEX to/TO_INDEX (must be a positive integer) "
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com"
-            + PREFIX_RANGE_FROM + "1"
-            + PREFIX_RANGE_TO + "3";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Perform command in range"
+            + "by the index number used in the displayed person list. \n"
+            + "Parameters: "
+            + "COMMAND (must be valid command without index) "
+            + PREFIX_RANGE_FROM + "FROM "
+            + PREFIX_RANGE_TO + "TO \n"
+            + "Example: " + COMMAND_WORD + " edit "
+            + PREFIX_PHONE + "12345678 "
+            + PREFIX_ADDRESS + "new address ";
 
     private final Index fromIndex;
     private final Index toIndex;
@@ -94,10 +83,11 @@ public class RangeCommand extends Command {
 
     private String createNewCommand(String commandInput, String index) {
         StringBuilder output = new StringBuilder();
-        String[] splitCommand = commandInput.trim().split(" ");
+        commandInput = commandInput.trim();
+        String[] splitCommand = commandInput.split(" ");
         output.append(splitCommand[0]).append(" ").append(index).append(" ");
-        for (int i = 1; i < splitCommand.length; i++) {
-            output.append(" ").append(splitCommand[i]);
+        if (commandInput.contains(" ")) {
+            output.append(commandInput.substring(commandInput.indexOf(" ")));
         }
         return output.toString();
     }
