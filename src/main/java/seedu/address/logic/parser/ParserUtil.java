@@ -195,7 +195,7 @@ public class ParserUtil {
         case "g":
             return LabStatus.GRADED;
         default:
-            throw new IllegalArgumentException("Did not expect " + trimmedLabStatus);
+            throw new ParseException(Lab.MESSAGE_CONSTRAINTS);
         }
     }
 
