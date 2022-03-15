@@ -1,6 +1,9 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.TYPE_CLASS;
+import static seedu.address.logic.parser.CliSyntax.TYPE_MODULE;
+import static seedu.address.logic.parser.CliSyntax.TYPE_STUDENT;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -15,6 +18,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.classgroup.ClassGroupId;
 import seedu.address.model.classgroup.ClassGroupType;
+import seedu.address.model.entity.EntityType;
 import seedu.address.model.person.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
@@ -213,6 +217,26 @@ public class ParserUtil {
             return type;
         } catch (IllegalArgumentException e) {
             throw new ParseException(Messages.MESSAGE_INVALID_COMMAND_FORMAT);
+        }
+    }
+
+    /**
+     * Parses a {@code String entityType} into an {@code EntityType}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code entityType} is invalid.
+     */
+    public static EntityType parseEntity(String entityType) throws ParseException {
+        String trimmedEntityType = entityType.trim();
+        switch(trimmedEntityType) {
+        case TYPE_STUDENT:
+            return EntityType.STUDENT;
+        case TYPE_MODULE:
+            return EntityType.TA_MODULE;
+        case TYPE_CLASS:
+            return EntityType.CLASS_GROUP;
+        default:
+            throw new ParseException(Messages.MESSAGE_UNKNOWN_ENTITY);
         }
     }
 

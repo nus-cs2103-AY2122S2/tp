@@ -15,7 +15,6 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.entity.EntityType;
 
 /**
  * Parses user input.
@@ -51,7 +50,7 @@ public class TAssistParser {
             return new DeleteCommandParser().parse(arguments, model);
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommand(EntityType.valueOf(arguments.trim().toUpperCase()));
+            return new ListCommand(ParserUtil.parseEntity(arguments.trim().split("\\s")[0]));
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
