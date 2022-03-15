@@ -14,8 +14,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.ContactWithNricPredicate;
-import seedu.address.model.person.Nric;
-import seedu.address.model.person.NricPredicate;
+import seedu.address.model.patient.Nric;
+import seedu.address.model.patient.NricPredicate;
 
 public class AddContactCommand extends Command {
     public static final String COMMAND_WORD = "add";

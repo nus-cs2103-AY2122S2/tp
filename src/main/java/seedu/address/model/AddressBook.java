@@ -7,8 +7,10 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.UniqueContactList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.patient.Patient;
+import seedu.address.model.patient.UniquePersonList;
+import seedu.address.model.prescription.Prescription;
+import seedu.address.model.prescription.UniquePrescriptionList;
 
 /**
  * Wraps all data at the address-book level
@@ -17,6 +19,7 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UniquePrescriptionList prescriptions;
     private final UniqueContactList contacts;
 
     /*
@@ -28,6 +31,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        prescriptions = new UniquePrescriptionList();
         contacts = new UniqueContactList();
     }
 
@@ -47,8 +51,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Replaces the contents of the person list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
      */
-    public void setPersons(List<Person> persons) {
-        this.persons.setPersons(persons);
+    public void setPersons(List<Patient> patients) {
+        this.persons.setPersons(patients);
     }
 
     /**
@@ -66,17 +70,28 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return persons.contains(person);
+    public boolean hasPerson(Patient patient) {
+        requireNonNull(patient);
+        return persons.contains(patient);
     }
 
     /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
-    public void addPerson(Person p) {
+    public void addPerson(Patient p) {
         persons.add(p);
+    }
+    public void addPrescription(Prescription p) {
+        prescriptions.add(p);
+    }
+
+    /**
+     * Returns true if a prescription with the same identity as {@code prescription} exists in the address book.
+     */
+    public boolean hasPrescription(Prescription prescription) {
+        requireNonNull(prescription);
+        return prescriptions.contains(prescription);
     }
 
     /**
@@ -84,17 +99,17 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
-    public void setPerson(Person target, Person editedPerson) {
-        requireNonNull(editedPerson);
+    public void setPerson(Patient target, Patient editedPatient) {
+        requireNonNull(editedPatient);
 
-        persons.setPerson(target, editedPerson);
+        persons.setPerson(target, editedPatient);
     }
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removePerson(Person key) {
+    public void removePerson(Patient key) {
         persons.remove(key);
     }
 
@@ -154,7 +169,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<Person> getPersonList() {
+    public ObservableList<Patient> getPersonList() {
         return persons.asUnmodifiableObservableList();
     }
 
@@ -162,6 +177,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Contact> getContactList() {
         return contacts.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Prescription> getPrescriptionList() {
+        return prescriptions.asUnmodifiableObservableList();
     }
 
     @Override
