@@ -12,6 +12,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_IMMUNIZATION_HISTORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SURGERIES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 
 import seedu.address.logic.commands.Command;
@@ -42,6 +43,7 @@ public class AddMedicalCommand extends Command {
             + PREFIX_GENDER + "GENDER "
             + PREFIX_ETHNICITY + "ETHNICITY "
             + "Example: " + COMMAND_WORD + " "
+            + PREFIX_TYPE + "medical "
             + PREFIX_NRIC + "S1234567L "
             + PREFIX_AGE + "22 "
             + PREFIX_BLOODTYPE + "O "
