@@ -10,6 +10,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 
 /**
  * A default model stub that have all of the methods failing.
@@ -56,6 +57,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void addTask(Task task, Group group) {
+
+    }
+
+    @Override
     public void setAddressBook(ReadOnlyAddressBook newData) {
         throw new AssertionError("This method should not be called.");
     }
@@ -72,6 +78,11 @@ public class ModelStub implements Model {
 
     @Override
     public boolean hasGroup(Group group) {
+        return false;
+    }
+
+    @Override
+    public boolean hasTask(Task task, Group group) {
         return false;
     }
 

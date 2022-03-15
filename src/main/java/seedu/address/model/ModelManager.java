@@ -13,6 +13,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -103,6 +104,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasTask(Task task, Group group) {
+        requireNonNull(group);
+        requireNonNull(task);
+        return addressBook.hasTask(task, group);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
@@ -125,9 +133,14 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addTask(Task task, Group group) {
+        addressBook.addTask(task, group);
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
     }
 
