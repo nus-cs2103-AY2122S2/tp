@@ -9,9 +9,14 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.DuplicateTaskException;
+import seedu.address.model.person.exceptions.InvalidTaskIndexException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.person.exceptions.TaskAlreadyCompleteException;
+import seedu.address.model.person.exceptions.TaskAlreadyNotCompleteException;
+
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
@@ -118,6 +123,75 @@ public class UniquePersonList implements Iterable<Person> {
                     setPerson(currPerson, updatedPerson);
                 } else {
                     throw new DuplicateTaskException();
+                }
+            }
+        }
+
+        if (!isPersonFound) {
+            throw new PersonNotFoundException();
+        }
+    }
+
+    /**
+     * Mark {@code task} task belonging to a person {@code studentId} as done.
+     *
+     * @param studentId the student id of the person's whose task is to be marked as done.
+     * @param index the index of he task to be marked as complete.
+     */
+
+    public void markTaskOfPerson(StudentId studentId, Index index) {
+        requireAllNonNull(studentId, index);
+        boolean isPersonFound = false;
+
+        for (Person currPerson: internalList) {
+            if (currPerson.getStudentId().equals(studentId)) {
+                isPersonFound = true;
+                Person updatedPerson = currPerson.getCopy();
+                TaskList updatedPersonTaskList = updatedPerson.getTaskList();
+                int numberOfTasks = updatedPersonTaskList.getNumberOfTasks();
+                if (!updatedPersonTaskList.getTaskList().get(index.getZeroBased()).isTaskComplete()) {
+                    if (index.getZeroBased() < numberOfTasks && index.getOneBased() > 0) {
+                        updatedPersonTaskList.markTaskAsComplete(index.getZeroBased());
+                        setPerson(currPerson, updatedPerson);
+                    } else {
+                        throw new InvalidTaskIndexException();
+                    }
+                } else {
+                    throw new TaskAlreadyCompleteException();
+                }
+            }
+        }
+
+        if (!isPersonFound) {
+            throw new PersonNotFoundException();
+        }
+    }
+
+    /**
+     * Mark {@code task} task belonging to a person {@code studentId} as undone.
+     *
+     * @param studentId the student id of the person's whose task is to be marked as undone.
+     * @param index the index of he task to be marked as incomplete.
+     */
+    public void unmarkTaskOfPerson(StudentId studentId, Index index) {
+        requireAllNonNull(studentId, index);
+        boolean isPersonFound = false;
+
+        for (Person currPerson: internalList) {
+            if (currPerson.getStudentId().equals(studentId)) {
+                isPersonFound = true;
+                Person updatedPerson = currPerson.getCopy();
+                TaskList updatedPersonTaskList = updatedPerson.getTaskList();
+                int numberOfTasks = updatedPersonTaskList.getNumberOfTasks();
+                if (updatedPersonTaskList.getTaskList().get(index.getZeroBased()).isTaskComplete()) {
+                    if (index.getZeroBased() < numberOfTasks && index.getOneBased() > 0) {
+                        updatedPersonTaskList.markTaskAsNotComplete(index.getZeroBased());
+                        setPerson(currPerson, updatedPerson);
+                    } else {
+                        throw new InvalidTaskIndexException();
+                    }
+                } else {
+                    throw new TaskAlreadyNotCompleteException();
                 }
             }
         }

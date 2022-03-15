@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentId;
 import seedu.address.model.person.Task;
@@ -106,6 +107,32 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(task);
 
         persons.assignTaskToPerson(studentId, task);
+    }
+
+    /**
+     * Marks task with {@code index} belonging to {@code Person} with {@code studentId} as done.
+     *
+     * @param studentId the student id of the person who's task is to be marked.
+     * @param index the task to be marked as done.
+     */
+    public void markTaskOfPerson(StudentId studentId, Index index) {
+        requireNonNull(studentId);
+        requireNonNull(index);
+
+        persons.markTaskOfPerson(studentId, index);
+    }
+
+    /**
+     * Marks task with {@code index} belonging to {@code Person} with {@code studentId} as undone.
+     *
+     * @param studentId the student id of the person who's task is to be marked.
+     * @param index the task to be marked as undone.
+     */
+    public void unmarkTaskOfPerson(StudentId studentId, Index index) {
+        requireNonNull(studentId);
+        requireNonNull(index);
+
+        persons.unmarkTaskOfPerson(studentId, index);
     }
 
     /**
