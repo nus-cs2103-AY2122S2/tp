@@ -1,12 +1,17 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_MODULE_SWE;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -35,5 +40,32 @@ class AddModuleCommandTest {
         expectedModel.setPerson(firstPerson, editedPerson);
 
         assertCommandSuccess(addModuleCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void equals() {
+        Person first = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        List<Tag> modules = new ArrayList<>(first.getTags());
+
+        AddModuleCommand addFirstCommand = new AddModuleCommand(INDEX_FIRST_PERSON, modules);
+
+        // same object -> returns true
+        assertEquals(addFirstCommand, addFirstCommand);
+
+        // same values -> returns true
+        AddModuleCommand deleteFirstCommandCopy = new AddModuleCommand(INDEX_FIRST_PERSON, modules);
+        assertEquals(addFirstCommand, deleteFirstCommandCopy);
+
+        // different types -> returns false
+        assertNotEquals(1, addFirstCommand);
+
+        // null -> returns false
+        assertNotEquals(addFirstCommand, null);
+
+        // different person -> returns false
+        Person second = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        List<Tag> modulesCopy = new ArrayList<>(second.getTags());
+        AddModuleCommand addSecondCommand = new AddModuleCommand(INDEX_SECOND_PERSON, modulesCopy);
+        assertNotEquals(addFirstCommand, addSecondCommand);
     }
 }
