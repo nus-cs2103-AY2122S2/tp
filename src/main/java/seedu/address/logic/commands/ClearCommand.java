@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.model.Model;
 
 /**
- * Requests for confirmation from the user to clear the address book.
+ * Requests for confirmation from the user to clear TAPA.
  */
 public class ClearCommand extends Command {
 
