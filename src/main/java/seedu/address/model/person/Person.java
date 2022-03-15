@@ -214,6 +214,16 @@ public class Person implements Serializable {
     }
 
     /**
+     * Gets the list of all transactions
+     *
+     * @return All transactions associated with
+     * the person.
+     */
+    public List<Transaction> getTransactions() {
+        return Collections.unmodifiableList(transactions);
+    }
+
+    /**
      * Returns true if both persons have the same email.
      * This defines a weaker notion of equality between two persons.
      */
@@ -243,13 +253,14 @@ public class Person implements Serializable {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getTransactions().equals(getTransactions());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(getName(), getPhone(), getEmail(), getAddress(), tags);
+        return Objects.hash(getName(), getPhone(), getEmail(), getAddress(), tags, transactions);
     }
 
     @Override
@@ -267,6 +278,11 @@ public class Person implements Serializable {
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
+        }
+
+        if (!transactions.isEmpty()) {
+            builder.append("; Transactions: " );
+            transactions.forEach(builder::append);
         }
 
         return builder.toString();

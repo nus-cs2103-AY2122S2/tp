@@ -29,7 +29,7 @@ public class AddTransactionCommand extends Command {
             + DueDate.PREFIX + "DUE DATE <OPTIONAL>\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + "a/123.456 "
-            + "td/2022-11-11"
+            + "td/2022-11-11 "
             + "dd/2022-11-11";
 
     public static final String MESSAGE_SUCCESS = "Added Transaction to Person: %1$s";
