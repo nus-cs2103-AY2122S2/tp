@@ -25,7 +25,7 @@ public class FilterCommandParserTest {
         FilterCommand expectedFilterCommand =
                 new FilterCommand(new StudentHasLabPredicate(expectedLab));
 
-        assertParseSuccess(parser, "l/1 s/s", expectedFilterCommand);
+        assertParseSuccess(parser, " l/1 s/s", expectedFilterCommand);
 
     }
 
