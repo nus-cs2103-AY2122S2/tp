@@ -20,7 +20,6 @@ public class Group {
     private final GroupName groupName;
 
     // Data fields
-  
     private final Set<Person> persons = new HashSet<>();
     private final UniqueTaskList tasks = new UniqueTaskList();
 
