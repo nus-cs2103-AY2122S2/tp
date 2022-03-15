@@ -51,16 +51,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            if (argMultimap.getValue(PREFIX_OPTION).equals(Optional.empty())) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        EditCommand.MESSAGE_OPTION_NOT_FOUND, EditCommand.PERSON_MESSAGE_USAGE), pe);
-            } else if (argMultimap.getValue(PREFIX_OPTION).get().equals("person")) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                                                        EditCommand.PERSON_MESSAGE_USAGE), pe);
-            } else {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                                                         EditCommand.MODULE_MESSAGE_USAGE), pe);
-            }
         }
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
@@ -83,7 +75,9 @@ public class EditCommandParser implements Parser<EditCommand> {
 
             parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
-            Optional<Set<ModuleCode>> module = parseModulesForEdit(argMultimap.getValue(PREFIX_NEWMOD).get());
+            Optional<Set<ModuleCode>> module = (!argMultimap.getValue(PREFIX_NEWMOD).isEmpty()) ?
+                    parseModulesForEdit(argMultimap.getValue(PREFIX_NEWMOD).get()) :
+                    Optional.empty();
             if (module.isEmpty() && !editPersonDescriptor.isAnyFieldEdited()) {
                 throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
             }

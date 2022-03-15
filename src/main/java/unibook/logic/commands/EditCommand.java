@@ -75,7 +75,7 @@ public class EditCommand extends Command {
             + PREFIX_OPTION + "OPTION "
             + PREFIX_NAME + "NAME "
             + "[" + PREFIX_MODULE + "MODULECODE] "
-            + "[" + PREFIX_NEWMOD + "NEWMODULECODE] "
+            + "[" + PREFIX_NEWMOD + "NEWMODULECODE] \n "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_OPTION + "module "
             + PREFIX_NAME + "Software Engineering "
@@ -85,7 +85,6 @@ public class EditCommand extends Command {
 
     private static final Logger logger = LogsCenter.getLogger(LogicManager.class);
     private final Index index;
-    private static Model model;
     private ModuleCode modCode;
     private EditPersonDescriptor editPersonDescriptor;
     private EditModuleDescriptor editModuleDescriptor;
@@ -137,10 +136,9 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model, Boolean isPersonListShowing,
                                  Boolean isModuleListShowing) throws CommandException, ModuleNotFoundException {
-        this.model = model;
         requireNonNull(model);
 
-        if (!model.hasModule(this.modCode)) {
+        if (this.modCode != null && !model.hasModule(this.modCode)) {
             throw new CommandException(String.format(Messages.MESSAGE_MODULE_CODE_NOT_EXIST, modCode.toString()));
         }
 
