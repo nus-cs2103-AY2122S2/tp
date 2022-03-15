@@ -3,18 +3,25 @@ package seedu.trackbeau.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.STAFF_DESC_BOB;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_STAFF_JOHN;
 import static seedu.trackbeau.testutil.Assert.assertThrows;
 import static seedu.trackbeau.testutil.TypicalCustomers.ALICE;
 import static seedu.trackbeau.testutil.TypicalCustomers.getTypicalTrackBeau;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.trackbeau.model.customer.Customer;
+import seedu.trackbeau.model.customer.exceptions.DuplicateCustomerException;
+import seedu.trackbeau.testutil.CustomerBuilder;
 
 public class TrackBeauTest {
 
@@ -37,18 +44,17 @@ public class TrackBeauTest {
         assertEquals(newData, trackBeau);
     }
 
-    /*
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
-        Customer editedAlice = new CustomerBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withStaffs(STAFF_DESC_BOB)
+        Customer editedAlice = new CustomerBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withStaffs(VALID_STAFF_JOHN)
                 .build();
         List<Customer> newCustomers = Arrays.asList(ALICE, editedAlice);
         TrackBeauStub newData = new TrackBeauStub(newCustomers);
 
         assertThrows(DuplicateCustomerException.class, () -> trackBeau.resetData(newData));
     }
-*/
+
     @Test
     public void hasCustomer_nullCustomer_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> trackBeau.hasCustomer(null));
@@ -65,15 +71,14 @@ public class TrackBeauTest {
         assertTrue(trackBeau.hasCustomer(ALICE));
     }
 
-    /*
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInTrackBeau_returnsTrue() {
+    public void hasCustomer_customerWithSameIdentityFieldsInTrackBeau_returnsTrue() {
         trackBeau.addCustomer(ALICE);
-        Customer editedAlice = new CustomerBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withStaffs(STAFF_DESC_BOB)
+        Customer editedAlice = new CustomerBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
+                .withStaffs(VALID_STAFF_JOHN)
                 .build();
         assertTrue(trackBeau.hasCustomer(editedAlice));
     }
-    */
 
     @Test
     public void getCustomerList_modifyList_throwsUnsupportedOperationException() {

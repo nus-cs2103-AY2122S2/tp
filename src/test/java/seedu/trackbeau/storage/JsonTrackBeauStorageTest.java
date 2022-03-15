@@ -15,11 +15,12 @@ import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import seedu.trackbeau.commons.exceptions.DataConversionException;
 import seedu.trackbeau.model.ReadOnlyTrackBeau;
 import seedu.trackbeau.model.TrackBeau;
 
 public class JsonTrackBeauStorageTest {
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonAddressBookStorageTest");
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonTrackBeauStorageTest");
 
     @TempDir
     public Path testFolder;
@@ -44,23 +45,23 @@ public class JsonTrackBeauStorageTest {
         assertFalse(readTrackBeau("NonExistentFile.json").isPresent());
     }
 
-    /*
+
     @Test
     public void read_notJsonFormat_exceptionThrown() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("notJsonFormatTrackBeau.json"));
+        assertThrows(DataConversionException.class, () -> readTrackBeau("notJsonFormatTrackBeau.json"));
     }
 
     @Test
-    public void readAddressBook_invalidPersonAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("invalidCustomerTrackBeau.json"));
+    public void readTrackBeau_invalidCustomerTrackBeau_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readTrackBeau("invalidCustomerTrackBeau.json"));
     }
-*/
-    /*
+
+
     @Test
-    public void readAddressBook_invalidAndValidPersonAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("invalidAndValidCustomerTrackBeau.json"));
+    public void readTrackBeau_invalidAndValidCustomerTrackBeau_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readTrackBeau("invalidAndValidCustomerTrackBeau.json"));
     }
-*/
+
     @Test
     public void readAndSaveTrackBeau_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempTrackBeau.json");

@@ -19,6 +19,7 @@ import seedu.trackbeau.model.customer.Email;
 import seedu.trackbeau.model.customer.HairType;
 import seedu.trackbeau.model.customer.Name;
 import seedu.trackbeau.model.customer.Phone;
+import seedu.trackbeau.model.customer.SkinType;
 import seedu.trackbeau.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -28,9 +29,9 @@ public class ParserUtilTest {
     private static final String INVALID_SKIN_TYPE = " ";
     private static final String INVALID_HAIR_TYPE = " ";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_STAFF = "#Jane";
-    private static final String INVALID_SERVICE = "#Facial";
-    private static final String INVALID_ALLERGY = "#Nickel";
+    private static final String INVALID_STAFF = " ";
+    private static final String INVALID_SERVICE = " ";
+    private static final String INVALID_ALLERGY = " ";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -40,6 +41,10 @@ public class ParserUtilTest {
     private static final String VALID_HAIR_TYPE = "Dry";
     private static final String VALID_STAFF_1 = "Jane";
     private static final String VALID_STAFF_2 = "John";
+    private static final String VALID_SERVICE_1 = "Chemical Peel";
+    private static final String VALID_SERVICE_2 = "Acne Treatment";
+    private static final String VALID_ALLERGY_1 = "Nickel";
+    private static final String VALID_ALLERGY_2 = "Cocoa Butter";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -142,22 +147,18 @@ public class ParserUtilTest {
         assertThrows(ParseException.class, () -> ParserUtil.parseSkinType(INVALID_SKIN_TYPE));
     }
 
-    /*
     @Test
     public void parseSkinType_validValueWithoutWhitespace_returnsSkinType() throws Exception {
-        Skin expectedSkin = new Skin(INVALID_SKIN_TYPE);
-        assertEquals(expectedSkin, ParserUtil.parseAddress(INVALID_SKIN_TYPE));
+        SkinType expectedSkin = new SkinType(VALID_SKIN_TYPE);
+        assertEquals(expectedSkin, ParserUtil.parseSkinType(VALID_SKIN_TYPE));
     }
-    */
 
-    /*
     @Test
     public void parseSkinType_validValueWithWhitespace_returnsTrimmedSkinType() throws Exception {
         String skinTypeWithWhitespace = WHITESPACE + VALID_SKIN_TYPE + WHITESPACE;
-        Skin expectedSkin = new Skin(VALID_SKIN_TYPE);
-        assertEquals(expectedSkin, ParserUtil.parseAddress(skinTypeWithWhitespace));
+        SkinType expectedSkin = new SkinType(VALID_SKIN_TYPE);
+        assertEquals(expectedSkin, ParserUtil.parseSkinType(skinTypeWithWhitespace));
     }
-    */
 
     @Test
     public void parseHairType_null_throwsNullPointerException() {
@@ -169,18 +170,17 @@ public class ParserUtilTest {
         assertThrows(ParseException.class, () -> ParserUtil.parseHairType(INVALID_HAIR_TYPE));
     }
 
-    /*
     @Test
     public void parseHairType_validValueWithoutWhitespace_returnsHairType() throws Exception {
-        Hair expectedHair = new Hair(INVALID_HAIR_TYPE);
-        assertEquals(expectedHair, ParserUtil.parseAddress(INVALID_HAIR_TYPE));
+        HairType expectedHair = new HairType(VALID_HAIR_TYPE);
+        assertEquals(expectedHair, ParserUtil.parseHairType(VALID_HAIR_TYPE));
     }
-    */
 
+    @Test
     public void parseHairType_validValueWithWhitespace_returnsTrimmedHairType() throws Exception {
         String hairTypeWithWhitespace = WHITESPACE + VALID_HAIR_TYPE + WHITESPACE;
         HairType expectedHairType = new HairType(VALID_HAIR_TYPE);
-        assertEquals(expectedHairType, ParserUtil.parseAddress(hairTypeWithWhitespace));
+        assertEquals(expectedHairType, ParserUtil.parseHairType(hairTypeWithWhitespace));
     }
 
     @Test
@@ -211,48 +211,103 @@ public class ParserUtilTest {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseTag(null));
     }
 
-    /*
-    @Test
-    public void parseTag_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_STAFF));
-    }
-    */
-
-    @Test
-    public void parseTag_validValueWithoutWhitespace_returnsStaff() throws Exception {
-        Tag expectedTag = new Tag(VALID_STAFF_1);
-        assertEquals(expectedTag, ParserUtil.parseTag(VALID_STAFF_1));
-    }
-
-    @Test
-    public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
-        String staffWithWhitespace = WHITESPACE + VALID_STAFF_1 + WHITESPACE;
-        Tag expectedStaff = new Tag(VALID_STAFF_1);
-        assertEquals(expectedStaff, ParserUtil.parseTag(staffWithWhitespace));
-    }
-
-    @Test
-    public void parseTags_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseTags(null));
-    }
-
-    /*
-    @Test
-    public void parseTags_collectionWithInvalidTags_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList(VALID_STAFF_1, VALID_STAFF_2)));
-    }
-    */
-
     @Test
     public void parseTags_emptyCollection_returnsEmptySet() throws Exception {
         assertTrue(ParserUtil.parseTags(Collections.emptyList()).isEmpty());
     }
 
     @Test
-    public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_STAFF_1, VALID_STAFF_2));
-        Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_STAFF_1), new Tag(VALID_STAFF_2)));
-
-        assertEquals(expectedTagSet, actualTagSet);
+    public void parseStaff_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_STAFF));
     }
+
+    @Test
+    public void parseService_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_SERVICE));
+    }
+
+    @Test
+    public void parseAllergy_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_ALLERGY));
+    }
+
+    @Test
+    public void parseStaff_validValueWithoutWhitespace_returnsStaff() throws Exception {
+        Tag expectedStaff = new Tag(VALID_STAFF_1);
+        assertEquals(expectedStaff, ParserUtil.parseTag(VALID_STAFF_1));
+    }
+
+    @Test
+    public void parseService_validValueWithoutWhitespace_returnsStaff() throws Exception {
+        Tag expectedService = new Tag(VALID_SERVICE_1);
+        assertEquals(expectedService, ParserUtil.parseTag(VALID_SERVICE_1));
+    }
+
+    @Test
+    public void parseAllergy_validValueWithoutWhitespace_returnsStaff() throws Exception {
+        Tag expectedAllergy = new Tag(VALID_ALLERGY_1);
+        assertEquals(expectedAllergy, ParserUtil.parseTag(VALID_ALLERGY_1));
+    }
+
+    @Test
+    public void parseStaff_validValueWithWhitespace_returnsTrimmedStaff() throws Exception {
+        String staffWithWhitespace = WHITESPACE + VALID_STAFF_1 + WHITESPACE;
+        Tag expectedStaff = new Tag(VALID_STAFF_1);
+        assertEquals(expectedStaff, ParserUtil.parseTag(staffWithWhitespace));
+    }
+
+    @Test
+    public void parseService_validValueWithWhitespace_returnsTrimmedService() throws Exception {
+        String serviceWithWhitespace = WHITESPACE + VALID_SERVICE_1 + WHITESPACE;
+        Tag expectedService = new Tag(VALID_SERVICE_1);
+        assertEquals(expectedService, ParserUtil.parseTag(serviceWithWhitespace));
+    }
+
+    @Test
+    public void parseAllergy_validValueWithWhitespace_returnsTrimmedAllergy() throws Exception {
+        String allergyWithWhitespace = WHITESPACE + VALID_ALLERGY_1 + WHITESPACE;
+        Tag expectedAllergy = new Tag(VALID_ALLERGY_1);
+        assertEquals(expectedAllergy, ParserUtil.parseTag(allergyWithWhitespace));
+    }
+
+    @Test
+    public void parseStaffs_collectionWithInvalidTags_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList(VALID_STAFF_1, INVALID_STAFF)));
+    }
+
+
+    @Test
+    public void parseServices_collectionWithInvalidTags_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList(VALID_SERVICE_1, INVALID_SERVICE)));
+    }
+
+    @Test
+    public void parseAllergies_collectionWithInvalidTags_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList(VALID_ALLERGY_1, INVALID_ALLERGY)));
+    }
+
+    @Test
+    public void parseStaffs_collectionWithValidTags_returnsTagSet() throws Exception {
+        Set<Tag> actualStaffSet = ParserUtil.parseTags(Arrays.asList(VALID_STAFF_1, VALID_STAFF_2));
+        Set<Tag> expectedStaffSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_STAFF_1), new Tag(VALID_STAFF_2)));
+
+        assertEquals(expectedStaffSet, actualStaffSet);
+    }
+
+    @Test
+    public void parseServices_collectionWithValidTags_returnsTagSet() throws Exception {
+        Set<Tag> actualServiceSet = ParserUtil.parseTags(Arrays.asList(VALID_SERVICE_1, VALID_SERVICE_2));
+        Set<Tag> expectedServiceSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_SERVICE_1), new Tag(VALID_SERVICE_2)));
+
+        assertEquals(expectedServiceSet, actualServiceSet);
+    }
+
+    @Test
+    public void parseAllergies_collectionWithValidTags_returnsTagSet() throws Exception {
+        Set<Tag> actualAllergySet = ParserUtil.parseTags(Arrays.asList(VALID_ALLERGY_1, VALID_ALLERGY_2));
+        Set<Tag> expectedAllergySet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_ALLERGY_1), new Tag(VALID_ALLERGY_2)));
+
+        assertEquals(expectedAllergySet, actualAllergySet);
+    }
+
 }

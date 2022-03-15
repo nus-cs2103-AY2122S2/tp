@@ -3,11 +3,15 @@ package seedu.trackbeau.model.customer;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_ALLERGY_COCOA_BUTTER;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_HAIR_TYPE_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_SERVICE_ACNE;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_SERVICE_CHEMICAL_PEEL;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_SKIN_TYPE_BOB;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_STAFF_JOHN;
 import static seedu.trackbeau.testutil.Assert.assertThrows;
 import static seedu.trackbeau.testutil.TypicalCustomers.ALICE;
 import static seedu.trackbeau.testutil.TypicalCustomers.BOB;
@@ -94,18 +98,17 @@ public class CustomerTest {
         editedAlice = new CustomerBuilder(ALICE).withAddress(VALID_HAIR_TYPE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        /*
         // different staffs -> returns false
-        editedAlice = new CustomerBuilder(ALICE).withStaffs(STAFF_DESC_BOB).build();
+        editedAlice = new CustomerBuilder(ALICE).withStaffs(VALID_STAFF_JOHN).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different services -> returns false
-        editedAlice = new CustomerBuilder(ALICE).withStaffs(SERVICE_DESC_BOB).build();
+        editedAlice = new CustomerBuilder(ALICE).withStaffs(VALID_SERVICE_CHEMICAL_PEEL).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different allergies -> returns false
-        editedAlice = new CustomerBuilder(ALICE).withStaffs(ALLERGY_DESC_BOB).build();
+        editedAlice = new CustomerBuilder(ALICE).withStaffs(VALID_ALLERGY_COCOA_BUTTER).build();
         assertFalse(ALICE.equals(editedAlice));
-        */
+
     }
 }
