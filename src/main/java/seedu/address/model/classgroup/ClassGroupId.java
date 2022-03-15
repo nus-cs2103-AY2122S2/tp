@@ -20,7 +20,7 @@ public class ClassGroupId {
      */
     public ClassGroupId(String classGroupId) {
         requireNonNull(classGroupId);
-        checkArgument(isValidClassGroupId(classGroupId.toUpperCase()), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidClassGroupId(classGroupId), MESSAGE_CONSTRAINTS);
         value = classGroupId.toUpperCase();
     }
 
@@ -28,7 +28,7 @@ public class ClassGroupId {
      * Returns true if a given string is a valid class group ID.
      */
     public static boolean isValidClassGroupId(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.toUpperCase().matches(VALIDATION_REGEX);
     }
 
     @Override

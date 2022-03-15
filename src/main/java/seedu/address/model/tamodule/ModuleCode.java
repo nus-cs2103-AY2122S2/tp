@@ -27,7 +27,7 @@ public class ModuleCode {
      */
     public ModuleCode(String moduleCode) {
         requireNonNull(moduleCode);
-        checkArgument(isValidModuleCode(moduleCode.toUpperCase()), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidModuleCode(moduleCode), MESSAGE_CONSTRAINTS);
         this.value = moduleCode.toUpperCase();
     }
 
@@ -35,7 +35,7 @@ public class ModuleCode {
      * Returns true if a given string is a valid module code.
      */
     public static boolean isValidModuleCode(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.toUpperCase().matches(VALIDATION_REGEX);
     }
 
 
