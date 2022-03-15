@@ -47,7 +47,7 @@ public class FindCommandTest {
                     new Name(VALID_NAME_A),
                     new Category(VALID_CATEGORY_A),
                     new Description(VALID_DESCRIPTION_A),
-                    Price.WILDPRICE));
+                    Price.WILD_PRICE));
 
     private ProductFulfillsFiltersPredicate kayaPredicate =
             new ProductFulfillsFiltersPredicate(KAYA_BREAD);

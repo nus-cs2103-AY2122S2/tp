@@ -9,21 +9,13 @@ import static seedu.ibook.commons.util.AppUtil.checkArgument;
  */
 public class Price {
 
-    private static class WildPrice extends Price {
-        private WildPrice() {};
-
+    public static final Price WILD_PRICE = new Price() {
         @Override
         public boolean equals(Object other) {
-            if (other instanceof Price) {
-                return true;
-            } else {
-                return false;
-            }
+            return other instanceof Price;
         }
+    };
 
-    }
-
-    public static final WildPrice WILDPRICE = new WildPrice();
     public static final String MESSAGE_CONSTRAINTS =
             "Prices should only be of type double, and should not be negative";
 
@@ -31,7 +23,7 @@ public class Price {
      * The first character of the name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "\\d+(?:.\\d{1,2})?";
+    public static final String VALIDATION_REGEX = "\\$?(\\d+(?:.\\d{1,2})?)";
 
     public final Double price;
 
@@ -47,16 +39,34 @@ public class Price {
     public Price(String price) {
         requireNonNull(price);
         checkArgument(isValidPrice(price), MESSAGE_CONSTRAINTS);
+
+        price = removeDollarSign(price);
         this.price = Double.parseDouble(price);
     }
 
     /**
-     * Returns true if a given string is a valid price.
+     * Checks if the string is valid as per {@code VALIDATION_REGEX}.
+     *
+     * @param test String to test.
+     * @return Result of test.
      */
     public static boolean isValidPrice(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Removes "$" sign (if any) from a price string.
+     *
+     * @param price Price string.
+     * @return Price string with "$" sign removed (if any).
+     */
+    private String removeDollarSign(String price) {
+        if (price.startsWith("$")) {
+            return price.substring(1);
+        }
+
+        return price;
+    }
 
     @Override
     public String toString() {

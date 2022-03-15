@@ -4,12 +4,9 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 
-<MenuBar style="-fx-background-color: #9F93Ed;">
-    <Menu mnemonicParsing="false" style="-fx-text-fill: white;" text="File">
+<MenuBar styleClass="menu-bar" stylesheets="@css/menuToolbar.css">
+    <Menu mnemonicParsing="false" text="File">
         <MenuItem mnemonicParsing="false" text="Close"/>
-    </Menu>
-    <Menu mnemonicParsing="false" text="Edit">
-        <MenuItem mnemonicParsing="false" text="Delete"/>
     </Menu>
     <Menu mnemonicParsing="false" text="Help">
         <MenuItem mnemonicParsing="false" text="About"/>

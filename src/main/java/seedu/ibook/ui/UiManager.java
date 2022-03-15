@@ -27,7 +27,9 @@ public class UiManager implements Ui {
     private MainWindow mainWindow;
 
     /**
-     * Creates a {@code UiManager} with the given {@code Logic}.
+     * Initializes a {@code UiManager}.
+     *
+     * @param logic The application {@code Logic}.
      */
     public UiManager(Logic logic) {
         this.logic = logic;
@@ -60,6 +62,8 @@ public class UiManager implements Ui {
     /**
      * Shows an error alert dialog with {@code title} and error message, {@code e},
      * and exits the application after the user has closed the alert dialog.
+     *
+     * @param e The error
      */
     private void showFatalErrorDialogAndShutdown(Throwable e) {
         logger.severe(UiManager.FATAL_ERROR_MESSAGE

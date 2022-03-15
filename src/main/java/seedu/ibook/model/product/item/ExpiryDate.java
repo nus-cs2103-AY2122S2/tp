@@ -14,20 +14,12 @@ import java.util.Arrays;
  */
 public class ExpiryDate {
 
-    private static class WildExpiryDate extends ExpiryDate {
-        private WildExpiryDate() {};
-
+    public static final ExpiryDate WILD_EXPIRY_DATE = new ExpiryDate() {
         @Override
         public boolean equals(Object other) {
-            if (other instanceof ExpiryDate) {
-                return true;
-            } else {
-                return false;
-            }
+            return other instanceof ExpiryDate;
         }
-    }
-
-    public static final WildExpiryDate WILDEXPIRYDATE = new WildExpiryDate();
+    };
 
     public static final String MESSAGE_CONSTRAINTS =
             "Expiry dates should have format such as 03 May 2022, 3 May 2022 or 2022-05-03";
@@ -62,7 +54,10 @@ public class ExpiryDate {
     }
 
     /**
-     * Returns true if a given {@code LocalDate} is a valid expiry date.
+     * Checks if a given {@code LocalDate} is valid as per {@code VALIDATION_REGEX}.
+     *
+     * @param expiryDate Date to test.
+     * @return Result of test.
      */
     public static boolean isValidExpiryDate(String expiryDate) {
         return Arrays.stream(ACCEPTED_FORMATS)

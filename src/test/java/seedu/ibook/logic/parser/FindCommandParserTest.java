@@ -39,8 +39,8 @@ public class FindCommandParserTest {
         FindCommand expectedFindCommand2 =
                 new FindCommand(new ProductFulfillsFiltersPredicate(new Product (
                         new Name("Maggi"),
-                        Category.WILDCATEGORY,
-                        Description.WILDDESCRIPTION,
+                        Category.WILD_CATEGORY,
+                        Description.WILD_DESCRIPTION,
                         new Price("3.00")))
                 );
 

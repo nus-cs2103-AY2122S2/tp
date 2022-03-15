@@ -1,0 +1,72 @@
+.title {
+    -fx-font-family: 'Noto Sans Thin';
+    -fx-min-width: 100;
+    -fx-font-size: 28;
+}
+
+.alert {
+    -fx-text-fill: #D82148;
+}
+
+.text-area .content {
+    -fx-background-color: transparent, white, transparent, white;
+}
+
+.text-area {
+    -fx-background-insets: 0;
+    -fx-background-color: transparent;
+    -fx-border-style: solid;
+    -fx-border-width: 1;
+    -fx-border-radius: 3;
+    -fx-padding : 4 2;
+    -fx-border-color: #CCC;
+}
+
+.text-area:focused {
+    -fx-border-color: #9F93Ed;
+    -fx-border-width: 1;
+    -fx-prompt-text-fill: derive(-fx-control-inner-background,-30%);
+}
+
+.text-field {
+    -fx-background-color: transparent;
+    -fx-border-style: solid;
+    -fx-border-width: 1;
+    -fx-border-radius: 3;
+    -fx-padding : 8 8;
+    -fx-border-color: #CCC;
+}
+
+.text-field:focused {
+    -fx-border-color: #9F93Ed;
+    -fx-border-width: 1;
+    -fx-prompt-text-fill: derive(-fx-control-inner-background,-30%);
+}
+
+.edit-button {
+    -fx-background-color: #FFE08A;
+    -fx-background-radius: 8;
+    -fx-text-fill: #000000B3;
+}
+
+.edit-button:hover {
+    -fx-background-color: #FFDC76;
+}
+
+.edit-button:pressed {
+    -fx-background-color: #FFD970;
+}
+
+.delete-button {
+    -fx-background-color: #F6416C;
+    -fx-background-radius: 8;
+    -fx-text-fill: white;
+}
+
+.delete-button:hover {
+    -fx-background-color: #E6315C;
+}
+
+.delete-button:pressed {
+    -fx-background-color: #E03957;
+}

@@ -1,0 +1,31 @@
+@font-face {
+    src: url('../font/NotoSans-Regular.ttf');
+}
+
+@font-face {
+    src: url('../font/NotoSans-Thin.ttf');
+}
+
+* {
+    -fx-font-family: 'Noto Sans';
+}
+
+.main {
+    -fx-min-height: 700;
+    -fx-min-width: 900;
+    -fx-background-color: white;
+}
+
+.primary-button {
+    -fx-background-color: #9F93Ed;
+    -fx-background-radius: 8;
+    -fx-text-fill: white;
+}
+
+.primary-button:hover {
+    -fx-background-color: #8373E7;
+}
+
+.primary-button:pressed {
+    -fx-background-color: #7D6DE0;
+}
