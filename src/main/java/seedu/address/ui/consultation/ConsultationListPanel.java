@@ -12,12 +12,13 @@ import seedu.address.model.consultation.Consultation;
 import seedu.address.ui.PersonListPanel;
 import seedu.address.ui.UiPart;
 import seedu.address.ui.consultation.ConsultationCard;
+import seedu.address.ui.consultation.ConsultationListPanel;
 
 /**
  * Panel containing the list of persons.
  */
 public class ConsultationListPanel extends UiPart<Region> {
-    private static final String FXML = "ConsultationListPanel.fxml";
+    private static final String FXML = "consultation/ConsultationListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(ConsultationListPanel.class);
 
     @FXML
@@ -28,6 +29,8 @@ public class ConsultationListPanel extends UiPart<Region> {
      */
     public ConsultationListPanel(ObservableList<Consultation> consultationList) {
         super(FXML);
+        System.out.println(consultationList == null);
+        System.out.println(consultationList == null);
         consultationListView.setItems(consultationList);
         consultationListView.setCellFactory(listView -> new ConsultationListViewCell());
     }

@@ -28,21 +28,21 @@ import seedu.address.model.consultation.TestsTakenAndResults;
 class JsonAdaptedConsultation {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Consultation's %s field is missing!";
 
-    private final Nric ownerNric;
-    private final Date date;
-    private final Time time;
-    private final Notes notes;
-    private final Prescription prescription;
-    private final TestsTakenAndResults testsTakenAndResults;
+    private final String ownerNric;
+    private final String date;
+    private final String time;
+    private final String notes;
+    private final String prescription;
+    private final String testsTakenAndResults;
 
     /**
      * Constructs a {@code JsonAdaptedContact} with the given contact details.
      */
     @JsonCreator
-    public JsonAdaptedConsultation(@JsonProperty("ownerNric") Nric ownerNric, @JsonProperty("date") Date date,
-                              @JsonProperty("time") Time time, @JsonProperty("notes") Notes notes,
-                              @JsonProperty("prescription") Prescription prescription, @JsonProperty("testsTakenAndResults")
-                                      TestsTakenAndResults testsTakenAndResults) {
+    public JsonAdaptedConsultation(@JsonProperty("ownerNric") String ownerNric, @JsonProperty("date") String date,
+                              @JsonProperty("time") String time, @JsonProperty("notes") String notes,
+                              @JsonProperty("prescription") String prescription, @JsonProperty("testsTakenAndResults")
+                                               String testsTakenAndResults) {
 
         this.ownerNric = ownerNric;
         this.date = date;
@@ -56,12 +56,12 @@ class JsonAdaptedConsultation {
      * Converts a given {@code Contact} into this class for Jackson use.
      */
     public JsonAdaptedConsultation(Consultation source) {
-        ownerNric = source.getNric();
-        date = source.getDate();
-        time = source.getTime();
-        notes = source.getNotes();
-        prescription = source.getPrescription();
-        testsTakenAndResults = source.getTestAndResults();
+        ownerNric = source.getNric().toString();
+        date = source.getDate().toString();
+        time = source.getTime().toString();
+        notes = source.getNotes().toString();
+        prescription = source.getPrescription().toString();
+        testsTakenAndResults = source.getTestAndResults().toString();
     }
 
     /**
@@ -77,7 +77,7 @@ class JsonAdaptedConsultation {
         if (!Nric.isValidNric(ownerNric.toString())) {
             throw new IllegalValueException(Nric.MESSAGE_CONSTRAINTS);
         }
-        final Nric modelOwnerNric = ownerNric;
+        final String modelOwnerNric = ownerNric.toString();
 
         if (date == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
@@ -85,7 +85,7 @@ class JsonAdaptedConsultation {
         if (!Date.isValidDate(date.toString())) {
             throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
         }
-        final Date modelDate = date;
+        final String modelDate = date.toString();
 
         if (time == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Time.class.getSimpleName()));
@@ -93,7 +93,7 @@ class JsonAdaptedConsultation {
         if (!Time.isValidTime(time.toString())) {
             throw new IllegalValueException(Time.MESSAGE_CONSTRAINTS);
         }
-        final Time modelTime = time;
+        final String modelTime = time.toString();
 
         if (notes == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Notes.class.getSimpleName()));
@@ -101,17 +101,18 @@ class JsonAdaptedConsultation {
         if (!Notes.isValid(notes.toString())) {
             throw new IllegalValueException(Notes.MESSAGE_CONSTRAINTS);
         }
-        final Notes modelNotes = notes;
+        final String modelNotes = notes.toString();
 
         if (prescription == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Prescription.class.getSimpleName()));
         }
 
-        final Prescription modelPrescription = prescription;
+        final String modelPrescription = prescription.toString();
 
-        final TestsTakenAndResults modelTestsTakenAndResults = testsTakenAndResults;
+        final String modelTestsTakenAndResults = testsTakenAndResults.toString();
 
 
-        return new Consultation(modelOwnerNric, modelDate, modelTime, modelNotes, modelPrescription, modelTestsTakenAndResults);
+        return new Consultation(new Nric(modelOwnerNric), new Date(modelDate), new Time(modelTime),
+                new Notes(modelNotes), new Prescription(modelPrescription), new TestsTakenAndResults(modelTestsTakenAndResults));
     }
 }
