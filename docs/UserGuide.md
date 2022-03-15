@@ -227,7 +227,8 @@ Delete existing event(s).
 ### Show all events : `showevents`
 
 Shows all events stored in Amigos. Switches GUI to the events tab.
-Format: `showevents`
+
+**Format**: `showevents`
 
 
 ## Miscellaneous
@@ -235,13 +236,13 @@ Format: `showevents`
 
 Shows a message explaning how to access the help page.
 
-Format: `help`
+**Format**: `help`
 
 ### Exiting the program : `exit`
 
 Exits the program.
 
-Format: `exit`
+**Format**: `exit`
 
 ### Saving the data
 
