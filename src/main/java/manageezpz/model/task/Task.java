@@ -66,6 +66,10 @@ public class Task {
         return this.type;
     }
 
+    public boolean isDone() {
+        return isDone;
+    }
+
     /**
      * Returns the string representation of the task.
      * @return a string representation of the task, consisting of its description and whether its done or not.

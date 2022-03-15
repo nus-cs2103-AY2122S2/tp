@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import manageezpz.logic.commands.AddEmployeeCommand;
 import manageezpz.logic.commands.ClearCommand;
-import manageezpz.logic.commands.DeleteCommand;
+import manageezpz.logic.commands.DeleteEmployeeCommand;
 import manageezpz.logic.commands.EditCommand;
 import manageezpz.logic.commands.EditCommand.EditPersonDescriptor;
 import manageezpz.logic.commands.ExitCommand;
@@ -48,9 +48,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_delete() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+        DeleteEmployeeCommand command = (DeleteEmployeeCommand) parser.parseCommand(
+                DeleteEmployeeCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DeleteEmployeeCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test
@@ -85,7 +85,6 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
     }
 
     @Test

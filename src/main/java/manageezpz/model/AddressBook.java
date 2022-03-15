@@ -1,12 +1,19 @@
 package manageezpz.model;
 
 import static java.util.Objects.requireNonNull;
+import static manageezpz.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static manageezpz.logic.parser.CliSyntax.PREFIX_EVENT;
+import static manageezpz.logic.parser.CliSyntax.PREFIX_TODAY;
+import static manageezpz.logic.parser.CliSyntax.PREFIX_TODO;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import manageezpz.logic.parser.Prefix;
 import manageezpz.model.person.Person;
 import manageezpz.model.person.UniquePersonList;
+import manageezpz.model.task.Date;
 import manageezpz.model.task.Deadline;
 import manageezpz.model.task.Event;
 import manageezpz.model.task.Task;
@@ -42,6 +49,113 @@ public class AddressBook implements ReadOnlyAddressBook {
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
         resetData(toBeCopied);
+    }
+
+    /**
+     * Gets the list of all tasks.
+     * @return A string representing all tasks
+     */
+    public String listTask() {
+        Iterator<Task> taskIterators = tasks.iterator();
+        String result = "";
+
+        while (taskIterators.hasNext()) {
+            Task task = taskIterators.next();
+            result = String.join("\n", result, task.toString());
+        }
+
+        return result;
+    }
+
+    /**
+     * Gets the list of all tasks with the options
+     * @param option Option provided to filter list
+     * @return All tasks that satisfy the option given
+     */
+    public String listTask(Prefix option) {
+        if (PREFIX_TODO.equals(option)) {
+            return listTodo();
+        } else if (PREFIX_DEADLINE.equals(option)) {
+            return listDeadline();
+        } else if (PREFIX_EVENT.equals(option)) {
+            return listEvent();
+        } else if (PREFIX_TODAY.equals(option)) {
+            return listToday();
+        }
+        assert true : "Invalid option, should be checked in list command parser";
+        return null;
+    }
+
+    /**
+     * Returns the list of all todos.
+     * @return List of all todos.
+     */
+    private String listTodo() {
+        Iterator<Task> taskIterators = tasks.iterator();
+        String result = "";
+
+        while (taskIterators.hasNext()) {
+            Task task = taskIterators.next();
+            if (task instanceof Todo) {
+                result = String.join("\n", result, task.toString());
+            }
+        }
+
+        return result;
+    }
+
+    private String listDeadline() {
+        Iterator<Task> taskIterators = tasks.iterator();
+        String result = "";
+
+        while (taskIterators.hasNext()) {
+            Task task = taskIterators.next();
+            if (task instanceof Deadline) {
+                result = String.join("\n", result, task.toString());
+            }
+        }
+
+        return result;
+    }
+
+    private String listEvent() {
+        Iterator<Task> taskIterators = tasks.iterator();
+        String result = "";
+
+        while (taskIterators.hasNext()) {
+            Task task = taskIterators.next();
+            if (task instanceof Event) {
+                result = String.join("\n", result, task.toString());
+            }
+        }
+
+        return result;
+    }
+
+    private String listToday() {
+        Iterator<Task> taskIterators = tasks.iterator();
+        Date todayDate = Date.getTodayDate();
+        String result = "";
+
+        while (taskIterators.hasNext()) {
+            Task task = taskIterators.next();
+            Date date = getDateFromTask(task);
+            if (date != null && date.equals(todayDate)) {
+                result = String.join("\n", result, task.toString());
+            }
+        }
+
+        return result;
+    }
+
+    private Date getDateFromTask(Task task) {
+        if (task instanceof Deadline) {
+            return ((Deadline) task).getDate();
+        } else if (task instanceof Event) {
+            return ((Event) task).getDate();
+        } else {
+            return null;
+        }
     }
 
     //// list overwrite operations
@@ -138,9 +252,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     public void markTask(Task task) {
+        task.setTaskDone();
     }
 
     public void unmarkTask(Task task) {
+        task.setTaskNotDone();
     }
 
     public void findTask(Task task) {
@@ -213,5 +329,4 @@ public class AddressBook implements ReadOnlyAddressBook {
     public int hashCode() {
         return persons.hashCode();
     }
-
 }

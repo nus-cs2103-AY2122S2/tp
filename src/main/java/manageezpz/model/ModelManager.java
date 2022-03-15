@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import manageezpz.commons.core.GuiSettings;
 import manageezpz.commons.core.LogsCenter;
+import manageezpz.logic.parser.Prefix;
 import manageezpz.model.person.Person;
 import manageezpz.model.task.Deadline;
 import manageezpz.model.task.Event;
@@ -231,5 +232,21 @@ public class ModelManager implements Model {
     public boolean hasTask(Task task) {
         requireNonNull(task);
         return addressBook.hasTask(task);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String listTasks() {
+        return addressBook.listTask();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String listTasks(Prefix option) {
+        return addressBook.listTask(option);
     }
 }

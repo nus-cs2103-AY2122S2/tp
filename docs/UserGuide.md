@@ -85,9 +85,9 @@ Adds a Task into the Task list.
 
 Format:
 
-* `addTask desc/TASK_DESCRIPTION`
-* `addTask desc/TASK_DESCRIPTION by/DATE TIME`
-* `addTask desc/TASK_DESCRIPTION at/DATE START_TIME END_TIME`
+* `addTodo desc/TASK_DESCRIPTION`
+* `addTDeadline desc/TASK_DESCRIPTION by/DATE TIME`
+* `addEvent desc/TASK_DESCRIPTION at/DATE START_TIME END_TIME`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Take Note:**
 For deadline and event, the DATE must be in this format: DD-MM-YYYY HHmm (in 24 hr format)
