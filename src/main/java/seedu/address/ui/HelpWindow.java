@@ -9,6 +9,15 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FlagCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListCommand;
 
 /**
  * Controller for a help page
@@ -16,7 +25,16 @@ import seedu.address.commons.core.LogsCenter;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL + "\n\n"
+            + AddCommand.MESSAGE_USAGE + "\n\n"
+            + ClearCommand.MESSAGE_USAGE + "\n\n"
+            + DeleteCommand.MESSAGE_USAGE + "\n\n"
+            + EditCommand.MESSAGE_USAGE + "\n\n"
+            + ExitCommand.MESSAGE_USAGE + "\n\n"
+            + FindCommand.MESSAGE_USAGE + "\n\n"
+            + FlagCommand.MESSAGE_USAGE + "\n\n"
+            + HelpCommand.MESSAGE_USAGE + "\n\n"
+            + ListCommand.MESSAGE_USAGE;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";

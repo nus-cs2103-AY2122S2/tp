@@ -15,7 +15,7 @@ public class Flag {
     }
 
     /**
-     * Constructs a {@code Flag} with a boolean.
+     * Constructs a {@code Flag} with given boolean.
      *
      * @param bool If the person is flagged.
      */
