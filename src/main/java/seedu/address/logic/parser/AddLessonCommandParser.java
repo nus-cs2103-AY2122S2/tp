@@ -36,7 +36,7 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
                         PREFIX_DURATION_MINUTES, PREFIX_RECURRING);
 
         if (CheckPrefixes.arePrefixesAbsent(argMultimap, PREFIX_LESSON_NAME, PREFIX_SUBJECT, PREFIX_LESSON_ADDRESS,
-                PREFIX_DATE, PREFIX_START_TIME, PREFIX_DURATION_HOURS, PREFIX_DURATION_MINUTES)
+                PREFIX_DATE, PREFIX_START_TIME)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLessonCommand.MESSAGE_USAGE));
         }
@@ -47,8 +47,15 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
         String startTime = ParserUtil.parseStartTime(argMultimap.getValue(PREFIX_START_TIME).get());
         String address = ParserUtil.parseStartLessonAddress(argMultimap.getValue(PREFIX_LESSON_ADDRESS).get());
 
-        int durationHours = ParserUtil.parseDurationHours(argMultimap.getValue(PREFIX_DURATION_HOURS).get());
-        int durationMinutes = ParserUtil.parseDurationMinutes(argMultimap.getValue(PREFIX_DURATION_MINUTES).get());
+        Integer durationHours = 0;
+        if (hasDurationHoursField(argMultimap)) {
+            durationHours = ParserUtil.parseDurationHours(argMultimap.getValue(PREFIX_DURATION_HOURS).get());
+        }
+        Integer durationMinutes = 0;
+        if (hasDurationMinutesField(argMultimap)) {
+            durationMinutes = ParserUtil.parseDurationMinutes(argMultimap.getValue(PREFIX_DURATION_MINUTES).get());
+        }
+
         checkDurationIsValid(durationHours, durationMinutes);
 
         Lesson lesson;
@@ -68,6 +75,20 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
      */
     private static boolean isRecurring(ArgumentMultimap argumentMultimap) {
         return !argumentMultimap.getValue(PREFIX_RECURRING).isEmpty();
+    }
+
+    /**
+     * Returns true if hour field is specified for lesson duration
+     */
+    private static boolean hasDurationHoursField(ArgumentMultimap argumentMultimap) {
+        return !argumentMultimap.getValue(PREFIX_DURATION_HOURS).isEmpty();
+    }
+
+    /**
+     * Returns true if minutes field is specified for lesson duration
+     */
+    private static boolean hasDurationMinutesField(ArgumentMultimap argumentMultimap) {
+        return !argumentMultimap.getValue(PREFIX_DURATION_MINUTES).isEmpty();
     }
 
     /**
