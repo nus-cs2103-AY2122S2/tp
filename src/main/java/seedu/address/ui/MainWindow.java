@@ -125,10 +125,10 @@ public class MainWindow extends UiPart<Stage> {
         applicantListPanel = new ApplicantListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(applicantListPanel.getRoot());
 
-        positionListPanel = new PositionListPanel(null); // TO LINK WITH LOGIC
+        positionListPanel = new PositionListPanel(logic.getFilteredPositionList()); // TO LINK WITH LOGIC
         positionListPanelPlaceholder.getChildren().add(positionListPanel.getRoot());
 
-        interviewListPanel = new InterviewListPanel(null); // TO LINK WITH LOGIC
+        interviewListPanel = new InterviewListPanel(logic.getFilteredInterviewList()); // TO LINK WITH LOGIC
         interviewListPanelPlaceholder.getChildren().add(interviewListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();

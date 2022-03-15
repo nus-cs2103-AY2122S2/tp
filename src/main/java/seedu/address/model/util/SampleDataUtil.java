@@ -13,7 +13,7 @@ import seedu.address.model.applicant.Email;
 import seedu.address.model.applicant.Gender;
 import seedu.address.model.applicant.Name;
 import seedu.address.model.applicant.Phone;
-import seedu.address.model.position.Requirement;
+import seedu.address.model.position.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -43,10 +43,37 @@ public class SampleDataUtil {
         };
     }
 
+    public static Position[] getSamplePositions() {
+        return new Position[] {
+                new Position(
+                        new PositionName("Senior Software Developer"),
+                        new Description("The highest paying job in the company\n"
+                                + "More than 5 years experience"),
+                        new PositionOpenings("3"), getRequirementSet("Java", "C++")),
+                new Position(
+                        new PositionName("Useless IT Intern"),
+                        new Description("Need to hire to fill the quota"),
+                        new PositionOpenings("1"),
+                        getRequirementSet("Source Academy", "C")),
+                new Position(new PositionName("Janitor"),
+                        new Description("Arguably the most important job"),
+                        new PositionOpenings("0"),
+                        getRequirementSet("Sweep Floor", "Wipe Window", "Wash Toilet")),
+                new Position(new PositionName("Admin Officer"),
+                        new Description("Degree or Postgraduate holder with Major in Information Technology, "
+                                + "Computer Science, or other similar focus, and a cumulative GPA of 3.5 and above"),
+                        new PositionOpenings("1"),
+                        getRequirementSet("Hardworking", "Good with people"))
+        };
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Applicant sampleApplicant : getSamplePersons()) {
             sampleAb.addPerson(sampleApplicant);
+        }
+        for (Position samplePosition : getSamplePositions()) {
+            sampleAb.addPosition(samplePosition);
         }
         return sampleAb;
     }
