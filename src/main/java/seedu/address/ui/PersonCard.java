@@ -59,7 +59,7 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         logs.setHgap(4);
         person.getLogs().stream()
-                .forEach(log -> logs.getChildren().add(new Label(log.getTitle())));
+                .forEach(log -> logs.getChildren().add(new Label(log.getTitle().toString())));
     }
 
     @Override

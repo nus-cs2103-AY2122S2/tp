@@ -6,9 +6,9 @@ import seedu.address.model.common.Name;
 
 /**
  * Represents a Person's log title in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidLogTitle(String)}
  */
-public class LogName extends Name {
+public class LogTitle extends Name {
 
     public static final int TITLE_LENGTH_CONSTRAINT = 50;
 
@@ -28,15 +28,15 @@ public class LogName extends Name {
      *
      * @param name A valid name.
      */
-    public LogName(String name) {
+    public LogTitle(String name) {
         super(name);
-        checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidLogTitle(name), MESSAGE_CONSTRAINTS);
     }
 
     /**
      * Returns true if a given string is a valid name.
      */
-    public static boolean isValidName(String test) {
+    public static boolean isValidLogTitle(String test) {
         // Ensure in implementation Regex is not null
         return test.matches(VALIDATION_REGEX);
     }
@@ -49,8 +49,8 @@ public class LogName extends Name {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof LogName // instanceof handles nulls
-                && fullName.equals(((LogName) other).fullName)); // state check
+                || (other instanceof LogTitle // instanceof handles nulls
+                && fullName.equals(((LogTitle) other).fullName)); // state check
     }
 
     @Override

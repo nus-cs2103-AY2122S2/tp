@@ -70,7 +70,7 @@ class JsonAdaptedEvent {
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, FriendName.class.getSimpleName()));
         }
-        if (!FriendName.isValidName(name)) {
+        if (!FriendName.isValidFriendName(name)) {
             throw new IllegalValueException(FriendName.MESSAGE_CONSTRAINTS);
         }
         final EventName modelName = new EventName(name);

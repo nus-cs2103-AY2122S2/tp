@@ -12,27 +12,27 @@ public class LogTest {
     @Test
     public void isValidLogTitle() {
         // null
-        assertThrows(NullPointerException.class, () -> LogName.isValidName(null));
+        assertThrows(NullPointerException.class, () -> LogTitle.isValidLogTitle(null));
 
         // blank title
-        assertFalse(LogName.isValidName("")); // empty string
-        assertFalse(LogName.isValidName("              ")); // spaces only
+        assertFalse(LogTitle.isValidLogTitle("")); // empty string
+        assertFalse(LogTitle.isValidLogTitle("              ")); // spaces only
 
         // valid length?
         String longTitle = "";
-        for (int i = 0; i < LogName.TITLE_LENGTH_CONSTRAINT; i++) {
+        for (int i = 0; i < LogTitle.TITLE_LENGTH_CONSTRAINT; i++) {
             longTitle += "c";
         }
-        assertTrue(LogName.isValidName(longTitle)); // exactly as many characters
-        assertFalse(LogName.isValidName(longTitle + "c")); // >limit characters
-        assertFalse(LogName.isValidName(" peter jack")); // start with space
+        assertTrue(LogTitle.isValidLogTitle(longTitle)); // exactly as many characters
+        assertFalse(LogTitle.isValidLogTitle(longTitle + "c")); // >limit characters
+        assertFalse(LogTitle.isValidLogTitle(" peter jack")); // start with space
 
         // valid
-        assertTrue(LogName.isValidName("12345")); // numbers only
-        assertTrue(LogName.isValidName("peter the 2nd")); // alphanumeric characters
-        assertTrue(LogName.isValidName("Capital Tan")); // with capital letters
-        assertTrue(LogName.isValidName("David Roger Jackson Ray Jr 2nd")); // long name
-        assertTrue(LogName.isValidName("`~!@#$%^&*()_-+={[}]|\\:;\"\'<,>.?/")); // random characters
+        assertTrue(LogTitle.isValidLogTitle("12345")); // numbers only
+        assertTrue(LogTitle.isValidLogTitle("peter the 2nd")); // alphanumeric characters
+        assertTrue(LogTitle.isValidLogTitle("Capital Tan")); // with capital letters
+        assertTrue(LogTitle.isValidLogTitle("David Roger Jackson Ray Jr 2nd")); // long name
+        assertTrue(LogTitle.isValidLogTitle("`~!@#$%^&*()_-+={[}]|\\:;\"\'<,>.?/")); // random characters
     }
 
     @Test
@@ -47,7 +47,7 @@ public class LogTest {
         assertThrows(IllegalArgumentException.class, () -> new Log("      ", null)); // spaces only
 
         String longTitle = "";
-        for (int i = 0; i < LogName.TITLE_LENGTH_CONSTRAINT + 1; i++) {
+        for (int i = 0; i < LogTitle.TITLE_LENGTH_CONSTRAINT + 1; i++) {
             longTitle += "c";
         }
         final String tooLongTitle = longTitle;
@@ -67,6 +67,6 @@ public class LogTest {
         String description = "description";
         Log testLog = new Log(title, description);
         assertEquals(testLog.getDescription(), description);
-        assertEquals(testLog.getTitle(), title);
+        assertEquals(testLog.getTitle(), new LogTitle(title));
     }
 }

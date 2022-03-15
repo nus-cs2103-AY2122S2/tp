@@ -13,7 +13,7 @@ public class Log {
     public static final String DEFAULT_NO_DESCRIPTION = "";
 
     // immutable attributes
-    private final LogName title;
+    private final LogTitle title;
     private final String description;
 
     /**
@@ -24,7 +24,7 @@ public class Log {
      */
     public Log(String title, String description) {
         requireNonNull(title);
-        this.title = new LogName(title);
+        this.title = new LogTitle(title);
         this.description = Objects.requireNonNullElse(description, Log.DEFAULT_NO_DESCRIPTION);
     }
 
@@ -33,9 +33,9 @@ public class Log {
         return this.description;
     }
 
-    public String getTitle() {
+    public LogTitle getTitle() {
         requireNonNull(this.title);
-        return this.title.toString();
+        return this.title;
     }
 
     /**

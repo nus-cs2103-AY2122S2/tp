@@ -6,7 +6,7 @@ import seedu.address.model.common.Name;
 
 /**
  * Represents an Event's name in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidFriendName(String)}
  */
 public class FriendName extends Name {
 
@@ -26,13 +26,13 @@ public class FriendName extends Name {
      */
     public FriendName(String name) {
         super(name);
-        checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidFriendName(name), MESSAGE_CONSTRAINTS);
     }
 
     /**
      * Returns true if a given string is a valid name.
      */
-    public static boolean isValidName(String test) {
+    public static boolean isValidFriendName(String test) {
         // Ensure in implementation Regex is not null
         return test.matches(VALIDATION_REGEX);
     }

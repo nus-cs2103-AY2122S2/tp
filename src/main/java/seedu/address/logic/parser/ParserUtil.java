@@ -15,7 +15,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.FriendName;
-import seedu.address.model.person.LogName;
+import seedu.address.model.person.LogTitle;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -49,7 +49,7 @@ public class ParserUtil {
     public static FriendName parseName(String name) throws ParseException {
         requireNonNull(name); //when a name is entered by user, it should not be null
         String trimmedName = name.trim();
-        if (!FriendName.isValidName(trimmedName)) {
+        if (!FriendName.isValidFriendName(trimmedName)) {
             throw new ParseException(FriendName.MESSAGE_CONSTRAINTS);
         }
         return new FriendName(trimmedName);
@@ -64,7 +64,7 @@ public class ParserUtil {
     public static EventName parseEventName(String name) throws ParseException {
         requireNonNull(name); //when a name is entered by user, it should not be null
         String trimmedName = name.trim();
-        if (!EventName.isValidName(trimmedName)) {
+        if (!EventName.isValidEventName(trimmedName)) {
             throw new ParseException(EventName.MESSAGE_CONSTRAINTS);
         }
         return new EventName(trimmedName);
@@ -190,8 +190,8 @@ public class ParserUtil {
      */
     public static String parseTitle(String title) throws ParseException {
         requireNonNull(title);
-        if (!LogName.isValidName(title)) {
-            throw new ParseException(LogName.MESSAGE_CONSTRAINTS);
+        if (!LogTitle.isValidLogTitle(title)) {
+            throw new ParseException(LogTitle.MESSAGE_CONSTRAINTS);
         }
         return title; // TODO: 8/3/2022 refactor into Title object next time
     }

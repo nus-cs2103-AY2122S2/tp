@@ -39,7 +39,7 @@ class JsonAdaptedName {
      * @throws IllegalValueException if there were any data constraints violated in the adapted name.
      */
     public FriendName toModelType() throws IllegalValueException {
-        if (!FriendName.isValidName(name)) {
+        if (!FriendName.isValidFriendName(name)) {
             throw new IllegalValueException(FriendName.MESSAGE_CONSTRAINTS);
         }
         return new FriendName(name);

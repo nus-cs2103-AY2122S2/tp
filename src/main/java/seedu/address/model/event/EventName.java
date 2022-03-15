@@ -6,7 +6,7 @@ import seedu.address.model.common.Name;
 
 /**
  * Represents a Person's name in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidEventName(String)}
  */
 public class EventName extends Name {
 
@@ -17,7 +17,7 @@ public class EventName extends Name {
      * The first character of the name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9][^\\W_]*";
+    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9][\\w\\s]*";
 
     /**
      * Constructs a {@code FriendName}.
@@ -26,13 +26,13 @@ public class EventName extends Name {
      */
     public EventName(String name) {
         super(name);
-        checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidEventName(name), MESSAGE_CONSTRAINTS);
     }
 
     /**
      * Returns true if a given string is a valid name.
      */
-    public static boolean isValidName(String test) {
+    public static boolean isValidEventName(String test) {
         // Ensure in implementation Regex is not null
         return test.matches(VALIDATION_REGEX);
     }

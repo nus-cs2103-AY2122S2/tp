@@ -17,7 +17,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.FriendName;
 import seedu.address.model.person.Log;
-import seedu.address.model.person.LogName;
+import seedu.address.model.person.LogTitle;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -157,7 +157,7 @@ public class AddLogCommand extends Command {
 
             // sanity checks
             assert (this.newTitle != null);
-            assert (LogName.isValidName(this.newTitle));
+            assert (LogTitle.isValidLogTitle(this.newTitle));
 
             Log toAdd = new Log(this.newTitle, this.newDescription); // create log to be added
             if (personToEdit.containsLog(toAdd)) {

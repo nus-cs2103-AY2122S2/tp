@@ -22,19 +22,19 @@ public class FriendNameTest {
     @Test
     public void isValidName() {
         // null name
-        assertThrows(NullPointerException.class, () -> FriendName.isValidName(null));
+        assertThrows(NullPointerException.class, () -> FriendName.isValidFriendName(null));
 
         // invalid name
-        assertFalse(FriendName.isValidName("")); // empty string
-        assertFalse(FriendName.isValidName(" ")); // spaces only
-        assertFalse(FriendName.isValidName("^")); // only non-alphanumeric characters
-        assertFalse(FriendName.isValidName("peter*")); // contains non-alphanumeric characters
+        assertFalse(FriendName.isValidFriendName("")); // empty string
+        assertFalse(FriendName.isValidFriendName(" ")); // spaces only
+        assertFalse(FriendName.isValidFriendName("^")); // only non-alphanumeric characters
+        assertFalse(FriendName.isValidFriendName("peter*")); // contains non-alphanumeric characters
 
         // valid name
-        assertTrue(FriendName.isValidName("peter jack")); // alphabets only
-        assertTrue(FriendName.isValidName("12345")); // numbers only
-        assertTrue(FriendName.isValidName("peter the 2nd")); // alphanumeric characters
-        assertTrue(FriendName.isValidName("Capital Tan")); // with capital letters
-        assertTrue(FriendName.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
+        assertTrue(FriendName.isValidFriendName("peter jack")); // alphabets only
+        assertTrue(FriendName.isValidFriendName("12345")); // numbers only
+        assertTrue(FriendName.isValidFriendName("peter the 2nd")); // alphanumeric characters
+        assertTrue(FriendName.isValidFriendName("Capital Tan")); // with capital letters
+        assertTrue(FriendName.isValidFriendName("David Roger Jackson Ray Jr 2nd")); // long names
     }
 }
