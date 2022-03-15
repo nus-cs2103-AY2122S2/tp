@@ -75,7 +75,7 @@ public class StudentInfoPanel extends InfoPanel {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new LessonCard(lesson, getIndex() + 1).getRoot());
+                setGraphic(new LessonCard(lesson).getRoot());
             }
         }
     }

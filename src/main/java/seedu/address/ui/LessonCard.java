@@ -50,6 +50,19 @@ public class LessonCard extends UiPart<Region> {
         time.setText(lesson.getDateTimeSlot().getTimeString());
     }
 
+    /**
+     * Creates a {@code StudentCode} with the given {@code Student} with no index.
+     */
+    public LessonCard(Lesson lesson) {
+        super(FXML);
+        this.lesson = lesson;
+        id.setText("");
+        name.setText(lesson.getName().fullName);
+        subject.setText(lesson.getSubject().subjectName);
+        date.setText(lesson.getDateTimeSlot().getDateString());
+        time.setText(lesson.getDateTimeSlot().getTimeString());
+    }
+
     @Override
     public boolean equals(Object other) {
         // short circuit if same object
