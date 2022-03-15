@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -102,7 +101,8 @@ public class EditCommand extends Command {
      * edited with {@code editPersonDescriptor}.
      * @throws exception if the edited status is same as the current status of the student
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) throws CommandException{
+    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) throws
+            CommandException {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
@@ -115,37 +115,37 @@ public class EditCommand extends Command {
         CovidStatus updatedCovidStatus = editPersonDescriptor.getCovidStatus()
                 .orElse(personToEdit.getStatus());
 
-        if(editPersonDescriptor.getName().isPresent()){
-            if(updatedName.equals(personToEdit.getName())){
+        if (editPersonDescriptor.getName().isPresent()) {
+            if (updatedName.equals(personToEdit.getName())) {
                 throw new CommandException(MESSAGE_SAME_STATUS);
             }
         }
 
-        if(editPersonDescriptor.getPhone().isPresent()){
-            if(updatedPhone.equals(personToEdit.getPhone())){
+        if (editPersonDescriptor.getPhone().isPresent()) {
+            if (updatedPhone.equals(personToEdit.getPhone())) {
                 throw new CommandException(MESSAGE_SAME_STATUS);
             }
         }
 
-        if(editPersonDescriptor.getCovidStatus().isPresent()){
-            if(updatedCovidStatus.equals(personToEdit.getStatus())){
+        if (editPersonDescriptor.getCovidStatus().isPresent()) {
+            if (updatedCovidStatus.equals(personToEdit.getStatus())) {
                 throw new CommandException(MESSAGE_SAME_STATUS);
             }
         }
 
-        if(editPersonDescriptor.getEmail().isPresent()){
-            if(updatedEmail.equals(personToEdit.getEmail())){
+        if (editPersonDescriptor.getEmail().isPresent()) {
+            if (updatedEmail.equals(personToEdit.getEmail())) {
                 throw new CommandException(MESSAGE_SAME_STATUS);
             }
         }
 
-        if(editPersonDescriptor.getMatriculationNumber().isPresent()){
-            if(updatedMatriculationNumber.equals(personToEdit.getMatriculationNumber())){
+        if (editPersonDescriptor.getMatriculationNumber().isPresent()) {
+            if (updatedMatriculationNumber.equals(personToEdit.getMatriculationNumber())) {
                 throw new CommandException(MESSAGE_SAME_STATUS);
             }
         }
-        if(editPersonDescriptor.getCovidStatus().isPresent()){
-            if(updatedCovidStatus.equals(personToEdit.getStatus())){
+        if (editPersonDescriptor.getCovidStatus().isPresent()) {
+            if (updatedCovidStatus.equals(personToEdit.getStatus())) {
                 throw new CommandException(MESSAGE_SAME_STATUS);
             }
         }
