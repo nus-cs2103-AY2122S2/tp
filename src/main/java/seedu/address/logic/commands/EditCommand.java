@@ -5,7 +5,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PROPERTY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_USERTYPE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -25,7 +26,8 @@ import seedu.address.model.person.Favourite;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.UserType;
+import seedu.address.model.property.Property;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -42,7 +44,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_PROPERTY + "PROPERTY]..."
+            + "[" + PREFIX_USERTYPE + "USERTYPE]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -98,11 +101,14 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         //Favourite status for a client will remain unchanged when edited if not, the FavouriteCommand is redundant.
-        Favourite noChangeFavourite = personToEdit.getFavourite();
+        Favourite noChangeFavourite = editPersonDescriptor.getFavourite().orElse(personToEdit.getFavourite());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<Property> updatedProperties = editPersonDescriptor.getProperties().orElse(personToEdit.getProperties());
+        Optional<Property> updatedPreference = personToEdit.getPreference();
+        UserType updatedUserType = editPersonDescriptor.getUserType().orElse(personToEdit.getUserType());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, noChangeFavourite, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, noChangeFavourite, updatedAddress, updatedProperties,
+                updatedPreference, updatedUserType);
     }
 
     @Override
@@ -131,28 +137,33 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
+        private Favourite favourite;
         private Address address;
-        private Set<Tag> tags;
+        private Set<Property> properties;
+        private UserType userType;
 
-        public EditPersonDescriptor() {}
+        public EditPersonDescriptor() {
+        }
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * A defensive copy of {@code userTypes} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
+            setFavourite(toCopy.favourite);
             setAddress(toCopy.address);
-            setTags(toCopy.tags);
+            setProperties(toCopy.properties);
+            setUserType(toCopy.userType);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, properties, userType);
         }
 
         public void setName(Name name) {
@@ -179,6 +190,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
+        public void setFavourite(Favourite favourite) {
+            this.favourite = favourite;
+        }
+
+        public Optional<Favourite> getFavourite() {
+            return Optional.ofNullable(favourite);
+        }
+
         public void setAddress(Address address) {
             this.address = address;
         }
@@ -187,21 +206,29 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setUserType(UserType userType) {
+            this.userType = userType;
+        }
+
+        public Optional<UserType> getUserType() {
+            return Optional.ofNullable(userType);
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Sets {@code properties} to this object's {@code properties}.
+         * A defensive copy of {@code properties} is used internally.
          */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public void setProperties(Set<Property> properties) {
+            this.properties = (properties != null) ? new HashSet<>(properties) : null;
+        }
+
+        /**
+         * Returns an unmodifiable property set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code properties} is null.
+         */
+        public Optional<Set<Property>> getProperties() {
+            return (properties != null) ? Optional.of(Collections.unmodifiableSet(properties)) : Optional.empty();
         }
 
         @Override
@@ -223,7 +250,8 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
-                    && getTags().equals(e.getTags());
+                    && getProperties().equals(e.getProperties())
+                    && getUserType().equals(e.getUserType());
         }
     }
 }

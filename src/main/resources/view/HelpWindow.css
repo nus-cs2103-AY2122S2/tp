@@ -2,8 +2,28 @@
     -fx-text-fill: white;
 }
 
-#copyButton {
+.copyButton {
+    -fx-padding: 5 7 5 7;
     -fx-background-color: dimgray;
+}
+
+.paneButton {
+    -fx-padding: 2 4 2 4;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent #4d4d4d transparent;
+}
+
+.linkLabel {
+    -fx-font-size: 9pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: #555555;
+    -fx-opacity: 0.9;
+}
+
+.split-pane:vertical .split-pane-divider {
+    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-border-color: #4d4d4d transparent transparent transparent;
+    -fx-padding: 0 0 0 0;
 }
 
 #copyButton:hover {
@@ -16,4 +36,40 @@
 
 #helpMessageContainer {
     -fx-background-color: derive(#1d1d1d, 20%);
+}
+
+.text-area {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: #555555;
+    -fx-opacity: 0.9;
+    -fx-background-color: transparent;
+}
+
+.text-area .content{
+    -fx-background-color: transparent;
+}
+
+.text-area .viewport {
+    -fx-background-color: transparent;
+}
+
+.table-view {
+    -fx-base: #1d1d1d;
+    -fx-table-cell-border-color: black;
+    -fx-table-header-border-color: black;
+    -fx-padding: 5;
+}
+
+.table-view .column-header-background .label {
+    -fx-font-size: 16pt;
+}
+
+.table-view .table-cell {
+    -fx-font-size: 12pt;
+}
+
+.table-view .table-row-cell {
+    -fx-control-inner-background: derive(black, 30%);
+    -fx-control-inner-background-alt: derive(#1d1d1d, 20%);
 }

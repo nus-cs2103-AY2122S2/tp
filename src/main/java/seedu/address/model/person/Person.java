@@ -3,15 +3,14 @@ package seedu.address.model.person;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.model.tag.Tag;
+import seedu.address.model.property.Property;
 
 /**
  * Represents a Person in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
 
@@ -19,38 +18,46 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
-    private Favourite favourite;
+    private final Favourite favourite;
 
     // Data fields
     private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
-
-    /**
-     * Every field must be present and not null.
-     * This constructor is used for adding a new Client, thus default status is unfavourited(false)
-     */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.favourite = new Favourite(false);
-        this.address = address;
-        this.tags.addAll(tags);
-    }
+    private final Set<Property> properties;
+    private final Optional<Property> preference;
+    private final UserType userType;
 
     /**
      * This constructor is used when editing a Client.
      * Favourited clients will remain favourited & unfavourited clients will remain unfavourited
      */
-    public Person(Name name, Phone phone, Email email, Favourite favourite, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Favourite favourite, Address address,
+            Set<Property> properties, Optional<Property> preference, UserType userType) {
+        requireAllNonNull(name, phone, email, favourite, address, properties, preference, userType);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.favourite = favourite;
+        this.properties = properties;
+        this.preference = preference;
         this.address = address;
-        this.tags.addAll(tags);
+        this.userType = userType;
+    }
+
+    /**
+     * Every field must be present and not null.
+     * This constructor is used for adding a new Client, thus default status is unfavourited(false)
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Set<Property> properties,
+            Optional<Property> preference, UserType userType) {
+        requireAllNonNull(name, phone, email, address, properties, preference, userType);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.favourite = new Favourite(false);
+        this.address = address;
+        this.properties = properties;
+        this.preference = preference;
+        this.userType = userType;
     }
 
     public Name getName() {
@@ -69,6 +76,9 @@ public class Person {
         return favourite;
     }
 
+    /**
+     * Toggles the favourite status of Person
+     */
     public void toggleFavourite() {
         boolean toggledStatus = !favourite.getStatus();
         favourite.setStatus(toggledStatus);
@@ -79,11 +89,19 @@ public class Person {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable property set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<Property> getProperties() {
+        return Collections.unmodifiableSet(properties);
+    }
+
+    public Optional<Property> getPreference() {
+        return preference;
+    }
+
+    public UserType getUserType() {
+        return userType;
     }
 
     /**
@@ -97,6 +115,27 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    /**
+     * Returns true if the given {@code buyer}'s {@code preference}
+     * matches with {@code this} person's {@code property}.
+     */
+    public boolean matches(Person buyer) {
+        if (properties.isEmpty()) {
+            return false;
+        }
+        if (buyer.preference.isEmpty()) {
+            return false;
+        }
+
+        for (Property p : properties) {
+            if (p.matches(buyer.preference.get())) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -118,13 +157,15 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getProperties().equals(getProperties())
+                && otherPerson.getPreference().equals(getPreference())
+                && otherPerson.getUserType().equals(getUserType());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, favourite, address, tags);
+        return Objects.hash(name, phone, email, favourite, address, properties, preference, userType);
     }
 
     @Override
@@ -140,11 +181,19 @@ public class Person {
                 .append("; Address: ")
                 .append(getAddress());
 
-        Set<Tag> tags = getTags();
-        if (!tags.isEmpty()) {
-            builder.append("; Tags: ");
-            tags.forEach(builder::append);
+        Set<Property> properties = getProperties();
+        if (!properties.isEmpty()) {
+            builder.append("; Properties: ");
+            properties.forEach(builder::append);
         }
+
+        if (getPreference().isPresent()) {
+            builder.append("; Preference: ");
+            builder.append(getPreference().get());
+        }
+
+        builder.append("; User Type: ").append(getUserType());
+
         return builder.toString();
     }
 }

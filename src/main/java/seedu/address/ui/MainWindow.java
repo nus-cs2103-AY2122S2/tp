@@ -4,9 +4,6 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -37,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private MatchWindow matchWindow;
     private FavouriteWindow favouriteWindow;
 
     @FXML
@@ -71,6 +69,7 @@ public class MainWindow extends UiPart<Stage> {
 
         favouriteWindow = new FavouriteWindow(logic);
         helpWindow = new HelpWindow();
+        matchWindow = new MatchWindow(logic);
     }
 
     public Stage getPrimaryStage() {
@@ -152,6 +151,18 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the match window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleMatch() {
+        if (!matchWindow.isShowing()) {
+            matchWindow.show();
+        } else {
+            matchWindow.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -165,6 +176,7 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        matchWindow.hide();
         primaryStage.hide();
     }
 
@@ -173,7 +185,11 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleFavourite(ActionEvent event) {
-        favouriteWindow.show();
+        if (!favouriteWindow.getRoot().isShowing()) {
+            favouriteWindow.show();
+        } else {
+            favouriteWindow.getRoot().requestFocus();
+        }
     }
 
     public PersonListPanel getPersonListPanel() {
@@ -193,6 +209,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
+            }
+
+            if (commandResult.isShowMatch()) {
+                handleMatch();
             }
 
             if (commandResult.isExit()) {

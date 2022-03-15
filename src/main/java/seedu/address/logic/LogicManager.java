@@ -2,12 +2,14 @@ package seedu.address.logic;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.Pair;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -78,6 +80,12 @@ public class LogicManager implements Logic {
             }
         }
         return favouritedList;
+    }
+
+    @Override
+    public List<Pair<Person>> getMatchList() {
+        model.updateMatchList();
+        return model.getMatchList();
     }
 
     @Override

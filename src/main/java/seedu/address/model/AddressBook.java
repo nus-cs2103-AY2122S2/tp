@@ -4,10 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
-import com.sun.javafx.UnmodifiableArrayList;
-
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableListBase;
+import seedu.address.commons.core.Pair;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -94,6 +92,11 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+    /** Returns a list of all matches. */
+    public List<Pair<Person>> match() {
+        return persons.match();
     }
 
     public void setFavouriteStatus(Person personToFavourite) {
