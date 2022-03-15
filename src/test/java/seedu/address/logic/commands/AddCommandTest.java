@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import seedu.address.model.medical.Medical;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -183,6 +184,11 @@ public class AddCommandTest {
         public void updateFilteredContactList(Predicate<Contact> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void addMedical(Medical medical) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -208,6 +214,7 @@ public class AddCommandTest {
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
         final ArrayList<Person> personsAdded = new ArrayList<>();
+        final ArrayList<Medical> medicalsAdded = new ArrayList<Medical>();
 
         @Override
         public boolean hasPerson(Person person) {
@@ -224,6 +231,12 @@ public class AddCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+
+        @Override
+        public void addMedical(Medical medical) {
+            requireNonNull(medical);
+            medicalsAdded.add(medical);
         }
     }
 
