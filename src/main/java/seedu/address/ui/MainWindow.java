@@ -152,6 +152,18 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Opens the clear confirmation window and clears storage depending on user confirmation.
+     */
+    @FXML
+    public void handleClearRequest() {
+        resultDisplay.setFeedbackToUser("WARNING: Input \"confirm\" if you want to clear the address book completely");
+
+        //replace CommandBox with CommandBox that only confirms clear requests
+        CommandBox commandBox = new CommandBox(this::confirmClearRequest);
+        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    /**
      * Closes the application.
      */
     @FXML
@@ -182,6 +194,10 @@ public class MainWindow extends UiPart<Stage> {
                 handleHelp();
             }
 
+            if (commandResult.isClearRequest()) {
+                handleClearRequest();
+            }
+
             if (commandResult.isExit()) {
                 handleExit();
             }
@@ -190,6 +206,32 @@ public class MainWindow extends UiPart<Stage> {
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
+            throw e;
+        }
+    }
+
+    /**
+     * Confirms if the user wishes to clear everything.
+     *
+     * @see seedu.address.logic.Logic#execute(String)
+     */
+    private CommandResult confirmClearRequest(String commandText) throws CommandException, ParseException {
+        try {
+            CommandResult commandResult = logic.executeClearConfirmation(commandText);
+            logger.info("Result: " + commandResult.getFeedbackToUser());
+            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            CommandBox commandBox = new CommandBox(this::executeCommand); //replace CommandBox with normal CommandBox
+            commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+            return commandResult;
+        } catch (CommandException | ParseException e) {
+            logger.info("Invalid command: " + commandText);
+            resultDisplay.setFeedbackToUser(e.getMessage());
+
+            CommandBox commandBox = new CommandBox(this::executeCommand); //replace CommandBox with normal CommandBox
+            commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
             throw e;
         }
     }
