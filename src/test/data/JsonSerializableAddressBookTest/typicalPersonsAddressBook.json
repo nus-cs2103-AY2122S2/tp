@@ -5,6 +5,7 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
+    "flag": "false",
     "tagged" : [ "friends" ],
     "prevDateMet" : "2022-01-12",
     "info" : "Salary of $5300"
@@ -13,6 +14,7 @@
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
+    "flag": "true",
     "tagged" : [ "owesMoney", "friends" ],
     "prevDateMet" : "2022-01-05",
     "info" : "Salary of $4000"
@@ -21,6 +23,7 @@
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
+    "flag": "false",
     "tagged" : [ ],
     "prevDateMet" : "2021-08-05",
     "info" : "Salary of $2500"
@@ -29,6 +32,7 @@
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
+    "flag": "false",
     "tagged" : [ "friends" ],
     "prevDateMet" : "2021-12-12",
     "info" : "Salary of $3500"
@@ -37,6 +41,7 @@
     "phone" : "9482224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
+    "flag": "false",
     "tagged" : [ ],
     "prevDateMet" : "2021-11-02",
     "info" : "Salary of $6200"
@@ -45,6 +50,7 @@
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
+    "flag": "false",
     "tagged" : [ ],
     "prevDateMet" : "2022-03-12",
     "info" : "Salary of $3100"
@@ -53,6 +59,7 @@
     "phone" : "9482442",
     "email" : "anna@example.com",
     "address" : "4th street",
+    "flag": "false",
     "tagged" : [ ],
     "prevDateMet" : "2021-04-25",
     "info" : "Salary of $4800"

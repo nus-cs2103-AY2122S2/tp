@@ -13,7 +13,7 @@ public class PrevDateMet {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Previous Date Met should only contain numbers and hyphens, in the format of YYYY-MM-DD";
-    //public static final String VALIDATION_REGEX = "\\d{3,}";
+    public static final String VALIDATION_REGEX = "^([0-9]{4})(-)(0[1-9]|1[0-2])(-)(0[1-9]|1[0-9]|2[0-9]|3[0-1])$";
     public final LocalDate value;
 
     /**
@@ -31,8 +31,35 @@ public class PrevDateMet {
      * Returns true if a given string is a valid previous date met.
      */
     public static boolean isValidPrevDateMet(String test) {
-        return true;
-        //return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Method to get today's date in the event where user does not
+     * specify the date last met when adding a client.
+     *
+     * @return String representation of today's date in YYYY-MM-DD format.
+     */
+    public static String getTodaysDate() {
+        return LocalDate.now().toString();
+    }
+
+    /**
+     * Method to compare PrevDateMet with other PrevDateMet.
+     * Returns 0 if date is equal, -1 if this PrevDateMet is before and 1 if it is after.
+     *
+     * @param otherDate Another PrevDateMet to compare to.
+     * @return Integer indicating if PrevDateMet is equal, before or after otherDate
+     */
+    public int compare(PrevDateMet otherDate) {
+        if (this.equals(otherDate)) {
+            return 0;
+        } else if (this.value.isBefore(otherDate.value)) {
+            return -1;
+        } else {
+            return 1;
+        }
+
     }
 
     @Override

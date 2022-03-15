@@ -23,6 +23,7 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private Flag flag;
     private final Set<Tag> tags = new HashSet<>();
     private final PrevDateMet prevDateMet;
     private final Info info;
@@ -30,13 +31,14 @@ public class Person {
     /**
      * Constructor for Person object where every field is present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+    public Person(Name name, Phone phone, Email email, Address address, Flag flag, Set<Tag> tags,
                   PrevDateMet prevDateMet, Info info) {
         requireAllNonNull(name, phone, email, address, tags, prevDateMet, info);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.flag = flag;
         this.tags.addAll(tags);
         this.prevDateMet = prevDateMet;
         this.info = info;
@@ -47,15 +49,16 @@ public class Person {
      * Previous date met will be set to the current date as the user might meet up with the client
      * for the first time.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Flag flag, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, flag, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.flag = flag;
         this.tags.addAll(tags);
         this.prevDateMet = new PrevDateMet(LocalDate.now().toString());
-        this.info = new Info("");
+        this.info = new Info("No further info");
     }
 
     public Name getName() {
@@ -72,6 +75,14 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Flag getFlag() {
+        return flag;
+    }
+
+    public void setFlag(Flag flag) {
+        this.flag = flag;
     }
 
     public PrevDateMet getPrevDateMet() {
@@ -122,9 +133,9 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
-//                && otherPerson.getPrevDateMet().equals(getPrevDateMet())
-//                && otherPerson.getInfo().equals(getInfo());
+                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getPrevDateMet().equals(getPrevDateMet())
+                && otherPerson.getInfo().equals(getInfo());
     }
 
     @Override
@@ -143,6 +154,8 @@ public class Person {
                 .append(getEmail())
                 .append("; Address: ")
                 .append(getAddress())
+                .append("; Flag: ")
+                .append(getFlag())
                 .append("; Previous Date Met: ")
                 .append(getPrevDateMet())
                 .append("; Info: ")

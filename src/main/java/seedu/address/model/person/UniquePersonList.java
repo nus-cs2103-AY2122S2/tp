@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.util.PersonPrevDateMetComparator;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
@@ -27,6 +28,7 @@ public class UniquePersonList implements Iterable<Person> {
     private final ObservableList<Person> internalList = FXCollections.observableArrayList();
     private final ObservableList<Person> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
+
 
     /**
      * Returns true if the list contains an equivalent person as the given argument.
@@ -69,6 +71,16 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Replaces the flag of the person {@code target} in the list with {@code flag}.
+     * {@code target} must exist in the list.
+     */
+    public void flagPerson(Person target, Flag flag) {
+        requireAllNonNull(target, flag);
+        target.setFlag(flag);
+    }
+
+
+    /**
      * Removes the equivalent person from the list.
      * The person must exist in the list.
      */
@@ -102,6 +114,11 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public ObservableList<Person> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
+    }
+
+
+    public void sortByDate() {
+        FXCollections.sort(internalList, new PersonPrevDateMetComparator());
     }
 
     @Override

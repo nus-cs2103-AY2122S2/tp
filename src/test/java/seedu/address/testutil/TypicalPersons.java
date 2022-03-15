@@ -34,7 +34,7 @@ public class TypicalPersons {
             .withInfo("Salary of $5300").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
-            .withEmail("johnd@example.com").withPhone("98765432")
+            .withEmail("johnd@example.com").withPhone("98765432").withFlag("false")
             .withTags("owesMoney", "friends")
             .withPrevDateMet("2022-01-05")
             .withInfo("Salary of $4000").build();
