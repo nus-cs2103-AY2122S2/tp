@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 
 /**
  * The API of the Model component.
@@ -67,6 +68,11 @@ public interface Model {
     boolean hasGroup(Group group);
 
     /**
+     * Returns true if a task with the same identity as {@code task} exists in the address book.
+     */
+    boolean hasTask(Task task, Group group);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
@@ -89,6 +95,14 @@ public interface Model {
      * {@code group} must not already exist in the address book.
      */
     void addGroup(Group group);
+
+    /**
+     * Adds the task into the specified group.
+     * {@code group} must already exist in the address book.
+     * {@code task} must not already exist in the address book.
+     *
+     */
+    void addTask(Task task,Group group);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.

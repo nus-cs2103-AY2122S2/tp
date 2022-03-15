@@ -10,6 +10,8 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.UniqueGroupList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.UniqueTaskList;
 
 /**
  * Wraps all data at the address-book level
@@ -89,6 +91,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a group with the same identity as {@code task} exists in the address book.
+     */
+    public boolean hasTask(Task task, Group group) {
+        requireNonNull(group);
+        requireNonNull(task);
+        return groups.getGroup(group).getTaskList().contains(task);
+    }
+
+    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
@@ -97,11 +108,20 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds a group to the address book.
+     * The group must not already exist in the address book.
      */
     public void addGroup(Group g) {
         groups.add(g);
+    }
+
+    /**
+     * Adds a task into a specified group to the address book.
+     * The group must already exist in the address book.
+     * The task must not already exist in the address book.
+     */
+    public void addTask(Task task, Group g) {
+        groups.getGroup(g).addTask(task);
     }
 
     /**
