@@ -69,8 +69,8 @@ public class AppointmentCommand extends Command {
      * {@code petToEdit}.
      */
     private String generateSuccessMessage(Pet petToEdit) {
-        String message = !appointment.value.isEmpty() ?
-                MESSAGE_ADD_APPOINTMENT_SUCCESS : MESSAGE_DELETE_APPOINTMENT_SUCCESS;
+        String message = !appointment.value.isEmpty()
+                ? MESSAGE_ADD_APPOINTMENT_SUCCESS : MESSAGE_DELETE_APPOINTMENT_SUCCESS;
         return String.format(message, petToEdit);
     }
 

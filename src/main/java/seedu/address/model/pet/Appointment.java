@@ -7,13 +7,14 @@ import static java.util.Objects.requireNonNull;
  * Guarantees: immutable; is always valid.
  */
 public class Appointment {
-    public final String value;
     /**
      * Regex to match appointment format.
      * eg: "Mar-04-2022 09:30 AM at NUS VET".
      */
     public static final String VALIDATION_REGEX =
             "\\w{3}-\\d{2}-\\d{4} \\d{2}:\\d{2} \\w{2} \\w+(\\s\\w+){1,}";
+
+    public final String value;
 
     /**
      * Constructs an {@code Appointment}.

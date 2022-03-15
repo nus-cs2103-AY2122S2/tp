@@ -141,7 +141,7 @@ public class ParserUtil {
         requireAllNonNull(dateTime, location);
         String formattedDateTime = formatDateTime(dateTime.trim());
         String trimmedLocation = location.trim();
-        String appointmentDetails = formattedDateTime + " at "+ trimmedLocation;
+        String appointmentDetails = formattedDateTime + " at " + trimmedLocation;
 
         if (!Appointment.isValidAppointment(appointmentDetails)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -164,7 +164,7 @@ public class ParserUtil {
             DateTimeFormatter formatIn = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             DateTimeFormatter formatOut = DateTimeFormatter.ofPattern("MMM-dd-yyyy HH:mm a");
             return LocalDateTime.parse(input, formatIn).format(formatOut);
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AppointmentCommand.MESSAGE_USAGE), e);
         }
