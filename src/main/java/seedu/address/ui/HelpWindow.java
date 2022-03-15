@@ -16,6 +16,8 @@ import seedu.address.commons.core.LogsCenter;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2122s2-cs2103-w17-4.github.io/tp/UserGuide.html";
+    private static final String USERGUIDE_MESSAGE =
+            "Refer to the HireLah user guide for more information:\n" + USERGUIDE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -25,6 +27,9 @@ public class HelpWindow extends UiPart<Stage> {
 
     @FXML
     private Label helpMessage;
+
+    @FXML
+    private Label ugMessage;
 
     private String helpDescription;
 
@@ -38,6 +43,7 @@ public class HelpWindow extends UiPart<Stage> {
         super(FXML, root);
         this.helpDescription = helpDescription;
         helpMessage.setText(this.helpDescription);
+        ugMessage.setText(USERGUIDE_MESSAGE);
     }
 
     /**

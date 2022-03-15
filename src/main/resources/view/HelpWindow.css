@@ -2,7 +2,7 @@
     -fx-font-family: 'sans-serif';
 }
 
-#copyButton, #helpMessage {
+#copyButton, #helpMessage, #ugMessage {
     -fx-text-fill: white;
 }
 
