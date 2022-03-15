@@ -10,8 +10,8 @@ import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.contact.ContactWithNricPredicate;
-import seedu.address.model.person.Nric;
-import seedu.address.model.person.NricPredicate;
+import seedu.address.model.patient.Nric;
+import seedu.address.model.patient.NricPredicate;
 
 /**
  * Lists all persons in the address book to the user.
