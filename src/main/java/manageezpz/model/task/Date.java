@@ -28,6 +28,15 @@ public class Date {
         return parsedDate;
     }
 
+    /**
+     * Gets today's date.
+     * @return Today's date
+     */
+    public static Date getTodayDate() {
+        LocalDate todayDate = LocalDate.now();
+        return new Date(todayDate.toString());
+    }
+
     public String format(DateTimeFormatter dtf) {
         return getParsedDate().format(dtf);
     }

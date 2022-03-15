@@ -6,9 +6,6 @@ import static manageezpz.logic.parser.CliSyntax.PREFIX_EVENT;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_TODAY;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_TODO;
 
-import java.util.function.Consumer;
-import java.util.stream.Stream;
-
 import manageezpz.logic.commands.ListCommand;
 import manageezpz.logic.parser.exceptions.ParseException;
 
@@ -16,12 +13,7 @@ import manageezpz.logic.parser.exceptions.ParseException;
  * The parser for list command.
  */
 public class ListCommandParser implements Parser<ListCommand> {
-    private static final Prefix[] VALID_PREFIXES = {
-            PREFIX_TODO,
-            PREFIX_DEADLINE,
-            PREFIX_EVENT,
-            PREFIX_TODAY,
-    };
+    private static final Prefix[] VALID_PREFIXES = {PREFIX_TODO, PREFIX_DEADLINE, PREFIX_EVENT, PREFIX_TODAY};
 
     /**
      * Parse the user input before executing the list command.
@@ -44,16 +36,14 @@ public class ListCommandParser implements Parser<ListCommand> {
 
         for (Prefix prefix: VALID_PREFIXES) {
             if (argMultimapList.isPrefixExist(prefix)) {
-                boolean hasValue = false;
-                String value = argMultimapList.getValue(prefix).orElse(null);
-                if (value != null) {
+                String value = argMultimapList.getValue(prefix).get();
+                if (!value.equals("")) {
                     throw new ParseException(
                             String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_INVALID_ARGUMENTS));
                 }
-                return new ListCommand();
+                return new ListCommand(prefix);
             }
         }
-
         return new ListCommand();
     }
 }
