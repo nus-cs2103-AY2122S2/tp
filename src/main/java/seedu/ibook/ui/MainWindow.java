@@ -12,6 +12,7 @@ import seedu.ibook.logic.Logic;
 import seedu.ibook.logic.commands.CommandResult;
 import seedu.ibook.logic.commands.exceptions.CommandException;
 import seedu.ibook.logic.parser.exceptions.ParseException;
+import seedu.ibook.model.product.Product;
 import seedu.ibook.ui.popup.PopupAdd;
 import seedu.ibook.ui.popup.PopupDelete;
 import seedu.ibook.ui.popup.PopupUpdate;
@@ -85,20 +86,20 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         ObservableList<Node> children = mainContent.getChildren();
 
-        popupAdd = new PopupAdd(this::executeCommand);
-        popupUpdate = new PopupUpdate(this::executeCommand);
-        popupDelete = new PopupDelete(this::executeCommand);
+        popupAdd = new PopupAdd(this);
+        popupUpdate = new PopupUpdate(this);
+        popupDelete = new PopupDelete(this);
 
-        menuToolbar = new MenuToolbar();
+        menuToolbar = new MenuToolbar(this);
         children.add(menuToolbar.getRoot());
 
-        commandBox = new CommandBox(this::executeCommand, popupAdd);
+        commandBox = new CommandBox(this);
         children.add(commandBox.getRoot());
 
-        resultWindow = new ResultWindow();
+        resultWindow = new ResultWindow(this);
         children.add(resultWindow.getRoot());
 
-        table = new Table(logic.getFilteredIBook(), popupUpdate, popupDelete);
+        table = new Table(this);
         children.add(table.getRoot());
     }
 
@@ -107,7 +108,7 @@ public class MainWindow extends UiPart<Stage> {
      *
      * @see seedu.ibook.logic.Logic#execute(String)
      */
-    private void executeCommand(String commandText) {
+    public void executeCommand(String commandText) {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
@@ -116,44 +117,74 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isExit()) {
                 handleExit();
             }
-
-            if (popupAdd.isShowing()) {
-                popupAdd.hide();
-            }
-
-            if (popupUpdate.isShowing()) {
-                popupUpdate.hide();
-            }
-
-            if (popupDelete.isShowing()) {
-                popupDelete.hide();
-            }
-
+            hidePopup();
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
-            if (popupAdd.isShowing()) {
-                popupAdd.setFeedbackToUser(e.getMessage());
-            } else if (popupUpdate.isShowing()) {
-                popupUpdate.setFeedbackToUser(e.getMessage());
-            } else if (popupDelete.isShowing()) {
-                popupDelete.setFeedbackToUser(e.getMessage());
-            } else {
-                resultWindow.setFeedbackToUser(e.getMessage());
-            }
+            setError(e.getMessage());
         }
     }
 
     /**
-     * Represents a function that can execute commands.
+     * Show the Popup window for adding product.
      */
-    @FunctionalInterface
-    public interface CommandExecutor {
-        /**
-         * Executes the command and returns the result.
-         *
-         * @see seedu.ibook.logic.Logic#execute(String)
-         */
-        void execute(String commandText);
+    public void showPopupAdd() {
+        if (popupAdd.isShowing()) {
+            popupAdd.focus();
+        } else {
+            popupAdd.show();
+        }
     }
 
+    /**
+     * Show the Popup window for deleting product.
+     */
+    public void showPopupDelete(int index, Product product) {
+        if (popupDelete.isShowing()) {
+            popupDelete.hide();
+        }
+        popupDelete.show(index, product);
+    }
+
+    /**
+     * Show the Popup window for updating product.
+     */
+    public void showPopupUpdate(int index, Product product) {
+        if (popupUpdate.isShowing()) {
+            popupUpdate.hide();
+        }
+        popupUpdate.show(index, product);
+    }
+
+    /**
+     * Get the filtered list of {@code Product} from {@code Logic}.
+     *
+     * @return Get a filtered list of {@code Product}.
+     */
+    public ObservableList<Product> getFilteredIBook() {
+        return logic.getFilteredIBook();
+    }
+
+    private void hidePopup() {
+        if (popupAdd.isShowing()) {
+            popupAdd.hide();
+        }
+        if (popupUpdate.isShowing()) {
+            popupUpdate.hide();
+        }
+        if (popupDelete.isShowing()) {
+            popupDelete.hide();
+        }
+    }
+
+    private void setError(String message) {
+        if (popupAdd.isShowing()) {
+            popupAdd.setFeedbackToUser(message);
+        } else if (popupUpdate.isShowing()) {
+            popupUpdate.setFeedbackToUser(message);
+        } else if (popupDelete.isShowing()) {
+            popupDelete.setFeedbackToUser(message);
+        } else {
+            resultWindow.setFeedbackToUser(message);
+        }
+    }
 }

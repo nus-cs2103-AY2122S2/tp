@@ -21,10 +21,10 @@ public class PopupDelete extends Popup {
     /**
      * Initializes a new {@code popupDelete} window.
      *
-     * @param commandExecutor Function to execute command.
+     * @param mainWindow The {@code MainWindow} that this component resides on.
      */
-    public PopupDelete(MainWindow.CommandExecutor commandExecutor) {
-        super(FXML, commandExecutor);
+    public PopupDelete(MainWindow mainWindow) {
+        super(FXML, mainWindow);
     }
 
     /**

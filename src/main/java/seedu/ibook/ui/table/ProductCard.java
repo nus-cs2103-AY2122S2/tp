@@ -4,22 +4,18 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import seedu.ibook.model.product.Product;
-import seedu.ibook.ui.UiPart;
-import seedu.ibook.ui.popup.PopupDelete;
-import seedu.ibook.ui.popup.PopupUpdate;
+import seedu.ibook.ui.MainWindow;
+import seedu.ibook.ui.UiComponent;
 
 /**
  * A card showing the details of a {@code Product}.
  */
-public class ProductCard extends UiPart<HBox> {
+public class ProductCard extends UiComponent<HBox> {
 
     private static final String FXML = "Table/ProductCard.fxml";
 
     private final int index;
     private final Product product;
-
-    private final PopupUpdate popupUpdate;
-    private final PopupDelete popupDelete;
 
     @FXML
     private Label indexLabel;
@@ -39,17 +35,12 @@ public class ProductCard extends UiPart<HBox> {
      *
      * @param index Index of the {@code Product} in the filtered list.
      * @param product The {@code Product}.
-     * @param popupUpdate The popup responsible for update.
-     * @param popupDelete The popup responsible for delete.
+     * @param mainWindow The Main Window that this component resides on.
      */
-    ProductCard(int index, Product product,
-                PopupUpdate popupUpdate,
-                PopupDelete popupDelete) {
-        super(FXML);
+    ProductCard(int index, Product product, MainWindow mainWindow) {
+        super(FXML, mainWindow);
         this.index = index;
         this.product = product;
-        this.popupUpdate = popupUpdate;
-        this.popupDelete = popupDelete;
         populateField();
     }
 
@@ -64,18 +55,12 @@ public class ProductCard extends UiPart<HBox> {
 
     @FXML
     private void handlePopupUpdate() {
-        if (popupUpdate.isShowing()) {
-            popupUpdate.hide();
-        }
-        popupUpdate.show(index, product);
+        getMainWindow().showPopupUpdate(index, product);
     }
 
     @FXML
     private void handlePopupDelete() {
-        if (popupDelete.isShowing()) {
-            popupDelete.hide();
-        }
-        popupDelete.show(index, product);
+        getMainWindow().showPopupDelete(index, product);
     }
 
 }
