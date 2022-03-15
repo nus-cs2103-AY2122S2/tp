@@ -9,7 +9,7 @@ import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 import seedu.address.model.task.Task;
 
-public class AddTaskCommand extends Command{
+public class AddTaskCommand extends Command {
 
     public static final String COMMAND_WORD = "addtask";
 
@@ -30,11 +30,11 @@ public class AddTaskCommand extends Command{
 
     /**
      * Creates an AddTaskCommand to add the specified {@code task}
-     * to the specified (@code group)
+     * to the specified {@code group}
      *
      * @param group group to be added to ArchDuke.
      */
-    public AddTaskCommand(Task task ,Group group) {
+    public AddTaskCommand(Task task, Group group) {
         requireAllNonNull(group);
         requireAllNonNull(task);
         this.taskToAdd = task;

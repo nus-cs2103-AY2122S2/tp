@@ -145,9 +145,9 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code groupName} is invalid.
      */
-    public static TaskName parseTaskName(String task) throws ParseException {
-        requireNonNull(task);
-        String trimmedName = task.trim();
+    public static TaskName parseTaskName(String taskName) throws ParseException {
+        requireNonNull(taskName);
+        String trimmedName = taskName.trim();
         if (!TaskName.isValidTaskName(trimmedName)) {
             throw new ParseException(TaskName.MESSAGE_CONSTRAINTS);
         }

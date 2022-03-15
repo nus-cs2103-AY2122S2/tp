@@ -1,8 +1,8 @@
 package seedu.address.model.task;
 
-import java.util.Objects;
-
 import static java.util.Objects.requireNonNull;
+
+import java.util.Objects;
 
 public class Task {
 
@@ -28,7 +28,7 @@ public class Task {
      * @param otherTask Another Task object.
      * @return true as a boolean value if both tasks are the same.
      */
-    public boolean isSameTask(seedu.address.model.task.Task otherTask) {
+    public boolean isSameTask(Task otherTask) {
         if (otherTask == this) {
             return true;
         }

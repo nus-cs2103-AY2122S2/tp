@@ -7,7 +7,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Task's name in Group.
  * Guarantees: immutable; is valid as declared in {@link #isValidTaskName(String)}
  */
-
 public class TaskName {
 
     public static final String MESSAGE_CONSTRAINTS =

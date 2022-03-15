@@ -62,7 +62,7 @@ public class Group {
     }
 
     /**
-     * Returns the taskList from this specific group
+     * Retrieves the UniqueTaskList from this specific group
      *
      */
     public UniqueTaskList getTaskList() {

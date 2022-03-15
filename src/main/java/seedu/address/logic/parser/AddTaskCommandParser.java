@@ -1,18 +1,18 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK;
+
+import java.util.stream.Stream;
+
 import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskName;
-
-import java.util.stream.Stream;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK;
 
 public class AddTaskCommandParser implements Parser<AddTaskCommand> {
 
@@ -25,7 +25,7 @@ public class AddTaskCommandParser implements Parser<AddTaskCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TASK, PREFIX_GROUP_NAME);
 
-        if (!arePrefixesPresent(argMultimap,PREFIX_TASK, PREFIX_GROUP_NAME)
+        if (!arePrefixesPresent(argMultimap, PREFIX_TASK, PREFIX_GROUP_NAME)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTaskCommand.MESSAGE_USAGE));
         }
