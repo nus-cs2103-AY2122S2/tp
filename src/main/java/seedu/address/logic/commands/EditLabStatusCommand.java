@@ -4,21 +4,14 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.GithubUsername;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.StudentId;
-import seedu.address.model.person.Telegram;
 import seedu.address.model.person.exceptions.DuplicateLabException;
 import seedu.address.model.person.exceptions.LabNotFoundException;
 import seedu.address.model.person.lab.Lab;
 import seedu.address.model.person.lab.LabList;
 import seedu.address.model.person.lab.LabStatus;
-import seedu.address.model.tag.Tag;
 
 import java.util.List;
-import java.util.Set;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
