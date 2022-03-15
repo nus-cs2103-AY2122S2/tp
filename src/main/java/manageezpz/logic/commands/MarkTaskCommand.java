@@ -1,14 +1,14 @@
 package manageezpz.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+
 import manageezpz.commons.core.Messages;
 import manageezpz.commons.core.index.Index;
 import manageezpz.logic.commands.exceptions.CommandException;
 import manageezpz.model.Model;
 import manageezpz.model.task.Task;
-
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Marks a task identified using its displayed index from the address book as done.
