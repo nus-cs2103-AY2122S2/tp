@@ -39,7 +39,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private FlowPane tags;
+    private FlowPane teams;
     @FXML
     private FlowPane skillSet;
 
@@ -54,9 +54,9 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         githubUsername.setText("@" + person.getGithubUsername().value);
         email.setText(person.getEmail().value);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        person.getTeams().stream()
+                .sorted(Comparator.comparing(team -> team.teamName))
+                .forEach(team -> teams.getChildren().add(new Label(team.teamName)));
         person.getSkillSet().stream()
                 .sorted(Comparator.comparing(skill -> skill.skillName))
                 .forEach(skill -> skillSet.getChildren().add(new Label(skill.skillName)));

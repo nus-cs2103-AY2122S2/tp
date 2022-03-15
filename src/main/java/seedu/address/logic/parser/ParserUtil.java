@@ -13,8 +13,8 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.GithubUsername;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Skill;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.team.Skill;
+import seedu.address.model.team.Team;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -97,18 +97,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String team} into a {@code Team}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code team} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+    public static Team parseTeam(String team) throws ParseException {
+        requireNonNull(team);
+        String trimmed = team.trim();
+        if (!Team.isValidteamName(trimmed)) {
+            throw new ParseException(Team.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return new Team(trimmed);
     }
 
     /**
@@ -132,15 +132,15 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses {@code Collection<String> teams} into a {@code Set<Team>}.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+    public static Set<Team> parseTeams(Collection<String> teams) throws ParseException {
+        requireNonNull(teams);
+        final Set<Team> teamSet = new HashSet<>();
+        for (String teamName : teams) {
+            teamSet.add(parseTeam(teamName));
         }
-        return tagSet;
+        return teamSet;
     }
 
     /**

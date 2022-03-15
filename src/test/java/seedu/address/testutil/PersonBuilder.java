@@ -8,8 +8,8 @@ import seedu.address.model.person.GithubUsername;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Skill;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.team.Skill;
+import seedu.address.model.team.Team;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -26,7 +26,7 @@ public class PersonBuilder {
     private Phone phone;
     private Email email;
     private GithubUsername githubUsername;
-    private Set<Tag> tags;
+    private Set<Team> teams;
     private Set<Skill> skillSet;
 
     /**
@@ -37,7 +37,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         githubUsername = new GithubUsername(DEFAULT_USERNAME);
-        tags = new HashSet<>();
+        teams = new HashSet<>();
         skillSet = new HashSet<>();
     }
 
@@ -49,7 +49,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         githubUsername = personToCopy.getGithubUsername();
-        tags = new HashSet<>(personToCopy.getTags());
+        teams = new HashSet<>(personToCopy.getTeams());
         skillSet = new HashSet<>(personToCopy.getSkillSet());
     }
 
@@ -62,10 +62,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code teams} into a {@code Set<Team>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+    public PersonBuilder withTeams(String ... teams) {
+        this.teams = SampleDataUtil.getTeamSet(teams);
         return this;
     }
 
@@ -102,7 +102,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, githubUsername, tags, skillSet);
+        return new Person(name, phone, email, githubUsername, teams, skillSet);
     }
 
 }

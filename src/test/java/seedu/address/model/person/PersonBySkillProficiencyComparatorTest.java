@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.tag.Skill;
+import seedu.address.model.team.Skill;
 import seedu.address.testutil.PersonBuilder;
 
 class PersonBySkillProficiencyComparatorTest {

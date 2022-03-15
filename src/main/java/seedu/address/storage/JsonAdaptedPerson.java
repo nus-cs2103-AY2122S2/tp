@@ -15,8 +15,8 @@ import seedu.address.model.person.GithubUsername;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Skill;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.team.Skill;
+import seedu.address.model.team.Team;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -29,7 +29,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String username;
-    private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final List<JsonAdaptedTeam> teamSet = new ArrayList<>();
     private final List<JsonAdaptedSkill> skillSet = new ArrayList<>();
 
     /**
@@ -38,14 +38,14 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("username") String username,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+            @JsonProperty("teamed") List<JsonAdaptedTeam> teamSet,
             @JsonProperty("skillSet") List<JsonAdaptedSkill> skillSet) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.username = username;
-        if (tagged != null) {
-            this.tagged.addAll(tagged);
+        if (teamSet != null) {
+            this.teamSet.addAll(teamSet);
         }
         if (skillSet != null) {
             this.skillSet.addAll(skillSet);
@@ -60,8 +60,8 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         username = source.getGithubUsername().value;
-        tagged.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
+        teamSet.addAll(source.getTeams().stream()
+                .map(JsonAdaptedTeam::new)
                 .collect(Collectors.toList()));
         skillSet.addAll(source.getSkillSet().stream()
                 .map(JsonAdaptedSkill::new)
@@ -74,11 +74,11 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+        final List<Team> personTeams = new ArrayList<>();
         final List<Skill> personSkillSet = new ArrayList<>();
 
-        for (JsonAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+        for (JsonAdaptedTeam team : teamSet) {
+            personTeams.add(team.toModelType());
         }
 
         for (JsonAdaptedSkill skill : skillSet) {
@@ -118,9 +118,9 @@ class JsonAdaptedPerson {
         }
         final GithubUsername modelGithubUsername = new GithubUsername(username);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
+        final Set<Team> modelTeams = new HashSet<>(personTeams);
         final Set<Skill> modelSkill = new HashSet<>(personSkillSet);
-        return new Person(modelName, modelPhone, modelEmail, modelGithubUsername, modelTags, modelSkill);
+        return new Person(modelName, modelPhone, modelEmail, modelGithubUsername, modelTeams, modelSkill);
     }
 
 }

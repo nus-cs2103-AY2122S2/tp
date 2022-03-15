@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GITHUB_USERNAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TEAM;
 
 import java.util.Set;
 import java.util.stream.Stream;
@@ -18,8 +18,8 @@ import seedu.address.model.person.GithubUsername;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Skill;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.team.Skill;
+import seedu.address.model.team.Team;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -34,7 +34,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_GITHUB_USERNAME,
-                        PREFIX_TAG, PREFIX_SKILL);
+                    PREFIX_TEAM, PREFIX_SKILL);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_GITHUB_USERNAME, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -45,10 +45,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         GithubUsername username = ParserUtil.parseGithubUsername(argMultimap.getValue(PREFIX_GITHUB_USERNAME).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Set<Team> teamList = ParserUtil.parseTeams(argMultimap.getAllValues(PREFIX_TEAM));
         Set<Skill> skillSet = ParserUtil.parseSkillSet(argMultimap.getAllValues(PREFIX_SKILL));
 
-        Person person = new Person(name, phone, email, username, tagList, skillSet);
+        Person person = new Person(name, phone, email, username, teamList, skillSet);
 
         return new AddCommand(person);
     }
