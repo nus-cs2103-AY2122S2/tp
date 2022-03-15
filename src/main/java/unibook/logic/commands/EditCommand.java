@@ -44,14 +44,13 @@ import unibook.model.tag.Tag;
  */
 public class EditCommand extends Command {
 
-
     public static final String COMMAND_WORD = "edit";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the UniBook.";
     public static final String MESSAGE_DUPLICATE_MODULE = "This module already exists in the UniBook.";
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_EDIT_MODULE_SUCCESS = "Edited Module: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_OPTION_NOT_FOUND = "Option tag must be provided. \n";
+    public static final String MESSAGE_OPTION_NOT_FOUND = "O/OPTION must either be person or module. \n";
     public static final String MESSAGE_PERSON_NO_SUBTYPE = "Person must be a professor or student";
 
     public static final String PERSON_MESSAGE_USAGE = COMMAND_WORD
@@ -59,8 +58,8 @@ public class EditCommand extends Command {
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_OPTION + "OPTION "
-            + "[" + PREFIX_NAME + "NAME] "
+            + PREFIX_OPTION + "OPTION (person or module) "
+            + PREFIX_NAME + "NAME "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_TAG + "TAG]...\n"
@@ -74,7 +73,7 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_OPTION + "OPTION "
-            + "[" + PREFIX_NAME + "NAME] "
+            + PREFIX_NAME + "NAME "
             + "[" + PREFIX_MODULE + "MODULECODE] "
             + "[" + PREFIX_NEWMOD + "NEWMODULECODE] "
             + "Example: " + COMMAND_WORD + " 1 "
@@ -84,8 +83,10 @@ public class EditCommand extends Command {
 
 
 
-    private final Logger logger = LogsCenter.getLogger(LogicManager.class);
+    private static final Logger logger = LogsCenter.getLogger(LogicManager.class);
     private final Index index;
+    private static Model model;
+    private ModuleCode modCode;
     private EditPersonDescriptor editPersonDescriptor;
     private EditModuleDescriptor editModuleDescriptor;
 
@@ -100,6 +101,7 @@ public class EditCommand extends Command {
         this.index = index;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
         this.editModuleDescriptor = null;
+        this.modCode = null;
     }
 
     /**
@@ -113,12 +115,34 @@ public class EditCommand extends Command {
         this.index = index;
         this.editModuleDescriptor = new EditModuleDescriptor(editModuleDescriptor);
         this.editPersonDescriptor = null;
+        this.modCode = null;
+    }
+
+    /**
+     * @param index of the module in the filtered module list to edit
+     * @param editPersonDescriptor details to edit the person with
+     * @param modCode module code to be edited
+     */
+    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor, ModuleCode modCode) {
+        requireNonNull(index);
+        requireNonNull(editPersonDescriptor);
+
+        this.index = index;
+        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.editModuleDescriptor = null;
+        this.modCode = modCode;
+
     }
 
     @Override
     public CommandResult execute(Model model, Boolean isPersonListShowing,
                                  Boolean isModuleListShowing) throws CommandException, ModuleNotFoundException {
+        this.model = model;
         requireNonNull(model);
+
+        if (!model.hasModule(this.modCode)) {
+            throw new CommandException(String.format(Messages.MESSAGE_MODULE_CODE_NOT_EXIST, modCode.toString()));
+        }
 
         // Edit person
         if (this.editModuleDescriptor == null) {
@@ -130,6 +154,13 @@ public class EditCommand extends Command {
 
             if (index.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+
+            if (this.modCode != null) {
+                Module mod = model.getModuleByCode(modCode);
+                Set<Module> modSet = new HashSet<>();
+                modSet.add(mod);
+                this.editPersonDescriptor.setModules(modSet);
             }
 
             Person personToEdit = lastShownList.get(index.getZeroBased());
@@ -236,7 +267,10 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
 
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        Set<Module> updatedModules = editPersonDescriptor.getModules().orElse(personToEdit.getModules());
+        Set<Module> updatedModules = editPersonDescriptor.getModulesModifiable().orElse(personToEdit.getModules());
+        if (!updatedModules.equals(personToEdit.getModulesModifiable())) {
+            updatedModules.addAll(personToEdit.getModulesModifiable());
+        }
 
         if (personToEdit instanceof Professor) {
             Office updatedOffice = ((Professor) personToEdit).getOffice();
@@ -362,6 +396,7 @@ public class EditCommand extends Command {
             } else {
                 Set<Module> modulesCopy = new HashSet<>(modules);
                 modulesCopy.addAll(modules);
+
                 this.modules = modulesCopy;
             }
         }
@@ -374,6 +409,15 @@ public class EditCommand extends Command {
         public Optional<Set<Module>> getModules() {
             return (modules != null) ? Optional.of(Collections.unmodifiableSet(modules)) : Optional.empty();
         }
+
+        /**
+         * Returns a mutable module set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         */
+        public Optional<Set<Module>> getModulesModifiable() {
+            return (modules != null) ? Optional.of(modules) : Optional.empty();
+        }
+
 
         @Override
         public boolean equals(Object other) {

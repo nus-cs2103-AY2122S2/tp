@@ -10,10 +10,7 @@ import static unibook.logic.parser.CliSyntax.PREFIX_OPTION;
 import static unibook.logic.parser.CliSyntax.PREFIX_PHONE;
 import static unibook.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.logging.Logger;
 
 import unibook.commons.core.LogsCenter;
@@ -22,8 +19,9 @@ import unibook.logic.LogicManager;
 import unibook.logic.commands.EditCommand;
 import unibook.logic.commands.EditCommand.EditModuleDescriptor;
 import unibook.logic.commands.EditCommand.EditPersonDescriptor;
+import unibook.logic.commands.exceptions.CommandException;
 import unibook.logic.parser.exceptions.ParseException;
-import unibook.model.module.Module;
+import unibook.model.module.ModuleCode;
 import unibook.model.tag.Tag;
 
 /**
@@ -37,7 +35,7 @@ public class EditCommandParser implements Parser<EditCommand> {
      * and returns an EditCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public EditCommand parse(String args) throws ParseException {
+    public EditCommand parse(String args) throws ParseException, CommandException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_OPTION,
@@ -52,9 +50,8 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
-            logger.info(index.toString());
         } catch (ParseException pe) {
-            if (argMultimap.getValue(PREFIX_OPTION).get().equals(null)) {
+            if (argMultimap.getValue(PREFIX_OPTION).equals(Optional.empty())) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         EditCommand.MESSAGE_OPTION_NOT_FOUND, EditCommand.PERSON_MESSAGE_USAGE), pe);
             } else if (argMultimap.getValue(PREFIX_OPTION).get().equals("person")) {
@@ -69,6 +66,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         EditModuleDescriptor editModuleDescriptor = new EditModuleDescriptor();
 
+        if (argMultimap.getValue(PREFIX_OPTION).equals(Optional.empty())) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.PERSON_MESSAGE_USAGE));
+        }
+
         if (argMultimap.getValue(PREFIX_OPTION).get().equals("person")) {
             if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
                 editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
@@ -81,13 +82,17 @@ public class EditCommandParser implements Parser<EditCommand> {
             }
 
             parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
-            parseModulesForEdit(argMultimap.getAllValues(PREFIX_NEWMOD)).ifPresent(editPersonDescriptor::setModules);
-            if (!editPersonDescriptor.isAnyFieldEdited()) {
+
+            Optional<Set<ModuleCode>> module = parseModulesForEdit(argMultimap.getValue(PREFIX_NEWMOD).get());
+            if (module.isEmpty() && !editPersonDescriptor.isAnyFieldEdited()) {
                 throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
             }
 
+            if (module.isPresent()) {
+                return new EditCommand(index, editPersonDescriptor, module.get().iterator().next());
+            }
             return new EditCommand(index, editPersonDescriptor);
-        } else {
+        } else if (argMultimap.getValue(PREFIX_OPTION).get().equals("module")) {
             if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
                 editModuleDescriptor.setModuleName(ParserUtil.parseModuleName(argMultimap.getValue(PREFIX_NAME).get()));
             }
@@ -100,6 +105,8 @@ public class EditCommandParser implements Parser<EditCommand> {
                 throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
             }
             return new EditCommand(index, editModuleDescriptor);
+        } else {
+            throw new ParseException(EditCommand.MESSAGE_OPTION_NOT_FOUND);
         }
     }
 
@@ -123,13 +130,10 @@ public class EditCommandParser implements Parser<EditCommand> {
      * If {@code modules} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Module>} containing zero modules.
      */
-    private Optional<Set<Module>> parseModulesForEdit(Collection<String> modules) throws ParseException {
-        assert modules != null;
-
-        if (modules.isEmpty()) {
-            return Optional.empty();
-        }
-        Collection<String> moduleSet = modules.size() == 1 && modules.contains("") ? Collections.emptySet() : modules;
-        return Optional.of(ParserUtil.parseModules(moduleSet));
+    private Optional<Set<ModuleCode>> parseModulesForEdit(String modules) throws ParseException {
+        Set<ModuleCode> moduleSet = new HashSet<ModuleCode>();
+        ModuleCode modCode = ParserUtil.parseModuleCode(modules);
+        moduleSet.add(modCode);
+        return Optional.of(moduleSet);
     }
 }

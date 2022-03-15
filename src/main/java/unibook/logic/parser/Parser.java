@@ -1,6 +1,7 @@
 package unibook.logic.parser;
 
 import unibook.logic.commands.Command;
+import unibook.logic.commands.exceptions.CommandException;
 import unibook.logic.parser.exceptions.ParseException;
 
 /**
@@ -13,5 +14,5 @@ public interface Parser<T extends Command> {
      *
      * @throws ParseException if {@code userInput} does not conform the expected format
      */
-    T parse(String userInput) throws ParseException;
+    T parse(String userInput) throws ParseException, CommandException;
 }
