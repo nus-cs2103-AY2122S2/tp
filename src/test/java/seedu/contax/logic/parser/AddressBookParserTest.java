@@ -20,6 +20,7 @@ import seedu.contax.logic.commands.AddAppointmentCommand;
 import seedu.contax.logic.commands.AddCommand;
 import seedu.contax.logic.commands.AddTagCommand;
 import seedu.contax.logic.commands.AppointmentsBetweenCommand;
+import seedu.contax.logic.commands.ChainCommand;
 import seedu.contax.logic.commands.ClearCommand;
 import seedu.contax.logic.commands.Command;
 import seedu.contax.logic.commands.DeleteAppointmentCommand;
@@ -40,6 +41,7 @@ import seedu.contax.logic.commands.ImportCsvCommand;
 import seedu.contax.logic.commands.ListAppointmentCommand;
 import seedu.contax.logic.commands.ListCommand;
 import seedu.contax.logic.commands.ListTagCommand;
+import seedu.contax.logic.commands.RangeCommand;
 import seedu.contax.logic.parser.exceptions.ParseException;
 import seedu.contax.model.IndexedCsvFile;
 import seedu.contax.model.appointment.Appointment;
@@ -188,6 +190,14 @@ public class AddressBookParserTest {
                 instanceof DeleteAppointmentCommand);
     }
 
+    @Test
+    public void parseCommand_appointmentsBetween() throws Exception {
+        LocalDateTime refDateTime = APPOINTMENT_ALONE.getStartDateTime().value;
+        assertTrue(parser.parseCommand(AppointmentsBetweenCommand.COMMAND_WORD
+                + DateInputUtil.getDateRangeInput(refDateTime, refDateTime.plusMinutes(50)))
+                instanceof AppointmentsBetweenCommand);
+    }
+
     //Import/Export csv tests
     @Test
     public void parseCommand_importCsv() throws Exception {
@@ -203,11 +213,15 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_appointmentsBetween() throws Exception {
-        LocalDateTime refDateTime = APPOINTMENT_ALONE.getStartDateTime().value;
-        assertTrue(parser.parseCommand(AppointmentsBetweenCommand.COMMAND_WORD
-                + DateInputUtil.getDateRangeInput(refDateTime, refDateTime.plusMinutes(50)))
-                instanceof AppointmentsBetweenCommand);
+    public void parseCommand_chainCommand() throws Exception {
+        assertTrue(parser.parseCommand(ChainCommand.COMMAND_WORD + " " + ListCommand.COMMAND_WORD
+                + " && " + ListCommand.COMMAND_WORD) instanceof ChainCommand);
+    }
+
+    @Test
+    public void parseCommand_rangeCommand() throws Exception {
+        assertTrue(parser.parseCommand(RangeCommand.COMMAND_WORD + " " + DeleteCommand.COMMAND_WORD
+                + " from/1 to/2") instanceof RangeCommand);
     }
 
     @Test

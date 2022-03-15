@@ -7,8 +7,6 @@ import static seedu.contax.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_PERSON;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_TIME;
 
-import java.util.stream.Stream;
-
 import seedu.contax.commons.core.index.Index;
 import seedu.contax.logic.commands.AddAppointmentCommand;
 import seedu.contax.logic.parser.exceptions.ParseException;
@@ -32,7 +30,7 @@ public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATE, PREFIX_TIME, PREFIX_DURATION,
                         PREFIX_PERSON);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DATE, PREFIX_TIME, PREFIX_DURATION)
+        if (!argMultimap.arePrefixesPresent(PREFIX_NAME, PREFIX_DATE, PREFIX_TIME, PREFIX_DURATION)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddAppointmentCommand.MESSAGE_USAGE));
@@ -52,13 +50,4 @@ public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand
         return new AddAppointmentCommand(new Appointment(name, startDateTime, duration, null),
                 personIndex);
     }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
-
 }

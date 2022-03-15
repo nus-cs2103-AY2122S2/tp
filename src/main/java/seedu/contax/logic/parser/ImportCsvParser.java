@@ -10,7 +10,6 @@ import static seedu.contax.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.io.File;
 import java.util.HashSet;
-import java.util.stream.Stream;
 
 import seedu.contax.logic.commands.ImportCsvCommand;
 import seedu.contax.logic.parser.exceptions.ParseException;
@@ -29,7 +28,7 @@ public class ImportCsvParser implements Parser<ImportCsvCommand> {
     public ImportCsvCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_FILE, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
-        if (!arePrefixesPresent(argMultimap, PREFIX_FILE)) {
+        if (!argMultimap.arePrefixesPresent(PREFIX_FILE)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCsvCommand.MESSAGE_USAGE));
         }
 
@@ -42,19 +41,19 @@ public class ImportCsvParser implements Parser<ImportCsvCommand> {
         int emailPosition = 3;
         int addressPosition = 4;
         int tagPosition = 5;
-        if (arePrefixesPresent(argMultimap, PREFIX_NAME)) {
+        if (argMultimap.arePrefixesPresent(PREFIX_NAME)) {
             namePosition = ParserUtil.parseCsvPositions(argMultimap.getValue(PREFIX_NAME).get());
         }
-        if (arePrefixesPresent(argMultimap, PREFIX_PHONE)) {
+        if (argMultimap.arePrefixesPresent(PREFIX_PHONE)) {
             phonePosition = ParserUtil.parseCsvPositions(argMultimap.getValue(PREFIX_PHONE).get());
         }
-        if (arePrefixesPresent(argMultimap, PREFIX_EMAIL)) {
+        if (argMultimap.arePrefixesPresent(PREFIX_EMAIL)) {
             emailPosition = ParserUtil.parseCsvPositions(argMultimap.getValue(PREFIX_EMAIL).get());
         }
-        if (arePrefixesPresent(argMultimap, PREFIX_ADDRESS)) {
+        if (argMultimap.arePrefixesPresent(PREFIX_ADDRESS)) {
             addressPosition = ParserUtil.parseCsvPositions(argMultimap.getValue(PREFIX_ADDRESS).get());
         }
-        if (arePrefixesPresent(argMultimap, PREFIX_TAG)) {
+        if (argMultimap.arePrefixesPresent(PREFIX_TAG)) {
             tagPosition = ParserUtil.parseCsvPositions(argMultimap.getValue(PREFIX_TAG).get());
         }
 
@@ -71,13 +70,6 @@ public class ImportCsvParser implements Parser<ImportCsvCommand> {
 
         return new ImportCsvCommand(indexedCsvFileObject);
 
-    }
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
     /**
