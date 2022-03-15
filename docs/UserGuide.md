@@ -11,6 +11,7 @@ HustleBook (HB) is a **desktop app for managing client details and meetings, opt
     * [Adding a client : `add`](#adding-a-client--add)
     * [Listing all persons : `list`](#listing-all-persons--list)
     * [Flagging a person : `flag`](#flagging-a-person--flag)
+    * [Sorting all persons : `sort`](#sorting-all-persons--sort)
     * [Editing a person : `edit`](#editing-a-person--edit)
     * [Locating persons by name : `find`](#locating-persons-by-name--find)
     * [Deleting a person : `delete`](#deleting-a-person--delete)
@@ -112,13 +113,6 @@ Shows a list of all clients in the HustleBook.
 
 Format: `list`
 
-### Sorting all persons : `sort`
-
-Displays all clients in the HustleBook according to previous date met. 
-Flagged clients are displayed before unflaggeed clients.
-
-Format: `sort`
-
 ### Flagging a person : `flag`
 
 Flag a person in the HustleBook to mark them as important. Can also be used to unflag the person.
@@ -127,6 +121,13 @@ Format: `flag INDEX f/FLAG`
 
 * `FLAG` input should either be true or false.
 * `True` or `False` is not case-sensitive.
+
+### Sorting all persons : `sort`
+
+Sorts clients such that flagged clients are displayed before unflagged clients.
+Clients are then sorted by previous date met, clients who have not met in a long time will be displayed first.
+
+Format: `sort`
 
 ### Editing a person : `edit`
 
@@ -219,8 +220,8 @@ _Details coming soon ..._
 |------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [d/DATE] [i/INFO] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 d/Salary-3400` |
 | **List**   | `list`            
-| **Sort**   | `sort`            |
 | **Clear**  | `clear`                                                                                                                                                                          |
+| **Sort**   | `sort`            |
 | **Delete** | `delete NAME`<br> e.g., `delete John`                                                                                                                                              |
 | **Flag**   | `flag INDEX f/FLAG`<br> e.g., `flag 3 f/true`                                                                                                                                    |
 | **Edit**   | `edit NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DATE] [i/INFO] [t/TAG]…​`<br> e.g.,`edit John n/James Lee e/jameslee@example.com`                                    |
