@@ -37,6 +37,18 @@ public class LabList implements Iterable<Lab> {
         return internalList.stream().anyMatch(toCheck::isSameLab);
     }
 
+    public Lab getLabByLabNumber(int labNumberToGet) throws LabNotFoundException {
+        requireNonNull(labNumberToGet);
+
+        for (Lab l : internalList) {
+            if (l.labNumber == labNumberToGet) {
+                return l.createCopy();
+            }
+        }
+
+        throw new LabNotFoundException(labNumberToGet);
+    }
+
     /**
      * Adds a lab to the list.
      * The person must not already exist in the list.
@@ -85,6 +97,10 @@ public class LabList implements Iterable<Lab> {
         }
     }
 
+    /**
+     * Replaces the contents of this list with {@code replacement}.
+     * @param replacement is assumed to not contain duplicate labs.
+     */
     public void setLabs(LabList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
