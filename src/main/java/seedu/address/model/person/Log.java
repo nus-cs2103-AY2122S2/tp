@@ -3,7 +3,8 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.util.Objects;
+import seedu.address.model.common.Description;
+
 
 /**
  * Represents a note or log tied to a Person in the address book.
@@ -12,7 +13,7 @@ import java.util.Objects;
 public class Log {
 
     // default values
-    public static final String DEFAULT_NO_DESCRIPTION = "";
+    public static final String DEFAULT_NO_DESCRIPTION = null;
 
     // constraints
     public static final int TITLE_LENGTH_CONSTRAINT = 50;
@@ -23,7 +24,7 @@ public class Log {
 
     // immutable attributes
     private final String title;
-    private final String description;
+    private final Description description;
 
 
     /**
@@ -36,7 +37,7 @@ public class Log {
         requireNonNull(title);
         checkArgument(isValidTitle(title), Log.TITLE_CONSTRAINTS);
         this.title = title;
-        this.description = Objects.requireNonNullElse(description, Log.DEFAULT_NO_DESCRIPTION);
+        this.description = new Description(description);
     }
 
     /**
@@ -49,7 +50,7 @@ public class Log {
                 && (title.length() < Log.TITLE_LENGTH_CONSTRAINT); // within length limit
     }
 
-    public String getDescription() {
+    public Description getDescription() {
         requireNonNull(this.description);
         return this.description;
     }
