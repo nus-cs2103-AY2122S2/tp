@@ -97,34 +97,43 @@ Examples:
 
 ### Listing entries: `list`
 
-Lists entries in UniBook according listing criteria.
+Lists entries in UniBook according to a specified listing criteria.
 
-Format: list [o/LISTING_CRITERIA CRITERIA_INFORMATION]…
+Format: `list o/OPTION [m/MODULE] [ty/TYPE]`, `list v/VIEW`
 
-* lists all contacts in UniBook in ordered alphabetically by name if no optional field is provided
-* if [o/LISTING_CRITERIA CRITERIA_INFORMATION] is provided, then only contacts with fields (defined by LISTING\_CRITERIA) matching the CRITERIA\_INFORMATION provided will be shown to user
-* listing criteria stack - so multiple listing criteria will further narrow the listing shown to user
+* Lists all entries in the UniBook based on the user specified option and criteria.
+* If no argument is provided, UniBook simply lists every entry depending on the currently active view.
 
-LISTING_CRITERIA values:
+OPTION values:
 
-* "module" -  lists all contacts that are participants of that module
+* `module` -  lists all contacts that are participants of a module which is specified by entering 
+`/m <MODULECODE>`.
 
-* "group" - lists all contacts that are participants of that group
+* `type` - lists all contacts by their contact type, specified by entering `ty/<TYPE>` where
+`<TYPE>` is either `professors` or `students`.
 
-* "type" - lists all contacts by their contact type (professor or student)
+* [NOT READY] `group` - lists all contacts that are participants of that group
+
+VIEW values:
+* `people` - switches to people view, automatically lists all persons
+* `modules` - switches to modules view, automatically list all modules
 
 Examples:
 
-* `list o/module CS2103` lists all contacts related to the module CS2103
+* `list` displays every entry depending on currently active view.
 
-* `list o/group W16-T1` lists all contacts that are related to the group W16-T1
+* `list o/module m/CS2103` lists all contacts related to the module CS2103
 
-* `list o/type professors` lists all professors
+* `list o/type ty/professors` lists all professors
 
-* `list o/module CS2103 o/type professors` lists all professors of the module CS2103
+* `list o/module m/CS2103 ty/professors` lists all professors of the module CS2103
 
-* `list o/module CS2104 o/type students` lists all students of the module CS2103
+* `list o/module m/CS2103 ty/students` lists all students of the module CS2103
 
+* `list v/modules` switches the UniBook to `modules` view.
+
+  
+* [NOT READY] `list o/group W16-T1` lists all contacts that are related to the group W16-T1
 
 ### Editing a person : `edit`
 
@@ -170,11 +179,16 @@ Removes the specified modules, module subgroup, student or professor profile fro
 
 Format:
 
+`delete [INDEX]`
+* Deletes the person at that index
+* Only can be used on Person view
+
 `delete m/MODULECODE [o/OPTION]`
 
 * Deletes the module with the specified `MODULECODE`.
+* Only can be used on module view
 * The module must already exist in the system.
-* Option is optional, and can take the following values: 
+* [NOT READY] Option is optional, and can take the following values: 
   - `ALL` -> Delete everything associated with the module, including profiles.
   - `MOD` -> Delete only the module
   - `PROF` -> Delete the Professor associated with the module.
@@ -183,7 +197,7 @@ Format:
 Example:
 * `delete m/CS2107` removes the "CS2107" module only.
 
-`delete m/MODULECODE g/GROUPCODE [o/OPTION]`
+[NOT READY] `delete m/MODULECODE g/GROUPCODE [o/OPTION]`
 * Deletes the subgroup specified by `GROUPCODE`, within the module specified by `MODULECODE`.
 * Option is optional, and can take the following values:
     - `ALL` -> Delete everything associated with the group, including profiles.
@@ -194,14 +208,14 @@ Example:
 Example:
 * `delete m/CS2107 g/T04` removes the T04 subgroup from the CS2107 module.
 
-`delete n/STUDENTNAME`
+[NOT READY] `delete n/STUDENTNAME`
 * Deletes the student profile specified by `STUDENTNAME`. If there are multiple matches,
 a prompt to specify which profile to delete will appear.
   
 Example: `delete n/Alan Tan` will remove the profile associated with Alan Tan. If there are multiple
 profiles associated with this name, a list will appear prompting you to specify which profile to delete.
 
-`delete n/PROFNAME`
+[NOT READY] `delete n/PROFNAME`
 * Deletes the professor profile specified by `PROFNAME`. If there are multiple matches, a prompt
 to specify which profile to delete will appear.
   
