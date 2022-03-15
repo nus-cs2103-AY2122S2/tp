@@ -2,13 +2,13 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.UniqueContactList;
 import seedu.address.model.medical.Medical;
+import seedu.address.model.medical.UniqueMedicalList;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.UniquePersonList;
 import seedu.address.model.prescription.Prescription;
@@ -23,7 +23,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     private final UniquePersonList persons;
     private final UniquePrescriptionList prescriptions;
     private final UniqueContactList contacts;
-    private final ArrayList<Medical> medicals;
+    private final UniqueMedicalList medicals;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -36,7 +36,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons = new UniquePersonList();
         prescriptions = new UniquePrescriptionList();
         contacts = new UniqueContactList();
-        medicals = new ArrayList<>();
+        medicals = new UniqueMedicalList();
     }
 
     public AddressBook() {}
