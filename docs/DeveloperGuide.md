@@ -323,20 +323,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: find customer's detail associated with a keyword**
+**Use case: find customer's details associated with a keyword**
 
 **MSS**
 
 1.  User requests to find a customer related to a keyword
 2.  TrackBeau shows a list of customers with matching keyword with their customer Index
 
-    Use case ends.
+
+
 
 **Extensions**
 
 * 2a. The list is empty.
 
   Use case ends.
+
+
 
 **Use case: Add a customer**
 
@@ -461,5 +464,5 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `find nickle`<br>
       Expected: Invalid keyword has been enter. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect show commands to try: `find`, `find x` (where x only contains english characters)<br>
+   1. Other incorrect show commands to try: `find skintype`, `find x` (where x only contains english characters)<br>
       Expected: Similar to previous.
