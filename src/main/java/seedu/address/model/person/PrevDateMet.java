@@ -44,6 +44,24 @@ public class PrevDateMet {
         return LocalDate.now().toString();
     }
 
+    /**
+     * Method to compare PrevDateMet with other PrevDateMet.
+     * Returns 0 if date is equal, -1 if this PrevDateMet is before and 1 if it is after.
+     *
+     * @param otherDate Another PrevDateMet to compare to.
+     * @return Integer indicating if PrevDateMet is equal, before or after otherDate
+     */
+    public int compare(PrevDateMet otherDate) {
+        if (this.equals(otherDate)) {
+            return 0;
+        } else if (this.value.isBefore(otherDate.value)) {
+            return -1;
+        } else {
+            return 1;
+        }
+
+    }
+
     @Override
     public String toString() {
         return value.toString();

@@ -107,6 +107,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    /**
+     * Sorts the persons in the address book.
+     */
+    public void sortPersonByDate() {
+        persons.sortByDate();
+    }
+
     //// util methods
 
     /**
