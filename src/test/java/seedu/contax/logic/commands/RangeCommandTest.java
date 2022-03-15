@@ -42,16 +42,16 @@ public class RangeCommandTest {
         String sampleCommand = "range edit from/1 to/3 p/12345678";
         ArgumentMultimap argumentMultimap = new ArgumentMultimap();
         RangeCommand rangeCommand =
-                new RangeCommand(Index.fromZeroBased(1), Index.fromZeroBased(3), argumentMultimap, sampleCommand);
+                new RangeCommand(Index.fromZeroBased(1), Index.fromZeroBased(3), sampleCommand);
         RangeCommand rangeCommand2 =
-                new RangeCommand(Index.fromZeroBased(1), Index.fromZeroBased(3), argumentMultimap, "sampleCommand");
+                new RangeCommand(Index.fromZeroBased(1), Index.fromZeroBased(3), "sampleCommand");
 
         // same object -> returns true
         assertTrue(rangeCommand.equals(rangeCommand));
 
         // same values -> returns true
         RangeCommand rangeCommandCopy =
-                new RangeCommand(Index.fromZeroBased(1), Index.fromZeroBased(3), argumentMultimap, sampleCommand);
+                new RangeCommand(Index.fromZeroBased(1), Index.fromZeroBased(3), sampleCommand);
         assertTrue(rangeCommand.equals(rangeCommandCopy));
 
         // different types -> returns false
@@ -71,9 +71,9 @@ public class RangeCommandTest {
         ArgumentMultimap argumentMultimap = new ArgumentMultimap();
 
         RangeCommand rangeCommandCopy =
-                new RangeCommand(Index.fromZeroBased(1), Index.fromZeroBased(3), argumentMultimap, sampleCommand);
+                new RangeCommand(Index.fromZeroBased(1), Index.fromZeroBased(3), sampleCommand);
         CommandResult commandResult = new RangeCommand(Index.fromZeroBased(1), Index.fromZeroBased(3),
-                argumentMultimap, sampleCommand).execute(modelStub);
+                sampleCommand).execute(modelStub);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new Schedule(), new UserPrefs());
         assertCommandSuccess(rangeCommandCopy, model, commandResult, expectedModel);
@@ -86,9 +86,9 @@ public class RangeCommandTest {
         ArgumentMultimap argumentMultimap = new ArgumentMultimap();
         argumentMultimap.put(new Prefix(""), "delete");
         RangeCommand rangeCommandCopy =
-                new RangeCommand(Index.fromZeroBased(1), Index.fromZeroBased(3), argumentMultimap, sampleCommand);
+                new RangeCommand(Index.fromZeroBased(1), Index.fromZeroBased(3), sampleCommand);
         CommandResult commandResult = new RangeCommand(Index.fromZeroBased(1), Index.fromZeroBased(3),
-                argumentMultimap, sampleCommand).execute(modelStub);
+                sampleCommand).execute(modelStub);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new Schedule(), new UserPrefs());
         assertCommandSuccess(rangeCommandCopy, model, commandResult, expectedModel);
@@ -103,7 +103,7 @@ public class RangeCommandTest {
         argumentMultimap.put(new Prefix("/from"), "2");
         argumentMultimap.put(new Prefix("/to"), "1");
         RangeCommand rangeCommand =
-                new RangeCommand(Index.fromZeroBased(2), Index.fromZeroBased(1), argumentMultimap, sampleCommand);
+                new RangeCommand(Index.fromZeroBased(2), Index.fromZeroBased(1), sampleCommand);
         assertCommandFailure(rangeCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 

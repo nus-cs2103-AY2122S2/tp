@@ -39,6 +39,6 @@ public class RangeCommandParser implements Parser<RangeCommand> {
         } else {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RangeCommand.MESSAGE_USAGE));
         }
-        return new RangeCommand(fromIndex, toIndex, argMultimap, commandInput);
+        return new RangeCommand(fromIndex, toIndex, commandInput);
     }
 }

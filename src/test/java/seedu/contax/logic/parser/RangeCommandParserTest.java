@@ -48,7 +48,7 @@ public class RangeCommandParserTest {
         argumentMultimap.put(new Prefix("/from"), "2");
         argumentMultimap.put(new Prefix("/to"), "1");
         RangeCommand expectedRangeCommand =
-                new RangeCommand(fromIndex, toIndex, argumentMultimap, "range delete");
+                new RangeCommand(fromIndex, toIndex, "range delete");
         assertParseFailure(parser, sampleUserInput, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
@@ -62,7 +62,7 @@ public class RangeCommandParserTest {
         argumentMultimap.put(new Prefix("/from"), "1");
         argumentMultimap.put(new Prefix("/to"), "2");
         RangeCommand expectedRangeCommand =
-                new RangeCommand(fromIndex, toIndex, argumentMultimap, "range delete");
+                new RangeCommand(fromIndex, toIndex, "range delete");
         assertParseSuccess(parser, sampleUserInput, expectedRangeCommand);
     }
 }
