@@ -88,7 +88,7 @@ public class UniquePositionList implements Iterable<Position> {
      * Replaces the contents of this list with {@code positions}.
      * {@code positions} must not contain duplicate positions.
      */
-    public void setPersons(List<Position> positions) {
+    public void setPositions(List<Position> positions) {
         requireAllNonNull(positions);
         if (!positionsAreUnique(positions)) {
             throw new DuplicatePositionException();

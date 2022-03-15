@@ -56,12 +56,23 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the position list with {@code positions}.
+     * {@code positions} must not contain duplicate positions.
+     */
+    public void setPositions(List<Position> positions) {
+        this.positions.setPositions(positions);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setPositions(newData.getPositionList());
+        // TO ADD: set positions for interview
+
     }
 
     //// applicant-level operations

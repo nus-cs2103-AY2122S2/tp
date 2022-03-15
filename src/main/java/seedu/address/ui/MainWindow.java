@@ -122,13 +122,13 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        applicantListPanel = new ApplicantListPanel(logic.getFilteredPersonList());
+        applicantListPanel = new ApplicantListPanel(logic.getFilteredApplicantList());
         personListPanelPlaceholder.getChildren().add(applicantListPanel.getRoot());
 
-        positionListPanel = new PositionListPanel(null); // TO LINK WITH LOGIC
+        positionListPanel = new PositionListPanel(logic.getFilteredPositionList());
         positionListPanelPlaceholder.getChildren().add(positionListPanel.getRoot());
 
-        interviewListPanel = new InterviewListPanel(null); // TO LINK WITH LOGIC
+        interviewListPanel = new InterviewListPanel(logic.getFilteredInterviewList());
         interviewListPanelPlaceholder.getChildren().add(interviewListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();

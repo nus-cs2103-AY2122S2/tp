@@ -82,7 +82,7 @@ public interface Model {
     void setPerson(Applicant target, Applicant editedApplicant);
 
     /** Returns an unmodifiable view of the filtered applicant list */
-    ObservableList<Applicant> getFilteredPersonList();
+    ObservableList<Applicant> getFilteredApplicantList();
 
     /**
      * Updates the filter of the filtered applicant list to filter by the given {@code predicate}.

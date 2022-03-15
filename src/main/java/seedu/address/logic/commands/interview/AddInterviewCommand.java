@@ -45,7 +45,7 @@ public class AddInterviewCommand extends AddCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Applicant> lastShownApplicantList = model.getFilteredPersonList();
+        List<Applicant> lastShownApplicantList = model.getFilteredApplicantList();
         if (applicantIndex.getZeroBased() >= lastShownApplicantList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }

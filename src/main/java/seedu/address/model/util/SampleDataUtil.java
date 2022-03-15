@@ -13,6 +13,10 @@ import seedu.address.model.applicant.Email;
 import seedu.address.model.applicant.Gender;
 import seedu.address.model.applicant.Name;
 import seedu.address.model.applicant.Phone;
+import seedu.address.model.position.Description;
+import seedu.address.model.position.Position;
+import seedu.address.model.position.PositionName;
+import seedu.address.model.position.PositionOpenings;
 import seedu.address.model.position.Requirement;
 import seedu.address.model.tag.Tag;
 
@@ -21,25 +25,45 @@ import seedu.address.model.tag.Tag;
  */
 public class SampleDataUtil {
     public static Applicant[] getSamplePersons() {
-        return new Applicant[] {
+        return new Applicant[]{
             new Applicant(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Age("21"), new Address("Blk 30 Geylang Street 29, #06-40"), new Gender("M"),
-                getTagSet("friends")),
+                    new Age("21"), new Address("Blk 30 Geylang Street 29, #06-40"), new Gender("M"),
+                    getTagSet("friends")),
             new Applicant(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new Age("22"), new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), new Gender("F"),
-                getTagSet("colleagues", "friends")),
+                    new Age("22"), new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), new Gender("F"),
+                    getTagSet("colleagues", "friends")),
             new Applicant(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new Age("23"), new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), new Gender("F"),
-                getTagSet("neighbours")),
+                    new Age("23"), new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), new Gender("F"),
+                    getTagSet("neighbours")),
             new Applicant(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                new Age("24"), new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), new Gender("M"),
-                getTagSet("family")),
+                    new Age("24"), new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), new Gender("M"),
+                    getTagSet("family")),
             new Applicant(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new Age("25"), new Address("Blk 47 Tampines Street 20, #17-35"), new Gender("M"),
-                getTagSet("classmates")),
+                    new Age("25"), new Address("Blk 47 Tampines Street 20, #17-35"), new Gender("M"),
+                    getTagSet("classmates")),
             new Applicant(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new Age("26"), new Address("Blk 45 Aljunied Street 85, #11-31"), new Gender("M"),
-                getTagSet("colleagues"))
+                    new Age("26"), new Address("Blk 45 Aljunied Street 85, #11-31"), new Gender("M"),
+                    getTagSet("colleagues"))
+        };
+    }
+
+    public static Position[] getSamplePositions() {
+        return new Position[]{
+            new Position(new PositionName("Senior Software Developer"),
+                    new Description("The highest paying job in the company\nMore than 5 years experience"),
+                    new PositionOpenings("3"), getRequirementSet("Java", "C++")),
+            new Position(new PositionName("Useless IT Intern"),
+                    new Description("Need to hire to fill the quota"),
+                    new PositionOpenings("1"),
+                    getRequirementSet("Source Academy", "C")),
+            new Position(new PositionName("Janitor"),
+                    new Description("Arguably the most important job"),
+                    new PositionOpenings("0"),
+                    getRequirementSet("Sweep Floor", "Wipe Window", "Wash Toilet")),
+            new Position(new PositionName("Admin Officer"),
+                    new Description("Degree or Postgraduate holder with Major in Information Technology, "
+                            + "Computer Science, or other similar focus, and a cumulative GPA of 3.5 and above"),
+                    new PositionOpenings("1"), getRequirementSet("Hardworking", "Good with people"))
         };
     }
 
@@ -47,6 +71,9 @@ public class SampleDataUtil {
         AddressBook sampleAb = new AddressBook();
         for (Applicant sampleApplicant : getSamplePersons()) {
             sampleAb.addPerson(sampleApplicant);
+        }
+        for (Position samplePosition : getSamplePositions()) {
+            sampleAb.addPosition(samplePosition);
         }
         return sampleAb;
     }
