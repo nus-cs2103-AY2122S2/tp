@@ -22,6 +22,9 @@ Class JsonAdaptedProduct
 
 }
 
+Class HiddenOutside<<Hidden>>
+HiddenOutside ..> Storage
+
 StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
 StorageManager -up-> "1" IBookStorage
