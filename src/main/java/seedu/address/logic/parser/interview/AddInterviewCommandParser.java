@@ -42,6 +42,10 @@ public class AddInterviewCommandParser implements Parser<AddInterviewCommand> {
                     AddInterviewCommand.MESSAGE_USAGE), pe);
         }
 
+        if (!arePrefixesPresent(argMultimap, PREFIX_DATE, PREFIX_POSITION)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddInterviewCommand.MESSAGE_USAGE));
+        }
+
         // Can find actual date and do error checking here
         LocalDateTime date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
 

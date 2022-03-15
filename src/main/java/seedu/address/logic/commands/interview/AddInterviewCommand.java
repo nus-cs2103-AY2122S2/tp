@@ -19,10 +19,13 @@ import seedu.address.model.interview.Interview;
 import seedu.address.model.position.Position;
 
 public class AddInterviewCommand extends AddCommand {
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " -i: Adds a interview to the Hirelah application. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " -i: Adds an interview to the Hirelah application. "
             + "Parameters: APPLICANT_INDEX (must be a positive integer) "
             + PREFIX_DATE + "DATE "
-            + PREFIX_POSITION + "POSITION ";
+            + PREFIX_POSITION + "POSITION_INDEX" + "\n"
+            + "Example: " + COMMAND_WORD + " -i " + "1 "
+            + PREFIX_DATE + "2022-01-01 12:00 "
+            + PREFIX_POSITION + "1";
 
     public static final String MESSAGE_SUCCESS = "New interview added: %1$s";
     public static final String MESSAGE_DUPLICATE_INTERVIEW = "This interview already exists in the address book";
@@ -62,7 +65,6 @@ public class AddInterviewCommand extends AddCommand {
 
         Interview interviewToAdd = new Interview(applicantInInterview, date, positionInInterview);
 
-        // TODO: Check duplicated persons
         if (model.hasInterview(interviewToAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_INTERVIEW);
         }

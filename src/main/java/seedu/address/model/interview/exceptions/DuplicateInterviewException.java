@@ -1,7 +1,7 @@
 package seedu.address.model.interview.exceptions;
 
-public class DuplicateInterivewException extends RuntimeException {
-    public DuplicateInterivewException() {
+public class DuplicateInterviewException extends RuntimeException {
+    public DuplicateInterviewException() {
         super("Operation would result in duplicate interviews");
     }
 }

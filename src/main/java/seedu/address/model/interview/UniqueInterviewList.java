@@ -8,7 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.interview.exceptions.DuplicateInterivewException;
+import seedu.address.model.interview.exceptions.DuplicateInterviewException;
 import seedu.address.model.interview.exceptions.InterviewNotFoundException;
 
 public class UniqueInterviewList implements Iterable<Interview> {
@@ -30,7 +30,7 @@ public class UniqueInterviewList implements Iterable<Interview> {
     public void add(Interview toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicateInterivewException();
+            throw new DuplicateInterviewException();
         }
         internalList.add(toAdd);
     }
@@ -49,7 +49,7 @@ public class UniqueInterviewList implements Iterable<Interview> {
         }
 
         if (!target.equals(editedInterview) && contains(editedInterview)) {
-            throw new DuplicateInterivewException();
+            throw new DuplicateInterviewException();
         }
 
         internalList.set(index, editedInterview);
@@ -78,7 +78,7 @@ public class UniqueInterviewList implements Iterable<Interview> {
     public void setInterviews(List<Interview> interview) {
         requireAllNonNull(interview);
         if (!interviewsAreUnique(interview)) {
-            throw new DuplicateInterivewException();
+            throw new DuplicateInterviewException();
         }
 
         internalList.setAll(interview);

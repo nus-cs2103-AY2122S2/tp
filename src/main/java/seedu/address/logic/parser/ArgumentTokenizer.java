@@ -161,12 +161,12 @@ public class ArgumentTokenizer {
      * @throws ParseException When a flag is not found or when the flag is invalid;
      */
     public static char getFlag(String argsString) throws ParseException {
-        if (argsString.charAt(0) != '-') {
+        if (argsString.equals("") || argsString.charAt(0) != '-') {
             throw new ParseException(MESSAGE_NO_FLAG);
         }
 
         char flag = argsString.charAt(1);
-        char whitespace = argsString.charAt(2);
+        char whitespace = argsString.length() <= 2 ? ' ' : argsString.charAt(2);
 
         if (whitespace != ' ' || (flag != FLAG_APPLICANT && flag != FLAG_INTERVIEW && flag != FLAG_POSITION)) {
             throw new ParseException(MESSAGE_INVALID_FLAG);
