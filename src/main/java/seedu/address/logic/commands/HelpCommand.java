@@ -19,7 +19,7 @@ public class HelpCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         HashMap<String, Boolean> settings = new HashMap<>();
-        settings.put("help", true);
+        settings.put("showHelp", true);
         return new CommandResult(SHOWING_HELP_MESSAGE, settings);
     }
 }
