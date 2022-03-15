@@ -58,6 +58,10 @@ public class UniBookParserTest {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
         System.out.println(PersonUtil.getEditPersonDescriptorDetails(descriptor));
+        System.out.println(EditCommand.COMMAND_WORD
+                + " " + TypicalIndexes.INDEX_FIRST_PERSON.getOneBased()
+                + " o/person "
+                + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD
             + " " + TypicalIndexes.INDEX_FIRST_PERSON.getOneBased()
             + " o/person "

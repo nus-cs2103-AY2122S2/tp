@@ -16,14 +16,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
-import unibook.commons.core.LogsCenter;
 import unibook.commons.core.Messages;
 import unibook.commons.core.index.Index;
 import unibook.commons.util.CollectionUtil;
-import unibook.logic.LogicManager;
 import unibook.logic.commands.exceptions.CommandException;
 import unibook.model.Model;
 import unibook.model.module.Module;

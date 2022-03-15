@@ -10,7 +10,11 @@ import static unibook.logic.parser.CliSyntax.PREFIX_OPTION;
 import static unibook.logic.parser.CliSyntax.PREFIX_PHONE;
 import static unibook.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import unibook.commons.core.LogsCenter;
@@ -19,7 +23,6 @@ import unibook.logic.LogicManager;
 import unibook.logic.commands.EditCommand;
 import unibook.logic.commands.EditCommand.EditModuleDescriptor;
 import unibook.logic.commands.EditCommand.EditPersonDescriptor;
-import unibook.logic.commands.exceptions.CommandException;
 import unibook.logic.parser.exceptions.ParseException;
 import unibook.model.module.ModuleCode;
 import unibook.model.tag.Tag;
@@ -35,7 +38,7 @@ public class EditCommandParser implements Parser<EditCommand> {
      * and returns an EditCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public EditCommand parse(String args) throws ParseException, CommandException {
+    public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_OPTION,
@@ -76,16 +79,19 @@ public class EditCommandParser implements Parser<EditCommand> {
 
             parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
-            Optional<Set<ModuleCode>> module = (!argMultimap.getValue(PREFIX_NEWMOD).isEmpty()) ?
-                    parseModulesForEdit(argMultimap.getValue(PREFIX_NEWMOD).get()) :
-                    Optional.empty();
+            Optional<Set<ModuleCode>> module = argMultimap.getValue(PREFIX_NEWMOD).isPresent()
+                    ? parseModulesForEdit(argMultimap.getValue(PREFIX_NEWMOD).get())
+                    : Optional.empty();
             if (module.isEmpty() && !editPersonDescriptor.isAnyFieldEdited()) {
                 throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
             }
 
+
             if (module.isPresent()) {
+                System.out.println("here");
                 return new EditCommand(index, editPersonDescriptor, module.get().iterator().next());
             }
+            System.out.println("there");
             return new EditCommand(index, editPersonDescriptor);
         } else if (argMultimap.getValue(PREFIX_OPTION).get().equals("module")) {
             if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
@@ -126,6 +132,9 @@ public class EditCommandParser implements Parser<EditCommand> {
      * {@code Set<Module>} containing zero modules.
      */
     private Optional<Set<ModuleCode>> parseModulesForEdit(String modules) throws ParseException {
+        if (modules == " ") {
+            return Optional.empty();
+        }
         Set<ModuleCode> moduleSet = new HashSet<ModuleCode>();
         ModuleCode modCode = ParserUtil.parseModuleCode(modules);
         moduleSet.add(modCode);
