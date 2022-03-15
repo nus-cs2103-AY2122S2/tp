@@ -12,8 +12,10 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.contact.Contact;
-import seedu.address.model.person.Person;
+
 import seedu.address.model.consultation.Consultation;
+import seedu.address.model.patient.Patient;
+import seedu.address.model.prescription.Prescription;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -23,11 +25,15 @@ class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
     public static final String MESSAGE_DUPLICATE_CONTACT = "Contact list contains duplicate person(s).";
+
     public static final String MESSAGE_DUPLICATE_CONSULTATION = "Consultation list contains duplicate consultation(s).";
+    public static final String MESSAGE_DUPLICATE_PRESCRIPTION = "Prescription list contains duplicate person(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedContact> contacts = new ArrayList<>();
     private final List<JsonAdaptedConsultation> consultations = new ArrayList<>();
+    private final List<JsonAdaptedPrescription> prescriptions = new ArrayList<>();
+
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given persons and contacts.
@@ -35,13 +41,17 @@ class JsonSerializableAddressBook {
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
                                        @JsonProperty("contacts") List<JsonAdaptedContact> contacts,
-                                       @JsonProperty("consultation") List<JsonAdaptedConsultation> consultations) {
+                                       @JsonProperty("consultation") List<JsonAdaptedConsultation> consultations,
+                                       @JsonProperty("prescriptions") List<JsonAdaptedPrescription> prescriptions) {
         this.persons.addAll(persons);
         if (!contacts.isEmpty()) {
             this.contacts.addAll(contacts);
         }
         if (!consultations.isEmpty()) {
             this.consultations.addAll(consultations);
+        }
+        if (!prescriptions.isEmpty()) {
+            this.prescriptions.addAll(prescriptions);
         }
     }
 
@@ -55,6 +65,8 @@ class JsonSerializableAddressBook {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
         contacts.addAll(source.getContactList().stream().map(JsonAdaptedContact::new).collect(Collectors.toList()));
         consultations.addAll(source.getConsultationList().stream().map(JsonAdaptedConsultation::new).collect(Collectors.toList()));
+        prescriptions.addAll(source.getPrescriptionList().stream().map(JsonAdaptedPrescription::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -65,11 +77,25 @@ class JsonSerializableAddressBook {
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Person person = jsonAdaptedPerson.toModelType();
-            if (addressBook.hasPerson(person)) {
+            Patient patient = jsonAdaptedPerson.toModelType();
+            if (addressBook.hasPerson(patient)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            addressBook.addPerson(person);
+            addressBook.addPerson(patient);
+        }
+        for (JsonAdaptedContact jsonAdaptedContact : contacts) {
+            Contact contact = jsonAdaptedContact.toModelType();
+            if (addressBook.hasContact(contact)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_CONTACT);
+            }
+            addressBook.addContact(contact);
+        }
+        for (JsonAdaptedPrescription jsonAdaptedPrescription : prescriptions) {
+            Prescription prescription = jsonAdaptedPrescription.toModelType();
+            if (addressBook.hasPrescription(prescription)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_PRESCRIPTION);
+            }
+            addressBook.addPrescription(prescription);
         }
         for (JsonAdaptedContact jsonAdaptedContact : contacts) {
             Contact contact = jsonAdaptedContact.toModelType();

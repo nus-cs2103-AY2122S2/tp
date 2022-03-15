@@ -9,6 +9,7 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.contact.exceptions.ContactNotFoundException;
 import seedu.address.model.contact.exceptions.DuplicateContactException;
 
 /**
@@ -59,7 +60,7 @@ public class UniqueContactList implements Iterable<Contact> {
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new PersonNotFoundException();
+            throw new ContactNotFoundException();
         }
 
         if (!target.isSameContact(editedContact) && contains(editedContact)) {
@@ -76,7 +77,7 @@ public class UniqueContactList implements Iterable<Contact> {
     public void remove(Contact toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            throw new PersonNotFoundException();
+            throw new ContactNotFoundException();
         }
     }
 

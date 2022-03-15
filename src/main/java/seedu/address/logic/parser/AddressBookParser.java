@@ -50,15 +50,13 @@ public class AddressBookParser {
                 ArgumentTokenizer.tokenize(arguments, PREFIX_TYPE);
 
         switch (commandWord) {
-            case "add":
-                if (argMultimap.getValue(PREFIX_TYPE).isPresent()) {
-                    return parseAddCommandType(argMultimap.getValue(PREFIX_TYPE).get(), arguments);
-                }
-                return new AddCommandParser().parse(arguments);
-
-
-            case EditCommand.COMMAND_WORD:
-                return new EditCommandParser().parse(arguments);
+        case AddCommand.COMMAND_WORD:
+            if (argMultimap.getValue(PREFIX_TYPE).isPresent()) {
+                return parseAddCommandType(argMultimap.getValue(PREFIX_TYPE).get(), arguments);
+            }
+            return new AddCommandParser().parse(arguments);
+        case EditCommand.COMMAND_WORD:
+            return new EditCommandParser().parse(arguments);
 
             case DeleteCommand.COMMAND_WORD:
                 return new DeleteCommandParser().parse(arguments);
@@ -69,11 +67,11 @@ public class AddressBookParser {
             case FindCommand.COMMAND_WORD:
                 return new FindCommandParser().parse(arguments);
 
-            case ListCommand.COMMAND_WORD:
-                if (argMultimap.getValue(PREFIX_TYPE).isPresent()) {
-                    return parseViewCommandType(argMultimap.getValue(PREFIX_TYPE).get(), arguments);
-                }
-                return new ListCommand();
+        case ListCommand.COMMAND_WORD:
+            if (argMultimap.getValue(PREFIX_TYPE).isPresent()) {
+                return parseViewCommandType(argMultimap.getValue(PREFIX_TYPE).get(), arguments);
+            }
+            return new ListCommand();
 
             case ExitCommand.COMMAND_WORD:
                 return new ExitCommand();

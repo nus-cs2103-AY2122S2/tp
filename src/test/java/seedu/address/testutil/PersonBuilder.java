@@ -5,9 +5,10 @@ import java.util.Set;
 
 import seedu.address.model.contact.Address;
 import seedu.address.model.contact.Email;
-import seedu.address.model.contact.Name;
-import seedu.address.model.contact.Person;
 import seedu.address.model.contact.Phone;
+import seedu.address.model.patient.Name;
+import seedu.address.model.patient.Nric;
+import seedu.address.model.patient.Patient;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -16,11 +17,13 @@ import seedu.address.model.util.SampleDataUtil;
  */
 public class PersonBuilder {
 
+    public static final String DEFAULT_NRIC = "S7654321L";
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
+    private Nric nric;
     private Name name;
     private Phone phone;
     private Email email;
@@ -31,6 +34,8 @@ public class PersonBuilder {
      * Creates a {@code PersonBuilder} with the default details.
      */
     public PersonBuilder() {
+        nric = new Nric(DEFAULT_NRIC);
+        name = new Name(DEFAULT_NAME);
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
@@ -41,12 +46,21 @@ public class PersonBuilder {
     /**
      * Initializes the PersonBuilder with the data of {@code personToCopy}.
      */
-    public PersonBuilder(Person personToCopy) {
-        name = personToCopy.getName();
-        phone = personToCopy.getPhone();
-        email = personToCopy.getEmail();
-        address = personToCopy.getAddress();
-        tags = new HashSet<>(personToCopy.getTags());
+    public PersonBuilder(Patient patientToCopy) {
+        nric = patientToCopy.getNric();
+        name = patientToCopy.getName();
+        phone = patientToCopy.getPhone();
+        email = patientToCopy.getEmail();
+        address = patientToCopy.getAddress();
+        tags = new HashSet<>(patientToCopy.getTags());
+    }
+
+    /**
+     * Sets the {@code Nric} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withNric(String nric) {
+        this.nric = new Nric(nric);
+        return this;
     }
 
     /**
@@ -89,8 +103,8 @@ public class PersonBuilder {
         return this;
     }
 
-    public Person build() {
-        return new Person(name, phone, email, address, tags);
+    public Patient build() {
+        return new Patient(nric, name, phone, email, address, tags);
     }
 
 }

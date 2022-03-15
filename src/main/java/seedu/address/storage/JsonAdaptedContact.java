@@ -14,8 +14,8 @@ import seedu.address.model.contact.Address;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Email;
 import seedu.address.model.contact.Phone;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Nric;
+import seedu.address.model.patient.Name;
+import seedu.address.model.patient.Nric;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -36,9 +36,9 @@ class JsonAdaptedContact {
      */
     @JsonCreator
     public JsonAdaptedContact(@JsonProperty("ownerNric") String ownerNric, @JsonProperty("name") String name,
-                              @JsonProperty("phone") String phone, @JsonProperty("email") String email,
-                              @JsonProperty("address") String address, @JsonProperty("tagged")
-                                      List<JsonAdaptedTag> tagged) {
+          @JsonProperty("phone") String phone, @JsonProperty("email") String email,
+          @JsonProperty("address") String address, @JsonProperty("tagged")
+              List<JsonAdaptedTag> tagged) {
 
         this.ownerNric = ownerNric;
         this.name = name;
