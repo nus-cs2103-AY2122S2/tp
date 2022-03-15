@@ -14,9 +14,9 @@ import seedu.address.logic.parser.Prefix;
  * Guarantees: immutable; is valid as declared in {@link #isValid(String)}
  */
 public class DueDate extends TransactionField {
-    public static final Prefix PREFIX = new Prefix("dd/", true);
+    public static final Prefix PREFIX = new Prefix("dd/", false);
     public static final String MESSAGE_CONSTRAINTS =
-            "Due date should be in YYYY-MM-DD format and must exist";
+            "Due date (if specified) should be in YYYY-MM-DD format and must exist";
 
     private final LocalDate value;
 
@@ -28,7 +28,7 @@ public class DueDate extends TransactionField {
     public DueDate(String dueDate) {
         super(PREFIX);
         requireNonNull(dueDate);
-        dueDate = dueDate.trim(); // Wow, look at that, we don't need a whole fucking parser to do one line.
+        dueDate = dueDate.trim();
         checkArgument(DueDate.isValid(dueDate), MESSAGE_CONSTRAINTS);
         value = LocalDate.parse(dueDate);
     }

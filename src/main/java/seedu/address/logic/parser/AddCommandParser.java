@@ -51,7 +51,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 FieldParser<? extends Field> parser = FieldRegistry.PARSERS.get(p);
                 Field field = parser.parse(argOpt.get());
                 fields.add(field);
-            }
+            }//refactor
         }
 
         Person person = new Person(fields, tags);
