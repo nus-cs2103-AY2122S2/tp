@@ -82,7 +82,7 @@ public class AddLogCommand extends Command {
             // find person with same name
             List<Person> personsToEdit = model.getAddressBook()
                     .getPersonList().stream()
-                    .filter(p -> p.isSamePerson(this.personWithNameToAddLog))
+                    .filter(p -> p.hasSameName(this.personWithNameToAddLog))
                     .collect(Collectors.toList());
 
             // if person not found, throw an error

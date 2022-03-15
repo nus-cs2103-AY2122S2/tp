@@ -99,8 +99,8 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both persons are the same, which we define to be
+     * having the same name.
      */
     public boolean isSamePerson(Person otherPerson) {
         if (otherPerson == this) {
@@ -109,6 +109,13 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    /**
+     * Returns true if both persons explicitly have the same name.
+     */
+    public boolean hasSameName(Person otherPerson) {
+        return this.name.equals(otherPerson.name);
     }
 
     /**
