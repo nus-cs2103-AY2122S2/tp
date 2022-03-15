@@ -17,7 +17,7 @@ public class Lab {
     /*
      * Lab number has to be a positive Integer.
      */
-    public static final String VALIDATION_REGEX = "\\d+";
+    public static final String VALIDATION_REGEX = "[1-9]\\d*";
 
     public final int labNumber;
 
