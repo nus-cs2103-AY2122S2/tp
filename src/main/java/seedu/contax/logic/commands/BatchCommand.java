@@ -30,10 +30,10 @@ public class BatchCommand extends Command {
             + "Parameters: "
             + "COMMAND (must be valid command without index) "
             + PREFIX_SEARCH_TYPE + "SEARCH_TYPE "
-            + PREFIX_EQUALS + "PATTERN \n"
+            + PREFIX_EQUALS + "VALUE \n"
             + "Example: " + COMMAND_WORD + " edit "
             + PREFIX_SEARCH_TYPE + "phone "
-            + PREFIX_EQUALS + "^123 ";
+            + PREFIX_EQUALS + "123 ";
 
     private final String commandInput;
     private final SearchType searchType;
