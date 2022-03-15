@@ -3,9 +3,11 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Objects;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.entry.Company;
+import seedu.address.model.entry.Event;
 import seedu.address.model.entry.Person;
 import seedu.address.model.entry.UniqueEntryList;
 
@@ -17,6 +19,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueEntryList<Person> persons;
     private final UniqueEntryList<Company> companies;
+    private final UniqueEntryList<Event> events;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -28,6 +31,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         persons = new UniqueEntryList<>();
         companies = new UniqueEntryList<>();
+        events = new UniqueEntryList<>();
     }
 
     public AddressBook() {}
@@ -65,6 +69,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setEvents(newData.getEventList());
     }
 
     //// person-level operations
@@ -145,7 +150,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public String toString() {
         return persons.asUnmodifiableObservableList().size() + " persons,"
-                + companies.asUnmodifiableObservableList().size() + " companies";
+                + companies.asUnmodifiableObservableList().size() + " companies, "
+                + events.asUnmodifiableObservableList().size() + " events";
         // TODO: refine later
     }
 
@@ -171,11 +177,60 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         AddressBook otherAddressBook = (AddressBook) other;
         return persons.equals(otherAddressBook.persons)
-                && companies.equals(otherAddressBook.companies);
+                && companies.equals(otherAddressBook.companies)
+                && events.equals(otherAddressBook.events);
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode() + companies.hashCode();
+        return Objects.hash(persons, companies, events);
     }
+
+    /**
+     * Replaces the contents of the event list with {@code events}.
+     * {@code events} must not contain duplicate events.
+     */
+    public void setEvents(List<Event> events) {
+        this.events.setEntries(events);
+    }
+
+    /**
+     * Returns true if an event with the same identity as {@code event} exists in the address book.
+     */
+    public boolean hasEvent(Event event) {
+        requireNonNull(event);
+        return events.contains(event);
+    }
+
+    /**
+     * Adds an event to the address book.
+     * The event must not already exist in the address book.
+     */
+    public void addEvent(Event e) {
+        events.add(e);
+    }
+
+    /**
+     * Replaces the contents of the event list with {@code events}.
+     * {@code events} must not contain duplicate events.
+     */
+    public void setEvent(Event target, Event editedEvent) {
+        requireNonNull(editedEvent);
+
+        events.setEntry(target, editedEvent);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeEvent(Event key) {
+        events.remove(key);
+    }
+
+    @Override
+    public ObservableList<Event> getEventList() {
+        return events.asUnmodifiableObservableList();
+    }
+
 }

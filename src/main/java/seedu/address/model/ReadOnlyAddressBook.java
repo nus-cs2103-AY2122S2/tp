@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.entry.Company;
+import seedu.address.model.entry.Event;
 import seedu.address.model.entry.Person;
 
 /**
@@ -20,5 +21,7 @@ public interface ReadOnlyAddressBook {
      * This list will not contain any duplicate companies.
      */
     ObservableList<Company> getCompanyList();
+
+    ObservableList<Event> getEventList();
 
 }
