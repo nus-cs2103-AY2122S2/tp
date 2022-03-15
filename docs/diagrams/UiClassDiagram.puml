@@ -1,60 +1,69 @@
 @startuml
 !include style.puml
-skinparam arrowThickness 1.1
-skinparam arrowColor UI_COLOR_T4
-skinparam classBackgroundColor UI_COLOR
+!theme materia-outline
 
-package UI <<Rectangle>>{
-Class "<<interface>>\nUi" as Ui
-Class "{abstract}\nUiPart" as UiPart
-Class UiManager
-Class MainWindow
-Class HelpWindow
-Class ResultDisplay
-Class PersonListPanel
-Class PersonCard
-Class StatusBarFooter
-Class CommandBox
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam arrowThickness 1.1
+
+package UI <<Rectangle>> {
+   Class "<<interface>>\nUi" as Ui
+   Class "{abstract}\nUiPart" as UiPart
+   Class "{abstract}\nUiComponent" as UiComponent
+   Class UiManager
+   Class MainWindow
+   Class MenuToolbar
+   Class CommandBox
+   Class ResultWindow
+
+   package Table <<Rectangle>> {
+   }
+
+   package Popup <<Rectangle>> {
+   }
+}
+
+skinparam Class<<Hidden>> {
+   BorderColor #FFFFFF
+   BackgroundColor #FFFFFF
+   FontColor #FFFFFF
+   HeaderBackgroundColor #FFFFFF
+   StereotypeFontColor #FFFFFF
 }
 
 package Model <<Rectangle>> {
-Class HiddenModel #FFFFFF
 }
 
 package Logic <<Rectangle>> {
-Class HiddenLogic #FFFFFF
 }
 
-Class HiddenOutside #FFFFFF
+
+Class HiddenOutside<<Hidden>>
 HiddenOutside ..> Ui
 
 UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
-MainWindow *-down->  "1" CommandBox
-MainWindow *-down-> "1" ResultDisplay
-MainWindow *-down-> "1" PersonListPanel
-MainWindow *-down-> "1" StatusBarFooter
-MainWindow --> "0..1" HelpWindow
+MainWindow *--> "1" MenuToolbar
+MainWindow *--> "1" CommandBox
+MainWindow *--> "1" ResultWindow
+MainWindow --> Table
+MainWindow --> Popup
 
-PersonListPanel -down-> "*" PersonCard
+MenuToolbar -up-|> UiComponent
+CommandBox -up-|> UiComponent
+ResultWindow -up-|> UiComponent
 
-MainWindow -left-|> UiPart
+MainWindow -up-|> UiPart
+UiComponent -up-|> UiPart
 
-ResultDisplay --|> UiPart
-CommandBox --|> UiPart
-PersonListPanel --|> UiPart
-PersonCard --|> UiPart
-StatusBarFooter --|> UiPart
-HelpWindow --|> UiPart
+UiManager --> Logic
+MainWindow --> Logic
+Popup .right.> Logic
 
-PersonCard ..> Model
-UiManager -right-> Logic
-MainWindow -left-> Logic
+MainWindow .[norank].> Model
+Popup .right.> Model
+Table .down.> Model
 
-PersonListPanel -[hidden]left- HelpWindow
-HelpWindow -[hidden]left- CommandBox
-CommandBox -[hidden]left- ResultDisplay
-ResultDisplay -[hidden]left- StatusBarFooter
+UiComponent -left-> MainWindow
 
-MainWindow -[hidden]-|> UiPart
 @enduml
