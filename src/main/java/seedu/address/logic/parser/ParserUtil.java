@@ -4,16 +4,27 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
+import seedu.address.model.classgroup.ClassGroupId;
+import seedu.address.model.classgroup.ClassGroupType;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.student.Email;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.StudentId;
+import seedu.address.model.student.Telegram;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tamodule.AcademicYear;
+import seedu.address.model.tamodule.ModuleCode;
+import seedu.address.model.tamodule.ModuleName;
+import seedu.address.model.tamodule.TaModule;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -33,6 +44,21 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses a {@code String id} into an {@code StudentId}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code StudentId} is invalid.
+     */
+    public static StudentId parseStudentId(String id) throws ParseException {
+        requireNonNull(id);
+        String trimmedId = id.trim();
+        if (!StudentId.isValidStudentId(trimmedId)) {
+            throw new ParseException(StudentId.MESSAGE_CONSTRAINTS);
+        }
+        return new StudentId(trimmedId);
     }
 
     /**
@@ -56,13 +82,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code phone} is invalid.
      */
-    public static Phone parsePhone(String phone) throws ParseException {
+    public static Optional<Telegram> parseTelegram(String phone) throws ParseException {
         requireNonNull(phone);
-        String trimmedPhone = phone.trim();
-        if (!Phone.isValidPhone(trimmedPhone)) {
-            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+        String trimmedTelegram = phone.trim();
+        if (!Telegram.isValidTelegram(trimmedTelegram)) {
+            throw new ParseException(Telegram.MESSAGE_CONSTRAINTS);
         }
-        return new Phone(trimmedPhone);
+        return Optional.of(new Telegram(trimmedTelegram));
     }
 
     /**
@@ -93,6 +119,101 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String moduleName} into an {@code ModuleName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code moduleName} is invalid.
+     */
+    public static ModuleName parseModuleName(String moduleName) throws ParseException {
+        requireNonNull(moduleName);
+        String trimmedModuleName = moduleName.trim();
+        if (!ModuleName.isValidModuleName(trimmedModuleName)) {
+            throw new ParseException(ModuleName.MESSAGE_CONSTRAINTS);
+        }
+        return new ModuleName(trimmedModuleName);
+    }
+
+    /**
+     * Parses a {@code String moduleCode} into an {@code ModuleCode}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code moduleCode} is invalid.
+     */
+    public static ModuleCode parseModuleCode(String moduleCode) throws ParseException {
+        requireNonNull(moduleCode);
+        String trimmedModuleCode = moduleCode.trim();
+        if (!ModuleCode.isValidModuleCode(trimmedModuleCode)) {
+            throw new ParseException(ModuleCode.MESSAGE_CONSTRAINTS);
+        }
+        return new ModuleCode(trimmedModuleCode);
+    }
+
+    /**
+     * Parses a {@code String academicYear} into an {@code AcademicYear}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code academicYear} is invalid.
+     */
+    public static AcademicYear parseAcademicYear(String academicYear) throws ParseException {
+        requireNonNull(academicYear);
+        String trimmedAcademicYear = academicYear.trim();
+        if (!AcademicYear.isValidAcademicYear(trimmedAcademicYear)) {
+            throw new ParseException(AcademicYear.MESSAGE_CONSTRAINTS);
+        }
+        return new AcademicYear(trimmedAcademicYear);
+    }
+
+    /**
+     * Parses a {@code String index} into an {@code TaModule}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code academicYear} is invalid.
+     */
+    public static TaModule parseTaModule(String index, Model model) throws ParseException {
+        requireNonNull(index);
+        Index targetIndex = parseIndex(index);
+        List<TaModule> lastShownModuleList = model.getFilteredModuleList();
+
+        if (targetIndex.getZeroBased() >= lastShownModuleList.size()) {
+            throw new ParseException(Messages.MESSAGE_INVALID_TA_MODULE_DISPLAYED_INDEX);
+        }
+
+        return lastShownModuleList.get(targetIndex.getZeroBased());
+    }
+
+    /**
+     * Parses a {@code String classGroupId} into an {@code ClassGroupId}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code classGroupId} is invalid.
+     */
+    public static ClassGroupId parseClassGroupId(String classGroupId) throws ParseException {
+        requireNonNull(classGroupId);
+        String trimmedId = classGroupId.trim();
+        if (!ClassGroupId.isValidClassGroupId(trimmedId)) {
+            throw new ParseException(ClassGroupId.MESSAGE_CONSTRAINTS);
+        }
+        return new ClassGroupId(trimmedId);
+    }
+
+    /**
+     * Parses a {@code String classGroupType} into an {@code ClassGroupType}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code classGroupType} is invalid.
+     */
+    public static ClassGroupType parseClassGroupType(String classGroupType) throws ParseException {
+        requireNonNull(classGroupType);
+        String trimmedUpperCaseType = classGroupType.trim().toUpperCase();
+        try {
+            ClassGroupType type = ClassGroupType.valueOf(trimmedUpperCaseType);
+            return type;
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(Messages.MESSAGE_INVALID_COMMAND_FORMAT);
+        }
     }
 
     /**

@@ -15,8 +15,6 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.AB3Model;
-import seedu.address.model.AB3ModelManager;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyTAssist;
@@ -47,7 +45,6 @@ public class MainApp extends Application {
     protected Ui ui;
     protected Logic logic;
     protected Storage storage;
-    protected AB3Model ab3model;
     protected Model model;
     protected Config config;
 
@@ -69,10 +66,8 @@ public class MainApp extends Application {
 
         initLogging(config);
 
-        ab3model = new AB3ModelManager();
         model = initModelManager(storage, userPrefs);
-        // TODO: remove AddressBookStorage from LogicManager
-        logic = new LogicManager(model, ab3model, storage);
+        logic = new LogicManager(model, storage);
 
         ui = new UiManager(logic);
     }

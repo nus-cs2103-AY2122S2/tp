@@ -210,8 +210,8 @@ _Details coming soon ..._
         <td>student</td>
         <td>
             <ul>
-                <li>syntax: <code>add student id/STUDENT_ID n/NAME p/PHONE_NUMBER e/EMAIL</code></li>
-                <li>e.g., <code>add student id/E0123456 n/John Doe p/98765432 e/johnd@example.com</code></li>
+                <li>syntax: <code>add student id/STUDENT_ID n/NAME t/TELEGRAM_ID e/EMAIL</code></li>
+                <li>e.g., <code>add student id/E0123456 n/John Doe t/john_doe e/johnd@example.com</code></li>
             </ul>
         </td>
     </tr>

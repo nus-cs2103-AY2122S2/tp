@@ -5,7 +5,7 @@ import seedu.address.model.AB3Model;
 /**
  * Format full help instructions for every command for display.
  */
-public class HelpCommand extends Command {
+public class HelpCommand extends AB3Command {
 
     public static final String COMMAND_WORD = "help";
 
