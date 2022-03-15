@@ -15,7 +15,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.FriendName;
-import seedu.address.model.person.Log;
+import seedu.address.model.person.LogName;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -190,8 +190,8 @@ public class ParserUtil {
      */
     public static String parseTitle(String title) throws ParseException {
         requireNonNull(title);
-        if (!Log.isValidTitle(title)) {
-            throw new ParseException(Log.TITLE_CONSTRAINTS);
+        if (!LogName.isValidName(title)) {
+            throw new ParseException(LogName.MESSAGE_CONSTRAINTS);
         }
         return title; // TODO: 8/3/2022 refactor into Title object next time
     }

@@ -5,26 +5,30 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import seedu.address.model.common.Name;
 
 /**
- * Represents an Event's name in the address book.
+ * Represents a Person's log title in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
-public class FriendName extends Name {
+public class LogName extends Name {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+    public static final int TITLE_LENGTH_CONSTRAINT = 50;
+
+    public static final String MESSAGE_CONSTRAINTS = "Titles of logs must satisfy:\n"
+                    + "1. Not be trivial (i.e. not empty or contain only spaces\n"
+                    + "2. Be at most " + TITLE_LENGTH_CONSTRAINT + " characters long. "
+                    + "This is because of display limitations.";
 
     /*
      * The first character of the name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "^[\\p{Alnum}\\p{Punct}][\\p{Alnum}\\p{Punct}\\s]{1," + (TITLE_LENGTH_CONSTRAINT - 1) + "}";
 
     /**
      * Constructs a {@code FriendName}.
      *
      * @param name A valid name.
      */
-    public FriendName(String name) {
+    public LogName(String name) {
         super(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
     }
@@ -45,8 +49,8 @@ public class FriendName extends Name {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof FriendName // instanceof handles nulls
-                && fullName.equals(((FriendName) other).fullName)); // state check
+                || (other instanceof LogName // instanceof handles nulls
+                && fullName.equals(((LogName) other).fullName)); // state check
     }
 
     @Override
