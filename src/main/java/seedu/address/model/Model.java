@@ -86,7 +86,7 @@ public interface Model {
     void updateFilteredPetList(Predicate<Pet> predicate);
 
     /**
-     * Sorts the pet list based on the columnName provided.
+     * Sorts the pet list based on the field provided.
      */
-    void sortPetList(String columnName);
+    void sortPetList(String field);
 }

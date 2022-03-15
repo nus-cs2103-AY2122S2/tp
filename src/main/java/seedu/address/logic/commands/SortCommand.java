@@ -13,19 +13,19 @@ public class SortCommand extends Command {
             + "Parameters: FIRST LETTER OF COLUMN NAME \n"
             + "Example: " + COMMAND_WORD + "o";
 
-    private final String columnName;
+    private final String field;
 
     /**
-     * @param columnName first letter of the column to sort the pet list by
+     * @param field first letter of the column to sort the pet list by
      */
-    public SortCommand(String columnName) {
-        this.columnName = columnName;
+    public SortCommand(String field) {
+        this.field = field;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.sortPetList(columnName);
+        model.sortPetList(field);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
