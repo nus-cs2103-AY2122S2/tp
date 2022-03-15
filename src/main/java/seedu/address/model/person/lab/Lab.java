@@ -15,7 +15,7 @@ import seedu.address.model.person.exceptions.LabNotSubmittedException;
 public class Lab {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Lab number should be a valid postitive Integer";
+            "Lab number should be a valid positive Integer";
 
     /*
      * Lab number has to be an Integer.
@@ -103,6 +103,13 @@ public class Lab {
         default:
             throw new IllegalArgumentException("Did not expect " + labStatusString);
         }
+    }
+
+    /**
+     * Returns a new immutable lab with the same lab number as this and the specified lab status.
+     */
+    public Lab of(LabStatus labStatus) {
+        return new Lab(String.valueOf(labNumber), labStatus);
     }
 
     /**
