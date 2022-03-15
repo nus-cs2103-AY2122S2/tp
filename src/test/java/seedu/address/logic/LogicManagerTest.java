@@ -30,7 +30,7 @@ import seedu.address.model.candidate.Candidate;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.CandidateBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
@@ -81,7 +81,7 @@ public class LogicManagerTest {
         // Execute add command
         String addCommand = AddCommand.COMMAND_WORD + STUDENT_ID_DESC_AMY + NAME_DESC_AMY + PHONE_DESC_AMY
                 + COURSE_DESC_AMY;
-        Candidate expectedCandidate = new PersonBuilder(AMY).withTags().build();
+        Candidate expectedCandidate = new CandidateBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedCandidate);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;

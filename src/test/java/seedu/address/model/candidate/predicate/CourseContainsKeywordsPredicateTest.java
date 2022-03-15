@@ -9,7 +9,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.CandidateBuilder;
 
 public class CourseContainsKeywordsPredicateTest {
 
@@ -45,35 +45,35 @@ public class CourseContainsKeywordsPredicateTest {
         // One keyword
         CourseContainsKeywordsPredicate predicate = new CourseContainsKeywordsPredicate(Collections.singletonList(
                 "computer"));
-        assertTrue(predicate.test(new PersonBuilder().withCourse("Computer Science").build()));
+        assertTrue(predicate.test(new CandidateBuilder().withCourse("Computer Science").build()));
 
         // Multiple keywords
         predicate = new CourseContainsKeywordsPredicate(Arrays.asList("Information", "Systems"));
-        assertTrue(predicate.test(new PersonBuilder().withCourse("Information Systems").build()));
+        assertTrue(predicate.test(new CandidateBuilder().withCourse("Information Systems").build()));
 
         // Only one matching keyword
         predicate = new CourseContainsKeywordsPredicate(Arrays.asList("Business", "Computer"));
-        assertTrue(predicate.test(new PersonBuilder().withCourse("Business Analytics").build()));
+        assertTrue(predicate.test(new CandidateBuilder().withCourse("Business Analytics").build()));
 
         // Mixed-case keywords
         predicate = new CourseContainsKeywordsPredicate(Arrays.asList("AnALyTICs", "BusINESS"));
-        assertTrue(predicate.test(new PersonBuilder().withCourse("Business Analytics").build()));
+        assertTrue(predicate.test(new CandidateBuilder().withCourse("Business Analytics").build()));
     }
 
     @Test
     public void test_courseDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         CourseContainsKeywordsPredicate predicate = new CourseContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new PersonBuilder().withName("Computer Science").build()));
+        assertFalse(predicate.test(new CandidateBuilder().withName("Computer Science").build()));
 
         // Non-matching keyword
         predicate = new CourseContainsKeywordsPredicate(Arrays.asList("Carol"));
-        assertFalse(predicate.test(new PersonBuilder().withName("Computer Science").build()));
+        assertFalse(predicate.test(new CandidateBuilder().withName("Computer Science").build()));
 
         // Keywords match other fields, but does/do not match course
         predicate = new CourseContainsKeywordsPredicate(Arrays.asList("87654321", "alice@email.com", "E0324444",
                 "Street"));
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("87654321")
+        assertFalse(predicate.test(new CandidateBuilder().withName("Alice").withPhone("87654321")
                 .withEmail("alice@email.com").withCourse("Business Analytics").withStudentID("E0324444").build()));
     }
 }

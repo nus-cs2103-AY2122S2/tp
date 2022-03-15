@@ -15,7 +15,7 @@ import seedu.address.model.util.SampleDataUtil;
 /**
  * A utility class to help with building Person objects.
  */
-public class PersonBuilder {
+public class CandidateBuilder {
 
     public static final String DEFAULT_STUDENT_ID = "E0123456";
     public static final String DEFAULT_NAME = "Amy Bee";
@@ -31,9 +31,9 @@ public class PersonBuilder {
     private Set<Tag> tags;
 
     /**
-     * Creates a {@code PersonBuilder} with the default details.
+     * Creates a {@code CandidateBuilder} with the default details.
      */
-    public PersonBuilder() {
+    public CandidateBuilder() {
         studentID = new StudentID(DEFAULT_STUDENT_ID);
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
@@ -43,9 +43,9 @@ public class PersonBuilder {
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code personToCopy}.
+     * Initializes the CandidateBuilder with the data of {@code personToCopy}.
      */
-    public PersonBuilder(Candidate candidateToCopy) {
+    public CandidateBuilder(Candidate candidateToCopy) {
         studentID = candidateToCopy.getStudentID();
         name = candidateToCopy.getName();
         phone = candidateToCopy.getPhone();
@@ -57,7 +57,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code StudentID} of the {@code Person} that we are building.
      */
-    public PersonBuilder withStudentID(String id) {
+    public CandidateBuilder withStudentID(String id) {
         this.studentID = new StudentID(id);
         return this;
     }
@@ -65,7 +65,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Name} of the {@code Person} that we are building.
      */
-    public PersonBuilder withName(String name) {
+    public CandidateBuilder withName(String name) {
         this.name = new Name(name);
         return this;
     }
@@ -73,7 +73,7 @@ public class PersonBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
+    public CandidateBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
@@ -81,7 +81,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Phone} of the {@code Person} that we are building.
      */
-    public PersonBuilder withPhone(String phone) {
+    public CandidateBuilder withPhone(String phone) {
         this.phone = new Phone(phone);
         return this;
     }
@@ -89,7 +89,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Email} of the {@code Person} that we are building.
      */
-    public PersonBuilder withEmail(String email) {
+    public CandidateBuilder withEmail(String email) {
         this.email = new Email(email);
         return this;
     }
@@ -97,7 +97,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Course} of the {@code Person} that we are building.
      */
-    public PersonBuilder withCourse(String course) {
+    public CandidateBuilder withCourse(String course) {
         this.course = new Course(course);
         return this;
     }

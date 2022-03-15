@@ -20,7 +20,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.candidate.Candidate;
 import seedu.address.model.candidate.exceptions.DuplicatePersonException;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.CandidateBuilder;
 
 public class AddressBookTest {
 
@@ -46,7 +46,7 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
-        Candidate editedAlice = new PersonBuilder(ALICE).withCourse(VALID_COURSE_BOB).withTags(VALID_TAG_HUSBAND)
+        Candidate editedAlice = new CandidateBuilder(ALICE).withCourse(VALID_COURSE_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Candidate> newCandidates = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newCandidates);
@@ -73,7 +73,7 @@ public class AddressBookTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
-        Candidate editedAlice = new PersonBuilder(ALICE).withCourse(VALID_COURSE_BOB).withTags(VALID_TAG_HUSBAND)
+        Candidate editedAlice = new CandidateBuilder(ALICE).withCourse(VALID_COURSE_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(addressBook.hasPerson(editedAlice));
     }

@@ -24,8 +24,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.candidate.Candidate;
+import seedu.address.testutil.CandidateBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -36,7 +36,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Candidate editedCandidate = new PersonBuilder().build();
+        Candidate editedCandidate = new CandidateBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedCandidate).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 
@@ -53,7 +53,7 @@ public class EditCommandTest {
         Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
         Candidate lastCandidate = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
 
-        PersonBuilder personInList = new PersonBuilder(lastCandidate);
+        CandidateBuilder personInList = new CandidateBuilder(lastCandidate);
         Candidate editedCandidate = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
 
@@ -86,7 +86,7 @@ public class EditCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Candidate candidateInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Candidate editedCandidate = new PersonBuilder(candidateInFilteredList).withName(VALID_NAME_BOB).build();
+        Candidate editedCandidate = new CandidateBuilder(candidateInFilteredList).withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
