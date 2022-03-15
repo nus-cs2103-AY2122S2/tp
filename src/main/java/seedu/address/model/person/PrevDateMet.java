@@ -13,7 +13,7 @@ public class PrevDateMet {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Previous Date Met should only contain numbers and hyphens, in the format of YYYY-MM-DD";
-    public static final String VALIDATION_REGEX = "^([0-9]{4})(-)(0[1-9]|1[0-2])(-)(0[1-9]|1[1-9]|2[1-9]|3[0-1])$";
+    public static final String VALIDATION_REGEX = "^([0-9]{4})(-)(0[1-9]|1[0-2])(-)(0[1-9]|1[0-9]|2[0-9]|3[0-1])$";
     public final LocalDate value;
 
     /**
