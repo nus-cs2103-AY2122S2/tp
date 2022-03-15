@@ -178,8 +178,6 @@ public class ParserUtil {
     /**
      * Parses a {@code String labStatus} into a {@code LabStatus}.
      * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException
      */
     public static LabStatus parseLabStatus(String labStatus) throws ParseException {
         requireNonNull(labStatus);
@@ -189,7 +187,16 @@ public class ParserUtil {
             throw new ParseException(LabStatus.MESSAGE_CONSTRAINTS);
         }
 
-        return LabStatus.map(trimmedLabStatus);
+        switch(trimmedLabStatus) {
+        case "u":
+            return LabStatus.UNSUBMITTED;
+        case "s":
+            return LabStatus.SUBMITTED;
+        case "g":
+            return LabStatus.GRADED;
+        default:
+            throw new ParseException(Lab.MESSAGE_CONSTRAINTS);
+        }
     }
 
 }

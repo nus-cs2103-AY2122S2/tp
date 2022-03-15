@@ -87,6 +87,22 @@ public class Lab {
     }
 
     /**
+     * Returns a new immutable {@code Lab} with the specified {@code LabStatus}
+     */
+    public Lab thatIs(LabStatus labStatus) {
+        switch (labStatus) {
+        case UNSUBMITTED:
+            return new Lab(String.valueOf(labNumber), LabStatus.UNSUBMITTED);
+        case SUBMITTED:
+            return new Lab(String.valueOf(labNumber), LabStatus.SUBMITTED);
+        case GRADED:
+            return new Lab(String.valueOf(labNumber), LabStatus.GRADED);
+        default:
+            throw new IllegalArgumentException("Did not expect " + labStatus.name());
+        }
+    }
+
+    /**
      * Returns true if both Labs have the same lab number.
      * This defines a weaker notion of equality between two Labs.
      */

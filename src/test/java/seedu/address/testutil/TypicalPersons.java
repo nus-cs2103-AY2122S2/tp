@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javafx.util.Pair;
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.lab.Lab;
@@ -26,52 +27,58 @@ import seedu.address.model.person.lab.LabList;
  * A utility class containing a list of {@code Person} objects to be used in tests.
  */
 public class TypicalPersons {
-
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withEmail("alice@example.com")
             .withTags("friends")
             .withGithub("aliceP")
             .withTelegram("alice_P")
             .withStudentId("A0123456B")
-            .withLabs("1").build();
+            .withLabs(new Pair<String, String>("1", "UNSUBMITTED"),
+                    new Pair<String, String>("2", "GRADED")).build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withEmail("johnd@example.com")
             .withTags("owesMoney", "friends")
             .withGithub("bensonM")
             .withTelegram("benson_M")
             .withStudentId("A0123457C")
-            .withLabs("1").build();
+            .withLabs(new Pair<String, String>("1", "SUBMITTED"),
+                    new Pair<String, String>("2", "UNSUBMITTED")).build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz")
             .withEmail("heinz@example.com")
             .withGithub("carlK")
             .withTelegram("carl_K")
             .withStudentId("A0123458D")
-            .withLabs("1").build();
+            .withLabs(new Pair<String, String>("1", "UNSUBMITTED"),
+                    new Pair<String, String>("2", "UNSUBMITTED")).build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier")
             .withEmail("cornelia@example.com")
             .withTags("friends")
             .withGithub("danielM")
             .withTelegram("daniel_M")
             .withStudentId("A0123459E")
-            .withLabs("1").build();
+            .withLabs(new Pair<String, String>("1", "UNSUBMITTED"),
+                    new Pair<String, String>("2", "UNSUBMITTED")).build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer")
             .withEmail("werner@example.com")
             .withGithub("elleM")
             .withTelegram("elle_M")
             .withStudentId("A0123411A")
-            .withLabs("1").build();
+            .withLabs(new Pair<String, String>("1", "GRADED"),
+                    new Pair<String, String>("2", "GRADED")).build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz")
             .withEmail("lydia@example.com")
             .withGithub("fionaK")
             .withTelegram("fiona_K")
             .withStudentId("A0123412B")
-            .withLabs("1").build();
+            .withLabs(new Pair<String, String>("1", "SUBMITTED"),
+                    new Pair<String, String>("2", "GRADED")).build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best")
             .withEmail("anna@example.com")
             .withGithub("georgeB")
             .withTelegram("george_B")
             .withStudentId("A0123413C")
-            .withLabs("1").build();
+            .withLabs(new Pair<String, String>("1", "GRADED"),
+                    new Pair<String, String>("2", "UNSUBMITTED")).build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier")
@@ -79,13 +86,13 @@ public class TypicalPersons {
             .withGithub("hoonM")
             .withTelegram("hoon_M")
             .withStudentId("A0123414D")
-            .withLabs("1").build();
+            .withLabs(new Pair<String, String>("1", "UNSUBMITTED")).build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller")
             .withEmail("hans@example.com")
             .withGithub("idaM")
             .withTelegram("ida_M")
             .withStudentId("A0123415E")
-            .withLabs("1").build();
+            .withLabs(new Pair<String, String>("1", "UNSUBMITTED")).build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY)
