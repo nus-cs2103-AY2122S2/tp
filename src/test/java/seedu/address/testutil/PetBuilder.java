@@ -108,7 +108,7 @@ public class PetBuilder {
     }
 
     /**
-     * Sets the {@code Diet} of the {@code Pet} that we are building.
+     * Sets the {@code Appointment} of the {@code Pet} that we are building.
      */
     public PetBuilder withAppointment(String appointment) {
         this.appointment = new Appointment(appointment);

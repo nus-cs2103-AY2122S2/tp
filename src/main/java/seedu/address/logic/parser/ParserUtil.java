@@ -130,7 +130,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String appointment} into a {@code Appointment}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @param dateTime Date and time of appointment.
@@ -139,27 +139,35 @@ public class ParserUtil {
      */
     public static Appointment parseAppointment(String dateTime, String location) throws ParseException {
         requireAllNonNull(dateTime, location);
-        try {
-            String formattedDateTime = formatDateTime(dateTime.trim());
-            String trimmedLocation = location.trim();
-            String appointmentDetails = formattedDateTime + " at "+ trimmedLocation;
+        String formattedDateTime = formatDateTime(dateTime.trim());
+        String trimmedLocation = location.trim();
+        String appointmentDetails = formattedDateTime + " at "+ trimmedLocation;
 
-            if (!Appointment.isValidAppointment(appointmentDetails)) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        AppointmentCommand.MESSAGE_USAGE));
-            }
-            
-            return new Appointment(appointmentDetails);
-        } catch (Exception e) {
+        if (!Appointment.isValidAppointment(appointmentDetails)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AppointmentCommand.MESSAGE_USAGE));
+        }
+
+        return new Appointment(appointmentDetails);
+    }
+
+    /**
+     * Parses the format of the Date and Time input from "yyyy-MM-dd HH:mm"
+     * to "MMM-dd-yyyy HH:mm a".
+     *
+     * @param input Date and time in yyyy-MM-dd HH:mm.
+     * @return Formatted Date and time in MMM-dd-yyyy HH:mm a.
+     * @throws ParseException If input format is invalid.
+     */
+    private static String formatDateTime(String input) throws ParseException {
+        try {
+            DateTimeFormatter formatIn = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            DateTimeFormatter formatOut = DateTimeFormatter.ofPattern("MMM-dd-yyyy HH:mm a");
+            return LocalDateTime.parse(input, formatIn).format(formatOut);
+        } catch (Exception e){
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AppointmentCommand.MESSAGE_USAGE), e);
         }
-    }
-
-    private static String formatDateTime(String input) {
-        DateTimeFormatter formatIn = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        DateTimeFormatter formatOut = DateTimeFormatter.ofPattern("MMM-dd-yyyy HH:mm a");
-        return LocalDateTime.parse(input, formatIn).format(formatOut);
     }
 
 }

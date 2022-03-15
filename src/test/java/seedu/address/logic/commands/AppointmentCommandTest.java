@@ -27,7 +27,7 @@ import seedu.address.testutil.PetBuilder;
 
 class AppointmentCommandTest {
 
-    private static final String APPOINTMENT_STUB = "Some appointment";
+    private static final String APPOINTMENT_STUB = "Mar-04-2022 09:30 AM at NUS Vet Clinic";
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
