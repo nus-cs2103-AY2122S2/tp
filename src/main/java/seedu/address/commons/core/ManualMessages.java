@@ -54,7 +54,6 @@ public class ManualMessages {
             + "particular student. \n"
             + "Format: task i/STUDENT_ID \n"
             + "Example: task i/A6942069R";
-    /* These commands have yet to be implemented. Will add them back once commands have been implemented.
 
     public static final String MANUAL_MESSAGE_MARK_COMMAND = "Marks a specific undone task as done for a particular "
             + "student. \n"
@@ -74,8 +73,6 @@ public class ManualMessages {
     public static final String MANUAL_MESSAGE_ASSIGN_COMMAND = "Assigns a task to a particular student. \n"
             + "Format : assign i/STUDENT_ID tn/TASK_NAME \n"
             + "Example: assign i/A6942069R tn/Watch Lecture";
-
-    */
 
     public static final String MANUAL_MESSAGE_ALL_COMMANDS = "Here are all the commands: \n"
             + "1. add \n"

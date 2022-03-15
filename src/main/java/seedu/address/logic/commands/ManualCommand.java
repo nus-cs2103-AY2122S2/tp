@@ -56,8 +56,6 @@ public class ManualCommand extends Command {
         case TaskCommand.COMMAND_WORD:
             return new CommandResult(ManualMessages.MANUAL_MESSAGE_TASK_COMMAND);
 
-        /* These commands have yet to be implemented. Will add them back once commands have been implemented.
-
         case MarkCommand.COMMAND_WORD:
             return new CommandResult(ManualMessages.MANUAL_MESSAGE_MARK_COMMAND);
 
@@ -69,8 +67,6 @@ public class ManualCommand extends Command {
 
         case AssignCommand.COMMAND_WORD:
             return new CommandResult(ManualMessages.MANUAL_MESSAGE_ASSIGN_COMMAND);
-
-         */
 
         default:
             throw new CommandException(ManualMessages.MANUAL_MESSAGE_UNKNOWN_COMMANDS);
