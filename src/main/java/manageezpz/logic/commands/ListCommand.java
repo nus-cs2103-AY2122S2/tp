@@ -5,7 +5,6 @@ import static manageezpz.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_EVENT;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_TODAY;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_TODO;
-import static manageezpz.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import manageezpz.logic.parser.Prefix;
 import manageezpz.model.Model;
@@ -65,7 +64,6 @@ public class ListCommand extends Command {
             list = model.listTasks(option);
         }
         String result = String.join("\n", messageSuccess, list);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(result);
     }
 
