@@ -7,6 +7,11 @@ public class PriceRange {
     private final int lower;
     private final int upper;
 
+    /**
+     * Constructor
+     * @param lower
+     * @param upper
+     */
     public PriceRange(int lower, int upper) {
         this.lower = lower;
         this.upper = upper;
@@ -23,10 +28,10 @@ public class PriceRange {
 
     @Override
     public String toString() {
-        return "[" +
-                lower +
-                ',' +
-                upper +
-                ']';
+        return "["
+                + lower
+                + ','
+                + upper
+                + ']';
     }
 }

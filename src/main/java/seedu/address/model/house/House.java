@@ -1,7 +1,5 @@
 package seedu.address.model.house;
 
-import seedu.address.model.client.Address;
-
 public class House {
 
     //identifiers of a house

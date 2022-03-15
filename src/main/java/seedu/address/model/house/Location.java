@@ -19,8 +19,12 @@ public class Location {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Location location = (Location) o;
         return address.equals(location.address);
     }
@@ -32,8 +36,6 @@ public class Location {
 
     @Override
     public String toString() {
-        return "Location{" +
-                "address='" + address + '\'' +
-                '}';
+        return address;
     }
 }
