@@ -25,7 +25,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.StudentID;
+import seedu.address.model.person.StudentId;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -96,7 +96,7 @@ public class EditCommand extends Command {
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
-        StudentID updatedID = editPersonDescriptor.getStudentID().orElse(personToEdit.getStudentID());
+        StudentId updatedID = editPersonDescriptor.getStudentId().orElse(personToEdit.getStudentId());
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
@@ -129,7 +129,7 @@ public class EditCommand extends Command {
      * corresponding field value of the person.
      */
     public static class EditPersonDescriptor {
-        private StudentID studentID;
+        private StudentId studentId;
         private Name name;
         private Phone phone;
         private Email email;
@@ -144,7 +144,7 @@ public class EditCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
-            setStudentID(toCopy.studentID);
+            setStudentId(toCopy.studentId);
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
@@ -156,15 +156,15 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(studentID, name, phone, email, course, tags);
+            return CollectionUtil.isAnyNonNull(studentId, name, phone, email, course, tags);
         }
 
-        public void setStudentID(StudentID id) {
-            this.studentID = id;
+        public void setStudentId(StudentId id) {
+            this.studentId = id;
         }
 
-        public Optional<StudentID> getStudentID() {
-            return Optional.ofNullable(studentID);
+        public Optional<StudentId> getStudentId() {
+            return Optional.ofNullable(studentId);
         }
 
         public void setName(Name name) {
@@ -231,7 +231,7 @@ public class EditCommand extends Command {
             // state check
             EditPersonDescriptor e = (EditPersonDescriptor) other;
 
-            return getStudentID().equals(e.getStudentID())
+            return getStudentId().equals(e.getStudentId())
                     && getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
