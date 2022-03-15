@@ -3,9 +3,13 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a Student's StudentId in the TAddressBook.
+ * Guarantees: immutable; is valid as declared in {@link #isValidStudentId(String)}
+ */
 public class StudentId {
 
-    public static final String MESSAGE_CONSTRAINTS = "Student Numbers should start with an A, "
+    public static final String MESSAGE_CONSTRAINTS = "Student IDs should start with an A, "
             + "followed by 7 numbers, then end with a capital alphabet.";
 
     /*
@@ -19,7 +23,7 @@ public class StudentId {
     /**
      * Constructs an {@code StudentId}.
      *
-     * @param studentId A valid student ID.
+     * @param studentId A valid Student ID.
      */
     public StudentId(String studentId) {
         requireNonNull(studentId);
@@ -28,7 +32,7 @@ public class StudentId {
     }
 
     /**
-     * Returns true if a given string is a valid student ID.
+     * Returns true if a given string is a valid Student ID.
      */
     public static boolean isValidStudentId(String test) {
         return test.matches(VALIDATION_REGEX);

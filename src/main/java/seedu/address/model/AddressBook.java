@@ -16,7 +16,7 @@ import seedu.address.model.person.lab.Lab;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniquePersonList persons;
+    private final UniquePersonList students;
 
     private final MasterLabList labs;
 
@@ -28,7 +28,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
+        students = new UniquePersonList();
     }
 
     public AddressBook() {
@@ -36,7 +36,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates a TAddressBook using the Students in the {@code toBeCopied}
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
@@ -46,16 +46,16 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the Student list with {@code persons}.
+     * {@code students} must not contain duplicate Students.
      */
-    public void setPersons(List<Person> persons) {
-        this.persons.setPersons(persons);
+    public void setPersons(List<Person> students) {
+        this.students.setPersons(students);
     }
 
     /**
-     * Replaces the contents of the person list with {@code labs}.
-     * {@code labs} must not contain duplicate persons.
+     * Replaces the contents of the Lab list with {@code labs}.
+     * {@code labs} must not contain duplicate Labs.
      */
     public void setLabs(MasterLabList labs) {
         this.labs.setLabs(labs);
@@ -74,42 +74,43 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// person-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same identity as {@code person} exists in the TAddressBook.
      */
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return persons.contains(person);
+    public boolean hasPerson(Person student) {
+        requireNonNull(student);
+        return students.contains(student);
     }
 
     /**
-     * Adds a person to the address book.
+     * Adds a person to the TAddressBook.
      * The person must not already exist in the address book.
      */
     public void addPerson(Person p) {
-        persons.add(p);
+        students.add(p);
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Replaces the given student {@code target} in the list with {@code editedStudent}.
+     * {@code target} must exist in the TAddressBook.
+     * The Student identity of {@code editedStudent} must not be the same as
+     * another existing Student in the TAddressBook.
      */
-    public void setPerson(Person target, Person editedPerson) {
-        requireNonNull(editedPerson);
+    public void setPerson(Person target, Person editedStudent) {
+        requireNonNull(editedStudent);
 
-        persons.setPerson(target, editedPerson);
+        students.setPerson(target, editedStudent);
     }
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * {@code key} must exist in the TAddressBook.
      */
     public void removePerson(Person key) {
-        persons.remove(key);
+        students.remove(key);
     }
 
     /**
-     * Returns true if a lab with the same identity as {@code lab} exists in the address book.
+     * Returns true if a Lab with the same identity as {@code lab} exists in the TAddressBook.
      */
     public boolean hasLab(Lab lab) {
         requireNonNull(lab);
@@ -117,25 +118,25 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a lab to the address book.
-     * The lab must not already exist in the address book.
+     * Adds a lab to the TAddressBook.
+     * The lab must not already exist in the TAddressBook.
      */
     public void addLab(Lab lab) {
         labs.add(lab);
-        persons.addLabToAll(lab);
+        students.addLabToAll(lab);
     }
 
     //// util methods
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
+        return students.asUnmodifiableObservableList().size() + " persons";
         // TODO: refine later
     }
 
     @Override
     public ObservableList<Person> getPersonList() {
-        return persons.asUnmodifiableObservableList();
+        return students.asUnmodifiableObservableList();
     }
 
     @Override
@@ -147,11 +148,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons));
+                && students.equals(((AddressBook) other).students));
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return students.hashCode();
     }
 }

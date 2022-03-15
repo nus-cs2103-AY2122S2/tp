@@ -19,7 +19,7 @@ import seedu.address.model.person.lab.LabStatus;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods used for parsing strings in the various *Parser classes.
+ * Contains utility methods used for parsing strings in the various Parser classes.
  */
 public class ParserUtil {
 
@@ -178,6 +178,8 @@ public class ParserUtil {
     /**
      * Parses a {@code String labStatus} into a {@code LabStatus}.
      * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code labStatus} is invalid.
      */
     public static LabStatus parseLabStatus(String labStatus) throws ParseException {
         requireNonNull(labStatus);

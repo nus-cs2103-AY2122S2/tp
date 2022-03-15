@@ -9,15 +9,15 @@ import seedu.address.model.Model;
 import seedu.address.model.person.lab.Lab;
 
 /**
- * Adds a person to the address book.
+ * Adds a Lab to the TAddressBook.
  */
 public class AddLabCommand extends Command {
 
     public static final String COMMAND_WORD = "labadd";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a lab to all students in the TAddressBook. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a lab to all students in the TAddressBook. \n"
             + "Parameters: "
-            + PREFIX_LAB + "LAB_NUMBER "
+            + PREFIX_LAB + "LAB_NUMBER \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_LAB + "1";
 

@@ -5,18 +5,18 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 
 /**
- * Represents a Person's GitHub Username in the address book.
+ * Represents a Student's GitHub Username in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidGithubUsername(String)}
  */
 public class GithubUsername {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Github usernames should only contain at most 39 alphanumeric characters and hyphens,"
+            "GitHub usernames should only contain at most 39 alphanumeric characters and hyphens,"
                     + " but cannot have consecutive hyphens and cannot begin or end with hyphens.";
 
     /*
-     * The first and last character of the GitHub Username must not be a hyphen,
-     * can't have consecutive hyphens in the GitHub Username,
+     * The first and last character of the GitHub Username must not be a hyphen.
+     * GitHub Usernames can't have consecutive hyphens
      * and can't be longer than 39 alphanumeric characters.
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}](?:[\\p{Alnum}]|-(?=[\\p{Alnum}])){0,38}";
@@ -26,7 +26,7 @@ public class GithubUsername {
     /**
      * Constructs an {@code GithubUsername}.
      *
-     * @param githubUsername A valid address.
+     * @param githubUsername A valid GitHub Username.
      */
     public GithubUsername(String githubUsername) {
         requireNonNull(githubUsername);

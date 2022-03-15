@@ -119,6 +119,10 @@ public class Lab {
         return "Lab " + labNumber;
     }
 
+    /**
+     * Returns true if both Labs have the same lab number and LabStatus.
+     * This defines a stronger notion of equality between two Labs.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

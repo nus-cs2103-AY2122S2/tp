@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's Telegram handle in the address book.
+ * Represents a Student's Telegram handle in the TAddressBook.
  * Guarantees: immutable; is valid as declared in {@link #isValidTelegram(String)}
  */
 public class Telegram {
@@ -14,7 +14,7 @@ public class Telegram {
                     + "and it should be 5 to 32 characters long.";
 
     /*
-     * The first character of the telegram handle must not be a whitespace,
+     * The first character of the Telegram handle must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input and must be at least
      * 5 alphanumeric characters or underscores but no more than 32.
      */

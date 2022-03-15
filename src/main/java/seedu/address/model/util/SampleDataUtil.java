@@ -40,10 +40,13 @@ public class SampleDataUtil {
         };
     }
 
+    /**
+     * Returns a sample TAddressBook based on the sample students.
+     */
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
-        for (Person samplePerson : getSamplePersons()) {
-            sampleAb.addPerson(samplePerson);
+        for (Person sampleStudent : getSamplePersons()) {
+            sampleAb.addPerson(sampleStudent);
         }
         return sampleAb;
     }

@@ -1,5 +1,8 @@
 package seedu.address.model.person.lab;
 
+/**
+ * Represents the possible LabStatuses a Lab can have.
+ */
 public enum LabStatus {
     UNSUBMITTED, SUBMITTED, GRADED;
 

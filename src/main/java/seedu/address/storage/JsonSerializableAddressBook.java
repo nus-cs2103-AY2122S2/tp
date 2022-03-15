@@ -15,7 +15,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.lab.Lab;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * An Immutable TAddressBook that is serializable to JSON format.
  */
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
@@ -48,7 +48,7 @@ class JsonSerializableAddressBook {
     }
 
     /**
-     * Converts this address book into the model's {@code AddressBook} object.
+     * Converts this TAddress book into the model's {@code AddressBook} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */

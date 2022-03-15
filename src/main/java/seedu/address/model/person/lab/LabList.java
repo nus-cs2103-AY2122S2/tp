@@ -28,7 +28,7 @@ public class LabList implements Iterable<Lab> {
     };
 
     /**
-     * Returns true if the list contains an equivalent lab as the given argument.
+     * Returns true if the list contains an equivalent Lab as the given argument.
      *
      * @param toCheck The Lab to be checked
      */
@@ -53,6 +53,9 @@ public class LabList implements Iterable<Lab> {
         throw new LabNotFoundException(labToGet.labNumber);
     }
 
+    /**
+     * Searches for and returns a Lab that has the given lab number (but potentially different LabStatus)
+     */
     public Lab getLabByLabNumber(int labNumberToGet) throws LabNotFoundException {
         requireNonNull(labNumberToGet);
 
@@ -66,10 +69,10 @@ public class LabList implements Iterable<Lab> {
     }
 
     /**
-     * Adds a lab to the list.
-     * The person must not already exist in the list.
+     * Adds a Lab to the list.
+     * The Lab must not already exist in the list.
      *
-     * @param toAdd The Lab that you want to add.
+     * @param toAdd The Lab to add.
      */
     public void add(Lab toAdd) throws DuplicateLabException {
         requireNonNull(toAdd);
@@ -81,9 +84,9 @@ public class LabList implements Iterable<Lab> {
     }
 
     /**
-     * Replaces the lab {@code target} in the list with {@code editedLab}.
+     * Replaces the Lab {@code target} in the list with {@code editedLab}.
      * {@code target} must exist in the list.
-     * The lab identity of {@code editedLab} must not be the same as another existing lab in the list.
+     * The lab identity of {@code editedLab} must not be the same as another existing Lab in the list.
      */
     public void setLab(Lab target, Lab editedLab) throws LabNotFoundException, DuplicateLabException {
         requireAllNonNull(target, editedLab);
@@ -101,10 +104,10 @@ public class LabList implements Iterable<Lab> {
     }
 
     /**
-     * Removes the equivalent lab from the list.
-     * The lab must exist in the list.
+     * Removes the equivalent Lab from the list.
+     * The Lab must exist in the list.
      *
-     * @param toRemove Lab you want to remove from the list.
+     * @param toRemove The Lab to remove from the list.
      */
     public void remove(Lab toRemove) throws LabNotFoundException {
         requireNonNull(toRemove);
@@ -115,7 +118,7 @@ public class LabList implements Iterable<Lab> {
 
     /**
      * Replaces the contents of this list with {@code replacement}.
-     * @param replacement is assumed to not contain duplicate labs.
+     * @param replacement is assumed to not contain duplicate Labs.
      */
     public void setLabs(LabList replacement) {
         requireNonNull(replacement);
@@ -124,7 +127,7 @@ public class LabList implements Iterable<Lab> {
 
     /**
      * Replaces the contents of this list with {@code labs}.
-     * {@code labs} must not contain duplicate labs.
+     * {@code labs} must not contain duplicate Labs.
      */
     public void setLabs(List<Lab> labs) throws DuplicateLabException {
         requireAllNonNull(labs);
@@ -160,7 +163,7 @@ public class LabList implements Iterable<Lab> {
     }
 
     /**
-     * Returns true if {@code labs} contains only unique labs.
+     * Returns true if {@code labs} contains only unique Labs.
      */
     private boolean labsAreUnique(List<Lab> labs) {
         for (int i = 0; i < labs.size() - 1; i++) {

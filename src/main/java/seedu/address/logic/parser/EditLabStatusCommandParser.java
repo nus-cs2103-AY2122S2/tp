@@ -13,7 +13,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.lab.LabStatus;
 
 /**
- * Parses input arguments and creates a new DeleteCommand object
+ * Parses input arguments and creates a new EditLabStatusCommand object
  */
 public class EditLabStatusCommandParser implements Parser<EditLabStatusCommand> {
 
