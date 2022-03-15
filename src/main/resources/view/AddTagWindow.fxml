@@ -3,27 +3,42 @@
 <?import java.net.URL?>
 <?import javafx.scene.Scene?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Text?>
 <?import javafx.stage.Stage?>
 
-<fx:root resizable="false" title="Create tag" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root resizable="false" title="Create tag" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <scene>
       <Scene>
          <stylesheets>
             <URL value="@AddTagWindow.css" />
          </stylesheets>
-         <HBox alignment="CENTER" prefHeight="266.0" prefWidth="306.0">
+         <HBox alignment="CENTER" prefHeight="500.0" prefWidth="400.0">
             <children>
-               <AnchorPane prefHeight="266.0" prefWidth="308.0" style="-fx-background-color: derive(#1d1d1d, 20%)derive(#1d1d1d, 20%);">
+               <AnchorPane prefHeight="500.0" prefWidth="410.0" style="-fx-background-color: derive(#1d1d1d, 20%);">
                   <children>
-                     <TextField fx:id="tagNameInput" layoutX="57.0" layoutY="70.0" prefHeight="34.0" prefWidth="197.0" promptText="Enter tag name..." />
-                     <StackPane fx:id="resultDisplayPlaceholder" layoutX="5.0" layoutY="114.0" maxHeight="100" minHeight="34.0" prefHeight="61.0" prefWidth="301.0" HBox.hgrow="NEVER">
+                     <StackPane fx:id="resultDisplayPlaceholder" layoutX="50.0" layoutY="109.0" maxHeight="100" minHeight="29.0" prefHeight="29.0" prefWidth="301.0" HBox.hgrow="NEVER">
                      </StackPane>
-                     <Button layoutX="57.0" layoutY="185.0" mnemonicParsing="false" onAction="#addTagHandler" text="Done" />
-                     <Button layoutX="162.0" layoutY="185.0" mnemonicParsing="false" onAction="#handleClose" text="Cancel" />
+                     <Text layoutX="43.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-family: Segoe UI Light;" text="Current Tags:" wrappingWidth="200.21630859375" />
+                     <ScrollPane layoutX="37.0" layoutY="172.0" prefWidth="327.0" style="-fx-background-color: derive(#1d1d1d, 20%);">
+                       <content>
+                         <AnchorPane prefHeight="198.0" prefWidth="325.0" style="-fx-background-color: derive(#1d1d1d, 20%);">
+                              <children>
+                                 <FlowPane fx:id="tagsPane" alignment="TOP_CENTER" layoutX="8.0" maxHeight="200.0" maxWidth="326.0" prefHeight="0.0" prefWidth="309.0">
+                     </FlowPane>
+                              </children>
+                           </AnchorPane>
+                       </content>
+                     </ScrollPane>
+                     <Button layoutX="50.0" layoutY="407.0" mnemonicParsing="false" onAction="#addTagHandler" text="Add" />
+                     <Button layoutX="272.0" layoutY="407.0" mnemonicParsing="false" onAction="#handleDelete" text="Delete"/>
+                     <TextField fx:id="tagNameInput" layoutX="102.0" layoutY="66.0" prefHeight="34.0" prefWidth="197.0" promptText="Enter tag name..." style="-fx-font-family: Segoe UI Semibold;" />
+                     <Button layoutX="157.0" layoutY="407.0" mnemonicParsing="false" onAction="#selectButtonHandler" text="Select" />
                   </children>
                </AnchorPane>
             </children>
