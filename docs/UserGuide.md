@@ -179,11 +179,16 @@ Removes the specified modules, module subgroup, student or professor profile fro
 
 Format:
 
+`delete [INDEX]`
+* Deletes the person at that index
+* Only can be used on Person view
+
 `delete m/MODULECODE [o/OPTION]`
 
 * Deletes the module with the specified `MODULECODE`.
+* Only can be used on module view
 * The module must already exist in the system.
-* Option is optional, and can take the following values: 
+* [NOT READY] Option is optional, and can take the following values: 
   - `ALL` -> Delete everything associated with the module, including profiles.
   - `MOD` -> Delete only the module
   - `PROF` -> Delete the Professor associated with the module.
@@ -192,7 +197,7 @@ Format:
 Example:
 * `delete m/CS2107` removes the "CS2107" module only.
 
-`delete m/MODULECODE g/GROUPCODE [o/OPTION]`
+[NOT READY] `delete m/MODULECODE g/GROUPCODE [o/OPTION]`
 * Deletes the subgroup specified by `GROUPCODE`, within the module specified by `MODULECODE`.
 * Option is optional, and can take the following values:
     - `ALL` -> Delete everything associated with the group, including profiles.
@@ -203,14 +208,14 @@ Example:
 Example:
 * `delete m/CS2107 g/T04` removes the T04 subgroup from the CS2107 module.
 
-`delete n/STUDENTNAME`
+[NOT READY] `delete n/STUDENTNAME`
 * Deletes the student profile specified by `STUDENTNAME`. If there are multiple matches,
 a prompt to specify which profile to delete will appear.
   
 Example: `delete n/Alan Tan` will remove the profile associated with Alan Tan. If there are multiple
 profiles associated with this name, a list will appear prompting you to specify which profile to delete.
 
-`delete n/PROFNAME`
+[NOT READY] `delete n/PROFNAME`
 * Deletes the professor profile specified by `PROFNAME`. If there are multiple matches, a prompt
 to specify which profile to delete will appear.
   
