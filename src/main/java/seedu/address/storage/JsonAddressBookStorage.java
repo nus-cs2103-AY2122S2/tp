@@ -78,7 +78,7 @@ public class JsonAddressBookStorage implements AddressBookStorage {
 
         FileUtil.createIfMissing(filePath);
         JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), filePath);
-        FileUtil.deleteDirectoryIfExists("data/pets");
+        // FileUtil.deleteDirectoryIfExists("data/pets");
         Iterator<Pet> iterator = addressBook.getPetList().iterator();
         while (iterator.hasNext()) {
             Pet pet = iterator.next();

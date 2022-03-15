@@ -2,6 +2,11 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -133,5 +138,57 @@ public class ParserUtil {
         requireNonNull(diet);
         String trimmedDiet = diet.trim();
         return new Diet(trimmedDiet);
+    }
+
+    /**
+     * Parses a {@code String attendanceDate} into an {@code LocalDateTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Diet} is invalid.
+     * @return
+     */
+    public static LocalDate parseAttendanceDate(String attendanceDate) throws ParseException {
+        requireNonNull(attendanceDate);
+        String trimmedAttendanceDate = attendanceDate.trim();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        try {
+            return LocalDate.parse(trimmedAttendanceDate, formatter);
+        } catch (DateTimeParseException e) {
+            throw new ParseException("Attendance date should be in dd-MM-yyyy format!");
+        }
+    }
+
+    /**
+     * Parses a {@code String pickUpTime} into an {@code LocalDateTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Diet} is invalid.
+     */
+    public static LocalTime parsePickUpTime(String pickUpTime) throws ParseException {
+        requireNonNull(pickUpTime);
+        String trimmedPickUpTime = pickUpTime.trim();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        try {
+            return  LocalTime.parse(trimmedPickUpTime, formatter);
+        } catch (DateTimeParseException e) {
+            throw new ParseException("Pick up time should be in HH:mm format!");
+        }
+    }
+
+    /**
+     * Parses a {@code String dropOffTime} into an {@code LocalDateTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Diet} is invalid.
+     */
+    public static LocalTime parseDropOffTime(String dropOffTime) throws ParseException {
+        requireNonNull(dropOffTime);
+        String trimmedDropOffTime = dropOffTime.trim();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        try {
+            return  LocalTime.parse(trimmedDropOffTime, formatter);
+        } catch (DateTimeParseException e) {
+            throw new ParseException("Drop off time should be in HH:mm format!");
+        }
     }
 }
