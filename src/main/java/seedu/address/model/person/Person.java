@@ -4,8 +4,10 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.model.tag.Tag;
 
@@ -76,6 +78,16 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns a String of tagname separated by spaces after retrieving the tagname from the {@code Tag } object.
+     * @return String of tagnames separated by spaces
+     */
+    public String getTagsInString() {
+        Set<Tag> tags = getTags();
+        List<String> tagsListInString = tags.stream().map(tag -> tag.tagName).collect(Collectors.toList());
+        return String.join(" ", tagsListInString);
     }
 
     /**
