@@ -2,11 +2,15 @@ package seedu.address.ui;
 
 import java.util.Comparator;
 
+import javafx.application.HostServices;
 import javafx.fxml.FXML;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.MainApp;
+import seedu.address.model.person.GithubUsername;
 import seedu.address.model.person.Person;
 
 /**
@@ -35,7 +39,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
-    private Label githubUsername;
+    private Hyperlink githubUsername;
     @FXML
     private Label email;
     @FXML
@@ -52,8 +56,15 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
-        githubUsername.setText("@" + person.getGithubUsername().value);
         email.setText(person.getEmail().value);
+
+        GithubUsername username = person.getGithubUsername();
+        githubUsername.setText(username.getGithubHandle());
+        HostServices hs = MainApp.getHS();
+        githubUsername.setOnAction(e -> {
+            hs.showDocument(username.getGithubProfileLink());
+        });
+
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
