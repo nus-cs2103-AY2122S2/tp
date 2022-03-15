@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -65,6 +66,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(person);
         return persons.contains(person);
     }
+
+//    public boolean hasPerson(Name name) { // todo should be PersonName object
+//        requireNonNull(name);
+//        Person
+//    }
 
     /**
      * Adds a person to the address book.

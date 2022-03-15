@@ -55,6 +55,10 @@ public class AddLogCommand extends Command {
         this.addLogDescriptor = addLogDescriptor;
     }
 
+//    public AddLogCommand(Name name, AddLogDescriptor addLogDescriptor) {
+//
+//    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -66,6 +70,7 @@ public class AddLogCommand extends Command {
         if (this.index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(MESSAGE_INVALID_INDEX);
         }
+
         Person personToEdit = lastShownList.get(this.index.getZeroBased());
         Person addedLogPerson = createAddedLogPerson(personToEdit, this.addLogDescriptor);
 

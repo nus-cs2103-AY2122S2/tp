@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.isNull;
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
@@ -39,15 +41,14 @@ public class Person {
      * @param tags Tag(s) of person
      */
     public Person(Name name, Phone phone, Email email, Address address, Description description, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+        requireNonNull(name);
         this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.description = description;
+        this.phone = isNull(phone) ? new Phone(null) : phone;
+        this.email = isNull(email) ? new Email(null) : email;
+        this.address = isNull(address) ? new Address(null) : address;
+        this.description = isNull(description) ? new Description(null) : description;
         this.tags.addAll(tags);
         this.logs.setLogs(new ArrayList<>());
-
     }
 
     /**
