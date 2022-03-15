@@ -19,4 +19,6 @@ public abstract class Name {
     public abstract String toString();
 
     public abstract int hashCode();
+
+
 }
