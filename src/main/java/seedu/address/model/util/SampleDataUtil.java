@@ -52,21 +52,21 @@ public class SampleDataUtil {
 
     public static Position[] getSamplePositions() {
         return new Position[]{
-                new Position(new PositionName("Senior Software Developer"),
-                        new Description("The highest paying job in the company\nMore than 5 years experience"),
-                        new PositionOpenings("3"), getRequirementSet("Java", "C++")),
-                new Position(new PositionName("Useless IT Intern"),
-                        new Description("Need to hire to fill the quota"),
-                        new PositionOpenings("1"),
-                        getRequirementSet("Source Academy", "C")),
-                new Position(new PositionName("Janitor"),
-                        new Description("Arguably the most important job"),
-                        new PositionOpenings("0"),
-                        getRequirementSet("Sweep Floor", "Wipe Window", "Wash Toilet")),
-                new Position(new PositionName("Admin Officer"),
-                        new Description("Degree or Postgraduate holder with Major in Information Technology, "
-                                + "Computer Science, or other similar focus, and a cumulative GPA of 3.5 and above"),
-                        new PositionOpenings("1"), getRequirementSet("Hardworking", "Good with people"))
+            new Position(new PositionName("Senior Software Developer"),
+                    new Description("The highest paying job in the company\nMore than 5 years experience"),
+                    new PositionOpenings("3"), getRequirementSet("Java", "C++")),
+            new Position(new PositionName("Useless IT Intern"),
+                    new Description("Need to hire to fill the quota"),
+                    new PositionOpenings("1"),
+                    getRequirementSet("Source Academy", "C")),
+            new Position(new PositionName("Janitor"),
+                    new Description("Arguably the most important job"),
+                    new PositionOpenings("0"),
+                    getRequirementSet("Sweep Floor", "Wipe Window", "Wash Toilet")),
+            new Position(new PositionName("Admin Officer"),
+                    new Description("Degree or Postgraduate holder with Major in Information Technology, "
+                            + "Computer Science, or other similar focus, and a cumulative GPA of 3.5 and above"),
+                    new PositionOpenings("1"), getRequirementSet("Hardworking", "Good with people"))
         };
     }
 
@@ -78,15 +78,15 @@ public class SampleDataUtil {
             new Interview(samplePersons[0],
                     LocalDateTime.parse("2021-01-01 12:00", formatter),
                     samplePositions[0]),
-                new Interview(samplePersons[1],
-                        LocalDateTime.parse("2021-05-05 05:00", formatter),
-                        samplePositions[1]),
-                new Interview(samplePersons[2],
-                        LocalDateTime.parse("2021-09-09 18:00", formatter),
-                        samplePositions[2]),
-                new Interview(samplePersons[3],
-                        LocalDateTime.parse("2021-12-20 19:00", formatter),
-                        samplePositions[3])
+            new Interview(samplePersons[1],
+                    LocalDateTime.parse("2021-05-05 05:00", formatter),
+                    samplePositions[1]),
+            new Interview(samplePersons[2],
+                    LocalDateTime.parse("2021-09-09 18:00", formatter),
+                    samplePositions[2]),
+            new Interview(samplePersons[3],
+                    LocalDateTime.parse("2021-12-20 19:00", formatter),
+                    samplePositions[3])
         };
     }
 
