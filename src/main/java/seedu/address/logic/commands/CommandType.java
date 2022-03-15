@@ -5,8 +5,8 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.logic.parser.contact.AddContactCommandParser;
 import seedu.address.logic.parser.contact.ViewContactCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.parser.prescription.AddPrescriptionCommandParser;
 import seedu.address.logic.parser.medical.AddMedicalCommandParser;
+import seedu.address.logic.parser.prescription.AddPrescriptionCommandParser;
 
 public enum CommandType {
     DEFAULT, CONTACT, MEDICAL, CONSULTATION, PRESCRIPTION, TEST;

@@ -23,8 +23,6 @@ import seedu.address.model.medical.ImmunizationHistory;
 import seedu.address.model.medical.Medication;
 import seedu.address.model.medical.Surgeries;
 import seedu.address.model.medical.Weight;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Nric;
 import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Nric;
 import seedu.address.model.prescription.DrugName;

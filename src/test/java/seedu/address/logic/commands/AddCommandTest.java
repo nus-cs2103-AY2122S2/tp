@@ -205,6 +205,12 @@ public class AddCommandTest {
         public void updateFilteredContactList(Predicate<Contact> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void addMedical(Medical medical) {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**

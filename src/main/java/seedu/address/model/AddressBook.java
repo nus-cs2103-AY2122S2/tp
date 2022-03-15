@@ -8,11 +8,11 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.UniqueContactList;
+import seedu.address.model.medical.Medical;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.UniquePersonList;
 import seedu.address.model.prescription.Prescription;
 import seedu.address.model.prescription.UniquePrescriptionList;
-import seedu.address.model.medical.Medical;
 
 /**
  * Wraps all data at the address-book level
@@ -86,6 +86,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void addPerson(Patient p) {
         persons.add(p);
     }
+
     public void addPrescription(Prescription p) {
         prescriptions.add(p);
     }
@@ -199,5 +200,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public int hashCode() {
         return persons.hashCode();
+    }
+
+
+    /**
+     * Adds medical information to the address book.
+     */
+    public void addMedical(Medical m) {
+        medicals.add(m);
     }
 }

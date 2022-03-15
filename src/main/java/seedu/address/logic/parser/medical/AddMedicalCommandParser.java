@@ -36,7 +36,7 @@ import seedu.address.model.medical.Medical;
 import seedu.address.model.medical.Medication;
 import seedu.address.model.medical.Surgeries;
 import seedu.address.model.medical.Weight;
-import seedu.address.model.person.Nric;
+import seedu.address.model.patient.Nric;
 
 public class AddMedicalCommandParser implements Parser<AddMedicalCommand> {
     /**
