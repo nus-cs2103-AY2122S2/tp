@@ -128,7 +128,7 @@ Edits an existing person in the HustleBook.
 
   Format: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [i/INFO] [d/DATE] [t/TAG]…​`
 
-  * Edits the person named `NAME`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+  * Edits the person named `NAME`.
   * At least one of the optional fields must be provided.
   * Existing values will be updated to the input values.
   * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
