@@ -2,8 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_MODULE_SWE;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -27,10 +26,11 @@ class AddModuleCommandTest {
     @Test
     void execute_addModuleUnfilteredList_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(firstPerson).withTags(VALID_TAG_MODULE_SWE).build();
+        Person editedPerson = new PersonBuilder(firstPerson).withTags(VALID_TAG_MODULE_SWE, VALID_TAG_MODULE).build();
 
         List<Tag> tags = new ArrayList<>();
         tags.add(new Tag(VALID_TAG_MODULE_SWE));
+        tags.add(new Tag(VALID_TAG_MODULE));
         AddModuleCommand addModuleCommand = new AddModuleCommand(INDEX_FIRST_PERSON, tags);
 
         String expectedMessage = String.format(AddModuleCommand.MESSAGE_SUCCESS, firstPerson.getName(), tags);
