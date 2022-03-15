@@ -130,13 +130,12 @@ Examples:
 
 Edits an existing person in UniBook.
 
-Format: `edit o/OPTION [INDEX] [m/MODULE] [n/NAME] [p/PHONE] [e/EMAIL] [nm/NEWMODULE]`
+Format: `edit INDEX o/OPTION [m/MODULE] [n/NAME] [p/PHONE] [e/EMAIL] [nm/NEWMODULE]`
 
 * Edits the entity type defined by `o/OPTION`. This is a compulsory field.
-* Depending on the entity type, certain fields will be compulsory.
-* Before choosing to edit module or person, user can see which `INDEX` to edit by changing the UI to show the relevant list
-  * `list o/module` : To display list of modules with respective indexes
-  *  `list o/person` : To display list of persons with respective indexes 
+* Before choosing to edit module or person, user can see which `INDEX` to edit by changing the UI to show the relevant list. User will not be allowed to edit if not on the correct page. 
+  * `list v/modules` : To display list of modules with respective indexes
+  * `list v/people` : To display list of persons with respective indexes 
 * 2 values for `OPTION`:
     * `module`: Edits the module specified by compulsory field `m/MODULE`. Optional fields `[n/NAME] [nm/NEWMODULE]` to specify the new name or module code of the module.
     * `person`: Edits the person at the specified by the compulsory field INDEX. The index refers to the index number shown in the most recent list of contacts viewable on the GUI. The index must be a positive integer 1, 2, 3, …
