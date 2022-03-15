@@ -7,6 +7,7 @@ import static seedu.address.commons.core.TypeFlags.FLAG_POSITION;
 import seedu.address.logic.commands.add.AddCommand;
 import seedu.address.logic.parser.applicants.AddApplicantCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.interview.AddInterviewCommandParser;
 import seedu.address.logic.parser.position.AddPositionCommandParser;
 
 /**
@@ -27,7 +28,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         if (flag == FLAG_APPLICANT) {
             return new AddApplicantCommandParser().parse(argsWithoutFlag);
         } else if (flag == FLAG_INTERVIEW) {
-            // calls add interview command parser
+            return new AddInterviewCommandParser().parse(argsWithoutFlag);
         } else if (flag == FLAG_POSITION) {
             return new AddPositionCommandParser().parse(argsWithoutFlag);
         }
