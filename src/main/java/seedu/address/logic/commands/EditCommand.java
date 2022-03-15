@@ -90,7 +90,12 @@ public class EditCommand extends Command {
 
         model.setPerson(applicantToEdit, editedApplicant);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedApplicant), DataType.APPLICANT);
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedApplicant), getCommandDataType());
+    }
+
+    @Override
+    public DataType getCommandDataType() {
+        return DataType.APPLICANT;
     }
 
     /**
@@ -252,5 +257,7 @@ public class EditCommand extends Command {
                     && getAddress().equals(e.getAddress())
                     && getTags().equals(e.getTags());
         }
+
+
     }
 }

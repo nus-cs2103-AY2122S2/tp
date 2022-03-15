@@ -61,7 +61,12 @@ public class AddApplicantCommand extends AddCommand {
         }
 
         model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), DataType.APPLICANT);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), getCommandDataType());
+    }
+
+    @Override
+    public DataType getCommandDataType() {
+        return DataType.APPLICANT;
     }
 
     @Override

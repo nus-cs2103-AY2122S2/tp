@@ -1,10 +1,10 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_FLAG;
-import static seedu.address.commons.core.Messages.MESSAGE_NO_FLAG;
 import static seedu.address.commons.core.DataTypeFlags.FLAG_APPLICANT;
 import static seedu.address.commons.core.DataTypeFlags.FLAG_INTERVIEW;
 import static seedu.address.commons.core.DataTypeFlags.FLAG_POSITION;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_FLAG;
+import static seedu.address.commons.core.Messages.MESSAGE_NO_FLAG;
 
 import java.util.ArrayList;
 import java.util.Arrays;

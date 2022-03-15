@@ -67,7 +67,12 @@ public class AddInterviewCommand extends AddCommand {
             throw new CommandException(MESSAGE_DUPLICATE_INTERVIEW);
         }
         model.addInterview(interviewToAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, interviewToAdd), DataType.INTERVIEW);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, interviewToAdd), getCommandDataType());
+    }
+
+    @Override
+    public DataType getCommandDataType() {
+        return DataType.INTERVIEW;
     }
 
     @Override

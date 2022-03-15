@@ -17,6 +17,11 @@ public class ListApplicantCommand extends ListCommand {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(MESSAGE_SUCCESS, DataType.APPLICANT);
+        return new CommandResult(MESSAGE_SUCCESS, getCommandDataType());
+    }
+
+    @Override
+    public DataType getCommandDataType() {
+        return DataType.APPLICANT;
     }
 }

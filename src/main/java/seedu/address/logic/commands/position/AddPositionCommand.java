@@ -52,7 +52,12 @@ public class AddPositionCommand extends AddCommand {
         }
 
         model.addPosition(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), DataType.POSITION);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), getCommandDataType());
+    }
+
+    @Override
+    public DataType getCommandDataType() {
+        return DataType.POSITION;
     }
 
     @Override

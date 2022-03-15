@@ -42,7 +42,12 @@ public class DeleteApplicantCommand extends DeleteCommand {
         Applicant applicantToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(applicantToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, applicantToDelete),
-                DataType.APPLICANT);
+                getCommandDataType());
+    }
+
+    @Override
+    public DataType getCommandDataType() {
+        return DataType.APPLICANT;
     }
 
     @Override
