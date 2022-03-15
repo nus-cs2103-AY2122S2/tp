@@ -24,6 +24,8 @@ public class LessonInfoPanel extends InfoPanel {
     @FXML
     private Label time;
     @FXML
+    private Label address;
+    @FXML
     private ListView<Student> enrolledStudentsList;
 
     /**
@@ -42,6 +44,7 @@ public class LessonInfoPanel extends InfoPanel {
         subject.setText(lesson.getSubject().subjectName);
         date.setText(lesson.getDateTimeSlot().getDateString());
         time.setText(lesson.getDateTimeSlot().getTimeString());
+        address.setText(lesson.getLessonAddress().value);
         setEnrolledStudents(FXCollections.observableList(lesson.getEnrolledStudents().getStudentsList()));
     }
 
