@@ -17,7 +17,6 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.person.exceptions.TaskAlreadyCompleteException;
 import seedu.address.model.person.exceptions.TaskAlreadyNotCompleteException;
 
-
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
  * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
@@ -149,15 +148,15 @@ public class UniquePersonList implements Iterable<Person> {
                 Person updatedPerson = currPerson.getCopy();
                 TaskList updatedPersonTaskList = updatedPerson.getTaskList();
                 int numberOfTasks = updatedPersonTaskList.getNumberOfTasks();
-                if (!updatedPersonTaskList.getTaskList().get(index.getZeroBased()).isTaskComplete()) {
-                    if (index.getZeroBased() < numberOfTasks && index.getOneBased() > 0) {
+                if (index.getZeroBased() < numberOfTasks && index.getOneBased() > 0) {
+                    if (!updatedPersonTaskList.getTaskList().get(index.getZeroBased()).isTaskComplete()) {
                         updatedPersonTaskList.markTaskAsComplete(index.getZeroBased());
                         setPerson(currPerson, updatedPerson);
                     } else {
-                        throw new InvalidTaskIndexException();
+                        throw new TaskAlreadyCompleteException();
                     }
                 } else {
-                    throw new TaskAlreadyCompleteException();
+                    throw new InvalidTaskIndexException();
                 }
             }
         }
@@ -183,15 +182,15 @@ public class UniquePersonList implements Iterable<Person> {
                 Person updatedPerson = currPerson.getCopy();
                 TaskList updatedPersonTaskList = updatedPerson.getTaskList();
                 int numberOfTasks = updatedPersonTaskList.getNumberOfTasks();
-                if (updatedPersonTaskList.getTaskList().get(index.getZeroBased()).isTaskComplete()) {
-                    if (index.getZeroBased() < numberOfTasks && index.getOneBased() > 0) {
+                if (index.getZeroBased() < numberOfTasks && index.getOneBased() > 0) {
+                    if (updatedPersonTaskList.getTaskList().get(index.getZeroBased()).isTaskComplete()) {
                         updatedPersonTaskList.markTaskAsNotComplete(index.getZeroBased());
                         setPerson(currPerson, updatedPerson);
                     } else {
-                        throw new InvalidTaskIndexException();
+                        throw new TaskAlreadyNotCompleteException();
                     }
                 } else {
-                    throw new TaskAlreadyNotCompleteException();
+                    throw new InvalidTaskIndexException();
                 }
             }
         }

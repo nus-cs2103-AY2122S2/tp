@@ -26,6 +26,9 @@ public class MarkCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PREFIX_ID + "A0123456Z " + PREFIX_INDEX + "1";
 
     public static final String MARKED_TASK_SUCCESS = "Task for %1$s marked";
+    public static final String MESSAGE_PERSON_NOT_FOUND = "There is no person with the given studentId";
+    public static final String TASK_ALREADY_DONE = "Task is already marked as done";
+    public static final String INVALID_TASK_INDEX = "Invalid index";
 
     private final StudentId studentId;
     private final Index index;
@@ -48,11 +51,11 @@ public class MarkCommand extends Command {
             requireNonNull(model);
             model.markTaskOfPerson(studentId, index);
         } catch (InvalidTaskIndexException invalidTaskIndexException) {
-            throw new InvalidTaskIndexException();
+            throw new CommandException(INVALID_TASK_INDEX);
         } catch (TaskAlreadyCompleteException taskAlreadyCompleteException) {
-            throw new TaskAlreadyCompleteException();
+            throw new CommandException(TASK_ALREADY_DONE);
         } catch (PersonNotFoundException personNotFoundException) {
-            throw new PersonNotFoundException();
+            throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
         } finally {
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         }
