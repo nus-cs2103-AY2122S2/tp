@@ -138,9 +138,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     public void markTask(Task task) {
+        task.setTaskDone();
     }
 
     public void unmarkTask(Task task) {
+        task.setTaskNotDone();
     }
 
     public void findTask(Task task) {
