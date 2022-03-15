@@ -14,12 +14,18 @@ public class FileUtil {
 
     private static final String CHARSET = "UTF-8";
 
+    /**
+     * Checks if file exists
+     */
     public static boolean isFileExists(Path file) {
         return Files.exists(file) && Files.isRegularFile(file);
     }
 
-    public static boolean isDirectoryExists(Path file) {
-        return Files.exists(file);
+    /**
+     * Checks if directory exists
+     */
+    public static boolean isDirectoryExists(Path dir) {
+        return Files.exists(dir);
     }
 
     /**
