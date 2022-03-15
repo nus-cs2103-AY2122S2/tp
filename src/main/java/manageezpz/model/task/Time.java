@@ -21,17 +21,7 @@ public class Time {
     }
 
     public static boolean isValidTime(String time) {
-        return time.matches(VALIDATION_REGEX) && checkTimeRange(time);
-    }
-
-    /**
-     * Validates the range of time provided.
-     * @param time String representation of time.
-     * @return true if time is within the range specified, false otherwise.
-     */
-    public static boolean checkTimeRange(String time) {
-        int timeInInt = Integer.parseInt(time);
-        return (timeInInt >= 0 && timeInInt <= 2359);
+        return time.matches(VALIDATION_REGEX) && time.matches("([01]?[0-9]|2[0-3])[0-5][0-9]");
     }
 
     public String getTime() {
