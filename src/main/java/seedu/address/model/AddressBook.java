@@ -75,6 +75,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Sorts the list of pets in the address book.
+     * Currently, it will sort the list of pets in alphabetical order according to their name.
+     */
+    public void sortPets() {
+        pets.sortPetList();
+    }
+
+    /**
      * Replaces the given pet {@code target} in the list with {@code editedPet}.
      * {@code target} must exist in the address book.
      * The pet identity of {@code editedPet} must not be the same as another existing pet in the address book.
@@ -84,6 +92,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         pets.setPet(target, editedPet);
     }
+
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
@@ -117,4 +126,5 @@ public class AddressBook implements ReadOnlyAddressBook {
     public int hashCode() {
         return pets.hashCode();
     }
+
 }
