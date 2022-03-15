@@ -42,7 +42,7 @@ TrackBeau is a **desktop app for managing customer profile, optimized for use vi
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [e/EMAIL]` can be used as `n/John Doe e/johnd@example.com` or as `n/John Doe`.
+  e.g. `n/NAME [e/EMAIL]` can be used as `n/John Doe e/johnd@example.com` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[sep/SERVICE_PREFERENCE]…​` can be used as ` ` (i.e. 0 times), `sep/massage`, `sep/facial sep/massage` etc.
@@ -50,7 +50,7 @@ TrackBeau is a **desktop app for managing customer profile, optimized for use vi
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+* If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
 * Extraneous parameters for commands that do not take in parameters (such as `list`, `exit`) will be ignored.<br>
@@ -60,7 +60,7 @@ TrackBeau is a **desktop app for managing customer profile, optimized for use vi
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -123,7 +123,7 @@ Finds customers whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `john` will match `john`
+* The search is case-insensitive. e.g. `john` will match `john`
 * Only the name is searched.
 * Only full words will be matched e.g. `john` will not match `joh`
 
@@ -134,13 +134,14 @@ Examples:
 
 Deletes the specified customer from the application.
 
-Format: delete INDEX
-* Deletes the customer profile at the specified INDEX.
+Format: delete INDEX,[MORE INDEXES]
+* Deletes the customer profile at the specified INDEXES.
 * The index refers to the index number shown in the displayed customer list.
 * The index must be a positive integer 1, 2, 3, …
+* All indexes must be valid else the operation will not execute.
 
 Examples:
-* `delete 2` : Removes the 2nd customer from the application.
+* `delete 1,2` : Removes the 1st and 2nd customer from the application.
 
 ### Clearing all entries : `clear`
 
