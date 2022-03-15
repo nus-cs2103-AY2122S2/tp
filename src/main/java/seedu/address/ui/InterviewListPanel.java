@@ -42,44 +42,7 @@ public class InterviewListPanel extends UiPart<Region> {
      */
     public InterviewListPanel(ObservableList<Interview> interviewList) {
         super(FXML);
-
-        Position tempPos1 = new Position(
-                new PositionName("Senior Software Developer"),
-                new Description("More than 5 years experience"),
-                new PositionOpenings("1"),
-                new HashSet<>());
-
-        Applicant tempApp1 = new Applicant(
-                new Name("Bobby Liu"),
-                new Phone("91234567"),
-                new Email("bobbyboy@gmail.com"),
-                new Age("42"),
-                new Address("12 Jurong West #03-45 Singapore 682930"),
-                new Gender("M"),
-                new HashSet<>());
-
-        Position tempPos2 = new Position(
-                new PositionName("Backend Engineer Intern"),
-                new Description("More than 5 years experience"),
-                new PositionOpenings("1"),
-                new HashSet<>());
-
-        Applicant tempApp2 = new Applicant(
-                new Name("Christian Fernando"),
-                new Phone("83749234"),
-                new Email("christian_fernando@yahoo.com"),
-                new Age("24"),
-                new Address("12 Jurong West #03-45 Singapore 682930"),
-                new Gender("M"),
-                new HashSet<>());
-
-        List<Interview> tempList = new ArrayList<>();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        tempList.add(new Interview(tempApp1, LocalDateTime.parse("2022-03-18 13:00", formatter), tempPos1));
-        tempList.add(new Interview(tempApp2, LocalDateTime.parse("2023-03-22 16:00", formatter), tempPos2));
-        ObservableList<Interview> intList = FXCollections.observableList(tempList);
-
-        interviewListView.setItems(intList); // TO REPLACE WITH REAL LIST
+        interviewListView.setItems(interviewList);
         interviewListView.setCellFactory(listView -> new InterviewListViewCell());
     }
 

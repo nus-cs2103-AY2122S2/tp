@@ -27,7 +27,7 @@ public class PositionListPanel extends UiPart<Region> {
     public PositionListPanel(ObservableList<Position> positionList) {
         super(FXML);
 
-        positionListView.setItems(positionList); // TO REPLACE WITH REAL LIST
+        positionListView.setItems(positionList);
         positionListView.setCellFactory(listView -> new PositionListViewCell());
     }
 
