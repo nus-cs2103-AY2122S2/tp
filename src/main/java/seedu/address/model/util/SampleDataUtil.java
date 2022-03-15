@@ -70,7 +70,7 @@ public class SampleDataUtil {
         };
     }
 
-    public static Interview[] getInterviewPositions() {
+    public static Interview[] getSampleInterviews() {
         Applicant[] samplePersons = getSamplePersons();
         Position[] samplePositions = getSamplePositions();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -98,7 +98,7 @@ public class SampleDataUtil {
         for (Position samplePosition : getSamplePositions()) {
             sampleAb.addPosition(samplePosition);
         }
-        for (Interview sampleInterview : getInterviewPositions()) {
+        for (Interview sampleInterview : getSampleInterviews()) {
             sampleAb.addInterview(sampleInterview);
         }
         return sampleAb;
