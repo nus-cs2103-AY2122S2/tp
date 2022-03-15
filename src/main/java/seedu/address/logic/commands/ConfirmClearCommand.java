@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 public class ConfirmClearCommand extends Command {
 
     public static final String COMMAND_WORD = "confirm";
-    public static final String MESSAGE_CLEAR_ACKNOWLEDGEMENT = "Address book completely cleared, as requested!";
+    public static final String MESSAGE_CLEAR_ACKNOWLEDGEMENT = "TAPA has been completely cleared, as requested!";
 
 
     @Override
