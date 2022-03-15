@@ -296,16 +296,20 @@ public class ParserUtilTest {
 
     @Test
     public void parseServices_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<Tag> actualServiceSet = ParserUtil.parseTags(Arrays.asList(VALID_SERVICE_1, VALID_SERVICE_2));
-        Set<Tag> expectedServiceSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_SERVICE_1), new Tag(VALID_SERVICE_2)));
+        Set<Tag> actualServiceSet = ParserUtil.parseTags(Arrays.asList(VALID_SERVICE_1,
+                VALID_SERVICE_2));
+        Set<Tag> expectedServiceSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_SERVICE_1),
+                new Tag(VALID_SERVICE_2)));
 
         assertEquals(expectedServiceSet, actualServiceSet);
     }
 
     @Test
     public void parseAllergies_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<Tag> actualAllergySet = ParserUtil.parseTags(Arrays.asList(VALID_ALLERGY_1, VALID_ALLERGY_2));
-        Set<Tag> expectedAllergySet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_ALLERGY_1), new Tag(VALID_ALLERGY_2)));
+        Set<Tag> actualAllergySet = ParserUtil.parseTags(Arrays
+                .asList(VALID_ALLERGY_1, VALID_ALLERGY_2));
+        Set<Tag> expectedAllergySet = new HashSet<Tag>(Arrays
+                .asList(new Tag(VALID_ALLERGY_1), new Tag(VALID_ALLERGY_2)));
 
         assertEquals(expectedAllergySet, actualAllergySet);
     }

@@ -3,7 +3,6 @@ package seedu.trackbeau.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.trackbeau.logic.commands.CommandTestUtil.STAFF_DESC_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_STAFF_JOHN;
 import static seedu.trackbeau.testutil.Assert.assertThrows;

@@ -8,7 +8,6 @@ import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_HAIR_TYPE_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_SERVICE_ACNE;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_SERVICE_CHEMICAL_PEEL;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_SKIN_TYPE_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_STAFF_JOHN;
