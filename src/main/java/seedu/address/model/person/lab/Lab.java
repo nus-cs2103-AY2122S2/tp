@@ -117,7 +117,7 @@ public class Lab {
         case GRADED:
             return new Lab(String.valueOf(labNumber), LabStatus.GRADED);
         default:
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Did not expect " + labStatus.name());
         }
     }
 
