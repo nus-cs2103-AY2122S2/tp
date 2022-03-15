@@ -125,7 +125,7 @@ Format: `flag INDEX f/FLAG`
 ### Sorting all persons : `sort`
 
 Sorts clients such that flagged clients are displayed before unflagged clients.
-Clients are then sorted by previous date met, clients who have not met in a long time will be displayed first.
+It then sorts all clients in HustleBook by date last met.
 
 Format: `sort`
 
