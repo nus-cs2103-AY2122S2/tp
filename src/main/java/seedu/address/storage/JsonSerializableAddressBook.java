@@ -75,9 +75,6 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
-//        System.out.println("1"+persons == null);
-//        System.out.println("2"+contacts == null);
-//        System.out.println("3"+consultations == null);
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
             Patient patient = jsonAdaptedPerson.toModelType();
             if (addressBook.hasPerson(patient)) {

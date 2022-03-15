@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.consultation;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.contact.AddContactCommand.MESSAGE_MISSING_PATIENT;
 import static seedu.address.logic.parser.CliSyntax.*;
 
 import seedu.address.commons.core.Messages;
@@ -26,7 +27,7 @@ public class ViewConsultationCommand extends Command {
             + "Parameters: TYPE, OWNER NRIC\n"
             + "Example: " + COMMAND_WORD +
             PREFIX_TYPE + "consultation " +
-            PREFIX_NRIC+ " S1234567L";
+            PREFIX_NRIC + " S1234567L";
 
     private final Nric ownerNric;
 
@@ -43,6 +44,10 @@ public class ViewConsultationCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.updateFilteredConsultationList(new ConsultationWithPredicates(ownerNric));
+
+        if (!model.hasPerson(new NricPredicate(ownerNric))) {
+            throw new CommandException(MESSAGE_MISSING_PATIENT);
+        }
 
         return new CommandResult(
                 String.format(Messages.MESSAGE_CONSULTATION_LISTED_OVERVIEW,

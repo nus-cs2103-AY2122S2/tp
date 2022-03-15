@@ -22,8 +22,6 @@ public class ConsultationCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    private Label id;
-    @FXML
     private Label nric;
     @FXML
     private Label date;
@@ -41,7 +39,6 @@ public class ConsultationCard extends UiPart<Region> {
     public ConsultationCard(Consultation consultation, int displayedIndex) {
         super(FXML);
         this.consultation = consultation;
-        id.setText(displayedIndex + ". ");
         nric.setText(consultation.getNric().toString());
         date.setText(consultation.getDate().toString());
         time.setText(consultation.getTime().toString());
@@ -61,7 +58,6 @@ public class ConsultationCard extends UiPart<Region> {
         }
         // state check
         ConsultationCard card = (ConsultationCard) other;
-        return id.getText().equals(card.id.getText())
-                && consultation.equals(card.consultation);
+        return consultation.equals(card.consultation);
     }
 }

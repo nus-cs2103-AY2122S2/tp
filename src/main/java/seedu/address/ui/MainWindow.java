@@ -166,7 +166,7 @@ public class MainWindow extends UiPart<Stage> {
                 personListPanelPlaceholder.getChildren().add(prescriptionListPanel.getRoot());
                 return;
             default:
-                personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+                personListPanelPlaceholder.getChildren().add(consultationListPanel.getRoot());
 
         }
     }
