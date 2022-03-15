@@ -44,7 +44,11 @@ If you can type fast, TAB can get your Lab management tasks done faster than tra
     - [Add, edit, delete students](#adding-a-student--add)
     - [List students](#listing-all-students--list)
     - [Find students](#locating-students-by-name--find)
+<<<<<<< HEAD
     - [Filter students based on status of lab tags](#filter-by-status-of-individual-labs--filter-coming-soon)
+=======
+    - [Filter students based on status of lab tags](#filter-by-status-of-individual-labs--filter-labx-lab-status)
+>>>>>>> 02c3157a84d97d11ff14df5bfb6b9ad49a614977
 - [Manage labs](#lab-related-features)
     - [Add labs](#adding-a-lab--labadd)
     - [Change status of labs](#setting-the-status-of-individual-labs--labstat-coming-soon)
@@ -99,11 +103,15 @@ Clears all entries from the TAddress book.
 
 Format: `clear`
 
-#### Filter (by status of individual labs) : `filter` [coming soon]
-Filters students based on the status of their lab tags. STATUS must be U/S/G (unsubmitted/submitted/graded).
-LAB_NUMBER must be a positive integer.
+#### Filter (by status of individual labs) : `filter`
+Filters students based on the status of their lab tags. LAB_NUMBER must be a positive integer.
 
-Format: `filter l/LAB_NUMBER s/STATUS`
+LAB_STATUS:
+* Unsubmitted = u
+* Submitted = s
+* Graded = g
+
+Format: `filter l/LAB_NUMBER s/LAB_STATUS`
 
 ### Lab-related features
 
@@ -114,11 +122,10 @@ LAB_NUMBER must be a positive integer.
 
 Format: `labadd l/LAB_NUMBER`
 
-#### Setting the status of individual Labs : `labstat` [coming soon]
-Changes the status of the specified lab for the student with the specified INDEX to the specified status. STATUS must be U/S/G (unsubmitted/submitted/graded).
-LAB_NUMBER must be a positive integer.
+#### Setting the status of individual Labs : `labstat`
+Changes the status of the specified lab for the student with the specified INDEX to the specified status. LAB_NUMBER must be a positive integer. LAB_STATUS must be one of u/s/g.
 
-Format: `labstat INDEX l/LAB_NUMBER s/STATUS`
+Format: `labstat INDEX l/LAB_NUMBER s/LAB_STATUS`
 
 --------------------------------------------------------------------------------------------------------------------
 ## FAQ
@@ -136,10 +143,10 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [e/EMAIL] [g/GITHUB] [t/TELEGRAM_HANDLE] [i/STUDENT_ID] [t/TAG]...`<br> e.g.,`edit 2 n/James Lee g/jamesHo`
-**Filter** | `filter l/LAB_NUMBER s/STATUS`<br> e.g., `filter l/1 s/u`
+**Filter** | `filter l/LAB_NUMBER s/LAB_STATUS`<br> e.g., `filter l/1 s/u`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Add lab** | `labadd l/LAB_NUMBER`
-**Edit lab status** | `labstat INDEX l/LAB_NUMBER s/STATUS`
+**Edit lab status** | `labstat INDEX l/LAB_NUMBER s/LAB_STATUS`
 **List** | `list`
 **Help** | `help`
 **Exit** | `exit`
