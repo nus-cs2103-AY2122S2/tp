@@ -1,23 +1,15 @@
 package seedu.address.ui;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 import java.util.logging.Logger;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.position.Description;
 import seedu.address.model.position.Position;
-import seedu.address.model.position.PositionName;
-import seedu.address.model.position.PositionOpenings;
-import seedu.address.model.position.Requirement;
+
 
 /**
  * Panel containing the list of positions.
