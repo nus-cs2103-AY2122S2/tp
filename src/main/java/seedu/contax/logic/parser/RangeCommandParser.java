@@ -16,7 +16,7 @@ import seedu.contax.logic.parser.exceptions.ParseException;
  */
 public class RangeCommandParser implements Parser<RangeCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the RangeEditCommandParser
+     * Parses the given {@code String} of arguments in the context of the RangeCommandParser
      * and returns an RangeEditCommandParser object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
