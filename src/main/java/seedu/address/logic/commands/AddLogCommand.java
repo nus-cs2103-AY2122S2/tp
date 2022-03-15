@@ -62,9 +62,13 @@ public class AddLogCommand extends Command {
         this.byName = false;
     }
 
+    /**
+     * Creates an AddLogCommand to add the specified {@code Log} to the specified
+     * {@code Person}.
+     */
     public AddLogCommand(Name name, AddLogDescriptor addLogDescriptor) {
         requireAllNonNull(name, addLogDescriptor);
-        this.personWithNameToAddLog = new Person(new Name(null));
+        this.personWithNameToAddLog = new Person(name);
         this.index = null;
         this.addLogDescriptor = addLogDescriptor;
         this.byName = true;
