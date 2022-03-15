@@ -27,7 +27,7 @@ public class FlagCommandParser implements Parser<FlagCommand> {
         Index index;
 
         try {
-            index = ParserUtil.parseIndex(args);
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FlagCommand.MESSAGE_USAGE), pe);
         }
