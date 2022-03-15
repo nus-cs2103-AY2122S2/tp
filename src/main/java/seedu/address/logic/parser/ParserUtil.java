@@ -8,6 +8,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -156,5 +157,14 @@ public class ParserUtil {
             throw new ParseException(Info.MESSAGE_CONSTRAINTS);
         }
         return new Info(trimmedInfo);
+    }
+
+    public static Class<? extends Command> parseCommand(String command) throws ParseException {
+        requireNonNull(command);
+        String trimmedCommand = command.trim();
+        if (!Command.CommandEnum.isValidCommand(trimmedCommand)) {
+            throw new ParseException(Command.MESSAGE_CONSTRAINTS);
+        }
+        return Command.CommandEnum.getCommand(trimmedCommand);
     }
 }

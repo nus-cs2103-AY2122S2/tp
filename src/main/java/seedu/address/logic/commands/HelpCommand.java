@@ -14,8 +14,22 @@ public class HelpCommand extends Command {
 
     public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
 
+    private Class<? extends Command> commandClass;
+
+    public HelpCommand() {
+        this.commandClass = null;
+    }
+
+    public HelpCommand(Class<? extends Command> commandClass) {
+        this.commandClass = commandClass;
+    }
+
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
+        if (commandClass == null) {
+            return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
+        } else {
+            return new CommandResult(commandClass.)
+        }
     }
 }
