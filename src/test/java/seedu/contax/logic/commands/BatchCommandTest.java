@@ -50,17 +50,16 @@ public class BatchCommandTest {
 
     @Test
     public void execute_personAcceptedByModel_rangeEditSuccessful() throws Exception {
-        String sampleCommand = "range edit p/12345678 by/phone regex/9 ";
+        String sampleCommand = "range edit p/12345678 by/phone =/9 ";
         ArgumentMultimap argumentMultimap = new ArgumentMultimap();
 
         BatchCommand expectedBatchCommand =
-                new BatchCommand("edit p/12345678", new SearchType(SearchType.TYPE_PHONE), "876");
+                new BatchCommand("edit p/12345678",
+                        new SearchType(SearchType.TYPE_PHONE), "94351253");
         CommandResult commandResult = expectedBatchCommand.execute(model);
         assertTrue(commandResult.getFeedbackToUser().equals(
-                "Edited Person: Benson Meier; Phone: 12345678; Email: johnd@example.com; Address: 311, "
-                + "Clementi Ave 2, #02-25; Tags: [owesmoney][friends]\n"
-                + "Edited Person: Daniel Meier; Phone: 12345678; Email: cornelia@example.com; "
-                + "Address: 10th street; Tags: [friends]\n"));
+                "Edited Person: Alice Pauline; Phone: 12345678; "
+                        + "Email: alice@example.com; Address: 123, Jurong West Ave 6, #08-111; Tags: [friends]\n"));
         expectedBatchCommand =
                 new BatchCommand("edit p/12345678",
                         new SearchType(SearchType.TYPE_ADDRESS), "1234567890");
@@ -82,7 +81,7 @@ public class BatchCommandTest {
     public void parseAndCreateNewCommand_invalidValue_throwsParseException() throws CommandException {
         BatchCommand expectedBatchCommand =
                 new BatchCommand("",
-                        new SearchType(SearchType.TYPE_NAME), "");
+                        new SearchType(SearchType.TYPE_PHONE), "94351253");
         assertThrows(CommandException.class, () -> expectedBatchCommand.execute(model));
     }
 

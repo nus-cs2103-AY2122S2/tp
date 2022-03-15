@@ -228,7 +228,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_batchCommand() throws Exception {
         assertTrue(parser.parseCommand(BatchCommand.COMMAND_WORD + " " + DeleteCommand.COMMAND_WORD
-                + " by/phone regex/123") instanceof BatchCommand);
+                + " by/phone =/123") instanceof BatchCommand);
     }
 
     @Test

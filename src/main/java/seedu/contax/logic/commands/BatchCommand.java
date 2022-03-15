@@ -2,12 +2,11 @@ package seedu.contax.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.contax.logic.parser.CliSyntax.PREFIX_REGEX;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_EQUALS;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_SEARCH_TYPE;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import seedu.contax.commons.core.index.Index;
 import seedu.contax.logic.commands.exceptions.CommandException;
@@ -27,41 +26,40 @@ import seedu.contax.model.util.SearchType;
 public class BatchCommand extends Command {
     public static final String COMMAND_WORD = "batch";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Perform command in batch"
-            + "by the Regular Expression provided. \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Perform command in batch \n"
             + "Parameters: "
             + "COMMAND (must be valid command without index) "
             + PREFIX_SEARCH_TYPE + "SEARCH_TYPE "
-            + PREFIX_REGEX + "PATTERN \n"
+            + PREFIX_EQUALS + "PATTERN \n"
             + "Example: " + COMMAND_WORD + " edit "
             + PREFIX_SEARCH_TYPE + "phone "
-            + PREFIX_REGEX + "^123 ";
+            + PREFIX_EQUALS + "^123 ";
 
     private final String commandInput;
     private final SearchType searchType;
-    private final String userRegex;
+    private final String userInput;
 
     /**
      * @param commandInput              details to word of command
      * @param searchType                search type of field apply matcher
-     * @param userRegex                 regex provided by user
+     * @param userInput                 regex provided by user
      */
-    public BatchCommand(String commandInput, SearchType searchType, String userRegex) {
+    public BatchCommand(String commandInput, SearchType searchType, String userInput) {
         requireNonNull(commandInput);
         requireNonNull(searchType);
-        requireNonNull(userRegex);
+        requireNonNull(userInput);
         this.commandInput = commandInput;
         this.searchType = searchType;
-        this.userRegex = userRegex.trim();
+        this.userInput = userInput.trim();
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Index> indexList = matchRegexToIndex(model, searchType, userRegex);
+        List<Index> indexList = matchInputStringToIndex(model, searchType, userInput);
         if (indexList.size() == 0) {
             return new CommandResult(COMMAND_WORD
-                    + ": No result matching \"" + userRegex + "\"");
+                    + ": No result matching \"" + userInput + "\"");
         }
         List<CommandResult> commandResultList = new ArrayList<>();
         for (Index index: indexList) {
@@ -82,13 +80,14 @@ public class BatchCommand extends Command {
         return new CommandResult(resultOutput.toString());
     }
 
-    private List<Index> matchRegexToIndex(Model model, SearchType searchType, String userRegex) {
+    private List<Index> matchInputStringToIndex(Model model, SearchType searchType, String userInput)
+            throws CommandException {
         List<Index> indexList = new ArrayList<>();
         List<Person> personList = model.getFilteredPersonList();
         for (int i = 1; i < personList.size() + 1; i++) {
             Person person = personList.get(i - 1);
             Index index = Index.fromOneBased(i);
-            Pattern pattern = Pattern.compile(userRegex);
+
             String targetField;
             switch (searchType.searchType) {
             case SearchType.TYPE_PHONE:
@@ -104,7 +103,7 @@ public class BatchCommand extends Command {
                 targetField = person.getName().toString();
                 break;
             }
-            if (!targetField.isEmpty() && pattern.matcher(targetField).find()) {
+            if (!targetField.isEmpty() && targetField.equals(userInput)) {
                 indexList.add(index);
             }
 
@@ -118,6 +117,6 @@ public class BatchCommand extends Command {
                 || (other instanceof BatchCommand // instanceof handles nulls
                 && commandInput.equals(((BatchCommand) other).commandInput)
                 && searchType.equals(((BatchCommand) other).searchType)
-                && userRegex.equals(((BatchCommand) other).userRegex));
+                && userInput.equals(((BatchCommand) other).userInput));
     }
 }

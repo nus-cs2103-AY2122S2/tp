@@ -2,7 +2,7 @@ package seedu.contax.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.contax.logic.parser.CliSyntax.PREFIX_REGEX;
+import static seedu.contax.logic.parser.CliSyntax.PREFIX_EQUALS;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_SEARCH_TYPE;
 
 import seedu.contax.logic.commands.BatchCommand;
@@ -19,10 +19,10 @@ public class BatchCommandParser implements Parser<BatchCommand> {
     public BatchCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_SEARCH_TYPE, PREFIX_REGEX);
+                ArgumentTokenizer.tokenize(args, PREFIX_SEARCH_TYPE, PREFIX_EQUALS);
 
         String commandInput = args.split("by/")[0];
-        if (!argMultimap.arePrefixesPresent(PREFIX_SEARCH_TYPE, PREFIX_REGEX)) {
+        if (!argMultimap.arePrefixesPresent(PREFIX_SEARCH_TYPE, PREFIX_EQUALS)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     BatchCommand.MESSAGE_USAGE));
         }
@@ -30,7 +30,7 @@ public class BatchCommandParser implements Parser<BatchCommand> {
         return new BatchCommand(
                 commandInput.trim(),
                 new SearchType(argMultimap.getValue(PREFIX_SEARCH_TYPE).get().toLowerCase()),
-                argMultimap.getValue(PREFIX_REGEX).get()
+                argMultimap.getValue(PREFIX_EQUALS).get()
         );
     }
 }

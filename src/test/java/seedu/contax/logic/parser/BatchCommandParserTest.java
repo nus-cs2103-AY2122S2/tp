@@ -28,17 +28,17 @@ public class BatchCommandParserTest {
         assertParseFailure(parser, "batch edit", MESSAGE_INVALID_FORMAT);
 
         // search type is not specified
-        assertParseFailure(parser, "batch edit regex/1", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "batch edit =/1", MESSAGE_INVALID_FORMAT);
 
     }
 
     @Test
     public void parse_someFieldsSpecified_success() {
-        String sampleUserInput = "edit p/321 by/name regex/123";
+        String sampleUserInput = "edit p/321 by/name =/123";
         ArgumentMultimap argumentMultimap = new ArgumentMultimap();
         argumentMultimap.put(new Prefix(""), "edit p/321");
-        argumentMultimap.put(new Prefix("/by"), "phone");
-        argumentMultimap.put(new Prefix("/regex"), "123");
+        argumentMultimap.put(new Prefix("by"), "phone");
+        argumentMultimap.put(new Prefix("regex"), "123");
         BatchCommand expectedBatchCommand =
                 new BatchCommand("edit p/321", new SearchType(SearchType.TYPE_NAME), "123");
         assertParseSuccess(parser, sampleUserInput, expectedBatchCommand);
