@@ -50,7 +50,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Phua Jun Heng
 
-<img src="images/junheng.png" width="200px">
+<img src="images/cwnm.png" width="200px">
 
 [[github](http://github.com/cwnm)] [[portfolio](team/cwnm.md)]
 
