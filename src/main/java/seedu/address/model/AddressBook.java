@@ -54,7 +54,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Replaces the contents of the companies list with {@code companies}.
      * {@code companies} must not contain duplicate companies.
      */
-    public void setCompanies(List<Company> companies) { this.companies.setEntries(companies); }
+    public void setCompanies(List<Company> companies) {
+        this.companies.setEntries(companies);
+    }
 
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.

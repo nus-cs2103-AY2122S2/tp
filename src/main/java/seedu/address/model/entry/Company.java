@@ -2,12 +2,15 @@ package seedu.address.model.entry;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.tag.Tag;
 
+/**
+ * Represents an Entry in the address book.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 public class Company extends Entry {
 
     // Identity fields
