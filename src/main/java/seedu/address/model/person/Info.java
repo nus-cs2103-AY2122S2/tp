@@ -11,7 +11,7 @@ public class Info {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Information about clients should not be empty";
-    public static final String VALIDATION_REGEX = ".*";
+    public static final String VALIDATION_REGEX = "^(?!\\s*$).+";
     public final String value;
 
     /**

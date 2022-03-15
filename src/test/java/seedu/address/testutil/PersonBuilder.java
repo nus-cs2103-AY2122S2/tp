@@ -24,8 +24,8 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_FLAG = "false";
-    public static final String DEFAULT_PREV_DATE_MET = "2022-01-15";
-    public static final String DEFAULT_INFO = "High risk tolerance.";
+    public static final String DEFAULT_PREV_DATE_MET = PrevDateMet.getTodaysDate();
+    public static final String DEFAULT_INFO = "No further info";
 
     private Name name;
     private Phone phone;
@@ -129,7 +129,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, flag, tags);
+        return new Person(name, phone, email, address, flag, tags, prevDateMet, info);
     }
 
 }

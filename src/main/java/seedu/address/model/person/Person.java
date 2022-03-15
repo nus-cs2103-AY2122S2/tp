@@ -58,7 +58,7 @@ public class Person {
         this.flag = flag;
         this.tags.addAll(tags);
         this.prevDateMet = new PrevDateMet(LocalDate.now().toString());
-        this.info = new Info("");
+        this.info = new Info("No further info");
     }
 
     public Name getName() {
@@ -133,9 +133,9 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
-//                && otherPerson.getPrevDateMet().equals(getPrevDateMet())
-//                && otherPerson.getInfo().equals(getInfo());
+                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getPrevDateMet().equals(getPrevDateMet())
+                && otherPerson.getInfo().equals(getInfo());
     }
 
     @Override
