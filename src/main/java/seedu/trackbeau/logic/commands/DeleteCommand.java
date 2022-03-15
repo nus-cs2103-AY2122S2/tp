@@ -25,8 +25,6 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_CUSTOMER_SUCCESS = "Deleted Customer(s):\n%1$s";
 
-    //private final Index targetIndex;
-
     private final ArrayList<Index> targetIndexes;
 
     public DeleteCommand(ArrayList<Index> targetIndexes) {
@@ -59,6 +57,6 @@ public class DeleteCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeleteCommand // instanceof handles nulls
-                && targetIndexes.equals(((DeleteCommand) other).targetIndexes)); // state check
+                && targetIndexes.containsAll(((DeleteCommand) other).targetIndexes)); // state check
     }
 }

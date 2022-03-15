@@ -64,6 +64,44 @@ public class DeleteCommandTest {
     }
 
     @Test
+    public void execute_validMultipleIndexesUnfilteredList_success() {
+        Customer customerToDelete1 = model.getFilteredCustomerList().get(INDEX_FIRST_CUSTOMER.getZeroBased());
+        Customer customerToDelete2 = model.getFilteredCustomerList().get(INDEX_SECOND_CUSTOMER.getZeroBased());
+
+        ArrayList<Index> customers = new ArrayList<>() {
+            {
+                add(INDEX_FIRST_CUSTOMER);
+                add(INDEX_SECOND_CUSTOMER);
+            }
+        };
+        DeleteCommand deleteCommand = new DeleteCommand(customers);
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(customerToDelete1).append("\n");
+        sb.append(customerToDelete2).append("\n");
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_CUSTOMER_SUCCESS, sb);
+
+        ModelManager expectedModel = new ModelManager(model.getTrackBeau(), new UserPrefs());
+        expectedModel.deleteCustomer(customerToDelete1);
+        expectedModel.deleteCustomer(customerToDelete2);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_invalidMultipleIndexesUnfilteredList_throwsCommandException() {
+        ArrayList<Index> customers = new ArrayList<>() {
+            {
+                add(INDEX_FIRST_CUSTOMER);
+                add(Index.fromOneBased(model.getFilteredCustomerList().size() + 1));
+            }
+        };
+        DeleteCommand deleteCommand = new DeleteCommand(customers);
+
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
+    }
+
+    @Test
     public void execute_validIndexFilteredList_success() {
         showCustomerAtIndex(model, INDEX_FIRST_CUSTOMER);
 

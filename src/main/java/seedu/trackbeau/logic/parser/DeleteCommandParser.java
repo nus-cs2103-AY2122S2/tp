@@ -26,7 +26,6 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             for (String s : split) {
                 indexes.add(ParserUtil.parseIndex(s));
             }
-            //Index index = ParserUtil.parseIndex(split[0]);
             return new DeleteCommand(indexes);
         } catch (ParseException pe) {
             throw new ParseException(
