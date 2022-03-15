@@ -126,7 +126,7 @@ public class DeleteLogCommandParserTest {
 
         // case 3: all persons
         args = " " + FLAG_ALL;
-        expectedCommand = new DeleteLogCommand(false, true, null, null);
+        expectedCommand = new DeleteLogCommand(true);
         assertParseSuccess(parser, args, expectedCommand);
     }
 

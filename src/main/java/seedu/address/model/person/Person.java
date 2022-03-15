@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -51,6 +52,9 @@ public class Person {
         this.tags.addAll(isNull(tags) ? new HashSet<>() : tags);
         this.logs.setLogs(isNull(logs) ? new ArrayList<>() : logs);
 
+        // sanity check
+        requireAllNonNull(this.name, this.phone, this.email,
+                this.address, this.description, this.tags, this.logs);
     }
 
     /**

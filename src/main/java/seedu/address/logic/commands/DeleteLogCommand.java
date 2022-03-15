@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.FLAG_ALL;
@@ -9,6 +10,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -60,8 +62,29 @@ public class DeleteLogCommand extends Command {
      */
     public DeleteLogCommand(boolean isForOnePerson, boolean isForDeletingAllLogs,
                             Index personIndex, Index logIndex) {
+        requireAllNonNull(isForOnePerson, isForDeletingAllLogs);
         this.descriptor = new DeleteLogDescriptor(isForOnePerson,
-                isForDeletingAllLogs, personIndex, logIndex);
+                isForDeletingAllLogs, personIndex, null, logIndex, false);
+    }
+
+    /**
+     * Creates a {@code DeleteLogCommand} object.
+     */
+    public DeleteLogCommand(boolean isForOnePerson, boolean isForDeletingAllLogs,
+                            Name personName, Index logIndex) {
+        requireAllNonNull(isForOnePerson, isForDeletingAllLogs);
+        this.descriptor = new DeleteLogDescriptor(isForOnePerson,
+                isForDeletingAllLogs, null, personName, logIndex, true);
+    }
+
+    /**
+     * Creates a {@code DeleteLogCommand} object, specifically one for
+     * deleting all logs of all persons.
+     */
+    public DeleteLogCommand(boolean isForDeletingAllLogs) {
+        assert (isForDeletingAllLogs);
+        this.descriptor = new DeleteLogDescriptor(false,
+                true, null, null, null, false);
     }
 
     @Override
@@ -105,34 +128,36 @@ public class DeleteLogCommand extends Command {
         private final boolean isForOnePerson;
         private final boolean isForDeletingAllLogs;
         private final Index personIndex;
+        private final Person personWithNameToDeleteLog;
         private final Index logIndex;
+        private final boolean byName;
 
         /**
-         * Creates a {@code DeleteLogDescriptor} object that wraps the details of deletion.
-         *
-         * @param isForOnePerson       boolean flag indicating if deletion is for a single person.
-         * @param isForDeletingAllLogs boolean flag indicating if the deletion involves all logs of
-         *                             a given person.
-         * @param personIndex          {@code Index} object indicating index of specified person to delete log from.
-         *                             Should be null if deletion is for all persons.
-         * @param logIndex             {@code Index} object indicating index of log of a specific to be deleted.
-         *                             Should be null if deletion is for all persons.
+         * Creates a {@code} DeleteLogDescriptor} object that wraps the details of deletion.
          */
-        public DeleteLogDescriptor(boolean isForOnePerson, boolean isForDeletingAllLogs,
-                                   Index personIndex, Index logIndex) {
+        private DeleteLogDescriptor(boolean isForOnePerson, boolean isForDeletingAllLogs,
+                                    Index personIndex, Name name, Index logIndex, boolean byName) {
             this.isForOnePerson = isForOnePerson;
             this.isForDeletingAllLogs = isForDeletingAllLogs;
             this.personIndex = personIndex;
+            this.personWithNameToDeleteLog = isNull(name) ? null : new Person(name);
             this.logIndex = logIndex;
+            this.byName = byName;
 
-            // assert valid cases
-            // if log is present, flags cannot be for deleting all, and must be single person
-            // if person is present, person index must be present
-            assert (((logIndex == null
-                    || (!isForDeletingAllLogs && isForOnePerson && personIndex != null)))
-                    && ((!isForOnePerson && personIndex == null)
-                    || isForOnePerson && personIndex != null));
+            // sanity checks
+            assert (!(this.personIndex != null && this.personWithNameToDeleteLog != null)); // cannot be overdefined
+            if (!this.byName) {
+                assert (((logIndex == null
+                        || (!isForDeletingAllLogs && isForOnePerson && personIndex != null)))
+                        && ((!isForOnePerson && personIndex == null)
+                        || isForOnePerson && personIndex != null));
 
+            } else {
+                assert (((logIndex == null
+                        || (!isForDeletingAllLogs && isForOnePerson && personWithNameToDeleteLog != null)))
+                        && ((!isForOnePerson && personWithNameToDeleteLog == null)
+                        || isForOnePerson && personWithNameToDeleteLog != null));
+            }
         }
 
         /**
@@ -188,19 +213,45 @@ public class DeleteLogCommand extends Command {
          */
         public CommandResult deleteAllLogsOfPerson(Model model) throws CommandException {
 
-            // sanity check
-            assert (this.isForDeletingAllLogs && this.isForOnePerson
-                    && this.personIndex != null && this.logIndex == null);
+            // sanity checks
+            assert (this.isForDeletingAllLogs && this.isForOnePerson && this.logIndex == null);
+            assert (this.personIndex != null || this.personWithNameToDeleteLog != null);
 
-            // set new person as empty
-            // get list of persons from model
-            List<Person> lastShownList = model.getFilteredPersonList();
+            // ===== GET PERSON =====
+            // todo: can consider implementing model method getByIndexOrName, since repeated
+            // across all functionalities that support both index and name
+            Person personToEdit;
+            if (this.byName) {
+                // sanity check
+                requireNonNull(this.personWithNameToDeleteLog);
 
-            // get person and modify
-            if (this.personIndex.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                // find person with same name
+                List<Person> personsToEdit = model.getAddressBook()
+                        .getPersonList().stream()
+                        .filter(p -> p.hasSameName(this.personWithNameToDeleteLog))
+                        .collect(Collectors.toList());
+
+                // if person not found, throw an error
+                if (personsToEdit.size() < 1) {
+                    throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
+                }
+                assert (personsToEdit.size() == 1);
+                personToEdit = personsToEdit.get(0);
+
+            } else {
+                // sanity check
+                requireNonNull(this.personIndex);
+
+                // get list of persons from model
+                List<Person> lastShownList = model.getFilteredPersonList();
+
+                // get person and modify
+                if (this.personIndex.getZeroBased() >= lastShownList.size()) {
+                    throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                }
+                personToEdit = lastShownList.get(this.personIndex.getZeroBased());
             }
-            Person personToEdit = lastShownList.get(this.personIndex.getZeroBased());
+
             Person deletedLogsPerson = copyPersonButWithEmptyLogs(personToEdit);
 
             // add to address book
@@ -236,17 +287,48 @@ public class DeleteLogCommand extends Command {
 
             // sanity checks
             requireNonNull(model);
-            assert (this.isForOnePerson && !this.isForDeletingAllLogs
-                    && this.personIndex != null && this.logIndex != null);
+            assert (this.isForOnePerson
+                    && !this.isForDeletingAllLogs
+                    && this.logIndex != null);
 
-            // get list of persons from model
-            List<Person> lastShownList = model.getFilteredPersonList();
+            assert (!((this.personIndex == null && this.personWithNameToDeleteLog == null)
+                    || (this.personIndex != null && this.personWithNameToDeleteLog != null)));
 
-            // get person and modify
-            if (this.personIndex.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            // ===== GET PERSON =====
+            // todo: can consider implementing model method getByIndexOrName, since repeated
+            // across all functionalities that support both index and name
+            Person personToEdit;
+            if (this.byName) {
+                // sanity check
+                requireNonNull(this.personWithNameToDeleteLog);
+
+                // find person with same name
+                List<Person> personsToEdit = model.getAddressBook()
+                        .getPersonList().stream()
+                        .filter(p -> p.hasSameName(this.personWithNameToDeleteLog))
+                        .collect(Collectors.toList());
+
+                // if person not found, throw an error
+                if (personsToEdit.size() < 1) {
+                    throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
+                }
+                assert (personsToEdit.size() == 1);
+                personToEdit = personsToEdit.get(0);
+
+            } else {
+                // sanity check
+                requireNonNull(this.personIndex);
+
+                // get list of persons from model
+                List<Person> lastShownList = model.getFilteredPersonList();
+
+                // get person and modify
+                if (this.personIndex.getZeroBased() >= lastShownList.size()) {
+                    throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                }
+                personToEdit = lastShownList.get(this.personIndex.getZeroBased());
             }
-            Person personToEdit = lastShownList.get(this.personIndex.getZeroBased());
+
             Person deletedLogPerson = createdDeletedLogPerson(personToEdit, this.logIndex);
 
             // add to address book
@@ -308,27 +390,28 @@ public class DeleteLogCommand extends Command {
             DeleteLogDescriptor d = (DeleteLogDescriptor) other;
 
             // person index must be same
-            boolean isSamePerson;
-            if ((this.personIndex == null && d.personIndex != null)
-                    || this.personIndex != null && d.personIndex == null) {
-                return false;
-            }
-            isSamePerson = (this.personIndex == null && d.personIndex == null
-                    || this.personIndex.equals(d.personIndex));
+            boolean isSamePerson = bothNullOrEqual(this.personIndex, d.personIndex);
 
             // log index must be same
-            boolean isSameLog;
-            if ((this.logIndex == null && d.logIndex != null)
-                    || this.logIndex != null && d.logIndex == null) {
-                return false;
-            }
-            isSameLog = (this.logIndex == null && d.logIndex == null
-                    || this.logIndex.equals(d.logIndex));
+            boolean isSameLog = bothNullOrEqual(this.logIndex, d.logIndex);
+
+            // person to delete must be same
+            boolean isSamePersonByName = bothNullOrEqual(this.personWithNameToDeleteLog, d.personWithNameToDeleteLog);
 
             // remaining must be same
-            return (isSameLog && isSamePerson
+            return (isSameLog && isSamePerson && isSamePersonByName
                     && this.isForOnePerson == d.isForOnePerson
                     && this.isForDeletingAllLogs == d.isForDeletingAllLogs);
+        }
+
+        private static boolean bothNullOrEqual(Object propertyOfOne, Object propertyOfOther) {
+            if ((propertyOfOne == null && propertyOfOther != null)
+                    || propertyOfOne != null && propertyOfOther == null) {
+                return false;
+            }
+            return (propertyOfOne == null && propertyOfOther == null
+                    || propertyOfOne.equals(propertyOfOther));
+
         }
     }
 
