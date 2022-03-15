@@ -11,7 +11,7 @@ import seedu.address.model.ReadOnlyEventBook;
 import seedu.address.model.event.DateTime;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Description;
+import seedu.address.model.common.Description;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
