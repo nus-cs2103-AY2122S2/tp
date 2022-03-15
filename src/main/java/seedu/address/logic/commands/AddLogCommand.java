@@ -34,7 +34,7 @@ public class AddLogCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a log to an existing friend in Amigos. "
             + "Parameters: "
-            + "INDEX or " + PREFIX_NAME + "NAME"
+            + "INDEX ? " + PREFIX_NAME + "NAME "
             + PREFIX_TITLE + "TITLE"
             + " [" + PREFIX_DESCRIPTION + "DESCRIPTION]\n"
             + "Example: " + COMMAND_WORD + " "
