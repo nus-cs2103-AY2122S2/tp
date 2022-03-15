@@ -6,7 +6,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 public class Amount extends TransactionField {
-    public static final Prefix PREFIX = new Prefix("/a", true);
+    public static final Prefix PREFIX = new Prefix("a/", true);
     public static final String MESSAGE_CONSTRAINT = "Transaction amount must be "
             + "numeric and the number specified "
             + "must be greater than 0 (zero)";

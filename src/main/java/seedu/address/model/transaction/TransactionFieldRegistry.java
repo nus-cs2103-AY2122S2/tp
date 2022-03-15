@@ -19,7 +19,7 @@ public class TransactionFieldRegistry {
 
         parsers.put(Amount.PREFIX, Amount::new);
         parsers.put(DueDate.PREFIX, DueDate::new);
-        parsers.put(TransactionDate.PREFIX, DueDate::new);
+        parsers.put(TransactionDate.PREFIX, TransactionDate::new);
 
         // --- Do not modify below this line unless you know what you're doing. (Trust me, you don't.) ---
         PARSERS = Collections.unmodifiableMap(parsers);
