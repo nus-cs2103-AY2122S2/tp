@@ -26,7 +26,7 @@ public class AddCommand extends Command {
             + "Parameters: " + TYPE_STUDENT + " "
             + PREFIX_ID + "STUDENT_ID "
             + PREFIX_NAME + "NAME "
-            + PREFIX_TELEGRAM + "PHONE_NUMBER "
+            + PREFIX_TELEGRAM + "TELEGRAM_ID "
             + PREFIX_EMAIL + "EMAIL "
             + "Example: " + COMMAND_WORD + " "
             + TYPE_STUDENT + " "
