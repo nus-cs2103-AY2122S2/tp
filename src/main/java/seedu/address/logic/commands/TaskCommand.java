@@ -37,7 +37,7 @@ public class TaskCommand extends Command {
 
     /**
      * Constructs a new TaskCommand.
-     * @param studentId the student ID of the student to be assigned. //TODO
+     * @param studentId the student ID of the student to display the tasks of.
      */
     public TaskCommand(StudentId studentId) {
         requireNonNull(studentId);
