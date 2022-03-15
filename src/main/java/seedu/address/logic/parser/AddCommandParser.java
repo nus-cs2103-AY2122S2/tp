@@ -56,7 +56,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 : null;
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, description, tagList);
+        Person person = new Person(name, phone, email, address, description, tagList, null); // explicitly no logs
 
         return new AddCommand(person);
     }

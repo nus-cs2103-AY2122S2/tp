@@ -14,6 +14,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Log;
 import seedu.address.model.person.Name;
@@ -55,9 +56,6 @@ public class AddLogCommand extends Command {
         this.addLogDescriptor = addLogDescriptor;
     }
 
-//    public AddLogCommand(Name name, AddLogDescriptor addLogDescriptor) {
-//
-//    }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -93,9 +91,10 @@ public class AddLogCommand extends Command {
         Phone phone = personToEdit.getPhone();
         Email email = personToEdit.getEmail();
         Address address = personToEdit.getAddress();
+        Description description = personToEdit.getDescription();
         Set<Tag> tags = personToEdit.getTags();
         List<Log> updatedLogs = addLogDescriptor.getLogsAfterAdd(personToEdit); // main logic encompassed here
-        return new Person(name, phone, email, address, tags, updatedLogs);
+        return new Person(name, phone, email, address, description, tags, updatedLogs);
     }
 
     @Override
