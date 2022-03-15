@@ -15,7 +15,9 @@ public class SortCommand extends Command {
 
     private final String columnName;
 
-
+    /**
+     * @param columnName first letter of the column to sort the pet list by
+     */
     public SortCommand(String columnName) {
         this.columnName = columnName;
     }

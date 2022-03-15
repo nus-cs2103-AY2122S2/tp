@@ -38,7 +38,8 @@ public class UniquePetList implements Iterable<Pet> {
     }
 
     /**
-     * Sort list of pets by name using the comparator in the Name class.
+     * Sort list of pets by columnName using the comparators in the respective columns.
+     * As of now, the columnName can either be "o" (owner name) or "n" (pet name).
      */
     public void sortPetList(String columnName) {
         Comparator<Pet> petNameComparator = Comparator.comparing(Pet::getName);
