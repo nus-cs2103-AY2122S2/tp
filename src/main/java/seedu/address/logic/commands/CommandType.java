@@ -6,6 +6,7 @@ import seedu.address.logic.parser.contact.AddContactCommandParser;
 import seedu.address.logic.parser.contact.ViewContactCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.prescription.AddPrescriptionCommandParser;
+import seedu.address.logic.parser.prescription.ViewPrescriptionCommandParser;
 
 public enum CommandType {
     DEFAULT, CONTACT, MEDICAL, CONSULTATION, PRESCRIPTION, TEST;
@@ -90,7 +91,7 @@ public enum CommandType {
         case CONSULTATION:
             throw new ParseException("WIP: Consultation type");
         case PRESCRIPTION:
-            throw new ParseException("WIP: Prescription type");
+            return new ViewPrescriptionCommandParser().parse(arguments);
         case TEST:
             throw new ParseException("WIP: Test type");
         default:

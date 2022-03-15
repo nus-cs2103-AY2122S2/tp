@@ -16,8 +16,6 @@ public class PrescriptionCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    private Label nric;
-    @FXML
     private Label id;
     @FXML
     private Label drugName;
@@ -33,7 +31,6 @@ public class PrescriptionCard extends UiPart<Region> {
         super(FXML);
         this.prescription = prescription;
         id.setText(displayedIndex + ". ");
-        nric.setText(prescription.getPrescriptionTarget().value);
         drugName.setText(prescription.getDrugName().drugName);
         date.setText(prescription.getPrescriptionDate().toString());
         instruction.setText(prescription.getInstruction().value);

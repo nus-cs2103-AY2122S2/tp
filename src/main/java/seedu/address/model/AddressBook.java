@@ -93,6 +93,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(prescription);
         return prescriptions.contains(prescription);
     }
+    public void setPrescriptions(Prescription target, Prescription editedPrescription) {
+        requireNonNull(editedPrescription);
+        prescriptions.setPrescription(target, editedPrescription);
+    }
 
     /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.

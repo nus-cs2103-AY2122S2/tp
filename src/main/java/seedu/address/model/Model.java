@@ -79,6 +79,7 @@ public interface Model {
     void addPerson(Patient patient);
     void addPrescription(Prescription prescription);
     boolean hasPrescription(Prescription prescription);
+    void setPrescription(Prescription target, Prescription editedPrescription);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
@@ -96,7 +97,6 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Patient> predicate);
-    void updateFilteredPrescriptionList(Predicate<Prescription> predicate);
 
     /**
      * Returns true if a contact with the same identity as {@code contact} exists in the address book.
@@ -131,4 +131,5 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredContactList(Predicate<Contact> predicate);
+    void updateFilteredPrescriptionList(Predicate<Prescription> predicate);
 }

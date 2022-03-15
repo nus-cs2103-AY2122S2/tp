@@ -130,6 +130,11 @@ public class ModelManager implements Model {
         requireNonNull(prescription);
         return addressBook.hasPrescription(prescription);
     }
+    @Override
+    public void setPrescription(Prescription target, Prescription editedPrescription) {
+        requireAllNonNull(target, editedPrescription);
+        addressBook.setPrescriptions(target, editedPrescription);
+    }
 
     @Override
     public ObservableList<Prescription> getFilteredPrescriptionList() {
