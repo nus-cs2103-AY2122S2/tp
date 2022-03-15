@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
 import unibook.commons.core.index.Index;
@@ -14,6 +15,7 @@ import unibook.model.module.ModuleCode;
 import unibook.model.module.ModuleName;
 import unibook.model.person.Email;
 import unibook.model.person.Name;
+import unibook.model.person.Office;
 import unibook.model.person.Phone;
 import unibook.model.tag.Tag;
 
@@ -108,7 +110,7 @@ public class ParserUtil {
      */
     public static ModuleCode parseModuleCode(String moduleCode) throws ParseException {
         requireNonNull(moduleCode);
-        String trimmedCode = moduleCode.trim();
+        String trimmedCode = moduleCode.trim().toUpperCase(Locale.ROOT);
         if (!ModuleCode.isValidModuleCode(trimmedCode)) {
             throw new ParseException(ModuleCode.MESSAGE_CONSTRAINTS);
         }
@@ -144,7 +146,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> modules} into a {@code Set<Module>}.
+     * Parses {@code Collection<String> modules} into a single {@code Set<Module>}.
      */
     public static Set<Module> parseModules(Collection<String> modules) throws ParseException {
         requireNonNull(modules);
@@ -159,5 +161,33 @@ public class ParserUtil {
         Module newmod = new Module(modName, modCode);
         moduleSet.add(newmod);
         return moduleSet;
+    }
+
+    /**
+     * Parses {@code Collection<String> modules} into a {@code Set<ModuleCode>}.
+     */
+    public static Set<ModuleCode> parseMultipleModules(Collection<String> moduleCodes) throws ParseException {
+        requireNonNull(moduleCodes);
+        final Set<ModuleCode> moduleSet = new HashSet<>();
+        if (moduleCodes.toArray().length == 0) {
+            return moduleSet;
+        }
+        for (String moduleCode : moduleCodes) {
+            ModuleCode mc = new ModuleCode(moduleCode.toUpperCase());
+            moduleSet.add(mc);
+        }
+        return moduleSet;
+    }
+
+    /**
+     * Parses {@code String office} into an {@code Office}.
+     */
+    public static Office parseOffice(String office) throws ParseException {
+        requireNonNull(office);
+        String trimmedOffice = office.trim();
+        if (!Office.isValidOffice(trimmedOffice)) {
+            throw new ParseException(Office.MESSAGE_CONSTRAINTS);
+        }
+        return new Office(trimmedOffice);
     }
 }

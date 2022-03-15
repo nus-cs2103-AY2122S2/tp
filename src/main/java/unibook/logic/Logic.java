@@ -20,11 +20,15 @@ public interface Logic {
      * Executes the command and returns the result.
      *
      * @param commandText The command as entered by the user.
+     * @param isPersonListShowing boolean value of whether person list is showing.
+     * @param isModuleListShowing boolean value of whether module list is showing.
      * @return the result of the command execution.
      * @throws CommandException If an error occurs during command execution.
      * @throws ParseException   If an error occurs during parsing.
      */
-    CommandResult execute(String commandText) throws CommandException, ParseException;
+    CommandResult execute(String commandText,
+                          Boolean isPersonListShowing,
+                          Boolean isModuleListShowing) throws CommandException, ParseException;
 
     /**
      * Returns the UniBook.

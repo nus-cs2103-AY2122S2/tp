@@ -15,7 +15,8 @@ public class ListCommand extends Command {
 
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model, Boolean isPersonListShowing,
+                                 Boolean isModuleListShowing) {
         requireNonNull(model);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(MESSAGE_SUCCESS);
