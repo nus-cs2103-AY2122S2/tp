@@ -1,8 +1,8 @@
 package seedu.address.logic.commands.interview;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
 
 import java.time.LocalDateTime;
 import java.util.List;
