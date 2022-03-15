@@ -8,6 +8,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import org.junit.jupiter.api.Test;
 
 public class IndexTest {
+    private static final int INCREMENT_VALUE = 2;
 
     @Test
     public void createOneBasedIndex() {
@@ -35,6 +36,34 @@ public class IndexTest {
         // convert from zero-based index to one-based index
         assertEquals(1, Index.fromZeroBased(0).getOneBased());
         assertEquals(6, Index.fromZeroBased(5).getOneBased());
+    }
+
+    @Test
+    public void testIncrement() {
+        final Index zeroBased = Index.fromZeroBased(2);
+        final Index oneBased = Index.fromOneBased(2);
+        final Index zeroBasedHigh = Index.fromZeroBased(6);
+        final Index oneBasedHigh = Index.fromOneBased(6);
+
+        // check equality for zero based low value
+        zeroBased.increment(INCREMENT_VALUE);
+        assertEquals(4, zeroBased.getZeroBased());
+        assertEquals(5, zeroBased.getOneBased());
+
+        // check equality for zero based high value
+        zeroBasedHigh.increment(INCREMENT_VALUE);
+        assertEquals(8, zeroBasedHigh.getZeroBased());
+        assertEquals(9, zeroBasedHigh.getOneBased());
+
+        // check equality for one based low value
+        oneBased.increment(INCREMENT_VALUE);
+        assertEquals(3, oneBased.getZeroBased());
+        assertEquals(4, oneBased.getOneBased());
+
+        // check equality for one based high value
+        oneBasedHigh.increment(INCREMENT_VALUE);
+        assertEquals(7, oneBasedHigh.getZeroBased());
+        assertEquals(8, oneBasedHigh.getOneBased());
     }
 
     @Test

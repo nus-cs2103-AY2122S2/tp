@@ -168,7 +168,7 @@ public class ParserUtil {
     public static Info parseInfo(String info) throws ParseException {
         requireNonNull(info);
         String trimmedInfo = info.trim();
-        if (!PrevDateMet.isValidPrevDateMet(trimmedInfo)) {
+        if (!Info.isValidInfo(trimmedInfo)) {
             throw new ParseException(Info.MESSAGE_CONSTRAINTS);
         }
         return new Info(trimmedInfo);
