@@ -116,7 +116,7 @@ Format: `filter l/LAB_NUMBER s/LAB_STATUS`
 ### Lab-related features
 
 #### Adding a Lab : `labadd`
-Adds a Lab to every student. Shows up as a tag on each student’s entry. By default, the tag will be colored red for “unsubmitted”. 
+Adds a Lab to every student. Shows up as a tag on each student’s entry. By default, the tag will be colored red for “unsubmitted”.
 The tags can subsequently be colored different colors to represent different statuses e.g. unsubmitted = red, submitted = yellow, graded = green.
 LAB_NUMBER must be a positive integer.
 
