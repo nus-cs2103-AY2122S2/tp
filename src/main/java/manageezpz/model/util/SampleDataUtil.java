@@ -6,8 +6,12 @@ import manageezpz.model.person.Email;
 import manageezpz.model.person.Name;
 import manageezpz.model.person.Person;
 import manageezpz.model.person.Phone;
+import manageezpz.model.task.Date;
+import manageezpz.model.task.Deadline;
 import manageezpz.model.task.Description;
+import manageezpz.model.task.Event;
 import manageezpz.model.task.Task;
+import manageezpz.model.task.Time;
 import manageezpz.model.task.Todo;
 
 /**
@@ -28,9 +32,10 @@ public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         return new Task[] {
             new Todo(new Description("Read Book")),
-            new Todo(new Description("Return Book")),
-            new Todo(new Description("Read Genshin Guides")),
-            new Todo(new Description("Do Daily Commissions")),
+            new Deadline(new Description("Finish 160 Resins in Genshin"),
+                    new Date("2022-03-15"), new Time("1800")),
+            new Event(new Description("Watch Netflix"), new Date("2022-03-15"),
+                    new Time("1200"), new Time("2359"))
         };
     }
     public static ReadOnlyAddressBook getSampleAddressBook() {
@@ -43,5 +48,4 @@ public class SampleDataUtil {
         }
         return sampleAb;
     }
-
 }

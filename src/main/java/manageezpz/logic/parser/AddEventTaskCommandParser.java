@@ -33,6 +33,9 @@ public class AddEventTaskCommandParser implements Parser<AddEventTaskCommand> {
 
         String atDateTime = argMultimapEvent.getValue(PREFIX_TIME).get();
         String[] parseAtDateTime = atDateTime.split(" ");
+        if (parseAtDateTime.length != 3) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventTaskCommand.MESSAGE_USAGE));
+        }
         Date date = ParserUtil.parseDate(parseAtDateTime[0]);
         Time startTime = ParserUtil.parseTime(parseAtDateTime[1]);
         Time endTime = ParserUtil.parseTime(parseAtDateTime[2]);
