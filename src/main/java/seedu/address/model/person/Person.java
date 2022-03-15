@@ -41,6 +41,9 @@ public class Person {
         this.tags.addAll(tags);
     }
 
+    /**
+     * Copies a person object.
+     */
     public static Person copyPerson(Person personToCopy) {
         Name copiedName = personToCopy.getName();
         Phone copiedPhone = personToCopy.getPhone();

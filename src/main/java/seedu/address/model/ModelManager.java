@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.Stack;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -12,7 +11,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
 
 /**
@@ -21,15 +19,13 @@ import seedu.address.model.person.Person;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    public static final String UNABLE_TO_UNDO = "Command cannot be undone";
+    private static final String UNABLE_TO_UNDO = "Command cannot be undone";
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
-    private Stack<String> pastCommands;
-    private Person copy;
-    private Person targetCopy;
+    private AddressBook backup;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -42,7 +38,6 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        this.pastCommands = new Stack<>();
     }
 
     public ModelManager() {
@@ -88,6 +83,7 @@ public class ModelManager implements Model {
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
+        backup = copyAddressBook();
         this.addressBook.resetData(addressBook);
     }
 
@@ -104,62 +100,40 @@ public class ModelManager implements Model {
 
     @Override
     public void deletePerson(Person target) {
-        copy = Person.copyPerson(target);
+        backup = copyAddressBook();
         addressBook.removePerson(target);
-        pastCommands.add("delete");
     }
 
     @Override
     public void addPerson(Person person) {
+        backup = copyAddressBook();
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        pastCommands.add("add");
     }
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
+        backup = copyAddressBook();
         requireAllNonNull(target, editedPerson);
-        copy = Person.copyPerson(target);
-        targetCopy = Person.copyPerson(editedPerson);
         addressBook.setPerson(target, editedPerson);
-        pastCommands.add("edit");
     }
 
     @Override
-    public void undoCommand() throws CommandException {
-        String prevCommand = pastCommands.pop();
-        switch (prevCommand) {
+    public void undoCommand() {
+        setAddressBook(backup);
+    }
 
-        case "add":
-            undoAddCommand();
-            break;
-
-        case "delete":
-            undoDeleteCommand();
-            break;
-
-        case "edit":
-            undoEditCommand();
-            break;
-
-        default:
-            throw new CommandException(UNABLE_TO_UNDO);
+    /**
+     * Makes a deep copy of an AddressBook
+     */
+    public AddressBook copyAddressBook() {
+        AddressBook copiedAddressBook = new AddressBook();
+        int currAddressBookSize = addressBook.getPersonList().size();
+        for (int i = 0; i < currAddressBookSize; i++) {
+            Person copiedPerson = Person.copyPerson(addressBook.getPersonList().get(i));
+            copiedAddressBook.addPerson(copiedPerson);
         }
-    }
-
-    public void undoAddCommand() {
-        int targetIndex = addressBook.getPersonList().size() - 1;
-        Person toRemove = addressBook.getPersonList().get(targetIndex);
-        deletePerson(toRemove);
-    }
-
-    public void undoDeleteCommand() {
-        addPerson(copy);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-    }
-
-    public void undoEditCommand() {
-        setPerson(targetCopy, copy);
+        return copiedAddressBook;
     }
 
     //=========== Filtered Person List Accessors =============================================================
