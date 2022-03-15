@@ -373,7 +373,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. TrackBeau shows an error message.
 
       Use case resumes at step 3.
-  
+
 *{More to be added}*
 
 **Use case: user wishes to exit the application**

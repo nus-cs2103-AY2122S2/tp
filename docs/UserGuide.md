@@ -110,7 +110,7 @@ Finds customers whose names contain any of the given keywords.
 
 Format: `find KEYWORDTYPE KEYWORD [MORE_KEYWORDS]`
 
-* Keyword types available: name, phone, skintype, hairtype, staffpref, servicepref & allergies 
+* Keyword types available: name, phone, skintype, hairtype, staffpref, servicepref & allergies
 * The search is case-insensitive. e.g `john` will match `john`
 * Only the name is searched.
 * Only full words will be matched e.g. `john` will not match `joh`
