@@ -52,18 +52,18 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
     private final Index index;
-    private final EditEventDescriptor editPersonDescriptor;
+    private final EditPersonDescriptor editPersonDescriptor;
 
     /**
      * @param index                of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
-    public EditCommand(Index index, EditEventDescriptor editPersonDescriptor) {
+    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(index);
         requireNonNull(editPersonDescriptor);
 
         this.index = index;
-        this.editPersonDescriptor = new EditEventDescriptor(editPersonDescriptor);
+        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
     @Override
@@ -91,7 +91,7 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditEventDescriptor editPersonDescriptor) {
+    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
@@ -125,7 +125,7 @@ public class EditCommand extends Command {
      * Stores the details to edit the person with. Each non-empty field value will replace the
      * corresponding field value of the person.
      */
-    public static class EditEventDescriptor {
+    public static class EditPersonDescriptor {
         private Name name;
         private Phone phone;
         private Email email;
@@ -133,14 +133,14 @@ public class EditCommand extends Command {
         private Set<Tag> tags;
         private List<Log> logs;
 
-        public EditEventDescriptor() {
+        public EditPersonDescriptor() {
         }
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditEventDescriptor(EditEventDescriptor toCopy) {
+        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
@@ -230,12 +230,12 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditEventDescriptor)) {
+            if (!(other instanceof EditPersonDescriptor)) {
                 return false;
             }
 
             // state check
-            EditEventDescriptor e = (EditEventDescriptor) other;
+            EditPersonDescriptor e = (EditPersonDescriptor) other;
 
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())

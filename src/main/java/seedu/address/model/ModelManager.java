@@ -177,10 +177,10 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setEvent(Event target, Event editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void setEvent(Event target, Event editedEvent) {
+        requireAllNonNull(target, editedEvent);
 
-        eventBook.setEvent(target, editedPerson);
+        eventBook.setEvent(target, editedEvent);
     }
 
     //=========== List Accessors ===========================================================================
