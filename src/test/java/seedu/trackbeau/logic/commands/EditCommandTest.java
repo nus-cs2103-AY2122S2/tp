@@ -51,16 +51,16 @@ public class EditCommandTest {
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
-        Index indexLastPerson = Index.fromOneBased(model.getFilteredCustomerList().size());
-        Customer lastCustomer = model.getFilteredCustomerList().get(indexLastPerson.getZeroBased());
+        Index indexLastCustomer = Index.fromOneBased(model.getFilteredCustomerList().size());
+        Customer lastCustomer = model.getFilteredCustomerList().get(indexLastCustomer.getZeroBased());
 
-        CustomerBuilder personInList = new CustomerBuilder(lastCustomer);
-        Customer editedCustomer = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+        CustomerBuilder customerInList = new CustomerBuilder(lastCustomer);
+        Customer editedCustomer = customerInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withStaffs(VALID_STAFF_JANE).withServices(VALID_SERVICE_ACNE).build();
 
         EditCustomerDescriptor descriptor = new EditCustomerDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withStaffs(VALID_STAFF_JANE).withServices(VALID_SERVICE_ACNE).build();
-        EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
+        EditCommand editCommand = new EditCommand(indexLastCustomer, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CUSTOMER_SUCCESS, editedCustomer);
 
@@ -74,8 +74,8 @@ public class EditCommandTest {
     public void execute_someFieldsSpecifiedRemovedUnfilteredList_success() {
         Customer secondCustomer = model.getFilteredCustomerList().get(INDEX_SECOND_CUSTOMER.getZeroBased());
 
-        CustomerBuilder personInList = new CustomerBuilder(secondCustomer);
-        Customer editedCustomer = personInList.withServices().withStaffs().build();
+        CustomerBuilder customerInList = new CustomerBuilder(secondCustomer);
+        Customer editedCustomer = customerInList.withServices().withStaffs().build();
 
         EditCustomerDescriptor descriptor = new EditCustomerDescriptorBuilder().withServices().withStaffs().build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_CUSTOMER, descriptor);
