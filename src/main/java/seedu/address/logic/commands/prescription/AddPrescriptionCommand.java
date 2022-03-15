@@ -37,7 +37,7 @@ public class AddPrescriptionCommand extends Command {
             + PREFIX_INSTRUCTION + "2 tablets after meal everyday ";
 
     public static final String MESSAGE_SUCCESS = "New medical prescription added: %1$s";
-    public static final String MESSAGE_DUPLICATE_CONTACT = "This medical prescription already exist";
+    public static final String MESSAGE_DUPLICATE_PRESCRIPTION = "This medical prescription already exist";
     public static final String MESSAGE_MISSING_PATIENT = "This patient does not exists in Medbook";
 
     private final Nric nric;
@@ -63,7 +63,7 @@ public class AddPrescriptionCommand extends Command {
         }
 
         if (model.hasPrescription(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_CONTACT);
+            throw new CommandException(MESSAGE_DUPLICATE_PRESCRIPTION);
         }
 
         model.addPrescription(toAdd);

@@ -17,10 +17,9 @@ public class JsonAdaptedPrescription {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Contact's %s field is missing!";
 
     private final String nric;
-    private final String drugname;
+    private final String drugName;
     private final String date;
     private final String instruction;
-
     /**
      * Constructs a {@code JsonAdaptedPrescription} with the given prescription details.
      */
@@ -29,7 +28,7 @@ public class JsonAdaptedPrescription {
                               @JsonProperty("date") String date, @JsonProperty("instruction") String instruction) {
 
         this.nric = nric;
-        this.drugname = drugname;
+        this.drugName = drugname;
         this.date = date;
         this.instruction = instruction;
     }
@@ -39,7 +38,7 @@ public class JsonAdaptedPrescription {
      */
     public JsonAdaptedPrescription(Prescription source) {
         nric = source.getPrescriptionTarget().value;
-        drugname = source.getDrugName().drugName;
+        drugName = source.getDrugName().drugName;
         date = source.getPrescriptionDate().toString();
         instruction = source.getInstruction().value;
     }
@@ -59,14 +58,14 @@ public class JsonAdaptedPrescription {
         }
         final Nric modelNric = new Nric(nric);
 
-        if (drugname == null) {
+        if (drugName == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     DrugName.class.getSimpleName()));
         }
-        if (!DrugName.isValidName(drugname)) {
+        if (!DrugName.isValidName(drugName)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
-        final DrugName modelDrugName = new DrugName(drugname);
+        final DrugName modelDrugName = new DrugName(drugName);
 
         if (date == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,

@@ -20,7 +20,7 @@ public class PrescriptionCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label drugname;
+    private Label drugName;
     @FXML
     private Label date;
     @FXML
@@ -34,7 +34,7 @@ public class PrescriptionCard extends UiPart<Region> {
         this.prescription = prescription;
         id.setText(displayedIndex + ". ");
         nric.setText(prescription.getPrescriptionTarget().value);
-        drugname.setText(prescription.getDrugName().drugName);
+        drugName.setText(prescription.getDrugName().drugName);
         date.setText(prescription.getPrescriptionDate().toString());
         instruction.setText(prescription.getInstruction().value);
     }
