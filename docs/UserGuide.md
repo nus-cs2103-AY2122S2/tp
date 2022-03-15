@@ -51,6 +51,17 @@ Format: `add n/NAME_OF_PET o/OWNER_NAME p/PHONE_NUMBER a/ADDRESS`
 Examples:
 * `add n/Mojo n/John Doe p/98765432 a/523 Woodlands ave 5, #01-01`.
 
+### Sort pets: `sort`
+
+Retrieves a sorted list of pets. Users can choose to either sort them by owner name or pet name. 
+
+Format: `sort [FIRST_LETTER_OF_COLUMN]`
+* Since we can only sort the pet list by owner name or pet name, the only commands available currently are `sort /o` and `sort /n`.
+
+Examples: 
+* `sort /o`
+
+
 ### Find pet details: `find`
 
 Retrieve and return a list of all pet with similar name to keywords and their corresponding details from the database. 

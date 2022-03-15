@@ -76,10 +76,10 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Sorts the list of pets in the address book.
-     * Currently, it will sort the list of pets in alphabetical order according to their name.
+     * Currently, it will sort the list of pets according to the field provided.
      */
-    public void sortPets() {
-        pets.sortPetList();
+    public void sortPets(String field) {
+        pets.sortPetList(field);
     }
 
     /**
