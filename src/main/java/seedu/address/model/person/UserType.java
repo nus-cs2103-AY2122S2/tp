@@ -11,6 +11,7 @@ public class UserType {
 
     public static final String VALIDATION_REGEX = "buyer|seller";
     public static final String MESSAGE_CONSTRAINTS = "User type name should either be \"buyer\" or \"seller\" ";
+    public static final String MESSAGE_USAGE = "Either property or preference is inputted, not both or none!";
 
     public final String value;
 
