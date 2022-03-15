@@ -56,8 +56,8 @@ public class ApplicantCard extends UiPart<Region> {
         phone.setText(applicant.getPhone().value);
         address.setText(applicant.getAddress().value);
         email.setText(applicant.getEmail().value);
-        gender.setText("G");
-        age.setText("99 years old");
+        gender.setText(applicant.getGender().value.equals("M") ? "Male" : "Female");
+        age.setText(applicant.getAge().value + " years old");
         applicant.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

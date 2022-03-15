@@ -29,7 +29,7 @@
         <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
       </HBox>
       <FlowPane fx:id="tags" />
-         <HBox alignment="CENTER_LEFT" spacing="15">
+         <HBox alignment="CENTER_LEFT" spacing="20">
             <children>
                <Label fx:id="gender" styleClass="cell_small_label" text="\$gender" />
                <Label fx:id="age" styleClass="cell_small_label" text="\$age" />
