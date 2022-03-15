@@ -17,13 +17,22 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** The application should list only the person. */
+    private final boolean showPerson;
+
+    /** The application should list only the event. */
+    private final boolean showEvent;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit,
+                         boolean showPerson, boolean showEvent) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.showPerson = showPerson;
+        this.showEvent = showEvent;
     }
 
     /**
@@ -31,7 +40,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -44,6 +53,14 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public boolean isShowPerson() {
+        return showPerson;
+    }
+
+    public boolean isShowEvent() {
+        return showEvent;
     }
 
     @Override
@@ -60,12 +77,14 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && showPerson == showPerson
+                && showEvent == showEvent;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, showHelp, exit, showPerson, showEvent);
     }
 
 }
