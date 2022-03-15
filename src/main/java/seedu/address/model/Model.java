@@ -88,4 +88,21 @@ public interface Model {
 
     void sortFilteredClientList();
 
+    //========== For addbuyer============//
+
+    /**
+     * Checks if the same buyer already exists in AgentSee.
+     *
+     * @param buyer The buyer to be checked.
+     * @return Whether buyer exists in AgentSee.
+     */
+    boolean hasBuyer(Buyer buyer);
+
+    /**
+     * Adds a new buyer to AgentSee.
+     *
+     * @param buyer The buyer to be added.
+     */
+    void addBuyer(Buyer buyer);
+
 }
