@@ -15,6 +15,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.StudentId;
 import seedu.address.model.person.Telegram;
 import seedu.address.model.person.lab.Lab;
+import seedu.address.model.person.lab.LabStatus;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -172,6 +173,30 @@ public class ParserUtil {
         }
 
         return new Lab(trimmedLab);
+    }
+
+    /**
+     * Parses a {@code String labStatus} into a {@code LabStatus}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static LabStatus parseLabStatus(String labStatus) throws ParseException {
+        requireNonNull(labStatus);
+        String trimmedLabStatus = labStatus.trim();
+
+        if (!LabStatus.isValidLabStatus(trimmedLabStatus)) {
+            throw new ParseException(LabStatus.MESSAGE_CONSTRAINTS);
+        }
+
+        switch(trimmedLabStatus) {
+        case "u":
+            return LabStatus.UNSUBMITTED;
+        case "s":
+            return LabStatus.SUBMITTED;
+        case "g":
+            return LabStatus.GRADED;
+        default:
+            throw new ParseException(Lab.MESSAGE_CONSTRAINTS);
+        }
     }
 
 }

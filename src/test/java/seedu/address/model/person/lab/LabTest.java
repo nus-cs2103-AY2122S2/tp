@@ -62,4 +62,12 @@ public class LabTest {
         Lab stub = new Lab("1");
         assertThrows(LabNotSubmittedException.class, stub::gradeLab);
     }
+
+    @Test
+    public void equals_success() {
+        Lab lab1 = (new Lab("1")).of("SUBMITTED");
+        Lab lab1copy = (new Lab("1")).of("SUBMITTED");
+        assertTrue(lab1.equals(lab1copy));
+    }
+
 }

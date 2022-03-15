@@ -106,7 +106,23 @@ public class Lab {
     }
 
     /**
-     * Returns true if both students have the same name.
+     * Returns a new immutable {@code Lab} with the specified {@code LabStatus}
+     */
+    public Lab thatIs(LabStatus labStatus) {
+        switch (labStatus) {
+        case UNSUBMITTED:
+            return new Lab(String.valueOf(labNumber), LabStatus.UNSUBMITTED);
+        case SUBMITTED:
+            return new Lab(String.valueOf(labNumber), LabStatus.SUBMITTED);
+        case GRADED:
+            return new Lab(String.valueOf(labNumber), LabStatus.GRADED);
+        default:
+            throw new IllegalArgumentException("Did not expect " + labStatus.name());
+        }
+    }
+
+    /**
+     * Returns true if both students have the same lab.
      * This defines a weaker notion of equality between two students.
      */
     public boolean isSameLab(Lab otherLab) {
@@ -127,7 +143,8 @@ public class Lab {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Lab // instanceof handles nulls
-                && labNumber == (((Lab) other).labNumber)); // state check
+                && labNumber == (((Lab) other).labNumber) // labNumber check
+                && labStatus == (((Lab) other).labStatus)); // labStatus check
     }
 
 }

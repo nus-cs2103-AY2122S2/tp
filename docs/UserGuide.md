@@ -44,7 +44,7 @@ If you can type fast, TAB can get your Lab management tasks done faster than tra
     - [Add, edit, delete students](#adding-a-student--add-coming-soon)
     - [List students](#listing-all-students--list)
     - [Find students](#locating-students-by-name--find)
-    - [Filter students based on status of lab tags](#filter-by-status-of-individual-labs--filter-labx-lab-status-coming-soon)
+    - [Filter students based on status of lab tags](#filter-by-status-of-individual-labs--filter-labx-lab-status)
 - [Manage labs](#lab-related-features)
     - [Add labs](#adding-a-lab--labadd-labx-coming-soon)
     - [Change status of labs](#markingunmarking-individual-labs-as-graded-labgrade-student-index-labx-coming-soon)
@@ -72,7 +72,7 @@ TAddressBook data are saved as a JSON file `[JAR file location]/data/addressbook
 #### Adding a student : `add` [coming soon]
 Adds a student to the address book with the necessary attributes.
 
-Format: `add n/NAME g/GITHUB t/TELEGRAM_HANDLE s/StudentID`
+Format: `add n/NAME g/GITHUB t/TELEGRAM_HANDLE i/StudentID`
 
 #### Listing all students : `list`
 Lists all the students
@@ -99,8 +99,13 @@ Clears all entries from the TAddress book.
 
 Format: `clear`
 
-#### Filter (by status of individual labs) : `filter [Labx] [Lab status]` [coming soon]
-Filters students based on the status of their lab tags. STATUS e.g. unsubmitted = U, graded = G, etc
+#### Filter (by status of individual labs) : `filter [Labx] [Lab status]`
+Filters students based on the status of their lab tags.
+
+Lab status:
+* Unsubmitted = u
+* Submitted = s
+* Graded = g
 
 Format: `filter l/LAB s/STATUS`
 
@@ -142,3 +147,4 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+**Filter** | `filter [l/Labx] [s/LabStatus]`<br> e.g. `filter l/1 s/u`
