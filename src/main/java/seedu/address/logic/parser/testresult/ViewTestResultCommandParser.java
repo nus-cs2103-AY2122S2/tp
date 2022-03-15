@@ -7,7 +7,7 @@ import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Nric;
+import seedu.address.model.patient.Nric;
 
 import java.util.stream.Stream;
 
