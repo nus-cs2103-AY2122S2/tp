@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -42,9 +43,12 @@ public class AddLogCommand extends Command {
     public static final String MESSAGE_ADD_LOG_SUCCESS = "New log added!";
     public static final String MESSAGE_DUPLICATE_LOG = "This log already exists for this friend.";
     public static final String MESSAGE_INVALID_INDEX = Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+    public static final String MESSAGE_PERSON_NOT_FOUND = Messages.MESSAGE_INVALID_PERSON_NAME;
 
     private final Index index;
+    private final Person personWithNameToAddLog;
     private final AddLogDescriptor addLogDescriptor;
+    private final boolean byName;
 
     /**
      * Creates an AddLogCommand to add the specified {@code Log} to the
@@ -53,7 +57,17 @@ public class AddLogCommand extends Command {
     public AddLogCommand(Index index, AddLogDescriptor addLogDescriptor) {
         requireAllNonNull(index, addLogDescriptor);
         this.index = index;
+        this.personWithNameToAddLog = null;
         this.addLogDescriptor = addLogDescriptor;
+        this.byName = false;
+    }
+
+    public AddLogCommand(Name name, AddLogDescriptor addLogDescriptor) {
+        requireAllNonNull(name, addLogDescriptor);
+        this.personWithNameToAddLog = new Person(new Name(null));
+        this.index = null;
+        this.addLogDescriptor = addLogDescriptor;
+        this.byName = true;
     }
 
 
@@ -61,15 +75,36 @@ public class AddLogCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        // get list of persons from model
-        List<Person> lastShownList = model.getFilteredPersonList();
+        Person personToEdit;
 
-        // get person and modify
-        if (this.index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(MESSAGE_INVALID_INDEX);
+        if (this.byName) {
+
+            // find person with same name
+            List<Person> personsToEdit = model.getAddressBook()
+                    .getPersonList().stream()
+                    .filter(p -> p.isSamePerson(this.personWithNameToAddLog))
+                    .collect(Collectors.toList());
+
+            // if person not found, throw an error
+            if (personsToEdit.size() < 1) {
+                throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
+            }
+            assert (personsToEdit.size() == 1);
+            personToEdit = personsToEdit.get(0);
+
+        } else {
+
+            // get list of persons from model
+            List<Person> lastShownList = model.getFilteredPersonList();
+
+            // get person and modify
+            if (this.index.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(MESSAGE_INVALID_INDEX);
+            }
+            personToEdit = lastShownList.get(this.index.getZeroBased());
         }
 
-        Person personToEdit = lastShownList.get(this.index.getZeroBased());
+        // create person with added logs
         Person addedLogPerson = createAddedLogPerson(personToEdit, this.addLogDescriptor);
 
         // add to address book
@@ -111,8 +146,23 @@ public class AddLogCommand extends Command {
 
         // cast
         AddLogCommand a = (AddLogCommand) other;
-        return this.index.equals(a.index)
-                && this.addLogDescriptor.equals(a.addLogDescriptor);
+
+        // compare descriptors
+        if (!this.addLogDescriptor.equals(a.addLogDescriptor)) {
+            return false;
+        }
+
+        // compare name or index
+        if ((this.byName) && (a.byName)) {
+            assert ((this.index == null) && (a.index == null));
+            return this.personWithNameToAddLog.equals(a.personWithNameToAddLog);
+
+        } else if ((!this.byName) && (!a.byName)) {
+            assert ((this.personWithNameToAddLog == null) && (a.personWithNameToAddLog == null));
+            return this.index.equals(a.index);
+        }
+
+        return false;
     }
 
     @Override
