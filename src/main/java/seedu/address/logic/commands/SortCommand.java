@@ -34,14 +34,18 @@ public class SortCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PREFIX_TAG + " " + PREFIX_NAME
             + " " + PREFIX_ORDER + "desc" + "\n";
 
-    public static final String MESSAGE_SUCCESS = "Sorted Modules successfully: %s";
+    public static final String MESSAGE_SUCCESS = "Sorted successfully by %s order: %s";
 
     private final PersonComparator personComparator;
     private final List<Prefix> fields;
+    private final String order;
+    private final String successField;
     /**
      * @param fields modules to be deleted
      */
-    public SortCommand(List<Prefix> fields, String order) {
+    public SortCommand(List<Prefix> fields, String order, String successField) {
+        this.successField = successField;
+        this.order = order;
         this.fields = fields;
         this.personComparator = new PersonComparator(fields, order);
     }
@@ -50,16 +54,17 @@ public class SortCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.sortPerson(personComparator);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, fields.toString()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, order, successField));
     }
-
 
     @Override
     public boolean equals(Object other) {
         // short circuit if same object
         return (other instanceof SortCommand)
                 && this.fields.equals(((SortCommand) other).fields)
-                && this.personComparator.equals(((SortCommand) other).personComparator); // instanceof handles null
+                && this.personComparator.equals(((SortCommand) other).personComparator)
+                && this.successField.equals(((SortCommand) other).successField)
+                && this.order.equals(((SortCommand) other).order); // instanceof handles null
     }
 
     public static class PersonComparator implements Comparator<Person> {
