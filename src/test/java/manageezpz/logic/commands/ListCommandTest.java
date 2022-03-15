@@ -8,6 +8,7 @@ import static manageezpz.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import manageezpz.logic.parser.Prefix;
 import manageezpz.model.Model;
 import manageezpz.model.ModelManager;
 import manageezpz.model.UserPrefs;
