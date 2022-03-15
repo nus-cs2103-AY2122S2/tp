@@ -26,7 +26,7 @@ TAssist is a **desktop app for managing students and their participation in less
 
    * **`list student`** : Lists all students.
 
-   * **`add student`**`id/E0123456 n/John Doe p/98765432 e/johnd@example.com` : Adds a student named `John Doe` to the TAssist.
+   * **`add student`**`id/E0123456 n/John Doe e/johnd@example.com` : Adds a student named `John Doe` to the TAssist.
 
    * **`delete student`**`3` : Deletes the 3rd student shown in the listing of the entity.
 
@@ -44,16 +44,13 @@ TAssist is a **desktop app for managing students and their participation in less
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `n/NAME [t/TELEGRAM_ID]` can be used as `n/John Doe t/john_doe` or as `n/John Doe`.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `n/NAME e/EMAIL`, `e/EMAIL n/NAME` is also acceptable.
 
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
+  e.g. if you specify `t/john_doe t/johnny_doe`, only `t/johnny_doe` will be taken.
 
 * Extraneous parameters for commands that do not take in parameters will be ignored.<br>
   e.g. if the command specifies `list student 123`, it will be interpreted as `list student`.
@@ -66,10 +63,11 @@ TAssist is a **desktop app for managing students and their participation in less
 
 Adds a student to TAssist.
 
-Format: `add student id/STUDENT_ID n/NAME p/PHONE_NUMBER e/EMAIL`
+Format: `add student id/STUDENT_ID n/NAME e/EMAIL [t/TELEGRAM_ID]`
 
 Examples:
-* `add student id/E0123456 n/John Doe p/98765432 e/johnd@example.com`
+* `add student id/E0123456 n/John Doe e/johnd@example.com`
+* `add student id/E0123456 n/John Doe e/johnd@example.com t/john_doe`
 
 #### Adding a module: `add module`
 
@@ -210,8 +208,8 @@ _Details coming soon ..._
         <td>student</td>
         <td>
             <ul>
-                <li>syntax: <code>add student id/STUDENT_ID n/NAME t/TELEGRAM_ID e/EMAIL</code></li>
-                <li>e.g., <code>add student id/E0123456 n/John Doe t/john_doe e/johnd@example.com</code></li>
+                <li>syntax: <code>add student id/STUDENT_ID n/NAME e/EMAIL [t/TELEGRAM_ID]</code></li>
+                <li>e.g., <code>add student id/E0123456 n/John Doe e/johnd@example.com t/john_doe</code></li>
             </ul>
         </td>
     </tr>
