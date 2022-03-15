@@ -5,8 +5,6 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
 ### Brandon Kheng
@@ -14,8 +12,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/brelkh.png" width="200px">
 
 [[github](https://github.com/brelkh)]
+[[portfolio](team/brelkh.md)]
 
-* Role: Undecided
+* Role: Developer
 
 ### Benjamin Koh Wei Jie
 
