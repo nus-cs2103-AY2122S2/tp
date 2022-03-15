@@ -1,10 +1,9 @@
 package seedu.address.model.util;
 
-import seedu.address.model.person.Flag;
+import java.util.Comparator;
+
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PrevDateMet;
-
-import java.util.Comparator;
 
 /**
  * Comparator which compares the PrevDateMet of two persons.
