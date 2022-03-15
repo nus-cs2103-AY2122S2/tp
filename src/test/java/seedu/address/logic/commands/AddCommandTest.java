@@ -114,7 +114,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void sortPetList(String columnName) {
+        public void sortPetList(String field) {
             throw new AssertionError("This method should not be called.");
         }
 
