@@ -15,7 +15,7 @@ public class Lab {
             "Lab number should be a valid positive integer";
 
     /*
-     * Lab number has to be an Integer.
+     * Lab number has to be a positive Integer.
      */
     public static final String VALIDATION_REGEX = "\\d+";
 
@@ -87,13 +87,6 @@ public class Lab {
     }
 
     /**
-     * Returns a new immutable lab with the same lab number as this and the specified lab status.
-     */
-    public Lab of(LabStatus labStatus) {
-        return new Lab(String.valueOf(labNumber), labStatus);
-    }
-
-    /**
      * Returns true if both Labs have the same lab number.
      * This defines a weaker notion of equality between two Labs.
      */
@@ -114,7 +107,8 @@ public class Lab {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Lab // instanceof handles nulls
-                && labNumber == (((Lab) other).labNumber)); // state check
+                && labNumber == (((Lab) other).labNumber) // labNumber check
+                && labStatus == (((Lab) other).labStatus)); // labStatus check
     }
 
 }

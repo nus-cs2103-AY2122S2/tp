@@ -88,13 +88,13 @@ public class LabList implements Iterable<Lab> {
     public void setLab(Lab target, Lab editedLab) throws LabNotFoundException, DuplicateLabException {
         requireAllNonNull(target, editedLab);
 
+        if (target.equals(editedLab)) {
+            throw new DuplicateLabException();
+        }
+
         int index = internalList.indexOf(target);
         if (index == -1) {
             throw new LabNotFoundException(target.labNumber);
-        }
-
-        if (!target.equals(editedLab) && contains(editedLab)) {
-            throw new DuplicateLabException();
         }
 
         internalList.set(index, editedLab);

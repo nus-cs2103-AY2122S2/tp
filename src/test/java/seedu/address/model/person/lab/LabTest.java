@@ -44,9 +44,10 @@ public class LabTest {
     @Test
     public void editLabStatus_changeStatus_success() {
         Lab stub = new Lab("1");
+        stub = stub.editLabStatus(LabStatus.GRADED);
 
-        assertEquals(new Lab("1").of(LabStatus.GRADED), stub.editLabStatus(LabStatus.GRADED));
-        assertNotEquals(new Lab("1").of(LabStatus.SUBMITTED), stub);
+        assertEquals(new Lab("1").of(LabStatus.GRADED.name()), stub);
+        assertNotEquals(new Lab("1"), stub);
     }
 
     @Test

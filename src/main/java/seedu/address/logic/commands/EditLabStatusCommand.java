@@ -71,7 +71,7 @@ public class EditLabStatusCommand extends Command {
 
         try {
             listToEdit.setLab(listToEdit.getLabByLabNumber(labNumber),
-                    new Lab(String.valueOf(labNumber)).of(newStatus));
+                    new Lab(String.valueOf(labNumber)).of(newStatus.name()));
         } catch (LabNotFoundException e) {
             throw new CommandException(MESSAGE_INVALID_LAB_NUMBER);
         } catch (DuplicateLabException e) {
