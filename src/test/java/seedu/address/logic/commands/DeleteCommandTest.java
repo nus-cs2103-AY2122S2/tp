@@ -9,7 +9,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalNames.FULL_NAME_FIRST_PERSON;
 import static seedu.address.testutil.TypicalNames.NAME_INVALID_PERSON;
 import static seedu.address.testutil.TypicalNames.NAME_SECOND_PERSON;
-import static seedu.address.testutil.TypicalNames.SHORT_NAME_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -31,7 +30,7 @@ public class DeleteCommandTest {
     @Test
     public void execute_validNameUnfilteredList_success() {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(SHORT_NAME_FIRST_PERSON);
+        DeleteCommand deleteCommand = new DeleteCommand(FULL_NAME_FIRST_PERSON);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
 
@@ -53,7 +52,7 @@ public class DeleteCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(SHORT_NAME_FIRST_PERSON);
+        DeleteCommand deleteCommand = new DeleteCommand(FULL_NAME_FIRST_PERSON);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
 

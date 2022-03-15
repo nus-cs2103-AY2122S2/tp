@@ -118,11 +118,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public Index getPersonListIndex(List<Person> personList, Name name) {
         Index result = Index.fromZeroBased(0);
-        String personName = name.fullName;
+        String[] personName = name.fullName.split(" ");
+        personLoop:
         for (Person i : personList) {
             String currName = i.getName().fullName;
-            if (StringUtil.containsWordIgnoreCase(currName, personName)) {
-                break;
+            for (String word : personName) {
+                if (StringUtil.containsWordIgnoreCase(currName, word)) {
+                    break personLoop;
+                }
             }
             result.increment(1);
         }

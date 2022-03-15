@@ -7,7 +7,6 @@ import seedu.address.model.person.Name;
  */
 public class TypicalNames {
     public static final Name FULL_NAME_FIRST_PERSON = new Name("Alice Pauline");
-    public static final Name SHORT_NAME_FIRST_PERSON = new Name("Alice");
     public static final Name NAME_SECOND_PERSON = new Name("Benson");
     public static final Name NAME_INVALID_PERSON = new Name("Ferrari");
 }
