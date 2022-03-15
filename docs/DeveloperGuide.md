@@ -264,12 +264,12 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: 
+**Value proposition**:
 
 Keep track of students’ covid status. This is a central repository for covid status updating to ease the facilitation of
 management of NUS students across different faculties. It will be easier to read and update covid status.
 
-Every students’ info in one integrated application platform. The app will help to manage students across different 
+Every students’ info in one integrated application platform. The app will help to manage students across different
 faculties within NUS (no support for other schools).
 
 
@@ -290,7 +290,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | IT admin                                   | clear the system database          | quickly restore the initial state of the system and to start on a clean slate again             |
 | `* * *`  | IT admin                                   | edit a contact’s information       | can modify any change in contact details regarding a user          |
 | `* * *`  | Professors                                 | get the statistics of covid cases among different groups of students | Can use for further medical research |
-| `* *`    | IT admin                                   | seek help if unfamiliar with Tracey | straighten out any uncertainties regarding the usage of the system 
+| `* *`    | IT admin                                   | seek help if unfamiliar with Tracey | straighten out any uncertainties regarding the usage of the system
 | `* *`    | IT admin                                   | easily keep track and update  the covid status of students  | use data to inform relevant module lecturers and TAs |
 | `* *`    | IT admin                                   | see when a particular student started having covid symptoms | find who is the superspreader             |
 | `* *`    | IT admin                                   | store the date when the student tested positive for covid   | check the duration for which the student has to be isolated for                |
@@ -372,20 +372,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. The student info has an invalid format.
-  
+
     * 1a1. Tracey will inform user that he/she did not provide the correct information.
-      
+
     * 1a2. User provide the correct details in the correct format.
-    
+
 * 1b. The student to be added already exist in the list by Tracey.
-  
+
     * 1b1. Tracey inform user that the contact exist in her.
-    
+
         Use case ends
+
 * 1c. User adds multiple students in one go.
-  
+
     * 1c1. Tracey will list out a list of new students added with their info.
-      
+
         Use case ends
 
 **Use case: Edit information of a student**
@@ -408,7 +409,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2b. The given student name exists multiple places on the list.
 
     * 2b1. Tracey will inform user that he/she did not provide the correct information formatting.
-    
+
     * 2b2. User will key in the correct format to edit student.
 
 **Use case: Clear the system database**
@@ -508,8 +509,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Student Status**: A student detail that indicates whether the student has Covid-19 
-* **Health Risk Warning**: A warning that informs school and students for high health risk 
+* **Student Status**: A student detail that indicates whether the student has Covid-19
+* **Health Risk Warning**: A warning that informs school and students for high health risk
 * **Covid-19**: An infectious disease caused by the SARS-CoV-2 virus.
 * **NUS IT**: The information technology department at the National University of Singapore
 
