@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_ENTITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ACADEMIC_YEAR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
@@ -63,14 +63,15 @@ public class AddCommandParser implements Parser<AddCommand> {
         case TYPE_STUDENT:
             argMultimap = ArgumentTokenizer.tokenize(arguments, PREFIX_ID, PREFIX_NAME, PREFIX_TELEGRAM, PREFIX_EMAIL);
 
-            if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_NAME, PREFIX_TELEGRAM, PREFIX_EMAIL)
+            if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_NAME, PREFIX_EMAIL)
                     || !argMultimap.getPreamble().isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        AddCommand.MESSAGE_STUDENT_USAGE));
             }
 
             StudentId id = ParserUtil.parseStudentId(argMultimap.getValue(PREFIX_ID).get());
             Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-            Optional<Telegram> telegram = ParserUtil.parseTelegram(argMultimap.getValue(PREFIX_TELEGRAM).get());
+            Optional<Telegram> telegram = ParserUtil.parseTelegram(argMultimap.getValue(PREFIX_TELEGRAM));
             Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
 
             Student student = new Student(id, name, email, telegram);
@@ -82,7 +83,8 @@ public class AddCommandParser implements Parser<AddCommand> {
 
             if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_MODULE_CODE, PREFIX_ACADEMIC_YEAR)
                     || !argMultimap.getPreamble().isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        AddCommand.MESSAGE_MODULE_USAGE));
             }
 
             ModuleName moduleName = ParserUtil.parseModuleName(argMultimap.getValue(PREFIX_NAME).get());
@@ -98,7 +100,8 @@ public class AddCommandParser implements Parser<AddCommand> {
 
             if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_TYPE, PREFIX_MODULE_INDEX)
                     || !argMultimap.getPreamble().isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        AddCommand.MESSAGE_CLASS_USAGE));
             }
 
             ClassGroupId classGroupId = ParserUtil.parseClassGroupId(argMultimap.getValue(PREFIX_ID).get());
@@ -110,7 +113,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             return new AddCommand(classGroup);
 
         default:
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            throw new ParseException(MESSAGE_UNKNOWN_ENTITY);
         }
     }
 

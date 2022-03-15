@@ -6,6 +6,8 @@ package seedu.address.commons.core;
 public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
+    public static final String MESSAGE_UNKNOWN_ENTITY = "Unknown entity!\n"
+            + "Available entities: student | module | class";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_CLASS_GROUP_DISPLAYED_INDEX = "The class index provided is invalid";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The people index provided is invalid";
