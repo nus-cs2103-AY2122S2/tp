@@ -20,6 +20,7 @@ import seedu.contax.logic.commands.AddAppointmentCommand;
 import seedu.contax.logic.commands.AddCommand;
 import seedu.contax.logic.commands.AddTagCommand;
 import seedu.contax.logic.commands.AppointmentsBetweenCommand;
+import seedu.contax.logic.commands.ChainCommand;
 import seedu.contax.logic.commands.ClearCommand;
 import seedu.contax.logic.commands.Command;
 import seedu.contax.logic.commands.DeleteAppointmentCommand;
@@ -188,6 +189,14 @@ public class AddressBookParserTest {
                 instanceof DeleteAppointmentCommand);
     }
 
+    @Test
+    public void parseCommand_appointmentsBetween() throws Exception {
+        LocalDateTime refDateTime = APPOINTMENT_ALONE.getStartDateTime().value;
+        assertTrue(parser.parseCommand(AppointmentsBetweenCommand.COMMAND_WORD
+                + DateInputUtil.getDateRangeInput(refDateTime, refDateTime.plusMinutes(50)))
+                instanceof AppointmentsBetweenCommand);
+    }
+
     //Import/Export csv tests
     @Test
     public void parseCommand_importCsv() throws Exception {
@@ -203,11 +212,9 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_appointmentsBetween() throws Exception {
-        LocalDateTime refDateTime = APPOINTMENT_ALONE.getStartDateTime().value;
-        assertTrue(parser.parseCommand(AppointmentsBetweenCommand.COMMAND_WORD
-                + DateInputUtil.getDateRangeInput(refDateTime, refDateTime.plusMinutes(50)))
-                instanceof AppointmentsBetweenCommand);
+    public void parseCommand_chainCommand() throws Exception {
+        assertTrue(parser.parseCommand(ChainCommand.COMMAND_WORD + " " + ListCommand.COMMAND_WORD
+                + " && " + ListCommand.COMMAND_WORD) instanceof ChainCommand);
     }
 
     @Test

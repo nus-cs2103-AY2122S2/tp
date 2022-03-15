@@ -2,6 +2,7 @@ package seedu.contax.model.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.contax.testutil.Assert.assertThrows;
 
@@ -35,5 +36,35 @@ public class SearchTypeTest {
         assertTrue(SearchType.isValidType("email")); // email
         assertEquals(new SearchType("address").searchType, "address");
         assertTrue(SearchType.isValidType("address")); // address
+    }
+
+    @Test
+    public void stringConversion() {
+        assertEquals("name", new SearchType("name").toString());
+        assertEquals("phone", new SearchType("phone").toString());
+        assertEquals("email", new SearchType("email").toString());
+        assertEquals("address", new SearchType("address").toString());
+    }
+
+    @Test
+    public void objectEquality() {
+        SearchType reference1 = new SearchType("name");
+        SearchType reference2 = new SearchType("phone");
+
+        assertTrue(reference1.equals(reference1));
+        assertTrue(reference1.equals(new SearchType("name")));
+
+        assertFalse(reference1.equals(null));
+        assertFalse(reference1.equals(-1));
+        assertFalse(reference1.equals(""));
+        assertFalse(reference1.equals(reference2));
+    }
+
+    @Test
+    public void hashCodeEquality() {
+        SearchType reference = new SearchType("name");
+
+        assertEquals(reference.hashCode(), new SearchType("name").hashCode());
+        assertNotEquals(reference.hashCode(), new SearchType("phone").hashCode());
     }
 }

@@ -23,6 +23,7 @@ import seedu.contax.model.person.Email;
 import seedu.contax.model.person.Name;
 import seedu.contax.model.person.Phone;
 import seedu.contax.model.tag.Tag;
+import seedu.contax.model.util.SearchType;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
@@ -322,5 +323,34 @@ public class ParserUtilTest {
     public void parseDuration_validValue_returnsDuration() throws Exception {
         Duration expectedDuration = new Duration(Integer.parseInt(VALID_DURATION));
         assertEquals(expectedDuration, ParserUtil.parseDuration(VALID_DURATION));
+    }
+
+    @Test
+    public void parseSearchType_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSearchType((String) null));
+    }
+
+    @Test
+    public void parseSearchType_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSearchType(""));
+        assertThrows(ParseException.class, () -> ParserUtil.parseSearchType("Not a valid type"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseSearchType("123 Not Type"));
+    }
+
+    @Test
+    public void parseSearchType_validValue_returnsSearchType() throws ParseException {
+        assertEquals(new SearchType(SearchType.TYPE_PHONE), ParserUtil.parseSearchType(SearchType.TYPE_PHONE));
+        assertEquals(new SearchType(SearchType.TYPE_ADDRESS), ParserUtil.parseSearchType(SearchType.TYPE_ADDRESS));
+        assertEquals(new SearchType(SearchType.TYPE_EMAIL), ParserUtil.parseSearchType(SearchType.TYPE_EMAIL));
+        assertEquals(new SearchType(SearchType.TYPE_NAME), ParserUtil.parseSearchType(SearchType.TYPE_NAME));
+
+        assertEquals(new SearchType(SearchType.TYPE_PHONE),
+                ParserUtil.parseSearchType(SearchType.TYPE_PHONE.toUpperCase()));
+        assertEquals(new SearchType(SearchType.TYPE_ADDRESS),
+                ParserUtil.parseSearchType(SearchType.TYPE_ADDRESS.toUpperCase()));
+        assertEquals(new SearchType(SearchType.TYPE_EMAIL),
+                ParserUtil.parseSearchType(SearchType.TYPE_EMAIL.toUpperCase()));
+        assertEquals(new SearchType(SearchType.TYPE_NAME),
+                ParserUtil.parseSearchType(SearchType.TYPE_NAME.toUpperCase()));
     }
 }
