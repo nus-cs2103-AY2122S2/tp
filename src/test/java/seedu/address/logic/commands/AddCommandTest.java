@@ -20,6 +20,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.entry.Company;
 import seedu.address.model.entry.Event;
 import seedu.address.model.entry.Person;
 import seedu.address.testutil.PersonBuilder;
@@ -150,7 +151,15 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addCompany(Company company) {
+            throw new AssertionError("This method should not be called.");
+        }
         public boolean hasEvent(Event event) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasCompany(Company company) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -160,7 +169,17 @@ public class AddCommandTest {
         }
 
         @Override
+        public void deleteCompany(Company target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addEvent(Event target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setCompany(Company target, Company editedCompany) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -170,7 +189,17 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Company> getFilteredCompanyList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Event> getFilteredEventList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredCompanyList(Predicate<Company> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 

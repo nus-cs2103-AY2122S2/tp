@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.entry.Company;
 import seedu.address.model.entry.Event;
 import seedu.address.model.entry.Person;
 
@@ -23,6 +24,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Company> filteredCompanies;
     private final FilteredList<Event> filteredEvents;
 
     /**
@@ -36,6 +38,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredCompanies = new FilteredList<>(this.addressBook.getCompanyList());
         filteredEvents = new FilteredList<>(this.addressBook.getEventList());
     }
 
@@ -90,6 +93,8 @@ public class ModelManager implements Model {
         return addressBook;
     }
 
+    //========== Person List Modifiers ========================================================================
+
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
@@ -114,6 +119,37 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    //========== Company List Modifiers ======================================================================
+
+    @Override
+    public boolean hasCompany(Company company) {
+        requireNonNull(company);
+        return addressBook.hasCompany(company);
+    }
+
+    @Override
+    public void deleteCompany(Company target) {
+        addressBook.removeCompany(target);
+    }
+
+    @Override
+    public void addCompany(Company company) {
+        addressBook.addCompany(company);
+        updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);
+    }
+
+    /**
+     * Replaces the given company {@code target} with {@code editedCompany}.
+     * {@code target} must exist in the address book.
+     * The company identity of {@code editedCompany} must not be the same as another existing company
+     * in the address book.
+     */
+    public void setCompany(Company target, Company editedCompany) {
+        requireAllNonNull(target, editedCompany);
+
+        addressBook.setCompany(target, editedCompany);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -131,6 +167,26 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //=========== Filtered Company List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the filtered company list
+     */
+    @Override
+    public ObservableList<Company> getFilteredCompanyList() {
+        return filteredCompanies;
+    }
+
+    /**
+     * Updates the filter of the filtered company list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    public void updateFilteredCompanyList(Predicate<Company> predicate) {
+        requireNonNull(predicate);
+        filteredCompanies.setPredicate(predicate);
+    }
+
+
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -147,7 +203,9 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPersons.equals(other.filteredPersons)
+                && filteredCompanies.equals(other.filteredCompanies)
+                && filteredEvents.equals(other.filteredEvents);
     }
 
     //=========== For Events =================================================================================
