@@ -19,6 +19,11 @@ public class TaskName {
     public static final String VALIDATION_REGEX = "[^\\s].*";
     public final String taskName;
 
+    /**
+     * Constructs a {@code TaskName}.
+     *
+     * @param taskName A valid task name.
+     */
     public TaskName(String taskName) {
         requireNonNull(taskName);
         checkArgument(isValidTaskName(taskName), MESSAGE_CONSTRAINTS);
