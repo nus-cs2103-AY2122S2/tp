@@ -152,7 +152,7 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Applicant> getFilteredPersonList() {
+    public ObservableList<Applicant> getFilteredApplicantList() {
         return filteredApplicants;
     }
 

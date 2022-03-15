@@ -32,7 +32,7 @@ public class DeleteApplicantCommand extends DeleteCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Applicant> lastShownList = model.getFilteredPersonList();
+        List<Applicant> lastShownList = model.getFilteredApplicantList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);

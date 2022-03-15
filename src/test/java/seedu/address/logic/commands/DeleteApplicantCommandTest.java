@@ -29,7 +29,7 @@ public class DeleteApplicantCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Applicant applicantToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Applicant applicantToDelete = model.getFilteredApplicantList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteApplicantCommand deleteApplicantCommand = new DeleteApplicantCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(DeleteApplicantCommand.MESSAGE_DELETE_PERSON_SUCCESS, applicantToDelete);
@@ -42,7 +42,7 @@ public class DeleteApplicantCommandTest {
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredApplicantList().size() + 1);
         DeleteApplicantCommand deleteApplicantCommand = new DeleteApplicantCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteApplicantCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -52,7 +52,7 @@ public class DeleteApplicantCommandTest {
     public void execute_validIndexFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Applicant applicantToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Applicant applicantToDelete = model.getFilteredApplicantList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteApplicantCommand deleteApplicantCommand = new DeleteApplicantCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(DeleteApplicantCommand.MESSAGE_DELETE_PERSON_SUCCESS, applicantToDelete);
@@ -105,6 +105,6 @@ public class DeleteApplicantCommandTest {
     private void showNoPerson(Model model) {
         model.updateFilteredPersonList(p -> false);
 
-        assertTrue(model.getFilteredPersonList().isEmpty());
+        assertTrue(model.getFilteredApplicantList().isEmpty());
     }
 }
