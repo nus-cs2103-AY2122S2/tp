@@ -67,9 +67,11 @@ public class UniqueItemList implements Iterable<Item> {
      */
     public void remove(Item toRemove) {
         requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
+        if (!contains(toRemove)) {
             throw new ItemNotFoundException();
         }
+        Item existingItem = getExisting(toRemove);
+        existingItem.subtract(toRemove);
     }
 
     public Integer getTotalQuantity() {
