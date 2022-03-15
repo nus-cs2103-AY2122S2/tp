@@ -59,5 +59,6 @@ public class EditPersonDescriptorTest {
         //different status -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withCovidStatus(VALID_COVID_STATUS_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
+
     }
 }
