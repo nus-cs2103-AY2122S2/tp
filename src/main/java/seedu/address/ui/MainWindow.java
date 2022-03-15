@@ -42,7 +42,6 @@ public class MainWindow extends UiPart<Stage> {
     private AddTagWindow addTagWindow;
     private AddProfileWindow addProfileWindow;
 
-
     @FXML
     private StackPane commandBoxPlaceholder;
 
