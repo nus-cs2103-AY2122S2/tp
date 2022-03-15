@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.patient;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -16,7 +16,7 @@ import seedu.address.model.tag.Tag;
  * Represents a Person in Medbook.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Patient {
 
     // Identity fields
     private final Nric nric;
@@ -31,7 +31,7 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Patient(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(nric, name, phone, email, address, tags);
         this.nric = nric;
         this.name = name;
@@ -73,13 +73,13 @@ public class Person {
      * Returns true if both persons have the same nric.
      * This defines a weaker notion of equality between two persons.
      */
-    public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
+    public boolean isSamePerson(Patient otherPatient) {
+        if (otherPatient == this) {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getNric().equals(getNric());
+        return otherPatient != null
+                && otherPatient.getNric().equals(getNric());
     }
 
     /**
@@ -92,17 +92,17 @@ public class Person {
             return true;
         }
 
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Patient)) {
             return false;
         }
 
-        Person otherPerson = (Person) other;
-        return otherPerson.getName().equals(getName())
-                && otherPerson.getNric().equals(getNric())
-                && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+        Patient otherPatient = (Patient) other;
+        return otherPatient.getName().equals(getName())
+                && otherPatient.getNric().equals(getNric())
+                && otherPatient.getPhone().equals(getPhone())
+                && otherPatient.getEmail().equals(getEmail())
+                && otherPatient.getAddress().equals(getAddress())
+                && otherPatient.getTags().equals(getTags());
     }
 
     @Override

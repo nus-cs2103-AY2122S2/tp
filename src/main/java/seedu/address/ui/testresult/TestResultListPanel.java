@@ -15,19 +15,19 @@ import java.util.logging.Logger;
  * Panel containing the list of persons.
  */
 public class TestResultListPanel extends UiPart<Region> {
-    private static final String FXML = "contact/ContactListPanel.fxml";
+    private static final String FXML = "testresult/TestResultListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(TestResultListPanel.class);
 
     @FXML
-    private ListView<TestResult> contactTestResult;
+    private ListView<TestResult> testResultListView;
 
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
     public TestResultListPanel(ObservableList<TestResult> testResultList) {
         super(FXML);
-        contactTestResult.setItems(testResultList);
-        contactTestResult.setCellFactory(listView -> new TestResultListViewCell());
+        testResultListView.setItems(testResultList);
+        testResultListView.setCellFactory(listView -> new TestResultListViewCell());
     }
 
     /**

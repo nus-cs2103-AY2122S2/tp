@@ -1,6 +1,6 @@
 package seedu.address.model.testresult;
 
-import seedu.address.model.person.Nric;
+import seedu.address.model.patient.Nric;
 
 import java.util.function.Predicate;
 

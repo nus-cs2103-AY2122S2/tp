@@ -19,6 +19,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.testresult.TestResult;
 import seedu.address.ui.contact.ContactListPanel;
+import seedu.address.ui.prescription.PrescriptionListPanel;
 import seedu.address.ui.testresult.TestResultListPanel;
 
 /**
@@ -37,6 +38,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private ContactListPanel contactListPanel;
+    private PrescriptionListPanel prescriptionListPanel;
     private TestResultListPanel testResultListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -118,6 +120,7 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         contactListPanel = new ContactListPanel(logic.getFilteredContactList());
+        prescriptionListPanel = new PrescriptionListPanel(logic.getFilteredPrescriptionList());
         testResultListPanel = new TestResultListPanel(logic.getFilteredTestResultList());
 
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
@@ -152,6 +155,10 @@ public class MainWindow extends UiPart<Stage> {
         case CONTACT:
             personListPanelPlaceholder.getChildren().remove(0);
             personListPanelPlaceholder.getChildren().add(contactListPanel.getRoot());
+            return;
+        case PRESCRIPTION:
+            personListPanelPlaceholder.getChildren().remove(0);
+            personListPanelPlaceholder.getChildren().add(prescriptionListPanel.getRoot());
             return;
         case TEST:
             personListPanelPlaceholder.getChildren().remove(0);

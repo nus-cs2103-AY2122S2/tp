@@ -2,9 +2,9 @@ package seedu.address.model.testresult;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.patient.Patient;
+import seedu.address.model.patient.exceptions.DuplicatePersonException;
+import seedu.address.model.patient.exceptions.PersonNotFoundException;
 import seedu.address.model.testresult.exceptions.DuplicateTestResultException;
 import seedu.address.model.testresult.exceptions.TestResultNotFoundException;
 

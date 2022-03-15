@@ -24,6 +24,7 @@ We are a team based in the [School of Computing, National University of Singapor
 [[github](http://github.com/clement0010)]
 [[portfolio](team/clement0010.md)]
 
+
 * Role: Code quality, Scheduling and tracking
 * Responsibilities: UI
 
@@ -33,6 +34,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 [[github](http://github.com/sibinhho99-nus)]
 [[portfolio](team/sibinhho99-nus.md)]
+
 
 * Role: Developer, Integration
 * Responsibilities: Storage
@@ -44,6 +46,7 @@ We are a team based in the [School of Computing, National University of Singapor
 [[github](http://github.com/joey-chance)]
 [[portfolio](team/joey-chance.md)]
 
+
 * Role: Developer, Testing
 * Responsibilities: Model
 
@@ -53,6 +56,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 [[github](http://github.com/justinlam19)]
 [[portfolio](team/justinlam.md)]
+
 
 * Role: Documentation
 * Responsibilities: Ui
