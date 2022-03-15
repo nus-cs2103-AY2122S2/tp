@@ -100,23 +100,25 @@ Clears all entries from the TAddress book.
 Format: `clear`
 
 #### Filter (by status of individual labs) : `filter` [coming soon]
-Filters students based on the status of their lab tags. STATUS must be U/S/G (unsubmitted/submitted/graded)
+Filters students based on the status of their lab tags. STATUS must be U/S/G (unsubmitted/submitted/graded).
+LAB_NUMBER must be a positive integer.
 
-Format: `filter l/LAB s/STATUS`
+Format: `filter l/LAB_NUMBER s/STATUS`
 
 ### Lab-related features
 
 #### Adding a Lab : `labadd`
 Adds a Lab to every student. Shows up as a tag on each student’s entry. By default, the tag will be colored red for “unsubmitted”. 
 The tags can subsequently be colored different colors to represent different statuses e.g. unsubmitted = red, submitted = yellow, graded = green.
-LAB must be a positive integer.
+LAB_NUMBER must be a positive integer.
 
-Format: `labadd l/LAB`
+Format: `labadd l/LAB_NUMBER`
 
 #### Setting the status of individual Labs : `labstat` [coming soon]
-Changes the status of the specified lab for the student with the specified INDEX to the specified status. STATUS must be U/S/G (unsubmitted/submitted/graded)
+Changes the status of the specified lab for the student with the specified INDEX to the specified status. STATUS must be U/S/G (unsubmitted/submitted/graded).
+LAB_NUMBER must be a positive integer.
 
-Format: `labstat INDEX l/LAB s/STATUS`
+Format: `labstat INDEX l/LAB_NUMBER s/STATUS`
 
 --------------------------------------------------------------------------------------------------------------------
 ## FAQ
@@ -134,10 +136,10 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [e/EMAIL] [g/GITHUB] [t/TELEGRAM_HANDLE] [i/STUDENT_ID] [t/TAG]...`<br> e.g.,`edit 2 n/James Lee g/jamesHo`
-**Filter** | `filter l/LAB s/STATUS`<br> e.g., `filter l/1 s/u`
+**Filter** | `filter l/LAB_NUMBER s/STATUS`<br> e.g., `filter l/1 s/u`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Add lab** | `labadd l/LAB`
-**Edit lab status** | `labstat INDEX l/LAB s/STATUS`
+**Add lab** | `labadd l/LAB_NUMBER`
+**Edit lab status** | `labstat INDEX l/LAB_NUMBER s/STATUS`
 **List** | `list`
 **Help** | `help`
 **Exit** | `exit`
