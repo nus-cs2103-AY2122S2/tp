@@ -64,6 +64,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the interview list with {@code interviews}.
+     * {@code interviews} must not contain duplicate interviews.
+     */
+    public void setInterviews(List<Interview> interviews) {
+        this.interviews.setInterviews(interviews);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
@@ -71,7 +79,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         setPersons(newData.getPersonList());
         setPositions(newData.getPositionList());
-        // TO ADD: set positions for interview
+        setInterviews(newData.getInterviewList());
 
     }
 

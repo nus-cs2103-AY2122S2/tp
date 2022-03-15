@@ -1,5 +1,7 @@
 package seedu.address.model.util;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -13,6 +15,7 @@ import seedu.address.model.applicant.Email;
 import seedu.address.model.applicant.Gender;
 import seedu.address.model.applicant.Name;
 import seedu.address.model.applicant.Phone;
+import seedu.address.model.interview.Interview;
 import seedu.address.model.position.Description;
 import seedu.address.model.position.Position;
 import seedu.address.model.position.PositionName;
@@ -67,6 +70,26 @@ public class SampleDataUtil {
         };
     }
 
+    public static Interview[] getSampleInterviews() {
+        Applicant[] samplePersons = getSamplePersons();
+        Position[] samplePositions = getSamplePositions();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return new Interview[]{
+            new Interview(samplePersons[0],
+                    LocalDateTime.parse("2021-01-01 12:00", formatter),
+                    samplePositions[0]),
+            new Interview(samplePersons[1],
+                    LocalDateTime.parse("2021-05-05 05:00", formatter),
+                    samplePositions[1]),
+            new Interview(samplePersons[2],
+                    LocalDateTime.parse("2021-09-09 18:00", formatter),
+                    samplePositions[2]),
+            new Interview(samplePersons[3],
+                    LocalDateTime.parse("2021-12-20 19:00", formatter),
+                    samplePositions[3])
+        };
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Applicant sampleApplicant : getSamplePersons()) {
@@ -74,6 +97,9 @@ public class SampleDataUtil {
         }
         for (Position samplePosition : getSamplePositions()) {
             sampleAb.addPosition(samplePosition);
+        }
+        for (Interview sampleInterview : getSampleInterviews()) {
+            sampleAb.addInterview(sampleInterview);
         }
         return sampleAb;
     }
