@@ -23,9 +23,10 @@ public class ManualMessages {
     public static final String MANUAL_MESSAGE_EDIT_COMMAND = "Edits a student's information in TAPA. \n"
             + "Format : edit STUDENT_INDEX [i/STUDENT_ID] [n/STUDENT_NAME] [m/MODULE_CODE] [p/PHONE_NUMBER] "
             + "[h/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] \n"
-            + "Example: edit 10 m/CS2103T p/98765432 t/johnnn e/e0123456z@u.nus.edu";
+            + "Example: edit 1 m/CS2103T p/98765432 t/johnnn e/e0123456z@u.nus.edu";
 
-    public static final String MANUAL_MESSAGE_CLEAR_COMMAND = "Clears all students from TAPA. \n"
+    public static final String MANUAL_MESSAGE_CLEAR_COMMAND = "Clears all students from TAPA. "
+            + "Additionally, the user will be prompted to confirm clear command. \n"
             + "Format : clear \n"
             + "Example: clear";
 
