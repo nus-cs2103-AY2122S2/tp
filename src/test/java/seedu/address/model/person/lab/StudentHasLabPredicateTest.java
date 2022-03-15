@@ -3,9 +3,9 @@ package seedu.address.model.person.lab;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import javafx.util.Pair;
 import org.junit.jupiter.api.Test;
 
+import javafx.util.Pair;
 import seedu.address.testutil.PersonBuilder;
 
 public class StudentHasLabPredicateTest {
