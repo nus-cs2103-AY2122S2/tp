@@ -26,7 +26,7 @@ import seedu.address.model.candidate.Candidate;
 import seedu.address.model.candidate.predicate.PersonContainsKeywordsPredicate;
 import seedu.address.testutil.CandidateBuilder;
 import seedu.address.testutil.CandidateUtil;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditCandidateDescriptorBuilder;
 
 public class AddressBookParserTest {
 
@@ -55,7 +55,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_edit() throws Exception {
         Candidate candidate = new CandidateBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(candidate).build();
+        EditPersonDescriptor descriptor = new EditCandidateDescriptorBuilder(candidate).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + CandidateUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
