@@ -14,7 +14,6 @@ import seedu.contax.commons.core.Messages;
 import seedu.contax.commons.core.index.Index;
 import seedu.contax.logic.commands.exceptions.CommandException;
 import seedu.contax.logic.parser.AddressBookParser;
-import seedu.contax.logic.parser.ArgumentMultimap;
 import seedu.contax.logic.parser.exceptions.ParseException;
 import seedu.contax.model.Model;
 
@@ -36,21 +35,17 @@ public class RangeCommand extends Command {
 
     private final Index fromIndex;
     private final Index toIndex;
-    private final ArgumentMultimap argMultimap;
     private final String commandInput;
     /**
      * @param fromIndex              of the person in the filtered person list to edit
      * @param toIndex                of the person in the filtered person list to edit
-     * @param argMultimap            details to argMultimap
      * @param commandInput            details to word of command
      */
-    public RangeCommand(Index fromIndex, Index toIndex, ArgumentMultimap argMultimap, String commandInput) {
+    public RangeCommand(Index fromIndex, Index toIndex, String commandInput) {
         requireNonNull(fromIndex);
         requireNonNull(toIndex);
-        requireNonNull(argMultimap);
         this.fromIndex = fromIndex;
         this.toIndex = toIndex;
-        this.argMultimap = argMultimap;
         this.commandInput = commandInput.trim();
     }
 
@@ -61,13 +56,10 @@ public class RangeCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         List<CommandResult> commandResultList = new ArrayList<>();
-        for (int i = fromIndex.getOneBased(); i <= toIndex.getOneBased(); i++) {
+        for (int i = toIndex.getOneBased(); i >= fromIndex.getOneBased(); i--) {
             AddressBookParser addressBookParser = new AddressBookParser();
             try {
                 String commandText = createNewCommand(commandInput, Integer.toString(i));
-                if (argMultimap.getPreamble().equals("delete")) {
-                    commandText = createNewCommand(commandInput, Integer.toString(fromIndex.getOneBased()));
-                }
                 Command command = addressBookParser.parseCommand(commandText);
                 commandResultList.add(command.execute(model));
             } catch (ParseException pe) {
