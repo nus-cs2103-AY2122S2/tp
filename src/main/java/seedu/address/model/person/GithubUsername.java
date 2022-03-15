@@ -14,6 +14,9 @@ public class GithubUsername {
 
     public static final String VALIDATION_REGEX = "[\\p{Alnum}-]+";
 
+    private static final String GITHUB_HANDLE_FORMAT = "@%s";
+    private static final String GITHUB_LINK_FORMAT = "https://github.com/%s";
+
     public final String value;
 
     /**
@@ -32,6 +35,20 @@ public class GithubUsername {
      */
     public static boolean isValidUsername(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns the GitHub handle of this username.
+     */
+    public String getGithubHandle() {
+        return String.format(GITHUB_HANDLE_FORMAT, value);
+    }
+
+    /**
+     * Returns the link to the GitHub profile of this username.
+     */
+    public String getGithubProfileLink() {
+        return String.format(GITHUB_LINK_FORMAT, value);
     }
 
     @Override
