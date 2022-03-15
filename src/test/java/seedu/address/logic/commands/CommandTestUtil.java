@@ -6,6 +6,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
@@ -48,17 +54,28 @@ public class CommandTestUtil {
     public static final String VALID_LOG_DESCRIPTION_OTHER = "some other description!";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
+    public static final String NEW_NAME_DESC_AMY = " " + PREFIX_NEW_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
+    public static final String NEW_PHONE_DESC_AMY = " " + PREFIX_NEW_PHONE + VALID_PHONE_AMY;
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
+    public static final String NEW_PHONE_DESC_BOB = " " + PREFIX_NEW_PHONE + VALID_PHONE_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
+    public static final String NEW_EMAIL_DESC_AMY = " " + PREFIX_NEW_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
+    public static final String NEW_EMAIL_DESC_BOB = " " + PREFIX_NEW_EMAIL + VALID_EMAIL_BOB;
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
+    public static final String NEW_ADDRESS_DESC_AMY = " " + PREFIX_NEW_ADDRESS + VALID_ADDRESS_AMY;
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
+    public static final String NEW_ADDRESS_DESC_BOB = " " + PREFIX_NEW_ADDRESS + VALID_ADDRESS_BOB;
     public static final String DESCRIPTION_DESC_AMY = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_AMY;
+    public static final String NEW_DESCRIPTION_DESC_AMY = " " + PREFIX_NEW_DESCRIPTION + VALID_DESCRIPTION_AMY;
     public static final String DESCRIPTION_DESC_BOB = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_BOB;
+    public static final String NEW_DESCRIPTION_DESC_BOB = " " + PREFIX_NEW_DESCRIPTION + VALID_DESCRIPTION_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
+    public static final String NEW_TAG_DESC_FRIEND = " " + PREFIX_NEW_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String NEW_TAG_DESC_HUSBAND = " " + PREFIX_NEW_TAG + VALID_TAG_HUSBAND;
     public static final String LOG_TITLE_DESC = " " + PREFIX_TITLE + VALID_LOG_TITLE;
     public static final String LOG_TITLE_DESC_PRECEDING_SPACE = " " + PREFIX_TITLE + VALID_LOG_TITLE_PRECEDING_SPACE;
     public static final String LOG_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION + VALID_LOG_DESCRIPTION;
@@ -66,13 +83,21 @@ public class CommandTestUtil {
 
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
+    public static final String INVALID_NEW_NAME_DESC = " " + PREFIX_NEW_NAME + "James&";
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
+    public static final String INVALID_NEW_PHONE_DESC = " " + PREFIX_NEW_PHONE + "911a";
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
+    public static final String INVALID_NEW_EMAIL_DESC = " " + PREFIX_NEW_EMAIL + "bob!yahoo";
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
+    public static final String INVALID_NEW_ADDRESS_DESC = " " + PREFIX_NEW_ADDRESS;
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_NEW_TAG_DESC = " " + PREFIX_NEW_TAG + "hubby*";
+    public static final String INVALID_NEW_DESCRIPTION_DESC = " " + PREFIX_NEW_DESCRIPTION
+            + " "; //empty descriptions not allowed
     public static final String INVALID_LOG_TITLE_EMPTY_STRING_DESC = " " + PREFIX_TITLE + "";
     public static final String INVALID_LOG_TITLE_ONLY_SPACES_DESC = " " + PREFIX_TITLE + "     ";
-    public static final String INVALID_LOG_TITLE_TOO_LONG_DESC = " " + PREFIX_TITLE + "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc";
+    public static final String INVALID_LOG_TITLE_TOO_LONG_DESC = " " + PREFIX_TITLE
+            + "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
