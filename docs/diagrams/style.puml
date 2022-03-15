@@ -36,8 +36,6 @@
 
 skinparam BackgroundColor #FFFFFFF
 
-skinparam Shadowing false
-
 skinparam Class {
     FontColor #FFFFFF
     BorderThickness 1
