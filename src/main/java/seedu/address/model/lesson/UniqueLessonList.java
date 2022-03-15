@@ -46,7 +46,6 @@ public class UniqueLessonList implements Iterable<Lesson> {
      */
     public Lesson findLessonConflictingWith(Lesson toCheck) {
         requireNonNull(toCheck);
-        boolean test = toCheck instanceof RecurringLesson;
         for (Lesson existingLesson : internalList) {
             if (existingLesson.isConflictingWithLesson(toCheck)) {
                 return existingLesson;

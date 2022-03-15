@@ -13,7 +13,7 @@
    <Label fx:id="date" style="-fx-text-fill: WHITE;" styleClass="cell_small_label" text="\$date" />
    <Label fx:id="time" style="-fx-text-fill: WHITE;" styleClass="cell_small_label" text="\$time" />
    <VBox fx:id="class_list" prefHeight="200.0" prefWidth="100.0" spacing="2.0" VBox.vgrow="ALWAYS">
-      <Label style="-fx-text-fill: WHITE;" styleClass="cell_big_label" text="Enrolled Students:" />
+      <Label style="-fx-text-fill: WHITE;" styleClass="cell_big_label" text="Students:" />
       <StackPane prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <ListView fx:id="enrolledStudentsList" prefHeight="50.0" prefWidth="50.0" />
       </StackPane>
