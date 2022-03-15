@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Email;
@@ -32,11 +33,11 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id; // index of entry
     @FXML
+    private FlowPane moduleCodes;
+    @FXML
     private Label studentId;
     @FXML
     private Label name;
-    @FXML
-    private Label moduleCode;
     @FXML
     private Label phone;
     @FXML
@@ -56,7 +57,6 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         studentId.setText("Matriculation No.: " + person.getStudentId().id);
         name.setText(person.getName().fullName);
-        moduleCode.setText(person.getModuleCode().moduleCode);
 
         Phone currentPhone = person.getPhone();
         if (currentPhone == null || currentPhone.value == null) {
@@ -85,6 +85,8 @@ public class PersonCard extends UiPart<Region> {
         } else {
             tasks.setText("Tasks: \n" + currentTasks.toString());
         }
+
+        moduleCodes.getChildren().add(new Label(person.getModuleCode().moduleCode));
 
     }
 
