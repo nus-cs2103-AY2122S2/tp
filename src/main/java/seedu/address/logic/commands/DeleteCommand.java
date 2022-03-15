@@ -78,14 +78,14 @@ public class DeleteCommand extends Command {
             if (targetIndex.getZeroBased() >= lastShownModuleList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
-            entityToDelete = lastShownStudentList.get(targetIndex.getZeroBased());
+            entityToDelete = lastShownModuleList.get(targetIndex.getZeroBased());
             break;
 
         case CLASS_GROUP:
             if (targetIndex.getZeroBased() >= lastShownClassGroupList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
-            entityToDelete = lastShownStudentList.get(targetIndex.getZeroBased());
+            entityToDelete = lastShownClassGroupList.get(targetIndex.getZeroBased());
             break;
 
         default:

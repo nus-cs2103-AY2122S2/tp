@@ -32,7 +32,7 @@ public class AddCommand extends Command {
             + TYPE_STUDENT + " "
             + PREFIX_ID + "E0123456 "
             + PREFIX_NAME + "John Doe "
-            + PREFIX_TELEGRAM + "98765432 "
+            + PREFIX_TELEGRAM + "john_doe "
             + PREFIX_EMAIL + "johnd@example.com\n"
             + "2. Adds a module: "
             + "Parameters: " + TYPE_MODULE + " "
