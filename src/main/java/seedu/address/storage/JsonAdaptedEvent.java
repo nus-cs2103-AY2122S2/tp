@@ -12,8 +12,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.event.DateTime;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.EventName;
 import seedu.address.model.person.Description;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.FriendName;
 
 /**
  * Jackson-friendly version of {@link Event}.
@@ -60,19 +61,19 @@ class JsonAdaptedEvent {
      * @throws IllegalValueException if there were any data constraints violated in the adapted event.
      */
     public Event toModelType() throws IllegalValueException {
-        final List<Name> eventFriendNames = new ArrayList<>();
+        final List<FriendName> eventFriendNames = new ArrayList<>();
         for (JsonAdaptedName friendName : friendNames) {
             eventFriendNames.add(friendName.toModelType());
         }
-        final Set<Name> modelFriendNames = new HashSet<>(eventFriendNames);
+        final Set<FriendName> modelFriendNames = new HashSet<>(eventFriendNames);
 
         if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, FriendName.class.getSimpleName()));
         }
-        if (!Name.isValidName(name)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        if (!FriendName.isValidName(name)) {
+            throw new IllegalValueException(FriendName.MESSAGE_CONSTRAINTS);
         }
-        final Name modelName = new Name(name);
+        final EventName modelName = new EventName(name);
 
         if (dateTime == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,

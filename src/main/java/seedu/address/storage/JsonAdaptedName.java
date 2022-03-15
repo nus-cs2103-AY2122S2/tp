@@ -4,10 +4,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.FriendName;
 
 /**
- * Jackson-friendly version of {@link Name}.
+ * Jackson-friendly version of {@link FriendName}.
  */
 class JsonAdaptedName {
 
@@ -24,7 +24,7 @@ class JsonAdaptedName {
     /**
      * Converts a given {@code Name} into this class for Jackson use.
      */
-    public JsonAdaptedName(Name source) {
+    public JsonAdaptedName(FriendName source) {
         name = source.fullName;
     }
 
@@ -38,10 +38,10 @@ class JsonAdaptedName {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted name.
      */
-    public Name toModelType() throws IllegalValueException {
-        if (!Name.isValidName(name)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+    public FriendName toModelType() throws IllegalValueException {
+        if (!FriendName.isValidName(name)) {
+            throw new IllegalValueException(FriendName.MESSAGE_CONSTRAINTS);
         }
-        return new Name(name);
+        return new FriendName(name);
     }
 }

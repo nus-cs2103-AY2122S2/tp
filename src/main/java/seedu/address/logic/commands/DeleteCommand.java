@@ -12,8 +12,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.FriendName;
 import seedu.address.model.person.Log;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -40,10 +40,10 @@ public class DeleteCommand extends Command {
     private static final Email dummyEmail = new Email("dummyemail@gmail.com");
     private static final Address dummyAddress = new Address("Dummy Address");
 
-    private final Name nameOfPersonToDelete;
+    private final FriendName nameOfPersonToDelete;
 
 
-    public DeleteCommand(Name nameOfPersonToDelete) {
+    public DeleteCommand(FriendName nameOfPersonToDelete) {
         this.nameOfPersonToDelete = nameOfPersonToDelete;
     }
 

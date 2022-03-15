@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.FriendName;
 import seedu.address.model.person.Person;
 
 /**
@@ -38,14 +38,14 @@ public class DeleteCommandTest {
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(new Name("Sprigatito"));
-        DeleteCommand deleteSecondCommand = new DeleteCommand(new Name("Quaxly"));
+        DeleteCommand deleteFirstCommand = new DeleteCommand(new FriendName("Sprigatito"));
+        DeleteCommand deleteSecondCommand = new DeleteCommand(new FriendName("Quaxly"));
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(new Name("Sprigatito"));
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(new FriendName("Sprigatito"));
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false

@@ -12,8 +12,9 @@ import seedu.address.logic.commands.AddEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.DateTime;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.EventName;
 import seedu.address.model.person.Description;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.FriendName;
 
 /**
  * Parses input arguments and creates a new AddEventCommand object
@@ -34,7 +35,7 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
         }
 
-        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        EventName name = ParserUtil.parseEventName(argMultimap.getValue(PREFIX_NAME).get());
         DateTime dateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get());
 
         // Optional Fields
@@ -44,7 +45,7 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         } else {
             description = new Description(null);
         }
-        Set<Name> friendNames = ParserUtil.parseNames(argMultimap.getAllValues(PREFIX_FRIEND_NAME));
+        Set<FriendName> friendNames = ParserUtil.parseNames(argMultimap.getAllValues(PREFIX_FRIEND_NAME));
 
         Event event = new Event(name, dateTime, description, friendNames);
 

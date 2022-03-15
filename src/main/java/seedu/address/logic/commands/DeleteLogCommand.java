@@ -17,8 +17,8 @@ import seedu.address.logic.parser.DeleteLogCommandParser;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.FriendName;
 import seedu.address.model.person.Log;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -216,7 +216,7 @@ public class DeleteLogCommand extends Command {
          */
         public static Person copyPersonButWithEmptyLogs(Person personToEdit) {
             requireAllNonNull(personToEdit);
-            Name name = personToEdit.getName();
+            FriendName name = personToEdit.getName();
             Phone phone = personToEdit.getPhone();
             Email email = personToEdit.getEmail();
             Address address = personToEdit.getAddress();
@@ -261,7 +261,7 @@ public class DeleteLogCommand extends Command {
          */
         public static Person createdDeletedLogPerson(Person personToEdit, Index toDelete) throws CommandException {
             requireAllNonNull(personToEdit, toDelete);
-            Name name = personToEdit.getName();
+            FriendName name = personToEdit.getName();
             Phone phone = personToEdit.getPhone();
             Email email = personToEdit.getEmail();
             Address address = personToEdit.getAddress();

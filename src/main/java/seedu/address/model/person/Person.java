@@ -18,7 +18,7 @@ import seedu.address.model.tag.Tag;
 public class Person {
 
     // Identity fields
-    private final Name name;
+    private final FriendName name;
     private final Phone phone;
     private final Email email;
 
@@ -38,7 +38,7 @@ public class Person {
      * @param description Description of person
      * @param tags Tag(s) of person
      */
-    public Person(Name name, Phone phone, Email email, Address address, Description description, Set<Tag> tags) {
+    public Person(FriendName name, Phone phone, Email email, Address address, Description description, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -54,7 +54,7 @@ public class Person {
      * Overloaded method to construct a person to have a description with null value.
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, List<Log> logs) {
+    public Person(FriendName name, Phone phone, Email email, Address address, Set<Tag> tags, List<Log> logs) {
         requireAllNonNull(name, phone, email, address, tags, logs);
         this.name = name;
         this.phone = phone;
@@ -69,7 +69,7 @@ public class Person {
      * Overloaded method to construct a person to have an empty list of logs.
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Description description, Set<Tag> tags,
+    public Person(FriendName name, Phone phone, Email email, Address address, Description description, Set<Tag> tags,
                   List<Log> logs) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
@@ -81,7 +81,7 @@ public class Person {
         this.logs.setLogs(logs);
     }
 
-    public Name getName() {
+    public FriendName getName() {
         return name;
     }
 
