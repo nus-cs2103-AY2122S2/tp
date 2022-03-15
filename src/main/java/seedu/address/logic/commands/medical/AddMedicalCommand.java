@@ -67,7 +67,7 @@ public class AddMedicalCommand extends Command {
     private final Medical toAdd;
 
     /**
-     * Creates an AddContactCommand to add medical information to the specified {@code Patient}
+     * Creates an AddMedicalCommand to add medical information to the specified {@code Patient}
      */
     public AddMedicalCommand(Nric patientNric, Medical medical) {
         requireNonNull(patientNric);
