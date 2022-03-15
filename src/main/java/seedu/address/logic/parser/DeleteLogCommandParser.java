@@ -5,10 +5,12 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.ArgumentMultimap.arePrefixesPresent;
 import static seedu.address.logic.parser.CliSyntax.FLAG_ALL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOG_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteLogCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Name;
 
 /**
  * Parses the input arguments and creates a new DeleteLogCommand object.
@@ -31,7 +33,7 @@ public class DeleteLogCommandParser implements Parser<DeleteLogCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_LOG_INDEX, FLAG_ALL);
 
-        // sanity check
+        // check that log index is present, or all flag present, but not both
         if (!(arePrefixesPresent(argMultimap, PREFIX_LOG_INDEX)
                 || arePrefixesPresent(argMultimap, FLAG_ALL))) {
             throw new ParseException(MESSAGE_INVALID_FORMAT);
@@ -40,14 +42,22 @@ public class DeleteLogCommandParser implements Parser<DeleteLogCommand> {
         // initialize
         Index personIndex = null;
         Index logIndex = null;
-        boolean isForOnePerson = false;
+        Name personName = null;
+        boolean hasIndex = !argMultimap.getPreamble().isEmpty();
+        boolean hasName = arePrefixesPresent(argMultimap, PREFIX_NAME);
+        boolean isForOnePerson = hasIndex ^ hasName;
         boolean isForDeletingAllLogs = false;
 
-        // read possible arguments
-        if (!argMultimap.getPreamble().isEmpty()) {
+        // parse index or name
+        if (hasIndex) {
             personIndex = ParserUtil.parseIndex(argMultimap.getPreamble());
-            isForOnePerson = true;
+        } else if (hasName) {
+            if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+                personName = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+            }
         }
+
+        // read other arguments
         if (argMultimap.getValue(PREFIX_LOG_INDEX).isPresent()) {
             logIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_LOG_INDEX).get());
         }
@@ -56,15 +66,27 @@ public class DeleteLogCommandParser implements Parser<DeleteLogCommand> {
         }
 
         // check for validity
-        if (!((isForOnePerson && !isForDeletingAllLogs
-                && personIndex != null && logIndex != null) // case 1: delete specific log of specific person
-                || (isForDeletingAllLogs && isForOnePerson
-                && personIndex != null && logIndex == null) // case 2: delete all logs of specific person
-                || (isForDeletingAllLogs && !isForOnePerson
-                && personIndex == null && logIndex == null))) { // case 3: delete all logs all persons
-
+        // case 1: delete specific log, specific person
+        // case 2: delete all logs, specific person
+        // case 3: delete all logs
+        if (!(isForOnePerson && !isForDeletingAllLogs && logIndex != null
+                || isForOnePerson && isForDeletingAllLogs && logIndex == null
+                || !isForOnePerson && isForDeletingAllLogs && logIndex == null && !hasIndex)) {
             throw new ParseException(MESSAGE_INVALID_FORMAT);
         }
-        return new DeleteLogCommand(isForOnePerson, isForDeletingAllLogs, personIndex, logIndex);
+
+        // call correct constructor
+        DeleteLogCommand command;
+        if (hasIndex) {
+            command = new DeleteLogCommand(isForOnePerson, isForDeletingAllLogs, personIndex, logIndex);
+        } else {
+            if (personName == null) { // means delete all
+                command = new DeleteLogCommand(true);
+            } else {
+                command = new DeleteLogCommand(true, false, personName, logIndex);
+            }
+
+        }
+        return command;
     }
 }

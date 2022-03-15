@@ -54,7 +54,7 @@ public class AddLogCommandParser implements Parser<AddLogCommand> {
             name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         }
 
-        // wrap new log into helper class
+        // read other arguments
         AddLogDescriptor addLogDescriptor = new AddLogDescriptor();
 
         if (argMultimap.getValue(PREFIX_TITLE).isPresent()) {

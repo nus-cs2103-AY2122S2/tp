@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.FLAG_ALL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOG_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ public class DeleteLogCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a log from an existing friend in Amigos. "
             + "Parameters: "
-            + "[INDEX] ["
+            + "[INDEX ? " + PREFIX_NAME + "NAME] ["
             + PREFIX_LOG_INDEX + "LOG_INDEX]"
             + " [" + FLAG_ALL + "]\n"
             + "Example: " + COMMAND_WORD + " "

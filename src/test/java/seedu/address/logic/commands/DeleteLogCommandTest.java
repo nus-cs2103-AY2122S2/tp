@@ -63,8 +63,8 @@ public class DeleteLogCommandTest {
         Name name = new Name(VALID_NAME_AMY);
 
         // all flags equal
-        command = new DeleteLogCommand(false);
-        other = new DeleteLogCommand(false);
+        command = new DeleteLogCommand(true);
+        other = new DeleteLogCommand(true);
         assertEquals(command, other);
 
         // uses index comparison
