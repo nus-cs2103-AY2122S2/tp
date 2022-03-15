@@ -215,7 +215,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Checks if medical information (for patient with same NRIC) already exist.
+     * Checks if medical information (for patient with same NRIC) already exists.
      */
     public boolean hasMedical(Medical m) {
         requireNonNull(m);
