@@ -21,8 +21,8 @@ import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.medical.Medical;
-import seedu.address.model.person.Nric;
-import seedu.address.model.person.NricPredicate;
+import seedu.address.model.patient.Nric;
+import seedu.address.model.patient.NricPredicate;
 
 public class AddMedicalCommand extends Command {
     public static final String COMMAND_WORD = "add";
