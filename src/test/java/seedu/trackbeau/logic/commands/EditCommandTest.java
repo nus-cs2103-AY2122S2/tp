@@ -2,14 +2,7 @@ package seedu.trackbeau.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.trackbeau.logic.commands.CommandTestUtil.DESC_AMY;
-import static seedu.trackbeau.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_STAFF_JANE;
-import static seedu.trackbeau.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.trackbeau.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.trackbeau.logic.commands.CommandTestUtil.showCustomerAtIndex;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.*;
 import static seedu.trackbeau.testutil.TypicalCustomers.getTypicalTrackBeau;
 import static seedu.trackbeau.testutil.TypicalIndexes.INDEX_FIRST_CUSTOMER;
 import static seedu.trackbeau.testutil.TypicalIndexes.INDEX_SECOND_CUSTOMER;
@@ -55,16 +48,34 @@ public class EditCommandTest {
 
         CustomerBuilder personInList = new CustomerBuilder(lastCustomer);
         Customer editedCustomer = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withStaffs(VALID_STAFF_JANE).build();
+                .withStaffs(VALID_STAFF_JANE).withServices(VALID_SERVICE_ACNE).build();
 
         EditCustomerDescriptor descriptor = new EditCustomerDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withStaffs(VALID_STAFF_JANE).build();
+                .withPhone(VALID_PHONE_BOB).withStaffs(VALID_STAFF_JANE).withServices(VALID_SERVICE_ACNE).build();
         EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CUSTOMER_SUCCESS, editedCustomer);
 
         Model expectedModel = new ModelManager(new TrackBeau(model.getTrackBeau()), new UserPrefs());
         expectedModel.setCustomer(lastCustomer, editedCustomer);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_someFieldsSpecifiedRemovedUnfilteredList_success() {
+        Customer secondCustomer = model.getFilteredCustomerList().get(INDEX_SECOND_CUSTOMER.getZeroBased());
+
+        CustomerBuilder personInList = new CustomerBuilder(secondCustomer);
+        Customer editedCustomer = personInList.withServices().withStaffs().build();
+
+        EditCustomerDescriptor descriptor = new EditCustomerDescriptorBuilder().withServices().withStaffs().build();
+        EditCommand editCommand = new EditCommand(INDEX_SECOND_CUSTOMER, descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CUSTOMER_SUCCESS, editedCustomer);
+
+        Model expectedModel = new ModelManager(new TrackBeau(model.getTrackBeau()), new UserPrefs());
+        expectedModel.setCustomer(secondCustomer, editedCustomer);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
