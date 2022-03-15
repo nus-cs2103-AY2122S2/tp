@@ -6,7 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.applicant.Applicant;
-import seedu.address.model.applicant.UniquePersonList;
+import seedu.address.model.applicant.UniqueApplicantList;
 import seedu.address.model.interview.Interview;
 import seedu.address.model.interview.UniqueInterviewList;
 import seedu.address.model.position.Position;
@@ -18,7 +18,7 @@ import seedu.address.model.position.UniquePositionList;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniquePersonList persons;
+    private final UniqueApplicantList persons;
     private final UniqueInterviewList interviews;
     private final UniquePositionList positions;
 
@@ -30,7 +30,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
+        persons = new UniqueApplicantList();
         interviews = new UniqueInterviewList();
         positions = new UniquePositionList();
     }
