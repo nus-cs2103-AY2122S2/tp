@@ -5,12 +5,15 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SingleSelectionModel;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import seedu.address.commons.core.DataType;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
@@ -213,6 +216,15 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            SingleSelectionModel<Tab> selectionModel = dataTypeTabs.getSelectionModel();
+            if (commandResult.getDataType() == DataType.APPLICANT) {
+                selectionModel.select(0);
+            } else if (commandResult.getDataType() == DataType.POSITION) {
+                selectionModel.select(1);
+            } else if (commandResult.getDataType() == DataType.INTERVIEW) {
+                selectionModel.select(2);
             }
 
             return commandResult;
