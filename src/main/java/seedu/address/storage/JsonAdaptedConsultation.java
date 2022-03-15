@@ -1,7 +1,6 @@
 package seedu.address.storage;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -56,12 +55,12 @@ class JsonAdaptedConsultation {
      * Converts a given {@code Contact} into this class for Jackson use.
      */
     public JsonAdaptedConsultation(Consultation source) {
-        ownerNric = source.getNric().toString();
-        date = source.getDate().toString();
-        time = source.getTime().toString();
-        notes = source.getNotes().toString();
-        prescription = source.getPrescription().toString();
-        testsTakenAndResults = source.getTestAndResults().toString();
+        ownerNric = source.getNric().value;
+        date = source.getDate().date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        time = source.getTime().time.format(DateTimeFormatter.ofPattern("HH-mm"));
+        notes = source.getNotes().notes;
+        prescription = source.getPrescription().prescription;
+        testsTakenAndResults = source.getTestAndResults().testsTakenAndResults;
     }
 
     /**
@@ -74,42 +73,42 @@ class JsonAdaptedConsultation {
         if (ownerNric == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Nric.class.getSimpleName()));
         }
-        if (!Nric.isValidNric(ownerNric.toString())) {
+        if (!Nric.isValidNric(ownerNric)) {
             throw new IllegalValueException(Nric.MESSAGE_CONSTRAINTS);
         }
-        final String modelOwnerNric = ownerNric.toString();
+        final String modelOwnerNric = ownerNric;
 
         if (date == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
         }
-        if (!Date.isValidDate(date.toString())) {
+        if (!Date.isValidDate(date)) {
             throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
         }
-        final String modelDate = date.toString();
+        final String modelDate = date;
 
         if (time == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Time.class.getSimpleName()));
         }
-        if (!Time.isValidTime(time.toString())) {
+        if (!Time.isValidTime(time)) {
             throw new IllegalValueException(Time.MESSAGE_CONSTRAINTS);
         }
-        final String modelTime = time.toString();
+        final String modelTime = time;
 
         if (notes == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Notes.class.getSimpleName()));
         }
-        if (!Notes.isValid(notes.toString())) {
+        if (!Notes.isValid(notes)) {
             throw new IllegalValueException(Notes.MESSAGE_CONSTRAINTS);
         }
-        final String modelNotes = notes.toString();
+        final String modelNotes = notes;
 
         if (prescription == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Prescription.class.getSimpleName()));
         }
 
-        final String modelPrescription = prescription.toString();
+        final String modelPrescription = prescription;
 
-        final String modelTestsTakenAndResults = testsTakenAndResults.toString();
+        final String modelTestsTakenAndResults = testsTakenAndResults;
 
 
         return new Consultation(new Nric(modelOwnerNric), new Date(modelDate), new Time(modelTime),

@@ -16,7 +16,7 @@ public class CliSyntax {
     // Consultation Prefixes
     public static final Prefix PREFIX_DATE = new Prefix("dt/");
     public static final Prefix PREFIX_TIME = new Prefix("tm/");
-    public static final Prefix PREFIX_NOTES = new Prefix("n/");
+    public static final Prefix PREFIX_NOTES = new Prefix("nt/");
     public static final Prefix PREFIX_PRESCRIPTION = new Prefix("pn/");
     public static final Prefix PREFIX_TESTS_TAKEN_AND_RESULTS = new Prefix("tt/");
     public static final Prefix PREFIX_INSTRUCTION = new Prefix("s/");

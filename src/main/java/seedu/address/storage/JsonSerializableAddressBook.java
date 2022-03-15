@@ -41,7 +41,7 @@ class JsonSerializableAddressBook {
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
                                        @JsonProperty("contacts") List<JsonAdaptedContact> contacts,
-                                       @JsonProperty("consultation") List<JsonAdaptedConsultation> consultations,
+                                       @JsonProperty("consultations") List<JsonAdaptedConsultation> consultations,
                                        @JsonProperty("prescriptions") List<JsonAdaptedPrescription> prescriptions) {
         this.persons.addAll(persons);
         if (!contacts.isEmpty()) {
@@ -61,7 +61,6 @@ class JsonSerializableAddressBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
-        System.out.println("HERE!!!");
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
         contacts.addAll(source.getContactList().stream().map(JsonAdaptedContact::new).collect(Collectors.toList()));
         consultations.addAll(source.getConsultationList().stream().map(JsonAdaptedConsultation::new).collect(Collectors.toList()));
@@ -76,6 +75,9 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
+//        System.out.println("1"+persons == null);
+//        System.out.println("2"+contacts == null);
+//        System.out.println("3"+consultations == null);
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
             Patient patient = jsonAdaptedPerson.toModelType();
             if (addressBook.hasPerson(patient)) {
@@ -96,13 +98,6 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PRESCRIPTION);
             }
             addressBook.addPrescription(prescription);
-        }
-        for (JsonAdaptedContact jsonAdaptedContact : contacts) {
-            Contact contact = jsonAdaptedContact.toModelType();
-            if (addressBook.hasContact(contact)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_CONTACT);
-            }
-            addressBook.addContact(contact);
         }
         for (JsonAdaptedConsultation jsonAdaptedConsultation : consultations) {
             Consultation consultation = jsonAdaptedConsultation.toModelType();

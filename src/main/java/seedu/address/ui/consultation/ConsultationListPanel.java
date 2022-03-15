@@ -29,8 +29,6 @@ public class ConsultationListPanel extends UiPart<Region> {
      */
     public ConsultationListPanel(ObservableList<Consultation> consultationList) {
         super(FXML);
-        System.out.println(consultationList == null);
-        System.out.println(consultationList == null);
         consultationListView.setItems(consultationList);
         consultationListView.setCellFactory(listView -> new ConsultationListViewCell());
     }

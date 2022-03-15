@@ -158,12 +158,8 @@ public class MainWindow extends UiPart<Stage> {
                 personListPanelPlaceholder.getChildren().add(contactListPanel.getRoot());
                 return;
             case CONSULTATION:
-                if (consultationListPanel == null) {
-                    personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
-                } else {
-                    personListPanelPlaceholder.getChildren().remove(0);
-                    personListPanelPlaceholder.getChildren().add(consultationListPanel.getRoot());
-                }
+                personListPanelPlaceholder.getChildren().remove(0);
+                personListPanelPlaceholder.getChildren().add(consultationListPanel.getRoot());
                 return;
             case PRESCRIPTION:
                 personListPanelPlaceholder.getChildren().remove(0);
