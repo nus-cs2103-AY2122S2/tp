@@ -61,3 +61,4 @@ public class EditPersonDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 }
+

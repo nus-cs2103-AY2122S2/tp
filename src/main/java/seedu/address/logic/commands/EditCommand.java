@@ -115,11 +115,41 @@ public class EditCommand extends Command {
         CovidStatus updatedCovidStatus = editPersonDescriptor.getCovidStatus()
                 .orElse(personToEdit.getStatus());
 
+        if(editPersonDescriptor.getName().isPresent()){
+            if(updatedName.equals(personToEdit.getName())){
+                throw new CommandException(MESSAGE_SAME_STATUS);
+            }
+        }
+
+        if(editPersonDescriptor.getPhone().isPresent()){
+            if(updatedPhone.equals(personToEdit.getPhone())){
+                throw new CommandException(MESSAGE_SAME_STATUS);
+            }
+        }
+
         if(editPersonDescriptor.getCovidStatus().isPresent()){
             if(updatedCovidStatus.equals(personToEdit.getStatus())){
                 throw new CommandException(MESSAGE_SAME_STATUS);
             }
         }
+
+        if(editPersonDescriptor.getEmail().isPresent()){
+            if(updatedEmail.equals(personToEdit.getEmail())){
+                throw new CommandException(MESSAGE_SAME_STATUS);
+            }
+        }
+
+        if(editPersonDescriptor.getMatriculationNumber().isPresent()){
+            if(updatedMatriculationNumber.equals(personToEdit.getMatriculationNumber())){
+                throw new CommandException(MESSAGE_SAME_STATUS);
+            }
+        }
+        if(editPersonDescriptor.getCovidStatus().isPresent()){
+            if(updatedCovidStatus.equals(personToEdit.getStatus())){
+                throw new CommandException(MESSAGE_SAME_STATUS);
+            }
+        }
+
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedFaculty, updatedPhone, updatedEmail, updatedAddress,
