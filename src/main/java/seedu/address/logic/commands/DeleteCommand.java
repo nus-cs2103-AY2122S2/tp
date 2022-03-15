@@ -35,7 +35,7 @@ public class DeleteCommand extends Command {
     private final StudentId targetId;
 
     /**
-     * Creates a DeleteCommand to delete the specified {@code Person} using the specfied index.
+     * Creates a DeleteCommand to delete the specified {@code Person} using the specified index.
      */
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
@@ -43,7 +43,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Creates a DeleteCommand to delete the specified {@code Person} using the specfied student id.
+     * Creates a DeleteCommand to delete the specified {@code Person} using the specified student id.
      */
     public DeleteCommand(StudentId targetId) {
         this.targetId = targetId;
