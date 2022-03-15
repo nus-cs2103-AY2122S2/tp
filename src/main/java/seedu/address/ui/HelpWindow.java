@@ -31,7 +31,7 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String ADD_COMMAND_EXAMPLE = "Adds a student contact information to ArchDuke.";
 
     public static final String ADD_GROUP_COMMAND_DESC = "Create a group: ";
-    public static final String ADD_GROUP_COMMAND = "addgroup g/CS2103-W16-3";
+    public static final String ADD_GROUP_COMMAND = "addgroup g/GROUP_NAME";
     public static final String ADD_GROUP_COMMAND_EXAMPLE = "Creates a group in ArchDuke.";
 
     public static final String ASSIGN_COMMAND_DESC = "Assign a student to a group: ";
