@@ -2,8 +2,8 @@ package seedu.trackbeau.testutil;
 
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_ALLERGY_COCOA_BUTTER;
-import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_ALLERGY_NICKEL;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_ALLERGY_AMY;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_ALLERGY_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_HAIR_TYPE_AMY;
@@ -12,12 +12,12 @@ import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_SERVICE_ACNE;
-import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_SERVICE_CHEMICAL_PEEL;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_SERVICE_AMY;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_SERVICE_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_SKIN_TYPE_AMY;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_SKIN_TYPE_BOB;
-import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_STAFF_JANE;
-import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_STAFF_JOHN;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_STAFF_AMY;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_STAFF_BOB;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -67,9 +67,9 @@ public class TypicalCustomers {
             .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
             .withSkinType(VALID_SKIN_TYPE_AMY)
             .withHairType(VALID_HAIR_TYPE_AMY)
-            .withStaffs(VALID_STAFF_JANE)
-            .withServices(VALID_SERVICE_CHEMICAL_PEEL)
-            .withAllergies(VALID_ALLERGY_NICKEL)
+            .withStaffs(VALID_STAFF_AMY)
+            .withServices(VALID_SERVICE_AMY)
+            .withAllergies(VALID_ALLERGY_AMY)
             .build();
 
     public static final Customer BOB = new CustomerBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
@@ -77,9 +77,9 @@ public class TypicalCustomers {
             .withAddress(VALID_ADDRESS_BOB)
             .withSkinType(VALID_SKIN_TYPE_BOB)
             .withHairType(VALID_HAIR_TYPE_BOB)
-            .withStaffs(VALID_STAFF_JOHN)
-            .withServices(VALID_SERVICE_ACNE)
-            .withAllergies(VALID_ALLERGY_COCOA_BUTTER)
+            .withStaffs(VALID_STAFF_BOB)
+            .withServices(VALID_SERVICE_BOB)
+            .withAllergies(VALID_ALLERGY_BOB)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

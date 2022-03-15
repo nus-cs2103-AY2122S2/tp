@@ -31,15 +31,15 @@ import static seedu.trackbeau.logic.commands.CommandTestUtil.SKIN_TYPE_DESC_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.STAFF_DESC_AMY;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.STAFF_DESC_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_ALLERGY_COCOA_BUTTER;
-import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_ALLERGY_NICKEL;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_ALLERGY_AMY;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_ALLERGY_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_SERVICE_ACNE;
-import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_SERVICE_CHEMICAL_PEEL;
-import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_STAFF_JANE;
-import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_STAFF_JOHN;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_SERVICE_AMY;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_SERVICE_BOB;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_STAFF_AMY;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_STAFF_BOB;
 import static seedu.trackbeau.logic.parser.AddCommandParser.EMPTY_HAIR_TYPE;
 import static seedu.trackbeau.logic.parser.AddCommandParser.EMPTY_SKIN_TYPE;
 import static seedu.trackbeau.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -65,8 +65,8 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Customer expectedCustomer = new CustomerBuilder(BOB).withStaffs(VALID_STAFF_JOHN)
-                .withServices(VALID_SERVICE_ACNE).withAllergies(VALID_ALLERGY_COCOA_BUTTER).build();
+        Customer expectedCustomer = new CustomerBuilder(BOB).withStaffs(VALID_STAFF_BOB)
+                .withServices(VALID_SERVICE_BOB).withAllergies(VALID_ALLERGY_BOB).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
@@ -106,8 +106,8 @@ public class AddCommandParserTest {
 
         // multiple staffs tags - all accepted
         Customer expectedCustomerMultipleStaffs = new CustomerBuilder(BOB)
-                .withStaffs(VALID_STAFF_JANE, VALID_STAFF_JOHN)
-                .withServices(VALID_SERVICE_ACNE).withAllergies(VALID_ALLERGY_COCOA_BUTTER)
+                .withStaffs(VALID_STAFF_AMY, VALID_STAFF_BOB)
+                .withServices(VALID_SERVICE_BOB).withAllergies(VALID_ALLERGY_BOB)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + SKIN_TYPE_DESC_BOB + HAIR_TYPE_DESC_BOB
@@ -116,10 +116,10 @@ public class AddCommandParserTest {
 
         // multiple services tags - all accepted
         Customer expectedCustomerMultipleServices = new CustomerBuilder(BOB)
-                .withStaffs(VALID_STAFF_JOHN)
-                .withServices(VALID_SERVICE_CHEMICAL_PEEL,
-                VALID_SERVICE_ACNE)
-                .withAllergies(VALID_ALLERGY_COCOA_BUTTER)
+                .withStaffs(VALID_STAFF_BOB)
+                .withServices(VALID_SERVICE_AMY,
+                        VALID_SERVICE_BOB)
+                .withAllergies(VALID_ALLERGY_BOB)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + SKIN_TYPE_DESC_BOB + HAIR_TYPE_DESC_BOB + STAFF_DESC_BOB
@@ -129,9 +129,9 @@ public class AddCommandParserTest {
 
         // multiple allergy tags - all accepted
         Customer expectedCustomerMultipleAllergies = new CustomerBuilder(BOB)
-                .withStaffs(VALID_STAFF_JOHN)
-                .withServices(VALID_SERVICE_ACNE)
-                .withAllergies(VALID_ALLERGY_NICKEL, VALID_ALLERGY_COCOA_BUTTER)
+                .withStaffs(VALID_STAFF_BOB)
+                .withServices(VALID_SERVICE_BOB)
+                .withAllergies(VALID_ALLERGY_AMY, VALID_ALLERGY_BOB)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + SKIN_TYPE_DESC_BOB + HAIR_TYPE_DESC_BOB

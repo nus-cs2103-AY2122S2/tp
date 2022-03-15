@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_STAFF_JOHN;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_STAFF_BOB;
 import static seedu.trackbeau.testutil.Assert.assertThrows;
 import static seedu.trackbeau.testutil.TypicalCustomers.ALICE;
 import static seedu.trackbeau.testutil.TypicalCustomers.getTypicalTrackBeau;
@@ -46,7 +46,7 @@ public class TrackBeauTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
-        Customer editedAlice = new CustomerBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withStaffs(VALID_STAFF_JOHN)
+        Customer editedAlice = new CustomerBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withStaffs(VALID_STAFF_BOB)
                 .build();
         List<Customer> newCustomers = Arrays.asList(ALICE, editedAlice);
         TrackBeauStub newData = new TrackBeauStub(newCustomers);
@@ -74,7 +74,7 @@ public class TrackBeauTest {
     public void hasCustomer_customerWithSameIdentityFieldsInTrackBeau_returnsTrue() {
         trackBeau.addCustomer(ALICE);
         Customer editedAlice = new CustomerBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
-                .withStaffs(VALID_STAFF_JOHN)
+                .withStaffs(VALID_STAFF_BOB)
                 .build();
         assertTrue(trackBeau.hasCustomer(editedAlice));
     }

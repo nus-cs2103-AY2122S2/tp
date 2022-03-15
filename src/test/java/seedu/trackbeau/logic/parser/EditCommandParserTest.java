@@ -3,25 +3,51 @@ package seedu.trackbeau.logic.parser;
 import static seedu.trackbeau.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.ALLERGY_DESC_AMY;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.ALLERGY_DESC_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.HAIR_TYPE_DESC_AMY;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.HAIR_TYPE_DESC_BOB;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.INVALID_HAIR_TYPE_DESC;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.INVALID_SKIN_TYPE_DESC;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.SERVICE_DESC_AMY;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.SERVICE_DESC_BOB;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.SKIN_TYPE_DESC_AMY;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.SKIN_TYPE_DESC_BOB;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.STAFF_DESC_AMY;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.STAFF_DESC_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_ALLERGY_AMY;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_ALLERGY_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_HAIR_TYPE_AMY;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_HAIR_TYPE_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_SERVICE_AMY;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_SERVICE_BOB;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_SKIN_TYPE_AMY;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_SKIN_TYPE_BOB;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_STAFF_AMY;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_STAFF_BOB;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_ALLERGIES;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SERVICES;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_STAFFS;
 import static seedu.trackbeau.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.trackbeau.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.trackbeau.testutil.TypicalIndexes.INDEX_FIRST_CUSTOMER;
+import static seedu.trackbeau.testutil.TypicalIndexes.INDEX_SECOND_CUSTOMER;
 import static seedu.trackbeau.testutil.TypicalIndexes.INDEX_THIRD_CUSTOMER;
 
 import org.junit.jupiter.api.Test;
@@ -29,6 +55,13 @@ import org.junit.jupiter.api.Test;
 import seedu.trackbeau.commons.core.index.Index;
 import seedu.trackbeau.logic.commands.EditCommand;
 import seedu.trackbeau.logic.commands.EditCommand.EditCustomerDescriptor;
+import seedu.trackbeau.model.customer.Address;
+import seedu.trackbeau.model.customer.Email;
+import seedu.trackbeau.model.customer.HairType;
+import seedu.trackbeau.model.customer.Name;
+import seedu.trackbeau.model.customer.Phone;
+import seedu.trackbeau.model.customer.SkinType;
+import seedu.trackbeau.model.tag.Tag;
 import seedu.trackbeau.testutil.EditCustomerDescriptorBuilder;
 
 public class EditCommandParserTest {
@@ -69,7 +102,6 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
     }
 
-    /* ToDo uncomment when edit command is fixed
     @Test
     public void parse_invalidValue_failure() {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
@@ -78,9 +110,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS); // invalid address
         assertParseFailure(parser, "1" + INVALID_SKIN_TYPE_DESC, SkinType.MESSAGE_CONSTRAINTS); //invalid skin type
         assertParseFailure(parser, "1" + INVALID_HAIR_TYPE_DESC, HairType.MESSAGE_CONSTRAINTS); //invalid hair type
-        assertParseFailure(parser, "1" + INVALID_STAFFS_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid staff
-        assertParseFailure(parser, "1" + INVALID_SERVICE_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid service
-        assertParseFailure(parser, "1" + INVALID_ALLERGY_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid allergy
+        //no invalid tags because e.g. for staffs stp/ clears the tags in edit, but note : it is invalid in add
 
         // invalid phone followed by valid email
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
@@ -89,44 +119,42 @@ public class EditCommandParserTest {
         // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
         assertParseFailure(parser, "1" + PHONE_DESC_BOB + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS);
 
-        // while parsing {@code PREFIX_STAFF} alone will reset the tags of the {@code Person} being edited,
+        // while parsing {@code PREFIX_STAFF} alone will reset the tags of the {@code Customer} being edited,
         // parsing it together with a valid tag results in error
-        assertParseFailure(parser, "1" + VALID_STAFF_JANE + VALID_STAFF_JOHN + STAFFS_EMPTY, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + VALID_STAFF_JANE + STAFFS_EMPTY + VALID_STAFF_JOHN, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + STAFFS_EMPTY + VALID_STAFF_JANE + VALID_STAFF_JOHN, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + STAFF_DESC_AMY + STAFF_DESC_BOB + STAFFS_EMPTY, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + STAFF_DESC_AMY + STAFFS_EMPTY + STAFF_DESC_BOB, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + STAFFS_EMPTY + STAFF_DESC_AMY + STAFF_DESC_BOB, Tag.MESSAGE_CONSTRAINTS);
 
-        // while parsing {@code PREFIX_SERVICE} alone will reset the tags of the {@code Person} being edited,
+        // while parsing {@code PREFIX_SERVICE} alone will reset the tags of the {@code Customer} being edited,
         // parsing it together with a valid tag results in error
-        assertParseFailure(parser, "1" + VALID_SERVICE_CHEMICAL_PEEL + VALID_SERVICE_ACNE
-        + SERVICES_EMPTY, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + VALID_SERVICE_CHEMICAL_PEEL
-        + SERVICES_EMPTY + VALID_SERVICE_ACNE, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + SERVICE_DESC_AMY + SERVICE_DESC_BOB
+                + SERVICES_EMPTY, Tag.MESSAGE_CONSTRAINTS);
+
+        assertParseFailure(parser, "1" + SERVICE_DESC_AMY
+                + SERVICES_EMPTY + SERVICE_DESC_BOB, Tag.MESSAGE_CONSTRAINTS);
+
         assertParseFailure(parser, "1" + SERVICES_EMPTY
-        + VALID_SERVICE_CHEMICAL_PEEL + VALID_SERVICE_ACNE, Tag.MESSAGE_CONSTRAINTS);
+                + SERVICE_DESC_AMY + SERVICE_DESC_BOB, Tag.MESSAGE_CONSTRAINTS);
 
-        // while parsing {@code PREFIX_ALLERGY} alone will reset the tags
-        of the {@code Person} being edited, parsing it together with a valid tag results in error
+        // while parsing {@code PREFIX_ALLERGY} alone will reset the tags of the
+        // {@code Customer} being edited, parsing it together with a valid tag results in error
         assertParseFailure(parser, "1"
-        + VALID_ALLERGY_COCOA_BUTTER
-        + VALID_ALLERGY_NICKEL + ALLERGY_EMPTY,
-        Tag.MESSAGE_CONSTRAINTS);
+                        + ALLERGY_DESC_BOB + ALLERGY_DESC_AMY + ALLERGY_EMPTY, Tag.MESSAGE_CONSTRAINTS);
+
         assertParseFailure(parser, "1"
-        + VALID_ALLERGY_COCOA_BUTTER + ALLERGY_EMPTY + VALID_ALLERGY_NICKEL,
-        Tag.MESSAGE_CONSTRAINTS);
+                        + ALLERGY_DESC_BOB + ALLERGY_EMPTY + ALLERGY_DESC_AMY, Tag.MESSAGE_CONSTRAINTS);
+
         assertParseFailure(parser, "1" + ALLERGY_EMPTY
-        + VALID_ALLERGY_COCOA_BUTTER + VALID_ALLERGY_NICKEL, Tag.MESSAGE_CONSTRAINTS);
+                + ALLERGY_DESC_BOB + ALLERGY_DESC_AMY, Tag.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC
-        + VALID_ADDRESS_AMY + VALID_PHONE_AMY,
-                Name.MESSAGE_CONSTRAINTS);
+                        + ADDRESS_DESC_AMY + PHONE_DESC_AMY, Name.MESSAGE_CONSTRAINTS);
     }
-*/
 
-    /* ToDo uncomment when edit command is fixed
     @Test
     public void parse_allFieldsSpecified_success() {
-        Index targetIndex = INDEX_SECOND_PERSON;
+        Index targetIndex = INDEX_SECOND_CUSTOMER;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + STAFF_DESC_BOB + SKIN_TYPE_DESC_BOB
                 + HAIR_TYPE_DESC_BOB + STAFF_DESC_BOB + SERVICE_DESC_BOB + ALLERGY_DESC_BOB
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + STAFF_DESC_AMY + SERVICE_DESC_AMY
@@ -135,16 +163,16 @@ public class EditCommandParserTest {
         EditCustomerDescriptor descriptor = new EditCustomerDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withSkinType(VALID_SKIN_TYPE_BOB).withHairType(VALID_HAIR_TYPE_BOB)
-                .withStaffs(STAFF_DESC_BOB, STAFF_DESC_AMY)
-                .withServices(SERVICE_DESC_BOB, SERVICE_DESC_AMY)
-                .withAllergies(ALLERGY_DESC_BOB, ALLERGY_DESC_AMY)
+                .withStaffs(VALID_STAFF_BOB, VALID_STAFF_AMY)
+                .withServices(VALID_SERVICE_BOB, VALID_SERVICE_AMY)
+                .withAllergies(VALID_ALLERGY_BOB, VALID_ALLERGY_AMY)
                 .build();
 
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
-*/
+
     @Test
     public void parse_someFieldsSpecified_success() {
         Index targetIndex = INDEX_FIRST_CUSTOMER;
@@ -184,7 +212,6 @@ public class EditCommandParserTest {
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        /* Todo uncomment when edit command is fixed by Kai Qi
         // skin type
         userInput = targetIndex.getOneBased() + SKIN_TYPE_DESC_AMY;
         descriptor = new EditCustomerDescriptorBuilder().withSkinType(VALID_SKIN_TYPE_AMY).build();
@@ -198,45 +225,47 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // staff
-        userInput = targetIndex.getOneBased() + VALID_STAFF_JANE;
-        descriptor = new EditCustomerDescriptorBuilder().withStaffs(VALID_STAFF_JANE).build();
+        userInput = targetIndex.getOneBased() + STAFF_DESC_AMY;
+        descriptor = new EditCustomerDescriptorBuilder().withStaffs(VALID_STAFF_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // service
-        userInput = targetIndex.getOneBased() + VALID_SERVICE_ACNE;
-        descriptor = new EditCustomerDescriptorBuilder().withServices(VALID_SERVICE_ACNE).build();
+        userInput = targetIndex.getOneBased() + SERVICE_DESC_AMY;
+        descriptor = new EditCustomerDescriptorBuilder().withServices(VALID_SERVICE_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // allergy
-        userInput = targetIndex.getOneBased() + VALID_ALLERGY_COCOA_BUTTER;
-        descriptor = new EditCustomerDescriptorBuilder().withAllergies(VALID_ALLERGY_COCOA_BUTTER).build();
+        userInput = targetIndex.getOneBased() + ALLERGY_DESC_AMY;
+        descriptor = new EditCustomerDescriptorBuilder().withAllergies(VALID_ALLERGY_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
-        */
+
     }
 
-    /* ToDo uncomment when the edit command is fixed
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
-        Index targetIndex = INDEX_FIRST_PERSON;
+        Index targetIndex = INDEX_FIRST_CUSTOMER;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY
-                + STAFF_DESC_AMY + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY
-                + SKIN_TYPE_DESC_AMY + HAIR_TYPE_DESC_AMY
+                + SKIN_TYPE_DESC_AMY + HAIR_TYPE_DESC_AMY + STAFF_DESC_AMY
+                + SERVICE_DESC_AMY + ALLERGY_DESC_AMY
                 + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB + SKIN_TYPE_DESC_BOB
-                + HAIR_TYPE_DESC_BOB + STAFF_DESC_BOB;
+                + HAIR_TYPE_DESC_BOB + STAFF_DESC_BOB + SERVICE_DESC_BOB + ALLERGY_DESC_BOB;
 
         EditCustomerDescriptor descriptor = new EditCustomerDescriptorBuilder().withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withSkinType(VALID_SKIN_TYPE_BOB).withHairType(VALID_HAIR_TYPE_BOB)
-                .withStaffs(STAFF_DESC_AMY, STAFF_DESC_BOB)
+                .withStaffs(VALID_STAFF_AMY, VALID_STAFF_BOB)
+                .withServices(VALID_SERVICE_AMY, VALID_SERVICE_BOB)
+                .withAllergies(VALID_ALLERGY_AMY, VALID_ALLERGY_BOB)
                 .build();
+
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
-*/
+
     @Test
     public void parse_invalidValueFollowedByValidValue_success() {
         // no other valid values specified

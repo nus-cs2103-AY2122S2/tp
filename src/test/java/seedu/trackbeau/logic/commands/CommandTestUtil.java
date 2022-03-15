@@ -48,14 +48,14 @@ public class CommandTestUtil {
     public static final String VALID_HAIR_TYPE_AMY = "Oily";
     public static final String VALID_HAIR_TYPE_BOB = "Dry";
 
-    public static final String VALID_STAFF_JANE = "Jane";
-    public static final String VALID_STAFF_JOHN = "John";
+    public static final String VALID_STAFF_AMY = "Jane";
+    public static final String VALID_STAFF_BOB = "John";
 
-    public static final String VALID_SERVICE_CHEMICAL_PEEL = "Chemical Peel";
-    public static final String VALID_SERVICE_ACNE = "Acne treatment";
+    public static final String VALID_SERVICE_AMY = "Chemical Peel";
+    public static final String VALID_SERVICE_BOB = "Acne treatment";
 
-    public static final String VALID_ALLERGY_NICKEL = "Nickel";
-    public static final String VALID_ALLERGY_COCOA_BUTTER = "Cocoa Butter";
+    public static final String VALID_ALLERGY_AMY = "Nickel";
+    public static final String VALID_ALLERGY_BOB = "Cocoa Butter";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -75,14 +75,14 @@ public class CommandTestUtil {
     public static final String HAIR_TYPE_DESC_AMY = " " + PREFIX_HAIRTYPE + VALID_HAIR_TYPE_AMY;
     public static final String HAIR_TYPE_DESC_BOB = " " + PREFIX_HAIRTYPE + VALID_HAIR_TYPE_BOB;
 
-    public static final String STAFF_DESC_AMY = " " + PREFIX_STAFFS + VALID_STAFF_JANE;
-    public static final String STAFF_DESC_BOB = " " + PREFIX_STAFFS + VALID_STAFF_JOHN;
+    public static final String STAFF_DESC_AMY = " " + PREFIX_STAFFS + VALID_STAFF_AMY;
+    public static final String STAFF_DESC_BOB = " " + PREFIX_STAFFS + VALID_STAFF_BOB;
 
-    public static final String SERVICE_DESC_AMY = " " + PREFIX_SERVICES + VALID_SERVICE_CHEMICAL_PEEL;
-    public static final String SERVICE_DESC_BOB = " " + PREFIX_SERVICES + VALID_SERVICE_ACNE;
+    public static final String SERVICE_DESC_AMY = " " + PREFIX_SERVICES + VALID_SERVICE_AMY;
+    public static final String SERVICE_DESC_BOB = " " + PREFIX_SERVICES + VALID_SERVICE_BOB;
 
-    public static final String ALLERGY_DESC_AMY = " " + PREFIX_ALLERGIES + VALID_ALLERGY_NICKEL;
-    public static final String ALLERGY_DESC_BOB = " " + PREFIX_ALLERGIES + VALID_ALLERGY_COCOA_BUTTER;
+    public static final String ALLERGY_DESC_AMY = " " + PREFIX_ALLERGIES + VALID_ALLERGY_AMY;
+    public static final String ALLERGY_DESC_BOB = " " + PREFIX_ALLERGIES + VALID_ALLERGY_BOB;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -106,18 +106,18 @@ public class CommandTestUtil {
                 .withAddress(VALID_ADDRESS_AMY)
                 .withSkinType(VALID_SKIN_TYPE_AMY)
                 .withHairType(VALID_HAIR_TYPE_AMY)
-                .withStaffs(VALID_STAFF_JANE)
-                .withServices(VALID_SERVICE_CHEMICAL_PEEL)
-                .withAllergies(VALID_ALLERGY_NICKEL)
+                .withStaffs(VALID_STAFF_AMY)
+                .withServices(VALID_SERVICE_AMY)
+                .withAllergies(VALID_ALLERGY_AMY)
                 .build();
         DESC_BOB = new EditCustomerDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB)
                 .withSkinType(VALID_SKIN_TYPE_BOB)
                 .withHairType(VALID_HAIR_TYPE_BOB)
-                .withStaffs(VALID_STAFF_JANE)
-                .withServices(VALID_SERVICE_CHEMICAL_PEEL)
-                .withAllergies(VALID_ALLERGY_NICKEL)
+                .withStaffs(VALID_STAFF_BOB)
+                .withServices(VALID_SERVICE_BOB)
+                .withAllergies(VALID_ALLERGY_BOB)
                 .build();
     }
 
