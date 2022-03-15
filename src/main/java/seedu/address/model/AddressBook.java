@@ -78,8 +78,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Sorts the list of pets in the address book.
      * Currently, it will sort the list of pets in alphabetical order according to their name.
      */
-    public void sortPets() {
-        pets.sortPetList();
+    public void sortPets(String columnName) {
+        pets.sortPetList(columnName);
     }
 
     /**

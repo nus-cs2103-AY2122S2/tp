@@ -40,9 +40,19 @@ public class UniquePetList implements Iterable<Pet> {
     /**
      * Sort list of pets by name using the comparator in the Name class.
      */
-    public void sortPetList() {
+    public void sortPetList(String columnName) {
         Comparator<Pet> petNameComparator = Comparator.comparing(Pet::getName);
-        FXCollections.sort(internalList, petNameComparator);
+        Comparator<Pet> petOwnerNameComparator = Comparator.comparing(Pet::getOwnerName);
+        switch (columnName) {
+        case "o":
+            FXCollections.sort(internalList, petOwnerNameComparator);
+            break;
+        case "n":
+            FXCollections.sort(internalList, petNameComparator);
+            break;
+        default:
+            assert false;
+        }
     }
 
     /**

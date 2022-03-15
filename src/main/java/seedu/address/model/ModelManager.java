@@ -113,8 +113,8 @@ public class ModelManager implements Model {
 
     /** Method that sorts the pet list via the sortPets() command in addressBook. **/
     @Override
-    public void sortPetList() {
-        addressBook.sortPets();
+    public void sortPetList(String columnName) {
+        addressBook.sortPets(columnName);
         updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
     }
     //=========== Filtered Pet List Accessors =============================================================

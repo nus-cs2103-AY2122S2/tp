@@ -88,5 +88,5 @@ public interface Model {
     /**
      * Sorts the pet list based on the name of the pet.
      */
-    void sortPetList();
+    void sortPetList(String columnName);
 }

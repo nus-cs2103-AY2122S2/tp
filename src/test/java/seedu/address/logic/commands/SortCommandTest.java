@@ -29,7 +29,7 @@ public class SortCommandTest {
      */
     @Test
     public void execute_listIsNotFiltered_showsSortedList() {
-        expectedModel.sortPetList();
-        assertCommandSuccess(new SortCommand(), model, SortCommand.MESSAGE_SUCCESS, expectedModel);
+        expectedModel.sortPetList("o");
+        assertCommandSuccess(new SortCommand("o"), model, SortCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }
