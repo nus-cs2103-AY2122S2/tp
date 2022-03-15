@@ -178,6 +178,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asUnmodifiableObservableList();
     }
 
+    @Override
+    public ObservableList<Medical> getMedicalList() {
+        return medicals.asUnmodifiableObservableList();
+    }
 
     @Override
     public ObservableList<Contact> getContactList() {
@@ -208,5 +212,13 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addMedical(Medical m) {
         medicals.add(m);
+    }
+
+    /**
+     * Checks if medical information (for patient with same NRIC) already exist.
+     */
+    public boolean hasMedical(Medical m) {
+        requireNonNull(m);
+        return medicals.contains(m);
     }
 }

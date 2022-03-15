@@ -21,6 +21,7 @@ import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.medical.Medical;
+import seedu.address.model.medical.MedicalWithNricPredicate;
 import seedu.address.model.patient.Nric;
 import seedu.address.model.patient.NricPredicate;
 
@@ -59,7 +60,7 @@ public class AddMedicalCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New medical information added: %1$s";
     public static final String MESSAGE_MISSING_PATIENT = "This patient does not exist in MedBook";
-
+    public static final String MESSAGE_DUPLICATE_MEDICAL = "Medical information for this patient already exist.";
 
     // Identifier
     private final Nric patientNric;
@@ -85,7 +86,12 @@ public class AddMedicalCommand extends Command {
             throw new CommandException(MESSAGE_MISSING_PATIENT);
         }
 
+        if (model.hasMedical(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_MEDICAL);
+        }
+
         model.addMedical(toAdd);
+        model.updateFilteredMedicalList(new MedicalWithNricPredicate(patientNric));
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), COMMAND_TYPE);
     }
