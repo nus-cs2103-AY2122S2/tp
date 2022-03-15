@@ -31,7 +31,7 @@ public class Location {
     }
 
     /**
-     * Returns true if a given string is a valid platform.
+     * Returns true if a given string is a valid location.
      * TODO
      */
     public static boolean isValidLocation(String test) {
