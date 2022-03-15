@@ -68,8 +68,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_STAFFS)).ifPresent(editCustomerDescriptor::setStaffs);
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_SERVICES)).ifPresent(editCustomerDescriptor::setStaffs);
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_ALLERGIES)).ifPresent(editCustomerDescriptor::setStaffs);
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_SERVICES)).ifPresent(editCustomerDescriptor::setServices);
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_ALLERGIES)).ifPresent(editCustomerDescriptor::setAllergies);
 
         if (!editCustomerDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
