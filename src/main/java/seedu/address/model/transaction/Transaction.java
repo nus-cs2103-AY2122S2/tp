@@ -11,10 +11,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.address.logic.parser.Prefix;
-import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
@@ -31,20 +29,16 @@ public class Transaction implements Serializable {
         requireAllNonNull(fields);
 
         // Add fields.
-        for (Field f : fields) {
+        for (TransactionField f : fields) {
             checkArgument(f != null, "All fields in Person constructor cannot be null.");
             this.fields.put(f.prefix, f);
         }
 
         // Check for required fields.
-        for (Prefix p : FieldRegistry.REQUIRED_PREFIXES) {
+        for (Prefix p : TransactionFieldRegistry.REQUIRED_PREFIXES) {
             checkArgument(this.fields.containsKey(p), "All required fields must be given.");
         }
     }
-
-//    public Transaction(Person otherPerson) {
-//        this(otherPerson.getFields(), otherPerson.getTags());
-//    }
 
     /**
      * Returns true if the person contains the specified field.
@@ -56,7 +50,6 @@ public class Transaction implements Serializable {
         return fields.containsKey(prefix);
     }
 
-
     public Optional<TransactionField> getField(Prefix prefix) {
         requireAllNonNull(prefix);
         return Optional.ofNullable(fields.get(prefix));
@@ -67,28 +60,30 @@ public class Transaction implements Serializable {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
+     * Get the amount of the transaction
+     *
+     * @return Amount of the transaction
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Amount getAmount() {
+        return (Amount) this.fields.get(Amount.PREFIX);
     }
-
-    public Person setTags(Collection<Tag> tags) {
-        return new Person(this.fields.values(), tags);
-    }
-
-
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Get the Due date of the transaction
+     *
+     * @return Due date of the transaction
      */
-    public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
-            return true;
-        }
-        return otherPerson != null && otherPerson.getEmail().equals(getEmail());
+    public Optional<DueDate> getDueDate() {
+        return Optional.ofNullable((DueDate) this.fields.get(DueDate.PREFIX));
+    }
+
+    /**
+     * Get the transaction date of the transaction
+     *
+     * @return transaction date of the transaction
+     */
+    public TransactionDate getTransactionDate() {
+        return (TransactionDate) this.fields.get(TransactionDate.PREFIX);
     }
 
     /**
@@ -101,41 +96,36 @@ public class Transaction implements Serializable {
             return true;
         }
 
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Transaction)) {
             return false;
         }
 
-        Person otherPerson = (Person) other;
-        return otherPerson.getName().equals(getName())
-                && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+        Transaction otherTr = (Transaction) other;
+        return otherTr.getAmount().equals(getAmount())
+                && otherTr.getDueDate().equals(getDueDate())
+                && otherTr.getTransactionDate().equals(getTransactionDate());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(getName(), getPhone(), getEmail(), getAddress(), tags);
+        return Objects.hash(getAmount(), getDueDate(), getTransactionDate());
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append("; Phone: ")
-                .append(getPhone())
-                .append("; Email: ")
-                .append(getEmail())
-                .append("; Address: ")
-                .append(getAddress());
+        builder.append("Amount: ")
+                .append(getAmount())
+                .append("; Transaction date: ")
+                .append(getTransactionDate());
 
-        Set<Tag> tags = getTags();
-        if (!tags.isEmpty()) {
-            builder.append("; Tags: ");
-            tags.forEach(builder::append);
+        if (getDueDate().isPresent()) {
+            builder.append("; Due date: ")
+                    .append(getDueDate().get());
         }
 
         return builder.toString();
     }
 }
+

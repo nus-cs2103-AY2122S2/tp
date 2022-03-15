@@ -17,6 +17,7 @@ import java.util.Set;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.transaction.Transaction;
 
 /**
  * Represents a Person in the address book.
@@ -25,6 +26,7 @@ import seedu.address.model.tag.Tag;
 public class Person implements Serializable {
     private final HashMap<Prefix, Field> fields = new HashMap<>();
     private final HashSet<Tag> tags = new HashSet<>();
+    private final ArrayList<Transaction> transactions = new ArrayList<>();
 
     /**
      * Person constructor
@@ -53,6 +55,11 @@ public class Person implements Serializable {
 
     public Person(Person otherPerson) {
         this(otherPerson.getFields(), otherPerson.getTags());
+    }
+
+    public Person(Collection<Field> fields, Collection<Tag> tags, Collection<Transaction> transactions) {
+        this(fields, tags);
+        this.transactions.addAll(transactions);
     }
 
     /**
@@ -195,7 +202,19 @@ public class Person implements Serializable {
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Adds a transaction to the person
+     *
+     * @param transaction transaction to add
+     * @return A new person with added transaction
+     */
+    public Person addTransaction(Transaction transaction) {
+        ArrayList<Transaction> newTransactions = new ArrayList<>(this.transactions);
+        newTransactions.add(transaction);
+        return new Person(getFields(), getTags(), newTransactions);
+    }
+
+    /**
+     * Returns true if both persons have the same email.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
