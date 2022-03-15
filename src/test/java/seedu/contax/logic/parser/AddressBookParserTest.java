@@ -41,6 +41,7 @@ import seedu.contax.logic.commands.ImportCsvCommand;
 import seedu.contax.logic.commands.ListAppointmentCommand;
 import seedu.contax.logic.commands.ListCommand;
 import seedu.contax.logic.commands.ListTagCommand;
+import seedu.contax.logic.commands.RangeCommand;
 import seedu.contax.logic.parser.exceptions.ParseException;
 import seedu.contax.model.IndexedCsvFile;
 import seedu.contax.model.appointment.Appointment;
@@ -215,6 +216,12 @@ public class AddressBookParserTest {
     public void parseCommand_chainCommand() throws Exception {
         assertTrue(parser.parseCommand(ChainCommand.COMMAND_WORD + " " + ListCommand.COMMAND_WORD
                 + " && " + ListCommand.COMMAND_WORD) instanceof ChainCommand);
+    }
+
+    @Test
+    public void parseCommand_rangeCommand() throws Exception {
+        assertTrue(parser.parseCommand(RangeCommand.COMMAND_WORD + " " + DeleteCommand.COMMAND_WORD
+                + " from/1 to/2") instanceof RangeCommand);
     }
 
     @Test
