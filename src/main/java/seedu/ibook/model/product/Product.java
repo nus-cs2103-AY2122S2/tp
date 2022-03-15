@@ -5,7 +5,6 @@ import static seedu.ibook.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 
 import seedu.ibook.model.product.item.Item;
-import seedu.ibook.model.product.item.Quantity;
 import seedu.ibook.model.product.item.UniqueItemList;
 
 /**
