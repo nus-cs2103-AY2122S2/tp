@@ -3,14 +3,16 @@ package seedu.address.model.property;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 
 class PriceRangeTest {
 
-    PriceRange editablePriceRange = new PriceRange(10, 20);
+    private PriceRange editablePriceRange = new PriceRange(10, 20);
 
     PriceRangeTest() throws IllegalValueException {
         assertThrows(IllegalValueException.class, () -> new PriceRange(20, 10));
@@ -84,8 +86,8 @@ class PriceRangeTest {
 
         //within range
         assertTrue(PriceRange.isWithinRange(90, pr1));
-        assertTrue(PriceRange.isWithinRange(150, pr2));  //inclusive
-        assertTrue(PriceRange.isWithinRange(50, pr2));  //inclusive
+        assertTrue(PriceRange.isWithinRange(150, pr2)); //inclusive
+        assertTrue(PriceRange.isWithinRange(50, pr2)); //inclusive
         assertTrue(PriceRange.isWithinRange(45, pr4));
 
         //outside range
