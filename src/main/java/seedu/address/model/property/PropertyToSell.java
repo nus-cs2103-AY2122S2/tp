@@ -20,6 +20,12 @@ public class PropertyToSell {
      */
     private String address;
 
+    /**
+     * Constructs a PropertyToSell for the seller.
+     * @param house the house that the seller is selling.
+     * @param sellRange the PriceRange that a seller is willing to sell the property for.
+     * @param address the exact address of the property the seller is selling.
+     */
     public PropertyToSell(House house, PriceRange sellRange, String address) {
         this.house = house;
         this.sellRange = sellRange;

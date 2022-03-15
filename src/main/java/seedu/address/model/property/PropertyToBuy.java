@@ -18,6 +18,11 @@ public class PropertyToBuy {
      */
     private PriceRange buyRange;
 
+    /**
+     * Constructs a PropertyToBuy of the buyer.
+     * @param house the house that a buyer wants to buy.
+     * @param buyRange the PriceRange that a buyer is willing to pay.
+     */
     public PropertyToBuy(House house, PriceRange buyRange) {
         this.house = house;
         this.buyRange = buyRange;

@@ -24,8 +24,8 @@ public class PriceRange {
     public PriceRange(int lower, int upper) throws IllegalValueException {
         if (lower > upper || lower < 0 || upper < 0) {
             // lower must be lower than upper, and the values should all be non-negative.
-            throw new IllegalValueException("lower should be lower than upper(inclusive)," +
-                     " and all values should be non-negative");
+            throw new IllegalValueException("lower should be lower than upper(inclusive),"
+                      + " and all values should be non-negative");
         }
         this.lower = lower;
         this.upper = upper;
