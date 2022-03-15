@@ -2,6 +2,7 @@ package seedu.address.logic.commands.help;
 
 import seedu.address.commons.core.DataType;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 
@@ -12,7 +13,7 @@ public class DetailHelpCommand extends HelpCommand {
         this.helpCommand = helpCommand;
     }
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         switch (helpCommand) {
         case "add":
             return new CommandResult(HelpDescription.ADD_COMMAND_DESCRIPTION, getCommandDataType(), true, false);
@@ -29,7 +30,7 @@ public class DetailHelpCommand extends HelpCommand {
         case "exit":
             return new CommandResult(HelpDescription.EXIT_COMMAND_DESCRIPTION, getCommandDataType(), true, false);
         default:
-            return new CommandResult(HelpDescription.COMMAND_NOT_FOUND_DESCRIPTION, getCommandDataType(), true, false);
+            throw new CommandException(HelpDescription.COMMAND_NOT_FOUND_DESCRIPTION);
         }
     }
 
