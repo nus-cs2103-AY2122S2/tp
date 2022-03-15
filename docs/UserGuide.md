@@ -97,17 +97,19 @@ Examples:
 
 Adds a new interview to HireLah.
 
-Format: `add -i n/CANDIDATE_INDEX d/DATE r/ROLE`
+Format: `add -i APPLICANT_INDEX d/DATE p/POSITION_INDEX`
 * Date provided must be in format YYYY-MM-DD HH:MM.
-* Role *must* currently exist in position.
+* The index refers to the index number shown in the last displayed Applicant
+  list and Position list.
+* Index provided must be positive.
 
 Examples:
-* `add -i n/1 d/2022-01-01 14:00 r/Senior Frontend Software Engineer`
+* `add -i 1 d/2022-01-01 14:00 p/2`
 
 ### Adding positions : `add -p`
 
 Adds a new open position to HireLah.
-Format: `posadd POSITION_NAME n/NUM_OPENINGS [d/DESCRIPTION] [r/REQUIREMENTS]`
+Format: `add -p POSITION_NAME n/NUM_OPENINGS [d/DESCRIPTION] [r/REQUIREMENTS]`
 * Positions must have a **unique name**.
 * Name provided is case-insensitive.
 * Number of openings in the position must be **0 or more** 0, 1, 2, …​
@@ -148,16 +150,18 @@ Examples:
 
 Edit an existing interview in HireLah.
 
-Format: `edit -i CANDIDATE_INDEX ROLE [d/DATE] [r/NEWROLE]`
-* Edits the interview with CANDIDATE_INDEX and ROLE.
+Format: `edit -i INTERVIEW_INDEX [d/DATE] [p/POSITION_INDEX]`
+* Edits the interview at the specified INTERVIEW_INDEX. The interview index refers to the index number shown in the 
+  last displayed interview list.
 * At least one optional field must be provided.
+* The position index refers to the index number shown in the last displayed interview list.
 * Existing attribute of the interview will be updated to the input value.
 * When editing requirements, the existing requirements of the interview will be removed. i.e.
   adding requirements is not cumulative.
 
 Examples:
-* `edit -i 1 Senior Frontend Software Engineer d/2022-01-01 15:00`
-* `edit -i 1 Senior Frontend Software Engineer r/Senior FullStack Developer`
+* `edit -i 1 d/2022-01-01 15:00`
+* `edit -i 3 d/2022-01-01 15:00 p/1`
 
 
 ### Edit positions : `edit -p`
@@ -203,12 +207,13 @@ Examples:
 
 Deletes an existing interview in HireLah.
 
-Format: `delete -i CANDIDATE_INDEX ROLE`
-* Existing interview with the matching CANDIDATE_INDEX and ROLE is deleted.
-* Role provided is case-insensitive.
+Format: `delete -i INTERVIEW_INDEX`
+* Deletes the Interview at the specified `INTERVIEW_INDEX`.
+* The index refers to the index number shown in the displayed Applicant list.
+* The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `delete -i 1 Senior Frontend Software Engineer`
+* `delete -i 3`
 
 
 ### Delete positions : `del -p`
@@ -233,13 +238,13 @@ Format: `list -TYPE`
 * -p will list all position
 
 ### List Applicants: `list -a`
-Lists all existing applicants
+Lists all existing applicants. Automatically toggles view to the applicant tab on the GUI.
 
 Format: `list -a`
 
 ### Listing interviews: `list -i`
 
-Lists all existing interviews for the candidate in HireLah.
+Lists all existing interviews in HireLah. Automatically toggles view to the interview tab on the GUI.
 
 Format: `list -i CANDIDATE_INDEX`
 
@@ -247,7 +252,7 @@ Examples:
 * `list -i 1`
 ### List Positions : `list -p`
 
-Lists all existing positions in HireLah.
+Lists all existing positions in HireLah. Automatically toggles view to the position tab on the GUI.
 
 Format: `list -p`
 
@@ -307,8 +312,8 @@ Format: `help COMMAND`
 * Command name is not case-sensitive
 
 Examples:
-* `help posadd`
-* `help Intvwdel`
+* `help add` 
+* `help del`
 
 ### Exiting the program : `exit`
 
