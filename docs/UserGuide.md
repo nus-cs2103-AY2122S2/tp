@@ -3,25 +3,18 @@ layout: page
 title: User Guide
 ---
 
-IBook is an inventory recording system for storekeepers to manage incoming and outgoing products in a store.
-
-## Table of Contents
-* [Quick start](#quick-start)
-* [Features](#features)
-  * [Viewing help](#viewing-help--help) 
-  * Products
-    * [Adding a product](#adding-a-product--add)
-    * [Listing products](#listing-products--list)
-    * [Updating products](#updating-products--update)
-    * [Deleting products](#deleting-products--delete)
-  * Categories
-  * [Exiting the program](#exiting-the-program--exit)
- * [FAQ](#faq)
- * [Command Summary](#command-summary)
+* Table of Contents
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## 1. Introduction
+
+IBook is an inventory recording system for storekeepers to manage incoming and outgoing products in a store.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## 2. Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -47,7 +40,58 @@ IBook is an inventory recording system for storekeepers to manage incoming and o
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## 3. About
+### 3.1 Structure of the document
+
+This document is structured in a chronological manner so that you would be able to follow through this guide while using the product. If you feel lost at any point in time, you can always refer to the Table of Contents.
+
+### 3.2 Reading the document
+
+This subsection would introduce you to the different symbols, syntax and technical terms that are used throughout this guide.
+It is important to read this section before proceeding further to avoid getting confused!
+
+### 3.2.1 Special symbols
+
+**Additional Information**
+
+Text that appear in an information box indicates additional information that may be useful to know.
+
+<div markdown="block" class="alert alert-info">
+
+:information_source: **Information:**
+Example additional information.
+
+</div>
+
+**Caution**
+
+Text that appear in a caution box should be followed carefully, else unintended consequences might arise.
+
+<div markdown="block" class="alert alert-warning">
+
+:exclamation: **Caution:**
+Example warnings.
+
+</div>
+
+<div style="page-break-after: always;"></div>
+
+**Tip**
+
+Text that appear in a tip box are useful for improving your experience with iBook.
+
+<div markdown="block" class="alert alert-primary">
+
+:bulb: **Tip:**
+Example tip.
+
+</div>
+
+### 3.2.2 Sections of the Application Window
+
+### 3.2.3 Navigating around
+
+### 3.2.4 Command Format
 
 <div markdown="block" class="alert alert-info">
 
@@ -67,29 +111,25 @@ IBook is an inventory recording system for storekeepers to manage incoming and o
 
 </div>
 
-### Viewing help : `help`
+### 3.2.5 Command Parameters
 
-Shows a message explaning how to access the help page.
+| Parameter      | Description                                               |
+|:---------------|:----------------------------------------------------------|
+| `NAME`         | Name of the product/item.                                 |
+| `CATEGORY`     | Category of the product.                                  |
+| `EXPRIRY_DATE` | Expiry date of the item.                                  |
+| `PRICE`        | Price of the product. A valid price is a positive number. |
+| `DESCRIPTION`  | Description of the product.                               |
+| `QUANTITY`     | Quantity of the item.                                     |
+| `DISCOUNT`     | Discount given to the item.                               |
 
-![help message](images/helpMessage.png)
+--------------------------------------------------------------------------------------------------------------------
 
-Format: `help`
+## 4. Features
 
+### 4.1 Product Commands
 
-### Adding a product : `add`
-
-Adds a new product to the application.
-
-Format: `add n:NAME c:CATEGORY e:EXPRIRY_DATE p:PRICE d:DESCRIPTION`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-Only a single product would be added at a time
-</div>
-
-Examples:
-* `add n:Maggie c:noodles e:01/01/2022 p:3.00 d:Maggie noodles`
-
-### Listing products : `list`
+#### 4.1.1 Listing all products : `list`
 
 Shows a list of all products in the application.
 
@@ -110,11 +150,24 @@ Examples:
 
 `list e:01/05/2022` lists all products that has expiry date on 01/05/2022.
 
-### Updating products : `update`
+#### 4.1.2 Adding a product : `add`
+
+Adds a new product to the application.
+
+Format: `add n:NAME c:CATEGORY e:EXPRIRY_DATE p:PRICE d:DESCRIPTION`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Only a single product would be added at a time
+</div>
+
+Examples:
+* `add n:Maggie c:noodles e:01/01/2022 p:3.00 d:Maggie noodles`
+
+#### 4.1.3 Updating products : `update`
 
 Updates the product at the specified INDEX.
 
-Format: `update INDEX | [TAG:NEW_VALUE ...]`
+Format: `update INDEX [TAG:NEW_VALUE ...]`
 
 * Updates the product at the specified `INDEX`. The index refers to the index number shown in the displayed product list. The index **must be a positive integer** 1, 2, 3, …
 * At least one of the optional fields must be provided.
@@ -131,25 +184,7 @@ Format: `update [SEARCH_TAG:OLD_VALUE ...] | [TAG:NEW_VALUE ...]`
 * Must include at least one search_tag and one tag
 * Existing values will be updated to the new values.
 
-### Finding products: `[coming soon]`
-
-Finds products whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-
-### Deleting products : `delete`
+#### 4.1.4 Deleting products : `delete`
 
 Deletes the product at a specified INDEX.
 
@@ -171,17 +206,49 @@ Format: `delete [TAG:VALUE ...]`
 
 Example: `delete n:Bread`
 
-### Exiting the program : `exit`
+#### 4.1.5 Finding products: `[coming soon]`
+
+Finds products whose names contain any of the given keywords.
+
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+Examples:
+* `find John` returns `john` and `John Doe`
+* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+  ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+### 4.2 Item Commands *[coming soon]*
+
+### 4.3 Miscellaneous Commands
+
+#### 4.3.1 Viewing help : `help`
+
+Shows a message explaning how to access the help page.
+
+![help message](images/helpMessage.png)
+
+Format: `help`
+
+#### 4.3.2 Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-### Saving the data
+## 5. Storage
+
+### 5.1 Saving the data
 
 iBook's data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file
+### 5.2 Editing the data file
 
 iBook's data are saved as a JSON file `[JAR file location]/data/ibook.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -189,25 +256,36 @@ iBook's data are saved as a JSON file `[JAR file location]/data/ibook.json`. Adv
 If your changes to the data file makes its format invalid, iBook will discard all data and start with an empty data file at the next run.
 </div>
 
-### Archiving data files `[coming in v2.0]`
+### 5.3 Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+## 6. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous iBook home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## 7. Command summary
 
- Action     | Format, Examples
-------------|------------------
- **Add**    | `add n:NAME c:CATEGORY e:EXPRIRY_DATE p:PRICE d:DESCRIPTION` <br> e.g., `add n:Maggie c:noodles e:01/01/2022 p:3.00 d:Maggie noodles`
- **List**   | `list`
- **Update** | `update INDEX [TAG:NEW_VALUE ...]` <br> e.g.,`update 2 n:Apple`
- **Delete** | `delete INDEX`<br> e.g., `delete 3`
- **Help**   | `help`
+### 7.1 Product
+
+| Action     | Format, Examples                                                                                                                      |
+|------------|---------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n:NAME c:CATEGORY e:EXPRIRY_DATE p:PRICE d:DESCRIPTION` <br> e.g., `add n:Maggie c:noodles e:01/01/2022 p:3.00 d:Maggie noodles` |
+| **List**   | `list`                                                                                                                                |
+| **Update** | `update INDEX [TAG:NEW_VALUE ...]` <br> e.g.,`update 2 n:Apple`                                                                       |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                   |
+| **Help**   | `help`                                                                                                                                |
+
+### 7.2 Item *[Coming soon]*
+
+### 7.3 Miscellaneous 
+
+| Action   | Format, Examples |
+|:---------|:-----------------|
+| **Help** | `help`           |
+| **Exit** | `exit`           |
