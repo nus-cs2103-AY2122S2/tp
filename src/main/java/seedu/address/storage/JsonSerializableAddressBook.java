@@ -38,7 +38,7 @@ class JsonSerializableAddressBook {
     public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
                                        @JsonProperty("contacts") List<JsonAdaptedContact> contacts,
                                        @JsonProperty("prescriptions") List<JsonAdaptedPrescription> prescriptions,
-                                       @JsonProperty("test results") List<JsonAdaptedTestResult> testResults) {
+                                       @JsonProperty("testResults") List<JsonAdaptedTestResult> testResults) {
         this.persons.addAll(persons);
         if (!contacts.isEmpty()) {
             this.contacts.addAll(contacts);
