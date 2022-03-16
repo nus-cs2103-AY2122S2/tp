@@ -45,4 +45,15 @@ public class Remark extends Field {
     public int hashCode() {
         return value.hashCode();
     }
+
+    @Override
+    public int compareTo(Field other)
+    {
+        if (!(other instanceof Remark)) {
+            return -1;
+        }
+
+        Remark otherRemark = (Remark)(other);
+        return value.toLowerCase().compareTo(otherRemark.value.toLowerCase());
+    }
 }

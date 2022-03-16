@@ -105,10 +105,7 @@ public class SortCommand extends Command {
                 return -1;
             }
 
-            String p1Value = p1Field.get().getValue().toLowerCase(Locale.ROOT);
-            String p2Value = p2Field.get().getValue().toLowerCase(Locale.ROOT);
-
-            return p1Value.compareTo(p2Value);
+            return p1Field.get().compareTo(p2Field.get());
         };
     }
 

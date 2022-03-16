@@ -62,4 +62,14 @@ public class Address extends Field {
         return value.hashCode();
     }
 
+    @Override
+    public int compareTo(Field other)
+    {
+        if (!(other instanceof Address)) {
+            return -1;
+        }
+
+        Address otherAddress = (Address)(other);
+        return value.toLowerCase().compareTo(otherAddress.value.toLowerCase());
+    }
 }
