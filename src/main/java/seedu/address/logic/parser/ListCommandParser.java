@@ -10,15 +10,11 @@ import seedu.address.logic.commands.interview.ListInterviewCommand;
 import seedu.address.logic.commands.position.ListPositionCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-
-
-
 public class ListCommandParser implements Parser<ListCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddApplicantCommand,
-     * calls the respective AddXCommandParsers according to the flag specified
-     * and returns an AddApplicantCommand object for execution.
+     * Parses the given {@code String} of arguments for data type flag and calls the respective
+     * ListXCommand according to the flag specified.
      * @throws ParseException if the user input does not conform the expected format
      */
     @Override
