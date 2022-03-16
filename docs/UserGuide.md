@@ -135,7 +135,7 @@ Example of usage:
 *  `summarise` summarises the contacts of everyone in the Tracey application such that she responses with how many Covid positive students in faculty A, how many on HRN, HRW and negative.
 
 Future Enhancements:
-*  For future versions, summarise command can display a visual pie chart for different faculties to visualise the percentage of Covid positive students. 
+*  For future versions, summarise command can display a visual pie chart for different faculties to visualise the percentage of Covid positive students.
 This can aid understanding of raw data easier.
 
 ### Listing the records: `list`
