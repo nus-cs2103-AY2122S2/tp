@@ -18,6 +18,7 @@ import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.ui.contact.ContactListPanel;
+import seedu.address.ui.medical.MedicalListPanel;
 import seedu.address.ui.prescription.PrescriptionListPanel;
 
 /**
@@ -30,15 +31,16 @@ public class MainWindow extends UiPart<Stage> {
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-    private Stage primaryStage;
-    private Logic logic;
+    private final Stage primaryStage;
+    private final Logic logic;
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private ContactListPanel contactListPanel;
+    private MedicalListPanel medicalListPanel;
     private PrescriptionListPanel prescriptionListPanel;
     private ResultDisplay resultDisplay;
-    private HelpWindow helpWindow;
+    private final HelpWindow helpWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -117,6 +119,7 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         contactListPanel = new ContactListPanel(logic.getFilteredContactList());
+        medicalListPanel = new MedicalListPanel(logic.getFilteredMedicalList());
         prescriptionListPanel = new PrescriptionListPanel(logic.getFilteredPrescriptionList());
 
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
@@ -151,6 +154,10 @@ public class MainWindow extends UiPart<Stage> {
         case CONTACT:
             personListPanelPlaceholder.getChildren().remove(0);
             personListPanelPlaceholder.getChildren().add(contactListPanel.getRoot());
+            return;
+        case MEDICAL:
+            personListPanelPlaceholder.getChildren().remove(0);
+            personListPanelPlaceholder.getChildren().add(medicalListPanel.getRoot());
             return;
         case PRESCRIPTION:
             personListPanelPlaceholder.getChildren().remove(0);

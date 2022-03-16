@@ -21,6 +21,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.contact.Contact;
+import seedu.address.model.medical.Medical;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.prescription.Prescription;
 import seedu.address.testutil.PersonBuilder;
@@ -170,6 +171,12 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+
+        @Override
+        public ObservableList<Medical> getFilteredMedicalList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public void updateFilteredPersonList(Predicate<Patient> predicate) {
             throw new AssertionError("This method should not be called.");
@@ -177,6 +184,11 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPrescriptionList(Predicate<Prescription> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredMedicalList(Predicate<Medical> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -209,6 +221,17 @@ public class AddCommandTest {
         public void updateFilteredContactList(Predicate<Contact> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void addMedical(Medical medical) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasMedical(Medical medical) {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**
@@ -234,6 +257,7 @@ public class AddCommandTest {
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
         final ArrayList<Patient> personsAdded = new ArrayList<>();
+        final ArrayList<Medical> medicalsAdded = new ArrayList<Medical>();
 
         @Override
         public boolean hasPerson(Patient patient) {
@@ -250,6 +274,12 @@ public class AddCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+
+        @Override
+        public void addMedical(Medical medical) {
+            requireNonNull(medical);
+            medicalsAdded.add(medical);
         }
     }
 
