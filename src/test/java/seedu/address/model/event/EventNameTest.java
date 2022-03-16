@@ -29,6 +29,8 @@ public class EventNameTest {
         assertFalse(EventName.isValidEventName(" ")); // spaces only
         assertFalse(EventName.isValidEventName("^")); // only one special character
         assertFalse(EventName.isValidEventName("&peter*")); // starts with special character
+        assertFalse(EventName.isValidEventName("Correct but wrong\n")); // starts with special character
+
 
         // valid name
         assertTrue(EventName.isValidEventName("12345")); // numbers only
