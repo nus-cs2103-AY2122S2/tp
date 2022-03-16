@@ -128,17 +128,11 @@ public class MainWindow extends UiPart<Stage> {
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
-    void emptyEntryPanelPlaceholder() {
-        while (entryListPanelPlaceholder.getChildren().size() > 0) {
-            entryListPanelPlaceholder.getChildren().remove(0);
-        }
-    }
-
     /**
      * Change the view to show the Person list.
      */
     void fillPerson() {
-        emptyEntryPanelPlaceholder();
+        entryListPanelPlaceholder.getChildren().clear();
         entryListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
     }
 
@@ -146,7 +140,7 @@ public class MainWindow extends UiPart<Stage> {
      * Change the view to show the Company list.
      */
     void fillCompany() {
-        emptyEntryPanelPlaceholder();
+        entryListPanelPlaceholder.getChildren().clear();
         entryListPanelPlaceholder.getChildren().add(companyListPanel.getRoot());
     }
 
@@ -154,7 +148,7 @@ public class MainWindow extends UiPart<Stage> {
      * Change the view to show the Event list.
      */
     void fillEvent() {
-        emptyEntryPanelPlaceholder();
+        entryListPanelPlaceholder.getChildren().clear();
         entryListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
     }
 
