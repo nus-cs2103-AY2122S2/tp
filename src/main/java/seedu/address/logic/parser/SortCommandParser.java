@@ -51,7 +51,7 @@ public class SortCommandParser implements Parser<SortCommand> {
         List<SortCommand.FieldSortOrder> fieldSortOrderList = new ArrayList<SortCommand.FieldSortOrder>();
 
         for (int i = 0; i < arguments.length; ++i) {
-            if (arguments[i].equals("")) {
+            if (arguments[i].equals("") || arguments[i].equals(SortCommand.DESCENDING_KEYWORD)) {
                 continue;
             }
 
