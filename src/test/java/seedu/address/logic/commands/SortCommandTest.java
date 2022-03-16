@@ -120,7 +120,7 @@ class SortCommandTest {
         ArrayList<SortCommand.FieldSortOrder> fieldSortOrder = new ArrayList<>();
         fieldSortOrder.add(REMARK_SORT_DESC);
 
-        List<Person> sortedPersonListByName = new ArrayList<>(Arrays.asList(DANIEL, FIONA, GEORGE, IDA, HOON, ELLE, CARL, BENSON, ALICE));
+        List<Person> sortedPersonListByName = new ArrayList<>(Arrays.asList(ELLE, CARL, BENSON, ALICE, DANIEL, FIONA, GEORGE, IDA, HOON));
 
         SortCommand sortCommand = new SortCommand(fieldSortOrder);
         Model expectedModel = new ModelManager(new AddressBook(sortedPersonListByName), new UserPrefs());
@@ -147,7 +147,7 @@ class SortCommandTest {
         ArrayList<SortCommand.FieldSortOrder> fieldSortOrder = new ArrayList<>();
         fieldSortOrder.add(BIRTHDAY_SORT_DESC);
 
-        List<Person> sortedPersonListByName = new ArrayList<>(Arrays.asList(DANIEL, FIONA, IDA, HOON, GEORGE, BENSON, ALICE, CARL, ELLE));
+        List<Person> sortedPersonListByName = new ArrayList<>(Arrays.asList(GEORGE, BENSON, ALICE, CARL, ELLE, DANIEL, FIONA, IDA, HOON));
 
         SortCommand sortCommand = new SortCommand(fieldSortOrder);
         Model expectedModel = new ModelManager(new AddressBook(sortedPersonListByName), new UserPrefs());

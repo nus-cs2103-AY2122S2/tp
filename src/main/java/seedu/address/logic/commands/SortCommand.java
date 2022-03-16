@@ -64,9 +64,11 @@ public class SortCommand extends Command {
 
         Comparator<Person> comparator = null;
         for (FieldSortOrder fieldSortOrder : fieldSortOrderList) {
-            Comparator<Person> currComperator = getComparator(fieldSortOrder.getFieldPrefix());
+            Comparator<Person> currComperator;
             if (fieldSortOrder.getIsDescendingOrder()) {
-                currComperator = currComperator.reversed();
+                currComperator = getComparatorDescending(fieldSortOrder.getFieldPrefix());
+            } else {
+                currComperator = getComparatorDefault(fieldSortOrder.getFieldPrefix());
             }
 
             if (comparator == null) {
@@ -91,22 +93,43 @@ public class SortCommand extends Command {
      * @param fieldPrefix the field to be sorted by
      * @return Comparator lambda function.
      */
-    private Comparator<Person> getComparator(Prefix fieldPrefix) {
+    private Comparator<Person> getComparatorDefault(Prefix fieldPrefix) {
         return (p1, p2) -> {
             Optional<Field> p1Field = p1.getField(fieldPrefix);
             Optional<Field> p2Field = p2.getField(fieldPrefix);
 
-            //null values would be the last in list in ascending order
-            if (p1Field.isEmpty() && p2Field.isEmpty()) {
-                return 0;
-            } else if (p1Field.isEmpty() && p2Field.isPresent()) {
-                return 1;
-            } else if (p1Field.isPresent() && p2Field.isEmpty()) {
-                return -1;
+            //null values are given lower priority
+            if (p1Field.isEmpty() || p2Field.isEmpty()) {
+                return compareNullField(p1Field, p2Field);
             }
 
             return p1Field.get().compareTo(p2Field.get());
         };
+    }
+
+    private Comparator<Person> getComparatorDescending(Prefix fieldPrefix) {
+        return (p1, p2) -> {
+            Optional<Field> p1Field = p1.getField(fieldPrefix);
+            Optional<Field> p2Field = p2.getField(fieldPrefix);
+
+            //null values are given lower priority
+            if (p1Field.isEmpty() || p2Field.isEmpty()) {
+                return compareNullField(p1Field, p2Field);
+            }
+
+            return p2Field.get().compareTo(p1Field.get());
+        };
+    }
+
+    private int compareNullField(Optional<Field> p1Field, Optional<Field> p2Field) {
+        //null values would be the last in list in ascending order
+        if (p1Field.isEmpty() && p2Field.isPresent()) {
+            return 1;
+        } else if (p1Field.isPresent() && p2Field.isEmpty()) {
+            return -1;
+        }
+
+        return 0; //both empty
     }
 
     /**
