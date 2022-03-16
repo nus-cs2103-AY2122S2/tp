@@ -44,12 +44,15 @@ public class SearchContainsKeywordsPredicate implements Predicate<Customer> {
                         searchString = searchString + tag.tagName + " ";
                     }
                 }
-                if (keywords != null) {
-                    for (String keyword : keywords) {
-                        if (StringUtil.containsWordIgnoreCase(searchString, keyword)) {
-                            anyMatch = true;
-                            break;
-                        }
+
+                if (keywords == null) {
+                    continue;
+                }
+
+                for (String keyword : keywords) {
+                    if (StringUtil.containsWordIgnoreCase(searchString, keyword)) {
+                        anyMatch = true;
+                        break;
                     }
                 }
             }
@@ -63,19 +66,19 @@ public class SearchContainsKeywordsPredicate implements Predicate<Customer> {
     public boolean equals(Object other) {
         if (other == this) {
             return true;
-        } else if (other instanceof SearchContainsKeywordsPredicate) {
-            for (int i = 0; i < 9; i++) {
-                List<String> thisKeywords = this.keywordsList.get(i);
-                List<String> otherKeywords = ((SearchContainsKeywordsPredicate) other).keywordsList.get(i);
-                if ((thisKeywords != null) && (otherKeywords != null)) {
-                    if (!thisKeywords.equals(otherKeywords)) {
-                        return false;
-                    }
-                }
-            }
-            return true;
-        } else {
+        } else if (!(other instanceof SearchContainsKeywordsPredicate)) {
             return false;
         }
+
+        for (int i = 0; i < 9; i++) {
+            List<String> thisKeywords = this.keywordsList.get(i);
+            List<String> otherKeywords = ((SearchContainsKeywordsPredicate) other).keywordsList.get(i);
+            if ((thisKeywords != null) && (otherKeywords != null)) {
+                if (!thisKeywords.equals(otherKeywords)) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
