@@ -1,12 +1,12 @@
 package seedu.address.model;
 
-import javafx.collections.ObservableList;
-import seedu.address.model.interview.Interview;
-import seedu.address.model.interview.UniqueInterviewList;
+import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
-import static java.util.Objects.requireNonNull;
+import javafx.collections.ObservableList;
+import seedu.address.model.interview.Interview;
+import seedu.address.model.interview.UniqueInterviewList;
 
 public class InterviewSchedule implements ReadOnlyInterviewSchedule {
     private final UniqueInterviewList interviews;
@@ -20,7 +20,7 @@ public class InterviewSchedule implements ReadOnlyInterviewSchedule {
     }
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an InterviewSchedule using the Interviews in the {@code toBeCopied}
      */
     public InterviewSchedule(ReadOnlyInterviewSchedule toBeCopied) {
         this();
@@ -28,8 +28,8 @@ public class InterviewSchedule implements ReadOnlyInterviewSchedule {
     }
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the interview list with {@code interviews}.
+     * {@code interviews} must not contain duplicate interviews.
      */
     public void setInterviews(List<Interview> interviews) {
         this.interviews.setInterviews(interviews);
@@ -45,30 +45,35 @@ public class InterviewSchedule implements ReadOnlyInterviewSchedule {
     }
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if an interview with the same candidate, date and time slot
+     * as {@code interview} exists in the interview schedule.
      */
     public boolean hasInterview(Interview interview) {
         requireNonNull(interview);
         return interviews.contains(interview);
     }
-
+    /**
+     * Returns true if an interview with the same date and time slot as {@code interview}
+     * exists in the interview schedule.
+     */
     public boolean hasConflictingInterview(Interview interview) {
         requireNonNull(interview);
         return interviews.containsConflictingInterview(interview);
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds an interview to the interview schedule.
+     * The interview must not already exist in the interview schedule.
      */
     public void addInterview(Interview interview) {
         interviews.add(interview);
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Replaces the given interview {@code target} in the list with {@code editedInterview}.
+     * {@code target} must exist in the interview schedule.
+     * The interview candidate, date and time of {@code editedInterview} must not be the same as another
+     * existing interview in the interview schedule.
      */
     public void setInterview(Interview target, Interview editedInterview) {
         requireNonNull(editedInterview);
@@ -77,8 +82,8 @@ public class InterviewSchedule implements ReadOnlyInterviewSchedule {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code InterviewSchedule}.
+     * {@code key} must exist in the interview schedule.
      */
     public void removeInterview(Interview key) {
         interviews.remove(key);

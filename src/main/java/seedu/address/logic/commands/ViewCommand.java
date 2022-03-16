@@ -1,11 +1,10 @@
 package seedu.address.logic.commands;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.model.Model;
+import static java.util.Objects.requireNonNull;
 
 import java.util.stream.Collectors;
 
-import static java.util.Objects.requireNonNull;
+import seedu.address.model.Model;
 
 /**
  * Lists all persons in the address book to the user.
@@ -13,8 +12,9 @@ import static java.util.Objects.requireNonNull;
 public class ViewCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
+    public static final String MESSAGE_NO_INTERVIEWS_IN_SYSTEM = "No interviews scheduled yet!";
 
-    public static final String MESSAGE_SUCCESS = "Listed all candidates in the system!";
+    public static final String MESSAGE_SUCCESS = "Listed ";
 
 
     @Override
@@ -22,8 +22,8 @@ public class ViewCommand extends Command {
         requireNonNull(model);
         String message = model.getInterviewSchedule().getInterviewList().size() > 0
                 ? model.getInterviewSchedule().getInterviewList().stream().map(Object::toString)
-                .collect(Collectors.joining(", \n"))
-                : Messages.MESSAGE_NO_CANDIDATES_IN_SYSTEM;
+                .collect(Collectors.joining("\n"))
+                : MESSAGE_NO_INTERVIEWS_IN_SYSTEM;
         return new CommandResult(message);
     }
 }
