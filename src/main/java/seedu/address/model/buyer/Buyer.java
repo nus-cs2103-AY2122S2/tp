@@ -1,6 +1,7 @@
 package seedu.address.model.buyer;
 
 import java.util.Set;
+import java.util.List;
 
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Appointment;
