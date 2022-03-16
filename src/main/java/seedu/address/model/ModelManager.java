@@ -112,6 +112,19 @@ public class ModelManager implements Model {
         addressBook.setclient(target, editedClient);
     }
 
+    //========== For addbuyer============//
+    @Override
+    public void addBuyer(Buyer buyer) {
+        addressBook.addBuyer(buyer);
+        updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
+    }
+
+    @Override
+    public boolean hasBuyer(Buyer buyer) {
+        requireNonNull(buyer);
+        return addressBook.hasBuyer(buyer);
+    }
+
     //=========== Filtered client List Accessors =============================================================
 
     /**

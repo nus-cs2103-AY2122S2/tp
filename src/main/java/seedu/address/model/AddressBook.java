@@ -16,6 +16,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueClientList clients;
 
+    // private final UniqueBuyerList buyers;
+
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -72,6 +74,17 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addclient(Client p) {
         clients.add(p);
+    }
+
+    //======== AddBuyer =========//
+
+    public boolean hasBuyer(Buyer buyer) {
+        requireNonNull(buyer);
+        return clients.contains(buyer);
+    }
+
+    public void addBuyer(Buyer buyer) {
+        clients.add(buyer);
     }
 
     /**
