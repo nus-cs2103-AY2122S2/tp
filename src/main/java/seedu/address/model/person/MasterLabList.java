@@ -12,16 +12,34 @@ import seedu.address.model.person.lab.LabList;
 public class MasterLabList extends LabList {
 
     /**
+     * Removes the given Lab from the MasterLabList and returns the index of the given Lab.
+     *
+     * @param lab The Lab that is to be removed
+     * @return An Index object specifying where the lab is in the list.
+     * @throws LabNotFoundException If the MasterLabList does not contain the given Lab.
+     */
+    public Index removeLab(Lab lab) throws LabNotFoundException {
+        requireNonNull(lab);
+        if (!contains(lab)) {
+            throw new LabNotFoundException(lab.labNumber);
+        }
+        Index toRemove = indexOf(lab);
+        remove(toRemove);
+        return toRemove;
+    }
+
+    /**
      * Returns the index of the Lab with {@code labNumber}
      *
-     * @param labNumber The lab number of the Lab to search for.
+     * @param toIndex The lab number of the Lab to search for.
      */
-    public Index indexOf(String labNumber) throws LabNotFoundException {
-        requireNonNull(labNumber);
-        Lab toIndex = new Lab(labNumber);
-        if (!super.asUnmodifiableObservableList().contains(toIndex)) {
+    private Index indexOf(Lab toIndex) throws LabNotFoundException {
+        requireNonNull(toIndex);
+
+        if (!contains(toIndex)) {
             throw new LabNotFoundException(toIndex.labNumber);
         }
+
         return Index.fromZeroBased(super.asUnmodifiableObservableList().indexOf(toIndex));
     }
     /**

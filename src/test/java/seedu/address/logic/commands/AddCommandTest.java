@@ -158,6 +158,11 @@ public class AddCommandTest {
         public void addLab(Lab lab) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void removeLab(Lab lab) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

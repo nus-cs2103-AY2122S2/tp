@@ -96,4 +96,10 @@ public interface Model {
      * {@code lab} must not already exist in the TAddressbook.
      */
     void addLab(Lab lab);
+
+    /**
+     * Removes the given lab.
+     * {@code lab} must already exist in the TAddressbook.
+     */
+    void removeLab(Lab lab);
 }

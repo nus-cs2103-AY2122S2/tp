@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.lab.Lab;
 import seedu.address.model.person.lab.LabList;
 import seedu.address.model.tag.Tag;
@@ -71,8 +72,23 @@ public class Person {
         labs.setLabs(ll);
     }
 
+    /**
+     * Adds a Lab to the Person's {@code labs}.
+     * The Lab must not already exist in the list.
+     *
+     * @param lab The Lab to add.
+     */
     public void addLab(Lab lab) {
         labs.add(lab);
+    }
+
+    /**
+     * Removes the lab at the specified index from the Person's {@code labs}.
+     *
+     * @param index The index of the lab to be removed.
+     */
+    public void removeLab(Index index) {
+        labs.remove(index);
     }
 
     /**

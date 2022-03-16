@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.person.lab.Lab;
@@ -106,6 +107,16 @@ public class UniquePersonList implements Iterable<Person> {
     public void addLabToAll(Lab lab) {
         requireNonNull(lab);
         internalList.forEach(person -> person.addLab(lab));
+    }
+
+    /**
+     * Removes the given {@code lab} from every student in the {@code internalList}.
+     *
+     * @param index The Lab to be removed.
+     */
+    public void removeLabFromAll(Index index) {
+        requireNonNull(index);
+        internalList.forEach(person -> person.removeLab(index));
     }
 
     /**
