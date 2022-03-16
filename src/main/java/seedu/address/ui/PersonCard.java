@@ -55,13 +55,13 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        email.setText(person.getEmail().value);
-        age.setText(person.getAge().toString()); // age.setText(person.getAge().value);
-        height.setText(person.getHeight().toString()); // height.setText(person.getHeight().value);
-        jerseyNumber.setText(person.getJerseyNumber().toString());
+        phone.setText("Phone: " + person.getPhone().value);
+        email.setText("Email: " + person.getEmail().value);
+        age.setText("Age: " + person.getAge().toString()); // age.setText(person.getAge().value);
+        height.setText("Height: " + person.getHeight().toString()); // height.setText(person.getHeight().value);
+        jerseyNumber.setText("Jersey Number: " + person.getJerseyNumber().toString());
         // jerseyNumber.setText(person.getJerseyNumber().value);
-        weight.setText(person.getWeight().toString()); // weight.setText(person.getWeight().value);
+        weight.setText("Weight: " + person.getWeight().toString()); // weight.setText(person.getWeight().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
