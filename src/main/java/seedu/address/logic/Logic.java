@@ -41,7 +41,7 @@ public interface Logic {
 
 
     ObservableList<Prescription> getFilteredPrescriptionList();
-  
+
     /** Returns an unmodifiable view of the filtered list of test results */
     ObservableList<TestResult> getFilteredTestResultList();
 
