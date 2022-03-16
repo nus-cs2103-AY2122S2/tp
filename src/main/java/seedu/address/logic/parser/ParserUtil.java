@@ -81,10 +81,10 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String phone} into a {@code Phone}.
+     * Parses a {@code Optional<String> telegram} into a {@code Optional<Telegram>}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code phone} is invalid.
+     * @throws ParseException if the given {@code telegram} is invalid.
      */
     public static Optional<Telegram> parseTelegram(Optional<String> telegram) throws ParseException {
         if (telegram.isEmpty()) {
