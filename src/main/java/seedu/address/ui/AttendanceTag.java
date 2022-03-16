@@ -22,17 +22,16 @@ public class AttendanceTag {
      * @param attendance the attendance information to be included.
      * @return a green label if the pet was present on the given date, a red label if the pet was absent.
      */
-    public static Label createAttendanceTag(Pair<LocalDate, Boolean> attendance) {
-        LocalDate date = attendance.getKey();
-        boolean isPresent = attendance.getValue();
+    public static Label createAttendanceTag(String attendance) {
+        String[] stringArray = attendance.split("\\s");
+        String date = stringArray[0];
+        Label presentLabel = new Label(date);
 
-        Label presentLabel = new Label(date.format(ATTENDANCE_DATE_FORMATTER));
-
-        if (isPresent) {
-            presentLabel.setStyle("-fx-background-color: #bffcc6");
-        } else {
-            presentLabel.setStyle("-fx-background-color: #fbbebc");
-        }
+//        if (isPresent) {
+//            presentLabel.setStyle("-fx-background-color: #bffcc6");
+//        } else {
+//            presentLabel.setStyle("-fx-background-color: #fbbebc");
+//        }
 
         return presentLabel;
     }
