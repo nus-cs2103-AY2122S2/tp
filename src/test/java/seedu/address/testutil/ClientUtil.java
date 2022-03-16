@@ -10,8 +10,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 
+import seedu.address.logic.commands.AddBuyerCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditclientDescriptor;
+import seedu.address.model.buyer.Buyer;
 import seedu.address.model.client.Client;
 import seedu.address.model.tag.Tag;
 
@@ -25,6 +27,13 @@ public class ClientUtil {
      */
     public static String getAddCommand(Client client) {
         return AddCommand.COMMAND_WORD + " " + getclientDetails(client);
+    }
+
+    /**
+     * Returns an add command string for adding the {@code buyer}.
+     */
+    public static String getAddBuyerCommand(Buyer buyer) {
+        return AddBuyerCommand.COMMAND_WORD + " " + getclientDetails(buyer);
     }
 
     /**

@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.buyer.Buyer;
 import seedu.address.model.client.Client;
 
 /**
@@ -110,6 +111,19 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedClient);
 
         addressBook.setclient(target, editedClient);
+    }
+
+    //========== For addbuyer============//
+    @Override
+    public void addBuyer(Buyer buyer) {
+        addressBook.addBuyer(buyer);
+        updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
+    }
+
+    @Override
+    public boolean hasBuyer(Buyer buyer) {
+        requireNonNull(buyer);
+        return addressBook.hasBuyer(buyer);
     }
 
     //=========== Filtered client List Accessors =============================================================

@@ -2,13 +2,12 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -22,63 +21,64 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.buyer.Buyer;
 import seedu.address.model.client.Client;
-import seedu.address.testutil.ClientBuilder;
+import seedu.address.testutil.BuyerBuilder;
 
-public class AddCommandTest {
+public class AddBuyerCommandTest {
 
     @Test
-    public void constructor_nullclient_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+    public void constructor_nullBuyer_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddBuyerCommand(null));
     }
 
     @Test
     public void execute_clientAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingClientAdded modelStub = new ModelStubAcceptingClientAdded();
-        Client validClient = new ClientBuilder().build();
+        ModelStubAcceptingBuyerAdded modelStub = new ModelStubAcceptingBuyerAdded();
+        Buyer validBuyer = new BuyerBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validClient).execute(modelStub);
+        CommandResult commandResult = new AddBuyerCommand(validBuyer).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validClient), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validClient), modelStub.clientsAdded);
+        assertEquals(String.format(AddBuyerCommand.MESSAGE_SUCCESS, validBuyer), commandResult.getFeedbackToUser());
+        assertEquals(List.of(validBuyer), modelStub.clientsAdded);
     }
 
     @Test
-    public void execute_duplicateclient_throwsCommandException() {
-        Client validClient = new ClientBuilder().build();
-        AddCommand addCommand = new AddCommand(validClient);
-        ModelStub modelStub = new ModelStubWithClient(validClient);
+    public void execute_duplicateBuyer_throwsCommandException() {
+        Buyer validBuyer = new BuyerBuilder().build();
+        AddBuyerCommand addBuyerCommand = new AddBuyerCommand(validBuyer);
+        ModelStub modelStub = new ModelStubWithBuyer(validBuyer);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_CLIENT, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddBuyerCommand.MESSAGE_DUPLICATE_CLIENT, () -> addBuyerCommand
+                .execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Client alice = new ClientBuilder().withName("Alice").build();
-        Client bob = new ClientBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        Buyer janald = new BuyerBuilder().withName("Janald").build();
+        Buyer junheng = new BuyerBuilder().withName("Junheng").build();
+        AddBuyerCommand addJanaldCommand = new AddBuyerCommand(janald);
+        AddBuyerCommand addJunhengCommand = new AddBuyerCommand(junheng);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertEquals(addJanaldCommand, addJanaldCommand);
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        AddBuyerCommand addJanaldCommandCopy = new AddBuyerCommand(janald);
+        assertEquals(addJanaldCommand, addJanaldCommandCopy);
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertNotEquals(1, addJanaldCommand);
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertNotEquals(null, addJanaldCommand);
 
         // different client -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        assertNotEquals(addJanaldCommand, addJunhengCommand);
     }
 
     /**
      * A default model stub that have all of the methods failing.
      */
-    private class ModelStub implements Model {
+    private static class ModelStub implements Model {
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
@@ -166,39 +166,39 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that contains a single client.
+     * A Model stub that contains a single buyer.
      */
-    private class ModelStubWithClient extends ModelStub {
-        private final Client client;
+    private static class ModelStubWithBuyer extends ModelStub {
+        private final Buyer buyer;
 
-        ModelStubWithClient(Client client) {
-            requireNonNull(client);
-            this.client = client;
+        ModelStubWithBuyer(Buyer buyer) {
+            requireNonNull(buyer);
+            this.buyer = buyer;
         }
 
         @Override
-        public boolean hasClient(Client client) {
-            requireNonNull(client);
-            return this.client.isSameclient(client);
+        public boolean hasBuyer(Buyer buyer) {
+            requireNonNull(buyer);
+            return this.buyer.isSameclient(buyer);
         }
     }
 
     /**
      * A Model stub that always accept the client being added.
      */
-    private class ModelStubAcceptingClientAdded extends ModelStub {
+    private static class ModelStubAcceptingBuyerAdded extends ModelStub {
         final ArrayList<Client> clientsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasClient(Client client) {
-            requireNonNull(client);
-            return clientsAdded.stream().anyMatch(client::isSameclient);
+        public boolean hasBuyer(Buyer buyer) {
+            requireNonNull(buyer);
+            return clientsAdded.stream().anyMatch(buyer::isSameclient);
         }
 
         @Override
-        public void addClient(Client client) {
-            requireNonNull(client);
-            clientsAdded.add(client);
+        public void addBuyer(Buyer buyer) {
+            requireNonNull(buyer);
+            clientsAdded.add(buyer);
         }
 
         @Override
