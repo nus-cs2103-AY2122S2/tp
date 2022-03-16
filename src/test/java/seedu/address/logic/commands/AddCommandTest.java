@@ -11,15 +11,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
-import org.junit.jupiter.api.Test;
-
 import javafx.collections.ObservableList;
+import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.buyer.Buyer;
 import seedu.address.model.client.Client;
 import seedu.address.testutil.ClientBuilder;
 
@@ -129,6 +129,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasBuyer(Buyer buyer) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
         public void deleteClient(Client target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -150,6 +155,11 @@ public class AddCommandTest {
 
         @Override
         public void sortFilteredClientList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addBuyer(Buyer buyer) {
             throw new AssertionError("This method should not be called.");
         }
     }

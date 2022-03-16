@@ -66,6 +66,6 @@ public class AddBuyerCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddCommand // instanceof handles nulls
-                && toAdd.equals(((AddCommand) other).toAdd));
+                && toAdd.equals(((AddBuyerCommand) other).toAdd));
     }
 }
