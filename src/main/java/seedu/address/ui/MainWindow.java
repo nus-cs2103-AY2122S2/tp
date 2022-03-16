@@ -200,6 +200,11 @@ public class MainWindow extends UiPart<Stage> {
                 handleHelp();
             }
 
+            if (commandResult.isShowAdd()) {
+                System.out.println("Detected add window");
+                handleAdd();
+            }
+
             if (commandResult.isExit()) {
                 handleExit();
             }
