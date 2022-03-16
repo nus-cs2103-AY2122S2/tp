@@ -6,7 +6,8 @@ import static seedu.ibook.commons.util.AppUtil.checkArgument;
 public class Quantity {
 
     public static final String MESSAGE_CONSTRAINTS = "Quantities should only be of positive integers";
-    public static final String SMALLER_THAN_CONSTRAINT = "Subtracted quantity must be smaller than current quantity";
+    public static final String SMALLER_THAN_CONSTRAINT =
+        "Subtracted quantity must be smaller than or equal to the current quantity";
 
     /*
      * Must be an integer.
@@ -47,8 +48,13 @@ public class Quantity {
         return this.quantity;
     }
 
+    public boolean isEmpty() {
+        return this.quantity == 0;
+    }
+
     /**
      * Adds both quantities.
+     *
      * @param other Quantity to add.
      */
     public void add(Quantity other) {
@@ -60,7 +66,7 @@ public class Quantity {
      * @param other Quantity to subtract.
      */
     public void subtract(Quantity other) {
-        checkArgument(this.quantity > other.quantity, SMALLER_THAN_CONSTRAINT);
+        checkArgument(this.quantity >= other.quantity, SMALLER_THAN_CONSTRAINT);
         this.quantity -= other.getQuantity();
     }
 

@@ -72,6 +72,9 @@ public class UniqueItemList implements Iterable<Item> {
         }
         Item existingItem = getExisting(toRemove);
         existingItem.subtract(toRemove);
+        if (existingItem.getQuantity().isEmpty()) {
+            remove(existingItem);
+        }
     }
 
     public Integer getTotalQuantity() {
