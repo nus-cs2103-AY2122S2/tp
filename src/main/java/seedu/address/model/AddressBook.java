@@ -121,6 +121,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Adds a lab to the TAddressBook.
      * The lab must not already exist in the TAddressBook.
+     *
+     * @param lab The lab to be added.
      */
     public void addLab(Lab lab) {
         labs.add(lab);
@@ -130,6 +132,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Removes a lab from the TAddressBook.
      * The lab must already exist in the TAddressBook.
+     *
+     * @param lab The lab to be removed.
      */
     public void removeLab(Lab lab) {
         Index toRemove = labs.removeLab(lab);
