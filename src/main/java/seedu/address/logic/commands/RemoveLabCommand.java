@@ -22,7 +22,7 @@ public class RemoveLabCommand extends Command {
             + PREFIX_LAB + "1";
 
     public static final String MESSAGE_SUCCESS = "Lab %1$s removed";
-    public static final String MESSAGE_LAB_NOT_FOUND = "This Lab does not exists in the TAddressBook";
+    public static final String MESSAGE_LAB_NOT_FOUND = "Lab %1$s does not exists in the TAddressBook";
 
     private final Lab toRemove;
 
@@ -39,7 +39,7 @@ public class RemoveLabCommand extends Command {
         requireNonNull(model);
 
         if (!model.hasLab(toRemove)) {
-            throw new CommandException(MESSAGE_LAB_NOT_FOUND);
+            throw new CommandException(String.format(MESSAGE_LAB_NOT_FOUND, toRemove.labNumber));
         }
 
         model.removeLab(toRemove);

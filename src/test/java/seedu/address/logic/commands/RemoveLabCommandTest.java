@@ -39,7 +39,7 @@ public class RemoveLabCommandTest {
         // Lab with lab_number 3 does not exist in the TypicalAddressBook.
         RemoveLabCommand command = new RemoveLabCommand(new Lab("3"));
 
-        String expectedMessage = RemoveLabCommand.MESSAGE_LAB_NOT_FOUND;
+        String expectedMessage = String.format(RemoveLabCommand.MESSAGE_LAB_NOT_FOUND, "3");
 
         assertCommandFailure(command, model, expectedMessage);
     }
