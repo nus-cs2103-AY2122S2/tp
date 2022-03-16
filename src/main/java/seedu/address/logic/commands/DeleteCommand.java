@@ -76,6 +76,7 @@ public class DeleteCommand extends Command {
                 //to be the same Person
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_NAME);
             }
+            //todo : make this more oop
             ObservableList<Person> personList = model.getAddressBook().getPersonList();
             Person personToDelete = personWithNameToDelete; //dummy person
 
