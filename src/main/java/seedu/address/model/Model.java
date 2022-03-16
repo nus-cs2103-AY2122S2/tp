@@ -36,21 +36,21 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' TAddressBook file path.
      */
     Path getAddressBookFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' TAddressBook file path.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces TAddressBook data with the data in {@code addressBook}.
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
-    /** Returns the AddressBook */
+    /** Returns the TAddressBook */
     ReadOnlyAddressBook getAddressBook();
 
     /**
@@ -66,14 +66,14 @@ public interface Model {
 
     /**
      * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * {@code person} must not already exist in the TAddressBook.
      */
     void addPerson(Person person);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * {@code target} must exist in the TAddressBook.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in the TAddressBook.
      */
     void setPerson(Person target, Person editedPerson);
 
@@ -87,7 +87,7 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
-     * Returns true if a lab with the same identity as {@code lab} exists in the address book.
+     * Returns true if a lab with the same identity as {@code lab} exists in the TAddressBook.
      */
     boolean hasLab(Lab lab);
 

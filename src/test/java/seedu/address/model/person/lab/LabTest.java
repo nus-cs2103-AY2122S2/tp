@@ -1,15 +1,14 @@
 package seedu.address.model.person.lab;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.exceptions.LabAlreadyGradedException;
-import seedu.address.model.person.exceptions.LabAlreadySubmittedException;
-import seedu.address.model.person.exceptions.LabNotSubmittedException;
-
+import seedu.address.model.person.exceptions.DuplicateLabException;
 
 public class LabTest {
 
@@ -43,24 +42,18 @@ public class LabTest {
     }
 
     @Test
-    public void submitLab_alreadySubmitted_throwsLabAlreadySubmittedException() {
+    public void editLabStatus_changeStatus_success() {
         Lab stub = new Lab("1");
-        stub = stub.submitLab();
-        assertThrows(LabAlreadySubmittedException.class, stub::submitLab);
+        stub = stub.editLabStatus(LabStatus.GRADED);
+
+        assertEquals(new Lab("1").of(LabStatus.GRADED.name()), stub);
+        assertNotEquals(new Lab("1"), stub);
     }
 
     @Test
-    public void gradeLab_alreadyGraded_throwsLabAlreadyGradedException() {
+    public void editLabStatus_sameStatus_throwsDuplicateLabException() {
         Lab stub = new Lab("1");
-        stub = stub.submitLab();
-        stub = stub.gradeLab();
-        assertThrows(LabAlreadyGradedException.class, stub::gradeLab);
-    }
-
-    @Test
-    public void gradeLab_notYetSubmitted_throwsLabNotSubmittedException() {
-        Lab stub = new Lab("1");
-        assertThrows(LabNotSubmittedException.class, stub::gradeLab);
+        assertThrows(DuplicateLabException.class, () -> stub.editLabStatus(LabStatus.UNSUBMITTED));
     }
 
     @Test

@@ -26,13 +26,13 @@ If you can type fast, TAB can get your Lab management tasks done faster than tra
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+   * **`list`** : Lists all students.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * **`add`**`n/James Ho e/jamesho@email.com g/jamesH t/jamesho i/A0123456T` : Adds a student named `James Ho` to the Address Book.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+   * **`delete`**`3` : Deletes the 3rd student shown in the current list.
 
-   * **`clear`** : Deletes all contacts.
+   * **`clear`** : Deletes all students.
 
    * **`exit`** : Exits the app.
 
@@ -41,13 +41,17 @@ If you can type fast, TAB can get your Lab management tasks done faster than tra
 --------------------------------------------------------------------------------------------------------------------
 ## Feature List
 - [Manage students](#student-related-features)
-    - [Add, edit, delete students](#adding-a-student--add-coming-soon)
+    - [Add, edit, delete students](#adding-a-student--add)
     - [List students](#listing-all-students--list)
     - [Find students](#locating-students-by-name--find)
+<<<<<<< HEAD
+    - [Filter students based on status of lab tags](#filter-by-status-of-individual-labs--filter-coming-soon)
+=======
     - [Filter students based on status of lab tags](#filter-by-status-of-individual-labs--filter-labx-lab-status)
+>>>>>>> 02c3157a84d97d11ff14df5bfb6b9ad49a614977
 - [Manage labs](#lab-related-features)
-    - [Add labs](#adding-a-lab--labadd-labx-coming-soon)
-    - [Change status of labs](#markingunmarking-individual-labs-as-graded-labgrade-student-index-labx-coming-soon)
+    - [Add labs](#adding-a-lab--labadd)
+    - [Change status of labs](#setting-the-status-of-individual-labs--labstat-coming-soon)
 
 ### System-related features
 
@@ -69,20 +73,20 @@ TAddressBook data are saved as a JSON file `[JAR file location]/data/addressbook
 
 ### Student-related features
 
-#### Adding a student : `add` [coming soon]
+#### Adding a student : `add`
 Adds a student to the address book with the necessary attributes.
 
-Format: `add n/NAME g/GITHUB t/TELEGRAM_HANDLE i/StudentID`
+Format: `add n/NAME e/EMAIL g/GITHUB t/TELEGRAM_HANDLE i/STUDENT_ID [t/TAG]...`
 
 #### Listing all students : `list`
 Lists all the students
 
 Format: `list`
 
-#### Editing a student : `edit` [coming soon]
+#### Editing a student : `edit`
 Edits an existing student in the TAddress book. At least one of the optional fields must be provided.
 
-Format: `edit INDEX [n/NAME] [g/GITHUB] [t/TELEGRAM_HANDLE] [s/StudentID]`
+Format: `edit INDEX [n/NAME] [e/EMAIL] [g/GITHUB] [t/TELEGRAM_HANDLE] [i/STUDENT_ID] [t/TAG]...`
 
 #### Locating students by name : `find`
 Finds students whose names contain any of the given keywords. At least one keyword must be specified.
@@ -99,34 +103,29 @@ Clears all entries from the TAddress book.
 
 Format: `clear`
 
-#### Filter (by status of individual labs) : `filter [Labx] [Lab status]`
-Filters students based on the status of their lab tags.
+#### Filter (by status of individual labs) : `filter`
+Filters students based on the status of their lab tags. LAB_NUMBER must be a positive integer.
 
-Lab status:
+LAB_STATUS:
 * Unsubmitted = u
 * Submitted = s
 * Graded = g
 
-Format: `filter l/LAB s/STATUS`
+Format: `filter l/LAB_NUMBER s/LAB_STATUS`
 
 ### Lab-related features
 
-#### Adding a Lab : `labadd [Labx]` [coming soon]
-Adds a Lab to every student. Shows up as a tag on each student’s entry.
-By default, the tag will be colored grey for “unsubmitted”. The tags can subsequently be colored different colors to represent different statuses e.g. unsubmitted = grey, submitted = yellow, graded = green, overdue = red.
+#### Adding a Lab : `labadd`
+Adds a Lab to every student. Shows up as a tag on each student’s entry. By default, the tag will be colored red for “unsubmitted”.
+The tags can subsequently be colored different colors to represent different statuses e.g. unsubmitted = red, submitted = yellow, graded = green.
+LAB_NUMBER must be a positive integer.
 
-Format: `labadd l/LAB`
+Format: `labadd l/LAB_NUMBER`
 
-#### Marking/unmarking individual Labs as “submitted” `labSubmit [Student Index] [Labx]` [coming soon]
-Changes the status for the student with the specified INDEX from “unsubmitted” to “submitted”.  MARK can be either M or U (mark or unmark)
+#### Setting the status of individual Labs : `labstat`
+Changes the status of the specified lab for the student with the specified INDEX to the specified status. LAB_NUMBER must be a positive integer. LAB_STATUS must be one of u/s/g.
 
-Format: `labSubmit i/INDEX l/LAB m/MARK`
-
-#### Marking/unmarking individual Labs as “graded” `labGrade [Student Index] [Labx]` [coming soon]
-Changes the status for the student with the specified INDEX from “submitted” to “graded”.
-MARK can be either M or U (mark or unmark)
-
-Format: `labGrade i/INDEX l/LAB m/MARK`
+Format: `labstat INDEX l/LAB_NUMBER s/LAB_STATUS`
 
 --------------------------------------------------------------------------------------------------------------------
 ## FAQ
@@ -140,11 +139,14 @@ Format: `labGrade i/INDEX l/LAB m/MARK`
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME g/GITHUB t/TELEGRAM_HANDLE s/StudentID` <br> e.g., `add n/James Ho g/jamesH t/jamesho s/A0123456T`
+**Add** | `add n/NAME e/EMAIL g/GITHUB t/TELEGRAM_HANDLE i/STUDENT_ID [t/TAG]...` <br> e.g., `add n/James Ho e/jamesho@email.com g/jamesH t/jamesho i/A0123456T`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [g/GITHUB] [t/TELEGRAM_HANDLE] [s/StudentID]`<br> e.g.,`edit 2 n/James Lee g/jamesHo`
+**Edit** | `edit INDEX [n/NAME] [e/EMAIL] [g/GITHUB] [t/TELEGRAM_HANDLE] [i/STUDENT_ID] [t/TAG]...`<br> e.g.,`edit 2 n/James Lee g/jamesHo`
+**Filter** | `filter l/LAB_NUMBER s/LAB_STATUS`<br> e.g., `filter l/1 s/u`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Add lab** | `labadd l/LAB_NUMBER`
+**Edit lab status** | `labstat INDEX l/LAB_NUMBER s/LAB_STATUS`
 **List** | `list`
 **Help** | `help`
-**Filter** | `filter [l/Labx] [s/LabStatus]`<br> e.g. `filter l/1 s/u`
+**Exit** | `exit`

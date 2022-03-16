@@ -49,9 +49,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Telegram telegram = ParserUtil.parseTelegram(argMultimap.getValue(PREFIX_TELEGRAM).get());
         StudentId studentId = ParserUtil.parseStudentId(argMultimap.getValue(PREFIX_STUDENTID).get());
 
-        Person person = new Person(name, email, tagList, githubUsername, telegram, studentId);
+        Person student = new Person(name, email, tagList, githubUsername, telegram, studentId);
 
-        return new AddCommand(person);
+        return new AddCommand(student);
     }
 
     /**

@@ -15,13 +15,13 @@ import seedu.address.model.person.lab.Lab;
 import seedu.address.model.person.lab.LabList;
 
 /**
- * Adds a person to the address book.
+ * Adds a Student to the TAddressBook.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to the TAddressBook. \n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_EMAIL + "EMAIL "
@@ -32,23 +32,23 @@ public class AddCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_GITHUB + "johnD"
-            + PREFIX_TELEGRAM + "jDoe"
-            + PREFIX_STUDENTID + "A0123456B"
+            + PREFIX_GITHUB + "johnD "
+            + PREFIX_TELEGRAM + "jDoe "
+            + PREFIX_STUDENTID + "A0123456B "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New student added: %1$s";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in the TAddressBook";
 
     private final Person toAdd;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public AddCommand(Person person) {
-        requireNonNull(person);
-        toAdd = person;
+    public AddCommand(Person student) {
+        requireNonNull(student);
+        toAdd = student;
     }
 
     @Override

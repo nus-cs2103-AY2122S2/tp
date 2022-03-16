@@ -5,19 +5,19 @@ import seedu.address.model.person.MasterLabList;
 import seedu.address.model.person.Person;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of a TAddress book
  */
 public interface ReadOnlyAddressBook {
 
     /**
-     * Returns an unmodifiable view of the persons list.
-     * This list will not contain any duplicate persons.
+     * Returns an unmodifiable view of the student list.
+     * This list will not contain any duplicate students.
      */
     ObservableList<Person> getPersonList();
 
     /**
      * Returns a MasterLabList containing all the Labs.
-     * This list will not contain any duplicate persons.
+     * This list will not contain any duplicate Labs.
      */
     MasterLabList getMasterLabList();
 

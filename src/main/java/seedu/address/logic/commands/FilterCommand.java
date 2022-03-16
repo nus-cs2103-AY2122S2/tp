@@ -15,6 +15,9 @@ public class FilterCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Finds all students with the specified lab number and lab status"
             + " and displays them as a list with index numbers.\n"
+            + "Parameters: "
+            + PREFIX_LAB + "LAB_NUMBER "
+            + PREFIX_LABSTATUS + "LAB_STATUS \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_LAB + "1" + " " + PREFIX_LABSTATUS + "s";
 
     private final StudentHasLabPredicate predicate;

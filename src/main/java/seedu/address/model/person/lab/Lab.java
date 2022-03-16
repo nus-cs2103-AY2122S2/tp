@@ -3,10 +3,7 @@ package seedu.address.model.person.lab;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import seedu.address.model.person.exceptions.LabAlreadyGradedException;
-import seedu.address.model.person.exceptions.LabAlreadySubmittedException;
-import seedu.address.model.person.exceptions.LabNotSubmittedException;
-
+import seedu.address.model.person.exceptions.DuplicateLabException;
 
 /**
  * Represents a Lab entry.
@@ -15,12 +12,12 @@ import seedu.address.model.person.exceptions.LabNotSubmittedException;
 public class Lab {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Lab number should be a valid postitive Integer";
+            "Lab number should be a valid positive integer";
 
     /*
-     * Lab number has to be an Integer.
+     * Lab number has to be a positive Integer.
      */
-    public static final String VALIDATION_REGEX = "\\d+";
+    public static final String VALIDATION_REGEX = "[1-9]\\d*";
 
     public final int labNumber;
 
@@ -50,36 +47,10 @@ public class Lab {
     }
 
     /**
-     * Returns true if a given string is a valid Lab.
+     * Returns true if a given string is a valid lab number.
      */
     public static boolean isValidLab(String test) {
         return test.matches(VALIDATION_REGEX);
-    }
-
-    /**
-     * Returns a new immutable lab with labStatus equals to {@code LabStatus.SUBMITTED}
-     */
-    public Lab submitLab() {
-        if (labStatus == LabStatus.SUBMITTED || labStatus == LabStatus.GRADED) {
-            throw new LabAlreadySubmittedException(labNumber);
-        }
-
-        return new Lab(String.valueOf(labNumber), LabStatus.SUBMITTED);
-    }
-
-    /**
-     * Returns a new immutable lab with labStatus equals to {@code LabStatus.GRADED}
-     */
-    public Lab gradeLab() {
-        if (labStatus == LabStatus.UNSUBMITTED) {
-            throw new LabNotSubmittedException(labNumber);
-        }
-
-        if (labStatus == LabStatus.GRADED) {
-            throw new LabAlreadyGradedException(labNumber);
-        }
-
-        return new Lab(String.valueOf(labNumber), LabStatus.GRADED);
     }
 
     /**
@@ -87,6 +58,16 @@ public class Lab {
      */
     public Lab createCopy() {
         return new Lab(String.valueOf(labNumber), labStatus);
+    }
+
+    /**
+     * Returns a new immutable lab with the same lab number as this and the given lab status.
+     */
+    public Lab editLabStatus(LabStatus status) throws DuplicateLabException {
+        if (status.equals(this.labStatus)) {
+            throw new DuplicateLabException();
+        }
+        return new Lab(String.valueOf(labNumber), status);
     }
 
     /**
@@ -122,16 +103,15 @@ public class Lab {
     }
 
     /**
-     * Returns true if both students have the same lab.
-     * This defines a weaker notion of equality between two students.
+     * Returns true if both Labs have the same lab number.
+     * This defines a weaker notion of equality between two Labs.
      */
     public boolean isSameLab(Lab otherLab) {
         if (otherLab == this) {
             return true;
         }
 
-        return otherLab != null
-                && otherLab.labNumber == this.labNumber;
+        return otherLab != null && otherLab.labNumber == this.labNumber;
     }
 
     @Override
@@ -139,6 +119,10 @@ public class Lab {
         return "Lab " + labNumber;
     }
 
+    /**
+     * Returns true if both Labs have the same lab number and LabStatus.
+     * This defines a stronger notion of equality between two Labs.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

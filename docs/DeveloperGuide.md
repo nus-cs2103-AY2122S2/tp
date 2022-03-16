@@ -315,7 +315,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  TA requests to filter students by a specific lab 
+1.  TA requests to filter students by a specific lab
 2.  TAB displays list of students based on filter criteria
 
     Use case ends
@@ -323,7 +323,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. TA provides non-existent lab
-  
+
     * 1a1. TAB shows error message
     * 1a2. TAB requests for valid lab
 
@@ -332,7 +332,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1b. TA tries to filter an empty list
 
     * 1b1. TAB shows error message
-  
+
       Use case ends
 
 **Use case: Mark Student Lab as Graded**

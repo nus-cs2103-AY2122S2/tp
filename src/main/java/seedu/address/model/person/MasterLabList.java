@@ -14,7 +14,7 @@ public class MasterLabList extends LabList {
     /**
      * Returns the index of the Lab with {@code labNumber}
      *
-     * @param labNumber The lab number of the Lab you want to find.
+     * @param labNumber The lab number of the Lab to search for.
      */
     public Index indexOf(String labNumber) throws LabNotFoundException {
         requireNonNull(labNumber);

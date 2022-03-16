@@ -27,7 +27,7 @@ public class SampleDataUtil {
                 new GithubUsername("alexyeoh"), new Telegram("alex_yeoh"), new StudentId("A0123456B")),
             new Person(new Name("Bernice Yu"), new Email("berniceyu@example.com"), getTagSet("colleagues", "friends"),
                 new GithubUsername("berniceyu"), new Telegram("bernice_yu"), new StudentId("A1234567C")),
-            new Person(new Name("Charlotte Oliveiro"), new Email("charlotte@example.com"), getTagSet("neighbours"),
+            new Person(new Name("Charlotte Oliveiro"), new Email("charlotte@example.com"), getTagSet("neighbors"),
                 new GithubUsername("charlotteoliveiro"), new Telegram("charlotte_oliverio"),
                 new StudentId("A0123457C")),
             new Person(new Name("David Li"), new Email("lidavid@example.com"), getTagSet("family"),
@@ -40,10 +40,13 @@ public class SampleDataUtil {
         };
     }
 
+    /**
+     * Returns a sample TAddressBook based on the sample students.
+     */
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
-        for (Person samplePerson : getSamplePersons()) {
-            sampleAb.addPerson(samplePerson);
+        for (Person sampleStudent : getSamplePersons()) {
+            sampleAb.addPerson(sampleStudent);
         }
         return sampleAb;
     }
