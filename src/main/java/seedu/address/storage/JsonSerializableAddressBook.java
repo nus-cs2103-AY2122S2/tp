@@ -37,6 +37,7 @@ class JsonSerializableAddressBook {
                                        @JsonProperty("events") List<JsonAdaptedEvent> events) {
         this.persons.addAll(persons);
         this.companies.addAll(companies);
+        this.events.addAll(events);
     }
 
     /**
