@@ -37,19 +37,19 @@ public class UniqueMedicalList implements Iterable<Medical> {
         internalList.add(toAdd);
     }
 
-    public void setMedical(Medical target, Medical editedPrescription) {
-        requireAllNonNull(target, editedPrescription);
+    public void setMedical(Medical target, Medical editedMedical) {
+        requireAllNonNull(target, editedMedical);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
             throw new MedicalNotFoundException();
         }
 
-        if (!target.equals(editedPrescription) && contains(editedPrescription)) {
+        if (!target.equals(editedMedical) && contains(editedMedical)) {
             throw new DuplicateMedicalException();
         }
 
-        internalList.set(index, editedPrescription);
+        internalList.set(index, editedMedical);
     }
 
     /**
@@ -61,20 +61,6 @@ public class UniqueMedicalList implements Iterable<Medical> {
         if (!internalList.remove(toRemove)) {
             throw new MedicalNotFoundException();
         }
-    }
-
-    public void setMedicals(UniqueMedicalList replacement) {
-        requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
-    }
-
-    public void setMedicals(List<Medical> prescriptions) {
-        requireAllNonNull(prescriptions);
-        if (!prescriptionAreUnique(prescriptions)) {
-            throw new DuplicateMedicalException();
-        }
-
-        internalList.setAll(prescriptions);
     }
 
     public ObservableList<Medical> asUnmodifiableObservableList() {
@@ -99,12 +85,12 @@ public class UniqueMedicalList implements Iterable<Medical> {
     }
 
     /**
-     * Returns true if {@code persons} contains only unique persons.
+     * Returns true if {@code medicals} contains only unique medical information records.
      */
-    private boolean prescriptionAreUnique(List<Medical> prescriptions) {
-        for (int i = 0; i < prescriptions.size() - 1; i++) {
-            for (int j = i + 1; j < prescriptions.size(); j++) {
-                if (prescriptions.get(i).equals(prescriptions.get(j))) {
+    private boolean medicalAreUnique(List<Medical> medicals) {
+        for (int i = 0; i < medicals.size() - 1; i++) {
+            for (int j = i + 1; j < medicals.size(); j++) {
+                if (medicals.get(i).equals(medicals.get(j))) {
                     return false;
                 }
             }
