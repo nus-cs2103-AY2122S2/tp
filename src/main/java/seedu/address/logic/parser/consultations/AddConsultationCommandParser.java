@@ -9,7 +9,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TESTS_TAKEN_AND_RESULT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
-
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.consultation.AddConsultationCommand;
