@@ -1,4 +1,7 @@
-# Developer Guide
+---
+layout: page
+title: Developer Guide
+---
 
 # Acknowledgements
 
@@ -11,6 +14,12 @@ Get started by following these instructions from our [guide](https://www.notion.
 # Design
 
 Take a look at our design which is mostly based off on [AddressBook Level 3 (AB3)](https://se-education.org/addressbook-level3/DeveloperGuide.html#design).
+
+
+##Architecture
+
+##UI Component
+<img src="images/developer-guide/UiArchitecture.png" width="800px">
 
 # Implementation
 
