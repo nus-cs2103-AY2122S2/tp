@@ -11,11 +11,11 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the view of an expanded person card.
  */
-public class PersonListPanel extends UiPart<Region> {
-    private static final String FXML = "PersonListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+public class ExpandedPersonListPanel extends UiPart<Region> {
+    private static final String FXML = "ExpandedPersonListPanel.fxml";
+    private final Logger logger = LogsCenter.getLogger(ExpandedPersonListPanel.class);
 
     @FXML
     private ListView<Person> personListView;
@@ -23,7 +23,7 @@ public class PersonListPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Person> personList) {
+    public ExpandedPersonListPanel(ObservableList<Person> personList) {
         super(FXML);
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
@@ -40,8 +40,9 @@ public class PersonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
+                    setGraphic(new ExpandedPersonCard(person).getRoot());
             }
         }
     }
+
 }
