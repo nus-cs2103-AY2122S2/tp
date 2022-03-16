@@ -123,6 +123,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteInterview(Interview target) {
+        addressBook.removeInterview(target);
+    }
+
+    @Override
     public void addInterview(Interview interview) {
         addressBook.addInterview(interview);
         updateFilteredInterviewList(PREDICATE_SHOW_ALL_INTERVIEWS);

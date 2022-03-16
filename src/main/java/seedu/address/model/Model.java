@@ -96,6 +96,12 @@ public interface Model {
     boolean hasInterview(Interview interview);
 
     /**
+     * Deletes the given interview.
+     * The interview must exist in the address book.
+     */
+    void deleteInterview(Interview target);
+
+    /**
      * Adds the given interview.
      * {@code interview} must not already exist in the address book.
      */
