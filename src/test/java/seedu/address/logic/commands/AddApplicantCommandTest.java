@@ -198,6 +198,10 @@ public class AddApplicantCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public void deleteInterview(Interview target) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
