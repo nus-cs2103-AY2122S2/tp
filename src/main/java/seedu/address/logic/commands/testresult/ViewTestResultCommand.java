@@ -2,6 +2,7 @@ package seedu.address.logic.commands.testresult;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.commands.contact.AddContactCommand.MESSAGE_MISSING_PATIENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import seedu.address.commons.core.Messages;
@@ -24,7 +25,7 @@ public class ViewTestResultCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all test results whose tests contain any of "
             + "the specified owner NRIC and displays them as a list with index numbers.\n"
             + "Parameters: OWNER NRIC\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_TYPE + "test" + " S1234567L";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_TYPE + "test " + PREFIX_NRIC + "S1234567L";
 
     private final Nric ownerNric;
 
