@@ -115,34 +115,53 @@ public class AttendanceCommand extends Command {
             }
             fileScanner.close();
 
-            Collections.sort(sortAttendance);
-            FileWriter sortedFileWriter = new FileWriter(file, false);
-            for (String line : sortAttendance) {
-                sortedFileWriter.write(line + "\n");
-            }
-            sortedFileWriter.close();
-
-            ArrayList<JsonAdaptedAttendance> attendances = new ArrayList<>();
-            Scanner sortedFileScanner = new Scanner(file);
-            while (sortedFileScanner.hasNextLine()) {
-                String lineAttendance = sortedFileScanner.nextLine();
-                String[] separator = lineAttendance.split(" ", 4);
-                String date = separator[0];
-                String puTime = separator[1];
-                String doTime = separator[2];
-                JsonAdaptedAttendance currAttendance = new JsonAdaptedAttendance(date, puTime, doTime);
-                attendances.add(currAttendance);
-            }
-            sortedFileScanner.close();
-
-            ObjectMapper mapper = new ObjectMapper();
-            ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
-            File jsonFile = new File(jsonFilePath);
-            writer.writeValue(jsonFile, attendances);
+            sortTextFile(file, sortAttendance);
+            createJsonFile(file, jsonFilePath);
         } catch (IOException e) {
             throw new CommandException(MESSAGE_PET_NOT_ADDED);
         }
 
+    }
+
+    /**
+     * Overwrites original text file with sorted dates.
+     * @param file text file to be overwritten.
+     * @param attendanceString ArrayList of Strings containing attendances.
+     * @throws IOException Throws exception if error occurs during writing.
+     */
+    private static void sortTextFile(File file, ArrayList<String> attendanceString) throws IOException {
+        Collections.sort(attendanceString);
+        FileWriter sortedFileWriter = new FileWriter(file, false);
+        for (String line : attendanceString) {
+            sortedFileWriter.write(line + "\n");
+        }
+        sortedFileWriter.close();
+    }
+
+    /**
+     * Overwrites existing JSON file of pet to give a new chronologically ordered file.
+     * @param textFile Sorted text file to be processed.
+     * @param jsonFilePath String path of JSON file to be overwritten.
+     * @throws IOException Throws exception if error occurs during writing of file
+     */
+    private static void createJsonFile(File textFile, String jsonFilePath) throws IOException {
+        ArrayList<JsonAdaptedAttendance> attendances = new ArrayList<>();
+        Scanner sortedFileScanner = new Scanner(textFile);
+        while (sortedFileScanner.hasNextLine()) {
+            String lineAttendance = sortedFileScanner.nextLine();
+            String[] separator = lineAttendance.split(" ", 3);
+            String date = separator[0];
+            String puTime = separator[1];
+            String doTime = separator[2];
+            JsonAdaptedAttendance currAttendance = new JsonAdaptedAttendance(date, puTime, doTime);
+            attendances.add(currAttendance);
+        }
+        sortedFileScanner.close();
+
+        ObjectMapper mapper = new ObjectMapper();
+        ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
+        File jsonFile = new File(jsonFilePath);
+        writer.writeValue(jsonFile, attendances);
     }
 
     /**
