@@ -15,18 +15,14 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-<<<<<<< HEAD:src/test/java/seedu/address/model/contact/UniquePersonListTest.java
-import seedu.address.model.contact.exceptions.DuplicatePersonException;
-import seedu.address.model.contact.exceptions.PersonNotFoundException;
-=======
+import seedu.address.model.contact.UniqueContactList;
 import seedu.address.model.patient.exceptions.DuplicatePersonException;
 import seedu.address.model.patient.exceptions.PersonNotFoundException;
->>>>>>> origin/master:src/test/java/seedu/address/model/patient/UniquePatientListTest.java
 import seedu.address.testutil.PersonBuilder;
 
 public class UniquePatientListTest {
 
-    private final UniqueContactList uniquePersonList = new UniqueContactList();
+    private final UniquePersonList uniquePersonList = new UniquePersonList();
 
     @Test
     public void contains_nullPerson_throwsNullPointerException() {
@@ -82,7 +78,7 @@ public class UniquePatientListTest {
     public void setPerson_editedPersonIsSamePerson_success() {
         uniquePersonList.add(ALICE);
         uniquePersonList.setPerson(ALICE, ALICE);
-        UniqueContactList expectedUniquePersonList = new UniqueContactList();
+        UniquePersonList expectedUniquePersonList = new UniquePersonList();
         expectedUniquePersonList.add(ALICE);
         assertEquals(expectedUniquePersonList, uniquePersonList);
     }
@@ -93,7 +89,7 @@ public class UniquePatientListTest {
         Patient editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         uniquePersonList.setPerson(ALICE, editedAlice);
-        UniqueContactList expectedUniquePersonList = new UniqueContactList();
+        UniquePersonList expectedUniquePersonList = new UniquePersonList();
         expectedUniquePersonList.add(editedAlice);
         assertEquals(expectedUniquePersonList, uniquePersonList);
     }
@@ -102,7 +98,7 @@ public class UniquePatientListTest {
     public void setPerson_editedPersonHasDifferentIdentity_success() {
         uniquePersonList.add(ALICE);
         uniquePersonList.setPerson(ALICE, BOB);
-        UniqueContactList expectedUniquePersonList = new UniqueContactList();
+        UniquePersonList expectedUniquePersonList = new UniquePersonList();
         expectedUniquePersonList.add(BOB);
         assertEquals(expectedUniquePersonList, uniquePersonList);
     }
@@ -128,19 +124,19 @@ public class UniquePatientListTest {
     public void remove_existingPerson_removesPerson() {
         uniquePersonList.add(ALICE);
         uniquePersonList.remove(ALICE);
-        UniqueContactList expectedUniquePersonList = new UniqueContactList();
+        UniquePersonList expectedUniquePersonList = new UniquePersonList();
         assertEquals(expectedUniquePersonList, uniquePersonList);
     }
 
     @Test
     public void setPersons_nullUniquePersonList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniquePersonList.setPersons((UniqueContactList) null));
+        assertThrows(NullPointerException.class, () -> uniquePersonList.setPersons((UniquePersonList) null));
     }
 
     @Test
     public void setPersons_uniquePersonList_replacesOwnListWithProvidedUniquePersonList() {
         uniquePersonList.add(ALICE);
-        UniqueContactList expectedUniquePersonList = new UniqueContactList();
+        UniquePersonList expectedUniquePersonList = new UniquePersonList();
         expectedUniquePersonList.add(BOB);
         uniquePersonList.setPersons(expectedUniquePersonList);
         assertEquals(expectedUniquePersonList, uniquePersonList);
@@ -154,15 +150,9 @@ public class UniquePatientListTest {
     @Test
     public void setPersons_list_replacesOwnListWithProvidedList() {
         uniquePersonList.add(ALICE);
-<<<<<<< HEAD:src/test/java/seedu/address/model/contact/UniquePersonListTest.java
-        List<Person> personList = Collections.singletonList(BOB);
-        uniquePersonList.setPersons(personList);
-        UniqueContactList expectedUniquePersonList = new UniqueContactList();
-=======
         List<Patient> patientList = Collections.singletonList(BOB);
         uniquePersonList.setPersons(patientList);
         UniquePersonList expectedUniquePersonList = new UniquePersonList();
->>>>>>> origin/master:src/test/java/seedu/address/model/patient/UniquePatientListTest.java
         expectedUniquePersonList.add(BOB);
         assertEquals(expectedUniquePersonList, uniquePersonList);
     }
