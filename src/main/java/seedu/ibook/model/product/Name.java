@@ -9,21 +9,12 @@ import static seedu.ibook.commons.util.AppUtil.checkArgument;
  */
 public class Name {
 
-    private static class WildName extends Name {
-        private WildName() {};
-
+    public static final Name WILD_NAME = new Name() {
         @Override
         public boolean equals(Object other) {
-            if (other instanceof Name) {
-                return true;
-            } else {
-                return false;
-            }
+            return other instanceof Name;
         }
-
-    }
-
-    public static final WildName WILDNAME = new WildName();
+    };
 
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters and spaces, and it should not be blank";
@@ -35,8 +26,6 @@ public class Name {
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String fullName;
-
-
 
     private Name() {
         fullName = "???";
@@ -54,7 +43,10 @@ public class Name {
     }
 
     /**
-     * Returns true if a given string is a valid name.
+     * Checks if the string is valid as per {@code VALIDATION_REGEX}.
+     *
+     * @param test String to test.
+     * @return Result of test.
      */
     public static boolean isValidName(String test) {
         return test.matches(VALIDATION_REGEX);

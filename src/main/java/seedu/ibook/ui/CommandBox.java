@@ -4,25 +4,28 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
-public class CommandBox extends UiPart<HBox> {
+/**
+ * CommandBox Ui class.
+ */
+public class CommandBox extends UiComponent<HBox> {
 
     private static final String FXML = "CommandBox.fxml";
-
-    private final CommandExecutor commandExecutor;
 
     @FXML
     private TextField commandTextField;
 
     /**
-     * Creates a {@code CommandBox} with the given {@code CommandExecutor}.
+     * Creates a {@code CommandBox} with a {@code CommandExecutor}
+     * and a {@code popupAdd}.
+     *
+     * @param mainWindow The {@code MainWindow} that this component resides on.
      */
-    public CommandBox(CommandExecutor commandExecutor) {
-        super(FXML);
-        this.commandExecutor = commandExecutor;
+    public CommandBox(MainWindow mainWindow) {
+        super(FXML, mainWindow);
     }
 
     /**
-     * Handles the Enter button pressed event.
+     * Handles the Enter button pressed event in the command line.
      */
     @FXML
     private void handleCommandEntered() {
@@ -31,20 +34,16 @@ public class CommandBox extends UiPart<HBox> {
             return;
         }
 
-        commandExecutor.execute(commandText);
+        getMainWindow().executeCommand(commandText);
         commandTextField.setText("");
     }
 
     /**
-     * Represents a function that can execute commands.
+     * Handles the add product button clicked event.
      */
-    @FunctionalInterface
-    public interface CommandExecutor {
-        /**
-         * Executes the command and returns the result.
-         *
-         * @see seedu.ibook.logic.Logic#execute(String)
-         */
-        void execute(String commandText);
+    @FXML
+    private void handleAddProductClicked() {
+        getMainWindow().showPopupAdd();
     }
+
 }

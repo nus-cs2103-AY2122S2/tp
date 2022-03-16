@@ -50,7 +50,7 @@ public class FindCommandTest {
                     new Category(VALID_CATEGORY_A),
                     new ExpiryDate(VALID_EXPIRY_DATE_A),
                     new Description(VALID_DESCRIPTION_A),
-                    Price.WILDPRICE));
+                    Price.WILD_PRICE));
 
     private ProductFulfillsFiltersPredicate kayaPredicate =
             new ProductFulfillsFiltersPredicate(KAYA_BREAD);

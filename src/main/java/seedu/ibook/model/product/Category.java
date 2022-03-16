@@ -9,19 +9,14 @@ import static seedu.ibook.commons.util.AppUtil.checkArgument;
  */
 public class Category {
 
-    private static class WildCategory extends Category {
-        private WildCategory() {};
-
+    public static final Category WILD_CATEGORY = new Category() {
         @Override
         public boolean equals(Object other) {
-            if (other instanceof Category) {
-                return true;
-            } else {
-                return false;
-            }
+            return other instanceof Category;
         }
-    }
-    public static final WildCategory WILDCATEGORY = new WildCategory();
+    };
+
+    public static final String DEFAULT_CATEGORY = "Miscellaneous";
 
     public static final String MESSAGE_CONSTRAINTS =
             "Categories (if given) should only contain alphanumeric characters and spaces";
@@ -38,7 +33,7 @@ public class Category {
      * Constructs a {@code Category} representing no categorization.
      */
     private Category() {
-        fullCategoryName = "";
+        fullCategoryName = DEFAULT_CATEGORY;
     }
 
     /**
@@ -53,7 +48,10 @@ public class Category {
     }
 
     /**
-     * Returns true if a given string is a valid category name.
+     * Checks if the string is valid as per {@code VALIDATION_REGEX}.
+     *
+     * @param test String to test.
+     * @return Result of test.
      */
     public static boolean isValidCategoryName(String test) {
         return test.matches(VALIDATION_REGEX);

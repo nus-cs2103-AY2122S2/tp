@@ -2,12 +2,20 @@ package seedu.ibook.ui;
 
 import javafx.scene.control.MenuBar;
 
-public class MenuToolbar extends UiPart<MenuBar> {
+/**
+ * The menu toolbar of the application.
+ */
+public class MenuToolbar extends UiComponent<MenuBar> {
 
     private static final String FXML = "MenuToolbar.fxml";
 
-    MenuToolbar() {
-        super(FXML);
+    /**
+     * Initializes a {@code MenuToolbar}.
+     *
+     * @param mainWindow The {@code MainWindow} that this component resides on.
+     */
+    MenuToolbar(MainWindow mainWindow) {
+        super(FXML, mainWindow);
     }
 
 }

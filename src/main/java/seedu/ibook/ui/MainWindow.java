@@ -12,6 +12,9 @@ import seedu.ibook.logic.Logic;
 import seedu.ibook.logic.commands.CommandResult;
 import seedu.ibook.logic.commands.exceptions.CommandException;
 import seedu.ibook.logic.parser.exceptions.ParseException;
+import seedu.ibook.model.product.Product;
+import seedu.ibook.ui.popup.PopupHandler;
+import seedu.ibook.ui.table.Table;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -31,11 +34,16 @@ public class MainWindow extends UiPart<Stage> {
     private ResultWindow resultWindow;
     private Table table;
 
+    private PopupHandler popupHandler;
+
     @FXML
     private VBox mainContent;
 
     /**
-     * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
+     * Initializes a {@code MainWindow}.
+     *
+     * @param primaryStage The {@code Stage} of the application.
+     * @param logic The main code {@code Logic}.
      */
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
@@ -45,6 +53,9 @@ public class MainWindow extends UiPart<Stage> {
         this.logic = logic;
     }
 
+    /**
+     * Shows the stage.
+     */
     void show() {
         primaryStage.show();
     }
@@ -57,26 +68,32 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Gets the primary stage.
+     * @return The primary stage.
+     */
     Stage getPrimaryStage() {
         return primaryStage;
     }
 
     /**
-     * Fills up all the placeholders of this window.
+     * Fills up the inner part of this window.
      */
     void fillInnerParts() {
         ObservableList<Node> children = mainContent.getChildren();
 
-        menuToolbar = new MenuToolbar();
+        popupHandler = new PopupHandler(this);
+
+        menuToolbar = new MenuToolbar(this);
         children.add(menuToolbar.getRoot());
 
-        commandBox = new CommandBox(this::executeCommand);
+        commandBox = new CommandBox(this);
         children.add(commandBox.getRoot());
 
-        resultWindow = new ResultWindow();
+        resultWindow = new ResultWindow(this);
         children.add(resultWindow.getRoot());
 
-        table = new Table(logic.getFilteredIBook());
+        table = new Table(this);
         children.add(table.getRoot());
     }
 
@@ -85,7 +102,7 @@ public class MainWindow extends UiPart<Stage> {
      *
      * @see seedu.ibook.logic.Logic#execute(String)
      */
-    private void executeCommand(String commandText) {
+    public void executeCommand(String commandText) {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
@@ -94,10 +111,52 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isExit()) {
                 handleExit();
             }
-
+            hidePopup();
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
-            resultWindow.setFeedbackToUser(e.getMessage());
+            setError(e.getMessage());
+        }
+    }
+
+    /**
+     * Shows the popup window for adding product.
+     */
+    public void showPopupAdd() {
+        popupHandler.showPopupAdd();
+    }
+
+    /**
+     * Shows the popup window for updating product.
+     */
+    public void showPopupUpdate(int index, Product product) {
+        popupHandler.showPopupUpdate(index, product);
+    }
+
+    /**
+     * Shows the popup window for deleting product.
+     */
+    public void showPopupDelete(int index, Product product) {
+        popupHandler.showPopupDelete(index, product);
+    }
+
+    /**
+     * Gets the filtered list of {@code Product} from {@code Logic}.
+     *
+     * @return Get a filtered list of {@code Product}.
+     */
+    public ObservableList<Product> getFilteredIBook() {
+        return logic.getFilteredIBook();
+    }
+
+    private void hidePopup() {
+        popupHandler.hidePopup();
+    }
+
+    private void setError(String message) {
+        if (popupHandler.isShowing()) {
+            popupHandler.setFeedbackToUser(message);
+        } else {
+            resultWindow.setFeedbackToUser(message);
         }
     }
 }
