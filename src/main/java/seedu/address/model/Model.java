@@ -18,6 +18,10 @@ public interface Model {
     Predicate<Company> PREDICATE_SHOW_ALL_COMPANIES = unused -> true;
     Predicate<Event> PREDICATE_SHOW_ALL_EVENTS = unused -> true;
 
+    Predicate<Person> PREDICATE_SHOW_NO_PERSONS = unused -> false;
+    Predicate<Company> PREDICATE_SHOW_NO_COMPANIES = unused -> false;
+    Predicate<Event> PREDICATE_SHOW_NO_EVENTS = unused -> false;
+
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
