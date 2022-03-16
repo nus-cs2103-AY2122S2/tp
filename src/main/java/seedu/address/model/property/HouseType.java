@@ -1,4 +1,4 @@
-package seedu.address.model.house;
+package seedu.address.model.property;
 
 /**
  * All types of houses are listed here
@@ -8,7 +8,7 @@ public enum HouseType {
     BUNGALOW,
     CONDOMINIUM,
     COLONIAL,
-    FLAT,
+    HDB_FLAT,
     SEMIDETACHED,
     MANSION
 }
