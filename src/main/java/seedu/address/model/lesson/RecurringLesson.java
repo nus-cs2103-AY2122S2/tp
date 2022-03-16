@@ -32,8 +32,12 @@ public class RecurringLesson extends Lesson {
     @Override
     public DateTimeSlot getDateTimeSlot() {
         DateTimeSlot start = super.getDateTimeSlot();
-        return new DateTimeSlot(LocalDateTime.of(LocalDateTime.now().with(dayOfLesson).toLocalDate(),
-                start.getDateOfLesson().toLocalTime()), start.getHours(), start.getMinutes());
+        if (start.getDateOfLesson().isAfter(LocalDateTime.now())) {
+            return start;
+        } else {
+            return new DateTimeSlot(LocalDateTime.of(LocalDateTime.now().with(dayOfLesson).toLocalDate(),
+                    start.getDateOfLesson().toLocalTime()), start.getHours(), start.getMinutes());
+        }
     }
 
     @Override
