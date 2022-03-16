@@ -48,7 +48,7 @@ deactivate IBookParser
 LogicManager -> DeleteCommand : execute()
 activate DeleteCommand
 
-DeleteCommand -> Model : deletePerson(1)
+DeleteCommand -> Model : deleteProduct(1)
 activate Model
 
 Model --> DeleteCommand
