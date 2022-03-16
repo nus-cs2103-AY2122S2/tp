@@ -62,9 +62,15 @@ public class Buyer extends Client {
                 && otherBuyer.hasSameProperties(this);
     }
 
+    /**
+     * Checks if 2 Buyers have the matching properties.
+     *
+     * @param other The other Buyer.
+     * @return Whether their properties match.
+     */
     public boolean hasSameProperties(Buyer other) {
-        return propertiesToBuy.containsAll(other.propertiesToBuy) &&
-                other.propertiesToBuy.containsAll(propertiesToBuy);
+        return propertiesToBuy.containsAll(other.propertiesToBuy)
+                && other.propertiesToBuy.containsAll(propertiesToBuy);
 
     }
 }
