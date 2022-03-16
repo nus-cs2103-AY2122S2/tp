@@ -5,6 +5,7 @@ import static seedu.trackbeau.storage.JsonAdaptedCustomer.MISSING_FIELD_MESSAGE_
 import static seedu.trackbeau.testutil.Assert.assertThrows;
 import static seedu.trackbeau.testutil.TypicalCustomers.BENSON;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,9 +26,9 @@ public class JsonAdaptedCustomerTest {
     private static final String INVALID_SKIN_TYPE = " ";
     private static final String INVALID_HAIR_TYPE = " ";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_STAFF = "#Jane";
-    private static final String INVALID_SERVICE = "#Chemical Peel";
-    private static final String INVALID_ALLERGY = "#Nickel";
+    private static final String INVALID_STAFF = " ";
+    private static final String INVALID_SERVICE = " ";
+    private static final String INVALID_ALLERGY = " ";
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
@@ -147,7 +148,6 @@ public class JsonAdaptedCustomerTest {
         assertThrows(IllegalValueException.class, expectedMessage, customer::toModelType);
     }
 
-    /*
     @Test
     public void toModelType_invalidStaffs_throwsIllegalValueException() {
         List<JsonAdaptedTag> invalidStaffs = new ArrayList<>(VALID_STAFFS);
@@ -180,5 +180,5 @@ public class JsonAdaptedCustomerTest {
                         VALID_SERVICES, invalidAllergies);
         assertThrows(IllegalValueException.class, person::toModelType);
     }
-    */
+
 }

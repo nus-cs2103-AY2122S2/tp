@@ -111,7 +111,6 @@ public class ParserUtil {
         }
         return new SkinType(trimmedSkinType);
     }
-
     /**
      * Parses a {@code String hairType} into an {@code HairType}.
      * Leading and trailing whitespaces will be trimmed.
@@ -121,7 +120,7 @@ public class ParserUtil {
     public static HairType parseHairType(String hairType) throws ParseException {
         requireNonNull(hairType);
         String trimmedHairType = hairType.trim();
-        if (!Address.isValidAddress(trimmedHairType)) {
+        if (!HairType.isValidHairType(trimmedHairType)) {
             throw new ParseException(HairType.MESSAGE_CONSTRAINTS);
         }
         return new HairType(trimmedHairType);

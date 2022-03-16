@@ -10,9 +10,14 @@ import static seedu.trackbeau.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.HAIR_TYPE_DESC_AMY;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.HAIR_TYPE_DESC_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.INVALID_ALLERGY_DESC;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.INVALID_HAIR_TYPE_DESC;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.INVALID_SERVICE_DESC;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.INVALID_SKIN_TYPE_DESC;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.INVALID_STAFFS_DESC;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
@@ -26,15 +31,15 @@ import static seedu.trackbeau.logic.commands.CommandTestUtil.SKIN_TYPE_DESC_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.STAFF_DESC_AMY;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.STAFF_DESC_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_ALLERGY_COCOA_BUTTER;
-import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_ALLERGY_NICKEL;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_ALLERGY_AMY;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_ALLERGY_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_SERVICE_ACNE;
-import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_SERVICE_CHEMICAL_PEEL;
-import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_STAFF_JANE;
-import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_STAFF_JOHN;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_SERVICE_AMY;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_SERVICE_BOB;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_STAFF_AMY;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_STAFF_BOB;
 import static seedu.trackbeau.logic.parser.AddCommandParser.EMPTY_HAIR_TYPE;
 import static seedu.trackbeau.logic.parser.AddCommandParser.EMPTY_SKIN_TYPE;
 import static seedu.trackbeau.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -48,8 +53,11 @@ import seedu.trackbeau.logic.commands.AddCommand;
 import seedu.trackbeau.model.customer.Address;
 import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.model.customer.Email;
+import seedu.trackbeau.model.customer.HairType;
 import seedu.trackbeau.model.customer.Name;
 import seedu.trackbeau.model.customer.Phone;
+import seedu.trackbeau.model.customer.SkinType;
+import seedu.trackbeau.model.tag.Tag;
 import seedu.trackbeau.testutil.CustomerBuilder;
 
 public class AddCommandParserTest {
@@ -57,8 +65,8 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Customer expectedCustomer = new CustomerBuilder(BOB).withStaffs(VALID_STAFF_JOHN)
-                .withServices(VALID_SERVICE_ACNE).withAllergies(VALID_ALLERGY_COCOA_BUTTER).build();
+        Customer expectedCustomer = new CustomerBuilder(BOB).withStaffs(VALID_STAFF_BOB)
+                .withServices(VALID_SERVICE_BOB).withAllergies(VALID_ALLERGY_BOB).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
@@ -98,8 +106,8 @@ public class AddCommandParserTest {
 
         // multiple staffs tags - all accepted
         Customer expectedCustomerMultipleStaffs = new CustomerBuilder(BOB)
-                .withStaffs(VALID_STAFF_JANE, VALID_STAFF_JOHN)
-                .withServices(VALID_SERVICE_ACNE).withAllergies(VALID_ALLERGY_COCOA_BUTTER)
+                .withStaffs(VALID_STAFF_AMY, VALID_STAFF_BOB)
+                .withServices(VALID_SERVICE_BOB).withAllergies(VALID_ALLERGY_BOB)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + SKIN_TYPE_DESC_BOB + HAIR_TYPE_DESC_BOB
@@ -108,10 +116,10 @@ public class AddCommandParserTest {
 
         // multiple services tags - all accepted
         Customer expectedCustomerMultipleServices = new CustomerBuilder(BOB)
-                .withStaffs(VALID_STAFF_JOHN)
-                .withServices(VALID_SERVICE_CHEMICAL_PEEL,
-                VALID_SERVICE_ACNE)
-                .withAllergies(VALID_ALLERGY_COCOA_BUTTER)
+                .withStaffs(VALID_STAFF_BOB)
+                .withServices(VALID_SERVICE_AMY,
+                        VALID_SERVICE_BOB)
+                .withAllergies(VALID_ALLERGY_BOB)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + SKIN_TYPE_DESC_BOB + HAIR_TYPE_DESC_BOB + STAFF_DESC_BOB
@@ -121,9 +129,9 @@ public class AddCommandParserTest {
 
         // multiple allergy tags - all accepted
         Customer expectedCustomerMultipleAllergies = new CustomerBuilder(BOB)
-                .withStaffs(VALID_STAFF_JOHN)
-                .withServices(VALID_SERVICE_ACNE)
-                .withAllergies(VALID_ALLERGY_NICKEL, VALID_ALLERGY_COCOA_BUTTER)
+                .withStaffs(VALID_STAFF_BOB)
+                .withServices(VALID_SERVICE_BOB)
+                .withAllergies(VALID_ALLERGY_AMY, VALID_ALLERGY_BOB)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + SKIN_TYPE_DESC_BOB + HAIR_TYPE_DESC_BOB
@@ -214,63 +222,46 @@ public class AddCommandParserTest {
     }
 
     @Test
-    public void parse_invalidValue_failure() {
+    public void parse_invalidName_failure() {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + SKIN_TYPE_DESC_BOB + HAIR_TYPE_DESC_BOB
                 + STAFF_DESC_BOB + SERVICE_DESC_BOB
                 + ALLERGY_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
+    }
 
+    @Test
+    public void parse_invalidPhone_failure() {
         // invalid phone
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + SKIN_TYPE_DESC_BOB + HAIR_TYPE_DESC_BOB
                 + STAFF_DESC_BOB + SERVICE_DESC_BOB
                 + ALLERGY_DESC_BOB, Phone.MESSAGE_CONSTRAINTS);
+    }
 
+    @Test
+    public void parse_invalidEmail_failure() {
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC
                 + ADDRESS_DESC_BOB
                 + SKIN_TYPE_DESC_BOB + HAIR_TYPE_DESC_BOB
                 + STAFF_DESC_BOB + SERVICE_DESC_BOB
                 + ALLERGY_DESC_BOB, Email.MESSAGE_CONSTRAINTS);
+    }
 
+    @Test
+    public void parse_invalidAddress_failure() {
         // invalid address
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + INVALID_ADDRESS_DESC
                 + SKIN_TYPE_DESC_BOB + HAIR_TYPE_DESC_BOB
                 + STAFF_DESC_BOB + SERVICE_DESC_BOB
                 + ALLERGY_DESC_BOB, Address.MESSAGE_CONSTRAINTS);
-        /*
-        // invalid skin type
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + INVALID_SKIN_TYPE_DESC + HAIR_TYPE_DESC_BOB
-                + STAFF_DESC_BOB + SERVICE_DESC_BOB
-                + ALLERGY_DESC_BOB, SkinType.MESSAGE_CONSTRAINTS);
+    }
 
-        // invalid hair type
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + SKIN_TYPE_DESC_BOB + INVALID_HAIR_TYPE_DESC
-                + STAFF_DESC_BOB + SERVICE_DESC_BOB
-                + ALLERGY_DESC_BOB, HairType.MESSAGE_CONSTRAINTS);
-
-        // invalid staff
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + SKIN_TYPE_DESC_BOB + HAIR_TYPE_DESC_BOB
-                + INVALID_STAFFS_DESC + VALID_STAFF_JOHN + SERVICE_DESC_BOB + ALLERGY_DESC_BOB,
-                Tag.MESSAGE_CONSTRAINTS);
-
-        // invalid service
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + SKIN_TYPE_DESC_BOB + HAIR_TYPE_DESC_BOB
-                + STAFF_DESC_BOB + INVALID_SERVICE_DESC + ALLERGY_DESC_BOB, Tag.MESSAGE_CONSTRAINTS);
-
-        // invalid allergy
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + SKIN_TYPE_DESC_BOB + HAIR_TYPE_DESC_BOB
-                + STAFF_DESC_BOB + SERVICE_DESC_BOB
-                + INVALID_ALLERGY_DESC, Tag.MESSAGE_CONSTRAINTS);
-
+    @Test
+    public void parse_twoInvalidValues_failure() {
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB
                         + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
@@ -278,12 +269,60 @@ public class AddCommandParserTest {
                         + STAFF_DESC_BOB + SERVICE_DESC_BOB
                         + ALLERGY_DESC_BOB,
                 Name.MESSAGE_CONSTRAINTS);
-*/
+    }
+
+    @Test
+    public void parse_nonEmptyPreamble_failure() {
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + SKIN_TYPE_DESC_BOB + HAIR_TYPE_DESC_BOB
+                        + ADDRESS_DESC_BOB + SKIN_TYPE_DESC_BOB + HAIR_TYPE_DESC_BOB
                         + STAFF_DESC_BOB + SERVICE_DESC_BOB
                         + ALLERGY_DESC_BOB,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
+
+    @Test
+    public void parse_invalidSkinType_failure() {
+        // invalid skin type
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + INVALID_SKIN_TYPE_DESC + HAIR_TYPE_DESC_BOB
+                + STAFF_DESC_BOB + SERVICE_DESC_BOB
+                + ALLERGY_DESC_BOB, SkinType.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_invalidHairType_failure() {
+        // invalid hair type
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + SKIN_TYPE_DESC_BOB + INVALID_HAIR_TYPE_DESC
+                + STAFF_DESC_BOB + SERVICE_DESC_BOB
+                + ALLERGY_DESC_BOB, HairType.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_invalidStaff_failure() {
+        // invalid staff
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                        + ADDRESS_DESC_BOB + SKIN_TYPE_DESC_BOB + HAIR_TYPE_DESC_BOB
+                        + INVALID_STAFFS_DESC + SERVICE_DESC_BOB + ALLERGY_DESC_BOB,
+                Tag.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_invalidService_failure() {
+        // invalid service
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + SKIN_TYPE_DESC_BOB + HAIR_TYPE_DESC_BOB
+                + STAFF_DESC_BOB + INVALID_SERVICE_DESC + ALLERGY_DESC_BOB, Tag.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_invalidAllergy_failure() {
+        // invalid allergy
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + SKIN_TYPE_DESC_BOB + HAIR_TYPE_DESC_BOB
+                + STAFF_DESC_BOB + SERVICE_DESC_BOB
+                + INVALID_ALLERGY_DESC, Tag.MESSAGE_CONSTRAINTS);
+    }
+
 }

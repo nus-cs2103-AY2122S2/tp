@@ -2,7 +2,8 @@ package seedu.trackbeau.testutil;
 
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_ALLERGY_NICKEL;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_ALLERGY_AMY;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_ALLERGY_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_HAIR_TYPE_AMY;
@@ -11,10 +12,12 @@ import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_SERVICE_CHEMICAL_PEEL;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_SERVICE_AMY;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_SERVICE_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_SKIN_TYPE_AMY;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_SKIN_TYPE_BOB;
-import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_STAFF_JANE;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_STAFF_AMY;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_STAFF_BOB;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,22 +33,28 @@ public class TypicalCustomers {
 
     public static final Customer ALICE = new CustomerBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-            .withPhone("94351253")
-            .withStaffs("John").build();
+            .withPhone("94351253").withSkinType("oily").withHairType("dry")
+            .withStaffs("Jason").withAllergies("Nickel").withServices("Acne treatment").build();
     public static final Customer BENSON = new CustomerBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withStaffs("Jason").withServices("Acne treatment").build();
+            .withSkinType("oily").withHairType("dry")
+            .withStaffs("Jason").withServices("Chemical Peel").build();
     public static final Customer CARL = new CustomerBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").withAddress("wall street").build();
+            .withEmail("heinz@example.com").withAddress("wall street")
+            .withSkinType("oily").withHairType("dry").build();
     public static final Customer DANIEL = new CustomerBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withAddress("10th street").withAllergies("Cocoa Butter").build();
+            .withEmail("cornelia@example.com").withAddress("10th street")
+            .withSkinType("oily").withHairType("dry").withAllergies("Cocoa Butter").build();
     public static final Customer ELLE = new CustomerBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withEmail("werner@example.com").withAddress("michegan ave").build();
+            .withEmail("werner@example.com").withAddress("michegan ave")
+            .withSkinType("oily").withHairType("dry").build();
     public static final Customer FIONA = new CustomerBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withEmail("lydia@example.com").withAddress("little tokyo").build();
+            .withEmail("lydia@example.com").withAddress("little tokyo")
+            .withSkinType("oily").withHairType("dry").build();
     public static final Customer GEORGE = new CustomerBuilder().withName("George Best").withPhone("9482442")
-            .withEmail("anna@example.com").withAddress("4th street").build();
+            .withEmail("anna@example.com").withAddress("4th street")
+            .withSkinType("oily").withHairType("dry").build();
 
     // Manually added
     public static final Customer HOON = new CustomerBuilder().withName("Hoon Meier").withPhone("8482424")
@@ -58,9 +67,9 @@ public class TypicalCustomers {
             .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
             .withSkinType(VALID_SKIN_TYPE_AMY)
             .withHairType(VALID_HAIR_TYPE_AMY)
-            .withStaffs(VALID_STAFF_JANE)
-            .withServices(VALID_SERVICE_CHEMICAL_PEEL)
-            .withAllergies(VALID_ALLERGY_NICKEL)
+            .withStaffs(VALID_STAFF_AMY)
+            .withServices(VALID_SERVICE_AMY)
+            .withAllergies(VALID_ALLERGY_AMY)
             .build();
 
     public static final Customer BOB = new CustomerBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
@@ -68,9 +77,9 @@ public class TypicalCustomers {
             .withAddress(VALID_ADDRESS_BOB)
             .withSkinType(VALID_SKIN_TYPE_BOB)
             .withHairType(VALID_HAIR_TYPE_BOB)
-            .withStaffs(VALID_STAFF_JANE)
-            .withServices(VALID_SERVICE_CHEMICAL_PEEL)
-            .withAllergies(VALID_ALLERGY_NICKEL)
+            .withStaffs(VALID_STAFF_BOB)
+            .withServices(VALID_SERVICE_BOB)
+            .withAllergies(VALID_ALLERGY_BOB)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

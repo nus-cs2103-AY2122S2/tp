@@ -1,5 +1,6 @@
 package seedu.trackbeau.storage;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.trackbeau.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -9,6 +10,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.trackbeau.commons.exceptions.IllegalValueException;
 import seedu.trackbeau.commons.util.JsonUtil;
+import seedu.trackbeau.model.TrackBeau;
+import seedu.trackbeau.testutil.TypicalCustomers;
 
 public class JsonSerializableTrackBeauTest {
 
@@ -17,16 +20,14 @@ public class JsonSerializableTrackBeauTest {
     private static final Path INVALID_CUSTOMER_FILE = TEST_DATA_FOLDER.resolve("invalidCustomerTrackBeau.json");
     private static final Path DUPLICATE_CUSTOMER_FILE = TEST_DATA_FOLDER.resolve("duplicateCustomerTrackBeau.json");
 
-    /*
     @Test
     public void toModelType_typicalCustomerFile_success() throws Exception {
         JsonSerializableTrackBeau dataFromFile = JsonUtil.readJsonFile(TYPICAL_CUSTOMERS_FILE,
                 JsonSerializableTrackBeau.class).get();
-        TrackBeau addressBookFromFile = dataFromFile.toModelType();
-        TrackBeau typicalPersonsAddressBook = TypicalCustomers.getTypicalAddressBook();
-        assertEquals(addressBookFromFile, typicalPersonsAddressBook);
+        TrackBeau trackBeauFromFile = dataFromFile.toModelType();
+        TrackBeau typicalCustomersTrackBeau = TypicalCustomers.getTypicalTrackBeau();
+        assertEquals(trackBeauFromFile, typicalCustomersTrackBeau);
     }
-    */
 
     @Test
     public void toModelType_invalidCustomerFile_throwsIllegalValueException() throws Exception {
@@ -35,14 +36,12 @@ public class JsonSerializableTrackBeauTest {
         assertThrows(IllegalValueException.class, dataFromFile::toModelType);
     }
 
-    /*
     @Test
-    public void toModelType_duplicatePersons_throwsIllegalValueException() throws Exception {
+    public void toModelType_duplicateCustomers_throwsIllegalValueException() throws Exception {
         JsonSerializableTrackBeau dataFromFile = JsonUtil.readJsonFile(DUPLICATE_CUSTOMER_FILE,
                 JsonSerializableTrackBeau.class).get();
-        assertThrows(IllegalValueException.class, JsonSerializableTrackBeau.MESSAGE_DUPLICATE_PERSON,
+        assertThrows(IllegalValueException.class, JsonSerializableTrackBeau.MESSAGE_DUPLICATE_CUSTOMER,
                 dataFromFile::toModelType);
     }
-    */
 
 }

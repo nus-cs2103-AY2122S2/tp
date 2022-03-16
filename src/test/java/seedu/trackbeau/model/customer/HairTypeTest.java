@@ -31,6 +31,6 @@ public class HairTypeTest {
         // valid HairTypes
         assertTrue(HairType.isValidHairType("Oily"));
         assertTrue(HairType.isValidHairType("o")); // one character
-        assertTrue(HairType.isValidHairType("2B curly hair and oily")); // detailed skin type
+        assertTrue(HairType.isValidHairType("2B curly hair and oily")); // detailed hair type
     }
 }

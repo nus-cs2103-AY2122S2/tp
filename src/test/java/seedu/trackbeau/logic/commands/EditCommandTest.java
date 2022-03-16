@@ -6,8 +6,8 @@ import static seedu.trackbeau.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_SERVICE_ACNE;
-import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_STAFF_JANE;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_SERVICE_BOB;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_STAFF_AMY;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.showCustomerAtIndex;
@@ -56,10 +56,10 @@ public class EditCommandTest {
 
         CustomerBuilder customerInList = new CustomerBuilder(lastCustomer);
         Customer editedCustomer = customerInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withStaffs(VALID_STAFF_JANE).withServices(VALID_SERVICE_ACNE).build();
+                .withStaffs(VALID_STAFF_AMY).withServices(VALID_SERVICE_BOB).build();
 
         EditCustomerDescriptor descriptor = new EditCustomerDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withStaffs(VALID_STAFF_JANE).withServices(VALID_SERVICE_ACNE).build();
+                .withPhone(VALID_PHONE_BOB).withStaffs(VALID_STAFF_AMY).withServices(VALID_SERVICE_BOB).build();
         EditCommand editCommand = new EditCommand(indexLastCustomer, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CUSTOMER_SUCCESS, editedCustomer);

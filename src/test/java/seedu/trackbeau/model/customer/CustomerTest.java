@@ -3,11 +3,14 @@ package seedu.trackbeau.model.customer;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_ALLERGY_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_HAIR_TYPE_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_SERVICE_AMY;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_SKIN_TYPE_BOB;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_STAFF_BOB;
 import static seedu.trackbeau.testutil.Assert.assertThrows;
 import static seedu.trackbeau.testutil.TypicalCustomers.ALICE;
 import static seedu.trackbeau.testutil.TypicalCustomers.BOB;
@@ -24,7 +27,6 @@ public class CustomerTest {
         assertThrows(UnsupportedOperationException.class, () -> customer.getStaffs().remove(0));
     }
 
-    /*ToDo uncomment when edit command is done
     @Test
     public void isSamePerson() {
         // same object -> returns true
@@ -35,7 +37,7 @@ public class CustomerTest {
 
         // same name, all other attributes different -> returns true
         Customer editedAlice = new CustomerBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withStaffs(STAFF_DESC_BOB).build();
+                .withAddress(VALID_ADDRESS_BOB).withStaffs(VALID_STAFF_BOB).build();
         assertTrue(ALICE.isSameCustomer(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -51,7 +53,7 @@ public class CustomerTest {
         editedBob = new CustomerBuilder(BOB).withName(nameWithTrailingSpaces).build();
         assertFalse(BOB.isSameCustomer(editedBob));
     }
-*/
+
     @Test
     public void equals() {
         // same values -> returns true
@@ -94,18 +96,17 @@ public class CustomerTest {
         editedAlice = new CustomerBuilder(ALICE).withAddress(VALID_HAIR_TYPE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        /*
         // different staffs -> returns false
-        editedAlice = new CustomerBuilder(ALICE).withStaffs(STAFF_DESC_BOB).build();
+        editedAlice = new CustomerBuilder(ALICE).withStaffs(VALID_STAFF_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different services -> returns false
-        editedAlice = new CustomerBuilder(ALICE).withStaffs(SERVICE_DESC_BOB).build();
+        editedAlice = new CustomerBuilder(ALICE).withServices(VALID_SERVICE_AMY).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different allergies -> returns false
-        editedAlice = new CustomerBuilder(ALICE).withStaffs(ALLERGY_DESC_BOB).build();
+        editedAlice = new CustomerBuilder(ALICE).withAllergies(VALID_ALLERGY_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
-        */
+
     }
 }

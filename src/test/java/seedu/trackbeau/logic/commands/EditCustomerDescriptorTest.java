@@ -1,27 +1,24 @@
 package seedu.trackbeau.logic.commands;
 
-/*
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_ALLERGY_NICKEL;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_ALLERGY_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_SERVICE_CHEMICAL_PEEL;
-import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_STAFF_JANE;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_SERVICE_BOB;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_STAFF_BOB;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.trackbeau.logic.commands.EditCommand.EditCustomerDescriptor;
 import seedu.trackbeau.testutil.EditCustomerDescriptorBuilder;
-*/
 
 public class EditCustomerDescriptorTest {
 
-    /*ToDo uncomment when edit command is fixed
     @Test
     public void equals() {
         // same values -> returns true
@@ -57,23 +54,17 @@ public class EditCustomerDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different staffs -> returns false
-        editedAmy = new EditCustomerDescriptorBuilder(DESC_AMY).withStaffs(VALID_STAFF_JANE).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
-
-        // different staffs -> returns false
-        editedAmy = new EditCustomerDescriptorBuilder(DESC_AMY).withStaffs(VALID_STAFF_JANE).build();
+        editedAmy = new EditCustomerDescriptorBuilder(DESC_AMY).withStaffs(VALID_STAFF_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different services -> returns false
-        editedAmy = new EditCustomerDescriptorBuilder(DESC_AMY).withServices(VALID_SERVICE_CHEMICAL_PEEL).build();
+        editedAmy = new EditCustomerDescriptorBuilder(DESC_AMY).withServices(VALID_SERVICE_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         //different allergies -> return false
-        // different services -> returns false
-        editedAmy = new EditCustomerDescriptorBuilder(DESC_AMY).withAllergies(VALID_ALLERGY_NICKEL).build();
+        editedAmy = new EditCustomerDescriptorBuilder(DESC_AMY).withAllergies(VALID_ALLERGY_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
-    */
 }
 
 
