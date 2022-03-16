@@ -4,12 +4,16 @@
     "name": "Valid Person",
     "phone": "94824240",
     "email": "E0123456@u.nus.edu",
-    "course": "Computer Science"
+    "course": "Computer Science",
+    "applicationStatus" : "Pending",
+    "interviewStatus" : "Pending"
   }, {
     "studentId": "E0123456",
     "name": "Person With Invalid Phone Field",
     "phone": "948asdf2424",
     "email": "E0123456@u.nus.edu",
-    "course": "Computer Science"
+    "course": "Computer Science",
+    "applicationStatus" : "Pending",
+    "interviewStatus" : "Pending"
   } ]
 }

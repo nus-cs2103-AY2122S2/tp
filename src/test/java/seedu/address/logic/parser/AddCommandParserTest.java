@@ -43,7 +43,8 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+        Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND)
+                .withApplicationStatus("Pending").withInterviewStatus("Pending").build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + STUDENT_ID_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB
@@ -61,13 +62,15 @@ public class AddCommandParserTest {
         Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         assertParseSuccess(parser, STUDENT_ID_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB
-                + COURSE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedPersonMultipleTags));
+                + COURSE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                new AddCommand(expectedPersonMultipleTags));
     }
 
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+
         assertParseSuccess(parser, STUDENT_ID_DESC_AMY + NAME_DESC_AMY + PHONE_DESC_AMY
                 + COURSE_DESC_AMY, new AddCommand(expectedPerson));
     }
