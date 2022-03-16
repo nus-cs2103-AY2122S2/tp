@@ -187,8 +187,8 @@ public class ParserUtil {
      */
     public static Preference parsePreference(String preference) throws ParseException {
         requireNonNull(preference);
-        String trimmedProperty = preference.trim();
-        String[] preferenceSplit = trimmedProperty.split(",");
+        String trimmedPreference = preference.trim();
+        String[] preferenceSplit = trimmedPreference.split(",");
 
         if (preferenceSplit.length != 4) {
             throw new ParseException(Preference.MESSAGE_CONSTRAINTS);
