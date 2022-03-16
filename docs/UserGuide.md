@@ -57,7 +57,7 @@ ManageEZPZ is a **desktop app for that allows managers or supervisors to manage 
 
 * Task related parameters must be in sequence as shown in the instruction.
 
-* Mark and unmark is interger based (cannot over 2^32)
+* All indexes are int based, as such the maximum value is 2147483647. (2<sup>32</sup>)
 
 </div>
 
@@ -140,11 +140,6 @@ Examples:
 
 Find tasks based on the task description or date in the format of (DD-MM-YYYY).
 
-<div markdown="span" class="alert alert-primary">:bulb: **Take Note:**
-Find works based on keywords, as such find would return all matches of the  
-and the DATE must be in this format: DD-MM-YYYY HHmm (in 24 hr format)
-</div>
-
 Format: 
 * `find task/ desc/TASK_DESCRIPTION`
 * `find date/DD-MM-YYYY`
@@ -152,6 +147,11 @@ Format:
 Examples:
 * `find task/ desc/homework`
 * `find date/02-02-2022`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Take Note:**
+Find works based on keywords, as such find would return all matches of the words found in description. 
+And the DATE must be in this format: DD-MM-YYYY HHmm (24 hr format)
+</div>
 
 ### Clearing all entries : `clear`
 
@@ -198,6 +198,6 @@ Action | Format, Examples
 **Add Task** | `TASK_TYPE desc/TASK_DESCRIPTION` <br> e.g., `addTodo desc/read book` <br>`addDeadline desc/Use up resin /by 2022-15-03 0400` 
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Find** | `find task/TASK_DESCRIPTION` <br> e.g., `find task/homework`
+**Find** | `find task/ desc/TASK_DESCRIPTION` <br> e.g., `find task/ desc/homework`
 **List** | `list` <br> e.g. `list all/` or `list event/` or `list deadline/`
 **Help** | `help`
