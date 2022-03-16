@@ -33,6 +33,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private CompanyListPanel companyListPanel;
+    private EventListPanel eventListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -108,12 +109,14 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Fills up all the placeholders of this window.
+     * Fills up all the placeholders of this window for the first initialization
+     * Always starts with Person first.
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         companyListPanel = new CompanyListPanel(logic.getFilteredCompanyList());
-        entryListPanelPlaceholder.getChildren().add(companyListPanel.getRoot());
+        eventListPanel = new EventListPanel(logic.getFilteredEventList());
+        entryListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -123,6 +126,22 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    /**
+     * Change the view to show Person.
+     */
+    void fillPerson() {
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        entryListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+    }
+
+    /**
+     * Change the view to show Event
+     */
+    void fillEvent() {
+        eventListPanel = new EventListPanel(logic.getFilteredEventList());
+        entryListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
     }
 
     /**
@@ -169,6 +188,10 @@ public class MainWindow extends UiPart<Stage> {
         return personListPanel;
     }
 
+    public EventListPanel getEventListPanel() {
+        return eventListPanel;
+    }
+
     /**
      * Executes the command and returns the result.
      *
@@ -179,6 +202,14 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            if (commandResult.isShowPerson()) {
+                fillPerson();
+            }
+
+            if (commandResult.isShowEvent()) {
+                fillEvent();
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
