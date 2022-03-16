@@ -73,7 +73,7 @@ ModuleMate Finder is a desktop app that allows students to find people taking th
 - [Help](#viewing-help--help)
 - [List](#listing-all-persons--list)
 - [Add Contact](#adding-a-contact--add)
-- [Add Module to Contact](#adding-a-module-to-a-contact--add)
+- [Add Module to Contact](#adding-modules-to-a-contact--add)
 - [Delete](#deleting-a-person--delete)
 - [Edit](#editing-a-person--edit)
 - [Clear](#clearing-all-entries--clear)
@@ -106,18 +106,19 @@ Format: `add -c n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS​`
 Examples:
 * `add -c n/Bob p/87654321 e/bob@u.nus.edu`
 
-### Adding a Module to a Contact : `add`
+### Adding Module(s) to a Contact : `addmodule`
 
-Adds a module to an existing contact
+Adds module(s) to an existing contact
 
-Format: `add INDEX -m c/CODE`
+Format: `addmodule INDEX m/CODE [m/CODE1]...`
 
-* Adds a module represented by module code `CODE` to a contact at index `INDEX`
+* Adds modules represented by each module code `m/CODE` to a contact at index `INDEX`
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `add 2 -m c/CS1231`
+* `addmodule 2 m/CS1231`
+* `addmodule 2 m/CS1231 m/2103T`
 
 ### Editing a person : `edit`
 
