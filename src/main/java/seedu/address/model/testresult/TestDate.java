@@ -24,9 +24,7 @@ public class TestDate {
     public TestDate(String testDate) {
         requireNonNull(testDate);
         checkArgument(isValidTestDate(testDate), MESSAGE_CONSTRAINTS);
-        //System.out.println("before make date");
         date = LocalDate.parse(testDate);
-        //System.out.println("after make date");
     }
 
     /**

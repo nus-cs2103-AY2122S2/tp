@@ -1,23 +1,23 @@
 package seedu.address.logic.parser.testresult;
 
-import seedu.address.logic.commands.testresult.AddTestResultCommand;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RESULT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICALTEST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TESTDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
+import seedu.address.logic.commands.testresult.AddTestResultCommand;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.Parser;
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.patient.Nric;
 import seedu.address.model.testresult.MedicalTest;
 import seedu.address.model.testresult.Result;
 import seedu.address.model.testresult.TestDate;
 import seedu.address.model.testresult.TestResult;
-import seedu.address.logic.parser.ArgumentMultimap;
-import seedu.address.logic.parser.ArgumentTokenizer;
-import seedu.address.logic.parser.Parser;
-import seedu.address.logic.parser.ParserUtil;
-import seedu.address.logic.parser.Prefix;
 
 import java.util.stream.Stream;
 

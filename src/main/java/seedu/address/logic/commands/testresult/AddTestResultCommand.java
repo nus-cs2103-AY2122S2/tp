@@ -1,17 +1,21 @@
 package seedu.address.logic.commands.testresult;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TESTDATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICALTEST;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RESULT;
 
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.testresult.TestResult;
-import seedu.address.model.testresult.TestResultWithNricPredicate;
 import seedu.address.model.patient.Nric;
 import seedu.address.model.patient.NricPredicate;
+import seedu.address.model.testresult.TestResult;
+import seedu.address.model.testresult.TestResultWithNricPredicate;
 
 public class AddTestResultCommand extends Command {
     public static final String COMMAND_WORD = "add";

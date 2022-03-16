@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.logic.commands.testresult.ViewTestResultCommand;
 import seedu.address.logic.parser.contact.AddContactCommandParser;
 import seedu.address.logic.parser.contact.ViewContactCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
