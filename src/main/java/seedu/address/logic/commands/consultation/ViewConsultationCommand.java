@@ -2,7 +2,6 @@ package seedu.address.logic.commands.consultation;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.commands.contact.AddContactCommand.MESSAGE_MISSING_PATIENT;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
@@ -62,7 +61,7 @@ public class ViewConsultationCommand extends Command {
             }
         }
 
-        System.out.println("ViewConsultationCommand.java: "+COMMAND_TYPE);
+        System.out.println("ViewConsultationCommand.java: " + COMMAND_TYPE);
 
         return new CommandResult(
                 String.format(Messages.MESSAGE_CONSULTATION_LISTED_OVERVIEW,

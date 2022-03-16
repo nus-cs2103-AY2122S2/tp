@@ -2,7 +2,6 @@ package seedu.address.logic.commands.consultation;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.commands.contact.AddContactCommand.MESSAGE_MISSING_PATIENT;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
@@ -39,7 +38,8 @@ public class DeleteConsultationCommand extends Command {
             + PREFIX_NRIC + " S1234567L "
             + PREFIX_DATE + "19-09-2021 "
             + PREFIX_TIME + "19-00";
-    public static final String MESSAGE_CONSULTATION_DELETE_OVERVIEW = "Delete consultation successful: %1$s, %2$s %3$s \n"
+    public static final String MESSAGE_CONSULTATION_DELETE_OVERVIEW =
+            "Delete consultation successful: %1$s, %2$s %3$s \n"
             + "Remaining %1$s consultations shown below.";
     public static final String MESSAGE_MISSING_CONSULTATION = "Consultation to delete is missing. \n"
             + "Cannot find %1$s, %2$s %3$s.";
