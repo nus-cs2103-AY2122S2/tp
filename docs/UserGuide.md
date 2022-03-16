@@ -16,6 +16,7 @@ They can easily look up the list of shows if they need to.
   * [Requesting help URL: `help`](#requesting-help-url-help)
   * [Finding a show: `find`](#finding-a-show-find)
   * [Deleting a show: `delete`](#deleting-a-show-delete)
+  * [Editing a show: `edit`](#editing-a-show-edit)
   * [Exiting the program: `exit`](#exiting-the-program-exit)
   * [Saving the data](#saving-the-data)
   * [Better Find [coming in v1.3]](#better-find-coming-in-v13)
@@ -155,6 +156,24 @@ Examples:
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
+### Editing a show: `Edit`
+
+Edit the specified show from Trackermon.
+
+Format: `edit <INDEX> [n/<NAME>] [s/<STATUS>] [t/<TAG>]…​`
+* Edit the show at the specified `<INDEX>`.
+* The index refers to the index number shown in the displayed show list. (not overall)
+* The index **must be a positive integer** 1,2,3,..
+* At least one field to edit must be provided
+* Editing to an existing name is not allowed
+
+Examples:
+* `list` followed by `edit 2 n/Sailor Moo` edit 2nd show's name in Trackermon to Sailor Moo.
+* `find ghibli` followed by `edit 1 n/Cowman s/completed t/awesome` edits 1st show in results of `find` command.
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
+---
 
 ### Exiting the program: `exit`
 
@@ -194,11 +213,14 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/<NAME> s/<STATUS> [t/<TAG>]…​` <br> e.g., `n/ReZero s/watching t/Anime`
-**Delete** | `delete <INDEX>`<br> e.g., `delete 3`
-**List** | `list`
-**Exit** | `exit`
+Action | Format, Examples                                                               
+--------|--------------------------------------------------------------------------------
+**Add** | `add n/<NAME> s/<STATUS> [t/<TAG>]…​` <br> e.g., `n/ReZero s/watching t/Anime` 
+**Delete** | `delete <INDEX>`<br> e.g., `delete 3`                                          
+**Edit**  |`edit <INDEX> [n/<NAME>] [s/<STATUS>] [t/<TAG>]…​` <br> e.g., `n/ReZero s/watching t/Anime`
+**Exit** | `exit`      
+**Find** | `find <KEYWORD>`<br> e.g., `find hero`
+**List** |`list`                                                                                                               |
+
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
