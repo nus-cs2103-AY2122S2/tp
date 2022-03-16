@@ -1,14 +1,14 @@
 package seedu.address.logic.commands.consultation;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.*;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
+
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TESTS_TAKEN_AND_RESULTS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -43,7 +43,8 @@ public class AddConsultationCommand extends Command {
             + PREFIX_TESTS_TAKEN_AND_RESULTS + "Stethoscope. Laboured breathing sounds.";
 
     public static final String MESSAGE_SUCCESS = "New consultation added: %1$s";
-    public static final String MESSAGE_DUPLICATE_CONSULTATION = "This consultation already exists in patient consultation list";
+    public static final String MESSAGE_DUPLICATE_CONSULTATION = "This consultation already" +
+                                                                "exists in patient consultation list";
     public static final String MESSAGE_MISSING_PATIENT = "This patient does not exists in Medbook";
 
     // Identifier

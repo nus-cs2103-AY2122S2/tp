@@ -29,7 +29,6 @@ import seedu.address.model.patient.Nric;
 import seedu.address.model.prescription.DrugName;
 import seedu.address.model.prescription.Instruction;
 import seedu.address.model.prescription.PrescriptionDate;
-
 import seedu.address.model.tag.Tag;
 import seedu.address.model.testresult.MedicalTest;
 import seedu.address.model.testresult.Result;
@@ -339,6 +338,13 @@ public class ParserUtil {
 
 
     // Starts here
+
+    /**
+     * Parses a {@code String time} into an {@code time}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code time} is invalid.
+     */
     public static Time parseTime(String time) throws ParseException {
         requireNonNull(time);
         if (!Time.isValidTime(time)) {
@@ -347,6 +353,12 @@ public class ParserUtil {
         return new Time(time);
     }
 
+    /**
+     * Parses a {@code String date} into an {@code date}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
     public static Date parseDate(String date) throws ParseException {
         requireNonNull(date);
         if (!Date.isValidDate(date)) {
@@ -355,6 +367,12 @@ public class ParserUtil {
         return new Date(date);
     }
 
+    /**
+     * Parses a {@code String notes} into an {@code notes}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code notes} is invalid.
+     */
     public static Notes parseNotes(String notes) throws ParseException {
         requireNonNull(notes);
         if (!Notes.isValid(notes)) {
@@ -363,10 +381,22 @@ public class ParserUtil {
         return new Notes(notes);
     }
 
+    /**
+     * Parses a {@code String prescription} into an {@code prescription}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code prescription} is invalid.
+     */
     public static Prescription parsePrescription(String prescription) {
         return new Prescription(prescription);
     }
 
+    /**
+     * Parses a {@code String testsTakenAndResults} into an {@code testsTakenAndResults}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code testsTakenAndResults} is invalid.
+     */
     public static TestsTakenAndResults parseTestsTakenAndResults(String testsTakenAndResults) {
         return new TestsTakenAndResults(testsTakenAndResults);
     }

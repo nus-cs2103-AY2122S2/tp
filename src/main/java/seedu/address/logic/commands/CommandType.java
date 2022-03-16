@@ -2,16 +2,16 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.logic.commands.consultation.ViewConsultationCommand;
+
 import seedu.address.logic.parser.consultations.AddConsultationCommandParser;
 import seedu.address.logic.parser.consultations.DeleteConsultationCommandParser;
 import seedu.address.logic.parser.consultations.ViewConsultationCommandParser;
 import seedu.address.logic.parser.contact.AddContactCommandParser;
 import seedu.address.logic.parser.contact.ViewContactCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.parser.contact.AddContactCommandParser;
-import seedu.address.logic.parser.contact.ViewContactCommandParser;
-import seedu.address.logic.parser.exceptions.ParseException;
+
+
+
 import seedu.address.logic.parser.medical.AddMedicalCommandParser;
 import seedu.address.logic.parser.medical.ViewMedicalCommandParser;
 import seedu.address.logic.parser.prescription.AddPrescriptionCommandParser;
@@ -41,18 +41,18 @@ public enum CommandType {
         String trimmedCommandType = getFirstPrefixType(commandType.trim());
 
         switch (trimmedCommandType) {
-            case "contact":
-                return CONTACT;
-            case "medical":
-                return MEDICAL;
-            case "consultation":
-                return CONSULTATION;
-            case "prescription":
-                return PRESCRIPTION;
-            case "test":
-                return TEST;
-            default:
-                throw new ParseException(MESSAGE_CONSTRAINTS);
+        case "contact":
+            return CONTACT;
+        case "medical":
+            return MEDICAL;
+        case "consultation":
+            return CONSULTATION;
+        case "prescription":
+            return PRESCRIPTION;
+        case "test":
+            return TEST;
+        default:
+            throw new ParseException(MESSAGE_CONSTRAINTS);
         }
     }
 
@@ -123,18 +123,18 @@ public enum CommandType {
         CommandType parsedCommandType = parseCommandType(commandType);
 
         switch(parsedCommandType) {
-            case CONTACT:
-                throw new ParseException("CONTACT: WIP");
-            case MEDICAL:
-                throw new ParseException("MEDICAL: WIP");
-            case CONSULTATION:
-                return new DeleteConsultationCommandParser().parse(arguments);
-            case PRESCRIPTION:
-                throw new ParseException("PRESCRIPTION: WIP");
-            case TEST:
-                throw new ParseException("TEST: WIP");
-            default:
-                throw new ParseException(MESSAGE_CONSTRAINTS);
+        case CONTACT:
+            throw new ParseException("CONTACT: WIP");
+        case MEDICAL:
+            throw new ParseException("MEDICAL: WIP");
+        case CONSULTATION:
+            return new DeleteConsultationCommandParser().parse(arguments);
+        case PRESCRIPTION:
+            throw new ParseException("PRESCRIPTION: WIP");
+        case TEST:
+            throw new ParseException("TEST: WIP");
+        default:
+            throw new ParseException(MESSAGE_CONSTRAINTS);
         }
     }
 }

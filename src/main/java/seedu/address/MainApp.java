@@ -62,8 +62,8 @@ public class MainApp extends Application {
         initLogging(config);
 
         model = initModelManager(storage, userPrefs);
-        System.out.println("initModelManager(storage, userPrefs): "+ initModelManager(storage, userPrefs).getAddressBook().toString());
-        System.out.println("MainApp.model: "+ model.getAddressBook().toString());
+
+
         logic = new LogicManager(model, storage);
 
         ui = new UiManager(logic);
@@ -90,8 +90,8 @@ public class MainApp extends Application {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
             initialData = new AddressBook();
         }
-        System.out.println("MainApp.initialData: "+initialData.toString());
-        System.out.println("MainApp.ModelManager: "+new ModelManager(initialData, userPrefs).getAddressBook().toString());
+
+
         return new ModelManager(initialData, userPrefs);
     }
 

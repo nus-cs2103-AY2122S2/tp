@@ -43,9 +43,9 @@ public class ModelManager implements Model {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
-        System.out.println("ModelManager.ReadOnlyAddressBook: "+addressBook.toString());
+        System.out.println("ModelManager.ReadOnlyAddressBook: "+ addressBook.toString());
         this.addressBook = new AddressBook(addressBook);
-        System.out.println("ModelManager.this.addressBook: "+new AddressBook(addressBook).toString());
+        System.out.println("ModelManager.this.addressBook: "+ new AddressBook(addressBook).toString());
         this.userPrefs = new UserPrefs(userPrefs);
 
         filteredConsultations = new FilteredList<>(this.addressBook.getConsultationList());
@@ -99,7 +99,7 @@ public class ModelManager implements Model {
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        System.out.println("ModelManager.setAddressBook: "+addressBook);
+        System.out.println("ModelManager.setAddressBook: " + addressBook);
         this.addressBook.resetData(addressBook);
     }
 

@@ -1,19 +1,20 @@
 package seedu.address.logic.parser.consultations;
 
-import static seedu.address.commons.core.Messages.*;
-import static seedu.address.logic.parser.CliSyntax.*;
-
 import java.util.stream.Stream;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
+
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import seedu.address.logic.commands.consultation.DeleteConsultationCommand;
-import seedu.address.logic.commands.consultation.ViewConsultationCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
-//import seedu.address.model.consultation.Date;
-//import seedu.address.model.consultation.Time;
 import seedu.address.model.consultation.Date;
 import seedu.address.model.consultation.Time;
 import seedu.address.model.patient.Nric;

@@ -1,19 +1,18 @@
 package seedu.address.logic.parser.consultations;
 
-import static seedu.address.commons.core.Messages.*;
-import static seedu.address.logic.parser.CliSyntax.*;
-
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.consultation.AddConsultationCommand;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
+
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import seedu.address.logic.commands.consultation.ViewConsultationCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
-//import seedu.address.model.consultation.Date;
-//import seedu.address.model.consultation.Time;
 import seedu.address.model.patient.Nric;
 
 public class ViewConsultationCommandParser {
@@ -28,7 +27,8 @@ public class ViewConsultationCommandParser {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_TYPE, PREFIX_NRIC)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewConsultationCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        ViewConsultationCommand.MESSAGE_USAGE));
         }
 
         Nric ownerNric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
