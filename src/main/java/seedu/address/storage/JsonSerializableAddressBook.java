@@ -14,7 +14,10 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.prescription.Prescription;
+<<<<<<< HEAD
 import seedu.address.model.testresult.TestResult;
+=======
+>>>>>>> c7c202bd32bcbf930dbbdce2eda3c1912b2370d4
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -25,29 +28,37 @@ class JsonSerializableAddressBook {
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
     public static final String MESSAGE_DUPLICATE_CONTACT = "Contact list contains duplicate person(s).";
     public static final String MESSAGE_DUPLICATE_PRESCRIPTION = "Prescription list contains duplicate person(s).";
+<<<<<<< HEAD
     public static final String MESSAGE_DUPLICATE_TEST_RESULT = "Test result list contains duplicate test(s).";
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedContact> contacts = new ArrayList<>();
     private final List<JsonAdaptedTestResult> testResults = new ArrayList<>();
+=======
+
+    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedContact> contacts = new ArrayList<>();
+>>>>>>> c7c202bd32bcbf930dbbdce2eda3c1912b2370d4
     private final List<JsonAdaptedPrescription> prescriptions = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons, contacts and test results.
+     * Constructs a {@code JsonSerializableAddressBook} with the given persons and contacts.
      */
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
                                        @JsonProperty("contacts") List<JsonAdaptedContact> contacts,
-                                       @JsonProperty("prescriptions") List<JsonAdaptedPrescription> prescriptions,
-                                       @JsonProperty("testResults") List<JsonAdaptedTestResult> testResults) {
+                                       @JsonProperty("prescriptions") List<JsonAdaptedPrescription> prescriptions) {
         this.persons.addAll(persons);
         if (!contacts.isEmpty()) {
             this.contacts.addAll(contacts);
         }
         if (!prescriptions.isEmpty()) {
             this.prescriptions.addAll(prescriptions);
+<<<<<<< HEAD
             if (!testResults.isEmpty()) {
                 this.testResults.addAll(testResults);
             }
+=======
+>>>>>>> c7c202bd32bcbf930dbbdce2eda3c1912b2370d4
         }
     }
 
@@ -61,7 +72,6 @@ class JsonSerializableAddressBook {
         contacts.addAll(source.getContactList().stream().map(JsonAdaptedContact::new).collect(Collectors.toList()));
         prescriptions.addAll(source.getPrescriptionList().stream().map(JsonAdaptedPrescription::new)
                 .collect(Collectors.toList()));
-        testResults.addAll(source.getTestResultList().stream().map(JsonAdaptedTestResult::new).collect(Collectors.toList()));
     }
 
     /**
@@ -91,6 +101,7 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PRESCRIPTION);
             }
             addressBook.addPrescription(prescription);
+<<<<<<< HEAD
         }
         for (JsonAdaptedTestResult jsonAdaptedTestResult : testResults) {
             TestResult testResult = jsonAdaptedTestResult.toModelType();
@@ -98,6 +109,8 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_TEST_RESULT);
             }
             addressBook.addTestResult(testResult);
+=======
+>>>>>>> c7c202bd32bcbf930dbbdce2eda3c1912b2370d4
         }
         return addressBook;
     }

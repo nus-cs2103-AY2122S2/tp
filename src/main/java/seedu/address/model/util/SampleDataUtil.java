@@ -13,10 +13,6 @@ import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Nric;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.testresult.MedicalTest;
-import seedu.address.model.testresult.Result;
-import seedu.address.model.testresult.TestDate;
-import seedu.address.model.testresult.TestResult;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -51,6 +47,7 @@ public class SampleDataUtil {
         };
     }
 
+<<<<<<< HEAD
     public static TestResult[] getSampleTestResults() {
         return new TestResult[] {
           new TestResult(new Nric("S1234567L"), new TestDate("2020-03-01"), new MedicalTest("X-Ray Scan"),
@@ -62,13 +59,12 @@ public class SampleDataUtil {
         };
     }
 
+=======
+>>>>>>> c7c202bd32bcbf930dbbdce2eda3c1912b2370d4
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Patient samplePatient : getSamplePersons()) {
             sampleAb.addPerson(samplePatient);
-        }
-        for (TestResult sampleTestResult : getSampleTestResults()) {
-            sampleAb.addTestResult(sampleTestResult);
         }
         return sampleAb;
     }
