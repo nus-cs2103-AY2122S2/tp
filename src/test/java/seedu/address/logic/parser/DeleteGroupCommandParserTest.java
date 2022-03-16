@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.commands.CommandTestUtil.GROUP_DESC_NUS_FINTECH_SOCIETY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.model.group.GroupName.MESSAGE_CONSTRAINTS;
@@ -25,6 +26,6 @@ public class DeleteGroupCommandParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, " ", MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " " + PREFIX_GROUP_NAME, MESSAGE_CONSTRAINTS);
     }
 }
