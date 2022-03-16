@@ -24,7 +24,7 @@ import seedu.address.model.person.Description;
 import seedu.address.model.person.Name;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing event in the address book.
  */
 public class EditEventCommand extends Command {
 
@@ -51,8 +51,8 @@ public class EditEventCommand extends Command {
     public final EditEventDescriptor editEventDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editEventDescriptor details to edit the person with
+     * @param index of the event in the event list to edit
+     * @param editEventDescriptor details to edit the event with
      */
     public EditEventCommand(Index index, EditEventDescriptor editEventDescriptor) {
         requireNonNull(index);
@@ -83,8 +83,8 @@ public class EditEventCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Event} with the details of {@code eventToEdit}
+     * edited with {@code editEventDescriptor}.
      */
     private static Event createEditedEvent(Event eventToEdit, EditEventDescriptor editEventDescriptor) {
         assert eventToEdit != null;
@@ -125,8 +125,8 @@ public class EditEventCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the event with. Each non-empty field value will replace the
+     * corresponding field value of the event.
      */
     public static class EditEventDescriptor {
         private Name name;
@@ -182,7 +182,7 @@ public class EditEventCommand extends Command {
         }
 
         /**
-         * Sets {@code friendsNames} to this object's {@code friendsNames}.
+         * Sets {@code addFriendsNames} to this object's {@code addFriendsNames}.
          * A defensive copy of {@code friendsNames} is used internally.
          */
         public void setAddFriendNames(Set<Name> addFriendsNames) {
@@ -190,16 +190,16 @@ public class EditEventCommand extends Command {
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable name set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns {@code Optional#empty()} if {@code names} is null.
          */
         public Optional<Set<Name>> getAddFriendNames() {
             return (addFriendNames != null) ? Optional.of(Collections.unmodifiableSet(addFriendNames)) : Optional.empty();
         }
 
         /**
-         * Sets {@code friendsNames} to this object's {@code friendsNames}.
+         * Sets {@code removeFriendsNames} to this object's {@code removeFriendsNames}.
          * A defensive copy of {@code friendsNames} is used internally.
          */
         public void setRemoveFriendNames(Set<Name> removeFriendNames) {
@@ -207,9 +207,9 @@ public class EditEventCommand extends Command {
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable name set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns {@code Optional#empty()} if {@code names} is null.
          */
         public Optional<Set<Name>> getRemoveFriendNames() {
             return (removeFriendNames != null) ? Optional.of(Collections.unmodifiableSet(removeFriendNames)) : Optional.empty();
