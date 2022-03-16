@@ -53,6 +53,12 @@ skinparam Actor {
     FontName Arial
 }
 
+skinparam Arrow {
+    Color #000000
+    FontSize 13
+    Thickness 1.1
+}
+
 skinparam Sequence {
     MessageAlign center
 
@@ -81,8 +87,6 @@ skinparam Package {
 skinparam MinClassWidth 50
 skinparam Shadowing false
 skinparam DefaultTextAlignment center
-skinparam ArrowThickness 1.1
-skinparam ArrowFontSize 13
 
 'Procedure to override colors and styles for class diagrams
 !procedure $OverrideTheme($theme_color)
