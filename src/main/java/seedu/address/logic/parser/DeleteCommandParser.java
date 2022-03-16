@@ -7,6 +7,7 @@ import static seedu.address.commons.core.DataTypeFlags.FLAG_POSITION;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.applicants.DeleteApplicantCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.position.DeletePositionCommandParser;
 
 /**
  * Parses delete command and calls the respective DeleteXCommandParsers according to the flag.
@@ -28,7 +29,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         } else if (flag == FLAG_INTERVIEW) {
             // calls delete interview command parser
         } else if (flag == FLAG_POSITION) {
-            // calls delete position command parser
+            return new DeletePositionCommandParser().parse(argsWithoutFlag);
         }
 
         return null;
