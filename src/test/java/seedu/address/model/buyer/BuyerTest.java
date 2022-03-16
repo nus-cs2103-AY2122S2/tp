@@ -136,7 +136,7 @@ public class BuyerTest {
             // Different list of properties
             editedYuqi = new BuyerBuilder(YUQI).withProperties(ptb1).build();
             testYuqi = new BuyerBuilder(YUQI).withProperties(ptb1, ptb2, ptb3).build();
-            assertEquals(editedYuqi, testYuqi);
+            assertNotEquals(editedYuqi, testYuqi);
 
         } catch (IllegalValueException e) {
             System.out.println(e.getMessage());
