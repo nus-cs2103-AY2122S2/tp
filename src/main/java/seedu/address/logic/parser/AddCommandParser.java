@@ -20,6 +20,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Preference;
 import seedu.address.model.person.UserType;
 import seedu.address.model.property.Property;
 
@@ -49,8 +50,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Property> properties = ParserUtil.parseProperties(argMultimap.getAllValues(PREFIX_PROPERTY));
         // preference is optional since it should not be present if the person being added is a not a buyer.
         Optional<String> preferenceArg = argMultimap.getValue(PREFIX_PREFERENCE);
-        Optional<Property> preference = preferenceArg.isPresent()
-                ? Optional.of(ParserUtil.parseProperty(preferenceArg.get()))
+        Optional<Preference> preference = preferenceArg.isPresent()
+                ? Optional.of(ParserUtil.parsePreference(preferenceArg.get()))
                 : Optional.empty();
         UserType userType = ParserUtil.parseUserType(argMultimap.getValue(PREFIX_USERTYPE).get());
 

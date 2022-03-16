@@ -10,6 +10,7 @@ import seedu.address.model.person.Favourite;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Preference;
 import seedu.address.model.person.UserType;
 import seedu.address.model.property.Property;
 
@@ -30,7 +31,7 @@ public class PersonBuilder {
     private Address address;
     private Set<Property> properties;
     private Favourite favourite;
-    private Optional<Property> preference;
+    private Optional<Preference> preference;
     private UserType userType;
 
     /**
