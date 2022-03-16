@@ -17,7 +17,7 @@ public class DeleteGroupCommandParserTest {
 
     private DeleteGroupCommandParser parser = new DeleteGroupCommandParser();
 
-    Group expectedGroup = new GroupBuilder(NUS_FINTECH_SOCIETY).build();
+    private Group expectedGroup = new GroupBuilder(NUS_FINTECH_SOCIETY).build();
 
     @Test
     public void parse_validArgs_returnsDeleteGroupCommand() {
