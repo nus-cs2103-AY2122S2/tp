@@ -1,20 +1,7 @@
 @startuml
 !include style.puml
 
-'Local overrides (copy this section)
-'Change the color here
-!$theme_color = LOGIC_COLOR
-
-skinparam TitleFontColor $theme_color
-skinparam Class {
-    FontColor $theme_color
-    StereotypeFontColor $theme_color
-    BorderColor $theme_color
-    FontColor<<Hidden>> #FFFFFF
-    StereotypeFontColor<<Hidden>> #FFFFFF
-    BorderColor<<Hidden>> #FFFFFF
-}
-'End of local overrides
+$OverrideTheme(LOGIC_COLOR)
 
 package Logic {
     class IBookParser
