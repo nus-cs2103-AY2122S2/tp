@@ -50,7 +50,7 @@ public class Preference {
     }
 
     public Price getLowPrice() {
-        return getLowPrice();
+        return lowPrice;
     }
 
     public Price getHighPrice() {

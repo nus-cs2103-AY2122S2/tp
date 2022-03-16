@@ -26,8 +26,8 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
-            + "[" + PREFIX_PROPERTY + "PROPERTY]...\n"
-            + "[" + PREFIX_PREFERENCE + "Preference]\n"
+            + "[" + PREFIX_PROPERTY + "PROPERTY]... "
+            + "[" + PREFIX_PREFERENCE + "Preference] "
             + PREFIX_USERTYPE + "USERTYPE\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
@@ -35,8 +35,8 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_PROPERTY + "north,123 North Street,1-room,$300000 "
-            + PREFIX_PROPERTY + "south,123 South Street,3-room,$700000"
-            + PREFIX_PREFERENCE + "north, 2-room, $200000, $600000"
+            + PREFIX_PROPERTY + "south,123 South Street,3-room,$700000 "
+            + PREFIX_PREFERENCE + "north, 2-room, $200000, $600000 "
             + PREFIX_USERTYPE + "buyer";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";

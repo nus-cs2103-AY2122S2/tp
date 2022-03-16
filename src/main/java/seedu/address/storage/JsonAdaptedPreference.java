@@ -31,7 +31,7 @@ public class JsonAdaptedPreference {
     }
 
     /**
-     * Converts a given {@code Property} into this class for Jackson use.
+     * Converts a given {@code Preference} into this class for Jackson use.
      */
     public JsonAdaptedPreference(Preference source) {
         region = source.getRegion().value;
