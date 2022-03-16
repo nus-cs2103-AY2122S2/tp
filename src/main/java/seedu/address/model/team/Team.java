@@ -53,4 +53,8 @@ public class Team {
             lineup.addPlayer(person);
         }
     }
+
+    public void deletePersonFromTeam(Person person) {
+        this.teamMemberList.deletePersonFromTeam(person);
+    }
 }

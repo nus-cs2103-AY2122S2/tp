@@ -47,4 +47,7 @@ public class TeamMemberList {
         return this.list.contains(person);
     }
 
+    public void deletePersonFromTeam(Person person) {
+        list.remove(person);
+    }
 }

@@ -10,6 +10,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PLAYER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TEAM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LINEUP;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -20,6 +23,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Name;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -35,13 +39,14 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_AGE,
+                ArgumentTokenizer.tokenize(args, PREFIX_PLAYER, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_AGE,
                         PREFIX_HEIGHT, PREFIX_JERSEY_NUMBER, PREFIX_TAG, PREFIX_WEIGHT);
 
-        Index index;
+        Name targetPlayerName;
 
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            targetPlayerName = ParserUtil.parsePlayer(argMultimap.getValue(PREFIX_PLAYER).get());
+            System.out.println(targetPlayerName);
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
@@ -56,28 +61,26 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
             editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
-        /*
-        // to be developed
         if (argMultimap.getValue(PREFIX_AGE).isPresent()) {
             editPersonDescriptor.setAge(ParserUtil.parseAge(argMultimap.getValue(PREFIX_AGE).get()));
         }
         if (argMultimap.getValue(PREFIX_HEIGHT).isPresent()) {
-            editPersonDescriptor.setAge(ParserUtil.parseHeight(argMultimap.getValue(PREFIX_HEIGHT).get()));
+            editPersonDescriptor.setHeight(ParserUtil.parseHeight(argMultimap.getValue(PREFIX_HEIGHT).get()));
         }
-        if (argMultimap.getValue(PREFIX_JERSEYNUMBER).isPresent()) {
-            editPersonDescriptor.setAge(ParserUtil.parseJerseyNumber(argMultimap.getValue(PREFIX_JERSEYNUMBER).get()));
+        if (argMultimap.getValue(PREFIX_JERSEY_NUMBER).isPresent()) {
+            editPersonDescriptor.setJerseyNumber(
+                    ParserUtil.parseJerseyNumber(argMultimap.getValue(PREFIX_JERSEY_NUMBER).get()));
         }
         if (argMultimap.getValue(PREFIX_WEIGHT).isPresent()) {
-            editPersonDescriptor.setAge(ParserUtil.parseWeight(argMultimap.getValue(PREFIX_WEIGHT).get()));
+            editPersonDescriptor.setWeight(ParserUtil.parseWeight(argMultimap.getValue(PREFIX_WEIGHT).get()));
         }
-        */
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index, editPersonDescriptor);
+        return new EditCommand(targetPlayerName, editPersonDescriptor);
     }
 
     /**
