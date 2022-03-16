@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.testresult.AddTestResultCommand;
 import seedu.address.logic.commands.testresult.ViewTestResultCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
@@ -28,7 +27,7 @@ public class ViewTestResultCommandParser {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_TYPE, PREFIX_NRIC)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTestResultCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewTestResultCommand.MESSAGE_USAGE));
         }
 
         Nric ownerNric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
