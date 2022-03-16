@@ -74,7 +74,7 @@ public class EditEventDescriptorBuilder {
      */
     public EditEventDescriptorBuilder withRemoveFriend(String... removeFriend) {
         Set<Name> nameSet = Stream.of(removeFriend).map(Name::new).collect(Collectors.toSet());
-        descriptor.setAddFriendNames(nameSet);
+        descriptor.setRemoveFriendNames(nameSet);
         return this;
     }
 

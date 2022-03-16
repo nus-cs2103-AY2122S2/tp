@@ -47,8 +47,8 @@ public class EditEventCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_EVENT = "This person already exists in the address book.";
 
-    private final Index index;
-    private final EditEventDescriptor editEventDescriptor;
+    public final Index index;
+    public final EditEventDescriptor editEventDescriptor;
 
     /**
      * @param index of the person in the filtered person list to edit
@@ -235,7 +235,6 @@ public class EditEventCommand extends Command {
                     && getDescription().equals(e.getDescription())
                     && getAddFriendNames().equals(e.getAddFriendNames())
                     && getRemoveFriendNames().equals(e.getRemoveFriendNames());
-
         }
     }
 }
