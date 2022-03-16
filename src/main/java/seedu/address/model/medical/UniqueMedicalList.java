@@ -85,7 +85,7 @@ public class UniqueMedicalList implements Iterable<Medical> {
     }
 
     /**
-     * Returns true if {@code persons} contains only unique persons.
+     * Returns true if {@code medicals} contains only unique medical information records.
      */
     private boolean medicalAreUnique(List<Medical> medicals) {
         for (int i = 0; i < medicals.size() - 1; i++) {
