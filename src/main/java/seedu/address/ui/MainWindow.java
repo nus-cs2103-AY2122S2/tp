@@ -201,7 +201,6 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.isShowAdd()) {
-                System.out.println("Detected add window");
                 handleAdd();
             }
 
