@@ -3,7 +3,6 @@ package seedu.address.model;
 import javafx.collections.ObservableList;
 import seedu.address.model.interview.Interview;
 import seedu.address.model.interview.UniqueInterviewList;
-import seedu.address.model.person.Person;
 
 import java.util.List;
 
@@ -51,6 +50,11 @@ public class InterviewList implements ReadOnlyInterviewList {
     public boolean hasInterview(Interview interview) {
         requireNonNull(interview);
         return interviews.contains(interview);
+    }
+
+    public boolean hasConflictingInterview(Interview interview) {
+        requireNonNull(interview);
+        return interviews.containsConflictingInterview(interview);
     }
 
     /**

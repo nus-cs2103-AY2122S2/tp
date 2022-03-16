@@ -32,7 +32,7 @@ public class ModelManager implements Model {
                         ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + addressBook + ", InterviewList: " + interviewList + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
@@ -87,7 +87,7 @@ public class ModelManager implements Model {
     @Override
     public void setInterviewListFilePath(Path interviewListFilePath) {
         requireNonNull(interviewListFilePath);
-        userPrefs.setAddressBookFilePath(interviewListFilePath);
+        userPrefs.setInterviewListFilePath(interviewListFilePath);
     }
 
     //=========== AddressBook ================================================================================
@@ -100,16 +100,6 @@ public class ModelManager implements Model {
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return addressBook;
-    }
-
-    @Override
-    public void setInterviewList(ReadOnlyInterviewList interviewList) {
-        this.interviewList.resetData(interviewList);
-    }
-
-    @Override
-    public ReadOnlyInterviewList getInterviewList() {
-        return interviewList;
     }
 
     @Override
@@ -136,12 +126,28 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
-    //====Interview List=======
+    //=========== InterviewList ================================================================================
+
+    @Override
+    public void setInterviewList(ReadOnlyInterviewList interviewList) {
+        this.interviewList.resetData(interviewList);
+    }
+
+    @Override
+    public ReadOnlyInterviewList getInterviewList() {
+        return interviewList;
+    }
 
     @Override
     public boolean hasInterview(Interview interview) {
         requireNonNull(interview);
         return interviewList.hasInterview(interview);
+    }
+
+    @Override
+    public boolean hasConflictingInterview(Interview interview) {
+        requireNonNull(interview);
+        return interviewList.hasConflictingInterview(interview);
     }
 
     @Override
@@ -152,7 +158,7 @@ public class ModelManager implements Model {
     @Override
     public void addInterview(Interview interview) {
         interviewList.addInterview(interview);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        //updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override

@@ -26,10 +26,13 @@ public class ScheduleCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 23-03-2022 13:30";
 
     public static final String MESSAGE_SCHEDULED_CANDIDATE_SUCCESS =
-            "Successfully scheduled "; //%1$s for interview on %2$s, %3$s";
+            "Successfully scheduled %1$s for interview on %2$s";
 
     public static final String MESSAGE_DUPLICATE_INTERVIEW =
-            "Duplicate Interview found";
+            "Duplicate interview found in system!";
+
+    public static final String MESSAGE_CONFLICTING_INTERVIEW =
+            "Interview for another candidate found at the same timeslot!";
 
     private final Index targetIndex;
     private final LocalDateTime interviewDateTime;
@@ -53,12 +56,18 @@ public class ScheduleCommand extends Command {
 
         Person candidateToInterview = lastShownList.get(targetIndex.getZeroBased());
         Interview toAdd = new Interview(candidateToInterview, interviewDateTime);
+
         if (model.hasInterview(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_INTERVIEW);
         }
 
+        if (model.hasConflictingInterview(toAdd)) {
+            throw new CommandException(MESSAGE_CONFLICTING_INTERVIEW);
+        }
+
         model.addInterview(toAdd);
-        return new CommandResult(String.format(MESSAGE_SCHEDULED_CANDIDATE_SUCCESS));
+        return new CommandResult(String.format(MESSAGE_SCHEDULED_CANDIDATE_SUCCESS, toAdd.getCandidate(),
+                toAdd.getInterviewDateTime()));
     }
 
     @Override

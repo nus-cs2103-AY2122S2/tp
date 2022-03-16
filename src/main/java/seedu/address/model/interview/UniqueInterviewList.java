@@ -5,12 +5,9 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.interview.exceptions.ConflictingInterviewException;
 import seedu.address.model.interview.exceptions.DuplicateInterviewException;
 import seedu.address.model.interview.exceptions.InterviewNotFoundException;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
@@ -27,13 +24,21 @@ public class UniqueInterviewList implements Iterable<Interview> {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSameInterview);
     }
+
+    /**
+     * Returns true if the list contains an equivalent person as the given argument.
+     */
+    public boolean containsConflictingInterview(Interview toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isConflictingInterview);
+    }
     /**
      * Adds an interview to the list.
      * The person must not already exist in the list.
      */
     public void add(Interview toAdd) {
         requireNonNull(toAdd);
-        if (contains(toAdd)) {
+        if (containsConflictingInterview(toAdd)) {
             throw new DuplicateInterviewException();
         }
         internalList.add(toAdd);
@@ -51,8 +56,12 @@ public class UniqueInterviewList implements Iterable<Interview> {
             throw new InterviewNotFoundException();
         }
 
-        if (!target.isSameInterview(editedInterview) && contains(editedInterview)) {
+        if (!target.isSameInterview(editedInterview)) {
             throw new DuplicateInterviewException();
+        }
+
+        if (containsConflictingInterview(editedInterview)) {
+            throw new ConflictingInterviewException();
         }
 
         internalList.set(index, editedInterview);
@@ -69,10 +78,10 @@ public class UniqueInterviewList implements Iterable<Interview> {
         }
     }
 
-    public void setInterviews(UniqueInterviewList replacement) {
+    /*public void setInterviews(UniqueInterviewList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
-    }
+    }*/
 
     /**
      * Replaces the contents of this list with {@code persons}.
@@ -116,7 +125,7 @@ public class UniqueInterviewList implements Iterable<Interview> {
     private boolean interviewsAreUnique(List<Interview> interviews) {
         for (int i = 0; i < interviews.size() - 1; i++) {
             for (int j = i + 1; j < interviews.size(); j++) {
-                if (interviews.get(i).isSameInterview(interviews.get(j))) {
+                if (interviews.get(i).isConflictingInterview(interviews.get(j))) {
                     return false;
                 }
             }

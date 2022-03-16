@@ -100,6 +100,8 @@ public interface Model {
 
     boolean hasInterview(Interview interview);
 
+    boolean hasConflictingInterview(Interview interview);
+
     void deleteInterview(Interview target);
 
     void addInterview(Interview interview);

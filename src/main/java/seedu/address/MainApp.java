@@ -3,6 +3,7 @@ package seedu.address;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
+import java.util.function.Supplier;
 import java.util.logging.Logger;
 
 import javafx.application.Application;
@@ -76,11 +77,11 @@ public class MainApp extends Application {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
-            //to edit logic
+            //Does not make sense for sample interview list. Change to empty list
             if (!interviewListOptional.isPresent()) {
                 logger.info("Data file for interviews not found. Will be starting with a sample InterviewList");
             }
-            initialInterviewList = new InterviewList();
+            initialInterviewList = interviewListOptional.orElseGet(SampleDataUtil::getEmptyInterviewList);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
             initialData = new AddressBook();
@@ -90,7 +91,6 @@ public class MainApp extends Application {
             initialData = new AddressBook();
             initialInterviewList = new InterviewList();
         }
-
         return new ModelManager(initialData, initialInterviewList, userPrefs);
     }
 

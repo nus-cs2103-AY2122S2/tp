@@ -22,6 +22,14 @@ public class Interview {
                 && otherInterview.getInterviewDateTime().equals(getInterviewDateTime());
     }
 
+    public boolean isConflictingInterview(Interview otherInterview) {
+        if (otherInterview == this) {
+            return true;
+        }
+        return otherInterview != null
+                && otherInterview.getInterviewDateTime().equals(getInterviewDateTime());
+    }
+
     public Person getCandidate() {
         return this.candidate;
     }

@@ -133,8 +133,8 @@ class JsonAdaptedInterview {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "test"));
         }
         //watch this
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        final LocalDateTime modelInterviewDateTime = LocalDateTime.parse(interviewDateTime, formatter);
+        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        final LocalDateTime modelInterviewDateTime = LocalDateTime.parse(interviewDateTime);
         return new Interview(candidate, modelInterviewDateTime);
     }
 
