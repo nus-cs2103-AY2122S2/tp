@@ -104,8 +104,8 @@ Format: `addRole COMPANY_INDEX n/ROLE_NAME s/STATUS b/DEADLINE [d/DESCRIPTION] [
 * The `STATUS` accepted are as follows: applying, pending, interview and assessments, offered, rejected, complete.
 * The `DEADLINE` should be in format dd-MM-yyyy HH:mm
 * The `DESCRIPTION` and `STIPEND` fields are optional during the initial role creation
-* The `DESCRIPTION` can contain alphanumeric characters, spaces and special characters.
-* The `STIPEND` must be a positive integer going up to 10 digits long.
+    * The `DESCRIPTION` can contain alphanumeric characters, spaces and special characters.
+    * The `STIPEND` must be a positive integer going up to 10 digits long.
 
 Examples:
 
