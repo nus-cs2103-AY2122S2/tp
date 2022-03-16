@@ -1,0 +1,47 @@
+@startuml
+!include style.puml
+
+$OverrideTheme(UI_COLOR)
+
+package UI {
+    class "{abstract}\nUiComponent" as UiComponent
+    class MainWindow
+
+    package Popup as PopupContainer {
+       class "{abstract}\nPopup" as Popup
+       class PopupHandler
+       class PopupAdd
+       class PopupDelete
+       class PopupUpdate
+    }
+}
+
+package Model <<Rectangle>> {
+}
+
+package Logic <<Rectangle>> {
+}
+
+
+MainWindow *--> "1" PopupHandler
+
+PopupHandler *-->  "1" PopupAdd
+PopupHandler *-->  "1" PopupDelete
+PopupHandler *-->  "1" PopupUpdate
+
+PopupAdd -up-|> Popup
+PopupDelete -up-|> Popup
+PopupUpdate -up-|> Popup
+
+Popup -up-|> UiComponent
+
+
+PopupAdd ..> Logic
+PopupUpdate ..> Model
+PopupUpdate ..> Logic
+PopupDelete ..> Model
+PopupDelete ..> Logic
+
+UiComponent -left-> MainWindow
+
+@enduml
