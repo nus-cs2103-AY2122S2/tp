@@ -72,22 +72,23 @@ Format: `add n/NAME p/PHONENUMBER e/EMAIL ...`
 * Add a student with the specific tags
 * The student name is case sensitive e.g. `add n/johnDoe` will logged as `johnDoe` and not `JohnDoe` in Tracey
 * Order of the tags does not matter e.g. `add n/NAME p/PHONENUMBER` is the same as `add p/PHONENUMBER n/NAME`
-* Tracey will ackoledge that the student has been added
+* Tracey will acknowledge that the student has been added
+* Tags such as faculty and covid status must be a valid pre-defined constant in its respective enumeration class
 
 Examples of usage:
 * `add n/Melvin f/SOC cs/ Negative`
 * `add e/student69@u.nus.edu n/ Martin`
 
 Possible tags:
-| **Tag** | **Meaning** |
-| - | - |
-| `n/`  | Name |
-| `p/` | Phone Number |
-| `e/` | Email |
-| `a/` | Address |
-| `f/` | Faculty |
-| `mc/` | Matriculation Number |
-| `cs`/ | Covid Status (Transient, Close Contact, Negative, Positive) |
+| **Tag** | **Meaning** | **Pre-defined constants** |
+| - | - | - |
+| `n/`  | Name | - |
+| `p/` | Phone Number | - | 
+| `e/` | Email | - |
+| `a/` | Address | - |
+| `f/` | Faculty |  FASS, BIZ, SOC, SCALE, FOD, CDE, DUKE, FOL, YLLSOM, YSTCOM, SOPP, LKYSPP, SPH, TEST, FOS |
+| `mc/` | Matriculation Number | - | 
+| `cs`/ | Covid Status | Positive, Negative, HRW, HRN |
 
 ### Deleting a contact: `delete`
 Delete a contact at a specific index
@@ -151,7 +152,7 @@ Format:`find HEALTH_STATUS`
 * The search is case-sensitive. e.g `Covid-Positive` will not match `covid-positive`
 
 Examples of usage:
-* `find covid-positive` returna all student that are tagged as covid-positive
+* `find covid-positive` returns all student that are tagged as covid-positive
 
 ### Saving
 Saving in the application is automatic. The data in the file will be saved accordingly whenever
@@ -169,7 +170,7 @@ there are changes to `Tracey`.
 | No. | Command | Description |
 | - | - | - |
 | 1. | `find` | Included in `AB3`|
-| 2. | `add' | Included in AB3, Additional Field: Include health categories (Positive, Close Contact, Transient Contact, Health Risk Warning etc.) |
+| 2. | `add' | Included in AB3 with additional attributes such as faculty, matriculation number and covid status |
 | 3. | `delete` | Included in `AB3` |
 | 4. | `edit` | Included in `AB3` |
 | 5. | `clear` | Delete everything inside `Tracey` |

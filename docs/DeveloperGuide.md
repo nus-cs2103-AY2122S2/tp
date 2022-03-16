@@ -385,6 +385,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1c. User adds multiple students in one go.
   
     * 1c1. Tracey will list out a list of new students added with their info.
+
+* 1d. User uses wrong pre-defined constants for fields such as faculty or covid status.
+
+    * 1d1. Tracey will provide a list of pre-defined constants for the user.
+
+    * 1d2. User use the correct pre-defined constants for the respective tags.
       
         Use case ends
 
