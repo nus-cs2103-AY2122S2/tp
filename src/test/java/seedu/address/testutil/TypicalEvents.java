@@ -15,6 +15,7 @@ public class TypicalEvents {
     public static final String AMY_NAME = "Amy Koh";
     public static final String ALEX_NAME = "Alex Yeoh";
 
+    // TODO alter to reflect new restrictions after refactoring of name and description classes
     public static final Event EVENT_AMY_BIRTHDAY = new EventBuilder().withName("Amy Birthday")
             .withDateTime(VALID_EVENT_DATETIME_AMY)
             .withNames(AMY_NAME)
