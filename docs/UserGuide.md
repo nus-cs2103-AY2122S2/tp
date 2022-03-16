@@ -142,6 +142,23 @@ Format: `delete STUDENT_ID`
 Examples:
 * `delete A0213456H` deletes the TA with STUDENT_ID A0123456H, if the record exists.
 
+### Scheduling a candidate for an interview : `schedule` [Work-In-Progress]
+
+Schedules the specified candidate for an interview.
+
+Format: `schedule INDEX /at DATE TIME`
+
+* Schedules the candidate at the specified `INDEX` for an interview on given `DATE` and `TIME`.
+* The index refers to the index number shown in the displayed person list.
+* The index must be a positive integer 1, 2, 3, …​
+* `DATE` and `TIME` must be specified in the format `dd/MM/yyyy` and `HH:mm` respectively.
+* `DATE` and `TIME` must not be earlier than the current date and time.
+
+Examples:
+* `list` followed by `schedule 2 /at 20/09/2022 15:00` schedules the second candidate in the address book
+for an interview on 20 September 2022, 3PM.
+* 
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.

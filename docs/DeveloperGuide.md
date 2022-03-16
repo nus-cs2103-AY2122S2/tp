@@ -273,13 +273,14 @@ interview availability dates.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​  | I want to …​                          | So that I can…​                                                               |
-|----------|----------|---------------------------------------|-------------------------------------------------------------------------------|
-| `* * *`  | user     | add an applicant to the system        | keep track of their application details for consideration.                    |
-| `* * *`  | user     | delete an applicant from the system   | remove entries that I no longer need.                                         |
+| Priority | As a …​  | I want to …​                          | So that I can…​                                                        |
+|----------|----------|---------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | user     | add an applicant to the system        | keep track of their application details for consideration.             |
+| `* * *`  | user     | delete an applicant from the system   | remove entries that I no longer need.                                  |
 | `* * *`  | user     | search for an applicant in the system | access details of the applicant without having to go through the entire list. |
-| `* * *`  | user     | list all applicants in the system     | monitor the application pool.                                                 |
-| `* * *`  | new user | view all available commands           | get familiarised with the system.                                             |
+| `* * *`  | user     | list all applicants in the system     | monitor the application pool.                                          |
+| `* * *`  | new user | view all available commands           | get familiarised with the system.                                      |
+| `* * *`  | user     | schedule TA candidates for interviews | keep track of the interview schedule.                                  |
 
 *{More to be added}*
 
@@ -351,6 +352,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case resumes at step 2.
 
+<hr>
+
+**Use case: Schedule a candidate from the system for an interview**
+
+**MSS**
+
+1.  User requests to list TA candidates
+2.  TAlent Assistant™ displays the list of TA candidates
+3.  User requests to schedule a specific candidate in the list for an interview on a particular date and time 
+4.  TAlent Assistant™ schedules the interview
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty
+
+  Use case ends.
+* 3a. The given index is invalid
+
+    * 3a1. TAlent Assistant™ displays an error message
+
+  Use case resumes at step 2.
+
+* 3b. The given date and/or time format is invalid
+
+    * 3b1. TAlent Assistant™ displays an error message
+
+  Use case resumes at step 2.
 <hr>
 
 **Use case: Find TAs**
