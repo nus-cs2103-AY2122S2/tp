@@ -25,6 +25,7 @@ title: Developer Guide
 * [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing)
     * [Launch and shutdown](#launch-and-shutdown)
     * [Deleting a show](#deleting-a-show)
+    * [Editing a show](#editing-a-show)
     * [Saving data](#saving-data)
 
 
@@ -194,7 +195,7 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.trackermon.commons` package.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -244,13 +245,14 @@ This section describes some noteworthy details on how certain features are imple
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                 | I want to …​                | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | user                                       | add new shows                  | add shows into the list                                                |
-| `* * *`  | user                                       | delete shows from the list     | delete shows from the list                                             |
-| `* * *`  | user                                       | change the status of the show  | mark shows as watched, watching, etc|
-| `* * *`  | user                                       | list out all of my shows       | see the details of all  my show in the list                                         |
-| `* *`    | new user                                   | see usage instructions         | refer to instructions when user forget how to use the App                 |
+| Priority | As a …​   | I want to …​                | So that I can…​                                            |
+|----------|----------|----------------------------|-----------------------------------------------------------|
+| `* * *`  | user     | add shows                  | add new shows into the list                               |
+| `* * *`  | user     | delete shows  		   | delete wrong entries in the list                          |
+| `* * *`  | user     | find a show                | find whether a specific show is in the list               |
+| `* * *`  | user     | list out all of my shows   | see the details of all my shows in the list               |
+| `* *`    | new user | see usage instructions     | refer to instructions when I forget how to use the App |
+| `* * *`  | user     | edit show from the list    | edit the name or status or tag of my show in the list     |
 
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
@@ -420,6 +422,62 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
+**Use case: UC07 - Edit a show**
+
+**Preconditions: Trackermon application is started.**
+
+**Guarantees: Show will be edited from Trackermon only if the user input matches the command format.**
+
+**MSS**
+
+1.  User requests to list shows.
+2.  Trackermon shows a list of shows.
+3.  User requests to edit a specific show in the list.
+4.  Trackermon edits the show.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. Trackermon shows an error message,  indicating the format for editing shows is incorrect, and attaches the correct syntax format.
+
+      Use case resumes at step 3.
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
+---
+
+**Use case: UC08 - Find a show**
+
+**Preconditions: Trackermon application is started.**
+
+**Guarantees: Show will be found in Trackermon only if the user input matches the command format.**
+
+**MSS**
+
+1.  User requests to find shows.
+2.  Trackermon shows a list of shows that matches the keyword entered by user.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User uses the command with the wrong syntax.
+
+    * 1a1. Trackermon shows an error message to user, indicating the format for finding shows is incorrect, and attaches the correct syntax format.
+
+      Use case resumes at step 1.
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
+---
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -433,7 +491,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -475,29 +532,53 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a show while all shows are being shown
 
-    1. Prerequisites: List all shows using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all shows using the `list` command. Multiple shows in the list.
 
     1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: First show is deleted from the list. Details of the deleted show shown in the status message. Timestamp in the status bar is updated.
 
     1. Test case: `delete 0`<br>
        Expected: No show is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    1. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
        Expected: Similar to previous.
+    
 
-1. _{ more test cases …​ }_
+### Editing a show
+
+1. Editing a show while all shows are being shown
+
+    1. Prerequisites: List all shows using the `list` command. Multiple shows in the list.
+
+    1. Test case: `edit 1 n/pepe`<br>
+       Expected: First show's name from the list is edited to pepe. Details of the edited show shown in the status message. Timestamp in the status bar is updated.
+
+    1. Test case: `edit 0`<br>
+       Expected: No show is edited. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect edit commands to try: `edit`, `edit 1`, `edit x` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+    
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
 
 ### Saving data
+1. Saving data between sessions
+    1. Launch the app.
+    2. Modify the show list with a valid add command.
+    3. Close the app.
+    4. Relaunch the app and ensure that the modification still exist
+   
 
 1. Dealing with missing/corrupted data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Modify the `data/trackermon.json` file with any software that would break the JSON format to simulate corrupted file. Alternatively, you can delete the file to simulate a missing file.
+    2. Relaunch the app.
+    3. Testcase: `data/trackermon.json` is corrupted. <br> Expected: The app starts with a empty show list.
+    4. Testcase: `data/imposter.json` is deleted. <br> Expected: The app starts with the default list of show list.
 
-1. _{ more test cases …​ }_
+
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
