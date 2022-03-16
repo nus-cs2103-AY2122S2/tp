@@ -79,11 +79,22 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     //======== AddBuyer =========//
 
+    /**
+     * Checks if the client list contains the buyer.
+     *
+     * @param buyer The buyer.
+     * @return Whether buyer is already in list.
+     */
     public boolean hasBuyer(Buyer buyer) {
         requireNonNull(buyer);
         return clients.contains(buyer);
     }
 
+    /**
+     * Adds a new buyer to the client list.
+     *
+     * @param buyer The buyer.
+     */
     public void addBuyer(Buyer buyer) {
         clients.add(buyer);
     }

@@ -29,6 +29,13 @@ import seedu.address.model.tag.Tag;
 
 public class AddBuyerCommandParser implements Parser<AddBuyerCommand> {
 
+    /**
+     * Parses the arguments of the command into the various attributes of a buyer.
+     *
+     * @param args The arguments to be parsed.
+     * @return An AddBuyerCommand of the new Buyer to add.
+     * @throws ParseException If there are problems with argument passed in.
+     */
     public AddBuyerCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DESCRIPTION, PREFIX_PHONE,
                 PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_REMARK, PREFIX_TAG);
