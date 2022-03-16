@@ -74,26 +74,34 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a module/student/professor: `add`
 
-Adds a person to the UniBook.
+Adds a module/student/professor to the UniBook depending on the value defined in `o/OPTION`.
 
-Format: `add o/OPTION n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS][m/MODULE]…​`
+Format: `add o/OPTION...`  
+OPTION values:  
+1. module  
+Format: `add o/module n/MODULENAME m/MODULECODE`  
+This adds a Module with name: Discrete Mathematics and code: CS1231S to the UniBook.  
+
+
+2. student  
+Format: `add o/student n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​ [m/MODULE]…​`  
+This adds a Student to the UniBook, it also adds the student into the student list of the corresponding Module objects (CS1231S and CS2103).  
+
+
+3. professor  
+Format: `add o/professor n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [m/MODULE]…​`  
+This adds a Professor to the UniBook, it also adds the professor into the professor list of the corresponding Module objects (CS1231S and CS2100).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of modules (including 0)
+A student/professor can have any number of tags and modules (including 0)
 </div>
 
-* Adds the entity type defined by `o/OPTION` to UniBook, where `n/NAME` is its name. These are the only two compulsory fields.
-* 3 values for `o/OPTION`:
-  * `o/module`: add module to UniBook, `n/name` specifies module name, while `m/MODULE` is compulsory to specify the module code.
-  * `o/professor`: add professor to UniBook, compulsory `n/name` to specify their name, optional field `[m/MODULE]` to specify what module(s) that professor is handling.
-  * `o/student`: add student to UniBook, compulsory field `n/name` to specify their name, and optional field `[m/MODULE]` to specify what module(s) that student is enrolled in.
-
-Examples:
-* `add o/module n/Software Engineering m/cs2103` add the module with code 'cs2103' and name 'Software Engineering' to UniBook
-* `add o/professor n/John Doe p/98765432 e/johnd@example.com a/COM2-02-02 m/cs2103` add the professor 'John Doe' to UniBook
-* `add o/student n/Betsy Crowe e/betsycrowe@example.com m/cs2103 m/cs2100` add a student 'Betsy Crowe' to UniBook
+Examples:  
+`add o/module n/Discrete Mathematics m/CS1231S` adds a module "Discrete Mathematics" with module code CS1231S to the UniBook  
+`add o/student n/Johnston p/98765432 e/johnston@gmail.com t/friend m/CS1231S m/CS2103` adds a student named Johnston to the UniBook  
+`add o/professor n/Aaron Tan p/98723432 e/aarontan@gmail.com a/COM2 01-15 t/smart m/CS1231S m/CS2100`  adds a professor named Aaron Tan to the UniBook  
 
 ### Listing entries: `list`
 
