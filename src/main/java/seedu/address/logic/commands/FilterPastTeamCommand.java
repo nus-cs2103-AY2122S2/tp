@@ -1,11 +1,11 @@
 package seedu.address.logic.commands;
 
-import seedu.address.model.Model;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TEAMMATES;
 
-public class FilterPastTeamCommand extends Command{
+import seedu.address.model.Model;
+
+public class FilterPastTeamCommand extends Command {
 
     public static final String COMMAND_WORD = "filterteam";
 
