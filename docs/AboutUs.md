@@ -9,6 +9,15 @@ You can reach us at the email `(placeholder for email address)`
 
 ## Project team
 
+### Charmaine Ho
+
+<img src="images/charmainehly.png" width="200px">
+
+[[github](http://github.com/charmainehly)] [[portfolio](team/charmainehly.md)]
+
+* Role: Developer
+* Responsibilities: Scheduling & Tracking, Testing
+
 ### Dominic Lim
 
 <img src="images/domlimm.png" width="200px">
@@ -19,14 +28,15 @@ You can reach us at the email `(placeholder for email address)`
 * Role: Developer
 * Responsibilities: Integration, Testing
 
-### Charmaine Ho
+### Ho Lanzan
 
-<img src="images/charmainehly.png" width="200px">
+<img src="images/lzan98.png" width="200px">
 
-[[github](http://github.com/charmainehly)] [[portfolio](team/charmainehly.md)]
+[[github](https://github.com/lzan98)]
+[[portfolio](team/lzan98.md)]
 
 * Role: Developer
-* Responsibilities: Scheduling & Tracking, Testing
+* Responsibilities: Deliverables and deadlines
 
 ### Lee En En
 
@@ -47,13 +57,3 @@ You can reach us at the email `(placeholder for email address)`
 
 * Role: Developer
 * Responsibilities: Code Quality, UI
-
-### Ho Lanzan
-
-<img src="images/lzan98.png" width="200px">
-
-[[github](https://github.com/lzan98)]
-[[portfolio](team/lzan98.md)]
-
-* Role: Developer
-* Responsibilities: Deliverables and deadlines

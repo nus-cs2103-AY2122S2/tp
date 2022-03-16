@@ -29,7 +29,7 @@ Command Line Interface (CLI)** while still having the benefits of a Graphical Us
 
    * **`list`** : Lists all TAs.
 
-   * **`add n/John Doe id/A0123456H c/Computer Science`** Adds a new TA into the system.
+   * **`add id/E0123456 n/John Doe p/87654321 c/Computer Science`** Adds a new TA into the system.
 
    * **`delete A0123456H`** : Deletes the TA with ID A0213456H from the system.
 
@@ -51,7 +51,7 @@ Command Line Interface (CLI)** while still having the benefits of a Graphical Us
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -77,12 +77,12 @@ Format: `help`
 
 Adds a TA into the system.
 
-Format: `add n/NAME id/STUDENT_ID c/COURSE`
+Format: `add id/STUDENT_ID n/NAME p/PHONE c/COURSE`
 
 * `STUDENT_ID` is sensitive, will be validated.
 
 Examples:
-* `add n/John Doe id/A0123456H c/Computer Science` adds a new TA named John Doe.
+* `add id/E0123456 n/John Doe p/87654321 c/Computer Science` adds a new TA with Student ID, E0123456, named John Doe.
 
 ### Listing all Teaching Assistants : `list`
 
@@ -100,7 +100,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
 
@@ -115,7 +115,7 @@ Finds and lists TAs whose attribute fields contain any of the given keywords.
 
 Format: `find k/KEYWORD [k/MORE_KEYWORDS] f/ATTRIBUTE_FIELD`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g. `hans` will match `Hans`
 * The search will return a list of all TAs containing any of the specified keyword(s) in the specified attribute field.
 * For `f/all`, the search will find keywords across all attribute fields of the TA records.
 * Only full keywords will be matched
@@ -183,7 +183,7 @@ _Details coming soon ..._
 
 | Action     | Format, Examples                                                                                                            |
 |------------|-----------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME id/STUDENT_ID c/COURSE`<br> e.g., `add n/John Doe id/A0123456H c/Computer Science`                              |
+| **Add**    | `add id/STUDENT_ID n/NAME p/PHONE c/COURSE`<br> e.g., `add id/E0123456 n/John Doe p/87654321 c/Computer Science`            |
 | **Clear**  | `clear`                                                                                                                     |
 | **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                         |
 | **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` |
