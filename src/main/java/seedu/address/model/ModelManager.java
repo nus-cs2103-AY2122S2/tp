@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.contact.Contact;
+import seedu.address.model.medical.Medical;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.prescription.Prescription;
 import seedu.address.model.testresult.TestResult;
@@ -26,6 +27,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Patient> filteredPatients;
     private final FilteredList<Prescription> filteredPrescription;
+    private final FilteredList<Medical> filteredMedicals;
     private final FilteredList<Contact> filteredContacts;
     private final FilteredList<TestResult> filteredTestResults;
 
@@ -43,6 +45,7 @@ public class ModelManager implements Model {
         filteredPrescription = new FilteredList<>(this.addressBook.getPrescriptionList());
         filteredContacts = new FilteredList<>(this.addressBook.getContactList());
         filteredTestResults = new FilteredList<>(this.addressBook.getTestResultList());
+        filteredMedicals = new FilteredList<>(this.addressBook.getMedicalList());
     }
 
     public ModelManager() {
@@ -140,6 +143,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Medical> getFilteredMedicalList() {
+        return filteredMedicals;
+    }
+
+    @Override
     public void setPerson(Patient target, Patient editedPatient) {
         requireAllNonNull(target, editedPatient);
 
@@ -188,7 +196,6 @@ public class ModelManager implements Model {
 
         addressBook.setContact(target, editedContact);
     }
-
 
     //=========== Filtered Contact List Accessors =============================================================
 
@@ -258,6 +265,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void updateFilteredMedicalList(Predicate<Medical> predicate) {
+        requireNonNull(predicate);
+        filteredMedicals.setPredicate(predicate);
+    }
+
+    @Override
     public boolean equals(Object obj) {
         // short circuit if same object
         if (obj == this) {
@@ -279,4 +292,15 @@ public class ModelManager implements Model {
                 && filteredTestResults.equals(other.filteredTestResults);
     }
 
+    //=========== Medical ================================================================================
+    @Override
+    public boolean hasMedical(Medical medical) {
+        requireNonNull(medical);
+        return addressBook.hasMedical(medical);
+    }
+
+    @Override
+    public void addMedical(Medical medical) {
+        addressBook.addMedical(medical);
+    }
 }

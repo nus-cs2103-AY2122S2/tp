@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.contact.Contact;
+import seedu.address.model.medical.Medical;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.prescription.Prescription;
 import seedu.address.model.testresult.TestResult;
@@ -19,6 +20,7 @@ public interface Model {
     Predicate<Prescription> PREDICATE_SHOW_ALL_PRESCRIPTIONS = unused -> true;
     Predicate<Contact> PREDICATE_SHOW_ALL_CONTACTS = unused -> true;
     Predicate<TestResult> PREDICATE_SHOW_ALL_TEST_RESULTS = unused -> true;
+    Predicate<Medical> PREDICATE_SHOW_ALL_MEDICALS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -91,6 +93,7 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Patient> getFilteredPersonList();
+    ObservableList<Medical> getFilteredMedicalList();
     ObservableList<Prescription> getFilteredPrescriptionList();
 
     /**
@@ -167,4 +170,19 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredTestResultList(Predicate<TestResult> predicate);
+
+    /**
+     * Adds the given medical information.
+     * {@code medical} must not already exist in the address book.
+     */
+    void addMedical(Medical medical);
+
+    boolean hasMedical(Medical medical);
+
+    /**
+     * Updates the filter of the filtered medical list to filter by the given {@code predicate}. s
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredMedicalList(Predicate<Medical> predicate);
+
 }
