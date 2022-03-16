@@ -37,7 +37,7 @@ public class AddBuyerCommandTest {
 
         CommandResult commandResult = new AddBuyerCommand(validBuyer).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validBuyer), commandResult.getFeedbackToUser());
+        assertEquals(String.format(AddBuyerCommand.MESSAGE_SUCCESS, validBuyer), commandResult.getFeedbackToUser());
         assertEquals(List.of(validBuyer), modelStub.clientsAdded);
     }
 
@@ -168,7 +168,7 @@ public class AddBuyerCommandTest {
     /**
      * A Model stub that contains a single buyer.
      */
-    private class ModelStubWithBuyer extends ModelStub {
+    private static class ModelStubWithBuyer extends ModelStub {
         private final Buyer buyer;
 
         ModelStubWithBuyer(Buyer buyer) {
@@ -177,7 +177,7 @@ public class AddBuyerCommandTest {
         }
 
         @Override
-        public boolean hasClient(Client buyer) {
+        public boolean hasBuyer(Buyer buyer) {
             requireNonNull(buyer);
             return this.buyer.isSameclient(buyer);
         }
