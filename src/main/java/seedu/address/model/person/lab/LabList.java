@@ -10,6 +10,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.exceptions.DuplicateLabException;
 import seedu.address.model.person.exceptions.LabNotFoundException;
 
@@ -114,6 +115,23 @@ public class LabList implements Iterable<Lab> {
         if (!internalList.remove(toRemove)) {
             throw new LabNotFoundException(toRemove.labNumber);
         }
+    }
+
+    /**
+     * Removes the lab at the specified index.
+     * The index must be < the size of {@code internalList}.
+     *
+     * @param index The index of the lab to be removed.
+     */
+    public void remove(Index index) throws LabNotFoundException {
+        requireNonNull(index);
+
+        // this guard clause should not be invoked
+        if (index.getZeroBased() >= internalList.size()) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        internalList.remove(index.getZeroBased());
     }
 
     /**

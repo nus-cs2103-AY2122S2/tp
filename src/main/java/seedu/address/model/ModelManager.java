@@ -126,6 +126,12 @@ public class ModelManager implements Model {
         addressBook.addLab(lab);
     }
 
+    @Override
+    public void removeLab(Lab lab) {
+        requireNonNull(lab);
+        addressBook.removeLab(lab);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
