@@ -305,7 +305,7 @@ public class ParserUtil {
         if (!Instruction.isValidInstruction(trimmedInstruction)) {
             throw new ParseException(Instruction.MESSAGE_CONSTRAINTS);
         }
-        return new Instruction(Instruction.MESSAGE_CONSTRAINTS);
+        return new Instruction(instruction);
     }
 
     /**
