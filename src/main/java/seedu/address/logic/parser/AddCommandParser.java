@@ -4,7 +4,7 @@ import static seedu.address.commons.core.DataTypeFlags.FLAG_APPLICANT;
 import static seedu.address.commons.core.DataTypeFlags.FLAG_INTERVIEW;
 import static seedu.address.commons.core.DataTypeFlags.FLAG_POSITION;
 
-import seedu.address.logic.commands.add.AddCommand;
+import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.applicants.AddApplicantCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.interview.AddInterviewCommandParser;

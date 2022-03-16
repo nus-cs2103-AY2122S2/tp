@@ -1,10 +1,11 @@
-package seedu.address.logic.commands.list;
+package seedu.address.logic.commands.applicant;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.address.commons.core.DataType;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.ListCommand;
 import seedu.address.model.Model;
 
 /**
