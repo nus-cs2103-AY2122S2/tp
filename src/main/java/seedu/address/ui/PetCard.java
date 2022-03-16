@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
@@ -7,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.util.Pair;
 import seedu.address.model.pet.Pet;
 
 /**
@@ -15,6 +18,10 @@ import seedu.address.model.pet.Pet;
 public class PetCard extends UiPart<Region> {
 
     private static final String FXML = "PetListCard.fxml";
+    private static LocalDate testDate = LocalDate.now();
+    private static Pair<LocalDate, Boolean> present = new Pair<>(testDate, true);
+    private static Pair<LocalDate, Boolean> absent = new Pair<>(testDate, false);
+    private final ArrayList<Pair<LocalDate, Boolean>> attendanceList = new ArrayList<>();
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -42,6 +49,8 @@ public class PetCard extends UiPart<Region> {
     private Label diet;
     @FXML
     private FlowPane tags;
+    @FXML
+    private FlowPane attendanceTags;
 
 
     /**
@@ -59,6 +68,30 @@ public class PetCard extends UiPart<Region> {
         pet.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        attendanceList.add(present);
+        attendanceList.add(absent);
+        attendanceList.add(present);
+        attendanceList.add(absent);
+        attendanceList.add(present);
+        attendanceList.add(absent);
+        attendanceList.add(present);
+        attendanceList.add(absent);
+        attendanceList.add(present);
+        attendanceList.add(absent);
+        attendanceList.add(present);
+        attendanceList.add(absent);
+        attendanceList.add(present);
+        attendanceList.add(absent);
+        attendanceList.stream().limit(7)
+                .forEach(attendance -> {
+                    attendanceTags.getChildren()
+                        .add(AttendanceTag.createAttendanceTag(attendance));
+                }
+                );
+    }
+
+    public void setColour(String colour) {
+        cardPane.setStyle("-fx-background-color: " + colour);
     }
 
     @Override
