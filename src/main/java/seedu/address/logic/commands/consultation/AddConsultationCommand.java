@@ -32,7 +32,15 @@ public class AddConsultationCommand extends Command {
             + PREFIX_TIME + "TIME "
             + PREFIX_NOTES + "NOTES "
             + PREFIX_PRESCRIPTION + "PRESCRIPTION "
-            + PREFIX_TESTS_TAKEN_AND_RESULTS + "TESTS TAKEN AND RESULTS ";
+            + PREFIX_TESTS_TAKEN_AND_RESULTS + "TESTS TAKEN AND RESULTS "
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_TYPE + "consultation "
+            + PREFIX_NRIC + "S1234567L "
+            + PREFIX_DATE + "19-09-2020 "
+            + PREFIX_TIME + "19-00 "
+            + PREFIX_NOTES + "Patient was having cough, sneezing fits. "
+            + PREFIX_PRESCRIPTION + "Antibiotics, cough drops. "
+            + PREFIX_TESTS_TAKEN_AND_RESULTS + "Stethoscope. Laboured breathing sounds.";
 
     public static final String MESSAGE_SUCCESS = "New consultation added: %1$s";
     public static final String MESSAGE_DUPLICATE_CONSULTATION = "This consultation already exists in patient consultation list";
