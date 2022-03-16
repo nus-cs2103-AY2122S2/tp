@@ -31,6 +31,13 @@ public class Office {
     }
 
     /**
+     * Constructs an empty {@code Office}.
+     */
+    public Office() {
+        value = "";
+    }
+
+    /**
      * Returns true if a given string is a valid office.
      */
     public static boolean isValidOffice(String test) {

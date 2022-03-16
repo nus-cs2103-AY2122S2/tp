@@ -74,6 +74,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_compulsoryFieldMissing_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        String expectedMessageStudent = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE_STUDENT);
 
         // missing option prefix
         assertParseFailure(parser, CommandTestUtil.VALID_OPTION_STUDENT
@@ -90,12 +91,12 @@ public class AddCommandParserTest {
         // missing phone prefix
         assertParseFailure(parser, CommandTestUtil.OPTION_DESC_STUDENT
                         + CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.VALID_PHONE_BOB
-                        + CommandTestUtil.EMAIL_DESC_BOB, expectedMessage);
+                        + CommandTestUtil.EMAIL_DESC_BOB, expectedMessageStudent);
 
         // missing email prefix
         assertParseFailure(parser, CommandTestUtil.OPTION_DESC_STUDENT
                         + CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB
-                        + CommandTestUtil.VALID_EMAIL_BOB, expectedMessage);
+                        + CommandTestUtil.VALID_EMAIL_BOB, expectedMessageStudent);
 
         // all prefixes missing
         assertParseFailure(parser, CommandTestUtil.VALID_OPTION_STUDENT
