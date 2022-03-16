@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
@@ -26,6 +27,7 @@ import seedu.address.model.person.Remark;
 public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
     public static final String MESSAGE_SUCCESS = "List is sorted accordingly!";
+    public static final String MESSAGE_EMPTY_ERROR = "Fields to be sorted or not specified, list remains unchanged!";
     public static final String DESCENDING_KEYWORD = "desc";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": sorts the person list in the field order specified.\n"
@@ -57,7 +59,7 @@ public class SortCommand extends Command {
      * @return CommandResult stating whether it has been successful.
      */
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
         Comparator<Person> comparator = null;
@@ -72,6 +74,10 @@ public class SortCommand extends Command {
             } else {
                 comparator = comparator.thenComparing(currComperator);
             }
+        }
+
+        if (comparator == null) {
+            throw new CommandException(MESSAGE_EMPTY_ERROR);
         }
 
         model.sortPersonList(comparator);

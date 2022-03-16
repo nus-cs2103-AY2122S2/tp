@@ -10,6 +10,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -21,7 +22,8 @@ public class TypicalPersons {
             new Name("Alice Pauline"),
             new Address("123, Jurong West Ave 6, #08-111"),
             new Email("alice@example.com"),
-            new Phone("94351253")),
+            new Phone("94351253"),
+            new Remark("Adventuring is life.")),
         List.of(
             new Tag("friends")));
 
@@ -30,7 +32,8 @@ public class TypicalPersons {
             new Name("Benson Meier"),
             new Address("311, Clementi Ave 2, #02-25"),
             new Email("benson@example.com"),
-            new Phone("98765432")),
+            new Phone("98765432"),
+            new Remark("Hates to swim.")),
         List.of(
             new Tag("friends"),
             new Tag("owesMoney")));
@@ -40,7 +43,8 @@ public class TypicalPersons {
             new Name("Carl Kurz"),
             new Address("Wall Street"),
             new Email("carl@example.com"),
-            new Phone("95352563")),
+            new Phone("95352563"),
+            new Remark("Likes dogs.")),
         List.of());
 
     public static final Person DANIEL = new Person(
@@ -58,7 +62,8 @@ public class TypicalPersons {
             new Name("Elle Meyer"),
             new Address("Michegan Ave"),
             new Email("elle@example.com"),
-            new Phone("9482224")),
+            new Phone("9482224"),
+            new Remark("Reads a lot.")),
         List.of());
 
     public static final Person FIONA = new Person(
