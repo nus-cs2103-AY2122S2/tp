@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_FRIENDNAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FRIEND_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMOVE_FRIENDNAME;
@@ -84,6 +85,8 @@ public class CommandTestUtil {
     public static final String EVENT_DATETIME_DESC_B = " " + PREFIX_DATETIME + VALID_EVENT_DATETIME_OTHER;
     public static final String EVENT_DESCRIPTION_DESC_A = " " + PREFIX_DESCRIPTION + VALID_EVENT_DESCRIPTION;
     public static final String EVENT_DESCRIPTION_DESC_B = " " + PREFIX_DESCRIPTION + VALID_EVENT_DESCRIPTION_OTHER;
+    public static final String EVENT_FRIEND_NAME_DESC_A = " " + PREFIX_FRIEND_NAME + VALID_NAME_AMY;
+    public static final String EVENT_FRIEND_NAME_DESC_B = " " + PREFIX_FRIEND_NAME + VALID_NAME_BOB;
     public static final String EVENT_ADDFRIEND_DESC_A = " " + PREFIX_ADD_FRIENDNAME + VALID_NAME_AMY;
     public static final String EVENT_ADDFRIEND_DESC_B = " " + PREFIX_ADD_FRIENDNAME + VALID_NAME_BOB;
     public static final String EVENT_REMOVEFRIEND_DESC_A = " " + PREFIX_REMOVE_FRIENDNAME + VALID_NAME_AMY;
@@ -100,7 +103,7 @@ public class CommandTestUtil {
     public static final String INVALID_LOG_TITLE_TOO_LONG_DESC = " " + PREFIX_TITLE + "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc";
     public static final String INVALID_EVENT_NAME_DESC = " " + PREFIX_NAME + "James\nBirthday";
     public static final String INVALID_EVENT_DATETIME_DESC = " " + PREFIX_DATETIME + "1400-20-10 %%";
-    public static final String INVALID_EVENT_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION + "  random";
+    public static final String INVALID_EVENT_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION + "";
     public static final String INVALID_EVENT_ADDFRIEND_DESC = " " + PREFIX_ADD_FRIENDNAME + "Jack,Hilary";
     public static final String INVALID_EVENT_REMOVE_DESC = " " + PREFIX_REMOVE_FRIENDNAME + "Tom,Arthur";
 
