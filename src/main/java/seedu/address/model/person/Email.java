@@ -77,13 +77,12 @@ public class Email extends Field {
     }
 
     @Override
-    public int compareTo(Field other)
-    {
+    public int compareTo(Field other) {
         if (!(other instanceof Email)) {
             return -1;
         }
 
-        Email otherEmail = (Email)(other);
+        Email otherEmail = (Email) other;
         return value.toLowerCase().compareTo(otherEmail.value.toLowerCase());
     }
 }

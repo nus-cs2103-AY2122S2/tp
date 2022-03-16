@@ -64,13 +64,12 @@ public class Name extends Field {
     }
 
     @Override
-    public int compareTo(Field other)
-    {
+    public int compareTo(Field other) {
         if (!(other instanceof Name)) {
             return -1;
         }
 
-        Name otherName = (Name)(other);
+        Name otherName = (Name) other;
         return value.toLowerCase().compareTo(otherName.value.toLowerCase());
     }
 }

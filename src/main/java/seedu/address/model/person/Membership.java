@@ -108,14 +108,13 @@ public class Membership extends Field {
     }
 
     @Override
-    public int compareTo(Field other)
-    {
+    public int compareTo(Field other) {
         if (!(other instanceof Membership)) {
             return -1;
         }
 
         //compare by name of membership first followed by date
-        Membership otherMembership = (Membership)(other);
+        Membership otherMembership = (Membership) other;
         return Comparator.comparing(Membership::getValue)
                 .thenComparing(Membership::getDate)
                 .compare(this, otherMembership);

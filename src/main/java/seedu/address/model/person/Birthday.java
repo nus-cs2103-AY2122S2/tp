@@ -6,7 +6,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeParseException;
-import java.util.Comparator;
 
 import seedu.address.logic.parser.Prefix;
 
@@ -74,13 +73,12 @@ public class Birthday extends Field {
     }
 
     @Override
-    public int compareTo(Field other)
-    {
+    public int compareTo(Field other) {
         if (!(other instanceof Birthday)) {
             return -1;
         }
 
-        Birthday otherBirthday = (Birthday)(other);
+        Birthday otherBirthday = (Birthday) other;
         return value.compareTo(otherBirthday.value);
     }
 }

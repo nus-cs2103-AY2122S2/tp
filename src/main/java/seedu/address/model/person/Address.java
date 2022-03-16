@@ -63,13 +63,12 @@ public class Address extends Field {
     }
 
     @Override
-    public int compareTo(Field other)
-    {
+    public int compareTo(Field other) {
         if (!(other instanceof Address)) {
             return -1;
         }
 
-        Address otherAddress = (Address)(other);
+        Address otherAddress = (Address) other;
         return value.toLowerCase().compareTo(otherAddress.value.toLowerCase());
     }
 }

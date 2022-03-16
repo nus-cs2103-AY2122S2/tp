@@ -1,6 +1,13 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Birthday;
@@ -10,12 +17,6 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.SortUtil;
-
-import java.util.ArrayList;
-
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 class SortCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -41,7 +42,8 @@ class SortCommandParserTest {
         assertParseFailure(parser, "i/", MESSAGE_INVALID_FORMAT);
 
         // invalid values mixed with valid values
-        assertParseFailure(parser, Phone.PREFIX.getPrefix() + SortUtil.DESC_STRING + " " + Email.PREFIX.getPrefix() + "   asce",
+        assertParseFailure(parser,
+                Phone.PREFIX.getPrefix() + SortUtil.DESC_STRING + " " + Email.PREFIX.getPrefix() + "   asce",
                 MESSAGE_INVALID_FORMAT);
 
         // desc keyword without a prefix before it
@@ -52,7 +54,8 @@ class SortCommandParserTest {
         assertParseFailure(parser, SortCommand.DESCENDING_KEYWORD, MESSAGE_INVALID_FORMAT);
 
         // no spaces in between desc keyword and prefix
-        assertParseFailure(parser, Phone.PREFIX.getPrefix() + SortCommand.DESCENDING_KEYWORD, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, Phone.PREFIX.getPrefix() + SortCommand.DESCENDING_KEYWORD,
+                MESSAGE_INVALID_FORMAT);
     }
 
     @Test
@@ -221,7 +224,8 @@ class SortCommandParserTest {
         fieldSortOrder.add(SortUtil.REMARK_SORT_DEFAULT);
         fieldSortOrder.add(SortUtil.BIRTHDAY_SORT_DEFAULT);
         expectedCommand = new SortCommand(fieldSortOrder);
-        input = Name.PREFIX.getPrefix() + Phone.PREFIX.getPrefix() + Email.PREFIX.getPrefix() + Address.PREFIX.getPrefix() + Remark.PREFIX.getPrefix() + Birthday.PREFIX.getPrefix();
+        input = Name.PREFIX.getPrefix() + Phone.PREFIX.getPrefix() + Email.PREFIX.getPrefix()
+                + Address.PREFIX.getPrefix() + Remark.PREFIX.getPrefix() + Birthday.PREFIX.getPrefix();
         assertParseSuccess(parser, input, expectedCommand);
 
         // all fields specified in descending order
@@ -233,7 +237,9 @@ class SortCommandParserTest {
         fieldSortOrder.add(SortUtil.REMARK_SORT_DESC);
         fieldSortOrder.add(SortUtil.BIRTHDAY_SORT_DESC);
         expectedCommand = new SortCommand(fieldSortOrder);
-        input = Name.PREFIX.getPrefix() + SortUtil.DESC_STRING + Phone.PREFIX.getPrefix() + SortUtil.DESC_STRING + Email.PREFIX.getPrefix() + SortUtil.DESC_STRING + Address.PREFIX.getPrefix() + SortUtil.DESC_STRING + Remark.PREFIX.getPrefix() + SortUtil.DESC_STRING + Birthday.PREFIX.getPrefix() + SortUtil.DESC_STRING;
+        input = Name.PREFIX.getPrefix() + SortUtil.DESC_STRING + Phone.PREFIX.getPrefix() + SortUtil.DESC_STRING
+                + Email.PREFIX.getPrefix() + SortUtil.DESC_STRING + Address.PREFIX.getPrefix() + SortUtil.DESC_STRING
+                + Remark.PREFIX.getPrefix() + SortUtil.DESC_STRING + Birthday.PREFIX.getPrefix() + SortUtil.DESC_STRING;
         assertParseSuccess(parser, input, expectedCommand);
     }
 

@@ -58,13 +58,12 @@ public class Phone extends Field {
     }
 
     @Override
-    public int compareTo(Field other)
-    {
+    public int compareTo(Field other) {
         if (!(other instanceof Phone)) {
             return -1;
         }
 
-        Phone otherPhone = (Phone)(other);
+        Phone otherPhone = (Phone) other;
         return value.toLowerCase().compareTo(otherPhone.value.toLowerCase());
     }
 }

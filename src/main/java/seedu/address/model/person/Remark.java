@@ -47,13 +47,12 @@ public class Remark extends Field {
     }
 
     @Override
-    public int compareTo(Field other)
-    {
+    public int compareTo(Field other) {
         if (!(other instanceof Remark)) {
             return -1;
         }
 
-        Remark otherRemark = (Remark)(other);
+        Remark otherRemark = (Remark) other;
         return value.toLowerCase().compareTo(otherRemark.value.toLowerCase());
     }
 }
