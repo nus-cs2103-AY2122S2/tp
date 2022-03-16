@@ -128,13 +128,13 @@ class SortCommandTest {
         assertCommandSuccess(sortCommand, model, SortCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
-    /*
+
     @Test
     public void execute_sortBirthdayDefault_success() {
         ArrayList<SortCommand.FieldSortOrder> fieldSortOrder = new ArrayList<>();
-        fieldSortOrder.add(REMARK_SORT_DEFAULT);
+        fieldSortOrder.add(BIRTHDAY_SORT_DEFAULT);
 
-        List<Person> sortedPersonListByName = new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, ELLE, DANIEL, FIONA, GEORGE, IDA, HOON));
+        List<Person> sortedPersonListByName = new ArrayList<>(Arrays.asList(ELLE, CARL, ALICE, BENSON, GEORGE, DANIEL, FIONA, IDA, HOON));
 
         SortCommand sortCommand = new SortCommand(fieldSortOrder);
         Model expectedModel = new ModelManager(new AddressBook(sortedPersonListByName), new UserPrefs());
@@ -145,16 +145,16 @@ class SortCommandTest {
     @Test
     public void execute_sortBirthdayDescending_success() {
         ArrayList<SortCommand.FieldSortOrder> fieldSortOrder = new ArrayList<>();
-        fieldSortOrder.add(REMARK_SORT_DEFAULT);
+        fieldSortOrder.add(BIRTHDAY_SORT_DESC);
 
-        List<Person> sortedPersonListByName = new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, ELLE, DANIEL, FIONA, GEORGE, IDA, HOON));
+        List<Person> sortedPersonListByName = new ArrayList<>(Arrays.asList(DANIEL, FIONA, IDA, HOON, GEORGE, BENSON, ALICE, CARL, ELLE));
 
         SortCommand sortCommand = new SortCommand(fieldSortOrder);
         Model expectedModel = new ModelManager(new AddressBook(sortedPersonListByName), new UserPrefs());
 
         assertCommandSuccess(sortCommand, model, SortCommand.MESSAGE_SUCCESS, expectedModel);
     }
-*/
+
 
     @Test
     public void execute_noFieldSpecified_Failure() {
