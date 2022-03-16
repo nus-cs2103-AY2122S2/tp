@@ -13,8 +13,10 @@ import seedu.tinner.model.company.Address;
 import seedu.tinner.model.company.Company;
 import seedu.tinner.model.company.CompanyName;
 import seedu.tinner.model.company.Email;
+import seedu.tinner.model.company.FavouriteStatus;
 import seedu.tinner.model.company.Phone;
 import seedu.tinner.model.company.RoleList;
+
 
 /**
  * Parses input arguments and creates a new AddCompanyCommand object
@@ -50,9 +52,10 @@ public class AddCompanyCommandParser implements Parser<AddCompanyCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getOptionalValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getOptionalValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getOptionalValue(PREFIX_ADDRESS).get());
+
         RoleList roles = new RoleList();
 
-        Company company = new Company(name, phone, email, address, roles);
+        Company company = new Company(name, phone, email, address, roles, new FavouriteStatus(false));
 
         return new AddCompanyCommand(company);
     }
