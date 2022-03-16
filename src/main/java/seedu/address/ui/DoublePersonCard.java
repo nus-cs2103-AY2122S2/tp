@@ -1,13 +1,13 @@
 package seedu.address.ui;
 
+import java.util.StringJoiner;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
 import seedu.address.model.property.Property;
-
-import java.util.StringJoiner;
 
 public class DoublePersonCard extends UiPart<Region> {
 

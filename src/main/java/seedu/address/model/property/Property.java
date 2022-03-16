@@ -13,7 +13,7 @@ import seedu.address.model.person.Address;
 public class Property {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Property must have have the format: [region, address, size, price]";
+            "Preference must have have the format: [region, size, lower price, higher price]";
 
     private final Region region;
     private final Address address;
@@ -45,15 +45,6 @@ public class Property {
 
     public Price getPrice() {
         return price;
-    }
-
-    /**
-     * Returns true if the two properties have the same region, size, and price.
-     */
-    public boolean matches(Property other) {
-        return region.equals(other.region)
-                && size.equals(other.size)
-                && price.equals(other.price);
     }
 
     @Override
@@ -105,7 +96,7 @@ public class Property {
 
     @Override
     public int hashCode() {
-        return Objects.hash(region, address, size, address, price);
+        return Objects.hash(region, address, size, price);
     }
 
 }
