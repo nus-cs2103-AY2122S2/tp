@@ -39,16 +39,12 @@ public enum CommandType {
         requireNonNull(commandType);
         String trimmedCommandType = getFirstPrefixType(commandType.trim());
 
-        System.out.println("CommandType2: "+trimmedCommandType);
-
         switch (trimmedCommandType) {
             case "contact":
-                System.out.println("trimmedCommandType: "+trimmedCommandType);
                 return CONTACT;
             case "medical":
                 return MEDICAL;
             case "consultation":
-                System.out.println("trimmedCommandType: "+trimmedCommandType);
                 return CONSULTATION;
             case "prescription":
                 return PRESCRIPTION;
