@@ -4,8 +4,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Set;
+
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.EditCommand.EditShowDescriptor;
 import seedu.address.model.show.Show;
+import seedu.address.model.tag.Tag;
 
 /**
  * A utility class for show.
@@ -31,5 +35,25 @@ public class ShowUtil {
         );
         return sb.toString();
     }
+
+    /**
+     * Returns the part of command string for the given {@code EditShowDescriptor}'s details.
+     */
+    public static String getEditShowDescriptorDetails(EditShowDescriptor descriptor) {
+        StringBuilder sb = new StringBuilder();
+        descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
+        descriptor.getStatus().ifPresent(status -> sb.append(PREFIX_STATUS).append(status.name()).append(" "));
+        if (descriptor.getTags().isPresent()) {
+            Set<Tag> tags = descriptor.getTags().get();
+            if (tags.isEmpty()) {
+                sb.append(PREFIX_TAG);
+            } else {
+                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
+            }
+        }
+        return sb.toString();
+    }
+
+
 
 }

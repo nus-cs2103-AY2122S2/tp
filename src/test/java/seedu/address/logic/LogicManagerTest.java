@@ -41,10 +41,10 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonShowListStorage addressBookStorage =
+        JsonShowListStorage showListStorage =
                 new JsonShowListStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(showListStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -153,7 +153,7 @@ public class LogicManagerTest {
         }
 
         @Override
-        public void saveShowList(ReadOnlyShowList addressBook, Path filePath) throws IOException {
+        public void saveShowList(ReadOnlyShowList showList, Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }
