@@ -1,27 +1,22 @@
 package seedu.address.model.event;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EVENT_DATETIME_AMY_DIFF_TIME;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EVENT_DATETIME_OTHER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EVENT_DESCRIPTION;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EVENT_DESCRIPTION_OTHER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EVENT_NAME_OTHER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalEvents.EVENT_AMY_BIRTHDAY;
 import static seedu.address.testutil.TypicalEvents.EVENT_NO_DESCRIPTION;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.Person;
 import seedu.address.testutil.EventBuilder;
-import seedu.address.testutil.PersonBuilder;
 
 class EventTest {
 
