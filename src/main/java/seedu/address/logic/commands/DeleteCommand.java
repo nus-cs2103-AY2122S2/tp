@@ -3,8 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -12,15 +10,8 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Description;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Log;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
-
 
 /**
  * Deletes a person identified using it's displayed index from the address book.
@@ -38,13 +29,6 @@ public class DeleteCommand extends Command {
             + "Example 2: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted friend: %1$s";
-
-    //these dummy fields are needed to instantiate a person to be used to check if such a name entered exists
-    // in the address book
-    private static final Phone dummyPhone = new Phone("12345678");
-    private static final Email dummyEmail = new Email("dummyemail@gmail.com");
-    private static final Address dummyAddress = new Address("Dummy Address");
-    private static final Description dummyDescription = new Description("Dummy Description");
 
     private final Name nameOfPersonToDelete;
     private final Index targetIndex;
@@ -86,8 +70,7 @@ public class DeleteCommand extends Command {
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
 
         } else { //deletion by name
-            Person personWithNameToDelete = new Person(nameOfPersonToDelete, dummyPhone,
-                    dummyEmail, dummyAddress, dummyDescription, new HashSet<Tag>(), new ArrayList<Log>());
+            Person personWithNameToDelete = new Person(nameOfPersonToDelete);
 
             if (!model.hasPerson(personWithNameToDelete)) { //model.hasPerson considers 2 Persons with same name
                 //to be the same Person
@@ -111,7 +94,6 @@ public class DeleteCommand extends Command {
     }
     @Override
     public boolean equals(Object other) {
-        System.out.println(this.isDeletionByIndex);
         return other == this // short circuit if same object
                 || (other instanceof DeleteCommand // instanceof handles nulls
                 && nameOfPersonToDelete.equals(((DeleteCommand) other).nameOfPersonToDelete) //state checl
