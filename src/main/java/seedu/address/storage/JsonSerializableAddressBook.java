@@ -45,9 +45,9 @@ class JsonSerializableAddressBook {
         }
         if (!prescriptions.isEmpty()) {
             this.prescriptions.addAll(prescriptions);
-            if (!testResults.isEmpty()) {
-                this.testResults.addAll(testResults);
-            }
+        }
+        if (!testResults.isEmpty()) {
+            this.testResults.addAll(testResults);
         }
     }
 

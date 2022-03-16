@@ -237,6 +237,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public ObservableList<Prescription> getPrescriptionList() {
         return prescriptions.asUnmodifiableObservableList();
     }
+
     @Override
     public ObservableList<TestResult> getTestResultList() {
         return testResults.asUnmodifiableObservableList();

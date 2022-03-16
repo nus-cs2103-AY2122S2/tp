@@ -13,7 +13,6 @@ import seedu.address.model.patient.Patient;
 import seedu.address.model.prescription.Prescription;
 import seedu.address.model.testresult.TestResult;
 
-
 /**
  * API of the Logic component
  */
