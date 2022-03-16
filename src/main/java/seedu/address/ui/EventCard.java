@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.event.Event;
@@ -33,9 +34,11 @@ public class EventCard extends UiPart<Region> {
     private Label dateTime;
     @FXML
     private Label description;
+    @FXML
+    private FlowPane friends;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code EventCard} with the given {@code Event} and index to display.
      */
     public EventCard(Event event, int displayedIndex) {
         super(FXML);
@@ -44,6 +47,9 @@ public class EventCard extends UiPart<Region> {
         name.setText(event.getName().fullName);
         dateTime.setText(event.getDateTime().toString());
         description.setText(event.getDescription().value);
+        friends.setHgap(4);
+        event.getFriendNames().stream()
+                .forEach(friend -> friends.getChildren().add(new Label(friend.fullName)));
     }
 
     @Override
