@@ -17,7 +17,7 @@ import seedu.address.model.patient.NricPredicate;
  * Lists all persons in the address book to the user.
  */
 public class ViewContactCommand extends Command {
-    public static final String COMMAND_WORD = "list";
+    public static final String COMMAND_WORD = "view";
     public static final CommandType COMMAND_TYPE = CommandType.CONTACT;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all cotnact whose names contain any of "

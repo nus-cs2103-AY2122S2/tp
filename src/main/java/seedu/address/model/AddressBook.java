@@ -10,10 +10,14 @@ import seedu.address.model.consultation.Consultation;
 import seedu.address.model.consultation.UniqueConsultationList;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.UniqueContactList;
+import seedu.address.model.medical.Medical;
+import seedu.address.model.medical.UniqueMedicalList;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.UniquePersonList;
 import seedu.address.model.prescription.Prescription;
 import seedu.address.model.prescription.UniquePrescriptionList;
+import seedu.address.model.testresult.TestResult;
+import seedu.address.model.testresult.UniqueTestResultList;
 
 
 /**
@@ -26,7 +30,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     private final UniqueContactList contacts;
     private final UniqueConsultationList consultations;
     private final UniquePrescriptionList prescriptions;
-
+    private final UniqueTestResultList testResults;
+    private final UniqueMedicalList medicals;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -40,6 +45,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         contacts = new UniqueContactList();
         consultations = new UniqueConsultationList();
         prescriptions = new UniquePrescriptionList();
+        testResults = new UniqueTestResultList();
+        medicals = new UniqueMedicalList();
+
     }
 
     public AddressBook() {}
@@ -67,10 +75,10 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-
         setPersons(newData.getPersonList());
         setContacts(newData.getContactList());
         setConsultations(newData.getConsultationList());
+        setTestResults(newData.getTestResultList());
     }
 
     //// person-level operations
@@ -90,6 +98,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void addPerson(Patient p) {
         persons.add(p);
     }
+
     public void addPrescription(Prescription p) {
         prescriptions.add(p);
     }
@@ -100,6 +109,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasPrescription(Prescription prescription) {
         requireNonNull(prescription);
         return prescriptions.contains(prescription);
+    }
+    public void setPrescriptions(Prescription target, Prescription editedPrescription) {
+        requireNonNull(editedPrescription);
+        prescriptions.setPrescription(target, editedPrescription);
     }
 
     /**
@@ -215,11 +228,57 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     //// util methods
 
+    /**
+     * Replaces the contents of the test results list with {@code testResults}.
+     * {@code testResults} must not contain duplicate test results.
+     */
+    public void setTestResults(List<TestResult> testResults) {
+        this.testResults.setTestResults(testResults);
+    }
+
+    /**
+     * Replaces the given test result {@code target} in the list with {@code editedTestResults}.
+     * {@code target} must exist in the address book.
+     * The test result identity of {@code editedTestResults} must not be the same
+     * as another existing test result in the address book.
+     */
+    public void setTestResults(TestResult target, TestResult editedTestResults) {
+        requireNonNull(editedTestResults);
+        testResults.setTestResult(target, editedTestResults);
+    }
+
+    //// contact-level operations
+
+    /**
+     * Returns true if a test result with the same identity as {@code testResult} exists in the address book.
+     */
+    public boolean hasTestResult(TestResult testResult) {
+        requireNonNull(testResult);
+        return testResults.contains(testResult);
+    }
+
+    /**
+     * Adds a test result to the address book.
+     * The test result must not already exist in the address book.
+     */
+    public void addTestResult(TestResult testResult) {
+        testResults.add(testResult);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeTestResult(TestResult key) {
+        testResults.remove(key);
+    }
+
     @Override
     public String toString() {
         return persons.asUnmodifiableObservableList().size() + " persons"
                 + contacts.asUnmodifiableObservableList().size() + " contacts"
                 + consultations.asUnmodifiableObservableList().size() + " consultations";
+                + testResults.asUnmodifiableObservableList().size() + " test results";
         // TODO: refine later
     }
 
@@ -228,6 +287,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asUnmodifiableObservableList();
     }
 
+    @Override
+    public ObservableList<Medical> getMedicalList() {
+        return medicals.asUnmodifiableObservableList();
+    }
 
     @Override
     public ObservableList<Contact> getContactList() {
@@ -244,16 +307,44 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
+    public ObservableList<TestResult> getTestResultList() {
+        return testResults.asUnmodifiableObservableList();
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
                 && persons.equals(((AddressBook) other).persons))
                 && contacts.equals(((AddressBook) other).contacts)
                 && consultations.equals(((AddressBook) other).consultations);
+                && testResults.equals(((AddressBook) other).testResults);
     }
 
     @Override
     public int hashCode() {
         return persons.hashCode();
+    }
+
+
+    /**
+     * Adds medical information to the address book.
+     */
+    public void addMedical(Medical m) {
+        medicals.add(m);
+    }
+
+
+    public void setMedicals(Medical target, Medical editedMedical) {
+        requireNonNull(editedMedical);
+        medicals.setMedical(target, editedMedical);
+    }
+
+    /**
+     * Checks if medical information (for patient with same NRIC) already exists.
+     */
+    public boolean hasMedical(Medical m) {
+        requireNonNull(m);
+        return medicals.contains(m);
     }
 }

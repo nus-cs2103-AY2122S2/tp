@@ -11,7 +11,12 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.contact.AddContactCommandParser;
 import seedu.address.logic.parser.contact.ViewContactCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.medical.AddMedicalCommandParser;
+import seedu.address.logic.parser.medical.ViewMedicalCommandParser;
 import seedu.address.logic.parser.prescription.AddPrescriptionCommandParser;
+import seedu.address.logic.parser.prescription.ViewPrescriptionCommandParser;
+import seedu.address.logic.parser.testresult.AddTestResultCommandParser;
+import seedu.address.logic.parser.testresult.ViewTestResultCommandParser;
 
 public enum CommandType {
     DEFAULT, CONTACT, MEDICAL, CONSULTATION, PRESCRIPTION, TEST;
@@ -66,20 +71,18 @@ public enum CommandType {
         CommandType parsedCommandType = parseCommandType(commandType);
 
         switch(parsedCommandType) {
-            case CONTACT:
-                System.out.println(1);
-                return new AddContactCommandParser().parse(arguments);
-            case MEDICAL:
-                throw new ParseException("WIP: Medical type");
-            case CONSULTATION:
-                System.out.println(2);
-                return new AddConsultationCommandParser().parse(arguments);
-            case PRESCRIPTION:
-                return new AddPrescriptionCommandParser().parse(arguments);
-            case TEST:
-                throw new ParseException("WIP: Test type");
-            default:
-                throw new ParseException(MESSAGE_CONSTRAINTS);
+        case CONTACT:
+            return new AddContactCommandParser().parse(arguments);
+        case MEDICAL:
+            return new AddMedicalCommandParser().parse(arguments);
+        case CONSULTATION:
+            return new AddConsultationCommandParser().parse(arguments);
+        case PRESCRIPTION:
+            return new AddPrescriptionCommandParser().parse(arguments);
+        case TEST:
+            return new AddTestResultCommandParser().parse(arguments);
+        default:
+            throw new ParseException(MESSAGE_CONSTRAINTS);
         }
     }
 
@@ -95,20 +98,19 @@ public enum CommandType {
         CommandType parsedCommandType = parseCommandType(commandType);
 
         switch(parsedCommandType) {
-            case CONTACT:
-                System.out.println(3);
-                return new ViewContactCommandParser().parse(arguments);
-            case MEDICAL:
-                throw new ParseException("WIP: Medical type");
-            case CONSULTATION:
-                System.out.println(4);
-                return new ViewConsultationCommandParser().parse(arguments);
-            case PRESCRIPTION:
-                throw new ParseException("WIP: Prescription type");
-            case TEST:
-                throw new ParseException("WIP: Test type");
-            default:
-                throw new ParseException(MESSAGE_CONSTRAINTS);
+        case CONTACT:
+            return new ViewContactCommandParser().parse(arguments);
+        case MEDICAL:
+            return new ViewMedicalCommandParser().parse(arguments);
+        case CONSULTATION:
+            return new ViewConsultationCommandParser().parse(arguments);
+        case PRESCRIPTION:
+            return new ViewPrescriptionCommandParser().parse(arguments);
+        case TEST:
+            return new ViewTestResultCommandParser().parse(arguments);
+        default:
+            throw new ParseException(MESSAGE_CONSTRAINTS);
+
         }
     }
 }

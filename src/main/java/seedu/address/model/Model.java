@@ -8,8 +8,10 @@ import seedu.address.commons.core.GuiSettings;
 
 import seedu.address.model.consultation.Consultation;
 import seedu.address.model.contact.Contact;
+import seedu.address.model.medical.Medical;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.prescription.Prescription;
+import seedu.address.model.testresult.TestResult;
 
 
 /**
@@ -21,6 +23,8 @@ public interface Model {
     Predicate<Patient> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
     Predicate<Prescription> PREDICATE_SHOW_ALL_PRESCRIPTIONS = unused -> true;
     Predicate<Contact> PREDICATE_SHOW_ALL_CONTACTS = unused -> true;
+    Predicate<TestResult> PREDICATE_SHOW_ALL_TEST_RESULTS = unused -> true;
+    Predicate<Medical> PREDICATE_SHOW_ALL_MEDICALS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -83,6 +87,7 @@ public interface Model {
     void addPerson(Patient patient);
     void addPrescription(Prescription prescription);
     boolean hasPrescription(Prescription prescription);
+    void setPrescription(Prescription target, Prescription editedPrescription);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
@@ -93,6 +98,7 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Patient> getFilteredPersonList();
+    ObservableList<Medical> getFilteredMedicalList();
     ObservableList<Prescription> getFilteredPrescriptionList();
 
     /**
@@ -100,7 +106,6 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Patient> predicate);
-    void updateFilteredPrescriptionList(Predicate<Prescription> predicate);
 
     /**
      * Returns true if a contact with the same identity as {@code contact} exists in the address book.
@@ -136,10 +141,8 @@ public interface Model {
      */
     void updateFilteredContactList(Predicate<Contact> predicate);
 
-
-
+  
     // Consultation
-
 
     /**
      * Returns true if a contact with the same identity as {@code contact} exists in the address book.
@@ -174,4 +177,54 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredConsultationList(Predicate<Consultation> predicate);
+
+    void updateFilteredPrescriptionList(Predicate<Prescription> predicate);
+
+    /**
+     * Returns true if a test result with the same identity as {@code testResult} exists in the address book.
+     */
+    boolean hasTestResult(TestResult testResult);
+
+    /**
+     * Deletes the given test result.
+     * The test result must exist in the address book.
+     */
+    void deleteTestResult(TestResult testResult);
+
+    /**
+     * Adds the given test result.
+     * {@code testResult} must not already exist in the address book.
+     */
+    void addTestResult(TestResult testResult);
+
+    /**
+     * Replaces the given testResult {@code target} with {@code editedTestResult}.
+     * {@code target} must exist in the address book.
+     * The test result identity of {@code editedTestResult} must not be the same
+     * as another existing test result in the address book.
+     */
+    void setTestResult(TestResult target, TestResult editedTestResult);
+
+    /** Returns an unmodifiable view of the filtered contact list */
+    ObservableList<TestResult> getFilteredTestResultList();
+
+    /**
+     * Updates the filter of the filtered test result list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredTestResultList(Predicate<TestResult> predicate);
+
+    /**
+     * Adds the given medical information.
+     * {@code medical} must not already exist in the address book.
+     */
+    void addMedical(Medical medical);
+
+    boolean hasMedical(Medical medical);
+
+    /**
+     * Updates the filter of the filtered medical list to filter by the given {@code predicate}. s
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredMedicalList(Predicate<Medical> predicate);
 }
