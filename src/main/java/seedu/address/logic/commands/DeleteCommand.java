@@ -93,7 +93,8 @@ public class DeleteCommand extends Command {
         }
 
         model.deleteEntity(entityToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_ENTITY_SUCCESS, entityToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_ENTITY_SUCCESS, entityToDelete),
+                entityToDelete.getEntityType());
     }
 
     @Override

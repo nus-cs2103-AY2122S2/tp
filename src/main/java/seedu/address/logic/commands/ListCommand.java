@@ -42,6 +42,6 @@ public class ListCommand extends Command {
         default:
             throw new UnknownEntityException();
         }
-        return new CommandResult(result);
+        return new CommandResult(result, entityType);
     }
 }
