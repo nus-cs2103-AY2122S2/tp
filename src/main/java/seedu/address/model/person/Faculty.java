@@ -3,6 +3,8 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -82,5 +84,14 @@ public class Faculty {
     @Override
     public int hashCode() {
         return studentFaculty.hashCode();
+    }
+
+    /**
+     * Returns a list of strings with enum values from the Nus enum class.
+     *
+     * @return List of Nus enum values.
+     */
+    public static List<String> getFacultyEnumAsList() {
+        return Stream.of(Nus.values()).map(Enum::name).collect(Collectors.toList());
     }
 }
