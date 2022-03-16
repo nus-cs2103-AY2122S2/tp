@@ -23,7 +23,8 @@ You can reach us at the email `(placeholder for email address)`
 
 <img src="images/charmainehly.png" width="200px">
 
-[[github](http://github.com/charmainehly)] [[portfolio](team/charmainehly.md)]
+[[github](http://github.com/charmainehly)]
+[[portfolio](team/charmainehly.md)]
 
 * Role: Developer
 * Responsibilities: Scheduling & Tracking, Testing

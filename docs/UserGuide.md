@@ -35,6 +35,8 @@ Command Line Interface (CLI)** while still having the benefits of a Graphical Us
 
    * **`find k/Jane f/name`** : Searches for all TAs with name containing “Jane/jane”.
 
+   * **`sort s/name`** : Sorts all TAs by name in descending alphabetical order.
+
    * **`help`** : List all commands in the system.
 
 1. Refer to the [Features](#features) below for details of each command.
@@ -109,15 +111,19 @@ Examples:
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 -->
 
-### Locating applicants by keyword search: `find`
+### Finding candidates by keyword(s) search: `find`
 
-Finds and lists TAs whose attribute fields contain any of the given keywords.
+Finds and lists TAs whose attribute field(s) contain(s) any of the given keyword(s).
 
-Format: `find k/KEYWORD [k/MORE_KEYWORDS] f/ATTRIBUTE_FIELD`
+Format: `find k/KEYWORD [k/MORE_KEYWORDS]... f/ATTRIBUTE_FIELD`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+Note: `ATTRIBUTE_FIELD` can take on the following values
+`course`, `email`, `name`, `phone`, `person`, `studentid`
+
+* The keyword search is case-insensitive. e.g `hans` will match `Hans`
+* The attribute field is case-insensitive. e.g. `NAME` is equivalent to `name`
 * The search will return a list of all TAs containing any of the specified keyword(s) in the specified attribute field.
-* For `f/all`, the search will find keywords across all attribute fields of the TA records.
+* For `f/person`, the search will find keywords across all attribute fields of the TA records.
 * Only full keywords will be matched
   e.g. `k/jane doe f/name` will not match TAs with name `jane koe` or just `jane`
 * TAs matching at least one full keyword (in the specified attribute field) will be returned i.e. OR search,
@@ -125,8 +131,36 @@ Format: `find k/KEYWORD [k/MORE_KEYWORDS] f/ATTRIBUTE_FIELD`
 
 Examples:
 * `find k/Jane f/name` returns TAs with name e.g. `jane` and `jane doe`
-* `find k/Computer Science f/course` returns TAs with the course field e.g. recorded as `computer science`
+* `find k/Computer Science f/course` returns TAs with the course field i.e. `computer science`
 * `find k/Jane k/Tan f/name` returns TAs with name e.g. `Jane`, `tan` and `John Tan`
+
+
+### Sorting candidates by attribute field: `sort`
+
+Returns a list of TAs sorted by the specified attribute field. 
+
+Format: `sort s/ATTRIBUTE_FIELD`
+
+Note: `ATTRIBUTE_FIELD` can take on the following values
+`course`, `email`, `name`, `phone`, `person`, `studentid`
+
+* The attribute field is case-insensitive. e.g. `NAME` is equivalent to `name`
+* The search will return a list of all TAs sorted in ascending order 
+(i.e. A-Z, 0-9) with regard to the specified attribute field.
+
+Examples:
+Let's reference a default sample list of unique TA candidates with attribute fields stated as (`name`, `studentid`).
+1. (`Ben`, `E23456789`)
+2. (`Alice`, `E0234567`)
+3. (`Charlie`, `E0123456`)
+* `sort s/name` returns TAs sorted by name in the following order:
+1. (`Alice`, `E0234567`)
+2. (`Ben`, `E23456789`)
+3. (`Charlie`, `E0123456`)
+* `sort s/studentid` returns TAs sorted by name in the following order:
+1. (`Charlie`, `E0123456`)
+2. (`Alice`, `E0234567`)
+3. (`Ben`, `E23456789`)
 
 
 ### Deleting a TA : `delete`
@@ -156,14 +190,14 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+TAlent Assistant™ data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+TAlent Assistant™ data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid, TAlent Assistant™ will discard all data and start with an empty data file at the next run.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -175,7 +209,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TAlent Assistant™ home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -187,6 +221,7 @@ _Details coming soon ..._
 | **Clear**  | `clear`                                                                                                                     |
 | **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                         |
 | **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` |
-| **Find**   | `find k/[KEYWORD] [k/MORE_KEYWORDS] f/[ATTRIBUTE_FIELD]`<br> e.g., `find k/Jane k/Doe f/name`                               |
+| **Find**   | `find k/KEYWORD [k/MORE_KEYWORDS]... f/ATTRIBUTE_FIELD`<br> e.g., `find k/Jane k/Doe f/name`                                |
+| **Sort**   | `sort s/ATTRIBUTE_FIELD`<br> e.g., `sort s/name`                                                                            |
 | **List**   | `list`                                                                                                                      |
 | **Help**   | `help`                                                                                                                      |
