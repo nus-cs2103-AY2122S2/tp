@@ -76,7 +76,7 @@ public class ArgumentTokenizerTest {
 
         // No preamble
         argsString = " p/   Argument value ";
-        argsString2 = "T/name";
+        argsString2 = " T/name ";
         argMultimap = ArgumentTokenizer.tokenize(argsString, pSlash);
         argMultimap2 = ArgumentTokenizer.tokenize(argsString2, new Prefix("T/"));
         assertPreambleEmpty(argMultimap);

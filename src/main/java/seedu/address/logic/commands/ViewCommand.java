@@ -20,10 +20,14 @@ public class ViewCommand extends Command {
 
     public static final String COMMAND_SUCCESS = "viewed";
 
-    public String input;
+    private String input;
 
     public ViewCommand(String input) {
         this.input = input;
+    }
+
+    public String getInput() {
+        return input;
     }
 
     @Override

@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LINEUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PLAYER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TEAM;
 
-
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.ViewCommand;
@@ -27,12 +26,7 @@ public class ViewCommandParser implements Parser<ViewCommand> {
     @Override
     public ViewCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_PLAYER, PREFIX_TEAM, PREFIX_LINEUP);
-//        boolean hasPreamblePlayer = !argMultimapForPlayer.getPreamble().isEmpty();
-        //String s1 = argMultimapForPlayer.getPreamble();
-//        boolean hasPreambleTeam = !argMultimapForPlayer.getPreamble().isEmpty();
-        //String s2 = argMultimapForPlayer.getPreamble();
-//        boolean hasPreambleTeamAndLineup = !argMultimapForPlayer.getPreamble().isEmpty();
-        //String s3 = argMultimapForPlayer.getPreamble();
+
         boolean hasTSlash = arePrefixesPresent(argMultimap, PREFIX_TEAM); // T/
         boolean hasTSlashAndLSlash = arePrefixesPresent(argMultimap, PREFIX_LINEUP, PREFIX_TEAM); // T/ L/
         boolean hasPSlash = arePrefixesPresent(argMultimap, PREFIX_PLAYER); // P/
@@ -42,7 +36,6 @@ public class ViewCommandParser implements Parser<ViewCommand> {
         boolean hasLSlashAndPSlash = arePrefixesPresent(argMultimap, PREFIX_LINEUP, PREFIX_PLAYER); // L/ P/
         boolean hasTSlashAndLSlashAndPSlash = arePrefixesPresent(argMultimap,
                 PREFIX_LINEUP, PREFIX_TEAM, PREFIX_PLAYER); // T/ L/ P/
-
 
         Name name = new Name("Player");
         TeamName teamName = new TeamName("Team");
@@ -64,6 +57,11 @@ public class ViewCommandParser implements Parser<ViewCommand> {
                 // view P/
             }
 
+            // check has preamble. check here because arg = "P/", preamble = "P/" as well
+            if (!argMultimap.getPreamble().isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
+            }
+
             // view P/[PLAYER_NAME]
             playerNameArg = argMultimap.getValue(PREFIX_PLAYER).get();
             if (!playerNameArg.equals("")) {
@@ -78,6 +76,11 @@ public class ViewCommandParser implements Parser<ViewCommand> {
                 // view T/
             }
 
+            // check has preamble. check here because arg = "P/", preamble = "P/" as well
+            if (!argMultimap.getPreamble().isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
+            }
+
             // view T/TEAM_NAME
             teamNameArg = argMultimap.getValue(PREFIX_TEAM).get();
             if (!teamNameArg.equals("")) {
@@ -90,14 +93,16 @@ public class ViewCommandParser implements Parser<ViewCommand> {
             teamNameArg = argMultimap.getValue(PREFIX_TEAM).get();
             lineupNameArg = argMultimap.getValue(PREFIX_LINEUP).get();
 
-            // view T/TEAM_NAME L/
-            if (!teamNameArg.equals("") && lineupNameArg.equals("")) {
-                // view T/TEAM_NAME L/
-                teamName = ParserUtil.parseTeamName(teamNameArg);
+            // check has preamble. check here because arg = "P/", preamble = "P/" as well
+            if (!argMultimap.getPreamble().isEmpty() || teamNameArg.equals("")) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
             }
 
-            // view T/TEAM_NAME L/LINEUP_NAME
-            if (!teamNameArg.equals("") && !lineupNameArg.equals("")) {
+            // view T/TEAM_NAME L/
+            if (lineupNameArg.equals("")) {
+                // view T/TEAM_NAME L/
+                teamName = ParserUtil.parseTeamName(teamNameArg);
+            } else {
                 // view T/TEAM_NAME L/LINEUP_NAME
                 teamName = ParserUtil.parseTeamName(teamNameArg);
                 lineupName = ParserUtil.parseLineupName(lineupNameArg);
