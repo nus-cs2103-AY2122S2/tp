@@ -3,7 +3,6 @@ package seedu.address;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
-import java.util.function.Supplier;
 import java.util.logging.Logger;
 
 import javafx.application.Application;
@@ -68,8 +67,8 @@ public class MainApp extends Application {
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlyAddressBook> addressBookOptional;
         ReadOnlyAddressBook initialData;
-        Optional<ReadOnlyInterviewList> interviewListOptional;
-        ReadOnlyInterviewList initialInterviewList;
+        Optional<ReadOnlyInterviewSchedule> interviewListOptional;
+        ReadOnlyInterviewSchedule initialInterviewList;
         try {
             addressBookOptional = storage.readAddressBook();
             interviewListOptional = storage.readInterviewList();
@@ -79,17 +78,17 @@ public class MainApp extends Application {
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
             //Does not make sense for sample interview list. Change to empty list
             if (!interviewListOptional.isPresent()) {
-                logger.info("Data file for interviews not found. Will be starting with a sample InterviewList");
+                logger.info("Data file for interviews not found. Will be starting with a sample InterviewSchedule");
             }
             initialInterviewList = interviewListOptional.orElseGet(SampleDataUtil::getEmptyInterviewList);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
             initialData = new AddressBook();
-            initialInterviewList = new InterviewList();
+            initialInterviewList = new InterviewSchedule();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
             initialData = new AddressBook();
-            initialInterviewList = new InterviewList();
+            initialInterviewList = new InterviewSchedule();
         }
         return new ModelManager(initialData, initialInterviewList, userPrefs);
     }

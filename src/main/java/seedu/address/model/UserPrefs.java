@@ -94,7 +94,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings);
         sb.append("\nLocal AddressBook data file location : " + addressBookFilePath);
-        sb.append("\nLocal InterviewList data file location : " + interviewListFilePath);
+        sb.append("\nLocal InterviewSchedule data file location : " + interviewListFilePath);
         return sb.toString();
     }
 

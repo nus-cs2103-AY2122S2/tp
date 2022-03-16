@@ -21,27 +21,27 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
-    private final InterviewList interviewList;
+    private final InterviewSchedule interviewSchedule;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyInterviewList interviewList,
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyInterviewSchedule interviewList,
                         ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + ", InterviewList: " + interviewList + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + addressBook + ", InterviewSchedule: " + interviewList + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        this.interviewList = new InterviewList(interviewList);
+        this.interviewSchedule = new InterviewSchedule(interviewList);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new InterviewList(), new UserPrefs());
+        this(new AddressBook(), new InterviewSchedule(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -126,38 +126,38 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
-    //=========== InterviewList ================================================================================
+    //=========== InterviewSchedule ================================================================================
 
     @Override
-    public void setInterviewList(ReadOnlyInterviewList interviewList) {
-        this.interviewList.resetData(interviewList);
+    public void setInterviewList(ReadOnlyInterviewSchedule interviewList) {
+        this.interviewSchedule.resetData(interviewList);
     }
 
     @Override
-    public ReadOnlyInterviewList getInterviewList() {
-        return interviewList;
+    public ReadOnlyInterviewSchedule getInterviewSchedule() {
+        return interviewSchedule;
     }
 
     @Override
     public boolean hasInterview(Interview interview) {
         requireNonNull(interview);
-        return interviewList.hasInterview(interview);
+        return interviewSchedule.hasInterview(interview);
     }
 
     @Override
     public boolean hasConflictingInterview(Interview interview) {
         requireNonNull(interview);
-        return interviewList.hasConflictingInterview(interview);
+        return interviewSchedule.hasConflictingInterview(interview);
     }
 
     @Override
     public void deleteInterview(Interview target) {
-        interviewList.removeInterview(target);
+        interviewSchedule.removeInterview(target);
     }
 
     @Override
     public void addInterview(Interview interview) {
-        interviewList.addInterview(interview);
+        interviewSchedule.addInterview(interview);
         //updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -165,7 +165,7 @@ public class ModelManager implements Model {
     public void setInterview(Interview target, Interview editedInterview) {
         requireAllNonNull(target, editedInterview);
 
-        interviewList.setInterview(target, editedInterview);
+        interviewSchedule.setInterview(target, editedInterview);
     }
 
     //=========== Filtered Person List Accessors =============================================================

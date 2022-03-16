@@ -8,7 +8,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyInterviewList;
+import seedu.address.model.ReadOnlyInterviewSchedule;
 import seedu.address.model.person.Person;
 
 /**
@@ -32,11 +32,11 @@ public interface Logic {
     ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Returns the InterviewList.
+     * Returns the InterviewSchedule.
      *
      * @see seedu.address.model.Model#getAddressBook()
      */
-    ReadOnlyInterviewList getInterviewList();
+    ReadOnlyInterviewSchedule getInterviewList();
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();

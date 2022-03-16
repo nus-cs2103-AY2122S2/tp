@@ -66,13 +66,13 @@ public interface Model {
     /**
      * Replaces interview list data with the data in {@code interviewList}.
      */
-    void setInterviewList(ReadOnlyInterviewList interviewList);
+    void setInterviewList(ReadOnlyInterviewSchedule interviewList);
 
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
 
-    /** Returns the InterviewList */
-    ReadOnlyInterviewList getInterviewList();
+    /** Returns the InterviewSchedule */
+    ReadOnlyInterviewSchedule getInterviewSchedule();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.

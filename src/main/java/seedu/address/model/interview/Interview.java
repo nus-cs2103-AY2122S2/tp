@@ -1,6 +1,8 @@
 package seedu.address.model.interview;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import seedu.address.model.person.Person;
 
@@ -36,5 +38,19 @@ public class Interview {
 
     public LocalDateTime getInterviewDateTime() {
         return this.interviewDateTime;
+    }
+
+    public LocalTime getInterviewTime() {
+        return this.interviewDateTime.toLocalTime();
+    }
+
+    public LocalDate getInterviewDate() {
+        return this.interviewDateTime.toLocalDate();
+    }
+
+    @Override
+    public String toString() {
+        return this.candidate.getName() + " " + this.candidate.getStudentID() + " "
+                + this.getInterviewDate() + " " + this.getInterviewTime();
     }
 }

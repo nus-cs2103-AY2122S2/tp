@@ -8,21 +8,21 @@ import java.util.List;
 
 import static java.util.Objects.requireNonNull;
 
-public class InterviewList implements ReadOnlyInterviewList {
+public class InterviewSchedule implements ReadOnlyInterviewSchedule {
     private final UniqueInterviewList interviews;
 
-    public InterviewList() {
+    public InterviewSchedule() {
         interviews = new UniqueInterviewList();
     }
 
-    public InterviewList(UniqueInterviewList interviews) {
+    public InterviewSchedule(UniqueInterviewList interviews) {
         this.interviews = interviews;
     }
 
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
      */
-    public InterviewList(ReadOnlyInterviewList toBeCopied) {
+    public InterviewSchedule(ReadOnlyInterviewSchedule toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -36,9 +36,9 @@ public class InterviewList implements ReadOnlyInterviewList {
     }
 
     /**
-     * Resets the existing data of this {@code InterviewList} with {@code newData}.
+     * Resets the existing data of this {@code InterviewSchedule} with {@code newData}.
      */
-    public void resetData(ReadOnlyInterviewList newData) {
+    public void resetData(ReadOnlyInterviewSchedule newData) {
         requireNonNull(newData);
 
         setInterviews(newData.getInterviewList());
@@ -99,7 +99,7 @@ public class InterviewList implements ReadOnlyInterviewList {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Interview // instanceof handles nulls
-                && interviews.equals(((InterviewList) other).interviews));
+                && interviews.equals(((InterviewSchedule) other).interviews));
     }
 
     @Override

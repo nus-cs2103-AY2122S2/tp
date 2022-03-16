@@ -13,7 +13,8 @@ import seedu.address.model.interview.Interview;
 import seedu.address.model.person.Person;
 
 /**
- * Deletes a candidate identified using it's displayed index from the address book.
+ * Schedules a candidate identified using it's displayed index from the address book for an interview
+ * on a specified time slot.
  */
 public class ScheduleCommand extends Command {
 
@@ -21,15 +22,12 @@ public class ScheduleCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Schedules the candidate identified by the index number for an interview on given date and time.\n"
-            + "Parameters: INDEX (must be a positive integer) + /at + DATE (in dd-mm-yyyy format)"
+            + "Parameters: INDEX (must be a positive integer) + /at + DATE (in dd/mm/yyyy format)"
             + "TIME (in hh:mm format)\n"
-            + "Example: " + COMMAND_WORD + " 1 23-03-2022 13:30";
+            + "Example: " + COMMAND_WORD + " 1 /at 23-03-2022 13:30";
 
     public static final String MESSAGE_SCHEDULED_CANDIDATE_SUCCESS =
-            "Successfully scheduled %1$s for interview on %2$s";
-
-    public static final String MESSAGE_DUPLICATE_INTERVIEW =
-            "Duplicate interview found in system!";
+            "Successfully scheduled %1$s %2$s for interview on %3$s %4$s";
 
     public static final String MESSAGE_CONFLICTING_INTERVIEW =
             "Interview for another candidate found at the same timeslot!";
@@ -57,17 +55,14 @@ public class ScheduleCommand extends Command {
         Person candidateToInterview = lastShownList.get(targetIndex.getZeroBased());
         Interview toAdd = new Interview(candidateToInterview, interviewDateTime);
 
-        if (model.hasInterview(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_INTERVIEW);
-        }
-
         if (model.hasConflictingInterview(toAdd)) {
             throw new CommandException(MESSAGE_CONFLICTING_INTERVIEW);
         }
 
         model.addInterview(toAdd);
-        return new CommandResult(String.format(MESSAGE_SCHEDULED_CANDIDATE_SUCCESS, toAdd.getCandidate(),
-                toAdd.getInterviewDateTime()));
+        return new CommandResult(String.format(MESSAGE_SCHEDULED_CANDIDATE_SUCCESS,
+                toAdd.getCandidate().getName(), toAdd.getCandidate().getStudentID(),
+                toAdd.getInterviewDate(), toAdd.getInterviewTime()));
     }
 
     @Override

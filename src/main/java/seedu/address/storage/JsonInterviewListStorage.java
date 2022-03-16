@@ -5,8 +5,7 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.JsonUtil;
-import seedu.address.model.ReadOnlyInterviewList;
-import seedu.address.model.ReadOnlyInterviewList;
+import seedu.address.model.ReadOnlyInterviewSchedule;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -16,7 +15,7 @@ import java.util.logging.Logger;
 import static java.util.Objects.requireNonNull;
 
 /**
- * A class to access InterviewList data stored as a json file on the hard disk.
+ * A class to access InterviewSchedule data stored as a json file on the hard disk.
  */
 public class JsonInterviewListStorage implements InterviewListStorage {
 
@@ -33,7 +32,7 @@ public class JsonInterviewListStorage implements InterviewListStorage {
     }
 
     @Override
-    public Optional<ReadOnlyInterviewList> readInterviewList() throws DataConversionException {
+    public Optional<ReadOnlyInterviewSchedule> readInterviewList() throws DataConversionException {
         return readInterviewList(filePath);
     }
 
@@ -43,7 +42,7 @@ public class JsonInterviewListStorage implements InterviewListStorage {
      * @param filePath location of the data. Cannot be null.
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyInterviewList> readInterviewList(Path filePath) throws DataConversionException {
+    public Optional<ReadOnlyInterviewSchedule> readInterviewList(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
         Optional<JsonSerializableInterviewList> jsonInterviewList = JsonUtil.readJsonFile(
@@ -61,16 +60,16 @@ public class JsonInterviewListStorage implements InterviewListStorage {
     }
 
     @Override
-    public void saveInterviewList(ReadOnlyInterviewList InterviewList) throws IOException {
+    public void saveInterviewList(ReadOnlyInterviewSchedule InterviewList) throws IOException {
         saveInterviewList(InterviewList, filePath);
     }
 
     /**
-     * Similar to {@link #saveInterviewList(ReadOnlyInterviewList)}.
+     * Similar to {@link #saveInterviewList(ReadOnlyInterviewSchedule)}.
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveInterviewList(ReadOnlyInterviewList InterviewList, Path filePath) throws IOException {
+    public void saveInterviewList(ReadOnlyInterviewSchedule InterviewList, Path filePath) throws IOException {
         requireNonNull(InterviewList);
         requireNonNull(filePath);
 

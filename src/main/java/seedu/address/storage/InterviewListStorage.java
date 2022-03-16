@@ -6,7 +6,7 @@ import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyInterviewList;
+import seedu.address.model.ReadOnlyInterviewSchedule;
 
 /**
  * Represents a storage for {@link seedu.address.model.AddressBook}.
@@ -24,23 +24,23 @@ public interface InterviewListStorage {
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyInterviewList> readInterviewList() throws DataConversionException, IOException;
+    Optional<ReadOnlyInterviewSchedule> readInterviewList() throws DataConversionException, IOException;
 
     /**
      * @see #getInterviewListFilePath()
      */
-    Optional<ReadOnlyInterviewList> readInterviewList(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyInterviewSchedule> readInterviewList(Path filePath) throws DataConversionException, IOException;
 
     /**
-     * Saves the given {@link ReadOnlyInterviewList} to the storage.
+     * Saves the given {@link ReadOnlyInterviewSchedule} to the storage.
      * @param interviewList cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveInterviewList(ReadOnlyInterviewList interviewList) throws IOException;
+    void saveInterviewList(ReadOnlyInterviewSchedule interviewList) throws IOException;
 
     /**
-     * @see #saveInterviewList(ReadOnlyInterviewList)
+     * @see #saveInterviewList(ReadOnlyInterviewSchedule)
      */
-    void saveInterviewList(ReadOnlyInterviewList interviewList, Path filePath) throws IOException;
+    void saveInterviewList(ReadOnlyInterviewSchedule interviewList, Path filePath) throws IOException;
 
 }

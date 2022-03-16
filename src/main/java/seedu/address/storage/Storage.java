@@ -6,7 +6,7 @@ import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyInterviewList;
+import seedu.address.model.ReadOnlyInterviewSchedule;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 
@@ -34,9 +34,9 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage, Interview
     Path getInterviewListFilePath();
 
     @Override
-    Optional<ReadOnlyInterviewList> readInterviewList() throws DataConversionException, IOException;
+    Optional<ReadOnlyInterviewSchedule> readInterviewList() throws DataConversionException, IOException;
 
     @Override
-    void saveInterviewList(ReadOnlyInterviewList interviewList) throws IOException;
+    void saveInterviewList(ReadOnlyInterviewSchedule interviewList) throws IOException;
 
 }
