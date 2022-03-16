@@ -164,7 +164,6 @@ Format:`find HEALTH_STATUS`
 Examples of usage:
 * `find positive` returns all student that are tagged as covid-positive
 
-
 ### Saving
 Saving in the application is automatic. The data in the file will be saved accordingly whenever
 there are changes to `Tracey`.
