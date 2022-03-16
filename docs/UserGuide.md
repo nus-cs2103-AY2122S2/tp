@@ -168,7 +168,7 @@ Format: `edit <INDEX> [n/<NAME>] [s/<STATUS>] [t/<TAG>]…​`
 * Editing to an existing name is not allowed
 
 Examples:
-* `list` followed by `edit 2 n/Sailor Moo` edit 2nd show's name in Trackermon to Sailor Moon.
+* `list` followed by `edit 2 n/Sailor Moo` edit 2nd show's name in Trackermon to Sailor Moo.
 * `find ghibli` followed by `edit 1 n/Cowman s/completed t/awesome` edits 1st show in results of `find` command.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
@@ -217,9 +217,9 @@ Action | Format, Examples
 --------|--------------------------------------------------------------------------------
 **Add** | `add n/<NAME> s/<STATUS> [t/<TAG>]…​` <br> e.g., `n/ReZero s/watching t/Anime` 
 **Delete** | `delete <INDEX>`<br> e.g., `delete 3`                                          
-**List** | `list`                                                                         
+**Edit**  |`edit <INDEX> [n/<NAME>] [s/<STATUS>] [t/<TAG>]…​` <br> e.g., `n/ReZero s/watching t/Anime`
 **Exit** | `exit`                                                                         
-|     **Edit**    | `edit <INDEX> [n/<NAME>] [s/<STATUS>] [t/<TAG>]…​` <br> e.g., `n/ReZero s/watching t/Anime`                            |
+**List** |`list`                                                                                                               |
 
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
