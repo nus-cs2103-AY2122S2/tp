@@ -9,7 +9,8 @@ import java.time.format.DateTimeParseException;
 import seedu.address.logic.parser.Prefix;
 
 /**
- * Represents a Person's birthday in the address book.
+ * Represents a Due date of the transaction.
+ * Optional to have.
  * Guarantees: immutable; is valid as declared in {@link #isValid(String)}
  */
 public class DueDate extends TransactionField {
