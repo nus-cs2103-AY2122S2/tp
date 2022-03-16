@@ -6,7 +6,7 @@ import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.PersonBySkillProficiencyComparator;
 import seedu.address.model.person.PersonContainsSkillPredicate;
-import seedu.address.model.tag.Skill;
+import seedu.address.model.team.Skill;
 
 /**
  * Parses input arguments and creates a new SortCommand object

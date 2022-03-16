@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GITHUB_USERNAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TEAM;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -25,8 +25,8 @@ import seedu.address.model.person.GithubUsername;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Skill;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.team.Skill;
+import seedu.address.model.team.Team;
 
 /**
  * Edits the details of an existing person in HackNet.
@@ -43,7 +43,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_GITHUB_USERNAME + "GITHUB USERNAME] "
-            + "[" + PREFIX_TAG + "TAG]"
+            + "[" + PREFIX_TEAM + "TEAM]"
             + "[" + PREFIX_SKILL + "SKILL NAME_SKILL PROFICIENCY]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -101,10 +101,10 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         GithubUsername updatedUsername = editPersonDescriptor.getGithubUsername()
                         .orElse(personToEdit.getGithubUsername());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<Team> updatedTeams = editPersonDescriptor.getTeams().orElse(personToEdit.getTeams());
         Set<Skill> updatedSkills = editPersonDescriptor.getSkillSet().orElse(personToEdit.getSkillSet());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedUsername, updatedTags, updatedSkills);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedUsername, updatedTeams, updatedSkills);
     }
 
     @Override
@@ -134,21 +134,21 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private GithubUsername username;
-        private Set<Tag> tags;
+        private Set<Team> teams;
         private Set<Skill> skillSet;
 
         public EditPersonDescriptor() {}
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * A defensive copy of {@code teams} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setGithubUsername(toCopy.username);
-            setTags(toCopy.tags);
+            setTeams(toCopy.teams);
             setSkillSet(toCopy.skillSet);
         }
 
@@ -156,7 +156,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, username, tags, skillSet);
+            return CollectionUtil.isAnyNonNull(name, phone, email, username, teams, skillSet);
         }
 
         public void setName(Name name) {
@@ -192,11 +192,11 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
+         * Sets {@code teams} to this object's {@code teams}.
+         * A defensive copy of {@code teams} is used internally.
          */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setTeams(Set<Team> teams) {
+            this.teams = (teams != null) ? new HashSet<>(teams) : null;
         }
 
         /**
@@ -208,12 +208,12 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable team set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns {@code Optional#empty()} if {@code teams} is null.
          */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public Optional<Set<Team>> getTeams() {
+            return (teams != null) ? Optional.of(Collections.unmodifiableSet(teams)) : Optional.empty();
         }
 
         /**
@@ -244,7 +244,7 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getGithubUsername().equals(e.getGithubUsername())
-                    && getTags().equals(e.getTags())
+                    && getTeams().equals(e.getTeams())
                     && getSkillSet().equals(e.getSkillSet());
         }
 

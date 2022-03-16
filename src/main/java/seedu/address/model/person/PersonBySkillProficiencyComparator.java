@@ -2,7 +2,7 @@ package seedu.address.model.person;
 
 import java.util.Comparator;
 
-import seedu.address.model.tag.Skill;
+import seedu.address.model.team.Skill;
 
 /**
  * Comparator to compare {@code Person}'s by the proficiency level of a given {@code Skill}.

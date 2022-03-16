@@ -20,7 +20,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.PersonBySkillProficiencyComparator;
 import seedu.address.model.person.PersonContainsSkillPredicate;
-import seedu.address.model.tag.Skill;
+import seedu.address.model.team.Skill;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code SortCommand}.

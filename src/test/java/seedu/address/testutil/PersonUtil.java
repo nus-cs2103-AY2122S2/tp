@@ -5,15 +5,15 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GITHUB_USERNAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TEAM;
 
 import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Skill;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.team.Skill;
+import seedu.address.model.team.Team;
 
 /**
  * A utility class for Person.
@@ -36,8 +36,8 @@ public class PersonUtil {
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_GITHUB_USERNAME + person.getGithubUsername().value + " ");
-        person.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.tagName + " ")
+        person.getTeams().stream().forEach(
+            s -> sb.append(PREFIX_TEAM + s.teamName + " ")
         );
         person.getSkillSet().stream().forEach(
             s -> sb.append(PREFIX_SKILL + s.skillName + "_" + s.skillProficiency + " ")
@@ -55,12 +55,12 @@ public class PersonUtil {
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getGithubUsername().ifPresent(address ->
                 sb.append(PREFIX_GITHUB_USERNAME).append(address.value).append(" "));
-        if (descriptor.getTags().isPresent()) {
-            Set<Tag> tags = descriptor.getTags().get();
-            if (tags.isEmpty()) {
-                sb.append(PREFIX_TAG).append(" ");
+        if (descriptor.getTeams().isPresent()) {
+            Set<Team> teams = descriptor.getTeams().get();
+            if (teams.isEmpty()) {
+                sb.append(PREFIX_TEAM).append(" ");
             } else {
-                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
+                teams.forEach(s -> sb.append(PREFIX_TEAM).append(s.teamName).append(" "));
             }
         }
         if (descriptor.getSkillSet().isPresent()) {

@@ -5,7 +5,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import seedu.address.logic.commands.FilterSkillCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.PersonContainsSkillPredicate;
-import seedu.address.model.tag.Skill;
+import seedu.address.model.team.Skill;
 
 /**
  * Parses input arguments and creates a new FilterSkillCommand object

@@ -2,7 +2,7 @@ package seedu.address.model.person;
 
 import java.util.function.Predicate;
 
-import seedu.address.model.tag.Skill;
+import seedu.address.model.team.Skill;
 
 /**
  * Tests that a {@code Person}'s {@code Skill} matches any of the keywords given.
