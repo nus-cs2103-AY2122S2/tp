@@ -12,18 +12,21 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 
+/**
+ * Parses user input starting with "assign".
+ */
 public class AssignCommandParser implements Parser<AssignCommand> {
 
     @Override
     public AssignCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        Index index = ParserUtil.parseAssignIndex(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_GROUP_NAME);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_GROUP_NAME)) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_GROUP_NAME)
+                || argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignCommand.MESSAGE_USAGE));
         }
-
+        Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
         GroupName groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUP_NAME).orElse(""));
         Group group = new Group(groupName);
 

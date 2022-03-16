@@ -32,13 +32,15 @@ public class JsonAdaptedGroup {
     public JsonAdaptedGroup(@JsonProperty("groupName") String groupName,
                             @JsonProperty("persons") List<JsonAdaptedPerson> persons) {
         this.groupName = groupName;
-        this.persons.addAll(persons);
+        if (!persons.isEmpty()) {
+            this.persons.addAll(persons);
+        }
     }
 
     /**
      * Converts a given {@code Group} into this class for Jackson use.
      */
-    public JsonAdaptedGroup(seedu.address.model.group.Group source) {
+    public JsonAdaptedGroup(Group source) {
         groupName = String.valueOf(source.getGroupName());
         persons.addAll(source.getPersons().stream()
                 .map(JsonAdaptedPerson::new)

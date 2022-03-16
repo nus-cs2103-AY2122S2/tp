@@ -130,7 +130,7 @@ public interface Model {
     void updateFilteredGroupList(Predicate<Group> predicate);
 
     /**
-     * Assigns a person to a group
+     * Assigns a person to a group.
      */
     void assignPerson(Person personToAssign, Group group);
 }

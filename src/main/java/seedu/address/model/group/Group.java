@@ -38,19 +38,19 @@ public class Group {
     }
 
     /**
-     * Assigns a person to the group
+     * Assigns a person to the group.
      *
-     * @param person The person to be assigned
+     * @param person The person to be assigned.
      */
     public void assignPerson(Person person) {
         persons.add(person);
     }
 
     /**
-     * Checks if a person is already existing in the group
+     * Checks if a person is already existing in the group.
      *
-     * @param person The person to be checked
-     * @return True if the person already exists in the group
+     * @param person The person to be checked.
+     * @return True if the person already exists in the group.
      */
     public boolean personExists(Person person) {
         return persons.contains(person);
@@ -76,7 +76,7 @@ public class Group {
     }
 
     /**
-     * Adds a task into this specific group
+     * Adds a task into this specific group.
      *
      * @param task Tasks to be added.
      */
@@ -85,7 +85,7 @@ public class Group {
     }
 
     /**
-     * Retrieves the UniqueTaskList from this specific group
+     * Retrieves the UniqueTaskList from this specific group.
      *
      */
     public UniqueTaskList getTaskList() {

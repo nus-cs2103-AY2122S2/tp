@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 
 import java.util.List;
@@ -35,10 +36,10 @@ public class AssignCommand extends Command {
     private final Group group;
 
     /**
-     * Creates an AssignCommand to add the specified {@code Person}
+     * Creates an AssignCommand to add the specified {@code Person}.
      */
     public AssignCommand(Index index, Group group) {
-        requireNonNull(group);
+        requireAllNonNull(index, group);
         this.index = index;
         this.group = group;
     }

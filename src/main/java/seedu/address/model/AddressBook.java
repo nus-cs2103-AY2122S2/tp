@@ -134,6 +134,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.setPerson(target, editedPerson);
     }
 
+    /**
+     * Replaces the given group {@code target} in the list with {@code editedGroup}.
+     * {@code target} must exist in the address book.
+     * The group identity of {@code editedGroup} must not be the same as another existing group in the address book.
+     */
     public void setGroup(Group target, Group editedGroup) {
         groups.setGroup(target, editedGroup);
     }
@@ -186,10 +191,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Assigns a {@code Person} to a {@code Group} in this {@code AddressBook}
+     * Assigns a {@code Person} to a {@code Group} in this {@code AddressBook}.
      *
-     * @param personToAssign The {@code Person} being assigned
-     * @param group The {@code Group} that the {@code Person} is being assigned
+     * @param personToAssign The {@code Person} being assigned.
+     * @param group The {@code Group} that the {@code Person} is being assigned.
      */
     public void assignPerson(Person personToAssign, Group group) {
         group.assignPerson(personToAssign);
