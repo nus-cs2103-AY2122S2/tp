@@ -1,7 +1,7 @@
 package seedu.address.model.buyer;
 
-import java.util.Set;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Appointment;
@@ -11,6 +11,7 @@ import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.Remark;
+import seedu.address.model.property.PropertyToBuy;
 import seedu.address.model.tag.Tag;
 
 /**
