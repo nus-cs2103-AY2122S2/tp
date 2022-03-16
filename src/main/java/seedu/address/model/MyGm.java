@@ -10,14 +10,14 @@ import seedu.address.model.team.Team;
  */
 public class MyGm {
     private final UniquePlayerList players;
-    private final List<Team> teams;
+    private final UniqueTeamList teams;
 
     /**
      * Creates a new empty MyGm class.
      */
     public MyGm() {
         this.players = new UniquePlayerList();
-        this.teams = new ArrayList<Team>();
+        this.teams = new UniqueTeamList();
     }
 
     // add more methods here to facilitate update of players and teams

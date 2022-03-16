@@ -53,4 +53,8 @@ public class Team {
             lineup.addPlayer(person);
         }
     }
+
+    public TeamName getTeamName() {
+        return this.teamName;
+    }
 }
