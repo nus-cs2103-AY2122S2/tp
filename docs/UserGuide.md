@@ -218,7 +218,8 @@ Action | Format, Examples
 **Add** | `add n/<NAME> s/<STATUS> [t/<TAG>]…​` <br> e.g., `n/ReZero s/watching t/Anime` 
 **Delete** | `delete <INDEX>`<br> e.g., `delete 3`                                          
 **Edit**  |`edit <INDEX> [n/<NAME>] [s/<STATUS>] [t/<TAG>]…​` <br> e.g., `n/ReZero s/watching t/Anime`
-**Exit** | `exit`                                                                         
+**Exit** | `exit`      
+**Find** | `find <KEYWORD>`<br> e.g., `find hero`
 **List** |`list`                                                                                                               |
 
 

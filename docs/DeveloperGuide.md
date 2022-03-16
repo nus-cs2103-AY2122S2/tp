@@ -245,14 +245,14 @@ This section describes some noteworthy details on how certain features are imple
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​  | I want to …​                 | So that I can…​                                           |
-|----------|----------|------------------------------|-----------------------------------------------------------|
-| `* * *`  | user     | add new shows                | add shows into the list                                   |
-| `* * *`  | user     | delete shows from the list   | delete shows from the list                                |
-| `* * *`  | user     | change the status of the show | mark shows as watched, watching, etc                      |
-| `* * *`  | user     | list out all of my shows     | see the details of all  my show in the list               |
-| `* *`    | new user | see usage instructions       | refer to instructions when user forget how to use the App |
-| `* * *`  | user     | edit show from the list      | edit the name or status or tag of my show in the list     |
+| Priority | As a …​   | I want to …​                | So that I can…​                                            |
+|----------|----------|----------------------------|-----------------------------------------------------------|
+| `* * *`  | user     | add shows                  | add new shows into the list                               |
+| `* * *`  | user     | delete shows  		   | delete wrong entries in the list                          |
+| `* * *`  | user     | find a show                | find whether a specific show is in the list               |
+| `* * *`  | user     | list out all of my shows   | see the details of all  my show in the list               |
+| `* *`    | new user | see usage instructions     | refer to instructions when user forget how to use the App |
+| `* * *`  | user     | edit show from the list    | edit the name or status or tag of my show in the list     |
 
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
@@ -421,6 +421,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
+
 **Use case: UC07 - Edit a show**
 
 **Preconditions: Trackermon application is started.**
@@ -452,6 +453,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
+**Use case: UC08 - Find a show**
+
+**Preconditions: Trackermon application is started.**
+
+**Guarantees: Show will be found in Trackermon only if the user input matches the command format.**
+
+**MSS**
+
+1.  User requests to find shows.
+2.  Trackermon shows a list of shows that matches the keyword entered by user.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User uses the command with the wrong syntax.
+
+    * 1a1. Trackermon shows an error message to user, indicating the format for finding shows is incorrect, and attaches the correct syntax format.
+
+      Use case resumes at step 1.
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
+---
 
 ### Non-Functional Requirements
 
