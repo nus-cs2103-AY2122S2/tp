@@ -33,7 +33,6 @@ ManageEZPZ is a **desktop app for that allows managers or supervisors to manage 
    * **`addTodo desc/read book`** : Adds a todo task with a description of `read book` to the Task list.
 
    * **`exit`** : Exits the app.
-   
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -57,6 +56,8 @@ ManageEZPZ is a **desktop app for that allows managers or supervisors to manage 
 * Task related Commands must be strictly lower case.
 
 * Task related parameters must be in sequence as shown in the instruction.
+
+* Mark and unmark is interger based (cannot over 2^32)
 
 </div>
 
@@ -138,6 +139,11 @@ Examples:
 ### Locating Task by description or Date: `find`
 
 Find tasks based on the task description or date in the format of (DD-MM-YYYY).
+
+<div markdown="span" class="alert alert-primary">:bulb: **Take Note:**
+Find works based on keywords, as such find would return all matches of the  
+and the DATE must be in this format: DD-MM-YYYY HHmm (in 24 hr format)
+</div>
 
 Format: 
 * `find task/ desc/TASK_DESCRIPTION`
