@@ -4,7 +4,7 @@ import static seedu.address.commons.core.DataTypeFlags.FLAG_APPLICANT;
 import static seedu.address.commons.core.DataTypeFlags.FLAG_INTERVIEW;
 import static seedu.address.commons.core.DataTypeFlags.FLAG_POSITION;
 
-import seedu.address.logic.commands.delete.DeleteCommand;
+import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.applicants.DeleteApplicantCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
