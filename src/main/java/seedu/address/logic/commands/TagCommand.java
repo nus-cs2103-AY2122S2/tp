@@ -65,19 +65,11 @@ public class TagCommand extends Command {
         this.ccas = cca;
     }
 
-    private static String convertToString(List<Tag> lst) {
-        if (lst.size() == 0) {
-            return "";
-        } else {
-            return Arrays.toString(lst.toArray());
-        }
-    }
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getOneBased() >= lastShownList.size()) {
+        if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
