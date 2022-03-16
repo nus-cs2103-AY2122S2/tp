@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_EVENT_FRIENDS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FRIEND_NAME;
@@ -11,14 +12,13 @@ import seedu.address.model.Model;
 import seedu.address.model.event.Event;
 
 /**
- * Adds a person to the event book.
+ * Adds an event to Amigos.
  */
 public class AddEventCommand extends Command {
 
     public static final String COMMAND_WORD = "addevent";
-    public static final String MESSAGE_EVENT_FRIENDS_INVALID = "An event contains friend names that do not exist!";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to the event book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to Amigos. "
             + "Parameters: "
             + PREFIX_NAME + "EVENT_NAME "
             + PREFIX_DATETIME + "DATE_TIME "
@@ -32,7 +32,7 @@ public class AddEventCommand extends Command {
             + PREFIX_FRIEND_NAME + "Amy Lim";
 
     public static final String MESSAGE_SUCCESS = "New event added: %1$s";
-    public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the event book!";
+    public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists!";
 
     private final Event toAdd;
 
@@ -52,7 +52,7 @@ public class AddEventCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
         }
         if (!model.areEventFriendsValid(toAdd)) {
-            throw new CommandException(MESSAGE_EVENT_FRIENDS_INVALID);
+            throw new CommandException(MESSAGE_INVALID_EVENT_FRIENDS);
         }
 
         model.addEvent(toAdd);

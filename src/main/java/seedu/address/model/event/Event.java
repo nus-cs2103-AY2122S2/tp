@@ -76,6 +76,7 @@ public class Event {
         // There ought to be a better way of doing this - search AddressBook by name perhaps?
         // worth thinking about - how to enforce search specifically by name, rather than relying
         // on the ::hasPerson(Person) method. todo implement search by name (specifically name objects match)
+        // todo change this to take in a ReadOnlyAddressBook
 
         for (Name name : getFriendNames()) {
             Person beingLookedFor = new Person(name);

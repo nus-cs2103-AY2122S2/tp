@@ -8,7 +8,6 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.EventBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -40,7 +39,7 @@ public class ShowEventsCommandTests {
      */
     @Test
     public void execute_noevents_showsEmptyList() {
-        Model noEventModel = new ModelManager(getTypicalAddressBook(), new EventBook(), new UserPrefs());
+        Model noEventModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         assertCommandSuccess(new ShowEventsCommand(), noEventModel, ShowEventsCommand.MESSAGE_SUCCESS, noEventModel);
 
         // Model has persons but no events, thus event list should be empty.

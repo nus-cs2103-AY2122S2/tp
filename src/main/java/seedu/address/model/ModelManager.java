@@ -26,7 +26,7 @@ public class ModelManager implements Model {
     private final ObservableList<Event> eventList;
 
     /**
-     * Initializes a ModelManager with the given addressBook, eventBook and userPrefs.
+     * Initializes a ModelManager with the given addressBook and userPrefs.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
@@ -43,27 +43,6 @@ public class ModelManager implements Model {
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
     }
-
-    /**
-     * Returns true if the eventBook data is compatible with the addressBook data.
-     *
-     * @param readOnlyAddressBook AddressBook to use when checking.
-     * @param readOnlyEventBook EventBook to use when checking.
-     * @return True if eventBook data is compatible with addressBook data.
-     */
-    /*
-    public static boolean isEventDataInSync(ReadOnlyAddressBook readOnlyAddressBook,
-                                            ReadOnlyEventBook readOnlyEventBook) {
-        ObservableList<Event> eventList = readOnlyEventBook.getEventList();
-        AddressBook addressBook = new AddressBook(readOnlyAddressBook);
-        for (Event event : eventList) {
-            if (!event.areFriendNamesValid(addressBook)) {
-                return false;
-            }
-        }
-        return true;
-    }
-    */
 
     //=========== UserPrefs ==================================================================================
 
@@ -156,12 +135,11 @@ public class ModelManager implements Model {
         addressBook.removeEvent(target);
     }
 
-    /*
+
     @Override
     public boolean areEventFriendsValid(Event toAdd) {
         return toAdd.areFriendNamesValid(addressBook);
     }
-     */
 
     @Override
     public void setEvent(Event target, Event editedEvent) {

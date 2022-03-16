@@ -82,19 +82,19 @@ public interface Model {
     //=========== Event Operations =============================================================
 
     /**
-     * Returns true if an event with the same identity as {@code event} exists in the event book.
+     * Returns true if an event with the same identity as {@code event} exists in the address book.
      */
     boolean hasEvent(Event event);
 
     /**
      * Adds the given event.
-     * {@code event} must not already exist in the event book.
+     * {@code event} must not already exist in the address book.
      */
     void addEvent(Event event);
 
     /**
      * Deletes the given event.
-     * The event must exist in the event book.
+     * The event must exist in the address book.
      */
     void deleteEvent(Event target);
 

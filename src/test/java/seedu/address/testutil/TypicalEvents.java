@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.EventBook;
+import seedu.address.model.AddressBook;
 import seedu.address.model.event.Event;
 
 public class TypicalEvents {
@@ -29,12 +29,12 @@ public class TypicalEvents {
 
     private TypicalEvents() {}
 
-    public static EventBook getTypicalEventBook() {
-        EventBook eb = new EventBook();
+    public static AddressBook getTypicalAddressBookWithEvents() {
+        AddressBook ab = new AddressBook();
         for (Event event: getTypicalEvents()) {
-            eb.addEvent(event);
+            ab.addEvent(event);
         }
-        return eb;
+        return ab;
     }
 
     public static List<Event> getTypicalEvents() {
