@@ -7,6 +7,8 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.UniqueContactList;
+import seedu.address.model.medical.Medical;
+import seedu.address.model.medical.UniqueMedicalList;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.UniquePersonList;
 import seedu.address.model.prescription.Prescription;
@@ -21,6 +23,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     private final UniquePersonList persons;
     private final UniquePrescriptionList prescriptions;
     private final UniqueContactList contacts;
+    private final UniqueMedicalList medicals;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -33,6 +36,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons = new UniquePersonList();
         prescriptions = new UniquePrescriptionList();
         contacts = new UniqueContactList();
+        medicals = new UniqueMedicalList();
     }
 
     public AddressBook() {}
@@ -82,6 +86,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void addPerson(Patient p) {
         persons.add(p);
     }
+
     public void addPrescription(Prescription p) {
         prescriptions.add(p);
     }
@@ -173,6 +178,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asUnmodifiableObservableList();
     }
 
+    @Override
+    public ObservableList<Medical> getMedicalList() {
+        return medicals.asUnmodifiableObservableList();
+    }
 
     @Override
     public ObservableList<Contact> getContactList() {
@@ -195,5 +204,21 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public int hashCode() {
         return persons.hashCode();
+    }
+
+
+    /**
+     * Adds medical information to the address book.
+     */
+    public void addMedical(Medical m) {
+        medicals.add(m);
+    }
+
+    /**
+     * Checks if medical information (for patient with same NRIC) already exists.
+     */
+    public boolean hasMedical(Medical m) {
+        requireNonNull(m);
+        return medicals.contains(m);
     }
 }
