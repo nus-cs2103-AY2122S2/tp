@@ -1,21 +1,22 @@
 package seedu.address.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.show.Name;
-import seedu.address.model.show.Status;
-import seedu.address.model.tag.Tag;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SHOW;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SHOW;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.show.Name;
+import seedu.address.model.show.Status;
+import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
@@ -91,7 +92,7 @@ public class ParserUtilTest {
     @Test
     public void parseStatus_validValueWithWhitespace_returnsTrimmedStatus() throws Exception {
         String statusWithWhitespace = WHITESPACE + VALID_STATUS + WHITESPACE;
-        Status expectedStatus =  Status.getStatus(VALID_STATUS);
+        Status expectedStatus = Status.getStatus(VALID_STATUS);
         assertEquals(expectedStatus, ParserUtil.parseStatus(statusWithWhitespace));
     }
 

@@ -4,12 +4,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Set;
-
-import seedu.address.model.show.Show;
-import seedu.address.model.tag.Tag;
-
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.model.show.Show;
 
 /**
  * A utility class for show.

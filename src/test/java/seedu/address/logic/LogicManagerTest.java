@@ -1,8 +1,20 @@
 package seedu.address.logic;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_SHOW_DISPLAYED_INDEX;
+import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_ALICE_IN_WONDERLAND;
+import static seedu.address.logic.commands.CommandTestUtil.STATUS_DESC_COMPLETED;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalShows.ALICE_IN_WONDERLAND;
+
+import java.io.IOException;
+import java.nio.file.Path;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
@@ -17,17 +29,6 @@ import seedu.address.storage.JsonShowListStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
 import seedu.address.testutil.ShowBuilder;
-
-import java.io.IOException;
-import java.nio.file.Path;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_SHOW_DISPLAYED_INDEX;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_ALICE_IN_WONDERLAND;
-import static seedu.address.logic.commands.CommandTestUtil.STATUS_DESC_COMPLETED;
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalShows.ALICE_IN_WONDERLAND;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
