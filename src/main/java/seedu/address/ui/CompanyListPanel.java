@@ -11,7 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.entry.Company;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of companies.
  */
 public class CompanyListPanel extends UiPart<Region> {
     private static final String FXML = "EntryListPanel.fxml";
@@ -21,16 +21,16 @@ public class CompanyListPanel extends UiPart<Region> {
     private ListView<Company> entryListView;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code CompanyListPanel} with the given {@code ObservableList}.
      */
-    public CompanyListPanel(ObservableList<Company> personList) {
+    public CompanyListPanel(ObservableList<Company> companyList) {
         super(FXML);
-        entryListView.setItems(personList);
+        entryListView.setItems(companyList);
         entryListView.setCellFactory(listView -> new CompanyListViewCell());
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Company} using a {@code CompanyCard}.
      */
     class CompanyListViewCell extends ListCell<Company> {
         @Override

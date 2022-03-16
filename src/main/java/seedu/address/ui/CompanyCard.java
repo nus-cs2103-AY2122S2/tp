@@ -42,7 +42,7 @@ public class CompanyCard extends UiPart<Region> {
     private FlowPane tags;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code CompanyCard} with the given {@code Company} and index to display.
      */
     public CompanyCard(Company company, int displayedIndex) {
         super(FXML);
