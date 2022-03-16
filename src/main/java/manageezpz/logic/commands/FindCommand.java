@@ -21,8 +21,8 @@ public class FindCommand extends Command {
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: task/ desc/ KEYWORD [MORE_KEYWORDS]..."
             + " or date/ YYYY-mm-dd\n"
-            + "Example: " + COMMAND_WORD + " task/ desc/ Play Genshin Impact"
-            + "or " + COMMAND_WORD + " date/ 2022-01-01";
+            + "Example: " + COMMAND_WORD + " \"task/ desc/ Play Genshin Impact\""
+            + " or " + COMMAND_WORD + " \"date/ 2022-01-01\"";
 
     private Predicate<Task> predicate;
 
