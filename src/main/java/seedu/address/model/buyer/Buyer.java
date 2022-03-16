@@ -40,4 +40,37 @@ public class Buyer extends Client {
     public List<PropertyToBuy> getPropertiesToBuy() {
         return propertiesToBuy;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Buyer)) {
+            return false;
+        }
+
+        Buyer otherBuyer = (Buyer) other;
+        return otherBuyer.getName().equals(getName())
+                && otherBuyer.getDescription().equals(getDescription())
+                && otherBuyer.getPhone().equals(getPhone())
+                && otherBuyer.getEmail().equals(getEmail())
+                && otherBuyer.getAddress().equals(getAddress())
+                && otherBuyer.getRemark().equals(getRemark())
+                && otherBuyer.getTags().equals(getTags())
+                && otherBuyer.hasSameProperties(this);
+    }
+
+    /**
+     * Checks if 2 Buyers have the matching properties.
+     *
+     * @param other The other Buyer.
+     * @return Whether their properties match.
+     */
+    public boolean hasSameProperties(Buyer other) {
+        return propertiesToBuy.containsAll(other.propertiesToBuy)
+                && other.propertiesToBuy.containsAll(propertiesToBuy);
+
+    }
 }
