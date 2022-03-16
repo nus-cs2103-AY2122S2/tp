@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LAB;
 
+import java.util.Objects;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.lab.Lab;
@@ -44,5 +46,15 @@ public class RemoveLabCommand extends Command {
 
         model.removeLab(toRemove);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toRemove));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        return (other instanceof RemoveLabCommand) && (toRemove.equals(((RemoveLabCommand) other).toRemove));
     }
 }
