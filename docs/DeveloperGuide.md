@@ -195,7 +195,7 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.trackermon.commons` package.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
