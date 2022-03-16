@@ -27,11 +27,12 @@ public class AddTransactionCommand extends Command {
             + Amount.PREFIX + "AMOUNT "
             + TransactionDate.PREFIX + "TRANSACTION DATE "
             + DueDate.PREFIX + "DUE DATE <OPTIONAL> "
-            + Note.PREFIX + "NOTE <OPTIONAL>"
+            + Note.PREFIX + "NOTE <OPTIONAL>\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + "a/123.456 "
             + "td/2022-11-11 "
-            + "dd/2022-11-11";
+            + "dd/2022-11-11 "
+            + "n/paid SGD 123.456 for haircut";
 
     public static final String MESSAGE_SUCCESS = "Added Transaction to Person: %1$s";
 

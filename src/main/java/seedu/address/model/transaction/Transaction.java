@@ -89,10 +89,10 @@ public class Transaction implements Serializable {
     /**
      * Gets the note of the transaction
      *
-     * @return note of the transaction
+     * @return Optional note of the transaction
      */
-    public Note getNote() {
-        return (Note) this.fields.get(Note.PREFIX);
+    public Optional<Note> getNote() {
+        return Optional.ofNullable((Note) this.fields.get(Note.PREFIX));
     }
 
     /**
@@ -132,6 +132,11 @@ public class Transaction implements Serializable {
         if (getDueDate().isPresent()) {
             builder.append("; Due date: ")
                     .append(getDueDate().get());
+        }
+
+        if (getNote().isPresent()) {
+            builder.append("; Note: ")
+                    .append(getNote().get());
         }
 
         return builder.toString();
