@@ -1,38 +1,35 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DROP_OFF;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PICK_UP;
 
-import com.fasterxml.jackson.core.JsonParser;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Scanner;
+
+import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.fasterxml.jackson.databind.ObjectWriter;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.FileUtil;
-import seedu.address.commons.util.JsonUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.pet.Name;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.pet.Phone;
 import seedu.address.storage.JsonAdaptedAttendance;
-import seedu.address.ui.PetCard;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Paths;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-public class AttendanceCommand extends Command{
+public class AttendanceCommand extends Command {
 
     public static final String COMMAND_WORD = "attendance";
 
@@ -49,8 +46,6 @@ public class AttendanceCommand extends Command{
             + PREFIX_DROP_OFF + "18:00";
 
     public static final String MESSAGE_ATTENDANCE_SUCCESS = "Attendance updated: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PET = "This pet already exists in the address book.";
     public static final String MESSAGE_PET_NOT_ADDED = "Seems like this pet is not in the address book yet! "
                                                         + "Make sure to add the pet in first!";
 
@@ -86,37 +81,64 @@ public class AttendanceCommand extends Command{
     }
 
     /**
-     * Creates and returns a {@code Pet} with the attendance details of {@code petToEdit}
-     * edited with {@code editPetDescriptor}.
+     * Creates an entry in individual pet's JSON file and txt file.
      */
-    private static void createAttendanceForPet(Pet petToEdit, AttendanceCommand.PetAttendanceDescriptor petAttendanceDescriptor) throws CommandException {
+    private static void createAttendanceForPet(Pet petToEdit,
+                           AttendanceCommand.PetAttendanceDescriptor petAttendanceDescriptor) throws CommandException {
         assert petToEdit != null;
 
         Name nameOfPet = petToEdit.getName();
         Phone phoneNumberOfOwner = petToEdit.getPhone();
-        String filePath = "data/pets/"
+        String jsonFilePath = "data/pets/"
                 + nameOfPet.toString().replaceAll("\\s", "")
                 + phoneNumberOfOwner.toString()
                 + ".json";
+        String txtFilePath = "data/pets/"
+                + nameOfPet.toString().replaceAll("\\s", "")
+                + phoneNumberOfOwner.toString()
+                + ".txt";
         String attendanceDate = petAttendanceDescriptor.getAttendanceDateString();
         String pickUpTime = petAttendanceDescriptor.getPickUpTimeString();
         String dropOffTime = petAttendanceDescriptor.getDropOffTimeString();
 
         try {
-            BufferedWriter attendanceWriter = new BufferedWriter(new FileWriter(filePath, true));
-//            String toWrite = attendanceDate + " " + pickUpTime + " " + dropOffTime;
-//            attendanceWriter.write(toWrite);
-//            attendanceWriter.close();
-//
-//            File
-            Map<String, Object> map = new HashMap<>();
-            map.put("attendance date", attendanceDate);
-            map.put("pick up time", pickUpTime);
-            map.put("drop off time", dropOffTime);
+            File file = new File(txtFilePath);
+            FileWriter fileWriter = new FileWriter(file, true);
+            fileWriter.write(attendanceDate + " " + pickUpTime + " " + dropOffTime + "\n");
+            fileWriter.close();
+
+            ArrayList<String> sortAttendance = new ArrayList<>();
+            Scanner fileScanner = new Scanner(file);
+            while (fileScanner.hasNextLine()) {
+                String lineAttendance = fileScanner.nextLine();
+                sortAttendance.add(lineAttendance);
+            }
+            fileScanner.close();
+
+            Collections.sort(sortAttendance);
+            FileWriter sortedFileWriter = new FileWriter(file, false);
+            for (String line : sortAttendance) {
+                sortedFileWriter.write(line + "\n");
+            }
+            sortedFileWriter.close();
+
+            ArrayList<JsonAdaptedAttendance> attendances = new ArrayList<>();
+            Scanner sortedFileScanner = new Scanner(file);
+            while (sortedFileScanner.hasNextLine()) {
+                String lineAttendance = sortedFileScanner.nextLine();
+                String[] separator = lineAttendance.split(" ", 4);
+                String date = separator[0];
+                String puTime = separator[1];
+                String doTime = separator[2];
+                JsonAdaptedAttendance currAttendance = new JsonAdaptedAttendance(date, puTime, doTime);
+                attendances.add(currAttendance);
+            }
+            sortedFileScanner.close();
 
             ObjectMapper mapper = new ObjectMapper();
-
-            mapper.writeValue(attendanceWriter, map);
+            ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
+            File jsonFile = new File(jsonFilePath);
+            writer.writeValue(jsonFile, attendances);
         } catch (IOException e) {
             throw new CommandException(MESSAGE_PET_NOT_ADDED);
         }
@@ -124,8 +146,7 @@ public class AttendanceCommand extends Command{
     }
 
     /**
-     * Stores the details to edit the pet with. Each non-empty field value will replace the
-     * corresponding field value of the pet.
+     * Stores the attendance details to edit the pet with.
      */
     public static class PetAttendanceDescriptor {
         private LocalDate attendanceDate;
@@ -134,6 +155,10 @@ public class AttendanceCommand extends Command{
 
         public PetAttendanceDescriptor() {}
 
+        /**
+         * Copy Constructor
+         * @param petAttendanceDescriptor takes in another PetAttendanceDescriptor class
+         */
         public PetAttendanceDescriptor(PetAttendanceDescriptor petAttendanceDescriptor) {
             setAttendanceDate(petAttendanceDescriptor.attendanceDate);
             setPickUpTime(petAttendanceDescriptor.pickUpTime);

@@ -88,6 +88,20 @@ Format: `time INDEX`
 Examples:
 * `time 12` returns pet 12’s pickup and dropoff times.
 
+### Adding pets’ attendance, pick-up and drop-off time: `attendance`
+
+Add pets’attendance date, pick-up and drop-off time
+
+Format: `attendance INDEX att/dd-MM-yyyy pu/HH:mm do/HH:mm`
+
+* Adds attendance date, pick-up and drop-off time of the pet at the specified `INDEX`.
+* The index refers to the index number shown in the displayed getId list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* Date and time must follow the specified format
+
+Examples:
+* `attendance 1 att/16-03-2022 pu/08:00 do/19:00` indicates that pet 1 is coming for daycare on `16-03-2022`, requires to be picked up at `08:00` and dropped off at `19:00`
+
 ### Deleting a pet: `delete`
 
 Deletes the specified pet from the address book.

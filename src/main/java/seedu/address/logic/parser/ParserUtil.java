@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -144,8 +143,9 @@ public class ParserUtil {
      * Parses a {@code String attendanceDate} into an {@code LocalDateTime}.
      * Leading and trailing whitespaces will be trimmed.
      *
+     * @return Parsed local date.
      * @throws ParseException if the given {@code Diet} is invalid.
-     * @return
+
      */
     public static LocalDate parseAttendanceDate(String attendanceDate) throws ParseException {
         requireNonNull(attendanceDate);
@@ -162,6 +162,7 @@ public class ParserUtil {
      * Parses a {@code String pickUpTime} into an {@code LocalDateTime}.
      * Leading and trailing whitespaces will be trimmed.
      *
+     * @return Parsed local time.
      * @throws ParseException if the given {@code Diet} is invalid.
      */
     public static LocalTime parsePickUpTime(String pickUpTime) throws ParseException {
@@ -169,7 +170,7 @@ public class ParserUtil {
         String trimmedPickUpTime = pickUpTime.trim();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
         try {
-            return  LocalTime.parse(trimmedPickUpTime, formatter);
+            return LocalTime.parse(trimmedPickUpTime, formatter);
         } catch (DateTimeParseException e) {
             throw new ParseException("Pick up time should be in HH:mm format!");
         }
@@ -179,6 +180,7 @@ public class ParserUtil {
      * Parses a {@code String dropOffTime} into an {@code LocalDateTime}.
      * Leading and trailing whitespaces will be trimmed.
      *
+     * @return Parsed local time.
      * @throws ParseException if the given {@code Diet} is invalid.
      */
     public static LocalTime parseDropOffTime(String dropOffTime) throws ParseException {
@@ -186,7 +188,7 @@ public class ParserUtil {
         String trimmedDropOffTime = dropOffTime.trim();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
         try {
-            return  LocalTime.parse(trimmedDropOffTime, formatter);
+            return LocalTime.parse(trimmedDropOffTime, formatter);
         } catch (DateTimeParseException e) {
             throw new ParseException("Drop off time should be in HH:mm format!");
         }
