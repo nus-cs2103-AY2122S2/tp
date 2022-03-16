@@ -7,8 +7,8 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.tag.Skill;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.team.Skill;
+import seedu.address.model.team.Team;
 
 /**
  * Represents a Person in the address book.
@@ -23,19 +23,19 @@ public class Person {
     private final GithubUsername githubUsername;
 
     // Data fields
-    private final Set<Tag> tags = new HashSet<>();
+    private final Set<Team> teams = new HashSet<>();
     private final Set<Skill> skillSet = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, GithubUsername username, Set<Tag> tags, Set<Skill> skillSet) {
-        requireAllNonNull(name, phone, email, username, tags, skillSet);
+    public Person(Name name, Phone phone, Email email, GithubUsername username, Set<Team> teams, Set<Skill> skillSet) {
+        requireAllNonNull(name, phone, email, username, teams, skillSet);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.githubUsername = username;
-        this.tags.addAll(tags);
+        this.teams.addAll(teams);
         this.skillSet.addAll(skillSet);
         //this.skillSet.add(new Skill("Python",30));
     }
@@ -57,15 +57,15 @@ public class Person {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable team set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<Team> getTeams() {
+        return Collections.unmodifiableSet(teams);
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable skill set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Skill> getSkillSet() {
@@ -135,14 +135,14 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getGithubUsername().equals(getGithubUsername())
-                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getTeams().equals(getTeams())
                 && otherPerson.getSkillSet().equals(getSkillSet());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, githubUsername, tags, skillSet);
+        return Objects.hash(name, phone, email, githubUsername, teams, skillSet);
     }
 
     @Override
@@ -156,10 +156,10 @@ public class Person {
                 .append("; GitHub Username: ")
                 .append(getGithubUsername());
 
-        Set<Tag> tags = getTags();
-        if (!tags.isEmpty()) {
-            builder.append("; Tags: ");
-            tags.forEach(builder::append);
+        Set<Team> teams = getTeams();
+        if (!teams.isEmpty()) {
+            builder.append("; Teams: ");
+            teams.forEach(builder::append);
         }
 
         Set<Skill> skillSet = getSkillSet();

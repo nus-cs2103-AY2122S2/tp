@@ -13,8 +13,8 @@ import seedu.address.model.person.GithubUsername;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Skill;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.team.Skill;
+import seedu.address.model.team.Team;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -24,19 +24,19 @@ public class SampleDataUtil {
         return new Person[]{
             new Person(new Name("Alex Teo"), new Phone("87438807"), new Email("alexteo@example.com"),
                     new GithubUsername("alexteo98"),
-                    getTagSet("friends"), getSkillSet("C_50")),
+                    getTeamSet("friends"), getSkillSet("C_50")),
             new Person(new Name("Junha Park"), new Phone("91031282"), new Email("billpark@example.com"),
                         new GithubUsername("B1LLP4RK"),
-                        getTagSet("family"), getSkillSet("Java_70")),
+                        getTeamSet("family"), getSkillSet("Java_70")),
             new Person(new Name("Lye Jia Yang"), new Phone("99272758"), new Email("lyejy@example.com"),
                     new GithubUsername("Jiaaa-yang"),
-                    getTagSet("colleagues", "friends"), getSkillSet("C_90")),
+                    getTeamSet("colleagues", "friends"), getSkillSet("C_90")),
             new Person(new Name("Melvin Chan"), new Phone("93210283"), new Email("mchan@example.com"),
                     new GithubUsername("MelvinCZJ"),
-                    getTagSet("neighbours"), getSkillSet("Bash_50")),
+                    getTeamSet("neighbours"), getSkillSet("Bash_50")),
             new Person(new Name("Toh Zhan Qing"), new Phone("92492021"), new Email("tohzq@example.com"),
                     new GithubUsername("tzhan98"),
-                    getTagSet("classmates"), getSkillSet("C_50")),
+                    getTeamSet("classmates"), getSkillSet("C_50")),
         };
     }
 
@@ -49,11 +49,11 @@ public class SampleDataUtil {
     }
 
     /**
-     * Returns a tag set containing the list of strings given.
+     * Returns a team set containing the list of strings given.
      */
-    public static Set<Tag> getTagSet(String... strings) {
+    public static Set<Team> getTeamSet(String... strings) {
         return Arrays.stream(strings)
-                .map(Tag::new)
+                .map(Team::new)
                 .collect(Collectors.toSet());
     }
 

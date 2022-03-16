@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.model.person.PersonBySkillProficiencyComparator;
 import seedu.address.model.person.PersonContainsSkillPredicate;
-import seedu.address.model.tag.Skill;
+import seedu.address.model.team.Skill;
 
 class SortCommandParserTest {
 
