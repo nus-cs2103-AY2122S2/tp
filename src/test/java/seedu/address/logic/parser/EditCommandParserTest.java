@@ -15,6 +15,7 @@ import static seedu.address.logic.commands.CommandTestUtil.NEW_DESCRIPTION_DESC_
 import static seedu.address.logic.commands.CommandTestUtil.NEW_EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NEW_EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.NEW_NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NEW_NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.NEW_PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NEW_PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.NEW_TAG_DESC_FRIEND;
@@ -26,6 +27,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BOB
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
@@ -200,18 +202,46 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_invalidValueFollowedByValidValue_success() {
-        // no other valid values specified
+
+        //name
         Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + INVALID_NEW_PHONE_DESC + NEW_PHONE_DESC_BOB;
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB).build();
+        String userInput = targetIndex.getOneBased() + INVALID_NEW_NAME_DESC + NEW_NAME_DESC_BOB;
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // other valid values specified
-        userInput = targetIndex.getOneBased() + NEW_EMAIL_DESC_BOB + INVALID_NEW_PHONE_DESC + NEW_ADDRESS_DESC_BOB
-                + NEW_PHONE_DESC_BOB;
-        descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).build();
+        // phone
+        targetIndex = INDEX_FIRST_PERSON;
+        userInput = targetIndex.getOneBased() + INVALID_NEW_PHONE_DESC + NEW_PHONE_DESC_BOB;
+        descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // address
+        userInput = targetIndex.getOneBased() + INVALID_NEW_ADDRESS_DESC + NEW_ADDRESS_DESC_BOB;
+        descriptor = new EditPersonDescriptorBuilder().withAddress(VALID_ADDRESS_BOB).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // email
+        userInput = targetIndex.getOneBased() + INVALID_NEW_EMAIL_DESC + NEW_EMAIL_DESC_BOB;
+        descriptor = new EditPersonDescriptorBuilder().withEmail(VALID_EMAIL_BOB).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        //description
+        userInput = targetIndex.getOneBased() + INVALID_NEW_DESCRIPTION_DESC + NEW_DESCRIPTION_DESC_BOB;
+        descriptor = new EditPersonDescriptorBuilder().withDescription(VALID_DESCRIPTION_BOB).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        //combination of arguments
+        userInput = targetIndex.getOneBased() + INVALID_NEW_ADDRESS_DESC + INVALID_NEW_EMAIL_DESC
+                + NEW_ADDRESS_DESC_BOB + INVALID_NEW_NAME_DESC + NEW_NAME_DESC_BOB + NEW_PHONE_DESC_BOB
+                + NEW_EMAIL_DESC_BOB;
+        descriptor = new EditPersonDescriptorBuilder().withAddress(VALID_ADDRESS_BOB).withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
+        System.out.println(descriptor);
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
