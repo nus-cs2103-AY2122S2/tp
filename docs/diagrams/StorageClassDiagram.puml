@@ -1,12 +1,11 @@
 @startuml
 !include style.puml
+!theme materia-outline
 skinparam arrowThickness 1.1
-skinparam arrowColor STORAGE_COLOR
-skinparam classBackgroundColor STORAGE_COLOR
 
 package Storage{
 
-package "UserPrefs Storage" #F4F6F6{
+package "UserPrefsStorage" #F4F6F6{
 Class "<<interface>>\nUserPrefsStorage" as UserPrefsStorage
 Class JsonUserPrefsStorage
 }
@@ -14,30 +13,28 @@ Class JsonUserPrefsStorage
 Class "<<interface>>\nStorage" as Storage
 Class StorageManager
 
-package "AddressBook Storage" #F4F6F6{
-Class "<<interface>>\nAddressBookStorage" as AddressBookStorage
-Class JsonAddressBookStorage
-Class JsonSerializableAddressBook
-Class JsonAdaptedPerson
-Class JsonAdaptedTag
+package "IBookStorage" #F4F6F6{
+Class "<<interface>>\nIBookStorage" as IBookStorage
+Class JsonIBookStorage
+Class JsonSerializableIBook
+Class JsonAdaptedProduct
 }
 
 }
 
-Class HiddenOutside #FFFFFF
+Class HiddenOutside<<Hidden>>
 HiddenOutside ..> Storage
 
 StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
-StorageManager -up-> "1" AddressBookStorage
+StorageManager -up-> "1" IBookStorage
 
 Storage -left-|> UserPrefsStorage
-Storage -right-|> AddressBookStorage
+Storage -right-|> IBookStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
-JsonAddressBookStorage .up.|> AddressBookStorage
-JsonAddressBookStorage ..> JsonSerializableAddressBook
-JsonSerializableAddressBook --> "*" JsonAdaptedPerson
-JsonAdaptedPerson --> "*" JsonAdaptedTag
+JsonIBookStorage .up.|> IBookStorage
+JsonIBookStorage ..> JsonSerializableIBook
+JsonSerializableIBook --> "*" JsonAdaptedProduct
 
 @enduml
