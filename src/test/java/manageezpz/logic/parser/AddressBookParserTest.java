@@ -2,6 +2,8 @@ package manageezpz.logic.parser;
 
 import static manageezpz.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static manageezpz.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static manageezpz.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static manageezpz.logic.parser.CliSyntax.PREFIX_TASK;
 import static manageezpz.testutil.Assert.assertThrows;
 import static manageezpz.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,8 +25,8 @@ import manageezpz.logic.commands.FindCommand;
 import manageezpz.logic.commands.HelpCommand;
 import manageezpz.logic.commands.ListCommand;
 import manageezpz.logic.parser.exceptions.ParseException;
-import manageezpz.model.person.NameContainsKeywordsPredicate;
 import manageezpz.model.person.Person;
+import manageezpz.model.task.TaskContainsKeywordsPredicate;
 import manageezpz.testutil.EditPersonDescriptorBuilder;
 import manageezpz.testutil.PersonBuilder;
 import manageezpz.testutil.PersonUtil;
@@ -72,8 +74,10 @@ public class AddressBookParserTest {
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+                FindCommand.COMMAND_WORD
+                        + " " + PREFIX_TASK.toString() + " " + PREFIX_DESCRIPTION
+                        + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindCommand(new TaskContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
