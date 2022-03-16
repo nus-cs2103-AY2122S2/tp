@@ -11,7 +11,10 @@ public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
-    public static final String MESSAGE_SUCCESS = "Listed all students/modules/class groups";
+    public static final String MESSAGE_SUCCESS = "Listed all %s";
+    public static final String MESSAGE_STUDENTS = "students";
+    public static final String MESSAGE_MODULES = "modules";
+    public static final String MESSAGE_CLASS_GROUPS = "class groups";
 
     private EntityType entityType;
 
@@ -22,19 +25,23 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        String result = MESSAGE_SUCCESS;
         switch(entityType) {
         case STUDENT:
             model.updateFilteredStudentList(PREDICATE_SHOW_ALL);
+            result = String.format(result, MESSAGE_STUDENTS);
             break;
         case TA_MODULE:
             model.updateFilteredModuleList(PREDICATE_SHOW_ALL);
+            result = String.format(result, MESSAGE_MODULES);
             break;
         case CLASS_GROUP:
             model.updateFilteredClassGroupList(PREDICATE_SHOW_ALL);
+            result = String.format(result, MESSAGE_CLASS_GROUPS);
             break;
         default:
             throw new UnknownEntityException();
         }
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(result, entityType);
     }
 }

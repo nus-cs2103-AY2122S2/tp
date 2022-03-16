@@ -248,12 +248,27 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Executes the command and returns the result.
      *
-     * @see AB3Logic#execute(String)
+     * @see Logic#execute(String)
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
+            commandResult.getEntityType().ifPresent(entityType -> {
+                switch (entityType) {
+                case STUDENT:
+                    handleStudentListButtonPress();
+                    break;
+                case TA_MODULE:
+                    handleModuleListButtonPress();
+                    break;
+                case CLASS_GROUP:
+                    handleClassGroupListButtonPress();
+                    break;
+                default:
+                    break;
+                }
+            });
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowHelp()) {

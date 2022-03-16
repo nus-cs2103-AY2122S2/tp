@@ -27,20 +27,20 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes an entity identified by the index number used in the displayed list\n"
-            + "1. Deletes a student: "
-            + "Parameters: " + TYPE_STUDENT
+            + "1. Deletes a student:\n"
+            + "\tParameters: " + TYPE_STUDENT
             + " INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD
+            + "\tExample: " + COMMAND_WORD + " "
             + TYPE_STUDENT + " 1\n"
-            + "2. Deletes a module: "
-            + "Parameter: " + TYPE_MODULE
+            + "2. Deletes a module:\n"
+            + "\tParameter: " + TYPE_MODULE
             + " INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD
+            + "\tExample: " + COMMAND_WORD + " "
             + TYPE_MODULE + " 1\n"
-            + "3. Deletes a class group: "
-            + "Parameters: " + TYPE_CLASS
+            + "3. Deletes a class group:\n"
+            + "\tParameters: " + TYPE_CLASS
             + " INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD
+            + "\tExample: " + COMMAND_WORD + " "
             + TYPE_CLASS + " 1";
 
     public static final String MESSAGE_DELETE_ENTITY_SUCCESS = "Deleted Entity: %1$s";
@@ -93,7 +93,8 @@ public class DeleteCommand extends Command {
         }
 
         model.deleteEntity(entityToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_ENTITY_SUCCESS, entityToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_ENTITY_SUCCESS, entityToDelete),
+                entityToDelete.getEntityType());
     }
 
     @Override

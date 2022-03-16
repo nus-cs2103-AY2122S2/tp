@@ -55,7 +55,7 @@ public class Student implements Entity {
     }
 
     /**
-     * Returns true if both students have the same name.
+     * Returns true if both students have the same student ID.
      * This defines a weaker notion of equality between two students.
      */
     public boolean isSameStudent(Student otherStudent) {
@@ -64,7 +64,7 @@ public class Student implements Entity {
         }
 
         return otherStudent != null
-                && otherStudent.getName().equals(getName());
+                && otherStudent.getStudentId().equals(getStudentId());
     }
 
     @Override
@@ -106,9 +106,11 @@ public class Student implements Entity {
                 .append("; Name: ")
                 .append(getName())
                 .append("; Email: ")
-                .append(getEmail())
-                .append("; Telegram: ")
-                .append(getTelegram());
+                .append(getEmail());
+        if (telegram.isPresent()) {
+            builder.append("; Telegram: ")
+                    .append(getTelegram().get().value);
+        }
 
         return builder.toString();
     }

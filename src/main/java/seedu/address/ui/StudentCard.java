@@ -44,7 +44,8 @@ public class StudentCard extends UiPart<Region> {
         this.student = student;
         id.setText(displayedIndex + ". ");
         name.setText(student.getName().fullName);
-        student.getTelegram().ifPresent(teleOptional -> telegram.setText(teleOptional.value));
+        student.getTelegram()
+            .ifPresentOrElse(teleOptional -> telegram.setText(teleOptional.value), () -> telegram.setVisible(false));
         studentId.setText(student.getStudentId().value);
         email.setText(student.getEmail().value);
     }
