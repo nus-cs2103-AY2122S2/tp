@@ -106,8 +106,8 @@ Example tip.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n:NAME c:CATEGORY`, `c:CATEGORY n:NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `list` annd `exit`) will be ignored.<br>
-  e.g. if the command specifies `list 123`, it will be interpreted as `list`.
+* Extraneous parameters for commands that do not take in parameters (such as `exit`) will be ignored.<br>
+  e.g. if the command specifies `exit 123`, it will be interpreted as `exit`.
 
 </div>
 
