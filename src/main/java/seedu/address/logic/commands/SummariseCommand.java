@@ -24,6 +24,8 @@ public class SummariseCommand extends Command {
 
     public static final String MESSAGE_SUMMARISE_PERSON_SUCCESS = "Summarising all students: \n";
 
+    public static final String MESSAGE_SUMMARISE_PERSON_FAILURE = "Unable to summarise \n";
+
     private static final String FACULTY_SUMMARY_FORM = "\nIn %s with %d student(s),\n"
             + "Covid Positive: %d student(s)\n"
             + "Covid Negative: %d student(s)\n"
@@ -44,8 +46,13 @@ public class SummariseCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         List<Person> lastShownList = model.getFilteredPersonList();
-        String answer = MESSAGE_SUMMARISE_PERSON_SUCCESS + filterByFaculty(lastShownList);
-        return new CommandResult(answer);
+        String answer = filterByFaculty(lastShownList);
+
+        if (answer.isEmpty()) {
+            return new CommandResult(MESSAGE_SUMMARISE_PERSON_FAILURE);
+        } else {
+            return new CommandResult(MESSAGE_SUMMARISE_PERSON_SUCCESS + answer);
+        }
     }
 
     /**
@@ -54,7 +61,7 @@ public class SummariseCommand extends Command {
      * @param list the unfiltered entire list in the database
      * @return the summarised overview for all students by faculties
      */
-    private String filterByFaculty(List<Person> list) {
+    public String filterByFaculty(List<Person> list) {
         StringBuilder ans = new StringBuilder();
 
         for (String facultyName : FACULTIES) {
