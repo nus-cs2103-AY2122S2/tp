@@ -1,6 +1,8 @@
 package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -12,15 +14,15 @@ import seedu.address.model.tag.Tag;
  */
 class JsonAdaptedTag {
     private final String tagName;
-    // private final Priority tagPriority;
+    private final Priority tagPriority;
 
     /**
      * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
      */
     @JsonCreator
-    public JsonAdaptedTag(String tagName, Priority priority) {
+    public JsonAdaptedTag(@JsonProperty("tagName") String tagName, @JsonProperty("priority") Priority priority) {
         this.tagName = tagName;
-        // this.tagPriority = priority;
+        this.tagPriority = priority;
     }
 
     /**
@@ -28,17 +30,17 @@ class JsonAdaptedTag {
      */
     public JsonAdaptedTag(Tag source) {
         tagName = source.tagName;
-        // tagPriority = source.tagPriority;
+        tagPriority = source.tagPriority;
     }
 
-    @JsonValue
+    /*@JsonValue
     public String getTagName() {
         return tagName;
     }
 
-    /*@JsonValue
-    public Priority getTagPriority() {
-        return tagPriority;
+    @JsonValue
+    public String getTagPriority() {
+        return tagPriority.name();
     }*/
 
     /**
@@ -50,7 +52,7 @@ class JsonAdaptedTag {
         if (!Tag.isValidTagName(tagName)) {
             throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(tagName, null); //tagPriority);
+        return new Tag(tagName, tagPriority);
     }
 
     @Override
@@ -64,7 +66,7 @@ class JsonAdaptedTag {
         }
 
         JsonAdaptedTag otherTag = (JsonAdaptedTag) other;
-        return tagName.equals(otherTag.tagName); //&& tagPriority.equals(otherTag.tagPriority);
+        return tagName.equals(otherTag.tagName) && tagPriority.equals(otherTag.tagPriority);
     }
 
     @Override
