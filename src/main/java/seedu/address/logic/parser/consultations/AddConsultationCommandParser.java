@@ -2,15 +2,6 @@ package seedu.address.logic.parser.consultations;
 
 import java.util.stream.Stream;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTES;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PRESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TESTS_TAKEN_AND_RESULTS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 import seedu.address.logic.commands.consultation.AddConsultationCommand;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ArgumentMultimap;
@@ -26,8 +17,14 @@ import seedu.address.model.consultation.Prescription;
 import seedu.address.model.consultation.TestsTakenAndResults;
 import seedu.address.model.patient.Nric;
 
-
-
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TESTS_TAKEN_AND_RESULTS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 public class AddConsultationCommandParser implements Parser<AddConsultationCommand> {
     /**
