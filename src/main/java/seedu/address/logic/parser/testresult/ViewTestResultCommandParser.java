@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.testresult.AddTestResultCommand;
 import seedu.address.logic.commands.testresult.ViewTestResultCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
@@ -18,8 +17,8 @@ import seedu.address.model.patient.Nric;
 
 public class ViewTestResultCommandParser {
     /**
-     * Parses the given {@code String} of arguments in the context of the AddContactCommand
-     * and returns an AddContactCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the ViewTestResultCommand
+     * and returns an ViewTestResultCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public ViewTestResultCommand parse(String args) throws ParseException {
@@ -28,7 +27,8 @@ public class ViewTestResultCommandParser {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_TYPE, PREFIX_NRIC)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTestResultCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ViewTestResultCommand.MESSAGE_USAGE));
         }
 
         Nric ownerNric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());

@@ -40,7 +40,7 @@ public class AddTestResultCommandParser implements Parser<AddTestResultCommand> 
         }
 
         Nric ownerNric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
-        TestDate testDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_TESTDATE).get());
+        TestDate testDate = ParserUtil.parseTestDate(argMultimap.getValue(PREFIX_TESTDATE).get());
         MedicalTest medicalTest = ParserUtil.parseMedicalTest(argMultimap.getValue(PREFIX_MEDICALTEST).get());
         Result result = ParserUtil.parseResult(argMultimap.getValue(PREFIX_RESULT).get());
 

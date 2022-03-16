@@ -3,7 +3,6 @@ package seedu.address.ui.testresult;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
@@ -18,11 +17,11 @@ public class TestResultListPanel extends UiPart<Region> {
     private static final String FXML = "testresult/TestResultListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(TestResultListPanel.class);
 
-    @FXML
+    @javafx.fxml.FXML
     private ListView<TestResult> testResultListView;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code TestResultListPanel} with the given {@code ObservableList}.
      */
     public TestResultListPanel(ObservableList<TestResult> testResultList) {
         super(FXML);
@@ -31,7 +30,7 @@ public class TestResultListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code TestResult} using a {@code TestResultCard}.
      */
     class TestResultListViewCell extends ListCell<TestResult> {
         @Override
