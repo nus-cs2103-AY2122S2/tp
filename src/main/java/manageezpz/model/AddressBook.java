@@ -58,10 +58,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     public String listTask() {
         Iterator<Task> taskIterators = tasks.iterator();
         String result = "";
+        int index = 1;
 
         while (taskIterators.hasNext()) {
             Task task = taskIterators.next();
-            result = String.join("\n", result, task.toString());
+            String curIndex = String.join("", String.valueOf(index), ".");
+            String curTask = String.join(" ", curIndex, task.toString());
+            result = String.join("\n", result, curTask);
+            index++;
         }
 
         return result;
@@ -93,11 +97,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     private String listTodo() {
         Iterator<Task> taskIterators = tasks.iterator();
         String result = "";
+        int index = 1;
 
         while (taskIterators.hasNext()) {
             Task task = taskIterators.next();
             if (task instanceof Todo) {
-                result = String.join("\n", result, task.toString());
+                String curIndex = String.join("", String.valueOf(index), ".");
+                String curTask = String.join(" ", curIndex, task.toString());
+                result = String.join("\n", result, curTask);
+                index++;
             }
         }
 
@@ -107,11 +115,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     private String listDeadline() {
         Iterator<Task> taskIterators = tasks.iterator();
         String result = "";
+        int index = 1;
 
         while (taskIterators.hasNext()) {
             Task task = taskIterators.next();
             if (task instanceof Deadline) {
-                result = String.join("\n", result, task.toString());
+                String curIndex = String.join("", String.valueOf(index), ".");
+                String curTask = String.join(" ", curIndex, task.toString());
+                result = String.join("\n", result, curTask);
+                index++;
             }
         }
 
@@ -121,11 +133,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     private String listEvent() {
         Iterator<Task> taskIterators = tasks.iterator();
         String result = "";
+        int index = 1;
 
         while (taskIterators.hasNext()) {
             Task task = taskIterators.next();
             if (task instanceof Event) {
-                result = String.join("\n", result, task.toString());
+                String curIndex = String.join("", String.valueOf(index), ".");
+                String curTask = String.join(" ", curIndex, task.toString());
+                result = String.join("\n", result, curTask);
+                index++;
             }
         }
 
@@ -136,12 +152,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         Iterator<Task> taskIterators = tasks.iterator();
         Date todayDate = Date.getTodayDate();
         String result = "";
+        int index = 1;
 
         while (taskIterators.hasNext()) {
             Task task = taskIterators.next();
             Date date = getDateFromTask(task);
             if (date != null && date.equals(todayDate)) {
-                result = String.join("\n", result, task.toString());
+                String curIndex = String.join("", String.valueOf(index), ".");
+                String curTask = String.join(" ", curIndex, task.toString());
+                result = String.join("\n", result, curTask);
+                index++;
             }
         }
 
