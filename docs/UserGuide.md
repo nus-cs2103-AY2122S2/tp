@@ -117,6 +117,20 @@ Format: `time INDEX`
 Examples:
 * `time 12` returns pet 12’s pickup and dropoff times.
 
+### Adding pet’s attendance, pick-up and drop-off time: `attd`
+
+Add pet’s attendance date, pick-up and drop-off time
+
+Format: `attd INDEX att/dd-MM-yyyy pu/HH:mm do/HH:mm`
+
+* Adds attendance date, pick-up and drop-off time of the pet at the specified `INDEX`.
+* The index refers to the index number shown in the displayed getId list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* Date and time must follow the specified format
+
+Examples:
+* `attd 1 att/16-03-2022 pu/08:00 do/19:00` indicates that pet 1 is coming for daycare on `16-03-2022`, requires to be picked up at `08:00` and dropped off at `19:00`
+
 ### Deleting a pet: `delete`
 
 Deletes the specified pet from the address book.
@@ -138,12 +152,13 @@ Format: `exit`
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                         |
-|------------|------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME_OF_PET o/OWNER_NAME p/PHONE_NUMBER a/ADDRESS` <br> e.g., `add n/Peepee o/Peter p/98648252 a/13 Computing Drive, Singapore 117417` |
-| **Delete** | `delete id` <br> e.g., `delete 3` (where 3 is the id of the pet in the system)                                                           |
-| **Find**   | `find n/NAME_OF_PET [Keywords]` <br> e.g., `find PeePee` (returns information of all pets called PeePee)                                 |
-| **Diet**   | `diet INDEX d/remark` <br> e.g. `diet 12 Only feed dry kibble` (stores remark in pet 12's database)                                      |
-| **Time**   | `time id `<br> e.g.,`pickup 3 0900 1200` (where 3 is the id of the pet in the system)                                                    |
-| **App**    | `app INDEX date/[yyyy-MM-dd HH:mm] at/[location]` <br> e.g., `app 1 date/2022-03-04 09:30 at/ NUS Vet Clinic`                            |
-| **Exit**   | `exit`                                                                                                                                   |
+| Action             | Format, Examples                                                                                                                                                                                                  |
+|--------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**            | `add n/NAME_OF_PET o/OWNER_NAME p/PHONE_NUMBER a/ADDRESS` <br> e.g., `add n/Peepee o/Peter p/98648252 a/13 Computing Drive, Singapore 117417`                                                                     |
+| **Delete**         | `delete id` <br> e.g., `delete 3` (where 3 is the id of the pet in the system)                                                                                                                                    |
+| **Find**           | `find n/NAME_OF_PET [Keywords]` <br> e.g., `find PeePee` (returns information of all pets called PeePee)                                                                                                          |
+| **Diet**           | `diet INDEX d/remark` <br> e.g. `diet 12 Only feed dry kibble` (stores remark in pet 12's database)                                                                                                               |
+| **Add Attendance** | `attd INDEX att/dd-MM-yyyy pu/HH:mm do/HH:mm` <br> e.g. `attd 1 att/16-03-2022 pu/08:00 do/17:00` (indicates that pet 1 will be attending daycare on 16 March 2022, requires pick up at 8 am and drop off at 5 pm |
+| **Time**           | `time id `<br> e.g.,`pickup 3 0900 1200` (where 3 is the id of the pet in the system)                                                                                                                             |
+| **App**    | `app INDEX date/[yyyy-MM-dd HH:mm] at/[location]` <br> e.g., `app 1 date/2022-03-04 09:30 at/ NUS Vet Clinic`                                                                                                             |
+| **Exit**           | `exit`                                                                                                                                                                                                            |
