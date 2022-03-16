@@ -31,7 +31,7 @@ public class Ethnicity {
     }
 
     /**
-     * Returns true if a given string is a valid email.
+     * Returns true if given string is valid.
      */
     public static boolean isValidEthnicity(String test) {
         return test.matches(VALIDATION_REGEX);

@@ -31,7 +31,7 @@ public class Illnesses {
     }
 
     /**
-     * Returns true if a given string is a valid email.
+     * Returns true if given string is valid.
      */
     public static boolean isValidIllnesses(String test) {
         return test.matches(VALIDATION_REGEX);

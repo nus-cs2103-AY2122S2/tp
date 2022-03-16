@@ -9,13 +9,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class BloodType {
 
-    public static final String MESSAGE_CONSTRAINTS = "Blood type can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Blood type must be either A, B, AB or O.";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final String VALIDATION_REGEX = "[A|B|AB|O]";
 
     public final String value;
 
@@ -31,7 +31,7 @@ public class BloodType {
     }
 
     /**
-     * Returns true if a given string is a valid email.
+     * Returns true if given string is valid.
      */
     public static boolean isValidBloodType(String test) {
         return test.matches(VALIDATION_REGEX);

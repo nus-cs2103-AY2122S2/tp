@@ -75,7 +75,6 @@ public class AddMedicalCommand extends Command {
         requireNonNull(medical);
         toAdd = medical;
         this.patientNric = patientNric;
-        System.out.println(patientNric);
     }
 
     @Override

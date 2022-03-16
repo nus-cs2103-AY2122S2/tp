@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Height {
 
-    public static final String MESSAGE_CONSTRAINTS = "Height can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Weight can take any values, and it should not be blank";
 
     /*
      * The first character of the height must not be a whitespace,
@@ -32,7 +32,7 @@ public class Height {
     }
 
     /**
-     * Returns true if a given string is a valid email.
+     * Returns true if given string is valid.
      */
     public static boolean isValidHeight(String test) {
         return test.matches(VALIDATION_REGEX);

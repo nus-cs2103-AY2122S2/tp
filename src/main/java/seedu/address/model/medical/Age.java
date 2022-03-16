@@ -27,7 +27,7 @@ public class Age {
     }
 
     /**
-     * Returns true if a given string is a valid age.
+     * Returns true if given string is valid.
      */
     public static boolean isValidAge(String test) {
         return test.matches(VALIDATION_REGEX);
