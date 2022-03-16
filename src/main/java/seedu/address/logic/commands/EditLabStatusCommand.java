@@ -44,10 +44,11 @@ public class EditLabStatusCommand extends Command {
     private final LabStatus newStatus;
 
     /**
+     * Creates an EditLabStatusCommand to edit the status of a Student's Lab
      *
-     * @param index
-     * @param labNumber
-     * @param newStatus
+     * @param index The index of the Student (according to the displayed list)
+     * @param labNumber The Lab number to edit
+     * @param newStatus The new LabStatus of the Lab
      */
     public EditLabStatusCommand(Index index, int labNumber, LabStatus newStatus) {
         requireAllNonNull(index, labNumber, newStatus);
