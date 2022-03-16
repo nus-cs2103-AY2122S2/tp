@@ -120,6 +120,38 @@ class SortCommandTest {
     }
 
     @Test
+    public void execute_sortPhoneDefault_success() {
+        ArrayList<SortCommand.FieldSortOrder> fieldSortOrder = new ArrayList<>();
+        fieldSortOrder.add(SortUtil.PHONE_SORT_DEFAULT);
+
+        List<Person> sortedPersonListByName = new ArrayList<>(
+                Arrays.asList(TypicalPersons.HOON, TypicalPersons.IDA, TypicalPersons.DANIEL, TypicalPersons.ALICE,
+                        TypicalPersons.ELLE, TypicalPersons.FIONA, TypicalPersons.GEORGE, TypicalPersons.CARL,
+                        TypicalPersons.BENSON));
+
+        SortCommand sortCommand = new SortCommand(fieldSortOrder);
+        Model expectedModel = new ModelManager(new AddressBook(sortedPersonListByName), new UserPrefs());
+
+        assertCommandSuccess(sortCommand, model, SortCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void execute_sortPhoneDescending_success() {
+        ArrayList<SortCommand.FieldSortOrder> fieldSortOrder = new ArrayList<>();
+        fieldSortOrder.add(SortUtil.PHONE_SORT_DESC);
+
+        List<Person> sortedPersonListByName = new ArrayList<>(
+                Arrays.asList(TypicalPersons.BENSON, TypicalPersons.CARL, TypicalPersons.GEORGE, TypicalPersons.FIONA,
+                        TypicalPersons.ELLE, TypicalPersons.ALICE, TypicalPersons.DANIEL, TypicalPersons.IDA,
+                        TypicalPersons.HOON));
+
+        SortCommand sortCommand = new SortCommand(fieldSortOrder);
+        Model expectedModel = new ModelManager(new AddressBook(sortedPersonListByName), new UserPrefs());
+
+        assertCommandSuccess(sortCommand, model, SortCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
     public void execute_sortRemarkDefault_success() {
         ArrayList<SortCommand.FieldSortOrder> fieldSortOrder = new ArrayList<>();
         fieldSortOrder.add(SortUtil.REMARK_SORT_DEFAULT);
