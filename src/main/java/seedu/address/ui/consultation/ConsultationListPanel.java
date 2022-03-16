@@ -10,6 +10,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.consultation.Consultation;
+import seedu.address.model.patient.Patient;
 import seedu.address.ui.PersonListPanel;
 import seedu.address.ui.UiPart;
 import seedu.address.ui.consultation.ConsultationCard;
@@ -24,14 +25,16 @@ public class ConsultationListPanel extends UiPart<Region> {
 
     @FXML
     private ListView<Consultation> consultationListView;
+    private ObservableList<Patient> personList;
 
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public ConsultationListPanel(ObservableList<Consultation> consultationList) {
+    public ConsultationListPanel(ObservableList<Consultation> consultationList, ObservableList<Patient> personList) {
         super(FXML);
         consultationListView.setItems(consultationList);
         consultationListView.setCellFactory(listView -> new ConsultationListViewCell());
+        this.personList = personList;
     }
 
     /**
@@ -48,16 +51,8 @@ public class ConsultationListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                System.out.println(consultation);
-                System.out.println(consultation == null);
-                System.out.println(consultation.getNric());
-                System.out.println(consultation.getDate());
-                System.out.println(consultation.getTime());
-                System.out.println(consultation.getNotes());
-                System.out.println(consultation.getPrescription());
-                System.out.println(consultation.getTestAndResults());
 
-                setGraphic(new ConsultationCard(consultation).getRoot());
+                setGraphic(new ConsultationCard(consultation, personList, getIndex() + 1).getRoot());
             }
         }
     }

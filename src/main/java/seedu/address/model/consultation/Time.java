@@ -32,7 +32,7 @@ public class Time {
         requireNonNull(time);
         checkArgument(isValidTime(time), MESSAGE_CONSTRAINTS);
 
-        this.time = LocalTime.parse(time, DateTimeFormatter.ofPattern("HH-mm"));
+        this.time = LocalTime.parse(time, DateTimeFormatter.ofPattern("HH-MM"));
     }
 
     /**
@@ -45,7 +45,7 @@ public class Time {
 
     @Override
     public String toString() {
-        return time.format(DateTimeFormatter.ofPattern("HH-mm"));
+        return time.format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 
     @Override

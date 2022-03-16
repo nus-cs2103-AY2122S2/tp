@@ -1,10 +1,12 @@
 package seedu.address.ui.consultation;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.consultation.*;
+import seedu.address.model.patient.Patient;
 import seedu.address.ui.UiPart;
 
 /**
@@ -25,6 +27,10 @@ public class ConsultationCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
+    private Label id;
+    @FXML
+    private Label name;
+    @FXML
     private Label nric;
     @FXML
     private Label date;
@@ -40,15 +46,27 @@ public class ConsultationCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public ConsultationCard(Consultation consultation) {
+    public ConsultationCard(Consultation consultation, ObservableList<Patient> personList, int displayedIndex) {
         super(FXML);
         this.consultation = consultation;
-        nric.setText(consultation.getNric().toString());
-        date.setText(consultation.getDate().toString());
-        time.setText(consultation.getTime().toString());
+        id.setText(displayedIndex + ". ");
+        for (Patient patient : personList) {
+            if (patient.getNric().equals(consultation.getNric())) {
+                name.setText(patient.getName().toString() + " / " + consultation.getNric().toString());
+            }
+        }
+        date.setText(consultation.getDate().toString() + ", " + consultation.getTime().toString());
         notes.setText(consultation.getNotes().toString());
-        prescription.setText(consultation.getPrescription().toString());
-        testsTakenAndResults.setText(consultation.getTestAndResults().toString());
+        if (consultation.getPrescription().toString().equals("")) {
+            prescription.setText("N/A");
+        } else {
+            prescription.setText(consultation.getPrescription().toString());
+        }
+        if (consultation.getTestAndResults().toString().equals("")) {
+            testsTakenAndResults.setText("N/A");
+        } else {
+            testsTakenAndResults.setText(consultation.getTestAndResults().toString());
+        }
     }
     @Override
     public boolean equals(Object other) {

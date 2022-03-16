@@ -14,13 +14,14 @@ import seedu.address.model.consultation.Consultation;
 import seedu.address.model.consultation.ConsultationWithPredicates;
 import seedu.address.model.patient.Nric;
 import seedu.address.model.patient.NricPredicate;
+import seedu.address.ui.MainWindow;
 
 /**
  * Lists all persons in the address book to the user.
  */
 public class ViewConsultationCommand extends Command {
     public static final String COMMAND_WORD = "list";
-    public static final CommandType COMMAND_TYPE = CommandType.CONTACT;
+    public static final CommandType COMMAND_TYPE = CommandType.CONSULTATION;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows consultations that "
             + "matches the specified owner NRIC, and displays them as a list with index numbers.\n"
@@ -48,6 +49,8 @@ public class ViewConsultationCommand extends Command {
         if (!model.hasPerson(new NricPredicate(ownerNric))) {
             throw new CommandException(MESSAGE_MISSING_PATIENT);
         }
+
+        System.out.println("ViewConsultationCommand.java: "+COMMAND_TYPE);
 
         return new CommandResult(
                 String.format(Messages.MESSAGE_CONSULTATION_LISTED_OVERVIEW,

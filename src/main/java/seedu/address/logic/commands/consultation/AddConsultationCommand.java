@@ -22,7 +22,7 @@ import seedu.address.model.patient.NricPredicate;
 
 public class AddConsultationCommand extends Command {
     public static final String COMMAND_WORD = "add";
-    public static final CommandType COMMAND_TYPE = CommandType.CONTACT;
+    public static final CommandType COMMAND_TYPE = CommandType.CONSULTATION;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a consultation of patient in Medbook. "
             + "Parameters: "

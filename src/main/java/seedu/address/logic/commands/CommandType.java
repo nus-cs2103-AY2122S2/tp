@@ -34,12 +34,16 @@ public enum CommandType {
         requireNonNull(commandType);
         String trimmedCommandType = getFirstPrefixType(commandType.trim());
 
+        System.out.println("CommandType2: "+trimmedCommandType);
+
         switch (trimmedCommandType) {
             case "contact":
+                System.out.println("trimmedCommandType: "+trimmedCommandType);
                 return CONTACT;
             case "medical":
                 return MEDICAL;
             case "consultation":
+                System.out.println("trimmedCommandType: "+trimmedCommandType);
                 return CONSULTATION;
             case "prescription":
                 return PRESCRIPTION;
@@ -63,10 +67,12 @@ public enum CommandType {
 
         switch(parsedCommandType) {
             case CONTACT:
+                System.out.println(1);
                 return new AddContactCommandParser().parse(arguments);
             case MEDICAL:
                 throw new ParseException("WIP: Medical type");
             case CONSULTATION:
+                System.out.println(2);
                 return new AddConsultationCommandParser().parse(arguments);
             case PRESCRIPTION:
                 return new AddPrescriptionCommandParser().parse(arguments);
@@ -90,10 +96,12 @@ public enum CommandType {
 
         switch(parsedCommandType) {
             case CONTACT:
+                System.out.println(3);
                 return new ViewContactCommandParser().parse(arguments);
             case MEDICAL:
                 throw new ParseException("WIP: Medical type");
             case CONSULTATION:
+                System.out.println(4);
                 return new ViewConsultationCommandParser().parse(arguments);
             case PRESCRIPTION:
                 throw new ParseException("WIP: Prescription type");

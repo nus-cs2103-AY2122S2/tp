@@ -45,7 +45,7 @@ public class Date {
 
     @Override
     public String toString() {
-        return date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        return date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
     }
 
     @Override

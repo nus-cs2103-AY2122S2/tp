@@ -121,8 +121,7 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         contactListPanel = new ContactListPanel(logic.getFilteredContactList());
-        consultationListPanel = new ConsultationListPanel(logic.getFilteredConsultationList());
-        System.out.println("getFilteredConsultationList: "+logic.getFilteredConsultationList().toString());
+        consultationListPanel = new ConsultationListPanel(logic.getFilteredConsultationList(), logic.getFilteredPersonList());
         prescriptionListPanel = new PrescriptionListPanel(logic.getFilteredPrescriptionList());
 
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
@@ -152,7 +151,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Sets the stackpane size based on {@code commandType}.
      */
-    private void setDisplayListPane(CommandType commandType) {
+    public void setDisplayListPane(CommandType commandType) {
         switch (commandType) {
             case CONTACT:
                 personListPanelPlaceholder.getChildren().clear();
@@ -223,6 +222,7 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            System.out.println("CommandType: "+commandResult.getCommandType());
             setDisplayListPane(commandResult.getCommandType());
 
             return commandResult;
