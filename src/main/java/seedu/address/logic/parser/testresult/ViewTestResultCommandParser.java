@@ -10,9 +10,9 @@ import seedu.address.logic.commands.testresult.AddTestResultCommand;
 import seedu.address.logic.commands.testresult.ViewTestResultCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.patient.Nric;
 
 

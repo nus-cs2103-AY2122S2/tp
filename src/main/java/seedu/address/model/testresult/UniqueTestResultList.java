@@ -5,17 +5,20 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 import seedu.address.model.testresult.exceptions.DuplicateTestResultException;
 import seedu.address.model.testresult.exceptions.TestResultNotFoundException;
 
 /**
  * A list of test results that enforces uniqueness between its elements and does not allow nulls.
- * A test results is considered unique by comparing using {@code TestResult#isSameTestResult(TestResult)}. As such, adding and updating of
- * test results uses TestResult#isSameTestResult(TestResult) for equality so as to ensure that the test result being added or updated is
- * unique in terms of identity in the UniqueTestResultList. However, the removal of a test result uses TestResult#equals(Object) so
- * as to ensure that the test result with exactly the same fields will be removed.
+ * A test results is considered unique by comparing using {@code TestResult#isSameTestResult(TestResult)}. As such,
+ * adding and updating of test results uses TestResult#isSameTestResult(TestResult) for equality so as to ensure that
+ * the test result being added or updated is unique in terms of identity in the UniqueTestResultList. However, the
+ * removal of a test result uses TestResult#equals(Object) so as to ensure that the test result with exactly the same
+ * fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
@@ -50,7 +53,8 @@ public class UniqueTestResultList implements Iterable<TestResult> {
     /**
      * Replaces the test result {@code target} in the list with {@code editedTestResult}.
      * {@code target} must exist in the list.
-     * The test result identity of {@code editedTestResult} must not be the same as another existing test result in the list.
+     * The test result identity of {@code editedTestResult} must not be the same as another existing test result in the
+     * list.
      */
     public void setTestResult(TestResult target, TestResult editedTestResult) {
         requireAllNonNull(target, editedTestResult);
