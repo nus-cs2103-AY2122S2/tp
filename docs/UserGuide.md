@@ -87,11 +87,11 @@ Adds a Task into the Task list.
 Format:
 
 * `addTodo desc/TASK_DESCRIPTION`
-* `addTDeadline desc/TASK_DESCRIPTION by/DATE TIME`
+* `addDeadline desc/TASK_DESCRIPTION by/DATE TIME`
 * `addEvent desc/TASK_DESCRIPTION at/DATE START_TIME END_TIME`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Take Note:**
-For deadline and event, the DATE must be in this format: DD-MM-YYYY HHmm (in 24 hr format)
+For deadline and event, the DATE must be in this format: YYYY-MM-DD HHmm (in 24 hr format)
 </div>
 
 ### Listing all Tasks : `list`
@@ -100,7 +100,7 @@ View all tasks, all todo tasks, all deadline tasks, all event tasks or tasks for
 
 Format:
 
-* `list all/`
+* `list`
 * `list todo/`
 * `list deadline/`
 * `list event/`
@@ -138,11 +138,11 @@ Examples:
 
 ### Locating Task by description or Date: `find`
 
-Find tasks based on the task description or date in the format of (DD-MM-YYYY).
+Find tasks based on the task description or date in the format of (YYYY-MM-DD).
 
 Format: 
 * `find task/ desc/TASK_DESCRIPTION`
-* `find date/DD-MM-YYYY`
+* `find date/YYYY-MM-DD`
 
 Examples:
 * `find task/ desc/homework`
@@ -150,7 +150,7 @@ Examples:
 
 <div markdown="span" class="alert alert-primary">:bulb: **Take Note:**
 Find works based on keywords, as such find would return all matches of the words found in description. 
-And the DATE must be in this format: DD-MM-YYYY HHmm (24 hr format)
+And the DATE must be in this format: YYYY-MM-DD (24 hr format)
 </div>
 
 ### Clearing all entries : `clear`
