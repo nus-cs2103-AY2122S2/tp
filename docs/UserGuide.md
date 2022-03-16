@@ -9,21 +9,22 @@ The app allows the user to track and remember what shows they have watched or cu
 They can easily look up the list of shows if they need to.
 
 ### Table of Contents
-* [Quick Start](#quick-start)
-* [Features](#features)
+* [**Quick Start**](#quick-start)
+* [**Features**](#features)
   * [Adding a show: `add`](#adding-a-show-add)
   * [Listing a show: `list`](#listing-all-shows-list)
   * [Requesting help URL: `help`](#requesting-help-url-help)
   * [Finding a show: `find`](#finding-a-show-find)
   * [Deleting a show: `delete`](#deleting-a-show-delete)
+  * [Editing a show: `edit`](#editing-a-show-edit)
   * [Exiting the program: `exit`](#exiting-the-program-exit)
   * [Saving the data](#saving-the-data)
   * [Better Find [coming in v1.3]](#better-find-coming-in-v13)
-  * [FAQ](#faq)
-  * [Command Summary](#command-summary)
+* [**FAQ**](#faq)
+* [**Command Summary**](#command-summary)
 
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## Quick start
 
@@ -51,7 +52,7 @@ Some example commands you can try:
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## Features
 
@@ -87,16 +88,15 @@ Some example commands you can try:
 
 Adds a new show to Trackermon. Note that the name of the show can only contain alphanumeric characters.
 
-Format: `add n/<NAME> [s/<STATUS>] [t/<TAG>]…​`
+Format: `add n/<NAME> s/<STATUS> [t/<TAG>]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/All of us are dead t/Kdrama`
+* `add n/All of us are dead s/completed`
 * `add n/All of us are dead s/completed t/Kdrama`
-* `add n/All of us are dead`
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -130,6 +130,7 @@ Format: `find <KEYWORD>`
 * Finds the show with the specified `<KEYWORD>`.
 * The keyword refers to the input entered by the user after `find`.
 * The keyword **can be a word or number** such as hero, S1,..
+* If the keyword is a word, it must be complete. 
 
 Examples:
 * `find` followed by `attack` displays all the shows in the list that contain the keyword `attack`.
@@ -151,6 +152,24 @@ Format: `delete <INDEX>`
 Examples:
 * `list` followed by `delete 2` removes 2nd show in Trackermon.
 * `find ghibli` followed by `delete 1` removes 1st show in results of `find` command.
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
+---
+### Editing a show: `Edit`
+
+Edit the specified show from Trackermon.
+
+Format: `edit <INDEX> [n/<NAME>] [s/<STATUS>] [t/<TAG>]…​`
+* Edit the show at the specified `<INDEX>`.
+* The index refers to the index number shown in the displayed show list. (not overall)
+* The index **must be a positive integer** 1,2,3,..
+* At least one field to edit must be provided
+* Editing to an existing name is not allowed
+
+Examples:
+* `list` followed by `edit 2 n/Sailor Moo` edit 2nd show's name in Trackermon to Sailor Moo.
+* `find ghibli` followed by `edit 1 n/Cowman s/completed t/awesome` edits 1st show in results of `find` command.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -194,11 +213,14 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/<NAME> s/<STATUS> [t/<TAG>]…​` <br> e.g., `n/ReZero s/watching t/Anime`
-**Delete** | `delete <INDEX>`<br> e.g., `delete 3`
-**List** | `list`
-**Exit** | `exit`
+Action | Format, Examples                                                               
+--------|--------------------------------------------------------------------------------
+**Add** | `add n/<NAME> s/<STATUS> [t/<TAG>]…​` <br> e.g., `n/ReZero s/watching t/Anime` 
+**Delete** | `delete <INDEX>`<br> e.g., `delete 3`                                          
+**Edit**  |`edit <INDEX> [n/<NAME>] [s/<STATUS>] [t/<TAG>]…​` <br> e.g., `n/ReZero s/watching t/Anime`
+**Exit** | `exit`      
+**Find** | `find <KEYWORD>`<br> e.g., `find hero`
+**List** |`list`                                                                                                               |
+
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
