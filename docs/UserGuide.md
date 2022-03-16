@@ -127,6 +127,11 @@ Changes the status of the specified lab for the student with the specified INDEX
 
 Format: `labstat INDEX l/LAB_NUMBER s/LAB_STATUS`
 
+#### Removing a Lab: `labrm`
+Removes a specified lab from every student in the class list. LAB_NUMBER must be a positive integer. If the specified LAB_NUMBER does not exist in the TAddressBook, an error message will be displayed.
+
+Format: `labrm l/LAB_NUMBER`
+
 --------------------------------------------------------------------------------------------------------------------
 ## FAQ
 
