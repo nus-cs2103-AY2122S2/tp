@@ -1,4 +1,4 @@
-package seedu.address.model.prescription;
+package seedu.address.model.medical;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
@@ -8,90 +8,89 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.patient.exceptions.PersonNotFoundException;
-import seedu.address.model.prescription.exceptions.DuplicatePrescriptionException;
-import seedu.address.model.prescription.exceptions.PrescriptionNotFoundException;
+import seedu.address.model.medical.exceptions.DuplicateMedicalException;
+import seedu.address.model.medical.exceptions.MedicalNotFoundException;
 
-public class UniquePrescriptionList implements Iterable<Prescription> {
+public class UniqueMedicalList implements Iterable<Medical> {
 
-    private final ObservableList<Prescription> internalList = FXCollections.observableArrayList();
-    private final ObservableList<Prescription> internalUnmodifiableList =
+    private final ObservableList<Medical> internalList = FXCollections.observableArrayList();
+    private final ObservableList<Medical> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains same prescription as the given argument.
+     * Returns true if the list contains same medical as the given argument.
      */
-    public boolean contains(Prescription toCheck) {
+    public boolean contains(Medical toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::equals);
     }
 
     /**
-     * Adds a prescription to the list.
-     * The prescription must not already exist in the list.
+     * Adds medical information to the list.
+     * The medical information must not already exist in the list.
      */
-    public void add(Prescription toAdd) {
+    public void add(Medical toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicatePrescriptionException();
+            throw new DuplicateMedicalException();
         }
         internalList.add(toAdd);
     }
 
-    public void setPrescription(Prescription target, Prescription editedPrescription) {
+    public void setMedical(Medical target, Medical editedPrescription) {
         requireAllNonNull(target, editedPrescription);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new PersonNotFoundException();
+            throw new MedicalNotFoundException();
         }
 
         if (!target.equals(editedPrescription) && contains(editedPrescription)) {
-            throw new DuplicatePrescriptionException();
+            throw new DuplicateMedicalException();
         }
 
         internalList.set(index, editedPrescription);
     }
 
     /**
-     * Removes the equivalent prescription from the list.
-     * The prescription must exist in the list.
+     * Removes the equivalent medical from the list.
+     * The medical must exist in the list.
      */
-    public void remove(Prescription toRemove) {
+    public void remove(Medical toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            throw new PrescriptionNotFoundException();
+            throw new MedicalNotFoundException();
         }
     }
 
-    public void setPrescriptions(UniquePrescriptionList replacement) {
+    public void setMedicals(UniqueMedicalList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
 
-    public void setPrescriptions(List<Prescription> prescriptions) {
+    public void setMedicals(List<Medical> prescriptions) {
         requireAllNonNull(prescriptions);
         if (!prescriptionAreUnique(prescriptions)) {
-            throw new DuplicatePrescriptionException();
+            throw new DuplicateMedicalException();
         }
 
         internalList.setAll(prescriptions);
     }
 
-    public ObservableList<Prescription> asUnmodifiableObservableList() {
+    public ObservableList<Medical> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
     }
 
     @Override
-    public Iterator<Prescription> iterator() {
+    public Iterator<Medical> iterator() {
         return internalList.iterator();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof UniquePrescriptionList // instanceof handles nulls
-                && internalList.equals(((UniquePrescriptionList) other).internalList));
+                || (other instanceof UniqueMedicalList // instanceof handles nulls
+                && internalList.equals(((UniqueMedicalList) other).internalList));
     }
 
     @Override
@@ -102,7 +101,7 @@ public class UniquePrescriptionList implements Iterable<Prescription> {
     /**
      * Returns true if {@code persons} contains only unique persons.
      */
-    private boolean prescriptionAreUnique(List<Prescription> prescriptions) {
+    private boolean prescriptionAreUnique(List<Medical> prescriptions) {
         for (int i = 0; i < prescriptions.size() - 1; i++) {
             for (int j = i + 1; j < prescriptions.size(); j++) {
                 if (prescriptions.get(i).equals(prescriptions.get(j))) {

@@ -113,8 +113,8 @@ public class UniqueContactList implements Iterable<Contact> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof seedu.address.model.contact.UniqueContactList // instanceof handles nulls
-                && internalList.equals(((seedu.address.model.contact.UniqueContactList) other).internalList));
+                || (other instanceof UniqueContactList // instanceof handles nulls
+                && internalList.equals(((UniqueContactList) other).internalList));
     }
 
     @Override

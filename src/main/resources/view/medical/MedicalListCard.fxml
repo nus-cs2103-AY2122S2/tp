@@ -24,10 +24,20 @@
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
-                <Label fx:id="drugName" text="\$first" styleClass="cell_big_label" />
+                <Label fx:id="nric" text="\$first" styleClass="cell_big_label" />
             </HBox>
-            <Label fx:id="date" styleClass="cell_small_label" text="\$date" />
-            <Label fx:id="instruction" styleClass="cell_small_label" text="\$instruction" />
+            <Label fx:id="age" styleClass="cell_small_label" text="\$age" />
+            <Label fx:id="bloodType" styleClass="cell_small_label" text="\$bloodType" />
+            <Label fx:id="medication" styleClass="cell_small_label" text="\$medication" />
+            <Label fx:id="height" styleClass="cell_small_label" text="\$height" />
+            <Label fx:id="weight" styleClass="cell_small_label" text="\$weight" />
+            <Label fx:id="illnesses" styleClass="cell_small_label" text="\$illnesses" />
+            <Label fx:id="surgeries" styleClass="cell_small_label" text="\$surgeries" />
+            <Label fx:id="familyHistory" styleClass="cell_small_label" text="\$familyHistory" />
+            <Label fx:id="immunizationHistory" styleClass="cell_small_label" text="\$immunizationHistory" />
+            <Label fx:id="gender" styleClass="cell_small_label" text="\$gender" />
+            <Label fx:id="ethnicity" styleClass="cell_small_label" text="\$ethnicity" />
+
         </VBox>
     </GridPane>
 </HBox>
