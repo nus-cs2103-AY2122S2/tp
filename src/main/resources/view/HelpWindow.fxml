@@ -16,19 +16,19 @@
   </icons>
    <scene>
       <Scene>
-          <AnchorPane prefHeight="530.0" prefWidth="720.0">
+          <AnchorPane prefHeight="530.0" prefWidth="740.0">
             <children>
                <SplitPane dividerPositions="0.06836461126005361" layoutX="149.0" layoutY="14.0" orientation="VERTICAL" prefHeight="273.0" prefWidth="373.0" stylesheets="@HelpWindow.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                  <items>
                    <AnchorPane minHeight="30.0" minWidth="0.0" prefHeight="30.0" prefWidth="371.0" stylesheets="@HelpWindow.css">
                         <children>
                            <Label fx:id="helpMessage" layoutX="1.0" layoutY="7.0" styleClass="linkLabel" text="Label" />
-                           <Button fx:id="copyButton" alignment="CENTER_RIGHT" layoutX="617.0" layoutY="1.0" mnemonicParsing="false" onAction="#copyUrl" styleClass="copyButton" text="Copy URL" />
+                           <Button fx:id="copyButton" alignment="CENTER_RIGHT" layoutX="655.0" mnemonicParsing="false" onAction="#copyUrl" styleClass="copyButton" text="Copy URL" />
                         </children>
                      </AnchorPane>
                      <SplitPane dividerPositions="0.5" prefHeight="385.0" prefWidth="550.0">
                         <items>
-                           <AnchorPane maxWidth="120.0" minHeight="0.0" minWidth="120.0" prefHeight="462.0" prefWidth="197.0">
+                           <AnchorPane maxWidth="120.0" minHeight="0.0" minWidth="140.0" prefHeight="462.0" prefWidth="197.0">
                               <children>
                                  <Button layoutY="1.0" maxHeight="30.0" minHeight="30.0" mnemonicParsing="false" onMouseClicked="#onHomeClick" prefHeight="30.0" prefWidth="86.0" styleClass="paneButton" text="Home" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                                  <Button layoutY="31.0" maxHeight="30.0" minHeight="30.0" mnemonicParsing="false" onMouseClicked="#onCommandClick" prefHeight="30.0" prefWidth="112.0" styleClass="paneButton" text="Commands" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="31.0" />

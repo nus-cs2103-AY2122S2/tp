@@ -17,6 +17,7 @@ import seedu.address.model.person.Favourite;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Preference;
 import seedu.address.model.person.UserType;
 import seedu.address.model.property.Property;
 
@@ -33,7 +34,7 @@ class JsonAdaptedPerson {
     private final boolean favourite;
     private final String address;
     private final List<JsonAdaptedProperty> properties = new ArrayList<>();
-    private final JsonAdaptedProperty preference;
+    private final JsonAdaptedPreference preference;
     private final String userType;
 
     /**
@@ -43,7 +44,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("favourite") boolean favourite,
             @JsonProperty("address") String address, @JsonProperty("properties") List<JsonAdaptedProperty> properties,
-            @JsonProperty("preference") JsonAdaptedProperty preference,
+            @JsonProperty("preference") JsonAdaptedPreference preference,
             @JsonProperty("userType") String userType) {
         this.name = name;
         this.phone = phone;
@@ -70,7 +71,8 @@ class JsonAdaptedPerson {
         properties.addAll(source.getProperties().stream()
                 .map(JsonAdaptedProperty::new)
                 .collect(Collectors.toList()));
-        preference = source.getPreference().isPresent() ? new JsonAdaptedProperty(source.getPreference().get()) : null;
+        preference = source.getPreference().isPresent()
+                ? new JsonAdaptedPreference(source.getPreference().get()) : null;
         userType = source.getUserType().value;
     }
 
@@ -86,7 +88,7 @@ class JsonAdaptedPerson {
             modelProperties.add(property.toModelType());
         }
 
-        final Optional<Property> modelPreference =
+        final Optional<Preference> modelPreference =
                 preference != null ? Optional.of(preference.toModelType()) : Optional.empty();
 
         if (name == null) {
