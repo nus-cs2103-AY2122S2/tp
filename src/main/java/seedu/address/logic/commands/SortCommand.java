@@ -12,6 +12,7 @@ import java.util.Optional;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Field;
 import seedu.address.model.person.Name;
@@ -35,7 +36,7 @@ public class SortCommand extends Command {
             + "[" + Email.PREFIX + "] "
             + "[" + Address.PREFIX + "] "
             + "[" + Remark.PREFIX + "] "
-            + "[" + Tag.PREFIX + "]...\n"
+            + "[" + Birthday.PREFIX + "] "
             + "Add keyword" + DESCENDING_KEYWORD + " after a field if it's to be sorted in descending order.\n"
             + "Example: " + COMMAND_WORD + " n/ e/ desc a/ n/";
 
