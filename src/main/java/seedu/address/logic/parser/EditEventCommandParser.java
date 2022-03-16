@@ -65,9 +65,9 @@ public class EditEventCommandParser implements Parser<EditEventCommand> {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
-     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Tag>} containing zero tags.
+     * Parses {@code Collection<String> names} into a {@code Set<Name>} if {@code names} is non-empty.
+     * If {@code names} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Name>} containing zero names.
      */
     private Optional<Set<Name>> parseNamesForEdit(Collection<String> names) throws ParseException {
         assert names != null;
