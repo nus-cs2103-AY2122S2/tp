@@ -1,17 +1,13 @@
 package seedu.address.logic.parser;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditLabStatusCommand;
 import seedu.address.logic.commands.RemoveLabCommand;
 import seedu.address.model.person.lab.Lab;
-import seedu.address.model.person.lab.LabStatus;
 
 public class RemoveLabCommandParserTest {
 
