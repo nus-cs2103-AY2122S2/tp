@@ -63,8 +63,6 @@ public class LogicManager implements Logic {
 
     @Override
     public ReadOnlyAddressBook getAddressBook() {
-
-        System.out.println("LogicManager.getAddressBook: "+model.getAddressBook().toString());
         return model.getAddressBook();
     }
 
