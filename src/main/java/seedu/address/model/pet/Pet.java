@@ -24,17 +24,20 @@ public class Pet {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final Diet diet;
+    private final Appointment appointment;
 
     /**
      * Every field must be present and not null.
      */
-    public Pet(Name name, OwnerName ownerName, Phone phone, Address address, Set<Tag> tags, Diet diet) {
-        requireAllNonNull(name, ownerName, phone, address, tags);
+    public Pet(Name name, OwnerName ownerName, Phone phone, Address address,
+               Set<Tag> tags, Diet diet, Appointment appointment) {
+        requireAllNonNull(name, ownerName, phone, address, tags, appointment);
         this.name = name;
         this.ownerName = ownerName;
         this.phone = phone;
         this.address = address;
         this.diet = diet;
+        this.appointment = appointment;
         this.tags.addAll(tags);
     }
 
@@ -56,6 +59,10 @@ public class Pet {
 
     public Diet getDiet() {
         return diet;
+    }
+
+    public Appointment getAppointment() {
+        return appointment;
     }
 
     /**
@@ -99,13 +106,14 @@ public class Pet {
                 && otherPet.getPhone().equals(getPhone())
                 && otherPet.getAddress().equals(getAddress())
                 && otherPet.getDiet().equals(getDiet())
+                && otherPet.getAppointment().equals(getAppointment())
                 && otherPet.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, ownerName, phone, address, tags, diet);
+        return Objects.hash(name, ownerName, phone, address, tags, diet, appointment);
     }
 
     @Override
@@ -118,8 +126,10 @@ public class Pet {
                 .append(getPhone())
                 .append("; Address: ")
                 .append(getAddress())
-                .append("; Address: ")
-                .append(getDiet());
+                .append("; Diet: ")
+                .append(getDiet())
+                .append("; Appointment: ")
+                .append(getAppointment());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
