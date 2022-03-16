@@ -40,6 +40,8 @@ Tracey can get your student health status management tasks done faster than trad
 
 * **`list`** : Lists all contacts.
 
+* **`summarise`** : summarise all contacts into their respective faculty and informs the reader percentage of student from that faculty is Covid positive.
+
 * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
 * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
@@ -72,22 +74,23 @@ Format: `add n/NAME p/PHONENUMBER e/EMAIL ...`
 * Add a student with the specific tags
 * The student name is case sensitive e.g. `add n/johnDoe` will logged as `johnDoe` and not `JohnDoe` in Tracey
 * Order of the tags does not matter e.g. `add n/NAME p/PHONENUMBER` is the same as `add p/PHONENUMBER n/NAME`
-* Tracey will ackoledge that the student has been added
+* Tracey will acknowledge that the student has been added
+* Tags such as faculty and covid status must be a valid pre-defined constant in its respective enumeration class
 
 Examples of usage:
 * `add n/Melvin f/SOC cs/ Negative`
 * `add e/student69@u.nus.edu n/ Martin`
 
 Possible tags:
-| **Tag** | **Meaning** |
-| - | - |
-| `n/`  | Name |
-| `p/` | Phone Number |
-| `e/` | Email |
-| `a/` | Address |
-| `f/` | Faculty |
-| `mc/` | Matriculation Number |
-| `cs`/ | Covid Status (Transient, Close Contact, Negative, Positive) |
+| **Tag** | **Meaning** | **Pre-defined constants** |
+| - | - | - |
+| `n/`  | Name | - |
+| `p/` | Phone Number | - | 
+| `e/` | Email | - |
+| `a/` | Address | - |
+| `f/` | Faculty |  FASS, BIZ, SOC, SCALE, FOD, CDE, DUKE, FOL, YLLSOM, YSTCOM, SOPP, LKYSPP, SPH, TEST, FOS |
+| `mc/` | Matriculation Number | - | 
+| `cs`/ | Covid Status | Positive, Negative, HRW, HRN |
 
 ### Deleting a contact: `delete`
 Delete a contact at a specific index
@@ -124,9 +127,17 @@ Format:`clear`
 :warning: `Save a copy of the data file if you intend to keep it as the deleted files cannot be recovered.`
 
 ### Summarising the records: `summarise`
-Summarises the record inside `Tracey` that an overview of the data, such as number of students who are `covid-positive`.
+Summarises the record inside `Tracey` that an overview of the data, such as number of students who are `covid-positive`. It will return an unfiltered list of the addressboook
+to show everyone in the address book while providing a valid response by the application.
 
-Format:`summarise record`
+Format:`summarise`
+
+Example of usage:
+*  `summarise` summarises the contacts of everyone in the Tracey application such that she responses with how many Covid positive students in faculty A, how many on HRN, HRW and negative.
+
+Future Enhancements:
+*  For future versions, summarise command can display a visual pie chart for different faculties to visualise the percentage of Covid positive students.
+This can aid understanding of raw data easier.
 
 ### Listing the records: `list`
 List the full record, which displays all the student's data that are logged into Tracey.
@@ -147,11 +158,11 @@ Filter student based on health statuses
 
 Format:`find HEALTH_STATUS`
 
-* Returns a list of students with the given health status: `covid-positive`, `covid-negative`, `close-contact`
-* The search is case-sensitive. e.g `Covid-Positive` will not match `covid-positive`
+* Returns a list of students with the given health status: `positive`, `negative`, `hrw`, `hrn`
+* The search is case-insensitive. e.g `Positive` will match `positive`
 
 Examples of usage:
-* `find covid-positive` returna all student that are tagged as covid-positive
+* `find positive` returns all student that are tagged as covid-positive
 
 ### Saving
 Saving in the application is automatic. The data in the file will be saved accordingly whenever
@@ -160,8 +171,12 @@ there are changes to `Tracey`.
 --------------------------------------------------------------------------------------------------------------------
 
 ### FAQ
-**Q**: How do I transfer my data to another computer?
-**A**: Copy the file from [ROOT]/data/tracey.txt over to your other computer.
+**Q**: How do I transfer my data to another computer? <br>
+**A**: Copy the file from [ROOT]/data/tracey.txt over to your other computer. <br>
+
+**Q**: What is the difference between the `list` command and `summarise` command? <br>
+**A**: The `list` command will provide an unfiltered list of addressbook whereas `summarise` command provides an overview
+of the data (Covid statuses) and give the user an easier understanding of how the faculty is dealing with the Covid outbreak. <br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -169,7 +184,7 @@ there are changes to `Tracey`.
 | No. | Command | Description |
 | - | - | - |
 | 1. | `find` | Included in `AB3`|
-| 2. | `add' | Included in AB3, Additional Field: Include health categories (Positive, Close Contact, Transient Contact, Health Risk Warning etc.) |
+| 2. | `add' | Included in AB3 with additional attributes such as faculty, matriculation number and covid status |
 | 3. | `delete` | Included in `AB3` |
 | 4. | `edit` | Included in `AB3` |
 | 5. | `clear` | Delete everything inside `Tracey` |
