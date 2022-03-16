@@ -4,17 +4,13 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.consultation.Consultation;
 import seedu.address.model.patient.Patient;
-import seedu.address.ui.PersonListPanel;
 import seedu.address.ui.UiPart;
-import seedu.address.ui.consultation.ConsultationCard;
-import seedu.address.ui.consultation.ConsultationListPanel;
 
 /**
  * Panel containing the list of persons.
@@ -42,7 +38,6 @@ public class ConsultationListPanel extends UiPart<Region> {
     class ConsultationListViewCell extends ListCell<Consultation> {
         @Override
         protected void updateItem(Consultation consultation, boolean empty) {
-//            System.out.println("ConsultationListViewCell.updateItem "+consultation.toString());
             super.updateItem(consultation, empty);
 
             if (empty || consultation == null) {

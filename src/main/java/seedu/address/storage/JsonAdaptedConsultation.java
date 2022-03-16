@@ -11,14 +11,13 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-
-import seedu.address.model.patient.Nric;
 import seedu.address.model.consultation.Consultation;
 import seedu.address.model.consultation.Date;
 import seedu.address.model.consultation.Time;
 import seedu.address.model.consultation.Notes;
 import seedu.address.model.consultation.Prescription;
 import seedu.address.model.consultation.TestsTakenAndResults;
+import seedu.address.model.patient.Nric;
 
 
 /**
@@ -108,6 +107,7 @@ class JsonAdaptedConsultation {
 
 
         return new Consultation(new Nric(modelOwnerNric), new Date(modelDate), new Time(modelTime),
-                new Notes(modelNotes), new Prescription(modelPrescription), new TestsTakenAndResults(modelTestsTakenAndResults));
+                new Notes(modelNotes), new Prescription(modelPrescription),
+                new TestsTakenAndResults(modelTestsTakenAndResults));
     }
 }

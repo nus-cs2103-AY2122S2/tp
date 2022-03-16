@@ -1,12 +1,9 @@
 package seedu.address.ui.consultation;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.consultation.*;
-import seedu.address.model.patient.Patient;
+import seedu.address.model.consultation.Consultation;
 import seedu.address.ui.UiPart;
 
 /**
@@ -48,11 +45,6 @@ public class ConsultationCard extends UiPart<Region> {
         super(FXML);
         this.consultation = consultation;
         id.setText(displayedIndex + ". ");
-//        for (Patient patient : personList) {
-//            if (patient.getNric().equals(consultation.getNric())) {
-//                name.setText(patient.getName().toString() + " / " + consultation.getNric().toString());
-//            }
-//        }
         date.setText(consultation.getDate().toString() + ", " + consultation.getTime().toString());
         notes.setText(consultation.getNotes().toString());
         if (consultation.getPrescription().toString().equals("")) {

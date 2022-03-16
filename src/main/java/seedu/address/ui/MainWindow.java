@@ -18,7 +18,6 @@ import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-import seedu.address.model.consultation.Consultation;
 import seedu.address.ui.consultation.ConsultationListPanel;
 import seedu.address.ui.contact.ContactListPanel;
 import seedu.address.ui.medical.MedicalListPanel;
@@ -160,14 +159,14 @@ public class MainWindow extends UiPart<Stage> {
      */
     public void setDisplayListPane(CommandType commandType) {
         switch (commandType) {
-            case CONTACT:
-                personListPanelPlaceholder.getChildren().clear();
-                personListPanelPlaceholder.getChildren().add(contactListPanel.getRoot());
-                return;
-            case CONSULTATION:
-                personListPanelPlaceholder.getChildren().clear();
-                personListPanelPlaceholder.getChildren().add(consultationListPanel.getRoot());
-                return;
+        case CONTACT:
+            personListPanelPlaceholder.getChildren().clear();
+            personListPanelPlaceholder.getChildren().add(contactListPanel.getRoot());
+            return;
+        case CONSULTATION:
+            personListPanelPlaceholder.getChildren().clear();
+            personListPanelPlaceholder.getChildren().add(consultationListPanel.getRoot());
+            return;
         case MEDICAL:
             personListPanelPlaceholder.getChildren().remove(0);
             personListPanelPlaceholder.getChildren().add(medicalListPanel.getRoot());
@@ -237,7 +236,7 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            System.out.println("CommandType: "+commandResult.getCommandType());
+            System.out.println("CommandType: " + commandResult.getCommandType());
             setDisplayListPane(commandResult.getCommandType());
 
             return commandResult;

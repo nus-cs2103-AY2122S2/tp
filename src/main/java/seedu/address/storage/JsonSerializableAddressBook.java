@@ -11,9 +11,8 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.contact.Contact;
-
 import seedu.address.model.consultation.Consultation;
+import seedu.address.model.contact.Contact;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.prescription.Prescription;
 import seedu.address.model.testresult.TestResult;
@@ -70,8 +69,8 @@ class JsonSerializableAddressBook {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
         contacts.addAll(source.getContactList().stream().map(JsonAdaptedContact::new).collect(Collectors.toList()));
         consultations.addAll(source.getConsultationList().stream().map(JsonAdaptedConsultation::new).collect(Collectors.toList()));
-        prescriptions.addAll(source.getPrescriptionList().stream().map(JsonAdaptedPrescription::new)
-                .collect(Collectors.toList()));
+        prescriptions.addAll(source.getPrescriptionList().stream().map(
+                JsonAdaptedPrescription::new).collect(Collectors.toList()));
         testResults.addAll(source.getTestResultList().stream().map(JsonAdaptedTestResult::new)
                 .collect(Collectors.toList()));
     }
