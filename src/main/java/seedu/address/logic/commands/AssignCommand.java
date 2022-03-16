@@ -23,6 +23,7 @@ public class AssignCommand extends Command {
             + PREFIX_LESSON + " 3";
     public static final String MESSAGE_SUCCESS = "%1$s has been assigned to %2$s successfully!";
     public static final String MESSAGE_ALREADY_ENROLLED = "%1$s is already enrolled into %2$s!";
+    public static final String MESSAGE_NO_SUCH_ID = "There is no %1$s with an ID of %2$s!";
     private final Index lessonIndex;
     private final Index studentIndex;
 
@@ -41,6 +42,12 @@ public class AssignCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        if (model.getFilteredLessonList().size() < lessonIndex.getOneBased()) {
+            throw new CommandException(String.format(MESSAGE_NO_SUCH_ID, "lesson", lessonIndex.getOneBased()));
+        }
+        if (model.getFilteredStudentList().size() < studentIndex.getOneBased()) {
+            throw new CommandException(String.format(MESSAGE_NO_SUCH_ID, "student", studentIndex.getOneBased()));
+        }
         Lesson lesson = model.getFilteredLessonList().get(lessonIndex.getZeroBased());
         Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
         if (student.isEnrolledIn(lesson) || lesson.hasAlreadyAssigned(student)) {
