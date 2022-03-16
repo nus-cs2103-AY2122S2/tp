@@ -16,9 +16,9 @@ public class Notes {
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    private static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public String notes;
+    private String notes;
 
     /**
      * Constructs a {@code Name}.
@@ -29,6 +29,10 @@ public class Notes {
         requireNonNull(notes);
         checkArgument(isValid(notes), MESSAGE_CONSTRAINTS);
         this.notes = notes;
+    }
+
+    public String value() {
+        return notes;
     }
 
     /**

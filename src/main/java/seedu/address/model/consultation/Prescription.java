@@ -9,7 +9,7 @@ public class Prescription {
     public static final String MESSAGE_CONSTRAINTS =
             "Prescription can be blank";
 
-    public String prescription;
+    private String prescription;
 
     /**
      * Constructs a {@code Name}.
@@ -18,6 +18,10 @@ public class Prescription {
      */
     public Prescription(String prescription) {
         this.prescription = prescription;
+    }
+
+    public String value() {
+        return prescription;
     }
 
 

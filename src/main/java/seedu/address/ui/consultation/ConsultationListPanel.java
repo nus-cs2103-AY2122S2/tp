@@ -41,7 +41,6 @@ public class ConsultationListPanel extends UiPart<Region> {
             super.updateItem(consultation, empty);
 
             if (empty || consultation == null) {
-                System.out.println("Consultation is null?");
                 setGraphic(null);
                 setText(null);
             } else {

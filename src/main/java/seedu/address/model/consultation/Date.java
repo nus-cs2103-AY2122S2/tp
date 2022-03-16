@@ -21,9 +21,9 @@ public class Date {
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "^(3[01]|[12][0-9]|0[1-9])-(1[0-2]|0[1-9])-[0-9]{4}$";
+    private static final String VALIDATION_REGEX = "^(3[01]|[12][0-9]|0[1-9])-(1[0-2]|0[1-9])-[0-9]{4}$";
 
-    public LocalDate date;
+    private LocalDate date;
 
     /**
      * Constructs a {@code Name}.
@@ -35,6 +35,10 @@ public class Date {
         checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
 
         this.date = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+    }
+
+    public LocalDate value() {
+        return date;
     }
 
     /**

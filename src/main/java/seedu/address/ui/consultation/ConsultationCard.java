@@ -26,10 +26,6 @@ public class ConsultationCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label name;
-    @FXML
-    private Label nric;
-    @FXML
     private Label date;
     @FXML
     private Label notes;

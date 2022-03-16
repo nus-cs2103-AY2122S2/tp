@@ -8,7 +8,7 @@ public class TestsTakenAndResults {
     public static final String MESSAGE_CONSTRAINTS =
             "Test Taken And Results can be blank";
 
-    public String testsTakenAndResults;
+    private String testsTakenAndResults;
 
     /**
      * Constructs a {@code Name}.
@@ -16,6 +16,10 @@ public class TestsTakenAndResults {
      */
     public TestsTakenAndResults(String testsTakenAndResults) {
         this.testsTakenAndResults = testsTakenAndResults;
+    }
+
+    public String value() {
+        return testsTakenAndResults;
     }
 
 

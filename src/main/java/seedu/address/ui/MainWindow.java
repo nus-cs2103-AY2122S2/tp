@@ -235,7 +235,6 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            System.out.println("CommandType: " + commandResult.getCommandType());
             setDisplayListPane(commandResult.getCommandType());
 
             return commandResult;

@@ -50,11 +50,11 @@ class JsonAdaptedConsultation {
      */
     public JsonAdaptedConsultation(Consultation source) {
         ownerNric = source.getNric().value;
-        date = source.getDate().date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-        time = source.getTime().time.format(DateTimeFormatter.ofPattern("HH-mm"));
-        notes = source.getNotes().notes;
-        prescription = source.getPrescription().prescription;
-        testsTakenAndResults = source.getTestAndResults().testsTakenAndResults;
+        date = source.getDate().value().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        time = source.getTime().value().format(DateTimeFormatter.ofPattern("HH-mm"));
+        notes = source.getNotes().value();
+        prescription = source.getPrescription().value();
+        testsTakenAndResults = source.getTestAndResults().value();
     }
 
     /**

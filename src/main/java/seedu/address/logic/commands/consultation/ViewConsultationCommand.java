@@ -61,8 +61,6 @@ public class ViewConsultationCommand extends Command {
             }
         }
 
-        System.out.println("ViewConsultationCommand.java: " + COMMAND_TYPE);
-
         return new CommandResult(
                 String.format(Messages.MESSAGE_CONSULTATION_LISTED_OVERVIEW,
                         model.getFilteredConsultationList().size(), nameAndNric),

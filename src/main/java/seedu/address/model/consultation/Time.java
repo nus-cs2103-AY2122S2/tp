@@ -19,9 +19,9 @@ public class Time {
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "^([2][0-4]|[10][0-9])-([543210][0-9])$";
+    private static final String VALIDATION_REGEX = "^([2][0-4]|[10][0-9])-([543210][0-9])$";
 
-    public LocalTime time;
+    private LocalTime time;
 
     /**
      * Constructs a {@code Name}.
@@ -33,6 +33,10 @@ public class Time {
         checkArgument(isValidTime(time), MESSAGE_CONSTRAINTS);
 
         this.time = LocalTime.parse(time, DateTimeFormatter.ofPattern("HH-MM"));
+    }
+
+    public LocalTime value() {
+        return time;
     }
 
     /**

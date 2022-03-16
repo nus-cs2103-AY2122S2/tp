@@ -96,7 +96,6 @@ public class ModelManager implements Model {
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        System.out.println("ModelManager.setAddressBook: " + addressBook);
         this.addressBook.resetData(addressBook);
     }
 
