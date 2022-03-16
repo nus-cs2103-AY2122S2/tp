@@ -154,6 +154,18 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Summarise feature
+
+The summarise mechanism implements the following sequence and interactions for the method call execute("summarise") on a LogicManager object.
+
+![SummariseSequenceDiagram](images/SummariseSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `SummariseCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+When execute is called on the SummariseCommand object, there are multiple call back to self to anaylse and produce the result back to the Logic Manager.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
