@@ -273,34 +273,34 @@ It can also keep track of performance metrics, like total new memberships.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority   | As a …​           | I want to …​                                                                             | So that I can…​                                                                  |
-|------------|-------------------|------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
-| `* * *`    | new user          | view the user guide easily                                                               | refer to instructions when I forget how to use the App                           |
-| `* * *`    | new user          | see where to key in information easily                                                   | I am not confused by the interface                                               |
-| `* * *`    | new user          | easily see the format to follow for commands for the system to understand                | key in customer information easily                                               |
-| `* * *`    | new user          | add name of customer                                                                     |                                                                                  |
-| `* * *`    | new user          | add contact details of customer                                                          | contact them for their appointment or for follow up                              |
-| `* * *`    | new user          | add customer preference for staff                                                        | appoint the staff they prefer during their appointment                           |
-| `* * *`    | new user          | add allergy information of customer                                                      | make sure I do not affect their health by applying products they are allergic to |
-| `* * *`    | new user          | add hair type of customer                                                                | choose the correct products when treating their hairType                         |
-| `* * *`    | new user          | add skin type of customer                                                                | choose the appropriate products when treating their skinType                     |
-| `* * *`    | new user          | view a customer profile                                                                  |                                                                                  |
-| `* * *`    | new user          | delete a customer profile                                                                | get rid of sample data I used to explore the app                                 |
-| `* * *`    | new user          | edit a customer profile                                                                  | update details when needed                                                       |
-| `* * *`    | new user          | find a customer profile                                                                  | locate a customer easily                                                         |
-| `* * *`    | new user          | show all customers depending on a keyword                                                | filter the list of customers to only those I am interested in                    |
-| `* *`      | intermediate user | view customers based on when they are coming to the salon                                | do appropriate preparations based on customer profile                            |
-| `* *`      | intermediate user | add the birth date of a customer                                                         | know when to sent birthday wishes to customers                                   |
-| `* *`      | intermediate user | view the customers that are having their birthday today                                  | be reminded to sent them birthday wishes                                         |
-| `*`        | user              | add personal details of staff like birth date, contact number, part time/full timer, etc | know my staffs better                                                            |
-| `*`        | user              | add services that customer prefers                                                       | better pitch new products and personalise their experience at the salon          |
-| `*`        | user              | add photo of customer                                                                    | remember new customers more easily                                               |
-| `*`        | expert user       | add the feedback of the customer after been serviced for a booking                       | know how satisfied the customer is and know the areas of improvement if any      |
-| `*`        | expert user       | keep track of number of customers on a specific day                                      | better allocate manpower                                                         |
-| `*`        | expert user       | keep track of how many new customers gained                                              | review and improve my company's performance                                      |
-| `*`        | expert user       | keep track of expected spending of customer                                              | review and improve my company's performance                                      |
-| `*`        | expert user       | get summary statistics on my customer profile (age)                                      | review and improve my choice of services and products                            |
-| `*`        | expert user       | get summary statistics on my customer profile (preferred staff)                          | identify the best staff and let the team learn from them                         |
+| Priority | As a …​           | I want to …​                                                                             | So that I can…​                                                                  |
+|----------|-------------------|------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
+| `* * *`  | new user          | view the user guide easily                                                               | refer to instructions when I forget how to use the App                           |
+| `* * *`  | new user          | see where to key in information easily                                                   |                                                                                  |
+| `* * *`  | new user          | easily see the format to follow for commands for the system to understand                | key in customer information easily                                               |
+| `* * *`  | new user          | add name of customer                                                                     |                                                                                  |
+| `* * *`  | new user          | add contact details of customer                                                          | contact them for their appointment or for follow up                              |
+| `* * *`  | new user          | add customer preference for staff                                                        | appoint the staff they prefer during their appointment                           |
+| `* * *`  | new user          | add allergy information of customer                                                      | make sure I do not affect their health by applying products they are allergic to |
+| `* * *`  | new user          | add hair type of customer                                                                | choose the correct products when treating their hairType                             |
+| `* * *`  | new user          | add skin type of customer                                                                | choose the appropriate products when treating their skinType                         |
+| `* * *`  | new user          | view a customer profile                                                                  | know the details of a customer                         |
+| `* * *`  | new user          | view a list of customer profile associated with a keyword                                | view the profiles of customers that i am interest in                                               |
+| `* * *`  | new user          | delete a customer profile                                                                | get rid of sample data I used to explore the app                                 |
+| `* * *`  | new user          | edit a customer profile                                                                  | update details when needed                                                       |
+| `* * *`  | new user          | find a customer profile                                                                  | locate a customer easily                                                         |
+| `* *`    | intermediate user | view customers based on when they are coming to the salon                                | do appropriate preparations based on customer profile                            |
+| `* *`    | intermediate user | add the birth date of a customer                                                         | know when to sent birthday wishes to customers                                   |
+| `* *`    | intermediate user | view the customers that are having their birthday today                                  | be reminded to sent them birthday wishes                                         |
+| `*`      | new user          | add personal details of staff like birth date, contact number, part time/full timer, etc | know my staffs better                                                            |
+| `*`      | new user          | add services that customer prefers                                                       | better pitch new products and personalise their experience at the salon          |
+| `*`      | new user          | add photo of customer                                                                    | remember new customers more easily                                               |
+| `*`      | expert user       | add the feedback of the customer after been serviced for a booking                       | know how satisfied the customer is and know the areas of improvement if any      |
+| `*`      | expert user       | keep track of number of customers on a specific day                                      | better allocate manpower                                                         |
+| `*`      | expert user       | keep track of how many new customers gained                                              | review and improve my company's performance                                      |
+| `*`      | expert user       | keep track of expected spending of customer                                              | review and improve my company's performance                                      |
+| `*`      | expert user       | get summary statistics on my customer profile (age)                                      | review and improve my choice of services and products                            |
+| `*`      | expert user       | get summary statistics on my customer profile (preferred staff)                          | identify the best staff and let the team learn from them                         |
 
 *{More to be added}*
 
@@ -308,35 +308,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is`TrackBeau` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: showing customer's detail by Index**
+**Use case: find customer's detail by their name**
 
 **MSS**
 
-1.  User requests to list customers
-2.  TrackBeau shows a list of customers with their customer Index
-3.  User requests to show information about customer using Index
-4.  TrackBeau shows information about customer
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3. The given index is invalid.
-
-    * 3a1. TrackBeau shows an error message.
-
-      Use case resumes at step 3.
-
-**Use case: find customer's detail by their name**
-
 1.  User requests to find a customer by name using a keyword
 2.  TrackBeau shows a list of customers with matching keyword with their customer Index
-3.  User requests to show information about customer using Index
-4.  TrackBeau shows information about customer
 
     Use case ends.
 
@@ -346,11 +323,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is invalid.
+**Use case: find customer's details associated with a keyword**
 
-    * 3a1. TrackBeau shows an error message.
+**MSS**
 
-      Use case resumes at step 3.
+1.  User requests to find a customer related to a keyword
+2.  TrackBeau shows a list of customers with matching keyword with their customer Index
+
+
+
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+
 
 **Use case: Add a customer**
 
@@ -387,7 +376,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. TrackBeau shows an error message.
 
       Use case resumes at step 3.
-  
+
 *{More to be added}*
 
 **Use case: user wishes to exit the application**
@@ -452,28 +441,28 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### showing customer's details
+### finding customer by name
 
-1. showing customer
+1. finding customer by name
 
-   1. Test case: `show 1`<br>
-      Expected: Details of the first customer on the list will be shown.
+   1. Test case: `find name john`<br>
+      Expected: list of customers with john in their name will be shown
 
-   1. Test case: `show 0`<br>
-      Expected: Customer does not exist. Error details shown in the status message. Status bar remains the same.
+   1. Test case: `find name j0hn`<br>
+      Expected: Invalid keyword has been enter. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect show commands to try: `show`, `show x` (where x is larger than the list size or less than 1)<br>
+   1. Other incorrect show commands to try: `find name`, `find x` (where x only contains english characters)<br>
       Expected: Similar to previous.
 
 ### finding customer by keyword
 
-1. finding customer by keyword
+1. finding customer by keyword type and keyword
 
-   1. Test case: `find john`<br>
-      Expected: list of customers with john in their name will be shown
+   1. Test case: `find allergies nickle`<br>
+      Expected: list of customers with nickle in their allergy will be shown
 
-   1. Test case: `find j0hn`<br>
+   1. Test case: `find nickle`<br>
       Expected: Invalid keyword has been enter. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect show commands to try: `find`, `find x` (where x only contains english characters)<br>
+   1. Other incorrect show commands to try: `find skintype`, `find x` (where x only contains english characters)<br>
       Expected: Similar to previous.
