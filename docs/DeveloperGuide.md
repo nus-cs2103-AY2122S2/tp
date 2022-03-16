@@ -304,16 +304,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 3a. User uses one of the three `addTask` commands: 
-    * 3a1. User uses `addTask /todo` command 
+* 3a. User uses one of the three `add` commands: 
+    * 3a1. User uses `addTodo` command 
 
       Use case resumes from step 4. 
 
-    * 3a2. User uses `addTask /event` command 
+    * 3a2. User uses `addEvent` command 
 
       Use case resumes from step 4. 
 
-    * 3a3. User uses `addTask /deadline` command 
+    * 3a3. User uses `addDeadline` command 
 
       Use case resumes from step 4. 
     
@@ -354,30 +354,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User starts up ManageEZPZ
 2. ManageEZPZ greets User with our HELP page, with all the commands.
 3. User enters the command to list Tasks.
-4. ManageEZPZ displays the Tasks according.
+4. ManageEZPZ displays the Tasks accordingly.
 
    Use case ends.
 
 **Extensions**
 
 * 3a. User uses one of the five `list` Task commands: 
-    * 3a1. User uses `list /all` command 
+    * 3a1. User uses `list` command 
 
       Use case resumes from step 4. 
 
-    * 3a2. User uses `list /todo` command 
+    * 3a2. User uses `list todo/` command 
 
       Use case resumes from step 4. 
 
-    * 3a3. User uses `list /deadline` command 
+    * 3a3. User uses `list deadline/` command 
 
       Use case resumes from step 4. 
 
-    * 3a2. User uses `list /event` command 
+    * 3a2. User uses `list event/` command 
 
       Use case resumes from step 4. 
 
-    * 3a3. User uses `list /today` command 
+    * 3a3. User uses `list today/` command 
 
       Use case resumes from step 4. 
     
@@ -453,11 +453,11 @@ Preconditions: User is currently using ManageEZPZ.
 
 * 3a. User uses one of the two Find Task commands: 
 
-    * 3a1. User uses `find /task TASK_DESCRIPTION` command 
+    * 3a1. User uses `find task/ desc/TASK_DESCRIPTION` command 
 
       Use case resumes from step 4. 
 
-    * 3a2. User uses `find /date DD-MM-YYYY` command 
+    * 3a2. User uses `find date/YYYY-MM-DD` command 
 
       Use case resumes from step 4. 
 
@@ -492,13 +492,13 @@ Preconditions: User is currently using ManageEZPZ.
 
 ****
 
-**Use Case 8 - Clear all Tasks**
+**Use Case 8 - Deleting all Entries in ManageEZPZ**
 
 **MSS**
 
-1. User enters the command to clear all Tasks
+1. User enters the command to clear ManageEZPZ.
 2. ManageEZPZ clears all Tasks & confirms with a successful 
-message that all Task are cleared. 
+message that ManageEZPZ entries are cleared. 
 
    Use case ends.
 
