@@ -39,13 +39,17 @@ public class ConsultationListPanel extends UiPart<Region> {
     class ConsultationListViewCell extends ListCell<Consultation> {
         @Override
         protected void updateItem(Consultation consultation, boolean empty) {
+//            System.out.println("ConsultationListViewCell.updateItem "+consultation.toString());
             super.updateItem(consultation, empty);
 
             if (empty || consultation == null) {
+                System.out.println("Consultation is null?");
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new ConsultationCard(consultation, getIndex() + 1).getRoot());
+                System.out.println(consultation);
+                System.out.println(consultation == null);
+                setGraphic(new ConsultationCard(consultation).getRoot());
             }
         }
     }

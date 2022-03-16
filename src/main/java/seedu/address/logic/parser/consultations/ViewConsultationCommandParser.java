@@ -14,7 +14,7 @@ import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 //import seedu.address.model.consultation.Date;
 //import seedu.address.model.consultation.Time;
-import seedu.address.model.person.Nric;
+import seedu.address.model.patient.Nric;
 
 public class ViewConsultationCommandParser {
     /**

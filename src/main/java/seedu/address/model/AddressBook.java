@@ -70,6 +70,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         setPersons(newData.getPersonList());
         setContacts(newData.getContactList());
+        setConsultations(newData.getConsultationList());
     }
 
     //// person-level operations
@@ -217,7 +218,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public String toString() {
         return persons.asUnmodifiableObservableList().size() + " persons"
-                + contacts.asUnmodifiableObservableList().size() + " contacts";
+                + contacts.asUnmodifiableObservableList().size() + " contacts"
+                + consultations.asUnmodifiableObservableList().size() + " consultations";
         // TODO: refine later
     }
 
@@ -246,7 +248,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
                 && persons.equals(((AddressBook) other).persons))
-                && contacts.equals(((AddressBook) other).contacts);
+                && contacts.equals(((AddressBook) other).contacts)
+                && consultations.equals(((AddressBook) other).consultations);
     }
 
     @Override

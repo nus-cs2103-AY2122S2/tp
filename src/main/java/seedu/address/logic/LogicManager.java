@@ -38,6 +38,7 @@ public class LogicManager implements Logic {
         this.model = model;
         this.storage = storage;
         addressBookParser = new AddressBookParser();
+        System.out.println("LogicManager(): "+ model.getAddressBook().toString());
     }
 
     @Override
@@ -49,6 +50,7 @@ public class LogicManager implements Logic {
         commandResult = command.execute(model);
 
         try {
+            System.out.println("LogicManager.execute: "+ model.getAddressBook().toString());
             storage.saveAddressBook(model.getAddressBook());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
@@ -59,6 +61,8 @@ public class LogicManager implements Logic {
 
     @Override
     public ReadOnlyAddressBook getAddressBook() {
+
+        System.out.println("LogicManager.getAddressBook: "+model.getAddressBook().toString());
         return model.getAddressBook();
     }
 

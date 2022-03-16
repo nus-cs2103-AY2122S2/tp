@@ -122,9 +122,10 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         contactListPanel = new ContactListPanel(logic.getFilteredContactList());
         consultationListPanel = new ConsultationListPanel(logic.getFilteredConsultationList());
+        System.out.println("getFilteredConsultationList: "+logic.getFilteredConsultationList().toString());
         prescriptionListPanel = new PrescriptionListPanel(logic.getFilteredPrescriptionList());
 
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        personListPanelPlaceholder.getChildren().add(consultationListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -154,19 +155,19 @@ public class MainWindow extends UiPart<Stage> {
     private void setDisplayListPane(CommandType commandType) {
         switch (commandType) {
             case CONTACT:
-                personListPanelPlaceholder.getChildren().remove(0);
+                personListPanelPlaceholder.getChildren().clear();
                 personListPanelPlaceholder.getChildren().add(contactListPanel.getRoot());
                 return;
             case CONSULTATION:
-                personListPanelPlaceholder.getChildren().remove(0);
+                personListPanelPlaceholder.getChildren().clear();
                 personListPanelPlaceholder.getChildren().add(consultationListPanel.getRoot());
                 return;
             case PRESCRIPTION:
-                personListPanelPlaceholder.getChildren().remove(0);
+                personListPanelPlaceholder.getChildren().clear();
                 personListPanelPlaceholder.getChildren().add(prescriptionListPanel.getRoot());
                 return;
             default:
-                personListPanelPlaceholder.getChildren().add(consultationListPanel.getRoot());
+                personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         }
     }

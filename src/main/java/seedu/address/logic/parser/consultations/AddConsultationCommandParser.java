@@ -4,7 +4,7 @@ import seedu.address.logic.commands.consultation.AddConsultationCommand;
 import seedu.address.logic.parser.*;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.consultation.*;
-import seedu.address.model.person.Nric;
+import seedu.address.model.patient.Nric;
 
 import java.util.Set;
 import java.util.stream.Stream;

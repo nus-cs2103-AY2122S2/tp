@@ -3,7 +3,7 @@ package seedu.address.model.consultation;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
-import seedu.address.model.person.Nric;
+import seedu.address.model.patient.Nric;
 
 /**
  * Represents a Person in the address book.

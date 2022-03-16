@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 
-import seedu.address.model.person.Nric;
+import seedu.address.model.patient.Nric;
 import seedu.address.model.consultation.Consultation;
 import seedu.address.model.consultation.Date;
 import seedu.address.model.consultation.Time;
@@ -101,10 +101,6 @@ class JsonAdaptedConsultation {
             throw new IllegalValueException(Notes.MESSAGE_CONSTRAINTS);
         }
         final String modelNotes = notes;
-
-        if (prescription == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Prescription.class.getSimpleName()));
-        }
 
         final String modelPrescription = prescription;
 

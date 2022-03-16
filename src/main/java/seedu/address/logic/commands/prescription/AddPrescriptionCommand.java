@@ -12,7 +12,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Nric;
+import seedu.address.model.patient.Nric;
 import seedu.address.model.patient.NricPredicate;
 import seedu.address.model.prescription.Prescription;
 import seedu.address.model.prescription.PrescriptionWithNricPredicate;

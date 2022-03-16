@@ -2,7 +2,7 @@ package seedu.address.model.prescription;
 
 import java.util.Objects;
 
-import seedu.address.model.person.Nric;
+import seedu.address.model.patient.Nric;
 
 public class Prescription {
 
