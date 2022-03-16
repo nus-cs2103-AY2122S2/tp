@@ -5,12 +5,15 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LINEUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PLAYER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TEAM;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.team.TeamName;
 
 /**
@@ -109,7 +112,7 @@ public class ViewCommandParser implements Parser<ViewCommand> {
             }
         }
 
-        return new ViewCommand("PlayerName: " + name + "\nTeamName: " + teamName + "\nLineupName: " + lineupName);
+        return new ViewCommand(new NameContainsKeywordsPredicate(new ArrayList<>()));
     }
 
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
