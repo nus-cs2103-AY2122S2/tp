@@ -1,10 +1,20 @@
 @startuml
 !include style.puml
-!theme materia-outline
 
-skinparam backgroundColor white
-skinparam shadowing false
-skinparam arrowThickness 1.1
+'Local overrides (copy this section)
+'Change the color here
+!$theme_color = UI_COLOR
+
+skinparam TitleFontColor $theme_color
+skinparam Class {
+    FontColor $theme_color
+    StereotypeFontColor $theme_color
+    BorderColor $theme_color
+    FontColor<<Hidden>> #FFFFFF
+    StereotypeFontColor<<Hidden>> #FFFFFF
+    BorderColor<<Hidden>> #FFFFFF
+}
+'End of local overrides
 
 package UI {
     Class "{abstract}\nUiComponent" as UiComponent

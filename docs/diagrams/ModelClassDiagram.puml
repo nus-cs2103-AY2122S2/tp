@@ -1,37 +1,40 @@
 @startuml
 !include style.puml
 
-skinparam titleFontColor black
+'Local overrides (copy this section)
+'Change the color here
+!$theme_color = MODEL_COLOR
+
+skinparam TitleFontColor $theme_color
 skinparam Class {
-    FontSize 15
-    StereotypeFontSize 13
-    BackgroundColor MODEL_COLOR
-    BackgroundColor<<Hidden>> #FFFFFF
+    FontColor $theme_color
+    StereotypeFontColor $theme_color
+    BorderColor $theme_color
+    FontColor<<Hidden>> #FFFFFF
+    StereotypeFontColor<<Hidden>> #FFFFFF
+    BorderColor<<Hidden>> #FFFFFF
+}
+'End of local overrides
+
+package Model {
+    interface "<<interface>>\nReadOnlyIBook" as ReadOnlyIBook
+    interface "<<interface>>\nModel" as Model
+    interface "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
+
+    class IBook
+    class ModelManager
+    class UserPrefs
+
+    class UniqueProductList
+    class Product
+    class Name
+    class Category
+    class ExpiryDate
+    class Description
+    class Price
 }
 
-skinparam arrowColor MODEL_COLOR
-skinparam arrowFontSize 13
-
-Package Model {
-interface "<<interface>>\nReadOnlyIBook" as ReadOnlyIBook
-interface "<<interface>>\nModel" as Model
-interface "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
-
-class IBook
-class ModelManager
-class UserPrefs
-
-class UniqueProductList
-class Product
-class Name
-class Category
-class ExpiryDate
-class Description
-class Price
-
-}
-
-Class HiddenOutside <<Hidden>>
+class HiddenOutside <<Hidden>>
 HiddenOutside ..> Model
 
 IBook .up.|> ReadOnlyIBook

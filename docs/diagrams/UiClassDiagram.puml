@@ -1,34 +1,36 @@
 @startuml
 !include style.puml
-!theme materia-outline
 
-skinparam backgroundColor white
-skinparam shadowing false
-skinparam arrowThickness 1.1
+'Local overrides (copy this section)
+'Change the color here
+!$theme_color = UI_COLOR
 
-package UI <<Rectangle>> {
-   Class "<<interface>>\nUi" as Ui
-   Class "{abstract}\nUiPart" as UiPart
-   Class "{abstract}\nUiComponent" as UiComponent
-   Class UiManager
-   Class MainWindow
-   Class MenuToolbar
-   Class CommandBox
-   Class ResultWindow
+skinparam TitleFontColor $theme_color
+skinparam Class {
+    FontColor $theme_color
+    StereotypeFontColor $theme_color
+    BorderColor $theme_color
+    FontColor<<Hidden>> #FFFFFF
+    StereotypeFontColor<<Hidden>> #FFFFFF
+    BorderColor<<Hidden>> #FFFFFF
+}
+'End of local overrides
+
+package UI {
+   class "<<interface>>\nUi" as Ui
+   class "{abstract}\nUiPart" as UiPart
+   class "{abstract}\nUiComponent" as UiComponent
+   class UiManager
+   class MainWindow
+   class MenuToolbar
+   class CommandBox
+   class ResultWindow
 
    package Table <<Rectangle>> {
    }
 
    package Popup <<Rectangle>> {
    }
-}
-
-skinparam Class<<Hidden>> {
-   BorderColor #FFFFFF
-   BackgroundColor #FFFFFF
-   FontColor #FFFFFF
-   HeaderBackgroundColor #FFFFFF
-   StereotypeFontColor #FFFFFF
 }
 
 package Model <<Rectangle>> {
@@ -38,7 +40,7 @@ package Logic <<Rectangle>> {
 }
 
 
-Class HiddenOutside<<Hidden>>
+class HiddenOutside<<Hidden>>
 HiddenOutside ..> Ui
 
 UiManager .left.|> Ui

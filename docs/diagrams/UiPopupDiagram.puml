@@ -1,20 +1,30 @@
 @startuml
 !include style.puml
-!theme materia-outline
 
-skinparam backgroundColor white
-skinparam shadowing false
-skinparam arrowThickness 1.1
+'Local overrides (copy this section)
+'Change the color here
+!$theme_color = UI_COLOR
+
+skinparam TitleFontColor $theme_color
+skinparam Class {
+    FontColor $theme_color
+    StereotypeFontColor $theme_color
+    BorderColor $theme_color
+    FontColor<<Hidden>> #FFFFFF
+    StereotypeFontColor<<Hidden>> #FFFFFF
+    BorderColor<<Hidden>> #FFFFFF
+}
+'End of local overrides
 
 package UI {
-    Class "{abstract}\nUiComponent" as UiComponent
-    Class MainWindow
+    class "{abstract}\nUiComponent" as UiComponent
+    class MainWindow
     package Popup as PopupContainer {
-       Class "{abstract}\nPopup" as Popup
-       Class PopupHandler
-       Class PopupAdd
-       Class PopupDelete
-       Class PopupUpdate
+       class "{abstract}\nPopup" as Popup
+       class PopupHandler
+       class PopupAdd
+       class PopupDelete
+       class PopupUpdate
     }
 }
 

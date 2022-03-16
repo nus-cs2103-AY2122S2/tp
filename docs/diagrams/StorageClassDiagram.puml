@@ -1,7 +1,20 @@
 @startuml
 !include style.puml
-!theme materia-outline
-skinparam arrowThickness 1.1
+
+'Local overrides (copy this section)
+'Change the color here
+!$theme_color = STORAGE_COLOR
+
+skinparam TitleFontColor $theme_color
+skinparam Class {
+    FontColor $theme_color
+    StereotypeFontColor $theme_color
+    BorderColor $theme_color
+    FontColor<<Hidden>> #FFFFFF
+    StereotypeFontColor<<Hidden>> #FFFFFF
+    BorderColor<<Hidden>> #FFFFFF
+}
+'End of local overrides
 
 package Storage{
 
