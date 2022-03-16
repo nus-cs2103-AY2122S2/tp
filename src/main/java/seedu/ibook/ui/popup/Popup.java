@@ -6,28 +6,25 @@ import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import seedu.ibook.ui.MainWindow;
-import seedu.ibook.ui.UiPart;
+import seedu.ibook.ui.UiComponent;
 
 /**
  * Abstract Class representing the skeleton of a popup.
  */
-public abstract class Popup extends UiPart<Stage> {
+public abstract class Popup extends UiComponent<Stage> {
 
     @FXML
     private Text error;
-
-    private final MainWindow.CommandExecutor commandExecutor;
 
     /**
      * Initialize a new popup window with a {@code FXML} file path
      * and a {@code CommandExecutor}.
      *
      * @param filePath FXML filepath.
-     * @param commandExecutor Function to execute command.
+     * @param mainWindow The {@code MainWindow} that this component resides on.
      */
-    Popup(String filePath, MainWindow.CommandExecutor commandExecutor) {
-        super(filePath, new Stage());
-        this.commandExecutor = commandExecutor;
+    Popup(String filePath, MainWindow mainWindow) {
+        super(filePath, mainWindow, new Stage());
     }
 
     /**
@@ -77,7 +74,7 @@ public abstract class Popup extends UiPart<Stage> {
      * @param commandText The commandText.
      */
     void execute(String commandText) {
-        commandExecutor.execute(commandText);
+        getMainWindow().executeCommand(commandText);
     }
 
 }
