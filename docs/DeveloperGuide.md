@@ -384,22 +384,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. The student info has an invalid format.
-    
     * 1a1. Tracey will inform user that he/she did not provide the correct information.
-      
     * 1a2. User provide the correct details in the correct format.
-    
 * 1b. The student to be added already exist in the list by Tracey.
-  
     * 1b1. Tracey inform user that the contact exist in her.
       
         Use case ends
 * 1c. User adds multiple students in one go.
-  
     * 1c1. Tracey will list out a list of new students added with their info.
       
         Use case ends
-
+    
 **Use case: Edit information of a student**
 
 **MSS**
