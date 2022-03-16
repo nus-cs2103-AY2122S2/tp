@@ -95,5 +95,4 @@ public class TypicalBuyers {
     public static List<Buyer> getTypicalBuyers() {
         return new ArrayList<>(Arrays.asList(JUNHENG, JUNHONG, SHIHONG, JANALD, DARA, RICHARD, YUQI));
     }
-    
 }
