@@ -13,7 +13,7 @@ import seedu.address.model.property.Size;
 public class Preference {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Property must have have the format: [region, size, price]";
+            "Preference must have have the format: [region, size, lower price, higher price]";
 
     private final Region region;
     private final Size size;
