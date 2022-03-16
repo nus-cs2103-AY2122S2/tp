@@ -1,5 +1,9 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.DataTypeFlags.FLAG_APPLICANT;
+import static seedu.address.commons.core.DataTypeFlags.FLAG_INTERVIEW;
+import static seedu.address.commons.core.DataTypeFlags.FLAG_POSITION;
+
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.applicant.ListApplicantCommand;
 import seedu.address.logic.commands.interview.ListInterviewCommand;
@@ -7,9 +11,7 @@ import seedu.address.logic.commands.position.ListPositionCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 
-import static seedu.address.commons.core.DataTypeFlags.FLAG_APPLICANT;
-import static seedu.address.commons.core.DataTypeFlags.FLAG_INTERVIEW;
-import static seedu.address.commons.core.DataTypeFlags.FLAG_POSITION;
+
 
 public class ListCommandParser implements Parser<ListCommand> {
 

@@ -1,12 +1,12 @@
 package seedu.address.logic.commands.interview;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERVIEWS;
+
 import seedu.address.commons.core.DataType;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.model.Model;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERVIEWS;
 
 public class ListInterviewCommand extends ListCommand {
 
