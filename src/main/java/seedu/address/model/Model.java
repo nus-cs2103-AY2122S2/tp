@@ -9,6 +9,7 @@ import seedu.address.model.contact.Contact;
 import seedu.address.model.medical.Medical;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.prescription.Prescription;
+import seedu.address.model.testresult.TestResult;
 
 /**
  * The API of the Model component.
@@ -18,6 +19,7 @@ public interface Model {
     Predicate<Patient> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
     Predicate<Prescription> PREDICATE_SHOW_ALL_PRESCRIPTIONS = unused -> true;
     Predicate<Contact> PREDICATE_SHOW_ALL_CONTACTS = unused -> true;
+    Predicate<TestResult> PREDICATE_SHOW_ALL_TEST_RESULTS = unused -> true;
     Predicate<Medical> PREDICATE_SHOW_ALL_MEDICALS = unused -> true;
 
     /**
@@ -134,6 +136,40 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredContactList(Predicate<Contact> predicate);
+
+    /**
+     * Returns true if a test result with the same identity as {@code testResult} exists in the address book.
+     */
+    boolean hasTestResult(TestResult testResult);
+
+    /**
+     * Deletes the given test result.
+     * The test result must exist in the address book.
+     */
+    void deleteTestResult(TestResult testResult);
+
+    /**
+     * Adds the given test result.
+     * {@code testResult} must not already exist in the address book.
+     */
+    void addTestResult(TestResult testResult);
+
+    /**
+     * Replaces the given testResult {@code target} with {@code editedTestResult}.
+     * {@code target} must exist in the address book.
+     * The test result identity of {@code editedTestResult} must not be the same
+     * as another existing test result in the address book.
+     */
+    void setTestResult(TestResult target, TestResult editedTestResult);
+
+    /** Returns an unmodifiable view of the filtered contact list */
+    ObservableList<TestResult> getFilteredTestResultList();
+
+    /**
+     * Updates the filter of the filtered test result list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredTestResultList(Predicate<TestResult> predicate);
 
     /**
      * Adds the given medical information.

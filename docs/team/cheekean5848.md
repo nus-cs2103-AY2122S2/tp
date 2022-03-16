@@ -11,7 +11,7 @@ Given below are my contributions to the project.
 
 * **Code contributed**: to be added soon
 
-* **Enhancement implemented**: 
+* **Enhancement implemented**:
 
 * **Contributions to the UG**: to be added soon
 

@@ -23,6 +23,7 @@ import seedu.address.model.medical.Medical;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.exceptions.DuplicatePersonException;
 import seedu.address.model.prescription.Prescription;
+import seedu.address.model.testresult.TestResult;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
@@ -92,6 +93,7 @@ public class AddressBookTest {
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Patient> patients = FXCollections.observableArrayList();
         private final ObservableList<Contact> contacts = FXCollections.observableArrayList();
+        private final ObservableList<TestResult> testResults = FXCollections.observableArrayList();
         private final ObservableList<Medical> medicals = FXCollections.observableArrayList();
         private final ObservableList<Prescription> prescriptions = FXCollections.observableArrayList();
 
@@ -112,6 +114,11 @@ public class AddressBookTest {
         @Override
         public ObservableList<Contact> getContactList() {
             return contacts;
+        }
+
+        @Override
+        public ObservableList<TestResult> getTestResultList() {
+            return testResults;
         }
 
         @Override

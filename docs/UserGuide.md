@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-<img src = "images/user-guide/icon.png" width = "250" alt="Unable to load image! Try again 
+<img src = "images/user-guide/icon.png" width = "250" alt="Unable to load image! Try again
 later.">
 ## Table of Contents
 - [Quick start](#quick-start)
@@ -125,7 +125,7 @@ Format: `/create -t consultation -i NRIC [-dt DATE] [-tm TIME] [-n NOTES] [-p PR
 
 NOTE: [-dt DATE][-tm TIME] are in the form dd-MM-yyyy, HH-mm (24 hour) respectively.
 
-Examples:  
+Examples:
 * `/create -t consultation -i S12345678P -dt 15-09-2021 -tm 18-00 -n Inflammation in the throat and windpipe, short and shallow breath, laboured breathing. Most likely has Upper Respiratory Infection. -p Augmentin Antibiotics 625mg - twice a day; Paracetamol 500mg - twice a day. -tt Stethoscope. Found short and laboured breathing.`
 
 ### View Past Consultations: `/view -t consultation`
@@ -144,7 +144,7 @@ Examples:
   * Shows all consultations for patients with id S12345678P that occurred in Sept 2021
 * `/view -t consultation -dt 15-09-2021 -tm 18-00`
   * Shows consultation that occurred on Sept 15 2021 1800hrs
-    
+
 <img src = "images/user-guide/feature2_8_1.png" width = "350" alt="Unable to load image! Try again later.">
 <img src = "images/user-guide/feature2_8_2.png" width = "350" alt="Unable to load image! Try again later.">
 
@@ -157,8 +157,8 @@ Examples:
 * `/delete -t consultation -i S12345678P  -dt 15-09-2021 -tm 18-00`
 
 ## FAQ
-Q: How do I transfer my data to another Computer?  
-A: Install the app on the other computer and overwrite the empty data file it creates with the file that contains the data of your previous MedBook folder.  
+Q: How do I transfer my data to another Computer?
+A: Install the app on the other computer and overwrite the empty data file it creates with the file that contains the data of your previous MedBook folder.
 
 ## Command Summary
 

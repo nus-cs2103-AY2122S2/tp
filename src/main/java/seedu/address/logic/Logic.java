@@ -12,6 +12,7 @@ import seedu.address.model.contact.Contact;
 import seedu.address.model.medical.Medical;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.prescription.Prescription;
+import seedu.address.model.testresult.TestResult;
 
 /**
  * API of the Logic component
@@ -42,6 +43,9 @@ public interface Logic {
     ObservableList<Medical> getFilteredMedicalList();
 
     ObservableList<Prescription> getFilteredPrescriptionList();
+
+    /** Returns an unmodifiable view of the filtered list of test results */
+    ObservableList<TestResult> getFilteredTestResultList();
 
     /**
      * Returns the user prefs' address book file path.
