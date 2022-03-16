@@ -27,7 +27,8 @@ public class ViewTestResultCommandParser {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_TYPE, PREFIX_NRIC)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewTestResultCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ViewTestResultCommand.MESSAGE_USAGE));
         }
 
         Nric ownerNric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
