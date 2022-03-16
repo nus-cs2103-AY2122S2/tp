@@ -50,7 +50,7 @@ This document is structured in a chronological manner so that you would be able 
 This subsection would introduce you to the different symbols, syntax and technical terms that are used throughout this guide.
 It is important to read this section before proceeding further to avoid getting confused!
 
-### 3.2.1 Special symbols
+#### 3.2.1 Special symbols
 
 **Additional Information**
 
@@ -87,11 +87,18 @@ Example tip.
 
 </div>
 
-### 3.2.2 Sections of the Application Window
+#### 3.2.2 Sections of the Application Window
 
-### 3.2.3 Navigating around
+The application window is divided into a command box, results window as well as a table that includes all the products.
+![Ui](images/Ui.png)
 
-### 3.2.4 Command Format
+#### 3.2.3 Navigating around
+
+The main mode of navigation in iBook is through the Command Line Interface (CLI). You can enter commands into the command box and press `Enter` to execute them. The results window would then display the results from executing the command. The table would also update accordingly based on the command ran.
+
+Alternatively, you can also interact with the application through buttons, such as the `Add Product` button, where a popup would be displayed for you to enter the different fields once it is clicked.
+
+#### 3.2.4 Command Format
 
 <div markdown="block" class="alert alert-info">
 
@@ -111,7 +118,7 @@ Example tip.
 
 </div>
 
-### 3.2.5 Command Parameters
+#### 3.2.5 Command Parameters
 
 | Parameter      | Description                                               |
 |:---------------|:----------------------------------------------------------|
