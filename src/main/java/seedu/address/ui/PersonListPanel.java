@@ -1,13 +1,19 @@
 package seedu.address.ui;
 
 import java.util.logging.Logger;
-
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.Logic;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
 
 /**
@@ -16,6 +22,8 @@ import seedu.address.model.person.Person;
 public class PersonListPanel extends UiPart<Region> {
     private static final String FXML = "PersonListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+    private Logic logic;
+    private ResultDisplay resultDisplay;
 
     @FXML
     private ListView<Person> personListView;
@@ -23,10 +31,12 @@ public class PersonListPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Person> personList) {
+    public PersonListPanel(ObservableList<Person> personList, Logic logic) {
         super(FXML);
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
+        this.logic = logic;
+        resultDisplay = new ResultDisplay();
     }
 
     /**
@@ -44,6 +54,10 @@ public class PersonListPanel extends UiPart<Region> {
                 setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
             }
         }
+
+        protected int getPersonCardIndex() {
+            return getIndex() + 1;
+        }
     }
 
     /**
@@ -51,6 +65,26 @@ public class PersonListPanel extends UiPart<Region> {
      */
     public void handleSelect() {
         MainWindow.setSelectedProfile(getPersonListView());
+    }
+
+    /**
+     * Handles the event where user right-clicks on a person card.
+     */
+    public void handleContextMenu() throws CommandException, ParseException {
+        ContextMenu contextMenu = new ContextMenu();
+        MenuItem edit = new MenuItem("Edit");
+        MenuItem delete = new MenuItem("Delete");
+        delete.setOnAction(event -> {
+            try {
+                int personToDeleteIndex = personListView.getSelectionModel().getSelectedIndex() + 1;
+                String deleteCommand = "delete " + personToDeleteIndex;
+                CommandResult result = logic.execute(deleteCommand);
+            } catch (ParseException | CommandException e) {
+                resultDisplay.setFeedbackToUser(e.getMessage());
+            }
+        });
+        contextMenu.getItems().addAll(edit, delete);
+        personListView.setContextMenu(contextMenu);
     }
 
     /**
