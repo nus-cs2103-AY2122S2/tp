@@ -21,9 +21,9 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.contact.Contact;
-import seedu.address.model.testresult.TestResult;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.prescription.Prescription;
+import seedu.address.model.testresult.TestResult;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
