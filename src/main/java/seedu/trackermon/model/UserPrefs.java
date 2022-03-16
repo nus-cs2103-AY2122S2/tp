@@ -14,7 +14,7 @@ import seedu.trackermon.commons.core.GuiSettings;
 public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
-    private Path showListFilePath = Paths.get("data" , "addressbook.json");
+    private Path showListFilePath = Paths.get("data" , "trackermon.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
