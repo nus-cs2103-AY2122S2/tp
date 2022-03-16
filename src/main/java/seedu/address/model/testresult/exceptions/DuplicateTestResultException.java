@@ -8,5 +8,5 @@ public class DuplicateTestResultException extends RuntimeException {
     public DuplicateTestResultException() {
         super("Operation would result in duplicate test results");
     }
-    
+
 }
