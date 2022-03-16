@@ -236,7 +236,6 @@ public class EditCommand extends Command {
                 if (moduleSet.contains(moduleToEdit)) {
                     moduleSet.remove(moduleToEdit);
                     moduleSet.add(editedModule);
-                    person.setModules(moduleSet);
                 }
             }
 
