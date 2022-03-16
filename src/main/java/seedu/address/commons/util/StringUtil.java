@@ -65,4 +65,9 @@ public class StringUtil {
             return false;
         }
     }
+
+    public static String removeAllWhiteSpaces(String s) {
+        requireNonNull(s);
+        return s.replaceAll("\\s", "");
+    }
 }
