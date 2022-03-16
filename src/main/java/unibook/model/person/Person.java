@@ -8,6 +8,7 @@ import java.util.Set;
 import unibook.commons.util.CollectionUtil;
 import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
+import unibook.model.person.exceptions.PersonNoSubtypeException;
 import unibook.model.tag.Tag;
 
 /**
@@ -22,7 +23,7 @@ public class Person {
     private final Email email;
 
     // Module that is person is associated with
-    private final Set<Module> modules = new HashSet<>();
+    private Set<Module> modules = new HashSet<>();
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
@@ -87,11 +88,10 @@ public class Person {
 
 
     /**
-     * Returns an immutable module set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
+     * Returns a modifiable module set.
      */
     public Set<Module> getModules() {
-        return Collections.unmodifiableSet(modules);
+        return modules;
     }
 
     /**
@@ -112,7 +112,26 @@ public class Person {
     }
 
     /**
-     * Returns a mutable module set.
+     * Adds this person to all the modules that they are associated with, into the
+     * correct personnel list (professor/student) in module depending on the runtime type
+     * of this person.
+     *
+     */
+    public void addPersonToAllTheirModules() throws PersonNoSubtypeException {
+        for (Module module : this.getModules()) {
+            if (this instanceof Student) {
+                module.addStudent((Student) this);
+            } else if (this instanceof Professor) {
+                module.addProfessor((Professor) this);
+            } else {
+                throw new PersonNoSubtypeException();
+            }
+        }
+    }
+
+    /**
+     * Returns a mutable module set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
      */
     public Set<Module> getModulesModifiable() {
         return modules;
@@ -144,6 +163,13 @@ public class Person {
      */
     public void addModule(Module module) {
         modules.add(module);
+    }
+
+    /**
+     * Sets peron's modules
+     */
+    public void setModules(Set<Module> modules) {
+        this.modules = modules;
     }
 
     /**

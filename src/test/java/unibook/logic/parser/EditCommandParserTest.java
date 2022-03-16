@@ -52,7 +52,7 @@ public class EditCommandParserTest {
     public void parse_missingParts_failure() {
 
         // no field specified
-        assertParseFailure(parser, "1 o/person ", EditCommand.MESSAGE_NOT_EDITED);
+        assertParseFailure(parser, " 1 o/person ", EditCommand.MESSAGE_NOT_EDITED);
 
         // no index and no field specified
         assertParseFailure(parser, " o/person ", MESSAGE_INVALID_FORMAT);
@@ -61,16 +61,16 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseFailure(parser, "-5" + " o/person " + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, " -5 " + " o/person " + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
 
         // zero index
-        assertParseFailure(parser, "0" + " o/person " + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, " 0 " + " o/person " + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
 
         // invalid arguments being parsed as preamble
-        assertParseFailure(parser, "1 some random string o/person", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, " 1 some random string o/person", MESSAGE_INVALID_FORMAT);
 
         // invalid prefix being parsed as preamble
-        assertParseFailure(parser, "1 i/ string o/person", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, " 1 i/ string o/person", MESSAGE_INVALID_FORMAT);
     }
 
     @Test

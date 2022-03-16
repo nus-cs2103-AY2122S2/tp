@@ -12,6 +12,7 @@ import static unibook.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -23,7 +24,7 @@ import unibook.logic.commands.EditCommand;
 import unibook.logic.commands.EditCommand.EditModuleDescriptor;
 import unibook.logic.commands.EditCommand.EditPersonDescriptor;
 import unibook.logic.parser.exceptions.ParseException;
-import unibook.model.module.Module;
+import unibook.model.module.ModuleCode;
 import unibook.model.tag.Tag;
 
 /**
@@ -52,18 +53,18 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            logger.info(index.toString());
         } catch (ParseException pe) {
-            if (argMultimap.getValue(PREFIX_OPTION).get().equals("person")) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                                                        EditCommand.PERSON_MESSAGE_USAGE), pe);
-            } else {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                                                        EditCommand.MODULE_MESSAGE_USAGE), pe);
-            }
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                                                    EditCommand.MODULE_MESSAGE_USAGE), pe);
         }
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         EditModuleDescriptor editModuleDescriptor = new EditModuleDescriptor();
+
+        if (argMultimap.getValue(PREFIX_OPTION).equals(Optional.empty())) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.PERSON_MESSAGE_USAGE));
+        }
 
         if (argMultimap.getValue(PREFIX_OPTION).get().equals("person")) {
             if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
@@ -77,13 +78,22 @@ public class EditCommandParser implements Parser<EditCommand> {
             }
 
             parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
-            parseModulesForEdit(argMultimap.getAllValues(PREFIX_NEWMOD)).ifPresent(editPersonDescriptor::setModules);
-            if (!editPersonDescriptor.isAnyFieldEdited()) {
+
+            Optional<Set<ModuleCode>> module = argMultimap.getValue(PREFIX_NEWMOD).isPresent()
+                    ? parseModulesForEdit(argMultimap.getValue(PREFIX_NEWMOD).get())
+                    : Optional.empty();
+            if (module.isEmpty() && !editPersonDescriptor.isAnyFieldEdited()) {
                 throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
             }
 
+            if (module.isPresent()) {
+                System.out.println("here");
+                System.out.println(module.get().iterator().next().getClass().getName());
+                return new EditCommand(index, editPersonDescriptor, module.get().iterator().next());
+            }
+            System.out.println("there");
             return new EditCommand(index, editPersonDescriptor);
-        } else {
+        } else if (argMultimap.getValue(PREFIX_OPTION).get().equals("module")) {
             if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
                 editModuleDescriptor.setModuleName(ParserUtil.parseModuleName(argMultimap.getValue(PREFIX_NAME).get()));
             }
@@ -96,6 +106,8 @@ public class EditCommandParser implements Parser<EditCommand> {
                 throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
             }
             return new EditCommand(index, editModuleDescriptor);
+        } else {
+            throw new ParseException(EditCommand.MESSAGE_OPTION_NOT_FOUND);
         }
     }
 
@@ -119,13 +131,13 @@ public class EditCommandParser implements Parser<EditCommand> {
      * If {@code modules} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Module>} containing zero modules.
      */
-    private Optional<Set<Module>> parseModulesForEdit(Collection<String> modules) throws ParseException {
-        assert modules != null;
-
-        if (modules.isEmpty()) {
+    private Optional<Set<ModuleCode>> parseModulesForEdit(String modules) throws ParseException {
+        if (modules == " ") {
             return Optional.empty();
         }
-        Collection<String> moduleSet = modules.size() == 1 && modules.contains("") ? Collections.emptySet() : modules;
-        return Optional.of(ParserUtil.parseModules(moduleSet));
+        Set<ModuleCode> moduleSet = new HashSet<ModuleCode>();
+        ModuleCode modCode = ParserUtil.parseModuleCode(modules);
+        moduleSet.add(modCode);
+        return Optional.of(moduleSet);
     }
 }

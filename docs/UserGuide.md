@@ -147,21 +147,20 @@ Examples:
 
 Edits an existing person in UniBook.
 
-Format: `edit o/OPTION [INDEX] [m/MODULE] [n/NAME] [p/PHONE] [e/EMAIL] [nm/NEWMODULE]`
+Format: `edit INDEX o/OPTION [m/MODULE] [n/NAME] [p/PHONE] [e/EMAIL] [nm/NEWMODULE]`
 
 * Edits the entity type defined by `o/OPTION`. This is a compulsory field.
-* Depending on the entity type, certain fields will be compulsory.
-* Before choosing to edit module or person, user can see which `INDEX` to edit by changing the UI to show the relevant list
-  * `list o/module` : To display list of modules with respective indexes
-  *  `list o/person` : To display list of persons with respective indexes 
+* Before choosing to edit module or person, user can see which `INDEX` to edit by changing the UI to show the relevant list. User will not be allowed to edit if not on the correct page. 
+  * `list v/modules` : To display list of modules with respective indexes
+  * `list v/people` : To display list of persons with respective indexes 
 * 2 values for `OPTION`:
-    * `module`: Edits the module specified by compulsory field `m/MODULE`. Optional fields `[n/NAME] [nm/NEWMODULE]` to specify the new name or module code of the module.
-    * `person`: Edits the person at the specified by the compulsory field INDEX. The index refers to the index number shown in the most recent list of contacts viewable on the GUI. The index must be a positive integer 1, 2, 3, …
+    * `module`: Edits the module specified by compulsory field `INDEX`. Optional fields `[n/NAME] [m/MODULECODE]` to specify the new name or module code of the module.
+    * `person`: Edits the person at the specified by the compulsory field `INDEX`. The index refers to the index number shown in the most recent list of contacts viewable on the GUI. The index must be a positive integer 1, 2, 3, …
 * Existing values will be updated to the input values.
 
 Examples:
 *  `edit 1 o/person p/91234567 e/prof@example.com nm/CS2103` Edits the phone number and email address of the 1st person to be `91234567` and `prof@example.com` respectively. Adds module CS2103 to the list of modules that this person is taking. 
-*  `edit 1 o/module m/CS2103 n/Software Engineering  ` Edits the module code of the 1st module with code `CS2103` to be named as `Software Engineering` and have a new code `CS2103T`
+*  `edit 1 o/module m/CS2103 n/Software Engineering  ` Edits the module code of the 1st module to code `CS2103` and name as `Software Engineering`. Edits the all instances of modules in each person taking the module. 
 
 ### Locating persons by name: `find`
 
