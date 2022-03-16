@@ -97,7 +97,15 @@ Examples:
 
 Adds an internship role to a company that already exists in the list.
 
-Format: `addRole COMPANY_INDEX n/ROLE s/STATUS b/DEADLINE d/DESCRIPTION $/STIPEND`
+Format: `addRole COMPANY_INDEX n/ROLE_NAME s/STATUS b/DEADLINE [d/DESCRIPTION] [$/STIPEND]`
+* Add internship role at the specified `COMPANY_INDEX`.
+* The `COMPANY_INDEX` must be a positive integer like 1, 2, 3, ...
+* The `ROLE_NAME` should only contain alphanumeric characters and spaces.
+* The `STATUS` accepted are as follows: applying, pending, interview and assessments, offered, rejected, complete.
+* The `DEADLINE` should be in format dd-MM-yyyy HH:mm
+* The `DESCRIPTION` and `STIPEND` fields are optional during the initial role creation
+    * The `DESCRIPTION` can contain alphanumeric characters, spaces and special characters.
+    * The `STIPEND` must be a positive integer going up to 10 digits long.
 
 Examples:
 
@@ -134,7 +142,10 @@ Examples:
   
 ### Finding companies or internship roles from companies by name: `find` <a id="c-find-c-r"></a>
 
-Find companies whose names match any of the given company keywords and contain one or more roles matching any of the given role keywords.
+Find companies or/and roles depending on the format given.
+If only company keywords are entered, companies whose names match any of the given keywords will be displayed with all their roles.
+If only role keywords are entered, roles across all companies whose role names match any of the given keywords will be displayed.
+If both keywords are entered, only companies with names that match any of the company keywords while containing roles whose names match any of the role keywords are displayed.
 
 Format: `find c/COMPANY_KEYWORD [MORE_COMPANY_KEYWORDS] r/ROLE_KEYWORD [MORE_ROLE_KEYWORDS]`
 
@@ -145,9 +156,6 @@ Format: `find c/COMPANY_KEYWORD [MORE_COMPANY_KEYWORDS] r/ROLE_KEYWORD [MORE_ROL
 * Companies and roles matching at least one keyword will be returned e.g. `software engineer` will match `mobile engineer` and `software developer`
 * At least one role keyword or one company keyword must be provided in the user input. 
 * The prefixes `c/` and `r/` can be omitted or included if no corresponding keywords are meant to be entered  
-* If both keywords are entered, only companies with names that match any of the company keywords, containing roles whose names match any of the role keywords are displayed.
-* If no role keywords are entered, companies whose names match any of the given keywords will be displayed with all their roles.
-* If no company keywords are entered, roles whose role names match role keywords, belonging to all companies, are displayed. 
 
 Examples:
 
@@ -175,7 +183,7 @@ Action | Format, Examples
 --------|------------------
 **List companies** | `list`
 **Add company** | `addCompany n/COMPANY_NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` <br><br> e.g.,`addCompany n/Google p/98765432 e/hr_google@gmail.com a/70 Pasir Panjang Rd, #03-71 Mapletree Business City II, Singapore 117371`
-**Add role** | `addRole COMPANY_INDEX n/ROLE s/STATUS b/DEADLINE d/DESCRIPTION $/STIPEND` <br><br> e.g.,` addRole 1 n/Data Analyst s/Applying b/31 March 2022 23:59 d/Analyse marketing data $/5000`
+**Add role** | `addRole COMPANY_INDEX n/ROLE_NAME s/STATUS b/DEADLINE [d/DESCRIPTION] [$/STIPEND]` <br><br> e.g.,` addRole 1 n/Data Analyst s/applying b/31-03-2022 23:59 d/Analyse marketing data $/5000`
 **Delete company** | `deleteCompany COMPANY_INDEX `<br><br> e.g.,`deleteCompany 3 `
 **Delete role** | `deleteRole COMPANY_INDEX ROLE_INDEX` <br><br> e.g.,`deleteRole 3 1 `
 **Find company or role** | `find c/COMPANY_KEYWORD [MORE_COMPANY_KEYWORDS] r/ROLE_KEYWORD [MORE_ROLE_KEYWORDS]` <br><br> e.g., `find c/google r/mobile software`
