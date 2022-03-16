@@ -15,6 +15,7 @@ import seedu.address.model.contact.Contact;
 import seedu.address.model.medical.Medical;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.prescription.Prescription;
+import seedu.address.model.testresult.TestResult;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -28,6 +29,7 @@ public class ModelManager implements Model {
     private final FilteredList<Prescription> filteredPrescription;
     private final FilteredList<Medical> filteredMedicals;
     private final FilteredList<Contact> filteredContacts;
+    private final FilteredList<TestResult> filteredTestResults;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -42,6 +44,7 @@ public class ModelManager implements Model {
         filteredPatients = new FilteredList<>(this.addressBook.getPersonList());
         filteredPrescription = new FilteredList<>(this.addressBook.getPrescriptionList());
         filteredContacts = new FilteredList<>(this.addressBook.getContactList());
+        filteredTestResults = new FilteredList<>(this.addressBook.getTestResultList());
         filteredMedicals = new FilteredList<>(this.addressBook.getMedicalList());
     }
 
@@ -216,6 +219,50 @@ public class ModelManager implements Model {
         filteredContacts.setPredicate(predicate);
     }
 
+    //=========== TestResult ================================================================================
+
+    @Override
+    public boolean hasTestResult(TestResult testResult) {
+        requireNonNull(testResult);
+        return addressBook.hasTestResult(testResult);
+    }
+
+    @Override
+    public void deleteTestResult(TestResult target) {
+        addressBook.removeTestResult(target);
+    }
+
+    @Override
+    public void addTestResult(TestResult testResult) {
+        addressBook.addTestResult(testResult);
+        updateFilteredTestResultList(PREDICATE_SHOW_ALL_TEST_RESULTS);
+    }
+
+    @Override
+    public void setTestResult(TestResult target, TestResult editedTestResult) {
+        requireAllNonNull(target, editedTestResult);
+
+        addressBook.setTestResults(target, editedTestResult);
+    }
+
+
+    //=========== Filtered Contact List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Contact} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<TestResult> getFilteredTestResultList() {
+        return filteredTestResults;
+    }
+
+    @Override
+    public void updateFilteredTestResultList(Predicate<TestResult> predicate) {
+        requireNonNull(predicate);
+        filteredTestResults.setPredicate(predicate);
+    }
+
     @Override
     public void updateFilteredPrescriptionList(Predicate<Prescription> predicate) {
         requireNonNull(predicate);
@@ -245,7 +292,9 @@ public class ModelManager implements Model {
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPatients.equals(other.filteredPatients)
-                && filteredContacts.equals(other.filteredContacts);
+                && filteredContacts.equals(other.filteredContacts)
+                && filteredPrescription.equals(other.filteredPrescription)
+                && filteredTestResults.equals(other.filteredTestResults);
     }
 
     //=========== Medical ================================================================================

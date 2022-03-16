@@ -51,5 +51,6 @@
     "tagged" : [ ]
   } ],
   "contacts": [ ],
-  "prescriptions": [ ]
+  "prescriptions": [ ],
+  "testResults": [ ]
 }
