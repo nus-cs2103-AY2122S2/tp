@@ -9,20 +9,22 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String MESSAGE_CONSTRAINTS = "Tags names should only contain numbers, digits or spaces";
+    public static final String VALIDATION_REGEX = "[a-zA-Z0-9 ]+";
 
     public final String tagName;
+    public final Priority tagPriority;
 
     /**
      * Constructs a {@code Tag}.
      *
      * @param tagName A valid tag name.
      */
-    public Tag(String tagName) {
+    public Tag(String tagName, Priority tagPriority) {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         this.tagName = tagName;
+        this.tagPriority = tagPriority;
     }
 
     /**
@@ -36,7 +38,8 @@ public class Tag {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Tag // instanceof handles nulls
-                && tagName.equals(((Tag) other).tagName)); // state check
+                && tagName.equals(((Tag) other).tagName))
+                && tagPriority.equals(((Tag) other).tagPriority); // state check
     }
 
     @Override

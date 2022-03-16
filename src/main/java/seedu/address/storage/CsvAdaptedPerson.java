@@ -84,7 +84,7 @@ public class CsvAdaptedPerson {
             String[] tags = allTagsString.split("\\|");
             for (String tagString : tags) {
                 if (tagString.length() > 0) {
-                    tagged.add(new CsvAdaptedTag(tagString));
+                    tagged.add(new CsvAdaptedTag(tagString, null)); // HAVE TO CHANGE THIS LATER
                 }
             }
         }

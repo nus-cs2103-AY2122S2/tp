@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.tag.Priority;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -9,12 +10,14 @@ import seedu.address.model.tag.Tag;
 class CsvAdaptedTag {
 
     private final String tagName;
+    private final Priority tagPriority;
 
     /**
      * Constructs a {@code CsvAdaptedTag} with the given {@code tagName}.
      */
-    public CsvAdaptedTag(String tagName) {
+    public CsvAdaptedTag(String tagName, Priority priority) {
         this.tagName = tagName;
+        this.tagPriority = priority;
     }
 
     /**
@@ -22,10 +25,15 @@ class CsvAdaptedTag {
      */
     public CsvAdaptedTag(Tag source) {
         tagName = source.tagName;
+        tagPriority = source.tagPriority;
     }
 
     public String getTagName() {
         return tagName;
+    }
+
+    public Priority getTagPriority() {
+        return tagPriority;
     }
 
     /**
@@ -37,7 +45,7 @@ class CsvAdaptedTag {
         if (!Tag.isValidTagName(tagName)) {
             throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(tagName);
+        return new Tag(tagName, tagPriority);
     }
 
     @Override
@@ -51,7 +59,7 @@ class CsvAdaptedTag {
         }
 
         CsvAdaptedTag otherTag = (CsvAdaptedTag) other;
-        return tagName.equals(otherTag.tagName);
+        return tagName.equals(otherTag.tagName) && tagPriority.equals(otherTag.tagPriority);
     }
 
     @Override
