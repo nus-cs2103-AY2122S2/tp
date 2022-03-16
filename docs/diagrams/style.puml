@@ -37,11 +37,14 @@
 skinparam BackgroundColor #FFFFFFF
 
 skinparam Class {
-    FontColor #FFFFFF
-    BorderThickness 1
-    BorderColor #FFFFFF
-    StereotypeFontColor #FFFFFF
+    FontColor<<Hidden>> #FFFFFF
+    StereotypeFontColor<<Hidden>> #FFFFFF
+    BorderColor<<Hidden>> #FFFFFF
+
     FontName Arial
+    FontSize 15
+    StereotypeFontSize 13
+    BorderThickness 1.1
 }
 
 skinparam Actor {
@@ -50,29 +53,54 @@ skinparam Actor {
     FontName Arial
 }
 
+skinparam Arrow {
+    Color #000000
+    FontSize 13
+    Thickness 1.1
+}
+
 skinparam Sequence {
     MessageAlign center
+
     BoxFontSize 15
     BoxPadding 0
     BoxFontColor #FFFFFF
+    BoxBorderColor #FFFFFF
+
+    FontColor #000000
     FontName Arial
+
+    LifelineBorderColor #000000
+    LifelineBackgroundColor #FFFFFF
 }
 
 skinparam Participant {
     FontColor #FFFFFFF
     Padding 10
+    BorderColor #000000
 }
 
 skinparam Package {
-    BorderColor #000
-    FontColor #000
     Style Rectangle
 }
 
 skinparam MinClassWidth 50
 skinparam Shadowing false
 skinparam DefaultTextAlignment center
-skinparam ArrowThickness 1.1
+
+'Procedure to override colors and styles for class diagrams
+!procedure $OverrideTheme($theme_color)
+    skinparam TitleFontColor $theme_color
+    skinparam ArrowColor $theme_color
+    skinparam Class {
+        FontColor $theme_color
+        StereotypeFontColor $theme_color
+        BorderColor $theme_color
+        FontColor<<Hidden>> #FFFFFF
+        StereotypeFontColor<<Hidden>> #FFFFFF
+        BorderColor<<Hidden>> #FFFFFF
+    }
+!endprocedure
 
 hide footbox
 hide members

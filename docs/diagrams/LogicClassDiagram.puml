@@ -1,29 +1,27 @@
 @startuml
 !include style.puml
-skinparam arrowThickness 1.1
-skinparam arrowColor LOGIC_COLOR_T4
-skinparam classBackgroundColor LOGIC_COLOR
+
+$OverrideTheme(LOGIC_COLOR)
 
 package Logic {
+    class IBookParser
+    class XYZCommand
+    class CommandResult
+    class "{abstract}\nCommand" as Command
 
-Class IBookParser
-Class XYZCommand
-Class CommandResult
-Class "{abstract}\nCommand" as Command
 
-
-Class "<<interface>>\nLogic" as Logic
-Class LogicManager
+    class "<<interface>>\nLogic" as Logic
+    class LogicManager
 }
 
-package Model{
-Class HiddenModel #FFFFFF
+package Model {
+    class HiddenModel<<Hidden>>
 }
 
-package Storage{
+package Storage {
 }
 
-Class HiddenOutside #FFFFFF
+class HiddenOutside<<Hidden>>
 HiddenOutside ..> Logic
 
 LogicManager .right.|> Logic

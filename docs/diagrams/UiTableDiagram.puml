@@ -1,19 +1,17 @@
 @startuml
 !include style.puml
-!theme materia-outline
 
-skinparam backgroundColor white
-skinparam shadowing false
-skinparam arrowThickness 1.1
+$OverrideTheme(UI_COLOR)
 
 package UI {
-    Class "{abstract}\nUiComponent" as UiComponent
-    Class MainWindow
+    class "{abstract}\nUiComponent" as UiComponent
+    class MainWindow
+
     package Table <<Rectangle>> {
-        Class ProductCard
-        Class Table
-        Class TableContent
-        Class TableHeader
+        class ProductCard
+        class Table
+        class TableContent
+        class TableHeader
     }
 }
 

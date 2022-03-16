@@ -1,28 +1,28 @@
 @startuml
 !include style.puml
-!theme materia-outline
-skinparam arrowThickness 1.1
 
-package Storage{
+$OverrideTheme(STORAGE_COLOR)
 
-package "UserPrefsStorage" #F4F6F6{
-Class "<<interface>>\nUserPrefsStorage" as UserPrefsStorage
-Class JsonUserPrefsStorage
+package Storage {
+
+    class "<<interface>>\nStorage" as Storage
+    class StorageManager
+
+    package "UserPrefsStorage" #F4F6F6{
+        class "<<interface>>\nUserPrefsStorage" as UserPrefsStorage
+        class JsonUserPrefsStorage
+    }
+
+    package "IBookStorage" #F4F6F6{
+        class "<<interface>>\nIBookStorage" as IBookStorage
+        class JsonIBookStorage
+        class JsonSerializableIBook
+        class JsonAdaptedProduct
+    }
+
 }
 
-Class "<<interface>>\nStorage" as Storage
-Class StorageManager
-
-package "IBookStorage" #F4F6F6{
-Class "<<interface>>\nIBookStorage" as IBookStorage
-Class JsonIBookStorage
-Class JsonSerializableIBook
-Class JsonAdaptedProduct
-}
-
-}
-
-Class HiddenOutside<<Hidden>>
+class HiddenOutside<<Hidden>>
 HiddenOutside ..> Storage
 
 StorageManager .up.|> Storage

@@ -1,37 +1,27 @@
 @startuml
 !include style.puml
 
-skinparam titleFontColor black
-skinparam Class {
-    FontSize 15
-    StereotypeFontSize 13
-    BackgroundColor MODEL_COLOR
-    BackgroundColor<<Hidden>> #FFFFFF
+$OverrideTheme(MODEL_COLOR)
+
+package Model {
+    class "<<interface>>\nReadOnlyIBook" as ReadOnlyIBook
+    class "<<interface>>\nModel" as Model
+    class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
+
+    class IBook
+    class ModelManager
+    class UserPrefs
+
+    class UniqueProductList
+    class Product
+    class Name
+    class Category
+    class ExpiryDate
+    class Description
+    class Price
 }
 
-skinparam arrowColor MODEL_COLOR
-skinparam arrowFontSize 13
-
-Package Model {
-interface "<<interface>>\nReadOnlyIBook" as ReadOnlyIBook
-interface "<<interface>>\nModel" as Model
-interface "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
-
-class IBook
-class ModelManager
-class UserPrefs
-
-class UniqueProductList
-class Product
-class Name
-class Category
-class ExpiryDate
-class Description
-class Price
-
-}
-
-Class HiddenOutside <<Hidden>>
+class HiddenOutside <<Hidden>>
 HiddenOutside ..> Model
 
 IBook .up.|> ReadOnlyIBook
