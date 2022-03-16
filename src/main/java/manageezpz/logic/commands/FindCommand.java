@@ -55,8 +55,12 @@ public class FindCommand extends Command {
 
     private String printList(ObservableList<Task> filteredTaskList) {
         String result = "";
+        int index = 1;
         for (Task task : filteredTaskList) {
-            result = String.join("\n", result, task.toString());
+            String curIndex = String.join("", String.valueOf(index), ".");
+            String curTask = String.join(" ", curIndex, task.toString());
+            result = String.join("\n", result, curTask);
+            index++;
         }
         return result;
     }
