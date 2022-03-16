@@ -16,6 +16,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddBuyerCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.buyer.Buyer;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Appointment;
 import seedu.address.model.client.Description;
@@ -24,6 +25,7 @@ import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.Remark;
 import seedu.address.model.tag.Tag;
+
 
 public class AddBuyerCommandParser implements Parser<AddBuyerCommand> {
 
@@ -46,7 +48,8 @@ public class AddBuyerCommandParser implements Parser<AddBuyerCommand> {
         Appointment appointment = new Appointment("");
 
         Buyer buyer = new Buyer(name, description, phone, email, address, remark, appointment, tagList,
-                new ArrayList<PropertyToBuy>());
+                new ArrayList<>());
+        return new AddBuyerCommand(buyer);
     }
 
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
