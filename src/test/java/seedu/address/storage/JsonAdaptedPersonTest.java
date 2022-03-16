@@ -46,28 +46,17 @@ public class JsonAdaptedPersonTest {
 
     @Test
     public void toModelType_invalidStudentId_throwsIllegalValueException() {
-        JsonAdaptedPerson person =
-                new JsonAdaptedPerson(INVALID_STUDENT_ID, VALID_NAME, VALID_PHONE,
-<<<<<<< HEAD
-                        VALID_EMAIL, VALID_COURSE, VALID_TAGS);
+        JsonAdaptedPerson person = new JsonAdaptedPerson(INVALID_STUDENT_ID, VALID_NAME, VALID_PHONE, VALID_EMAIL,
+                VALID_COURSE, VALID_TAGS, VALID_APPLICATION_STATUS, VALID_INTERVIEW_STATUS);
         String expectedMessage = StudentId.MESSAGE_CONSTRAINTS;
-=======
-                        VALID_EMAIL, VALID_COURSE, VALID_TAGS, VALID_APPLICATION_STATUS, VALID_INTERVIEW_STATUS);
-        String expectedMessage = StudentID.MESSAGE_CONSTRAINTS;
->>>>>>> origin/6869-add-status-attribute
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
     @Test
     public void toModelType_nullStudentId_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(null, VALID_NAME, VALID_PHONE,
-<<<<<<< HEAD
-                VALID_EMAIL, VALID_COURSE, VALID_TAGS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, StudentId.class.getSimpleName());
-=======
                 VALID_EMAIL, VALID_COURSE, VALID_TAGS, VALID_APPLICATION_STATUS, VALID_INTERVIEW_STATUS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, StudentID.class.getSimpleName());
->>>>>>> origin/6869-add-status-attribute
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, StudentId.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 

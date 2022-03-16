@@ -30,17 +30,10 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-<<<<<<< HEAD
-    public Person(StudentId studentId, Name name, Phone phone, Email email, Course course, Set<Tag> tags) {
+    public Person(StudentId studentId, Name name, Phone phone, Email email, Course course, Set<Tag> tags,
+                  ApplicationStatus applicationStatus, InterviewStatus interviewStatus) {
         requireAllNonNull(studentId, name, phone, email, course, tags);
         this.studentId = studentId;
-=======
-    public Person(StudentID studentID, Name name, Phone phone, Email email, Course course, Set<Tag> tags,
-                  ApplicationStatus applicationStatus, InterviewStatus interviewStatus) {
-
-        requireAllNonNull(studentID, name, phone, email, course, tags, applicationStatus, interviewStatus);
-        this.studentID = studentID;
->>>>>>> origin/6869-add-status-attribute
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -127,12 +120,7 @@ public class Person {
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-<<<<<<< HEAD
-        return Objects.hash(studentId, name, phone, email, course, tags);
-=======
-        return Objects.hash(studentID, name, phone, email, course, tags, applicationStatus, interviewStatus);
->>>>>>> origin/6869-add-status-attribute
+        return Objects.hash(studentId, name, phone, email, course, tags, applicationStatus, interviewStatus);
     }
 
     @Override
