@@ -577,7 +577,7 @@ testers are expected to do more *exploratory* testing.
     1. Modify the `data/trackermon.json` file with any software that would break the JSON format to simulate corrupted file. Alternatively, you can delete the file to simulate a missing file.
     2. Relaunch the app.
     3. Testcase: `data/trackermon.json` is corrupted. <br> Expected: The app starts with a empty show list.
-    4. Testcase: `data/imposter.json` is deleted. <br> Expected: The app starts with the default list of show list.
+    4. Testcase: `data/trackermon.json` is deleted. <br> Expected: The app starts with the default list of show list.
 
 
 
