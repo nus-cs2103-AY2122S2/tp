@@ -129,11 +129,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-<<<<<<< HEAD
-        return new Person(studentId, name, phone, email, course, tags);
-=======
-        return new Person(studentID, name, phone, email, course, tags, applicationStatus, interviewStatus);
->>>>>>> origin/6869-add-status-attribute
+        return new Person(studentId, name, phone, email, course, tags, applicationStatus, interviewStatus);
     }
 
 }

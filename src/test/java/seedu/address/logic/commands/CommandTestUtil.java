@@ -75,14 +75,9 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withStudentId(VALID_STUDENT_ID_AMY).withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withCourse(VALID_COURSE_AMY)
-<<<<<<< HEAD
-                .withTags(VALID_TAG_FRIEND).build();
-        DESC_BOB = new EditPersonDescriptorBuilder().withStudentId(VALID_STUDENT_ID_BOB).withName(VALID_NAME_BOB)
-=======
                 .withTags(VALID_TAG_FRIEND).withApplicationStatus(APPLICATION_STATUS_PENDING)
                 .withInterviewStatus(INTERVIEW_STATUS_PENDING).build();
-        DESC_BOB = new EditPersonDescriptorBuilder().withStudentID(VALID_STUDENT_ID_BOB).withName(VALID_NAME_BOB)
->>>>>>> origin/6869-add-status-attribute
+        DESC_BOB = new EditPersonDescriptorBuilder().withStudentId(VALID_STUDENT_ID_BOB).withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withCourse(VALID_COURSE_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withApplicationStatus(APPLICATION_STATUS_PENDING)
                 .withInterviewStatus(INTERVIEW_STATUS_PENDING).build();
