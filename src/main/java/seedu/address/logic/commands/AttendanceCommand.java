@@ -31,7 +31,7 @@ import seedu.address.storage.JsonAdaptedAttendance;
 
 public class AttendanceCommand extends Command {
 
-    public static final String COMMAND_WORD = "attendance";
+    public static final String COMMAND_WORD = "attd";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an attendance of a pet to the database "
             + "by the index number used in the displayed pet list. \n"
@@ -45,7 +45,7 @@ public class AttendanceCommand extends Command {
             + PREFIX_PICK_UP + "09:15 "
             + PREFIX_DROP_OFF + "18:00";
 
-    public static final String MESSAGE_ATTENDANCE_SUCCESS = "Attendance updated: %1$s";
+    public static final String MESSAGE_ATTENDANCE_SUCCESS = "Attendance updated for %1$s!";
     public static final String MESSAGE_PET_NOT_ADDED = "Seems like this pet is not in the address book yet! "
                                                         + "Make sure to add the pet in first!";
 
@@ -77,7 +77,7 @@ public class AttendanceCommand extends Command {
         Pet petToUpdateAttendance = lastShownList.get(index.getZeroBased());
         createAttendanceForPet(petToUpdateAttendance, attendanceDescriptor);
 
-        return new CommandResult(MESSAGE_ATTENDANCE_SUCCESS);
+        return new CommandResult(String.format(MESSAGE_ATTENDANCE_SUCCESS, petToUpdateAttendance.getName()));
     }
 
     /**
