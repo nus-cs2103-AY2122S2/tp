@@ -93,7 +93,7 @@ public class SampleDataUtil {
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Applicant sampleApplicant : getSamplePersons()) {
-            sampleAb.addPerson(sampleApplicant);
+            sampleAb.addApplicant(sampleApplicant);
         }
         for (Position samplePosition : getSamplePositions()) {
             sampleAb.addPosition(samplePosition);

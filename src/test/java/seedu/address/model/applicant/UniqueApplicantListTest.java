@@ -60,23 +60,23 @@ public class UniqueApplicantListTest {
 
     @Test
     public void setPerson_nullTargetPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueApplicantList.setPerson(null, ALICE));
+        assertThrows(NullPointerException.class, () -> uniqueApplicantList.setApplicant(null, ALICE));
     }
 
     @Test
     public void setPerson_nullEditedPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueApplicantList.setPerson(ALICE, null));
+        assertThrows(NullPointerException.class, () -> uniqueApplicantList.setApplicant(ALICE, null));
     }
 
     @Test
     public void setPerson_targetPersonNotInList_throwsPersonNotFoundException() {
-        assertThrows(PersonNotFoundException.class, () -> uniqueApplicantList.setPerson(ALICE, ALICE));
+        assertThrows(PersonNotFoundException.class, () -> uniqueApplicantList.setApplicant(ALICE, ALICE));
     }
 
     @Test
     public void setPerson_editedPersonIsSamePerson_success() {
         uniqueApplicantList.add(ALICE);
-        uniqueApplicantList.setPerson(ALICE, ALICE);
+        uniqueApplicantList.setApplicant(ALICE, ALICE);
         UniqueApplicantList expectedUniqueApplicantList = new UniqueApplicantList();
         expectedUniqueApplicantList.add(ALICE);
         assertEquals(expectedUniqueApplicantList, uniqueApplicantList);
@@ -87,7 +87,7 @@ public class UniqueApplicantListTest {
         uniqueApplicantList.add(ALICE);
         Applicant editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        uniqueApplicantList.setPerson(ALICE, editedAlice);
+        uniqueApplicantList.setApplicant(ALICE, editedAlice);
         UniqueApplicantList expectedUniqueApplicantList = new UniqueApplicantList();
         expectedUniqueApplicantList.add(editedAlice);
         assertEquals(expectedUniqueApplicantList, uniqueApplicantList);
@@ -96,7 +96,7 @@ public class UniqueApplicantListTest {
     @Test
     public void setPerson_editedPersonHasDifferentIdentity_success() {
         uniqueApplicantList.add(ALICE);
-        uniqueApplicantList.setPerson(ALICE, BOB);
+        uniqueApplicantList.setApplicant(ALICE, BOB);
         UniqueApplicantList expectedUniqueApplicantList = new UniqueApplicantList();
         expectedUniqueApplicantList.add(BOB);
         assertEquals(expectedUniqueApplicantList, uniqueApplicantList);
@@ -106,7 +106,7 @@ public class UniqueApplicantListTest {
     public void setPerson_editedPersonHasNonUniqueIdentity_throwsDuplicatePersonException() {
         uniqueApplicantList.add(ALICE);
         uniqueApplicantList.add(BOB);
-        assertThrows(DuplicatePersonException.class, () -> uniqueApplicantList.setPerson(ALICE, BOB));
+        assertThrows(DuplicatePersonException.class, () -> uniqueApplicantList.setApplicant(ALICE, BOB));
     }
 
     @Test
@@ -129,7 +129,7 @@ public class UniqueApplicantListTest {
 
     @Test
     public void setPersons_nullUniquePersonList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueApplicantList.setPersons((UniqueApplicantList) null));
+        assertThrows(NullPointerException.class, () -> uniqueApplicantList.setApplicants((UniqueApplicantList) null));
     }
 
     @Test
@@ -137,20 +137,20 @@ public class UniqueApplicantListTest {
         uniqueApplicantList.add(ALICE);
         UniqueApplicantList expectedUniqueApplicantList = new UniqueApplicantList();
         expectedUniqueApplicantList.add(BOB);
-        uniqueApplicantList.setPersons(expectedUniqueApplicantList);
+        uniqueApplicantList.setApplicants(expectedUniqueApplicantList);
         assertEquals(expectedUniqueApplicantList, uniqueApplicantList);
     }
 
     @Test
     public void setPersons_nullList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueApplicantList.setPersons((List<Applicant>) null));
+        assertThrows(NullPointerException.class, () -> uniqueApplicantList.setApplicants((List<Applicant>) null));
     }
 
     @Test
     public void setPersons_list_replacesOwnListWithProvidedList() {
         uniqueApplicantList.add(ALICE);
         List<Applicant> applicantList = Collections.singletonList(BOB);
-        uniqueApplicantList.setPersons(applicantList);
+        uniqueApplicantList.setApplicants(applicantList);
         UniqueApplicantList expectedUniqueApplicantList = new UniqueApplicantList();
         expectedUniqueApplicantList.add(BOB);
         assertEquals(expectedUniqueApplicantList, uniqueApplicantList);
@@ -159,7 +159,7 @@ public class UniqueApplicantListTest {
     @Test
     public void setPersons_listWithDuplicatePersons_throwsDuplicatePersonException() {
         List<Applicant> listWithDuplicateApplicants = Arrays.asList(ALICE, ALICE);
-        assertThrows(DuplicatePersonException.class, () -> uniqueApplicantList.setPersons(listWithDuplicateApplicants));
+        assertThrows(DuplicatePersonException.class, () -> uniqueApplicantList.setApplicants(listWithDuplicateApplicants));
     }
 
     @Test

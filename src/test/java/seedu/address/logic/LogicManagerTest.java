@@ -87,7 +87,7 @@ public class LogicManagerTest {
                 + EMAIL_DESC_AMY + AGE_DESC_AMY + ADDRESS_DESC_AMY + GENDER_DESC_AMY;
         Applicant expectedApplicant = new PersonBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
-        expectedModel.addPerson(expectedApplicant);
+        expectedModel.addApplicant(expectedApplicant);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
