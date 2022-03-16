@@ -19,7 +19,7 @@ import seedu.address.model.patient.Nric;
 public class ViewMedicalCommandParser {
     /**
      * Parses the given {@code String} of arguments in the context of the ViewMedicalCommand
-     * and returns an AddContactCommand object for execution.
+     * and returns an AddMedicalCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public ViewMedicalCommand parse(String args) throws ParseException {

@@ -28,7 +28,7 @@ public class ViewMedicalCommand extends Command {
     private final Nric nric;
 
     /**
-     * Creates an ViewContactCommand to view the specified {@code Patient}
+     * Creates an ViewMedicalCommand to view the medical information of specified {@code Patient}
      */
     public ViewMedicalCommand(Nric nric) {
         requireNonNull(nric);
