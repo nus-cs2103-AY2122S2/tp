@@ -73,6 +73,19 @@ public class CommandTestUtil {
     public static final EditCommand.EditclientDescriptor DESC_AMY;
     public static final EditCommand.EditclientDescriptor DESC_BOB;
 
+    /* For future use
+    public static final House VALID_HOUSE_1 =
+    public static final House VALID_HOUSE_2
+    public static final House VALID_HOUSE_2
+
+    public static final PriceRange VALID_PRICE_RANGE_1 = new PriceRange(100000, 200000);
+    public static final PriceRange VALID_PRICE_RANGE_2 = new PriceRange(350000, 400000);
+    public static final PriceRange VALID_PRICE_RANGE_3 = new PriceRange(150000, 1000000);
+
+    public static final PropertyToBuy VALID_PROPERTY_1 = new PropertyToBuy();
+    public static final PropertyToBuy VALID_PROPERTY_2 = new PropertyToBuy();
+    public static final PropertyToBuy VALID_PROPERTY_3 = new PropertyToBuy();
+*/
     static {
         DESC_AMY = new EditClientDescriptorBuilder().withName(VALID_NAME_AMY).withDescription(VALID_DESCRIPTION_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
