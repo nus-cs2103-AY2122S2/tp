@@ -148,6 +148,18 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addMedical(Medical medical) {
+        addressBook.addMedical(medical);
+        updateFilteredMedicalList(PREDICATE_SHOW_ALL_MEDICALS);
+    }
+
+    @Override
+    public boolean hasMedical(Medical medical) {
+        requireNonNull(medical);
+        return addressBook.hasMedical(medical);
+    }
+
+    @Override
     public ObservableList<Medical> getFilteredMedicalList() {
         return filteredMedicals;
     }
@@ -293,19 +305,9 @@ public class ModelManager implements Model {
                 && userPrefs.equals(other.userPrefs)
                 && filteredPatients.equals(other.filteredPatients)
                 && filteredContacts.equals(other.filteredContacts)
+                && filteredMedicals.equals(other.filteredMedicals)
                 && filteredPrescription.equals(other.filteredPrescription)
                 && filteredTestResults.equals(other.filteredTestResults);
     }
 
-    //=========== Medical ================================================================================
-    @Override
-    public boolean hasMedical(Medical medical) {
-        requireNonNull(medical);
-        return addressBook.hasMedical(medical);
-    }
-
-    @Override
-    public void addMedical(Medical medical) {
-        addressBook.addMedical(medical);
-    }
 }
