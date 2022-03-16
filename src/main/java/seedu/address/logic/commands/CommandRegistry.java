@@ -6,12 +6,14 @@ import java.util.Map;
 
 import seedu.address.logic.parser.AddCommandParser;
 import seedu.address.logic.parser.AddMembershipParser;
+import seedu.address.logic.parser.AddTransactionParser;
 import seedu.address.logic.parser.DeleteCommandParser;
 import seedu.address.logic.parser.EditCommandParser;
 import seedu.address.logic.parser.FindCommandParser;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.RemarkCommandParser;
 import seedu.address.logic.parser.SortCommandParser;
+
 
 public class CommandRegistry {
     public static final Map<String, Parser<? extends Command>> PARSERS;
@@ -31,6 +33,7 @@ public class CommandRegistry {
         parsers.put(RemarkCommand.COMMAND_WORD, new RemarkCommandParser());
         parsers.put(AddMembershipCommand.COMMAND_WORD, new AddMembershipParser());
         parsers.put(SortCommand.COMMAND_WORD, new SortCommandParser());
+        parsers.put(AddTransactionCommand.COMMAND_WORD, new AddTransactionParser());
 
         // --- Do not modify below this line unless you know what you're doing. (Trust me, you don't.) ---
         PARSERS = Collections.unmodifiableMap(parsers);

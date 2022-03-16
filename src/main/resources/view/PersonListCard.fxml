@@ -34,6 +34,7 @@
       <Label fx:id="birthday" styleClass="cell_small_label" text="\$birthday" />
       <Label fx:id="remark" styleClass="cell_small_label" text="\$email" />
       <FlowPane fx:id="memberships" />
+      <Label fx:id="transactions" styleClass="cell_small_label" text="\$trx" />
     </VBox>
   </GridPane>
 </HBox>

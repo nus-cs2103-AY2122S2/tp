@@ -49,6 +49,8 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private FlowPane memberships;
+    @FXML
+    private Label transactions;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -80,6 +82,16 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(membership -> memberships.getChildren().add(new Label(membership.toString())));
 
          */
+
+        // Transactions
+        StringBuilder sb = new StringBuilder();
+        if (person.hasTransaction()) {
+            sb.append("Transactions: \n");
+        }
+        person.getTransactions()
+                .forEach(transaction -> sb.append(transaction).append("\n"));
+
+        transactions.setText(sb.toString());
         Membership membership = person.getMembership();
         if (membership != null) {
             memberships.getChildren().add(new Label(membership.toString()));
