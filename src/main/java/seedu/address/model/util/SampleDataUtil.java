@@ -63,15 +63,10 @@ public class SampleDataUtil {
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }
-        return sampleAb;
-    }
-
-    public static ReadOnlyEventBook getSampleEventBook() {
-        EventBook sampleEb = new EventBook();
         for (Event sampleEvent : getSampleEvents()) {
-            sampleEb.addEvent(sampleEvent);
+            sampleAb.addEvent(sampleEvent);
         }
-        return sampleEb;
+        return sampleAb;
     }
 
     /**

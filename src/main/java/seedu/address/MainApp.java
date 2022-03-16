@@ -61,8 +61,7 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        EventBookStorage eventBookStorage = new JsonEventBookStorage(userPrefs.getEventBookFilePath());
-        storage = new StorageManager(addressBookStorage, eventBookStorage, userPrefsStorage);
+        storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -95,26 +94,11 @@ public class MainApp extends Application {
             initialAddressBookData = new AddressBook();
         }
 
-        Optional<ReadOnlyEventBook> eventBookOptional;
-        ReadOnlyEventBook initialEventBookData;
-        try {
-            eventBookOptional = storage.readEventBook();
-            if (!eventBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample EventBook");
-            }
-            initialEventBookData = eventBookOptional.orElseGet(SampleDataUtil::getSampleEventBook);
-        } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty EventBook");
-            initialEventBookData = new EventBook();
-        } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty EventBook");
-            initialEventBookData = new EventBook();
-        }
         if (!ModelManager.isEventDataInSync(initialAddressBookData, initialEventBookData)) {
             logger.warning("Data file has invalid values. Will be starting with an empty EventBook");
             initialEventBookData = new EventBook();
         }
-        return new ModelManager(initialAddressBookData, initialEventBookData, userPrefs);
+        return new ModelManager(initialAddressBookData, userPrefs);
     }
 
     private void initLogging(Config config) {
