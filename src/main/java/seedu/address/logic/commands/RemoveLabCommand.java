@@ -53,6 +53,6 @@ public class RemoveLabCommand extends Command {
             return true;
         }
 
-        return (other instanceof RemoveLabCommand) && (toRemove.equals(((RemoveLabCommand) other).toRemove));
+        return (other instanceof RemoveLabCommand) && (toRemove.isSameLab(((RemoveLabCommand) other).toRemove));
     }
 }
