@@ -159,7 +159,8 @@ public class UniqueApplicantListTest {
     @Test
     public void setPersons_listWithDuplicatePersons_throwsDuplicatePersonException() {
         List<Applicant> listWithDuplicateApplicants = Arrays.asList(ALICE, ALICE);
-        assertThrows(DuplicatePersonException.class, () -> uniqueApplicantList.setApplicants(listWithDuplicateApplicants));
+        assertThrows(DuplicatePersonException.class, () ->
+                uniqueApplicantList.setApplicants(listWithDuplicateApplicants));
     }
 
     @Test
