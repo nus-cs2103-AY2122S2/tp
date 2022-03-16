@@ -21,7 +21,7 @@ public class RemoveLabCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_LAB + "1";
 
-    public static final String MESSAGE_SUCCESS = "Lab removed";
+    public static final String MESSAGE_SUCCESS = "Lab %1$s removed";
     public static final String MESSAGE_LAB_NOT_FOUND = "This Lab does not exists in the TAddressBook";
 
     private final Lab toRemove;
@@ -43,7 +43,7 @@ public class RemoveLabCommand extends Command {
         }
 
         model.removeLab(toRemove);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toRemove));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toRemove.labNumber));
     }
 
     @Override

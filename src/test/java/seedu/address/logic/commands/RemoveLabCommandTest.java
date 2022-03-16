@@ -25,7 +25,7 @@ public class RemoveLabCommandTest {
         // Lab with lab_number 1 does exist in the TypicalAddressBook.
         RemoveLabCommand command = new RemoveLabCommand(new Lab("1"));
 
-        String expectedMessage = RemoveLabCommand.MESSAGE_SUCCESS;
+        String expectedMessage = String.format(RemoveLabCommand.MESSAGE_SUCCESS, "1");
 
         Model expectedModel = new ModelManager(getTypicalAddressBookWithoutLabs(), new UserPrefs());
 
