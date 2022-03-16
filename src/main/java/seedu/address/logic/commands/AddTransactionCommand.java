@@ -15,6 +15,7 @@ import seedu.address.model.transaction.Amount;
 import seedu.address.model.transaction.DueDate;
 import seedu.address.model.transaction.Transaction;
 import seedu.address.model.transaction.TransactionDate;
+import seedu.address.model.transaction.Note;
 
 public class AddTransactionCommand extends Command {
     public static final String COMMAND_WORD = "addTransaction";
@@ -25,7 +26,8 @@ public class AddTransactionCommand extends Command {
             + "Parameters: "
             + Amount.PREFIX + "AMOUNT "
             + TransactionDate.PREFIX + "TRANSACTION DATE "
-            + DueDate.PREFIX + "DUE DATE <OPTIONAL> \n"
+            + DueDate.PREFIX + "DUE DATE <OPTIONAL> "
+            + Note.PREFIX + "NOTE <OPTIONAL>"
             + "Example: " + COMMAND_WORD + " 1 "
             + "a/123.456 "
             + "td/2022-11-11 "
