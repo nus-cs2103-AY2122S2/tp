@@ -13,9 +13,9 @@ public class Status {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Status should only be one from the following: \"applying\", \"pending\", "
-                    + "\"offered\", \"rejected\", \"complete\"";
+                    + "\"interview and assessments\", \"offered\", \"rejected\", \"complete\"";
     public static final String[] VALIDATION_ARRAY =
-            new String[]{"applying", "pending", "offered", "rejected", "complete"};
+            new String[]{"applying", "pending", "offered", "interview and assessments", "rejected", "complete"};
     public final String value;
 
     /**

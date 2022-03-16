@@ -101,7 +101,7 @@ Format: `addRole COMPANY_INDEX n/ROLE_NAME s/STATUS b/DEADLINE [d/DESCRIPTION] [
 * Add internship role at the specified `COMPANY_INDEX`.
 * The `COMPANY_INDEX` must be a positive integer like 1, 2, 3, ...
 * The `ROLE_NAME` should only contain alphanumeric characters and spaces.
-* The `STATUS` accepted are as follows: applying, pending, offered, rejected, complete.
+* The `STATUS` accepted are as follows: applying, pending, interview and assessments, offered, rejected, complete.
 * The `DEADLINE` should be in format dd-MM-yyyy HH:mm
 * The `DESCRIPTION` and `STIPEND` fields are optional during the initial role creation
 * The `DESCRIPTION` can contain alphanumeric characters, spaces and special characters.
