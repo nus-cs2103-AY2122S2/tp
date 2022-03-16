@@ -8,7 +8,6 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import seedu.address.model.testresult.exceptions.DuplicateTestResultException;
 import seedu.address.model.testresult.exceptions.TestResultNotFoundException;
 
