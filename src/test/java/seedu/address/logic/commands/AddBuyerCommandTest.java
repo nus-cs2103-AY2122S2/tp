@@ -11,7 +11,9 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -47,7 +49,7 @@ public class AddBuyerCommandTest {
         ModelStub modelStub = new ModelStubWithBuyer(validBuyer);
 
         assertThrows(CommandException.class, AddBuyerCommand.MESSAGE_DUPLICATE_CLIENT,
-                () -> addBuyerCommand.execute(modelStub));
+            () -> addBuyerCommand.execute(modelStub));
     }
 
     @Test
