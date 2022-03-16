@@ -17,13 +17,20 @@ public class AddTestResultCommand extends Command {
     public static final String COMMAND_WORD = "add";
     public static final CommandType COMMAND_TYPE = CommandType.TEST;
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " "
+            + PREFIX_TYPE + "test"
             + ": Adds the results of a test taken for a patient in the MedBook. "
             + "Parameters: "
             + PREFIX_NRIC + "OWNER_NRIC "
-            + PREFIX_TESTDATE + "TEST_DATE"
-            + PREFIX_MEDICALTEST + "MEDICAL_TEST"
-            + PREFIX_RESULT + "TEST_RESULT";
+            + PREFIX_TESTDATE + "TEST_DATE "
+            + PREFIX_MEDICALTEST + "MEDICAL_TEST "
+            + PREFIX_RESULT + "TEST_RESULT "
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_TYPE + "test "
+            + PREFIX_NRIC + "S1234568L "
+            + PREFIX_TESTDATE + "2022-03-16 "
+            + PREFIX_MEDICALTEST + "CT Scan "
+            + PREFIX_RESULT + "Brain damage ";
 
     public static final String MESSAGE_SUCCESS = "New test result added: %1$s";
     public static final String MESSAGE_DUPLICATE_TESTRESULT =

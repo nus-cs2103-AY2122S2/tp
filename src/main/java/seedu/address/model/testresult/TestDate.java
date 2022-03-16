@@ -12,9 +12,9 @@ import java.time.format.DateTimeParseException;
  */
 public class TestDate {
 
-    public static final String MESSAGE_CONSTRAINTS = "Test dates must be in the form of yyyy-mm-dd";
+    public static final String MESSAGE_CONSTRAINTS = "Test dates must be in the form of YYYY-MM-DD";
 
-    public final LocalDate value;
+    public final LocalDate date;
 
     /**
      * Constructs an {@code TestDate}.
@@ -24,7 +24,9 @@ public class TestDate {
     public TestDate(String testDate) {
         requireNonNull(testDate);
         checkArgument(isValidTestDate(testDate), MESSAGE_CONSTRAINTS);
-        value = LocalDate.parse(testDate);
+        //System.out.println("before make date");
+        date = LocalDate.parse(testDate);
+        //System.out.println("after make date");
     }
 
     /**
@@ -35,26 +37,25 @@ public class TestDate {
             LocalDate.parse(test);
         } catch (DateTimeParseException e) {
             return false;
-        } finally {
-            return true;
         }
+        return true;
     }
 
     @Override
     public String toString() {
-        return value.format(DateTimeFormatter.ISO_LOCAL_DATE);
+        return date.format(DateTimeFormatter.ISO_LOCAL_DATE);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TestDate // instanceof handles nulls
-                && value.equals(((TestDate) other).value)); // state check
+                && date.equals(((TestDate) other).date)); // state check
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return date.hashCode();
     }
 
 }
