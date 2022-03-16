@@ -12,10 +12,9 @@ import seedu.address.model.Model;
  */
 public class ListEventCommand extends Command {
 
-    public static final String COMMAND_WORD = "list_event";
+    public static final String COMMAND_WORD = "liste";
 
     public static final String MESSAGE_SUCCESS = "Listed all events";
-
 
     @Override
     public CommandResult execute(Model model) {
@@ -25,6 +24,6 @@ public class ListEventCommand extends Command {
         model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
         model.updateFilteredPersonList(PREDICATE_SHOW_NO_PERSONS);
         model.updateFilteredCompanyList(PREDICATE_SHOW_NO_COMPANIES);
-        return new CommandResult(MESSAGE_SUCCESS, false, false, false, true);
+        return new CommandResult(MESSAGE_SUCCESS, false, false, false, false, true);
     }
 }

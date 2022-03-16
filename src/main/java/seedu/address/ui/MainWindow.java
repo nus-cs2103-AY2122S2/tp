@@ -32,6 +32,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private CompanyListPanel companyListPanel;
     private EventListPanel eventListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -113,6 +114,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        companyListPanel = new CompanyListPanel(logic.getFilteredCompanyList());
+        eventListPanel = new EventListPanel(logic.getFilteredEventList());
         entryListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -126,18 +129,26 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Change the view to show Person.
+     * Change the view to show the Person list.
      */
     void fillPerson() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        entryListPanelPlaceholder.getChildren().clear();
         entryListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
     }
 
     /**
-     * Change the view to show Event
+     * Change the view to show the Company list.
+     */
+    void fillCompany() {
+        entryListPanelPlaceholder.getChildren().clear();
+        entryListPanelPlaceholder.getChildren().add(companyListPanel.getRoot());
+    }
+
+    /**
+     * Change the view to show the Event list.
      */
     void fillEvent() {
-        eventListPanel = new EventListPanel(logic.getFilteredEventList());
+        entryListPanelPlaceholder.getChildren().clear();
         entryListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
     }
 
@@ -185,6 +196,10 @@ public class MainWindow extends UiPart<Stage> {
         return personListPanel;
     }
 
+    public CompanyListPanel getCompanyListPanel() {
+        return companyListPanel;
+    }
+
     public EventListPanel getEventListPanel() {
         return eventListPanel;
     }
@@ -202,6 +217,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowPerson()) {
                 fillPerson();
+            }
+
+            if (commandResult.isShowCompany()) {
+                fillCompany();
             }
 
             if (commandResult.isShowEvent()) {
