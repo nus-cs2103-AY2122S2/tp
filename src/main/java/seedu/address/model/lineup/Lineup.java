@@ -47,6 +47,18 @@ public class Lineup {
         playersList.remove(index);
     }
 
+    /**
+     * Removes a player.
+     */
+    public void removePlayer(Person player) {
+        for (int i = 0; i < this.playersList.size(); i++) {
+            if (this.playersList.get(i).equals(player)) {
+                this.playersList.remove(i);
+                return;
+            }
+        }
+    }
+
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
