@@ -20,7 +20,7 @@ public class ViewContactCommand extends Command {
     public static final String COMMAND_WORD = "view";
     public static final CommandType COMMAND_TYPE = CommandType.CONTACT;
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all contact whose names contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all contacts whose names contain any of "
             + "the specified owner NRIC and displays them as a list with index numbers.\n"
             + "Parameters: OWNER NRIC\n"
             + "Example: " + COMMAND_WORD + " S1234567L";
