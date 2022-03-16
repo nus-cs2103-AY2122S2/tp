@@ -1,11 +1,6 @@
 package seedu.trackbeau.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-
-import seedu.trackbeau.commons.core.Messages;
-import seedu.trackbeau.model.Model;
-import seedu.trackbeau.model.customer.SearchContainsKeywordsPredicate;
-
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_ALLERGIES;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -15,6 +10,10 @@ import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SERVICES;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SKINTYPE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_STAFFS;
+
+import seedu.trackbeau.commons.core.Messages;
+import seedu.trackbeau.model.Model;
+import seedu.trackbeau.model.customer.SearchContainsKeywordsPredicate;
 
 /**
  * Finds and lists all customers in trackBeau whose name contains any of the argument keywords.

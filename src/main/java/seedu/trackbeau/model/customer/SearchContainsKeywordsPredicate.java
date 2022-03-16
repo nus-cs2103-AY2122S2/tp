@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
-import seedu.trackbeau.model.tag.Tag;
 import seedu.trackbeau.commons.util.StringUtil;
+import seedu.trackbeau.model.tag.Tag;
 
 /**
  * Tests that a {@code Customer's}'s {@code Data} matches any of the keywords given.
@@ -27,7 +27,7 @@ public class SearchContainsKeywordsPredicate implements Predicate<Customer> {
     @Override
     public boolean test(Customer customer) {
         String[] find = {"getName", "getPhone", "getEmail", "getAddress", "getSkinType",
-                "getHairType", "getStaffs", "getServices", "getAllergies"};
+            "getHairType", "getStaffs", "getServices", "getAllergies"};
         String searchString = "";
         Boolean anyMatch = false;
 

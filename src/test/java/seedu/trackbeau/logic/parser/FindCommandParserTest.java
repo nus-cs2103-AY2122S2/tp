@@ -39,12 +39,12 @@ public class FindCommandParserTest {
         prefixArr.add(8, Arrays.asList(new String[]{"nickel"}));
         FindCommand expectedFindNameCommand =
                 new FindCommand(new SearchContainsKeywordsPredicate(prefixArr));
-        assertParseSuccess(parser, "name n/alex yeoh p/87438807 e/alex@example.com" +
-                " a/geylang s/oily h/dry stp/jason sep/acne al/nickel", expectedFindNameCommand);
+        assertParseSuccess(parser, "name n/alex yeoh p/87438807 e/alex@example.com"
+                + " a/geylang s/oily h/dry stp/jason sep/acne al/nickel", expectedFindNameCommand);
 
         // Find name with multiple whitespaces between keywords
-        assertParseSuccess(parser, "name \n n/alex \n \t yeoh p/87438807 e/alex@example.com\" +" +
-                " a/geylang s/oily h/dry stp/jason sep/acne al/nickel\t", expectedFindNameCommand);
+        assertParseSuccess(parser, "name \n n/alex \n \t yeoh p/87438807 e/alex@example.com\" +"
+                + " a/geylang s/oily h/dry stp/jason sep/acne al/nickel\t", expectedFindNameCommand);
 
     }
 

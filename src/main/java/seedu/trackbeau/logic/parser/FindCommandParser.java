@@ -1,16 +1,24 @@
 package seedu.trackbeau.logic.parser;
 
 import static seedu.trackbeau.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.trackbeau.logic.parser.CliSyntax.*;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_ALLERGIES;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_HAIRTYPE;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SERVICES;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SKINTYPE;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_STAFFS;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import seedu.trackbeau.model.customer.SearchContainsKeywordsPredicate;
 import seedu.trackbeau.logic.commands.FindCommand;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
+import seedu.trackbeau.model.customer.SearchContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -84,13 +92,13 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         if (argMultimap.getValue(PREFIX_ALLERGIES).isPresent() && argMultimap.getPreamble().isEmpty()) {
             prefixArr.add(8,
-                    Arrays.asList(ParserUtil
-                            .parseName(argMultimap.getValue(PREFIX_ALLERGIES).get()).toString().split(" ")));
+                Arrays.asList(ParserUtil
+                    .parseName(argMultimap.getValue(PREFIX_ALLERGIES).get()).toString().split(" ")));
         }
 
         System.out.println(prefixArr.toString());
 
         return new FindCommand(new SearchContainsKeywordsPredicate(prefixArr));
 
-        }
+    }
 }
