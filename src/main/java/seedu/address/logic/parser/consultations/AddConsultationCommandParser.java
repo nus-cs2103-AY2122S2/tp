@@ -1,7 +1,5 @@
 package seedu.address.logic.parser.consultations;
 
-import java.util.stream.Stream;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
@@ -10,6 +8,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TESTS_TAKEN_AND_RESULT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
+import java.util.stream.Stream;
 
 import seedu.address.logic.commands.consultation.AddConsultationCommand;
 import seedu.address.logic.parser.ArgumentMultimap;

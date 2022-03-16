@@ -68,7 +68,8 @@ class JsonSerializableAddressBook {
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
         contacts.addAll(source.getContactList().stream().map(JsonAdaptedContact::new).collect(Collectors.toList()));
-        consultations.addAll(source.getConsultationList().stream().map(JsonAdaptedConsultation::new).collect(Collectors.toList()));
+        consultations.addAll(source.getConsultationList().stream().map(
+                                JsonAdaptedConsultation::new).collect(Collectors.toList()));
         prescriptions.addAll(source.getPrescriptionList().stream().map(
                 JsonAdaptedPrescription::new).collect(Collectors.toList()));
         testResults.addAll(source.getTestResultList().stream().map(JsonAdaptedTestResult::new)

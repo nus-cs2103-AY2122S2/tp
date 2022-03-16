@@ -17,7 +17,6 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-
 import seedu.address.ui.consultation.ConsultationListPanel;
 import seedu.address.ui.contact.ContactListPanel;
 import seedu.address.ui.medical.MedicalListPanel;

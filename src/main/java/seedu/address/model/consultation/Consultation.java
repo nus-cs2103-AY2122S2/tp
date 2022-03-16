@@ -1,10 +1,10 @@
 package seedu.address.model.consultation;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.Objects;
 
 import seedu.address.model.patient.Nric;
-
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * Represents a Person in the address book.

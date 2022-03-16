@@ -1,7 +1,6 @@
 package seedu.address.model.patient;
 
 import java.util.function.Predicate;
-import seedu.address.model.patient.Nric;
 
 public class NricPredicate implements Predicate<Patient> {
     private final Nric nric;

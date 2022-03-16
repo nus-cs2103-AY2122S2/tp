@@ -1,11 +1,6 @@
 package seedu.address.storage;
 
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -13,10 +8,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.consultation.Consultation;
 import seedu.address.model.consultation.Date;
-import seedu.address.model.consultation.Time;
 import seedu.address.model.consultation.Notes;
 import seedu.address.model.consultation.Prescription;
 import seedu.address.model.consultation.TestsTakenAndResults;
+import seedu.address.model.consultation.Time;
 import seedu.address.model.patient.Nric;
 
 

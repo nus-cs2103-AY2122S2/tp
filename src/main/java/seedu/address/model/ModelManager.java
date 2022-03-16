@@ -11,7 +11,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-
 import seedu.address.model.consultation.Consultation;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.medical.Medical;
@@ -43,9 +42,7 @@ public class ModelManager implements Model {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
-        System.out.println("ModelManager.ReadOnlyAddressBook: "+ addressBook.toString());
         this.addressBook = new AddressBook(addressBook);
-        System.out.println("ModelManager.this.addressBook: "+ new AddressBook(addressBook).toString());
         this.userPrefs = new UserPrefs(userPrefs);
 
         filteredConsultations = new FilteredList<>(this.addressBook.getConsultationList());
