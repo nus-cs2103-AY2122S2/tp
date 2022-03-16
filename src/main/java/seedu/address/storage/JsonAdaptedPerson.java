@@ -17,8 +17,8 @@ import seedu.address.model.person.Favourite;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.UserType;
 import seedu.address.model.property.Property;
-import seedu.address.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -32,9 +32,9 @@ class JsonAdaptedPerson {
     private final String email;
     private final boolean favourite;
     private final String address;
-    private final JsonAdaptedProperty property;
+    private final List<JsonAdaptedProperty> properties = new ArrayList<>();
     private final JsonAdaptedProperty preference;
-    private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final String userType;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -42,19 +42,19 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("favourite") boolean favourite,
-            @JsonProperty("address") String address,
-            @JsonProperty("property") JsonAdaptedProperty property,
+            @JsonProperty("address") String address, @JsonProperty("properties") List<JsonAdaptedProperty> properties,
             @JsonProperty("preference") JsonAdaptedProperty preference,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("userType") String userType) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.favourite = favourite;
         this.address = address;
-        this.property = property;
         this.preference = preference;
-        if (tagged != null) {
-            this.tagged.addAll(tagged);
+        this.userType = userType;
+
+        if (properties != null) {
+            this.properties.addAll(properties);
         }
     }
 
@@ -67,11 +67,11 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         favourite = source.getFavourite().getStatus();
         address = source.getAddress().value;
-        property = source.getProperty().isPresent() ? new JsonAdaptedProperty(source.getProperty().get()) : null;
-        preference = source.getPreference().isPresent() ? new JsonAdaptedProperty(source.getPreference().get()) : null;
-        tagged.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
+        properties.addAll(source.getProperties().stream()
+                .map(JsonAdaptedProperty::new)
                 .collect(Collectors.toList()));
+        preference = source.getPreference().isPresent() ? new JsonAdaptedProperty(source.getPreference().get()) : null;
+        userType = source.getUserType().value;
     }
 
     /**
@@ -80,13 +80,11 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
-        }
 
-        final Optional<Property> modelProperty =
-                property != null ? Optional.of(property.toModelType()) : Optional.empty();
+        final Set<Property> modelProperties = new HashSet<>();
+        for (JsonAdaptedProperty property : properties) {
+            modelProperties.add(property.toModelType());
+        }
 
         final Optional<Property> modelPreference =
                 preference != null ? Optional.of(preference.toModelType()) : Optional.empty();
@@ -126,10 +124,17 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
+        if (userType == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    UserType.class.getSimpleName()));
+        }
+        if (!UserType.isValidUserType(userType)) {
+            throw new IllegalValueException(UserType.MESSAGE_CONSTRAINTS);
+        }
+        final UserType modelUserType = new UserType(userType);
 
-        return new Person(modelName, modelPhone, modelEmail, modelFavourite,
-                modelAddress, modelProperty, modelPreference, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelFavourite, modelAddress, modelProperties,
+                modelPreference, modelUserType);
     }
 
 }

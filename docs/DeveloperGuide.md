@@ -48,6 +48,24 @@ Step 3. User can access the `Favourite`Window by navigating to the menu item as 
 
 ![FavouriteWindow](images/developer-guide/FavouriteWindowAccess.png)
 
+## Property
+The `Property` is a new attribute that can be added to a `Person` that represents a real estate property listing. A `Person` is able to hold multiple properties including none.
+
+The `Property` itself consists of the following attributes: `Region`, `Address`, `Size`, `Price`.
+
+- `Region` represents the general location of the `Address` of the `Property`. It is an enum that can be one of the following: `NORTH`, `SOUTH`, `EAST`, `WEST`, `CENTRAL`.
+
+- `Address` represents the exact location of the `Property`.
+
+- `Size` represents the size of the `Property` in terms of the number of rooms it has. It is an enum that can be one of the following: `ONE_ROOM`, `TWO_ROOM`, `THREE_ROOM`, `FOUR_ROOM`, `FIVE_ROOM`.
+
+- `Price` represents the price of the `Property`. It's `toString()` method returns the price in the form of `$###` or `$###.#K` or `$###.#M` depending on the value of the `Price` for easier readability.
+
+## UserType
+The `UserType` represents an attribute that needs to be added to a `Person` & represents the `Person` as a `buyer` or `seller`. A `Person` is only either a `buyer` or `seller` at a given time. They cannot be both or none.
+
+Similar to other attributes of a `Person`, the `UserType` of a `Person` can be edited via the `edit` command. A `Person` can be changed from a `buyer` to a `seller` & vice versa. This can be done with the command: `edit INDEX t/seller`
+
 # Documentation, logging, testing, configuration, dev-ops
 
 This is how we do our [documentation](https://se-education.org/addressbook-level3/Documentation.html).

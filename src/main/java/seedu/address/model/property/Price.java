@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Price {
 
     public static final String MESSAGE_CONSTRAINTS = "Price must have the format $#####";
-    public static final String VALIDATION_REGEX = "^\\$\\d*";
+    public static final String VALIDATION_REGEX = "^\\$\\d+";
 
     private static final double THOUSAND = 1E3;
     private static final double MILLION = 1E6;

@@ -1,6 +1,6 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
+import java.util.StringJoiner;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -8,6 +8,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
+import seedu.address.model.property.Property;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -43,9 +44,9 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label preference;
     @FXML
-    private FlowPane tags;
-    @FXML
     private Label favourite;
+    @FXML
+    private FlowPane userType;
 
     /**
      * Creates a {@code PersonCard} with the given {@code Person} and index to display.
@@ -59,22 +60,17 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         favourite.setText(person.getFavourite().toString());
+        userType.getChildren().add(new Label(person.getUserType().value));
 
-        if (person.getProperty().isPresent()) {
-            property.setText(person.getProperty().get().toString());
-        } else {
-            property.setVisible(false);
-        }
+        StringJoiner propertyJoiner = new StringJoiner("\n");
+        person.getProperties().stream().map(Property::toString).forEach(propertyJoiner::add);
+        property.setText(propertyJoiner.toString());
 
         if (person.getPreference().isPresent()) {
             preference.setText(person.getPreference().get().toString());
         } else {
             preference.setVisible(false);
         }
-
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
     @Override

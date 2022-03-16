@@ -48,4 +48,3 @@ Given below are my contributions to the project.
 * **Tools**:
   * Introduced Trello for brainstorming process of User Stories
 
-
