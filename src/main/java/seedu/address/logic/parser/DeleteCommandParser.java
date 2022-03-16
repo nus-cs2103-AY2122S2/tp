@@ -29,7 +29,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
 
-        FriendName name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        FriendName name = ParserUtil.parseFriendName(argMultimap.getValue(PREFIX_NAME).get());
         return new DeleteCommand(name);
     }
 

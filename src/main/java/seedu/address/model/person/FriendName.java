@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import seedu.address.model.common.Name;
 
 /**
- * Represents an Event's name in the address book.
+ * Represents a Friend's name in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidFriendName(String)}
  */
 public class FriendName extends Name {
@@ -17,7 +17,7 @@ public class FriendName extends Name {
      * The first character of the name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "^[a-zA-Z][\\p{Alnum} ]*";
 
     /**
      * Constructs a {@code FriendName}.
@@ -38,20 +38,9 @@ public class FriendName extends Name {
     }
 
     @Override
-    public String toString() {
-        return fullName;
-    }
-
-    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof FriendName // instanceof handles nulls
                 && fullName.equals(((FriendName) other).fullName)); // state check
     }
-
-    @Override
-    public int hashCode() {
-        return fullName.hashCode();
-    }
-
 }

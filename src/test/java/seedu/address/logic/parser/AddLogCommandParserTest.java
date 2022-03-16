@@ -23,11 +23,11 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddLogCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.model.person.LogTitle;
+import seedu.address.model.person.LogName;
 
 public class AddLogCommandParserTest {
 
-    private static final String MESSAGE_INVALID_TITLE = LogTitle.MESSAGE_CONSTRAINTS;
+    private static final String MESSAGE_INVALID_TITLE = LogName.MESSAGE_CONSTRAINTS;
     private final AddLogCommandParser parser = new AddLogCommandParser();
 
     @Test

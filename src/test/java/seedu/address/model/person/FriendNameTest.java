@@ -29,10 +29,10 @@ public class FriendNameTest {
         assertFalse(FriendName.isValidFriendName(" ")); // spaces only
         assertFalse(FriendName.isValidFriendName("^")); // only non-alphanumeric characters
         assertFalse(FriendName.isValidFriendName("peter*")); // contains non-alphanumeric characters
+        assertFalse(FriendName.isValidFriendName("12345")); // numbers only
 
         // valid name
         assertTrue(FriendName.isValidFriendName("peter jack")); // alphabets only
-        assertTrue(FriendName.isValidFriendName("12345")); // numbers only
         assertTrue(FriendName.isValidFriendName("peter the 2nd")); // alphanumeric characters
         assertTrue(FriendName.isValidFriendName("Capital Tan")); // with capital letters
         assertTrue(FriendName.isValidFriendName("David Roger Jackson Ray Jr 2nd")); // long names

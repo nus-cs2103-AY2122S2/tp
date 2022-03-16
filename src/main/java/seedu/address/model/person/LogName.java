@@ -5,15 +5,15 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import seedu.address.model.common.Name;
 
 /**
- * Represents a Person's log title in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidLogTitle(String)}
+ * Represents a Person's log name in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidLogName(String)}
  */
-public class LogTitle extends Name {
+public class LogName extends Name {
 
     public static final int TITLE_LENGTH_CONSTRAINT = 50;
 
     public static final String MESSAGE_CONSTRAINTS = "Titles of logs must satisfy:\n"
-                    + "1. Not be trivial (i.e. not empty or contain only spaces\n"
+                    + "1. Not be trivial (i.e. not empty or contain only spaces)\n"
                     + "2. Be at most " + TITLE_LENGTH_CONSTRAINT + " characters long. "
                     + "This is because of display limitations.";
 
@@ -28,34 +28,23 @@ public class LogTitle extends Name {
      *
      * @param name A valid name.
      */
-    public LogTitle(String name) {
+    public LogName(String name) {
         super(name);
-        checkArgument(isValidLogTitle(name), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidLogName(name), MESSAGE_CONSTRAINTS);
     }
 
     /**
      * Returns true if a given string is a valid name.
      */
-    public static boolean isValidLogTitle(String test) {
+    public static boolean isValidLogName(String test) {
         // Ensure in implementation Regex is not null
         return test.matches(VALIDATION_REGEX);
     }
 
     @Override
-    public String toString() {
-        return fullName;
-    }
-
-    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof LogTitle // instanceof handles nulls
-                && fullName.equals(((LogTitle) other).fullName)); // state check
+                || (other instanceof LogName // instanceof handles nulls
+                && fullName.equals(((LogName) other).fullName)); // state check
     }
-
-    @Override
-    public int hashCode() {
-        return fullName.hashCode();
-    }
-
 }

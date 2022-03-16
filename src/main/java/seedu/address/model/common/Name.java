@@ -16,9 +16,13 @@ public abstract class Name {
         this.fullName = name;
     }
 
-    public abstract String toString();
+    public String toString() {
+        return fullName;
+    }
 
-    public abstract int hashCode();
+    public int hashCode() {
+        return fullName.hashCode();
+    }
 
 
 }

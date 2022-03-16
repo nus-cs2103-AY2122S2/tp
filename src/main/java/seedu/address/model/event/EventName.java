@@ -17,7 +17,7 @@ public class EventName extends Name {
      * The first character of the name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9][\\w\\s]*";
+    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9][^\\t\\n\\r\\f]*";
 
     /**
      * Constructs a {@code FriendName}.
@@ -38,20 +38,9 @@ public class EventName extends Name {
     }
 
     @Override
-    public String toString() {
-        return fullName;
-    }
-
-    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof EventName // instanceof handles nulls
                 && fullName.equals(((EventName) other).fullName)); // state check
     }
-
-    @Override
-    public int hashCode() {
-        return fullName.hashCode();
-    }
-
 }
