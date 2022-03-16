@@ -40,9 +40,9 @@ public class PetTest {
         editedAlice = new PetBuilder(BOBA).withName(VALID_NAME_BOB).build();
         assertFalse(BOBA.isSamePet(editedAlice));
 
-        // name differs in case, all other attributes same -> returns false
+        // name differs in case, all other attributes same -> returns true
         Pet editedBob = new PetBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSamePet(editedBob));
+        assertTrue(BOB.isSamePet(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";

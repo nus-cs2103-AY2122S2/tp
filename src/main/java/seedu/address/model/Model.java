@@ -84,4 +84,9 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPetList(Predicate<Pet> predicate);
+
+    /**
+     * Sorts the pet list based on the field provided.
+     */
+    void sortPetList(String field);
 }
