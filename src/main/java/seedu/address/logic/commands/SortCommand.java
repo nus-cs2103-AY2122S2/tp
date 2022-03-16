@@ -19,7 +19,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
-import seedu.address.model.tag.Tag;
 
 /**
  * Sorts the person list in address book based on fields given.
@@ -134,6 +133,40 @@ public class SortCommand extends Command {
         public boolean getIsDescendingOrder() {
             return isDescendingOrder;
         }
+
+        @Override
+        public boolean equals(Object other) {
+            // short circuit if same object
+            if (other == this) {
+                return true;
+            }
+
+            // instanceof handles nulls
+            if (!(other instanceof FieldSortOrder)) {
+                return false;
+            }
+
+            // state check
+            FieldSortOrder f = (FieldSortOrder) other;
+            return fieldPrefix.equals(f.fieldPrefix) && isDescendingOrder == f.isDescendingOrder;
+        }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof SortCommand)) {
+            return false;
+        }
+
+        // state check
+        SortCommand s = (SortCommand) other;
+        return fieldSortOrderList.equals(s.fieldSortOrderList);
     }
 }
 

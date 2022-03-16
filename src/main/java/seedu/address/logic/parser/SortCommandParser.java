@@ -51,11 +51,20 @@ public class SortCommandParser implements Parser<SortCommand> {
         List<SortCommand.FieldSortOrder> fieldSortOrderList = new ArrayList<SortCommand.FieldSortOrder>();
 
         for (int i = 0; i < arguments.length; ++i) {
-            if (arguments[i].equals("") || arguments[i].equals(SortCommand.DESCENDING_KEYWORD)) {
+            if (arguments[i].equals("")) {
                 continue;
             }
 
-            if (!prefixMap.containsKey(arguments[i]) && !arguments[i].equals(SortCommand.DESCENDING_KEYWORD)) {
+            //check if there is a prefix before desc keyword
+            if (arguments[i].equals(SortCommand.DESCENDING_KEYWORD)) {
+                if (i - 1 < 0 || !prefixMap.containsKey(arguments[i - 1])) {
+                    throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+                }
+
+                continue;
+            }
+
+            if (!prefixMap.containsKey(arguments[i])) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
             }
 
