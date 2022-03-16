@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
-import javafx.collections.ObservableList;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
@@ -24,6 +22,8 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.buyer.Buyer;
 import seedu.address.model.client.Client;
 import seedu.address.testutil.ClientBuilder;
+
+import javafx.collections.ObservableList;
 
 public class AddCommandTest {
 

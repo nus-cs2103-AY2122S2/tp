@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-import javafx.collections.ObservableList;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
@@ -23,6 +21,8 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.buyer.Buyer;
 import seedu.address.model.client.Client;
 import seedu.address.testutil.BuyerBuilder;
+
+import javafx.collections.ObservableList;
 
 public class AddBuyerCommandTest {
 
@@ -48,8 +48,8 @@ public class AddBuyerCommandTest {
         AddBuyerCommand addBuyerCommand = new AddBuyerCommand(validBuyer);
         ModelStub modelStub = new ModelStubWithBuyer(validBuyer);
 
-        assertThrows(CommandException.class, AddBuyerCommand.MESSAGE_DUPLICATE_CLIENT,
-            () -> addBuyerCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddBuyerCommand.MESSAGE_DUPLICATE_CLIENT, () -> addBuyerCommand
+                .execute(modelStub));
     }
 
     @Test
