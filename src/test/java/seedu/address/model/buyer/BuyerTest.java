@@ -179,7 +179,6 @@ public class BuyerTest {
             assertTrue(testBuyer2.hasSameProperties(testBuyer3));
             assertFalse(testBuyer.hasSameProperties(testBuyer2));
             assertTrue(testBuyer3.hasSameProperties(testBuyer4));
-            
         } catch (IllegalValueException ignored) {
 
         }
