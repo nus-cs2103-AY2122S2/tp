@@ -2,15 +2,15 @@ package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import seedu.address.commons.exceptions.IllegalValueException;
+
 import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Nric;
 import seedu.address.model.testresult.MedicalTest;
 import seedu.address.model.testresult.Result;
 import seedu.address.model.testresult.TestDate;
 import seedu.address.model.testresult.TestResult;
-
-import java.util.*;
 
 /**
  * Jackson-friendly version of {@link TestResult}.
@@ -28,8 +28,8 @@ class JsonAdaptedTestResult {
      */
     @JsonCreator
     public JsonAdaptedTestResult(@JsonProperty("ownerNric") String ownerNric, @JsonProperty("date") String testDate,
-                                 @JsonProperty("medicalTest") String medicalTest, @JsonProperty("result") String result
-                                    ) {
+                                 @JsonProperty("medicalTest") String medicalTest,
+                                 @JsonProperty("result") String result) {
 
         this.ownerNric = ownerNric;
         this.testDate = testDate;
@@ -62,7 +62,8 @@ class JsonAdaptedTestResult {
         final Nric modelOwnerNric = new Nric(ownerNric);
 
         if (testDate == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, TestDate.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    TestDate.class.getSimpleName()));
         }
         if (!TestDate.isValidTestDate(testDate)) {
             throw new IllegalValueException(TestDate.MESSAGE_CONSTRAINTS);
@@ -70,7 +71,8 @@ class JsonAdaptedTestResult {
         final TestDate modelDate = new TestDate(testDate);
 
         if (medicalTest == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, MedicalTest.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    MedicalTest.class.getSimpleName()));
         }
         if (!MedicalTest.isValidMedicalTest(medicalTest)) {
             throw new IllegalValueException(MedicalTest.MESSAGE_CONSTRAINTS);

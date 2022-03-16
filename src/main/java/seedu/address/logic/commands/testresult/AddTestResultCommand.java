@@ -1,11 +1,11 @@
 package seedu.address.logic.commands.testresult;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TESTDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICALTEST;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RESULT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TESTDATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;

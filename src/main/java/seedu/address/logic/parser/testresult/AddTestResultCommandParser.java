@@ -1,10 +1,13 @@
 package seedu.address.logic.parser.testresult;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RESULT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICALTEST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TESTDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
+
+import java.util.stream.Stream;
 
 import seedu.address.logic.commands.testresult.AddTestResultCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
@@ -18,10 +21,6 @@ import seedu.address.model.testresult.MedicalTest;
 import seedu.address.model.testresult.Result;
 import seedu.address.model.testresult.TestDate;
 import seedu.address.model.testresult.TestResult;
-
-import java.util.stream.Stream;
-
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 public class AddTestResultCommandParser implements Parser<AddTestResultCommand> {
     /**

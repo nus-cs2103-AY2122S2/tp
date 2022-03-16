@@ -1,8 +1,7 @@
 package seedu.address.model.testresult;
 
-import seedu.address.model.patient.Nric;
-
 import java.util.function.Predicate;
+import seedu.address.model.patient.Nric;
 
 public class TestResultWithNricPredicate implements Predicate<TestResult> {
     private final Nric nric;

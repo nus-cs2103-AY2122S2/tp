@@ -53,12 +53,12 @@ public class SampleDataUtil {
 
     public static TestResult[] getSampleTestResults() {
         return new TestResult[] {
-          new TestResult(new Nric("S1234567L"), new TestDate("2020-03-01"), new MedicalTest("X-Ray Scan"),
-                  new Result("Fractured wrist")),
-          new TestResult(new Nric("S1234568L"), new TestDate("2022-12-01"), new MedicalTest("CT Scan"),
-                  new Result("Stroke")),
-          new TestResult(new Nric("S1234569L"), new TestDate("2021-06-09"), new MedicalTest("Blood Pressure"),
-                  new Result("Systolic: 154; Diastolic: 99"))
+            new TestResult(new Nric("S1234567L"), new TestDate("2020-03-01"), new MedicalTest("X-Ray Scan"),
+                    new Result("Fractured wrist")),
+            new TestResult(new Nric("S1234568L"), new TestDate("2022-12-01"), new MedicalTest("CT Scan"),
+                    new Result("Stroke")),
+            new TestResult(new Nric("S1234569L"), new TestDate("2021-06-09"), new MedicalTest("Blood Pressure"),
+                    new Result("Systolic: 154; Diastolic: 99"))
         };
     }
 

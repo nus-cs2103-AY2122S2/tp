@@ -61,7 +61,8 @@ class JsonSerializableAddressBook {
         contacts.addAll(source.getContactList().stream().map(JsonAdaptedContact::new).collect(Collectors.toList()));
         prescriptions.addAll(source.getPrescriptionList().stream().map(JsonAdaptedPrescription::new)
                 .collect(Collectors.toList()));
-        testResults.addAll(source.getTestResultList().stream().map(JsonAdaptedTestResult::new).collect(Collectors.toList()));
+        testResults.addAll(source.getTestResultList().stream().map(JsonAdaptedTestResult::new)
+                .collect(Collectors.toList()));
     }
 
     /**

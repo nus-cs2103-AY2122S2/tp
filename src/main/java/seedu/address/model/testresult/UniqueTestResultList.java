@@ -1,18 +1,14 @@
 package seedu.address.model.testresult;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import seedu.address.model.patient.Patient;
-import seedu.address.model.patient.exceptions.DuplicatePersonException;
-import seedu.address.model.patient.exceptions.PersonNotFoundException;
-import seedu.address.model.testresult.exceptions.DuplicateTestResultException;
-import seedu.address.model.testresult.exceptions.TestResultNotFoundException;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.address.model.testresult.exceptions.DuplicateTestResultException;
+import seedu.address.model.testresult.exceptions.TestResultNotFoundException;
 
 /**
  * A list of test results that enforces uniqueness between its elements and does not allow nulls.

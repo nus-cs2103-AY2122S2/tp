@@ -11,8 +11,6 @@ import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.UniquePersonList;
 import seedu.address.model.prescription.Prescription;
 import seedu.address.model.prescription.UniquePrescriptionList;
-import seedu.address.model.patient.Patient;
-import seedu.address.model.patient.UniquePersonList;
 import seedu.address.model.testresult.TestResult;
 import seedu.address.model.testresult.UniqueTestResultList;
 
@@ -176,6 +174,17 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.testResults.setTestResults(testResults);
     }
 
+    /**
+     * Replaces the given test result {@code target} in the list with {@code editedTestResults}.
+     * {@code target} must exist in the address book.
+     * The test result identity of {@code editedTestResults} must not be the same
+     * as another existing test result in the address book.
+     */
+    public void setTestResults(TestResult target, TestResult editedTestResults) {
+        requireNonNull(editedTestResults);
+        testResults.setTestResult(target, editedTestResults);
+    }
+
     //// contact-level operations
 
     /**
@@ -192,18 +201,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addTestResult(TestResult testResult) {
         testResults.add(testResult);
-    }
-
-    /**
-     * Replaces the given test result {@code target} in the list with {@code editedTestResults}.
-     * {@code target} must exist in the address book.
-     * The test result identity of {@code editedTestResults} must not be the same
-     * as another existing test result in the address book.
-     */
-    public void setTestResults(TestResult target, TestResult editedTestResults) {
-        requireNonNull(editedTestResults);
-
-        testResults.setTestResult(target, editedTestResults);
     }
 
     /**
