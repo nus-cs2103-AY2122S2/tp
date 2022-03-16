@@ -15,6 +15,7 @@ import static seedu.address.testutil.TypicalBuyers.BOB;
 import static seedu.address.testutil.TypicalBuyers.YUQI;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.property.House;
 import seedu.address.model.property.HouseType;
@@ -35,15 +36,15 @@ public class BuyerTest {
         // same object -> returns true
         assertTrue(YUQI.isSameclient(YUQI));
 
-            // null -> returns false
+        // null -> returns false
         assertFalse(YUQI.isSameclient(null));
 
-            // same name, all other attributes different -> returns true
+        // same name, all other attributes different -> returns true
         Buyer editedYuqi = new BuyerBuilder(YUQI).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                     .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(YUQI.isSameclient(editedYuqi));
 
-            // different name, all other attributes same -> returns false
+        // different name, all other attributes same -> returns false
         editedYuqi = new BuyerBuilder(YUQI).withName(VALID_NAME_BOB).build();
         assertFalse(YUQI.isSameclient(editedYuqi));
 
@@ -63,35 +64,35 @@ public class BuyerTest {
         Buyer yuqiCopy = new BuyerBuilder(YUQI).build();
         assertEquals(YUQI, yuqiCopy);
 
-            // same object -> returns true
+        // same object -> returns true
         assertEquals(YUQI, YUQI);
 
-            // null -> returns false
+        // null -> returns false
         assertNotEquals(null, YUQI);
 
-            // different type -> returns false
+        // different type -> returns false
         assertNotEquals(5, YUQI);
 
-            // different client -> returns false
+        // different client -> returns false
         assertNotEquals(YUQI, BOB);
 
-            // different name -> returns false
+        // different name -> returns false
         Buyer editedYuqi = new BuyerBuilder(YUQI).withName(VALID_NAME_BOB).build();
         assertNotEquals(YUQI, editedYuqi);
 
-            // different phone -> returns false
+        // different phone -> returns false
         editedYuqi = new BuyerBuilder(YUQI).withPhone(VALID_PHONE_BOB).build();
         assertNotEquals(YUQI, editedYuqi);
 
-            // different email -> returns false
+        // different email -> returns false
         editedYuqi = new BuyerBuilder(YUQI).withEmail(VALID_EMAIL_BOB).build();
         assertNotEquals(YUQI, editedYuqi);
 
-            // different address -> returns false
+        // different address -> returns false
         editedYuqi = new BuyerBuilder(YUQI).withAddress(VALID_ADDRESS_BOB).build();
         assertNotEquals(YUQI, editedYuqi);
 
-            // different tags -> returns false
+        // different tags -> returns false
         editedYuqi = new BuyerBuilder(YUQI).withTags(VALID_TAG_HUSBAND).build();
         assertNotEquals(YUQI, editedYuqi);
 
@@ -137,8 +138,8 @@ public class BuyerTest {
             testYuqi = new BuyerBuilder(YUQI).withProperties(ptb1, ptb2, ptb3).build();
             assertEquals(editedYuqi, testYuqi);
 
-        } catch (IllegalValueException ignored) {
-
+        } catch (IllegalValueException e) {
+            System.out.println(e.getMessage());
         }
 
     }
@@ -174,13 +175,13 @@ public class BuyerTest {
             Buyer testBuyer = new BuyerBuilder().withProperties(ptb1).build();
             Buyer testBuyer2 = new BuyerBuilder().withProperties(ptb1, ptb2).build();
             Buyer testBuyer3 = new BuyerBuilder(testBuyer2).build();
-            Buyer testBuyer4 = new BuyerBuilder().withProperties(ptb2,ptb1).build();
+            Buyer testBuyer4 = new BuyerBuilder().withProperties(ptb2, ptb1).build();
 
             assertTrue(testBuyer2.hasSameProperties(testBuyer3));
             assertFalse(testBuyer.hasSameProperties(testBuyer2));
             assertTrue(testBuyer3.hasSameProperties(testBuyer4));
-        } catch (IllegalValueException ignored) {
-
+        } catch (IllegalValueException e) {
+            System.out.println(e.getMessage());
         }
     }
 }

@@ -135,6 +135,9 @@ public class BuyerBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Properties} of the {@code buyer} that we are building.
+     */
     public BuyerBuilder withProperties(PropertyToBuy... properties) {
         this.properties = new ArrayList<>(Arrays.asList(properties));
         return this;
