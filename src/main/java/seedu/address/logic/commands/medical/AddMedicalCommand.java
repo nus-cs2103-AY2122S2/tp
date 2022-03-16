@@ -31,6 +31,7 @@ public class AddMedicalCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds medical information of a patient to MedBook. "
             + "Parameters: "
+            + PREFIX_TYPE + "medical "
             + PREFIX_NRIC + "NRIC "
             + PREFIX_AGE + "AGE "
             + PREFIX_BLOODTYPE + "BLOODTYPE "
