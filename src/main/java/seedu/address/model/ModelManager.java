@@ -47,7 +47,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         System.out.println("ModelManager.this.addressBook: "+new AddressBook(addressBook).toString());
         this.userPrefs = new UserPrefs(userPrefs);
-  
+
         filteredConsultations = new FilteredList<>(this.addressBook.getConsultationList());
         filteredPatients = new FilteredList<>(this.addressBook.getPersonList());
         filteredPrescription = new FilteredList<>(this.addressBook.getPrescriptionList());

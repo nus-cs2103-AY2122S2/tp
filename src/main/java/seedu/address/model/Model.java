@@ -141,7 +141,7 @@ public interface Model {
      */
     void updateFilteredContactList(Predicate<Contact> predicate);
 
-  
+
     // Consultation
 
     /**

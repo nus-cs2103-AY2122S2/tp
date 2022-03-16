@@ -301,7 +301,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public ObservableList<Consultation> getConsultationList() {
         return consultations.asUnmodifiableObservableList();
     }
-    
+
     public ObservableList<Prescription> getPrescriptionList() {
         return prescriptions.asUnmodifiableObservableList();
     }
