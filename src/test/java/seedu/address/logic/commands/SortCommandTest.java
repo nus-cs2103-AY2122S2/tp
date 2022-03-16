@@ -6,7 +6,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonUtil;
 import seedu.address.testutil.SortUtil;
 
 import java.util.ArrayList;
@@ -17,7 +16,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.SortUtil.*;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.*;
 
 class SortCommandTest {
@@ -155,6 +153,18 @@ class SortCommandTest {
         assertCommandSuccess(sortCommand, model, SortCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
+    @Test
+    public void execute_sortMultipleFields_success() {
+        ArrayList<SortCommand.FieldSortOrder> fieldSortOrder = new ArrayList<>();
+        fieldSortOrder.add(BIRTHDAY_SORT_DESC);
+        fieldSortOrder.add(NAME_SORT_DEFAULT);
+
+        List<Person> sortedPersonListByName = new ArrayList<>(Arrays.asList(GEORGE, BENSON, ALICE, CARL, ELLE, HOON, DANIEL, FIONA, IDA));
+        SortCommand sortCommand = new SortCommand(fieldSortOrder);
+        Model expectedModel = new ModelManager(new AddressBook(sortedPersonListByName), new UserPrefs());
+
+        assertCommandSuccess(sortCommand, model, SortCommand.MESSAGE_SUCCESS, expectedModel);
+    }
 
     @Test
     public void execute_noFieldSpecified_Failure() {
