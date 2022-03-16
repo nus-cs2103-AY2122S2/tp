@@ -23,7 +23,7 @@
 .split-pane:vertical .split-pane-divider {
     -fx-background-color: derive(#1d1d1d, 20%);
     -fx-border-color: #4d4d4d transparent transparent transparent;
-    -fx-padding: 0 0 0 0;
+    -fx-padding: 0 0.1em 0 0.1em;
 }
 
 #copyButton:hover {
@@ -67,6 +67,10 @@
 
 .table-view .table-cell {
     -fx-font-size: 12pt;
+}
+
+.my-cell-text {
+    -fx-fill: white;
 }
 
 .table-view .table-row-cell {
