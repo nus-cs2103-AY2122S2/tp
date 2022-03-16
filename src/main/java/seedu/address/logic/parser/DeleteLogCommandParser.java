@@ -31,11 +31,10 @@ public class DeleteLogCommandParser implements Parser<DeleteLogCommand> {
 
         // tokenize
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_LOG_INDEX, FLAG_ALL);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_LOG_INDEX, FLAG_ALL);
 
         // check that log index is present, or all flag present, but not both
-        if (!(arePrefixesPresent(argMultimap, PREFIX_LOG_INDEX)
-                || arePrefixesPresent(argMultimap, FLAG_ALL))) {
+        if (arePrefixesPresent(argMultimap, PREFIX_LOG_INDEX) == arePrefixesPresent(argMultimap, FLAG_ALL)) {
             throw new ParseException(MESSAGE_INVALID_FORMAT);
         }
 
@@ -81,9 +80,9 @@ public class DeleteLogCommandParser implements Parser<DeleteLogCommand> {
             command = new DeleteLogCommand(isForOnePerson, isForDeletingAllLogs, personIndex, logIndex);
         } else {
             if (personName == null) { // means delete all
-                command = new DeleteLogCommand(true);
+                command = new DeleteLogCommand(isForDeletingAllLogs);
             } else {
-                command = new DeleteLogCommand(true, false, personName, logIndex);
+                command = new DeleteLogCommand(isForOnePerson, isForDeletingAllLogs, personName, logIndex);
             }
 
         }

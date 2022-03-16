@@ -414,6 +414,16 @@ public class DeleteLogCommand extends Command {
                     || propertyOfOne.equals(propertyOfOther));
 
         }
+
+        @Override
+        public String toString() {
+            return "For one person: " + this.isForOnePerson
+                    + "\nFor all logs: " + this.isForDeletingAllLogs
+                    + "\nBy Name: " + this.byName
+                    + "\nPerson with name: " + this.personWithNameToDeleteLog
+                    + "\nPerson index: " + this.personIndex
+                    + "\nLog Index: " + this.logIndex;
+        }
     }
 
 }
