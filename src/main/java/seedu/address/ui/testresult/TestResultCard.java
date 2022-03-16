@@ -12,7 +12,7 @@ import seedu.address.ui.UiPart;
  */
 public class TestResultCard extends UiPart<Region> {
 
-    private static final String FXML = "TestResultListCard.fxml";
+    private static final String FXML = "testresult/TestResultListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -26,8 +26,6 @@ public class TestResultCard extends UiPart<Region> {
 
     @FXML
     private HBox cardPane;
-    @FXML
-    private Label nric;
     @FXML
     private Label id;
     @FXML
@@ -44,7 +42,6 @@ public class TestResultCard extends UiPart<Region> {
         super(FXML);
         this.testResult = testResult;
         id.setText(displayedIndex + ". ");
-        nric.setText(testResult.getOwnerNric().value);
         testDate.setText(testResult.getTestDate().toString());
         medicalTest.setText(testResult.getMedicalTest().value);
         result.setText(testResult.getResult().value);

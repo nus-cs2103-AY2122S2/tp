@@ -267,7 +267,7 @@ public class ModelManager implements Model {
     }
 
 
-    //=========== Filtered Contact List Accessors =============================================================
+    //=========== Filtered Test Result List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Contact} backed by the internal list of
