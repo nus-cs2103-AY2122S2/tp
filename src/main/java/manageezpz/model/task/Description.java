@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static manageezpz.commons.util.AppUtil.checkArgument;
 
 public class Description {
-    public static final String MESSAGE_CONSTRAINTS = "Description should should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Description should not be blank";
 
     public final String description;
 
