@@ -30,11 +30,10 @@ public class ConsultationListPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public ConsultationListPanel(ObservableList<Consultation> consultationList, ObservableList<Patient> personList) {
+    public ConsultationListPanel(ObservableList<Consultation> consultationList) {
         super(FXML);
         consultationListView.setItems(consultationList);
         consultationListView.setCellFactory(listView -> new ConsultationListViewCell());
-        this.personList = personList;
     }
 
     /**
@@ -52,7 +51,7 @@ public class ConsultationListPanel extends UiPart<Region> {
                 setText(null);
             } else {
 
-                setGraphic(new ConsultationCard(consultation, personList, getIndex() + 1).getRoot());
+                setGraphic(new ConsultationCard(consultation, getIndex() + 1).getRoot());
             }
         }
     }

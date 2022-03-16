@@ -26,7 +26,7 @@ public class Consultation {
      */
     public Consultation(Nric nric, Date date, Time time, Notes notes,
                             Prescription prescription, TestsTakenAndResults testsTakenAndResults) {
-        requireAllNonNull(nric, date, time, notes);
+        requireAllNonNull(nric, date, time);
         this.nric = nric;
         this.date = date;
         this.time = time;
@@ -76,10 +76,7 @@ public class Consultation {
         Consultation otherConsultation = (Consultation) other;
         return otherConsultation.getNric().equals(getNric())
                 && otherConsultation.getDate().equals(getDate())
-                && otherConsultation.getTime().equals(getTime())
-                && otherConsultation.getNotes().equals(getNotes())
-                && otherConsultation.getPrescription().equals(getPrescription())
-                && otherConsultation.getTestAndResults().equals(getTestAndResults());
+                && otherConsultation.getTime().equals(getTime());
     }
 
     @Override

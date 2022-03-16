@@ -26,15 +26,11 @@
                     <Region fx:constant="USE_PREF_SIZE" />
                 </minWidth>
             </Label>
-            <Label fx:id="name" styleClass="cell_big_label" text="\$name">
+            <Label fx:id="name" styleClass="cell_big_label" text="\$date">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font></Label>
         </HBox>
-      <Label fx:id="date" text="\$date">
-            <font>
-               <Font name="System Bold" size="14.0" />
-            </font></Label>
          <Region prefHeight="200.0" prefWidth="200.0" />
       <Label text="Notes">
             <font>

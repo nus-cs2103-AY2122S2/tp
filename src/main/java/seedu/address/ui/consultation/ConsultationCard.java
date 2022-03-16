@@ -35,8 +35,6 @@ public class ConsultationCard extends UiPart<Region> {
     @FXML
     private Label date;
     @FXML
-    private Label time;
-    @FXML
     private Label notes;
     @FXML
     private Label prescription;
@@ -46,15 +44,15 @@ public class ConsultationCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public ConsultationCard(Consultation consultation, ObservableList<Patient> personList, int displayedIndex) {
+    public ConsultationCard(Consultation consultation, int displayedIndex) {
         super(FXML);
         this.consultation = consultation;
         id.setText(displayedIndex + ". ");
-        for (Patient patient : personList) {
-            if (patient.getNric().equals(consultation.getNric())) {
-                name.setText(patient.getName().toString() + " / " + consultation.getNric().toString());
-            }
-        }
+//        for (Patient patient : personList) {
+//            if (patient.getNric().equals(consultation.getNric())) {
+//                name.setText(patient.getName().toString() + " / " + consultation.getNric().toString());
+//            }
+//        }
         date.setText(consultation.getDate().toString() + ", " + consultation.getTime().toString());
         notes.setText(consultation.getNotes().toString());
         if (consultation.getPrescription().toString().equals("")) {

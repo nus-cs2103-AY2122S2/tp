@@ -360,7 +360,7 @@ public class ModelManager implements Model {
                 && userPrefs.equals(other.userPrefs)
                 && filteredContacts.equals(other.filteredContacts)
                 && filteredConsultations.equals(other.filteredConsultations)
-                && filteredPatients.equals(other.filteredPatients);
+                && filteredPatients.equals(other.filteredPatients)
                 && filteredMedicals.equals(other.filteredMedicals)
                 && filteredPrescription.equals(other.filteredPrescription)
                 && filteredTestResults.equals(other.filteredTestResults);

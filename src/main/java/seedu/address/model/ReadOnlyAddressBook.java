@@ -36,7 +36,8 @@ public interface ReadOnlyAddressBook {
      */
     ObservableList<Consultation> getConsultationList();
 
-     * Returns an unmodifiable view of the test results list.
+    /**
+     *  Returns an unmodifiable view of the test results list.
      * This list will not contain any duplicate test results.
      * @return
      */

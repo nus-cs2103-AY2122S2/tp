@@ -277,7 +277,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public String toString() {
         return persons.asUnmodifiableObservableList().size() + " persons"
                 + contacts.asUnmodifiableObservableList().size() + " contacts"
-                + consultations.asUnmodifiableObservableList().size() + " consultations";
+                + consultations.asUnmodifiableObservableList().size() + " consultations"
                 + testResults.asUnmodifiableObservableList().size() + " test results";
         // TODO: refine later
     }
@@ -317,7 +317,7 @@ public class AddressBook implements ReadOnlyAddressBook {
                 || (other instanceof AddressBook // instanceof handles nulls
                 && persons.equals(((AddressBook) other).persons))
                 && contacts.equals(((AddressBook) other).contacts)
-                && consultations.equals(((AddressBook) other).consultations);
+                && consultations.equals(((AddressBook) other).consultations)
                 && testResults.equals(((AddressBook) other).testResults);
     }
 

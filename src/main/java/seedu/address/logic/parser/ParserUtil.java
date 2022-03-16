@@ -371,8 +371,6 @@ public class ParserUtil {
         return new TestsTakenAndResults(testsTakenAndResults);
     }
 
-}
-
     /**
      * Parses a {@code String testDate} into a {@code TestDate}.
      * Leading and trailing whitespaces will be trimmed.

@@ -110,6 +110,7 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_CONSULTATION);
             }
             addressBook.addConsultation(consultation);
+        }
         for (JsonAdaptedTestResult jsonAdaptedTestResult : testResults) {
             TestResult testResult = jsonAdaptedTestResult.toModelType();
             if (addressBook.hasTestResult(testResult)) {

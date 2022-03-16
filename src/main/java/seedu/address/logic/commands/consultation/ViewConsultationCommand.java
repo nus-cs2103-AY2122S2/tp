@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.commands.contact.AddContactCommand.MESSAGE_MISSING_PATIENT;
 import static seedu.address.logic.parser.CliSyntax.*;
 
+import javafx.beans.Observable;
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -14,6 +16,7 @@ import seedu.address.model.consultation.Consultation;
 import seedu.address.model.consultation.ConsultationWithPredicates;
 import seedu.address.model.patient.Nric;
 import seedu.address.model.patient.NricPredicate;
+import seedu.address.model.patient.Patient;
 import seedu.address.ui.MainWindow;
 
 /**
@@ -50,11 +53,20 @@ public class ViewConsultationCommand extends Command {
             throw new CommandException(MESSAGE_MISSING_PATIENT);
         }
 
+        ObservableList<Patient> personList = model.getAddressBook().getPersonList();
+        String nameAndNric = new String();
+
+        for (Patient patient : personList) {
+            if (patient.getNric().equals(ownerNric)) {
+                nameAndNric = patient.getName().toString() + " / " + ownerNric;
+            }
+        }
+
         System.out.println("ViewConsultationCommand.java: "+COMMAND_TYPE);
 
         return new CommandResult(
                 String.format(Messages.MESSAGE_CONSULTATION_LISTED_OVERVIEW,
-                        model.getFilteredConsultationList().size(), ownerNric),
+                        model.getFilteredConsultationList().size(), nameAndNric),
                 COMMAND_TYPE);
     }
 }
