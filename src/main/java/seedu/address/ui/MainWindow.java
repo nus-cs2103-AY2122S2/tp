@@ -125,7 +125,7 @@ public class MainWindow extends UiPart<Stage> {
         System.out.println("getFilteredConsultationList: "+logic.getFilteredConsultationList().toString());
         prescriptionListPanel = new PrescriptionListPanel(logic.getFilteredPrescriptionList());
 
-        personListPanelPlaceholder.getChildren().add(consultationListPanel.getRoot());
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());

@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
@@ -49,6 +50,13 @@ public class ConsultationListPanel extends UiPart<Region> {
             } else {
                 System.out.println(consultation);
                 System.out.println(consultation == null);
+                System.out.println(consultation.getNric());
+                System.out.println(consultation.getDate());
+                System.out.println(consultation.getTime());
+                System.out.println(consultation.getNotes());
+                System.out.println(consultation.getPrescription());
+                System.out.println(consultation.getTestAndResults());
+
                 setGraphic(new ConsultationCard(consultation).getRoot());
             }
         }
