@@ -33,7 +33,7 @@ You can reach us at the ownerName `seer[at]comp.nus.edu.sg`
 
 <img src="images/tobihy.png" width="200px">
 
-[[github](http://github.com/tobihy)] 
+[[github](http://github.com/tobihy)]
 [[portfolio](team/tobihy.md)]
 
 * Role: Developer
@@ -47,7 +47,7 @@ You can reach us at the ownerName `seer[at]comp.nus.edu.sg`
 [[portfolio](team/soloplxya.md)]
 
 * Role: Developer
-* Responsibilities: Developer 
+* Responsibilities: Developer
 
 
 ### Lin Hui Xin Tiffany

@@ -9,40 +9,39 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.pet.Diet;
+import seedu.address.model.pet.Appointment;
 import seedu.address.model.pet.Pet;
 
 
-
 /**
- * Adds diet details to a pet identified using it's displayed index from the address book.
+ * Adds appointment details to a pet identified using it's displayed index from the address book.
  */
-public class DietCommand extends Command {
+public class AppointmentCommand extends Command {
 
-    public static final String COMMAND_WORD = "diet";
+    public static final String COMMAND_WORD = "app";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the diet of the pet identified "
-            + "by the index number used in the last pet listing. "
-            + "Existing diet will be overwritten by the input.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "d/ [diet]\n"
+            + ": Edits the appointment of the pet identified "
+            + "by the index number used in the last pet listing.\n"
+            + "Existing appointment will be overwritten by the input.\n"
+            + "Parameters: INDEX (must be a positive integer)"
+            + "date/ [yyyy-MM-dd HH:mm] at/ [location]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "d/ No seafood.";
+            + "date/2022-03-04 09:30 at/ NUS Vet Clinic";
 
-    public static final String MESSAGE_ADD_DIET_SUCCESS = "Added diet to Pet: %1$s";
-    public static final String MESSAGE_DELETE_DIET_SUCCESS = "Removed diet from Pet: %1$s";
+    public static final String MESSAGE_ADD_APPOINTMENT_SUCCESS = "Added appointment to Pet: %1$s";
+    public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS = "Removed appointment from Pet: %1$s";
     private final Index index;
-    private final Diet diet;
+    private final Appointment appointment;
 
     /**
-     * @param index of the pet in the filtered pets list to edit the diet
-     * @param diet of the pet to be updated to
+     * @param index of the pet in the filtered pets list to edit the appointment.
+     * @param appointment of the pet to be updated to.
      */
-    public DietCommand(Index index, Diet diet) {
-        requireAllNonNull(index, diet);
+    public AppointmentCommand(Index index, Appointment appointment) {
+        requireAllNonNull(index, appointment);
 
         this.index = index;
-        this.diet = diet;
+        this.appointment = appointment;
     }
 
     @Override
@@ -56,7 +55,7 @@ public class DietCommand extends Command {
         Pet petToEdit = lastShownList.get(index.getZeroBased());
         Pet editedPet = new Pet(
                 petToEdit.getName(), petToEdit.getOwnerName(), petToEdit.getPhone(),
-                petToEdit.getAddress(), petToEdit.getTags(), diet, petToEdit.getAppointment());
+                petToEdit.getAddress(), petToEdit.getTags(), petToEdit.getDiet(), appointment);
 
         model.setPet(petToEdit, editedPet);
         model.updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
@@ -66,11 +65,12 @@ public class DietCommand extends Command {
 
     /**
      * Generates a command execution success message based on whether
-     * the diet is added to or removed from
+     * the appointment is added to or removed from
      * {@code petToEdit}.
      */
     private String generateSuccessMessage(Pet petToEdit) {
-        String message = !diet.value.isEmpty() ? MESSAGE_ADD_DIET_SUCCESS : MESSAGE_DELETE_DIET_SUCCESS;
+        String message = !appointment.value.isEmpty()
+                ? MESSAGE_ADD_APPOINTMENT_SUCCESS : MESSAGE_DELETE_APPOINTMENT_SUCCESS;
         return String.format(message, petToEdit);
     }
 
@@ -82,13 +82,14 @@ public class DietCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DietCommand)) {
+        if (!(other instanceof AppointmentCommand)) {
             return false;
         }
 
         // state check
-        DietCommand e = (DietCommand) other;
+        AppointmentCommand e = (AppointmentCommand) other;
         return index.equals(e.index)
-                && diet.equals(e.diet);
+                && appointment.equals(e.appointment);
     }
+
 }

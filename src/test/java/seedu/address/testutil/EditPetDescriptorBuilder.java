@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPetDescriptor;
 import seedu.address.model.pet.Address;
+import seedu.address.model.pet.Appointment;
 import seedu.address.model.pet.Diet;
 import seedu.address.model.pet.Name;
 import seedu.address.model.pet.OwnerName;
@@ -41,6 +42,7 @@ public class EditPetDescriptorBuilder {
         descriptor.setAddress(pet.getAddress());
         descriptor.setTags(pet.getTags());
         descriptor.setDiet(pet.getDiet());
+        descriptor.setAppointment(pet.getAppointment());
     }
 
     /**
@@ -86,11 +88,18 @@ public class EditPetDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPetDescriptor}
-     * that we are building.
+     * Sets the {@code Diet} of the {@code EditPetDescriptor} that we are building.
      */
     public EditPetDescriptorBuilder withDiet(String diet) {
         descriptor.setDiet(new Diet(diet));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Appointment} of the {@code EditPetDescriptor} that we are building.
+     */
+    public EditPetDescriptorBuilder withAppointment(String appointment) {
+        descriptor.setAppointment(new Appointment(appointment));
         return this;
     }
 
