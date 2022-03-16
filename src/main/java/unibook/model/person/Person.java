@@ -112,8 +112,7 @@ public class Person {
     }
 
     /**
-     * Returns a mutable module set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
+     * Returns a mutable module set.
      */
     public Set<Module> getModulesModifiable() {
         return modules;
