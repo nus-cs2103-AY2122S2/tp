@@ -12,6 +12,7 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -80,6 +81,8 @@ public class MainWindow extends UiPart<Stage> {
 
         helpWindow = new HelpWindow();
         addTagWindow = new AddTagWindow(logic);
+        addTagWindow.getRoot().initOwner(primaryStage);
+        addTagWindow.getRoot().initModality(Modality.WINDOW_MODAL);
         addProfileWindow = new AddProfileWindow(logic);
     }
 

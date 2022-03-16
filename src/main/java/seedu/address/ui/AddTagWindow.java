@@ -49,7 +49,6 @@ public class AddTagWindow extends UiPart<Stage> {
         this.logic = logic;
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
-        setupTags();
         selectButtonPressed = false;
     }
 
@@ -90,6 +89,9 @@ public class AddTagWindow extends UiPart<Stage> {
      * </ul>
      */
     public void show() {
+        tagsPane.getChildren().clear();
+        setupTags();
+        resultDisplay.setFeedbackToUser("");
         getRoot().show();
         getRoot().centerOnScreen();
     }
@@ -200,7 +202,5 @@ public class AddTagWindow extends UiPart<Stage> {
             }
         }
     }
-
-
 
 }
