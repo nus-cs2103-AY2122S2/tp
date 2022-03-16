@@ -17,25 +17,24 @@ skinparam Class {
 'End of local overrides
 
 package Logic {
+    class IBookParser
+    class XYZCommand
+    class CommandResult
+    class "{abstract}\nCommand" as Command
 
-Class IBookParser
-Class XYZCommand
-Class CommandResult
-Class "{abstract}\nCommand" as Command
 
-
-Class "<<interface>>\nLogic" as Logic
-Class LogicManager
+    class "<<interface>>\nLogic" as Logic
+    class LogicManager
 }
 
-package Model{
-Class HiddenModel #FFFFFF
+package Model {
+    class HiddenModel<<Hidden>>
 }
 
-package Storage{
+package Storage {
 }
 
-Class HiddenOutside #FFFFFF
+class HiddenOutside<<Hidden>>
 HiddenOutside ..> Logic
 
 LogicManager .right.|> Logic

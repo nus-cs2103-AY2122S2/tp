@@ -17,9 +17,9 @@ skinparam Class {
 'End of local overrides
 
 package Model {
-    interface "<<interface>>\nReadOnlyIBook" as ReadOnlyIBook
-    interface "<<interface>>\nModel" as Model
-    interface "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
+    class "<<interface>>\nReadOnlyIBook" as ReadOnlyIBook
+    class "<<interface>>\nModel" as Model
+    class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
 
     class IBook
     class ModelManager

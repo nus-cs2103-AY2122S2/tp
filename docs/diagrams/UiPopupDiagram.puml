@@ -19,6 +19,7 @@ skinparam Class {
 package UI {
     class "{abstract}\nUiComponent" as UiComponent
     class MainWindow
+
     package Popup as PopupContainer {
        class "{abstract}\nPopup" as Popup
        class PopupHandler

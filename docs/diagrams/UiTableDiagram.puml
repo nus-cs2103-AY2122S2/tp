@@ -17,13 +17,14 @@ skinparam Class {
 'End of local overrides
 
 package UI {
-    Class "{abstract}\nUiComponent" as UiComponent
-    Class MainWindow
+    class "{abstract}\nUiComponent" as UiComponent
+    class MainWindow
+
     package Table <<Rectangle>> {
-        Class ProductCard
-        Class Table
-        Class TableContent
-        Class TableHeader
+        class ProductCard
+        class Table
+        class TableContent
+        class TableHeader
     }
 }
 
