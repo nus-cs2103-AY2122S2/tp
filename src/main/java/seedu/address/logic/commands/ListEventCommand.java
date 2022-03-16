@@ -25,6 +25,6 @@ public class ListEventCommand extends Command {
         model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
         model.updateFilteredPersonList(PREDICATE_SHOW_NO_PERSONS);
         model.updateFilteredCompanyList(PREDICATE_SHOW_NO_COMPANIES);
-        return new CommandResult(MESSAGE_SUCCESS, false, false, false, true);
+        return new CommandResult(MESSAGE_SUCCESS, false, false, false, false, true);
     }
 }

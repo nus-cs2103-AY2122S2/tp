@@ -128,19 +128,33 @@ public class MainWindow extends UiPart<Stage> {
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
+    void emptyEntryPanelPlaceholder() {
+        while (entryListPanelPlaceholder.getChildren().size() > 0) {
+            entryListPanelPlaceholder.getChildren().remove(0);
+        }
+    }
+
     /**
-     * Change the view to show Person.
+     * Change the view to show the Person list.
      */
     void fillPerson() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        emptyEntryPanelPlaceholder();
         entryListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
     }
 
     /**
-     * Change the view to show Event
+     * Change the view to show the Company list.
+     */
+    void fillCompany() {
+        emptyEntryPanelPlaceholder();
+        entryListPanelPlaceholder.getChildren().add(companyListPanel.getRoot());
+    }
+
+    /**
+     * Change the view to show the Event list.
      */
     void fillEvent() {
-        eventListPanel = new EventListPanel(logic.getFilteredEventList());
+        emptyEntryPanelPlaceholder();
         entryListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
     }
 
@@ -188,6 +202,10 @@ public class MainWindow extends UiPart<Stage> {
         return personListPanel;
     }
 
+    public CompanyListPanel getCompanyListPanel() {
+        return companyListPanel;
+    }
+
     public EventListPanel getEventListPanel() {
         return eventListPanel;
     }
@@ -205,6 +223,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowPerson()) {
                 fillPerson();
+            }
+
+            if (commandResult.isShowCompany()) {
+                fillCompany();
             }
 
             if (commandResult.isShowEvent()) {
