@@ -4,7 +4,7 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "username": "alice-123",
-    "teamed": [ "friends" ],
+    "teams": [ "friends" ],
     "skillSet" : [ "C_50" ]
   }, {
     "name": "Alice Pauline",

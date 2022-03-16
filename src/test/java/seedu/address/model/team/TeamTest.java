@@ -20,7 +20,7 @@ public class TeamTest {
     @Test
     public void isValidTeamName() {
         // null team name
-        assertThrows(NullPointerException.class, () -> Team.isValidteamName(null));
+        assertThrows(NullPointerException.class, () -> Team.isValidTeamName(null));
     }
 
 }

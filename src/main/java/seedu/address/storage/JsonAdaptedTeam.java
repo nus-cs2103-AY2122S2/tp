@@ -39,7 +39,7 @@ class JsonAdaptedTeam {
      * @throws IllegalValueException if there were any data constraints violated in the adapted team.
      */
     public Team toModelType() throws IllegalValueException {
-        if (!Team.isValidteamName(teamName)) {
+        if (!Team.isValidTeamName(teamName)) {
             throw new IllegalValueException(Team.MESSAGE_CONSTRAINTS);
         }
         return new Team(teamName);

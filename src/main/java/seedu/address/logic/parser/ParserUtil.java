@@ -105,7 +105,7 @@ public class ParserUtil {
     public static Team parseTeam(String team) throws ParseException {
         requireNonNull(team);
         String trimmed = team.trim();
-        if (!Team.isValidteamName(trimmed)) {
+        if (!Team.isValidTeamName(trimmed)) {
             throw new ParseException(Team.MESSAGE_CONSTRAINTS);
         }
         return new Team(trimmed);
