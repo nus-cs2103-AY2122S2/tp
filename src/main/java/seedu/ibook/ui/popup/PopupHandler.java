@@ -61,9 +61,7 @@ public class PopupHandler {
      * Shows the popup window for updating product.
      */
     public void showPopupUpdate(int index, Product product) {
-        if (popupUpdate.isShowing()) {
-            popupUpdate.hide();
-        }
+        popupUpdate.hideIfShowing();
         popupUpdate.show(index, product);
     }
 
@@ -71,9 +69,7 @@ public class PopupHandler {
      * Shows the popup window for deleting product.
      */
     public void showPopupDelete(int index, Product product) {
-        if (popupDelete.isShowing()) {
-            popupDelete.hide();
-        }
+        popupDelete.hideIfShowing();
         popupDelete.show(index, product);
     }
 
@@ -81,14 +77,8 @@ public class PopupHandler {
      * Hides the popup window.
      */
     public void hidePopup() {
-        if (popupAdd.isShowing()) {
-            popupAdd.hide();
-        }
-        if (popupUpdate.isShowing()) {
-            popupUpdate.hide();
-        }
-        if (popupDelete.isShowing()) {
-            popupDelete.hide();
-        }
+        popupAdd.hideIfShowing();
+        popupUpdate.hideIfShowing();
+        popupDelete.hideIfShowing();
     }
 }

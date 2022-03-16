@@ -17,7 +17,7 @@ public abstract class Popup extends UiComponent<Stage> {
     private Text error;
 
     /**
-     * Initialize a new popup window with a {@code FXML} file path
+     * Initializes a new popup window with a {@code FXML} file path
      * and a {@code CommandExecutor}.
      *
      * @param filePath FXML filepath.
@@ -28,7 +28,7 @@ public abstract class Popup extends UiComponent<Stage> {
     }
 
     /**
-     * Show the popup window.
+     * Shows the popup window.
      */
     public void show() {
         getRoot().show();
@@ -36,14 +36,14 @@ public abstract class Popup extends UiComponent<Stage> {
     }
 
     /**
-     * Hide the popup window.
+     * Hides the popup window.
      */
     public void hide() {
         getRoot().hide();
     }
 
     /**
-     * Check if the popup is showing.
+     * Checks if the popup is showing.
      *
      * @return A boolean indicating if the popup is showing.
      */
@@ -52,14 +52,23 @@ public abstract class Popup extends UiComponent<Stage> {
     }
 
     /**
-     * Focus the popup window.
+     * Hides the popup if it is showing.
+     */
+    public void hideIfShowing() {
+        if (isShowing()) {
+            hide();
+        }
+    }
+
+    /**
+     * Focuses the popup window.
      */
     public void focus() {
         getRoot().requestFocus();
     }
 
     /**
-     * Show feedback to user.
+     * Shows feedback to user.
      *
      * @param feedbackToUser The feedback string.
      */
@@ -69,7 +78,7 @@ public abstract class Popup extends UiComponent<Stage> {
     }
 
     /**
-     * Execute the commandText with the {@code commandExecutor}.
+     * Executes the commandText with the {@code commandExecutor}.
      *
      * @param commandText The commandText.
      */
