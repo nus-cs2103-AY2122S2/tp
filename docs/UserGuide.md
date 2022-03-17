@@ -67,21 +67,22 @@ Adds a new friend to Amigos. A friend has:
 * *(optional)* email
 * *(optional)* address
 * *(optional)* description
+* *(optional)* tags
 
-Format: `addfriend n/[NAME]  p/[PHONE_NUMBER] e/[EMAIL]  a/[ADDRESS] d/[DESCRIPTION]`
+Format: `addfriend n/[NAME]  p/[PHONE_NUMBER] e/[EMAIL]  a/[ADDRESS] d/[DESCRIPTION] [t/TAG]…`
 
 * Note that `NAME` field is minimally compulsory. `p/`, `em/`, `a/` and `d/` flags and their arguments are optional.
 * Note that there can be no duplicate friends having the same name.
 
 Examples:
 * `addfriend n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 d/Physics Major, Sarah’s friend. Met at Freshman Dinner.`
-* `addfriend n/John Doe`
+* `addfriend n/John Doe t/Friend t/Banker`
 
 ### Editing a friend : `editfriend`
 
 Edits an existing friend in Amigos.
 
-Format: `editfriend cn/[CURRENT_NAME] nn/[NEW_NAME]  np/[NEW_PHONE_NUMBER] ne/[NEW_EMAIL] na/[NEW_ADDRESS] nd/[NEW_DESCRIPTION]`
+Format: `editfriend cn/[CURRENT_NAME] nn/[NEW_NAME]  np/[NEW_PHONE_NUMBER] ne/[NEW_EMAIL] na/[NEW_ADDRESS] nd/[NEW_DESCRIPTION] [t/TAG]…`
 
 * Edits an existing friend in Amigos. Field `CURRENT_NAME` is compulsory to identify the existing friend.
 * At least one of the optional fields must be provided.
@@ -269,8 +270,8 @@ If your changes to the data file makes its format invalid, Amigos will discard a
 
 | Action                     | Format, Examples                                                                                                                                                                                                                                                                               |
 |----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Friend**             | `addfriend n/[NAME] p/[PHONE_NUMBER] e/[EMAIL]  a/[ADDRESS] d/[DESCRIPTION]` <br> e.g., `addfriend n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 d/Physics Major, Sarah’s friend. Met at Freshman Dinner`                                                         |
-| **Edit friend**            | `editfriend cn[CURRENT_NAME] nn/[NEW_NAME]  np/[NEW_PHONE_NUMBER] ne/[NEW_EMAIL] na/[NEW_ADDRESS] nd/[NEW_DESCRIPTION]`<br> e.g., `editfriend cn/John Doe na/John street, block 456, #01-01 ne/johndoe@example.com`                                                                            |
+| **Add Friend**             | `addfriend n/[NAME] p/[PHONE_NUMBER] e/[EMAIL]  a/[ADDRESS] d/[DESCRIPTION] [t/TAG]…` <br> e.g., `addfriend n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 d/Physics Major, Sarah’s friend. Met at Freshman Dinner t/TA`                                           |
+| **Edit friend**            | `editfriend cn[CURRENT_NAME] nn/[NEW_NAME]  np/[NEW_PHONE_NUMBER] ne/[NEW_EMAIL] na/[NEW_ADDRESS] nd/[NEW_DESCRIPTION] [t/TAG]…`<br> e.g., `editfriend cn/John Doe na/John street, block 456, #01-01 ne/johndoe@example.com`                                                                   |
 | **Delete Friend**          | `deletefriend n/[NAME]` <br> `deletefriend -a` <br> e.g., `deletefriend n/John Doe`                                                                                                                                                                                                            |
 | **Show a specific friend** | `showfriend n/NAME -alllogs`                                                                                                                                                                                                                                                                   |
 | **Show all friends**       | `showfriends`                                                                                                                                                                                                                                                                                  |
