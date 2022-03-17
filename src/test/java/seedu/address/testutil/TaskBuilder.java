@@ -1,12 +1,10 @@
 package seedu.address.testutil;
 
-import seedu.address.model.group.Group;
-import seedu.address.model.group.GroupName;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskName;
 
 /**
- * A utility class to help with building Group objects.
+ * A utility class to help with building Task objects.
  */
 public class TaskBuilder {
     public static final String TASK_NAME = "Department Meeting";
