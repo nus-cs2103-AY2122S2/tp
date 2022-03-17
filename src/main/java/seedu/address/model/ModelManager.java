@@ -105,7 +105,6 @@ public class ModelManager implements Model {
         undoable = true;
         backup = copyAddressBook();
         addressBook.removePerson(target);
-        undoable = false;
     }
 
     @Override
@@ -114,7 +113,6 @@ public class ModelManager implements Model {
         backup = copyAddressBook();
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        undoable = false;
     }
 
     @Override
@@ -123,7 +121,6 @@ public class ModelManager implements Model {
         backup = copyAddressBook();
         requireAllNonNull(target, editedPerson);
         addressBook.setPerson(target, editedPerson);
-        undoable = false;
     }
 
     @Override
@@ -131,10 +128,10 @@ public class ModelManager implements Model {
         if (undoable) {
             setAddressBook(backup);
             backup = copyAddressBook();
+            undoable = false;
         } else {
             throw new CommandException(UNABLE_TO_UNDO);
         }
-
     }
 
     /**
