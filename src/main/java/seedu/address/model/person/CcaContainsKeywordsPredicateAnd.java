@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Tests that a {@code Person}'s {@code Cca} matches any of the keywords given.
  */
-public class CcaContainsKeywordsPredicateAnd extends TagContainsKeywordsPredicateAnd{
+public class CcaContainsKeywordsPredicateAnd extends TagContainsKeywordsPredicateAnd {
     public CcaContainsKeywordsPredicateAnd(List<String> keywords) {
         super(keywords, person -> person.getCcaStrings());
     }

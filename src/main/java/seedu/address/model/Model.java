@@ -1,6 +1,5 @@
 package seedu.address.model;
 
-import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 

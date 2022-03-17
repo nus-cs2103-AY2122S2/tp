@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Tests that a {@code Person}'s {@code Education} matches any of the keywords given.
  */
-public class EducationContainsKeywordsPredicateOr extends TagContainsKeywordsPredicateOr{
+public class EducationContainsKeywordsPredicateOr extends TagContainsKeywordsPredicateOr {
 
     public EducationContainsKeywordsPredicateOr(List<String> keywords) {
         super(keywords, person -> person.getEducationStrings());

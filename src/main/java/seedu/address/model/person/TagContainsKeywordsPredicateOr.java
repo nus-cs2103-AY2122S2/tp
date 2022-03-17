@@ -1,9 +1,11 @@
 package seedu.address.model.person;
 
-import seedu.address.commons.util.StringUtil;
-
 import java.util.List;
 import java.util.function.Function;
+
+import seedu.address.commons.util.StringUtil;
+
+
 
 public abstract class TagContainsKeywordsPredicateOr extends ContainsKeywordsPredicate<List<String>> {
     private final List<String> keywords;

@@ -1,10 +1,10 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
-
-import static java.util.Objects.requireNonNull;
 
 public abstract class ContainsKeywordsPredicate<T> implements Predicate<Person> {
     private final List<String> keywords;

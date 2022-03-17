@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Tests that a {@code Person}'s {@code Internship} matches any of the keywords given.
  */
-public class InternshipContainsKeywordsPredicateAnd extends TagContainsKeywordsPredicateAnd{
+public class InternshipContainsKeywordsPredicateAnd extends TagContainsKeywordsPredicateAnd {
 
     public InternshipContainsKeywordsPredicateAnd(List<String> keywords) {
         super(keywords, person -> person.getInternshipStrings());
