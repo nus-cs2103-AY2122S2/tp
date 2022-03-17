@@ -71,7 +71,6 @@ Adds a new friend to Amigos. A friend has:
 **Examples**:
 * `addfriend n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 d/Physics Major, Sarah’s friend. Met at Freshman Dinner.`
 * `addfriend n/John Doe t/Friend t/Banker`
->>>>>>> upstream/master
 
 ### Editing a friend : `editfriend`
 
