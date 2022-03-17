@@ -119,9 +119,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a task from a specified group from the address book.
+     * Adds a task to a specified group from the address book.
      * The group must already exist in the address book.
-     * The task must already exist in the specified group in the address book.
+     * The task must not already exist in the specified group in the address book.
      */
     public void addTask(Task task, Group g) {
         groups.getGroup(g).addTask(task);

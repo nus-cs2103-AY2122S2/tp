@@ -11,7 +11,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.task.Task;
 
 /**
- * Deletes an existing task from ArchDuke.
+ * Deletes an existing task from an existing group in ArchDuke.
  */
 public class DeleteTaskCommand extends Command {
 

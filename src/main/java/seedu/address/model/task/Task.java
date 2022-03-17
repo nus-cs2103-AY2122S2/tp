@@ -53,11 +53,11 @@ public class Task {
         }
 
         // instanceof handles null
-        if (!(other instanceof seedu.address.model.task.Task)) {
+        if (!(other instanceof Task)) {
             return false;
         }
 
-        seedu.address.model.task.Task otherTask = (seedu.address.model.task.Task) other;
+        Task otherTask = (Task) other;
         return otherTask.getTaskName().equals(getTaskName());
     }
 
