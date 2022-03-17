@@ -19,13 +19,13 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.module.Module;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Status;
-import seedu.address.model.module.Module;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -101,7 +101,7 @@ public class EditCommand extends Command {
         Status updatedStatus = editPersonDescriptor.getStatus().orElse(personToEdit.getStatus());
 
         return new Person(updatedName, updatedPhone, updatedEmail,
-                updatedAddress, updatedStatus, personToEdit.getTags());
+                updatedAddress, updatedStatus, personToEdit.getModules());
     }
 
     @Override
@@ -146,7 +146,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setStatus(toCopy.status);
-            setTags(toCopy.modules);
+            setModules(toCopy.modules);
         }
 
         /**
@@ -202,7 +202,7 @@ public class EditCommand extends Command {
          * A defensive copy of {@code modules} is used internally.
          */
 
-        public void setTags(Set<Module> modules) {
+        public void setModules(Set<Module> modules) {
             this.modules = (modules != null) ? new HashSet<>(modules) : null;
         }
 
@@ -211,7 +211,7 @@ public class EditCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code modules} is null.
          */
-        public Optional<Set<Module>> getTags() {
+        public Optional<Set<Module>> getModules() {
             return (modules != null) ? Optional.of(Collections.unmodifiableSet(modules)) : Optional.empty();
         }
 
@@ -236,7 +236,7 @@ public class EditCommand extends Command {
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
                     && getStatus().equals(e.getStatus())
-                    && getTags().equals(e.getTags());
+                    && getModules().equals(e.getModules());
         }
     }
 }

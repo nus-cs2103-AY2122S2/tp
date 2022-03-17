@@ -14,13 +14,13 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.module.Module;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Status;
-import seedu.address.model.module.Module;
 
 public class AddModuleCommand extends Command {
 
@@ -95,11 +95,11 @@ public class AddModuleCommand extends Command {
         Address updatedAddress = personToEdit.getAddress();
         Status updatedStatus = personToEdit.getStatus();
 
-        Set<Module> oldTags = personToEdit.getTags();
-        Set<Module> updatedTags = new HashSet<>(oldTags);
-        updatedTags.addAll(modulesToAdd);
+        Set<Module> oldModules = personToEdit.getModules();
+        Set<Module> updatedModules = new HashSet<>(oldModules);
+        updatedModules.addAll(modulesToAdd);
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedStatus, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedStatus, updatedModules);
     }
 
     @Override

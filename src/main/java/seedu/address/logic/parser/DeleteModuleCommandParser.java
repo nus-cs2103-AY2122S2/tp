@@ -51,12 +51,12 @@ public class DeleteModuleCommandParser implements Parser<DeleteModuleCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteModuleCommand.MESSAGE_USAGE), pe);
         }
 
-        modules.addAll(parseTagsForEdit(argMultimap.getAllValues(PREFIX_MODULE)));
+        modules.addAll(parseModulesForEdit(argMultimap.getAllValues(PREFIX_MODULE)));
 
         return new DeleteModuleCommand(index, modules);
     }
 
-    private Set<Module> parseTagsForEdit(Collection<String> modules) throws ParseException {
+    private Set<Module> parseModulesForEdit(Collection<String> modules) throws ParseException {
         assert modules != null;
 
         if (modules.isEmpty()) {
@@ -64,6 +64,6 @@ public class DeleteModuleCommandParser implements Parser<DeleteModuleCommand> {
         }
 
         Collection<String> tagSet = modules.size() == 1 && modules.contains("") ? Collections.emptySet() : modules;
-        return ParserUtil.parseTags(tagSet);
+        return ParserUtil.parseModules(tagSet);
     }
 }

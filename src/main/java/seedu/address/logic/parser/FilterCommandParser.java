@@ -5,8 +5,8 @@ import static seedu.address.commons.core.Messages.MESSAGE_MORE_MODULES_THAN_EXPE
 
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameContainsTagPredicate;
 import seedu.address.model.module.Module;
+import seedu.address.model.person.NameContainsModulePredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -32,7 +32,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                     String.format(MESSAGE_MORE_MODULES_THAN_EXPECTED, FilterCommand.MESSAGE_USAGE));
         }
 
-        if (!Module.isValidTagName(tagKeywords[0])) {
+        if (!Module.isValidModuleName(tagKeywords[0])) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_CONSTRAINTS)
             );
@@ -40,6 +40,6 @@ public class FilterCommandParser implements Parser<FilterCommand> {
 
         // because we only allow ONE module.
         String tagToFind = tagKeywords[0];
-        return new FilterCommand(new NameContainsTagPredicate(tagToFind));
+        return new FilterCommand(new NameContainsModulePredicate(tagToFind));
     }
 }

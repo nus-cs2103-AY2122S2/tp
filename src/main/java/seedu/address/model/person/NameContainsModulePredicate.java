@@ -8,11 +8,11 @@ import seedu.address.model.module.Module;
 /**
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
  */
-public class NameContainsTagPredicate implements Predicate<Person> {
+public class NameContainsModulePredicate implements Predicate<Person> {
     // May possibly change to a list of modules
     private final Module module;
 
-    public NameContainsTagPredicate(String module) {
+    public NameContainsModulePredicate(String module) {
         this.module = new Module(module);
     }
 
@@ -20,15 +20,15 @@ public class NameContainsTagPredicate implements Predicate<Person> {
     public boolean test(Person person) {
         // instead of converting to stream, it is simply a module now
         // so, to do the "test", we only need to check if module is within the set of modules
-        Set<Module> modules = person.getTags();
+        Set<Module> modules = person.getModules();
         return modules.contains(module);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof NameContainsTagPredicate // instanceof handles nulls
-                && module.equals(((NameContainsTagPredicate) other).module)); // state check
+                || (other instanceof NameContainsModulePredicate // instanceof handles nulls
+                && module.equals(((NameContainsModulePredicate) other).module)); // state check
     }
 
 }

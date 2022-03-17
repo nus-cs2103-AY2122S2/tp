@@ -70,7 +70,7 @@ public class Person {
      * Returns an immutable module set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Module> getTags() {
+    public Set<Module> getModules() {
         return Collections.unmodifiableSet(modules);
     }
 
@@ -106,7 +106,7 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getModules().equals(getModules())
                 && otherPerson.getStatus().equals(getStatus());
     }
 
@@ -129,7 +129,7 @@ public class Person {
                 .append("; Status: ")
                 .append(getStatus());
 
-        Set<Module> modules = getTags();
+        Set<Module> modules = getModules();
         if (!modules.isEmpty()) {
             builder.append("; Modules: ");
             modules.forEach(builder::append);

@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsTagPredicate;
+import seedu.address.model.person.NameContainsModulePredicate;
 
 /**
  * Searches persons by their corresponding modules. This allows filtering by modules for users within ModuleMateFinder
@@ -20,9 +20,9 @@ public class FilterCommand extends Command {
             + "Parameters: KEYWORD \n"
             + "Example: " + COMMAND_WORD + " CS3230";
 
-    private final NameContainsTagPredicate predicate;
+    private final NameContainsModulePredicate predicate;
 
-    public FilterCommand(NameContainsTagPredicate predicate) {
+    public FilterCommand(NameContainsModulePredicate predicate) {
         this.predicate = predicate;
     }
 

@@ -63,10 +63,10 @@ class DeleteModuleCommandParserTest {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + MODULE_DESC_CS2101
                 + MODULE_DESC_CS2103T;
-        List<Module> expectedTags = new ArrayList<>();
-        expectedTags.add(new Module(VALID_MODULE_SWE));
-        expectedTags.add(new Module(VALID_MODULE));
-        DeleteModuleCommand expectedCommand = new DeleteModuleCommand(targetIndex, expectedTags);
+        List<Module> expectedModules = new ArrayList<>();
+        expectedModules.add(new Module(VALID_MODULE_SWE));
+        expectedModules.add(new Module(VALID_MODULE));
+        DeleteModuleCommand expectedCommand = new DeleteModuleCommand(targetIndex, expectedModules);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }

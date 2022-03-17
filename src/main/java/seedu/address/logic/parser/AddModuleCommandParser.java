@@ -41,7 +41,7 @@ public class AddModuleCommandParser implements Parser<AddModuleCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddModuleCommand.MESSAGE_USAGE), pe);
         }
 
-        List<Module> modules = new ArrayList<>(parseTagsForEdit(argMultimap.getAllValues(PREFIX_MODULE)));
+        List<Module> modules = new ArrayList<>(parseModulesForEdit(argMultimap.getAllValues(PREFIX_MODULE)));
 
         return new AddModuleCommand(index, modules);
     }
@@ -50,7 +50,7 @@ public class AddModuleCommandParser implements Parser<AddModuleCommand> {
      * @param modules Collection of Modules in string form to be parsed
      * @return Set of parsed Modules if @param modules not empty, else Empty Set
      */
-    private Set<Module> parseTagsForEdit(Collection<String> modules) throws ParseException {
+    private Set<Module> parseModulesForEdit(Collection<String> modules) throws ParseException {
         assert modules != null;
 
         if (modules.isEmpty()) {
@@ -58,6 +58,6 @@ public class AddModuleCommandParser implements Parser<AddModuleCommand> {
         }
 
         Collection<String> tagSet = modules.size() == 1 && modules.contains("") ? Collections.emptySet() : modules;
-        return ParserUtil.parseTags(tagSet);
+        return ParserUtil.parseModules(tagSet);
     }
 }

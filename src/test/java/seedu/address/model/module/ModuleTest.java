@@ -5,7 +5,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-public class TagTest {
+public class ModuleTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -13,9 +13,9 @@ public class TagTest {
     }
 
     @Test
-    public void constructor_invalidTagName_throwsIllegalArgumentException() {
-        String invalidTagName = "";
-        assertThrows(IllegalArgumentException.class, () -> new Module(invalidTagName));
+    public void constructor_invalidModuleName_throwsIllegalArgumentException() {
+        String invalidModuleName = "";
+        assertThrows(IllegalArgumentException.class, () -> new Module(invalidModuleName));
 
         assertThrows(IllegalArgumentException.class, () -> new Module("CS123S ")); // Need 4 digits
 
@@ -25,12 +25,12 @@ public class TagTest {
     }
 
     @Test
-    public void isValidTagName() {
+    public void isValidModuleName() {
         // null module name
-        assertThrows(NullPointerException.class, () -> Module.isValidTagName(null));
+        assertThrows(NullPointerException.class, () -> Module.isValidModuleName(null));
 
-        assertTrue(Module.isValidTagName("CS1231S"));
-        assertTrue(Module.isValidTagName("GEQ1000"));;
+        assertTrue(Module.isValidModuleName("CS1231S"));
+        assertTrue(Module.isValidModuleName("GEQ1000"));;
     }
 
 }

@@ -65,9 +65,9 @@ public class PersonCard extends UiPart<Region> {
         // Then set the image
         statusImage.setImage(imageToDisplay);
 
-        person.getTags().stream()
-                .sorted(Comparator.comparing(module -> module.tagName))
-                .forEach(module -> modules.getChildren().add(new Label(module.tagName)));
+        person.getModules().stream()
+                .sorted(Comparator.comparing(module -> module.moduleName))
+                .forEach(module -> modules.getChildren().add(new Label(module.moduleName)));
     }
 
     private Image getImageToDisplay(String statusText) {

@@ -96,7 +96,7 @@ public class EditCommandParserTest {
     }
 
     @Test
-    public void parse_tagFieldSpecified_failure() {
+    public void parse_moduleFieldSpecified_failure() {
         assertParseFailure(parser, "1 n/Bob a/Kent Ridge Hall m/CS2103", MESSAGE_INVALID_FORMAT);
         assertParseFailure(parser, "2 n/George m/CS2103", MESSAGE_INVALID_FORMAT);
         assertParseFailure(parser, "3 p/12345980 m/CS2103", MESSAGE_INVALID_FORMAT);

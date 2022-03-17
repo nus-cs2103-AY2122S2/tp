@@ -45,7 +45,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_MODULE_SWE).build();
+        Person expectedPerson = new PersonBuilder(BOB).withModules(VALID_MODULE_SWE).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
@@ -68,16 +68,16 @@ public class AddCommandParserTest {
                 + ADDRESS_DESC_BOB + MODULE_DESC_CS2103T, new AddCommand(expectedPerson));
 
         // multiple modules - all accepted
-        Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_MODULE_SWE, VALID_MODULE)
+        Person expectedPersonMultipleModules = new PersonBuilder(BOB).withModules(VALID_MODULE_SWE, VALID_MODULE)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + MODULE_DESC_CS2101 + MODULE_DESC_CS2103T, new AddCommand(expectedPersonMultipleTags));
+                + MODULE_DESC_CS2101 + MODULE_DESC_CS2103T, new AddCommand(expectedPersonMultipleModules));
     }
 
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero modules
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        Person expectedPerson = new PersonBuilder(AMY).withModules().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
                 new AddCommand(expectedPerson));
     }

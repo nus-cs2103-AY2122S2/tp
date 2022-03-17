@@ -3,11 +3,11 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ORDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 
 import java.util.Comparator;
 import java.util.List;
@@ -97,7 +97,7 @@ public class SortCommand extends Command {
                     result = o1.getAddress().compareTo(o2.getAddress());
 
                 } else if (PREFIX_MODULE.equals(field)) {
-                    result = Integer.compare(o1.getTags().size(), o2.getTags().size());
+                    result = Integer.compare(o1.getModules().size(), o2.getModules().size());
 
                 } else if (PREFIX_STATUS.equals(field)) {
                     result = o1.getStatus().compareTo(o2.getStatus());

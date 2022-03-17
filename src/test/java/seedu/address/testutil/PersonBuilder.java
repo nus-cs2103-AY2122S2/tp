@@ -51,7 +51,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         status = personToCopy.getStatus();
-        modules = new HashSet<>(personToCopy.getTags());
+        modules = new HashSet<>(personToCopy.getModules());
     }
 
     /**
@@ -65,8 +65,8 @@ public class PersonBuilder {
     /**
      * Parses the {@code modules} into a {@code Set<Module>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... modules) {
-        this.modules = SampleDataUtil.getTagSet(modules);
+    public PersonBuilder withModules(String ... modules) {
+        this.modules = SampleDataUtil.getModuleSet(modules);
         return this;
     }
 

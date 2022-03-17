@@ -34,7 +34,7 @@ class ClearModulesCommandTest {
         String expectedMessage = String.format(ClearModulesCommand.MESSAGE_SUCCESS, personToClear.getName());
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        Person editedPerson = new PersonBuilder(personToClear).withTags().build();
+        Person editedPerson = new PersonBuilder(personToClear).withModules().build();
         expectedModel.setPerson(personToClear, editedPerson);
 
         assertCommandSuccess(clearCommand, model, expectedMessage, expectedModel);
@@ -58,7 +58,7 @@ class ClearModulesCommandTest {
         Person personToClear = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         String expectedMessage = String.format(ClearModulesCommand.MESSAGE_SUCCESS, personToClear.getName());
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        Person editedPerson = new PersonBuilder(personToClear).withTags().build();
+        Person editedPerson = new PersonBuilder(personToClear).withModules().build();
         expectedModel.setPerson(personToClear, editedPerson);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);

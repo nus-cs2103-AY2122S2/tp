@@ -9,12 +9,12 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.module.Module;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Status;
-import seedu.address.model.module.Module;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -117,24 +117,24 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code module} is invalid.
      */
-    public static Module parseTag(String module) throws ParseException {
+    public static Module parseModule(String module) throws ParseException {
         requireNonNull(module);
-        String trimmedTag = module.trim();
-        if (!Module.isValidTagName(trimmedTag)) {
+        String trimmedModule = module.trim();
+        if (!Module.isValidModuleName(trimmedModule)) {
             throw new ParseException(Module.MESSAGE_CONSTRAINTS);
         }
-        return new Module(trimmedTag);
+        return new Module(trimmedModule);
     }
 
     /**
      * Parses {@code Collection<String> modules} into a {@code Set<Module>}.
      */
-    public static Set<Module> parseTags(Collection<String> modules) throws ParseException {
+    public static Set<Module> parseModules(Collection<String> modules) throws ParseException {
         requireNonNull(modules);
-        final Set<Module> tagSet = new HashSet<>();
-        for (String tagName : modules) {
-            tagSet.add(parseTag(tagName));
+        final Set<Module> moduleSet = new HashSet<>();
+        for (String moduleName : modules) {
+            moduleSet.add(parseModule(moduleName));
         }
-        return tagSet;
+        return moduleSet;
     }
 }

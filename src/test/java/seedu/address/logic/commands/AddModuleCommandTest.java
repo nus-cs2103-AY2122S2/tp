@@ -28,7 +28,7 @@ class AddModuleCommandTest {
     @Test
     void execute_addModuleUnfilteredList_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(firstPerson).withTags(VALID_MODULE_SWE, VALID_MODULE).build();
+        Person editedPerson = new PersonBuilder(firstPerson).withModules(VALID_MODULE_SWE, VALID_MODULE).build();
 
         List<Module> modules = new ArrayList<>();
         modules.add(new Module(VALID_MODULE_SWE));
@@ -45,7 +45,7 @@ class AddModuleCommandTest {
     @Test
     public void equals() {
         Person first = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        List<Module> modules = new ArrayList<>(first.getTags());
+        List<Module> modules = new ArrayList<>(first.getModules());
 
         AddModuleCommand addFirstCommand = new AddModuleCommand(INDEX_FIRST_PERSON, modules);
 
@@ -64,7 +64,7 @@ class AddModuleCommandTest {
 
         // different person -> returns false
         Person second = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-        List<Module> modulesCopy = new ArrayList<>(second.getTags());
+        List<Module> modulesCopy = new ArrayList<>(second.getModules());
         AddModuleCommand addSecondCommand = new AddModuleCommand(INDEX_SECOND_PERSON, modulesCopy);
         assertNotEquals(addFirstCommand, addSecondCommand);
     }

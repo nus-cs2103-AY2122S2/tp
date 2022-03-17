@@ -52,7 +52,7 @@ public class EditPersonDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different modules -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_MODULE).build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withModules(VALID_MODULE).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 }

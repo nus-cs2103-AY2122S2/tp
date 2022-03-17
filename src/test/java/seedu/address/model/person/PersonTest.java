@@ -20,7 +20,7 @@ public class PersonTest {
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Person person = new PersonBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> person.getModules().remove(0));
     }
 
     @Test
@@ -33,7 +33,7 @@ public class PersonTest {
 
         // same name, all other attributes different -> returns true
         Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_MODULE).build();
+                .withAddress(VALID_ADDRESS_BOB).withModules(VALID_MODULE).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -85,7 +85,7 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different modules -> returns false
-        editedAlice = new PersonBuilder(ALICE).withTags(VALID_MODULE).build();
+        editedAlice = new PersonBuilder(ALICE).withModules(VALID_MODULE).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 }
