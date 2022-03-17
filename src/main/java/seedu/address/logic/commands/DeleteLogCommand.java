@@ -207,21 +207,16 @@ public class DeleteLogCommand extends Command {
             return new CommandResult(MESSAGE_DELETE_LOG_SUCCESS);
         }
 
-        /**
-         * Carries out deletion logic for deletion of all {@code Log} objects of a specified person.
-         *
-         * @throws CommandException if person specified is not in address book.
-         */
-        public CommandResult deleteAllLogsOfPerson(Model model) throws CommandException {
-
-            // sanity checks
-            assert (this.isForDeletingAllLogs && this.isForOnePerson && this.logIndex == null);
-            assert (this.personIndex != null || this.personWithNameToDeleteLog != null);
-
-            // ===== GET PERSON =====
+        private Person getPersonToEdit(Model model) throws CommandException {
             // todo: can consider implementing model method getByIndexOrName, since repeated
             // across all functionalities that support both index and name
-            Person personToEdit;
+
+            // sanity checks
+            assert (this.personIndex != null || this.personWithNameToDeleteLog != null);
+
+            // get person to edit
+            Person personToEdit = null;
+
             if (this.byName) {
                 // sanity check
                 requireNonNull(this.personWithNameToDeleteLog);
@@ -253,6 +248,25 @@ public class DeleteLogCommand extends Command {
                 personToEdit = lastShownList.get(this.personIndex.getZeroBased());
             }
 
+            // another sanity check
+            requireNonNull(personToEdit);
+            return personToEdit;
+        }
+
+        /**
+         * Carries out deletion logic for deletion of all {@code Log} objects of a specified person.
+         *
+         * @throws CommandException if person specified is not in address book.
+         */
+        public CommandResult deleteAllLogsOfPerson(Model model) throws CommandException {
+
+            // sanity checks
+            assert (this.isForDeletingAllLogs && this.isForOnePerson && this.logIndex == null);
+            assert (this.personIndex != null || this.personWithNameToDeleteLog != null);
+
+            // ===== GET PERSON =====
+
+            Person personToEdit = this.getPersonToEdit(model);
             Person deletedLogsPerson = copyPersonButWithEmptyLogs(personToEdit);
 
             // add to address book
@@ -296,39 +310,7 @@ public class DeleteLogCommand extends Command {
                     || (this.personIndex != null && this.personWithNameToDeleteLog != null)));
 
             // ===== GET PERSON =====
-            // todo: can consider implementing model method getByIndexOrName, since repeated
-            // across all functionalities that support both index and name
-            Person personToEdit;
-            if (this.byName) {
-                // sanity check
-                requireNonNull(this.personWithNameToDeleteLog);
-
-                // find person with same name
-                List<Person> personsToEdit = model.getAddressBook()
-                        .getPersonList().stream()
-                        .filter(p -> p.hasSameName(this.personWithNameToDeleteLog))
-                        .collect(Collectors.toList());
-
-                // if person not found, throw an error
-                if (personsToEdit.size() < 1) {
-                    throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
-                }
-                assert (personsToEdit.size() == 1);
-                personToEdit = personsToEdit.get(0);
-
-            } else {
-                // sanity check
-                requireNonNull(this.personIndex);
-
-                // get list of persons from model
-                List<Person> lastShownList = model.getFilteredPersonList();
-
-                // get person and modify
-                if (this.personIndex.getZeroBased() >= lastShownList.size()) {
-                    throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-                }
-                personToEdit = lastShownList.get(this.personIndex.getZeroBased());
-            }
+            Person personToEdit = this.getPersonToEdit(model);
 
             Person deletedLogPerson = createdDeletedLogPerson(personToEdit, this.logIndex);
 
