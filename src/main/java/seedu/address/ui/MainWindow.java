@@ -34,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private ClientListPanel clientListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ListSelectionTab listSelectionTab;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -51,7 +52,7 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane statusbarPlaceholder;
 
     @FXML
-    private StackPane listSelectionTab;
+    private StackPane tabHolder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -124,6 +125,9 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        listSelectionTab = new ListSelectionTab();
+        tabHolder.getChildren().add(listSelectionTab.getRoot());
     }
 
     /**

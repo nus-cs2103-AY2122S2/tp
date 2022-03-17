@@ -52,6 +52,7 @@
         </VBox>
 
         <VBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+               <StackPane fx:id="tabHolder" prefHeight="30.0" />
 
           <VBox fx:id="clientList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
             <padding>
