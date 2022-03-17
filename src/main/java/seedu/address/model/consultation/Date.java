@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
+import java.time.format.DateTimeParseException;
 
 
 /**
@@ -32,7 +32,6 @@ public class Date {
     public Date(String date) {
         requireNonNull(date);
         checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
-
         this.date = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     }
 
@@ -44,7 +43,12 @@ public class Date {
      * Returns true if a given string is a valid date.
      */
     public static boolean isValidDate(String test) {
-        return test.matches(VALIDATION_REGEX);
+        try {
+            LocalDate.parse(test);
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+        return true;
     }
 
 

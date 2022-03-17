@@ -26,7 +26,7 @@ import seedu.address.model.patient.Patient;
  * Lists all persons in the address book to the user.
  */
 public class DeleteConsultationCommand extends Command {
-    public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_WORD = "delete ";
     public static final CommandType COMMAND_TYPE = CommandType.CONSULTATION;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
