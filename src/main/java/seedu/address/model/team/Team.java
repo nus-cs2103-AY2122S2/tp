@@ -66,15 +66,8 @@ public class Team {
         }
     }
 
-    public TeamName getTeamName() {
-        return this.teamName;
-
     public void deletePersonFromTeam(Person person) {
         this.teamMemberList.deletePersonFromTeam(person);
-    }
-
-    public TeamName getTeamName() {
-        return teamName;
     }
 
     public TeamMemberList getTeamMemberList() {
@@ -84,18 +77,4 @@ public class Team {
     public TeamLineupList getTeamLineupList() {
         return teamLineupList;
 
-    /**
-     * Removes a player.
-     */
-    public void removePlayer(Person person) {
-        // meanwhile, should also remove from lineup
-        this.teamMemberList.removePerson(person);
-    }
-
-    /**
-     * Removes a lineup.
-     */
-    public void removeLineup(String lineup) {
-        return;
-    }
 }

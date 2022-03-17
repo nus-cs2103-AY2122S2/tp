@@ -31,7 +31,6 @@ public class UniquePlayerList {
 
     /**
      * Checks if the given name is in the player pool.
-     *
      * @param name
      * @return
      */
