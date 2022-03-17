@@ -15,6 +15,9 @@ import seedu.address.model.person.Person;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
+    private static final String APPLICATION_STATUS_MSG = "Application Status : ";
+    private static final String INTERVIEW_STATUS_MSG = "Interview Status : ";
+
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -39,8 +42,11 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label applicationStatus;
+    @FXML
+    private Label interviewStatus;
+    @FXML
     private FlowPane tags;
-
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
@@ -48,13 +54,17 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName + ", " + person.getStudentID().studentID);
+        name.setText(person.getName().fullName + ", " + person.getStudentId().studentId);
         phone.setText(person.getPhone().value);
         course.setText(person.getCourse().course);
         email.setText(person.getEmail().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        applicationStatus.setText(APPLICATION_STATUS_MSG + person.getApplicationStatus().toString());
+        interviewStatus.setText(INTERVIEW_STATUS_MSG + person.getInterviewStatus().toString());
+
+
     }
 
     @Override

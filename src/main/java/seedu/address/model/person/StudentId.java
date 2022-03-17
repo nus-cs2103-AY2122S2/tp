@@ -3,7 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-public class StudentID {
+public class StudentId {
     public static final String MESSAGE_CONSTRAINTS =
             "IDs should only contain alphanumeric characters, and it should not be blank";
 
@@ -12,17 +12,17 @@ public class StudentID {
      */
     public static final String VALIDATION_REGEX = "E[\\p{Digit}]{7}";
 
-    public final String studentID;
+    public final String studentId;
 
     /**
-     * Constructs a {@code StudentID}.
+     * Constructs a {@code StudentId}.
      *
      * @param id A valid student ID.
      */
-    public StudentID(String id) {
+    public StudentId(String id) {
         requireNonNull(id);
         checkArgument(isValidId(id), MESSAGE_CONSTRAINTS);
-        studentID = id;
+        studentId = id;
     }
 
     /**
@@ -34,18 +34,18 @@ public class StudentID {
 
     @Override
     public String toString() {
-        return studentID;
+        return studentId;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof StudentID // instanceof handles nulls
-                && studentID.equals(((StudentID) other).studentID)); // state check
+                || (other instanceof StudentId // instanceof handles nulls
+                && studentId.equals(((StudentId) other).studentId)); // state check
     }
 
     @Override
     public int hashCode() {
-        return studentID.hashCode();
+        return studentId.hashCode();
     }
 }

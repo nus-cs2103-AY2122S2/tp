@@ -1,9 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPLICATION_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERVIEW_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -20,12 +22,14 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.ApplicationStatus;
 import seedu.address.model.person.Course;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.InterviewStatus;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.StudentID;
+import seedu.address.model.person.StudentId;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -44,7 +48,9 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_COURSE + "COURSE] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG]..."
+            + "[" + PREFIX_APPLICATION_STATUS + "APPLICATION STATUS]"
+            + "[" + PREFIX_INTERVIEW_STATUS + "INTERVIEW STATUS]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -96,14 +102,19 @@ public class EditCommand extends Command {
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
-        StudentID updatedID = editPersonDescriptor.getStudentID().orElse(personToEdit.getStudentID());
+        StudentId updatedID = editPersonDescriptor.getStudentId().orElse(personToEdit.getStudentId());
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Course updatedCourse = editPersonDescriptor.getCourse().orElse(personToEdit.getCourse());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        ApplicationStatus applicationStatus = editPersonDescriptor.getApplicationStatus()
+                .orElse(personToEdit.getApplicationStatus());
+        InterviewStatus interviewStatus = editPersonDescriptor.getInterviewStatus()
+                .orElse(personToEdit.getInterviewStatus());
 
-        return new Person(updatedID, updatedName, updatedPhone, updatedEmail, updatedCourse, updatedTags);
+        return new Person(updatedID, updatedName, updatedPhone, updatedEmail,
+                updatedCourse, updatedTags, applicationStatus, interviewStatus);
     }
 
     @Override
@@ -129,13 +140,15 @@ public class EditCommand extends Command {
      * corresponding field value of the person.
      */
     public static class EditPersonDescriptor {
-        private StudentID studentID;
+        private StudentId studentId;
         private Name name;
         private Phone phone;
         private Email email;
         private Course course;
 
         private Set<Tag> tags;
+        private ApplicationStatus applicationStatus;
+        private InterviewStatus interviewStatus;
 
         public EditPersonDescriptor() {}
 
@@ -144,27 +157,30 @@ public class EditCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
-            setStudentID(toCopy.studentID);
+            setStudentId(toCopy.studentId);
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setCourse(toCopy.course);
             setTags(toCopy.tags);
+            setApplicationStatus(toCopy.applicationStatus);
+            setInterviewStatus(toCopy.interviewStatus);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(studentID, name, phone, email, course, tags);
+            return CollectionUtil.isAnyNonNull(studentId, name, phone, email, course, tags,
+                    applicationStatus, interviewStatus);
         }
 
-        public void setStudentID(StudentID id) {
-            this.studentID = id;
+        public void setStudentId(StudentId id) {
+            this.studentId = id;
         }
 
-        public Optional<StudentID> getStudentID() {
-            return Optional.ofNullable(studentID);
+        public Optional<StudentId> getStudentId() {
+            return Optional.ofNullable(studentId);
         }
 
         public void setName(Name name) {
@@ -199,6 +215,21 @@ public class EditCommand extends Command {
             return Optional.ofNullable(course);
         }
 
+        public void setApplicationStatus(ApplicationStatus applicationStatus) {
+            this.applicationStatus = applicationStatus;
+        }
+
+        public Optional<ApplicationStatus> getApplicationStatus() {
+            return Optional.ofNullable(applicationStatus);
+        }
+
+        public void setInterviewStatus(InterviewStatus interviewStatus) {
+            this.interviewStatus = interviewStatus;
+        }
+
+        public Optional<InterviewStatus> getInterviewStatus() {
+            return Optional.ofNullable(interviewStatus);
+        }
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -231,12 +262,14 @@ public class EditCommand extends Command {
             // state check
             EditPersonDescriptor e = (EditPersonDescriptor) other;
 
-            return getStudentID().equals(e.getStudentID())
+            return getStudentId().equals(e.getStudentId())
                     && getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getCourse().equals(e.getCourse())
-                    && getTags().equals(e.getTags());
+                    && getTags().equals(e.getTags())
+                    && getApplicationStatus().equals(e.getApplicationStatus())
+                    && getInterviewStatus().equals(e.getInterviewStatus());
         }
     }
 }

@@ -16,11 +16,13 @@ import seedu.address.model.tag.Tag;
 public class Person {
 
     // Identity fields
-    private final StudentID studentID;
+    private final StudentId studentId;
     private final Name name;
     private final Phone phone;
     private final Email email;
     private final Course course;
+    private final ApplicationStatus applicationStatus;
+    private final InterviewStatus interviewStatus;
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
@@ -28,18 +30,21 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(StudentID studentID, Name name, Phone phone, Email email, Course course, Set<Tag> tags) {
-        requireAllNonNull(studentID, name, phone, email, course, tags);
-        this.studentID = studentID;
+    public Person(StudentId studentId, Name name, Phone phone, Email email, Course course, Set<Tag> tags,
+                  ApplicationStatus applicationStatus, InterviewStatus interviewStatus) {
+        requireAllNonNull(studentId, name, phone, email, course, tags);
+        this.studentId = studentId;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.course = course;
         this.tags.addAll(tags);
+        this.applicationStatus = applicationStatus;
+        this.interviewStatus = interviewStatus;
     }
 
-    public StudentID getStudentID() {
-        return studentID;
+    public StudentId getStudentId() {
+        return studentId;
     }
 
     public Name getName() {
@@ -56,6 +61,14 @@ public class Person {
 
     public Course getCourse() {
         return course;
+    }
+
+    public ApplicationStatus getApplicationStatus() {
+        return applicationStatus;
+    }
+
+    public InterviewStatus getInterviewStatus() {
+        return interviewStatus;
     }
 
     /**
@@ -76,7 +89,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getStudentID().equals(getStudentID())
+                && otherPerson.getStudentId().equals(getStudentId())
                 && otherPerson.getName().equals(getName());
     }
 
@@ -95,24 +108,27 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return otherPerson.getStudentID().equals(getStudentID())
+        return otherPerson.getStudentId().equals(getStudentId())
                 && otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getCourse().equals(getCourse())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getApplicationStatus().equals(getApplicationStatus())
+                && otherPerson.getInterviewStatus().equals(getInterviewStatus());
     }
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(studentID, name, phone, email, course, tags);
+        return Objects.hash(studentId, name, phone, email, course, tags, applicationStatus, interviewStatus);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName() + ", " + getStudentID())
+        builder.append("Student ID: ").append(getStudentId())
+                .append("; Name: ")
+                .append(getName())
                 .append("; Phone: ")
                 .append(getPhone())
                 .append("; Email: ")
@@ -125,6 +141,10 @@ public class Person {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
         }
+        builder.append("; Application Status: ")
+                .append(getApplicationStatus());
+        builder.append("; Interview Status: ")
+                .append(getInterviewStatus());
         return builder.toString();
     }
 

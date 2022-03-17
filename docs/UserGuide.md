@@ -29,11 +29,13 @@ Command Line Interface (CLI)** while still having the benefits of a Graphical Us
 
    * **`list`** : Lists all TAs.
 
-   * **`add n/John Doe id/A0123456H c/Computer Science`** Adds a new TA into the system.
+   * **`add id/E0123456 n/John Doe p/87654321 c/Computer Science`** Adds a new TA into the system.
 
    * **`delete A0123456H`** : Deletes the TA with ID A0213456H from the system.
 
    * **`find k/Jane f/name`** : Searches for all TAs with name containing “Jane/jane”.
+
+   * **`sort s/name`** : Sorts all TAs by name in descending alphabetical order.
 
    * **`help`** : List all commands in the system.
 
@@ -51,7 +53,7 @@ Command Line Interface (CLI)** while still having the benefits of a Graphical Us
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -77,12 +79,12 @@ Format: `help`
 
 Adds a TA into the system.
 
-Format: `add n/NAME id/STUDENT_ID c/COURSE`
+Format: `add id/STUDENT_ID n/NAME p/PHONE c/COURSE`
 
 * `STUDENT_ID` is sensitive, will be validated.
 
 Examples:
-* `add n/John Doe id/A0123456H c/Computer Science` adds a new TA named John Doe.
+* `add id/E0123456 n/John Doe p/87654321 c/Computer Science` adds a new TA with Student ID, E0123456, named John Doe.
 
 ### Listing all Teaching Assistants : `list`
 
@@ -100,7 +102,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
 
@@ -109,15 +111,20 @@ Examples:
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 -->
 
-### Locating applicants by keyword search: `find`
+### Finding candidates by keyword(s) search: `find`
 
-Finds and lists TAs whose attribute fields contain any of the given keywords.
+Finds and lists TAs whose attribute field(s) contain(s) any of the given keyword(s).
 
-Format: `find k/KEYWORD [k/MORE_KEYWORDS] f/ATTRIBUTE_FIELD`
+Format: `find k/KEYWORD [k/MORE_KEYWORDS]... f/ATTRIBUTE_FIELD`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+Note: `ATTRIBUTE_FIELD` can take on the following values
+`course`, `email`, `name`, `phone`, `person`, `studentid`
+
+
+* The keyword search is case-insensitive. e.g `hans` will match `Hans`
+* The attribute field is case-insensitive. e.g. `NAME` is equivalent to `name`
 * The search will return a list of all TAs containing any of the specified keyword(s) in the specified attribute field.
-* For `f/all`, the search will find keywords across all attribute fields of the TA records.
+* For `f/person`, the search will find keywords across all attribute fields of the TA records.
 * Only full keywords will be matched
   e.g. `k/jane doe f/name` will not match TAs with name `jane koe` or just `jane`
 * TAs matching at least one full keyword (in the specified attribute field) will be returned i.e. OR search,
@@ -125,8 +132,36 @@ Format: `find k/KEYWORD [k/MORE_KEYWORDS] f/ATTRIBUTE_FIELD`
 
 Examples:
 * `find k/Jane f/name` returns TAs with name e.g. `jane` and `jane doe`
-* `find k/Computer Science f/course` returns TAs with the course field e.g. recorded as `computer science`
+* `find k/Computer Science f/course` returns TAs with the course field i.e. `computer science`
 * `find k/Jane k/Tan f/name` returns TAs with name e.g. `Jane`, `tan` and `John Tan`
+
+
+### Sorting candidates by attribute field: `sort`
+
+Returns a list of TAs sorted by the specified attribute field. 
+
+Format: `sort s/ATTRIBUTE_FIELD`
+
+Note: `ATTRIBUTE_FIELD` can take on the following values
+`course`, `email`, `name`, `phone`, `person`, `studentid`
+
+* The attribute field is case-insensitive. e.g. `NAME` is equivalent to `name`
+* The search will return a list of all TAs sorted in ascending order 
+(i.e. A-Z, 0-9) with regard to the specified attribute field.
+
+Examples:
+Let's reference a default sample list of unique TA candidates with attribute fields stated as (`name`, `studentid`).
+1. (`Ben`, `E23456789`)
+2. (`Alice`, `E0234567`)
+3. (`Charlie`, `E0123456`)
+* `sort s/name` returns TAs sorted by name in the following order:
+1. (`Alice`, `E0234567`)
+2. (`Ben`, `E23456789`)
+3. (`Charlie`, `E0123456`)
+* `sort s/studentid` returns TAs sorted by name in the following order:
+1. (`Charlie`, `E0123456`)
+2. (`Alice`, `E0234567`)
+3. (`Ben`, `E23456789`)
 
 
 ### Deleting a TA : `delete`
@@ -142,6 +177,23 @@ Format: `delete STUDENT_ID`
 Examples:
 * `delete A0213456H` deletes the TA with STUDENT_ID A0123456H, if the record exists.
 
+### Scheduling a candidate for an interview : `schedule` [Work-In-Progress]
+
+Schedules the specified candidate for an interview.
+
+Format: `schedule INDEX /at DATE TIME`
+
+* Schedules the candidate at the specified `INDEX` for an interview on given `DATE` and `TIME`.
+* The index refers to the index number shown in the displayed candidate list.
+* The index must be a positive integer 1, 2, 3, …​
+* `DATE` and `TIME` must be specified in the format `dd/MM/yyyy` and `HH:mm` respectively.
+* `DATE` and `TIME` must not be earlier than the current date and time.
+
+Examples:
+* `list` followed by `schedule 2 /at 20/09/2022 15:00` schedules the second candidate in TAlent Assistant™
+for an interview on 20 September 2022, 3PM.
+* 
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -156,14 +208,14 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+TAlent Assistant™ data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+TAlent Assistant™ data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid, TAlent Assistant™ will discard all data and start with an empty data file at the next run.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -175,18 +227,20 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TAlent Assistant™ home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                            |
-|------------|-----------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME id/STUDENT_ID c/COURSE`<br> e.g., `add n/John Doe id/A0123456H c/Computer Science`                              |
-| **Clear**  | `clear`                                                                                                                     |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                         |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` |
-| **Find**   | `find k/[KEYWORD] [k/MORE_KEYWORDS] f/[ATTRIBUTE_FIELD]`<br> e.g., `find k/Jane k/Doe f/name`                               |
-| **List**   | `list`                                                                                                                      |
-| **Help**   | `help`                                                                                                                      |
+| Action       | Format, Examples                                                                                                            |
+|--------------|-----------------------------------------------------------------------------------------------------------------------------|
+| **Add**      | `add id/STUDENT_ID n/NAME p/PHONE c/COURSE`<br> e.g., `add id/E0123456 n/John Doe p/87654321 c/Computer Science`            |
+| **Clear**    | `clear`                                                                                                                     |
+| **Delete**   | `delete INDEX`<br> e.g., `delete 3`                                                                                         |
+| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` |
+| **Find**     | `find k/KEYWORD [k/MORE_KEYWORDS]... f/ATTRIBUTE_FIELD`<br> e.g., `find k/Jane k/Doe f/name`                                |
+| **Sort**     | `sort s/ATTRIBUTE_FIELD`<br> e.g., `sort s/name`                                                                            |
+| **Schedule** | `schedule INDEX /at DATE TIME` <br> e.g., `schedule 2 /at 20/09/2022 15:00`                                                 |
+| **List**     | `list`                                                                                                                      |
+| **Help**     | `help`                                                                                                                      |
