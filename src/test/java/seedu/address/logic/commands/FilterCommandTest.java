@@ -17,7 +17,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.NameContainsTagPredicate;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.module.Module;
 import seedu.address.testutil.TypicalPersons;
 
 
@@ -67,13 +67,13 @@ public class FilterCommandTest {
 
     @Test
     public void execute_oneTag_onePersonFound() {
-        Optional<Tag> tagToString = BENSON.getTags().stream()
+        Optional<Module> tagToString = BENSON.getTags().stream()
                 .findFirst();
         String moduleName = tagToString
                 .map(x -> x.toString().substring(1, x.toString().length() - 1))
                 .orElse("CS2103T");
         Integer numOfMatches = (int) (TypicalPersons.getTypicalPersons().stream()
-                .filter(x -> x.getTags().contains(tagToString.orElse(new Tag("CS2103T"))))
+                .filter(x -> x.getTags().contains(tagToString.orElse(new Module("CS2103T"))))
                 .count());
 
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, numOfMatches);

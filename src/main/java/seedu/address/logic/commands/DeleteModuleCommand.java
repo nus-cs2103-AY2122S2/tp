@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
@@ -19,11 +19,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Status;
-import seedu.address.model.tag.Tag;
-
-
-
-
+import seedu.address.model.module.Module;
 
 public class DeleteModuleCommand extends Command {
     public static final String COMMAND_WORD = "deletemodule";
@@ -32,21 +28,21 @@ public class DeleteModuleCommand extends Command {
             + ": Clear specified modules of the person identified by the index "
             + "number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_TAG + "CS3230 " + PREFIX_TAG + "CS1231S\n";
+            + "[" + PREFIX_MODULE + "MODULE]...\n"
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_MODULE + "CS3230 " + PREFIX_MODULE + "CS1231S\n";
 
     public static final String MESSAGE_SUCCESS = "Deleted Modules for %s: %s";
     public static final String MESSAGE_FAILURE = "These modules were not found: %s";
 
     private final Index targetIndex;
 
-    private final List<Tag> modules;
+    private final List<Module> modules;
 
     /**
      * @param targetIndex of the person in the filtered person list
      * @param modules modules to be deleted
      */
-    public DeleteModuleCommand(Index targetIndex, List<Tag> modules) {
+    public DeleteModuleCommand(Index targetIndex, List<Module> modules) {
         this.targetIndex = targetIndex;
         this.modules = modules;
     }
@@ -60,7 +56,7 @@ public class DeleteModuleCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        List<Tag> modulesToDelete = new ArrayList<>(modules);
+        List<Module> modulesToDelete = new ArrayList<>(modules);
         Person personToEdit = lastShownList.get(targetIndex.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, modules);
 
@@ -78,7 +74,7 @@ public class DeleteModuleCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, List<Tag> modules) {
+    private static Person createEditedPerson(Person personToEdit, List<Module> modules) {
         assert personToEdit != null;
 
         Name updatedName = personToEdit.getName();
@@ -87,8 +83,8 @@ public class DeleteModuleCommand extends Command {
         Address updatedAddress = personToEdit.getAddress();
         Status updatedStatus = personToEdit.getStatus();
 
-        Set<Tag> oldTags = personToEdit.getTags();
-        Set<Tag> updatedTags = new HashSet<>(oldTags);
+        Set<Module> oldTags = personToEdit.getTags();
+        Set<Module> updatedTags = new HashSet<>(oldTags);
         modules.removeIf(module -> updatedTags.remove(module));
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedStatus, updatedTags);

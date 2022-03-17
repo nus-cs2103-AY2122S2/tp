@@ -44,7 +44,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private FlowPane tags;
+    private FlowPane modules;
     @FXML
     private ImageView statusImage;
 
@@ -66,8 +66,8 @@ public class PersonCard extends UiPart<Region> {
         statusImage.setImage(imageToDisplay);
 
         person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .sorted(Comparator.comparing(module -> module.tagName))
+                .forEach(module -> modules.getChildren().add(new Label(module.tagName)));
     }
 
     private Image getImageToDisplay(String statusText) {

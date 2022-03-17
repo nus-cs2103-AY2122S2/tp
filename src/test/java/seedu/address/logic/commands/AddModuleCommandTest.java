@@ -2,8 +2,8 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_MODULE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_MODULE_SWE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_SWE;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -19,7 +19,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.module.Module;
 import seedu.address.testutil.PersonBuilder;
 
 class AddModuleCommandTest {
@@ -28,14 +28,14 @@ class AddModuleCommandTest {
     @Test
     void execute_addModuleUnfilteredList_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(firstPerson).withTags(VALID_TAG_MODULE_SWE, VALID_TAG_MODULE).build();
+        Person editedPerson = new PersonBuilder(firstPerson).withTags(VALID_MODULE_SWE, VALID_MODULE).build();
 
-        List<Tag> tags = new ArrayList<>();
-        tags.add(new Tag(VALID_TAG_MODULE_SWE));
-        tags.add(new Tag(VALID_TAG_MODULE));
-        AddModuleCommand addModuleCommand = new AddModuleCommand(INDEX_FIRST_PERSON, tags);
+        List<Module> modules = new ArrayList<>();
+        modules.add(new Module(VALID_MODULE_SWE));
+        modules.add(new Module(VALID_MODULE));
+        AddModuleCommand addModuleCommand = new AddModuleCommand(INDEX_FIRST_PERSON, modules);
 
-        String expectedMessage = String.format(AddModuleCommand.MESSAGE_SUCCESS, firstPerson.getName(), tags);
+        String expectedMessage = String.format(AddModuleCommand.MESSAGE_SUCCESS, firstPerson.getName(), modules);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
 
@@ -45,7 +45,7 @@ class AddModuleCommandTest {
     @Test
     public void equals() {
         Person first = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        List<Tag> modules = new ArrayList<>(first.getTags());
+        List<Module> modules = new ArrayList<>(first.getTags());
 
         AddModuleCommand addFirstCommand = new AddModuleCommand(INDEX_FIRST_PERSON, modules);
 
@@ -64,7 +64,7 @@ class AddModuleCommandTest {
 
         // different person -> returns false
         Person second = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-        List<Tag> modulesCopy = new ArrayList<>(second.getTags());
+        List<Module> modulesCopy = new ArrayList<>(second.getTags());
         AddModuleCommand addSecondCommand = new AddModuleCommand(INDEX_SECOND_PERSON, modulesCopy);
         assertNotEquals(addFirstCommand, addSecondCommand);
     }

@@ -15,7 +15,7 @@ public class FilterCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        // occurs if > 1 tag, or < 1 tag
+        // occurs if > 1 module, or < 1 module
         assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
     }
 

@@ -14,7 +14,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Status;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.module.Module;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -97,10 +97,10 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String module} into a {@code Module}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code module} is invalid.
      */
     public static Status parseStatus(String status) throws ParseException {
         requireNonNull(status);
@@ -112,27 +112,27 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String module} into a {@code Module}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code module} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+    public static Module parseTag(String module) throws ParseException {
+        requireNonNull(module);
+        String trimmedTag = module.trim();
+        if (!Module.isValidTagName(trimmedTag)) {
+            throw new ParseException(Module.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return new Module(trimmedTag);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses {@code Collection<String> modules} into a {@code Set<Module>}.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
+    public static Set<Module> parseTags(Collection<String> modules) throws ParseException {
+        requireNonNull(modules);
+        final Set<Module> tagSet = new HashSet<>();
+        for (String tagName : modules) {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;

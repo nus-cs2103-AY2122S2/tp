@@ -25,7 +25,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Status;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.module.Module;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -132,13 +132,13 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Status status;
-        private Set<Tag> tags;
+        private Set<Module> modules;
 
         public EditPersonDescriptor() {}
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * A defensive copy of {@code modules} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
@@ -146,14 +146,14 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setStatus(toCopy.status);
-            setTags(toCopy.tags);
+            setTags(toCopy.modules);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, modules);
         }
 
         public void setName(Name name) {
@@ -198,21 +198,21 @@ public class EditCommand extends Command {
 
 
         /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
+         * Sets {@code modules} to this object's {@code modules}.
+         * A defensive copy of {@code modules} is used internally.
          */
 
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setTags(Set<Module> modules) {
+            this.modules = (modules != null) ? new HashSet<>(modules) : null;
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable module set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns {@code Optional#empty()} if {@code modules} is null.
          */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public Optional<Set<Module>> getTags() {
+            return (modules != null) ? Optional.of(Collections.unmodifiableSet(modules)) : Optional.empty();
         }
 
 

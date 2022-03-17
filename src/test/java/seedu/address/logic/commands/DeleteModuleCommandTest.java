@@ -17,7 +17,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.module.Module;
 import seedu.address.testutil.PersonBuilder;
 
 class DeleteModuleCommandTest {
@@ -26,7 +26,7 @@ class DeleteModuleCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        List<Tag> modules = personToDelete.getTags().stream()
+        List<Module> modules = personToDelete.getTags().stream()
                 .collect(Collectors.toList());
         DeleteModuleCommand deleteCommand = new DeleteModuleCommand(INDEX_FIRST_PERSON, modules);
 
@@ -43,7 +43,7 @@ class DeleteModuleCommandTest {
     @Test
     public void equals() {
         Person first = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        List<Tag> modules = first.getTags().stream()
+        List<Module> modules = first.getTags().stream()
                 .collect(Collectors.toList());
 
         DeleteModuleCommand deleteFirstCommand = new DeleteModuleCommand(INDEX_FIRST_PERSON, modules);
@@ -63,7 +63,7 @@ class DeleteModuleCommandTest {
 
         // different person -> returns false
         Person second = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-        List<Tag> modulesCopy = second.getTags().stream()
+        List<Module> modulesCopy = second.getTags().stream()
                 .collect(Collectors.toList());
         DeleteModuleCommand deleteSecondCommand = new DeleteModuleCommand(INDEX_SECOND_PERSON, modulesCopy);
         assertNotEquals(deleteFirstCommand, deleteSecondCommand);

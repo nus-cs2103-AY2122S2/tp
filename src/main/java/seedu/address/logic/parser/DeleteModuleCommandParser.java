@@ -2,7 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,7 +13,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteModuleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.module.Module;
 
 
 
@@ -40,10 +40,10 @@ public class DeleteModuleCommandParser implements Parser<DeleteModuleCommand> {
     public DeleteModuleCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_MODULE);
 
         Index index;
-        List<Tag> modules = new ArrayList<>();
+        List<Module> modules = new ArrayList<>();
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
@@ -51,19 +51,19 @@ public class DeleteModuleCommandParser implements Parser<DeleteModuleCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteModuleCommand.MESSAGE_USAGE), pe);
         }
 
-        modules.addAll(parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)));
+        modules.addAll(parseTagsForEdit(argMultimap.getAllValues(PREFIX_MODULE)));
 
         return new DeleteModuleCommand(index, modules);
     }
 
-    private Set<Tag> parseTagsForEdit(Collection<String> tags) throws ParseException {
-        assert tags != null;
+    private Set<Module> parseTagsForEdit(Collection<String> modules) throws ParseException {
+        assert modules != null;
 
-        if (tags.isEmpty()) {
+        if (modules.isEmpty()) {
             throw new ParseException(MESSAGE_EMPTY);
         }
 
-        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
+        Collection<String> tagSet = modules.size() == 1 && modules.contains("") ? Collections.emptySet() : modules;
         return ParserUtil.parseTags(tagSet);
     }
 }
