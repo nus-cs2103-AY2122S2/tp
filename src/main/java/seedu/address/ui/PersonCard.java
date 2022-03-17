@@ -7,10 +7,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.Birthday;
+import seedu.address.model.person.Field;
 import seedu.address.model.person.Membership;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Remark;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -31,6 +30,8 @@ public class PersonCard extends UiPart<Region> {
 
     @FXML
     private HBox cardPane;
+
+    // Required Fields
     @FXML
     private Label name;
     @FXML
@@ -42,9 +43,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private Label birthday;
-    @FXML
-    private Label remark;
+    private FlowPane optionalFields;
     @FXML
     private FlowPane tags;
     @FXML
@@ -67,13 +66,13 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().getValue());
 
         // Optional fields.
-        remark.setText(person.getField(Remark.PREFIX).orElse(Remark.EMPTY_REMARK).getValue());
-        birthday.setText(person.hasField(Birthday.PREFIX) ? person.getField(Birthday.PREFIX).get().getValue() : "");
+        person.getFields().stream().filter((Field f) -> !f.prefix.isRequired()).forEach((Field f) -> {
+            optionalFields.getChildren().add(new Label(f.getValue()));
+        });
 
         // Tags.
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.value))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.value)));
+        person.getTags().stream().sorted(Comparator.comparing(tag -> tag.value))
+            .forEach(tag -> tags.getChildren().add(new Label(tag.value)));
 
         /*
         // Memberships.
@@ -88,8 +87,7 @@ public class PersonCard extends UiPart<Region> {
         if (person.hasTransaction()) {
             sb.append("Transactions: \n");
         }
-        person.getTransactions()
-                .forEach(transaction -> sb.append(transaction).append("\n"));
+        person.getTransactions().forEach(transaction -> sb.append(transaction).append("\n"));
 
         transactions.setText(sb.toString());
         Membership membership = person.getMembership();
@@ -113,7 +111,6 @@ public class PersonCard extends UiPart<Region> {
 
         // state check
         PersonCard card = (PersonCard) other;
-        return id.getText().equals(card.id.getText())
-                && person.equals(card.person);
+        return id.getText().equals(card.id.getText()) && person.equals(card.person);
     }
 }
