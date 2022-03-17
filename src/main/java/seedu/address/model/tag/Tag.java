@@ -15,13 +15,14 @@ public abstract class Tag {
 
     /**
      * Constructs a {@code Tag}.
-     *
      * @param tagName A valid tag name.
      */
     public Tag(String tagName) {
         requireNonNull(tagName);
         this.tagName = tagName;
     }
+
+    public abstract String getTagString();
 
     @Override
     public int hashCode() {

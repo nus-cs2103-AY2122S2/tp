@@ -26,6 +26,11 @@ public class Module extends Tag {
         this.value = module.trim().toLowerCase();
     }
 
+    @Override
+    public String getTagString() {
+        return this.value;
+    }
+
     public static boolean isValidTagName(String test) {
         return test.matches(VALIDATION_REGEX);
     }

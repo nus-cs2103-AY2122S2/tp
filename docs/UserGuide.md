@@ -130,7 +130,7 @@ Examples:
 
 ### Locating persons: `find` [coming in v1.2]
 
-Finds persons that match any of the given fields.
+Finds persons that match any of the given fields and tags.
 
 Format: `find [n/NAME]…​ [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`
 
@@ -138,6 +138,7 @@ Format: `find [n/NAME]…​ [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…�
 * At least one of the optional fields must be provided.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one of the field will be returned (i.e. `OR` search).
+* Persons matching at least one tag of a particular type will be returned. For example, 'find m/cs2030s m/cs2040s' may return a person tagged with 'cs2030s' or 'cs2040s'
   e.g. `n/Hans m/cs2040s` will return `Hans`, `Bo Yang` (i.e. Bo Yang is tagged with cs2040s)
 
 Examples:
@@ -147,7 +148,7 @@ Examples:
 
 ### Locating specific persons: `find -s` [coming in v1.2]
 
-Finds persons that match all given fields.
+Finds persons that match all given fields and tags.
 
 Format: `find -s [n/NAME]…​ [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`
 
@@ -156,6 +157,7 @@ Format: `find -s [n/NAME]…​ [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]�
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Only persons matching all fields will be returned (i.e. `AND` search).
   e.g. `n/Bo Yang m/cs2040s` will return `Bo Yang` (i.e. Bo Yang is tagged with cs2040s)
+* Persons matching all tags of a particular type will be returned. For example, 'find -s m/cs2030s m/cs2040s' will only return a person tagged with both 'cs2030s' and 'cs2040s'
 
 Examples:
 * `find -s n/John Doe` returns `John Doe`

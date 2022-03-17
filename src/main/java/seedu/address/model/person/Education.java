@@ -30,6 +30,11 @@ public class Education extends Tag {
     }
 
     @Override
+    public String getTagString() {
+        return this.value;
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this
                 || (other instanceof Education

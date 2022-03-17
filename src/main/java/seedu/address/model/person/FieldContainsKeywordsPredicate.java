@@ -2,15 +2,15 @@ package seedu.address.model.person;
 
 import java.util.List;
 import java.util.function.Function;
-import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
 
-public abstract class FieldContainsKeywordsPredicate implements Predicate<Person> {
+public abstract class FieldContainsKeywordsPredicate extends ContainsKeywordsPredicate<String> {
     private final List<String> keywords;
     private final Function<Person, String> field;
 
     FieldContainsKeywordsPredicate(List<String> keywords, Function<Person, String> field) {
+        super(keywords, field);
         this.keywords = keywords;
         this.field = field;
     }

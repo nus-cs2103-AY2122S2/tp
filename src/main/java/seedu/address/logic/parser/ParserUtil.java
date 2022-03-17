@@ -225,20 +225,32 @@ public class ParserUtil {
             if (!Education.isValidTagName(trimmedTag)) {
                 throw new ParseException(Education.MESSAGE_CONSTRAINTS);
             }
+            if (trimmedTag.split(" ").length > 1) {
+                throw new ParseException(FindCommandParser.MULTIPLE_WORDS);
+            }
             return new Education(trimmedTag);
         case Tag.INTERNSHIP:
             if (!Internship.isValidTagName(trimmedTag)) {
                 throw new ParseException(Internship.MESSAGE_CONSTRAINTS);
+            }
+            if (trimmedTag.split(" ").length > 1) {
+                throw new ParseException(FindCommandParser.MULTIPLE_WORDS);
             }
             return new Internship(trimmedTag);
         case Tag.MODULE:
             if (!Module.isValidTagName(trimmedTag)) {
                 throw new ParseException(Module.MESSAGE_CONSTRAINTS);
             }
+            if (trimmedTag.split(" ").length > 1) {
+                throw new ParseException(FindCommandParser.MULTIPLE_WORDS);
+            }
             return new Module(trimmedTag);
         case Tag.CCA:
             if (!Cca.isValidTagName(trimmedTag)) {
                 throw new ParseException(Cca.MESSAGE_CONSTRAINTS);
+            }
+            if (trimmedTag.split(" ").length > 1) {
+                throw new ParseException(FindCommandParser.MULTIPLE_WORDS);
             }
             return new Cca(trimmedTag);
         default:
@@ -247,7 +259,7 @@ public class ParserUtil {
     }
 
     /**
-    * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+    * Parses {@code Collection<String> tags} into a {@code List<Tag>}.
     */
     public static List<Tag> parseTags(Collection<String> tags, String type) throws ParseException {
         requireNonNull(tags);

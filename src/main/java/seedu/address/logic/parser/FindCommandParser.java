@@ -3,13 +3,22 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CCA;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EDUCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERNSHIP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+
+import java.util.List;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindCommand.FindPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.tag.Tag;
+
+
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -29,7 +38,8 @@ public class FindCommandParser implements Parser<FindCommand> {
     public FindCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                        PREFIX_CCA, PREFIX_EDUCATION, PREFIX_MODULE, PREFIX_INTERNSHIP);
 
         boolean isAndSearch = false;
 
@@ -51,6 +61,24 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             personDescriptor.setAddresses(ParserUtil.parseAddresses(argMultimap.getAllValues(PREFIX_ADDRESS)));
+        }
+        if (argMultimap.getValue(PREFIX_CCA).isPresent()) {
+            List<Tag> cca = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_CCA), Tag.CCA);
+            personDescriptor.setCcas(cca);
+        }
+        if (argMultimap.getValue(PREFIX_EDUCATION).isPresent()) {
+            List<Tag> education = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_EDUCATION),
+                    Tag.EDUCATION);
+            personDescriptor.setEducations(education);
+        }
+        if (argMultimap.getValue(PREFIX_MODULE).isPresent()) {
+            List<Tag> module = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_MODULE), Tag.MODULE);
+            personDescriptor.setModules(module);
+        }
+        if (argMultimap.getValue(PREFIX_INTERNSHIP).isPresent()) {
+            List<Tag> internship = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_INTERNSHIP),
+                    Tag.INTERNSHIP);
+            personDescriptor.setInternships(internship);
         }
 
         if (!personDescriptor.isAnyFieldPresent()) {
