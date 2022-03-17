@@ -3,6 +3,7 @@ package seedu.address.model.pet;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -33,7 +34,26 @@ public class UniquePetList implements Iterable<Pet> {
      */
     public boolean contains(Pet toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSamePet);
+        return internalList.stream().anyMatch(toCheck::equals);
+    }
+
+    /**
+     * Sort list of pets by field using the comparators in the respective fields.
+     * As of now, the field can either be "/o" (owner name) or "/n" (pet name).
+     */
+    public void sortPetList(String field) {
+        Comparator<Pet> petNameComparator = Comparator.comparing(Pet::getName);
+        Comparator<Pet> petOwnerNameComparator = Comparator.comparing(Pet::getOwnerName);
+        switch (field) {
+        case "/o":
+            FXCollections.sort(internalList, petOwnerNameComparator);
+            break;
+        case "/n":
+            FXCollections.sort(internalList, petNameComparator);
+            break;
+        default:
+            assert false;
+        }
     }
 
     /**

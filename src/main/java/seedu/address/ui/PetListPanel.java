@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.commons.util.GuiUtil.isEvenIndexCard;
+
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -41,8 +43,21 @@ public class PetListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PetCard(pet, getIndex() + 1).getRoot());
+                setGraphic(createPetCard(pet).getRoot());
             }
+        }
+
+        private PetCard createPetCard(Pet pet) {
+            int currentCellIndex = getIndex();
+            PetCard petCard = new PetCard(pet, currentCellIndex + 1);
+
+            if (isEvenIndexCard(currentCellIndex)) {
+                petCard.setColour("#744D26");
+            } else {
+                petCard.setColour("#C4A484");
+            }
+
+            return petCard;
         }
     }
 

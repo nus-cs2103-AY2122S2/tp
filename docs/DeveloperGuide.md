@@ -293,7 +293,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | pet daycare owner | alert when it is time to feed the pets                            | ensure pets are well-fed and healthy                              |
 | `* *`    | pet daycare owner | keep track of basic logistics like leash and waste bags           | replace when they are running low                                 |
 | `* *`    | pet daycare owner | alert one day before appointment                                  | remember a particular pet's appointment schedule                  |
-| `* *`    | pet daycare owner | alert when pets arrive                                            | prepare relevant logistics needed to take care of the pet         | 
+| `* *`    | pet daycare owner | alert when pets arrive                                            | prepare relevant logistics needed to take care of the pet         |
 | `*`      | pet daycare owner | track the vet appointments of pets                                | make sure pets do not miss their medical appointments             |
 | `*`      | pet daycare owner | sort the pets by their type                                       | order their necessary supplies accordingly                        |
 | `*`      | pet daycare owner | track the medicine that pets need to take                         | i can feed them medicine appropriately                            |
@@ -318,14 +318,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  System shows confirmation message that pet details are added
 
 Use case ends.
-    
+
 
 **Extensions**
 
 * 1a. User keyed in wrong command format.
 
     * 1a1. System shows an error message.
-      
+
       Use case resumes at step 1.
 
 **Use case: Delete a pet**
@@ -336,14 +336,14 @@ Use case ends.
 2.  System shows confirmation message that pet details are deleted
 
 Use case ends.
-    
+
 
 **Extensions**
 
 * 1a. User keyed in missing/ invalid pet ID.
 
     * 1a1. System shows an error message.
-      
+
       Use case resumes at step 1.
 
 **Use case: Get pet ID**
@@ -354,14 +354,14 @@ Use case ends.
 2.  System shows a list of pet IDs with the specified name.
 
 Use case ends.
-    
+
 
 **Extensions**
 
 * 1a. User keyed in invalid pet name.
 
     * 1a1. System shows empty list.
-      
+
       Use case resumes at step 1.
 
 
@@ -373,17 +373,17 @@ Use case ends.
 2.  System shows the dietary requirement of the pet with specified ID.
 
 Use case ends.
-    
+
 
 **Extensions**
 
 * 1a. User keyed in invalid pet ID.
 
     * 1a1. System shows an error message.
-      
+
       Use case resumes at step 1.
-      
-      
+    
+     
 **Use case: Get pet owner details**
 
 **MSS**
@@ -392,16 +392,16 @@ Use case ends.
 2.  System shows the pet owner's details of the pet with specified ID.
 
 Use case ends.
-    
+
 
 **Extensions**
 
 * 1a. User keyed in invalid pet ID.
 
     * 1a1. System shows an error message.
-      
+
       Use case resumes at step 1.
-      
+
 
 **Use case: Get pet pickup and drop-off time**
 
@@ -411,14 +411,14 @@ Use case ends.
 2.  System shows the pickup and drop-off time of the pet with specified ID.
 
 Use case ends.
-    
+
 
 **Extensions**
 
 * 1a. User keyed in invalid pet ID.
 
     * 1a1. System shows an error message.
-      
+
       Use case resumes at step 1.
 
 **Use case: Exit**

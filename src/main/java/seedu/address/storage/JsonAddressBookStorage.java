@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Iterator;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -13,6 +15,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.pet.Pet;
 
 /**
  * A class to access AddressBook data stored as a json file on the hard disk.
@@ -65,7 +68,7 @@ public class JsonAddressBookStorage implements AddressBookStorage {
     }
 
     /**
-     * Similar to {@link #saveAddressBook(ReadOnlyAddressBook)}.
+     * Similar to {@link #saveAddressBook(ReadOnlyAddressBook)}. Also creates an attendance file for each pet.
      *
      * @param filePath location of the data. Cannot be null.
      */
@@ -75,6 +78,21 @@ public class JsonAddressBookStorage implements AddressBookStorage {
 
         FileUtil.createIfMissing(filePath);
         JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), filePath);
+        // FileUtil.deleteDirectoryIfExists("data/pets");
+        Iterator<Pet> iterator = addressBook.getPetList().iterator();
+        while (iterator.hasNext()) {
+            Pet pet = iterator.next();
+            String jsonPetFile = pet.getName().toString().replaceAll("\\s", "")
+                    + String.valueOf(pet.getPhone())
+                    + ".json";
+            String txtPetFile = pet.getName().toString().replaceAll("\\s", "")
+                    + String.valueOf(pet.getPhone())
+                    + ".txt";
+            Path petJsonFilePath = Paths.get("data/pets" , jsonPetFile);
+            Path petTxtFilePath = Paths.get("data/pets" , txtPetFile);
+            FileUtil.createIfMissing(petJsonFilePath);
+            FileUtil.createIfMissing(petTxtFilePath);
+        }
     }
 
 }

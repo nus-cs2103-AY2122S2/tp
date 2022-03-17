@@ -1,10 +1,12 @@
 package seedu.address.commons.util;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
 
 /**
  * Writes and reads files
@@ -13,8 +15,18 @@ public class FileUtil {
 
     private static final String CHARSET = "UTF-8";
 
+    /**
+     * Checks if file exists
+     */
     public static boolean isFileExists(Path file) {
         return Files.exists(file) && Files.isRegularFile(file);
+    }
+
+    /**
+     * Checks if directory exists
+     */
+    public static boolean isDirectoryExists(Path dir) {
+        return Files.exists(dir);
     }
 
     /**
@@ -38,6 +50,21 @@ public class FileUtil {
     public static void createIfMissing(Path file) throws IOException {
         if (!isFileExists(file)) {
             createFile(file);
+        }
+    }
+
+    /**
+     * Deletes a directory if it exists.
+     * @throws IOException if the directory cannot be deleted.
+     */
+    public static void deleteDirectoryIfExists(String dirPath) throws IOException {
+        Path directoryPath = Paths.get(dirPath);
+        if (isDirectoryExists(directoryPath)) {
+            File dir = new File(dirPath);
+            File[] fileList = dir.listFiles();
+            for (File file : fileList) {
+                file.delete();
+            }
         }
     }
 
