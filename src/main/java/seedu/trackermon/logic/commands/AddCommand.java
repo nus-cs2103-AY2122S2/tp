@@ -28,7 +28,7 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "Action";
 
     public static final String MESSAGE_SUCCESS = "New show added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This show already exists in Trackermon";
+    public static final String MESSAGE_DUPLICATE_SHOW = "This show already exists in Trackermon";
 
     private final Show toAdd;
 
@@ -45,7 +45,7 @@ public class AddCommand extends Command {
         requireNonNull(model);
 
         if (model.hasShow(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_SHOW);
         }
 
         model.addShow(toAdd);
