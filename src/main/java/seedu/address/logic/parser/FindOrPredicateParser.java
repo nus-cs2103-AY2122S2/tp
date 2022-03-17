@@ -7,11 +7,11 @@ import java.util.function.Predicate;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindCommand.FindPersonDescriptor;
 import seedu.address.model.person.AddressContainsKeywordsPredicate;
-import seedu.address.model.person.CcaContainsKeywordsPredicate;
-import seedu.address.model.person.EducationContainsKeywordsPredicate;
+import seedu.address.model.person.CcaContainsKeywordsPredicateOr;
+import seedu.address.model.person.EducationContainsKeywordsPredicateOr;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
-import seedu.address.model.person.InternshipContainsKeywordsPredicate;
-import seedu.address.model.person.ModuleContainsKeywordsPredicate;
+import seedu.address.model.person.InternshipContainsKeywordsPredicateOr;
+import seedu.address.model.person.ModuleContainsKeywordsPredicateOr;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
@@ -40,13 +40,13 @@ public class FindOrPredicateParser {
                 predicateList.add(new AddressContainsKeywordsPredicate(list)));
 
         personDescriptor.getStringEducations().ifPresent(list ->
-                predicateList.add(new EducationContainsKeywordsPredicate(list)));
+                predicateList.add(new EducationContainsKeywordsPredicateOr(list)));
         personDescriptor.getStringInternships().ifPresent(list ->
-                predicateList.add(new InternshipContainsKeywordsPredicate(list)));
+                predicateList.add(new InternshipContainsKeywordsPredicateOr(list)));
         personDescriptor.getStringModules().ifPresent(list ->
-                predicateList.add(new ModuleContainsKeywordsPredicate(list)));
+                predicateList.add(new ModuleContainsKeywordsPredicateOr(list)));
         personDescriptor.getStringCcas().ifPresent(list ->
-                predicateList.add(new CcaContainsKeywordsPredicate(list)));
+                predicateList.add(new CcaContainsKeywordsPredicateOr(list)));
 
         Predicate<Person> predicate = predicateList.stream().reduce(x->false, Predicate::or);
 

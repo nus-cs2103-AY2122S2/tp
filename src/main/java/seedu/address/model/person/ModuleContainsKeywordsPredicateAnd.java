@@ -2,16 +2,16 @@ package seedu.address.model.person;
 
 import java.util.List;
 
-public class ModuleContainsKeywordsPredicate extends TagContainsKeywordsPredicate{
+public class ModuleContainsKeywordsPredicateAnd extends TagContainsKeywordsPredicateAnd{
 
-    public ModuleContainsKeywordsPredicate(List<String> keywords) {
+    public ModuleContainsKeywordsPredicateAnd(List<String> keywords) {
         super(keywords, person -> person.getModuleStrings());
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ModuleContainsKeywordsPredicate // instanceof handles nulls
+                || (other instanceof ModuleContainsKeywordsPredicateAnd // instanceof handles nulls
                 && super.equals(other)); // state check
     }
 }

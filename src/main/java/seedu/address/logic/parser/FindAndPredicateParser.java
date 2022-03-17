@@ -6,11 +6,11 @@ import java.util.function.Predicate;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.model.person.AddressContainsKeywordsPredicate;
-import seedu.address.model.person.CcaContainsKeywordsPredicate;
-import seedu.address.model.person.EducationContainsKeywordsPredicate;
+import seedu.address.model.person.CcaContainsKeywordsPredicateAnd;
+import seedu.address.model.person.EducationContainsKeywordsPredicateAnd;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
-import seedu.address.model.person.InternshipContainsKeywordsPredicate;
-import seedu.address.model.person.ModuleContainsKeywordsPredicate;
+import seedu.address.model.person.InternshipContainsKeywordsPredicateAnd;
+import seedu.address.model.person.ModuleContainsKeywordsPredicateAnd;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
@@ -38,13 +38,13 @@ public class FindAndPredicateParser {
                 predicateList.add(new AddressContainsKeywordsPredicate(list)));
 
         personDescriptor.getStringEducations().ifPresent(list ->
-                predicateList.add(new EducationContainsKeywordsPredicate(list)));
+                predicateList.add(new EducationContainsKeywordsPredicateAnd(list)));
         personDescriptor.getStringInternships().ifPresent(list ->
-                predicateList.add(new InternshipContainsKeywordsPredicate(list)));
+                predicateList.add(new InternshipContainsKeywordsPredicateAnd(list)));
         personDescriptor.getStringModules().ifPresent(list ->
-                predicateList.add(new ModuleContainsKeywordsPredicate(list)));
+                predicateList.add(new ModuleContainsKeywordsPredicateAnd(list)));
         personDescriptor.getStringCcas().ifPresent(list ->
-                predicateList.add(new CcaContainsKeywordsPredicate(list)));
+                predicateList.add(new CcaContainsKeywordsPredicateAnd(list)));
 
         Predicate<Person> predicate = predicateList.stream().reduce(x->true, Predicate::and);
 
