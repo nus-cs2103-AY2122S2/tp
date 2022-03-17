@@ -31,7 +31,13 @@ public class Team {
     }
 
     /**
-     * Adds a lineup into this team
+     * Gets the team name.
+     */
+    public TeamName getTeamName() {
+        return this.teamName;
+    }
+
+    /** Adds a lineup into this team
      *
      * @param lineup The lineup to be added
      */
@@ -60,6 +66,7 @@ public class Team {
         }
     }
 
+<<<<<<< branch-edit
     public void deletePersonFromTeam(Person person) {
         this.teamMemberList.deletePersonFromTeam(person);
     }
@@ -74,5 +81,20 @@ public class Team {
 
     public TeamLineupList getTeamLineupList() {
         return teamLineupList;
+=======
+    /**
+     * Removes a player.
+     */
+    public void removePlayer(Person person) {
+        // meanwhile, should also remove from lineup
+        this.teamMemberList.removePerson(person);
+    }
+
+    /**
+     * Removes a lineup.
+     */
+    public void removeLineup(String lineup) {
+        return;
+>>>>>>> master
     }
 }

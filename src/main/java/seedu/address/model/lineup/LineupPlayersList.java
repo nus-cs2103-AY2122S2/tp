@@ -17,6 +17,10 @@ public class LineupPlayersList {
         this.playersList = players;
     }
 
+    public int size() {
+        return playersList.size();
+    }
+
     public Person get(int index) {
         return playersList.get(index);
     }

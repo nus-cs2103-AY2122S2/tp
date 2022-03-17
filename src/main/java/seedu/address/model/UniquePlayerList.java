@@ -57,6 +57,27 @@ public class UniquePlayerList {
     }
 
     /**
+     * Gets a person.
+     */
+    public Person getPerson(Name name) {
+        return this.nameToPersonMap.getOrDefault(name, null);
+    }
+
+    /**
+     * Gets a person's team.
+     */
+    public Team getPersonTeam(Person person) {
+        return this.personToTeamMap.getOrDefault(person, null);
+    }
+
+    /**
+     * Gets a person's lineups.
+     */
+    public List<Lineup> getPersonLineups(Person person) {
+        return this.personToLineupMap.getOrDefault(person, null);
+    }
+
+    /**
      * Adds a person to team mapping to the system.
      */
     public void addPersonToTeam(Person person, Team team) {
