@@ -55,6 +55,10 @@ public class Price implements Comparable<Price> {
         }
     }
 
+    public String toParseValue() {
+        return value;
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

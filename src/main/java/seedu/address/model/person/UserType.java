@@ -48,6 +48,7 @@ public class UserType {
     public boolean isSeller() {
         return value.matches(SELLER_REGEX);
     }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

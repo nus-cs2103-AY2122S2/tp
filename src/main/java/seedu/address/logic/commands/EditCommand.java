@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PREFERENCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROPERTY;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -44,6 +45,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_PREFERENCE + "PREFERENCE]"
             + "[" + PREFIX_PROPERTY + "PROPERTY]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -103,8 +105,8 @@ public class EditCommand extends Command {
         Favourite noChangeFavourite = editPersonDescriptor.getFavourite().orElse(personToEdit.getFavourite());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Property> updatedProperties = editPersonDescriptor.getProperties().orElse(personToEdit.getProperties());
-        // preference cannot be edited
-        Optional<Preference> updatedPreference = personToEdit.getPreference();
+        // retrieve Preference of the edited person
+        Optional<Preference> updatedPreference = editPersonDescriptor.getPreference();
         UserType updatedUserType = editPersonDescriptor.getUserType().orElse(personToEdit.getUserType());
 
         return new Person(updatedName, updatedPhone, updatedEmail, noChangeFavourite, updatedAddress, updatedProperties,
@@ -139,6 +141,7 @@ public class EditCommand extends Command {
         private Email email;
         private Favourite favourite;
         private Address address;
+        private Preference preference;
         private Set<Property> properties;
         private UserType userType;
 
@@ -155,6 +158,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setFavourite(toCopy.favourite);
             setAddress(toCopy.address);
+            setPreference(toCopy.preference);
             setProperties(toCopy.properties);
             setUserType(toCopy.userType);
         }
@@ -214,6 +218,18 @@ public class EditCommand extends Command {
             return Optional.ofNullable(userType);
         }
 
+        public Optional<Preference> getPreference() {
+            return Optional.ofNullable(preference); //TODO
+        }
+
+        public void setPreference(Preference preference) {
+            this.preference = preference;
+        }
+
+        public void clearPreference() {
+            this.preference = null;
+        }
+
         /**
          * Sets {@code properties} to this object's {@code properties}.
          * A defensive copy of {@code properties} is used internally.
@@ -229,6 +245,19 @@ public class EditCommand extends Command {
          */
         public Optional<Set<Property>> getProperties() {
             return (properties != null) ? Optional.of(Collections.unmodifiableSet(properties)) : Optional.empty();
+        }
+
+        /**
+         * Clears all of this object's {@code properties}.
+         */
+        public void clearProperties() {
+            this.properties = null; // alternatively, set properties to be an empty HashSet
+        }
+
+        @Override
+        public String toString() {
+            return name + "|" + phone + "|" + email + "|" + favourite + "|" + address + "|" + preference + "|"
+                    + properties + "|" + userType;
         }
 
         @Override
@@ -250,6 +279,7 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
+                    && getPreference().equals(e.getPreference())
                     && getProperties().equals(e.getProperties())
                     && getUserType().equals(e.getUserType());
         }

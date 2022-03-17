@@ -11,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PROPERTY;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -66,12 +67,15 @@ public class EditCommandParser implements Parser<EditCommand> {
         // set the User as a Buyer if he/she has a preference
         if (argMultimap.getValue(PREFIX_PREFERENCE).isPresent()) {
             editPersonDescriptor.setUserType(UserTypeUtil.createBuyer());
-            // TODO -  code to clear existing property/properties, as this user is now a buyer (has Preference)
+            editPersonDescriptor.setPreference(ParserUtil.parsePreference(
+                    argMultimap.getValue(PREFIX_PREFERENCE).get()));
+            editPersonDescriptor.setProperties(new HashSet<>());
         }
         // set the User as a Seller if he/she has a property/properties
         if (argMultimap.getValue(PREFIX_PROPERTY).isPresent()) {
+            System.out.print(": " + argMultimap.getValue(PREFIX_PROPERTY));
             editPersonDescriptor.setUserType(UserTypeUtil.createSeller());
-            // TODO - code to clear existing preference, as this user is now a seller (has Property)
+            editPersonDescriptor.clearPreference();
         }
         parsePropertiesForEdit(argMultimap.getAllValues(PREFIX_PROPERTY)).ifPresent(
                 editPersonDescriptor::setProperties);
