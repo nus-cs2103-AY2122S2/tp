@@ -4,11 +4,14 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LINEUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PLAYER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TEAM;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
+import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lineup.LineupName;
@@ -53,11 +56,13 @@ public class ViewCommandParser implements Parser<ViewCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
         }
 
-        // view P/[PLAYER_NAME]
+        // view P/[PLAYER_NAME...]
         if (hasPSlash) {
-            // view P/
+            // view P/ --> view all player
+            List<String> keywords = new ArrayList<>();
+            keywords.add(PREFIX_PLAYER.toString());
             if (args.equals("P/")) {
-                // view P/
+                return new ViewCommand(PREDICATE_SHOW_ALL_PERSONS, keywords);
             }
 
             // check has preamble. check here because arg = "P/", preamble = "P/" as well
@@ -65,10 +70,14 @@ public class ViewCommandParser implements Parser<ViewCommand> {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
             }
 
-            // view P/[PLAYER_NAME]
+            // view P/[PLAYER_NAME...]
             playerNameArg = argMultimap.getValue(PREFIX_PLAYER).get();
             if (!playerNameArg.equals("")) {
                 name = ParserUtil.parseName(playerNameArg);
+                String trimmedArgs = name.toString().trim();
+                keywords.add(trimmedArgs);
+                String[] nameKeywords = trimmedArgs.split("\\s+");
+                return new ViewCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)), keywords);
             }
         }
 
@@ -112,7 +121,7 @@ public class ViewCommandParser implements Parser<ViewCommand> {
             }
         }
 
-        return new ViewCommand(new NameContainsKeywordsPredicate(new ArrayList<>()));
+        return new ViewCommand(PREDICATE_SHOW_ALL_PERSONS, new ArrayList<>());
     }
 
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
