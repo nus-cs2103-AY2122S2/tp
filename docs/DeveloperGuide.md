@@ -195,7 +195,7 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.trackermon.commons` package.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -245,14 +245,14 @@ This section describes some noteworthy details on how certain features are imple
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​  | I want to …​                 | So that I can…​                                           |
-|----------|----------|------------------------------|-----------------------------------------------------------|
-| `* * *`  | user     | add new shows                | add shows into the list                                   |
-| `* * *`  | user     | delete shows from the list   | delete shows from the list                                |
-| `* * *`  | user     | change the status of the show | mark shows as watched, watching, etc                      |
-| `* * *`  | user     | list out all of my shows     | see the details of all  my show in the list               |
-| `* *`    | new user | see usage instructions       | refer to instructions when user forget how to use the App |
-| `* * *`  | user     | edit show from the list      | edit the name or status or tag of my show in the list     |
+| Priority | As a …​   | I want to …​                | So that I can…​                                            |
+|----------|----------|----------------------------|-----------------------------------------------------------|
+| `* * *`  | user     | add shows                  | add new shows into the list                               |
+| `* * *`  | user     | delete shows  		   | delete wrong entries in the list                          |
+| `* * *`  | user     | find a show                | find whether a specific show is in the list               |
+| `* * *`  | user     | list out all of my shows   | see the details of all my shows in the list               |
+| `* *`    | new user | see usage instructions     | refer to instructions when I forget how to use the App |
+| `* * *`  | user     | edit show from the list    | edit the name or status or tag of my show in the list     |
 
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
@@ -421,6 +421,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
+
 **Use case: UC07 - Edit a show**
 
 **Preconditions: Trackermon application is started.**
@@ -452,6 +453,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
+**Use case: UC08 - Find a show**
+
+**Preconditions: Trackermon application is started.**
+
+**Guarantees: Show will be found in Trackermon only if the user input matches the command format.**
+
+**MSS**
+
+1.  User requests to find shows.
+2.  Trackermon shows a list of shows that matches the keyword entered by user.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User uses the command with the wrong syntax.
+
+    * 1a1. Trackermon shows an error message to user, indicating the format for finding shows is incorrect, and attaches the correct syntax format.
+
+      Use case resumes at step 1.
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
+---
 
 ### Non-Functional Requirements
 
@@ -466,7 +491,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -541,11 +565,20 @@ testers are expected to do more *exploratory* testing.
 ---
 
 ### Saving data
+1. Saving data between sessions
+    1. Launch the app.
+    2. Modify the show list with a valid add command.
+    3. Close the app.
+    4. Relaunch the app and ensure that the modification still exist
+   
 
 1. Dealing with missing/corrupted data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Modify the `data/trackermon.json` file with any software that would break the JSON format to simulate corrupted file. Alternatively, you can delete the file to simulate a missing file.
+    2. Relaunch the app.
+    3. Testcase: `data/trackermon.json` is corrupted. <br> Expected: The app starts with a empty show list.
+    4. Testcase: `data/trackermon.json` is deleted. <br> Expected: The app starts with the default list of show list.
 
-1. _{ more test cases …​ }_
+
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
