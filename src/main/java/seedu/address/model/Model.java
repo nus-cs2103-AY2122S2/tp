@@ -15,6 +15,11 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
+    /** {@code Predicate} that evaluate to true only when
+     * teams field of person object is not-empty
+     * */
+    Predicate<Person> PREDICATE_SHOW_ALL_TEAMMATES = person -> !person.getTeams().isEmpty();
+
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */

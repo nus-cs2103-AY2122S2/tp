@@ -14,6 +14,7 @@ title: User Guide
     * Contact Information
     * Github Profile
     * Team
+  * Filter for past teammates: filterteam
   * Listing all persons: list
   * Deleting a person: delete
   * Saving the data
@@ -101,6 +102,12 @@ A person can have any number of teams (including 0)
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com g/johndoe123`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com g/betsycoder p/1234567 t/entrepeneur s/java_80`
+
+### Filter for past teammates : `filterteam`
+
+Shows a list of past teammates in HackNet.
+
+Format: `list`
 
 ### Listing all persons : `list`
 
@@ -238,6 +245,7 @@ Action | Format, Examples
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [g/GITHUB_USERNAME] [t/Team]…​ [s/SKILLNAME_SKILLPROFICENCY]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Filter** | `filter SKILL`<br> e.g. `filter c`
+**Filter Past Teammates** | `filterteam` 
 **Sort** | `sort SKILL`<br> e.g., `sort Python`
 **List** | `list`
 **Help** | `help`
