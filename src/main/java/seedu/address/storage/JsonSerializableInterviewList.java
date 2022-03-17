@@ -50,7 +50,7 @@ class JsonSerializableInterviewList {
         InterviewSchedule InterviewSchedule = new InterviewSchedule();
         for (JsonAdaptedInterview jsonAdaptedInterview : interviews) {
             Interview interview = jsonAdaptedInterview.toModelType();
-            if (InterviewSchedule.hasInterview(interview)) {
+            if (InterviewSchedule.hasCandidate(interview)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_INTERVIEW);
             }
             InterviewSchedule.addInterview(interview);

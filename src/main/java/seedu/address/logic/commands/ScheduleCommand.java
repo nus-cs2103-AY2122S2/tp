@@ -62,7 +62,7 @@ public class ScheduleCommand extends Command {
         model.addInterview(toAdd);
         return new CommandResult(String.format(MESSAGE_SCHEDULED_CANDIDATE_SUCCESS,
                 toAdd.getCandidate().getName(), toAdd.getCandidate().getStudentID(),
-                toAdd.getInterviewDate(), toAdd.getInterviewTime()));
+                toAdd.getInterviewDate(), toAdd.getInterviewStartTime()));
     }
 
     @Override

@@ -6,7 +6,7 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.interview.exceptions.ConflictingInterviewException;
-import seedu.address.model.interview.exceptions.DuplicateInterviewException;
+import seedu.address.model.interview.exceptions.DuplicateCandidateException;
 import seedu.address.model.interview.exceptions.InterviewNotFoundException;
 
 import static java.util.Objects.requireNonNull;
@@ -20,9 +20,9 @@ public class UniqueInterviewList implements Iterable<Interview> {
     /**
      * Returns true if the list contains an equivalent person as the given argument.
      */
-    public boolean contains(Interview toCheck) {
+    public boolean containsSameCandidate(Interview toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSameInterview);
+        return internalList.stream().anyMatch(toCheck::isSameInterviewCandidate);
     }
 
     /**
@@ -38,8 +38,11 @@ public class UniqueInterviewList implements Iterable<Interview> {
      */
     public void add(Interview toAdd) {
         requireNonNull(toAdd);
+        if (containsSameCandidate(toAdd)) {
+            throw new DuplicateCandidateException();
+        }
         if (containsConflictingInterview(toAdd)) {
-            throw new DuplicateInterviewException();
+            throw new ConflictingInterviewException();
         }
         internalList.add(toAdd);
     }
@@ -56,8 +59,8 @@ public class UniqueInterviewList implements Iterable<Interview> {
             throw new InterviewNotFoundException();
         }
 
-        if (!target.isSameInterview(editedInterview)) {
-            throw new DuplicateInterviewException();
+        if (!target.isSameInterviewCandidate(editedInterview)) {
+            throw new DuplicateCandidateException();
         }
 
         if (containsConflictingInterview(editedInterview)) {
@@ -90,7 +93,7 @@ public class UniqueInterviewList implements Iterable<Interview> {
     public void setInterviews(List<Interview> interviews) {
         requireAllNonNull(interviews);
         if (!interviewsAreUnique(interviews)) {
-            throw new DuplicateInterviewException();
+            throw new DuplicateCandidateException();
         }
 
         internalList.setAll(interviews);

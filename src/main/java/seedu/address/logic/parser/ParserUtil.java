@@ -27,7 +27,7 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_DATETIME =
-            "Date and/or Time is not in the following format: dd-mm-yyy hh:mm";
+            "Date and/or Time is not in the following format: dd/MM/yyyy HH:mm";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be

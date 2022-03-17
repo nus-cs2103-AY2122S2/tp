@@ -45,12 +45,11 @@ public class InterviewSchedule implements ReadOnlyInterviewSchedule {
     }
 
     /**
-     * Returns true if an interview with the same candidate, date and time slot
-     * as {@code interview} exists in the interview schedule.
+     * Returns true if an interview with the same candidate as {@code interview} exists in the interview schedule.
      */
-    public boolean hasInterview(Interview interview) {
+    public boolean hasCandidate(Interview interview) {
         requireNonNull(interview);
-        return interviews.contains(interview);
+        return interviews.containsSameCandidate(interview);
     }
     /**
      * Returns true if an interview with the same date and time slot as {@code interview}

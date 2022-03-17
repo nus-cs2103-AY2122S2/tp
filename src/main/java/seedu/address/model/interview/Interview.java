@@ -13,8 +13,11 @@ import seedu.address.model.person.Person;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Interview {
+    private static final int INTERVIEW_DURATION_IN_MINUTES = 30;
+
     private final Person candidate;
     private final LocalDateTime interviewDateTime;
+    private final LocalDateTime interviewEndDateTime;
 
     /**
      * Every field must be present and not null.
@@ -23,27 +26,36 @@ public class Interview {
         requireAllNonNull(candidate, interviewDateTime);
         this.candidate = candidate;
         this.interviewDateTime = interviewDateTime;
+        this.interviewEndDateTime = interviewDateTime.plusMinutes(INTERVIEW_DURATION_IN_MINUTES);
     }
 
     /**
-     * Returns true if both interviews have candidates with the same name.
-     * This defines a weaker notion of equality between two interviews.
+     * Returns true if both interviews have the same candidates.
      */
-    public boolean isSameInterview(Interview otherInterview) {
+    public boolean isSameInterviewCandidate(Interview otherInterview) {
         if (otherInterview == this) {
             return true;
         }
         return otherInterview != null
-                && otherInterview.getCandidate().getName().equals(getCandidate().getName())
-                && otherInterview.getInterviewDateTime().equals(getInterviewDateTime());
+                && otherInterview.getCandidate().equals(getCandidate());
     }
 
+    /**
+     * Returns true if both interviews have the same interview date and time.
+     */
     public boolean isConflictingInterview(Interview otherInterview) {
         if (otherInterview == this) {
             return true;
         }
         return otherInterview != null
                 && otherInterview.getInterviewDateTime().equals(getInterviewDateTime());
+    }
+
+    /**
+     * Returns true if the given date and time is not in the past.
+     */
+    public static boolean isValidDateTime(LocalDateTime localDateTime) {
+        return LocalDateTime.now().isBefore(localDateTime);
     }
 
     public Person getCandidate() {
@@ -54,8 +66,11 @@ public class Interview {
         return this.interviewDateTime;
     }
 
-    public LocalTime getInterviewTime() {
+    public LocalTime getInterviewStartTime() {
         return this.interviewDateTime.toLocalTime();
+    }
+    public LocalTime getInterviewEndTime() {
+        return this.interviewEndDateTime.toLocalTime();
     }
 
     public LocalDate getInterviewDate() {
@@ -72,22 +87,18 @@ public class Interview {
             return true;
         }
 
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Interview)) {
             return false;
         }
 
-        Person otherPerson = (Person) other;
-        return otherPerson.getStudentID().equals(getStudentID())
-                && otherPerson.getName().equals(getName())
-                && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getCourse().equals(getCourse())
-                && otherPerson.getTags().equals(getTags());
+        Interview otherInterview = (Interview) other;
+        return otherInterview.getCandidate().equals(getCandidate())
+                && otherInterview.getInterviewDateTime().equals(getInterviewDateTime());
     }
 
     @Override
     public String toString() {
         return this.candidate.getName() + " " + this.candidate.getStudentID() + " "
-                + this.getInterviewDate() + " " + this.getInterviewTime();
+                + this.getInterviewDate() + " " + this.getInterviewStartTime();
     }
 }

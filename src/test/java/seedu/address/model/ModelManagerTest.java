@@ -27,6 +27,7 @@ public class ModelManagerTest {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
         assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
+        assertEquals(new InterviewSchedule(), new InterviewSchedule(modelManager.getInterviewSchedule()));
     }
 
     @Test
@@ -60,6 +61,40 @@ public class ModelManagerTest {
         assertEquals(guiSettings, modelManager.getGuiSettings());
     }
 
+    @Test
+    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setAddressBookFilePath(null));
+    }
+
+    @Test
+    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
+        Path path = Paths.get("address/book/file/path");
+        modelManager.setAddressBookFilePath(path);
+        assertEquals(path, modelManager.getAddressBookFilePath());
+    }
+
+    @Test
+    public void hasPerson_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
+    }
+
+    @Test
+    public void hasPerson_personNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasPerson(ALICE));
+    }
+
+    @Test
+    public void hasPerson_personInAddressBook_returnsTrue() {
+        modelManager.addPerson(ALICE);
+        assertTrue(modelManager.hasPerson(ALICE));
+    }
+
+    @Test
+    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    }
+
+    //=======TODO======
     @Test
     public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.setAddressBookFilePath(null));

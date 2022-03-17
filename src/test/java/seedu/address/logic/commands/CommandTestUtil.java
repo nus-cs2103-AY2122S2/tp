@@ -10,6 +10,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -39,6 +41,10 @@ public class CommandTestUtil {
     public static final String VALID_COURSE_BOB = "Computer Engineering";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final LocalDateTime VALID_AMY_INTERVIEW_DATE_TIME =
+            LocalDateTime.of(2023, Month.FEBRUARY, 23, 15, 00);
+    public static final LocalDateTime VALID_BOB_INTERVIEW_DATE_TIME =
+            LocalDateTime.of(2023, Month.DECEMBER, 01, 15, 00);
 
     public static final String STUDENT_ID_DESC_AMY = " " + PREFIX_ID + VALID_STUDENT_ID_AMY;
     public static final String STUDENT_ID_DESC_BOB = " " + PREFIX_ID + VALID_STUDENT_ID_BOB;
@@ -59,6 +65,8 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_COURSE_DESC = " " + PREFIX_COURSE; // empty string not allowed for courses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final LocalDateTime INVALID_INTERVIEW_DATE_TIME =
+            LocalDateTime.of(2020, Month.FEBRUARY, 23, 15, 00); //Past date and time
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

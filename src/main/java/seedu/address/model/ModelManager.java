@@ -32,7 +32,8 @@ public class ModelManager implements Model {
                         ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + ", InterviewSchedule: " + interviewList + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + addressBook + ", InterviewSchedule: " + interviewList
+                + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
@@ -141,7 +142,7 @@ public class ModelManager implements Model {
     @Override
     public boolean hasInterview(Interview interview) {
         requireNonNull(interview);
-        return interviewSchedule.hasInterview(interview);
+        return interviewSchedule.hasCandidate(interview);
     }
 
     @Override
@@ -201,7 +202,8 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPersons.equals(other.filteredPersons)
+                && interviewSchedule.equals(other.interviewSchedule);
     }
 
 }
