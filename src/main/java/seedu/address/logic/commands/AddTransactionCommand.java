@@ -19,6 +19,7 @@ import seedu.address.model.transaction.Note;
 
 public class AddTransactionCommand extends Command {
     public static final String COMMAND_WORD = "addTransaction";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Add a transaction to the transaction list of the "
             + "identified person by the index number used in the last person "
