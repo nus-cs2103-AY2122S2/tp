@@ -176,6 +176,13 @@ public class ModelManager implements Model {
         return toAdd.areFriendNamesValid(addressBook);
     }
 
+    @Override
+    public void setEvent(Event target, Event editedEvent) {
+        requireAllNonNull(target, editedEvent);
+
+        eventBook.setEvent(target, editedEvent);
+    }
+
     //=========== List Accessors ===========================================================================
 
     /**

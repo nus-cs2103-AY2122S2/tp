@@ -82,6 +82,17 @@ public class EventBook implements ReadOnlyEventBook {
         events.remove(key);
     }
 
+    /**
+     * Replaces the given event {@code target} in the list with {@code editedEvent}.
+     * {@code target} must exist in the event book.
+     * The person identity of {@code editedEvent} must not be the same as another existing event in the event book.
+     */
+    public void setEvent(Event target, Event editedEvent) {
+        requireNonNull(editedEvent);
+
+        events.setEvent(target, editedEvent);
+    }
+
     //// util methods
 
     @Override
