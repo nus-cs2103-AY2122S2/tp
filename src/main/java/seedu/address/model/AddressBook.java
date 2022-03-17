@@ -2,6 +2,8 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -45,6 +47,18 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setPersons(List<Candidate> candidates) {
         this.candidates.setPersons(candidates);
+    }
+
+    /**
+     * Reorders the contents of the person list by comparator on {@code sortKey}.
+     * {@code persons} must not contain duplicate persons.
+     */
+    public void sortPersons(List<Candidate> persons, Comparator<Candidate> sortComparator) {
+        requireNonNull(persons);
+        requireNonNull(sortComparator);
+        List<Candidate> personsCopy = new ArrayList<Candidate>(persons);
+        personsCopy.sort(sortComparator);
+        this.candidates.setPersons(personsCopy);
     }
 
     /**

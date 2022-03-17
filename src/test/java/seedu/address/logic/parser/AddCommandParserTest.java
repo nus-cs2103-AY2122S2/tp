@@ -1,8 +1,11 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.AVAILABILITY_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.AVAILABILITY_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.COURSE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.COURSE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_AVAILABILITY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_COURSE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
@@ -31,6 +34,7 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.model.candidate.Availability;
 import seedu.address.model.candidate.Candidate;
 import seedu.address.model.candidate.Name;
 import seedu.address.model.candidate.Phone;
@@ -48,22 +52,22 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + STUDENT_ID_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB
-                + COURSE_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedCandidate));
+                + COURSE_DESC_BOB + TAG_DESC_FRIEND + AVAILABILITY_DESC_BOB, new AddCommand(expectedCandidate));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, STUDENT_ID_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB
-                + COURSE_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedCandidate));
+                + COURSE_DESC_BOB + TAG_DESC_FRIEND + AVAILABILITY_DESC_BOB, new AddCommand(expectedCandidate));
 
         // multiple phones - last phone accepted
         assertParseSuccess(parser, STUDENT_ID_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB
-                + COURSE_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedCandidate));
+                + COURSE_DESC_BOB + TAG_DESC_FRIEND + AVAILABILITY_DESC_BOB, new AddCommand(expectedCandidate));
 
         // multiple tags - all accepted
         Candidate expectedCandidateMultipleTags = new CandidateBuilder(BOB)
                 .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         assertParseSuccess(parser, STUDENT_ID_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB
-                + COURSE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                + COURSE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + AVAILABILITY_DESC_BOB,
                 new AddCommand(expectedCandidateMultipleTags));
     }
 
@@ -72,7 +76,7 @@ public class AddCommandParserTest {
         // zero tags
         Candidate expectedCandidate = new CandidateBuilder(AMY).withTags().build();
         assertParseSuccess(parser, STUDENT_ID_DESC_AMY + NAME_DESC_AMY + PHONE_DESC_AMY
-                + COURSE_DESC_AMY, new AddCommand(expectedCandidate));
+                + COURSE_DESC_AMY + AVAILABILITY_DESC_AMY, new AddCommand(expectedCandidate));
     }
 
     @Test
@@ -100,27 +104,36 @@ public class AddCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid studentId
         assertParseFailure(parser, INVALID_STUDENT_ID_DESC + NAME_DESC_BOB + PHONE_DESC_BOB
-                + COURSE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, StudentId.MESSAGE_CONSTRAINTS);
+                + COURSE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + AVAILABILITY_DESC_BOB,
+                StudentId.MESSAGE_CONSTRAINTS);
 
         // invalid name
         assertParseFailure(parser, STUDENT_ID_DESC_BOB + INVALID_NAME_DESC + PHONE_DESC_BOB
-                + COURSE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
+                + COURSE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + AVAILABILITY_DESC_BOB,
+                Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, STUDENT_ID_DESC_BOB + NAME_DESC_BOB + INVALID_PHONE_DESC
-                + COURSE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Phone.MESSAGE_CONSTRAINTS);
+                + COURSE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + AVAILABILITY_DESC_BOB,
+                Phone.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, STUDENT_ID_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB
-                + COURSE_DESC_BOB + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
+                + COURSE_DESC_BOB + INVALID_TAG_DESC + VALID_TAG_FRIEND + AVAILABILITY_DESC_BOB,
+                Tag.MESSAGE_CONSTRAINTS);
+
+        // invalid availability
+        assertParseFailure(parser, STUDENT_ID_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB
+                + COURSE_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + INVALID_AVAILABILITY_DESC,
+                Availability.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, STUDENT_ID_DESC_BOB + INVALID_NAME_DESC + PHONE_DESC_BOB
-                + INVALID_COURSE_DESC, Name.MESSAGE_CONSTRAINTS);
+                + INVALID_COURSE_DESC + AVAILABILITY_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + STUDENT_ID_DESC_BOB + NAME_DESC_BOB
-                + COURSE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                + COURSE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + AVAILABILITY_DESC_BOB,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }

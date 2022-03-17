@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPLICATION_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AVAILABILITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
@@ -22,14 +23,14 @@ import seedu.address.model.tag.Tag;
 public class CandidateUtil {
 
     /**
-     * Returns an add command string for adding the {@code person}.
+     * Returns an add command string for adding the {@code candidate}.
      */
     public static String getAddCommand(Candidate candidate) {
         return AddCommand.COMMAND_WORD + " " + getPersonDetails(candidate);
     }
 
     /**
-     * Returns the part of command string for the given {@code person}'s details.
+     * Returns the part of command string for the given {@code candidate}'s details.
      */
     public static String getPersonDetails(Candidate candidate) {
         StringBuilder sb = new StringBuilder();
@@ -37,6 +38,7 @@ public class CandidateUtil {
         sb.append(PREFIX_NAME + candidate.getName().fullName + " ");
         sb.append(PREFIX_PHONE + candidate.getPhone().value + " ");
         sb.append(PREFIX_COURSE + candidate.getCourse().course + " ");
+        sb.append(PREFIX_AVAILABILITY + candidate.getAvailability().availability + " ");
         candidate.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
@@ -67,7 +69,8 @@ public class CandidateUtil {
                 .append(applicationStatus.toString()).append(" "));
         descriptor.getInterviewStatus().ifPresent(interviewStatus -> sb.append(PREFIX_INTERVIEW_STATUS)
                 .append(interviewStatus.toString()).append(" "));
-
+        descriptor.getAvailability().ifPresent(availability -> sb.append(PREFIX_AVAILABILITY)
+                .append(availability.availability).append(" "));
         return sb.toString();
     }
 }

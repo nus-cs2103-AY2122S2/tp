@@ -17,7 +17,7 @@ public class PersonCard extends UiPart<Region> {
     private static final String FXML = "PersonListCard.fxml";
     private static final String APPLICATION_STATUS_MSG = "Application Status : ";
     private static final String INTERVIEW_STATUS_MSG = "Interview Status : ";
-
+    private static final String AVAILABILITY_MSG = "Availability: ";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -46,6 +46,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label interviewStatus;
     @FXML
+    private Label availability;
+    @FXML
     private FlowPane tags;
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -63,8 +65,7 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         applicationStatus.setText(APPLICATION_STATUS_MSG + candidate.getApplicationStatus().toString());
         interviewStatus.setText(INTERVIEW_STATUS_MSG + candidate.getInterviewStatus().toString());
-
-
+        availability.setText(AVAILABILITY_MSG + candidate.getAvailability().availability);
     }
 
     @Override

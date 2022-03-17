@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPLICATION_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AVAILABILITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
@@ -23,6 +24,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.candidate.ApplicationStatus;
+import seedu.address.model.candidate.Availability;
 import seedu.address.model.candidate.Candidate;
 import seedu.address.model.candidate.Course;
 import seedu.address.model.candidate.Email;
@@ -49,8 +51,9 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_COURSE + "COURSE] "
             + "[" + PREFIX_TAG + "TAG]..."
-            + "[" + PREFIX_APPLICATION_STATUS + "APPLICATION STATUS]"
-            + "[" + PREFIX_INTERVIEW_STATUS + "INTERVIEW STATUS]...\n"
+            + "[" + PREFIX_APPLICATION_STATUS + "APPLICATION STATUS] "
+            + "[" + PREFIX_INTERVIEW_STATUS + "INTERVIEW STATUS] "
+            + "[" + PREFIX_AVAILABILITY + "AVAILABILITY]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "E0123456@u.nus.edu";
@@ -112,9 +115,11 @@ public class EditCommand extends Command {
                 .orElse(candidateToEdit.getApplicationStatus());
         InterviewStatus interviewStatus = editPersonDescriptor.getInterviewStatus()
                 .orElse(candidateToEdit.getInterviewStatus());
+        Availability updatedAvailability = editPersonDescriptor.getAvailability()
+                .orElse(candidateToEdit.getAvailability());
 
         return new Candidate(updatedID, updatedName, updatedPhone, updatedEmail,
-                updatedCourse, updatedTags, applicationStatus, interviewStatus);
+                updatedCourse, updatedTags, applicationStatus, interviewStatus, updatedAvailability);
     }
 
     @Override
@@ -149,6 +154,7 @@ public class EditCommand extends Command {
         private Set<Tag> tags;
         private ApplicationStatus applicationStatus;
         private InterviewStatus interviewStatus;
+        private Availability availability;
 
         public EditPersonDescriptor() {}
 
@@ -165,6 +171,7 @@ public class EditCommand extends Command {
             setTags(toCopy.tags);
             setApplicationStatus(toCopy.applicationStatus);
             setInterviewStatus(toCopy.interviewStatus);
+            setAvailability(toCopy.availability);
         }
 
         /**
@@ -172,7 +179,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(studentId, name, phone, email, course, tags,
-                    applicationStatus, interviewStatus);
+                    applicationStatus, interviewStatus, availability);
         }
 
         public void setStudentId(StudentId id) {
@@ -230,6 +237,15 @@ public class EditCommand extends Command {
         public Optional<InterviewStatus> getInterviewStatus() {
             return Optional.ofNullable(interviewStatus);
         }
+
+        public void setAvailability(Availability availability) {
+            this.availability = availability;
+        }
+
+        public Optional<Availability> getAvailability() {
+            return Optional.ofNullable(availability);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -269,7 +285,8 @@ public class EditCommand extends Command {
                     && getCourse().equals(e.getCourse())
                     && getTags().equals(e.getTags())
                     && getApplicationStatus().equals(e.getApplicationStatus())
-                    && getInterviewStatus().equals(e.getInterviewStatus());
+                    && getInterviewStatus().equals(e.getInterviewStatus())
+                    && getAvailability().equals(e.getAvailability());
         }
     }
 }

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -111,7 +112,7 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedCandidate);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filter/Sort Person List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
@@ -126,6 +127,12 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Candidate> predicate) {
         requireNonNull(predicate);
         filteredCandidates.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateSortedPersonList(Comparator<Candidate> sortComparator) {
+        requireNonNull(sortComparator);
+        addressBook.sortPersons(filteredCandidates, sortComparator);
     }
 
     @Override

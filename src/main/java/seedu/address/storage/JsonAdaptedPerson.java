@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.candidate.Address;
 import seedu.address.model.candidate.ApplicationStatus;
+import seedu.address.model.candidate.Availability;
 import seedu.address.model.candidate.Candidate;
 import seedu.address.model.candidate.Course;
 import seedu.address.model.candidate.Email;
@@ -36,6 +37,7 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final String applicationStatus;
     private final String interviewStatus;
+    private final String availability;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -45,7 +47,8 @@ class JsonAdaptedPerson {
             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
             @JsonProperty("course") String course, @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
             @JsonProperty("applicationStatus") String applicationStatus,
-            @JsonProperty("interviewStatus") String interviewStatus) {
+            @JsonProperty("interviewStatus") String interviewStatus,
+            @JsonProperty("availability") String availability) {
         this.studentId = studentId;
         this.name = name;
         this.phone = phone;
@@ -56,7 +59,7 @@ class JsonAdaptedPerson {
         }
         this.applicationStatus = applicationStatus;
         this.interviewStatus = interviewStatus;
-
+        this.availability = availability;
     }
 
     /**
@@ -73,6 +76,7 @@ class JsonAdaptedPerson {
                 .collect(Collectors.toList()));
         applicationStatus = source.getApplicationStatus().toString();
         interviewStatus = source.getInterviewStatus().toString();
+        availability = source.getAvailability().availability;
     }
 
     /**
@@ -127,8 +131,17 @@ class JsonAdaptedPerson {
         }
         final Course modelCourse = new Course(course);
 
+        if (availability == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Availability.class.getSimpleName()));
+        }
+        if (!Availability.isValidDate(availability)) {
+            throw new IllegalValueException(Availability.MESSAGE_CONSTRAINTS);
+        }
+        final Availability modelAvailability = new Availability(availability);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Candidate(modelId, modelName, modelPhone, modelEmail, modelCourse, modelTags,
-                new ApplicationStatus(applicationStatus), new InterviewStatus(interviewStatus));
+                new ApplicationStatus(applicationStatus), new InterviewStatus(interviewStatus), modelAvailability);
     }
 }

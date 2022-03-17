@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_APPLICATION_STATUS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AVAILABILITY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COURSE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERVIEW_STATUS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -11,9 +12,11 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -51,12 +54,26 @@ public class AddressBookTest {
         Candidate editedAlice = new CandidateBuilder(ALICE).withCourse(VALID_COURSE_BOB).withTags(VALID_TAG_HUSBAND)
                 .withApplicationStatus(VALID_APPLICATION_STATUS)
                 .withInterviewStatus(VALID_INTERVIEW_STATUS)
+                .withAvailability(VALID_AVAILABILITY_BOB)
                 .build();
         List<Candidate> newCandidates = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newCandidates);
 
         assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
     }
+
+    @Test
+    public void sortPersons_basedOnName_returnsSortedList() {
+        ObservableList<Candidate> newData = addressBook.getPersonList();
+        List<Candidate> personsCopy = new ArrayList<Candidate>(newData);
+        Comparator<Candidate> sortComparator = Comparator.comparing(l -> l.getName().toString().toLowerCase());
+        personsCopy.sort(sortComparator);
+        addressBook.setPersons(newData);
+        addressBook.sortPersons(newData, sortComparator);
+
+        assertEquals(personsCopy, addressBook.getPersonList());
+    }
+
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
@@ -78,7 +95,7 @@ public class AddressBookTest {
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
         Candidate editedAlice = new CandidateBuilder(ALICE).withCourse(VALID_COURSE_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
+                .withAvailability(VALID_AVAILABILITY_BOB).build();
         assertTrue(addressBook.hasPerson(editedAlice));
     }
 

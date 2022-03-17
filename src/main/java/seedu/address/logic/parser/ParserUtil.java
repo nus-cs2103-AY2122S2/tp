@@ -11,6 +11,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.candidate.Address;
 import seedu.address.model.candidate.ApplicationStatus;
+import seedu.address.model.candidate.Availability;
 import seedu.address.model.candidate.Course;
 import seedu.address.model.candidate.Email;
 import seedu.address.model.candidate.InterviewStatus;
@@ -186,5 +187,20 @@ public class ParserUtil {
             throw new ParseException(InterviewStatus.MESSAGE_CONSTRAINTS);
         }
         return new InterviewStatus(trimmedStatus);
+    }
+
+    /**
+     * Parses a {@code String tag} into a {@code Tag}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code tag} is invalid.
+     */
+    public static Availability parseAvailability(String availability) throws ParseException {
+        requireNonNull(availability);
+        String trimmedAvailability = availability.trim();
+        if (!Availability.isValidDate(trimmedAvailability)) {
+            throw new ParseException(Availability.MESSAGE_CONSTRAINTS);
+        }
+        return new Availability(trimmedAvailability);
     }
 }

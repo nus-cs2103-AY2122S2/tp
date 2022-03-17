@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.candidate.ApplicationStatus;
+import seedu.address.model.candidate.Availability;
 import seedu.address.model.candidate.Candidate;
 import seedu.address.model.candidate.Course;
 import seedu.address.model.candidate.Email;
@@ -26,6 +27,7 @@ public class CandidateBuilder {
     public static final String DEFAULT_COURSE = "Computer Science";
     public static final String DEFAULT_APPLICATION_STATUS = "Pending";
     public static final String DEFAULT_INTERVIEW_STATUS = "Pending";
+    public static final String DEFAULT_AVAILABILITY = "1,2,3,4,5,6,7";
 
     private StudentId studentId;
     private Name name;
@@ -35,6 +37,7 @@ public class CandidateBuilder {
     private Set<Tag> tags;
     private ApplicationStatus applicationStatus;
     private InterviewStatus interviewStatus;
+    private Availability availability;
 
     /**
      * Creates a {@code CandidateBuilder} with the default details.
@@ -48,6 +51,7 @@ public class CandidateBuilder {
         tags = new HashSet<>();
         applicationStatus = new ApplicationStatus(DEFAULT_APPLICATION_STATUS);
         interviewStatus = new InterviewStatus(DEFAULT_INTERVIEW_STATUS);
+        availability = new Availability(DEFAULT_AVAILABILITY);
     }
 
     /**
@@ -62,6 +66,7 @@ public class CandidateBuilder {
         tags = new HashSet<>(candidateToCopy.getTags());
         applicationStatus = candidateToCopy.getApplicationStatus();
         interviewStatus = candidateToCopy.getInterviewStatus();
+        availability = candidateToCopy.getAvailability();
     }
 
     /**
@@ -128,8 +133,21 @@ public class CandidateBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Availability} of the {@code Person} that we are building.
+     */
+    public CandidateBuilder withAvailability(String availability) {
+        this.availability = new Availability(availability);
+        return this;
+    }
+
+    /**
+     * Returns a new Person with specific fields.
+     * @return a new Person.
+     */
     public Candidate build() {
-        return new Candidate(studentId, name, phone, email, course, tags, applicationStatus, interviewStatus);
+        return new Candidate(studentId, name, phone, email, course, tags,
+                applicationStatus, interviewStatus, availability);
     }
 
 }

@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.candidate.ApplicationStatus;
+import seedu.address.model.candidate.Availability;
 import seedu.address.model.candidate.Candidate;
 import seedu.address.model.candidate.Course;
 import seedu.address.model.candidate.Email;
@@ -43,6 +44,7 @@ public class EditCandidateDescriptorBuilder {
         descriptor.setTags(candidate.getTags());
         descriptor.setApplicationStatus(candidate.getApplicationStatus());
         descriptor.setInterviewStatus(candidate.getInterviewStatus());
+        descriptor.setAvailability(candidate.getAvailability());
     }
 
     /**
@@ -112,6 +114,14 @@ public class EditCandidateDescriptorBuilder {
      */
     public EditCandidateDescriptorBuilder withInterviewStatus(String interviewStatus) {
         descriptor.setInterviewStatus(new InterviewStatus(interviewStatus));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Availability} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditCandidateDescriptorBuilder withAvailability(String availability) {
+        descriptor.setAvailability(new Availability(availability));
         return this;
     }
 }
