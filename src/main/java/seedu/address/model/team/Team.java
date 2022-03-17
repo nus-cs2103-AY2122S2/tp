@@ -66,7 +66,9 @@ public class Team {
         }
     }
 
-<<<<<<< branch-edit
+    public TeamName getTeamName() {
+        return this.teamName;
+
     public void deletePersonFromTeam(Person person) {
         this.teamMemberList.deletePersonFromTeam(person);
     }
@@ -81,7 +83,7 @@ public class Team {
 
     public TeamLineupList getTeamLineupList() {
         return teamLineupList;
-=======
+
     /**
      * Removes a player.
      */
@@ -95,6 +97,5 @@ public class Team {
      */
     public void removeLineup(String lineup) {
         return;
->>>>>>> master
     }
 }

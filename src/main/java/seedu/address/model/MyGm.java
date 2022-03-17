@@ -5,13 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-<<<<<<< branch-edit
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-=======
 import seedu.address.model.lineup.Lineup;
 import seedu.address.model.lineup.LineupName;
->>>>>>> master
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.team.Team;
@@ -24,17 +21,37 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
  */
 public class MyGm {
     private final UniquePlayerList players;
-    private final List<Team> teams;
+    private final UniqueTeamList teams;
 
     /**
      * Creates a new empty MyGm class.
      */
     public MyGm() {
         this.players = new UniquePlayerList();
-        this.teams = new ArrayList<Team>();
+        this.teams = new UniqueTeamList();
     }
 
-<<<<<<< branch-edit
+    /**
+     * Puts a player into a team
+     *
+     * @param player Player to put
+     * @param team Team to put
+     */
+    public void putPlayerToTeam(Person player, Team team) {
+        this.players.addPersonToTeam(player, team);
+    }
+
+    /**
+     * Puts a player into a lineup
+     *
+     * @param player Player to put
+     * @param lineup Lineup to put
+     */
+    public void putPlayerToLineup(Person player, Lineup lineup) {
+        this.players.addPersonToLineup(player, lineup);
+    }
+
+    //final
     public boolean hasPerson(Name targetName) {
         return players.containsName(targetName);
     }
@@ -47,16 +64,14 @@ public class MyGm {
         requireAllNonNull(target, editedPerson);
 
         players.setPerson(target, editedPerson);
-=======
+
     boolean containsPlayer(String name) {
         return this.players.containsName(new Name(name));
->>>>>>> master
+
     }
 
     // add more methods here to facilitate update of players and teams
 
-<<<<<<< branch-edit
-=======
     /**
      * Deletes a player from a lineup.
      */
@@ -146,5 +161,5 @@ public class MyGm {
     public boolean deleteTeamFromPool(String team) {
         return true; // assume only one team, cannot delete
     }
->>>>>>> master
+
 }
