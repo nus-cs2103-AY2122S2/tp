@@ -12,6 +12,7 @@ import seedu.address.logic.parser.Prefix;
  */
 public class Note extends TransactionField {
     public static final Prefix PREFIX = new Prefix("n/", false);
+    public static final String EMPTY_DUE_DATE = "";
     private final String note;
 
     /**

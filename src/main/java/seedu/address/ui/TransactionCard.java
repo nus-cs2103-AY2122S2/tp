@@ -2,9 +2,11 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.transaction.DueDate;
+import seedu.address.model.transaction.Note;
 import seedu.address.model.transaction.Transaction;
 
 /**
@@ -27,13 +29,13 @@ public class TransactionCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    private Label id;
-    @FXML
     private Label amount;
     @FXML
     private Label transactionDate;
     @FXML
     private Label dueDate;
+    @FXML
+    private Label note;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -41,7 +43,6 @@ public class TransactionCard extends UiPart<Region> {
     public TransactionCard(Transaction transaction, int displayedIndex) {
         super(FXML);
         this.transaction = transaction;
-        id.setText(displayedIndex + ". ");
 
         // Required fields.
         amount.setText("Amount: " + transaction.getAmount().getValue());
@@ -51,6 +52,10 @@ public class TransactionCard extends UiPart<Region> {
         dueDate.setText(transaction.getDueDate()
                 .map(date -> "Due Date: " + date.getValue())
                 .orElse(DueDate.EMPTY_DUE_DATE));
+
+        note.setText(transaction.getNote()
+                .map(note -> "Notes: " + note.getValue())
+                .orElse(Note.EMPTY_DUE_DATE));
     }
 
     @Override
@@ -67,7 +72,6 @@ public class TransactionCard extends UiPart<Region> {
 
         // state check
         TransactionCard card = (TransactionCard) other;
-        return id.getText().equals(card.id.getText())
-                && transaction.equals(card.transaction);
+        return transaction.equals(card.transaction);
     }
 }
