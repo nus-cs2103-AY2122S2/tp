@@ -26,6 +26,7 @@ import seedu.address.model.person.Favourite;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Preference;
 import seedu.address.model.person.UserType;
 import seedu.address.model.property.Property;
 
@@ -104,7 +105,8 @@ public class EditCommand extends Command {
         Favourite noChangeFavourite = editPersonDescriptor.getFavourite().orElse(personToEdit.getFavourite());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Property> updatedProperties = editPersonDescriptor.getProperties().orElse(personToEdit.getProperties());
-        Optional<Property> updatedPreference = personToEdit.getPreference();
+        // preference cannot be edited
+        Optional<Preference> updatedPreference = personToEdit.getPreference();
         UserType updatedUserType = editPersonDescriptor.getUserType().orElse(personToEdit.getUserType());
 
         return new Person(updatedName, updatedPhone, updatedEmail, noChangeFavourite, updatedAddress, updatedProperties,
