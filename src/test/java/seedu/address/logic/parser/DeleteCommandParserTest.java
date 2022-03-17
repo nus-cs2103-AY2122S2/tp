@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INDEX_IS_NOT_NON_ZERO_UNSIGNED_INTEGER;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -12,7 +13,7 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.FriendName;
 import seedu.address.model.person.Person;
 
 /**
@@ -28,16 +29,45 @@ public class DeleteCommandParserTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void parse_validArgs_returnsDeleteCommand() {
+    public void parse_validArgsName_returnsDeleteCommand() {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Name name = personToDelete.getName();
+        FriendName name = personToDelete.getName();
         DeleteCommand deleteCommand = new DeleteCommand(personToDelete.getName());
 
         assertParseSuccess(parser, " n/" + name.fullName, deleteCommand);
     }
 
     @Test
+    public void parse_noNameGiven_throwsParseException() {
+        assertParseFailure(parser, " n/", FriendName.MESSAGE_CONSTRAINTS);
+    }
+
+
+    @Test
+    public void parse_invalidArgsName_throwsParseException() {
+        assertParseFailure(parser, " n/" + "!@", FriendName.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_validArgsIndex_returnsDeleteCommand() {
+        assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_PERSON));
+    }
+
+    @Test
+    public void parse_invalidIndex_throwsParseException() {
+        assertParseFailure(parser, "-1", MESSAGE_INDEX_IS_NOT_NON_ZERO_UNSIGNED_INTEGER);
+    }
+
+    @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "/n", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
+
+    @Test
+    public void parse_noArgs_throwsParseException() {
+        assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "   ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    }
+
 }

@@ -98,7 +98,7 @@ public class EditEventCommandTest {
         EditEventCommand.EditEventDescriptor descriptor = new EditEventDescriptorBuilder().withName(VALID_EVENT_NAME).build();
         EditEventCommand editCommand = new EditEventCommand(outOfBoundIndex, descriptor);
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
     }
 
     @Test

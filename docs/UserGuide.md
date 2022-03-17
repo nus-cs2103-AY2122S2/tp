@@ -62,33 +62,28 @@ Amigos is designed to help you keep track of the friends in your life.
 ### Adding a friend: `addfriend`
 
 Adds a new friend to Amigos. A friend has:
-* ***(compulsory)*** name
-* *(optional)* phone number
-* *(optional)* email
-* *(optional)* address
-* *(optional)* description
 
-Format: `addfriend n/[NAME]  p/[PHONE_NUMBER] e/[EMAIL]  a/[ADDRESS] d/[DESCRIPTION]`
+**Format**: `addfriend n/NAME  [p/PHONE_NUMBER] [e/EMAIL]  [a/ADDRESS] [d/DESCRIPTION] [t/TAG]…`
 
-* Note that `NAME` field is minimally compulsory. `p/`, `em/`, `a/` and `d/` flags and their arguments are optional.
+* Note that `NAME` field is minimally compulsory. `p/`, `em/`, `a/` and `d/` `t/` flags and their arguments are optional.
 * Note that there can be no duplicate friends having the same name.
 
-Examples:
+**Examples**:
 * `addfriend n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 d/Physics Major, Sarah’s friend. Met at Freshman Dinner.`
-* `addfriend n/John Doe`
+* `addfriend n/John Doe t/Friend t/Banker`
 
 ### Editing a friend : `editfriend`
 
 Edits an existing friend in Amigos.
 
-Format: `editfriend cn/[CURRENT_NAME] nn/[NEW_NAME]  np/[NEW_PHONE_NUMBER] ne/[NEW_EMAIL] na/[NEW_ADDRESS] nd/[NEW_DESCRIPTION]`
+**Format**: `editfriend cn/CURRENT_NAME [nn/NEW_NAME]  [np/NEW_PHONE_NUMBER] [ne/NEW_EMAIL] [na/NEW_ADDRESS] [nd/NEW_DESCRIPTION] [t/TAG]…`
 
 * Edits an existing friend in Amigos. Field `CURRENT_NAME` is compulsory to identify the existing friend.
 * At least one of the optional fields must be provided.
 * Existing values will be overwritten to the input values.
 
 
-Examples:
+**Examples**:
 * `editfriend cn/John Doe na/John street, block 456, #01-01 ne/johndoe@example.com` edits the address
   and email of John Doe to be `John street, block 456, #01-01` and `johndoe@example.com` respectively.
 
@@ -97,11 +92,11 @@ Examples:
 
 Deletes a friend in Amigos.
 
-Format: `deletefriend n/[NAME]`
+**Format**: `deletefriend n/[NAME]`
 
 * `NAME` field must be provided unless all friends are being deleted then just the -a flag is needed.
 
-Examples:
+**Examples**:
 * `deletefriend n/John Doe`
 * `deletefriend -a`
 
@@ -110,12 +105,12 @@ Examples:
 
 Shows page containing the full details related to an existing friend in Amigos. By default, only the latest 10 logs are displayed in this page.
 
-Format: `showfriend n/NAME -alllogs`
+**Format**: `showfriend n/NAME -alllogs`
 
 * NAME field **must** be provided.
 * If the `-alllogs` flag is provided all the logs contained in that person will be displayed instead of the default 10 logs.
 
-Examples:
+**Examples**:
 * `showfriend n/John Doe` Will open up the page containing full details related to John Doe - his name, address, phone number, email, description, logs, and upcoming events with him.
 * `showfriend n/John Doe -alllogs` Will do the same as above except every single log will be displayed
 
@@ -123,7 +118,7 @@ Examples:
 
 Shows all friends in Amigos. Switches GUI to the friends tab.
 
-Format: `showfriends`
+**Format**: `showfriends`
 
 
 ## Logs management
@@ -133,14 +128,15 @@ Amigos provides functionality to manage logs, which are essentially detailed not
 
 Adds a log to an existing friend at the specified `INDEX` in Amigos.
 The `INDEX` refers to the index number shown in the displayed person's list.
-Format: `addlog INDEX ? n/NAME ttl/[TITLE] d/[DESCRIPTION]`
+
+**Format**: `addlog INDEX ? n/NAME ttl/[TITLE] d/[DESCRIPTION]`
 
 * Exactly one of `INDEX` or the `NAME` fields is compulsory.
 * If the `TITLE` argument is provided, then the `DESCRIPTON` argument is optional.
 * If neither `TITLE` nor `DESCRIPTION` arguments are provided, then a GUI
   pop up will prompt the user to key in the title and longer-form text as the description.
 
-Examples:
+**Examples**:
 * `addlog 1 ttl/has a pet named poki`
 * `addlog John ttl/recommended movies d/the martian, interstellar, three idiots`
 
@@ -148,7 +144,7 @@ Examples:
 
 Edits an existing log of an existing friend in Amigos.
 
-Format: `editlog n/[NAME] id/[LOG_INDEX] nt/[NEW_TITLE] nd/[NEW_DESCRIPTION]`
+**Format**: `editlog n/[NAME] id/[LOG_INDEX] nt/[NEW_TITLE] nd/[NEW_DESCRIPTION]`
 
 * The `NAME` field is compulsory.
 * If `LOG_INDEX` is not provided, then all logs, each with an accompanying index, will allow a user to
@@ -158,7 +154,7 @@ Format: `editlog n/[NAME] id/[LOG_INDEX] nt/[NEW_TITLE] nd/[NEW_DESCRIPTION]`
 * If neither `NEW_TITLE` nor `NEW_DESCRIPTION` arguments are provided, then a GUI
   pop up will prompt the user to key in the title and longer-form text as the description.
 
-Examples:
+**Examples:**
 * `editlog n/John Doe id/1 nt/has a pet named Poki`
 * `editlog n/Andrew Tan id/1 nt/recommended movies and shows nd/the martian, interstellar, three idiots, peaky blinders`
 
@@ -166,7 +162,7 @@ Examples:
 
 Deletes an existing log of an existing friend in Amigos.
 
-Format: `deletelog INDEX id/LOG_INDEX -a`
+**Format**: `deletelog INDEX id/LOG_INDEX -a`
 
 * The `INDEX` field is compulsory.
 * If `INDEX` is provided as well as a `-a` flag, then all logs of tht person will
@@ -176,72 +172,72 @@ Format: `deletelog INDEX id/LOG_INDEX -a`
 * If no `INDEX` or `LOG_INDEX` is provided, but `-a` is provided, then all possible logs
   of all friends will be deleted.
 
-## Event Management [Coming Soon!]
+**Examples:**
+* `deletelog n/John Doe id/1`
+* `deletelog n/John Doe -a `
+* `deletelog -a`
+
+## Event Management
 Amigos also allows you to keep track of your social events!
 ![Events Page](images/EventPage.png)
 
 ### Creating an event: `addevent`
-Adds a new event, which can be optionally linked to existing friends.
+Adds a new event, which can be optionally linked to any number of existing friends.
 
-**Format**: `addevent n/[EVENT_NAME] dt/[DATE_TIME] dd/[DESCRIPTION] f/[FRIEND_NAME1, FRIEND_NAME2…]`
+**Format**: `addevent n/EVENT_NAME dt/DATE_TIME [d/DESCRIPTION] [f/FRIEND_NAME]...`
 
-* The `EVENT_NAME` and `DATE_TIME` fields are **compulsory**, while the remaining fields are **optional**.
 * There **cannot** be any duplicate events with the same name and date.
+* All given `FRIEND_NAME` values must match the `NAME` of an existing friend in Amigos.
+
 
 **Examples**:
-* `addevent n/John’s Birthday dt/15-08-2021 1700 dd/Remember to get a present! f/John, Abe, Bob`
+* `addevent n/John’s Birthday dt/15-08-2021 1700 d/Remember to get a present! f/John Low f/Alex Yeo`
 * `addevent n/Christmas Party dt/25-12-2022`
 
 ### Editing an event: `editevent`
 Edits an existing event.
 
-**Format**: `editevent n/[EVENT_NAME] dt/[DATE] nn/[NEW_EVENT_NAME] ndt/[NEW_DATE_TIME] ndd/[NEW_DESCRIPTION]  af/[ADD_FRIEND_NAME1, ADD_FRIEND_NAME2…] rf/[REMOVE_FRIEND_NAME1, REMOVE_FRIEND_NAME2…]`
+**Format**: `editevent INDEX [n/EVENT_NAME] [dt/DATE_TIME] [d/DESCRIPTION] [af/ADD_FRIEND_NAME]... rf/[REMOVE_FRIEND_NAME]...`
 
-* The `EVENT_NAME` and `DATE` fields are **compulsory** and uniquely identify the event to be edited.
-* The `NEW_EVENT_NAME`, `NEW_DATE_TIME` and `NEW_DESCRIPTION` arguments are **optional**. If provided, they directly overwrite the existing details.
-* The `ADD_FRIEND_NAME` and `REMOVE_FRIEND_NAME` arguments are also **optional** and add/remove friends tied to the event respectively.
+* Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed events list. The index **must be a positive integer** 1, 2, 3, ...
+* At least one of the optional fields must be provided.
+* The `EVENT_NAME`, `DATE_TIME` and `DESCRIPTION` arguments directly overwrite the existing details.
+* The `ADD_FRIEND_NAME` and `REMOVE_FRIEND_NAME` arguments add/remove friends tied to the event respectively, and must match the `NAME` of an existing friend in Amigos.
 
 **Examples**:
-* `editevent n/John’s Birthday dt/15-08-2021 ndt/16-08-2021 1600 af/Bob rf/Sarah, Edison`
+* `editevent 2 dt/16-08-2022 1600 af/Jacky Jones rf/Sarah Lim rf/Alex Yeo` will edit the date & time of the 2nd event to `16-08-2022 1600`, adds `Jacky Jones`, and removes `Sarah Lim` and `Alex Yeo` from the event.
 
 ### Deleting events: `deleteevent`
 Delete existing event(s).
 
-**Format**: `deleteevent n/[EVENT_NAME] dt/[DATE] -a`
+**Format**: `deleteevent INDEX`
 
-* When at least one of `EVENT_NAME` and `DATE` are provided:
-  * If only a single event matches the argument(s), it will be deleted.
-  * If multiple events match the argument(s), the `-a` flag is required for all to be deleted.
-* If only the `-a` flag is given, all events will be cleared.
+* Deletes the event at the specified `INDEX`.
+* The index refers to the index number shown in the displayed events list.
+* The index **must be a positive integer** 1, 2, 3, ...
 
 **Examples**:
-* `deleteevent n/John’s Birthday dt/15-08-2021`
-* `deleteevent n/Weekly Boardgames -a`
-* `deleteevent -a`
+* `deleteevent 2`
 
 ### Show all events : `showevents`
 
 Shows all events stored in Amigos. Switches GUI to the events tab.
 
-Format: `showevents`
+**Format**: `showevents`
 
-Examples:
-* `deletelog n/John Doe id/1`
-* `deletelog n/John Doe -a `
-* `deletelog -a`
 
 ## Miscellaneous
 ### Viewing help : `help`
 
 Shows a message explaning how to access the help page.
 
-Format: `help`
+**Format**: `help`
 
 ### Exiting the program : `exit`
 
 Exits the program.
 
-Format: `exit`
+**Format**: `exit`
 
 ### Saving the data
 
@@ -267,17 +263,17 @@ If your changes to the data file makes its format invalid, Amigos will discard a
 
 ## Command summary
 
-| Action                     | Format, Examples                                                                                                                                                                                                                                                                               |
-|----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Friend**             | `addfriend n/[NAME] p/[PHONE_NUMBER] e/[EMAIL]  a/[ADDRESS] d/[DESCRIPTION]` <br> e.g., `addfriend n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 d/Physics Major, Sarah’s friend. Met at Freshman Dinner`                                                         |
-| **Edit friend**            | `editfriend cn[CURRENT_NAME] nn/[NEW_NAME]  np/[NEW_PHONE_NUMBER] ne/[NEW_EMAIL] na/[NEW_ADDRESS] nd/[NEW_DESCRIPTION]`<br> e.g., `editfriend cn/John Doe na/John street, block 456, #01-01 ne/johndoe@example.com`                                                                            |
-| **Delete Friend**          | `deletefriend n/[NAME]` <br> `deletefriend -a` <br> e.g., `deletefriend n/John Doe`                                                                                                                                                                                                            |
-| **Show a specific friend** | `showfriend n/NAME -alllogs`                                                                                                                                                                                                                                                                   |
-| **Show all friends**       | `showfriends`                                                                                                                                                                                                                                                                                  |
-| **Add log**                | `addlog n/[NAME] t/[TITLE] d/[DESCRIPTION]`                                                                                                                                                                                                                                                    |
-| **Edit log**               | `editlog n/[NAME] id/[LOG_INDEX] nt/[NEW_TITLE] nd/[NEW_DESCRIPTION]`                                                                                                                                                                                                                          |
-| **Delete log**             | `deletelog n/[NAME] id/[LOG_INDEX] -a`                                                                                                                                                                                                                                                         |
-| **Add Event**              | `addevent n/[EVENT_NAME] dt/[DATE_TIME] dd/[DESCRIPTION] f/[FRIEND_NAME1, FRIEND_NAME2…]` <br> e.g.,`addevent n/John’s Birthday dt/15-08-2021 1700 dd/Remember to get a present! f/John, Abe, Bob`                                                                                             |
-| **Edit Event**             | `editevent n/[EVENT_NAME] dt/[DATE] nn/[NEW_EVENT_NAME] ndt/[NEW_DATE_TIME] ndd/[NEW_DESCRIPTION]  af/[ADD_FRIEND_NAME1, ADD_FRIEND_NAME2…] rf/[REMOVE_FRIEND_NAME1, REMOVE_FRIEND_NAME2…]` <br> e.g., `editevent n/John’s Birthday dt/15-08-2021 ndt/16-08-2021 1600 af/Bob rf/Sarah, Edison` |
-| **Delete Event**           | `deleteevent n/[EVENT_NAME] dt/[DATE] -a` <br> e.g., `deleteevent n/John’s Birthday dt/15-08-2021` <br> e.g., `deleteevent n/Weekly Boardgames -a`                                                                                                                                             |
-| **Show all events**        | `showevents`                                                                                                                                                                                                                                                                                   |
+| Action                     | Format, Examples                                                                                                                                                                                                                              |
+|----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Friend**             | `addfriend n/NAME [p/PHONE_NUMBER] [e/EMAIL]  [a/ADDRESS] [d/DESCRIPTION] [t/TAG]…` <br> e.g., `addfriend n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 d/Physics Major, Sarah’s friend. Met at Freshman Dinner` |
+| **Edit friend**            | `editfriend cn/CURRENT_NAME [nn/NEW_NAME]  [np/NEW_PHONE_NUMBER] [ne/NEW_EMAIL] [na/NEW_ADDRESS] [nd/NEW_DESCRIPTION] [t/TAG]…`<br> e.g., `editfriend cn/John Doe na/John street, block 456, #01-01 ne/johndoe@example.com`                   |
+| **Delete Friend**          | `deletefriend n/[NAME]` <br> `deletefriend -a` <br> e.g., `deletefriend n/John Doe`                                                                                                                                                           |
+| **Show a specific friend** | `showfriend n/NAME -alllogs`                                                                                                                                                                                                                  |
+| **Show all friends**       | `showfriends`                                                                                                                                                                                                                                 |
+| **Add log**                | `addlog n/[NAME] t/[TITLE] d/[DESCRIPTION]`                                                                                                                                                                                                   |
+| **Edit log**               | `editlog n/[NAME] id/[LOG_INDEX] nt/[NEW_TITLE] nd/[NEW_DESCRIPTION]`                                                                                                                                                                         |
+| **Delete log**             | `deletelog n/[NAME] id/[LOG_INDEX] -a`                                                                                                                                                                                                        |
+| **Add Event**              | `addevent n/EVENT_NAME dt/DATE_TIME [d/DESCRIPTION] [f/FRIEND_NAME]...` <br> e.g.,`addevent n/John’s Birthday dt/15-08-2021 1700 d/Remember to get a present! f/John Low f/Alex Yeo`                                                          |
+| **Edit Event**             | `editevent INDEX [n/EVENT_NAME] [dt/DATE_TIME] [d/DESCRIPTION] [af/ADD_FRIEND_NAME]... rf/[REMOVE_FRIEND_NAME]...` <br> e.g., `editevent 2 dt/16-08-2022 1600 af/Jacky Jones rf/Sarah Lim rf/Alex Yeo`                                        |
+| **Delete Event**           | `deleteevent INDEX` <br> e.g., `deleteevent 2`                                                                                                                                                                                                |
+| **Show all events**        | `showevents`                                                                                                                                                                                                                                  |

@@ -18,10 +18,11 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.common.Description;
 import seedu.address.model.event.DateTime;
 import seedu.address.model.event.Event;
-import seedu.address.model.person.Description;
-import seedu.address.model.person.Name;
+import seedu.address.model.event.EventName;
+import seedu.address.model.person.FriendName;
 
 /**
  * Edits the details of an existing event in the address book.
@@ -37,15 +38,15 @@ public class EditEventCommand extends Command {
             + "[" + PREFIX_NAME + "NEW_EVENT_NAME] "
             + "[" + PREFIX_DATETIME + "NEW_DATE_TIME] "
             + "[" + PREFIX_DESCRIPTION + "NEW_DESCRIPTION] "
-            + "[" + PREFIX_ADD_FRIENDNAME + "ADD_FRIEND_NAME1, ADD_FRIEND_NAME2…] "
-            + "[" + PREFIX_REMOVE_FRIENDNAME + "REMOVE_FRIEND_NAME1, REMOVE_FRIEND_NAME2…]...\n"
+            + "[" + PREFIX_ADD_FRIENDNAME + "ADD_FRIEND_NAME]… "
+            + "[" + PREFIX_REMOVE_FRIENDNAME + "REMOVE_FRIEND_NAME]…\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_NAME + "2nd Birthday "
             + PREFIX_DATETIME + "16-08-2021 1600";
 
     public static final String MESSAGE_EDIT_EVENT_SUCCESS = "Edited Event: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_EVENT = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book.";
 
     public final Index index;
     public final EditEventDescriptor editEventDescriptor;
@@ -68,7 +69,7 @@ public class EditEventCommand extends Command {
         List<Event> lastShownList = model.getEventsList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
 
         Event eventToEdit = lastShownList.get(index.getZeroBased());
@@ -89,13 +90,13 @@ public class EditEventCommand extends Command {
     private static Event createEditedEvent(Event eventToEdit, EditEventDescriptor editEventDescriptor) {
         assert eventToEdit != null;
 
-        Name updatedName = editEventDescriptor.getName().orElse(eventToEdit.getName());
+        EventName updatedName = editEventDescriptor.getName().orElse(eventToEdit.getName());
         DateTime updatedDateTime = editEventDescriptor.getDateTime().orElse(eventToEdit.getDateTime());
         Description updatedDescription = editEventDescriptor.getDescription().orElse(eventToEdit.getDescription());
-        Set<Name> addFriendNames = editEventDescriptor.getAddFriendNames().orElse(null);
-        Set<Name> removeFriendNames = editEventDescriptor.getRemoveFriendNames().orElse(null);
-        Set<Name> currentFriendName = eventToEdit.getFriendNames();
-        Set<Name> updatedFriendNames = new HashSet<>(currentFriendName);
+        Set<FriendName> addFriendNames = editEventDescriptor.getAddFriendNames().orElse(null);
+        Set<FriendName> removeFriendNames = editEventDescriptor.getRemoveFriendNames().orElse(null);
+        Set<FriendName> currentFriendName = eventToEdit.getFriendNames();
+        Set<FriendName> updatedFriendNames = new HashSet<>(currentFriendName);
         if (removeFriendNames != null) {
             updatedFriendNames.removeAll(removeFriendNames);
         }
@@ -129,11 +130,11 @@ public class EditEventCommand extends Command {
      * corresponding field value of the event.
      */
     public static class EditEventDescriptor {
-        private Name name;
+        private EventName name;
         private DateTime dateTime;
         private Description description;
-        private Set<Name> addFriendNames;
-        private Set<Name> removeFriendNames;
+        private Set<FriendName> addFriendNames;
+        private Set<FriendName> removeFriendNames;
 
 
         public EditEventDescriptor() {}
@@ -157,11 +158,11 @@ public class EditEventCommand extends Command {
             return CollectionUtil.isAnyNonNull(name, dateTime, description, addFriendNames, removeFriendNames);
         }
 
-        public void setName(Name name) {
+        public void setName(EventName name) {
             this.name = name;
         }
 
-        public Optional<Name> getName() {
+        public Optional<EventName> getName() {
             return Optional.ofNullable(name);
         }
 
@@ -185,7 +186,7 @@ public class EditEventCommand extends Command {
          * Sets {@code addFriendsNames} to this object's {@code addFriendsNames}.
          * A defensive copy of {@code friendsNames} is used internally.
          */
-        public void setAddFriendNames(Set<Name> addFriendsNames) {
+        public void setAddFriendNames(Set<FriendName> addFriendsNames) {
             this.addFriendNames = (addFriendsNames != null) ? new HashSet<>(addFriendsNames) : null;
         }
 
@@ -194,7 +195,7 @@ public class EditEventCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code names} is null.
          */
-        public Optional<Set<Name>> getAddFriendNames() {
+        public Optional<Set<FriendName>> getAddFriendNames() {
             return (addFriendNames != null) ? Optional.of(Collections.unmodifiableSet(addFriendNames)) : Optional.empty();
         }
 
@@ -202,7 +203,7 @@ public class EditEventCommand extends Command {
          * Sets {@code removeFriendsNames} to this object's {@code removeFriendsNames}.
          * A defensive copy of {@code friendsNames} is used internally.
          */
-        public void setRemoveFriendNames(Set<Name> removeFriendNames) {
+        public void setRemoveFriendNames(Set<FriendName> removeFriendNames) {
             this.removeFriendNames = (removeFriendNames != null) ? new HashSet<>(removeFriendNames) : null;
         }
 
@@ -211,7 +212,7 @@ public class EditEventCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code names} is null.
          */
-        public Optional<Set<Name>> getRemoveFriendNames() {
+        public Optional<Set<FriendName>> getRemoveFriendNames() {
             return (removeFriendNames != null) ? Optional.of(Collections.unmodifiableSet(removeFriendNames)) : Optional.empty();
         }
 

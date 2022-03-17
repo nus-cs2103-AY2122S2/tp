@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.person.Log;
 import seedu.address.model.person.Person;
 
 /**
@@ -24,7 +25,7 @@ public class PersonCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Person person;
+    private final Person person;
 
     @FXML
     private HBox cardPane;
@@ -58,8 +59,11 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         logs.setHgap(4);
-        person.getLogs().stream()
-                .forEach(log -> logs.getChildren().add(new Label(log.getTitle())));
+        int index = 1;
+        for (Log log: person.getLogs()) {
+            logs.getChildren().add(new Label(index + ". " + log.getTitle()));
+            index++;
+        }
     }
 
     @Override

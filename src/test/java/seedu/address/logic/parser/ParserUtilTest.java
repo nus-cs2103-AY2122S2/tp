@@ -17,7 +17,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.DateTime;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.FriendName;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -62,25 +62,25 @@ public class ParserUtilTest {
 
     @Test
     public void parseName_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseName((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseFriendName((String) null));
     }
 
     @Test
     public void parseName_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseName(INVALID_NAME));
+        assertThrows(ParseException.class, () -> ParserUtil.parseFriendName(INVALID_NAME));
     }
 
     @Test
     public void parseName_validValueWithoutWhitespace_returnsName() throws Exception {
-        Name expectedName = new Name(VALID_NAME_1);
-        assertEquals(expectedName, ParserUtil.parseName(VALID_NAME_1));
+        FriendName expectedName = new FriendName(VALID_NAME_1);
+        assertEquals(expectedName, ParserUtil.parseFriendName(VALID_NAME_1));
     }
 
     @Test
     public void parseName_validValueWithWhitespace_returnsTrimmedName() throws Exception {
         String nameWithWhitespace = WHITESPACE + VALID_NAME_1 + WHITESPACE;
-        Name expectedName = new Name(VALID_NAME_1);
-        assertEquals(expectedName, ParserUtil.parseName(nameWithWhitespace));
+        FriendName expectedName = new FriendName(VALID_NAME_1);
+        assertEquals(expectedName, ParserUtil.parseFriendName(nameWithWhitespace));
     }
 
     @Test
@@ -239,9 +239,10 @@ public class ParserUtilTest {
 
     @Test
     public void parseFriendNames_collectionWithValidFriendNames_returnsTagSet() throws Exception {
-        Set<Name> actualNameSet = ParserUtil.parseFriendNames(Arrays.asList(VALID_NAME_1, VALID_NAME_2));
-        Set<Name> expectedNameSet = new HashSet<Name>(Arrays.asList(new Name(VALID_NAME_1), new Name(VALID_NAME_2)));
+        Set<FriendName> actualFriendNameSet = ParserUtil.parseFriendNames(Arrays.asList(VALID_NAME_1, VALID_NAME_2));
+        Set<FriendName> expectedFriendNameSet =
+                new HashSet<FriendName>(Arrays.asList(new FriendName(VALID_NAME_1), new FriendName(VALID_NAME_2)));
 
-        assertEquals(expectedNameSet, actualNameSet);
+        assertEquals(expectedFriendNameSet, actualFriendNameSet);
     }
 }
