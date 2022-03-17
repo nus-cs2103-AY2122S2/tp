@@ -9,7 +9,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMOVE_FRIENDNAME;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
@@ -75,8 +74,7 @@ public class EditEventCommandParser implements Parser<EditEventCommand> {
         if (names.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> nameSet = names.size() == 1 && names.contains("") ? Collections.emptySet() : names;
-        return Optional.of(ParserUtil.parseFriendNames(nameSet));
+        return Optional.of(ParserUtil.parseFriendNames(names));
     }
 
 }
