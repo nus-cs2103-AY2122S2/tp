@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.buyer.Buyer;
 import seedu.address.model.client.Client;
+import seedu.address.model.seller.Seller;
 
 /**
  * The API of the Model component.
@@ -105,5 +106,22 @@ public interface Model {
      * @param buyer The buyer to be added.
      */
     void addBuyer(Buyer buyer);
+
+    //========== For addseller============//
+
+    /**
+     * Checks if the same buyer already exists in AgentSee.
+     *
+     * @param seller The buyer to be checked.
+     * @return Whether buyer exists in AgentSee.
+     */
+    boolean hasSeller(Seller seller);
+
+    /**
+     * Adds a new buyer to AgentSee.
+     *
+     * @param seller The buyer to be added.
+     */
+    void addSeller(Seller seller);
 
 }

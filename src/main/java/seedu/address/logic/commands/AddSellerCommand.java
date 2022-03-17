@@ -18,9 +18,9 @@ import seedu.address.model.seller.Seller;
  */
 public class AddSellerCommand extends Command {
 
-    public static final String COMMAND_WORD = "addSeller";
+    public static final String COMMAND_WORD = "addseller";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a client to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a seller to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
@@ -40,8 +40,8 @@ public class AddSellerCommand extends Command {
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
-    public static final String MESSAGE_SUCCESS = "New client added: %1$s";
-    public static final String MESSAGE_DUPLICATE_CLIENT = "This client already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New seller added: %1$s";
+    public static final String MESSAGE_DUPLICATE_CLIENT = "This seller already exists in the address book";
 
     private final Seller toAdd;
 
@@ -57,11 +57,11 @@ public class AddSellerCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasClient(toAdd)) {
+        if (model.hasSeller(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_CLIENT);
         }
 
-        model.addClient(toAdd);
+        model.addSeller(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

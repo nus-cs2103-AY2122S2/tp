@@ -12,7 +12,7 @@ import java.util.Locale;
 public class Appointment {
     public static final String MESSAGE_CONSTRAINTS =
             "Appointment should be in the form of"
-                    + " 'yyyy-MM-dd-HH-hh'. It can be empty";
+                    + " 'yyyy-MM-dd-HH-hh'.\nIt can't be empty when using appointment command";
 
     public static final String EMPTY_APPOINTMENT = "";
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm");
