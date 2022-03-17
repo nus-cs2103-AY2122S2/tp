@@ -6,7 +6,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+import seedu.address.logic.commands.AddTransactionCommand;
 import seedu.address.logic.parser.Prefix;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Represents a Due date of the transaction.
@@ -25,11 +27,15 @@ public class DueDate extends TransactionField {
      *
      * @param dueDate A valid due date.
      */
-    public DueDate(String dueDate) {
+    public DueDate(String dueDate) throws ParseException {
         super(PREFIX);
         requireNonNull(dueDate);
         dueDate = dueDate.trim();
-        checkArgument(DueDate.isValid(dueDate), MESSAGE_CONSTRAINTS);
+        try {
+            checkArgument(DueDate.isValid(dueDate), MESSAGE_CONSTRAINTS);
+        } catch (Exception e) {
+            throw new ParseException(MESSAGE_CONSTRAINTS);
+        }
         value = LocalDate.parse(dueDate);
     }
 
