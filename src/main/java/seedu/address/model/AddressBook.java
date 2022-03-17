@@ -35,7 +35,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     public AddressBook() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an AddressBook using the data in {@code toBeCopied}.
+     * Assumes that the given data is valid.
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
@@ -48,7 +49,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Replaces the contents of the person list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
      */
-    public void setPersons(List<Person> persons) {
+    private void setPersons(List<Person> persons) {
         this.persons.setPersons(persons);
     }
 
@@ -56,12 +57,13 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Replaces the contents of the event list with {@code events}.
      * {@code events} must not contain duplicate events.
      */
-    public void setEvents(List<Event> events) {
+    private void setEvents(List<Event> events) {
         this.events.setEvents(events);
     }
 
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Assumptions: Given data is valid.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
@@ -97,6 +99,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedPerson);
 
         persons.setPerson(target, editedPerson);
+
+        if (!(target.hasSameName(editedPerson))) {
+            events.changeFriendName(target.getName(), editedPerson.getName());
+        }
     }
 
     /**
@@ -105,6 +111,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+        events.removeFriendName(key.getName());
     }
 
     /**
