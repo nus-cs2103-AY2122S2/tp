@@ -44,16 +44,16 @@ public class TransactionCard extends UiPart<Region> {
         this.transaction = transaction;
 
         // Required fields.
-        amount.setText("Amount: " + transaction.getAmount().getValue());
-        transactionDate.setText("Transaction Date: " + transaction.getTransactionDate().getValue());
+        amount.setText(transaction.getAmount().toString());
+        transactionDate.setText(transaction.getTransactionDate().toString());
 
         // Optional fields.
         dueDate.setText(transaction.getDueDate()
-                .map(date -> "Due Date: " + date.getValue())
+                .map(DueDate::getValue)
                 .orElse(DueDate.EMPTY_DUE_DATE));
 
         note.setText(transaction.getNote()
-                .map(note -> "Notes: " + note.getValue())
+                .map(Note::getValue)
                 .orElse(Note.EMPTY_DUE_DATE));
     }
 
