@@ -150,7 +150,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateSortedPersonList(Comparator<Person> sortKey) {
+        public void updateSortedPersonList(Comparator<Candidate> sortKey) {
             throw new AssertionError("This method should not be called.");
         }
     }

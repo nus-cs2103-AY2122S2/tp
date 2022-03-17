@@ -81,7 +81,7 @@ public class LogicManagerTest {
 
         // Execute add command
         String addCommand = AddCommand.COMMAND_WORD + STUDENT_ID_DESC_AMY + NAME_DESC_AMY
-                + PHONE_DESC_AMY + COURSE_DESC_AMY;
+                + PHONE_DESC_AMY + COURSE_DESC_AMY + AVAILABILITY_DESC_AMY;
         Candidate expectedCandidate = new CandidateBuilder(AMY).withTags()
                 .withApplicationStatus("Pending").withInterviewStatus("Pending").build();
         ModelManager expectedModel = new ModelManager();

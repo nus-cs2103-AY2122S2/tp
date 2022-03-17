@@ -100,7 +100,7 @@ public class ModelManagerTest {
         AddressBook addressBook = new AddressBookBuilder().withPerson(BENSON).withPerson(ALICE).build();
         UserPrefs userPrefs = new UserPrefs();
         modelManager = new ModelManager(addressBook, userPrefs);
-        Comparator<Person> sortComparator = Comparator.comparing(l -> l.getName().toString().toLowerCase());
+        Comparator<Candidate> sortComparator = Comparator.comparing(l -> l.getName().toString().toLowerCase());
 
         // returns true before sorting
         assertTrue(modelManager.getAddressBook().getPersonList().get(0).getName().fullName

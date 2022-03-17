@@ -11,7 +11,7 @@ import java.util.Comparator;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.SortCommand;
-import seedu.address.model.person.Person;
+import seedu.address.model.candidate.Candidate;
 
 public class SortCommandParserTest {
 
@@ -50,11 +50,11 @@ public class SortCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        Comparator<Person> sortComparatorName = Comparator.comparing(l -> l.getName().toString().toLowerCase());
-        Comparator<Person> sortComparatorCourse = Comparator.comparing(l -> l.getName().toString().toLowerCase());
-        Comparator<Person> sortComparatorStudentId = Comparator.comparing(l -> l.getName().toString().toLowerCase());
-        Comparator<Person> sortComparatorPhone = Comparator.comparing(l -> l.getName().toString().toLowerCase());
-        Comparator<Person> sortComparatorEmail = Comparator.comparing(l -> l.getName().toString().toLowerCase());
+        Comparator<Candidate> sortComparatorName = Comparator.comparing(l -> l.getName().toString().toLowerCase());
+        Comparator<Candidate> sortComparatorCourse = Comparator.comparing(l -> l.getName().toString().toLowerCase());
+        Comparator<Candidate> sortComparatorStudentId = Comparator.comparing(l -> l.getName().toString().toLowerCase());
+        Comparator<Candidate> sortComparatorPhone = Comparator.comparing(l -> l.getName().toString().toLowerCase());
+        Comparator<Candidate> sortComparatorEmail = Comparator.comparing(l -> l.getName().toString().toLowerCase());
 
         SortCommand expectedCommandName = new SortCommand(sortComparatorName, "name");
         SortCommand expectedCommandCourse = new SortCommand(sortComparatorCourse, "course");
@@ -74,7 +74,7 @@ public class SortCommandParserTest {
     public void parse_multipleRepeatedFields_acceptsLast() {
         String userInput = SORT_EMPTY + "name" + SORT_EMPTY + "course" + SORT_EMPTY + "studentid";
 
-        Comparator<Person> sortComparator = Comparator.comparing(l -> l.getStudentId().toString().toLowerCase());
+        Comparator<Candidate> sortComparator = Comparator.comparing(l -> l.getStudentId().toString().toLowerCase());
         SortCommand expectedCommand = new SortCommand(sortComparator, "studentid");
 
         assertParseSuccess(parser, userInput, expectedCommand);
