@@ -74,7 +74,7 @@ public class SortCommandParserTest {
     public void parse_multipleRepeatedFields_acceptsLast() {
         String userInput = SORT_EMPTY + "name" + SORT_EMPTY + "course" + SORT_EMPTY + "studentid";
 
-        Comparator<Person> sortComparator = Comparator.comparing(l -> l.getStudentID().toString().toLowerCase());
+        Comparator<Person> sortComparator = Comparator.comparing(l -> l.getStudentId().toString().toLowerCase());
         SortCommand expectedCommand = new SortCommand(sortComparator, "studentid");
 
         assertParseSuccess(parser, userInput, expectedCommand);
