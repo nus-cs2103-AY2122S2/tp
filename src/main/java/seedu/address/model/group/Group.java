@@ -21,7 +21,7 @@ public class Group {
 
     // Data fields
     private final Set<Person> persons = new HashSet<>();
-    private final Set<Task> tasks = new HashSet<>();
+    private final UniqueTaskList tasks = new UniqueTaskList();
 
     /**
      * Constructs a {@code Group}.
@@ -53,7 +53,7 @@ public class Group {
     }
 
     /**
-     * Adds a task into this specific group
+     * Adds a task into this specific group.
      *
      * @param task Tasks to be added.
      */
@@ -74,7 +74,7 @@ public class Group {
      * Retrieves the UniqueTaskList from this specific group
      *
      */
-    public Set<Task> getTaskList() {
+    public UniqueTaskList getTaskList() {
         return tasks;
     }
 

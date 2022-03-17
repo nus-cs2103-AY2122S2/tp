@@ -1,16 +1,12 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
@@ -43,9 +39,14 @@ public class JsonAdaptedGroup {
      */
     public JsonAdaptedGroup(Group source) {
         groupName = String.valueOf(source.getGroupName());
-        tasks.addAll(source.getTaskList().stream()
-                .map(JsonAdaptedTask::new)
+
+        List<String> taskNames = new ArrayList<>();
+
+        //map all the tasks into a stream of strings
+        taskNames.addAll(source.getTaskList().getInternalList().stream()
+                .map(task -> String.valueOf(task.taskName))
                 .collect(Collectors.toList()));
+        tasks.addAll(taskNames.stream().map(JsonAdaptedTask::new).collect(Collectors.toList()));
     }
 
     /**
