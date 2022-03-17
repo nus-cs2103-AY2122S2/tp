@@ -9,7 +9,6 @@ import seedu.address.model.buyer.Buyer;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.UniqueClientList;
 import seedu.address.model.seller.Seller;
-import seedu.address.model.seller.UniqueSellerList;
 
 /**
  * Wraps all data at the address-book level
@@ -18,7 +17,6 @@ import seedu.address.model.seller.UniqueSellerList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueClientList clients;
-    private final UniqueSellerList sellers;
 
     // private final UniqueBuyerList buyers;
 
@@ -31,7 +29,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         clients = new UniqueClientList();
-        sellers = new UniqueSellerList();
     }
 
     public AddressBook() {}
