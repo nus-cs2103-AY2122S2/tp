@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static java.util.Objects.requireNonNull;
+
 import javafx.scene.control.Label;
 import seedu.address.model.person.Cca;
 import seedu.address.model.person.Education;
@@ -12,12 +14,18 @@ public class TagComponent {
 
     private final Tag tag;
 
+    /**
+     * Constructs a tag component fron a Tag object
+     * @param tag
+     */
     public TagComponent(Tag tag) {
+        requireNonNull(tag);
         this.tag = tag;
     }
 
     public Label getTagLabel() {
         Label l = new Label(tag.tagName);
+
         if (tag instanceof Internship) {
             l.setStyle("-fx-padding:2;"
                     + "-fx-border-width: 0;"

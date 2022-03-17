@@ -30,6 +30,7 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX_MULTIPLE = "All indexes must be unique"
                 + " and a non-zero unsigned integer.";
     public static final String INVALID_TAGTYPE = "The tag type is invalid!";
+    public static final String INVLAID_FIELD_TYPE = "The single field type is invalid!";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -92,6 +93,24 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a  {@code List<String> } into a {@code List<Name>}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if any single list item has more than one word
+     */
+    public static List<Name> parseNames(List<String> list) throws ParseException {
+        requireNonNull(list);
+        final Set<Name> set = new HashSet<>();
+        for (String value : list) {
+            if (value.split(" ").length > 1) {
+                throw new ParseException(FindCommandParser.MULTIPLE_WORDS);
+            }
+            set.add(parseName(value));
+        }
+        return new ArrayList<>(set);
+    }
+
+    /**
      * Parses a {@code String phone} into a {@code Phone}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -104,6 +123,24 @@ public class ParserUtil {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
         return new Phone(trimmedPhone);
+    }
+
+    /**
+     * Parses a {@code List<String> } into a {@code List<Phone>}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if any single list item has more than one word.
+     */
+    public static List<Phone> parsePhones(List<String> list) throws ParseException {
+        requireNonNull(list);
+        final Set<Phone> set = new HashSet<>();
+        for (String value : list) {
+            if (value.split(" ").length > 1) {
+                throw new ParseException(FindCommandParser.MULTIPLE_WORDS);
+            }
+            set.add(parsePhone(value));
+        }
+        return new ArrayList<>(set);
     }
 
     /**
@@ -122,6 +159,24 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code List<String> } into a {@code List<Address>}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if any single list item has more than one word.
+     */
+    public static List<Address> parseAddresses(List<String> list) throws ParseException {
+        requireNonNull(list);
+        final Set<Address> set = new HashSet<>();
+        for (String value : list) {
+            if (value.split(" ").length > 1) {
+                throw new ParseException(FindCommandParser.MULTIPLE_WORDS);
+            }
+            set.add(parseAddress(value));
+        }
+        return new ArrayList<>(set);
+    }
+
+    /**
      * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -135,6 +190,25 @@ public class ParserUtil {
         }
         return new Email(trimmedEmail);
     }
+
+    /**
+     * Parses a {@code List<String> } into a {@code List<Email>}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if any single list item has more than one word.
+     */
+    public static List<Email> parseEmails(List<String> list) throws ParseException {
+        requireNonNull(list);
+        final Set<Email> set = new HashSet<>();
+        for (String value : list) {
+            if (value.split(" ").length > 1) {
+                throw new ParseException(FindCommandParser.MULTIPLE_WORDS);
+            }
+            set.add(parseEmail(value));
+        }
+        return new ArrayList<>(set);
+    }
+
 
     /**
     * Parses a {@code String tag} into a {@code Tag}.
@@ -151,20 +225,32 @@ public class ParserUtil {
             if (!Education.isValidTagName(trimmedTag)) {
                 throw new ParseException(Education.MESSAGE_CONSTRAINTS);
             }
+            if (trimmedTag.split(" ").length > 1) {
+                throw new ParseException(FindCommandParser.MULTIPLE_WORDS);
+            }
             return new Education(trimmedTag);
         case Tag.INTERNSHIP:
             if (!Internship.isValidTagName(trimmedTag)) {
                 throw new ParseException(Internship.MESSAGE_CONSTRAINTS);
+            }
+            if (trimmedTag.split(" ").length > 1) {
+                throw new ParseException(FindCommandParser.MULTIPLE_WORDS);
             }
             return new Internship(trimmedTag);
         case Tag.MODULE:
             if (!Module.isValidTagName(trimmedTag)) {
                 throw new ParseException(Module.MESSAGE_CONSTRAINTS);
             }
+            if (trimmedTag.split(" ").length > 1) {
+                throw new ParseException(FindCommandParser.MULTIPLE_WORDS);
+            }
             return new Module(trimmedTag);
         case Tag.CCA:
             if (!Cca.isValidTagName(trimmedTag)) {
                 throw new ParseException(Cca.MESSAGE_CONSTRAINTS);
+            }
+            if (trimmedTag.split(" ").length > 1) {
+                throw new ParseException(FindCommandParser.MULTIPLE_WORDS);
             }
             return new Cca(trimmedTag);
         default:
@@ -173,7 +259,7 @@ public class ParserUtil {
     }
 
     /**
-    * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+    * Parses {@code Collection<String> tags} into a {@code List<Tag>}.
     */
     public static List<Tag> parseTags(Collection<String> tags, String type) throws ParseException {
         requireNonNull(tags);
@@ -186,7 +272,7 @@ public class ParserUtil {
 
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
-     * Returns an empty
+     * Returns an empty ArrayList if the tags list is [""], this is the case that the tag list is to be cleared.
      */
     public static List<Tag> parseTagsForEdit(Collection<String> tags, String type) throws ParseException {
         requireNonNull(tags);
