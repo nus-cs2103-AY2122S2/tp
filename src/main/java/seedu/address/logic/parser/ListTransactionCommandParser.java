@@ -23,7 +23,8 @@ public class ListTransactionCommandParser implements Parser<ListTransactionComma
         try {
             index = IndexParser.parse(userInput.trim());
         } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListTransactionCommand.MESSAGE_USAGE), ive);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ListTransactionCommand.MESSAGE_USAGE), ive);
         }
 
         return new ListTransactionCommand(index);

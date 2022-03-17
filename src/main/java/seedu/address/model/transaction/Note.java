@@ -1,8 +1,10 @@
 package seedu.address.model.transaction;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.logic.parser.Prefix;
 
-import static java.util.Objects.requireNonNull;
+
 
 /**
  * Represents the Note of a particular transaction.

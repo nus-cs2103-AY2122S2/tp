@@ -13,13 +13,13 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.transaction.Amount;
 import seedu.address.model.transaction.DueDate;
+import seedu.address.model.transaction.Note;
 import seedu.address.model.transaction.Transaction;
 import seedu.address.model.transaction.TransactionDate;
-import seedu.address.model.transaction.Note;
+
 
 public class AddTransactionCommand extends Command {
     public static final String COMMAND_WORD = "addTransaction";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Add a transaction to the transaction list of the "
             + "identified person by the index number used in the last person "
