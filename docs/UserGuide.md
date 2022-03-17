@@ -258,8 +258,11 @@ Views the summarised information of a team, lineup or player.
 **To view a team:**<br>
 
 Format: `view T/[TEAM]`
-* Displays the aggregated data of the team of the specified `TEAM`. The summary contains information such as all players in the team, number of players in each position.
-* If no `TEAM` is provided, the summary of all existing teams will be provided.
+* The summarised information of a team only contains the total number of players in the team,  the total number of players in each position.
+* Displays the summarised information of  the specified `TEAM`.
+  - All the players in the specified `TEAM` will be displayed.
+* If no `TEAM` is provided, the summarised information of each of all of the existing teams will be provided.
+  - All the `TEAM` will be displayed.
 * The specified `TEAM` must be **valid** to be viewed.
 
 Examples:
@@ -269,19 +272,24 @@ Examples:
 **To view a lineup:**<br>
 
 Format: `view T/TEAM L/[LINEUP]`
-* Displays the summary of the specified `LINEUP` in the specified `TEAM`.
-* If no `LINEUP` is provided, the summary of all lineups in the specified `TEAM` will be displayed.
-* The specified `LINEUP` must be valid to be viewed (i.e. it exists in the specified `TEAM`).
+* The summarised information of a lineup only include the name, the position of the player and the number of slots (out of 5) filled.
+* Displays the summarised information of the specified `LINEUP` in the specified `TEAM`.
+  - All the players in the specified `LINEUP` will be displayed.
+* If no `LINEUP` is provided, the summarised information of all lineups in the specified `TEAM` will be displayed.
+  - All the `LINEUP` in the specified team will be displayed. 
+* The specified `LINEUP` and specified `TEAM` must be **valid** to be viewed.
 
 Examples:
-* `view T/Lakaka L/Starting Five` Displays the lineup summary of `Start Five` lineup in `Lakaka`.
-* `view T/Lakaka L/` Displays the lineup summary of all lineups in `Lakaka`.
+* `view T/Lakaka L/Starting Five` Displays the summarised information of lineup `Start Five` in team `Lakaka`.
+* `view T/Lakaka L/` Displays the summarised information of all lineups in team `Lakaka`.
 
 **To view a player:**<br>
 
 Format: `view P/[PLAYER]`
-* Displays the information of the specified `PLAYER`.
-* If no `PLAYER` is provided, the information of all existing players in the system will be displayed.
+* The summarised information of a player includes all its attributes.
+* Displays the summarised information of the specified `PLAYER`.
+  - Only the specified player will be displayed.
+* If no `PLAYER` is provided, the summarised information of all existing players in the system will be displayed.
 
 Examples:
 * `view P/Kelvin Darent` Displays the information of `Kelvin Darent`.

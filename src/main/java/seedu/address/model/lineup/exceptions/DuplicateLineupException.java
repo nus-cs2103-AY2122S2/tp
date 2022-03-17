@@ -1,4 +1,4 @@
-package seedu.address.model.lineup.lineupExceptions;
+package seedu.address.model.lineup.exceptions;
 
 public class DuplicateLineupException extends RuntimeException {
     DuplicateLineupException() {
