@@ -17,15 +17,17 @@ public class Show {
 
     //Data field
     private final Set<Tag> tags = new HashSet<>();
+    private final Rating rating;
 
     /**
      * Every field must be present and not null.
      */
-    public Show(Name name, Status status, Set<Tag> tags) {
+    public Show(Name name, Status status, Set<Tag> tags, Rating rating) {
         requireAllNonNull(name, status, tags);
         this.name = name;
         this.status = status;
         this.tags.addAll(tags);
+        this.rating = rating;
     }
 
     public Name getName() {
@@ -34,6 +36,10 @@ public class Show {
 
     public Status getStatus() {
         return status;
+    }
+
+    public Rating getRating() {
+        return rating;
     }
 
     /**
@@ -74,7 +80,8 @@ public class Show {
         Show otherShow = (Show) other;
         return otherShow.getName().equals(getName())
                 && otherShow.getTags().equals(getTags())
-                    && otherShow.getStatus().equals(getStatus());
+                    && otherShow.getStatus().equals(getStatus())
+                        && otherShow.getRating().equals(getRating());
     }
 
     @Override
@@ -88,6 +95,7 @@ public class Show {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName().toString());
         builder.append(getStatus().toString());
+        builder.append(getRating().toString());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
