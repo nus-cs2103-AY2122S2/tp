@@ -39,7 +39,7 @@ public class Tag {
         return other == this // short circuit if same object
                 || (other instanceof Tag // instanceof handles nulls
                 && tagName.equals(((Tag) other).tagName))
-                && tagPriority.equals(((Tag) other).tagPriority); // state check
+                && tagPriority == (((Tag) other).tagPriority); // state check
     }
 
     @Override
