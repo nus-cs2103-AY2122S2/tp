@@ -15,11 +15,12 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.common.Description;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.FriendName;
 import seedu.address.model.person.Log;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.LogName;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -67,7 +68,7 @@ public class AddLogCommand extends Command {
      * Creates an AddLogCommand to add the specified {@code Log} to the specified
      * {@code Person}.
      */
-    public AddLogCommand(Name name, AddLogDescriptor addLogDescriptor) {
+    public AddLogCommand(FriendName name, AddLogDescriptor addLogDescriptor) {
         requireAllNonNull(name, addLogDescriptor);
         this.personWithNameToAddLog = new Person(name);
         this.index = null;
@@ -127,7 +128,7 @@ public class AddLogCommand extends Command {
     private static Person createAddedLogPerson(Person personToEdit, AddLogDescriptor addLogDescriptor)
             throws CommandException {
         requireAllNonNull(personToEdit, addLogDescriptor);
-        Name name = personToEdit.getName();
+        FriendName name = personToEdit.getName();
         Phone phone = personToEdit.getPhone();
         Email email = personToEdit.getEmail();
         Address address = personToEdit.getAddress();
@@ -215,7 +216,7 @@ public class AddLogCommand extends Command {
 
             // sanity checks
             assert (this.newTitle != null);
-            assert (Log.isValidTitle(this.newTitle));
+            assert (LogName.isValidLogName(this.newTitle));
 
             Log toAdd = new Log(this.newTitle, this.newDescription); // create log to be added
             if (personToEdit.containsLog(toAdd)) {

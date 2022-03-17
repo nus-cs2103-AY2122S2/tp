@@ -16,7 +16,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditEventCommand;
 import seedu.address.logic.commands.EditEventCommand.EditEventDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.FriendName;
 
 /**
  * Parses input arguments and creates a new EditEventCommand object
@@ -45,7 +45,7 @@ public class EditEventCommandParser implements Parser<EditEventCommand> {
 
         EditEventDescriptor editEventDescriptor = new EditEventDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editEventDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+            editEventDescriptor.setName(ParserUtil.parseEventName(argMultimap.getValue(PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_DATETIME).isPresent()) {
             editEventDescriptor.setDateTime(ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get()));
@@ -68,7 +68,7 @@ public class EditEventCommandParser implements Parser<EditEventCommand> {
      * If {@code names} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Name>} containing zero names.
      */
-    private Optional<Set<Name>> parseNamesForEdit(Collection<String> names) throws ParseException {
+    private Optional<Set<FriendName>> parseNamesForEdit(Collection<String> names) throws ParseException {
         assert names != null;
 
         if (names.isEmpty()) {

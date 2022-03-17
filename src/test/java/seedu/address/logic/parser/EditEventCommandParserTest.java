@@ -37,7 +37,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditEventCommand;
 import seedu.address.logic.commands.EditEventCommand.EditEventDescriptor;
 import seedu.address.model.event.DateTime;
-import seedu.address.model.person.Name;
+import seedu.address.model.event.EventName;
+import seedu.address.model.person.FriendName;
 import seedu.address.testutil.EditEventDescriptorBuilder;
 
 public class EditEventCommandParserTest {
@@ -79,11 +80,11 @@ public class EditEventCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        assertParseFailure(parser, "1" + INVALID_EVENT_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
+        assertParseFailure(parser, "1" + INVALID_EVENT_NAME_DESC, EventName.MESSAGE_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "1" + INVALID_EVENT_DATETIME_DESC, DateTime.MESSAGE_CONSTRAINTS); // invalid Datetime
         //assertParseFailure(parser, "1" + INVALID_EVENT_DESCRIPTION_DESC, Description.MESSAGE_CONSTRAINTS); // invalid Description
-        assertParseFailure(parser, "1" + INVALID_EVENT_ADDFRIEND_DESC, Name.MESSAGE_CONSTRAINTS); // invalid Name
-        assertParseFailure(parser, "1" + INVALID_EVENT_REMOVE_DESC, Name.MESSAGE_CONSTRAINTS); // invalid Name
+        assertParseFailure(parser, "1" + INVALID_EVENT_ADDFRIEND_DESC, FriendName.MESSAGE_CONSTRAINTS); // invalid Name
+        assertParseFailure(parser, "1" + INVALID_EVENT_REMOVE_DESC, FriendName.MESSAGE_CONSTRAINTS); // invalid Name
 
         // invalid Datetime followed by valid description
         assertParseFailure(parser, "1" + INVALID_EVENT_DATETIME_DESC + VALID_EVENT_DESCRIPTION, DateTime.MESSAGE_CONSTRAINTS);
@@ -93,13 +94,13 @@ public class EditEventCommandParserTest {
         assertParseFailure(parser, "1" + EVENT_DESCRIPTION_DESC_A + INVALID_EVENT_DATETIME_DESC, DateTime.MESSAGE_CONSTRAINTS);
 
         // parsing it together with a valid Addfriend list results in error
-        assertParseFailure(parser, "1" + EVENT_ADDFRIEND_DESC_A + EVENT_ADDFRIEND_DESC_B + ADDFRIENDS_EMPTY, Name.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + EVENT_REMOVEFRIEND_DESC_A + REMOVEFRIENDS_EMPTY + EVENT_REMOVEFRIEND_DESC_B, Name.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + ADDFRIENDS_EMPTY + EVENT_ADDFRIEND_DESC_A + EVENT_REMOVEFRIEND_DESC_A, Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + EVENT_ADDFRIEND_DESC_A + EVENT_ADDFRIEND_DESC_B + ADDFRIENDS_EMPTY, FriendName.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + EVENT_REMOVEFRIEND_DESC_A + REMOVEFRIENDS_EMPTY + EVENT_REMOVEFRIEND_DESC_B, FriendName.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + ADDFRIENDS_EMPTY + EVENT_ADDFRIEND_DESC_A + EVENT_REMOVEFRIEND_DESC_A, FriendName.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_EVENT_NAME_DESC + INVALID_EVENT_DATETIME_DESC + VALID_EVENT_DESCRIPTION,
-                Name.MESSAGE_CONSTRAINTS);
+                EventName.MESSAGE_CONSTRAINTS);
     }
 
     @Test

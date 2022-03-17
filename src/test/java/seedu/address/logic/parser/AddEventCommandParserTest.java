@@ -11,8 +11,8 @@ import static seedu.address.logic.commands.CommandTestUtil.EVENT_NAME_DESC_A;
 import static seedu.address.logic.commands.CommandTestUtil.EVENT_NAME_DESC_B;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EVENT_DATETIME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EVENT_DESCRIPTION_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_EVENT_FRIENDNAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EVENT_NAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EVENT_DATETIME;
@@ -26,10 +26,11 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddEventCommand;
+import seedu.address.model.common.Description;
 import seedu.address.model.event.DateTime;
 import seedu.address.model.event.Event;
-import seedu.address.model.person.Description;
-import seedu.address.model.person.Name;
+import seedu.address.model.event.EventName;
+import seedu.address.model.person.FriendName;
 import seedu.address.testutil.EventBuilder;
 
 public class AddEventCommandParserTest {
@@ -98,7 +99,7 @@ public class AddEventCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, INVALID_EVENT_NAME_DESC + EVENT_DATETIME_DESC_A
-                + EVENT_DESCRIPTION_DESC_A + EVENT_FRIEND_NAME_DESC_A, Name.MESSAGE_CONSTRAINTS);
+                + EVENT_DESCRIPTION_DESC_A + EVENT_FRIEND_NAME_DESC_A, EventName.MESSAGE_CONSTRAINTS);
 
         // invalid datetime
         assertParseFailure(parser, EVENT_NAME_DESC_A + INVALID_EVENT_DATETIME_DESC
@@ -110,11 +111,12 @@ public class AddEventCommandParserTest {
 
         // invalid friend name
         assertParseFailure(parser, EVENT_NAME_DESC_A + EVENT_DATETIME_DESC_A
-                + EVENT_DESCRIPTION_DESC_A + INVALID_NAME_DESC + EVENT_FRIEND_NAME_DESC_A, Name.MESSAGE_CONSTRAINTS);
+                + EVENT_DESCRIPTION_DESC_A + INVALID_EVENT_FRIENDNAME_DESC + EVENT_FRIEND_NAME_DESC_A,
+                FriendName.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_EVENT_NAME_DESC + INVALID_EVENT_DATETIME_DESC
-                + EVENT_DESCRIPTION_DESC_A + EVENT_FRIEND_NAME_DESC_A, Name.MESSAGE_CONSTRAINTS);
+                + EVENT_DESCRIPTION_DESC_A + EVENT_FRIEND_NAME_DESC_A, EventName.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + EVENT_NAME_DESC_A + EVENT_DATETIME_DESC_A

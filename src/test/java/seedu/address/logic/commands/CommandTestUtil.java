@@ -128,6 +128,7 @@ public class CommandTestUtil {
     public static final String INVALID_EVENT_NAME_DESC = " " + PREFIX_NAME + "James\nBirthday";
     public static final String INVALID_EVENT_DATETIME_DESC = " " + PREFIX_DATETIME + "1400-20-10 %%";
     public static final String INVALID_EVENT_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION + "";
+    public static final String INVALID_EVENT_FRIENDNAME_DESC = " " + PREFIX_FRIEND_NAME + "Tom $% Arthur";
     public static final String INVALID_EVENT_ADDFRIEND_DESC = " " + PREFIX_ADD_FRIENDNAME + "Jack,Hilary";
     public static final String INVALID_EVENT_REMOVE_DESC = " " + PREFIX_REMOVE_FRIENDNAME + "Tom,Arthur";
     public static final String INVALID_LOG_TITLE_TOO_LONG_DESC = " " + PREFIX_TITLE

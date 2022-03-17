@@ -4,10 +4,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import seedu.address.model.common.Description;
 import seedu.address.model.event.DateTime;
 import seedu.address.model.event.Event;
-import seedu.address.model.person.Description;
-import seedu.address.model.person.Name;
+import seedu.address.model.event.EventName;
+import seedu.address.model.person.FriendName;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -18,18 +19,18 @@ public class EventBuilder {
     public static final String DEFAULT_NAME = "Default Event";
     public static final String DEFAULT_DATE_TIME = "12-5-2022 1500";
     public static final String DEFAULT_DESCRIPTION = "Default Description";
-    public static final List<Name> DEFAULT_FRIENDLIST = List.of(new Name("Amy Bee"), new Name("Alex Yeoh"));
+    public static final List<FriendName> DEFAULT_FRIENDLIST = List.of(new FriendName("Amy Bee"), new FriendName("Alex Yeoh"));
 
-    private Name name;
+    private EventName name;
     private DateTime dateTime;
     private Description description;
-    private Set<Name> friendNames = new HashSet<>();
+    private Set<FriendName> friendNames = new HashSet<>();
 
     /**
      * Creates a {@code EventBuilder} with the default details.
      */
     public EventBuilder() {
-        name = new Name(DEFAULT_NAME);
+        name = new EventName(DEFAULT_NAME);
         dateTime = new DateTime(DEFAULT_DATE_TIME);
         description = new Description(DEFAULT_DESCRIPTION);
         friendNames.addAll(DEFAULT_FRIENDLIST);
@@ -49,7 +50,7 @@ public class EventBuilder {
      * Sets the {@code Name} of the {@code Event} that we are building.
      */
     public EventBuilder withName(String name) {
-        this.name = new Name(name);
+        this.name = new EventName(name);
         return this;
     }
 
