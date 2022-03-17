@@ -11,7 +11,7 @@ import seedu.address.model.tamodule.TaModule;
  */
 public class TypicalModules {
     public static final TaModule CS2101 = new ModuleBuilder().withModuleName("Effectiv Communication")
-            .withModuleCode("CS2101").withAcademicYer("2022").build();
+            .withModuleCode("CS2101").withAcademicYer("22S1").build();
 
     private TypicalModules() {} // prevents instantiation
 

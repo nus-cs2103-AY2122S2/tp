@@ -11,7 +11,7 @@ import seedu.address.model.classgroup.ClassGroup;
  */
 public class TypicalClassGroups {
     public static final ClassGroup CS2101G09 = new ClassGroupBuilder().withClassGroupId("A01")
-            .withClassGroupType("SECTIONAL").withModule("Effective Communication", "CS2101", "y2s2").build();
+            .withClassGroupType("SECTIONAL").withModule(TypicalModules.CS2101).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

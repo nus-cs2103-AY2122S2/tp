@@ -65,6 +65,14 @@ public class ClassGroupBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code ModuleCode} of the {@code ClassGroup} that we are building.
+     */
+    public ClassGroupBuilder withModule(TaModule module) {
+        this.module = module;
+        return this;
+    }
+
     public ClassGroup build() {
         return new ClassGroup(classGroupId, classGroupType, module);
     }
