@@ -63,7 +63,7 @@ Amigos is designed to help you keep track of the friends in your life.
 
 Adds a new friend to Amigos. A friend has:
 
-**Format**: `addfriend n/[NAME]  [p/PHONE_NUMBER] [e/EMAIL]  [a/ADDRESS] [d/DESCRIPTION] [t/TAG]…`
+**Format**: `addfriend n/NAME  [p/PHONE_NUMBER] [e/EMAIL]  [a/ADDRESS] [d/DESCRIPTION] [t/TAG]…`
 
 * Note that `NAME` field is minimally compulsory. `p/`, `em/`, `a/` and `d/` `t/` flags and their arguments are optional.
 * Note that there can be no duplicate friends having the same name.
