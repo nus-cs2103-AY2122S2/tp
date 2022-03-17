@@ -37,8 +37,8 @@ public class EditEventCommand extends Command {
             + "[" + PREFIX_NAME + "NEW_EVENT_NAME] "
             + "[" + PREFIX_DATETIME + "NEW_DATE_TIME] "
             + "[" + PREFIX_DESCRIPTION + "NEW_DESCRIPTION] "
-            + "[" + PREFIX_ADD_FRIENDNAME + "ADD_FRIEND_NAME1, ADD_FRIEND_NAME2…] "
-            + "[" + PREFIX_REMOVE_FRIENDNAME + "REMOVE_FRIEND_NAME1, REMOVE_FRIEND_NAME2…]...\n"
+            + "[" + PREFIX_ADD_FRIENDNAME + "ADD_FRIEND_NAME]… "
+            + "[" + PREFIX_REMOVE_FRIENDNAME + "REMOVE_FRIEND_NAME]…\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_NAME + "2nd Birthday "
             + PREFIX_DATETIME + "16-08-2021 1600";
@@ -68,7 +68,7 @@ public class EditEventCommand extends Command {
         List<Event> lastShownList = model.getEventsList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
 
         Event eventToEdit = lastShownList.get(index.getZeroBased());
