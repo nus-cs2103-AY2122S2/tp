@@ -13,7 +13,7 @@ public class TestResultWithNricPredicate implements Predicate<TestResult> {
 
     @Override
     public boolean test(TestResult testResult) {
-        return testResult.getOwnerNric().equals(nric);
+        return testResult.getPatientNric().equals(nric);
     }
 
     @Override

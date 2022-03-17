@@ -13,6 +13,7 @@ import seedu.address.logic.parser.medical.ViewMedicalCommandParser;
 import seedu.address.logic.parser.prescription.AddPrescriptionCommandParser;
 import seedu.address.logic.parser.prescription.ViewPrescriptionCommandParser;
 import seedu.address.logic.parser.testresult.AddTestResultCommandParser;
+import seedu.address.logic.parser.testresult.DeleteTestResultCommandParser;
 import seedu.address.logic.parser.testresult.ViewTestResultCommandParser;
 
 public enum CommandType {
@@ -80,7 +81,7 @@ public enum CommandType {
     }
 
     /**
-     * Returns command related to adding information to patients in Medbook.
+     * Returns command related to viewing information to patients in Medbook.
      *
      * @param commandType user input command type
      * @param arguments user input arguments
@@ -129,6 +130,33 @@ public enum CommandType {
             throw new ParseException("PRESCRIPTION: WIP");
         case TEST:
             throw new ParseException("TEST: WIP");
+        default:
+            throw new ParseException(MESSAGE_CONSTRAINTS);
+        }
+    }
+
+    /**
+     * Returns command related to deleting information to patients in Medbook.
+     *
+     * @param commandType user input command type
+     * @param arguments user input arguments
+     * @return the command based on the user input
+     */
+    public static Command parseDeleteCommandType(String commandType, String arguments) throws ParseException {
+        requireNonNull(commandType);
+        CommandType parsedCommandType = parseCommandType(commandType);
+
+        switch(parsedCommandType) {
+        case CONTACT:
+            throw new ParseException("WIP: Contact type");
+        case MEDICAL:
+            throw new ParseException("WIP: Medical type");
+        case CONSULTATION:
+            throw new ParseException("WIP: Consultation type");
+        case PRESCRIPTION:
+            throw new ParseException("WIP: Prescription type");
+        case TEST:
+            return new DeleteTestResultCommandParser().parse(arguments);
         default:
             throw new ParseException(MESSAGE_CONSTRAINTS);
         }

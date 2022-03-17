@@ -17,7 +17,7 @@ import seedu.address.model.testresult.TestResult;
 class JsonAdaptedTestResult {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Test result's %s field is missing!";
 
-    private final String ownerNric;
+    private final String patientNric;
     private final String testDate;
     private final String medicalTest;
     private final String result;
@@ -26,11 +26,11 @@ class JsonAdaptedTestResult {
      * Constructs a {@code JsonAdaptedTestResult} with the given test result details.
      */
     @JsonCreator
-    public JsonAdaptedTestResult(@JsonProperty("ownerNric") String ownerNric, @JsonProperty("date") String testDate,
+    public JsonAdaptedTestResult(@JsonProperty("patientNric") String patientNric, @JsonProperty("date") String testDate,
                                  @JsonProperty("medicalTest") String medicalTest,
                                  @JsonProperty("result") String result) {
 
-        this.ownerNric = ownerNric;
+        this.patientNric = patientNric;
         this.testDate = testDate;
         this.medicalTest = medicalTest;
         this.result = result;
@@ -40,7 +40,7 @@ class JsonAdaptedTestResult {
      * Converts a given {@code TestResult} into this class for Jackson use.
      */
     public JsonAdaptedTestResult(TestResult source) {
-        ownerNric = source.getOwnerNric().value;
+        patientNric = source.getPatientNric().value;
         testDate = source.getTestDate().toString();
         medicalTest = source.getMedicalTest().value;
         result = source.getResult().value;
@@ -52,13 +52,13 @@ class JsonAdaptedTestResult {
      * @throws IllegalValueException if there were any data constraints violated in the adapted test result.
      */
     public TestResult toModelType() throws IllegalValueException {
-        if (ownerNric == null) {
+        if (patientNric == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Nric.class.getSimpleName()));
         }
-        if (!Nric.isValidNric(ownerNric)) {
+        if (!Nric.isValidNric(patientNric)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
-        final Nric modelOwnerNric = new Nric(ownerNric);
+        final Nric modelPatientNric = new Nric(patientNric);
 
         if (testDate == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -86,6 +86,6 @@ class JsonAdaptedTestResult {
         }
         final Result modelResult = new Result(result);
 
-        return new TestResult(modelOwnerNric, modelDate, modelMedicalTest, modelResult);
+        return new TestResult(modelPatientNric, modelDate, modelMedicalTest, modelResult);
     }
 }
