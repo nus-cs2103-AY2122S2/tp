@@ -44,11 +44,13 @@ public class TransactionCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
 
         // Required fields.
-        amount.setText(transaction.getAmount().getValue());
-        transactionDate.setText(transaction.getTransactionDate().getValue());
+        amount.setText("Amount: " + transaction.getAmount().getValue());
+        transactionDate.setText("Transaction Date: " + transaction.getTransactionDate().getValue());
 
         // Optional fields.
-        dueDate.setText(transaction.getDueDate().map(DueDate::getValue).orElse(DueDate.EMPTY_DUE_DATE));
+        dueDate.setText(transaction.getDueDate()
+                .map(date -> "Due Date: " + date.getValue())
+                .orElse(DueDate.EMPTY_DUE_DATE));
     }
 
     @Override
