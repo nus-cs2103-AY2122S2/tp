@@ -5,10 +5,10 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditEventCommand.EditEventDescriptor;
+import seedu.address.model.common.Description;
 import seedu.address.model.event.DateTime;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
-import seedu.address.model.person.Description;
 import seedu.address.model.person.FriendName;
 
 /**

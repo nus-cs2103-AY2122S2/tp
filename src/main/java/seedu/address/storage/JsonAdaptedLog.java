@@ -30,7 +30,7 @@ public class JsonAdaptedLog {
      */
     public JsonAdaptedLog(Log log) {
         this.title = log.getTitle().toString();
-        this.description = log.getDescription();
+        this.description = log.getDescription().toString();
     }
 
     /**

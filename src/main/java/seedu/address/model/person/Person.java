@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.common.Description;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -50,6 +51,8 @@ public class Person {
         this.description = isNull(description) ? new Description(null) : description;
         this.tags.addAll(isNull(tags) ? new HashSet<>() : tags);
         this.logs.setLogs(isNull(logs) ? new ArrayList<>() : logs);
+        requireAllNonNull(this.name, this.phone, this.email,
+                this.address, this.description, this.tags, this.logs);
     }
 
     /**

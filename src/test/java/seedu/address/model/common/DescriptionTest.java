@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.common;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -25,8 +25,8 @@ public class DescriptionTest {
     public void isValidDescription() {
 
         // invalid description
-        assertFalse(Description.isValidDescription("")); // empty string
         assertFalse(Description.isValidDescription(" ")); // spaces only
+        assertFalse(Description.isValidDescription("")); // empty string
 
         // valid description
         assertTrue(Description.isValidDescription("tE394 !!11    descrIptioe394~!"));

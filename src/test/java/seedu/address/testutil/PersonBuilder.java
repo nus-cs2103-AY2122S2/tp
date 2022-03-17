@@ -5,8 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import seedu.address.model.common.Description;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.FriendName;
 import seedu.address.model.person.Log;

@@ -2,7 +2,8 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Objects;
+import seedu.address.model.common.Description;
+
 
 /**
  * Represents a note or log tied to a Person in the address book.
@@ -10,11 +11,11 @@ import java.util.Objects;
 public class Log {
 
     // default values
-    public static final String DEFAULT_NO_DESCRIPTION = "";
+    public static final String DEFAULT_NO_DESCRIPTION = null;
 
     // immutable attributes
     private final LogName title;
-    private final String description;
+    private final Description description;
 
     /**
      * Constructs a Log object.
@@ -25,10 +26,10 @@ public class Log {
     public Log(String title, String description) {
         requireNonNull(title);
         this.title = new LogName(title);
-        this.description = Objects.requireNonNullElse(description, Log.DEFAULT_NO_DESCRIPTION);
+        this.description = new Description(description);
     }
 
-    public String getDescription() {
+    public Description getDescription() {
         requireNonNull(this.description);
         return this.description;
     }
