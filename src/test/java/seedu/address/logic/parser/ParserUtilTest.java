@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Address;
+import seedu.address.model.client.Appointment;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
@@ -26,6 +27,7 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_APPOINTMENT = "tomorrow";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -33,6 +35,7 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_APPOINTMENT = "2022-05-05-12-00";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -146,6 +149,24 @@ public class ParserUtilTest {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+    }
+
+    @Test
+    public void parseAppointment_validValueWithoutWhitespace_returnsAppointment() throws Exception {
+        Appointment expectedAppointment = new Appointment(VALID_APPOINTMENT);
+        assertEquals(expectedAppointment, ParserUtil.parseAppointment(VALID_APPOINTMENT));
+    }
+
+    @Test
+    public void parseAppointment_validValueWithWhitespace_returnsTrimmedAppointment() throws Exception {
+        String appointmentWithWhitespace = WHITESPACE + VALID_APPOINTMENT + WHITESPACE;
+        Appointment expectedAppointment = new Appointment(VALID_APPOINTMENT);
+        assertEquals(expectedAppointment, ParserUtil.parseAppointment(appointmentWithWhitespace));
+    }
+
+    @Test
+    public void parseAppointment_invalidAppointment_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAppointment(INVALID_APPOINTMENT));
     }
 
     @Test
