@@ -341,7 +341,7 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code testDate} is invalid.
      */
-    public static TestDate parseDate(String testDate) throws ParseException {
+    public static TestDate parseTestDate(String testDate) throws ParseException {
         requireNonNull(testDate);
         String trimmedName = testDate.trim();
         if (!TestDate.isValidTestDate(trimmedName)) {

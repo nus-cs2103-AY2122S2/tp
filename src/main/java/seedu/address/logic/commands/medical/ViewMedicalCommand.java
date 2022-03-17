@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.testresult;
+package seedu.address.logic.commands.medical;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.commands.contact.AddContactCommand.MESSAGE_MISSING_PATIENT;
@@ -11,46 +11,43 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.medical.MedicalWithNricPredicate;
 import seedu.address.model.patient.Nric;
 import seedu.address.model.patient.NricPredicate;
-import seedu.address.model.testresult.TestResultWithNricPredicate;
 
-/**
- * Lists all test results in the address book to the user.
- */
-public class ViewTestResultCommand extends Command {
+public class ViewMedicalCommand extends Command {
     public static final String COMMAND_WORD = "view";
-    public static final CommandType COMMAND_TYPE = CommandType.TEST;
+    public static final CommandType COMMAND_TYPE = CommandType.MEDICAL;
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all test results whose tests contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Lists all medical information whose owner's name contain any of "
             + "the specified owner NRIC and displays them as a list with index numbers.\n"
             + "Parameters: OWNER NRIC\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_TYPE + "test " + PREFIX_NRIC + "S1234567L";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_TYPE + "medical " + PREFIX_NRIC + "S1234567G";
 
-    private final Nric ownerNric;
+    private final Nric nric;
 
     /**
-     * Creates an ViewTestResultCommand to view the specified {@code ownerNric}
+     * Creates an ViewMedicalCommand to view the medical information of specified {@code Patient}
      */
-    public ViewTestResultCommand(Nric ownerNric) {
-        requireNonNull(ownerNric);
-        this.ownerNric = ownerNric;
+    public ViewMedicalCommand(Nric nric) {
+        requireNonNull(nric);
+        this.nric = nric;
     }
 
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.updateFilteredTestResultList(new TestResultWithNricPredicate(ownerNric));
+        model.updateFilteredMedicalList(new MedicalWithNricPredicate(nric));
 
-        if (!model.hasPerson(new NricPredicate(ownerNric))) {
+        if (!model.hasPerson(new NricPredicate(nric))) {
             throw new CommandException(MESSAGE_MISSING_PATIENT);
         }
 
         return new CommandResult(
-                String.format(Messages.MESSAGE_TEST_RESULTS_LISTED_OVERVIEW,
-                        model.getFilteredTestResultList().size(), ownerNric),
+                String.format(Messages.MESSAGE_MEDICALS_LISTED_OVERVIEW,
+                        model.getFilteredMedicalList().size(), nric),
                 COMMAND_TYPE);
     }
 }
-

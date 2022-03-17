@@ -279,6 +279,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         medicals.add(m);
     }
 
+
+    public void setMedicals(Medical target, Medical editedMedical) {
+        requireNonNull(editedMedical);
+        medicals.setMedical(target, editedMedical);
+    }
+
     /**
      * Checks if medical information (for patient with same NRIC) already exists.
      */

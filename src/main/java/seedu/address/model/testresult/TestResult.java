@@ -49,7 +49,7 @@ public class TestResult {
 
 
     /**
-     * Returns true if both contacts have the same owner, date, medical test taken and test result.
+     * Returns true if both test results have the same owner, date, medical test taken and test result.
      * This defines a weaker notion of equality between two test results.
      */
     public boolean isSameTestResult(TestResult otherTestResult) {
