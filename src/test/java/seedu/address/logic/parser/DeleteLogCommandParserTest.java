@@ -1,5 +1,10 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.parser.CliSyntax.FLAG_ALL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOG_INDEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -14,6 +19,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteLogCommand;
+import seedu.address.model.person.FriendName;
 
 public class DeleteLogCommandParserTest {
 
@@ -28,17 +34,27 @@ public class DeleteLogCommandParserTest {
 
         String args;
 
-        // missing person index without all flag
+        // missing person index/name without all flag
         args = "" + PREFIX_LOG_INDEX + logIndex.getOneBased();
         assertParseFailure(parser, args, MESSAGE_INVALID_FORMAT);
 
+        // both index and name present
+        // valid person (name) and log index but all flag present
+        args = personIndex.getOneBased() + " "
+                + NAME_DESC_AMY + PREFIX_LOG_INDEX + logIndex.getOneBased();
+        assertParseFailure(parser, args, MESSAGE_INVALID_FORMAT);
 
         // missing log index without all flag
         args = "" + personIndex.getOneBased();
         assertParseFailure(parser, args, MESSAGE_INVALID_FORMAT);
 
-        // valid person and log index but all flag present
-        args = personIndex.getOneBased() + " " + PREFIX_LOG_INDEX + logIndex.getOneBased() + " " + FLAG_ALL;
+        // valid person (index) and log index but all flag present
+        args = personIndex.getOneBased() + " " + PREFIX_LOG_INDEX
+                + logIndex.getOneBased() + " " + FLAG_ALL;
+        assertParseFailure(parser, args, MESSAGE_INVALID_FORMAT);
+
+        // valid person (name) and log index but all flag present
+        args = NAME_DESC_AMY + " " + PREFIX_LOG_INDEX + logIndex.getOneBased() + " " + FLAG_ALL;
         assertParseFailure(parser, args, MESSAGE_INVALID_FORMAT);
 
         // arguments after all flag
@@ -73,11 +89,23 @@ public class DeleteLogCommandParserTest {
     }
 
     @Test
+    public void parse_invalidPersonName_failure() {
+
+        String args;
+
+        args = INVALID_NAME_DESC + PREFIX_LOG_INDEX + INDEX_FIRST_LOG.getOneBased();
+        assertParseFailure(parser, args, MESSAGE_INVALID_FORMAT);
+
+    }
+
+    @Test
     public void parse_invalidLogIndex_failure() {
 
         Index personIndex = INDEX_FIRST_PERSON;
 
         String args;
+
+        // ===== INDEX BASED =====
 
         // empty string log index
         args = personIndex.getOneBased() + " " + PREFIX_LOG_INDEX + "";
@@ -89,6 +117,19 @@ public class DeleteLogCommandParserTest {
 
         // negative log index
         args = personIndex.getOneBased() + " " + PREFIX_LOG_INDEX + "-5";
+        assertParseFailure(parser, args, MESSAGE_INVALID_INDEX);
+
+        // ===== NAME BASED =====
+        // empty string log index
+        args = NAME_DESC_AMY + " " + PREFIX_LOG_INDEX + "";
+        assertParseFailure(parser, args, MESSAGE_INVALID_INDEX);
+
+        // non-numeric log index
+        args = NAME_DESC_AMY + " " + PREFIX_LOG_INDEX + "qwerty";
+        assertParseFailure(parser, args, MESSAGE_INVALID_INDEX);
+
+        // negative log index
+        args = NAME_DESC_AMY + " " + PREFIX_LOG_INDEX + "-5";
         assertParseFailure(parser, args, MESSAGE_INVALID_INDEX);
 
     }
@@ -114,6 +155,7 @@ public class DeleteLogCommandParserTest {
         Index logIndex = INDEX_FIRST_LOG;
         String args;
 
+        // ===== PERSON INDEX =====
         // case 1: person and log
         args = personIndex.getOneBased() + " " + PREFIX_LOG_INDEX + logIndex.getOneBased();
         expectedCommand = new DeleteLogCommand(true, false, personIndex, logIndex);
@@ -124,9 +166,22 @@ public class DeleteLogCommandParserTest {
         expectedCommand = new DeleteLogCommand(true, true, personIndex, null);
         assertParseSuccess(parser, args, expectedCommand);
 
-        // case 3: all persons
+        // ===== PERSON NAME =====
+        FriendName targetName = new FriendName(VALID_NAME_AMY);
+        // case 1: person and log
+        args = NAME_DESC_AMY + " " + PREFIX_LOG_INDEX + logIndex.getOneBased();
+        expectedCommand = new DeleteLogCommand(true, false, targetName, logIndex);
+        assertParseSuccess(parser, args, expectedCommand);
+
+        // case 2: all of person
+        args = NAME_DESC_AMY + " " + FLAG_ALL;
+        expectedCommand = new DeleteLogCommand(true, true, targetName, null);
+        assertParseSuccess(parser, args, expectedCommand);
+
+        // ===== SHARED =====
+        // case 1: all persons
         args = " " + FLAG_ALL;
-        expectedCommand = new DeleteLogCommand(false, true, null, null);
+        expectedCommand = new DeleteLogCommand(true);
         assertParseSuccess(parser, args, expectedCommand);
     }
 
@@ -138,18 +193,20 @@ public class DeleteLogCommandParserTest {
         Index logIndex2 = INDEX_SECOND_LOG;
         String args;
 
-        // case 1: person and log
+        // case 1: logs
         args = personIndex.getOneBased() + " "
                 + PREFIX_LOG_INDEX + logIndex1.getOneBased() + " "
                 + PREFIX_LOG_INDEX + logIndex2.getOneBased() + " ";
         expectedCommand = new DeleteLogCommand(true, false, personIndex, logIndex2);
         assertParseSuccess(parser, args, expectedCommand);
 
-        // case 2: all of person
-        args = personIndex.getOneBased() + " "
-                + FLAG_ALL;
-        expectedCommand = new DeleteLogCommand(true, true, personIndex, null);
+        // case 2: multiple person names
+        FriendName targetName = new FriendName(VALID_NAME_BOB);
+        args = NAME_DESC_AMY + " " + NAME_DESC_BOB + " "
+                + PREFIX_LOG_INDEX + logIndex1.getOneBased();
+        expectedCommand = new DeleteLogCommand(true, false, targetName, logIndex1);
         assertParseSuccess(parser, args, expectedCommand);
+
     }
 
     @Test
@@ -160,17 +217,18 @@ public class DeleteLogCommandParserTest {
         Index logIndex = INDEX_SECOND_LOG;
         String args;
 
-        // case 1: person and log
+        // case 1: log
         args = personIndex.getOneBased() + " "
                 + PREFIX_LOG_INDEX + invalidLogIndex + " "
                 + PREFIX_LOG_INDEX + logIndex.getOneBased() + " ";
         expectedCommand = new DeleteLogCommand(true, false, personIndex, logIndex);
         assertParseSuccess(parser, args, expectedCommand);
 
-        // case 2: all of person
-        args = personIndex.getOneBased() + " "
-                + FLAG_ALL;
-        expectedCommand = new DeleteLogCommand(true, true, personIndex, null);
+        // case 2: multiple person names
+        FriendName targetName = new FriendName(VALID_NAME_BOB);
+        args = INVALID_NAME_DESC + " " + NAME_DESC_BOB + " "
+                + PREFIX_LOG_INDEX + logIndex.getOneBased();
+        expectedCommand = new DeleteLogCommand(true, false, targetName, logIndex);
         assertParseSuccess(parser, args, expectedCommand);
     }
 

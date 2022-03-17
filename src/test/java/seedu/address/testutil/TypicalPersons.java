@@ -78,6 +78,7 @@ public class TypicalPersons {
 
     /**
      * Returns an {@code AddressBook} with all the typical persons.
+     * todo rename to getTypicalAddressBookWithPersons to distinguish from one with events.
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();

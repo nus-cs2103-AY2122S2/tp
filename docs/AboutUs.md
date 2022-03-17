@@ -17,7 +17,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/aryansarswat.md)]
 
 * Role: Developer
-* Responsibilities: Documentation (Developer Guide, User Guide[Show features])
+* Responsibilities:
 
 ### Dione Goh
 

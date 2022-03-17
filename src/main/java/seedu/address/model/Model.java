@@ -53,6 +53,8 @@ public interface Model {
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
 
+    //=========== Person Operations =============================================================
+
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
@@ -77,32 +79,26 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
-    //=========== EventBook =============================================================
+    //=========== Event Operations =============================================================
 
     /**
-     * Replaces event book data with the data in {@code eventBook}.
-     */
-    void setEventBook(ReadOnlyEventBook eventBook);
-
-    /** Returns the EventBook */
-    ReadOnlyEventBook getEventBook();
-
-    /**
-     * Returns true if an event with the same identity as {@code event} exists in the event book.
+     * Returns true if an event with the same identity as {@code event} exists in the address book.
      */
     boolean hasEvent(Event event);
 
     /**
      * Adds the given event.
-     * {@code event} must not already exist in the event book.
+     * {@code event} must not already exist in the address book.
      */
     void addEvent(Event event);
 
     /**
      * Deletes the given event.
-     * The event must exist in the event book.
+     * The event must exist in the address book.
      */
     void deleteEvent(Event target);
+
+    void setEvent(Event target, Event editedPerson);
 
     /**
      * Returns true if all friend names in Event correspond to actual Friend objects.

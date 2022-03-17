@@ -62,22 +62,16 @@ Amigos is designed to help you keep track of the friends in your life.
 ### Adding a friend: `addfriend`
 
 Adds a new friend to Amigos. A friend has:
-* ***(compulsory)*** name
-* *(optional)* phone number
-* *(optional)* email
-* *(optional)* address
-* *(optional)* description
-* *(optional)* tag(s)
 
+**Format**: `addfriend n/NAME  [p/PHONE_NUMBER] [e/EMAIL]  [a/ADDRESS] [d/DESCRIPTION] [t/TAG]…`
 
-**Format**: `addfriend n/NAME  [p/PHONE_NUMBER] [e/EMAIL]  [a/ADDRESS] [d/DESCRIPTION] [t/TAG]...`
-
-* Note that `NAME` field is minimally compulsory. `p/`, `em/`, `a/`, `d/` and `t/` flags and their arguments are optional.
+* Note that `NAME` field is minimally compulsory. `p/`, `em/`, `a/` and `d/` `t/` flags and their arguments are optional.
 * Note that there can be no duplicate friends having the same name.
 
 **Examples**:
-* `addfriend n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 d/Physics Major, Sarah’s friend. Met at Freshman Dinner. t/friend t/classmate`
-* `addfriend n/John Doe`
+* `addfriend n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 d/Physics Major, Sarah’s friend. Met at Freshman Dinner.`
+* `addfriend n/John Doe t/Friend t/Banker`
+>>>>>>> upstream/master
 
 ### Editing a friend : `editfriend`
 
@@ -127,6 +121,23 @@ Shows page containing the full details related to an existing friend in Amigos.
 Shows all friends in Amigos. Switches GUI to the friends tab.
 
 **Format**: `showfriends`
+
+### Find friends : `findfriend`
+
+Find friends in Amigos whose name contain any of the given keyword(s).
+
+**Format**: `findfriend KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g john will match John
+* The order of the keywords does not matter. e.g Doe John will match John Doe
+* Only the name is searched.
+* Only full words will be matched e.g Joh will not match John
+* Friends matching at least one keyword will be returned. e.g John will return John Doe, John Tan
+* Either a specified`INDEX`or `NAME` of an existing friend in Amigos must be provided.
+
+**Examples**:
+* `findfriend John`
+* `findfriend John Emily Russell`
 
 
 ## Logs management
@@ -284,6 +295,7 @@ If your changes to the data file makes its format invalid, Amigos will discard a
 | **Delete Friend**          | `deletefriend INDEX ? n/NAME` <br> e.g., `deletefriend n/John Doe`, `deletefriend 1`                                                                                                                                                                                   |
 | **Show a specific friend** | `showfriend n/NAME`                                                                                                                                                                                                                                                    |
 | **Show all friends**       | `showfriends`                                                                                                                                                                                                                                                          |
+| **Find friends**           | `findfriend KEYWORD [KEYWORD]...`                                                                                                                                                                                                                                      |
 | **Add log**                | `addlog n/[NAME] t/[TITLE] d/[DESCRIPTION]`                                                                                                                                                                                                                            |
 | **Edit log**               | `editlog n/[NAME] id/[LOG_INDEX] nt/[NEW_TITLE] nd/[NEW_DESCRIPTION]`                                                                                                                                                                                                  |
 | **Delete log**             | `deletelog n/[NAME] id/[LOG_INDEX] -a`                                                                                                                                                                                                                                 |

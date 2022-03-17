@@ -9,8 +9,8 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.AddressBook;
-import seedu.address.model.person.Description;
-import seedu.address.model.person.Name;
+import seedu.address.model.common.Description;
+import seedu.address.model.person.FriendName;
 import seedu.address.model.person.Person;
 
 /**
@@ -20,12 +20,12 @@ import seedu.address.model.person.Person;
 public class Event {
 
     // Identity fields
-    private final Name name;
+    private final EventName name;
     private final DateTime dateTime;
 
     // Data fields
     private final Description description;
-    private final Set<Name> friendNames = new HashSet<>();
+    private final Set<FriendName> friendNames = new HashSet<>();
 
     /**
      * Constructor for event.
@@ -35,7 +35,7 @@ public class Event {
      * @param dateTime    date and time of event
      * @param friendNames     set of friend's Names linked with the event.
      */
-    public Event(Name name, DateTime dateTime, Description description, Set<Name> friendNames) {
+    public Event(EventName name, DateTime dateTime, Description description, Set<FriendName> friendNames) {
         requireAllNonNull(name, dateTime, description, friendNames);
         this.name = name;
         this.dateTime = dateTime;
@@ -43,7 +43,7 @@ public class Event {
         this.friendNames.addAll(friendNames);
     }
 
-    public Name getName() {
+    public EventName getName() {
         return name;
     }
 
@@ -63,7 +63,7 @@ public class Event {
      * Returns an immutable person set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Name> getFriendNames() {
+    public Set<FriendName> getFriendNames() {
         return Collections.unmodifiableSet(friendNames);
     }
 
@@ -76,8 +76,9 @@ public class Event {
         // There ought to be a better way of doing this - search AddressBook by name perhaps?
         // worth thinking about - how to enforce search specifically by name, rather than relying
         // on the ::hasPerson(Person) method. todo implement search by name (specifically name objects match)
+        // todo change this to take in a ReadOnlyAddressBook
 
-        for (Name name : getFriendNames()) {
+        for (FriendName name : getFriendNames()) {
             Person beingLookedFor = new Person(name);
             if (!addressBook.hasPerson(beingLookedFor)) {
                 return false;
@@ -139,10 +140,10 @@ public class Event {
                 .append(getDateTime())
                 .append("; Description: ")
                 .append(getDescription());
-        Set<Name> friendNames = getFriendNames();
+        Set<FriendName> friendNames = getFriendNames();
         if (!friendNames.isEmpty()) {
             builder.append("; Friends: ");
-            friendNames.forEach(name -> builder.append(name + " "));
+            friendNames.forEach(name -> builder.append(name).append(" "));
         }
         return builder.toString();
     }

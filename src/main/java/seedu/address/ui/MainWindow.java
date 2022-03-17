@@ -35,6 +35,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private EventListPanel eventListPanel;
+    private ExpandedPersonListPanel expandedPersonListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -49,6 +50,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane eventListPanelPlaceholder;
+
+    @FXML
+    private StackPane expandedPersonListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -125,6 +129,11 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        expandedPersonListPanel = new ExpandedPersonListPanel(logic.getFilteredPersonList());
+
+        expandedPersonListPanelPlaceholder.getChildren();
+        expandedPersonListPanelPlaceholder.getChildren().add(expandedPersonListPanel.getRoot());
+
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
@@ -183,12 +192,19 @@ public class MainWindow extends UiPart<Stage> {
 
     private void changeInterface(CommandResult commandResult) {
         boolean event = commandResult.isEvent();
+        boolean isExpandedCard = commandResult.isShowFriendCommand();
         if (event) {
             tabs.getSelectionModel().select(eventsListTab);
             eventListPanelPlaceholder.requestFocus();
         } else {
             tabs.getSelectionModel().select(personListTab);
-            personListPanelPlaceholder.requestFocus();
+            if (isExpandedCard) {
+                expandedPersonListPanelPlaceholder.requestFocus();
+                expandedPersonListPanelPlaceholder.toFront();
+            } else {
+                personListPanelPlaceholder.requestFocus();
+                personListPanelPlaceholder.toFront();
+            }
         }
     }
 
@@ -219,4 +235,5 @@ public class MainWindow extends UiPart<Stage> {
             throw e;
         }
     }
+
 }
