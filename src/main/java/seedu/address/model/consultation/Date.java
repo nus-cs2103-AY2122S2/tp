@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
 public class Date {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Date should not be blank";
+            "Date should not be blank, and should be in the format dd-MM-yyyy";
 
     /*
      * The first character of the address must not be a whitespace,

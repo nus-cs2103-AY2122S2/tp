@@ -52,7 +52,7 @@ public class ViewConsultationCommand extends Command {
             throw new CommandException(MESSAGE_MISSING_PATIENT);
         }
 
-        ObservableList<Patient> personList = model.getAddressBook().getPersonList();
+        ObservableList<Patient> personList = model.getPersonList();
         String nameAndNric = new String();
 
         for (Patient patient : personList) {

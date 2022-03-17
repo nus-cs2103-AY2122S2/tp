@@ -100,6 +100,9 @@ public interface Model {
     ObservableList<Medical> getFilteredMedicalList();
     ObservableList<Prescription> getFilteredPrescriptionList();
 
+    /** Returns the person list **/
+    ObservableList getPersonList();
+
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.

@@ -92,5 +92,3 @@ public class DeleteConsultationCommand extends Command {
                 COMMAND_TYPE);
     }
 }
-
-

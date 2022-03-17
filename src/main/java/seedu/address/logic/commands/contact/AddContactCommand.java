@@ -31,8 +31,8 @@ public class AddContactCommand extends Command {
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TYPE + "contact"
-            + PREFIX_NAME + "John S. Smith "
+            + PREFIX_TYPE + "contact "
+            + PREFIX_NAME + "John S Smith "
             + PREFIX_PHONE + "88888888 "
             + PREFIX_EMAIL + "johns@example.com "
             + PREFIX_ADDRESS + "21 Lower Kent Ridge Road, Singapore 119077 ";

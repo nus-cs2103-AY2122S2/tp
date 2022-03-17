@@ -10,8 +10,8 @@ public class NricPredicate implements Predicate<Patient> {
     }
 
     @Override
-    public boolean test(Patient person) {
-        return person.getNric().equals(nric);
+    public boolean test(Patient patient) {
+        return patient.getNric().equals(nric);
     }
 
     @Override

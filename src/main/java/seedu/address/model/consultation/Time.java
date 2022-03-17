@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 public class Time {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Date should not be blank, and should be in format HH-mm (24h time)";
+            "Time should not be blank, and should be in format HH-mm (24h time)";
 
     /*
      * The first character of the address must not be a whitespace,

@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Notes {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Notes should not be blank";
+            "Notes should not be blank, and should not consist of just spaces.";
 
     /*
      * The first character of the address must not be a whitespace,
