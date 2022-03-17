@@ -53,6 +53,6 @@ public class ShowFriendCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ShowFriendCommand // instanceof handles nulls
-                && toShow.equals(((ShowFriendCommand) other).toShow));
+                && toShow.isSamePerson(((ShowFriendCommand) other).toShow));
     }
 }
