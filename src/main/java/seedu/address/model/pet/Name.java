@@ -41,14 +41,15 @@ public class Name implements Comparable<Name> {
 
     @Override
     public String toString() {
-        return fullName;
+        return fullName.trim();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Name // instanceof handles nulls
-                && fullName.equalsIgnoreCase(((Name) other).fullName));
+                && fullName.replaceAll(" ", "")
+                    .equalsIgnoreCase(((Name) other).fullName.replaceAll(" ", "")));
     }
 
     @Override
