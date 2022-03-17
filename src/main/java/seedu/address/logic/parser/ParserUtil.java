@@ -247,7 +247,7 @@ public class ParserUtil {
     }
 
     /**
-    * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+    * Parses {@code Collection<String> tags} into a {@code List<Tag>}.
     */
     public static List<Tag> parseTags(Collection<String> tags, String type) throws ParseException {
         requireNonNull(tags);

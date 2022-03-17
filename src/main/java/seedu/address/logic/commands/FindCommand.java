@@ -15,6 +15,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Tag;
 
 
 /**
@@ -54,14 +55,18 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to find the person with. Each non-empty field value will
+     * be added to the predicate to filter the contact list
      */
     public static class FindPersonDescriptor {
         private List<Name> names;
         private List<Phone> phones;
         private List<Email> emails;
         private List<Address> addresses;
+        private List<Tag> educations;
+        private List<Tag> internships;
+        private List<Tag> modules;
+        private List<Tag> ccas;
 
 
         public FindPersonDescriptor() {
@@ -75,13 +80,18 @@ public class FindCommand extends Command {
             setPhones(toCopy.phones);
             setEmails(toCopy.emails);
             setAddresses(toCopy.addresses);
+            setEducations(toCopy.educations);
+            setInternships(toCopy.internships);
+            setModules(toCopy.modules);
+            setCcas(toCopy.ccas);
         }
 
         /**
          * Returns true if at least one field is searched for.
          */
         public boolean isAnyFieldPresent() {
-            return CollectionUtil.isAnyNonNull(names, phones, emails, addresses);
+            return CollectionUtil.isAnyNonNull(names, phones, emails, addresses,
+                    educations, internships, modules, ccas);
         }
 
         public void setNames(List<Name> names) {
@@ -134,6 +144,60 @@ public class FindCommand extends Command {
         public Optional<List<String>> getStringAddresses() {
             return getAddresses().map(list ->
                     list.stream().map(name -> name.value).collect(Collectors.toList()));
+        }
+
+        //Methods for getting and setting tag lists
+
+        public void setEducations(List<Tag> tags) {
+            this.educations = tags;
+        }
+
+        public Optional<List<Tag>> getEducations() {
+            return Optional.ofNullable(educations);
+        }
+
+        public Optional<List<String>> getStringEducations() {
+            return getEducations().map(list ->
+                    list.stream().map(Tag::getTagString).collect(Collectors.toList()));
+        }
+
+        public void setInternships(List<Tag> tags) {
+            this.internships = tags;
+        }
+
+        public Optional<List<Tag>> getInternships() {
+            return Optional.ofNullable(internships);
+        }
+
+        public Optional<List<String>> getStringInternships() {
+            return getInternships().map(list ->
+                    list.stream().map(Tag::getTagString).collect(Collectors.toList()));
+        }
+
+        public void setModules(List<Tag> tags) {
+            this.modules = tags;
+        }
+
+        public Optional<List<Tag>> getModules() {
+            return Optional.ofNullable(modules);
+        }
+
+        public Optional<List<String>> getStringModules() {
+            return getModules().map(list ->
+                    list.stream().map(Tag::getTagString).collect(Collectors.toList()));
+        }
+
+        public void setCcas(List<Tag> tags) {
+            this.ccas = tags;
+        }
+
+        public Optional<List<Tag>> getCcas() {
+            return Optional.ofNullable(ccas);
+        }
+
+        public Optional<List<String>> getStringCcas() {
+            return getCcas().map(list ->
+                    list.stream().map(Tag::getTagString).collect(Collectors.toList()));
         }
 
         @Override

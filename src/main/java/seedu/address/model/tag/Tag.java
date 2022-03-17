@@ -13,6 +13,8 @@ public abstract class Tag {
 
     public final String tagName;
 
+    abstract public String getTagString();
+
     /**
      * Constructs a {@code Tag}.
      *

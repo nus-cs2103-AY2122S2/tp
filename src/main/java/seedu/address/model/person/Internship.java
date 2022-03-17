@@ -26,6 +26,11 @@ public class Internship extends Tag {
         this.value = internship.trim().toLowerCase();
     }
 
+    @Override
+    public String getTagString() {
+        return this.value;
+    }
+
     public static boolean isValidTagName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
