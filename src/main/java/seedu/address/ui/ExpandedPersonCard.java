@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -11,11 +12,11 @@ import seedu.address.model.person.Log;
 import seedu.address.model.person.Person;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays the full information of a {@code Person}.
  */
-public class PersonCard extends UiPart<Region> {
+public class ExpandedPersonCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "ExpandedPersonListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -32,38 +33,45 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
-    private Label id;
-    @FXML
     private Label phone;
     @FXML
     private Label address;
     @FXML
     private Label email;
     @FXML
+    private Label description;
+    @FXML
     private FlowPane tags;
     @FXML
-    private FlowPane logs;
+    private Label logs;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex) {
+    public ExpandedPersonCard(Person person) {
         super(FXML);
         this.person = person;
-        id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value == null ? "" : person.getPhone().value);
-        address.setText(person.getAddress().value == null ? "" : person.getAddress().value);
-        email.setText(person.getEmail().value == null ? "" : person.getEmail().value);
+        phone.setText(person.getPhone().value == null ? "" : "Phone: " + person.getPhone().value);
+        address.setText(person.getAddress().value == null ? "" : "Address: " + person.getAddress().value);
+        email.setText(person.getEmail().value == null ? "" : "Email: " + person.getEmail().value);
+        description.setText(person.getDescription().value == null
+                ? ""
+                : person.getDescription().value);
+
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        logs.setHgap(4);
-        int index = 1;
-        for (Log log: person.getLogs()) {
-            logs.getChildren().add(new Label(index + ". " + log.getTitle()));
-            index++;
+
+        //displaying each log
+        StringBuilder sb = new StringBuilder();
+        List<Log> logList = person.getLogs();
+        int numberOfLogs = logList.size();
+
+        for (int i = 1; i <= numberOfLogs; i++) {
+            sb.append(i + ". " + logList.get(i - 1).toString() + "\n");
         }
+        logs.setText(sb.toString());
     }
 
     @Override
@@ -74,13 +82,12 @@ public class PersonCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PersonCard)) {
+        if (!(other instanceof ExpandedPersonCard)) {
             return false;
         }
 
         // state check
-        PersonCard card = (PersonCard) other;
-        return id.getText().equals(card.id.getText())
-                && person.equals(card.person);
+        ExpandedPersonCard card = (ExpandedPersonCard) other;
+        return person.equals(card.person);
     }
 }

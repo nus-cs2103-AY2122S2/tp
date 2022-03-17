@@ -20,6 +20,20 @@ public class CommandResult {
     /** The application should switch to event */
     private final boolean event;
 
+    /**PersonListPanel will switch to expanded view showing all details of a friend */
+    private final boolean showDetails;
+
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean event, boolean showDetails) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = showHelp;
+        this.exit = exit;
+        this.event = event;
+        this.showDetails = showDetails;
+    }
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
@@ -28,6 +42,7 @@ public class CommandResult {
         this.showHelp = showHelp;
         this.exit = exit;
         this.event = event;
+        this.showDetails = false;
     }
 
     /**
@@ -38,6 +53,7 @@ public class CommandResult {
         this.showHelp = showHelp;
         this.exit = exit;
         this.event = false;
+        this.showDetails = false;
     }
 
     /**
@@ -45,7 +61,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false);
+        this(feedbackToUser, false, false, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -62,6 +78,10 @@ public class CommandResult {
 
     public boolean isEvent() {
         return event;
+    }
+
+    public boolean isShowFriendCommand() {
+        return showDetails;
     }
 
     @Override

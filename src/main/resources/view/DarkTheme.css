@@ -149,9 +149,21 @@
     -fx-text-fill: white;
 }
 
+.cell_header_label {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 20px;
+    -fx-text-fill: #010504;
+}
+
 .cell_big_label {
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 16px;
+    -fx-text-fill: #010504;
+}
+
+.cell_name_label {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 40px;
     -fx-text-fill: #010504;
 }
 
