@@ -6,19 +6,19 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Field;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
-import seedu.address.model.tag.Tag;
 
 /**
  * Sorts the person list in address book based on fields given.
@@ -26,6 +26,7 @@ import seedu.address.model.tag.Tag;
 public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
     public static final String MESSAGE_SUCCESS = "List is sorted accordingly!";
+    public static final String MESSAGE_EMPTY_ERROR = "Fields to be sorted or not specified, list remains unchanged!";
     public static final String DESCENDING_KEYWORD = "desc";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": sorts the person list in the field order specified.\n"
@@ -35,7 +36,7 @@ public class SortCommand extends Command {
             + "[" + Email.PREFIX + "] "
             + "[" + Address.PREFIX + "] "
             + "[" + Remark.PREFIX + "] "
-            + "[" + Tag.PREFIX + "]...\n"
+            + "[" + Birthday.PREFIX + "] "
             + "Add keyword" + DESCENDING_KEYWORD + " after a field if it's to be sorted in descending order.\n"
             + "Example: " + COMMAND_WORD + " n/ e/ desc a/ n/";
 
@@ -57,14 +58,16 @@ public class SortCommand extends Command {
      * @return CommandResult stating whether it has been successful.
      */
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
         Comparator<Person> comparator = null;
         for (FieldSortOrder fieldSortOrder : fieldSortOrderList) {
-            Comparator<Person> currComperator = getComparator(fieldSortOrder.getFieldPrefix());
+            Comparator<Person> currComperator;
             if (fieldSortOrder.getIsDescendingOrder()) {
-                currComperator = currComperator.reversed();
+                currComperator = getComparatorDescending(fieldSortOrder.getFieldPrefix());
+            } else {
+                currComperator = getComparatorDefault(fieldSortOrder.getFieldPrefix());
             }
 
             if (comparator == null) {
@@ -72,6 +75,10 @@ public class SortCommand extends Command {
             } else {
                 comparator = comparator.thenComparing(currComperator);
             }
+        }
+
+        if (comparator == null) {
+            throw new CommandException(MESSAGE_EMPTY_ERROR);
         }
 
         model.sortPersonList(comparator);
@@ -85,25 +92,43 @@ public class SortCommand extends Command {
      * @param fieldPrefix the field to be sorted by
      * @return Comparator lambda function.
      */
-    private Comparator<Person> getComparator(Prefix fieldPrefix) {
+    private Comparator<Person> getComparatorDefault(Prefix fieldPrefix) {
         return (p1, p2) -> {
             Optional<Field> p1Field = p1.getField(fieldPrefix);
             Optional<Field> p2Field = p2.getField(fieldPrefix);
 
-            //null values would be the last in list in ascending order
-            if (p1Field.isEmpty() && p2Field.isEmpty()) {
-                return 0;
-            } else if (p1Field.isEmpty() && p2Field.isPresent()) {
-                return 1;
-            } else if (p1Field.isPresent() && p2Field.isEmpty()) {
-                return -1;
+            //null values are given lower priority
+            if (p1Field.isEmpty() || p2Field.isEmpty()) {
+                return compareNullField(p1Field, p2Field);
             }
 
-            String p1Value = p1Field.get().getValue().toLowerCase(Locale.ROOT);
-            String p2Value = p2Field.get().getValue().toLowerCase(Locale.ROOT);
-
-            return p1Value.compareTo(p2Value);
+            return p1Field.get().compareTo(p2Field.get());
         };
+    }
+
+    private Comparator<Person> getComparatorDescending(Prefix fieldPrefix) {
+        return (p1, p2) -> {
+            Optional<Field> p1Field = p1.getField(fieldPrefix);
+            Optional<Field> p2Field = p2.getField(fieldPrefix);
+
+            //null values are given lower priority
+            if (p1Field.isEmpty() || p2Field.isEmpty()) {
+                return compareNullField(p1Field, p2Field);
+            }
+
+            return p2Field.get().compareTo(p1Field.get());
+        };
+    }
+
+    private int compareNullField(Optional<Field> p1Field, Optional<Field> p2Field) {
+        //null values would be the last in list in ascending order
+        if (p1Field.isEmpty() && p2Field.isPresent()) {
+            return 1;
+        } else if (p1Field.isPresent() && p2Field.isEmpty()) {
+            return -1;
+        }
+
+        return 0; //both empty
     }
 
     /**
@@ -133,6 +158,40 @@ public class SortCommand extends Command {
         public boolean getIsDescendingOrder() {
             return isDescendingOrder;
         }
+
+        @Override
+        public boolean equals(Object other) {
+            // short circuit if same object
+            if (other == this) {
+                return true;
+            }
+
+            // instanceof handles nulls
+            if (!(other instanceof FieldSortOrder)) {
+                return false;
+            }
+
+            // state check
+            FieldSortOrder f = (FieldSortOrder) other;
+            return fieldPrefix.equals(f.fieldPrefix) && isDescendingOrder == f.isDescendingOrder;
+        }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof SortCommand)) {
+            return false;
+        }
+
+        // state check
+        SortCommand s = (SortCommand) other;
+        return fieldSortOrderList.equals(s.fieldSortOrderList);
     }
 }
 

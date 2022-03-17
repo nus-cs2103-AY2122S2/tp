@@ -71,4 +71,14 @@ public class Birthday extends Field {
     public int hashCode() {
         return value.hashCode();
     }
+
+    @Override
+    public int compareTo(Field other) {
+        if (!(other instanceof Birthday)) {
+            return -1;
+        }
+
+        Birthday otherBirthday = (Birthday) other;
+        return value.compareTo(otherBirthday.value);
+    }
 }

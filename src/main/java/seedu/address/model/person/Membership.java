@@ -5,6 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.Comparator;
 
 import seedu.address.logic.parser.Prefix;
 
@@ -106,4 +107,16 @@ public class Membership extends Field {
         return value.hashCode();
     }
 
+    @Override
+    public int compareTo(Field other) {
+        if (!(other instanceof Membership)) {
+            return -1;
+        }
+
+        //compare by name of membership first followed by date
+        Membership otherMembership = (Membership) other;
+        return Comparator.comparing(Membership::getValue)
+                .thenComparing(Membership::getDate)
+                .compare(this, otherMembership);
+    }
 }

@@ -6,10 +6,12 @@ import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -21,7 +23,9 @@ public class TypicalPersons {
             new Name("Alice Pauline"),
             new Address("123, Jurong West Ave 6, #08-111"),
             new Email("alice@example.com"),
-            new Phone("94351253")),
+            new Phone("94351253"),
+            new Remark("Adventuring is life."),
+            new Birthday("2000-10-10")),
         List.of(
             new Tag("friends")));
 
@@ -30,7 +34,9 @@ public class TypicalPersons {
             new Name("Benson Meier"),
             new Address("311, Clementi Ave 2, #02-25"),
             new Email("benson@example.com"),
-            new Phone("98765432")),
+            new Phone("98765432"),
+            new Remark("Hates to swim."),
+            new Birthday("2000-11-15")),
         List.of(
             new Tag("friends"),
             new Tag("owesMoney")));
@@ -40,7 +46,9 @@ public class TypicalPersons {
             new Name("Carl Kurz"),
             new Address("Wall Street"),
             new Email("carl@example.com"),
-            new Phone("95352563")),
+            new Phone("95352563"),
+            new Remark("Likes dogs."),
+            new Birthday("1998-11-15")),
         List.of());
 
     public static final Person DANIEL = new Person(
@@ -58,7 +66,9 @@ public class TypicalPersons {
             new Name("Elle Meyer"),
             new Address("Michegan Ave"),
             new Email("elle@example.com"),
-            new Phone("9482224")),
+            new Phone("9482224"),
+            new Remark("Reads a lot."),
+            new Birthday("1978-11-15")),
         List.of());
 
     public static final Person FIONA = new Person(
@@ -74,7 +84,8 @@ public class TypicalPersons {
             new Name("George Best"),
             new Address("4th Street"),
             new Email("george@placeholder.net"),
-            new Phone("9482442")),
+            new Phone("9482442"),
+            new Birthday("2001-01-10")),
         List.of());
 
     public static final Person IDA = new Person(
