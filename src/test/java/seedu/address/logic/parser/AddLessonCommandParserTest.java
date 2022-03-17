@@ -36,6 +36,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddLessonCommand;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.testutil.TemporaryLessonBuilder;
 
 public class AddLessonCommandParserTest {
     private AddLessonCommandParser parser = new AddLessonCommandParser();
@@ -44,15 +45,21 @@ public class AddLessonCommandParserTest {
     public void parse_allFieldsPresent_success() {
         // TODO: fix generation of lessonDate to update based on VALID_LESSON_DATE
         // (RELATED TO: CommandTestUtil#VALID_LESSON_DATE)
-        Lesson expectedLesson = Lesson.makeTemporaryLesson(
-                VALID_LESSON_NAME,
-                VALID_LESSON_SUBJECT,
-                VALID_LESSON_ADDRESS,
-                LocalDateTime.of(2022, 12, 1, 18, 0),
-                2, 30
-        ); // TODO: make constants for 2 hours and 30 minutes
+//        Lesson expectedLesson = Lesson.makeTemporaryLesson(
+//                VALID_LESSON_NAME,
+//                VALID_LESSON_SUBJECT,
+//                VALID_LESSON_ADDRESS,
+//                LocalDateTime.of(2022, 12, 1, 18, 0),
+//                2, 30
+//        ); // TODO: make constants for 2 hours and 30 minutes
 
-
+        Lesson expectedLesson = new TemporaryLessonBuilder()
+                .withName(VALID_LESSON_NAME)
+                .withSubject(VALID_LESSON_SUBJECT)
+                .withAddress(VALID_LESSON_ADDRESS)
+                .withDateTimeSlot(2022, 12, 1, 18, 0,
+                        2, 30)
+                .build();
 
         assertParseSuccess(parser, LESSON_NAME_DESC_TRIAL_LESSON + LESSON_SUBJECT_DESC_BIOLOGY
                 + LESSON_ADDRESS_DESC_AMK + LESSON_DATE_DESC + LESSON_START_TIME_DESC_6PM
