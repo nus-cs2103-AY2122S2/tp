@@ -11,8 +11,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.ApplicationStatus;
 import seedu.address.model.person.Course;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.InterviewStatus;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -32,6 +34,8 @@ class JsonAdaptedPerson {
     private final String email;
     private final String course;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final String applicationStatus;
+    private final String interviewStatus;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -39,7 +43,9 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("studentId") String studentId, @JsonProperty("name") String name,
             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
-            @JsonProperty("course") String course, @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("course") String course, @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+            @JsonProperty("applicationStatus") String applicationStatus,
+            @JsonProperty("interviewStatus") String interviewStatus) {
         this.studentId = studentId;
         this.name = name;
         this.phone = phone;
@@ -48,6 +54,9 @@ class JsonAdaptedPerson {
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
+        this.applicationStatus = applicationStatus;
+        this.interviewStatus = interviewStatus;
+
     }
 
     /**
@@ -62,6 +71,8 @@ class JsonAdaptedPerson {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        applicationStatus = source.getApplicationStatus().toString();
+        interviewStatus = source.getInterviewStatus().toString();
     }
 
     /**
@@ -117,6 +128,7 @@ class JsonAdaptedPerson {
         final Course modelCourse = new Course(course);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelId, modelName, modelPhone, modelEmail, modelCourse, modelTags);
+        return new Person(modelId, modelName, modelPhone, modelEmail, modelCourse, modelTags,
+                new ApplicationStatus(applicationStatus), new InterviewStatus(interviewStatus));
     }
 }

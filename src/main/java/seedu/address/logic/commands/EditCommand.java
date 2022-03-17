@@ -1,9 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPLICATION_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERVIEW_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -20,8 +22,10 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.ApplicationStatus;
 import seedu.address.model.person.Course;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.InterviewStatus;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -44,7 +48,9 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_COURSE + "COURSE] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG]..."
+            + "[" + PREFIX_APPLICATION_STATUS + "APPLICATION STATUS]"
+            + "[" + PREFIX_INTERVIEW_STATUS + "INTERVIEW STATUS]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -102,8 +108,13 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Course updatedCourse = editPersonDescriptor.getCourse().orElse(personToEdit.getCourse());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        ApplicationStatus applicationStatus = editPersonDescriptor.getApplicationStatus()
+                .orElse(personToEdit.getApplicationStatus());
+        InterviewStatus interviewStatus = editPersonDescriptor.getInterviewStatus()
+                .orElse(personToEdit.getInterviewStatus());
 
-        return new Person(updatedID, updatedName, updatedPhone, updatedEmail, updatedCourse, updatedTags);
+        return new Person(updatedID, updatedName, updatedPhone, updatedEmail,
+                updatedCourse, updatedTags, applicationStatus, interviewStatus);
     }
 
     @Override
@@ -136,6 +147,8 @@ public class EditCommand extends Command {
         private Course course;
 
         private Set<Tag> tags;
+        private ApplicationStatus applicationStatus;
+        private InterviewStatus interviewStatus;
 
         public EditPersonDescriptor() {}
 
@@ -150,13 +163,16 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setCourse(toCopy.course);
             setTags(toCopy.tags);
+            setApplicationStatus(toCopy.applicationStatus);
+            setInterviewStatus(toCopy.interviewStatus);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(studentId, name, phone, email, course, tags);
+            return CollectionUtil.isAnyNonNull(studentId, name, phone, email, course, tags,
+                    applicationStatus, interviewStatus);
         }
 
         public void setStudentId(StudentId id) {
@@ -199,6 +215,21 @@ public class EditCommand extends Command {
             return Optional.ofNullable(course);
         }
 
+        public void setApplicationStatus(ApplicationStatus applicationStatus) {
+            this.applicationStatus = applicationStatus;
+        }
+
+        public Optional<ApplicationStatus> getApplicationStatus() {
+            return Optional.ofNullable(applicationStatus);
+        }
+
+        public void setInterviewStatus(InterviewStatus interviewStatus) {
+            this.interviewStatus = interviewStatus;
+        }
+
+        public Optional<InterviewStatus> getInterviewStatus() {
+            return Optional.ofNullable(interviewStatus);
+        }
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -236,7 +267,9 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getCourse().equals(e.getCourse())
-                    && getTags().equals(e.getTags());
+                    && getTags().equals(e.getTags())
+                    && getApplicationStatus().equals(e.getApplicationStatus())
+                    && getInterviewStatus().equals(e.getInterviewStatus());
         }
     }
 }
