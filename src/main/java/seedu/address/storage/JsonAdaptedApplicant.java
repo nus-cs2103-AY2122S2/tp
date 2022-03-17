@@ -22,7 +22,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Jackson-friendly version of {@link Applicant}.
  */
-class JsonAdaptedPerson {
+class JsonAdaptedApplicant {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Applicant's %s field is missing!";
 
@@ -38,7 +38,7 @@ class JsonAdaptedPerson {
      * Constructs a {@code JsonAdaptedPerson} with the given applicant details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
+    public JsonAdaptedApplicant(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("age") String age,
             @JsonProperty("address") String address, @JsonProperty("gender") String gender,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
@@ -57,7 +57,7 @@ class JsonAdaptedPerson {
     /**
      * Converts a given {@code Applicant} into this class for Jackson use.
      */
-    public JsonAdaptedPerson(Applicant source) {
+    public JsonAdaptedApplicant(Applicant source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
