@@ -4,16 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LINEUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PLAYER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TEAM;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 
 public class ViewCommand extends Command {
@@ -41,10 +38,16 @@ public class ViewCommand extends Command {
             + MESSAGE_USAGE_PLAYER + "\n"
             + MESSAGE_USAGE_LINEUP;
 
+    private static String successMessage = "Listed all persons!";
+
     private final Predicate<Person> predicate;
     private final List<String> keywords;
-    public static String SUCCESS_MESSAGE = "Listed all persons!";
 
+    /**
+     * Constructs a view command.
+     * @param predicate the view criteria.
+     * @param keywords the keywords that define this type of view.
+     */
     public ViewCommand(Predicate<Person> predicate, List<String> keywords) {
         requireNonNull(predicate);
         this.predicate = predicate;
@@ -56,15 +59,15 @@ public class ViewCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
         changeSuccessMessage(model);
-        return new CommandResult(SUCCESS_MESSAGE);
+        return new CommandResult(successMessage);
     }
 
     private void changeSuccessMessage(Model model) {
         if (keywords.contains(PREFIX_PLAYER.toString()) && keywords.size() > 1) {
-            SUCCESS_MESSAGE = String.format(
+            successMessage = String.format(
                     Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size());
         } else {
-            SUCCESS_MESSAGE = "Listed all persons!";
+            successMessage = "Listed all persons!";
         }
     }
 
