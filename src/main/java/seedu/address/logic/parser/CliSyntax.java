@@ -16,4 +16,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_FIELD = new Prefix("f/");
     public static final Prefix PREFIX_APPLICATION_STATUS = new Prefix("as/");
     public static final Prefix PREFIX_INTERVIEW_STATUS = new Prefix("is/");
+    public static final Prefix PREFIX_AVAILABILITY = new Prefix("avail/");
 }
