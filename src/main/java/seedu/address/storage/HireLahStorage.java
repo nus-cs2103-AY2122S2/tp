@@ -10,7 +10,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 /**
  * Represents a storage for {@link seedu.address.model.AddressBook}.
  */
-public interface ApplicantStorage {
+public interface HireLahStorage {
 
     /**
      * Returns the file path of the data file.

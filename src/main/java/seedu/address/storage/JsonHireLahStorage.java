@@ -17,13 +17,13 @@ import seedu.address.model.ReadOnlyAddressBook;
 /**
  * A class to access AddressBook data stored as a json file on the hard disk.
  */
-public class JsonApplicantStorage implements ApplicantStorage {
+public class JsonHireLahStorage implements HireLahStorage {
 
-    private static final Logger logger = LogsCenter.getLogger(JsonApplicantStorage.class);
+    private static final Logger logger = LogsCenter.getLogger(JsonHireLahStorage.class);
 
     private Path filePath;
 
-    public JsonApplicantStorage(Path filePath) {
+    public JsonHireLahStorage(Path filePath) {
         this.filePath = filePath;
     }
 
