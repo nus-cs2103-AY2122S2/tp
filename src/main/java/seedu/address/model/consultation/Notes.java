@@ -4,8 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's Notes in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
+ * Represents a Consultation's Notes in the address book.
  */
 public class Notes {
 
@@ -21,9 +20,9 @@ public class Notes {
     private String notes;
 
     /**
-     * Constructs a {@code Name}.
+     * Constructs a {@code Notes}.
      *
-     * @param name A valid name.
+     * @param notes A valid notes.
      */
     public Notes(String notes) {
         requireNonNull(notes);
@@ -36,7 +35,7 @@ public class Notes {
     }
 
     /**
-     * Returns true if a given string is a valid name.
+     * Returns true if a given string is a valid notes.
      */
     public static boolean isValid(String test) {
         return test.matches(VALIDATION_REGEX);

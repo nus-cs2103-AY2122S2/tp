@@ -20,8 +20,8 @@ import seedu.address.model.patient.Nric;
 
 public class DeleteConsultationCommandParser {
     /**
-     * Parses the given {@code String} of arguments in the context of the AddContactCommand
-     * and returns an AddContactCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the DeleteConsultationCommand
+     * and returns an DeleteConsultationCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteConsultationCommand parse(String args) throws ParseException {

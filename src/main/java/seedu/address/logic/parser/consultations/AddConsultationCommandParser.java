@@ -28,8 +28,8 @@ import seedu.address.model.patient.Nric;
 
 public class AddConsultationCommandParser implements Parser<AddConsultationCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the AddContactCommand
-     * and returns an AddContactCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AddConsultationCommand
+     * and returns an AddConsultationCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddConsultationCommand parse(String args) throws ParseException {

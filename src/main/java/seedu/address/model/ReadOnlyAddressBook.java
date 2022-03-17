@@ -30,8 +30,8 @@ public interface ReadOnlyAddressBook {
 
     /**
 
-     * Returns an unmodifiable view of the contacts list.
-     * This list will not contain any duplicate persons.
+     * Returns an unmodifiable view of the consultations list.
+     * This list will not contain any duplicate consultations.
      * @return
      */
     ObservableList<Consultation> getConsultationList();

@@ -7,8 +7,7 @@ import java.util.Objects;
 import seedu.address.model.patient.Nric;
 
 /**
- * Represents a Person in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Represents a Consultation in the address book.
  */
 public class Consultation {
 
@@ -23,7 +22,7 @@ public class Consultation {
     private TestsTakenAndResults testsTakenAndResults;
 
     /**
-     * Every field must be present and not null.
+     * Every field except notes, prescription, and testsTakenAndResults must be present and not null.
      */
     public Consultation(Nric nric, Date date, Time time, Notes notes,
                             Prescription prescription, TestsTakenAndResults testsTakenAndResults) {
@@ -61,8 +60,7 @@ public class Consultation {
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both consultations have the same nric, date, time fields.
      */
     @Override
     public boolean equals(Object other) {

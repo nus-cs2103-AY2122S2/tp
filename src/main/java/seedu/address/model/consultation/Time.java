@@ -7,8 +7,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents a Person's name in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
+ * Represents a Consultation's time in the address book.
  */
 public class Time {
 
@@ -24,9 +23,9 @@ public class Time {
     private LocalTime time;
 
     /**
-     * Constructs a {@code Name}.
+     * Constructs a {@code Time}.
      *
-     * @param name A valid name.
+     * @param time A valid time.
      */
     public Time(String time) {
         requireNonNull(time);

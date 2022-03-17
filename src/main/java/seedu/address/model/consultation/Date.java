@@ -9,8 +9,7 @@ import java.time.format.DateTimeFormatter;
 
 
 /**
- * Represents a Person's name in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
+ * Represents a Consultation's date in the address book.
  */
 public class Date {
 
@@ -26,9 +25,9 @@ public class Date {
     private LocalDate date;
 
     /**
-     * Constructs a {@code Name}.
+     * Constructs a {@code Date}.
      *
-     * @param name A valid name.
+     * @param date A valid date.
      */
     public Date(String date) {
         requireNonNull(date);
@@ -42,7 +41,7 @@ public class Date {
     }
 
     /**
-     * Returns true if a given string is a valid name.
+     * Returns true if a given string is a valid date.
      */
     public static boolean isValidDate(String test) {
         return test.matches(VALIDATION_REGEX);

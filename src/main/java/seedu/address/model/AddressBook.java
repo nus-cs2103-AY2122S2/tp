@@ -144,7 +144,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// consultation-level operations
 
     /**
-     * Returns true if a contact with the same identity as {@code contact} exists in the address book.
+     * Returns true if a consultation with the same identity as {@code consultation} exists in the address book.
      */
     public boolean hasConsultation(Consultation consultation) {
         requireNonNull(consultation);
@@ -152,18 +152,18 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a contact to the address book.
-     * The contact must not already exist in the address book.
+     * Adds a consultation to the address book.
+     * The consultation must not already exist in the address book.
      */
     public void addConsultation(Consultation p) {
         consultations.add(p);
     }
 
     /**
-     * Replaces the given contact {@code target} in the list with {@code editedContact}.
+     * Replaces the given consultation {@code target} in the list with {@code editedConsultation}.
      * {@code target} must exist in the address book.
-     * The contact identity of {@code editedContact} must not be the same
-     * as another existing contact in the address book.
+     * The consultation identity of {@code editedConsultation} must not be the same
+     * as another existing consultation in the address book.
      */
     public void setConsultation(Consultation target, Consultation editedConsultation) {
         requireNonNull(editedConsultation);
@@ -180,8 +180,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the contents of the contact list with {@code contacts}.
-     * {@code contacts} must not contain duplicate contacts.
+     * Replaces the contents of the consultations list with {@code consultations}.
+     * {@code consultations} must not contain duplicate consultations.
      */
     public void setConsultations(List<Consultation> consultations) {
         this.consultations.setConsultations(consultations);

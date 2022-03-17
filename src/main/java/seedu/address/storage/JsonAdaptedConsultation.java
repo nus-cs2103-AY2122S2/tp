@@ -16,7 +16,7 @@ import seedu.address.model.patient.Nric;
 
 
 /**
- * Jackson-friendly version of {@link Contact}.
+ * Jackson-friendly version of {@link Consultation}.
  */
 class JsonAdaptedConsultation {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Consultation's %s field is missing!";
@@ -29,7 +29,7 @@ class JsonAdaptedConsultation {
     private final String testsTakenAndResults;
 
     /**
-     * Constructs a {@code JsonAdaptedContact} with the given contact details.
+     * Constructs a {@code JsonAdaptedConsultation} with the given consultation details.
      */
     @JsonCreator
     public JsonAdaptedConsultation(@JsonProperty("ownerNric") String ownerNric, @JsonProperty("date") String date,
@@ -46,7 +46,7 @@ class JsonAdaptedConsultation {
     }
 
     /**
-     * Converts a given {@code Contact} into this class for Jackson use.
+     * Converts a given {@code Consultation} into this class for Jackson use.
      */
     public JsonAdaptedConsultation(Consultation source) {
         ownerNric = source.getNric().value;
@@ -58,9 +58,9 @@ class JsonAdaptedConsultation {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Contact} object.
+     * Converts this Jackson-friendly adapted person object into the model's {@code Consultation} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted contact.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted consultation.
      */
     public Consultation toModelType() throws IllegalValueException {
 

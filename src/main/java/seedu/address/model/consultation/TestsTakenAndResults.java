@@ -1,7 +1,7 @@
 package seedu.address.model.consultation;
 
 /**
- * Represents a Person's Notes in the address book.
+ * Represents a Consultation's TestsTakenAndResults in the address book.
  */
 public class TestsTakenAndResults {
 
@@ -11,8 +11,7 @@ public class TestsTakenAndResults {
     private String testsTakenAndResults;
 
     /**
-     * Constructs a {@code Name}.
-     *
+     * Constructs a {@code TestsTakenAndResults}.
      */
     public TestsTakenAndResults(String testsTakenAndResults) {
         this.testsTakenAndResults = testsTakenAndResults;

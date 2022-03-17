@@ -38,16 +38,17 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Patient> getFilteredPersonList();
 
-
+    /** Returns an unmodifiable view of the filtered list of prescriptions */
     ObservableList<Prescription> getFilteredPrescriptionList();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
+    /** Returns an unmodifiable view of the filtered list of contacts */
     ObservableList<Contact> getFilteredContactList();
 
 
     /** Returns an unmodifiable view of the filtered list of consultations */
     ObservableList<Consultation> getFilteredConsultationList();
 
+    /** Returns an unmodifiable view of the filtered list of medicals */
     ObservableList<Medical> getFilteredMedicalList();
 
 

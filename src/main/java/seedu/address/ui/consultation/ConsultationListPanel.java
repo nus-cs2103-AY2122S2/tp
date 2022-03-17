@@ -13,7 +13,7 @@ import seedu.address.model.patient.Patient;
 import seedu.address.ui.UiPart;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of consultations.
  */
 public class ConsultationListPanel extends UiPart<Region> {
     private static final String FXML = "consultation/ConsultationListPanel.fxml";
@@ -24,7 +24,7 @@ public class ConsultationListPanel extends UiPart<Region> {
     private ObservableList<Patient> personList;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code ConsultationListPanel} with the given {@code ObservableList}.
      */
     public ConsultationListPanel(ObservableList<Consultation> consultationList) {
         super(FXML);
@@ -33,7 +33,7 @@ public class ConsultationListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Consultation} using a {@code ConsultationCard}.
      */
     class ConsultationListViewCell extends ListCell<Consultation> {
         @Override

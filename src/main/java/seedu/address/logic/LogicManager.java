@@ -80,7 +80,7 @@ public class LogicManager implements Logic {
         return model.getFilteredConsultationList();
     }
 
-
+    @Override
     public ObservableList<Medical> getFilteredMedicalList() {
         return model.getFilteredMedicalList();
     }

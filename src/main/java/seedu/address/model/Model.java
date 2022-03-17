@@ -144,35 +144,35 @@ public interface Model {
     // Consultation
 
     /**
-     * Returns true if a contact with the same identity as {@code contact} exists in the address book.
+     * Returns true if a consultation with the same identity as {@code consultation} exists in the address book.
      */
     boolean hasConsultation(Consultation consultation);
 
     /**
-     * Deletes the given contact.
-     * The contact must exist in the address book.
+     * Deletes the given consultation.
+     * The consultation must exist in the address book.
      */
     void deleteConsultation(Consultation target);
 
     /**
-     * Adds the given contact.
-     * {@code contact} must not already exist in the address book.
+     * Adds the given consultation.
+     * {@code consultation} must not already exist in the address book.
      */
     void addConsultation(Consultation consultation);
 
     /**
-     * Replaces the given contact {@code target} with {@code editedContact}.
+     * Replaces the given consultation {@code target} with {@code editedConsultation}.
      * {@code target} must exist in the address book.
-     * The contact identity of {@code editedContact} must not be the same
-     * as another existing contact in the address book.
+     * The consultation identity of {@code editedConsultation} must not be the same
+     * as another existing consultation in the address book.
      */
     void setConsultation(Consultation target, Consultation editedConsultation);
 
-    /** Returns an unmodifiable view of the filtered contact list */
+    /** Returns an unmodifiable view of the filtered consultation list */
     ObservableList<Consultation> getFilteredConsultationList();
 
     /**
-     * Updates the filter of the filtered contact list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered consultation list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredConsultationList(Predicate<Consultation> predicate);

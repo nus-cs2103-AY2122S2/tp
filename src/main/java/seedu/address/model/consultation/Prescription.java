@@ -1,8 +1,7 @@
 package seedu.address.model.consultation;
 
 /**
- * Represents a Person's Notes in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
+ * Represents a Consultation's Prescription in the address book.
  */
 public class Prescription {
 
@@ -12,9 +11,9 @@ public class Prescription {
     private String prescription;
 
     /**
-     * Constructs a {@code Name}.
+     * Constructs a {@code Prescription}.
      *
-     * @param name A valid name.
+     * @param prescription A valid prescription.
      */
     public Prescription(String prescription) {
         this.prescription = prescription;

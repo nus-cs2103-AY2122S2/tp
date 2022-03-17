@@ -13,15 +13,15 @@ import seedu.address.model.consultation.exceptions.DuplicateConsultationExceptio
 
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
- * persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object) so
- * as to ensure that the person with exactly the same fields will be removed.
+ * A list of consultations that enforces uniqueness between its elements that identify it: nric, date, time.
+ * A consultation is considered unique by comparing using {@code Consultation#equals(Object)}. As such, adding and updating of
+ * consultations uses Consultation#equals(Object) for equality so as to ensure that the consultation being added or updated is
+ * unique in terms of identity in the UniqueConsultationList. The removal of a consultation uses Consultation#equals(Object) so
+ * as to ensure that the consultation with the same unique identifiers will be removed.
  *
  * Supports a minimal set of list operations.
  *
- * @see Person#isSamePerson(Person)
+ * @see Consultation#equals(Object)
  */
 public class UniqueConsultationList implements Iterable<Consultation> {
 
@@ -30,7 +30,7 @@ public class UniqueConsultationList implements Iterable<Consultation> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent consultation as the given argument.
      */
     public boolean contains(Consultation toCheck) {
         requireNonNull(toCheck);
@@ -38,8 +38,8 @@ public class UniqueConsultationList implements Iterable<Consultation> {
     }
 
     /**
-     * Adds a person to the list.
-     * The person must not already exist in the list.
+     * Adds a consultation to the list.
+     * The consultation must not already exist in the list.
      */
     public void add(Consultation toAdd) {
         requireNonNull(toAdd);
@@ -50,9 +50,9 @@ public class UniqueConsultationList implements Iterable<Consultation> {
     }
 
     /**
-     * Replaces the person {@code target} in the list with {@code editedPerson}.
+     * Replaces the consultation {@code target} in the list with {@code editedConsultation}.
      * {@code target} must exist in the list.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
+     * The consultation identity of {@code editedConsultation} must not be the same as another existing consultation in the list.
      */
     public void setConsultation(Consultation target, Consultation editedConsultation) {
         requireAllNonNull(target, editedConsultation);
@@ -70,8 +70,8 @@ public class UniqueConsultationList implements Iterable<Consultation> {
     }
 
     /**
-     * Removes the equivalent person from the list.
-     * The person must exist in the list.
+     * Removes the equivalent consultation from the list.
+     * The consultation must exist in the list.
      */
     public void remove(Consultation toRemove) {
         requireNonNull(toRemove);
@@ -86,8 +86,8 @@ public class UniqueConsultationList implements Iterable<Consultation> {
     }
 
     /**
-     * Replaces the contents of this list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of this list with {@code consultations}.
+     * {@code consultations} must not contain duplicate consultations.
      */
     public void setConsultations(List<Consultation> consultations) {
         requireAllNonNull(consultations);
@@ -123,7 +123,7 @@ public class UniqueConsultationList implements Iterable<Consultation> {
     }
 
     /**
-     * Returns true if {@code persons} contains only unique persons.
+     * Returns true if {@code consultations} contains only unique consultations.
      */
     private boolean consultationsAreUnique(List<Consultation> consultations) {
         for (int i = 0; i < consultations.size() - 1; i++) {
