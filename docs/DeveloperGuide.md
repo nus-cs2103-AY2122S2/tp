@@ -384,13 +384,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. The student info has an invalid format.
+
     * 1a1. Tracey will inform user that he/she did not provide the correct information.
+
     * 1a2. User provide the correct details in the correct format.
+
 * 1b. The student to be added already exist in the list by Tracey.
+
     * 1b1. Tracey inform user that the contact exist in her.
-      
-        Use case ends
+    
 * 1c. User adds multiple students in one go.
+  
     * 1c1. Tracey will list out a list of new students added with their info.
 
 * 1d. User uses wrong pre-defined constants for fields such as faculty or covid status.
@@ -398,8 +402,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1d1. Tracey will provide a list of pre-defined constants for the user.
 
     * 1d2. User use the correct pre-defined constants for the respective tags.
-      
-        Use case ends
     
 **Use case: Edit information of a student**
 
@@ -421,6 +423,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2b. The given student name exists multiple places on the list.
 
     * 2b1. Tracey will inform user that he/she did not provide the correct information formatting.
+
     * 2b2. User will key in the correct format to edit student.
 
 **Use case: Clear the system database**
@@ -576,4 +579,6 @@ testers are expected to do more *exploratory* testing.
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
+
 1. _{ more test cases …​ }_
+
