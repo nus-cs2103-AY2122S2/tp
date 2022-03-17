@@ -176,6 +176,15 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a string.
+     */
+    public static String parseString(String str) {
+        requireNonNull(str);
+        String trimmedStr = str.trim();
+        return trimmedStr;
+    }
+
+    /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
