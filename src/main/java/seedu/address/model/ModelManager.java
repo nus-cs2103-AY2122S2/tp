@@ -139,7 +139,7 @@ public class ModelManager implements Model {
     @Override
     public void setPrescription(Prescription target, Prescription editedPrescription) {
         requireAllNonNull(target, editedPrescription);
-        addressBook.setPrescriptions(target, editedPrescription);
+        addressBook.setPrescription(target, editedPrescription);
     }
 
     @Override

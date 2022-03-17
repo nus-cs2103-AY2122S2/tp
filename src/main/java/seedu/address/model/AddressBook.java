@@ -71,6 +71,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         setPersons(newData.getPersonList());
         setContacts(newData.getContactList());
+        setPrescriptions(newData.getPrescriptionList());
         setTestResults(newData.getTestResultList());
     }
 
@@ -103,7 +104,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(prescription);
         return prescriptions.contains(prescription);
     }
-    public void setPrescriptions(Prescription target, Prescription editedPrescription) {
+    public void setPrescriptions(List<Prescription> prescriptions) {
+        this.prescriptions.setPrescriptions(prescriptions);
+    }
+    public void setPrescription(Prescription target, Prescription editedPrescription) {
         requireNonNull(editedPrescription);
         prescriptions.setPrescription(target, editedPrescription);
     }
