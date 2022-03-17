@@ -64,6 +64,7 @@ public class AddMembershipCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddMembershipCommand // instanceof handles nulls
-                && membership.equals(((AddMembershipCommand) other).membership));
+                && membership.equals(((AddMembershipCommand) other).membership)
+                && index.equals(((AddMembershipCommand) other).index));
     }
 }

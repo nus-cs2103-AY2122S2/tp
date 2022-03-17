@@ -97,9 +97,14 @@ public class Membership extends Field {
 
     @Override
     public boolean equals(Object other) {
+        if (date != null) {
+            return other == this // short circuit if same object
+                    || (other instanceof Membership // instanceof handles nulls
+                    && value.equals(((Membership) other).value) && date.equals(((Membership) other).date));
+        }
         return other == this // short circuit if same object
                 || (other instanceof Membership // instanceof handles nulls
-                && value.equals(((Membership) other).value) && date.equals(((Membership) other).date)); // state check
+                && value.equals(((Membership) other).value));
     }
 
     @Override
