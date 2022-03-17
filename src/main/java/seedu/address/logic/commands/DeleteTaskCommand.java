@@ -5,8 +5,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK;
 
-import java.util.List;
-
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
@@ -36,6 +34,13 @@ public class DeleteTaskCommand extends Command {
     private final Task task;
     private final Group group;
 
+    /**
+     * Creates a DeleteTaskCommand to delete the specified {@code Task}
+     * in the specified {@code Group}
+     *
+     * @param task Task to be deleted.
+     * @param group Group in which the task to be deleted exists.
+     */
     public DeleteTaskCommand(Task task, Group group) {
         requireAllNonNull(task, group);
 
