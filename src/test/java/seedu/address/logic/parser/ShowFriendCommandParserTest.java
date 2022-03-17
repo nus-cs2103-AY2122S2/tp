@@ -4,6 +4,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -49,6 +50,15 @@ public class ShowFriendCommandParserTest {
         assertParseFailure(parser, fullName, String.format(MESSAGE_INVALID_COMMAND_FORMAT, ShowFriendCommand.MESSAGE_USAGE));
     }
 
+    @Test
+    public void parse_multipleNamesOnlyLastValidNameShown_success() {
+        Person personOneToShow = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personTwoToShow = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        String fullNameOne = personOneToShow.getName().fullName;
+        String fullNameTwo = personTwoToShow.getName().fullName;
+        ShowFriendCommand showFriendCommand = new ShowFriendCommand(personTwoToShow);
+        assertParseSuccess(parser, " n/" + fullNameOne + " n/" + fullNameTwo, showFriendCommand);
+    }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
