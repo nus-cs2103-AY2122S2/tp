@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Log;
+import seedu.address.model.person.LogName;
 
 
 /**
@@ -28,7 +29,7 @@ public class JsonAdaptedLog {
      * Constructs a {@code JsonAdaptedLog} with the given {@code Log}.
      */
     public JsonAdaptedLog(Log log) {
-        this.title = log.getTitle();
+        this.title = log.getTitle().toString();
         this.description = log.getDescription().toString();
     }
 
@@ -39,8 +40,8 @@ public class JsonAdaptedLog {
      *                               illegal values.
      */
     public Log toModelType() throws IllegalValueException {
-        if (!Log.isValidTitle(this.title)) {
-            throw new IllegalValueException(Log.TITLE_CONSTRAINTS);
+        if (!LogName.isValidLogName(this.title)) {
+            throw new IllegalValueException(LogName.MESSAGE_CONSTRAINTS);
         }
         return new Log(this.title, this.description);
     }

@@ -1,31 +1,21 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import seedu.address.model.common.Description;
 
 
 /**
  * Represents a note or log tied to a Person in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidTitle(String)}
  */
 public class Log {
 
     // default values
     public static final String DEFAULT_NO_DESCRIPTION = null;
 
-    // constraints
-    public static final int TITLE_LENGTH_CONSTRAINT = 50;
-    public static final String TITLE_CONSTRAINTS = "Titles of logs must satisfy:\n"
-            + "1. Not be trivial (i.e. not empty or contain only spaces\n"
-            + "2. Be at most " + Log.TITLE_LENGTH_CONSTRAINT + " characters long. "
-            + "This is because of display limitations.";
-
     // immutable attributes
-    private final String title;
+    private final LogName title;
     private final Description description;
-
 
     /**
      * Constructs a Log object.
@@ -35,19 +25,8 @@ public class Log {
      */
     public Log(String title, String description) {
         requireNonNull(title);
-        checkArgument(isValidTitle(title), Log.TITLE_CONSTRAINTS);
-        this.title = title;
+        this.title = new LogName(title);
         this.description = new Description(description);
-    }
-
-    /**
-     * Returns true if a given string is a valid title.
-     */
-    public static boolean isValidTitle(String title) {
-        requireNonNull(title);
-        return (title.length() > 0) // not empty string
-                && (title.split(" ").length > 0) // at least one non-space item
-                && (title.length() < Log.TITLE_LENGTH_CONSTRAINT); // within length limit
     }
 
     public Description getDescription() {
@@ -55,7 +34,7 @@ public class Log {
         return this.description;
     }
 
-    public String getTitle() {
+    public LogName getTitle() {
         requireNonNull(this.title);
         return this.title;
     }

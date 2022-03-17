@@ -10,7 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteLogCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.FriendName;
 
 /**
  * Parses the input arguments and creates a new DeleteLogCommand object.
@@ -41,7 +41,7 @@ public class DeleteLogCommandParser implements Parser<DeleteLogCommand> {
         // initialize
         Index personIndex = null;
         Index logIndex = null;
-        Name personName = null;
+        FriendName personName = null;
         boolean hasIndex = !argMultimap.getPreamble().isEmpty();
         boolean hasName = arePrefixesPresent(argMultimap, PREFIX_NAME);
         boolean isForOnePerson = hasIndex ^ hasName;
@@ -52,7 +52,7 @@ public class DeleteLogCommandParser implements Parser<DeleteLogCommand> {
             personIndex = ParserUtil.parseIndex(argMultimap.getPreamble());
         } else if (hasName) {
             if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-                personName = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+                personName = ParserUtil.parseFriendName(argMultimap.getValue(PREFIX_NAME).get());
             }
         }
 

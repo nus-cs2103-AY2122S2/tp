@@ -11,7 +11,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddLogCommand;
 import seedu.address.logic.commands.AddLogCommand.AddLogDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.FriendName;
 
 /**
  * Parses input arguments and creates a new AddLogCommand object
@@ -31,7 +31,7 @@ public class AddLogCommandParser implements Parser<AddLogCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TITLE, PREFIX_DESCRIPTION);
 
-        Name name = null;
+        FriendName name = null;
         Index index = null;
 
         // ensure title prefix is present
@@ -51,7 +51,7 @@ public class AddLogCommandParser implements Parser<AddLogCommand> {
         if (hasIndex) {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } else {
-            name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+            name = ParserUtil.parseFriendName(argMultimap.getValue(PREFIX_NAME).get());
         }
 
         // read other arguments

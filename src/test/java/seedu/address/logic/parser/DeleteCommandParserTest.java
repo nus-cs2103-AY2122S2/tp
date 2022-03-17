@@ -13,7 +13,7 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.FriendName;
 import seedu.address.model.person.Person;
 
 /**
@@ -31,7 +31,7 @@ public class DeleteCommandParserTest {
     @Test
     public void parse_validArgsName_returnsDeleteCommand() {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Name name = personToDelete.getName();
+        FriendName name = personToDelete.getName();
         DeleteCommand deleteCommand = new DeleteCommand(personToDelete.getName());
 
         assertParseSuccess(parser, " n/" + name.fullName, deleteCommand);
@@ -39,13 +39,13 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_noNameGiven_throwsParseException() {
-        assertParseFailure(parser, " n/", Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " n/", FriendName.MESSAGE_CONSTRAINTS);
     }
 
 
     @Test
     public void parse_invalidArgsName_throwsParseException() {
-        assertParseFailure(parser, " n/" + "!@", Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " n/" + "!@", FriendName.MESSAGE_CONSTRAINTS);
     }
 
     @Test

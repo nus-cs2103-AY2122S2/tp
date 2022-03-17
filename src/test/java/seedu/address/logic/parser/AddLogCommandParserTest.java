@@ -29,12 +29,13 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddLogCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.model.person.Log;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.FriendName;
+import seedu.address.model.person.LogName;
+
 
 public class AddLogCommandParserTest {
 
-    private static final String MESSAGE_INVALID_TITLE = Log.TITLE_CONSTRAINTS;
+    private static final String MESSAGE_INVALID_TITLE = LogName.MESSAGE_CONSTRAINTS;
     private final AddLogCommandParser parser = new AddLogCommandParser();
 
     @Test
@@ -166,7 +167,7 @@ public class AddLogCommandParserTest {
         assertParseSuccess(parser, args, expectedCommand);
 
         // ===== WITH NAME =====
-        Name targetName = new Name(VALID_NAME_AMY);
+        FriendName targetName = new FriendName(VALID_NAME_AMY);
 
         // valid title
         args = NAME_DESC_AMY + LOG_TITLE_DESC;
@@ -209,7 +210,7 @@ public class AddLogCommandParserTest {
 
         // ===== WITH NAME =====
         // expected to take last name
-        Name targetName = new Name(VALID_NAME_BOB);
+        FriendName targetName = new FriendName(VALID_NAME_BOB);
         args = NAME_DESC_AMY + NAME_DESC_BOB + LOG_TITLE_DESC + LOG_DESCRIPTION_DESC;
         descriptor = new AddLogCommand.AddLogDescriptor();
         descriptor.setNewTitle(VALID_LOG_TITLE);
@@ -233,7 +234,7 @@ public class AddLogCommandParserTest {
 
         // ===== WITH NAME =====
         // expected to take last name
-        Name targetName = new Name(VALID_NAME_BOB);
+        FriendName targetName = new FriendName(VALID_NAME_BOB);
         args = INVALID_NAME_DESC + NAME_DESC_BOB + LOG_TITLE_DESC + LOG_DESCRIPTION_DESC;
         descriptor = new AddLogCommand.AddLogDescriptor();
         descriptor.setNewTitle(VALID_LOG_TITLE);

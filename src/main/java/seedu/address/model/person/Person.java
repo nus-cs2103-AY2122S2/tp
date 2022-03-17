@@ -1,7 +1,6 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.isNull;
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
@@ -21,8 +20,7 @@ import seedu.address.model.tag.Tag;
 public class Person {
 
     // Identity fields
-    private final Name name;
-
+    private final FriendName name;
 
     // Data fields
     private final Phone phone;
@@ -43,8 +41,9 @@ public class Person {
      * @param tags        Set of tags of the person. If null, default to no tags.
      * @param logs        Log list of the person. if null, default to no logs.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Description description, Set<Tag> tags, List<Log> logs) {
-        requireNonNull(name);
+    public Person(FriendName name, Phone phone, Email email, Address address, Description description, Set<Tag> tags,
+                  List<Log> logs) {
+        requireAllNonNull(name);
         this.name = name;
         this.phone = isNull(phone) ? new Phone(null) : phone;
         this.email = isNull(email) ? new Email(null) : email;
@@ -52,22 +51,69 @@ public class Person {
         this.description = isNull(description) ? new Description(null) : description;
         this.tags.addAll(isNull(tags) ? new HashSet<>() : tags);
         this.logs.setLogs(isNull(logs) ? new ArrayList<>() : logs);
-
-        // sanity check
         requireAllNonNull(this.name, this.phone, this.email,
                 this.address, this.description, this.tags, this.logs);
     }
+
+    /**
+     * Overloaded constructor for person without tags and logs.
+     */
+    public Person(FriendName name, Phone phone, Email email, Address address) {
+        requireAllNonNull(name, phone, email, address);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.description = new Description(null);
+        this.tags.addAll(new HashSet<>());
+        this.logs.setLogs(new ArrayList<>());
+    }
+
 
     /**
      * Overloaded method to construct a person with only a name.
      *
      * @param name Name of the person. Compulsory.
      */
-    public Person(Name name) {
-        this(name, null, null, null, null, null, null);
+    public Person(FriendName name) {
+        this.name = name;
+        this.phone = new Phone(null);
+        this.email = new Email(null);
+        this.address = new Address(null);
+        this.description = new Description(null);
+        this.tags.addAll(new HashSet<>());
+        this.logs.setLogs(new ArrayList<>());
     }
 
-    public Name getName() {
+    /**
+     * Overloaded constructor for person with no email.
+     */
+    public Person(FriendName name, Phone phone, Email email, Address address, Description description, Set<Tag> tags) {
+        requireAllNonNull(name, phone, address, description, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.description = description;
+        this.tags.addAll(tags);
+        this.logs.setLogs(new ArrayList<>());
+    }
+
+    /**
+     * Overloaded constructor for person with no description.
+     */
+    public Person(FriendName name, Phone phone, Email email, Address address, Set<Tag> tags, List<Log> logs) {
+        requireAllNonNull(name, phone, email, address, tags, logs);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.description = new Description(null);
+        this.tags.addAll(tags);
+        this.logs.setLogs(logs);
+    }
+
+    public FriendName getName() {
         return name;
     }
 

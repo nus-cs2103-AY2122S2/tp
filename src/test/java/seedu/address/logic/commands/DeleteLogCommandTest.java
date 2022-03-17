@@ -17,7 +17,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.FriendName;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -38,7 +38,7 @@ public class DeleteLogCommandTest {
 
         Index personIndex = INDEX_FIRST_PERSON;
         Index logIndex = INDEX_FIRST_LOG;
-        Name personName = new Name(VALID_NAME_AMY);
+        FriendName personName = new FriendName(VALID_NAME_AMY);
 
         // all flag should not have logIndex
         assertThrows(AssertionError.class, () -> new DeleteLogCommand(
@@ -60,7 +60,7 @@ public class DeleteLogCommandTest {
         DeleteLogCommand command;
         DeleteLogCommand other;
         Index personIndex = INDEX_FIRST_PERSON;
-        Name name = new Name(VALID_NAME_AMY);
+        FriendName name = new FriendName(VALID_NAME_AMY);
 
         // all flags equal
         command = new DeleteLogCommand(true);
@@ -281,7 +281,7 @@ public class DeleteLogCommandTest {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         command = new DeleteLogCommand(true,
                 true,
-                new Name("some random bloke"), // not in address book
+                new FriendName("some random bloke"), // not in address book
                 null); // no log specified
 
         assertCommandFailure(command, model, MESSAGE_PERSON_NOT_FOUND);

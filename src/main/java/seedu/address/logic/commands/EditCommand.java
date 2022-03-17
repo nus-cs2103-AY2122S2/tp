@@ -23,8 +23,8 @@ import seedu.address.model.Model;
 import seedu.address.model.common.Description;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.FriendName;
 import seedu.address.model.person.Log;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -97,7 +97,7 @@ public class EditCommand extends Command {
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
+        FriendName updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
@@ -131,7 +131,7 @@ public class EditCommand extends Command {
      * corresponding field value of the person.
      */
     public static class EditPersonDescriptor {
-        private Name name;
+        private FriendName name;
         private Phone phone;
         private Email email;
         private Address address;
@@ -163,11 +163,11 @@ public class EditCommand extends Command {
             return CollectionUtil.isAnyNonNull(name, phone, email, address, description, tags);
         }
 
-        public void setName(Name name) {
+        public void setName(FriendName name) {
             this.name = name;
         }
 
-        public Optional<Name> getName() {
+        public Optional<FriendName> getName() {
             return Optional.ofNullable(name);
         }
 

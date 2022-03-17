@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteLogCommand;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.FriendName;
 
 public class DeleteLogCommandParserTest {
 
@@ -167,7 +167,7 @@ public class DeleteLogCommandParserTest {
         assertParseSuccess(parser, args, expectedCommand);
 
         // ===== PERSON NAME =====
-        Name targetName = new Name(VALID_NAME_AMY);
+        FriendName targetName = new FriendName(VALID_NAME_AMY);
         // case 1: person and log
         args = NAME_DESC_AMY + " " + PREFIX_LOG_INDEX + logIndex.getOneBased();
         expectedCommand = new DeleteLogCommand(true, false, targetName, logIndex);
@@ -201,7 +201,7 @@ public class DeleteLogCommandParserTest {
         assertParseSuccess(parser, args, expectedCommand);
 
         // case 2: multiple person names
-        Name targetName = new Name(VALID_NAME_BOB);
+        FriendName targetName = new FriendName(VALID_NAME_BOB);
         args = NAME_DESC_AMY + " " + NAME_DESC_BOB + " "
                 + PREFIX_LOG_INDEX + logIndex1.getOneBased();
         expectedCommand = new DeleteLogCommand(true, false, targetName, logIndex1);
@@ -225,7 +225,7 @@ public class DeleteLogCommandParserTest {
         assertParseSuccess(parser, args, expectedCommand);
 
         // case 2: multiple person names
-        Name targetName = new Name(VALID_NAME_BOB);
+        FriendName targetName = new FriendName(VALID_NAME_BOB);
         args = INVALID_NAME_DESC + " " + NAME_DESC_BOB + " "
                 + PREFIX_LOG_INDEX + logIndex.getOneBased();
         expectedCommand = new DeleteLogCommand(true, false, targetName, logIndex);

@@ -11,10 +11,11 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.common.Description;
 import seedu.address.model.event.DateTime;
+import seedu.address.model.event.EventName;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Log;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.FriendName;
+import seedu.address.model.person.LogName;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -45,13 +46,28 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
-    public static Name parseName(String name) throws ParseException {
+    public static FriendName parseFriendName(String name) throws ParseException {
         requireNonNull(name); //when a name is entered by user, it should not be null
         String trimmedName = name.trim();
-        if (!Name.isValidName(trimmedName)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        if (!FriendName.isValidFriendName(trimmedName)) {
+            throw new ParseException(FriendName.MESSAGE_CONSTRAINTS);
         }
-        return new Name(trimmedName);
+        return new FriendName(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String name} into a {@code EventName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static EventName parseEventName(String name) throws ParseException {
+        requireNonNull(name); //when a name is entered by user, it should not be null
+        String trimmedName = name.trim();
+        if (!EventName.isValidEventName(trimmedName)) {
+            throw new ParseException(EventName.MESSAGE_CONSTRAINTS);
+        }
+        return new EventName(trimmedName);
     }
 
     /**
@@ -116,11 +132,11 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> names} into a {@code Set<Name>}.
      */
-    public static Set<Name> parseNames(Collection<String> names) throws ParseException {
+    public static Set<FriendName> parseNames(Collection<String> names) throws ParseException {
         requireNonNull(names);
-        final Set<Name> nameSet = new HashSet<>();
+        final Set<FriendName> nameSet = new HashSet<>();
         for (String name : names) {
-            nameSet.add(parseName(name));
+            nameSet.add(parseFriendName(name));
         }
         return nameSet;
     }
@@ -174,8 +190,8 @@ public class ParserUtil {
      */
     public static String parseTitle(String title) throws ParseException {
         requireNonNull(title);
-        if (!Log.isValidTitle(title)) {
-            throw new ParseException(Log.TITLE_CONSTRAINTS);
+        if (!LogName.isValidLogName(title)) {
+            throw new ParseException(LogName.MESSAGE_CONSTRAINTS);
         }
         return title; // TODO: 8/3/2022 refactor into Title object next time
     }
@@ -185,11 +201,11 @@ public class ParserUtil {
      *
      * @throws ParseException if a given {@code names} is invalid
      */
-    public static Set<Name> parseFriendNames(Collection<String> names) throws ParseException {
+    public static Set<FriendName> parseFriendNames(Collection<String> names) throws ParseException {
         requireNonNull(names);
-        final Set<Name> nameSet = new HashSet<>();
+        final Set<FriendName> nameSet = new HashSet<>();
         for (String name: names) {
-            nameSet.add(parseName(name));
+            nameSet.add(parseFriendName(name));
         }
         return nameSet;
     }

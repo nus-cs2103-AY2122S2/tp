@@ -30,7 +30,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Event;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.FriendName;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditEventDescriptorBuilder;
@@ -53,7 +53,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommandByName_deletefriend() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand("deletefriend n/Dummy Name");
-        assertEquals(new DeleteCommand(new Name("Dummy Name")), command);
+        assertEquals(new DeleteCommand(new FriendName("Dummy Name")), command);
     }
 
     @Test
