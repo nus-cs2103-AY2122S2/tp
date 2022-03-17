@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.AddressBook;
-import seedu.address.model.person.Description;
+import seedu.address.model.common.Description;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 

@@ -7,6 +7,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.common.Description;
+
 public class LogTest {
 
     @Test
@@ -66,7 +68,7 @@ public class LogTest {
         String title = "title";
         String description = "description";
         Log testLog = new Log(title, description);
-        assertEquals(testLog.getDescription(), description);
+        assertEquals(testLog.getDescription(), new Description(description));
         assertEquals(testLog.getTitle(), title);
     }
 }
