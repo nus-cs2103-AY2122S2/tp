@@ -53,7 +53,7 @@ public class Group {
     }
 
     /**
-     * Adds a task into this specific group
+     * Adds a task into this specific group.
      *
      * @param task Tasks to be added.
      */
