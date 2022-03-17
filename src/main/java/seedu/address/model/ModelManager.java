@@ -13,6 +13,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.buyer.Buyer;
 import seedu.address.model.client.Client;
+import seedu.address.model.seller.Seller;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -124,6 +125,19 @@ public class ModelManager implements Model {
     public boolean hasBuyer(Buyer buyer) {
         requireNonNull(buyer);
         return addressBook.hasBuyer(buyer);
+    }
+
+    //========== For addseller============//
+    @Override
+    public void addSeller(Seller seller) {
+        addressBook.addSeller(seller);
+        updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
+    }
+
+    @Override
+    public boolean hasSeller(Seller seller) {
+        requireNonNull(seller);
+        return addressBook.hasSeller(seller);
     }
 
     //=========== Filtered client List Accessors =============================================================
