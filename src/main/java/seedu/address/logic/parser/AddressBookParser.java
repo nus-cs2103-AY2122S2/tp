@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandType.parseAddCommandType;
+import static seedu.address.logic.commands.CommandType.parseDeleteCommandType;
 import static seedu.address.logic.commands.CommandType.parseViewCommandType;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
@@ -59,6 +60,9 @@ public class AddressBookParser {
             return new EditCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
+            if (argMultimap.getValue(PREFIX_TYPE).isPresent()) {
+                return parseDeleteCommandType(argMultimap.getValue(PREFIX_TYPE).get(), arguments);
+            }
             return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
