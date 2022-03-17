@@ -19,9 +19,11 @@ public class AddMembershipParserTest {
         Membership expectedMember = new Membership("Test");
         Membership expectedMemberWithDate = new Membership("Test", LocalDate.parse("1920-02-02"));
 
+        // valid name
         assertParseSuccess(parser, "1 m/Test",
                 new AddMembershipCommand(Index.fromOneBased(1), expectedMember));
 
+        // valid name and date
         assertParseSuccess(parser, "1 m/Test d/1920-02-02",
                 new AddMembershipCommand(Index.fromOneBased(1), expectedMemberWithDate));
     }
