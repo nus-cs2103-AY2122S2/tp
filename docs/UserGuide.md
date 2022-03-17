@@ -245,7 +245,7 @@ Action | Format, Examples
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [g/GITHUB_USERNAME] [t/Team]…​ [s/SKILLNAME_SKILLPROFICENCY]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Filter** | `filter SKILL`<br> e.g. `filter c`
-**Filter Past Teammates** | `filterteam`
+**Filter Past Teammates** | `filterteam` 
 **Sort** | `sort SKILL`<br> e.g., `sort Python`
 **List** | `list`
 **Help** | `help`
