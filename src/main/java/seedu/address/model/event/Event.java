@@ -15,7 +15,7 @@ import seedu.address.model.person.Person;
 
 /**
  * Represents an Event in Amigos.
- * Guarantees: fields are present and not null, field values are validated, immutable.
+ * Guarantees: fields are present and not null, field values are validated, immutable. (except for friendNames)
  */
 public class Event {
 
@@ -25,7 +25,7 @@ public class Event {
 
     // Data fields
     private final Description description;
-    private final Set<Name> friendNames = new HashSet<>();
+    private final HashSet<Name> friendNames = new HashSet<>(); // mutable to allow for easier updating
 
     /**
      * Constructor for event.
@@ -57,6 +57,31 @@ public class Event {
 
     public Description getDescription() {
         return description;
+    }
+
+    /**
+     * Changes the given Name from {@code original} to {@code replacement} if
+     * it is present in this Event's set of friend names.
+     *
+     * @param original Friend name to be changed.
+     * @param replacement Name to change the friend name to.
+     */
+    public void changeFriendNameIfPresent(Name original, Name replacement) {
+        if (getFriendNames().contains(original)) {
+            friendNames.remove(original);
+            friendNames.add(replacement);
+        }
+    }
+
+    /**
+     * Removes the given Name {@code toRemove} from the set of friend names in Event if present.
+     *
+     * @param toRemove Name of friend to remove from the Event if present.
+     */
+    public void removeFriendNameIfPresent(Name toRemove) {
+        if (getFriendNames().contains(toRemove)) {
+            friendNames.remove(toRemove);
+        }
     }
 
     /**
