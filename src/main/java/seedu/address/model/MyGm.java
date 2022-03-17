@@ -1,5 +1,10 @@
 package seedu.address.model;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import seedu.address.model.lineup.Lineup;
 import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Name;
@@ -7,28 +12,26 @@ import seedu.address.model.person.Person;
 import seedu.address.model.team.Team;
 import seedu.address.model.team.TeamName;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
-import java.util.List;
-
 /**
  * Represents the root class of MyGM.
  */
-public class MyGM {
+public class MyGm {
     private final UniquePlayerList players;
     private final UniqueTeamList teams;
+    private final List<Team> tempteams; // NOTE: TEMPORARY FOR TX'S FUNCTION
 
     /**
      * Creates a new empty MyGm class.
      */
-    public MyGM() {
+    public MyGm() {
         this.players = new UniquePlayerList();
         this.teams = new UniqueTeamList();
+        this.tempteams = new ArrayList<>();
     }
 
     //// list overwrite operations
     public void setPersons(List<Person> persons) {
-        this.players.setPersons(persons);
+        //this.players.setPersons(persons);
     }
 
     /**
@@ -52,7 +55,7 @@ public class MyGM {
     }
 
     public boolean hasPerson(Person player) {
-        return players.containsName(targetName);
+        return true; // players.containsName(targetName);
     }
 
     public Person getPerson(Name targetPersonName) {
@@ -63,6 +66,7 @@ public class MyGM {
         requireAllNonNull(target, editedPerson);
 
         players.setPerson(target, editedPerson);
+    }
 
     boolean containsPlayer(String name) {
         return this.players.containsName(new Name(name));
@@ -144,7 +148,7 @@ public class MyGM {
      * Deletes a lineup from a team.
      */
     public boolean deleteLineupFromTeam(String lineup, String team) {
-        for (Team tempTeam : this.teams) {
+        for (Team tempTeam : tempteams) {
             if (tempTeam.getTeamName().equals(new TeamName(team))) {
                 tempTeam.removeLineup(lineup);
                 return true;
@@ -158,6 +162,6 @@ public class MyGM {
      * Deletes a team.
      */
     public boolean deleteTeamFromPool(String team) {
-
+        return true;
     }
 }

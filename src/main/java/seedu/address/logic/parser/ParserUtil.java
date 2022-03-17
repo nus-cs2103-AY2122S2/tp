@@ -29,6 +29,9 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
+    /**
+     * Parses a player.
+     */
     public static Name parsePlayer(String targetPlayerName) throws ParseException {
         requireNonNull(targetPlayerName);
         String trimmedName = targetPlayerName.trim();

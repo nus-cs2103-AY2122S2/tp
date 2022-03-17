@@ -24,6 +24,9 @@ public class Team {
         this.teamLineupList = new TeamLineupList();
     }
 
+    /**
+     * Constructs a team.
+     */
     public Team(TeamName teamName, TeamMemberList teamMemberList, TeamLineupList teamLineupList) {
         this.teamName = teamName;
         this.teamMemberList = teamMemberList;
@@ -67,7 +70,7 @@ public class Team {
     }
 
     public void deletePersonFromTeam(Person person) {
-        this.teamMemberList.deletePersonFromTeam(person);
+        this.teamMemberList.removePerson(person);
     }
 
     public TeamMemberList getTeamMemberList() {
@@ -77,4 +80,19 @@ public class Team {
     public TeamLineupList getTeamLineupList() {
         return teamLineupList;
 
+    }
+    /**
+     * Removes a player.
+     */
+    public void removePlayer(Person person) {
+        // meanwhile, should also remove from lineup
+        this.teamMemberList.removePerson(person);
+    }
+
+    /**
+     * Removes a lineup.
+     */
+    public void removeLineup(String lineup) {
+        return;
+    }
 }
