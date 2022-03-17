@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_FRIENDNAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -13,6 +15,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMOVE_FRIENDNAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -27,6 +30,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.EditEventDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -52,6 +56,14 @@ public class CommandTestUtil {
 
     public static final String VALID_LOG_DESCRIPTION = "some description!";
     public static final String VALID_LOG_DESCRIPTION_OTHER = "some other description!";
+
+    public static final String VALID_EVENT_NAME = "Some valid event";
+    public static final String VALID_EVENT_NAME_OTHER = "Some other valid event";
+    public static final String VALID_EVENT_DATETIME = "15-12-2000 2201";
+    public static final String VALID_EVENT_DATETIME_OTHER = "15-12-2020 1400";
+    public static final String VALID_EVENT_DESCRIPTION = "Some valid description";
+    public static final String VALID_EVENT_DESCRIPTION_OTHER = "Some other valid description";
+
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NEW_NAME_DESC_AMY = " " + PREFIX_NEW_NAME + VALID_NAME_AMY;
@@ -81,6 +93,16 @@ public class CommandTestUtil {
     public static final String LOG_TITLE_DESC_PRECEDING_SPACE = " " + PREFIX_TITLE + VALID_LOG_TITLE_PRECEDING_SPACE;
     public static final String LOG_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION + VALID_LOG_DESCRIPTION;
     public static final String LOG_DESCRIPTION_DIFFERENT_DESC = " " + PREFIX_DESCRIPTION + VALID_LOG_DESCRIPTION_OTHER;
+    public static final String EVENT_NAME_DESC_A = " " + PREFIX_NAME + VALID_EVENT_NAME;
+    public static final String EVENT_NAME_DESC_B = " " + PREFIX_NAME + VALID_EVENT_NAME_OTHER;
+    public static final String EVENT_DATETIME_DESC_A = " " + PREFIX_DATETIME + VALID_EVENT_DATETIME;
+    public static final String EVENT_DATETIME_DESC_B = " " + PREFIX_DATETIME + VALID_EVENT_DATETIME_OTHER;
+    public static final String EVENT_DESCRIPTION_DESC_A = " " + PREFIX_DESCRIPTION + VALID_EVENT_DESCRIPTION;
+    public static final String EVENT_DESCRIPTION_DESC_B = " " + PREFIX_DESCRIPTION + VALID_EVENT_DESCRIPTION_OTHER;
+    public static final String EVENT_ADDFRIEND_DESC_A = " " + PREFIX_ADD_FRIENDNAME + VALID_NAME_AMY;
+    public static final String EVENT_ADDFRIEND_DESC_B = " " + PREFIX_ADD_FRIENDNAME + VALID_NAME_BOB;
+    public static final String EVENT_REMOVEFRIEND_DESC_A = " " + PREFIX_REMOVE_FRIENDNAME + VALID_NAME_AMY;
+    public static final String EVENT_REMOVEFRIEND_DESC_B = " " + PREFIX_REMOVE_FRIENDNAME + VALID_NAME_BOB;
 
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
@@ -97,6 +119,11 @@ public class CommandTestUtil {
             + " "; //empty descriptions not allowed
     public static final String INVALID_LOG_TITLE_EMPTY_STRING_DESC = " " + PREFIX_TITLE + "";
     public static final String INVALID_LOG_TITLE_ONLY_SPACES_DESC = " " + PREFIX_TITLE + "     ";
+    public static final String INVALID_EVENT_NAME_DESC = " " + PREFIX_NAME + "James\nBirthday";
+    public static final String INVALID_EVENT_DATETIME_DESC = " " + PREFIX_DATETIME + "1400-20-10 %%";
+    public static final String INVALID_EVENT_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION + "  random";
+    public static final String INVALID_EVENT_ADDFRIEND_DESC = " " + PREFIX_ADD_FRIENDNAME + "Jack,Hilary";
+    public static final String INVALID_EVENT_REMOVE_DESC = " " + PREFIX_REMOVE_FRIENDNAME + "Tom,Arthur";
     public static final String INVALID_LOG_TITLE_TOO_LONG_DESC = " " + PREFIX_TITLE
             + "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc";
 
@@ -115,6 +142,20 @@ public class CommandTestUtil {
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 
+    public static final EditEventCommand.EditEventDescriptor DESC_A;
+    public static final EditEventCommand.EditEventDescriptor DESC_B;
+
+    static {
+        DESC_A = new EditEventDescriptorBuilder().withName(VALID_EVENT_NAME)
+                .withDateTime(VALID_EVENT_DATETIME)
+                .withDescription(VALID_EVENT_DESCRIPTION)
+                .withAddFriend(VALID_NAME_AMY).build();
+        DESC_B = new EditEventDescriptorBuilder().withName(VALID_EVENT_NAME_OTHER)
+                .withDateTime(VALID_EVENT_DATETIME_OTHER)
+                .withDescription(VALID_EVENT_DESCRIPTION_OTHER)
+                .withAddFriend(VALID_NAME_BOB).build();
+    }
+
     /**
      * Executes the given {@code command}, confirms that <br>
      * - the returned {@link CommandResult} matches {@code expectedCommandResult} <br>
@@ -124,6 +165,8 @@ public class CommandTestUtil {
             Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
+            System.out.println(result.getFeedbackToUser());
+            System.out.println(expectedCommandResult.getFeedbackToUser());
             assertEquals(expectedCommandResult, result);
             assertEquals(expectedModel, actualModel);
         } catch (CommandException ce) {
@@ -136,10 +179,22 @@ public class CommandTestUtil {
      * that takes a string {@code expectedMessage}.
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
-            Model expectedModel) {
+                                            Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
+
+    /**
+     * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)}
+     * that takes a string {@code expectedMessage}.
+     */
+    public static void assertEventCommandSuccess(Command command, Model actualModel, String expectedMessage,
+            Model expectedModel) {
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false, true);
+        assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
+    }
+
+
 
     /**
      * Executes the given {@code command}, confirms that <br>

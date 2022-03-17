@@ -147,7 +147,7 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code description} is invalid.
      */
-    public static Description parsePersonDescription(String description) throws ParseException {
+    public static Description parseDescription(String description) throws ParseException {
         requireNonNull(description); //when a description is entered by user, it should not be null
         String trimmedDescription = description.trim();
         if (!Description.isValidDescription(trimmedDescription)) {
@@ -196,10 +196,21 @@ public class ParserUtil {
         return title; // TODO: 8/3/2022 refactor into Title object next time
     }
 
-    // TODO: 8/3/2022  refactor into Description object
+    /**
+     * Parses a list of friend names
+     *
+     * @throws ParseException if a given {@code names} is invalid
+     */
+    public static Set<FriendName> parseFriendNames(Collection<String> names) throws ParseException {
+        requireNonNull(names);
+        final Set<FriendName> nameSet = new HashSet<>();
+        for (String name: names) {
+            nameSet.add(parseFriendName(name));
+        }
+        return nameSet;
+    }
+
     public static String parseLogDescription(String description) throws ParseException {
         return description; // no restrictions on description at the moment
     }
-
-
 }
