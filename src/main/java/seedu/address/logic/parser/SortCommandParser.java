@@ -48,7 +48,7 @@ public class SortCommandParser implements Parser<SortCommand> {
             sortComparator = Comparator.comparing(l -> l.getName().toString().toLowerCase());
             break;
         case "studentid":
-            sortComparator = Comparator.comparing(l -> l.getStudentID().toString().toLowerCase());
+            sortComparator = Comparator.comparing(l -> l.getStudentId().toString().toLowerCase());
             break;
         default:
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
