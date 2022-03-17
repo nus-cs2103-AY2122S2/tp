@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INDEX_IS_NOT_NON_ZERO_UNSIGNED_INTEGER;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
@@ -32,8 +33,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                 Index index = ParserUtil.parseIndex(args);
                 return new DeleteCommand(index);
             } catch (ParseException pe) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+                throw new ParseException(MESSAGE_INDEX_IS_NOT_NON_ZERO_UNSIGNED_INTEGER);
             }
         } else { //deletion by name
             ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME);

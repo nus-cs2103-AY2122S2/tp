@@ -41,6 +41,14 @@ public class DeleteCommandTest {
     }
 
     @Test
+    public void execute_deleteInvalidName_throwsCommandException() {
+        //Tommy Ang does not exist in the sample model that is used for testing here
+        Person personToDelete = new Person(new Name("Tommy Ang"));
+        DeleteCommand deleteCommand = new DeleteCommand(personToDelete.getName());
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_PERSON_DOES_NOT_EXIST);
+    }
+
+    @Test
     public void execute_validIndexUnfilteredList_success() {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
@@ -53,7 +61,7 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
+    public void execute_invalidPositiveIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 

@@ -13,6 +13,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
+
 /**
  * Deletes a person identified using it's displayed index from the address book.
  */
@@ -36,20 +37,22 @@ public class DeleteCommand extends Command {
 
     /**
      * Constructs a DeleteCommand for deletion by name
+     *
      * @param nameOfPersonToDelete The name of the person to be deleted
      */
     public DeleteCommand(Name nameOfPersonToDelete) {
         this.nameOfPersonToDelete = nameOfPersonToDelete;
-        this.targetIndex = Index.fromOneBased(1); //a dummy value
+        this.targetIndex = null;
         this.isDeletionByIndex = false;
     }
 
     /**
      * Constructs a DeleteCommand for deletion by index
+     *
      * @param targetIndex The index of the person to be deleted on the filtered list on GUI
      */
     public DeleteCommand(Index targetIndex) {
-        this.nameOfPersonToDelete = new Name("name"); //a dummy value
+        this.nameOfPersonToDelete = null;
         this.targetIndex = targetIndex;
         this.isDeletionByIndex = true;
     }
@@ -74,7 +77,7 @@ public class DeleteCommand extends Command {
 
             if (!model.hasPerson(personWithNameToDelete)) { //model.hasPerson considers 2 Persons with same name
                 //to be the same Person
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_NAME);
+                throw new CommandException(Messages.MESSAGE_PERSON_DOES_NOT_EXIST);
             }
             //todo : make this more oop
             ObservableList<Person> personList = model.getAddressBook().getPersonList();
@@ -93,11 +96,19 @@ public class DeleteCommand extends Command {
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
         }
     }
+
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof DeleteCommand // instanceof handles nulls
-                && nameOfPersonToDelete.equals(((DeleteCommand) other).nameOfPersonToDelete) //state checl
-                && targetIndex.equals(((DeleteCommand) other).targetIndex));
+        if (other == this) {
+            return true;
+        } else if (other instanceof DeleteCommand) {
+            DeleteCommand otherDeleteCommand = (DeleteCommand) other;
+            if (otherDeleteCommand.isDeletionByIndex && this.isDeletionByIndex) {
+                return otherDeleteCommand.targetIndex.equals(this.targetIndex);
+            } else if (!otherDeleteCommand.isDeletionByIndex && !this.isDeletionByIndex) {
+                return otherDeleteCommand.nameOfPersonToDelete.equals(this.nameOfPersonToDelete);
+            }
+        }
+        return false;
     }
 }
