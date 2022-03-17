@@ -40,7 +40,12 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmail(person.getEmail());
         descriptor.setFavourite(person.getFavourite());
         descriptor.setAddress(person.getAddress());
-        descriptor.setProperties(person.getProperties());
+        if (person.getPreference().isPresent()) {
+            descriptor.setPreference(person.getPreference().get());
+        }
+        if (!person.getProperties().isEmpty()) {
+            descriptor.setProperties(person.getProperties());
+        }
         descriptor.setUserType(person.getUserType());
     }
 
