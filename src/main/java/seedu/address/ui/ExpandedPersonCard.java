@@ -26,7 +26,7 @@ public class ExpandedPersonCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Person person;
+    private final Person person;
 
     @FXML
     private HBox cardPane;
@@ -69,7 +69,7 @@ public class ExpandedPersonCard extends UiPart<Region> {
         int numberOfLogs = logList.size();
 
         for (int i = 1; i <= numberOfLogs; i++) {
-            sb.append(i + ". " + logList.get(i - 1).toString());
+            sb.append(i + ". " + logList.get(i - 1).toString() + "\n");
         }
         logs.setText(sb.toString());
     }

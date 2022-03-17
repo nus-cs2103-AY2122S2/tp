@@ -55,7 +55,7 @@
                <Font size="30.0" />
             </font>
          </Label>
-         <Label styleClass="cell_header_label" text="Logs" wrapText="true">
+         <Label styleClass="cell_header_label" text="Logs:" wrapText="true">
             <VBox.margin>
                <Insets top="30.0" />
             </VBox.margin>

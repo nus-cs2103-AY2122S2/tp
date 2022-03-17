@@ -11,6 +11,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -47,6 +48,37 @@ public class ShowFriendCommandTest {
         Person personToShow = new Person(new Name("Tommy Ang"));
         ShowFriendCommand showFriendCommand = new ShowFriendCommand(personToShow);
         assertCommandFailure(showFriendCommand, model, Messages.MESSAGE_PERSON_DOES_NOT_EXIST);
+    }
+
+    @Test
+    public void execute_switchingWindows_success() {
+
+        Person personToShow = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        ShowFriendCommand showFriendCommand = new ShowFriendCommand(personToShow);
+        String expectedMessage = String.format(ShowFriendCommand.MESSAGE_SUCCESS, personToShow.getName());
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.updateFilteredPersonList(x -> x.isSamePerson(personToShow));
+
+        CommandResult commandResult = null;
+        try {
+            commandResult = showFriendCommand.execute(model);
+        } catch (CommandException ce) {
+            assertCommandFailure(showFriendCommand, model, Messages.MESSAGE_INVALID_COMMAND_FORMAT);
+        }
+
+        //ensures that window is switched from normal to expanded
+        assert (commandResult.isShowFriendCommand());
+
+        assert (expectedModel.getFilteredPersonList().size() == 1);
+        assertCommandSuccess(showFriendCommand, model, expectedMessage, expectedModel);
+
+        //when that when a new command(not showfriend command) is made, the window is
+        //switched from expanded to normal
+        ListCommand listCommand = new ListCommand();
+        CommandResult listCommandResult = listCommand.execute(model);
+
+        //ensures that window is switched from expanded to normal
+        assert (!listCommandResult.isShowFriendCommand());
     }
 
 
