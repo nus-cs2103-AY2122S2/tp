@@ -22,24 +22,21 @@ import seedu.address.model.team.Team;
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[]{
-            new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                    new GithubUsername("alexyeoh-123"),
+            new Person(new Name("Alex Teo"), new Phone("87438807"), new Email("alexteo@example.com"),
+                    new GithubUsername("alexteo98"),
                     getTeamSet("friends"), getSkillSet("C_50")),
-            new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                    new GithubUsername("bernice-99"),
+            new Person(new Name("Junha Park"), new Phone("91031282"), new Email("billpark@example.com"),
+                        new GithubUsername("B1LLP4RK"),
+                        getTeamSet("family"), getSkillSet("Java_70")),
+            new Person(new Name("Lye Jia Yang"), new Phone("99272758"), new Email("lyejy@example.com"),
+                    new GithubUsername("Jiaaa-yang"),
                     getTeamSet("colleagues", "friends"), getSkillSet("C_90")),
-            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                    new GithubUsername("oliverino-char"),
+            new Person(new Name("Melvin Chan"), new Phone("93210283"), new Email("mchan@example.com"),
+                    new GithubUsername("MelvinCZJ"),
                     getTeamSet("neighbours"), getSkillSet("Bash_50")),
-            new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                    new GithubUsername("davlid-li"),
-                    getTeamSet("family"), getSkillSet("Java_70")),
-            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                    new GithubUsername("ibrahim98"),
+            new Person(new Name("Toh Zhan Qing"), new Phone("92492021"), new Email("tohzq@example.com"),
+                    new GithubUsername("tzhan98"),
                     getTeamSet("classmates"), getSkillSet("C_50")),
-            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                    new GithubUsername("roy-bala-92"),
-                    getTeamSet("colleagues"), getSkillSet("Git_90")),
         };
     }
 

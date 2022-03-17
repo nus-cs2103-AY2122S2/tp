@@ -133,6 +133,7 @@
 }
 
 .cell_hyperlink {
+    -fx-padding: 0 0 0 0;
     -fx-underline: true;
     -fx-text-fill: #00C9FF;
 }
