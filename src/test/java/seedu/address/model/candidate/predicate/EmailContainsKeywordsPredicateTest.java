@@ -73,6 +73,6 @@ public class EmailContainsKeywordsPredicateTest {
         predicate = new EmailContainsKeywordsPredicate(Arrays.asList("87654321", "E0324444", "Main",
                 "Street"));
         assertFalse(predicate.test(new CandidateBuilder().withName("Alice").withPhone("87654321")
-                .withEmail("alice@email.com").withCourse("Business Analytics").withStudentID("E0324444").build()));
+                .withEmail("alice@email.com").withCourse("Business Analytics").withStudentId("E0324444").build()));
     }
 }

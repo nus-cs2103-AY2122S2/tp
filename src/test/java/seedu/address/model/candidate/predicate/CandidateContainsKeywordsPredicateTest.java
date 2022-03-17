@@ -46,22 +46,22 @@ public class CandidateContainsKeywordsPredicateTest {
         PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(Collections.singletonList(
                 "Alice"));
         assertTrue(predicate.test(new CandidateBuilder().withName("Alice").withPhone("87654321")
-                .withEmail("alice@email.com").withCourse("Business Analytics").withStudentID("E0324444").build()));
+                .withEmail("alice@email.com").withCourse("Business Analytics").withStudentId("E0324444").build()));
 
         // Multiple keywords
         predicate = new PersonContainsKeywordsPredicate(Arrays.asList("Alice", "Business Analytics"));
         assertTrue(predicate.test(new CandidateBuilder().withName("Alice").withPhone("87654321")
-                .withEmail("alice@email.com").withCourse("Business Analytics").withStudentID("E0324444").build()));
+                .withEmail("alice@email.com").withCourse("Business Analytics").withStudentId("E0324444").build()));
 
         // Only one matching keyword
         predicate = new PersonContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"));
         assertTrue(predicate.test(new CandidateBuilder().withName("Alice").withPhone("87654321")
-                .withEmail("alice@email.com").withCourse("Business Analytics").withStudentID("E0324444").build()));
+                .withEmail("alice@email.com").withCourse("Business Analytics").withStudentId("E0324444").build()));
 
         // Mixed-case keywords
         predicate = new PersonContainsKeywordsPredicate(Arrays.asList("aLIce", "e0324"));
         assertTrue(predicate.test(new CandidateBuilder().withName("Alice").withPhone("87654321")
-                .withEmail("alice@email.com").withCourse("Business Analytics").withStudentID("E0324444").build()));
+                .withEmail("alice@email.com").withCourse("Business Analytics").withStudentId("E0324444").build()));
     }
 
     @Test
@@ -69,11 +69,11 @@ public class CandidateContainsKeywordsPredicateTest {
         // Zero keywords
         PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(Collections.emptyList());
         assertFalse(predicate.test(new CandidateBuilder().withName("Alice").withPhone("87654321")
-                .withEmail("alice@email.com").withCourse("Business Analytics").withStudentID("E0324444").build()));
+                .withEmail("alice@email.com").withCourse("Business Analytics").withStudentId("E0324444").build()));
 
         // Non-matching keyword
         predicate = new PersonContainsKeywordsPredicate(Arrays.asList("Carol Alice"));
         assertFalse(predicate.test(new CandidateBuilder().withName("Alice").withPhone("87654321")
-                .withEmail("alice@email.com").withCourse("Business Analytics").withStudentID("E0324444").build()));
+                .withEmail("alice@email.com").withCourse("Business Analytics").withStudentId("E0324444").build()));
     }
 }

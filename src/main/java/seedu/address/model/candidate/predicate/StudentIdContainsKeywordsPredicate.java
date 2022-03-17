@@ -7,7 +7,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.model.candidate.Candidate;
 
 /**
- * Tests that a {@code Person}'s {@code StudentID} matches any of the keywords given.
+ * Tests that a {@code Person}'s {@code StudentId} matches any of the keywords given.
  */
 public class StudentIdContainsKeywordsPredicate extends ContainsKeywordsPredicate implements Predicate<Candidate> {
     private final List<String> keywords;
@@ -15,7 +15,7 @@ public class StudentIdContainsKeywordsPredicate extends ContainsKeywordsPredicat
     /**
      * Creates a new {@link StudentIdContainsKeywordsPredicate} object with the
      * {@link StudentIdContainsKeywordsPredicate#keywords} initialised.
-     * @param keywords contain keyword(s) to find in {@code Person}'s {@code StudentID}.
+     * @param keywords contain keyword(s) to find in {@code Person}'s {@code StudentId}.
      */
     public StudentIdContainsKeywordsPredicate(List<String> keywords) {
         super(keywords);
@@ -23,7 +23,7 @@ public class StudentIdContainsKeywordsPredicate extends ContainsKeywordsPredicat
     }
 
     /**
-     * Tests if any part of {@code Person}'s {@code StudentID} matches any of the specified
+     * Tests if any part of {@code Person}'s {@code StudentId} matches any of the specified
      * {@link StudentIdContainsKeywordsPredicate#keywords}.
      * @param candidate object to retrieve the {@code StudentID}.
      * @return true if a match is found, and false otherwise.
@@ -31,7 +31,7 @@ public class StudentIdContainsKeywordsPredicate extends ContainsKeywordsPredicat
     @Override
     public boolean test(Candidate candidate) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsStringIgnoreCase(candidate.getStudentID().toString(), keyword));
+                .anyMatch(keyword -> StringUtil.containsStringIgnoreCase(candidate.getStudentId().toString(), keyword));
     }
 
     /**

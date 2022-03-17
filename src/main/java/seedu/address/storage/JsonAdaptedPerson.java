@@ -11,12 +11,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.candidate.Address;
+import seedu.address.model.candidate.ApplicationStatus;
 import seedu.address.model.candidate.Candidate;
 import seedu.address.model.candidate.Course;
 import seedu.address.model.candidate.Email;
+import seedu.address.model.candidate.InterviewStatus;
 import seedu.address.model.candidate.Name;
 import seedu.address.model.candidate.Phone;
-import seedu.address.model.candidate.StudentID;
+import seedu.address.model.candidate.StudentId;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -26,21 +28,25 @@ class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
-    private final String studentID;
+    private final String studentId;
     private final String name;
     private final String phone;
     private final String email;
     private final String course;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final String applicationStatus;
+    private final String interviewStatus;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("studentID") String studentID, @JsonProperty("name") String name,
+    public JsonAdaptedPerson(@JsonProperty("studentId") String studentId, @JsonProperty("name") String name,
             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
-            @JsonProperty("course") String course, @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
-        this.studentID = studentID;
+            @JsonProperty("course") String course, @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+            @JsonProperty("applicationStatus") String applicationStatus,
+            @JsonProperty("interviewStatus") String interviewStatus) {
+        this.studentId = studentId;
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -48,13 +54,16 @@ class JsonAdaptedPerson {
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
+        this.applicationStatus = applicationStatus;
+        this.interviewStatus = interviewStatus;
+
     }
 
     /**
      * Converts a given {@code Person} into this class for Jackson use.
      */
     public JsonAdaptedPerson(Candidate source) {
-        studentID = source.getStudentID().studentID;
+        studentId = source.getStudentId().studentId;
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
@@ -62,6 +71,8 @@ class JsonAdaptedPerson {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        applicationStatus = source.getApplicationStatus().toString();
+        interviewStatus = source.getInterviewStatus().toString();
     }
 
     /**
@@ -75,14 +86,14 @@ class JsonAdaptedPerson {
             personTags.add(tag.toModelType());
         }
 
-        if (studentID == null) {
+        if (studentId == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    StudentID.class.getSimpleName()));
+                    StudentId.class.getSimpleName()));
         }
-        if (!StudentID.isValidId(studentID)) {
-            throw new IllegalValueException(StudentID.MESSAGE_CONSTRAINTS);
+        if (!StudentId.isValidId(studentId)) {
+            throw new IllegalValueException(StudentId.MESSAGE_CONSTRAINTS);
         }
-        final StudentID modelId = new StudentID(studentID);
+        final StudentId modelId = new StudentId(studentId);
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -117,7 +128,7 @@ class JsonAdaptedPerson {
         final Course modelCourse = new Course(course);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Candidate(modelId, modelName, modelPhone, modelEmail, modelCourse, modelTags);
+        return new Candidate(modelId, modelName, modelPhone, modelEmail, modelCourse, modelTags,
+                new ApplicationStatus(applicationStatus), new InterviewStatus(interviewStatus));
     }
-
 }

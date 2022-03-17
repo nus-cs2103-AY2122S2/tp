@@ -3,8 +3,9 @@ layout: page
 title: TAlent Assistant™
 ---
 
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
-[![codecov](https://codecov.io/gh/se-edu/addressbook-level3/branch/master/graph/badge.svg)](https://codecov.io/gh/se-edu/addressbook-level3)
+[![Java CI](https://github.com/AY2122S2-CS2103-F11-2/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2122S2-CS2103-F11-2/tp/actions/workflows/gradle.yml)
+[![pages-build-deployment](https://github.com/AY2122S2-CS2103-F11-2/tp/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/AY2122S2-CS2103-F11-2/tp/actions/workflows/pages/pages-build-deployment)
+[![codecov](https://codecov.io/gh/AY2122S2-CS2103-F11-2/tp/branch/master/graph/badge.svg)](https://codecov.io/gh/AY2122S2-CS2103-F11-2/tp)
 
 ![Ui](images/Ui.png)
 

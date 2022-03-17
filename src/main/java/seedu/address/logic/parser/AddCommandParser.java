@@ -12,12 +12,15 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+
+import seedu.address.model.candidate.ApplicationStatus;
 import seedu.address.model.candidate.Candidate;
 import seedu.address.model.candidate.Course;
 import seedu.address.model.candidate.Email;
+import seedu.address.model.candidate.InterviewStatus;
 import seedu.address.model.candidate.Name;
 import seedu.address.model.candidate.Phone;
-import seedu.address.model.candidate.StudentID;
+import seedu.address.model.candidate.StudentId;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -40,14 +43,16 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        StudentID id = ParserUtil.parseStudentID(argMultimap.getValue(PREFIX_ID).get());
+        StudentId id = ParserUtil.parseStudentId(argMultimap.getValue(PREFIX_ID).get());
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        Email email = new Email(id.studentID);
+        Email email = new Email(id.studentId);
         Course course = ParserUtil.parseCourse(argMultimap.getValue(PREFIX_COURSE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        ApplicationStatus applicationStatus = new ApplicationStatus(ApplicationStatus.PENDING_STATUS);
+        InterviewStatus interviewStatus = new InterviewStatus(InterviewStatus.PENDING_STATUS);
 
-        Candidate candidate = new Candidate(id, name, phone, email, course, tagList);
+        Candidate candidate = new Candidate(id, name, phone, email, course, tagList, applicationStatus, interviewStatus);
 
         return new AddCommand(candidate);
     }

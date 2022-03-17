@@ -5,12 +5,14 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.model.candidate.ApplicationStatus;
 import seedu.address.model.candidate.Candidate;
 import seedu.address.model.candidate.Course;
 import seedu.address.model.candidate.Email;
+import seedu.address.model.candidate.InterviewStatus;
 import seedu.address.model.candidate.Name;
 import seedu.address.model.candidate.Phone;
-import seedu.address.model.candidate.StudentID;
+import seedu.address.model.candidate.StudentId;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -29,23 +31,25 @@ public class EditCandidateDescriptorBuilder {
     }
 
     /**
-     * Returns an {@code EditPersonDescriptor} with fields containing {@code person}'s details
+     * Returns an {@code EditPersonDescriptor} with fields containing {@code candidate}'s details
      */
     public EditCandidateDescriptorBuilder(Candidate candidate) {
         descriptor = new EditPersonDescriptor();
-        descriptor.setStudentID(candidate.getStudentID());
+        descriptor.setStudentId(candidate.getStudentId());
         descriptor.setName(candidate.getName());
         descriptor.setPhone(candidate.getPhone());
         descriptor.setEmail(candidate.getEmail());
         descriptor.setCourse(candidate.getCourse());
         descriptor.setTags(candidate.getTags());
+        descriptor.setApplicationStatus(candidate.getApplicationStatus());
+        descriptor.setInterviewStatus(candidate.getInterviewStatus());
     }
 
     /**
-     * Sets the {@code StudentID} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code StudentId} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditCandidateDescriptorBuilder withStudentID(String id) {
-        descriptor.setStudentID(new StudentID(id));
+    public EditCandidateDescriptorBuilder withStudentId(String id) {
+        descriptor.setStudentId(new StudentId(id));
         return this;
     }
 
@@ -93,5 +97,21 @@ public class EditCandidateDescriptorBuilder {
 
     public EditPersonDescriptor build() {
         return descriptor;
+    }
+
+    /**
+     * Sets the {@code ApplicationStatus} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditCandidateDescriptorBuilder withApplicationStatus(String applicationStatus) {
+        descriptor.setApplicationStatus(new ApplicationStatus(applicationStatus));
+        return this;
+    }
+
+    /**
+     * Sets the {@code InterviewStatus} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditCandidateDescriptorBuilder withInterviewStatus(String interviewStatus) {
+        descriptor.setInterviewStatus(new InterviewStatus(interviewStatus));
+        return this;
     }
 }

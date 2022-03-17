@@ -79,9 +79,10 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + STUDENT_ID_DESC_AMY + NAME_DESC_AMY + PHONE_DESC_AMY
-                + COURSE_DESC_AMY;
-        Candidate expectedCandidate = new CandidateBuilder(AMY).withTags().build();
+        String addCommand = AddCommand.COMMAND_WORD + STUDENT_ID_DESC_AMY + NAME_DESC_AMY
+                + PHONE_DESC_AMY + COURSE_DESC_AMY;
+        Candidate expectedCandidate = new CandidateBuilder(AMY).withTags()
+                .withApplicationStatus("Pending").withInterviewStatus("Pending").build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedCandidate);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
