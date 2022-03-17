@@ -102,8 +102,8 @@ public class PersonTest {
     public void hasSameName() {
 
         // no other fields
-        Name name = new Name("some valid name");
-        Name repeatedName = new Name("some valid name");
+        FriendName name = new FriendName("some valid name");
+        FriendName repeatedName = new FriendName("some valid name");
 
         Person person = new Person(name);
         Person otherPerson = new Person(repeatedName);

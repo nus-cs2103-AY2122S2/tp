@@ -10,7 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.event.exceptions.DuplicateEventException;
 import seedu.address.model.event.exceptions.EventNotFoundException;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.FriendName;
 
 /**
  * A list of events that enforces uniqueness between its elements and does not allow nulls.
@@ -66,7 +66,7 @@ public class UniqueEventList implements Iterable<Event> {
      *
      * @param toRemove Friend name to remove from all events.
      */
-    public void removeFriendName(Name toRemove) {
+    public void removeFriendName(FriendName toRemove) {
         requireNonNull(toRemove);
         internalUnmodifiableList.forEach(event -> event.removeFriendNameIfPresent(toRemove));
     }
@@ -77,7 +77,7 @@ public class UniqueEventList implements Iterable<Event> {
      * @param original Friend name to be changed.
      * @param replacement Friend name to change to.
      */
-    public void changeFriendName(Name original, Name replacement) {
+    public void changeFriendName(FriendName original, FriendName replacement) {
         requireAllNonNull(original, replacement);
         internalUnmodifiableList.forEach(event -> event.changeFriendNameIfPresent(original, replacement));
     }

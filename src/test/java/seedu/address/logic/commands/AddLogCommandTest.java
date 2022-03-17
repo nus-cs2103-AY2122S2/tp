@@ -23,8 +23,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.FriendName;
 import seedu.address.model.person.Log;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -47,8 +47,8 @@ public class AddLogCommandTest {
         AddLogCommand.AddLogDescriptor otherDescriptor;
         Index targetIndex = INDEX_FIRST_PERSON;
         Index otherIndex = INDEX_SECOND_PERSON;
-        Name targetName = new Name(VALID_NAME_AMY);
-        Name otherName = new Name(VALID_NAME_BOB);
+        FriendName targetName = new FriendName(VALID_NAME_AMY);
+        FriendName otherName = new FriendName(VALID_NAME_BOB);
         String title = "some title";
         String otherTitle = "some other title";
 
@@ -153,7 +153,7 @@ public class AddLogCommandTest {
         String expectedMessage = AddLogCommand.MESSAGE_ADD_LOG_SUCCESS;
         AddLogCommand command;
         Index targetIndex = INDEX_FIRST_PERSON;
-        Name targetName;
+        FriendName targetName;
         Log log;
         Person basePerson;
         Person addedLogPerson;
@@ -199,7 +199,7 @@ public class AddLogCommandTest {
         String expectedMessage = AddLogCommand.MESSAGE_ADD_LOG_SUCCESS;
         AddLogCommand command;
         Index targetIndex = INDEX_FIRST_PERSON;
-        Name targetName;
+        FriendName targetName;
         Log log;
         Person basePerson;
         Person addedLogPerson;
@@ -295,7 +295,7 @@ public class AddLogCommandTest {
         Log log = new Log(title, null);
         Model testModel;
         Index targetIndex = INDEX_FIRST_PERSON;
-        Name targetName;
+        FriendName targetName;
         AddLogCommand.AddLogDescriptor descriptor;
         AddLogCommand command;
         Model model;
@@ -355,7 +355,7 @@ public class AddLogCommandTest {
         // ===== INVALID NAME =====
 
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Name notInList = new Name("somegibberish");
+        FriendName notInList = new FriendName("somegibberish");
         command = new AddLogCommand(notInList, descriptor);
         assertCommandFailure(command, model, MESSAGE_PERSON_NOT_FOUND);
 

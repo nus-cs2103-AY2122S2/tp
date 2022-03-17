@@ -67,7 +67,7 @@ class JsonSerializableAddressBook {
             Event event = jsonAdaptedEvent.toModelType();
             if (!(event.areFriendNamesValid(addressBook))) {
                 throw new IllegalValueException(MESSAGE_INVALID_EVENT_FRIENDS);
-            };
+            }
             if (addressBook.hasEvent(event)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_EVENT);
             }
