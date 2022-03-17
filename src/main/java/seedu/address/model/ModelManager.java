@@ -36,7 +36,7 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredApplicants = new FilteredList<>(this.addressBook.getPersonList());
+        filteredApplicants = new FilteredList<>(this.addressBook.getApplicantList());
         filteredInterviews = new FilteredList<>(this.addressBook.getInterviewList());
         filteredPositions = new FilteredList<>(this.addressBook.getPositionList());
     }
@@ -95,17 +95,17 @@ public class ModelManager implements Model {
     @Override
     public boolean hasPerson(Applicant applicant) {
         requireNonNull(applicant);
-        return addressBook.hasPerson(applicant);
+        return addressBook.hasApplicant(applicant);
     }
 
     @Override
     public void deletePerson(Applicant target) {
-        addressBook.removePerson(target);
+        addressBook.removeApplicant(target);
     }
 
     @Override
     public void addPerson(Applicant applicant) {
-        addressBook.addPerson(applicant);
+        addressBook.addApplicant(applicant);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -113,7 +113,7 @@ public class ModelManager implements Model {
     public void setPerson(Applicant target, Applicant editedApplicant) {
         requireAllNonNull(target, editedApplicant);
 
-        addressBook.setPerson(target, editedApplicant);
+        addressBook.setApplicant(target, editedApplicant);
     }
 
     @Override

@@ -71,7 +71,7 @@ public class TypicalPersons {
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
         for (Applicant applicant : getTypicalPersons()) {
-            ab.addPerson(applicant);
+            ab.addApplicant(applicant);
         }
         return ab;
     }

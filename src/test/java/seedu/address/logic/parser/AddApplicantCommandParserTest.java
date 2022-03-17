@@ -202,4 +202,4 @@ public class AddApplicantCommandParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddApplicantCommand.MESSAGE_USAGE));
     }
 }
-*/
+ */
