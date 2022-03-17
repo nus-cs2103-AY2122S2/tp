@@ -119,7 +119,7 @@ public class AddCommandParserTest {
         // multiple tags - all accepted
         Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
-        assertParseSuccess(parser, NAME_DESC_BOB + BLOCK_DESC_BOB+ FACULTY_DESC_BOB + PHONE_DESC_BOB
+        assertParseSuccess(parser, NAME_DESC_BOB + BLOCK_DESC_BOB + FACULTY_DESC_BOB + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + MATRICULATION_NUMBER_DESC_BOB + COVID_STATUS_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedPersonMultipleTags));
     }
@@ -222,7 +222,7 @@ public class AddCommandParserTest {
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Address.MESSAGE_CONSTRAINTS);
 
         // invalid matriculation number
-        assertParseFailure(parser, NAME_DESC_BOB + BLOCK_DESC_BOB +FACULTY_DESC_BOB + PHONE_DESC_BOB
+        assertParseFailure(parser, NAME_DESC_BOB + BLOCK_DESC_BOB + FACULTY_DESC_BOB + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + INVALID_MATRICULATION_NUMBER_DESC + COVID_STATUS_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, MatriculationNumber.MESSAGE_CONSTRAINTS);
 

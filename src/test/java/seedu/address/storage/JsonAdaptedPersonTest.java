@@ -12,7 +12,14 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Block;
+import seedu.address.model.person.CovidStatus;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Faculty;
+import seedu.address.model.person.MatriculationNumber;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Phone;
 
 
 public class JsonAdaptedPersonTest {
@@ -134,16 +141,16 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_invalidAddress_throwsIllegalValueException() {
         JsonAdaptedPerson person =
-                new JsonAdaptedPerson(VALID_NAME, VALID_BLOCK, VALID_FACULTY, VALID_PHONE, VALID_EMAIL, INVALID_ADDRESS,
-                        VALID_MATRICULATION_NUMBER, VALID_COVID_STATUS, VALID_TAGS);
+                new JsonAdaptedPerson(VALID_NAME, VALID_BLOCK, VALID_FACULTY, VALID_PHONE, VALID_EMAIL,
+                        INVALID_ADDRESS, VALID_MATRICULATION_NUMBER, VALID_COVID_STATUS, VALID_TAGS);
         String expectedMessage = Address.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
     @Test
     public void toModelType_nullAddress_throwsIllegalValueException() {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_BLOCK, VALID_FACULTY, VALID_PHONE, VALID_EMAIL, null,
-                VALID_MATRICULATION_NUMBER, VALID_COVID_STATUS, VALID_TAGS);
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_BLOCK, VALID_FACULTY, VALID_PHONE,
+                VALID_EMAIL, null, VALID_MATRICULATION_NUMBER, VALID_COVID_STATUS, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -176,8 +183,8 @@ public class JsonAdaptedPersonTest {
 
     @Test
     public void toModelType_nullCovidStatus_throwsIllegalValueException() {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_BLOCK, VALID_FACULTY, VALID_PHONE, VALID_EMAIL,
-                VALID_ADDRESS, VALID_MATRICULATION_NUMBER, null, VALID_TAGS);
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_BLOCK, VALID_FACULTY, VALID_PHONE,
+                VALID_EMAIL, VALID_ADDRESS, VALID_MATRICULATION_NUMBER, null, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, CovidStatus.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
