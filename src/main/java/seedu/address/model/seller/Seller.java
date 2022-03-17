@@ -40,4 +40,37 @@ public class Seller extends Client {
     public List<PropertyToSell> getPropertiesToSell() {
         return propertiesToSell;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Seller)) {
+            return false;
+        }
+
+        Seller otherSeller = (Seller) other;
+        return otherSeller.getName().equals(getName())
+                && otherSeller.getDescription().equals(getDescription())
+                && otherSeller.getPhone().equals(getPhone())
+                && otherSeller.getEmail().equals(getEmail())
+                && otherSeller.getAddress().equals(getAddress())
+                && otherSeller.getRemark().equals(getRemark())
+                && otherSeller.getTags().equals(getTags())
+                && otherSeller.hasSameProperties(this);
+    }
+
+    /**
+     * Checks if 2 Sellers have the matching properties.
+     *
+     * @param other The other Seller.
+     * @return Whether their properties match.
+     */
+    public boolean hasSameProperties(Seller other) {
+        return propertiesToSell.containsAll(other.propertiesToSell)
+                && other.propertiesToSell.containsAll(propertiesToSell);
+
+    }
 }
