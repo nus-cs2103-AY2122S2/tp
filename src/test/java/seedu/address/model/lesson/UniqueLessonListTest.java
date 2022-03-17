@@ -8,28 +8,32 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.lesson.exceptions.ConflictsWithLessonException;
+import seedu.address.testutil.TemporaryLessonBuilder;
 
 public class UniqueLessonListTest {
-    private final LocalDateTime d1 = LocalDateTime.of(2022, 1, 25, 18, 0, 0);
-    private final LocalDateTime d2 = LocalDateTime.of(2022, 1, 25, 18, 0, 0);
-    private final Lesson sameStartingDateTimeOne = Lesson.makeTemporaryLesson(
-            "Test Lesson", "Biology",
-            "Blk 11 Ang Mo Kio Street 74, #11-04", d1, 1, 0);
-    private final Lesson sameStartingDateTimeTwo = Lesson.makeTemporaryLesson(
-            "Test Lesson", "Biology",
-            "Blk 11 Ang Mo Kio Street 74, #11-04", d2, 0, 50);
+    private final LocalDateTime sameLessonDateTime = LocalDateTime.of(
+            2022, 1, 25, 18, 0, 0);
+
+    private final Lesson sameStartingDateTimeOne = new TemporaryLessonBuilder()
+            .withDateTimeSlot(sameLessonDateTime, 1, 0)
+            .build();
+    private final Lesson sameStartingDateTimeTwo = new TemporaryLessonBuilder()
+            .withDateTimeSlot(sameLessonDateTime, 30, 0)
+            .build();
+
     private final List<Lesson> listWithConflictingLessons = List.of(sameStartingDateTimeOne, sameStartingDateTimeTwo);
 
-    private final LocalDateTime d3 = LocalDateTime.of(
+    private final LocalDateTime differentLessonDateTimeOne = LocalDateTime.of(
             2022, 1, 25, 18, 0, 0);
-    private final LocalDateTime d4 = LocalDateTime.of(
+    private final LocalDateTime differentLessonDateTimeTwo = LocalDateTime.of(
             2022, 1, 25, 19, 0, 0);
-    private final Lesson nonConflictingLessonOne = Lesson.makeTemporaryLesson(
-            "Test Lesson", "Biology",
-            "Blk 11 Ang Mo Kio Street 74, #11-04", d3, 0, 50);
-    private final Lesson nonConflictingLessonTwo = Lesson.makeTemporaryLesson(
-            "Test Lesson", "Biology",
-            "Blk 11 Ang Mo Kio Street 74, #11-04", d4, 0, 50);
+
+    private final Lesson nonConflictingLessonOne = new TemporaryLessonBuilder()
+            .withDateTimeSlot(differentLessonDateTimeOne, 0, 50)
+            .build();
+    private final Lesson nonConflictingLessonTwo = new TemporaryLessonBuilder()
+            .withDateTimeSlot(differentLessonDateTimeTwo, 0, 50)
+            .build();
 
     private final List<Lesson> listWithNonConflictingLessons = List.of(
             nonConflictingLessonOne, nonConflictingLessonTwo);
@@ -46,9 +50,11 @@ public class UniqueLessonListTest {
         UniqueLessonList l = new UniqueLessonList();
         l.setLessons(listWithNonConflictingLessons);
 
-        Lesson conflictingLesson = Lesson.makeTemporaryLesson(
-                "Test Lesson", "Biology",
-                "Blk 11 Ang Mo Kio Street 74, #11-04", d3, 0, 50);
+        LocalDateTime conflictingStartingDateTime = differentLessonDateTimeOne;
+
+        Lesson conflictingLesson = new TemporaryLessonBuilder()
+                .withDateTimeSlot(conflictingStartingDateTime, 0, 50)
+                        .build();
 
         assertThrows(ConflictsWithLessonException.class, () -> l.add(conflictingLesson));
     }

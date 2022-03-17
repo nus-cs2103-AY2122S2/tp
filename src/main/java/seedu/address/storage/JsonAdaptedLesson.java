@@ -9,13 +9,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.lesson.DateTimeSlot;
+import seedu.address.model.lesson.EnrolledStudents;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonAddress;
 import seedu.address.model.lesson.LessonName;
 import seedu.address.model.lesson.RecurringLesson;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.lesson.TemporaryLesson;
-import seedu.address.model.student.Student;
 
 /**
  * Jackson-friendly version of {@link TemporaryLesson}.
@@ -104,9 +104,9 @@ class JsonAdaptedLesson {
         }
         final DateTimeSlot modelDateTimeSlot = dateTimeSlot.toModelType();
 
-        final List<Student> modelAssignedStudents = new ArrayList<>();
+        final EnrolledStudents modelAssignedStudents = new EnrolledStudents();
         for (JsonAdaptedStudent student : assignedStudents) {
-            modelAssignedStudents.add(student.toModelType());
+            modelAssignedStudents.addStudent(student.toModelType());
         }
         if (this.isRecurring) {
             return Lesson.makeRecurringLesson(modelLessonName, modelSubject, modelLessonAddress,

@@ -9,7 +9,11 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.LessonBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyLessonBook;
+import seedu.address.model.lesson.DateTimeSlot;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.LessonAddress;
+import seedu.address.model.lesson.LessonName;
+import seedu.address.model.lesson.Subject;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
@@ -45,17 +49,23 @@ public class SampleDataUtil {
     }
 
     public static Lesson[] getSampleLessons() {
-        LocalDateTime firstLessonDate = LocalDateTime.of(2022, 1, 5, 17, 50, 0);
-        LocalDateTime secondLessonDate = LocalDateTime.of(2022, 1, 7, 18, 0, 0);
-        LocalDateTime thirdLessonDate = LocalDateTime.of(2022, 1, 9, 0, 50);
+        DateTimeSlot firstLessonDateTimeSlot = new DateTimeSlot(
+                LocalDateTime.of(2022, 1, 5, 17, 50, 0),
+                2, 0);
+        DateTimeSlot secondLessonDateTimeSlot = new DateTimeSlot(
+                LocalDateTime.of(2022, 1, 7, 18, 0, 0),
+                2, 0);
+        DateTimeSlot thirdLessonDateTimeSlot = new DateTimeSlot(
+                LocalDateTime.of(2022, 1, 9, 0, 50),
+                2, 5);
 
         return new Lesson[] {
-            Lesson.makeTemporaryLesson("Make up lesson for George", "Geography",
-                    "Blk 47 Tampines Street 20, #17-35", firstLessonDate, 2),
-            Lesson.makeTemporaryLesson("Trial lesson for Jake", "Biology",
-                    "Blk 47 Tampines Street 20, #17-35", secondLessonDate, 2),
-            Lesson.makeTemporaryLesson("Make up lesson for Henry", "Physics",
-                    "Blk 47 Tampines Street 20, #17-35", thirdLessonDate, 2, 5)
+            Lesson.makeTemporaryLesson(new LessonName("Make up lesson for George"), new Subject("Geography"),
+                    new LessonAddress("Blk 47 Tampines Street 20, #17-35"), firstLessonDateTimeSlot),
+            Lesson.makeTemporaryLesson(new LessonName("Trial lesson for Jake"), new Subject("Biology"),
+                    new LessonAddress("Blk 47 Tampines Street 20, #17-35"), secondLessonDateTimeSlot),
+            Lesson.makeTemporaryLesson(new LessonName("Make up lesson for Henry"), new Subject("Physics"),
+                    new LessonAddress("Blk 47 Tampines Street 20, #17-35"), thirdLessonDateTimeSlot)
         };
     }
 

@@ -19,16 +19,6 @@ public class RecurringLesson extends Lesson {
         dayOfLesson = DayOfWeek.from(super.getDateTimeSlot().getDateOfLesson());
     }
 
-    /**
-     * Every field must be present and not null.
-     */
-    protected RecurringLesson(LessonName name, Subject subject, LessonAddress address,
-                              DateTimeSlot dateTimeSlot) {
-        super(name, subject, address, dateTimeSlot);
-        requireAllNonNull(dateTimeSlot);
-        dayOfLesson = DayOfWeek.from(super.getDateTimeSlot().getDateOfLesson());
-    }
-
     @Override
     public DateTimeSlot getDateTimeSlot() {
         DateTimeSlot start = super.getDateTimeSlot();
