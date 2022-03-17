@@ -62,6 +62,15 @@ public class Group {
     }
 
     /**
+     * Deletes a task from this specific group.
+     *
+     * @param task Tasks to be removed.
+     */
+    public void removeTask(Task task) {
+        tasks.remove(task);
+    }
+
+    /**
      * Retrieves the UniqueTaskList from this specific group
      *
      */

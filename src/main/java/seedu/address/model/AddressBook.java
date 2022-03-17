@@ -11,6 +11,7 @@ import seedu.address.model.group.UniqueGroupList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.UniqueTaskList;
 
 /**
  * Wraps all data at the address-book level
@@ -20,6 +21,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
     private final UniqueGroupList groups;
+    private final UniqueTaskList tasks;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -31,6 +33,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         persons = new UniquePersonList();
         groups = new UniqueGroupList();
+        tasks = new UniqueTaskList();
     }
 
     public AddressBook() {}
@@ -116,7 +119,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a task into a specified group to the address book.
+     * Adds a task to a specified group from the address book.
      * The group must already exist in the address book.
      * The task must not already exist in the specified group in the address book.
      */
@@ -150,6 +153,15 @@ public class AddressBook implements ReadOnlyAddressBook {
         groups.remove(key);
     }
 
+    /**
+     * Removes a task from a specified group from the address book.
+     * The group must already exist in the address book.
+     * The task must already exist in the specified group in the address book.
+     */
+    public void removeTask(Task task, Group g) {
+        groups.getGroup(g).removeTask(task);
+    }
+
     //// util methods
 
     @Override
@@ -166,6 +178,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Group> getGroupList() {
         return groups.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Task> getTaskList() {
+        return tasks.asUnmodifiableObservableList();
     }
 
     @Override

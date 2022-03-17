@@ -16,9 +16,9 @@ public class DeleteGroupCommand extends Command {
 
     public static final String COMMAND_WORD = "delgroup";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a task from a group."
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a group from ArchDuke."
             + "Parameters: "
-            + PREFIX_GROUP_NAME + "TASK_NAME \n"
+            + PREFIX_GROUP_NAME + "GROUP_NAME \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_GROUP_NAME + "CS2103-W16-3 \n";
 
