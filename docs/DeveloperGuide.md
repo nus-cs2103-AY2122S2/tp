@@ -366,7 +366,7 @@ in the specified attribute field
 
 **Extensions**
 
-* 2a. No TA candidate entries contains the given keyword in the specified attribute field
+* 2a. No TA candidate entries contain the given keyword in the specified attribute field
     * 2a1. TAlent Assistant™ returns an empty list with zero search results
 
     Use case ends.
