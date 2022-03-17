@@ -178,6 +178,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void setEvent(Event target, Event editedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean areEventFriendsValid(Event toAdd) {
             throw new AssertionError("This method should not be called.");
         }
