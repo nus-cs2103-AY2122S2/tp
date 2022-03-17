@@ -18,7 +18,7 @@ public class Task {
         this.taskName = task;
     }
 
-    public TaskName getTask() {
+    public TaskName getTaskName() {
         return taskName;
     }
 
@@ -34,7 +34,7 @@ public class Task {
         }
 
         return otherTask != null
-                && otherTask.getTask().equals(getTask());
+                && otherTask.getTaskName().equals(getTaskName());
     }
 
 
@@ -58,7 +58,7 @@ public class Task {
         }
 
         seedu.address.model.task.Task otherTask = (seedu.address.model.task.Task) other;
-        return otherTask.getTask().equals(getTask());
+        return otherTask.getTaskName().equals(getTaskName());
     }
 
     @Override

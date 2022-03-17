@@ -85,6 +85,13 @@ public interface Model {
     void deleteGroup(Group group);
 
     /**
+     * Deletes the given task in the given group.
+     * The group must exist in the address book.
+     * The task must exist in the specified group.
+     */
+    void deleteTask(Task task, Group group);
+
+    /**
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */

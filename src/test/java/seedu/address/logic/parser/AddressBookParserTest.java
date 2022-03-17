@@ -28,11 +28,14 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.GroupBuilder;
 import seedu.address.testutil.GroupUtil;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.TaskBuilder;
+import seedu.address.testutil.TaskUtil;
 
 public class AddressBookParserTest {
 
@@ -67,7 +70,10 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_deleteTask() throws Exception {
-        assertTrue(parser.parseCommand(DeleteTaskCommand.COMMAND_WORD) instanceof DeleteTaskCommand);
+        Group group = new GroupBuilder().build();
+        Task task = new TaskBuilder().build();
+        DeleteTaskCommand command = (DeleteTaskCommand) parser.parseCommand(TaskUtil.getDeleteTaskCommand(task, group));
+        assertEquals(new DeleteTaskCommand(task, group), command);
     }
 
     @Test

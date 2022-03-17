@@ -1,8 +1,11 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK;
+
+import java.util.List;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -24,7 +27,11 @@ public class DeleteTaskCommand extends Command {
             + PREFIX_TASK + "v1.2 user guide "
             + PREFIX_GROUP_NAME + "CS2103-W16-3 \n";
 
-    public static final String MESSAGE_ARGUMENTS = "Task: %1$s, Group: %2$s";
+    public static final String MESSAGE_NON_EXISTENT_TASK = "This task does not exist in the specified group.";
+
+    public static final String MESSAGE_NON_EXISTENT_GROUP = "This group does not exist in the list";
+
+    public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted task: %1$s";
 
     private final Task task;
     private final Group group;
@@ -38,7 +45,17 @@ public class DeleteTaskCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        throw new CommandException(String.format(MESSAGE_ARGUMENTS, task, group));
+        requireNonNull(model);
+
+        if (model.hasGroup(group)) { //check whether the specified group exists
+            if (!model.hasTask(task, group)) {
+                throw new CommandException(MESSAGE_NON_EXISTENT_TASK);
+            }
+            model.deleteTask(task, group);
+            return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, task));
+        } else {
+            throw new CommandException(MESSAGE_NON_EXISTENT_GROUP);
+        }
     }
 
     @Override

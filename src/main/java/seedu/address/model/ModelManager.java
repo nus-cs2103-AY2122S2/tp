@@ -121,6 +121,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteTask(Task task, Group group) {
+        addressBook.removeTask(task, group);
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+    }
+
+    @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
