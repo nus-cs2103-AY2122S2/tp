@@ -104,8 +104,12 @@ public class DeleteCommand extends Command {
         } else if (other instanceof DeleteCommand) {
             DeleteCommand otherDeleteCommand = (DeleteCommand) other;
             if (otherDeleteCommand.isDeletionByIndex && this.isDeletionByIndex) {
+                //assertion to ensure that if it is deletion by index, then targetIndex will not be null
+                assert(otherDeleteCommand.targetIndex != null && this.targetIndex != null);
                 return otherDeleteCommand.targetIndex.equals(this.targetIndex);
             } else if (!otherDeleteCommand.isDeletionByIndex && !this.isDeletionByIndex) {
+                //assertion to ensure that if it is deletion by name, then name will not be null
+                assert(otherDeleteCommand.nameOfPersonToDelete != null && this.nameOfPersonToDelete != null);
                 return otherDeleteCommand.nameOfPersonToDelete.equals(this.nameOfPersonToDelete);
             }
         }
