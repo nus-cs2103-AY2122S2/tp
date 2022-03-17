@@ -101,7 +101,7 @@ Firstly, `MainWindow` contains a `PopupHandler` that provides several APIs for o
 
 Every popup is inherited from the `Popup` abstract class which contains the implementation of the common attribute across all popups. The abstract class `Popup` is again inherited from `UiComponent` for navigability to `MainWindow`
 
-Popups depends on several classes in `Logic` and `Model`. 
+Popups depends on several classes in `Logic` and `Model`.
 
 `Model` is needed to show the relevant product information to the user. `Logic` on the other hand, is required to forge commands to add product and update product.
 
@@ -286,7 +286,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * is forgetful and sometimes forgets command syntax
 * prefer desktop apps over other types
 
-**Value proposition**: manage products and their expiry dates with ease using CLI 
+**Value proposition**: manage products and their expiry dates with ease using CLI
 
 
 ### User stories
@@ -371,7 +371,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. Should be able to hold up to 1000 products without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. Data should be auto saved locally each time a new command has been entered. 
+4. Data should be auto saved locally each time a new command has been entered.
 5. Should reload saved data accurately provided that data is not corrupted.
 6. System should respond within 3 seconds.
 7. UI should be clear and easy to use.

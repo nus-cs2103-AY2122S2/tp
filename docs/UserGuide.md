@@ -139,14 +139,14 @@ Shows a list of all products in the application.
 
 Format: `list`
 
-*Alternatively*, we are able to show only products that match one or more (tag, value) pairs. 
+*Alternatively*, we are able to show only products that match one or more (tag, value) pairs.
 Values are case-sensitive.
 
 Tags and their values: `n:NAME` `c:CATEGORY` `e:EXPIRY_DATE` `p:PRICE` `d:DESCRIPTION`
 
 Format: `list [TAG:VALUE ...]`
 
-Examples: 
+Examples:
 
 `list n:Water` lists all products that has Water as name.
 
@@ -265,7 +265,7 @@ _Details coming soon ..._
 
 ### 7.2 Item *[Coming soon]*
 
-### 7.3 Miscellaneous 
+### 7.3 Miscellaneous
 
 | Action   | Format, Examples |
 |:---------|:-----------------|
