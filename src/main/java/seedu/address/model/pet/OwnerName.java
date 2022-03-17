@@ -29,7 +29,7 @@ public class OwnerName implements Comparable<OwnerName> {
     public OwnerName(String ownerName) {
         requireNonNull(ownerName);
         checkArgument(isValidOwnerName(ownerName), MESSAGE_CONSTRAINTS);
-        value = ownerName;
+        value = ownerName.trim().replaceAll(" +", " ");
     }
 
     /**
