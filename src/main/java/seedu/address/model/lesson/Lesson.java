@@ -2,8 +2,6 @@ package seedu.address.model.lesson;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.LocalDateTime;
-
 import seedu.address.model.student.Student;
 
 
@@ -45,45 +43,6 @@ public abstract class Lesson {
         this.address = address;
         this.dateTimeSlot = dateTimeSlot;
         this.enrolledStudents = enrolledStudents;
-    }
-
-    /**
-     * Creates a new instance of a non-recurring lesson.
-     * @param name lesson name
-     * @param subject what subject would be taught during the lesson
-     * @param startDateTime date and starting time of the lesson
-     * @param hours how long the lesson would last
-     *
-     * TODO: remove this constructor
-     */
-    public static TemporaryLesson makeTemporaryLesson(String name, String subject, String address,
-                                                      LocalDateTime startDateTime, int hours) {
-        return Lesson.makeTemporaryLesson(name, subject, address, startDateTime, hours, 0);
-    }
-
-    /**
-     * Creates a new instance of a non-recurring lesson.
-     * @param name lesson name
-     * @param subject what subject would be taught during the lesson
-     * @param startDateTime date and starting time of the lesson
-     * @param hours how long the lesson would last
-     * @param minutes how long the lesson would last
-     *
-     * TODO: remove this constructor
-     */
-    public static TemporaryLesson makeTemporaryLesson(String name, String subject, String address,
-                                                      LocalDateTime startDateTime, int hours, int minutes) {
-        LessonName lessonName = new LessonName(name);
-        Subject lessonSubject = new Subject(subject);
-        DateTimeSlot lessonDateTimeSlot = new DateTimeSlot(startDateTime, hours, minutes);
-        LessonAddress lessonAddress = new LessonAddress(address);
-
-        return new TemporaryLesson(
-                lessonName,
-                lessonSubject,
-                lessonAddress,
-                lessonDateTimeSlot
-        );
     }
 
     public static TemporaryLesson makeTemporaryLesson(LessonName name, Subject subject, LessonAddress address,
