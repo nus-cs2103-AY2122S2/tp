@@ -287,7 +287,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | Seasoned User  | see which of my friends I am closest to and which of them I have not visited in a while | reflect more about how I spend my time with my friend and maybe catch up with ones I have not met in awhile | 
 | `* *`    | Seasoned User  | chain commands                                                                          | reduce the number of commands I need to type thereby increasing efficiency                                  |
 | `*`      | User           | tag friends under different categories                                                  | better classify and organise my friend circle                                                               | 
-| `*`      | New User       | know which features of the application I am not using as often                          | fully utilise the application to its maximum capability                                                     | 
 
 ### Use cases
 
@@ -633,13 +632,13 @@ Use case ends
 **MSS**
 
 1. User requests to show all events
-2. Amigos switches the GUI to the events tab and displays all possible events.
+2. Amigos switches the GUI to the events tab and displays all the stored events.
     
    Use case ends.
 
 **Extensions**
 * 2a. There are no events to show.
-    * 2a1. Amigos displays an empty interface with the message “No events”.
+    * 2a1. Amigos displays an empty interface with no entries and the message “No events”.
     
     Use case ends.
 
@@ -647,7 +646,7 @@ Use case ends
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. Should be able to hold up to 200 friends with up to 100 events/logs per person without a noticeable sluggishness in performance for typical usage (time taken to process any one command is 1 second at most).
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish all the basic tasks faster using commands than using the mouse.
 4. The project only supports managing of the user friendships and not other types of relationships.
 5. The application should work with different screen sizes, resolutions and window sizes.
 
