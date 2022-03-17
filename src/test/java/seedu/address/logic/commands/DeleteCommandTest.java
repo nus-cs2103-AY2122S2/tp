@@ -116,6 +116,10 @@ public class DeleteCommandTest {
         DeleteCommand deleteThirdCommandCopy = new DeleteCommand(INDEX_FIRST_PERSON);
         assertTrue(deleteThirdCommandCopy.equals(deleteThirdCommandCopy));
 
+        //different types of deletion -> returns false
+        assertFalse(new DeleteCommand(INDEX_FIRST_PERSON).equals(new DeleteCommand(model.getFilteredPersonList()
+                .get(INDEX_FIRST_PERSON.getZeroBased()).getName())));
+
         // different types -> returns false
         assertFalse(deleteFirstCommand.equals(1));
 
