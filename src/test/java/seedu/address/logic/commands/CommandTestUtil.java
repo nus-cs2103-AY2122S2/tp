@@ -14,12 +14,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javafx.util.Pair;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
+import seedu.address.model.tag.Priority;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -37,8 +39,15 @@ public class CommandTestUtil {
     public static final String VALID_INSURANCE_PACKAGE_BOB = "Silver Pro";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
-    public static final String VALID_TAG_HUSBAND = "husband";
-    public static final String VALID_TAG_FRIEND = "friend";
+    public static final Pair<String, Priority> VALID_TAG_HUSBAND = new Pair<>("call husband for payment",
+            Priority.PRIORITY_2);
+    public static final String VALID_TAG_NAME_HUSBAND = VALID_TAG_HUSBAND.getKey();
+    public static final Priority VALID_TAG_PRIORITY_HUSBAND = VALID_TAG_HUSBAND.getValue();
+    public static final String VALID_TAG_COMMAND_HUSBAND = VALID_TAG_NAME_HUSBAND + " :p2"; // change when needed
+    public static final Pair<String, Priority> VALID_TAG_FRIEND = new Pair<>("personal friend", null);
+    public static final String VALID_TAG_NAME_FRIEND = VALID_TAG_FRIEND.getKey();
+    public static final Priority VALID_TAG_PRIORITY_FRIEND = VALID_TAG_FRIEND.getValue();
+    public static final String VALID_TAG_COMMAND_FRIEND = VALID_TAG_NAME_FRIEND;
 
     public static final String NAME_FIND_ALICE_BOB = " " + PREFIX_NAME + "Alice Bob";
     public static final String NAME_FIND_ALICE_BOB_WHITESPACE = " " + PREFIX_NAME + "  \n Alice \n \t Bob  \t";
@@ -59,8 +68,8 @@ public class CommandTestUtil {
             " " + PREFIX_INSURANCE_PACKAGE + VALID_INSURANCE_PACKAGE_BOB;
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_COMMAND_FRIEND;
+    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_COMMAND_HUSBAND;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones

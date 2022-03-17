@@ -17,6 +17,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.InsurancePackage;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Priority;
 
 public class CsvAdaptedPersonTest {
 
@@ -125,7 +126,7 @@ public class CsvAdaptedPersonTest {
     @Test
     public void toModelType_invalidTags_throwsIllegalValueException() {
         List<CsvAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
-        invalidTags.add(new CsvAdaptedTag(INVALID_TAG));
+        invalidTags.add(new CsvAdaptedTag(INVALID_TAG, Priority.PRIORITY_1));
         CsvAdaptedPerson person = new CsvAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                 VALID_INSURANCE_PACKAGE, VALID_ADDRESS, invalidTags);
         assertThrows(IllegalValueException.class, person::toModelType);
@@ -141,15 +142,15 @@ public class CsvAdaptedPersonTest {
     @Test
     public void tagsToStringTests() {
         ArrayList<CsvAdaptedTag> tags = new ArrayList<>();
-        tags.add(new CsvAdaptedTag("Family"));
-        tags.add(new CsvAdaptedTag("Brother"));
+        tags.add(new CsvAdaptedTag("Family", null));
+        tags.add(new CsvAdaptedTag("Brother", Priority.PRIORITY_2));
 
         String tagsString = CsvAdaptedPerson.getTagsAsString(tags);
-        assertEquals("Family|Brother", tagsString);
+        assertEquals("Family|Brother[P2]", tagsString);
 
-        tags.add(new CsvAdaptedTag("Owe Money"));
+        tags.add(new CsvAdaptedTag("Owe Money", Priority.PRIORITY_3));
         tagsString = CsvAdaptedPerson.getTagsAsString(tags);
-        assertEquals("Family|Brother|Owe Money", tagsString);
+        assertEquals("Family|Brother[P2]|Owe Money[P3]", tagsString);
     }
 
     @Test

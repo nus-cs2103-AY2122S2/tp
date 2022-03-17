@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -9,6 +10,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -19,6 +21,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.InsurancePackage;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Priority;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -27,15 +30,15 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_INSURANCE_PACKAGE = " ";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TAG = "friend :q3";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_INSURANCE_PACKAGE = "Golden Premium Plus";
     private static final String VALID_EMAIL = "rachel@example.com";
-    private static final String VALID_TAG_1 = "friend";
-    private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_TAG_NAME_1 = "friend";
+    private static final String VALID_TAG_NAME_2 = "neighbour";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -186,15 +189,22 @@ public class ParserUtilTest {
 
     @Test
     public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
-        Tag expectedTag = new Tag(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseTag(VALID_TAG_1));
+        Tag expectedTag = new Tag(VALID_TAG_NAME_1, null);
+        assertEquals(expectedTag, ParserUtil.parseTag(VALID_TAG_NAME_1));
     }
 
     @Test
     public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
-        String tagWithWhitespace = WHITESPACE + VALID_TAG_1 + WHITESPACE;
-        Tag expectedTag = new Tag(VALID_TAG_1);
+        String tagWithWhitespace = WHITESPACE + VALID_TAG_NAME_1 + WHITESPACE;
+        Tag expectedTag = new Tag(VALID_TAG_NAME_1, null);
         assertEquals(expectedTag, ParserUtil.parseTag(tagWithWhitespace));
+    }
+
+    @Test
+    public void parseTag_priorityNeededForEquality_returnTag() throws Exception {
+        String tag = VALID_TAG_NAME_2;
+        Tag notEqualTag = new Tag(VALID_TAG_NAME_2, Priority.PRIORITY_2);
+        assertNotEquals(notEqualTag, ParserUtil.parseTag(tag));
     }
 
     @Test
@@ -204,7 +214,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseTags_collectionWithInvalidTags_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, INVALID_TAG)));
+        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList(VALID_TAG_NAME_1, INVALID_TAG)));
     }
 
     @Test
@@ -214,8 +224,17 @@ public class ParserUtilTest {
 
     @Test
     public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
-        Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
+        Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_NAME_1, VALID_TAG_NAME_2));
+        Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_NAME_1, null),
+                new Tag(VALID_TAG_NAME_2, null)));
+        for (Iterator<Tag> it = actualTagSet.iterator(); it.hasNext(); ) {
+            Tag t = it.next();
+            System.out.println(t.tagName + t.tagPriority); //has priority
+        }
+        for (Iterator<Tag> it = expectedTagSet.iterator(); it.hasNext(); ) {
+            Tag t = it.next();
+            System.out.println(t.tagName + t.tagPriority); //doesn't have priority
+        }
 
         assertEquals(expectedTagSet, actualTagSet);
     }

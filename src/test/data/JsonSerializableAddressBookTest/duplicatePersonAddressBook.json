@@ -5,7 +5,10 @@
     "email": "alice@example.com",
     "insurance package": "Gold Plus",
     "address": "123, Jurong West Ave 6, #08-111",
-    "tagged": [ "friends" ]
+    "tagged": [ {
+      "tagName" : "introduce to friends",
+      "tagPriority" : "PRIORITY_2"
+    } ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",

@@ -36,6 +36,7 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.InsurancePackage;
@@ -49,7 +50,7 @@ public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
     @Test
-    public void parse_allFieldsPresent_success() {
+    public void parse_allFieldsPresent_success() throws ParseException {
         Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
 
         // whitespace only preamble
