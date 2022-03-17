@@ -264,8 +264,6 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Value proposition**: The program will help busy university students to manage their friendships by keeping track of important details. An example of possible features include the tracking of birthdays, money owed, upcoming meetings etc. and providing relevant reminders, in addition to basic functionalities.
 
-
-
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
@@ -640,13 +638,13 @@ Use case ends
 **MSS**
 
 1. User requests to show all events
-2. Amigos switches the GUI to the events tab and displays all possible events.
+2. Amigos switches the GUI to the events tab and displays all the stored events.
     
    Use case ends.
 
 **Extensions**
 * 2a. There are no events to show.
-    * 2a1. Amigos displays an empty interface with the message “No events”.
+    * 2a1. Amigos displays an empty interface with no entries and the message “No events”.
     
     Use case ends.
 
@@ -654,9 +652,9 @@ Use case ends
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. Should be able to hold up to 200 friends with up to 100 events/logs per person without a noticeable sluggishness in performance for typical usage (time taken to process any one command is 1 second at most).
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish all the basic tasks faster using commands than using the mouse.
 4. The project only supports managing of the user friendships and not other types of relationships.
-5. The application should work with different screen sizes, resolutions and window sizes.
+5. The application should work with different screen sizes, resolutions and window sizes (minimum resolution is 600x450).
 
 ### Glossary
 
