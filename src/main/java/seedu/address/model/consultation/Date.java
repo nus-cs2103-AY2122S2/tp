@@ -16,12 +16,6 @@ public class Date {
     public static final String MESSAGE_CONSTRAINTS =
             "Date should not be blank, and should be in the format dd-MM-yyyy";
 
-    /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    private static final String VALIDATION_REGEX = "^(3[01]|[12][0-9]|0[1-9])-(1[0-2]|0[1-9])-[0-9]{4}$";
-
     private LocalDate date;
 
     /**
