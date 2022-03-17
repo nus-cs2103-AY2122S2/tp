@@ -61,6 +61,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_SAME_INPUT = "The edited value is the same as the current one";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -98,11 +99,22 @@ public class EditCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
 
+    private static <T> T editChecker(Optional<T> updatedOptionalField, T prevField) throws
+            CommandException {
+        T updatedField = updatedOptionalField.orElse(prevField);
+        if (updatedOptionalField.isPresent() && updatedField.equals(prevField)) {
+            throw new CommandException(MESSAGE_SAME_INPUT);
+        }
+        return updatedField;
+    }
+
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
+     * @throws exception if the edited status is same as the current status of the student
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) throws
+            CommandException {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
@@ -236,6 +248,10 @@ public class EditCommand extends Command {
             return Optional.ofNullable(matriculationNumber);
         }
 
+        /**
+         * Set the covid status of a student
+         * @param covidStatus is the covid status of a student in POSITIVE, NEGATIVE, HRW, HRN
+         */
         public void setCovidStatus(CovidStatus covidStatus) {
             this.covidStatus = covidStatus;
         }
