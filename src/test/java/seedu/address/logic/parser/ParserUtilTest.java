@@ -14,11 +14,11 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.module.Module;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.module.Module;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
@@ -178,7 +178,8 @@ public class ParserUtilTest {
 
     @Test
     public void parseModules_collectionWithInvalidModules_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseModules(Arrays.asList(VALID_MODULE_1, INVALID_MODULE)));
+        assertThrows(ParseException.class,
+                () -> ParserUtil.parseModules(Arrays.asList(VALID_MODULE_1, INVALID_MODULE)));
     }
 
     @Test
@@ -188,8 +189,10 @@ public class ParserUtilTest {
 
     @Test
     public void parseModules_collectionWithValidModules_returnsModuleSet() throws Exception {
-        Set<Module> actualModuleSet = ParserUtil.parseModules(Arrays.asList(VALID_MODULE_1, VALID_MODULE_2));
-        Set<Module> expectedModuleSet = new HashSet<Module>(Arrays.asList(new Module(VALID_MODULE_1), new Module(VALID_MODULE_2)));
+        Set<Module> actualModuleSet = ParserUtil.parseModules(
+                Arrays.asList(VALID_MODULE_1, VALID_MODULE_2));
+        Set<Module> expectedModuleSet = new HashSet<Module>(
+                Arrays.asList(new Module(VALID_MODULE_1), new Module(VALID_MODULE_2)));
 
         assertEquals(expectedModuleSet, actualModuleSet);
     }
