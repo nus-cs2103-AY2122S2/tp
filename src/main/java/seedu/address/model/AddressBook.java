@@ -275,6 +275,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         medicals.add(m);
     }
 
+    /**
+     * Removes {@code key} from this {@code MedBook}.
+     * {@code key} must exist in MedBook.
+     */
+    public void removeMedical(Medical key) {
+        medicals.remove(key);
+    }
+
 
     public void setMedicals(Medical target, Medical editedMedical) {
         requireNonNull(editedMedical);

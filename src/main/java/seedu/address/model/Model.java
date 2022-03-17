@@ -180,6 +180,8 @@ public interface Model {
 
     boolean hasMedical(Medical medical);
 
+    void deleteMedical(Medical medical);
+
     /**
      * Updates the filter of the filtered medical list to filter by the given {@code predicate}. s
      * @throws NullPointerException if {@code predicate} is null.
