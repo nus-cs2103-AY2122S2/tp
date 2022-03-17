@@ -13,7 +13,7 @@ import seedu.address.logic.commands.ShowFriendCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.FriendName;
 import seedu.address.model.person.Person;
 
 
@@ -25,7 +25,7 @@ public class ShowFriendCommandParserTest {
     @Test
     public void parse_validName_returnsShowFriendCommand() {
         Person personToShow = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Name name = personToShow.getName();
+        FriendName name = personToShow.getName();
         ShowFriendCommand showFriendCommand = new ShowFriendCommand(personToShow);
 
         assertParseSuccess(parser, " n/" + name.fullName, showFriendCommand);
@@ -34,12 +34,12 @@ public class ShowFriendCommandParserTest {
 
     @Test
     public void parse_noNameGiven_throwsParseException() {
-        assertParseFailure(parser, " n/", Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " n/", FriendName.MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void parse_invalidNameArgs_throwsParseException() {
-        assertParseFailure(parser, " n/" + "$12345", Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " n/" + "$12345", FriendName.MESSAGE_CONSTRAINTS);
     }
 
     @Test

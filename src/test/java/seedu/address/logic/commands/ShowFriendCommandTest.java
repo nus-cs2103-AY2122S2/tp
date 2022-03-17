@@ -15,7 +15,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.FriendName;
 import seedu.address.model.person.Person;
 
 /**
@@ -45,7 +45,7 @@ public class ShowFriendCommandTest {
     @Test
     public void execute_showNameDoesNotExist_throwsCommandException() {
         //Tommy Ang does not exist in the sample model that is used for testing here
-        Person personToShow = new Person(new Name("Tommy Ang"));
+        Person personToShow = new Person(new FriendName("Tommy Ang"));
         ShowFriendCommand showFriendCommand = new ShowFriendCommand(personToShow);
         assertCommandFailure(showFriendCommand, model, Messages.MESSAGE_PERSON_DOES_NOT_EXIST);
     }
