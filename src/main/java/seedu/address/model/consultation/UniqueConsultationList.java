@@ -14,9 +14,12 @@ import seedu.address.model.consultation.exceptions.DuplicateConsultationExceptio
 
 /**
  * A list of consultations that enforces uniqueness between its elements that identify it: nric, date, time.
- * A consultation is considered unique by comparing using {@code Consultation#equals(Object)}. As such, adding and updating of
- * consultations uses Consultation#equals(Object) for equality so as to ensure that the consultation being added or updated is
- * unique in terms of identity in the UniqueConsultationList. The removal of a consultation uses Consultation#equals(Object) so
+ * A consultation is considered unique by comparing using {@code Consultation#equals(Object)}.
+ * As such, adding and updating of
+ * consultations uses Consultation#equals(Object) for equality so as to ensure that
+ * the consultation being added or updated is
+ * unique in terms of identity in the UniqueConsultationList. The removal of a consultation
+ * uses Consultation#equals(Object) so
  * as to ensure that the consultation with the same unique identifiers will be removed.
  *
  * Supports a minimal set of list operations.
@@ -52,7 +55,8 @@ public class UniqueConsultationList implements Iterable<Consultation> {
     /**
      * Replaces the consultation {@code target} in the list with {@code editedConsultation}.
      * {@code target} must exist in the list.
-     * The consultation identity of {@code editedConsultation} must not be the same as another existing consultation in the list.
+     * The consultation identity of {@code editedConsultation} must not be the same
+     * as another existing consultation in the list.
      */
     public void setConsultation(Consultation target, Consultation editedConsultation) {
         requireAllNonNull(target, editedConsultation);
