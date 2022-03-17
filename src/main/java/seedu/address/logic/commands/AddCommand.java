@@ -61,6 +61,10 @@ public class AddCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
+    public Person getToAdd() {
+        return toAdd;
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

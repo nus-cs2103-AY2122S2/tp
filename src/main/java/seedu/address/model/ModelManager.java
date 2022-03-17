@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
 
 /**
@@ -26,6 +27,7 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
 
     private AddressBook backup;
+    private boolean undoable = false;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -100,27 +102,39 @@ public class ModelManager implements Model {
 
     @Override
     public void deletePerson(Person target) {
+        undoable = true;
         backup = copyAddressBook();
         addressBook.removePerson(target);
+        undoable = false;
     }
 
     @Override
     public void addPerson(Person person) {
+        undoable = true;
         backup = copyAddressBook();
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        undoable = false;
     }
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
+        undoable = true;
         backup = copyAddressBook();
         requireAllNonNull(target, editedPerson);
         addressBook.setPerson(target, editedPerson);
+        undoable = false;
     }
 
     @Override
-    public void undoCommand() {
-        setAddressBook(backup);
+    public void undoCommand() throws CommandException {
+        if (undoable) {
+            setAddressBook(backup);
+            backup = copyAddressBook();
+        } else {
+            throw new CommandException(UNABLE_TO_UNDO);
+        }
+
     }
 
     /**

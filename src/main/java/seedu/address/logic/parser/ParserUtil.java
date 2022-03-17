@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import javafx.util.Pair;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -14,6 +15,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.InsurancePackage;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Priority;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -112,6 +114,40 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String tag} into a {@code Pair<String, Priority>}.
+     * Seperates the priority from the tag entered
+     */
+    public static Pair<String, Priority> parsePriority(String tag) throws ParseException {
+        requireNonNull(tag);
+        Priority priority = null;
+        String tagName = "";
+        String possiblePriority = tag.length() > 4 ? tag.substring(tag.length() - 4).toLowerCase() : "";
+
+        switch (possiblePriority) {
+        case " :p1":
+            tagName = tag.substring(0, tag.length() - 4);
+            priority = Priority.PRIORITY_1;
+            break;
+        case " :p2":
+            tagName = tag.substring(0, tag.length() - 4);
+            priority = Priority.PRIORITY_2;
+            break;
+        case " :p3":
+            tagName = tag.substring(0, tag.length() - 4);
+            priority = Priority.PRIORITY_3;
+            break;
+        case " :p4":
+            tagName = tag.substring(0, tag.length() - 4);
+            priority = Priority.PRIORITY_4;
+            break;
+        default:
+            tagName = tag;
+            priority = null;
+        }
+        return new Pair<>(tagName, priority);
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -119,11 +155,13 @@ public class ParserUtil {
      */
     public static Tag parseTag(String tag) throws ParseException {
         requireNonNull(tag);
-        String trimmedTag = tag.trim();
+        Pair<String, Priority> tagAndPriority = parsePriority(tag.trim());
+        String trimmedTag = tagAndPriority.getKey().trim();
+
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return new Tag(trimmedTag, tagAndPriority.getValue());
     }
 
     /**

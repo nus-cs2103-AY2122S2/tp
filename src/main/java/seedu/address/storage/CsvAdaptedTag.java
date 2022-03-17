@@ -1,6 +1,9 @@
 package seedu.address.storage;
 
+import java.util.Map;
+
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.tag.Priority;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -8,13 +11,18 @@ import seedu.address.model.tag.Tag;
  */
 class CsvAdaptedTag {
 
+    public static final Map<String, Priority> STRING_PRIORITY_MAP = Map.of("[P1]", Priority.PRIORITY_1,
+            "[P2]", Priority.PRIORITY_2, "[P3]", Priority.PRIORITY_3, "[P4]", Priority.PRIORITY_4);
     private final String tagName;
+    private final Priority tagPriority;
+
 
     /**
      * Constructs a {@code CsvAdaptedTag} with the given {@code tagName}.
      */
-    public CsvAdaptedTag(String tagName) {
+    public CsvAdaptedTag(String tagName, Priority priority) {
         this.tagName = tagName;
+        this.tagPriority = priority;
     }
 
     /**
@@ -22,10 +30,21 @@ class CsvAdaptedTag {
      */
     public CsvAdaptedTag(Tag source) {
         tagName = source.tagName;
+        tagPriority = source.tagPriority;
     }
 
-    public String getTagName() {
-        return tagName;
+    public String getTagNameString() {
+        String priorityString = "";
+        if (tagPriority != null) {
+            for (Map.Entry<String, Priority> e: STRING_PRIORITY_MAP.entrySet()) {
+                if (e.getValue() == tagPriority) {
+                    priorityString = e.getKey();
+                    break;
+                }
+            }
+        }
+
+        return tagName + priorityString;
     }
 
     /**
@@ -37,7 +56,7 @@ class CsvAdaptedTag {
         if (!Tag.isValidTagName(tagName)) {
             throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(tagName);
+        return new Tag(tagName, tagPriority);
     }
 
     @Override
@@ -51,11 +70,16 @@ class CsvAdaptedTag {
         }
 
         CsvAdaptedTag otherTag = (CsvAdaptedTag) other;
-        return tagName.equals(otherTag.tagName);
+        return tagName.equals(otherTag.tagName) && tagPriority == otherTag.tagPriority;
     }
 
     @Override
     public int hashCode() {
         return tagName.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return tagName + tagPriority;
     }
 }
