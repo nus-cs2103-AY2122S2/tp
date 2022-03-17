@@ -7,7 +7,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import seedu.address.commons.core.Messages;
@@ -191,7 +193,7 @@ public class EditCommand extends Command {
         }
 
         public void setEducations(List<Tag> tags) {
-            this.educations = tags;
+            this.educations = Objects.requireNonNullElseGet(tags, ArrayList::new);
         }
 
         public Optional<List<Tag>> getEducations() {
@@ -199,7 +201,7 @@ public class EditCommand extends Command {
         }
 
         public void setInternships(List<Tag> tags) {
-            this.internships = tags;
+            this.internships = Objects.requireNonNullElseGet(tags, ArrayList::new);
         }
 
         public Optional<List<Tag>> getInternships() {
@@ -207,7 +209,7 @@ public class EditCommand extends Command {
         }
 
         public void setModules(List<Tag> tags) {
-            this.modules = tags;
+            this.modules = Objects.requireNonNullElseGet(tags, ArrayList::new);
         }
 
         public Optional<List<Tag>> getModules() {
@@ -215,7 +217,7 @@ public class EditCommand extends Command {
         }
 
         public void setCcas(List<Tag> tags) {
-            this.ccas = tags;
+            this.ccas = Objects.requireNonNullElseGet(tags, ArrayList::new);
         }
 
         public Optional<List<Tag>> getCcas() {
