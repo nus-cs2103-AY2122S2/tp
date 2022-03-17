@@ -3,16 +3,16 @@ package seedu.address.logic.commands.testresult;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
-import seedu.address.commons.core.Messages;
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.testresult.TestResult;
-
-import java.util.List;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.

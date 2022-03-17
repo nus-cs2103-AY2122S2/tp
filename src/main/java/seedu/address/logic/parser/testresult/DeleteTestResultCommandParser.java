@@ -4,6 +4,8 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
+import java.util.stream.Stream;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.testresult.DeleteTestResultCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
@@ -12,8 +14,6 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
-
-import java.util.stream.Stream;
 
 /**
  * Parses input arguments and creates a new DeleteCommand object
@@ -30,7 +30,8 @@ public class DeleteTestResultCommandParser implements Parser<DeleteTestResultCom
                 ArgumentTokenizer.tokenize(args, PREFIX_TYPE, PREFIX_INDEX);
         if (!arePrefixesPresent(argMultimap, PREFIX_TYPE, PREFIX_INDEX)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTestResultCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DeleteTestResultCommand.MESSAGE_USAGE));
         }
         try {
             Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
