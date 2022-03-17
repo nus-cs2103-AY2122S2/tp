@@ -178,8 +178,8 @@ public class ParserUtilTest {
 
     @Test
     public void parseModules_collectionWithInvalidModules_throwsParseException() {
-        assertThrows(ParseException.class,
-                () -> ParserUtil.parseModules(Arrays.asList(VALID_MODULE_1, INVALID_MODULE)));
+        assertThrows(ParseException.class, () -> ParserUtil.parseModules(
+                Arrays.asList(VALID_MODULE_1, INVALID_MODULE)));
     }
 
     @Test
