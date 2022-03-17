@@ -138,7 +138,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     CovidStatus.class.getSimpleName()));
         }
-        if (!Address.isValidAddress(status)) {
+        if (!CovidStatus.isValidCovidStatus(status)) {
             throw new IllegalValueException(CovidStatus.MESSAGE_CONSTRAINTS);
         }
         final CovidStatus covidStatus = new CovidStatus(status);
