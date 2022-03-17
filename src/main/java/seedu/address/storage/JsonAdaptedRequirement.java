@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.position.Requirement;
 
+
 public class JsonAdaptedRequirement {
 
     private final String requirementText;
@@ -36,7 +37,7 @@ public class JsonAdaptedRequirement {
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
     public Requirement toModelType() throws IllegalValueException {
-        if (Requirement.isValidRequirementText(requirementText)) {
+        if (!Requirement.isValidRequirementText(requirementText)) {
             throw new IllegalValueException(Requirement.MESSAGE_CONSTRAINTS);
         }
         return new Requirement(requirementText);

@@ -50,7 +50,6 @@ public class JsonHireLahStorage implements HireLahStorage {
         if (!jsonAddressBook.isPresent()) {
             return Optional.empty();
         }
-
         try {
             return Optional.of(jsonAddressBook.get().toModelType());
         } catch (IllegalValueException ive) {
