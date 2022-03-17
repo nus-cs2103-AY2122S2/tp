@@ -31,10 +31,21 @@ public class TeamMemberList {
 
     /**
      * Adds a player into the teamList
+     *
      * @param person The player to be added
      */
     public void putToTeamList(Person person) {
         this.list.add(person);
+    }
+
+    // remove after resolving compilation error
+    public void removePerson(int index) {
+        this.list.remove(index);
+    }
+
+    // this is the final one
+    public void removePerson(Person person) {
+        this.list.remove(person);
     }
 
     /**
@@ -43,8 +54,13 @@ public class TeamMemberList {
      * @param person The person to be checked
      * @return Boolean represents the existence of person
      */
-    public boolean containsPerson(Person person) {
+    public boolean containsPerson (Person person) {
         return this.list.contains(person);
+    }
+
+    // remove after resolving compilation error
+    public void deletePersonFromTeam(Person person) {
+        this.list.remove(person);
     }
 
 }

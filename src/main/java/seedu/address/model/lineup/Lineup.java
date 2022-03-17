@@ -43,8 +43,20 @@ public class Lineup {
         playersList.add(player);
     }
 
-    public void removePlayer(int index) {
-        playersList.remove(index);
+    public void removePlayer(Person player) {
+        playersList.remove(player);
+    }
+
+    /**
+     * Removes a player.
+     */
+    public void removePlayer(Person player) {
+        for (int i = 0; i < this.playersList.size(); i++) {
+            if (this.playersList.get(i).equals(player)) {
+                this.playersList.remove(i);
+                return;
+            }
+        }
     }
 
     @Override

@@ -57,6 +57,27 @@ public class UniquePlayerList {
     }
 
     /**
+     * Gets a person.
+     */
+    public Person getPerson(Name name) {
+        return this.nameToPersonMap.getOrDefault(name, null);
+    }
+
+    /**
+     * Gets a person's team.
+     */
+    public Team getPersonTeam(Person person) {
+        return this.personToTeamMap.getOrDefault(person, null);
+    }
+
+    /**
+     * Gets a person's lineups.
+     */
+    public List<Lineup> getPersonLineups(Person person) {
+        return this.personToLineupMap.getOrDefault(person, null);
+    }
+
+    /**
      * Adds a person to team mapping to the system.
      */
     public void addPersonToTeam(Person person, Team team) {
@@ -101,5 +122,55 @@ public class UniquePlayerList {
         if (this.personToLineupMap.get(person).contains(lineup)) {
             this.personToLineupMap.get(person).remove(lineup);
         }
+    }
+
+    public Person getPerson(Name targetPersonName) {
+        return nameToPersonMap.get(targetPersonName);
+    }
+
+    public void setPerson(Person target, Person editedPerson) {
+        Team targetTeam = personToTeamMap.get(target);
+        List<Lineup> targetLineups = personToLineupMap.get(target);
+
+        editPersonInTeam(targetTeam, target, editedPerson);
+        editPersonInLineUp(targetLineups, target, editedPerson);
+        updateMaps(target, editedPerson, targetTeam, targetLineups);
+    }
+
+    public void editPersonInTeam(Team targetTeam, Person target, Person editedPerson) {
+        targetTeam.deletePersonFromTeam(target);
+        targetTeam.putPersonToTeam(editedPerson);
+    }
+
+    public void editPersonInLineUp(List<Lineup> targetLineups, Person target, Person editedPerson) {
+        for (Lineup lineup : targetLineups) {
+            lineup.removePlayer(target);
+            lineup.addPlayer(editedPerson);
+        }
+    }
+
+    public void updateMaps(Person target, Person editedPerson, Team targetTeam, List<Lineup> targetLineups) {
+        removePerson(target);
+        addPerson(editedPerson);
+        removePersonFromTeam(target);
+        addPersonToTeam(editedPerson, targetTeam);
+        removePersonFromLineUp(target);
+        addPersonToLineup(editedPerson, targetLineups);
+    }
+
+    public void removePersonFromTeam(Person person) {
+        if (personToTeamMap.containsKey(person)) {
+            personToTeamMap.remove(person);
+        }
+    }
+
+    public void removePersonFromLineUp(Person person) {
+        if (personToLineupMap.containsKey(person)) {
+            personToLineupMap.remove(person);
+        }
+    }
+
+    public void addPersonToLineup(Person person, List<Lineup> lineups) {
+        personToLineupMap.put(person, lineups);
     }
 }
