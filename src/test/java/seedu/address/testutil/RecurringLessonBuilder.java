@@ -53,7 +53,10 @@ public class RecurringLessonBuilder {
      * Sets the {@code Name} of the {@code Lesson} that we are building.
      */
     public RecurringLessonBuilder withName(String name) {
-        this.name = new LessonName(name);
+        this.name = isNull(name)
+            ? null
+            : new LessonName(name);
+
         return this;
     }
 
@@ -61,7 +64,10 @@ public class RecurringLessonBuilder {
      * Sets the {@code Subject} of the {@code Lesson} that we are building.
      */
     public RecurringLessonBuilder withSubject(String subject) {
-        this.subject = new Subject(subject);
+        this.subject = isNull(subject)
+                ? null
+                : new Subject(subject);
+
         return this;
     }
 
@@ -69,7 +75,10 @@ public class RecurringLessonBuilder {
      * Sets the {@code Address} of the {@code Lesson} that we are building.
      */
     public RecurringLessonBuilder withAddress(String address) {
-        this.address = new LessonAddress(address);
+        this.address = isNull(address)
+                ? null
+                : new LessonAddress(address);
+
         return this;
     }
 
@@ -78,6 +87,27 @@ public class RecurringLessonBuilder {
      */
     public RecurringLessonBuilder withDateTimeSlot(DateTimeSlot dateTimeSlot) {
         this.dateTimeSlot = dateTimeSlot;
+        return this;
+    }
+
+    /**
+     * Sets the {@code DateTimeSlot} of the {@code Lesson} that we are building.
+     */
+    public RecurringLessonBuilder withDateTimeSlot(Integer year, Integer month, Integer dayOfMonth,
+                                                   Integer hour, Integer minute,
+                                                   Integer durationHours, Integer durationMinutes) {
+        this.dateTimeSlot = new DateTimeSlot(
+                LocalDateTime.of(year, month, dayOfMonth, hour, minute),
+                durationHours, durationMinutes
+        );
+        return this;
+    }
+
+    /**
+     * Sets the duration of the {@code DateTimeSlot} of the {@code Lesson} that we are building
+     */
+    public RecurringLessonBuilder withDuration(Integer hours, Integer minutes) {
+        this.dateTimeSlot = new DateTimeSlot(this.dateTimeSlot.getDateOfLesson(), hours, minutes);
         return this;
     }
 
@@ -91,5 +121,9 @@ public class RecurringLessonBuilder {
 
     public Lesson build() {
         return Lesson.makeRecurringLesson(name, subject, address, dateTimeSlot);
+    }
+
+    private static boolean isNull(Object toTest) {
+        return toTest == null;
     }
 }

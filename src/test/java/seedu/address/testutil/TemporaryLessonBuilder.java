@@ -53,7 +53,10 @@ public class TemporaryLessonBuilder {
      * Sets the {@code Name} of the {@code Lesson} that we are building.
      */
     public TemporaryLessonBuilder withName(String name) {
-        this.name = new LessonName(name);
+        this.name = isNull(name)
+                ? null
+                : new LessonName(name);
+
         return this;
     }
 
@@ -61,7 +64,10 @@ public class TemporaryLessonBuilder {
      * Sets the {@code Subject} of the {@code Lesson} that we are building.
      */
     public TemporaryLessonBuilder withSubject(String subject) {
-        this.subject = new Subject(subject);
+        this.subject = isNull(subject)
+                ? null
+                : new Subject(subject);
+
         return this;
     }
 
@@ -69,7 +75,10 @@ public class TemporaryLessonBuilder {
      * Sets the {@code Address} of the {@code Lesson} that we are building.
      */
     public TemporaryLessonBuilder withAddress(String address) {
-        this.address = new LessonAddress(address);
+        this.address = isNull(address)
+                ? null
+                : new LessonAddress(address);
+
         return this;
     }
 
@@ -78,6 +87,36 @@ public class TemporaryLessonBuilder {
      */
     public TemporaryLessonBuilder withDateTimeSlot(DateTimeSlot dateTimeSlot) {
         this.dateTimeSlot = dateTimeSlot;
+        return this;
+    }
+
+    /**
+     * Sets the {@code DateTimeSlot} of the {@code Lesson} that we are building.
+     */
+    public TemporaryLessonBuilder withDateTimeSlot(LocalDateTime lessonDateTime,
+                                                   Integer durationHours, Integer durationMinutes) {
+        this.dateTimeSlot = new DateTimeSlot(lessonDateTime, durationHours, durationMinutes);
+        return this;
+    }
+
+    /**
+     * Sets the {@code DateTimeSlot} of the {@code Lesson} that we are building.
+     */
+    public TemporaryLessonBuilder withDateTimeSlot(Integer year, Integer month, Integer dayOfMonth,
+                                                   Integer hour, Integer minute,
+                                                   Integer durationHours, Integer durationMinutes) {
+        this.dateTimeSlot = new DateTimeSlot(
+                LocalDateTime.of(year, month, dayOfMonth, hour, minute),
+                durationHours, durationMinutes
+        );
+        return this;
+    }
+
+    /**
+     * Sets the duration of the {@code DateTimeSlot} of the {@code Lesson} that we are building
+     */
+    public TemporaryLessonBuilder withDuration(Integer hours, Integer minutes) {
+        this.dateTimeSlot = new DateTimeSlot(this.dateTimeSlot.getDateOfLesson(), hours, minutes);
         return this;
     }
 
@@ -91,5 +130,9 @@ public class TemporaryLessonBuilder {
 
     public Lesson build() {
         return Lesson.makeTemporaryLesson(name, subject, address, dateTimeSlot);
+    }
+
+    private static boolean isNull(Object toTest) {
+        return toTest == null;
     }
 }
