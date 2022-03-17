@@ -52,8 +52,8 @@ public class AddCommandParser implements Parser<AddCommand> {
                 ? ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get())
                 : null;
         Description description = argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()
-                ? ParserUtil.parsePersonDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get())
-                : null;
+                ? ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get())
+                : new Description(null);
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Person person = new Person(name, phone, email, address, description, tagList, null); // explicitly no logs

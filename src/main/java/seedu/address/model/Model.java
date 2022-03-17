@@ -104,6 +104,8 @@ public interface Model {
      */
     void deleteEvent(Event target);
 
+    public void setEvent(Event target, Event editedPerson);
+
     /**
      * Returns true if all friend names in Event correspond to actual Friend objects.
      */
