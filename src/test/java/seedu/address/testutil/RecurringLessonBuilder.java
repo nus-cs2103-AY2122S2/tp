@@ -1,13 +1,13 @@
 package seedu.address.testutil;
 
+import java.time.LocalDateTime;
+
 import seedu.address.model.lesson.DateTimeSlot;
 import seedu.address.model.lesson.EnrolledStudents;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonAddress;
 import seedu.address.model.lesson.LessonName;
 import seedu.address.model.lesson.Subject;
-
-import java.time.LocalDateTime;
 
 /**
  * A utility class to help with building Lesson objects.

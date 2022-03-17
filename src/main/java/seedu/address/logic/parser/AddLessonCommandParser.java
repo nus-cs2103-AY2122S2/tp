@@ -10,13 +10,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
-import java.time.DateTimeException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 import seedu.address.logic.commands.AddLessonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.lesson.*;
+import seedu.address.model.lesson.DateTimeSlot;
+import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.LessonAddress;
+import seedu.address.model.lesson.LessonName;
+import seedu.address.model.lesson.Subject;
 
 /**
  * Parses input arguments and creates a new AddStudentCommand object
@@ -98,24 +98,4 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
             throw new ParseException(INVALID_DURATION_MESSAGE);
         }
     }
-
-    /**
-     * Returns a {@code LocalDateTime} representing the date of the lesson and the time at which it starts.
-     */
-//    private static LocalDateTime getLessonDateTime(LocalDate dateOfLesson, String startTime) throws ParseException {
-//        String[] hourAndMinuteOfStartTime = startTime.split(":");
-//        Integer hour;
-//        Integer minute;
-//        LocalDateTime lessonDatetime;
-//
-//        try {
-//            hour = Integer.parseInt(hourAndMinuteOfStartTime[0]);
-//            minute = Integer.parseInt(hourAndMinuteOfStartTime[1]);
-//            lessonDatetime = dateOfLesson.atTime(hour, minute);
-//        } catch (NumberFormatException | DateTimeException exception) {
-//            throw new ParseException(String.format("Invalid lesson start time: %s", startTime));
-//        }
-//
-//        return lessonDatetime;
-//    }
 }

@@ -1,12 +1,12 @@
 package seedu.address.model.lesson;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.testutil.TemporaryLessonBuilder;
 
 public class LessonTest {
@@ -42,7 +42,7 @@ public class LessonTest {
         Lesson overlappingDateTimeOne = new TemporaryLessonBuilder()
                 .withDateTimeSlot(d1, 1, 30)
                 .build();
-        Lesson overlappingDateTimeTwo =  new TemporaryLessonBuilder()
+        Lesson overlappingDateTimeTwo = new TemporaryLessonBuilder()
                 .withDateTimeSlot(d2, 1, 30)
                 .build();
         assertTrue(overlappingDateTimeOne.isConflictingWithLesson(overlappingDateTimeTwo));

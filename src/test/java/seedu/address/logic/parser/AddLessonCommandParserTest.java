@@ -16,8 +16,6 @@ import static seedu.address.logic.commands.CommandTestUtil.LESSON_NAME_DESC_TRIA
 import static seedu.address.logic.commands.CommandTestUtil.LESSON_START_TIME_DESC_6PM;
 import static seedu.address.logic.commands.CommandTestUtil.LESSON_SUBJECT_DESC_BIOLOGY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_ADDRESS;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_DURATION_HOURS;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_DURATION_MINUTES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_NAME;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_SUBJECT;
 import static seedu.address.logic.parser.AddLessonCommandParser.INVALID_DURATION_MESSAGE;
@@ -30,8 +28,6 @@ import static seedu.address.logic.parser.ParserUtil.MINUTES_GREATER_THAN_59_MESS
 import static seedu.address.logic.parser.ParserUtil.NEGATIVE_HOURS_MESSAGE;
 import static seedu.address.logic.parser.ParserUtil.NEGATIVE_MINUTES_MESSAGE;
 
-import java.time.LocalDateTime;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddLessonCommand;
@@ -43,16 +39,6 @@ public class AddLessonCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        // TODO: fix generation of lessonDate to update based on VALID_LESSON_DATE
-        // (RELATED TO: CommandTestUtil#VALID_LESSON_DATE)
-//        Lesson expectedLesson = Lesson.makeTemporaryLesson(
-//                VALID_LESSON_NAME,
-//                VALID_LESSON_SUBJECT,
-//                VALID_LESSON_ADDRESS,
-//                LocalDateTime.of(2022, 12, 1, 18, 0),
-//                2, 30
-//        ); // TODO: make constants for 2 hours and 30 minutes
-
         Lesson expectedLesson = new TemporaryLessonBuilder()
                 .withName(VALID_LESSON_NAME)
                 .withSubject(VALID_LESSON_SUBJECT)
