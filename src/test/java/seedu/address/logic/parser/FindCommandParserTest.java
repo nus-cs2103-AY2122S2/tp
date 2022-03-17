@@ -9,12 +9,12 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.model.person.predicate.CourseContainsKeywordsPredicate;
-import seedu.address.model.person.predicate.EmailContainsKeywordsPredicate;
-import seedu.address.model.person.predicate.NameContainsKeywordsPredicate;
-import seedu.address.model.person.predicate.PersonContainsKeywordsPredicate;
-import seedu.address.model.person.predicate.PhoneContainsKeywordsPredicate;
-import seedu.address.model.person.predicate.StudentIdContainsKeywordsPredicate;
+import seedu.address.model.candidate.predicate.CourseContainsKeywordsPredicate;
+import seedu.address.model.candidate.predicate.EmailContainsKeywordsPredicate;
+import seedu.address.model.candidate.predicate.NameContainsKeywordsPredicate;
+import seedu.address.model.candidate.predicate.PersonContainsKeywordsPredicate;
+import seedu.address.model.candidate.predicate.PhoneContainsKeywordsPredicate;
+import seedu.address.model.candidate.predicate.StudentIdContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
 

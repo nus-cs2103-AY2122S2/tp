@@ -8,10 +8,10 @@ import java.util.Comparator;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.Person;
+import seedu.address.model.candidate.Candidate;
 
 public class SortCommandTest {
-    private final Comparator<Person> sortComparator = (p1, p2) -> 0;
+    private final Comparator<Candidate> sortComparator = (p1, p2) -> 0;
 
     @Test
     public void constructor_nullComparator_throwsNullPointerException() {

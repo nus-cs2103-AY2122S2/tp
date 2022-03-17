@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Person;
+import seedu.address.model.candidate.Candidate;
 
 /**
  * Parses input arguments and creates a new SortCommand object
@@ -31,8 +31,7 @@ public class SortCommandParser implements Parser<SortCommand> {
         }
 
         String sortKey = argMultimap.getValue(PREFIX_SORTKEY).get().toLowerCase();
-        Comparator<Person> sortComparator;
-
+        Comparator<Candidate> sortComparator;
 
         switch (sortKey) {
         case "course":

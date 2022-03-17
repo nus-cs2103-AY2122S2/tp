@@ -7,9 +7,9 @@
     "email" : "E0123456@u.nus.edu",
     "course": "Business Analytics",
     "tagged" : [ "friends" ],
-    "applicationStatus" : "Pending",
-    "interviewStatus" : "Pending",
-    "availability" : "1,2,3"
+    "applicationStatus": "Pending",
+    "interviewStatus": "Pending",
+    "availability": "1,2,3"
   }, {
     "studentId": "E0234567",
     "name" : "Benson Meier",
@@ -17,9 +17,9 @@
     "email" : "E0234567@u.nus.edu",
     "course": "Computer Engineering",
     "tagged" : [ "owesMoney", "friends" ],
-    "applicationStatus" : "Pending",
-    "interviewStatus" : "Pending",
-    "availability" : "2,3,4"
+    "applicationStatus": "Pending",
+    "interviewStatus": "Pending",
+    "availability": "2,3,4"
   }, {
     "studentId": "E0345678",
     "name" : "Carl Kurz",
@@ -27,9 +27,9 @@
     "email" : "E0345678@u.nus.edu",
     "course": "Computer Science",
     "tagged" : [ ],
-    "applicationStatus" : "Pending",
-    "interviewStatus" : "Pending",
-    "availability" : "3,4,5"
+    "applicationStatus": "Pending",
+    "interviewStatus": "Pending",
+    "availability": "3,4,5"
   }, {
     "studentId": "E0456789",
     "name" : "Daniel Meier",
@@ -37,9 +37,9 @@
     "email" : "E0456789@u.nus.edu",
     "course": "Information Security",
     "tagged" : [ "friends" ],
-    "applicationStatus" : "Pending",
-    "interviewStatus" : "Pending",
-    "availability" : "5,6,7"
+    "applicationStatus": "Pending",
+    "interviewStatus": "Pending",
+    "availability": "5,6,7"
   }, {
     "studentId": "E0567890",
     "name" : "Elle Meyer",
@@ -47,9 +47,9 @@
     "email" : "E0567890@u.nus.edu",
     "course": "Information Systems",
     "tagged" : [ ],
-    "applicationStatus" : "Pending",
-    "interviewStatus" : "Pending",
-    "availability" : "1,3,5,7"
+    "applicationStatus": "Pending",
+    "interviewStatus": "Pending",
+    "availability": "1,3,5,7"
   }, {
     "studentId": "E0678901",
     "name" : "Fiona Kunz",
@@ -57,9 +57,9 @@
     "email" : "E0678901@u.nus.edu",
     "course": "Business Analytics",
     "tagged" : [ ],
-    "applicationStatus" : "Pending",
-    "interviewStatus" : "Pending",
-    "availability" : "2,4,6"
+    "applicationStatus": "Pending",
+    "interviewStatus": "Pending",
+    "availability": "2,4,6"
   }, {
     "studentId": "E0789012",
     "name" : "George Best",
@@ -67,8 +67,8 @@
     "email" : "E0789012@u.nus.edu",
     "course": "Computer Engineering",
     "tagged" : [ ],
-    "applicationStatus" : "Pending",
-    "interviewStatus" : "Pending",
-    "availability" : "2,3,4,5,6"
+    "applicationStatus": "Pending",
+    "interviewStatus": "Pending",
+    "availability": "2,3,4,5,6"
   } ]
 }

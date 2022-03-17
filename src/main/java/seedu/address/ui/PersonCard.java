@@ -7,7 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.Person;
+import seedu.address.model.candidate.Candidate;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -27,7 +27,7 @@ public class PersonCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Person person;
+    public final Candidate candidate;
 
     @FXML
     private HBox cardPane;
@@ -52,20 +52,20 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex) {
+    public PersonCard(Candidate candidate, int displayedIndex) {
         super(FXML);
-        this.person = person;
+        this.candidate = candidate;
         id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName + ", " + person.getStudentId().studentId);
-        phone.setText(person.getPhone().value);
-        course.setText(person.getCourse().course);
-        email.setText(person.getEmail().value);
-        person.getTags().stream()
+        name.setText(candidate.getName().fullName + ", " + candidate.getStudentId().studentId);
+        phone.setText(candidate.getPhone().value);
+        course.setText(candidate.getCourse().course);
+        email.setText(candidate.getEmail().value);
+        candidate.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        applicationStatus.setText(APPLICATION_STATUS_MSG + person.getApplicationStatus().toString());
-        interviewStatus.setText(INTERVIEW_STATUS_MSG + person.getInterviewStatus().toString());
-        availability.setText(AVAILABILITY_MSG + person.getAvailability().availability);
+        applicationStatus.setText(APPLICATION_STATUS_MSG + candidate.getApplicationStatus().toString());
+        interviewStatus.setText(INTERVIEW_STATUS_MSG + candidate.getInterviewStatus().toString());
+        availability.setText(AVAILABILITY_MSG + candidate.getAvailability().availability);
     }
 
     @Override
@@ -83,6 +83,6 @@ public class PersonCard extends UiPart<Region> {
         // state check
         PersonCard card = (PersonCard) other;
         return id.getText().equals(card.id.getText())
-                && person.equals(card.person);
+                && candidate.equals(card.candidate);
     }
 }
