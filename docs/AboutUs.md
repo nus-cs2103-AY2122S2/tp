@@ -13,7 +13,8 @@ You can reach us at the email `(placeholder for email address)`
 
 <img src="images/charmainehly.png" width="200px">
 
-[[github](http://github.com/charmainehly)] [[portfolio](team/charmainehly.md)]
+[[github](http://github.com/charmainehly)] 
+[[portfolio](team/charmainehly.md)]
 
 * Role: Developer
 * Responsibilities: Scheduling & Tracking, Testing
@@ -31,7 +32,6 @@ You can reach us at the email `(placeholder for email address)`
 ### Ho Lanzan
 
 <img src="images/lzan98.png" width="200px">
-
 [[github](https://github.com/lzan98)]
 [[portfolio](team/lzan98.md)]
 
