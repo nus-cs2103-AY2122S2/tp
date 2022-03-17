@@ -17,5 +17,5 @@ public class TypicalTAssist {
         }
         return tassist;
     }
-    
+
 }
