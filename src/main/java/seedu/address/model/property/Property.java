@@ -47,6 +47,16 @@ public class Property {
         return price;
     }
 
+
+    /**
+     * Returns true if the two properties have the same region, size, and price.
+     */
+    public boolean matches(Property other) {
+        return region.equals(other.region)
+                && size.equals(other.size)
+                && price.equals(other.price);
+    }
+
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();

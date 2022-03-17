@@ -9,6 +9,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
 import seedu.address.model.property.Property;
 
+
 public class DoublePersonCard extends UiPart<Region> {
 
     private static final String FXML = "DoublePersonCard.fxml";
