@@ -1,6 +1,8 @@
 package seedu.address.testutil;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_APPLICATION_STATUS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AVAILABILITY_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AVAILABILITY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COURSE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COURSE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
@@ -36,6 +38,7 @@ public class TypicalPersons {
             .withTags("friends")
             .withApplicationStatus(VALID_APPLICATION_STATUS)
             .withInterviewStatus(VALID_INTERVIEW_STATUS)
+            .withAvailability("1,2,3")
             .build();
     public static final Person BENSON = new PersonBuilder()
             .withStudentId("E0234567")
@@ -46,6 +49,7 @@ public class TypicalPersons {
             .withTags("owesMoney", "friends")
             .withApplicationStatus(VALID_APPLICATION_STATUS)
             .withInterviewStatus(VALID_INTERVIEW_STATUS)
+            .withAvailability("2,3,4")
             .build();
     public static final Person CARL = new PersonBuilder()
             .withStudentId("E0345678")
@@ -55,6 +59,7 @@ public class TypicalPersons {
             .withCourse("Computer Science")
             .withApplicationStatus(VALID_APPLICATION_STATUS)
             .withInterviewStatus(VALID_INTERVIEW_STATUS)
+            .withAvailability("3,4,5")
             .build();
     public static final Person DANIEL = new PersonBuilder()
             .withStudentId("E0456789")
@@ -65,6 +70,7 @@ public class TypicalPersons {
             .withTags("friends")
             .withApplicationStatus(VALID_APPLICATION_STATUS)
             .withInterviewStatus(VALID_INTERVIEW_STATUS)
+            .withAvailability("5,6,7")
             .build();
     public static final Person ELLE = new PersonBuilder()
             .withStudentId("E0567890")
@@ -74,6 +80,7 @@ public class TypicalPersons {
             .withCourse("Information Systems")
             .withApplicationStatus(VALID_APPLICATION_STATUS)
             .withInterviewStatus(VALID_INTERVIEW_STATUS)
+            .withAvailability("1,3,5,7")
             .build();
     public static final Person FIONA = new PersonBuilder()
             .withStudentId("E0678901")
@@ -83,6 +90,7 @@ public class TypicalPersons {
             .withCourse("Business Analytics")
             .withApplicationStatus(VALID_APPLICATION_STATUS)
             .withInterviewStatus(VALID_INTERVIEW_STATUS)
+            .withAvailability("2,4,6")
             .build();
     public static final Person GEORGE = new PersonBuilder()
             .withStudentId("E0789012")
@@ -92,6 +100,7 @@ public class TypicalPersons {
             .withCourse("Computer Engineering")
             .withApplicationStatus(VALID_APPLICATION_STATUS)
             .withInterviewStatus(VALID_INTERVIEW_STATUS)
+            .withAvailability("2,3,4,5,6")
             .build();
 
     // Manually added
@@ -103,6 +112,7 @@ public class TypicalPersons {
             .withCourse("Computer Science")
             .withApplicationStatus(VALID_APPLICATION_STATUS)
             .withInterviewStatus(VALID_INTERVIEW_STATUS)
+            .withAvailability("1,4,7")
             .build();
     public static final Person IDA = new PersonBuilder()
             .withStudentId("E0901234")
@@ -112,6 +122,7 @@ public class TypicalPersons {
             .withCourse("Information Security")
             .withApplicationStatus(VALID_APPLICATION_STATUS)
             .withInterviewStatus(VALID_INTERVIEW_STATUS)
+            .withAvailability("3,4,5,6,7")
             .build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
@@ -124,6 +135,7 @@ public class TypicalPersons {
             .withTags(VALID_TAG_FRIEND)
             .withApplicationStatus(VALID_APPLICATION_STATUS)
             .withInterviewStatus(VALID_INTERVIEW_STATUS)
+            .withAvailability(VALID_AVAILABILITY_AMY)
             .build();
     public static final Person BOB = new PersonBuilder()
             .withStudentId(VALID_STUDENT_ID_BOB)
@@ -134,6 +146,7 @@ public class TypicalPersons {
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .withApplicationStatus(VALID_APPLICATION_STATUS)
             .withInterviewStatus(VALID_INTERVIEW_STATUS)
+            .withAvailability(VALID_AVAILABILITY_BOB)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

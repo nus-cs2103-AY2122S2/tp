@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPLICATION_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AVAILABILITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
@@ -15,8 +16,6 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
-
-
 
 /**
  * A utility class for Person.
@@ -39,6 +38,7 @@ public class PersonUtil {
         sb.append(PREFIX_NAME + person.getName().fullName + " ");
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_COURSE + person.getCourse().course + " ");
+        sb.append(PREFIX_AVAILABILITY + person.getAvailability().availability + " ");
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
@@ -69,7 +69,8 @@ public class PersonUtil {
                 .append(applicationStatus.toString()).append(" "));
         descriptor.getInterviewStatus().ifPresent(interviewStatus -> sb.append(PREFIX_INTERVIEW_STATUS)
                 .append(interviewStatus.toString()).append(" "));
-
+        descriptor.getAvailability().ifPresent(availability -> sb.append(PREFIX_AVAILABILITY)
+                .append(availability.availability).append(" "));
         return sb.toString();
     }
 }
