@@ -124,10 +124,6 @@ public class UniquePlayerList {
         }
     }
 
-    public Person getPerson(Name targetPersonName) {
-        return nameToPersonMap.get(targetPersonName);
-    }
-
     public void setPerson(Person target, Person editedPerson) {
         Team targetTeam = personToTeamMap.get(target);
         List<Lineup> targetLineups = personToLineupMap.get(target);
