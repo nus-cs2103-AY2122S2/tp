@@ -29,4 +29,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_IMMUNIZATION_HISTORY = new Prefix("ih/");
     public static final Prefix PREFIX_GENDER = new Prefix("gd/");
     public static final Prefix PREFIX_ETHNICITY = new Prefix("et/");
+    public static final Prefix PREFIX_INDEX = new Prefix("id/");
 }
