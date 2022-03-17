@@ -1,9 +1,5 @@
 package seedu.address.ui;
 
-import static seedu.address.commons.util.AttendanceUtil.getAttendanceStringStream;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
@@ -11,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.util.Pair;
 import seedu.address.model.pet.Pet;
 
 /**
@@ -69,13 +64,6 @@ public class PetCard extends UiPart<Region> {
         pet.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        getAttendanceStringStream(pet)
-                .limit(7)
-                .forEach(string -> {
-                    attendanceTags.getChildren()
-                        .add(AttendanceTag.createAttendanceTag(string));
-                }
-                );
     }
 
     public void setColour(String colour) {

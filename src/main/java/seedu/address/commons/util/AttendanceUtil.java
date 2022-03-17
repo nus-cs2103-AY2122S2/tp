@@ -24,8 +24,8 @@ public class AttendanceUtil {
      * @return a Stream containing the string attendance data of the pet.
      */
     public static Stream<String> getAttendanceStringStream(Pet pet) {
-        String filePath = "data/pets" + removeAllWhiteSpaces(pet.getName().fullName) +
-                pet.getPhone().value;
+        String filePath = "data/pets/" + removeAllWhiteSpaces(pet.getName().fullName) +
+                pet.getPhone().value + ".txt";
 
         try {
             return Files.lines(Paths.get(filePath));
