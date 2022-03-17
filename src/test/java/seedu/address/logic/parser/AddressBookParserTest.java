@@ -120,14 +120,14 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_addevent() throws Exception {
-        Event event  = new EventBuilder().build();
+        Event event = new EventBuilder().build();
         AddEventCommand command = (AddEventCommand) parser.parseCommand(EventUtil.getAddEventCommand(event));
         assertEquals(new AddEventCommand(event), command);
     }
 
     @Test
     public void parseCommand_deleteevent() throws Exception {
-        DeleteEventCommand command = (DeleteEventCommand)  parser.parseCommand(
+        DeleteEventCommand command = (DeleteEventCommand) parser.parseCommand(
                 DeleteEventCommand.COMMAND_WORD + " " + INDEX_FIRST_EVENT.getOneBased());
         assertEquals(new DeleteEventCommand(INDEX_FIRST_EVENT), command);
     }

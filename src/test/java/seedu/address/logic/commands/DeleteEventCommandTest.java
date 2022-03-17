@@ -3,10 +3,10 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertEventCommandSuccess;
 import static seedu.address.testutil.TypicalEvents.getTypicalAddressBookWithEvents;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EVENT;
 
 import org.junit.jupiter.api.Test;
 
@@ -27,15 +27,15 @@ public class DeleteEventCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Event eventToDelete = model.getEventsList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteEventCommand deleteEventCommand = new DeleteEventCommand(INDEX_FIRST_PERSON);
+        Event eventToDelete = model.getEventsList().get(INDEX_FIRST_EVENT.getZeroBased());
+        DeleteEventCommand deleteEventCommand = new DeleteEventCommand(INDEX_FIRST_EVENT);
 
         String expectedMessage = String.format(DeleteEventCommand.MESSAGE_DELETE_EVENT_SUCCESS, eventToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deleteEvent(eventToDelete);
 
-        assertCommandSuccess(deleteEventCommand, model, expectedMessage, expectedModel);
+        assertEventCommandSuccess(deleteEventCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -48,14 +48,14 @@ public class DeleteEventCommandTest {
 
     @Test
     public void equals() {
-        DeleteEventCommand deleteFirstCommand = new DeleteEventCommand(INDEX_FIRST_PERSON);
-        DeleteEventCommand deleteSecondCommand = new DeleteEventCommand(INDEX_SECOND_PERSON);
+        DeleteEventCommand deleteFirstCommand = new DeleteEventCommand(INDEX_FIRST_EVENT);
+        DeleteEventCommand deleteSecondCommand = new DeleteEventCommand(INDEX_SECOND_EVENT);
 
         // same object -> returns true
         assertEquals(deleteFirstCommand, deleteFirstCommand);
 
         // same values -> returns true
-        DeleteEventCommand deleteFirstCommandCopy = new DeleteEventCommand(INDEX_FIRST_PERSON);
+        DeleteEventCommand deleteFirstCommandCopy = new DeleteEventCommand(INDEX_FIRST_EVENT);
         assertEquals(deleteFirstCommand, deleteFirstCommandCopy);
 
         // different types -> returns false
