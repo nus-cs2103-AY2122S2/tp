@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -133,12 +132,10 @@ public class CsvAdaptedPersonTest {
         assertThrows(IllegalValueException.class, person::toModelType);
     }
 
-    @Disabled
+    @Test
     public void toCsvStringAndBack_noExceptionThrown() {
         CsvAdaptedPerson person = new CsvAdaptedPerson(BENSON);
-        System.out.println(person);
         String personString = person.toCsvString();
-        System.out.println(personString);
         assertEquals(person, new CsvAdaptedPerson(personString));
     }
 
@@ -149,11 +146,11 @@ public class CsvAdaptedPersonTest {
         tags.add(new CsvAdaptedTag("Brother", Priority.PRIORITY_2));
 
         String tagsString = CsvAdaptedPerson.getTagsAsString(tags);
-        assertEquals("Family|Brother", tagsString);
+        assertEquals("Family|Brother[P2]", tagsString);
 
         tags.add(new CsvAdaptedTag("Owe Money", Priority.PRIORITY_3));
         tagsString = CsvAdaptedPerson.getTagsAsString(tags);
-        assertEquals("Family|Brother|Owe Money", tagsString);
+        assertEquals("Family|Brother[P2]|Owe Money[P3]", tagsString);
     }
 
     @Test

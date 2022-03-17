@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import java.util.Map;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Priority;
 import seedu.address.model.tag.Tag;
@@ -9,8 +11,11 @@ import seedu.address.model.tag.Tag;
  */
 class CsvAdaptedTag {
 
+    public static final Map<String, Priority> STRING_PRIORITY_MAP = Map.of("[P1]", Priority.PRIORITY_1,
+            "[P2]", Priority.PRIORITY_2, "[P3]", Priority.PRIORITY_3, "[P4]", Priority.PRIORITY_4);
     private final String tagName;
     private final Priority tagPriority;
+
 
     /**
      * Constructs a {@code CsvAdaptedTag} with the given {@code tagName}.
@@ -28,12 +33,18 @@ class CsvAdaptedTag {
         tagPriority = source.tagPriority;
     }
 
-    public String getTagName() {
-        return tagName;
-    }
+    public String getTagNameString() {
+        String priorityString = "";
+        if (tagPriority != null) {
+            for (Map.Entry<String, Priority> e: STRING_PRIORITY_MAP.entrySet()) {
+                if (e.getValue() == tagPriority) {
+                    priorityString = e.getKey();
+                    break;
+                }
+            }
+        }
 
-    public Priority getTagPriority() {
-        return tagPriority;
+        return tagName + priorityString;
     }
 
     /**
@@ -59,11 +70,16 @@ class CsvAdaptedTag {
         }
 
         CsvAdaptedTag otherTag = (CsvAdaptedTag) other;
-        return tagName.equals(otherTag.tagName) && tagPriority.equals(otherTag.tagPriority);
+        return tagName.equals(otherTag.tagName) && tagPriority == otherTag.tagPriority;
     }
 
     @Override
     public int hashCode() {
         return tagName.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return tagName + tagPriority;
     }
 }

@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import static seedu.address.storage.CsvAdaptedTag.STRING_PRIORITY_MAP;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -15,6 +17,7 @@ import seedu.address.model.person.InsurancePackage;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Priority;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -83,8 +86,15 @@ public class CsvAdaptedPerson {
             // tags are internally separated by |
             String[] tags = allTagsString.split("\\|");
             for (String tagString : tags) {
+                String possiblePriority = tagString.length() > 4
+                        ? tagString.substring(tagString.length() - 4) : "";
+                Priority p = STRING_PRIORITY_MAP.get(possiblePriority);
+                if (p != null) {
+                    tagString = tagString.substring(0, tagString.length() - 4);
+                }
+
                 if (tagString.length() > 0) {
-                    tagged.add(new CsvAdaptedTag(tagString, null)); // HAVE TO CHANGE THIS LATER
+                    tagged.add(new CsvAdaptedTag(tagString, p));
                 }
             }
         }
@@ -98,7 +108,7 @@ public class CsvAdaptedPerson {
      */
     public Person toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
-        for (CsvAdaptedTag tag : tagged) {
+        for (CsvAdaptedTag tag : tagged) { //change here
             personTags.add(tag.toModelType());
         }
 
@@ -169,7 +179,7 @@ public class CsvAdaptedPerson {
      */
     public static String getTagsAsString(List<CsvAdaptedTag> tags) {
         return tags.stream()
-                .map(CsvAdaptedTag::getTagName)
+                .map(CsvAdaptedTag::getTagNameString)
                 .collect(Collectors.joining("|"));
     }
 
