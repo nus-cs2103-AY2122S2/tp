@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -155,6 +156,23 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Executes the given {@code command}, confirms that <br>
+     * - the returned {@link String} does not match {@code nonExpectedMessage} <br>
+     * - the {@code actualModel} matches {@code expectedModel}
+     */
+    public static void assertResponseSuccess(Command command, Model actualModel, String nonExpectedMessage,
+                                            Model expectedModel) {
+        CommandResult nonExpectedCommandResult = new CommandResult(nonExpectedMessage);
+        try {
+            CommandResult result = command.execute(actualModel);
+            assertNotEquals(nonExpectedCommandResult, result);
+            assertEquals(expectedModel, actualModel);
+        } catch (CommandException ce) {
+            throw new AssertionError("Execution of command should not fail.", ce);
+        }
     }
 
 }
