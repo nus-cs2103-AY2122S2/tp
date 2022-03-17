@@ -17,14 +17,14 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.consultation.Consultation;
-import seedu.address.model.patient.Patient;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.medical.Medical;
+import seedu.address.model.Model;
+import seedu.address.model.patient.Patient;
 import seedu.address.model.prescription.Prescription;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.testresult.TestResult;
 import seedu.address.testutil.PersonBuilder;
 
