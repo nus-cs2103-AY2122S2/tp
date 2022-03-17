@@ -8,7 +8,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.text.Font;
 import seedu.address.model.person.Log;
 import seedu.address.model.person.Person;
 
@@ -69,7 +68,7 @@ public class ExpandedPersonCard extends UiPart<Region> {
         List<Log> logList = person.getLogs();
         int numberOfLogs = logList.size();
 
-        for(int i = 1; i <= numberOfLogs; i++) {
+        for (int i = 1; i <= numberOfLogs; i++) {
             sb.append(i + ". " + logList.get(i - 1).toString());
         }
         logs.setText(sb.toString());

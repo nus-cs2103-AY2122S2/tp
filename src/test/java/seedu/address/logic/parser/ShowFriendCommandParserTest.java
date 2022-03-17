@@ -43,7 +43,7 @@ public class ShowFriendCommandParserTest {
     }
 
     @Test
-    public void parse_validNameWithoutFlag_Args() {
+    public void parse_validNameWithoutFlag_throwsParseException() {
         //valid name input but without 'n/' flag
         Person personToShow = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         String fullName = personToShow.getName().fullName;

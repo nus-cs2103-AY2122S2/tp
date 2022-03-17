@@ -38,7 +38,7 @@ public class ShowFriendCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (! model.hasPerson(toShow)) {
+        if (!model.hasPerson(toShow)) {
             throw new CommandException(MESSAGE_PERSON_DOES_NOT_EXIST);
         }
 

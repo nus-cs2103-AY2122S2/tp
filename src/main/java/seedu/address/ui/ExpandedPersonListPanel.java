@@ -40,7 +40,7 @@ public class ExpandedPersonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                    setGraphic(new ExpandedPersonCard(person).getRoot());
+                setGraphic(new ExpandedPersonCard(person).getRoot());
             }
         }
     }
