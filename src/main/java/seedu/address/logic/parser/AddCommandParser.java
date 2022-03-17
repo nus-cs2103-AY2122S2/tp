@@ -13,15 +13,15 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.ApplicationStatus;
-import seedu.address.model.person.Availability;
-import seedu.address.model.person.Course;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.InterviewStatus;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.StudentId;
+import seedu.address.model.candidate.ApplicationStatus;
+import seedu.address.model.candidate.Availability;
+import seedu.address.model.candidate.Candidate;
+import seedu.address.model.candidate.Course;
+import seedu.address.model.candidate.Email;
+import seedu.address.model.candidate.InterviewStatus;
+import seedu.address.model.candidate.Name;
+import seedu.address.model.candidate.Phone;
+import seedu.address.model.candidate.StudentId;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -54,10 +54,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         InterviewStatus interviewStatus = new InterviewStatus(InterviewStatus.PENDING_STATUS);
         Availability availability = ParserUtil.parseAvailability(argMultimap.getValue(PREFIX_AVAILABILITY).get());
 
-        Person person = new Person(id, name, phone, email, course, tagList, applicationStatus, interviewStatus,
-                availability);
+        Candidate candidate = new Candidate(id, name, phone, email, course, tagList,
+                applicationStatus, interviewStatus, availability);
 
-        return new AddCommand(person);
+        return new AddCommand(candidate);
     }
 
     /**

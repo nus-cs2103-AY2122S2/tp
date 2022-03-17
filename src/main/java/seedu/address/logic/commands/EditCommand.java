@@ -23,15 +23,15 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.ApplicationStatus;
-import seedu.address.model.person.Availability;
-import seedu.address.model.person.Course;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.InterviewStatus;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.StudentId;
+import seedu.address.model.candidate.ApplicationStatus;
+import seedu.address.model.candidate.Availability;
+import seedu.address.model.candidate.Candidate;
+import seedu.address.model.candidate.Course;
+import seedu.address.model.candidate.Email;
+import seedu.address.model.candidate.InterviewStatus;
+import seedu.address.model.candidate.Name;
+import seedu.address.model.candidate.Phone;
+import seedu.address.model.candidate.StudentId;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -56,11 +56,11 @@ public class EditCommand extends Command {
             + "[" + PREFIX_AVAILABILITY + "AVAILABILITY]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_EMAIL + "E0123456@u.nus.edu";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_CANDIDATE_SUCCESS = "Edited Candidate: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_CANDIDATE = "This candidate already exists in the address book.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -80,45 +80,45 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Candidate> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Candidate candidateToEdit = lastShownList.get(index.getZeroBased());
+        Candidate editedCandidate = createEditedPerson(candidateToEdit, editPersonDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (!candidateToEdit.isSamePerson(editedCandidate) && model.hasPerson(editedCandidate)) {
+            throw new CommandException(MESSAGE_DUPLICATE_CANDIDATE);
         }
 
-        model.setPerson(personToEdit, editedPerson);
+        model.setPerson(candidateToEdit, editedCandidate);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        return new CommandResult(String.format(MESSAGE_EDIT_CANDIDATE_SUCCESS, editedCandidate));
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
+     * Creates and returns a {@code Person} with the details of {@code candidateToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+    private static Candidate createEditedPerson(Candidate candidateToEdit, EditPersonDescriptor editPersonDescriptor) {
+        assert candidateToEdit != null;
 
-        StudentId updatedID = editPersonDescriptor.getStudentId().orElse(personToEdit.getStudentId());
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Course updatedCourse = editPersonDescriptor.getCourse().orElse(personToEdit.getCourse());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        StudentId updatedID = editPersonDescriptor.getStudentId().orElse(candidateToEdit.getStudentId());
+        Name updatedName = editPersonDescriptor.getName().orElse(candidateToEdit.getName());
+        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(candidateToEdit.getPhone());
+        Email updatedEmail = editPersonDescriptor.getEmail().orElse(candidateToEdit.getEmail());
+        Course updatedCourse = editPersonDescriptor.getCourse().orElse(candidateToEdit.getCourse());
+        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(candidateToEdit.getTags());
         ApplicationStatus applicationStatus = editPersonDescriptor.getApplicationStatus()
-                .orElse(personToEdit.getApplicationStatus());
+                .orElse(candidateToEdit.getApplicationStatus());
         InterviewStatus interviewStatus = editPersonDescriptor.getInterviewStatus()
-                .orElse(personToEdit.getInterviewStatus());
+                .orElse(candidateToEdit.getInterviewStatus());
         Availability updatedAvailability = editPersonDescriptor.getAvailability()
-                .orElse(personToEdit.getAvailability());
+                .orElse(candidateToEdit.getAvailability());
 
-        return new Person(updatedID, updatedName, updatedPhone, updatedEmail,
+        return new Candidate(updatedID, updatedName, updatedPhone, updatedEmail,
                 updatedCourse, updatedTags, applicationStatus, interviewStatus, updatedAvailability);
     }
 

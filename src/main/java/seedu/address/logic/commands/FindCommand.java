@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_KEYWORD;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.predicate.ContainsKeywordsPredicate;
+import seedu.address.model.candidate.predicate.ContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in TAlent Assistant™ whose description (in one of all of the fields)

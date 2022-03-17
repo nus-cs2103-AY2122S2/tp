@@ -16,8 +16,8 @@ import java.util.Comparator;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.predicate.NameContainsKeywordsPredicate;
+import seedu.address.model.candidate.Candidate;
+import seedu.address.model.candidate.predicate.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -100,7 +100,7 @@ public class ModelManagerTest {
         AddressBook addressBook = new AddressBookBuilder().withPerson(BENSON).withPerson(ALICE).build();
         UserPrefs userPrefs = new UserPrefs();
         modelManager = new ModelManager(addressBook, userPrefs);
-        Comparator<Person> sortComparator = Comparator.comparing(l -> l.getName().toString().toLowerCase());
+        Comparator<Candidate> sortComparator = Comparator.comparing(l -> l.getName().toString().toLowerCase());
 
         // returns true before sorting
         assertTrue(modelManager.getAddressBook().getPersonList().get(0).getName().fullName

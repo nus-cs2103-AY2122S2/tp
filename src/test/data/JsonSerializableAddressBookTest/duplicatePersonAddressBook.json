@@ -6,17 +6,17 @@
     "email": "E0123456@u.nus.edu",
     "course": "Business Analytics",
     "tagged": [ "friends" ],
-    "applicationStatus" : "Pending",
-    "interviewStatus" : "Pending",
-    "availability" : "1,2,3,4,5,6,7"
+    "applicationStatus": "Pending",
+    "interviewStatus": "Pending",
+    "availability": "1,2,3,4,5,6,7"
   }, {
     "studentId": "E0123456",
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "E0123456@u.nus.edu",
     "course": "Business Analytics",
-    "applicationStatus" : "Pending",
-    "interviewStatus" : "Pending",
-    "availability" : "1,2,3,4,5,6,7"
+    "applicationStatus": "Pending",
+    "interviewStatus": "Pending",
+    "availability": "1,2,3,4,5,6,7"
   } ]
 }

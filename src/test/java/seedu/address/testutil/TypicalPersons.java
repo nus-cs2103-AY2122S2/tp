@@ -22,14 +22,14 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.candidate.Candidate;
 
 /**
- * A utility class containing a list of {@code Person} objects to be used in tests.
+ * A utility class containing a list of {@code Candidate} objects to be used in tests.
  */
 public class TypicalPersons {
 
-    public static final Person ALICE = new PersonBuilder()
+    public static final Candidate ALICE = new CandidateBuilder()
             .withStudentId("E0123456")
             .withName("Alice Pauline")
             .withPhone("94351253")
@@ -40,7 +40,7 @@ public class TypicalPersons {
             .withInterviewStatus(VALID_INTERVIEW_STATUS)
             .withAvailability("1,2,3")
             .build();
-    public static final Person BENSON = new PersonBuilder()
+    public static final Candidate BENSON = new CandidateBuilder()
             .withStudentId("E0234567")
             .withName("Benson Meier")
             .withPhone("98765432")
@@ -51,7 +51,7 @@ public class TypicalPersons {
             .withInterviewStatus(VALID_INTERVIEW_STATUS)
             .withAvailability("2,3,4")
             .build();
-    public static final Person CARL = new PersonBuilder()
+    public static final Candidate CARL = new CandidateBuilder()
             .withStudentId("E0345678")
             .withName("Carl Kurz")
             .withPhone("95352563")
@@ -61,7 +61,7 @@ public class TypicalPersons {
             .withInterviewStatus(VALID_INTERVIEW_STATUS)
             .withAvailability("3,4,5")
             .build();
-    public static final Person DANIEL = new PersonBuilder()
+    public static final Candidate DANIEL = new CandidateBuilder()
             .withStudentId("E0456789")
             .withName("Daniel Meier")
             .withPhone("87652533")
@@ -72,7 +72,7 @@ public class TypicalPersons {
             .withInterviewStatus(VALID_INTERVIEW_STATUS)
             .withAvailability("5,6,7")
             .build();
-    public static final Person ELLE = new PersonBuilder()
+    public static final Candidate ELLE = new CandidateBuilder()
             .withStudentId("E0567890")
             .withName("Elle Meyer")
             .withPhone("94822240")
@@ -82,7 +82,7 @@ public class TypicalPersons {
             .withInterviewStatus(VALID_INTERVIEW_STATUS)
             .withAvailability("1,3,5,7")
             .build();
-    public static final Person FIONA = new PersonBuilder()
+    public static final Candidate FIONA = new CandidateBuilder()
             .withStudentId("E0678901")
             .withName("Fiona Kunz")
             .withPhone("94824270")
@@ -92,7 +92,7 @@ public class TypicalPersons {
             .withInterviewStatus(VALID_INTERVIEW_STATUS)
             .withAvailability("2,4,6")
             .build();
-    public static final Person GEORGE = new PersonBuilder()
+    public static final Candidate GEORGE = new CandidateBuilder()
             .withStudentId("E0789012")
             .withName("George Best")
             .withPhone("94824420")
@@ -104,7 +104,7 @@ public class TypicalPersons {
             .build();
 
     // Manually added
-    public static final Person HOON = new PersonBuilder()
+    public static final Candidate HOON = new CandidateBuilder()
             .withStudentId("E0890123")
             .withName("Hoon Meier")
             .withPhone("84824240")
@@ -114,7 +114,7 @@ public class TypicalPersons {
             .withInterviewStatus(VALID_INTERVIEW_STATUS)
             .withAvailability("1,4,7")
             .build();
-    public static final Person IDA = new PersonBuilder()
+    public static final Candidate IDA = new CandidateBuilder()
             .withStudentId("E0901234")
             .withName("Ida Mueller")
             .withPhone("84821310")
@@ -125,8 +125,8 @@ public class TypicalPersons {
             .withAvailability("3,4,5,6,7")
             .build();
 
-    // Manually added - Person's details found in {@code CommandTestUtil}
-    public static final Person AMY = new PersonBuilder()
+    // Manually added - Candidate's details found in {@code CommandTestUtil}
+    public static final Candidate AMY = new CandidateBuilder()
             .withStudentId(VALID_STUDENT_ID_AMY)
             .withName(VALID_NAME_AMY)
             .withPhone(VALID_PHONE_AMY)
@@ -137,7 +137,7 @@ public class TypicalPersons {
             .withInterviewStatus(VALID_INTERVIEW_STATUS)
             .withAvailability(VALID_AVAILABILITY_AMY)
             .build();
-    public static final Person BOB = new PersonBuilder()
+    public static final Candidate BOB = new CandidateBuilder()
             .withStudentId(VALID_STUDENT_ID_BOB)
             .withName(VALID_NAME_BOB)
             .withPhone(VALID_PHONE_BOB)
@@ -158,13 +158,13 @@ public class TypicalPersons {
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
-        for (Person person : getTypicalPersons()) {
-            ab.addPerson(person);
+        for (Candidate candidate : getTypicalCandidates()) {
+            ab.addPerson(candidate);
         }
         return ab;
     }
 
-    public static List<Person> getTypicalPersons() {
+    public static List<Candidate> getTypicalCandidates() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 }

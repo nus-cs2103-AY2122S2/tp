@@ -7,7 +7,7 @@ import java.util.Comparator;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.candidate.Candidate;
 
 /**
  * Reorders all persons in TAlent Assistant™ based on the sort key provided.
@@ -24,7 +24,7 @@ public class SortCommand extends Command {
             + "Parameters: " + PREFIX_SORTKEY + "SORTKEY \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_SORTKEY + "name";
 
-    private final Comparator<Person> sortComparator;
+    private final Comparator<Candidate> sortComparator;
     private final String sortKey;
 
     /**
@@ -33,7 +33,7 @@ public class SortCommand extends Command {
      * @param sortComparator contains the Comparator for sorting the list of candidates
      * @param sortKey contains the valid sort key for equality state check
      */
-    public SortCommand(Comparator<Person> sortComparator, String sortKey) {
+    public SortCommand(Comparator<Candidate> sortComparator, String sortKey) {
         requireNonNull(sortComparator);
         requireNonNull(sortKey);
 
