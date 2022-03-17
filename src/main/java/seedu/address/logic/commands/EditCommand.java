@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOCK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COVID_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FACULTY;
@@ -23,6 +24,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Block;
 import seedu.address.model.person.CovidStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Faculty;
@@ -44,6 +46,7 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_BLOCK + "BLOCK] "
             + "[" + PREFIX_FACULTY + "FACULTY]"
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
@@ -103,6 +106,7 @@ public class EditCommand extends Command {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
+        Block updatedBlock = editPersonDescriptor.getBlock().orElse(personToEdit.getBlock());
         Faculty updatedFaculty = editPersonDescriptor.getFaculty().orElse(personToEdit.getFaculty());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
@@ -113,7 +117,7 @@ public class EditCommand extends Command {
                 .orElse(personToEdit.getStatus());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedFaculty, updatedPhone, updatedEmail, updatedAddress,
+        return new Person(updatedName, updatedBlock, updatedFaculty, updatedPhone, updatedEmail, updatedAddress,
                 updatedMatriculationNumber, updatedCovidStatus, updatedTags);
     }
 
@@ -141,6 +145,7 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Name name;
+        private Block block;
         private Faculty faculty;
         private Phone phone;
         private Email email;
@@ -157,6 +162,7 @@ public class EditCommand extends Command {
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
+            setBlock(toCopy.block);
             setFaculty(toCopy.faculty);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
@@ -170,7 +176,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, faculty, phone, email, address,
+            return CollectionUtil.isAnyNonNull(name, block, faculty, phone, email, address,
                     matriculationNumber, covidStatus, tags);
         }
 
@@ -180,6 +186,14 @@ public class EditCommand extends Command {
 
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
+        }
+
+        public void setBlock(Block block) {
+            this.block = block;
+        }
+
+        public Optional<Block> getBlock() {
+            return Optional.ofNullable(block);
         }
 
         public void setFaculty(Faculty faculty) {
@@ -263,6 +277,7 @@ public class EditCommand extends Command {
             EditPersonDescriptor e = (EditPersonDescriptor) other;
 
             return getName().equals(e.getName())
+                    && getBlock().equals(e.getBlock())
                     && getPhone().equals(e.getPhone())
                     && getFaculty().equals(e.getFaculty())
                     && getEmail().equals(e.getEmail())
