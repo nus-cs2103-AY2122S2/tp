@@ -38,7 +38,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public CommandResult execute(String userInput) throws CommandException, ParseException {
+    public CommandResult execute(String userInput) throws CommandException, ParseException, IllegalArgumentException {
         logger.info("----------------[USER INPUT][" + userInput + "]");
 
         CommandResult commandResult = null;
