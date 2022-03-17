@@ -38,7 +38,6 @@
       <FlowPane fx:id="optionalFields" />
       <!-- Memebership -->
       <FlowPane fx:id="memberships" />
-      <Label fx:id="transactions" styleClass="cell_small_label" text="\$trx" />
     </VBox>
   </GridPane>
 </HBox>
