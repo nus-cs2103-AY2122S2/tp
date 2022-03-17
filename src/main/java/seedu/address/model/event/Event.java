@@ -60,7 +60,7 @@ public class Event {
     }
 
     /**
-     * Changes the given Name from {@code original} to {@code replacement} if
+     * Changes the given FriendName from {@code original} to {@code replacement} if
      * it is present in this Event's set of friend names.
      *
      * @param original Friend name to be changed.
@@ -74,7 +74,7 @@ public class Event {
     }
 
     /**
-     * Removes the given Name {@code toRemove} from the set of friend names in Event if present.
+     * Removes the given FriendName {@code toRemove} from the set of friend names in Event if present.
      *
      * @param toRemove Name of friend to remove from the Event if present.
      */
