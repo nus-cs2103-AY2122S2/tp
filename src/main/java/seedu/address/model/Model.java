@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.buyer.Buyer;
 import seedu.address.model.client.Client;
 
 /**
@@ -87,5 +88,22 @@ public interface Model {
     void updateFilteredClientList(Predicate<Client> predicate);
 
     void sortFilteredClientList();
+
+    //========== For addbuyer============//
+
+    /**
+     * Checks if the same buyer already exists in AgentSee.
+     *
+     * @param buyer The buyer to be checked.
+     * @return Whether buyer exists in AgentSee.
+     */
+    boolean hasBuyer(Buyer buyer);
+
+    /**
+     * Adds a new buyer to AgentSee.
+     *
+     * @param buyer The buyer to be added.
+     */
+    void addBuyer(Buyer buyer);
 
 }
