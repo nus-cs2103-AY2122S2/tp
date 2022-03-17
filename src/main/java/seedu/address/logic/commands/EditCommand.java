@@ -22,14 +22,14 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.candidate.ApplicationStatus;
 import seedu.address.model.candidate.Candidate;
 import seedu.address.model.candidate.Course;
 import seedu.address.model.candidate.Email;
+import seedu.address.model.candidate.InterviewStatus;
 import seedu.address.model.candidate.Name;
 import seedu.address.model.candidate.Phone;
 import seedu.address.model.candidate.StudentId;
-import seedu.address.model.candidate.ApplicationStatus;
-import seedu.address.model.candidate.InterviewStatus;
 import seedu.address.model.tag.Tag;
 
 /**

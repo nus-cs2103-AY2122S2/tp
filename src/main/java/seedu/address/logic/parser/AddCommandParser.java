@@ -12,7 +12,6 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-
 import seedu.address.model.candidate.ApplicationStatus;
 import seedu.address.model.candidate.Candidate;
 import seedu.address.model.candidate.Course;
@@ -52,7 +51,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         ApplicationStatus applicationStatus = new ApplicationStatus(ApplicationStatus.PENDING_STATUS);
         InterviewStatus interviewStatus = new InterviewStatus(InterviewStatus.PENDING_STATUS);
 
-        Candidate candidate = new Candidate(id, name, phone, email, course, tagList, applicationStatus, interviewStatus);
+        Candidate candidate = new Candidate(id, name, phone, email, course,
+                tagList, applicationStatus, interviewStatus);
 
         return new AddCommand(candidate);
     }

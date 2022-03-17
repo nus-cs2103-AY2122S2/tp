@@ -9,7 +9,6 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-
 import seedu.address.model.candidate.Address;
 import seedu.address.model.candidate.ApplicationStatus;
 import seedu.address.model.candidate.Course;
