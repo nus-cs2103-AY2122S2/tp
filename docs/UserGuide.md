@@ -166,16 +166,17 @@ Let's reference a default sample list of unique TA candidates with attribute fie
 
 ### Deleting a TA : `delete`
 
-Deletes the specified TA from the system.
+Deletes the specified candidate from the system.
 
-Format: `delete STUDENT_ID`
+Format: `delete INDEX`
 
-* Deletes the specified TA with specified `STUDENT_ID`.
-* The `STUDENT_ID` **must belong to a TA** in the system.
-* Otherwise, the system will prompt a message, stating that the record does not exist.
+* Deletes the candidate at specified `INDEX`.
+* The index refers to the index number shown in the displayed candidate list
+* The index must be a positive integer 1, 2, 3, …​
 
 Examples:
-* `delete A0213456H` deletes the TA with STUDENT_ID A0123456H, if the record exists.
+* `list` followed by delete 2 deletes the 2nd candidate in the candidate list.
+* `find k/bernice k/alex f/name` followed by delete 1 deletes the 1st person in the results of the find command.
 
 ### Scheduling a candidate for an interview : `schedule` [Work-In-Progress]
 
