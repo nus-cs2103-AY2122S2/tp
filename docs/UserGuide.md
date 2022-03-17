@@ -32,7 +32,7 @@ IBook is an inventory recording system for storekeepers to manage incoming and o
 
    * **`add n:Maggie c:noodles e:01/01/2022 p:3.00 d:Maggie noodles`** : Adds a product named `Maggie` to iBook.
 
-   * **`delete`**`3` : Deletes the 3rd product shown in the current list.
+   * **`delete`** `3` : Deletes the 3rd product shown in the current list.
 
    * **`exit`** : Exits the app.
 
@@ -50,7 +50,7 @@ This document is structured in a chronological manner so that you would be able 
 This subsection would introduce you to the different symbols, syntax and technical terms that are used throughout this guide.
 It is important to read this section before proceeding further to avoid getting confused!
 
-### 3.2.1 Special symbols
+#### 3.2.1 Special symbols
 
 **Additional Information**
 
@@ -87,11 +87,18 @@ Example tip.
 
 </div>
 
-### 3.2.2 Sections of the Application Window
+#### 3.2.2 Sections of the Application Window
 
-### 3.2.3 Navigating around
+The application window is divided into a command box, results window as well as a table that includes all the products.
+![Ui](images/Ui.png)
 
-### 3.2.4 Command Format
+#### 3.2.3 Navigating around
+
+The main mode of navigation in iBook is through the Command Line Interface (CLI). You can enter commands into the command box and press `Enter` to execute them. The results window would then display the results from executing the command. The table would also update accordingly based on the command ran.
+
+Alternatively, you can also interact with the application through buttons, such as the `Add Product` button, where a popup would be displayed for you to enter the different fields once it is clicked.
+
+#### 3.2.4 Command Format
 
 <div markdown="block" class="alert alert-info">
 
@@ -106,12 +113,12 @@ Example tip.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n:NAME c:CATEGORY`, `c:CATEGORY n:NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* Extraneous parameters for commands that do not take in parameters (such as `exit`) will be ignored.<br>
+  e.g. if the command specifies `exit 123`, it will be interpreted as `exit`.
 
 </div>
 
-### 3.2.5 Command Parameters
+#### 3.2.5 Command Parameters
 
 | Parameter      | Description                                               |
 |:---------------|:----------------------------------------------------------|
@@ -120,8 +127,6 @@ Example tip.
 | `EXPRIRY_DATE` | Expiry date of the item.                                  |
 | `PRICE`        | Price of the product. A valid price is a positive number. |
 | `DESCRIPTION`  | Description of the product.                               |
-| `QUANTITY`     | Quantity of the item.                                     |
-| `DISCOUNT`     | Discount given to the item.                               |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -154,6 +159,10 @@ Examples:
 
 Adds a new product to the application.
 
+Click the add product button on the left of command input to add a new product.
+
+*Alternatively*, by using command,
+
 Format: `add n:NAME c:CATEGORY e:EXPRIRY_DATE p:PRICE d:DESCRIPTION`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -166,6 +175,10 @@ Examples:
 #### 4.1.3 Updating products : `update`
 
 Updates the product at the specified INDEX.
+
+Click the yellow edit icon on the right side of each product to update the product.
+
+*Alternatively*, by using command,
 
 Format: `update INDEX [TAG:NEW_VALUE ...]`
 
@@ -180,6 +193,10 @@ Examples:
 #### 4.1.4 Deleting products : `delete`
 
 Deletes the product at a specified INDEX.
+
+Click the red delete icon on the right side of each product to delete the product.
+
+*Alternatively*, by using command,
 
 Format: `delete INDEX`
 
@@ -199,35 +216,9 @@ Format: `delete [TAG:VALUE ...]`
 
 Example: `delete n:Bread`
 
-#### 4.1.5 Finding products: `[coming soon]`
-
-Finds products whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-
 ### 4.2 Item Commands *[coming soon]*
 
 ### 4.3 Miscellaneous Commands
-
-#### 4.3.1 Viewing help : `help`
-
-Shows a message explaning how to access the help page.
-
-![help message](images/helpMessage.png)
-
-Format: `help`
 
 #### 4.3.2 Exiting the program : `exit`
 
@@ -272,7 +263,6 @@ _Details coming soon ..._
 | **List**   | `list`                                                                                                                                |
 | **Update** | `update INDEX [TAG:NEW_VALUE ...]` <br> e.g.,`update 2 n:Apple`                                                                       |
 | **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                   |
-| **Help**   | `help`                                                                                                                                |
 
 ### 7.2 Item *[Coming soon]*
 
@@ -280,5 +270,4 @@ _Details coming soon ..._
 
 | Action   | Format, Examples |
 |:---------|:-----------------|
-| **Help** | `help`           |
 | **Exit** | `exit`           |
