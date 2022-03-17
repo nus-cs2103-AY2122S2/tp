@@ -146,7 +146,7 @@ Format:
 
 Examples:
 * `find task/ desc/homework`
-* `find date/02-02-2022`
+* `find date/2022-02-02`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Take Note:**
 Find works based on keywords, as such find would return all matches of the words found in description. 
