@@ -177,6 +177,23 @@ Format: `delete STUDENT_ID`
 Examples:
 * `delete A0213456H` deletes the TA with STUDENT_ID A0123456H, if the record exists.
 
+### Scheduling a candidate for an interview : `schedule` [Work-In-Progress]
+
+Schedules the specified candidate for an interview.
+
+Format: `schedule INDEX /at DATE TIME`
+
+* Schedules the candidate at the specified `INDEX` for an interview on given `DATE` and `TIME`.
+* The index refers to the index number shown in the displayed candidate list.
+* The index must be a positive integer 1, 2, 3, …​
+* `DATE` and `TIME` must be specified in the format `dd/MM/yyyy` and `HH:mm` respectively.
+* `DATE` and `TIME` must not be earlier than the current date and time.
+
+Examples:
+* `list` followed by `schedule 2 /at 20/09/2022 15:00` schedules the second candidate in TAlent Assistant™
+for an interview on 20 September 2022, 3PM.
+* 
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -216,13 +233,14 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                            |
-|------------|-----------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add id/STUDENT_ID n/NAME p/PHONE c/COURSE`<br> e.g., `add id/E0123456 n/John Doe p/87654321 c/Computer Science`            |
-| **Clear**  | `clear`                                                                                                                     |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                         |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` |
-| **Find**   | `find k/KEYWORD [k/MORE_KEYWORDS]... f/ATTRIBUTE_FIELD`<br> e.g., `find k/Jane k/Doe f/name`                                |
-| **Sort**   | `sort s/ATTRIBUTE_FIELD`<br> e.g., `sort s/name`                                                                            |
-| **List**   | `list`                                                                                                                      |
-| **Help**   | `help`                                                                                                                      |
+| Action       | Format, Examples                                                                                                            |
+|--------------|-----------------------------------------------------------------------------------------------------------------------------|
+| **Add**      | `add id/STUDENT_ID n/NAME p/PHONE c/COURSE`<br> e.g., `add id/E0123456 n/John Doe p/87654321 c/Computer Science`            |
+| **Clear**    | `clear`                                                                                                                     |
+| **Delete**   | `delete INDEX`<br> e.g., `delete 3`                                                                                         |
+| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` |
+| **Find**     | `find k/KEYWORD [k/MORE_KEYWORDS]... f/ATTRIBUTE_FIELD`<br> e.g., `find k/Jane k/Doe f/name`                                |
+| **Sort**     | `sort s/ATTRIBUTE_FIELD`<br> e.g., `sort s/name`                                                                            |
+| **Schedule** | `schedule INDEX /at DATE TIME` <br> e.g., `schedule 2 /at 20/09/2022 15:00`                                                 |
+| **List**     | `list`                                                                                                                      |
+| **Help**     | `help`                                                                                                                      |
