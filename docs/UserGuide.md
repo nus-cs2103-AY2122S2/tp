@@ -53,10 +53,10 @@ ModuleMate Finder is a desktop app that allows students to find people taking th
   e.g. in `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`, `NAME`, `PHONE_NUMBER`, `EMAIL` and `ADDRESS`  are parameters which cannot be left empty. 
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [m/TAG]` can be used as `n/John Doe m/friend` or as `n/John Doe`.
+  e.g `n/NAME [m/TAG]` can be used as `n/John Doe m/CS2103` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[m/TAG]…​` can be used as ` ` (i.e. 0 times), `m/friend`, `m/friend m/family` etc.
+  e.g. `[m/TAG]…​` can be used as ` ` (i.e. 0 times), `m/CS2103`, `m/CS2103 m/CS2100` etc.
 
 * Parameters has to be in order.<br>
   e.g. if the command specifies `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`, then it must follow strictly that format.
@@ -73,12 +73,16 @@ ModuleMate Finder is a desktop app that allows students to find people taking th
 - [Help](#viewing-help--help)
 - [List](#listing-all-persons--list)
 - [Add Contact](#adding-a-contact--add)
-- [Add Module to Contact](#adding-modules-to-a-contact--add)
-- [Delete](#deleting-a-person--delete)
+- [Add Module to Contact](#adding-modules-to-a-contact--addmodule)
 - [Edit](#editing-a-person--edit)
+- [Delete Contact](#deleting-a-person--delete)
+- [Delete Module from Contact](#deleting-a-module--deletemodule)
 - [Clear](#clearing-all-entries--clear)
-- [Tags](#tagging-a-person--tag)
+- [Clear all Modules from Contact](#clearing-all-modules-for-a-person--clearmodules)
+- [Status](#set-a-status-for-a-person--status)
 - [Find](#locating-a-person-find)
+- [Filter](#locating-a-person-by-their-module-filter)
+- [Sort](#sorting-contacts-in-list-sort)
 - [Undo](#undo-a-command--undo)
 - [Redo](#redo-a-command--redo)
 - [Exit](#exiting-the-program--exit)
@@ -101,7 +105,7 @@ Format: `list`
 
 Adds a contact to ModuleMate Finder.
  
-Format: `add -c n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS​`
 
 Examples:
 * `add -c n/Bob p/87654321 e/bob@u.nus.edu`
@@ -124,14 +128,12 @@ Examples:
 
 Edits an existing person in ModuleMate Finder.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [m/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `m/` without
-    specifying any tags after it.
+* Modules cannot be edited through the `edit` command.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -234,7 +236,7 @@ Examples:
 
 Sort all people within address book.
 
-Format: `sort [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STATUS] [t/TAG] [o/ORDER]​`
+Format: `sort [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STATUS] [m/TAG] [o/ORDER]​`
 
 * Sorts list with specified field(s). For any two persons, latter fields will only be considered if preceding fields are equal.​
 * Order of parameters is important except for that of `o/ORDER`.
@@ -302,18 +304,20 @@ A: As long as the module offered can be found in NUSmod, it will be available on
 
 ## Command summary
 
-| Action            | Format                                                                                             | Examples                               |
-|-------------------|----------------------------------------------------------------------------------------------------|----------------------------------------|
-| **List**          | `list -flags`                                                                                      | `list -m`, `list -c`                   |
-| **Add**           | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`                                                      | `add n/Bob p/87654321 e/bob@u.nus.edu` |
-| **Delete**        | `delete index`                                                                                     | `delete 3`                             |
-| **Delete Module** | `deletemodule index m/TAG`...                                                                      | `deletemodule 1 m/CS1231`              |
-| **Edit**          | `edit index [n/NAME] [c/CODE] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` **brackets indicate optional | `edit 1 -c n/Alice`                    |
-| **Clear**         | `clear`                                                                                            | `clear`                                |
-| **Clear Modules** | `clear INDEX`                                                                                      | `clear 3`                              |
-| **Status**        | `status INDEX s/STATUS`                                                                            | `status 2 s/favourite`                 |
-| **Find**          | `find KEYWORD [MORE_KEYWORDS]`                                                                     | `find James Jake`                      |
-| **Filter**        | `filter m/TAG`                                                                                     | `filter m/CS3230`                      |
-| **Undo**          | `undo`                                                                                             | `undo`                                 |
-| **Redo**          | `redo`                                                                                             | `redo`                                 |
+| Action            | Format                                                                                                     | Examples                               |
+|-------------------|------------------------------------------------------------------------------------------------------------|----------------------------------------|
+| **List**          | `list`                                                                                                     | `list`                                 |
+| **Add**           | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`                                                              | `add n/Bob p/87654321 e/bob@u.nus.edu` |
+| **Add Module**    | `addmodule INDEX m/TAG`                                                                                    | `addmodule 4 m/CS2100`                 |
+| **Delete**        | `delete INDEX`                                                                                             | `delete 3`                             |
+| **Delete Module** | `deletemodule index m/TAG`...                                                                              | `deletemodule 1 m/CS1231`              |
+| **Edit**          | `edit index [n/NAME] [c/CODE] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` **brackets indicate optional         | `edit 1 n/Alice`                       |
+| **Clear**         | `clear`                                                                                                    | `clear`                                |
+| **Clear Modules** | `clearmodules INDEX`                                                                                       | `clearmodules 3`                       |
+| **Status**        | `status INDEX s/STATUS`                                                                                    | `status 2 s/favourite`                 |
+| **Find**          | `find KEYWORD [MORE_KEYWORDS]`                                                                             | `find James Jake`                      |
+| **Filter**        | `filter m/TAG`                                                                                             | `filter m/CS3230`                      |
+| **Sort**          | `sort [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/status] [m/TAG] [o/ORDER]`  **brackets indicate optional | `sort n/ p/ o/desc`                    |
+| **Undo**          | `undo`                                                                                                     | `undo`                                 |
+| **Redo**          | `redo`                                                                                                     | `redo`                                 |
 
