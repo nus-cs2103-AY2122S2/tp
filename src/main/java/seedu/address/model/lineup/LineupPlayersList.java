@@ -29,8 +29,8 @@ public class LineupPlayersList {
         playersList.add(player);
     }
 
-    public void remove(int index) {
-        playersList.remove(index);
+    public void remove(Person player) {
+        playersList.remove(player);
     }
 
     @Override

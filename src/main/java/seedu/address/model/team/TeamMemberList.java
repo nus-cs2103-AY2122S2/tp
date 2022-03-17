@@ -38,10 +38,12 @@ public class TeamMemberList {
         this.list.add(person);
     }
 
+    // remove after resolving compilation error
     public void removePerson(int index) {
         this.list.remove(index);
     }
 
+    // this is the final one
     public void removePerson(Person person) {
         this.list.remove(person);
     }
@@ -55,4 +57,10 @@ public class TeamMemberList {
     public boolean containsPerson (Person person) {
         return this.list.contains(person);
     }
+
+    // remove after resolving compilation error
+    public void deletePersonFromTeam(Person person) {
+        this.list.remove(person);
+    }
+
 }

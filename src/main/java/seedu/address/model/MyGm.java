@@ -1,14 +1,23 @@
 package seedu.address.model;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
+<<<<<<< branch-edit
+import javafx.collections.ObservableList;
+import seedu.address.commons.core.GuiSettings;
+=======
 import seedu.address.model.lineup.Lineup;
 import seedu.address.model.lineup.LineupName;
+>>>>>>> master
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.team.Team;
 import seedu.address.model.team.TeamName;
+
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * Represents the root class of MyGM.
@@ -25,12 +34,29 @@ public class MyGm {
         this.teams = new ArrayList<Team>();
     }
 
+<<<<<<< branch-edit
+    public boolean hasPerson(Name targetName) {
+        return players.containsName(targetName);
+    }
+
+    public Person getPerson(Name targetPersonName) {
+        return players.getPerson(targetPersonName);
+    }
+
+    public void setPerson(Person target, Person editedPerson) {
+        requireAllNonNull(target, editedPerson);
+
+        players.setPerson(target, editedPerson);
+=======
     boolean containsPlayer(String name) {
         return this.players.containsName(new Name(name));
+>>>>>>> master
     }
 
     // add more methods here to facilitate update of players and teams
 
+<<<<<<< branch-edit
+=======
     /**
      * Deletes a player from a lineup.
      */
@@ -120,4 +146,5 @@ public class MyGm {
     public boolean deleteTeamFromPool(String team) {
         return true; // assume only one team, cannot delete
     }
+>>>>>>> master
 }

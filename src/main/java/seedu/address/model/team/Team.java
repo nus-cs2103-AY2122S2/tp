@@ -24,6 +24,12 @@ public class Team {
         this.teamLineupList = new TeamLineupList();
     }
 
+    public Team(TeamName teamName, TeamMemberList teamMemberList, TeamLineupList teamLineupList) {
+        this.teamName = teamName;
+        this.teamMemberList = teamMemberList;
+        this.teamLineupList = teamLineupList;
+    }
+
     /**
      * Gets the team name.
      */
@@ -60,6 +66,22 @@ public class Team {
         }
     }
 
+<<<<<<< branch-edit
+    public void deletePersonFromTeam(Person person) {
+        this.teamMemberList.deletePersonFromTeam(person);
+    }
+
+    public TeamName getTeamName() {
+        return teamName;
+    }
+
+    public TeamMemberList getTeamMemberList() {
+        return teamMemberList;
+    }
+
+    public TeamLineupList getTeamLineupList() {
+        return teamLineupList;
+=======
     /**
      * Removes a player.
      */
@@ -73,5 +95,6 @@ public class Team {
      */
     public void removeLineup(String lineup) {
         return;
+>>>>>>> master
     }
 }
