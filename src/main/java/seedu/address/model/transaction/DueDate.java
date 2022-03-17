@@ -16,6 +16,7 @@ public class DueDate extends TransactionField {
     public static final Prefix PREFIX = new Prefix("dd/", false);
     public static final String MESSAGE_CONSTRAINTS =
             "Due date (if specified) should be in YYYY-MM-DD format and must exist";
+    public static final String EMPTY_DUE_DATE = "";
 
     private final LocalDate value;
 
