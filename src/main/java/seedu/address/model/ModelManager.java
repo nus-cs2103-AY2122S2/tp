@@ -24,8 +24,6 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private final MyGm myGm;
-
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -51,7 +49,6 @@ public class ModelManager implements Model {
         this.myGm = new MyGm();
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        this.myGm = new MyGm();
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
 

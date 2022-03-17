@@ -58,9 +58,5 @@ public class TeamMemberList {
         return this.list.contains(person);
     }
 
-    // remove after resolving compilation error
-    public void deletePersonFromTeam(Person person) {
-        this.list.remove(person);
-    }
 
 }

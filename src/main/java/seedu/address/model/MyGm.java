@@ -22,6 +22,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 public class MyGm {
     private final UniquePlayerList players;
     private final UniqueTeamList teams;
+    private final List<Team> tempteams; // NOTE: TEMPORARY FOR TX'S FUNCTION
 
     /**
      * Creates a new empty MyGm class.
@@ -29,6 +30,7 @@ public class MyGm {
     public MyGm() {
         this.players = new UniquePlayerList();
         this.teams = new UniqueTeamList();
+        this.tempteams = new ArrayList<>();
     }
 
     /**
@@ -64,6 +66,7 @@ public class MyGm {
         requireAllNonNull(target, editedPerson);
 
         players.setPerson(target, editedPerson);
+    }
 
     boolean containsPlayer(String name) {
         return this.players.containsName(new Name(name));
@@ -145,7 +148,7 @@ public class MyGm {
      * Deletes a lineup from a team.
      */
     public boolean deleteLineupFromTeam(String lineup, String team) {
-        for (Team tempTeam : this.teams) {
+        for (Team tempTeam : tempteams) {
             if (tempTeam.getTeamName().equals(new TeamName(team))) {
                 tempTeam.removeLineup(lineup);
                 return true;
