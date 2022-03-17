@@ -56,7 +56,7 @@ public class ModuleBuilder {
      * Sets the {@code AcademicYear} of the {@code Module} that we are building.
      */
     public ModuleBuilder withAcademicYer(String academicYear) {
-        this.academicYear= new AcademicYear(academicYear);
+        this.academicYear = new AcademicYear(academicYear);
         return this;
     }
 

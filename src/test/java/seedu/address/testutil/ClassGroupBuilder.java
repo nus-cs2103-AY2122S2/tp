@@ -29,7 +29,8 @@ public class ClassGroupBuilder {
     public ClassGroupBuilder() {
         classGroupId = new ClassGroupId(DEFAULT_CLASS_GROUP_ID);
         classGroupType = ClassGroupType.valueOf(DEFAULT_CLASS_GROUP_TYPE);
-        module = new TaModule(new ModuleName(DEFAULT_MODULE_NAME), new ModuleCode(DEFAULT_MODULE_CODE), new AcademicYear(DEFAULT_ACADEMIC_YEAR));
+        module = new TaModule(new ModuleName(DEFAULT_MODULE_NAME), new ModuleCode(DEFAULT_MODULE_CODE),
+                new AcademicYear(DEFAULT_ACADEMIC_YEAR));
     }
 
     /**
@@ -61,7 +62,8 @@ public class ClassGroupBuilder {
      * Sets the {@code ModuleCode} of the {@code ClassGroup} that we are building.
      */
     public ClassGroupBuilder withModule(String moduleName, String moduleCode, String academicYear) {
-        this.module = new TaModule(new ModuleName(moduleName), new ModuleCode(moduleCode), new AcademicYear(academicYear));
+        this.module = new TaModule(new ModuleName(moduleName), new ModuleCode(moduleCode),
+                new AcademicYear(academicYear));
         return this;
     }
 
