@@ -9,17 +9,6 @@ Amigos is a desktop application to help tech-savvy university students manage th
 
 Given below are my contributions to the project.
 
-* **showfriends**: Added the ability to view all friends stored.
-  * What it does:
-  * Justification:
-  * Highlights
-  * Credits: 
-
-* **showfriend**: Added the ability to view a particular friends and all their details.
-  * What it does:
-  * Justification:
-  * Highlights
-  * Credits:
 * **showevents**: Added the ability to view all upcoming events.
   * What it does:
   * Justification:
