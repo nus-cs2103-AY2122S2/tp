@@ -28,8 +28,11 @@ public class JsonAdaptedGroup {
      * Constructs a {@code JsonAdaptedGroup} with the given group details.
      */
     @JsonCreator
-    public JsonAdaptedGroup(@JsonProperty("groupName") String groupName) {
+    public JsonAdaptedGroup(@JsonProperty("groupName") String groupName, @JsonProperty("tasks") List<JsonAdaptedTask> tasks) {
         this.groupName = groupName;
+        if (tasks != null) {
+            this.tasks.addAll(tasks);
+        }
     }
 
     /**
@@ -38,12 +41,15 @@ public class JsonAdaptedGroup {
     public JsonAdaptedGroup(Group source) {
         groupName = String.valueOf(source.getGroupName());
 
-        List<String> taskNames = new ArrayList<>();
+//        List<String> taskNames = new ArrayList<>();
         //map all the tasks into a stream of strings
-        taskNames.addAll(source.getTaskList().getInternalList().stream()
-                .map(task -> String.valueOf(task.taskName))
+//        taskNames.addAll(source.getTaskList().getInternalList().stream()
+//                .map(task -> String.valueOf(task.taskName))
+//                .collect(Collectors.toList()));
+//        tasks.addAll(taskNames.stream().map(JsonAdaptedTask::new).collect(Collectors.toList()));
+        tasks.addAll(source.getTaskList().stream()
+                .map(JsonAdaptedTask::new)
                 .collect(Collectors.toList()));
-        tasks.addAll(taskNames.stream().map(JsonAdaptedTask::new).collect(Collectors.toList()));
     }
 
     /**

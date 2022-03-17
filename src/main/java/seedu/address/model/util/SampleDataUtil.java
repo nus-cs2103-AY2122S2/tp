@@ -50,8 +50,8 @@ public class SampleDataUtil {
         groupList.add(new Group(new GroupName("NUS Fintech Society")));
         groupList.add(new Group(new GroupName("NUS Data Science Society")));
 
-        groupList.get(0).addTask(new Task(new TaskName("Do Presentation for Open House")));
-        groupList.get(1).addTask(new Task(new TaskName("Electing the new president")));
+//        groupList.get(0).addTask(new Task(new TaskName("Do Presentation for Open House")));
+//        groupList.get(1).addTask(new Task(new TaskName("Electing the new president")));
 
         return groupList;
     }
