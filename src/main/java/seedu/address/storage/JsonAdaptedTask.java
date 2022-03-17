@@ -50,5 +50,4 @@ class JsonAdaptedTask {
 
         return new Task(modelTaskName);
     }
-
 }

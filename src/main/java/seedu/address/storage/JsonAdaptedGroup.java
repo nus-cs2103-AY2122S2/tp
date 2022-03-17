@@ -1,7 +1,9 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -28,7 +30,8 @@ public class JsonAdaptedGroup {
      * Constructs a {@code JsonAdaptedGroup} with the given group details.
      */
     @JsonCreator
-    public JsonAdaptedGroup(@JsonProperty("groupName") String groupName, @JsonProperty("tasks") List<JsonAdaptedTask> tasks) {
+    public JsonAdaptedGroup(@JsonProperty("groupName") String groupName,
+                            @JsonProperty("tasks") List<JsonAdaptedTask> tasks) {
         this.groupName = groupName;
         if (tasks != null) {
             this.tasks.addAll(tasks);
@@ -40,13 +43,6 @@ public class JsonAdaptedGroup {
      */
     public JsonAdaptedGroup(Group source) {
         groupName = String.valueOf(source.getGroupName());
-
-//        List<String> taskNames = new ArrayList<>();
-        //map all the tasks into a stream of strings
-//        taskNames.addAll(source.getTaskList().getInternalList().stream()
-//                .map(task -> String.valueOf(task.taskName))
-//                .collect(Collectors.toList()));
-//        tasks.addAll(taskNames.stream().map(JsonAdaptedTask::new).collect(Collectors.toList()));
         tasks.addAll(source.getTaskList().stream()
                 .map(JsonAdaptedTask::new)
                 .collect(Collectors.toList()));
@@ -58,8 +54,7 @@ public class JsonAdaptedGroup {
      * @throws IllegalValueException if there were any data constraints violated in the adapted group.
      */
     public Group toModelType() throws IllegalValueException {
-        // Transfer tasks.toModelType into ObservableList<Task>;
-        ObservableList<Task> groupTasks = FXCollections.observableArrayList();
+        final List<Task> groupTasks = new ArrayList<>();
         for (JsonAdaptedTask task : tasks) {
             groupTasks.add(task.toModelType());
         }
