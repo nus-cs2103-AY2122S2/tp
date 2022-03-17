@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -13,6 +14,7 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -157,6 +159,7 @@ public class MainWindow extends UiPart<Stage> {
      * Sets the stackpane size based on {@code commandType}.
      */
     public void setDisplayListPane(CommandType commandType) {
+
         switch (commandType) {
         case CONTACT:
             personListPanelPlaceholder.getChildren().clear();
@@ -180,7 +183,6 @@ public class MainWindow extends UiPart<Stage> {
             return;
         default:
             personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
-
         }
     }
 

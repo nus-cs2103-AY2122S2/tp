@@ -38,7 +38,7 @@ public class Date {
      */
     public static boolean isValidDate(String test) {
         try {
-            LocalDate.parse(test);
+            LocalDate.parse(test, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         } catch (DateTimeParseException e) {
             return false;
         }
