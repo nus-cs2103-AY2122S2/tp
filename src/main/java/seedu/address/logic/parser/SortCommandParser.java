@@ -55,7 +55,16 @@ public class SortCommandParser implements Parser<SortCommand> {
                 continue;
             }
 
-            if (!prefixMap.containsKey(arguments[i]) && !arguments[i].equals(SortCommand.DESCENDING_KEYWORD)) {
+            //check if there is a prefix before desc keyword
+            if (arguments[i].equals(SortCommand.DESCENDING_KEYWORD)) {
+                if (i - 1 < 0 || !prefixMap.containsKey(arguments[i - 1])) {
+                    throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+                }
+
+                continue;
+            }
+
+            if (!prefixMap.containsKey(arguments[i])) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
             }
 

@@ -81,7 +81,7 @@ public class EditCommand extends Command {
         // Update fields.
         Person editedPerson = personToEdit;
         for (Field f : fields) {
-            editedPerson = editedPerson.setField(f);
+            editedPerson = editedPerson.addField(f);
         }
 
         // Update tags.

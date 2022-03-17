@@ -4,15 +4,18 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.transaction.Transaction;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -23,6 +26,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final ObservableList<Transaction> transactionObservableList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -35,6 +39,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        transactionObservableList = FXCollections.observableArrayList();
     }
 
     public ModelManager() {
@@ -133,6 +138,19 @@ public class ModelManager implements Model {
     public void sortPersonList(Comparator<Person> comparator) {
         requireNonNull(comparator);
         addressBook.sortPersonList(comparator);
+    }
+
+    //=========== Transaction List Accessors =============================================================
+
+    @Override
+    public ObservableList<Transaction> getTransactionList() {
+        return transactionObservableList;
+    }
+
+    @Override
+    public void updateTransactionList(Collection<Transaction> transactions) {
+        requireNonNull(transactions);
+        transactionObservableList.setAll(transactions);
     }
 
     @Override

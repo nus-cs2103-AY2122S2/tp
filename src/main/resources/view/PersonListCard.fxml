@@ -25,15 +25,20 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
+        <!-- Name -->
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
+      <!-- Tags -->
       <FlowPane fx:id="tags" />
+      <!-- Required Fields (Need to add individually.) -->
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-      <Label fx:id="birthday" styleClass="cell_small_label" text="\$birthday" />
-      <Label fx:id="remark" styleClass="cell_small_label" text="\$email" />
+      <!-- Optional Fields -->
+      <FlowPane fx:id="optionalFields" />
+      <!-- Memebership -->
       <FlowPane fx:id="memberships" />
+      <Label fx:id="transactions" styleClass="cell_small_label" text="\$trx" />
     </VBox>
   </GridPane>
 </HBox>

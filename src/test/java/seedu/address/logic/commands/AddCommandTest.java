@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.function.Predicate;
 
@@ -22,7 +23,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.transaction.Transaction;
+import seedu.address.testutil.PersonUtil;
 
 public class AddCommandTest {
 
@@ -34,7 +36,7 @@ public class AddCommandTest {
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+        Person validPerson = PersonUtil.AMY;
 
         CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
 
@@ -44,7 +46,7 @@ public class AddCommandTest {
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
+        Person validPerson = PersonUtil.AMY;
         AddCommand addCommand = new AddCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
@@ -53,26 +55,22 @@ public class AddCommandTest {
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        AddCommand command = new AddCommand(PersonUtil.AMY);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(command.equals(command));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        assertTrue(command.equals(new AddCommand(PersonUtil.AMY)));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(command.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(command.equals(null));
 
         // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        assertFalse(command.equals(new AddCommand(PersonUtil.BOB)));
     }
 
     /**
@@ -152,6 +150,15 @@ public class AddCommandTest {
         @Override
         public void sortPersonList(Comparator<Person> comparator) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateTransactionList(Collection<Transaction> transactions) {
+        }
+
+        @Override
+        public ObservableList<Transaction> getTransactionList() {
+            return null;
         }
     }
 

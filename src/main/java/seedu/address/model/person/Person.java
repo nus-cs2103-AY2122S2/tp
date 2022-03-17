@@ -17,41 +17,16 @@ import java.util.Set;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.transaction.Transaction;
 
 /**
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person implements Serializable {
-    private final HashSet<Tag> tags = new HashSet<>();
     private final HashMap<Prefix, Field> fields = new HashMap<>();
-
-    /**
-     * Deprecated constructor.
-     * @param name the person's name
-     * @param phone the person's phone
-     * @param email the person's email
-     * @param address the person's address
-     * @param tags the person's tags
-     */
-    @Deprecated
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
-
-        // Add fields.
-        fields.put(name.prefix, name);
-        fields.put(phone.prefix, phone);
-        fields.put(email.prefix, email);
-        fields.put(address.prefix, address);
-        Remark remark = new Remark("");
-        fields.put(remark.prefix, remark);
-
-        // Add tags.
-        for (Tag t : tags) {
-            checkArgument(t != null, "All tags in Person constructor cannot be null.");
-            this.tags.add(t);
-        }
-    }
+    private final HashSet<Tag> tags = new HashSet<>();
+    private final ArrayList<Transaction> transactions = new ArrayList<>();
 
     /**
      * Person constructor
@@ -83,6 +58,18 @@ public class Person implements Serializable {
     }
 
     /**
+     * Constructs a Person object with fields, tags, and transactions
+     *
+     * @param fields fields of the person
+     * @param tags tags of the person
+     * @param transactions transactions of the person
+     */
+    public Person(Collection<Field> fields, Collection<Tag> tags, Collection<Transaction> transactions) {
+        this(fields, tags);
+        this.transactions.addAll(transactions);
+    }
+
+    /**
      * Returns true if the person contains the specified field.
      * @param prefix the field prefix
      * @return return true if the person contains the specified field
@@ -92,15 +79,31 @@ public class Person implements Serializable {
         return fields.containsKey(prefix);
     }
 
-    public Person setField(Field field) {
+    /**
+     * Add a field to the person. If the field already exists, it is replaced.
+     * @param field the field to add
+     * @return a person with the field added
+     */
+    public Person addField(Field field) {
         requireAllNonNull(field);
         Map<Prefix, Field> updatedFields = new HashMap<>(fields);
-        if (field == null) {
-            updatedFields.remove(field.prefix);
-        } else {
-            updatedFields.put(field.prefix, field);
-        }
+        updatedFields.put(field.prefix, field);
         return new Person(updatedFields.values(), tags);
+    }
+
+    /**
+     * Remove a field from the person. If the field does not exists, this does nothing.
+     * @param prefix the prefix of the field to remove
+     * @return a person with the field removed
+     */
+    public Person removeField(Prefix prefix) {
+        requireAllNonNull(prefix);
+        if (hasField(prefix)) {
+            Map<Prefix, Field> updatedFields = new HashMap<>(fields);
+            updatedFields.remove(prefix);
+            return new Person(updatedFields.values(), tags);
+        }
+        return this;
     }
 
     public Optional<Field> getField(Prefix prefix) {
@@ -144,6 +147,55 @@ public class Person implements Serializable {
         return new Person(this.fields.values(), tags);
     }
 
+    public Person setTags(Tag... tags) {
+        return setTags(List.of(tags));
+    }
+
+    /**
+     * Add tags to the person.
+     * @param tags the tags to add
+     * @return a person with the tags added
+     */
+    public Person addTags(Collection<Tag> tags) {
+        HashSet<Tag> updatedTags = new HashSet<>(this.tags);
+        for (Tag t : tags) {
+            checkArgument(t != null, "Cannot add null tags!");
+            updatedTags.add(t);
+        }
+        return new Person(this.fields.values(), updatedTags);
+    }
+
+    /**
+     * Add tags to the person.
+     * @param tags the tags to add
+     * @return a person with the tags added
+     */
+    public Person addTags(Tag... tags) {
+        return addTags(List.of(tags));
+    }
+
+    /**
+     * Remove tags from the person.
+     * @param tags the tags to remove
+     * @return a person with the tags remove
+     */
+    public Person removeTags(Collection<Tag> tags) {
+        HashSet<Tag> updatedTags = new HashSet<>(this.tags);
+        for (Tag t : tags) {
+            updatedTags.remove(t);
+        }
+        return new Person(this.fields.values(), updatedTags);
+    }
+
+    /**
+     * Remove tags from the person.
+     * @param tags the tags to remove
+     * @return a person with the tags remove
+     */
+    public Person removeTags(Tag... tags) {
+        return removeTags(tags);
+    }
+
     /**
      * Adds a membership to the person
      *
@@ -156,9 +208,34 @@ public class Person implements Serializable {
         return new Person(newFields.values(), tags);
     }
 
+    /**
+     * Adds a transaction to the person
+     *
+     * @param transaction transaction to add
+     * @return A new person with added transaction
+     */
+    public Person addTransaction(Transaction transaction) {
+        ArrayList<Transaction> newTransactions = new ArrayList<>(this.transactions);
+        newTransactions.add(transaction);
+        return new Person(getFields(), getTags(), newTransactions);
+    }
 
     /**
-     * Returns true if both persons have the same name.
+     * Gets the list of all transactions
+     *
+     * @return All transactions associated with
+     * the person.
+     */
+    public List<Transaction> getTransactions() {
+        return Collections.unmodifiableList(transactions);
+    }
+
+    public boolean hasTransaction() {
+        return !getTransactions().isEmpty();
+    }
+
+    /**
+     * Returns true if both persons have the same email.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
@@ -187,13 +264,14 @@ public class Person implements Serializable {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getTransactions().equals(getTransactions());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(getName(), getPhone(), getEmail(), getAddress(), tags);
+        return Objects.hash(getName(), getPhone(), getEmail(), getAddress(), tags, transactions);
     }
 
     @Override
@@ -211,6 +289,11 @@ public class Person implements Serializable {
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
+        }
+
+        if (!transactions.isEmpty()) {
+            builder.append("; Transactions: ");
+            transactions.forEach(builder::append);
         }
 
         return builder.toString();

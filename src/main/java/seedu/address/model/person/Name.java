@@ -63,4 +63,13 @@ public class Name extends Field {
         return value.hashCode();
     }
 
+    @Override
+    public int compareTo(Field other) {
+        if (!(other instanceof Name)) {
+            return -1;
+        }
+
+        Name otherName = (Name) other;
+        return value.toLowerCase().compareTo(otherName.value.toLowerCase());
+    }
 }
