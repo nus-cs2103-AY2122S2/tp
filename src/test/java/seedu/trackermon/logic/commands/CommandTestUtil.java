@@ -1,8 +1,8 @@
 package seedu.trackermon.logic.commands;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_STATUS;
+import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_TAG;
 
 /**
  * Contains helper methods for testing commands.

@@ -1,11 +1,11 @@
-package seedu.address.logic.parser;
+package seedu.trackermon.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SHOW;
+import static seedu.trackermon.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.trackermon.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.trackermon.testutil.Assert.assertThrows;
+import static seedu.trackermon.testutil.TypicalIndexes.INDEX_FIRST_SHOW;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,20 +13,20 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditShowDescriptor;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.show.NameContainsKeywordsPredicate;
-import seedu.address.model.show.Show;
-import seedu.address.testutil.EditShowDescriptorBuilder;
-import seedu.address.testutil.ShowBuilder;
-import seedu.address.testutil.ShowUtil;
+import seedu.trackermon.logic.commands.AddCommand;
+import seedu.trackermon.logic.commands.DeleteCommand;
+import seedu.trackermon.logic.commands.EditCommand;
+import seedu.trackermon.logic.commands.EditCommand.EditShowDescriptor;
+import seedu.trackermon.logic.commands.ExitCommand;
+import seedu.trackermon.logic.commands.FindCommand;
+import seedu.trackermon.logic.commands.HelpCommand;
+import seedu.trackermon.logic.commands.ListCommand;
+import seedu.trackermon.logic.parser.exceptions.ParseException;
+import seedu.trackermon.model.show.NameContainsKeywordsPredicate;
+import seedu.trackermon.model.show.Show;
+import seedu.trackermon.testutil.EditShowDescriptorBuilder;
+import seedu.trackermon.testutil.ShowBuilder;
+import seedu.trackermon.testutil.ShowUtil;
 
 public class TrackermonParserTest {
 
