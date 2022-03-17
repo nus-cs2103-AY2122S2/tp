@@ -5,9 +5,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
-import seedu.address.model.EventBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyEventBook;
 import seedu.address.model.common.Description;
 import seedu.address.model.event.DateTime;
 import seedu.address.model.event.Event;
@@ -64,15 +62,10 @@ public class SampleDataUtil {
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }
-        return sampleAb;
-    }
-
-    public static ReadOnlyEventBook getSampleEventBook() {
-        EventBook sampleEb = new EventBook();
         for (Event sampleEvent : getSampleEvents()) {
-            sampleEb.addEvent(sampleEvent);
+            sampleAb.addEvent(sampleEvent);
         }
-        return sampleEb;
+        return sampleAb;
     }
 
     /**
