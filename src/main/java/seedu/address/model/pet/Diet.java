@@ -16,7 +16,7 @@ public class Diet {
      */
     public Diet(String diet) {
         requireNonNull(diet);
-        value = diet;
+        value = diet.trim().replaceAll(" +", " ");
     }
 
     @Override
