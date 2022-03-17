@@ -60,7 +60,7 @@ public class Transaction implements Serializable {
     }
 
     /**
-     * Get the amount of the transaction
+     * Gets the amount of the transaction
      *
      * @return Amount of the transaction
      */
@@ -69,7 +69,7 @@ public class Transaction implements Serializable {
     }
 
     /**
-     * Get the Due date of the transaction
+     * Gets the Due date of the transaction
      *
      * @return Due date of the transaction
      */
@@ -78,12 +78,21 @@ public class Transaction implements Serializable {
     }
 
     /**
-     * Get the transaction date of the transaction
+     * Gets the transaction date of the transaction
      *
      * @return transaction date of the transaction
      */
     public TransactionDate getTransactionDate() {
         return (TransactionDate) this.fields.get(TransactionDate.PREFIX);
+    }
+
+    /**
+     * Gets the note of the transaction
+     *
+     * @return Optional note of the transaction
+     */
+    public Optional<Note> getNote() {
+        return Optional.ofNullable((Note) this.fields.get(Note.PREFIX));
     }
 
     /**
@@ -109,7 +118,7 @@ public class Transaction implements Serializable {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(getAmount(), getDueDate(), getTransactionDate());
+        return Objects.hash(getAmount(), getDueDate(), getTransactionDate(), getNote());
     }
 
     @Override
@@ -123,6 +132,11 @@ public class Transaction implements Serializable {
         if (getDueDate().isPresent()) {
             builder.append("; Due date: ")
                     .append(getDueDate().get());
+        }
+
+        if (getNote().isPresent()) {
+            builder.append("; Note: ")
+                    .append(getNote().get());
         }
 
         return builder.toString();

@@ -1,12 +1,14 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.transaction.Transaction;
 
 /**
  * The API of the Model component.
@@ -93,4 +95,18 @@ public interface Model {
      * @throws NullPointerException if {@code comparator} is null.
      */
     void sortPersonList(Comparator<Person> comparator);
+
+    /**
+     * Update the transaction list shown with the given
+     * list of transactions
+     *
+     * @param transactions of the selected person.
+     */
+    void updateTransactionList(Collection<Transaction> transactions);
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Transaction} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    ObservableList<Transaction> getTransactionList();
 }

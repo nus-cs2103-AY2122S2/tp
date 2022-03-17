@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.function.Predicate;
 
@@ -22,6 +23,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.transaction.Transaction;
 import seedu.address.testutil.PersonUtil;
 
 public class AddCommandTest {
@@ -148,6 +150,15 @@ public class AddCommandTest {
         @Override
         public void sortPersonList(Comparator<Person> comparator) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateTransactionList(Collection<Transaction> transactions) {
+        }
+
+        @Override
+        public ObservableList<Transaction> getTransactionList() {
+            return null;
         }
     }
 

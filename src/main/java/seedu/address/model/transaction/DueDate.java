@@ -7,9 +7,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Represents a Person's birthday in the address book.
+ * Represents a Due date of the transaction.
+ * Optional to have.
  * Guarantees: immutable; is valid as declared in {@link #isValid(String)}
  */
 public class DueDate extends TransactionField {
@@ -25,11 +27,15 @@ public class DueDate extends TransactionField {
      *
      * @param dueDate A valid due date.
      */
-    public DueDate(String dueDate) {
+    public DueDate(String dueDate) throws ParseException {
         super(PREFIX);
         requireNonNull(dueDate);
         dueDate = dueDate.trim();
-        checkArgument(DueDate.isValid(dueDate), MESSAGE_CONSTRAINTS);
+        try {
+            checkArgument(DueDate.isValid(dueDate), MESSAGE_CONSTRAINTS);
+        } catch (Exception e) {
+            throw new ParseException(MESSAGE_CONSTRAINTS);
+        }
         value = LocalDate.parse(dueDate);
     }
 
