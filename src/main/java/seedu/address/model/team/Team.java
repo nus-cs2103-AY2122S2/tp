@@ -24,8 +24,20 @@ public class Team {
         this.teamLineupList = new TeamLineupList();
     }
 
+    public Team(TeamName teamName, TeamMemberList teamMemberList, TeamLineupList teamLineupList) {
+        this.teamName = teamName;
+        this.teamMemberList = teamMemberList;
+        this.teamLineupList = teamLineupList;
+    }
+
     /**
-     * Adds a lineup into this team
+     * Gets the team name.
+     */
+    public TeamName getTeamName() {
+        return this.teamName;
+    }
+
+    /** Adds a lineup into this team
      *
      * @param lineup The lineup to be added
      */
@@ -52,5 +64,38 @@ public class Team {
         if (this.teamLineupList.containsLineup(lineup) && this.teamMemberList.containsPerson(person)) {
             lineup.addPlayer(person);
         }
+    }
+
+    public TeamName getTeamName() {
+        return this.teamName;
+
+    public void deletePersonFromTeam(Person person) {
+        this.teamMemberList.deletePersonFromTeam(person);
+    }
+
+    public TeamName getTeamName() {
+        return teamName;
+    }
+
+    public TeamMemberList getTeamMemberList() {
+        return teamMemberList;
+    }
+
+    public TeamLineupList getTeamLineupList() {
+        return teamLineupList;
+
+    /**
+     * Removes a player.
+     */
+    public void removePlayer(Person person) {
+        // meanwhile, should also remove from lineup
+        this.teamMemberList.removePerson(person);
+    }
+
+    /**
+     * Removes a lineup.
+     */
+    public void removeLineup(String lineup) {
+        return;
     }
 }

@@ -29,6 +29,12 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
+    public static Name parsePlayer(String targetPlayerName) throws ParseException {
+        requireNonNull(targetPlayerName);
+        String trimmedName = targetPlayerName.trim();
+        return new Name(trimmedName);
+    }
+
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -205,6 +211,15 @@ public class ParserUtil {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
         return new Tag(trimmedTag);
+    }
+
+    /**
+     * Parses a string.
+     */
+    public static String parseString(String str) {
+        requireNonNull(str);
+        String trimmedStr = str.trim();
+        return trimmedStr;
     }
 
     /**

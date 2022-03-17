@@ -19,6 +19,9 @@
         <Insets top="5" right="5" bottom="5" left="15" />
       </padding>
       <HBox spacing="5" alignment="CENTER_LEFT">
+        <padding>
+          <Insets top="5" right="5" bottom="5"/>
+        </padding>
         <Label fx:id="id" styleClass="cell_big_label">
           <minWidth>
             <!-- Ensures that the label text is never truncated -->
@@ -28,12 +31,17 @@
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
       <FlowPane fx:id="tags" />
-      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-      <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-      <Label fx:id="age" styleClass="cell_small_label" text="\$age" />
-      <Label fx:id="height" styleClass="cell_small_label" text="\$height" />
-      <Label fx:id="jerseyNumber" styleClass="cell_small_label" text="\$jerseyNumber" />
-      <Label fx:id="weight" styleClass="cell_small_label" text="\$weight" />
+      <HBox spacing = "5" alignment="CENTER_LEFT">
+        <padding>
+          <Insets top="5" right="5" bottom="5"/>
+        </padding>
+        <Label fx:id="phone" styleClass="cell_small_label" text="\$phone \$email" />
+        <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+        <Label fx:id="age" styleClass="cell_small_label" text="\$age" />
+        <Label fx:id="height" styleClass="cell_small_label" text="\$height" />
+        <Label fx:id="jerseyNumber" styleClass="cell_small_label" text="\$jerseyNumber" />
+        <Label fx:id="weight" styleClass="cell_small_label" text="\$weight" />
+      </HBox>
     </VBox>
   </GridPane>
 </HBox>
