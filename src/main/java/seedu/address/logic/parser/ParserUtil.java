@@ -14,7 +14,7 @@ import seedu.address.model.person.Course;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.StudentID;
+import seedu.address.model.person.StudentId;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -38,18 +38,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String id} into a {@code StudentID}.
+     * Parses a {@code String id} into a {@code StudentId}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code id} is invalid.
      */
-    public static StudentID parseStudentID(String id) throws ParseException {
+    public static StudentId parseStudentId(String id) throws ParseException {
         requireNonNull(id);
         String updatedId = id.trim().toUpperCase();
-        if (!StudentID.isValidId(updatedId)) {
-            throw new ParseException(StudentID.MESSAGE_CONSTRAINTS);
+        if (!StudentId.isValidId(updatedId)) {
+            throw new ParseException(StudentId.MESSAGE_CONSTRAINTS);
         }
-        return new StudentID(updatedId);
+        return new StudentId(updatedId);
     }
 
     /**

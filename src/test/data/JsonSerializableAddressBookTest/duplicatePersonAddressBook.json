@@ -1,13 +1,13 @@
 {
   "persons": [ {
-    "studentID": "E0123456",
+    "studentId": "E0123456",
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "E0123456@u.nus.edu",
     "course": "Business Analytics",
     "tagged": [ "friends" ]
   }, {
-    "studentID": "E0123456",
+    "studentId": "E0123456",
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "E0123456@u.nus.edu",

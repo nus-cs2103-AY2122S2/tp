@@ -16,7 +16,7 @@ import seedu.address.model.tag.Tag;
 public class Person {
 
     // Identity fields
-    private final StudentID studentID;
+    private final StudentId studentId;
     private final Name name;
     private final Phone phone;
     private final Email email;
@@ -28,9 +28,9 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(StudentID studentID, Name name, Phone phone, Email email, Course course, Set<Tag> tags) {
-        requireAllNonNull(studentID, name, phone, email, course, tags);
-        this.studentID = studentID;
+    public Person(StudentId studentId, Name name, Phone phone, Email email, Course course, Set<Tag> tags) {
+        requireAllNonNull(studentId, name, phone, email, course, tags);
+        this.studentId = studentId;
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -38,8 +38,8 @@ public class Person {
         this.tags.addAll(tags);
     }
 
-    public StudentID getStudentID() {
-        return studentID;
+    public StudentId getStudentId() {
+        return studentId;
     }
 
     public Name getName() {
@@ -76,7 +76,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getStudentID().equals(getStudentID())
+                && otherPerson.getStudentId().equals(getStudentId())
                 && otherPerson.getName().equals(getName());
     }
 
@@ -95,7 +95,7 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return otherPerson.getStudentID().equals(getStudentID())
+        return otherPerson.getStudentId().equals(getStudentId())
                 && otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
@@ -106,13 +106,15 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(studentID, name, phone, email, course, tags);
+        return Objects.hash(studentId, name, phone, email, course, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName() + ", " + getStudentID())
+        builder.append("Student ID: ").append(getStudentId())
+                .append("; Name: ")
+                .append(getName())
                 .append("; Phone: ")
                 .append(getPhone())
                 .append("; Email: ")

@@ -8,7 +8,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.StudentID;
+import seedu.address.model.person.StudentId;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -23,7 +23,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "E0123456@u.nus.edu";
     public static final String DEFAULT_COURSE = "Computer Science";
 
-    private StudentID studentID;
+    private StudentId studentId;
     private Name name;
     private Phone phone;
     private Email email;
@@ -34,7 +34,7 @@ public class PersonBuilder {
      * Creates a {@code PersonBuilder} with the default details.
      */
     public PersonBuilder() {
-        studentID = new StudentID(DEFAULT_STUDENT_ID);
+        studentId = new StudentId(DEFAULT_STUDENT_ID);
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
@@ -46,7 +46,7 @@ public class PersonBuilder {
      * Initializes the PersonBuilder with the data of {@code personToCopy}.
      */
     public PersonBuilder(Person personToCopy) {
-        studentID = personToCopy.getStudentID();
+        studentId = personToCopy.getStudentId();
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
@@ -55,10 +55,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code StudentID} of the {@code Person} that we are building.
+     * Sets the {@code StudentId} of the {@code Person} that we are building.
      */
-    public PersonBuilder withStudentID(String id) {
-        this.studentID = new StudentID(id);
+    public PersonBuilder withStudentId(String id) {
+        this.studentId = new StudentId(id);
         return this;
     }
 
@@ -103,7 +103,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(studentID, name, phone, email, course, tags);
+        return new Person(studentId, name, phone, email, course, tags);
     }
 
 }

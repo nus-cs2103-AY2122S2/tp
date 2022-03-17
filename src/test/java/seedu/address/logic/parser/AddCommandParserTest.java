@@ -34,7 +34,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.StudentID;
+import seedu.address.model.person.StudentId;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
@@ -95,9 +95,9 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        // invalid studentID
+        // invalid studentId
         assertParseFailure(parser, INVALID_STUDENT_ID_DESC + NAME_DESC_BOB + PHONE_DESC_BOB
-                + COURSE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, StudentID.MESSAGE_CONSTRAINTS);
+                + COURSE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, StudentId.MESSAGE_CONSTRAINTS);
 
         // invalid name
         assertParseFailure(parser, STUDENT_ID_DESC_BOB + INVALID_NAME_DESC + PHONE_DESC_BOB
