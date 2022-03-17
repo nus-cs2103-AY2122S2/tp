@@ -28,7 +28,7 @@ public class Name implements Comparable<Name> {
     public Name(String name) {
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        fullName = name;
+        fullName = name.trim().replaceAll(" +", " ");
     }
 
     /**
@@ -41,15 +41,14 @@ public class Name implements Comparable<Name> {
 
     @Override
     public String toString() {
-        return fullName.trim();
+        return fullName.trim().replaceAll(" +", " ");
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Name // instanceof handles nulls
-                && fullName.replaceAll(" ", "")
-                    .equalsIgnoreCase(((Name) other).fullName.replaceAll(" ", "")));
+                && fullName.equalsIgnoreCase(((Name) other).fullName));
     }
 
     @Override
