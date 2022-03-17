@@ -8,16 +8,16 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_ALICE_IN_WO
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_GONE;
 import static seedu.address.logic.commands.CommandTestUtil.STATUS_DESC_COMPLETED;
 import static seedu.address.logic.commands.CommandTestUtil.STATUS_DESC_WATCHING;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIENDS;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HENTAI;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_MOVIE;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_OWESMONEY;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_YURI;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ALICE_IN_WONDERLAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_GONE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_COMPLETED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_WATCHING;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIENDS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HENTAI;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_MOVIE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_OWESMONEY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_YURI;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -86,9 +86,9 @@ public class EditCommandParserTest {
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Show} being edited,
         // parsing it together with a valid tag results in error
-        assertParseFailure(parser, "1" + TAG_DESC_MOVIE + TAG_DESC_FRIENDS + TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_DESC_MOVIE + TAG_EMPTY + TAG_DESC_FRIENDS, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_MOVIE + TAG_DESC_FRIENDS, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TAG_DESC_MOVIE + TAG_DESC_HENTAI + TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TAG_DESC_MOVIE + TAG_EMPTY + TAG_DESC_HENTAI, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_MOVIE + TAG_DESC_HENTAI, Tag.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_STATUS_DESC,
@@ -100,10 +100,10 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_SECOND_SHOW;
         String userInput = targetIndex.getOneBased() + NAME_DESC_ALICE_IN_WONDERLAND
                 + STATUS_DESC_COMPLETED + TAG_DESC_MOVIE
-                + TAG_DESC_FRIENDS;
+                + TAG_DESC_HENTAI;
 
         EditShowDescriptor descriptor = new EditShowDescriptorBuilder().withName(VALID_NAME_ALICE_IN_WONDERLAND)
-                .withStatus(VALID_STATUS_COMPLETED).withTags(VALID_TAG_MOVIE, VALID_TAG_FRIENDS).build();
+                .withStatus(VALID_STATUS_COMPLETED).withTags(VALID_TAG_MOVIE, VALID_TAG_HENTAI).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -140,8 +140,8 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // tags
-        userInput = targetIndex.getOneBased() + TAG_DESC_FRIENDS;
-        descriptor = new EditShowDescriptorBuilder().withTags(VALID_TAG_FRIENDS).build();
+        userInput = targetIndex.getOneBased() + TAG_DESC_HENTAI;
+        descriptor = new EditShowDescriptorBuilder().withTags(VALID_TAG_HENTAI).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -150,11 +150,11 @@ public class EditCommandParserTest {
     public void parse_multipleRepeatedFields_acceptsLast() {
         Index targetIndex = INDEX_FIRST_SHOW;
         String userInput = targetIndex.getOneBased()
-                + NAME_DESC_ALICE_IN_WONDERLAND + STATUS_DESC_COMPLETED + TAG_DESC_FRIENDS
-                + NAME_DESC_GONE + STATUS_DESC_WATCHING + TAG_DESC_MOVIE + TAG_DESC_OWESMONEY;
+                + NAME_DESC_ALICE_IN_WONDERLAND + STATUS_DESC_COMPLETED + TAG_DESC_HENTAI
+                + NAME_DESC_GONE + STATUS_DESC_WATCHING + TAG_DESC_MOVIE + TAG_DESC_YURI;
 
         EditShowDescriptor descriptor = new EditShowDescriptorBuilder().withName(VALID_NAME_GONE)
-                .withStatus(VALID_STATUS_WATCHING).withTags(VALID_TAG_FRIENDS, VALID_TAG_MOVIE, VALID_TAG_OWESMONEY)
+                .withStatus(VALID_STATUS_WATCHING).withTags(VALID_TAG_HENTAI, VALID_TAG_MOVIE, VALID_TAG_YURI)
                 .build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 

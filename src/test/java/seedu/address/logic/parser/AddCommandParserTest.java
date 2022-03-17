@@ -10,14 +10,14 @@ import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.STATUS_DESC_COMPLETED;
 import static seedu.address.logic.commands.CommandTestUtil.STATUS_DESC_WATCHING;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIENDS;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HENTAI;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_MOVIE;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_OWESMONEY;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_YURI;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ALICE_IN_WONDERLAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_COMPLETED;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIENDS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HENTAI;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_MOVIE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_OWESMONEY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_YURI;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalShows.ALICE_IN_WONDERLAND;
@@ -52,10 +52,10 @@ public class AddCommandParserTest {
                 + STATUS_DESC_COMPLETED + TAG_DESC_MOVIE, new AddCommand(expectedShow));
 
         // multiple tags - all accepted
-        Show expectedShowMultipleTags = new ShowBuilder(GONE).withTags(VALID_TAG_OWESMONEY, VALID_TAG_FRIENDS)
+        Show expectedShowMultipleTags = new ShowBuilder(GONE).withTags(VALID_TAG_YURI, VALID_TAG_HENTAI)
                 .build();
-        assertParseSuccess(parser, NAME_DESC_GONE + STATUS_DESC_WATCHING + TAG_DESC_OWESMONEY
-                + TAG_DESC_FRIENDS, new AddCommand(expectedShowMultipleTags));
+        assertParseSuccess(parser, NAME_DESC_GONE + STATUS_DESC_WATCHING + TAG_DESC_YURI
+                + TAG_DESC_HENTAI, new AddCommand(expectedShowMultipleTags));
     }
 
     @Test
