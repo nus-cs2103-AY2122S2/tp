@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 
 import seedu.address.logic.commands.AddLessonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.*;
 
 /**
  * Parses input arguments and creates a new AddStudentCommand object
@@ -41,31 +41,27 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLessonCommand.MESSAGE_USAGE));
         }
 
-        String lessonName = ParserUtil.parseLessonName(argMultimap.getValue(PREFIX_LESSON_NAME).get());
-        String subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
-        LocalDate date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-        String startTime = ParserUtil.parseStartTime(argMultimap.getValue(PREFIX_START_TIME).get());
-        String address = ParserUtil.parseStartLessonAddress(argMultimap.getValue(PREFIX_LESSON_ADDRESS).get());
-
-        Integer durationHours = 0;
-        if (hasDurationHoursField(argMultimap)) {
-            durationHours = ParserUtil.parseDurationHours(argMultimap.getValue(PREFIX_DURATION_HOURS).get());
-        }
-        Integer durationMinutes = 0;
-        if (hasDurationMinutesField(argMultimap)) {
-            durationMinutes = ParserUtil.parseDurationMinutes(argMultimap.getValue(PREFIX_DURATION_MINUTES).get());
-        }
-
+        LessonName name = ParserUtil.parseLessonName(argMultimap.getValue(PREFIX_LESSON_NAME).get());
+        Subject subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
+        LessonAddress address = ParserUtil.parseLessonAddress(argMultimap.getValue(PREFIX_LESSON_ADDRESS).get());
+        Integer durationHours = hasDurationHoursField(argMultimap)
+                ? ParserUtil.parseDurationHours(argMultimap.getValue(PREFIX_DURATION_HOURS).get())
+                : 0;
+        Integer durationMinutes = hasDurationMinutesField(argMultimap)
+                ? ParserUtil.parseDurationMinutes(argMultimap.getValue(PREFIX_DURATION_MINUTES).get())
+                : 0;
         checkDurationIsValid(durationHours, durationMinutes);
 
-        Lesson lesson;
-        if (isRecurring(argMultimap)) {
-            lesson = Lesson.makeRecurringLesson(lessonName, subject, address, date,
-                    startTime , durationHours, durationMinutes);
-        } else {
-            lesson = Lesson.makeTemporaryLesson(lessonName, subject, address, date,
-                    startTime, durationHours, durationMinutes);
-        }
+        DateTimeSlot dateTimeSlot = ParserUtil.parseDateTimeSlot(
+                argMultimap.getValue(PREFIX_DATE).get(),
+                argMultimap.getValue(PREFIX_START_TIME).get(),
+                durationHours,
+                durationMinutes
+        );
+
+        Lesson lesson = isRecurring(argMultimap)
+                ? Lesson.makeRecurringLesson(name, subject, address, dateTimeSlot)
+                : Lesson.makeTemporaryLesson(name, subject, address, dateTimeSlot);
 
         return new AddLessonCommand(lesson);
     }
@@ -106,20 +102,20 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
     /**
      * Returns a {@code LocalDateTime} representing the date of the lesson and the time at which it starts.
      */
-    private static LocalDateTime getLessonDateTime(LocalDate dateOfLesson, String startTime) throws ParseException {
-        String[] hourAndMinuteOfStartTime = startTime.split(":");
-        Integer hour;
-        Integer minute;
-        LocalDateTime lessonDatetime;
-
-        try {
-            hour = Integer.parseInt(hourAndMinuteOfStartTime[0]);
-            minute = Integer.parseInt(hourAndMinuteOfStartTime[1]);
-            lessonDatetime = dateOfLesson.atTime(hour, minute);
-        } catch (NumberFormatException | DateTimeException exception) {
-            throw new ParseException(String.format("Invalid lesson start time: %s", startTime));
-        }
-
-        return lessonDatetime;
-    }
+//    private static LocalDateTime getLessonDateTime(LocalDate dateOfLesson, String startTime) throws ParseException {
+//        String[] hourAndMinuteOfStartTime = startTime.split(":");
+//        Integer hour;
+//        Integer minute;
+//        LocalDateTime lessonDatetime;
+//
+//        try {
+//            hour = Integer.parseInt(hourAndMinuteOfStartTime[0]);
+//            minute = Integer.parseInt(hourAndMinuteOfStartTime[1]);
+//            lessonDatetime = dateOfLesson.atTime(hour, minute);
+//        } catch (NumberFormatException | DateTimeException exception) {
+//            throw new ParseException(String.format("Invalid lesson start time: %s", startTime));
+//        }
+//
+//        return lessonDatetime;
+//    }
 }

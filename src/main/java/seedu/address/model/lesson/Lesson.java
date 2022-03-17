@@ -97,6 +97,8 @@ public abstract class Lesson {
      * @param startTime starting time of the lesson
      * @param hours how long the lesson would last
      * @param minutes how long the lesson would last
+     *
+     * TODO: remove this constructor
      */
     public static TemporaryLesson makeTemporaryLesson(String name, String subject, String address,
                                                       LocalDate dateOfLesson, String startTime,
@@ -123,11 +125,18 @@ public abstract class Lesson {
      * @param dateOfLesson date of the lesson
      * @param startTime starting time of the lesson
      * @param hours how long the lesson would last
+     *
+     * TODO: remove this constructor
      */
     public static TemporaryLesson makeTemporaryLesson(String name, String subject, String address,
                                                       LocalDate dateOfLesson, String startTime,
                                                       int hours) {
         return Lesson.makeTemporaryLesson(name, subject, address, dateOfLesson, startTime, hours, 0);
+    }
+
+    public static TemporaryLesson makeTemporaryLesson(LessonName name, Subject subject, LessonAddress address,
+                                                      DateTimeSlot dateTimeSlot) {
+        return new TemporaryLesson(name, subject, address, dateTimeSlot);
     }
 
     /**
@@ -155,6 +164,7 @@ public abstract class Lesson {
      * @param subject what subject would be taught during the lesson
      * @param address where the lesson would be conducted
      * @param dateTimeSlot an object encapsulating a lesson's start date, starting time and duration.
+     * @param enrolledStudents a list of students currently enrolled in the lesson
      */
     public static RecurringLesson makeRecurringLesson(LessonName name, Subject subject, LessonAddress address,
                                                       DateTimeSlot dateTimeSlot, List<Student> enrolledStudents) {
@@ -178,6 +188,8 @@ public abstract class Lesson {
      * @param startTime starting time of the lesson
      * @param hours how long the lesson would last
      * @param minutes how long the lesson would last
+     *
+     * TODO: REMOVE THIS CONSTRUCTOR
      */
     public static RecurringLesson makeRecurringLesson(String name, String subject, String address,
                                                       LocalDate dateOfLesson, String startTime,
@@ -192,6 +204,23 @@ public abstract class Lesson {
                 lessonSubject,
                 lessonAddress,
                 lessonDateTimeSlot
+        );
+    }
+
+    /**
+     * Creates a new instance of a recurring lesson.
+     * @param name lesson name
+     * @param subject what subject would be taught during the lesson
+     * @param address where the lesson would be conducted
+     * @param dateTimeSlot an object encapsulating a lesson's start date, starting time and duration.
+     */
+    public static RecurringLesson makeRecurringLesson(LessonName name, Subject subject, LessonAddress address,
+                                                      DateTimeSlot dateTimeSlot) {
+        return new RecurringLesson(
+                name,
+                subject,
+                address,
+                dateTimeSlot
         );
     }
 

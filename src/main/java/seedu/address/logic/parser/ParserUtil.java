@@ -2,7 +2,9 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Collection;
@@ -34,9 +36,9 @@ public class ParserUtil {
     public static final String INVALID_DATE_PASTDATE_MESSAGE = "Retroactively creating lessons "
             + "for past dates is not allowed!";
 
-    public static final String INVALID_HOURS_FORMAT_MESSAGE = "Invalid duration in hours format!"
+    public static final String INVALID_HOURS_FORMAT_MESSAGE = "Invalid duration in hours format! "
             + "Hours must be a non-negative integer.\n"
-            + "[EXAMPLE] to specify that the hours field in the lesson's duration is 2 hours,"
+            + "[EXAMPLE] to specify that the hours field in the lesson's duration is 2 hours, "
             + "include the following\n"
             + "-h 2";
     public static final String NEGATIVE_HOURS_MESSAGE = "Hours cannot be lesser than 0.";
@@ -45,9 +47,9 @@ public class ParserUtil {
             + "[EXAMPLE] to specify that a lesson starts at 6:30PM, include the following\n"
             + "-t 18:30";
 
-    public static final String INVALID_MINUTES_FORMAT_MESSAGE = "Invalid duration in minutes format!"
+    public static final String INVALID_MINUTES_FORMAT_MESSAGE = "Invalid duration in minutes format! "
             + "Minutes must be a non-negative integer.\n"
-            + "[EXAMPLE] to specify that the minutes field in the lesson's duration is 25 minutes,"
+            + "[EXAMPLE] to specify that the minutes field in the lesson's duration is 25 minutes, "
             + "include the following\n"
             + "-m 25";
     public static final String NEGATIVE_MINUTES_MESSAGE = "Minutes cannot be lesser than 0.";
@@ -154,49 +156,77 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String lessonName} into a {@code String}.
+     * Parses a {@code String lessonName} into a {@code LessonName}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code lessonName} is invalid.
      */
-    public static String parseLessonName(String lessonName) throws ParseException {
+    public static LessonName parseLessonName(String lessonName) throws ParseException {
         requireNonNull(lessonName);
         String trimmedName = lessonName.trim();
         if (!LessonName.isValidName(trimmedName)) {
             throw new ParseException(LessonName.MESSAGE_CONSTRAINTS);
         }
-        return trimmedName;
+        return new LessonName(trimmedName);
     }
 
     /**
-     * Parses a {@code String subject} into a {@code String}.
+     * Parses a {@code String subject} into a {@code Subject}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code subject} is invalid.
      */
-    public static String parseSubject(String subject) throws ParseException {
+    public static Subject parseSubject(String subject) throws ParseException {
         requireNonNull(subject);
         String trimmedSubject = subject.trim();
         if (!Subject.isValidSubject(trimmedSubject)) {
             throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
         }
-        return trimmedSubject;
+        return new Subject(trimmedSubject);
     }
 
     /**
-     * Parses a {@code String address} into a {@code String}.
+     * Parses a {@code String address} into a {@code LessonAddress}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code address} is invalid.
      */
-    public static String parseStartLessonAddress(String address) throws ParseException {
+    public static LessonAddress parseLessonAddress(String address) throws ParseException {
         requireNonNull(address);
         String trimmedAddress = address.trim();
         if (!LessonAddress.isValidAddress(trimmedAddress)) {
             throw new ParseException(LessonAddress.MESSAGE_CONSTRAINTS);
         }
 
-        return trimmedAddress;
+        return new LessonAddress(trimmedAddress);
+    }
+
+    /**
+     * Parses a {@code String dateOfLesson}, a {@code startTime}, a {@code duration hour-field}
+     * and a {@code duration minute-field} into a {@code DateTimeSlot}
+     *
+     * @throws ParseException if the given {@code dateOfLesson} is invalid.
+     * @throws ParseException if the given {@code startTime} is invalid.
+     */
+    public static DateTimeSlot parseDateTimeSlot(String dateOfLesson, String startTime,
+                                                 int durationHours, int durationMinutes) throws ParseException {
+        LocalDate lessonDate = parseDate(dateOfLesson);
+        String lessonStartTime = parseStartTime(startTime);
+
+        String[] hourAndMinuteOfStartTime = startTime.split(":");
+        Integer hour;
+        Integer minute;
+        LocalDateTime lessonDateTime;
+
+        try {
+            hour = Integer.parseInt(hourAndMinuteOfStartTime[0]);
+            minute = Integer.parseInt(hourAndMinuteOfStartTime[1]);
+            lessonDateTime = lessonDate.atTime(hour, minute);
+        } catch (NumberFormatException | DateTimeException exception) {
+            throw new ParseException(String.format("Invalid lesson start time: %s", startTime));
+        }
+
+        return new DateTimeSlot(lessonDateTime, durationHours, durationMinutes);
     }
 
     /**

@@ -49,9 +49,10 @@ public class AddLessonCommandParserTest {
                 VALID_LESSON_SUBJECT,
                 VALID_LESSON_ADDRESS,
                 LocalDateTime.of(2022, 12, 1, 18, 0),
-                Integer.parseInt(VALID_LESSON_DURATION_HOURS),
-                Integer.parseInt(VALID_LESSON_DURATION_MINUTES)
-        );
+                2, 30
+        ); // TODO: make constants for 2 hours and 30 minutes
+
+
 
         assertParseSuccess(parser, LESSON_NAME_DESC_TRIAL_LESSON + LESSON_SUBJECT_DESC_BIOLOGY
                 + LESSON_ADDRESS_DESC_AMK + LESSON_DATE_DESC + LESSON_START_TIME_DESC_6PM
