@@ -109,6 +109,21 @@ public class UniqueInterviewListTest {
     }
 
     @Test
+    public void setInterview_hasSameCandidate_throwsDuplicateCandidateException() {
+        uniqueInterviewList.add(INTERVIEW_ALICE);
+        assertThrows(DuplicateCandidateException.class, () ->
+                uniqueInterviewList.setInterview(INTERVIEW_ALICE, INTERVIEW_ALICE));
+    }
+
+    @Test
+    public void setInterview_hasConflictingInterview_throwsConflictingInterviewException() {
+        uniqueInterviewList.add(INTERVIEW_ALICE);
+        uniqueInterviewList.add(INTERVIEW_AMY_TYPICAL);
+        assertThrows(ConflictingInterviewException.class, () ->
+                uniqueInterviewList.setInterview(INTERVIEW_ALICE, INTERVIEW_BOB_TYPICAL));
+    }
+
+    @Test
     public void setInterviews_nulluniqueInterviewList_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueInterviewList.setInterviews((UniqueInterviewList) null));
     }

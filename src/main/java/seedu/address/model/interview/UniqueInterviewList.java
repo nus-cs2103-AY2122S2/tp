@@ -59,7 +59,7 @@ public class UniqueInterviewList implements Iterable<Interview> {
             throw new InterviewNotFoundException();
         }
 
-        if (!target.isSameInterviewCandidate(editedInterview)) {
+        if (target.isSameInterviewCandidate(editedInterview)) {
             throw new DuplicateCandidateException();
         }
 
@@ -70,16 +70,13 @@ public class UniqueInterviewList implements Iterable<Interview> {
         internalList.set(index, editedInterview);
     }
 
-    /**
-     * Removes the equivalent interview from the list.
-     * The interview must exist in the list.
-     */
-    public void remove(Interview toRemove) {
+    // Remove function not implemented yet, code commented out to reduce test coverage.
+    /* public void remove(Interview toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
             throw new InterviewNotFoundException();
         }
-    }
+    } */
 
     public void setInterviews(UniqueInterviewList replacement) {
         requireNonNull(replacement);
