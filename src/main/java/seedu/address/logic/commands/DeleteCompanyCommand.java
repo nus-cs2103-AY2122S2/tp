@@ -15,7 +15,7 @@ import seedu.address.model.entry.Company;
  */
 public class DeleteCompanyCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete_company";
+    public static final String COMMAND_WORD = "deletec";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the company identified by the index number used in the displayed company list.\n"
