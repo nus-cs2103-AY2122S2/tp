@@ -74,6 +74,6 @@ public class JsonInterviewScheduleStorage implements InterviewScheduleStorage {
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableInterviewSchedule(InterviewList), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableInterviewSchedule(interviewList), filePath);
     }
 }
