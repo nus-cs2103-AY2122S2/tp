@@ -1,5 +1,8 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.GroupBuilder;
@@ -14,6 +17,17 @@ public class ViewTaskCommandTest {
         // same value --> returns true
         ViewTaskCommand commandWithSameValues = new ViewTaskCommand(new GroupBuilder()
                 .withGroupName("NUS Fintech Society").build());
-    }
 
+        assertTrue(standardCommand.equals(commandWithSameValues));
+
+        // same object --> returns true
+        assertTrue(standardCommand.equals(standardCommand));
+
+        // null --> return false
+        assertFalse(standardCommand.equals(null));
+
+        // different group -> returns false
+        assertFalse(standardCommand.equals(new ViewTaskCommand(new GroupBuilder()
+                .withGroupName("NUS Data Science Society").build())));
+    }
 }
