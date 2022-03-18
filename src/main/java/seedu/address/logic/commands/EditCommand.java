@@ -23,6 +23,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.StudentId;
+import seedu.address.model.person.TaskList;
 import seedu.address.model.person.TelegramHandle;
 
 /**
@@ -138,7 +139,6 @@ public class EditCommand extends Command {
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setStudentId(toCopy.studentId);
@@ -203,6 +203,7 @@ public class EditCommand extends Command {
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
         }
+
 
         @Override
         public boolean equals(Object other) {
