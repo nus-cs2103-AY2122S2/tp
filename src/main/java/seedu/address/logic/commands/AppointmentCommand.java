@@ -51,8 +51,7 @@ public class AppointmentCommand extends Command {
 
         Client clientToEdit = lastShownList.get(index.getZeroBased());
         Client editedClient = new Client(
-                clientToEdit.getName(), clientToEdit.getDescription(), clientToEdit.getPhone(), clientToEdit.getEmail(),
-                clientToEdit.getAddress(), clientToEdit.getRemark(), appointment, clientToEdit.getTags()
+                clientToEdit.getName(), clientToEdit.getPhone(), appointment, clientToEdit.getTags()
         );
 
         model.setClient(clientToEdit, editedClient);

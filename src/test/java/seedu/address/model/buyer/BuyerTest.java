@@ -5,8 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -40,8 +38,8 @@ public class BuyerTest {
         assertFalse(YUQI.isSameclient(null));
 
         // same name, all other attributes different -> returns true
-        Buyer editedYuqi = new BuyerBuilder(YUQI).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                    .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+        Buyer editedYuqi = new BuyerBuilder(YUQI).withPhone(VALID_PHONE_BOB)
+                    .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(YUQI.isSameclient(editedYuqi));
 
         // different name, all other attributes same -> returns false
@@ -82,14 +80,6 @@ public class BuyerTest {
 
         // different phone -> returns false
         editedYuqi = new BuyerBuilder(YUQI).withPhone(VALID_PHONE_BOB).build();
-        assertNotEquals(YUQI, editedYuqi);
-
-        // different email -> returns false
-        editedYuqi = new BuyerBuilder(YUQI).withEmail(VALID_EMAIL_BOB).build();
-        assertNotEquals(YUQI, editedYuqi);
-
-        // different address -> returns false
-        editedYuqi = new BuyerBuilder(YUQI).withAddress(VALID_ADDRESS_BOB).build();
         assertNotEquals(YUQI, editedYuqi);
 
         // different tags -> returns false
