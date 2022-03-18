@@ -131,15 +131,15 @@ public enum CommandType {
 
         switch (viewCommandType) {
         case CONTACT:
-            return new DeleteContactCommandParser().parse(arguments);
+            throw new ParseException("Contact: WIP");
         case MEDICAL:
-            return new DeleteMedicalCommandParser().parse(arguments);
+            throw new ParseException("Medical: WIP");
         case CONSULTATION:
             return new DeleteConsultationCommandParser().parse(arguments);
         case PRESCRIPTION:
             return new DeletePrescriptionCommandParser().parse(arguments);
         case TEST:
-            return new DeleteTestResultCommandParser().parse(arguments);
+            throw new ParseException("Test: WIP");
         default:
             return new DeleteCommandParser().parse(arguments);
         }
