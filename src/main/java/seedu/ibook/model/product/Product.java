@@ -2,6 +2,7 @@ package seedu.ibook.model.product;
 
 import static seedu.ibook.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.List;
 import java.util.Objects;
 
 import seedu.ibook.model.product.item.Item;
@@ -31,6 +32,18 @@ public class Product {
         this.category = category;
         this.description = description;
         this.price = price;
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Product(Name name, Category category, Description description, Price price, List<Item> items) {
+        requireAllNonNull(name, category, description, price);
+        this.name = name;
+        this.category = category;
+        this.description = description;
+        this.price = price;
+        this.items.setItems(items);
     }
 
     public Name getName() {

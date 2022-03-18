@@ -41,8 +41,6 @@ public class ProductUtil {
             name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getCategory().ifPresent(
             category -> sb.append(PREFIX_CATEGORY).append(category.fullCategoryName).append(" "));
-        descriptor.getExpiryDate().ifPresent(
-            expiryDate -> sb.append(PREFIX_EXPIRY_DATE).append(expiryDate.toString()).append(" "));
         descriptor.getDescription().ifPresent(
             description -> sb.append(PREFIX_DESCRIPTION).append(description).append(" "));
         descriptor.getPrice().ifPresent(

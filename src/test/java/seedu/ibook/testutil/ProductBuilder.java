@@ -13,13 +13,11 @@ public class ProductBuilder {
 
     public static final String DEFAULT_NAME = "Maggie Mee";
     public static final String DEFAULT_CATEGORY = "Noodles";
-    public static final String DEFAULT_EXPIRY_DATE = "2022-12-13";
     public static final String DEFAULT_DESCRIPTION = "Delicious noodles";
     public static final String DEFAULT_PRICE = "1.99";
 
     public static final Name WILDCARD_NAME = Name.WILD_NAME;
     public static final Category WILDCARD_CATEGORY = Category.WILD_CATEGORY;
-    public static final ExpiryDate WILDCARD_EXPIRY_DATE = ExpiryDate.WILD_EXPIRY_DATE;
     public static final Description WILDCARD_DESCRIPTION = Description.WILD_DESCRIPTION;
     public static final Price WILDCARD_PRICE = Price.WILD_PRICE;
 
@@ -90,7 +88,6 @@ public class ProductBuilder {
     public ProductBuilder toWildProduct() {
         name = WILDCARD_NAME;
         category = WILDCARD_CATEGORY;
-        expiryDate = WILDCARD_EXPIRY_DATE;
         description = WILDCARD_DESCRIPTION;
         price = WILDCARD_PRICE;
         return this;

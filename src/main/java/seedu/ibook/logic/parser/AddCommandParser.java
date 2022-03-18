@@ -3,7 +3,6 @@ package seedu.ibook.logic.parser;
 import static seedu.ibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.ibook.logic.parser.CliSyntax.PREFIX_EXPIRY_DATE;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_PRICE;
 
@@ -30,11 +29,11 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_CATEGORY, PREFIX_EXPIRY_DATE, PREFIX_DESCRIPTION,
+            ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_CATEGORY, PREFIX_DESCRIPTION,
                 PREFIX_PRICE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_EXPIRY_DATE, PREFIX_DESCRIPTION,
-            PREFIX_PRICE) || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DESCRIPTION, PREFIX_PRICE)
+            || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 

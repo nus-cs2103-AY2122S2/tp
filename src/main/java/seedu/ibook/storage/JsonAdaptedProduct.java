@@ -1,5 +1,10 @@
 package seedu.ibook.storage;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -9,6 +14,8 @@ import seedu.ibook.model.product.Description;
 import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Price;
 import seedu.ibook.model.product.Product;
+import seedu.ibook.model.product.item.Item;
+import seedu.ibook.model.product.item.UniqueItemList;
 
 /**
  * Jackson-friendly version of {@link Product}.
@@ -21,6 +28,7 @@ class JsonAdaptedProduct {
     private final String category;
     private final String description;
     private final String price;
+    private final List<JsonAdaptedItem> items = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedProduct} with the given product details.
@@ -29,11 +37,15 @@ class JsonAdaptedProduct {
     public JsonAdaptedProduct(@JsonProperty("name") String name,
                               @JsonProperty("category") String category,
                               @JsonProperty("description") String description,
-                              @JsonProperty("price") String price) {
+                              @JsonProperty("price") String price,
+                              @JsonProperty("items") List<JsonAdaptedItem> items) {
         this.name = name;
         this.category = category;
         this.description = description;
         this.price = price;
+        if (items != null) {
+            this.items.addAll(items);
+        }
     }
 
     /**
@@ -44,6 +56,9 @@ class JsonAdaptedProduct {
         category = source.getCategory().fullCategoryName;
         description = source.getDescription().fullDescription;
         price = source.getPrice().price.toString();
+        items.addAll(StreamSupport.stream(source.getItems().spliterator(), false)
+            .map(JsonAdaptedItem::new)
+            .collect(Collectors.toList()));
     }
 
     /**
@@ -52,6 +67,11 @@ class JsonAdaptedProduct {
      * @throws IllegalValueException if there were any data constraints violated in the adapted product.
      */
     public Product toModelType() throws IllegalValueException {
+        final List<Item> productItems = new ArrayList<>();
+        for (JsonAdaptedItem item : items) {
+            productItems.add(item.toModelType());
+        }
+
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -85,6 +105,9 @@ class JsonAdaptedProduct {
             throw new IllegalValueException(Price.MESSAGE_CONSTRAINTS);
         }
         final Price modelPrice = new Price(price);
+
+        final UniqueItemList modelItems = new UniqueItemList();
+        modelItems.setItems(productItems);
 
         return new Product(modelName, modelCategory, modelDescription, modelPrice);
     }

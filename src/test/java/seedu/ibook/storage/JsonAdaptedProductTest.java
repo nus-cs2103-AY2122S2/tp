@@ -35,7 +35,7 @@ public class JsonAdaptedProductTest {
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedProduct product =
-                new JsonAdaptedProduct(INVALID_NAME, VALID_CATEGORY, VALID_DESCRIPTION, VALID_PRICE);
+                new JsonAdaptedProduct(INVALID_NAME, VALID_CATEGORY, VALID_DESCRIPTION, VALID_PRICE, null);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, product::toModelType);
     }
@@ -43,7 +43,7 @@ public class JsonAdaptedProductTest {
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
         JsonAdaptedProduct product =
-                new JsonAdaptedProduct(null, VALID_CATEGORY, VALID_DESCRIPTION, VALID_PRICE);
+                new JsonAdaptedProduct(null, VALID_CATEGORY, VALID_DESCRIPTION, VALID_PRICE, null);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, product::toModelType);
     }
@@ -51,7 +51,7 @@ public class JsonAdaptedProductTest {
     @Test
     public void toModelType_invalidCategory_throwsIllegalValueException() {
         JsonAdaptedProduct product =
-                new JsonAdaptedProduct(VALID_NAME, INVALID_CATEGORY, VALID_DESCRIPTION, VALID_PRICE);
+                new JsonAdaptedProduct(VALID_NAME, INVALID_CATEGORY, VALID_DESCRIPTION, VALID_PRICE, null);
         String expectedMessage = Category.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, product::toModelType);
     }
@@ -59,7 +59,7 @@ public class JsonAdaptedProductTest {
     @Test
     public void toModelType_nullCategory_throwsIllegalValueException() {
         JsonAdaptedProduct product =
-                new JsonAdaptedProduct(VALID_NAME, null, VALID_DESCRIPTION, VALID_PRICE);
+                new JsonAdaptedProduct(VALID_NAME, null, VALID_DESCRIPTION, VALID_PRICE, null);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Category.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, product::toModelType);
     }
@@ -67,7 +67,7 @@ public class JsonAdaptedProductTest {
     @Test
     public void toModelType_invalidDescription_throwsIllegalValueException() {
         JsonAdaptedProduct product =
-                new JsonAdaptedProduct(VALID_NAME, VALID_CATEGORY, INVALID_DESCRIPTION, VALID_PRICE);
+                new JsonAdaptedProduct(VALID_NAME, VALID_CATEGORY, INVALID_DESCRIPTION, VALID_PRICE, null);
         String expectedMessage = Description.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, product::toModelType);
     }
@@ -75,7 +75,7 @@ public class JsonAdaptedProductTest {
     @Test
     public void toModelType_nullDescription_throwsIllegalValueException() {
         JsonAdaptedProduct product =
-                new JsonAdaptedProduct(VALID_NAME, VALID_CATEGORY, null, VALID_PRICE);
+                new JsonAdaptedProduct(VALID_NAME, VALID_CATEGORY, null, VALID_PRICE, null);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, product::toModelType);
     }
@@ -83,7 +83,7 @@ public class JsonAdaptedProductTest {
     @Test
     public void toModelType_invalidPrice_throwsIllegalValueException() {
         JsonAdaptedProduct product =
-                new JsonAdaptedProduct(VALID_NAME, VALID_CATEGORY, VALID_DESCRIPTION, INVALID_PRICE);
+                new JsonAdaptedProduct(VALID_NAME, VALID_CATEGORY, VALID_DESCRIPTION, INVALID_PRICE, null);
         String expectedMessage = Price.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, product::toModelType);
     }
@@ -91,7 +91,7 @@ public class JsonAdaptedProductTest {
     @Test
     public void toModelType_nullPrice_throwsIllegalValueException() {
         JsonAdaptedProduct product =
-                new JsonAdaptedProduct(VALID_NAME, VALID_CATEGORY, VALID_DESCRIPTION, null);
+                new JsonAdaptedProduct(VALID_NAME, VALID_CATEGORY, VALID_DESCRIPTION, null, null);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Price.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, product::toModelType);
     }
