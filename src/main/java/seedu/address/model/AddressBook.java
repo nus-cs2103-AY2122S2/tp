@@ -96,6 +96,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void addPrescription(Prescription p) {
         prescriptions.add(p);
     }
+    public void removePrescription(Prescription key) {
+        prescriptions.remove(key);
+    }
 
     /**
      * Returns true if a prescription with the same identity as {@code prescription} exists in the address book.

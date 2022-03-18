@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandType.parseAddCommandType;
+import static seedu.address.logic.commands.CommandType.parseDeleteCommandType;
 import static seedu.address.logic.commands.CommandType.parseViewCommandType;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
@@ -17,7 +18,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -59,7 +60,7 @@ public class AddressBookParser {
             return new EditCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+            return parseDeleteCommandType(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
@@ -67,11 +68,11 @@ public class AddressBookParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
+        case ViewCommand.COMMAND_WORD:
             if (argMultimap.getValue(PREFIX_TYPE).isPresent()) {
                 return parseViewCommandType(argMultimap.getValue(PREFIX_TYPE).get(), arguments);
             }
-            return new ListCommand();
+            return new ViewCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
