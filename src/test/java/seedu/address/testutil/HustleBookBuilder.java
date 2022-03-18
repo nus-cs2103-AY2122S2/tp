@@ -4,7 +4,7 @@ import seedu.address.model.HustleBook;
 import seedu.address.model.person.Person;
 
 /**
- * A utility class to help with building Addressbook objects.
+ * A utility class to help with building HustleBook objects.
  * Example usage: <br>
  *     {@code HustleBook ab = new HustleBookBuilder().withPerson("John", "Doe").build();}
  */
