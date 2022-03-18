@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -27,5 +29,15 @@ class DeleteFilteredCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs());
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    void equals() {
+        DeleteFilteredCommand command = new DeleteFilteredCommand();
+        DeleteFilteredCommand otherCommand = new DeleteFilteredCommand();
+
+        assertTrue(command.equals(command));
+
+        assertFalse(command.equals(otherCommand));
     }
 }
