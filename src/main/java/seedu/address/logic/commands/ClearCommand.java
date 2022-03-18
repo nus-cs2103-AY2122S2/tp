@@ -6,7 +6,7 @@ import seedu.address.model.HustleBook;
 import seedu.address.model.Model;
 
 /**
- * Clears the address book.
+ * Clears the hustle book.
  */
 public class ClearCommand extends Command {
 
@@ -14,7 +14,7 @@ public class ClearCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Clears all persons in the program.";
 
-    public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
+    public static final String MESSAGE_SUCCESS = "Hustle book has been cleared!";
 
 
     @Override

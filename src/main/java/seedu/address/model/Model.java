@@ -36,17 +36,17 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' hustle book file path.
      */
     Path getHustleBookFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' hustle book file path.
      */
     void setHustleBookFilePath(Path hustleBookFilePath);
 
     /**
-     * Replaces address book data with the data in {@code hustleBook}.
+     * Replaces hustle book data with the data in {@code hustleBook}.
      */
     void setHustleBook(ReadOnlyHustleBook hustleBook);
 
@@ -54,32 +54,32 @@ public interface Model {
     ReadOnlyHustleBook getHustleBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same identity as {@code person} exists in the hustle book.
      */
     boolean hasPerson(Person person);
 
     /**
      * Deletes the given person.
-     * The person must exist in the address book.
+     * The person must exist in the hustle book.
      */
     void deletePerson(Person target);
 
     /**
      * Flags the given person.
-     * The person must exist in the address book.
+     * The person must exist in the hustle book.
      */
     void flagPerson(Person target, Flag flag);
 
     /**
      * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * {@code person} must not already exist in the hustle book.
      */
     void addPerson(Person person);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * {@code target} must exist in the hustle book.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in the hustle book.
      */
     void setPerson(Person target, Person editedPerson);
 

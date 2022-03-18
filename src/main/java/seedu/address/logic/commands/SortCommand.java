@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.model.Model;
 
 /**
- * Sorts all persons in the address book according to whether they are flagged and prevDateMet.
+ * Sorts all persons in the hustle book according to whether they are flagged and prevDateMet.
  */
 public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";

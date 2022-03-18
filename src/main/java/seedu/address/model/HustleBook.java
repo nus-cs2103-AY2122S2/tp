@@ -63,7 +63,7 @@ public class HustleBook implements ReadOnlyHustleBook {
     //// person-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same identity as {@code person} exists in the hustle book.
      */
     public boolean hasPerson(Person person) {
         requireNonNull(person);
@@ -71,8 +71,8 @@ public class HustleBook implements ReadOnlyHustleBook {
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds a person to the hustle book.
+     * The person must not already exist in the hustle book.
      */
     public void addPerson(Person p) {
         persons.add(p);
@@ -80,8 +80,8 @@ public class HustleBook implements ReadOnlyHustleBook {
 
     /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * {@code target} must exist in the hustle book.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in the hustle book.
      */
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
@@ -91,7 +91,7 @@ public class HustleBook implements ReadOnlyHustleBook {
 
     /**
      * Replaces the flag of the given person {@code target} in the list with {@code flag}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in the hustle book.
      */
     public void flagPerson(Person target, Flag flag) {
         requireNonNull(flag);
@@ -101,14 +101,14 @@ public class HustleBook implements ReadOnlyHustleBook {
 
     /**
      * Removes {@code key} from this {@code HustleBook}.
-     * {@code key} must exist in the address book.
+     * {@code key} must exist in the hustle book.
      */
     public void removePerson(Person key) {
         persons.remove(key);
     }
 
     /**
-     * Sorts the persons in the address book.
+     * Sorts the persons in the hustle book.
      */
     public void sortPersonByDate() {
         persons.sortByDate();

@@ -41,7 +41,7 @@ class JsonSerializableHustleBook {
     }
 
     /**
-     * Converts this address book into the model's {@code HustleBook} object.
+     * Converts this hustle book into the model's {@code HustleBook} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */

@@ -15,7 +15,7 @@ import seedu.address.model.person.Flag;
 import seedu.address.model.person.Person;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the hustle book data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -30,7 +30,7 @@ public class ModelManager implements Model {
     public ModelManager(ReadOnlyHustleBook hustleBook, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(hustleBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + hustleBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with hustle book: " + hustleBook + " and user prefs " + userPrefs);
 
         this.hustleBook = new HustleBook(hustleBook);
         this.userPrefs = new UserPrefs(userPrefs);
