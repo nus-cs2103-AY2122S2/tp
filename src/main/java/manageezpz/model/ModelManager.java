@@ -199,6 +199,9 @@ public class ModelManager implements Model {
         addressBook.findTask(task);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void updateFilteredTaskList(Predicate<Task> predicate) {
         requireNonNull(predicate);
