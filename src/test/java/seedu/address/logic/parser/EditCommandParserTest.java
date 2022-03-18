@@ -24,7 +24,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PROPERTY_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PROPERTY_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_USERTYPE_BUYER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_USERTYPE_SELLER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROPERTY;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -43,7 +42,6 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.property.Property;
-import seedu.address.model.util.UserTypeUtil;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 public class EditCommandParserTest {
@@ -206,16 +204,4 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
-/* TODO - will need to edit a person from having a property to having a preference & vice versa, user type will
-   change accordingly */
-//    @Test
-//    public void parse_changeUserType_success() {
-//        Index targetIndex = INDEX_THIRD_PERSON;
-//        String userInput = targetIndex.getOneBased() + USERTYPE_DESC_SELLER;
-//
-//        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withUserType(VALID_USERTYPE_SELLER).build();
-//        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
-//
-//        assertParseSuccess(parser, userInput, expectedCommand);
-//    }
 }

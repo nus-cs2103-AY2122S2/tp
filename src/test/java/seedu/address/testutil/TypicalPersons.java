@@ -1,7 +1,5 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.PREFERENCE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.PROPERTY_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
@@ -11,9 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PREFERENCE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PROPERTY_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_USERTYPE_BUYER;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_USERTYPE_SELLER;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -60,7 +56,6 @@ public class TypicalPersons {
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withUserType(VALID_USERTYPE_BUYER)
             .withPreference(VALID_PREFERENCE_BOB).build();
-            //.withPreference().withProperties(VALID_PROPERTY_AMY).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withUserType(VALID_USERTYPE_BUYER)
             .withPreference(VALID_PREFERENCE_BOB).build();

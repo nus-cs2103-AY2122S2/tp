@@ -51,6 +51,7 @@ public class CommandTestUtil {
     public static final String VALID_HIGHPRICE_BOB = "$400000";
     public static final String VALID_PREFERENCE_BOB = VALID_REGION_AMY + "," + VALID_SIZE_AMY + ","
             + VALID_LOWPRICE_BOB + "," + VALID_HIGHPRICE_BOB;
+    public static final String VALID_PREFERENCE_ALICE = "West,4-room,$100000,$200000";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -60,8 +61,6 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
-//    public static final String USERTYPE_DESC_SELLER = " " + PREFIX_USERTYPE + VALID_USERTYPE_SELLER;
-//    public static final String USERTYPE_DESC_BUYER = " " + PREFIX_USERTYPE + VALID_USERTYPE_BUYER;
     public static final String PROPERTY_DESC_AMY = " " + PREFIX_PROPERTY + VALID_PROPERTY_AMY;
     public static final String PROPERTY_DESC_BOB = " " + PREFIX_PROPERTY + VALID_PROPERTY_BOB;
     public static final String PREFERENCE_DESC_BOB = " " + PREFIX_PREFERENCE + VALID_PREFERENCE_BOB;
@@ -70,7 +69,6 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
-//    public static final String INVALID_USERTYPE_DESC = " BUYER"; // 'BUYER' not allowed in usertype
     public static final String INVALID_PROPERTY_DESC =
             " " + PREFIX_PROPERTY + "North Block 123 1-room $300000"; // missing comma between fields
 

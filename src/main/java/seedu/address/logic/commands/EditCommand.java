@@ -104,13 +104,18 @@ public class EditCommand extends Command {
         //Favourite status for a client will remain unchanged when edited if not, the FavouriteCommand is redundant.
         Favourite noChangeFavourite = editPersonDescriptor.getFavourite().orElse(personToEdit.getFavourite());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Property> updatedProperties = editPersonDescriptor.getProperties().orElse(personToEdit.getProperties());
+        Set<Property> updatedProperties = editPersonDescriptor.getProperties().orElse(new HashSet<>());
         // retrieve Preference of the edited person
         Optional<Preference> updatedPreference = editPersonDescriptor.getPreference();
         UserType updatedUserType = editPersonDescriptor.getUserType().orElse(personToEdit.getUserType());
 
         return new Person(updatedName, updatedPhone, updatedEmail, noChangeFavourite, updatedAddress, updatedProperties,
                 updatedPreference, updatedUserType);
+    }
+
+    @Override
+    public String toString() {
+        return index.toString() + editPersonDescriptor.toString();
     }
 
     @Override
@@ -219,7 +224,7 @@ public class EditCommand extends Command {
         }
 
         public Optional<Preference> getPreference() {
-            return Optional.ofNullable(preference); //TODO
+            return Optional.ofNullable(preference);
         }
 
         public void setPreference(Preference preference) {

@@ -8,9 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PREFERENCE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.PROPERTY_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_USERTYPE_BUYER;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_USERTYPE_SELLER;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.AMY;
 
