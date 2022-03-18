@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
@@ -13,9 +14,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-//import seedu.address.model.person.Cca;
-//import seedu.address.model.person.Education;
-//import seedu.address.model.person.Internship;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
@@ -30,9 +28,9 @@ import seedu.address.model.tag.Tag;
 
 public class TagCommandTest {
     private static final String EDUCATION_STRING = "NUS";
-    private static final String INTERNSHIP_STRING = "Twitter";
-    private static final String MODULE_STRING = "CS2040S";
-    private static final String CCA_STRING = "Greyhats";
+    private static final String INTERNSHIP_STRING = "Facebook";
+    private static final String MODULE_STRING = "CS1101S";
+    private static final String CCA_STRING = "Basketball";
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private final List<Tag> emptyList = new ArrayList<>();
     private final List<Tag> eduList = Arrays.asList(new Education(EDUCATION_STRING));
@@ -57,86 +55,85 @@ public class TagCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredListEduMissing_success() {
-        Person personToTag1 = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToTag = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
 
         TagCommand tagCommandEduEmpty = new TagCommand(
-                INDEX_FIRST_PERSON, emptyList, internshipList, moduleList, ccaList);
+                INDEX_THIRD_PERSON, emptyList, internshipList, moduleList, ccaList);
 
         String expectedMessageEdu = String.format(TagCommand.MESSAGE_ARGUMENTS,
-                personToTag1.getName(),
+                personToTag.getName(),
                 "[]", "[" + INTERNSHIP_STRING + "]", "[" + MODULE_STRING + "]", "[" + CCA_STRING + "]");
 
         Person editedPersonEdu = new Person(
-                personToTag1.getName(), personToTag1.getPhone(), personToTag1.getEmail(), personToTag1.getAddress(),
+                personToTag.getName(), personToTag.getPhone(), personToTag.getEmail(), personToTag.getAddress(),
                 emptyList, internshipList, moduleList, ccaList);
 
         ModelManager expectedModelEduEmpty = new ModelManager(model.getAddressBook(), new UserPrefs());
 
-        expectedModelEduEmpty.setPerson(personToTag1, editedPersonEdu);
+        expectedModelEduEmpty.setPerson(personToTag, editedPersonEdu);
 
         assertCommandSuccess(tagCommandEduEmpty, model, expectedMessageEdu, expectedModelEduEmpty);
     }
 
     @Test
     public void execute_validIndexUnfilteredListInternshipMissing_success() {
-        Person personToTag1 = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToTag = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
 
         TagCommand tagCommandInternshipEmpty = new TagCommand(
-                INDEX_FIRST_PERSON, eduList, emptyList, moduleList, ccaList);
+                INDEX_THIRD_PERSON, eduList, emptyList, moduleList, ccaList);
 
         String expectedMessageInternship = String.format(TagCommand.MESSAGE_ARGUMENTS,
-                personToTag1.getName(),
+                personToTag.getName(),
                 "[" + EDUCATION_STRING + "]", "[]", "[" + MODULE_STRING + "]", "[" + CCA_STRING + "]");
 
         Person editedPersonInternship = new Person(
-                personToTag1.getName(), personToTag1.getPhone(), personToTag1.getEmail(), personToTag1.getAddress(),
+                personToTag.getName(), personToTag.getPhone(), personToTag.getEmail(), personToTag.getAddress(),
                 eduList, emptyList, moduleList, ccaList);
 
         ModelManager expectedModelInternshipEmpty = new ModelManager(model.getAddressBook(), new UserPrefs());
 
-        expectedModelInternshipEmpty.setPerson(personToTag1, editedPersonInternship);
+        expectedModelInternshipEmpty.setPerson(personToTag, editedPersonInternship);
 
         assertCommandSuccess(tagCommandInternshipEmpty, model, expectedMessageInternship, expectedModelInternshipEmpty);
     }
 
     @Test
     public void execute_validIndexUnfilteredListModuleMissing_success() {
-        Person personToTag1 = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToTag = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
 
         TagCommand tagCommandModuleEmpty = new TagCommand(
-                INDEX_FIRST_PERSON, eduList, internshipList, emptyList, ccaList);
-
+                INDEX_THIRD_PERSON, eduList, internshipList, emptyList, ccaList);
         String expectedMessageModule = String.format(TagCommand.MESSAGE_ARGUMENTS,
-                personToTag1.getName(),
+                personToTag.getName(),
                 "[" + EDUCATION_STRING + "]", "[" + INTERNSHIP_STRING + "]", "[]", "[" + CCA_STRING + "]");
 
         Person editedPersonModule = new Person(
-                personToTag1.getName(), personToTag1.getPhone(), personToTag1.getEmail(), personToTag1.getAddress(),
+                personToTag.getName(), personToTag.getPhone(), personToTag.getEmail(), personToTag.getAddress(),
                 eduList, internshipList, emptyList, ccaList);
 
         ModelManager expectedModelModuleEmpty = new ModelManager(model.getAddressBook(), new UserPrefs());
 
-        expectedModelModuleEmpty.setPerson(personToTag1, editedPersonModule);
+        expectedModelModuleEmpty.setPerson(personToTag, editedPersonModule);
 
         assertCommandSuccess(tagCommandModuleEmpty, model, expectedMessageModule, expectedModelModuleEmpty);
     }
 
     @Test
     public void execute_validIndexUnfilteredListCcaMissing_success() {
-        Person personToTag1 = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToTag = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
         TagCommand tagCommandCcaEmpty = new TagCommand(
-                INDEX_FIRST_PERSON, eduList, internshipList, moduleList, emptyList);
+                INDEX_THIRD_PERSON, eduList, internshipList, moduleList, emptyList);
 
         String expectedMessageCca = String.format(TagCommand.MESSAGE_ARGUMENTS,
-                personToTag1.getName(),
+                personToTag.getName(),
                 "[" + EDUCATION_STRING + "]", "[" + INTERNSHIP_STRING + "]", "[" + MODULE_STRING + "]", "[]");
 
         Person editedPersonCca = new Person(
-                personToTag1.getName(), personToTag1.getPhone(), personToTag1.getEmail(), personToTag1.getAddress(),
+                personToTag.getName(), personToTag.getPhone(), personToTag.getEmail(), personToTag.getAddress(),
                 eduList, internshipList, moduleList, emptyList);
 
         ModelManager expectedModelCcaEmpty = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModelCcaEmpty.setPerson(personToTag1, editedPersonCca);
+        expectedModelCcaEmpty.setPerson(personToTag, editedPersonCca);
 
         assertCommandSuccess(tagCommandCcaEmpty, model, expectedMessageCca, expectedModelCcaEmpty);
     }
@@ -159,7 +156,7 @@ public class TagCommandTest {
         // null -> returns false
         assertFalse(moduleTag.equals(null));
 
-        // different person -> returns false
+        // different tag -> returns false
         assertFalse(moduleTag.equals(moduleTag2));
     }
 }

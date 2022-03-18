@@ -6,7 +6,7 @@ title: User Guide
 NUSocials is a **desktop app for university students to maintain a professional contact list, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). The value of the app is to facilitate a convenient way for university students to manage their professional networks with fellow acquaintances.
 
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -24,23 +24,25 @@ NUSocials is a **desktop app for university students to maintain a professional 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+    * **`list`** : Lists all contacts.
 
-   * **`add`**`n/fred p/99998888 e/fred@example.com a/fred street, block 123, #01-01` : Adds a contact named `fred` to the Address Book.
+    * **`add`**`n/fred p/99998888 e/fred@example.com a/fred street, block 123, #01-01` : Adds a contact named `fred` to the Address Book.
 
-   * **`tag`** `2 edu/computer science m/CS2040S` : Tags the 2nd contact shown in the current list with a Computer Science degree and CS2040S module.
+    * **`tag`** `2 edu/computer science m/CS2040S` : Tags the 2nd contact shown in the current list with a Computer Science degree and CS2040S module.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
-    
-   * **`delete`**`3 5` : Deletes the 3rd and 5th contact shown in the current list.
-    
-   * **`find`**`n/fred` : Finds persons that match the name 'fred'.
-    
-   * **`find -s`**`n/fred m/cs2040s edu/computer science` : Finds persons that match the name 'fred' AND takes the module 'cs2040s' AND is studying 'computer science'.
+    * **`removetag`**`2 m/cs2100 i/Shopee` : Removes the specified tags of the 2nd contact shown in the current list.
 
-   * **`clear`** : Deletes all contacts.
+    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
-   * **`exit`** : Exits the app.
+    * **`delete`**`3 5` : Deletes the 3rd and 5th contact shown in the current list.
+
+    * **`find`**`n/fred` : Finds persons that match the name 'fred'.
+
+    * **`find -s`**`n/fred m/cs2040s edu/computer science` : Finds persons that match the name 'fred' AND takes the module 'cs2040s' AND is studying 'computer science'.
+
+    * **`clear`** : Deletes all contacts.
+
+    * **`exit`** : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -63,7 +65,7 @@ NUSocials is a **desktop app for university students to maintain a professional 
 
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12345678 p/87654321`, onbly `p/87654321` will be taken.
-* 
+*
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
@@ -142,7 +144,7 @@ Format: `find [n/NAME]…​ [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…�
   e.g. `n/Hans m/cs2040s` will return `Hans`, `Bo Yang` (i.e. Bo Yang is tagged with cs2040s)
 
 Examples:
-* `find n/John` returns `john` 
+* `find n/John` returns `john`
 * `find i/Shopee m/cs2040s m/cs2030s` returns `Alex Yeoh` (i.e Alex Yeoh is tagged with Shopee), `David Li` (i.e. David Li is tagged with cs2040s, cs2030s)<br>
   ![result for 'find i/Shopee m/cs2040s cs2030s']()
 
@@ -163,7 +165,7 @@ Examples:
 * `find -s n/John Doe` returns `John Doe`
 * `find -s n/David Li m/cs2040s m/cs2030s` returns `David Li` (i.e. David Li is tagged with cs2040s, cs2030s)<br>
   ![result for 'find -s n/David Li m/cs2040s cs2030s']()
- 
+
 ### Deleting a person : `delete` [coming in V1.2]
 
 Deletes the specified person from the address book.
@@ -187,6 +189,19 @@ Alternate Format: `delete INDEX…​`
 
 Examples:
 * `list` followed by `delete 2 5 7` deletes the 2nd, 5th and 7th person in the address book.
+
+### Removing specific tags from person: `removetag` [coming in V1.2]
+Removes the specific tags of an existing contact.
+
+Format: `removetag INDEX [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`
+
+* Removes the tags from the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the prefixes must be provided.
+* If a prefix is used, the input after must not be blank.
+* Input tag values will be removed from the existing tags.
+
+Examples:
+* `removetag 1 i/abc-company m/CS2100 m/CS2030S` Removes the internship company and 2 modules tags from the 1st person.
 
 ### Clearing all entries : `clear`
 
@@ -230,11 +245,12 @@ _Details coming soon ..._
 Action | Format, Examples
 --------|------------------
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665`
-**Tag** | `tag INDEX [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`<br> e.g.,`tag 1 m/CS2105`
+**Tag** | `tag INDEX [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`<br> e.g.,`tag 1 m/CS2105 m/CS2106`
+**RemoveTag** | `removetag INDEX [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​` <br> e.g.,`removetag 1 c/Bouldering m/CS2105 m/CS2106`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3` <br> `delete INDEX…​INDEX` <br> e.g. `delete 1 3 5`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`<br> e.g.,`edit 2 n/Fred e/fred111@example.com`
-**Find** | `find [n/NAME]…​ [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`<br> e.g., `find n/john edu/computer science`  
+**Find** | `find [n/NAME]…​ [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`<br> e.g., `find n/john edu/computer science`
 **Find -s** | `find -s [n/NAME]…​ [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`<br> e.g., `find -s n/john i/bytedance edu/computer science`
 **List** | `list`
 **Help** | `help`

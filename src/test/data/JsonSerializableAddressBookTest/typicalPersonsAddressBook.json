@@ -5,19 +5,19 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "educations": [],
-    "internships":[],
-    "modules": [],
-    "ccas": []
+    "educations": ["NUS"],
+    "internships":["Facebook"],
+    "modules": ["CS1101S"],
+    "ccas": ["Basketball"]
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
-    "educations": [],
-    "internships":[],
-    "modules": [],
-    "ccas": []
+    "educations": ["SMU"],
+    "internships":["Amazon"],
+    "modules": ["CS3243"],
+    "ccas": ["Football"]
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
