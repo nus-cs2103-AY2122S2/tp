@@ -19,8 +19,7 @@ public class Notes {
     public String value() {
         return notes;
     }
-
-
+    
     @Override
     public String toString() {
         return notes;
