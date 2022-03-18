@@ -22,7 +22,8 @@ public class AddContactCommand extends Command {
     public static final String COMMAND_WORD = "add";
     public static final CommandType COMMAND_TYPE = CommandType.CONTACT;
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a contact to patient in Medbook. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + PREFIX_TYPE + "contact"
+            + ": Adds a contact to patient in MedBook. "
             + "Parameters: "
             + PREFIX_TYPE + "contact "
             + PREFIX_NRIC + "OWNER_NRIC "
@@ -32,7 +33,8 @@ public class AddContactCommand extends Command {
             + PREFIX_ADDRESS + "ADDRESS "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TYPE + "contact "
-            + PREFIX_NAME + "John S Smith "
+            + PREFIX_NRIC + "S1234567L "
+            + PREFIX_NAME + "John S. Smith "
             + PREFIX_PHONE + "88888888 "
             + PREFIX_EMAIL + "johns@example.com "
             + PREFIX_ADDRESS + "21 Lower Kent Ridge Road, Singapore 119077 ";

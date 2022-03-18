@@ -10,11 +10,13 @@ import seedu.address.logic.parser.contact.AddContactCommandParser;
 import seedu.address.logic.parser.contact.ViewContactCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.medical.AddMedicalCommandParser;
+import seedu.address.logic.parser.medical.DeleteMedicalCommandParser;
 import seedu.address.logic.parser.medical.ViewMedicalCommandParser;
 import seedu.address.logic.parser.prescription.AddPrescriptionCommandParser;
 import seedu.address.logic.parser.prescription.DeletePrescriptionCommandParser;
 import seedu.address.logic.parser.prescription.ViewPrescriptionCommandParser;
 import seedu.address.logic.parser.testresult.AddTestResultCommandParser;
+import seedu.address.logic.parser.testresult.DeleteTestResultCommandParser;
 import seedu.address.logic.parser.testresult.ViewTestResultCommandParser;
 
 
@@ -122,7 +124,8 @@ public enum CommandType {
     }
 
     /**
-     * Returns command related to deleting information to patients in Medbook.
+     * Returns command related to deleting information to patients in MedBook.
+     *
      * @param arguments user input arguments
      * @return the command based on the user input
      */
@@ -133,13 +136,13 @@ public enum CommandType {
         case CONTACT:
             throw new ParseException("Contact: WIP");
         case MEDICAL:
-            throw new ParseException("Medical: WIP");
+            return new DeleteMedicalCommandParser().parse(arguments);
         case CONSULTATION:
             return new DeleteConsultationCommandParser().parse(arguments);
         case PRESCRIPTION:
             return new DeletePrescriptionCommandParser().parse(arguments);
         case TEST:
-            throw new ParseException("Test: WIP");
+            return new DeleteTestResultCommandParser().parse(arguments);
         default:
             return new DeleteCommandParser().parse(arguments);
         }

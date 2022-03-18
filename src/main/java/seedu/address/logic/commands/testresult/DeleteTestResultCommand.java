@@ -1,9 +1,6 @@
 package seedu.address.logic.commands.testresult;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import java.util.List;
 
@@ -24,15 +21,10 @@ public class DeleteTestResultCommand extends Command {
     public static final String COMMAND_WORD = "delete";
     public static final CommandType COMMAND_TYPE = CommandType.TEST;
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " "
-            + PREFIX_TYPE + "test "
-            + PREFIX_NRIC + "PATIENT_NRIC "
-            + PREFIX_INDEX + "INDEX"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " INDEX"
             + ": Deletes the test result identified by the index number used in the displayed test result list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_TYPE + "test "
-            + PREFIX_NRIC + "S1234567L "
-            + PREFIX_INDEX + "1";
+            + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_TEST_RESULT_SUCCESS = "Deleted Test Result: %1$s";
 

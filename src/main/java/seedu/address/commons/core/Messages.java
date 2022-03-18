@@ -19,5 +19,8 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_CONSULTATION = "Duplicate consultation found!";
     public static final String MESSAGE_INVALID_TEST_RESULT_DISPLAYED_INDEX =
             "The test result index provided is invalid";
+    public static final String MESSAGE_INVALID_MEDICAL_INFORMATION_INDEX =
+            "The medical information index provided is invalid";
+
 
 }
