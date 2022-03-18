@@ -154,15 +154,17 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 ### Filtering contacts: `filter`
-Filter student based on health statuses
+Filter student based on health statuses and/or faculties
 
-Format:`find HEALTH_STATUS`
+Format:`filter cs/HEALTH_STATUS f/FACULTY`
 
-* Returns a list of students with the given health status: `positive`, `negative`, `hrw`, `hrn`
+* Returns a list of students with the given health status: `positive`, `negative`, `hrn`
 * The search is case-insensitive. e.g `Positive` will match `positive`
 
 Examples of usage:
-* `find positive` returns all student that are tagged as covid-positive
+* `filter cs/positive` returns all students that are tagged as covid-positive
+* `filter f/soc` returns all students that are enrolled in the faculty SOC (School of Computing)
+* `filter cs/negative f/soc` returns all students that are tagged as covid-negative and enrolled in the faculty SOC (School of Computing)
 
 ### Saving
 Saving in the application is automatic. The data in the file will be saved accordingly whenever
