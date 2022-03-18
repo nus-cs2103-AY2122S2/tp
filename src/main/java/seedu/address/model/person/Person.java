@@ -291,11 +291,6 @@ public class Person implements Serializable {
             tags.forEach(builder::append);
         }
 
-        if (!transactions.isEmpty()) {
-            builder.append("; Transactions: ");
-            transactions.forEach(builder::append);
-        }
-
         return builder.toString();
     }
 }

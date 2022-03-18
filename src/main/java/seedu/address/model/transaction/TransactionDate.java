@@ -14,7 +14,11 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Guarantees: immutable; is valid as declared in {@link #isValid(String)}
  */
 public class TransactionDate extends TransactionField {
+
+    public static final String FIELD_NAME = "Transaction Date";
+
     public static final Prefix PREFIX = new Prefix("td/", true);
+
     public static final String MESSAGE_CONSTRAINTS =
             "Due date should be in YYYY-MM-DD format and must exist";
 
@@ -54,9 +58,13 @@ public class TransactionDate extends TransactionField {
         return value.toString();
     }
 
+    private String generateStringRep() {
+        return FIELD_NAME + ": " + this.value;
+    }
+
     @Override
     public String toString() {
-        return value.toString();
+        return generateStringRep();
     }
 
     @Override

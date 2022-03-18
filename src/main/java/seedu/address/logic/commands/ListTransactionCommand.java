@@ -22,7 +22,7 @@ public class ListTransactionCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_SUCCESS = "Listed all transactions from person: "
-            + "%s";
+            + "%1$s";
 
     private final Index index;
 

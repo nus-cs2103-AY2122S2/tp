@@ -6,7 +6,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import seedu.address.logic.parser.Prefix;
 
 public class Amount extends TransactionField {
+
+    public static final String FIELD_NAME = "Amount";
+
     public static final Prefix PREFIX = new Prefix("a/", true);
+
     public static final String MESSAGE_CONSTRAINT = "Transaction amount must be "
             + "numeric and the number specified "
             + "must be greater than 0 (zero)";
@@ -25,9 +29,13 @@ public class Amount extends TransactionField {
         this.value = Double.parseDouble(value);
     }
 
+    private String generateStringRep() {
+        return FIELD_NAME + ": " + this.value;
+    }
+
     @Override
     public String toString() {
-        return "" + this.value;
+        return generateStringRep();
     }
 
     @Override

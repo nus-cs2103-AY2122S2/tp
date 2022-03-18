@@ -11,8 +11,14 @@ import seedu.address.logic.parser.Prefix;
  * Is not required/optional.
  */
 public class Note extends TransactionField {
+
+    public static final String FIELD_NAME = "Note";
+
     public static final Prefix PREFIX = new Prefix("n/", false);
-    private final String note;
+
+    public static final String EMPTY_DUE_DATE = "";
+
+    private final String value;
 
     /**
      * Constructs the note of a transaction. consists
@@ -23,21 +29,25 @@ public class Note extends TransactionField {
     public Note(String note) {
         super(PREFIX);
         requireNonNull(note);
-        this.note = note;
+        this.value = note;
     }
 
     @Override
     public String getValue() {
-        return this.note;
+        return this.value;
+    }
+
+    private String generateStringRep() {
+        return FIELD_NAME + ": " + this.value;
     }
 
     @Override
     public String toString() {
-        return this.note;
+        return generateStringRep();
     }
 
     @Override
     public int hashCode() {
-        return this.note.hashCode();
+        return this.value.hashCode();
     }
 }
