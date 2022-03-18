@@ -16,10 +16,10 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.trackermon.commons.core.GuiSettings;
 import seedu.trackermon.logic.commands.exceptions.CommandException;
-import seedu.trackermon.model.ShowList;
 import seedu.trackermon.model.Model;
 import seedu.trackermon.model.ReadOnlyShowList;
 import seedu.trackermon.model.ReadOnlyUserPrefs;
+import seedu.trackermon.model.ShowList;
 import seedu.trackermon.model.show.Show;
 import seedu.trackermon.testutil.ShowBuilder;
 
@@ -47,8 +47,7 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(validShow);
         ModelStub modelStub = new ModelStubWithShow(validShow);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_SHOW,
-        () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_SHOW, () -> addCommand.execute(modelStub));
     }
 
     @Test

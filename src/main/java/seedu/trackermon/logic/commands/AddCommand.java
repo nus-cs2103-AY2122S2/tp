@@ -34,6 +34,7 @@ public class AddCommand extends Command {
 
     /**
      * Creates an AddCommand to add the specified {@code Show}
+     * @param show a show to add into the show list.
      */
     public AddCommand(Show show) {
         requireNonNull(show);

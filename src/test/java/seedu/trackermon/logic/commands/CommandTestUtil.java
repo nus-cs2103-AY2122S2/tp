@@ -2,6 +2,9 @@ package seedu.trackermon.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_STATUS;
+import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.trackermon.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -14,10 +17,9 @@ import seedu.trackermon.model.Model;
 import seedu.trackermon.model.ShowList;
 import seedu.trackermon.model.show.NameContainsKeywordsPredicate;
 import seedu.trackermon.model.show.Show;
+import seedu.trackermon.testutil.EditShowDescriptorBuilder;
 
-import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_STATUS;
-import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_TAG;
+
 
 /**
  * Contains helper methods for testing commands.
@@ -28,10 +30,11 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = " ";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final String VALID_NAME_YOU = "You";
+    public static final String VALID_NAME_WEATHERING_WITH_YOU = "Weathering with You";
     public static final String VALID_NAME_ALICE_IN_WONDERLAND = "Alice in WonderLand";
+    public static final String VALID_NAME_HIMYM = "HIMYM";
     public static final String VALID_NAME_GONE = "gone";
-    public static final String VALID_NAME_ME = "ME";
+    public static final String VALID_NAME_HANCOCK = "Hancock";
     public static final String VALID_STATUS_COMPLETED = "completed";
     public static final String VALID_STATUS_WATCHING = "watching";
     public static final String VALID_TAG_MOVIE = "movie";
@@ -51,6 +54,17 @@ public class CommandTestUtil {
     public static final String INVALID_STATUS_DESC = " "
             + PREFIX_STATUS + "Watch"; // Status have to be completed or watching
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+
+    public static final EditCommand.EditShowDescriptor DESC_ALICE_IN_WONDERLAND;
+    public static final EditCommand.EditShowDescriptor DESC_GONE;
+
+    static {
+        DESC_ALICE_IN_WONDERLAND = new EditShowDescriptorBuilder().withName(VALID_NAME_ALICE_IN_WONDERLAND)
+                .withStatus(VALID_STATUS_COMPLETED).withTags(VALID_TAG_MOVIE).build();
+        DESC_GONE = new EditShowDescriptorBuilder().withName(VALID_NAME_GONE)
+                .withStatus(VALID_STATUS_WATCHING).withTags(VALID_TAG_SERIES, VALID_TAG_HENTAI).build();
+    }
+
     /**
      * Executes the given {@code command}, confirms that <br>
      * - the returned {@link CommandResult} matches {@code expectedCommandResult} <br>

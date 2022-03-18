@@ -8,7 +8,7 @@ import seedu.trackermon.commons.exceptions.DataConversionException;
 import seedu.trackermon.model.ReadOnlyShowList;
 
 /**
- * Represents a storage for {@link seedu.trackermon.model.AddressBook}.
+ * Represents a storage for {@link seedu.trackermon.model.ShowList}.
  */
 public interface ShowListStorage {
 

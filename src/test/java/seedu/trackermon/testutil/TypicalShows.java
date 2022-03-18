@@ -1,7 +1,7 @@
 package seedu.trackermon.testutil;
 
-import static seedu.trackermon.logic.commands.CommandTestUtil.VALID_NAME_ME;
-import static seedu.trackermon.logic.commands.CommandTestUtil.VALID_NAME_YOU;
+import static seedu.trackermon.logic.commands.CommandTestUtil.VALID_NAME_HANCOCK;
+import static seedu.trackermon.logic.commands.CommandTestUtil.VALID_NAME_WEATHERING_WITH_YOU;
 import static seedu.trackermon.logic.commands.CommandTestUtil.VALID_STATUS_COMPLETED;
 import static seedu.trackermon.logic.commands.CommandTestUtil.VALID_STATUS_WATCHING;
 import static seedu.trackermon.logic.commands.CommandTestUtil.VALID_TAG_MOVIE;
@@ -26,13 +26,11 @@ public class TypicalShows {
             .withStatus("watching").withTags("Horror", "friends").build();
 
     // Manually added - Show's details found in {@code CommandTestUtil}
-    public static final Show YOU = new ShowBuilder().withName(VALID_NAME_YOU).withStatus(VALID_STATUS_COMPLETED)
-            .withTags(VALID_TAG_MOVIE).build();
+    public static final Show WEATHERING_WITH_YOU = new ShowBuilder().withName(VALID_NAME_WEATHERING_WITH_YOU)
+            .withStatus(VALID_STATUS_COMPLETED).withTags(VALID_TAG_MOVIE).build();
 
-    public static final Show ME = new ShowBuilder().withName(VALID_NAME_ME).withStatus(VALID_STATUS_WATCHING)
+    public static final Show HANCOCK = new ShowBuilder().withName(VALID_NAME_HANCOCK).withStatus(VALID_STATUS_WATCHING)
             .withTags(VALID_TAG_MOVIE, VALID_TAG_SERIES).build();
-
-    //public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalShows() {} // prevents instantiation
 
