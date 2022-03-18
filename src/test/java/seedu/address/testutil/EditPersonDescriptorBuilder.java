@@ -76,8 +76,8 @@ public class EditPersonDescriptorBuilder {
      * that we are building.
      */
     public EditPersonDescriptorBuilder withModules(String... modules) {
-        Set<Module> tagSet = Stream.of(modules).map(Module::new).collect(Collectors.toSet());
-        descriptor.setModules(tagSet);
+        Set<Module> moduleSet = Stream.of(modules).map(Module::new).collect(Collectors.toSet());
+        descriptor.setModules(moduleSet);
         return this;
     }
 

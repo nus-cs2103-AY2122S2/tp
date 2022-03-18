@@ -63,7 +63,7 @@ public class DeleteModuleCommandParser implements Parser<DeleteModuleCommand> {
             throw new ParseException(MESSAGE_EMPTY);
         }
 
-        Collection<String> tagSet = modules.size() == 1 && modules.contains("") ? Collections.emptySet() : modules;
-        return ParserUtil.parseModules(tagSet);
+        Collection<String> moduleSet = modules.size() == 1 && modules.contains("") ? Collections.emptySet() : modules;
+        return ParserUtil.parseModules(moduleSet);
     }
 }

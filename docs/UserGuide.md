@@ -108,7 +108,7 @@ Adds a contact to ModuleMate Finder.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS​`
 
 Examples:
-* `add -c n/Bob p/87654321 e/bob@u.nus.edu`
+* `add n/Bob p/87654321 e/bob@u.nus.edu`
 
 ### Adding Module(s) to a Contact : `addmodule`
 
@@ -136,8 +136,9 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]…​`
 * Modules cannot be edited through the `edit` command.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower m/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing modules.
+* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+* `edit 5 n/Bob a/Kent Ridge Drive` Edits the name and address of the 5th person to be `Bob` and `Kent Ridge Drive` 
+  respectively.
 
 ### Deleting a person : `delete`
 
@@ -186,7 +187,7 @@ Clears all modules based on the given index from ModuleMate Finder.
 Format: `clearmodules INDEX`
 
 Examples:
-- `clear 5` wipes all modules for person in index 5.
+- `clearmodules 5` wipes all modules for person in index 5.
 
 
 ### Set a status for a Person : `status`
@@ -198,8 +199,8 @@ Format: `status INDEX s/STATUS`
 - `INDEX` must be a **positive integer** 1, 2, 3, ...
 
 Examples:
-- `status 1 s/blacklist` modules the 1st person in ModuleMate Finder as blacklisted.
-- `status 2 s/favourite` modules the 2nd person in ModuleMate Finder as favourite.
+- `status 1 s/blacklist` tags the 1st person in ModuleMate Finder as blacklisted.
+- `status 2 s/favourite` tags the 2nd person in ModuleMate Finder as favourite.
 
 
 ### Locating a person: `find`
@@ -223,14 +224,14 @@ Examples:
 
 Finds a person by the given module code. 
 
-Format: `filter m/MODULE`
+Format: `filter MODULE`
 
 - Only the given flag + keyword is searched
 - Keyword not matching the indicator is ignored
 - Valid module code have 2-3 prefix letters followed by 4 digits and one optional letter.
 
 Examples:
-* `filter m/CS3230`  will find all persons with the module CS3230
+* `filter CS3230`  will find all persons with the module CS3230
 
 ### Sorting contacts in list: `sort`
 
@@ -308,15 +309,15 @@ A: As long as the module offered can be found in NUSmod, it will be available on
 |-------------------|------------------------------------------------------------------------------------------------------------|----------------------------------------|
 | **List**          | `list`                                                                                                     | `list`                                 |
 | **Add**           | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`                                                              | `add n/Bob p/87654321 e/bob@u.nus.edu` |
-| **Add Module**    | `addmodule INDEX m/MODULE`                                                                                    | `addmodule 4 m/CS2100`                 |
+| **Add Module**    | `addmodule INDEX m/MODULE`                                                                                  | `addmodule 4 m/CS2100`                 |
 | **Delete**        | `delete INDEX`                                                                                             | `delete 3`                             |
-| **Delete Module** | `deletemodule index m/MODULE`...                                                                              | `deletemodule 1 m/CS1231`              |
+| **Delete Module** | `deletemodule index m/MODULE`...                                                                            | `deletemodule 1 m/CS1231`              |
 | **Edit**          | `edit index [n/NAME] [c/CODE] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` **brackets indicate optional         | `edit 1 n/Alice`                       |
 | **Clear**         | `clear`                                                                                                    | `clear`                                |
 | **Clear Modules** | `clearmodules INDEX`                                                                                       | `clearmodules 3`                       |
 | **Status**        | `status INDEX s/STATUS`                                                                                    | `status 2 s/favourite`                 |
 | **Find**          | `find KEYWORD [MORE_KEYWORDS]`                                                                             | `find James Jake`                      |
-| **Filter**        | `filter m/MODULE`                                                                                             | `filter m/CS3230`                      |
+| **Filter**        | `filter MODULE`                                                                                             | `filter CS3230`                      |
 | **Sort**          | `sort [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/status] [m/MODULE] [o/ORDER]`  **brackets indicate optional | `sort n/ p/ o/desc`                    |
 | **Undo**          | `undo`                                                                                                     | `undo`                                 |
 | **Redo**          | `redo`                                                                                                     | `redo`                                 |
