@@ -43,8 +43,22 @@ public class JsonAdaptedInterview {
      * @throws IllegalValueException if there were any data constraints violated in the adapted interview.
      */
     public Interview toModelType() throws IllegalValueException {
+        if (applicant == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    JsonAdaptedApplicant.class.getSimpleName()));
+        }
         final Applicant modelApplicant = applicant.toModelType();
+
+        if (date == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    LocalDateTime.class.getSimpleName()));
+        }
         final LocalDateTime modelDate = date;
+
+        if (position == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    JsonAdaptedPosition.class.getSimpleName()));
+        }
         final Position modelPosition = position.toModelType();
 
         return new Interview(modelApplicant, modelDate, modelPosition);
