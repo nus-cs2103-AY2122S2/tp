@@ -47,7 +47,7 @@ public class TypicalPersons {
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withMatricNumber("A1234567X")
-            .withCovidStatus("HRW")
+            .withCovidStatus("HRN")
             .withTags("owesMoney", "friends")
             .build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz")
@@ -76,7 +76,7 @@ public class TypicalPersons {
             .withEmail("werner@example.com")
             .withAddress("michegan ave")
             .withMatricNumber("A4345678N")
-            .withCovidStatus("HRW")
+            .withCovidStatus("HRN")
             .build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz")
             .withBlock("B")

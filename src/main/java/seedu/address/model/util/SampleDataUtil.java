@@ -25,7 +25,7 @@ public class SampleDataUtil {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Block("A"), new Faculty("SOC"), new Phone("87438807"),
                     new Email("alexyeoh@example.com"), new Address("Blk 30 Geylang Street 29, #06-40"),
-                    new MatriculationNumber("a1234567m"), new CovidStatus("hrw"), getTagSet("friends")),
+                    new MatriculationNumber("a1234567m"), new CovidStatus("hrn"), getTagSet("friends")),
             new Person(new Name("Bernice Yu"), new Block("A"), new Faculty("FOS"), new Phone("99272758"),
                     new Email("berniceyu@example.com"), new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
                     new MatriculationNumber("a7364736m"), new CovidStatus("negative"),
@@ -38,7 +38,7 @@ public class SampleDataUtil {
                     new MatriculationNumber("a1234423m"), new CovidStatus("negative"), getTagSet("family")),
             new Person(new Name("Irfan Ibrahim"), new Block("D"), new Faculty("FASS"), new Phone("92492021"),
                     new Email("irfan@example.com"), new Address("Blk 47 Tampines Street 20, #17-35"),
-                    new MatriculationNumber("a6374567m"), new CovidStatus("hrw"),
+                    new MatriculationNumber("a6374567m"), new CovidStatus("hrn"),
                     getTagSet("classmates")),
             new Person(new Name("Roy Balakrishnan"), new Block("E"), new Faculty("BIZ"), new Phone("92624417"),
                     new Email("royb@example.com"), new Address("Blk 45 Aljunied Street 85, #11-31"),

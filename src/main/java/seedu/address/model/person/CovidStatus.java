@@ -12,11 +12,10 @@ import java.util.stream.Stream;
 public class CovidStatus {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Covid status should be one of the following: " + getCovidStatusEnumAsString() + ", and it should"
+            "Covid status should be one of the following: " + getCovidStatusEnumAsString() + ", and it should "
                     + "not be blank";
 
     public enum CovidStatusTier {
-        HRW,
         HRN,
         NEGATIVE,
         POSITIVE
@@ -38,13 +37,13 @@ public class CovidStatus {
     /**
      * Returns true if a given string is a valid covid status.
      *
-     * @param test
+     * @param inputStatus
      * @return true if given string is valid, false otherwise.
      */
-    public static boolean isValidCovidStatus(String test) {
+    public static boolean isValidCovidStatus(String inputStatus) {
         return Stream.of(CovidStatusTier.values())
                 .anyMatch(status -> status.name()
-                        .equalsIgnoreCase(test));
+                        .equalsIgnoreCase(inputStatus));
     }
 
     /**
