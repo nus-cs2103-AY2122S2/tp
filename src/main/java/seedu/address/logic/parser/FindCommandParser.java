@@ -91,15 +91,4 @@ public class FindCommandParser implements Parser<FindCommand> {
             return new FindOrPredicateParser().parse(personDescriptor);
         }
     }
-
-    //    private List<Tag> splitAndTrim(List<Tag> tags) {
-    //        List<Tag> modifiedList = new ArrayList<>();
-    //        for (Tag t : tags) {
-    //            if (t.tagName.split(" ").length > 1) {
-    //
-    //            }
-    //            modifiedList.add(t);
-    //        }
-    //    }
-
 }
