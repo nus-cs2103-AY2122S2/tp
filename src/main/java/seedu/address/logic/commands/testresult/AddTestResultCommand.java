@@ -25,13 +25,13 @@ public class AddTestResultCommand extends Command {
             + PREFIX_TYPE + "test"
             + ": Adds the results of a test taken for a patient in the MedBook. "
             + "Parameters: "
-            + PREFIX_NRIC + "OWNER_NRIC "
+            + PREFIX_NRIC + "PATIENT_NRIC "
             + PREFIX_TESTDATE + "TEST_DATE "
             + PREFIX_MEDICALTEST + "MEDICAL_TEST "
             + PREFIX_RESULT + "TEST_RESULT "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TYPE + "test "
-            + PREFIX_NRIC + "S1234568L "
+            + PREFIX_NRIC + "S1234567L "
             + PREFIX_TESTDATE + "2022-03-16 "
             + PREFIX_MEDICALTEST + "CT Scan "
             + PREFIX_RESULT + "Brain damage ";
@@ -42,25 +42,25 @@ public class AddTestResultCommand extends Command {
     public static final String MESSAGE_MISSING_PATIENT = "This patient does not exists in MedBook";
 
     // Identifier
-    private final Nric ownerNric;
+    private final Nric patientNric;
 
     private final TestResult toAdd;
 
     /**
      * Creates an AddTestResultCommand to add the specified {@code TestResult}
      */
-    public AddTestResultCommand(Nric ownerNric, TestResult testResult) {
-        requireNonNull(ownerNric);
+    public AddTestResultCommand(Nric patientNric, TestResult testResult) {
+        requireNonNull(patientNric);
         requireNonNull(testResult);
         toAdd = testResult;
-        this.ownerNric = ownerNric;
+        this.patientNric = patientNric;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (!model.hasPerson(new NricPredicate(ownerNric))) {
+        if (!model.hasPerson(new NricPredicate(patientNric))) {
             throw new CommandException(MESSAGE_MISSING_PATIENT);
         }
 
@@ -69,7 +69,7 @@ public class AddTestResultCommand extends Command {
         }
 
         model.addTestResult(toAdd);
-        model.updateFilteredTestResultList(new TestResultWithNricPredicate(ownerNric));
+        model.updateFilteredTestResultList(new TestResultWithNricPredicate(patientNric));
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), COMMAND_TYPE);
     }

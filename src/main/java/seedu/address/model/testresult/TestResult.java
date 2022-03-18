@@ -12,8 +12,8 @@ import seedu.address.model.patient.Nric;
  */
 public class TestResult {
 
-    // Relationship fields - owner nric
-    private final Nric ownerNric;
+    // Relationship fields - patient nric
+    private final Nric patientNric;
 
     // Data fields
     private final TestDate testDate;
@@ -23,16 +23,16 @@ public class TestResult {
     /**
      * Every field must be present and not null.
      */
-    public TestResult(Nric ownerNric, TestDate testDate, MedicalTest medicalTest, Result result) {
-        requireAllNonNull(ownerNric, testDate, medicalTest, result);
-        this.ownerNric = ownerNric;
+    public TestResult(Nric patientNric, TestDate testDate, MedicalTest medicalTest, Result result) {
+        requireAllNonNull(patientNric, testDate, medicalTest, result);
+        this.patientNric = patientNric;
         this.testDate = testDate;
         this.medicalTest = medicalTest;
         this.result = result;
     }
 
-    public Nric getOwnerNric() {
-        return ownerNric;
+    public Nric getPatientNric() {
+        return patientNric;
     }
 
     public TestDate getTestDate() {
@@ -49,7 +49,7 @@ public class TestResult {
 
 
     /**
-     * Returns true if both test results have the same owner, date, medical test taken and test result.
+     * Returns true if both test results have the same patient, date, medical test taken and test result.
      * This defines a weaker notion of equality between two test results.
      */
     public boolean isSameTestResult(TestResult otherTestResult) {
@@ -58,7 +58,7 @@ public class TestResult {
         }
 
         return otherTestResult != null
-                && otherTestResult.getOwnerNric().equals(getOwnerNric())
+                && otherTestResult.getPatientNric().equals(getPatientNric())
                 && otherTestResult.getTestDate().equals(getTestDate())
                 && otherTestResult.getMedicalTest().equals(getMedicalTest())
                 && otherTestResult.getResult().equals(getResult());
@@ -79,7 +79,7 @@ public class TestResult {
         }
 
         TestResult otherTestResult = (TestResult) other;
-        return otherTestResult.getOwnerNric().equals(getOwnerNric())
+        return otherTestResult.getPatientNric().equals(getPatientNric())
                 && otherTestResult.getTestDate().equals(getTestDate())
                 && otherTestResult.getMedicalTest().equals(getMedicalTest())
                 && otherTestResult.getResult().equals(getResult());
@@ -94,8 +94,8 @@ public class TestResult {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("Owner NRIC: ")
-                .append(getOwnerNric())
+        builder.append("Patient NRIC: ")
+                .append(getPatientNric())
                 .append("; Test Date: ")
                 .append(getTestDate())
                 .append("; Test Taken: ")
