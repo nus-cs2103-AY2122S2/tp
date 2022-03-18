@@ -29,8 +29,10 @@ Given below are my contributions to the project.
     * Added documentation for the features `add` and `tag`
     * Added documentation for feature `delete` enhancement 
     * Added documentation for new feature `removetag`
+    * Updated documentation for exact tag names for `find` and `tag`
   * Developer Guide:
     * Added user stories for `removetag` and `delete` multiple contacts
+    * Added use cases for `removetag` and `find`
 
 * **Tools**:
   * Integrated Codecov into team repo
