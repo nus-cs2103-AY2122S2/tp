@@ -105,7 +105,7 @@ public enum CommandType {
     }
 
     /**
-     * Returns command related to deleting information to patients in Medbook.
+     * Returns command related to deleting information to patients in MedBook.
      *
      * @param commandType user input command type
      * @param arguments user input arguments
