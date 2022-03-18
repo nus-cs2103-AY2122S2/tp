@@ -57,11 +57,10 @@ public class DeleteConsultationCommand extends Command {
         }
 
         Consultation consultationToDelete = lastShownList.get(targetIndex.getZeroBased());
-        System.out.println(lastShownList.get(targetIndex.getZeroBased()).toString());
         model.deleteConsultation(consultationToDelete);
         return new CommandResult(
                 String.format(
-                        MESSAGE_CONSULTATION_DELETE_OVERVIEW, targetIndex),
+                        MESSAGE_CONSULTATION_DELETE_OVERVIEW, targetIndex.getOneBased()),
                 COMMAND_TYPE);
     }
 

@@ -22,9 +22,9 @@ public class DeleteConsultationCommandParser {
      */
     public DeleteConsultationCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_TYPE, PREFIX_INDEX);
+                ArgumentTokenizer.tokenize(args, PREFIX_INDEX);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_TYPE, PREFIX_INDEX)
+        if (!arePrefixesPresent(argMultimap, PREFIX_INDEX)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                                         DeleteConsultationCommand.MESSAGE_USAGE));
