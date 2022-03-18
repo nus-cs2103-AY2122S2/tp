@@ -18,8 +18,8 @@ public class ViewCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        CommandType.setViewCommandType(CommandType.DEFAULT);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        CommandType.setViewCommandType(CommandType.DEFAULT);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
