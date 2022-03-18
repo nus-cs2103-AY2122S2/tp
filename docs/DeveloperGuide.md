@@ -347,7 +347,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. The list is empty
 
     Use case ends.
-* 3b. The given student number is invalid or does not exist in the system
+* 3b. The given index is invalid.
 
     * 3b1. TAlent Assistant™ displays an error message
 
