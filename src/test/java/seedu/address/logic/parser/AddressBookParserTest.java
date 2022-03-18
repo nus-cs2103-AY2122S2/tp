@@ -24,6 +24,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ViewTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -74,6 +75,13 @@ public class AddressBookParserTest {
         Task task = new TaskBuilder().build();
         DeleteTaskCommand command = (DeleteTaskCommand) parser.parseCommand(TaskUtil.getDeleteTaskCommand(task, group));
         assertEquals(new DeleteTaskCommand(task, group), command);
+    }
+
+    @Test
+    public void parseCommand_viewTask() throws Exception {
+        Group group = new GroupBuilder().build();
+        ViewTaskCommand command = (ViewTaskCommand) parser.parseCommand(TaskUtil.getViewTaskCommand(group));
+        assertEquals(new ViewTaskCommand(group), command);
     }
 
     @Test

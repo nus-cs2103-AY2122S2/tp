@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
@@ -71,7 +72,19 @@ public class Group {
     }
 
     /**
-     * Retrieves the UniqueTaskList from this specific group
+     * Views a task from this specific group.
+     */
+    public String viewTask() {
+        ObservableList<Task> taskList = tasks.asUnmodifiableObservableList();
+        String output = "Here are the tasks in the group: \n";
+        for (int i = 0; i < taskList.size(); i++) {
+            output += taskList.get(i).getTaskName().taskName + "\n";
+        }
+        return output;
+    }
+
+    /**
+     * Retrieves the UniqueTaskList from this specific group.
      *
      */
     public UniqueTaskList getTaskList() {
