@@ -1,5 +1,9 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ALICE_INTERVIEW_DATE_TIME;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BENSON_INTERVIEW_DATE_TIME;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CARL_INTERVIEW_DATE_TIME;
+
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
@@ -8,10 +12,6 @@ import java.util.List;
 
 import seedu.address.model.InterviewSchedule;
 import seedu.address.model.interview.Interview;
-
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ALICE_INTERVIEW_DATE_TIME;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_BENSON_INTERVIEW_DATE_TIME;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_CARL_INTERVIEW_DATE_TIME;
 
 
 /**
