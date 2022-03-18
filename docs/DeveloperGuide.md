@@ -171,6 +171,43 @@ As such, the detailed descriptions for the Address Book subsystem above can be t
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### The Appointments Model
+
+This section will describe the implementation of the models used by the appointments subsystem. An overview is shown in the partial class diagram below.
+
+![Appointment Models](images/AppointmentModelClassDiagram.png)
+
+#### The `DisjointAppointmentList` Class
+
+All persistent `Appointment` objects in the system are stored in a `DisjointAppointmentList` object at the lowest level. `DisjointAppointmentList` is a partial implementation of a `List`, supporting only a minimal set of list operations including `add()`, `set()`, `remove()` and `contains()`. It enforces the following constraints upon the `Appointment` objects contained in the list:
+- All `Appointment` objects in the list must not have overlapping periods, that is, for all distinct `Appointment` objects `A1` and `A2` in the list, `A1.startDateTime >= A2.endDateTime` or `A2.startStartTime >= A1.endDateTime`.
+- All `Appointment` objects are chronologically sorted by `startDateTime` within the list.
+
+|<img src="images/DisjointAppointmentListStateAllowed.png" width="550" />|
+| - |
+|<img src="images/DisjointAppointmentListStateDisallowed.png" width="550" />|
+
+In order to efficiently maintain chronological ordering upon list modification, `DisjointAppointmentList` implements the shifting operation of *Insertion Sort* in the private method `DisjointAppointmentList#shiftAppointmentToPosition()`. *Insertion Sort* is significantly faster than the default Java list sort function, which uses *Quick Sort*, when only 1 element is out of place. For list modifications, this is always the case, and the implementation will result in better sorting performance. 
+|<img src="images/DisjointAppointmentListSortBefore.png" width="550" />|
+| - |
+|<img src="images/DisjointAppointmentListSortAfter.png" width="550" />|
+
+*Merge Sort* is however still used in the initial construction of the `DisjointAppointmentList`, where there is no such guarantee that **only one** `Appointment` object is out of position.
+
+#### The `Schedule` Wrapper Class
+
+The `Schedule` class is a mutable wrapper around an underlying `DisjointAppointmentList` that logically represents a container for `Appointment` objects in the system. A `Schedule` object is contained in the `Model` stored in `MainApp#model`, and serves as the single point of truth for all the `Appointment` models in the Appointment subsystem. Multiple `Schedule` objects may exist concurrently in the system, but should be avoided where possible.
+
+In terms of implementation, `Schedule` simply passes through the methods implemented by the backing `DisjointAppointmentList`. A defensive read-only copy of the underlying `DisjointAppointmentList` can be obtained from `Schedule#getAppointmentList()`.
+
+A call of `Model#addAppointment()` is shown below to illustrate how a call is propagated through the model classes. Note how underlying calls are progressively abstracted from upper levels.
+
+![Appointment Models](images/AppointmentAddSequenceDiagram.png)
+
+#### Defensive `Schedule`
+
+`Schedule` implements the `ReadOnlySchedule` interface, which exposes only the getter method `Schedule#getAppointmentList()` for the underlying `DisjointAppointmentList`. While `ModelManager` maintains a mutable copy of `Schedule`, all other classes accessing `Schedule` through `Model#getSchedule()` use a defensive version of `Schedule` to prevent unintended modifications to the list of `Appointment` objects.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
