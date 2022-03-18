@@ -8,7 +8,7 @@ import seedu.address.model.Model;
 /**
  * Lists all persons in the address book to the user.
  */
-public class ListCommand extends Command {
+public class ViewCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
 
@@ -19,6 +19,7 @@ public class ListCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        CommandType.setViewCommandType(CommandType.DEFAULT);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
