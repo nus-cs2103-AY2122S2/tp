@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class RecurringLesson extends Lesson {
+    private static final String RECURRING_LESSON_DESCRIPTOR = "============== [RECURRING LESSON] ==============";
     private DayOfWeek dayOfLesson;
 
     /**
@@ -82,6 +83,12 @@ public class RecurringLesson extends Lesson {
 
     @Override
     public String toString() {
-        return this.getName().toString();
+        StringBuilder lessonString = new StringBuilder();
+
+        lessonString.append(RECURRING_LESSON_DESCRIPTOR)
+                .append(System.getProperty("line.separator"))
+                .append(super.toString());
+
+        return lessonString.toString();
     }
 }
