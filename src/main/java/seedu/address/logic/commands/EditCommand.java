@@ -111,22 +111,22 @@ public class EditCommand extends Command {
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
-     * @throws exception if the edited status is same as the current status of the student
+     * @throws CommandException if the edited status is same as the current status of the student
      */
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) throws
             CommandException {
         assert personToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Block updatedBlock = editPersonDescriptor.getBlock().orElse(personToEdit.getBlock());
-        Faculty updatedFaculty = editPersonDescriptor.getFaculty().orElse(personToEdit.getFaculty());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        MatriculationNumber updatedMatriculationNumber = editPersonDescriptor.getMatriculationNumber()
-                .orElse(personToEdit.getMatriculationNumber());
-        CovidStatus updatedCovidStatus = editPersonDescriptor.getCovidStatus()
-                .orElse(personToEdit.getStatus());
+        Name updatedName = editChecker(editPersonDescriptor.getName(), personToEdit.getName());
+        Block updatedBlock = editChecker(editPersonDescriptor.getBlock(), personToEdit.getBlock());
+        Faculty updatedFaculty = editChecker(editPersonDescriptor.getFaculty(), personToEdit.getFaculty());
+        Phone updatedPhone = editChecker(editPersonDescriptor.getPhone(), personToEdit.getPhone());
+        Email updatedEmail = editChecker(editPersonDescriptor.getEmail(), personToEdit.getEmail());
+        Address updatedAddress = editChecker(editPersonDescriptor.getAddress(), personToEdit.getAddress());
+        MatriculationNumber updatedMatriculationNumber = editChecker(
+                editPersonDescriptor.getMatriculationNumber(), personToEdit.getMatriculationNumber());
+        CovidStatus updatedCovidStatus = editChecker(editPersonDescriptor.getCovidStatus(),
+                personToEdit.getStatus());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedBlock, updatedFaculty, updatedPhone, updatedEmail, updatedAddress,
