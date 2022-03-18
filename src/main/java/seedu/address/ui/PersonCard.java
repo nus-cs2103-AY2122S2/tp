@@ -59,9 +59,15 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        favourite.setText(person.getFavourite().toString());
         userType.getChildren().add(new Label(person.getUserType().value));
 
+        if (!person.getFavourite().isUnfavourited()) {
+            favourite.setText(person.getFavourite().toString());
+        } else {
+            favourite.setManaged(false);
+        }
+
+        favourite.setText(person.getFavourite().toString());
         StringJoiner propertyJoiner = new StringJoiner("\n");
         person.getProperties().stream().map(Property::toString).forEach(propertyJoiner::add);
         property.setText(propertyJoiner.toString());

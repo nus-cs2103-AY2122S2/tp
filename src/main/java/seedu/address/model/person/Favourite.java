@@ -18,6 +18,10 @@ public class Favourite {
         value = status;
     }
 
+    public boolean isUnfavourited() {
+        return !value;
+    }
+
     @Override
     public String toString() {
         return value
