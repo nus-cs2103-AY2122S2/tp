@@ -18,6 +18,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Preference;
 import seedu.address.model.person.UserType;
 import seedu.address.model.property.Price;
 import seedu.address.model.property.Property;
@@ -33,8 +34,11 @@ public class ParserUtilTest {
     private static final String INVALID_REGION = "northwest";
     private static final String INVALID_SIZE = "6-room";
     private static final String INVALID_PRICE = "100000";
+    private static final String INVALID_PRICE_2 = "200000";
     private static final String INVALID_PROPERTY =
             INVALID_REGION + "," + INVALID_ADDRESS + "," + INVALID_SIZE + "," + INVALID_PRICE;
+    private static final String INVALID_PREFERENCE =
+            INVALID_REGION + "," + INVALID_SIZE + "," + INVALID_PRICE + "," + INVALID_PRICE_2;
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -53,6 +57,8 @@ public class ParserUtilTest {
             VALID_REGION_1 + "," + VALID_ADDRESS_1 + "," + VALID_SIZE_1 + "," + VALID_PRICE_1;
     private static final String VALID_PROPERTY_2 =
             VALID_REGION_2 + "," + VALID_ADDRESS_2 + "," + VALID_SIZE_2 + "," + VALID_PRICE_2;
+    private static final String VALID_PREFERENCE =
+            VALID_REGION_1 + "," + VALID_SIZE_1 + "," + VALID_PRICE_1 + "," + VALID_PRICE_2;
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -326,5 +332,36 @@ public class ParserUtilTest {
         Set<Property> expectedPropertySet = new HashSet<>(Arrays.asList(expectedProperty1, expectedProperty2));
 
         assertEquals(expectedPropertySet, actualPropertySet);
+    }
+
+    @Test
+    public void parsePreference_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parsePreference(null));
+    }
+
+    @Test
+    public void parsePreference_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePreference(INVALID_PREFERENCE));
+    }
+
+    @Test
+    public void parsePreference_validValueWithoutWhitespace_returnsPreference() throws Exception {
+        Region region = Region.fromString(VALID_REGION_1);
+        Size size = Size.fromString(VALID_SIZE_1);
+        Price lowPrice = new Price(VALID_PRICE_1);
+        Price highPrice = new Price(VALID_PRICE_2);
+        Preference expectedPreference = new Preference(region, size, lowPrice, highPrice);
+        assertEquals(expectedPreference, ParserUtil.parsePreference(VALID_PREFERENCE));
+    }
+
+    @Test
+    public void parsePreference_validValueWithWhitespace_returnsTrimmedPreference() throws Exception {
+        String preferenceWithWhitespace = WHITESPACE + VALID_PREFERENCE + WHITESPACE;
+        Region region = Region.fromString(VALID_REGION_1);
+        Size size = Size.fromString(VALID_SIZE_1);
+        Price lowPrice = new Price(VALID_PRICE_1);
+        Price highPrice = new Price(VALID_PRICE_2);
+        Preference expectedPreference = new Preference(region, size, lowPrice, highPrice);
+        assertEquals(expectedPreference, ParserUtil.parsePreference(preferenceWithWhitespace));
     }
 }
