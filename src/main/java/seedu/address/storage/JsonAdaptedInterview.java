@@ -38,9 +38,9 @@ public class JsonAdaptedInterview {
     }
 
     /**
-     * Converts this Jackson-friendly adapted applicant object into the model's {@code Interview} object.
+     * Converts this Jackson-friendly adapted interview object into the model's {@code Interview} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted applicant.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted interview.
      */
     public Interview toModelType() throws IllegalValueException {
         final Applicant modelApplicant = applicant.toModelType();

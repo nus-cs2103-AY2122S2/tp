@@ -25,7 +25,7 @@ public class JsonAdaptedPosition {
     private final List<JsonAdaptedRequirement> requirements = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonAdaptedInterview} with the given interview details.
+     * Constructs a {@code JsonAdaptedPosition} with the given position details.
      */
     @JsonCreator
     public JsonAdaptedPosition(@JsonProperty("positionName") String positionName,
@@ -41,7 +41,7 @@ public class JsonAdaptedPosition {
     }
 
     /**
-     * Converts a given {@code Interview} into this class for Jackson use.
+     * Converts a given {@code Position} into this class for Jackson use.
      */
     public JsonAdaptedPosition(Position source) {
         positionName = source.getPositionName().positionName;
@@ -54,9 +54,9 @@ public class JsonAdaptedPosition {
     }
 
     /**
-     * Converts this Jackson-friendly adapted applicant object into the model's {@code Interview} object.
+     * Converts this Jackson-friendly adapted position object into the model's {@code Position} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted applicant.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted position.
      */
     public Position toModelType() throws IllegalValueException {
         final List<Requirement> positionRequirements = new ArrayList<>();
