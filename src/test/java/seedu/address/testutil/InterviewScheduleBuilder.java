@@ -1,7 +1,6 @@
 package seedu.address.testutil;
 
 import seedu.address.model.InterviewSchedule;
-import seedu.address.model.candidate.Candidate;
 import seedu.address.model.interview.Interview;
 
 /**

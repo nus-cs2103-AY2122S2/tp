@@ -48,7 +48,10 @@ public class Interview {
             return true;
         }
         return otherInterview != null
-                && otherInterview.getInterviewDateTime().equals(getInterviewDateTime());
+                && (!otherInterview.getInterviewDateTime().isAfter(getInterviewDateTime())
+                && otherInterview.getInterviewEndDateTime().isAfter(getInterviewDateTime()))
+                || (otherInterview.getInterviewDateTime().isBefore(getInterviewEndDateTime())
+                && otherInterview.getInterviewEndDateTime().isAfter(getInterviewEndDateTime()));
     }
 
     /**
@@ -69,8 +72,8 @@ public class Interview {
     public LocalTime getInterviewStartTime() {
         return this.interviewDateTime.toLocalTime();
     }
-    public LocalTime getInterviewEndTime() {
-        return this.interviewEndDateTime.toLocalTime();
+    public LocalDateTime getInterviewEndDateTime() {
+        return this.interviewEndDateTime;
     }
 
     public LocalDate getInterviewDate() {

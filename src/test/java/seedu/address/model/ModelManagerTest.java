@@ -5,23 +5,21 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalInterviews.*;
+import static seedu.address.testutil.TypicalInterviews.INTERVIEW_ALICE;
+import static seedu.address.testutil.TypicalInterviews.INTERVIEW_BENSON;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.Comparator;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.candidate.Candidate;
 import seedu.address.model.candidate.predicate.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.InterviewScheduleBuilder;
-import seedu.address.testutil.TypicalInterviews;
 
 public class ModelManagerTest {
 
@@ -140,8 +138,8 @@ public class ModelManagerTest {
 
     @Test
     public void hasConflictingInterview_interviewInInterviewSchedule_returnsTrue() {
-        modelManager.addInterview(INTERVIEW_AMY_TYPICAL);
-        assertTrue(modelManager.hasConflictingInterview(INTERVIEW_BOB_TYPICAL));
+        modelManager.addInterview(INTERVIEW_ALICE);
+        assertTrue(modelManager.hasConflictingInterview(INTERVIEW_ALICE));
     }
 
     @Test

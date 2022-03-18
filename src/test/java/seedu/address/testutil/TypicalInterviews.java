@@ -9,6 +9,10 @@ import java.util.List;
 import seedu.address.model.InterviewSchedule;
 import seedu.address.model.interview.Interview;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ALICE_INTERVIEW_DATE_TIME;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BENSON_INTERVIEW_DATE_TIME;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CARL_INTERVIEW_DATE_TIME;
+
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
@@ -17,9 +21,11 @@ public class TypicalInterviews {
     public static final LocalDateTime TYPICAL_INTERVIEW_DATE_TIME = LocalDateTime.of(2022, Month.DECEMBER, 23, 10, 00);
 
     public static final Interview INTERVIEW_ALICE = new InterviewBuilder().withCandidate(TypicalPersons.ALICE)
-            .withInterviewDateTime(LocalDateTime.now()).build();
+            .withInterviewDateTime(VALID_ALICE_INTERVIEW_DATE_TIME).build();
     public static final Interview INTERVIEW_BENSON = new InterviewBuilder().withCandidate(TypicalPersons.BENSON)
-            .withInterviewDateTime(LocalDateTime.now().plusMinutes(30)).build();
+            .withInterviewDateTime(VALID_BENSON_INTERVIEW_DATE_TIME).build();
+    public static final Interview INTERVIEW_CARL = new InterviewBuilder().withCandidate(TypicalPersons.CARL)
+            .withInterviewDateTime(VALID_CARL_INTERVIEW_DATE_TIME).build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Interview INTERVIEW_AMY_TYPICAL = new InterviewBuilder().withCandidate(TypicalPersons.AMY)

@@ -68,7 +68,7 @@ public interface Model {
     /**
      * Replaces interview list data with the data in {@code interviewList}.
      */
-    void setInterviewList(ReadOnlyInterviewSchedule interviewList);
+    void setInterviewSchedule(ReadOnlyInterviewSchedule interviewList);
 
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();

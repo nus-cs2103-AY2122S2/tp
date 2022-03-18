@@ -40,7 +40,7 @@ public class ScheduleCommand extends Command {
             "Interview for this candidate already exists!";
 
     public static final String MESSAGE_CONFLICTING_INTERVIEW =
-            "Interview for another candidate found at the same timeslot!";
+            "Interview for another candidate clashes with the proposed time slot!";
 
     private final Index targetIndex;
     private final LocalDateTime interviewDateTime;

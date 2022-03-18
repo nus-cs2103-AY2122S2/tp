@@ -133,7 +133,7 @@ public class ModelManager implements Model {
     //=========== InterviewSchedule ================================================================================
 
     @Override
-    public void setInterviewList(ReadOnlyInterviewSchedule interviewList) {
+    public void setInterviewSchedule(ReadOnlyInterviewSchedule interviewList) {
         this.interviewSchedule.resetData(interviewList);
     }
 

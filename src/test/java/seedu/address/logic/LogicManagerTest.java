@@ -23,7 +23,11 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.*;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyInterviewSchedule;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.candidate.Candidate;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonInterviewScheduleStorage;
@@ -75,7 +79,8 @@ public class LogicManagerTest {
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
         JsonInterviewScheduleStorage interviewScheduleStorage =
-                new JsonInterviewScheduleIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionInterviewSchedule.json"));
+                new JsonInterviewScheduleIoExceptionThrowingStub(temporaryFolder
+                        .resolve("ioExceptionInterviewSchedule.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, interviewScheduleStorage);

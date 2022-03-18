@@ -81,10 +81,10 @@ public class UniqueInterviewList implements Iterable<Interview> {
         }
     }
 
-    /*public void setInterviews(UniqueInterviewList replacement) {
+    public void setInterviews(UniqueInterviewList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
-    }*/
+    }
 
     /**
      * Replaces the contents of this list with {@code persons}.
@@ -92,12 +92,26 @@ public class UniqueInterviewList implements Iterable<Interview> {
      */
     public void setInterviews(List<Interview> interviews) {
         requireAllNonNull(interviews);
-        if (!interviewsAreUnique(interviews)) {
+        if (!interviewsCandidatesAreUnique(interviews)) {
             throw new DuplicateCandidateException();
+        }
+        if (!interviewsDateTimeAreUnique(interviews)) {
+            throw new ConflictingInterviewException();
         }
 
         internalList.setAll(interviews);
     }
+
+    /**
+     * Checks if the interview list contains an interview with the same candidate in {@code toCheck}.
+     * @param toCheck
+     * @return
+     */
+    public boolean containsCandidate(Interview toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isSameInterviewCandidate);
+    }
+
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
@@ -125,7 +139,20 @@ public class UniqueInterviewList implements Iterable<Interview> {
     /**
      * Returns true if {@code persons} contains only unique persons.
      */
-    private boolean interviewsAreUnique(List<Interview> interviews) {
+    private boolean interviewsCandidatesAreUnique(List<Interview> interviews) {
+        for (int i = 0; i < interviews.size() - 1; i++) {
+            for (int j = i + 1; j < interviews.size(); j++) {
+                if (interviews.get(i).isSameInterviewCandidate(interviews.get(j))) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    /**
+     * Returns true if {@code persons} contains only unique persons.
+     */
+    private boolean interviewsDateTimeAreUnique(List<Interview> interviews) {
         for (int i = 0; i < interviews.size() - 1; i++) {
             for (int j = i + 1; j < interviews.size(); j++) {
                 if (interviews.get(i).isConflictingInterview(interviews.get(j))) {
