@@ -8,6 +8,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.lesson.exceptions.ConflictsWithLessonException;
+import seedu.address.model.lesson.exceptions.ContainsConflictingLessonsException;
 import seedu.address.testutil.TemporaryLessonBuilder;
 
 public class UniqueLessonListTest {
@@ -39,10 +40,10 @@ public class UniqueLessonListTest {
             nonConflictingLessonOne, nonConflictingLessonTwo);
 
     @Test
-    public void setLessons_settingConflictingLessons_throwsConflictsWithLessonException() {
+    public void setLessons_settingConflictingLessons_throwsContainsConflictingLessonsException() {
         UniqueLessonList l = new UniqueLessonList();
 
-        assertThrows(ConflictsWithLessonException.class, () -> l.setLessons(listWithConflictingLessons));
+        assertThrows(ContainsConflictingLessonsException.class, () -> l.setLessons(listWithConflictingLessons));
     }
 
     @Test

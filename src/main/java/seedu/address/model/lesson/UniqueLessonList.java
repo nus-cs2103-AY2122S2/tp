@@ -3,6 +3,7 @@ package seedu.address.model.lesson;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -11,6 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.lesson.exceptions.ConflictsWithLessonException;
+import seedu.address.model.lesson.exceptions.ContainsConflictingLessonsException;
 import seedu.address.model.lesson.exceptions.LessonNotFoundException;
 import seedu.address.model.student.Student;
 
@@ -46,12 +48,29 @@ public class UniqueLessonList implements Iterable<Lesson> {
      */
     public Lesson findLessonConflictingWith(Lesson toCheck) {
         requireNonNull(toCheck);
+
         for (Lesson existingLesson : internalList) {
             if (existingLesson.isConflictingWithLesson(toCheck)) {
                 return existingLesson;
             }
         }
+
         return null;
+    }
+
+    /**
+     * Returns a list of lessons in the list with timeslot that overlaps with the specified lesson, if exists.
+     */
+    public List<Lesson> findAllLessonsConflictingWith(Lesson toCheck) {
+        requireNonNull(toCheck);
+
+        List<Lesson> conflictingLessons = new ArrayList<>();
+        for (Lesson existingLesson : internalList) {
+            if (existingLesson.isConflictingWithLesson(toCheck)) {
+                conflictingLessons.add(existingLesson);
+            }
+        }
+        return conflictingLessons;
     }
 
     /**
@@ -61,8 +80,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
     public void add(Lesson toAdd) {
         requireNonNull(toAdd);
         if (hasConflictingLesson(toAdd)) {
-
-            throw new ConflictsWithLessonException(findLessonConflictingWith(toAdd), toAdd);
+            throw new ConflictsWithLessonException(toAdd, findLessonConflictingWith(toAdd));
         }
         internalList.add(toAdd);
     }
@@ -104,7 +122,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
         }
 
         if (hasConflictingLesson(editedLesson)) {
-            throw new ConflictsWithLessonException(findLessonConflictingWith(editedLesson), editedLesson);
+            throw new ConflictsWithLessonException(editedLesson, findLessonConflictingWith(editedLesson));
         }
 
         internalList.set(index, editedLesson);
@@ -132,9 +150,9 @@ public class UniqueLessonList implements Iterable<Lesson> {
      */
     public void setLessons(List<Lesson> lessons) {
         requireAllNonNull(lessons);
-        if (!lessonsDoNotConflict(lessons)) {
+        if (lessonsDoConflict(lessons)) {
             List<Lesson> conflictingLessons = findConflictingLessons(lessons);
-            throw new ConflictsWithLessonException(conflictingLessons.get(0), conflictingLessons.get(1));
+            throw new ContainsConflictingLessonsException(conflictingLessons);
         }
 
         internalList.setAll(lessons);
@@ -165,17 +183,17 @@ public class UniqueLessonList implements Iterable<Lesson> {
     }
 
     /**
-     * Returns true if {@code lessons} contains only non-conflicting lessons.
+     * Returns false if {@code lessons} contains only non-conflicting lessons.
      */
-    private boolean lessonsDoNotConflict(List<Lesson> lessons) {
+    private boolean lessonsDoConflict(List<Lesson> lessons) {
         for (int i = 0; i < lessons.size() - 1; i++) {
             for (int j = i + 1; j < lessons.size(); j++) {
                 if (lessons.get(i).isConflictingWithLesson(lessons.get(j))) {
-                    return false;
+                    return true;
                 }
             }
         }
-        return true;
+        return false;
     }
 
     /**
