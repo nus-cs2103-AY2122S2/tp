@@ -71,4 +71,12 @@ public class SkillTest {
         assertThrows(NullPointerException.class, () -> Skill.isValidSkillName(null));
     }
 
+    @Test void isValidSkillProficiency() {
+        assertTrue(Skill.isValidSkillProficiency(100));
+        assertTrue(Skill.isValidSkillProficiency(10));
+        assertTrue(Skill.isValidSkillProficiency(0));
+        assertFalse(Skill.isValidSkillProficiency(101));
+        assertFalse(Skill.isValidSkillProficiency(-1));
+    }
+
 }
