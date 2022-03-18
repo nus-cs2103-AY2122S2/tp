@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+import seedu.address.model.candidate.Candidate;
 import seedu.address.model.person.Person;
 
 /**
@@ -15,14 +16,14 @@ import seedu.address.model.person.Person;
 public class Interview {
     private static final int INTERVIEW_DURATION_IN_MINUTES = 30;
 
-    private final Person candidate;
+    private final Candidate candidate;
     private final LocalDateTime interviewDateTime;
     private final LocalDateTime interviewEndDateTime;
 
     /**
      * Every field must be present and not null.
      */
-    public Interview(Person candidate, LocalDateTime interviewDateTime) {
+    public Interview(Candidate candidate, LocalDateTime interviewDateTime) {
         requireAllNonNull(candidate, interviewDateTime);
         this.candidate = candidate;
         this.interviewDateTime = interviewDateTime;
@@ -58,7 +59,7 @@ public class Interview {
         return LocalDateTime.now().isBefore(localDateTime);
     }
 
-    public Person getCandidate() {
+    public Candidate getCandidate() {
         return this.candidate;
     }
 

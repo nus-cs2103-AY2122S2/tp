@@ -12,14 +12,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.candidate.*;
 import seedu.address.model.interview.Interview;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Course;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.StudentID;
 import seedu.address.model.tag.Tag;
 
 
@@ -62,7 +56,7 @@ class JsonAdaptedInterview {
      * Converts a given {@code Person} into this class for Jackson use.
      */
     public JsonAdaptedInterview(Interview source) {
-        studentID = source.getCandidate().getStudentID().studentID;
+        studentID = source.getCandidate().getStudentId().studentId;
         name = source.getCandidate().getName().fullName;
         phone = source.getCandidate().getPhone().value;
         email = source.getCandidate().getEmail().value;
@@ -86,12 +80,12 @@ class JsonAdaptedInterview {
 
         if (studentID == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    StudentID.class.getSimpleName()));
+                    StudentId.class.getSimpleName()));
         }
-        if (!StudentID.isValidId(studentID)) {
-            throw new IllegalValueException(StudentID.MESSAGE_CONSTRAINTS);
+        if (!StudentId.isValidId(studentID)) {
+            throw new IllegalValueException(StudentId.MESSAGE_CONSTRAINTS);
         }
-        final StudentID modelId = new StudentID(studentID);
+        final StudentId modelId = new StudentId(studentID);
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -127,7 +121,7 @@ class JsonAdaptedInterview {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        Person candidate = new Person(modelId, modelName, modelPhone, modelEmail, modelCourse, modelTags);
+        Candidate candidate = new Candidate(modelId, modelName, modelPhone, modelEmail, modelCourse, modelTags);
 
         if (interviewDateTime == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "test"));

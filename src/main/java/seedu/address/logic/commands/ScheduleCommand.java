@@ -9,8 +9,8 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.candidate.Candidate;
 import seedu.address.model.interview.Interview;
-import seedu.address.model.person.Person;
 
 /**
  * Schedules a candidate identified using it's displayed index from the address book for an interview
@@ -43,7 +43,7 @@ public class ScheduleCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Candidate> lastShownList = model.getFilteredPersonList();
         if (lastShownList.isEmpty()) {
             throw new CommandException(String.format(Messages.MESSAGE_NO_CANDIDATES_IN_SYSTEM));
         }
@@ -52,7 +52,7 @@ public class ScheduleCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person candidateToInterview = lastShownList.get(targetIndex.getZeroBased());
+        Candidate candidateToInterview = lastShownList.get(targetIndex.getZeroBased());
         Interview toAdd = new Interview(candidateToInterview, interviewDateTime);
 
         if (model.hasConflictingInterview(toAdd)) {
@@ -61,7 +61,7 @@ public class ScheduleCommand extends Command {
 
         model.addInterview(toAdd);
         return new CommandResult(String.format(MESSAGE_SCHEDULED_CANDIDATE_SUCCESS,
-                toAdd.getCandidate().getName(), toAdd.getCandidate().getStudentID(),
+                toAdd.getCandidate().getName(), toAdd.getCandidate().getStudentId(),
                 toAdd.getInterviewDate(), toAdd.getInterviewStartTime()));
     }
 

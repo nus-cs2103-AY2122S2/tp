@@ -1,44 +1,44 @@
 package seedu.address.testutil;
 
-import seedu.address.model.interview.Interview;
-import seedu.address.model.person.Person;
-
 import java.time.LocalDateTime;
 
+import seedu.address.model.candidate.Candidate;
+import seedu.address.model.interview.Interview;
+
 /**
- * A utility class to help with building Person objects.
+ * A utility class to help with building Candidate objects.
  */
 public class InterviewBuilder {
 
-    private Person person;
+    private Candidate candidate;
     private LocalDateTime interviewDateTime;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
      */
     public InterviewBuilder() {
-        person = new PersonBuilder().build();
+        candidate = new CandidateBuilder().build();
         interviewDateTime = LocalDateTime.now();
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code personToCopy}.
+     * Initializes the CandidateBuilder with the data of {@code interviewToCopy}.
      */
     public InterviewBuilder(Interview interviewToCopy) {
-        person = interviewToCopy.getCandidate();
+        candidate = interviewToCopy.getCandidate();
         interviewDateTime = interviewToCopy.getInterviewDateTime();
     }
 
     /**
-     * Sets the {@code StudentID} of the {@code Person} that we are building.
+     * Sets the {@code StudentID} of the {@code Candidate} that we are building.
      */
-    public InterviewBuilder withCandidate(Person p) {
-        this.person = p;
+    public InterviewBuilder withCandidate(Candidate c) {
+        this.candidate = c;
         return this;
     }
 
     /**
-     * Sets the {@code Name} of the {@code Person} that we are building.
+     * Sets the {@code Name} of the {@code Candidate} that we are building.
      */
     public InterviewBuilder withInterviewDateTime(LocalDateTime interviewDateTime) {
         this.interviewDateTime = interviewDateTime;
@@ -46,7 +46,7 @@ public class InterviewBuilder {
     }
 
     public Interview build() {
-        return new Interview(person, interviewDateTime);
+        return new Interview(candidate, interviewDateTime);
     }
 
 }

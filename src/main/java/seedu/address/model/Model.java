@@ -100,15 +100,15 @@ public interface Model {
      */
     void setPerson(Candidate target, Candidate editedCandidate);
 
-    boolean hasInterview(Interview interview);
+    boolean hasInterviewCandidate(Interview interview);
 
     boolean hasConflictingInterview(Interview interview);
 
-    void deleteInterview(Interview target);
+    //void deleteInterview(Interview target);
 
     void addInterview(Interview interview);
 
-    void setInterview(Interview target, Interview editedInterview);
+    //void setInterview(Interview target, Interview editedInterview);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Candidate> getFilteredPersonList();

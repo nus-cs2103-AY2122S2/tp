@@ -44,17 +44,17 @@ public class CommandTestUtil {
     public static final String VALID_COURSE_BOB = "Computer Engineering";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
-<<<<<<< HEAD
-    public static final LocalDateTime VALID_AMY_INTERVIEW_DATE_TIME =
-            LocalDateTime.of(2023, Month.FEBRUARY, 23, 15, 00);
-    public static final LocalDateTime VALID_BOB_INTERVIEW_DATE_TIME =
-            LocalDateTime.of(2023, Month.DECEMBER, 01, 15, 00);
-=======
+
     public static final String VALID_APPLICATION_STATUS = "Pending";
     public static final String VALID_INTERVIEW_STATUS = "Pending";
     public static final String VALID_AVAILABILITY_AMY = "1,2,3,4,5";
     public static final String VALID_AVAILABILITY_BOB = "1,2,6,7";
->>>>>>> d432f75ef30342fc9d5899d350643f422c94e43a
+
+    public static final LocalDateTime VALID_AMY_INTERVIEW_DATE_TIME =
+            LocalDateTime.of(2023, Month.FEBRUARY, 23, 15, 00);
+    public static final LocalDateTime VALID_BOB_INTERVIEW_DATE_TIME =
+            LocalDateTime.of(2023, Month.DECEMBER, 01, 15, 00);
+
 
     public static final String STUDENT_ID_DESC_AMY = " " + PREFIX_ID + VALID_STUDENT_ID_AMY;
     public static final String STUDENT_ID_DESC_BOB = " " + PREFIX_ID + VALID_STUDENT_ID_BOB;

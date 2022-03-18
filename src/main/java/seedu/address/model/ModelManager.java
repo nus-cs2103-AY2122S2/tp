@@ -12,7 +12,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-
 import seedu.address.model.candidate.Candidate;
 import seedu.address.model.interview.Interview;
 
@@ -131,7 +130,6 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedCandidate);
     }
 
-<<<<<<< HEAD
     //=========== InterviewSchedule ================================================================================
 
     @Override
@@ -145,7 +143,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasInterview(Interview interview) {
+    public boolean hasInterviewCandidate(Interview interview) {
         requireNonNull(interview);
         return interviewSchedule.hasCandidate(interview);
     }
@@ -156,10 +154,10 @@ public class ModelManager implements Model {
         return interviewSchedule.hasConflictingInterview(interview);
     }
 
-    @Override
+    /*@Override
     public void deleteInterview(Interview target) {
         interviewSchedule.removeInterview(target);
-    }
+    }*/
 
     @Override
     public void addInterview(Interview interview) {
@@ -167,12 +165,12 @@ public class ModelManager implements Model {
         //updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
-    @Override
+    /*@Override
     public void setInterview(Interview target, Interview editedInterview) {
         requireAllNonNull(target, editedInterview);
 
         interviewSchedule.setInterview(target, editedInterview);
-    }
+    }*/
 
     //=========== Filtered/Sort Person List Accessors =============================================================
     /**
