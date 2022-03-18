@@ -7,6 +7,7 @@ import seedu.address.logic.parser.contact.AddContactCommandParser;
 import seedu.address.logic.parser.contact.ViewContactCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.medical.AddMedicalCommandParser;
+import seedu.address.logic.parser.medical.DeleteMedicalCommandParser;
 import seedu.address.logic.parser.medical.ViewMedicalCommandParser;
 import seedu.address.logic.parser.prescription.AddPrescriptionCommandParser;
 import seedu.address.logic.parser.prescription.DeletePrescriptionCommandParser;
@@ -130,7 +131,7 @@ public enum CommandType {
         case CONTACT:
             throw new ParseException("WIP: Contact");
         case MEDICAL:
-            throw new ParseException("WIP: Medical");
+            return new DeleteMedicalCommandParser().parse(arguments);
         case CONSULTATION:
             throw new ParseException("WIP: Consultation type");
         case PRESCRIPTION:
