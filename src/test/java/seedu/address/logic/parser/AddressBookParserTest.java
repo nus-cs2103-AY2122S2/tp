@@ -32,7 +32,7 @@ import seedu.address.testutil.PersonUtil;
 public class AddressBookParserTest {
 
     private final AddressBookParser parser = new AddressBookParser();
-
+    // TODO: Add tests for other parseCommands (like archive, task, manual etc)
     @Test
     public void parseCommand_add() throws Exception {
         Person person = new PersonBuilder().build();
