@@ -16,11 +16,11 @@ Given below are my contributions to the project.
   * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
 
 * **New Feature**: Added `match` command.
-  * What it does: allows the real estate agent to see potential matching sellers and buyers. 
+  * What it does: allows the real estate agent to see potential matching sellers and buyers.
 
 * **New Component**: Added `Preference` class
-  * What it does: a new field of a `Person`. Specifies the preference of a potential buyer. 
-  
+  * What it does: a new field of a `Person`. Specifies the preference of a potential buyer.
+
 * **Code contributed**: [RepoSense link]()
 
 * **Project management**:

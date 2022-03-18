@@ -143,7 +143,7 @@ Examples:
 
 ### Matching properties and preferences: `match`
 
-Opens a new window and shows all sellers and buyers with matching property and preference. 
+Opens a new window and shows all sellers and buyers with matching property and preference.
 
 Format: `match`
 
