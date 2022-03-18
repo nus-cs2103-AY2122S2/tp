@@ -87,7 +87,7 @@ public enum CommandType {
     }
 
     /**
-     * Returns command related to adding information to patients in Medbook.
+     * Returns command related to viewing information to patients in Medbook.
      *
      * @param commandType user input command type
      * @param arguments user input arguments
@@ -120,7 +120,6 @@ public enum CommandType {
 
     /**
      * Returns command related to deleting information to patients in Medbook.
-     *
      * @param arguments user input arguments
      * @return the command based on the user input
      */
