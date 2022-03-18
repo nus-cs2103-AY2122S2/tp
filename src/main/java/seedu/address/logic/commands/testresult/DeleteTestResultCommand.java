@@ -1,9 +1,6 @@
 package seedu.address.logic.commands.testresult;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import java.util.List;
 
