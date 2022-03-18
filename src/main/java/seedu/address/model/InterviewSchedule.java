@@ -66,25 +66,17 @@ public class InterviewSchedule implements ReadOnlyInterviewSchedule {
         interviews.add(interview);
     }
 
-    /**
-     * Replaces the given interview {@code target} in the list with {@code editedInterview}.
-     * {@code target} must exist in the interview schedule.
-     * The interview candidate, date and time of {@code editedInterview} must not be the same as another
-     * existing interview in the interview schedule.
-     */
-    public void setInterview(Interview target, Interview editedInterview) {
+    // Edit function not implemented yet, code commented out to reduce test coverage.
+    /* public void setInterview(Interview target, Interview editedInterview) {
         requireNonNull(editedInterview);
 
         interviews.setInterview(target, editedInterview);
-    }
+    }*/
 
-    /**
-     * Removes {@code key} from this {@code InterviewSchedule}.
-     * {@code key} must exist in the interview schedule.
-     */
-    public void removeInterview(Interview key) {
+    // Delete function not implemented yet, code commented out to reduce test coverage.
+    /* public void removeInterview(Interview key) {
         interviews.remove(key);
-    }
+    }*/
 
     @Override
     public String toString() {

@@ -5,8 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.ScheduleCommand.MESSAGE_CONFLICTING_INTERVIEW;
+import static seedu.address.logic.commands.ScheduleCommand.MESSAGE_DUPLICATE_CANDIDATE_INTERVIEW;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalInterviews.INTERVIEW_AMY_TYPICAL;
 import static seedu.address.testutil.TypicalInterviews.TYPICAL_INTERVIEW_DATE_TIME;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -22,6 +25,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.candidate.Candidate;
 import seedu.address.model.interview.Interview;
+import seedu.address.testutil.InterviewBuilder;
 
 
 public class ScheduleCommandTest {
@@ -49,8 +53,7 @@ public class ScheduleCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        LocalDateTime interviewDateTime = TYPICAL_INTERVIEW_DATE_TIME;
-        ScheduleCommand scheduleCommand = new ScheduleCommand(outOfBoundIndex, interviewDateTime);
+        ScheduleCommand scheduleCommand = new ScheduleCommand(outOfBoundIndex, TYPICAL_INTERVIEW_DATE_TIME);
 
         assertCommandFailure(scheduleCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
@@ -58,10 +61,10 @@ public class ScheduleCommandTest {
     @Test
     public void execute_validIndexFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        ScheduleCommand scheduleCommand = new ScheduleCommand(INDEX_FIRST_PERSON, TYPICAL_INTERVIEW_DATE_TIME);
 
         Candidate candidateToInterview = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         LocalDateTime interviewDateTime = TYPICAL_INTERVIEW_DATE_TIME;
-        ScheduleCommand scheduleCommand = new ScheduleCommand(INDEX_FIRST_PERSON, interviewDateTime);
 
         String expectedMessage = String.format(ScheduleCommand.MESSAGE_SCHEDULED_CANDIDATE_SUCCESS,
                 candidateToInterview.getName(), candidateToInterview.getStudentId(),
@@ -83,8 +86,7 @@ public class ScheduleCommandTest {
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
-        LocalDateTime interviewDateTime = TYPICAL_INTERVIEW_DATE_TIME;
-        ScheduleCommand scheduleCommand = new ScheduleCommand(INDEX_SECOND_PERSON, interviewDateTime);
+        ScheduleCommand scheduleCommand = new ScheduleCommand(INDEX_SECOND_PERSON, TYPICAL_INTERVIEW_DATE_TIME);
         assertCommandFailure(scheduleCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
@@ -92,10 +94,28 @@ public class ScheduleCommandTest {
     public void execute_emptyList_throwsCommandException() {
         Index outOfBoundIndex = INDEX_FIRST_PERSON;
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_EMPTY_LIST);
-        LocalDateTime interviewDateTime = TYPICAL_INTERVIEW_DATE_TIME;
-        ScheduleCommand scheduleCommand = new ScheduleCommand(outOfBoundIndex, interviewDateTime);
+        ScheduleCommand scheduleCommand = new ScheduleCommand(outOfBoundIndex, TYPICAL_INTERVIEW_DATE_TIME);
 
         assertCommandFailure(scheduleCommand, model, Messages.MESSAGE_NO_CANDIDATES_IN_SYSTEM);
+    }
+
+    @Test
+    public void execute_hasSameCandidate_throwsCommandException() {
+        Candidate candidateToInterview = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        model.addInterview(new InterviewBuilder().withCandidate(candidateToInterview)
+                .withInterviewDateTime(TYPICAL_INTERVIEW_DATE_TIME).build());
+        ScheduleCommand scheduleCommand = new ScheduleCommand(INDEX_FIRST_PERSON, TYPICAL_INTERVIEW_DATE_TIME);
+
+        assertCommandFailure(scheduleCommand, model, MESSAGE_DUPLICATE_CANDIDATE_INTERVIEW);
+    }
+
+    @Test
+    public void execute_hasConflictingInterview_throwsCommandException() {
+        model.addInterview(INTERVIEW_AMY_TYPICAL);
+        LocalDateTime interviewDateTime = TYPICAL_INTERVIEW_DATE_TIME;
+        ScheduleCommand scheduleCommand = new ScheduleCommand(INDEX_FIRST_PERSON, interviewDateTime);
+
+        assertCommandFailure(scheduleCommand, model, MESSAGE_CONFLICTING_INTERVIEW);
     }
 
     @Test
