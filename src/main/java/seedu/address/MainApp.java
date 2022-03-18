@@ -56,8 +56,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        HustleBookStorage addressBookStorage = new JsonHustleBookStorage(userPrefs.getHustleBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        HustleBookStorage hustleBookStorage = new JsonHustleBookStorage(userPrefs.getHustleBookFilePath());
+        storage = new StorageManager(hustleBookStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -74,14 +74,14 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyHustleBook> addressBookOptional;
+        Optional<ReadOnlyHustleBook> hustleBookOptional;
         ReadOnlyHustleBook initialData;
         try {
-            addressBookOptional = storage.readHustleBook();
-            if (!addressBookOptional.isPresent()) {
+            hustleBookOptional = storage.readHustleBook();
+            if (!hustleBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample HustleBook");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleHustleBook);
+            initialData = hustleBookOptional.orElseGet(SampleDataUtil::getSampleHustleBook);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty HustleBook");
             initialData = new HustleBook();

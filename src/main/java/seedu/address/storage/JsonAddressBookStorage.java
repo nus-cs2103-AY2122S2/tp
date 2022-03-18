@@ -60,8 +60,8 @@ public class JsonHustleBookStorage implements HustleBookStorage {
     }
 
     @Override
-    public void saveHustleBook(ReadOnlyHustleBook addressBook) throws IOException {
-        saveHustleBook(addressBook, filePath);
+    public void saveHustleBook(ReadOnlyHustleBook hustleBook) throws IOException {
+        saveHustleBook(hustleBook, filePath);
     }
 
     /**
@@ -69,12 +69,12 @@ public class JsonHustleBookStorage implements HustleBookStorage {
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveHustleBook(ReadOnlyHustleBook addressBook, Path filePath) throws IOException {
-        requireNonNull(addressBook);
+    public void saveHustleBook(ReadOnlyHustleBook hustleBook, Path filePath) throws IOException {
+        requireNonNull(hustleBook);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableHustleBook(addressBook), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableHustleBook(hustleBook), filePath);
     }
 
 }

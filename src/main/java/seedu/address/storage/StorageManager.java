@@ -17,14 +17,14 @@ import seedu.address.model.UserPrefs;
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private HustleBookStorage addressBookStorage;
+    private HustleBookStorage hustleBookStorage;
     private UserPrefsStorage userPrefsStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code HustleBookStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(HustleBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
-        this.addressBookStorage = addressBookStorage;
+    public StorageManager(HustleBookStorage hustleBookStorage, UserPrefsStorage userPrefsStorage) {
+        this.hustleBookStorage = hustleBookStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -50,29 +50,29 @@ public class StorageManager implements Storage {
 
     @Override
     public Path getHustleBookFilePath() {
-        return addressBookStorage.getHustleBookFilePath();
+        return hustleBookStorage.getHustleBookFilePath();
     }
 
     @Override
     public Optional<ReadOnlyHustleBook> readHustleBook() throws DataConversionException, IOException {
-        return readHustleBook(addressBookStorage.getHustleBookFilePath());
+        return readHustleBook(hustleBookStorage.getHustleBookFilePath());
     }
 
     @Override
     public Optional<ReadOnlyHustleBook> readHustleBook(Path filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return addressBookStorage.readHustleBook(filePath);
+        return hustleBookStorage.readHustleBook(filePath);
     }
 
     @Override
-    public void saveHustleBook(ReadOnlyHustleBook addressBook) throws IOException {
-        saveHustleBook(addressBook, addressBookStorage.getHustleBookFilePath());
+    public void saveHustleBook(ReadOnlyHustleBook hustleBook) throws IOException {
+        saveHustleBook(hustleBook, hustleBookStorage.getHustleBookFilePath());
     }
 
     @Override
-    public void saveHustleBook(ReadOnlyHustleBook addressBook, Path filePath) throws IOException {
+    public void saveHustleBook(ReadOnlyHustleBook hustleBook, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        addressBookStorage.saveHustleBook(addressBook, filePath);
+        hustleBookStorage.saveHustleBook(hustleBook, filePath);
     }
 
 }

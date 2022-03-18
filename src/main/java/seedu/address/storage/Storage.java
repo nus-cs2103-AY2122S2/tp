@@ -27,6 +27,6 @@ public interface Storage extends HustleBookStorage, UserPrefsStorage {
     Optional<ReadOnlyHustleBook> readHustleBook() throws DataConversionException, IOException;
 
     @Override
-    void saveHustleBook(ReadOnlyHustleBook addressBook) throws IOException;
+    void saveHustleBook(ReadOnlyHustleBook hustleBook) throws IOException;
 
 }

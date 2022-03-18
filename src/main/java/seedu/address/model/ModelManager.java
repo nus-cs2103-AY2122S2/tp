@@ -20,21 +20,21 @@ import seedu.address.model.person.Person;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final HustleBook addressBook;
+    private final HustleBook hustleBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given hustleBook and userPrefs.
      */
-    public ModelManager(ReadOnlyHustleBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyHustleBook hustleBook, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(hustleBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + hustleBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new HustleBook(addressBook);
+        this.hustleBook = new HustleBook(hustleBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredPersons = new FilteredList<>(this.hustleBook.getPersonList());
     }
 
     public ModelManager() {
@@ -71,42 +71,42 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setHustleBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setHustleBookFilePath(addressBookFilePath);
+    public void setHustleBookFilePath(Path hustleBookFilePath) {
+        requireNonNull(hustleBookFilePath);
+        userPrefs.setHustleBookFilePath(hustleBookFilePath);
     }
 
     //=========== HustleBook ================================================================================
 
     @Override
-    public void setHustleBook(ReadOnlyHustleBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setHustleBook(ReadOnlyHustleBook hustleBook) {
+        this.hustleBook.resetData(hustleBook);
     }
 
     @Override
     public ReadOnlyHustleBook getHustleBook() {
-        return addressBook;
+        return hustleBook;
     }
 
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return addressBook.hasPerson(person);
+        return hustleBook.hasPerson(person);
     }
 
     @Override
     public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+        hustleBook.removePerson(target);
     }
 
     @Override
     public void flagPerson(Person target, Flag flag) {
-        addressBook.flagPerson(target, flag);
+        hustleBook.flagPerson(target, flag);
     }
 
     @Override
     public void addPerson(Person person) {
-        addressBook.addPerson(person);
+        hustleBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -114,12 +114,12 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
-        addressBook.setPerson(target, editedPerson);
+        hustleBook.setPerson(target, editedPerson);
     }
 
     @Override
     public void sortPersonListByDate() {
-        addressBook.sortPersonByDate();
+        hustleBook.sortPersonByDate();
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -153,7 +153,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return hustleBook.equals(other.hustleBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons);
     }

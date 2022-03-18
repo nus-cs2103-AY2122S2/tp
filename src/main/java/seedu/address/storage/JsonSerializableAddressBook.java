@@ -46,15 +46,15 @@ class JsonSerializableHustleBook {
      * @throws IllegalValueException if there were any data constraints violated.
      */
     public HustleBook toModelType() throws IllegalValueException {
-        HustleBook addressBook = new HustleBook();
+        HustleBook hustleBook = new HustleBook();
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
             Person person = jsonAdaptedPerson.toModelType();
-            if (addressBook.hasPerson(person)) {
+            if (hustleBook.hasPerson(person)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            addressBook.addPerson(person);
+            hustleBook.addPerson(person);
         }
-        return addressBook;
+        return hustleBook;
     }
 
 }

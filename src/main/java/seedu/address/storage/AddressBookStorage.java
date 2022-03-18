@@ -32,14 +32,14 @@ public interface HustleBookStorage {
 
     /**
      * Saves the given {@link ReadOnlyHustleBook} to the storage.
-     * @param addressBook cannot be null.
+     * @param hustleBook cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveHustleBook(ReadOnlyHustleBook addressBook) throws IOException;
+    void saveHustleBook(ReadOnlyHustleBook hustleBook) throws IOException;
 
     /**
      * @see #saveHustleBook(ReadOnlyHustleBook)
      */
-    void saveHustleBook(ReadOnlyHustleBook addressBook, Path filePath) throws IOException;
+    void saveHustleBook(ReadOnlyHustleBook hustleBook, Path filePath) throws IOException;
 
 }

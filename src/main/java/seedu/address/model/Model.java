@@ -43,12 +43,12 @@ public interface Model {
     /**
      * Sets the user prefs' address book file path.
      */
-    void setHustleBookFilePath(Path addressBookFilePath);
+    void setHustleBookFilePath(Path hustleBookFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces address book data with the data in {@code hustleBook}.
      */
-    void setHustleBook(ReadOnlyHustleBook addressBook);
+    void setHustleBook(ReadOnlyHustleBook hustleBook);
 
     /** Returns the HustleBook */
     ReadOnlyHustleBook getHustleBook();
