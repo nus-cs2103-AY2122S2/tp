@@ -163,6 +163,12 @@ public class ModelManager implements Model {
         return addressBook.hasMedical(medical);
     }
 
+
+    @Override
+    public void deleteMedical(Medical target) {
+        addressBook.removeMedical(target);
+    }
+
     @Override
     public ObservableList<Medical> getFilteredMedicalList() {
         return filteredMedicals;
