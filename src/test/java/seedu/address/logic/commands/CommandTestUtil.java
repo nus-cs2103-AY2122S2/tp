@@ -2,9 +2,12 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPLICATION_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AVAILABILITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERVIEW_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -20,9 +23,9 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.predicate.NameContainsKeywordsPredicate;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.model.candidate.Candidate;
+import seedu.address.model.candidate.predicate.NameContainsKeywordsPredicate;
+import seedu.address.testutil.EditCandidateDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -41,10 +44,17 @@ public class CommandTestUtil {
     public static final String VALID_COURSE_BOB = "Computer Engineering";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+<<<<<<< HEAD
     public static final LocalDateTime VALID_AMY_INTERVIEW_DATE_TIME =
             LocalDateTime.of(2023, Month.FEBRUARY, 23, 15, 00);
     public static final LocalDateTime VALID_BOB_INTERVIEW_DATE_TIME =
             LocalDateTime.of(2023, Month.DECEMBER, 01, 15, 00);
+=======
+    public static final String VALID_APPLICATION_STATUS = "Pending";
+    public static final String VALID_INTERVIEW_STATUS = "Pending";
+    public static final String VALID_AVAILABILITY_AMY = "1,2,3,4,5";
+    public static final String VALID_AVAILABILITY_BOB = "1,2,6,7";
+>>>>>>> d432f75ef30342fc9d5899d350643f422c94e43a
 
     public static final String STUDENT_ID_DESC_AMY = " " + PREFIX_ID + VALID_STUDENT_ID_AMY;
     public static final String STUDENT_ID_DESC_BOB = " " + PREFIX_ID + VALID_STUDENT_ID_BOB;
@@ -58,6 +68,10 @@ public class CommandTestUtil {
     public static final String COURSE_DESC_BOB = " " + PREFIX_COURSE + VALID_COURSE_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String APPLICATION_STATUS_PENDING = " " + PREFIX_APPLICATION_STATUS + VALID_APPLICATION_STATUS;
+    public static final String INTERVIEW_STATUS_PENDING = " " + PREFIX_INTERVIEW_STATUS + VALID_INTERVIEW_STATUS;
+    public static final String AVAILABILITY_DESC_AMY = " " + PREFIX_AVAILABILITY + VALID_AVAILABILITY_AMY;
+    public static final String AVAILABILITY_DESC_BOB = " " + PREFIX_AVAILABILITY + VALID_AVAILABILITY_BOB;
 
     public static final String INVALID_STUDENT_ID_DESC = " " + PREFIX_ID + "A0123456"; // Must begin with 'E'
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
@@ -65,8 +79,12 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_COURSE_DESC = " " + PREFIX_COURSE; // empty string not allowed for courses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_AVAILABILITY_DESC = " "
+            + PREFIX_AVAILABILITY + "1,,1"; // double commas ',' not allowed in availability
+
     public static final LocalDateTime INVALID_INTERVIEW_DATE_TIME =
             LocalDateTime.of(2020, Month.FEBRUARY, 23, 15, 00); //Past date and time
+
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -75,12 +93,14 @@ public class CommandTestUtil {
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
     static {
-        DESC_AMY = new EditPersonDescriptorBuilder().withStudentID(VALID_STUDENT_ID_AMY).withName(VALID_NAME_AMY)
+        DESC_AMY = new EditCandidateDescriptorBuilder().withStudentId(VALID_STUDENT_ID_AMY).withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withCourse(VALID_COURSE_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
-        DESC_BOB = new EditPersonDescriptorBuilder().withStudentID(VALID_STUDENT_ID_BOB).withName(VALID_NAME_BOB)
+                .withTags(VALID_TAG_FRIEND).withApplicationStatus(APPLICATION_STATUS_PENDING)
+                .withInterviewStatus(INTERVIEW_STATUS_PENDING).withAvailability(VALID_AVAILABILITY_AMY).build();
+        DESC_BOB = new EditCandidateDescriptorBuilder().withStudentId(VALID_STUDENT_ID_BOB).withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withCourse(VALID_COURSE_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withApplicationStatus(APPLICATION_STATUS_PENDING)
+                .withInterviewStatus(INTERVIEW_STATUS_PENDING).withAvailability(VALID_AVAILABILITY_BOB).build();
     }
 
     /**
@@ -119,7 +139,7 @@ public class CommandTestUtil {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
-        List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
+        List<Candidate> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
@@ -132,8 +152,8 @@ public class CommandTestUtil {
     public static void showPersonAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
 
-        Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
-        final String[] splitName = person.getName().fullName.split("\\s+");
+        Candidate candidate = model.getFilteredPersonList().get(targetIndex.getZeroBased());
+        final String[] splitName = candidate.getName().fullName.split("\\s+");
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());

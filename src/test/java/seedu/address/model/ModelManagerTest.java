@@ -11,11 +11,13 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Comparator;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.predicate.NameContainsKeywordsPredicate;
+import seedu.address.model.candidate.Candidate;
+import seedu.address.model.candidate.predicate.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -127,6 +129,24 @@ public class ModelManagerTest {
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
     }
+
+    @Test
+    public void updateSortedPersonList_sortList() {
+        AddressBook addressBook = new AddressBookBuilder().withPerson(BENSON).withPerson(ALICE).build();
+        UserPrefs userPrefs = new UserPrefs();
+        modelManager = new ModelManager(addressBook, userPrefs);
+        Comparator<Candidate> sortComparator = Comparator.comparing(l -> l.getName().toString().toLowerCase());
+
+        // returns true before sorting
+        assertTrue(modelManager.getAddressBook().getPersonList().get(0).getName().fullName
+                .compareTo(modelManager.getAddressBook().getPersonList().get(1).getName().fullName) > 0);
+
+        // returns false after sorting
+        modelManager.updateSortedPersonList(sortComparator);
+        assertFalse(modelManager.getAddressBook().getPersonList().get(0).getName().fullName
+                .compareTo(modelManager.getAddressBook().getPersonList().get(1).getName().fullName) > 0);
+    }
+
 
     @Test
     public void equals() {

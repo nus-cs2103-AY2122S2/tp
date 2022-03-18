@@ -12,12 +12,15 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Course;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.StudentID;
+import seedu.address.model.candidate.Address;
+import seedu.address.model.candidate.ApplicationStatus;
+import seedu.address.model.candidate.Availability;
+import seedu.address.model.candidate.Course;
+import seedu.address.model.candidate.Email;
+import seedu.address.model.candidate.InterviewStatus;
+import seedu.address.model.candidate.Name;
+import seedu.address.model.candidate.Phone;
+import seedu.address.model.candidate.StudentId;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -43,18 +46,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String id} into a {@code StudentID}.
+     * Parses a {@code String id} into a {@code StudentId}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code id} is invalid.
      */
-    public static StudentID parseStudentID(String id) throws ParseException {
+    public static StudentId parseStudentId(String id) throws ParseException {
         requireNonNull(id);
         String updatedId = id.trim().toUpperCase();
-        if (!StudentID.isValidId(updatedId)) {
-            throw new ParseException(StudentID.MESSAGE_CONSTRAINTS);
+        if (!StudentId.isValidId(updatedId)) {
+            throw new ParseException(StudentId.MESSAGE_CONSTRAINTS);
         }
-        return new StudentID(updatedId);
+        return new StudentId(updatedId);
     }
 
     /**
@@ -157,6 +160,53 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String applicationStatus} into an {@code ApplicationStatus}.
+     *
+     * @param applicationStatus the application status
+     * @return the ApplicationStatus of the string
+     * @throws ParseException if the given {@code applicationStatus} is invalid.
+     */
+    public static ApplicationStatus parseApplicationStatus (String applicationStatus) throws ParseException {
+        requireNonNull(applicationStatus);
+        String trimmedStatus = applicationStatus.trim();
+        if (!ApplicationStatus.isValidStatus(trimmedStatus)) {
+            throw new ParseException(ApplicationStatus.MESSAGE_CONSTRAINTS);
+        }
+        return new ApplicationStatus(trimmedStatus);
+    }
+
+    /**
+     * Parses a {@code String interviewStatus} into an {@code InterviewStatus}.
+     *
+     * @param interviewStatus the application status
+     * @return the InterviewStatus of the string
+     * @throws ParseException if the given {@code interviewStatus} is invalid.
+     */
+    public static InterviewStatus parseInterviewStatus (String interviewStatus) throws ParseException {
+        requireNonNull(interviewStatus);
+        String trimmedStatus = interviewStatus.trim();
+        if (!InterviewStatus.isValidStatus(trimmedStatus)) {
+            throw new ParseException(InterviewStatus.MESSAGE_CONSTRAINTS);
+        }
+        return new InterviewStatus(trimmedStatus);
+    }
+
+    /**
+     * Parses a {@code String tag} into a {@code Tag}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code tag} is invalid.
+     */
+    public static Availability parseAvailability(String availability) throws ParseException {
+        requireNonNull(availability);
+        String trimmedAvailability = availability.trim();
+        if (!Availability.isValidDate(trimmedAvailability)) {
+            throw new ParseException(Availability.MESSAGE_CONSTRAINTS);
+        }
+        return new Availability(trimmedAvailability);
     }
 
     public static LocalDateTime parseDateTime(String dateTime) throws ParseException {

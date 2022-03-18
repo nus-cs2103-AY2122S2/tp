@@ -95,7 +95,7 @@ Here's a (partial) class diagram of the `Logic` component:
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
+1. The command can communicate with the `Model` when it is executed (e.g. to add a candidate).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
@@ -172,11 +172,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th candidate in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new candidate. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
@@ -184,7 +184,7 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the candidate was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
@@ -229,7 +229,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `delete`, just save the candidate being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
@@ -275,10 +275,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​  | I want to …​                          | So that I can…​                                                               |
 |----------|----------|---------------------------------------|-------------------------------------------------------------------------------|
-| `* * *`  | user     | add an applicant to the system        | keep track of their application details for consideration.                    |
-| `* * *`  | user     | delete an applicant from the system   | remove entries that I no longer need.                                         |
-| `* * *`  | user     | search for an applicant in the system | access details of the applicant without having to go through the entire list. |
-| `* * *`  | user     | list all applicants in the system     | monitor the application pool.                                                 |
+| `* * *`  | user     | add a candidate to the system         | keep track of their application details for consideration.                    |
+| `* * *`  | user     | delete a candidate from the system    | remove entries that I no longer need.                                         |
+| `* * *`  | user     | find a candidate in the system        | access details of the candidate without having to go through the entire list. |
+| `* * *`  | user     | list all candidates in the system     | monitor the application pool.                                                 |
+| `*`      | user     | sort candidates                       | reorder candidates based on a specific attribute field.                       |
+| `* * *`  | user     | schedule TA candidates for interviews | keep track of the interview schedule.                                         |
 | `* * *`  | new user | view all available commands           | get familiarised with the system.                                             |
 
 *{More to be added}*
@@ -291,7 +293,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br>
 
-**Use case: List all TA applicants in the system**
+**Use case: List all TA candidates in the system**
 
 **MSS**
 
@@ -333,8 +335,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list TA applicants
-2.  TAlent Assistant™ displays the list of TA applicants
+1.  User requests to list TA candidates
+2.  TAlent Assistant™ displays the list of TA candidates
 3.  User requests to delete a specific TA in the list
 4.  TAlent Assistant™ deletes the TA from the list and displays the deleted entry
 
@@ -353,18 +355,48 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <hr>
 
-**Use case: Find TAs**
+**Use case: Schedule a candidate from the system for an interview**
 
 **MSS**
 
-1.  User requests to find TAs containing a specific keyword
-2.  TAlent Assistant™ returns list of TAs found with given keyword in specified attribute field
+1.  User requests to list TA candidates
+2.  TAlent Assistant™ displays the list of TA candidates
+3.  User requests to schedule a specific candidate in the list for an interview on a particular date and time 
+4.  TAlent Assistant™ schedules the interview
 
     Use case ends.
 
 **Extensions**
 
-* 2a. No TA applicant entries contain the given keyword
+* 2a. The list is empty
+
+  Use case ends.
+* 3a. The given index is invalid
+
+    * 3a1. TAlent Assistant™ displays an error message
+
+  Use case resumes at step 2.
+
+* 3b. The given date and/or time format is invalid
+
+    * 3b1. TAlent Assistant™ displays an error message
+
+  Use case resumes at step 2.
+<hr>
+
+**Use case: Find TAs**
+
+**MSS**
+
+1. User requests to find TAs containing specific keyword(s)
+2. TAlent Assistant™ returns a list of TAs that contain one or more of the given keyword(s) 
+in the specified attribute field
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. No TA candidate entries contain the given keyword in the specified attribute field
     * 2a1. TAlent Assistant™ returns an empty list with zero search results
 
     Use case ends.
@@ -373,6 +405,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2b1. TAlent Assistant™ returns an error message
 
     Use case resumes at step 1.
+
+<hr>
+
+**Sort TAs**
+
+**MSS**
+
+1. User requests to sort TAs by a specific field
+2. TAlent Assistant™ returns a list of TAs sorted in order with regard to the specified attribute field
+
+    Use case ends.
+
+* 2b. The specified attribute field is invalid
+    * 2b1. TAlent Assistant™ returns an error message
+
+  Use case resumes at step 1.
 
 <hr>
 
@@ -437,17 +485,17 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a candidate
 
-1. Deleting a person while all persons are being shown
+1. Deleting a candidate while all candidates are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all candidates using the `list` command. Multiple candidates in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No candidate is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.

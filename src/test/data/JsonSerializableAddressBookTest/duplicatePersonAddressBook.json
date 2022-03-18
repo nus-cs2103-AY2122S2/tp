@@ -1,16 +1,22 @@
 {
   "persons": [ {
-    "studentID": "E0123456",
+    "studentId": "E0123456",
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "E0123456@u.nus.edu",
     "course": "Business Analytics",
-    "tagged": [ "friends" ]
+    "tagged": [ "friends" ],
+    "applicationStatus": "Pending",
+    "interviewStatus": "Pending",
+    "availability": "1,2,3,4,5,6,7"
   }, {
-    "studentID": "E0123456",
+    "studentId": "E0123456",
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "E0123456@u.nus.edu",
-    "course": "Business Analytics"
+    "course": "Business Analytics",
+    "applicationStatus": "Pending",
+    "interviewStatus": "Pending",
+    "availability": "1,2,3,4,5,6,7"
   } ]
 }

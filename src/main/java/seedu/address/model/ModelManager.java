@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,8 +12,10 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+
+import seedu.address.model.candidate.Candidate;
 import seedu.address.model.interview.Interview;
-import seedu.address.model.person.Person;
+
 
 /**
  * Represents the in-memory model of the address book data.
@@ -23,7 +26,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final InterviewSchedule interviewSchedule;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Candidate> filteredCandidates;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -37,8 +40,9 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+
         this.interviewSchedule = new InterviewSchedule(interviewList);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredCandidates = new FilteredList<>(this.addressBook.getPersonList());
     }
 
     public ModelManager() {
@@ -104,29 +108,30 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public boolean hasPerson(Candidate candidate) {
+        requireNonNull(candidate);
+        return addressBook.hasPerson(candidate);
     }
 
     @Override
-    public void deletePerson(Person target) {
+    public void deletePerson(Candidate target) {
         addressBook.removePerson(target);
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
+    public void addPerson(Candidate candidate) {
+        addressBook.addPerson(candidate);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void setPerson(Candidate target, Candidate editedCandidate) {
+        requireAllNonNull(target, editedCandidate);
 
-        addressBook.setPerson(target, editedPerson);
+        addressBook.setPerson(target, editedCandidate);
     }
 
+<<<<<<< HEAD
     //=========== InterviewSchedule ================================================================================
 
     @Override
@@ -169,21 +174,26 @@ public class ModelManager implements Model {
         interviewSchedule.setInterview(target, editedInterview);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
-
+    //=========== Filtered/Sort Person List Accessors =============================================================
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Candidate> getFilteredPersonList() {
+        return filteredCandidates;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredPersonList(Predicate<Candidate> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredCandidates.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateSortedPersonList(Comparator<Candidate> sortComparator) {
+        requireNonNull(sortComparator);
+        addressBook.sortPersons(filteredCandidates, sortComparator);
     }
 
     @Override
@@ -202,7 +212,7 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons)
+                && filteredCandidates.equals(other.filteredCandidates)
                 && interviewSchedule.equals(other.interviewSchedule);
     }
 
