@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import seedu.address.model.candidate.Candidate;
-import seedu.address.model.person.Person;
 
 /**
  * Represents an Interview in the interview schedule.
@@ -99,7 +98,7 @@ public class Interview {
 
     @Override
     public String toString() {
-        return this.candidate.getName() + " " + this.candidate.getStudentID() + " "
+        return this.candidate.getName() + " " + this.candidate.getStudentId() + " "
                 + this.getInterviewDate() + " " + this.getInterviewStartTime();
     }
 }

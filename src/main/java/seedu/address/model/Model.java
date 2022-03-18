@@ -53,12 +53,12 @@ public interface Model {
     /**
      * Returns the user prefs' interview list file path.
      */
-    Path getInterviewListFilePath();
+    Path getInterviewScheduleFilePath();
 
     /**
      * Sets the user prefs' interview list file path.
      */
-    void setInterviewListFilePath(Path interviewListFilePath);
+    void setInterviewScheduleFilePath(Path interviewListFilePath);
 
     /**
      * Replaces address book data with the data in {@code addressBook}.

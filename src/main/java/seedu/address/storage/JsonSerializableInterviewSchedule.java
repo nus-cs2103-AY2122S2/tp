@@ -17,26 +17,26 @@ import seedu.address.model.interview.Interview;
  * An Immutable InterviewSchedule that is serializable to JSON format.
  */
 @JsonRootName(value = "InterviewSchedule")
-class JsonSerializableInterviewList {
+class JsonSerializableInterviewSchedule {
 
     public static final String MESSAGE_DUPLICATE_INTERVIEW = "Interviews list contains duplicate interview(s).";
 
     private final List<JsonAdaptedInterview> interviews = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableInterviewList} with the given interviews.
+     * Constructs a {@code JsonSerializableInterviewSchedule} with the given interviews.
      */
     @JsonCreator
-    public JsonSerializableInterviewList(@JsonProperty("interviews") List<JsonAdaptedInterview> interviews) {
+    public JsonSerializableInterviewSchedule(@JsonProperty("interviews") List<JsonAdaptedInterview> interviews) {
         this.interviews.addAll(interviews);
     }
 
     /**
      * Converts a given {@code ReadOnlyInterviewSchedule} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableInterviewList}.
+     * @param source future changes to this will not affect the created {@code JsonSerializableInterviewSchedule}.
      */
-    public JsonSerializableInterviewList(ReadOnlyInterviewSchedule source) {
+    public JsonSerializableInterviewSchedule(ReadOnlyInterviewSchedule source) {
         interviews.addAll(source.getInterviewList().stream().map(JsonAdaptedInterview::new)
                 .collect(Collectors.toList()));
     }

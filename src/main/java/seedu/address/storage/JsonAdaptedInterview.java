@@ -1,7 +1,6 @@
 package seedu.address.storage;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -12,7 +11,16 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.candidate.*;
+import seedu.address.model.candidate.Address;
+import seedu.address.model.candidate.ApplicationStatus;
+import seedu.address.model.candidate.Availability;
+import seedu.address.model.candidate.Candidate;
+import seedu.address.model.candidate.Course;
+import seedu.address.model.candidate.Email;
+import seedu.address.model.candidate.InterviewStatus;
+import seedu.address.model.candidate.Name;
+import seedu.address.model.candidate.Phone;
+import seedu.address.model.candidate.StudentId;
 import seedu.address.model.interview.Interview;
 import seedu.address.model.tag.Tag;
 
@@ -30,6 +38,9 @@ class JsonAdaptedInterview {
     private final String email;
     private final String course;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final String applicationStatus;
+    private final String interviewStatus;
+    private final String availability;
     private final String interviewDateTime;
 
     /**
@@ -40,6 +51,9 @@ class JsonAdaptedInterview {
                                 @JsonProperty("phone") String phone, @JsonProperty("email") String email,
                                 @JsonProperty("course") String course,
                                 @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+                                @JsonProperty("applicationStatus") String applicationStatus,
+                                @JsonProperty("interviewStatus") String interviewStatus,
+                                @JsonProperty("availability") String availability,
                                 @JsonProperty("interviewDateTime") String interviewDateTime) {
         this.studentID = studentID;
         this.name = name;
@@ -49,6 +63,9 @@ class JsonAdaptedInterview {
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
+        this.applicationStatus = applicationStatus;
+        this.interviewStatus = interviewStatus;
+        this.availability = availability;
         this.interviewDateTime = interviewDateTime;
     }
 
@@ -64,6 +81,9 @@ class JsonAdaptedInterview {
         tagged.addAll(source.getCandidate().getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        applicationStatus = source.getCandidate().getApplicationStatus().toString();
+        interviewStatus = source.getCandidate().getInterviewStatus().toString();
+        availability = source.getCandidate().getAvailability().availability;
         interviewDateTime = source.getInterviewDateTime().toString();
     }
 
@@ -119,9 +139,19 @@ class JsonAdaptedInterview {
         }
         final Course modelCourse = new Course(course);
 
+        if (availability == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Availability.class.getSimpleName()));
+        }
+        if (!Availability.isValidDate(availability)) {
+            throw new IllegalValueException(Availability.MESSAGE_CONSTRAINTS);
+        }
+        final Availability modelAvailability = new Availability(availability);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        Candidate candidate = new Candidate(modelId, modelName, modelPhone, modelEmail, modelCourse, modelTags);
+        Candidate candidate = new Candidate(modelId, modelName, modelPhone, modelEmail, modelCourse, modelTags,
+                new ApplicationStatus(applicationStatus), new InterviewStatus(interviewStatus), modelAvailability);
 
         if (interviewDateTime == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "test"));

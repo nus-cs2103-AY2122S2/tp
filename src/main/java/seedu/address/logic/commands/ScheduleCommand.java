@@ -29,6 +29,9 @@ public class ScheduleCommand extends Command {
     public static final String MESSAGE_SCHEDULED_CANDIDATE_SUCCESS =
             "Successfully scheduled %1$s %2$s for interview on %3$s %4$s";
 
+    public static final String MESSAGE_DUPLICATE_CANDIDATE_INTERVIEW =
+            "Interview for this candidate already exists!";
+
     public static final String MESSAGE_CONFLICTING_INTERVIEW =
             "Interview for another candidate found at the same timeslot!";
 
@@ -54,6 +57,10 @@ public class ScheduleCommand extends Command {
 
         Candidate candidateToInterview = lastShownList.get(targetIndex.getZeroBased());
         Interview toAdd = new Interview(candidateToInterview, interviewDateTime);
+
+        if (model.hasInterviewCandidate(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_CANDIDATE_INTERVIEW);
+        }
 
         if (model.hasConflictingInterview(toAdd)) {
             throw new CommandException(MESSAGE_CONFLICTING_INTERVIEW);

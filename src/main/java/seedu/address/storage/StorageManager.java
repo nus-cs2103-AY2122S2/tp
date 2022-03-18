@@ -20,13 +20,13 @@ public class StorageManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
     private UserPrefsStorage userPrefsStorage;
-    private InterviewListStorage interviewListStorage;
+    private InterviewScheduleStorage interviewListStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
     public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage,
-                          InterviewListStorage interviewListStorage) {
+                          InterviewScheduleStorage interviewListStorage) {
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
         this.interviewListStorage = interviewListStorage;
@@ -80,31 +80,31 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public Path getInterviewListFilePath() {
-        return interviewListStorage.getInterviewListFilePath();
+    public Path getInterviewScheduleFilePath() {
+        return interviewListStorage.getInterviewScheduleFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyInterviewSchedule> readInterviewList() throws DataConversionException, IOException {
-        return readInterviewList(interviewListStorage.getInterviewListFilePath());
+    public Optional<ReadOnlyInterviewSchedule> readInterviewSchedule() throws DataConversionException, IOException {
+        return readInterviewSchedule(interviewListStorage.getInterviewScheduleFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyInterviewSchedule> readInterviewList(Path filePath)
+    public Optional<ReadOnlyInterviewSchedule> readInterviewSchedule(Path filePath)
             throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return interviewListStorage.readInterviewList(filePath);
+        return interviewListStorage.readInterviewSchedule(filePath);
     }
 
     @Override
-    public void saveInterviewList(ReadOnlyInterviewSchedule interviewList) throws IOException {
-        saveInterviewList(interviewList, interviewListStorage.getInterviewListFilePath());
+    public void saveInterviewSchedule(ReadOnlyInterviewSchedule interviewList) throws IOException {
+        saveInterviewSchedule(interviewList, interviewListStorage.getInterviewScheduleFilePath());
     }
 
     @Override
-    public void saveInterviewList(ReadOnlyInterviewSchedule interviewList, Path filePath) throws IOException {
+    public void saveInterviewSchedule(ReadOnlyInterviewSchedule interviewList, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        interviewListStorage.saveInterviewList(interviewList, filePath);
+        interviewListStorage.saveInterviewSchedule(interviewList, filePath);
     }
 
 }

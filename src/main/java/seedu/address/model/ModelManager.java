@@ -84,12 +84,12 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getInterviewListFilePath() {
+    public Path getInterviewScheduleFilePath() {
         return userPrefs.getInterviewListFilePath();
     }
 
     @Override
-    public void setInterviewListFilePath(Path interviewListFilePath) {
+    public void setInterviewScheduleFilePath(Path interviewListFilePath) {
         requireNonNull(interviewListFilePath);
         userPrefs.setInterviewListFilePath(interviewListFilePath);
     }

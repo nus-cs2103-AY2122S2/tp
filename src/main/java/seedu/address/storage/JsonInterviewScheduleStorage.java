@@ -17,36 +17,36 @@ import seedu.address.model.ReadOnlyInterviewSchedule;
 /**
  * A class to access InterviewSchedule data stored as a json file on the hard disk.
  */
-public class JsonInterviewListStorage implements InterviewListStorage {
+public class JsonInterviewScheduleStorage implements InterviewScheduleStorage {
 
-    private static final Logger logger = LogsCenter.getLogger(JsonInterviewListStorage.class);
+    private static final Logger logger = LogsCenter.getLogger(JsonInterviewScheduleStorage.class);
 
     private Path filePath;
 
-    public JsonInterviewListStorage(Path filePath) {
+    public JsonInterviewScheduleStorage(Path filePath) {
         this.filePath = filePath;
     }
 
-    public Path getInterviewListFilePath() {
+    public Path getInterviewScheduleFilePath() {
         return filePath;
     }
 
     @Override
-    public Optional<ReadOnlyInterviewSchedule> readInterviewList() throws DataConversionException {
-        return readInterviewList(filePath);
+    public Optional<ReadOnlyInterviewSchedule> readInterviewSchedule() throws DataConversionException {
+        return readInterviewSchedule(filePath);
     }
 
     /**
-     * Similar to {@link #readInterviewList()}.
+     * Similar to {@link #readInterviewSchedule()}.
      *
      * @param filePath location of the data. Cannot be null.
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyInterviewSchedule> readInterviewList(Path filePath) throws DataConversionException {
+    public Optional<ReadOnlyInterviewSchedule> readInterviewSchedule(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableInterviewList> jsonInterviewList = JsonUtil.readJsonFile(
-                filePath, JsonSerializableInterviewList.class);
+        Optional<JsonSerializableInterviewSchedule> jsonInterviewList = JsonUtil.readJsonFile(
+                filePath, JsonSerializableInterviewSchedule.class);
         if (!jsonInterviewList.isPresent()) {
             return Optional.empty();
         }
@@ -60,21 +60,20 @@ public class JsonInterviewListStorage implements InterviewListStorage {
     }
 
     @Override
-    public void saveInterviewList(ReadOnlyInterviewSchedule InterviewList) throws IOException {
-        saveInterviewList(InterviewList, filePath);
+    public void saveInterviewSchedule(ReadOnlyInterviewSchedule InterviewList) throws IOException {
+        saveInterviewSchedule(InterviewList, filePath);
     }
 
     /**
-     * Similar to {@link #saveInterviewList(ReadOnlyInterviewSchedule)}.
+     * Similar to {@link #saveInterviewSchedule(ReadOnlyInterviewSchedule)}.
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveInterviewList(ReadOnlyInterviewSchedule InterviewList, Path filePath) throws IOException {
+    public void saveInterviewSchedule(ReadOnlyInterviewSchedule InterviewList, Path filePath) throws IOException {
         requireNonNull(InterviewList);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableInterviewList(InterviewList), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableInterviewSchedule(InterviewList), filePath);
     }
-
 }

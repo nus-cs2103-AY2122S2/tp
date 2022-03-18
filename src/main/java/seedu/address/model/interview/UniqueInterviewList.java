@@ -1,5 +1,8 @@
 package seedu.address.model.interview;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -8,9 +11,6 @@ import javafx.collections.ObservableList;
 import seedu.address.model.interview.exceptions.ConflictingInterviewException;
 import seedu.address.model.interview.exceptions.DuplicateCandidateException;
 import seedu.address.model.interview.exceptions.InterviewNotFoundException;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 public class UniqueInterviewList implements Iterable<Interview> {
     private final ObservableList<Interview> internalList = FXCollections.observableArrayList();

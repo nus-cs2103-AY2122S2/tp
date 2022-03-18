@@ -11,13 +11,11 @@ import seedu.address.model.interview.UniqueInterviewList;
 public class InterviewSchedule implements ReadOnlyInterviewSchedule {
     private final UniqueInterviewList interviews;
 
-    public InterviewSchedule() {
+    {
         interviews = new UniqueInterviewList();
     }
 
-    public InterviewSchedule(UniqueInterviewList interviews) {
-        this.interviews = interviews;
-    }
+    public InterviewSchedule() {}
 
     /**
      * Creates an InterviewSchedule using the Interviews in the {@code toBeCopied}
@@ -102,7 +100,7 @@ public class InterviewSchedule implements ReadOnlyInterviewSchedule {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Interview // instanceof handles nulls
+                || (other instanceof InterviewSchedule // instanceof handles nulls
                 && interviews.equals(((InterviewSchedule) other).interviews));
     }
 

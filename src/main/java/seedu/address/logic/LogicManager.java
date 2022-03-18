@@ -48,7 +48,7 @@ public class LogicManager implements Logic {
 
         try {
             storage.saveAddressBook(model.getAddressBook());
-            storage.saveInterviewList(model.getInterviewSchedule());
+            storage.saveInterviewSchedule(model.getInterviewSchedule());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
@@ -78,7 +78,7 @@ public class LogicManager implements Logic {
 
     @Override
     public Path getInterviewListFilePath() {
-        return model.getInterviewListFilePath();
+        return model.getInterviewScheduleFilePath();
     }
 
     @Override
