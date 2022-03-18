@@ -130,6 +130,10 @@ public class ModelManager implements Model {
         addressBook.addPrescription(prescription);
         updateFilteredPrescriptionList(PREDICATE_SHOW_ALL_PRESCRIPTIONS);
     }
+    @Override
+    public void deletePrescription(Prescription prescription) {
+        addressBook.removePrescription(prescription);
+    }
 
     @Override
     public boolean hasPrescription(Prescription prescription) {
@@ -139,7 +143,7 @@ public class ModelManager implements Model {
     @Override
     public void setPrescription(Prescription target, Prescription editedPrescription) {
         requireAllNonNull(target, editedPrescription);
-        addressBook.setPrescriptions(target, editedPrescription);
+        addressBook.setPrescription(target, editedPrescription);
     }
 
     @Override

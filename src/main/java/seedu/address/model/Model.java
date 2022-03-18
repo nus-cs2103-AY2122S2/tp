@@ -82,6 +82,7 @@ public interface Model {
      */
     void addPerson(Patient patient);
     void addPrescription(Prescription prescription);
+    void deletePrescription(Prescription target);
     boolean hasPrescription(Prescription prescription);
     void setPrescription(Prescription target, Prescription editedPrescription);
 
