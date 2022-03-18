@@ -54,9 +54,9 @@ public class Appointment {
     /**
      * Returns an easy-to-read String of the appointment time
      */
-    public String getTimeInString() {
+    public String getAppointmentDetail() {
         if (appointmentTime == null) {
-            return "";
+            return "No appointment with the person";
         } else {
             String pattern = "hh:mm a";
             DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern(pattern);
