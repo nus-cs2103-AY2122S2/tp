@@ -107,6 +107,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public String viewTask(Group group) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public ObservableList<Person> getFilteredPersonList() {
         throw new AssertionError("This method should not be called.");
     }
@@ -117,12 +122,22 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public ObservableList<Task> getFilteredTaskList() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
     public void updateFilteredGroupList(Predicate<Group> predicate) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void updateFilteredTaskList(Predicate<Task> predicate) {
         throw new AssertionError("This method should not be called.");
     }
 }

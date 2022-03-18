@@ -115,8 +115,8 @@ public class UniqueTaskList implements Iterable<Task> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof seedu.address.model.task.UniqueTaskList // instanceof handles nulls
-                && internalList.equals(((seedu.address.model.task.UniqueTaskList) other).internalList));
+                || (other instanceof UniqueTaskList // instanceof handles nulls
+                && internalList.equals(((UniqueTaskList) other).internalList));
     }
 
     @Override

@@ -162,6 +162,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         groups.getGroup(g).removeTask(task);
     }
 
+    /**
+     * Views tasks from a specified group from the address book.
+     * The group must already exist in the address book.
+     */
+    public String viewTask(Group g) {
+        return groups.getGroup(g).viewTask();
+    }
+
     //// util methods
 
     @Override

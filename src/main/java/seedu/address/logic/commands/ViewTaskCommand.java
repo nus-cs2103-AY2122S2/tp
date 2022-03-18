@@ -20,7 +20,8 @@ public class ViewTaskCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_GROUP_NAME + "CS2103-W16-3";
 
-    public static final String MESSAGE_ARGUMENTS = "View task in group %1$s";
+    public static final String MESSAGE_NON_EXISTENT_GROUP = "This group does not exist in the list";
+    public static final String MESSAGE_SUCCESS = "Here are the tasks in this group: %s";
 
     private final Group group;
 
@@ -37,7 +38,11 @@ public class ViewTaskCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        throw new CommandException(String.format(MESSAGE_ARGUMENTS, group));
+        if (model.hasGroup(group)) { //check whether the specified group exists
+            return new CommandResult(model.viewTask(group));
+        } else {
+            throw new CommandException(MESSAGE_NON_EXISTENT_GROUP);
+        }
     }
 
     @Override
