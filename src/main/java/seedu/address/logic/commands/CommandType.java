@@ -13,6 +13,7 @@ import seedu.address.logic.parser.prescription.AddPrescriptionCommandParser;
 import seedu.address.logic.parser.prescription.DeletePrescriptionCommandParser;
 import seedu.address.logic.parser.prescription.ViewPrescriptionCommandParser;
 import seedu.address.logic.parser.testresult.AddTestResultCommandParser;
+import seedu.address.logic.parser.testresult.DeleteTestResultCommandParser;
 import seedu.address.logic.parser.testresult.ViewTestResultCommandParser;
 
 public enum CommandType {
@@ -120,7 +121,8 @@ public enum CommandType {
     }
 
     /**
-     * Returns command related to deleting information to patients in Medbook.
+     * Returns command related to deleting information to patients in MedBook.
+     *
      * @param arguments user input arguments
      * @return the command based on the user input
      */
@@ -137,7 +139,7 @@ public enum CommandType {
         case PRESCRIPTION:
             return new DeletePrescriptionCommandParser().parse(arguments);
         case TEST:
-            throw new ParseException("WIP: Test");
+            return new DeleteTestResultCommandParser().parse(arguments);
         default:
             return new DeleteCommandParser().parse(arguments);
         }
