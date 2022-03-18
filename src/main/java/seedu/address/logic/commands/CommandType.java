@@ -132,10 +132,9 @@ public enum CommandType {
      */
     public static Command parseDeleteCommandType(String arguments) throws ParseException {
         requireNonNull(arguments);
-        System.out.println(viewCommandType);
         switch (viewCommandType) {
         case CONTACT:
-            throw new ParseException("Contact: WIP");
+            throw new ParseException("WIP: Contact");
         case MEDICAL:
             return new DeleteMedicalCommandParser().parse(arguments);
         case CONSULTATION:

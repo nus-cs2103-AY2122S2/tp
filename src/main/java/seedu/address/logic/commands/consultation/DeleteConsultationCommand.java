@@ -14,7 +14,7 @@ import seedu.address.model.Model;
 import seedu.address.model.consultation.Consultation;
 
 /**
- * Lists all persons in the address book to the user.
+ * Lists all consultation in the address book to the user.
  */
 public class DeleteConsultationCommand extends Command {
     public static final String COMMAND_WORD = "delete ";
@@ -36,7 +36,7 @@ public class DeleteConsultationCommand extends Command {
 
 
     /**
-     * Creates an ViewContactCommand to view the specified {@code Patient}
+     * Creates an ViewConsultationCommand to view the specified {@code Patient}
      */
     public DeleteConsultationCommand(Index targetIndex) {
         requireNonNull(targetIndex);

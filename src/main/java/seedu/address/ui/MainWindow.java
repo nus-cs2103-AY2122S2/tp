@@ -23,7 +23,6 @@ import seedu.address.ui.medical.MedicalListPanel;
 import seedu.address.ui.prescription.PrescriptionListPanel;
 import seedu.address.ui.testresult.TestResultListPanel;
 
-
 /**
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.

@@ -18,7 +18,7 @@ import seedu.address.model.patient.NricPredicate;
 import seedu.address.model.patient.Patient;
 
 /**
- * Lists all persons in the address book to the user.
+ * Lists all consultations in the address book to the user.
  */
 public class ViewConsultationCommand extends Command {
     public static final String COMMAND_WORD = "view ";
@@ -35,7 +35,7 @@ public class ViewConsultationCommand extends Command {
     private final Nric ownerNric;
 
     /**
-     * Creates an ViewContactCommand to view the specified {@code Patient}
+     * Creates an ViewConsultationCommand to view the specified {@code Patient}
      */
     public ViewConsultationCommand(Nric ownerNric) {
         requireNonNull(ownerNric);

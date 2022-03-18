@@ -12,7 +12,6 @@ import seedu.address.model.patient.Patient;
 import seedu.address.model.prescription.Prescription;
 import seedu.address.model.testresult.TestResult;
 
-
 /**
  * The API of the Model component.
  */
@@ -143,7 +142,6 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredContactList(Predicate<Contact> predicate);
-
 
     // Consultation
 

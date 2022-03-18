@@ -58,7 +58,7 @@ class JsonAdaptedConsultation {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Consultation} object.
+     * Converts this Jackson-friendly adapted consultation object into the model's {@code Consultation} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted consultation.
      */

@@ -88,11 +88,11 @@ public class Consultation {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getNric())
-                .append("; Date: ")
+                .append("Date: ")
                 .append(getDate())
-                .append("; Time: ")
+                .append("Time: ")
                 .append(getTime())
-                .append("; Notes: ")
+                .append("Notes: ")
                 .append(getNotes());
         //.append("; Prescription: ")
         //.append(getPrescription())

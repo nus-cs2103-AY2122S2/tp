@@ -52,7 +52,7 @@ public class AddConsultationCommand extends Command {
     private final Consultation toAdd;
 
     /**
-     * Creates an AddContactCommand to add the specified {@code Patient}
+     * Creates an AddConsultationCommand to add the specified {@code Consultation}
      */
     public AddConsultationCommand(Nric ownerNric, Consultation consultation) {
         requireNonNull(ownerNric);
