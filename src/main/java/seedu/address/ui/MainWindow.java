@@ -38,7 +38,7 @@ public class MainWindow extends UiPart<Stage> {
     private final Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private PatientListPanel patientListPanel;
     private ContactListPanel contactListPanel;
     private ConsultationListPanel consultationListPanel;
     private MedicalListPanel medicalListPanel;
@@ -122,14 +122,14 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        patientListPanel = new PatientListPanel(logic.getFilteredPersonList());
         contactListPanel = new ContactListPanel(logic.getFilteredContactList());
         consultationListPanel = new ConsultationListPanel(logic.getFilteredConsultationList());
         medicalListPanel = new MedicalListPanel(logic.getFilteredMedicalList());
         prescriptionListPanel = new PrescriptionListPanel(logic.getFilteredPrescriptionList());
         testResultListPanel = new TestResultListPanel(logic.getFilteredTestResultList());
 
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        personListPanelPlaceholder.getChildren().add(patientListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -180,7 +180,8 @@ public class MainWindow extends UiPart<Stage> {
             personListPanelPlaceholder.getChildren().add(testResultListPanel.getRoot());
             return;
         default:
-            personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+            personListPanelPlaceholder.getChildren().remove(0);
+            personListPanelPlaceholder.getChildren().add(patientListPanel.getRoot());
         }
     }
 
@@ -212,8 +213,8 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public PatientListPanel getPersonListPanel() {
+        return patientListPanel;
     }
 
     /**

@@ -77,6 +77,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         setPersons(newData.getPersonList());
         setContacts(newData.getContactList());
         setConsultations(newData.getConsultationList());
+        setPrescriptions(newData.getPrescriptionList());
         setTestResults(newData.getTestResultList());
     }
 
@@ -101,6 +102,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void addPrescription(Prescription p) {
         prescriptions.add(p);
     }
+    public void removePrescription(Prescription key) {
+        prescriptions.remove(key);
+    }
 
     /**
      * Returns true if a prescription with the same identity as {@code prescription} exists in the address book.
@@ -109,7 +113,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(prescription);
         return prescriptions.contains(prescription);
     }
-    public void setPrescriptions(Prescription target, Prescription editedPrescription) {
+    public void setPrescriptions(List<Prescription> prescriptions) {
+        this.prescriptions.setPrescriptions(prescriptions);
+    }
+    public void setPrescription(Prescription target, Prescription editedPrescription) {
         requireNonNull(editedPrescription);
         prescriptions.setPrescription(target, editedPrescription);
     }
