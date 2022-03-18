@@ -16,12 +16,16 @@ import seedu.address.commons.util.HelpWindowUtil;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL =
-            "https://github.com/AY2122S2-CS2103-F11-2/tp/blob/master/docs/UserGuide.md";
+            "https://ay2122s2-cs2103-f11-2.github.io/tp/UserGuide.html";
     public static final String HELP_MESSAGE = "Available functions on this version: \n\n"
-            + "-add n/NAME id/STUDENT_ID c/COURSE \n-delete STUDENT_ID\n"
-            + "-find k/KEYWORD [k/MORE_KEYWORDS] f/ATTRIBUTE_FIELD\n"
-            + "-exit\n\n"
+            + "- add n/NAME id/STUDENT_ID c/COURSE \n-delete STUDENT_ID\n"
+            + "- find k/KEYWORD [k/MORE_KEYWORDS] f/ATTRIBUTE_FIELD\n"
+            + "- delete [INDEX]\n"
+            + "- sort s/[attribute] \n"
+            + "- edit [INDEX] [PREFIX]/[NEW VALUE]\n"
+            + "- exit\n\n"
             + "The full guide is available on our User Guide";
+
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
