@@ -130,7 +130,7 @@ public class ModelManager implements Model {
     public void updateMatchList() {
         matchList = addressBook.match();
     }
-  
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
