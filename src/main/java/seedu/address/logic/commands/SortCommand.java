@@ -3,11 +3,11 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ORDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Comparator;
 import java.util.List;
@@ -29,9 +29,9 @@ public class SortCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_STATUS + "STATUS] "
-            + "[" + PREFIX_TAG + "TAG] "
+            + "[" + PREFIX_MODULE + "MODULE] "
             + "[" + PREFIX_ORDER + "ORDER]\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_TAG + " " + PREFIX_NAME
+            + "Example: " + COMMAND_WORD + " " + PREFIX_MODULE + " " + PREFIX_NAME
             + " " + PREFIX_ORDER + "desc" + "\n";
 
     public static final String MESSAGE_SUCCESS = "Sorted successfully by %s order: %s";
@@ -96,8 +96,8 @@ public class SortCommand extends Command {
                 } else if (PREFIX_ADDRESS.equals(field)) {
                     result = o1.getAddress().compareTo(o2.getAddress());
 
-                } else if (PREFIX_TAG.equals(field)) {
-                    result = Integer.compare(o1.getTags().size(), o2.getTags().size());
+                } else if (PREFIX_MODULE.equals(field)) {
+                    result = Integer.compare(o1.getModules().size(), o2.getModules().size());
 
                 } else if (PREFIX_STATUS.equals(field)) {
                     result = o1.getStatus().compareTo(o2.getStatus());

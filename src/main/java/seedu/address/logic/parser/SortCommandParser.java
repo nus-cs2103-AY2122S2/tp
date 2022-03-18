@@ -5,11 +5,11 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.commons.core.Messages.MESSAGE_NO_PARAMETERS_SUPPLIED;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ORDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,10 +31,10 @@ public class SortCommandParser implements Parser<SortCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
-                        PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_STATUS, PREFIX_TAG, PREFIX_ORDER);
+                        PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_STATUS, PREFIX_MODULE, PREFIX_ORDER);
 
         List<Prefix> prefixes = ArgumentTokenizer.sortPrefixOrder(args, PREFIX_NAME, PREFIX_PHONE,
-                PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_STATUS, PREFIX_TAG);
+                PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_STATUS, PREFIX_MODULE);
 
         if (prefixes.size() == 0) {
             throw new ParseException(String.format(MESSAGE_NO_PARAMETERS_SUPPLIED, SortCommand.MESSAGE_USAGE));
@@ -82,7 +82,7 @@ public class SortCommandParser implements Parser<SortCommand> {
             return "Address";
         } else if (prefix.equals(PREFIX_STATUS)) {
             return "Status";
-        } else if (prefix.equals(PREFIX_TAG)) {
+        } else if (prefix.equals(PREFIX_MODULE)) {
             return "Module";
         } else {
             throw new ParseException("Prefix is not supported");

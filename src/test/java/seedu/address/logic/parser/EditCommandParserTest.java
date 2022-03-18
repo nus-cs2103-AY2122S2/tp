@@ -19,7 +19,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -39,7 +39,7 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 public class EditCommandParserTest {
 
-    private static final String TAG_EMPTY = " " + PREFIX_TAG;
+    private static final String MODULE_EMPTY = " " + PREFIX_MODULE;
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
@@ -72,7 +72,7 @@ public class EditCommandParserTest {
         // invalid prefix being parsed as preamble
         assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
 
-        // attempt to edit the tag field
+        // attempt to edit the module field
         assertParseFailure(parser, "1 m/CS2100", MESSAGE_INVALID_FORMAT);
     }
 
@@ -96,7 +96,7 @@ public class EditCommandParserTest {
     }
 
     @Test
-    public void parse_tagFieldSpecified_failure() {
+    public void parse_moduleFieldSpecified_failure() {
         assertParseFailure(parser, "1 n/Bob a/Kent Ridge Hall m/CS2103", MESSAGE_INVALID_FORMAT);
         assertParseFailure(parser, "2 n/George m/CS2103", MESSAGE_INVALID_FORMAT);
         assertParseFailure(parser, "3 p/12345980 m/CS2103", MESSAGE_INVALID_FORMAT);

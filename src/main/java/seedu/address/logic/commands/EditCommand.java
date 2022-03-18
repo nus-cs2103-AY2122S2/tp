@@ -19,13 +19,13 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.module.Module;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Status;
-import seedu.address.model.tag.Tag;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -101,7 +101,7 @@ public class EditCommand extends Command {
         Status updatedStatus = editPersonDescriptor.getStatus().orElse(personToEdit.getStatus());
 
         return new Person(updatedName, updatedPhone, updatedEmail,
-                updatedAddress, updatedStatus, personToEdit.getTags());
+                updatedAddress, updatedStatus, personToEdit.getModules());
     }
 
     @Override
@@ -132,13 +132,13 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Status status;
-        private Set<Tag> tags;
+        private Set<Module> modules;
 
         public EditPersonDescriptor() {}
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * A defensive copy of {@code modules} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
@@ -146,14 +146,14 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setStatus(toCopy.status);
-            setTags(toCopy.tags);
+            setModules(toCopy.modules);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, modules);
         }
 
         public void setName(Name name) {
@@ -198,21 +198,21 @@ public class EditCommand extends Command {
 
 
         /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
+         * Sets {@code modules} to this object's {@code modules}.
+         * A defensive copy of {@code modules} is used internally.
          */
 
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setModules(Set<Module> modules) {
+            this.modules = (modules != null) ? new HashSet<>(modules) : null;
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable module set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns {@code Optional#empty()} if {@code modules} is null.
          */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public Optional<Set<Module>> getModules() {
+            return (modules != null) ? Optional.of(Collections.unmodifiableSet(modules)) : Optional.empty();
         }
 
 
@@ -236,7 +236,7 @@ public class EditCommand extends Command {
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
                     && getStatus().equals(e.getStatus())
-                    && getTags().equals(e.getTags());
+                    && getModules().equals(e.getModules());
         }
     }
 }
