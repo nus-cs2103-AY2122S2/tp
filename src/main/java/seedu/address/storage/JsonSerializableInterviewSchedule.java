@@ -47,15 +47,15 @@ class JsonSerializableInterviewSchedule {
      * @throws IllegalValueException if there were any data constraints violated.
      */
     public InterviewSchedule toModelType() throws IllegalValueException {
-        InterviewSchedule InterviewSchedule = new InterviewSchedule();
+        InterviewSchedule interviewSchedule = new InterviewSchedule();
         for (JsonAdaptedInterview jsonAdaptedInterview : interviews) {
             Interview interview = jsonAdaptedInterview.toModelType();
-            if (InterviewSchedule.hasCandidate(interview)) {
+            if (interviewSchedule.hasCandidate(interview)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_INTERVIEW);
             }
-            InterviewSchedule.addInterview(interview);
+            interviewSchedule.addInterview(interview);
         }
-        return InterviewSchedule;
+        return interviewSchedule;
     }
 
 }

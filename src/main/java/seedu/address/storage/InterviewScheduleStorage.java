@@ -29,7 +29,8 @@ public interface InterviewScheduleStorage {
     /**
      * @see #getInterviewScheduleFilePath()
      */
-    Optional<ReadOnlyInterviewSchedule> readInterviewSchedule(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyInterviewSchedule> readInterviewSchedule(Path filePath)
+            throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlyInterviewSchedule} to the storage.

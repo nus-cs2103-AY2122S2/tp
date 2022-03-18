@@ -60,8 +60,8 @@ public class JsonInterviewScheduleStorage implements InterviewScheduleStorage {
     }
 
     @Override
-    public void saveInterviewSchedule(ReadOnlyInterviewSchedule InterviewList) throws IOException {
-        saveInterviewSchedule(InterviewList, filePath);
+    public void saveInterviewSchedule(ReadOnlyInterviewSchedule interviewSchedule) throws IOException {
+        saveInterviewSchedule(interviewSchedule, filePath);
     }
 
     /**
@@ -69,8 +69,8 @@ public class JsonInterviewScheduleStorage implements InterviewScheduleStorage {
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveInterviewSchedule(ReadOnlyInterviewSchedule InterviewList, Path filePath) throws IOException {
-        requireNonNull(InterviewList);
+    public void saveInterviewSchedule(ReadOnlyInterviewSchedule interviewList, Path filePath) throws IOException {
+        requireNonNull(interviewList);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);

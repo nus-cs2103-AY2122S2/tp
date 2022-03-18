@@ -22,9 +22,16 @@ public class ScheduleCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Schedules the candidate identified by the index number for an interview on given date and time.\n"
+            + "Time and date given must not be in the past.\n"
             + "Parameters: INDEX (must be a positive integer) + /at + DATE (in dd/mm/yyyy format)"
             + "TIME (in hh:mm format)\n"
             + "Example: " + COMMAND_WORD + " 1 /at 23-03-2022 13:30";
+
+    public static final String MESSAGE_INVALID_FORMAT_DATETIME =
+            "Date and/or Time is not in the following format: dd/MM/yyyy HH:mm";
+
+    public static final String MESSAGE_INVALID_DATETIME =
+            "Date and/or Time must not be in the past!";
 
     public static final String MESSAGE_SCHEDULED_CANDIDATE_SUCCESS =
             "Successfully scheduled %1$s %2$s for interview on %3$s %4$s";
@@ -38,6 +45,10 @@ public class ScheduleCommand extends Command {
     private final Index targetIndex;
     private final LocalDateTime interviewDateTime;
 
+    /**
+     * Creates a ScheduleCommand to schedule the candidate at specified index for an
+     * interview on {@code LocalDateTime}
+     */
     public ScheduleCommand(Index targetIndex, LocalDateTime interviewDateTime) {
         this.targetIndex = targetIndex;
         this.interviewDateTime = interviewDateTime;

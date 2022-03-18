@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.ScheduleCommand.MESSAGE_INVALID_DATETIME;
+import static seedu.address.logic.commands.ScheduleCommand.MESSAGE_INVALID_FORMAT_DATETIME;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -21,6 +23,7 @@ import seedu.address.model.candidate.InterviewStatus;
 import seedu.address.model.candidate.Name;
 import seedu.address.model.candidate.Phone;
 import seedu.address.model.candidate.StudentId;
+import seedu.address.model.interview.Interview;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -29,8 +32,6 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_INVALID_DATETIME =
-            "Date and/or Time is not in the following format: dd/MM/yyyy HH:mm";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -209,12 +210,22 @@ public class ParserUtil {
         return new Availability(trimmedAvailability);
     }
 
+    /**
+     * Parses a {@code String dateTime} into a {@code LocalDateTime}.
+     *
+     * @param dateTime The given interview date and time.
+     * @return the LocalDateTime of the string.
+     * @throws ParseException if the given {@code dateTime} is in the past or has an invalid format.
+     */
     public static LocalDateTime parseDateTime(String dateTime) throws ParseException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         LocalDateTime formattedDateTime;
         try {
             formattedDateTime = LocalDateTime.parse(dateTime, formatter);
         } catch (DateTimeParseException e) {
+            throw new ParseException(MESSAGE_INVALID_FORMAT_DATETIME);
+        }
+        if (!Interview.isValidDateTime(formattedDateTime)) {
             throw new ParseException(MESSAGE_INVALID_DATETIME);
         }
         return formattedDateTime;
