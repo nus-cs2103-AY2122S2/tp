@@ -1,8 +1,13 @@
 {
   "persons": [ {
-    "name": "Hans Muster",
-    "phone": "9482424",
-    "email": "invalid@email!3e",
-    "address": "4th street"
+    "studentId" : "A0000005Z",
+    "name" : "Invalid Email",
+    "moduleCode" : "CS2103T",
+    "phone" : "98765432",
+    "telegramHandle" : "invalidemail",
+    "email" : "invalidemail@email!3e",
+    "taskList" : {
+      "taskList" : [ ]
+    }
   } ]
 }
