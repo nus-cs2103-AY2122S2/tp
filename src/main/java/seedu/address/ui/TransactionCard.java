@@ -49,11 +49,11 @@ public class TransactionCard extends UiPart<Region> {
 
         // Optional fields.
         dueDate.setText(transaction.getDueDate()
-                .map(DueDate::getValue)
+                .map(DueDate::toString)
                 .orElse(DueDate.EMPTY_DUE_DATE));
 
         note.setText(transaction.getNote()
-                .map(Note::getValue)
+                .map(Note::toString)
                 .orElse(Note.EMPTY_DUE_DATE));
     }
 
