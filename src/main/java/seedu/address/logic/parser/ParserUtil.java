@@ -378,10 +378,6 @@ public class ParserUtil {
      * @throws ParseException if the given {@code notes} is invalid.
      */
     public static Notes parseNotes(String notes) throws ParseException {
-        requireNonNull(notes);
-        if (!Notes.isValid(notes)) {
-            throw new ParseException(Notes.MESSAGE_CONSTRAINTS);
-        }
         return new Notes(notes);
     }
 

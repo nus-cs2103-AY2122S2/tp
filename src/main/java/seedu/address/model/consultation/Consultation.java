@@ -93,11 +93,11 @@ public class Consultation {
                 .append("; Time: ")
                 .append(getTime())
                 .append("; Notes: ")
-                .append(getNotes())
-                .append("; Prescription: ")
-                .append(getPrescription())
-                .append("; Tests and Results: ")
-                .append(getTestAndResults());
+                .append(getNotes());
+                //.append("; Prescription: ")
+                //.append(getPrescription())
+                //.append("; Tests and Results: ")
+                //.append(getTestAndResults());
 
         return builder.toString();
     }

@@ -29,10 +29,10 @@ public class ConsultationCard extends UiPart<Region> {
     private Label date;
     @FXML
     private Label notes;
-    @FXML
-    private Label prescription;
-    @FXML
-    private Label testsTakenAndResults;
+//    @FXML
+//    private Label prescription;
+//    @FXML
+//    private Label testsTakenAndResults;
 
     /**
      * Creates a {@code ConsultationCard} with the given {@code Consultation} and index to display.
@@ -43,16 +43,16 @@ public class ConsultationCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         date.setText(consultation.getDate().toString() + ", " + consultation.getTime().toString());
         notes.setText(consultation.getNotes().toString());
-        if (consultation.getPrescription().toString().equals("")) {
-            prescription.setText("N/A");
-        } else {
-            prescription.setText(consultation.getPrescription().toString());
-        }
-        if (consultation.getTestAndResults().toString().equals("")) {
-            testsTakenAndResults.setText("N/A");
-        } else {
-            testsTakenAndResults.setText(consultation.getTestAndResults().toString());
-        }
+//        if (consultation.getPrescription().toString().equals("")) {
+//            prescription.setText("N/A");
+//        } else {
+//            prescription.setText(consultation.getPrescription().toString());
+//        }
+//        if (consultation.getTestAndResults().toString().equals("")) {
+//            testsTakenAndResults.setText("N/A");
+//        } else {
+//            testsTakenAndResults.setText(consultation.getTestAndResults().toString());
+//        }
     }
     @Override
     public boolean equals(Object other) {

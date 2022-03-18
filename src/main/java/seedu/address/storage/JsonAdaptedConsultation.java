@@ -88,12 +88,6 @@ class JsonAdaptedConsultation {
         }
         final String modelTime = time;
 
-        if (notes == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Notes.class.getSimpleName()));
-        }
-        if (!Notes.isValid(notes)) {
-            throw new IllegalValueException(Notes.MESSAGE_CONSTRAINTS);
-        }
         final String modelNotes = notes;
 
         final String modelPrescription = prescription;

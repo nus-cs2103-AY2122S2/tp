@@ -8,15 +8,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Notes {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Notes should not be blank, and should not consist of just spaces.";
-
-    /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    private static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
-
     private String notes;
 
     /**
@@ -25,20 +16,11 @@ public class Notes {
      * @param notes A valid notes.
      */
     public Notes(String notes) {
-        requireNonNull(notes);
-        checkArgument(isValid(notes), MESSAGE_CONSTRAINTS);
         this.notes = notes;
     }
 
     public String value() {
         return notes;
-    }
-
-    /**
-     * Returns true if a given string is a valid notes.
-     */
-    public static boolean isValid(String test) {
-        return test.matches(VALIDATION_REGEX);
     }
 
 
