@@ -78,6 +78,7 @@ public class UniqueItemList implements Iterable<Item> {
         if (!newItem.getQuantity().isEmpty()) {
             internalList.add(newItem);
         }
+        FXCollections.sort(internalList);
     }
 
     public Integer getTotalQuantity() {
