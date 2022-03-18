@@ -110,6 +110,7 @@ public enum CommandType {
             viewCommandType = MEDICAL;
             return new ViewMedicalCommandParser().parse(arguments);
         case CONSULTATION:
+            viewCommandType = CONSULTATION;
             return new ViewConsultationCommandParser().parse(arguments);
         case PRESCRIPTION:
             viewCommandType = PRESCRIPTION;
@@ -131,7 +132,7 @@ public enum CommandType {
      */
     public static Command parseDeleteCommandType(String arguments) throws ParseException {
         requireNonNull(arguments);
-
+        System.out.println(viewCommandType);
         switch (viewCommandType) {
         case CONTACT:
             throw new ParseException("Contact: WIP");

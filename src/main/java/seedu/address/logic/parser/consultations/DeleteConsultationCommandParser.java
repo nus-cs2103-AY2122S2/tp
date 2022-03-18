@@ -9,7 +9,6 @@ import java.util.stream.Stream;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.consultation.DeleteConsultationCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
-import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -21,17 +20,15 @@ public class DeleteConsultationCommandParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteConsultationCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_INDEX);
-
-        if (!arePrefixesPresent(argMultimap, PREFIX_INDEX)
-                || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                                        DeleteConsultationCommand.MESSAGE_USAGE));
+        try{
+            Index targetIndex = ParserUtil.parseIndex(args);
+            return new DeleteConsultationCommand(targetIndex);
+        } catch (ParseException pe) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteConsultationCommand.MESSAGE_USAGE), pe);
         }
 
-        Index targetIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
-        return new DeleteConsultationCommand(targetIndex);
+
     }
 
     /**
