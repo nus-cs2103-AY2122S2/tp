@@ -1,15 +1,15 @@
 package seedu.address.model.lesson.exceptions;
 
-import seedu.address.model.lesson.Lesson;
-
 import java.util.List;
+
+import seedu.address.model.lesson.Lesson;
 
 /**
  * Signals that the operation will result in two lessons with conflicting timeslots.
  */
 public class ContainsConflictingLessonsException extends RuntimeException {
     public static final String ERROR_MESSAGE = "These lessons have conflicting timeslots:";
-    public static final String PADDING = "   ";
+    public static final String PADDING = "   ->";
 
     private final List<Lesson> conflictingLessons;
 
@@ -25,12 +25,16 @@ public class ContainsConflictingLessonsException extends RuntimeException {
     @Override
     public String getMessage() {
         StringBuilder message = new StringBuilder();
-        message.append(ERROR_MESSAGE);
+        message.append(System.getProperty("line.separator"))
+                .append(System.getProperty("line.separator"))
+                .append(ERROR_MESSAGE)
+                .append(System.getProperty("line.separator"))
+                .append(System.getProperty("line.separator"));
 
         for (Lesson l : conflictingLessons) {
-            message.append(System.getProperty("line.separator"))
-                    .append(PADDING)
-                    .append(l.toString());
+            message.append(l.toString())
+                    .append(System.getProperty("line.separator"))
+                    .append(System.getProperty("line.separator"));
         }
 
         return message.toString();

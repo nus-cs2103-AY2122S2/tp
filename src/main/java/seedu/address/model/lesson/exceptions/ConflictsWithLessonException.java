@@ -2,15 +2,12 @@ package seedu.address.model.lesson.exceptions;
 
 import seedu.address.model.lesson.Lesson;
 
-import java.util.List;
-
 /**
  * Signals that the operation will result in two lessons with conflicting timeslots.
  */
 public class ConflictsWithLessonException extends RuntimeException {
-    public static final String ERROR_MESSAGE_FIRST_PART = "This lesson:";
-    public static final String ERROR_MESSAGE_SECOND_PART = "clashes with the following lesson in your schedule:";
-    public static final String PADDING = "   -> ";
+    public static final String ERROR_MESSAGE = "Cannot add this lesson as it conflicts with this"
+            + " lesson in your schedule:";
 
     private final Lesson lessonToAdd;
     private final Lesson conflictingLesson;
@@ -31,13 +28,9 @@ public class ConflictsWithLessonException extends RuntimeException {
     public String getMessage() {
         StringBuilder message = new StringBuilder();
 
-        message.append(ERROR_MESSAGE_FIRST_PART)
-                .append(System.getProperty("line.separator"))
-                .append(PADDING).append(lessonToAdd.toString())
-                .append(System.getProperty("line.separator"))
-                .append(ERROR_MESSAGE_SECOND_PART)
-                .append(System.getProperty("line.separator"))
-                .append(PADDING).append(lessonToAdd.toString());
+        message.append(ERROR_MESSAGE)
+                .append(System.getProperty("line.separator")).append(System.getProperty("line.separator"))
+                .append(conflictingLesson.toString());
 
         return message.toString();
     }
