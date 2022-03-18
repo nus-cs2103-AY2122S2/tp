@@ -62,7 +62,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyInterviewSchedule getInterviewList() {
+    public ReadOnlyInterviewSchedule getInterviewSchedule() {
         return model.getInterviewSchedule();
     }
 
@@ -77,7 +77,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Path getInterviewListFilePath() {
+    public Path getInterviewScheduleFilePath() {
         return model.getInterviewScheduleFilePath();
     }
 

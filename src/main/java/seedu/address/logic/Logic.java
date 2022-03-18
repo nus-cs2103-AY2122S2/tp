@@ -36,7 +36,7 @@ public interface Logic {
      *
      * @see seedu.address.model.Model#getAddressBook()
      */
-    ReadOnlyInterviewSchedule getInterviewList();
+    ReadOnlyInterviewSchedule getInterviewSchedule();
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Candidate> getFilteredPersonList();
@@ -49,7 +49,7 @@ public interface Logic {
     /**
      * Returns the user prefs' interview list file path.
      */
-    Path getInterviewListFilePath();
+    Path getInterviewScheduleFilePath();
 
     /**
      * Returns the user prefs' GUI settings.
