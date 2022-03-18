@@ -43,6 +43,27 @@ public class FavouriteWindow extends UiPart<Stage> {
         getRoot().centerOnScreen();
     }
 
+    /**
+     * Returns true if the favourites window is currently being shown.
+     */
+    public boolean isShowing() {
+        return getRoot().isShowing();
+    }
+
+    /**
+     * Hides the favourites window.
+     */
+    public void hide() {
+        getRoot().hide();
+    }
+
+    /**
+     * Focuses on the favourites window.
+     */
+    public void focus() {
+        getRoot().requestFocus();
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
