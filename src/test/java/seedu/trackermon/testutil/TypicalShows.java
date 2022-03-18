@@ -19,11 +19,11 @@ public class TypicalShows {
     public static final Show ALICE_IN_WONDERLAND = new ShowBuilder().withName("Alice in WonderLand")
             .withStatus("completed").withTags("movie").build();
     public static final Show GONE = new ShowBuilder().withName("gone")
-            .withStatus("watching").withTags("owesMoney", "friends").build();
+            .withStatus("watching").withTags("Horror", "friends").build();
     public static final Show FRIENDS = new ShowBuilder().withName("friends")
-            .withStatus("watching").withTags("owesMoney", "friends").build();
+            .withStatus("watching").withTags("Horror", "friends").build();
     public static final Show HIMYM = new ShowBuilder().withName("HIMYM")
-            .withStatus("watching").withTags("owesMoney", "friends").build();
+            .withStatus("watching").withTags("Horror", "friends").build();
 
     // Manually added - Show's details found in {@code CommandTestUtil}
     public static final Show YOU = new ShowBuilder().withName(VALID_NAME_YOU).withStatus(VALID_STATUS_COMPLETED)
@@ -51,7 +51,7 @@ public class TypicalShows {
      * Returns an {@code List} with all the typical shows.
      */
     public static List<Show> getTypicalShows() {
-        return new ArrayList<>(Arrays.asList(ALICE_IN_WONDERLAND, YOU,
+        return new ArrayList<>(Arrays.asList(ALICE_IN_WONDERLAND, GONE,
                 FRIENDS, HIMYM));
     }
 }

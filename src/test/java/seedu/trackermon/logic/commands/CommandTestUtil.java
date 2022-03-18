@@ -47,7 +47,6 @@ public class CommandTestUtil {
     public static final String TAG_DESC_YURI = " " + PREFIX_TAG + VALID_TAG_YURI;
     public static final String TAG_DESC_HENTAI = " " + PREFIX_TAG + VALID_TAG_HENTAI;
 
-
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "PicoNoPiko&"; // '&' not allowed in names
     public static final String INVALID_STATUS_DESC = " "
             + PREFIX_STATUS + "Watch"; // Status have to be completed or watching
