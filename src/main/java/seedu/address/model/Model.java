@@ -82,6 +82,7 @@ public interface Model {
      */
     void addPerson(Patient patient);
     void addPrescription(Prescription prescription);
+    void deletePrescription(Prescription target);
     boolean hasPrescription(Prescription prescription);
     void setPrescription(Prescription target, Prescription editedPrescription);
 
@@ -179,6 +180,8 @@ public interface Model {
     void addMedical(Medical medical);
 
     boolean hasMedical(Medical medical);
+
+    void deleteMedical(Medical medical);
 
     /**
      * Updates the filter of the filtered medical list to filter by the given {@code predicate}. s

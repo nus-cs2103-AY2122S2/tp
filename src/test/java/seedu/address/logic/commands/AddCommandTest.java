@@ -123,6 +123,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void deletePrescription(Prescription target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasPrescription(Prescription prescription) {
             throw new AssertionError("This method should not be called.");
         }
@@ -261,6 +266,12 @@ public class AddCommandTest {
 
         @Override
         public boolean hasMedical(Medical medical) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+
+        @Override
+        public void deleteMedical(Medical target) {
             throw new AssertionError("This method should not be called.");
         }
 
