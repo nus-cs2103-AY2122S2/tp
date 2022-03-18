@@ -55,7 +55,9 @@ public class UniqueItemList implements Iterable<Item> {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
             Item existingItem = getExisting(toAdd);
-            existingItem.add(toAdd);
+            internalList.remove(existingItem);
+            Item newItem = existingItem.add(toAdd);
+            internalList.add(newItem);
         } else {
             internalList.add(toAdd);
         }
@@ -71,9 +73,10 @@ public class UniqueItemList implements Iterable<Item> {
             throw new ItemNotFoundException();
         }
         Item existingItem = getExisting(toRemove);
-        existingItem.subtract(toRemove);
-        if (existingItem.getQuantity().isEmpty()) {
-            remove(existingItem);
+        internalList.remove(existingItem);
+        Item newItem = existingItem.subtract(toRemove);
+        if (!newItem.getQuantity().isEmpty()) {
+            internalList.add(newItem);
         }
     }
 

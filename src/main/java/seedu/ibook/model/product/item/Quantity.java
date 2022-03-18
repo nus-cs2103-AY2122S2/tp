@@ -57,17 +57,17 @@ public class Quantity {
      *
      * @param other Quantity to add.
      */
-    public void add(Quantity other) {
-        this.quantity += other.getQuantity();
+    public Quantity add(Quantity other) {
+        return new Quantity(quantity + other.getQuantity());
     }
 
     /**
      * Subtracts from the current quantity.
      * @param other Quantity to subtract.
      */
-    public void subtract(Quantity other) {
+    public Quantity subtract(Quantity other) {
         checkArgument(this.quantity >= other.quantity, SMALLER_THAN_CONSTRAINT);
-        this.quantity -= other.getQuantity();
+        return new Quantity(quantity - other.getQuantity());
     }
 
     @Override

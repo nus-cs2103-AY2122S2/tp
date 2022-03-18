@@ -55,18 +55,20 @@ public class Item implements Comparable<Item> {
      * Adds two items together.
      * @param newItem Item to add.
      */
-    public void add(Item newItem) {
-        checkArgument(this.equals(newItem), ITEMS_MUST_BE_EQUAL_CONSTRAINT);
-        this.quantity.add(newItem.getQuantity());
+    public Item add(Item newItem) {
+        checkArgument(this.isSameItem(newItem), ITEMS_MUST_BE_EQUAL_CONSTRAINT);
+        Quantity newQuantity = quantity.add(newItem.getQuantity());
+        return new Item(product, expiryDate, newQuantity);
     }
 
     /**
      * Subtracts two items.
      * @param newItem Item to subtract.
      */
-    public void subtract(Item newItem) {
-        checkArgument(this.equals(newItem), ITEMS_MUST_BE_EQUAL_CONSTRAINT);
-        this.quantity.subtract(newItem.getQuantity());
+    public Item subtract(Item newItem) {
+        checkArgument(this.isSameItem(newItem), ITEMS_MUST_BE_EQUAL_CONSTRAINT);
+        Quantity newQuantity = quantity.subtract(newItem.getQuantity());
+        return new Item(product, expiryDate, newQuantity);
     }
 
     public boolean isExpired() {
@@ -82,7 +84,8 @@ public class Item implements Comparable<Item> {
             return true;
         }
 
-        return otherItem.getProduct().equals(getProduct())
+        return otherItem != null
+            && otherItem.getProduct().equals(getProduct())
             && otherItem.getExpiryDate().equals(getExpiryDate());
     }
 
