@@ -63,20 +63,20 @@ public class FindCommandParser implements Parser<FindCommand> {
             personDescriptor.setAddresses(ParserUtil.parseAddresses(argMultimap.getAllValues(PREFIX_ADDRESS)));
         }
         if (argMultimap.getValue(PREFIX_CCA).isPresent()) {
-            List<Tag> cca = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_CCA), Tag.CCA);
+            List<Tag> cca = ParserUtil.parseTagsForFind(argMultimap.getAllValues(PREFIX_CCA), Tag.CCA);
             personDescriptor.setCcas(cca);
         }
         if (argMultimap.getValue(PREFIX_EDUCATION).isPresent()) {
-            List<Tag> education = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_EDUCATION),
+            List<Tag> education = ParserUtil.parseTagsForFind(argMultimap.getAllValues(PREFIX_EDUCATION),
                     Tag.EDUCATION);
             personDescriptor.setEducations(education);
         }
         if (argMultimap.getValue(PREFIX_MODULE).isPresent()) {
-            List<Tag> module = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_MODULE), Tag.MODULE);
+            List<Tag> module = ParserUtil.parseTagsForFind(argMultimap.getAllValues(PREFIX_MODULE), Tag.MODULE);
             personDescriptor.setModules(module);
         }
         if (argMultimap.getValue(PREFIX_INTERNSHIP).isPresent()) {
-            List<Tag> internship = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_INTERNSHIP),
+            List<Tag> internship = ParserUtil.parseTagsForFind(argMultimap.getAllValues(PREFIX_INTERNSHIP),
                     Tag.INTERNSHIP);
             personDescriptor.setInternships(internship);
         }
@@ -91,5 +91,15 @@ public class FindCommandParser implements Parser<FindCommand> {
             return new FindOrPredicateParser().parse(personDescriptor);
         }
     }
+
+    //    private List<Tag> splitAndTrim(List<Tag> tags) {
+    //        List<Tag> modifiedList = new ArrayList<>();
+    //        for (Tag t : tags) {
+    //            if (t.tagName.split(" ").length > 1) {
+    //
+    //            }
+    //            modifiedList.add(t);
+    //        }
+    //    }
 
 }

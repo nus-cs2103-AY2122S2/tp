@@ -403,10 +403,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 ````
-
+1. User requests to find a person using specific fields
+2. NUSocials shows a list of persons matching the fields
+    Use case ends. 
 ````
 ***Extensions***
 ````
+1a. User indicates for an AND search using a "-s" flag
+
+      Use case resumes at step 2.
+
+3b. The given find command is invalid.
+    - 3b1. NUSocials shows an error message.
+    
+      Use case resumes at step 1.
 
 ````
 

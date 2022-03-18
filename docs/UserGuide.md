@@ -142,6 +142,7 @@ Format: `find [n/NAME]…​ [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…�
 * Persons matching at least one of the field will be returned (i.e. `OR` search).
 * Persons matching at least one tag of a particular type will be returned. For example, 'find m/cs2030s m/cs2040s' may return a person tagged with 'cs2030s' or 'cs2040s'
   e.g. `n/Hans m/cs2040s` will return `Hans`, `Bo Yang` (i.e. Bo Yang is tagged with cs2040s)
+* All arguments for tags provided must be an exact match to existing tags.
 
 Examples:
 * `find n/John` returns `john`
@@ -160,6 +161,7 @@ Format: `find -s [n/NAME]…​ [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]�
 * Only persons matching all fields will be returned (i.e. `AND` search).
   e.g. `n/Bo Yang m/cs2040s` will return `Bo Yang` (i.e. Bo Yang is tagged with cs2040s)
 * Persons matching all tags of a particular type will be returned. For example, 'find -s m/cs2030s m/cs2040s' will only return a person tagged with both 'cs2030s' and 'cs2040s'
+* All arguments for tags provided must be an exact match to existing tags.
 
 Examples:
 * `find -s n/John Doe` returns `John Doe`
@@ -198,6 +200,7 @@ Format: `removetag INDEX [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [e
 * Removes the tags from the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the prefixes must be provided.
 * If a prefix is used, the input after must not be blank.
+* All arguments for tags provided must be an exact match to existing tags.
 * Input tag values will be removed from the existing tags.
 
 Examples:
