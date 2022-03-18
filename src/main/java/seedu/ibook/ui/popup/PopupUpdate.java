@@ -29,10 +29,10 @@ public class PopupUpdate extends Popup {
     /**
      * Initializes a new {@code popupUpdate} window.
      *
-     * @param commandExecutor Function to execute command.
+     * @param mainWindow The {@code MainWindow} that this component resides on.
      */
-    public PopupUpdate(MainWindow.CommandExecutor commandExecutor) {
-        super(FXML, commandExecutor);
+    public PopupUpdate(MainWindow mainWindow) {
+        super(FXML, mainWindow);
     }
 
     /**

@@ -6,21 +6,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import seedu.ibook.model.product.Product;
-import seedu.ibook.ui.UiPart;
-import seedu.ibook.ui.popup.PopupDelete;
-import seedu.ibook.ui.popup.PopupUpdate;
+import seedu.ibook.ui.MainWindow;
+import seedu.ibook.ui.UiComponent;
 
 /**
  * The main content of the table.
  */
-public class TableContent extends UiPart<ScrollPane> {
+public class TableContent extends UiComponent<ScrollPane> {
 
     private static final String FXML = "Table/TableContent.fxml";
-
-    private final ObservableList<Product> filteredIBook;
-
-    private final PopupUpdate popupUpdate;
-    private final PopupDelete popupDelete;
 
     @FXML
     private VBox content;
@@ -28,27 +22,20 @@ public class TableContent extends UiPart<ScrollPane> {
     /**
      * Initializes a {@code TableContent}.
      *
-     * @param filteredIBook The filtered {@code Product} list.
-     * @param popupUpdate The popup responsible for update.
-     * @param popupDelete The popup responsible for delete.
+     * @param mainWindow The {@code MainWindow} that this component resides on.
      */
-    TableContent(ObservableList<Product> filteredIBook,
-                 PopupUpdate popupUpdate,
-                 PopupDelete popupDelete) {
-        super(FXML);
-        this.filteredIBook = filteredIBook;
-        this.filteredIBook.addListener(new Listener());
-        this.popupUpdate = popupUpdate;
-        this.popupDelete = popupDelete;
+    TableContent(MainWindow mainWindow) {
+        super(FXML, mainWindow);
         populateField();
     }
 
     private void populateField() {
+        ObservableList<Product> filteredIBook = getMainWindow().getFilteredIBook();
+        filteredIBook.addListener(new Listener());
         content.getChildren().clear();
         for (int i = 0; i < filteredIBook.size(); i++) {
             Product product = filteredIBook.get(i);
-            ProductCard productCard = new ProductCard(
-                    i + 1, product, popupUpdate, popupDelete);
+            ProductCard productCard = new ProductCard(i + 1, product, getMainWindow());
             content.getChildren().add(productCard.getRoot());
         }
     }

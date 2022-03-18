@@ -2,8 +2,6 @@ package seedu.ibook.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.format.DateTimeParseException;
-
 import seedu.ibook.commons.core.index.Index;
 import seedu.ibook.commons.util.StringUtil;
 import seedu.ibook.logic.parser.exceptions.ParseException;
@@ -86,15 +84,11 @@ public class ParserUtil {
      */
     public static ExpiryDate parseExpiryDate(String expiryDate) throws ParseException {
         requireNonNull(expiryDate);
-        try {
-            if (!ExpiryDate.isValidExpiryDate(expiryDate)) {
-                throw new ParseException(ExpiryDate.MESSAGE_CONSTRAINTS);
-            }
-            return new ExpiryDate(expiryDate);
-        } catch (DateTimeParseException e) {
+        String trimmedExpiryDate = expiryDate.trim();
+        if (!ExpiryDate.isValidExpiryDate(trimmedExpiryDate)) {
             throw new ParseException(ExpiryDate.MESSAGE_CONSTRAINTS);
         }
-
+        return new ExpiryDate(trimmedExpiryDate);
     }
 
     /**
@@ -105,13 +99,10 @@ public class ParserUtil {
      */
     public static Price parsePrice(String price) throws ParseException {
         requireNonNull(price);
-        try {
-            if (!Price.isValidPrice(price)) {
-                throw new ParseException(Price.MESSAGE_CONSTRAINTS);
-            }
-            return new Price(price);
-        } catch (NumberFormatException e) {
+        String trimmedPrice = price.trim();
+        if (!Price.isValidPrice(trimmedPrice)) {
             throw new ParseException(Price.MESSAGE_CONSTRAINTS);
         }
+        return new Price(trimmedPrice);
     }
 }

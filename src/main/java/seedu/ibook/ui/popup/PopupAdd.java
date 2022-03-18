@@ -28,10 +28,10 @@ public class PopupAdd extends Popup {
     /**
      * Initializes a new {@code popupAdd} window.
      *
-     * @param commandExecutor Function to execute command.
+     * @param mainWindow The {@code MainWindow} that this component resides on.
      */
-    public PopupAdd(MainWindow.CommandExecutor commandExecutor) {
-        super(FXML, commandExecutor);
+    public PopupAdd(MainWindow mainWindow) {
+        super(FXML, mainWindow);
     }
 
     @FXML

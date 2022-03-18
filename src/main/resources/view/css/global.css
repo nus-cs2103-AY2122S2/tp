@@ -6,7 +6,7 @@
     src: url('../font/NotoSans-Thin.ttf');
 }
 
-* {
+.root {
     -fx-font-family: 'Noto Sans';
 }
 
