@@ -21,7 +21,6 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "00000000";
     public static final String DEFAULT_TELEGRAM_HANDLE = "default";
     public static final String DEFAULT_EMAIL = "default@gmail.com";
-    public static final String DEFAULT_TASK = "DefaultTask";
 
     private StudentId studentId;
     private Name name;
@@ -42,7 +41,6 @@ public class PersonBuilder {
         telegramHandle = new TelegramHandle(DEFAULT_TELEGRAM_HANDLE);
         email = new Email(DEFAULT_EMAIL);
         taskList = new TaskList();
-        taskList.addTask(new Task(DEFAULT_TASK));
     }
 
     /**

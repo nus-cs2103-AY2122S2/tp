@@ -53,7 +53,7 @@ public class EditPersonDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different telegramHandle -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withPhone(VALID_TELEGRAM_HANDLE_BOB).build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different email -> returns false

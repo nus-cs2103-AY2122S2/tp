@@ -52,10 +52,10 @@ public class PersonUtil {
         descriptor.getStudentId().ifPresent(studentId -> sb.append(PREFIX_ID).append(studentId.id).append(" "));
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getModuleCode().ifPresent(
-                moduleCode -> sb.append(PREFIX_MODULE_CODE).append(moduleCode.moduleCode).append(" "));
+            moduleCode -> sb.append(PREFIX_MODULE_CODE).append(moduleCode.moduleCode).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getTelegramHandle().ifPresent(
-                telegramHandle -> sb.append(PREFIX_TELEGRAM_HANDLE).append(telegramHandle.telegramHandle).append(" "));
+            telegramHandle -> sb.append(PREFIX_TELEGRAM_HANDLE).append(telegramHandle.telegramHandle).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         // TODO: TaskList should be included if we implement the edit task function
 
