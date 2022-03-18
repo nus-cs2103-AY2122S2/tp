@@ -62,14 +62,18 @@ public class PersonCard extends UiPart<Region> {
         favourite.setText(person.getFavourite().toString());
         userType.getChildren().add(new Label(person.getUserType().value));
 
-        StringJoiner propertyJoiner = new StringJoiner("\n");
-        person.getProperties().stream().map(Property::toString).forEach(propertyJoiner::add);
-        property.setText(propertyJoiner.toString());
+        if (person.getProperties().isEmpty()) {
+            property.setManaged(false);
+        } else {
+            StringJoiner propertyJoiner = new StringJoiner("\n");
+            person.getProperties().stream().map(Property::toString).forEach(propertyJoiner::add);
+            property.setText(propertyJoiner.toString());
+        }
 
         if (person.getPreference().isPresent()) {
             preference.setText(person.getPreference().get().toString());
         } else {
-            preference.setVisible(false);
+            preference.setManaged(false);
         }
     }
 
