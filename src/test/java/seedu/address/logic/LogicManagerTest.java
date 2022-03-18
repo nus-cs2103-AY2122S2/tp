@@ -45,10 +45,10 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonHustleBookStorage addressBookStorage =
-                new JsonHustleBookStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonHustleBookStorage hustleBookStorage =
+                new JsonHustleBookStorage(temporaryFolder.resolve("hustleBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(hustleBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -73,11 +73,11 @@ public class LogicManagerTest {
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
         // Setup LogicManager with JsonHustleBookIoExceptionThrowingStub
-        JsonHustleBookStorage addressBookStorage =
+        JsonHustleBookStorage hustleBookStorage =
                 new JsonHustleBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionHustleBook.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(hustleBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command
@@ -157,7 +157,7 @@ public class LogicManagerTest {
         }
 
         @Override
-        public void saveHustleBook(ReadOnlyHustleBook addressBook, Path filePath) throws IOException {
+        public void saveHustleBook(ReadOnlyHustleBook hustleBook, Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }

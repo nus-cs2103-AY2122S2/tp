@@ -10,25 +10,25 @@ import seedu.address.model.person.Person;
  */
 public class HustleBookBuilder {
 
-    private HustleBook addressBook;
+    private HustleBook hustleBook;
 
     public HustleBookBuilder() {
-        addressBook = new HustleBook();
+        hustleBook = new HustleBook();
     }
 
-    public HustleBookBuilder(HustleBook addressBook) {
-        this.addressBook = addressBook;
+    public HustleBookBuilder(HustleBook hustleBook) {
+        this.hustleBook = hustleBook;
     }
 
     /**
      * Adds a new {@code Person} to the {@code HustleBook} that we are building.
      */
     public HustleBookBuilder withPerson(Person person) {
-        addressBook.addPerson(person);
+        hustleBook.addPerson(person);
         return this;
     }
 
     public HustleBook build() {
-        return addressBook;
+        return hustleBook;
     }
 }

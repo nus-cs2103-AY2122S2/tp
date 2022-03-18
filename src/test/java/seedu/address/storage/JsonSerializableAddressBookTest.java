@@ -24,9 +24,9 @@ public class JsonSerializableHustleBookTest {
     public void toModelType_typicalPersonsFile_success() throws Exception {
         JsonSerializableHustleBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
                 JsonSerializableHustleBook.class).get();
-        HustleBook addressBookFromFile = dataFromFile.toModelType();
+        HustleBook hustleBookFromFile = dataFromFile.toModelType();
         HustleBook typicalPersonsHustleBook = TypicalPersons.getTypicalHustleBook();
-        assertEquals(addressBookFromFile, typicalPersonsHustleBook);
+        assertEquals(hustleBookFromFile, typicalPersonsHustleBook);
     }
 
     @Test

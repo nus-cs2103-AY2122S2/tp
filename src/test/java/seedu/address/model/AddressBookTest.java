@@ -24,23 +24,23 @@ import seedu.address.testutil.PersonBuilder;
 
 public class HustleBookTest {
 
-    private final HustleBook addressBook = new HustleBook();
+    private final HustleBook hustleBook = new HustleBook();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), hustleBook.getPersonList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
+        assertThrows(NullPointerException.class, () -> hustleBook.resetData(null));
     }
 
     @Test
     public void resetData_withValidReadOnlyHustleBook_replacesData() {
         HustleBook newData = getTypicalHustleBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+        hustleBook.resetData(newData);
+        assertEquals(newData, hustleBook);
     }
 
     @Test
@@ -51,36 +51,36 @@ public class HustleBookTest {
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
         HustleBookStub newData = new HustleBookStub(newPersons);
 
-        assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicatePersonException.class, () -> hustleBook.resetData(newData));
     }
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasPerson(null));
+        assertThrows(NullPointerException.class, () -> hustleBook.hasPerson(null));
     }
 
     @Test
     public void hasPerson_personNotInHustleBook_returnsFalse() {
-        assertFalse(addressBook.hasPerson(ALICE));
+        assertFalse(hustleBook.hasPerson(ALICE));
     }
 
     @Test
     public void hasPerson_personInHustleBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        assertTrue(addressBook.hasPerson(ALICE));
+        hustleBook.addPerson(ALICE);
+        assertTrue(hustleBook.hasPerson(ALICE));
     }
 
     @Test
     public void hasPerson_personWithSameIdentityFieldsInHustleBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
+        hustleBook.addPerson(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasPerson(editedAlice));
+        assertTrue(hustleBook.hasPerson(editedAlice));
     }
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> hustleBook.getPersonList().remove(0));
     }
 
     /**
