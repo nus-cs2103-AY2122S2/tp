@@ -1,8 +1,6 @@
 package seedu.address.logic.parser.consultations;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import java.util.stream.Stream;
 
@@ -20,7 +18,7 @@ public class DeleteConsultationCommandParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteConsultationCommand parse(String args) throws ParseException {
-        try{
+        try {
             Index targetIndex = ParserUtil.parseIndex(args);
             return new DeleteConsultationCommand(targetIndex);
         } catch (ParseException pe) {
