@@ -21,6 +21,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class SortCommandParser implements Parser<SortCommand> {
 
+    private static final String defaultOrder = "ASC";
+
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an SortCommand object for execution.
@@ -67,7 +69,11 @@ public class SortCommandParser implements Parser<SortCommand> {
         for (int i = 0; i < fields.size(); i++) {
             List<String> formattedField = new ArrayList<>();
             formattedField.add(formatPrefix(fields.get(i)));
-            formattedField.add(orders.get(i).toUpperCase());
+            if (orders.get(i).equals("")) {
+                formattedField.add(defaultOrder);
+            } else {
+                formattedField.add(orders.get(i).toUpperCase());
+            }
             formattedFields.add(formattedField);
         }
         return formattedFields.toString();

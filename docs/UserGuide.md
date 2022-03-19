@@ -247,7 +247,7 @@ Format: `sort [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STATUS] [m/MODULE]​`
 
 Examples:
 * `sort n/asc p/desc`  will sort the list by name in ascending order first. If two persons have the same name, then sort by phone number in descending order.
-* `sort n/` will sort the list by name in descending order.
+* `sort n/` will sort the list by name in ascending order.
 
 ### Undo a command : `undo`
 
