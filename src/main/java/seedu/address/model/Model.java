@@ -81,9 +81,13 @@ public interface Model {
      * {@code person} must not already exist in the address book.
      */
     void addPerson(Patient patient);
+
     void addPrescription(Prescription prescription);
+
     void deletePrescription(Prescription target);
+
     boolean hasPrescription(Prescription prescription);
+
     void setPrescription(Prescription target, Prescription editedPrescription);
 
     /**
@@ -137,6 +141,7 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredContactList(Predicate<Contact> predicate);
+
     void updateFilteredPrescriptionList(Predicate<Prescription> predicate);
 
     /**
