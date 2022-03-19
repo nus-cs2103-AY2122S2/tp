@@ -60,7 +60,6 @@
                            <StackPane fx:id="sellerListPanelPlaceholder" prefWidth="360.0" VBox.vgrow="ALWAYS" />
                         </children>
                      </VBox>
-      
                 <VBox fx:id="clientList" minWidth="360.0" prefWidth="360.0" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
                   <padding>
                     <Insets bottom="10" left="10" right="10" top="10" />
