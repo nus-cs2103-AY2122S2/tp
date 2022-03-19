@@ -273,7 +273,7 @@ back to `George`, using `redo` will restore the contact's name back to `Adam`.
 
 Copy the people within address book. Attach a clipboard to the side of CLI to copy data.
 
-Format: `sort [INDEX] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STATUS] [m/MODULE] [f/FORMAT]​`
+Format: `copy [INDEX] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STATUS] [m/MODULE] [f/FORMAT]​`
 
 * Copy persons using specified field names.​
 * If no fields are specified, all fields will be copied.
