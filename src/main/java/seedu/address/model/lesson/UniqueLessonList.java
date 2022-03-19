@@ -11,7 +11,7 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
-import seedu.address.model.lesson.exceptions.ConflictsWithLessonException;
+import seedu.address.model.lesson.exceptions.ConflictsWithLessonsException;
 import seedu.address.model.lesson.exceptions.ContainsConflictingLessonsException;
 import seedu.address.model.lesson.exceptions.LessonNotFoundException;
 import seedu.address.model.student.Student;
@@ -80,7 +80,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
     public void add(Lesson toAdd) {
         requireNonNull(toAdd);
         if (hasConflictingLesson(toAdd)) {
-            throw new ConflictsWithLessonException(toAdd, findLessonConflictingWith(toAdd));
+            throw new ConflictsWithLessonsException(toAdd, findAllLessonsConflictingWith(toAdd));
         }
         internalList.add(toAdd);
     }
@@ -122,7 +122,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
         }
 
         if (hasConflictingLesson(editedLesson)) {
-            throw new ConflictsWithLessonException(editedLesson, findLessonConflictingWith(editedLesson));
+            throw new ConflictsWithLessonsException(editedLesson, findAllLessonsConflictingWith(editedLesson));
         }
 
         internalList.set(index, editedLesson);

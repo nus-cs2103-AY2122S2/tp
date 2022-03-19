@@ -7,26 +7,30 @@ import seedu.address.model.lesson.Lesson;
 /**
  * Signals that the operation will result in two lessons with conflicting timeslots.
  */
-public class ContainsConflictingLessonsException extends RuntimeException {
-    public static final String ERROR_MESSAGE = "These lessons have conflicting timeslots:";
-    public static final String PADDING = "   ->";
+public class ConflictsWithLessonsException extends RuntimeException {
+    public static final String ERROR_MESSAGE = "Cannot add this lesson as it conflicts with these"
+            + " lessons in your schedule:";
 
+    private final Lesson lessonToAdd;
     private final List<Lesson> conflictingLessons;
 
     /**
-     * Creates an exception specifying which lessons in the list conflict with each other.
+     * Creates an exception specifying which two lessons would conflict with each other.
+     * @param lessonToAdd
      * @param conflictingLessons
      */
-    public ContainsConflictingLessonsException(List<Lesson> conflictingLessons) {
+    public ConflictsWithLessonsException(Lesson lessonToAdd, List<Lesson> conflictingLessons) {
         super();
+
+        this.lessonToAdd = lessonToAdd;
         this.conflictingLessons = conflictingLessons;
     }
 
     @Override
     public String getMessage() {
         StringBuilder message = new StringBuilder();
-        message.append(getPadding())
-                .append(ERROR_MESSAGE)
+
+        message.append(ERROR_MESSAGE)
                 .append(getPadding());
 
         for (Lesson l : conflictingLessons) {

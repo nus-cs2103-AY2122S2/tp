@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.lesson.exceptions.ConflictsWithLessonException;
+import seedu.address.model.lesson.exceptions.ConflictsWithLessonsException;
 import seedu.address.model.lesson.exceptions.ContainsConflictingLessonsException;
 import seedu.address.testutil.TemporaryLessonBuilder;
 
@@ -57,6 +57,6 @@ public class UniqueLessonListTest {
                 .withDateTimeSlot(conflictingStartingDateTime, 0, 50)
                         .build();
 
-        assertThrows(ConflictsWithLessonException.class, () -> l.add(conflictingLesson));
+        assertThrows(ConflictsWithLessonsException.class, () -> l.add(conflictingLesson));
     }
 }

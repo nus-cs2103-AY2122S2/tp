@@ -13,7 +13,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.model.lesson.exceptions.ConflictsWithLessonException;
+import seedu.address.model.lesson.exceptions.ConflictsWithLessonsException;
 
 public class AddLessonCommand extends Command {
     public static final String COMMAND_WORD = "addlesson";
@@ -66,7 +66,7 @@ public class AddLessonCommand extends Command {
 
         try {
             model.addLesson(toAdd);
-        } catch (ConflictsWithLessonException e) {
+        } catch (ConflictsWithLessonsException e) {
             throw new CommandException(e.getMessage());
         }
 
