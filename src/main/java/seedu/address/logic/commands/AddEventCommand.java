@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_NONEXISTENT_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
@@ -38,7 +39,6 @@ public class AddEventCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New event added: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book";
-    public static final String MESSAGE_NONEXISTENT_COMPANY = "The given company does not exist in the company list";
 
     private final Event toAdd;
 

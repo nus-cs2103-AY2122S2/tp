@@ -116,7 +116,7 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         companyListPanel = new CompanyListPanel(logic.getFilteredCompanyList());
         eventListPanel = new EventListPanel(logic.getFilteredEventList());
-        entryListPanelPlaceholder.getChildren().add(companyListPanel.getRoot());
+        entryListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());

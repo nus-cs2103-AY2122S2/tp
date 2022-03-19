@@ -18,17 +18,21 @@ public class Person extends Entry {
     private final Email email;
 
     // Data fields
-    private final Address address;
+    private final Name companyName;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Name companyName, Phone phone, Email email, Set<Tag> tags) {
         super(name, tags);
-        requireAllNonNull(phone, email, address);
+        requireAllNonNull(phone, email, companyName);
+        this.companyName = companyName;
         this.phone = phone;
         this.email = email;
-        this.address = address;
+    }
+
+    public Name getCompanyName() {
+        return this.companyName;
     }
 
     public Phone getPhone() {
@@ -37,10 +41,6 @@ public class Person extends Entry {
 
     public Email getEmail() {
         return email;
-    }
-
-    public Address getAddress() {
-        return address;
     }
 
     /**
@@ -77,26 +77,26 @@ public class Person extends Entry {
         return otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getCompanyName().equals(getCompanyName())
                 && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(getName(), phone, email, address, getTags());
+        return Objects.hash(getName(), phone, email, companyName, getTags());
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
+                .append("; Company: ")
+                .append(getCompanyName())
                 .append("; Phone: ")
                 .append(getPhone())
                 .append("; Email: ")
-                .append(getEmail())
-                .append("; Address: ")
-                .append(getAddress());
+                .append(getEmail());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

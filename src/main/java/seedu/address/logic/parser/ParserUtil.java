@@ -136,7 +136,7 @@ public class ParserUtil {
         requireNonNull(companyName);
         String trimmedCompanyName = companyName.trim();
         if (!Name.isValidName(trimmedCompanyName)) {
-            throw new ParseException("Company name cannot be empty");
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedCompanyName);
     }
