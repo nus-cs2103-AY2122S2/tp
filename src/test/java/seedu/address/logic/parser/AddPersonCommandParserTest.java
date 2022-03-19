@@ -62,7 +62,7 @@ public class AddPersonCommandParserTest {
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB
                 + COMPANY_DESC_BOB + TAG_DESC_FRIEND, new AddPersonCommand(expectedPerson));
 
-        // multiple addresses - last address accepted
+        // multiple company names - last company names accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + COMPANY_DESC_AMY
                 + COMPANY_DESC_BOB + TAG_DESC_FRIEND, new AddPersonCommand(expectedPerson));
 
@@ -97,7 +97,7 @@ public class AddPersonCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + COMPANY_DESC_BOB,
                 expectedMessage);
 
-        // missing address prefix
+        // missing company name prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_COMPANY_BOB,
                 expectedMessage);
 
@@ -120,7 +120,7 @@ public class AddPersonCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + COMPANY_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
 
-        // invalid address
+        // invalid company name
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_COMPANY_DESC
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
 

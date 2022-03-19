@@ -28,7 +28,7 @@ public class CompanyBuilder {
     private Set<Tag> tags;
 
     /**
-     * Creates a {@code PersonBuilder} with the default details.
+     * Creates a {@code CompanyBuilder} with the default details.
      */
     public CompanyBuilder() {
         name = new Name(DEFAULT_NAME);
@@ -39,7 +39,7 @@ public class CompanyBuilder {
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code personToCopy}.
+     * Initializes the CompanyBuilder with the data of {@code companyToCopy}.
      */
     public CompanyBuilder(Company companyToCopy) {
         name = companyToCopy.getName();
@@ -50,7 +50,7 @@ public class CompanyBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code Person} that we are building.
+     * Sets the {@code Name} of the {@code Company} that we are building.
      */
     public CompanyBuilder withName(String name) {
         this.name = new Name(name);
@@ -58,7 +58,7 @@ public class CompanyBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Company} that we are building.
      */
     public CompanyBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
@@ -66,7 +66,7 @@ public class CompanyBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code Person} that we are building.
+     * Sets the {@code Phone} of the {@code Company} that we are building.
      */
     public CompanyBuilder withPhone(String phone) {
         this.phone = new Phone(phone);
@@ -74,7 +74,7 @@ public class CompanyBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code Person} that we are building.
+     * Sets the {@code Email} of the {@code Company} that we are building.
      */
     public CompanyBuilder withEmail(String email) {
         this.email = new Email(email);
@@ -82,7 +82,7 @@ public class CompanyBuilder {
     }
 
     /**
-     * Sets the {@code address} of the {@code Person} that we are building.
+     * Sets the {@code address} of the {@code Company} that we are building.
      */
     public CompanyBuilder withAddress(String address) {
         this.address = new Address(address);
