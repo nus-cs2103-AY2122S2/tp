@@ -155,7 +155,8 @@ public class ModelManagerTest {
         modelManager.addPerson(ALICE);
         modelManager.addPerson(BOB);
         modelManager.addAppointment(APPOINTMENT_ALICE);
-        Appointment appointment2 = new AppointmentBuilder(APPOINTMENT_ALONE).withPerson(BOB).build();
+        modelManager.addAppointment(APPOINTMENT_ALONE);
+        Appointment appointment2 = new AppointmentBuilder(APPOINTMENT_EXTRA).withPerson(BOB).build();
         modelManager.addAppointment(appointment2);
 
         modelManager.deletePerson(ALICE);
@@ -163,6 +164,7 @@ public class ModelManagerTest {
         ModelManager expectedModel = new ModelManager();
         expectedModel.addTag(FRIENDS);
         expectedModel.addPerson(BOB);
+        expectedModel.addAppointment(APPOINTMENT_ALONE);
         expectedModel.addAppointment(new AppointmentBuilder(APPOINTMENT_ALICE).withPerson(null).build());
         expectedModel.addAppointment(appointment2);
         assertEquals(expectedModel, modelManager);
@@ -198,8 +200,9 @@ public class ModelManagerTest {
     public void setPerson_personInAddressBookHasAppointments_success() {
         modelManager.addPerson(ALICE);
         modelManager.addPerson(BOB);
+        modelManager.addAppointment(APPOINTMENT_ALONE);
         modelManager.addAppointment(APPOINTMENT_ALICE);
-        Appointment appointment2 = new AppointmentBuilder(APPOINTMENT_ALONE).withPerson(BOB).build();
+        Appointment appointment2 = new AppointmentBuilder(APPOINTMENT_EXTRA).withPerson(BOB).build();
         modelManager.addAppointment(appointment2);
 
         modelManager.setPerson(ALICE, CARL);
@@ -208,6 +211,7 @@ public class ModelManagerTest {
         expectedModel.addTag(FRIENDS);
         expectedModel.addPerson(CARL);
         expectedModel.addPerson(BOB);
+        expectedModel.addAppointment(APPOINTMENT_ALONE);
         expectedModel.addAppointment(new AppointmentBuilder(APPOINTMENT_ALICE).withPerson(CARL).build());
         expectedModel.addAppointment(appointment2);
         assertEquals(expectedModel, modelManager);
