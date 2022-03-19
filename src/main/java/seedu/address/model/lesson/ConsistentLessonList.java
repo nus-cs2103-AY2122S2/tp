@@ -17,10 +17,14 @@ import seedu.address.model.lesson.exceptions.LessonNotFoundException;
 import seedu.address.model.student.Student;
 
 /**
- * A list of lessons that enforces uniqueness between its elements and does not allow nulls.
- * A lesson is considered unique by comparing using {@code Lesson#isClashingWith(Lesson)}.
- * As such, adding and updating of lessons uses Lesson#isClashingWith(Lesson) for equality so as to
- * ensure that the lesson being added or updated does not clash with any lesson in the UniqueLessonList.
+ * A list of lessons that enforces consistency between the lessons contained in it and does not allow nulls.
+ *
+ * A lesson is considered consistent if its assigned date and time does not clash with any other lesson inside
+ * the list. This is achieved using {@code Lesson#isClashingWith(Lesson)}.
+ *
+ * As such, adding and updating of lessons uses Lesson#isClashingWith(Lesson) to ensure that the lesson
+ * being added or updated does not clash with any lesson in the ConsistentLessonList.
+ *
  * However, the removal of a lesson uses Lesson#equals(Object) to ensure that the lesson with exactly the
  * same fields will be removed.
  *
@@ -28,7 +32,7 @@ import seedu.address.model.student.Student;
  *
  * @see Lesson#isConflictingWithLesson(Lesson)
  */
-public class UniqueLessonList implements Iterable<Lesson> {
+public class ConsistentLessonList implements Iterable<Lesson> {
 
     private final ObservableList<Lesson> internalList = FXCollections.observableArrayList();
     private final ObservableList<Lesson> internalUnmodifiableList =
@@ -139,7 +143,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
         }
     }
 
-    public void setLessons(UniqueLessonList replacement) {
+    public void setLessons(ConsistentLessonList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
@@ -173,8 +177,8 @@ public class UniqueLessonList implements Iterable<Lesson> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof UniqueLessonList // instanceof handles nulls
-                        && internalList.equals(((UniqueLessonList) other).internalList));
+                || (other instanceof ConsistentLessonList // instanceof handles nulls
+                        && internalList.equals(((ConsistentLessonList) other).internalList));
     }
 
     @Override

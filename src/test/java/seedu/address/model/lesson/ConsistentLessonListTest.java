@@ -11,7 +11,7 @@ import seedu.address.model.lesson.exceptions.ConflictsWithLessonsException;
 import seedu.address.model.lesson.exceptions.ContainsConflictingLessonsException;
 import seedu.address.testutil.TemporaryLessonBuilder;
 
-public class UniqueLessonListTest {
+public class ConsistentLessonListTest {
     private final LocalDateTime sameLessonDateTime = LocalDateTime.of(
             2022, 1, 25, 18, 0, 0);
 
@@ -41,14 +41,14 @@ public class UniqueLessonListTest {
 
     @Test
     public void setLessons_settingConflictingLessons_throwsContainsConflictingLessonsException() {
-        UniqueLessonList l = new UniqueLessonList();
+        ConsistentLessonList l = new ConsistentLessonList();
 
         assertThrows(ContainsConflictingLessonsException.class, () -> l.setLessons(listWithConflictingLessons));
     }
 
     @Test
     public void setLessons_addingConflictingLesson_throwsConflictsWithLessonException() {
-        UniqueLessonList l = new UniqueLessonList();
+        ConsistentLessonList l = new ConsistentLessonList();
         l.setLessons(listWithNonConflictingLessons);
 
         LocalDateTime conflictingStartingDateTime = differentLessonDateTimeOne;
