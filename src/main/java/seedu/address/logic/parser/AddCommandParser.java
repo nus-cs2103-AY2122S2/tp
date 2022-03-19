@@ -43,12 +43,6 @@ public class AddCommandParser implements Parser<AddCommand> {
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
-        // if the user did not input both property & preference prefixes, throw an error
-        //if (!arePrefixesPresent(argMultimap, PREFIX_PROPERTY, PREFIX_PREFERENCE)) {
-        if (argMultimap.getValue(PREFIX_PREFERENCE).isPresent() && argMultimap.getValue(PREFIX_PROPERTY).isPresent()
-            || argMultimap.getValue(PREFIX_PREFERENCE).isEmpty() && argMultimap.getValue(PREFIX_PROPERTY).isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UserType.MESSAGE_USAGE));
-        }
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
