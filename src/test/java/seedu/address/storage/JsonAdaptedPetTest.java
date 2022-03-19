@@ -33,6 +33,11 @@ public class JsonAdaptedPetTest {
     private static final List<JsonAdaptedTag> VALID_TAGS = PIZZA.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
+    private static final List<JsonAdaptedAttendance> VALID_ATTENDANCE_MAP = PIZZA.getAttendanceHashMap()
+            .toCollection()
+            .stream()
+            .map(JsonAdaptedAttendance::new)
+            .collect(Collectors.toList());
 
     @Test
     public void toModelType_validPetDetails_returnsPet() throws Exception {
@@ -44,7 +49,7 @@ public class JsonAdaptedPetTest {
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedPet pet =
                 new JsonAdaptedPet(INVALID_NAME, VALID_PHONE, VALID_OWNER_NAME, VALID_ADDRESS,
-                        VALID_TAGS, VALID_DIET, VALID_APPOINTMENT);
+                        VALID_TAGS, VALID_DIET, VALID_APPOINTMENT, VALID_ATTENDANCE_MAP);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, pet::toModelType);
     }
@@ -52,7 +57,7 @@ public class JsonAdaptedPetTest {
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
         JsonAdaptedPet pet = new JsonAdaptedPet(null, VALID_PHONE, VALID_OWNER_NAME,
-                VALID_ADDRESS, VALID_TAGS, VALID_DIET, VALID_APPOINTMENT);
+                VALID_ADDRESS, VALID_TAGS, VALID_DIET, VALID_APPOINTMENT, VALID_ATTENDANCE_MAP);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, pet::toModelType);
     }
@@ -61,7 +66,7 @@ public class JsonAdaptedPetTest {
     public void toModelType_invalidPhone_throwsIllegalValueException() {
         JsonAdaptedPet pet =
                 new JsonAdaptedPet(VALID_NAME, VALID_OWNER_NAME, INVALID_PHONE, VALID_ADDRESS,
-                        VALID_TAGS, VALID_DIET, VALID_APPOINTMENT);
+                        VALID_TAGS, VALID_DIET, VALID_APPOINTMENT, VALID_ATTENDANCE_MAP);
         String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, pet::toModelType);
     }
@@ -69,7 +74,7 @@ public class JsonAdaptedPetTest {
     @Test
     public void toModelType_nullPhone_throwsIllegalValueException() {
         JsonAdaptedPet pet = new JsonAdaptedPet(VALID_NAME, VALID_OWNER_NAME, null,
-                VALID_ADDRESS, VALID_TAGS, VALID_DIET, VALID_APPOINTMENT);
+                VALID_ADDRESS, VALID_TAGS, VALID_DIET, VALID_APPOINTMENT, VALID_ATTENDANCE_MAP);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, pet::toModelType);
     }
@@ -78,7 +83,7 @@ public class JsonAdaptedPetTest {
     public void toModelType_invalidOwnerName_throwsIllegalValueException() {
         JsonAdaptedPet pet =
                 new JsonAdaptedPet(VALID_NAME, INVALID_OWNER_NAME, VALID_PHONE, VALID_ADDRESS,
-                        VALID_TAGS, VALID_DIET, VALID_APPOINTMENT);
+                        VALID_TAGS, VALID_DIET, VALID_APPOINTMENT, VALID_ATTENDANCE_MAP);
         String expectedMessage = OwnerName.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, pet::toModelType);
     }
@@ -86,7 +91,7 @@ public class JsonAdaptedPetTest {
     @Test
     public void toModelType_nullOwnerName_throwsIllegalValueException() {
         JsonAdaptedPet pet = new JsonAdaptedPet(VALID_NAME, null, VALID_PHONE, VALID_ADDRESS,
-                VALID_TAGS, VALID_DIET, VALID_APPOINTMENT);
+                VALID_TAGS, VALID_DIET, VALID_APPOINTMENT, VALID_ATTENDANCE_MAP);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, OwnerName.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, pet::toModelType);
     }
@@ -95,7 +100,7 @@ public class JsonAdaptedPetTest {
     public void toModelType_invalidAddress_throwsIllegalValueException() {
         JsonAdaptedPet pet =
                 new JsonAdaptedPet(VALID_NAME, VALID_OWNER_NAME, VALID_PHONE, INVALID_ADDRESS,
-                        VALID_TAGS, VALID_DIET, VALID_APPOINTMENT);
+                        VALID_TAGS, VALID_DIET, VALID_APPOINTMENT, VALID_ATTENDANCE_MAP);
         String expectedMessage = Address.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, pet::toModelType);
     }
@@ -103,7 +108,7 @@ public class JsonAdaptedPetTest {
     @Test
     public void toModelType_nullAddress_throwsIllegalValueException() {
         JsonAdaptedPet pet = new JsonAdaptedPet(VALID_NAME, VALID_OWNER_NAME,
-                VALID_PHONE, null, VALID_TAGS, VALID_DIET, VALID_APPOINTMENT);
+                VALID_PHONE, null, VALID_TAGS, VALID_DIET, VALID_APPOINTMENT, VALID_ATTENDANCE_MAP);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, pet::toModelType);
     }
@@ -114,7 +119,7 @@ public class JsonAdaptedPetTest {
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
         JsonAdaptedPet pet =
                 new JsonAdaptedPet(VALID_NAME, VALID_OWNER_NAME, VALID_PHONE, VALID_ADDRESS,
-                        invalidTags, VALID_DIET, VALID_APPOINTMENT);
+                        invalidTags, VALID_DIET, VALID_APPOINTMENT, VALID_ATTENDANCE_MAP);
         assertThrows(IllegalValueException.class, pet::toModelType);
     }
 

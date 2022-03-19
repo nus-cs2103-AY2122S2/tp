@@ -56,7 +56,8 @@ public class DietCommand extends Command {
         Pet petToEdit = lastShownList.get(index.getZeroBased());
         Pet editedPet = new Pet(
                 petToEdit.getName(), petToEdit.getOwnerName(), petToEdit.getPhone(),
-                petToEdit.getAddress(), petToEdit.getTags(), diet, petToEdit.getAppointment());
+                petToEdit.getAddress(), petToEdit.getTags(), diet, petToEdit.getAppointment(),
+                petToEdit.getAttendanceHashMap());
 
         model.setPet(petToEdit, editedPet);
         model.updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);

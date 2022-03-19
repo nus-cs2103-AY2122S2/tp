@@ -2,8 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_LOCATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import java.util.stream.Stream;
 
@@ -26,11 +26,11 @@ public class AppointmentCommandParser implements Parser<AppointmentCommand> {
     public AppointmentCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
-                PREFIX_APPOINTMENT_DATE, PREFIX_APPOINTMENT_LOCATION);
+                PREFIX_DATE, PREFIX_TIME);
 
         Index index;
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_APPOINTMENT_DATE, PREFIX_APPOINTMENT_LOCATION)) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_DATE, PREFIX_TIME)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AppointmentCommand.MESSAGE_USAGE));
         }
@@ -42,8 +42,8 @@ public class AppointmentCommandParser implements Parser<AppointmentCommand> {
                     AppointmentCommand.MESSAGE_USAGE), pe);
         }
 
-        Appointment appointment = ParserUtil.parseAppointment(argMultimap.getValue(PREFIX_APPOINTMENT_DATE).get(),
-                argMultimap.getValue(PREFIX_APPOINTMENT_LOCATION).get());
+        Appointment appointment = ParserUtil.parseAppointment(argMultimap.getValue(PREFIX_DATE).get(),
+                argMultimap.getValue(PREFIX_TIME).get());
 
         return new AppointmentCommand(index, appointment);
     }

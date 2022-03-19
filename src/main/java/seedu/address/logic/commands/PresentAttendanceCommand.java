@@ -1,0 +1,163 @@
+package seedu.address.logic.commands;
+
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DROPOFF;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PICKUP;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PETS;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.List;
+
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.attendance.PresentAttendance;
+import seedu.address.model.pet.AttendanceHashMap;
+import seedu.address.model.pet.Pet;
+
+public class PresentAttendanceCommand extends Command {
+
+    public static final String COMMAND_WORD = "present";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks an attendance of a pet as present "
+            + "by the index number used in the displayed pet list. \n"
+            + "Includes the date, pick up time and drop off time (if any). \n"
+            + "Parameters: INDEX (must be a positive integer) "
+            + "[" + PREFIX_DATE + "DATE OF ATTENDANCE IN DD/MM/YYYY] "
+            + "[" + PREFIX_PICKUP + "PICK UP TIME IN HH:MM] "
+            + "[" + PREFIX_DROPOFF + "DROP OFF TIME IN HH:MM] \n"
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_DATE + "15/03/2022 "
+            + PREFIX_PICKUP + "09:15 "
+            + PREFIX_DROPOFF + "18:00";
+
+    public static final String MESSAGE_PRESENT_ATTENDANCE_SUCCESS = "Successfully marked %1$s! as present!";
+    public static final String MESSAGE_PRESENT_ATTENDANCE_FAILURE =
+            "Seems like you have already marked %1$s as present!";
+
+    private final Index index;
+    private final PetAttendanceDescriptor petAttendanceDescriptor;
+
+    /**
+     * @param index                   of the pet in the filtered pets list to mark as present.
+     * @param petAttendanceDescriptor the present attendance of the pet to be stored.
+     */
+    public PresentAttendanceCommand(Index index, PetAttendanceDescriptor petAttendanceDescriptor) {
+        requireAllNonNull(index, petAttendanceDescriptor);
+
+        this.index = index;
+        this.petAttendanceDescriptor = petAttendanceDescriptor;
+    }
+
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+        List<Pet> lastShownList = model.getFilteredPetList();
+
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);
+        }
+
+        Pet petToEdit = lastShownList.get(index.getZeroBased());
+        AttendanceHashMap targetAttendanceHashMap = petToEdit.getAttendanceHashMap();
+
+        PresentAttendance presentAttendance = new PresentAttendance(petAttendanceDescriptor.getAttendanceDate(),
+                petAttendanceDescriptor.getPickUpTime(), petAttendanceDescriptor.getDropOffTime());
+
+        if (targetAttendanceHashMap.containsAttendance(presentAttendance)) {
+            throw new CommandException(MESSAGE_PRESENT_ATTENDANCE_FAILURE);
+        }
+
+        AttendanceHashMap editedAttendanceHashMap = targetAttendanceHashMap.addAttendance(presentAttendance);
+
+        Pet editedPet = new Pet(
+                petToEdit.getName(), petToEdit.getOwnerName(), petToEdit.getPhone(),
+                petToEdit.getAddress(), petToEdit.getTags(), petToEdit.getDiet(),
+                petToEdit.getAppointment(), editedAttendanceHashMap);
+
+        model.setPet(petToEdit, editedPet);
+        model.updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
+
+        return new CommandResult(generateSuccessMessage(editedPet));
+    }
+
+    /**
+     * Generates a command execution success message based on the
+     * {@code petToEdit}.
+     */
+    private String generateSuccessMessage(Pet petToEdit) {
+        return String.format(MESSAGE_PRESENT_ATTENDANCE_SUCCESS, petToEdit);
+    }
+
+    /**
+     * Stores the attendance details to edit the pet with.
+     */
+    public static class PetAttendanceDescriptor {
+        private LocalDate attendanceDate;
+        private LocalTime pickUpTime;
+        private LocalTime dropOffTime;
+
+        public PetAttendanceDescriptor() {
+        }
+
+        /**
+         * Copy Constructor
+         *
+         * @param petAttendanceDescriptor takes in another PetAttendanceDescriptor class
+         */
+        public PetAttendanceDescriptor(PetAttendanceDescriptor petAttendanceDescriptor) {
+            setAttendanceDate(petAttendanceDescriptor.attendanceDate);
+            setPickUpTime(petAttendanceDescriptor.pickUpTime);
+            setDropOffTime(petAttendanceDescriptor.dropOffTime);
+        }
+
+
+        public void setAttendanceDate(LocalDate attendanceDate) {
+            this.attendanceDate = attendanceDate;
+        }
+
+        public void setPickUpTime(LocalTime pickUpTime) {
+            this.pickUpTime = pickUpTime;
+        }
+
+        public void setDropOffTime(LocalTime dropOffTime) {
+            this.dropOffTime = dropOffTime;
+        }
+
+        public LocalDate getAttendanceDate() {
+            return attendanceDate;
+        }
+
+        public LocalTime getPickUpTime() {
+            return pickUpTime;
+        }
+
+        public LocalTime getDropOffTime() {
+            return dropOffTime;
+        }
+
+    }
+
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof PresentAttendanceCommand)) {
+            return false;
+        }
+
+        // state check
+        PresentAttendanceCommand e = (PresentAttendanceCommand) other;
+        return index.equals(e.index)
+                && petAttendanceDescriptor.equals(e.petAttendanceDescriptor);
+    }
+
+
+}
