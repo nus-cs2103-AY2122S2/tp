@@ -17,7 +17,7 @@ public class ClassGroupBuilder {
     public static final String DEFAULT_CLASS_GROUP_TYPE = ClassGroupType.SECTIONAL.toString();
     public static final String DEFAULT_MODULE_NAME = "Software Engineering";
     public static final String DEFAULT_MODULE_CODE = "CS2101";
-    public static final String DEFAULT_ACADEMIC_YEAR = "y1s1";
+    public static final String DEFAULT_ACADEMIC_YEAR = "21S1";
 
     private ClassGroupId classGroupId;
     private ClassGroupType classGroupType;

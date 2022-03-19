@@ -17,8 +17,7 @@ public class TypicalStudents {
             .withStudentId("E0123458").withEmail("benson@example.com")
             .withTelegram("bensonhandle").build();
     public static final Student CARL = new StudentBuilder().withName("Carl Kurz")
-            .withStudentId("E0123459").withEmail("carl@example.com")
-            .withTelegram("carlxx").build();
+            .withStudentId("E0123459").withEmail("carl@example.com").build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
