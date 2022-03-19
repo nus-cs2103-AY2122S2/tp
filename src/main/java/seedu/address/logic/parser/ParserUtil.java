@@ -132,13 +132,13 @@ public class ParserUtil {
      * @throws ParseException if the given companyName is invalid.
      */
 
-    public static String parseCompanyName(String companyName) throws ParseException {
+    public static Name parseCompanyName(String companyName) throws ParseException {
         requireNonNull(companyName);
         String trimmedCompanyName = companyName.trim();
-        if (trimmedCompanyName.equals("")) {
+        if (!Name.isValidName(trimmedCompanyName)) {
             throw new ParseException("Company name cannot be empty");
         }
-        return trimmedCompanyName;
+        return new Name(trimmedCompanyName);
     }
 
     /**

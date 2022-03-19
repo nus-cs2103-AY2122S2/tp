@@ -38,6 +38,7 @@ public class AddEventCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New event added: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book";
+    public static final String MESSAGE_NONEXISTENT_COMPANY = "The given company does not exist in the company list";
 
     private final Event toAdd;
 
@@ -52,6 +53,10 @@ public class AddEventCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        if (!model.hasCompany(toAdd.getCompanyName())) {
+            throw new CommandException(MESSAGE_NONEXISTENT_COMPANY);
+        }
 
         if (model.hasEvent(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);

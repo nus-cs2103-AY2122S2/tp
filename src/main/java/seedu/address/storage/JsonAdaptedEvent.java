@@ -55,7 +55,7 @@ class JsonAdaptedEvent {
      */
     public JsonAdaptedEvent(Event source) {
         name = source.getName().fullName;
-        company = source.getCompany();
+        company = source.getCompanyName().fullName;
         date = source.getDate().date;
         time = source.getTime().time;
         location = source.getLocation().location;
@@ -91,7 +91,7 @@ class JsonAdaptedEvent {
         if (company.equals("")) {
             throw new IllegalValueException("Company name cannot be blank");
         }
-        final String modelCompany = company;
+        final Name modelCompany = new Name(company);
 
         //=========================== Date ==========================================================
         if (date == null) {

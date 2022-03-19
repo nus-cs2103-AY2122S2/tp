@@ -2,6 +2,7 @@ package seedu.address.model.entry;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -29,6 +30,15 @@ public class Company extends Entry {
         this.phone = phone;
         this.email = email;
         this.address = address;
+    }
+
+    /**
+     * Creates a dummy Company object with the given name.
+     * @param companyName The name of the dummy Company.
+     * @return The dummy Company.
+     */
+    public static Company createDummyCompany(Name companyName) {
+        return new Company(companyName, new Phone("1234"), new Email("a@a.com"), new Address("a"), new HashSet<>());
     }
 
     public Phone getPhone() {
