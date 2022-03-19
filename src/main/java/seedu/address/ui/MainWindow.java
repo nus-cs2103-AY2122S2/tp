@@ -32,6 +32,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private ClientListPanel clientListPanel;
+    private SellerListPanel sellerListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private ListSelectionTab listSelectionTab;
@@ -53,6 +54,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane tabHolder;
+
+    @FXML
+    private StackPane sellerListPanelPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -116,6 +120,9 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         clientListPanel = new ClientListPanel(logic.getFilteredclientList());
         clientListPanelPlaceholder.getChildren().add(clientListPanel.getRoot());
+
+        sellerListPanel = new SellerListPanel(logic.getFilteredSellerList());
+        sellerListPanelPlaceholder.getChildren().add(sellerListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());

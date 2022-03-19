@@ -40,7 +40,7 @@ public class AddSellerCommandParser implements Parser<AddSellerCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Appointment appointment = new Appointment("");
-        Seller seller = new Seller(name, phone, appointment, tagList, new ArrayList<>());
+        Seller seller = new Seller(name, phone, appointment, tagList);
 
         return new AddSellerCommand(seller);
     }

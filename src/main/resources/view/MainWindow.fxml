@@ -55,9 +55,9 @@
                <StackPane fx:id="tabHolder" minWidth="800.0" prefHeight="30.0" />
                <HBox minWidth="720.0" prefWidth="800.0" VBox.vgrow="ALWAYS">
                   <children>
-                     <VBox fx:id="buyerList" minWidth="360.0" prefWidth="360.0" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
+                     <VBox fx:id="sellerList" minWidth="360.0" prefWidth="360.0" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
                         <children>
-                           <StackPane fx:id="buyerListPanelPlaceHolder" prefWidth="360.0" VBox.vgrow="ALWAYS" />
+                           <StackPane fx:id="sellerListPanelPlaceholder" prefWidth="360.0" VBox.vgrow="ALWAYS" />
                         </children>
                      </VBox>
       

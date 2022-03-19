@@ -1,15 +1,20 @@
 package seedu.address.model.util;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlySellerAddressBook;
+import seedu.address.model.SellerAddressBook;
 import seedu.address.model.client.Appointment;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.property.PropertyToSell;
+import seedu.address.model.seller.Seller;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -36,12 +41,27 @@ public class SampleDataUtil {
         };
     }
 
+    public static Seller[] getSampleSellers() {
+        return new Seller[] {
+            new Seller(new Name("Jacky"), new Phone("2103"),
+            NO_APPOINTMENT, getTagSet("friends"))
+        };
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Client sampleClient : getSampleclients()) {
             sampleAb.addclient(sampleClient);
         }
         return sampleAb;
+    }
+
+    public static ReadOnlySellerAddressBook getSampleSellerAddressBook() {
+        SellerAddressBook sampleSab = new SellerAddressBook();
+        for (Seller sampleSeller : getSampleSellers()) {
+            sampleSab.addSeller(sampleSeller);
+        }
+        return sampleSab;
     }
 
     /**
