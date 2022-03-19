@@ -47,17 +47,17 @@ public class JsonStudentBookStorageTest {
 
     @Test
     public void read_notJsonFormat_exceptionThrown() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("notJsonFormatAddressBook.json"));
+        assertThrows(DataConversionException.class, () -> readAddressBook("notJsonFormatStudentBook.json"));
     }
 
     @Test
     public void readAddressBook_invalidStudentAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("invalidStudentAddressBook.json"));
+        assertThrows(DataConversionException.class, () -> readAddressBook("invalidStudentBook.json"));
     }
 
     @Test
     public void readAddressBook_invalidAndValidStudentAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("invalidAndValidStudentAddressBook.json"));
+        assertThrows(DataConversionException.class, () -> readAddressBook("invalidAndValidStudentBook.json"));
     }
 
     @Test
