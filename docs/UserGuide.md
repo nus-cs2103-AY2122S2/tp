@@ -1,11 +1,10 @@
 
-| Quick Links     |
-|-----------------|
-| Glossary        |
-| User Guide      |
-| Quick start     |
-| Features        |
-| Command Summary |
+| Quick Links                         |
+|-------------------------------------|
+| [Glossary](#Glossary)               |
+| [Quick start](#Quick-start)         |
+| [Features](#Features)               |
+| [Command Summary](#Command-Summary) |
 
 
 Ultimate DivocTracker is a desktop app for managing COVID-19 contacts in school admin, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Ultimate DivocTracker can get your contact management tasks done faster than traditional GUI apps.
