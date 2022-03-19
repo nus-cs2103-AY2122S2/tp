@@ -7,13 +7,13 @@ import java.util.List;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.HustleBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes a person identified using it's displayed index from the hustle book.
  */
 public class DeleteCommand extends Command {
 
@@ -36,8 +36,8 @@ public class DeleteCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-        AddressBook tempAddressBook = new AddressBook();
-        Index targetIndex = tempAddressBook.getPersonListIndex(lastShownList, targetName);
+        HustleBook tempHustleBook = new HustleBook();
+        Index targetIndex = tempHustleBook.getPersonListIndex(lastShownList, targetName);
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_NAME);

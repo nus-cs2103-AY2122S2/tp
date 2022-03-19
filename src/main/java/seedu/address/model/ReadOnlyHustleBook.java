@@ -4,9 +4,9 @@ import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of an hustle book
  */
-public interface ReadOnlyAddressBook {
+public interface ReadOnlyHustleBook {
 
     /**
      * Returns an unmodifiable view of the persons list.
