@@ -69,7 +69,7 @@
                                  <Font size="14.0" />
                               </font>
                            </Label>
-                           <TextField fx:id="emailField" prefHeight="44.0" prefWidth="449.0" promptText="johndoe@example.com" />
+                           <TextField fx:id="emailField" prefHeight="44.0" prefWidth="449.0" promptText="johndoe@example.com" onAction="#handleEnter"/>
                         </children>
                      </HBox>
                      <Label fx:id="errorLabel" alignment="CENTER" prefHeight="57.0" prefWidth="524.0" text="Label" textFill="WHITE">

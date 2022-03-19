@@ -186,10 +186,21 @@ public class AddWindow extends UiPart<Stage> {
         return false;
     }
 
+    /**
+     * Handles the case where the "Cancel" button is pressed.
+     */
     @FXML
     private void handleCancel() {
         this.resetFields();
         this.hide();
+    }
+
+    /**
+     * Handles the case where ENTER key is pressed on the last TextField
+     */
+    @FXML
+    private void handleEnter() {
+        this.handleAdd();
     }
 
     /**
