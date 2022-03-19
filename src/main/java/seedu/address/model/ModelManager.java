@@ -40,6 +40,10 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredCompanies = new FilteredList<>(this.addressBook.getCompanyList());
         filteredEvents = new FilteredList<>(this.addressBook.getEventList());
+
+        // Don't allow deleting/finding/editing on the persons or events list at the beginning
+        filteredPersons.setPredicate(PREDICATE_SHOW_NO_PERSONS);
+        filteredEvents.setPredicate(PREDICATE_SHOW_NO_EVENTS);
     }
 
     public ModelManager() {
