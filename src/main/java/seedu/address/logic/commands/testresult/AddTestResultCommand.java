@@ -28,7 +28,7 @@ public class AddTestResultCommand extends Command {
             + PREFIX_NRIC + "PATIENT_NRIC "
             + PREFIX_TESTDATE + "TEST_DATE "
             + PREFIX_MEDICALTEST + "MEDICAL_TEST "
-            + PREFIX_RESULT + "TEST_RESULT "
+            + PREFIX_RESULT + "TEST_RESULT \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TYPE + "test "
             + PREFIX_NRIC + "S1234567L "

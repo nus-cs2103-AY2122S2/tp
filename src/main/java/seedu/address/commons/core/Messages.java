@@ -13,6 +13,8 @@ public class Messages {
     public static final String MESSAGE_CONSULTATION_LISTED_OVERVIEW = "%1$d consultations listed! Belongs to: %2$s";
     public static final String MESSAGE_MEDICALS_LISTED_OVERVIEW = "%1$d medical information listed! Belongs to: %2$s";
     public static final String MESSAGE_PRESCRIPTIONS_LISTED_OVERVIEW = "%1$d prescription listed! Belongs to: %2$s";
+    public static final String MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX =
+            "The contact index provided is invalid";
     public static final String MESSAGE_INVALID_PRESCRIPTION_DISPLAYED_INDEX =
             "The prescription index provided is invalid";
     public static final String MESSAGE_TEST_RESULTS_LISTED_OVERVIEW = "%1$d test results listed! Belongs to: %2$s";

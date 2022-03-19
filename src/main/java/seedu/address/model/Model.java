@@ -83,9 +83,13 @@ public interface Model {
      * {@code person} must not already exist in the address book.
      */
     void addPerson(Patient patient);
+
     void addPrescription(Prescription prescription);
+
     void deletePrescription(Prescription target);
+
     boolean hasPrescription(Prescription prescription);
+
     void setPrescription(Prescription target, Prescription editedPrescription);
 
     /**
@@ -97,11 +101,13 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Patient> getFilteredPersonList();
+
     ObservableList<Medical> getFilteredMedicalList();
+
     ObservableList<Prescription> getFilteredPrescriptionList();
 
     /** Returns the person list **/
-    ObservableList getPersonList();
+    ObservableList<Patient> getPersonList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
@@ -143,6 +149,11 @@ public interface Model {
      */
     void updateFilteredContactList(Predicate<Contact> predicate);
 
+
+    // Consultation
+
+    void updateFilteredPrescriptionList(Predicate<Prescription> predicate);
+
     // Consultation
 
     /**
@@ -178,8 +189,6 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredConsultationList(Predicate<Consultation> predicate);
-
-    void updateFilteredPrescriptionList(Predicate<Prescription> predicate);
 
     /**
      * Returns true if a test result with the same identity as {@code testResult} exists in the address book.
