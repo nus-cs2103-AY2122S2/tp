@@ -205,7 +205,7 @@ public class AddWindow extends UiPart<Stage> {
             String setStatus = "status " + lastIndex + " " + status;
             try {
                 executeCommand(setStatus);
-            } catch(CommandException | ParseException e) {
+            } catch (CommandException | ParseException e) {
                 errorLabel.setText("Error encountered\nEnsure status is only blacklist, whitelist, or empty.");
                 return;
             }
@@ -217,7 +217,7 @@ public class AddWindow extends UiPart<Stage> {
                 modsToAdd += "m/" + modules[i];
 
                 // Append whitespace if it's not the last module to add.
-                if (i != modules.length-1) {
+                if (i != modules.length - 1) {
                     modsToAdd += " ";
                 }
             }
