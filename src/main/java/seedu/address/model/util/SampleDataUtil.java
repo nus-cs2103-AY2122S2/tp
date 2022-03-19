@@ -5,10 +5,10 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.model.StudentBook;
 import seedu.address.model.LessonBook;
-import seedu.address.model.ReadOnlyStudentBook;
+import seedu.address.model.StudentBook;
 import seedu.address.model.ReadOnlyLessonBook;
+import seedu.address.model.ReadOnlyStudentBook;
 import seedu.address.model.lesson.DateTimeSlot;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonAddress;

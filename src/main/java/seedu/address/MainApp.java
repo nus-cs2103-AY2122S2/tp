@@ -15,11 +15,17 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.*;
+import seedu.address.model.LessonBook;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.ReadOnlyLessonBook;
+import seedu.address.model.ReadOnlyStudentBook;
+import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.StudentBook;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.AddressBookStorage;
-import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.StudentBookStorage;
+import seedu.address.storage.JsonStudentBookStorage;
 import seedu.address.storage.JsonLessonBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.LessonBookStorage;
@@ -54,9 +60,9 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
+        StudentBookStorage studentBookStorage = new JsonStudentBookStorage(userPrefs.getAddressBookFilePath());
         LessonBookStorage lessonBookStorage = new JsonLessonBookStorage(userPrefs.getLessonBookFilePath());
-        storage = new StorageManager(addressBookStorage, lessonBookStorage, userPrefsStorage);
+        storage = new StorageManager(studentBookStorage, lessonBookStorage, userPrefsStorage);
 
         initLogging(config);
 
