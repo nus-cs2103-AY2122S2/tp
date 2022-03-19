@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,6 +13,8 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.person.Person;
 
 
 /**
@@ -24,6 +27,8 @@ public class AddWindow extends UiPart<Stage> {
     public static final String PHONE_LABEL = "Number: ";
     public static final String ADDRESS_LABEL = "Address: ";
     public static final String EMAIL_LABEL = "Email: ";
+    public static final String STAT_LABEL = "Status: ";
+    public static final String MODULES_LABEL = "Modules: ";
 
     private static final Logger logger = LogsCenter.getLogger(AddWindow.class);
     private static final String FXML = "AddWindow.fxml";
@@ -48,6 +53,12 @@ public class AddWindow extends UiPart<Stage> {
     private Label emailLabel;
 
     @FXML
+    private Label statLabel;
+
+    @FXML
+    private Label modulesLabel;
+
+    @FXML
     private Label errorLabel;
 
     @FXML
@@ -61,6 +72,12 @@ public class AddWindow extends UiPart<Stage> {
 
     @FXML
     private TextField emailField;
+
+    @FXML
+    private TextField statField;
+
+    @FXML
+    private TextField modulesField;
 
 
     /**
@@ -83,6 +100,8 @@ public class AddWindow extends UiPart<Stage> {
         phoneLabel.setText(PHONE_LABEL);
         addressLabel.setText(ADDRESS_LABEL);
         emailLabel.setText(EMAIL_LABEL);
+        statLabel.setText(STAT_LABEL);
+        modulesLabel.setText(MODULES_LABEL);
         errorLabel.setText("");
     }
 
@@ -118,6 +137,8 @@ public class AddWindow extends UiPart<Stage> {
         phoneField.setText("");
         addressField.setText("");
         emailField.setText("");
+        statField.setText("");
+        modulesField.setText("");
         errorLabel.setText("");
     }
 
@@ -151,9 +172,11 @@ public class AddWindow extends UiPart<Stage> {
         String phone = "p/" + phoneField.getText();
         String address = "a/" + addressField.getText();
         String email = "e/" + emailField.getText();
+        String status = "s/" + statField.getText();
+        String[] modules = modulesField.getText().split(" ");
         StringBuilder userInput = new StringBuilder();
         String[] personFields = {"add", name, phone, address, email};
-        if (isAnyFieldEmpty()) {
+        if (isAnyCompulsoryFieldEmpty()) {
             errorLabel.setText("You must input all fields!");
             return;
         }
@@ -165,19 +188,60 @@ public class AddWindow extends UiPart<Stage> {
 
         try {
             executeCommand(userInput.toString());
-            // reset all fields and then hide the panel
-            this.resetFields();
-            this.hide();
         } catch (CommandException | ParseException e) {
             errorLabel.setText("Error encountered");
+            return;
         }
+
+        // Since user command execution is successful, then we do the other stuff next.
+        // Notice that whenever a new Person is added into AddressBook, it'll list out all Persons.
+        // So we simply need to retrieve the last Person added...
+        ReadOnlyAddressBook ab = logic.getAddressBook();
+        ObservableList<Person> personList = ab.getPersonList();
+        int lastIndex = personList.size();
+
+        // Do not need to handle the fact that the given status might not be valid.
+        if (!status.equals("")) {
+            String setStatus = "status " + lastIndex + " " + status;
+            try {
+                executeCommand(setStatus);
+            } catch(CommandException | ParseException e) {
+                errorLabel.setText("Error encountered\nEnsure status is only blacklist, whitelist, or empty.");
+                return;
+            }
+        }
+
+        if (modules.length != 0) {
+            String modsToAdd = "";
+            for (int i = 0; i < modules.length; i++) {
+                modsToAdd += "m/" + modules[i];
+
+                // Append whitespace if it's not the last module to add.
+                if (i != modules.length-1) {
+                    modsToAdd += " ";
+                }
+            }
+
+            // Then, execute the addmodule command.
+            String commandText = "addmodule " + lastIndex + " " + modsToAdd;
+            try {
+                executeCommand(commandText);
+            } catch (CommandException | ParseException e) {
+                errorLabel.setText("Error encountered");
+            }
+        }
+
+
+        // reset all fields and then hide the panel
+        this.resetFields();
+        this.hide();
     }
 
     /**
      * Checks all the fields to make sure none of it is empty.
      * @return true if any of the field is empty
      */
-    private boolean isAnyFieldEmpty() {
+    private boolean isAnyCompulsoryFieldEmpty() {
         if (nameField.getText().equals("") || phoneField.getText().equals("")
                 || addressField.getText().equals("") || emailField.getText().equals("")) {
             return true;

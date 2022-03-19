@@ -69,7 +69,27 @@
                                  <Font size="14.0" />
                               </font>
                            </Label>
-                           <TextField fx:id="emailField" prefHeight="44.0" prefWidth="449.0" promptText="johndoe@example.com" onAction="#handleEnter"/>
+                           <TextField fx:id="emailField" onAction="#handleEnter" prefHeight="44.0" prefWidth="449.0" promptText="johndoe@example.com" />
+                        </children>
+                     </HBox>
+                     <HBox>
+                        <children>
+                           <Label fx:id="statLabel" alignment="CENTER" prefHeight="44.0" prefWidth="75.0" text="Label" textFill="#ffe5e5">
+                              <font>
+                                 <Font size="14.0" />
+                              </font>
+                           </Label>
+                           <TextField fx:id="statField" onAction="#handleEnter" prefHeight="44.0" prefWidth="449.0" promptText="[OPTIONAL] favourite" />
+                        </children>
+                     </HBox>
+                     <HBox>
+                        <children>
+                           <Label fx:id="modulesLabel" alignment="CENTER" prefHeight="44.0" prefWidth="75.0" text="Label" textFill="#ffe5e5">
+                              <font>
+                                 <Font size="14.0" />
+                              </font>
+                           </Label>
+                           <TextField fx:id="modulesField" onAction="#handleEnter" prefHeight="44.0" prefWidth="449.0" promptText="[OPTIONAL] CS3230 CS1231S" />
                         </children>
                      </HBox>
                      <Label fx:id="errorLabel" alignment="CENTER" prefHeight="57.0" prefWidth="524.0" text="Label" textFill="WHITE">
