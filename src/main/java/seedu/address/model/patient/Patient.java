@@ -78,8 +78,10 @@ public class Patient {
             return true;
         }
 
+
         return otherPatient != null
                 && otherPatient.getNric().equals(getNric());
+
     }
 
     /**

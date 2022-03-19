@@ -3,6 +3,9 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.logic.parser.DeleteCommandParser;
+import seedu.address.logic.parser.consultations.AddConsultationCommandParser;
+import seedu.address.logic.parser.consultations.DeleteConsultationCommandParser;
+import seedu.address.logic.parser.consultations.ViewConsultationCommandParser;
 import seedu.address.logic.parser.contact.AddContactCommandParser;
 import seedu.address.logic.parser.contact.ViewContactCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -15,6 +18,7 @@ import seedu.address.logic.parser.prescription.ViewPrescriptionCommandParser;
 import seedu.address.logic.parser.testresult.AddTestResultCommandParser;
 import seedu.address.logic.parser.testresult.DeleteTestResultCommandParser;
 import seedu.address.logic.parser.testresult.ViewTestResultCommandParser;
+
 
 public enum CommandType {
     DEFAULT, CONTACT, MEDICAL, CONSULTATION, PRESCRIPTION, TEST;
@@ -75,8 +79,7 @@ public enum CommandType {
             viewCommandType = MEDICAL;
             return new AddMedicalCommandParser().parse(arguments);
         case CONSULTATION:
-            viewCommandType = CONSULTATION;
-            throw new ParseException("WIP: Consultation type");
+            return new AddConsultationCommandParser().parse(arguments);
         case PRESCRIPTION:
             viewCommandType = PRESCRIPTION;
             return new AddPrescriptionCommandParser().parse(arguments);
@@ -108,7 +111,7 @@ public enum CommandType {
             return new ViewMedicalCommandParser().parse(arguments);
         case CONSULTATION:
             viewCommandType = CONSULTATION;
-            throw new ParseException("WIP: Consultation type");
+            return new ViewConsultationCommandParser().parse(arguments);
         case PRESCRIPTION:
             viewCommandType = PRESCRIPTION;
             return new ViewPrescriptionCommandParser().parse(arguments);
@@ -117,6 +120,7 @@ public enum CommandType {
             return new ViewTestResultCommandParser().parse(arguments);
         default:
             throw new ParseException(MESSAGE_CONSTRAINTS);
+
         }
     }
 
@@ -128,14 +132,13 @@ public enum CommandType {
      */
     public static Command parseDeleteCommandType(String arguments) throws ParseException {
         requireNonNull(arguments);
-
         switch (viewCommandType) {
         case CONTACT:
             throw new ParseException("WIP: Contact");
         case MEDICAL:
             return new DeleteMedicalCommandParser().parse(arguments);
         case CONSULTATION:
-            throw new ParseException("WIP: Consultation type");
+            return new DeleteConsultationCommandParser().parse(arguments);
         case PRESCRIPTION:
             return new DeletePrescriptionCommandParser().parse(arguments);
         case TEST:

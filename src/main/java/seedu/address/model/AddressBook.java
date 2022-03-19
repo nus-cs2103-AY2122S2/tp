@@ -5,6 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.consultation.Consultation;
+import seedu.address.model.consultation.UniqueConsultationList;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.UniqueContactList;
 import seedu.address.model.medical.Medical;
@@ -16,6 +18,7 @@ import seedu.address.model.prescription.UniquePrescriptionList;
 import seedu.address.model.testresult.TestResult;
 import seedu.address.model.testresult.UniqueTestResultList;
 
+
 /**
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
@@ -23,8 +26,9 @@ import seedu.address.model.testresult.UniqueTestResultList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
-    private final UniquePrescriptionList prescriptions;
     private final UniqueContactList contacts;
+    private final UniqueConsultationList consultations;
+    private final UniquePrescriptionList prescriptions;
     private final UniqueTestResultList testResults;
     private final UniqueMedicalList medicals;
 
@@ -37,10 +41,12 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
-        prescriptions = new UniquePrescriptionList();
         contacts = new UniqueContactList();
+        consultations = new UniqueConsultationList();
+        prescriptions = new UniquePrescriptionList();
         testResults = new UniqueTestResultList();
         medicals = new UniqueMedicalList();
+
     }
 
     public AddressBook() {}
@@ -68,9 +74,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-
         setPersons(newData.getPersonList());
         setContacts(newData.getContactList());
+        setConsultations(newData.getConsultationList());
         setPrescriptions(newData.getPrescriptionList());
         setTestResults(newData.getTestResultList());
     }
@@ -140,6 +146,52 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setContacts(List<Contact> contacts) {
         this.contacts.setContacts(contacts);
+    }
+
+    //// consultation-level operations
+
+    /**
+     * Returns true if a consultation with the same identity as {@code consultation} exists in the address book.
+     */
+    public boolean hasConsultation(Consultation consultation) {
+        requireNonNull(consultation);
+        return consultations.contains(consultation);
+    }
+
+    /**
+     * Adds a consultation to the address book.
+     * The consultation must not already exist in the address book.
+     */
+    public void addConsultation(Consultation p) {
+        consultations.add(p);
+    }
+
+    /**
+     * Replaces the given consultation {@code target} in the list with {@code editedConsultation}.
+     * {@code target} must exist in the address book.
+     * The consultation identity of {@code editedConsultation} must not be the same
+     * as another existing consultation in the address book.
+     */
+    public void setConsultation(Consultation target, Consultation editedConsultation) {
+        requireNonNull(editedConsultation);
+
+        consultations.setConsultation(target, editedConsultation);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeConsultation(Consultation key) {
+        consultations.remove(key);
+    }
+
+    /**
+     * Replaces the contents of the consultations list with {@code consultations}.
+     * {@code consultations} must not contain duplicate consultations.
+     */
+    public void setConsultations(List<Consultation> consultations) {
+        this.consultations.setConsultations(consultations);
     }
 
     //// contact-level operations
@@ -231,6 +283,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public String toString() {
         return persons.asUnmodifiableObservableList().size() + " persons"
                 + contacts.asUnmodifiableObservableList().size() + " contacts"
+                + consultations.asUnmodifiableObservableList().size() + " consultations"
                 + testResults.asUnmodifiableObservableList().size() + " test results";
         // TODO: refine later
     }
@@ -251,6 +304,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
+    public ObservableList<Consultation> getConsultationList() {
+        return consultations.asUnmodifiableObservableList();
+    }
+
     public ObservableList<Prescription> getPrescriptionList() {
         return prescriptions.asUnmodifiableObservableList();
     }
@@ -266,6 +323,7 @@ public class AddressBook implements ReadOnlyAddressBook {
                 || (other instanceof AddressBook // instanceof handles nulls
                 && persons.equals(((AddressBook) other).persons))
                 && contacts.equals(((AddressBook) other).contacts)
+                && consultations.equals(((AddressBook) other).consultations)
                 && testResults.equals(((AddressBook) other).testResults);
     }
 

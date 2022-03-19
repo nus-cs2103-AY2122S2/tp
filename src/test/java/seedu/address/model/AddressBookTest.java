@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.consultation.Consultation;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.medical.Medical;
 import seedu.address.model.patient.Patient;
@@ -96,6 +97,7 @@ public class AddressBookTest {
         private final ObservableList<TestResult> testResults = FXCollections.observableArrayList();
         private final ObservableList<Medical> medicals = FXCollections.observableArrayList();
         private final ObservableList<Prescription> prescriptions = FXCollections.observableArrayList();
+        private final ObservableList<Consultation> consultations = FXCollections.observableArrayList();
 
         AddressBookStub(Collection<Patient> patients) {
             this.patients.setAll(patients);
@@ -117,6 +119,11 @@ public class AddressBookTest {
         }
 
         @Override
+        public ObservableList<Consultation> getConsultationList() {
+            return consultations;
+        }
+
+        @Override
         public ObservableList<TestResult> getTestResultList() {
             return testResults;
         }
@@ -124,6 +131,7 @@ public class AddressBookTest {
         @Override
         public ObservableList<Medical> getMedicalList() {
             return medicals;
+
         }
     }
 

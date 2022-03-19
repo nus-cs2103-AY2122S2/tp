@@ -25,6 +25,7 @@ public class AddContactCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + PREFIX_TYPE + "contact"
             + ": Adds a contact to patient in MedBook. "
             + "Parameters: "
+            + PREFIX_TYPE + "contact "
             + PREFIX_NRIC + "OWNER_NRIC "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "

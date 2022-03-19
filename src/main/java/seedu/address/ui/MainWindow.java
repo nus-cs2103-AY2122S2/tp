@@ -17,6 +17,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.ui.consultation.ConsultationListPanel;
 import seedu.address.ui.contact.ContactListPanel;
 import seedu.address.ui.medical.MedicalListPanel;
 import seedu.address.ui.prescription.PrescriptionListPanel;
@@ -38,6 +39,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PatientListPanel patientListPanel;
     private ContactListPanel contactListPanel;
+    private ConsultationListPanel consultationListPanel;
     private MedicalListPanel medicalListPanel;
     private PrescriptionListPanel prescriptionListPanel;
     private TestResultListPanel testResultListPanel;
@@ -121,6 +123,7 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         patientListPanel = new PatientListPanel(logic.getFilteredPersonList());
         contactListPanel = new ContactListPanel(logic.getFilteredContactList());
+        consultationListPanel = new ConsultationListPanel(logic.getFilteredConsultationList());
         medicalListPanel = new MedicalListPanel(logic.getFilteredMedicalList());
         prescriptionListPanel = new PrescriptionListPanel(logic.getFilteredPrescriptionList());
         testResultListPanel = new TestResultListPanel(logic.getFilteredTestResultList());
@@ -152,11 +155,16 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Sets the stackpane size based on {@code commandType}.
      */
-    private void setDisplayListPane(CommandType commandType) {
+    public void setDisplayListPane(CommandType commandType) {
+
         switch (commandType) {
         case CONTACT:
-            personListPanelPlaceholder.getChildren().remove(0);
+            personListPanelPlaceholder.getChildren().clear();
             personListPanelPlaceholder.getChildren().add(contactListPanel.getRoot());
+            return;
+        case CONSULTATION:
+            personListPanelPlaceholder.getChildren().clear();
+            personListPanelPlaceholder.getChildren().add(consultationListPanel.getRoot());
             return;
         case MEDICAL:
             personListPanelPlaceholder.getChildren().remove(0);
@@ -173,7 +181,6 @@ public class MainWindow extends UiPart<Stage> {
         default:
             personListPanelPlaceholder.getChildren().remove(0);
             personListPanelPlaceholder.getChildren().add(patientListPanel.getRoot());
-
         }
     }
 
