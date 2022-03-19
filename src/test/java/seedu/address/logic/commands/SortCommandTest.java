@@ -21,18 +21,20 @@ class SortCommandTest {
     public void equals() {
         List<Prefix> firstPrefixList = Arrays.asList(PREFIX_NAME, PREFIX_STATUS);
         List<Prefix> secondPrefixList = Arrays.asList(PREFIX_NAME, PREFIX_STATUS, PREFIX_EMAIL);
+        List<String> firstOrder = Arrays.asList("asc", "asc");
+        List<String> secondOrder = Arrays.asList("asc", "asc", "desc");
         try {
             SortCommand firstSortCommand = new SortCommand(firstPrefixList,
-                    "asc", SortCommandParser.formatFields(firstPrefixList));
+                    firstOrder, SortCommandParser.formatFields(firstPrefixList, firstOrder));
             SortCommand secondSortCommand = new SortCommand(secondPrefixList,
-                    "desc", SortCommandParser.formatFields(secondPrefixList));
+                    secondOrder, SortCommandParser.formatFields(secondPrefixList, secondOrder));
 
             // same object -> returns true
             assertTrue(firstSortCommand.equals(firstSortCommand));
 
             // same values -> returns true
             SortCommand firstSortCommandCopy = new SortCommand(firstPrefixList,
-                    "asc", SortCommandParser.formatFields(firstPrefixList));
+                    firstOrder, SortCommandParser.formatFields(firstPrefixList, firstOrder));
             assertTrue(firstSortCommand.equals(firstSortCommandCopy));
 
             // different types -> returns false

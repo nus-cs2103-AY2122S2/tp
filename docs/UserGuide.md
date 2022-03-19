@@ -237,17 +237,17 @@ Examples:
 
 Sort all people within address book.
 
-Format: `sort [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STATUS] [m/MODULE] [o/ORDER]​`
+Format: `sort [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STATUS] [m/MODULE]​`
 
 * Sorts list with specified field(s). For any two persons, latter fields will only be considered if preceding fields are equal.​
-* Order of parameters is important except for that of `o/ORDER`.
-* At least one of the optional fields must be provided (excluding order).
-* Parameters are ignored except for order `o/asc`.
-* Orders are optional and default order is "asc". Parameters of order must be either "asc" or "desc" and is case-insensitive. 
+* Order of fields is important and there must be at least one field.
+* Parameters determine whether field is sorted on ascending or descending order.
+* Parameters are optional must be either "asc", "desc" or an empty string "". Empty string "" is ascending by default.
+* Parameters are case-insensitive. 
 
 Examples:
-* `sort n/ p/`  will sort the list by name first. If two persons have the same name, then sort by phone number.
-* `sort n/ o/desc` will sort the list by name in descending order.
+* `sort n/asc p/desc`  will sort the list by name in ascending order first. If two persons have the same name, then sort by phone number in descending order.
+* `sort n/` will sort the list by name in descending order.
 
 ### Undo a command : `undo`
 

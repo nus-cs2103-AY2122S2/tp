@@ -9,23 +9,27 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 class PersonComparatorTest {
     @Test
     public void equals() {
+        List<String> firstOrder = Arrays.asList("asc", "asc", "desc", "desc");
+        List<String> secondOrder = Arrays.asList("asc", "asc");
+
         PersonComparator firstPersonComparator = new PersonComparator(Arrays.asList(PREFIX_NAME, PREFIX_EMAIL,
-                PREFIX_ADDRESS, PREFIX_STATUS), "asc");
+                PREFIX_ADDRESS, PREFIX_STATUS), firstOrder);
         PersonComparator secondPersonComparator = new PersonComparator(Arrays.asList(PREFIX_NAME,
-                PREFIX_STATUS), "desc");
+                PREFIX_STATUS), secondOrder);
 
         // same object -> returns true
         assertTrue(firstPersonComparator.equals(firstPersonComparator));
 
         // same values -> returns true
         PersonComparator firstPersonComparatorCopy = new PersonComparator(Arrays.asList(PREFIX_NAME, PREFIX_EMAIL,
-                PREFIX_ADDRESS, PREFIX_STATUS), "asc");
+                PREFIX_ADDRESS, PREFIX_STATUS), firstOrder);
         assertTrue(firstPersonComparator.equals(firstPersonComparatorCopy));
 
         // different types -> returns false

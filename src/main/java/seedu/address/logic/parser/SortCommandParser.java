@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ORDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 
@@ -31,9 +30,12 @@ public class SortCommandParser implements Parser<SortCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
-                        PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_STATUS, PREFIX_MODULE, PREFIX_ORDER);
+                        PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_STATUS, PREFIX_MODULE);
 
-        List<Prefix> prefixes = ArgumentTokenizer.sortPrefixOrder(args, PREFIX_NAME, PREFIX_PHONE,
+        List<Prefix> prefixes = ArgumentTokenizer.getPrefixListInOrder(args, PREFIX_NAME, PREFIX_PHONE,
+                PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_STATUS, PREFIX_MODULE);
+
+        List<String> orders = ArgumentTokenizer.getArgListInOrder(args, PREFIX_NAME, PREFIX_PHONE,
                 PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_STATUS, PREFIX_MODULE);
 
         if (prefixes.size() == 0) {
@@ -44,18 +46,15 @@ public class SortCommandParser implements Parser<SortCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
 
-        String successField = formatFields(prefixes);
-
-        if (argMultimap.getValue(PREFIX_ORDER).isPresent()) {
-            String order = argMultimap.getValue(PREFIX_ORDER).get().toLowerCase();
-            if (!order.equals("asc") && !order.equals("desc")) {
+        for (String order : orders) {
+            String uppercaseOrder = order.toUpperCase();
+            if (!uppercaseOrder.equals("ASC") && !uppercaseOrder.equals("DESC") && !uppercaseOrder.equals("")) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
             }
-            String formattedOrder = order.equals("asc") ? "ascending" : "descending";
-            return new SortCommand(prefixes, formattedOrder, successField);
         }
 
-        return new SortCommand(prefixes, "ascending", successField);
+        String successField = formatFields(prefixes, orders);
+        return new SortCommand(prefixes, orders, successField);
     }
 
     /**
@@ -63,10 +62,13 @@ public class SortCommandParser implements Parser<SortCommand> {
      * @param fields the list of prefixes to be displayed
      * @return the formatted success message
      */
-    public static String formatFields(List<Prefix> fields) throws ParseException {
-        List<String> formattedFields = new ArrayList<>();
-        for (Prefix field : fields) {
-            formattedFields.add(formatPrefix(field));
+    public static String formatFields(List<Prefix> fields, List<String> orders) throws ParseException {
+        List<List<String>> formattedFields = new ArrayList<>();
+        for (int i = 0; i < fields.size(); i++) {
+            List<String> formattedField = new ArrayList<>();
+            formattedField.add(formatPrefix(fields.get(i)));
+            formattedField.add(orders.get(i).toUpperCase());
+            formattedFields.add(formattedField);
         }
         return formattedFields.toString();
     }
