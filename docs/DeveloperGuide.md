@@ -37,8 +37,19 @@ TODO
 TODO
 
 ### Model component
+**API** : [`Model.java`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-TODO
+![Overall Model Class Diagram](images/ModelClassDiagram_Overall.png)
+
+The `Model` component,
+* stores the student book data i.e., all `Student` objects (which are contained in a `UniquePersonList` object).
+* stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the lesson book data i.e., all `Lesson` objects (which are contained in a `ConsistentLessonList` object).
+* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+
+![Overall Model Class Diagram](images/ModelClassDiagram_LessonBook.png)
+![Overall Model Class Diagram](images/ModelClassDiagram_StudentBook.png)
 
 ### Storage component
 

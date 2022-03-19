@@ -1,0 +1,33 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package LessonBook <<Rectangle>>{
+    Class LessonBook
+    Class "<<interface>>\nReadOnlyLessonBook" as ReadOnlyLessonBook
+    Class ConsistentLessonList
+    Class Lesson
+    Class LessonName
+    Class Subject
+    Class LessonAddress
+    Class DateTimeSlot
+    Class EnrolledStudents
+}
+
+Class HiddenOutside1 #FFFFFF
+HiddenOutside1 --> "1" LessonBook
+Class HiddenOutside2 #FFFFFF
+HiddenOutside2 ..> ReadOnlyLessonBook
+
+LessonBook .up.|> ReadOnlyLessonBook
+LessonBook *--> "1" ConsistentLessonList
+ConsistentLessonList --> "~* all" Lesson
+Lesson *--> LessonName
+Lesson *--> Subject
+Lesson *--> LessonAddress
+Lesson *--> DateTimeSlot
+Lesson *--> EnrolledStudents
+
+@enduml

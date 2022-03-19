@@ -1,0 +1,53 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+package Model <<Rectangle>> {
+
+    Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
+    Class "<<interface>>\nModel" as Model
+    Class ModelManager
+    Class UserPrefs
+
+    package "StudentBook" {
+        Class "<<interface>>\nReadOnlyStudentBook" as ReadOnlyStudentBook
+        Class StudentBook
+        Class UniqueStudentsList
+        Class Student
+
+        StudentBook -down-> UniqueStudentsList
+        UniqueStudentsList --> "~* all" Student
+    }
+
+    package "LessonBook" {
+        Class "<<interface>>\nReadOnlyLessonBook" as ReadOnlyLessonBook
+        Class LessonBook
+    }
+}
+
+LessonBook .up.|> ReadOnlyLessonBook
+StudentBook .up.|> ReadOnlyStudentBook
+ModelManager .up.|> Model
+UserPrefs .up.|> ReadOnlyUserPrefs
+
+Model .left.> ReadOnlyStudentBook
+Model .left.> ReadOnlyUserPrefs
+Model .right.> ReadOnlyLessonBook
+ModelManager -right-> "1" StudentBook
+ModelManager -right-> "1" LessonBook
+ModelManager -left-> "1" UserPrefs
+ModelManager -right-> "filtered ~*" Student
+
+Class HiddenOutside1 #FFFFFF
+Class HiddenOutside2 #FFFFFF
+Class HiddenOutside3 #FFFFFF
+Class HiddenOutside4 #FFFFFF
+HiddenOutside1 ..> Model
+
+LessonBook -right[hidden]- HiddenOutside2
+StudentBook -right[hidden]- HiddenOutside3
+UserPrefs -left[hidden]- HiddenOutside4
+
+@enduml
