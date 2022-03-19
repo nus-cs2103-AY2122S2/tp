@@ -8,21 +8,14 @@ import seedu.address.model.person.UserType;
 
 public class UserTypeUtil {
 
-    /** Returns a "buyer" String */
-    private static String isBuyer() {
-        return "buyer";
-    }
-
-    /** Returns a "seller" String */
-    private static String isSeller() {
-        return "seller";
-    }
+    private static final String BUYER = "buyer";
+    private static final String SELLER = "seller";
 
     public static UserType createBuyer() {
-        return new UserType(isBuyer());
+        return new UserType(BUYER);
     }
 
     public static UserType createSeller() {
-        return new UserType(isSeller());
+        return new UserType(SELLER);
     }
 }
