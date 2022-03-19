@@ -2,8 +2,10 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -36,6 +38,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private HelpWindow helpWindow;
     private AddWindow addWindow;
+    private CommandBox commandBox;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -125,6 +128,7 @@ public class MainWindow extends UiPart<Stage> {
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
+        this.commandBox = commandBox;
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -181,6 +185,11 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    private void handleCopy(CommandResult result) {
+        commandBox.enableButton();
+        commandBox.setCopiedText(result.getFeedbackToUser());
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
@@ -202,6 +211,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowAdd()) {
                 handleAdd();
+            }
+
+            if (commandResult.isCopy()) {
+                handleCopy(commandResult);
             }
 
             if (commandResult.isExit()) {
