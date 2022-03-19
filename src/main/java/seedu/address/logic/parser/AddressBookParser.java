@@ -17,6 +17,7 @@ import seedu.address.logic.commands.FilterSkillCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.MakeTeamCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -70,6 +71,12 @@ public class AddressBookParser {
 
         case FilterPastTeamCommand.COMMAND_WORD:
             return new FilterPastTeamCommand();
+
+        case MakeTeamCommand.COMMAND_WORD_ADD:
+            return new MakeTeamCommandParser(MakeTeamCommand.TeamAction.ADD).parse(arguments);
+
+        case MakeTeamCommand.COMMAND_WORD_REMOVE:
+            return new MakeTeamCommandParser(MakeTeamCommand.TeamAction.REMOVE).parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();

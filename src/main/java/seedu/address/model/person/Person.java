@@ -23,13 +23,15 @@ public class Person {
     private final GithubUsername githubUsername;
 
     // Data fields
+    private final boolean isPotentialTeammate;
     private final Set<Team> teams = new HashSet<>();
     private final Set<Skill> skillSet = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, GithubUsername username, Set<Team> teams, Set<Skill> skillSet) {
+    public Person(Name name, Phone phone, Email email, GithubUsername username,
+                  Set<Team> teams, Set<Skill> skillSet, boolean isPotentialTeammate) {
         requireAllNonNull(name, phone, email, username, teams, skillSet);
         this.name = name;
         this.phone = phone;
@@ -37,7 +39,7 @@ public class Person {
         this.githubUsername = username;
         this.teams.addAll(teams);
         this.skillSet.addAll(skillSet);
-        //this.skillSet.add(new Skill("Python",30));
+        this.isPotentialTeammate = isPotentialTeammate;
     }
 
     public Name getName() {
@@ -54,6 +56,10 @@ public class Person {
 
     public GithubUsername getGithubUsername() {
         return githubUsername;
+    }
+
+    public boolean isPotentialTeammate() {
+        return isPotentialTeammate;
     }
 
     /**
@@ -103,6 +109,7 @@ public class Person {
         }
         return false;
     }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
@@ -136,13 +143,14 @@ public class Person {
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getGithubUsername().equals(getGithubUsername())
                 && otherPerson.getTeams().equals(getTeams())
-                && otherPerson.getSkillSet().equals(getSkillSet());
+                && otherPerson.getSkillSet().equals(getSkillSet())
+                && otherPerson.isPotentialTeammate == isPotentialTeammate;
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, githubUsername, teams, skillSet);
+        return Objects.hash(name, phone, email, githubUsername, isPotentialTeammate, teams, skillSet);
     }
 
     @Override

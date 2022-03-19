@@ -29,6 +29,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String username;
+    private final boolean isPotentialTeammate;
     private final List<JsonAdaptedTeam> teamSet = new ArrayList<>();
     private final List<JsonAdaptedSkill> skillSet = new ArrayList<>();
 
@@ -38,12 +39,14 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("username") String username,
+            @JsonProperty("isPotentialTeammate") boolean isPotentialTeammate,
             @JsonProperty("teams") List<JsonAdaptedTeam> teamSet,
             @JsonProperty("skillSet") List<JsonAdaptedSkill> skillSet) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.username = username;
+        this.isPotentialTeammate = isPotentialTeammate;
         if (teamSet != null) {
             this.teamSet.addAll(teamSet);
         }
@@ -60,6 +63,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         username = source.getGithubUsername().value;
+        isPotentialTeammate = source.isPotentialTeammate();
         teamSet.addAll(source.getTeams().stream()
                 .map(JsonAdaptedTeam::new)
                 .collect(Collectors.toList()));
@@ -120,7 +124,8 @@ class JsonAdaptedPerson {
 
         final Set<Team> modelTeams = new HashSet<>(personTeams);
         final Set<Skill> modelSkill = new HashSet<>(personSkillSet);
-        return new Person(modelName, modelPhone, modelEmail, modelGithubUsername, modelTeams, modelSkill);
+        return new Person(modelName, modelPhone, modelEmail, modelGithubUsername,
+                modelTeams, modelSkill, isPotentialTeammate);
     }
 
 }
