@@ -80,6 +80,7 @@ public enum CommandType {
             viewCommandType = MEDICAL;
             return new AddMedicalCommandParser().parse(arguments);
         case CONSULTATION:
+            viewCommandType = CONSULTATION;
             return new AddConsultationCommandParser().parse(arguments);
         case PRESCRIPTION:
             viewCommandType = PRESCRIPTION;
