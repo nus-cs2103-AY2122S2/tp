@@ -29,11 +29,11 @@ public class AddContactCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
+            + PREFIX_ADDRESS + "ADDRESS \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TYPE + "contact "
             + PREFIX_NRIC + "S1234567L "
-            + PREFIX_NAME + "John S. Smith "
+            + PREFIX_NAME + "John Smith "
             + PREFIX_PHONE + "88888888 "
             + PREFIX_EMAIL + "johns@example.com "
             + PREFIX_ADDRESS + "21 Lower Kent Ridge Road, Singapore 119077 ";
