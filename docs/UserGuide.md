@@ -46,7 +46,7 @@ Adds a patient's contact to the Medbook
 Format: `/create -t contact -i NRIC -n NAME -p PHONE_NUMBER -e EMAIL -a ADDRESS`
 
 Examples:
-* `/create -t contact -i S12345678P -n John Doe -p 80008000 -e johndoe@gmail.com -a COM1`
+* `/create -t contact -i S1234567P -n John Doe -p 80008000 -e johndoe@gmail.com -a COM1`
 
 <img src = "images/user-guide/feature2_1.png" width = "350" alt="Unable to load image! Try again later.">
 
@@ -60,7 +60,7 @@ Note: Optional fields allow users to have a more refined search.
 
 Examples:
 * `/view -t contact` to show all patients’ contact information
-* `/view -t contact -i S12345678P` to view the contact information of the patient with this NRIC
+* `/view -t contact -i S1234567P` to view the contact information of the patient with this NRIC
 * `/view -t contact -n John Smith` to view all contact information of patients with this name
 
 <img src = "images/user-guide/feature2_2.png" width = "350" alt="Unable to load image! Try again later.">
@@ -74,7 +74,7 @@ Format: `/delete -t contact -i NRIC`
 Note: Only NRIC can be used to uniquely identify the contact owner.
 
 Examples:
-* `/delete -t contact -i S12345678P`
+* `/delete -t contact -i S1234567P`
 
 ### Create Medical Information: `/create -t medical`
 Adds a patient's medical information to the MedBook.
@@ -95,7 +95,7 @@ Optional fields and associated flags:
 - Ethnicity `-et`
 
 Examples:
-* `/create -t medical -i S12345678P -bt O -ht 185 cm`
+* `/create -t medical -i S1234567P -bt O -ht 185 cm`
 
 <img src = "images/user-guide/feature2_4.png" width = "350" alt="Unable to load image! Try again later.">
 
@@ -106,7 +106,7 @@ Format:  `/view -t medical [-i NRIC]`
 
 Examples:
 * `/view -t medical`
-* `/view -t medical -i S12345678P`
+* `/view -t medical -i S1234567P`
 
 <img src = "images/user-guide/feature2_5.png" width = "350" alt="Unable to load image! Try again later.">
 
@@ -116,7 +116,7 @@ Deletes all medical information of a patient from the MedBook
 Format: `/delete -t medical -i NRIC`
 
 Examples:
-* `/delete -t medical -i S12345678P`
+* `/delete -t medical -i S1234567P`
 
 ### Create Consultation Information: `/create -t consultation`
 Adds a consultation report of a patient to the MedBook.
@@ -126,7 +126,7 @@ Format: `/create -t consultation -i NRIC [-dt DATE] [-tm TIME] [-n NOTES] [-p PR
 NOTE: [-dt DATE][-tm TIME] are in the form dd-MM-yyyy, HH-mm (24 hour) respectively.
 
 Examples:
-* `/create -t consultation -i S12345678P -dt 15-09-2021 -tm 18-00 -n Inflammation in the throat and windpipe, short and shallow breath, laboured breathing. Most likely has Upper Respiratory Infection. -p Augmentin Antibiotics 625mg - twice a day; Paracetamol 500mg - twice a day. -tt Stethoscope. Found short and laboured breathing.`
+* `/create -t consultation -i S1234567P -dt 15-09-2021 -tm 18-00 -n Inflammation in the throat and windpipe, short and shallow breath, laboured breathing. Most likely has Upper Respiratory Infection. -p Augmentin Antibiotics 625mg - twice a day; Paracetamol 500mg - twice a day. -tt Stethoscope. Found short and laboured breathing.`
 
 ### View Past Consultations: `/view -t consultation`
 View all past consultations in the MedBook that fit search parameters. All fields are optional.
@@ -138,10 +138,10 @@ NOTE:  [-dt DATE][-tm TIME] are in the form dd-MM-yyyy, HH-mm (24 hour) respecti
 Examples:
 * `/view -t consultation`
   * Shows all the consultations for all patients
-* `/view -t consultation -i S12345678P`
-  * Shows all the consultations for patient with id S12345678P
-* `/view -t consultation -i S12345678P -dt -09-2021`
-  * Shows all consultations for patients with id S12345678P that occurred in Sept 2021
+* `/view -t consultation -i S1234567P`
+  * Shows all the consultations for patient with id S1234567P
+* `/view -t consultation -i S1234567P -dt -09-2021`
+  * Shows all consultations for patients with id S1234567P that occurred in Sept 2021
 * `/view -t consultation -dt 15-09-2021 -tm 18-00`
   * Shows consultation that occurred on Sept 15 2021 1800hrs
 
@@ -154,7 +154,7 @@ Deletes a consultation of a patient from the MedBook.
 Format: `/delete -t consultation -i NRIC [-dt DATE] [-tm TIME]`
 
 Examples:
-* `/delete -t consultation -i S12345678P  -dt 15-09-2021 -tm 18-00`
+* `/delete -t consultation -i S1234567P  -dt 15-09-2021 -tm 18-00`
 
 ## FAQ
 Q: How do I transfer my data to another Computer?
@@ -167,9 +167,9 @@ A: Install the app on the other computer and overwrite the empty data file it cr
 | Add Contact Info | /create -t contact -i NRIC -n NAME -p PHONE_NUMBER -e EMAIL -a ADDRESS |
 | View Contact Info | /view -t contact [-i NRIC] [-n NAME] [-p PHONE_NUMBER] [-e EMAIL] |
 | Delete Contact Info | /delete -t contact -i NRIC |
-| Add Medical Info | /create -t medical -i S12345678P [-a AGE] [-bt BLOOD_TYPE] [-md MEDICATION]... |
+| Add Medical Info | /create -t medical -i S1234567P [-a AGE] [-bt BLOOD_TYPE] [-md MEDICATION]... |
 | View Medical Info | /view -t medical [-i NRIC] |
 | Delete Medical Info | /delete -t medical -i NRIC |
-| Add Consultation Info | /create -t consultation -i S12345678P [-dt DATE] [-tm TIME] [-n NOTES] [-p PRESCRIPTION] [-tt TESTS TAKEN AND RESULTS] |
-| View Consultation Info | /view -t consultation  -i S12345678P [-dt DATE][-tm TIME] |
-| Delete Consultation Info | /delete -t consultation -i S12345678P [-dt DATE] [-tm TIME] |
+| Add Consultation Info | /create -t consultation -i S1234567P [-dt DATE] [-tm TIME] [-n NOTES] [-p PRESCRIPTION] [-tt TESTS TAKEN AND RESULTS] |
+| View Consultation Info | /view -t consultation  -i S1234567P [-dt DATE][-tm TIME] |
+| Delete Consultation Info | /delete -t consultation -i S1234567P [-dt DATE] [-tm TIME] |

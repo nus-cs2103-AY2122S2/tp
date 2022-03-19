@@ -31,7 +31,7 @@ public class AddConsultationCommand extends Command {
             + PREFIX_TIME + "TIME "
             + PREFIX_NOTES + "NOTES "
             + PREFIX_PRESCRIPTION + " "
-            + PREFIX_TESTS_TAKEN_AND_RESULTS + " "
+            + PREFIX_TESTS_TAKEN_AND_RESULTS + " \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TYPE + "consultation "
             + PREFIX_NRIC + "S1234567L "
@@ -42,7 +42,7 @@ public class AddConsultationCommand extends Command {
             + PREFIX_TESTS_TAKEN_AND_RESULTS + " ";
 
     public static final String MESSAGE_SUCCESS = "New consultation added: %1$s";
-    public static final String MESSAGE_DUPLICATE_CONSULTATION = "This consultation already"
+    public static final String MESSAGE_DUPLICATE_CONSULTATION = "This consultation already "
                                                                 + "exists in patient consultation list";
     public static final String MESSAGE_MISSING_PATIENT = "This patient does not exists in Medbook";
 

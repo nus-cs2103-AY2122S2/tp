@@ -30,7 +30,7 @@ public class ViewConsultationCommand extends Command {
             + "Parameters: TYPE, OWNER NRIC\n"
             + "Example: " + COMMAND_WORD
             + PREFIX_TYPE + "consultation "
-            + PREFIX_NRIC + " S1234567L";
+            + PREFIX_NRIC + "S1234567L";
 
     private final Nric ownerNric;
 
@@ -53,7 +53,7 @@ public class ViewConsultationCommand extends Command {
         }
 
         ObservableList<Patient> personList = model.getPersonList();
-        String nameAndNric = new String();
+        String nameAndNric = "";
 
         for (Patient patient : personList) {
             if (patient.getNric().equals(ownerNric)) {

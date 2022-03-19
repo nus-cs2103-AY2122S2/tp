@@ -8,6 +8,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.prescription.Prescription;
@@ -17,6 +18,7 @@ import seedu.address.model.prescription.Prescription;
 public class DeletePrescriptionCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
+    public static final CommandType COMMAND_TYPE = CommandType.PRESCRIPTION;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the prescription identified by the index number used in the displayed prescription list.\n"
@@ -42,7 +44,12 @@ public class DeletePrescriptionCommand extends Command {
 
         Prescription prescriptionToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePrescription(prescriptionToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PRESCRIPTION_SUCCESS, prescriptionToDelete));
+        if (lastShownList.isEmpty()) {
+            return new CommandResult(String.format(MESSAGE_DELETE_PRESCRIPTION_SUCCESS, prescriptionToDelete),
+                    CommandType.DEFAULT);
+        }
+        return new CommandResult(String.format(MESSAGE_DELETE_PRESCRIPTION_SUCCESS, prescriptionToDelete),
+                COMMAND_TYPE);
     }
 
     @Override
