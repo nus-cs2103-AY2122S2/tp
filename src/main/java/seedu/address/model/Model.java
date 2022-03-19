@@ -19,6 +19,9 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Group> PREDICATE_SHOW_ALL_GROUPS = unused -> true;
 
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Task> PREDICATE_SHOW_ALL_TASKS = unused -> true;
+
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -85,6 +88,13 @@ public interface Model {
     void deleteGroup(Group group);
 
     /**
+     * Deletes the given task in the given group.
+     * The group must exist in the address book.
+     * The task must exist in the specified group.
+     */
+    void deleteTask(Task task, Group group);
+
+    /**
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */
@@ -105,6 +115,13 @@ public interface Model {
     void addTask(Task task, Group group);
 
     /**
+     * Views the task into the specified group.
+     * {@code group} must exists in the address book.
+     *
+     */
+    String viewTask(Group group);
+
+    /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
@@ -116,6 +133,9 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered group list */
     ObservableList<Group> getFilteredGroupList();
+
+    /** Returns an unmodifiable view of the filtered group list */
+    ObservableList<Task> getFilteredTaskList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
@@ -134,4 +154,10 @@ public interface Model {
      * {@code Group} must already exist in the address book.
      */
     void assignPerson(Person person, Group group);
+
+    /**
+     * Updates the filter of the filtered group list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredTaskList(Predicate<Task> predicate);
 }

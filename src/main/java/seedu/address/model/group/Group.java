@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
@@ -82,6 +83,27 @@ public class Group {
      */
     public void addTask(Task task) {
         tasks.add(task);
+    }
+
+    /**
+     * Deletes a task from this specific group.
+     *
+     * @param task Tasks to be removed.
+     */
+    public void removeTask(Task task) {
+        tasks.remove(task);
+    }
+
+    /**
+     * Views a task from this specific group.
+     */
+    public String viewTask() {
+        ObservableList<Task> taskList = tasks.asUnmodifiableObservableList();
+        String output = "Here are the tasks in the group: \n";
+        for (int i = 0; i < taskList.size(); i++) {
+            output += taskList.get(i).getTaskName().taskName + "\n";
+        }
+        return output;
     }
 
     /**

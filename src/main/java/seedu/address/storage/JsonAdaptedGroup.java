@@ -7,8 +7,6 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
@@ -30,10 +28,14 @@ public class JsonAdaptedGroup {
      */
     @JsonCreator
     public JsonAdaptedGroup(@JsonProperty("groupName") String groupName,
-                            @JsonProperty("persons") List<JsonAdaptedPerson> persons) {
+                            @JsonProperty("persons") List<JsonAdaptedPerson> persons ,
+                            @JsonProperty("tasks") List<JsonAdaptedTask> tasks) {
         this.groupName = groupName;
         if (!persons.isEmpty()) {
             this.persons.addAll(persons);
+        }
+        if (tasks != null) {
+            this.tasks.addAll(tasks);
         }
     }
 
@@ -47,6 +49,7 @@ public class JsonAdaptedGroup {
                 .collect(Collectors.toList()));
 
         List<String> taskNames = new ArrayList<>();
+
         //map all the tasks into a stream of strings
         taskNames.addAll(source.getTaskList().getInternalList().stream()
                 .map(task -> String.valueOf(task.taskName))
@@ -60,8 +63,7 @@ public class JsonAdaptedGroup {
      * @throws IllegalValueException if there were any data constraints violated in the adapted group.
      */
     public Group toModelType() throws IllegalValueException {
-        // Transfer tasks.toModelType into ObservableList<Task>;
-        ObservableList<Task> groupTasks = FXCollections.observableArrayList();
+        final List<Task> groupTasks = new ArrayList<>();
         for (JsonAdaptedTask task : tasks) {
             groupTasks.add(task.toModelType());
         }
