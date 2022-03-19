@@ -104,19 +104,6 @@ public class Medical {
     }
 
     /**
-     * Returns true if both contacts have the same name, number and owner.
-     * This defines a weaker notion of equality between two contacts.
-     */
-    public boolean isSameContact(Medical otherContact) {
-        if (otherContact == this) {
-            return true;
-        }
-
-        return otherContact != null
-                && otherContact.getPatientNric().equals(getPatientNric());
-    }
-
-    /**
      * Returns true if both contacts have the same identity and data fields.
      * This defines a stronger notion of equality between two contacts.
      */

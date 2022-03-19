@@ -83,9 +83,13 @@ public interface Model {
      * {@code person} must not already exist in the address book.
      */
     void addPerson(Patient patient);
+
     void addPrescription(Prescription prescription);
+
     void deletePrescription(Prescription target);
+
     boolean hasPrescription(Prescription prescription);
+
     void setPrescription(Prescription target, Prescription editedPrescription);
 
     /**
@@ -97,7 +101,9 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Patient> getFilteredPersonList();
+
     ObservableList<Medical> getFilteredMedicalList();
+
     ObservableList<Prescription> getFilteredPrescriptionList();
 
     /** Returns the person list **/
@@ -143,6 +149,7 @@ public interface Model {
      */
     void updateFilteredContactList(Predicate<Contact> predicate);
 
+
     // Consultation
 
     /**
@@ -180,6 +187,42 @@ public interface Model {
     void updateFilteredConsultationList(Predicate<Consultation> predicate);
 
     void updateFilteredPrescriptionList(Predicate<Prescription> predicate);
+
+    // Consultation
+
+    /**
+     * Returns true if a consultation with the same identity as {@code consultation} exists in the address book.
+     */
+    boolean hasConsultation(Consultation consultation);
+
+    /**
+     * Deletes the given consultation.
+     * The consultation must exist in the address book.
+     */
+    void deleteConsultation(Consultation target);
+
+    /**
+     * Adds the given consultation.
+     * {@code consultation} must not already exist in the address book.
+     */
+    void addConsultation(Consultation consultation);
+
+    /**
+     * Replaces the given consultation {@code target} with {@code editedConsultation}.
+     * {@code target} must exist in the address book.
+     * The consultation identity of {@code editedConsultation} must not be the same
+     * as another existing consultation in the address book.
+     */
+    void setConsultation(Consultation target, Consultation editedConsultation);
+
+    /** Returns an unmodifiable view of the filtered consultation list */
+    ObservableList<Consultation> getFilteredConsultationList();
+
+    /**
+     * Updates the filter of the filtered consultation list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredConsultationList(Predicate<Consultation> predicate);
 
     /**
      * Returns true if a test result with the same identity as {@code testResult} exists in the address book.
