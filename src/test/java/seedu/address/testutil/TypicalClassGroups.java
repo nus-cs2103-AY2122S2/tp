@@ -7,17 +7,23 @@ import java.util.List;
 import seedu.address.model.classgroup.ClassGroup;
 
 /**
- * A utility class containing a list of {@code Person} objects to be used in tests.
+ * A utility class containing a list of {@code ClassGroup} objects to be used in tests.
  */
 public class TypicalClassGroups {
-    public static final ClassGroup CS2101G09 = new ClassGroupBuilder().withClassGroupId("A01")
+    public static final ClassGroup CS2101G09 = new ClassGroupBuilder().withClassGroupId("G09")
             .withClassGroupType("SECTIONAL").withModule(TypicalModules.CS2101).build();
-
-    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
+    public static final ClassGroup CS2101G10 = new ClassGroupBuilder().withClassGroupId("G10")
+            .withClassGroupType("SECTIONAL").withModule(TypicalModules.CS2101).build();
+    public static final ClassGroup CS2040B10A = new ClassGroupBuilder().withClassGroupId("B10A")
+            .withClassGroupType("LAB").withModule(TypicalModules.CS2040).build();
+    public static final ClassGroup CS2105T05 = new ClassGroupBuilder().withClassGroupId("T05")
+            .withClassGroupType("TUTORIAL").withModule(TypicalModules.CS2101).build();
+    public static final ClassGroup CS2030R08 = new ClassGroupBuilder().withClassGroupId("R08")
+            .withClassGroupType("RECITATION").withModule(TypicalModules.CS2030).build();
 
     private TypicalClassGroups() {} // prevents instantiation
 
     public static List<ClassGroup> getTypicalClassGroups() {
-        return new ArrayList<>(Arrays.asList(CS2101G09));
+        return new ArrayList<>(Arrays.asList(CS2101G09, CS2101G10, CS2040B10A, CS2105T05, CS2030R08));
     }
 }
