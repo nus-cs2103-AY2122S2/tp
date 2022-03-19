@@ -15,14 +15,8 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.AddressBook;
-import seedu.address.model.LessonBook;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyLessonBook;
-import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.UserPrefs;
+import seedu.address.model.*;
+import seedu.address.model.StudentBook;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
@@ -52,7 +46,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing StudentBook ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -79,9 +73,9 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
+        Optional<ReadOnlyStudentBook> addressBookOptional;
         Optional<ReadOnlyLessonBook> lessonBookOptional;
-        ReadOnlyAddressBook initialDataAddressBook;
+        ReadOnlyStudentBook initialDataAddressBook;
         ReadOnlyLessonBook initialDataLessonBook;
 
         try {
@@ -100,11 +94,11 @@ public class MainApp extends Application {
 
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty record.");
-            initialDataAddressBook = new AddressBook();
+            initialDataAddressBook = new StudentBook();
             initialDataLessonBook = new LessonBook();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty record.");
-            initialDataAddressBook = new AddressBook();
+            initialDataAddressBook = new StudentBook();
             initialDataLessonBook = new LessonBook();
         }
 
@@ -169,7 +163,7 @@ public class MainApp extends Application {
                     + "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty StudentBook");
             initializedPrefs = new UserPrefs();
         }
 
@@ -185,7 +179,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting StudentBook " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 

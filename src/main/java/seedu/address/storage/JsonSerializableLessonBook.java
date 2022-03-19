@@ -14,7 +14,7 @@ import seedu.address.model.ReadOnlyLessonBook;
 import seedu.address.model.lesson.Lesson;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * An Immutable StudentBook that is serializable to JSON format.
  */
 @JsonRootName(value = "lessonbook")
 class JsonSerializableLessonBook {

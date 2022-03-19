@@ -32,7 +32,7 @@ public class LessonBook implements ReadOnlyLessonBook {
     public LessonBook() {}
 
     /**
-     * Creates an AddressBook using the Students in the {@code toBeCopied}
+     * Creates an StudentBook using the Students in the {@code toBeCopied}
      */
     public LessonBook(ReadOnlyLessonBook toBeCopied) {
         this();
