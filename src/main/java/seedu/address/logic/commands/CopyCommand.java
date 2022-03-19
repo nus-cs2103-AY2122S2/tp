@@ -9,6 +9,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import java.util.List;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -34,20 +36,18 @@ public class CopyCommand extends Command {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_STATUS + "STATUS] "
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
-
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+            + PREFIX_PHONE + " "
+            + PREFIX_EMAIL + "\n";
 
     private final Index index;
     private final List<Prefix> prefixes;
     private final FormatPersonUtil formatPersonUtil;
 
     /**
+     * Constructor for copy command.
      * @param index of the person in the filtered person list to edit
      * @param prefixes details to copy the person with
+     * @param formatPersonUtil to format the person
      */
     public CopyCommand(Index index, List<Prefix> prefixes, FormatPersonUtil formatPersonUtil) {
         requireNonNull(index);
@@ -59,10 +59,33 @@ public class CopyCommand extends Command {
         this.formatPersonUtil = formatPersonUtil;
     }
 
+    /**
+     * Constructor for copy command
+     * @param prefixes details to copy the person with
+     * @param formatPersonUtil to format the person
+     */
+    public CopyCommand(List<Prefix> prefixes, FormatPersonUtil formatPersonUtil) {
+        requireNonNull(prefixes);
+        requireNonNull(formatPersonUtil);
+
+        this.index = null;
+        this.prefixes = prefixes;
+        this.formatPersonUtil = formatPersonUtil;
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+
+        if (index == null) {
+            try {
+                String formattedAddressBook = formatPersonUtil.formatAddressBook(lastShownList, prefixes);
+                return new CommandResult(formattedAddressBook, false, false, false, true);
+            } catch (JsonProcessingException e) {
+                throw new CommandException(Messages.MESSAGE_INVALID_COMMAND_FORMAT);
+            }
+        }
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);

@@ -9,13 +9,16 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.module.Module;
 
 public class FormatPersonUtil {
     private static final String JSON_FORMAT = "json";
@@ -48,18 +51,35 @@ public class FormatPersonUtil {
     }
 
     /**
-     * Returns a String contained formatted person
+     * Returns a String containing formatted person
      * @param person person to be formatted
      * @param prefixes list of prefixes to be used
      * @return
      */
     public String formatPerson(Person person, List<Prefix> prefixes) throws JsonProcessingException {
         if (format.equals(JSON_FORMAT)) {
-            return formatPersonJson(person, prefixes);
+            return JsonUtil.toJsonString(formatPersonJson(person, prefixes));
+
         } else if (format.equals(CSV_FORMAT)) {
             return formatPersonCsv(person, prefixes);
         } else {
             return formatPersonDefault(person, prefixes);
+        }
+    }
+
+    /**
+     * Returns a String containing formatted addressbook
+     * @param persons person to be formatted
+     * @param prefixes list of prefixes to be used
+     * @return
+     */
+    public String formatAddressBook(List<Person> persons, List<Prefix> prefixes) throws JsonProcessingException {
+        if (format.equals(JSON_FORMAT)) {
+            return formatAddressBookJson(persons, prefixes);
+        } else if (format.equals(CSV_FORMAT)) {
+            return formatAddressBookCsv(persons, prefixes);
+        } else {
+            return formatAddressBookDefault(persons, prefixes);
         }
     }
 
@@ -72,21 +92,67 @@ public class FormatPersonUtil {
         return builder.toString();
     }
 
-    private String formatPersonCsv(Person person, List<Prefix> prefixes) {
-        List<String> copiedFields = new ArrayList<>();
-        for (Prefix prefix : prefixes) {
-            copiedFields.add(getPersonField(person, prefix));
+    private String formatAddressBookDefault(List<Person> persons, List<Prefix> prefixes) {
+        StringBuilder builder = new StringBuilder();
+        for (Person person : persons) {
+            builder.append(formatPersonDefault(person, prefixes));
+            builder.append("\n");
         }
-        String csv = copiedFields.toString();
-        return csv.substring(1, csv.length() - 1);
+        return builder.toString();
     }
 
-    private String formatPersonJson(Person person, List<Prefix> prefixes) throws JsonProcessingException {
-        Map<String, String> map = new HashMap<>();
-        for (Prefix prefix : prefixes) {
-            map.put(prefix.getDescription(), getPersonField(person, prefix));
+    private String formatPersonCsv(Person person, List<Prefix> prefixes) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < prefixes.size() - 1; i++) {
+            builder.append(getPersonField(person, prefixes.get(i)));
+            builder.append(" | ");
         }
-        return JsonUtil.toJsonString(map);
+        builder.append(getPersonField(person, prefixes.get(prefixes.size() - 1)));
+        return builder.toString();
+    }
+
+    private String formatAddressBookCsv(List<Person> persons, List<Prefix> prefixes) {
+        StringBuilder builder = new StringBuilder();
+        List<String> headers = prefixes.stream()
+                .map(Prefix::getDescription)
+                .collect(Collectors.toList());
+        for (int i = 0; i < headers.size() - 1; i++) {
+            builder.append(headers.get(i));
+            builder.append(" | ");
+        }
+        builder.append(headers.get(headers.size() - 1));
+        builder.append("\n");
+        for (Person person : persons) {
+            builder.append(formatPersonCsv(person, prefixes));
+            builder.append("\n");
+        }
+        return builder.toString();
+    }
+
+    private Map<String, Object> formatPersonJson(Person person, List<Prefix> prefixes) throws JsonProcessingException {
+        Map<String, Object> personMap = new LinkedHashMap<>();
+        for (Prefix prefix : prefixes) {
+            if (prefix.equals(PREFIX_MODULE)) {
+                List<String> modules = new ArrayList<>();
+                for (Module module : person.getModules()) {
+                    modules.add(module.getModuleName());
+                }
+                personMap.put(prefix.getDescription(), modules);
+            } else {
+                personMap.put(prefix.getDescription(), getPersonField(person, prefix));
+            }
+        }
+        return personMap;
+    }
+
+    private String formatAddressBookJson(List<Person> person, List<Prefix> prefixes) throws JsonProcessingException {
+        List<Map<String, Object>> mapList = new ArrayList<>();
+        for (Person p : person) {
+            mapList.add(formatPersonJson(p, prefixes));
+        }
+        Map<String, Object> addressBookStructure = new HashMap<>();
+        addressBookStructure.put("persons", mapList);
+        return JsonUtil.toJsonString(addressBookStructure);
     }
 
     private String getPersonField(Person person, Prefix prefix) {
