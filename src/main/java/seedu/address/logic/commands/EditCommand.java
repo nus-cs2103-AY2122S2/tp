@@ -106,12 +106,20 @@ public class EditCommand extends Command {
         Favourite noChangeFavourite = editPersonDescriptor.getFavourite().orElse(personToEdit.getFavourite());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
 
-        // default value of edited person's user type
-        UserType updatedUserType = personToEdit.getUserType();
+        // set value of edited person's properties
+        Set<Property> updatedProperties = setProperties(personToEdit, editPersonDescriptor);
+        // set value of edited person's preference
+        Optional<Preference> updatedPreference = setPreference(personToEdit, editPersonDescriptor);
+        // set value of edited person's user type
+        UserType updatedUserType = setUserType(updatedProperties, updatedPreference);
+
+        return new Person(updatedName, updatedPhone, updatedEmail, noChangeFavourite, updatedAddress, updatedProperties,
+                updatedPreference, updatedUserType);
+    }
+
+    private static Set<Property> setProperties(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         // default value of edited person's properties
         Set<Property> updatedProperties = personToEdit.getProperties();
-        // default value of edited person's preference
-        Optional<Preference> updatedPreference = personToEdit.getPreference();
 
         // check if person to edit contains Properties
         if (!personToEdit.getProperties().isEmpty()) {
@@ -121,29 +129,40 @@ public class EditCommand extends Command {
             // if edit command contains Preference
             } else if (editPersonDescriptor.getPreference().isPresent()) {
                 updatedProperties = new HashSet<>();
-                updatedUserType = UserTypeUtil.createBuyer();
             }
         } else if (editPersonDescriptor.getProperties().isPresent()) {
             updatedProperties = editPersonDescriptor.getProperties().get();
         }
+
+        return updatedProperties;
+    }
+
+    private static Optional<Preference> setPreference(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+        // default value of edited person's preference
+        Optional<Preference> updatedPreference = personToEdit.getPreference();
 
         // check if person to edit contains Preference
         if (personToEdit.getPreference().isPresent()) {
             // if edit command contains Preference
             if (editPersonDescriptor.getPreference().isPresent()) {
                 updatedPreference = editPersonDescriptor.getPreference();
-            // if edit command contains Properties
+                // if edit command contains Properties
             } else if (!editPersonDescriptor.getProperties().isEmpty()) {
                 updatedPreference = Optional.ofNullable(null);
-                updatedUserType = UserTypeUtil.createSeller();
             }
-        //
         } else if (editPersonDescriptor.getPreference().isPresent()) {
             updatedPreference = editPersonDescriptor.getPreference();
         }
 
-        return new Person(updatedName, updatedPhone, updatedEmail, noChangeFavourite, updatedAddress, updatedProperties,
-                updatedPreference, updatedUserType);
+        return updatedPreference;
+    }
+
+    private static UserType setUserType(Set<Property> updatedProperties, Optional<Preference> updatedPreference) {
+        if (!updatedProperties.isEmpty()) {
+            return UserTypeUtil.createSeller();
+        } else {
+            return UserTypeUtil.createBuyer();
+        }
     }
 
     @Override
