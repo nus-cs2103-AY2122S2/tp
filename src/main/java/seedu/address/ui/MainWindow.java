@@ -2,10 +2,8 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -215,6 +213,8 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isCopy()) {
                 handleCopy(commandResult);
+            } else {
+                commandBox.disableButton();
             }
 
             if (commandResult.isExit()) {

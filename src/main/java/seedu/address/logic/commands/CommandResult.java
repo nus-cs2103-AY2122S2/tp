@@ -69,7 +69,9 @@ public class CommandResult {
         return exit;
     }
 
-    public boolean isCopy() { return isCopy; }
+    public boolean isCopy() {
+        return isCopy;
+    }
 
     @Override
     public boolean equals(Object other) {

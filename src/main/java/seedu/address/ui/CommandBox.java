@@ -21,8 +21,6 @@ public class CommandBox extends UiPart<Region> {
 
     private final CommandExecutor commandExecutor;
 
-    public static final String USERGUIDE_URL = "https://ay2122s2-cs2103t-t13-4.github.io/tp/UserGuide.html";
-
     @FXML
     private TextField commandTextField;
 
@@ -83,19 +81,23 @@ public class CommandBox extends UiPart<Region> {
         copyButton.setDisable(false);
     }
 
+    public void disableButton() {
+        copyButton.setDisable(true);
+    }
+
     public void setCopiedText(String copiedText) {
         this.copiedText = copiedText;
     }
 
     /**
-     * Copies the URL to the user guide to the clipboard.
+     * Copies the content to the clipboard beside command line.
      */
     @FXML
-    private void copyUrl() {
+    private void copyContent() {
         final Clipboard clipboard = Clipboard.getSystemClipboard();
-        final ClipboardContent url = new ClipboardContent();
-        url.putString(copiedText);
-        clipboard.setContent(url);
+        final ClipboardContent content = new ClipboardContent();
+        content.putString(copiedText);
+        clipboard.setContent(content);
     }
 
     /**

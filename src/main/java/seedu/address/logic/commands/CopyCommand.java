@@ -1,34 +1,21 @@
 package seedu.address.logic.commands;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.CollectionUtil;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.Prefix;
-import seedu.address.model.Model;
-import seedu.address.model.module.Module;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Status;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
+import java.util.List;
+
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.Prefix;
+import seedu.address.model.Model;
+import seedu.address.model.person.FormatPersonUtil;
+import seedu.address.model.person.Person;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -56,17 +43,20 @@ public class CopyCommand extends Command {
 
     private final Index index;
     private final List<Prefix> prefixes;
+    private final FormatPersonUtil formatPersonUtil;
 
     /**
      * @param index of the person in the filtered person list to edit
      * @param prefixes details to copy the person with
      */
-    public CopyCommand(Index index, List<Prefix> prefixes) {
+    public CopyCommand(Index index, List<Prefix> prefixes, FormatPersonUtil formatPersonUtil) {
         requireNonNull(index);
         requireNonNull(prefixes);
+        requireNonNull(formatPersonUtil);
 
         this.index = index;
         this.prefixes = prefixes;
+        this.formatPersonUtil = formatPersonUtil;
     }
 
     @Override
@@ -79,43 +69,16 @@ public class CopyCommand extends Command {
         }
 
         Person personToCopy = lastShownList.get(index.getZeroBased());
-
-        List<String> copiedFields = copyFields(personToCopy, prefixes);
-        System.out.println(copiedFields);
-        return new CommandResult(copiedFields.toString(), false, false, false, true);
-    }
-
-    private List<String> copyFields(Person personToCopy, List<Prefix> prefixes) {
-        List<String> copiedFields = new ArrayList<>();
-        for (Prefix prefix : prefixes) {
-            copiedFields.add(getPersonField(personToCopy, prefix));
+        String copiedFields;
+        try {
+            copiedFields = formatPersonUtil.formatPerson(personToCopy, prefixes);
+        } catch (Exception e) {
+            throw new CommandException(e.getMessage());
         }
-        return copiedFields;
+
+        return new CommandResult(copiedFields, false, false, false, true);
     }
 
-    private String getPersonField(Person person, Prefix prefix) {
-        if (prefix.equals(PREFIX_NAME)) {
-            return person.getName().toString();
-
-        } else if (prefix.equals(PREFIX_PHONE)) {
-            return person.getPhone().toString();
-
-        } else if (prefix.equals(PREFIX_EMAIL)) {
-            return person.getEmail().toString();
-
-        } else if (prefix.equals(PREFIX_ADDRESS)) {
-            return person.getAddress().toString();
-
-        } else if (prefix.equals(PREFIX_STATUS)) {
-            return person.getStatus().toString();
-
-        } else if (prefix.equals(PREFIX_MODULE)) {
-            return person.getModules().toString();
-
-        } else {
-            return "";
-        }
-    }
     @Override
     public boolean equals(Object other) {
         // short circuit if same object
