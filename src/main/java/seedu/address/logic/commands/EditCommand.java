@@ -29,6 +29,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Preference;
 import seedu.address.model.person.UserType;
 import seedu.address.model.property.Property;
+import seedu.address.model.util.UserTypeUtil;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -104,10 +105,42 @@ public class EditCommand extends Command {
         //Favourite status for a client will remain unchanged when edited if not, the FavouriteCommand is redundant.
         Favourite noChangeFavourite = editPersonDescriptor.getFavourite().orElse(personToEdit.getFavourite());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Property> updatedProperties = editPersonDescriptor.getProperties().orElse(new HashSet<>());
-        // retrieve Preference of the edited person
-        Optional<Preference> updatedPreference = editPersonDescriptor.getPreference();
-        UserType updatedUserType = editPersonDescriptor.getUserType().orElse(personToEdit.getUserType());
+
+        // default value of edited person's user type
+        UserType updatedUserType = personToEdit.getUserType();
+        // default value of edited person's properties
+        Set<Property> updatedProperties = personToEdit.getProperties();
+        // default value of edited person's preference
+        Optional<Preference> updatedPreference = personToEdit.getPreference();
+
+        // check if person to edit contains Properties
+        if (!personToEdit.getProperties().isEmpty()) {
+            // if edit command contains properties
+            if (editPersonDescriptor.getProperties().isPresent()) {
+                updatedProperties = editPersonDescriptor.getProperties().get();
+            // if edit command contains Preference
+            } else if (editPersonDescriptor.getPreference().isPresent()) {
+                updatedProperties = new HashSet<>();
+                updatedUserType = UserTypeUtil.createBuyer();
+            }
+        } else if (editPersonDescriptor.getProperties().isPresent()) {
+            updatedProperties = editPersonDescriptor.getProperties().get();
+        }
+
+        // check if person to edit contains Preference
+        if (personToEdit.getPreference().isPresent()) {
+            // if edit command contains Preference
+            if (editPersonDescriptor.getPreference().isPresent()) {
+                updatedPreference = editPersonDescriptor.getPreference();
+            // if edit command contains Properties
+            } else if (!editPersonDescriptor.getProperties().isEmpty()) {
+                updatedPreference = Optional.ofNullable(null);
+                updatedUserType = UserTypeUtil.createSeller();
+            }
+        //
+        } else if (editPersonDescriptor.getPreference().isPresent()) {
+            updatedPreference = editPersonDescriptor.getPreference();
+        }
 
         return new Person(updatedName, updatedPhone, updatedEmail, noChangeFavourite, updatedAddress, updatedProperties,
                 updatedPreference, updatedUserType);
@@ -172,7 +205,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, properties, userType);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, properties, preference, userType);
         }
 
         public void setName(Name name) {

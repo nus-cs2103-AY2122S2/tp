@@ -20,7 +20,6 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.UserType;
 import seedu.address.model.property.Property;
-import seedu.address.model.util.UserTypeUtil;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -63,19 +62,12 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
-        // set the User as a Buyer if he/she has a preference
+
         if (argMultimap.getValue(PREFIX_PREFERENCE).isPresent()) {
-            editPersonDescriptor.setUserType(UserTypeUtil.createBuyer());
             editPersonDescriptor.setPreference(ParserUtil.parsePreference(
                     argMultimap.getValue(PREFIX_PREFERENCE).get()));
-            editPersonDescriptor.clearProperties();
         }
-        // set the User as a Seller if he/she has a property/properties
-        if (argMultimap.getValue(PREFIX_PROPERTY).isPresent()) {
-            System.out.print(": " + argMultimap.getValue(PREFIX_PROPERTY));
-            editPersonDescriptor.setUserType(UserTypeUtil.createSeller());
-            editPersonDescriptor.clearPreference();
-        }
+
         parsePropertiesForEdit(argMultimap.getAllValues(PREFIX_PROPERTY)).ifPresent(
                 editPersonDescriptor::setProperties);
 
