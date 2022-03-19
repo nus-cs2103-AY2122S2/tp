@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.MainApp;
 import seedu.address.model.person.GithubUsername;
 import seedu.address.model.person.Person;
@@ -33,6 +34,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
+    private VBox personCard;
+    @FXML
     private Label name;
     @FXML
     private Label id;
@@ -53,6 +56,10 @@ public class PersonCard extends UiPart<Region> {
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
+        if (person.isPotentialTeammate()) {
+            // Add highlight class to potential teammates
+            personCard.getStyleClass().add("highlight");
+        }
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
