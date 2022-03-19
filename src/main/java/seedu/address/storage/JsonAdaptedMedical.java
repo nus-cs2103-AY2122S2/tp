@@ -41,8 +41,8 @@ public class JsonAdaptedMedical {
      */
     @JsonCreator
     public JsonAdaptedMedical(@JsonProperty("nric") String nric,
-                                @JsonProperty("age") String age,
-                                @JsonProperty("bloodType") String bloodType,
+                              @JsonProperty("age") String age,
+                              @JsonProperty("bloodType") String bloodType,
                               @JsonProperty("medication") String medication,
                               @JsonProperty("weight") String weight,
                               @JsonProperty("height") String height,
@@ -100,7 +100,6 @@ public class JsonAdaptedMedical {
         }
         final Nric modelNric = new Nric(nric);
 
-
         if (age == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Age.class.getSimpleName()));
         }
@@ -110,14 +109,12 @@ public class JsonAdaptedMedical {
         }
         final Age modelAge = new Age(age);
 
-
         if (bloodType == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT,
                             BloodType.class.getSimpleName())
             );
         }
-
         if (!BloodType.isValidBloodType(bloodType)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
@@ -130,7 +127,6 @@ public class JsonAdaptedMedical {
                             Medication.class.getSimpleName())
             );
         }
-
         if (!Medication.isValidMedication(medication)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
@@ -140,7 +136,6 @@ public class JsonAdaptedMedical {
         if (weight == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Weight.class.getSimpleName()));
         }
-
         if (!Weight.isValidWeight(weight)) {
             throw new IllegalValueException(Weight.MESSAGE_CONSTRAINTS);
         }
@@ -150,7 +145,6 @@ public class JsonAdaptedMedical {
         if (height == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Height.class.getSimpleName()));
         }
-
         if (!Height.isValidHeight(weight)) {
             throw new IllegalValueException(Height.MESSAGE_CONSTRAINTS);
         }
@@ -163,7 +157,6 @@ public class JsonAdaptedMedical {
                             Illnesses.class.getSimpleName())
             );
         }
-
         if (!Illnesses.isValidIllnesses(illnesses)) {
             throw new IllegalValueException(Illnesses.MESSAGE_CONSTRAINTS);
         }
@@ -176,7 +169,6 @@ public class JsonAdaptedMedical {
                             Surgeries.class.getSimpleName())
             );
         }
-
         if (!Surgeries.isValidSurgeries(surgeries)) {
             throw new IllegalValueException(Surgeries.MESSAGE_CONSTRAINTS);
         }
@@ -189,7 +181,6 @@ public class JsonAdaptedMedical {
                             FamilyHistory.class.getSimpleName())
             );
         }
-
         if (!FamilyHistory.isValidFamilyHistory(familyHistory)) {
             throw new IllegalValueException(FamilyHistory.MESSAGE_CONSTRAINTS);
         }
@@ -202,7 +193,6 @@ public class JsonAdaptedMedical {
                             ImmunizationHistory.class.getSimpleName())
             );
         }
-
         if (!ImmunizationHistory.isValidImmunizationHistory(immunizationHistory)) {
             throw new IllegalValueException(ImmunizationHistory.MESSAGE_CONSTRAINTS);
         }
@@ -215,7 +205,6 @@ public class JsonAdaptedMedical {
                             Gender.class.getSimpleName())
             );
         }
-
         if (!Gender.isValidGender(gender)) {
             throw new IllegalValueException(Gender.MESSAGE_CONSTRAINTS);
         }
@@ -229,11 +218,9 @@ public class JsonAdaptedMedical {
                             Ethnicity.class.getSimpleName())
             );
         }
-
         if (!Ethnicity.isValidEthnicity(ethnicity)) {
             throw new IllegalValueException(Ethnicity.MESSAGE_CONSTRAINTS);
         }
-
         final Ethnicity modelEthnicity = new Ethnicity(ethnicity);
 
 
