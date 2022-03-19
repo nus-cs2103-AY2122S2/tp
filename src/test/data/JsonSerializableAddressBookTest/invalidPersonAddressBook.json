@@ -9,5 +9,6 @@
   "contacts": [ ],
   "medicals": [ ],
   "prescriptions": [ ],
-  "testResults": [ ]
+  "testResults": [ ],
+  "consultations": [ ]
 }

@@ -63,6 +63,7 @@ public class MainApp extends Application {
 
         model = initModelManager(storage, userPrefs);
 
+
         logic = new LogicManager(model, storage);
 
         ui = new UiManager(logic);
@@ -89,6 +90,7 @@ public class MainApp extends Application {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
             initialData = new AddressBook();
         }
+
 
         return new ModelManager(initialData, userPrefs);
     }

@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.consultation.Consultation;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.medical.Medical;
 import seedu.address.model.patient.Patient;
@@ -16,6 +17,7 @@ import seedu.address.model.testresult.TestResult;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
+    Predicate<Consultation> PREDICATE_SHOW_ALL_CONSULTATIONS = unused -> true;
     Predicate<Patient> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
     Predicate<Prescription> PREDICATE_SHOW_ALL_PRESCRIPTIONS = unused -> true;
     Predicate<Contact> PREDICATE_SHOW_ALL_CONTACTS = unused -> true;
@@ -98,6 +100,9 @@ public interface Model {
     ObservableList<Medical> getFilteredMedicalList();
     ObservableList<Prescription> getFilteredPrescriptionList();
 
+    /** Returns the person list **/
+    ObservableList getPersonList();
+
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
@@ -137,6 +142,43 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredContactList(Predicate<Contact> predicate);
+
+    // Consultation
+
+    /**
+     * Returns true if a consultation with the same identity as {@code consultation} exists in the address book.
+     */
+    boolean hasConsultation(Consultation consultation);
+
+    /**
+     * Deletes the given consultation.
+     * The consultation must exist in the address book.
+     */
+    void deleteConsultation(Consultation target);
+
+    /**
+     * Adds the given consultation.
+     * {@code consultation} must not already exist in the address book.
+     */
+    void addConsultation(Consultation consultation);
+
+    /**
+     * Replaces the given consultation {@code target} with {@code editedConsultation}.
+     * {@code target} must exist in the address book.
+     * The consultation identity of {@code editedConsultation} must not be the same
+     * as another existing consultation in the address book.
+     */
+    void setConsultation(Consultation target, Consultation editedConsultation);
+
+    /** Returns an unmodifiable view of the filtered consultation list */
+    ObservableList<Consultation> getFilteredConsultationList();
+
+    /**
+     * Updates the filter of the filtered consultation list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredConsultationList(Predicate<Consultation> predicate);
+
     void updateFilteredPrescriptionList(Predicate<Prescription> predicate);
 
     /**
@@ -181,10 +223,11 @@ public interface Model {
 
     boolean hasMedical(Medical medical);
 
+    void deleteMedical(Medical medical);
+
     /**
      * Updates the filter of the filtered medical list to filter by the given {@code predicate}. s
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredMedicalList(Predicate<Medical> predicate);
-
 }

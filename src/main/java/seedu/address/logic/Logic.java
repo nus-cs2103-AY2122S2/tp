@@ -8,6 +8,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.consultation.Consultation;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.medical.Medical;
 import seedu.address.model.patient.Patient;
@@ -37,12 +38,19 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Patient> getFilteredPersonList();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
+    /** Returns an unmodifiable view of the filtered list of prescriptions */
+    ObservableList<Prescription> getFilteredPrescriptionList();
+
+    /** Returns an unmodifiable view of the filtered list of contacts */
     ObservableList<Contact> getFilteredContactList();
 
+
+    /** Returns an unmodifiable view of the filtered list of consultations */
+    ObservableList<Consultation> getFilteredConsultationList();
+
+    /** Returns an unmodifiable view of the filtered list of medicals */
     ObservableList<Medical> getFilteredMedicalList();
 
-    ObservableList<Prescription> getFilteredPrescriptionList();
 
     /** Returns an unmodifiable view of the filtered list of test results */
     ObservableList<TestResult> getFilteredTestResultList();

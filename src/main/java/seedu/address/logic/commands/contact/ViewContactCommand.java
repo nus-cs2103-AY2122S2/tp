@@ -2,6 +2,8 @@ package seedu.address.logic.commands.contact;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.commands.contact.AddContactCommand.MESSAGE_MISSING_PATIENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.Command;
@@ -20,10 +22,11 @@ public class ViewContactCommand extends Command {
     public static final String COMMAND_WORD = "view";
     public static final CommandType COMMAND_TYPE = CommandType.CONTACT;
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all contacts whose names contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + PREFIX_TYPE + "contact "
+            + ": Lists all contacts whose names contain any of "
             + "the specified owner NRIC and displays them as a list with index numbers.\n"
             + "Parameters: OWNER NRIC\n"
-            + "Example: " + COMMAND_WORD + " S1234567L";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_TYPE + "contact " + PREFIX_NRIC + "S1234567L";
 
     private final Nric ownerNric;
 

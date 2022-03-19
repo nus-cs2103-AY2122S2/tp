@@ -9,6 +9,11 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.consultation.Date;
+import seedu.address.model.consultation.Notes;
+import seedu.address.model.consultation.Prescription;
+import seedu.address.model.consultation.TestsTakenAndResults;
+import seedu.address.model.consultation.Time;
 import seedu.address.model.contact.Address;
 import seedu.address.model.contact.Email;
 import seedu.address.model.contact.Phone;
@@ -333,6 +338,67 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+
+    // Starts here
+
+    /**
+     * Parses a {@code String time} into an {@code time}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code time} is invalid.
+     */
+    public static Time parseTime(String time) throws ParseException {
+        requireNonNull(time);
+        if (!Time.isValidTime(time)) {
+            throw new ParseException(Time.MESSAGE_CONSTRAINTS);
+        }
+        return new Time(time);
+    }
+
+    /**
+     * Parses a {@code String date} into an {@code date}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+    public static Date parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        if (!Date.isValidDate(date)) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        }
+        return new Date(date);
+    }
+
+    /**
+     * Parses a {@code String notes} into an {@code notes}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code notes} is invalid.
+     */
+    public static Notes parseNotes(String notes) throws ParseException {
+        return new Notes(notes);
+    }
+
+    /**
+     * Parses a {@code String prescription} into an {@code prescription}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code prescription} is invalid.
+     */
+    public static Prescription parsePrescription(String prescription) {
+        return new Prescription(prescription);
+    }
+
+    /**
+     * Parses a {@code String testsTakenAndResults} into an {@code testsTakenAndResults}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code testsTakenAndResults} is invalid.
+     */
+    public static TestsTakenAndResults parseTestsTakenAndResults(String testsTakenAndResults) {
+        return new TestsTakenAndResults(testsTakenAndResults);
     }
 
     /**

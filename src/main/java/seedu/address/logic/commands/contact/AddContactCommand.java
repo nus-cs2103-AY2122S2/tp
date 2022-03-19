@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -21,14 +22,18 @@ public class AddContactCommand extends Command {
     public static final String COMMAND_WORD = "add";
     public static final CommandType COMMAND_TYPE = CommandType.CONTACT;
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a contact to patient in Medbook. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + PREFIX_TYPE + "contact"
+            + ": Adds a contact to patient in MedBook. "
             + "Parameters: "
+            + PREFIX_TYPE + "contact "
             + PREFIX_NRIC + "OWNER_NRIC "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
             + "Example: " + COMMAND_WORD + " "
+            + PREFIX_TYPE + "contact "
+            + PREFIX_NRIC + "S1234567L "
             + PREFIX_NAME + "John S. Smith "
             + PREFIX_PHONE + "88888888 "
             + PREFIX_EMAIL + "johns@example.com "
