@@ -13,5 +13,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_USERTYPE = new Prefix("t/");
     public static final Prefix PREFIX_PROPERTY = new Prefix("pr/");
     public static final Prefix PREFIX_PREFERENCE = new Prefix("pf/");
-
+    public static final Prefix PREFIX_DESCRIPTION = new Prefix("d/");
+    public static final Prefix PREFIX_FILEPATH = new Prefix("f/");
 }
