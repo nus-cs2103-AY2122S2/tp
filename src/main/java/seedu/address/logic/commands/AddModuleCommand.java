@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.commands.DeleteModuleCommand.MESSAGE_FAILURE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
@@ -14,13 +14,13 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.module.Module;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Status;
-import seedu.address.model.tag.Tag;
 
 public class AddModuleCommand extends Command {
 
@@ -30,8 +30,8 @@ public class AddModuleCommand extends Command {
             + "by the index number used in the displayed person list. "
             + "Input values will be added on to existing modules.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_TAG + "CS3230 " + PREFIX_TAG + "CS1231S\n";
+            + "[" + PREFIX_MODULE + "MODULE]...\n"
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_MODULE + "CS3230 " + PREFIX_MODULE + "CS1231S\n";
 
     /**
      * Arg1 is Person's Name
@@ -40,14 +40,14 @@ public class AddModuleCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Added Modules for %s: %s";
 
     private final Index targetIndex;
-    private final List<Tag> modulesToAdd;
+    private final List<Module> modulesToAdd;
 
 
     /**
      * @param targetIndex of the person in the filtered person list
      * @param modulesToAdd modules to be added
      */
-    public AddModuleCommand(Index targetIndex, List<Tag> modulesToAdd) {
+    public AddModuleCommand(Index targetIndex, List<Module> modulesToAdd) {
         this.targetIndex = targetIndex;
         this.modulesToAdd = modulesToAdd;
     }
@@ -72,7 +72,7 @@ public class AddModuleCommand extends Command {
             throw new CommandException(String.format(MESSAGE_FAILURE, modulesToAdd));
         }
 
-        List<Tag> modulesToAddActual = new ArrayList<>(modulesToAdd);
+        List<Module> modulesToAddActual = new ArrayList<>(modulesToAdd);
         Person personToEdit = lastShownList.get(targetIndex.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, modulesToAdd);
 
@@ -86,7 +86,7 @@ public class AddModuleCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, List<Tag> modulesToAdd) {
+    private static Person createEditedPerson(Person personToEdit, List<Module> modulesToAdd) {
         assert personToEdit != null;
 
         Name updatedName = personToEdit.getName();
@@ -95,11 +95,11 @@ public class AddModuleCommand extends Command {
         Address updatedAddress = personToEdit.getAddress();
         Status updatedStatus = personToEdit.getStatus();
 
-        Set<Tag> oldTags = personToEdit.getTags();
-        Set<Tag> updatedTags = new HashSet<>(oldTags);
-        updatedTags.addAll(modulesToAdd);
+        Set<Module> oldModules = personToEdit.getModules();
+        Set<Module> updatedModules = new HashSet<>(oldModules);
+        updatedModules.addAll(modulesToAdd);
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedStatus, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedStatus, updatedModules);
     }
 
     @Override
