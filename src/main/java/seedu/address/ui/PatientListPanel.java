@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
@@ -14,17 +15,22 @@ import seedu.address.model.patient.Patient;
  * Panel containing the list of persons.
  */
 public class PatientListPanel extends UiPart<Region> {
+    private static final String SCREEN_TITLE = "Patients";
     private static final String FXML = "PersonListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(PatientListPanel.class);
 
     @FXML
     private ListView<Patient> personListView;
 
+    @FXML
+    private Label screenTitle;
+
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
     public PatientListPanel(ObservableList<Patient> patientList) {
         super(FXML);
+        screenTitle.setText(SCREEN_TITLE);
         personListView.setItems(patientList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
     }
