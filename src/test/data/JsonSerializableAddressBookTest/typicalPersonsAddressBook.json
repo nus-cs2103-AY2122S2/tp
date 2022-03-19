@@ -51,6 +51,7 @@
     "tagged" : [ ]
   } ],
   "contacts": [ ],
+  "medicals": [ ],
   "prescriptions": [ ],
   "testResults": [ ],
   "consultations": [ ]
