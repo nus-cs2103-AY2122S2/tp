@@ -89,6 +89,12 @@ public class JsonScheduleStorageTest {
     }
 
     @Test
+    public void readSchedule_overlappingAppointment_throwsDataConversionException() {
+        assertThrows(DataConversionException.class, ()
+            -> readSchedule("overlappingAppointmentSchedule.json", GLOBAL_ADDRESSBOOK));
+    }
+
+    @Test
     public void readAddressBook_validAppointments_success() throws Exception {
         Optional<ReadOnlySchedule> schedule = readSchedule("validAppointmentSchedule.json",
                 GLOBAL_ADDRESSBOOK);
