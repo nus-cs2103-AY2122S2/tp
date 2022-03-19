@@ -198,7 +198,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ObservableList getPersonList() {
+    public ObservableList<Patient> getPersonList() {
         return addressBook.getPersonList();
     }
 

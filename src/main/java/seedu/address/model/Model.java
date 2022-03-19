@@ -107,7 +107,7 @@ public interface Model {
     ObservableList<Prescription> getFilteredPrescriptionList();
 
     /** Returns the person list **/
-    ObservableList getPersonList();
+    ObservableList<Patient> getPersonList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
