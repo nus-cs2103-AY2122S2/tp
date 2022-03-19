@@ -1,15 +1,11 @@
 package seedu.address.testutil;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import seedu.address.model.client.Appointment;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
-import seedu.address.model.property.PropertyToSell;
 import seedu.address.model.seller.Seller;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -27,7 +23,6 @@ public class SellerBuilder {
     private Phone phone;
     private Set<Tag> tags;
     private Appointment appointment;
-    private List<PropertyToSell> properties;
 
     /**
      * Creates a {@code clientBuilder} with the default details.
@@ -37,7 +32,6 @@ public class SellerBuilder {
         phone = new Phone(DEFAULT_PHONE);
         appointment = new Appointment(DEFAULT_APPOINTMENT);
         tags = new HashSet<>();
-        properties = new ArrayList<>();
     }
 
     /**
@@ -48,7 +42,6 @@ public class SellerBuilder {
         phone = sellerToCopy.getPhone();
         appointment = sellerToCopy.getAppointment();
         tags = new HashSet<>(sellerToCopy.getTags());
-        properties = new ArrayList<>(sellerToCopy.getPropertiesToSell());
     }
 
     /**
@@ -83,16 +76,8 @@ public class SellerBuilder {
         return this;
     }
 
-    /**
-     * Sets the {@code Properties} of the {@code seller} that we are building.
-     */
-    public SellerBuilder withProperties(PropertyToSell... properties) {
-        this.properties = new ArrayList<>(Arrays.asList(properties));
-        return this;
-    }
-
     public Seller build() {
-        return new Seller(name, phone, appointment, tags, properties);
+        return new Seller(name, phone, appointment, tags);
     }
 
 }

@@ -116,21 +116,6 @@ public class SellerTest {
             PropertyToSell ptb2 = new PropertyToSell(h2, pr2, a2);
             PropertyToSell ptb3 = new PropertyToSell(h3, pr3, a3);
 
-            // Same list of properties with different order
-            editedYuqi = new SellerBuilder(YUQI).withProperties(ptb1, ptb2, ptb3).build();
-            Seller testYuqi = new SellerBuilder(YUQI).withProperties(ptb2, ptb3, ptb1).build();
-            assertEquals(editedYuqi, testYuqi);
-
-            // Same list of properties with same order
-            editedYuqi = new SellerBuilder(YUQI).withProperties(ptb1, ptb2, ptb3).build();
-            testYuqi = new SellerBuilder(YUQI).withProperties(ptb1, ptb2, ptb3).build();
-            assertEquals(editedYuqi, testYuqi);
-
-            // Different list of properties
-            editedYuqi = new SellerBuilder(YUQI).withProperties(ptb1).build();
-            testYuqi = new SellerBuilder(YUQI).withProperties(ptb1, ptb2, ptb3).build();
-            assertNotEquals(editedYuqi, testYuqi);
-
         } catch (IllegalValueException e) {
             System.out.println(e.getMessage());
         }
@@ -169,14 +154,6 @@ public class SellerTest {
             PropertyToSell pts2 = new PropertyToSell(h2, pr2, a2);
             PropertyToSell pts3 = new PropertyToSell(h3, pr3, a3);
 
-            Seller testSeller = new SellerBuilder().withProperties(pts1).build();
-            Seller testSeller2 = new SellerBuilder().withProperties(pts1, pts2).build();
-            Seller testSeller3 = new SellerBuilder(testSeller2).build();
-            Seller testSeller4 = new SellerBuilder().withProperties(pts2, pts1).build();
-
-            assertTrue(testSeller2.hasSameProperties(testSeller3));
-            assertFalse(testSeller.hasSameProperties(testSeller2));
-            assertTrue(testSeller3.hasSameProperties(testSeller4));
         } catch (IllegalValueException e) {
             System.out.println(e.getMessage());
         }
