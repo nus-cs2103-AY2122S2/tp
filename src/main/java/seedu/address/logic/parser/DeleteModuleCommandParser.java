@@ -15,11 +15,6 @@ import seedu.address.logic.commands.DeleteModuleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.Module;
 
-
-
-
-
-
 /**
  * Parses input arguments and creates a new DeleteCommand object
  */

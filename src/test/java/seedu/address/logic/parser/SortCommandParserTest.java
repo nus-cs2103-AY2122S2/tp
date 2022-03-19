@@ -2,14 +2,15 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_NO_PARAMETERS_SUPPLIED;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,12 +25,13 @@ class SortCommandParserTest {
     @Test
     public void parse_validArgs_returnsSortModulesCommand() {
         try {
-            List<Prefix> prefixes = Arrays.asList(PREFIX_NAME, PREFIX_STATUS, PREFIX_EMAIL);
-            List<String> firstOrder = Arrays.asList("asc", "asc", "desc");
+            List<Prefix> prefixes = Arrays.asList(PREFIX_NAME, PREFIX_PHONE,
+                    PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_STATUS, PREFIX_MODULE);
+            List<String> firstOrder = Arrays.asList("asc", "asc", "desc", "asc", "asc", "desc");
 
             SortCommand correctCommand = new SortCommand(prefixes,
                     firstOrder, SortCommandParser.formatFields(prefixes, firstOrder));
-            assertParseSuccess(parser, " n/asc s/asc e/desc", correctCommand);
+            assertParseSuccess(parser, " n/asc p/asc e/desc a/asc s/asc m/desc", correctCommand);
         } catch (ParseException e) {
             assert false;
         }
