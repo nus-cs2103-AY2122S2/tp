@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ORDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 
@@ -30,31 +29,29 @@ public class SortCommand extends Command {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_STATUS + "STATUS] "
             + "[" + PREFIX_MODULE + "MODULE] "
-            + "[" + PREFIX_ORDER + "ORDER]\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_MODULE + " " + PREFIX_NAME
-            + " " + PREFIX_ORDER + "desc" + "\n";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_MODULE + "/asc " + PREFIX_NAME + "/desc " + "\n";
 
-    public static final String MESSAGE_SUCCESS = "Sorted successfully by %s order: %s";
+    public static final String MESSAGE_SUCCESS = "Sorted successfully: %s";
 
     private final PersonComparator personComparator;
     private final List<Prefix> fields;
-    private final String order;
+    private final List<String> orders;
     private final String successField;
     /**
      * @param fields modules to be deleted
      */
-    public SortCommand(List<Prefix> fields, String order, String successField) {
+    public SortCommand(List<Prefix> fields, List<String> orders, String successField) {
         this.successField = successField;
-        this.order = order;
+        this.orders = orders;
         this.fields = fields;
-        this.personComparator = new PersonComparator(fields, order);
+        this.personComparator = new PersonComparator(fields, orders);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.sortPerson(personComparator);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, order, successField));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, successField));
     }
 
     @Override
@@ -64,26 +61,30 @@ public class SortCommand extends Command {
                 && this.fields.equals(((SortCommand) other).fields)
                 && this.personComparator.equals(((SortCommand) other).personComparator)
                 && this.successField.equals(((SortCommand) other).successField)
-                && this.order.equals(((SortCommand) other).order); // instanceof handles null
+                && this.orders.equals(((SortCommand) other).orders); // instanceof handles null
     }
 
     public static class PersonComparator implements Comparator<Person> {
         private final List<Prefix> fields;
-        private final String order;
+        private final List<String> orders;
         /**
          * Create a comparator using the specified fields,
          * using the ordering implied by its iterator.
          * @param fields a list of field names
          */
-        public PersonComparator(List<Prefix> fields, String order) {
+        public PersonComparator(List<Prefix> fields, List<String> orders) {
+            assert fields.size() == orders.size();
             this.fields = fields;
-            this.order = order;
+            this.orders = orders;
         }
 
         @Override
         public int compare(Person o1, Person o2) {
-            for (Prefix field : fields) {
+            for (int i = 0; i < fields.size(); i++) {
                 int result = 0;
+                Prefix field = fields.get(i);
+                String order = orders.get(i);
+
                 if (PREFIX_NAME.equals(field)) {
                     result = o1.getName().compareTo(o2.getName());
 
@@ -101,7 +102,6 @@ public class SortCommand extends Command {
 
                 } else if (PREFIX_STATUS.equals(field)) {
                     result = o1.getStatus().compareTo(o2.getStatus());
-
                 }
 
                 if (order.equals("desc")) {
@@ -120,7 +120,7 @@ public class SortCommand extends Command {
             // short circuit if same object
             return (other instanceof PersonComparator)
                     && this.fields.equals(((PersonComparator) other).fields)
-                    && this.order.equals(((PersonComparator) other).order); // instanceof handles null
+                    && this.orders.equals(((PersonComparator) other).orders); // instanceof handles null
         }
     }
 }

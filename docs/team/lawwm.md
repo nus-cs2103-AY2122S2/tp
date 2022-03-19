@@ -8,22 +8,24 @@ title: Wei Ming's Project Portfolio Page
 
 
 - **Administrative**:
-    - Fully set up team repo
-    - Set up User Guide for ease of update
 
 
 AddressBook - Level 3 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added the ability to undo/redo previous commands.
-    * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-    * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-    * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-    * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+* **New Feature**: Added the ability to sort persons by specified fields.
+    * What it does: allows the user to sort all persons by specified fields.
+    * Justification: This feature improves the product significantly because a user can order persons based on what their needs. e.g. sort by status to track people by their status.
+    * Highlights: This enhancement affects existing attributes of persons to be added in future. It required an in-depth analysis of design alternatives.
 
-* **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
+* **New Feature**: Added delete modules command that allows the user to navigate to previous commands using up/down keys.
+    * What it does: allows the user to delete modules by specifying the module name.
+    * Justification: This feature allows user to remove specified modules for a specific person.
 
+* **New Feature**: Added clear modules command that allows the user to easily clear all modules of a person.
+    * Justification: Clear all modules taken by a person so user does not have to delete each module individually. 
+    
 * **Code contributed**: [RepoSense link]()
 
 * **Project management**:
@@ -35,7 +37,7 @@ Given below are my contributions to the project.
 
 * **Documentation**:
     * User Guide:
-        * Added documentation for the features `delete` and `find` [\#72]()
+        * Added documentation for the features `deletemodule`, `clearmodules` and `sort` [\#72]()
         * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
     * Developer Guide:
         * Added implementation details of the `delete` feature.
