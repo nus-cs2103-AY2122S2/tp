@@ -8,6 +8,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.medical.Medical;
@@ -16,8 +17,8 @@ import seedu.address.model.medical.Medical;
  * Deletes medical information identified using its displayed index from MedBook.
  */
 public class DeleteMedicalCommand extends Command {
-
     public static final String COMMAND_WORD = "delete";
+    public static final CommandType COMMAND_TYPE = CommandType.MEDICAL;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the medical information identified by the "
@@ -44,7 +45,7 @@ public class DeleteMedicalCommand extends Command {
 
         Medical medicalToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteMedical(medicalToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_MEDICAL_SUCCESS, medicalToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_MEDICAL_SUCCESS, medicalToDelete), COMMAND_TYPE);
     }
 
     @Override
