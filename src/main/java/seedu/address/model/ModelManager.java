@@ -145,8 +145,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void assignPerson(Person personToAssign, Group group) {
-        addressBook.assignPerson(personToAssign, group);
+    public void assignPerson(Person person, Group group) {
+        addressBook.assignPerson(person, group);
     }
 
     //=========== Filtered Person List Accessors =============================================================

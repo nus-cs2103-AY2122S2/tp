@@ -131,6 +131,7 @@ public interface Model {
 
     /**
      * Assigns a person to a group.
+     * {@code Group} must already exist in the address book.
      */
-    void assignPerson(Person personToAssign, Group group);
+    void assignPerson(Person person, Group group);
 }
