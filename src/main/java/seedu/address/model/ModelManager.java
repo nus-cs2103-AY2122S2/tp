@@ -11,11 +11,13 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.consultation.Consultation;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.medical.Medical;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.prescription.Prescription;
 import seedu.address.model.testresult.TestResult;
+
 
 /**
  * Represents the in-memory model of the address book data.
@@ -25,10 +27,12 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
+
+    private final FilteredList<Contact> filteredContacts;
+    private final FilteredList<Consultation> filteredConsultations;
     private final FilteredList<Patient> filteredPatients;
     private final FilteredList<Prescription> filteredPrescription;
     private final FilteredList<Medical> filteredMedicals;
-    private final FilteredList<Contact> filteredContacts;
     private final FilteredList<TestResult> filteredTestResults;
 
     /**
@@ -38,9 +42,10 @@ public class ModelManager implements Model {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
-
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+
+        filteredConsultations = new FilteredList<>(this.addressBook.getConsultationList());
         filteredPatients = new FilteredList<>(this.addressBook.getPersonList());
         filteredPrescription = new FilteredList<>(this.addressBook.getPrescriptionList());
         filteredContacts = new FilteredList<>(this.addressBook.getContactList());
@@ -193,6 +198,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList getPersonList() {
+        return addressBook.getPersonList();
+    }
+
+    @Override
     public void updateFilteredPersonList(Predicate<Patient> predicate) {
         requireNonNull(predicate);
         filteredPatients.setPredicate(predicate);
@@ -291,6 +301,52 @@ public class ModelManager implements Model {
         filteredPrescription.setPredicate(predicate);
     }
 
+    //=========== Consultation ================================================================================
+
+    @Override
+    public boolean hasConsultation(Consultation consultation) {
+        requireNonNull(consultation);
+        return addressBook.hasConsultation(consultation);
+    }
+
+    @Override
+    public void deleteConsultation(Consultation target) {
+        addressBook.removeConsultation(target);
+    }
+
+    @Override
+    public void addConsultation(Consultation consultation) {
+        addressBook.addConsultation(consultation);
+        updateFilteredConsultationList(PREDICATE_SHOW_ALL_CONSULTATIONS);
+    }
+
+    @Override
+    public void setConsultation(Consultation target, Consultation editedConsultation) {
+        requireAllNonNull(target, editedConsultation);
+
+        addressBook.setConsultation(target, editedConsultation);
+    }
+
+
+    //=========== Filtered Consultation List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Consultation} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Consultation> getFilteredConsultationList() {
+        return filteredConsultations;
+    }
+
+    @Override
+    public void updateFilteredConsultationList(Predicate<Consultation> predicate) {
+        requireNonNull(predicate);
+        filteredConsultations.setPredicate(predicate);
+    }
+
+    //=========== Other Accessors ==============================================================================
+
     @Override
     public void updateFilteredMedicalList(Predicate<Medical> predicate) {
         requireNonNull(predicate);
@@ -313,8 +369,9 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPatients.equals(other.filteredPatients)
                 && filteredContacts.equals(other.filteredContacts)
+                && filteredConsultations.equals(other.filteredConsultations)
+                && filteredPatients.equals(other.filteredPatients)
                 && filteredMedicals.equals(other.filteredMedicals)
                 && filteredPrescription.equals(other.filteredPrescription)
                 && filteredTestResults.equals(other.filteredTestResults);

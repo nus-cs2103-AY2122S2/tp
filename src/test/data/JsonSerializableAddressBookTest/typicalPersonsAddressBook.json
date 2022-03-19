@@ -52,5 +52,6 @@
   } ],
   "contacts": [ ],
   "prescriptions": [ ],
-  "testResults": [ ]
+  "testResults": [ ],
+  "consultations": [ ]
 }
