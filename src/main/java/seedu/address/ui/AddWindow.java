@@ -15,6 +15,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Status;
+import seedu.address.model.module.Module;
 
 
 /**
@@ -172,18 +174,30 @@ public class AddWindow extends UiPart<Stage> {
         String phone = "p/" + phoneField.getText();
         String address = "a/" + addressField.getText();
         String email = "e/" + emailField.getText();
-        String status = "s/" + statField.getText();
-        String[] modules = modulesField.getText().split(" ");
         StringBuilder userInput = new StringBuilder();
         String[] personFields = {"add", name, phone, address, email};
+
         if (isAnyCompulsoryFieldEmpty()) {
-            errorLabel.setText("You must input all fields!");
+            errorLabel.setText("You must input all mandatory fields!");
             return;
         }
 
         // Craft the user input to be fed into executeCommand
         for (int i = 0; i < personFields.length; i++) {
             userInput.append(personFields[i]).append(" ");
+        }
+
+        // Ensure that modules and status are valid before attempting to add a Person.
+        if (!isValidStatus()) {
+            errorLabel.setText(Status.MESSAGE_CONSTRAINTS);
+            return;
+        }
+
+        if (!isValidModule()) {
+            // Cannot use Module.MESSAGE_CONSTRAINTS here as it would be too long to fit within AddWindow
+            errorLabel.setText("Modules names should have 2-3 letters prefix\n"
+                    + "followed by 4 digits and an optional letter\n");
+            return;
         }
 
         try {
@@ -196,22 +210,47 @@ public class AddWindow extends UiPart<Stage> {
         // Since user command execution is successful, then we do the other stuff next.
         // Notice that whenever a new Person is added into AddressBook, it'll list out all Persons.
         // So we simply need to retrieve the last Person added...
+        addStatusForNewPerson();
+        addModulesForNewPerson();
+
+        // reset all fields and then hide the panel
+        this.resetFields();
+        this.hide();
+    }
+
+    /**
+     * Adds a Status for the newly created Person object.
+     */
+    private void addStatusForNewPerson() {
         ReadOnlyAddressBook ab = logic.getAddressBook();
         ObservableList<Person> personList = ab.getPersonList();
         int lastIndex = personList.size();
+        String status = statField.getText();
 
-        // Do not need to handle the fact that the given status might not be valid.
-        if (!status.equals("")) {
-            String setStatus = "status " + lastIndex + " " + status;
-            try {
-                executeCommand(setStatus);
-            } catch (CommandException | ParseException e) {
-                errorLabel.setText("Error encountered\nEnsure status is only blacklist, whitelist, or empty.");
-                return;
-            }
+        if (status.equals("")) {
+            return;
         }
 
-        if (modules.length != 0) {
+        // Do not need to handle the fact that the given status might not be valid.
+        // This is handled by executeCommand
+        String setStatusCommand = "status " + lastIndex + " s/" + status;
+        try {
+            executeCommand(setStatusCommand);
+        } catch (CommandException | ParseException e) {
+            return;
+        }
+    }
+
+    /**
+     * Adds the modules for the newly created Person object.
+     */
+    private void addModulesForNewPerson() {
+        ReadOnlyAddressBook ab = logic.getAddressBook();
+        ObservableList<Person> personList = ab.getPersonList();
+        int lastIndex = personList.size();
+        String[] modules = modulesField.getText().split(" ");
+
+        if (!modules[0].equals("")) {
             String modsToAdd = "";
             for (int i = 0; i < modules.length; i++) {
                 modsToAdd += "m/" + modules[i];
@@ -227,14 +266,37 @@ public class AddWindow extends UiPart<Stage> {
             try {
                 executeCommand(commandText);
             } catch (CommandException | ParseException e) {
-                errorLabel.setText("Error encountered");
+                return;
             }
         }
+    }
 
+    /**
+     * Checks if the Status field provided by the user is valid or not.
+     * A valid Status is either empty, "blacklist", or "favourite"
+     * @return true if it is valid
+     */
+    private boolean isValidStatus() {
+        return Status.isValidStatus(statField.getText());
+    }
 
-        // reset all fields and then hide the panel
-        this.resetFields();
-        this.hide();
+    /**
+     * Checks if the given modules are of the correct format
+     * @return true if all modules are valid
+     */
+    private boolean isValidModule() {
+        String[] modules = modulesField.getText().split(" ");
+
+        if (modules.length == 1 && modules[0].equals("")) {
+            return true;
+        } else {
+            for (String module : modules) {
+                if (!Module.isValidModuleName(module)) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     /**
