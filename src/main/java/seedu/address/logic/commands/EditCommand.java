@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JERSEY_NUMBER;
@@ -9,21 +8,20 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+//import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
+//import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
+//import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.lineup.LineupPlayersList;
-import seedu.address.model.person.Age;
+//import seedu.address.model.lineup.LineupPlayersList;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.JerseyNumber;
@@ -51,7 +49,6 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_AGE + "AGE] "
             + "[" + PREFIX_HEIGHT + "HEIGHT] "
             + "[" + PREFIX_WEIGHT + "WEIGHT] "
             + "[" + PREFIX_JERSEY_NUMBER + "JERSEY_NUMBER] "
@@ -79,13 +76,12 @@ public class EditCommand extends Command {
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
-//    public EditCommand(TeamName targetTeamName, EditTeamDescriptor editTeamDescriptor) {
-//        requireNonNull(targetTeamName);
-//        requireNonNull(editTeamDescriptor);
-//
-//        this.targetPlayerName = targetPlayerName;
-//        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
-//    }
+    //public EditCommand(TeamName targetTeamName, EditTeamDescriptor editTeamDescriptor) {
+    //    requireNonNull(targetTeamName);
+    //    requireNonNull(editTeamDescriptor);
+    //    this.targetPlayerName = targetPlayerName;
+    //    this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+    //}
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -94,7 +90,8 @@ public class EditCommand extends Command {
         if (!model.hasPersonInMyGM(targetPlayerName)) { // check if UPL name to person have targetPerson
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-        Person personToEdit = model.getPersonFromMyGM(targetPlayerName); //get the person to edit from model (currently doesn't work)
+        //get the person to edit from model (currently doesn't work)
+        Person personToEdit = model.getPersonFromMyGM(targetPlayerName);
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
@@ -115,14 +112,13 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Age updatedAge = editPersonDescriptor.getAge().orElse(personToEdit.getAge());
         Height updatedHeight = editPersonDescriptor.getHeight().orElse(personToEdit.getHeight());
         Weight updatedWeight = editPersonDescriptor.getWeight().orElse(personToEdit.getWeight());
         JerseyNumber updatedJerseyNumber = editPersonDescriptor.getJerseyNumber()
                 .orElse(personToEdit.getJerseyNumber());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAge,
+        return new Person(updatedName, updatedPhone, updatedEmail,
                 updatedHeight, updatedJerseyNumber, updatedTags, updatedWeight);
     }
 
@@ -167,7 +163,6 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
-        private Age age;
         private Height height;
         private JerseyNumber jerseyNumber;
         private Set<Tag> tags;
@@ -183,7 +178,6 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            setAge(toCopy.age);
             setHeight(toCopy.height);
             setJerseyNumber(toCopy.jerseyNumber);
             setTags(toCopy.tags);
@@ -194,7 +188,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, age, height, jerseyNumber, tags, weight);
+            return CollectionUtil.isAnyNonNull(name, phone, email, height, jerseyNumber, tags, weight);
         }
 
         public void setName(Name name) {
@@ -219,14 +213,6 @@ public class EditCommand extends Command {
 
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
-        }
-
-        public void setAge(Age age) {
-            this.age = age;
-        }
-
-        public Optional<Age> getAge() {
-            return Optional.ofNullable(age);
         }
 
         public void setHeight(Height height) {
@@ -288,7 +274,6 @@ public class EditCommand extends Command {
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
-                    && getAge().equals(e.getAge())
                     && getHeight().equals(e.getHeight())
                     && getJerseyNumber().equals(e.getJerseyNumber())
                     && getWeight().equals(e.getWeight())

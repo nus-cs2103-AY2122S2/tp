@@ -7,7 +7,6 @@ public class CliSyntax {
 
     /* Prefix definitions */
     public static final Prefix PREFIX_NAME = new Prefix("n/");
-    public static final Prefix PREFIX_AGE = new Prefix("a/");
     public static final Prefix PREFIX_JERSEY_NUMBER = new Prefix("j/");
     public static final Prefix PREFIX_WEIGHT = new Prefix("w/");
     public static final Prefix PREFIX_HEIGHT = new Prefix("h/");
@@ -15,6 +14,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_EMAIL = new Prefix("e/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_PLAYER = new Prefix("P/");
+    public static final Prefix PREFIX_SCHEDULE = new Prefix("S/");
     public static final Prefix PREFIX_TEAM = new Prefix("T/");
     public static final Prefix PREFIX_LINEUP = new Prefix("L/");
 

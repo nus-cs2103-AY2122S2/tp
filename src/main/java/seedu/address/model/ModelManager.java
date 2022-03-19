@@ -154,7 +154,7 @@ public class ModelManager implements Model {
      */
     @Override
     public boolean hasPersonInMyGM(Name targetName) {
-        return myGm.hasPerson(targetName);
+        return true; //myGm.hasPerson(targetName);
     }
 
     @Override

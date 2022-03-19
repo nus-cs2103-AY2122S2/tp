@@ -1,20 +1,16 @@
 package seedu.address.model;
 
-import java.nio.file.Path;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
 
-import javafx.collections.ObservableList;
-import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.lineup.Lineup;
 import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.team.Team;
 import seedu.address.model.team.TeamName;
-
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * Represents the root class of MyGM.
@@ -31,6 +27,11 @@ public class MyGm {
         this.players = new UniquePlayerList();
         this.teams = new UniqueTeamList();
         this.tempteams = new ArrayList<>();
+    }
+
+    //// list overwrite operations
+    public void setPersons(List<Person> persons) {
+        //this.players.setPersons(persons);
     }
 
     /**
@@ -53,9 +54,8 @@ public class MyGm {
         this.players.addPersonToLineup(player, lineup);
     }
 
-    //final
-    public boolean hasPerson(Name targetName) {
-        return players.containsName(targetName);
+    public boolean hasPerson(Person player) {
+        return true; // players.containsName(targetName);
     }
 
     public Person getPerson(Name targetPersonName) {
@@ -162,7 +162,6 @@ public class MyGm {
      * Deletes a team.
      */
     public boolean deleteTeamFromPool(String team) {
-        return true; // assume only one team, cannot delete
+        return true;
     }
-
 }

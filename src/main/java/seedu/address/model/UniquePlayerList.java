@@ -31,7 +31,6 @@ public class UniquePlayerList {
 
     /**
      * Checks if the given name is in the player pool.
-     *
      * @param name
      * @return
      */
@@ -97,6 +96,13 @@ public class UniquePlayerList {
     }
 
     /**
+     * Add person to lineup.
+     */
+    public void addPersonToLineup(Person person, List<Lineup> lineups) {
+        personToLineupMap.put(person, lineups);
+    }
+
+    /**
      * Removes a person from the system.
      */
     public void removePerson(Person person) {
@@ -116,6 +122,15 @@ public class UniquePlayerList {
     }
 
     /**
+     * Remove person from team.
+     */
+    public void removePersonFromTeam(Person person) {
+        if (personToTeamMap.containsKey(person)) {
+            personToTeamMap.remove(person);
+        }
+    }
+
+    /**
      * Removes a person to lineup mapping from the system.
      */
     public void removePersonFromLineup(Person person, Lineup lineup) {
@@ -124,6 +139,9 @@ public class UniquePlayerList {
         }
     }
 
+    /**
+     * Sets a person in MyGM
+     */
     public void setPerson(Person target, Person editedPerson) {
         Team targetTeam = personToTeamMap.get(target);
         List<Lineup> targetLineups = personToLineupMap.get(target);
@@ -133,11 +151,17 @@ public class UniquePlayerList {
         updateMaps(target, editedPerson, targetTeam, targetLineups);
     }
 
+    /**
+     * Edit a person in team.
+     */
     public void editPersonInTeam(Team targetTeam, Person target, Person editedPerson) {
         targetTeam.deletePersonFromTeam(target);
         targetTeam.putPersonToTeam(editedPerson);
     }
 
+    /**
+     * Edit a person in lineup
+     */
     public void editPersonInLineUp(List<Lineup> targetLineups, Person target, Person editedPerson) {
         for (Lineup lineup : targetLineups) {
             lineup.removePlayer(target);
@@ -145,6 +169,9 @@ public class UniquePlayerList {
         }
     }
 
+    /**
+     * Update maps.
+     */
     public void updateMaps(Person target, Person editedPerson, Team targetTeam, List<Lineup> targetLineups) {
         removePerson(target);
         addPerson(editedPerson);
@@ -154,19 +181,12 @@ public class UniquePlayerList {
         addPersonToLineup(editedPerson, targetLineups);
     }
 
-    public void removePersonFromTeam(Person person) {
-        if (personToTeamMap.containsKey(person)) {
-            personToTeamMap.remove(person);
-        }
-    }
-
+    /**
+     * Remove person from lineup.
+     */
     public void removePersonFromLineUp(Person person) {
         if (personToLineupMap.containsKey(person)) {
             personToLineupMap.remove(person);
         }
-    }
-
-    public void addPersonToLineup(Person person, List<Lineup> lineups) {
-        personToLineupMap.put(person, lineups);
     }
 }

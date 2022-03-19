@@ -24,6 +24,9 @@ public class Team {
         this.teamLineupList = new TeamLineupList();
     }
 
+    /**
+     * Constructs a team.
+     */
     public Team(TeamName teamName, TeamMemberList teamMemberList, TeamLineupList teamLineupList) {
         this.teamName = teamName;
         this.teamMemberList = teamMemberList;
@@ -76,6 +79,7 @@ public class Team {
 
     public TeamLineupList getTeamLineupList() {
         return teamLineupList;
+
     }
     /**
      * Removes a player.
