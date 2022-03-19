@@ -280,13 +280,13 @@ Format: `sort [INDEX] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STATUS] [m/MOD
 * Choose INDEX to copy a specific person.
 * If no INDEX is specified, all persons will be copied.
 * Choice of format is default, csv and json.
-* Default just displays attribute, while csv format separates attributes via a "|" delimiter.
+* Default simply displays attribute line by line, while csv format separates attributes via a "|" delimiter.
 * JSON format is a JSON object with attribute names as keys and attribute values as values, similar to application's save file.
 * Order of field names determines the order of attributes in the output.
 
 Examples:
-* `sort n/asc p/desc`  will sort the list by name in ascending order first. If two persons have the same name, then sort by phone number in descending order.
-* `sort n/` will sort the list by name in ascending order by default.
+* `copy 1 n/ p/ e/ f/json`  will copy name, phone and email of first person in JSON format.
+* `copy f/csv` will copy the entire list in csv format.
 
 
 ### Exiting the program : `exit`
