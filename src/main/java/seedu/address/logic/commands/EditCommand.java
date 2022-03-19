@@ -23,7 +23,6 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 //import seedu.address.model.lineup.LineupPlayersList;
-import seedu.address.model.person.Age;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.JerseyNumber;
@@ -115,14 +114,13 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Age updatedAge = editPersonDescriptor.getAge().orElse(personToEdit.getAge());
         Height updatedHeight = editPersonDescriptor.getHeight().orElse(personToEdit.getHeight());
         Weight updatedWeight = editPersonDescriptor.getWeight().orElse(personToEdit.getWeight());
         JerseyNumber updatedJerseyNumber = editPersonDescriptor.getJerseyNumber()
                 .orElse(personToEdit.getJerseyNumber());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAge,
+        return new Person(updatedName, updatedPhone, updatedEmail,
                 updatedHeight, updatedJerseyNumber, updatedTags, updatedWeight);
     }
 
@@ -167,7 +165,6 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
-        private Age age;
         private Height height;
         private JerseyNumber jerseyNumber;
         private Set<Tag> tags;
@@ -183,7 +180,6 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            setAge(toCopy.age);
             setHeight(toCopy.height);
             setJerseyNumber(toCopy.jerseyNumber);
             setTags(toCopy.tags);
@@ -194,7 +190,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, age, height, jerseyNumber, tags, weight);
+            return CollectionUtil.isAnyNonNull(name, phone, email, height, jerseyNumber, tags, weight);
         }
 
         public void setName(Name name) {
@@ -219,14 +215,6 @@ public class EditCommand extends Command {
 
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
-        }
-
-        public void setAge(Age age) {
-            this.age = age;
-        }
-
-        public Optional<Age> getAge() {
-            return Optional.ofNullable(age);
         }
 
         public void setHeight(Height height) {
@@ -288,7 +276,6 @@ public class EditCommand extends Command {
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
-                    && getAge().equals(e.getAge())
                     && getHeight().equals(e.getHeight())
                     && getJerseyNumber().equals(e.getJerseyNumber())
                     && getWeight().equals(e.getWeight())

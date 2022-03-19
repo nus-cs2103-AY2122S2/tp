@@ -3,7 +3,6 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.person.Age;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.JerseyNumber;
@@ -30,7 +29,6 @@ public class PersonBuilder {
     private Name name;
     private Phone phone;
     private Email email;
-    private Age age;
     private Height height;
     private JerseyNumber jerseyNumber;
     private Weight weight;
@@ -43,7 +41,6 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        age = new Age(DEFAULT_AGE);
         height = new Height(DEFAULT_HEIGHT);
         jerseyNumber = new JerseyNumber(DEFAULT_JERSEY_NUMBER);
         weight = new Weight(DEFAULT_WEIGHT);
@@ -57,7 +54,6 @@ public class PersonBuilder {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
-        age = personToCopy.getAge();
         height = personToCopy.getHeight();
         jerseyNumber = personToCopy.getJerseyNumber();
         weight = personToCopy.getWeight();
@@ -97,14 +93,6 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Age} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withAge(String age) {
-        this.age = new Age(age);
-        return this;
-    }
-
-    /**
      * Sets the {@code Height} of the {@code Person} that we are building.
      */
     public PersonBuilder withHeight(String height) {
@@ -129,7 +117,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, age, height, jerseyNumber, tags, weight);
+        return new Person(name, phone, email, height, jerseyNumber, tags, weight);
     }
 
 }

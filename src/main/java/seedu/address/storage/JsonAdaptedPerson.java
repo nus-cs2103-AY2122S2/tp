@@ -10,7 +10,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Age;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.JerseyNumber;
@@ -30,7 +29,6 @@ class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final String email;
-    private final String age;
     private final String height;
     private final String jerseyNumber;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
@@ -41,14 +39,13 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                             @JsonProperty("email") String email, @JsonProperty("age") String age,
+                             @JsonProperty("email") String email,
                              @JsonProperty("height") String height, @JsonProperty("jerseyNumber") String jerseyNumber,
                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
                              @JsonProperty("weight") String weight) {
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.age = age;
         this.height = height;
         this.jerseyNumber = jerseyNumber;
         this.weight = weight;
@@ -64,7 +61,6 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
-        age = source.getAge().value;
         height = source.getHeight().value;
         jerseyNumber = source.getJerseyNumber().value;
         weight = source.getWeight().value;
@@ -108,15 +104,6 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
-        // age
-        if (age == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Age.class.getSimpleName()));
-        }
-        if (!Age.isValidAge(age)) {
-            throw new IllegalValueException(Age.MESSAGE_CONSTRAINTS);
-        }
-        final Age modelAge = new Age(age);
-
         // height
         if (height == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Height.class.getSimpleName()));
@@ -147,7 +134,7 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAge,
+        return new Person(modelName, modelPhone, modelEmail,
                 modelHeight, modelJerseyNumber, modelTags, modelWeight);
     }
 

@@ -11,7 +11,6 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Age;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.JerseyNumber;
@@ -94,21 +93,6 @@ public class ParserUtil {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
         return new Address(trimmedAddress);
-    }
-
-    /**
-     * Parses a {@code String age} into an {@code Age}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException
-     */
-    public static Age parseAge(String age) throws ParseException {
-        requireNonNull(age);
-        String trimmedAge = age.trim();
-        if (!Age.isValidAge(age)) {
-            throw new ParseException(Age.MESSAGE_CONSTRAINTS);
-        }
-        return new Age(trimmedAge);
     }
 
     /**

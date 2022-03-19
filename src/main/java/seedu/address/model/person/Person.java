@@ -21,7 +21,6 @@ public class Person {
     private final Email email;
 
     // Data fields
-    private final Age age;
     private final Height height;
     private final JerseyNumber jerseyNumber;
     private final Set<Tag> tags = new HashSet<>();
@@ -30,13 +29,12 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Age age,
-                  Height height, JerseyNumber jerseyNumber, Set<Tag> tags, Weight weight) {
-        requireAllNonNull(name, phone, email, age, height, jerseyNumber, tags, weight);
+    public Person(Name name, Phone phone, Email email, Height height, JerseyNumber jerseyNumber,
+                  Set<Tag> tags, Weight weight) {
+        requireAllNonNull(name, phone, email, height, jerseyNumber, tags, weight);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.age = age;
         this.height = height;
         this.jerseyNumber = jerseyNumber;
         this.tags.addAll(tags);
@@ -53,10 +51,6 @@ public class Person {
 
     public Email getEmail() {
         return email;
-    }
-
-    public Age getAge() {
-        return age;
     }
 
     public Height getHeight() {
@@ -110,7 +104,6 @@ public class Person {
         return otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAge().equals(getAge())
                 && otherPerson.getHeight().equals(getHeight())
                 && otherPerson.getWeight().equals(getWeight())
                 && otherPerson.getJerseyNumber().equals(getJerseyNumber())
@@ -120,7 +113,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, age, jerseyNumber, height, tags, weight);
+        return Objects.hash(name, phone, email, jerseyNumber, height, tags, weight);
     }
 
     @Override
@@ -131,8 +124,6 @@ public class Person {
                 .append(getPhone())
                 .append("; Email: ")
                 .append(getEmail())
-                .append("; Age: ")
-                .append(getAge())
                 .append("; Height: ")
                 .append(getHeight())
                 .append("; Weight: ")

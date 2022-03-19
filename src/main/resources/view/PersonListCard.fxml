@@ -37,9 +37,8 @@
         </padding>
         <Label fx:id="phone" styleClass="cell_small_label" text="\$phone \$email" />
         <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-        <Label fx:id="age" styleClass="cell_small_label" text="\$age" />
-        <Label fx:id="height" styleClass="cell_small_label" text="\$height" />
         <Label fx:id="jerseyNumber" styleClass="cell_small_label" text="\$jerseyNumber" />
+        <Label fx:id="height" styleClass="cell_small_label" text="\$height" />
         <Label fx:id="weight" styleClass="cell_small_label" text="\$weight" />
       </HBox>
     </VBox>
