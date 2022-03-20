@@ -129,7 +129,7 @@ public class AddProfileWindow extends UiPart<Stage> {
     }
 
     /**
-     * Handle close
+     * Handle close. Clear all the text fields within the pop out window.
      */
     @FXML
     private void handleClose() {
