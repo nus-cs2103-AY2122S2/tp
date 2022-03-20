@@ -77,32 +77,32 @@ public class PersonTest {
         editedBob = new PersonBuilder(BOB).withMatricNumber(VALID_MATRICULATION_NUMBER_BOB.toLowerCase()).build();
         assertTrue(BOB.isSamePerson(editedBob));
 
-        // First character is lower case last character is upper case eg. a0253625M
+        // First character is upper case last character is lower case eg. A0253625m --> returns true
         String editedMatriculationNumber = VALID_MATRICULATION_NUMBER_BOB.substring(0, 1).toUpperCase()
                 + VALID_MATRICULATION_NUMBER_BOB.substring(1).toLowerCase();
 
         editedBob = new PersonBuilder(BOB).withMatricNumber(editedMatriculationNumber).build();
         assertTrue(BOB.isSamePerson(editedBob));
 
-        // First character is upper case last character is lower case eg. A0253625m
+        // First character is lower case last character is upper case eg. a0253625M --> returns true
         editedMatriculationNumber = VALID_MATRICULATION_NUMBER_BOB.substring(0, 1).toLowerCase()
                 + VALID_MATRICULATION_NUMBER_BOB.substring(1).toUpperCase();
         editedBob = new PersonBuilder(BOB).withMatricNumber(editedMatriculationNumber).build();
         assertTrue(BOB.isSamePerson(editedBob));
 
-        // name has trailing spaces, all other attributes same -> returns false
+        // email has trailing spaces, all other attributes same -> returns true
         String emailWithTrailingSpaces = VALID_EMAIL_BOB + " ";
         editedBob = new PersonBuilder(BOB).withEmail(emailWithTrailingSpaces).build();
         assertTrue(BOB.isSamePerson(editedBob));
 
-        // name has trailing spaces, all other attributes same -> returns false
+        // phone has trailing spaces, all other attributes same -> returns true
         String phoneWithTrailingSpaces = VALID_PHONE_BOB + " ";
-        editedBob = new PersonBuilder(BOB).withName(phoneWithTrailingSpaces).build();
+        editedBob = new PersonBuilder(BOB).withPhone(phoneWithTrailingSpaces).build();
         assertTrue(BOB.isSamePerson(editedBob));
 
-        // name has trailing spaces, all other attributes same -> returns false
+        // matriculation number has trailing spaces, all other attributes same -> returns true
         String matriculationNumberWithTrailingSpaces = VALID_MATRICULATION_NUMBER_BOB + " ";
-        editedBob = new PersonBuilder(BOB).withName(matriculationNumberWithTrailingSpaces).build();
+        editedBob = new PersonBuilder(BOB).withMatricNumber(matriculationNumberWithTrailingSpaces).build();
         assertTrue(BOB.isSamePerson(editedBob));
     }
 
