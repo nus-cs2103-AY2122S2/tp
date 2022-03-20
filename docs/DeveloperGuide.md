@@ -133,6 +133,7 @@ The `Model` component,
 
 </div>
 
+Within the `/model` folder, there also exists an `IndexedCsvFile` model that helps with the parsing of CSV files for the Import CSV function. However, this file does not fit within the model component diagram and just serves as a helper model. 
 
 ### Storage component
 
@@ -144,6 +145,8 @@ The `Storage` component,
 * can save both address book data and user preference data in json format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+
+Within the `/storage` folder, there also exists a `CsvManager` class that is a helper file to do file IO related operations when Import CSV or Export CSV is called. This file does not fit within the storage component diagram as it is simply meant to separate IO operations to a helper class within `/storage`.
 
 ### Common classes
 
@@ -170,6 +173,41 @@ As such, the detailed descriptions for the Address Book subsystem above can be t
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Import and Export CSV Features
+
+This section describes some of the details as to how the import and export CSV features were implemented
+
+#### Import CSV
+
+The import CSV function is meant to append to the current address book with new data imported from any CSV file. The intention is to allow users to be able to import from a Microsoft Excel compatible format. Since there are multiple different templates for contacts in CSV files across various platforms, such as Microsoft Outlook and Google Contacts, the idea was to ensure this feature was as flexible as possible, allowing the user to specify which particular columns contained certain information
+
+The arguments that are parsed here are the custom column numbers for each value, e.g. `n/3 p/4 e/5 a/6 t/7` will read `Name` from column 3, `Phone` from column 4, `Email` from column 5, `Address` from column 6 and `Tags` from column 7 
+
+In the event that any of the data read does not conform to the restrictions given by each of the components in `Person`, e.g. an email that does not have `@`, or if the person has a duplicate name with another person, that particular line will be skipped.
+
+The `CSVManager` takes in the `IndexedCsvFile` object, opens the file and reads the lines, while a function from the command is passed to the Manager that will store each of the lines as a new Person in the model. The sequence diagram is as follows:
+
+![ImportCsvSequenceDiagram](images/ImportCsvSequenceDiagram.png)
+
+#### Export CSV
+
+The Export CSV function is meant to value add upon the existing `.json` file saving to provide an alternative option, especially for users who prefer interacting with a Microsoft Excel compatible format.
+
+The resulting `addressbook.csv` that will be produced will be in the following format
+
+| Name        | Phone        | Email        | Address        | Tags                            |
+|-------------|--------------|--------------|----------------|---------------------------------|
+| Person Name | Person Phone | Person Email | Person Address | Person Tag 1;Person Tag 2; .... |
+
+Multiple tags are delimited by the `;` character
+
+Likewise with Import, File IO operations are also separated into the `CSVManager` class, such that the command logic takes the current address book, parses them into the approprate strings, then passes it to the `CsvManager` to handle the writing to file
+
+The sequence diagram is as follows:
+![ExportCsvSequenceDiagram](images/ExportCsvSequenceDiagram.png)
+
+The subsequent exported file can be imported back into any other instance of ContaX, similar to the existing `.json` system of import/export
 
 ### \[Proposed\] Undo/redo feature
 
