@@ -5,46 +5,80 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model <<Rectangle>>{
-Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
+Class "<<interface>>\nReadOnlyTAssist" as ReadOnlyTAssist
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
 Class "<<interface>>\nModel" as Model
-Class AddressBook
+Class TAssist
 Class ModelManager
 Class UserPrefs
 
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
+Class UniqueStudentList
+Class Student
+Class StudentId
 Class Name
-Class Phone
-Class Tag
+Class Email
+Class Telegram
 
+Class UniqueModuleList
+Class TaModule
+Class ModuleName
+Class ModuleCode
+Class AcademicYear
+
+Class UniqueClassGroupList
+Class ClassGroup
+Class ClassGroupId
+Class ClassGroupType
+Class TaModule
+Class Lesson
+Class Student
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+TAssist .up.|> ReadOnlyTAssist
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+Model .left.> ReadOnlyTAssist
+ModelManager -left-> "1" TAssist
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+TAssist *--> "1" UniqueStudentList
+TAssist *--> "1" UniqueModuleList
+TAssist *--> "1" UniqueClassGroupList
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+UniqueStudentList --> "~* all" Student
+Student *--> StudentId
+Student *--> Name
+Student *--> Email
+Student *--> Telegram
 
-ModelManager -->"~* filtered" Person
+'StudentId -[hidden]right-> Name
+'Name -[hidden]right-> Email
+'Email -[hidden]right-> Telegram
+
+UniqueModuleList --> "~* all" TaModule
+TaModule *--> ModuleName
+TaModule *--> ModuleCode
+TaModule *--> AcademicYear
+
+'ModuleName -[hidden]right-> ModuleCode
+'ModuleCode -[hidden]right-> AcademicYear
+
+UniqueClassGroupList --> "~* all" ClassGroup
+ClassGroup *--> ClassGroupId
+ClassGroup *--> ClassGroupType
+ClassGroup *--> TaModule
+ClassGroup *--> "~*" Student
+ClassGroup *--> "~*" Lesson
+
+'ClassGroupId -[hidden]right-> ClassGroupType
+'ClassGroupType -[hidden]right-> TaModule
+
+ModelManager -->"~* filtered" Student
+ModelManager -->"~* filtered" TaModule
+ModelManager -->"~* filtered" ClassGroup
 @enduml
