@@ -3,6 +3,9 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL;
 
+import java.util.Optional;
+
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.entity.EntityType;
 import seedu.address.model.entity.exceptions.UnknownEntityException;
@@ -17,9 +20,17 @@ public class ListCommand extends Command {
     public static final String MESSAGE_CLASS_GROUPS = "class groups";
 
     private EntityType entityType;
+    private Optional<EntityType> filterEntityType;
+    private Optional<Index> filterEntityIndex;
 
-    public ListCommand(EntityType entityType) {
+    /**
+     * Creates a ListCommand to list the specified entity, Optionally filtering by other entities
+     */
+    public ListCommand(EntityType entityType, Optional<EntityType> filterEntityType,
+                       Optional<Index> filterEntityIndex) {
         this.entityType = entityType;
+        this.filterEntityType = filterEntityType;
+        this.filterEntityIndex = filterEntityIndex;
     }
 
     @Override
