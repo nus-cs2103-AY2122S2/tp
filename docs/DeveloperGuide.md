@@ -2,8 +2,19 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-{:toc}
+##Table of Contents
+| Quick Links                                                                                                     |
+|-----------------------------------------------------------------------------------------------------------------|
+| [Acknowledgements](#acknowledgements)                                                                           |
+| [Setting up, getting started](#setting-up-getting-started)                                                      |
+| [Design](#design)                                                                                               |
+| [Architecture](#architecture)                                                                                   |
+| [Implementation](#implementation)                                                                               |
+| [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops) |
+| [Appendix: Requirements](#appendix-requirements)                                                                |
+| [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)                          |
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -36,7 +47,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S2-CS2103T-T12-1/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S2-CS2103T-T12-1/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -69,7 +80,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S2-CS2103T-T12-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
@@ -86,7 +97,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S2-CS2103T-T12-1/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -114,7 +125,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S2-CS2103T-T12-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -135,7 +146,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S2-CS2103T-T12-1/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -273,17 +284,17 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new student              |                                                                        |
-| `* * *`  | user                                       | delete a student               | remove entries that I no longer need                                   |
-| `* *`    | user                                       | find a student by name         | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | find a student by status       | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | find a student by class        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | update a student's Covid-19 status | make the necessary changes to the student's status as required     |
-| `* *`    | user                                       | edit a student's details       | update the details of a student's particulars                          |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                    | I want to …​                       | So that I can…​                                                        |
+|----------|--------------------------------------------|------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | new user                                   | see usage instructions             | refer to instructions when I forget how to use the App                 |
+| `* * *`  | user                                       | add a new student                  |                                                                        |
+| `* * *`  | user                                       | delete a student                   | remove entries that I no longer need                                   |
+| `* *`    | user                                       | find a student by name             | locate details of persons without having to go through the entire list |
+| `* *`    | user                                       | find a student by status           | locate details of persons without having to go through the entire list |
+| `* *`    | user                                       | find a student by class            | locate details of persons without having to go through the entire list |
+| `* *`    | user                                       | update a student's Covid-19 status | make the necessary changes to the student's status as required         |
+| `* *`    | user                                       | edit a student's details           | update the details of a student's particulars                          |
+| `*`      | user with many persons in the address book | sort persons by name               | locate a person easily                                                 |
 
 *{More to be added}*
 
