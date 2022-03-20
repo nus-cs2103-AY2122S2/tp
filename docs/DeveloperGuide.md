@@ -201,7 +201,7 @@ The sequence diagram of a mouse click event interaction is as follows:
 ![OnboardingStepSequenceDiagram](images/OnboardingStepSequenceDiagram.png)
 
 #### Processing of OnboardingSteps
-Upon the processing of an OnboardingStep, the OnboardingWindow propagates the instruction to the other UI components to update them accordingly. In cases that the OnboardingStep does not contain any instruction for a particular UI components, that component's update function will not be invoked and therefore remain the same. 
+Upon the processing of an OnboardingStep, the OnboardingWindow propagates the instruction to the other UI components to update them accordingly. In cases that the OnboardingStep does not contain any instruction for a particular UI components, that component's update function will not be invoked and therefore remain the same.
 
 A possible sequence of processing is as follows:
 ![OnboardingUiSequenceDiagram](images/OnboardingUiSequenceDiagram.png)

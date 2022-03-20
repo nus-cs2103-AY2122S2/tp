@@ -13,9 +13,9 @@ Given below are my contributions to the project.
 
 * **New Feature**: Onboarding Guide for new users
   * What it does: Provides a step-by-step guide for new users to learn the basic functions of ContaX
-  * Justification: ContaX's extensive feature set may set a learning curve for new users. The Onboarding guide serves as starting point for new users by introducing the basic functions in a manner that is simple to understand. 
+  * Justification: ContaX's extensive feature set may set a learning curve for new users. The Onboarding guide serves as starting point for new users by introducing the basic functions in a manner that is simple to understand.
 
-* **Code contributed**: 
+* **Code contributed**:
   * Functionality, documentation and tests for Onboarding Guide
 
 * **Project management**:
