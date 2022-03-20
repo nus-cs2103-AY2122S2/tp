@@ -53,6 +53,9 @@ Notes about the property format:
 - Properties must be specified in the following format: `pr/REGION,ADDRESS,SIZE,PRICE`. Whitespace between parameters is ignored.<br>
   e.g. Both `pr/East,Pasir Ris Drive 1 Block 123,2-room,$550000` and `pr/East, Pasir Ris Drive 1 Block 123, 2-room, $550000` are acceptable. `pr/Pasir Ris Drive 1 Block 123, East, 2-room, $550000` is not acceptable.
 
+Notes about the preference format:
+- Preference must be specified in the following format: `pf/REGION,SIZE,LOWPRICE,HIGHPRICE`. Whitespace between parameters is ignored.<br>
+
 Parameter formats:
 - REGION: One of [`North`, `South`, `East`, `West`, `Central`] (Non case-sensitive).
 - ADDRESS: Any non-empty string that does not contain `,`. e.g. `Pasir Ris Drive 1 Block 123`
@@ -69,14 +72,14 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY]…, t/USER_TYPE`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY]… [pf/PREFERENCE] t/USER_TYPE`
 
 **Tip**: A person can be tagged as either a `buyer`, or `seller`.
 
 Examples:
 
-- `add n/John Doe p/98765432 e/johnd@example.com a/John street block 123 #01-01, pr/East, John street block 123 #01-01, 2-room, $200000, t/buyer`
-- `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 pr/West, Newgate Prison, 1-room, $100000, t/seller`
+- `add n/John Doe p/98765432 e/johnd@example.com a/John street block 123 #01-01, pr/East, John street block 123 #01-01, 2-room, $200000 t/buyer`
+- `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 pf/West, 1-room, $100000, $200000 t/seller`
 
     ![images/user-guide/addBetsyCroweResult.png](images/user-guide/addBetsyCroweResult.png)
 
@@ -137,6 +140,12 @@ Examples:
 
 - `list` followed by `delete 2` deletes the 2nd person in the address book.
 - `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+### Matching properties and preferences: `match`
+
+Opens a new window and shows all sellers and buyers with matching property and preference. 
+
+Format: `match`
 
 ### Clearing all entries : `clear`
 
@@ -205,8 +214,8 @@ RealEstatePro data are saved as a JSON file `[JAR file location]/data/realestat
 
 | Action | Format, Examples  |
 | --- | --- |
-| Add | add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY]..., t/USER_TYPE
-e.g., add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 pr/2-room, East, SGD$200K, t/buyer    |
+| Add | add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY]... [pf/PREFERENCE] t/USER_TYPE
+e.g., add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 pr/2-room, East, SGD$200K, t/seller|
 | Clear | clear  |
 | Delete | delete INDEX
 e.g., delete 3  |
@@ -216,6 +225,7 @@ e.g., edit 2 n/James Lee e/jameslee@example.com |
 e.g., find James Jake  |
 | List | list  |
 | Help | help  |
+|Match | match |
 | Favourite | favourite INDEX
 e.g., favourite 3  |
 

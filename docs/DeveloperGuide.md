@@ -48,6 +48,12 @@ Step 3. User can access the `Favourite`Window by navigating to the menu item as 
 
 ![FavouriteWindow](images/developer-guide/FavouriteWindowAccess.png)
 
+## Match feature/Window
+The `match` opens a new `MatchWindow`, in which all matches are displayed in pairs. 
+The left column shows the sellers, while the right column shows the buyers.
+
+Two `Person` make a match if one has at least one `property` that matches the other's `preference`.
+
 ## Property
 The `Property` is a new attribute that can be added to a `Person` that represents a real estate property listing. A `Person` is able to hold multiple properties including none.
 
@@ -60,6 +66,13 @@ The `Property` itself consists of the following attributes: `Region`, `Address`,
 - `Size` represents the size of the `Property` in terms of the number of rooms it has. It is an enum that can be one of the following: `ONE_ROOM`, `TWO_ROOM`, `THREE_ROOM`, `FOUR_ROOM`, `FIVE_ROOM`.
 
 - `Price` represents the price of the `Property`. It's `toString()` method returns the price in the form of `$###` or `$###.#K` or `$###.#M` depending on the value of the `Price` for easier readability.
+
+## Preference
+The `Preference` is a new attribute that can be added to a `Person`. A `Person` can either have a `Preference` or not. 
+
+A `Preference` contains the following attributes: `Region`, `Size`, `lowPrice`, `highPrice`, 
+among which the first two is explained in the previous sector. 
+The latter two specifies the expected range of money the buyer would like to pay. 
 
 ## UserType
 The `UserType` represents an attribute that needs to be added to a `Person` & represents the `Person` as a `buyer` or `seller`. A `Person` is only either a `buyer` or `seller` at a given time. They cannot be both or none.
