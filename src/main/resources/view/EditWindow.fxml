@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.stage.Stage?>
 
-<fx:root resizable="false" title="Add Person" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root resizable="false" title="Edit Person" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
     <icons>
         <Image url="@/images/help_icon.png" />
     </icons>
@@ -25,13 +25,26 @@
 
             <HBox fx:id="addContainer" alignment="BOTTOM_RIGHT" prefHeight="419.0" prefWidth="546.0">
                 <children>
-               <VBox prefHeight="404.0" prefWidth="524.0">
+               <VBox prefHeight="366.0" prefWidth="524.0">
                   <children>
-                     <Label fx:id="addMessageLabel" alignment="CENTER" contentDisplay="CENTER" prefWidth="540.0" text="Label" textAlignment="CENTER" textFill="WHITE">
+                     <Label fx:id="editMessageLabel" alignment="CENTER" contentDisplay="CENTER" prefWidth="540.0" text="Label" textAlignment="CENTER" textFill="WHITE">
                         <font>
                            <Font size="18.0" />
                         </font>
+                        <opaqueInsets>
+                           <Insets />
+                        </opaqueInsets>
                      </Label>
+                     <HBox>
+                        <children>
+                           <Label fx:id="indexLabel" alignment="CENTER" prefHeight="44.0" prefWidth="75.0" text="Label" textFill="#ffe5e5">
+                              <font>
+                                 <Font size="14.0" />
+                              </font>
+                           </Label>
+                           <TextField fx:id="indexField" prefHeight="44.0" prefWidth="449.0" promptText="INDEX (e.g. 1)" />
+                        </children>
+                     </HBox>
                      <HBox>
                         <children>
                            <Label fx:id="nameLabel" alignment="CENTER" prefHeight="44.0" prefWidth="75.0" text="Label" textFill="#ffe5e5">
@@ -39,7 +52,7 @@
                                  <Font size="14.0" />
                               </font>
                            </Label>
-                           <TextField fx:id="nameField" prefHeight="44.0" prefWidth="449.0" promptText="John Doe" />
+                           <TextField fx:id="nameField" prefHeight="44.0" prefWidth="449.0" promptText="[OPTIONAL] John Doe" />
                         </children>
                      </HBox>
                      <HBox>
@@ -49,7 +62,7 @@
                                  <Font size="14.0" />
                               </font>
                            </Label>
-                           <TextField fx:id="phoneField" prefHeight="44.0" prefWidth="449.0" promptText="91234567" />
+                           <TextField fx:id="phoneField" prefHeight="44.0" prefWidth="449.0" promptText="[OPTIONAL] 91234567" />
                         </children>
                      </HBox>
                      <HBox>
@@ -59,7 +72,7 @@
                                  <Font size="14.0" />
                               </font>
                            </Label>
-                           <TextField fx:id="addressField" prefHeight="44.0" prefWidth="449.0" promptText="123, Woodlands Ave 16, #02-123" />
+                           <TextField fx:id="addressField" prefHeight="44.0" prefWidth="449.0" promptText="[OPTIONAL] 123, Woodlands Ave 16, #02-123" />
                         </children>
                      </HBox>
                      <HBox>
@@ -69,27 +82,7 @@
                                  <Font size="14.0" />
                               </font>
                            </Label>
-                           <TextField fx:id="emailField" onAction="#handleEnter" prefHeight="44.0" prefWidth="449.0" promptText="johndoe@example.com" />
-                        </children>
-                     </HBox>
-                     <HBox>
-                        <children>
-                           <Label fx:id="statLabel" alignment="CENTER" prefHeight="44.0" prefWidth="75.0" text="Label" textFill="#ffe5e5">
-                              <font>
-                                 <Font size="14.0" />
-                              </font>
-                           </Label>
-                           <TextField fx:id="statField" onAction="#handleEnter" prefHeight="44.0" prefWidth="449.0" promptText="[OPTIONAL] favourite" />
-                        </children>
-                     </HBox>
-                     <HBox>
-                        <children>
-                           <Label fx:id="modulesLabel" alignment="CENTER" prefHeight="44.0" prefWidth="75.0" text="Label" textFill="#ffe5e5">
-                              <font>
-                                 <Font size="14.0" />
-                              </font>
-                           </Label>
-                           <TextField fx:id="modulesField" onAction="#handleEnter" prefHeight="44.0" prefWidth="449.0" promptText="[OPTIONAL] CS3230 CS1231S" />
+                           <TextField fx:id="emailField" prefHeight="44.0" prefWidth="449.0" promptText="[OPTIONAL] johndoe@example.com" />
                         </children>
                      </HBox>
                      <Label fx:id="errorLabel" alignment="CENTER" prefHeight="57.0" prefWidth="524.0" text="Label" textFill="WHITE">
@@ -97,7 +90,7 @@
                            <Font size="16.0" />
                         </font>
                      </Label>
-                     <Region prefHeight="89.0" prefWidth="524.0" />
+                     <Region prefHeight="57.0" prefWidth="524.0" />
                      <HBox>
                         <children>
                                 <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleCancel" prefHeight="40.0" prefWidth="102.0" text="Cancel" />

@@ -6,7 +6,7 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "status": "",
-    "tagged" : [ "CS2103T" ],
+    "module" : [ "CS2103T" ],
     "comment": ""
   }, {
     "name" : "Benson Meier",
@@ -14,7 +14,7 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "status": "",
-    "tagged" : [ "CS2103T", "MA1101R" ],
+    "module" : [ "CS2103T", "MA1101R" ],
     "comment": ""
   }, {
     "name" : "Carl Kurz",
@@ -22,7 +22,7 @@
     "email" : "heinz@example.com",
     "address" : "wall street",
     "status": "",
-    "tagged" : [ ],
+    "module" : [ ],
     "comment": ""
   }, {
     "name" : "Daniel Meier",
@@ -30,7 +30,7 @@
     "email" : "cornelia@example.com",
     "address" : "10th street",
     "status": "",
-    "tagged" : [ "CS2103T" ],
+    "module" : [ "CS2103T" ],
     "comment": ""
   }, {
     "name" : "Elle Meyer",
@@ -38,7 +38,7 @@
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "status": "",
-    "tagged" : [ ],
+    "module" : [ ],
     "comment": ""
   }, {
     "name" : "Fiona Kunz",
@@ -46,7 +46,7 @@
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "status": "",
-    "tagged" : [ ],
+    "module" : [ ],
     "comment": ""
   }, {
     "name" : "George Best",
@@ -54,7 +54,7 @@
     "email" : "anna@example.com",
     "address" : "4th street",
     "status": "",
-    "tagged" : [ ],
+    "module" : [ ],
     "comment": ""
   } ]
 }

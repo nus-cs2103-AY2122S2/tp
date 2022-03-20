@@ -5,7 +5,7 @@
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
     "status": "",
-    "tagged": [ "CS1231S" ],
+    "module": [ "CS1231S" ],
     "comment": ""
   }, {
     "name": "Alice Pauline",

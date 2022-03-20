@@ -85,6 +85,7 @@ ModuleMate Finder is a desktop app that allows students to find people taking th
 - [Sort](#sorting-contacts-in-list-sort)
 - [Undo](#undo-a-command--undo)
 - [Redo](#redo-a-command--redo)
+- [Copy](#copy-command)
 - [Exit](#exiting-the-program--exit)
 
 ### Viewing help : `help`
@@ -111,7 +112,8 @@ Examples:
 * `add n/Bob p/87654321 e/bob@u.nus.edu`
 
 Additionally, if one were to simply use `add`, it would open up a new window to allow users to systematically add a new contact
-![addWindow.png](images/addWindow.png)
+![addWindow.png](images/addWindow.png)  
+Then, simply fill up the fields as guided in the window. Users can then press the `ENTER` key to submit the fields when complete, or press the `Submit` button.
 
 ### Adding Module(s) to a Contact : `addmodule`
 
@@ -137,6 +139,11 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]…​`
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * Modules cannot be edited through the `edit` command.
+
+Additionally, if one were to simply use `edit`, it would open up a new window to allow users to systematically edit a chosen contact  
+![editWindow.png](images/editWindow.png)  
+Then, simply fill up the fields as guided in the window.
+
 
 Examples:
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -270,6 +277,26 @@ Format: `redo`
 Examples:
 - After editing a contact's name at index 3 from `George` to `Adam` and using `undo` to reverse the contact's name
 back to `George`, using `redo` will restore the contact's name back to `Adam`.
+
+### Copy contacts in list: `copy`
+
+Copy the people within address book. Attach a clipboard to the side of CLI to copy data.
+
+Format: `copy [INDEX] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STATUS] [m/MODULE] [f/FORMAT]​`
+
+* Copy persons using specified field names.​
+* If no fields are specified, all fields will be copied.
+* Choose INDEX to copy a specific person.
+* If no INDEX is specified, all persons will be copied.
+* Choice of format is default, csv and json.
+* Default simply displays attribute line by line, while csv format separates attributes via a "|" delimiter.
+* JSON format is a JSON object with attribute names as keys and attribute values as values, similar to application's save file.
+* Order of field names determines the order of attributes in the output.
+
+Examples:
+* `copy 1 n/ p/ e/ f/json`  will copy name, phone and email of first person in JSON format.
+* `copy f/csv` will copy the entire list in csv format.
+
 
 ### Exiting the program : `exit`
 

@@ -41,6 +41,10 @@ public class Module {
                 && moduleName.equals(((Module) other).moduleName)); // state check
     }
 
+    public String getModuleName() {
+        return moduleName;
+    }
+
     @Override
     public int hashCode() {
         return moduleName.hashCode();

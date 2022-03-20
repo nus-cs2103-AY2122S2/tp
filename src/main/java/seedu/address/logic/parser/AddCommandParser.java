@@ -37,7 +37,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                         PREFIX_ADDRESS, PREFIX_MODULE);
 
         if (args.equals("")) {
-            return new AddCommand();
+            return AddCommand.addWindowHelper();
         }
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)

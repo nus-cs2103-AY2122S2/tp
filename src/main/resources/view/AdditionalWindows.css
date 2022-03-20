@@ -1,0 +1,35 @@
+#addContainer {
+    -fx-background-color: derive(#1d1d1d, 20%);
+}
+
+#editContainer {
+    -fx-background-color: derive(#1d1d1d, 20%);
+}
+
+#indexLabel {
+    -fx-background-color: #6F686D;
+}
+
+#nameLabel {
+    -fx-background-color: #6F686D;
+}
+
+#phoneLabel {
+    -fx-background-color: #6F686D;
+}
+
+#addressLabel {
+    -fx-background-color: #6F686D;
+}
+
+#emailLabel {
+    -fx-background-color: #6F686D;
+}
+
+#statLabel {
+    -fx-background-color: #6F686D;
+}
+
+#modulesLabel {
+    -fx-background-color: #6F686D;
+}

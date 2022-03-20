@@ -6,6 +6,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
@@ -16,6 +18,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -36,12 +39,20 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private HelpWindow helpWindow;
     private AddWindow addWindow;
+    private EditWindow editWindow;
+
 
     @FXML
     private StackPane commandBoxPlaceholder;
 
     @FXML
     private MenuItem helpMenuItem;
+
+    @FXML
+    private MenuItem addMenuItem;
+
+    @FXML
+    private MenuItem editMenuItem;
 
     @FXML
     private StackPane personListPanelPlaceholder;
@@ -71,6 +82,7 @@ public class MainWindow extends UiPart<Stage> {
 
         // Pass the logic into AddWindow so we can use it to execute commands as well
         addWindow = new AddWindow(logic);
+        editWindow = new EditWindow(logic);
     }
 
     public Stage getPrimaryStage() {
@@ -164,6 +176,18 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the edit window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleEdit() {
+        if (!editWindow.isShowing()) {
+            editWindow.show();
+        } else {
+            editWindow.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -181,6 +205,17 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Copy to the clipboard the selected person's information.
+     */
+    private void handleCopy(CommandResult result) {
+        String copiedText = result.getFeedbackToUser();
+        final Clipboard clipboard = Clipboard.getSystemClipboard();
+        final ClipboardContent content = new ClipboardContent();
+        content.putString(copiedText);
+        clipboard.setContent(content);
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
@@ -194,7 +229,14 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            if (commandResult.isCopyCommand()) {
+                resultDisplay.setFeedbackToUser("Successfully copied to clipboard!\n");
+                handleCopy(commandResult);
+            } else {
+                resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            }
+
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
@@ -203,6 +245,11 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isShowAdd()) {
                 handleAdd();
             }
+
+            if (commandResult.isShowEdit()) {
+                handleEdit();
+            }
+
 
             if (commandResult.isExit()) {
                 handleExit();
