@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMENT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -10,40 +10,39 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Comment;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Status;
 
 /**
- * Changes the status of an existing person in the address book.
+ * Changes the remark of an existing person in the address book.
  */
-public class StatusCommand extends Command {
+public class AddCommentCommand extends Command {
 
-    public static final String COMMAND_WORD = "status";
-
-    public static final String MESSAGE_ADD_STATUS_SUCCESS = "Added status to Person: %1$s";
-    public static final String MESSAGE_DELETE_STATUS_SUCCESS = "Removed status from Person: %1$s";
-    public static final String MESSAGE_ADD_STATUS_FAILURE = "Modules should be either 'blacklist' or 'favourite'";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the status of the person identified "
-            + "by the index number used in the last person listing. "
-            + "Existing status will be overwritten by the input.\n"
+    public static final String COMMAND_WORD = "addcomment";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add a comment to the person identified "
+            + "by the index number used in the displayed person list. "
+            + "Existing comments will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_STATUS + "[STATUS]\n"
+            + PREFIX_COMMENT + "COMMENT\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_STATUS + "blacklist";
+            + PREFIX_COMMENT + "Good at teamwork and programming";
+    public static final String MESSAGE_ADD_COMMENT_SUCCESS = "Added remark to Person: %1$s";
+    public static final String MESSAGE_DELETE_COMMENT_SUCCESS = "Removed remark from Person: %1$s";
 
     private final Index index;
-    private final Status status;
+    private final Comment comment;
 
     /**
-     * @param index of the person in the filtered person list to edit the status
-     * @param status of the person to be updated to
+     * @param index of the person in the filtered person list
+     * @param comment comment to be added
      */
-    public StatusCommand(Index index, Status status) {
-        requireAllNonNull(index, status);
+    public AddCommentCommand(Index index, Comment comment) {
+        requireAllNonNull(index, comment);
 
         this.index = index;
-        this.status = status;
+        this.comment = comment;
     }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
@@ -55,20 +54,22 @@ public class StatusCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), status, personToEdit.getModules(), personToEdit.getComment());
+                personToEdit.getAddress(), personToEdit.getStatus(),
+                personToEdit.getModules(), comment);
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
         return new CommandResult(generateSuccessMessage(editedPerson));
     }
 
     /**
-     * Generates a command execution success message based on whether the status is added to or removed from
+     * Generates a command execution success message based on whether
+     * the remark is added to or removed from
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        String message = !status.value.isEmpty() ? MESSAGE_ADD_STATUS_SUCCESS : MESSAGE_DELETE_STATUS_SUCCESS;
-        return String.format(message, personToEdit);
+        return String.format(MESSAGE_ADD_COMMENT_SUCCESS, personToEdit);
     }
 
     @Override
@@ -79,13 +80,13 @@ public class StatusCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof StatusCommand)) {
+        if (!(other instanceof AddCommentCommand)) {
             return false;
         }
 
         // state check
-        StatusCommand e = (StatusCommand) other;
+        AddCommentCommand e = (AddCommentCommand) other;
         return index.equals(e.index)
-                && status.equals(e.status);
+                && comment.equals(e.comment);
     }
 }

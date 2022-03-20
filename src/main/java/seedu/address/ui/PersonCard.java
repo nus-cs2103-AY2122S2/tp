@@ -47,6 +47,8 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane modules;
     @FXML
     private ImageView statusImage;
+    @FXML
+    private Label comment;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -59,6 +61,7 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        comment.setText(person.getComment().value);
 
         // Get the image to display
         Image imageToDisplay = getImageToDisplay(person.getStatus().value);

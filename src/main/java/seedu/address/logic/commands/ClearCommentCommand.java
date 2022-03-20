@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -20,19 +19,19 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Status;
 
-public class ClearModulesCommand extends Command {
-    public static final String COMMAND_WORD = "clearmodules";
+public class ClearCommentCommand extends Command {
+    public static final String COMMAND_WORD = "clearcomment";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Clear all modules of the person identified by the index number used in the displayed person list.\n"
+            + ": Clear the comment of the person identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Example: " + COMMAND_WORD + " 4";
 
-    public static final String MESSAGE_SUCCESS = "%s's modules have been cleared";
+    public static final String MESSAGE_SUCCESS = "%s's comments have been cleared";
 
     private final Index targetIndex;
 
-    public ClearModulesCommand(Index targetIndex) {
+    public ClearCommentCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -65,8 +64,8 @@ public class ClearModulesCommand extends Command {
         Email updatedEmail = personToEdit.getEmail();
         Address updatedAddress = personToEdit.getAddress();
         Status updatedStatus = personToEdit.getStatus();
-        Set<Module> updatedModules = new HashSet<>();
-        Comment updatedComment = personToEdit.getComment();
+        Set<Module> updatedModules = personToEdit.getModules();
+        Comment updatedComment = new Comment("");
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
                 updatedStatus, updatedModules, updatedComment);
@@ -75,7 +74,7 @@ public class ClearModulesCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ClearModulesCommand // instanceof handles nulls
-                && targetIndex.equals(((ClearModulesCommand) other).targetIndex)); // state check
+                || (other instanceof ClearCommentCommand // instanceof handles nulls
+                && targetIndex.equals(((ClearCommentCommand) other).targetIndex)); // state check
     }
 }

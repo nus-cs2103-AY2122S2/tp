@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.address.model.module.Module;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Comment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -22,6 +23,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_STATUS = "";
+    public static final String DEFAULT_COMMENT = "";
 
     private Name name;
     private Phone phone;
@@ -29,6 +31,7 @@ public class PersonBuilder {
     private Address address;
     private Status status;
     private Set<Module> modules;
+    private Comment comment;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -40,6 +43,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         status = new Status(DEFAULT_STATUS);
         modules = new HashSet<>();
+        comment = new Comment(DEFAULT_COMMENT);
     }
 
     /**
@@ -52,6 +56,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         status = personToCopy.getStatus();
         modules = new HashSet<>(personToCopy.getModules());
+        comment = personToCopy.getComment();
     }
 
     /**
@@ -102,8 +107,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Comment} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withComment(String comment) {
+        this.comment = new Comment(comment);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, status, modules);
+        return new Person(name, phone, email, address, status, modules, comment);
     }
 
 }
