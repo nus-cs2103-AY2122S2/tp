@@ -18,8 +18,8 @@ public class ActivityContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        String activitiesString = person.getActivities().toString().replace("[","")
-                .replace("]", "").replace(",", "");
+        String activitiesString = person.getActivities().toString().replace("[", "")
+                .replace("]", "").replace(", ", " ");
         return keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(activitiesString, keyword));
     }
