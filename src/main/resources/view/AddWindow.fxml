@@ -20,14 +20,14 @@
     <scene>
         <Scene>
             <stylesheets>
-                <URL value="@AddWindow.css" />
+                <URL value="@AdditionalWindows.css" />
             </stylesheets>
 
             <HBox fx:id="addContainer" alignment="BOTTOM_RIGHT" prefHeight="419.0" prefWidth="546.0">
                 <children>
                <VBox prefHeight="404.0" prefWidth="524.0">
                   <children>
-                     <Label fx:id="addMessageLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="41.0" prefWidth="540.0" text="Label" textFill="WHITE">
+                     <Label fx:id="addMessageLabel" alignment="CENTER" contentDisplay="CENTER" prefWidth="540.0" text="Label" textAlignment="CENTER" textFill="WHITE">
                         <font>
                            <Font size="18.0" />
                         </font>

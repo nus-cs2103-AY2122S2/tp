@@ -20,7 +20,7 @@
     <scene>
         <Scene>
             <stylesheets>
-                <URL value="@AddWindow.css" />
+                <URL value="@AdditionalWindows.css" />
             </stylesheets>
 
             <HBox fx:id="addContainer" alignment="BOTTOM_RIGHT" prefHeight="419.0" prefWidth="546.0">
