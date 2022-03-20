@@ -35,7 +35,7 @@
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       <!-- Optional Fields -->
-      <FlowPane fx:id="optionalFields" styleClass="flow-pane"/>
+      <FlowPane fx:id="optionalFields" />
       <!-- Memebership -->
       <FlowPane fx:id="memberships" />
     </VBox>
