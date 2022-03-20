@@ -13,6 +13,9 @@ public class UnmarkCommand extends Command {
     private Optional<List<Index>> studentIndexes;
     private boolean isAllStudents;
 
+    /**
+     * Creates a UnmarkCommand to unmark the attendance for the students in the specified class and week.
+     */
     public UnmarkCommand(Index classGroupIndex, Index weekIndex, Optional<List<Index>> studentIndexes,
                          boolean isAllStudents) {
         this.classGroupIndex = classGroupIndex;

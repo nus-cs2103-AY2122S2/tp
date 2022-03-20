@@ -21,12 +21,16 @@ public class ListCommand extends Command {
 
     private EntityType entityType;
     private Optional<EntityType> filterEntityType;
-    private Optional<Index> filterIndex;
+    private Optional<Index> filterEntityIndex;
 
-    public ListCommand(EntityType entityType, Optional<EntityType> filterEntityType, Optional<Index> filterIndex) {
+    /**
+     * Creates a ListCommand to list the specified entity, Optionally filtering by other entities
+     */
+    public ListCommand(EntityType entityType, Optional<EntityType> filterEntityType,
+                       Optional<Index> filterEntityIndex) {
         this.entityType = entityType;
         this.filterEntityType = filterEntityType;
-        this.filterIndex = filterIndex;
+        this.filterEntityIndex = filterEntityIndex;
     }
 
     @Override

@@ -1,16 +1,10 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL;
-
 import java.util.List;
 import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
-import seedu.address.model.entity.EntityType;
-import seedu.address.model.entity.exceptions.UnknownEntityException;
-import seedu.address.model.student.Student;
 
 public class MarkCommand extends Command {
 
@@ -19,6 +13,9 @@ public class MarkCommand extends Command {
     private Optional<List<Index>> studentIndexes;
     private boolean isAllStudents;
 
+    /**
+     * Creates a MarkCommand to mark the attendance for the students in the specified class and week.
+     */
     public MarkCommand(Index classGroupIndex, Index weekIndex, Optional<List<Index>> studentIndexes,
                        boolean isAllStudents) {
         this.classGroupIndex = classGroupIndex;

@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -50,7 +51,8 @@ public class TAssistParser {
             return new DeleteCommandParser().parse(arguments, model);
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommand(ParserUtil.parseEntity(arguments.trim().split("\\s")[0]));
+            return new ListCommand(ParserUtil.parseEntity(arguments.trim().split("\\s")[0]), Optional.empty(),
+                    Optional.empty());
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
