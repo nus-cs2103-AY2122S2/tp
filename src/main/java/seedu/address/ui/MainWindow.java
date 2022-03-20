@@ -36,12 +36,19 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private HelpWindow helpWindow;
     private AddWindow addWindow;
+    private EditWindow editWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
 
     @FXML
     private MenuItem helpMenuItem;
+
+    @FXML
+    private MenuItem addMenuItem;
+
+    @FXML
+    private MenuItem editMenuItem;
 
     @FXML
     private StackPane personListPanelPlaceholder;
@@ -71,6 +78,7 @@ public class MainWindow extends UiPart<Stage> {
 
         // Pass the logic into AddWindow so we can use it to execute commands as well
         addWindow = new AddWindow(logic);
+        editWindow = new EditWindow(logic);
     }
 
     public Stage getPrimaryStage() {
@@ -164,6 +172,18 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the edit window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleEdit() {
+        if (!editWindow.isShowing()) {
+            editWindow.show();
+        } else {
+            editWindow.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -203,6 +223,7 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isShowAdd()) {
                 handleAdd();
             }
+
 
             if (commandResult.isExit()) {
                 handleExit();
