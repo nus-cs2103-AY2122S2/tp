@@ -18,7 +18,7 @@ public class DietCommandParser implements Parser<DietCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the DietCommand
      * and returns a DietCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException if the user input does not conform to the expected format
      */
     public DietCommand parse(String args) throws ParseException {
         requireNonNull(args);

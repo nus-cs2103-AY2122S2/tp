@@ -277,7 +277,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | pet daycare owner | tag different types of pets                                       | easily differentiate between the types of pets                    |
 | `* * *`  | pet daycare owner | track when pets require pickup or drop-off                        | schedule the school bus for each day                              |
 | `* * *`  | pet daycare owner | track the different food preferences required by different pets   | make sure the pets are served the right foods                     |
-| `* * *`  | pet daycare owner | track the attendance of pets                                      | charge pet owners the correct amount depending on pets attendance |
+| `* * *`  | pet daycare owner | track the attendanceEntry of pets                                      | charge pet owners the correct amount depending on pets attendanceEntry |
 | `* * *`  | pet daycare owner | add pets in the daycare to system                                 | I have a consolidated information sheet                           |
 | `* * *`  | pet daycare owner | retrieve the pets addresses                                       | inform the school bus driver correctly                            |
 | `* * *`  | pet daycare owner | find pets bu their ID                                             | retrieve the pet information accordingly                          |
@@ -297,10 +297,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | pet daycare owner | track the vet appointments of pets                                | make sure pets do not miss their medical appointments             |
 | `*`      | pet daycare owner | sort the pets by their type                                       | order their necessary supplies accordingly                        |
 | `*`      | pet daycare owner | track the medicine that pets need to take                         | i can feed them medicine appropriately                            |
-| `*`      | pet daycare owner | change the attendance of pets anytime I want                      | I can allow for last minute scheduling                            |
+| `*`      | pet daycare owner | change the attendanceEntry of pets anytime I want                      | I can allow for last minute scheduling                            |
 | `*`      | pet daycare owner | update pet's information                                          |                                                                   |
 | `*`      | pet daycare owner | update pet owner's information                                    |                                                                   |
-| `*`      | pet daycare owner | access the previous attendance of pets                            | update owners if they were to enquire                             |
+| `*`      | pet daycare owner | access the previous attendanceEntry of pets                            | update owners if they were to enquire                             |
 | `*`      | pet daycare owner | find the number of pets present in the daycare fo each day        | arrange the necessary manpower                                    |
 | `*`      | pet daycare owner | get a list of pets which will be staying overnight in the daycare | arrange the necessary manpower                                    |
 

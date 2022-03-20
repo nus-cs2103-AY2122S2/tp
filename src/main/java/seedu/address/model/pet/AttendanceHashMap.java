@@ -7,21 +7,21 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashMap;
 
-import seedu.address.model.attendance.Attendance;
+import seedu.address.model.attendance.AttendanceEntry;
 
 /**
  * Represents a Pet's attendance history in the address book.
  * Guarantees: immutable; is always valid.
  */
 public class AttendanceHashMap {
-    public final HashMap<LocalDate, Attendance> attendanceHashMap;
+    public final HashMap<LocalDate, AttendanceEntry> attendanceHashMap;
 
     /**
      * Constructs an {@code AttendanceHashMap}.
      *
      * @param attendanceHashMap A valid AttendanceHashMap.
      */
-    public AttendanceHashMap(HashMap<LocalDate, Attendance> attendanceHashMap) {
+    public AttendanceHashMap(HashMap<LocalDate, AttendanceEntry> attendanceHashMap) {
         requireNonNull(attendanceHashMap);
         this.attendanceHashMap = attendanceHashMap;
     }
@@ -35,35 +35,57 @@ public class AttendanceHashMap {
 
     /**
      * Checks if there is already an identical attendance entry in the table.
-     * @param attendance the incoming attendance entry.
-     * @return true if entry with same attendance already exists, false otherwise.
+     * @param attendanceEntry the incoming attendance entry.
+     * @return true if entry with same absent attendance already exists, false otherwise.
      */
-    public boolean containsAttendance(Attendance attendance) {
-        LocalDate dateKey = attendance.getAttendanceDate();
+    public boolean containsAttendance(AttendanceEntry attendanceEntry) {
+        LocalDate dateKey = attendanceEntry.getAttendanceDate();
 
         if (!(attendanceHashMap.containsKey(dateKey))) {
             return false;
         }
 
-        return attendanceHashMap.get(dateKey).equals(attendance);
+        AttendanceEntry existingAttendanceEntry = attendanceHashMap.get(dateKey);
+
+        return existingAttendanceEntry.equals(attendanceEntry);
+    }
+
+    /**
+     * Checks if attendance has already been marked on a given date.
+     * @param date the target date.
+     * @return true if attendance has been marked, false otherwise.
+     */
+    public boolean hasAttendanceEntry(LocalDate date) {
+        return attendanceHashMap.containsKey(date);
+    }
+
+    /**
+     * Checks if the attendance hash map is empty.
+     * @return true if attendance hash map is empty, false otherwise.
+     */
+    public boolean isEmpty() {
+        return attendanceHashMap.isEmpty();
     }
 
     /**
      * Adds an attendance entry into the attendance hash map.
-     * @param attendance the attendance to be stored.
+     * @param attendanceEntry the attendance to be stored.
      * @return an edited attendance hash map with the attendance marked present or absent.
      */
-    public AttendanceHashMap addAttendance(Attendance attendance) {
-        attendanceHashMap.put(attendance.getAttendanceDate(), attendance);
+    public AttendanceHashMap addAttendance(AttendanceEntry attendanceEntry) {
+        attendanceHashMap.put(attendanceEntry.getAttendanceDate(), attendanceEntry);
         return this;
     }
 
-    public AttendanceHashMap addAbsentAttendance(Attendance attendance) {
-        attendanceHashMap.put(attendance.getAttendanceDate(), attendance);
-        return this;
+    public AttendanceEntry getAttendance(LocalDate attendanceDate) {
+        return attendanceHashMap.get(attendanceDate);
     }
 
-    public Collection<Attendance> toCollection() {
+    /**
+     * Returns the attendance hash map in collection form.
+     * @return a collection containing date-attendance pairs.
+     */
+    public Collection<AttendanceEntry> toCollection() {
         return attendanceHashMap.values();
     }
 

@@ -65,14 +65,4 @@ public class StringUtil {
             return false;
         }
     }
-
-    /**
-     * Removes all white spaces from a given string.
-     * @param s the target string.
-     * @return the string with all white spaces removed.
-     */
-    public static String removeAllWhiteSpaces(String s) {
-        requireNonNull(s);
-        return s.replaceAll("\\s", "");
-    }
 }

@@ -6,7 +6,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Date;
 import java.util.Optional;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -14,12 +13,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.AttendanceUtil;
-import seedu.address.logic.parser.ParserUtil;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.attendance.AbsentAttendance;
-import seedu.address.model.attendance.Attendance;
-import seedu.address.model.attendance.PresentAttendance;
+import seedu.address.model.attendance.AbsentAttendanceEntry;
+import seedu.address.model.attendance.AttendanceEntry;
+import seedu.address.model.attendance.PresentAttendanceEntry;
 
+/**
+ * Jackson-friendly version of {@link AttendanceEntry}.
+ */
 public class JsonAdaptedAttendance {
 
     public final String attendanceDate;
@@ -44,15 +44,15 @@ public class JsonAdaptedAttendance {
     /**
      * Constructs a given {@code Attendance} into this class for Jackson use.
      *
-     * @param attendance the attendance of the pet.
+     * @param attendanceEntry the attendance of the pet.
      */
-    public JsonAdaptedAttendance(Attendance attendance) {
+    public JsonAdaptedAttendance(AttendanceEntry attendanceEntry) {
 
-        this.attendanceDate = attendance.getAttendanceDate().format(DateTimeFormatter.ISO_LOCAL_DATE);
-        this.isPresent = attendance.getIsPresent().toString();
+        this.attendanceDate = attendanceEntry.getAttendanceDate().format(DateTimeFormatter.ISO_LOCAL_DATE);
+        this.isPresent = attendanceEntry.getIsPresent().toString();
 
-        Optional<LocalTime> optionalPickUpTime = attendance.getPickUpTime();
-        Optional<LocalTime> optionalDropOffTime = attendance.getDropOffTime();
+        Optional<LocalTime> optionalPickUpTime = attendanceEntry.getPickUpTime();
+        Optional<LocalTime> optionalDropOffTime = attendanceEntry.getDropOffTime();
 
         this.pickUpTime = optionalPickUpTime.isEmpty()
                 ? ""
@@ -67,7 +67,7 @@ public class JsonAdaptedAttendance {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted attendance object.
      */
-    public Attendance toModelType() throws IllegalValueException {
+    public AttendanceEntry toModelType() throws IllegalValueException {
 
         LocalDate modelAttendanceDate;
         Boolean modelIsPresent;
@@ -75,7 +75,7 @@ public class JsonAdaptedAttendance {
         LocalTime modelDropOffTime;
 
         if (!isValidIsPresentString(isPresent)) {
-            throw new IllegalValueException(Attendance.MESSAGE_INVALID_IS_PRESENT);
+            throw new IllegalValueException(AttendanceEntry.MESSAGE_INVALID_ISPRESENT);
         }
 
         modelIsPresent = Boolean.parseBoolean(isPresent);
@@ -87,7 +87,7 @@ public class JsonAdaptedAttendance {
         }
 
         if (!modelIsPresent) {
-            return new AbsentAttendance(modelAttendanceDate);
+            return new AbsentAttendanceEntry(modelAttendanceDate);
         }
 
         try {
@@ -102,10 +102,10 @@ public class JsonAdaptedAttendance {
             throw new IllegalValueException(pe.getMessage());
         }
 
-        if (!PresentAttendance.isValidInterval(modelPickUpTime, modelDropOffTime)) {
-            throw new IllegalValueException(Attendance.MESSAGE_TIME_CONSTRAINTS);
+        if (!PresentAttendanceEntry.isValidInterval(modelPickUpTime, modelDropOffTime)) {
+            throw new IllegalValueException(PresentAttendanceEntry.MESSAGE_TIME_CONSTRAINTS);
         }
 
-        return new PresentAttendance(modelAttendanceDate, modelPickUpTime, modelDropOffTime);
+        return new PresentAttendanceEntry(modelAttendanceDate, modelPickUpTime, modelDropOffTime);
     }
 }

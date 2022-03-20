@@ -12,12 +12,16 @@ import java.util.List;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.AttendanceUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.attendance.PresentAttendance;
+import seedu.address.model.attendance.PresentAttendanceEntry;
 import seedu.address.model.pet.AttendanceHashMap;
 import seedu.address.model.pet.Pet;
 
+/**
+ * Marks the attendance of an existing pet in WoofAreYou as present on a particular date.
+ */
 public class PresentAttendanceCommand extends Command {
 
     public static final String COMMAND_WORD = "present";
@@ -30,19 +34,19 @@ public class PresentAttendanceCommand extends Command {
             + "[" + PREFIX_PICKUP + "PICK UP TIME IN HH:MM] "
             + "[" + PREFIX_DROPOFF + "DROP OFF TIME IN HH:MM] \n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_DATE + "15/03/2022 "
+            + PREFIX_DATE + "15-03-2022 "
             + PREFIX_PICKUP + "09:15 "
             + PREFIX_DROPOFF + "18:00";
 
-    public static final String MESSAGE_PRESENT_ATTENDANCE_SUCCESS = "Successfully marked %1$s! as present!";
+    public static final String MESSAGE_PRESENT_ATTENDANCE_SUCCESS = "Successfully marked %1$s as present on %2$s!";
     public static final String MESSAGE_PRESENT_ATTENDANCE_FAILURE =
-            "Seems like you have already marked %1$s as present!";
+            "Seems like you have already marked %1$s as present on %2$s!";
 
     private final Index index;
     private final PetAttendanceDescriptor petAttendanceDescriptor;
 
     /**
-     * @param index                   of the pet in the filtered pets list to mark as present.
+     * @param index of the pet in the filtered pets list to mark as present.
      * @param petAttendanceDescriptor the present attendance of the pet to be stored.
      */
     public PresentAttendanceCommand(Index index, PetAttendanceDescriptor petAttendanceDescriptor) {
@@ -63,11 +67,22 @@ public class PresentAttendanceCommand extends Command {
         Pet petToEdit = lastShownList.get(index.getZeroBased());
         AttendanceHashMap targetAttendanceHashMap = petToEdit.getAttendanceHashMap();
 
-        PresentAttendance presentAttendance = new PresentAttendance(petAttendanceDescriptor.getAttendanceDate(),
+        LocalDate attendanceDate = petAttendanceDescriptor.getAttendanceDate();
+        LocalTime pickUpTime = petAttendanceDescriptor.getPickUpTime();
+        LocalTime dropOffTime = petAttendanceDescriptor.getDropOffTime();
+
+        String attendanceDateString = attendanceDate.format(AttendanceUtil.ATTENDANCE_DATE_FORMATTER);
+
+        PresentAttendanceEntry presentAttendance = new PresentAttendanceEntry(attendanceDate,
                 petAttendanceDescriptor.getPickUpTime(), petAttendanceDescriptor.getDropOffTime());
 
         if (targetAttendanceHashMap.containsAttendance(presentAttendance)) {
-            throw new CommandException(MESSAGE_PRESENT_ATTENDANCE_FAILURE);
+            throw new CommandException(String.format(MESSAGE_PRESENT_ATTENDANCE_FAILURE, petToEdit.getName(),
+                    attendanceDateString));
+        }
+
+        if(!(PresentAttendanceEntry.isValidInterval(pickUpTime, dropOffTime))) {
+            throw new CommandException(PresentAttendanceEntry.MESSAGE_TIME_CONSTRAINTS);
         }
 
         AttendanceHashMap editedAttendanceHashMap = targetAttendanceHashMap.addAttendance(presentAttendance);
@@ -80,15 +95,15 @@ public class PresentAttendanceCommand extends Command {
         model.setPet(petToEdit, editedPet);
         model.updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
 
-        return new CommandResult(generateSuccessMessage(editedPet));
+        return new CommandResult(generateSuccessMessage(editedPet, attendanceDateString));
     }
 
     /**
      * Generates a command execution success message based on the
      * {@code petToEdit}.
      */
-    private String generateSuccessMessage(Pet petToEdit) {
-        return String.format(MESSAGE_PRESENT_ATTENDANCE_SUCCESS, petToEdit);
+    private String generateSuccessMessage(Pet petToEdit, String attendanceDate) {
+        return String.format(MESSAGE_PRESENT_ATTENDANCE_SUCCESS, petToEdit.getName(), attendanceDate);
     }
 
     /**
@@ -137,7 +152,6 @@ public class PresentAttendanceCommand extends Command {
         public LocalTime getDropOffTime() {
             return dropOffTime;
         }
-
     }
 
 
@@ -158,6 +172,4 @@ public class PresentAttendanceCommand extends Command {
         return index.equals(e.index)
                 && petAttendanceDescriptor.equals(e.petAttendanceDescriptor);
     }
-
-
 }

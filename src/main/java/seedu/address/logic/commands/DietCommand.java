@@ -13,9 +13,8 @@ import seedu.address.model.pet.Diet;
 import seedu.address.model.pet.Pet;
 
 
-
 /**
- * Adds diet details to a pet identified using it's displayed index from the address book.
+ * Adds diet details to a pet identified using its displayed index from the address book.
  */
 public class DietCommand extends Command {
 
@@ -36,7 +35,7 @@ public class DietCommand extends Command {
 
     /**
      * @param index of the pet in the filtered pets list to edit the diet
-     * @param diet of the pet to be updated to
+     * @param diet  of the pet to be updated to
      */
     public DietCommand(Index index, Diet diet) {
         requireAllNonNull(index, diet);

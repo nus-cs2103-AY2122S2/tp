@@ -117,13 +117,13 @@ Format: `time INDEX`
 Examples:
 * `time 12` returns pet 12’s pickup and dropoff times.
 
-### Adding pet’s attendance, pick-up and drop-off time: `attd`
+### Adding pet’s attendanceEntry, pick-up and drop-off time: `attd`
 
-Add pet’s attendance date, pick-up and drop-off time
+Add pet’s attendanceEntry date, pick-up and drop-off time
 
 Format: `attd INDEX att/dd-MM-yyyy pu/HH:mm do/HH:mm`
 
-* Adds attendance date, pick-up and drop-off time of the pet at the specified `INDEX`.
+* Adds attendanceEntry date, pick-up and drop-off time of the pet at the specified `INDEX`.
 * The index refers to the index number shown in the displayed getId list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * Date and time must follow the specified format

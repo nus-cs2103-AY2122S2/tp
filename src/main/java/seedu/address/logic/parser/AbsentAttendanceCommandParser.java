@@ -9,13 +9,16 @@ import seedu.address.logic.commands.AbsentAttendanceCommand;
 import seedu.address.logic.commands.AbsentAttendanceCommand.PetAttendanceDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses input arguments and creates a new AbsentAttendanceCommand object.
+ */
 public class AbsentAttendanceCommandParser implements Parser<AbsentAttendanceCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AbsentAttendanceCommand
      * and returns a AbsentAttendanceCommand object for execution.
      *
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException if the user input does not conform to the expected format.
      */
     public AbsentAttendanceCommand parse(String args) throws ParseException {
         requireNonNull(args);

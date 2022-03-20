@@ -13,8 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.AttendanceUtil;
-import seedu.address.logic.parser.ParserUtil;
-import seedu.address.model.attendance.Attendance;
+import seedu.address.model.attendance.AttendanceEntry;
 import seedu.address.model.pet.Address;
 import seedu.address.model.pet.Appointment;
 import seedu.address.model.pet.AttendanceHashMap;
@@ -95,13 +94,11 @@ class JsonAdaptedPet {
             petTags.add(tag.toModelType());
         }
 
-        final HashMap<LocalDate, Attendance> attendanceList = new HashMap<>();
+        final HashMap<LocalDate, AttendanceEntry> attendanceList = new HashMap<>();
         for (JsonAdaptedAttendance attendance : attendance) {
             LocalDate attendanceDateKey = AttendanceUtil.convertToModelDate(attendance.attendanceDate);
             attendanceList.put(attendanceDateKey, attendance.toModelType());
         }
-
-        AttendanceHashMap modelAttendanceList = new AttendanceHashMap(attendanceList);
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -148,8 +145,11 @@ class JsonAdaptedPet {
         final Appointment modelAppointment = new Appointment(appointment);
 
         final Set<Tag> modelTags = new HashSet<>(petTags);
+
+        final AttendanceHashMap modelAttendanceHashMap = new AttendanceHashMap(attendanceList);
+
         return new Pet(modelName, modelOwnerName, modelPhone, modelAddress, modelTags, modelDiet, modelAppointment,
-                modelAttendanceList);
+                modelAttendanceHashMap);
     }
 
 }

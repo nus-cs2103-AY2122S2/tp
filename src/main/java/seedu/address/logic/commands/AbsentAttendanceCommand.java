@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.commons.util.AttendanceUtil.ATTENDANCE_DATE_FORMATTER;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PETS;
@@ -11,11 +12,13 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.attendance.AbsentAttendance;
-import seedu.address.model.attendance.PresentAttendance;
+import seedu.address.model.attendance.AbsentAttendanceEntry;
 import seedu.address.model.pet.AttendanceHashMap;
 import seedu.address.model.pet.Pet;
 
+/**
+ * Marks the attendance of an existing pet in WoofAreYou as absent on a particular date.
+ */
 public class AbsentAttendanceCommand extends Command {
 
     public static final String COMMAND_WORD = "absent";
@@ -25,18 +28,18 @@ public class AbsentAttendanceCommand extends Command {
             + "Includes the date, pick up time and drop off time (if any). \n"
             + "Parameters: INDEX (must be a positive integer) "
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_DATE + "15/03/2022 ";
+            + PREFIX_DATE + "15-03-2022 ";
 
-    public static final String MESSAGE_ABSENT_ATTENDANCE_SUCCESS = "Successfully marked %1$s! as absent!";
+    public static final String MESSAGE_ABSENT_ATTENDANCE_SUCCESS = "Successfully marked %1$s as absent on %2$s!";
     public static final String MESSAGE_ABSENT_ATTENDANCE_FAILURE =
-            "Seems like you have already marked %1$s as absent!";
+            "Seems like you have already marked %1$s as absent on %2$s!";
 
     private final Index index;
     private final PetAttendanceDescriptor petAttendanceDescriptor;
 
     /**
-     * @param index of the pet in the filtered pets list to mark as present.
-     * @param petAttendanceDescriptor the absent attendance of the pet to be stored.
+     * @param index of the pet in the filtered pets list to mark as absent.
+     * @param petAttendanceDescriptor details of the absent attendance to be stored.
      */
     public AbsentAttendanceCommand(Index index, PetAttendanceDescriptor petAttendanceDescriptor) {
         requireAllNonNull(index, petAttendanceDescriptor);
@@ -56,11 +59,13 @@ public class AbsentAttendanceCommand extends Command {
         Pet petToEdit = lastShownList.get(index.getZeroBased());
         AttendanceHashMap targetAttendanceHashMap = petToEdit.getAttendanceHashMap();
 
-        AbsentAttendance absentAttendance = new AbsentAttendance(petAttendanceDescriptor.getAttendanceDate());
-
+        LocalDate attendanceDate = petAttendanceDescriptor.getAttendanceDate();
+        String attendanceDateString = attendanceDate.format(ATTENDANCE_DATE_FORMATTER);
+        AbsentAttendanceEntry absentAttendance = new AbsentAttendanceEntry(attendanceDate);
 
         if (targetAttendanceHashMap.containsAttendance(absentAttendance)) {
-            throw new CommandException(MESSAGE_ABSENT_ATTENDANCE_FAILURE);
+            throw new CommandException(String.format(MESSAGE_ABSENT_ATTENDANCE_FAILURE, petToEdit.getName(),
+                    attendanceDateString));
         }
 
         AttendanceHashMap editedAttendanceHashMap = targetAttendanceHashMap.addAttendance(absentAttendance);
@@ -73,7 +78,7 @@ public class AbsentAttendanceCommand extends Command {
         model.setPet(petToEdit, editedPet);
         model.updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
 
-        return new CommandResult(generateSuccessMessage(editedPet));
+        return new CommandResult(generateSuccessMessage(editedPet, attendanceDateString));
     }
 
     /**
@@ -94,7 +99,6 @@ public class AbsentAttendanceCommand extends Command {
             setAttendanceDate(petAttendanceDescriptor.attendanceDate);
         }
 
-
         public void setAttendanceDate(LocalDate attendanceDate) {
             this.attendanceDate = attendanceDate;
         }
@@ -109,8 +113,8 @@ public class AbsentAttendanceCommand extends Command {
      * Generates a command execution success message based on the
      * {@code petToEdit}.
      */
-    private String generateSuccessMessage(Pet petToEdit) {
-        return String.format(MESSAGE_ABSENT_ATTENDANCE_SUCCESS, petToEdit);
+    private String generateSuccessMessage(Pet petToEdit, String attendanceDate) {
+        return String.format(MESSAGE_ABSENT_ATTENDANCE_SUCCESS, petToEdit.getName(), attendanceDate);
     }
 
     @Override

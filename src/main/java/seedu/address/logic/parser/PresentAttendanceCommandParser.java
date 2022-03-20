@@ -7,10 +7,16 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DROPOFF;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PICKUP;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.PresentAttendanceCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses input arguments and creates a new PresentAttendanceCommand object.
+ */
 public class PresentAttendanceCommandParser implements Parser<PresentAttendanceCommand> {
 
     /**
@@ -38,21 +44,19 @@ public class PresentAttendanceCommandParser implements Parser<PresentAttendanceC
                     PresentAttendanceCommand.MESSAGE_USAGE));
         }
 
+        LocalDate attendanceDate = ParserUtil.parseAttendanceDate(
+                argMultimap.getValue(PREFIX_DATE).get());
+        LocalTime pickUpTime = ParserUtil.parsePickUpTime(
+                argMultimap.getValue(PREFIX_PICKUP).get());
+        LocalTime dropOffTime = ParserUtil.parseDropOffTime(
+                argMultimap.getValue(PREFIX_DROPOFF).get());
+
         PetAttendanceDescriptor petAttendanceDescriptor =
                 new PetAttendanceDescriptor();
 
-        if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
-            petAttendanceDescriptor.setAttendanceDate(ParserUtil.parseAttendanceDate(
-                    argMultimap.getValue(PREFIX_DATE).get()));
-        }
-        if (argMultimap.getValue(PREFIX_PICKUP).isPresent()) {
-            petAttendanceDescriptor.setPickUpTime(ParserUtil.parsePickUpTime(
-                    argMultimap.getValue(PREFIX_PICKUP).get()));
-        }
-        if (argMultimap.getValue(PREFIX_DROPOFF).isPresent()) {
-            petAttendanceDescriptor.setDropOffTime(ParserUtil.parseDropOffTime(
-                    argMultimap.getValue(PREFIX_DROPOFF).get()));
-        }
+        petAttendanceDescriptor.setAttendanceDate(attendanceDate);
+        petAttendanceDescriptor.setPickUpTime(pickUpTime);
+        petAttendanceDescriptor.setDropOffTime(dropOffTime);
 
         return new PresentAttendanceCommand(index, petAttendanceDescriptor);
     }
