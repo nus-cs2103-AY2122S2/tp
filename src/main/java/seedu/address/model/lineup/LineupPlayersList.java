@@ -17,6 +17,10 @@ public class LineupPlayersList {
         this.playersList = players;
     }
 
+    public int size() {
+        return playersList.size();
+    }
+
     public Person get(int index) {
         return playersList.get(index);
     }
@@ -25,8 +29,8 @@ public class LineupPlayersList {
         playersList.add(player);
     }
 
-    public void remove(int index) {
-        playersList.remove(index);
+    public void remove(Person player) {
+        playersList.remove(player);
     }
 
     @Override

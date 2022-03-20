@@ -43,8 +43,8 @@ public class Lineup {
         playersList.add(player);
     }
 
-    public void removePlayer(int index) {
-        playersList.remove(index);
+    public void removePlayer(Person player) {
+        playersList.remove(player);
     }
 
     @Override

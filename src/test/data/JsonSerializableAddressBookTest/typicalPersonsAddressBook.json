@@ -7,7 +7,7 @@
     "age": "19",
     "height": "211",
     "jerseyNumber": "10",
-    "tagged" : [ "friends" ],
+    "tagged" : [ "C" ],
     "weight": "110"
   }, {
     "name" : "Benson Meier",
@@ -16,7 +16,7 @@
     "age": "21",
     "height": "185",
     "jerseyNumber": "11",
-    "tagged" : [ "owesMoney", "friends" ],
+    "tagged" : [ "PG", "SG" ],
     "weight": "75"
   }, {
     "name" : "Carl Kurz",
@@ -34,7 +34,7 @@
     "age": "22",
     "height": "196",
     "jerseyNumber": "69",
-    "tagged" : [ "friends" ],
+    "tagged" : [ "SF" ],
     "weight": "79"
   }, {
     "name" : "Elle Meyer",

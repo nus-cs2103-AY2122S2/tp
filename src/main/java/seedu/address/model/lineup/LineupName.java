@@ -22,14 +22,14 @@ public class LineupName {
      */
     public LineupName(String lineupName) {
         requireNonNull(lineupName);
-        checkArgument(isValidName(lineupName), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidLineupName(lineupName), MESSAGE_CONSTRAINTS);
         this.lineupName = lineupName;
     }
 
     /**
      * Returns true if a given string is a valid lineup name.
      */
-    public static boolean isValidName(String test) {
+    public static boolean isValidLineupName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 

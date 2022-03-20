@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -13,6 +14,8 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+
+    MyGm getMyGm();
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -84,4 +87,13 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Functions to support MyGM stuff (to replace the addressBook stuff)
+     */
+    boolean hasPersonInMyGM(Name targetName);
+
+    void setPersonInMyGM(Person target, Person editedPerson);
+
+    Person getPersonFromMyGM(Name targetPersonName);
 }

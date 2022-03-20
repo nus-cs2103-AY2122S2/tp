@@ -57,7 +57,6 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         phone.setText("Phone: " + person.getPhone().value);
         email.setText("Email: " + person.getEmail().value);
-        age.setText("Age: " + person.getAge().toString()); // age.setText(person.getAge().value);
         height.setText("Height: " + person.getHeight().toString()); // height.setText(person.getHeight().value);
         jerseyNumber.setText("Jersey Number: " + person.getJerseyNumber().toString());
         // jerseyNumber.setText(person.getJerseyNumber().value);
