@@ -199,6 +199,11 @@ public class ModelManager implements Model {
         addressBook.findTask(task);
     }
 
+    @Override
+    public void tagTask(Task task, Person person) {
+        addressBook.tagTask(task, person);
+    }
+
     /**
      * {@inheritDoc}
      */

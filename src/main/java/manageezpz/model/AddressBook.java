@@ -282,6 +282,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void findTask(Task task) {
     }
 
+    public void tagTask(Task task, Person person) {
+        task.assignedTo(person);
+    }
 
     //// person-level operations
 

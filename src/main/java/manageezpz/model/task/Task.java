@@ -20,6 +20,7 @@ public class Task {
 
     // Data fields
     private List<Person> assignees; //List of Strings as of now, V1.3 will incorporate Persons (assign tasks to Persons)
+    //private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Constructor for the Task class.
@@ -39,12 +40,24 @@ public class Task {
      * @return the string representation of the status of the task.
      */
     public String getStatusIcon() {
-        if (this.isDone) {
+        if (this.isDone()) {
             return "X";
         } else {
             return " ";
         }
     }
+
+    /**
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    /*
+    public Set<Tag> getTags() {
+       return Collections.unmodifiableSet(tags);
+    }
+
+     */
+
 
     public void setTaskDone() {
         this.isDone = true;
@@ -90,6 +103,10 @@ public class Task {
 
         return otherTask != null
                 && otherTask.getDescription().equals(getDescription());
+    }
+
+    public void assignedTo(Person person) {
+        assignees.add(person);
     }
 
     @Override

@@ -5,7 +5,7 @@ import static manageezpz.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 
 import manageezpz.logic.commands.exceptions.CommandException;
 import manageezpz.model.Model;
-import manageezpz.model.task.Task;
+import manageezpz.model.task.Todo;
 
 public class AddTodoTaskCommand extends Command {
     public static final String COMMAND_WORD = "addTodo";
@@ -16,15 +16,15 @@ public class AddTodoTaskCommand extends Command {
             + "\r\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_DESCRIPTION + "Play Genshin Impact";
-    public static final String MESSAGE_SUCCESS = "New Task added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New Todo Task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This Task already exists in the address book";
 
-    private final Task toAdd;
+    private final Todo toAdd;
 
     /**
      * Creates an AddEmployeeCommand to add the specified {@code Person}
      */
-    public AddTodoTaskCommand(Task task) {
+    public AddTodoTaskCommand(Todo task) {
         requireNonNull(task);
         toAdd = task;
     }
@@ -37,7 +37,7 @@ public class AddTodoTaskCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
-        model.addTask(toAdd);
+        model.addTodo(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 }
