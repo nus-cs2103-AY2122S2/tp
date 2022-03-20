@@ -21,6 +21,12 @@ Given below are my contributions to the project.
   * Highlights: Given Class Code can be part of the full Class Code
   * Credits: *{}*
 
+* **New Feature**: Command to find persons by Activity (Pull request [\#83](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/83))
+  * What it does: Find a list of persons that match the Activity given.
+  * Justification: Allows admins and users to find all persons in the same activity groups.
+  * Highlights: Can find specific Activity from multiple Activities tied to the same person.
+  * Credits: *{Collaborators: Yong Rui, Zi Foong}*
+
 * **Code contributed**: [RepoSense link]()
 
 * **Project management**:
@@ -28,6 +34,7 @@ Given below are my contributions to the project.
 
 * **Enhancements to existing features**:
   * Fixed multiple checkstyle errors (Pull request [\#49](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/49))
+  * Added JUnit tests for Finding persons by Class Code and its related classes (Pull request [\#75](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/75))
   * -- (Pull requests [\#--](), [\#--]())
 
 * **Documentation**:
