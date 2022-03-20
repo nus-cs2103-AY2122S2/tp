@@ -37,7 +37,10 @@ public class AddWindow extends UiPart<Stage> {
     private Logic logic;
 
     @FXML
-    private Button addButton;
+    private Button submitButton;
+
+    @FXML
+    private Button cancelButton;
 
     @FXML
     private Label addMessageLabel;
@@ -166,59 +169,6 @@ public class AddWindow extends UiPart<Stage> {
     }
 
     /**
-     * Handles submission of the fields inputted by the user through AddWindow's Ui.
-     */
-    @FXML
-    private void handleAdd() {
-        String name = "n/" + nameField.getText();
-        String phone = "p/" + phoneField.getText();
-        String address = "a/" + addressField.getText();
-        String email = "e/" + emailField.getText();
-        StringBuilder userInput = new StringBuilder();
-        String[] personFields = {"add", name, phone, address, email};
-
-        if (isAnyCompulsoryFieldEmpty()) {
-            errorLabel.setText("You must input all mandatory fields!");
-            return;
-        }
-
-        // Craft the user input to be fed into executeCommand
-        for (int i = 0; i < personFields.length; i++) {
-            userInput.append(personFields[i]).append(" ");
-        }
-
-        // Ensure that modules and status are valid before attempting to add a Person.
-        if (!isValidStatus()) {
-            errorLabel.setText(Status.MESSAGE_CONSTRAINTS);
-            return;
-        }
-
-        if (!isValidModule()) {
-            // Cannot use Module.MESSAGE_CONSTRAINTS here as it would be too long to fit within AddWindow
-            errorLabel.setText("Modules names should have 2-3 letters prefix\n"
-                    + "followed by 4 digits and an optional letter\n");
-            return;
-        }
-
-        try {
-            executeCommand(userInput.toString());
-        } catch (CommandException | ParseException e) {
-            errorLabel.setText("Error encountered");
-            return;
-        }
-
-        // Since user command execution is successful, then we do the other stuff next.
-        // Notice that whenever a new Person is added into AddressBook, it'll list out all Persons.
-        // So we simply need to retrieve the last Person added...
-        addStatusForNewPerson();
-        addModulesForNewPerson();
-
-        // reset all fields and then hide the panel
-        this.resetFields();
-        this.hide();
-    }
-
-    /**
      * Adds a Status for the newly created Person object.
      */
     private void addStatusForNewPerson() {
@@ -313,6 +263,59 @@ public class AddWindow extends UiPart<Stage> {
     }
 
     /**
+     * Handles submission of the fields inputted by the user through AddWindow's Ui.
+     */
+    @FXML
+    private void handleSubmit() {
+        String name = "n/" + nameField.getText();
+        String phone = "p/" + phoneField.getText();
+        String address = "a/" + addressField.getText();
+        String email = "e/" + emailField.getText();
+        StringBuilder userInput = new StringBuilder();
+        String[] personFields = {"add", name, phone, address, email};
+
+        if (isAnyCompulsoryFieldEmpty()) {
+            errorLabel.setText("You must input all mandatory fields!");
+            return;
+        }
+
+        // Craft the user input to be fed into executeCommand
+        for (int i = 0; i < personFields.length; i++) {
+            userInput.append(personFields[i]).append(" ");
+        }
+
+        // Ensure that modules and status are valid before attempting to add a Person.
+        if (!isValidStatus()) {
+            errorLabel.setText(Status.MESSAGE_CONSTRAINTS);
+            return;
+        }
+
+        if (!isValidModule()) {
+            // Cannot use Module.MESSAGE_CONSTRAINTS here as it would be too long to fit within AddWindow
+            errorLabel.setText("Modules names should have 2-3 letters prefix\n"
+                    + "followed by 4 digits and an optional letter\n");
+            return;
+        }
+
+        try {
+            executeCommand(userInput.toString());
+        } catch (CommandException | ParseException e) {
+            errorLabel.setText("Error encountered");
+            return;
+        }
+
+        // Since user command execution is successful, then we do the other stuff next.
+        // Notice that whenever a new Person is added into AddressBook, it'll list out all Persons.
+        // So we simply need to retrieve the last Person added...
+        addStatusForNewPerson();
+        addModulesForNewPerson();
+
+        // reset all fields and then hide the panel
+        this.resetFields();
+        this.hide();
+    }
+
+    /**
      * Handles the case where the "Cancel" button is pressed.
      */
     @FXML
@@ -326,7 +329,7 @@ public class AddWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleEnter() {
-        this.handleAdd();
+        this.handleSubmit();
     }
 
     /**
