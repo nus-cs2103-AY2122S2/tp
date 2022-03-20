@@ -1,5 +1,6 @@
 package seedu.address.model.classgroup;
 
+//@@author jxt00
 /**
  * Represents a ClassGroupType in the TAssist.
  * Only these 4 types are acceptable.

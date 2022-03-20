@@ -3,6 +3,7 @@ package seedu.address.model.lesson;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+//@@author jxt00
 /**
  * Represents a Lesson's week ID in the TAssist.
  * Guarantees: immutable; is valid as declared in {@link #isValidWeekId(String)}

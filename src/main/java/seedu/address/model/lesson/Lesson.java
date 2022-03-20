@@ -8,6 +8,7 @@ import java.util.Objects;
 
 import seedu.address.model.studentattendance.StudentAttendance;
 
+//@@author jxt00
 /**
  * Represents a Lesson in the TAssist.
  * Guarantees: details are present and not null, field values are validated, immutable.

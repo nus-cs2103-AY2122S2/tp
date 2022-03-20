@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import seedu.address.model.student.Student;
 
+//@@author jxt00
 /**
  * Represents a StudentAttendance in the TAssist.
  * Guarantees: details are present and not null, field values are validated, immutable.

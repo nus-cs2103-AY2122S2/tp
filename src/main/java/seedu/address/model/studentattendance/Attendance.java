@@ -3,6 +3,7 @@ package seedu.address.model.studentattendance;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+//@@author jxt00
 /**
  * Represents a student's attendance for lessons in the TAssist.
  * Guarantees: immutable; is valid as declared in {@link #isValidAttendance(String)}

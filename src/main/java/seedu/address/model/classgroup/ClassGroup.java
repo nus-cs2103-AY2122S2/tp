@@ -6,6 +6,7 @@ import seedu.address.model.entity.Entity;
 import seedu.address.model.entity.EntityType;
 import seedu.address.model.tamodule.TaModule;
 
+//@@author jxt00
 /**
  * Represents a ClassGroup in the TAssist.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -42,11 +43,13 @@ public class ClassGroup implements Entity {
         return taModule;
     }
 
+    //@@author lkldev
     @Override
     public EntityType getEntityType() {
         return EntityType.CLASS_GROUP;
     }
 
+    //@@author jxt00
     /**
      * Returns true if both class groups have the same identity and fields.
      */
