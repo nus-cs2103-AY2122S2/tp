@@ -35,7 +35,7 @@ public class DeleteCommand extends Command {
         Entry deletedEntry = model.deleteEntry(targetIndex.getZeroBased());
 
         if (deletedEntry == null) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_ENTRY_DISPLAYED_INDEX);
         }
 
         return new CommandResult(String.format(MESSAGE_DELETE_ENTRY_SUCCESS, deletedEntry));
