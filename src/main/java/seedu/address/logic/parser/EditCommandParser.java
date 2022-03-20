@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -30,6 +31,10 @@ public class EditCommandParser implements Parser<EditCommand> {
                         PREFIX_ADDRESS, PREFIX_MODULE);
 
         Index index;
+
+        if (args.equals("")) {
+            return new EditCommand();
+        }
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());

@@ -56,7 +56,7 @@ public class AddCommand extends Command {
         requireNonNull(model);
 
         if (toAdd == null) {
-            return new CommandResult(SHOWING_ADD_WINDOW, false, true, false);
+            return new CommandResult(SHOWING_ADD_WINDOW, false, true, false, false);
         }
 
         if (model.hasPerson(toAdd)) {

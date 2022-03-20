@@ -224,6 +224,10 @@ public class MainWindow extends UiPart<Stage> {
                 handleAdd();
             }
 
+            if (commandResult.isShowEdit()) {
+                handleEdit();
+            }
+
 
             if (commandResult.isExit()) {
                 handleExit();
