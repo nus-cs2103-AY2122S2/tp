@@ -158,6 +158,46 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### \[Proposed\] Delete feature
+
+#### Proposed Implementation
+
+The proposed delete mechanism is facilitated by `TAssist`. Its functionality, usage and behaviour is the same for all entities. Additionally, it implements the following operations:
+
+* `DeleteCommandParser#parse()` — Parses the command arguments.
+* `DeleteCommand#execute()` — Executes `ModelManager#deleteEntity()` with the specified entity.
+* `ModelManager#deleteEntity()` — Deletes the specified entity.
+
+However, when a `TaModule` object is deleted, its associated `ClassGroup` objects are also deleted. 
+
+Given below is an example usage scenario using `Student` objects and how the delete mechanism behaves at each step.
+
+Step 1. The user launches the application. The `TAssist` is already populated with data.
+
+![DeleteState0](images/DeleteState0.png)
+
+Step 2. The user executes `list student` command to list the students in the `TAssist`. The `list` command implementation is detailed below in the List Feature section.
+
+Step 3. The user executes `delete student 2` to delete the 2nd student in the list which is `s2`. The `delete` command also calls `DeleteCommandParser#parse()`, which parses the input and return the index and entity type.
+
+![DeleteState1](images/DeleteState1.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `DeleteCommand#execute()`, instead a `CommandException` will be thrown and no entities will be deleted.  
+
+</div>
+
+The following sequence diagram shows how the delete operation works:
+
+![DeleteSequenceDiagram](images/DeleteSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The following activity diagram summarizes what happens when a user executes a delete command:
+
+<img src="images/DeleteActivityDiagram.png" width="250" />
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
