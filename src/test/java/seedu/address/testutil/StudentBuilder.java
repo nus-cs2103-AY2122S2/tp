@@ -14,9 +14,8 @@ import seedu.address.model.student.Telegram;
 public class StudentBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
-    public static final String DEFAULT_STUDENT_ID = "A0111111X";
+    public static final String DEFAULT_STUDENT_ID = "E0123456";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_TELEGRAM = "telegramhandle";
 
     private Name name;
     private StudentId studentId;
@@ -30,7 +29,7 @@ public class StudentBuilder {
         name = new Name(DEFAULT_NAME);
         studentId = new StudentId(DEFAULT_STUDENT_ID);
         email = new Email(DEFAULT_EMAIL);
-        telegram = Optional.of(new Telegram(DEFAULT_TELEGRAM));
+        telegram = Optional.empty();
     }
 
     /**

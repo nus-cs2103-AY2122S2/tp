@@ -11,8 +11,8 @@ import seedu.address.model.tamodule.TaModule;
 public class ModuleBuilder {
 
     public static final String DEFAULT_MODULE_NAME = "Software Engineering";
-    public static final String DEFAULT_MODULE_CODE = "G09";
-    public static final String DEFAULT_ACADEMIC_YEAR = "y1s1";
+    public static final String DEFAULT_MODULE_CODE = "CS2103T";
+    public static final String DEFAULT_ACADEMIC_YEAR = "21S1";
 
     private ModuleName moduleName;
     private ModuleCode moduleCode;
@@ -55,7 +55,7 @@ public class ModuleBuilder {
     /**
      * Sets the {@code AcademicYear} of the {@code Module} that we are building.
      */
-    public ModuleBuilder withAcademicYer(String academicYear) {
+    public ModuleBuilder withAcademicYear(String academicYear) {
         this.academicYear = new AcademicYear(academicYear);
         return this;
     }
