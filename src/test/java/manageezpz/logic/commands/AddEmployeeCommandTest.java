@@ -234,6 +234,11 @@ public class AddEmployeeCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public void tagTask(Task task, Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**

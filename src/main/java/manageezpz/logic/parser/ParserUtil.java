@@ -13,9 +13,6 @@ import manageezpz.model.task.Description;
 import manageezpz.model.task.Time;
 import manageezpz.model.tasktag.Tag;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.

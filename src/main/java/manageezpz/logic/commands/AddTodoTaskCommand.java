@@ -5,7 +5,6 @@ import static manageezpz.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 
 import manageezpz.logic.commands.exceptions.CommandException;
 import manageezpz.model.Model;
-import manageezpz.model.task.Task;
 import manageezpz.model.task.Todo;
 
 public class AddTodoTaskCommand extends Command {

@@ -2,14 +2,10 @@ package manageezpz.model.task;
 
 import static manageezpz.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import manageezpz.model.person.Person;
-import manageezpz.model.tasktag.Tag;
 
 /**
  * Represents the Tasks a user could create. A <code> Task </code> object would correspond to a task
@@ -55,9 +51,12 @@ public class Task {
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    //public Set<Tag> getTags() {
-      //  return Collections.unmodifiableSet(tags);
-    //}
+    /*
+    public Set<Tag> getTags() {
+       return Collections.unmodifiableSet(tags);
+    }
+
+     */
 
 
     public void setTaskDone() {
