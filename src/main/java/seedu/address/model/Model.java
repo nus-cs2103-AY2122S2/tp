@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.entry.Company;
+import seedu.address.model.entry.Entry;
 import seedu.address.model.entry.Event;
 import seedu.address.model.entry.Person;
 
@@ -22,7 +23,7 @@ public interface Model {
     Predicate<Company> PREDICATE_SHOW_NO_COMPANIES = unused -> false;
     Predicate<Event> PREDICATE_SHOW_NO_EVENTS = unused -> false;
 
-    enum ListType { PERSON, COMPANY, EVENT }
+    static enum ListType { PERSON, COMPANY, EVENT }
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -178,7 +179,7 @@ public interface Model {
     void showEventList(Predicate<Event> predicate);
 
     /**
-     * Returns the currently displayed ListType
+     * Deletes the entry at the index of the currently displayed list and returns it.
      */
-    ListType getCurrentlyDisplayedListType();
+    Entry deleteEntry(int index);
 }

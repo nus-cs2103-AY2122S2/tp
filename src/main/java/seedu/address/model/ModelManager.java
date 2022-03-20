@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.entry.Company;
+import seedu.address.model.entry.Entry;
 import seedu.address.model.entry.Event;
 import seedu.address.model.entry.Person;
 
@@ -181,6 +182,38 @@ public class ModelManager implements Model {
         currentlyDisplayedListType = ListType.EVENT;
     }
 
+    @Override
+    public Entry deleteEntry(int index) {
+        switch (currentlyDisplayedListType) {
+        case PERSON:
+            if (index >= filteredPersons.size()) {
+                return null;
+            }
+
+            Person personToDelete = filteredPersons.get(index);
+            deletePerson(personToDelete);
+            return personToDelete;
+        case COMPANY:
+            if (index >= filteredCompanies.size()) {
+                return null;
+            }
+
+            Company companyToDelete = filteredCompanies.get(index);
+            deleteCompany(companyToDelete);
+            return companyToDelete;
+        case EVENT:
+            if (index >= filteredEvents.size()) {
+                return null;
+            }
+
+            Event eventToDelete = filteredEvents.get(index);
+            deleteEvent(eventToDelete);
+            return eventToDelete;
+        default:
+            return null;
+        }
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -215,11 +248,6 @@ public class ModelManager implements Model {
     public void updateFilteredCompanyList(Predicate<Company> predicate) {
         requireNonNull(predicate);
         filteredCompanies.setPredicate(predicate);
-    }
-
-    @Override
-    public ListType getCurrentlyDisplayedListType() {
-        return currentlyDisplayedListType;
     }
 
     @Override
