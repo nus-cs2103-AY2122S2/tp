@@ -129,7 +129,7 @@ public class ModelManager implements Model {
         // any modification to the list.
         List<Appointment> oldAppointments = new ArrayList<>(
                 schedule.getAppointmentList()
-                        .filtered(appointment -> appointment.getPerson().equals(target)));
+                        .filtered(appointment -> target.equals(appointment.getPerson())));
         oldAppointments.forEach(appointment -> {
             setAppointment(appointment, appointment.withPerson(null));
         });
@@ -152,7 +152,7 @@ public class ModelManager implements Model {
         // any modification to the list.
         List<Appointment> oldAppointments = new ArrayList<>(
                 schedule.getAppointmentList()
-                        .filtered(appointment -> appointment.getPerson().equals(target)));
+                        .filtered(appointment -> target.equals(appointment.getPerson())));
 
         oldAppointments.forEach(appointment -> {
             setAppointment(appointment, appointment.withPerson(editedPerson));
