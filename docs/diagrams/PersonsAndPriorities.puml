@@ -1,0 +1,26 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+class Priority<<enumeration>> {
+  PRIORITY_1,
+  PRIORITY_2,
+  PRIORITY_3,
+  PRIORITY_4
+}
+
+class Tag {
+    String tagName;
+}
+
+show members
+AddressBook *-right-> "1" UniquePersonList
+UniquePersonList -right-> Person
+Person -up-> "*" TagList
+
+TagList *-left-> "*" Tag
+Tag -left-> Priority
+
+@enduml
