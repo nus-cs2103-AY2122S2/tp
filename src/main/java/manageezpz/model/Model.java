@@ -120,6 +120,13 @@ public interface Model {
     void findTask(Task task);
 
     /**
+     * Tags the given task.
+     * The task must exist in the task list.
+     * @param task
+     */
+    void tagTask(Task task, Person person);
+
+    /**
      * Adds the given task.
      * {@code task} must not already exist in the task list
      */
