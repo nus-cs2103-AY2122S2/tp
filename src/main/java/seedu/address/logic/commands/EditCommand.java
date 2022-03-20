@@ -89,7 +89,7 @@ public class EditCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index == null || editPersonDescriptor == null) {
-            return new CommandResult(SHOWING_EDIT_WINDOW, false, false, true, false);
+            return new CommandResult(SHOWING_EDIT_WINDOW, false, false, true, false, false);
         }
 
         if (index.getZeroBased() >= lastShownList.size()) {
