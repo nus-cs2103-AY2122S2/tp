@@ -12,6 +12,10 @@ import seedu.address.logic.commands.AddCommentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Comment;
 
+/**
+ * Parses input arguments and creates a new {@code AddCommentCommand} object
+ * AddCommentCommandParser is adapted from https://nus-cs2103-ay2122s2.github.io/tp/tutorials/AddRemark.html
+ */
 public class AddCommentCommandParser implements Parser<AddCommentCommand> {
 
     /**

@@ -14,7 +14,8 @@ import seedu.address.model.person.Comment;
 import seedu.address.model.person.Person;
 
 /**
- * Changes the remark of an existing person in the address book.
+ * Adds a comment to an existing person in the address book.
+ * AddCommentCommand is adapted from https://nus-cs2103-ay2122s2.github.io/tp/tutorials/AddRemark.html
  */
 public class AddCommentCommand extends Command {
 
