@@ -60,6 +60,7 @@ grey-ish - #FDF8F0 / #FDF6EB
 }
 
 .result-display {
+    -fx-background-color: #FEFAF5;
     -fx-font-family: "Segoe UI";
     -fx-font-size: 12pt;
     -fx-text-fill: #222;
