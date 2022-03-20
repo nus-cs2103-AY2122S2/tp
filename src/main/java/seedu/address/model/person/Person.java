@@ -120,20 +120,20 @@ public class Person {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append("; Phone: ")
+                .append("\nPhone: ")
                 .append(getPhone())
-                .append("; Email: ")
+                .append("\nEmail: ")
                 .append(getEmail())
-                .append("; Height: ")
+                .append("\nHeight: ")
                 .append(getHeight())
-                .append("; Weight: ")
+                .append("\nWeight: ")
                 .append(getWeight())
-                .append("; JerseyNumber: ")
+                .append("\nJerseyNumber: ")
                 .append(getJerseyNumber());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
-            builder.append("; Tags: ");
+            builder.append("\nTags: ");
             tags.forEach(builder::append);
         }
         return builder.toString();

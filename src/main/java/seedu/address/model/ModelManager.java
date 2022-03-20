@@ -111,7 +111,23 @@ public class ModelManager implements Model {
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return addressBook.hasPerson(person);
+        return myGm.hasPerson(person);
+    }
+
+    @Override
+    public boolean hasJerseyNumber(Person person) {
+        requireNonNull(person);
+        return myGm.hasJerseyNumber(person);
+    }
+
+    @Override
+    public String getAvailableJerseyNumber() {
+        return myGm.getAvailableJerseyNumber();
+    }
+
+    @Override
+    public boolean isFull() {
+        return myGm.isFull();
     }
 
     @Override
@@ -122,6 +138,7 @@ public class ModelManager implements Model {
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
+        myGm.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
