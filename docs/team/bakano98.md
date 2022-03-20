@@ -33,8 +33,14 @@ Given below are my contributions to the project.
   - **What it does**: Allows users to add a new contact into ModuleMateFinder.
   - **Justification**: This feature improves the product significantly as not all users will be familiar with CLI application, or simply do not want to memorise the commands. Having a GUI way to add contacts provides ease of use for the users.
   - **Highlights**: This feature was challenging as it required good understanding of JavaFX, which required digging deeper into JavaFX and how it integrates with Java. Furthermore, styling is non-trivial.
-  - **Enhancements**: Extended the feature to allow for adding _optional_ fields like `Module` and `Status`[(PR #72)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/72)
+  - **Enhancements**: Extended the feature to allow for adding _optional_ fields like `Module` and `Status`[(PR #72)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/72). Binded the `ENTER` key to act as a `Submit` button, when mandatory fields are added.
   - **Credits**: Some code reuse from `HelpWindow`, which served as the _baseline_ to start implementation of `AddWindow`
+
+- **New Feature**: Added GUI, `EditWindow` for editing a Person within ModuleMateFinder. [(PR #81)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/81)
+  - **What it does**: Allows users to easily edit a contact in ModuleMateFinder
+  - **Justification**: Not all users are familiar with the command syntax and would prefer something more guided. This provides that guidance while still giving the benefit of typing fast.
+  - **Highlights**: This feature is similar to `AddWindow`, so only a few changes needed to be made.
+  - **Credits**: Some code reuse from `HelpWindow`, which served as the _baseline_ to start implementation of `EditWindow`
 
 - **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=bakano98&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=bakano98&tabRepo=AY2122S2-CS2103T-T13-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=functional-code&authorshipIsBinaryFileTypeChecked=false)
 - **Project Management**: TBD

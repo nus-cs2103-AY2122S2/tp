@@ -31,6 +31,10 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         Index index;
 
+        if (args.equals("")) {
+            return EditCommand.editWindowHelper();
+        }
+
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {

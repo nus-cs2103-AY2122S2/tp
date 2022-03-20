@@ -50,6 +50,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String SHOWING_EDIT_WINDOW = "Opened edit window instead";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -66,10 +67,30 @@ public class EditCommand extends Command {
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
+    /**
+     * Overloaded constructor. Only used as a helper to open {@code EditWindow}.
+     */
+    private EditCommand() {
+        this.index = null;
+        this.editPersonDescriptor = null;
+    }
+
+    /**
+     * Factory method for an empty EditCommand. Prevents unintended calls to an EditCommand.
+     * @return an empty EditCommand
+     */
+    public static EditCommand editWindowHelper() {
+        return new EditCommand();
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+
+        if (index == null || editPersonDescriptor == null) {
+            return new CommandResult(SHOWING_EDIT_WINDOW, false, false, true, false, false);
+        }
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);

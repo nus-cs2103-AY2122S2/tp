@@ -17,6 +17,9 @@ public class CommandResult {
     /** Add window should be shown to the user */
     private final boolean showAdd;
 
+    /** Edoit window should be shown to the user */
+    private final boolean showEdit;
+
     /** The application should exit. */
     private final boolean exit;
 
@@ -26,21 +29,12 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean showAdd, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean showAdd,
+                         boolean showEdit, boolean exit, boolean isCopy) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.showAdd = showAdd;
-        this.exit = exit;
-        this.isCopyCommand = false;
-    }
-
-    /**
-     * Constructs a {@code CommandResult} with the specified fields.
-     */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean showAdd, boolean exit, boolean isCopy) {
-        this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.showHelp = showHelp;
-        this.showAdd = showAdd;
+        this.showEdit = showEdit;
         this.exit = exit;
         this.isCopyCommand = isCopy;
     }
@@ -50,7 +44,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false);
+        this(feedbackToUser, false, false, false, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -63,6 +57,10 @@ public class CommandResult {
 
     public boolean isShowAdd() {
         return showAdd;
+    }
+
+    public boolean isShowEdit() {
+        return showEdit;
     }
 
     public boolean isExit() {
@@ -88,6 +86,7 @@ public class CommandResult {
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
                 && showAdd == otherCommandResult.showAdd
+                && showEdit == otherCommandResult.showEdit
                 && exit == otherCommandResult.exit;
     }
 

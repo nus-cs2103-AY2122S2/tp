@@ -112,7 +112,8 @@ Examples:
 * `add n/Bob p/87654321 e/bob@u.nus.edu`
 
 Additionally, if one were to simply use `add`, it would open up a new window to allow users to systematically add a new contact
-![addWindow.png](images/addWindow.png)
+![addWindow.png](images/addWindow.png)  
+Then, simply fill up the fields as guided in the window. Users can then press the `ENTER` key to submit the fields when complete, or press the `Submit` button.
 
 ### Adding Module(s) to a Contact : `addmodule`
 
@@ -138,6 +139,11 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]…​`
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * Modules cannot be edited through the `edit` command.
+
+Additionally, if one were to simply use `edit`, it would open up a new window to allow users to systematically edit a chosen contact  
+![editWindow.png](images/editWindow.png)  
+Then, simply fill up the fields as guided in the window.
+
 
 Examples:
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.

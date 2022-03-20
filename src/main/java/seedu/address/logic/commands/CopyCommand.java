@@ -81,7 +81,7 @@ public class CopyCommand extends Command {
         if (index == null) {
             try {
                 String formattedAddressBook = formatPersonUtil.formatAddressBook(lastShownList, prefixes);
-                return new CommandResult(formattedAddressBook, false, false, false, true);
+                return new CommandResult(formattedAddressBook, false, false, false, false, true);
             } catch (JsonProcessingException e) {
                 throw new CommandException(Messages.MESSAGE_INVALID_COMMAND_FORMAT);
             }
@@ -99,7 +99,7 @@ public class CopyCommand extends Command {
             throw new CommandException(e.getMessage());
         }
 
-        return new CommandResult(copiedFields, false, false, false, true);
+        return new CommandResult(copiedFields, false, false, false, false, true);
     }
 
     @Override
