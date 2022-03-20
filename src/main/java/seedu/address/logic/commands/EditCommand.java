@@ -67,9 +67,20 @@ public class EditCommand extends Command {
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
-    public EditCommand() {
+    /**
+     * Overloaded constructor. Only used as a helper to open {@code EditWindow}.
+     */
+    private EditCommand() {
         this.index = null;
         this.editPersonDescriptor = null;
+    }
+
+    /**
+     * Factory method for an empty EditCommand. Prevents unintended calls to an EditCommand.
+     * @return an empty EditCommand
+     */
+    public static EditCommand editWindowHelper() {
+        return new EditCommand();
     }
 
     @Override
