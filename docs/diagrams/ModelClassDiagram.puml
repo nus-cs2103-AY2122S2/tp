@@ -28,8 +28,8 @@ HiddenOutside ..> Model
 TAssist .up.|> ReadOnlyTAssist
 
 ModelManager .up.|> Model
-ReadOnlyTAssist .right.> ReadOnlyUserPrefs
-ReadOnlyTAssist .left.> Model
+Model .right.> ReadOnlyUserPrefs
+Model .right.> ReadOnlyTAssist
 ModelManager -right-> "1" TAssist
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
