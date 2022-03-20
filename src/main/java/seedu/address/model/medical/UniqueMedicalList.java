@@ -97,4 +97,17 @@ public class UniqueMedicalList implements Iterable<Medical> {
         }
         return true;
     }
+
+    /**
+     * Replaces the contents of this list with {@code medicals}.
+     * {@code medicals} must not contain duplicate medicals.
+     */
+    public void setMedicals(List<Medical> medicals) {
+        requireAllNonNull(medicals);
+        if (!medicalAreUnique(medicals)) {
+            throw new DuplicateMedicalException();
+        }
+
+        internalList.setAll(medicals);
+    }
 }

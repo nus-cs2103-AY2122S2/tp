@@ -26,13 +26,17 @@ public class ViewMedicalCommandParser {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_TYPE, PREFIX_NRIC);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_TYPE, PREFIX_NRIC)
+        if (!arePrefixesPresent(argMultimap, PREFIX_TYPE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     ViewMedicalCommand.MESSAGE_USAGE));
         }
 
-        Nric nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
+        Nric nric = null;
+
+        if (arePrefixesPresent(argMultimap, PREFIX_NRIC)) {
+            nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
+        }
 
         return new ViewMedicalCommand(nric);
     }

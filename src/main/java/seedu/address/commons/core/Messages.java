@@ -11,6 +11,7 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_CONTACTS_LISTED_OVERVIEW = "%1$d contacts listed! Belongs to: %2$s";
     public static final String MESSAGE_CONSULTATION_LISTED_OVERVIEW = "%1$d consultations listed! Belongs to: %2$s";
+    public static final String MESSAGE_MEDICALS_LISTED_NO_NRIC = "%1$d medical information listed!";
     public static final String MESSAGE_MEDICALS_LISTED_OVERVIEW = "%1$d medical information listed! Belongs to: %2$s";
     public static final String MESSAGE_PRESCRIPTIONS_LISTED_OVERVIEW = "%1$d prescription listed! Belongs to: %2$s";
     public static final String MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX =
