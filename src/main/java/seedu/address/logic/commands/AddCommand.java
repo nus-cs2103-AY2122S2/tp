@@ -47,8 +47,19 @@ public class AddCommand extends Command {
         toAdd = person;
     }
 
-    public AddCommand() {
+    /**
+     * Creates an empty AddCommand. Used to open {@code AddWindow}
+     */
+    private AddCommand() {
         toAdd = null;
+    }
+
+    /**
+     * Factory method for an empty AddCommand. Prevents unintended calls to empty constructor.
+     * @return an empty AddCommand
+     */
+    public static AddCommand addWindowHelper() {
+        return new AddCommand();
     }
 
     @Override
