@@ -12,6 +12,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.Module;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.FormatPersonUtil;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Status;
@@ -124,6 +125,21 @@ public class ParserUtil {
             throw new ParseException(Module.MESSAGE_CONSTRAINTS);
         }
         return new Module(trimmedModule);
+    }
+
+    /**
+     * Parses a {@code String format} into a {@code FormatPersonUtil}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code format} is invalid.
+     */
+    public static FormatPersonUtil parseFormat(String format) throws ParseException {
+        requireNonNull(format);
+        String trimmedFormat = format.trim();
+        if (!FormatPersonUtil.isValidFormat(trimmedFormat)) {
+            throw new ParseException(FormatPersonUtil.MESSAGE_CONSTRAINTS);
+        }
+        return new FormatPersonUtil(trimmedFormat);
     }
 
     /**

@@ -6,13 +6,24 @@ package seedu.address.logic.parser;
  */
 public class Prefix {
     private final String prefix;
+    private final String description;
 
-    public Prefix(String prefix) {
+    /**
+     * Constructs a Prefix.
+     * @param prefix the prefix string.
+     * @param desc the description of the prefix.
+     */
+    public Prefix(String prefix, String desc) {
+        this.description = desc;
         this.prefix = prefix;
     }
 
     public String getPrefix() {
         return prefix;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public String toString() {
@@ -34,6 +45,7 @@ public class Prefix {
         }
 
         Prefix otherPrefix = (Prefix) obj;
-        return otherPrefix.getPrefix().equals(getPrefix());
+        return otherPrefix.getPrefix().equals(getPrefix())
+                && otherPrefix.getDescription().equals(getDescription());
     }
 }
