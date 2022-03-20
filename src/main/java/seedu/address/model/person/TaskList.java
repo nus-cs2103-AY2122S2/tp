@@ -81,6 +81,20 @@ public class TaskList {
     }
 
     /**
+     * Retrieves the completion status of a specific task assigned to a student.
+     *
+     * @param task target task to be checked against.
+     * @return true if the task is already been completed.
+     */
+    @SuppressWarnings("OptionalGetWithoutIsPresent") // This is checked using the isTaskAlreadyPresent assertion.
+    public boolean isTaskPresentAndCompleted(Task task) {
+        // Should always be true, since we checked for this condition
+        // before calling this method in {@code UniquePersonList}
+        assert isTaskAlreadyPresent(task);
+        return taskList.stream().filter(x -> x.isTaskNameEqual(task.getTaskName())).findFirst().get().isTaskComplete();
+    }
+
+    /**
      * Gets the number of tasks in the list.
      *
      * @return the number of tasks.

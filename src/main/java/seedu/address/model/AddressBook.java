@@ -2,6 +2,8 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -140,6 +142,18 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void sortPersonList() {
         persons.sortList();
+    }
+
+    /**
+     * Returns a key-value pair between each {@code person} and the completion status of a task,
+     * if the person is being assigned with the specified task.
+     *
+     * @param task target task to be compared with
+     * @return LinkedHashMap containing valid person/completion status pair.
+     */
+    public LinkedHashMap<Person, Boolean> checkProgress(Task task) {
+        requireNonNull(task);
+        return persons.checkProgress(task);
     }
 
     //// util methods
