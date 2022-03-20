@@ -9,6 +9,9 @@ import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Contains unit tests for Block class and its methods.
+ */
 public class BlockTest {
 
     @Test

@@ -9,6 +9,9 @@ import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Contains unit tests for CovidStatus class and its methods.
+ */
 public class CovidStatusTest {
 
     @Test
@@ -24,15 +27,15 @@ public class CovidStatusTest {
 
     @Test
     public void isValidCovidStatus() {
-        //null faculty
+        //null status
         assertFalse(CovidStatus.isValidCovidStatus(null));
 
-        //invalid faculty
+        //invalid status
         assertFalse(CovidStatus.isValidCovidStatus("")); // empty string
         assertFalse(CovidStatus.isValidCovidStatus(" ")); // spaces only
         assertFalse(CovidStatus.isValidCovidStatus("HRW")); // incorrect status
 
-        //Valid faculty
+        //Valid status
         assertTrue(CovidStatus.isValidCovidStatus("hrn")); // all lowercase, correct status
         assertTrue(CovidStatus.isValidCovidStatus("POSITIVE")); // correct status
     }

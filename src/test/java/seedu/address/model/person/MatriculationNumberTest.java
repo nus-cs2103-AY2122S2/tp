@@ -6,6 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Contains unit tests for MatriculationNumber class and its methods.
+ */
 public class MatriculationNumberTest {
 
     @Test
@@ -30,6 +33,8 @@ public class MatriculationNumberTest {
         assertFalse(MatriculationNumber.isValidMatriculationNumber("A123456D")); // 6 numbers
         assertFalse(MatriculationNumber.isValidMatriculationNumber("A12345678")); // 8 numbers
         assertFalse(MatriculationNumber.isValidMatriculationNumber("A12345678$")); // format is of AXXXXXXX{Alpha}
+        assertFalse(MatriculationNumber.isValidMatriculationNumber("B12345678G")); // first character
+        // should be an a/A
 
         // valid matriculation number
         assertTrue(MatriculationNumber.isValidMatriculationNumber("a1234567g")); // all lowercase, correct number

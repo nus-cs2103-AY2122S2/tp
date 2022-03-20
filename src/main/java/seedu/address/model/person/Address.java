@@ -32,6 +32,9 @@ public class Address {
 
     /**
      * Returns true if a given string is a valid email.
+     *
+     * @param test string to be tested to determine if valid address.
+     * @return Boolean result where it is true if a given string is valid address, false otherwise.
      */
     public static boolean isValidAddress(String test) {
         return test.matches(VALIDATION_REGEX);

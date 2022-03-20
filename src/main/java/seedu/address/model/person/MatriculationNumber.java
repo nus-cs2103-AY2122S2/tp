@@ -36,6 +36,9 @@ public class MatriculationNumber {
 
     /**
      * Returns true if a given string is a valid matriculation number.
+     *
+     * @param test string to be tested to determine if valid matriculation number.
+     * @return Boolean result where it is true if a given string is a valid number, false otherwise.
      */
     public static boolean isValidMatriculationNumber(String test) {
         return test.matches(VALIDATION_REGEX);

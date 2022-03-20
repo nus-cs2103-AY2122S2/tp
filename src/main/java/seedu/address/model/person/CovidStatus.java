@@ -37,13 +37,13 @@ public class CovidStatus {
     /**
      * Returns true if a given string is a valid covid status.
      *
-     * @param inputStatus
-     * @return true if given string is valid, false otherwise.
+     * @param test covid status string to be tested.
+     * @return Boolean result where true if given string is a valid status, false otherwise.
      */
-    public static boolean isValidCovidStatus(String inputStatus) {
+    public static boolean isValidCovidStatus(String test) {
         return Stream.of(CovidStatusTier.values())
                 .anyMatch(status -> status.name()
-                        .equalsIgnoreCase(inputStatus));
+                        .equalsIgnoreCase(test));
     }
 
     /**

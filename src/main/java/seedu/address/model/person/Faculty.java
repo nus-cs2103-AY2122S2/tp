@@ -49,8 +49,9 @@ public class Faculty {
 
     /**
      * Returns true if a given string is a valid faculty.
-     * @param test
-     * @return true if a given string is valid, false otherwise.
+     *
+     * @param test string to be tested to determine if valid faculty.
+     * @return Boolean result where it is true if a given string is a valid faculty, false otherwise.
      */
     public static boolean isValidFaculty(String test) {
         return Stream.of(Nus.values())

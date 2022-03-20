@@ -9,6 +9,9 @@ import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Contains unit tests for Faculty class and its methods.
+ */
 public class FacultyTest {
 
     @Test
