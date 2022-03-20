@@ -171,6 +171,50 @@ As such, the detailed descriptions for the Address Book subsystem above can be t
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### The onboarding guide
+
+This section describes the implementation of the onboarding guide subsystem.
+
+#### Accessing the Onboarding Guide
+The Onboarding Prompt, which leads to the onboarding guide only appears during first program run, which is determined by whether or not has there been any modification to the system. The onboarding guide can also be alternatively accessed through the menu bar.
+
+#### The `OnboardingWindow` Class
+To mimic the actual environment of Contax, the OnboardingWindow appears as a clone of the MainWindow, but with a different set of components aimed towards providing a comprehensive guide.
+
+The class diagram of the UI components are as follows:
+
+![OnboardingUiClassDiagram](images/OnboardingUiClassDiagram.png)
+
+#### Onboarding models
+The OnboardingStep and OnboardingStory models are implemented to support the onboarding subsystem. Functionally, each OnboardingStep instance represents a step in the onboarding guide by containing a set of instruction for the OnboardingWindow, and the OnboardingStory represents an onboarding guide sequence comprised of a series of OnboardingSteps.
+
+##### The `OnboardingStep` Class
+The purpose of the OnboardingStep is to soley contain updates for the OnboardingWindow and is therefore implemented with minimal functionalities, providing only getters and setters for initialization and processing.
+
+##### The `OnboardingStory` Class
+The OnboardingStory serves as a simple container class for the OnboardingStep, providing only basic container class functionalities.
+
+#### The `OnboardingStoryManager` Class
+The purpose of the OnboardingStoryManager is to provide the OnboardingWindow with the necessary logic to interact with the OnboardingStory and OnboardingStep. This is accomplished by keeping track of the onboarding guide's progress and providing the OnboardingWindow with the current OnboardingStep whenever a specified event is detected.
+
+The sequence diagram of a mouse click event interaction is as follows:
+![OnboardingStepSequenceDiagram](images/OnboardingStepSequenceDiagram.png)
+
+#### Processing of OnboardingSteps
+Upon the processing of an OnboardingStep, the OnboardingWindow propagates the instruction to the other UI components to update them accordingly. In cases that the OnboardingStep does not contain any instruction for a particular UI components, that component's update function will not be invoked and therefore remain the same. 
+
+A possible sequence of processing is as follows:
+![OnboardingUiSequenceDiagram](images/OnboardingUiSequenceDiagram.png)
+
+#### Directing User's area of focus
+Throughout the onboarding guide, Overlays and Highlights are used to direct the user's area of focus for a better user experience.
+
+##### Highlighting
+Within the OnboardingWindow, multiple UI objects are implemented with the functionality to be highlighted with a yellow border to attract the user's attention.
+
+##### The `Overlay` Class
+The Overlay class is implemented using 2 translucent panes binded to the top and bottom of the OnboardingWindow. This makes it possible to create an desired area of focus by leaving only an area uncovered.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
