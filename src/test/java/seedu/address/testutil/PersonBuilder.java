@@ -115,6 +115,19 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Activity} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withActivity(String stringActivities) {
+        Set<Activity> newSet = new HashSet<>();
+        String[] activityStringArray = stringActivities.split(", ");
+        for (String activityString : activityStringArray) {
+            newSet.add(new Activity(activityString));
+        }
+        this.activities = newSet;
+        return this;
+    }
+
     public Person build() {
         return new Person(name, phone, email, address, status, classCode, activities);
     }
