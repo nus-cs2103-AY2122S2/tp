@@ -196,7 +196,7 @@ Sets a person's status as favourite or blacklisted.
 
 Format: `status INDEX s/STATUS`
 - Gives a status to the person at specified `INDEX`
-- Status can either be a `blacklist` or `favourite`, a person can have no status module.
+- Status can either be a `blacklist` or `favourite`, a person can have no status tagged.
 - `INDEX` must be a **positive integer** 1, 2, 3, ...
 
 Examples:
