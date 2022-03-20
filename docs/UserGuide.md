@@ -85,6 +85,7 @@ ModuleMate Finder is a desktop app that allows students to find people taking th
 - [Sort](#sorting-contacts-in-list-sort)
 - [Undo](#undo-a-command--undo)
 - [Redo](#redo-a-command--redo)
+- [Copy](#copy-command)
 - [Exit](#exiting-the-program--exit)
 
 ### Viewing help : `help`
@@ -270,6 +271,26 @@ Format: `redo`
 Examples:
 - After editing a contact's name at index 3 from `George` to `Adam` and using `undo` to reverse the contact's name
 back to `George`, using `redo` will restore the contact's name back to `Adam`.
+
+### Copy contacts in list: `copy`
+
+Copy the people within address book. Attach a clipboard to the side of CLI to copy data.
+
+Format: `copy [INDEX] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STATUS] [m/MODULE] [f/FORMAT]​`
+
+* Copy persons using specified field names.​
+* If no fields are specified, all fields will be copied.
+* Choose INDEX to copy a specific person.
+* If no INDEX is specified, all persons will be copied.
+* Choice of format is default, csv and json.
+* Default simply displays attribute line by line, while csv format separates attributes via a "|" delimiter.
+* JSON format is a JSON object with attribute names as keys and attribute values as values, similar to application's save file.
+* Order of field names determines the order of attributes in the output.
+
+Examples:
+* `copy 1 n/ p/ e/ f/json`  will copy name, phone and email of first person in JSON format.
+* `copy f/csv` will copy the entire list in csv format.
+
 
 ### Exiting the program : `exit`
 

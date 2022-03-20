@@ -20,6 +20,9 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** The application should copy. */
+    private final boolean isCopyCommand;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
@@ -28,6 +31,18 @@ public class CommandResult {
         this.showHelp = showHelp;
         this.showAdd = showAdd;
         this.exit = exit;
+        this.isCopyCommand = false;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean showAdd, boolean exit, boolean isCopy) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = showHelp;
+        this.showAdd = showAdd;
+        this.exit = exit;
+        this.isCopyCommand = isCopy;
     }
 
     /**
@@ -52,6 +67,10 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public boolean isCopyCommand() {
+        return isCopyCommand;
     }
 
     @Override

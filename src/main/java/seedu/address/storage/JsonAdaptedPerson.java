@@ -21,7 +21,7 @@ import seedu.address.model.person.Status;
 /**
  * Jackson-friendly version of {@link Person}.
  */
-class JsonAdaptedPerson {
+public class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
@@ -30,7 +30,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final String status;
-    private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final List<JsonAdaptedTag> module = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -39,14 +39,14 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("status") String status,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("module") List<JsonAdaptedTag> module) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.status = status;
-        if (tagged != null) {
-            this.tagged.addAll(tagged);
+        if (module != null) {
+            this.module.addAll(module);
         }
     }
 
@@ -59,7 +59,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         status = source.getStatus().value;
-        tagged.addAll(source.getModules().stream()
+        module.addAll(source.getModules().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
     }
@@ -71,7 +71,7 @@ class JsonAdaptedPerson {
      */
     public Person toModelType() throws IllegalValueException {
         final List<Module> personModules = new ArrayList<>();
-        for (JsonAdaptedTag module : tagged) {
+        for (JsonAdaptedTag module : module) {
             personModules.add(module.toModelType());
         }
 
