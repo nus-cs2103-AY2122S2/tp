@@ -194,6 +194,7 @@ While chronological ordering can arguably be enforced in `ModelManager` or even 
 Although manipulation using the public methods can be done, they do not provide index-level manipulation, and are hence less efficient due to the extra `List#indexOf` operation required. The solution of implementing additional index-based operations exists, but would result in highly specialized methods that are only used by the sorting function, unnecessarily complicating the class.
 
 In order to efficiently maintain chronological ordering upon list modification, `DisjointAppointmentList` implements the shifting operation of *Insertion Sort* in the private method `DisjointAppointmentList#shiftAppointmentToPosition(index)`. *Insertion Sort* is **significantly faster** than the default Java list sort function, which uses *Quick Sort*, when only 1 element is out of place. For list modifications, this is always the case, and the implementation will result in better sorting performance. 
+
 |<img src="images/DisjointAppointmentListSortBefore.png" width="550" />|
 | - |
 |<img src="images/DisjointAppointmentListSortAfter.png" width="550" />|
