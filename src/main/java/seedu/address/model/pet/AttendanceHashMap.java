@@ -23,7 +23,7 @@ public class AttendanceHashMap {
      */
     public AttendanceHashMap(HashMap<LocalDate, AttendanceEntry> attendanceHashMap) {
         requireNonNull(attendanceHashMap);
-        this.attendanceHashMap = attendanceHashMap;
+        this.attendanceHashMap = new HashMap<>(attendanceHashMap);
     }
 
     /**
@@ -68,13 +68,14 @@ public class AttendanceHashMap {
     }
 
     /**
-     * Adds an attendance entry into the attendance hash map.
+     * Adds an attendance entry into a new attendance hash map.
      * @param attendanceEntry the attendance to be stored.
-     * @return an edited attendance hash map with the attendance marked present or absent.
+     * @return a new attendance hash map with the attendance marked present or absent.
      */
     public AttendanceHashMap addAttendance(AttendanceEntry attendanceEntry) {
-        attendanceHashMap.put(attendanceEntry.getAttendanceDate(), attendanceEntry);
-        return this;
+        HashMap<LocalDate, AttendanceEntry> tempHashMap = new HashMap<>(attendanceHashMap);
+        tempHashMap.put(attendanceEntry.getAttendanceDate(), attendanceEntry);
+        return new AttendanceHashMap(tempHashMap);
     }
 
     public AttendanceEntry getAttendance(LocalDate attendanceDate) {

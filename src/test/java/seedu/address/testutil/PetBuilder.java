@@ -1,10 +1,15 @@
 package seedu.address.testutil;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.attendance.AbsentAttendanceEntry;
+import seedu.address.model.attendance.PresentAttendanceEntry;
 import seedu.address.model.pet.Address;
 import seedu.address.model.pet.Appointment;
+import seedu.address.model.pet.AttendanceHashMap;
 import seedu.address.model.pet.Diet;
 import seedu.address.model.pet.Name;
 import seedu.address.model.pet.OwnerName;
@@ -32,6 +37,7 @@ public class PetBuilder {
     private Set<Tag> tags;
     private Diet diet;
     private Appointment appointment;
+    private AttendanceHashMap attendanceHashMap;
 
     /**
      * Creates a {@code PetBuilder} with the default details.
@@ -44,6 +50,7 @@ public class PetBuilder {
         tags = new HashSet<>();
         diet = new Diet(DEFAULT_DIET);
         appointment = new Appointment(DEFAULT_APPOINTMENT);
+        attendanceHashMap = new AttendanceHashMap();
     }
 
     /**
@@ -57,6 +64,7 @@ public class PetBuilder {
         diet = petToCopy.getDiet();
         appointment = petToCopy.getAppointment();
         tags = new HashSet<>(petToCopy.getTags());
+        attendanceHashMap = petToCopy.getAttendanceHashMap();
     }
 
     /**
@@ -115,8 +123,31 @@ public class PetBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code PresentAttendanceEntry} of the {@code Pet} that we are building.
+     */
+    public PetBuilder withPresentAttendanceEntry(String attendanceDate, String pickUpTime, String dropOffTime) {
+        this.attendanceHashMap = attendanceHashMap.addAttendance(
+                new PresentAttendanceEntry(
+                        LocalDate.parse(attendanceDate),
+                        LocalTime.parse(pickUpTime),
+                        LocalTime.parse(dropOffTime)));
+        return this;
+    }
+
+    /**
+     * Sets the {@code PresentAttendanceEntry} of the {@code Pet} that we are building.
+     */
+    public PetBuilder withAbsentAttendanceEntry(String attendanceDate) {
+        this.attendanceHashMap = attendanceHashMap.addAttendance(
+                new AbsentAttendanceEntry(
+                        LocalDate.parse(attendanceDate)
+                )
+        );
+        return this;
+    }
     public Pet build() {
-        return new Pet(name, ownerName, phone, address, tags, diet, appointment);
+        return new Pet(name, ownerName, phone, address, tags, diet, appointment, attendanceHashMap);
     }
 
 }

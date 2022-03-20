@@ -18,7 +18,7 @@ import seedu.address.storage.JsonAdaptedAttendance;
  */
 public class AttendanceUtil {
     public static final String ATTENDANCE_DATE_GUI_FORMAT = "dd/MM";
-    public static final String ATTENDANCE_DATE_FORMAT = "dd/MM/yyyy";
+    public static final String ATTENDANCE_DATE_FORMAT = "dd-MM-yyyy";
     public static final DateTimeFormatter ATTENDANCE_DATE_GUI_FORMATTER =
             DateTimeFormatter.ofPattern(ATTENDANCE_DATE_GUI_FORMAT);
     public static final DateTimeFormatter ATTENDANCE_DATE_FORMATTER =

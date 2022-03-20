@@ -81,7 +81,7 @@ public class PresentAttendanceCommand extends Command {
                     attendanceDateString));
         }
 
-        if(!(PresentAttendanceEntry.isValidInterval(pickUpTime, dropOffTime))) {
+        if(!(PresentAttendanceEntry.isValidTimings(pickUpTime, dropOffTime))) {
             throw new CommandException(PresentAttendanceEntry.MESSAGE_TIME_CONSTRAINTS);
         }
 

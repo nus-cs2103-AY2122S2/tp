@@ -31,25 +31,8 @@ public class Pet {
      * Every field must be present and not null.
      */
     public Pet(Name name, OwnerName ownerName, Phone phone, Address address,
-               Set<Tag> tags, Diet diet, Appointment appointment) {
-        requireAllNonNull(name, ownerName, phone, address, tags, appointment);
-        this.name = name;
-        this.ownerName = ownerName;
-        this.phone = phone;
-        this.address = address;
-        this.diet = diet;
-        this.appointment = appointment;
-        this.tags.addAll(tags);
-        this.attendanceHashMap = new AttendanceHashMap();
-    }
-
-    /**
-     * Constructor used when converting from Jackson-friendly version of {@code Pet}
-     * to a pet in the address book.
-     */
-    public Pet(Name name, OwnerName ownerName, Phone phone, Address address,
                Set<Tag> tags, Diet diet, Appointment appointment, AttendanceHashMap attendanceHashMap) {
-        requireAllNonNull(name, ownerName, phone, address, tags, appointment);
+        requireAllNonNull(name, ownerName, phone, address, tags, appointment, attendanceHashMap);
         this.name = name;
         this.ownerName = ownerName;
         this.phone = phone;

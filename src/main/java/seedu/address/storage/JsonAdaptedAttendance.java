@@ -102,7 +102,7 @@ public class JsonAdaptedAttendance {
             throw new IllegalValueException(pe.getMessage());
         }
 
-        if (!PresentAttendanceEntry.isValidInterval(modelPickUpTime, modelDropOffTime)) {
+        if (!PresentAttendanceEntry.isValidTimings(modelPickUpTime, modelDropOffTime)) {
             throw new IllegalValueException(PresentAttendanceEntry.MESSAGE_TIME_CONSTRAINTS);
         }
 

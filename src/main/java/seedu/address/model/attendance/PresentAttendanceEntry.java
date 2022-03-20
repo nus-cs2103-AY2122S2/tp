@@ -49,7 +49,7 @@ public class PresentAttendanceEntry extends AttendanceEntry {
      * @param dropOffTime the drop off time of the pet.
      * @return true if the pick up time is before the drop off time, false otherwise.
      */
-    public static boolean isValidInterval(LocalTime pickUpTime, LocalTime dropOffTime) {
+    public static boolean isValidTimings(LocalTime pickUpTime, LocalTime dropOffTime) {
         return pickUpTime.isBefore(dropOffTime);
     }
 

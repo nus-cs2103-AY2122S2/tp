@@ -57,19 +57,7 @@ public abstract class AttendanceEntry {
     public abstract Optional<LocalTime> getDropOffTime();
 
     @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true; // short circuit if same object
-        }
-
-        if (!(other instanceof AttendanceEntry)) {
-            return false; // instanceof handles nulls
-        }
-
-        AttendanceEntry otherAttendanceEntry = (AttendanceEntry) other;
-        return attendanceDate.equals(otherAttendanceEntry.attendanceDate)
-                && isPresent.equals(otherAttendanceEntry.isPresent); // state check
-    }
+    public abstract boolean equals(Object other);
 
     @Override
     public int hashCode() {

@@ -30,9 +30,11 @@ public class TypicalPets {
     public static final Pet PIZZA = new PetBuilder().withName("Pizza")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withOwnerName("Benson Meier").withPhone("98765432")
-            .withTags("owesMoney", "friends").withDiet("").withAppointment("").build();
+            .withTags("owesMoney", "friends").withDiet("").withAppointment("")
+            .withPresentAttendanceEntry("2022-03-20", "09:00", "17:30").build();
     public static final Pet BAGEL = new PetBuilder().withName("Bagel").withPhone("95352563")
-            .withOwnerName("Heinz Ketchup").withAddress("wall street").withDiet("").withAppointment("").build();
+            .withOwnerName("Heinz Ketchup").withAddress("wall street").withDiet("").withAppointment("")
+            .withAbsentAttendanceEntry("2022-03-20").build();
     public static final Pet DANIEL = new PetBuilder().withName("Peepee").withPhone("87652533")
             .withOwnerName("Daniel Meier").withAddress("10th street").withTags("friends")
             .withDiet("").withAppointment("").build();

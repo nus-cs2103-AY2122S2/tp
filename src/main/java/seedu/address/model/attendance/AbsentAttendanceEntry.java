@@ -27,4 +27,19 @@ public class AbsentAttendanceEntry extends AttendanceEntry {
     public Optional<LocalTime> getDropOffTime() {
         return Optional.empty();
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true; // short circuit if same object
+        }
+
+        if (!(other instanceof AbsentAttendanceEntry)) {
+            return false; // instanceof handles nulls
+        }
+
+        AbsentAttendanceEntry otherAttendanceEntry = (AbsentAttendanceEntry) other;
+        return this.getAttendanceDate().equals(otherAttendanceEntry.getAttendanceDate())
+                && this.getIsPresent().equals(otherAttendanceEntry.getIsPresent()); // state check
+    }
 }
