@@ -7,7 +7,7 @@ ModuleMateFinder Level 3 (MMF3) is a **desktop app for managing contacts in your
 
 - [Quick Start](#quick-start)
 - [Features](#features)
-  - [Quick Jump](#quick-jump)
+- [Quick Jump](#quick-jump)
 - [FAQ](#faq)
 - [Command Summary](#command-summary)
 
@@ -110,6 +110,9 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS​`
 Examples:
 * `add n/Bob p/87654321 e/bob@u.nus.edu`
 
+Additionally, if one were to simply use `add`, it would open up a new window to allow users to systematically add a new contact
+![addWindow.png](images/addWindow.png)
+
 ### Adding Module(s) to a Contact : `addmodule`
 
 Adds module(s) to an existing contact
@@ -121,8 +124,8 @@ Format: `addmodule INDEX m/MODULE [m/MODULE]...`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `addmodule 2 m/CS1231`
-* `addmodule 2 m/CS1231 m/2103T`
+* `addmodule 2 m/CS1231` Adds a module, `CS1231` to the 2nd person
+* `addmodule 2 m/CS1231 m/CS2103T` Adds two modules, `CS1231` and `CS2103T` to the 2nd person
 
 ### Editing a person : `edit`
 
@@ -166,8 +169,8 @@ Format: `deletemodule INDEX m/MODULE...`
 * The modules will be deleted only if the person has the specified modules.
 
 Examples:
-* `list` followed by `delete 2 m/CS3230` deletes the module CS3230 for the 2nd person in ModuleMate Finder.
-* `find Betsy` followed by `delete 1 m/CS2102 m/CS2040S` deletes the specified modules for the 1st person in the results of the `find` command.
+* `list` followed by `deletemodule 2 m/CS3230` deletes the module CS3230 for the 2nd person in ModuleMate Finder.
+* `find Betsy` followed by `deletemodule 1 m/CS2102 m/CS2040S` deletes the specified modules for the 1st person in the results of the `find` command.
 
 
 ### Clearing all entries : `clear`
@@ -201,7 +204,7 @@ Format: `status INDEX s/STATUS`
 Examples:
 - `status 1 s/blacklist` tags the 1st person in ModuleMate Finder as blacklisted.
 - `status 2 s/favourite` tags the 2nd person in ModuleMate Finder as favourite.
-
+- `status 2 s/` will untag the 2nd person in ModuleMate Finder, leaving them with no `Status`
 
 ### Locating a person: `find`
 
@@ -237,17 +240,17 @@ Examples:
 
 Sort all people within address book.
 
-Format: `sort [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STATUS] [m/MODULE] [o/ORDER]​`
+Format: `sort [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STATUS] [m/MODULE]​`
 
 * Sorts list with specified field(s). For any two persons, latter fields will only be considered if preceding fields are equal.​
-* Order of parameters is important except for that of `o/ORDER`.
-* At least one of the optional fields must be provided (excluding order).
-* Parameters are ignored except for order `o/asc`.
-* Orders are optional and default order is "asc". Parameters of order must be either "asc" or "desc" and is case-insensitive. 
+* Order of fields is important and there must be at least one field.
+* Parameters determine whether field is sorted on ascending or descending order.
+* Parameters are optional must be either "asc", "desc" or an empty string "". Empty string "" is ascending by default.
+* Parameters are case-insensitive. 
 
 Examples:
-* `sort n/ p/`  will sort the list by name first. If two persons have the same name, then sort by phone number.
-* `sort n/ o/desc` will sort the list by name in descending order.
+* `sort n/asc p/desc`  will sort the list by name in ascending order first. If two persons have the same name, then sort by phone number in descending order.
+* `sort n/` will sort the list by name in ascending order by default.
 
 ### Undo a command : `undo`
 
