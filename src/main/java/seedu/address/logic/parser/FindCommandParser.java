@@ -41,19 +41,19 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         String[] keywords;
         if (args.contains(PREFIX_NAME.getPrefix())) {
-            keywords = parseName(args).split("\\s");
+            keywords = parseName(args).split("\\s+");
             AttributeContainsKeywordsPredicate type = new NameContainsKeywordsPredicate(Arrays.asList(keywords));
             return new FindCommand(type);
         } else if (args.contains(PREFIX_PHONE.getPrefix())) {
-            keywords = parsePhone(args).split("\\s");
+            keywords = parsePhone(args).split("\\s+");
             AttributeContainsKeywordsPredicate type = new PhoneContainsKeywordsPredicate(Arrays.asList(keywords));
             return new FindCommand(type);
         } else if (args.contains(PREFIX_EMAIL.getPrefix())) {
-            keywords = parseEmail(args).split("\\s");
+            keywords = parseEmail(args).split("\\s+");
             AttributeContainsKeywordsPredicate type = new EmailContainsKeywordsPredicate(Arrays.asList(keywords));
             return new FindCommand(type);
         } else if (args.contains(PREFIX_ACADEMIC_MAJOR.getPrefix())) {
-            keywords = parseAcademicMajor(args).split("\\s");
+            keywords = parseAcademicMajor(args).split("\\s+");
             AttributeContainsKeywordsPredicate type =
                     new AcademicMajorContainsKeywordsPredicate(Arrays.asList(keywords));
             return new FindCommand(type);

@@ -22,7 +22,7 @@ public class FindCommand extends Command {
             + "Attributes can be accessed by adding prefixes before the keywords.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + " alice bob charlie "
-            + "or " + COMMAND_WORD + " " + PREFIX_ACADEMIC_MAJOR + "Computer Science";
+            + "or " + COMMAND_WORD + " " + PREFIX_ACADEMIC_MAJOR + " Computer Science";
 
     private final AttributeContainsKeywordsPredicate predicate;
 
