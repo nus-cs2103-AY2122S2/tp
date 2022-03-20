@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.util.logging.Logger;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -11,15 +13,14 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-import java.util.logging.Logger;
-
 
 /**
  * Controller for an Edit page
  */
 public class EditWindow extends UiPart<Stage> {
 
-    public static final String HELP_MESSAGE = "You can edit a person easily here.\nIndex must be provided, and at least one other field.";
+    public static final String HELP_MESSAGE = "You can edit a person easily here."
+            + "\nIndex must be provided, and at least one other field.";
     public static final String INDEX_LABEL = "Index: ";
     public static final String NAME_LABEL = "Name: ";
     public static final String PHONE_LABEL = "Number: ";
