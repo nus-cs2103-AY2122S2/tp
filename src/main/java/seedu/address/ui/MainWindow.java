@@ -211,7 +211,7 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
 
-            if (commandResult.isCopy()) {
+            if (commandResult.isCopyCommand()) {
                 resultDisplay.setFeedbackToUser("Successfully copied to clipboard!\n");
                 handleCopy(commandResult);
             } else {
