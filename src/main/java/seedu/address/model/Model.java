@@ -22,6 +22,8 @@ public interface Model {
     Predicate<Company> PREDICATE_SHOW_NO_COMPANIES = unused -> false;
     Predicate<Event> PREDICATE_SHOW_NO_EVENTS = unused -> false;
 
+    enum ListType { PERSON, COMPANY, EVENT }
+
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -174,4 +176,9 @@ public interface Model {
      * Updates filtered lists to show only the Events list filtered through the {@code predicate}.
      */
     void showEventList(Predicate<Event> predicate);
+
+    /**
+     * Returns the currently displayed ListType
+     */
+    ListType getCurrentlyDisplayedListType();
 }

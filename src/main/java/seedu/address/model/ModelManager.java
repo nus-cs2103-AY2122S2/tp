@@ -21,14 +21,12 @@ import seedu.address.model.entry.Person;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private enum ListType { PERSON, COMPANY, EVENT };
-
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Company> filteredCompanies;
     private final FilteredList<Event> filteredEvents;
-    private ListType currentShownListType;
+    private ListType currentlyDisplayedListType;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -44,7 +42,7 @@ public class ModelManager implements Model {
         filteredCompanies = new FilteredList<>(this.addressBook.getCompanyList());
         filteredEvents = new FilteredList<>(this.addressBook.getEventList());
 
-        currentShownListType = ListType.PERSON;
+        currentlyDisplayedListType = ListType.PERSON;
     }
 
     public ModelManager() {
@@ -168,19 +166,19 @@ public class ModelManager implements Model {
     @Override
     public void showPersonList(Predicate<Person> predicate) {
         updateFilteredLists(predicate, PREDICATE_SHOW_NO_COMPANIES, PREDICATE_SHOW_NO_EVENTS);
-        currentShownListType = ListType.PERSON;
+        currentlyDisplayedListType = ListType.PERSON;
     }
 
     @Override
     public void showCompanyList(Predicate<Company> predicate) {
         updateFilteredLists(PREDICATE_SHOW_NO_PERSONS, predicate, PREDICATE_SHOW_NO_EVENTS);
-        currentShownListType = ListType.COMPANY;
+        currentlyDisplayedListType = ListType.COMPANY;
     }
 
     @Override
     public void showEventList(Predicate<Event> predicate) {
         updateFilteredLists(PREDICATE_SHOW_NO_PERSONS, PREDICATE_SHOW_NO_COMPANIES, predicate);
-        currentShownListType = ListType.EVENT;
+        currentlyDisplayedListType = ListType.EVENT;
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -219,8 +217,9 @@ public class ModelManager implements Model {
         filteredCompanies.setPredicate(predicate);
     }
 
-    public ListType getCurrentShownListType() {
-        return currentShownListType;
+    @Override
+    public ListType getCurrentlyDisplayedListType() {
+        return currentlyDisplayedListType;
     }
 
     @Override
