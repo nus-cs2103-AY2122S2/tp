@@ -101,7 +101,7 @@ Format: `add class id/CLASSGROUP_ID t/CLASSGROUP_TYPE m/MODULE_INDEX`
 * TAssist supports the following class group types: lab, recitation, sectional and tutorial.
 
 Examples:
-* `add class id/T13 t/tutorial m/1` creates a new class group that is tied to the 1st module shown when `list module` is run. 
+* `add class id/T13 t/tutorial m/1` creates a new class group that is tied to the 1st module shown when `list module` is run.
 
 ### Listing entries
 
@@ -122,6 +122,22 @@ Format: `list module`
 Shows a list of all class groups.
 
 Format: `list class`
+
+
+### Filtering entries
+
+#### Filtering students
+
+list student [m/<MODULE_INDEX> OR c/<CLASS_GROUP_INDEX>]
+
+
+list student c/2
+list student m/1
+
+#### Filtering class groups
+
+list class [m/<MODULE_INDEX>]
+list class m/1
 
 ### Deleting entries
 

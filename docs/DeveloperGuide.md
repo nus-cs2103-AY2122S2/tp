@@ -168,7 +168,7 @@ The proposed delete mechanism is facilitated by `TAssist`. Its functionality, us
 * `DeleteCommand#execute()` — Executes `ModelManager#deleteEntity()` with the specified entity.
 * `ModelManager#deleteEntity()` — Deletes the specified entity.
 
-However, when a `TaModule` object is deleted, its associated `ClassGroup` objects are also deleted. 
+However, when a `TaModule` object is deleted, its associated `ClassGroup` objects are also deleted.
 
 Given below is an example usage scenario using `Student` objects and how the delete mechanism behaves at each step.
 
@@ -182,8 +182,7 @@ Step 3. The user executes `delete student 2` to delete the 2nd student in the li
 
 ![DeleteState1](images/DeleteState1.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `DeleteCommand#execute()`, instead a `CommandException` will be thrown and no entities will be deleted.  
-
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `DeleteCommand#execute()`, instead a `CommandException` will be thrown and no entities will be deleted.
 </div>
 
 The following sequence diagram shows how the delete operation works:
