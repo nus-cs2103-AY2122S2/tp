@@ -54,6 +54,10 @@ public class LogicManager implements Logic {
         return commandResult;
     }
 
+    public Model getModel() {
+        return model;
+    }
+
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return model.getAddressBook();
