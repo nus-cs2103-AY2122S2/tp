@@ -43,7 +43,7 @@ public class TypicalPersons {
             .withPhone("95352563")
             .withEmail("heinz@example.com")
             .withGithubUsername("kurz-carl")
-            .isPotentialTeammate(false)
+            .isPotentialTeammate(true)
             .build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier")
             .withPhone("87652533")

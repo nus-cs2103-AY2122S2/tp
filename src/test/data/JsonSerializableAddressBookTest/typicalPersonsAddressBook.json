@@ -21,7 +21,7 @@
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "username" : "kurz-carl",
-    "isPotentialTeammate": false,
+    "isPotentialTeammate": true,
     "teams" : [ ],
     "skillSet" : [ ]
   }, {

@@ -3,7 +3,9 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -37,8 +39,9 @@ public class MakeTeamCommand extends Command {
     public static final String MESSAGE_DUPLICATE_ADDING = "Person is already a potential teammate!";
     public static final String MESSAGE_DUPLICATE_REMOVAL = "Person is not part of your potential team!";
 
-    private final Index targetIndex;
+    private static final Logger logger = LogsCenter.getLogger(MakeTeamCommand.class);
 
+    private final Index targetIndex;
     private final TeamAction action;
 
     /**
@@ -82,6 +85,7 @@ public class MakeTeamCommand extends Command {
             successMessage = MESSAGE_REMOVE_TEAMMATE_SUCCESS;
             break;
         default:
+            logger.warning("Invalid enum value: " + action.toString());
             throw new CommandException(MESSAGE_INVALID_TEAM_ACTION);
         }
         model.setPerson(personToUpdate, updatedPerson);

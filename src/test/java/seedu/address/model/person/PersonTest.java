@@ -80,8 +80,12 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different address -> returns false
+        // different username -> returns false
         editedAlice = new PersonBuilder(ALICE).withGithubUsername(VALID_USERNAME_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different isPotentialTeammate field -> returns false
+        editedAlice = new PersonBuilder(ALICE).isPotentialTeammate(true).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different s -> returns false
