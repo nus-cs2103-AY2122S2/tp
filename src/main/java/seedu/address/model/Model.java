@@ -159,4 +159,19 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredEventList(Predicate<Event> predicate);
+
+    /**
+     * Updates filtered lists to show only the Persons list filtered through the {@code predicate}.
+     */
+    void showPersonList(Predicate<Person> predicate);
+
+    /**
+     * Updates filtered lists to show only the Company list filtered through the {@code predicate}.
+     */
+    void showCompanyList(Predicate<Company> predicate);
+
+    /**
+     * Updates filtered lists to show only the Events list filtered through the {@code predicate}.
+     */
+    void showEventList(Predicate<Event> predicate);
 }
