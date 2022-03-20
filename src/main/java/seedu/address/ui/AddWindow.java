@@ -24,7 +24,7 @@ import seedu.address.model.person.Status;
  */
 public class AddWindow extends UiPart<Stage> {
 
-    public static final String HELP_MESSAGE = "You can add a person easily here";
+    public static final String HELP_MESSAGE = "Add a new contact";
     public static final String NAME_LABEL = "Name: ";
     public static final String PHONE_LABEL = "Number: ";
     public static final String ADDRESS_LABEL = "Address: ";
