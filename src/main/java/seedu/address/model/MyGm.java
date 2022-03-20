@@ -17,7 +17,7 @@ import seedu.address.model.team.TeamName;
  */
 public class MyGm {
     private final UniquePlayerList players;
-    private final UniqueTeamList teams;
+    //private final UniqueTeamList teams;
     private final List<Team> tempteams; // NOTE: TEMPORARY FOR TX'S FUNCTION
 
     /**
@@ -25,13 +25,21 @@ public class MyGm {
      */
     public MyGm() {
         this.players = new UniquePlayerList();
-        this.teams = new UniqueTeamList();
+        //this.teams = new UniqueTeamList();
         this.tempteams = new ArrayList<>();
     }
 
     //// list overwrite operations
     public void setPersons(List<Person> persons) {
         //this.players.setPersons(persons);
+    }
+
+    public boolean isFull() {
+        return players.isFull();
+    }
+
+    public void addPerson(Person player) {
+        players.addPerson(player);
     }
 
     /**
@@ -55,11 +63,19 @@ public class MyGm {
     }
 
     public boolean hasPerson(Person player) {
-        return true; // players.containsName(targetName);
+        return players.containsPerson(player);
+    }
+
+    public boolean hasJerseyNumber(Person player) {
+        return players.containsJerseyNumber(player.getJerseyNumber());
     }
 
     public Person getPerson(Name targetPersonName) {
         return players.getPerson(targetPersonName);
+    }
+
+    public String getAvailableJerseyNumber() {
+        return players.getAvailableJerseyNumber();
     }
 
     public void setPerson(Person target, Person editedPerson) {

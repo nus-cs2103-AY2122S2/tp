@@ -61,6 +61,21 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns true if the Jersey number specified by {@code person} is already taken.
+     */
+    boolean hasJerseyNumber(Person person);
+
+    /**
+     * Returns a String representation of available jersey numbers.
+     */
+    String getAvailableJerseyNumber();
+
+    /**
+     * Returns true if number of players has reached maximum capacity.
+     */
+    boolean isFull();
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */

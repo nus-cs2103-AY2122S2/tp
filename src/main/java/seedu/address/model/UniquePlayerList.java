@@ -2,10 +2,14 @@ package seedu.address.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.stream.IntStream;
 import java.util.List;
 import java.util.Map;
 
 import seedu.address.model.lineup.Lineup;
+import seedu.address.model.person.JerseyNumber;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.team.Team;
@@ -16,6 +20,9 @@ import seedu.address.model.team.Team;
  * and a map from players to their lineups.
  */
 public class UniquePlayerList {
+    private static final int MAXIMUM_CAPACITY = 100;
+
+    private final Map<JerseyNumber, Person> jerseyToPersonMap;
     private final Map<Name, Person> nameToPersonMap;
     private final Map<Person, Team> personToTeamMap;
     private final Map<Person, List<Lineup>> personToLineupMap;
@@ -24,6 +31,7 @@ public class UniquePlayerList {
      * Cretes a new MyGM object.
      */
     public UniquePlayerList() {
+        this.jerseyToPersonMap = new HashMap<JerseyNumber, Person>();
         this.nameToPersonMap = new HashMap<Name, Person>();
         this.personToTeamMap = new HashMap<Person, Team>();
         this.personToLineupMap = new HashMap<Person, List<Lineup>>();
@@ -46,13 +54,37 @@ public class UniquePlayerList {
     }
 
     /**
+     * Checks if a Jersey number is already taken by some player.
+     * @param jerseyNumber
+     * @return
+     */
+    public boolean containsJerseyNumber(JerseyNumber jerseyNumber) {
+        return this.jerseyToPersonMap.containsKey(jerseyNumber);
+    }
+
+    public String getAvailableJerseyNumber() {
+        Stream<Integer> stream = IntStream.range(0, MAXIMUM_CAPACITY).boxed();
+        List<Integer> ls = stream.filter(x -> !this.jerseyToPersonMap.containsKey(new JerseyNumber(((Integer) x).toString())))
+                .collect(Collectors.toList());
+        return ls.toString();
+    }
+
+    /**
      * Adds a person to the system.
      */
     public void addPerson(Person person) {
         Name name = person.getName();
         if (!this.nameToPersonMap.containsKey(name)) {
             this.nameToPersonMap.put(name, person);
+            this.jerseyToPersonMap.put(person.getJerseyNumber(), person);
         }
+    }
+
+    /**
+     * @return Returns true if the number of players has reached the maximum capcity.
+     */
+    public boolean isFull() {
+        return nameToPersonMap.size() == MAXIMUM_CAPACITY;
     }
 
     /**
