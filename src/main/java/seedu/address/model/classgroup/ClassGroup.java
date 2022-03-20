@@ -43,13 +43,11 @@ public class ClassGroup implements Entity {
         return taModule;
     }
 
-    //@@author lkldev
     @Override
     public EntityType getEntityType() {
         return EntityType.CLASS_GROUP;
     }
 
-    //@@author jxt00
     /**
      * Returns true if both class groups have the same identity and fields.
      */

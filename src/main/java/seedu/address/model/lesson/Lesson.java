@@ -28,7 +28,7 @@ public class Lesson {
     public Lesson(WeekId weekId) {
         requireAllNonNull(weekId);
         this.weekId = weekId;
-        this.studentAttendanceList = new ArrayList<>();
+        this.studentAttendanceList = new ArrayList<StudentAttendance>();
     }
 
     /**
@@ -41,7 +41,7 @@ public class Lesson {
     public Lesson(WeekId weekId, List<StudentAttendance> studentAttendanceList) {
         requireAllNonNull(weekId, studentAttendanceList);
         this.weekId = weekId;
-        this.studentAttendanceList = new ArrayList<>(studentAttendanceList);
+        this.studentAttendanceList = new ArrayList<StudentAttendance>(studentAttendanceList);
     }
 
     public WeekId getWeekId() {
