@@ -101,7 +101,6 @@ class JsonAdaptedPerson {
         if (block == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Block.class.getSimpleName()));
         }
-
         if (!Block.isValidBlock(block)) {
             throw new IllegalValueException(Block.MESSAGE_CONSTRAINTS);
         }
