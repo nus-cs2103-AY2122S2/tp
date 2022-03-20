@@ -2,10 +2,7 @@ package seedu.address.ui;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -24,10 +21,6 @@ public class CommandBox extends UiPart<Region> {
     @FXML
     private TextField commandTextField;
 
-    @FXML
-    private Button copyButton;
-    private String copiedText;
-
     /**
      * Creates a {@code CommandBox} with the given {@code CommandExecutor}.
      */
@@ -36,7 +29,6 @@ public class CommandBox extends UiPart<Region> {
         this.commandExecutor = commandExecutor;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
-        copyButton.setDisable(true);
     }
 
     /**
@@ -75,29 +67,6 @@ public class CommandBox extends UiPart<Region> {
         }
 
         styleClass.add(ERROR_STYLE_CLASS);
-    }
-
-    public void enableButton() {
-        copyButton.setDisable(false);
-    }
-
-    public void disableButton() {
-        copyButton.setDisable(true);
-    }
-
-    public void setCopiedText(String copiedText) {
-        this.copiedText = copiedText;
-    }
-
-    /**
-     * Copies the content to the clipboard beside command line.
-     */
-    @FXML
-    private void copyContent() {
-        final Clipboard clipboard = Clipboard.getSystemClipboard();
-        final ClipboardContent content = new ClipboardContent();
-        content.putString(copiedText);
-        clipboard.setContent(content);
     }
 
     /**

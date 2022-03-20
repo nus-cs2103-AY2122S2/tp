@@ -68,7 +68,7 @@ public class SortCommandParser implements Parser<SortCommand> {
         List<List<String>> formattedFields = new ArrayList<>();
         for (int i = 0; i < fields.size(); i++) {
             List<String> formattedField = new ArrayList<>();
-            formattedField.add(formatPrefix(fields.get(i)));
+            formattedField.add((fields.get(i)).getDescription());
             if (orders.get(i).equals("")) {
                 formattedField.add(defaultOrder);
             } else {
@@ -77,23 +77,5 @@ public class SortCommandParser implements Parser<SortCommand> {
             formattedFields.add(formattedField);
         }
         return formattedFields.toString();
-    }
-
-    private static String formatPrefix(Prefix prefix) throws ParseException {
-        if (prefix.equals(PREFIX_NAME)) {
-            return "Name";
-        } else if (prefix.equals(PREFIX_PHONE)) {
-            return "Phone";
-        } else if (prefix.equals(PREFIX_EMAIL)) {
-            return "Email";
-        } else if (prefix.equals(PREFIX_ADDRESS)) {
-            return "Address";
-        } else if (prefix.equals(PREFIX_STATUS)) {
-            return "Status";
-        } else if (prefix.equals(PREFIX_MODULE)) {
-            return "Module";
-        } else {
-            throw new ParseException("Prefix is not supported");
-        }
     }
 }

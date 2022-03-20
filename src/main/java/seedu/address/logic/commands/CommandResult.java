@@ -21,7 +21,7 @@ public class CommandResult {
     private final boolean exit;
 
     /** The application should copy. */
-    private final boolean isCopy;
+    private final boolean isCopyCommand;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
@@ -31,7 +31,7 @@ public class CommandResult {
         this.showHelp = showHelp;
         this.showAdd = showAdd;
         this.exit = exit;
-        this.isCopy = false;
+        this.isCopyCommand = false;
     }
 
     /**
@@ -42,7 +42,7 @@ public class CommandResult {
         this.showHelp = showHelp;
         this.showAdd = showAdd;
         this.exit = exit;
-        this.isCopy = isCopy;
+        this.isCopyCommand = isCopy;
     }
 
     /**
@@ -69,8 +69,8 @@ public class CommandResult {
         return exit;
     }
 
-    public boolean isCopy() {
-        return isCopy;
+    public boolean isCopyCommand() {
+        return isCopyCommand;
     }
 
     @Override
