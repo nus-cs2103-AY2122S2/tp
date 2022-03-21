@@ -35,10 +35,6 @@ public class Task {
         this.type = "";
     }
 
-    /**
-     * Returns X if the task is done, otherwise blank.
-     * @return the string representation of the status of the task.
-     */
     public String getStatusIcon() {
         if (this.isDone()) {
             return "X";
@@ -46,18 +42,6 @@ public class Task {
             return " ";
         }
     }
-
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    /*
-    public Set<Tag> getTags() {
-       return Collections.unmodifiableSet(tags);
-    }
-
-     */
-
 
     public void setTaskDone() {
         this.isDone = true;
@@ -79,6 +63,10 @@ public class Task {
         return this.type;
     }
 
+    /**
+     * Checks if the task is done or not.
+     * @return true if task is done, false otherwise.
+     */
     public boolean isDone() {
         return isDone;
     }
@@ -93,7 +81,7 @@ public class Task {
     }
 
     /**
-     * Returns true if both Task have the same name.
+     * Returns true if both Task have the same Description.
      * This defines a weaker notion of equality between two Task.
      */
     public boolean isSameTask(Task otherTask) {

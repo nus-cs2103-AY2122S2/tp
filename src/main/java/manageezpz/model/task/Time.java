@@ -25,6 +25,10 @@ public class Time {
         this.time = time;
     }
 
+    /**
+     * Checks if a given string is a valid time.
+     * @return true if a given string is a valid time, false otherwise
+     */
     public static boolean isValidTime(String time) {
         return time.matches(VALIDATION_REGEX) && time.matches("([01]?[0-9]|2[0-3])[0-5][0-9]");
     }

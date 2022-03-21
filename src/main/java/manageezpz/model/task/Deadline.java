@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     private Date date;
     private Time time;
+
     /**
      * Constructor for the Task class.
      *
