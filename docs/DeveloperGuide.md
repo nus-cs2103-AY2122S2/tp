@@ -190,6 +190,25 @@ Marks a specific undone task as done for a particular student.
 
 ![MarkCommandSequenceDiagram](images/MarkCommandSequenceDiagram.png)
 
+### Unmark Command
+
+#### Description
+
+Marks a specific done task as undone for a particular student.
+
+#### Implementation
+1. The `LogicManager` starts to parse the given input text using `AddressBookParser`.
+2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
+3. The remaining input text will be passed to the `UnmarkCommandParser` to parse.
+4. The `UnmarkCommandParser` will tokenize the remaining input text using the `ArgumentTokenizer` into an `ArgumentMultiMap`.
+5. The `UnmarkCommandParser` will then create a new `StudentId` and `Index` using the `ArgumentMultiMap`.
+6. The `UnmarkCommandParser` will then create a `UnmarkCommand` with the `StudentId` and `Index`.
+7. The `LogicManager` will call the `execute` method of `UnmarkCommand`.
+8. The `UnmarkCommand` will then call the `unmarkTaskOfPerson` method of the provided `Model` with its `StudentId` and `Index`
+9. The `UnmarkCommand` will finally create a new `CommandResult` which will be returned to `LogicManager`
+
+![MarkCommandSequenceDiagram](images/UnmarkCommandSequenceDiagram.png)
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
