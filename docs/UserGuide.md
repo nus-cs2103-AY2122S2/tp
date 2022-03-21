@@ -137,7 +137,7 @@ Notes:
 
 Finds clients whose field contains any of the given keywords.
 
-Format: `find FIELD KEYWORD [MORE_KEYWORDS]`
+Format: `find FIELD KEYWORD [MORE_KEYWORDS] [MORE_FIELD] [MORE_KEYWORDS]`
 
 Fields:
 * `n/`: name
@@ -151,17 +151,22 @@ Notes:
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * The fields described above can be searched
+* It is possible to search for multiple fields, and the order of the fields does not matter.
 
 Examples:
 * `find n/John` returns `john` and `John Doe`
 * `find p/91234567` returns the client that is associated to the number
 * `find a/street` returns the client associated with the address
+* `find i/undecided n/david` returns the client with the Undecided insurance package and with name containing David
 
 After a `find` command:
-
-![result for 'find alex david'](images/findAlexDavidResultUG.png)
 * `find n/ alex david` returns `Alex Yeoh`, `David Li`
 
+![result for 'find n/alex david'](images/findAlexDavidResultUG.png)
+
+* `find i/undecided n/david` returns `David Li`
+
+![result for 'find i/undecided n/david'](images/findUndecidedDavid.png)
 
 ### Deleting a person : `delete`
 
