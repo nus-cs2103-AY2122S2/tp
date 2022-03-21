@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.classgroup.exceptions.ClassGroupNotFoundException;
 import seedu.address.model.classgroup.exceptions.DuplicateClassGroupException;
 
+//@@author jxt00
 /**
  * A list of class groups that enforces uniqueness between its elements and does not allow nulls.
  * A class group is considered unique by comparing using {@code ClassGroup#equals(ClassGroup)}.
