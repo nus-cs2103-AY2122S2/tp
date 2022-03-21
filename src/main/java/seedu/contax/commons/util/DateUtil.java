@@ -5,20 +5,20 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
+import seedu.contax.commons.util.datetimeparser.DateParser;
+import seedu.contax.commons.util.datetimeparser.TimeParser;
+
 /**
- * Provides parsing services for dates and times used in the application.
+ * Provides helper methods for working with date and time objects.
+ * Serves as a facade for date and time parsing services.
  */
 public class DateUtil {
 
-    public static final String DATE_PATTERN = "dd-MM-yyyy";
-    public static final String TIME_PATTERN = "HH:mm";
-
     /**
      * Parses a date input string to a {@code LocalDate} object.
+     * See {@link DateParser#parseDate(String)} for detailed information on accepted formats.
      *
      * @param input The input date string to parse.
      * @return An Optional container that contains a LocalDate object if parsing was successful, or an empty
@@ -26,17 +26,12 @@ public class DateUtil {
      */
     public static Optional<LocalDate> parseDate(String input) {
         requireNonNull(input);
-
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(DATE_PATTERN);
-        try {
-            return Optional.ofNullable(LocalDate.parse(input, dateFormatter));
-        } catch (DateTimeParseException ex) {
-            return Optional.empty();
-        }
+        return DateParser.parseDate(input);
     }
 
     /**
      * Parses a time input string to a {@code LocalTime} object.
+     * See {@link TimeParser#parseTime(String)} for detailed information on accepted formats.
      *
      * @param input The input time string to parse.
      * @return An Optional container that contains a LocalTime object if parsing was successful, or an empty
@@ -44,13 +39,7 @@ public class DateUtil {
      */
     public static Optional<LocalTime> parseTime(String input) {
         requireNonNull(input);
-
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern(TIME_PATTERN);
-        try {
-            return Optional.of(LocalTime.parse(input, timeFormatter));
-        } catch (DateTimeParseException ex) {
-            return Optional.empty();
-        }
+        return TimeParser.parseTime(input);
     }
 
     /**
