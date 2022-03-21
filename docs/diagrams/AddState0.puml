@@ -14,7 +14,7 @@ package State {
 
 State1 *--> Student1
 State1 *--> ClassGroup1
-ClassGroup1 *--> Module1
+Module1 *--> ClassGroup1
 State1 *--> Module1
 
 @end

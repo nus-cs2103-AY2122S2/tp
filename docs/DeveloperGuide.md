@@ -158,11 +158,9 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Add feature
+###  Add Feature
 
-#### Proposed Implementation
-
-The proposed add mechanism is facilitated by `TAssist`. Its functionality, usage and behaviour is the same for all entities. Additionally, it implements the following operations:
+The add mechanism is facilitated by `TAssist`. Its functionality, usage and behaviour is the same for all entities. Additionally, it implements the following operations:
 
 * `AddCommandParser#parse()` — Parses the command arguments.
 * `AddCommand#execute()` — Executes `ModelManager#addEntity()` with the specified entity.
@@ -222,7 +220,7 @@ Step 1. The user launches the application. The `TAssist` is already populated wi
 
 Step 2. The user executes `list student` command to list the students in the `TAssist`. The `list` command implementation is detailed below in the List Feature section.
 
-Step 3. The user executes `delete student 2` to delete the 2nd student in the list which is `s2`. The `delete` command also calls `DeleteCommandParser#parse()`, which parses the input and returns the index and entity type.
+Step 3. The user executes `delete student 2` to delete the 2nd student in the list which is `s2`. The `delete` command also calls `DeleteCommandParser#parse()`, which parses the input and return the index and entity type.
 
 ![DeleteState1](images/DeleteState1.png)
 
@@ -241,11 +239,9 @@ The following activity diagram summarizes what happens when a user executes a de
 
 <img src="images/DeleteActivityDiagram.png" width="250" />
 
-### \[Proposed\] Enrol feature
+### Enrol feature
 
-#### Proposed Implementation
-
-The proposed enrol mechanism is facilitated by `TAssist`. Its functionality, usage and behaviour is the only for student entity. Additionally, it implements the following operations:
+The enrol mechanism is facilitated by `TAssist`. Its functionality, usage and behaviour is the only for student entity. Additionally, it implements the following operations:
 
 * `EnrolCommandParser#parse()` — Parses the command arguments.
 * `EnrolCommand#execute()` — Executes `ModelManager#enrolStudent()` with given student(s) and class group.
