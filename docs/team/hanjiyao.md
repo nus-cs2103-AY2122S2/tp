@@ -17,7 +17,7 @@ Given below are my contributions to the project.
   * Highlights: `To be added soon`
   * Credits: `To be added soon`
 
-* **Code contributed**: 
+* **Code contributed**:
   * 2000+ LoC contributed
   * Add relevant testcases
 

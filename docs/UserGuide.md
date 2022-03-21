@@ -224,7 +224,7 @@ Format: `edittag INDEX t/NEW_TAGNAME`
 * An error will be thrown if the tag at `INDEX` has the same name as `NEW_TAGNAME`
 
 Examples:
-* `edittag 1 t/Prospective Clients` Changes the name of first tag in the list to *Prospective Clients*. 
+* `edittag 1 t/Prospective Clients` Changes the name of first tag in the list to *Prospective Clients*.
 
 ### Listing All Tags : `listtags`
 
