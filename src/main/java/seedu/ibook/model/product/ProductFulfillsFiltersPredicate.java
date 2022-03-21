@@ -2,6 +2,7 @@ package seedu.ibook.model.product;
 
 import java.util.function.Predicate;
 
+// TODO: change this to compound filter
 public class ProductFulfillsFiltersPredicate implements Predicate<Product> {
     private final Product product;
 

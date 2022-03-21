@@ -71,6 +71,29 @@ public class Item implements Comparable<Item> {
         return new Item(product, expiryDate, newQuantity);
     }
 
+    /**
+     * Increase the quantity of the item.
+     */
+    public Item increment(Quantity quantity) {
+        Quantity newQuantity = this.quantity.add(quantity);
+        return new Item(product, expiryDate, newQuantity);
+    }
+
+    /**
+     * Decrease the quantity of the item.
+     */
+    public Item decrement(Quantity quantity) {
+        Quantity newQuantity = this.quantity.subtract(quantity);
+        return new Item(product, expiryDate, newQuantity);
+    }
+
+    /**
+     * Checks if the quantity of the item is zero.
+     */
+    public boolean isEmpty() {
+        return quantity.isEmpty();
+    }
+
     public boolean isExpired() {
         return expiryDate.isPast();
     }
