@@ -17,6 +17,7 @@ public class StatusContainsKeywordsPredicate implements Predicate<Show> {
 
     @Override
     public boolean test(Show show) {
+        // Checks for fragmented words in status
         return keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsFragmentedWordIgnoreCase(show.getStatus().toString(), keyword));
     }

@@ -43,7 +43,7 @@ public class StringUtil {
      *   Ignores case, but a fragmented word match is required.
      *   <br>examples:<pre>
      *       containsFragmentedWordIgnoreCase("ABc def", "abc") == true
-     *       containsFragmentedWordIgnoreCase("ABc def", "AB") == true
+     *       containsFragmentedWordIgnoreCase("ABc def", "de") == true
      *       containsFragmentedWordIgnoreCase("ABc def", "df") == false // not in order
      *       </pre>
      * @param sentence cannot be null
