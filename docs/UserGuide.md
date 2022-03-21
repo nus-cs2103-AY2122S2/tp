@@ -135,7 +135,7 @@ Notes:
 
 ### Locating persons by field: `find`
 
-Finds clients whose field contains any of the given keywords. 
+Finds clients whose field contains any of the given keywords.
 
 Format: `find FIELD KEYWORD [MORE_KEYWORDS] [MORE_FIELD] [MORE_KEYWORDS]`
 
@@ -164,7 +164,7 @@ After a `find` command:
 
 ![result for 'find n/alex david'](images/findAlexDavidResultUG.png)
 
-* `find i/undecided n/david` returns `David Li` 
+* `find i/undecided n/david` returns `David Li`
 
 ![result for 'find i/undecided n/david'](images/findUndecidedDavid.png)
 
