@@ -96,12 +96,55 @@ Examples:
 
 Adds a class group to TAssist.
 
-Format: `add class id/CLASSGROUP_ID t/CLASSGROUP_TYPE m/MODULE_INDEX`
+Format: `add class id/CLASS_GROUP_ID t/CLASS_GROUP_TYPE m/MODULE_INDEX`
 
 * TAssist supports the following class group types: lab, recitation, sectional and tutorial.
 
 Examples:
 * `add class id/T13 t/tutorial m/1` creates a new class group that is tied to the 1st module shown when `list module` is run.
+
+### Enrolling students
+
+Enrols 1 or more students to a class group.
+
+Format: `enrol c/CLASS_GROUP_INDEX s/COMMA_SEPARATED_INDEXES`
+
+* Enrols the students at the specified `COMMA_SEPARATED_INDEXES` to the class group at the specified `CLASS_GROUP_INDEX`.
+* The index refers to the index number shown in the displayed student or class group list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `enrol c/1 s/1,2,3,4,5,6` enrols the 1st 6 students shown when `list student` is run to the 1st class group shown when `list class` is run.
+
+### Taking student attendance
+
+#### Marking attendance
+
+Marks student(s)' attendance.
+
+Format: `mark attend c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|COMMA_SEPARATED_INDEXES`
+
+* Marks the attendance(s) of the students at the specified `COMMA_SEPARATED_INDEXES` belonging to the class group at the specified `CLASS_GROUP_INDEX` for the specified week.
+* The index refers to the index number shown in the displayed student or class group list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `mark attend c/1 w/3 s/1,2,3,4,5,6` marks the attendance(s) of the 1st 6 students belonging to the 1st class group for week 3.
+* `mark attend c/1 w/3 s/all` marks the attendance(s) of all the students belonging to the 1st class group for week 3.
+
+#### Unmarking attendance
+
+Unmarks student(s)' attendance.
+
+Format: `unmark attend c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|COMMA_SEPARATED_INDEXES`
+
+* Unmarks the attendance(s) of the students at the specified `COMMA_SEPARATED_INDEXES` belonging to the class group at the specified `CLASS_GROUP_INDEX` for the specified week.
+* The index refers to the index number shown in the displayed student or class group list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `unmark attend c/1 w/3 s/1,2,3,4,5,6` unmarks the attendance(s) of the 1st 6 students belonging to the 1st class group for week 3.
+* `unmark attend c/1 w/3 s/all` unmarks the attendance(s) of all the students belonging to the 1st class group for week 3.
 
 ### Listing entries
 
@@ -123,21 +166,34 @@ Shows a list of all class groups.
 
 Format: `list class`
 
-
 ### Filtering entries
 
 #### Filtering students
 
-list student [m/<MODULE_INDEX> OR c/<CLASS_GROUP_INDEX>]
+Shows a list of students belonging to either module or class group.
 
+Format: `list student m/MODULE_INDEX OR c/CLASS_GROUP_INDEX`
 
-list student c/2
-list student m/1
+* Displays the students belonging to the module at the specified `MODULE_INDEX` or the class group at the specified `CLASS_GROUP_INDEX`.
+* The index refers to the index number shown in the displayed module or class group list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list student m/1` displays the students belonging to the 1st module shown when `list module` is run.
+* `list student c/2` displays the students belonging to the 2nd class group shown when `list class` is run.
 
 #### Filtering class groups
 
-list class [m/<MODULE_INDEX>]
-list class m/1
+Shows a list of class groups belonging to a module.
+
+Format: `list class m/MODULE_INDEX`
+
+* Displays the class groups belonging to the module at the specified `MODULE_INDEX`.
+* The index refers to the index number shown in the displayed module list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list class m/1` displays the class groups belonging to the 1st module shown when `list module` is run.
 
 ### Deleting entries
 
@@ -242,8 +298,77 @@ _Details coming soon ..._
         <td>class group</td>
         <td>
             <ul>
-                <li>syntax: <code>add class id/CLASSGROUP_ID t/CLASSGROUP_TYPE m/MODULE_INDEX</code></li>
+                <li>syntax: <code>add class id/CLASS_GROUP_ID t/CLASS_GROUP_TYPE m/MODULE_INDEX</code></li>
                 <li>e.g., <code>add class id/T13 t/tutorial m/1</code></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td rowspan="1">Enrol</td>
+        <td>student</td>
+        <td>
+            <ul>
+                <li>syntax: <code>enrol c/CLASS_GROUP_INDEX s/COMMA_SEPARATED_INDEXES</code></li>
+                <li>e.g., <code>enrol c/1 s/1,2,3,4,5,6</code></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td rowspan="1">Taking attendance</td>
+        <td>student</td>
+        <td>
+            <ul>
+                <li>syntax: <code>mark attend c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|COMMA_SEPARATED_INDEXES</code></li>
+                <li>e.g., <code>mark attend c/1 w/3 s/1,2,3,4,5,6</code></li>
+            </ul>
+            <ul>
+                <li>syntax: <code>unmark attend c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|COMMA_SEPARATED_INDEXES</code></li>
+                <li>e.g., <code>unmark attend c/1 w/3 s/1,2,3,4,5,6</code></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td rowspan="3">List</td>
+        <td>students</td>
+        <td>
+            <ul>
+                <li>syntax: <code>list student</code></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>modules</td>
+        <td>
+            <ul>
+                <li>syntax: <code>list module</code></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>class groups</td>
+        <td>
+            <ul>
+                <li>syntax: <code>list class</code></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td rowspan="2">Filter</td>
+        <td>students</td>
+        <td>
+            <ul>
+                <li>syntax: <code>list student m/MODULE_INDEX OR c/CLASS_GROUP_INDEX</code></li>
+                <li>e.g., <code>list student m/1</code></li>
+                <li>e.g., <code>list student c/2</code></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>class groups</td>
+        <td>
+            <ul>
+                <li>syntax: <code>list class m/MODULE_INDEX</code></li>
+                <li>e.g., <code>list class m/1</code></li>
             </ul>
         </td>
     </tr>
@@ -272,31 +397,6 @@ _Details coming soon ..._
             <ul>
                 <li>syntax: <code>delete class INDEX</code></li>
                 <li>e.g., <code>delete class 2</code></li>
-            </ul>
-        </td>
-    </tr>
-    <tr>
-        <td rowspan="3">List</td>
-        <td>students</td>
-        <td>
-            <ul>
-                <li>syntax: <code>list student</code></li>
-            </ul>
-        </td>
-    </tr>
-    <tr>
-        <td>modules</td>
-        <td>
-            <ul>
-                <li>syntax: <code>list module</code></li>
-            </ul>
-        </td>
-    </tr>
-    <tr>
-        <td>class groups</td>
-        <td>
-            <ul>
-                <li>syntax: <code>list class</code></li>
             </ul>
         </td>
     </tr>
