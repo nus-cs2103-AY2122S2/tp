@@ -1,4 +1,4 @@
-package seedu.ibook.model.product.exceptions;
+package seedu.ibook.model.item.exceptions;
 
 /**
  * Signals that the operation is unable to find the specified item.

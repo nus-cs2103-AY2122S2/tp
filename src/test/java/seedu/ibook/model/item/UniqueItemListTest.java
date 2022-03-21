@@ -10,7 +10,7 @@ import static seedu.ibook.testutil.TypicalItems.QUANTITY_10;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.ibook.model.product.exceptions.ItemNotFoundException;
+import seedu.ibook.model.item.exceptions.ItemNotFoundException;
 import seedu.ibook.testutil.ItemBuilder;
 
 class UniqueItemListTest {
