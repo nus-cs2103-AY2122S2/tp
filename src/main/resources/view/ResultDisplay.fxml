@@ -2,9 +2,11 @@
 
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.TextFlow?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.ScrollPane?>
 
 <StackPane fx:id="placeHolder" styleClass="pane-with-border" xmlns="http://javafx.com/javafx/8"
            xmlns:fx="http://javafx.com/fxml/1">
+  <ScrollPane styleClass="scroll-pane">
   <TextFlow fx:id="resultDisplay" styleClass="result-display" />
+  </ScrollPane>
 </StackPane>
