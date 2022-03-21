@@ -47,6 +47,10 @@ public class Lineup {
         playersList.remove(player);
     }
 
+    public boolean sameLineupName(LineupName otherLineupName) {
+        return this.lineupName.equals(otherLineupName);
+    }
+
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own

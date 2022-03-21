@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.model.lineup.Lineup;
+import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Person;
 
 
@@ -30,6 +31,21 @@ public class UniqueLineupList {
 
     public boolean containsLineup(Lineup lineup) {
         return this.list.contains(lineup);
+    }
+
+    /**
+     * Checks for any lineup in the UniqueLineupList has the same lineupName
+     *
+     * @param lineupName The lineupName to check
+     * @return Boolean represents the existence of the lineup name
+     */
+    public boolean containsLineupName(LineupName lineupName) {
+        for (Lineup lineup : list) {
+            if (lineup.sameLineupName(lineupName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
