@@ -64,7 +64,7 @@ public class MainWindow extends UiPart<Stage> {
      * Closes the application.
      */
     @FXML
-    private void handleExit() {
+    public void handleExit() {
         primaryStage.hide();
     }
 
@@ -108,9 +108,14 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultWindow.setFeedbackToUser(commandResult.getFeedbackToUser());
 
+            if (commandResult.isShowHelp()) {
+                menuToolbar.handleHelp();
+            }
+
             if (commandResult.isExit()) {
                 handleExit();
             }
+
             hidePopup();
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
