@@ -186,7 +186,7 @@ The arguments that are parsed here are the custom column numbers for each value,
 
 In the event that any of the data fields read do not conform to the restrictions given by each of the components in `Person`, that particular line will be skipped. For example, if the record in a line has an email that does not have the `@` symbol or if the record contains a duplicated name that already exists in the Address Book, the entire line will be skipped.
 
-The `CSVManager` takes in a `IndexedCsvFile` object, opens the file and reads the lines. The logic that performs the parsing of data fields and creation of `Person` models is specified in the import command, and is passed as an anonymous function to CSVManager. The sequence diagram is as follows:
+The `CSVManager` takes in a `IndexedCsvFile` object, opens the file and reads the lines. The logic that performs the parsing of data fields and creation of `Person` models is specified in the import command, and is passed as an anonymous function to CsvManager. The sequence diagram is as follows:
 
 ![ImportCsvSequenceDiagram](images/ImportCsvSequenceDiagram.png)
 
@@ -202,7 +202,7 @@ The resulting `addressbook.csv` that will be produced will be in the following f
 
 Multiple tags are delimited by the `;` character.
 
-Like the Import feature, File IO operations are also separated into the `CSVManager` class, such that the command logic takes the current address book, parses them into the appropriate strings, then passes it to the `CsvManager` to handle the writing to file.
+Like the Import feature, File IO operations are also separated into the `CsvManager` class, such that the command logic takes the current address book, parses them into the appropriate strings, then passes it to the `CsvManager` to handle the writing to file.
 
 The sequence diagram is as follows:
 ![ExportCsvSequenceDiagram](images/ExportCsvSequenceDiagram.png)
