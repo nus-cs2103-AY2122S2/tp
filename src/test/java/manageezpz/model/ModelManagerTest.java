@@ -2,7 +2,6 @@ package manageezpz.model;
 
 import static manageezpz.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static manageezpz.testutil.Assert.assertThrows;
-import static manageezpz.testutil.TypcialTasks.GET_A_DRINK;
 import static manageezpz.testutil.TypcialTasks.GET_DRINK;
 import static manageezpz.testutil.TypcialTasks.HOUSE_VISTING;
 import static manageezpz.testutil.TypcialTasks.READ_BOOK;

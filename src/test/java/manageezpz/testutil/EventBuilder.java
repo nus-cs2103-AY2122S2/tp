@@ -3,7 +3,6 @@ package manageezpz.testutil;
 import manageezpz.model.task.Date;
 import manageezpz.model.task.Description;
 import manageezpz.model.task.Event;
-import manageezpz.model.task.Task;
 import manageezpz.model.task.Time;
 
 
@@ -19,6 +18,9 @@ public class EventBuilder {
     private Time startTime;
     private Time endTime;
 
+    /**
+     * Creates a {@code EventBuilder} with the default details.
+     */
     public EventBuilder() {
         description = new Description(TASK_DESCRIPTION);
         date = new Date(TASK_DATE);

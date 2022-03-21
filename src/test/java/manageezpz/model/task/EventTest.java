@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 
 public class EventTest {
 
-    private final Event testEvent = new Event(new Description("testing"), new Date("2022-11-08")
-            , new Time("1800"), new Time("2000"));
+    private final Event testEvent = new Event(new Description("testing"), new Date("2022-11-08"), new Time("1800"),
+            new Time("2000"));
 
     @Test
     public void testGetters() {

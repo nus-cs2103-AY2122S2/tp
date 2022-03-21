@@ -3,7 +3,6 @@ package manageezpz.testutil;
 import manageezpz.model.task.Date;
 import manageezpz.model.task.Deadline;
 import manageezpz.model.task.Description;
-import manageezpz.model.task.Task;
 import manageezpz.model.task.Time;
 
 public class DeadlineBuilder {
@@ -15,6 +14,9 @@ public class DeadlineBuilder {
     private Date date;
     private Time time;
 
+    /**
+     * Creates a {@code DeadlineBuilder} with the default details.
+     */
     public DeadlineBuilder() {
         description = new Description(TASK_DESCRIPTION);
         date = new Date(TASK_DATE);

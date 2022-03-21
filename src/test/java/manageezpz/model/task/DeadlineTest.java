@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 
 public class DeadlineTest {
 
-    private final Deadline testDealine = new Deadline(new Description("testing")
-            , new Date("2022-11-08"), new Time("1800"));
+    private final Deadline testDealine = new Deadline(new Description("testing"),
+            new Date("2022-11-08"), new Time("1800"));
     @Test
     public void testGetters() {
         assertEquals("testing", testDealine.getDescription().toString());

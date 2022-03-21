@@ -20,8 +20,8 @@ public class TypcialTasks {
     public static final Task GET_HAIRCUT = new TaskBuilder().withDescription("Get Haircut").build();
     public static final Deadline GET_DRINK = new DeadlineBuilder().withDescription("Get Drink")
             .withDate("2022-05-13").withTime("1800").build();
-    public static final Event HOUSE_VISTING = new EventBuilder().withDescription("House Visiting").withDate("2022-09-15")
-            .withStartTime("1800").withEndTime("2000").build();
+    public static final Event HOUSE_VISTING = new EventBuilder().withDescription("House Visiting")
+            .withDate("2022-09-15").withStartTime("1800").withEndTime("2000").build();
     public static final Todo WEEKLY_QUIZ = new TodoBuilder().withDescription("Weekly Quiz").build();
 
     // Manually added - Task's details found in {@code CommandTestUtil}

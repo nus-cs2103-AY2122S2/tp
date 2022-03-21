@@ -1,9 +1,7 @@
 package manageezpz.testutil;
 
-import manageezpz.model.task.Date;
 import manageezpz.model.task.Description;
 import manageezpz.model.task.Task;
-import manageezpz.model.task.Time;
 
 /**
  * A utility class to help with building Person objects.

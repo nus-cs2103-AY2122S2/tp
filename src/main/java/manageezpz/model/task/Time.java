@@ -1,10 +1,10 @@
 package manageezpz.model.task;
 
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-
 import static java.util.Objects.requireNonNull;
 import static manageezpz.commons.util.AppUtil.checkArgument;
+
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class Time {
     public static final String MESSAGE_CONSTRAINTS = "Time should strictly be in the format of HHMM."
