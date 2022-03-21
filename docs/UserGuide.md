@@ -135,10 +135,15 @@ Expected outcome:
 ### Locating student contacts by attributes: `find`
 
 Locates all student contact in ArchDuke based on attributes that matches the given keywords. 
-The attributes supported are: `n/NAME`, `p/PHONE_NUMER`, `e/EMAIL`, `a/ACADEMIC_MAJOR`, `t/TAG`
-The specified keywords are case-insensitive. The attributes could be accessed by adding prefixes before the keywords.
-The result must match the exact wording, partial words will not match (e.g. `n/Dav` will not match the student contact
+* The attributes supported are: `n/NAME`, `p/PHONE_NUMER`, `e/EMAIL`, `a/ACADEMIC_MAJOR`, `t/TAG`
+* The specified keywords are case-insensitive. 
+* The attributes could be accessed by adding prefixes before the keywords.
+* The result must match the exact wording, partial words will not match (e.g. `n/Dav` will not match the student contact
 `David` or `David Li`).
+* The command will list out all student contacts that matches the keyword.
+  * `find n/Alex` would match with `Alex Yeoh` and `Alex Yu`
+  * `find n/Alex Yeoh` would match with `Alex Yeoh` and `Alex Yu`
+  * `find n/Alex Yu` would match with `Alex Yeoh`, `Alex Yu`, and `Bernice Yu`
 
 Format: `find PREFIX/KEYWORD [MORE_KEYWORDS]`
 
