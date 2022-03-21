@@ -115,31 +115,31 @@ The onboarding guide will cover the following:
 - Add person
 - List person
 
-### Adding a person: `add`
+### Adding a person: `addperson`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `addperson n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `addperson n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* `addperson n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Listing all persons : `list`
+### Listing all persons : `listpersons`
 
 Shows a list of all persons in the address book.
 
-Format: `list`
+Format: `listpersons`
 
-### Editing a person : `edit`
+### Editing a person : `editperson`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `editperson INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -149,14 +149,14 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `editperson 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+*  `editperson 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Locating persons by attribute: `findperson`
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS] [by/SEARCH_TYPE]`
+Format: `findperson KEYWORD [MORE_KEYWORDS] [by/SEARCH_TYPE]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -172,25 +172,25 @@ Format: `find KEYWORD [MORE_KEYWORDS] [by/SEARCH_TYPE]`
 * If `SEARCH_TYPE` is not specified, default search type is by `Name`.
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find Garden by/address` lists all persons whose address contain the keyword "Garden"
-* `find 87438807 by/phone` lists all persons whose phone number matches "87438807"
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `findperson John` returns `john` and `John Doe`
+* `findperson Garden by/address` lists all persons whose address contain the keyword "Garden"
+* `findperson 87438807 by/phone` lists all persons whose phone number matches "87438807"
+* `findperson alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting a person : `deleteperson`
 
 Deletes the specified person from the address book.
 
-Format: `delete INDEX`
+Format: `deleteperson INDEX`
 
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `listpersons` followed by `deleteperson 2` deletes the 2nd person in the address book.
+* `findperson Betsy` followed by `deleteperson 1` deletes the 1st person in the results of the `findperson` command.
 
 ### Clearing all entries : `clear`
 
@@ -489,12 +489,12 @@ Examples:
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add Person** | `addperson n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `addperson n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS] [by/SEARCH_TYPE]`<br> e.g., `find James Jake by/name`
-**List** | `list`
+**Delete Person** | `deleteperson INDEX`<br> e.g., `delete 3`
+**Edit Person** | `editperson INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`editperson 2 n/James Lee e/jameslee@example.com`
+**Find Person** | `findperson KEYWORD [MORE_KEYWORDS] [by/SEARCH_TYPE]`<br> e.g., `findperson James Jake by/name`
+**List Persons** | `listpersons`
 **Add Tag** | `addtag n/TAGNAME` <br> e.g., `addtag n/Potential Clients`
 **Edit Tag** | `edittag INDEX t/NEW_TAGNAME` <br> e.g., `edittag 1 t/Prospective Clients`
 **List Tags** | `listtags`
@@ -509,5 +509,5 @@ Action | Format, Examples
 **Export CSV** | `exportcsv`
 **Import CSV** | `importcsv f/FILEPATH [n/COLUMNNUM] [p/COLUMN_PERSON] [e/COLUMN_EMAIL] [a/COLUMN_ADDRESS] [t/COLUMN_TAGS]` <br> e.g., `importCSV n/2 p/3 e/5 a/6 t/4`
 **Operate on Contacts by Conditional Clause** | `batch COMMAND where/CONDITION` <br> e.g., `batch Edit p/87438806 where/ p/Phone = 87438807`
-**Operate on Contacts within Range** | `range COMMAND from/INDEX to/INDEX` <br> e.g., `range edit e/johndoe@example.com from/6 to/10`
+**Operate on Contacts within Range** | `range COMMAND from/INDEX to/INDEX` <br> e.g., `range editperson e/johndoe@example.com from/6 to/10`
 **Chaining Commands** | `chain COMMAND_A && COMMAND_B` <br> e.g., `chain editappointment 6 l/360 && listappointments`
