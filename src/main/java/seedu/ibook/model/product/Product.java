@@ -2,7 +2,11 @@ package seedu.ibook.model.product;
 
 import static seedu.ibook.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.List;
 import java.util.Objects;
+
+import seedu.ibook.model.item.Item;
+import seedu.ibook.model.item.UniqueItemList;
 
 /**
  * Represents a Product in the ibook.
@@ -13,22 +17,33 @@ public class Product {
     // Identity fields
     private final Name name;
     private final Category category;
-    private final ExpiryDate expiryDate;
 
     // Data fields
     private final Description description;
     private final Price price;
+    private final UniqueItemList items = new UniqueItemList();
 
     /**
      * Every field must be present and not null.
      */
-    public Product(Name name, Category category, ExpiryDate expiryDate, Description description, Price price) {
-        requireAllNonNull(name, category, expiryDate, description, price);
+    public Product(Name name, Category category, Description description, Price price) {
+        requireAllNonNull(name, category, description, price);
         this.name = name;
         this.category = category;
-        this.expiryDate = expiryDate;
         this.description = description;
         this.price = price;
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Product(Name name, Category category, Description description, Price price, List<Item> items) {
+        requireAllNonNull(name, category, description, price);
+        this.name = name;
+        this.category = category;
+        this.description = description;
+        this.price = price;
+        this.items.setItems(items);
     }
 
     public Name getName() {
@@ -39,10 +54,6 @@ public class Product {
         return category;
     }
 
-    public ExpiryDate getExpiryDate() {
-        return expiryDate;
-    }
-
     public Description getDescription() {
         return description;
     }
@@ -51,8 +62,27 @@ public class Product {
         return price;
     }
 
-    public boolean isExpired() {
-        return expiryDate.isPast();
+    public UniqueItemList getItems() {
+        return items;
+    }
+
+    public Integer getTotalQuantity() {
+        return items.getTotalQuantity();
+    }
+
+    /**
+     * Adds an item to the product.
+     */
+    public void addItem(Item i) {
+        items.add(i);
+    }
+
+    /**
+     * Removes {@code key} from this {@code items}.
+     * {@code key} must exist in items.
+     */
+    public void removeItem(Item key) {
+        items.remove(key);
     }
 
     /**
@@ -66,8 +96,7 @@ public class Product {
 
         return otherProduct != null
                 && otherProduct.getName().equals(getName())
-                && otherProduct.getCategory().equals(getCategory())
-                && otherProduct.getExpiryDate().equals(getExpiryDate());
+                && otherProduct.getCategory().equals(getCategory());
     }
 
     /**
@@ -87,7 +116,6 @@ public class Product {
         Product otherProduct = (Product) other;
         return getName().equals(otherProduct.getName())
                 && getCategory().equals(otherProduct.getCategory())
-                && getExpiryDate().equals(otherProduct.getExpiryDate())
                 && getDescription().equals(otherProduct.getDescription())
                 && getPrice().equals(otherProduct.getPrice());
     }
@@ -95,7 +123,7 @@ public class Product {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, category, expiryDate, description, price);
+        return Objects.hash(name, category, description, price);
     }
 
     @Override
@@ -104,8 +132,6 @@ public class Product {
         builder.append(getName())
                 .append("; Category: ")
                 .append(getCategory())
-                .append("; ExpiryDate: ")
-                .append(getExpiryDate())
                 .append("; Description: ")
                 .append(getDescription())
                 .append("; Price: ")

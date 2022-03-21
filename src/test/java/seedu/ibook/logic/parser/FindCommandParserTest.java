@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import seedu.ibook.logic.commands.FindCommand;
 import seedu.ibook.model.product.Category;
 import seedu.ibook.model.product.Description;
-import seedu.ibook.model.product.ExpiryDate;
 import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Price;
 import seedu.ibook.model.product.Product;
@@ -32,7 +31,6 @@ public class FindCommandParserTest {
                 new FindCommand(new ProductFulfillsFiltersPredicate(new Product(
                         new Name("Maggi"),
                         new Category("noodles"),
-                        new ExpiryDate("2022-01-01"),
                         new Description("tasty"),
                         new Price("3.00"))));
         assertParseSuccess(parser, " n: Maggi c: noodles e: 2022-01-01 d: tasty p: 3.00", expectedFindCommand);
@@ -42,7 +40,6 @@ public class FindCommandParserTest {
                 new FindCommand(new ProductFulfillsFiltersPredicate(new Product (
                         new Name("Maggi"),
                         Category.WILD_CATEGORY,
-                        new ExpiryDate("2022-01-01"),
                         Description.WILD_DESCRIPTION,
                         new Price("3.00")))
                 );

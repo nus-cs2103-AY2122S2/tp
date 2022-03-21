@@ -60,10 +60,10 @@ public class CommandTestUtil {
 
     static {
         DESC_A = new UpdateProductDescriptorBuilder().withName(VALID_NAME_A)
-                .withCategory(VALID_CATEGORY_A).withExpiryDate(VALID_EXPIRY_DATE_A)
+                .withCategory(VALID_CATEGORY_A)
                 .withDescription(VALID_DESCRIPTION_A).withPrice(VALID_PRICE_A).build();
         DESC_B = new UpdateProductDescriptorBuilder().withName(VALID_NAME_B)
-                .withCategory(VALID_CATEGORY_B).withExpiryDate(VALID_EXPIRY_DATE_B)
+                .withCategory(VALID_CATEGORY_B)
                 .withDescription(VALID_DESCRIPTION_B).withPrice(VALID_PRICE_B).build();
     }
 
