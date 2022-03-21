@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import static java.util.Objects.requireNonNull;
 
 import seedu.address.model.lineup.Lineup;
 import seedu.address.model.lineup.LineupName;
@@ -22,14 +23,17 @@ public class UniqueLineupList {
     }
 
     public void addLineupToList(Lineup lineup) {
+        requireNonNull(lineup);
         this.list.add(lineup);
     }
 
     public void deleteLineupFromList(Lineup lineup) {
+        requireNonNull(lineup);
         this.list.remove(lineup);
     }
 
     public boolean containsLineup(Lineup lineup) {
+        requireNonNull(lineup);
         return this.list.contains(lineup);
     }
 
@@ -40,6 +44,7 @@ public class UniqueLineupList {
      * @return Boolean represents the existence of the lineup name
      */
     public boolean containsLineupName(LineupName lineupName) {
+        requireNonNull(lineupName);
         for (Lineup lineup : list) {
             if (lineup.sameLineupName(lineupName)) {
                 return true;
@@ -55,6 +60,8 @@ public class UniqueLineupList {
      * @param lineup The lineup to put at
      */
     public void putPlayerToLineup(Person player, Lineup lineup) {
+        requireNonNull(lineup);
+        requireNonNull(player);
         if (containsLineup(lineup)) {
             lineup.addPlayer(player);
         }
@@ -67,6 +74,8 @@ public class UniqueLineupList {
      * @param lineup The Lineup to delete from
      */
     public void deletePlayerFromLineup(Person player, Lineup lineup) {
+        requireNonNull(lineup);
+        requireNonNull(player);
         if (containsLineup(lineup)) {
             lineup.removePlayer(player);
         }
