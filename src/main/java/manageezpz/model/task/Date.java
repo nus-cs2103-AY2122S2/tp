@@ -5,6 +5,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import static java.util.Objects.requireNonNull;
+import static manageezpz.commons.util.AppUtil.checkArgument;
+
 public class Date {
     public static final String MESSAGE_CONSTRAINTS = "Date should be in the following format : yyyy-MM-dd"
             + " Month should be between 1 and 12 and Day should be between 1 and 31";
@@ -14,6 +17,8 @@ public class Date {
     private String date;
 
     public Date(String date) {
+        requireNonNull(date);
+        checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
         this.date = date;
     }
 

@@ -2,8 +2,12 @@ package manageezpz.model;
 
 import static manageezpz.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static manageezpz.testutil.Assert.assertThrows;
+import static manageezpz.testutil.TypcialTasks.GET_A_DRINK;
+import static manageezpz.testutil.TypcialTasks.GET_DRINK;
+import static manageezpz.testutil.TypcialTasks.HOUSE_VISTING;
 import static manageezpz.testutil.TypcialTasks.READ_BOOK;
 import static manageezpz.testutil.TypcialTasks.RETURN_BOOK;
+import static manageezpz.testutil.TypcialTasks.WEEKLY_QUIZ;
 import static manageezpz.testutil.TypicalPersons.ALICE;
 import static manageezpz.testutil.TypicalPersons.BENSON;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -155,5 +159,43 @@ public class ModelManagerTest {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredTaskList().remove(0));
     }
 
+    @Test
+    public void hasDeadline_nullTask_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasDeadline(null));
+    }
 
+    @Test
+    public void hasEvent_nullTask_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasEvent(null));
+    }
+
+    @Test
+    public void hasTodo_nullTask_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasTodo(null));
+    }
+
+    @Test
+    public void hasDeadline_taskInAddressBook_returnsTrue() {
+        modelManager.addDeadline(GET_DRINK);
+        assertTrue(modelManager.hasDeadline(GET_DRINK));
+    }
+
+    @Test
+    public void hasEvent_taskInAddressBook_returnsTrue() {
+        modelManager.addEvent(HOUSE_VISTING);
+        assertTrue(modelManager.hasEvent(HOUSE_VISTING));
+    }
+
+    @Test
+    public void hasTodo_taskInAddressBook_returnsTrue() {
+        modelManager.addTodo(WEEKLY_QUIZ);
+        assertTrue(modelManager.hasTodo(WEEKLY_QUIZ));
+    }
+
+    @Test
+    public void isDeleted_taskInAddressBook_returnsTrue() {
+        modelManager.addTask(READ_BOOK);
+        modelManager.deleteTask(READ_BOOK);
+        assertTrue(!modelManager.hasTask(READ_BOOK));
+    }
 }

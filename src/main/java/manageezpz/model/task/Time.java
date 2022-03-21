@@ -3,6 +3,9 @@ package manageezpz.model.task;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+import static java.util.Objects.requireNonNull;
+import static manageezpz.commons.util.AppUtil.checkArgument;
+
 public class Time {
     public static final String MESSAGE_CONSTRAINTS = "Time should strictly be in the format of HHMM."
             + " It should only contain numbers, 4 digits long and should not be blank. "
@@ -17,6 +20,8 @@ public class Time {
      * @param time A valid time.
      */
     public Time(String time) {
+        requireNonNull(time);
+        checkArgument(isValidTime(time), MESSAGE_CONSTRAINTS);
         this.time = time;
     }
 

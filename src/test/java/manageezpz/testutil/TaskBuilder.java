@@ -1,7 +1,9 @@
 package manageezpz.testutil;
 
+import manageezpz.model.task.Date;
 import manageezpz.model.task.Description;
 import manageezpz.model.task.Task;
+import manageezpz.model.task.Time;
 
 /**
  * A utility class to help with building Person objects.
@@ -26,7 +28,7 @@ public class TaskBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code Task} that we are building.
+     * Sets the {@code Description} of the {@code Task} that we are building.
      */
     public TaskBuilder withDescription(String description) {
         this.description = new Description(description);
