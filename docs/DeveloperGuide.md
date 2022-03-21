@@ -121,14 +121,18 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the TAssist data i.e., all `Student`, `TaModule`, `ClassGroup` objects (which are contained in `UniqueStudentList`, `UniqueModuleList`, `UniqueClassGroupList` objects respectively).
+* stores the currently 'selected' `Student`/`TaModule`/`ClassGroup` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>`/`ObservableList<TaModule>`/`ObservableList<ClassGroup>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** Alternative (arguably, more OOP) models are given below.<br>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+<img src="images/BetterModelStudentClassDiagram.png" width="450" />
+
+<img src="images/BetterModelTaModuleClassDiagram.png" width="450" />
+
+<img src="images/BetterModelClassGroupClassDiagram.png" width="450" />
 
 </div>
 
@@ -153,6 +157,45 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### \[Proposed\] Delete feature
+
+#### Proposed Implementation
+
+The proposed delete mechanism is facilitated by `TAssist`. Its functionality, usage and behaviour is the same for all entities. Additionally, it implements the following operations:
+
+* `DeleteCommandParser#parse()` — Parses the command arguments.
+* `DeleteCommand#execute()` — Executes `ModelManager#deleteEntity()` with the specified entity.
+* `ModelManager#deleteEntity()` — Deletes the specified entity.
+
+However, when a `TaModule` object is deleted, its associated `ClassGroup` objects are also deleted.
+
+Given below is an example usage scenario using `Student` objects and how the delete mechanism behaves at each step.
+
+Step 1. The user launches the application. The `TAssist` is already populated with data.
+
+![DeleteState0](images/DeleteState0.png)
+
+Step 2. The user executes `list student` command to list the students in the `TAssist`. The `list` command implementation is detailed below in the List Feature section.
+
+Step 3. The user executes `delete student 2` to delete the 2nd student in the list which is `s2`. The `delete` command also calls `DeleteCommandParser#parse()`, which parses the input and return the index and entity type.
+
+![DeleteState1](images/DeleteState1.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `DeleteCommand#execute()`, instead a `CommandException` will be thrown and no entities will be deleted.
+</div>
+
+The following sequence diagram shows how the delete operation works:
+
+![DeleteSequenceDiagram](images/DeleteSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The following activity diagram summarizes what happens when a user executes a delete command:
+
+<img src="images/DeleteActivityDiagram.png" width="250" />
 
 ### \[Proposed\] Undo/redo feature
 
