@@ -110,6 +110,7 @@ public class UiSummarisePieChart {
         ObservableList<PieChart.Data> pieChartData =
                 FXCollections.observableArrayList();
         PieChart pieChart = new PieChart(pieChartData);
+        pieChart.setTitle("Covid positive percentage by faculty");
         for (Map.Entry<String, Double> entry : treeMap.entrySet()) {
             pieChartData.add(new PieChart.Data(entry.getKey(), entry.getValue()));
         }
