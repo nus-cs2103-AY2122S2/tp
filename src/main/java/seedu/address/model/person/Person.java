@@ -76,7 +76,7 @@ public class Person {
     /**
      * Returns the Covid Status as a String instead of type CovidStatus.
      *
-     * @return a string of the covidStatus
+     * @return A string of the covidStatus
      */
     public String getStatusAsString() {
         return status.toString();
@@ -86,19 +86,28 @@ public class Person {
      * Predicate to check if the status of Person object matches the given CovidStatus.
      *
      * @param status given status to check if matched by status property in Person
-     * @return boolean value to show if there is a match
+     * @return Boolean value to show if there is a match
      */
     public boolean isStatus(CovidStatus status) {
         return this.status.equals(status);
     }
 
     /**
-     * Returns the Faculty of this person as a String instead of type Faculty.
+     * Returns the faculty of this person as a String instead of type Faculty.
      *
-     * @return a string of the faculty
+     * @return A string of the faculty
      */
     public String getFacultyAsString() {
         return faculty.toString();
+    }
+
+    /**
+     * Returns the block of this person as a String instead of type Block.
+     *
+     * @return A string of the block
+     */
+    public String getBlockAsString() {
+        return block.toString();
     }
 
     public Address getAddress() {
