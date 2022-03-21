@@ -6,6 +6,14 @@
     src: url('../font/NotoSans-Thin.ttf');
 }
 
+@font-face {
+    src: url('../font/NotoSans-Medium.ttf');
+}
+
+@font-face {
+    src: url('../font/NotoSans-SemiBold.ttf');
+}
+
 .root {
     -fx-font-family: 'Noto Sans';
 }
@@ -28,4 +36,30 @@
 
 .primary-button:pressed {
     -fx-background-color: #7D6DE0;
+}
+
+.scroll-bar {
+    -fx-font-size: 8px;
+}
+
+.scroll-bar:horizontal, .scroll-bar:vertical{
+    -fx-background-color:transparent;
+}
+
+.increment-button, .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0em;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #00000012;
+    -fx-background-radius: 5em;
 }
