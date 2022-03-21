@@ -26,7 +26,7 @@ public class FindCommand extends Command {
             + "Parameters: " + PREFIX_NAME + "STUDENT_NAME " + "or " + PREFIX_ID + "STUDENT_ID " + "or "
             + PREFIX_MODULE_CODE + "MODULE_CODE\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "John " + "or " + COMMAND_WORD + " "
-            + PREFIX_ID + "A0123456Z " + "or " + COMMAND_WORD + " " + PREFIX_NAME + "CS2103T\n";
+            + PREFIX_ID + "A0123456Z " + "or " + COMMAND_WORD + " " + PREFIX_MODULE_CODE + "CS2103T\n";
 
     private final NameContainsKeywordsPredicate namePredicate;
     private final StudentIdContainsKeywordsPredicate idPredicate;
