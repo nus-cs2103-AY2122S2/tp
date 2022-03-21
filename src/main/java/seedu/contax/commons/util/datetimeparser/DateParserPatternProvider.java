@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 /**
- * Provides commonly used constants for parsing dates. This class is package-private and is only visible to
+ * Provides regex patterns for parsing dates. This class is package-private and is only visible to
  * the {@code datetimeparser} package.
  */
 class DateParserPatternProvider {

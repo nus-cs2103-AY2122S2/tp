@@ -10,8 +10,20 @@ import org.junit.jupiter.api.Test;
 
 public class DateParserTest {
     @Test
-    public void parseStandardDate() {
+    public void parseDate_nullInput_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> DateParser.parseDate(null));
+    }
+
+    @Test
+    public void parseStandardDate() {
+        // Missing Components
+        assertEquals(Optional.empty(), DateParser.parseDate("-10-2022"));
+        assertEquals(Optional.empty(), DateParser.parseDate("10--2022"));
+        assertEquals(Optional.empty(), DateParser.parseDate("10-10-"));
+        assertEquals(Optional.empty(), DateParser.parseDate("10-10"));
+        assertEquals(Optional.empty(), DateParser.parseDate("10-2022"));
+
+        // Invalid Components
         assertEquals(Optional.empty(), DateParser.parseDate("32-10-2022")); // Invalid Day
         assertEquals(Optional.empty(), DateParser.parseDate("0-10-2022")); // Invalid Day
         assertEquals(Optional.empty(), DateParser.parseDate("ab-10-2022")); // Invalid Day
@@ -41,8 +53,6 @@ public class DateParserTest {
 
     @Test
     public void parseNaturalDate() {
-        assertThrows(NullPointerException.class, () -> DateParser.parseDate(null));
-
         // Missing Components
         assertEquals(Optional.empty(), DateParser.parseDate("Jan 2022")); // Missing Day
         assertEquals(Optional.empty(), DateParser.parseDate("10 2022")); // Missing Month
