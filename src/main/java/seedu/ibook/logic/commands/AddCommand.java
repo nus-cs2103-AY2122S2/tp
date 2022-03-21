@@ -3,7 +3,6 @@ package seedu.ibook.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.ibook.logic.parser.CliSyntax.PREFIX_EXPIRY_DATE;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_PRICE;
 
@@ -22,14 +21,12 @@ public class AddCommand extends Command {
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_CATEGORY + "CATEGORY "
-            + PREFIX_EXPIRY_DATE + "EXPIRY DATE "
             + PREFIX_PRICE + "PRICE "
             + PREFIX_DESCRIPTION + "DESCRIPTION"
             + "\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Tasty Bread "
             + PREFIX_CATEGORY + "Bread "
-            + PREFIX_EXPIRY_DATE + "2022-01-01 "
             + PREFIX_PRICE + "3.00 "
             + PREFIX_DESCRIPTION + "Very Tasty";
 
@@ -39,7 +36,7 @@ public class AddCommand extends Command {
     private final Product toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Product}
      */
     public AddCommand(Product product) {
         requireNonNull(product);

@@ -1,10 +1,13 @@
 package seedu.ibook.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.ibook.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
+import java.util.stream.StreamSupport;
 
 import javafx.collections.ObservableList;
+import seedu.ibook.model.item.Item;
 import seedu.ibook.model.product.Product;
 import seedu.ibook.model.product.UniqueProductList;
 
@@ -59,7 +62,7 @@ public class IBook implements ReadOnlyIBook {
     //// product-level operations
 
     /**
-     * Returns true if a product with the same identity as {@code product} exists in the ibook.
+     * Returns true if a product with the same identity as {@code product} exists in the iBook.
      */
     public boolean hasProduct(Product product) {
         requireNonNull(product);
@@ -67,8 +70,8 @@ public class IBook implements ReadOnlyIBook {
     }
 
     /**
-     * Adds a product to the ibook.
-     * The product must not already exist in the ibook.
+     * Adds a product to the iBook.
+     * The product must not already exist in the iBook.
      */
     public void addProduct(Product p) {
         products.add(p);
@@ -76,7 +79,7 @@ public class IBook implements ReadOnlyIBook {
 
     /**
      * Replaces the given product {@code target} in the list with {@code editedProduct}.
-     * {@code target} must exist in the ibook.
+     * {@code target} must exist in the iBook.
      * The product identity of {@code editedProduct} must not be the same as another existing product in the book.
      */
     public void setProduct(Product target, Product editedProduct) {
@@ -87,10 +90,30 @@ public class IBook implements ReadOnlyIBook {
 
     /**
      * Removes {@code key} from this {@code IBook}.
-     * {@code key} must exist in the ibook.
+     * {@code key} must exist in the iBook.
      */
     public void removeProduct(Product key) {
         products.remove(key);
+    }
+
+    //// item-level operations
+
+    /**
+     * Returns true if a product with the same identity as {@code product} exists in the iBook.
+     */
+    public boolean hasItem(Item item) {
+        requireNonNull(item);
+        return StreamSupport.stream(products.spliterator(), false) // Turn Iterable<Product> to Stream<Product>
+                .anyMatch(product -> product.hasItem(item));
+    }
+
+    /**
+     * Adds a item to the iBook.
+     * The product must not already exist in the iBook.
+     */
+    public void addItem(Product product, Item item) {
+        requireAllNonNull(product, item);
+        product.addItem(item);
     }
 
     //// util methods

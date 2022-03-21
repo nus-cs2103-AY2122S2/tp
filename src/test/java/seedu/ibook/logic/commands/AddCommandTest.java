@@ -18,6 +18,7 @@ import seedu.ibook.model.IBook;
 import seedu.ibook.model.Model;
 import seedu.ibook.model.ReadOnlyIBook;
 import seedu.ibook.model.ReadOnlyUserPrefs;
+import seedu.ibook.model.item.Item;
 import seedu.ibook.model.product.Product;
 import seedu.ibook.testutil.ProductBuilder;
 
@@ -96,6 +97,16 @@ public class AddCommandTest {
 
         @Override
         public void addProduct(Product product) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasItem(Item item) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addItem(Product product, Item item) {
             throw new AssertionError("This method should not be called.");
         }
 
