@@ -5,8 +5,8 @@ import static seedu.ibook.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.List;
 import java.util.Objects;
 
-import seedu.ibook.model.product.item.Item;
-import seedu.ibook.model.product.item.UniqueItemList;
+import seedu.ibook.model.item.Item;
+import seedu.ibook.model.item.UniqueItemList;
 
 /**
  * Represents a Product in the ibook.

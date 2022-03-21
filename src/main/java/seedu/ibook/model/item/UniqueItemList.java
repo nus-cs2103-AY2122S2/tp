@@ -1,4 +1,4 @@
-package seedu.ibook.model.product.item;
+package seedu.ibook.model.item;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.ibook.commons.util.CollectionUtil.requireAllNonNull;

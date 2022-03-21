@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.ibook.commons.exceptions.IllegalValueException;
-import seedu.ibook.model.product.item.ExpiryDate;
-import seedu.ibook.model.product.item.Item;
-import seedu.ibook.model.product.item.Quantity;
+import seedu.ibook.model.item.ExpiryDate;
+import seedu.ibook.model.item.Item;
+import seedu.ibook.model.item.Quantity;
 
 /**
  * Jackson-friendly version of {@link Item}.

@@ -3,9 +3,9 @@ package seedu.ibook.testutil;
 import static seedu.ibook.testutil.TypicalProducts.PRODUCT_A;
 
 import seedu.ibook.model.product.Product;
-import seedu.ibook.model.product.item.ExpiryDate;
-import seedu.ibook.model.product.item.Item;
-import seedu.ibook.model.product.item.Quantity;
+import seedu.ibook.model.item.ExpiryDate;
+import seedu.ibook.model.item.Item;
+import seedu.ibook.model.item.Quantity;
 
 public class ItemBuilder {
     public static final Product DEFAULT_PRODUCT = PRODUCT_A;

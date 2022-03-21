@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.ibook.model.product.item.Item;
+import seedu.ibook.model.item.Item;
 
 public class TypicalItems {
     public static final String QUANTITY_5 = "5";

@@ -14,8 +14,8 @@ import seedu.ibook.model.product.Description;
 import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Price;
 import seedu.ibook.model.product.Product;
-import seedu.ibook.model.product.item.Item;
-import seedu.ibook.model.product.item.UniqueItemList;
+import seedu.ibook.model.item.Item;
+import seedu.ibook.model.item.UniqueItemList;
 
 /**
  * Jackson-friendly version of {@link Product}.

@@ -1,4 +1,4 @@
-package seedu.ibook.model.product.item;
+package seedu.ibook.model.item;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -11,6 +11,7 @@ import static seedu.ibook.testutil.TypicalItems.QUANTITY_10;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.ibook.model.item.Item;
 import seedu.ibook.testutil.ItemBuilder;
 
 class ItemTest {

@@ -9,7 +9,7 @@ import seedu.ibook.model.product.Category;
 import seedu.ibook.model.product.Description;
 import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Price;
-import seedu.ibook.model.product.item.ExpiryDate;
+import seedu.ibook.model.item.ExpiryDate;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
