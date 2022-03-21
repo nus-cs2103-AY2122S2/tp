@@ -2,7 +2,6 @@ package seedu.ibook.testutil;
 
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.ibook.logic.parser.CliSyntax.PREFIX_EXPIRY_DATE;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_PRICE;
 
@@ -28,7 +27,6 @@ public class ProductUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + product.getName().toString() + " ");
         sb.append(PREFIX_CATEGORY + product.getCategory().toString() + " ");
-        sb.append(PREFIX_EXPIRY_DATE + product.getExpiryDate().toString() + " ");
         sb.append(PREFIX_DESCRIPTION + product.getDescription().toString() + " ");
         sb.append(PREFIX_PRICE + product.getPrice().toString() + " ");
         return sb.toString();
@@ -43,8 +41,6 @@ public class ProductUtil {
             name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getCategory().ifPresent(
             category -> sb.append(PREFIX_CATEGORY).append(category.fullCategoryName).append(" "));
-        descriptor.getExpiryDate().ifPresent(
-            expiryDate -> sb.append(PREFIX_EXPIRY_DATE).append(expiryDate.toString()).append(" "));
         descriptor.getDescription().ifPresent(
             description -> sb.append(PREFIX_DESCRIPTION).append(description).append(" "));
         descriptor.getPrice().ifPresent(

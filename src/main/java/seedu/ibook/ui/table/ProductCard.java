@@ -24,8 +24,6 @@ public class ProductCard extends UiComponent<HBox> {
     @FXML
     private Label category;
     @FXML
-    private Label expiryDate;
-    @FXML
     private Label price;
     @FXML
     private Label description;
@@ -48,7 +46,6 @@ public class ProductCard extends UiComponent<HBox> {
         indexLabel.setText(String.valueOf(index));
         name.setText(product.getName().toString());
         category.setText(product.getCategory().toString());
-        expiryDate.setText(product.getExpiryDate().toString());
         price.setText(product.getPrice().toString());
         description.setText(product.getDescription().toString());
     }
