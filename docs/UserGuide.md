@@ -321,6 +321,7 @@ Action | Format, Examples
 **View help** | `help`
 **List all student contacts** | `list`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Clear entries** | `clear`
 **Exit** | `exit`
 
 ### Student contact management
@@ -328,6 +329,7 @@ Action | Format, Examples
 Action | Format, Examples
 --------|------------------
 **Add student contact information** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ACADEMIC MAJOR [t/TAG]` <br> e.g., `add n/John Doe p/12345678 e/johndoe@u.nus.edu a/Computer Science [t/optional]`
+**Delete student contact information** | `delete INDEX` <br> e.g., `delete 1`
 
 ### Student group management
 
@@ -336,6 +338,8 @@ Action | Format, Examples
 **Create a group** | `addgroup g/GROUP_NAME`<br> e.g., `addgroup g/CS2103-W16-3`
 **Delete a group** | `delgroup g/GROUP_NAME`<br> e.g.,`delgroup g/CS2103-W16-3`
 **Assign a student to a group** | `assign INDEX g/GROUP_NAME`<br> e.g.,`assign 1 g/CS2103-W16-3`
+**Deassign a student from a group** | `deassign INDEX g/GROUP_NAME`<br> e.g.,`deassign 1 g/CS2103-W16-3`
+**Display student contacts in a group** | `viewcontact g/GROUP_NAME`<br> e.g.,`viewcontact g/CS2103-W16-3`
 
 ### Student group task management
 
@@ -343,4 +347,4 @@ Action | Format, Examples
 --------|------------------
 **Add a task in a group** | `addtask t/TASK_NAME g/GROUP_NAME`<br> e.g., `addtask t/v1.2 user guide g/CS2103-W16-3`
 **Delete a task in a group** | `deltask t/TASK_NAME g/GROUP_NAME`<br> e.g.,`deltask t/v1.2 user guide g/CS2103-W16-3`
-**Displays the tasks in a group** | `viewtask g/GROUP_NAME`<br> e.g.,`viewtask g/CS2103-W16-3`
+**Display the tasks in a group** | `viewtask g/GROUP_NAME`<br> e.g.,`viewtask g/CS2103-W16-3`
