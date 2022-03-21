@@ -29,9 +29,7 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
-
         ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_STATUS, PREFIX_TAG);
-
         boolean hasPrefix = false;
         boolean hasNamePrefix = argumentMultimap.arePrefixesPresent(PREFIX_NAME);
         boolean hasStatusPrefix = argumentMultimap.arePrefixesPresent(PREFIX_STATUS);
@@ -62,18 +60,17 @@ public class FindCommandParser implements Parser<FindCommand> {
             predicateArrayList.add(new TagsContainsKeywordsPredicate(Arrays.asList(keywordsArr)));
         }
 
-        // if no prefix, find acts as a general search, otherwise it acts as a narrow search based on keywords
+        // if no prefix, find acts as a general search based on 1 keyword,
+        // otherwise it acts as a narrow search based on prefix and keywords
         if (!hasPrefix) {
             keywordsArr = getKeywords(args);
             return new FindCommand(new ShowContainsKeywordsPredicate(Arrays.asList(keywordsArr)));
         } else {
-            return new FindCommand(predicateArrayList.stream().reduce(a -> true, Predicate::and));
+            return new FindCommand(predicateArrayList.stream().reduce(Predicate::and).orElse(x ->true));
         }
     }
 
     public String[] getKeywords(String args) throws ParseException {
-        // throws an assertion error if args is empty
-        assert args != null;
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
