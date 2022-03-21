@@ -84,71 +84,27 @@ public class MyGm {
         players.setPerson(target, editedPerson);
     }
 
-    boolean containsPlayer(String name) {
-        return this.players.containsName(new Name(name));
+    /**
+     * Checks if the system contains a player with the given {@code name}.
+     *
+     * @param name The player name to be checked.
+     * @return True if the system contains a player with the given name.
+     */
+    public boolean containsPlayer(Name name) {
+        return this.players.containsName(name);
 
     }
 
     // add more methods here to facilitate update of players and teams
 
     /**
-     * Deletes a player from a lineup.
-     */
-    public boolean deletePlayerFromLineup(String player, String lineup, String team) {
-        if (!containsPlayer(player)) {
-            return false;
-        } else if (!(new TeamName(team)).equals(this.players.getPersonTeam(
-                this.players.getPerson(new Name(player))).getTeamName())) {
-            return false;
-        } else {
-            Person currPlayer = this.players.getPerson(new Name(player));
-            Lineup currLineup = null;
-            boolean containsLineup = false;
-            for (Lineup tempLineup : this.players.getPersonLineups(this.players.getPerson(new Name(player)))) {
-                if (tempLineup.getLineupName().equals(new LineupName(lineup))) {
-                    currLineup = tempLineup;
-                    containsLineup = true;
-                    break;
-                }
-            }
-
-            if (!containsLineup) {
-                return false;
-            }
-
-            this.players.removePersonFromLineup(currPlayer, currLineup);
-            currLineup.removePlayer(currPlayer);
-            return true;
-        }
-    }
-
-    /**
-     * Deletes a player from a team.
-     */
-    public boolean deletePlayerFromTeam(String player, String team) {
-        if (!containsPlayer(player)) {
-            return false;
-        } else if (!(new TeamName(team)).equals(this.players.getPersonTeam(
-                this.players.getPerson(new Name(player))).getTeamName())) {
-            return false;
-        } else {
-            Person currPlayer = this.players.getPerson(new Name(player));
-            Team currTeam = this.players.getPersonTeam(currPlayer);
-
-            this.players.removePersonFromTeam(currPlayer, currTeam);
-            currTeam.removePlayer(currPlayer);
-            return true;
-        }
-    }
-
-    /**
      * Deletes a player.
      */
-    public boolean deletePlayerFromPool(String player) {
+    public boolean deletePlayer(Name player) {
         if (!containsPlayer(player)) {
             return false;
         } else {
-            Person currPlayer = this.players.getPerson(new Name(player));
+            Person currPlayer = this.players.getPerson(player);
             if (this.players.getPersonTeam(currPlayer) != null) {
                 Team currTeam = this.players.getPersonTeam(currPlayer);
 
