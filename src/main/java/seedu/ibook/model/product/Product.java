@@ -12,6 +12,11 @@ import javafx.collections.transformation.FilteredList;
 import seedu.ibook.model.item.Item;
 import seedu.ibook.model.item.UniqueItemList;
 
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import seedu.ibook.model.item.Item;
+import seedu.ibook.model.item.UniqueItemList;
+
 /**
  * Represents a Product in the ibook.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -41,7 +46,7 @@ public class Product {
         this.price = price;
         filteredItems = new FilteredList<>(this.items.asUnmodifiableObservableList());
     }
-
+  
     /**
      * Every field must be present and not null.
      */

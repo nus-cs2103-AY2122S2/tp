@@ -14,11 +14,10 @@ package Logic {
     class LogicManager
 }
 
-package Model {
-    class HiddenModel<<Hidden>>
+package Model <<Rectangle>> {
 }
 
-package Storage {
+package Storage <<Rectangle>> {
 }
 
 class HiddenOutside<<Hidden>>
