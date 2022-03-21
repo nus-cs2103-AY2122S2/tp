@@ -65,7 +65,7 @@ public class UniquePlayerList {
     public String getAvailableJerseyNumber() {
         Stream<Integer> stream = IntStream.range(0, MAXIMUM_CAPACITY).boxed();
         List<Integer> ls = stream
-                .filter(x -> !this.jerseyToPersonMap.containsKey(new JerseyNumber(String.valueOf(x))))
+                .filter(x -> !this.jerseyToPersonMap.containsKey(new JerseyNumber(((Integer) x).toString())))
                 .collect(Collectors.toList());
         return ls.toString();
     }
