@@ -72,20 +72,28 @@ Broadly speaking, ContaX consists of an *Address Book* for managing Contacts, an
 
 **:information_source: This section details the format(s) that date and time inputs are expected to be in.**<br>
 
-* All date inputs must conform to the following format: `dd-mm-yyyy`.
+* All date inputs must conform to one of the following formats:
+  * `dd-mm-yyyy`
+  * `dd/mm/yyyy`
+  * `dd MMM yyyy` with the date components appearing in any order
 
 | Field | Description |
 | - | - |
 | `dd` | Day of the month. |
 | `mm` | Numerical representation of the month, from `1` to `12`. |
+| `MMM` | Textual representation of the month, such as `oct` or `october`. |
 | `yyyy` | Year in the full 4-digit format. |
 
-* All time inputs must conform to the following format: `hh:mm`
+* All time inputs must conform to one of the following formats:
+  * `hh:mm`
+  * `HH:mm aa`
 
 | Field | Description |
 | - | - |
 | `hh` | Hour of the day, in 24-hour format. |
+| `HH` | Hour of the day, in 12-hour format. |
 | `mm` | Minute of the hour, from `00` to `59`. |
+| `aa` | Either `am` or `pm`, case-insensitive. |
 
 </div>
 
