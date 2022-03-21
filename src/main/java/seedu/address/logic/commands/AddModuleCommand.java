@@ -136,7 +136,6 @@ public class AddModuleCommand extends Command {
         if (hasModulesInCommon(personToEdit, modulesToAddActual)) {
             List<Module> newModules = getNewModules(personToEdit, modulesToAddActual);
 
-            String feedback;
             if (newModules.isEmpty()) {
                 return new CommandResult(String.format(MESSAGE_DUPLICATE_MODULES_EXIST + MESSAGE_NO_NEW_MODULES_ADDED,
                         editedPerson.getName(),
