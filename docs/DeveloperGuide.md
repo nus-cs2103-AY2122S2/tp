@@ -321,16 +321,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `IBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a product**
+#### UC1: Listing products
 
 **MSS**
 
-1.  User requests to list products according to a filter
-2.  IBook shows a list of products
-3.  User requests to delete a product in the list specified by the index
-4.  AddressBook deletes the product
+1. User requests to list products according to a filter
+2. IBook shows a list of products
 
-    Use case ends.
 
 **Extensions**
 
@@ -338,34 +335,68 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is invalid.
-
-    * 3a1. IBook shows an error message.
-
-      Use case resumes at step 2.
-
-**Use case: Update a product**
+#### UC2: Adding a product
 
 **MSS**
 
-1.  User requests to list products according to a filter
-2.  IBook shows a list of products
-3.  User requests to update a product in the list specified by the index
-4.  AddressBook update the product
+1. User request to add a product to IBook
+2. IBook adds the product
+
+**Extensions**
+
+* 1a. Required fields are all present but are invalid.
+
+    * 1a1. IBook shows an error message.
+
+      Use case resumes at step 1.
+
+* 1b. Not all required fields are present (eg Name).
+
+    * 1b1. IBook shows an error message.
+
+      Use case resumes at step 1.
+
+* 1c. Optional fields like Category is missing.
+
+    * 1c1. IBook automatically sets the category to miscellaneous.
+    
+      Use case resumes at step 1.
+
+#### UC3: Delete a product
+
+**MSS**
+
+1. User requests to list products ([UC1](#uc1-listing-products))
+2. User requests to delete a product in the list specified by the index
+3. IBook deletes the product
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The given index is invalid.
 
-  Use case ends.
+    * 2a1. IBook shows an error message.
 
-* 3a. The given index is invalid.
+      Use case resumes at step 1.
 
-    * 3a1. IBook shows an error message.
+#### UC4: Update a product
 
-      Use case resumes at step 2.
+**MSS**
+
+1. User requests to list products ([UC1](#uc1-listing-products))
+2. User requests to update a product in the list specified by the index 
+3. IBook updates the product
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given index is invalid.
+
+    * 2a1. IBook shows an error message.
+
+      Use case resumes at step 1.
 
 *{More to be added}*
 
