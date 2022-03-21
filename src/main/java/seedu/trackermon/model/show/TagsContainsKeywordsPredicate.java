@@ -8,24 +8,25 @@ import seedu.trackermon.commons.util.StringUtil;
 /**
  * Tests that a {@code Show}'s {@code Name} matches any of the keywords given.
  */
-public class NameContainsKeywordsPredicate implements Predicate<Show> {
+public class TagsContainsKeywordsPredicate implements Predicate<Show> {
     private final List<String> keywords;
 
-    public NameContainsKeywordsPredicate(List<String> keywords) {
+    public TagsContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
     @Override
     public boolean test(Show show) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsFragmentedWordIgnoreCase(show.getName().fullName, keyword));
+                .anyMatch(keyword -> StringUtil.containsFragmentedWordIgnoreCase(show.getTags().toString(), keyword));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof NameContainsKeywordsPredicate // instanceof handles nulls
-                && keywords.equals(((NameContainsKeywordsPredicate) other).keywords)); // state check
+                || (other instanceof TagsContainsKeywordsPredicate // instanceof handles nulls
+                && keywords.equals(((TagsContainsKeywordsPredicate) other).keywords)); // state check
     }
+
 
 }
