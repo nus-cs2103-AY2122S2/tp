@@ -91,6 +91,13 @@ public class UniqueItemList implements Iterable<Item> {
     }
 
     /**
+     * Increase the quantity of the specified item by 1.
+     */
+    public void incrementItemCount(Item target) {
+        incrementItemCount(target, new Quantity(1));
+    }
+
+    /**
      * Decrease the quantity of the specified item.
      */
     public void decrementItemCount(Item target, Quantity quantity) {
@@ -107,6 +114,13 @@ public class UniqueItemList implements Iterable<Item> {
         } else {
             internalList.set(index, newItem);
         }
+    }
+
+    /**
+     * Decrease the quantity of the specified item by 1.
+     */
+    public void decrementItemCount(Item target) {
+        decrementItemCount(target, new Quantity(1));
     }
 
     public Integer getTotalQuantity() {
