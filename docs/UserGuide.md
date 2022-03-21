@@ -132,6 +132,29 @@ Expected outcome:
 
 * The student contact is removed from ArchDuke.
 
+### Locating student contacts by attributes: `find`
+
+Locates all student contact in ArchDuke based on attributes that matches the given keywords. 
+The attributes supported are: `n/NAME`, `p/PHONE_NUMER`, `e/EMAIL`, `a/ACADEMIC_MAJOR`, `t/TAG`
+The specified keywords are case-insensitive. The attributes could be accessed by adding prefixes before the keywords.
+The result must match the exact wording, partial words will not match (e.g. `n/Dav` will not match the student contact
+`David` or `David Li`).
+
+Format: `find PREFIX/KEYWORD [MORE_KEYWORDS]`
+
+Example:
+
+* `find n/Alex`
+* `find p/98765432`
+* `find e/example@u.nus.edu`
+* `find a/Computer Science`
+* `find t/friends`
+
+Expected outcome:
+
+* Lists all student contacts that match with those attributes and displays the number of student contacts that 
+match those keywords.
+
 ## Student Group Management
 
 ### Create a group: `addgroup`
@@ -165,8 +188,8 @@ Expected outcome:
 ### Assign a student to a group: `assign`
 
 Assigns a student to an existing group in ArchDuke. `assign` is followed by the index at which the student is 
-in the ArchDuke contact list and the group name in which the student would be assigned. The group must already exist
-in ArchDuke, and the index must be a positive integer.
+in the ArchDuke contact list and the group name in which the student would be assigned. 
+The group must **already exist** in ArchDuke, and the index must be a **positive integer**.
 
 Format: `assign INDEX g/GROUP_NAME`
 
@@ -184,7 +207,7 @@ Expected outcome:
 
 Deassigns a student from an existing group in ArchDuke. `deassign` is followed by the index at which the student
 is in the ArchDuke contact list and the group name in which the student would be deassigned. 
-The group must already exist in ArchDuke, and the index must be a positive integer.
+The group must **already exist** in ArchDuke, and the index must be a **positive integer**.
 
 Format: `deassign INDEX g/GROUP_NAME`
 
