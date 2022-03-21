@@ -230,7 +230,7 @@ Examples:
 
 Shows a list of all assessments belonging to a particular module.
 
-Format: `list assessment [m\MODULE_INDEX]`
+Format: `list assessment m\MODULE_INDEX`
 
 Examples:
 * `list assessment m/1` displays the assessment(s) belonging to the 1st module shown when `list module` is run.
@@ -457,7 +457,7 @@ _Details coming soon ..._
         <td>assessments</td>
         <td>
             <ul>
-                <li>syntax: <code>list assessment [m\MODULE_INDEX]</code></li>
+                <li>syntax: <code>list assessment m\MODULE_INDEX</code></li>
                 <li>e.g., <code>list assessment m/1</code></li>
             </ul>
         </td>

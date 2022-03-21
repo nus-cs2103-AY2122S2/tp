@@ -116,8 +116,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
-
+<img src="images/ModelClassDiagram.png" width="600" />
 
 The `Model` component,
 
@@ -170,15 +169,15 @@ The proposed delete mechanism is facilitated by `TAssist`. Its functionality, us
 * `DeleteCommand#execute()` — Executes `ModelManager#deleteEntity()` with the specified entity.
 * `ModelManager#deleteEntity()` — Deletes the specified entity.
 
-However, when a `TaModule` object is deleted, its associated `ClassGroup` and `Assessment` objects are also deleted.
+However, when a `TaModule` object is deleted, its associated `ClassGroup` and `Assessment` object(s) are also deleted.
 
-Given below is an example usage scenario using `Class Group` objects and how the delete mechanism behaves at each step.
+Given below is an example usage scenario using `ClassGroup` objects and how the delete mechanism behaves at each step.
 
 Step 1. The user launches the application. The `TAssist` is already populated with data.
 
 ![DeleteState0](images/DeleteState0.png)
 
-Step 2. The user executes `list class group` command to list the class groups in the `TAssist`. The `list` command implementation is detailed below in the List Feature section.
+Step 2. The user executes `list class` command to list the class groups in the `TAssist`. The `list` command implementation is detailed below in the List Feature section.
 
 Step 3. The user executes `delete class 2` to delete the 2nd class group in the list which is `c2`. The `delete` command also calls `DeleteCommandParser#parse()`, which parses the input and return the index and entity type.
 
