@@ -18,6 +18,7 @@ import seedu.ibook.model.IBook;
 import seedu.ibook.model.Model;
 import seedu.ibook.model.ReadOnlyIBook;
 import seedu.ibook.model.ReadOnlyUserPrefs;
+import seedu.ibook.model.item.Item;
 import seedu.ibook.model.product.Product;
 import seedu.ibook.testutil.ProductBuilder;
 
@@ -131,6 +132,11 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredProductList(Predicate<Product> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredItemListForProducts(Predicate<Item> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }

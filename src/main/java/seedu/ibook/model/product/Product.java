@@ -1,5 +1,6 @@
 package seedu.ibook.model.product;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.ibook.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
@@ -17,6 +18,8 @@ import seedu.ibook.model.item.UniqueItemList;
  */
 public class Product {
 
+    public static final Predicate<Item> PREDICATE_SHOW_ALL_ITEMS = unused -> true;
+
     // Identity fields
     private final Name name;
     private final Category category;
@@ -26,8 +29,6 @@ public class Product {
     private final Price price;
     private final UniqueItemList items = new UniqueItemList();
     private final FilteredList<Item> filteredItems;
-
-    public static final Predicate<Item> PREDICATE_SHOW_ALL_ITEMS = unused -> true;
 
     /**
      * Every field must be present and not null.
@@ -153,9 +154,14 @@ public class Product {
         return builder.toString();
     }
 
+    /**
+     * Checks if the Product has items that are expired
+     *
+     * @return true if the product contains items that are expired.
+     */
     public boolean hasExpiredItems() {
         for (Item i : items) {
-            if(i.isExpired()) {
+            if (i.isExpired()) {
                 filteredItems.setPredicate(Item::isExpired);
                 return true;
             }
@@ -164,7 +170,13 @@ public class Product {
         return false;
     }
 
-    public void UpdateFilteredItemList(Predicate<Item> predicate) {
+    /**
+     * Updates the filter of the filtered product list to filter by the given {@code predicate}.
+     * @param predicate
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    public void updateFilteredItemList (Predicate<Item> predicate) {
+        requireNonNull(predicate);
         filteredItems.setPredicate(predicate);
     }
 

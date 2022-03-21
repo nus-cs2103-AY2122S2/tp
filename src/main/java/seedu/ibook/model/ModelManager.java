@@ -151,7 +151,7 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredItemListForProducts(Predicate<Item> predicate) {
         for (Product p: filteredProducts) {
-            p.UpdateFilteredItemList(predicate);
+            p.updateFilteredItemList(predicate);
         }
     }
 
