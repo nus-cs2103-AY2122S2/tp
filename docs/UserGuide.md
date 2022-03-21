@@ -28,7 +28,7 @@ ArchDuke is a **desktop app for managing student contacts and groups, optimized 
 
    * **`add`**`n/John Doe p/12345678 e/johndoe@u.nus.edu a/Computer Science [t/optional]` : Adds a contact named `John Doe` to ArchDuke.
 
-   * **`clear`** : Deletes all student contacts.
+   * **`clear`** : Deletes all entries in ArchDuke.
 
    * **`exit`** : Exits the app.
 
