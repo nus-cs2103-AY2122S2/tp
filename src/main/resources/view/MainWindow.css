@@ -1,0 +1,88 @@
+.label {
+    -fx-font-size: 15px;
+    -fx-font-family: "Segoe UI", sans-serif;
+}
+
+.error {
+    -fx-text-fill: #d06651 !important;
+}
+
+.list-view {
+    -fx-padding: 0;
+}
+
+.list-cell:filled {
+    -fx-background-radius: 14px;
+    -fx-border-radius: 10px;
+    -fx-padding: 14px 16px;
+    -fx-border-insets: 5px 9px;
+    -fx-background-insets: 5px 9px;
+}
+
+.list-cell .label {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+}
+
+.list-cell .cell_big_label {
+    -fx-font-family: "Segoe UI Semibold", sans-serif;
+    -fx-font-size: 15px;
+}
+
+.result-display {
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-font-size: 15px;
+    -fx-wrap-text: "true";
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-padding: 2px;
+}
+
+.result-display .content {
+    -fx-background-radius: 0;
+}
+
+.status-bar .label {
+    -fx-font-family: "Segoe UI Light", sans-serif;
+    -fx-padding: 10px;
+    -fx-pref-height: 30px;
+}
+
+.increment-button, .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.increment-arrow, .decrement-arrow {
+    -fx-shape: " ";
+}
+
+#commandTypeLabel {
+    -fx-font-size: 16px;
+    -fx-text-fill: #F70D1A;
+}
+
+#commandTextField {
+    -fx-border-width: 2px;
+    -fx-font-family: "Segoe UI Semibold", sans-serif;
+    -fx-font-size: 16px;
+}
+
+#tags, #memberships {
+    -fx-hgap: 7px;
+}
+
+#tags .label, #memberships .label {
+    -fx-padding: 6px;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+    -fx-font-size: 11px;
+    -fx-font-family: "Segoe UI Semibold", sans-serif;
+    -fx-border-insets: 3px 0;
+    -fx-background-insets: 3px 0;
+}
+
+#optionalFields .label {
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-font-size: 13px;
+}
