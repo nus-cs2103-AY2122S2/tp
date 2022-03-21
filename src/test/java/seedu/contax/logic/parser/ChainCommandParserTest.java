@@ -50,8 +50,9 @@ public class ChainCommandParserTest {
         commandList.add(expectedCommand);
         commandList.add(new AddPersonCommand(new PersonBuilder().build()));
 
-        assertParseSuccess(parser, "edit " + userInput
-                        + "&& add n/Amy Bee p/85355255 e/amy@gmail.com a/123, Jurong West Ave 6, #08-111",
+        assertParseSuccess(parser, EditPersonCommand.COMMAND_WORD + " " + userInput
+                        + "&&  " + AddPersonCommand.COMMAND_WORD
+                        + " n/Amy Bee p/85355255 e/amy@gmail.com a/123, Jurong West Ave 6, #08-111",
                 new ChainCommand(commandList));
     }
 

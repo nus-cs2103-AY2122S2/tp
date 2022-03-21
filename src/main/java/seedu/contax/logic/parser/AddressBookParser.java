@@ -23,7 +23,7 @@ import seedu.contax.logic.commands.EditTagCommand;
 import seedu.contax.logic.commands.ExitCommand;
 import seedu.contax.logic.commands.ExportCsvCommand;
 import seedu.contax.logic.commands.FindByTagCommand;
-import seedu.contax.logic.commands.FindCommand;
+import seedu.contax.logic.commands.FindPersonCommand;
 import seedu.contax.logic.commands.HelpCommand;
 import seedu.contax.logic.commands.ImportCsvCommand;
 import seedu.contax.logic.commands.ListAppointmentCommand;
@@ -74,8 +74,8 @@ public class AddressBookParser {
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
+        case FindPersonCommand.COMMAND_WORD:
+            return new FindPersonCommandParser().parse(arguments);
 
         case ListPersonCommand.COMMAND_WORD:
             return new ListPersonCommand();

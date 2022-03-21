@@ -36,7 +36,7 @@ import seedu.contax.logic.commands.EditTagCommand.EditTagDescriptor;
 import seedu.contax.logic.commands.ExitCommand;
 import seedu.contax.logic.commands.ExportCsvCommand;
 import seedu.contax.logic.commands.FindByTagCommand;
-import seedu.contax.logic.commands.FindCommand;
+import seedu.contax.logic.commands.FindPersonCommand;
 import seedu.contax.logic.commands.HelpCommand;
 import seedu.contax.logic.commands.ImportCsvCommand;
 import seedu.contax.logic.commands.ListAppointmentCommand;
@@ -104,9 +104,9 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        FindPersonCommand command = (FindPersonCommand) parser.parseCommand(
+                FindPersonCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindPersonCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test

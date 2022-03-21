@@ -26,6 +26,7 @@ import org.junit.jupiter.api.io.TempDir;
 import seedu.contax.logic.commands.AddAppointmentCommand;
 import seedu.contax.logic.commands.AddPersonCommand;
 import seedu.contax.logic.commands.CommandResult;
+import seedu.contax.logic.commands.DeletePersonCommand;
 import seedu.contax.logic.commands.ListPersonCommand;
 import seedu.contax.logic.commands.exceptions.CommandException;
 import seedu.contax.logic.parser.exceptions.ParseException;
@@ -70,7 +71,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete 9";
+        String deleteCommand = DeletePersonCommand.COMMAND_WORD + " 9";
         assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
