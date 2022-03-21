@@ -125,7 +125,7 @@ public class ParserUtil {
         requireNonNull(course);
         String trimmedCourse = course.trim();
         if (!Course.isValidCourse(trimmedCourse)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Course.MESSAGE_CONSTRAINTS);
         }
         return new Course(trimmedCourse);
     }

@@ -6,9 +6,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Course {
     public static final String MESSAGE_CONSTRAINTS =
             "Courses should only contain alphabets, and it should not be blank\n"
-            + "Accepting only exact matches of either Computing courses"
-            + "(Business Analytics, Computer Engineering, "
-            + "Computer Science, Information Security, Information Systems)";
+            + "Accepting only an exact match of a Computing course from this list\n"
+            + "1. Business Analytics\n2. Computer Engineering\n"
+            + "3. Computer Science\n4. Information Security\n5. Information Systems";
     private static final String[] COURSES = {
         "Business Analytics", "Computer Engineering", "Computer Science",
         "Information Security", "Information Systems" };
