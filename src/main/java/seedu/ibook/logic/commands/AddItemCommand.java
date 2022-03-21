@@ -18,17 +18,17 @@ public class AddItemCommand extends Command {
 
     public static final String COMMAND_WORD = "add item";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an item to the IBook. "
-            + "Parameters: "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an item to the IBook by the "
+            + "index number (a positive integer) of a product used in the displayed product list. "
+            + "Parameters: INDEX "
             + PREFIX_EXPIRY_DATE + "EXPIRY DATE "
             + PREFIX_QUANTITY + "QUANTITY "
             + "\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_EXPIRY_DATE + "2022-01-01 "
             + PREFIX_QUANTITY + "10";
 
     public static final String MESSAGE_SUCCESS = "New item added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PRODUCT = "This item already exists in the ibook.";
 
     private final Index productIndex;
     private final Item toAdd;
@@ -45,10 +45,6 @@ public class AddItemCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
-        if (model.hasItem(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PRODUCT);
-        }
 
         List<Product> lastShownList = model.getFilteredProductList();
         if (productIndex.getZeroBased() >= lastShownList.size()) {
