@@ -72,6 +72,12 @@ public class PersonCard extends UiPart<Region> {
             buyer.setManaged(false);
         }
 
+        if (!person.getFavourite().isUnfavourited()) {
+            favourite.setText(person.getFavourite().toString());
+        } else {
+            favourite.setManaged(false);
+        }
+
         if (person.getProperties().isEmpty()) {
             property.setManaged(false);
         } else {

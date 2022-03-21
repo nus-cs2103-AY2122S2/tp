@@ -67,9 +67,9 @@ public class MainWindow extends UiPart<Stage> {
 
         setAccelerators();
 
-        favouriteWindow = new FavouriteWindow(logic);
         helpWindow = new HelpWindow();
         matchWindow = new MatchWindow(logic);
+        favouriteWindow = new FavouriteWindow(logic);
     }
 
     public Stage getPrimaryStage() {
@@ -163,6 +163,18 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the favourites window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleFavourites() {
+        if (!favouriteWindow.isShowing()) {
+            favouriteWindow.show();
+        } else {
+            favouriteWindow.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -177,19 +189,8 @@ public class MainWindow extends UiPart<Stage> {
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         matchWindow.hide();
+        favouriteWindow.hide();
         primaryStage.hide();
-    }
-
-    /**
-     * Opens up FavouriteWindow by setting up the fxml scene and opening it
-     */
-    @FXML
-    private void handleFavourite(ActionEvent event) {
-        if (!favouriteWindow.getRoot().isShowing()) {
-            favouriteWindow.show();
-        } else {
-            favouriteWindow.getRoot().requestFocus();
-        }
     }
 
     public PersonListPanel getPersonListPanel() {
@@ -213,6 +214,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowMatch()) {
                 handleMatch();
+            }
+
+            if (commandResult.isShowFavourites()) {
+                handleFavourites();
             }
 
             if (commandResult.isExit()) {

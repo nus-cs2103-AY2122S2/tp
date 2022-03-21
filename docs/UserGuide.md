@@ -143,7 +143,7 @@ Examples:
 
 ### Matching properties and preferences: `match`
 
-Opens a new window and shows all sellers and buyers with matching property and preference. 
+Opens a new window and shows all sellers and buyers with matching property and preference.
 
 Format: `match`
 
@@ -161,13 +161,31 @@ Format: `exit`
 
 ### Favourite a person: `favourite`
 
-Favourites the specified person from the application. The user (real estate agent) will be able to view the more compact list of favorited persons in a new window that can be opened up through the ‘Favourite’ menu item.
+Favourites the specified client from the application represented by a star as show below. The user (real estate agent) will be able to view the more compact list of favorited clients in a new window called the Favourites window.
+
+![images/Favouritestar.png](images/Favouritestar.png)
 
 Format: `favourite INDEX`
 
 - Favourites the person at the specified `INDEX`.
 - The index refers to the index number shown in the displayed person list.
 - The index **must be a positive integer** 1, 2, 3, …
+
+### Open Favourites window:
+
+Opens a new window that displays compacted list of clients that have been favourited.
+
+#### By Command: `fw`
+
+Format: `fw`
+
+#### By Ui:
+
+1)  Navigate to the `File` menu and click on it.
+
+2) Under it, click on `Favourites`
+
+3) The system will pop up the Favourites window that contains a list of Persons favourited by the user.
 
 ### Open Help Window: `help`
 
@@ -182,16 +200,6 @@ Format: `help`
 1. Link to the full user guide
 2. Buttons to access the different help sections
 3. Help contents
-
-### Open Favourite Window:
-
-This opens up a new window that lists Persons that have been favourited.
-
-1)  Navigate to the ‘File’ menu item and click on it.
-
-2) Under it, click on ‘Favourite’
-
-3) The system will pop up the window that contains a list of Persons favourited by the user.
 
 ### User onboarding [Coming soon]
 
@@ -211,7 +219,7 @@ RealEstatePro data are saved as a JSON file `[JAR file location]/data/realestat
 # FAQ
 
 # Command Summary
-
+                                                                                                  |
 | Action | Format, Examples  |
 | --- | --- |
 | Add | add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY]... [pf/PREFERENCE] t/USER_TYPE
@@ -228,4 +236,5 @@ e.g., find James Jake  |
 |Match | match |
 | Favourite | favourite INDEX
 e.g., favourite 3  |
+| Open Favourites window                                                                                               | fw
 
