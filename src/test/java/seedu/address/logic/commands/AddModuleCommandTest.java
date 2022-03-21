@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_PM1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_SWE;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -28,11 +28,10 @@ class AddModuleCommandTest {
     @Test
     void execute_addModuleUnfilteredList_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(firstPerson).withModules(VALID_MODULE_SWE, VALID_MODULE).build();
+        Person editedPerson = new PersonBuilder(firstPerson).withModules(VALID_MODULE_SWE, VALID_MODULE_PM1).build();
 
         List<Module> modules = new ArrayList<>();
-        modules.add(new Module(VALID_MODULE_SWE));
-        modules.add(new Module(VALID_MODULE));
+        modules.add(new Module(VALID_MODULE_PM1));
         AddModuleCommand addModuleCommand = new AddModuleCommand(INDEX_FIRST_PERSON, modules);
 
         String expectedMessage = String.format(AddModuleCommand.MESSAGE_SUCCESS, firstPerson.getName(), modules);
