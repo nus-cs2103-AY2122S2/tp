@@ -318,6 +318,7 @@ The implemented find by status mechanism is facilitated by `FindByStatus`. It ex
 #### Implementation
 
 The implemented Class Code label is facilitated by `ClassCode`. It extends `AddressBook` with a Class Code, tied to each person.
+* Group students by using `ClassCode` and used as an identifier for contact-tracing
 
 ### \[Implemented\] Find By Class Code feature
 
@@ -356,6 +357,23 @@ The implemented find by activity mechanism is facilitated by `FindByActivity`. I
 ### \[Enhancement\] Batch update
 
 #### Enhancements
+
+The purpose of the batch update enhancement is update all students by `ClassCode` when the `Status` of a student in that `ClassCode` changes from `Negative` -> `Positive` and vice-versa.
+
+The batch update enhancement is facilitated by using `execute()` command in the `EditCommand` class.
+
+Batch update depends on the `Model` and `Person` class and methods to implement this enhancement.
+
+How the batch update works:
+
+* When `execute()` in `EditCommand` checks for a change in `Status` if the person to edit from `Negative` -> `Positive` and `Status` is not already `Positive`
+  * If true, a filtered `List` of students with the same `ClassCode`, students who are not `Positive`, not the current student being edited would be created.
+  * All students `Status` in the filtered `List` will be switched from `Negative` -> `Close-Contact`.
+* Conversely, when a student's `Status` changes from `Positive` -> `Negative`, `execute()` will check the current student being edited that there are no `Positive` statuses in `ClassCode`.
+  * If true, all students `Status` in the filtered `List`will be switched to `Negative`.
+
+
+
 
 ### \[Proposed Enhancement\] Implementing CSV compatibility
 
