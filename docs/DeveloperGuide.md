@@ -177,7 +177,7 @@ This section will describe tag management in the address book as well as the fea
 
 ### Centralising Tags in the Address Book
 
-In the previous implementation, all `Tag`s are independent of one another despite having the same tag names. To improve the usability of the address book, tha tags are centralised so that the user can easily manage the tags as well as searching for `Person` objects that contain the tag.
+In the previous implementation, all `Tag` objects are independent of one another despite having the same tag names. To improve the usability of the address book, the tags are centralised so that the user can easily manage them as well as searching for `Person` objects that contain the tag.
 This is done by creating a `UniqueTagList` within `AddressBook` which will store all tags that were created by the user. Whenever a command relating to `Tag` is executed, it will not only apply the changes to the `Tag` in the `UniqueTagList` but will also propagate these changes to the relevant `Person`s who contain the specified tag.
 All operations relating to the `Tag` objects are done at the `AddressBook` level to ensure that the `Tag` objects and `Person` objects are properly synchronised.
 
