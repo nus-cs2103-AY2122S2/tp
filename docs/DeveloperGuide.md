@@ -245,73 +245,60 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
-
 ### \[Implemented\] Status feature
 
 #### Implementation
 
-The implemented status label is facilitated by `Status`. It extends `AddressBook` with a Status, tied to each person. Additionally, it implements the following operations:
-
-* `Status#FUNCTIONNAME()` — DESCRIPTION.
-
-These operations are exposed in the `Model` interface as `Model#___()`, `Model#___()` and `Model#___()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. 
-
-![NAME PLACEHOLDER]()
-
-Step 2. 
-
-![NAME PLACEHOLDER]()
-
-Step 3. 
-
-![NAME PLACEHOLDER]()
-
-Step 4. 
-
-![NAME PLACEHOLDER]()
-
-The following sequence diagram shows how the undo operation works:
-
-![NAME PLACEHOLDER]()
-
-Step 5. 
-
-![NAME PLACEHOLDER]()
-
-Step 6. 
-
-![NAME PLACEHOLDER]()
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="IMAGE PATH" width="250" />
+The implemented status label is facilitated by `Status` attribute. This label is an additional attribute for each person within the application
+and is implemented as a separate file within the `Person` Package.
 
 #### Design considerations:
 
-**Aspect: PLACEHOLDER:**
+**Aspect: Abstracting `Status` attribute**
 
-* **Alternative 1 (current choice):** PLACEHOLDER.
-  * Pros: PLACEHOLDER.
-  * Cons: PLACEHOLDER.
+* **Alternative 1 (current choice):** Abstracted class.
+  * Pros: 
+    * Higher Level of abstraction
+    * Changes can be made easily from this class
+  * Cons: 
+    * Adding files to the currently already large amount of files within
+    * Difficulty navigating through folders to find specific files
 
-* **Alternative 2:** PLACEHOLDER.
-  * Pros: PLACEHOLDER.
-  * Cons: PLACEHOLDER.
+* **Alternative 2:** Attribute placed within `Person` class.
+  * Pros: 
+    * Single file where changes can be made
+  * Cons: 
+    * Lesser level of abstraction, changes made have to be constantly changed throughout the file
 
 ### \[Implemented\] Find By Status feature
 
 #### Implementation
 
-The implemented find by status mechanism is facilitated by `FindByStatus`. It extends `AddressBook` with a Find By Status, allowing users to find persons by their current statuses.
+The implemented find by status mechanism is facilitated by `findstatus` command. It extends `UDT` with a Find By Status, allowing users to find persons by their current COVID-19 statuses.
+
+Classes added for this feature: 
+* `StatusContainsKeywordsPredicate`
+* `FindStatusCommand`
+* `FindStatusCommandParser`
+
+#### Design considerations:
+
+**Aspect: Abstracting into different classes**
+
+* **Alternative 1 (current choice):** Abstracted classes.
+    * Pros:
+        * Higher Level of abstraction
+        * Changes can be made easily from this class
+        * Different classes serve different lower-level purposes and are organised into separate packages (e.g. `FindStatusCommandParser` belongs to the `parser` package)
+    * Cons:
+        * Adding files to the currently already large amount of files within
+        * Changes to this method may require going through all the different files being abstracted depending on what kind of changes are being made
+
+* **Alternative 2:** Single command that executed upon reading from parser
+    * Pros:
+        * Single file where changes can be made
+    * Cons:
+        * Lesser level of abstraction, file may become exceptionally long to accommodate all the smaller features required
 
 ### \[Implemented\] Class Code feature
 
@@ -329,7 +316,27 @@ The implemented find by class code mechanism is facilitated by `FindByClassCode`
 
 #### Implementation
 
-The implemented Activity label is facilitated by `ClassCode`. It repurposes `AddressBook` `Tag` to Activity, tied to each person.
+The implemented status label is facilitated by `Activity` attribute. This label is an additional attribute for each person within the application
+and is implemented as a separate package within the `activity` Package. A `person` will have a Set of `activity` as an attribute.
+
+#### Design considerations:
+
+**Aspect: Abstracting `activity` attribute**
+
+* **Alternative 1 (current choice):** Abstracted class.
+    * Pros:
+        * Higher Level of abstraction
+        * Changes can be made easily from this class
+        * Ease of accommodating how `activity` attribute can be implemented and added in to the `Person` class as a `Set`
+    * Cons:
+        * Adding files to the currently already large amount of files within
+        * Difficulty navigating through folders to find specific files
+
+* **Alternative 2:** Attribute placed within `Person` class.
+    * Pros:
+        * Single file where changes can be made
+    * Cons:
+        * Lesser level of abstraction, changes made have to be constantly changed throughout the file
 
 ### \[Implemented\] Find By Activity feature
 
@@ -490,13 +497,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The given status is invalid.
+
+    * 1a1. UltimateDivocTracker shows an error message.
 
   Use case ends.
 
-* 2a. The given status is invalid.
-
-  * 2a1. UltimateDivocTracker shows an error message.
+* 2a. The list is empty.
 
   Use case ends.
 
@@ -512,13 +519,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The given class is invalid.
+
+    * 1a1. UltimateDivocTracker shows an error message.
 
   Use case ends.
 
-* 2a. The given class is invalid.
-
-  * 2a1. UltimateDivocTracker shows an error message.
+* 2a. The list is empty.
 
   Use case ends.
 
@@ -542,9 +549,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 4a. The given status is invalid.
+* 3a. The given status is invalid.
 
-  * 4a1. UltimateDivocTracker shows an error message.
+  * 3a1. UltimateDivocTracker shows an error message.
 
   Use case ends.
 
@@ -609,6 +616,23 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+
+2. _{ more test cases …​ }_
+
+### Adding a person
+
+1. Adding a person to the list
+
+    1. Prerequisites: None
+
+    1. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/5A s/NEGATIVE`<br>
+       Expected: Student John Doe is added to the list. Details of the added contact shown in the status message.
+
+    1. Test case: `add 0`<br>
+       Expected: No person is added. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect delete commands to try: `add ?!@`, `add p/1231923`, `...` (Missing details)<br>
+       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
