@@ -5,7 +5,6 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.ibook.commons.core.GuiSettings;
-import seedu.ibook.commons.core.index.Index;
 import seedu.ibook.model.item.Item;
 import seedu.ibook.model.product.Product;
 

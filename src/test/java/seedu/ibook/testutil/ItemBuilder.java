@@ -58,6 +58,9 @@ public class ItemBuilder {
         return this;
     }
 
+    /**
+     * Builds the {@code Item} object.
+     */
     public Item build() {
         return new Item(product, expiryDate, quantity);
     }

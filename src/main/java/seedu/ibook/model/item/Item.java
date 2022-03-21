@@ -1,12 +1,10 @@
 package seedu.ibook.model.item;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.ibook.commons.util.AppUtil.checkArgument;
 import static seedu.ibook.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
-import seedu.ibook.model.item.exceptions.ItemMutationException;
 import seedu.ibook.model.product.Product;
 
 /**
@@ -17,7 +15,7 @@ public class Item implements Comparable<Item> {
 
     private static final String ITEMS_MUST_BE_EQUAL_CONSTRAINT = "Items must be equal";
 
-    private Product product = null;
+    private final Product product;
     private final ExpiryDate expiryDate;
     private final Quantity quantity;
 
@@ -25,35 +23,49 @@ public class Item implements Comparable<Item> {
      * Every field must be present and not null.
      */
     public Item(ExpiryDate expiryDate) {
-        requireAllNonNull(expiryDate);
-        this.expiryDate = expiryDate;
-        this.quantity = new Quantity(1);
+        this(null, expiryDate, new Quantity(1));
     }
 
     /**
      * Every field must be present and not null.
      */
     public Item(ExpiryDate expiryDate, Quantity quantity) {
+        this(null, expiryDate, quantity);
+    }
+
+    /**
+     * This constructor is kept as private as it is only used for creating new {@code Item} instances
+     * {@code product} is optional. Other fields must be present and not null.
+     */
+    public Item(Product product, ExpiryDate expiryDate, Quantity quantity) {
         requireAllNonNull(expiryDate, quantity);
+
+        this.product = product;
         this.expiryDate = expiryDate;
         this.quantity = quantity;
+
+        // Enforce two-way association
+        if (product != null) {
+            product.addItem(this);
+        }
     }
 
     public Product getProduct() {
         return product;
     }
 
-    public void setProduct(Product product) throws ItemMutationException {
+    /*
+    public Item setProduct(Product product) throws ItemMutationException {
         requireNonNull(product);
 
-        if (this.product != null) {
-            throw new ItemMutationException();
+        // Remove previous association
+        if (product != null) {
+            product.removeItem(this);
         }
 
-        // Enforce two-way association
-        this.product = product;
-        product.addItem(this);
+        return new Item(product, expiryDate, quantity);
     }
+    */
 
     public ExpiryDate getExpiryDate() {
         return expiryDate;
@@ -70,7 +82,7 @@ public class Item implements Comparable<Item> {
     public Item add(Item newItem) {
         checkArgument(this.isSameItem(newItem), ITEMS_MUST_BE_EQUAL_CONSTRAINT);
         Quantity newQuantity = quantity.add(newItem.getQuantity());
-        return new Item(expiryDate, newQuantity);
+        return new Item(product, expiryDate, newQuantity);
     }
 
     /**
@@ -80,7 +92,7 @@ public class Item implements Comparable<Item> {
     public Item subtract(Item newItem) {
         checkArgument(this.isSameItem(newItem), ITEMS_MUST_BE_EQUAL_CONSTRAINT);
         Quantity newQuantity = quantity.subtract(newItem.getQuantity());
-        return new Item(expiryDate, newQuantity);
+        return new Item(product, expiryDate, newQuantity);
     }
 
     public boolean isExpired() {
@@ -97,7 +109,7 @@ public class Item implements Comparable<Item> {
         }
 
         return otherItem != null
-            && otherItem.getProduct().equals(getProduct())
+            && Objects.equals(otherItem.getProduct(), getProduct()) // Checks for nullity then invokes equals()
             && otherItem.getExpiryDate().equals(getExpiryDate());
     }
 
@@ -116,7 +128,7 @@ public class Item implements Comparable<Item> {
         }
 
         Item otherItem = (Item) other;
-        return otherItem.getProduct().equals(getProduct())
+        return Objects.equals(otherItem.getProduct(), getProduct()) // Checks for nullity then invokes equals()
             && otherItem.getExpiryDate().equals(getExpiryDate())
             && otherItem.getQuantity().equals(getQuantity());
     }

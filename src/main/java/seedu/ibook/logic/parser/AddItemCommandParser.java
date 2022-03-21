@@ -1,21 +1,17 @@
 package seedu.ibook.logic.parser;
 
+import static seedu.ibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.ibook.logic.parser.CliSyntax.PREFIX_EXPIRY_DATE;
+import static seedu.ibook.logic.parser.CliSyntax.PREFIX_QUANTITY;
+
+import java.util.stream.Stream;
+
 import seedu.ibook.commons.core.index.Index;
 import seedu.ibook.logic.commands.AddItemCommand;
 import seedu.ibook.logic.parser.exceptions.ParseException;
 import seedu.ibook.model.item.ExpiryDate;
 import seedu.ibook.model.item.Item;
 import seedu.ibook.model.item.Quantity;
-import seedu.ibook.model.product.Category;
-import seedu.ibook.model.product.Description;
-import seedu.ibook.model.product.Name;
-import seedu.ibook.model.product.Price;
-import seedu.ibook.model.product.Product;
-
-import java.util.stream.Stream;
-
-import static seedu.ibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.ibook.logic.parser.CliSyntax.*;
 
 public class AddItemCommandParser implements Parser<AddItemCommand> {
     /**
