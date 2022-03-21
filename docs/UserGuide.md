@@ -26,7 +26,7 @@ ArchDuke is a **desktop app for managing student contacts and groups, optimized 
 
    * **`list`** : Lists all student contacts.
 
-   * **`add`**`n/John Doe p/12345678 e/johndoe@u.nus.edu a/Y2 Computer Science [t/optional]` : Adds a contact named `John Doe` to ArchDuke.
+   * **`add`**`n/John Doe p/12345678 e/johndoe@u.nus.edu a/Computer Science [t/optional]` : Adds a contact named `John Doe` to ArchDuke.
 
    * **`clear`** : Deletes all student contacts.
 
@@ -93,7 +93,7 @@ There is no need to save manually.
 
 ### Add student contact information: `add`
 
-Adds a student contact information to the address book. `add` must be followed by the student’s name, 
+Adds a student contact information to ArchDuke. `add` must be followed by the student’s name, 
 phone number, email, and academic major. Tag is optional.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ACADEMIC MAJOR [t/TAG]`
@@ -112,7 +112,25 @@ Example:
 
 Expected outcome:
 
-* Student’s contact information is visible in ArchDuke GUI.
+* Student’s contact information is visible in ArchDuke.
+
+### Delete student contact information: `delete`
+
+Deletes a student contact information at the specified index from ArchDuke.
+The index refers to the index number shown in the displayed student contact list. 
+The index must be a positive integer.
+
+Format: `delete INDEX`
+
+Example: 
+
+* `delete 1`
+* `list` followed by `delete 2` deletes the second person in the current list from ArchDuke.
+* `find Alex` followed by `delete 1` deletes the first person in the current resulting list of the `find` command.
+
+Expected outcome:
+
+* The student contact is removed from ArchDuke.
 
 ## Student Group Management
 
