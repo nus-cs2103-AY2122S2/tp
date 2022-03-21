@@ -13,7 +13,7 @@ package State {
 }
 
 State1 *--> Student1
-Student1 *--> ClassGroup1
+Student1 --> ClassGroup1
 State1 *--> ClassGroup1
 Module1 *--> ClassGroup1
 State1 *--> Module1
