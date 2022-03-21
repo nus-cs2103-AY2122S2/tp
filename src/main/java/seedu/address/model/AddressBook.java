@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.lineup.Lineup;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -15,6 +16,7 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UniqueLineupList lineups;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,6 +27,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        lineups = new UniqueLineupList();
     }
 
     public AddressBook() {}
@@ -92,6 +95,25 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void removePerson(Person key) {
         persons.remove(key);
     }
+
+    /**
+     * Adds a Lineup to MyGM
+     *
+     * @param lineup The Lineup to be added
+     */
+    public void addLineup(Lineup lineup) {
+        lineups.addLineupToList(lineup);
+    }
+
+    /**
+     * Removes a Lineup from MyGM
+     *
+     * @param lineup The Lineup to be removed
+     */
+    public void removeLineup(Lineup lineup) {
+        lineups.deleteLineupFromList(lineup);
+    }
+
 
     //// util methods
 
