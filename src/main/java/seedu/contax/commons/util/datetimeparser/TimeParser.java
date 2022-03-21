@@ -11,7 +11,6 @@ import java.util.regex.Matcher;
  * Provides parsing services for time inputs used in the application.
  */
 public class TimeParser {
-    public static final String TIME_PATTERN = "HH:mm";
 
     /**
      * Parses a time input string to a {@code LocalTime} object.

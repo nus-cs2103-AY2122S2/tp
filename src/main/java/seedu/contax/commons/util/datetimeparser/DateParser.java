@@ -11,7 +11,6 @@ import java.util.regex.Matcher;
  * Provides parsing services for date inputs used in the application.
  */
 public class DateParser {
-    public static final String DATE_PATTERN = "dd-MM-yyyy";
 
     /**
      * Parses a date input string to a {@code LocalDate} object.
