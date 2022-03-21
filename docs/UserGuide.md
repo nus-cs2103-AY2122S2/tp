@@ -85,8 +85,8 @@ Broadly speaking, ContaX consists of an *Address Book* for managing Contacts, an
 | `yyyy` | Year in the full 4-digit format. |
 
 * All time inputs must conform to one of the following formats:
-  * `hh:mm`
-  * `HH:mm aa`
+  * The 24-hour format `hh:mm` or `hh-mm`
+  * The 12-hour format `HH:mm aa` or `HH-mm aa`. The whitespace between the numeric fields and `am/pm` field can be omitted.
 
 | Field | Description |
 | - | - |
