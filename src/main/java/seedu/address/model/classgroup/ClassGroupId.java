@@ -3,6 +3,7 @@ package seedu.address.model.classgroup;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+//@@author jxt00
 /**
  * Represents a ClassGroup's ID in the TAssist.
  * Guarantees: immutable; is valid as declared in {@link #isValidClassGroupId(String)}

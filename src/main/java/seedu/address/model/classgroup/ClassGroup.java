@@ -6,6 +6,7 @@ import seedu.address.model.entity.Entity;
 import seedu.address.model.entity.EntityType;
 import seedu.address.model.tamodule.TaModule;
 
+//@@author jxt00
 /**
  * Represents a ClassGroup in the TAssist.
  * Guarantees: details are present and not null, field values are validated, immutable.
