@@ -36,8 +36,8 @@ public class MakeTeamCommand extends Command {
     public static final String MESSAGE_ADD_TEAMMATE_SUCCESS = "Added person as potential teammate: %1$s";
     public static final String MESSAGE_REMOVE_TEAMMATE_SUCCESS = "Remove person from potential teammate: %1$s";
     public static final String MESSAGE_INVALID_TEAM_ACTION = "Invalid team action for command";
-    public static final String MESSAGE_DUPLICATE_ADDING = "Person is already a potential teammate!";
-    public static final String MESSAGE_DUPLICATE_REMOVAL = "Person is not part of your potential team!";
+    public static final String MESSAGE_REDUNDANT_ADDING = "Person is already a potential teammate!";
+    public static final String MESSAGE_REDUNDANT_REMOVAL = "Person is not part of your potential team!";
 
     private static final Logger logger = LogsCenter.getLogger(MakeTeamCommand.class);
 
@@ -71,15 +71,15 @@ public class MakeTeamCommand extends Command {
         case ADD:
             if (personToUpdate.isPotentialTeammate()) {
                 // Attempting to add someone who is already a potential teammate
-                throw new CommandException(MESSAGE_DUPLICATE_ADDING);
+                throw new CommandException(MESSAGE_REDUNDANT_ADDING);
             }
             updatedPerson = createNewTeamPerson(personToUpdate, true);
             successMessage = MESSAGE_ADD_TEAMMATE_SUCCESS;
             break;
         case REMOVE:
             if (!personToUpdate.isPotentialTeammate()) {
-                // Attempting to add someone who is already a potential teammate
-                throw new CommandException(MESSAGE_DUPLICATE_REMOVAL);
+                // Attempting to remove a non-potential teammate from team
+                throw new CommandException(MESSAGE_REDUNDANT_REMOVAL);
             }
             updatedPerson = createNewTeamPerson(personToUpdate, false);
             successMessage = MESSAGE_REMOVE_TEAMMATE_SUCCESS;

@@ -29,7 +29,7 @@ public class MakeTeamCommandTest {
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void executeAddToTeam_validIndexUnfilteredList_success() {
+    public void execute_addValidIndexUnfilteredList_success() {
         Person person = model.getDisplayPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         MakeTeamCommand makeTeamCommand = new MakeTeamCommand(INDEX_FIRST_PERSON, MakeTeamCommand.TeamAction.ADD);
 
@@ -43,7 +43,7 @@ public class MakeTeamCommandTest {
     }
 
     @Test
-    public void executeRemoveFromTeam_validIndexUnfilteredList_success() {
+    public void execute_removeValidIndexUnfilteredList_success() {
         Person person = model.getDisplayPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
         MakeTeamCommand makeTeamCommand = new MakeTeamCommand(INDEX_THIRD_PERSON, MakeTeamCommand.TeamAction.REMOVE);
 
@@ -61,7 +61,7 @@ public class MakeTeamCommandTest {
         // Third person in TypicalPersons.java is already a potential teammate
         MakeTeamCommand makeTeamCommand = new MakeTeamCommand(INDEX_THIRD_PERSON, MakeTeamCommand.TeamAction.ADD);
 
-        String expectedMessage = MakeTeamCommand.MESSAGE_DUPLICATE_ADDING;
+        String expectedMessage = MakeTeamCommand.MESSAGE_REDUNDANT_ADDING;
         assertCommandFailure(makeTeamCommand, model, expectedMessage);
     }
 
@@ -70,7 +70,7 @@ public class MakeTeamCommandTest {
         // Second person in TypicalPersons.java is not a potential teammate
         MakeTeamCommand makeTeamCommand = new MakeTeamCommand(INDEX_SECOND_PERSON, MakeTeamCommand.TeamAction.REMOVE);
 
-        String expectedMessage = MakeTeamCommand.MESSAGE_DUPLICATE_REMOVAL;
+        String expectedMessage = MakeTeamCommand.MESSAGE_REDUNDANT_REMOVAL;
         assertCommandFailure(makeTeamCommand, model, expectedMessage);
     }
 
