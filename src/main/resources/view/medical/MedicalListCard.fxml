@@ -24,8 +24,9 @@
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
-                <Label fx:id="nric" text="\$first" styleClass="cell_big_label" />
+                <Label fx:id="index" text="\$first" styleClass="cell_big_label" />
             </HBox>
+            <Label fx:id="nric" styleClass="cell_small_label" text="\$nric" />
             <Label fx:id="age" styleClass="cell_small_label" text="\$age" />
             <Label fx:id="bloodType" styleClass="cell_small_label" text="\$bloodType" />
             <Label fx:id="medication" styleClass="cell_small_label" text="\$medication" />

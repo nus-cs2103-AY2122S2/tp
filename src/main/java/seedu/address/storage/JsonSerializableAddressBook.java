@@ -26,7 +26,8 @@ class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
     public static final String MESSAGE_DUPLICATE_CONTACT = "Contact list contains duplicate person(s).";
-
+    public static final String MESSAGE_DUPLICATE_MEDICAL =
+            "Medical information list contains duplicate medical details.";
     public static final String MESSAGE_DUPLICATE_CONSULTATION = "Consultation list contains duplicate consultation(s).";
     public static final String MESSAGE_DUPLICATE_PRESCRIPTION = "Prescription list contains duplicate person(s).";
     public static final String MESSAGE_DUPLICATE_TEST_RESULT = "Test result list contains duplicate test(s).";
@@ -79,8 +80,6 @@ class JsonSerializableAddressBook {
                 .collect(Collectors.toList()));
         consultations.addAll(source.getConsultationList().stream().map(
                                 JsonAdaptedConsultation::new).collect(Collectors.toList()));
-        prescriptions.addAll(source.getPrescriptionList().stream().map(
-                JsonAdaptedPrescription::new).collect(Collectors.toList()));
         testResults.addAll(source.getTestResultList().stream().map(JsonAdaptedTestResult::new)
                 .collect(Collectors.toList()));
     }
@@ -109,7 +108,7 @@ class JsonSerializableAddressBook {
         for (JsonAdaptedMedical jsonAdaptedMedical: medicals) {
             Medical medical = jsonAdaptedMedical.toModelType();
             if (addressBook.hasMedical(medical)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_CONTACT);
+                throw new IllegalValueException(MESSAGE_DUPLICATE_MEDICAL);
             }
             addressBook.addMedical(medical);
         }

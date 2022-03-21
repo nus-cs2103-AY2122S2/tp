@@ -16,6 +16,8 @@ public class MedicalCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
+    private Label index;
+    @FXML
     private Label nric;
     @FXML
     private Label age;
@@ -54,7 +56,8 @@ public class MedicalCard extends UiPart<Region> {
     public MedicalCard(Medical medical, int displayedIndex) {
         super(FXML);
         this.medical = null;
-        nric.setText(displayedIndex + ". ");
+        index.setText(displayedIndex + ". ");
+        nric.setText("Patient's NRIC: " + medical.getPatientNric().value);
         age.setText("Age: " + medical.getAge().value);
         bloodType.setText("Blood type: " + medical.getBloodType().value);
         medication.setText("Medication: " + medical.getMedication().value);
