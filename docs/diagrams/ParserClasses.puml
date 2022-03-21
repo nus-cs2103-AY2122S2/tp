@@ -1,24 +1,23 @@
 @startuml
 !include style.puml
-skinparam arrowThickness 1.1
-skinparam arrowColor LOGIC_COLOR_T4
-skinparam classBackgroundColor LOGIC_COLOR
 
-Class "{abstract}\nCommand" as Command
-Class XYZCommand
+$OverrideTheme(LOGIC_COLOR)
 
-package "Parser classes"{
-Class "<<interface>>\nParser" as Parser
-Class AddressBookParser
-Class XYZCommandParser
-Class CliSyntax
-Class ParserUtil
-Class ArgumentMultimap
-Class ArgumentTokenizer
-Class Prefix
+class "{abstract}\nCommand" as Command
+class XYZCommand
+
+package "Parser classes" {
+    class "<<interface>>\nParser" as Parser
+    class AddressBookParser
+    class XYZCommandParser
+    class CliSyntax
+    class ParserUtil
+    class ArgumentMultimap
+    class ArgumentTokenizer
+    class Prefix
 }
 
-Class HiddenOutside #FFFFFF
+class HiddenOutside<<Hidden>>
 HiddenOutside ..> AddressBookParser
 
 AddressBookParser .down.> XYZCommandParser: creates >
