@@ -1,7 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
@@ -24,7 +26,7 @@ public class FindCommand extends Command {
             + "Parameters: " + PREFIX_NAME + "STUDENT_NAME " + "or " + PREFIX_ID + "STUDENT_ID " + "or "
             + PREFIX_MODULE_CODE + "MODULE_CODE\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "John " + "or " + COMMAND_WORD + " "
-            + PREFIX_ID + "A0123456Z " + "or " + COMMAND_WORD + " "+ PREFIX_NAME + "CS2103T\n";
+            + PREFIX_ID + "A0123456Z " + "or " + COMMAND_WORD + " " + PREFIX_NAME + "CS2103T\n";
 
     private final NameContainsKeywordsPredicate namePredicate;
     private final StudentIdContainsKeywordsPredicate idPredicate;
@@ -62,7 +64,7 @@ public class FindCommand extends Command {
         requireNonNull(model);
         if (namePredicate != null) { // student name was used for the command
             model.updateFilteredPersonList(namePredicate);
-        } else if (idPredicate != null){ // student id was used for the command
+        } else if (idPredicate != null) { // student id was used for the command
             model.updateFilteredPersonList(idPredicate);
         } else { // module code was used for the command
             model.updateFilteredPersonList(modCodePredicate);
