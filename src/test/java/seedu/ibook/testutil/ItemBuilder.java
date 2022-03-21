@@ -2,10 +2,10 @@ package seedu.ibook.testutil;
 
 import static seedu.ibook.testutil.TypicalProducts.PRODUCT_A;
 
-import seedu.ibook.model.product.Product;
 import seedu.ibook.model.item.ExpiryDate;
 import seedu.ibook.model.item.Item;
 import seedu.ibook.model.item.Quantity;
+import seedu.ibook.model.product.Product;
 
 public class ItemBuilder {
     public static final Product DEFAULT_PRODUCT = PRODUCT_A;
