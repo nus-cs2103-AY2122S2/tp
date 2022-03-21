@@ -1,0 +1,22 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+class "{abstract}\nFieldContainsKeywordsPredicate" as FieldContainsKeywordsPredicate
+class "<<interface>>\nPredicate<Person>"
+FieldContainsKeywordsPredicate .up.|> "<<interface>>\nPredicate<Person>"
+
+FieldContainsKeywordsPredicate <|-left- AddressContainsKeywordsPredicate
+FieldContainsKeywordsPredicate <|-right- EmailContainsKeywordsPredicate
+FieldContainsKeywordsPredicate <|-- InsurancePackageContainsKeywordsPredicate
+FieldContainsKeywordsPredicate <|-- NameContainsKeywordsPredicate
+FieldContainsKeywordsPredicate <|--  CombineContainsKeywordsPredicate
+FieldContainsKeywordsPredicate <|-- PhoneContainsKeywordsPredicate
+FieldContainsKeywordsPredicate <|-- TagsContainsKeywordsPredicate
+
+CombineContainsKeywordsPredicate <-- "List<FieldContainsKeywordsPredicate>"
+FieldContainsKeywordsPredicate <-- "List<FieldContainsKeywordsPredicate>"
+
+@enduml
