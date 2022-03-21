@@ -177,6 +177,29 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Adding Priority Level feature
+
+The addition of priorities is facilitated by the `Tag` and `Priority` classes. In addition to a `tagName`, the tag now also has a priority level, represented by the `Priority` enum.
+
+![PersonsAndPriorities](images/PersonsAndPriorities.png)
+
+Currently, there are 4 priority levels that a tag can have, as provided by the `Priority` enum. If unspecified, the default `Priority` is `null`. The priority of a tag is set by the `ParserUtil`'s methods- specifically using `parseTag` and `parsePriority`
+
+#### Design considerations:
+
+**Aspect: TBD:**
+
+* **Alternative 1 (current choice):** Give Priority to Tag
+  * Pros: Can go into detail. Tasks the agent has to do can be captured in the tags. For the same person, some tasks may be very urgent and some may not be as urgent. The specifics can be conveyed much better.
+  * Cons: Not very easy to implement. Hard to adapt for future features (e.g. how to sort by priority in the future)
+
+* **Alternative 2:** Give Priority to Person
+  itself.
+  * Pros: Easier to implement, and easy to extend for future features such as `sort`.
+  * Cons: We cannot give so much nuance- if someone has some issues that are urgent, and others that aren't, this cannot be captured.
+
+_{more aspects and alternatives to be added}_
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
