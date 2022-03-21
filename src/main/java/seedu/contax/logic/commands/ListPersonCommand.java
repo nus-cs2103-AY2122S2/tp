@@ -9,7 +9,7 @@ import seedu.contax.model.Model;
 /**
  * Lists all persons in the address book to the user.
  */
-public class ListCommand extends Command {
+public class ListPersonCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
