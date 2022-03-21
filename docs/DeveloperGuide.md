@@ -154,6 +154,23 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Manual Command
+
+#### Description
+
+The `manual` command display the format for a specified command and a short description for a particular command.
+
+#### Implementation
+1. The `LogicManager` starts to parse the given input text using `AddressBookParser`.
+2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
+3. The remaining input text will be passed to the `ManualCommandParser` to parse.
+4. The `ManualCommandParser` will parse the `commandText` from the remaining input text. In our implementation, a valid `commandText` is either an empty string or an existing command name.
+5. The `ManualCommandParser` will then create a ManualCommand with the `commandText`.
+6. The `LogicManager` will call the execute method of `ManualCommand`.
+7. The `ManualCommand` will finally create a new `CommandResult` which will be returned to `LogicManager`, and the command's information will be displayed.
+
+![ManualCommandSequenceDiagram](images/ManualCommandSequenceDiagram.png)
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
