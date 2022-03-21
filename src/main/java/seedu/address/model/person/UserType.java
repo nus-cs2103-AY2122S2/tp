@@ -9,8 +9,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class UserType {
 
-    public static final String VALIDATION_REGEX = "buyer|seller";
+    public static final String BUYER_REGEX = "buyer";
+    public static final String SELLER_REGEX = "seller";
+    public static final String VALIDATION_REGEX = BUYER_REGEX + "|" + SELLER_REGEX;
     public static final String MESSAGE_CONSTRAINTS = "User type name should either be \"buyer\" or \"seller\" ";
+    public static final String MESSAGE_USAGE = "Either property or preference is inputted, not both or none!";
 
     public final String value;
 
@@ -30,6 +33,20 @@ public class UserType {
      */
     public static boolean isValidUserType(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if the current User Type is a buyer.
+     */
+    public boolean isBuyer() {
+        return value.matches(BUYER_REGEX);
+    }
+
+    /**
+     * Returns true if the current User Type is a buyer.
+     */
+    public boolean isSeller() {
+        return value.matches(SELLER_REGEX);
     }
 
     @Override

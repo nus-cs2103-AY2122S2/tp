@@ -10,6 +10,7 @@ import seedu.address.model.person.Favourite;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Preference;
 import seedu.address.model.person.UserType;
 import seedu.address.model.property.Price;
 import seedu.address.model.property.Property;
@@ -40,7 +41,13 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmail(person.getEmail());
         descriptor.setFavourite(person.getFavourite());
         descriptor.setAddress(person.getAddress());
-        descriptor.setProperties(person.getProperties());
+        if (person.getPreference().isPresent()) {
+            descriptor.setPreference(person.getPreference().get());
+            descriptor.clearProperties();
+        }
+        if (!person.getProperties().isEmpty()) {
+            descriptor.setProperties(person.getProperties());
+        }
         descriptor.setUserType(person.getUserType());
     }
 
@@ -91,6 +98,24 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withUserType(String userType) {
         descriptor.setUserType(new UserType(userType));
+        return this;
+    }
+
+    /**
+     * Parses the (@code preference} into a {@code Preference} and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     * @param preference
+     */
+    public EditPersonDescriptorBuilder withPreference(String preference) {
+        String[] splitPreference = preference.split(",");
+        Region region = Region.fromString(splitPreference[0]);
+        Size size = Size.fromString(splitPreference[1]);
+        Price lowPrice = new Price(splitPreference[2]);
+        Price highPrice = new Price(splitPreference[3]);
+
+        Preference editedPreference = new Preference(region, size, lowPrice, highPrice);
+
+        descriptor.setPreference(editedPreference);
         return this;
     }
 

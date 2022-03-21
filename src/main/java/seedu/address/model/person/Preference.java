@@ -57,6 +57,13 @@ public class Preference {
         return highPrice;
     }
 
+    /**
+     * Returns the input command representing the addition of a {@code Preference}.
+     */
+    public String toParseValue() {
+        return region + "," + size + "," + lowPrice.toParseValue() + "," + highPrice.toParseValue();
+    }
+
     @Override
     public String toString() {
         return "[Region: " + region

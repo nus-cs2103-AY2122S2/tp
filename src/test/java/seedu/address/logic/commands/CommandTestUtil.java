@@ -6,8 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PREFERENCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROPERTY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_USERTYPE;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -47,6 +47,11 @@ public class CommandTestUtil {
             VALID_REGION_AMY + "," + VALID_ADDRESS_AMY + "," + VALID_SIZE_AMY + "," + VALID_PRICE_AMY;
     public static final String VALID_PROPERTY_BOB = VALID_REGION_BOB + "," + VALID_ADDRESS_BOB + ","
             + VALID_SIZE_BOB + "," + VALID_PRICE_BOB;
+    public static final String VALID_LOWPRICE_BOB = "$200000";
+    public static final String VALID_HIGHPRICE_BOB = "$400000";
+    public static final String VALID_PREFERENCE_BOB = VALID_REGION_AMY + "," + VALID_SIZE_AMY + ","
+            + VALID_LOWPRICE_BOB + "," + VALID_HIGHPRICE_BOB;
+    public static final String VALID_PREFERENCE_ALICE = "West,4-room,$100000,$200000";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -56,16 +61,14 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
-    public static final String USERTYPE_DESC_SELLER = " " + PREFIX_USERTYPE + VALID_USERTYPE_SELLER;
-    public static final String USERTYPE_DESC_BUYER = " " + PREFIX_USERTYPE + VALID_USERTYPE_BUYER;
     public static final String PROPERTY_DESC_AMY = " " + PREFIX_PROPERTY + VALID_PROPERTY_AMY;
     public static final String PROPERTY_DESC_BOB = " " + PREFIX_PROPERTY + VALID_PROPERTY_BOB;
+    public static final String PREFERENCE_DESC_BOB = " " + PREFIX_PREFERENCE + VALID_PREFERENCE_BOB;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
-    public static final String INVALID_USERTYPE_DESC = " " + PREFIX_USERTYPE + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_PROPERTY_DESC =
             " " + PREFIX_PROPERTY + "North Block 123 1-room $300000"; // missing comma between fields
 
