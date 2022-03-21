@@ -20,6 +20,7 @@ public class JsonAdaptedGroup {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Group's %s field is missing!";
 
     private final String groupName;
+    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedTask> tasks = new ArrayList<>();
 
     /**
@@ -27,8 +28,12 @@ public class JsonAdaptedGroup {
      */
     @JsonCreator
     public JsonAdaptedGroup(@JsonProperty("groupName") String groupName,
+                            @JsonProperty("persons") List<JsonAdaptedPerson> persons ,
                             @JsonProperty("tasks") List<JsonAdaptedTask> tasks) {
         this.groupName = groupName;
+        if (!persons.isEmpty()) {
+            this.persons.addAll(persons);
+        }
         if (tasks != null) {
             this.tasks.addAll(tasks);
         }
@@ -39,6 +44,9 @@ public class JsonAdaptedGroup {
      */
     public JsonAdaptedGroup(Group source) {
         groupName = String.valueOf(source.getGroupName());
+        persons.addAll(source.getPersons().stream()
+                .map(JsonAdaptedPerson::new)
+                .collect(Collectors.toList()));
 
         List<String> taskNames = new ArrayList<>();
 
@@ -70,14 +78,18 @@ public class JsonAdaptedGroup {
         }
         final GroupName modelGroupName = new GroupName(groupName);
 
-        Group newGroup = new Group(modelGroupName);
+        Group modelGroup = new Group(modelGroupName);
+
+        for (JsonAdaptedPerson person: persons) {
+            modelGroup.assignPerson(person.toModelType());
+        }
 
         for (Task task : groupTasks) {
-            if (!newGroup.getTaskList().contains(task)) {
-                newGroup.addTask(task);
+            if (!modelGroup.getTaskList().contains(task)) {
+                modelGroup.addTask(task);
             }
         }
 
-        return newGroup;
+        return modelGroup;
     }
 }

@@ -39,6 +39,29 @@ public class Group {
     }
 
     /**
+     * Assigns a person to the group.
+     *
+     * @param person The person to be assigned.
+     */
+    public void assignPerson(Person person) {
+        persons.add(person);
+    }
+
+    /**
+     * Checks if a person is already existing in the group.
+     *
+     * @param person The person to be checked.
+     * @return True if the person already exists in the group.
+     */
+    public boolean personExists(Person person) {
+        return persons.contains(person);
+    }
+
+    public Set<Person> getPersons() {
+        return this.persons;
+    }
+
+    /**
      * Compares as a weaker notion of identity between two groups.
      *
      * @param otherGroup Another group object.
