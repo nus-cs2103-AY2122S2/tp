@@ -209,7 +209,4 @@ public class ModelManagerTest {
         modelManager.unmarkTask(READ_BOOK);
         assertTrue(!READ_BOOK.isDone());
     }
-
-    
-
 }
