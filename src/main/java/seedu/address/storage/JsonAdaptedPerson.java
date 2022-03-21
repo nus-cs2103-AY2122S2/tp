@@ -19,6 +19,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Preference;
 import seedu.address.model.person.UserType;
+import seedu.address.model.userimage.UserImage;
 import seedu.address.model.property.Property;
 
 /**
@@ -36,6 +37,7 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedProperty> properties = new ArrayList<>();
     private final JsonAdaptedPreference preference;
     private final String userType;
+    private final JsonAdaptedUserImage userImage;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -45,7 +47,7 @@ class JsonAdaptedPerson {
             @JsonProperty("email") String email, @JsonProperty("favourite") boolean favourite,
             @JsonProperty("address") String address, @JsonProperty("properties") List<JsonAdaptedProperty> properties,
             @JsonProperty("preference") JsonAdaptedPreference preference,
-            @JsonProperty("userType") String userType) {
+            @JsonProperty("userType") String userType, @JsonProperty("userImage") JsonAdaptedUserImage userImage) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -53,6 +55,7 @@ class JsonAdaptedPerson {
         this.address = address;
         this.preference = preference;
         this.userType = userType;
+        this.userImage = userImage;
 
         if (properties != null) {
             this.properties.addAll(properties);
@@ -74,6 +77,8 @@ class JsonAdaptedPerson {
         preference = source.getPreference().isPresent()
                 ? new JsonAdaptedPreference(source.getPreference().get()) : null;
         userType = source.getUserType().value;
+        userImage = source.getUserImage().isPresent()
+                ? new JsonAdaptedUserImage(source.getUserImage().get()) : null;
     }
 
     /**
@@ -90,6 +95,9 @@ class JsonAdaptedPerson {
 
         final Optional<Preference> modelPreference =
                 preference != null ? Optional.of(preference.toModelType()) : Optional.empty();
+
+        final Optional<UserImage> modelUserImage = userImage != null
+                ? Optional.of(userImage.toModelType()) : Optional.empty();
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -136,7 +144,7 @@ class JsonAdaptedPerson {
         final UserType modelUserType = new UserType(userType);
 
         return new Person(modelName, modelPhone, modelEmail, modelFavourite, modelAddress, modelProperties,
-                modelPreference, modelUserType);
+                modelPreference, modelUserType, modelUserImage);
     }
 
 }

@@ -22,6 +22,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Preference;
 import seedu.address.model.person.UserType;
+import seedu.address.model.userimage.UserImage;
 import seedu.address.model.property.Property;
 
 /**
@@ -54,8 +55,9 @@ public class AddCommandParser implements Parser<AddCommand> {
                 ? Optional.of(ParserUtil.parsePreference(preferenceArg.get()))
                 : Optional.empty();
         UserType userType = ParserUtil.parseUserType(argMultimap.getValue(PREFIX_USERTYPE).get());
+        UserImage userImage = null;
 
-        Person person = new Person(name, phone, email, address, properties, preference, userType);
+        Person person = new Person(name, phone, email, address, properties, preference, userType, userImage);
 
         return new AddCommand(person);
     }

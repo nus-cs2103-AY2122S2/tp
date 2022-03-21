@@ -12,6 +12,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Preference;
 import seedu.address.model.person.UserType;
+import seedu.address.model.userimage.UserImage;
 import seedu.address.model.property.Property;
 
 /**
@@ -24,6 +25,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_USERTYPE = "buyer";
+    public static final UserImage DEFAULT_USERIMAGE = null;
 
     private Name name;
     private Phone phone;
@@ -33,6 +35,7 @@ public class PersonBuilder {
     private Favourite favourite;
     private Optional<Preference> preference;
     private UserType userType;
+    private UserImage userImage;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -46,6 +49,7 @@ public class PersonBuilder {
         properties = new HashSet<>();
         preference = Optional.empty();
         userType = new UserType(DEFAULT_USERTYPE);
+        userImage = DEFAULT_USERIMAGE;
     }
 
     /**
@@ -60,6 +64,7 @@ public class PersonBuilder {
         properties = personToCopy.getProperties();
         preference = personToCopy.getPreference();
         userType = personToCopy.getUserType();
+        userImage = personToCopy.getUserImage();
     }
 
     /**
@@ -72,7 +77,6 @@ public class PersonBuilder {
 
     /**
      * Parses the {@code userType} into a {@code UserType} and set it to the {@code Person} that we are building.
-     * @param userType
      */
     public PersonBuilder withUserType(String userType) {
         this.userType = new UserType(userType);
@@ -112,7 +116,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, favourite, address, properties, preference, userType);
+        return new Person(name, phone, email, favourite, address, properties, preference, userType, userImage);
     }
 
 }

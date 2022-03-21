@@ -8,6 +8,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.model.property.Property;
+import seedu.address.model.userimage.UserImage;
 
 /**
  * Represents a Person in the address book.
@@ -25,14 +26,16 @@ public class Person {
     private final Set<Property> properties;
     private final Optional<Preference> preference;
     private final UserType userType;
+    private final Optional<UserImage> userImage;
 
     /**
      * This constructor is used when editing a Client.
      * Favourited clients will remain favourited & unfavourited clients will remain unfavourited
+     * @param userImage user can be of null value since a person may have no image associated
      */
     public Person(Name name, Phone phone, Email email, Favourite favourite, Address address,
-            Set<Property> properties, Optional<Preference> preference, UserType userType) {
-        requireAllNonNull(name, phone, email, favourite, address, properties, preference, userType);
+            Set<Property> properties, Optional<Preference> preference, UserType userType, Optional<UserImage> userImage) {
+        requireAllNonNull(name, phone, email, favourite, address, properties, preference, userType, userImage);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -41,15 +44,17 @@ public class Person {
         this.preference = preference;
         this.address = address;
         this.userType = userType;
+        this.userImage = userImage;
     }
 
     /**
      * Every field must be present and not null.
      * This constructor is used for adding a new Client, thus default status is unfavourited(false)
+     * @param userImage user can be empty since a person may have no image associated
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Property> properties,
-            Optional<Preference> preference, UserType userType) {
-        requireAllNonNull(name, phone, email, address, properties, preference, userType);
+            Optional<Preference> preference, UserType userType, Optional<UserImage> userImage) {
+        requireAllNonNull(name, phone, email, address, properties, preference, userType, userImage);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -58,6 +63,7 @@ public class Person {
         this.properties = properties;
         this.preference = preference;
         this.userType = userType;
+        this.userImage = userImage;
     }
 
     public Name getName() {
@@ -102,6 +108,10 @@ public class Person {
 
     public UserType getUserType() {
         return userType;
+    }
+
+    public Optional<UserImage> getUserImage() {
+        return userImage;
     }
 
     /**
@@ -159,13 +169,14 @@ public class Person {
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getProperties().equals(getProperties())
                 && otherPerson.getPreference().equals(getPreference())
-                && otherPerson.getUserType().equals(getUserType());
+                && otherPerson.getUserType().equals(getUserType())
+                && otherPerson.getUserImage().equals(getUserImage());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, favourite, address, properties, preference, userType);
+        return Objects.hash(name, phone, email, favourite, address, properties, preference, userType, userImage);
     }
 
     @Override
@@ -194,6 +205,12 @@ public class Person {
 
         builder.append("; User Type: ").append(getUserType());
 
+        if (getUserImage().isPresent()) {
+            builder.append("; UserImage: ");
+            builder.append(getUserImage().get().getFilePath());
+            builder.append("; Description: ");
+            builder.append(getUserImage().get().getDescription());
+        }
         return builder.toString();
     }
 }

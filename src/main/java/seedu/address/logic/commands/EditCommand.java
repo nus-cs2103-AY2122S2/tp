@@ -29,6 +29,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Preference;
 import seedu.address.model.person.UserType;
 import seedu.address.model.property.Property;
+import seedu.address.model.userimage.UserImage;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -108,6 +109,7 @@ public class EditCommand extends Command {
         // preference cannot be edited
         Optional<Preference> updatedPreference = personToEdit.getPreference();
         UserType updatedUserType = editPersonDescriptor.getUserType().orElse(personToEdit.getUserType());
+        Optional<UserImage> updatedUserImage = personToEdit.getUserImage();
 
         return new Person(updatedName, updatedPhone, updatedEmail, noChangeFavourite, updatedAddress, updatedProperties,
                 updatedPreference, updatedUserType);

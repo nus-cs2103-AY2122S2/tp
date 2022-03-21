@@ -8,6 +8,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.UploadCommand;
 import seedu.address.logic.commands.UploadCommand.UploadDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.userimage.FilePath;
 
 /**
  * Parses input arguments and creates a new UploadCommand object
@@ -29,12 +30,14 @@ public class UploadCommandParser implements Parser<UploadCommand> {
         UploadDescriptor uploadDescriptor = new UploadCommand.UploadDescriptor();
 
         if (argMultimap.getValue(PREFIX_FILEPATH).isPresent()) {
-           uploadDescriptor.setFilePath(argMultimap.getValue(PREFIX_FILEPATH).get());
+            FilePath filePath = ParserUtil.parseFilePath(argMultimap.getValue(PREFIX_FILEPATH).get());
+            uploadDescriptor.setFilePath(filePath);
         } else {
             throw new ParseException(UploadCommand.MESSAGE_MISSING_FILEPATH);
         }
+
         if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
-            uploadDescriptor.setFilePath(argMultimap.getValue(PREFIX_DESCRIPTION).get());
+            uploadDescriptor.setDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         }
         return new UploadCommand(index, uploadDescriptor);
     }

@@ -19,6 +19,7 @@ import seedu.address.model.property.Price;
 import seedu.address.model.property.Property;
 import seedu.address.model.property.Region;
 import seedu.address.model.property.Size;
+import seedu.address.model.userimage.FilePath;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -216,4 +217,12 @@ public class ParserUtil {
         return new UserType(trimmedUserType);
     }
 
+    public static FilePath parseFilePath(String filePath) throws ParseException {
+        requireNonNull(filePath);
+        String trimmedFilePath = filePath.trim();
+        if (!FilePath.isValidFilePath(trimmedFilePath)) {
+            throw new ParseException(FilePath.MESSAGE_CONSTRAINTS);
+        }
+        return new FilePath(trimmedFilePath);
+    }
 }

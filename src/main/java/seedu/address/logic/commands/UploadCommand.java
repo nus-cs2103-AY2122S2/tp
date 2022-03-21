@@ -5,7 +5,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.UserImage;
+import seedu.address.model.userimage.FilePath;
+import seedu.address.model.userimage.UserImage;
 
 import java.util.List;
 import java.util.Optional;
@@ -48,7 +49,7 @@ public class UploadCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         UserImage newImage = new UserImage(uploadDescriptor);
-        if (!newImage.isValid()) {
+        if (!newImage.isImage()) {
             throw new CommandException(MESSAGE_FILE_NOT_FOUND);
         }
         if (!newImage.isImage()) {
@@ -58,17 +59,17 @@ public class UploadCommand extends Command {
     }
 
     public static class UploadDescriptor {
-        private String filePath;
+        private FilePath filePath;
         private String description;
 
         public UploadDescriptor() {
         }
 
-        public void setFilePath(String filePath) {
+        public void setFilePath(FilePath filePath) {
             this.filePath = filePath;
         }
 
-        public String getFilePath() {
+        public FilePath getFilePath() {
             return filePath;
         }
 
