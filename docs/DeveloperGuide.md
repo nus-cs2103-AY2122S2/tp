@@ -133,7 +133,7 @@ The `Model` component,
 
 </div>
 
-Within the `/model` folder, there also exists an `IndexedCsvFile` model that helps with the parsing of CSV files for the Import CSV function. However, this file does not fit within the model component diagram and just serves as a helper model. 
+Within the `model` package, there also exists an `IndexedCsvFile` model that helps with the parsing of CSV files for the Import CSV function. However, the class does not maintain any persistent instances, and does not fit within the model component diagram, serving solely as a helper model.
 
 ### Storage component
 
@@ -180,13 +180,13 @@ This section describes some of the details as to how the import and export CSV f
 
 #### Import CSV
 
-The import CSV function is meant to append to the current address book with new data imported from any CSV file. The intention is to allow users to be able to import from a Microsoft Excel compatible format. Since there are multiple different templates for contacts in CSV files across various platforms, such as Microsoft Outlook and Google Contacts, the idea was to ensure this feature was as flexible as possible, allowing the user to specify which particular columns contained certain information
+The import CSV function is meant to append to the current address book with new data imported from any CSV file. The intention is to allow users to be able to import from a Microsoft Excel compatible format. Since there are multiple different templates for contacts in CSV files across various platforms, such as Microsoft Outlook and Google Contacts, the feature is designed to be as flexible as possible, allowing the user to specify mappings for the information contained in the various columns.
 
 The arguments that are parsed here are the custom column numbers for each value, e.g. `n/3 p/4 e/5 a/6 t/7` will read `Name` from column 3, `Phone` from column 4, `Email` from column 5, `Address` from column 6 and `Tags` from column 7 
 
-In the event that any of the data read does not conform to the restrictions given by each of the components in `Person`, e.g. an email that does not have `@`, or if the person has a duplicate name with another person, that particular line will be skipped.
+In the event that any of the data fields read do not conform to the restrictions given by each of the components in `Person`, that particular line will be skipped. For example, if the record in a line has an email that does not have the `@` symbol or if the record contains a duplicated name that already exists in the Address Book, the entire line will be skipped.
 
-The `CSVManager` takes in the `IndexedCsvFile` object, opens the file and reads the lines, while a function from the command is passed to the Manager that will store each of the lines as a new Person in the model. The sequence diagram is as follows:
+The `CSVManager` takes in a `IndexedCsvFile` object, opens the file and reads the lines. The logic that performs the parsing of data fields and creation of `Person` models is specified in the import command, and is passed as an anonymous function to CSVManager. The sequence diagram is as follows:
 
 ![ImportCsvSequenceDiagram](images/ImportCsvSequenceDiagram.png)
 
@@ -194,20 +194,20 @@ The `CSVManager` takes in the `IndexedCsvFile` object, opens the file and reads 
 
 The Export CSV function is meant to value add upon the existing `.json` file saving to provide an alternative option, especially for users who prefer interacting with a Microsoft Excel compatible format.
 
-The resulting `addressbook.csv` that will be produced will be in the following format
+The resulting `addressbook.csv` that will be produced will be in the following format:
 
 | Name        | Phone        | Email        | Address        | Tags                            |
 |-------------|--------------|--------------|----------------|---------------------------------|
 | Person Name | Person Phone | Person Email | Person Address | Person Tag 1;Person Tag 2; .... |
 
-Multiple tags are delimited by the `;` character
+Multiple tags are delimited by the `;` character.
 
-Likewise with Import, File IO operations are also separated into the `CSVManager` class, such that the command logic takes the current address book, parses them into the approprate strings, then passes it to the `CsvManager` to handle the writing to file
+Like the Import feature, File IO operations are also separated into the `CSVManager` class, such that the command logic takes the current address book, parses them into the appropriate strings, then passes it to the `CsvManager` to handle the writing to file.
 
 The sequence diagram is as follows:
 ![ExportCsvSequenceDiagram](images/ExportCsvSequenceDiagram.png)
 
-The subsequent exported file can be imported back into any other instance of ContaX, similar to the existing `.json` system of import/export
+The exported file can be subsequently imported back into any other instance of ContaX, similar to the existing `.json` system of import/export.
 
 ### \[Proposed\] Undo/redo feature
 

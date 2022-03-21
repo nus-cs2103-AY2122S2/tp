@@ -11,10 +11,10 @@ box Storage STORAGE_COLOR_T1
 participant ":CsvManager" as CsvManager MODEL_COLOR
 end box
 
-[-> LogicManager : execute(exportcsv)
+[-> LogicManager : execute("exportcsv")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(exportcsv)
+LogicManager -> AddressBookParser : parseCommand("exportcsv")
 activate AddressBookParser
 
 create ExportCsvCommand
