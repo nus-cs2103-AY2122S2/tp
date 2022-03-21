@@ -205,13 +205,13 @@ Expected outcome:
 Adds a task to the specified group. `addtask` must be followed by a task name and a group name. 
 The group must **already exist** in ArchDuke.
 
-Format: `addtask t/TASK_NAME g/GROUP_NAME`
+Format: `addtask task/TASK_NAME g/GROUP_NAME`
 
 * Adds the task called `TASK_NAME` to the group called `GROUP_NAME`
 
 Example:
 
-* `addtask t/v1.2 user guide g/CS2103-W16-3`
+* `addtask task/v1.2 user guide g/CS2103-W16-3`
 
 Expected outcome:
 
@@ -222,13 +222,13 @@ Expected outcome:
 Deletes a task from the specified group. `deltask` must be followed by a task name and a group name. 
 The group must **already exist** in ArchDuke.
 
-Format: `deltask t/TASK_NAME g/GROUP_NAME`
+Format: `deltask task/TASK_NAME g/GROUP_NAME`
 
 * Deletes the task called `TASK_NAME` from the group called `GROUP_NAME`
 
 Example: 
 
-* `deltask t/v1.2 user guide g/CS2103-W16-3`
+* `deltask task/v1.2 user guide g/CS2103-W16-3`
 
 Expected outcome:
 
