@@ -226,6 +226,23 @@ Expected outcome:
 
 * Deassigns the specified student from the specified group.
 
+### View student contacts in an existing group: `viewcontact`
+
+Displays the student contacts from the specified group. `viewcontact` must be followed by a group name.
+The group must already exist in ArchDuke.
+
+Format: `viewcontact g/GROUP_NAME`
+
+* Views all student contacts in the group called `GROUP_NAME`
+
+Example:
+
+* `viewcontact g/CS2103-W16-3`
+
+Expected outcome:
+
+* Displays all the student contacts from the specified group.
+
 ## Student Group Task Management
 
 ### Add a task in a group: `addtask`
