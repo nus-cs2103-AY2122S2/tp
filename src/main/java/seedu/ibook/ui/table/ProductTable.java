@@ -3,28 +3,27 @@ package seedu.ibook.ui.table;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import seedu.ibook.model.product.Product;
 import seedu.ibook.ui.MainWindow;
 import seedu.ibook.ui.UiComponent;
 
 /**
- * The main content of the table.
+ * The {@code Product} table that is containing {@code ProductCard}.
  */
-public class TableContent extends UiComponent<ScrollPane> {
+public class ProductTable extends UiComponent<VBox> {
 
-    private static final String FXML = "Table/TableContent.fxml";
+    private static final String FXML = "Table/ProductTable.fxml";
 
     @FXML
     private VBox content;
 
     /**
-     * Initializes a {@code TableContent}.
+     * Initializes a {@code ProductTable}.
      *
      * @param mainWindow The {@code MainWindow} that this component resides on.
      */
-    TableContent(MainWindow mainWindow) {
+    public ProductTable(MainWindow mainWindow) {
         super(FXML, mainWindow);
         populateField();
     }

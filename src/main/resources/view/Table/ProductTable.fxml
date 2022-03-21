@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+
+<VBox xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1"
+      VBox.vgrow="ALWAYS" stylesheets="@../css/table.css" styleClass="table">
+    <VBox.margin>
+        <Insets bottom="20.0" left="20.0" right="20.0" />
+    </VBox.margin>
+    <HBox styleClass="table-header">
+        <Label styleClass="expand-column" HBox.hgrow="NEVER"/>
+        <Label styleClass="table-column-short" text="INDEX"/>
+        <Label styleClass="table-column-long" text="NAME"/>
+        <Label styleClass="table-column-long" text="CATEGORY"/>
+        <Label styleClass="table-column-short" text="PRICE"/>
+        <Label styleClass="table-column-long" text="DESCRIPTION" HBox.hgrow="ALWAYS"/>
+        <Label styleClass="table-column-long" HBox.hgrow="NEVER"/>
+    </HBox>
+    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="table-content">
+        <VBox fx:id="content" style="-fx-background-color: white;"/>
+    </ScrollPane>
+</VBox>
