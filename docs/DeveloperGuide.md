@@ -171,6 +171,25 @@ The `manual` command display the format for a specified command and a short desc
 
 ![ManualCommandSequenceDiagram](images/ManualCommandSequenceDiagram.png)
 
+### Mark Command
+
+#### Description
+
+Marks a specific undone task as done for a particular student.
+
+#### Implementation
+1. The `LogicManager` starts to parse the given input text using `AddressBookParser`.
+2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
+3. The remaining input text will be passed to the `MarkCommandParser` to parse.
+4. The `MarkCommandParser` will tokenize the remaining input text using the `ArgumentTokenizer` into an `ArgumentMultiMap`.
+5. The `MarkCommandParser` will then create a new `StudentId` and `Index` using the `ArgumentMultiMap`.
+6. The `MarkCommandParser` will then create a `MarkCommand` with the `StudentId` and `Index`.
+7. The `LogicManager` will call the `execute` method of `MarkCommand`.
+8. The `MarkCommand` will then call the `markTaskOfPerson` method of the provided `Model` with its `StudentId` and `Index`
+9. The `MarkCommand` will finally create a new `CommandResult` which will be returned to `LogicManager`
+
+![MarkCommandSequenceDiagram](images/MarkCommandSequenceDiagram.png)
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -405,7 +424,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. TAPA shows an error message.
 
       Use case resumes from step 2.
-      
+
 * 3b. The given student id is invalid.
 
     * 3b1. TAPA shows an error message.

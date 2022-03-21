@@ -47,10 +47,10 @@ activate CommandResult LOGIC_COLOR
 CommandResult --> ManualCommand --:
 deactivate CommandResult
 
-ManualCommand --> LogicManager --
+ManualCommand --> LogicManager --: result:CommandResult
 deactivate ManualCommand
 
-[<--LogicManager
+[<--LogicManager --: result:CommandResult
 deactivate LogicManager
 
 @enduml

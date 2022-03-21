@@ -1,0 +1,79 @@
+@startuml
+!include style.puml
+
+title MarkCommand\n
+
+box "Logic" #00000000
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":MarkCommandParser" as MarkCommandParser LOGIC_COLOR
+participant "command:MarkCommand" as MarkCommand LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
+participant "studentId:StudentId" as StudentId LOGIC_COLOR
+participant "index:Index" as Index LOGIC_COLOR
+end box
+
+box "Model" #FFFFFF
+Participant "model:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute
+activate LogicManager LOGIC_COLOR
+
+LogicManager -> AddressBookParser : parseCommand(commandText)
+activate AddressBookParser LOGIC_COLOR
+
+create MarkCommandParser
+AddressBookParser -> MarkCommandParser
+activate MarkCommandParser LOGIC_COLOR
+MarkCommandParser -> AddressBookParser
+deactivate MarkCommandParser
+
+AddressBookParser -> MarkCommandParser : parse(arguments)
+activate MarkCommandParser LOGIC_COLOR
+
+create StudentId
+MarkCommandParser -> StudentId ++ LOGIC_COLOR: argMultiMap
+StudentId --> MarkCommandParser --:
+
+create Index
+MarkCommandParser -> Index ++ LOGIC_COLOR: argMultiMap
+Index --> MarkCommandParser --:
+
+create MarkCommand
+MarkCommandParser -> MarkCommand ++ LOGIC_COLOR: studentId, index
+
+MarkCommand --> MarkCommandParser --:
+deactivate MarkCommand
+
+MarkCommandParser --> AddressBookParser --:
+deactivate MarkCommandParser
+
+AddressBookParser --> LogicManager --:
+deactivate AddressBookParser
+
+LogicManager -> MarkCommand ++ LOGIC_COLOR : execute(model)
+activate MarkCommand LOGIC_COLOR
+
+MarkCommand -> Model ++ MODEL_COLOR: markTaskOfPerson(studentId, index)
+
+loop all person
+    Model -> StudentId ++ LOGIC_COLOR: markTaskOfPerson(studentId, index)
+    StudentId --> Model --
+end
+
+Model --> MarkCommand --
+
+create CommandResult
+MarkCommand --> CommandResult ++ LOGIC_COLOR:
+
+CommandResult --> MarkCommand --:
+deactivate CommandResult
+
+MarkCommand --> LogicManager --: result:CommandResult
+deactivate MarkCommand
+
+[<--LogicManager --: result:CommandResult
+deactivate LogicManager
+
+@enduml
