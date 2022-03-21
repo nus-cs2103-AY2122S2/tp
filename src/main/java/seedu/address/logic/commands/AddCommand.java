@@ -32,8 +32,6 @@ public class AddCommand extends Command {
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_COURSE + "Computer Science "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney "
             + PREFIX_AVAILABILITY + "1,2,3,4,5,6,7";
 
     public static final String MESSAGE_SUCCESS = "New candidate added: %1$s";
