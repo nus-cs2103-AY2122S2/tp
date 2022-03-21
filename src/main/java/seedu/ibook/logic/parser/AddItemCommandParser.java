@@ -29,14 +29,14 @@ public class AddItemCommandParser implements Parser<AddItemCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddItemCommand.MESSAGE_USAGE));
         }
 
-        Index compoundIndex = ParserUtil.parseIndex(argMultimap.getPreamble());
+        Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
 
         ExpiryDate expiry = ParserUtil.parseExpiryDate(argMultimap.getValue(PREFIX_EXPIRY_DATE).get());
         Quantity quantity = ParserUtil.parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get());
 
         Item item = new Item(expiry, quantity);
 
-        return new AddItemCommand(compoundIndex, item);
+        return new AddItemCommand(index, item);
     }
 
     /**
