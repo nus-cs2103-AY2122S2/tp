@@ -19,7 +19,7 @@ Given below are my contributions to the project.
   * What it does: Allows the user to manage tags in the address book.
   * Justification: This improves the usability of the application, as it provides more options for the user to search for contacts.
    
-* **Code contributed**: 
+* **Code contributed**:
   * 2000+ LoC contributed to the project
   * Test cases for the tags subsystem
 
