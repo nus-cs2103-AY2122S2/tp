@@ -6,7 +6,8 @@ package seedu.address.model.entity;
 public enum EntityType {
     STUDENT("Student"),
     CLASS_GROUP("ClassGroup"),
-    TA_MODULE("TaModule");
+    TA_MODULE("TaModule"),
+    ASSESSMENT("Assessment");
 
     private final String entityClass;
 
