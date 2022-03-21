@@ -39,6 +39,10 @@ public class Comment {
         return test.matches(VALIDATION_REGEX);
     }
 
+    public boolean isEmpty() {
+        return value.equals("");
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

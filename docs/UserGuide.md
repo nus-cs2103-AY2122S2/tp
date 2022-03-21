@@ -87,7 +87,6 @@ ModuleMate Finder is a desktop app that allows students to find people taking th
 - [Redo](#redo-a-command--redo)
 - [Copy](#copy-command)
 - [Add Comment to contact](#adding-a-comment-for-a-contact--addcomment)
-- [Clears Comment from Contact](#clearing-a-comment-for-a-contact--clearcomment)
 - [Exit](#exiting-the-program--exit)
 
 ### Viewing help : `help`
@@ -299,31 +298,22 @@ Examples:
 * `copy 1 n/ p/ e/ f/json`  will copy name, phone and email of first person in JSON format.
 * `copy f/csv` will copy the entire list in csv format.
 
-### Adding a comment for a contact : `addcomment`
+### Adding a comment for a contact : `comment`
 
 Adds a comment for the specified person in ModuleMateFinder.
 
-Format: `addcomment INDEX c/COMMENT`
+Format: `comment INDEX c/COMMENT`
 
 * Adds a comment for the person at the specified `INDEX`.
 * `INDEX` must be a **positive integer** 1, 2, 3, ...
 * `COMMENT` cannot be blank.
 * Any existing comments for a person will be overwritten by the new user input.
+* If used without the `c/` prefix, the command will be treated as a delete command and removes the comment of the 
+  specified person.
 
 Examples:
-* `addcomment 2 c/Good at math.` will add the comment `Good at math` to the 2nd person.
-
-### Clearing a comment for a contact : `clearcomment`
-
-Clears a comment for the specified person in ModuleMateFinder.
-
-Format: `clearcomment INDEX`
-
-* Clears a comment for the person at the specified `INDEX`.
-* `INDEX` must be a **positive integer** 1, 2, 3, ...
-
-Examples:
-* `clearcomment 5` will remove the comment for the 5th person.
+* `comment 2 c/Good at math.` will add the comment `Good at math` to the 2nd person.
+* `comment 3` will delete the comment for the 3rd person.
 
 ### Exiting the program : `exit`
 
@@ -379,6 +369,6 @@ A: As long as the module offered can be found in NUSmod, it will be available on
 | **Undo**          | `undo`                                                                                                        | `undo`                                 |
 | **Redo**          | `redo`                                                                                                        | `redo`                                 |
 | **Copy**          | `copy [INDEX] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STATUS] [m/MODULE] [f/FORMAT]`                      | `copy 3 n/ e/ f/csv`                   |
-| **Add Comment**   | `addcomment INDEX c/COMMENT`                                                                                  | `addcomment 1 c/Good at math`          |
-| **Clear Comment** | `clearcomment INDEX`                                                                                          | `clearcomment 3`                       |
+| **Add Comment**   | `comment INDEX c/COMMENT`                                                                                     | `comment 1 c/Good at math`             |
+
 

@@ -27,7 +27,7 @@ public class ClearCommentCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 4";
 
-    public static final String MESSAGE_SUCCESS = "%s's comments have been cleared";
+    public static final String MESSAGE_SUCCESS = "Removed comment from %s";
 
     private final Index targetIndex;
 

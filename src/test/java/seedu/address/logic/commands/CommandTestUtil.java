@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -38,6 +39,7 @@ public class CommandTestUtil {
     public static final String VALID_STATUS_BOB = Person.BLACKLIST;
     public static final String VALID_MODULE = "CS2101";
     public static final String VALID_MODULE_SWE = "CS2103T";
+    public static final String VALID_COMMENT = "Good at programming";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -49,6 +51,7 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String MODULE_DESC_CS2103T = " " + PREFIX_MODULE + VALID_MODULE_SWE;
     public static final String MODULE_DESC_CS2101 = " " + PREFIX_MODULE + VALID_MODULE;
+    public static final String COMMENT_DESC = " " + PREFIX_COMMENT + VALID_COMMENT;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones

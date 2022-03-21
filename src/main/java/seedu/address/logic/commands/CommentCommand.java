@@ -17,9 +17,9 @@ import seedu.address.model.person.Person;
  * Adds a comment to an existing person in the address book.
  * AddCommentCommand is adapted from https://nus-cs2103-ay2122s2.github.io/tp/tutorials/AddRemark.html
  */
-public class AddCommentCommand extends Command {
+public class CommentCommand extends Command {
 
-    public static final String COMMAND_WORD = "addcomment";
+    public static final String COMMAND_WORD = "comment";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add a comment to the person identified "
             + "by the index number used in the displayed person list. "
             + "Existing comments will be overwritten by the input.\n"
@@ -27,8 +27,8 @@ public class AddCommentCommand extends Command {
             + PREFIX_COMMENT + "COMMENT\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_COMMENT + "Good at teamwork and programming";
-    public static final String MESSAGE_ADD_COMMENT_SUCCESS = "Added remark to Person: %1$s";
-    public static final String MESSAGE_DELETE_COMMENT_SUCCESS = "Removed remark from Person: %1$s";
+    public static final String MESSAGE_ADD_SUCCESS = "Added comment to %s: %s";
+    public static final String MESSAGE_REMOVE_SUCCESS = "Removed comment from %s";
 
     private final Index index;
     private final Comment comment;
@@ -37,7 +37,7 @@ public class AddCommentCommand extends Command {
      * @param index of the person in the filtered person list
      * @param comment comment to be added
      */
-    public AddCommentCommand(Index index, Comment comment) {
+    public CommentCommand(Index index, Comment comment) {
         requireAllNonNull(index, comment);
 
         this.index = index;
@@ -60,17 +60,20 @@ public class AddCommentCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-
         return new CommandResult(generateSuccessMessage(editedPerson));
     }
 
     /**
      * Generates a command execution success message based on whether
-     * the remark is added to or removed from
+     * the comment is added to or removed from
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        return String.format(MESSAGE_ADD_COMMENT_SUCCESS, personToEdit);
+        if (personToEdit.getComment().isEmpty()) {
+            return String.format(MESSAGE_REMOVE_SUCCESS, personToEdit.getName());
+        } else {
+            return String.format(MESSAGE_ADD_SUCCESS, personToEdit.getName(), personToEdit.getComment());
+        }
     }
 
     @Override
@@ -81,12 +84,12 @@ public class AddCommentCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddCommentCommand)) {
+        if (!(other instanceof CommentCommand)) {
             return false;
         }
 
         // state check
-        AddCommentCommand e = (AddCommentCommand) other;
+        CommentCommand e = (CommentCommand) other;
         return index.equals(e.index)
                 && comment.equals(e.comment);
     }
