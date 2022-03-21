@@ -5,6 +5,8 @@ import static seedu.ibook.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.List;
 import java.util.Objects;
 
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.ibook.model.item.Item;
 import seedu.ibook.model.item.UniqueItemList;
 
@@ -22,6 +24,7 @@ public class Product {
     private final Description description;
     private final Price price;
     private final UniqueItemList items = new UniqueItemList();
+    private final FilteredList<Item> filteredItems;
 
     /**
      * Every field must be present and not null.
@@ -32,6 +35,7 @@ public class Product {
         this.category = category;
         this.description = description;
         this.price = price;
+        filteredItems = new FilteredList<>(this.items.asUnmodifiableObservableList());
     }
 
     /**
@@ -44,6 +48,7 @@ public class Product {
         this.description = description;
         this.price = price;
         this.items.setItems(items);
+        filteredItems = new FilteredList<>(this.items.asUnmodifiableObservableList());
     }
 
     public Name getName() {
@@ -65,6 +70,11 @@ public class Product {
     public UniqueItemList getItems() {
         return items;
     }
+
+    public ObservableList<Item> getFilteredItems() {
+        return filteredItems;
+    }
+
 
     public Integer getTotalQuantity() {
         return items.getTotalQuantity();
