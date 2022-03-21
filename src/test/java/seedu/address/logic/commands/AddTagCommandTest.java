@@ -49,7 +49,8 @@ public class AddTagCommandTest {
         AddTagCommand addTagCommand = new AddTagCommand(validTag);
         AddTagCommandTest.ModelStub modelStub = new AddTagCommandTest.ModelStubWithTag(validTag);
 
-        assertThrows(CommandException.class, AddTagCommand.MESSAGE_DUPLICATE_TAG, () -> addTagCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddTagCommand.MESSAGE_DUPLICATE_TAG, () ->
+                addTagCommand.execute(modelStub));
     }
 
     @Test
