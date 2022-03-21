@@ -73,6 +73,7 @@ Add a student with relevant details into Tracey.
 Format: `add n/NAME p/PHONENUMBER e/EMAIL ...`
 * Add a student with the specific tags
 * The student name is case sensitive e.g. `add n/johnDoe` will logged as `johnDoe` and not `JohnDoe` in Tracey
+* Phone Number, email and matriculation number must be **unique** to each student
 * Order of the tags does not matter e.g. `add n/NAME p/PHONENUMBER` is the same as `add p/PHONENUMBER n/NAME`
 * Tracey will acknowledge that the student has been added
 * Tags such as faculty and covid status must be a valid pre-defined constant in its respective enumeration class
@@ -88,9 +89,10 @@ Possible tags:
 | `p/` | Phone Number | - | 
 | `e/` | Email | - |
 | `a/` | Address | - |
-| `f/` | Faculty |  FASS, BIZ, SOC, SCALE, FOD, CDE, DUKE, FOL, YLLSOM, YSTCOM, SOPP, LKYSPP, SPH, TEST, FOS |
+| `f/` | Faculty |  `FASS` `BIZ` `SOC` `SCALE` `FOD` `CDE` `DUKE` `FOL` `YLLSOM` `YSTCOM` `SOPP` `LKYSPP` `SPH` `TEST` `FOS` |
 | `mc/` | Matriculation Number | - | 
 | `cs`/ | Covid Status | Positive, Negative, HRN |
+
 
 ### Deleting a contact: `delete`
 Delete a contact at a specific index
@@ -184,7 +186,7 @@ of the data (Covid statuses) and give the user an easier understanding of how th
 | No. | Command | Description |
 | - | - | - |
 | 1. | `find` | Included in `AB3`|
-| 2. | `add' | Included in AB3 with additional attributes such as faculty, matriculation number and covid status |
+| 2. | `add` | Included in AB3 with additional attributes such as faculty, matriculation number and covid status |
 | 3. | `delete` | Included in `AB3` |
 | 4. | `edit` | Included in `AB3` |
 | 5. | `clear` | Delete everything inside `Tracey` |
