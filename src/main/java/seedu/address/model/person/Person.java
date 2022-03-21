@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.lineup.LineupName;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -25,6 +26,7 @@ public class Person {
     private final JerseyNumber jerseyNumber;
     private final Set<Tag> tags = new HashSet<>();
     private final Weight weight;
+    //private final List<LineupName> lineupName;
 
     /**
      * Every field must be present and not null.

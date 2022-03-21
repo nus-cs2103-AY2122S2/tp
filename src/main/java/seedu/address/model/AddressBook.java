@@ -15,6 +15,8 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    //UniqueLineupList --> keeps track of the lineups and each lineup obj has a list of person, cap at 5.
+    //UniqueScheduleList
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,6 +27,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        // new UniqueLineupList();
+        // new UniqueScheduleList();
     }
 
     public AddressBook() {}

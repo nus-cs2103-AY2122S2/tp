@@ -2,11 +2,11 @@ package seedu.address.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import java.util.stream.IntStream;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import seedu.address.model.lineup.Lineup;
 import seedu.address.model.person.JerseyNumber;
@@ -15,8 +15,8 @@ import seedu.address.model.person.Person;
 import seedu.address.model.team.Team;
 
 /**
- * Represents all plauers contained in the system..
- * Contains the set of all players, a map from players to their teams,
+ * Represents all players contained in the system.
+ * Contains the set of all players,
  * and a map from players to their lineups.
  */
 public class UniquePlayerList {
@@ -64,7 +64,8 @@ public class UniquePlayerList {
 
     public String getAvailableJerseyNumber() {
         Stream<Integer> stream = IntStream.range(0, MAXIMUM_CAPACITY).boxed();
-        List<Integer> ls = stream.filter(x -> !this.jerseyToPersonMap.containsKey(new JerseyNumber(((Integer) x).toString())))
+        List<Integer> ls = stream
+                .filter(x -> !this.jerseyToPersonMap.containsKey(new JerseyNumber(String.valueOf(x))))
                 .collect(Collectors.toList());
         return ls.toString();
     }
