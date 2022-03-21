@@ -10,7 +10,8 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-import seedu.contax.commons.util.DateUtil;
+import seedu.contax.commons.util.datetimeparser.DateParser;
+import seedu.contax.commons.util.datetimeparser.TimeParser;
 
 /**
  * Provides conversion service from java datetime objects to String inputs for parsing tests.
@@ -23,7 +24,7 @@ public class DateInputUtil {
      * @return A string representing {@code date} that can be accepted as a command input.
      */
     public static String formatDateToInputString(LocalDate date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DateUtil.DATE_PATTERN);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DateParser.DATE_PATTERN);
         return date.format(formatter);
     }
 
@@ -34,7 +35,7 @@ public class DateInputUtil {
      * @return A string representing {@code time} that can be accepted as a command input.
      */
     public static String formatTimeToInputString(LocalTime time) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DateUtil.TIME_PATTERN);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(TimeParser.TIME_PATTERN);
         return time.format(formatter);
     }
 
