@@ -24,11 +24,11 @@ TAssist is a **desktop app for managing students and their participation in less
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`list student`** and pressing Enter will list all students added.<br>
    Some example commands you can try:
 
-   * **`list student`** : Lists all students.
+   * **`list student`**: Lists all students.
 
-   * **`add student`**`id/E0123456 n/John Doe e/johnd@example.com` : Adds a student named `John Doe` to the TAssist.
+   * **`add student`**`id/E0123456 n/John Doe e/johnd@example.com`: Adds a student named `John Doe` to the TAssist.
 
-   * **`delete student`**`3` : Deletes the 3rd student shown in the listing of the entity.
+   * **`delete student`**`3`: Deletes the 3rd student shown in the listing of the entity.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -103,7 +103,16 @@ Format: `add class id/CLASS_GROUP_ID t/CLASS_GROUP_TYPE m/MODULE_INDEX`
 Examples:
 * `add class id/T13 t/tutorial m/1` creates a new class group that is tied to the 1st module shown when `list module` is run.
 
-### Enrolling students
+#### Adding an assessment: `add assessment` [coming in v1.3]
+
+Adds an assessment to TAssist.
+
+Format: `add assessment n\ASSESSMENT_NAME m\MODULE_INDEX [sn\SIMPLE_NAME]`
+
+Examples:
+* `add assessment n\Test m\1` creates a new assessment that is tied to the 1st module shown when `list module` is run.
+
+### Enrolling students [coming in v1.3]
 
 Enrols 1 or more students to a class group.
 
@@ -116,57 +125,79 @@ Format: `enrol c/CLASS_GROUP_INDEX s/COMMA_SEPARATED_INDEXES`
 Examples:
 * `enrol c/1 s/1,2,3,4,5,6` enrols the 1st 6 students shown when `list student` is run to the 1st class group shown when `list class` is run.
 
-### Taking student attendance
+### Taking student attendance [coming in v1.3]
 
 #### Marking attendance
 
-Marks student(s)' attendance.
+Marks student(s)' attendance(s).
 
 Format: `mark attend c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|COMMA_SEPARATED_INDEXES`
 
-* Marks the attendance(s) of the students at the specified `COMMA_SEPARATED_INDEXES` belonging to the class group at the specified `CLASS_GROUP_INDEX` for the specified week.
+* Marks the attendance(s) of the student(s) at the specified `COMMA_SEPARATED_INDEXES` belonging to the class group at the specified `CLASS_GROUP_INDEX` for the specified week.
 * The index refers to the index number shown in the displayed student or class group list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `mark attend c/1 w/3 s/1,2,3,4,5,6` marks the attendance(s) of the 1st 6 students belonging to the 1st class group for week 3.
-* `mark attend c/1 w/3 s/all` marks the attendance(s) of all the students belonging to the 1st class group for week 3.
+* `mark attend c/1 w/3 s/1,2,3,4,5,6` marks the attendances of the 1st 6 students belonging to the 1st class group for week 3.
+* `mark attend c/1 w/3 s/all` marks the attendances of all the students belonging to the 1st class group for week 3.
 
 #### Unmarking attendance
 
-Unmarks student(s)' attendance.
+Unmarks student(s)' attendance(s).
 
 Format: `unmark attend c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|COMMA_SEPARATED_INDEXES`
 
-* Unmarks the attendance(s) of the students at the specified `COMMA_SEPARATED_INDEXES` belonging to the class group at the specified `CLASS_GROUP_INDEX` for the specified week.
+* Unmarks the attendance(s) of the student(s) at the specified `COMMA_SEPARATED_INDEXES` belonging to the class group at the specified `CLASS_GROUP_INDEX` for the specified week.
 * The index refers to the index number shown in the displayed student or class group list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `unmark attend c/1 w/3 s/1,2,3,4,5,6` unmarks the attendance(s) of the 1st 6 students belonging to the 1st class group for week 3.
-* `unmark attend c/1 w/3 s/all` unmarks the attendance(s) of all the students belonging to the 1st class group for week 3.
+* `unmark attend c/1 w/3 s/1,2,3,4,5,6` unmarks the attendances of the 1st 6 students belonging to the 1st class group for week 3.
+* `unmark attend c/1 w/3 s/all` unmarks the attendances of all the students belonging to the 1st class group for week 3.
+
+### Grading assessments: `grade` [coming in v1.3]
+
+Grades student's assessment.
+
+Format: `grade {a\ASSESSMENT_INDEX | sn\SIMPLE_NAME m\MODULE_INDEX} s\STUDENT_ID [g\GRADE]`
+
+* Grades the assessment of the student with the specified `STUDENT_ID`.
+* The assessment can be specified with either the `ASSESSMENT_INDEX` or the `SIMPLE_NAME` and `MODULE_INDEX`.
+* The index refers to the index number shown in the displayed assessment or module list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* If the grade is omitted, the value of the student's attempt will simply be incremented.
+
+Examples:
+* `grade a\1 s\e0123456 g\1` adds a grade of value `1` for the student with a student ID of `E0123456` to the 1st assessment shown when `list assessment` is run.
+* `grade sn\lab1 m\1 s\e0123456 g\1` adds a grade of value `1` for the student with a student ID of `E0123456` to the `lab1` assessment belonging to the 1st module shown when `list module` is run.
 
 ### Listing entries
 
-#### Listing all students : `list student`
+#### Listing all students: `list student`
 
 Shows a list of all students.
 
 Format: `list student`
 
-#### Listing all modules : `list module`
+#### Listing all modules: `list module`
 
 Shows a list of all modules.
 
 Format: `list module`
 
-#### Listing all students : `list class`
+#### Listing all students: `list class`
 
 Shows a list of all class groups.
 
 Format: `list class`
 
-### Filtering entries
+#### Listing assessments: `list assessment` [coming in v1.3]
+
+Shows a list of all assessments.
+
+Format: `list assessment`
+
+### Filtering entries [coming in v1.3]
 
 #### Filtering students
 
@@ -195,11 +226,20 @@ Format: `list class m/MODULE_INDEX`
 Examples:
 * `list class m/1` displays the class groups belonging to the 1st module shown when `list module` is run.
 
+#### Filtering assessments
+
+Shows a list of all assessments belonging to a particular module.
+
+Format: `list assessment [m\MODULE_INDEX]`
+
+Examples:
+* `list assessment m/1` displays the assessment(s) belonging to the 1st module shown when `list module` is run.
+
 ### Deleting entries
 
-#### Deleting a student : `delete student`
+#### Deleting a student: `delete student`
 
-Deletes the specified student from TAssist.
+Deletes the specified student from TAssist as well as the student's attempt(s) in the assessment(s).
 
 Format: `delete student INDEX`
 
@@ -208,11 +248,11 @@ Format: `delete student INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list student` followed by `delete student 2` deletes the 2nd student in TAssist.
+* `list student` followed by `delete student 2` deletes the 2nd student and their assessment(s)' attempt(s) in TAssist.
 
-#### Deleting a module : `delete module`
+#### Deleting a module: `delete module`
 
-Deletes the specified module from TAssist.
+Deletes the specified module from TAssist as well as its associated class group(s) and assessment(s).
 
 Format: `delete module INDEX`
 
@@ -221,9 +261,9 @@ Format: `delete module INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list module` followed by `delete module 2` deletes the 2nd module in TAssist.
+* `list module` followed by `delete module 2` deletes the 2nd module and its associated class group(s) and assessment(s) in TAssist.
 
-#### Deleting a class group : `delete class`
+#### Deleting a class group: `delete class`
 
 Deletes the specified class group from TAssist.
 
@@ -235,6 +275,19 @@ Format: `delete class INDEX`
 
 Examples:
 * `list class` followed by `delete class 2` deletes the 2nd class group in TAssist.
+
+#### Deleting an assessment: `delete assessment` [coming in v1.3]
+
+Deletes the specified assessment from TAssist.
+
+Format: `delete assessment INDEX`
+
+* Deletes the assessment at the specified `INDEX`.
+* The index refers to the index number shown in the displayed class groups list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list assessment` followed by `delete assessment 2` deletes the 2nd assessment in TAssist.
 
 ### Exiting the program : `exit`
 
@@ -276,7 +329,7 @@ _Details coming soon ..._
         <th>Format, Examples</th>
     </tr>
     <tr>
-        <td rowspan="3">Add</td>
+        <td rowspan="4">Add</td>
         <td>student</td>
         <td>
             <ul>
@@ -304,8 +357,17 @@ _Details coming soon ..._
         </td>
     </tr>
     <tr>
+        <td>assessment</td>
+        <td>
+            <ul>
+                <li>syntax: <code>add assessment n\ASSESSMENT_NAME m\MODULE_INDEX [sn\SIMPLE_NAME]</code></li>
+                <li>e.g., <code>add assessment n\Test m\1</code></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
         <td rowspan="1">Enrol</td>
-        <td>student</td>
+        <td>student(s)</td>
         <td>
             <ul>
                 <li>syntax: <code>enrol c/CLASS_GROUP_INDEX s/COMMA_SEPARATED_INDEXES</code></li>
@@ -315,7 +377,7 @@ _Details coming soon ..._
     </tr>
     <tr>
         <td rowspan="1">Taking attendance</td>
-        <td>student</td>
+        <td>student(s)</td>
         <td>
             <ul>
                 <li>syntax: <code>mark attend c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|COMMA_SEPARATED_INDEXES</code></li>
@@ -328,7 +390,18 @@ _Details coming soon ..._
         </td>
     </tr>
     <tr>
-        <td rowspan="3">List</td>
+        <td rowspan="1">Grading</td>
+        <td>assessment</td>
+        <td>
+            <ul>
+                <li>syntax: <code>grade {a\ASSESSMENT_INDEX | sn\SIMPLE_NAME m\MODULE_INDEX} s\STUDENT_ID [g\GRADE]</code></li>
+                <li>e.g., <code>grade a\1 s\e0123456 g\1</code></li>
+                <li>e.g., <code>grade sn\lab1 m\1 s\e0123456 g\1</code></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td rowspan="4">List</td>
         <td>students</td>
         <td>
             <ul>
@@ -353,7 +426,15 @@ _Details coming soon ..._
         </td>
     </tr>
     <tr>
-        <td rowspan="2">Filter</td>
+        <td>assessments</td>
+        <td>
+            <ul>
+                <li>syntax: <code>list assessment</code></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td rowspan="3">Filter</td>
         <td>students</td>
         <td>
             <ul>
@@ -373,7 +454,16 @@ _Details coming soon ..._
         </td>
     </tr>
     <tr>
-        <td rowspan="3">Delete</td>
+        <td>assessments</td>
+        <td>
+            <ul>
+                <li>syntax: <code>list assessment [m\MODULE_INDEX]</code></li>
+                <li>e.g., <code>list assessment m/1</code></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td rowspan="4">Delete</td>
         <td>student</td>
         <td>
             <ul>
@@ -397,6 +487,15 @@ _Details coming soon ..._
             <ul>
                 <li>syntax: <code>delete class INDEX</code></li>
                 <li>e.g., <code>delete class 2</code></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>assessment</td>
+        <td>
+            <ul>
+                <li>syntax: <code>delete assessment INDEX</code></li>
+                <li>e.g., <code>delete assessment 2</code></li>
             </ul>
         </td>
     </tr>
