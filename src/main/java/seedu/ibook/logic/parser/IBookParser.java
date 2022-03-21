@@ -10,6 +10,7 @@ import seedu.ibook.logic.commands.ClearCommand;
 import seedu.ibook.logic.commands.Command;
 import seedu.ibook.logic.commands.DeleteCommand;
 import seedu.ibook.logic.commands.ExitCommand;
+import seedu.ibook.logic.commands.ExpiredCommand;
 import seedu.ibook.logic.commands.FindCommand;
 import seedu.ibook.logic.commands.ListCommand;
 import seedu.ibook.logic.commands.UpdateCommand;
@@ -63,6 +64,9 @@ public class IBookParser {
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
+
+        case ExpiredCommand.COMMAND_WORD:
+            return new ExpiredCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
