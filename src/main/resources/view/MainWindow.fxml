@@ -14,18 +14,21 @@
 
 <fx:root minHeight="600" minWidth="1000.0" onCloseRequest="#handleExit" title="CinnamonBun" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
-    <Image url="@/images/address_book_32.png" />
+    <Image url="@/images/bun.png" />
   </icons>
   <scene>
     <Scene>
       <stylesheets>
         <URL value="@Cinnamon.css" />
-        <URL value="@Extensions.css" />
       </stylesheets>
       <VBox>
         <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
           <Menu mnemonicParsing="false" text="File">
             <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
+          </Menu>
+          <Menu mnemonicParsing="false" text="Theme">
+            <MenuItem mnemonicParsing="false" onAction="#useLightTheme" text="Cinnamon" />
+            <MenuItem mnemonicParsing="false" onAction="#useDarkTheme" text="Caramel" />
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />

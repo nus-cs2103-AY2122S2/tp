@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -26,6 +27,8 @@ public class MainWindow extends UiPart<Stage> {
     private static final String FXML = "MainWindow.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
+    private final String lightThemeUrl = getClass().getResource("/view/Cinnamon.css").toExternalForm();
+    private final String darkThemeUrl = getClass().getResource("/view/Caramel.css").toExternalForm();
 
     private Stage primaryStage;
     private Logic logic;
@@ -139,6 +142,30 @@ public class MainWindow extends UiPart<Stage> {
         if (guiSettings.getWindowCoordinates() != null) {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
             primaryStage.setY(guiSettings.getWindowCoordinates().getY());
+        }
+    }
+
+    /**
+     * Enables the light theme.
+     */
+    @FXML
+    private void useLightTheme() {
+        Scene scene = primaryStage.getScene();
+        if (scene.getStylesheets().contains(darkThemeUrl)) {
+            scene.getStylesheets().remove(darkThemeUrl);
+            scene.getStylesheets().add(lightThemeUrl);
+        }
+    }
+
+    /**
+     * Enables the dark theme.
+     */
+    @FXML
+    private void useDarkTheme() {
+        Scene scene = primaryStage.getScene();
+        if (scene.getStylesheets().contains(lightThemeUrl)) {
+            scene.getStylesheets().remove(lightThemeUrl);
+            scene.getStylesheets().add(darkThemeUrl);
         }
     }
 
