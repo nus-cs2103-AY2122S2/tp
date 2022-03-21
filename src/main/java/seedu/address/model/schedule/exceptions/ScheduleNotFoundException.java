@@ -1,4 +1,5 @@
 package seedu.address.model.schedule.exceptions;
 
-public class ScheduleNotFoundException extends RuntimeException{
+public class ScheduleNotFoundException extends RuntimeException {
+
 }

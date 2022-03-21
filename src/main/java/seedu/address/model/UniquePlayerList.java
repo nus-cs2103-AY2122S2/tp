@@ -15,8 +15,8 @@ import seedu.address.model.person.Person;
 import seedu.address.model.team.Team;
 
 /**
- * Represents all plauers contained in the system..
- * Contains the set of all players, a map from players to their teams,
+ * Represents all players contained in the system.
+ * Contains the set of all players,
  * and a map from players to their lineups.
  */
 public class UniquePlayerList {

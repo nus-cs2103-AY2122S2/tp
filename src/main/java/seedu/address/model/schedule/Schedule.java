@@ -1,21 +1,31 @@
 package seedu.address.model.schedule;
 
-import java.util.Objects;
-
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.Objects;
 
 public class Schedule {
     private final ScheduleName scheduleName;
+    private final ScheduleDescription scheduleDescription;
     private final ScheduleDateTime scheduleDateTime;
 
-    public Schedule(ScheduleName scheduleName, ScheduleDateTime scheduleDateTime) {
-        requireAllNonNull(scheduleName, scheduleDateTime);
+    /**
+     * Constructs a schedule.
+     */
+    public Schedule(ScheduleName scheduleName, ScheduleDescription scheduleDescription,
+                    ScheduleDateTime scheduleDateTime) {
+        requireAllNonNull(scheduleName, scheduleDescription, scheduleDateTime);
         this.scheduleName = scheduleName;
+        this.scheduleDescription = scheduleDescription;
         this.scheduleDateTime = scheduleDateTime;
     }
 
     public ScheduleName getScheduleName() {
         return scheduleName;
+    }
+
+    public ScheduleDescription getScheduleDescription() {
+        return scheduleDescription;
     }
 
     public ScheduleDateTime getScheduleDateTime() {
@@ -37,19 +47,22 @@ public class Schedule {
 
         Schedule otherSchedule = (Schedule) other;
         return otherSchedule.getScheduleName().equals(getScheduleName())
+                && otherSchedule.getScheduleDescription().equals(getScheduleDescription())
                 && otherSchedule.getScheduleDateTime().equals(getScheduleDateTime());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(scheduleName, scheduleDateTime);
+        return Objects.hash(scheduleName, scheduleDescription, scheduleDateTime);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getScheduleName())
+                .append("\nDescription: ")
+                .append(getScheduleDescription())
                 .append("\nDate and Time: ")
                 .append(getScheduleDateTime());
         return builder.toString();

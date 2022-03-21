@@ -15,6 +15,9 @@ public class ScheduleName {
 
     private final String scheduleName;
 
+    /**
+     * Constructs a schedule name.
+     */
     public ScheduleName(String scheduleName) {
         requireNonNull(scheduleName);
         checkArgument(isValidScheduleName(scheduleName), MESSAGE_CONSTRAINTS);
