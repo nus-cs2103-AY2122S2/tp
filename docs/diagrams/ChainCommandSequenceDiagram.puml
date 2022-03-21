@@ -1,8 +1,14 @@
 @startuml
-participant Actor
-Actor -> ChainCommand : execute
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager"  as LogicManager LOGIC_COLOR
+participant ":ChainCommand"  as ChainCommand LOGIC_COLOR
+participant ":Command"  as Command LOGIC_COLOR
+
+LogicManager -> ChainCommand : execute
 activate ChainCommand
-ChainCommand -> Command : execute
+ChainCommand  -> Command : execute
 activate Command
 Command --> ChainCommand
 deactivate Command

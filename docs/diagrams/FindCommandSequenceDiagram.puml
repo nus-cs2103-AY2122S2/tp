@@ -1,6 +1,18 @@
 @startuml
-participant Actor
-Actor -> FindCommand : execute
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager"  as LogicManager LOGIC_COLOR
+participant ":FindCommand"  as FindCommand LOGIC_COLOR
+end box
+box Person MODEL_COLOR_T1
+participant ":Model"  as Model MODEL_COLOR
+end box
+box Logic LOGIC_COLOR_T1
+participant ":CommandResult"  as CommandResult LOGIC_COLOR
+end box
+
+LogicManager -> FindCommand : execute
 activate FindCommand
 FindCommand -> Model : updateFilteredPersonList
 activate Model

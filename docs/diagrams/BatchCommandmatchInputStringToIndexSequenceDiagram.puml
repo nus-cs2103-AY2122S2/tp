@@ -1,6 +1,22 @@
 @startuml
-participant Actor
-Actor -> BatchCommand : matchInputStringToIndex
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+
+participant ":LogicManager"  as LogicManager LOGIC_COLOR
+participant ":BatchCommand"  as BatchCommand LOGIC_COLOR
+participant ":Index"  as Index LOGIC_COLOR
+
+box end
+
+box Person MODEL_COLOR_T1
+
+participant ":Phone"  as Phone MODEL_COLOR
+participant ":Email"  as Email MODEL_COLOR
+participant ":Address"  as Address MODEL_COLOR
+participant ":Name"  as Name MODEL_COLOR
+
+LogicManager -> BatchCommand : matchInputStringToIndex
 activate BatchCommand
 BatchCommand -> Index : fromZeroBased
 activate Index
@@ -9,6 +25,8 @@ activate Index
 Index --> Index
 deactivate Index
 Index --> BatchCommand
+
+
 deactivate Index
 BatchCommand -> Phone : toString
 activate Phone
