@@ -1,0 +1,29 @@
+@startuml
+!include style.puml
+
+$OverrideTheme(MODEL_COLOR)
+
+package Model {
+    class Product
+    class Name
+    class Category
+    class Description
+    class Price
+
+    class UniqueItemList
+    class Item
+    class ExpiryDate
+    class Quantity
+}
+
+Product *--> Name
+Product *--> Category
+Product *--> UniqueItemList
+Product *--> Description
+Product *--> Price
+
+UniqueItemList ---> "*" Item
+Item *--> ExpiryDate
+Item *--> Quantity
+
+@enduml

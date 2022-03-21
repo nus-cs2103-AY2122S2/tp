@@ -14,15 +14,6 @@ package Model {
 
     class UniqueProductList
     class Product
-    class Name
-    class Category
-    class Description
-    class Price
-
-    class UniqueItemList
-    class Item
-    class ExpiryDate
-    class Quantity
 }
 
 class HiddenOutside <<Hidden>>
@@ -39,16 +30,6 @@ ModelManager -right-> "1" UserPrefs
 
 IBook *--> "1" UniqueProductList
 UniqueProductList ---> "~* all" Product
-
-Product *--> Name
-Product *--> Category
-Product *--> UniqueItemList
-Product *--> Description
-Product *--> Price
-
-UniqueItemList ---> "~*" Item
-Item *--> ExpiryDate
-Item *--> Quantity
 
 ModelManager -->"~* filtered" Product
 @enduml

@@ -148,13 +148,16 @@ How the parsing works:
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
-
 The `Model` component,
 
 * stores the IBook data i.e., all `Product` objects (which are contained in a `UniqueProductList` object).
 * stores the currently 'selected' `Product` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Product>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPrefs` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPrefs` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+
+A more detailed representation of the `Product` class is shown below which includes more details regarding the `Item` class.
+
+<img src="images/DetailedModelClassDiagram.png" width="450" />
 
 ### Storage component
 
