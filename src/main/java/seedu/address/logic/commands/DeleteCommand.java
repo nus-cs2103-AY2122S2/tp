@@ -41,12 +41,18 @@ public class DeleteCommand extends Command {
         this.lineup = null;
     }
 
+    /**
+     * Overloaded constructor for delete command.
+     */
     public DeleteCommand(Name player, LineupName lineup) {
         this.type = DeleteCommandType.PLAYER_LINEUP;
         this.player = player;
         this.lineup = lineup;
     }
 
+    /**
+     * Overloaded constructor for delete command.
+     */
     public DeleteCommand(LineupName lineup) {
         this.type = DeleteCommandType.LINEUP;
         this.player = null;
@@ -70,6 +76,7 @@ public class DeleteCommand extends Command {
             // to be added
         case LINEUP:
             // to be added
+        default:
         }
 
         return null; // temporarily

@@ -33,7 +33,7 @@ If you can type fast, MyGM can get your contact management tasks done faster tha
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `MyGM.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `MyGM.jar` from [here](https://github.com/AY2122S2-CS2103-F09-1/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your MyGM.
 
@@ -87,12 +87,12 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a player/ team/ lineup/ schedule: `add`
+### Adding a player/ lineup/ schedule: `add`
 
-Adds a player/ team/ lineup/ schedule to MyGM.
+Adds a player/ lineup/ schedule to MyGM.
 
 **To add a player:**  
-Format: `add P/ n/NAME a/AGE j/JERSY_NUMBER w/WEIGHT h/HEIGHT p/PHONE_NUMBER e/EMAIL_ADDRESS`
+Format: `add P/ n/NAME j/JERSY_NUMBER w/WEIGHT h/HEIGHT p/PHONE_NUMBER e/EMAIL_ADDRESS`
 
 * Adds a player with the specified attributes to the player list in MyGM.
 
@@ -101,72 +101,49 @@ Examples:
 who is age of 17, jersey number of 3, weight of 69kg, height of 188cm, handphone number of 98765432
 and email of johnd@example.com to the player list.`
 
-**To add a team:**  
-Format: `add T/ n/TEAM_NAME [P/PLAYER]…​`
-* Adds a team with the specified team name in MyGM.
-* If `n/TEAM_NAME` and `P/PLAYER` are specified, a team with the specified `TEAM_NAME` and the specified `PLAYER`
-  added into team `TEAM_NAME`.
-* Multiple `PLAYER` can be specified.
-* The `PLAYER` specified **must already exist** in MyGM.
-
-Examples:
-* `add T/ n/Huskers` Creates a team by the name of `Huskers` only.
-* `add T/ n/Huskers  P/John Doe P/James` Doe Creates a team by the name of `Huskers` with players `John Doe` and `James Doe`
-added to team `Huskers`.
-
 **To add a lineup:**  
-Format: `add L/ n/LINEUP_NAME T/TEAM [P/PLAYER]…​`
-* Adds a lineup with the specified `LINEUP_NAME` inside `TEAM`.
-* If `n/LINEUP_NAME`, `T/TEAM` and `P/PLAYER` are specified, a lineup with the specified `LINEUP_NAME` 
-with the specified `PLAYER` added to this lineup will also be added to `TEAM`.
+Format: `add L/ n/LINEUP_NAME [P/PLAYER]…​`
+* Adds a lineup with the specified `LINEUP_NAME` inside MyGM.
+* If `n/LINEUP_NAME` and `P/PLAYER` are specified, a lineup with the specified `LINEUP_NAME` 
+with the specified `PLAYER` added to this lineup.
 * Multiple `PLAYER` can be specified but it will be **capped at 5**.
-* Both the team `TEAM` and the `PLAYER` specified **must already exist** in MyGM.
+* Tthe `PLAYER` specified **must already exist** in MyGM.
 
 Examples:
-* `add L/ n/starting five T/Balluba` adds a lineup by the name of `starting five` inside team `Balluba`.
-* `add L/ n/starting five T/Balluba P/James P/Curry P/Harden P/Durant P/Embiid` adds a lineup by the name of `starting five`
-inside team `Balluba`. Players `James`, `Curry`, `Harden`, `Durant` and `Embiid` are also added to the lineup `starting five`.
+* `add L/ n/starting five` adds a lineup by the name of `starting five` inside MyGM.
+* `add L/ n/starting five P/James P/Curry P/Harden P/Durant P/Embiid` Players `James`, `Curry`, `Harden`, `Durant` and `Embiid` are also added to the lineup `starting five`.
 
 **To add a schedule:**  
-Format: `add S/ T/TEAM n/DESCRIPTION d/DATETIME`
-* Adds a schedule with the description of `DESCRIPTION` and the date time of `DATETIME` inside the specified team `TEAM`.
-* `TEAM` specified **must already exists** in MyGM
+Format: `add S/ r/DESCRIPTION d/DATETIME`
+* Adds a schedule with the description of `DESCRIPTION` and the date time of `DATETIME` inside MyGM.
 * `DATETIME` must be in a date time format.
 
 Examples:
-* `add S/ n/Yabuda d/competition d/22/02/2022 0900` adds a schedule with the description of `competition` that is held on `22/02/2022 0900` inside team `Yabuda`.
+* `add S/ d/competition d/22/02/2022 0900` adds a schedule with the description of `competition` that is held on `22/02/2022 0900`.
 
-### deleting a player/ team/ lineup/ schedule :  `delete`
-deletes a player/ team/ lineup/ schedule from MyGM
+### deleting a player/ lineup/ schedule :  `delete`
+deletes a player/ lineup/ schedule from MyGM
 
 **To delete a player:**
-Format: `delete P/PLAYER [T/TEAM] [L/LINEUP]`
+Format: `delete P/PLAYER [L/LINEUP]`
 * Deletes the player from the player list.
-* If only `T/TEAM` is specified, delete the player from the team.
-* If `T/TEAM` and `L/LINEUP` are specified, delete the player from the lineup.
+* Id `L/LINEUP` is specified, delete the player from the lineup.
 
 Example:
-*`delete P/James Soften T/Netts` will delete player `James Soften` from team `Netts`.
-
-**To delete a team:**
-Format: `delete T/TEAM`
-* Deletes the team.
-
-Example:
-*`delete T/Lokers` will delete team `Lokers`.
+*`delete P/James Soften` will delete player `James Soften`.
 
 **To delete a lineup:**
-Format: `delete T/TEAM L/LINEUP`
-* Delete the lineup in the team.
+Format: `delete L/LINEUP`
+* Delete the lineup.
 
 Example:
-* `delete T/Lokers L/starting five` will delete the lineup `starting five` from team `Lokers`.
+* `delete L/starting five` will delete the lineup `starting five` from MyGM.
 
 **To delete a schedule:**
-Format: `delete T/TEAM i/INDEX_SCHEDULE`
-* Delete the i-th schedule of the team.
+Format: `delete T/ i/INDEX_SCHEDULE`
+* Delete the i-th schedule of MyGM.
   Example:
-  *`delete T/Lokers i/1` will delete schedule `1` from team `Lokers`.
+  *`delete i/1` will delete schedule `1` from MyGM.
 
 ### Listing all persons : `list`
 
@@ -192,25 +169,15 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Putting a player to a team/ lineup: `put`
+### Putting a player to a lineup: `put`
 
 Puts a player to a specific team or to a specific lineup.
 
-**To put a player into a team:** <br>
-Format: `put P/PLAYER T/TEAM`
-* Puts a player to a specific team for managing purposes.
-* Displays error if either the input PLAYER or TEAM does not exist.
-* Each player can only belong to one team at a time. Displays errors if the input player already has a team.
-
-Example:
-* `put P/John Doe T/Hulluka` Puts Player John Doe into the team named Hulluka
-
 **To put a player to a lineup:** <br>
 Format: `put P/PLAYER L/LINEUP`
-* Adds a player to a specific lineup within his team for training purposes.
+* Adds a player to a specific lineup.
 * Displays error if either the specified PLAYER or LINEUP does not exist.
-* Displays error if the input player does not belong to any team.
-* Each player can join multiple lineups within the team he belongs to.
+* Each player can join multiple lineups.
 
 * Example:
 * `put P/John Doe L/starting five` Puts John Doe into the lineup named starting five
@@ -219,69 +186,41 @@ Format: `put P/PLAYER L/LINEUP`
 
 Mark the attendance of players in a team for a specific training date or competition.
 
-Format: `mark T/TEAM i/INDEX_SCHEDULE P/PLAYER [P/MORE_PLAYERS]`
+Format: `mark i/INDEX_SCHEDULE P/PLAYER [P/MORE_PLAYERS]`
 * Mark all players specified PLAYER_NAME as present for the event with index number INDEX_SCHEDULE on the schedule.
 * The index must be a positive integer 1, 2, 3…
 
 Example:
-* `mark T/Jiayous i/1 P/Budaha P/john` Marks Budaha Arda and John Doe as present for the event with schedule index 1.
+* `mark i/1 P/Budaha P/john` Marks Budaha Arda and John Doe as present for the event with schedule index 1.
 
 ### Mark a player as absent: `unmark`
 
 Mark the attendance of players in a team as absent for a specific training date or competition.
 
-Format: `unmark T/TEAM i/INDEX_SCHEDULE P/PLAYER [P/MORE_PLAYERS]​`
+Format: `unmark i/INDEX_SCHEDULE P/PLAYER [P/MORE_PLAYERS]​`
 * Mark all players with the specified PLAYER_NAME as absent for the event with index number INDEX_SCHEDULE on the schedule.
 * The index **must be a positive integer 1, 2, 3.**
 
 Example:
-* `unmark T/Jiayous i/1 P/Budaha P/john` marks Budaha Arda and John Doe as absent for the event with schedule index 1.
-
-### Tagging a player by their position: `tag`
-
-Tag a player by their position. Position includes: Point Guard (PG), Shooting Guard(SG), Small Forward(SF), 
-Power Forward(PF) and Centre(C).
-
-Format: `tag P/PLAYER t/TAG…​`
-* Tags the specified `PLAYER` with the position of `TAG`
-* The specified `PLAYER` can be tagged with a multiple `TAG`
-* The `PLAYER` specified **must already exist** in MyGM.
-
-Examples:
-* `tag P/LBJ t/SF tags` the player `LBJ` with the position of `SF` only.
-* `tag P/LBJ t/PG t/SG t/PF` tags the player `LBJ` with the position of `PG`, `SF` and `PF`.
+* `unmark i/1 P/Budaha P/john` marks Budaha Arda and John Doe as absent for the event with schedule index 1.
 
 ### Viewing the summary: `view`
 
-Views the summarised information of a team, lineup or player.
-
-**To view a team:**<br>
-
-Format: `view T/[TEAM]`
-* The summarised information of a team only contains the total number of players in the team,  the total number of players in each position.
-* Displays the summarised information of  the specified `TEAM`.
-  - All the players in the specified `TEAM` will be displayed.
-* If no `TEAM` is provided, the summarised information of each of all of the existing teams will be provided.
-  - All the `TEAM` will be displayed.
-* The specified `TEAM` must be **valid** to be viewed.
-
-Examples:
-* `view T/Lakaka` Displays the team summary of `Lakaka`.
-* `view T/` Displays all existing teams.
+Views the summarised information of lineup/ player/ schedule.
 
 **To view a lineup:**<br>
 
-Format: `view T/TEAM L/[LINEUP]`
+Format: `view L/[LINEUP]`
 * The summarised information of a lineup only include the name, the position of the player and the number of slots (out of 5) filled.
-* Displays the summarised information of the specified `LINEUP` in the specified `TEAM`.
+* Displays the summarised information of the specified `LINEUP` in the specified ``.
   - All the players in the specified `LINEUP` will be displayed.
-* If no `LINEUP` is provided, the summarised information of all lineups in the specified `TEAM` will be displayed.
+* If no `LINEUP` is provided, the summarised information of all lineups in the specified `` will be displayed.
   - All the `LINEUP` in the specified team will be displayed. 
-* The specified `LINEUP` and specified `TEAM` must be **valid** to be viewed.
+* The specified `LINEUP` and specified `` must be **valid** to be viewed.
 
 Examples:
-* `view T/Lakaka L/Starting Five` Displays the summarised information of lineup `Start Five` in team `Lakaka`.
-* `view T/Lakaka L/` Displays the summarised information of all lineups in team `Lakaka`.
+* `view L/Starting Five` Displays the summarised information of lineup `Start Five`
+* `view L/` Displays the summarised information of all lineups
 
 **To view a player:**<br>
 
@@ -297,12 +236,12 @@ Examples:
 
 **To view a schedule:**<br>
 
-Format: `view T/TEAM i/[INDEX]`
-* Displays the schedule of the specified `TEAM` numbered with the specified `INDEX`.
-* If no `INDEX` is provided, the list of all schedules of the `TEAM` will be displayed.
+Format: `view i/[INDEX]`
+* Displays the schedule of the specified `` numbered with the specified `INDEX`.
+* If no `INDEX` is provided, the list of all schedules of the `` will be displayed.
 
 Examples:
-* `view T/Lakaka i/1` Displays the information on `Lakaka`'s 1st schedule.
+* `view i/1` Displays the information on `Lakaka`'s 1st schedule.
 
 ### Finding a lineup or player: `find`
 
@@ -322,35 +261,19 @@ Format: `find P/PLAYER`
 Examples:
 * `find P/Brown James` If the user forgets which team and lineup `Brown James` belongs to, they can use this command to find him.
 
-
-
-### Deleting a person : `delete`
-
-Delete the specified person from the address book.
-
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
 ### Filtering players by position: `filter`
 
 Filter all players with the specified tag(s).
 
-Format: `filter [T/TEAM] t/TAG [t/TAGS]`
+Format: `filter [T/] t/TAG [t/TAGS]`
 * Display all the players with the specific tag(s) from a particular team.
-* If T/TEAM is not specified, players with these tags from all teams will be displayed.
+* If T/ is not specified, players with these tags from all teams will be displayed.
 
 Example:
 * `filter T/Sandama t/PF` Displays all the players with the tag PF in the team Sandama.
 
 
-### Edit a player/team/lineup/schedule information : `edit`
+### Edit a player/ lineup/ schedule information : `edit`
 
 Update the details of a player, team, lineup or schedule
 
@@ -365,33 +288,24 @@ Format: `edit P/NAME [n/NAME] [p/PHONE_NUMBER] [a/AGE] [w/WEIGHT] [h/HEIGHT] [j/
 Example:
 * `edit P/James Soften p/8888888` will change the phone number of player James Soften to 88888888
 
-**To edit a team:**
-
-Format: `update T/TEAM_NAME n/NEW_TEAM_NAME`
-
-* edit the team name of team TEAM_NAME to NEW_TEAM_NAME
-
-Example:
-* `edit T/Lokers n/Lakers` will change team Lokers to team Lakers
-
 **To edit a lineup:**
 
-Format: `edit T/TEAM_NAME L/LINEUP n/NEW_LINEUP_NAME`
+Format: `edit L/LINEUP n/NEW_LINEUP_NAME`
 
-* Edit the lineup name of lineup LINEUP of team TEAM_NAME to NEW_LINEUP_NAME
+* Edit the lineup name of lineup LINEUP of team _NAME to NEW_LINEUP_NAME
 
 Example:
 * `edit T/Lakers L/Starting5 n/Worst5` will change name of the lineup Starting5 of team Lakers to Worst5
 
 **To edit a schedule:**
 
-Format: `edit T/TEAM i/INDEX_SCHEDULE [n/DESCRIPTION] [d/DATETIME]`
+Format: `edit i/INDEX_SCHEDULE [n/DESCRIPTION] [d/DATETIME]`
 
 * Edit the details of the i-th schedule of a team
 * If any fields are specified, it will be changed accordingly
 
 Example:
-* `edit T/Wizards i/1 n/Training` will change the description of first event in the schedule for team Wizards to Training
+* `edit S/ i/1 n/Training` will change the description of first event in the schedule for team Wizards to Training
 
 ### Clearing all entries : `clear`
 
@@ -452,19 +366,18 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add P/ n/NAME a/AGE j/JERSY_NUMBER w/WEIGHT h/HEIGHT p/PHONE_NUMBER e/EMAIL_ADDRESS`<br>e.g. `add P/ n/John Doe a/17 j/3 w/69 h/188 p/98765432 e/johnd@example.com`<br> `add T/ n/TEAM_NAME [P/PLAYER]…​`<br> e.g. `add T/ n/Huskers  P/John Doe  P/James Doe`<br>`add L/ n/LINEUP_NAME T/TEAM [P/PLAYER]…​`<br>e.g. `add L/ n/starting five T/Balluba P/James P/Curry P/Harden P/Durant P/Embiid`<br>`add S/ T/TEAM n/DESCRIPTION d/DATETIME`<br>e.g. `add S/ T/Yabuda n/competition d/22/02/2022 0900` |
-| **Delete** | `xxx`<br>e.g.`xxx`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| **View**   | `view T/[TEAM]`<br>e.g. `view T/Huskers`<br>`view T/TEAM L/[LINEUP]`<br>e.g. `view T/Huskers L/starting five`<br>`view P/[PLAYER]`<br>e.g. `view P/Blue Blue`<br>`view T/TEAM i/[INDEX]`<br>e.g. `view T/Lakaka i/1`                                                                                                                                                                                                                                                                                      |
-| **Tag**    | `tag P/PLAYER t/TAG…​`<br>e.g. `tag P/LBJ t/SF`                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| **Put**    | `xxx`<br> e.g.`xxx`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| **Mark**   | `xxx`<br> e.g.`xxx`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| **Unmark** | `unmark T/TEAM i/INDEX_SCHEDULE P/PLAYER [P/PLAYER]`<br> e.g. `unmark T/Huskers i/1 P/John Doe P/James P/Durant`                                                                                                                                                                                                                                                                                                                                                                                          |
-| **Filter** | `xxx`<br> e.g.`xxx`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| **Update** | `update P/PLAYER [n/NAME] [p/PHONE_NUMBER] [a/AGE] [w/WEIGHT] [h/HEIGHT] [j/JERSY_NUMBER]`<br> e.g. `update P/John Doe a/22`<br>`update T/TEAM n/NEW_TEAM_NAME`<br>e.g. `update T/Huskers n/Huskies`<br>`update T/TEAM_NAME L/LINEUP_NAME n/NEW_LINEUP_NAME`<br> e.g. `update T/Lakers L/HAHA n/HEIHEI`<br>`update S/TEAM_NAME i/INDEX_SCHEDULE [n/DESCRIPTION] [d/DATETIME]`<br> e.g. `add S/Yabuda i/1 n/competition d/22/02/2022 0900`                                                                 |
-| **Find**   | `find P/PLAYER`<br>e.g. `find P/Wu Lala`<br>`find L/LINEUP`<br>e.g. `find L/Oo la la`                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| **Save**   | `save PATH`<br> e.g.`save details/team.txt`                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| **Load**   | `xxx`<br> e.g.`xxx`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| **Clear**  | `xxx`<br> e.g.`xxx`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| **Help**   | `help`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| Action     | Format, Examples                                                                                                                                                                                                                                                                                                                                                           |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add P/ n/NAME j/JERSY_NUMBER w/WEIGHT h/HEIGHT p/PHONE_NUMBER e/EMAIL_ADDRESS`<br>e.g. `add P/ n/John Doe j/3 w/69 h/188 p/98765432 e/johnd@example.com`<br>`add L/ n/LINEUP_NAME [P/PLAYER]…​`<br>e.g. `add L/ n/starting five  P/James P/Curry P/Harden P/Durant P/Embiid`<br>`add S/ n/NAME r/DESCRIPTION d/DATETIME`<br>e.g. `add S/ r/competition d/22/02/2022 0900` |
+| **Delete** | `xxx`<br>e.g.`xxx`                                                                                                                                                                                                                                                                                                                                                         |
+| **View**   | `view L/[LINEUP]`<br>e.g. `view L/starting five`<br>`view P/[PLAYER]`<br>e.g. `view P/Blue Blue`<br>`view S/ i/[INDEX]`<br>e.g. `view S/ i/1`                                                                                                                                                                                                                              |
+| **Put**    | `xxx`<br> e.g.`xxx`                                                                                                                                                                                                                                                                                                                                                        |
+| **Mark**   | `xxx`<br> e.g.`xxx`                                                                                                                                                                                                                                                                                                                                                        |
+| **Unmark** | `unmark i/INDEX_SCHEDULE P/PLAYER [P/PLAYER]`<br> e.g. `unmark i/1 P/John Doe P/James P/Durant`                                                                                                                                                                                                                                                                            |
+| **Filter** | `xxx`<br> e.g.`xxx`                                                                                                                                                                                                                                                                                                                                                        |
+| **Edit**   | `edit P/PLAYER [n/NAME] [p/PHONE_NUMBER] [w/WEIGHT] [h/HEIGHT] [j/JERSY_NUMBER]`<br> e.g. `edit P/John Doe a/22`<br>`edit L/LINEUP_NAME n/NEW_LINEUP_NAME`<br> e.g. `edit L/HAHA n/HEIHEI`<br>`edit i/INDEX_SCHEDULE [n/DESCRIPTION] [d/DATETIME]`<br> e.g. `add S/ i/1 n/competition d/22/02/2022 0900`                                                                   |
+| **Find**   | `find P/PLAYER`<br>e.g. `find P/Wu Lala`<br>`find L/LINEUP`<br>e.g. `find L/Oo la la`                                                                                                                                                                                                                                                                                      |
+| **Save**   | `save PATH`<br> e.g.`save details/team.txt`                                                                                                                                                                                                                                                                                                                                |
+| **Load**   | `xxx`<br> e.g.`xxx`                                                                                                                                                                                                                                                                                                                                                        |
+| **Clear**  | `xxx`<br> e.g.`xxx`                                                                                                                                                                                                                                                                                                                                                        |
+| **Help**   | `help`                                                                                                                                                                                                                                                                                                                                                                     |

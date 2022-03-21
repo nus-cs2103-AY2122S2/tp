@@ -10,9 +10,11 @@ public class ScheduleDateTime {
     public static final String MESSAGE_CONSTRAINTS =
             "Please check the format of schedule date and time, and it should not be blank";
 
-
     private final LocalDateTime scheduleDateTime;
 
+    /**
+     * Creates a date time for schedule.
+     */
     public ScheduleDateTime(String scheduleDateTime) {
         requireNonNull(scheduleDateTime);
         checkArgument(isValidScheduleDateTime(scheduleDateTime), MESSAGE_CONSTRAINTS);

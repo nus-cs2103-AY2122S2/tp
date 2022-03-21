@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.model.lineup.Lineup;
-import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.team.Team;
