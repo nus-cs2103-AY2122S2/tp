@@ -78,6 +78,12 @@ Shows a list of all student contacts in ArchDuke.
 
 Format: `list`
 
+### Clearing all entries: `clear`
+
+Clears all entries from ArchDuke.
+
+Format: `clear`
+
 ### Exiting the program : `exit`
 
 Exits the program.
