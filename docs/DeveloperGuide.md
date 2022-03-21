@@ -146,7 +146,7 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
-Within the `/storage` folder, there also exists a `CsvManager` class that is a helper file to do file IO related operations when Import CSV or Export CSV is called. This file does not fit within the storage component diagram as it is simply meant to separate IO operations to a helper class within `/storage`.
+Within the `storage` package, there also exists a `CsvManager` class that is a helper that provides file IO related operations for working with CSV files. It is used in the Import CSV or Export CSV features. This class does not fit within the storage component diagram as it does not interact with any other classes, serving solely as a helper class.
 
 ### Common classes
 
