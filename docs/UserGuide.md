@@ -26,9 +26,9 @@ ArchDuke is a **desktop app for managing student contacts and groups, optimized 
 
    * **`list`** : Lists all student contacts.
 
-   * **`add`**`n/John Doe p/12345678 e/johndoe@u.nus.edu a/Y2 Computer Science [t/optional]` : Adds a contact named `John Doe` to ArchDuke.
+   * **`add`**`n/John Doe p/12345678 e/johndoe@u.nus.edu a/Computer Science [t/optional]` : Adds a contact named `John Doe` to ArchDuke.
 
-   * **`clear`** : Deletes all student contacts.
+   * **`clear`** : Deletes all entries in ArchDuke.
 
    * **`exit`** : Exits the app.
 
@@ -78,6 +78,12 @@ Shows a list of all student contacts in ArchDuke.
 
 Format: `list`
 
+### Clearing all entries: `clear`
+
+Clears all entries from ArchDuke.
+
+Format: `clear`
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -93,7 +99,7 @@ There is no need to save manually.
 
 ### Add student contact information: `add`
 
-Adds a student contact information to the address book. `add` must be followed by the student’s name, 
+Adds a student contact information to ArchDuke. `add` must be followed by the student’s name, 
 phone number, email, and academic major. Tag is optional.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ACADEMIC MAJOR [t/TAG]`
@@ -112,7 +118,53 @@ Example:
 
 Expected outcome:
 
-* Student’s contact information is visible in ArchDuke GUI.
+* Student’s contact information is visible in ArchDuke.
+
+### Delete student contact information: `delete`
+
+Deletes a student contact information at the specified index from ArchDuke.
+The index refers to the index number shown in the displayed student contact list. 
+The index must be a positive integer.
+
+Format: `delete INDEX`
+
+Example: 
+
+* `delete 1`
+* `list` followed by `delete 2` deletes the second person in the current list from ArchDuke.
+* `find Alex` followed by `delete 1` deletes the first person in the current resulting list of the `find` command.
+
+Expected outcome:
+
+* The student contact is removed from ArchDuke.
+
+### Locating student contacts by attributes: `find`
+
+Locates all student contact in ArchDuke based on attributes that matches the given keywords. 
+* The attributes supported are: `n/NAME`, `p/PHONE_NUMER`, `e/EMAIL`, `a/ACADEMIC_MAJOR`, `t/TAG`
+* The specified keywords are case-insensitive. 
+* The attributes could be accessed by adding prefixes before the keywords.
+* The result must match the exact wording, partial words will not match (e.g. `n/Dav` will not match the student contact
+`David` or `David Li`).
+* The command will list out all student contacts that matches the keyword.
+  * `find n/Alex` would match with `Alex Yeoh` and `Alex Yu`
+  * `find n/Alex Yeoh` would match with `Alex Yeoh` and `Alex Yu`
+  * `find n/Alex Yu` would match with `Alex Yeoh`, `Alex Yu`, and `Bernice Yu`
+
+Format: `find PREFIX/KEYWORD [MORE_KEYWORDS]`
+
+Example:
+
+* `find n/Alex`
+* `find p/98765432`
+* `find e/example@u.nus.edu`
+* `find a/Computer Science`
+* `find t/friends`
+
+Expected outcome:
+
+* Lists all student contacts that match with those attributes and displays the number of student contacts that 
+match those keywords.
 
 ## Student Group Management
 
@@ -147,7 +199,8 @@ Expected outcome:
 ### Assign a student to a group: `assign`
 
 Assigns a student to an existing group in ArchDuke. `assign` is followed by the index at which the student is 
-in the ArchDuke contact list and the group name in which the student would be assigned.
+in the ArchDuke contact list and the group name in which the student would be assigned. 
+The group must **already exist** in ArchDuke, and the index must be a **positive integer**.
 
 Format: `assign INDEX g/GROUP_NAME`
 
@@ -159,7 +212,42 @@ Example:
 
 Expected outcome:
 
-* Assigns the specified student to the group.
+* Assigns the specified student to the specified group.
+
+### Deassign a student from a group: `deassign`
+
+Deassigns a student from an existing group in ArchDuke. `deassign` is followed by the index at which the student
+is in the ArchDuke contact list and the group name in which the student would be deassigned. 
+The group must **already exist** in ArchDuke, and the index must be a **positive integer**.
+
+Format: `deassign INDEX g/GROUP_NAME`
+
+* Deassigns the student at index `INDEX` from the group called `GROUP_NAME`
+
+Example:
+
+* `deassign 1 g/CS2103-W16-3`
+
+Expected outcome:
+
+* Deassigns the specified student from the specified group.
+
+### View student contacts in an existing group: `viewcontact`
+
+Displays the student contacts from the specified group. `viewcontact` must be followed by a group name.
+The group must already exist in ArchDuke.
+
+Format: `viewcontact g/GROUP_NAME`
+
+* Views all student contacts in the group called `GROUP_NAME`
+
+Example:
+
+* `viewcontact g/CS2103-W16-3`
+
+Expected outcome:
+
+* Displays all the student contacts from the specified group.
 
 ## Student Group Task Management
 
@@ -168,13 +256,13 @@ Expected outcome:
 Adds a task to the specified group. `addtask` must be followed by a task name and a group name. 
 The group must **already exist** in ArchDuke.
 
-Format: `addtask t/TASK_NAME g/GROUP_NAME`
+Format: `addtask task/TASK_NAME g/GROUP_NAME`
 
 * Adds the task called `TASK_NAME` to the group called `GROUP_NAME`
 
 Example:
 
-* `addtask t/v1.2 user guide g/CS2103-W16-3`
+* `addtask task/v1.2 user guide g/CS2103-W16-3`
 
 Expected outcome:
 
@@ -185,13 +273,13 @@ Expected outcome:
 Deletes a task from the specified group. `deltask` must be followed by a task name and a group name. 
 The group must **already exist** in ArchDuke.
 
-Format: `deltask t/TASK_NAME g/GROUP_NAME`
+Format: `deltask task/TASK_NAME g/GROUP_NAME`
 
 * Deletes the task called `TASK_NAME` from the group called `GROUP_NAME`
 
 Example: 
 
-* `deltask t/v1.2 user guide g/CS2103-W16-3`
+* `deltask task/v1.2 user guide g/CS2103-W16-3`
 
 Expected outcome:
 
@@ -233,6 +321,7 @@ Action | Format, Examples
 **View help** | `help`
 **List all student contacts** | `list`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Clear entries** | `clear`
 **Exit** | `exit`
 
 ### Student contact management
@@ -240,6 +329,7 @@ Action | Format, Examples
 Action | Format, Examples
 --------|------------------
 **Add student contact information** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ACADEMIC MAJOR [t/TAG]` <br> e.g., `add n/John Doe p/12345678 e/johndoe@u.nus.edu a/Computer Science [t/optional]`
+**Delete student contact information** | `delete INDEX` <br> e.g., `delete 1`
 
 ### Student group management
 
@@ -248,6 +338,8 @@ Action | Format, Examples
 **Create a group** | `addgroup g/GROUP_NAME`<br> e.g., `addgroup g/CS2103-W16-3`
 **Delete a group** | `delgroup g/GROUP_NAME`<br> e.g.,`delgroup g/CS2103-W16-3`
 **Assign a student to a group** | `assign INDEX g/GROUP_NAME`<br> e.g.,`assign 1 g/CS2103-W16-3`
+**Deassign a student from a group** | `deassign INDEX g/GROUP_NAME`<br> e.g.,`deassign 1 g/CS2103-W16-3`
+**Display student contacts in a group** | `viewcontact g/GROUP_NAME`<br> e.g.,`viewcontact g/CS2103-W16-3`
 
 ### Student group task management
 
@@ -255,4 +347,4 @@ Action | Format, Examples
 --------|------------------
 **Add a task in a group** | `addtask t/TASK_NAME g/GROUP_NAME`<br> e.g., `addtask t/v1.2 user guide g/CS2103-W16-3`
 **Delete a task in a group** | `deltask t/TASK_NAME g/GROUP_NAME`<br> e.g.,`deltask t/v1.2 user guide g/CS2103-W16-3`
-**Displays the tasks in a group** | `viewtask g/GROUP_NAME`<br> e.g.,`viewtask g/CS2103-W16-3`
+**Display the tasks in a group** | `viewtask g/GROUP_NAME`<br> e.g.,`viewtask g/CS2103-W16-3`
