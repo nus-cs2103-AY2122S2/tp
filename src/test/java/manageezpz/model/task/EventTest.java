@@ -25,4 +25,10 @@ public class EventTest {
         assertEquals("X", testEvent.getStatusIcon());
     }
 
+    @Test
+    public void testToString() {
+        String expected = "[E][ ] testing (at: Nov 08 2022 6:00 PM to 8:00 PM)";
+        assertEquals(expected, testEvent.toString());
+    }
+
 }

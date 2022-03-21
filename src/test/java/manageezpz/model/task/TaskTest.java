@@ -4,6 +4,7 @@ import static manageezpz.logic.commands.CommandTestUtil.VALID_TASK_DESCRIPTION;
 import static manageezpz.testutil.TypcialTasks.GET_A_DRINK;
 import static manageezpz.testutil.TypcialTasks.READ_BOOK;
 import static manageezpz.testutil.TypcialTasks.RETURN_BOOK;
+import static manageezpz.testutil.TypicalPersons.ALICE;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -68,5 +69,4 @@ public class TaskTest {
         GET_A_DRINK.setTaskNotDone();
         assertFalse(GET_A_DRINK.isDone);
     }
-
 }

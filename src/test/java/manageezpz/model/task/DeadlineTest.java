@@ -23,4 +23,10 @@ public class DeadlineTest {
         assertEquals("X", testDealine.getStatusIcon());
     }
 
+    @Test
+    public void testToString() {
+        String expected = "[D][ ] testing (by: Nov 08 2022 6:00 PM)";
+        assertEquals(expected, testDealine.toString());
+    }
+
 }

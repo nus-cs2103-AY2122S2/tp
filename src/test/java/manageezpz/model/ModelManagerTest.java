@@ -192,9 +192,24 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void isDeleted_taskInAddressBook_returnsTrue() {
+    public void deleteTask_taskInAddressBook_returnsTrue() {
         modelManager.addTask(READ_BOOK);
         modelManager.deleteTask(READ_BOOK);
         assertTrue(!modelManager.hasTask(READ_BOOK));
     }
+
+    @Test
+    public void markTask_taskInaddressBook_returnsTrue() {
+        modelManager.markTask(READ_BOOK);
+        assertTrue(READ_BOOK.isDone());
+    }
+
+    @Test
+    public void unmarkTask_taskInaddressBook_returnsTrue() {
+        modelManager.unmarkTask(READ_BOOK);
+        assertTrue(!READ_BOOK.isDone());
+    }
+
+    
+
 }

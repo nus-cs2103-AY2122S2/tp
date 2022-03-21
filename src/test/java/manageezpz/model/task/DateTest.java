@@ -1,6 +1,9 @@
 package manageezpz.model.task;
 
+import java.time.LocalDate;
+
 import static manageezpz.testutil.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -38,5 +41,11 @@ public class DateTest {
         // valid date
         assertTrue(Date.isValidDate("2022-05-09"));
         assertTrue(Date.isValidDate("2024-05-09"));
+    }
+
+    @Test
+    public void testGetters() {
+        Date testDate = new Date(LocalDate.now().toString());
+        assertEquals(testDate, Date.getTodayDate());
     }
 }
