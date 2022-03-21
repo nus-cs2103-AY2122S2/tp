@@ -21,6 +21,7 @@ public class TextStyleHelper {
         boolean bold = false;
         boolean italic = false;
         boolean boldAndItalic = false;
+        boolean monospaced = false;
         int start = 0;
 
         for (int i = 0; i < text.length(); i++) {
@@ -63,11 +64,21 @@ public class TextStyleHelper {
                     i += 2;
                     boldAndItalic = true;
                 }
+            } else if (text.charAt(i) == '`') {
+                if (monospaced) {
+                    resultingList.add(newMonospacedText(text.substring(start, i)));
+                    start = i + 1;
+                    monospaced = false;
+                    continue;
+                } else {
+                    resultingList.add(newText(text.substring(start, i), false, false));
+                    start = i + 1;
+                    monospaced = true;
+                }
             } else if (i == (text.length() - 1)) {
                 resultingList.add(newText(text.substring(start, i + 1), false, false));
             }
         }
-
         return resultingList;
     }
 
@@ -83,6 +94,13 @@ public class TextStyleHelper {
             newText.setFont(Font.font("Arial", 17));
         }
         newText.setFill(Color.WHITE);
+        return newText;
+    }
+
+    private static Text newMonospacedText(String text) {
+        Text newText = new Text(text);
+        newText.setFill(Color.WHITE);
+        newText.setFont(Font.font("Courier New", 17));
         return newText;
     }
 }
