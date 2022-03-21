@@ -239,6 +239,123 @@ _{more aspects and alternatives to be added}_
 _{Explain here how the data archiving feature will be implemented}_
 
 
+
+### \[Implemented\] Status feature
+
+#### Implementation
+
+The implemented status label is facilitated by `Status`. It extends `AddressBook` with a Status, tied to each person. Additionally, it implements the following operations:
+
+* `Status#FUNCTIONNAME()` — DESCRIPTION.
+
+These operations are exposed in the `Model` interface as `Model#___()`, `Model#___()` and `Model#___()` respectively.
+
+Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+
+Step 1. 
+
+![NAME PLACEHOLDER]()
+
+Step 2. 
+
+![NAME PLACEHOLDER]()
+
+Step 3. 
+
+![NAME PLACEHOLDER]()
+
+Step 4. 
+
+![NAME PLACEHOLDER]()
+
+The following sequence diagram shows how the undo operation works:
+
+![NAME PLACEHOLDER]()
+
+Step 5. 
+
+![NAME PLACEHOLDER]()
+
+Step 6. 
+
+![NAME PLACEHOLDER]()
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+<img src="IMAGE PATH" width="250" />
+
+#### Design considerations:
+
+**Aspect: PLACEHOLDER:**
+
+* **Alternative 1 (current choice):** PLACEHOLDER.
+  * Pros: PLACEHOLDER.
+  * Cons: PLACEHOLDER.
+
+* **Alternative 2:** PLACEHOLDER.
+  * Pros: PLACEHOLDER.
+  * Cons: PLACEHOLDER.
+
+### \[Implemented\] Find By Status feature
+
+#### Implementation
+
+The implemented find by status mechanism is facilitated by `FindByStatus`. It extends `AddressBook` with a Find By Status, allowing users to find persons by their current statuses.
+
+### \[Implemented\] Class Code feature
+
+#### Implementation
+
+The implemented Class Code label is facilitated by `ClassCode`. It extends `AddressBook` with a Class Code, tied to each person.
+
+### \[Implemented\] Find By Class Code feature
+
+#### Implementation
+
+The implemented find by class code mechanism is facilitated by `FindByClassCode`. It extends `AddressBook` with a Find By Class Code, allowing users to find persons by their current statuses.
+
+### \[Implemented\] Activity feature
+
+#### Implementation
+
+The implemented Activity label is facilitated by `ClassCode`. It repurposes `AddressBook` `Tag` to Activity, tied to each person.
+
+### \[Implemented\] Find By Activity feature
+
+#### Implementation
+
+The implemented find by activity mechanism is facilitated by `FindByActivity`. It extends `AddressBook` with a Find By Activity, allowing users to find persons by their Activity.
+
+### \[Changed\] Adding a person feature
+
+#### Changes
+
+### \[Changed\] Editing a person feature
+
+#### Changes
+
+### \[Updated\] User Interface
+
+#### Updates
+
+### \[Updated\] Storage
+
+#### Updates
+
+### \[Enhancement\] Batch update
+
+#### Enhancements
+
+### \[Proposed Enhancement\] Implementing CSV compatibility
+
+#### Proposed Enhancements
+
+### \[Testing\] JUnit tests
+
+#### JUnit tests
+
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
