@@ -4,6 +4,7 @@ import static seedu.ibook.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -25,6 +26,8 @@ public class Product {
     private final Price price;
     private final UniqueItemList items = new UniqueItemList();
     private final FilteredList<Item> filteredItems;
+
+    public static final Predicate<Item> PREDICATE_SHOW_ALL_ITEMS = unused -> true;
 
     /**
      * Every field must be present and not null.
@@ -148,6 +151,21 @@ public class Product {
                 .append(getPrice());
 
         return builder.toString();
+    }
+
+    public boolean hasExpiredItems() {
+        for (Item i : items) {
+            if(i.isExpired()) {
+                filteredItems.setPredicate(Item::isExpired);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public void UpdateFilteredItemList(Predicate<Item> predicate) {
+        filteredItems.setPredicate(predicate);
     }
 
 }

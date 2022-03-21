@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.ibook.commons.core.GuiSettings;
 import seedu.ibook.commons.core.LogsCenter;
+import seedu.ibook.model.item.Item;
 import seedu.ibook.model.product.Product;
 
 /**
@@ -145,6 +146,13 @@ public class ModelManager implements Model {
         return iBook.equals(other.iBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredProducts.equals(other.filteredProducts);
+    }
+
+    @Override
+    public void updateFilteredItemListForProducts(Predicate<Item> predicate) {
+        for (Product p: filteredProducts) {
+            p.UpdateFilteredItemList(predicate);
+        }
     }
 
 }

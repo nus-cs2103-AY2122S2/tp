@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.ibook.commons.core.GuiSettings;
+import seedu.ibook.model.item.Item;
 import seedu.ibook.model.product.Product;
 
 /**
@@ -84,4 +85,10 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredProductList(Predicate<Product> predicate);
+
+    /**
+     * Applies the filter to the filtered item list of every product in the model by the given {@code predicate}
+     * @throws NullPointerException if {@code predicate} is null
+     */
+    void updateFilteredItemListForProducts(Predicate<Item> predicate);
 }
