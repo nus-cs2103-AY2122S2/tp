@@ -16,7 +16,7 @@ import seedu.ibook.model.product.ProductFulfillsFiltersPredicate;
 
 public class FindCommandParserTest {
 
-    private FindCommandParser parser = new FindCommandParser();
+    private final FindCommandParser parser = new FindCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
@@ -33,7 +33,7 @@ public class FindCommandParserTest {
                         new Category("noodles"),
                         new Description("tasty"),
                         new Price("3.00"))));
-        assertParseSuccess(parser, " n: Maggi c: noodles e: 2022-01-01 d: tasty p: 3.00", expectedFindCommand);
+        assertParseSuccess(parser, " n: Maggi c: noodles d: tasty p: 3.00", expectedFindCommand);
 
         // with null values
         FindCommand expectedFindCommand2 =
@@ -44,7 +44,7 @@ public class FindCommandParserTest {
                         new Price("3.00")))
                 );
 
-        assertParseSuccess(parser, " n: Maggi e: 2022-01-01 p: 3.00", expectedFindCommand2);
+        assertParseSuccess(parser, " n: Maggi p: 3.00", expectedFindCommand2);
 
 
     }

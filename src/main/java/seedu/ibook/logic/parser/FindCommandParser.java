@@ -3,7 +3,6 @@ package seedu.ibook.logic.parser;
 import static seedu.ibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.ibook.logic.parser.CliSyntax.PREFIX_EXPIRY_DATE;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_PRICE;
 
@@ -29,7 +28,7 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     public FindCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_CATEGORY, PREFIX_EXPIRY_DATE, PREFIX_DESCRIPTION,
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_CATEGORY, PREFIX_DESCRIPTION,
                         PREFIX_PRICE);
         Name name;
         Category category;
@@ -37,7 +36,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         Description description;
         Price price;
 
-        int wildCard = 5;
+        int wildCard = 4;
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
@@ -50,13 +49,6 @@ public class FindCommandParser implements Parser<FindCommand> {
             category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
         } else {
             category = Category.WILD_CATEGORY;
-            wildCard--;
-        }
-
-        if (argMultimap.getValue(PREFIX_EXPIRY_DATE).isPresent()) {
-            expiryDate = ParserUtil.parseExpiryDate(argMultimap.getValue(PREFIX_EXPIRY_DATE).get());
-        } else {
-            expiryDate = ExpiryDate.WILD_EXPIRY_DATE;
             wildCard--;
         }
 
