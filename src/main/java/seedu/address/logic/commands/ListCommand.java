@@ -10,6 +10,7 @@ import seedu.address.model.Model;
 import seedu.address.model.entity.EntityType;
 import seedu.address.model.entity.exceptions.UnknownEntityException;
 
+//@@author EvaderFati
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
