@@ -24,7 +24,7 @@ loop for each tag in personTags
     JsonSerializableAddressBook <-- AddressBook : isTagMissing
     deactivate AddressBook
 
-    alt isTagMissing
+    opt isTagMissing
         create Tag
         JsonSerializableAddressBook -> Tag
         activate Tag

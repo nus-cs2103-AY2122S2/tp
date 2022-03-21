@@ -177,15 +177,15 @@ This section will describe tag management in the address book as well as the fea
 
 ### Centralising Tags in the Address Book
 
-In the previous implementation, all `Tag`s are independent of one another despite having the same tag names. Hence, centralising the tags enable the user to easily manipulate them as well as easily searching for `Person`s that contain the tag.
-This is done by creating a `UniqueTagList` within `AddressBook` which will store all tags that were created by the user. Whenever a command relating to `Tag` is executed, it will not only apply the changes to the `Tag` in the `UniqueTagList` but will propagate these changes to the relevant `Person`s who contain the specified tag.
-Hence, all operations relating to the `Tag`s are done at the `AddressBook` level to ensure that the `Tag`s and `Person`s are properly synchronised.
+In the previous implementation, all `Tag`s are independent of one another despite having the same tag names. To improve the usability of the address book, tha tags are centralised so that the user can easily manage the tags as well as searching for `Person` objects that contain the tag.
+This is done by creating a `UniqueTagList` within `AddressBook` which will store all tags that were created by the user. Whenever a command relating to `Tag` is executed, it will not only apply the changes to the `Tag` in the `UniqueTagList` but will also propagate these changes to the relevant `Person`s who contain the specified tag.
+All operations relating to the `Tag` objects are done at the `AddressBook` level to ensure that the `Tag` objects and `Person` objects are properly synchronised.
 
-Another benefit that comes with the centralised tag list is that the user can maintain tags even if it is not associated to any `Person`s. The rationale to maintain `Tag` is to allow the user to reuse the tag depending on their workflow (i.e. A user may want to maintain the `prospective clients` tag even if he/she currently does not have any prospective clients.)
+Another benefit that comes with the centralised tag list is that the user can maintain tags even if it is not associated with any `Person` objects. The rationale to maintain `Tag` separately is to allow the user to reuse the tag depending on their workflow (i.e. A user may want to maintain the `prospective clients` tag even if he/she currently does not have any prospective clients.)
 
 ### Edit Tag Feature - `edittag`
 
-The tag editing feature is similar to the system used for `Person` but extended to propagate the changes to the `Person`s. This feature is implemented at the `AddressBook` level, and the related functions are:
+The tag editing feature is similar to the system used for `Person` but extended to propagate the changes to the `Person` objects. This feature is implemented at the `AddressBook` level, and the related functions are:
 
 * `AddressBook#setTag(target, editedTag)`
 * `AddressBook#setPersonsWithTag(target, editedTag)`
@@ -196,7 +196,7 @@ Note: `target` refers to the tag to be updated, and `editedTag` is the replaceme
 
 ### Serialisation and Inflation
 
-`Tag` serialisation and inflation is handled by the `Storage` component. The current implementation extends the existing method from `JsonSerializableAddressBook` to read a list of tag names from the JSON file and saving them as its own JSON file.
+`Tag` serialisation and inflation is handled by the `Storage` component. The current implementation augments the existing method from `JsonSerializableAddressBook` through the addition of reading a list of tag names from the JSON file and saving them.
 
 #### Serialisation of Tags
 
@@ -204,8 +204,8 @@ Since the tags are independent to the `Person`, the serialisation does not requi
 
 #### Inflation of Tags
 
-To ensure the `Tag`s are properly added into the address book, `JsonSerializableAddressBook#toModelType()` has been modified to inflate the tags first before the person. This is to ensure that duplicate tags are not added into the address book by accident and will only add tags that do not exist in the tag list (which could be caused by the user manually adding the tags in the user-editable JSON file).
-Hence, the `JSONSerializableAddressBook#addMissingTags()` is implemented to check all `Tag`s within each `Person` and add only the missing `Tag`s.
+To ensure the `Tag` objects are properly added into the address book, `JsonSerializableAddressBook#toModelType()` has been modified to inflate the tags first before the person. This is to ensure that duplicate tags are not added into the address book by accident and will only add tags that do not exist in the tag list (which could be caused by the user manually adding the tags in the user-editable JSON file).
+A helper method `JSONSerializableAddressBook#addMissingTags()` is implemented to check all `Tag` objects within each `Person` and add only the missing `Tag` objects.
 
 ![Modified toModelType](images/ToModelTypeSequenceDiagram.png)
 
