@@ -1,45 +1,44 @@
-//package seedu.trackermon.logic.commands;
-//
-//import static seedu.trackermon.logic.commands.CommandTestUtil.assertCommandFailure;
-//import static seedu.trackermon.logic.commands.CommandTestUtil.assertCommandSuccess;
-//import static seedu.trackermon.testutil.TypicalPersons.getTypicalAddressBook;
-//
-//import org.junit.jupiter.api.BeforeEach;
-//import org.junit.jupiter.api.Test;
-//
-//import seedu.trackermon.model.Model;
-//import seedu.trackermon.model.ModelManager;
-//import seedu.trackermon.model.UserPrefs;
-//import seedu.trackermon.model.person.Person;
-//import seedu.trackermon.testutil.PersonBuilder;
-//
-///**
-// * Contains integration tests (interaction with the Model) for {@code AddCommand}.
-// */
-//public class AddCommandIntegrationTest {
-//
-//    private Model model;
-//
-//    @BeforeEach
-//    public void setUp() {
-//        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-//    }
-//
-//    @Test
-//    public void execute_newPerson_success() {
-//        Person validPerson = new PersonBuilder().build();
-//
-//        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-//        expectedModel.addPerson(validPerson);
-//
-//        assertCommandSuccess(new AddCommand(validPerson), model,
-//                String.format(AddCommand.MESSAGE_SUCCESS, validPerson), expectedModel);
-//    }
-//
-//    @Test
-//    public void execute_duplicatePerson_throwsCommandException() {
-//        Person personInList = model.getAddressBook().getPersonList().get(0);
-//        assertCommandFailure(new AddCommand(personInList), model, AddCommand.MESSAGE_DUPLICATE_PERSON);
-//    }
-//
-//}
+package seedu.trackermon.logic.commands;
+
+import static seedu.trackermon.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.trackermon.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.trackermon.testutil.TypicalShows.getTypicalShowList;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import seedu.trackermon.model.Model;
+import seedu.trackermon.model.ModelManager;
+import seedu.trackermon.model.UserPrefs;
+import seedu.trackermon.model.show.Show;
+import seedu.trackermon.testutil.ShowBuilder;
+
+/**
+ * Contains integration tests (interaction with the Model) for {@code AddCommand}.
+ */
+public class AddCommandIntegrationTest {
+
+    private Model model;
+
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(getTypicalShowList(), new UserPrefs());
+    }
+
+    @Test
+    public void execute_newShow_success() {
+        Show validShow = new ShowBuilder().build();
+
+        Model expectedModel = new ModelManager(model.getShowList(), new UserPrefs());
+        expectedModel.addShow(validShow);
+
+        assertCommandSuccess(new AddCommand(validShow), model,
+                String.format(AddCommand.MESSAGE_SUCCESS, validShow), expectedModel);
+    }
+
+    @Test
+    public void execute_duplicateShow_throwsCommandException() {
+        Show showInList = model.getShowList().getShows().get(0);
+        assertCommandFailure(new AddCommand(showInList), model, AddCommand.MESSAGE_DUPLICATE_SHOW);
+    }
+}
