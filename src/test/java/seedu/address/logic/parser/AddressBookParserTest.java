@@ -22,6 +22,8 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.MakeTeamCommand;
+import seedu.address.logic.commands.ShowCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -80,6 +82,26 @@ public class AddressBookParserTest {
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
+    }
+
+    @Test
+    public void parseCommand_makeTeamCommandAdd() throws Exception {
+        MakeTeamCommand command = (MakeTeamCommand) parser.parseCommand(
+                MakeTeamCommand.COMMAND_WORD_ADD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new MakeTeamCommand(INDEX_FIRST_PERSON, MakeTeamCommand.TeamAction.ADD), command);
+    }
+
+    @Test
+    public void parseCommand_makeTeamCommandRemove() throws Exception {
+        MakeTeamCommand command = (MakeTeamCommand) parser.parseCommand(
+                MakeTeamCommand.COMMAND_WORD_REMOVE + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new MakeTeamCommand(INDEX_FIRST_PERSON, MakeTeamCommand.TeamAction.REMOVE), command);
+    }
+
+    @Test
+    public void parseCommand_show() throws Exception {
+        assertTrue(parser.parseCommand(ShowCommand.COMMAND_WORD) instanceof ShowCommand);
+        assertTrue(parser.parseCommand(ShowCommand.COMMAND_WORD + " 3") instanceof ShowCommand);
     }
 
     @Test

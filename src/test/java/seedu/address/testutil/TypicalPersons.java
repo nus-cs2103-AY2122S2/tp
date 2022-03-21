@@ -29,36 +29,50 @@ public class TypicalPersons {
             .withGithubUsername("alice-paul").withEmail("alice@example.com")
             .withPhone("94351253")
             .withTeams("friends")
-            .withSkillSet("C_20").build();
+            .withSkillSet("C_20")
+            .isPotentialTeammate(false)
+            .build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withGithubUsername("benson-123")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withTeams("owesMoney", "friends")
-            .withSkillSet("python_40").build();
+            .withSkillSet("python_40")
+            .isPotentialTeammate(false)
+            .build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz")
             .withPhone("95352563")
             .withEmail("heinz@example.com")
-            .withGithubUsername("kurz-carl").build();
+            .withGithubUsername("kurz-carl")
+            .isPotentialTeammate(true)
+            .build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier")
             .withPhone("87652533")
             .withEmail("cornelia@example.com")
             .withGithubUsername("meier-coding")
-            .withTeams("friends").withSkillSet("Bash_90").build();
+            .withTeams("friends").withSkillSet("Bash_90")
+            .isPotentialTeammate(true)
+            .build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer")
             .withPhone("9482224")
             .withEmail("werner@example.com")
             .withGithubUsername("ellelle")
-            .withSkillSet("C_80").build();
+            .withSkillSet("C_80")
+            .isPotentialTeammate(false)
+            .build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz")
             .withPhone("9482427")
             .withEmail("lydia@example.com")
             .withGithubUsername("kunzgunz")
-            .withSkillSet("Git_59").build();
+            .withSkillSet("Git_59")
+            .isPotentialTeammate(false)
+            .build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best")
             .withPhone("9482442")
             .withEmail("anna@example.com")
             .withGithubUsername("best-coder")
-            .withSkillSet("C_30").build();
+            .withSkillSet("C_30")
+            .isPotentialTeammate(false)
+            .build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")

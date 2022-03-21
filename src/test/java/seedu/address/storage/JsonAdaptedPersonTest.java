@@ -36,6 +36,8 @@ public class JsonAdaptedPersonTest {
             .map(JsonAdaptedSkill::new)
             .collect(Collectors.toList());
 
+    private static final boolean PLACEHOLDER_IS_TEAMMATE = false;
+
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
         JsonAdaptedPerson person = new JsonAdaptedPerson(BENSON);
@@ -45,8 +47,8 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedPerson person =
-                new JsonAdaptedPerson(INVALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_USERNAME, VALID_TEAMS,
-                        VALID_SKILLSET);
+                new JsonAdaptedPerson(INVALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_USERNAME, PLACEHOLDER_IS_TEAMMATE,
+                        VALID_TEAMS, VALID_SKILLSET);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -54,7 +56,7 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(null, VALID_PHONE, VALID_EMAIL, VALID_USERNAME,
-            VALID_TEAMS, VALID_SKILLSET);
+            PLACEHOLDER_IS_TEAMMATE, VALID_TEAMS, VALID_SKILLSET);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -62,8 +64,8 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_invalidPhone_throwsIllegalValueException() {
         JsonAdaptedPerson person =
-                new JsonAdaptedPerson(VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_USERNAME, VALID_TEAMS,
-                        VALID_SKILLSET);
+                new JsonAdaptedPerson(VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_USERNAME, PLACEHOLDER_IS_TEAMMATE,
+                        VALID_TEAMS, VALID_SKILLSET);
         String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -71,7 +73,7 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_nullPhone_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, null, VALID_EMAIL, VALID_USERNAME,
-            VALID_TEAMS, VALID_SKILLSET);
+                PLACEHOLDER_IS_TEAMMATE, VALID_TEAMS, VALID_SKILLSET);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -79,16 +81,16 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_invalidEmail_throwsIllegalValueException() {
         JsonAdaptedPerson person =
-                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, INVALID_EMAIL, VALID_USERNAME, VALID_TEAMS,
-                        VALID_SKILLSET);
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, INVALID_EMAIL, VALID_USERNAME,
+                        PLACEHOLDER_IS_TEAMMATE, VALID_TEAMS, VALID_SKILLSET);
         String expectedMessage = Email.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
     @Test
     public void toModelType_nullEmail_throwsIllegalValueException() {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, null,
-                VALID_USERNAME, VALID_TEAMS, VALID_SKILLSET);
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, null, VALID_USERNAME,
+                PLACEHOLDER_IS_TEAMMATE, VALID_TEAMS, VALID_SKILLSET);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -96,7 +98,7 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_invalidGithubUsername_throwsIllegalValueException() {
         JsonAdaptedPerson person =
-                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, INVALID_USERNAME,
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, INVALID_USERNAME, PLACEHOLDER_IS_TEAMMATE,
                     VALID_TEAMS, VALID_SKILLSET);
         String expectedMessage = GithubUsername.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
@@ -104,8 +106,8 @@ public class JsonAdaptedPersonTest {
 
     @Test
     public void toModelType_nullGithubUsername() {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
-                null, VALID_TEAMS, VALID_SKILLSET);
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, null,
+                PLACEHOLDER_IS_TEAMMATE, VALID_TEAMS, VALID_SKILLSET);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, GithubUsername.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -115,7 +117,7 @@ public class JsonAdaptedPersonTest {
         List<JsonAdaptedTeam> invalidTeams = new ArrayList<>(VALID_TEAMS);
         invalidTeams.add(new JsonAdaptedTeam(INVALID_TEAM));
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE,
-                VALID_EMAIL, VALID_USERNAME, invalidTeams, VALID_SKILLSET);
+                VALID_EMAIL, VALID_USERNAME, PLACEHOLDER_IS_TEAMMATE, invalidTeams, VALID_SKILLSET);
         assertThrows(IllegalValueException.class, person::toModelType);
     }
 

@@ -21,6 +21,12 @@ public interface Model {
     Predicate<Person> PREDICATE_SHOW_ALL_TEAMMATES = person -> !person.getTeams().isEmpty();
 
     /**
+     * {@code Predicate} that evalutes to true if and only if the
+     * person is a potential teammate.
+     */
+    Predicate<Person> PREDICATE_SHOW_POTENTIAL_TEAMMATES = Person::isPotentialTeammate;
+
+    /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
     void setUserPrefs(ReadOnlyUserPrefs userPrefs);

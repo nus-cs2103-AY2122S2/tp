@@ -28,6 +28,7 @@ public class PersonBuilder {
     private GithubUsername githubUsername;
     private Set<Team> teams;
     private Set<Skill> skillSet;
+    private boolean isPotentialTeammate;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -39,6 +40,7 @@ public class PersonBuilder {
         githubUsername = new GithubUsername(DEFAULT_USERNAME);
         teams = new HashSet<>();
         skillSet = new HashSet<>();
+        isPotentialTeammate = false;
     }
 
     /**
@@ -49,6 +51,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         githubUsername = personToCopy.getGithubUsername();
+        isPotentialTeammate = personToCopy.isPotentialTeammate();
         teams = new HashSet<>(personToCopy.getTeams());
         skillSet = new HashSet<>(personToCopy.getSkillSet());
     }
@@ -101,8 +104,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code isPotentialTeammate} of the {@code Person} that we are building.
+     */
+    public PersonBuilder isPotentialTeammate(boolean isPotentialTeammate) {
+        this.isPotentialTeammate = isPotentialTeammate;
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, githubUsername, teams, skillSet);
+        return new Person(name, phone, email, githubUsername, teams, skillSet, isPotentialTeammate);
     }
 
 }

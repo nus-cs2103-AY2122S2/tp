@@ -48,7 +48,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Team> teamList = ParserUtil.parseTeams(argMultimap.getAllValues(PREFIX_TEAM));
         Set<Skill> skillSet = ParserUtil.parseSkillSet(argMultimap.getAllValues(PREFIX_SKILL));
 
-        Person person = new Person(name, phone, email, username, teamList, skillSet);
+        Person person = new Person(name, phone, email, username, teamList, skillSet, false);
 
         return new AddCommand(person);
     }

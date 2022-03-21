@@ -103,8 +103,11 @@ public class EditCommand extends Command {
                         .orElse(personToEdit.getGithubUsername());
         Set<Team> updatedTeams = editPersonDescriptor.getTeams().orElse(personToEdit.getTeams());
         Set<Skill> updatedSkills = editPersonDescriptor.getSkillSet().orElse(personToEdit.getSkillSet());
+        // Potential teammate field to be unchanged on edit command
+        boolean isPotentialTeammate = personToEdit.isPotentialTeammate();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedUsername, updatedTeams, updatedSkills);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedUsername,
+                updatedTeams, updatedSkills, isPotentialTeammate);
     }
 
     @Override
