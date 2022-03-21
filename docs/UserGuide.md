@@ -165,7 +165,8 @@ Expected outcome:
 ### Assign a student to a group: `assign`
 
 Assigns a student to an existing group in ArchDuke. `assign` is followed by the index at which the student is 
-in the ArchDuke contact list and the group name in which the student would be assigned.
+in the ArchDuke contact list and the group name in which the student would be assigned. The group must already exist
+in ArchDuke, and the index must be a positive integer.
 
 Format: `assign INDEX g/GROUP_NAME`
 
@@ -177,7 +178,25 @@ Example:
 
 Expected outcome:
 
-* Assigns the specified student to the group.
+* Assigns the specified student to the specified group.
+
+### Deassign a student from a group: `deassign`
+
+Deassigns a student from an existing group in ArchDuke. `deassign` is followed by the index at which the student
+is in the ArchDuke contact list and the group name in which the student would be deassigned. 
+The group must already exist in ArchDuke, and the index must be a positive integer.
+
+Format: `deassign INDEX g/GROUP_NAME`
+
+* Deassigns the student at index `INDEX` from the group called `GROUP_NAME`
+
+Example:
+
+* `deassign 1 g/CS2103-W16-3`
+
+Expected outcome:
+
+* Deassigns the specified student from the specified group.
 
 ## Student Group Task Management
 
