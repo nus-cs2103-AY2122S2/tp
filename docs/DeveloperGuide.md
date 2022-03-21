@@ -170,17 +170,17 @@ The proposed delete mechanism is facilitated by `TAssist`. Its functionality, us
 * `DeleteCommand#execute()` — Executes `ModelManager#deleteEntity()` with the specified entity.
 * `ModelManager#deleteEntity()` — Deletes the specified entity.
 
-However, when a `TaModule` object is deleted, its associated `ClassGroup` objects are also deleted.
+However, when a `TaModule` object is deleted, its associated `ClassGroup` and `Assessment` objects are also deleted.
 
-Given below is an example usage scenario using `Student` objects and how the delete mechanism behaves at each step.
+Given below is an example usage scenario using `Class Group` objects and how the delete mechanism behaves at each step.
 
 Step 1. The user launches the application. The `TAssist` is already populated with data.
 
 ![DeleteState0](images/DeleteState0.png)
 
-Step 2. The user executes `list student` command to list the students in the `TAssist`. The `list` command implementation is detailed below in the List Feature section.
+Step 2. The user executes `list class group` command to list the class groups in the `TAssist`. The `list` command implementation is detailed below in the List Feature section.
 
-Step 3. The user executes `delete student 2` to delete the 2nd student in the list which is `s2`. The `delete` command also calls `DeleteCommandParser#parse()`, which parses the input and return the index and entity type.
+Step 3. The user executes `delete class 2` to delete the 2nd class group in the list which is `c2`. The `delete` command also calls `DeleteCommandParser#parse()`, which parses the input and return the index and entity type.
 
 ![DeleteState1](images/DeleteState1.png)
 

@@ -13,13 +13,13 @@ end box
 box Model MODEL_COLOR_T1
 participant ":ModelManager" as ModelManager MODEL_COLOR
 participant ":TAssist" as TAssist MODEL_COLOR
-participant ":UniqueStudentList" as UniqueStudentList MODEL_COLOR
+participant ":UniqueClassGroupList" as UniqueClassGroupList MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete student 2")
+[-> LogicManager : execute("delete class 2")
 activate LogicManager
 
-LogicManager -> TAssistParser : parseCommand("delete student 2")
+LogicManager -> TAssistParser : parseCommand("delete class 2")
 activate TAssistParser
 
 create DeleteCommandParser
@@ -29,10 +29,10 @@ activate DeleteCommandParser
 DeleteCommandParser --> TAssistParser
 deactivate DeleteCommandParser
 
-TAssistParser -> DeleteCommandParser : parse(["student", 2])
+TAssistParser -> DeleteCommandParser : parse(["class", 2])
 activate DeleteCommandParser
 
-DeleteCommandParser -> ParserUtil : parseEntity("student")
+DeleteCommandParser -> ParserUtil : parseEntity("class")
 activate ParserUtil
 
 ParserUtil --> DeleteCommandParser
@@ -57,17 +57,17 @@ deactivate TAssistParser
 LogicManager -> DeleteCommand : execute()
 activate DeleteCommand
 
-DeleteCommand -> ModelManager : deleteEntity(STUDENT)
+DeleteCommand -> ModelManager : deleteEntity(CLASS)
 activate ModelManager
 
-ModelManager -> TAssist : removeStudent(STUDENT)
+ModelManager -> TAssist : removeClassGroup(CLASS)
 activate TAssist
 
-TAssist -> UniqueStudentList : removeStudent(key)
-activate UniqueStudentList
+TAssist -> UniqueClassGroupList : remove(key)
+activate UniqueClassGroupList
 
-UniqueStudentList --> TAssist
-deactivate UniqueStudentList
+UniqueClassGroupList --> TAssist
+deactivate UniqueClassGroupList
 
 TAssist --> ModelManager
 deactivate TAssist

@@ -8,6 +8,10 @@ start
 
 if () then ([entity exists])
     :Delete entity;
+    if () then ([associated entities exist])
+        :Delete associated entities;
+    else ([else])
+    endif
     :Display modified list;
 else ([else])
 endif
