@@ -213,7 +213,7 @@ The different `Predicate` inherits from the `FieldContainsKeywordsPredicate`. Th
 
 #### Design considerations:
 The `FindCommandParser` was implemented this way as there are multiple prefixes in the new multi-field find command. So it requires a mapping of the different prefixes with their respective arguments.
-s
+
 The predicate is implemented in this way since updating the filteredPersonList in the `Model` class requires a single `Predicate`, so a single `CombineContainsKeywordsPredicate` was used, where the `CombineContainsKeywordsPredicate#test(person)` will make use of all the subclasses of `FieldContainsKeywordsPredicate` to update the filteredPersonList.
 
 **Aspect: How FindCommand executes:**
