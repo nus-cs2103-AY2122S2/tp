@@ -10,7 +10,8 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.StudentIdContainsKeywordsPredicate;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
+ * Finds and lists all persons in address book whose name, student id or module code
+ * contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
 public class FindCommand extends Command {
