@@ -1,4 +1,4 @@
-package seedu.ibook.model.product;
+package seedu.ibook.model.item;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.ibook.commons.util.AppUtil.checkArgument;
@@ -12,7 +12,7 @@ import java.util.Arrays;
  * Represents a Product's expiry date in the ibook.
  * Guarantees: immutable;
  */
-public class ExpiryDate {
+public class ExpiryDate implements Comparable<ExpiryDate> {
 
     public static final ExpiryDate WILD_EXPIRY_DATE = new ExpiryDate() {
         @Override
@@ -95,6 +95,11 @@ public class ExpiryDate {
     @Override
     public int hashCode() {
         return expiryDate.hashCode();
+    }
+
+    @Override
+    public int compareTo(ExpiryDate o) {
+        return expiryDate.compareTo(o.expiryDate);
     }
 
     /**

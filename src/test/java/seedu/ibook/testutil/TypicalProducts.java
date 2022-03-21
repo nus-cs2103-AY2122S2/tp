@@ -4,8 +4,6 @@ import static seedu.ibook.logic.commands.CommandTestUtil.VALID_CATEGORY_A;
 import static seedu.ibook.logic.commands.CommandTestUtil.VALID_CATEGORY_B;
 import static seedu.ibook.logic.commands.CommandTestUtil.VALID_DESCRIPTION_A;
 import static seedu.ibook.logic.commands.CommandTestUtil.VALID_DESCRIPTION_B;
-import static seedu.ibook.logic.commands.CommandTestUtil.VALID_EXPIRY_DATE_A;
-import static seedu.ibook.logic.commands.CommandTestUtil.VALID_EXPIRY_DATE_B;
 import static seedu.ibook.logic.commands.CommandTestUtil.VALID_NAME_A;
 import static seedu.ibook.logic.commands.CommandTestUtil.VALID_NAME_B;
 import static seedu.ibook.logic.commands.CommandTestUtil.VALID_PRICE_A;
@@ -23,31 +21,31 @@ import seedu.ibook.model.product.Product;
  */
 public class TypicalProducts {
     public static final Product KAYA_BREAD = new ProductBuilder().withName("Kaya Bread")
-        .withCategory("Bread").withExpiryDate("2022-03-08")
+        .withCategory("Bread")
         .withDescription("Kaya on bread")
         .withPrice("1.99").build();
     public static final Product PEANUT_BUTTER_BREAD = new ProductBuilder().withName("Peanut Butter Bread")
-        .withCategory("Bread").withExpiryDate("2022-03-08")
+        .withCategory("Bread")
         .withDescription("Peanut Butter on bread")
         .withPrice("1.99").build();
     public static final Product CHOCOLATE_BREAD = new ProductBuilder().withName("Chocolate Bread")
-        .withCategory("Bread").withExpiryDate("2022-03-08")
+        .withCategory("Bread")
         .withDescription("Chocolate on bread")
         .withPrice("1.99").build();
     public static final Product VANILLA_CAKE = new ProductBuilder().withName("Vanilla Cake")
-        .withCategory("Cake").withExpiryDate("2022-03-08")
+        .withCategory("Cake")
         .withDescription("Vanilla Cake")
         .withPrice("1.99").build();
     public static final Product WAFFLES = new ProductBuilder().withName("Waffles")
-        .withCategory("Waffle").withExpiryDate("2022-03-08")
+        .withCategory("Waffle")
         .withDescription("Waffles")
         .withPrice("1.99").build();
 
     // Manually added - Product's details found in {@code CommandTestUtil}
     public static final Product PRODUCT_A = new ProductBuilder().withName(VALID_NAME_A).withCategory(VALID_CATEGORY_A)
-            .withExpiryDate(VALID_EXPIRY_DATE_A).withDescription(VALID_DESCRIPTION_A).withPrice(VALID_PRICE_A).build();
+            .withDescription(VALID_DESCRIPTION_A).withPrice(VALID_PRICE_A).build();
     public static final Product PRODUCT_B = new ProductBuilder().withName(VALID_NAME_B).withCategory(VALID_CATEGORY_B)
-            .withExpiryDate(VALID_EXPIRY_DATE_B).withDescription(VALID_DESCRIPTION_B).withPrice(VALID_PRICE_B).build();
+            .withDescription(VALID_DESCRIPTION_B).withPrice(VALID_PRICE_B).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

@@ -3,7 +3,6 @@ package seedu.ibook.testutil;
 import seedu.ibook.logic.commands.UpdateCommand.UpdateProductDescriptor;
 import seedu.ibook.model.product.Category;
 import seedu.ibook.model.product.Description;
-import seedu.ibook.model.product.ExpiryDate;
 import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Price;
 import seedu.ibook.model.product.Product;
@@ -29,7 +28,6 @@ public class UpdateProductDescriptorBuilder {
         descriptor = new UpdateProductDescriptor();
         descriptor.setName(product.getName());
         descriptor.setCategory(product.getCategory());
-        descriptor.setExpiryDate(product.getExpiryDate());
         descriptor.setDescription(product.getDescription());
         descriptor.setPrice(product.getPrice());
     }
@@ -47,14 +45,6 @@ public class UpdateProductDescriptorBuilder {
      */
     public UpdateProductDescriptorBuilder withCategory(String category) {
         descriptor.setCategory(new Category(category));
-        return this;
-    }
-
-    /**
-     * Sets the {@code ExpiryDate} of the {@code UpdateProductDescriptor} that we are building.
-     */
-    public UpdateProductDescriptorBuilder withExpiryDate(String expiryDate) {
-        descriptor.setExpiryDate(new ExpiryDate(expiryDate));
         return this;
     }
 

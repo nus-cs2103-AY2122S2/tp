@@ -20,8 +20,6 @@ import static seedu.ibook.logic.commands.CommandTestUtil.VALID_CATEGORY_A;
 import static seedu.ibook.logic.commands.CommandTestUtil.VALID_CATEGORY_B;
 import static seedu.ibook.logic.commands.CommandTestUtil.VALID_DESCRIPTION_A;
 import static seedu.ibook.logic.commands.CommandTestUtil.VALID_DESCRIPTION_B;
-import static seedu.ibook.logic.commands.CommandTestUtil.VALID_EXPIRY_DATE_A;
-import static seedu.ibook.logic.commands.CommandTestUtil.VALID_EXPIRY_DATE_B;
 import static seedu.ibook.logic.commands.CommandTestUtil.VALID_NAME_A;
 import static seedu.ibook.logic.commands.CommandTestUtil.VALID_NAME_B;
 import static seedu.ibook.logic.commands.CommandTestUtil.VALID_PRICE_A;
@@ -39,7 +37,6 @@ import seedu.ibook.logic.commands.UpdateCommand;
 import seedu.ibook.logic.commands.UpdateCommand.UpdateProductDescriptor;
 import seedu.ibook.model.product.Category;
 import seedu.ibook.model.product.Description;
-import seedu.ibook.model.product.ExpiryDate;
 import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Price;
 import seedu.ibook.testutil.UpdateProductDescriptorBuilder;
@@ -84,8 +81,6 @@ public class UpdateCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS);
         // invalid category
         assertParseFailure(parser, "1" + INVALID_CATEGORY_DESC, Category.MESSAGE_CONSTRAINTS);
-        // invalid expiry date
-        assertParseFailure(parser, "1" + INVALID_EXPIRY_DATE_DESC, ExpiryDate.MESSAGE_CONSTRAINTS);
         // invalid description
         assertParseFailure(parser, "1" + INVALID_DESCRIPTION_DESC, Description.MESSAGE_CONSTRAINTS);
         // invalid price
@@ -110,7 +105,7 @@ public class UpdateCommandParserTest {
                 + DESCRIPTION_FULL_A + PRICE_FULL_A;
 
         UpdateProductDescriptor descriptor = new UpdateProductDescriptorBuilder().withName(VALID_NAME_A)
-                .withCategory(VALID_CATEGORY_A).withExpiryDate(VALID_EXPIRY_DATE_A)
+                .withCategory(VALID_CATEGORY_A)
                 .withDescription(VALID_DESCRIPTION_A).withPrice(VALID_PRICE_A).build();
         UpdateCommand expectedCommand = new UpdateCommand(targetIndex, descriptor);
 
@@ -144,12 +139,6 @@ public class UpdateCommandParserTest {
         expectedCommand = new UpdateCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // expiry date
-        userInput = targetIndex.getOneBased() + EXPIRY_DATE_FULL_A;
-        descriptor = new UpdateProductDescriptorBuilder().withExpiryDate(VALID_EXPIRY_DATE_A).build();
-        expectedCommand = new UpdateCommand(targetIndex, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
-
         // description
         userInput = targetIndex.getOneBased() + DESCRIPTION_FULL_A;
         descriptor = new UpdateProductDescriptorBuilder().withDescription(VALID_DESCRIPTION_A).build();
@@ -171,7 +160,7 @@ public class UpdateCommandParserTest {
                 + DESCRIPTION_FULL_B + PRICE_FULL_B;
 
         UpdateProductDescriptor descriptor = new UpdateProductDescriptorBuilder().withName(VALID_NAME_B)
-                .withCategory(VALID_CATEGORY_B).withExpiryDate(VALID_EXPIRY_DATE_B)
+                .withCategory(VALID_CATEGORY_B)
                 .withDescription(VALID_DESCRIPTION_B).withPrice(VALID_PRICE_B).build();
         UpdateCommand expectedCommand = new UpdateCommand(targetIndex, descriptor);
 

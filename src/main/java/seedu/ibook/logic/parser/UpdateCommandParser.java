@@ -43,10 +43,6 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
         if (argMultimap.getValue(PREFIX_CATEGORY).isPresent()) {
             updateProductDescriptor.setCategory(ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get()));
         }
-        if (argMultimap.getValue(PREFIX_EXPIRY_DATE).isPresent()) {
-            updateProductDescriptor.setExpiryDate(
-                    ParserUtil.parseExpiryDate(argMultimap.getValue(PREFIX_EXPIRY_DATE).get()));
-        }
         if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
             updateProductDescriptor.setDescription(
                     ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get()));

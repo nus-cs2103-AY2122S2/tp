@@ -3,31 +3,26 @@
   "products" : [ {
     "name" : "Kaya Bread",
     "category" : "Bread",
-    "expiryDate" : "2022-03-08",
     "description" : "Kaya on bread",
     "price" : "1.99"
   }, {
     "name" : "Peanut Butter Bread",
     "category" : "Bread",
-    "expiryDate" : "2022-03-08",
     "description" : "Peanut Butter on bread",
     "price" : "1.99"
   }, {
     "name" : "Chocolate Bread",
     "category" : "Bread",
-    "expiryDate" : "2022-03-08",
     "description" : "Chocolate on bread",
     "price" : "1.99"
   }, {
     "name" : "Vanilla Cake",
     "category" : "Cake",
-    "expiryDate" : "2022-03-08",
     "description" : "Vanilla Cake",
     "price" : "1.99"
   }, {
     "name" : "Waffles",
     "category" : "Waffle",
-    "expiryDate" : "2022-03-08",
     "description" : "Waffles",
     "price" : "1.99"
   } ]

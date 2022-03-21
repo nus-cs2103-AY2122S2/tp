@@ -5,9 +5,9 @@ import static java.util.Objects.requireNonNull;
 import seedu.ibook.commons.core.index.Index;
 import seedu.ibook.commons.util.StringUtil;
 import seedu.ibook.logic.parser.exceptions.ParseException;
+import seedu.ibook.model.item.ExpiryDate;
 import seedu.ibook.model.product.Category;
 import seedu.ibook.model.product.Description;
-import seedu.ibook.model.product.ExpiryDate;
 import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Price;
 
