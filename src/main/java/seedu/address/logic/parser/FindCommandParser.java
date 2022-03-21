@@ -33,7 +33,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID, PREFIX_MODULE_CODE);
-        // user inputted name, id, modcode or any two combinations of the two
+        // user inputted more than one search term (ie. name, id, or moduleCode)
         if (arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ID, PREFIX_MODULE_CODE)
                 || arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ID)
                 || arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_MODULE_CODE)
