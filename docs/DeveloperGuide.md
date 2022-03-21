@@ -261,7 +261,7 @@ and is implemented as a separate file within the `Person` Package.
     * Higher Level of abstraction
     * Changes can be made easily from this class
   * Cons: 
-    * Adding files to the currently already large amount of files within
+    * Existing layers of abstraction and tangled dependencies make introducing a new attribute for the base Person model difficult
     * Difficulty navigating through folders to find specific files
 
 * **Alternative 2:** Attribute placed within `Person` class.
@@ -329,7 +329,7 @@ and is implemented as a separate package within the `activity` Package. A `perso
         * Changes can be made easily from this class
         * Ease of accommodating how `activity` attribute can be implemented and added in to the `Person` class as a `Set`
     * Cons:
-        * Adding files to the currently already large amount of files within
+        * Existing layers of abstraction and tangled dependencies make introducing a new attribute for the base Person model difficult
         * Difficulty navigating through folders to find specific files
 
 * **Alternative 2:** Attribute placed within `Person` class.
