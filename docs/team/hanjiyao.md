@@ -12,24 +12,29 @@ ContacX will allow for efficient management of a large list of contacts, allowin
 Given below are my contributions to the project.
 
 * **New Feature**: Bulk Operations
-  * What it does: `To be added soon`
-  * Justification: `To be added soon`
+  * What it does: allow user to create multiple commands together by range batch or chain
+  * Justification: As part of target user profile, this is enhancement user experience to organise contacts
   * Highlights: `To be added soon`
   * Credits: `To be added soon`
 
-* **Code contributed**: `to be added soon`
+* **Code contributed**: 
+  * 2000+ LoC contributed
+  * Add relevant testcases
 
 * **Project management**:
-  * `to be added soon`
+  * Code reviews
 
 * **Enhancements to existing features**:
-  * `to be added soon`
+  * modify find feature to accept more fileds
 
 * **Documentation**:
   * User Guide:
-    * `to be added soon`
+    * find
+    * batch
+    * chain
+    * range
   * Developer Guide:
-    * `to be added soon`
+    * how multiple commands binds together
 
 * **Community**:
   * `to be added soon`

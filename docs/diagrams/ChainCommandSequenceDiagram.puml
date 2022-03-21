@@ -1,0 +1,14 @@
+@startuml
+participant Actor
+Actor -> ChainCommand : execute
+activate ChainCommand
+ChainCommand -> Command : execute
+activate Command
+Command --> ChainCommand
+deactivate Command
+ChainCommand -> Command : execute
+activate Command
+Command --> ChainCommand
+deactivate Command
+return
+@enduml

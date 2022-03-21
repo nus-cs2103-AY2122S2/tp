@@ -1,0 +1,18 @@
+@startuml
+participant Actor
+Actor -> FindCommand : execute
+activate FindCommand
+FindCommand -> Model : updateFilteredPersonList
+activate Model
+Model --> FindCommand
+deactivate Model
+FindCommand -> CommandResult : new
+activate CommandResult
+CommandResult -> CommandResult : new
+activate CommandResult
+CommandResult --> CommandResult
+deactivate CommandResult
+CommandResult --> FindCommand
+deactivate CommandResult
+return
+@enduml

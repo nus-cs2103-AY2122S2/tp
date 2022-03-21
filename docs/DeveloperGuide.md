@@ -171,6 +171,31 @@ As such, the detailed descriptions for the Address Book subsystem above can be t
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Enhanced Find Logic
+
+The previous implementation find target is limited to name field only. Hence, extending the find function will increase the user experience by enable them easily search `Person` with `phone`
+`email` and `address` field.
+This is done by creating `searchType` model within the `model util` package and extract original `NameCdonstrainsKeywordsPreicate` to form `CdonstrainsKeywordsPreicate` then create different inherit of three different types of predicate.
+
+### Enhanced Command Features
+
+#### Chain Command
+
+This extension allow user to chain multiple commands together, also noted one command fail may lead to following commands invalid (e.g. if create person failed, you cannot edit the newly created person) and exception will throw.
+
+#### Range Command
+
+This extension allow user to perform range of commands base on `index`. Hence, `from/INDEX to/INDEX` is essential in parsing the value of input. The validation of index is similar to original (i.e. the index in edit command)
+
+#### Batch Command
+
+This extension focus on matching specific value field (`name phone email address`) and then perform edit or delete operation on the target which satisfy the matching condition. This is achieved by `matchInputStringToIndex` which convert the person that matched the condition and returned as series of command and execute sequentially.
+
+#### Combined Feedback message
+
+The multiple commands executed will return one `CommandResult` which contain the list of result executed feedback message to user and combine them together return as `feedbackToUser`
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation

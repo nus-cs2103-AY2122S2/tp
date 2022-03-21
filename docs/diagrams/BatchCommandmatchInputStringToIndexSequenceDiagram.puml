@@ -1,0 +1,30 @@
+@startuml
+participant Actor
+Actor -> BatchCommand : matchInputStringToIndex
+activate BatchCommand
+BatchCommand -> Index : fromZeroBased
+activate Index
+Index -> Index : new
+activate Index
+Index --> Index
+deactivate Index
+Index --> BatchCommand
+deactivate Index
+BatchCommand -> Phone : toString
+activate Phone
+Phone --> BatchCommand
+deactivate Phone
+BatchCommand -> Email : toString
+activate Email
+Email --> BatchCommand
+deactivate Email
+BatchCommand -> Address : toString
+activate Address
+Address --> BatchCommand
+deactivate Address
+BatchCommand -> Name : toString
+activate Name
+Name --> BatchCommand
+deactivate Name
+return
+@enduml
