@@ -2,7 +2,6 @@ package seedu.ibook.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.ibook.commons.core.index.CompoundIndex;
 import seedu.ibook.commons.core.index.Index;
 import seedu.ibook.commons.util.StringUtil;
 import seedu.ibook.logic.parser.exceptions.ParseException;
