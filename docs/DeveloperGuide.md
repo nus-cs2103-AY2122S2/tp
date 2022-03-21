@@ -158,6 +158,50 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### \[Proposed\] Add feature
+
+#### Proposed Implementation
+
+The proposed add mechanism is facilitated by `TAssist`. Its functionality, usage and behaviour is the same for all entities. Additionally, it implements the following operations:
+
+* `AddCommandParser#parse()` — Parses the command arguments.
+* `AddCommand#execute()` — Executes `ModelManager#addEntity()` with the specified entity.
+* `ModelManager#addEntity()` — Adds the specified entity.
+
+Given below is an example usage scenario for the creation of `Student` object and how the add mechanism behaves at each step.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** As TAssist comes with initial data, the user should issue a `clear` command to remove all existing data.
+
+</div>
+
+Step 1. The user launches the application. The `TAssist` is already populated with data.
+
+![AddState0](images/AddState0.png)
+
+Step 2. The user executes `clear` command to remove all existing data in `TAssist`.
+
+![AddState1](images/AddState1.png)
+
+Step 3. The user executes `add student` command to add a student to `TAssist`. The `add` command also calls `AddCommandParser#parse()`, which parses the input and returns the index and entity type.    
+* An example of the `add student` command: `add student id/E0123456 n/John Doe e/johnd@example.com t/john_doe`
+
+![AddState2](images/AddState2.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `AddCommand#execute()`, instead a `CommandException` will be thrown and no entity will be added.
+</div>
+
+The following sequence diagram shows how the delete operation works:
+
+![DeleteSequenceDiagram](images/AddSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The following activity diagram summarizes what happens when a user executes an add command:
+
+<img src="images/AddActivityDiagram.png" width="250" />
+
 ### \[Proposed\] Delete feature
 
 #### Proposed Implementation
@@ -178,7 +222,7 @@ Step 1. The user launches the application. The `TAssist` is already populated wi
 
 Step 2. The user executes `list student` command to list the students in the `TAssist`. The `list` command implementation is detailed below in the List Feature section.
 
-Step 3. The user executes `delete student 2` to delete the 2nd student in the list which is `s2`. The `delete` command also calls `DeleteCommandParser#parse()`, which parses the input and return the index and entity type.
+Step 3. The user executes `delete student 2` to delete the 2nd student in the list which is `s2`. The `delete` command also calls `DeleteCommandParser#parse()`, which parses the input and returns the index and entity type.
 
 ![DeleteState1](images/DeleteState1.png)
 
@@ -196,6 +240,34 @@ The following sequence diagram shows how the delete operation works:
 The following activity diagram summarizes what happens when a user executes a delete command:
 
 <img src="images/DeleteActivityDiagram.png" width="250" />
+
+### \[Proposed\] Enrol feature
+
+#### Proposed Implementation
+
+The proposed enrol mechanism is facilitated by `TAssist`. Its functionality, usage and behaviour is the only for student entity. Additionally, it implements the following operations:
+
+* `EnrolCommandParser#parse()` — Parses the command arguments.
+* `EnrolCommand#execute()` — Executes `ModelManager#enrolStudent()` with given student(s) and class group.
+* `ModelManager#enrolStudent()` — Enrols student(s) to a given class group.
+
+Given below is an example usage scenario for the enrolment of `Student` object to a `ClassGroup` object and how the enrol mechanism behaves at each step.
+
+<div markdown="span" class="alert alert-info">:information_source: **Assumption:** Valid `Student`, `Module` and `ClassGroup` objects are created beforehand.
+
+</div>
+
+Step 1. The user launches the application. The `TAssist` is already populated with data.
+
+![AddState0](images/AddState0.png)
+
+Step 2. The user executes `enrol` command to enrol student(s) to a `ClassGroup`. The `enrol` command also calls `EnrolCommandParser#parse()`, which parses the input and returns a successful/unsuccessful output message.
+* An example of the `enrol` command: `enrol c/1 s/1,2,3,4,5,6`
+
+![AddState1](images/EnrolState1.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `AddCommand#execute()`, instead a `CommandException` will be thrown and no entity will be added.
+</div>
 
 ### \[Proposed\] Undo/redo feature
 
