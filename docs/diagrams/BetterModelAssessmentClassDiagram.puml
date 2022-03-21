@@ -8,7 +8,10 @@ TAssist *-right-> "1" UniqueAssessmentList
 UniqueAssessmentList -right-> Assessment
 
 Assessment *--> AssessmentName
-Assessment *--> AssessmentType
+Assessment *--> "0..1" SimpleName
 Assessment *--> TaModule
-Assessment *--> "~*" Student
+Assessment *--> "~*" Attempt
+
+Attempt *--> Student
+Attempt *--> Grade
 @enduml
