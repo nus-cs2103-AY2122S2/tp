@@ -239,9 +239,11 @@ The following activity diagram summarizes what happens when a user executes a de
 
 <img src="images/DeleteActivityDiagram.png" width="250" />
 
-### Enrol feature
+### \[Proposed\] Enrol Feature
 
-The enrol mechanism is facilitated by `TAssist`. Its functionality, usage and behaviour is the only for student entity. Additionally, it implements the following operations:
+#### Proposed Implementation
+
+The proposed enrol mechanism is facilitated by `TAssist`. Its functionality, usage and behaviour is the only for student entity. Additionally, it implements the following operations:
 
 * `EnrolCommandParser#parse()` — Parses the command arguments.
 * `EnrolCommand#execute()` — Executes `ModelManager#enrolStudent()` with given student(s) and class group.
