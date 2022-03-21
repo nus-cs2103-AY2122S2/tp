@@ -10,35 +10,35 @@ public class Rating {
 
     public static final Integer FULL_RATING = 10;
 
-    private final Integer score;
+    private final Integer rating;
 
     /**
-     * Constructs a {@code score}.
+     * Constructs a {@code rating}.
      *
-     * @param score A valid score.
+     * @param rating A valid rating.
      */
-    public Rating(int score) {
-        requireNonNull(score);
-        checkArgument(isValidScore(score), INVALID_RATING);
-        this.score = score;
+    public Rating(int rating) {
+        requireNonNull(rating);
+        checkArgument(isValidScore(rating), INVALID_RATING);
+        this.rating = rating;
     }
 
     /**
-     * Return true if a given score is a valid score.
+     * Return true if a given rating is a valid rating.
      */
-    public static boolean isValidScore(int score) {
-        if (score <= 10 && score >= 0) {
+    public static boolean isValidScore(int rating) {
+        if (rating <= 10 && rating >= 0) {
             return true;
         }
         return false;
     }
 
     /**
-     * Return true if a given score is a valid score.
+     * Return true if a given rating is a valid rating.
      */
-    public static boolean isValidScore(String score) {
+    public static boolean isValidScore(String rating) {
         try {
-            int parsedScore = Integer.parseInt(score);
+            int parsedScore = Integer.parseInt(rating);
             return isValidScore(parsedScore);
         } catch (NumberFormatException e) {
             return false;
@@ -47,18 +47,22 @@ public class Rating {
 
     @Override
     public String toString() {
-        return Integer.toString(score);
+        return Integer.toString(rating);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this //short circuit if same object
                 || (other instanceof Rating
-                && score.equals(((Rating) other).score));
+                && rating.equals(((Rating) other).rating));
+    }
+
+    public String stringRating() {
+        return rating.toString();
     }
 
     @Override
     public int hashCode() {
-        return score.hashCode();
+        return rating.hashCode();
     }
 }
