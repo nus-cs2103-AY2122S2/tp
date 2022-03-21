@@ -97,7 +97,7 @@ public class PersonBuilder {
      * Sets the {@code Phone} of the {@code Person} that we are building.
      */
     public PersonBuilder withPhone(String phone) {
-        this.phone = new Phone(phone);
+        this.phone = new Phone(phone.trim());
         return this;
     }
 
@@ -105,7 +105,7 @@ public class PersonBuilder {
      * Sets the {@code Email} of the {@code Person} that we are building.
      */
     public PersonBuilder withEmail(String email) {
-        this.email = new Email(email);
+        this.email = new Email(email.trim());
         return this;
     }
 
@@ -123,7 +123,7 @@ public class PersonBuilder {
      * This method is to be used in future tests
      */
     public PersonBuilder withMatricNumber(String matriculationNumber) {
-        this.matriculationNumber = new MatriculationNumber(matriculationNumber);
+        this.matriculationNumber = new MatriculationNumber(matriculationNumber.trim());
         return this;
     }
 
