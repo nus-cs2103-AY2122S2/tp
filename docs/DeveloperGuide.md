@@ -121,8 +121,8 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the TAssist data i.e., all `Student`, `TaModule`, `ClassGroup` objects (which are contained in `UniqueStudentList`, `UniqueModuleList`, `UniqueClassGroupList` objects respectively).
-* stores the currently 'selected' `Student`/`TaModule`/`ClassGroup` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>`/`ObservableList<TaModule>`/`ObservableList<ClassGroup>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the TAssist data i.e., all `Student`, `TaModule`, `ClassGroup`, `Assessment` objects (which are contained in `UniqueStudentList`, `UniqueModuleList`, `UniqueClassGroupList`, `UniqueAssessmentList` objects respectively).
+* stores the currently 'selected' `Student`/`TaModule`/`ClassGroup`/`Assessment` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>`/`ObservableList<TaModule>`/`ObservableList<ClassGroup>`/`ObservableList<Assessment>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
@@ -133,6 +133,8 @@ The `Model` component,
 <img src="images/BetterModelTaModuleClassDiagram.png" width="450" />
 
 <img src="images/BetterModelClassGroupClassDiagram.png" width="450" />
+
+<img src="images/BetterModelAssessmentClassDiagram.png" width="450" />
 
 </div>
 
