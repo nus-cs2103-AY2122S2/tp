@@ -20,7 +20,7 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose details match "
             + "the specified search term, matriculation number or module code "
             + "and displays them as a list with index numbers.\n"
             + "Parameters: " + PREFIX_NAME + "STUDENT_NAME " + "or " + PREFIX_ID + "STUDENT_ID " + "or "
