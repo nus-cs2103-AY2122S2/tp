@@ -9,5 +9,5 @@ public interface ReadOnlyShowList {
      * Returns an unmodifiable view of the show list.
      * This list will not contain any duplicate show.
      */
-    ObservableList<Show> getShowList();
+    ObservableList<Show> getShows();
 }

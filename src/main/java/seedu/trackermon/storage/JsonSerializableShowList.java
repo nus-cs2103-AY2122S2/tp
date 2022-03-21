@@ -37,7 +37,7 @@ class JsonSerializableShowList {
      * @param source future changes to this will not affect the created {@code JsonSerializableShowList}.
      */
     public JsonSerializableShowList(ReadOnlyShowList source) {
-        shows.addAll(source.getShowList().stream().map(JsonAdaptedShow::new).collect(Collectors.toList()));
+        shows.addAll(source.getShows().stream().map(JsonAdaptedShow::new).collect(Collectors.toList()));
     }
 
     /**

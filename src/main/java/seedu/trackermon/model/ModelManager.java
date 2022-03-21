@@ -34,7 +34,7 @@ public class ModelManager implements Model {
 
         this.showList = new ShowList(showList);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredShows = new FilteredList<>(this.showList.getShowList());
+        filteredShows = new FilteredList<>(this.showList.getShows());
     }
 
     public ModelManager() {
