@@ -10,6 +10,7 @@ import seedu.ibook.logic.commands.ClearCommand;
 import seedu.ibook.logic.commands.Command;
 import seedu.ibook.logic.commands.DeleteCommand;
 import seedu.ibook.logic.commands.ExitCommand;
+import seedu.ibook.logic.commands.FindCommand;
 import seedu.ibook.logic.commands.ListCommand;
 import seedu.ibook.logic.commands.UpdateCommand;
 import seedu.ibook.logic.parser.exceptions.ParseException;
@@ -52,11 +53,10 @@ public class IBookParser {
             return new UpdateCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
-            if (arguments.isEmpty()) {
-                return new ListCommand();
-            } else {
-                return new FindCommandParser().parse(arguments);
-            }
+            return new ListCommand();
+
+        case FindCommand.COMMAND_WORD:
+            return new FindCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();

@@ -14,7 +14,7 @@ import seedu.ibook.model.product.ProductFulfillsFiltersPredicate;
  */
 public class FindCommand extends Command {
 
-    public static final String COMMAND_WORD = "list";
+    public static final String COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Lists all products that matches with the key value pair "
