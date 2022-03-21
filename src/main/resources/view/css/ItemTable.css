@@ -1,0 +1,35 @@
+.item-table {
+    -fx-background-color: transparent;
+}
+
+.table-row {
+    -fx-background-color: #FCFDFE;
+}
+
+.table-header {
+    -fx-background-color: #F8F9FA;
+    -fx-padding: 8 10;
+}
+
+.table-header .table-column-short {
+    -fx-border-width: 0;
+}
+
+.table-header .table-column-long {
+    -fx-border-width: 0;
+}
+
+.modify-button {
+    -fx-background-color: #9F93Ed20;
+    -fx-background-radius: 8;
+    -fx-text-fill: #9F93Ed;
+    -fx-font-family: 'Noto Sans SemiBold';
+}
+
+.modify-button:hover {
+    -fx-background-color: #9F93Ed30;
+}
+
+.modify-button:pressed {
+    -fx-background-color: #9F93Ed35;
+}

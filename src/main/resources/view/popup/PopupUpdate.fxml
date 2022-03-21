@@ -61,31 +61,19 @@
                        </TextField>
                     </VBox>
                  </HBox>
-                 <HBox maxWidth="Infinity" spacing="20.0">
+                 <VBox HBox.hgrow="ALWAYS">
                     <VBox.margin>
                        <Insets top="30.0"/>
                     </VBox.margin>
-                    <VBox HBox.hgrow="ALWAYS">
-                       <HBox spacing="3.0">
-                          <Label styleClass="field-label" text="Expiry Date"/>
-                       </HBox>
-                       <TextField fx:id="expiryDate" promptText="2022-12-31">
-                          <VBox.margin>
-                             <Insets top="5.0"/>
-                          </VBox.margin>
-                       </TextField>
-                    </VBox>
-                    <VBox HBox.hgrow="ALWAYS">
-                       <HBox spacing="3.0">
-                          <Label styleClass="field-label" text="Price"/>
-                       </HBox>
-                       <TextField fx:id="price" promptText="3.33">
-                          <VBox.margin>
-                             <Insets top="5.0"/>
-                          </VBox.margin>
-                       </TextField>
-                    </VBox>
-                 </HBox>
+                    <HBox spacing="3.0">
+                       <Label styleClass="field-label" text="Price"/>
+                    </HBox>
+                    <TextField fx:id="price" promptText="3.33">
+                       <VBox.margin>
+                          <Insets top="5.0"/>
+                       </VBox.margin>
+                    </TextField>
+                 </VBox>
                  <VBox maxHeight="Infinity" VBox.vgrow="ALWAYS">
                     <VBox.margin>
                        <Insets top="30.0"/>

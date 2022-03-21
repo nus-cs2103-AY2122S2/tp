@@ -14,7 +14,7 @@ import seedu.ibook.logic.commands.exceptions.CommandException;
 import seedu.ibook.logic.parser.exceptions.ParseException;
 import seedu.ibook.model.product.Product;
 import seedu.ibook.ui.popup.PopupHandler;
-import seedu.ibook.ui.table.Table;
+import seedu.ibook.ui.table.ProductTable;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -32,7 +32,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuToolbar menuToolbar;
     private CommandBox commandBox;
     private ResultWindow resultWindow;
-    private Table table;
+    private ProductTable productTable;
 
     private PopupHandler popupHandler;
 
@@ -93,8 +93,8 @@ public class MainWindow extends UiPart<Stage> {
         resultWindow = new ResultWindow(this);
         children.add(resultWindow.getRoot());
 
-        table = new Table(this);
-        children.add(table.getRoot());
+        productTable = new ProductTable(this);
+        children.add(productTable.getRoot());
     }
 
     /**
