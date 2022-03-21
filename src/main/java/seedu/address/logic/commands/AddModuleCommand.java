@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -38,6 +39,8 @@ public class AddModuleCommand extends Command {
      * Arg2 is List of Modules added
      */
     public static final String MESSAGE_SUCCESS = "Added Modules for %s: %s";
+    public static final String MESSAGE_DUPLICATE_MODULES_EXIST = "Some Module(s) already exists, ";
+    public static final String MESSAGE_NO_NEW_MODULES_ADDED = "no new Modules added, current Modules that %s has: %s";
 
     private final Index targetIndex;
     private final List<Module> modulesToAdd;
@@ -79,7 +82,7 @@ public class AddModuleCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, editedPerson.getName(), modulesToAddActual));
+        return getCommandResult(personToEdit, editedPerson, modulesToAddActual);
     }
 
     /**
@@ -108,5 +111,42 @@ public class AddModuleCommand extends Command {
                 || (other instanceof AddModuleCommand // instanceof handles nulls
                 && targetIndex.equals(((AddModuleCommand) other).targetIndex)) // state check
                 && modulesToAdd.equals(((AddModuleCommand) other).modulesToAdd);
+    }
+
+    /**
+     * @return true if personToEdit contains any modules in proposedModules
+     */
+    private boolean hasModulesInCommon(Person personToEdit, List<Module> proposedModules) {
+        Set<Module> existingModules = personToEdit.getModules();
+        return !Collections.disjoint(existingModules, proposedModules);
+    }
+
+    /**
+     * Function to get a List of non-duplicated modules added to the Person
+     * @return List of non-duplicated modules, which may be empty if no unique modules exist
+     */
+    private List<Module> getNewModules(Person personToEdit, List<Module> proposedModules) {
+        Set<Module> existingModules = personToEdit.getModules();
+        proposedModules.removeAll(existingModules);
+
+        return proposedModules;
+    }
+
+    private CommandResult getCommandResult(Person personToEdit, Person editedPerson, List<Module> modulesToAddActual) {
+        if (hasModulesInCommon(personToEdit, modulesToAddActual)) {
+            List<Module> newModules = getNewModules(personToEdit, modulesToAddActual);
+
+            if (newModules.isEmpty()) {
+                return new CommandResult(String.format(MESSAGE_DUPLICATE_MODULES_EXIST + MESSAGE_NO_NEW_MODULES_ADDED,
+                        editedPerson.getName(),
+                        editedPerson.getModules()));
+            } else {
+                return new CommandResult(String.format(MESSAGE_DUPLICATE_MODULES_EXIST + MESSAGE_SUCCESS,
+                        editedPerson.getName(),
+                        newModules));
+            }
+        }
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, editedPerson.getName(), modulesToAddActual));
     }
 }
