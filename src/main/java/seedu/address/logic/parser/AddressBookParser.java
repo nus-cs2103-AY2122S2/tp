@@ -82,7 +82,7 @@ public class AddressBookParser {
             return new AssignCommandParser().parse(arguments);
 
         case DeassignCommand.COMMAND_WORD:
-            return new DeassignCommand();
+            return new DeassignCommandParser().parse(arguments);
 
         case DeleteGroupCommand.COMMAND_WORD:
             return new DeleteGroupCommandParser().parse(arguments);
