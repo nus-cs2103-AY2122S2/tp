@@ -1,7 +1,5 @@
 package seedu.contax.model.appointment;
 
-import seedu.contax.model.person.Person;
-
 import java.util.Locale;
 import java.util.function.Predicate;
 

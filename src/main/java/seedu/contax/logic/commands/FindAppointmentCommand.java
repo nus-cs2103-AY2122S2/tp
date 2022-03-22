@@ -1,16 +1,17 @@
 package seedu.contax.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.contax.commons.core.GuiListContentType;
 import seedu.contax.commons.core.Messages;
 import seedu.contax.model.Model;
 import seedu.contax.model.appointment.HasClientPredicate;
 
-import static java.util.Objects.requireNonNull;
-
 public class FindAppointmentCommand extends Command {
     public static final String COMMAND_WORD = "findappointment";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " : Finds all appointments with the specified client name. \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + " : Finds all appointments with the specified client name. \n"
             + "Parameters: n/NAME\n"
             + "Example: " + COMMAND_WORD + " n/Johnny";
 
