@@ -14,6 +14,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.contax.model.appointment.exceptions.AppointmentNotFoundException;
 import seedu.contax.model.appointment.exceptions.OverlappingAppointmentException;
+import seedu.contax.model.util.TimeRange;
 
 /**
  * A list of appointments that enforces that its elements cannot have overlapping periods and does not allow
@@ -180,26 +181,24 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
     }
 
     /**
-     * Returns a list of appointments that can allow another appointment of {@code minimumDuration} to be
-     * slotted between it and the subsequent appointment in the schedule, subject to the supplied start and
-     * end DateTime search window.
+     * Returns a list of slots between appointments, within the supplied start and end DateTime search window,
+     * that are of at least {@code minimumDuration} minutes.
      *
      * @param start The start of the search window.
      * @param end The end of the search window.
      * @param minimumDuration The minimum size of the empty slot.
-     * @return A list of appointments that can allow another appointment of {@code minimumDuration} to be
-     *         slotted between it and the subsequent appointment.
+     * @return A list of slots between appointments that are of at least {@code minimumDuration} minutes.
      */
-    public List<Appointment> findSlotsBetweenAppointments(LocalDateTime start, LocalDateTime end,
-                                                  int minimumDuration) {
+    public List<TimeRange> findSlotsBetweenAppointments(LocalDateTime start, LocalDateTime end,
+                                                        int minimumDuration) {
         requireAllNonNull(start, end, minimumDuration);
         if (minimumDuration <= 0) {
             throw new IllegalArgumentException("Duration has to be a positive integer");
         }
 
-        ArrayList<Appointment> slotsFoundAfterAppointments = new ArrayList<>();
+        ArrayList<TimeRange> slotsFound = new ArrayList<>();
         if (!(start.isBefore(end))) {
-            return slotsFoundAfterAppointments;
+            return slotsFound;
         }
 
         // Check gaps between appointments
@@ -224,11 +223,11 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
 
             long minutesBetween = gapStart.until(gapEnd, ChronoUnit.MINUTES);
             if (minutesBetween >= minimumDuration) {
-                slotsFoundAfterAppointments.add(earlierAppointment);
+                slotsFound.add(new TimeRange(gapStart, gapEnd));
             }
         }
 
-        return slotsFoundAfterAppointments;
+        return slotsFound;
     }
 
     @Override

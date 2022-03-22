@@ -22,6 +22,7 @@ import javafx.collections.ObservableList;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.appointment.exceptions.AppointmentNotFoundException;
 import seedu.contax.model.appointment.exceptions.OverlappingAppointmentException;
+import seedu.contax.model.util.TimeRange;
 import seedu.contax.testutil.AppointmentBuilder;
 import seedu.contax.testutil.ScheduleBuilder;
 
@@ -240,7 +241,7 @@ public class ScheduleTest {
         schedule.addAppointment(appointment1);
         schedule.addAppointment(appointment2);
 
-        List<Appointment> expectedList = List.of(appointment1);
+        List<TimeRange> expectedList = List.of(new TimeRange(rangeStart, rangeEnd));
 
         assertEquals(expectedList, schedule.findSlotsBetweenAppointments(rangeStart, rangeEnd, 120));
         assertEquals(expectedList, schedule.findSlotsBetweenAppointments(rangeStart, rangeEnd, 60));
@@ -291,18 +292,18 @@ public class ScheduleTest {
 
         @Override
         public boolean hasOverlappingAppointment(Appointment target) {
-            throw new RuntimeException("This method should not be called");
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public boolean hasAppointment(Appointment target) {
-            throw new RuntimeException("This method should not be called");
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public List<Appointment> findSlotsBetweenAppointments(LocalDateTime start, LocalDateTime end,
-                                                              int minimumDuration) {
-            throw new RuntimeException("This method should not be called");
+        public List<TimeRange> findSlotsBetweenAppointments(LocalDateTime start, LocalDateTime end,
+                                                            int minimumDuration) {
+            throw new AssertionError("This method should not be called.");
         }
     }
 

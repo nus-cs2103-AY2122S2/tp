@@ -24,6 +24,7 @@ import seedu.contax.logic.commands.ExitCommand;
 import seedu.contax.logic.commands.ExportCsvCommand;
 import seedu.contax.logic.commands.FindByTagCommand;
 import seedu.contax.logic.commands.FindPersonCommand;
+import seedu.contax.logic.commands.FreeBetweenCommand;
 import seedu.contax.logic.commands.HelpCommand;
 import seedu.contax.logic.commands.ImportCsvCommand;
 import seedu.contax.logic.commands.ListAppointmentCommand;
@@ -109,6 +110,9 @@ public class AddressBookParser {
 
         case AppointmentsBetweenCommand.COMMAND_WORD:
             return new AppointmentsBetweenCommandParser().parse(arguments);
+
+        case FreeBetweenCommand.COMMAND_WORD:
+            return new FreeBetweenCommandParser().parse(arguments);
 
         // Tag management commands
         case AddTagCommand.COMMAND_WORD:

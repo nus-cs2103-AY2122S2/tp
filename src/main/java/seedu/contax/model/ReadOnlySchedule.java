@@ -5,6 +5,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.contax.model.appointment.Appointment;
+import seedu.contax.model.util.TimeRange;
 
 /**
  * Unmodifiable view of a schedule.
@@ -38,6 +39,6 @@ public interface ReadOnlySchedule {
      * @return A list of appointments that can allow another appointment of {@code minimumDuration} to be
      *         slotted between it and the subsequent appointment.
      */
-    List<Appointment> findSlotsBetweenAppointments(LocalDateTime start, LocalDateTime end,
-                                                   int minimumDuration);
+    List<TimeRange> findSlotsBetweenAppointments(LocalDateTime start, LocalDateTime end,
+                                                 int minimumDuration);
 }

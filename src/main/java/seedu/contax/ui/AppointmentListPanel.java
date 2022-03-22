@@ -8,7 +8,9 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.contax.commons.core.LogsCenter;
+import seedu.contax.model.ScheduleItem;
 import seedu.contax.model.appointment.Appointment;
+import seedu.contax.model.appointment.AppointmentSlot;
 
 /**
  * Panel containing a list of appointments.
@@ -18,12 +20,12 @@ public class AppointmentListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(AppointmentListPanel.class);
 
     @FXML
-    private ListView<Appointment> appointmentListView;
+    private ListView<ScheduleItem> appointmentListView;
 
     /**
      * Creates a {@code AppointmentListPanel} with the given appointment {@code ObservableList}.
      */
-    public AppointmentListPanel(ObservableList<Appointment> appointmentList) {
+    public AppointmentListPanel(ObservableList<ScheduleItem> appointmentList) {
         super(FXML);
         appointmentListView.setItems(appointmentList);
         appointmentListView.setCellFactory(listView -> new AppointmentListPanel.AppointmentListViewCell());
@@ -33,16 +35,23 @@ public class AppointmentListPanel extends UiPart<Region> {
      * Custom {@code ListCell} that displays the graphics of an {@code Appointment} using
      * an {@code AppointmentCard}.
      */
-    class AppointmentListViewCell extends ListCell<Appointment> {
+    class AppointmentListViewCell extends ListCell<ScheduleItem> {
         @Override
-        protected void updateItem(Appointment appointment, boolean empty) {
-            super.updateItem(appointment, empty);
+        protected void updateItem(ScheduleItem scheduleItem, boolean empty) {
+            super.updateItem(scheduleItem, empty);
 
-            if (empty || appointment == null) {
+            if (empty || scheduleItem == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new AppointmentCard(appointment, getIndex() + 1).getRoot());
+                if (scheduleItem instanceof Appointment) {
+                    setGraphic(new AppointmentCard((Appointment) scheduleItem, getIndex() + 1).getRoot());
+                } else if (scheduleItem instanceof AppointmentSlot) {
+                    setGraphic(new AppointmentSlotCard((AppointmentSlot) scheduleItem).getRoot());
+                } else {
+                    setGraphic(null);
+                    setText(null);
+                }
             }
         }
     }

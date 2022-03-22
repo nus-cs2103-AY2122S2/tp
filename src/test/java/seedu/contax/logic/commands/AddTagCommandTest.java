@@ -11,6 +11,7 @@ import static seedu.contax.testutil.TypicalPersons.FRIENDS;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -22,9 +23,11 @@ import seedu.contax.model.Model;
 import seedu.contax.model.ReadOnlyAddressBook;
 import seedu.contax.model.ReadOnlySchedule;
 import seedu.contax.model.ReadOnlyUserPrefs;
+import seedu.contax.model.ScheduleItem;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.tag.Tag;
+import seedu.contax.model.util.TimeRange;
 import seedu.contax.testutil.TagBuilder;
 
 class AddTagCommandTest {
@@ -187,6 +190,26 @@ class AddTagCommandTest {
 
         @Override
         public void updateFilteredAppointmentList(Predicate<Appointment> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<TimeRange> getDisplayedAppointmentSlots() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setDisplayedAppointmentSlots(List<TimeRange> items) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void clearDisplayedAppointmentSlots() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<ScheduleItem> getScheduleItemList() {
             throw new AssertionError("This method should not be called.");
         }
 

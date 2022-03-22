@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
  * Represents an anchored period of time, from a start date-time to an end date-time inclusive.
@@ -57,5 +58,25 @@ public class TimeRange implements TemporalComparable {
     @Override
     public int compareTo(TemporalComparable o) {
         return this.getComparableDateTime().compareTo(o.getComparableDateTime());
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof TimeRange)) {
+            return false;
+        }
+
+        TimeRange otherRange = (TimeRange) other;
+        return otherRange.start.equals(start)
+                && otherRange.end.equals(end);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(start, end);
     }
 }

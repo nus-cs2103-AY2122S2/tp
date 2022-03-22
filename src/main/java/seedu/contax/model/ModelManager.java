@@ -34,6 +34,7 @@ public class ModelManager implements Model {
 
     private final ObservableList<TimeRange> displayedAppointmentSlots;
     private final ObservableList<TimeRange> unmodifiableDisplayedAppointmentSlots;
+    private final CompositeScheduleItemList scheduleItemList;
 
     /**
      * Initializes a ModelManager with the given addressBook, schedule and userPrefs.
@@ -52,9 +53,11 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredAppointments = new FilteredList<>(this.schedule.getAppointmentList());
         filteredTags = new FilteredList<>(this.addressBook.getTagList());
-        displayedAppointmentSlots = FXCollections.emptyObservableList();
+        displayedAppointmentSlots = FXCollections.observableArrayList();
         unmodifiableDisplayedAppointmentSlots =
                 FXCollections.unmodifiableObservableList(displayedAppointmentSlots);
+        scheduleItemList = new CompositeScheduleItemList(filteredAppointments,
+                unmodifiableDisplayedAppointmentSlots);
     }
 
     /**
@@ -300,6 +303,11 @@ public class ModelManager implements Model {
     @Override
     public void clearDisplayedAppointmentSlots() {
         displayedAppointmentSlots.clear();
+    }
+
+    @Override
+    public ObservableList<ScheduleItem> getScheduleItemList() {
+        return this.scheduleItemList.getUnmodifiableList();
     }
 
     @Override

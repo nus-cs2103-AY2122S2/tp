@@ -204,4 +204,9 @@ public interface Model {
      */
     void clearDisplayedAppointmentSlots();
 
+    /**
+     * Returns a list of {@code ScheduleItems}.
+     */
+    ObservableList<ScheduleItem> getScheduleItemList();
+
 }

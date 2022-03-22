@@ -9,6 +9,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.appointment.DisjointAppointmentList;
+import seedu.contax.model.util.TimeRange;
 
 /**
  * Wraps all data at the Schedule level.
@@ -99,8 +100,8 @@ public class Schedule implements ReadOnlySchedule {
     }
 
     @Override
-    public List<Appointment> findSlotsBetweenAppointments(LocalDateTime start, LocalDateTime end,
-                                                          int minimumDuration) {
+    public List<TimeRange> findSlotsBetweenAppointments(LocalDateTime start, LocalDateTime end,
+                                                        int minimumDuration) {
         requireAllNonNull(start, end, minimumDuration);
         return appointments.findSlotsBetweenAppointments(start, end, minimumDuration);
     }

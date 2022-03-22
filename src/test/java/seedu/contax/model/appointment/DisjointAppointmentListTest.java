@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.contax.model.appointment.exceptions.AppointmentNotFoundException;
 import seedu.contax.model.appointment.exceptions.OverlappingAppointmentException;
+import seedu.contax.model.util.TimeRange;
 import seedu.contax.testutil.AppointmentBuilder;
 
 public class DisjointAppointmentListTest {
@@ -342,7 +343,7 @@ public class DisjointAppointmentListTest {
         refList.add(appointment1);
         refList.add(appointment2);
 
-        List<Appointment> expectedList = List.of(appointment1);
+        List<TimeRange> expectedList = List.of(new TimeRange(exactRangeStart, exactRangeEnd));
 
         assertEquals(expectedList, refList.findSlotsBetweenAppointments(exactRangeStart, exactRangeEnd, 120));
         assertEquals(expectedList, refList.findSlotsBetweenAppointments(exactRangeStart, exactRangeEnd, 60));
@@ -374,19 +375,24 @@ public class DisjointAppointmentListTest {
         refList.add(appointment1);
         refList.add(appointment2);
 
-        List<Appointment> expectedList = List.of(appointment1);
+        List<TimeRange> expectedList = List.of(new TimeRange(smallerRangeStart, exactRangeEnd));
 
         assertEquals(List.of(), refList.findSlotsBetweenAppointments(smallerRangeStart, exactRangeEnd, 120));
         assertEquals(expectedList, refList.findSlotsBetweenAppointments(smallerRangeStart, exactRangeEnd, 119));
 
+        expectedList = List.of(new TimeRange(exactRangeStart, smallerRangeEnd));
         assertEquals(List.of(), refList.findSlotsBetweenAppointments(exactRangeStart, smallerRangeEnd, 120));
         assertEquals(expectedList, refList.findSlotsBetweenAppointments(exactRangeStart, smallerRangeEnd, 119));
 
+        expectedList = List.of(new TimeRange(smallerRangeStart, smallerRangeEnd));
         assertEquals(List.of(), refList.findSlotsBetweenAppointments(smallerRangeStart, smallerRangeEnd, 119));
         assertEquals(expectedList, refList.findSlotsBetweenAppointments(smallerRangeStart, smallerRangeEnd, 118));
 
+        expectedList = List.of(new TimeRange(smallerRangeStart, exactRangeEnd));
         assertEquals(List.of(), refList.findSlotsBetweenAppointments(smallerRangeStart, largerRangeEnd, 120));
         assertEquals(expectedList, refList.findSlotsBetweenAppointments(smallerRangeStart, largerRangeEnd, 119));
+
+        expectedList = List.of(new TimeRange(exactRangeStart, smallerRangeEnd));
         assertEquals(List.of(), refList.findSlotsBetweenAppointments(largerRangeStart, smallerRangeEnd, 120));
         assertEquals(expectedList, refList.findSlotsBetweenAppointments(largerRangeStart, smallerRangeEnd, 119));
 

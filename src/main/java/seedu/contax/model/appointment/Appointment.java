@@ -6,13 +6,14 @@ import static seedu.contax.commons.util.CollectionUtil.requireAllNonNull;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import seedu.contax.model.ScheduleItem;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.util.TemporalComparable;
 
 /**
  * Represents an appointment in the schedule.
  */
-public class Appointment implements TemporalComparable {
+public class Appointment extends ScheduleItem implements TemporalComparable {
 
     // Appointment identification fields
     private final StartDateTime startDateTime;

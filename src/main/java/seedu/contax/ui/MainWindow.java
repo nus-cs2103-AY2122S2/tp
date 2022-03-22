@@ -128,7 +128,7 @@ public class MainWindow extends UiPart<Stage> {
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        appointmentListPanel = new AppointmentListPanel(logic.getAppointmentList());
+        appointmentListPanel = new AppointmentListPanel(logic.getScheduleItemList());
         tagListPanel = new TagListPanel(logic.getFilteredTagList());
         changeListContentType(GuiListContentType.PERSON);
 

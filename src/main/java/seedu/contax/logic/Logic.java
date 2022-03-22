@@ -8,6 +8,7 @@ import seedu.contax.logic.commands.CommandResult;
 import seedu.contax.logic.commands.exceptions.CommandException;
 import seedu.contax.logic.parser.exceptions.ParseException;
 import seedu.contax.model.ReadOnlyAddressBook;
+import seedu.contax.model.ScheduleItem;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.tag.Tag;
@@ -35,8 +36,8 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
 
-    /** Returns an unmodifiable view of the list of appointments */
-    ObservableList<Appointment> getAppointmentList();
+    /** Returns an unmodifiable view of the list of appointments and highlighted empty slots */
+    ObservableList<ScheduleItem> getScheduleItemList();
 
     /** Returns an unmodifiable view of the filtered list of tags */
     ObservableList<Tag> getFilteredTagList();
