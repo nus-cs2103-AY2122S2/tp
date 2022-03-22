@@ -123,7 +123,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_MODULE_INDEX)
                     || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        AddCommand.MESSAGE_CLASS_USAGE));
+                        AddCommand.MESSAGE_ASSESSMENT_USAGE));
             }
 
             AssessmentName assessmentName = ParserUtil.parseAssessmentName(argMultimap.getValue(PREFIX_NAME).get());
