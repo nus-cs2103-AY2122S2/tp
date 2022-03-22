@@ -403,7 +403,7 @@ The sequence diagram is as follows:
 
 #### Range Command
 
-This extension allows user to perform range of commands based on `index`. Hence, `from/INDEX to/INDEX` is essential in parsing the value of input. The validation for `INDEX` followed as original edit command index validation.
+This extension allows user to perform range of commands based on `index`. During the conversion from user input to list of commands `from/INDEX to/INDEX` is essential for parsing to generate new commands. The validation for `INDEX` followed as original edit command index validation.
 
 #### Batch Command
 
