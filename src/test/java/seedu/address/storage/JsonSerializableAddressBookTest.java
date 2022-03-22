@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.AddressBook;
+import seedu.address.model.lab.Lab;
+import seedu.address.model.lab.LabList;
 import seedu.address.testutil.TypicalStudents;
 
 public class JsonSerializableAddressBookTest {
@@ -19,6 +21,7 @@ public class JsonSerializableAddressBookTest {
     private static final Path TYPICAL_STUDENTS_FILE = TEST_DATA_FOLDER.resolve("typicalStudentsAddressBook.json");
     private static final Path INVALID_STUDENT_FILE = TEST_DATA_FOLDER.resolve("invalidStudentAddressBook.json");
     private static final Path DUPLICATE_STUDENT_FILE = TEST_DATA_FOLDER.resolve("duplicateStudentAddressBook.json");
+    private static final Path INVALID_LABSTATUS_FILE = TEST_DATA_FOLDER.resolve("invalidLabStatusAddressBook.json");
 
     @Test
     public void toModelType_typicalStudentsFile_success() throws Exception {
@@ -42,6 +45,15 @@ public class JsonSerializableAddressBookTest {
                 JsonSerializableAddressBook.class).get();
         assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_DUPLICATE_STUDENT,
                 dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidLabStatusFile_defaultToUnsubmitted() throws Exception {
+        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(INVALID_LABSTATUS_FILE,
+                JsonSerializableAddressBook.class).get();
+        LabList expectedLabList = new LabList();
+        expectedLabList.add(new Lab("1"));
+        assertEquals(expectedLabList, dataFromFile.toModelType().getStudentList().get(0).getLabs());
     }
 
 }

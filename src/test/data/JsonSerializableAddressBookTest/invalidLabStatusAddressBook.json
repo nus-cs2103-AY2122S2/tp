@@ -1,0 +1,12 @@
+{
+  "masterList": [ "1" ],
+  "students": [ {
+    "name": "Hans Muster",
+    "email": "valid@gmail.com",
+    "github": "hansM",
+    "telegram": "hans_M",
+    "studentId": "A0123458C",
+    "labStatuses": [ "test" ],
+    "labNumbers": [ "1" ]
+  } ]
+}
