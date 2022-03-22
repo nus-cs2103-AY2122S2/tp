@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.assessment.Assessment;
 import seedu.address.model.classgroup.ClassGroup;
 import seedu.address.model.entity.Entity;
 import seedu.address.model.entity.EntityConverter;
@@ -30,6 +31,7 @@ public class ModelManager implements Model {
     private final FilteredList<Student> filteredStudents;
     private final FilteredList<TaModule> filteredModules;
     private final FilteredList<ClassGroup> filteredClassGroups;
+    private final FilteredList<Assessment> filteredAssessments;
 
     /**
      * Initializes a ModelManager with the given tAssist and userPrefs.
@@ -44,6 +46,7 @@ public class ModelManager implements Model {
         filteredStudents = new FilteredList<>(this.tAssist.getStudentList());
         filteredModules = new FilteredList<>(this.tAssist.getModuleList());
         filteredClassGroups = new FilteredList<>(this.tAssist.getClassGroupList());
+        filteredAssessments = new FilteredList<>(this.tAssist.getAssessmentList());
     }
 
     public ModelManager() {
@@ -108,6 +111,8 @@ public class ModelManager implements Model {
             return tAssist.hasModule(EntityConverter.entityToTaModule(entity));
         case CLASS_GROUP:
             return tAssist.hasClassGroup(EntityConverter.entityToClassGroup(entity));
+        case ASSESSMENT:
+            return tAssist.hasAssessment(EntityConverter.entityToAssessment(entity));
         default:
             throw new UnknownEntityException();
         }
@@ -125,6 +130,9 @@ public class ModelManager implements Model {
             break;
         case CLASS_GROUP:
             tAssist.removeClassGroup(EntityConverter.entityToClassGroup(target));
+            break;
+        case ASSESSMENT:
+            tAssist.removeAssessment(EntityConverter.entityToAssessment(target));
             break;
         default:
             throw new UnknownEntityException();
@@ -146,6 +154,10 @@ public class ModelManager implements Model {
         case CLASS_GROUP:
             tAssist.addClassGroup(EntityConverter.entityToClassGroup(entity));
             updateFilteredClassGroupList(PREDICATE_SHOW_ALL);
+            break;
+        case ASSESSMENT:
+            tAssist.addAssessment(EntityConverter.entityToAssessment(entity));
+            updateFilteredAssessmentList(PREDICATE_SHOW_ALL);
             break;
         default:
             throw new UnknownEntityException();
@@ -170,6 +182,11 @@ public class ModelManager implements Model {
             ClassGroup targetClassGroup = EntityConverter.entityToClassGroup(target);
             ClassGroup editedClassGroup = EntityConverter.entityToClassGroup(editedEntity);
             tAssist.setClassGroup(targetClassGroup, editedClassGroup);
+            break;
+        case ASSESSMENT:
+            Assessment targetAssessment = EntityConverter.entityToAssessment(target);
+            Assessment editedAssessment = EntityConverter.entityToAssessment(editedEntity);
+            tAssist.setAssessment(targetAssessment, editedAssessment);
             break;
         default:
             throw new DifferentEntityException(target.getEntityType(), editedEntity.getEntityType());
@@ -200,6 +217,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Assessment> getFilteredAssessmentList() {
+        return filteredAssessments;
+    }
+
+    @Override
     public void updateFilteredStudentList(Predicate<? super Student> predicate) {
         requireNonNull(predicate);
         filteredStudents.setPredicate(predicate);
@@ -215,6 +237,12 @@ public class ModelManager implements Model {
     public void updateFilteredClassGroupList(Predicate<? super ClassGroup> predicate) {
         requireNonNull(predicate);
         filteredClassGroups.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredAssessmentList(Predicate<? super Assessment> predicate) {
+        requireNonNull(predicate);
+        filteredAssessments.setPredicate(predicate);
     }
 
     @Override
@@ -235,7 +263,8 @@ public class ModelManager implements Model {
                 && userPrefs.equals(other.userPrefs)
                 && filteredStudents.equals(other.filteredStudents)
                 && filteredModules.equals(other.filteredModules)
-                && filteredClassGroups.equals(other.filteredClassGroups);
+                && filteredClassGroups.equals(other.filteredClassGroups)
+                && filteredAssessments.equals(other.filteredAssessments);
     }
 
 }

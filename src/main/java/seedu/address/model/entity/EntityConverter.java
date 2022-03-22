@@ -1,5 +1,6 @@
 package seedu.address.model.entity;
 
+import seedu.address.model.assessment.Assessment;
 import seedu.address.model.classgroup.ClassGroup;
 import seedu.address.model.entity.exceptions.InvalidEntityConversionException;
 import seedu.address.model.student.Student;
@@ -47,5 +48,18 @@ public class EntityConverter {
             throw new InvalidEntityConversionException(EntityType.CLASS_GROUP);
         }
         return (ClassGroup) entity;
+    }
+
+    /**
+     * Converts the entity to an {@code Assessment} class.
+     *
+     * @param entity The entity to convert.
+     * @return The {@code Assessment} class that the entity represent.
+     */
+    public static Assessment entityToAssessment(Entity entity) {
+        if (entity.getEntityType() != EntityType.ASSESSMENT) {
+            throw new InvalidEntityConversionException(EntityType.ASSESSMENT);
+        }
+        return (Assessment) entity;
     }
 }
