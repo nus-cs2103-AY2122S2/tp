@@ -252,7 +252,7 @@ The `unmark` command marks a specific done task as undone for a particular stude
 10. `Index#isValidId(Index index)` will then be invoked, which checks if the trimmed argument is valid (according to the Regex supplied). If the argument is valid, a new `Index` object will be created and returned to the `UnmarkCommandParser`. If the argument is not valid, a `ParseException` will be thrown.
 11. The `UnmarkCommandParser` will create a new `UnmarkCommand` object using the `StudentId` and `Index` created in Step 7 and 10 respectively.
 12. The `LogicManager` will then call `UnmarkCommand#execute(Model model)`.
-13. The `UnmarkCommand` will call `model.unmarkTaskOfPerson(Student studentId, Index index)`, which marks the task (corresponding to the supplied index) of the given student as undone.
+13. The `UnmarkCommand` will call `model#unmarkTaskOfPerson(Student studentId, Index index)`, which marks the task (corresponding to the supplied index) of the given student as undone.
     <div markdown="span" class="alert alert-info">:information_source:
     **Note:** A CommandException will be thrown if the supplied index or studentId is invalid, or if the task is already marked as not complete.
     </div>
