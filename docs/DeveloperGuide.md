@@ -157,6 +157,18 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add group feature
+to be updated
+
+### Delete group feature
+to be updated
+
+### Delete task feature
+to be updated
+
+### View task feature
+to be updated
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
