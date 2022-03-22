@@ -394,16 +394,16 @@ The sequence diagram is as follows:
 
 #### Chain Command
 
-This extension allows user to chain multiple commands together.
+This extension allows the user to chain multiple commands together.
 
-:information_source: **Note:** A command failure may lead to following commands being invalid (e.g. if create person failed, you cannot edit the newly created person), causing an exception to be thrown.
+:information_source: **Note:** A command failure may lead to the following commands being invalid (e.g. if create person failed, you cannot edit the newly created person), causing an exception to be thrown.
 
 The sequence diagram is as follows:
 ![Chain Command](images/ChainCommandSequenceDiagram.png)
 
 #### Range Command
 
-This extension allows user to perform range of commands based on `index`. During the conversion from user input to list of commands `from/INDEX to/INDEX` is essential for parsing to generate new commands. The validation for `INDEX` followed as original edit command index validation.
+This extension allows the user to perform range of commands based on `index`. During the conversion from user input to list of commands `from/INDEX to/INDEX` is essential for parsing to generate new commands. The validation for `INDEX` followed as original edit command index validation.
 
 #### Batch Command
 
