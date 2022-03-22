@@ -147,9 +147,4 @@ public class ModelManager implements Model {
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons);
     }
-    //=========== EventBook =================================================================================
-    @Override
-    public void addEvent(Event event) {
-
-    }
 }
