@@ -59,6 +59,15 @@ public class PositionBuilder {
      * Parses the {@code requirements} into a {@code Set<Requirement>} and set it to the {@code Position}
      * that we are building.
      */
+    public PositionBuilder withRequirements() {
+        this.requirements = new HashSet<>();
+        return this;
+    }
+
+    /**
+     * Parses the {@code requirements} into a {@code Set<Requirement>} and set it to the {@code Position}
+     * that we are building.
+     */
     public PositionBuilder withRequirements(String... requirements) {
         this.requirements = SampleDataUtil.getRequirementSet(requirements);
         return this;
