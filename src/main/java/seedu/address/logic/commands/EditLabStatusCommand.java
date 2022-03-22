@@ -79,7 +79,6 @@ public class EditLabStatusCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_STATUS_CHANGE);
         }
 
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         return new CommandResult(
                 String.format(MESSAGE_EDIT_LAB_STATUS_SUCCESS, labNumber, studentToEdit.getName(), newStatus.name()));
     }
