@@ -1,0 +1,15 @@
+#emailButton {
+    -fx-text-fill: white;
+}
+
+#emailButton {
+    -fx-background-color: dimgray;
+}
+
+#emailButton {
+    -fx-border-radius: 5px;
+}
+
+#emailButton:hover {
+    -fx-background-color: gray;
+}

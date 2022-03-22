@@ -1,0 +1,19 @@
+#emailButton, #helpMessage {
+    -fx-text-fill: white;
+}
+
+#emailButton {
+    -fx-background-color: dimgray;
+}
+
+#emailButton:hover {
+    -fx-background-color: gray;
+}
+
+#emailButton:armed {
+    -fx-background-color: darkgray;
+}
+
+#emailMessageContainer {
+    -fx-background-color: derive(#1d1d1d, 20%);
+}
