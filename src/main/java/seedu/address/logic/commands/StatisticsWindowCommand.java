@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
-public class StatisticsCommand extends Command {
+public class StatisticsWindowCommand extends Command {
     public static final String COMMAND_WORD = "stats";
     public static final String MESSAGE_STATISTICS_WINDOW_SUCCESS =
             "Successfully opened Statistics window!";
