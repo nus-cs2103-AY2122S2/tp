@@ -7,10 +7,10 @@ end box
 
 box OnboardingStoryManager LOGIC_COLOR_T1
 participant ":OnboardingStoryManager" as OnboardingStoryManager LOGIC_COLOR
-participant "OnboardingStory" as OnboardingStory LOGIC_COLOR
+participant ":OnboardingStory" as OnboardingStory LOGIC_COLOR
 end box
 
-[-> OnboardingWindow : mouseClick();
+[-> OnboardingWindow : mouseClick()
 activate OnboardingWindow
 
 OnboardingWindow -> OnboardingStoryManager : handleMouseClick()
