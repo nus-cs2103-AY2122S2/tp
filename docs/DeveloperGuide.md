@@ -181,6 +181,28 @@ A new `Applicant` class had to be created to support the functionality. It is al
 Hence it made sense to refactor `Person` to `Applicant` and to extend and build on the existing functionalities to 
 support the needs of HireLah. 
 
+### Adding of Data 
+
+#### Implementation
+
+Adding of different data types is currently done through `ModelManger`, which implements the methods in interface `Model`.
+There are 3 levels to the parsing of the add command from user input.
+1. `AddressBookParser` identifies it as an `add` command.
+2. `AddCommandParser` identifies the exact data type that is to be added, through the `flag` of the user input.
+3. `AddXYZCommandParser` identifies the fields to be added for the specific datatype, and creates and `AddXYZCommand`.
+
+#### Design considerations:
+
+#### Aspect: How to add different data types:
+
+* **Alternative 1 (current choice):** Have a general add command.
+    * Pros: User-friendly since users only have to remember a singular command.
+    * Cons: Requires additional levels of parsers to be created.
+
+* **Alternative 2:** An individual command for each data type that can be added
+    * Pros: Fewer levels of parsers is required.
+    * Cons: We must ensure that the implementation of each individual command are correct.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
