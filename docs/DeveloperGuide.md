@@ -400,7 +400,17 @@ The `clear` command deletes all students currently stored in TAPA. During the ex
 
 #### Implementation
 1. Upon receiving the user input, the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
-2. 
+2. A new `ClearCommand` is created by `AddressBookParser` and returned to the `LogicManager`.
+3. The `LogicManager` will then call `ClearCommand#execute(Model model)`, which returns a new `CommandResult` object (with its `isClearRequest` field set to `true`) to the `LogicManager`
+4. The `CommandResult` (with its `isClearRequest` field set to `true`) is then returned to the `MainWindow`.
+5. To confirm the user's decision to clear TAPA, the `MainWindow` executes `MainWindow#handleClearRequest()` which updates the `CommandBox` to only recognise a `confirm` input for the next command.
+    <div markdown="span" class="alert alert-info">:information_source:
+    **Note:** A CommandException will be thrown if the user inputs anything other than `confirm` for the next input. The `CommandBox` then returns to accepting all commands as described in the user guide.
+    </div>
+6. If the user inputs `confirm`, `LogicManager` parses the given input text using `AddressBookParser#parseCommand()` and a new `ConfirmClearCommand` is created and returned to the `LogicManager`.
+7. The `LogicManager` will then call `ConfirmClearCommand#execute(Model model)`.
+8. In the `ConfirmClearCommand`, `model.setAddressBook(new AddressBook())` is invoked, resetting the current list of students stored in TAPA to an empty list.
+9. Lastly, the `ConfirmClearCommand` will create a new `CommandResult`, which will be returned to the `LogicManager`.
 
 ### \[Proposed\] Undo/redo feature
 
