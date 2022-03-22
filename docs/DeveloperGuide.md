@@ -188,7 +188,7 @@ Step 3. The user executes `add student` command to add a student to `TAssist`. T
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `AddCommand#execute()`, instead a `CommandException` will be thrown and no entity will be added.
 </div>
 
-The following sequence diagram shows how the delete operation works:
+The following sequence diagram shows how the add operation works:
 
 ![DeleteSequenceDiagram](images/AddSequenceDiagram.png)
 
@@ -243,13 +243,13 @@ The following activity diagram summarizes what happens when a user executes a de
 
 #### Proposed Implementation
 
-The proposed enrol mechanism is facilitated by `TAssist`. Its functionality, usage and behaviour is the only for student entity. Additionally, it implements the following operations:
+The proposed enrol mechanism is facilitated by `TAssist`. Its functionality, usage and behaviour is only for student entity. Additionally, it implements the following operations:
 
 * `EnrolCommandParser#parse()` — Parses the command arguments.
 * `EnrolCommand#execute()` — Executes `ModelManager#enrolStudent()` with given student(s) and class group.
 * `ModelManager#enrolStudent()` — Enrols student(s) to a given class group.
 
-Given below is an example usage scenario for the enrolment of `Student` object to a `ClassGroup` object and how the enrol mechanism behaves at each step.
+Given below is an example usage scenario for the enrolment of a `Student` object to a `ClassGroup` object and how the enrol mechanism behaves at each step.
 
 <div markdown="span" class="alert alert-info">:information_source: **Assumption:** Valid `Student`, `Module` and `ClassGroup` objects are created beforehand.
 
