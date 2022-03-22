@@ -186,7 +186,7 @@ The `mark` command marks a specific undone task as done for a particular student
 #### Implementation
 1. Upon receiving the user input, the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
 2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
-3. Since the first word in the user input matches the word "mark", `AddressBookParser#parseCommand(arguments)` will be called. In this case, the arguments refer to the remaining input text after the exclusion of the command word "mark".
+3. Since the first word in the user input matches the word "mark", `MarkCommandParser#parse(arguments)` will be called. In this case, the arguments refer to the remaining input text after the exclusion of the command word "mark".
 4. In the `AddressBookParser#parseCommand(arguments)`, the arguments will be tokenized into a `ArgumentMultiMap`, by `using ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
     <div markdown="span" class="alert alert-info">:information_source:
     **Note:** A ParseException will be thrown if the prefix of the compulsory fields are missing or if the arguments are invalid.
