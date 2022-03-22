@@ -158,8 +158,8 @@ public class AddLogCommand extends ByIndexByNameCommand {
      */
     public static class AddLogDescriptor {
 
-        private String newTitle;
-        private String newDescription;
+        private LogName newTitle;
+        private Description newDescription;
 
         /**
          * Constructs a new {@code AddLogDescriptor} object.
@@ -170,13 +170,20 @@ public class AddLogCommand extends ByIndexByNameCommand {
         }
 
         public void setNewTitle(String newTitle) {
+            this.newTitle = new LogName(newTitle);
+        }
+
+        public void setNewTitle(LogName newTitle) {
             this.newTitle = newTitle;
         }
 
         public void setNewDescription(String newDescription) {
-            this.newDescription = newDescription;
+            this.newDescription = new Description(newDescription);
         }
 
+        public void setNewDescription(Description newDescription) {
+            this.newDescription = newDescription;
+        }
         /**
          * Returns true if title has been edited.
          */
@@ -192,7 +199,6 @@ public class AddLogCommand extends ByIndexByNameCommand {
 
             // sanity checks
             assert (this.newTitle != null);
-            assert (LogName.isValidLogName(this.newTitle));
 
             Log toAdd = new Log(this.newTitle, this.newDescription); // create log to be added
             if (personToEdit.containsLog(toAdd)) {

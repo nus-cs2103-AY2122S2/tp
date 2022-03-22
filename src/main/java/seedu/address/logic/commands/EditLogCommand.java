@@ -35,10 +35,10 @@ public class EditLogCommand extends ByIndexByNameCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits an existing log "
             + "of an existing friend in Amigos. "
             + "Parameters: "
-            + "INDEX ? " + PREFIX_NAME + "NAME ["
-            + PREFIX_LOG_INDEX + "LOG_INDEX] ["
-            + PREFIX_NEW_TITLE + "NEW_TITLE] b"
-            + " [" + PREFIX_NEW_DESCRIPTION + "NEW DESCRIPTION]\n"
+            + "INDEX ? " + PREFIX_NAME + "NAME "
+            + PREFIX_LOG_INDEX + "LOG_INDEX ["
+            + PREFIX_NEW_TITLE + "NEW_TITLE ? "
+            + PREFIX_NEW_DESCRIPTION + "NEW DESCRIPTION\n"
             + "Note that at least one of title and description must be provided.\n"
             + "Example: " + COMMAND_WORD + " "
             + "1 "
@@ -178,8 +178,16 @@ public class EditLogCommand extends ByIndexByNameCommand {
             this.newTitle = new LogName(newTitle);
         }
 
+        public void setNewTitle(LogName newTitle) {
+            this.newTitle = newTitle;
+        }
+        
         public void setNewDescription(String newDescription) {
             this.newDescription = new Description(newDescription);
+        }
+
+        public void setNewDescription(Description newDescription) {
+            this.newDescription = newDescription;
         }
 
         /**
