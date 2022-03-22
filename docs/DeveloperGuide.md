@@ -173,6 +173,28 @@ Given below is an example of how `SkillSet` interacts with the `Skill` class whe
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Team forming feature
+
+#### Implementation
+
+`MakeTeamCommand` which supports this feature is a command which is responsible for two distinct command words: `team` and `unteam`.
+With most commands implemented in **HackNet** being responsible for one and only one command word, the `MakeTeamCommand` is an exception due to the similarity between the 2 actions.
+
+![MakeTeamCommand](images/MakeTeamCommandClassDiagram.png)
+
+We have decided that it is preferable to use an enumeration to distinguish the two actions the command can perform, rather than having 2 distinct classes, due to their overlapping implementations.
+It is recommended that such a design is used for two commands with similar implementations that perform opposite actions.
+
+#### Execution
+
+Below is a sequence diagram showing the execution path for this command
+
+![MakeTeamCommand](images/MakeTeamSequenceDiagram.png)
+
+By making use of the enumeration `TeamAction`, this command decides its execution path to either add or remove someone from the list of potential teammates.
+
+Similar logic required by the command after (e.g. `model#setPerson`) regardless of the path taken will hence have a single implementation, reducing the risks of have 2 out-of-sync commands.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -291,14 +313,14 @@ Hacknet functions as an addressbook to store all relevant details of potential t
 Priorities: High (must have) - A, Medium (nice to have) - B, Low (unlikely to have) - C
 
 | Priority | As a …​                                             | I want to …​                                                          | So that I can…​                                                                       |
-| -------- | --------------------------------------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+|----------|-----------------------------------------------------|-----------------------------------------------------------------------|---------------------------------------------------------------------------------------|
 | A        | Beginner user                                       | Save contacts even after HackNet is closed                            | Access those contacts again without having to keep HackNet running the whole time     |
 | A        | User familiar with CLI                              | Make use of HackNet through the use of CLI                            | I do not have to take a long time getting used to HackNet                             |
 | A        | Beginner user                                       | Manually add a new contact                                            | I am able to have his details                                                         |
 | A        | Beginner user                                       | Delete a contact                                                      | Remove a contact from my address book                                                 |
 | A        | Beginner user                                       | I can view my added contacts                                          | So that I can see the contacts I have saved                                           |
 | B        | Expert user                                         | Sort my contacts by relevant details                                  | I can find potential teammates faster                                                 |
-| B        | Expert user                                         | create my custom teams to label teammates by                           | I can search for relevant teammates faster                                            |
+| B        | Expert user                                         | create my custom teams to label teammates by                          | I can search for relevant teammates faster                                            |
 | B        | Intermediate user                                   | Look at the github profile of a potential teammate                    | I can further scrutinize the person’s past experience/project                         |
 | B        | Intermediate user                                   | Filter out people based on certain skills i.e. proficient in java     | I can easily look for the teammate that complements my skill                          |
 | B        | Intermediate user                                   | Add people into my ‘basket’.                                          | I can simulate possible team-ups for the project                                      |
@@ -312,7 +334,7 @@ Priorities: High (must have) - A, Medium (nice to have) - B, Low (unlikely to ha
 | B        | Visual person                                       | Use different colors to differentiate my contacts by technical skills | I can classify my contacts at a glance                                                |
 | B        | Expert user                                         | Tweak settings such as shortcuts and preferences                      | I can be more productive with HackNet                                                 |
 | B        | Person with a friend also using HackNet             | Add him to my team and share contacts                                 | We can share contacts with a team                                                     |
-| B        | Intermediate user                                   | Use batch actions                                                     | Add teams to multiple people in a single action                                        |
+| B        | Intermediate user                                   | Use batch actions                                                     | Add teams to multiple people in a single action                                       |
 | B        | Intermediate user                                   | View past teammates                                                   | Keep track of who i worked with before                                                |
 | B        | Expert user                                         | Request/suggest a feature to the developer                            | Future experience with the app gets faster and more user friendly                     |
 | B        | Expert user                                         | Choose specific formats to display info in                            | Formats are more natural(date formats and name formats etc)                           |

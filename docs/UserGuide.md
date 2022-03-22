@@ -15,6 +15,7 @@ title: User Guide
     * Github Profile
     * Team
   * Filter for past teammates: filterteam
+  * Add/remove contact as potential teammate: team/unteam
   * Listing all persons: list
   * Deleting a person: delete
   * Saving the data
@@ -192,6 +193,27 @@ Format: `sort SKILL`
 Examples:
 * `sort Python` shows persons with `Python` as a skill in descending order of proficiency <br>
 
+### Add/remove potential teammates : `team/unteam`
+
+Format:
+* `team INDEX`
+* `unteam INDEX`
+  * Adds/removes the person at `INDEX`as potential teammate
+  * The index refers to the index number shown in the displayed person list
+  * The index **must be a positive integer** 1, 2, 3, …​
+  * Redundant adding/removal (e.g. adding someone who is already a potential teammate) is not allowed
+
+Examples:
+* `team 1` adds the first person as a potential teammate
+
+![result for 'team 1'](images/teamCommandResult.png)
+
+### Show all potential teammates : `show`
+
+Shows the list of all persons marked as potential teammates
+
+Format: `show`
+
 ### Clearing all entries : `clear`
 
 Clears all entries from HackNet.
@@ -243,9 +265,11 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [g/GITHUB_USERNAME] [t/Team]…​ [s/SKILLNAME_SKILLPROFICENCY]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Make Team** | `team`, `unteam` <br> e.g., `team1`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Filter** | `filter SKILL`<br> e.g. `filter c`
 **Filter Past Teammates** | `filterteam` 
 **Sort** | `sort SKILL`<br> e.g., `sort Python`
 **List** | `list`
+**Show potential teammates** | `show`
 **Help** | `help`
