@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -15,7 +16,10 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.lab.Lab;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
+import seedu.address.model.student.exceptions.DuplicateLabException;
+import seedu.address.model.student.exceptions.LabNotFoundException;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -128,5 +132,49 @@ public class ModelManagerTest {
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+    }
+
+    @Test
+    public void hasLab_nullLab_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasLab(null));
+    }
+
+    @Test
+    public void hasLab_labNotInModel_returnsFalse() {
+        assertFalse(modelManager.hasLab(new Lab("1")));
+    }
+
+    @Test
+    public void hasLab_labInModel_returnsTrue() {
+        modelManager.addLab(new Lab("1"));
+        assertTrue(modelManager.hasLab(new Lab("1")));
+    }
+
+    @Test
+    public void removeLab_nullLab_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.removeLab(null));
+    }
+
+    @Test
+    public void removeLab_labNotInModel_throwsLabNotFoundException() {
+        assertThrows(LabNotFoundException.class, () -> modelManager.removeLab(new Lab("12")));
+    }
+
+    @Test
+    public void removeLab_labInModel_throwsLabNotFoundException() {
+        modelManager.addLab(new Lab("1"));
+        assertDoesNotThrow(() -> modelManager.removeLab(new Lab("1")));
+        assertFalse(modelManager.hasLab(new Lab("1")));
+    }
+
+    @Test
+    public void addLab_nullLab_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.addLab(null));
+    }
+
+    @Test
+    public void addLab_duplicateLab_throwsDuplicateLabException() {
+        modelManager.addLab(new Lab("1"));
+        assertThrows(DuplicateLabException.class, () -> modelManager.addLab(new Lab("1")));
     }
 }

@@ -126,7 +126,7 @@ public class AddressBookTest {
     }
 
     @Test
-    public void removeLab_duplicateLab_throwsDuplicateLabException() {
+    public void addLab_duplicateLab_throwsDuplicateLabException() {
         addressBook.addLab(new Lab("1"));
         assertThrows(DuplicateLabException.class, () -> addressBook.addLab(new Lab("1")));
     }
