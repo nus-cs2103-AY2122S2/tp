@@ -36,8 +36,8 @@ public class AddPositionCommandParser implements Parser<AddPositionCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_POSITION, PREFIX_NUM_OPENINGS, PREFIX_DESCRIPTION,
                         PREFIX_REQUIREMENT);
 
-        if (!arePrefixesPresent(argMultiMap, PREFIX_POSITION, PREFIX_NUM_OPENINGS, PREFIX_DESCRIPTION,
-                PREFIX_REQUIREMENT) || !argMultiMap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultiMap, PREFIX_POSITION, PREFIX_NUM_OPENINGS, PREFIX_DESCRIPTION)
+                || !argMultiMap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPositionCommand.MESSAGE_USAGE));
         }
 

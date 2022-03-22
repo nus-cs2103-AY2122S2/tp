@@ -4,10 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NUM_OPENINGS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REQUIREMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -66,6 +70,20 @@ public class CommandTestUtil {
     public static final String GENDER_DESC_BOB = " " + PREFIX_GENDER + VALID_GENDER_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+
+    public static final String POSITION_DESC_JR_SWE = " " + PREFIX_POSITION + VALID_POSITION_NAME_JR_SWE;
+    public static final String POSITION_DESC_SR_FE_SWE = " " + PREFIX_POSITION + VALID_POSITION_NAME_SR_FE_SWE;
+    public static final String DESCRIPTION_DESC_JR_SWE = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_NAME_JR_SWE;
+    public static final String DESCRIPTION_DESC_SR_FE_SWE = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_NAME_SR_FE_SWE;
+    public static final String OPENING_DESC_JR_SWE = " " + PREFIX_NUM_OPENINGS + VALID_POSITION_OPENINGS_JR_SWE;
+    public static final String OPENING_DESC_SR_FE_SWE = " " + PREFIX_NUM_OPENINGS + VALID_POSITION_OPENINGS_SR_FE_SWE;
+    public static final String REQUIREMENT_DESC_EXPERIENCE = " " + PREFIX_REQUIREMENT + VALID_REQUIREMENT_EXPERIENCE;
+    public static final String REQUIREMENT_DESC_SKILL = " " + PREFIX_REQUIREMENT + VALID_REQUIREMENT_SKILL;
+
+    public static final String INVALID_POSITION_DESC = " " + PREFIX_POSITION + "^#$#"; // only special characters
+    public static final String INVALID_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION + "  "; // on whitespaces
+    public static final String INVALID_OPENING_DESC = " " + PREFIX_NUM_OPENINGS + "-1"; // negative integer
+    public static final String INVALID_REQUIREMENT_DESC = " " + PREFIX_REQUIREMENT + "*!@#"; // only special characters
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
