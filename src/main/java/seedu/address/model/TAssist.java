@@ -164,10 +164,14 @@ public class TAssist implements ReadOnlyTAssist {
     }
 
     /**
-     * Removes {@code key} from this {@code TAssist}.
+     * Removes {@code key} and all the class groups that tied to the {@code TaModule} from this {@code TAssist}.
      * {@code key} must exist in the TAssist.
      */
     public void removeModule(TaModule key) {
+        List<ClassGroup> lst = classGroups.findClassesOfModule(key);
+        for (ClassGroup classGroup : lst) {
+            this.removeClassGroup(classGroup);
+        }
         modules.remove(key);
     }
 
