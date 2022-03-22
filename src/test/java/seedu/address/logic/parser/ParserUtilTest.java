@@ -39,8 +39,8 @@ public class ParserUtilTest {
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
-    private static final String VALID_TAG_CCA_1 = "Track and Field";
-    private static final String VALID_TAG_CCA_2 = "Table Tennis";
+    private static final String VALID_TAG_CCA_1 = "Track";
+    private static final String VALID_TAG_CCA_2 = "Tennis";
     private static final String VALID_TAG_MODULE_1 = "CS1231S";
     private static final String VALID_TAG_MODULE_2 = "CS2100";
     private static final String VALID_TAG_INTERNSHIP_1 = "Google";

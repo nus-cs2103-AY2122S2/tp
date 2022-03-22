@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import seedu.address.model.tag.Tag;
 
@@ -18,9 +19,9 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final Address address;
 
     // Data fields
-    private final Address address;
     private final List<Tag> educations;
     private final List<Tag> internships;
     private final List<Tag> modules;
@@ -89,6 +90,25 @@ public class Person {
         return ccas;
     }
 
+    public List<String> getEducationStrings() {
+        return getEducations().stream().map(education -> education.getTagString())
+                .collect(Collectors.toList());
+    }
+
+    public List<String> getInternshipStrings() {
+        return getInternships().stream().map(internship -> internship.getTagString())
+                .collect(Collectors.toList());
+    }
+
+    public List<String> getModuleStrings() {
+        return getModules().stream().map(module -> module.getTagString())
+                .collect(Collectors.toList());
+    }
+
+    public List<String> getCcaStrings() {
+        return getCcas().stream().map(cca -> cca.getTagString())
+                .collect(Collectors.toList());
+    }
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.

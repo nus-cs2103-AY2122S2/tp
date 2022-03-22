@@ -59,26 +59,20 @@ public class PersonCardComponent extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        educations.setHgap(8);
-        educations.setVgap(8);
-        internships.setHgap(8);
-        internships.setVgap(8);
-        modules.setHgap(8);
-        modules.setVgap(8);
-        ccas.setHgap(8);
-        ccas.setVgap(8);
+
         person.getEducations().stream()
                 .sorted(Comparator.comparing(edu -> edu.tagName))
-                .forEach(edu -> educations.getChildren().add(new TagComponent(edu).getTagLabel()));
+                .forEach(edu -> educations.getChildren().add(new Label(edu.tagName)));
+
         person.getInternships().stream()
                 .sorted(Comparator.comparing(intern -> intern.tagName))
-                .forEach(intern -> internships.getChildren().add(new TagComponent(intern).getTagLabel()));
+                .forEach(intern -> internships.getChildren().add(new Label(intern.tagName)));
         person.getModules().stream()
                 .sorted(Comparator.comparing(module -> module.tagName))
-                .forEach(module -> modules.getChildren().add(new TagComponent(module).getTagLabel()));
+                .forEach(module -> modules.getChildren().add(new Label(module.tagName)));
         person.getCcas().stream()
                 .sorted(Comparator.comparing(cca -> cca.tagName))
-                .forEach(cca -> ccas.getChildren().add(new TagComponent(cca).getTagLabel()));
+                .forEach(cca -> ccas.getChildren().add(new Label(cca.tagName)));
 
     }
 

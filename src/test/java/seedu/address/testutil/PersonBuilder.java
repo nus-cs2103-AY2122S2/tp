@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.person.Address;
@@ -23,6 +24,10 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final List<Tag> DEFAULT_EDUCATION = Arrays.asList(new Education("Computer Science"));
+    public static final List<Tag> DEFAULT_INTERNSHIP = Arrays.asList(new Internship("GIC"));
+    public static final List<Tag> DEFAULT_MODULE = Arrays.asList(new Module("CS2040S"));
+    public static final List<Tag> DEFAULT_CCA = Arrays.asList(new Cca("Netball"));
 
     private Name name;
     private Phone phone;
@@ -126,8 +131,17 @@ public class PersonBuilder {
         return this;
     }
 
+    private boolean isAllTagsEmpty() {
+        return educations.isEmpty() && internships.isEmpty() && modules.isEmpty() && ccas.isEmpty();
+    }
+
+    /**
+     * Creates a Person with the appropriate fields.
+     */
     public Person build() {
-        return new Person(name, phone, email, address);
+        return isAllTagsEmpty()
+                ? new Person(name, phone, email, address)
+                : new Person(name, phone, email, address, educations, internships, modules, ccas);
     }
 
 }

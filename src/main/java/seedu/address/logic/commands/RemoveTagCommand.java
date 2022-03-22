@@ -18,14 +18,12 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
-/**
- * Tags additional information of an existing person in the address book.
- */
-public class TagCommand extends Command {
-    public static final String COMMAND_WORD = "tag";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Tags additional information to the person identified "
+public class RemoveTagCommand extends Command {
+
+    public static final String COMMAND_WORD = "removetag";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes the specified tags from the person identified "
             + "by the index number used in the last person listing. "
-            + "If there are existing tags, the new tags will be appended to them.\n"
+            + "If there are non-existing tags, the command will not work.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_EDUCATION + "[EDUCATION]... "
             + PREFIX_CCA + "[CCA]... "
@@ -33,11 +31,12 @@ public class TagCommand extends Command {
             + PREFIX_MODULE + "[MODULE]..."
             + "\nExample: " + COMMAND_WORD + " 1 "
             + PREFIX_EDUCATION + "Computer Science "
-            + PREFIX_CCA + "Bouldering "
-            + PREFIX_INTERNSHIP + "GIC "
+            + PREFIX_CCA + "Tennis "
+            + PREFIX_INTERNSHIP + "Grab "
             + PREFIX_MODULE + "CS2040S";
-    public static final String MESSAGE_ADD_TAG_SUCCESS = "Added tag to Person: %1$s";
     public static final String MESSAGE_NO_PARAMETERS = "At least 1 field must be used and not blank.";
+    public static final String MESSAGE_NO_TAG_FOUND = "Deleting a non-existent tag cannot be done. "
+            + "All specified tags must be present in %1$s";
     public static final String MESSAGE_ARGUMENTS = "Name: %1$s, Education: %2$s, Internship: %3$s, Module: %4$s, "
             + "CCA: %5$s";
 
@@ -54,7 +53,7 @@ public class TagCommand extends Command {
      * @param module of the person to be updated to
      * @param cca of the person to be updated to
      */
-    public TagCommand(Index index, List<Tag> education, List<Tag> internship, List<Tag> module, List<Tag> cca) {
+    public RemoveTagCommand(Index index, List<Tag> education, List<Tag> internship, List<Tag> module, List<Tag> cca) {
         requireAllNonNull(index, education, internship, module, cca);
 
         this.index = index;
@@ -62,6 +61,29 @@ public class TagCommand extends Command {
         this.internships = internship;
         this.modules = module;
         this.ccas = cca;
+    }
+
+    private boolean isAllEmpty() {
+        return educations.isEmpty() && internships.isEmpty() && modules.isEmpty() && ccas.isEmpty();
+    }
+
+    /**
+     * Generates a command execution success message based on whether
+     * the tag is added to or removed from
+     * {@code personToEdit}.
+     */
+    private String generateSuccessMessage(Person personToEdit) {
+        return String.format(MESSAGE_ARGUMENTS,
+                personToEdit.getName(),
+                personToEdit.getEducations(),
+                personToEdit.getInternships(),
+                personToEdit.getModules(),
+                personToEdit.getCcas());
+    }
+
+    private boolean isAllTagsPresent(Set<Tag> eduSet, Set<Tag> internSet, Set<Tag> moduleSet, Set<Tag> ccaSet) {
+        return eduSet.containsAll(educations) && internSet.containsAll(internships)
+                && moduleSet.containsAll(modules) && moduleSet.containsAll(modules) && ccaSet.containsAll(ccas);
     }
 
     @Override
@@ -82,10 +104,14 @@ public class TagCommand extends Command {
         Set<Tag> currModules = new HashSet<>(personToEdit.getModules());
         Set<Tag> currCcas = new HashSet<>(personToEdit.getCcas());
 
-        currEducations.addAll(educations);
-        currInternships.addAll(internships);
-        currModules.addAll(modules);
-        currCcas.addAll(ccas);
+        if (!isAllTagsPresent(currEducations, currInternships, currModules, currCcas)) {
+            throw new CommandException(String.format(MESSAGE_NO_TAG_FOUND, personToEdit.getName()));
+        }
+        currEducations.removeAll(educations);
+        currInternships.removeAll(internships);
+        currModules.removeAll(modules);
+        currCcas.removeAll(ccas);
+
 
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(), personToEdit.getAddress(),
@@ -95,26 +121,7 @@ public class TagCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
 
-
         return new CommandResult(generateSuccessMessage(editedPerson));
-    }
-
-    private boolean isAllEmpty() {
-        return educations.isEmpty() && internships.isEmpty() && modules.isEmpty() && ccas.isEmpty();
-    }
-
-    /**
-     * Generates a command execution success message based on whether
-     * the tag is added to or removed from
-     * {@code personToEdit}.
-     */
-    private String generateSuccessMessage(Person personToEdit) {
-        return String.format(MESSAGE_ARGUMENTS,
-                    personToEdit.getName(),
-                    personToEdit.getEducations(),
-                    personToEdit.getInternships(),
-                    personToEdit.getModules(),
-                    personToEdit.getCcas());
     }
 
     @Override
@@ -125,12 +132,12 @@ public class TagCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof TagCommand)) {
+        if (!(other instanceof RemoveTagCommand)) {
             return false;
         }
 
         // state check
-        TagCommand e = (TagCommand) other;
+        RemoveTagCommand e = (RemoveTagCommand) other;
         return index.equals(e.index) && educations.equals(e.educations) && internships.equals(e.internships)
                 && modules.equals(e.modules) && ccas.equals(e.ccas);
     }

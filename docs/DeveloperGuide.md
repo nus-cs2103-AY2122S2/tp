@@ -3,7 +3,7 @@ layout: page
 title: Developer Guide
 ---
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -224,13 +224,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
@@ -257,13 +257,13 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* university students who like to maintain a professional contact list 
+* university students who like to maintain a professional contact list
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: to facilitate a convenient way for university students to manage their professional networks with fellow acquaintances 
+**Value proposition**: to facilitate a convenient way for university students to manage their professional networks with fellow acquaintances
 
 
 ### User stories
@@ -281,11 +281,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                                      | tag additional information to an existing contact | keep a memo of such details for future references                                                |
 | `* * `   | user                                                      | find a person by name                            | locate details of persons without having to go through the entire list                           |
 | `* * `   | user                                                      | find a person by module                          | locate details of persons with identical modules, without having to go through the entire list   |
-| `* * `   | user                                                      | find a person by internship                      | locate details of persons with identical intership, without having to go through the entire list |
+| `* * `   | user                                                      | find a person by internship                      | locate details of persons with identical internship, without having to go through the entire list |
 | `* * `   | user                                                      | find a person by cca                             | locate details of persons with identical cca, without having to go through the entire list       |
 | `* * `   | user                                                      | find a person by education                       | locate details of persons with identical education, without having to go through the entire list |
 | `* *`    | user with too many irrelevant persons in the contact list | delete all my contacts                           | reset my contact list                                                                            |
-| `*`      | user that tagged a lot of information to the contacts     | remove a specific tag of a contact               | avoid going through the trouble of retagging all the inforamtion again                           |
+| `*`      | user that tagged a lot of information to the contacts     | remove a specific tag of a contact               | avoid going through the trouble of re-tagging all the information again                           |
 | `*`      | user with many persons in the contact list                | sort persons by name                             | locate a person easily                                                                           |
 
 
@@ -298,104 +298,158 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: Delete a person**
 
 **MSS**
-
+````
 1.  User requests to list persons
 2.  NUSocials shows a list of persons
 3.  User requests to delete a specific person(s) in the list
 4.  AddressBook deletes the person(s)
 
     Use case ends.
-
+````
 **Extensions**
-
-* 2a. The list is empty.
+````
+2a. The list is empty.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+3a. The given index is invalid.
 
-    * 3a1. NUSocials shows an error message.
+    - 3a1. NUSocials shows an error message.
 
       Use case resumes at step 2.
+````
 
 **Use case: Add a person**
 
 **MSS**
-
+````
 1. User adds a new person in the given command format (see User Guide) 
 2. NUSocials adds the new person to the list
 
     Use case ends.
-
+````
 **Extensions**
+````
+3a. The given add command is invalid.
 
-* 3a. The given add command is invalid.
-
-    * 3a1. NUSocials shows an error message.
+    - 3a1. NUSocials shows an error message.
 
       Use case resumes at step 1.
-
+````
 
 **Use case: Tag a person**
 
 **MSS**
-
+````
 1. User requests to list all persons
 2. NUSocials shows a list of all persons
 3. User inputs command to tag a specific person in the list
 4. NUSocials tags the person
 
    Use case ends.
-
+````
 **Extensions**
-
-* 2a. The list is empty. 
+````
+2a. The list is empty. 
 
   Use case ends
 
-* 3a. The given index is invalid.
-  * 3a1. NUSocials shows an error message.
+3a. The given index is invalid.
+  - 3a1. NUSocials shows an error message.
 
     Use case resumes at step 2.
-* 3b. The given tag command is invalid.
-  * 3b1. NUSocials shows an error message.
+    
+3b. The given tag command is invalid.
+  - 3b1. NUSocials shows an error message.
     
     Use case resumes at step 2.
-
+````
 **Use case: Edit a person**
 
 **MSS**
-
+````
 1. User requests to list all persons
 2. NUSocials shows a list of all persons
 3. Users requests to overwrite certain fields and tags of the person with updated information
 4. NUSocials tags the person
 
    Use case ends.
-
+````
 **Extensions**
-
-* 2a. The list is empty.
+````
+2a. The list is empty.
 
   Use case end
 
-* 3a. The given index is invalid.
-    * 3a1. NUSocials shows an error message.
+3a. The given index is invalid.
+    - 3a1. NUSocials shows an error message.
 
       Use case resumes at step 2.
-* 3b. The given edit command is invalid.
-    * 3b1. NUSocials shows an error message.
+3b. The given edit command is invalid.
+    - 3b1. NUSocials shows an error message.
 
       Use case resumes at step 2.
-
+````
 **Use case: Viewing all persons**
 
 **MSS**
-
+````
 1. User requests to list all persons
 2. NUSocials displays all persons in a list
 
    Use case ends.
+````
+**Use case: Finding a person**
+
+**MSS**
+````
+1. User requests to find a person using specific fields
+2. NUSocials shows a list of persons matching the fields
+    Use case ends. 
+````
+***Extensions***
+````
+1a. User indicates for an AND search using a "-s" flag
+
+      Use case resumes at step 2.
+
+3b. The given find command is invalid.
+    - 3b1. NUSocials shows an error message.
+    
+      Use case resumes at step 1.
+
+````
+
+**Use case: Removing specific tags**
+
+**MSS**
+````
+1. User requests to list all persons
+2. NUSocials shows a list of all persons
+3. User requests to remove certain tags from the person
+4. NUSocials removes the specific tags
+    
+    Use case ends. 
+````
+***Extensions***
+````
+2a. The list is empty.
+
+  Use case end
+
+3a. The given index is invalid.
+    - 3a1. NUSocials shows an error message.
+
+      Use case resumes at step 2.
+3b. The given removetag command is invalid.
+    - 3b1. NUSocials shows an error message.
+
+      Use case resumes at step 2.
+3c. The request contains non-existent tags to be removed.
+    - 3c1. NUSocials shows an error message.
+    
+      Use case resumes at step 2.
+````
 
 *{More to be added}*
 
@@ -411,7 +465,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **Mainstream OS**: Windows, macOS 
+* **Mainstream OS**: Windows, macOS
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -428,15 +482,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
@@ -445,16 +499,16 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete 0`<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
@@ -462,6 +516,6 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_

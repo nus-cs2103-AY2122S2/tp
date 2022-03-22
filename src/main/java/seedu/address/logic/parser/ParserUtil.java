@@ -247,7 +247,7 @@ public class ParserUtil {
     }
 
     /**
-    * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+    * Parses {@code Collection<String> tags} into a {@code List<Tag>}.
     */
     public static List<Tag> parseTags(Collection<String> tags, String type) throws ParseException {
         requireNonNull(tags);
@@ -271,6 +271,21 @@ public class ParserUtil {
         }
         for (String tagName : tags) {
             tagSet.add(parseTag(tagName, type));
+        }
+        return new ArrayList<>(tagSet);
+    }
+
+    /**
+     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Returns a list with all tagNames split using whitespace and trimmed.
+     */
+    public static List<Tag> parseTagsForFind(Collection<String> tags, String type) throws ParseException {
+        requireNonNull(tags);
+        final Set<Tag> tagSet = new HashSet<>();
+        for (String tagName : tags) {
+            for (String s : tagName.split(" ")) {
+                tagSet.add(parseTag(s.trim(), type));
+            }
         }
         return new ArrayList<>(tagSet);
     }
