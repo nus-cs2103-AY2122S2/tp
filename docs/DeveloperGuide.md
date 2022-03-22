@@ -297,8 +297,9 @@ object will be created, and is executed by the LogicManager.
 
 The following sequence diagram shows how the add operation works:
 
-![AddCommandSequenceDiagram](images/AddCommandSequenceDiagram.png)
+![AddCommandSequenceDiagram-1](images/AddCommandSequenceDiagram-1.png)
 
+![AddCommandSequenceDiagram-2](images/AddCommandSequenceDiagram-2.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
