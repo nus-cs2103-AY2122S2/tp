@@ -20,6 +20,8 @@ Class Email
 Class Name
 Class Phone
 Class Tag
+Class "  Name  "
+
 
 Class DisjointAppointmentList
 Class Appointment
@@ -52,6 +54,7 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
+Tag *--> "1" "  Name  "
 
 Schedule *--> "1" DisjointAppointmentList
 DisjointAppointmentList --> "~* all" Appointment
