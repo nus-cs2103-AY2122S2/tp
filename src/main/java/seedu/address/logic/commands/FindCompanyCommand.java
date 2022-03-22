@@ -30,7 +30,7 @@ public class FindCompanyCommand extends Command {
         requireNonNull(model);
         model.updateFilteredCompanyList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_COMPANIES_LISTED_OVERVIEW, model.getFilteredEventList().size()),
+                String.format(Messages.MESSAGE_COMPANIES_LISTED_OVERVIEW, model.getFilteredCompanyList().size()),
                 false, false, false, true, false);
     }
 
