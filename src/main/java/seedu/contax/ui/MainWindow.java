@@ -38,7 +38,6 @@ public class MainWindow extends UiPart<Stage> {
     private TagListPanel tagListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-    private HelpMenu helpMenu;
     private StatusBarFooter statusBarFooter;
 
     private OnboardingPrompt onboardingPrompt;
@@ -79,7 +78,6 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
-        helpMenu = new HelpMenu();
         onboardingPrompt = new OnboardingPrompt(primaryStage);
     }
 
@@ -200,7 +198,11 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleHelp() {
-        helpMenu.show();
+        if (!helpWindow.isShowing()) {
+            helpWindow.show();
+        } else {
+            helpWindow.focus();
+        }
     }
 
     /**
