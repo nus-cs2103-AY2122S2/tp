@@ -70,5 +70,5 @@ skinparam Shadowing false
 skinparam DefaultTextAlignment center
 
 hide footbox
-hide members
+' hide members
 hide circle

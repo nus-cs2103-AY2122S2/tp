@@ -41,15 +41,17 @@ TODO
 
 ![Model Class Diagram](images/ModelClassDiagram.png)
 
-The `Model` component,
+The `ModelManager` component,
 * stores the student book data i.e., all `Student` objects (which are contained in a `UniquePersonList` object).
 * stores the lesson book data i.e., all `Lesson` objects (which are contained in a `ConsistentLessonList` object).
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* stores a `UserPref` object that represents the user’s preferences.
 
-the `Model` component also,
+the `ModelManager` component also,
 * stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores the currently 'selected' `Lesson` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Lesson>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* similarly, it stores the currently 'selected' `Lesson` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Lesson>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+
+![Model Class Diagram](images/LessonModelClassDiagram.png)
+Each `Lesson` has an association with a list of `EnrolledStudents`, which contains references to each `Student` assigned to the lesson.
 
 ### Storage component
 
@@ -65,7 +67,39 @@ TODO
 
 This section describes some noteworthy details on how certain features are implemented.
 
-TODO
+### Add temporary/recurring lesson
+Adding a lesson is enabled by the `ConsistentLessonList` class, which ensures that no lessons in record clash with one another.
+
+This is achieved by enforcing ***consistency*** between existing lessons stored in the application.
+
+A lesson list is considered ***consistent*** when no lessons in the list clash with one another. In particular, the following two conditions are enforced by the `ConsistentLessonList`:
+- no two temporary lessons should have overlapping timeslots (ie: a lesson should start when another lesson has not ended)
+- no recurring lesson should have overlapping timeslots with any temporary lesson or recurring lesson that falls on the same weekday as it
+
+This is done with the method `ConsistentLessonList#hasConflictingLesson()`, which takes in a `Lesson` that is to be added to the list and returns true if any existing lessons clashes with it.
+
+Given below is an example scenario:
+
+Step 1. The user requests to add a lesson that,
+- is on 20 March 2022
+- starts at 12 pm
+- lasts for 1 hour
+
+![Add Lesson Object Diagram](images/AddLessonObjectDiagram_1.png)
+
+Step 2. The method `ConsistentLessonList#add()` is called, with the new lesson passed in as the argument. The method `ConsistentLessonList#hasConflictingLesson()` is then called, which checks if the first existing lesson clashes with this one using the method `Lesson#isConflictingWithLesson()`.
+
+![Add Lesson Object Diagram](images/AddLessonObjectDiagram_2.png)
+
+Step 3. The method then moves down the list and checks if the second existing lesson clashes with this one using the method `Lesson#isConflictingWithLesson()`.
+
+![Add Lesson Object Diagram](images/AddLessonObjectDiagram_3.png)
+
+After all the existing lessons have been verified to not clash with the new lesson, it is added to the list of lessons.
+
+![Add Lesson Object Diagram](images/AddLessonObjectDiagram_4.png)
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 

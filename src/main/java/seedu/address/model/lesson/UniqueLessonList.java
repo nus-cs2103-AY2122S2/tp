@@ -61,7 +61,6 @@ public class UniqueLessonList implements Iterable<Lesson> {
     public void add(Lesson toAdd) {
         requireNonNull(toAdd);
         if (hasConflictingLesson(toAdd)) {
-
             throw new ConflictsWithLessonException(findLessonConflictingWith(toAdd), toAdd);
         }
         internalList.add(toAdd);

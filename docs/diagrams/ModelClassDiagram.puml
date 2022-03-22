@@ -15,28 +15,26 @@ package Model <<Rectangle>> {
             Class UniqueStudentsList
             Class Student
 
-            Class Name
-            Class Address
-            Class Email
-            Class Phone
-            Class Tag
-
             StudentBook -down-> UniqueStudentsList
             UniqueStudentsList --> "all ~*" Student
 
-            Student *--> Name
-            Student *--> Phone
-            Student *--> Email
-            Student *--> Address
-            Student *--> "*" Tag
+
+            ' ---------- padding ----------
+            Class HiddenSB1 #FFFFFF
+            Class HiddenSB2 #FFFFFF
+            HiddenSB1 .down[hidden].> Student
+            HiddenSB2 .down[hidden].> Student
+            ' -----------------------------
         }
 
         package UserPrefs <<Rectangle>> {
             Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
             Class UserPrefs
 
+            ' ---------- padding ----------
             Class HiddenUserPref #FFFFFF
             HiddenUserPref -up[hidden]- UserPrefs
+            ' -----------------------------
         }
 
         ReadOnlyStudentBook -up[hidden]- UserPrefs
@@ -46,22 +44,15 @@ package Model <<Rectangle>> {
         Class "<<interface>>\nReadOnlyLessonBook" as ReadOnlyLessonBook
         Class LessonBook
         Class ConsistentLessonsList
-        Class Lesson
-
-        Class LessonName
-        Class Subject
-        Class LessonAddress
-        Class DateTimeSlot
-        Class EnrolledStudents
+        Class "{abstract}\nLesson"
+        Class TemporaryLesson
+        Class RecurringLesson
 
         LessonBook -down-> ConsistentLessonsList
-        ConsistentLessonsList --> "~* all" Lesson
+        ConsistentLessonsList --> "~* all" "{abstract}\nLesson"
 
-        Lesson *--> LessonName
-        Lesson *--> Subject
-        Lesson *--> LessonAddress
-        Lesson *--> DateTimeSlot
-        Lesson *--> EnrolledStudents
+        RecurringLesson -up-|> "{abstract}\nLesson"
+        TemporaryLesson -up-|> "{abstract}\nLesson"
     }
 }
 
@@ -77,8 +68,9 @@ ModelManager -right-> "1" StudentBook
 ModelManager -right-> "1" LessonBook
 ModelManager -left-> "1" UserPrefs
 ModelManager -right-> "~* filtered" Student
-ModelManager -right-> "filtered ~*" Lesson
+ModelManager -right-> "filtered ~*" "{abstract}\nLesson"
 
+' ---------- padding ----------
 Class HiddenOutside1 #FFFFFF
 HiddenOutside1 ..> Model
 
@@ -87,5 +79,6 @@ HiddenOutside2 .[hidden].> Student
 
 ReadOnlyLessonBook -right[Hidden]- ReadOnlyUserPrefs
 ReadOnlyStudentBook -left[Hidden]- ReadOnlyUserPrefs
+' -----------------------------
 
 @enduml
