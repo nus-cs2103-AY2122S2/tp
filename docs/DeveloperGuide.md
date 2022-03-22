@@ -181,7 +181,7 @@ The following sequence diagram shows how the manual command works:
 
 #### Description
 
-The `mark` command marks a specific undone task as done for a particular student. Since all the fields are compulsory during the execution of the `mark` command, the user's input is being parsed in `AddressBookParser`. After which, a new `MarkCommand` object will be created, and is executed by the `LogicManager`.
+The `mark` command marks a specific undone task as done for a particular student. During the execution of the `mark` command, the user's input is being parsed in `AddressBookParser`. After which, a new `MarkCommand` object will be created, and is executed by the `LogicManager`.
 
 #### Implementation
 1. Upon receiving the user input, the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
