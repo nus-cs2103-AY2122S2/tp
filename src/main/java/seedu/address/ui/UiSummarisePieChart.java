@@ -72,11 +72,15 @@ public class UiSummarisePieChart {
     private ArrayList<Double> parsePositivePercentage(String message) {
         ArrayList<Double> arrayList = new ArrayList<>();
         String[] splitMessage = message.split(" ");
-        for (int i = 0; i < splitMessage.length - 1; i++) {
-            if (splitMessage[i + 1].equals("percent")) {
-                arrayList.add(Double.parseDouble(splitMessage[i].split("\\)")[1]));
-            }
-        }
+        String validationRegex = "[0-9]*\\.[0-9]{2}$";
+
+        // filters the index where the split message with REGEX ')' has length of 2 i.e. [student(s, 100.00]
+        Stream.of(splitMessage).filter(msg -> msg.split("\\)").length == 2)
+                // filters the index where the second element is a percentage i.e. 100.00
+                .filter(msg -> msg.split("\\)")[1].trim().matches(validationRegex))
+                // adds each percentage to the array list
+                .forEach(msg -> arrayList.add(Double.parseDouble(msg.split("\\)")[1])));
+
         return arrayList;
     }
 
@@ -110,6 +114,7 @@ public class UiSummarisePieChart {
         ObservableList<PieChart.Data> pieChartData =
                 FXCollections.observableArrayList();
         PieChart pieChart = new PieChart(pieChartData);
+        pieChart.setTitle("Covid positive percentage by faculty");
         for (Map.Entry<String, Double> entry : treeMap.entrySet()) {
             pieChartData.add(new PieChart.Data(entry.getKey(), entry.getValue()));
         }
