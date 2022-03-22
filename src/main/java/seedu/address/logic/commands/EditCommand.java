@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JERSEY_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PLAYER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
@@ -12,7 +13,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 
 import java.util.Collections;
 import java.util.HashSet;
-//import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -21,7 +21,9 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-//import seedu.address.model.lineup.LineupPlayersList;
+import seedu.address.model.lineup.Lineup;
+import seedu.address.model.lineup.LineupName;
+import seedu.address.model.lineup.LineupPlayersList;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.JerseyNumber;
@@ -30,10 +32,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Weight;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.team.Team;
-import seedu.address.model.team.TeamLineupList;
-import seedu.address.model.team.TeamMemberList;
-import seedu.address.model.team.TeamName;
 
 /**
  * Edits the details of an existing person in MyGM.
@@ -45,7 +43,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: " + PREFIX_PLAYER + "PERSON_NAME "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
@@ -58,48 +56,80 @@ public class EditCommand extends Command {
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_LINEUP_SUCCESS = "Edited Lineup: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in MyGM.";
+    public static final String MESSAGE_DUPLICATE_LINEUP = "This lineup already exists in MyGM.";
 
+    private enum EDIT_COMMAND_TYPE {
+        PLAYER, LINEUP
+    }
+
+    private final EDIT_COMMAND_TYPE type;
     private final Name targetPlayerName;
     private final EditPersonDescriptor editPersonDescriptor;
+    private final LineupName targetLineupName;
+    private final LineupName editLineupName;
 
     /**
-     * @param targetPlayerName of the person in the filtered person list to edit
+     * @param targetPlayerName     of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
     public EditCommand(Name targetPlayerName, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(targetPlayerName);
         requireNonNull(editPersonDescriptor);
 
+        this.type = EDIT_COMMAND_TYPE.PLAYER;
         this.targetPlayerName = targetPlayerName;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.targetLineupName = null;
+        this.editLineupName = null;
     }
 
-    //public EditCommand(TeamName targetTeamName, EditTeamDescriptor editTeamDescriptor) {
-    //    requireNonNull(targetTeamName);
-    //    requireNonNull(editTeamDescriptor);
-    //    this.targetPlayerName = targetPlayerName;
-    //    this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
-    //}
+    public EditCommand(LineupName targetLineupName, LineupName editLineupName) {
+        requireNonNull(targetLineupName);
+        requireNonNull(editLineupName);
+
+        this.type = EDIT_COMMAND_TYPE.LINEUP;
+        this.targetPlayerName = null;
+        this.editPersonDescriptor = null;
+        this.targetLineupName = targetLineupName;
+        this.editLineupName = editLineupName;
+    }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (!model.hasPersonInMyGM(targetPlayerName)) { // check if UPL name to person have targetPerson
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-        //get the person to edit from model (currently doesn't work)
-        Person personToEdit = model.getPersonFromMyGM(targetPlayerName);
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        if (this.type == EDIT_COMMAND_TYPE.PLAYER) {
+            if (!model.hasPersonName(targetPlayerName)) { // check if UPL name to person have targetPerson
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON);
+            }
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
+            Person personToEdit = model.getPerson(targetPlayerName);
+            Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-        model.setPersonInMyGM(personToEdit, editedPerson);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+            if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+                throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            }
+
+            model.setPerson(personToEdit, editedPerson);
+            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        } else {
+            if (!model.hasLineupName(targetLineupName)) { // check if UPL name to person have targetPerson
+                throw new CommandException(Messages.MESSAGE_INVALID_LINEUP);
+            }
+
+            Lineup lineupToEdit = model.getLineup(targetLineupName);
+            Lineup editedLineup = createEditedLineup(lineupToEdit, editLineupName);
+
+            if (!targetLineupName.equals(editLineupName) && model.hasLineupName(editLineupName)) {
+                throw new CommandException(MESSAGE_DUPLICATE_LINEUP);
+            }
+
+            model.setLineup(lineupToEdit, editedLineup);
+            return new CommandResult(String.format(MESSAGE_EDIT_LINEUP_SUCCESS, editedLineup));
+        }
     }
 
     /**
@@ -117,25 +147,20 @@ public class EditCommand extends Command {
         JerseyNumber updatedJerseyNumber = editPersonDescriptor.getJerseyNumber()
                 .orElse(personToEdit.getJerseyNumber());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<LineupName> lineupNames = personToEdit.getModifiableLineupNames();
 
         return new Person(updatedName, updatedPhone, updatedEmail,
-                updatedHeight, updatedJerseyNumber, updatedTags, updatedWeight);
+                updatedHeight, updatedJerseyNumber, updatedTags, updatedWeight, lineupNames);
     }
 
-    /**
-     * Creates and returns a {@code Team} with the details of {@code teamToEdit}
-     * edited with {@code editTeamDescriptor}.
-     */
-    private static Team createEditedTeam(Team teamToEdit, EditTeamDescriptor editTeamDescriptor) {
-        assert teamToEdit != null;
+    private static Lineup createEditedLineup(Lineup lineupToEdit, LineupName editLineupName) {
+        assert lineupToEdit != null;
 
-        TeamName updatedTeamName = editTeamDescriptor.getTeamName().orElse(teamToEdit.getTeamName());
-        TeamMemberList updatedTeamMemberList =
-                editTeamDescriptor.getTeamMemberList().orElse(teamToEdit.getTeamMemberList());
-        TeamLineupList updatedTeamLineupList =
-                editTeamDescriptor.getTeamLineupList().orElse(teamToEdit.getTeamLineupList());
+        LineupName updatedName = editLineupName;
+        LineupPlayersList playersList = lineupToEdit.getPlayers();
+        playersList.replaceLineup(lineupToEdit.getLineupName(), updatedName);
 
-        return new Team(updatedTeamName, updatedTeamMemberList, updatedTeamLineupList);
+        return new Lineup(updatedName, playersList);
     }
 
     @Override
@@ -168,7 +193,8 @@ public class EditCommand extends Command {
         private Set<Tag> tags;
         private Weight weight;
 
-        public EditPersonDescriptor() {}
+        public EditPersonDescriptor() {
+        }
 
         /**
          * Copy constructor.
@@ -278,79 +304,6 @@ public class EditCommand extends Command {
                     && getJerseyNumber().equals(e.getJerseyNumber())
                     && getWeight().equals(e.getWeight())
                     && getTags().equals(e.getTags());
-        }
-    }
-
-    /**
-     * Stores the details to edit the team with. Each non-empty field value will replace the
-     * corresponding field value of the team.
-     */
-    public static class EditTeamDescriptor {
-        private TeamName teamName;
-        private TeamMemberList teamMemberList;
-        private TeamLineupList teamLineupList;
-
-        public EditTeamDescriptor() {}
-
-        /**
-         * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public EditTeamDescriptor(EditTeamDescriptor toCopy) {
-            setTeamName(toCopy.teamName);
-            setTeamMemberList(toCopy.teamMemberList);
-            setTimeLineupList(toCopy.teamLineupList);
-        }
-
-        /**
-         * Returns true if team name is edited
-         */
-        public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(teamName);
-        }
-
-        public void setTeamName(TeamName teamName) {
-            this.teamName = teamName;
-        }
-
-        public Optional<TeamName> getTeamName() {
-            return Optional.ofNullable(teamName);
-        }
-
-        public void setTeamMemberList(TeamMemberList teamMemberList) {
-            this.teamMemberList = teamMemberList;
-        }
-
-        public Optional<TeamMemberList> getTeamMemberList() {
-            return Optional.ofNullable(teamMemberList);
-        }
-
-        public void setTimeLineupList(TeamLineupList teamLineupList) {
-            this.teamLineupList = teamLineupList;
-        }
-
-        public Optional<TeamLineupList> getTeamLineupList() {
-            return Optional.ofNullable(teamLineupList);
-        }
-
-        @Override
-        public boolean equals(Object other) {
-            // short circuit if same object
-            if (other == this) {
-                return true;
-            }
-
-            // instanceof handles nulls
-            if (!(other instanceof EditTeamDescriptor)) {
-                return false;
-            }
-
-            // state check
-            EditTeamDescriptor e = (EditTeamDescriptor) other;
-
-            return getTeamName().equals(e.getTeamName())
-                    && getTeamMemberList().equals(e.getTeamMemberList())
-                    && getTeamLineupList().equals(e.getTeamLineupList());
         }
     }
 }

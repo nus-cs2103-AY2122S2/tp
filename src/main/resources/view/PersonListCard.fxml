@@ -30,6 +30,7 @@
         </Label>
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
+      <FlowPane fx:id="lineupNames" />
       <FlowPane fx:id="tags" />
       <HBox spacing = "5" alignment="CENTER_LEFT">
         <padding>

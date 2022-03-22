@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.lineup.Lineup;
+import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
@@ -78,7 +79,20 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public boolean hasPersonName(Name targetName) {
         requireNonNull(targetName);
-        return persons.containsName(targetName);
+        return this.persons.containsName(targetName);
+    }
+
+    public boolean hasLineupName(LineupName targetName) {
+        requireNonNull(targetName);
+        return this.lineups.containsLineupName(targetName);
+    }
+
+    /**
+     * Deletes the lineup from all players and lineup lists.
+     */
+    public void deleteLineup(Lineup lineup) {
+        this.lineups.deleteLineupFromList(lineup);
+        this.persons.removeAllPlayerFromLineup(lineup);
     }
 
     /**
@@ -86,6 +100,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public Person getPerson(Name targetName) {
         return persons.getPerson(targetName);
+    }
+
+    public Lineup getLineup(LineupName targetName) {
+        return lineups.getLineup(targetName);
+    }
+
+    public void addPersonToLineup(Person person, Lineup lineup) {
+        lineup.addPlayer(person);
     }
 
     /**
@@ -126,8 +148,13 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
-
         persons.setPerson(target, editedPerson);
+        lineups.replacePlayerInAllLineups(editedPerson, target);
+    }
+
+    public void setLineup(Lineup target, Lineup editedLineup) {
+        requireNonNull(editedLineup);
+        lineups.replaceLineup(target, editedLineup);
     }
 
     /**
@@ -136,6 +163,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+        lineups.deletePlayerFromALlLineups(key);
     }
 
     /**
@@ -146,16 +174,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void addLineup(Lineup lineup) {
         lineups.addLineupToList(lineup);
     }
-
-    /**
-     * Removes a Lineup from MyGM
-     *
-     * @param lineup The Lineup to be removed
-     */
-    public void removeLineup(Lineup lineup) {
-        lineups.deleteLineupFromList(lineup);
-    }
-
 
     //// util methods
 

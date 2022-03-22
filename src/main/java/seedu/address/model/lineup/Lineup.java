@@ -12,8 +12,16 @@ import seedu.address.model.person.Person;
  */
 public class Lineup {
 
+    private static final int MAXIMUM_CAPACITY = 5;
+
     private final LineupName lineupName;
     private final LineupPlayersList playersList;
+
+    public Lineup(LineupName lineupName) {
+        requireAllNonNull(lineupName);
+        this.lineupName = lineupName;
+        this.playersList = new LineupPlayersList();
+    }
 
     /**
      * lineupName must be present and not null.
@@ -22,6 +30,10 @@ public class Lineup {
         requireAllNonNull(lineupName);
         this.lineupName = lineupName;
         this.playersList = playersList;
+    }
+
+    public boolean hasPlayer(Person person) {
+        return playersList.hasPlayer(person);
     }
 
     public LineupName getLineupName() {
@@ -45,6 +57,10 @@ public class Lineup {
 
     public void removePlayer(Person player) {
         playersList.remove(player);
+    }
+
+    public boolean reachMaximumCapacity() {
+        return this.playersList.size() == MAXIMUM_CAPACITY;
     }
 
     public boolean sameLineupName(LineupName otherLineupName) {

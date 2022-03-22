@@ -5,6 +5,8 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.lineup.Lineup;
+import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
@@ -14,8 +16,6 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
-
-    MyGm getMyGm();
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -65,6 +65,29 @@ public interface Model {
      */
     boolean hasPersonName(Name targetName);
 
+    boolean hasLineupName(LineupName targetName);
+
+    /**
+     * Add a lineup to MyGM.
+     */
+    void addLineup(Lineup toAdd);
+
+    void deleteLineup(Lineup lineup);
+
+    void putPersonIntoLineup(Person player, Lineup lineup);
+
+    void setLineup(Lineup target, Lineup editedLineup);
+
+    /**
+     * Delete a player from the lineup.
+     */
+    void deletePersonFromLineup(Person player, Lineup lineup);
+
+    /**
+     * Returns true if the person is inside the lineup.
+     */
+    boolean isPersonInLineup(Person person, Lineup lineup);
+
     /**
      * Returns true if the Jersey number specified by {@code person} is already taken.
      */
@@ -84,6 +107,8 @@ public interface Model {
      * Returns the person with the given name.
      */
     Person getPerson(Name targetName);
+
+    Lineup getLineup(LineupName targetName);
 
     /**
      * Deletes the given person.
@@ -113,12 +138,4 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-    /**
-     * Functions to support MyGM stuff (to replace the addressBook stuff)
-     */
-    boolean hasPersonInMyGM(Name targetName);
-
-    void setPersonInMyGM(Person target, Person editedPerson);
-
-    Person getPersonFromMyGM(Name targetPersonName);
 }

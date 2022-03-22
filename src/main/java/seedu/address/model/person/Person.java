@@ -8,6 +8,8 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.lineup.Lineup;
+import seedu.address.model.lineup.LineupName;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -25,11 +27,12 @@ public class Person {
     private final Height height;
     private final JerseyNumber jerseyNumber;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<LineupName> lineups = new HashSet<>();
     private final Weight weight;
-    //private final List<LineupName> lineupName;
 
     /**
      * Every field must be present and not null.
+     * Constructor to create a new player without lineups.
      */
     public Person(Name name, Phone phone, Email email, Height height, JerseyNumber jerseyNumber,
                   Set<Tag> tags, Weight weight) {
@@ -42,6 +45,23 @@ public class Person {
         this.tags.addAll(tags);
         this.weight = weight;
     }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Person(Name name, Phone phone, Email email, Height height, JerseyNumber jerseyNumber,
+                  Set<Tag> tags, Weight weight, Set<LineupName> lineups) {
+        requireAllNonNull(name, phone, email, height, jerseyNumber, tags, weight, lineups);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.height = height;
+        this.jerseyNumber = jerseyNumber;
+        this.tags.addAll(tags);
+        this.weight = weight;
+        this.lineups.addAll(lineups);
+    }
+
 
     public Name getName() {
         return name;
@@ -72,7 +92,32 @@ public class Person {
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+        return Collections.unmodifiableSet(this.tags);
+    }
+
+    /**
+     * Returns an immutable lineup set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<LineupName> getLineups() {
+        return Collections.unmodifiableSet(this.lineups);
+    }
+
+    public Set<LineupName> getLineupNames() {
+        return Collections.unmodifiableSet(lineups);
+    }
+
+    public Set<LineupName> getModifiableLineupNames() {
+        return this.lineups;
+    }
+
+    public void addLineupName(Lineup lineup) {
+        this.lineups.add(lineup.getLineupName());
+    }
+
+    public void replaceLineupName(LineupName oldName, LineupName newName) {
+        this.lineups.remove(oldName);
+        this.lineups.add(newName);
     }
 
     /**
@@ -97,11 +142,23 @@ public class Person {
     }
 
     /**
+     * Returns true if the the player is in lineup.
+     */
+    public boolean isInLineup(Lineup lineup) {
+        /* for delete command */
+        return lineups.contains(lineup.getLineupName());
+    }
+
+    /**
      * Returns true if the person's jersey number is already taken.
      */
     public boolean isSameJerseyNumber(JerseyNumber jerseyNumber) {
         requireNonNull(jerseyNumber);
         return getJerseyNumber().equals(jerseyNumber);
+    }
+
+    public void removeFromLineup(Lineup lineup) {
+        this.lineups.remove(lineup.getLineupName());
     }
 
     /**
@@ -137,6 +194,7 @@ public class Person {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
+        final StringBuilder lineupBuilder = new StringBuilder();
         builder.append(getName())
                 .append("\nPhone: ")
                 .append(getPhone())
@@ -150,11 +208,16 @@ public class Person {
                 .append(getJerseyNumber());
 
         Set<Tag> tags = getTags();
+        Set<LineupName> lineups = getLineups();
+
         if (!tags.isEmpty()) {
             builder.append("\nTags: ");
             tags.forEach(builder::append);
         }
+        if (!lineups.isEmpty()) {
+            lineupBuilder.append("\nLineups: ");
+            lineups.forEach(lineupBuilder::append);
+        }
         return builder.toString();
     }
-
 }

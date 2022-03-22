@@ -11,6 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.lineup.Lineup;
+import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
@@ -20,38 +22,17 @@ import seedu.address.model.person.Person;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    /* to be deleted */
-    private final MyGm myGm;
-
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
-     */
-    public ModelManager(MyGm myGm, ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(myGm, addressBook, userPrefs);
-
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
-
-        /* to be deleted */
-        this.myGm = myGm;
-
-        this.addressBook = new AddressBook(addressBook);
-        this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-    }
-
-    /**
-     * Constructs a model manager.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
-
-        /* to be deleted */
-        this.myGm = new MyGm();
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
@@ -59,16 +40,10 @@ public class ModelManager implements Model {
     }
 
     public ModelManager() {
-        this(new MyGm(), new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
-
-    /* to be deleted */
-    @Override
-    public MyGm getMyGm() {
-        return this.myGm;
-    }
 
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
@@ -128,9 +103,42 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasLineupName(LineupName targetName) {
+        requireNonNull(targetName);
+        return addressBook.hasLineupName(targetName);
+    }
+
+    @Override
     public Person getPerson(Name targetName) {
         requireNonNull(targetName);
         return addressBook.getPerson(targetName);
+    }
+
+    @Override
+    public Lineup getLineup(LineupName targetName) {
+        requireNonNull(targetName);
+        return addressBook.getLineup(targetName);
+    }
+
+    @Override
+    public boolean isPersonInLineup(Person person, Lineup lineup) {
+        return lineup.hasPlayer(person);
+    }
+
+    @Override
+    public void deletePersonFromLineup(Person person, Lineup lineup) {
+        lineup.removePlayer(person);
+        person.removeFromLineup(lineup);
+    }
+
+    @Override
+    public void addLineup(Lineup toAdd) {
+        addressBook.addLineup(toAdd);
+    }
+
+    @Override
+    public void deleteLineup(Lineup lineup) {
+        addressBook.deleteLineup(lineup);
     }
 
     @Override
@@ -155,6 +163,7 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
@@ -167,6 +176,21 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
         addressBook.setPerson(target, editedPerson);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void setLineup(Lineup target, Lineup editedLineup) {
+        requireAllNonNull(target, editedLineup);
+        addressBook.setLineup(target, editedLineup);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void putPersonIntoLineup(Person player, Lineup lineup) {
+        player.addLineupName(lineup);
+        addressBook.addPersonToLineup(player, lineup);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -184,25 +208,6 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
-    }
-
-    /**
-     * Functions for MyGM
-     */
-    /* to be deleted */
-    @Override
-    public boolean hasPersonInMyGM(Name targetName) {
-        return true; //myGm.hasPerson(targetName);
-    }
-
-    @Override
-    public void setPersonInMyGM(Person target, Person editedPerson) {
-        myGm.setPerson(target, editedPerson);
-    }
-
-    @Override
-    public Person getPersonFromMyGM(Name targetPersonName) {
-        return myGm.getPerson(targetPersonName);
     }
 
     @Override
