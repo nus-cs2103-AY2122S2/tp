@@ -258,13 +258,13 @@ object will be created, and is executed by the LogicManager.
    by using `ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
    
     <div markdown="span" class="alert alert-info">:information_source: 
-    **Note:** A `ParseException` will be thrown if the prefix of the compulsory fields are missing.
+    **Note:** A ParseException will be thrown if the prefix of the compulsory fields are missing.
 
 5. The `AddCommandParser` will pass the studentId input (found in the `ArgumentMultimap`) 
    into `ParserUtil#parseStudentId(String studentId)`
    
    <div markdown="span" class="alert alert-info">:information_source: 
-   **Note:** A `NullException` will be thrown if the supplied string argument is null.
+   **Note:** A NullException will be thrown if the supplied string argument is null.
    
 6. In `ParserUtil#parseStudentId(String studentId)`, the supplied argument will be trimmed using `String#trim()`.
 7. `StudentId#isValidId(String studentId` will then be invoked, 
