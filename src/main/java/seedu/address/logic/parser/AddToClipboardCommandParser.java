@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import seedu.address.logic.commands.AddToClipboardCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.NameExistsPredicate;
+import seedu.address.model.person.predicates.NameExistsPredicate;
 
 /**
  * Parses input arguments and creates a new {@code AddToClipboardCommand} object

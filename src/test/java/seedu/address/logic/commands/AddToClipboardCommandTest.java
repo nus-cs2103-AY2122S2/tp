@@ -18,7 +18,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.NameExistsPredicate;
+import seedu.address.model.person.predicates.NameExistsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddToClipboardCommand}.
