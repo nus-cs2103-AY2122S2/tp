@@ -69,6 +69,10 @@ public class FilterCommand extends Command {
      * Stores the filters requested by the user.
      */
     public static class FilterDescriptor {
+        private static final int FACULTY_INDEX = 0;
+        private static final int COVID_STATUS_INDEX = 1;
+        private static final int BLOCK_INDEX = 2;
+
         private Faculty faculty;
         private CovidStatus status;
         private Block block;
@@ -79,10 +83,6 @@ public class FilterCommand extends Command {
         private Predicate<Person> facultyFilter = person -> person.isFaculty(faculty);
         private Predicate<Person> covidStatusFilter = person -> person.isStatus(status);
         private Predicate<Person> blockFilter = person -> person.isBlock(block);
-
-        private static final int FACULTY_INDEX = 0;
-        private static final int COVID_STATUS_INDEX = 1;
-        private static final int BLOCK_INDEX = 2;
 
         /**
          * Constructor to create a FilterDescriptor object.
