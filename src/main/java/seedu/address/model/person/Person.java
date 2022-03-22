@@ -3,10 +3,13 @@ package seedu.address.model.person;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
+import seedu.address.model.event.Event;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -26,6 +29,7 @@ public class Person {
     private final List<Tag> internships;
     private final List<Tag> modules;
     private final List<Tag> ccas;
+    private final List<Event> events;
 
     /**
      * Every field must be present and not null.
@@ -40,6 +44,7 @@ public class Person {
         this.internships = new ArrayList<>();
         this.modules = new ArrayList<>();
         this.ccas = new ArrayList<>();
+        this.events = new ArrayList<>();
     }
 
     /**
@@ -56,6 +61,25 @@ public class Person {
         this.internships = internships;
         this.modules = modules;
         this.ccas = ccas;
+        this.events = new ArrayList<>();
+    }
+
+    /**
+     * Third constructor for Person.
+     */
+    public Person(Person person, Event event) {
+        requireAllNonNull(person, event);
+        Set<Event> temp = new HashSet<>(person.getEvents());
+        temp.add(event);
+        this.name = person.name;
+        this.phone = person.phone;
+        this.email = person.email;
+        this.address = person.address;
+        this.educations = person.educations;
+        this.internships = person.internships;
+        this.modules = person.modules;
+        this.ccas = person.ccas;
+        this.events = new ArrayList<>(temp);
     }
 
     public Name getName() {
@@ -88,6 +112,14 @@ public class Person {
 
     public List<Tag> getCcas() {
         return ccas;
+    }
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public Person addEvent(Event event) {
+        return new Person(this, event);
     }
 
     public List<String> getEducationStrings() {
@@ -144,13 +176,14 @@ public class Person {
                 && otherPerson.getEducations().equals(getEducations())
                 && otherPerson.getInternships().equals(getInternships())
                 && otherPerson.getModules().equals(getModules())
-                && otherPerson.getCcas().equals(getCcas());
+                && otherPerson.getCcas().equals(getCcas())
+                && otherPerson.getEvents().equals(getEvents());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, educations, internships, modules, ccas);
+        return Objects.hash(name, phone, email, address, educations, internships, modules, ccas, events);
     }
 
     @Override

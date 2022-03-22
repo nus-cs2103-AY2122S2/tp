@@ -11,6 +11,9 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.event.DateTime;
+import seedu.address.model.event.EventName;
+import seedu.address.model.event.Information;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Cca;
 import seedu.address.model.person.Education;
@@ -287,5 +290,45 @@ public class ParserUtil {
             }
         }
         return new ArrayList<>(tagSet);
+    }
+
+    public static EventName parseEventName(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!EventName.isValidEventName(trimmedName)) {
+            throw new ParseException(EventName.MESSAGE_CONSTRAINTS);
+        }
+        return new EventName(trimmedName);
+    }
+
+    public static Information parseInfo(String info) throws ParseException {
+        requireNonNull(info);
+        String trimmedInfo = info.trim();
+        if (!Information.isValidInformation(trimmedInfo)) {
+            throw new ParseException(Information.MESSAGE_CONSTRAINTS);
+        }
+        return new Information(trimmedInfo);
+    }
+
+    public static DateTime parseDateTime(String date, String time) throws ParseException {
+        requireNonNull(date);
+        requireNonNull(time);
+        String trimmedDate = date.trim();
+        String trimmedTime = time.trim();
+
+        if (!DateTime.isValidTime(trimmedTime)) {
+            throw new ParseException(DateTime.TIME_MESSAGE_CONSTRAINTS);
+        } else if (!DateTime.isValidDate(trimmedDate)) {
+            throw new ParseException(DateTime.DATE_MESSAGE_CONSTRAINTS);
+        }
+
+        String[] tempDate = trimmedDate.split("-");
+        String[] tempTime = trimmedTime.split(":");
+
+        return new DateTime(Integer.parseInt(tempDate[0]),
+                Integer.parseInt(tempDate[1]),
+                Integer.parseInt(tempDate[2]),
+                Integer.parseInt(tempTime[0]),
+                Integer.parseInt(tempTime[1]));
     }
 }
