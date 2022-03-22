@@ -109,6 +109,9 @@ public class UniqueClassGroupList implements Iterable<ClassGroup> {
         return internalUnmodifiableList;
     }
 
+    /**
+     * Returns all the class groups of a TA module
+     */
     public List<ClassGroup> findClassesOfModule(TaModule taModule) {
         List<ClassGroup> lst = new ArrayList<>();
         for (ClassGroup classGroup : internalList) {
