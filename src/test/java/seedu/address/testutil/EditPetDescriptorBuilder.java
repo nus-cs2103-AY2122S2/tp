@@ -87,22 +87,6 @@ public class EditPetDescriptorBuilder {
         return this;
     }
 
-    /**
-     * Sets the {@code Diet} of the {@code EditPetDescriptor} that we are building.
-     */
-    public EditPetDescriptorBuilder withDiet(String diet) {
-        descriptor.setDiet(new Diet(diet));
-        return this;
-    }
-
-    /**
-     * Sets the {@code Appointment} of the {@code EditPetDescriptor} that we are building.
-     */
-    public EditPetDescriptorBuilder withAppointment(String appointment) {
-        descriptor.setAppointment(new Appointment(appointment));
-        return this;
-    }
-
     public EditCommand.EditPetDescriptor build() {
         return descriptor;
     }
