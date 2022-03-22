@@ -29,7 +29,6 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
     private final Set<LineupName> lineups = new HashSet<>();
     private final Weight weight;
-    private final Set<LineupName> lineupNames = new HashSet<>();
 
     /**
      * Every field must be present and not null.
@@ -105,20 +104,20 @@ public class Person {
     }
 
     public Set<LineupName> getLineupNames() {
-        return Collections.unmodifiableSet(lineupNames);
+        return Collections.unmodifiableSet(lineups);
     }
 
     public Set<LineupName> getModifiableLineupNames() {
-        return this.lineupNames;
+        return this.lineups;
     }
 
     public void addLineupName(Lineup lineup) {
-        this.lineupNames.add(lineup.getLineupName());
+        this.lineups.add(lineup.getLineupName());
     }
 
     public void replaceLineupName(LineupName oldName, LineupName newName) {
-        this.lineupNames.remove(oldName);
-        this.lineupNames.add(newName);
+        this.lineups.remove(oldName);
+        this.lineups.add(newName);
     }
 
     /**
@@ -147,7 +146,7 @@ public class Person {
      */
     public boolean isInLineup(Lineup lineup) {
         /* for delete command */
-        return lineupNames.contains(lineup.getLineupName());
+        return lineups.contains(lineup.getLineupName());
     }
 
     /**
@@ -159,7 +158,7 @@ public class Person {
     }
 
     public void removeFromLineup(Lineup lineup) {
-        this.lineupNames.remove(lineup.getLineupName());
+        this.lineups.remove(lineup.getLineupName());
     }
 
     /**
