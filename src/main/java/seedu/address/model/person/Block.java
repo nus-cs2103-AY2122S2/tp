@@ -39,8 +39,9 @@ public class Block {
 
     /**
      * Returns true if a given string is a valid block.
-     * @param test
-     * @return true if a given string is valid, false otherwise.
+     *
+     * @param test string to be tested to determine if valid block.
+     * @return Boolean result where it is true if a given string is a valid block, false otherwise.
      */
     public static boolean isValidBlock(String test) {
         return Stream.of(HallBlock.values())

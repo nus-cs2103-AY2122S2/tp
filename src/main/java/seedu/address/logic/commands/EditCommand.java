@@ -250,7 +250,7 @@ public class EditCommand extends Command {
 
         /**
          * Set the covid status of a student
-         * @param covidStatus is the covid status of a student in POSITIVE, NEGATIVE, HRW, HRN
+         * @param covidStatus is the covid status of a student in POSITIVE, NEGATIVE, HRN
          */
         public void setCovidStatus(CovidStatus covidStatus) {
             this.covidStatus = covidStatus;

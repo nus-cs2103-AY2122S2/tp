@@ -91,7 +91,8 @@ Possible tags:
 | `a/` | Address | - |
 | `f/` | Faculty |  `FASS` `BIZ` `SOC` `SCALE` `FOD` `CDE` `DUKE` `FOL` `YLLSOM` `YSTCOM` `SOPP` `LKYSPP` `SPH` `TEST` `FOS` |
 | `mc/` | Matriculation Number | - | 
-| `cs`/ | Covid Status | `Positive` `Negative` `HRW` `HRN` |
+| `cs`/ | Covid Status | Positive, Negative, HRN |
+
 
 ### Deleting a contact: `delete`
 Delete a contact at a specific index
@@ -134,7 +135,7 @@ to show everyone in the address book while providing a valid response by the app
 Format:`summarise`
 
 Example of usage:
-*  `summarise` summarises the contacts of everyone in the Tracey application such that she responses with how many Covid positive students in faculty A, how many on HRN, HRW and negative.
+*  `summarise` summarises the contacts of everyone in the Tracey application such that she responses with how many Covid positive students in faculty A, how many on HRN and negative.
 
 Future Enhancements:
 *  For future versions, summarise command can display a visual pie chart for different faculties to visualise the percentage of Covid positive students.

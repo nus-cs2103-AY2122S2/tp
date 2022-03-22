@@ -18,7 +18,7 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "number" : "A1234567X",
-    "status" : "HRW",
+    "status" : "HRN",
     "tagged" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
@@ -48,7 +48,7 @@
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "number" : "A4345678N",
-    "status" : "HRW",
+    "status" : "HRN",
     "tagged" : [ ]
   }, {
     "name" : "Fiona Kunz",

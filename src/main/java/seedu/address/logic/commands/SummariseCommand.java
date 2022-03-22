@@ -58,7 +58,8 @@ public class SummariseCommand extends Command {
         if (answer.isEmpty()) {
             return new CommandResult(MESSAGE_SUMMARISE_PERSON_FAILURE);
         } else {
-            return new CommandResult(MESSAGE_SUMMARISE_PERSON_SUCCESS + answer);
+            return new CommandResult(MESSAGE_SUMMARISE_PERSON_SUCCESS + answer,
+                    false, false, true);
         }
     }
 
@@ -138,6 +139,7 @@ public class SummariseCommand extends Command {
                 numberOfNegative, numberOfHrn, percentagePositive);
     }
 
+    
 }
 
 

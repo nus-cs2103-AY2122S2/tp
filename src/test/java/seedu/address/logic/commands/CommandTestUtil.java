@@ -45,7 +45,7 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_MATRICULATION_NUMBER_AMY = "A1234567A";
     public static final String VALID_MATRICULATION_NUMBER_BOB = "A2180000A";
-    public static final String VALID_COVID_STATUS_AMY = "HRW";
+    public static final String VALID_COVID_STATUS_AMY = "HRN";
     public static final String VALID_COVID_STATUS_BOB = "POSITIVE";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";

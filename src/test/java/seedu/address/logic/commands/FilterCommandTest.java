@@ -30,14 +30,12 @@ public class FilterCommandTest {
 
     private CovidStatus positive = new CovidStatus("positive");
     private CovidStatus negative = new CovidStatus("negative");
-    private CovidStatus hrw = new CovidStatus("hrw");
     private CovidStatus hrn = new CovidStatus("hrn");
 
     @Test
     public void isStatus_correctOutput() {
         // correctly matches CovidStatus input -> returns true
         assertTrue(CARL.isStatus(hrn));
-        assertTrue(ELLE.isStatus(hrw));
         assertTrue(FIONA.isStatus(negative));
         assertTrue(GEORGE.isStatus(positive));
 
@@ -50,7 +48,7 @@ public class FilterCommandTest {
     public void equals() {
 
         FilterCommand filterFirstCommand = new FilterCommand("positive");
-        FilterCommand filterSecondCommand = new FilterCommand("hrw");
+        FilterCommand filterSecondCommand = new FilterCommand("negative");
 
         // same object -> returns true
         assertTrue(filterFirstCommand.equals(filterFirstCommand));
