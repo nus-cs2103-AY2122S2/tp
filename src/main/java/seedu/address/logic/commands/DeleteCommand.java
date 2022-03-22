@@ -9,7 +9,6 @@ import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
-import javax.sound.sampled.Line;
 
 /**
  * Represents a delete command which deletes an entity from MyGM.
@@ -68,6 +67,13 @@ public class DeleteCommand extends Command {
         this.lineup = lineup;
     }
 
+    /**
+     * Executes the DeleteCommand and returns the result message.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return feedback message of the operation result for display
+     * @throws CommandException If an error occurs during command execution.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -96,7 +102,8 @@ public class DeleteCommand extends Command {
             }
 
             model.deletePersonFromLineup(person, lineup);
-            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_FROM_LINEUP_SUCCESS, this.lineup, this.player));
+            return new CommandResult(String
+                    .format(MESSAGE_DELETE_PERSON_FROM_LINEUP_SUCCESS, this.lineup, this.player));
             // to be added
         case LINEUP:
             if (!model.hasLineupName(this.lineup)) {

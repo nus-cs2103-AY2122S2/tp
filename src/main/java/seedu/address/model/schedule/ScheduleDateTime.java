@@ -6,6 +6,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents the date and time of a schedule
+ */
 public class ScheduleDateTime {
     public static final String MESSAGE_CONSTRAINTS =
             "Please check the format of schedule date and time, and it should not be blank";

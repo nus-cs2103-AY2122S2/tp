@@ -102,11 +102,17 @@ public class UniquePersonList implements Iterable<Person> {
                 .collect(Collectors.toList()).get(0);
     }
 
+    /**
+     * Removes all player in the target lineup
+     *
+     * @param lineup The lineup to be cleared
+     */
     public void removeAllPlayerFromLineup(Lineup lineup) {
         requireNonNull(lineup);
         for (Person person : this.internalList) {
             if (person.isInLineup(lineup)) {
                 person.removeFromLineup(lineup);
+                System.out.printf("%s has been removed from lineup %s\n", person.getName(), lineup.getLineupName());
             }
         }
     }

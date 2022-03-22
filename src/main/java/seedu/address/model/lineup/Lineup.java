@@ -7,7 +7,7 @@ import java.util.Objects;
 import seedu.address.model.person.Person;
 
 /**
- * Represents a lineup in a team.
+ * Represents a lineup in MyGM.
  * Guarantees: lineupName is present and not null, up to 5 players per lineup.
  */
 public class Lineup {
@@ -17,6 +17,11 @@ public class Lineup {
     private final LineupName lineupName;
     private final LineupPlayersList playersList;
 
+    /**
+     * Constructs a {@code LIneup}
+     *
+     * @param lineupName The name of the lineup
+     */
     public Lineup(LineupName lineupName) {
         requireAllNonNull(lineupName);
         this.lineupName = lineupName;

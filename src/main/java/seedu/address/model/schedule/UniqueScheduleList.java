@@ -11,13 +11,16 @@ import javafx.collections.ObservableList;
 import seedu.address.model.schedule.exceptions.DuplicateScheduleException;
 import seedu.address.model.schedule.exceptions.ScheduleNotFoundException;
 
+/**
+ * Represents a list of unique schedules
+ */
 public class UniqueScheduleList implements Iterable<Schedule> {
     private final ObservableList<Schedule> internalList = FXCollections.observableArrayList();
     private final ObservableList<Schedule> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent schedule as the given argument.
      */
     public boolean contains(Schedule toCheck) {
         requireNonNull(toCheck);
@@ -25,8 +28,8 @@ public class UniqueScheduleList implements Iterable<Schedule> {
     }
 
     /**
-     * Adds a person to the list.
-     * The person must not already exist in the list.
+     * Adds a schedule to the list.
+     * The schedule must not already exist in the list.
      */
     public void add(Schedule toAdd) {
         requireNonNull(toAdd);
@@ -34,9 +37,9 @@ public class UniqueScheduleList implements Iterable<Schedule> {
     }
 
     /**
-     * Replaces the person {@code target} in the list with {@code editedPerson}.
+     * Replaces the schedule {@code target} in the list with {@code editedSchedule}.
      * {@code target} must exist in the list.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
+     * The schedule identity of {@code editedSchedule} must not be the same as another existing schedule in the list.
      */
     public void setSchedule(Schedule target, Schedule editedSchedule) {
         requireAllNonNull(target, editedSchedule);
@@ -50,8 +53,8 @@ public class UniqueScheduleList implements Iterable<Schedule> {
     }
 
     /**
-     * Removes the equivalent person from the list.
-     * The person must exist in the list.
+     * Removes the equivalent schedule from the list.
+     * The schedule must exist in the list.
      */
     public void remove(Schedule toRemove) {
         requireNonNull(toRemove);
@@ -60,6 +63,9 @@ public class UniqueScheduleList implements Iterable<Schedule> {
         }
     }
 
+    /**
+     * Sets the internalList with a new replacement list
+     */
     public void setSchedules(UniqueScheduleList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);

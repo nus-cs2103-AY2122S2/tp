@@ -3,6 +3,9 @@ package seedu.address.model.schedule;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents the name of a schedule
+ */
 public class ScheduleName {
     public static final String MESSAGE_CONSTRAINTS =
             "Schedule Descriptions should only contain alphanumeric characters and spaces, and it should not be blank";
