@@ -378,13 +378,58 @@ How the batch update works:
   * All students `Status` in the filtered `List` will be switched from `Negative` -> `Close-Contact`.
 * Conversely, when a student's `Status` changes from `Positive` -> `Negative`, `execute()` will check the current student being edited that there are no `Positive` statuses in `ClassCode`.
   * If true, all students `Status` in the filtered `List`will be switched to `Negative`.
-
-
-
-
+  
 ### \[Proposed Enhancement\] Implementing CSV compatibility
+The purpose of the CSV compatibility ehancement is to enable administrators to quickly import students' information
+from a central data bank. Fields that are required includes `Name`, `Address`, `ClassCode` and other attributes
+that can be found in the `Person` Class.
 
-#### Proposed Enhancements
+The proposed CSV support mechanism is facilitated by `AddressBook`. It performs read/write on a target Excel file,
+stored internally as an `addressBookContactList`. Additionally, it supports the following operations:
+
+* `AddressBook#readCSV()` — Reads the target Excel file and streams the information into a `Person` list.
+* `VersionedAddressBook#writeCSV()` — Writes `Person` information to a target Excel file.
+
+These operations are exposed in the `Model` interface as `Model#readCSV()` and `Model#writeCSV()` respectively.
+
+#### Design considerations:
+
+**Aspect: How reading of CSV executes:**
+
+* **Alternative 1 (current choice):** Automatically attempt to read from a target CSV file.
+    * Pros: Automated process of importing contacts.
+    * Cons: May have performance issues due to constant execution read operation.
+
+* **Alternative 2:** Individual command to execute read by
+  itself.
+    * Pros: Will use less memory (e.g. create another UI component to a user to input the CSV file).
+    * Cons: More components to implement (e.g. an Upload file component on JavaFX).
+
+_{more aspects and alternatives to be added}_
+
+Given below is an example usage scenario and how read mechanism behaves at each step.
+
+1. The user launches the application for the first time. The Addressbook will be initialized with the initial
+address book state, and the `addressBookContactList` initialized as an empty list.
+2. The AddressBook then attempts to execute `Model#readCSV()`, reading the target CSV file that the administrator
+has _uploaded into the same directory_ as the file.
+3. The User Interface will prompt the administrator that the information from the CSV file is being processed and it
+will require time to complete the import process.
+4. `addressBookContactList` is populated by `Model#readCSV()` and changes the state of the User Interface.
+5. Administrator can interact with the Addressbook, with all the relevant contacts being updated on the list.
+
+Given below is an example usage scenario and how write mechanism behaves at each step.
+_To be Continued_
+
+#### Limitations:
+
+* Data accepted is scoped to the `Person` model. Other information deemed important
+will be omitted from the read process.
+* File size will affect the performance of the application.
+
+#### Proposed Enhancement:
+
+
 
 ### \[Testing\] JUnit tests
 
