@@ -30,7 +30,29 @@ TODO
 
 ### UI component
 
-TODO
+
+<img src="images/UiPhotos/BottomHalf.png" height="300" />
+
+The bottom half of the `UI` component is split into two parts using a `SplitPane` component from 
+the JavaFX UI framework. The left pane contains a `TabPane` to two `ListPanel` components while the right pane contains
+an `InfoPanel` component.
+
+![img.png](images/UiPhotos/ListPanelClassDiagram.png)
+
+The `ListPanel` component lists out either `Lesson` entries or `Student` entries based on which type is used.
+The `Lessons` tab contains a `LessonListPanel` which lists out `Lesson` entries while the `Students` tab contains
+a `StudentListPanel` which lists out `Student` entries.
+
+To switch between the tabs, the methods `toggleLessonTab()` and `toggleStudentTab()` can be used to switch between
+the `Lesson` tab and `Student` tab respectively. Switching the tabs by using user commands is done by the
+method `toggleTab()` found in `MainWindow`.
+
+![img.png](images/UiPhotos/InfoPanelClassDiagram.png)
+
+The `InfoPanel` component shows the details of a `Lesson` entry or `Student` entry based on which is selected.
+The methods `populateInfoPanelWithLesson()` and `populateInfoPanelWithStudent()` found in `MainWindow` can be used to
+populate the `InfoPanel` with the provided entry. Populating the `InfoPanel` using user commands is handled by the 
+method `handleInfoPanelUpdate()` in `MainWindow`.
 
 ### Logic component
 

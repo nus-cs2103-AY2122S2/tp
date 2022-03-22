@@ -48,8 +48,8 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private ListPanel lessonListPanel;
-    private ListPanel personListPanel;
+    private LessonListPanel lessonListPanel;
+    private StudentListPanel studentListPanel;
     //    private LessonListPanel lessonListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -304,8 +304,8 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void populateListPanelWithStudents(ObservableList<Student> list) {
-        personListPanel = new StudentListPanel(list);
-        populatePersonListPanel(personListPanel);
+        studentListPanel = new StudentListPanel(list);
+        populatePersonListPanel(studentListPanel);
     }
 
     private void populatePersonListPanel(ListPanel newListPanel) {
