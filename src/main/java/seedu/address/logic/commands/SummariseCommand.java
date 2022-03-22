@@ -38,6 +38,8 @@ public class SummariseCommand extends Command {
             + "Covid Negative: %d student(s)\n"
             + "Health Risk Notice: %d student(s)\n"
             + "%.2f percent of student(s) here are suffering...\n";
+    private static final String HALL_SUMMARY_FORM = "\nIn this hall, %d of %d student(s) are covid positive.\n"
+            + "The breakdowns by Block level and Faculty level are given below:\n";
 
     private static final List<String> FACULTIES = Faculty.getFacultyEnumAsList();
     private static final List<String> BLOCKS = Block.getBlockEnumAsList();
@@ -52,8 +54,7 @@ public class SummariseCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         List<Person> lastShownList = model.getFilteredPersonList();
-        String answer = filterByBlock(lastShownList);
-        answer += filterByFaculty(lastShownList);
+        String answer = summariseAll(lastShownList) + filterByBlock(lastShownList) + filterByFaculty(lastShownList);
 
         if (answer.isEmpty()) {
             return new CommandResult(MESSAGE_SUMMARISE_PERSON_FAILURE);
@@ -139,7 +140,21 @@ public class SummariseCommand extends Command {
                 numberOfNegative, numberOfHrn, percentagePositive);
     }
 
-    
+    /**
+     * Filter entire list to provide overview of covid situation in the hall.
+     *
+     * @param list the unfiltered entire list in the database
+     * @return The summarised overview for all students
+     */
+    public String summariseAll(List<Person> list) {
+        StringBuilder ans = new StringBuilder();
+        int numberOfStudents = list.size();
+
+        List<Person> students = list.stream().filter(BY_POSITIVE).collect(Collectors.toList());
+        int numberOfPositive = students.size();
+
+        return String.format(HALL_SUMMARY_FORM, numberOfPositive, numberOfStudents);
+    }
 }
 
 
