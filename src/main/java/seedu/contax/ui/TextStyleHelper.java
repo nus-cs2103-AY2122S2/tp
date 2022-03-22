@@ -58,9 +58,12 @@ public class TextStyleHelper {
                     bold = isLookaheadOneStar && !isLookaheadTwoStar;
                     boldAndItalic = isLookaheadOneStar && isLookaheadTwoStar;
 
-                    int lookaheadCount = (bold ? 1 : 0) + (boldAndItalic ? 2 : 0);
-                    i += lookaheadCount;
-                    start = i + lookaheadCount;
+                    if (bold) {
+                        i += 1;
+                    } else if (boldAndItalic) {
+                        i += 2;
+                    }
+                    start = i + 1;
                 }
             } else if (text.charAt(i) == '`') {
                 if (monospaced) {
