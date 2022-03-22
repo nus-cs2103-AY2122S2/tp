@@ -9,25 +9,18 @@ import seedu.ibook.model.product.Product;
 import seedu.ibook.model.product.UniqueProductList;
 
 /**
- * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSameProduct comparison)
+ * Wraps all data at the iBook level.
+ * Duplicates are not allowed. (by .isSameProduct comparison)
  */
 public class IBook implements ReadOnlyIBook {
-
     private final UniqueProductList products;
 
-    /*
-     * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
-     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
-     *
-     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
-     *   among constructors.
+    /**
+     * Default class constructor.
      */
-    {
+    public IBook() {
         products = new UniqueProductList();
     }
-
-    public IBook() {}
 
     /**
      * Creates an IBook using the Products in the {@code toBeCopied}
@@ -67,8 +60,8 @@ public class IBook implements ReadOnlyIBook {
     }
 
     /**
-     * Adds a product to the ibook.
-     * The product must not already exist in the ibook.
+     * Adds a product to the iBook.
+     * The product must not already exist in the iBook.
      */
     public void addProduct(Product p) {
         products.add(p);
@@ -76,18 +69,17 @@ public class IBook implements ReadOnlyIBook {
 
     /**
      * Replaces the given product {@code target} in the list with {@code editedProduct}.
-     * {@code target} must exist in the ibook.
-     * The product identity of {@code editedProduct} must not be the same as another existing product in the book.
+     * {@code target} must exist in the iBook.
+     * The product identity of {@code updatedProduct} must not be the same as another existing product in the book.
      */
-    public void setProduct(Product target, Product editedProduct) {
-        requireNonNull(editedProduct);
-
-        products.setProduct(target, editedProduct);
+    public void setProduct(Product target, Product updatedProduct) {
+        requireNonNull(updatedProduct);
+        products.setProduct(target, updatedProduct);
     }
 
     /**
      * Removes {@code key} from this {@code IBook}.
-     * {@code key} must exist in the ibook.
+     * {@code key} must exist in the iBook.
      */
     public void removeProduct(Product key) {
         products.remove(key);
