@@ -80,9 +80,9 @@ public class FilterCommand extends Command {
         private Predicate<Person> covidStatusFilter = person -> person.isStatus(status);
         private Predicate<Person> blockFilter = person -> person.isBlock(block);
 
-        private int facultyIndex = 0;
-        private int covidStatusIndex = 1;
-        private int blockIndex = 2;
+        private static final int FACULTY_INDEX = 0;
+        private static final int COVID_STATUS_INDEX = 1;
+        private static final int BLOCK_INDEX = 2;
 
         /**
          * Constructor to create a FilterDescriptor object.
@@ -94,22 +94,22 @@ public class FilterCommand extends Command {
         }
 
         public Predicate<Person> getFilters() {
-            return filters.get(facultyIndex).and(filters.get(covidStatusIndex)).and(filters.get(blockIndex));
+            return filters.get(FACULTY_INDEX).and(filters.get(COVID_STATUS_INDEX)).and(filters.get(BLOCK_INDEX));
         }
 
         public void setFaculty(Faculty faculty) {
             this.faculty = faculty;
-            filters.set(facultyIndex, facultyFilter);
+            filters.set(FACULTY_INDEX, facultyFilter);
         }
 
         public void setCovidStatus(CovidStatus status) {
             this.status = status;
-            filters.set(covidStatusIndex, covidStatusFilter);
+            filters.set(COVID_STATUS_INDEX, covidStatusFilter);
         }
 
         public void setBlock(Block block) {
             this.block = block;
-            filters.set(blockIndex, blockFilter);
+            filters.set(BLOCK_INDEX, blockFilter);
         }
 
         @Override
