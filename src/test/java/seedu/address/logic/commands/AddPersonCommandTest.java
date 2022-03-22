@@ -23,6 +23,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.entry.Company;
 import seedu.address.model.entry.Entry;
 import seedu.address.model.entry.Event;
+import seedu.address.model.entry.Name;
 import seedu.address.model.entry.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -151,6 +152,11 @@ public class AddPersonCommandTest {
         public boolean hasEvent(Event event) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean hasCompany(Name companyName) {
+            return true;
+        }; // Leave it this way for now
 
         @Override
         public boolean hasCompany(Company company) {

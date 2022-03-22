@@ -8,6 +8,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.entry.Company;
 import seedu.address.model.entry.Entry;
 import seedu.address.model.entry.Event;
+import seedu.address.model.entry.Name;
 import seedu.address.model.entry.Person;
 
 /**
@@ -95,6 +96,11 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Returns true if a company with the {@code companyName} exists in the address book.
+     */
+    boolean hasCompany(Name companyName);
 
     /**
      * Returns true if a company with the same identity as {@code company} exists in the address book.

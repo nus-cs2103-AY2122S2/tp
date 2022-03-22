@@ -14,6 +14,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.entry.Company;
 import seedu.address.model.entry.Entry;
 import seedu.address.model.entry.Event;
+import seedu.address.model.entry.Name;
 import seedu.address.model.entry.Person;
 
 /**
@@ -44,6 +45,10 @@ public class ModelManager implements Model {
         filteredEvents = new FilteredList<>(this.addressBook.getEventList());
 
         currentlyDisplayedListType = ListType.PERSON;
+
+        // Don't allow deleting/finding/editing on the companies or events list at the beginning
+        filteredCompanies.setPredicate(PREDICATE_SHOW_NO_COMPANIES);
+        filteredEvents.setPredicate(PREDICATE_SHOW_NO_EVENTS);
     }
 
     public ModelManager() {
@@ -126,6 +131,11 @@ public class ModelManager implements Model {
     //========== Company List Modifiers ======================================================================
 
     @Override
+    public boolean hasCompany(Name companyName) {
+        return addressBook.hasCompany(Company.createDummyCompany(companyName));
+    }
+
+    @Override
     public boolean hasCompany(Company company) {
         requireNonNull(company);
         return addressBook.hasCompany(company);
@@ -142,6 +152,12 @@ public class ModelManager implements Model {
         updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);
     }
 
+    /**
+     * Replaces the given company {@code target} with {@code editedCompany}.
+     * {@code target} must exist in the address book.
+     * The company identity of {@code editedCompany} must not be the same as another existing company
+     * in the address book.
+     */
     @Override
     public void setCompany(Company target, Company editedCompany) {
         requireAllNonNull(target, editedCompany);

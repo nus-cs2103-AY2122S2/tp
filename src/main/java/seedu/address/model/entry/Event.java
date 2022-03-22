@@ -14,7 +14,7 @@ import seedu.address.model.tag.Tag;
 public class Event extends Entry {
 
     //Identity fields
-    private final String company;
+    private final Name companyName;
 
     // Data fields
     private final Date date;
@@ -24,17 +24,17 @@ public class Event extends Entry {
     /**
      * Every field must be present and not null.
      */
-    public Event(Name name, String company, Date date, Time time, Location location, Set<Tag> tags) {
+    public Event(Name name, Name companyName, Date date, Time time, Location location, Set<Tag> tags) {
         super(name, tags);
-        requireAllNonNull(company, date, time, location);
-        this.company = company;
+        requireAllNonNull(companyName, date, time, location);
+        this.companyName = companyName;
         this.date = date;
         this.time = time;
         this.location = location;
     }
 
-    public String getCompany() {
-        return this.company;
+    public Name getCompanyName() {
+        return this.companyName;
     }
 
     public Date getDate() {
@@ -65,7 +65,7 @@ public class Event extends Entry {
 
         Event otherEvent = (Event) otherEntry;
         return otherEvent.getName().equals(getName())
-                && otherEvent.getCompany().equals(getCompany())
+                && otherEvent.getCompanyName().equals(getCompanyName())
                 && otherEvent.getDate().equals(getDate())
                 && otherEvent.getTime().equals(getTime());
     }
@@ -86,7 +86,7 @@ public class Event extends Entry {
 
         Event otherEvent = (Event) other;
         return otherEvent.getName().equals(getName())
-                && otherEvent.getCompany().equals(getCompany())
+                && otherEvent.getCompanyName().equals(getCompanyName())
                 && otherEvent.getDate().equals(getDate())
                 && otherEvent.getTime().equals(getTime())
                 && otherEvent.getLocation().equals((getLocation()))
@@ -96,7 +96,7 @@ public class Event extends Entry {
     @Override
     public int hashCode() {
         // Use all Event's attributes to get a unique hashCode
-        return Objects.hash(getName(), company, date, time, location, getTags());
+        return Objects.hash(getName(), companyName, date, time, location, getTags());
     }
 
     @Override
@@ -104,7 +104,7 @@ public class Event extends Entry {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
                 .append("; Company: ")
-                .append(getCompany())
+                .append(getCompanyName())
                 .append("; Date: ")
                 .append(getDate())
                 .append("; Time: ")
