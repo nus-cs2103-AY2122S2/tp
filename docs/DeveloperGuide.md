@@ -188,7 +188,7 @@ Marks a specific undone task as done for a particular student.
 8. The `MarkCommand` will then call the `markTaskOfPerson` method of the provided `Model` with its `StudentId` and `Index`
 9. The `MarkCommand` will finally create a new `CommandResult` which will be returned to `LogicManager`
 
-![MarkCommandSequenceDiagram](images/MarkCommandSequenceDiagram.png)
+![MarkCommandSequenceDiagram](images/MarkCommandSequenceDiagram-1.png)
 
 ### Unmark Command
 
@@ -207,7 +207,7 @@ Marks a specific done task as undone for a particular student.
 8. The `UnmarkCommand` will then call the `unmarkTaskOfPerson` method of the provided `Model` with its `StudentId` and `Index`
 9. The `UnmarkCommand` will finally create a new `CommandResult` which will be returned to `LogicManager`
 
-![MarkCommandSequenceDiagram](images/UnmarkCommandSequenceDiagram.png)
+![UnmarkCommandSequenceDiagram](images/UnmarkCommandSequenceDiagram-1.png)
 
 ### \[Proposed\] Undo/redo feature
 

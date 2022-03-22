@@ -3,18 +3,18 @@
 
 title ManualCommand\n
 
-box "Logic" #00000000
+box "Logic" LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":ManualCommandParser" as ManualCommandParser LOGIC_COLOR
 participant "command:ManualCommand" as ManualCommand LOGIC_COLOR
-participant "result:CommandResult" as CommandResult LOGIC_COLOR
+participant "commandResult:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 [-> LogicManager : execute
 activate LogicManager LOGIC_COLOR
 
-LogicManager -> AddressBookParser ++: parseCommand(commandText)
+LogicManager -> AddressBookParser: parseCommand(commandText)
 activate AddressBookParser LOGIC_COLOR
 
 create ManualCommandParser
@@ -23,11 +23,11 @@ activate ManualCommandParser LOGIC_COLOR
 ManualCommandParser -> AddressBookParser
 deactivate ManualCommandParser
 
-AddressBookParser -> ManualCommandParser ++: parse(arguments)
+AddressBookParser -> ManualCommandParser: parse(arguments)
 activate ManualCommandParser LOGIC_COLOR
 
 create ManualCommand
-ManualCommandParser -> ManualCommand ++: commandName
+ManualCommandParser -> ManualCommand
 activate ManualCommand LOGIC_COLOR
 ManualCommand --> ManualCommandParser --
 deactivate ManualCommand
@@ -38,19 +38,19 @@ deactivate ManualCommandParser
 AddressBookParser --> LogicManager --
 deactivate AddressBookParser
 
-LogicManager -> ManualCommand ++: execute(model)
+LogicManager -> ManualCommand: execute(model)
 activate ManualCommand LOGIC_COLOR
 
 create CommandResult
-ManualCommand -> CommandResult ++:
+ManualCommand -> CommandResult :
 activate CommandResult LOGIC_COLOR
 CommandResult --> ManualCommand --:
 deactivate CommandResult
 
-ManualCommand --> LogicManager --: result:CommandResult
+ManualCommand --> LogicManager --: commandResult
 deactivate ManualCommand
 
-[<--LogicManager --: result:CommandResult
+[<--LogicManager --: commandResult
 deactivate LogicManager
 
 @enduml
