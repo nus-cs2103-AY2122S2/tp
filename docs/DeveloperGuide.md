@@ -238,6 +238,63 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Add students
+
+#### Description
+
+The `add` command allows users to add a particular student into TAPA. 
+Since not all fields are compulsory during the execution of the `add` command,
+the user's input is being parsed in `AddressBookParser`. After which, a new `AddCommand`
+object will be created, and is executed by the LogicManager.
+
+#### Implementation
+
+1. Upon receiving the user input, 
+   the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
+2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
+3. Since the first word in user input matches the word "add", `AddCommandParser#parse(arguments)` will be called.
+   In this case, the arguments refer to the remaining input text after the exclusion of the command word ("add").
+4. In the `AddCommandParser#parse(arguments)`, the arguments will be tokenized into a `ArgumentMultimap`, 
+   by using `ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
+   
+    <div markdown="span" class="alert alert-info">:information_source: 
+    **Note:** A `ParseException` will be thrown if the prefix of the compulsory fields are missing.
+
+5. The `AddCommandParser` will pass the studentId input (found in the `ArgumentMultimap`) 
+   into `ParserUtil#parseStudentId(String studentId)`
+   
+   <div markdown="span" class="alert alert-info">:information_source: 
+   **Note:** A `NullException` will be thrown if the supplied string argument is null.
+   
+6. In `ParserUtil#parseStudentId(String studentId)`, the supplied argument will be trimmed using `String#trim()`.
+7. `StudentId#isValidId(String studentId` will then be invoked, 
+   which checks if the trimmed argument is valid (according to the Regex supplied).
+   If the argument is valid, a new StudentId object will be created and returned to the `AddCommandParser`.
+   If the argument is not valid, a `ParseException` will be thrown.
+8. Step 5 to 7 will be repeated for the other compulsory fields (name, moduleCode) 
+   and optional fields (phone, telegramHandle, email), by using their respective parse methods in `ParserUtil`.
+   ![ParserUtilClassDiagram](images/ParserUtilClassDiagram.png)
+   <div markdown="span" class="alert alert-info">:information_source: 
+   **Note:** If an optional field is not supplied (i.e. not found in the `ArgumentMultimap`), 
+   the extra parsing process in steps 5 to 7 will be skipped. 
+   Instead, the respective object will be created and initialized to `null`.
+
+9. The `AddCommandParser` will create a new `Person`.
+10. A new `AddCommand` will be created (using the `Person` in Step 9) and returned to the `LogicManager`.
+11. The `LogicManager` will then call `AddCommand#execute(Model model)`.
+12. In the `AddCommand`, the `model#hasPerson(Person person)` will be invoked. If the `Person` already exist
+    in TAPA, a `CommandException` will be thrown.
+
+    <div markdown="span" class="alert alert-info">:information_source: 
+    **Note:** In TAPA, two `Person` are equal only if they have the same studentId.
+    
+13. The `AddCommand` will call `model.addPerson(Person person)`, which adds the `Person` into the `AddressBook`.
+14. Lastly, the `AddCommand` will create a new `CommandResult`, which will be returned to `LogicManager`.
+
+The following sequence diagram shows how the add operation works:
+
+![AddCommandSequenceDiagram](images/AddCommandSequenceDiagram.png)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
