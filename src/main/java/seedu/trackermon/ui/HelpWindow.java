@@ -2,24 +2,36 @@ package seedu.trackermon.ui;
 
 import java.util.logging.Logger;
 
+import javafx.beans.binding.Bindings;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import seedu.trackermon.commons.core.GuiSettings;
 import seedu.trackermon.commons.core.LogsCenter;
+import seedu.trackermon.logic.Logic;
+import seedu.trackermon.model.show.Show;
 
 /**
  * Controller for a help page
  */
 public class HelpWindow extends UiPart<Stage> {
-
     public static final String USERGUIDE_URL = "https://ay2122s2-cs2103t-t09-3.github.io/tp/UserGuide.html";
     public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
+
+    private TableView<CommandBuilder> commandSummaryTableView;
 
     @FXML
     private Button copyButton;
@@ -27,21 +39,30 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     private Label helpMessage;
 
+    @FXML
+    private StackPane commandSummaryPlaceholder;
+
     /**
      * Creates a new HelpWindow.
      *
      * @param root Stage to use as the root of the HelpWindow.
      */
-    public HelpWindow(Stage root) {
+    public HelpWindow(Stage root, Logic logic) {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
+
+        //setWindowDefaultSize(root, logic.getGuiSettings());
+
+        commandSummaryTableView = new TableView<>();
+        commandSummaryPlaceholder.getChildren().add(commandSummaryTableView);
+        buildTable(commandSummaryTableView, getCommandSummary());
     }
 
     /**
      * Creates a new HelpWindow.
      */
-    public HelpWindow() {
-        this(new Stage());
+    public HelpWindow(Logic logic) {
+        this(new Stage(), logic);
     }
 
     /**
@@ -99,4 +120,46 @@ public class HelpWindow extends UiPart<Stage> {
         url.putString(USERGUIDE_URL);
         clipboard.setContent(url);
     }
+
+    private void buildTable(TableView<CommandBuilder> table, ObservableList<CommandBuilder> commands) {
+        TableColumn<CommandBuilder, String> titleColumn = new TableColumn<>("Command Title");
+        titleColumn.setCellValueFactory(new PropertyValueFactory<>("commandTitle"));
+
+        TableColumn<CommandBuilder, String> commandInputColumn = new TableColumn<>("Command Input");
+        commandInputColumn.setCellValueFactory(new PropertyValueFactory<>("commandInput"));
+
+        table.setItems(commands);
+
+        titleColumn.prefWidthProperty().bind(table.widthProperty().multiply(0.2));
+        commandInputColumn.prefWidthProperty().bind(table.widthProperty().multiply(0.795));
+
+        table.getColumns().add(titleColumn);
+        table.getColumns().add(commandInputColumn);
+
+        table.prefHeightProperty().bind(commandSummaryPlaceholder.heightProperty());
+    }
+
+    private static ObservableList<CommandBuilder> getCommandSummary() {
+        return FXCollections.observableArrayList(
+                new CommandBuilder("Add", "add n/<NAME> s/<STATUS> [t/<TAG>]..."),
+                new CommandBuilder("Delete", "delete <INDEX>"),
+                new CommandBuilder("Edit", "edit <INDEX> [n/<NAME>] [s/<STATUS>] [t/<TAG>]…"),
+                new CommandBuilder("Exit", "exit"),
+                new CommandBuilder("Find", "find <KEYWORD>"),
+                new CommandBuilder("List", "list")
+        );
+    }
+
+    /**
+     * Sets the default size based on {@code guiSettings}.
+     */
+    private void setWindowDefaultSize(Stage stage, GuiSettings guiSettings) {
+        stage.setHeight(guiSettings.getWindowHeight());
+        stage.setWidth(guiSettings.getWindowWidth());
+        if (guiSettings.getWindowCoordinates() != null) {
+            stage.setX(guiSettings.getWindowCoordinates().getX());
+            stage.setY(guiSettings.getWindowCoordinates().getY());
+        }
+    }
+
 }
