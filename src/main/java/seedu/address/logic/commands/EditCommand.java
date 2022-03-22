@@ -32,10 +32,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Weight;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.team.Team;
-import seedu.address.model.team.TeamLineupList;
-import seedu.address.model.team.TeamMemberList;
-import seedu.address.model.team.TeamName;
 
 /**
  * Edits the details of an existing person in MyGM.
