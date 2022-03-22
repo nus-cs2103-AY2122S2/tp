@@ -332,6 +332,16 @@ The following sequence diagrams shows how the unmark command works:
 
 ![UnmarkCommandSequenceDiagram](images/UnmarkCommandSequenceDiagram-2.png)
 
+### Clear Command
+
+#### Description
+
+The `clear` command deletes all students currently stored in TAPA. During the execution of the `clear` command, a new `ClearCommand` object will be created, and is executed by the `LogicManager`. The `MainWindow` changes the `commandBox` to only recognise a followup `confirm` command. If the user executes a `confirm` command, a new `ConfirmClearCommand` object is created and executed by the `LogicManager`. Subsequently, `ModelManager` clears the students currently stored in TAPA.
+
+#### Implementation
+1. Upon receiving the user input, the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
+2. 
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
