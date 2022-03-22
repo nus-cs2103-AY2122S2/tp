@@ -17,13 +17,17 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** The list will be modified **/
+    private final boolean modifyList;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean modifyList) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.modifyList = modifyList;
     }
 
     /**
@@ -31,7 +35,15 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false, false);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
+     * , modifying the list and other fields set to their default value.
+     */
+    public CommandResult(String feedbackToUser, boolean modifyList) {
+        this(feedbackToUser, false, false, modifyList);
     }
 
     public String getFeedbackToUser() {
@@ -40,6 +52,10 @@ public class CommandResult {
 
     public boolean isShowHelp() {
         return showHelp;
+    }
+
+    public boolean isModifyList() {
+        return modifyList;
     }
 
     public boolean isExit() {

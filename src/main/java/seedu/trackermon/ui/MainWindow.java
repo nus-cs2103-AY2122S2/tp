@@ -35,6 +35,7 @@ public class MainWindow extends UiPart<Stage> {
     private ShowListPanel showListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ShowDetailsCard showDetailsCard;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -50,6 +51,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane showDetailsPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -111,7 +115,10 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        showListPanel = new ShowListPanel(logic.getFilteredShowList());
+        showDetailsCard = new ShowDetailsCard(null);
+        showDetailsPlaceholder.getChildren().add(showDetailsCard.getRoot());
+
+        showListPanel = new ShowListPanel(logic.getFilteredShowList(), showDetailsCard);
         showListPanelPlaceholder.getChildren().add(showListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -164,6 +171,10 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    private void handleModifyList() {
+        showListPanel.handleUpdatedList();
+    }
+
     public ShowListPanel getShowListPanel() {
         return showListPanel;
     }
@@ -185,6 +196,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isModifyList()) {
+                handleModifyList();
             }
 
             return commandResult;

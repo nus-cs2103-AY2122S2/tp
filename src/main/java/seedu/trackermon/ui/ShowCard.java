@@ -1,6 +1,7 @@
 package seedu.trackermon.ui;
 
 import java.util.Comparator;
+import java.util.Set;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -8,6 +9,8 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.trackermon.model.show.Show;
+import seedu.trackermon.model.show.Status;
+import seedu.trackermon.model.tag.Tag;
 
 
 /**
