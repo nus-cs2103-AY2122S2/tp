@@ -32,16 +32,16 @@ public class ChainCommandTest {
 
     @Test
     public void execute_chainedList_success() {
-        assertCommandSuccess(new ChainCommand(List.of(new ListCommand())), model,
-                new CommandResult(ListCommand.MESSAGE_SUCCESS,
+        assertCommandSuccess(new ChainCommand(List.of(new ListPersonCommand())), model,
+                new CommandResult(ListPersonCommand.MESSAGE_SUCCESS,
                 GuiListContentType.PERSON), expectedModel);
     }
 
     @Test
     public void execute_chainedEditThenList_success() {
         Person editedPerson = new PersonBuilder().build();
-        EditCommand.EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+        EditPersonCommand.EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
+        EditPersonCommand editPersonCommand = new EditPersonCommand(INDEX_FIRST_PERSON, descriptor);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new Schedule(), new UserPrefs());
@@ -49,11 +49,11 @@ public class ChainCommandTest {
 
         List<Command> commandList = new ArrayList<>();
 
-        commandList.add(editCommand);
-        commandList.add(new ListCommand());
+        commandList.add(editPersonCommand);
+        commandList.add(new ListPersonCommand());
 
         assertCommandSuccess(new ChainCommand(commandList),
-                model, new CommandResult(ListCommand.MESSAGE_SUCCESS,
+                model, new CommandResult(ListPersonCommand.MESSAGE_SUCCESS,
                 GuiListContentType.PERSON), expectedModel);
     }
 }
