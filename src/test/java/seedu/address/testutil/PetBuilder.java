@@ -136,7 +136,7 @@ public class PetBuilder {
     }
 
     /**
-     * Sets the {@code PresentAttendanceEntry} of the {@code Pet} that we are building.
+     * Sets the {@code AbsentAttendanceEntry} of the {@code Pet} that we are building.
      */
     public PetBuilder withAbsentAttendanceEntry(String attendanceDate) {
         this.attendanceHashMap = attendanceHashMap.addAttendance(

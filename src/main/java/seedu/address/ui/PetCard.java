@@ -68,7 +68,9 @@ public class PetCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         getPastWeekAttendance(pet.getAttendanceHashMap())
                 .forEach(attendance -> {
-                    attendanceTags.getChildren().add(AttendanceTag.createAttendanceTag(attendance));
+                    attendanceTags
+                            .getChildren()
+                            .add(AttendanceTag.createAttendanceTag(attendance));
                 });
     }
 

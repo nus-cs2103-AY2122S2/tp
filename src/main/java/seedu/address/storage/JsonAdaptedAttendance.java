@@ -49,7 +49,7 @@ public class JsonAdaptedAttendance {
     public JsonAdaptedAttendance(AttendanceEntry attendanceEntry) {
 
         this.attendanceDate = attendanceEntry.getAttendanceDate().format(DateTimeFormatter.ISO_LOCAL_DATE);
-        this.isPresent = attendanceEntry.getIsPresent().toString();
+        this.isPresent = attendanceEntry.getIsPresent().get().toString();
 
         Optional<LocalTime> optionalPickUpTime = attendanceEntry.getPickUpTime();
         Optional<LocalTime> optionalDropOffTime = attendanceEntry.getDropOffTime();
@@ -73,6 +73,7 @@ public class JsonAdaptedAttendance {
         Boolean modelIsPresent;
         LocalTime modelPickUpTime;
         LocalTime modelDropOffTime;
+        PresentAttendanceEntry presentAttendanceEntry;
 
         if (!isValidIsPresentString(isPresent)) {
             throw new IllegalValueException(AttendanceEntry.MESSAGE_INVALID_ISPRESENT);
@@ -102,7 +103,9 @@ public class JsonAdaptedAttendance {
             throw new IllegalValueException(pe.getMessage());
         }
 
-        if (!PresentAttendanceEntry.isValidTimings(modelPickUpTime, modelDropOffTime)) {
+        presentAttendanceEntry = new PresentAttendanceEntry(modelAttendanceDate, modelPickUpTime, modelDropOffTime);
+
+        if (!presentAttendanceEntry.isValidTimings()) {
             throw new IllegalValueException(PresentAttendanceEntry.MESSAGE_TIME_CONSTRAINTS);
         }
 

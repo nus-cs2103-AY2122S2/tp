@@ -8,8 +8,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import seedu.address.model.attendance.AttendanceEntry;
+import seedu.address.model.attendance.MissingAttendanceEntry;
 import seedu.address.model.pet.AttendanceHashMap;
 import seedu.address.storage.JsonAdaptedAttendance;
 
@@ -47,22 +49,23 @@ public class AttendanceUtil {
      * @throws DateTimeParseException if the date string is invalid.
      */
     public static LocalTime convertToModelTime(String jsonTime) throws DateTimeParseException {
+        if (jsonTime.isEmpty()) {
+            return null;
+        }
+
         return LocalTime.parse(jsonTime);
     }
 
     /**
      * Creates and returns a list of attendance entries for the past week,
      * starting from six days ago (inclusive) to the current date (inclusive).
+     * If no attendance has been marked on a particular date, a missing attendance entry is added.
      * @param attendanceHashMap the attendance hash map of the pet.
      * @return a list of attendance entries for the past week.
      */
     public static List<AttendanceEntry> getPastWeekAttendance(AttendanceHashMap attendanceHashMap) {
         requireNonNull(attendanceHashMap);
         ArrayList<AttendanceEntry> weeklyAttendanceList = new ArrayList<>();
-
-        if (attendanceHashMap.isEmpty()) {
-            return weeklyAttendanceList;
-        }
 
         LocalDate currentDate = LocalDate.now(); // the current date
         LocalDate startDate = currentDate.minusDays(6); // the date a week before
@@ -71,6 +74,8 @@ public class AttendanceUtil {
         for (LocalDate d = startDate; d.isBefore(endDate); d = d.plusDays(1)) {
             if (attendanceHashMap.hasAttendanceEntry(d)) {
                 weeklyAttendanceList.add(attendanceHashMap.getAttendance(d));
+            } else {
+                weeklyAttendanceList.add(new MissingAttendanceEntry(d));
             }
         }
 

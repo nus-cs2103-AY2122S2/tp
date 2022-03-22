@@ -15,17 +15,14 @@ public abstract class AttendanceEntry {
     public static final String MESSAGE_INVALID_ISPRESENT = "The isPresent field is invalid!";
 
     private final LocalDate attendanceDate;
-    private final Boolean isPresent;
 
     /**
-     * Constructs a {@code AttendanceEntry}.
+     * Constructs an {@code AttendanceEntry}.
      * @param attendanceDate A valid date.
-     * @param isPresent True if the pet was present on the given date, false otherwise.
      */
-    public AttendanceEntry(LocalDate attendanceDate, boolean isPresent) {
+    public AttendanceEntry(LocalDate attendanceDate) {
         requireNonNull(attendanceDate);
         this.attendanceDate = attendanceDate;
-        this.isPresent = isPresent;
     }
 
     /**
@@ -38,11 +35,9 @@ public abstract class AttendanceEntry {
 
     /**
      * Retrieves the attendance status of the pet.
-     * @return True if the pet was present, false otherwise.
+     * @return An optional containing the attendance status of the pet.
      */
-    public Boolean getIsPresent() {
-        return isPresent;
-    }
+    public abstract Optional<Boolean> getIsPresent();
 
     /**
      * Retrieves the pick-up time of the pet, if any.

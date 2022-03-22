@@ -68,9 +68,9 @@ public class AttendanceHashMap {
     }
 
     /**
-     * Adds an attendance entry into a new attendance hash map.
+     * Adds an attendance entry into a new attendance hash map containing the current attendance entries.
      * @param attendanceEntry the attendance to be stored.
-     * @return a new attendance hash map with the attendance marked present or absent.
+     * @return an attendance hash map with the attendance marked present or absent.
      */
     public AttendanceHashMap addAttendance(AttendanceEntry attendanceEntry) {
         HashMap<LocalDate, AttendanceEntry> tempHashMap = new HashMap<>(attendanceHashMap);

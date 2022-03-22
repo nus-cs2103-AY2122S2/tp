@@ -9,13 +9,20 @@ import java.util.Optional;
  *  * Guarantees: immutable; entry is valid.
  */
 public class AbsentAttendanceEntry extends AttendanceEntry {
+    private final Boolean isPresent;
 
     /**
      * Constructs a {@code AbsentAttendanceEntry}.
      * @param entryDate A valid date.
      */
     public AbsentAttendanceEntry(LocalDate entryDate) {
-        super(entryDate, false);
+        super(entryDate);
+        this.isPresent = false;
+    }
+
+    @Override
+    public Optional<Boolean> getIsPresent() {
+        return Optional.ofNullable(isPresent);
     }
 
     @Override
