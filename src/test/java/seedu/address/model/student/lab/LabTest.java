@@ -89,6 +89,28 @@ public class LabTest {
     }
 
     @Test
+    public void isSameLab_sameLabNumberAndStatus_success() {
+        Lab stub = new Lab("1");
+        Lab stub2 = new Lab("1");
+        assertTrue(stub.isSameLab(stub2));
+    }
+
+    @Test
+    public void isSameLab_sameLabNumberDifferentStatus_success() {
+        Lab stub = new Lab("1");
+        Lab stub2 = new Lab("1");
+        stub2.editLabStatus(LabStatus.GRADED);
+        assertTrue(stub.isSameLab(stub2));
+    }
+
+    @Test
+    public void isSameLab_differentLabNumber_failure() {
+        Lab stub = new Lab("1");
+        Lab stub2 = new Lab("2");
+        assertFalse(stub.isSameLab(stub2));
+    }
+
+    @Test
     public void equals_success() {
         Lab lab1 = (new Lab("1")).of("SUBMITTED");
         Lab lab1copy = (new Lab("1")).of("SUBMITTED");
