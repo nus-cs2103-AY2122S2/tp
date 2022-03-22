@@ -23,13 +23,6 @@ class ItemTest {
     }
 
     @Test
-    void subtract() {
-        // 10 - 5 = 5
-        Item newItem = KAYA_BREAD_1_Q10.subtract(KAYA_BREAD_1_Q5);
-        assertEquals(KAYA_BREAD_1_Q5, newItem);
-    }
-
-    @Test
     void isExpired() {
         Item expiredItem = new ItemBuilder(KAYA_BREAD_1_Q5).withExpiryDate("2000-01-01").build();
         assertTrue(expiredItem.isExpired());
