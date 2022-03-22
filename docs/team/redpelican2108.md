@@ -8,7 +8,7 @@ Given below are my contributions to the project.
 - **Code contributed** : to be added soon
 - **Project management** : to be added soon
 - **Enhancements to existing features** : to be added soon
-- **Documentation** : 
+- **Documentation** :
     - User Guide: to be added soon
     - Developer Guide: to be added soon
 -**Community** : to be added soon
