@@ -1,7 +1,9 @@
 package seedu.contax.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.contax.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -79,6 +81,7 @@ public class Schedule implements ReadOnlySchedule {
 
     // ====== Read Methods ===================================================================================
 
+    @Override
     public ObservableList<Appointment> getAppointmentList() {
         return appointments.asUnmodifiableObservableList();
     }
@@ -93,6 +96,13 @@ public class Schedule implements ReadOnlySchedule {
     public boolean hasOverlappingAppointment(Appointment target) {
         requireNonNull(target);
         return appointments.containsOverlapping(target);
+    }
+
+    @Override
+    public List<Appointment> findSlotsBetweenAppointments(LocalDateTime start, LocalDateTime end,
+                                                          int minimumDuration) {
+        requireAllNonNull(start, end, minimumDuration);
+        return appointments.findSlotsBetweenAppointments(start, end, minimumDuration);
     }
 
     // ====== Util Methods ===================================================================================

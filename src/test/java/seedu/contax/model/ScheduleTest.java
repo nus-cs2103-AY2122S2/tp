@@ -9,6 +9,7 @@ import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALICE;
 import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALONE;
 import static seedu.contax.testutil.TypicalAppointments.getTypicalSchedule;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -215,6 +216,39 @@ public class ScheduleTest {
     }
 
     @Test
+    public void findSlotsBetweenAppointments_nullInputs_throwsNullPointerException() {
+        LocalDateTime dummyTime = LocalDateTime.parse("2022-12-12T12:30");
+        assertThrows(NullPointerException.class,
+            () -> schedule.findSlotsBetweenAppointments(null, dummyTime, 1));
+        assertThrows(NullPointerException.class,
+            () -> schedule.findSlotsBetweenAppointments(dummyTime, null, 1));
+    }
+
+    @Test
+    public void findSlotsBetweenAppointments_validInputs_success() {
+        // This is an integration test, more thorough tests are performed in DisjointAppointmentListTest
+        LocalDateTime rangeStart = LocalDateTime.parse("2022-12-12T12:30");
+        LocalDateTime rangeEnd = LocalDateTime.parse("2022-12-12T14:30");
+
+        Appointment appointment1 = new AppointmentBuilder(APPOINTMENT_ALONE)
+                .withStartDateTime(LocalDateTime.parse("2022-12-12T12:00"))
+                .withDuration(30).build();
+        Appointment appointment2 = new AppointmentBuilder(APPOINTMENT_ALONE)
+                .withStartDateTime(LocalDateTime.parse("2022-12-12T14:30"))
+                .withDuration(30).build();
+
+        schedule.addAppointment(appointment1);
+        schedule.addAppointment(appointment2);
+
+        List<Appointment> expectedList = List.of(appointment1);
+
+        assertEquals(expectedList, schedule.findSlotsBetweenAppointments(rangeStart, rangeEnd, 120));
+        assertEquals(expectedList, schedule.findSlotsBetweenAppointments(rangeStart, rangeEnd, 60));
+        assertEquals(expectedList, schedule.findSlotsBetweenAppointments(rangeStart, rangeEnd, 1));
+        assertEquals(List.of(), schedule.findSlotsBetweenAppointments(rangeStart, rangeEnd, 121));
+    }
+
+    @Test
     public void equals() {
         Schedule refSchedule = new Schedule();
         Schedule otherSchedule = getTypicalSchedule();
@@ -257,12 +291,18 @@ public class ScheduleTest {
 
         @Override
         public boolean hasOverlappingAppointment(Appointment target) {
-            return false;
+            throw new RuntimeException("This method should not be called");
         }
 
         @Override
         public boolean hasAppointment(Appointment target) {
-            return false;
+            throw new RuntimeException("This method should not be called");
+        }
+
+        @Override
+        public List<Appointment> findSlotsBetweenAppointments(LocalDateTime start, LocalDateTime end,
+                                                              int minimumDuration) {
+            throw new RuntimeException("This method should not be called");
         }
     }
 
