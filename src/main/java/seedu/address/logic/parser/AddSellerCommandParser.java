@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.ArrayList;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -40,7 +39,7 @@ public class AddSellerCommandParser implements Parser<AddSellerCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Appointment appointment = new Appointment("");
-        Seller seller = new Seller(name, phone, appointment, tagList, new ArrayList<>());
+        Seller seller = new Seller(name, phone, appointment, tagList);
 
         return new AddSellerCommand(seller);
     }
