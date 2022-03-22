@@ -14,6 +14,7 @@ import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.DuplicateTaskException;
 import seedu.address.model.person.exceptions.InvalidTaskIndexException;
 import seedu.address.model.person.exceptions.ModuleCodeNotFoundException;
+import seedu.address.model.person.exceptions.PartialDuplicateTaskException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.person.exceptions.TaskAlreadyCompleteException;
 import seedu.address.model.person.exceptions.TaskAlreadyNotCompleteException;
@@ -157,11 +158,15 @@ public class UniquePersonList implements Iterable<Person> {
                 }
             }
         }
-        if (totalPersonTakingThisModule != totalPersonWithNoDuplicateTask) {
-            throw new DuplicateTaskException();
-        }
         if (!anyPersonFound) {
             throw new ModuleCodeNotFoundException();
+        }
+        if (totalPersonWithNoDuplicateTask == 0) {
+            throw new DuplicateTaskException();
+        }
+
+        if (totalPersonWithNoDuplicateTask != totalPersonTakingThisModule) {
+            throw new PartialDuplicateTaskException();
         }
     }
 

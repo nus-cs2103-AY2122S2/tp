@@ -29,6 +29,7 @@ public class AssignCommandParser implements Parser<AssignCommand> {
      * @return AssignCommand to execute.
      * @throws ParseException if the user input does not conform the expected format.
      */
+    @SuppressWarnings("OptionalGetWithoutIsPresent") // This is checked using our custom function (arePrefixesPresent).
     public AssignCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
