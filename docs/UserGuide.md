@@ -72,8 +72,8 @@ Adds a student to TAssist.
 Format: `add student id/STUDENT_ID n/NAME e/EMAIL [t/TELEGRAM_ID]`
 
 Examples:
-* `add student id/E0123456 n/John Doe e/johnd@example.com`
-* `add student id/E0123456 n/John Doe e/johnd@example.com t/john_doe`
+* `add student id/E0123456 n/John Doe e/johnd@example.com` creates a new student named `John Doe` with a student ID of `E0123456` and email `johnd@example.com`.
+* `add student id/E0123456 n/John Doe e/johnd@example.com t/john_doe` creates a new student named `John Doe` with a student ID of `E0123456`, email `johnd@example.com` and telegram handle `john_doe`.
 
 #### Adding a module: `add module`
 
@@ -96,7 +96,7 @@ Format: `add module n/MODULE_NAME c/MODULE_CODE a/ACADEMIC_YEAR`
 | S8  | Mini-Semester 2B       |
 
 Examples:
-* `add module n/Software Engineering Project c/CS2103T a/21S1`
+* `add module n/Software Engineering Project c/CS2103T a/21S1` creates a new module named `Software Engineering Project` with a module code of `CS2103T` for the academic year `2021 Semester 1`.
 
 #### Adding a class group: `add class`
 
