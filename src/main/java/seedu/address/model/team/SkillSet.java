@@ -132,6 +132,10 @@ public class SkillSet {
         return skillSet.stream();
     }
 
+    public int getSize() {
+        return this.skillSet.size();
+    }
+
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
@@ -147,6 +151,31 @@ public class SkillSet {
         return other == this // short circuit if same object
                 || (other instanceof SkillSet // instanceof handles nulls
                 && this.skillSet.equals(((SkillSet) other).getSkillSet())); // state check
+    }
+
+    /**
+     * Checks if another SkillSet has the same Skill name as the current SkillSet
+     * @param other SkillSet to compare to
+     * @return true if entered SkillSet has the same Skill names as current, false otherwise
+     */
+    public boolean hasSameSkillSet(Object other) {
+        if (other == this) {
+            return true;
+        } else if (!(other instanceof SkillSet)) {
+            return false;
+        }
+        SkillSet otherSkillSet = (SkillSet) other;
+
+        if (otherSkillSet.getSize() != this.getSize()) {
+            return false;
+        }
+        int sameSkill = 0;
+        for (Skill s : otherSkillSet.getSkillSet()) {
+            if (this.hasSkill(s)) {
+                sameSkill ++;
+            }
+        }
+        return sameSkill == this.getSize();
     }
 
 }

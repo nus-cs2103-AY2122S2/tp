@@ -14,12 +14,15 @@ public class SkillSetTest {
     private Skill c0 = new Skill("C");
     private SkillSet skillSet1 = new SkillSet();
     private SkillSet skillSet2 = new SkillSet();
+    private SkillSet skillSet3 = new SkillSet();
 
     @Test
     public void equals() {
         skillSet1.add(java90);
         skillSet2.add(python100);
+        skillSet3.add(java100);
         SkillSet copyOfSkillSet1 = new SkillSet(skillSet1);
+        assertFalse(skillSet3.equals(skillSet1));
         assertTrue(copyOfSkillSet1.equals(skillSet1));
         assertFalse(copyOfSkillSet1.equals(skillSet2));
     }
