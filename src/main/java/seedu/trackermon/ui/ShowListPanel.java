@@ -31,9 +31,9 @@ public class ShowListPanel extends UiPart<Region> {
     public ShowListPanel(ObservableList<Show> showList, ShowDetailsCard showDetailsCard) {
         super(FXML);
         this.showDetailsCard = showDetailsCard;
+
         showListView.setItems(showList);
         showListView.setCellFactory(listView -> new ShowListViewCell());
-        handleUpdatedList();
 
         showListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Show>() {
             @Override
@@ -42,6 +42,8 @@ public class ShowListPanel extends UiPart<Region> {
                 showDetailsCard.updateShowDetails(newValue);
             }
         });
+
+        handleUpdatedList();
     }
 
     /**
@@ -49,7 +51,11 @@ public class ShowListPanel extends UiPart<Region> {
      */
     public void handleUpdatedList() {
         if (!showListView.getItems().isEmpty()) {
-            showListView.getSelectionModel().select(0);
+
+            if (showListView.getSelectionModel().getSelectedItem() == null) {
+                showListView.getSelectionModel().selectFirst();
+            }
+
             showDetailsCard.updateShowDetails(showListView.getSelectionModel().getSelectedItem());
         }
     }

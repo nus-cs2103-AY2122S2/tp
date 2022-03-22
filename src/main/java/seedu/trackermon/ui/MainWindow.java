@@ -2,12 +2,18 @@ package seedu.trackermon.ui;
 
 import java.util.logging.Logger;
 
+import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.input.InputEvent;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TouchEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.trackermon.commons.core.GuiSettings;
@@ -53,7 +59,7 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane statusbarPlaceholder;
 
     @FXML
-    private StackPane showDetailsPlaceholder;
+    private ScrollPane showDetailsPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -116,10 +122,14 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         showDetailsCard = new ShowDetailsCard(null);
-        showDetailsPlaceholder.getChildren().add(showDetailsCard.getRoot());
+
+        showDetailsPlaceholder.setContent(showDetailsCard.getRoot());
+        showDetailsCard.getRoot().prefWidthProperty().bind(showDetailsPlaceholder.widthProperty());
 
         showListPanel = new ShowListPanel(logic.getFilteredShowList(), showDetailsCard);
         showListPanelPlaceholder.getChildren().add(showListPanel.getRoot());
+
+        showDetailsPlaceholder.focusTraversableProperty().setValue(false);
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -129,6 +139,12 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        ChangeListener<Number> stageSizeListener = (observable, oldValue, newValue) ->
+                showListPanel.handleUpdatedList();
+
+        primaryStage.widthProperty().addListener(stageSizeListener);
+        primaryStage.heightProperty().addListener(stageSizeListener);
     }
 
     /**

@@ -2,7 +2,10 @@ package seedu.trackermon.ui;
 
 import java.util.Comparator;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.FlowPane;
@@ -18,7 +21,7 @@ import seedu.trackermon.model.show.Show;
 public class ShowDetailsCard extends UiPart<Region> {
 
     private static final String FXML = "ShowDetailsCard.fxml";
-    private static final double SPACING = 30;
+    private static final double SPACING = 15;
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -45,7 +48,7 @@ public class ShowDetailsCard extends UiPart<Region> {
      */
     public ShowDetailsCard(Show show) {
         super(FXML);
-        updateShowDetails(show);
+        name.setOpaqueInsets(Insets.EMPTY);
     }
 
     /**
@@ -79,17 +82,22 @@ public class ShowDetailsCard extends UiPart<Region> {
      * @param textArea the text area to be resized.
      */
     public void updateTextArea(TextArea textArea) {
+
         Text helper = new Text(textArea.getText());
+
         helper.setFont(textArea.getFont());
+
         double wrappingWidth = textArea.getWidth();
+
+        double fontHeight = helper.getFont().getSize() + SPACING;
         double singleHeight = helper.getBoundsInLocal().getHeight();
 
         helper.setWrappingWidth(wrappingWidth);
-        double rowHeight = helper.getBoundsInLocal().getHeight();
+        double rowHeight = helper.getBoundsInParent().getHeight();
 
-        int count = (int) (rowHeight / singleHeight);
+        int count = (int) Math.ceil(rowHeight / singleHeight);
 
-        textArea.setPrefHeight(rowHeight + (count - 1) * SPACING);
+        textArea.setPrefHeight(count * fontHeight);
     }
 
     @Override
