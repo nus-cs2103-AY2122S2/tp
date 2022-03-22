@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.lineup.Lineup;
+import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
@@ -81,11 +82,24 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.containsName(targetName);
     }
 
+    public boolean hasLineupName(LineupName targetName) {
+        requireNonNull(targetName);
+        return lineups.containsLineupName(targetName);
+    }
+
     /**
      * Returns the person with {@code targetName};
      */
     public Person getPerson(Name targetName) {
         return persons.getPerson(targetName);
+    }
+
+    public Lineup getLineup(LineupName targetName) {
+        return lineups.getLineup(targetName);
+    }
+
+    public void addPersonToLineup(Person person, Lineup lineup) {
+        lineup.addPlayer(person);
     }
 
     /**

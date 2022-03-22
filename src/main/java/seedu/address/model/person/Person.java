@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.lineup.Lineup;
 import seedu.address.model.lineup.LineupName;
 import seedu.address.model.tag.Tag;
 
@@ -96,6 +97,10 @@ public class Person {
 
     public Set<LineupName> getModifiableLineupNames() {
         return this.lineupNames;
+    }
+
+    public void addLineupName(Lineup lineup) {
+        this.lineupNames.add(lineup.getLineupName());
     }
 
     /**
