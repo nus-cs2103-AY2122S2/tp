@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.StackPane?>
@@ -51,7 +52,12 @@
             <Insets bottom="10" left="10" right="10" top="10" />
           </padding>
 <!--          <StackPane fx:id="contentListPanelPlaceholder" VBox.vgrow="ALWAYS"/>-->
-              <TabPane fx:id="tabbedPanelPlaceholder" tabClosingPolicy="UNAVAILABLE" />
+              <TabPane fx:id="tabbedPanelPlaceholder" styleClass="background" tabClosingPolicy="UNAVAILABLE">
+                  <tabs>
+                     <Tab fx:id="personTab" text="Person" />
+                     <Tab fx:id="appointmentTab" text="Appointment" />
+                     <Tab fx:id="tagTab" text="Tag" />
+                  </tabs></TabPane>
         </VBox>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />

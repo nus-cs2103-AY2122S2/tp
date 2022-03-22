@@ -59,6 +59,15 @@ public class MainWindow extends UiPart<Stage> {
     private TabPane tabbedPanelPlaceholder;
 
     @FXML
+    private Tab appointmentTab;
+
+    @FXML
+    private Tab tagTab;
+
+    @FXML
+    private Tab personTab;
+
+    @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
@@ -148,9 +157,9 @@ public class MainWindow extends UiPart<Stage> {
      * Creates the tabs and sets it in the Tab Pane.
      */
     private void fillTabsFromPanels() {
-        Tab appointmentTab = new Tab("Appointment", appointmentListPanel.getRoot());
-        Tab personTab = new Tab("Person", personListPanel.getRoot());
-        Tab tagTab = new Tab("Tag", tagListPanel.getRoot());
+        appointmentTab.setContent(appointmentListPanel.getRoot());
+        personTab.setContent(personListPanel.getRoot());
+        tagTab.setContent(tagListPanel.getRoot());
         tabbedPanelPlaceholder.getTabs().add(personTab);
         tabbedPanelPlaceholder.getTabs().add(appointmentTab);
         tabbedPanelPlaceholder.getTabs().add(tagTab);
