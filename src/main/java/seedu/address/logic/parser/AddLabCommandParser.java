@@ -5,7 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LAB;
 
 import seedu.address.logic.commands.AddLabCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.lab.Lab;
+import seedu.address.model.student.lab.Lab;
 
 /**
  * Parses input arguments and creates a new AddLabCommand object

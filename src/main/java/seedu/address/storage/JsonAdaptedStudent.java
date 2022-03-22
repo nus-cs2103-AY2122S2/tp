@@ -1,0 +1,150 @@
+package seedu.address.storage;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.student.Email;
+import seedu.address.model.student.GithubUsername;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentId;
+import seedu.address.model.student.Telegram;
+import seedu.address.model.student.lab.Lab;
+import seedu.address.model.tag.Tag;
+
+/**
+ * Jackson-friendly version of {@link Student}.
+ */
+class JsonAdaptedStudent {
+
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+
+    private final String name;
+    private final String email;
+    private final String githubUsername;
+    private final String telegram;
+    private final String studentId;
+    private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final List<JsonAdaptedLabNumber> labNumbers = new ArrayList<>();
+    private final List<JsonAdaptedLabStatus> labStatuses = new ArrayList<>();
+
+    /**
+     * Constructs a {@code JsonAdaptedPerson} with the given student details.
+     */
+    @JsonCreator
+    public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("email") String email,
+            @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("github") String githubUsername,
+            @JsonProperty("telegram") String telegram, @JsonProperty("studentId") String studentId,
+            @JsonProperty("labNames") List<JsonAdaptedLabNumber> labNumbers,
+            @JsonProperty("labStatuses") List<JsonAdaptedLabStatus> labStatuses) {
+        this.name = name;
+        this.email = email;
+        this.githubUsername = githubUsername;
+        this.telegram = telegram;
+        this.studentId = studentId;
+
+        if (tagged != null) {
+            this.tagged.addAll(tagged);
+        }
+
+        if (labNumbers != null) {
+            this.labNumbers.addAll(labNumbers);
+        }
+
+        if (labStatuses != null) {
+            this.labStatuses.addAll(labStatuses);
+        }
+    }
+
+    /**
+     * Converts a given {@code Student} into this class for Jackson use.
+     */
+    public JsonAdaptedStudent(Student source) {
+        name = source.getName().fullName;
+        email = source.getEmail().value;
+        githubUsername = source.getGithubUsername().username;
+        telegram = source.getTelegram().handle;
+        studentId = source.getStudentId().id;
+        tagged.addAll(source.getTags().stream()
+                .map(JsonAdaptedTag::new)
+                .collect(Collectors.toList()));
+        labNumbers.addAll(source.getLabs().asUnmodifiableObservableList().stream()
+                .map(JsonAdaptedLabNumber::new)
+                .collect(Collectors.toList()));
+        labStatuses.addAll(source.getLabs().asUnmodifiableObservableList().stream()
+                .map(JsonAdaptedLabStatus::new)
+                .collect(Collectors.toList()));
+    }
+
+    /**
+     * Converts this Jackson-friendly adapted student object into the model's {@code Student} object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated in the adapted student.
+     */
+    public Student toModelType() throws IllegalValueException {
+        final List<Tag> personTags = new ArrayList<>();
+        for (JsonAdaptedTag tag : tagged) {
+            personTags.add(tag.toModelType());
+        }
+        final List<Lab> personLabs = new ArrayList<>();
+        for (int i = 0; i < labNumbers.size(); i++) {
+            personLabs.add(labNumbers.get(i).toModelType().of(labStatuses.get(i).getLabStatus()));
+        }
+
+        if (name == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+        }
+        if (!Name.isValidName(name)) {
+            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        }
+        final Name modelName = new Name(name);
+
+        if (email == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
+        }
+        if (!Email.isValidEmail(email)) {
+            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+        }
+        final Email modelEmail = new Email(email);
+
+        if (githubUsername == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    GithubUsername.class.getSimpleName()));
+        }
+        if (!GithubUsername.isValidGithubUsername(githubUsername)) {
+            throw new IllegalValueException(GithubUsername.MESSAGE_CONSTRAINTS);
+        }
+        final GithubUsername modelUsername = new GithubUsername(githubUsername);
+
+        if (telegram == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Telegram.class.getSimpleName()));
+        }
+        if (!Telegram.isValidTelegram(telegram)) {
+            throw new IllegalValueException(Telegram.MESSAGE_CONSTRAINTS);
+        }
+        final Telegram modelTelegram = new Telegram(telegram);
+
+        if (studentId == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    StudentId.class.getSimpleName()));
+        }
+        if (!StudentId.isValidStudentId(studentId)) {
+            throw new IllegalValueException(StudentId.MESSAGE_CONSTRAINTS);
+        }
+        final StudentId modelId = new StudentId(studentId);
+
+        final Set<Tag> modelTags = new HashSet<>(personTags);
+        Student s = new Student(modelName, modelEmail, modelTags, modelUsername, modelTelegram, modelId);
+        s.getLabs().setLabs(personLabs);
+        return s;
+    }
+
+}

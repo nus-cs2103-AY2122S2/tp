@@ -4,10 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
+import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,11 +17,11 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.lab.Lab;
-import seedu.address.model.person.lab.LabList;
-import seedu.address.model.person.lab.LabStatus;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.lab.Lab;
+import seedu.address.model.student.lab.LabList;
+import seedu.address.model.student.lab.LabStatus;
+import seedu.address.testutil.StudentBuilder;
 
 public class EditLabStatusCommandTest {
 
@@ -32,59 +32,59 @@ public class EditLabStatusCommandTest {
 
     @Test
     public void execute_validParameters_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showStudentAtIndex(model, INDEX_FIRST_STUDENT);
 
-        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(personToEdit).build();
+        Student personToEdit = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        Student editedPerson = new StudentBuilder(personToEdit).build();
         LabList listToEdit = editedPerson.getLabs();
         listToEdit.setLab(listToEdit.getLabByLabNumber(VALID_LABNUMBER),
                 new Lab(String.valueOf(VALID_LABNUMBER)).of(VALID_LABSTATUS.name()));
 
-        EditLabStatusCommand command = new EditLabStatusCommand(INDEX_FIRST_PERSON, VALID_LABNUMBER, VALID_LABSTATUS);
+        EditLabStatusCommand command = new EditLabStatusCommand(INDEX_FIRST_STUDENT, VALID_LABNUMBER, VALID_LABSTATUS);
 
         String expectedMessage = String.format(EditLabStatusCommand.MESSAGE_EDIT_LAB_STATUS_SUCCESS,
                 VALID_LABNUMBER, personToEdit.getName(), VALID_LABSTATUS.name());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+        expectedModel.setStudent(model.getFilteredStudentList().get(0), editedPerson);
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
         EditLabStatusCommand command = new EditLabStatusCommand(outOfBoundIndex, VALID_LABNUMBER, VALID_LABSTATUS);
 
-        assertCommandFailure(command, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(command, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showStudentAtIndex(model, INDEX_FIRST_STUDENT);
 
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        Index outOfBoundIndex = INDEX_SECOND_STUDENT;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getStudentList().size());
 
         EditLabStatusCommand command = new EditLabStatusCommand(outOfBoundIndex, VALID_LABNUMBER, VALID_LABSTATUS);
 
-        assertCommandFailure(command, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(command, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_invalidLabNumber_throwsCommandException() {
         int invalidLabNumber = 0;
-        EditLabStatusCommand command = new EditLabStatusCommand(INDEX_FIRST_PERSON, invalidLabNumber, VALID_LABSTATUS);
+        EditLabStatusCommand command = new EditLabStatusCommand(INDEX_FIRST_STUDENT, invalidLabNumber, VALID_LABSTATUS);
 
         assertCommandFailure(command, model, EditLabStatusCommand.MESSAGE_INVALID_LAB_NUMBER);
     }
 
     @Test
     public void execute_duplicateLab_throwsCommandException() {
-        LabStatus currentStatus = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased())
+        LabStatus currentStatus = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased())
                 .getLabs().getLabByLabNumber(VALID_LABNUMBER).labStatus;
-        EditLabStatusCommand command = new EditLabStatusCommand(INDEX_FIRST_PERSON, VALID_LABNUMBER, currentStatus);
+        EditLabStatusCommand command = new EditLabStatusCommand(INDEX_FIRST_STUDENT, VALID_LABNUMBER, currentStatus);
 
         assertCommandFailure(command, model, EditLabStatusCommand.MESSAGE_INVALID_STATUS_CHANGE);
     }
@@ -92,20 +92,20 @@ public class EditLabStatusCommandTest {
     @Test
     public void equals() {
         EditLabStatusCommand standardCommand =
-                new EditLabStatusCommand(INDEX_FIRST_PERSON, VALID_LABNUMBER, VALID_LABSTATUS);
+                new EditLabStatusCommand(INDEX_FIRST_STUDENT, VALID_LABNUMBER, VALID_LABSTATUS);
         EditLabStatusCommand changeIndexCommand =
-                new EditLabStatusCommand(INDEX_SECOND_PERSON, VALID_LABNUMBER, VALID_LABSTATUS);
+                new EditLabStatusCommand(INDEX_SECOND_STUDENT, VALID_LABNUMBER, VALID_LABSTATUS);
         EditLabStatusCommand changeLabCommand =
-                new EditLabStatusCommand(INDEX_FIRST_PERSON, 2, VALID_LABSTATUS);
+                new EditLabStatusCommand(INDEX_FIRST_STUDENT, 2, VALID_LABSTATUS);
         EditLabStatusCommand changeStatusCommand =
-                new EditLabStatusCommand(INDEX_FIRST_PERSON, VALID_LABNUMBER, LabStatus.GRADED);
+                new EditLabStatusCommand(INDEX_FIRST_STUDENT, VALID_LABNUMBER, LabStatus.GRADED);
 
         // same object -> returns true
         assertTrue(standardCommand.equals(standardCommand));
 
         // same values -> returns true
         EditLabStatusCommand standardCommandCopy =
-                new EditLabStatusCommand(INDEX_FIRST_PERSON, 1, LabStatus.SUBMITTED);
+                new EditLabStatusCommand(INDEX_FIRST_STUDENT, 1, LabStatus.SUBMITTED);
         assertTrue(standardCommand.equals(standardCommandCopy));
 
         // different values -> returns false
