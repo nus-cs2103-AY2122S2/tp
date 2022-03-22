@@ -1,5 +1,7 @@
 package seedu.contax.ui;
 
+import java.util.logging.Logger;
+
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -15,7 +17,7 @@ import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import seedu.contax.commons.core.LogsCenter;
 
-import java.util.logging.Logger;
+
 
 public class HelpWindow extends UiPart<Stage> {
     private static final String FXML = "HelpWindow.fxml";
@@ -115,7 +117,8 @@ public class HelpWindow extends UiPart<Stage> {
 
         // populate cells
         insertRow("Add Person", "addperson n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…   ",
-                "addperson n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd t/friend t/colleague", page1);
+                "addperson n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd t/friend t/colleague",
+                page1);
         insertRow("Clear", "clear", "-", page1);
         insertRow("Delete Person", "deleteperson INDEX", "delete 3", page1);
         insertRow("Edit Person", "editperson INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…",
@@ -134,19 +137,22 @@ public class HelpWindow extends UiPart<Stage> {
         insertRow("Delete Appointment", "deleteappointment INDEX", "deleteappointment 2", page1);
 
         rowCounter = 1;
+
         insertRow("Edit Appointment", "editappointment INDEX [n/NAME] [d/DATE] [t/TIME] [p/PERSON] [l/DURATION]",
                 "editappointment 2 n/Call Juliet t/13:45", page2);
-        insertRow("List Appointments Within Period", "appointmentsbetween sd/STARTDATE st/STARTTIME ed/ENDDATE et/ENDTIME",
-                "appointmentsbetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00", page2);
+        insertRow("List Appointments Within Period", "appointmentsbetween sd/STARTDATE st/STARTTIME ",
+                "ed/ENDDATE et/ENDTIME appointmentsbetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00", page2);
         insertRow("Help", "help", "-", page2);
         insertRow("Export CSV", "exportcsv", "-", page2);
-        insertRow("Import CSV", "importcsv f/FILEPATH [n/COLUMNNUM] [p/COLUMN_PERSON] [e/COLUMN_EMAIL] [a/COLUMN_ADDRESS] [t/COLUMN_TAGS]",
+        insertRow("Import CSV", "importcsv f/FILEPATH [n/COLUMNNUM] "
+                        + "[p/COLUMN_PERSON] [e/COLUMN_EMAIL] [a/COLUMN_ADDRESS] [t/COLUMN_TAGS]",
                 "importCSV n/2 p/3 e/5 a/6 t/4", page2);
         insertRow("Operate on Contacts by Conditional Clause", "batch COMMAND where/CONDITION",
                 "batch Edit p/87438806 where/ p/Phone = 87438807", page2);
         insertRow("Operate on Contacts within Range", "range COMMAND from/INDEX to/INDEX",
                 "range editperson e/johndoe@example.com from/6 to/10", page2);
-        insertRow("Chaining Commands", "chain COMMAND_A && COMMAND_B", "chain editappointment 6 l/360 && listappointments", page2);
+        insertRow("Chaining Commands", "chain COMMAND_A && COMMAND_B",
+                "chain editappointment 6 l/360 && listappointments", page2);
 
         setPage1();
     }
@@ -182,7 +188,7 @@ public class HelpWindow extends UiPart<Stage> {
         label.setWrapText(true);
         label.setPrefWidth(350);
         label.setPrefHeight(text.length() > 60 ? 50 : 30);
-        label.setPadding(new Insets(0,0,0,5));
+        label.setPadding(new Insets(0, 0, 0, 5));
         label.setText(text);
         label.setTextFill(Paint.valueOf("#FFFFFF"));
 
