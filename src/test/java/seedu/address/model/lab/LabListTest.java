@@ -203,4 +203,24 @@ class LabListTest {
         labs.add(new Lab("1"));
         assertThrows(UnsupportedOperationException.class, () -> labs.asUnmodifiableObservableList().remove(0));
     }
+
+    @Test
+    public void equals_success() {
+        LabList labs1 = new LabList();
+        LabList labs2 = new LabList();
+        List<Lab> labList = Arrays.asList(new Lab("1"), new Lab("2"));
+        labs1.setLabs(labList);
+        labs2.setLabs(labList);
+        assertTrue(labs1.equals(labs2));
+    }
+
+    @Test
+    public void equals_differentLists_failure() {
+        LabList labs1 = new LabList();
+        LabList labs2 = new LabList();
+        List<Lab> labList = Arrays.asList(new Lab("1"), new Lab("2"));
+        labs1.setLabs(labList);
+        labs2.add(new Lab("1"));
+        assertFalse(labs1.equals(labs2));
+    }
 }
