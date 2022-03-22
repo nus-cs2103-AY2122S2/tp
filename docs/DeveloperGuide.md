@@ -306,6 +306,47 @@ The returned `CommandResult` is then used by `MainWindow` to switch between diff
 
 ![CommandResult Class Diagram](images/UiFocusSequenceDiagram.png)
 
+### The Onboarding Guide
+
+This section describes the implementation of the onboarding guide component.
+
+#### Accessing the Onboarding Guide
+The onboarding guide is accessible through an onboarding prompt, which only appears if the data currently in application is the sample data that is seeded during the first run. The onboarding prompt leads the user to inititate the guided onboarding tutorial. The onboarding guide can also be alternatively accessed through the menu bar.
+
+#### The `OnboardingWindow` Class
+To mimic the actual environment of ContaX, the OnboardingWindow appears as a clone of the MainWindow, but with a different set of UI and logic components aimed towards providing a quick start guide.
+
+The class diagram of the UI components are as follows:
+
+![OnboardingUiClassDiagram](images/OnboardingUiClassDiagram.png)
+
+#### Onboarding models
+The `OnboardingStep` and `OnboardingStory` models are implemented to support the onboarding component. Functionally, each `OnboardingStep` instance represents a step in the onboarding guide, containing a set of instruction for the `OnboardingWindow`. The `OnboardingStory` on the other hand represents an onboarding sequence comprised of a series of OnboardingSteps.
+
+##### The `OnboardingStep` Class
+The purpose of the OnboardingStep is to soley contain UI and logic updates for the OnboardingWindow and is therefore implemented with minimal functionalities, providing only getters and setters for initialization and processing.
+
+##### The `OnboardingStory` Class
+The OnboardingStory serves as a simple container class for `OnboardingStep` objects, providing a basic subset of list functionalities.
+
+#### The `OnboardingStoryManager` Class
+The OnboardingStoryManager is a driver class for the OnboardingWindow containing the necessary logic to interact with the OnboardingStory and OnboardingStep. This is accomplished by keeping track of the onboarding guide's progress and providing the OnboardingWindow with the current OnboardingStep whenever a specified event is detected.
+
+The sequence diagram of a mouse click event interaction is as follows:
+![OnboardingStepSequenceDiagram](images/OnboardingStepSequenceDiagram.png)
+
+#### Processing of OnboardingSteps
+Upon the processing of an OnboardingStep, the OnboardingWindow propagates the instruction to the other UI components to update them accordingly. In cases that the OnboardingStep does not contain any instruction for a particular UI components, that component's update function will not be invoked and will therefore remain the same.
+
+A possible sequence of processing is as follows:
+![OnboardingUiSequenceDiagram](images/OnboardingUiSequenceDiagram.png)
+
+#### Directing User's Attention
+
+Throughout the onboarding guide, Overlays and Highlights are used to direct the user's attention for a better user experience. Within the OnboardingWindow, multiple UI objects are implemented with the functionality to be highlighted with a yellow border to attract the user's attention.
+
+##### The `Overlay` Class
+The Overlay class is implemented using 2 translucent panes binded to the top and bottom of the OnboardingWindow. This makes it possible to create an desired area of focus by leaving only an area uncovered.
 
 ### Import and Export CSV Features
 
