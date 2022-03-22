@@ -19,6 +19,7 @@ public class ListCommand extends Command {
     public static final String MESSAGE_STUDENTS = "students";
     public static final String MESSAGE_MODULES = "modules";
     public static final String MESSAGE_CLASS_GROUPS = "class groups";
+    public static final String MESSAGE_ASSESSMENTS = "assessments";
 
     private EntityType entityType;
     private Optional<EntityType> filterEntityType;
@@ -50,6 +51,10 @@ public class ListCommand extends Command {
         case CLASS_GROUP:
             model.updateFilteredClassGroupList(PREDICATE_SHOW_ALL);
             result = String.format(result, MESSAGE_CLASS_GROUPS);
+            break;
+        case ASSESSMENT:
+            model.updateFilteredAssessmentList(PREDICATE_SHOW_ALL);
+            result = String.format(result, MESSAGE_ASSESSMENTS);
             break;
         default:
             throw new UnknownEntityException();

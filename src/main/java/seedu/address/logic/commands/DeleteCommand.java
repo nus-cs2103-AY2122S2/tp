@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.TYPE_ASSESSMENT;
 import static seedu.address.logic.parser.CliSyntax.TYPE_CLASS;
 import static seedu.address.logic.parser.CliSyntax.TYPE_MODULE;
 import static seedu.address.logic.parser.CliSyntax.TYPE_STUDENT;
@@ -11,6 +12,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.assessment.Assessment;
 import seedu.address.model.classgroup.ClassGroup;
 import seedu.address.model.entity.Entity;
 import seedu.address.model.entity.EntityType;
@@ -42,7 +44,12 @@ public class DeleteCommand extends Command {
             + "\tParameters: " + TYPE_CLASS
             + " INDEX (must be a positive integer)\n"
             + "\tExample: " + COMMAND_WORD + " "
-            + TYPE_CLASS + " 1";
+            + TYPE_CLASS + " 1"
+            + "4. Deletes an assessment:\n"
+            + "\tParameters: " + TYPE_ASSESSMENT
+            + " INDEX (must be a positive integer)\n"
+            + "\tExample: " + COMMAND_WORD + " "
+            + TYPE_ASSESSMENT + " 1";
 
     public static final String MESSAGE_DELETE_ENTITY_SUCCESS = "Deleted Entity: %1$s";
 
@@ -64,6 +71,7 @@ public class DeleteCommand extends Command {
         List<Student> lastShownStudentList = model.getFilteredStudentList();
         List<TaModule> lastShownModuleList = model.getFilteredModuleList();
         List<ClassGroup> lastShownClassGroupList = model.getFilteredClassGroupList();
+        List<Assessment> lastShownAssessmentList = model.getFilteredAssessmentList();
         Entity entityToDelete;
 
         switch(entityType) {
@@ -88,6 +96,14 @@ public class DeleteCommand extends Command {
             }
             entityToDelete = lastShownClassGroupList.get(targetIndex.getZeroBased());
             break;
+
+        case ASSESSMENT:
+            if (targetIndex.getZeroBased() >= lastShownAssessmentList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_ASSESSMENT_DISPLAYED_INDEX);
+            }
+            entityToDelete = lastShownAssessmentList.get(targetIndex.getZeroBased());
+            break;
+
 
         default:
             throw new UnknownEntityException();
