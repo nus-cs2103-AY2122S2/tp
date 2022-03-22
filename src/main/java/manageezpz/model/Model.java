@@ -123,8 +123,17 @@ public interface Model {
      * Tags the given task.
      * The task must exist in the task list.
      * @param task
+     * @param person
      */
     void tagTask(Task task, Person person);
+
+    /**
+     * Untags the given task.
+     * The task must exist in the task list.
+     * @param task
+     * @param person
+     */
+    void untagTask(Task task, Person person);
 
     /**
      * Adds the given task.
