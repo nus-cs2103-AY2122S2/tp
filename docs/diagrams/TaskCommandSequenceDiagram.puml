@@ -39,6 +39,9 @@ Person --> TaskCommand -- MODEL_COLOR: targetTaskList:TaskList
 
 ref over TaskCommand: Categorise each task in targetTaskList
 
+TaskCommand -> Model ++ MODEL_COLOR: updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)
+deactivate Model
+
 create CommandResult
 TaskCommand -> CommandResult
 activate CommandResult LOGIC_COLOR
