@@ -29,6 +29,8 @@ public class FilterCommand extends Command {
 
     private FilterDescriptor filterDescriptor;
 
+    public FilterDescriptor getDescriptor() {return filterDescriptor;}
+
     /**
      * Constructor for this class to create a FilterCommand object.
      *
@@ -61,8 +63,8 @@ public class FilterCommand extends Command {
         }
 
         // state check
-        FilterCommand e = (FilterCommand) other;
-        return filterDescriptor.equals(((FilterCommand) other).filterDescriptor);
+        FilterCommand f = (FilterCommand) other;
+        return filterDescriptor.equals(f.filterDescriptor);
     }
 
     /**
@@ -104,9 +106,8 @@ public class FilterCommand extends Command {
 
             // state check
             FilterDescriptor f = (FilterDescriptor) other;
-
-            return this.faculty.equals(f.faculty)
-                    && this.status.equals(f.status);
+            return faculty.equals(f.faculty)
+                    && status.equals(f.status);
         }
     }
 }
