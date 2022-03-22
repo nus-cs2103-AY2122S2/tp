@@ -43,5 +43,10 @@ public class FriendNameTest {
        FriendName friendNameTwo = new FriendName("Bernice Teng");
 
        assertFalse(friendNameOne.equals(friendNameTwo));
+
+       //Friend name is case insensitive. eg arthur neo is the same as Arthur Neo
+       assertTrue(friendNameOne.equals(new FriendName("arthur neo")));
+
+       assertFalse(friendNameOne == null);
     }
 }

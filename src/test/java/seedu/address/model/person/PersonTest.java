@@ -72,9 +72,13 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
 
-        // name differs in case, all other attributes same -> returns false
+        // name differs in case, all other attributes same -> returns true
         Person editedBob = new PersonBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        assertTrue(BOB.isSamePerson(editedBob));
+
+        // name differs in case, all other attributes different -> returns true
+        editedBob = new PersonBuilder(ALICE).withName(VALID_NAME_BOB.toLowerCase()).build();
+        assertTrue(BOB.isSamePerson(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
@@ -148,6 +152,11 @@ public class PersonTest {
         // returns true even with different attributes
         Person editedAlice = new PersonBuilder(ALICE).withLogs(TypicalLogs.getTypicalLogs()).build();
         assertTrue(ALICE.hasSameName(editedAlice));
+
+        //returns true even if cases are different
+        FriendName repeatedNameDifferentCase = new FriendName("Some Valid Name");
+        otherPerson = new Person(repeatedNameDifferentCase);
+        assertTrue(person.hasSameName(otherPerson));
 
         // returns false
         assertFalse(ALICE.hasSameName(BOB));
