@@ -13,10 +13,15 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 
 /**
- * Parses user input starting with "assign".
+ * Parses input arguments and creates a new AssignCommand object.
  */
 public class AssignCommandParser implements Parser<AssignCommand> {
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the {@code AssignCommand}
+     * and returns an {@code AssignCommand} object for execution.
+     * @throws ParseException if the user input does not conform the expected format.
+     */
     @Override
     public AssignCommand parse(String args) throws ParseException {
         requireNonNull(args);

@@ -21,7 +21,8 @@ public class AssignCommand extends Command {
 
     public static final String COMMAND_WORD = "assign";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns a student contact to ArchDuke. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns a student contact to "
+            + "an existing group in ArchDuke. "
             + "Parameters: "
             + "INDEX (must be a positive integer) "
             + PREFIX_GROUP_NAME + "GROUP_NAME\n"
@@ -35,8 +36,13 @@ public class AssignCommand extends Command {
     private final Index index;
     private final Group group;
 
+
     /**
-     * Creates an AssignCommand to add the specified {@code Person}.
+     * Creates an AssignCommand to assign the specified {@code Person}
+     * at the specified {@code Index} to an existing {@code Group}.
+     *
+     * @param index Index of the student contact.
+     * @param group An existing group to assign the student contact.
      */
     public AssignCommand(Index index, Group group) {
         requireAllNonNull(index, group);
