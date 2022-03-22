@@ -2,6 +2,7 @@ package seedu.contax.model.appointment;
 
 import seedu.contax.model.person.Person;
 
+import java.util.Locale;
 import java.util.function.Predicate;
 
 public class HasClientPredicate implements Predicate<Appointment> {
@@ -14,6 +15,7 @@ public class HasClientPredicate implements Predicate<Appointment> {
 
     @Override
     public boolean test(Appointment appointment) {
-        return appointment.getPerson().getName().toString().equals(clientName);
+        return appointment.getPerson().getName().toString()
+                .toLowerCase(Locale.ROOT).equals(clientName.toLowerCase(Locale.ROOT));
     }
 }
