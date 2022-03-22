@@ -203,13 +203,15 @@ Example:
 
 ### Assigning tasks to a particular student: `assign`
 
-Format: `assign i/STUDENT_ID tn/TASK_NAME`
+Format: `assign i/STUDENT_ID tn/TASK_NAME` (or) `assign m/MODULE_CODE tn/TASK_NAME`
 
 * Assigns a task to a particular student.
 
 Example:
 * `assign i/AXXXXXXXR tn/assignment 1`
     * Assigns assignment 1 to student with id AXXXXXXXR.
+* `assign m/CS2103T tn/assignment 1`
+    * Assigns assignment 1 to students taking module CS2103T.
 
 
 ### Displaying manual for a command: `manual`
@@ -257,6 +259,8 @@ Action      | Format, Examples
 ------------|------------------
 **Add**     | `add i/MATRICULATION_NO n/STUDENT_NAME m/MODULE_CODE [p/PHONE_NUMBER] [h/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] ` <br> e.g., `add i/AXXXXXXXR n/john m/CS2103T p/98765432 t/johnnn e/e0123456@u.nus.edu`
 **Delete**  | `delete STUDENT_INDEX` (or) `delete i/STUDENT_ID` <br> e.g., `delete 10`, `delete i/AXXXXXXXR`
+**Find**    | `find n/STUDENT_NAME` (or) `find i/STUDENT_ID` <br> e.g., `find n/john`, `find i/AXXXXXXXR`
+**Manual**  | `manual [COMMAND_NAME]` <br> e.g., `manual add`, `manual`
 **Find**    | `find n/STUDENT_NAME` (or) `find i/STUDENT_ID` (or) `find m/MODULE_CODE` <br> e.g., `find n/john`, `find i/AXXXXXXXR`, `find m/CS2103T`
 **Manual**  | `manual COMMAND_NAME` <br> e.g., `manual add`
 **Exit**    | `exit`
@@ -264,7 +268,7 @@ Action      | Format, Examples
 **Mark**    | `mark i/STUDENT_ID idx/UNDONE_TASK_INDEX` <br> e.g., `mark i/AXXXXXXXR idx/1`
 **Unmark**  | `unmark i/STUDENT_ID idx/DONE_TASK_INDEX` <br> e.g., `unmark i/AXXXXXXXR idx/1`
 **list**    | `list`
-**Assign**  | `assign i/STUDENT_ID tn/TASK_NAME` <br> e.g., `task i/AXXXXXXXR tn/assignment 1`
+**Assign**  | `assign i/STUDENT_ID tn/TASK_NAME` (or) `assign m/MODULE_CODE tn/TASK_NAME` <br> e.g., `task i/AXXXXXXXR tn/assignment 1`, `assign m/CS2103T tn/assignment 2`
 **Edit**    | `edit STUDENT_INDEX [i/MATRICULATION_NO] [n/STUDENT_NAME] [m/MODULE_CODE] [p/PHONE_NUMBER] [t/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] ` <br> e.g., `edit 10 m/CS2103T p/98765432 t/johnnn e/e0123456@nus.edu.sg`
 **Clear**   | `clear`
 **Archive** | `archive`

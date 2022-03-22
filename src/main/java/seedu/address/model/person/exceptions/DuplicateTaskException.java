@@ -6,6 +6,6 @@ package seedu.address.model.person.exceptions;
  */
 public class DuplicateTaskException extends RuntimeException {
     public DuplicateTaskException() {
-        super("Operation would result in duplicate tasks");
+        super("Operation would result in duplicate tasks assigned to all students");
     }
 }
