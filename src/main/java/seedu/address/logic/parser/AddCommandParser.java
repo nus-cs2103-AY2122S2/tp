@@ -8,6 +8,8 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.lineup.Lineup;
+import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.JerseyNumber;
@@ -30,7 +32,20 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_PLAYER, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_HEIGHT, PREFIX_JERSEY_NUMBER, PREFIX_TAG, PREFIX_WEIGHT);
+                        PREFIX_HEIGHT, PREFIX_JERSEY_NUMBER, PREFIX_TAG, PREFIX_WEIGHT, PREFIX_LINEUP);
+
+        if (arePrefixesPresent(argMultimap, PREFIX_LINEUP) &&
+                !arePrefixesPresent(argMultimap, PREFIX_PHONE, PREFIX_EMAIL,
+                        PREFIX_JERSEY_NUMBER, PREFIX_HEIGHT, PREFIX_WEIGHT)) {
+            LineupName name = ParserUtil.parseLineupName(argMultimap.getValue(PREFIX_NAME).get());
+            Lineup lineup = new Lineup(name);
+            if (arePrefixesPresent(argMultimap, PREFIX_PLAYER)) {
+                // to be added later
+                // need to parse all players and put them into lineup
+            }
+            return new AddCommand(lineup);
+
+        }
 
         if (!arePrefixesPresent(argMultimap, PREFIX_PLAYER, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_JERSEY_NUMBER, PREFIX_HEIGHT, PREFIX_WEIGHT)

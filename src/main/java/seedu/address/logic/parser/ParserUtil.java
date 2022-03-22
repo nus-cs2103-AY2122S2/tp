@@ -176,9 +176,9 @@ public class ParserUtil {
      *
      * @throws ParseException
      */
-    public static LineupName parseLineupName(String jerseyNumber) throws ParseException {
-        requireNonNull(jerseyNumber);
-        String trimmedLineupName = jerseyNumber.trim();
+    public static LineupName parseLineupName(String lineupName) throws ParseException {
+        requireNonNull(lineupName);
+        String trimmedLineupName = lineupName.trim();
         if (!LineupName.isValidLineupName(trimmedLineupName)) {
             throw new ParseException(LineupName.MESSAGE_CONSTRAINTS);
         }

@@ -17,6 +17,12 @@ public class Lineup {
     private final LineupName lineupName;
     private final LineupPlayersList playersList;
 
+    public Lineup(LineupName lineupName) {
+        requireAllNonNull(lineupName);
+        this.lineupName = lineupName;
+        this.playersList = new LineupPlayersList();
+    }
+
     /**
      * lineupName must be present and not null.
      */

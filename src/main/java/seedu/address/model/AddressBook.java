@@ -175,16 +175,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         lineups.addLineupToList(lineup);
     }
 
-    /**
-     * Removes a Lineup from MyGM
-     *
-     * @param lineup The Lineup to be removed
-     */
-    public void removeLineup(Lineup lineup) {
-        lineups.deleteLineupFromList(lineup);
-    }
-
-
     //// util methods
 
     @Override
