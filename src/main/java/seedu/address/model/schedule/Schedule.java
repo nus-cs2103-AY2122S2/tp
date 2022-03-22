@@ -4,6 +4,9 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+/**
+ * Represents a schedule in MyGM
+ */
 public class Schedule {
     private final ScheduleName scheduleName;
     private final ScheduleDescription scheduleDescription;

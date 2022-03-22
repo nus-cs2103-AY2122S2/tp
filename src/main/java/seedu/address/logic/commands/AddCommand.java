@@ -62,6 +62,9 @@ public class AddCommand extends Command {
         toAddLineup = null;
     }
 
+    /**
+     * Creates an AddCommand to add the specified {@code Lineup}
+     */
     public AddCommand(Lineup lineup) {
         requireNonNull(lineup);
         toAddLineup = lineup;
@@ -70,6 +73,13 @@ public class AddCommand extends Command {
 
     /* to add: add lineup */
 
+    /**
+     * Executes the AddCommand and returns the result message.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return feedback message of the operation result for display
+     * @throws CommandException If an error occurs during command execution.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);

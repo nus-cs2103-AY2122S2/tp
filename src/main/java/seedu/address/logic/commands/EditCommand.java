@@ -72,6 +72,8 @@ public class EditCommand extends Command {
     private final LineupName editLineupName;
 
     /**
+     * Constructs an EditCommand for Person
+     *
      * @param targetPlayerName     of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
@@ -86,6 +88,12 @@ public class EditCommand extends Command {
         this.editLineupName = null;
     }
 
+    /**
+     * Constructs an EditCommand for Lineup
+     *
+     * @param targetLineupName The target LineupName to edit
+     * @param editLineupName The new LineupName
+     */
     public EditCommand(LineupName targetLineupName, LineupName editLineupName) {
         requireNonNull(targetLineupName);
         requireNonNull(editLineupName);
@@ -97,6 +105,13 @@ public class EditCommand extends Command {
         this.editLineupName = editLineupName;
     }
 
+    /**
+     * Executes the EditCommand and returns the result message.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return feedback message of the operation result for display
+     * @throws CommandException If an error occurs during command execution.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -153,6 +168,9 @@ public class EditCommand extends Command {
                 updatedHeight, updatedJerseyNumber, updatedTags, updatedWeight, lineupNames);
     }
 
+    /**
+     * Creates and return a {@code Lineup} with the new Lineup name
+     */
     private static Lineup createEditedLineup(Lineup lineupToEdit, LineupName editLineupName) {
         assert lineupToEdit != null;
 

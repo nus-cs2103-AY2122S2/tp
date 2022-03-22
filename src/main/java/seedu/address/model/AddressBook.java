@@ -13,7 +13,7 @@ import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.schedule.UniqueScheduleList;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at MyGM
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
