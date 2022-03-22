@@ -13,6 +13,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
+import seedu.contax.commons.core.LogsCenter;
+
+import java.util.logging.Logger;
 
 public class HelpWindow extends UiPart<Stage> {
     private static final String FXML = "HelpWindow.fxml";
@@ -33,34 +36,72 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     private Button secondPageBtn;
 
-
+    /**
+     * Creates a new HelpWindow.
+     *
+     * @param root Stage to use as the root of the HelpWindow.
+     */
     public HelpWindow(Stage root) {
         super(FXML, root);
         init();
     }
 
+    /**
+     * Creates a new HelpWindow.
+     */
     public HelpWindow() {
         this(new Stage());
     }
 
+    /**
+     * Shows the help window.
+     * @throws IllegalStateException
+     * <ul>
+     *     <li>
+     *         if this method is called on a thread other than the JavaFX Application Thread.
+     *     </li>
+     *     <li>
+     *         if this method is called during animation or layout processing.
+     *     </li>
+     *     <li>
+     *         if this method is called on the primary stage.
+     *     </li>
+     *     <li>
+     *         if {@code dialogStage} is already showing.
+     *     </li>
+     * </ul>
+     */
     public void show() {
+
         getRoot().show();
         getRoot().centerOnScreen();
 
     }
 
+    /**
+     * Returns true if the help window is currently being shown
+     */
     public boolean isShowing() {
         return getRoot().isShowing();
     }
 
+    /**
+     * Hides the help window
+     */
     public void hide() {
         getRoot().hide();
     }
 
+    /**
+     * Focuses on the help window
+     */
     public void focus() {
         getRoot().requestFocus();
     }
 
+    /**
+     * Initializes the HelpWindow by populating it with data
+     */
     private void init() {
 
         // set up table headers
@@ -109,13 +150,28 @@ public class HelpWindow extends UiPart<Stage> {
         setPage1();
     }
 
-    private void insertRow(String action, String format, String example, GridPane table) {
-        table.add(makeCell(action, CELL_COLOR), 0, rowCounter);
-        table.add(makeCell(format, CELL_COLOR), 1, rowCounter);
-        table.add(makeCell(example, CELL_COLOR), 2, rowCounter);
+    /**
+     * Inserts a row into the help window table at the current row.
+     * The current row is indicated by rowCounter.
+     * @param s1 string for the first column
+     * @param s2 string for the second column
+     * @param s3 string for the third column
+     * @param table table for row to be inserted into
+     */
+    private void insertRow(String s1, String s2, String s3, GridPane table) {
+        table.add(makeCell(s1, CELL_COLOR), 0, rowCounter);
+        table.add(makeCell(s2, CELL_COLOR), 1, rowCounter);
+        table.add(makeCell(s3, CELL_COLOR), 2, rowCounter);
         rowCounter += 1;
     }
 
+
+    /**
+     * Makes a cell, which comprises a hbox and a label within it.
+     * @param text text of the label
+     * @param paint background color of the cell
+     * @return a node object which corresponds to a cell in the table
+     */
     private Node makeCell(String text, Paint paint) {
         HBox hbox = new HBox();
         hbox.setAlignment(Pos.CENTER_LEFT);
@@ -134,6 +190,9 @@ public class HelpWindow extends UiPart<Stage> {
         return hbox;
     }
 
+    /**
+     * Sets page 1 to be shown
+     */
     public void setPage1() {
         page1.setVisible(true);
         page2.setVisible(false);
@@ -142,6 +201,9 @@ public class HelpWindow extends UiPart<Stage> {
 
     }
 
+    /**
+     * Sets page 2 to be shown
+     */
     public void setPage2() {
         page1.setVisible(false);
         page2.setVisible(true);
