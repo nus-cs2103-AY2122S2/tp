@@ -225,7 +225,7 @@ The following sequence diagrams shows how the mark command works:
 
 #### Description
 
-The `unmark` command marks a specific done task as undone for a particular student. Since all the fields are compulsory during the execution of the `unmark` command, the user's input is being parsed in `AddressBookParser`. After which, a new `UnmarkCommand` object will be created, and is executed by the `LogicManager`.
+The `unmark` command marks a specific done task as undone for a particular student. During the execution of the `unmark` command, the user's input is being parsed in `AddressBookParser`. After which, a new `UnmarkCommand` object will be created, and is executed by the `LogicManager`.
 
 #### Implementation
 1. Upon receiving the user input, the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
