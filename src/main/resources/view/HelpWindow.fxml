@@ -22,7 +22,6 @@
       </stylesheets>
          <VBox>
             <children>
-      
             <HBox fx:id="helpMessageContainer" alignment="CENTER">
               <children>
                 <Label fx:id="helpMessage" text="Label">
