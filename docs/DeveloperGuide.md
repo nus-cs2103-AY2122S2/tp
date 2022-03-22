@@ -524,14 +524,14 @@ object will be created, and is subsequently executed by the `LogicManager`.
 9. A new `FindCommand` will be created (using the `Predicate` in Step 8) and returned to the `LogicManager`.
 10. The `LogicManager` will then call `FindCommand#execute(Model model)`.
 11. In the `FindCommand`, the `model#updateFilteredPersonList(Predicate<Person> predicate)` will be invoked, which
-    updates the filter of the filtered person list to filter by the given `Predicate`.
+    updates the filter of the person list to filter by the given `Predicate`.
 12. Lastly, the `FindCommand` will create a new `CommandResult`, which will be returned to `LogicManager`.
 
 The following sequence diagram shows how the find operation works:
 
-![AddCommandSequenceDiagram-1](images/AddCommandSequenceDiagram-1.png)
+![AddCommandSequenceDiagram-1](images/FindCommandSequenceDiagram-1.png)
 
-![AddCommandSequenceDiagram-2](images/AddCommandSequenceDiagram-2.png)
+![AddCommandSequenceDiagram-2](images/FindCommandSequenceDiagram-2.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
