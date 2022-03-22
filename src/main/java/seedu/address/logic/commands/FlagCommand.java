@@ -8,8 +8,10 @@ import java.util.List;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.HustleBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.Flag;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -27,15 +29,15 @@ public class FlagCommand extends Command {
 
     public static final String MESSAGE_FLAG_PERSON_SUCCESS = "Updated flag for Person: %1$s";
 
-    private final Index targetIndex;
+    private final Name targetName;
     private final Flag flag;
 
     /**
-     * @param targetIndex Index of person whose flag to replace.
+     * @param targetName Index of person whose flag to replace.
      * @param flag Flag to replace with.
      */
-    public FlagCommand(Index targetIndex, Flag flag) {
-        this.targetIndex = targetIndex;
+    public FlagCommand(Name targetName, Flag flag) {
+        this.targetName = targetName;
         this.flag = flag;
     }
 
@@ -43,6 +45,8 @@ public class FlagCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+        HustleBook tempHustleBook = new HustleBook();
+        Index targetIndex = tempHustleBook.getPersonListIndex(lastShownList, targetName);
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -58,6 +62,6 @@ public class FlagCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof FlagCommand // instanceof handles nulls
-                && targetIndex.equals(((FlagCommand) other).targetIndex)); // state check
+                && targetName.equals(((FlagCommand) other).targetName)); // state check
     }
 }
