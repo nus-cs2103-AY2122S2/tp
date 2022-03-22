@@ -1,6 +1,5 @@
 package seedu.address.commons.util;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
@@ -30,8 +29,9 @@ public class FileUtil {
     }
 
     /**
-     * Returns true if {@code path} can be converted into a {@code Path} via {@link Paths#get(String)},
+     * Returns true if {@code path} can be converted into a {@code Path} via {@link Paths#get(String, String...)},
      * otherwise returns false.
+     *
      * @param path A string representing the file path. Cannot be null.
      */
     public static boolean isValidPath(String path) {
@@ -45,26 +45,12 @@ public class FileUtil {
 
     /**
      * Creates a file if it does not exist along with its missing parent directories.
+     *
      * @throws IOException if the file or directory cannot be created.
      */
     public static void createIfMissing(Path file) throws IOException {
         if (!isFileExists(file)) {
             createFile(file);
-        }
-    }
-
-    /**
-     * Deletes a directory if it exists.
-     * @throws IOException if the directory cannot be deleted.
-     */
-    public static void deleteDirectoryIfExists(String dirPath) throws IOException {
-        Path directoryPath = Paths.get(dirPath);
-        if (isDirectoryExists(directoryPath)) {
-            File dir = new File(dirPath);
-            File[] fileList = dir.listFiles();
-            for (File file : fileList) {
-                file.delete();
-            }
         }
     }
 
@@ -106,5 +92,4 @@ public class FileUtil {
     public static void writeToFile(Path file, String content) throws IOException {
         Files.write(file, content.getBytes(CHARSET));
     }
-
 }
