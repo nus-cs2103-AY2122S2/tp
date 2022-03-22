@@ -96,7 +96,7 @@ Format: `add module n/MODULE_NAME c/MODULE_CODE a/ACADEMIC_YEAR`
 | S8  | Mini-Semester 2B       |
 
 Examples:
-* `add module n/Software Engineering Project c/CS2103T a/21S1` creates a new module named `Software Engineering Project` with a module code of `CS2103T` for the academic year `2021 Semester 1`.
+* `add module n/Software Engineering Project c/CS2103T a/21S1` creates a new module named `Software Engineering Project` with a module code of `CS2103T` for the academic year `21S1` (academic year 2021 Semester 1).
 
 #### Adding a class group: `add class`
 
@@ -104,7 +104,7 @@ Adds a class group to TAssist.
 
 Format: `add class id/CLASS_GROUP_ID t/CLASS_GROUP_TYPE m/MODULE_INDEX`
 
-* TAssist supports the following class group types: lab, recitation, sectional and tutorial.
+* TAssist supports the following `CLASS_GROUP_TYPE`: `LAB`, `RECITATION`, `SECTIONAL` and `TUTORIAL`.
 
 Examples:
 * `add class id/T13 t/tutorial m/1` creates a new class group that is tied to the 1st module shown when `list module` is run.
@@ -128,7 +128,7 @@ Format: `enrol c/CLASS_GROUP_INDEX s/all|STUDENT_INDEXES|STUDENT_IDS`
 
 * Enrols the specified students to the class group at the specified `CLASS_GROUP_INDEX`.
 * Students may be specified with either `all` (i.e. all students), `STUDENT_INDEXES` or `STUDENT_IDS`.
-* Multiple student indexes or IDs can be separated with commas (i.e. `s/1,2,3` or `s/e0123456,e0234567`).
+* Multiple `STUDENT_INDEXES` or `STUDENT_IDS` should be separated with commas (i.e. `s/1,2,3` or `s/e0123456,e0234567`).
 * The index refers to the index number shown in the displayed student or class group list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
@@ -145,7 +145,7 @@ Format: `disenrol c/CLASS_GROUP_INDEX s/all|STUDENT_INDEXES|STUDENT_IDS`
 
 * Disenrols the specified students from the class group at the specified `CLASS_GROUP_INDEX`.
 * Students may be specified with either `all` (i.e. all students), `STUDENT_INDEXES` or `STUDENT_IDS`; they should already be enrolled in the specified class group.
-* Multiple student indexes or IDs can be separated with commas (i.e. `s/1,2,3` or `s/e0123456,e0234567`).
+* Multiple `STUDENT_INDEXES` or `STUDENT_IDS` should be separated with commas (i.e. `s/1,2,3` or `s/e0123456,e0234567`).
 * The index refers to the index number shown in the displayed student or class group list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
@@ -164,7 +164,7 @@ Format: `mark attend c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|STUDENT_INDEXES|STUD
 
 * Marks the attendance(s) of the specified student(s) belonging to the class group at the specified `CLASS_GROUP_INDEX` for the specified week.
 * Students may be specified with either `all` (i.e. all students), `STUDENT_INDEXES` or `STUDENT_IDS`.
-* Multiple student indexes or IDs can be separated with commas (i.e. `s/1,2,3` or `s/e0123456,e0234567`).
+* Multiple `STUDENT_INDEXES` or `STUDENT_IDS` should be separated with commas (i.e. `s/1,2,3` or `s/e0123456,e0234567`).
 * The index refers to the index number shown in the displayed student or class group list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
@@ -181,7 +181,7 @@ Format: `unmark attend c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|STUDENT_INDEXES|ST
 
 * Unmarks the attendance(s) of the specified student(s) belonging to the class group at the specified `CLASS_GROUP_INDEX` for the specified week.
 * Students may be specified with either `all` (i.e. all students), `STUDENT_INDEXES` or `STUDENT_IDS`.
-* Multiple student indexes or IDs can be separated with commas (i.e. `s/1,2,3` or `s/e0123456,e0234567`).
+* Multiple `STUDENT_INDEXES` or `STUDENT_IDS` should be separated with commas (i.e. `s/1,2,3` or `s/e0123456,e0234567`).
 * The index refers to the index number shown in the displayed student or class group list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
@@ -198,7 +198,7 @@ Format: `grade {a/ASSESSMENT_INDEX | sn/SIMPLE_NAME m/MODULE_INDEX} s/all|STUDEN
 
 * The assessment can be specified with either the `ASSESSMENT_INDEX` or the `SIMPLE_NAME` and `MODULE_INDEX`.
 * Students may be specified with either `all` (i.e. all students), `STUDENT_INDEXES` or `STUDENT_IDS`; they should already be enrolled in the module tied to the assessment.
-* Multiple student indexes or IDs can be separated with commas (i.e. `s/1,2,3` or `s/e0123456,e0234567`).
+* Multiple `STUDENT_INDEXES` or `STUDENT_IDS` should be separated with commas (i.e. `s/1,2,3` or `s/e0123456,e0234567`).
 * The index refers to the index number shown in the displayed assessment or module list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * If the grade is omitted, the value of the student's attempt will simply be incremented (i.e. `0` will be incremented to `1`).
