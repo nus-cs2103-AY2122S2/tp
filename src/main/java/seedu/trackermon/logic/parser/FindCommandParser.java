@@ -39,11 +39,15 @@ public class FindCommandParser implements Parser<FindCommand> {
         List<Predicate<Show>> predicateArrayList = new ArrayList<>();
 
         // Based on prefix, add user input as keywords into predicateArrayList
+        // PredicateArrayList.add -> AND Operator
+        // Whole list of keywords -> OR Operator
         if (hasNamePrefix) {
             hasPrefix = true;
             String input = argumentMultimap.getValue(PREFIX_NAME).get();
             keywordsArr = getKeywords(input);
-            predicateArrayList.add(new NameContainsKeywordsPredicate(Arrays.asList(keywordsArr)));
+            for (int i = 0; i < keywordsArr.length; i++) {
+                predicateArrayList.add(new NameContainsKeywordsPredicate(Arrays.asList(keywordsArr[i])));
+            }
         }
 
         if (hasStatusPrefix) {
@@ -55,9 +59,10 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         if (hasTagPrefix) {
             hasPrefix = true;
-            String input = argumentMultimap.getValue(PREFIX_TAG).get();
-            keywordsArr = getKeywords(input);
-            predicateArrayList.add(new TagsContainsKeywordsPredicate(Arrays.asList(keywordsArr)));
+            List<String> input = argumentMultimap.getAllValues(PREFIX_TAG);
+            for (int i = 0; i < input.size(); i++) {
+                predicateArrayList.add(new TagsContainsKeywordsPredicate(Arrays.asList(input.get(i))));
+            }
         }
 
         // if no prefix, find acts as a general search based on 1 keyword,
@@ -76,7 +81,6 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
-
         return trimmedArgs.split("\\s+");
     }
 }

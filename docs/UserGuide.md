@@ -133,25 +133,26 @@ Format: `find <KEYWORD>`
 * There must be at **least one keyword** and it **must not be empty**.
 
 Examples:
-* `find shingeki` displays all the shows in the list that contain the keyword `shingeki`.
+* `find shingeki` displays all the shows in the list that contain the keyword `shingeki` whether it is a name or tag.
 [put image here after ui update]
 
-**Narrow Find** Finds shows in Trackermon by matching the user's input across specific parameters using prefixes.
+**Precise Find** Finds shows in Trackermon by matching the user's input across specific parameters using prefixes.
 
 Format: `find n/[NAME] s/[STATUS] t/[TAG]`
-* **Within a single prefix**, the find command will execute an **OR** search across Trackermon's show list and return all shows that match either keywords that are input by the user.
-* **Across multiple prefixes**, the find command will execute an **AND** search across Trackermon's show list and return all shows that match all keywords.
+* **Within a single prefix**, the find command will execute an **AND** search across Trackermon's show list and return all shows that match all keywords that are input by the user.
+* **Across multiple prefixes**, the find command will execute an **AND** search across Trackermon's show list and return all shows that match all the keywords.
+* There must be at **least one prefix field** and it **must not be empty**.
 
 Examples:
-* `find n/shingeki s/watching t/seinen` displays all the shows in the Trackermon's show list that contain **shingeki** in NAME, **watching** in STATUS, and **seinen** in TAG.
-* `find n/Shutter Island s/watching` displays all the shows in the Trackermon's show list that contain **Shutter OR Island** in NAME, and **watching** in STATUS.
+* `find n/shingeki s/watching t/seinen` displays all the shows in the Trackermon's show list that contain **shingeki** in NAME, **watching** in STATUS, and **seinen** in TAG. [put image here after ui update]
+* `find n/Shutter Island s/watching` displays all the shows in the Trackermon's show list that contain **Shutter AND Island** in NAME, and **watching** in STATUS. [put image here after ui update]
 
 <div markdown="span" class="alert alert-warning">:bulb: **Tip:**
 Find is case-insensitive, and the order in which the keywords are entered is irrelevant. Partial words **will** be matched as well. e.g., `shing` will match `shingeki`.
 </div>
 
 <div markdown="span" class="alert alert-danger">:exclamation: **Caution:**
-find `find n/shingeki n/2` does not mean `find n/shingeki 2` The former will only find show names that match with **2**(as mentioned in [features](#features)) while the latter will find all show names that match **shingeki or 2**. This applies across all parameters.
+find `find n/shingeki n/no n/2` does not mean `find n/shingeki no 2` The former will only find show names that match with **2**(as mentioned in [features](#features)) while the latter will find all show names that match **shingeki and no and 2**. This applies across the name and tag parameters.
 </div>
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)

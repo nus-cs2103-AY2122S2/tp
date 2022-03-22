@@ -1,9 +1,9 @@
 package seedu.trackermon.model.show;
 
-import seedu.trackermon.commons.util.StringUtil;
-
 import java.util.List;
 import java.util.function.Predicate;
+
+import seedu.trackermon.commons.util.StringUtil;
 
 /**
  * Tests that a {@code Show}'s {@code Name} matches any of the keywords given.
