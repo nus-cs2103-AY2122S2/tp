@@ -18,6 +18,10 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
     public boolean test(Person person) {
         return keywords.stream()
                 .anyMatch(keyword -> {
+
+                    //keyword must not be blank spaces or empty string
+                    assert(!keyword.equals(" ") && !keyword.equals(""));
+
                     String keywordToLowerCase = keyword.toLowerCase(Locale.ROOT);
 
                     //check if (substring) name of a person matches keyword
