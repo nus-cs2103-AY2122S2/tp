@@ -2,8 +2,6 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPetAtIndex;
@@ -27,17 +25,22 @@ import seedu.address.testutil.PetBuilder;
 
 class AppointmentCommandTest {
 
-    private static final String APPOINTMENT_STUB = "Mar-04-2022 09:30 AM at NUS Vet Clinic";
+    private static final String APPOINTMENT_DATE_TIME_STUB = "02-04-2022 09:30";
+    private static final String APPOINTMENT_LOCATION_STUB = "NUS Vet Clinic";
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_addAppointmentUnfilteredList_success() {
         Pet firstPerson = model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
-        Pet editedPerson = new PetBuilder(firstPerson).withAppointment(APPOINTMENT_STUB).build();
+        Pet editedPerson = new PetBuilder(firstPerson)
+                .withAppointment(APPOINTMENT_DATE_TIME_STUB,
+                        APPOINTMENT_LOCATION_STUB).build();
 
-        AppointmentCommand appointmentCommand = new AppointmentCommand(INDEX_FIRST_PET,
-                new Appointment(editedPerson.getAppointment().value));
+        AppointmentCommand appointmentCommand =
+                new AppointmentCommand(INDEX_FIRST_PET,
+                        new Appointment(editedPerson.getAppointment().getDateTime(),
+                                editedPerson.getAppointment().getLocation()));
 
         String expectedMessage = String.format(AppointmentCommand.MESSAGE_ADD_APPOINTMENT_SUCCESS, editedPerson);
 
@@ -48,12 +51,12 @@ class AppointmentCommandTest {
     }
 
     @Test
-    public void execute_deleteAppointmentUnfilteredList_success() {
+    public void execute_clearAppointmentUnfilteredList_success() {
         Pet firstPerson = model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
-        Pet editedPerson = new PetBuilder(firstPerson).withAppointment("").build();
+        Pet editedPerson = new PetBuilder(firstPerson).withAppointment().build();
 
         AppointmentCommand appointmentCommand = new AppointmentCommand(INDEX_FIRST_PET,
-                new Appointment(editedPerson.getAppointment().toString()));
+                editedPerson.getAppointment());
 
         String expectedMessage = String.format(AppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS, editedPerson);
 
@@ -69,10 +72,11 @@ class AppointmentCommandTest {
 
         Pet firstPerson = model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
         Pet editedPerson = new PetBuilder(model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased()))
-                .withAppointment(APPOINTMENT_STUB).build();
+                .withAppointment(APPOINTMENT_DATE_TIME_STUB, APPOINTMENT_LOCATION_STUB).build();
 
         AppointmentCommand appointmentCommand = new AppointmentCommand(INDEX_FIRST_PET,
-                new Appointment(editedPerson.getAppointment().value));
+                new Appointment(editedPerson.getAppointment().getDateTime(),
+                        editedPerson.getAppointment().getLocation()));
 
         String expectedMessage = String.format(AppointmentCommand.MESSAGE_ADD_APPOINTMENT_SUCCESS, editedPerson);
 
@@ -86,7 +90,7 @@ class AppointmentCommandTest {
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPetList().size() + 1);
         AppointmentCommand appointmentCommand = new AppointmentCommand(outOfBoundIndex,
-                new Appointment(VALID_APPOINTMENT_BOB));
+                new Appointment());
 
         assertCommandFailure(appointmentCommand, model, Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);
     }
@@ -103,7 +107,7 @@ class AppointmentCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPetList().size());
 
         AppointmentCommand appointmentCommand = new AppointmentCommand(outOfBoundIndex,
-                new Appointment(VALID_APPOINTMENT_BOB));
+                new Appointment());
 
         assertCommandFailure(appointmentCommand, model, Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);
     }
@@ -111,10 +115,10 @@ class AppointmentCommandTest {
     @Test
     public void equals() {
         final AppointmentCommand standardCommand = new AppointmentCommand(INDEX_FIRST_PET,
-                new Appointment(VALID_APPOINTMENT_AMY));
+                new Appointment());
         // same values -> returns true
         AppointmentCommand commandWithSameValues = new AppointmentCommand(INDEX_FIRST_PET,
-                new Appointment(VALID_APPOINTMENT_AMY));
+                new Appointment());
         assertTrue(standardCommand.equals(commandWithSameValues));
         // same object -> returns true
         assertTrue(standardCommand.equals(standardCommand));
@@ -124,10 +128,7 @@ class AppointmentCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
         // different index -> returns false
         assertFalse(standardCommand.equals(new AppointmentCommand(INDEX_SECOND_PET,
-                new Appointment(VALID_APPOINTMENT_AMY))));
-        // different remark -> returns false
-        assertFalse(standardCommand.equals(new AppointmentCommand(INDEX_FIRST_PET,
-                new Appointment(VALID_APPOINTMENT_BOB))));
+                new Appointment())));
     }
 
 }

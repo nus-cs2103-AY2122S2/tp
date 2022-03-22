@@ -21,7 +21,7 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
 
     public static final Diet EMPTY_DIET = new Diet("");
-    public static final Appointment EMPTY_APPOINTMENT = new Appointment("");
+    public static final Appointment EMPTY_APPOINTMENT = new Appointment();
 
     public static Pet[] getSamplePets() {
         return new Pet[] {
