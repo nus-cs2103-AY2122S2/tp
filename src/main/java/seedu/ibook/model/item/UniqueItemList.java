@@ -96,13 +96,8 @@ public class UniqueItemList implements Iterable<Item> {
     public void incrementItemCount(Item target, Quantity quantity) {
         requireAllNonNull(target, quantity);
 
-        int index = internalList.indexOf(target);
-        if (index == -1) {
-            throw new ProductNotFoundException();
-        }
-
-        Item newItem = target.increment(quantity);
-        internalList.set(index, newItem);
+        Quantity newQuantity = target.getQuantity().add(quantity);
+        setItemCount(target, newQuantity);
     }
 
     /**
