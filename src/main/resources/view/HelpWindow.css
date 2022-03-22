@@ -1,19 +1,23 @@
-#copyButton, #helpMessage {
-    -fx-text-fill: white;
+.grid {
+    -fx-background-fill: black, white ;
+    -fx-background-insets: 0, 1 ;
 }
 
-#copyButton {
-    -fx-background-color: dimgray;
+.label-table-header {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: #555555;
+    -fx-opacity: 1;
+    -fx-alignment:  center;
+    -fx-border-color: black;
 }
 
-#copyButton:hover {
-    -fx-background-color: gray;
+.label-table-body {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: #000000;
+    -fx-opacity: 1;
+    -fx-alignment:  center;
+    -fx-border-color: black;
 }
 
-#copyButton:armed {
-    -fx-background-color: darkgray;
-}
-
-#helpMessageContainer {
-    -fx-background-color: derive(#1d1d1d, 20%);
-}
