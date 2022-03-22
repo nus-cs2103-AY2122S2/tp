@@ -18,8 +18,14 @@ public class LabTest {
     }
 
     @Test
-    public void constructor_invalidLab_throwsIllegalArgumentException() {
+    public void constructor_nonNumericCharacters_throwsIllegalArgumentException() {
         String invalidLabNumber = "a";
+        assertThrows(IllegalArgumentException.class, () -> new Lab(invalidLabNumber));
+    }
+
+    @Test
+    public void constructor_startsWithZero_throwsIllegalArgumentException() {
+        String invalidLabNumber = "012";
         assertThrows(IllegalArgumentException.class, () -> new Lab(invalidLabNumber));
     }
 
@@ -34,6 +40,7 @@ public class LabTest {
 
         // invalid lab
         assertFalse(Lab.isValidLab("1a")); // invalid lab number
+        assertFalse(Lab.isValidLab("01")); // invalid lab number
 
         // valid lab
         assertTrue(Lab.isValidLab("1")); // valid integer
@@ -42,7 +49,38 @@ public class LabTest {
     }
 
     @Test
-    public void editLabStatus_changeStatus_success() {
+    public void editLabStatus_sameStatusUnsubmitted_throwDuplicateLabException() {
+        Lab stub = new Lab("1");
+        assertThrows(DuplicateLabException.class, () -> stub.editLabStatus(LabStatus.UNSUBMITTED));
+    }
+
+    @Test
+    public void editLabStatus_sameStatusSubmitted_throwDuplicateLabException() {
+        Lab stub = new Lab("1");
+        stub = stub.editLabStatus(LabStatus.SUBMITTED);
+        Lab finalStub = stub;
+        assertThrows(DuplicateLabException.class, () -> finalStub.editLabStatus(LabStatus.SUBMITTED));
+    }
+
+    @Test
+    public void editLabStatus_sameStatusGraded_throwDuplicateLabException() {
+        Lab stub = new Lab("1");
+        stub = stub.editLabStatus(LabStatus.GRADED);
+        Lab finalStub = stub;
+        assertThrows(DuplicateLabException.class, () -> finalStub.editLabStatus(LabStatus.GRADED));
+    }
+
+    @Test
+    public void editLabStatus_changeStatusToSubmitted_success() {
+        Lab stub = new Lab("1");
+        stub = stub.editLabStatus(LabStatus.SUBMITTED);
+
+        assertEquals(new Lab("1").of(LabStatus.SUBMITTED.name()), stub);
+        assertNotEquals(new Lab("1"), stub);
+    }
+
+    @Test
+    public void editLabStatus_changeStatusToGraded_success() {
         Lab stub = new Lab("1");
         stub = stub.editLabStatus(LabStatus.GRADED);
 
@@ -51,16 +89,24 @@ public class LabTest {
     }
 
     @Test
-    public void editLabStatus_sameStatus_throwsDuplicateLabException() {
-        Lab stub = new Lab("1");
-        assertThrows(DuplicateLabException.class, () -> stub.editLabStatus(LabStatus.UNSUBMITTED));
-    }
-
-    @Test
     public void equals_success() {
         Lab lab1 = (new Lab("1")).of("SUBMITTED");
         Lab lab1copy = (new Lab("1")).of("SUBMITTED");
         assertTrue(lab1.equals(lab1copy));
+    }
+
+    @Test
+    public void equals_differentLabNumber_failure() {
+        Lab lab1 = (new Lab("1")).of("SUBMITTED");
+        Lab lab2 = (new Lab("2")).of("SUBMITTED");
+        assertFalse(lab1.equals(lab2));
+    }
+
+    @Test
+    public void equals_differentLabStatus_failure() {
+        Lab lab1 = (new Lab("1")).of("SUBMITTED");
+        Lab lab1copy = (new Lab("1")).of("UNSUBMITTED");
+        assertFalse(lab1.equals(lab1copy));
     }
 
 }
