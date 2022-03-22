@@ -176,7 +176,7 @@ This section describes some noteworthy details on how certain features are imple
 This section describes the implementation of the onboarding guide component.
 
 #### Accessing the Onboarding Guide
-The onboarding guide is accessible through an onboarding prompt, which only appears if the data currently in application is the sample data that is seeded during the first run. The onboarding prompt leads the user initiates the guided onboarding tutorial. The onboarding guide can also be alternatively accessed through the menu bar.
+The onboarding guide is accessible through an onboarding prompt, which only appears if the data currently in application is the sample data that is seeded during the first run. The onboarding prompt leads the user to inititate the guided onboarding tutorial. The onboarding guide can also be alternatively accessed through the menu bar.
 
 #### The `OnboardingWindow` Class
 To mimic the actual environment of ContaX, the OnboardingWindow appears as a clone of the MainWindow, but with a different set of UI and logic components aimed towards providing a quick start guide.
@@ -186,7 +186,7 @@ The class diagram of the UI components are as follows:
 ![OnboardingUiClassDiagram](images/OnboardingUiClassDiagram.png)
 
 #### Onboarding models
-TThe `OnboardingStep` and `OnboardingStory` models are implemented to support the onboarding subsystem. Functionally, each `OnboardingStep` instance represents a step in the onboarding guide, containing a set of instruction for the `OnboardingWindow`. The `OnboardingStory` on the other hand represents an onboarding sequence comprised of a series of OnboardingSteps.
+The `OnboardingStep` and `OnboardingStory` models are implemented to support the onboarding component. Functionally, each `OnboardingStep` instance represents a step in the onboarding guide, containing a set of instruction for the `OnboardingWindow`. The `OnboardingStory` on the other hand represents an onboarding sequence comprised of a series of OnboardingSteps.
 
 ##### The `OnboardingStep` Class
 The purpose of the OnboardingStep is to soley contain UI and logic updates for the OnboardingWindow and is therefore implemented with minimal functionalities, providing only getters and setters for initialization and processing.
