@@ -6,14 +6,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.candidate.Candidate;
 
 /**
- * Adds a person to the address book.
+ * Adds a candidate to the address book.
  */
 public class AddCommand extends Command {
 
@@ -25,24 +24,21 @@ public class AddCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_COURSE + "COURSE "
-            + "[" + PREFIX_TAG + "TAG]... "
             + PREFIX_AVAILABILITY + "AVAILABILITY \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_ID + "E0123456 "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_COURSE + "Computer Science "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney "
             + PREFIX_AVAILABILITY + "1,2,3,4,5,6,7";
 
     public static final String MESSAGE_SUCCESS = "New candidate added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This candidate already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This candidate already exists in the system";
 
     private final Candidate toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Candidate}
      */
     public AddCommand(Candidate candidate) {
         requireNonNull(candidate);

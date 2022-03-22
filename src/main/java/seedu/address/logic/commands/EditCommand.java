@@ -9,7 +9,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERVIEW_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -50,7 +49,6 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_COURSE + "COURSE] "
-            + "[" + PREFIX_TAG + "TAG]..."
             + "[" + PREFIX_APPLICATION_STATUS + "APPLICATION STATUS] "
             + "[" + PREFIX_INTERVIEW_STATUS + "INTERVIEW STATUS] "
             + "[" + PREFIX_AVAILABILITY + "AVAILABILITY]...\n"
@@ -60,7 +58,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_CANDIDATE_SUCCESS = "Edited Candidate: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_CANDIDATE = "This candidate already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_CANDIDATE = "This candidate already exists in the system";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;

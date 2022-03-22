@@ -30,7 +30,7 @@ import seedu.address.model.candidate.Candidate;
 public class TypicalPersons {
 
     public static final Candidate ALICE = new CandidateBuilder()
-            .withStudentId("E0123456")
+            .withStudentId("E0123450")
             .withName("Alice Pauline")
             .withPhone("94351253")
             .withEmail("E0123456@u.nus.edu")

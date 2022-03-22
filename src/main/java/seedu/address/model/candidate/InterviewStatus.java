@@ -8,7 +8,7 @@ public class InterviewStatus {
     public static final String INTERVIEWING_STATUS = "Interviewing";
     public static final String NOT_INTERVIEWED_STATUS = "Not Interviewed";
 
-    private String interviewStatus;
+    public final String interviewStatus;
 
     /**
      * Constructor for Interview Status.
@@ -17,16 +17,19 @@ public class InterviewStatus {
      */
     public InterviewStatus(String interviewStatusType) {
         String input = interviewStatusType.toLowerCase();
+        String statusTemp = "";
         input = input.replaceAll(" ", "");
 
         if (input.equals(PENDING_STATUS.toLowerCase())) {
-            this.interviewStatus = PENDING_STATUS;
+            statusTemp = PENDING_STATUS;
         } else if (input.equals(INTERVIEWING_STATUS.toLowerCase())) {
-            this.interviewStatus = INTERVIEWING_STATUS;
+            statusTemp = INTERVIEWING_STATUS;
         } else if (input.equals(NOT_INTERVIEWED_STATUS
                 .replaceAll(" ", "").toLowerCase())) {
-            this.interviewStatus = NOT_INTERVIEWED_STATUS;
+            statusTemp = NOT_INTERVIEWED_STATUS;
         }
+
+        this.interviewStatus = statusTemp;
     }
 
     /**
