@@ -22,6 +22,7 @@ public class AddTagCommandParser implements Parser<AddTagCommand> {
     public AddTagCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME);
 
+        // boolean isPreambleEmpty = argMultimap.getPreamble().isEmpty();
         if (!argMultimap.arePrefixesPresent(PREFIX_NAME) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE));
         }
