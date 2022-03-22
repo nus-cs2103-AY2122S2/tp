@@ -26,7 +26,7 @@ public class UniquePersonList implements Iterable<Person> {
 
     private final ObservableList<Person> internalList = FXCollections.observableArrayList();
     private final ObservableList<Person> internalUnmodifiableList =
-            FXCollections.unmodifiableObservableList(internalList);
+            FXCollections.unmodifiableObservableList(internalList).sorted();
 
     /**
      * Returns true if the list contains an equivalent person as the given argument.
