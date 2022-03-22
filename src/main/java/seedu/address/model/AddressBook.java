@@ -79,12 +79,20 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public boolean hasPersonName(Name targetName) {
         requireNonNull(targetName);
-        return persons.containsName(targetName);
+        return this.persons.containsName(targetName);
     }
 
     public boolean hasLineupName(LineupName targetName) {
         requireNonNull(targetName);
-        return lineups.containsLineupName(targetName);
+        return this.lineups.containsLineupName(targetName);
+    }
+
+    /**
+     * Deletes the lineup from all players and lineup lists.
+     */
+    public void deleteLineup(Lineup lineup) {
+        this.lineups.deleteLineupFromList(lineup);
+        this.persons.removeAllPlayerFromLineup(lineup);
     }
 
     /**

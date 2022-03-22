@@ -4,9 +4,12 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.lineup.Lineup;
 import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+
+import javax.sound.sampled.Line;
 
 /**
  * Represents a delete command which deletes an entity from MyGM.
@@ -22,8 +25,13 @@ public class DeleteCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
+    public static final String MESSAGE_NO_SUCH_LINEUP = "Lineup does not exist.";
     public static final String MESSAGE_NO_SUCH_PERSON = "Player does not exist.";
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %s$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %s";
+    public static final String MESSAGE_PERSON_NOT_IN_LINEUP = "Player is not inside the lineup";
+    public static final String MESSAGE_DELETE_PERSON_FROM_LINEUP_SUCCESS = "Person deleted from lineup %s: %s";
+    public static final String MESSAGE_DELETE_LINEUP_SUCCESS = "Deleted Lineup: %s";
+    public static final String MESSAGE_DELETE_FAILURE = "Delete cannot be executed.";
 
     private enum DeleteCommandType {
         PLAYER, LINEUP, PLAYER_LINEUP
@@ -75,12 +83,33 @@ public class DeleteCommand extends Command {
                 // do I also need to delete person from lineup?
             }
         case PLAYER_LINEUP:
+            if (!model.hasPersonName(this.player)) {
+                throw new CommandException(MESSAGE_NO_SUCH_PERSON);
+            }
+            if (!model.hasLineupName(this.lineup)) {
+                throw new CommandException(MESSAGE_NO_SUCH_LINEUP);
+            }
+            Person person = model.getPerson(this.player);
+            Lineup lineup = model.getLineup(this.lineup);
+            if (!model.isPersonInLineup(person, lineup)) {
+                throw new CommandException(MESSAGE_PERSON_NOT_IN_LINEUP);
+            }
+
+            model.deletePersonFromLineup(person, lineup);
+            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_FROM_LINEUP_SUCCESS, this.lineup, this.player));
             // to be added
         case LINEUP:
+            if (!model.hasLineupName(this.lineup)) {
+                throw new CommandException(MESSAGE_NO_SUCH_LINEUP);
+            }
+            Lineup toDelete = model.getLineup(this.lineup);
+            model.deleteLineup(toDelete);
+            return new CommandResult(String.format(MESSAGE_DELETE_LINEUP_SUCCESS, this.lineup));
             // to be added
         default:
+            throw new CommandException(MESSAGE_DELETE_FAILURE);
         }
 
-        return null; // temporarily
+        //return null; // temporarily
     }
 }

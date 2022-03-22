@@ -29,7 +29,7 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
     private final Set<LineupName> lineups = new HashSet<>();
     private final Weight weight;
-    private final Set<LineupName> lineupNames;
+    private final Set<LineupName> lineupNames = new HashSet<>();
 
     /**
      * Every field must be present and not null.
@@ -45,20 +45,6 @@ public class Person {
         this.jerseyNumber = jerseyNumber;
         this.tags.addAll(tags);
         this.weight = weight;
-        this.lineupNames = new HashSet<>();
-    }
-
-    public Person(Name name, Phone phone, Email email, Height height, JerseyNumber jerseyNumber,
-                  Set<Tag> tags, Weight weight, Set<LineupName> lineupNames) {
-        requireAllNonNull(name, phone, email, height, jerseyNumber, tags, weight);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.height = height;
-        this.jerseyNumber = jerseyNumber;
-        this.tags.addAll(tags);
-        this.weight = weight;
-        this.lineupNames = lineupNames;
     }
 
     /**
@@ -152,11 +138,23 @@ public class Person {
     }
 
     /**
+     * Returns true if the the player is in lineup.
+     */
+    public boolean isInLineup(Lineup lineup) {
+        /* for delete command */
+        return lineupNames.contains(lineup.getLineupName());
+    }
+
+    /**
      * Returns true if the person's jersey number is already taken.
      */
     public boolean isSameJerseyNumber(JerseyNumber jerseyNumber) {
         requireNonNull(jerseyNumber);
         return getJerseyNumber().equals(jerseyNumber);
+    }
+
+    public void removeFromLineup(Lineup lineup) {
+        this.lineupNames.remove(lineup.getLineupName());
     }
 
     /**
@@ -218,5 +216,4 @@ public class Person {
         }
         return builder.toString();
     }
-
 }
