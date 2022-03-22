@@ -13,6 +13,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Module;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Comment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -65,8 +66,10 @@ public class ClearModulesCommand extends Command {
         Address updatedAddress = personToEdit.getAddress();
         Status updatedStatus = personToEdit.getStatus();
         Set<Module> updatedModules = new HashSet<>();
+        Comment updatedComment = personToEdit.getComment();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedStatus, updatedModules);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
+                updatedStatus, updatedModules, updatedComment);
     }
 
     @Override

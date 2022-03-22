@@ -13,4 +13,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_MODULE = new Prefix("m/", "module");
     public static final Prefix PREFIX_STATUS = new Prefix("s/", "status");
     public static final Prefix PREFIX_FORMAT = new Prefix("f/", "format");
+    public static final Prefix PREFIX_COMMENT = new Prefix("c/", "comment");
 }

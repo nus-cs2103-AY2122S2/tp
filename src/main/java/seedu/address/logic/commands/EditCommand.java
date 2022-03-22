@@ -21,6 +21,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Module;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Comment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -120,9 +121,9 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Status updatedStatus = editPersonDescriptor.getStatus().orElse(personToEdit.getStatus());
-
+        Comment updatedComment = editPersonDescriptor.getComment().orElse(personToEdit.getComment());
         return new Person(updatedName, updatedPhone, updatedEmail,
-                updatedAddress, updatedStatus, personToEdit.getModules());
+                updatedAddress, updatedStatus, personToEdit.getModules(), updatedComment);
     }
 
     @Override
@@ -154,6 +155,7 @@ public class EditCommand extends Command {
         private Address address;
         private Status status;
         private Set<Module> modules;
+        private Comment comment;
 
         public EditPersonDescriptor() {}
 
@@ -215,6 +217,14 @@ public class EditCommand extends Command {
 
         public Optional<Status> getStatus() {
             return Optional.ofNullable(status);
+        }
+
+        public void setComment(Comment comment) {
+            this.comment = comment;
+        }
+
+        public Optional<Comment> getComment() {
+            return Optional.ofNullable(comment);
         }
 
 

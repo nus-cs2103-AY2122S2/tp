@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.module.Module;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Comment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -30,6 +31,7 @@ public class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final String status;
+    private final String comment;
     private final List<JsonAdaptedTag> module = new ArrayList<>();
 
     /**
@@ -39,12 +41,14 @@ public class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("status") String status,
-            @JsonProperty("module") List<JsonAdaptedTag> module) {
+            @JsonProperty("module") List<JsonAdaptedTag> module, @JsonProperty("comment") String comment) {
+
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.status = status;
+        this.comment = comment;
         if (module != null) {
             this.module.addAll(module);
         }
@@ -62,6 +66,7 @@ public class JsonAdaptedPerson {
         module.addAll(source.getModules().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        comment = source.getComment().value;
     }
 
     /**
@@ -110,11 +115,16 @@ public class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Status.class.getSimpleName()));
         }
 
+        if (comment == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Comment.class.getSimpleName()));
+        }
+
         final Address modelAddress = new Address(address);
         final Set<Module> modelModules = new HashSet<>(personModules);
         final Status modelStatus = new Status(status);
+        final Comment modelComment = new Comment(comment);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelStatus, modelModules);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelStatus, modelModules, modelComment);
     }
 
 }

@@ -6,48 +6,55 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "status": "",
-    "module" : [ "CS2103T" ]
+    "module" : [ "CS2103T" ],
+    "comment": ""
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "status": "",
-    "module" : [ "CS2103T", "MA1101R" ]
+    "module" : [ "CS2103T", "MA1101R" ],
+    "comment": ""
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
     "status": "",
-    "module" : [ ]
+    "module" : [ ],
+    "comment": ""
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
     "status": "",
-    "module" : [ "CS2103T" ]
+    "module" : [ "CS2103T" ],
+    "comment": ""
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "status": "",
-    "module" : [ ]
+    "module" : [ ],
+    "comment": ""
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "status": "",
-    "module" : [ ]
+    "module" : [ ],
+    "comment": ""
   }, {
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "anna@example.com",
     "address" : "4th street",
     "status": "",
-    "module" : [ ]
+    "module" : [ ],
+    "comment": ""
   } ]
 }

@@ -55,7 +55,7 @@ public class StatusCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), status, personToEdit.getModules());
+                personToEdit.getAddress(), status, personToEdit.getModules(), personToEdit.getComment());
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

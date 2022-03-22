@@ -86,6 +86,7 @@ ModuleMate Finder is a desktop app that allows students to find people taking th
 - [Undo](#undo-a-command--undo)
 - [Redo](#redo-a-command--redo)
 - [Copy](#copy-command)
+- [Add Comment to contact](#adding-a-comment-for-a-contact--addcomment)
 - [Exit](#exiting-the-program--exit)
 
 ### Viewing help : `help`
@@ -297,6 +298,22 @@ Examples:
 * `copy 1 n/ p/ e/ f/json`  will copy name, phone and email of first person in JSON format.
 * `copy f/csv` will copy the entire list in csv format.
 
+### Adding a comment for a contact : `comment`
+
+Adds a comment for the specified person in ModuleMateFinder.
+
+Format: `comment INDEX c/COMMENT`
+
+* Adds a comment for the person at the specified `INDEX`.
+* `INDEX` must be a **positive integer** 1, 2, 3, ...
+* `COMMENT` cannot be blank.
+* Any existing comments for a person will be overwritten by the new user input.
+* If used without the `c/` prefix, the command will be treated as a delete command and removes the comment of the 
+  specified person.
+
+Examples:
+* `comment 2 c/Good at math.` will add the comment `Good at math` to the 2nd person.
+* `comment 3` will delete the comment for the 3rd person.
 
 ### Exiting the program : `exit`
 
@@ -335,20 +352,23 @@ A: As long as the module offered can be found in NUSmod, it will be available on
 
 ## Command summary
 
-| Action            | Format                                                                                                     | Examples                               |
-|-------------------|------------------------------------------------------------------------------------------------------------|----------------------------------------|
-| **List**          | `list`                                                                                                     | `list`                                 |
-| **Add**           | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`                                                              | `add n/Bob p/87654321 e/bob@u.nus.edu` |
-| **Add Module**    | `addmodule INDEX m/MODULE`                                                                                  | `addmodule 4 m/CS2100`                 |
-| **Delete**        | `delete INDEX`                                                                                             | `delete 3`                             |
-| **Delete Module** | `deletemodule index m/MODULE`...                                                                            | `deletemodule 1 m/CS1231`              |
-| **Edit**          | `edit index [n/NAME] [c/CODE] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` **brackets indicate optional         | `edit 1 n/Alice`                       |
-| **Clear**         | `clear`                                                                                                    | `clear`                                |
-| **Clear Modules** | `clearmodules INDEX`                                                                                       | `clearmodules 3`                       |
-| **Status**        | `status INDEX s/STATUS`                                                                                    | `status 2 s/favourite`                 |
-| **Find**          | `find KEYWORD [MORE_KEYWORDS]`                                                                             | `find James Jake`                      |
-| **Filter**        | `filter MODULE`                                                                                             | `filter CS3230`                      |
+| Action            | Format                                                                                                        | Examples                               |
+|-------------------|---------------------------------------------------------------------------------------------------------------|----------------------------------------|
+| **List**          | `list`                                                                                                        | `list`                                 |
+| **Add**           | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`                                                                 | `add n/Bob p/87654321 e/bob@u.nus.edu` |
+| **Add Module**    | `addmodule INDEX m/MODULE`                                                                                    | `addmodule 4 m/CS2100`                 |
+| **Delete**        | `delete INDEX`                                                                                                | `delete 3`                             |
+| **Delete Module** | `deletemodule index m/MODULE`...                                                                              | `deletemodule 1 m/CS1231`              |
+| **Edit**          | `edit index [n/NAME] [c/CODE] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` **brackets indicate optional            | `edit 1 n/Alice`                       |
+| **Clear**         | `clear`                                                                                                       | `clear`                                |
+| **Clear Modules** | `clearmodules INDEX`                                                                                          | `clearmodules 3`                       |
+| **Status**        | `status INDEX s/STATUS`                                                                                       | `status 2 s/favourite`                 |
+| **Find**          | `find KEYWORD [MORE_KEYWORDS]`                                                                                | `find James Jake`                      |
+| **Filter**        | `filter MODULE`                                                                                               | `filter CS3230`                        |
 | **Sort**          | `sort [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/status] [m/MODULE] [o/ORDER]`  **brackets indicate optional | `sort n/ p/ o/desc`                    |
-| **Undo**          | `undo`                                                                                                     | `undo`                                 |
-| **Redo**          | `redo`                                                                                                     | `redo`                                 |
+| **Undo**          | `undo`                                                                                                        | `undo`                                 |
+| **Redo**          | `redo`                                                                                                        | `redo`                                 |
+| **Copy**          | `copy [INDEX] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STATUS] [m/MODULE] [f/FORMAT]`                      | `copy 3 n/ e/ f/csv`                   |
+| **Add Comment**   | `comment INDEX c/COMMENT`                                                                                     | `comment 1 c/Good at math`             |
+
 

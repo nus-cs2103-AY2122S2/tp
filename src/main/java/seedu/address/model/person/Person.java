@@ -23,6 +23,7 @@ public class Person {
     private final Phone phone;
     private final Email email;
     private final Status status;
+    private final Comment comment;
 
     // Data fields
     private final Address address;
@@ -31,8 +32,9 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Status status, Set<Module> modules) {
-        requireAllNonNull(name, phone, email, address, modules);
+    public Person(Name name, Phone phone, Email email, Address address, Status status,
+                  Set<Module> modules, Comment comment) {
+        requireAllNonNull(name, phone, email, address, modules, comment);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -44,6 +46,7 @@ public class Person {
         }
         this.address = address;
         this.modules.addAll(modules);
+        this.comment = comment;
     }
 
     public Name getName() {
@@ -64,6 +67,10 @@ public class Person {
 
     public Status getStatus() {
         return status;
+    }
+
+    public Comment getComment() {
+        return comment;
     }
 
     /**
@@ -107,7 +114,8 @@ public class Person {
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getModules().equals(getModules())
-                && otherPerson.getStatus().equals(getStatus());
+                && otherPerson.getStatus().equals(getStatus())
+                && otherPerson.getComment().equals(getComment());
     }
 
     @Override
@@ -127,7 +135,9 @@ public class Person {
                 .append("; Address: ")
                 .append(getAddress())
                 .append("; Status: ")
-                .append(getStatus());
+                .append(getStatus())
+                .append("; Comment: ")
+                .append(getComment());
 
         Set<Module> modules = getModules();
         if (!modules.isEmpty()) {
