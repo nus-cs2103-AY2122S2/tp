@@ -50,6 +50,7 @@ public class ParserUtil {
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
 
+    //@@author EvaderFati
     /**
      * Parses a {@code String id} into an {@code StudentId}.
      * Leading and trailing whitespaces will be trimmed.
@@ -65,6 +66,7 @@ public class ParserUtil {
         return new StudentId(trimmedId);
     }
 
+    //@@author EvaderFati
     /**
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
@@ -80,6 +82,7 @@ public class ParserUtil {
         return new Name(trimmedName);
     }
 
+    //@@author EvaderFati
     /**
      * Parses a {@code Optional<String> telegram} into a {@code Optional<Telegram>}.
      * Leading and trailing whitespaces will be trimmed.
@@ -112,6 +115,7 @@ public class ParserUtil {
         return new Address(trimmedAddress);
     }
 
+    //@@author EvaderFati
     /**
      * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
@@ -127,6 +131,7 @@ public class ParserUtil {
         return new Email(trimmedEmail);
     }
 
+    //@@author EvaderFati
     /**
      * Parses a {@code String moduleName} into an {@code ModuleName}.
      * Leading and trailing whitespaces will be trimmed.
@@ -142,6 +147,7 @@ public class ParserUtil {
         return new ModuleName(trimmedModuleName);
     }
 
+    //@@author EvaderFati
     /**
      * Parses a {@code String moduleCode} into an {@code ModuleCode}.
      * Leading and trailing whitespaces will be trimmed.
@@ -157,6 +163,7 @@ public class ParserUtil {
         return new ModuleCode(trimmedModuleCode);
     }
 
+    //@@author EvaderFati
     /**
      * Parses a {@code String academicYear} into an {@code AcademicYear}.
      * Leading and trailing whitespaces will be trimmed.
@@ -172,6 +179,7 @@ public class ParserUtil {
         return new AcademicYear(trimmedAcademicYear);
     }
 
+    //@@author EvaderFati
     /**
      * Parses a {@code String index} into an {@code TaModule}.
      * Leading and trailing whitespaces will be trimmed.
@@ -190,6 +198,7 @@ public class ParserUtil {
         return lastShownModuleList.get(targetIndex.getZeroBased());
     }
 
+    //@@author EvaderFati
     /**
      * Parses a {@code String classGroupId} into an {@code ClassGroupId}.
      * Leading and trailing whitespaces will be trimmed.
@@ -205,6 +214,7 @@ public class ParserUtil {
         return new ClassGroupId(trimmedId);
     }
 
+    //@@author EvaderFati
     /**
      * Parses a {@code String classGroupType} into an {@code ClassGroupType}.
      * Leading and trailing whitespaces will be trimmed.
