@@ -171,6 +171,46 @@ As such, the detailed descriptions for the Address Book subsystem above can be t
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Tag Management
+
+This section will describe tag management in the address book as well as the features implemented.
+
+### Centralising Tags in the Address Book
+
+In the previous implementation, all `Tag` objects are independent of one another despite having the same tag names. To improve the usability of the address book, the tags are centralised so that the user can easily manage them as well as searching for `Person` objects that contain the tag.
+This is done by creating a `UniqueTagList` within `AddressBook` which will store all tags that were created by the user. Whenever a command relating to `Tag` is executed, it will not only apply the changes to the `Tag` in the `UniqueTagList` but will also propagate these changes to the relevant `Person`s who contain the specified tag.
+All operations relating to the `Tag` objects are done at the `AddressBook` level to ensure that the `Tag` objects and `Person` objects are properly synchronised.
+
+Another benefit that comes with the centralised tag list is that the user can maintain tags even if it is not associated with any `Person` objects. The rationale to maintain `Tag` separately is to allow the user to reuse the tag depending on their workflow (i.e. A user may want to maintain the `prospective clients` tag even if he/she currently does not have any prospective clients.)
+
+### Edit Tag Feature - `edittag`
+
+The tag editing feature is similar to the system used for `Person` but extended to propagate the changes to the `Person` objects. This feature is implemented at the `AddressBook` level, and the related functions are:
+
+* `AddressBook#setTag(target, editedTag)`
+* `AddressBook#setPersonsWithTag(target, editedTag)`
+
+Note: `target` refers to the tag to be updated, and `editedTag` is the replacement tag specified by the user.
+
+![Tag Edit](images/TagEditSequenceDiagram.png)
+
+### Serialisation and Inflation
+
+`Tag` serialisation and inflation is handled by the `Storage` component. The current implementation augments the existing method from `JsonSerializableAddressBook` through the addition of reading a list of tag names from the JSON file and saving them.
+
+#### Serialisation of Tags
+
+Since the tags are independent to the `Person`, the serialisation does not require any special attention for the dependency, as the integrity is guaranteed by the `AddressBook` component.
+
+#### Inflation of Tags
+
+To ensure the `Tag` objects are properly added into the address book, `JsonSerializableAddressBook#toModelType()` has been modified to inflate the tags first before the person. This is to ensure that duplicate tags are not added into the address book by accident and will only add tags that do not exist in the tag list (which could be caused by the user manually adding the tags in the user-editable JSON file).
+A helper method `JSONSerializableAddressBook#addMissingTags()` is implemented to check all `Tag` objects within each `Person` and add only the missing `Tag` objects.
+
+![Modified toModelType](images/ToModelTypeSequenceDiagram.png)
+
+![AddMissingTags](images/AddMissingTagsSequenceDiagram.png)
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -254,7 +294,6 @@ _{more aspects and alternatives to be added}_
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
