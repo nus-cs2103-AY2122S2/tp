@@ -7,11 +7,12 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 import seedu.contax.model.person.Person;
+import seedu.contax.model.util.TemporalComparable;
 
 /**
  * Represents an appointment in the schedule.
  */
-public class Appointment implements Comparable<Appointment> {
+public class Appointment implements TemporalComparable {
 
     // Appointment identification fields
     private final StartDateTime startDateTime;
@@ -140,7 +141,12 @@ public class Appointment implements Comparable<Appointment> {
     }
 
     @Override
-    public int compareTo(Appointment o) {
-        return this.getStartDateTime().compareTo(o.getStartDateTime());
+    public LocalDateTime getComparableDateTime() {
+        return this.getStartDateTime().value;
+    }
+
+    @Override
+    public int compareTo(TemporalComparable other) {
+        return this.getStartDateTime().compareTo(other);
     }
 }
