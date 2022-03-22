@@ -1,15 +1,14 @@
 package manageezpz.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static manageezpz.logic.parser.CliSyntax.PREFIX_NAME;
+
+import java.util.List;
+
 import manageezpz.logic.commands.exceptions.CommandException;
 import manageezpz.model.Model;
 import manageezpz.model.person.Person;
 import manageezpz.model.task.Task;
-
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-import static manageezpz.logic.parser.CliSyntax.PREFIX_NAME;
-
 
 public class UntagTaskCommand extends Command {
     public static final String COMMAND_WORD = "untagTask";

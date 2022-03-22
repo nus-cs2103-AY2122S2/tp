@@ -5,11 +5,10 @@ import static manageezpz.commons.core.Messages.MESSAGE_EMPTY_TASK_NUMBER;
 import static manageezpz.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.stream.Stream;
 
 import manageezpz.logic.commands.UntagTaskCommand;
 import manageezpz.logic.parser.exceptions.ParseException;
-
-import java.util.stream.Stream;
 
 public class UntagTaskCommandParser implements Parser<UntagTaskCommand> {
 
