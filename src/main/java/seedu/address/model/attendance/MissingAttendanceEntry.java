@@ -39,6 +39,6 @@ public class MissingAttendanceEntry extends AttendanceEntry {
         }
 
         MissingAttendanceEntry otherAttendanceEntry = (MissingAttendanceEntry) other;
-        return super.getAttendanceDate().equals(((MissingAttendanceEntry) other).getAttendanceDate());
+        return super.getAttendanceDate().equals(otherAttendanceEntry.getAttendanceDate());
     }
 }

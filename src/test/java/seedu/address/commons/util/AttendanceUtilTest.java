@@ -1,17 +1,137 @@
 package seedu.address.commons.util;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Random;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import seedu.address.model.attendance.AbsentAttendanceEntry;
+import seedu.address.model.attendance.AttendanceEntry;
+import seedu.address.model.attendance.MissingAttendanceEntry;
+import seedu.address.model.attendance.PresentAttendanceEntry;
+import seedu.address.model.pet.AttendanceHashMap;
 
 public class AttendanceUtilTest {
 
     public static final LocalDate DATE_TODAY = LocalDate.now();
+    public static final LocalTime PICKUP_TIME = LocalTime.of(9, 0);
+    public static final LocalTime DROPOFF_TIME = LocalTime.of(18, 0);
+
+    public static AttendanceHashMap allPresentAttendanceHashMap;
+    public static AttendanceHashMap allAbsentAttendanceHashMap;
+    public static AttendanceHashMap mixedAttendanceHashMap;
+    public static AttendanceHashMap missingAttendanceHashMap = new AttendanceHashMap();
+
+    public static ArrayList<AttendanceEntry> allPresentAttendanceList;
+    public static ArrayList<AttendanceEntry> allAbsentAttendanceList;
+    public static ArrayList<AttendanceEntry> mixedAttendanceList;
+    public static ArrayList<AttendanceEntry> missingAttendanceList;
+
+
+    @BeforeAll
+    public static void createAllPresentAttendanceScenario() {
+        HashMap<LocalDate, AttendanceEntry> fullPresentHashMap = new HashMap<>();
+
+        ArrayList<AttendanceEntry> fullPresentArrayList = new ArrayList<>();
+
+        // creates an attendance hashmap with present entries
+        // from 30 days ago till now.
+        for (LocalDate d = DATE_TODAY.minusDays(30); d.isBefore(DATE_TODAY.plusDays(1)); d = d.plusDays(1)) {
+            PresentAttendanceEntry currentEntry =
+                    new PresentAttendanceEntry(d, PICKUP_TIME, DROPOFF_TIME);
+
+            fullPresentHashMap.put(d, currentEntry);
+
+            // creates an attendance list with entries from a week before till now.
+            if (isWithinWeek(d)) {
+                fullPresentArrayList.add(currentEntry);
+            }
+        }
+
+        allPresentAttendanceHashMap = new AttendanceHashMap(fullPresentHashMap);
+        allPresentAttendanceList = fullPresentArrayList;
+    }
+
+    @BeforeAll
+    public static void createAllAbsentAttendanceScenario() {
+        HashMap<LocalDate, AttendanceEntry> fullAbsentHashMap = new HashMap<>();
+
+        ArrayList<AttendanceEntry> fullAbsentArrayList = new ArrayList<>();
+
+        // creates an attendance hashmap with absent entries
+        // from 30 days ago till now.
+        for (LocalDate d = DATE_TODAY.minusDays(30); d.isBefore(DATE_TODAY.plusDays(1)); d = d.plusDays(1)) {
+            AbsentAttendanceEntry currentEntry =
+                    new AbsentAttendanceEntry(d);
+
+            fullAbsentHashMap.put(d, currentEntry);
+
+            // creates an attendance list with entries from a week before till now.
+            if (isWithinWeek(d)) {
+                fullAbsentArrayList.add(currentEntry);
+            }
+        }
+
+        allAbsentAttendanceHashMap = new AttendanceHashMap(fullAbsentHashMap);
+        allAbsentAttendanceList = fullAbsentArrayList;
+    }
+
+    @BeforeAll
+    public static void createMixedAttendanceScenario() {
+        // randomizer to create a mixed attendance hash map.
+        Random RNG = new Random();
+
+        HashMap<LocalDate, AttendanceEntry> mixedHashMap = new HashMap<>();
+
+        ArrayList<AttendanceEntry> mixedArrayList = new ArrayList<>();
+
+        // creates an attendance hashmap with either absent or present entries
+        // from 30 days ago till now.
+        for (LocalDate d = DATE_TODAY.minusDays(30); d.isBefore(DATE_TODAY.plusDays(1)); d = d.plusDays(1)) {
+            boolean isPresent = RNG.nextBoolean();
+            AttendanceEntry currentEntry;
+
+            if (isPresent) {
+                currentEntry = new PresentAttendanceEntry(d, PICKUP_TIME, DROPOFF_TIME);
+            } else {
+                currentEntry = new AbsentAttendanceEntry(d);
+            }
+
+            mixedHashMap.put(d, currentEntry);
+
+            // creates an attendance list with entries from a week before till now.
+            if (isWithinWeek(d)) {
+                mixedArrayList.add(currentEntry);
+            }
+        }
+
+        mixedAttendanceHashMap = new AttendanceHashMap(mixedHashMap);
+        mixedAttendanceList = mixedArrayList;
+    }
+
+    @BeforeAll
+    public static void createMissingAttendanceScenario() {
+        ArrayList<AttendanceEntry> missingArrayList = new ArrayList<>();
+
+        // creates an attendance list with missing entries for the week.
+        for (LocalDate d = DATE_TODAY.minusDays(30); d.isBefore(DATE_TODAY.plusDays(1)); d = d.plusDays(1)) {
+            if (isWithinWeek(d)) {
+                missingArrayList.add(new MissingAttendanceEntry(d));
+            }
+        }
+
+        missingAttendanceList = missingArrayList;
+    }
 
     @Test
     public void isValidIsPresentString_validInputs_correctResult() {
@@ -64,6 +184,26 @@ public class AttendanceUtilTest {
     public void getPastWeekAttendance_nullInput_throwsNullPointerException() {
         assertThrows(NullPointerException.class,
                 () -> AttendanceUtil.getPastWeekAttendance(null));
+    }
+
+    @Test
+    public void getPastWeekAttendance_missingAttendance_returnsMissingEntriesWeeklyAttendanceList() {
+        assertEquals(missingAttendanceList, AttendanceUtil.getPastWeekAttendance(missingAttendanceHashMap));
+    }
+
+    @Test
+    public void getPastWeekAttendance_allPresentAttendance_returnsCorrectWeeklyAttendanceList() {
+        assertEquals(allPresentAttendanceList, AttendanceUtil.getPastWeekAttendance(allPresentAttendanceHashMap));
+    }
+
+    @Test
+    public void getPastWeekAttendance_allAbsentAttendance_returnsCorrectWeeklyAttendanceList() {
+        assertEquals(allAbsentAttendanceList, AttendanceUtil.getPastWeekAttendance(allAbsentAttendanceHashMap));
+    }
+
+    @Test
+    public void getPastWeekAttendance_mixedAttendance_returnsCorrectWeeklyAttendanceList() {
+        assertEquals(mixedAttendanceList, AttendanceUtil.getPastWeekAttendance(mixedAttendanceHashMap));
     }
 
     /**

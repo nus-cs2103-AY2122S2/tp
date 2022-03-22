@@ -11,6 +11,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -23,6 +24,8 @@ import seedu.address.model.pet.Pet;
  */
 public class TypicalPets {
 
+    public static final String DATE_TODAY = LocalDate.now().toString();
+
     public static final Pet BOBA = new PetBuilder().withName("Boba")
             .withAddress("123, Jurong West Ave 6, #08-111").withOwnerName("Alice Pauline")
             .withPhone("94351253")
@@ -31,10 +34,10 @@ public class TypicalPets {
             .withAddress("311, Clementi Ave 2, #02-25")
             .withOwnerName("Benson Meier").withPhone("98765432")
             .withTags("owesMoney", "friends").withDiet("").withAppointment("")
-            .withPresentAttendanceEntry("2022-03-20", "09:00", "17:30").build();
+            .withPresentAttendanceEntry(DATE_TODAY, "09:00", "17:30").build();
     public static final Pet BAGEL = new PetBuilder().withName("Bagel").withPhone("95352563")
             .withOwnerName("Heinz Ketchup").withAddress("wall street").withDiet("").withAppointment("")
-            .withAbsentAttendanceEntry("2022-03-20").build();
+            .withAbsentAttendanceEntry(DATE_TODAY).build();
     public static final Pet DANIEL = new PetBuilder().withName("Peepee").withPhone("87652533")
             .withOwnerName("Daniel Meier").withAddress("10th street").withTags("friends")
             .withDiet("").withAppointment("").build();

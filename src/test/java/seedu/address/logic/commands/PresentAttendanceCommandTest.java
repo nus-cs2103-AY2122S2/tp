@@ -7,8 +7,11 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PET;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PET;
 import static seedu.address.testutil.TypicalPets.getTypicalAddressBook;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.util.AttendanceUtil;
 import seedu.address.logic.commands.PresentAttendanceCommand.PetAttendanceDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -20,8 +23,8 @@ import seedu.address.testutil.PresentAttendanceDescriptorBuilder;
 
 public class PresentAttendanceCommandTest {
 
-    private static final String DATE_STUB = "2022-03-20";
-    private static final String FAILURE_DATE_STUB = "20-03-2022";
+    private static final String DATE_STUB = LocalDate.now().toString();
+    private static final String FAILURE_DATE_STUB = LocalDate.now().format(AttendanceUtil.ATTENDANCE_DATE_FORMATTER);
     private static final String PICKUP_TIME_STUB = "09:00";
     private static final String DROPOFF_TIME_STUB = "17:30";
 
