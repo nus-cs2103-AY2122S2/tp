@@ -39,7 +39,9 @@ public class CommandTestUtil {
     public static final String VALID_STATUS_BOB = Person.BLACKLIST;
     public static final String VALID_MODULE = "CS2101";
     public static final String VALID_MODULE_SWE = "CS2103T";
+    public static final String VALID_MODULE_PM1 = "CS1101S";
     public static final String VALID_COMMENT = "Good at programming";
+
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
