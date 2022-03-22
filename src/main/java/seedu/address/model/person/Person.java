@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.lineup.LineupName;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -26,7 +27,7 @@ public class Person {
     private final JerseyNumber jerseyNumber;
     private final Set<Tag> tags = new HashSet<>();
     private final Weight weight;
-    //private final List<LineupName> lineupName;
+    private final Set<LineupName> lineupNames;
 
     /**
      * Every field must be present and not null.
@@ -41,6 +42,20 @@ public class Person {
         this.jerseyNumber = jerseyNumber;
         this.tags.addAll(tags);
         this.weight = weight;
+        this.lineupNames = new HashSet<>();
+    }
+
+    public Person(Name name, Phone phone, Email email, Height height, JerseyNumber jerseyNumber,
+                  Set<Tag> tags, Weight weight, Set<LineupName> lineupNames) {
+        requireAllNonNull(name, phone, email, height, jerseyNumber, tags, weight);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.height = height;
+        this.jerseyNumber = jerseyNumber;
+        this.tags.addAll(tags);
+        this.weight = weight;
+        this.lineupNames = lineupNames;
     }
 
     public Name getName() {
@@ -73,6 +88,14 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public Set<LineupName> getLineupNames() {
+        return Collections.unmodifiableSet(lineupNames);
+    }
+
+    public Set<LineupName> getModifiableLineupNames() {
+        return this.lineupNames;
     }
 
     /**

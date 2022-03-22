@@ -126,8 +126,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
-
         persons.setPerson(target, editedPerson);
+        lineups.replacePlayerInAllLineups(editedPerson, target);
     }
 
     /**
@@ -136,6 +136,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+        lineups.deletePlayerFromALlLineups(key);
     }
 
     /**
