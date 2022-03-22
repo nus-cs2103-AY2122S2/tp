@@ -529,9 +529,9 @@ object will be created, and is subsequently executed by the `LogicManager`.
 
 The following sequence diagram shows how the find operation works:
 
-![AddCommandSequenceDiagram-1](images/FindCommandSequenceDiagram-1.png)
+![FindCommandSequenceDiagram-1](images/FindCommandSequenceDiagram-1.png)
 
-![AddCommandSequenceDiagram-2](images/FindCommandSequenceDiagram-2.png)
+![FindCommandSequenceDiagram-2](images/FindCommandSequenceDiagram-2.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
