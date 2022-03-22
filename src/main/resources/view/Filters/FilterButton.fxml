@@ -9,10 +9,10 @@
 
 
 <VBox xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
-    <HBox>
-        <Label fx:id="type"/>
-        <Label fx:id="value"/>
-        <Button alignment="CENTER" onMouseClicked="#handleRemove" mnemonicParsing="false" styleClass="action-button">
+    <HBox styleClass="primary-button">
+        <Label fx:id="type" textFill="white"/>
+        <Label fx:id="value" textFill="white"/>
+        <Button alignment="CENTER" onMouseClicked="#handleRemove" mnemonicParsing="false">
             <graphic>
                 <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../images/trash-2-color.png"/>

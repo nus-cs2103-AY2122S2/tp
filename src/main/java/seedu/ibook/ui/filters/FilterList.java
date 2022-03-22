@@ -2,6 +2,7 @@ package seedu.ibook.ui.filters;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import seedu.ibook.model.product.filters.AttributeFilter;
 import seedu.ibook.ui.MainWindow;
@@ -33,6 +34,11 @@ public class FilterList extends UiComponent<HBox> {
         for (AttributeFilter filter: filterList) {
             FilterButton filterButton = new FilterButton(filter, getMainWindow());
             filters.getChildren().add(filterButton.getRoot());
+        }
+        if (filterList.size() > 0) {
+            Button clearButton = new Button("Clear all");
+            clearButton.setOnAction((event) -> getMainWindow().clearProductFilters());
+            filters.getChildren().add(clearButton);
         }
     }
 }
