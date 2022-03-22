@@ -12,6 +12,8 @@ import seedu.address.model.person.Person;
  */
 public class Lineup {
 
+    private static final int MAXIMUM_CAPACITY = 5;
+
     private final LineupName lineupName;
     private final LineupPlayersList playersList;
 
@@ -45,6 +47,10 @@ public class Lineup {
 
     public void removePlayer(Person player) {
         playersList.remove(player);
+    }
+
+    public boolean reachMaximumCapacity() {
+        return this.playersList.size() == MAXIMUM_CAPACITY;
     }
 
     public boolean sameLineupName(LineupName otherLineupName) {

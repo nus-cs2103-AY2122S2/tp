@@ -11,6 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.lineup.Lineup;
+import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
@@ -128,9 +130,21 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasLineupName(LineupName targetName) {
+        requireNonNull(targetName);
+        return addressBook.hasLineupName(targetName);
+    }
+
+    @Override
     public Person getPerson(Name targetName) {
         requireNonNull(targetName);
         return addressBook.getPerson(targetName);
+    }
+
+    @Override
+    public Lineup getLineup(LineupName targetName) {
+        requireNonNull(targetName);
+        return addressBook.getLineup(targetName);
     }
 
     @Override
@@ -167,6 +181,12 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public void putPersonIntoLineup(Person player, Lineup lineup) {
+        player.addLineupName(lineup);
+        addressBook.addPersonToLineup(player, lineup);
     }
 
     //=========== Filtered Person List Accessors =============================================================

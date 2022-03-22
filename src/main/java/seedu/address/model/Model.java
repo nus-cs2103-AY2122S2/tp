@@ -5,6 +5,8 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.lineup.Lineup;
+import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
@@ -65,6 +67,10 @@ public interface Model {
      */
     boolean hasPersonName(Name targetName);
 
+    boolean hasLineupName(LineupName targetName);
+
+    void putPersonIntoLineup(Person player, Lineup lineup);
+
     /**
      * Returns true if the Jersey number specified by {@code person} is already taken.
      */
@@ -84,6 +90,8 @@ public interface Model {
      * Returns the person with the given name.
      */
     Person getPerson(Name targetName);
+
+    Lineup getLineup(LineupName targetName);
 
     /**
      * Deletes the given person.

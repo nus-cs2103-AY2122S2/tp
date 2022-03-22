@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JERSEY_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PLAYER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
@@ -12,7 +13,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 
 import java.util.Collections;
 import java.util.HashSet;
-//import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -21,7 +21,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-//import seedu.address.model.lineup.LineupPlayersList;
+import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.JerseyNumber;
@@ -45,7 +45,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: " + PREFIX_PLAYER + "PERSON_NAME "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
@@ -87,18 +87,18 @@ public class EditCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (!model.hasPersonInMyGM(targetPlayerName)) { // check if UPL name to person have targetPerson
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        if (!model.hasPersonName(targetPlayerName)) { // check if UPL name to person have targetPerson
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON);
         }
-        //get the person to edit from model (currently doesn't work)
-        Person personToEdit = model.getPersonFromMyGM(targetPlayerName);
+
+        Person personToEdit = model.getPerson(targetPlayerName);
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.setPersonInMyGM(personToEdit, editedPerson);
+        model.setPerson(personToEdit, editedPerson);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
 
@@ -117,15 +117,13 @@ public class EditCommand extends Command {
         JerseyNumber updatedJerseyNumber = editPersonDescriptor.getJerseyNumber()
                 .orElse(personToEdit.getJerseyNumber());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<LineupName> lineupNames = personToEdit.getModifiableLineupNames();
 
         return new Person(updatedName, updatedPhone, updatedEmail,
-                updatedHeight, updatedJerseyNumber, updatedTags, updatedWeight);
+                updatedHeight, updatedJerseyNumber, updatedTags, updatedWeight, lineupNames);
     }
 
-    /**
-     * Creates and returns a {@code Team} with the details of {@code teamToEdit}
-     * edited with {@code editTeamDescriptor}.
-     */
+    /* Since we delete Team, this method is no longer used.
     private static Team createEditedTeam(Team teamToEdit, EditTeamDescriptor editTeamDescriptor) {
         assert teamToEdit != null;
 
@@ -137,6 +135,7 @@ public class EditCommand extends Command {
 
         return new Team(updatedTeamName, updatedTeamMemberList, updatedTeamLineupList);
     }
+    */
 
     @Override
     public boolean equals(Object other) {
