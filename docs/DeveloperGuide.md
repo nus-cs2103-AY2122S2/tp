@@ -163,7 +163,7 @@ The `manual` command displays the format and a short description for a particula
 #### Implementation
 1. Upon receiving the user input, the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
 2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
-3. Since the first word in the user input matches the word "manual", `AddressBookParser#parseCommand(arguments)` will be called. In this case, the arguments refer to the remaining input text after the exclusion of the command word "manual".
+3. Since the first word in the user input matches the word "manual", `ManualCommandParser#parse(arguments)` will be called. In this case, the arguments refer to the remaining input text after the exclusion of the command word "manual".
     <div markdown="span" class="alert alert-info">:information_source:
     **Note:** A ParseException will be thrown if the argument is invalid.
     </div>
