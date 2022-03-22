@@ -319,9 +319,9 @@ public class DisjointAppointmentListTest {
     public void findSlotsBetweenAppointments_nonPositiveDuration_throwsIllegalArgumentException() {
         LocalDateTime refDateTime = LocalDateTime.parse("2022-12-12T12:30");
         assertThrows(IllegalArgumentException.class,
-                () -> new DisjointAppointmentList().findSlotsBetweenAppointments(refDateTime, refDateTime, 0));
+            () -> new DisjointAppointmentList().findSlotsBetweenAppointments(refDateTime, refDateTime, 0));
         assertThrows(IllegalArgumentException.class,
-                () -> new DisjointAppointmentList().findSlotsBetweenAppointments(refDateTime, refDateTime, -1));
+            () -> new DisjointAppointmentList().findSlotsBetweenAppointments(refDateTime, refDateTime, -1));
     }
 
     @Test
@@ -389,6 +389,30 @@ public class DisjointAppointmentListTest {
         assertEquals(expectedList, refList.findSlotsBetweenAppointments(smallerRangeStart, largerRangeEnd, 119));
         assertEquals(List.of(), refList.findSlotsBetweenAppointments(largerRangeStart, smallerRangeEnd, 120));
         assertEquals(expectedList, refList.findSlotsBetweenAppointments(largerRangeStart, smallerRangeEnd, 119));
+
+        assertEquals(List.of(), refList.findSlotsBetweenAppointments(smallerRangeEnd, smallerRangeStart, 1));
+    }
+
+    @Test
+    public void findSlotsBetweenAppointments_rangeDisjointFromSlot_success() {
+        LocalDateTime beforeRangeStart = LocalDateTime.parse("2022-12-11T12:30");
+        LocalDateTime beforeRangeEnd = LocalDateTime.parse("2022-12-11T14:30");
+        LocalDateTime afterRangeStart = LocalDateTime.parse("2022-12-13T12:30");
+        LocalDateTime afterRangeEnd = LocalDateTime.parse("2022-12-13T14:30");
+
+        Appointment appointment1 = new AppointmentBuilder(APPOINTMENT_ALONE)
+                .withStartDateTime(LocalDateTime.parse("2022-12-12T12:00"))
+                .withDuration(30).build();
+        Appointment appointment2 = new AppointmentBuilder(APPOINTMENT_ALONE)
+                .withStartDateTime(LocalDateTime.parse("2022-12-12T14:30"))
+                .withDuration(30).build();
+
+        DisjointAppointmentList refList = new DisjointAppointmentList();
+        refList.add(appointment1);
+        refList.add(appointment2);
+
+        assertEquals(List.of(), refList.findSlotsBetweenAppointments(beforeRangeStart, beforeRangeEnd, 120));
+        assertEquals(List.of(), refList.findSlotsBetweenAppointments(afterRangeStart, afterRangeEnd, 120));
     }
 
     @Test
