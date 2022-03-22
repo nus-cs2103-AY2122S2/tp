@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.ibook.logic.commands.exceptions.CommandException;
 import seedu.ibook.model.Model;
-import seedu.ibook.model.exceptions.AtOldestStateException;
 
 public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
@@ -16,9 +15,7 @@ public class UndoCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        try {
-            model.undoIBook();
-        } catch (AtOldestStateException exception) {
+        if (!model.canUndoIBook()) {
             throw new CommandException(MESSAGE_OLDEST_STATE);
         }
 

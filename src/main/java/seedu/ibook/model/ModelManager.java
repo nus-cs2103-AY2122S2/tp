@@ -114,12 +114,24 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void undoIBook() throws AtOldestStateException {
+    public boolean canUndoIBook() {
+        // TODO: implement this method
+        return true;
+    }
+
+    @Override
+    public boolean canRedoIBook() {
+        // TODO: implement this method
+        return true;
+    }
+
+    @Override
+    public void undoIBook() {
         reversibleIBook.toPreviousState();
     }
 
     @Override
-    public void redoIBook() throws AtLatestStateException {
+    public void redoIBook() {
         reversibleIBook.toNextState();
     }
 

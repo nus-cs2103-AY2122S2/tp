@@ -5,8 +5,6 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.ibook.commons.core.GuiSettings;
-import seedu.ibook.model.exceptions.AtLatestStateException;
-import seedu.ibook.model.exceptions.AtOldestStateException;
 import seedu.ibook.model.product.Product;
 
 /**
@@ -88,12 +86,22 @@ public interface Model {
     void updateFilteredProductList(Predicate<Product> predicate);
 
     /**
+     * Checks if the current state of iBook can be undone.
+     */
+    boolean canUndoIBook();
+
+    /**
+     * Checks if there is any undone state of iBook that can be redone.
+     */
+    boolean canRedoIBook();
+
+    /**
      * Reverts the iBook to one state older.
      */
-    void undoIBook() throws AtOldestStateException;
+    void undoIBook();
 
     /**
      * Restores the iBook to one state newer.
      */
-    void redoIBook() throws AtLatestStateException;
+    void redoIBook();
 }

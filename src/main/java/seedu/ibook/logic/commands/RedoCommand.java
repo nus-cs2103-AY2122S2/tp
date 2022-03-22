@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.ibook.logic.commands.exceptions.CommandException;
 import seedu.ibook.model.Model;
-import seedu.ibook.model.exceptions.AtLatestStateException;
 
 public class RedoCommand extends Command {
     public static final String COMMAND_WORD = "redo";
@@ -16,9 +15,7 @@ public class RedoCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        try {
-            model.redoIBook();
-        } catch (AtLatestStateException exception) {
+        if (!model.canRedoIBook()) {
             throw new CommandException(MESSAGE_LATEST_STATE);
         }
 
