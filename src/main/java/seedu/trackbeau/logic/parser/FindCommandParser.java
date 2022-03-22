@@ -34,14 +34,14 @@ public class FindCommandParser implements Parser<FindCommand> {
         Integer attributeCount = 9;
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(userInput, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_SKINTYPE, PREFIX_HAIRTYPE, PREFIX_STAFFS, PREFIX_SERVICES, PREFIX_ALLERGIES);
+            ArgumentTokenizer.tokenize(userInput, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                PREFIX_SKINTYPE, PREFIX_HAIRTYPE, PREFIX_STAFFS, PREFIX_SERVICES, PREFIX_ALLERGIES);
         Prefix[] prefixList = {PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_SKINTYPE, PREFIX_HAIRTYPE, PREFIX_STAFFS, PREFIX_SERVICES, PREFIX_ALLERGIES};
+            PREFIX_SKINTYPE, PREFIX_HAIRTYPE, PREFIX_STAFFS, PREFIX_SERVICES, PREFIX_ALLERGIES};
 
         if (userInput.isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
         ArrayList<List<String>> prefixArr = new ArrayList<List<String>>(Collections.nCopies(attributeCount, null));
@@ -49,8 +49,8 @@ public class FindCommandParser implements Parser<FindCommand> {
         for (int i = 0; i < attributeCount; i++) {
             if (argMultimap.getValue(prefixList[i]).isPresent() && argMultimap.getPreamble().isEmpty()) {
                 prefixArr.add(i,
-                        Arrays.asList(ParserUtil
-                                .parseName(argMultimap.getValue(prefixList[i]).get()).toString().split(" ")));
+                    Arrays.asList(ParserUtil
+                        .parseName(argMultimap.getValue(prefixList[i]).get()).toString().split(" ")));
             }
         }
 
