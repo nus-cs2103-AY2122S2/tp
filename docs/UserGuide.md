@@ -8,8 +8,8 @@ the process of hiring undergraduate/graduate Teaching Assistants (TA). They will
 data easily and review qualifications or availability for scheduling interviews. It is **optimized for use via a
 Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, this application will be able to help you manage all things under the hood of the TA initiative faster than traditional GUI applications.
 
-
 * Table of Contents
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -194,7 +194,6 @@ Format: `schedule INDEX /at DATE TIME`
 Examples:
 * `list` followed by `schedule 2 /at 20/09/2022 15:00` schedules the second candidate in TAlent Assistant™
 for an interview on 20 September 2022, 3PM.
-* 
 
 ### Clearing all entries : `clear`
 
