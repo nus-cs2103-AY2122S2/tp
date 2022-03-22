@@ -169,7 +169,7 @@ The `manual` command displays the format and a short description for a particula
     </div>
 
 4. The supplied argument will be trimmed using `String#trim()`.
-5. The `ManualCommandParser` will create a new `ManualCommand` using the (`argument` in Step 3) and returned to `LogicManager`.
+5. The `ManualCommandParser` will create a new `ManualCommand` (using the `argument` in Step 4), which will be returned to `LogicManager`.
 6. The `LogicManager` will call `ManualCommand#execute(Model model)`. If the `argument` is invalid, a `CommandException` will be thrown.
 7. Lastly, the `ManualCommand` will create a new `CommandResult` which will be returned to `LogicManager`.
 
