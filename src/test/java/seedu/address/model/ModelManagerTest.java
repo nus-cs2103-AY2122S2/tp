@@ -161,7 +161,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void removeLab_labInModel_throwsLabNotFoundException() {
+    public void removeLab_labInModel_success() {
         modelManager.addLab(new Lab("1"));
         assertDoesNotThrow(() -> modelManager.removeLab(new Lab("1")));
         assertFalse(modelManager.hasLab(new Lab("1")));

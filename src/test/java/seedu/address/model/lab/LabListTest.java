@@ -191,7 +191,7 @@ class LabListTest {
     }
 
     @Test
-    public void setLabs_listWithDuplicateStudents_throwsDuplicateLabException() {
+    public void setLabs_listWithDuplicateLabs_throwsDuplicateLabException() {
         LabList labs = new LabList();
         List<Lab> listWithDuplicateLabs = Arrays.asList(new Lab("1"), new Lab("1"));
         assertThrows(DuplicateLabException.class, () -> labs.setLabs(listWithDuplicateLabs));
@@ -205,7 +205,7 @@ class LabListTest {
     }
 
     @Test
-    public void equals_success() {
+    public void equals_sameList_success() {
         LabList labs1 = new LabList();
         LabList labs2 = new LabList();
         List<Lab> labList = Arrays.asList(new Lab("1"), new Lab("2"));

@@ -55,7 +55,7 @@ class MasterLabListTest {
     }
 
     @Test
-    public void equals_success() {
+    public void equals_sameList_success() {
         MasterLabList labs1 = new MasterLabList();
         MasterLabList labs2 = new MasterLabList();
         List<Lab> labList = Arrays.asList(new Lab("1"), new Lab("2"));

@@ -114,7 +114,7 @@ public class AddressBookTest {
     }
 
     @Test
-    public void removeLab_labInAddressBook_throwsLabNotFoundException() {
+    public void removeLab_labInAddressBook_success() {
         addressBook.addLab(new Lab("1"));
         assertDoesNotThrow(() -> addressBook.removeLab(new Lab("1")));
         assertFalse(addressBook.hasLab(new Lab("1")));

@@ -25,7 +25,7 @@ class AddLabCommandTest {
     }
 
     @Test
-    public void constructor_validLab_throwsNullPointerException() {
+    public void constructor_validLab_success() {
         assertDoesNotThrow(() -> new AddLabCommand(new Lab("1")));
     }
 
