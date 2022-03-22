@@ -225,6 +225,7 @@ Step 2. The user executes `grade a\1 s\1,2 g\1` command to grade the 1st assessm
 The following sequence diagram shows how the grade operation works:
 
 ![GradeSequenceDiagram](images/GradeSequenceDiagram.png)
+![GradeSequenceDiagram](images/GradeAssessmentSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `GradeCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
