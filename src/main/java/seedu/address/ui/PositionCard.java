@@ -50,7 +50,7 @@ public class PositionCard extends UiPart<Region> {
         name.setText(position.getPositionName().positionName);
         description.setText(position.getDescription().descriptionText);
 
-        int numofOpenings = position.getPositionOpenings().numOfOpenings;
+        int numofOpenings = position.getPositionOpenings().getCount();
         openings.setText(numofOpenings + (numofOpenings <= 1 ? " opening" : " openings"));
         if (numofOpenings == 0) {
             openings.setStyle("-fx-text-fill: #ffa4a4");

@@ -1,5 +1,6 @@
 package seedu.address.model.position;
 
+import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
@@ -13,16 +14,22 @@ import java.util.Set;
  */
 public class Position {
 
+    public static final String MESSAGE_CONSTRAINTS =
+            "Position cannot have more offers than openings.";
+
     // Identity fields
     private final PositionName positionName;
     private final Description description;
 
     // Data fields
     private final PositionOpenings positionOpenings;
+    private final PositionOffers positionOffers;
     private final Set<Requirement> requirements = new HashSet<>();
 
     /**
      * Every field must be present, not null and validated.
+     * Number of offers is left out of parameters.
+     * Constructor is used for initializing a new position.
      */
     public Position(PositionName positionName, Description description, PositionOpenings positionOpenings,
                     Set<Requirement> requirements) {
@@ -31,6 +38,21 @@ public class Position {
         this.description = description;
         this.positionOpenings = positionOpenings;
         this.requirements.addAll(requirements);
+        this.positionOffers = new PositionOffers();
+    }
+
+    /**
+     * Every field must be present, not null and validated.
+     */
+    public Position(PositionName positionName, Description description, PositionOpenings positionOpenings,
+                    PositionOffers positionOffers, Set<Requirement> requirements) {
+        requireAllNonNull(positionName, description, positionOpenings, positionOffers, requirements);
+        checkArgument(isValidOpeningsToOffers(), MESSAGE_CONSTRAINTS);
+        this.positionName = positionName;
+        this.description = description;
+        this.positionOpenings = positionOpenings;
+        this.requirements.addAll(requirements);
+        this.positionOffers = positionOffers;
     }
 
     public PositionName getPositionName() {
@@ -43,6 +65,10 @@ public class Position {
 
     public PositionOpenings getPositionOpenings() {
         return positionOpenings;
+    }
+
+    public PositionOffers getPositionOffers() {
+        return positionOffers;
     }
 
     /**
@@ -67,6 +93,27 @@ public class Position {
     }
 
     /**
+     * Returns true if number of offers is less than number of openings.
+     */
+    public boolean isValidOpeningsToOffers() {
+        return positionOffers.getCount() <= positionOpenings.getCount();
+    }
+
+    /**
+     * Returns true if number of offers is less than number of openings.
+     */
+    public boolean canExtendOffer() {
+        return positionOffers.getCount() < positionOpenings.getCount();
+    }
+
+    /**
+     * Returns true if number of openings and number of offers are more than 0.
+     */
+    public boolean canAcceptOffer() {
+        return positionOpenings.getCount() > 0 && positionOffers.getCount() > 0;
+    }
+
+    /**
      * Returns true if both positions have the same identity and data fields.
      * This defines a stronger notion of equality between two positions.
      */
@@ -84,7 +131,8 @@ public class Position {
         return otherPosition.getPositionName().equals(getPositionName())
                 && otherPosition.getDescription().equals(getDescription())
                 && otherPosition.getPositionOpenings().equals(getPositionOpenings())
-                && otherPosition.getRequirements().equals(getRequirements());
+                && otherPosition.getRequirements().equals(getRequirements())
+                && otherPosition.getPositionOffers().equals(getPositionOffers());
     }
 
     @Override
@@ -100,7 +148,9 @@ public class Position {
                 .append("; Description: ")
                 .append(getDescription())
                 .append("; Openings: ")
-                .append(getPositionOpenings());
+                .append(getPositionOpenings())
+                .append("; Current Offers: ")
+                .append(getPositionOffers());
 
         Set<Requirement> requirements = getRequirements();
         if (!requirements.isEmpty()) {
