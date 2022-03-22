@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Person {
+email
+githubUsername
+phone
+skillSet
+team
+}
+
+class Skill {
+skillName : String
+skillProficiency : int
+isSameSkill(skill : Skill) : boolean
+}
+
+class SkillSet {
+skillset : Set<Skill>
+hasSkill(skill : Skill) : boolean
+addAll(SkillSeq : SkillSet)
+add(skill : Skill)
+getSkillProficiency(skill : Skill) : int
+}
+
+
+Person "1" -- "1" SkillSet : > have
+SkillSet "1" *-- "0..*"Skill : > contains
+
+@enduml

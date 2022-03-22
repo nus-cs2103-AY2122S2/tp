@@ -24,7 +24,7 @@ Given below are my contributions to the project.
   * User Guide:
     * to be added
   * Developer Guide:
-    * to be added
+    * refer to docs/DeveloperGuide.md
 
 * **Community**:
   * to be added

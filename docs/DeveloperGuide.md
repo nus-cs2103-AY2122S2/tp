@@ -148,6 +148,25 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
+### SkillSet class
+The 'SkillSet' class,
+* stores a Set of `Skill`
+* is used to manipulate `Skill` objects
+
+### Skill class
+
+The `Skill` class,
+* can store an alphanumeric skill name value and an integer ranging from 0 to 100 for skill proficiency value
+* is a field of the `Person` class
+* is used for sorting by `Skill` proficiency level
+
+![skillClassDiagram](images/SkillDiagram.png)
+
+Given below is an example of how `SkillSet` interacts with the `Skill` class when the `Person` class calls the method
+`getSkillProficency(Skill)`
+
+![skillSequenceDiagram](images/SkillSequenceDiagram.png)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Implementation**
