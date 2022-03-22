@@ -94,8 +94,14 @@ class JsonAdaptedStudent {
             personTags.add(tag.toModelType());
         }
         final List<Lab> personLabs = new ArrayList<>();
+
         for (int i = 0; i < labNumbers.size(); i++) {
-            personLabs.add(labNumbers.get(i).toModelType().of(labStatuses.get(i).getLabStatus()));
+            // Incase of wrong lab status format we will just add the lab with LabStatus.UNSUBMITTED
+            try {
+                personLabs.add(labNumbers.get(i).toModelType().of(labStatuses.get(i).getLabStatus()));
+            } catch (IllegalArgumentException e) {
+                personLabs.add(labNumbers.get(i).toModelType());
+            }
         }
 
         if (name == null) {
