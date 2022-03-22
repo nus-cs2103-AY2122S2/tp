@@ -3,7 +3,9 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -27,11 +29,6 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
  */
 public class UniquePersonList implements Iterable<Person> {
     private static final int MAXIMUM_CAPACITY = 100;
-
-    /* to be deleted */
-    //private final Map<Name, Person> nameToPersonMap = new HashMap<>();
-    //private final Map<Person, Team> personToTeamMap = new HashMap<>();
-    //private final Map<Person, List<Lineup>> personToLineupMap = new HashMap<>();
 
     private final ObservableList<Person> internalList = FXCollections.observableArrayList();
     private final ObservableList<Person> internalUnmodifiableList =
