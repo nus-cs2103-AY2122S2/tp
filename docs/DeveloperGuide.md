@@ -49,7 +49,10 @@ method `toggleTab()` found in `MainWindow`.
 
 ![img.png](images/UiPhotos/InfoPanelClassDiagram.png)
 
-The `InfoPanel` component shows the details of a `Lesson` entry or `Student` entry based on which is selected.
+The `InfoPanel` component can either show the details of a `Lesson` entry or `Student` entry. A `LessonInfoPanel` is
+used to show the details of a `Lesson` entry, while a `StudentInfoPanel` is used to show the details of a `Student`
+entry.
+
 The methods `populateInfoPanelWithLesson()` and `populateInfoPanelWithStudent()` found in `MainWindow` can be used to
 populate the `InfoPanel` with the provided entry. Populating the `InfoPanel` using user commands is handled by the 
 method `handleInfoPanelUpdate()` in `MainWindow`.
