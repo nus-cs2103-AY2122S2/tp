@@ -54,14 +54,14 @@ public class Lab {
     }
 
     /**
-     * Returns a new immutable lab with the same attributes as this.
+     * Returns a new immutable lab with the same attributes as {@code this}.
      */
     public Lab createCopy() {
         return new Lab(String.valueOf(labNumber), labStatus);
     }
 
     /**
-     * Returns a new immutable lab with the same lab number as this and the given lab status.
+     * Returns a new immutable lab with the same lab number as {@code this} and the given lab status.
      */
     public Lab editLabStatus(LabStatus status) throws DuplicateLabException {
         if (status.equals(this.labStatus)) {
@@ -74,32 +74,16 @@ public class Lab {
      * Returns a new immutable lab with the same attributes as this.
      */
     public Lab of(String labStatusString) {
-        switch (labStatusString) {
-        case "UNSUBMITTED":
-            return new Lab(String.valueOf(labNumber), LabStatus.UNSUBMITTED);
-        case "SUBMITTED":
-            return new Lab(String.valueOf(labNumber), LabStatus.SUBMITTED);
-        case "GRADED":
-            return new Lab(String.valueOf(labNumber), LabStatus.GRADED);
-        default:
-            throw new IllegalArgumentException("Did not expect " + labStatusString);
-        }
+        requireNonNull(labStatusString);
+        return of(LabStatus.toLabStatus(labStatusString));
     }
 
     /**
      * Returns a new immutable {@code Lab} with the specified {@code LabStatus}
      */
-    public Lab thatIs(LabStatus labStatus) {
-        switch (labStatus) {
-        case UNSUBMITTED:
-            return new Lab(String.valueOf(labNumber), LabStatus.UNSUBMITTED);
-        case SUBMITTED:
-            return new Lab(String.valueOf(labNumber), LabStatus.SUBMITTED);
-        case GRADED:
-            return new Lab(String.valueOf(labNumber), LabStatus.GRADED);
-        default:
-            throw new IllegalArgumentException("Did not expect " + labStatus.name());
-        }
+    public Lab of(LabStatus labStatus) {
+        requireNonNull(labStatus);
+        return new Lab(String.valueOf(labNumber), labStatus);
     }
 
     /**

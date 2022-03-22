@@ -19,4 +19,20 @@ public enum LabStatus {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Parses a String given by {@code labStatusString} into a LabStatus.
+     */
+    public static LabStatus toLabStatus(String labStatusString) {
+        switch (labStatusString) {
+        case "UNSUBMITTED":
+            return LabStatus.UNSUBMITTED;
+        case "SUBMITTED":
+            return LabStatus.SUBMITTED;
+        case "GRADED":
+            return LabStatus.GRADED;
+        default:
+            throw new IllegalArgumentException("Did not expect " + labStatusString);
+        }
+    }
+
 }
