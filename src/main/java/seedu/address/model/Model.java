@@ -69,6 +69,11 @@ public interface Model {
 
     boolean hasLineupName(LineupName targetName);
 
+    /**
+     * Add a lineup to MyGM.
+     */
+    void addLineup(Lineup toAdd);
+
     void deleteLineup(Lineup lineup);
 
     void putPersonIntoLineup(Person player, Lineup lineup);

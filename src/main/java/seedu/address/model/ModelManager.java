@@ -159,6 +159,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addLineup(Lineup toAdd) {
+        addressBook.addLineup(toAdd);
+    }
+
+    @Override
     public void deleteLineup(Lineup lineup) {
         addressBook.deleteLineup(lineup);
     }
