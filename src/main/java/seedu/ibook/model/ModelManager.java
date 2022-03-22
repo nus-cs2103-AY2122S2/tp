@@ -11,8 +11,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.ibook.commons.core.GuiSettings;
 import seedu.ibook.commons.core.LogsCenter;
-import seedu.ibook.model.exceptions.AtLatestStateException;
-import seedu.ibook.model.exceptions.AtOldestStateException;
 import seedu.ibook.model.product.Product;
 
 /**
@@ -97,12 +95,12 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteProduct(Product target) {
-        reversibleIBook.removeProduct(target);
+        reversibleIBook.reversibleRemoveProduct(target);
     }
 
     @Override
     public void addProduct(Product product) {
-        reversibleIBook.addProduct(product);
+        reversibleIBook.reversibleAddProduct(product);
         updateFilteredProductList(PREDICATE_SHOW_ALL_PRODUCTS);
     }
 
@@ -110,29 +108,32 @@ public class ModelManager implements Model {
     public void setProduct(Product target, Product updatedProduct) {
         requireAllNonNull(target, updatedProduct);
 
-        reversibleIBook.setProduct(target, updatedProduct);
+        reversibleIBook.reversibleSetProduct(target, updatedProduct);
+    }
+
+    @Override
+    public void saveIBookChanges() {
+        reversibleIBook.saveChanges();
     }
 
     @Override
     public boolean canUndoIBook() {
-        // TODO: implement this method
-        return true;
+        return reversibleIBook.canUndo();
     }
 
     @Override
     public boolean canRedoIBook() {
-        // TODO: implement this method
-        return true;
+        return reversibleIBook.canRedo();
     }
 
     @Override
     public void undoIBook() {
-        reversibleIBook.toPreviousState();
+        reversibleIBook.undo();
     }
 
     @Override
     public void redoIBook() {
-        reversibleIBook.toNextState();
+        reversibleIBook.redo();
     }
 
     //=========== Filtered Product List Accessors =============================================================
