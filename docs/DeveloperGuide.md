@@ -158,7 +158,7 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Description
 
-The `manual` command displays the format and a short description for a particular command. During the execution of the `manual` command, the user's input is being parsed in `ManualCommandParser`. After which, a new `ManualCommand` object will be created, and is executed by the `LogicManager`.
+The `manual` command displays the format and a short description for a particular command. During the execution of the `manual` command, the user's input is being parsed in `ManualCommandParser`. After which, a new `ManualCommand` object will be created, and is subsequently executed by the `LogicManager`.
 
 #### Implementation
 1. Upon receiving the user input, the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
@@ -181,7 +181,7 @@ The following sequence diagram shows how the manual command works:
 
 #### Description
 
-The `mark` command marks a specific undone task as done for a particular student. During the execution of the `mark` command, the user's input is being parsed in `AddressBookParser`. After which, a new `MarkCommand` object will be created, and is executed by the `LogicManager`.
+The `mark` command marks a specific undone task as done for a particular student. During the execution of the `mark` command, the user's input is being parsed in `AddressBookParser`. After which, a new `MarkCommand` object will be created, and is subsequently executed by the `LogicManager`.
 
 #### Implementation
 1. Upon receiving the user input, the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
@@ -225,7 +225,7 @@ The following sequence diagrams shows how the mark command works:
 
 #### Description
 
-The `unmark` command marks a specific done task as undone for a particular student. During the execution of the `unmark` command, the user's input is being parsed in `AddressBookParser`. After which, a new `UnmarkCommand` object will be created, and is executed by the `LogicManager`.
+The `unmark` command marks a specific done task as undone for a particular student. During the execution of the `unmark` command, the user's input is being parsed in `AddressBookParser`. After which, a new `UnmarkCommand` object will be created, and is subsequently executed by the `LogicManager`.
 
 #### Implementation
 1. Upon receiving the user input, the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
@@ -349,21 +349,21 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
-### Add students
+### Add Command 
 
 #### Description
 
 The `add` command allows users to add a particular student into TAPA. 
 Since not all fields are compulsory during the execution of the `add` command,
 the user's input is being parsed in `AddressBookParser`. After which, a new `AddCommand`
-object will be created, and is executed by the `LogicManager`.
+object will be created, and is subsequently executed by the `LogicManager`.
 
 #### Implementation
 
 1. Upon receiving the user input, 
    the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
 2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
-3. Since the first word in user input matches the word "add", `AddCommandParser#parse(arguments)` will be called.
+3. Since the first word in the user input matches the word "add", `AddCommandParser#parse(arguments)` will be called.
    In this case, the arguments refer to the remaining input text after the exclusion of the command word ("add").
 4. In the `AddCommandParser#parse(arguments)`, the arguments will be tokenized into a `ArgumentMultimap`, 
    by using `ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
@@ -415,6 +415,67 @@ The following sequence diagram shows how the add operation works:
 ![AddCommandSequenceDiagram-1](images/AddCommandSequenceDiagram-1.png)
 
 ![AddCommandSequenceDiagram-2](images/AddCommandSequenceDiagram-2.png)
+
+### Task Command
+
+#### Description
+
+The `task` command allows users to check and view all the tasks belonging to a particular student.
+During the execution of the `task` command, the user's input is being parsed in `AddressBookParser`.
+After which, a new `TaskCommand` object will be created, and is subsequently executed by the LogicManager.
+
+#### Implementation
+
+1. Upon receiving the user input,
+   the `LogicManager` starts to parse the given input text using `AdddressBookParser#parseCommand()`.
+2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
+3. Since the first word in the user input matches the word "task", `TaskCommandParser#parse(arguments)` will be called.
+   In this case, the arguments refer to the remaining input text after the exclusion of the command word ("task").
+4. In the `TaskCommandParser#parse(arguments)`, the arguments will be tokenized into a `ArgumentMultimap`,
+   by using `ArgumentTokenizer#tokenize(String argsString, Prefex... prefixes)`.
+
+   <div markdown="span" class="alert alert-info">:information_source: 
+    **Note:** A ParseException will be thrown if the prefix of `StudentId` is missing, as it is a compulsory field.
+   </div>
+
+5. The `TaskCommandParser` will pass the studentId input (found in the `ArgumentMultimap`)
+   into `ParserUtil#parseStudentId(String studentId).`
+
+   <div markdown="span" class="alert alert-info">:information_source: 
+   **Note:** A NullException will be thrown if the supplied string argument is null.
+   </div>
+
+6. In `ParserUtil#parseStudentId(String studentId)`, the supplied argument will be trimmed using `String#trim()`.
+7. `StudentId#isValidId(String studentId)` will then be invoked,
+   which checks if the trimmed argument is valid (according to the Regex supplied).
+   If the argument is valid, a new StudentId object will be created and returned to the `TaskCommandParser`.
+   If the argument is not valid, a `ParseException` will be thrown.
+8. A new `TaskCommand` will be created (using the `StudentId` object created in Step 7) and returned to the `LogicManager`.
+9. The `LogicManager` will then call `TaskCommand#execute(Model model)`.
+10. In the `TaskCommand`, a `StudentIdContainsKeywordsPredicate` is created using the studentId.
+11. The `model#updateFilteredPersonList(predicate)` is then invoked such that the list is filtered by the predicate created.
+12. The `model#getFilteredPersonList()` is then called. 
+    The size of the resulting list determines if there is any `Person` that corresponds to the specified `studentId`. 
+    If the size is equals to 0, a `CommandException` will be thrown.
+
+    <div markdown="span" class="alert alert-info">:information_source: 
+    **Note:** The studentId is a UNIQUE field in TAPA.
+    </div>
+
+13. The `Person` object in the filtered list is then extracted out using `model#getFilteredPersonList().get(0)`.
+14. The `TaskList` belong to this `Person` can then be retrieved using `Person#getTaskList()`.
+15. If this `TaskList` is null or empty, a `CommandException` will be thrown.
+16. The `TaskCommand` iterates through this `TaskList`, and categorises the tasks into two new `TaskList`
+    according to the task's completion status.
+17. Lastly, the `TaskCommand` will create a new `CommandResult` by using the `TaskList` in Step 16.
+    This `CommandResult` will then be returned to `LogicManager`.
+
+![TaskCommandSequenceDiagram-1](images/TaskCommandSequenceDiagram-1.png)
+
+![TaskCommandSequenceDiagram-2](images/TaskCommandSequenceDiagram-2.png)
+
+![TaskCommandSequenceDiagram-3](images/TaskCommandSequenceDiagram-3.png)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
