@@ -55,11 +55,4 @@ public class Profile extends UiPart<Region> {
     public void clearPreviousTags() {
         tags.getChildren().clear();
     }
-
-    /**
-     * Edit a profile.
-     */
-    @FXML
-    public void handleEdit() {
-    }
 }

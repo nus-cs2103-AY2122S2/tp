@@ -72,7 +72,6 @@ public class PersonListPanel extends UiPart<Region> {
      */
     public void handleContextMenu() throws CommandException, ParseException {
         ContextMenu contextMenu = new ContextMenu();
-        MenuItem edit = new MenuItem("Edit");
         MenuItem delete = new MenuItem("Delete");
         delete.setOnAction(event -> {
             try {
@@ -83,7 +82,7 @@ public class PersonListPanel extends UiPart<Region> {
                 resultDisplay.setFeedbackToUser(e.getMessage());
             }
         });
-        contextMenu.getItems().addAll(edit, delete);
+        contextMenu.getItems().addAll(delete);
         personListView.setContextMenu(contextMenu);
     }
 
