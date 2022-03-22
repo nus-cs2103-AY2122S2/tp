@@ -387,25 +387,39 @@ The exported file can be subsequently imported back into any other instance of C
 
 The previous implementation find target is limited to name field only. Hence, extending the find function will increase the user experience by enable them easily search `Person` with `phone`
 `email` and `address` field.
-This is done by creating `searchType` model within the `model util` package and extract original `NameCdonstrainsKeywordsPreicate` to form `CdonstrainsKeywordsPreicate` then create different inherit of three different types of predicate.
+
+This is done by creating `searchType` model within the `model util` package and extracting the original `NameConstrainsKeywordsPreicate` to form `ConstrainsKeywordsPreicate` then create different inherit of three different types of predicate.
+
+The sequence diagram is as follows:
+![Enhanced Find Logic](images/FindCommandSequenceDiagram.png)
 
 ### Enhanced Command Features
 
 #### Chain Command
 
-This extension allow user to chain multiple commands together, also noted one command fail may lead to following commands invalid (e.g. if create person failed, you cannot edit the newly created person) and exception will throw.
+This extension allows user to chain multiple commands together.
+
+:information_source: **Note:** A command failure may lead to following commands being invalid (e.g. if create person failed, you cannot edit the newly created person), causing an exception to be thrown.
+
+The sequence diagram is as follows:
+![Chain Command](images/ChainCommandSequenceDiagram.png)
 
 #### Range Command
 
-This extension allow user to perform range of commands base on `index`. Hence, `from/INDEX to/INDEX` is essential in parsing the value of input. The validation of index is similar to original (i.e. the index in edit command)
+This extension allows user to perform range of commands base on `index`. Hence, `from/INDEX to/INDEX` is essential in parsing the value of input. The validation of index is similar to original command (i.e. the index in edit command).
 
 #### Batch Command
 
-This extension focus on matching specific value field (`name phone email address`) and then perform edit or delete operation on the target which satisfy the matching condition. This is achieved by `matchInputStringToIndex` which convert the person that matched the condition and returned as series of command and execute sequentially.
+This extension focuses on matching specific value field (`name phone email address`) and then perform edit or delete operation on the target which satisfy the matching condition. This is achieved by `BatchCommand#matchInputStringToIndex()` which converts the person that matched the condition and returned as series of command and execute sequentially.
+
+The batch command extract the user input value and match them to create new `Index`.
+
+The sequence diagram is as follows:
+![Input to Index](images/BatchCommandInputToIndexSequenceDiagram.png)
 
 #### Combined Feedback message
 
-The multiple commands executed will return one `CommandResult` which contain the list of result executed feedback message to user and combine them together return as `feedbackToUser`
+The multiple commands executed will return a `CommandResult` which contains a list of feedback messages of the results executed combined all together and returned as `feedbackToUser`
 
 
 ### \[Proposed\] Undo/redo feature

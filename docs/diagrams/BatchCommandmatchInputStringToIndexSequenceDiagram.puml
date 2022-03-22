@@ -3,46 +3,35 @@
 
 box Logic LOGIC_COLOR_T1
 
-participant ":LogicManager"  as LogicManager LOGIC_COLOR
+participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":BatchCommand"  as BatchCommand LOGIC_COLOR
 participant ":Index"  as Index LOGIC_COLOR
 
 box end
 
-box Person MODEL_COLOR_T1
+box Model MODEL_COLOR_T1
+participant ":Person"  as Person MODEL_COLOR
+box end
 
-participant ":Phone"  as Phone MODEL_COLOR
-participant ":Email"  as Email MODEL_COLOR
-participant ":Address"  as Address MODEL_COLOR
-participant ":Name"  as Name MODEL_COLOR
-
-LogicManager -> BatchCommand : matchInputStringToIndex
+create BatchCommand
+LogicManager -> BatchCommand : execute()
 activate BatchCommand
-BatchCommand -> Index : fromZeroBased
+
+BatchCommand -> BatchCommand : matchInputStringToIndex()
+activate BatchCommand
+BatchCommand --> BatchCommand
+deactivate BatchCommand
+
+create Index
+BatchCommand -> Index : fromZeroBased()
 activate Index
-Index -> Index : new
-activate Index
-Index --> Index
-deactivate Index
+
 Index --> BatchCommand
-
-
 deactivate Index
-BatchCommand -> Phone : toString
-activate Phone
-Phone --> BatchCommand
-deactivate Phone
-BatchCommand -> Email : toString
-activate Email
-Email --> BatchCommand
-deactivate Email
-BatchCommand -> Address : toString
-activate Address
-Address --> BatchCommand
-deactivate Address
-BatchCommand -> Name : toString
-activate Name
-Name --> BatchCommand
-deactivate Name
+BatchCommand -> Person : getPersonMatchedIndex()
+activate Person
+
+Person --> BatchCommand
+deactivate Person
 return
 @enduml

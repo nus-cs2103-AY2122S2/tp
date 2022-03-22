@@ -5,16 +5,25 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager"  as LogicManager LOGIC_COLOR
 participant ":ChainCommand"  as ChainCommand LOGIC_COLOR
 participant ":Command"  as Command LOGIC_COLOR
+participant ":CommandResult"  as CommandResult LOGIC_COLOR
+end box
 
-LogicManager -> ChainCommand : execute
-activate ChainCommand
-ChainCommand  -> Command : execute
-activate Command
-Command --> ChainCommand
-deactivate Command
-ChainCommand -> Command : execute
-activate Command
-Command --> ChainCommand
-deactivate Command
+create ChainCommand
+LogicManager -> ChainCommand : execute()
+loop for all command in commands
+    activate ChainCommand
+    create Command
+    ChainCommand -> Command : execute()
+    create CommandResult
+    Command -> CommandResult : create
+    activate CommandResult
+    CommandResult -> CommandResult : getFeedbackToUser()
+    activate CommandResult
+    CommandResult --> CommandResult:
+    deactivate CommandResult
+    CommandResult --> Command:
+    deactivate CommandResult
+    Command --> ChainCommand:
+end
 return
 @enduml

@@ -18,24 +18,24 @@ Given below are my contributions to the project.
   * Credits: `To be added soon`
 
 * **Code contributed**:
-  * 2000+ LoC contributed
+  * 2400+ LoC contributed (by version 1.2)
   * Add relevant testcases
 
 * **Project management**:
   * Perform code reviews
 
 * **Enhancements to existing features**:
-  * Modify find feature to accept more fileds
+  * Modify find feature to accept more fields
 
 * **Documentation**:
   * User Guide:
   * Added documentation for all tag related functionalities, including:
-    * find
-    * batch
-    * chain
-    * range
+    * findperson by/
+    * batch by/ =/
+    * chain &&
+    * range from/ to/
   * Developer Guide:
-    * How multiple commands binds together
+    * Documentation on how multiple commands binds together
 
 * **Community**:
   * `to be added soon`
