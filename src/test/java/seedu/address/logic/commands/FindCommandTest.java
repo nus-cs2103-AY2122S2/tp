@@ -133,6 +133,34 @@ public class FindCommandTest {
         assertEquals(Arrays.asList(ALICE, BENSON, DANIEL, JAMES, LAUREN, MAVIS), model.getFilteredPersonList());
     }
 
+    @Test
+    public void execute_caseInsensitiveMatches_success() {
+
+        //input 'benson' matches to a person named Benson Meier
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        NameContainsKeywordsPredicate predicate = preparePredicate("benson");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(BENSON), model.getFilteredPersonList());
+
+        //input 'FRIENDS' matches to tag 'friends'
+        expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        predicate = preparePredicate("FRIENDS");
+        command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredPersonList());
+
+        //input 'birThDaY' matches to log title 'birthday coming up'
+        expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        predicate = preparePredicate("birThDaY");
+        command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(LAUREN, MAVIS), model.getFilteredPersonList());
+    }
+
 
     /**
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
