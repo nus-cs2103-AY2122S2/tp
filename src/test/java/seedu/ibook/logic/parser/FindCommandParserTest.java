@@ -1,7 +1,5 @@
 package seedu.ibook.logic.parser;
 
-import static seedu.ibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.ibook.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.ibook.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
