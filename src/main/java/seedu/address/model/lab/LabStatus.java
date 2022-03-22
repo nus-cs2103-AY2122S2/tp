@@ -1,5 +1,7 @@
 package seedu.address.model.lab;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * Represents the possible LabStatuses a Lab can have.
  */
@@ -23,6 +25,7 @@ public enum LabStatus {
      * Parses a String given by {@code labStatusString} into a LabStatus.
      */
     public static LabStatus toLabStatus(String labStatusString) {
+        requireNonNull(labStatusString);
         switch (labStatusString) {
         case "UNSUBMITTED":
             return LabStatus.UNSUBMITTED;
