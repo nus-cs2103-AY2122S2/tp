@@ -32,10 +32,10 @@ public class CommandResultTest {
         assertFalse(commandResult.equals(new CommandResult("feedback", true, false, false, false)));
 
         // different showFavourites value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", true, false, true, false)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, false, true, false)));
 
         // different exit value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", false, false, true, false)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, false, false, true)));
     }
 
     @Test
@@ -55,6 +55,6 @@ public class CommandResultTest {
         assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, false, true, false).hashCode());
 
         // different exit value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, false, true, false).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, false, false, true).hashCode());
     }
 }
