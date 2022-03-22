@@ -34,7 +34,7 @@
     -fx-font-size: 15px;
     -fx-wrap-text: "true";
     -fx-border-width: 1px;
-    -fx-border-radius: 5px;
+    -fx-border-radius: 8px;
     -fx-padding: 2px;
 }
 
@@ -55,6 +55,11 @@
 
 .increment-arrow, .decrement-arrow {
     -fx-shape: " ";
+}
+
+#resultPane {
+    -fx-border-width: 0 0 2px 0;
+    -fx-padding: 10px 9px 20px 9px;
 }
 
 #commandTypeLabel {

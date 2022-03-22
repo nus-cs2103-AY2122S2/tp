@@ -21,15 +21,20 @@
 }
 
 .result-display {
+    -fx-background-color: #FCF3E5;
     -fx-text-fill: #222;
-    -fx-border-color: #986544;
+    -fx-border-color: #FCF3E5;
+}
+
+.result-display .content {
+    -fx-background-color: #FCF3E5;
 }
 
 .status-bar .label {
     -fx-text-fill: #333;
 }
 
-.pane-with-border, .status-bar, .scroll-bar, .list-view, .list-cell, .result-display, .result-display .content {
+.pane-with-border, .status-bar, .scroll-bar, .list-view, .list-cell {
     -fx-background-color: #FEFAF5;
 }
 
@@ -43,6 +48,10 @@
 
 .thumb {
     -fx-background-color: #D36F1C;
+}
+
+#resultPane {
+    -fx-border-color: #FCF3E5;
 }
 
 #commandTextField {

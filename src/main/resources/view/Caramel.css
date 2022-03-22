@@ -1,7 +1,7 @@
 /* No idea what this does but it looks important */
 .background {
-    -fx-background-color: #222;
-    background-color: #222; /* Used in the default.html file */
+    -fx-background-color: #2A2A2A;
+    background-color: #2A2A2A; /* Used in the default.html file */
 }
 
 .label {
@@ -38,7 +38,7 @@
 }
 
 .pane-with-border, .status-bar, .scroll-bar, .list-view, .list-cell {
-    -fx-background-color: #222;
+    -fx-background-color: #2A2A2A;
 }
 
 .menu-bar, .context-menu, .menu-item:focused {
@@ -53,8 +53,12 @@
     -fx-background-color: #BA6C41;
 }
 
+#resultPane {
+    -fx-border-color: #333;
+}
+
 #commandTextField {
-    -fx-background-color: #222;
+    -fx-background-color: #2A2A2A;
     -fx-border-color: transparent transparent #333 transparent;
     -fx-text-fill: #EAEAEA;
 }
