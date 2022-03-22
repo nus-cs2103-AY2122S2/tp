@@ -3,6 +3,7 @@ package seedu.address.model.event;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 import seedu.address.model.person.Person;

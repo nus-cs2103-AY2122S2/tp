@@ -46,7 +46,7 @@ public class Information {
     public boolean equals(Object other) {
         return other == this
                 || (other instanceof Information
-                && value.equals(((Information) other).value));
+                && value.equalsIgnoreCase(((Information) other).value));
     }
 
     @Override

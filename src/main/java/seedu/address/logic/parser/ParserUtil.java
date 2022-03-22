@@ -324,11 +324,17 @@ public class ParserUtil {
 
         String[] tempDate = trimmedDate.split("-");
         String[] tempTime = trimmedTime.split(":");
+        int year = Integer.parseInt(tempDate[0]);
+        int month = Integer.parseInt(tempDate[1]);
+        int day = Integer.parseInt(tempDate[2]);
+        int hour = Integer.parseInt(tempTime[0]);
+        int min = Integer.parseInt(tempTime[1]);
 
-        return new DateTime(Integer.parseInt(tempDate[0]),
-                Integer.parseInt(tempDate[1]),
-                Integer.parseInt(tempDate[2]),
-                Integer.parseInt(tempTime[0]),
-                Integer.parseInt(tempTime[1]));
+
+        if (!DateTime.isValidDateTime(year, month, day, hour, min)) {
+            throw new ParseException(DateTime.DATETIME_MESSAGE_CONSTRAINTS);
+        }
+
+        return new DateTime(year, month, day, hour, min);
     }
 }

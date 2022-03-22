@@ -32,9 +32,7 @@ public class EventCommandParser implements Parser<EventCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_EVENT_NAME, PREFIX_INFO,
                 PREFIX_TIME, PREFIX_DATE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_EVENT_NAME, PREFIX_INFO, PREFIX_TIME,
-                PREFIX_DATE)
-                || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_EVENT_NAME, PREFIX_INFO, PREFIX_TIME, PREFIX_DATE)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EventCommand.MESSAGE_USAGE));
         }
 
@@ -44,7 +42,7 @@ public class EventCommandParser implements Parser<EventCommand> {
                 argMultimap.getValue(PREFIX_TIME).get());
 
         try {
-            Index[] indexes = ParserUtil.parseIndexes(args);
+            Index[] indexes = ParserUtil.parseIndexes(argMultimap.getPreamble());
             return new EventCommand(indexes, eventName, info, dateTime);
         } catch (ParseException e) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EventCommand.MESSAGE_USAGE), e);

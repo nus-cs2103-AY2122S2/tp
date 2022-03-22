@@ -8,11 +8,11 @@ import java.time.format.DateTimeFormatter;
 public class DateTime {
     public static final String DATETIME_MESSAGE_CONSTRAINTS = "Date and Time has to be valid!";
     public static final String DATE_MESSAGE_CONSTRAINTS = "Date has to be in the format of yyyy-MM-DD!";
-    public static final String TIME_MESSAGE_CONSTRAINTS = "Date and Time has to be valid!";
+    public static final String TIME_MESSAGE_CONSTRAINTS = "Time has to be in the format of HH:mm!";
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm");
 
-    public static final String DATE_VALIDATION_REGEX = "^(\\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$";
-    public static final String TIME_VALIDATION_REGEX = "^(([01][1-9]|2[0-3]|00):([01234][0-9]|5[0-9]))$";
+    public static final String DATE_VALIDATION_REGEX = "^(\\d{4})-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$";
+    public static final String TIME_VALIDATION_REGEX = "([01]?[0-9]|2[0-3]):[0-5][0-9]";
 
     public final LocalDateTime value;
 
@@ -25,17 +25,17 @@ public class DateTime {
      * @param min the event min
      */
     public DateTime(int year, int month, int day, int hour, int min) {
+        checkArgument(isValidDateTime(year, month, day, hour, min), DATETIME_MESSAGE_CONSTRAINTS);
         LocalDateTime temp = LocalDateTime.of(year, month, day, hour, min);
-        checkArgument(isValidDateTime(temp), DATETIME_MESSAGE_CONSTRAINTS);
         value = temp;
     }
 
     /**
      * Returns true if a given date and time is valid.
      */
-    public static boolean isValidDateTime(LocalDateTime test) {
+    public static boolean isValidDateTime(int year, int month, int day, int hour, int min) {
         LocalDateTime now = LocalDateTime.now();
-        return test.isAfter(now);
+        return LocalDateTime.of(year, month, day, hour, min).isAfter(now);
     }
 
     public static boolean isValidDate(String test) {
