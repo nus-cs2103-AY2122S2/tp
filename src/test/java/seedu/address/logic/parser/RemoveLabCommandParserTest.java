@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.RemoveLabCommand;
-import seedu.address.model.student.lab.Lab;
+import seedu.address.model.lab.Lab;
 
 public class RemoveLabCommandParserTest {
 

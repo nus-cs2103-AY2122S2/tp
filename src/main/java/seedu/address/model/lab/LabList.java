@@ -1,4 +1,4 @@
-package seedu.address.model.student.lab;
+package seedu.address.model.lab;
 
 
 import static java.util.Objects.requireNonNull;
@@ -152,6 +152,7 @@ public class LabList implements Iterable<Lab> {
 
     /**
      * Replaces the contents of this list with {@code replacement}.
+     *
      * @param replacement is assumed to not contain duplicate Labs.
      */
     public void setLabs(LabList replacement) {

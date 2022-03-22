@@ -5,13 +5,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LAB;
 
 import seedu.address.logic.commands.RemoveLabCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.student.lab.Lab;
+import seedu.address.model.lab.Lab;
 
 public class RemoveLabCommandParser implements Parser<RemoveLabCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the RemoveLabCommand
      * and returns a RemoveLabCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     @Override

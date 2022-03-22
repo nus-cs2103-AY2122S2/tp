@@ -3,7 +3,7 @@ package seedu.address.storage;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import seedu.address.model.student.lab.Lab;
+import seedu.address.model.lab.Lab;
 
 /**
  * Jackson-friendly version of {@link Lab}.

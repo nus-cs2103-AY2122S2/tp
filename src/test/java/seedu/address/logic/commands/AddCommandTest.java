@@ -17,12 +17,12 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
+import seedu.address.model.MasterLabList;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.student.MasterLabList;
+import seedu.address.model.lab.Lab;
 import seedu.address.model.student.Student;
-import seedu.address.model.student.lab.Lab;
 import seedu.address.testutil.StudentBuilder;
 
 public class AddCommandTest {

@@ -80,7 +80,7 @@ public class AddCommandParserTest {
         Student expectedStudentMultipleTags = new StudentBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_HUSBAND + GITHUB_DESC_BOB
-                + TELEGRAM_DESC_BOB + STUDENTID_DESC_BOB + TAG_DESC_FRIEND,
+                        + TELEGRAM_DESC_BOB + STUDENTID_DESC_BOB + TAG_DESC_FRIEND,
                 new AddCommand(expectedStudentMultipleTags));
     }
 
@@ -137,22 +137,22 @@ public class AddCommandParserTest {
 
         // invalid github (consecutive hyphens)
         assertParseFailure(parser, NAME_DESC_BOB + EMAIL_DESC_BOB + INVALID_GITHUB_CONSECUTIVE_HYPHEN_DESC
-                + TELEGRAM_DESC_BOB + STUDENTID_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                        + TELEGRAM_DESC_BOB + STUDENTID_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 GithubUsername.MESSAGE_CONSTRAINTS);
 
         // invalid github (starting with hyphen)
         assertParseFailure(parser, NAME_DESC_BOB + EMAIL_DESC_BOB + INVALID_GITHUB_STARTING_HYPHEN_DESC
-                + TELEGRAM_DESC_BOB + STUDENTID_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                        + TELEGRAM_DESC_BOB + STUDENTID_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 GithubUsername.MESSAGE_CONSTRAINTS);
 
         // invalid github (ending with hyphen)
         assertParseFailure(parser, NAME_DESC_BOB + EMAIL_DESC_BOB + INVALID_GITHUB_ENDING_HYPHEN_DESC
-                + TELEGRAM_DESC_BOB + STUDENTID_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                        + TELEGRAM_DESC_BOB + STUDENTID_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 GithubUsername.MESSAGE_CONSTRAINTS);
 
         // invalid github (longer than 39 alphanumerical characters)
         assertParseFailure(parser, NAME_DESC_BOB + EMAIL_DESC_BOB + INVALID_GITHUB_LONGER_THAN_39_DESC
-                + STUDENTID_DESC_BOB + TELEGRAM_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                        + STUDENTID_DESC_BOB + TELEGRAM_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 GithubUsername.MESSAGE_CONSTRAINTS);
 
         // invalid telegram
@@ -161,22 +161,22 @@ public class AddCommandParserTest {
 
         // invalid student id (does not start with A)
         assertParseFailure(parser, NAME_DESC_BOB + EMAIL_DESC_BOB + GITHUB_DESC_BOB + TELEGRAM_DESC_BOB
-                + INVALID_STUDENTID_START_LETTER_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                        + INVALID_STUDENTID_START_LETTER_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 StudentId.MESSAGE_CONSTRAINTS);
 
         // invalid student id (wrong length)
         assertParseFailure(parser, NAME_DESC_BOB + EMAIL_DESC_BOB + GITHUB_DESC_BOB + TELEGRAM_DESC_BOB
-                + INVALID_STUDENTID_WRONG_LENGTH_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                        + INVALID_STUDENTID_WRONG_LENGTH_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 StudentId.MESSAGE_CONSTRAINTS);
 
         // invalid student id (does not end with letter)
         assertParseFailure(parser, NAME_DESC_BOB + EMAIL_DESC_BOB + GITHUB_DESC_BOB + TELEGRAM_DESC_BOB
-                + INVALID_STUDENTID_END_NUMBER_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                        + INVALID_STUDENTID_END_NUMBER_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 StudentId.MESSAGE_CONSTRAINTS);
 
         // invalid student id (has a letter in the middle)
         assertParseFailure(parser, NAME_DESC_BOB + EMAIL_DESC_BOB + GITHUB_DESC_BOB + TELEGRAM_DESC_BOB
-                + INVALID_STUDENTID_MIDDLE_LETTER + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                        + INVALID_STUDENTID_MIDDLE_LETTER + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 StudentId.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
@@ -185,7 +185,7 @@ public class AddCommandParserTest {
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + EMAIL_DESC_BOB + GITHUB_DESC_BOB
-                + TELEGRAM_DESC_BOB + STUDENTID_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                        + TELEGRAM_DESC_BOB + STUDENTID_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }

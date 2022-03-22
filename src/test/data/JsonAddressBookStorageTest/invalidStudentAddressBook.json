@@ -1,9 +1,11 @@
 {
-  "students": [ {
-    "name": "Student with invalid name field: Ha!ns Mu@ster",
-    "email": "hans@example.com",
-    "github": "fionaK",
-    "telegram": "fiona_K",
-    "studentId": "A0123456B"
-  } ]
+  "students": [
+    {
+      "name": "Student with invalid name field: Ha!ns Mu@ster",
+      "email": "hans@example.com",
+      "github": "fionaK",
+      "telegram": "fiona_K",
+      "studentId": "A0123456B"
+    }
+  ]
 }

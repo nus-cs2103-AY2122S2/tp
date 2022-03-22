@@ -1,4 +1,4 @@
-package seedu.address.model.student.lab;
+package seedu.address.model.lab;
 
 import java.util.function.Predicate;
 

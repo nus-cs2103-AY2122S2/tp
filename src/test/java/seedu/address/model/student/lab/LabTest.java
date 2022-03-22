@@ -8,6 +8,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.lab.Lab;
+import seedu.address.model.lab.LabStatus;
 import seedu.address.model.student.exceptions.DuplicateLabException;
 
 public class LabTest {

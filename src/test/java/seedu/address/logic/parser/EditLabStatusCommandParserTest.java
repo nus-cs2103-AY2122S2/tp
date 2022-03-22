@@ -10,8 +10,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditLabStatusCommand;
-import seedu.address.model.student.lab.Lab;
-import seedu.address.model.student.lab.LabStatus;
+import seedu.address.model.lab.Lab;
+import seedu.address.model.lab.LabStatus;
 
 public class EditLabStatusCommandParserTest {
 
@@ -77,7 +77,7 @@ public class EditLabStatusCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         EditLabStatusCommand expectedCommand =
                 new EditLabStatusCommand(Index.fromOneBased(Integer.parseInt(VALID_INDEX.trim())),
-                Integer.parseInt(VALID_LAB.trim()), LabStatus.GRADED);
+                        Integer.parseInt(VALID_LAB.trim()), LabStatus.GRADED);
 
         assertParseSuccess(parser, VALID_INDEX + VALID_LAB_DESC + VALID_LABSTATUS_DESC, expectedCommand);
     }

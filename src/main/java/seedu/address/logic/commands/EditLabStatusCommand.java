@@ -12,12 +12,12 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.lab.Lab;
+import seedu.address.model.lab.LabList;
+import seedu.address.model.lab.LabStatus;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.exceptions.DuplicateLabException;
 import seedu.address.model.student.exceptions.LabNotFoundException;
-import seedu.address.model.student.lab.Lab;
-import seedu.address.model.student.lab.LabList;
-import seedu.address.model.student.lab.LabStatus;
 
 /**
  * Edits the LabStatus of a Lab of a Student in the TAddressBook.
@@ -46,7 +46,7 @@ public class EditLabStatusCommand extends Command {
     /**
      * Creates an EditLabStatusCommand to edit the status of a Student's Lab
      *
-     * @param index The index of the Student (according to the displayed list)
+     * @param index     The index of the Student (according to the displayed list)
      * @param labNumber The Lab number to edit
      * @param newStatus The new LabStatus of the Lab
      */

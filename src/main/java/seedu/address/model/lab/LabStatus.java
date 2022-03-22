@@ -1,4 +1,4 @@
-package seedu.address.model.student.lab;
+package seedu.address.model.lab;
 
 /**
  * Represents the possible LabStatuses a Lab can have.
@@ -8,7 +8,7 @@ public enum LabStatus {
 
     public static final String MESSAGE_CONSTRAINTS =
             "LabStatus should be u, s, or g, which respectively stands for "
-            + "Unsubmitted, Submitted, and Graded";
+                    + "Unsubmitted, Submitted, and Graded";
 
     public static final String VALIDATION_REGEX = "[usg]";
 

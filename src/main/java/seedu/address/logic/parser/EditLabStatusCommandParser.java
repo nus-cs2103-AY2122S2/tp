@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditLabStatusCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.student.lab.LabStatus;
+import seedu.address.model.lab.LabStatus;
 
 /**
  * Parses input arguments and creates a new EditLabStatusCommand object
@@ -20,6 +20,7 @@ public class EditLabStatusCommandParser implements Parser<EditLabStatusCommand> 
     /**
      * Parses the given {@code String} of arguments in the context of the EditLabStatusCommand
      * and returns an EditLabStatusCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditLabStatusCommand parse(String args) throws ParseException {

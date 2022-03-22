@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.student.lab.Lab;
+import seedu.address.model.lab.Lab;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for

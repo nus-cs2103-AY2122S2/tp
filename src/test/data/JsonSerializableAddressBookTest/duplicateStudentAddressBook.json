@@ -1,20 +1,36 @@
-{ "masterList" : [ "1" ],
-  "students": [ {
-    "name": "Alice Pauline",
-    "email": "alice@example.com",
-    "github": "aliceP",
-    "telegram": "alice_P",
-    "studentId": "A0123457C",
-    "tagged": [ "friends" ],
-    "labStatuses" : [ "UNSUBMITTED" ],
-    "labNumbers" : [ "1" ]
-  }, {
-    "name": "Alice Pauline",
-    "email": "pauline@example.com",
-    "github": "aliceP",
-    "telegram": "alice_P",
-    "studentId": "A0123457C",
-    "labStatuses" : [ "UNSUBMITTED" ],
-    "labNumbers" : [ "1" ]
-  } ]
+{
+  "masterList": [
+    "1"
+  ],
+  "students": [
+    {
+      "name": "Alice Pauline",
+      "email": "alice@example.com",
+      "github": "aliceP",
+      "telegram": "alice_P",
+      "studentId": "A0123457C",
+      "tagged": [
+        "friends"
+      ],
+      "labStatuses": [
+        "UNSUBMITTED"
+      ],
+      "labNumbers": [
+        "1"
+      ]
+    },
+    {
+      "name": "Alice Pauline",
+      "email": "pauline@example.com",
+      "github": "aliceP",
+      "telegram": "alice_P",
+      "studentId": "A0123457C",
+      "labStatuses": [
+        "UNSUBMITTED"
+      ],
+      "labNumbers": [
+        "1"
+      ]
+    }
+  ]
 }

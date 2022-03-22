@@ -6,10 +6,9 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
-import seedu.address.model.student.MasterLabList;
+import seedu.address.model.lab.Lab;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.UniqueStudentList;
-import seedu.address.model.student.lab.Lab;
 
 /**
  * Wraps all data at the TAddressbook level
