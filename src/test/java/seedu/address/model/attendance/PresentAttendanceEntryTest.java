@@ -24,15 +24,15 @@ public class PresentAttendanceEntryTest {
     public static final PresentAttendanceEntry NO_TIMINGS_PRESENT_ATTENDANCE_ENTRY =
             new PresentAttendanceEntry(DATE_TODAY, null, null);
     public static final PresentAttendanceEntry EDGE_CASE_PRESENT_ATTENDANCE_ENTRY =
-            new PresentAttendanceEntry(DATE_TODAY, LocalTime.of(0,0), LocalTime.of(23,59));
+            new PresentAttendanceEntry(DATE_TODAY, LocalTime.of(0, 0), LocalTime.of(23, 59));
 
     // Invalid attendance entries
     public static final PresentAttendanceEntry INVALID_PRESENT_ATTENDANCE_ENTRY =
-            new PresentAttendanceEntry(DATE_TODAY, LocalTime.of(15,0), LocalTime.of(9,0));
+            new PresentAttendanceEntry(DATE_TODAY, LocalTime.of(15, 0), LocalTime.of(9, 0));
     public static final PresentAttendanceEntry SAME_TIMING_ATTENDANCE_ENTRY =
             new PresentAttendanceEntry(DATE_TODAY, PICKUP_TIME, PICKUP_TIME);
     public static final PresentAttendanceEntry OVERNIGHT_ATTENDANCE_ENTRY =
-            new PresentAttendanceEntry(DATE_TODAY, LocalTime.of(1,0),LocalTime.of(0,30));
+            new PresentAttendanceEntry(DATE_TODAY, LocalTime.of(1, 0), LocalTime.of(0, 30));
 
     @Test
     public void getPickUpTime() {

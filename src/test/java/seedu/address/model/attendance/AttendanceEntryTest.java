@@ -1,7 +1,6 @@
 package seedu.address.model.attendance;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -19,12 +18,12 @@ public class AttendanceEntryTest {
             new AbsentAttendanceEntry(DATE_TODAY);
 
     @Test
-    public void getAttendanceDate_PresentAttendanceEntry_returnsCorrectDate() {
+    public void getAttendanceDate_presentAttendanceEntry_returnsCorrectDate() {
         assertEquals(PRESENT_ATTENDANCE_ENTRY.getAttendanceDate(), DATE_TODAY);
     }
 
     @Test
-    public void getAttendanceDate_AbsentAttendanceEntry_returnsCorrectDate() {
+    public void getAttendanceDate_absentAttendanceEntry_returnsCorrectDate() {
         assertEquals(ABSENT_ATTENDANCE_ENTRY.getAttendanceDate(), DATE_TODAY);
     }
 }

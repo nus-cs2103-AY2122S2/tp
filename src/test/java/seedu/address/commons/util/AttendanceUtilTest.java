@@ -27,15 +27,15 @@ public class AttendanceUtilTest {
     public static final LocalTime PICKUP_TIME = LocalTime.of(9, 0);
     public static final LocalTime DROPOFF_TIME = LocalTime.of(18, 0);
 
-    public static AttendanceHashMap allPresentAttendanceHashMap;
-    public static AttendanceHashMap allAbsentAttendanceHashMap;
-    public static AttendanceHashMap mixedAttendanceHashMap;
-    public static AttendanceHashMap missingAttendanceHashMap = new AttendanceHashMap();
+    private static AttendanceHashMap allPresentAttendanceHashMap;
+    private static AttendanceHashMap allAbsentAttendanceHashMap;
+    private static AttendanceHashMap mixedAttendanceHashMap;
+    private static final AttendanceHashMap missingAttendanceHashMap = new AttendanceHashMap();
 
-    public static ArrayList<AttendanceEntry> allPresentAttendanceList;
-    public static ArrayList<AttendanceEntry> allAbsentAttendanceList;
-    public static ArrayList<AttendanceEntry> mixedAttendanceList;
-    public static ArrayList<AttendanceEntry> missingAttendanceList;
+    private static ArrayList<AttendanceEntry> allPresentAttendanceList;
+    private static ArrayList<AttendanceEntry> allAbsentAttendanceList;
+    private static ArrayList<AttendanceEntry> mixedAttendanceList;
+    private static ArrayList<AttendanceEntry> missingAttendanceList;
 
 
     @BeforeAll
@@ -89,7 +89,7 @@ public class AttendanceUtilTest {
     @BeforeAll
     public static void createMixedAttendanceScenario() {
         // randomizer to create a mixed attendance hash map.
-        Random RNG = new Random();
+        Random rng = new Random();
 
         HashMap<LocalDate, AttendanceEntry> mixedHashMap = new HashMap<>();
 
@@ -98,7 +98,7 @@ public class AttendanceUtilTest {
         // creates an attendance hashmap with either absent or present entries
         // from 30 days ago till now.
         for (LocalDate d = DATE_TODAY.minusDays(30); d.isBefore(DATE_TODAY.plusDays(1)); d = d.plusDays(1)) {
-            boolean isPresent = RNG.nextBoolean();
+            boolean isPresent = rng.nextBoolean();
             AttendanceEntry currentEntry;
 
             if (isPresent) {
@@ -147,17 +147,17 @@ public class AttendanceUtilTest {
     @Test
     public void convertToModelDate_invalidInputs_throwsDateTimeParseException() {
         final String[] invalidDateStringArray =
-                {"18-03-2022",
-                        "18/03/2022",
-                        "03-18-2022",
-                        "03/18/2022",
-                        "",
-                        "ABC",
-                        "09:00:00",
-                        "0900",
-                        "09:00",
-                        "9",
-                        "9.30 pm"};
+            {"18-03-2022",
+                "18/03/2022",
+                "03-18-2022",
+                "03/18/2022",
+                "",
+                "ABC",
+                "09:00:00",
+                "0900",
+                "09:00",
+                "9",
+                "9.30 pm"};
 
         for (String s : invalidDateStringArray) {
             assertThrows(DateTimeParseException.class, () -> AttendanceUtil.convertToModelDate(s));
@@ -167,13 +167,13 @@ public class AttendanceUtilTest {
     @Test
     public void convertToModelTime_invalidInputs_throwsDateTimeParseException() {
         final String[] invalidTimeStringArray =
-                {"0900",
-                        "9",
-                        "9.30 pm",
-                        "18-03-2022",
-                        "18/03/2022",
-                        "03-18-2022",
-                        "03/18/2022"};
+            {"0900",
+                "9",
+                "9.30 pm",
+                "18-03-2022",
+                "18/03/2022",
+                "03-18-2022",
+                "03/18/2022"};
 
         for (String s : invalidTimeStringArray) {
             assertThrows(DateTimeParseException.class, () -> AttendanceUtil.convertToModelTime(s));
@@ -182,8 +182,7 @@ public class AttendanceUtilTest {
 
     @Test
     public void getPastWeekAttendance_nullInput_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-                () -> AttendanceUtil.getPastWeekAttendance(null));
+        assertThrows(NullPointerException.class, () -> AttendanceUtil.getPastWeekAttendance(null));
     }
 
     @Test
