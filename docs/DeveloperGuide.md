@@ -243,6 +243,41 @@ The predicate is implemented in this way since updating the filteredPersonList i
 
 _{more aspects and alternatives to be added}_
 
+### Adding the ability to export AddressBook to CSV and back
+
+The ability to convert a collection of Persons to a CSV file is facilitated by `CsvUtil` and `CsvAdaptedPerson`.
+
+`CsvAdaptedPerson` is a CSV-friendly version of `Person`, with a method that allows it to be converted to a CSV-friendly string, while `CsvUtil` allows for the writing of a `CsvAdaptedPerson` object to a CSV file.
+
+The implementation of writing the AddressBook to CSV is as follows:
+
+When the user wishes to save the current state of the AddressBook to CSV, either through the `export` command or by clicking on the button in the dropdown, the following events occur:
+
+Step 1: `MainWindow#handleSaveToCsv` is called, which:
+- calls `MainWindow#handleSaveFile` to obtain a destination file location from the user to save to.
+- then calls `LogicManager#saveAddressBookToCsv`
+
+Step 2: `LogicManager#saveAddressBookToCsv`is called, which calls `StorageManager#saveAddressBookToCsv`
+
+Step 3: `StorageManager#saveAddressBookToCsv` is called, which calls `CsvAddressBookStorage#saveAddressBook`
+
+Step 4: `CsvAddressBookStorage#saveAddressBook` is called, which
+- creates a file at the given location, if it does not exist yet
+- generates a `List` of `CsvAdaptedPerson` from the AddressBook
+- calls `CsvUtil#saveCsvFile`
+
+Step 5: `CsvUtil#saveCsvFile` is called, which writes the contents of the AddressBook to the CSV file.
+
+![Save AddressBook to CSV](images/SaveAddressBookToCsv.png)
+
+A similar flow of events occur for the loading of a CSV file to the AddressBook.
+
+#### Design considerations:
+
+The functionality was implemented this way to stick to the existing codebase as much as possible.
+
+There is existing functionality to export the AddressBook to JSON, hence the classes involved with CSV files are organised and structured in a similar way.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
