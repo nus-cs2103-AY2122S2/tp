@@ -37,7 +37,7 @@ public class EditLabStatusCommandTest {
         Student personToEdit = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
         Student editedPerson = new StudentBuilder(personToEdit).build();
         LabList listToEdit = editedPerson.getLabs();
-        listToEdit.setLab(listToEdit.getLabByLabNumber(VALID_LABNUMBER),
+        listToEdit.setLab(listToEdit.getLab(VALID_LABNUMBER),
                 new Lab(String.valueOf(VALID_LABNUMBER)).of(VALID_LABSTATUS.name()));
 
         EditLabStatusCommand command = new EditLabStatusCommand(INDEX_FIRST_STUDENT, VALID_LABNUMBER, VALID_LABSTATUS);
@@ -83,7 +83,7 @@ public class EditLabStatusCommandTest {
     @Test
     public void execute_duplicateLab_throwsCommandException() {
         LabStatus currentStatus = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased())
-                .getLabs().getLabByLabNumber(VALID_LABNUMBER).labStatus;
+                .getLabs().getLab(VALID_LABNUMBER).labStatus;
         EditLabStatusCommand command = new EditLabStatusCommand(INDEX_FIRST_STUDENT, VALID_LABNUMBER, currentStatus);
 
         assertCommandFailure(command, model, EditLabStatusCommand.MESSAGE_INVALID_STATUS_CHANGE);

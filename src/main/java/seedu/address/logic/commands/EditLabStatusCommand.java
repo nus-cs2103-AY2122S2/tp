@@ -71,7 +71,7 @@ public class EditLabStatusCommand extends Command {
         LabList listToEdit = studentToEdit.getLabs();
 
         try {
-            listToEdit.setLab(listToEdit.getLabByLabNumber(labNumber),
+            listToEdit.setLab(listToEdit.getLab(labNumber),
                     new Lab(String.valueOf(labNumber)).of(newStatus.name()));
         } catch (LabNotFoundException e) {
             throw new CommandException(MESSAGE_INVALID_LAB_NUMBER);
