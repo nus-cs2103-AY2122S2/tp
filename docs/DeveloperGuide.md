@@ -239,10 +239,14 @@ The following activity diagram summarizes what happens when a user executes the 
 
 Since our application had two primary classes `Friends` and `Events` we needed to be able to view instances of both of these classes without the GUI being cluttered with details. Thus, we decided to implement a Tab Pane with one `Friends` tab and an `Events` tab. 
 
+The following images show how the Tabs feature look when the `Friends` tab is selected and when the `Events` tabs is selected
+
+![friendsTab.png](C:\Users\aryan\Desktop\Sem 6\CS2103\tP\src\main\resources\images\friendsTab.png) ![eventsTab.png](C:\Users\aryan\Desktop\Sem 6\CS2103\tP\src\main\resources\images\eventsTab.png)
+
 #### 4.1 Automatically Change tabs (By Command)
 
 1. `CommandResult` class was modified to contain another boolean called `event` this boolean indicates whether the command which was just executed requires us to switch to the events tab or not.
-2. If `event` is true the GUI will switch to the events tabs by `MainWindow#changeInterface` otherwise this method will switch over to the `Person` tab.
+2. If `event` is true the GUI will switch to the events tabs by `MainWindow#changeInterface` otherwise this method will switch over to the `Friends` tab.
 
 #### 4.2 Manually Change tabs (By Clicking)
 
