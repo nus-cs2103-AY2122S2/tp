@@ -9,6 +9,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PETS;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -68,20 +69,20 @@ public class PresentAttendanceCommand extends Command {
         AttendanceHashMap targetAttendanceHashMap = petToEdit.getAttendanceHashMap();
 
         LocalDate attendanceDate = petAttendanceDescriptor.getAttendanceDate();
-        LocalTime pickUpTime = petAttendanceDescriptor.getPickUpTime();
-        LocalTime dropOffTime = petAttendanceDescriptor.getDropOffTime();
+        LocalTime pickUpTime = petAttendanceDescriptor.getPickUpTime().orElse(null);
+        LocalTime dropOffTime = petAttendanceDescriptor.getDropOffTime().orElse(null);
 
         String attendanceDateString = attendanceDate.format(AttendanceUtil.ATTENDANCE_DATE_FORMATTER);
 
         PresentAttendanceEntry presentAttendance = new PresentAttendanceEntry(attendanceDate,
-                petAttendanceDescriptor.getPickUpTime(), petAttendanceDescriptor.getDropOffTime());
+                pickUpTime, dropOffTime);
 
         if (targetAttendanceHashMap.containsAttendance(presentAttendance)) {
             throw new CommandException(String.format(MESSAGE_PRESENT_ATTENDANCE_FAILURE, petToEdit.getName(),
                     attendanceDateString));
         }
 
-        if(!(PresentAttendanceEntry.isValidTimings(pickUpTime, dropOffTime))) {
+        if(!presentAttendance.isValidTimings()) {
             throw new CommandException(PresentAttendanceEntry.MESSAGE_TIME_CONSTRAINTS);
         }
 
@@ -145,12 +146,12 @@ public class PresentAttendanceCommand extends Command {
             return attendanceDate;
         }
 
-        public LocalTime getPickUpTime() {
-            return pickUpTime;
+        public Optional<LocalTime> getPickUpTime() {
+            return Optional.ofNullable(pickUpTime);
         }
 
-        public LocalTime getDropOffTime() {
-            return dropOffTime;
+        public Optional<LocalTime> getDropOffTime() {
+            return Optional.ofNullable(dropOffTime);
         }
     }
 

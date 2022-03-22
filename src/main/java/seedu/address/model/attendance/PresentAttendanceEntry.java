@@ -13,6 +13,7 @@ import java.util.Optional;
 public class PresentAttendanceEntry extends AttendanceEntry {
     public static final String MESSAGE_TIME_CONSTRAINTS = "The pick-up time should be before the drop-off time!";
 
+    private final Boolean isPresent;
     private final LocalTime pickUpTime;
     private final LocalTime dropOffTime;
 
@@ -23,34 +24,39 @@ public class PresentAttendanceEntry extends AttendanceEntry {
      * @param dropOffTime A valid drop off time.
      */
     public PresentAttendanceEntry(LocalDate entryDate, LocalTime pickUpTime, LocalTime dropOffTime) {
-        super(entryDate, true);
+        super(entryDate);
 
-        requireNonNull(pickUpTime);
-        requireNonNull(dropOffTime);
-
+        this.isPresent = true;
         this.pickUpTime = pickUpTime;
         this.dropOffTime = dropOffTime;
     }
 
     @Override
+    public Optional<Boolean> getIsPresent() {
+        return Optional.ofNullable(isPresent);
+    }
+
+    @Override
     public Optional<LocalTime> getPickUpTime() {
-        return Optional.of(pickUpTime);
+        return Optional.ofNullable(pickUpTime);
     }
 
     @Override
     public Optional<LocalTime> getDropOffTime() {
-        return Optional.of(dropOffTime);
+        return Optional.ofNullable(dropOffTime);
     }
 
     /**
      * Checks to see if the pick up time is before the drop off time.
      *
-     * @param pickUpTime  the pick up time of the pet.
-     * @param dropOffTime the drop off time of the pet.
      * @return true if the pick up time is before the drop off time, false otherwise.
      */
-    public static boolean isValidTimings(LocalTime pickUpTime, LocalTime dropOffTime) {
-        return pickUpTime.isBefore(dropOffTime);
+    public boolean isValidTimings() {
+        if (getPickUpTime().isPresent() && getDropOffTime().isPresent()) {
+            return pickUpTime.isBefore(dropOffTime);
+        }
+
+        return true;
     }
 
     @Override
@@ -65,8 +71,8 @@ public class PresentAttendanceEntry extends AttendanceEntry {
 
         PresentAttendanceEntry otherAttendanceEntry = (PresentAttendanceEntry) other;
         return super.getAttendanceDate().equals(otherAttendanceEntry.getAttendanceDate()) &&
-                super.getIsPresent().equals(otherAttendanceEntry.getIsPresent()) &&
-                pickUpTime.equals(otherAttendanceEntry.pickUpTime) &&
-                dropOffTime.equals(otherAttendanceEntry.dropOffTime); // state checks
+                isPresent.equals(otherAttendanceEntry.isPresent) &&
+                getPickUpTime().equals(otherAttendanceEntry.getPickUpTime()) &&
+                getDropOffTime().equals(otherAttendanceEntry.getDropOffTime()); // state checks
     }
 }

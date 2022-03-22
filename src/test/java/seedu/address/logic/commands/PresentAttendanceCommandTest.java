@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showPetAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PET;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PET;
 import static seedu.address.testutil.TypicalPets.getTypicalAddressBook;
@@ -54,7 +55,35 @@ public class PresentAttendanceCommandTest {
         assertCommandSuccess(presentAttendanceCommand, model, expectedMessage, expectedModel);
     }
 
+    @Test
+    public void execute_markPresentFilteredList_success() {
+        showPetAtIndex(model, INDEX_FIRST_PET);
 
+        Pet firstPet = model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
+        Pet petToMarkPresent = new PetBuilder(firstPet)
+                .withPresentAttendanceEntry(DATE_STUB, PICKUP_TIME_STUB, DROPOFF_TIME_STUB)
+                .build();
+
+        PetAttendanceDescriptor petAttendanceDescriptor = new PresentAttendanceDescriptorBuilder()
+                .withDate(DATE_STUB)
+                .withPickUpTime(PICKUP_TIME_STUB)
+                .withDropOffTime(DROPOFF_TIME_STUB)
+                .build();
+
+        PresentAttendanceCommand presentAttendanceCommand = new PresentAttendanceCommand(
+                INDEX_FIRST_PET,
+                petAttendanceDescriptor
+        );
+
+        String expectedMessage = String.format(
+                PresentAttendanceCommand.MESSAGE_PRESENT_ATTENDANCE_SUCCESS,
+                petToMarkPresent.getName(), FAILURE_DATE_STUB);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPet(firstPet, petToMarkPresent);
+
+        assertCommandSuccess(presentAttendanceCommand, model, expectedMessage, expectedModel);
+    }
 
     @Test
     public void execute_alreadyMarkedPresentUnfilteredList_failure() {

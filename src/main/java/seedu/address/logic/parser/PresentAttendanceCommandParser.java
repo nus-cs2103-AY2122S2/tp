@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PICKUP;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.PresentAttendanceCommand;
@@ -39,38 +40,49 @@ public class PresentAttendanceCommandParser implements Parser<PresentAttendanceC
                     PresentAttendanceCommand.MESSAGE_USAGE), pe);
         }
 
-        if (!allFieldsPresent(argMultimap)) {
+        LocalDate attendanceDate;
+
+        try {
+            attendanceDate = ParserUtil.parseAttendanceDate(argMultimap.getValue(PREFIX_DATE).get());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    PresentAttendanceCommand.MESSAGE_USAGE), pe);
+        }
+
+        if (onlyOneTimePresent(argMultimap)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     PresentAttendanceCommand.MESSAGE_USAGE));
         }
 
-        LocalDate attendanceDate = ParserUtil.parseAttendanceDate(
-                argMultimap.getValue(PREFIX_DATE).get());
-        LocalTime pickUpTime = ParserUtil.parsePickUpTime(
-                argMultimap.getValue(PREFIX_PICKUP).get());
-        LocalTime dropOffTime = ParserUtil.parseDropOffTime(
-                argMultimap.getValue(PREFIX_DROPOFF).get());
-
         PetAttendanceDescriptor petAttendanceDescriptor =
                 new PetAttendanceDescriptor();
 
+        if (argMultimap.getValue(PREFIX_PICKUP).isPresent()) {
+            petAttendanceDescriptor.setPickUpTime(
+                    ParserUtil.parsePickUpTime(argMultimap.getValue(PREFIX_PICKUP).get())
+            );
+        }
+
+        if (argMultimap.getValue(PREFIX_DROPOFF).isPresent()) {
+            petAttendanceDescriptor.setDropOffTime(
+                    ParserUtil.parseDropOffTime(argMultimap.getValue(PREFIX_DROPOFF).get())
+            );
+        }
+
         petAttendanceDescriptor.setAttendanceDate(attendanceDate);
-        petAttendanceDescriptor.setPickUpTime(pickUpTime);
-        petAttendanceDescriptor.setDropOffTime(dropOffTime);
 
         return new PresentAttendanceCommand(index, petAttendanceDescriptor);
     }
 
     /**
-     * Checks to see if all the compulsory arguments for the command are present.
+     * Checks to see if only pick up or only drop off time for the command is present.
      *
      * @param argumentMultimap the arguments of the command.
-     * @return true if all compulsory arguments are present, false otherwise.
+     * @return true if only one of the time arguments are present, false otherwise.
      */
-    private boolean allFieldsPresent(ArgumentMultimap argumentMultimap) {
-        return argumentMultimap.getValue(PREFIX_DATE).isPresent() &&
-                argumentMultimap.getValue(PREFIX_PICKUP).isPresent() &&
-                argumentMultimap.getValue(PREFIX_DROPOFF).isPresent();
+    private boolean onlyOneTimePresent(ArgumentMultimap argumentMultimap) {
+        return argumentMultimap.getValue(PREFIX_PICKUP).isPresent() ^
+                argumentMultimap.getValue(PREFIX_DROPOFF).isPresent(); // exclusive OR
     }
 }
 
