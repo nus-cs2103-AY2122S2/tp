@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -18,8 +19,11 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.lab.Lab;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.exceptions.DuplicateLabException;
 import seedu.address.model.student.exceptions.DuplicateStudentException;
+import seedu.address.model.student.exceptions.LabNotFoundException;
 import seedu.address.testutil.StudentBuilder;
 
 public class AddressBookTest {
@@ -55,7 +59,7 @@ public class AddressBookTest {
     }
 
     @Test
-    public void haStudent_nullStudent_throwsNullPointerException() {
+    public void hasStudent_nullStudent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> addressBook.hasStudent(null));
     }
 
@@ -81,6 +85,50 @@ public class AddressBookTest {
     @Test
     public void getStudentList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getStudentList().remove(0));
+    }
+
+    @Test
+    public void hasLab_nullLab_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasLab(null));
+    }
+
+    @Test
+    public void hasLab_labNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasLab(new Lab("1")));
+    }
+
+    @Test
+    public void hasLab_labInAddressBook_returnsTrue() {
+        addressBook.addLab(new Lab("1"));
+        assertTrue(addressBook.hasLab(new Lab("1")));
+    }
+
+    @Test
+    public void removeLab_nullLab_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.removeLab(null));
+    }
+
+    @Test
+    public void removeLab_labNotInAddressBook_throwsLabNotFoundException() {
+        assertThrows(LabNotFoundException.class, () -> addressBook.removeLab(new Lab("12")));
+    }
+
+    @Test
+    public void removeLab_labInAddressBook_throwsLabNotFoundException() {
+        addressBook.addLab(new Lab("1"));
+        assertDoesNotThrow(() -> addressBook.removeLab(new Lab("1")));
+        assertFalse(addressBook.hasLab(new Lab("1")));
+    }
+
+    @Test
+    public void addLab_nullLab_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.addLab(null));
+    }
+
+    @Test
+    public void removeLab_duplicateLab_throwsDuplicateLabException() {
+        addressBook.addLab(new Lab("1"));
+        assertThrows(DuplicateLabException.class, () -> addressBook.addLab(new Lab("1")));
     }
 
     /**
