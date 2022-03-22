@@ -1,0 +1,53 @@
+@startuml
+!include style.puml
+
+box Storage STORAGE_COLOR_T1
+participant ":AddressBookStorage" as AddressBookStorage STORAGE_COLOR
+participant ":JsonSerializableAddressBook" as JsonSerializableAddressBook STORAGE_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":AddressBook" as AddressBook MODEL_COLOR
+participant ":Tag" as Tag MODEL_COLOR
+participant ":Person" as Person MODEL_COLOR
+end box
+
+[-> AddressBookStorage : readAddressBook()
+activate AddressBookStorage
+AddressBookStorage -> JsonSerializableAddressBook : toModelType()
+activate JsonSerializableAddressBook
+
+create AddressBook
+JsonSerializableAddressBook -> AddressBook
+activate AddressBook
+JsonSerializableAddressBook <-- AddressBook : addressBook
+deactivate AddressBook
+
+loop for all jsonAdaptedTag in tags
+   create Tag
+   JsonSerializableAddressBook -> Tag : jsonAdaptedTag.toModelType()
+   activate Tag
+   JsonSerializableAddressBook <-- Tag : tag
+   deactivate Tag
+   JsonSerializableAddressBook -> AddressBook : addTag(tag)
+   activate AddressBook
+   JsonSerializableAddressBook <-- AddressBook
+   deactivate AddressBook
+end
+
+loop for all jsonAdaptedPerson in persons
+   create Person
+   JsonSerializableAddressBook -> Person : jsonAdaptedPerson.toModelType()
+   activate Person
+   JsonSerializableAddressBook <-- Person : person
+   deactivate Person
+   JsonSerializableAddressBook -> JsonSerializableAddressBook : addMissingTags(person, addressBook)
+   JsonSerializableAddressBook -> AddressBook : addPerson(Person)
+   activate AddressBook
+   JsonSerializableAddressBook <-- AddressBook
+   deactivate AddressBook
+end
+
+
+AddressBookStorage <-- JsonSerializableAddressBook : addressBook
+@enduml

@@ -17,7 +17,7 @@ import seedu.contax.model.UserPrefs;
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
  */
-public class ListCommandTest {
+public class ListPersonCommandTest {
 
     private Model model;
     private Model expectedModel;
@@ -30,14 +30,14 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListCommand(), model, new CommandResult(ListCommand.MESSAGE_SUCCESS,
+        assertCommandSuccess(new ListPersonCommand(), model, new CommandResult(ListPersonCommand.MESSAGE_SUCCESS,
                 GuiListContentType.PERSON), expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        assertCommandSuccess(new ListCommand(), model, new CommandResult(ListCommand.MESSAGE_SUCCESS,
+        assertCommandSuccess(new ListPersonCommand(), model, new CommandResult(ListPersonCommand.MESSAGE_SUCCESS,
                 GuiListContentType.PERSON), expectedModel);
     }
 }
