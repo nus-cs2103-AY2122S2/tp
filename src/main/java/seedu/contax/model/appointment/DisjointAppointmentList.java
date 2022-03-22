@@ -3,6 +3,10 @@ package seedu.contax.model.appointment;
 import static java.util.Objects.requireNonNull;
 import static seedu.contax.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -173,6 +177,51 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
      */
     public ObservableList<Appointment> asUnmodifiableObservableList() {
         return readOnlyAppointments;
+    }
+
+    public List<Appointment> findSlotsBetweenAppointments(LocalDateTime start, LocalDateTime end,
+                                                  int minimumDuration) {
+        requireAllNonNull(start, end, minimumDuration);
+        if (minimumDuration <= 0) {
+            throw new IllegalArgumentException("Duration has to be a positive integer");
+        }
+
+        ArrayList<Appointment> slotsFoundAfterAppointments = new ArrayList<>();
+        if (!(start.isBefore(end))) {
+            return slotsFoundAfterAppointments;
+        }
+
+        // Check gaps between appointments
+        for (int i = 0; i < size() - 1; i++) {
+            Appointment earlierAppointment = appointments.get(i);
+            Appointment laterAppointment = appointments.get(i + 1);
+            LocalDateTime gapStart = earlierAppointment.getEndDateTime();
+            LocalDateTime gapEnd = laterAppointment.getStartDateTime().value;
+
+            if (!(gapEnd.isAfter(start))) {
+                continue;
+            } else if (gapStart.isAfter(end)) {
+                break;
+            }
+
+            if (start.isAfter(gapStart)) {
+                gapStart = start;
+            }
+            if (end.isBefore(gapEnd)) {
+                gapEnd = end;
+            }
+
+            long minutesBetween = gapStart.until(gapEnd, ChronoUnit.MINUTES);
+            if (minutesBetween >= minimumDuration) {
+                slotsFoundAfterAppointments.add(earlierAppointment);
+            }
+        }
+
+        return slotsFoundAfterAppointments;
+    }
+
+    public List<Appointment> findSlotsBetweenAppointments(LocalDateTime startTime, int minimumDuration) {
+        return findSlotsBetweenAppointments(startTime, LocalDateTime.MAX, minimumDuration);
     }
 
     @Override

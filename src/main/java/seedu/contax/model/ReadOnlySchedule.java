@@ -14,4 +14,14 @@ public interface ReadOnlySchedule {
      */
     ObservableList<Appointment> getAppointmentList();
 
+    /**
+     * Returns true if an appointment that overlaps with {@code target} exists in the schedule.
+     */
+    boolean hasOverlappingAppointment(Appointment target);
+
+    /**
+     * Returns true if an appointment that is equals to {@code target} exists in the schedule.
+     */
+    boolean hasAppointment(Appointment target);
+
 }

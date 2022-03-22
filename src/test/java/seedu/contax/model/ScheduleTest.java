@@ -254,6 +254,16 @@ public class ScheduleTest {
         public ObservableList<Appointment> getAppointmentList() {
             return appointments;
         }
+
+        @Override
+        public boolean hasOverlappingAppointment(Appointment target) {
+            return false;
+        }
+
+        @Override
+        public boolean hasAppointment(Appointment target) {
+            return false;
+        }
     }
 
 }
