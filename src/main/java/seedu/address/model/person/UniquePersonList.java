@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,6 +30,7 @@ import seedu.address.model.team.Team;
  * @see Person#isSamePerson(Person)
  */
 public class UniquePersonList implements Iterable<Person> {
+    private static final int MAXIMUM_CAPACITY = 100;
 
     private final Map<Name, Person> nameToPersonMap = new HashMap<>();
     private final Map<Person, Team> personToTeamMap = new HashMap<>();
@@ -42,6 +46,16 @@ public class UniquePersonList implements Iterable<Person> {
     public boolean contains(Person toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSamePerson);
+    }
+
+    /**
+     * Return true if some person with {@code targetName}
+     * @param targetName
+     * @return
+     */
+    public boolean containsName(Name targetName) {
+        requireNonNull(targetName);
+        return internalList.stream().anyMatch(person -> person.isMatchName(targetName));
     }
 
     /**
@@ -77,6 +91,32 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns the person with {@code targetName};
+     */
+    public Person getPerson(Name targetName) {
+        requireNonNull(targetName);
+        return internalList.stream()
+                .filter(person -> person.isMatchName(targetName))
+                .collect(Collectors.toList()).get(0);
+    }
+
+    /**
+     * Returns true if the person's jersey number is already taken.
+     */
+    public boolean containsJerseyNumber(JerseyNumber jerseyNumber) {
+        requireNonNull(jerseyNumber);
+        return internalList.stream()
+                .anyMatch(person -> person.isSameJerseyNumber(jerseyNumber));
+    }
+
+    /**
+     * Returns true if MyGM has reached maximum capacity.
+     */
+    public boolean isFull() {
+        return internalList.size() == MAXIMUM_CAPACITY;
+    }
+
+    /**
      * Removes the equivalent person from the list.
      * The person must exist in the list.
      */
@@ -103,6 +143,18 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.setAll(persons);
+    }
+
+    /**
+     * Returns a string representation of a list of available Jersey Number.
+     * @return
+     */
+    public String getAvailableJerseyNumber() {
+        Stream<Integer> stream = IntStream.range(0, MAXIMUM_CAPACITY).boxed();
+        List<Integer> ls = stream
+                .filter(x -> !this.containsJerseyNumber(new JerseyNumber(((Integer) x).toString())))
+                .collect(Collectors.toList());
+        return ls.toString();
     }
 
     /**

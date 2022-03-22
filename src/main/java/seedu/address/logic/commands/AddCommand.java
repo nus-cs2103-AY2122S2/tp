@@ -59,6 +59,8 @@ public class AddCommand extends Command {
         toAdd = person;
     }
 
+    /* to add: add lineup */
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
