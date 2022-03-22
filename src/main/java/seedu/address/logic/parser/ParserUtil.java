@@ -14,6 +14,7 @@ import seedu.address.model.person.GithubUsername;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.team.Skill;
+import seedu.address.model.team.SkillSet;
 import seedu.address.model.team.Team;
 
 /**
@@ -146,9 +147,9 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> skill} into a {@code Set<Skill>}.
      */
-    public static Set<Skill> parseSkillSet(Collection<String> skills) throws ParseException {
+    public static SkillSet parseSkillSet(Collection<String> skills) throws ParseException {
         requireNonNull(skills);
-        final Set<Skill> skillSet = new HashSet<>();
+        final SkillSet skillSet = new SkillSet();
         for (String skill : skills) {
             skillSet.add(parseSkill(skill));
         }

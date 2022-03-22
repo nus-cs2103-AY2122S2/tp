@@ -18,7 +18,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.team.Skill;
+import seedu.address.model.team.SkillSet;
 import seedu.address.model.team.Team;
 
 /**
@@ -89,7 +89,7 @@ public class EditCommandParser implements Parser<EditCommand> {
      * If {@code skill} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Skill>} containing zero tags.
      */
-    private Optional<Set<Skill>> parseSkillSetForEdit(Collection<String> skill) throws ParseException {
+    private Optional<SkillSet> parseSkillSetForEdit(Collection<String> skill) throws ParseException {
         assert skill != null;
 
         if (skill.isEmpty()) {

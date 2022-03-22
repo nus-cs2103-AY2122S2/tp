@@ -13,7 +13,7 @@ import seedu.address.model.person.GithubUsername;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.team.Skill;
+import seedu.address.model.team.SkillSet;
 import seedu.address.model.team.Team;
 
 /**
@@ -60,8 +60,8 @@ public class SampleDataUtil {
     /**
      * Returns a skill set containing the list of strings given.
      */
-    public static Set<Skill> getSkillSet(String... strings) {
-        return Arrays.stream(strings)
+    public static SkillSet getSkillSet(String... strings) {
+        return new SkillSet(Arrays.stream(strings)
                 .map(x -> {
                     try {
                         return ParserUtil.parseSkill(x);
@@ -70,7 +70,7 @@ public class SampleDataUtil {
                         return null;
                     }
                 })
-                .collect(Collectors.toSet());
+                .collect(Collectors.toSet()));
     }
 
 }

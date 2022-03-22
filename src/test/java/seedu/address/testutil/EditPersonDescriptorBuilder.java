@@ -14,6 +14,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.team.Skill;
+import seedu.address.model.team.SkillSet;
 import seedu.address.model.team.Team;
 
 /**
@@ -100,7 +101,7 @@ public class EditPersonDescriptorBuilder {
             }
         }).collect(Collectors.toSet());
         skillSet.removeIf(Objects::isNull);
-        descriptor.setSkillSet(skillSet);
+        descriptor.setSkillSet(new SkillSet(skillSet));
         return this;
     }
 

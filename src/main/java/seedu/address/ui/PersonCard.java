@@ -75,7 +75,7 @@ public class PersonCard extends UiPart<Region> {
         person.getTeams().stream()
             .sorted(Comparator.comparing(team -> team.teamName))
             .forEach(team -> teams.getChildren().add(new Label(team.teamName)));
-        person.getSkillSet().stream()
+        person.getSkillSet().getSkillSetInStream()
             .sorted(Comparator.comparing(skill -> skill.skillName))
             .forEach(skill -> skillSet.getChildren().add(new Label(skill.skillName)));
     }

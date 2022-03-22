@@ -25,7 +25,7 @@ import seedu.address.model.person.GithubUsername;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.team.Skill;
+import seedu.address.model.team.SkillSet;
 import seedu.address.model.team.Team;
 
 /**
@@ -102,7 +102,7 @@ public class EditCommand extends Command {
         GithubUsername updatedUsername = editPersonDescriptor.getGithubUsername()
                         .orElse(personToEdit.getGithubUsername());
         Set<Team> updatedTeams = editPersonDescriptor.getTeams().orElse(personToEdit.getTeams());
-        Set<Skill> updatedSkills = editPersonDescriptor.getSkillSet().orElse(personToEdit.getSkillSet());
+        SkillSet updatedSkills = editPersonDescriptor.getSkillSet().orElse(personToEdit.getSkillSet());
         // Potential teammate field to be unchanged on edit command
         boolean isPotentialTeammate = personToEdit.isPotentialTeammate();
 
@@ -138,7 +138,7 @@ public class EditCommand extends Command {
         private Email email;
         private GithubUsername username;
         private Set<Team> teams;
-        private Set<Skill> skillSet;
+        private SkillSet skillSet;
 
         public EditPersonDescriptor() {}
 
@@ -202,12 +202,8 @@ public class EditCommand extends Command {
             this.teams = (teams != null) ? new HashSet<>(teams) : null;
         }
 
-        /**
-         * Sets {@code skill} to this object's {@code skill}.
-         * A defensive copy of {@code skill} is used internally.
-         */
-        public void setSkillSet(Set<Skill> skillSet) {
-            this.skillSet = (skillSet != null) ? new HashSet<>(skillSet) : null;
+        public void setSkillSet(SkillSet skillSet) {
+            this.skillSet = (skillSet != null) ? new SkillSet(new HashSet<>(skillSet.getSkillSet())) : null;
         }
 
         /**
@@ -219,13 +215,9 @@ public class EditCommand extends Command {
             return (teams != null) ? Optional.of(Collections.unmodifiableSet(teams)) : Optional.empty();
         }
 
-        /**
-         * Returns an unmodifiable skill set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code skill} is null.
-         */
-        public Optional<Set<Skill>> getSkillSet() {
-            return (skillSet != null) ? Optional.of(Collections.unmodifiableSet(skillSet)) : Optional.empty();
+        public Optional<SkillSet> getSkillSet() {
+            return (this.skillSet != null && skillSet.getSkillSet() != null)
+                    ? Optional.of(new SkillSet(Collections.unmodifiableSet(skillSet.getSkillSet()))) : Optional.empty();
         }
 
         @Override

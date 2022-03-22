@@ -32,7 +32,7 @@ public class JsonAdaptedPersonTest {
             .map(JsonAdaptedTeam::new)
             .collect(Collectors.toList());
 
-    private static final List<JsonAdaptedSkill> VALID_SKILLSET = BENSON.getSkillSet().stream()
+    private static final List<JsonAdaptedSkill> VALID_SKILLSET = BENSON.getSkillSet().getSkillSetInStream()
             .map(JsonAdaptedSkill::new)
             .collect(Collectors.toList());
 
