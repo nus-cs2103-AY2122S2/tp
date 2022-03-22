@@ -115,6 +115,9 @@ public class HelpWindow extends UiPart<Stage> {
         clipboard.setContent(url);
     }
 
+    /**
+     * Fills the table with command information.
+     */
     private void buildTable(TableView<CommandBuilder> table, ObservableList<CommandBuilder> commands) {
         TableColumn<CommandBuilder, String> titleColumn = new TableColumn<>("Command Title");
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("commandTitle"));
