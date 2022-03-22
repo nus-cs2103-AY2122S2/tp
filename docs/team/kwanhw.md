@@ -12,24 +12,36 @@ ContacX will allow for efficient management of a large list of contacts, allowin
 Given below are my contributions to the project.
 
 * **New Feature**: Added ability to create and manage tags
-    * What it does: `To be added soon`
-    * Justification: `To be added soon`
-    * Highlights: `To be added soon`
-    * Credits: `To be added soon`
+    * What it does: Allows the user to create, view, edit and delete tags in the application
+    * Justification: As part of the target user profile, this a key feature that allows the user to organise the contacts in the address book.
 
-* **Code contributed**: `to be added soon`
+* **New Feature**: Added ability to find persons who contain a specified tag
+  * What it does: Allows the user to manage tags in the address book.
+  * Justification: This improves the usability of the application, as it provides more options for the user to search for contacts.
+   
+* **Code contributed**:
+  * 2000+ LoC contributed to the project
+  * Test cases for the tags subsystem
 
 * **Project management**:
     * `to be added soon`
 
 * **Enhancements to existing features**:
-    * `to be added soon`
+    * Extraction of Tags into its own list for management
+    * Abstraction of `Tag` by moving the name attribute as its own class
 
 * **Documentation**:
     * User Guide:
-        * `to be added soon`
+        * Added documentation for all tag related functionalities, including:
+          * `addtag`
+          * `listtags`
+          * `edittag`
+          * `deletetag`
+          * `findbytag`
     * Developer Guide:
-        * `to be added soon`
+        * Added section for tag management
+        * Added section for tag editing
+        * Added section for tag inflation and serialisation
 
 * **Community**:
     * `to be added soon`

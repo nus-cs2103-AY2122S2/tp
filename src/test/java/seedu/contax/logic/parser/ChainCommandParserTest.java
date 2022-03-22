@@ -23,10 +23,10 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.contax.commons.core.index.Index;
-import seedu.contax.logic.commands.AddCommand;
+import seedu.contax.logic.commands.AddPersonCommand;
 import seedu.contax.logic.commands.ChainCommand;
 import seedu.contax.logic.commands.Command;
-import seedu.contax.logic.commands.EditCommand;
+import seedu.contax.logic.commands.EditPersonCommand;
 import seedu.contax.testutil.EditPersonDescriptorBuilder;
 import seedu.contax.testutil.PersonBuilder;
 
@@ -41,17 +41,18 @@ public class ChainCommandParserTest {
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
 
-        EditCommand.EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
+        EditPersonCommand.EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        EditPersonCommand expectedCommand = new EditPersonCommand(targetIndex, descriptor);
 
         List<Command> commandList = new ArrayList<>();
         commandList.add(expectedCommand);
-        commandList.add(new AddCommand(new PersonBuilder().build()));
+        commandList.add(new AddPersonCommand(new PersonBuilder().build()));
 
-        assertParseSuccess(parser, "edit " + userInput
-                        + "&& add n/Amy Bee p/85355255 e/amy@gmail.com a/123, Jurong West Ave 6, #08-111",
+        assertParseSuccess(parser, EditPersonCommand.COMMAND_WORD + " " + userInput
+                        + "&&  " + AddPersonCommand.COMMAND_WORD
+                        + " n/Amy Bee p/85355255 e/amy@gmail.com a/123, Jurong West Ave 6, #08-111",
                 new ChainCommand(commandList));
     }
 

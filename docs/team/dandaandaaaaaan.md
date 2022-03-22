@@ -10,25 +10,30 @@ ContacX will allow for efficient management of a large list of contacts, allowin
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added the import and export features for `csv` and `json`
-    * What it does: `To be added soon`
-    * Justification: `To be added soon`
-    * Highlights: `To be added soon`
-    * Credits: `To be added soon`
+* **New Feature**: Added the import and export features for `.csv`
+    * What it does: Allows the user to import contacts from a Microsoft Excel compatible format, as well as export it back into the same format. Import CSV allows for customising of column numbers for each field.
+    * Justification: As our target audience is professionals, it is very common that they will have contacts in Excel in some form. By designing an Import CSV command with flexibility of column numbers, professionals can easily migrate their existing contacts with minimal modifications.
 
-* **Code contributed**: `to be added soon`
+
+
+* **Code contributed**: 
+    * Functionality, documentation and tests for both `Import CSV` and `Export CSV` functions
+      * Includes components in `Storage`, `Logic`, `Model` etc.
 
 * **Project management**:
-    * `to be added soon`
+    * Code reviews, workflow establishment
+    * Creation of releases, ensuring passing CI
 
 * **Enhancements to existing features**:
-    * `to be added soon`
+    * Modified the constraints for `Phone` to allow country codes within the numbers. It is common that other contact management apps use this, and can cause problems when importing, so we decided to allow it.
 
 * **Documentation**:
     * User Guide:
-        * `to be added soon`
+        * Added documentation for import/export CSV related functionalities
+          * `importcsv`
+          * `exportcsv`
     * Developer Guide:
-        * `to be added soon`
+        * Added sequence diagram and explaination of how the `Import CSV` and `Export CSV` functionalities work
 
 * **Community**:
     * `to be added soon`

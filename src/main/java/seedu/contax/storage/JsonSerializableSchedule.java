@@ -2,12 +2,14 @@ package seedu.contax.storage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
+import seedu.contax.commons.core.LogsCenter;
 import seedu.contax.commons.exceptions.IllegalValueException;
 import seedu.contax.model.ReadOnlyAddressBook;
 import seedu.contax.model.ReadOnlySchedule;
@@ -23,6 +25,9 @@ class JsonSerializableSchedule {
 
     public static final String MESSAGE_OVERLAPPING_APPOINTMENT =
             "Schedule contains overlapping appointments.";
+
+    private static final Logger LOGGER = LogsCenter.getLogger(JsonSerializableSchedule.class);
+    private static final String MESSAGE_SKIP_APPOINTMENT = "Appointment cannot be inflated, skipping record";
 
     private final List<JsonAdaptedAppointment> appointments = new ArrayList<>();
 
@@ -54,11 +59,13 @@ class JsonSerializableSchedule {
     public Schedule toModelType(ReadOnlyAddressBook addressBook) throws IllegalValueException {
         Schedule schedule = new Schedule();
         for (JsonAdaptedAppointment jsonAdaptedAppointment : appointments) {
-            Appointment appointment = jsonAdaptedAppointment.toModelType(addressBook);
             try {
+                Appointment appointment = jsonAdaptedAppointment.toModelType(addressBook);
                 schedule.addAppointment(appointment);
             } catch (OverlappingAppointmentException ex) {
                 throw new IllegalValueException(MESSAGE_OVERLAPPING_APPOINTMENT);
+            } catch (IllegalValueException ex) {
+                LOGGER.info(MESSAGE_SKIP_APPOINTMENT);
             }
         }
         return schedule;

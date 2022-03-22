@@ -12,7 +12,7 @@ import static seedu.contax.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.contax.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.contax.logic.commands.EditPersonCommand.EditPersonDescriptor;
 import seedu.contax.testutil.EditPersonDescriptorBuilder;
 
 public class EditPersonDescriptorTest {
