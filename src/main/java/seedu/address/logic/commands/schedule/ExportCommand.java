@@ -27,6 +27,10 @@ public class ExportCommand extends Command {
 
     public static final String COMMAND_WORD = "export";
     public static final String MESSAGE_SUCCESS = "%1$s's schedule exported!";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Exports the schedule of the person identified by the index number used in the displayed person list.\n"
+            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 1";
 
     private final Index targetIndex;
 
@@ -50,7 +54,7 @@ public class ExportCommand extends Command {
         Schedule toStoreSchedule = targetPerson.getSchedule();
 
         if (Schedule.isEmptySchedule(toStoreSchedule)) {
-            throw new CommandException(String.format(Schedule.EMPTY_SCHEDULE_MESSAGE, targetPerson));
+            throw new CommandException(String.format(Schedule.EMPTY_SCHEDULE_MESSAGE, targetPerson.getName()));
         }
 
         Path exportFile = Paths.get("data", String.format("%1$s.json", targetPerson.getName()));
