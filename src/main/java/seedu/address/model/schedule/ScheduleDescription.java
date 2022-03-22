@@ -3,6 +3,9 @@ package seedu.address.model.schedule;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents the description of a schedule
+ */
 public class ScheduleDescription {
 
     public static final String MESSAGE_CONSTRAINTS =

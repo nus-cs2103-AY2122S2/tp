@@ -6,9 +6,15 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.person.Person;
 
+/**
+ * Represents a list contains all the players in the lineup
+ */
 public class LineupPlayersList {
     private ArrayList<Person> playersList;
 
+    /**
+     * Constructs a {@code LineupPlayersList}
+     */
     public LineupPlayersList() {
         this.playersList = new ArrayList<>();
     }
@@ -33,6 +39,12 @@ public class LineupPlayersList {
         playersList.remove(player);
     }
 
+    /**
+     * Updates the lineupName for every player in the lineup
+     *
+     * @param oldName The old lineup name
+     * @param newName The new lineup name
+     */
     public void replaceLineup(LineupName oldName, LineupName newName) {
         for (Person person : playersList) {
             person.replaceLineupName(oldName, newName);

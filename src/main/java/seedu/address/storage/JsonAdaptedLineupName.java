@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.lineup.LineupName;
-import seedu.address.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link LineupName}
@@ -30,8 +29,13 @@ public class JsonAdaptedLineupName {
     }
 
     @JsonValue
-    public String getLineupName() {return lineupName;}
+    public String getLineupName() {
+        return lineupName;
+    }
 
+    /**
+     * Returns a {@code LineupName}
+     */
     public LineupName toModelType() throws IllegalValueException {
         if (!LineupName.isValidLineupName(lineupName)) {
             throw new IllegalValueException(LineupName.MESSAGE_CONSTRAINTS);

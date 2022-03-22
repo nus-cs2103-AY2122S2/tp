@@ -98,6 +98,11 @@ public class UniquePersonList implements Iterable<Person> {
                 .collect(Collectors.toList()).get(0);
     }
 
+    /**
+     * Removes all player in the target lineup
+     *
+     * @param lineup The lineup to be cleared
+     */
     public void removeAllPlayerFromLineup(Lineup lineup) {
         requireNonNull(lineup);
         for (Person person : this.internalList) {
