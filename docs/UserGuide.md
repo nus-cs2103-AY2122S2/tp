@@ -150,6 +150,9 @@ Examples:
 Find is case-insensitive, and the order in which the keywords are entered is irrelevant. Partial words **will** be matched as well. e.g., `shing` will match `shingeki`.
 </div>
 
+<div markdown="span style=background-color:yellow" class="alert alert-primary">:bulb: **Caution:**
+find `find n/shingeki n/2` does not mean `find n/shingeki 2` The former will only find show names that match with **2**(as mentioned in [features](#features)) while the latter will find all show names that match **shingeki or 2**. This applies across all parameters.
+</div>
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
