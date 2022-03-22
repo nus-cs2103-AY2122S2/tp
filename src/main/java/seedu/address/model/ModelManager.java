@@ -20,7 +20,9 @@ import seedu.address.model.person.Person;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
+    /* to be deleted */
     private final MyGm myGm;
+
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
@@ -32,7 +34,9 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
+        /* to be deleted */
         this.myGm = myGm;
+
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
@@ -46,7 +50,9 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
+        /* to be deleted */
         this.myGm = new MyGm();
+
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
@@ -58,6 +64,7 @@ public class ModelManager implements Model {
 
     //=========== UserPrefs ==================================================================================
 
+    /* to be deleted */
     @Override
     public MyGm getMyGm() {
         return this.myGm;
@@ -111,23 +118,38 @@ public class ModelManager implements Model {
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return myGm.hasPerson(person);
+        return addressBook.hasPerson(person);
+    }
+
+    @Override
+    public boolean hasPersonName(Name targetName) {
+        requireNonNull(targetName);
+        return addressBook.hasPersonName(targetName);
+    }
+
+    @Override
+    public Person getPerson(Name targetName) {
+        requireNonNull(targetName);
+        return addressBook.getPerson(targetName);
     }
 
     @Override
     public boolean hasJerseyNumber(Person person) {
         requireNonNull(person);
-        return myGm.hasJerseyNumber(person);
+        /* to be changed to AB3 */
+        return addressBook.hasJerseyNumber(person);
     }
 
     @Override
     public String getAvailableJerseyNumber() {
-        return myGm.getAvailableJerseyNumber();
+        /* to be changed to AB3 */
+        return addressBook.getAvailableJerseyNumber();
     }
 
     @Override
     public boolean isFull() {
-        return myGm.isFull();
+        /* to be changed to AB3 */
+        return addressBook.isFull();
     }
 
     @Override
@@ -138,14 +160,12 @@ public class ModelManager implements Model {
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
-        myGm.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
     }
 
@@ -169,6 +189,7 @@ public class ModelManager implements Model {
     /**
      * Functions for MyGM
      */
+    /* to be deleted */
     @Override
     public boolean hasPersonInMyGM(Name targetName) {
         return true; //myGm.hasPerson(targetName);

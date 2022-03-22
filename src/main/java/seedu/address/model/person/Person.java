@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
@@ -85,6 +86,22 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    /**
+     * Returns true if some person's name is {@code targetName}.
+     */
+    public boolean isMatchName(Name targetName) {
+        requireNonNull(targetName);
+        return getName().equals(targetName);
+    }
+
+    /**
+     * Returns true if the person's jersey number is already taken.
+     */
+    public boolean isSameJerseyNumber(JerseyNumber jerseyNumber) {
+        requireNonNull(jerseyNumber);
+        return getJerseyNumber().equals(jerseyNumber);
     }
 
     /**
