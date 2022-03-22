@@ -25,7 +25,7 @@ MainWindow <-- Model
 deactivate Model
 UiManager <-- MainWindow
 deactivate MainWindow
-[<- UiManager
+[<-- UiManager
 deactivate UiManager
 
 [-> Logic : execute("appointmentsbetween \n sd/12-12-2022 st/12:00 \n ed/13-12-2022 ed/12:00")
@@ -43,7 +43,7 @@ Command <-- Model
 deactivate Model
 Logic <-- Command
 deactivate Command
-[<- Logic
+[<-- Logic
 deactivate Logic
 
 
