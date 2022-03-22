@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.lineup.Lineup;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.schedule.UniqueScheduleList;
@@ -71,6 +72,44 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(person);
         return persons.contains(person);
     }
+
+    /**
+     * Returns true if {@code targetName} is taken by some player.
+     */
+    public boolean hasPersonName(Name targetName) {
+        requireNonNull(targetName);
+        return persons.containsName(targetName);
+    }
+
+    /**
+     * Returns the person with {@code targetName};
+     */
+    public Person getPerson(Name targetName) {
+        return persons.getPerson(targetName);
+    }
+
+    /**
+     * Returns true if the person to add has a duplicate jersey number.
+     */
+    public boolean hasJerseyNumber(Person player) {
+        return persons.containsJerseyNumber(player.getJerseyNumber());
+    }
+
+    /**
+     * Returns true if MyGM has reached maximum capacity.
+     */
+    public boolean isFull() {
+        return persons.isFull();
+    }
+
+    /**
+     * Returns a list of jersey number that are still available.
+     * @return
+     */
+    public String getAvailableJerseyNumber() {
+        return persons.getAvailableJerseyNumber();
+    }
+
 
     /**
      * Adds a person to the address book.

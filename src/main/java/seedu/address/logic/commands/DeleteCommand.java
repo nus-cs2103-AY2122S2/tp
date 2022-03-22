@@ -6,6 +6,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 
 /**
  * Represents a delete command which deletes an entity from MyGM.
@@ -41,12 +42,18 @@ public class DeleteCommand extends Command {
         this.lineup = null;
     }
 
+    /**
+     * Overloaded constructor for delete command.
+     */
     public DeleteCommand(Name player, LineupName lineup) {
         this.type = DeleteCommandType.PLAYER_LINEUP;
         this.player = player;
         this.lineup = lineup;
     }
 
+    /**
+     * Overloaded constructor for delete command.
+     */
     public DeleteCommand(LineupName lineup) {
         this.type = DeleteCommandType.LINEUP;
         this.player = null;
@@ -59,10 +66,11 @@ public class DeleteCommand extends Command {
 
         switch (this.type) {
         case PLAYER:
-            if (!model.getMyGm().containsPlayer(this.player)) {
+            if (!model.hasPersonName(this.player)) {
                 throw new CommandException(MESSAGE_NO_SUCH_PERSON);
             } else {
-                model.getMyGm().deletePlayer(this.player);
+                Person toDelete = model.getPerson(this.player);
+                model.deletePerson(toDelete);
                 return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, this.player));
                 // do I also need to delete person from lineup?
             }
@@ -70,6 +78,7 @@ public class DeleteCommand extends Command {
             // to be added
         case LINEUP:
             // to be added
+        default:
         }
 
         return null; // temporarily

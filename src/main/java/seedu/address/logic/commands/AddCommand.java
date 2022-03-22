@@ -43,8 +43,8 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "SG";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the team";
-    public static final String MESSAGE_DUPLICATE_JERSEY_NUMBER = "This Jersey number already exists in the team.\n"
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in MyGM";
+    public static final String MESSAGE_DUPLICATE_JERSEY_NUMBER = "This Jersey number already exists in MyGM.\n"
             + "You may consider these available ones:\n%1$s";
     public static final String MESSAGE_FULL_CAPACITY_REACHED = "MyGM has reached its full capacity with 100 players.";
     // can consider adding in a list of available jersey number
@@ -59,6 +59,8 @@ public class AddCommand extends Command {
         toAdd = person;
     }
 
+    /* to add: add lineup */
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -72,7 +74,8 @@ public class AddCommand extends Command {
         }
 
         if (model.hasJerseyNumber(toAdd)) {
-            throw new CommandException(String.format(MESSAGE_DUPLICATE_JERSEY_NUMBER, model.getAvailableJerseyNumber()));
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_JERSEY_NUMBER,
+                    model.getAvailableJerseyNumber()));
         }
 
         model.addPerson(toAdd);
