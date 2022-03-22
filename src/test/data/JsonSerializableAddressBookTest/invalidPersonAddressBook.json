@@ -1,9 +1,9 @@
 {
   "persons": [ {
     "name": "Hans Muster",
+    "companyName": "Janice street",
     "phone": "9482424",
-    "email": "invalid@email!3e",
-    "address": "4th street"
+    "email": "invalid@email!3e"
   } ],
   "companies": [],
   "events": []

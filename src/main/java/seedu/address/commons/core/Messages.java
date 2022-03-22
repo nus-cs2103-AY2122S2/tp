@@ -12,4 +12,6 @@ public class Messages {
 
     public static final String MESSAGE_INVALID_EVENT_DISPLAYED_INDEX = "The event index provided is invalid";
     public static final String MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX = "The company index provided is invalid";
+
+    public static final String MESSAGE_NONEXISTENT_COMPANY = "The company provided does not exist in the company list";
 }
