@@ -2,10 +2,7 @@ package seedu.trackermon.ui;
 
 import java.util.Comparator;
 
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
-import javafx.geometry.Bounds;
-import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.FlowPane;
