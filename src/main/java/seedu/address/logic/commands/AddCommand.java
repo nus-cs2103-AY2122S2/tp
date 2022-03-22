@@ -10,9 +10,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.lab.Lab;
-import seedu.address.model.person.lab.LabList;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.lab.Lab;
+import seedu.address.model.student.lab.LabList;
 
 /**
  * Adds a Student to the TAddressBook.
@@ -39,14 +39,14 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in the TAddressBook";
+    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the TAddressBook";
 
-    private final Person toAdd;
+    private final Student toAdd;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public AddCommand(Person student) {
+    public AddCommand(Student student) {
         requireNonNull(student);
         toAdd = student;
     }
@@ -61,10 +61,10 @@ public class AddCommand extends Command {
         }
         toAdd.setLabs(plainLabList);
 
-        if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (model.hasStudent(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
-        model.addPerson(toAdd);
+        model.addStudent(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

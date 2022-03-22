@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LAB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LABSTATUS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.List;
 
@@ -12,12 +12,12 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.DuplicateLabException;
-import seedu.address.model.person.exceptions.LabNotFoundException;
-import seedu.address.model.person.lab.Lab;
-import seedu.address.model.person.lab.LabList;
-import seedu.address.model.person.lab.LabStatus;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.exceptions.DuplicateLabException;
+import seedu.address.model.student.exceptions.LabNotFoundException;
+import seedu.address.model.student.lab.Lab;
+import seedu.address.model.student.lab.LabList;
+import seedu.address.model.student.lab.LabStatus;
 
 /**
  * Edits the LabStatus of a Lab of a Student in the TAddressBook.
@@ -27,13 +27,13 @@ public class EditLabStatusCommand extends Command {
     public static final String COMMAND_WORD = "labstat";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the lab status of a specific lab of the student "
-            + "identified by the index number used in the displayed person list.\n"
+            + "identified by the index number used in the displayed student list.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_LAB + "LAB_NUMBER "
             + PREFIX_LABSTATUS + "LAB_STATUS (u/s/g)\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_LAB + "1 " + PREFIX_LABSTATUS + "s";
 
-    // Edited status of Lab {LAB_NUMBER} for {PERSON_NAME} to {NEW_STATUS}
+    // Edited status of Lab {LAB_NUMBER} for {STUDENT_NAME} to {NEW_STATUS}
     public static final String MESSAGE_EDIT_LAB_STATUS_SUCCESS = "Edited status of Lab %1$s for %2$s to %3$s";
     public static final String MESSAGE_INVALID_STATUS_CHANGE = "New lab status provided is identical to previous";
     // add this to commons.core.Messages if it also applies to other commands
@@ -61,13 +61,13 @@ public class EditLabStatusCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Student> lastShownList = model.getFilteredStudentList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
-        Person studentToEdit = lastShownList.get(index.getZeroBased());
+        Student studentToEdit = lastShownList.get(index.getZeroBased());
         LabList listToEdit = studentToEdit.getLabs();
 
         try {
@@ -79,7 +79,7 @@ public class EditLabStatusCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_STATUS_CHANGE);
         }
 
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         return new CommandResult(
                 String.format(MESSAGE_EDIT_LAB_STATUS_SUCCESS, labNumber, studentToEdit.getName(), newStatus.name()));
     }

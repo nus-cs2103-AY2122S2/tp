@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditLabStatusCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.lab.LabStatus;
+import seedu.address.model.student.lab.LabStatus;
 
 /**
  * Parses input arguments and creates a new EditLabStatusCommand object
