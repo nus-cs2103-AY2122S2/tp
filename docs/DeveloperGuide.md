@@ -154,6 +154,55 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Applicant feature
+
+#### Proposed Implementation
+
+An applicant in HireLah is represented by `Applicant`. `Applicant` is implemented by refactoring `Persons`.
+Additionally, `Applicant` implements two new attributes which are represented by the following two new classes:
+
+* `Gender` — M refers to male, and F refers to female. Only the value M or F is allowed.
+* `Age` —  Numerical representation of the age of the applicant. Only values with two digits or more are allowed. 
+
+`Gender` and `Age` class highly resemble other existing attribute classes such as `Address`, `Email`, `Name`, and 
+`Phone`.
+
+These classes are contained in the `applicant` package which belongs to the `model` package.
+
+Applicant is implemented this way as for HireLah, we require new attributes such as `Gender` and `Age` to aid in the 
+recruitment process. the `Person` class did not contain such attributes. 
+
+Adding Gender and Age as tags using the existing functionality is not ideal as we do not want these attributes to be 
+optional.
+
+A new `Applicant` class had to be created to support the functionality. It is also not ideal to keep the existing 
+`Person` class as it should not be instantiated by users in HireLah. 
+
+Hence it made sense to refactor `Person` to `Applicant` and to extend and build on the existing functionalities to 
+support the needs of HireLah. 
+
+### Adding of Data 
+
+#### Implementation
+
+Adding of different data types is currently done through `ModelManger`, which implements the methods in interface `Model`.
+There are 3 levels to the parsing of the add command from user input.
+1. `AddressBookParser` identifies it as an `add` command.
+2. `AddCommandParser` identifies the exact data type that is to be added, through the `flag` of the user input.
+3. `AddXYZCommandParser` identifies the fields to be added for the specific datatype, and creates and `AddXYZCommand`.
+
+#### Design considerations:
+
+#### Aspect: How to add different data types:
+
+* **Alternative 1 (current choice):** Have a general add command.
+    * Pros: User-friendly since users only have to remember a singular command.
+    * Cons: Requires additional levels of parsers to be created.
+
+* **Alternative 2:** An individual command for each data type that can be added
+    * Pros: Fewer levels of parsers is required.
+    * Cons: We must ensure that the implementation of each individual command are correct.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
