@@ -1,0 +1,114 @@
+@startuml
+!include style.puml
+
+title MarkCommand\n
+
+box "Logic" LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":MarkCommandParser" as MarkCommandParser LOGIC_COLOR
+participant ":MarkCommand" as MarkCommand LOGIC_COLOR
+participant ":ArgumentTokenizer" as ArgumentTokenizer LOGIC_COLOR
+participant "commandResult:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box "Model" MODEL_COLOR_T1
+participant "person:Person" as Person MODEL_COLOR
+participant "model:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute
+activate LogicManager LOGIC_COLOR
+
+LogicManager -> AddressBookParser : parseCommand(commandText)
+activate AddressBookParser LOGIC_COLOR
+
+create MarkCommandParser
+AddressBookParser -> MarkCommandParser
+activate MarkCommandParser LOGIC_COLOR
+MarkCommandParser --> AddressBookParser
+deactivate MarkCommandParser
+
+AddressBookParser -> MarkCommandParser : parse(arguments)
+activate MarkCommandParser LOGIC_COLOR
+
+MarkCommandParser -> ArgumentTokenizer ++ LOGIC_COLOR: tokenize(argsString, prefixes)
+ArgumentTokenizer --> MarkCommandParser -- LOGIC_COLOR: argMultimap
+
+ref over MarkCommandParser: Parsing each field
+
+create Person
+MarkCommandParser -> Person MODEL_COLOR
+activate Person MODEL_COLOR
+Person --> MarkCommandParser --:
+deactivate Person
+
+create MarkCommand
+MarkCommandParser -> MarkCommand ++ LOGIC_COLOR
+
+MarkCommand --> MarkCommandParser --:
+deactivate MarkCommand
+
+MarkCommandParser --> AddressBookParser --: MarkCommand
+deactivate MarkCommandParser
+
+AddressBookParser --> LogicManager --: MarkCommand
+deactivate AddressBookParser
+
+LogicManager -> MarkCommand LOGIC_COLOR : execute(model)
+activate MarkCommand LOGIC_COLOR
+
+MarkCommand -> Model ++ MODEL_COLOR: markTaskOfPerson(studentId, index)
+
+Model --> MarkCommand --
+
+create CommandResult
+MarkCommand -> CommandResult ++ LOGIC_COLOR:
+
+CommandResult --> MarkCommand --:
+deactivate CommandResult
+
+MarkCommand --> LogicManager --: commandResult
+deactivate MarkCommand
+
+[<--LogicManager --: commandResult
+deactivate LogicManager
+
+@enduml
+
+@startuml
+!include style.puml
+
+box "Logic" LOGIC_COLOR_T1
+participant ":MarkCommandParser" as MarkCommandParser LOGIC_COLOR
+participant ":ParserUtil" as ParserUtil LOGIC_COLOR
+end box
+
+box "Model" MODEL_COLOR_T1
+participant "studentId:StudentId" as StudentId MODEL_COLOR
+participant "index:Index" as Index MODEL_COLOR
+end box
+
+mainframe sd Parsing each field
+
+MarkCommandParser -> ParserUtil ++ LOGIC_COLOR: parseStudentId(studentId)
+create StudentId
+
+ParserUtil -> StudentId
+activate StudentId MODEL_COLOR
+StudentId --> ParserUtil
+deactivate StudentId
+
+ParserUtil --> MarkCommandParser -- MODEL_COLOR: studentId
+
+MarkCommandParser -> ParserUtil ++ LOGIC_COLOR: parseIndex(index)
+create Index
+
+ParserUtil -> Index
+activate Index MODEL_COLOR
+Index --> ParserUtil
+deactivate Index
+
+ParserUtil --> MarkCommandParser -- MODEL_COLOR: index
+
+@enduml
