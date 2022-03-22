@@ -101,7 +101,7 @@ public class Group {
         ObservableList<Task> taskList = tasks.asUnmodifiableObservableList();
         String output = "Here are the tasks in the group: \n";
         for (int i = 0; i < taskList.size(); i++) {
-            output += taskList.get(i).getTaskName().taskName + "\n";
+            output += (i + 1) + ". " + taskList.get(i).getTaskName().taskName + "\n";
         }
         return output;
     }
