@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
+import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentId;
 import seedu.address.model.person.Task;
@@ -85,6 +86,13 @@ public interface Model {
      * The {@code task} should be unique and not a duplicate of already assigned task.
      */
     void assignTaskToPerson(StudentId studentId, Task task);
+
+    /**
+     * Assigns {@code Task} to 1 or more {@code person} with taking the module with the {@code moduleCode}.
+     * 1 or more persons with {@code moduleCode} must exist in the address book.
+     * The {@code task} should be unique and not a duplicate of already assigned task.
+     */
+    void assignTaskToAllInModule(ModuleCode moduleCode, Task task);
 
     /**
      * Marks {@code Task} to {@code person} with {@code studentId}.

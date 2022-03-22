@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
+import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentId;
 import seedu.address.model.person.Task;
@@ -118,6 +119,13 @@ public class ModelManager implements Model {
     public void assignTaskToPerson(StudentId studentId, Task task) {
         requireAllNonNull(studentId, task);
         addressBook.assignTaskToPerson(studentId, task);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void assignTaskToAllInModule(ModuleCode moduleCode, Task task) {
+        requireAllNonNull(moduleCode, task);
+        addressBook.assignTaskToAllInModule(moduleCode, task);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
