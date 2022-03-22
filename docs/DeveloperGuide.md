@@ -273,9 +273,13 @@ object will be created, and is executed by the LogicManager.
    If the argument is not valid, a `ParseException` will be thrown.
 8. Step 5 to 7 will be repeated for the other compulsory fields (name, moduleCode) 
    and optional fields (phone, telegramHandle, email), by using their respective parse methods in `ParserUtil`.
+   
+
    ![ParserUtilClassDiagram](images/ParserUtilClassDiagram.png)
+
+
    <div markdown="span" class="alert alert-info">:information_source: 
-   **Note:** If an optional field is not supplied (i.e. not found in the `ArgumentMultimap`), 
+   **Note:** If an optional field is not supplied (i.e. not found in the ArgumentMultimap), 
    the extra parsing process in steps 5 to 7 will be skipped. 
    Instead, the respective object will be created and initialized to `null`.
 
@@ -286,7 +290,7 @@ object will be created, and is executed by the LogicManager.
     in TAPA, a `CommandException` will be thrown.
 
     <div markdown="span" class="alert alert-info">:information_source: 
-    **Note:** In TAPA, two `Person` are equal only if they have the same studentId.
+    **Note:** In TAPA, two Person are equal only if they have the same studentId.
     
 13. The `AddCommand` will call `model.addPerson(Person person)`, which adds the `Person` into the `AddressBook`.
 14. Lastly, the `AddCommand` will create a new `CommandResult`, which will be returned to `LogicManager`.
