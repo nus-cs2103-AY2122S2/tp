@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 import seedu.ibook.model.item.Item;
+import seedu.ibook.model.item.Quantity;
 import seedu.ibook.model.item.UniqueItemList;
 
 /**
@@ -83,6 +84,27 @@ public class Product {
      */
     public void removeItem(Item key) {
         items.remove(key);
+    }
+
+    /**
+     * Sets the quantity of the specified item.
+     */
+    public void setItemCount(Item i, Quantity quantity) {
+        items.setItemCount(i, quantity);
+    }
+
+    /**
+     * Increase the quantity of the specified item.
+     */
+    public void incrementItemCount(Item i) {
+        items.incrementItemCount(i);
+    }
+
+    /**
+     * Decrease the quantity of the specified item.
+     */
+    public void decrementItemCount(Item i) {
+        items.decrementItemCount(i);
     }
 
     /**

@@ -62,12 +62,9 @@ public class Item implements Comparable<Item> {
     }
 
     /**
-     * Subtracts two items.
-     * @param newItem Item to subtract.
+     * Set the quantity of the item.
      */
-    public Item subtract(Item newItem) {
-        checkArgument(this.isSameItem(newItem), ITEMS_MUST_BE_EQUAL_CONSTRAINT);
-        Quantity newQuantity = quantity.subtract(newItem.getQuantity());
+    public Item setQuantity(Quantity newQuantity) {
         return new Item(product, expiryDate, newQuantity);
     }
 
@@ -76,7 +73,7 @@ public class Item implements Comparable<Item> {
      */
     public Item increment(Quantity quantity) {
         Quantity newQuantity = this.quantity.add(quantity);
-        return new Item(product, expiryDate, newQuantity);
+        return setQuantity(newQuantity);
     }
 
     /**
@@ -84,7 +81,7 @@ public class Item implements Comparable<Item> {
      */
     public Item decrement(Quantity quantity) {
         Quantity newQuantity = this.quantity.subtract(quantity);
-        return new Item(product, expiryDate, newQuantity);
+        return setQuantity(newQuantity);
     }
 
     /**
