@@ -5,20 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalStudents.ALICE;
-import static seedu.address.testutil.TypicalStudents.BOB;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.model.student.Student;
-import seedu.address.model.student.UniqueStudentList;
 import seedu.address.model.student.exceptions.DuplicateLabException;
-import seedu.address.model.student.exceptions.DuplicateStudentException;
 import seedu.address.model.student.exceptions.LabNotFoundException;
 
 
@@ -167,7 +161,6 @@ class LabListTest {
     public void setLabs_nullLabList_throwsNullPointerException() {
         LabList labs = new LabList();
         assertThrows(NullPointerException.class, () -> labs.setLabs((LabList) null));
-        assertThrows(NullPointerException.class, () -> labs.setLabs((List<Lab>) null));
     }
 
     @Test
@@ -181,23 +174,33 @@ class LabListTest {
     }
 
     @Test
-    public void setStudents_nullList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueStudentList.setStudents((List<Student>) null));
+    public void setLabs_nullList_throwsNullPointerException() {
+        LabList labs = new LabList();
+        assertThrows(NullPointerException.class, () -> labs.setLabs((List<Lab>) null));
     }
 
     @Test
-    public void setStudents_list_replacesOwnListWithProvidedList() {
-        uniqueStudentList.add(ALICE);
-        List<Student> personList = Collections.singletonList(BOB);
-        uniqueStudentList.setStudents(personList);
-        UniqueStudentList expectedUniqueStudentList = new UniqueStudentList();
-        expectedUniqueStudentList.add(BOB);
-        assertEquals(expectedUniqueStudentList, uniqueStudentList);
+    public void setLabs_list_replacesOwnListWithProvidedList() {
+        LabList labs = new LabList();
+        List<Lab> labList = Arrays.asList(new Lab("1"), new Lab("2"));
+        labs.setLabs(labList);
+        LabList expectedLabList = new LabList();
+        expectedLabList.add(new Lab("2"));
+        expectedLabList.add(new Lab("1"));
+        assertEquals(expectedLabList, labs);
     }
 
     @Test
-    public void setStudents_listWithDuplicateStudents_throwsDuplicateStudentException() {
-        List<Student> listWithDuplicatePersons = Arrays.asList(ALICE, ALICE);
-        assertThrows(DuplicateStudentException.class, () -> uniqueStudentList.setStudents(listWithDuplicatePersons));
+    public void setLabs_listWithDuplicateStudents_throwsDuplicateLabException() {
+        LabList labs = new LabList();
+        List<Lab> listWithDuplicateLabs = Arrays.asList(new Lab("1"), new Lab("1"));
+        assertThrows(DuplicateLabException.class, () -> labs.setLabs(listWithDuplicateLabs));
+    }
+
+    @Test
+    public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
+        LabList labs = new LabList();
+        labs.add(new Lab("1"));
+        assertThrows(UnsupportedOperationException.class, () -> labs.asUnmodifiableObservableList().remove(0));
     }
 }
