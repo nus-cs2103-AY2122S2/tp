@@ -81,7 +81,7 @@ public class CommandTestUtil {
     public static final String REQUIREMENT_DESC_SKILL = " " + PREFIX_REQUIREMENT + VALID_REQUIREMENT_SKILL;
 
     public static final String INVALID_POSITION_DESC = " " + PREFIX_POSITION + "^#$#"; // only special characters
-    public static final String INVALID_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION + "  "; // on whitespaces
+    public static final String INVALID_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION + "  "; // only whitespaces
     public static final String INVALID_OPENING_DESC = " " + PREFIX_NUM_OPENINGS + "-1"; // negative integer
     public static final String INVALID_REQUIREMENT_DESC = " " + PREFIX_REQUIREMENT + "*!@#"; // only special characters
 
