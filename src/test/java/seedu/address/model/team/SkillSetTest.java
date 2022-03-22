@@ -25,7 +25,7 @@ public class SkillSetTest {
     }
 
     @Test
-    public void adding_skill_to_SkillSet_success() {
+    public void addSkill() {
         skillSet1.add(java100);
         assertTrue(skillSet1.hasSkill(java90));
         assertTrue(skillSet1.hasSkill(java100));
@@ -33,7 +33,7 @@ public class SkillSetTest {
     }
 
     @Test
-    public void adding_skillSet_to_SkillSet_success() {
+    public void addSkillSet() {
         skillSet1.add(java100);
         skillSet1.add(python100);
         skillSet2.addAll(skillSet1);
@@ -44,7 +44,7 @@ public class SkillSetTest {
     }
 
     @Test
-    public void get_SkillProficiency_success() {
+    public void getSkillProficiency() {
         skillSet1.add(java90);
         skillSet1.add(c0);
         skillSet1.add(python100);

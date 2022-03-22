@@ -1,0 +1,14 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Skill {
+skillName
+skillProficiency
+}
+
+'class SkillSet
+
+Person "1" -- "0..*" Skill : > have
+
+
+@enduml
