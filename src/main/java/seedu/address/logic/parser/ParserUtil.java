@@ -198,8 +198,4 @@ public class ParserUtil {
         return new LogName(title);
     }
 
-    public static String parseTitleAsPossiblyInvalid(String title) {
-        return title;
-    }
-
 }

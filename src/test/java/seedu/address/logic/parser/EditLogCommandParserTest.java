@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LOG_DESCRIPTION;
@@ -9,9 +8,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_LOG_TITLE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LOG_TITLE_PRECEDING_SPACE_TRIMMED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOG_INDEX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_TITLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LOG;
@@ -22,6 +21,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditLogCommand;
+import seedu.address.model.common.Description;
 import seedu.address.model.person.FriendName;
 import seedu.address.model.person.LogName;
 
@@ -31,6 +31,7 @@ public class EditLogCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT = EditLogCommandParser.MESSAGE_INVALID_FORMAT;
     private static final String MESSAGE_INVALID_TITLE = LogName.MESSAGE_CONSTRAINTS;
     private static final String MESSAGE_INVALID_INDEX = ParserUtil.MESSAGE_INVALID_INDEX;
+    private static final String MESSAGE_INVALID_DESCRIPTION = Description.MESSAGE_CONSTRAINTS;
 
 
     @Test
@@ -42,12 +43,12 @@ public class EditLogCommandParserTest {
 
         // missing person index/name -> fail
         args = " " + PREFIX_LOG_INDEX + logIndex.getOneBased()
-                + " " + PREFIX_NEW_TITLE + VALID_LOG_TITLE;
+                + " " + PREFIX_TITLE + VALID_LOG_TITLE;
         assertParseFailure(parser, args, MESSAGE_INVALID_FORMAT);
 
         // missing log index -> fail
         args = personIndex.getOneBased()
-                + " " + PREFIX_NEW_TITLE + VALID_LOG_TITLE;
+                + " " + PREFIX_TITLE + VALID_LOG_TITLE;
         assertParseFailure(parser, args, MESSAGE_INVALID_FORMAT);
 
         // missing both new title and new description
@@ -64,18 +65,23 @@ public class EditLogCommandParserTest {
 
         // invalid new title
         args = personIndex.getOneBased() + " " + PREFIX_LOG_INDEX + logIndex.getOneBased() + " "
-                + PREFIX_NEW_TITLE + "";
+                + PREFIX_TITLE + "";
         assertParseFailure(parser, args, MESSAGE_INVALID_TITLE);
 
         // invalid person index
         args = -1 + " " + PREFIX_LOG_INDEX + logIndex.getOneBased()
-                + " " + PREFIX_NEW_TITLE + VALID_LOG_TITLE;
+                + " " + PREFIX_TITLE + VALID_LOG_TITLE;
         assertParseFailure(parser, args, MESSAGE_INVALID_INDEX);
 
         // invalid log index
         args = personIndex.getOneBased() + " " + PREFIX_LOG_INDEX + "-1"
-                + " " + PREFIX_NEW_TITLE + VALID_LOG_TITLE;
+                + " " + PREFIX_TITLE + VALID_LOG_TITLE;
         assertParseFailure(parser, args, MESSAGE_INVALID_INDEX);
+
+        // invalid new description
+        args = personIndex.getOneBased() + " " + PREFIX_LOG_INDEX + logIndex.getOneBased() + " "
+                + PREFIX_DESCRIPTION + "   "; // only spaces
+        assertParseFailure(parser, args, MESSAGE_INVALID_DESCRIPTION);
 
     }
 
@@ -107,10 +113,10 @@ public class EditLogCommandParserTest {
         String args = targetIndex.getOneBased() + " "
                 + PREFIX_LOG_INDEX + targetLog.getOneBased() + " "
                 + PREFIX_LOG_INDEX + otherLog.getOneBased() + " "
-                + PREFIX_NEW_TITLE + firstTitle + " "
-                + PREFIX_NEW_TITLE + otherTitle + " "
-                + PREFIX_NEW_DESCRIPTION + firstDescription + " "
-                + PREFIX_NEW_DESCRIPTION + otherDescription;
+                + PREFIX_TITLE + firstTitle + " "
+                + PREFIX_TITLE + otherTitle + " "
+                + PREFIX_DESCRIPTION + firstDescription + " "
+                + PREFIX_DESCRIPTION + otherDescription;
 
         // expected
         EditLogCommand.EditLogDescriptor descriptor = new EditLogCommand.EditLogDescriptor();
@@ -127,10 +133,10 @@ public class EditLogCommandParserTest {
         args = NAME_DESC_BOB + " " + NAME_DESC_AMY + " "
                 + PREFIX_LOG_INDEX + targetLog.getOneBased() + " "
                 + PREFIX_LOG_INDEX + otherLog.getOneBased() + " "
-                + PREFIX_NEW_TITLE + firstTitle + " "
-                + PREFIX_NEW_TITLE + otherTitle + " "
-                + PREFIX_NEW_DESCRIPTION + firstDescription + " "
-                + PREFIX_NEW_DESCRIPTION + otherDescription;
+                + PREFIX_TITLE + firstTitle + " "
+                + PREFIX_TITLE + otherTitle + " "
+                + PREFIX_DESCRIPTION + firstDescription + " "
+                + PREFIX_DESCRIPTION + otherDescription;
 
         // expected
         descriptor = new EditLogCommand.EditLogDescriptor();
@@ -154,8 +160,8 @@ public class EditLogCommandParserTest {
         String args = targetIndex.getOneBased() + " "
                 + PREFIX_LOG_INDEX + invalidLogIndex + " "
                 + PREFIX_LOG_INDEX + otherLog.getOneBased() + " "
-                + PREFIX_NEW_TITLE + otherTitle + " "
-                + PREFIX_NEW_DESCRIPTION + otherDescription;
+                + PREFIX_TITLE + otherTitle + " "
+                + PREFIX_DESCRIPTION + otherDescription;
 
         // expected
         EditLogCommand.EditLogDescriptor descriptor = new EditLogCommand.EditLogDescriptor();
@@ -171,8 +177,8 @@ public class EditLogCommandParserTest {
         args = NAME_DESC_BOB + " " + NAME_DESC_AMY + " "
                 + PREFIX_LOG_INDEX + invalidLogIndex + " "
                 + PREFIX_LOG_INDEX + otherLog.getOneBased() + " "
-                + PREFIX_NEW_TITLE + otherTitle + " "
-                + PREFIX_NEW_DESCRIPTION + otherDescription;
+                + PREFIX_TITLE + otherTitle + " "
+                + PREFIX_DESCRIPTION + otherDescription;
 
         // expected
         descriptor = new EditLogCommand.EditLogDescriptor();
@@ -199,8 +205,8 @@ public class EditLogCommandParserTest {
 
         args = targetIndex.getOneBased() + " "
                 + PREFIX_LOG_INDEX + targetLogIndex.getOneBased() + " "
-                + PREFIX_NEW_TITLE + validTitle + " "
-                + PREFIX_NEW_DESCRIPTION + validDescription;
+                + PREFIX_TITLE + validTitle + " "
+                + PREFIX_DESCRIPTION + validDescription;
 
         // expected
         descriptor = new EditLogCommand.EditLogDescriptor();
@@ -212,8 +218,8 @@ public class EditLogCommandParserTest {
         // WITH NAME
         args = NAME_DESC_AMY + " "
                 + PREFIX_LOG_INDEX + targetLogIndex.getOneBased() + " "
-                + PREFIX_NEW_TITLE + validTitle + " "
-                + PREFIX_NEW_DESCRIPTION + validDescription;
+                + PREFIX_TITLE + validTitle + " "
+                + PREFIX_DESCRIPTION + validDescription;
 
         // expected
         descriptor = new EditLogCommand.EditLogDescriptor();
