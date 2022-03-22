@@ -199,12 +199,12 @@ In particular:
 1. In the model, `Person` now has an additional `UniqueLogList` field encapsulating some number
    of `Log` objects.
 
-![](images/LogFeaturesModelClassDiagram.png)
+![LogFeaturesModelClassDiagram](images/LogFeaturesModelClassDiagram.png)
 
 2. 'JsonAdaptedLog' objects are used to save `Log` objects to json format, in an implementation analogous to that of
    'JsonAdaptedTag'.
 
-![](images/LogFeaturesStorageClassDiagram.png)
+![LogFeaturesStorageClassDiagram](images/LogFeaturesStorageClassDiagram.png)
 
 3. To support adding logs by the name of a friend or the index in `Amigos`, `ByIndexByNameCommand` is implemented as
    a parent class that encapsulates methods useful to find the specified `Person` in the model to add logs to.
@@ -230,7 +230,7 @@ step.
 
 A sequence diagram shows, clearly, the interactions between `AddLogCommand`, `AddLogCommandParser`, `AddLogDescriptor` and `model`.
 
-![](images/AddLogSequenceDiagram.png)
+![AddLogSequenceDiagram](images/AddLogSequenceDiagram.png)
 
 #### Design considerations
 
