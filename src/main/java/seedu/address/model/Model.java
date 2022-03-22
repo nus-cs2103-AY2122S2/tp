@@ -61,6 +61,11 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns true if the name is taken by some player.
+     */
+    boolean hasPersonName(Name targetName);
+
+    /**
      * Returns true if the Jersey number specified by {@code person} is already taken.
      */
     boolean hasJerseyNumber(Person person);
@@ -74,6 +79,11 @@ public interface Model {
      * Returns true if number of players has reached maximum capacity.
      */
     boolean isFull();
+
+    /**
+     * Returns the person with the given name.
+     */
+    Person getPerson(Name targetName);
 
     /**
      * Deletes the given person.
