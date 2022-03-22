@@ -27,13 +27,15 @@ public class DeleteCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_validIndexUnfilteredList_success() {
+    public void execute_validIndexUnfilteredPersonList_success() {
+        showPerson(model);
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_ENTRY_SUCCESS, personToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        showPerson(expectedModel);
         expectedModel.deletePerson(personToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -48,7 +50,8 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_validIndexFilteredList_success() {
+    public void execute_validIndexFilteredPersonList_success() {
+        showPerson(model);
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
@@ -57,6 +60,7 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_ENTRY_SUCCESS, personToDelete);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        showPerson(expectedModel);
         expectedModel.deletePerson(personToDelete);
         showNoPerson(expectedModel);
 
@@ -64,7 +68,8 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexFilteredList_throwsCommandException() {
+    public void execute_invalidIndexFilteredPersonList_throwsCommandException() {
+        showPerson(model);
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
@@ -105,5 +110,23 @@ public class DeleteCommandTest {
         model.updateFilteredPersonList(p -> false);
 
         assertTrue(model.getFilteredPersonList().isEmpty());
+    }
+
+    private void showPerson(Model model) {
+        model.updateFilteredCompanyList(p -> false);
+        model.updateFilteredEventList(p -> false);
+        model.updateFilteredPersonList(p -> true);
+    }
+
+    private void showEvent(Model model) {
+        model.updateFilteredCompanyList(p -> false);
+        model.updateFilteredEventList(p -> true);
+        model.updateFilteredPersonList(p -> false);
+    }
+
+    private void showCompany(Model model) {
+        model.updateFilteredCompanyList(p -> true);
+        model.updateFilteredEventList(p -> false);
+        model.updateFilteredPersonList(p -> false);
     }
 }

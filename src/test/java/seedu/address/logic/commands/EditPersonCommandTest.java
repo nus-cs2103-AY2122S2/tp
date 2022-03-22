@@ -14,6 +14,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
@@ -32,7 +33,13 @@ import seedu.address.testutil.PersonBuilder;
  */
 public class EditPersonCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model;
+
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        showPerson(model);
+    }
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -43,6 +50,7 @@ public class EditPersonCommandTest {
         String expectedMessage = String.format(EditPersonCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        showPerson(expectedModel);
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editPersonCommand, model, expectedMessage, expectedModel);
@@ -64,6 +72,7 @@ public class EditPersonCommandTest {
         String expectedMessage = String.format(EditPersonCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        showPerson(expectedModel);
         expectedModel.setPerson(lastPerson, editedPerson);
 
         assertCommandSuccess(editPersonCommand, model, expectedMessage, expectedModel);
@@ -77,6 +86,7 @@ public class EditPersonCommandTest {
         String expectedMessage = String.format(EditPersonCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        showPerson(expectedModel);
 
         assertCommandSuccess(editPersonCommand, model, expectedMessage, expectedModel);
     }
@@ -93,6 +103,7 @@ public class EditPersonCommandTest {
         String expectedMessage = String.format(EditPersonCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        showPerson(expectedModel);
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editPersonCommand, model, expectedMessage, expectedModel);
@@ -168,6 +179,12 @@ public class EditPersonCommandTest {
 
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(new EditPersonCommand(INDEX_FIRST_PERSON, DESC_BOB)));
+    }
+
+    private void showPerson(Model model) {
+        model.updateFilteredCompanyList(p -> false);
+        model.updateFilteredEventList(p -> false);
+        model.updateFilteredPersonList(p -> true);
     }
 
 }
