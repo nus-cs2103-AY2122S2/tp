@@ -11,6 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.ibook.commons.core.GuiSettings;
 import seedu.ibook.commons.core.LogsCenter;
+import seedu.ibook.model.exceptions.AtLatestStateException;
+import seedu.ibook.model.exceptions.AtOldestStateException;
 import seedu.ibook.model.product.Product;
 
 /**
@@ -19,7 +21,7 @@ import seedu.ibook.model.product.Product;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final IBook iBook;
+    private final ReversibleIBook reversibleIBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Product> filteredProducts;
 
@@ -31,9 +33,9 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with ibook: " + iBook + " and user prefs " + userPrefs);
 
-        this.iBook = new IBook(iBook);
+        this.reversibleIBook = new ReversibleIBook(iBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredProducts = new FilteredList<>(this.iBook.getProductList());
+        filteredProducts = new FilteredList<>(this.reversibleIBook.getProductList());
     }
 
     public ModelManager() {
@@ -79,36 +81,46 @@ public class ModelManager implements Model {
 
     @Override
     public void setIBook(ReadOnlyIBook iBook) {
-        this.iBook.resetData(iBook);
+        this.reversibleIBook.resetData(iBook);
     }
 
     @Override
     public ReadOnlyIBook getIBook() {
-        return iBook;
+        return this.reversibleIBook;
     }
 
     @Override
     public boolean hasProduct(Product product) {
         requireNonNull(product);
-        return iBook.hasProduct(product);
+        return reversibleIBook.hasProduct(product);
     }
 
     @Override
     public void deleteProduct(Product target) {
-        iBook.removeProduct(target);
+        reversibleIBook.removeProduct(target);
     }
 
     @Override
     public void addProduct(Product product) {
-        iBook.addProduct(product);
+        reversibleIBook.addProduct(product);
         updateFilteredProductList(PREDICATE_SHOW_ALL_PRODUCTS);
     }
 
     @Override
-    public void setProduct(Product target, Product editedProduct) {
-        requireAllNonNull(target, editedProduct);
+    public void setProduct(Product target, Product updatedProduct) {
+        requireAllNonNull(target, updatedProduct);
+        
+        reversibleIBook.setProduct(target, updatedProduct);
+    }
 
-        iBook.setProduct(target, editedProduct);
+    @Override
+    public void undoIBook() throws AtOldestStateException {
+        reversibleIBook.toPreviousState();
+    }
+
+    @Override
+    public void redoIBook() throws AtLatestStateException {
+        reversibleIBook.toNextState();
     }
 
     //=========== Filtered Product List Accessors =============================================================
@@ -142,7 +154,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return iBook.equals(other.iBook)
+        return reversibleIBook.equals(other.reversibleIBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredProducts.equals(other.filteredProducts);
     }

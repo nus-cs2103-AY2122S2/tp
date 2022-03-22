@@ -5,6 +5,8 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.ibook.commons.core.GuiSettings;
+import seedu.ibook.model.exceptions.AtLatestStateException;
+import seedu.ibook.model.exceptions.AtOldestStateException;
 import seedu.ibook.model.product.Product;
 
 /**
@@ -84,4 +86,14 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredProductList(Predicate<Product> predicate);
+
+    /**
+     * Reverts the iBook to one state older.
+     */
+    void undoIBook() throws AtOldestStateException;
+
+    /**
+     * Restores the iBook to one state newer.
+     */
+    void redoIBook() throws AtLatestStateException;
 }
