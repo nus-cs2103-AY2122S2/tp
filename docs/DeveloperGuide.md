@@ -195,6 +195,20 @@ By making use of the enumeration `TeamAction`, this command decides its executio
 
 Similar logic required by the command after (e.g. `model#setPerson`) regardless of the path taken will hence have a single implementation, reducing the risks of have 2 out-of-sync commands.
 
+### Filtering feature
+
+#### Implementation
+`FilterSkillCommand` is a command which is responsible for one command word: `filter`.
+This command is used to display a list of people who has the skill specified in the command argument.
+
+![FilterSkillCommand](images/FilterSkillCommandClassDiagram.png)
+
+#### Execution
+
+Below is a sequence diagram showing the execution path when this command is entered. 
+
+![FilterSkillCommand](images/FilterSkillSequenceDiagram.png)
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation

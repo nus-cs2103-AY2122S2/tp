@@ -1,0 +1,83 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FilterSkillCommandParser" as FilterSkillCommandParser LOGIC_COLOR
+participant "f:FilterSkillCommand" as FilterSkillCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":PersonContainsSkillPredicate" as PersonContainsSkillPredicate MODEL_COLOR
+participant ":Skill" as Skill MODEL_COLOR
+end box
+
+[-> LogicManager : execute("filter java")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("filter java")
+activate AddressBookParser
+
+create FilterSkillCommandParser
+AddressBookParser -> FilterSkillCommandParser
+activate FilterSkillCommandParser
+
+FilterSkillCommandParser --> AddressBookParser
+deactivate FilterSkillCommandParser
+
+AddressBookParser -> FilterSkillCommandParser : parse("java")
+activate FilterSkillCommandParser
+
+create Skill
+FilterSkillCommandParser -> Skill : new Skill("java")
+activate Skill
+Skill -> FilterSkillCommandParser : s
+deactivate Skill
+
+create PersonContainsSkillPredicate
+FilterSkillCommandParser -> PersonContainsSkillPredicate : new PersonContainsSkillPredicate(s)
+activate PersonContainsSkillPredicate
+PersonContainsSkillPredicate -> FilterSkillCommandParser : p
+deactivate PersonContainsSkillPredicate
+
+create FilterSkillCommand
+FilterSkillCommandParser -> FilterSkillCommand : new FilterSkillCommand(p)
+activate FilterSkillCommand
+
+FilterSkillCommand --> FilterSkillCommandParser : f
+deactivate FilterSkillCommand
+
+FilterSkillCommandParser --> AddressBookParser : f
+deactivate FilterSkillCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FilterSkillCommandParser -[hidden]-> AddressBookParser
+destroy FilterSkillCommandParser
+
+AddressBookParser --> LogicManager : f
+deactivate AddressBookParser
+
+LogicManager -> FilterSkillCommand : execute()
+activate FilterSkillCommand
+
+FilterSkillCommand -> Model : updateDisplayPersonList(p)
+activate Model
+
+Model --> FilterSkillCommand
+deactivate Model
+
+create CommandResult
+FilterSkillCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FilterSkillCommand
+deactivate CommandResult
+
+FilterSkillCommand --> LogicManager : result
+deactivate FilterSkillCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

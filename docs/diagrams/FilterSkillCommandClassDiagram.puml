@@ -1,0 +1,22 @@
+@startuml
+
+class Skill{
+skillName : String
+skillProficiency : int
+isSameSkill(skill : Skill) : boolean
+}
+class PersonContainsSkillPredicate
+class FilterSkillCommand{
+    execute(Model model)
+}
+class FilterSkillCommandParser{
+    parse(String args)
+}
+
+
+FilterSkillCommandParser --> "1    " FilterSkillCommand
+FilterSkillCommandParser --> Skill
+PersonContainsSkillPredicate --> "1 " Skill
+FilterSkillCommand  --> "1 " PersonContainsSkillPredicate
+
+@enduml
