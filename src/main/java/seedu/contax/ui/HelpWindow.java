@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 
 public class HelpWindow extends UiPart<Stage> {
     private static final String FXML = "HelpWindow.fxml";
+    private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final Paint HEADER_COLOR = Paint.valueOf("#383838");
     private static final Paint CELL_COLOR = Paint.valueOf("#555555");
 
@@ -72,7 +73,7 @@ public class HelpWindow extends UiPart<Stage> {
      * </ul>
      */
     public void show() {
-
+        logger.fine("Showing help page about the application.");
         getRoot().show();
         getRoot().centerOnScreen();
 
