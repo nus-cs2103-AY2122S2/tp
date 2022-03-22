@@ -20,7 +20,7 @@ activate AddressBookParser LOGIC_COLOR
 create ManualCommandParser
 AddressBookParser -> ManualCommandParser
 activate ManualCommandParser LOGIC_COLOR
-ManualCommandParser -> AddressBookParser
+ManualCommandParser --> AddressBookParser
 deactivate ManualCommandParser
 
 AddressBookParser -> ManualCommandParser: parse(arguments)
