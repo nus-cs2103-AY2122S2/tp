@@ -206,8 +206,8 @@ The `mark` command marks a specific undone task as done for a particular student
 
 9. In `ParserUtil#parseStudentId(Index index)`, the supplied argument will be trimmed using `String#trim()`.
 10. `Index#isValidId(Index index)` will then be invoked, which checks if the trimmed argument is valid (according to the Regex supplied). If the argument is valid, a new `Index` object will be created and returned to the `MarkCommandParser`. If the argument is not valid, a `ParseException` will be thrown.
-11. The `MarkCommandParser` will create a new `MarkCommand` object using the `StudentId` and `Index` created in Step 7 and 10 repectively.
-12. The `LogicManager` will then call `MarkCommand#execute(Model model).
+11. The `MarkCommandParser` will create a new `MarkCommand` object using the `StudentId` and `Index` created in Step 7 and 10 respectively.
+12. The `LogicManager` will then call `MarkCommand#execute(Model model)`.
 13. The `MarkCommand` will call `model.markTaskOfPerson(Student studentId, Index index)`, which marks the task (corresponding to the supplied index) of the given student as done.
     <div markdown="span" class="alert alert-info">:information_source:
     **Note:** A CommandException will be thrown if the supplied index or studentId is invalid, or if the task is already marked as completed.
@@ -225,20 +225,45 @@ The following sequence diagrams shows how the mark command works:
 
 #### Description
 
-Marks a specific done task as undone for a particular student.
+The `unmark` command marks a specific done task as undone for a particular student. Since all the fields are compulsory during the execution of the `unmark` command, the user's input is being parsed in `AddressBookParser`. After which, a new `UnmarkCommand` object will be created, and is executed by the `LogicManager`.
 
 #### Implementation
-1. The `LogicManager` starts to parse the given input text using `AddressBookParser`.
+1. Upon receiving the user input, the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
 2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
-3. The remaining input text will be passed to the `UnmarkCommandParser` to parse.
-4. The `UnmarkCommandParser` will tokenize the remaining input text using the `ArgumentTokenizer` into an `ArgumentMultiMap`.
-5. The `UnmarkCommandParser` will then create a new `StudentId` and `Index` using the `ArgumentMultiMap`.
-6. The `UnmarkCommandParser` will then create a `UnmarkCommand` with the `StudentId` and `Index`.
-7. The `LogicManager` will call the `execute` method of `UnmarkCommand`.
-8. The `UnmarkCommand` will then call the `unmarkTaskOfPerson` method of the provided `Model` with its `StudentId` and `Index`
-9. The `UnmarkCommand` will finally create a new `CommandResult` which will be returned to `LogicManager`
+3. Since the first word in the user input matches the word "unmark", `AddressBookParser#parseCommand(arguments)` will be called. In this case, the arguments refer to the remaining input text after the exclusion of the command word "unmark".
+4. In the `AddressBookParser#parseCommand(arguments)`, the arguments will be tokenized into a `ArgumentMultiMap`, by `using ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
+    <div markdown="span" class="alert alert-info">:information_source:
+    **Note:** A ParseException will be thrown if the prefix of the compulsory fields are missing or if the arguments are invalid.
+    </div>
+
+5. The `UnmarkCommandParser` will pass the studentId input (found in the `ArgumentMultiMap`) into `ParserUtil#parseStudentId(String studentId)`.
+    <div markdown="span" class="alert alert-info">:information_source:
+    **Note:** A NullException will be thrown if the supplied string argument is null.
+    </div>
+
+6. In `ParserUtil#parseStudentId(String studentId)`, the supplied argument will be trimmed using `String#trim()`.
+7. `StudentId#isValidId(String studentId)` will then be invoked, which checks if the trimmed argument is valid (according to the Regex supplied). If the argument is valid, a new `StudentId` object will be created and returned to the `UnmarkCommandParser`. If the argument is not valid, a `ParseException` will be thrown.
+8. The `UnmarkCommandParser` will pass the index input (found in the `ArgumentMultiMap`) into `ParserUtil#parseIndex(Index index)`.
+    <div markdown="span" class="alert alert-info">:information_source:
+    **Note:** A NullException will be thrown if the supplied string argument is null.
+    </div>
+
+9. In `ParserUtil#parseStudentId(Index index)`, the supplied argument will be trimmed using `String#trim()`.
+10. `Index#isValidId(Index index)` will then be invoked, which checks if the trimmed argument is valid (according to the Regex supplied). If the argument is valid, a new `Index` object will be created and returned to the `UnmarkCommandParser`. If the argument is not valid, a `ParseException` will be thrown.
+11. The `UnmarkCommandParser` will create a new `UnmarkCommand` object using the `StudentId` and `Index` created in Step 7 and 10 respectively.
+12. The `LogicManager` will then call `UnmarkCommand#execute(Model model)`.
+13. The `UnmarkCommand` will call `model.unmarkTaskOfPerson(Student studentId, Index index)`, which marks the task (corresponding to the supplied index) of the given student as undone.
+    <div markdown="span" class="alert alert-info">:information_source:
+    **Note:** A CommandException will be thrown if the supplied index or studentId is invalid, or if the task is already marked as not complete.
+    </div>
+
+14. Lastly, the `UnmarkCommand` will create a new `CommandResult`, which will be returned to `LogicManager`
+
+The following sequence diagrams shows how the unmark command works:
 
 ![UnmarkCommandSequenceDiagram](images/UnmarkCommandSequenceDiagram-1.png)
+
+![UnmarkCommandSequenceDiagram](images/UnmarkCommandSequenceDiagram-2.png)
 
 ### \[Proposed\] Undo/redo feature
 
