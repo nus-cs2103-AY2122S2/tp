@@ -84,6 +84,11 @@ public interface Model {
     void deletePersonFromLineup(Person player, Lineup lineup);
 
     /**
+     * Refreshes the model.
+     */
+    void refresh();
+
+    /**
      * Returns true if the person is inside the lineup.
      */
     boolean isPersonInLineup(Person person, Lineup lineup);

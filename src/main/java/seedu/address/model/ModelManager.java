@@ -129,16 +129,19 @@ public class ModelManager implements Model {
     public void deletePersonFromLineup(Person person, Lineup lineup) {
         lineup.removePlayer(person);
         person.removeFromLineup(lineup);
+        addressBook.refresh();
     }
 
     @Override
     public void addLineup(Lineup toAdd) {
         addressBook.addLineup(toAdd);
+        addressBook.refresh();
     }
 
     @Override
     public void deleteLineup(Lineup lineup) {
         addressBook.deleteLineup(lineup);
+        addressBook.refresh();
     }
 
     @Override
@@ -158,6 +161,14 @@ public class ModelManager implements Model {
     public boolean isFull() {
         /* to be changed to AB3 */
         return addressBook.isFull();
+    }
+
+    /**
+     * Refreshes the model to display the change in GUI.
+     */
+    @Override
+    public void refresh() {
+        addressBook.refresh();
     }
 
     @Override
