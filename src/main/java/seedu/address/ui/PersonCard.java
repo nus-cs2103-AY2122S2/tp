@@ -79,6 +79,13 @@ public class PersonCard extends UiPart<Region> {
         String covidStatus = status.toLowerCase().trim();
         String color;
 
+        final String baseStyle = ("-fx-background-color: %s; "
+                + "-fx-background-radius: 15px; "
+                + "-fx-border-radius: 15px; "
+                + "-fx-border-color: white; "
+                + "-fx-max-width: 100px; "
+                + "-fx-max-height: 50px;");
+
         switch(covidStatus) {
         case "positive":
             color = "RED";
@@ -97,12 +104,7 @@ public class PersonCard extends UiPart<Region> {
             assert false : covidStatus;
         }
 
-        String style = String.format("-fx-background-color: %s; "
-                + "-fx-background-radius: 15px; "
-                + "-fx-border-radius: 15px; "
-                + "-fx-border-color: white; "
-                + "-fx-max-width: 100px; "
-                + "-fx-max-height: 50px;", color);
+        String style = String.format(baseStyle, color);
 
         covidStatusPane.setStyle(style);
     }
