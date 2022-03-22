@@ -69,9 +69,21 @@ public interface Model {
 
     boolean hasLineupName(LineupName targetName);
 
+    void deleteLineup(Lineup lineup);
+
     void putPersonIntoLineup(Person player, Lineup lineup);
 
     void setLineup(Lineup target, Lineup editedLineup);
+
+    /**
+     * Delete a player from the lineup.
+     */
+    void deletePersonFromLineup(Person player, Lineup lineup);
+
+    /**
+     * Returns true if the person is inside the lineup.
+     */
+    boolean isPersonInLineup(Person person, Lineup lineup);
 
     /**
      * Returns true if the Jersey number specified by {@code person} is already taken.

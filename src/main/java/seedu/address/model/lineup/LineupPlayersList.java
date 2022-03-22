@@ -39,6 +39,10 @@ public class LineupPlayersList {
         }
     }
 
+    public boolean hasPlayer(Person player) {
+        return playersList.contains(player);
+    }
+
     @Override
     public String toString() {
         return (String) playersList.stream()

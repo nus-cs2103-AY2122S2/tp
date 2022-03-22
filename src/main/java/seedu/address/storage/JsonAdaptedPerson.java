@@ -1,5 +1,6 @@
 package seedu.address.storage;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -10,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.JerseyNumber;
@@ -33,16 +35,21 @@ class JsonAdaptedPerson {
     private final String jerseyNumber;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final String weight;
+    private final List<JsonAdaptedLineupName> lineups = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
+    public JsonAdaptedPerson(@JsonProperty("name") String name,
+                             @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email,
-                             @JsonProperty("height") String height, @JsonProperty("jerseyNumber") String jerseyNumber,
+                             @JsonProperty("height") String height,
+                             @JsonProperty("jerseyNumber") String jerseyNumber,
                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
-                             @JsonProperty("weight") String weight) {
+                             @JsonProperty("lineups") List<JsonAdaptedLineupName> lineups,
+                             @JsonProperty("weight") String weight
+                             ) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -51,6 +58,9 @@ class JsonAdaptedPerson {
         this.weight = weight;
         if (tagged != null) {
             this.tagged.addAll(tagged);
+        }
+        if (lineups != null) {
+            this.lineups.addAll(lineups);
         }
     }
 
@@ -67,6 +77,9 @@ class JsonAdaptedPerson {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        lineups.addAll(source.getLineups().stream()
+                .map(JsonAdaptedLineupName::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -76,8 +89,12 @@ class JsonAdaptedPerson {
      */
     public Person toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
+        final List<LineupName> personLineups = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
+        }
+        for (JsonAdaptedLineupName lineupName : lineups) {
+            personLineups.add(lineupName.toModelType());
         }
 
         if (name == null) {
@@ -133,9 +150,10 @@ class JsonAdaptedPerson {
         final Weight modelWeight = new Weight(weight);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
+        final Set<LineupName> modelLineups = new HashSet<>(personLineups);
 
         return new Person(modelName, modelPhone, modelEmail,
-                modelHeight, modelJerseyNumber, modelTags, modelWeight);
+                modelHeight, modelJerseyNumber, modelTags, modelWeight, modelLineups);
     }
 
 }

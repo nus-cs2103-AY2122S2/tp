@@ -148,6 +148,22 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean isPersonInLineup(Person person, Lineup lineup) {
+        return lineup.hasPlayer(person);
+    }
+
+    @Override
+    public void deletePersonFromLineup(Person person, Lineup lineup) {
+        lineup.removePlayer(person);
+        person.removeFromLineup(lineup);
+    }
+
+    @Override
+    public void deleteLineup(Lineup lineup) {
+        addressBook.deleteLineup(lineup);
+    }
+
+    @Override
     public boolean hasJerseyNumber(Person person) {
         requireNonNull(person);
         /* to be changed to AB3 */
