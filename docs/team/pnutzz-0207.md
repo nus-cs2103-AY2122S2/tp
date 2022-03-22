@@ -9,7 +9,7 @@ UNite is a desktop contact book application designed for university student's, t
 
 Given below are my contributions to the project.
 
-* **New Feature**: to be added soon
+* **New Feature**: GUI for tag related features (listing all tags, add/delete tag etc.)
 
 
 * **New Feature**: to be added soon
@@ -29,7 +29,7 @@ Given below are my contributions to the project.
     * Added documentation for the features `list tag`, `tag`, `detag` and `showTag` [\#25](https://github.com/AY2122S2-CS2103T-W12-2/tp/pull/25)
 
   * Developer Guide:
-    * To be added soon
+    * Added test cases and user stories
 
 
 * **Community**:
