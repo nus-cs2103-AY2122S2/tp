@@ -214,6 +214,99 @@ A helper method `JSONSerializableAddressBook#addMissingTags()` is implemented to
 
 ![AddMissingTags](images/AddMissingTagsSequenceDiagram.png)
 
+### The Appointments Model
+
+This section will describe the implementation of the models used by the appointments subsystem. An overview is shown in the partial class diagram below.
+
+![Appointment Models](images/AppointmentModelClassDiagram.png)
+
+#### The `DisjointAppointmentList` Class
+
+All persistent `Appointment` objects in the system are stored in a `DisjointAppointmentList` object at the lowest level. `DisjointAppointmentList` is a partial implementation of a `List`, supporting only a minimal set of list operations including `add()`, `set()`, `remove()` and `contains()`. It enforces the following constraints upon the `Appointment` objects contained in the list:
+* All `Appointment` objects in the list must not have overlapping periods, that is, for all distinct `Appointment` objects `A1` and `A2` in the list, `A1.startDateTime >= A2.endDateTime` or `A2.startStartTime >= A1.endDateTime`.
+* All `Appointment` objects are chronologically sorted by `startDateTime` within the list.
+
+|<img src="images/DisjointAppointmentListStateAllowed.png" width="550" />|
+| - |
+|<img src="images/DisjointAppointmentListStateDisallowed.png" width="550" />|
+
+
+The no-overlap constraint is enforced at such a low level as a defensive measure so that all higher-level classes that use this class is guaranteed a list of appointments that is consistent with the application constraints (that is to have no overlapping appointments in the schedule). This eliminates the need for higher-level classes to check and possibly recover from an inconsistent list.
+
+While chronological ordering can arguably be enforced in `ModelManager` or even the `UI` component, the decision to implement it at such a low level is due to the fact that `DisjointAppointmentList` is the only class that has direct access to the underlying list of appointments.
+Although manipulation using the public methods can be done, they do not provide index-level manipulation, and are hence less efficient due to the extra `List#indexOf` operation required. The solution of implementing additional index-based operations exists, but would result in highly specialized methods that are only used by the sorting function, unnecessarily complicating the class.
+
+In order to efficiently maintain chronological ordering upon list modification, `DisjointAppointmentList` implements the shifting operation of *Insertion Sort* in the private method `DisjointAppointmentList#shiftAppointmentToPosition(index)`. *Insertion Sort* is **significantly faster** than the default Java list sort function, which uses *Quick Sort*, when only 1 element is out of place. For list modifications, this is always the case, and the implementation will result in better sorting performance. 
+
+|<img src="images/DisjointAppointmentListSortBefore.png" width="550" />|
+| - |
+|<img src="images/DisjointAppointmentListSortAfter.png" width="550" />|
+
+*Merge Sort* is however still used in the initial construction of the `DisjointAppointmentList`, where there is no such guarantee that **only one** `Appointment` object is out of position.
+
+#### The `Schedule` Wrapper Class
+
+The `Schedule` class is a mutable wrapper around an underlying `DisjointAppointmentList` that logically represents a container for `Appointment` objects in the system. A `Schedule` object is contained in the `Model` stored in `MainApp#model`, and serves as the single point of truth for all the `Appointment` models in the Appointment subsystem. Multiple `Schedule` objects may exist concurrently in the system, but should be avoided where possible.
+
+In terms of implementation, `Schedule` simply passes through the methods implemented by the backing `DisjointAppointmentList`. A defensive read-only copy of the underlying `DisjointAppointmentList` can be obtained from `Schedule#getAppointmentList()`.
+
+A call of `Model#addAppointment()` is shown below to illustrate how a call is propagated through the model classes. Note how underlying calls are progressively abstracted from upper levels.
+
+![Appointment Models](images/AppointmentAddSequenceDiagram.png)
+
+#### Defensive `Schedule`
+
+`Schedule` implements the `ReadOnlySchedule` interface, which exposes only the getter method `Schedule#getAppointmentList()` for the underlying `DisjointAppointmentList`. While `ModelManager` maintains a mutable copy of `Schedule`, all other classes accessing `Schedule` through `Model#getSchedule()` use a defensive version of `Schedule` to prevent unintended modifications to the list of `Appointment` objects.
+
+### Appointments Filtering Feature - `appointmentsbetween`
+
+The `Appointment` filtering feature mirrors the system used for `Person`, and is facilitated by `FilteredList` from the JavaFX library. This feature is implemented at the `ModelManager` level, and the related functions are:
+
+* `Model#updateFilteredAppointmentList(Predicate)`
+* `Model#getFilteredAppointmentList()`
+
+The filtering is implemented at the `ModelManager` level because it is the highest common level that can be accessed by both the `Logic` and `UI` components.
+This allows code for filtering to be centralized, while allowing the lower level classes in the `Model` component access to the full unfiltered list of `Appointment` objects.
+
+The sequence diagram below illustrates an example of both `Parser` and `UI` accessing the appointment filtering functionality.
+
+![Appointment Filter](images/AppointmentFilterSequenceDiagram.png)
+
+### Schedule Serialization and Inflation
+
+`Schedule` serialization and inflation is handled by the `Storage` component in a simliar fashion to the serialization and inflation of `AddressBook`. Importantly, because appointments depend on the existence of persons in the `AddressBook`, the `AddressBook` **must** be inflated **before** `Schedule` is inflated.
+Subsequent sections will describe how the dependence on `AddressBook` is handled during the process of serializing and inflating `Schedule`.
+
+#### Serialization of Schedule
+
+Because each schedule stores a reference to a `Person`, serialization does not require special attention for the dependency, since the integrity of the dependency is guaranteed by the `Model` component (through the consistency of its data lists).
+
+#### Inflation of Schedule
+
+This operation is particularly tricky as the dependency requires the data in `AddressBook` to be inflated correctly before `Schedule` can be inflated. This is handled in the `MainApp#initModelManager()` method, in which the implementation guarantees that `AddressBook` must be inflated first. The sequence diagram below shows this process and how `AddressBook` is propagated inwards.
+
+![Appointment Filter](images/ScheduleInflationSequenceDiagram.png)
+
+#### Schedule Data as a Separate JSON File
+
+The data for `Schedule`, containing multiple `Appointment` objects is stored in a file separate from `AddressBook`. This is a conscious decision after considering the usability requirement that the JSON data file should be user-editable. Clustering both AddressBook and Schedule data into a single file would have made the JSON file extremely large and cluttered, reducing the ease of editing it manually should the user choose. Separating Schedule and AddressBook allows the user to quickly narrow down the area to edit, making the task slightly easier.
+
+However, this implementation comes with the increased risk of desynchronization between the AddressBook and Schedule data files. This is deemed an acceptable risk, but is also mitigated by validation checks during the inflation process to discard invalid appointment data, ensuring that the application only works with valid appointments.
+
+### Result List Model Type Switching Feature
+
+Due to the fact that the application handles multiple model types, including `Person`, `Appointment` and `Tag`, there is a need for the UI to handle the display of different models and their associated data.
+The approach taken is a "Focus" action that `Command` objects can request in the `CommandResult` they return after execution. The implementation of the focus is shown in the partial class diagram below.
+
+![CommandResult Class Diagram](images/UiFocusClassDiagram.png)
+
+#### Flow of Events
+
+The returned `CommandResult` is then used by `MainWindow` to switch between different result lists, according to the model type being requested. This is done through the `MainWindow#changeListContentType()` method, which implements the actual UI manipulation.
+
+![CommandResult Class Diagram](images/UiFocusSequenceDiagram.png)
+
+
 ### Import and Export CSV Features
 
 This section describes some of the details as to how the import and export CSV features were implemented
@@ -248,7 +341,6 @@ The sequence diagram is as follows:
 ![ExportCsvSequenceDiagram](images/ExportCsvSequenceDiagram.png)
 
 The exported file can be subsequently imported back into any other instance of ContaX, similar to the existing `.json` system of import/export.
-
 
 ### \[Proposed\] Undo/redo feature
 
@@ -333,6 +425,7 @@ _{more aspects and alternatives to be added}_
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
+
 
 --------------------------------------------------------------------------------------------------------------------
 
