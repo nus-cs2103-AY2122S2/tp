@@ -73,6 +73,8 @@ public interface Model {
 
     void putPersonIntoLineup(Person player, Lineup lineup);
 
+    void setLineup(Lineup target, Lineup editedLineup);
+
     /**
      * Delete a player from the lineup.
      */
