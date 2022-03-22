@@ -2,6 +2,8 @@ package seedu.address.model.common;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.model.person.FriendName;
+
 public abstract class Name {
 
     public final String fullName;
@@ -25,4 +27,7 @@ public abstract class Name {
     }
 
 
+    public int compareTo(FriendName name) {
+        return this.fullName.compareTo(name.fullName);
+    }
 }

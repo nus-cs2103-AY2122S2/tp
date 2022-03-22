@@ -84,4 +84,8 @@ public class DateTime {
     public int hashCode() {
         return value.hashCode();
     }
+
+    public int compareTo(DateTime dateTime) {
+        return this.value.compareTo(dateTime.value);
+    }
 }
