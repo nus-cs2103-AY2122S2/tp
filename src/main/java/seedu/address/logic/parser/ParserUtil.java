@@ -10,7 +10,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lineup.LineupName;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.JerseyNumber;
@@ -18,7 +17,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Weight;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.team.TeamName;
 
 
 /**
@@ -80,20 +78,6 @@ public class ParserUtil {
         return new Phone(trimmedPhone);
     }
 
-    /**
-     * Parses a {@code String address} into an {@code Address}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code address} is invalid.
-     */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
-        }
-        return new Address(trimmedAddress);
-    }
 
     /**
      * Parses a {@code String email} into an {@code Email}.
@@ -155,20 +139,6 @@ public class ParserUtil {
         return new JerseyNumber(trimmedJerseyNumber);
     }
 
-    /**
-     * Parses a {@code String teamName} into an {@code TeamName}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException
-     */
-    public static TeamName parseTeamName(String teamName) throws ParseException {
-        requireNonNull(teamName);
-        String trimmedTeamName = teamName.trim();
-        if (!TeamName.isValidTeamName(trimmedTeamName)) {
-            throw new ParseException(TeamName.MESSAGE_CONSTRAINTS);
-        }
-        return new TeamName(trimmedTeamName);
-    }
 
     /**
      * Parses a {@code String LineupName} into an {@code LineupName}.

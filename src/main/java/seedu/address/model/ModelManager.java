@@ -22,38 +22,17 @@ import seedu.address.model.person.Person;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    /* to be deleted */
-    private final MyGm myGm;
-
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
-     */
-    public ModelManager(MyGm myGm, ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(myGm, addressBook, userPrefs);
-
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
-
-        /* to be deleted */
-        this.myGm = myGm;
-
-        this.addressBook = new AddressBook(addressBook);
-        this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-    }
-
-    /**
-     * Constructs a model manager.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
-
-        /* to be deleted */
-        this.myGm = new MyGm();
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
@@ -61,16 +40,10 @@ public class ModelManager implements Model {
     }
 
     public ModelManager() {
-        this(new MyGm(), new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
-
-    /* to be deleted */
-    @Override
-    public MyGm getMyGm() {
-        return this.myGm;
-    }
 
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
@@ -231,25 +204,6 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
-    }
-
-    /**
-     * Functions for MyGM
-     */
-    /* to be deleted */
-    @Override
-    public boolean hasPersonInMyGM(Name targetName) {
-        return true; //myGm.hasPerson(targetName);
-    }
-
-    @Override
-    public void setPersonInMyGM(Person target, Person editedPerson) {
-        myGm.setPerson(target, editedPerson);
-    }
-
-    @Override
-    public Person getPersonFromMyGM(Name targetPersonName) {
-        return myGm.getPerson(targetPersonName);
     }
 
     @Override
