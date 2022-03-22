@@ -79,28 +79,28 @@ public class OnboardingStoryManager {
                 OnboardingStory.PositionOption.RESULT_DISPLAY_TOP,
                 OnboardingStory.HighlightOption.COMMAND_BOX, 1,
                 "null123null123null", ((model, commandBox) -> {
-            if (commandBox.getText().length() > 0) {
-                Command command = null;
-                try {
-                    command = parser.parseCommand(commandBox.getText());
-                } catch (ParseException e) {
-                    return INVALID_COMMAND;
-                }
+                            if (commandBox.getText().length() > 0) {
+                                Command command = null;
+                                try {
+                                    command = parser.parseCommand(commandBox.getText());
+                                } catch (ParseException e) {
+                                    return INVALID_COMMAND;
+                                }
 
-                if (!(command instanceof AddCommand)) {
-                    return "Please use a add command";
-                }
+                                if (!(command instanceof AddCommand)) {
+                                    return "Please use a add command";
+                                }
 
-                try {
-                    command.execute(model);
-                } catch (CommandException e) {
-                    if (e.getMessage().equals(AddCommand.MESSAGE_DUPLICATE_PERSON)) {
-                        return "Person name already exists! Add someone else";
-                    }
-                }
-            }
-            return null;
-        }), null, true));
+                                try {
+                                    command.execute(model);
+                                } catch (CommandException e) {
+                                    if (e.getMessage().equals(AddCommand.MESSAGE_DUPLICATE_PERSON)) {
+                                        return "Person name already exists! Add someone else";
+                                    }
+                                }
+                            }
+                            return null;
+                        }), null, true));
 
         test.addStory(new OnboardingStep(
                 "Great! %s is now added into the system!" + CLICK_CONTINUE,
