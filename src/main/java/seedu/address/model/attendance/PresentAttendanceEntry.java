@@ -1,14 +1,12 @@
 package seedu.address.model.attendance;
 
-import static java.util.Objects.requireNonNull;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Optional;
 
 /**
  * Represents a present attendance entry of a pet.
- *  * Guarantees: immutable; entry is valid.
+ * * Guarantees: immutable; entry is valid.
  */
 public class PresentAttendanceEntry extends AttendanceEntry {
     public static final String MESSAGE_TIME_CONSTRAINTS = "The pick-up time should be before the drop-off time!";
@@ -19,8 +17,9 @@ public class PresentAttendanceEntry extends AttendanceEntry {
 
     /**
      * Constructs a {@code PresentAttendanceEntry}.
-     * @param entryDate A valid date.
-     * @param pickUpTime A valid pick up time.
+     *
+     * @param entryDate   A valid date.
+     * @param pickUpTime  A valid pick up time.
      * @param dropOffTime A valid drop off time.
      */
     public PresentAttendanceEntry(LocalDate entryDate, LocalTime pickUpTime, LocalTime dropOffTime) {
@@ -70,9 +69,9 @@ public class PresentAttendanceEntry extends AttendanceEntry {
         }
 
         PresentAttendanceEntry otherAttendanceEntry = (PresentAttendanceEntry) other;
-        return super.getAttendanceDate().equals(otherAttendanceEntry.getAttendanceDate()) &&
-                isPresent.equals(otherAttendanceEntry.isPresent) &&
-                getPickUpTime().equals(otherAttendanceEntry.getPickUpTime()) &&
-                getDropOffTime().equals(otherAttendanceEntry.getDropOffTime()); // state checks
+        return super.getAttendanceDate().equals(otherAttendanceEntry.getAttendanceDate())
+            && isPresent.equals(otherAttendanceEntry.isPresent)
+            && getPickUpTime().equals(otherAttendanceEntry.getPickUpTime())
+            && getDropOffTime().equals(otherAttendanceEntry.getDropOffTime()); // state checks
     }
 }

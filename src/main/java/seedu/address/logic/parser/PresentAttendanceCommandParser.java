@@ -8,8 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DROPOFF;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PICKUP;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.PresentAttendanceCommand;
@@ -81,8 +79,8 @@ public class PresentAttendanceCommandParser implements Parser<PresentAttendanceC
      * @return true if only one of the time arguments are present, false otherwise.
      */
     private boolean onlyOneTimePresent(ArgumentMultimap argumentMultimap) {
-        return argumentMultimap.getValue(PREFIX_PICKUP).isPresent() ^
-                argumentMultimap.getValue(PREFIX_DROPOFF).isPresent(); // exclusive OR
+        return argumentMultimap.getValue(PREFIX_PICKUP).isPresent()
+            ^ argumentMultimap.getValue(PREFIX_DROPOFF).isPresent(); // exclusive OR
     }
 }
 

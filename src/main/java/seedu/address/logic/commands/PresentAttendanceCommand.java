@@ -82,7 +82,7 @@ public class PresentAttendanceCommand extends Command {
                     attendanceDateString));
         }
 
-        if(!presentAttendance.isValidTimings()) {
+        if (!presentAttendance.isValidTimings()) {
             throw new CommandException(PresentAttendanceEntry.MESSAGE_TIME_CONSTRAINTS);
         }
 

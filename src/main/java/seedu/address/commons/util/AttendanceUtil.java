@@ -8,7 +8,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import seedu.address.model.attendance.AttendanceEntry;
 import seedu.address.model.attendance.MissingAttendanceEntry;
@@ -22,9 +21,9 @@ public class AttendanceUtil {
     public static final String ATTENDANCE_DATE_GUI_FORMAT = "dd/MM";
     public static final String ATTENDANCE_DATE_FORMAT = "dd-MM-yyyy";
     public static final DateTimeFormatter ATTENDANCE_DATE_GUI_FORMATTER =
-            DateTimeFormatter.ofPattern(ATTENDANCE_DATE_GUI_FORMAT);
+        DateTimeFormatter.ofPattern(ATTENDANCE_DATE_GUI_FORMAT);
     public static final DateTimeFormatter ATTENDANCE_DATE_FORMATTER =
-            DateTimeFormatter.ofPattern(ATTENDANCE_DATE_FORMAT);
+        DateTimeFormatter.ofPattern(ATTENDANCE_DATE_FORMAT);
 
     public static boolean isValidIsPresentString(String isPresent) {
         return isPresent.equals("true") || isPresent.equals("false");
@@ -33,6 +32,7 @@ public class AttendanceUtil {
     /**
      * Converts a date string found in {@link JsonAdaptedAttendance} into a
      * {@code LocalDate} object.
+     *
      * @param jsonDate the time string to be converted.
      * @return a LocalDate object.
      * @throws DateTimeParseException if the time string is invalid.
@@ -44,6 +44,7 @@ public class AttendanceUtil {
     /**
      * Converts a time string found in {@link JsonAdaptedAttendance} into a
      * {@code LocalTime} object.
+     *
      * @param jsonTime the date string to be converted.
      * @return a LocalTime object.
      * @throws DateTimeParseException if the date string is invalid.
@@ -60,6 +61,7 @@ public class AttendanceUtil {
      * Creates and returns a list of attendance entries for the past week,
      * starting from six days ago (inclusive) to the current date (inclusive).
      * If no attendance has been marked on a particular date, a missing attendance entry is added.
+     *
      * @param attendanceHashMap the attendance hash map of the pet.
      * @return a list of attendance entries for the past week.
      */
