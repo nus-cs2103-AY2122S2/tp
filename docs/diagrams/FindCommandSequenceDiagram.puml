@@ -35,7 +35,7 @@ activate FindCommandParser LOGIC_COLOR
 FindCommandParser -> ArgumentTokenizer ++ LOGIC_COLOR: tokenize(argsString, prefixes)
 ArgumentTokenizer --> FindCommandParser -- LOGIC_COLOR: argMultimap
 
-ref over FindCommandParser: Parsing each field
+ref over FindCommandParser: Parsing inputted field
 
 create Predicate
 FindCommandParser -> Predicate
@@ -82,7 +82,7 @@ participant "name:Name" as Name MODEL_COLOR
 participant "moduleCode:ModuleCode" as ModuleCode MODEL_COLOR
 end box
 
-mainframe sd Parsing each field
+mainframe sd Parsing inputted field
 
 alt user inputs studentId
     FindCommandParser -> ParserUtil ++ LOGIC_COLOR: parseStudentId(studentId)
