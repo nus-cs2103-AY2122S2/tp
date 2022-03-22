@@ -80,7 +80,7 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add` [coming in V1.2]
+### Adding a person: `add`
 Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`
@@ -88,7 +88,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`
 Examples:
 * `add n/Kim Lai p/12345678 e/kimlai222@example.com a/KL street, block 123, #01-01`
 
-### Tagging a person: `tag` [coming in V1.2]
+### Tagging a person: `tag`
 Tags additional information to an existing contact.
 
 Format: `tag INDEX [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`
@@ -101,7 +101,7 @@ Format: `tag INDEX [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDU
 Examples:
 * `tag 1 i/abc-company m/CS2100 m/CS2030S` Tags the internship company and 2 modules to the 1st person.
 
-### Listing all persons : `list` [coming in V1.2]
+### Listing all persons : `list`
 Shows a list of all persons in the address book.
 
 Format: `list`
@@ -111,7 +111,7 @@ Format: `list`
 * Personal details are listed in the following order: Phone number, Address, Email
 
 
-### Editing a person : `edit` [coming in V1.2]
+### Editing a person : `edit`
 
 Edits an existing person in the address book.
 
@@ -128,7 +128,7 @@ Examples:
 * `edit 2 m/CS2040s` Clears all module tags of the 2nd person and tag `CS2040s` as a module.
 * `edit 2 edu/ m/` Clears all education and module tags of the 2nd person.
 
-### Locating persons: `find` [coming in v1.2]
+### Locating persons: `find`
 
 Finds persons that match any of the given fields.
 
@@ -162,7 +162,7 @@ Examples:
 * `find -s n/David Li m/cs2040s m/cs2030s` returns `David Li` (i.e. David Li is tagged with cs2040s, cs2030s)<br>
   ![result for 'find -s n/David Li m/cs2040s cs2030s']()
  
-### Deleting a person : `delete` [coming in V1.2]
+### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
 
