@@ -100,15 +100,17 @@ Example:
 
 Allows the user to look up the details of a particular student.
 
-Format: `find n/STUDENT_NAME` (or) `find i/STUDENT_ID`
+Format: `find n/STUDENT_NAME` (or) `find i/STUDENT_ID` (or) `find m/MODULE_CODE`
 
-* The student whose name or student id is specified after the `find` command will appear in the resulting list.
+* The student whose name, student id or module code is specified after the `find` command will appear in the resulting list.
 
 Example:
 * `find n/John`
     * Displays the particulars of the students whose names include John.
 * `find i/AXXXXXXXR`
     * Displays the particulars of the student with student ID AXXXXXXXR.
+* `find m/CS2103T`
+    * Displays the particulars of the student with module code CS2103T. Also works for module codes with varying lengths.
 
 ### Checking all the tasks that a student has: `task`
 
@@ -209,7 +211,7 @@ Example:
 * `assign i/AXXXXXXXR tn/assignment 1`
     * Assigns assignment 1 to student with id AXXXXXXXR.
 * `assign m/CS2103T tn/assignment 1`
-    * Assigns assignment 1 to students taking module CS2103T
+    * Assigns assignment 1 to students taking module CS2103T.
 
 
 ### Displaying manual for a command: `manual`
@@ -259,6 +261,8 @@ Action      | Format, Examples
 **Delete**  | `delete STUDENT_INDEX` (or) `delete i/STUDENT_ID` <br> e.g., `delete 10`, `delete i/AXXXXXXXR`
 **Find**    | `find n/STUDENT_NAME` (or) `find i/STUDENT_ID` <br> e.g., `find n/john`, `find i/AXXXXXXXR`
 **Manual**  | `manual [COMMAND_NAME]` <br> e.g., `manual add`, `manual`
+**Find**    | `find n/STUDENT_NAME` (or) `find i/STUDENT_ID` (or) `find m/MODULE_CODE` <br> e.g., `find n/john`, `find i/AXXXXXXXR`, `find m/CS2103T`
+**Manual**  | `manual COMMAND_NAME` <br> e.g., `manual add`
 **Exit**    | `exit`
 **Task**    | `task i/STUDENT_ID` <br> e.g., `task i/AXXXXXXXR`
 **Mark**    | `mark i/STUDENT_ID idx/UNDONE_TASK_INDEX` <br> e.g., `mark i/AXXXXXXXR idx/1`

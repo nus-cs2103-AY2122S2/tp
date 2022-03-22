@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.Arrays;
@@ -9,6 +10,8 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.ModuleCode;
+import seedu.address.model.person.ModuleCodeContainsKeywordsPredicate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.StudentId;
@@ -29,9 +32,12 @@ public class FindCommandParser implements Parser<FindCommand> {
         FindCommand findCommand;
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID);
-
-        if (arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ID) // user inputted both name and id
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID, PREFIX_MODULE_CODE);
+        // user inputted more than one search term (ie. name, id, or moduleCode)
+        if (arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ID, PREFIX_MODULE_CODE)
+                || arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ID)
+                || arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_MODULE_CODE)
+                || arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_MODULE_CODE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
@@ -44,6 +50,10 @@ public class FindCommandParser implements Parser<FindCommand> {
             StudentId studentId = ParserUtil.parseStudentId(argMultimap.getValue(PREFIX_ID).get());
             String[] idKeywords = studentId.toString().split("\\s+");
             findCommand = new FindCommand(new StudentIdContainsKeywordsPredicate(Arrays.asList(idKeywords)));
+        } else if (arePrefixesPresent(argMultimap, PREFIX_MODULE_CODE)) { // module code was used
+            ModuleCode moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE).get());
+            String[] modCodeKeywords = moduleCode.toString().split("\\s+");
+            findCommand = new FindCommand(new ModuleCodeContainsKeywordsPredicate(Arrays.asList(modCodeKeywords)));
         } else {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }

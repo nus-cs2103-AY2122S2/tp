@@ -154,6 +154,117 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Manual Command
+
+#### Description
+
+The `manual` command displays the format and a short description for a particular command. During the execution of the `manual` command, the user's input is being parsed in `ManualCommandParser`. After which, a new `ManualCommand` object will be created, and is executed by the `LogicManager`.
+
+#### Implementation
+1. Upon receiving the user input, the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
+2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
+3. Since the first word in the user input matches the word "manual", `ManualCommandParser#parse(arguments)` will be called. In this case, the arguments refer to the remaining input text after the exclusion of the command word "manual".
+    <div markdown="span" class="alert alert-info">:information_source:
+    **Note:** A ParseException will be thrown if the argument is invalid.
+    </div>
+
+4. The supplied argument will be trimmed using `String#trim()`.
+5. The `ManualCommandParser` will create a new `ManualCommand` (using the `argument` in Step 4), which will be returned to `LogicManager`.
+6. The `LogicManager` will call `ManualCommand#execute(Model model)`. If the `argument` is invalid, a `CommandException` will be thrown.
+7. Lastly, the `ManualCommand` will create a new `CommandResult` which will be returned to `LogicManager`.
+
+The following sequence diagram shows how the manual command works:
+
+![ManualCommandSequenceDiagram](images/ManualCommandSequenceDiagram.png)
+
+### Mark Command
+
+#### Description
+
+The `mark` command marks a specific undone task as done for a particular student. During the execution of the `mark` command, the user's input is being parsed in `AddressBookParser`. After which, a new `MarkCommand` object will be created, and is executed by the `LogicManager`.
+
+#### Implementation
+1. Upon receiving the user input, the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
+2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
+3. Since the first word in the user input matches the word "mark", `MarkCommandParser#parse(arguments)` will be called. In this case, the arguments refer to the remaining input text after the exclusion of the command word "mark".
+4. In the `AddressBookParser#parseCommand(arguments)`, the arguments will be tokenized into a `ArgumentMultiMap`, by `using ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
+    <div markdown="span" class="alert alert-info">:information_source:
+    **Note:** A ParseException will be thrown if the prefix of the compulsory fields are missing or if the arguments are invalid.
+    </div>
+
+5. The `MarkCommandParser` will pass the studentId input (found in the `ArgumentMultiMap`) into `ParserUtil#parseStudentId(String studentId)`.
+    <div markdown="span" class="alert alert-info">:information_source:
+    **Note:** A NullException will be thrown if the supplied string argument is null.
+    </div>
+
+6. In `ParserUtil#parseStudentId(String studentId)`, the supplied argument will be trimmed using `String#trim()`.
+7. `StudentId#isValidId(String studentId)` will then be invoked, which checks if the trimmed argument is valid (according to the Regex supplied). If the argument is valid, a new `StudentId` object will be created and returned to the `MarkCommandParser`. If the argument is not valid, a `ParseException` will be thrown.
+8. The `MarkCommandParser` will pass the index input (found in the `ArgumentMultiMap`) into `ParserUtil#parseIndex(Index index)`.
+    <div markdown="span" class="alert alert-info">:information_source:
+    **Note:** A NullException will be thrown if the supplied string argument is null.
+    </div>
+
+9. In `ParserUtil#parseStudentId(Index index)`, the supplied argument will be trimmed using `String#trim()`.
+10. `Index#isValidId(Index index)` will then be invoked, which checks if the trimmed argument is valid (according to the Regex supplied). If the argument is valid, a new `Index` object will be created and returned to the `MarkCommandParser`. If the argument is not valid, a `ParseException` will be thrown.
+11. The `MarkCommandParser` will create a new `MarkCommand` object using the `StudentId` and `Index` created in Step 7 and 10 respectively.
+12. The `LogicManager` will then call `MarkCommand#execute(Model model)`.
+13. The `MarkCommand` will call `model#markTaskOfPerson(Student studentId, Index index)`, which marks the task (corresponding to the supplied index) of the given student as done.
+    <div markdown="span" class="alert alert-info">:information_source:
+    **Note:** A CommandException will be thrown if the supplied index or studentId is invalid, or if the task is already marked as completed.
+    </div>
+    
+14. Lastly, the `MarkCommand` will create a new `CommandResult`, which will be returned to `LogicManager`
+
+The following sequence diagrams shows how the mark command works:
+
+![MarkCommandSequenceDiagram](images/MarkCommandSequenceDiagram-1.png)
+
+![MarkCommandSequenceDiagram](images/MarkCommandSequenceDiagram-2.png)
+
+### Unmark Command
+
+#### Description
+
+The `unmark` command marks a specific done task as undone for a particular student. During the execution of the `unmark` command, the user's input is being parsed in `AddressBookParser`. After which, a new `UnmarkCommand` object will be created, and is executed by the `LogicManager`.
+
+#### Implementation
+1. Upon receiving the user input, the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
+2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
+3. Since the first word in the user input matches the word "unmark", `UnmarkCommandParser#parse(arguments)` will be called. In this case, the arguments refer to the remaining input text after the exclusion of the command word "unmark".
+4. In the `AddressBookParser#parseCommand(arguments)`, the arguments will be tokenized into a `ArgumentMultiMap`, by `using ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
+    <div markdown="span" class="alert alert-info">:information_source:
+    **Note:** A ParseException will be thrown if the prefix of the compulsory fields are missing or if the arguments are invalid.
+    </div>
+
+5. The `UnmarkCommandParser` will pass the studentId input (found in the `ArgumentMultiMap`) into `ParserUtil#parseStudentId(String studentId)`.
+    <div markdown="span" class="alert alert-info">:information_source:
+    **Note:** A NullException will be thrown if the supplied string argument is null.
+    </div>
+
+6. In `ParserUtil#parseStudentId(String studentId)`, the supplied argument will be trimmed using `String#trim()`.
+7. `StudentId#isValidId(String studentId)` will then be invoked, which checks if the trimmed argument is valid (according to the Regex supplied). If the argument is valid, a new `StudentId` object will be created and returned to the `UnmarkCommandParser`. If the argument is not valid, a `ParseException` will be thrown.
+8. The `UnmarkCommandParser` will pass the index input (found in the `ArgumentMultiMap`) into `ParserUtil#parseIndex(Index index)`.
+    <div markdown="span" class="alert alert-info">:information_source:
+    **Note:** A NullException will be thrown if the supplied string argument is null.
+    </div>
+
+9. In `ParserUtil#parseStudentId(Index index)`, the supplied argument will be trimmed using `String#trim()`.
+10. `Index#isValidId(Index index)` will then be invoked, which checks if the trimmed argument is valid (according to the Regex supplied). If the argument is valid, a new `Index` object will be created and returned to the `UnmarkCommandParser`. If the argument is not valid, a `ParseException` will be thrown.
+11. The `UnmarkCommandParser` will create a new `UnmarkCommand` object using the `StudentId` and `Index` created in Step 7 and 10 respectively.
+12. The `LogicManager` will then call `UnmarkCommand#execute(Model model)`.
+13. The `UnmarkCommand` will call `model#unmarkTaskOfPerson(Student studentId, Index index)`, which marks the task (corresponding to the supplied index) of the given student as undone.
+    <div markdown="span" class="alert alert-info">:information_source:
+    **Note:** A CommandException will be thrown if the supplied index or studentId is invalid, or if the task is already marked as not complete.
+    </div>
+
+14. Lastly, the `UnmarkCommand` will create a new `CommandResult`, which will be returned to `LogicManager`
+
+The following sequence diagrams shows how the unmark command works:
+
+![UnmarkCommandSequenceDiagram](images/UnmarkCommandSequenceDiagram-1.png)
+
+![UnmarkCommandSequenceDiagram](images/UnmarkCommandSequenceDiagram-2.png)
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -238,6 +349,72 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Add students
+
+#### Description
+
+The `add` command allows users to add a particular student into TAPA. 
+Since not all fields are compulsory during the execution of the `add` command,
+the user's input is being parsed in `AddressBookParser`. After which, a new `AddCommand`
+object will be created, and is executed by the `LogicManager`.
+
+#### Implementation
+
+1. Upon receiving the user input, 
+   the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
+2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
+3. Since the first word in user input matches the word "add", `AddCommandParser#parse(arguments)` will be called.
+   In this case, the arguments refer to the remaining input text after the exclusion of the command word ("add").
+4. In the `AddCommandParser#parse(arguments)`, the arguments will be tokenized into a `ArgumentMultimap`, 
+   by using `ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
+   
+    <div markdown="span" class="alert alert-info">:information_source: 
+    **Note:** A ParseException will be thrown if the prefix of the compulsory fields are missing.
+    </div> 
+
+5. The `AddCommandParser` will pass the studentId input (found in the `ArgumentMultimap`) 
+   into `ParserUtil#parseStudentId(String studentId)`
+   
+   <div markdown="span" class="alert alert-info">:information_source: 
+   **Note:** A NullException will be thrown if the supplied string argument is null.
+    </div> 
+   
+6. In `ParserUtil#parseStudentId(String studentId)`, the supplied argument will be trimmed using `String#trim()`.
+7. `StudentId#isValidId(String studentId)` will then be invoked, 
+   which checks if the trimmed argument is valid (according to the Regex supplied).
+   If the argument is valid, a new `StudentId` object will be created and returned to the `AddCommandParser`.
+   If the argument is not valid, a `ParseException` will be thrown.
+8. Step 5 to 7 will be repeated for the other compulsory fields (name, moduleCode) 
+   and optional fields (phone, telegramHandle, email), by using their respective parse methods in `ParserUtil`.
+   
+
+   ![ParserUtilClassDiagram](images/ParserUtilClassDiagram.png)
+
+
+   <div markdown="span" class="alert alert-info">:information_source: 
+   **Note:** If an optional field is not supplied (i.e. not found in the ArgumentMultimap), 
+   the extra parsing process in steps 5 to 7 will be skipped. 
+   Instead, the respective object will be created and initialized to `null`.
+    </div> 
+
+9. The `AddCommandParser` will create a new `Person`.
+10. A new `AddCommand` will be created (using the `Person` in Step 9) and returned to the `LogicManager`.
+11. The `LogicManager` will then call `AddCommand#execute(Model model)`.
+12. In the `AddCommand`, the `model#hasPerson(Person person)` will be invoked. If the `Person` already exist
+    in TAPA, a `CommandException` will be thrown.
+
+    <div markdown="span" class="alert alert-info">:information_source: 
+    **Note:** In TAPA, two Person are equal only if they have the same studentId.
+    </div> 
+    
+13. The `AddCommand` will call `model.addPerson(Person person)`, which adds the `Person` into the `AddressBook`.
+14. Lastly, the `AddCommand` will create a new `CommandResult`, which will be returned to `LogicManager`.
+
+The following sequence diagram shows how the add operation works:
+
+![AddCommandSequenceDiagram-1](images/AddCommandSequenceDiagram-1.png)
+
+![AddCommandSequenceDiagram-2](images/AddCommandSequenceDiagram-2.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -388,7 +565,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. TAPA shows an error message.
 
       Use case resumes from step 2.
-      
+
 * 3b. The given student id is invalid.
 
     * 3b1. TAPA shows an error message.
