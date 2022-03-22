@@ -1,23 +1,9 @@
-.grid {
-    -fx-background-fill: black, white ;
-    -fx-background-insets: 0, 1 ;
+.button {
+    -fx-background-color: #555555;
+    -fx-text-fill: #FFFFFF;
+     -fx-padding: 10px;
+     -fx-border-color: #555555;
+     -fx-border-radius: 5px;
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
 }
-
-.label-table-header {
-    -fx-font-size: 11pt;
-    -fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: #555555;
-    -fx-opacity: 1;
-    -fx-alignment:  center;
-    -fx-border-color: black;
-}
-
-.label-table-body {
-    -fx-font-size: 11pt;
-    -fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: #000000;
-    -fx-opacity: 1;
-    -fx-alignment:  center;
-    -fx-border-color: black;
-}
-
