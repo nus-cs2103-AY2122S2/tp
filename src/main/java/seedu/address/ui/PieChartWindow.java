@@ -3,6 +3,7 @@ package seedu.address.ui;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
 import javafx.collections.FXCollections;
@@ -11,41 +12,43 @@ import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Faculty;
 
-public class UiSummarisePieChart {
+/**
+ * Controller for a pie chart page
+ */
+public class PieChartWindow extends UiPart<Stage> {
 
-    private String summariseMessage;
+    private static final Logger logger = LogsCenter.getLogger(PieChartWindow.class);
+    private static final String FXML = "PieChartWindow.fxml";
     private ArrayList<String> faculties;
     private ArrayList<Double> positiveStats;
+    private TreeMap<String, Double> positiveStatsByFacultyData;
+    private PieChart pieChart;
+    private VBox pieChartContainer;
+    private Scene pieChartScene;
 
     /**
-     * Constructor for this class
+     * Creates a new PieChartWindow.
      *
-     * @param message Feedback message to user from SummariseCommand
+     * @param root Stage to use as the root of the PieChartWindow.
      */
-    public UiSummarisePieChart(String message) {
-        summariseMessage = message;
-        faculties = parseFacultyName(summariseMessage);
-        positiveStats = parsePositivePercentage(summariseMessage);
+    public PieChartWindow(Stage root) {
+        super(FXML, root);
     }
 
     /**
-     * Show the pie chart to user when the user enters SummariseCommand. The pie chart shows the
-     * percentage of positive cases for each student's faculty present in Tracey. The number of
-     * elements in both array list for faculty and covid positive percentage for each faculty present
-     * in Tracey must be the same.
+     * Creates a new PieChartWindow.
      */
-    public void showPieChartWindow() {
-        int numOfFaculties = faculties.size();
-        int numOfStats = positiveStats.size();
-
-        assert numOfStats == numOfFaculties;
-
-        TreeMap<String, Double> positiveStatsByFacultyData = getPositiveStatsByFacultyData(faculties, positiveStats);
-        PieChart pieChart = makePieChart(positiveStatsByFacultyData);
-        renderPieChartWindow(pieChart);
-
+    public PieChartWindow(String message) {
+        this(new Stage());
+        faculties = parseFacultyName(message);
+        positiveStats = parsePositivePercentage(message);
+        positiveStatsByFacultyData = getPositiveStatsByFacultyData(faculties, positiveStats);
+        pieChart = makePieChart(positiveStatsByFacultyData);
+        pieChartScene = makePieChartScene(pieChart);
+        this.getRoot().setScene(pieChartScene);
     }
 
     /**
@@ -184,16 +187,52 @@ public class UiSummarisePieChart {
     }
 
     /**
-     * Opens a new window and renders the pie chart.
-     *
-     * @param pieChart A pie chart that shows covid positive percentage for each faculty
+     * Creates the scene which contains the pie chart.
+     * @param pieChart
+     * @return Scene containing the pie chart
      */
-    private void renderPieChartWindow(PieChart pieChart) {
-        Stage newWindow = new Stage();
-        VBox vbox = new VBox(pieChart);
-        Scene scene = new Scene(vbox);
-        newWindow.setScene(scene);
-        newWindow.show();
+    private Scene makePieChartScene(PieChart pieChart) {
+        pieChartContainer = new VBox(pieChart);
+        pieChartScene = new Scene(pieChartContainer);
+        return pieChartScene;
+    }
+
+    /**
+     * Shows the pie chart window.
+     * @throws IllegalStateException
+     * <ul>
+     *     <li>
+     *         if this method is called on a thread other than the JavaFX Application Thread.
+     *     </li>
+     *     <li>
+     *         if this method is called during animation or layout processing.
+     *     </li>
+     *     <li>
+     *         if this method is called on the primary stage.
+     *     </li>
+     *     <li>
+     *         if {@code dialogStage} is already showing.
+     *     </li>
+     * </ul>
+     */
+    public void show() {
+        logger.fine("Showing pie chart page about the application.");
+        getRoot().show();
+        getRoot().centerOnScreen();
+    }
+
+    /**
+     * Returns true if the pie chart window is currently being shown.
+     */
+    public boolean isShowing() {
+        return getRoot().isShowing();
+    }
+
+    /**
+     * Hides the pie chart window.
+     */
+    public void hide() {
+        getRoot().hide();
     }
 
 }
