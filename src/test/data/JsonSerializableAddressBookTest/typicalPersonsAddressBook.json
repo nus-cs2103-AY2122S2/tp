@@ -1,7 +1,7 @@
 {
   "_comment": "TAlent Assistant™ save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
   "persons" : [ {
-    "studentId": "E0123456",
+    "studentId": "E0123450",
     "name" : "Alice Pauline",
     "phone" : "94351253",
     "email" : "E0123456@u.nus.edu",
