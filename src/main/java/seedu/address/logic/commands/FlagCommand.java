@@ -17,14 +17,15 @@ import seedu.address.model.person.Person;
  */
 public class FlagCommand extends Command {
 
-    public static final String COMMAND_WORD = "flag";
+    public static final String FLAG_COMMAND_WORD = "flag";
+    public static final String UNFLAG_COMMAND_WORD = "unflag";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
+    public static final String MESSAGE_USAGE = FLAG_COMMAND_WORD + "|" + UNFLAG_COMMAND_WORD
             + ": Flags the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer), FLAG (must be true or false)\n"
-            + "Example: " + COMMAND_WORD + " 1" + " f/true";
+            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Example: " + FLAG_COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_FLAG_PERSON_SUCCESS = "Flagged Person: %1$s";
+    public static final String MESSAGE_FLAG_PERSON_SUCCESS = "Updated flag for Person: %1$s";
 
     private final Index targetIndex;
     private final Flag flag;

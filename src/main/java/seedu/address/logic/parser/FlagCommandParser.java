@@ -14,6 +14,13 @@ import seedu.address.model.person.Flag;
  */
 public class FlagCommandParser implements Parser<FlagCommand> {
 
+    private String commandWord;
+
+    public FlagCommandParser setCommand(String commandWord) {
+        this.commandWord = commandWord;
+        return this;
+    }
+
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
@@ -22,7 +29,7 @@ public class FlagCommandParser implements Parser<FlagCommand> {
     public FlagCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_FLAG);
+                ArgumentTokenizer.tokenize(args);
 
         Index index;
 
@@ -32,12 +39,7 @@ public class FlagCommandParser implements Parser<FlagCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FlagCommand.MESSAGE_USAGE), pe);
         }
 
-        Flag newFlag;
-        if (argMultimap.getValue(PREFIX_FLAG).isPresent()) {
-            newFlag = ParserUtil.parseFlag(argMultimap.getValue(PREFIX_FLAG).get());
-        } else {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FlagCommand.MESSAGE_USAGE));
-        }
+        Flag newFlag = ParserUtil.parseFlag(commandWord);
         return new FlagCommand(index, newFlag);
     }
 
