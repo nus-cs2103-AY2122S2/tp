@@ -26,6 +26,13 @@ public class Assessment implements Entity {
     private final ObservableMap<Student, Grade> attempts;
 
     /**
+     * Minimum fields that must be present and not null.
+     */
+    public Assessment(AssessmentName assessmentName, TaModule module) {
+        this(assessmentName, module, Optional.empty());
+    }
+
+    /**
      * Every field must be present and not null.
      */
     public Assessment(AssessmentName assessmentName, TaModule module, Optional<SimpleName> simpleName) {
@@ -109,14 +116,13 @@ public class Assessment implements Entity {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getSimpleName())
-                .append("; Assessment Name: ")
+        builder.append("Assessment Name: ")
                 .append(getAssessmentName())
-                .append("; Module Code: ")
-                .append(getTaModule());
+                .append("; Module: ")
+                .append(getTaModule().toUniqueRepresentation());
         getSimpleName().ifPresent(simpleName ->
                 builder.append("; Simple name: ")
-                .append(getTaModule()));
+                .append(simpleName));
         return builder.toString();
     }
 
