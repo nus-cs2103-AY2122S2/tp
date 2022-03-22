@@ -2,15 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_JERSEY_NUMBER;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PLAYER;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TEAM;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
+import static seedu.address.logic.parser.CliSyntax.*;
 //import static seedu.address.logic.parser.CliSyntax.PREFIX_LINEUP;
 
 import java.util.Collection;
@@ -21,6 +13,7 @@ import java.util.Set;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Name;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.team.TeamName;
@@ -39,14 +32,28 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_PLAYER, PREFIX_TEAM, PREFIX_NAME, PREFIX_PHONE,
-                        PREFIX_EMAIL, PREFIX_HEIGHT, PREFIX_JERSEY_NUMBER, PREFIX_TAG, PREFIX_WEIGHT);
+                        PREFIX_EMAIL, PREFIX_HEIGHT, PREFIX_JERSEY_NUMBER, PREFIX_TAG, PREFIX_WEIGHT, PREFIX_LINEUP);
 
         Name targetPlayerName;
-        TeamName targetTeamName;
+        LineupName targetLineupName;
+
+        if (argMultimap.getValue(PREFIX_LINEUP).isPresent()) {
+            if (argMultimap.getValue(PREFIX_PLAYER).isPresent()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+            }
+
+            if (!argMultimap.getValue(PREFIX_NAME).isPresent()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+            } else {
+                targetLineupName = ParserUtil.parseLineupName(argMultimap.getValue(PREFIX_LINEUP).get());
+                LineupName editLineupName = ParserUtil.parseLineupName(argMultimap.getValue(PREFIX_NAME).get());
+                return new EditCommand(targetLineupName, editLineupName);
+            }
+        }
 
         try {
             targetPlayerName = ParserUtil.parsePlayer(argMultimap.getValue(PREFIX_PLAYER).get());
-            System.out.println(targetPlayerName);
+            // System.out.println(targetPlayerName);
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
