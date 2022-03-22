@@ -21,6 +21,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.entry.Company;
+import seedu.address.model.entry.Entry;
 import seedu.address.model.entry.Event;
 import seedu.address.model.entry.Name;
 import seedu.address.model.entry.Person;
@@ -143,19 +144,11 @@ public class AddPersonCommandTest {
         }
 
         @Override
-        public ObservableList<Person> getFilteredPersonList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void addCompany(Company company) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
         public boolean hasEvent(Event event) {
             throw new AssertionError("This method should not be called.");
         }
@@ -196,12 +189,32 @@ public class AddPersonCommandTest {
         }
 
         @Override
-        public ObservableList<Company> getFilteredCompanyList() {
+        public void showPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Event> getFilteredEventList() {
+        public void showCompanyList(Predicate<Company> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void showEventList(Predicate<Event> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Person> getFilteredPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Company> getFilteredCompanyList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -211,7 +224,17 @@ public class AddPersonCommandTest {
         }
 
         @Override
+        public ObservableList<Event> getFilteredEventList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredEventList(Predicate<Event> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Entry deleteEntry(int index) {
             throw new AssertionError("This method should not be called.");
         }
     }

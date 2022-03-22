@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.entry.Company;
+import seedu.address.model.entry.Entry;
 import seedu.address.model.entry.Event;
 import seedu.address.model.entry.Name;
 import seedu.address.model.entry.Person;
@@ -22,6 +23,8 @@ public interface Model {
     Predicate<Person> PREDICATE_SHOW_NO_PERSONS = unused -> false;
     Predicate<Company> PREDICATE_SHOW_NO_COMPANIES = unused -> false;
     Predicate<Event> PREDICATE_SHOW_NO_EVENTS = unused -> false;
+
+    static enum ListType { PERSON, COMPANY, EVENT }
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -165,4 +168,24 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredEventList(Predicate<Event> predicate);
+
+    /**
+     * Updates filtered lists to show only the Persons list filtered through the {@code predicate}.
+     */
+    void showPersonList(Predicate<Person> predicate);
+
+    /**
+     * Updates filtered lists to show only the Company list filtered through the {@code predicate}.
+     */
+    void showCompanyList(Predicate<Company> predicate);
+
+    /**
+     * Updates filtered lists to show only the Events list filtered through the {@code predicate}.
+     */
+    void showEventList(Predicate<Event> predicate);
+
+    /**
+     * Deletes the entry at the index of the currently displayed list and returns it.
+     */
+    Entry deleteEntry(int index);
 }

@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.entry.Company;
+import seedu.address.model.entry.Entry;
 import seedu.address.model.entry.Event;
 import seedu.address.model.entry.Name;
 import seedu.address.model.entry.Person;
@@ -27,6 +28,7 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Company> filteredCompanies;
     private final FilteredList<Event> filteredEvents;
+    private ListType currentlyDisplayedListType;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -41,6 +43,8 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredCompanies = new FilteredList<>(this.addressBook.getCompanyList());
         filteredEvents = new FilteredList<>(this.addressBook.getEventList());
+
+        currentlyDisplayedListType = ListType.PERSON;
 
         // Don't allow deleting/finding/editing on the companies or events list at the beginning
         filteredCompanies.setPredicate(PREDICATE_SHOW_NO_COMPANIES);
@@ -161,6 +165,71 @@ public class ModelManager implements Model {
         addressBook.setCompany(target, editedCompany);
     }
 
+    //=========== General Filtered List Modifiers ============================================================
+
+    /**
+     * Updates each of the filtered lists with the given predicate.
+     * @param personPredicate The predicate to apply to the Person list.
+     * @param companyPredicate The predicate to apply to the Company list.
+     * @param eventPredicate The predicate to apply to the Event list.
+     */
+    private void updateFilteredLists(Predicate<Person> personPredicate, Predicate<Company> companyPredicate,
+                                    Predicate<Event> eventPredicate) {
+        updateFilteredPersonList(personPredicate);
+        updateFilteredCompanyList(companyPredicate);
+        updateFilteredEventList(eventPredicate);
+    }
+
+    @Override
+    public void showPersonList(Predicate<Person> predicate) {
+        updateFilteredLists(predicate, PREDICATE_SHOW_NO_COMPANIES, PREDICATE_SHOW_NO_EVENTS);
+        currentlyDisplayedListType = ListType.PERSON;
+    }
+
+    @Override
+    public void showCompanyList(Predicate<Company> predicate) {
+        updateFilteredLists(PREDICATE_SHOW_NO_PERSONS, predicate, PREDICATE_SHOW_NO_EVENTS);
+        currentlyDisplayedListType = ListType.COMPANY;
+    }
+
+    @Override
+    public void showEventList(Predicate<Event> predicate) {
+        updateFilteredLists(PREDICATE_SHOW_NO_PERSONS, PREDICATE_SHOW_NO_COMPANIES, predicate);
+        currentlyDisplayedListType = ListType.EVENT;
+    }
+
+    @Override
+    public Entry deleteEntry(int index) {
+        switch (currentlyDisplayedListType) {
+        case PERSON:
+            if (index >= filteredPersons.size()) {
+                return null;
+            }
+
+            Person personToDelete = filteredPersons.get(index);
+            deletePerson(personToDelete);
+            return personToDelete;
+        case COMPANY:
+            if (index >= filteredCompanies.size()) {
+                return null;
+            }
+
+            Company companyToDelete = filteredCompanies.get(index);
+            deleteCompany(companyToDelete);
+            return companyToDelete;
+        case EVENT:
+            if (index >= filteredEvents.size()) {
+                return null;
+            }
+
+            Event eventToDelete = filteredEvents.get(index);
+            deleteEvent(eventToDelete);
+            return eventToDelete;
+        default:
+            return null;
+        }
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -196,7 +265,6 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredCompanies.setPredicate(predicate);
     }
-
 
     @Override
     public boolean equals(Object obj) {
