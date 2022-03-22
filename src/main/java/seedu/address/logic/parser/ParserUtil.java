@@ -30,7 +30,6 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX_MULTIPLE = "All indexes must be unique"
                 + " and a non-zero unsigned integer.";
     public static final String INVALID_TAGTYPE = "The tag type is invalid!";
-    public static final String INVLAID_FIELD_TYPE = "The single field type is invalid!";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
