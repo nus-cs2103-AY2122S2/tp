@@ -104,6 +104,20 @@ public class FilterCommand extends Command {
 
             // state check
             FilterDescriptor f = (FilterDescriptor) other;
+            if (faculty == null) {
+                if (f.faculty != null) {
+                    return false;
+                } else if (status == null) {
+                    return f.status == null;
+                } else {
+                    return status.equals(f.status);
+                }
+            }
+
+            if (status == null) {
+                return f.status == null;
+            }
+
             return faculty.equals(f.faculty)
                     && status.equals(f.status);
         }
