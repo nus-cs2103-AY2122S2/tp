@@ -20,6 +20,7 @@ public class LabList implements Iterable<Lab> {
     private final ObservableList<Lab> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
+    //Comparator to sort the list by lab number
     private final Comparator<Lab> sortByLabNumber = new Comparator<>() {
         @Override
         public int compare(Lab l1, Lab l2) {
@@ -82,9 +83,11 @@ public class LabList implements Iterable<Lab> {
      */
     public void add(Lab toAdd) throws DuplicateLabException {
         requireNonNull(toAdd);
+
         if (contains(toAdd)) {
             throw new DuplicateLabException();
         }
+
         internalList.add(toAdd);
         internalList.sort(sortByLabNumber);
     }
@@ -114,13 +117,17 @@ public class LabList implements Iterable<Lab> {
      * The Lab must exist in the list.
      * Maintains sorted by lab number invariant.
      *
-     * @param toRemove The Lab to remove from the list.
+     * @param toRemove The Lab to remove from the list. (has to have the same labNumber and labStatus
+     *                 as the lab you are trying to remove from the list)
      */
     public void remove(Lab toRemove) throws LabNotFoundException {
         requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
+
+        if (!internalList.contains(toRemove)) {
             throw new LabNotFoundException(toRemove.labNumber);
         }
+
+        remove(Index.fromZeroBased(internalList.indexOf(toRemove)));
         internalList.sort(sortByLabNumber);
     }
 
