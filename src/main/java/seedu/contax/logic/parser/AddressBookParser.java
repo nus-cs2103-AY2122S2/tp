@@ -6,30 +6,7 @@ import static seedu.contax.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.contax.logic.commands.AddAppointmentCommand;
-import seedu.contax.logic.commands.AddCommand;
-import seedu.contax.logic.commands.AddTagCommand;
-import seedu.contax.logic.commands.AppointmentsBetweenCommand;
-import seedu.contax.logic.commands.BatchCommand;
-import seedu.contax.logic.commands.ChainCommand;
-import seedu.contax.logic.commands.ClearCommand;
-import seedu.contax.logic.commands.Command;
-import seedu.contax.logic.commands.DeleteAppointmentCommand;
-import seedu.contax.logic.commands.DeleteCommand;
-import seedu.contax.logic.commands.DeleteTagCommand;
-import seedu.contax.logic.commands.EditAppointmentCommand;
-import seedu.contax.logic.commands.EditCommand;
-import seedu.contax.logic.commands.EditTagCommand;
-import seedu.contax.logic.commands.ExitCommand;
-import seedu.contax.logic.commands.ExportCsvCommand;
-import seedu.contax.logic.commands.FindByTagCommand;
-import seedu.contax.logic.commands.FindCommand;
-import seedu.contax.logic.commands.HelpCommand;
-import seedu.contax.logic.commands.ImportCsvCommand;
-import seedu.contax.logic.commands.ListAppointmentCommand;
-import seedu.contax.logic.commands.ListCommand;
-import seedu.contax.logic.commands.ListTagCommand;
-import seedu.contax.logic.commands.RangeCommand;
+import seedu.contax.logic.commands.*;
 import seedu.contax.logic.parser.exceptions.ParseException;
 
 /**
@@ -126,6 +103,9 @@ public class AddressBookParser {
         case FindByTagCommand.COMMAND_WORD:
             return new FindByTagCommandParser().parse(arguments);
 
+        case FindAppointmentCommand.COMMAND_WORD:
+            return new FindAppointmentParser().parse(arguments);
+
         // Command chaining
         case ChainCommand.COMMAND_WORD:
             return new ChainCommandParser().parse(arguments);
@@ -133,7 +113,6 @@ public class AddressBookParser {
         // Batch Command
         case BatchCommand.COMMAND_WORD:
             return new BatchCommandParser().parse(arguments);
-
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
