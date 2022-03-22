@@ -12,7 +12,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="Trackermon" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="Trackermon" type="javafx.stage.Stage"
+         xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/address_book_32.png" />
   </icons>
@@ -49,7 +50,8 @@
                 </VBox>
                   <VBox minWidth="500.0" styleClass="pane-without-border" HBox.hgrow="ALWAYS">
                       <children>
-                          <StackPane fx:id="showDetailsPlaceholder" minHeight="200.0" styleClass="pane-without-border" VBox.vgrow="ALWAYS">
+                          <StackPane fx:id="showDetailsPlaceholder" minHeight="200.0" styleClass="pane-without-border"
+                                     VBox.vgrow="ALWAYS">
                             <VBox.margin>
                                 <Insets />
                             </VBox.margin>
@@ -58,13 +60,15 @@
                               </padding>
                           </StackPane>
 
-                          <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100.0" minHeight="100.0" prefHeight="100.0" styleClass="pane-without-border" VBox.vgrow="NEVER">
+                          <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100.0" minHeight="100.0"
+                                     prefHeight="100.0" styleClass="pane-without-border" VBox.vgrow="NEVER">
                               <padding>
                                   <Insets bottom="5.0" top="5.0" />
                               </padding>
                           </StackPane>
 
-                          <StackPane fx:id="commandBoxPlaceholder" maxHeight="50.0" minHeight="50.0" prefHeight="50.0" styleClass="pane-without-border" VBox.vgrow="NEVER">
+                          <StackPane fx:id="commandBoxPlaceholder" maxHeight="50.0" minHeight="50.0"
+                                     prefHeight="50.0" styleClass="pane-without-border" VBox.vgrow="NEVER">
                               <padding>
                                   <Insets bottom="5.0" top="5.0" />
                               </padding>
