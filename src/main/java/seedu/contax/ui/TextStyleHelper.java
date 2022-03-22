@@ -35,11 +35,11 @@ public class TextStyleHelper {
         for (int i = 0; i < text.length(); i++) {
             if (text.charAt(i) == '*') {
                 boolean isLookaheadOneStar = (i + 1 < text.length()) && text.charAt(i + 1) == '*';
-                boolean isLookaheadTwoStar = (i + 2 < text.length()) &&  text.charAt(i + 2) == '*';
+                boolean isLookaheadTwoStar = (i + 2 < text.length()) && text.charAt(i + 2) == '*';
                 if (bold || italic || boldAndItalic) {
                     //Close bold/italic/bold and italic section
-                    resultingList.add(createTextElement(text.substring(start, i), (boldAndItalic || bold)
-                            , boldAndItalic || italic));
+                    resultingList.add(createTextElement(text.substring(start, i), (boldAndItalic || bold),
+                            boldAndItalic || italic));
                     int lookaheadCount = (bold ? 1 : 0) + (boldAndItalic ? 2 : 0);
                     if (italic) {
                         italic = false;
