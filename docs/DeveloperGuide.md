@@ -177,6 +177,19 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Adding Clip feature
+
+The addition of the clip feature is facilitated by the `AddToClipboardCommand`, `AddToClipboardCommandParser`, and `NameExistsPredicate` classes.
+
+`AddToClipboardCommandParser` parses the input to obtain the name of the contact that the user wishes to clip. It then creates a `NameExistsPredicate`, which it passes to a `AddToClipboardCommand`. When `Commmand#execute` is called, `AddToClipboardCommand` uses the `NameExistsPredicate` to filter out exact matches to the given name via the `Model#getFilteredPersonList()` method.
+
+![Clip Command Sequence Diagram](images/ClipCommandSeqMain.PNG)
+![Clip Command Sequence Diagram](images/ClipCommandSeqSD.PNG)
+
+**Aspect: TBD:**
+
+Currently, the user must specify the exact name of the contact they wish to clip. We want to allow the user to specify an index as an alternative.
+
 ### Adding Priority Level feature
 
 The addition of priorities is facilitated by the `Tag` and `Priority` classes. In addition to a `tagName`, the tag now also has a priority level, represented by the `Priority` enum.
