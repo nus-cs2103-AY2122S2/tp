@@ -188,6 +188,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asUnmodifiableObservableList();
     }
 
+    public void refresh() {
+        persons.refresh();
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

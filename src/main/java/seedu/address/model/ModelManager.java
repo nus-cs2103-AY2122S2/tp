@@ -129,16 +129,19 @@ public class ModelManager implements Model {
     public void deletePersonFromLineup(Person person, Lineup lineup) {
         lineup.removePlayer(person);
         person.removeFromLineup(lineup);
+        addressBook.refresh();
     }
 
     @Override
     public void addLineup(Lineup toAdd) {
         addressBook.addLineup(toAdd);
+        addressBook.refresh();
     }
 
     @Override
     public void deleteLineup(Lineup lineup) {
         addressBook.deleteLineup(lineup);
+        addressBook.refresh();
     }
 
     @Override
@@ -164,12 +167,14 @@ public class ModelManager implements Model {
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        addressBook.refresh();
     }
 
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        addressBook.refresh();
     }
 
     @Override
@@ -177,6 +182,7 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
         addressBook.setPerson(target, editedPerson);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        addressBook.refresh();
     }
 
     @Override
@@ -184,6 +190,7 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedLineup);
         addressBook.setLineup(target, editedLineup);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        addressBook.refresh();
     }
 
     @Override
@@ -191,6 +198,7 @@ public class ModelManager implements Model {
         player.addLineupName(lineup);
         addressBook.addPersonToLineup(player, lineup);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        addressBook.refresh();
     }
 
     //=========== Filtered Person List Accessors =============================================================
