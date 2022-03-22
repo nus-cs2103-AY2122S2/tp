@@ -153,7 +153,7 @@ public class AddLogCommand extends ByIndexByNameCommand {
     }
 
     /**
-     * Stores the details of the edited log to edit a person's logs with, as well as the person's
+     * Stores the details of the edited log to add a person's logs with, as well as the person's
      * original details.
      */
     public static class AddLogDescriptor {
