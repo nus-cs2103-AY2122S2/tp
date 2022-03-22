@@ -2,14 +2,30 @@
 !include style.puml
 
 box Logic LOGIC_COLOR_T1
-participant ":ChainCommandParser"  as ChainCommandParser LOGIC_COLOR
-participant ":ChainCommand"  as ChainCommand LOGIC_COLOR
-participant ":Command"  as Command LOGIC_COLOR
-participant ":CommandResult"  as CommandResult LOGIC_COLOR
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ChainCommandParser" as ChainCommandParser LOGIC_COLOR
+participant ":ChainCommand" as ChainCommand LOGIC_COLOR
+participant ":Command" as Command LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
+activate LogicManager
+create ChainCommandParser
+LogicManager -> ChainCommandParser: parseCommand()
+
+activate ChainCommandParser
 create ChainCommand
 ChainCommandParser -> ChainCommand : parse()
+activate ChainCommand
+ChainCommand --> ChainCommandParser
+
+deactivate ChainCommand
+
+ChainCommandParser --> LogicManager
+
+deactivate ChainCommandParser
+LogicManager -> ChainCommand: execute()
+
 loop for all command in commands
     activate ChainCommand
     create Command
@@ -21,5 +37,6 @@ loop for all command in commands
     deactivate CommandResult
     Command --> ChainCommand:
 end
+
 return
 @enduml

@@ -1,6 +1,8 @@
 package seedu.contax.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.contax.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.contax.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -11,12 +13,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.contax.logic.commands.exceptions.CommandException;
+import seedu.contax.logic.parser.ArgumentMultimap;
 import seedu.contax.model.AddressBook;
 import seedu.contax.model.Model;
 import seedu.contax.model.ModelManager;
 import seedu.contax.model.Schedule;
 import seedu.contax.model.UserPrefs;
 import seedu.contax.model.person.Person;
+import seedu.contax.model.util.SearchType;
 import seedu.contax.testutil.EditPersonDescriptorBuilder;
 import seedu.contax.testutil.PersonBuilder;
 
@@ -28,6 +32,30 @@ public class ChainCommandTest {
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new Schedule(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), new Schedule(), new UserPrefs());
+    }
+
+    @Test
+    public void equals() {
+        ChainCommand testChainCommand = new ChainCommand(List.of(new ListPersonCommand()));
+        ChainCommand testChainCommand2 = new ChainCommand(new ArrayList<Command>());
+
+        // same object -> returns true
+        assertTrue(testChainCommand.equals(testChainCommand));
+
+        // same values -> returns true
+
+        ChainCommand expectedChainCommandCopy =
+                new ChainCommand(List.of(new ListPersonCommand()));
+        assertTrue(testChainCommand.equals(expectedChainCommandCopy));
+
+        // different types -> returns false
+        assertFalse(testChainCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(testChainCommand.equals(null));
+
+        // different command -> returns false
+        assertFalse(testChainCommand.equals(testChainCommand2));
     }
 
     @Test

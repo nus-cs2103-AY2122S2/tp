@@ -386,7 +386,7 @@ The exported file can be subsequently imported back into any other instance of C
 ### Enhanced Find Logic
 
 The previous implementation of the find function is limited to only searching the name field. The enhancement to the feature allows users to search for `Person` objects by more attributes, including by the `phone`, `email` and `address` fields.
-This is done by creating a helper `SearchType` model within the `model.util` package and abstracting the original `NameConstrainsKeywordsPreicate` to form `ConstrainsKeywordsPreicate` then create different inherit of three different types of predicate.
+This is done by creating a helper `SearchType` model within the `model.util` package and abstracting the original `NameConstrainsKeywordsPredicate` to form `ConstrainsKeywordsPredicate` then create different inherit of three different types of predicate.
 The sequence diagram is as follows:
 ![Enhanced Find Logic](images/FindCommandSequenceDiagram.png)
 
