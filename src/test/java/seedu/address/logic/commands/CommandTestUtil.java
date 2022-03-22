@@ -72,7 +72,7 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_FACULTY_DESC = " " + PREFIX_FACULTY + "coconut"; // unknown faculty
-    public static final String INVALID_COVID_STATUS_DESC = " " + PREFIX_COVID_STATUS + "coconut"; // unknown covid status
+    public static final String INVALID_COVID_STATUS_DESC = " " + PREFIX_COVID_STATUS + "coconut";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

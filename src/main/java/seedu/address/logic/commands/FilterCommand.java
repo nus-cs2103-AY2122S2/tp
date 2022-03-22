@@ -29,8 +29,6 @@ public class FilterCommand extends Command {
 
     private FilterDescriptor filterDescriptor;
 
-    public FilterDescriptor getDescriptor() {return filterDescriptor;}
-
     /**
      * Constructor for this class to create a FilterCommand object.
      *
