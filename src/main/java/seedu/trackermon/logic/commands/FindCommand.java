@@ -2,12 +2,11 @@ package seedu.trackermon.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.function.Predicate;
+
 import seedu.trackermon.commons.core.Messages;
 import seedu.trackermon.model.Model;
-import seedu.trackermon.model.show.NameContainsKeywordsPredicate;
 import seedu.trackermon.model.show.Show;
-
-import java.util.function.Predicate;
 
 /**
  * Finds and lists all shows in Trackermon whose name contains any of the argument keywords.

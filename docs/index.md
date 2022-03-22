@@ -15,5 +15,6 @@ title: Trackermon
 
 
 **Acknowledgements**
-
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org/)
+* The find feature was adopted from imPoster created by team [AY2021S2-CS2103T-T12-4](https://github.com/AY2021S2-CS2103T-T12-4/tp).
 * Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)

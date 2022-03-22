@@ -124,17 +124,32 @@ Format: `help`
 
 ### Finding a show: `find`
 
-Finds the specified show in Trackermon.
+**General Find**: Finds shows in Trackermon by matching the user's input across all parameters.
 
 Format: `find <KEYWORD>`
-* Finds the show with the specified `<KEYWORD>`.
+* Find shows with the specified `<KEYWORD>`.
 * The keyword refers to the input entered by the user after `find`.
-* The keyword **can be a word or number** such as hero, S1,..
-* If the keyword is a word, it must be complete. 
+* The keyword **can be a word or number** such as hero, S1,...
+* There must be at **least one keyword** and it **must not be empty**.
 
 Examples:
-* `find` followed by `attack` displays all the shows in the list that contain the keyword `attack`.
-* `find attack` followed by `delete 1` removes 1st show in results of `find` command.
+* `find shingeki` displays all the shows in the list that contain the keyword `shingeki`.
+[put image here after ui update]
+
+**Narrow Find** Finds shows in Trackermon by matching the user's input across specific parameters using prefixes.
+
+Format: `find n/[NAME] s/[STATUS] t/[TAG]`
+* **Within a single prefix**, the find command will execute an **OR** search across Trackermon's show list and return all shows that match either keywords that are input by the user.
+* **Across multiple prefixes**, the find command will execute an **AND** search across Trackermon's show list and return all shows that match all keywords.
+
+Examples:
+* `find n/shingeki s/watching t/seinen` displays all the shows in the Trackermon's show list that contain **shingeki** in NAME, **watching** in STATUS, and **seinen** in TAG.
+* `find n/Shutter Island s/watching` displays all the shows in the Trackermon's show list that contain **Shutter OR Island** in NAME, and **watching** in STATUS.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Find is case-insensitive, and the order in which the keywords are entered is irrelevant. Partial words **will** be matched as well. e.g., `shing` will match `shingeki`.
+</div>
+
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
