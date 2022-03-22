@@ -234,6 +234,36 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
+
+### \[Proposed\] Enhanced Add Profile Feature 
+
+In the original add profile feature in the AB3 address book, all the profiles are being stored in the `AddressBook`.
+
+Within it, it contains two class, i) `UniquePersonList` that keep tracks of the person in the addressbook, and 
+ii) `UniqueTagList` that keep tracks of the `Tag` in the address book.
+
+In the original AB3 address book, each profile is modelled by one `Person` object, which
+consist of various attributes such as `Name`, `Phone`, `Address`, `Email` and `Tag`. Here shows a 
+diagram of a class diagram of the profiles in the AB3 Address Book. 
+
+![AddProfileOldClassDiagram](images/AddProfileOldClassDiagram.png)
+
+In UNite, the profiling of each `Person` object is being enhanced and modified in order to fits the needs of our target users
+(ie university professors, teaching assistants and students). More classes are added to be associated to the `Person` class, 
+this includes `Major` class, `MatricCard` class and `Telegram` class. The updated class diagram for UNite can be found below.
+
+![AddProfileNewClassDiagram](images/AddProfileNewClassDiagram.png)
+
+Consider the following commands. 
+
+`add n/junjieteoh p/88888888 e/teohjj@comp.nus.edu.sg a/1234, Kong Ling Road t/friends m/A1234567B`
+
+This is a sample of the `Person` object diagram. 
+
+![AddProfileSampleObjectDiagram](images/AddProfileSampleObjectDiagram.png)
+
+
+
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_

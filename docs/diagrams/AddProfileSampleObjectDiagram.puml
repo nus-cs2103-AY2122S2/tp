@@ -1,0 +1,26 @@
+@startuml
+'https://plantuml.com/object-diagram
+
+object Person
+object Name
+object Phone
+object Address
+object Email
+object MatricCard
+object Tag
+
+Name : fullname = "junjieteoh"
+Phone : value = 88888888
+Email : value = "teohjj@comp.nus.edu.sg"
+Address : value = "1234, Kong Ling Road"
+Tag : tagName = "friends"
+MatricCard : value = A1234567B
+
+Person -up- Name
+Person -up- Phone
+Person -down-  Email
+Person -left- Address
+Person -down- MatricCard
+Person -right- Tag
+
+@enduml
