@@ -68,6 +68,7 @@ public class SkillSet {
      * @param additionalSkill skillSet to be added
      */
     public void addAll(SkillSet additionalSkill) {
+        removeSkillSet(additionalSkill);
         Set<Skill> toAdd = additionalSkill.getSkillSet();
         skillSet.addAll(toAdd);
     }
@@ -77,13 +78,48 @@ public class SkillSet {
      * @param additionalSkill Skill to be added
      */
     public void add(Skill additionalSkill) {
+        removeSkill(additionalSkill);
         skillSet.add(additionalSkill);
     }
 
     /**
-     * Returns an immutable skill set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
+     * Remove SkillSet if present in current SkillSet
+     * @param skillSetRemove SkillSet to remove
      */
+    public void removeSkillSet(SkillSet skillSetRemove) {
+        for (Skill s : skillSetRemove.getSkillSet()) {
+            removeSkill(s);
+        }
+    }
+
+    /**
+     * Remove Skill if present in current SkillSet
+     * @param skill SkillSet to remove
+     */
+    public void removeSkill(Skill skill) {
+        Skill toRemove = getSkill(skill);
+        if (toRemove == null) {
+            return;
+        }
+        this.skillSet.remove(toRemove);
+    }
+
+    /**
+     * Get the skill with provided Skill in SkillSet
+     * @param skillToGet skill to get from SkillSet
+     * @return Skill in SkillSet
+     */
+    public Skill getSkill(Skill skillToGet) {
+        if (!this.hasSkill(skillToGet)) {
+            for (Skill s : skillSet) {
+                if (skillToGet.isSameSkill(s)) {
+                    return s;
+                }
+            }
+        }
+        return null;
+    }
+
     public Set<Skill> getSkillSet() {
         return skillSet;
     }
@@ -110,7 +146,7 @@ public class SkillSet {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof SkillSet // instanceof handles nulls
-                && skillSet.equals(((SkillSet) other).getSkillSet())); // state check
+                && this.skillSet.equals(((SkillSet) other).getSkillSet())); // state check
     }
 
 }
