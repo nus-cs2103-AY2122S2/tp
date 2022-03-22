@@ -44,7 +44,7 @@ public class AddLabCommand extends Command {
 
         model.addLab(toAdd);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.labNumber));
     }
 
     @Override
