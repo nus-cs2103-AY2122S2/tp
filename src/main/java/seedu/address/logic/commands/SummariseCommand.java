@@ -28,12 +28,12 @@ public class SummariseCommand extends Command {
 
     public static final String MESSAGE_SUMMARISE_PERSON_FAILURE = "Unable to summarise \n";
 
-    private static final String FACULTY_SUMMARY_FORM = "\nIn %s with %d student(s),\n"
+    private static final String FACULTY_SUMMARY_FORM = "\nIn %s faculty with %d student(s),\n"
             + "Covid Positive: %d student(s)\n"
             + "Covid Negative: %d student(s)\n"
             + "Health Risk Notice: %d student(s)\n"
             + "%.2f percent of student(s) here are suffering...\n";
-    private static final String BLOCK_SUMMARY_FORM = "\nIn block %s with %d student(s),\n"
+    private static final String BLOCK_SUMMARY_FORM = "\nIn %s block with %d student(s),\n"
             + "Covid Positive: %d student(s)\n"
             + "Covid Negative: %d student(s)\n"
             + "Health Risk Notice: %d student(s)\n"

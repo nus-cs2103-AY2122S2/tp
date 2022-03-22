@@ -63,6 +63,34 @@ public class UiSummarisePieChart {
     }
 
     /**
+     * Parse the output message from SummariseCommand and gets the list of student's faculty in Tracey.
+     *
+     * @param message Feedback message to user from SummariseCommand
+     * @return Array list containing student's faculty present in Tracey
+     */
+    private ArrayList<String> parseFacultyName2(String message) {
+        ArrayList<String> arrayList2 = new ArrayList<>();
+        String[] splitMessage2 = message.split("In ");
+        Stream.of(splitMessage2).filter(string -> string.contains("faculty")).forEach(string -> arrayList2.add(string));
+        System.out.println(arrayList2.get(0));
+        return arrayList2;
+    }
+
+    /**
+     * Parse the output message from SummariseCommand and gets the list of student's faculty in Tracey.
+     *
+     * @param message Feedback message to user from SummariseCommand
+     * @return Array list containing student's faculty present in Tracey
+     */
+    private ArrayList<String> parseBlockLetter(String message) {
+        ArrayList<String> arrayList2 = new ArrayList<>();
+        String[] splitMessage2 = message.split("In ");
+        Stream.of(splitMessage2).filter(string -> string.contains("block")).forEach(string -> arrayList2.add(string));
+        System.out.println(arrayList2.get(0));
+        return arrayList2;
+    }
+
+    /**
      * Parse the output message from SummariseCommand and gets the list of covid positive percentage from each
      * faculty present in Tracey.
      *
@@ -101,6 +129,40 @@ public class UiSummarisePieChart {
             treeMap.put(faculties.get(i), positiveStats.get(i));
         }
         return treeMap;
+    }
+
+    /**
+     * Puts the parsed data from the two array lists of faculty and covid positive percentage of faculty present
+     * in Tracey into a treemap for processing of data for the pie chart.
+     *
+     * @param form     Array list containing student's faculty present in Tracey
+     * @return A treemap containing key value a pair of faculty and covid positive percentage.
+     */
+    private TreeMap<String, Double> getPositiveStats(ArrayList<String> form, int i) {
+        TreeMap<String, Double> treeMap = new TreeMap<>();
+        String targetForm = form.get(i);
+        String[] arr = targetForm.split(" ", 2);
+        String categoryName = arr[0];
+        targetForm = arr[1];
+        String[] spiltTargetForm = targetForm.split(System.lineSeparator());
+        for (int j = 0; j < 3; j++) {
+            String[] spiltLine = spiltTargetForm[j].split(": ", 2);
+            String status = spiltLine[0];
+            int numOfStudents = Integer.parseInt(spiltLine[1].substring(0, 1));
+            treeMap.put(status, (double) numOfStudents);
+        }
+
+        return treeMap;
+    }
+    private boolean isInt(String str) {
+        try {
+            @SuppressWarnings("unused")
+            int x = Integer.parseInt(str);
+            return true; //String is an Integer
+        } catch (NumberFormatException e) {
+            return false; //String is not an Integer
+        }
+
     }
 
     /**
