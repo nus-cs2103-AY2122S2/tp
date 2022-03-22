@@ -103,6 +103,11 @@ public class Person {
         this.lineupNames.add(lineup.getLineupName());
     }
 
+    public void replaceLineupName(LineupName oldName, LineupName newName) {
+        this.lineupNames.remove(oldName);
+        this.lineupNames.add(newName);
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.

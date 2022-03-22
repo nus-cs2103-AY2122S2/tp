@@ -184,6 +184,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setLineup(Lineup target, Lineup editedLineup) {
+        requireAllNonNull(target, editedLineup);
+        addressBook.setLineup(target, editedLineup);
+    }
+
+    @Override
     public void putPersonIntoLineup(Person player, Lineup lineup) {
         player.addLineupName(lineup);
         addressBook.addPersonToLineup(player, lineup);

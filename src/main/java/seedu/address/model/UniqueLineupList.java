@@ -62,6 +62,11 @@ public class UniqueLineupList {
         return null;
     }
 
+    public void replaceLineup(Lineup target, Lineup editedLineup) {
+        this.deleteLineupFromList(target);
+        this.addLineupToList(editedLineup);
+    }
+
     /**
      * Puts a player into a Lineup in the UniqueLineupList
      *

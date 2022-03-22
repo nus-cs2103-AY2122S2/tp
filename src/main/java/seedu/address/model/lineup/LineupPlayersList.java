@@ -33,6 +33,12 @@ public class LineupPlayersList {
         playersList.remove(player);
     }
 
+    public void replaceLineup(LineupName oldName, LineupName newName) {
+        for (Person person : playersList) {
+            person.replaceLineupName(oldName, newName);
+        }
+    }
+
     @Override
     public String toString() {
         return (String) playersList.stream()

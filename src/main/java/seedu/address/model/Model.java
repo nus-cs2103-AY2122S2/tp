@@ -71,6 +71,8 @@ public interface Model {
 
     void putPersonIntoLineup(Person player, Lineup lineup);
 
+    void setLineup(Lineup target, Lineup editedLineup);
+
     /**
      * Returns true if the Jersey number specified by {@code person} is already taken.
      */
