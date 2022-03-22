@@ -53,12 +53,12 @@ public class EmailWindow extends UiPart<Stage> {
      * @param personList list of Person objects currently in the PersonList.
      */
     public String parseEmailFromList(ObservableList<Person> personList) {
-        String stringOfEmail = "";
+        String stringOfEmails = "";
         for (Person p : personList) {
             Email personEmail = p.getEmail();
-            stringOfEmail = stringOfEmail + personEmail.toString() + "\n";
+            stringOfEmails = stringOfEmails + personEmail.toString() + "\n";
         }
-        return stringOfEmail;
+        return stringOfEmails;
     }
 
     /**
@@ -112,9 +112,9 @@ public class EmailWindow extends UiPart<Stage> {
     @FXML
     private void copyEmail() {
         final Clipboard clipboard = Clipboard.getSystemClipboard();
-        final ClipboardContent email = new ClipboardContent();
-        email.putString(emailStringForCopy);
-        clipboard.setContent(email);
+        final ClipboardContent copyEmail = new ClipboardContent();
+        copyEmail.putString(emailStringForCopy);
+        clipboard.setContent(copyEmail);
     }
 
 }
