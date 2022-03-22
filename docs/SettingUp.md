@@ -6,6 +6,12 @@ title: Setting up and getting started
 * Table of Contents
 {:toc}
 
+## Note on this setting up guide
+
+This file was relevant for AB3. As AB3 has been evolved into TAPA, this guide is no longer relevant for our project.
+
+Previously, this guide was linked to in the AB3 DG ("Setting up, getting started" section). Now, the link has been
+updated to forward readers of our DG to TAPA's [_UG Quick Start Section_](https://ay2122s2-cs2103t-w09-4.github.io/tp/UserGuide.html#quick-start).
 
 --------------------------------------------------------------------------------------------------------------------
 
