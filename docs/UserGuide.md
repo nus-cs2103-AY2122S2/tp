@@ -26,7 +26,7 @@ TAssist is a **desktop app for managing students and their participation in less
 
    * **`list student`**: Lists all students.
 
-   * **`add student`**`id/E0123456 n/John Doe e/johnd@example.com`: Adds a student named `John Doe` to the TAssist.
+   * **`add student`**`id/E0123456 n/John Doe e/johnd@example.com`: Adds a student named `John Doe` to TAssist.
 
    * **`delete student`**`3`: Deletes the 3rd student shown in the listing of the entity.
 
@@ -46,11 +46,11 @@ TAssist is a **desktop app for managing students and their participation in less
 * Items in square brackets are optional.<br>
   e.g. `n/NAME [t/TELEGRAM_ID]` can be used as `n/John Doe t/john_doe` or as `n/John Doe`.
 
-* Only one item in curly brackets can be chosen.<br>
+* Only one group of arguments in curly braces can be used as argument. Each group is separated by a `|`.<br>
   e.g. `{m/MODULE_INDEX | c/CLASS_GROUP_INDEX}` can be used as `m/1` or as `c/1` but not as `m/1 c/1`.
 
 * If multiple options are accepted for a parameter, only one option can be specified.<br>
-  e.g. `s/all|COMMA_SEPARATED_INDEXES|COMMA_SEPARATED_STUDENT_IDS` can be used as `s/all`, `s/1,2,3,4,5,6` and `s/e0123456,e0234567` but not mix-and-matched as `s/all,1,2,e0123456`.
+  e.g. `s/all|STUDENT_INDEXES|STUDENT_IDS` can be used as `s/all`, `s/1,2,3,4,5,6` and `s/e0123456,e0234567` but not mix-and-matched as `s/all,1,2,e0123456`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME e/EMAIL`, `e/EMAIL n/NAME` is also acceptable.
@@ -124,10 +124,11 @@ Examples:
 
 Enrols 1 or more students to a class group.
 
-Format: `enrol c/CLASS_GROUP_INDEX s/all|COMMA_SEPARATED_INDEXES|COMMA_SEPARATED_STUDENT_IDS`
+Format: `enrol c/CLASS_GROUP_INDEX s/all|STUDENT_INDEXES|STUDENT_IDS`
 
 * Enrols the specified students to the class group at the specified `CLASS_GROUP_INDEX`.
-* Students may be specified with either `all` (i.e. all students), `COMMA_SEPARATED_INDEXES` or `COMMA_SEPARATED_STUDENT_IDS`.
+* Students may be specified with either `all` (i.e. all students), `STUDENT_INDEXES` or `STUDENT_IDS`.
+* Multiple student indexes or IDs can be separated with commas (i.e. `s/1,2,3` or `s/e0123456,e0234567`).
 * The index refers to the index number shown in the displayed student or class group list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
@@ -140,10 +141,11 @@ Examples:
 
 Disenrols 1 or more students from a class group.
 
-Format: `disenrol c/CLASS_GROUP_INDEX s/all|COMMA_SEPARATED_INDEXES|COMMA_SEPARATED_STUDENT_IDS`
+Format: `disenrol c/CLASS_GROUP_INDEX s/all|STUDENT_INDEXES|STUDENT_IDS`
 
 * Disenrols the specified students from the class group at the specified `CLASS_GROUP_INDEX`.
-* Students may be specified with either `all` (i.e. all students), `COMMA_SEPARATED_INDEXES` or `COMMA_SEPARATED_STUDENT_IDS`; they should already be enrolled in the specified class group.
+* Students may be specified with either `all` (i.e. all students), `STUDENT_INDEXES` or `STUDENT_IDS`; they should already be enrolled in the specified class group.
+* Multiple student indexes or IDs can be separated with commas (i.e. `s/1,2,3` or `s/e0123456,e0234567`).
 * The index refers to the index number shown in the displayed student or class group list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
@@ -158,10 +160,11 @@ Examples:
 
 Marks student(s)' attendance(s).
 
-Format: `mark attend c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|COMMA_SEPARATED_INDEXES|COMMA_SEPARATED_STUDENT_IDS`
+Format: `mark attend c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|STUDENT_INDEXES|STUDENT_IDS`
 
 * Marks the attendance(s) of the specified student(s) belonging to the class group at the specified `CLASS_GROUP_INDEX` for the specified week.
-* Students may be specified with either `all` (i.e. all students), `COMMA_SEPARATED_INDEXES` or `COMMA_SEPARATED_STUDENT_IDS`.
+* Students may be specified with either `all` (i.e. all students), `STUDENT_INDEXES` or `STUDENT_IDS`.
+* Multiple student indexes or IDs can be separated with commas (i.e. `s/1,2,3` or `s/e0123456,e0234567`).
 * The index refers to the index number shown in the displayed student or class group list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
@@ -174,10 +177,11 @@ Examples:
 
 Unmarks student(s)' attendance(s).
 
-Format: `unmark attend c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|COMMA_SEPARATED_INDEXES|COMMA_SEPARATED_STUDENT_IDS`
+Format: `unmark attend c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|STUDENT_INDEXES|STUDENT_IDS`
 
 * Unmarks the attendance(s) of the specified student(s) belonging to the class group at the specified `CLASS_GROUP_INDEX` for the specified week.
-* Students may be specified with either `all` (i.e. all students), `COMMA_SEPARATED_INDEXES` or `COMMA_SEPARATED_STUDENT_IDS`.
+* Students may be specified with either `all` (i.e. all students), `STUDENT_INDEXES` or `STUDENT_IDS`.
+* Multiple student indexes or IDs can be separated with commas (i.e. `s/1,2,3` or `s/e0123456,e0234567`).
 * The index refers to the index number shown in the displayed student or class group list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
@@ -190,10 +194,11 @@ Examples:
 
 Grades student's assessment.
 
-Format: `grade {a/ASSESSMENT_INDEX | sn/SIMPLE_NAME m/MODULE_INDEX} s/all|COMMA_SEPARATED_INDEXES|COMMA_SEPARATED_STUDENT_IDS [g/GRADE]`
+Format: `grade {a/ASSESSMENT_INDEX | sn/SIMPLE_NAME m/MODULE_INDEX} s/all|STUDENT_INDEXES|STUDENT_IDS [g/GRADE]`
 
 * The assessment can be specified with either the `ASSESSMENT_INDEX` or the `SIMPLE_NAME` and `MODULE_INDEX`.
-* Students may be specified with either `all` (i.e. all students), `COMMA_SEPARATED_INDEXES` or `COMMA_SEPARATED_STUDENT_IDS`; they should already be enrolled in the module tied to the assessment.
+* Students may be specified with either `all` (i.e. all students), `STUDENT_INDEXES` or `STUDENT_IDS`; they should already be enrolled in the module tied to the assessment.
+* Multiple student indexes or IDs can be separated with commas (i.e. `s/1,2,3` or `s/e0123456,e0234567`).
 * The index refers to the index number shown in the displayed assessment or module list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * If the grade is omitted, the value of the student's attempt will simply be incremented (i.e. `0` will be incremented to `1`).
@@ -223,7 +228,7 @@ Shows a list of all class groups.
 
 Format: `list class`
 
-#### Listing assessments: `list assessment` [coming in v1.3]
+#### Listing all assessments: `list assessment` [coming in v1.3]
 
 Shows a list of all assessments.
 
@@ -321,7 +326,13 @@ Format: `delete assessment INDEX`
 Examples:
 * `list assessment` followed by `delete assessment 2` deletes the 2nd assessment in TAssist.
 
-### Exiting the program : `exit`
+### Clearing all entries: `clear`
+
+Clears all entries from TAssist.
+
+Format: `clear`
+
+### Exiting the program: `exit`
 
 Exits the program.
 
@@ -402,7 +413,7 @@ _Details coming soon ..._
         <td>student(s)</td>
         <td>
             <ul>
-                <li>syntax: <code>enrol c/CLASS_GROUP_INDEX s/all|COMMA_SEPARATED_INDEXES|COMMA_SEPARATED_STUDENT_IDS</code></li>
+                <li>syntax: <code>enrol c/CLASS_GROUP_INDEX s/all|STUDENT_INDEXES|STUDENT_IDS</code></li>
                 <li>e.g., <code>enrol c/1 s/all</code></li>
                 <li>e.g., <code>enrol c/1 s/1,2,3,4,5,6</code></li>
                 <li>e.g., <code>enrol c/1 s/e0123456,e0234567</code></li>
@@ -413,7 +424,7 @@ _Details coming soon ..._
         <td>student(s)</td>
         <td>
             <ul>
-                <li>syntax: <code>disenrol c/CLASS_GROUP_INDEX s/all|COMMA_SEPARATED_INDEXES|COMMA_SEPARATED_STUDENT_IDS</code></li>
+                <li>syntax: <code>disenrol c/CLASS_GROUP_INDEX s/all|STUDENT_INDEXES|STUDENT_IDS</code></li>
                 <li>e.g., <code>disenrol c/1 s/all</code></li>
                 <li>e.g., <code>disenrol c/1 s/1,2,3,4,5,6</code></li>
                 <li>e.g., <code>disenrol c/1 s/e0123456,e0234567</code></li>
@@ -425,13 +436,13 @@ _Details coming soon ..._
         <td>student(s)</td>
         <td>
             <ul>
-                <li>syntax: <code>mark attend c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|COMMA_SEPARATED_INDEXES|COMMA_SEPARATED_STUDENT_IDS</code></li>
+                <li>syntax: <code>mark attend c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|STUDENT_INDEXES|STUDENT_IDS</code></li>
                 <li>e.g., <code>mark attend c/1 w/3 s/all</code></li>
                 <li>e.g., <code>mark attend c/1 w/3 s/1,2,3,4,5,6</code></li>
                 <li>e.g., <code>mark attend c/1 w/3 s/e0123456,e0234567</code></li>
             </ul>
             <ul>
-                <li>syntax: <code>unmark attend c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|COMMA_SEPARATED_INDEXES|COMMA_SEPARATED_STUDENT_IDS</code></li>
+                <li>syntax: <code>unmark attend c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|STUDENT_INDEXES|STUDENT_IDS</code></li>
                 <li>e.g., <code>unmark attend c/1 w/3 s/all</code></li>
                 <li>e.g., <code>unmark attend c/1 w/3 s/1,2,3,4,5,6</code></li>
                 <li>e.g., <code>unmark attend c/1 w/3 s/e0123456,e0234567</code></li>
@@ -443,7 +454,7 @@ _Details coming soon ..._
         <td>assessment</td>
         <td>
             <ul>
-                <li>syntax: <code>grade {a/ASSESSMENT_INDEX | sn/SIMPLE_NAME m/MODULE_INDEX} s/all|COMMA_SEPARATED_INDEXES|COMMA_SEPARATED_STUDENT_IDS [g/GRADE]</code></li>
+                <li>syntax: <code>grade {a/ASSESSMENT_INDEX | sn/SIMPLE_NAME m/MODULE_INDEX} s/all|STUDENT_INDEXES|STUDENT_IDS [g/GRADE]</code></li>
                 <li>e.g., <code>grade sn/lab1 m/1 s/all g/1</code></li>
                 <li>e.g., <code>grade a/1 s/1,2,3,4,5,6</code></li>
                 <li>e.g., <code>grade a/1 s/e0123456,e0234567 g/1</code></li>
@@ -546,6 +557,24 @@ _Details coming soon ..._
             <ul>
                 <li>syntax: <code>delete assessment INDEX</code></li>
                 <li>e.g., <code>delete assessment 2</code></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td rowspan="1">Clearing</td>
+        <td></td>
+        <td>
+            <ul>
+                <li>syntax: <code>clear</code></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td rowspan="1">Exiting</td>
+        <td></td>
+        <td>
+            <ul>
+                <li>syntax: <code>exit</code></li>
             </ul>
         </td>
     </tr>
