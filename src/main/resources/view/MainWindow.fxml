@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="Trackermon" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="600" minWidth="800.0" onCloseRequest="#handleExit" title="Trackermon" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/address_book_32.png" />
   </icons>
@@ -42,7 +42,7 @@
               </padding>
 
               <children>
-                  <VBox fx:id="showList" minWidth="250.0" prefWidth="260.0" styleClass="pane-without-border">
+                  <VBox fx:id="showList" minWidth="260.0" prefWidth="260.0" styleClass="pane-without-border">
                       <padding>
                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                       </padding>
