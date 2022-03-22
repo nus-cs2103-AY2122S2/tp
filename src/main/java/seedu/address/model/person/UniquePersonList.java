@@ -3,10 +3,8 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -105,6 +103,7 @@ public class UniquePersonList implements Iterable<Person> {
         for (Person person : this.internalList) {
             if (person.isInLineup(lineup)) {
                 person.removeFromLineup(lineup);
+                System.out.printf("%s has been removed from lineup %s\n", person.getName(), lineup.getLineupName());
             }
         }
     }

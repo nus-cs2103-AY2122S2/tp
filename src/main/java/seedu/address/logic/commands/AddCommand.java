@@ -34,12 +34,15 @@ public class AddCommand extends Command {
             + PREFIX_JERSEY_NUMBER + "23 "
             + PREFIX_WEIGHT + "80 "
             + PREFIX_TAG + "PG "
-            + PREFIX_TAG + "SG"
-            + "\n"
-            + "Adds a lineup to MyGM. Parameters: "
+            + PREFIX_TAG + "SG";
+    public static final String MESSAGE_USAGE_LINEUP = COMMAND_WORD + ":\nAdds a lineup to MyGM."
+            + "Parameters: "
             + PREFIX_LINEUP + " "
             + PREFIX_NAME + "LINEUP NAME"
-            + "[" + PREFIX_PLAYER + "PLAYER]...";
+            + "[" + PREFIX_PLAYER + "PLAYER]...\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_LINEUP + " "
+            + PREFIX_NAME + "Starting 5";
 
     public static final String MESSAGE_ADD_PERSON_SUCCESS = "New person added: %1$s.";
     public static final String MESSAGE_ADD_LINEUP_SUCCESS = "New lineup added: %1$s.";

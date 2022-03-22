@@ -37,14 +37,18 @@ public class AddCommandParser implements Parser<AddCommand> {
         if (arePrefixesPresent(argMultimap, PREFIX_LINEUP) &&
                 !arePrefixesPresent(argMultimap, PREFIX_PHONE, PREFIX_EMAIL,
                         PREFIX_JERSEY_NUMBER, PREFIX_HEIGHT, PREFIX_WEIGHT)) {
-            LineupName name = ParserUtil.parseLineupName(argMultimap.getValue(PREFIX_NAME).get());
-            Lineup lineup = new Lineup(name);
-            if (arePrefixesPresent(argMultimap, PREFIX_PLAYER)) {
-                // to be added later
-                // need to parse all players and put them into lineup
+            if (!arePrefixesPresent(argMultimap, PREFIX_NAME)) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        AddCommand.MESSAGE_USAGE_LINEUP));
+            } else{
+                LineupName name = ParserUtil.parseLineupName(argMultimap.getValue(PREFIX_NAME).get());
+                Lineup lineup = new Lineup(name);
+                if (arePrefixesPresent(argMultimap, PREFIX_PLAYER)) {
+                    // to be added later
+                    // need to parse all players and put them into lineup
+                }
+                return new AddCommand(lineup);
             }
-            return new AddCommand(lineup);
-
         }
 
         if (!arePrefixesPresent(argMultimap, PREFIX_PLAYER, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
