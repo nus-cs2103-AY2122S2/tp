@@ -2,8 +2,8 @@ package seedu.address.ui;
 
 
 import javafx.scene.control.Label;
-import seedu.address.model.person.exceptions.InvalidLabStatusException;
-import seedu.address.model.person.lab.Lab;
+import seedu.address.model.student.exceptions.InvalidLabStatusException;
+import seedu.address.model.student.lab.Lab;
 
 public class LabLabel extends Label {
 

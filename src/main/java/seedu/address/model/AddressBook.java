@@ -6,18 +6,18 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
-import seedu.address.model.person.MasterLabList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.person.lab.Lab;
+import seedu.address.model.student.MasterLabList;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.UniqueStudentList;
+import seedu.address.model.student.lab.Lab;
 
 /**
  * Wraps all data at the TAddressbook level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicates are not allowed (by .isSameStudent comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniquePersonList students;
+    private final UniqueStudentList students;
 
     private final MasterLabList labs;
 
@@ -29,7 +29,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        students = new UniquePersonList();
+        students = new UniqueStudentList();
     }
 
     public AddressBook() {
@@ -50,8 +50,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Replaces the contents of the Student list with {@code persons}.
      * {@code students} must not contain duplicate Students.
      */
-    public void setPersons(List<Person> students) {
-        this.students.setPersons(students);
+    public void setStudents(List<Student> students) {
+        this.students.setStudents(students);
     }
 
     /**
@@ -68,26 +68,26 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getPersonList());
+        setStudents(newData.getStudentList());
         setLabs(newData.getMasterLabList());
     }
 
-    //// person-level operations
+    //// student-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the TAddressBook.
+     * Returns true if a student with the same identity as {@code student} exists in the TAddressBook.
      */
-    public boolean hasPerson(Person student) {
+    public boolean hasStudent(Student student) {
         requireNonNull(student);
         return students.contains(student);
     }
 
     /**
-     * Adds a person to the TAddressBook.
-     * The person must not already exist in the address book.
+     * Adds a student to the TAddressBook.
+     * The student must not already exist in the address book.
      */
-    public void addPerson(Person p) {
-        students.add(p);
+    public void addStudent(Student s) {
+        students.add(s);
     }
 
     /**
@@ -96,17 +96,17 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The Student identity of {@code editedStudent} must not be the same as
      * another existing Student in the TAddressBook.
      */
-    public void setPerson(Person target, Person editedStudent) {
+    public void setStudent(Student target, Student editedStudent) {
         requireNonNull(editedStudent);
 
-        students.setPerson(target, editedStudent);
+        students.setStudent(target, editedStudent);
     }
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the TAddressBook.
      */
-    public void removePerson(Person key) {
+    public void removeStudent(Student key) {
         students.remove(key);
     }
 
@@ -144,12 +144,12 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public String toString() {
-        return students.asUnmodifiableObservableList().size() + " persons";
+        return students.asUnmodifiableObservableList().size() + " students";
         // TODO: refine later
     }
 
     @Override
-    public ObservableList<Person> getPersonList() {
+    public ObservableList<Student> getStudentList() {
         return students.asUnmodifiableObservableList();
     }
 
