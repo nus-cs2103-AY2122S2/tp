@@ -6,7 +6,16 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.entry.*;
+import seedu.address.model.entry.Address;
+import seedu.address.model.entry.Company;
+import seedu.address.model.entry.Date;
+import seedu.address.model.entry.Email;
+import seedu.address.model.entry.Event;
+import seedu.address.model.entry.Location;
+import seedu.address.model.entry.Name;
+import seedu.address.model.entry.Person;
+import seedu.address.model.entry.Phone;
+import seedu.address.model.entry.Time;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -32,25 +41,25 @@ public class SampleDataUtil {
 
     public static Company[] getSampleCompanies() {
         return new Company[] {
-                new Company(new Name("ABCDE"), new Phone("12345678"), new Email("hr@ABCDE.com"),
-                        new Address("123 Street Singapore"), getTagSet("OA")),
-                new Company(new Name("DBSSS"), new Phone("23859694"), new Email("hr@DBSSS.com"),
-                        new Address("456 Street Singapore"), getTagSet("interview")),
-                new Company(new Name("SGShop"), new Phone("58496034"), new Email("hr@SGShop.com"),
-                        new Address("789 Street Singapore"), getTagSet("applied"))
+            new Company(new Name("ABCDE"), new Phone("12345678"), new Email("hr@ABCDE.com"),
+                    new Address("123 Street Singapore"), getTagSet("OA")),
+            new Company(new Name("DBSSS"), new Phone("23859694"), new Email("hr@DBSSS.com"),
+                    new Address("456 Street Singapore"), getTagSet("interview")),
+            new Company(new Name("SGShop"), new Phone("58496034"), new Email("hr@SGShop.com"),
+                    new Address("789 Street Singapore"), getTagSet("applied"))
         };
     }
 
     public static Event[] getSampleEvents() {
         return new Event[] {
-                new Event(new Name("Interview"), new Name("SGShop"), new Date("16-9-2022"), new Time("13:30"),
-                        new Location("zoom"), getTagSet("technical")),
-                new Event(new Name("Interview"), new Name("DBSSS"), new Date("13-10-2022"), new Time("12:30"),
-                        new Location("zoom"), getTagSet("behavioural")),
-                new Event(new Name("Online Assessment"), new Name("DBSSS"), new Date("23-04-2022"), new Time("14:30"),
-                        new Location("hackerrank"), getTagSet("OOP")),
-                new Event(new Name("Online Assessment"), new Name("SGShop"), new Date("16-05-2022"), new Time("15:30"),
-                        new Location("hackereartch"), getTagSet("datastructure")),
+            new Event(new Name("Interview"), new Name("SGShop"), new Date("16-9-2022"), new Time("13:30"),
+                    new Location("zoom"), getTagSet("technical")),
+            new Event(new Name("Interview"), new Name("DBSSS"), new Date("13-10-2022"), new Time("12:30"),
+                    new Location("zoom"), getTagSet("behavioural")),
+            new Event(new Name("Online Assessment"), new Name("DBSSS"), new Date("23-04-2022"), new Time("14:30"),
+                    new Location("hackerrank"), getTagSet("OOP")),
+            new Event(new Name("Online Assessment"), new Name("SGShop"), new Date("16-05-2022"), new Time("15:30"),
+                    new Location("hackereartch"), getTagSet("datastructure")),
         };
     }
 
