@@ -7,6 +7,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.model.lineup.Lineup;
 import seedu.address.model.lineup.LineupName;
+import seedu.address.model.lineup.UniqueLineupList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
