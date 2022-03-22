@@ -2,7 +2,12 @@ package seedu.address.model;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+
+import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -37,5 +42,35 @@ class MasterLabListTest {
     public void removeLab_labEmpty_throwsLabNotFoundException() {
         MasterLabList ml = new MasterLabList();
         assertThrows(LabNotFoundException.class, () -> ml.removeLab(new Lab("2")));
+    }
+
+    @Test
+    public void getMasterLabList_assertIsCopy_success() {
+        MasterLabList ml = new MasterLabList();
+        ml.add(new Lab("1"));
+        ml.getMasterList().add(new Lab("2"));
+        MasterLabList expectedMasterLabList = new MasterLabList();
+        expectedMasterLabList.add(new Lab("1"));
+        assertEquals(expectedMasterLabList, ml);
+    }
+
+    @Test
+    public void equals_success() {
+        MasterLabList labs1 = new MasterLabList();
+        MasterLabList labs2 = new MasterLabList();
+        List<Lab> labList = Arrays.asList(new Lab("1"), new Lab("2"));
+        labs1.setLabs(labList);
+        labs2.setLabs(labList);
+        assertTrue(labs1.equals(labs2));
+    }
+
+    @Test
+    public void equals_differentLists_failure() {
+        MasterLabList labs1 = new MasterLabList();
+        MasterLabList labs2 = new MasterLabList();
+        List<Lab> labList = Arrays.asList(new Lab("1"), new Lab("2"));
+        labs1.setLabs(labList);
+        labs2.add(new Lab("1"));
+        assertFalse(labs1.equals(labs2));
     }
 }
