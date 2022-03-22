@@ -31,6 +31,7 @@ public class DeleteLogCommandTest {
     private static final String MESSAGE_SUCCESS = DeleteLogCommand.MESSAGE_DELETE_LOG_SUCCESS;
     private static final String MESSAGE_PERSON_NOT_FOUND = DeleteLogCommand.MESSAGE_PERSON_NOT_FOUND;
     private static final String MESSAGE_LOG_NOT_FOUND = DeleteLogCommand.MESSAGE_LOG_NOT_FOUND;
+    private static final String MESSAGE_INVALID_INDEX = DeleteLogCommand.MESSAGE_INVALID_INDEX;
 
     // ===== UNIT TESTS =====
     @Test
@@ -257,7 +258,7 @@ public class DeleteLogCommandTest {
                 Index.fromOneBased(2000), // not in address book
                 null); // no log specified
 
-        assertCommandFailure(command, model, MESSAGE_PERSON_NOT_FOUND);
+        assertCommandFailure(command, model, MESSAGE_INVALID_INDEX);
 
         // ===== EMPTY ADDRESS BOOK =====
         model = new ModelManager();
@@ -266,7 +267,7 @@ public class DeleteLogCommandTest {
                 INDEX_FIRST_PERSON, // first person, but empty address book
                 null); // no log specified
 
-        assertCommandFailure(command, model, MESSAGE_PERSON_NOT_FOUND);
+        assertCommandFailure(command, model, MESSAGE_INVALID_INDEX);
 
     }
 

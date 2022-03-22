@@ -11,14 +11,13 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.DeleteLogCommandParser;
 import seedu.address.model.Model;
 import seedu.address.model.common.Description;
+import seedu.address.model.common.Name;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.FriendName;
@@ -30,7 +29,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Deletes a log from a person in the address book.
  */
-public class DeleteLogCommand extends Command {
+public class DeleteLogCommand extends ByIndexByNameCommand {
 
     public static final String COMMAND_WORD = "deletelog";
 
@@ -45,7 +44,6 @@ public class DeleteLogCommand extends Command {
 
     public static final String MESSAGE_DELETE_LOG_SUCCESS = "Log deleted.";
     public static final String MESSAGE_LOG_NOT_FOUND = "The specified log does not exist!";
-    public static final String MESSAGE_PERSON_NOT_FOUND = Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 
     // data fields
     private final DeleteLogDescriptor descriptor;
@@ -97,7 +95,6 @@ public class DeleteLogCommand extends Command {
 
     }
 
-
     @Override
     public boolean equals(Object other) {
         // short circuit if same object
@@ -129,7 +126,7 @@ public class DeleteLogCommand extends Command {
         private final boolean isForOnePerson;
         private final boolean isForDeletingAllLogs;
         private final Index personIndex;
-        private final Person personWithNameToDeleteLog;
+        private final Name nameToDeleteLog;
         private final Index logIndex;
         private final boolean byName;
 
@@ -141,12 +138,12 @@ public class DeleteLogCommand extends Command {
             this.isForOnePerson = isForOnePerson;
             this.isForDeletingAllLogs = isForDeletingAllLogs;
             this.personIndex = personIndex;
-            this.personWithNameToDeleteLog = isNull(name) ? null : new Person(name);
+            this.nameToDeleteLog = isNull(name) ? null : name;
             this.logIndex = logIndex;
             this.byName = byName;
 
             // sanity checks
-            assert (!(this.personIndex != null && this.personWithNameToDeleteLog != null)); // cannot be overdefined
+            assert (!(this.personIndex != null && this.nameToDeleteLog != null)); // cannot be overdefined
             if (!this.byName) {
                 assert (((logIndex == null
                         || (!isForDeletingAllLogs && isForOnePerson && personIndex != null)))
@@ -155,9 +152,9 @@ public class DeleteLogCommand extends Command {
 
             } else {
                 assert (((logIndex == null
-                        || (!isForDeletingAllLogs && isForOnePerson && personWithNameToDeleteLog != null)))
-                        && ((!isForOnePerson && personWithNameToDeleteLog == null)
-                        || isForOnePerson && personWithNameToDeleteLog != null));
+                        || (!isForDeletingAllLogs && isForOnePerson && nameToDeleteLog != null)))
+                        && ((!isForOnePerson && nameToDeleteLog == null)
+                        || isForOnePerson && nameToDeleteLog != null));
             }
         }
 
@@ -208,46 +205,24 @@ public class DeleteLogCommand extends Command {
         }
 
         private Person getPersonToEdit(Model model) throws CommandException {
-            // todo: can consider implementing model method getByIndexOrName, since repeated
-            // across all functionalities that support both index and name
 
             // sanity checks
-            assert (this.personIndex != null || this.personWithNameToDeleteLog != null);
+            assert (this.personIndex != null || this.nameToDeleteLog != null);
 
             // get person to edit
             Person personToEdit = null;
 
             if (this.byName) {
                 // sanity check
-                requireNonNull(this.personWithNameToDeleteLog);
-
-                // find person with same name
-                List<Person> personsToEdit = model.getAddressBook()
-                        .getPersonList().stream()
-                        .filter(p -> p.hasSameName(this.personWithNameToDeleteLog))
-                        .collect(Collectors.toList());
-
-                // if person not found, throw an error
-                if (personsToEdit.size() < 1) {
-                    throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
-                }
-                assert (personsToEdit.size() == 1);
-                personToEdit = personsToEdit.get(0);
+                requireNonNull(this.nameToDeleteLog);
+                personToEdit = DeleteLogCommand.getPersonByName(model, this.nameToDeleteLog);
 
             } else {
                 // sanity check
                 requireNonNull(this.personIndex);
 
-                // get list of persons from model
-                List<Person> lastShownList = model.getFilteredPersonList();
-
-                // get person and modify
-                if (this.personIndex.getZeroBased() >= lastShownList.size()) {
-                    throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-                }
-                personToEdit = lastShownList.get(this.personIndex.getZeroBased());
+                personToEdit = DeleteLogCommand.getPersonByFilteredIndex(model, this.personIndex);
             }
-
             // another sanity check
             requireNonNull(personToEdit);
             return personToEdit;
@@ -262,7 +237,7 @@ public class DeleteLogCommand extends Command {
 
             // sanity checks
             assert (this.isForDeletingAllLogs && this.isForOnePerson && this.logIndex == null);
-            assert (this.personIndex != null || this.personWithNameToDeleteLog != null);
+            assert (this.personIndex != null || this.nameToDeleteLog != null);
 
             // ===== GET PERSON =====
 
@@ -306,8 +281,8 @@ public class DeleteLogCommand extends Command {
                     && !this.isForDeletingAllLogs
                     && this.logIndex != null);
 
-            assert (!((this.personIndex == null && this.personWithNameToDeleteLog == null)
-                    || (this.personIndex != null && this.personWithNameToDeleteLog != null)));
+            assert (!((this.personIndex == null && this.nameToDeleteLog == null)
+                    || (this.personIndex != null && this.nameToDeleteLog != null)));
 
             // ===== GET PERSON =====
             Person personToEdit = this.getPersonToEdit(model);
@@ -379,7 +354,7 @@ public class DeleteLogCommand extends Command {
             boolean isSameLog = bothNullOrEqual(this.logIndex, d.logIndex);
 
             // person to delete must be same
-            boolean isSamePersonByName = bothNullOrEqual(this.personWithNameToDeleteLog, d.personWithNameToDeleteLog);
+            boolean isSamePersonByName = bothNullOrEqual(this.nameToDeleteLog, d.nameToDeleteLog);
 
             // remaining must be same
             return (isSameLog && isSamePerson && isSamePersonByName
@@ -402,7 +377,7 @@ public class DeleteLogCommand extends Command {
             return "For one person: " + this.isForOnePerson
                     + "\nFor all logs: " + this.isForDeletingAllLogs
                     + "\nBy Name: " + this.byName
-                    + "\nPerson with name: " + this.personWithNameToDeleteLog
+                    + "\nPerson with name: " + this.nameToDeleteLog
                     + "\nPerson index: " + this.personIndex
                     + "\nLog Index: " + this.logIndex;
         }
