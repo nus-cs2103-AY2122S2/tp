@@ -1,0 +1,19 @@
+@startuml
+!include style.puml
+skinparam classBackgroundColor LOGIC_COLOR
+skinparam classAttributeFontColor BackgroundColor
+skinparam classAttributeIconSize 0
+show members
+
+class ParserUtil {
+    +{static} MESSAGE_INVALID_INDEX: String
+    +{static} parseIndex(String oneBasedIndex): Index
+    +{static} parseName(String name): Name
+    +{static} parsePhone(String phone): Phone
+    +{static} parseEmail(String email): Email
+    +{static} parseStudentId(String studentId): StudentId
+    +{static} parseModuleCode(String moduleCode): ModuleCode
+    +{static} parseTelegramHandle(String telegramHandle): TelegramHandle
+    +{static} parseTask(String task): Task
+}
+@enduml

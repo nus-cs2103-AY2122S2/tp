@@ -1,0 +1,144 @@
+@startuml
+!include style.puml
+
+title AddCommand\n
+
+box "Logic" LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddCommandParser" as AddCommandParser LOGIC_COLOR
+participant ":ArgumentTokenizer" as ArgumentTokenizer LOGIC_COLOR
+participant ":AddCommand" as AddCommand LOGIC_COLOR
+participant "commandResult:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box "Model" MODEL_COLOR_T1
+participant "person:Person" as Person MODEL_COLOR
+participant "model:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute
+activate LogicManager LOGIC_COLOR
+
+LogicManager -> AddressBookParser : parseCommand(commandText)
+activate AddressBookParser LOGIC_COLOR
+
+create AddCommandParser
+AddressBookParser -> AddCommandParser
+activate AddCommandParser LOGIC_COLOR
+AddCommandParser --> AddressBookParser
+deactivate AddCommandParser
+
+AddressBookParser -> AddCommandParser : parse(arguments)
+activate AddCommandParser LOGIC_COLOR
+
+AddCommandParser -> ArgumentTokenizer ++ LOGIC_COLOR: tokenize(argsString, prefixes)
+ArgumentTokenizer --> AddCommandParser -- LOGIC_COLOR: argMultimap
+
+ref over AddCommandParser: Parsing each field
+
+create Person
+AddCommandParser -> Person
+activate Person MODEL_COLOR
+Person --> AddCommandParser
+deactivate Person
+
+create AddCommand
+AddCommandParser -> AddCommand
+activate AddCommand LOGIC_COLOR
+AddCommand --> AddCommandParser
+deactivate AddCommand
+
+AddCommandParser --> AddressBookParser -- LOGIC_COLOR: AddCommand
+AddressBookParser --> LogicManager -- LOGIC_COLOR: AddCommand
+
+LogicManager -> AddCommand ++ LOGIC_COLOR: execute(model)
+AddCommand -> Model ++ MODEL_COLOR: hasPerson(person)
+deactivate Model
+AddCommand -> Model ++ MODEL_COLOR: addPerson(person)
+deactivate Model
+
+create CommandResult
+AddCommand -> CommandResult
+activate CommandResult LOGIC_COLOR
+CommandResult --> AddCommand
+deactivate CommandResult
+
+AddCommand --> LogicManager -- LOGIC_COLOR: commandResult
+[<--LogicManager --: commandResult
+deactivate LogicManager
+
+@enduml
+
+@startuml
+!include style.puml
+
+box "Logic" LOGIC_COLOR_T1
+participant ":AddCommandParser" as AddCommandParser LOGIC_COLOR
+participant ":ParserUtil" as ParserUtil LOGIC_COLOR
+end box
+
+box "Model" MODEL_COLOR_T1
+participant "studentId:StudentId" as StudentId MODEL_COLOR
+participant "name:Name" as Name MODEL_COLOR
+participant "moduleCode:ModuleCode" as ModuleCode MODEL_COLOR
+participant "phone:Phone" as Phone MODEL_COLOR
+participant "telegramHandle:TelegramHandle" as TelegramHandle MODEL_COLOR
+participant "email:Email" as Email MODEL_COLOR
+end box
+
+mainframe sd Parsing each field
+AddCommandParser -> ParserUtil ++ LOGIC_COLOR: parseStudentId(studentId)
+create StudentId
+ParserUtil -> StudentId
+activate StudentId MODEL_COLOR
+StudentId --> ParserUtil
+deactivate StudentId
+ParserUtil --> AddCommandParser -- MODEL_COLOR: studentId
+
+AddCommandParser -> ParserUtil ++ LOGIC_COLOR: parseName(name)
+create Name
+ParserUtil -> Name
+activate Name MODEL_COLOR
+Name --> ParserUtil
+deactivate Name
+ParserUtil --> AddCommandParser -- MODEL_COLOR: name
+
+AddCommandParser -> ParserUtil ++ LOGIC_COLOR: parseModuleCode(moduleCode)
+create ModuleCode
+ParserUtil -> ModuleCode
+activate ModuleCode MODEL_COLOR
+ModuleCode --> ParserUtil
+deactivate ModuleCode
+ParserUtil --> AddCommandParser -- LOGIC_COLOR: moduleCode
+
+opt user inputs phone
+    AddCommandParser -> ParserUtil ++ LOGIC_COLOR: parsePhone(phone)
+    create Phone
+    ParserUtil -> Phone
+    activate Phone MODEL_COLOR
+    Phone --> ParserUtil
+    deactivate Phone
+    ParserUtil --> AddCommandParser -- LOGIC_COLOR: phone
+end
+
+opt user inputs telegramHandle
+    AddCommandParser -> ParserUtil ++ LOGIC_COLOR: parseTelegramHandle(telegramHandle)
+    create TelegramHandle
+    ParserUtil -> TelegramHandle
+    activate TelegramHandle MODEL_COLOR
+    TelegramHandle --> ParserUtil
+    deactivate TelegramHandle
+    ParserUtil --> AddCommandParser -- LOGIC_COLOR: telegramHandle
+end
+
+opt user inputs email
+    AddCommandParser -> ParserUtil ++ LOGIC_COLOR: parseEmail(email)
+    create Email
+    ParserUtil -> Email
+    activate Email MODEL_COLOR
+    Email --> ParserUtil
+    deactivate Email
+    ParserUtil --> AddCommandParser -- LOGIC_COLOR: email
+end
+@enduml
