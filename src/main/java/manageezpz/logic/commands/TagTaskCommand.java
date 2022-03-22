@@ -39,10 +39,15 @@ public class TagTaskCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        Task task;
+        try {
+            task = model.getFilteredTaskList().get(index);
+        } catch (IndexOutOfBoundsException e) {
+            throw new CommandException("This Task Number is invalid. \r\n"
+                    + MESSAGE_USAGE);
+        }
 
-        Task task = model.getFilteredTaskList().get(index);
         List<Person> personList = model.getFilteredPersonList();
-
         Person person = null;
         for (int i = 0; i < personList.size(); i++) {
             Person tempPerson = personList.get(i);
@@ -51,10 +56,13 @@ public class TagTaskCommand extends Command {
                 break;
             }
         }
-
-        if (model.isTagged(task, person)) {
+        if (person == null) {
+            throw new CommandException("Sorry, the person does not exist within our database. \r\n"
+                    + MESSAGE_USAGE);
+        } else if (model.isTagged(task, person)) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
+
         model.tagTask(task, person);
         return new CommandResult(String.format(MESSAGE_SUCCESS, task));
     }

@@ -1,5 +1,7 @@
 package manageezpz.logic.parser;
 
+import static manageezpz.commons.core.Messages.MESSAGE_EMPTY_NAME;
+import static manageezpz.commons.core.Messages.MESSAGE_EMPTY_TASK_NUMBER;
 import static manageezpz.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_NAME;
 
@@ -7,7 +9,6 @@ import java.util.stream.Stream;
 
 import manageezpz.logic.commands.TagTaskCommand;
 import manageezpz.logic.parser.exceptions.ParseException;
-
 
 public class TagTaskCommandParser implements Parser<TagTaskCommand> {
 
@@ -17,15 +18,21 @@ public class TagTaskCommandParser implements Parser<TagTaskCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public TagTaskCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimapDeadline =
+        ArgumentMultimap argMultimapTag =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME);
-
-        if (!arePrefixesPresent(argMultimapDeadline, PREFIX_NAME)
-                || !argMultimapDeadline.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimapTag, PREFIX_NAME)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     TagTaskCommand.MESSAGE_USAGE));
         }
-        String name = argMultimapDeadline.getValue(PREFIX_NAME).get();
+        if (argMultimapTag.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_EMPTY_TASK_NUMBER,
+                    TagTaskCommand.MESSAGE_USAGE));
+        }
+        String name = argMultimapTag.getValue(PREFIX_NAME).get();
+        if (name.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_EMPTY_NAME,
+                    TagTaskCommand.MESSAGE_USAGE));
+        }
         String[] argsArr = args.trim().split(" ");
         int index = ParserUtil.parseIndex(argsArr[0]).getZeroBased();
         return new TagTaskCommand(index, name);
