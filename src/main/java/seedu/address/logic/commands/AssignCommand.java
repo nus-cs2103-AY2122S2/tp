@@ -30,12 +30,13 @@ public class AssignCommand extends Command {
             + PREFIX_GROUP_NAME + "CS2103-W16-3";
 
     public static final String MESSAGE_ASSIGN_SUCCESS = "Student %1$s assigned to %2$s";
+
     public static final String MESSAGE_GROUP_DOES_NOT_EXIST = "This group does not exist in ArchDuke";
+
     public static final String MESSAGE_PERSON_ALREADY_EXISTS = "%1$s already exists in %2$s.";
 
     private final Index index;
     private final Group group;
-
 
     /**
      * Creates an AssignCommand to assign the specified {@code Person}
@@ -53,9 +54,9 @@ public class AssignCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> persons = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (index.getZeroBased() >= persons.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
@@ -63,17 +64,17 @@ public class AssignCommand extends Command {
             throw new CommandException(MESSAGE_GROUP_DOES_NOT_EXIST);
         }
 
-        ObservableList<Group> groupList = model.getFilteredGroupList();
+        ObservableList<Group> groups = model.getFilteredGroupList();
 
         Group assignedGroup = group;
-        for (Group gp : groupList) {
+        for (Group gp : groups) {
             if (gp.equals(group)) {
                 assignedGroup = gp;
                 break;
             }
         }
 
-        Person personToAssign = lastShownList.get(index.getZeroBased());
+        Person personToAssign = persons.get(index.getZeroBased());
 
         if (assignedGroup.personExists(personToAssign)) {
             throw new CommandException(String.format(

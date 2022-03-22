@@ -1,12 +1,19 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.commands.AssignCommand.MESSAGE_GROUP_DOES_NOT_EXIST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 
+import java.util.List;
+
+import javafx.collections.ObservableList;
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
+import seedu.address.model.person.Person;
 
 /**
  * Deassigns a student from a group in ArchDuke.
@@ -24,6 +31,10 @@ public class DeassignCommand extends Command {
             + PREFIX_GROUP_NAME + "CS2103-W16-3";
 
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Group: %2$s";
+
+    public static final String MESSAGE_PERSON_DOES_NOT_EXIST = "%1$s does not exist in %2$s.";
+
+    public static final String MESSAGE_DEASSIGN_SUCCESS = "Student %1$s deassigned from %2$s";
 
     private final Index index;
     private final Group group;
@@ -44,7 +55,36 @@ public class DeassignCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        throw new CommandException(String.format(MESSAGE_ARGUMENTS, index.getOneBased(), group));
+        requireNonNull(model);
+        List<Person> persons = model.getFilteredPersonList();
+
+        if (index.getZeroBased() >= persons.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        if (!model.hasGroup(group)) {
+            throw new CommandException(MESSAGE_GROUP_DOES_NOT_EXIST);
+        }
+
+        ObservableList<Group> groups = model.getFilteredGroupList();
+
+        Group deassignedGroup = group;
+        for (Group gp : groups) {
+            if (gp.equals(group)) {
+                deassignedGroup = gp;
+                break;
+            }
+        }
+
+        Person personToDeassign = persons.get(index.getZeroBased());
+
+        if (!deassignedGroup.personExists(personToDeassign)) {
+            throw new CommandException(String.format(
+                    MESSAGE_PERSON_DOES_NOT_EXIST, personToDeassign.getName(), group));
+        }
+
+        model.deassignPerson(personToDeassign, deassignedGroup);
+        return new CommandResult(String.format(MESSAGE_DEASSIGN_SUCCESS, personToDeassign.getName(), deassignedGroup));
     }
 
     @Override

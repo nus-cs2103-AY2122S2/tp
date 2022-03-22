@@ -48,6 +48,15 @@ public class Group {
     }
 
     /**
+     * Deassigns a person from the group.
+     *
+     * @param person The person to be deassigned.
+     */
+    public void deassignPerson(Person person) {
+        persons.remove(person);
+    }
+
+    /**
      * Checks if a person is already existing in the group.
      *
      * @param person The person to be checked.

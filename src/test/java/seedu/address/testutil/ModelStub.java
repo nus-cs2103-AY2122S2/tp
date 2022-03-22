@@ -145,4 +145,9 @@ public class ModelStub implements Model {
     public void assignPerson(Person personToAssign, Group group) {
         throw new AssertionError("This method should not be called.");
     }
+
+    @Override
+    public void deassignPerson(Person personToDeassign, Group group) {
+        throw new AssertionError("This method should not be called.");
+    }
 }
