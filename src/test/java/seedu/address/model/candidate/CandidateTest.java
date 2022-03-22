@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_COURSE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -49,6 +50,14 @@ public class CandidateTest {
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new CandidateBuilder(BOB).withName(nameWithTrailingSpaces).build();
         assertTrue(BOB.isSamePerson(editedBob));
+
+        // different studentId, all other attributes same -> returns false
+        editedBob = new CandidateBuilder(BOB).withStudentId(VALID_STUDENT_ID_AMY).build();
+        assertFalse(BOB.isSamePerson(editedBob));
+
+        // totally different candidates
+        assertFalse(ALICE.isSamePerson(BOB));
+        assertFalse(BOB.isSamePerson(ALICE));
     }
 
     @Test
