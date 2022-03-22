@@ -1,8 +1,9 @@
 package seedu.address.model;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.ArrayList;
 import java.util.List;
-import static java.util.Objects.requireNonNull;
 
 import seedu.address.model.lineup.Lineup;
 import seedu.address.model.lineup.LineupName;
@@ -83,8 +84,14 @@ public class UniqueLineupList {
         return false;
     }
 
+    /**
+     * Getter of lineup using LineupName
+     *
+     * @param lineupName The name of the target lineup
+     * @return The target lineup which has the same LineupName
+     */
     public Lineup getLineup(LineupName lineupName) {
-        if (! containsLineupName(lineupName)) {
+        if (!containsLineupName(lineupName)) {
             return null;
         } else {
             for (Lineup lineup: list) {
@@ -97,6 +104,11 @@ public class UniqueLineupList {
         return null;
     }
 
+    /**
+     * Replaces a old lineup by a new lineup
+     * @param target The old lineup to be replaced
+     * @param editedLineup The new lineup to replace the old lineup
+     */
     public void replaceLineup(Lineup target, Lineup editedLineup) {
         this.deleteLineupFromList(target);
         this.addLineupToList(editedLineup);
@@ -130,6 +142,13 @@ public class UniqueLineupList {
         }
     }
 
+    /**
+     * Replaces an old player in a lineup by a new player
+     *
+     * @param removedPlayer The player to be removed from the lineup
+     * @param addedPlayer The player to be added into the lineup
+     * @param lineup The target lineup
+     */
     public void replacePlayerInLineup(Person removedPlayer, Person addedPlayer, Lineup lineup) {
         if (containsLineup(lineup)) {
             deletePlayerFromLineup(removedPlayer, lineup);
@@ -137,12 +156,23 @@ public class UniqueLineupList {
         }
     }
 
+    /**
+     * Deletes a player from all lineups
+     *
+     * @param removedPlayer The player to be deleted
+     */
     public void deletePlayerFromALlLineups(Person removedPlayer) {
         for (Lineup lineup : list) {
             deletePlayerFromLineup(removedPlayer, lineup);
         }
     }
 
+    /**
+     * Replaces a player from all lineups
+     *
+     * @param removedPlayer The player to be replaced
+     * @param addedPlayer The new player to replace the old player
+     */
     public void replacePlayerInAllLineups(Person removedPlayer, Person addedPlayer) {
         for (Lineup lineup : list) {
             replacePlayerInLineup(removedPlayer, addedPlayer, lineup);

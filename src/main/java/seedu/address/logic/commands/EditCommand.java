@@ -5,8 +5,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JERSEY_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PLAYER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PLAYER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 //import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -61,11 +61,11 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in MyGM.";
     public static final String MESSAGE_DUPLICATE_LINEUP = "This lineup already exists in MyGM.";
 
-    private enum EDIT_COMMAND_TYPE {
+    private enum EditCommandType {
         PLAYER, LINEUP
     }
 
-    private final EDIT_COMMAND_TYPE type;
+    private final EditCommandType type;
     private final Name targetPlayerName;
     private final EditPersonDescriptor editPersonDescriptor;
     private final LineupName targetLineupName;
@@ -81,7 +81,7 @@ public class EditCommand extends Command {
         requireNonNull(targetPlayerName);
         requireNonNull(editPersonDescriptor);
 
-        this.type = EDIT_COMMAND_TYPE.PLAYER;
+        this.type = EditCommandType.PLAYER;
         this.targetPlayerName = targetPlayerName;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
         this.targetLineupName = null;
@@ -98,7 +98,7 @@ public class EditCommand extends Command {
         requireNonNull(targetLineupName);
         requireNonNull(editLineupName);
 
-        this.type = EDIT_COMMAND_TYPE.LINEUP;
+        this.type = EditCommandType.LINEUP;
         this.targetPlayerName = null;
         this.editPersonDescriptor = null;
         this.targetLineupName = targetLineupName;
@@ -116,7 +116,7 @@ public class EditCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (this.type == EDIT_COMMAND_TYPE.PLAYER) {
+        if (this.type == EditCommandType.PLAYER) {
             if (!model.hasPersonName(targetPlayerName)) { // check if UPL name to person have targetPerson
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON);
             }

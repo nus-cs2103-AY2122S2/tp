@@ -82,6 +82,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         return this.persons.containsName(targetName);
     }
 
+    /**
+     * Checks for the existence of a lineup name
+     * @param targetName The lineup name to check
+     * @return Boolean represents the existecne of the lineup name
+     */
     public boolean hasLineupName(LineupName targetName) {
         requireNonNull(targetName);
         return this.lineups.containsLineupName(targetName);

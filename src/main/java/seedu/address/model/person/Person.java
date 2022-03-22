@@ -115,6 +115,11 @@ public class Person {
         this.lineups.add(lineup.getLineupName());
     }
 
+    /**
+     * Replaces the old lineup name with a new lineup name
+     * @param oldName The old LineupName
+     * @param newName The new LineupName
+     */
     public void replaceLineupName(LineupName oldName, LineupName newName) {
         this.lineups.remove(oldName);
         this.lineups.add(newName);

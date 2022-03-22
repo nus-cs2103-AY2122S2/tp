@@ -3,10 +3,8 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -100,6 +98,11 @@ public class UniquePersonList implements Iterable<Person> {
                 .collect(Collectors.toList()).get(0);
     }
 
+    /**
+     * Removes all player in the target lineup
+     *
+     * @param lineup The lineup to be cleared
+     */
     public void removeAllPlayerFromLineup(Lineup lineup) {
         requireNonNull(lineup);
         for (Person person : this.internalList) {
