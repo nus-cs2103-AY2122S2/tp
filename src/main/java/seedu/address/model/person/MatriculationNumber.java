@@ -12,7 +12,7 @@ public class MatriculationNumber {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Matriculation number should be in the following format: A1234567X, where X is a placeholder for the "
-                    + "last alphabet of the student's matriculation number";
+                    + "last alphabet of the student's matriculation number, and it should not be blank.";
 
     /*
      * The first character of the matriculation number must be an A.
@@ -36,6 +36,9 @@ public class MatriculationNumber {
 
     /**
      * Returns true if a given string is a valid matriculation number.
+     *
+     * @param test string to be tested to determine if valid matriculation number.
+     * @return Boolean result where it is true if a given string is a valid number, false otherwise.
      */
     public static boolean isValidMatriculationNumber(String test) {
         return test.matches(VALIDATION_REGEX);

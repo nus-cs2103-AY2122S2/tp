@@ -13,7 +13,7 @@ import seedu.address.model.person.Faculty;
 import seedu.address.model.person.Person;
 
 /**
- * Summarise all the students by faculty and show how many students in that faculty are positive, negative, HRW, HRN
+ * Summarise all the students by faculty and show how many students in that faculty are positive, negative, HRN
  */
 public class SummariseCommand extends Command {
 
@@ -29,7 +29,6 @@ public class SummariseCommand extends Command {
     private static final String FACULTY_SUMMARY_FORM = "\nIn %s with %d student(s),\n"
             + "Covid Positive: %d student(s)\n"
             + "Covid Negative: %d student(s)\n"
-            + "Health Risk Warning: %d student(s)\n"
             + "Health Risk Notice: %d student(s)\n"
             + "%.2f percent of student(s) here are suffering...\n";
 
@@ -37,7 +36,6 @@ public class SummariseCommand extends Command {
 
     private static final Predicate<Person> BY_POSITIVE = person -> person.getStatusAsString().equals("POSITIVE");
     private static final Predicate<Person> BY_NEGATIVE = person -> person.getStatusAsString().equals("NEGATIVE");
-    private static final Predicate<Person> BY_HRW = person -> person.getStatusAsString().equals("HRW");
     private static final Predicate<Person> BY_HRN = person -> person.getStatusAsString().equals("HRN");
 
 
@@ -51,7 +49,7 @@ public class SummariseCommand extends Command {
         if (answer.isEmpty()) {
             return new CommandResult(MESSAGE_SUMMARISE_PERSON_FAILURE);
         } else {
-            return new CommandResult(MESSAGE_SUMMARISE_PERSON_SUCCESS + answer);
+            return new CommandResult(MESSAGE_SUMMARISE_PERSON_SUCCESS + answer, false, false, true);
         }
     }
 
@@ -86,14 +84,12 @@ public class SummariseCommand extends Command {
         int totalNumberOfStudents = result.size();
         int numberOfPositive = (int) result.stream().filter(BY_POSITIVE).count();
         int numberOfNegative = (int) result.stream().filter(BY_NEGATIVE).count();
-        int numberOfHrw = (int) result.stream().filter(BY_HRW).count();
         int numberOfHrn = (int) result.stream().filter(BY_HRN).count();
         double percentagePositive = (double) numberOfPositive / totalNumberOfStudents * 100;
 
         return String.format(FACULTY_SUMMARY_FORM, facultyName, totalNumberOfStudents, numberOfPositive,
-                numberOfNegative, numberOfHrw, numberOfHrn, percentagePositive);
+                numberOfNegative, numberOfHrn, percentagePositive);
     }
 
 }
-
 

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOCK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COVID_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FACULTY;
@@ -32,6 +33,8 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
+    public static final String VALID_BLOCK_AMY = "B";
+    public static final String VALID_BLOCK_BOB = "E";
     public static final String VALID_FACULTY_AMY = "SOC";
     public static final String VALID_FACULTY_BOB = "FASS";
     public static final String VALID_PHONE_AMY = "11111111";
@@ -42,13 +45,15 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_MATRICULATION_NUMBER_AMY = "A1234567A";
     public static final String VALID_MATRICULATION_NUMBER_BOB = "A2180000A";
-    public static final String VALID_COVID_STATUS_AMY = "HRW";
+    public static final String VALID_COVID_STATUS_AMY = "HRN";
     public static final String VALID_COVID_STATUS_BOB = "POSITIVE";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
+    public static final String BLOCK_DESC_AMY = " " + PREFIX_BLOCK + VALID_BLOCK_AMY;
+    public static final String BLOCK_DESC_BOB = " " + PREFIX_BLOCK + VALID_BLOCK_BOB;
     public static final String FACULTY_DESC_AMY = " " + PREFIX_FACULTY + VALID_FACULTY_AMY;
     public static final String FACULTY_DESC_BOB = " " + PREFIX_FACULTY + VALID_FACULTY_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
@@ -67,9 +72,15 @@ public class CommandTestUtil {
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
+    public static final String INVALID_BLOCK_DESC = " " + PREFIX_BLOCK + "1"; // '1' not allowed in blocks
+    public static final String INVALID_FACULTY_DESC = " " + PREFIX_FACULTY + "@"; // '@' not allowed in faculties
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
+    public static final String INVALID_MATRICULATION_NUMBER_DESC = " " + PREFIX_MATRICULATION_NUMBER; // empty string
+    // not allowed for matriculation number
+    public static final String INVALID_COVID_STATUS_DESC = " " + PREFIX_COVID_STATUS; // empty string not allowed
+    // for covid status
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_FACULTY_DESC = " " + PREFIX_FACULTY + "coconut"; // unknown faculty
     public static final String INVALID_COVID_STATUS_DESC = " " + PREFIX_COVID_STATUS + "coconut";
@@ -82,6 +93,7 @@ public class CommandTestUtil {
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withBlock(VALID_BLOCK_AMY)
                 .withFaculty(VALID_FACULTY_AMY)
                 .withPhone(VALID_PHONE_AMY)
                 .withEmail(VALID_EMAIL_AMY)
@@ -90,6 +102,7 @@ public class CommandTestUtil {
                 .withCovidStatus(VALID_COVID_STATUS_AMY)
                 .withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
+                .withBlock(VALID_BLOCK_BOB)
                 .withFaculty(VALID_FACULTY_BOB)
                 .withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_BOB)

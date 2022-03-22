@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Block;
 import seedu.address.model.person.CovidStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Faculty;
@@ -20,6 +21,7 @@ import seedu.address.model.util.SampleDataUtil;
 public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
+    public static final String DEFAULT_BLOCK = "C";
     public static final String DEFAULT_FACULTY = "FOL";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
@@ -28,6 +30,7 @@ public class PersonBuilder {
     public static final String DEFAULT_COVID_STATUS = "negative";
 
     private Name name;
+    private Block block;
     private Faculty faculty;
     private Phone phone;
     private Email email;
@@ -41,6 +44,7 @@ public class PersonBuilder {
      */
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
+        block = new Block(DEFAULT_BLOCK);
         faculty = new Faculty(DEFAULT_FACULTY);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
@@ -55,6 +59,7 @@ public class PersonBuilder {
      */
     public PersonBuilder(Person personToCopy) {
         name = personToCopy.getName();
+        block = personToCopy.getBlock();
         faculty = personToCopy.getFaculty();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
@@ -92,7 +97,7 @@ public class PersonBuilder {
      * Sets the {@code Phone} of the {@code Person} that we are building.
      */
     public PersonBuilder withPhone(String phone) {
-        this.phone = new Phone(phone);
+        this.phone = new Phone(phone.trim());
         return this;
     }
 
@@ -100,7 +105,7 @@ public class PersonBuilder {
      * Sets the {@code Email} of the {@code Person} that we are building.
      */
     public PersonBuilder withEmail(String email) {
-        this.email = new Email(email);
+        this.email = new Email(email.trim());
         return this;
     }
 
@@ -118,7 +123,7 @@ public class PersonBuilder {
      * This method is to be used in future tests
      */
     public PersonBuilder withMatricNumber(String matriculationNumber) {
-        this.matriculationNumber = new MatriculationNumber(matriculationNumber);
+        this.matriculationNumber = new MatriculationNumber(matriculationNumber.trim());
         return this;
     }
 
@@ -131,8 +136,17 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@Code Block} of the {@Code Person} that we are building
+     * This method is to be used in future tests
+     */
+    public PersonBuilder withBlock(String block) {
+        this.block = new Block(block);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, faculty, phone, email, address, matriculationNumber, covidStatus, tags);
+        return new Person(name, block, faculty, phone, email, address, matriculationNumber, covidStatus, tags);
     }
 
 }
