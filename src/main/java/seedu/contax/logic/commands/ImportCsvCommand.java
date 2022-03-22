@@ -33,14 +33,14 @@ import seedu.contax.storage.CsvManager;
  */
 public class ImportCsvCommand extends Command {
     public static final String COMMAND_WORD = "importcsv";
-    public static final String MESSAGE_USAGE = "`" + COMMAND_WORD + "`: *Imports contacts from CSV file* "
-            + "Parameters: **"
+    public static final String MESSAGE_USAGE = "`" + COMMAND_WORD + "`: **Imports contacts from CSV file** "
+            + "Parameters: *"
             + PREFIX_FILE + "FILEPATH "
             + "[" + PREFIX_NAME + "NAME_POSITION]"
             + "[" + PREFIX_PHONE + "PHONE_POSITION]"
             + "[" + PREFIX_EMAIL + "EMAIL_POSITION]"
             + "[" + PREFIX_ADDRESS + "ADDRESS_POSITION]"
-            + "[" + PREFIX_TAG + "TAG_POSITION]**\n"
+            + "[" + PREFIX_TAG + "TAG_POSITION]*\n"
             + "Example: `" + COMMAND_WORD + " "
             + PREFIX_FILE + "/data/file.csv`";
     public static final String MESSAGE_NO_FILE_FOUND = "File not found: %s";

@@ -12,8 +12,8 @@ import seedu.contax.model.Model;
  */
 public class ChainCommand extends Command {
     public static final String COMMAND_WORD = "chain";
-    public static final String MESSAGE_USAGE = "`" + COMMAND_WORD + "`: *Chain two commands together for execution*\n"
-            + "Parameters: **[Command] && [Command]**\n"
+    public static final String MESSAGE_USAGE = "`" + COMMAND_WORD + "`: **Chain two commands together for execution**\n"
+            + "Parameters: *[Command] && [Command]*\n"
             + "Example: `deleteperson 1 addperson n/Alice p/91231231 e/alice@example.com a/Address`";
 
     private final List<Command> commands;

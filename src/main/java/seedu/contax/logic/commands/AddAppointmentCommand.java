@@ -24,13 +24,13 @@ public class AddAppointmentCommand extends Command {
 
     public static final String COMMAND_WORD = "addappointment";
 
-    public static final String MESSAGE_USAGE = "`" + COMMAND_WORD + "`: *Adds an appointment to the schedule.* "
-            + "Parameters: **"
+    public static final String MESSAGE_USAGE = "`" + COMMAND_WORD + "`: **Adds an appointment to the schedule.** "
+            + "Parameters: *"
             + PREFIX_NAME + "NAME "
             + PREFIX_DATE + "DATE "
             + PREFIX_TIME + "TIME "
             + PREFIX_DURATION + "DURATION "
-            + "[" + PREFIX_PERSON + "PERSON] **\n"
+            + "[" + PREFIX_PERSON + "PERSON] *\n"
             + "Example: `" + COMMAND_WORD + " "
             + PREFIX_NAME + "Contract Signing With Charlie "
             + PREFIX_DATE + "22-10-2022 "

@@ -34,51 +34,43 @@ public class TextStyleHelper {
 
         for (int i = 0; i < text.length(); i++) {
             if (text.charAt(i) == '*') {
-                //close bold/italic section
+                boolean isLookaheadOneStar = (i + 1 < text.length()) && text.charAt(i + 1) == '*';
+                boolean isLookaheadTwoStar = (i + 2 < text.length()) &&  text.charAt(i + 2) == '*';
                 if (bold || italic || boldAndItalic) {
+                    //Close bold/italic/bold and italic section
+                    resultingList.add(createTextElement(text.substring(start, i), (boldAndItalic || bold)
+                            , boldAndItalic || italic));
+                    int lookaheadCount = (bold ? 1 : 0) + (boldAndItalic ? 2 : 0);
                     if (italic) {
-                        resultingList.add(createTextElement(text.substring(start, i), true, false));
-                        start = i + 1;
                         italic = false;
-                        continue;
-                    }
-                    if (bold && text.charAt(i + 1) == '*') {
-                        resultingList.add(createTextElement(text.substring(start, i), false, true));
+                    } else if (bold && isLookaheadOneStar) {
                         bold = false;
-                        i += 1;
-                        start = i + 1;
-                        continue;
-                    }
-                    if (boldAndItalic && text.charAt(i + 1) == '*' && text.charAt(i + 2) == '*') {
-                        resultingList.add(createTextElement(text.substring(start, i), true, true));
+                    } else if (boldAndItalic && isLookaheadTwoStar) {
                         boldAndItalic = false;
-                        i += 2;
-                        start = i + 1;
-                        continue;
                     }
-                    //Open bold/italic section
-                } else if (text.charAt(i + 1) != '*') {
-                    resultingList.add(createTextElement(text.substring(start, i), false, false));
+                    i += lookaheadCount;
                     start = i + 1;
-                    italic = true;
-                } else if (text.charAt(i + 2) != '*') {
-                    resultingList.add(createTextElement(text.substring(start, i), false, false));
-                    start = i + 2;
-                    i += 1;
-                    bold = true;
+                    continue;
                 } else {
+                    //Open bold/italic/bold and italic section
                     resultingList.add(createTextElement(text.substring(start, i), false, false));
-                    start = i + 3;
-                    i += 2;
-                    boldAndItalic = true;
+                    italic = !isLookaheadOneStar;
+                    bold = isLookaheadOneStar && !isLookaheadTwoStar;
+                    boldAndItalic = isLookaheadOneStar && isLookaheadTwoStar;
+
+                    int lookaheadCount = (bold ? 1 : 0) + (boldAndItalic ? 2 : 0);
+                    i += lookaheadCount;
+                    start = i + lookaheadCount;
                 }
             } else if (text.charAt(i) == '`') {
                 if (monospaced) {
+                    //Close monospaced section
                     resultingList.add(createMonospacedText(text.substring(start, i)));
                     start = i + 1;
                     monospaced = false;
                     continue;
                 } else {
+                    //Open monospaced section
                     resultingList.add(createTextElement(text.substring(start, i), false, false));
                     start = i + 1;
                     monospaced = true;
