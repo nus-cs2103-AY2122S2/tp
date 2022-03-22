@@ -133,6 +133,16 @@ public class AddCommandTest {
         public void updateFilteredProductList(Predicate<Product> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void undoIBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void redoIBook() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

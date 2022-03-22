@@ -11,6 +11,8 @@ import seedu.ibook.logic.commands.Command;
 import seedu.ibook.logic.commands.DeleteCommand;
 import seedu.ibook.logic.commands.ExitCommand;
 import seedu.ibook.logic.commands.ListCommand;
+import seedu.ibook.logic.commands.RedoCommand;
+import seedu.ibook.logic.commands.UndoCommand;
 import seedu.ibook.logic.commands.UpdateCommand;
 import seedu.ibook.logic.parser.exceptions.ParseException;
 
@@ -60,6 +62,12 @@ public class IBookParser {
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
+
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
+
+        case RedoCommand.COMMAND_WORD:
+            return new RedoCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
