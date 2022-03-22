@@ -264,7 +264,8 @@ Step 2. The user executes `enrol` command to enrol student(s) to a `ClassGroup`.
 
 ![AddState1](images/EnrolState1.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `EnrolCommand#execute()`, instead a `CommandException` will be thrown and no student(s) will be enroled to the given class group.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** <br> 1. Student(s) enroled to a class group will automatically be linked to the module it belongs to. 
+<br> 2. If a command fails its execution, it will not call `EnrolCommand#execute()`, instead a `CommandException` will be thrown and no student(s) will be enroled to the given class group.
 </div>
 
 ### \[Proposed\] Undo/redo feature
