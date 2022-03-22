@@ -28,10 +28,6 @@ public class FindCommandParserTest {
         AttributeContainsKeywordsPredicate testName = new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"));
         FindCommand expectedFindCommand = new FindCommand(testName);
         assertParseSuccess(parser, " " + PREFIX_NAME + "Alice Bob", expectedFindCommand);
-
-        // This one might not be too relevant in our case cause they need to enter a solid name for it
-        // multiple whitespaces between keywords
-        // assertParseSuccess(parser, " " + PREFIX_NAME + " \n Alice \n \t Bob  \t", expectedFindCommand);
     }
 
 }
