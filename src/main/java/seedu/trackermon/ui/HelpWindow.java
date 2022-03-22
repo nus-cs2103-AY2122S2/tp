@@ -2,14 +2,12 @@ package seedu.trackermon.ui;
 
 import java.util.logging.Logger;
 
-import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.Clipboard;
@@ -18,8 +16,6 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.trackermon.commons.core.GuiSettings;
 import seedu.trackermon.commons.core.LogsCenter;
-import seedu.trackermon.logic.Logic;
-import seedu.trackermon.model.show.Show;
 
 /**
  * Controller for a help page
@@ -47,11 +43,9 @@ public class HelpWindow extends UiPart<Stage> {
      *
      * @param root Stage to use as the root of the HelpWindow.
      */
-    public HelpWindow(Stage root, Logic logic) {
+    public HelpWindow(Stage root) {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
-
-        //setWindowDefaultSize(root, logic.getGuiSettings());
 
         commandSummaryTableView = new TableView<>();
         commandSummaryPlaceholder.getChildren().add(commandSummaryTableView);
@@ -61,8 +55,8 @@ public class HelpWindow extends UiPart<Stage> {
     /**
      * Creates a new HelpWindow.
      */
-    public HelpWindow(Logic logic) {
-        this(new Stage(), logic);
+    public HelpWindow() {
+        this(new Stage());
     }
 
     /**
