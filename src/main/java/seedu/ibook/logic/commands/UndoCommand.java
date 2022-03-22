@@ -19,6 +19,7 @@ public class UndoCommand extends Command {
             throw new CommandException(MESSAGE_OLDEST_STATE);
         }
 
+        model.undoIBook();
         return new CommandResult(MESSAGE_UNDO_SUCCESS);
     }
 }

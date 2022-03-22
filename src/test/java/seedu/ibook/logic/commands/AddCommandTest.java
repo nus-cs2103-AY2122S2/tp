@@ -135,6 +135,21 @@ public class AddCommandTest {
         }
 
         @Override
+        public void saveIBookChanges() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canUndoIBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canRedoIBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void undoIBook() {
             throw new AssertionError("This method should not be called.");
         }
@@ -179,6 +194,11 @@ public class AddCommandTest {
         public void addProduct(Product product) {
             requireNonNull(product);
             productsAdded.add(product);
+        }
+
+        @Override
+        public void saveIBookChanges() {
+
         }
 
         @Override

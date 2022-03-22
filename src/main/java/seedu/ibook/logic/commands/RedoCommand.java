@@ -19,6 +19,7 @@ public class RedoCommand extends Command {
             throw new CommandException(MESSAGE_LATEST_STATE);
         }
 
+        model.redoIBook();
         return new CommandResult(MESSAGE_REDO_SUCCESS);
     }
 }

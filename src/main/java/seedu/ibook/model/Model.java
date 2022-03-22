@@ -70,11 +70,11 @@ public interface Model {
     void addProduct(Product product);
 
     /**
-     * Replaces the given product {@code target} with {@code editedProduct}.
+     * Replaces the given product {@code target} with {@code updatedProduct}.
      * {@code target} must exist in the Ibook.
-     * The product identity of {@code editedProduct} must not be the same as another existing product in the book.
+     * The product identity of {@code updatedProduct} must not be the same as another existing product in the book.
      */
-    void setProduct(Product target, Product editedProduct);
+    void setProduct(Product target, Product updatedProduct);
 
     /** Returns an unmodifiable view of the filtered product list */
     ObservableList<Product> getFilteredProductList();
@@ -84,6 +84,11 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredProductList(Predicate<Product> predicate);
+
+    /**
+     * Saves changes made to IBook.
+     */
+    void saveIBookChanges();
 
     /**
      * Checks if the current state of iBook can be undone.
