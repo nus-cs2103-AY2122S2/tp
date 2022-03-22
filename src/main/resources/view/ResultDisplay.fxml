@@ -7,6 +7,6 @@
 <StackPane fx:id="placeHolder" styleClass="pane-with-border" xmlns="http://javafx.com/javafx/8"
            xmlns:fx="http://javafx.com/fxml/1">
   <ScrollPane styleClass="scroll-pane">
-  <TextFlow fx:id="resultDisplay" styleClass="result-display" />
+  <TextFlow fx:id="resultDisplay" styleClass="result-display" minWidth="-1" prefWidth="-1"/>
   </ScrollPane>
 </StackPane>

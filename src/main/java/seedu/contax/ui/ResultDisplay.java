@@ -21,25 +21,18 @@ public class ResultDisplay extends UiPart<Region> {
     private TextFlow resultDisplay;
 
     /**
-     * Constructor for ResultDisplay UI component
+     * Construct the ResultDisplay UI component
      * Used to set initial properties of resultDisplay TextFlow
      */
     public ResultDisplay() {
         super(FXML);
-        resultDisplay.setPadding(new Insets(5, 10, 5, 10));
-
-        //Code to make the text not wrap, wip to make it scroll
-        resultDisplay.setPrefWidth(Region.USE_COMPUTED_SIZE);
-        resultDisplay.setMinWidth(Region.USE_PREF_SIZE);
     }
 
 
     public void setFeedbackToUser(String feedbackToUser) {
         requireNonNull(feedbackToUser);
         resultDisplay.getChildren().clear();
-        List<Text> generateStyledText = TextStyleHelper.formattedTextParser(feedbackToUser);
-        for (int i = 0; i < generateStyledText.size(); i++) {
-            resultDisplay.getChildren().add(generateStyledText.get(i));
-        }
+        List<Text> generatedStyledText = TextStyleHelper.formattedTextParser(feedbackToUser);
+        resultDisplay.getChildren().setAll(generatedStyledText);
     }
 }
