@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
+import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentId;
 import seedu.address.model.person.Task;
@@ -107,6 +108,19 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(task);
 
         persons.assignTaskToPerson(studentId, task);
+    }
+
+    /**
+     * Assigns {@code task} to {@code Person} with {@code moduleCode}.
+     *
+     * @param moduleCode the module code of the module of which all students are to be assigned a task.
+     * @param task the task to be assigned.
+     */
+    public void assignTaskToAllInModule(ModuleCode moduleCode, Task task) {
+        requireNonNull(moduleCode);
+        requireNonNull(task);
+
+        persons.assignTaskToAllInModule(moduleCode, task);
     }
 
     /**

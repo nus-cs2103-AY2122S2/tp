@@ -21,6 +21,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentId;
 import seedu.address.model.person.Task;
@@ -144,6 +145,11 @@ public class AddCommandTest {
 
         @Override
         public void assignTaskToPerson(StudentId studentId, Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void assignTaskToAllInModule(ModuleCode moduleCode, Task task) {
             throw new AssertionError("This method should not be called.");
         }
 
