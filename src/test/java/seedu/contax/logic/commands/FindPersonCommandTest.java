@@ -28,7 +28,7 @@ import seedu.contax.model.person.PhoneContainsKeywordsPredicate;
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
-public class FindCommandTest {
+public class FindPersonCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new Schedule(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new Schedule(), new UserPrefs());
 
@@ -39,14 +39,14 @@ public class FindCommandTest {
         NameContainsKeywordsPredicate secondPredicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("second"));
 
-        FindCommand findFirstCommand = new FindCommand(firstPredicate);
-        FindCommand findSecondCommand = new FindCommand(secondPredicate);
+        FindPersonCommand findFirstCommand = new FindPersonCommand(firstPredicate);
+        FindPersonCommand findSecondCommand = new FindPersonCommand(secondPredicate);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
-        FindCommand findFirstCommandCopy = new FindCommand(firstPredicate);
+        FindPersonCommand findFirstCommandCopy = new FindPersonCommand(firstPredicate);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
@@ -66,14 +66,14 @@ public class FindCommandTest {
         PhoneContainsKeywordsPredicate secondPredicate =
                 new PhoneContainsKeywordsPredicate(Collections.singletonList("23452345"));
 
-        FindCommand findFirstCommand = new FindCommand(firstPredicate);
-        FindCommand findSecondCommand = new FindCommand(secondPredicate);
+        FindPersonCommand findFirstCommand = new FindPersonCommand(firstPredicate);
+        FindPersonCommand findSecondCommand = new FindPersonCommand(secondPredicate);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
-        FindCommand findFirstCommandCopy = new FindCommand(firstPredicate);
+        FindPersonCommand findFirstCommandCopy = new FindPersonCommand(firstPredicate);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
@@ -93,14 +93,14 @@ public class FindCommandTest {
         EmailContainsKeywordsPredicate secondPredicate =
                 new EmailContainsKeywordsPredicate(Collections.singletonList("email@2"));
 
-        FindCommand findFirstCommand = new FindCommand(firstPredicate);
-        FindCommand findSecondCommand = new FindCommand(secondPredicate);
+        FindPersonCommand findFirstCommand = new FindPersonCommand(firstPredicate);
+        FindPersonCommand findSecondCommand = new FindPersonCommand(secondPredicate);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
-        FindCommand findFirstCommandCopy = new FindCommand(firstPredicate);
+        FindPersonCommand findFirstCommandCopy = new FindPersonCommand(firstPredicate);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
@@ -120,14 +120,14 @@ public class FindCommandTest {
         AddressContainsKeywordsPredicate secondPredicate =
                 new AddressContainsKeywordsPredicate(Collections.singletonList("address2"));
 
-        FindCommand findFirstCommand = new FindCommand(firstPredicate);
-        FindCommand findSecondCommand = new FindCommand(secondPredicate);
+        FindPersonCommand findFirstCommand = new FindPersonCommand(firstPredicate);
+        FindPersonCommand findSecondCommand = new FindPersonCommand(secondPredicate);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
-        FindCommand findFirstCommandCopy = new FindCommand(firstPredicate);
+        FindPersonCommand findFirstCommandCopy = new FindPersonCommand(firstPredicate);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
@@ -145,7 +145,7 @@ public class FindCommandTest {
         CommandResult expectedResult = new CommandResult(String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0),
                 GuiListContentType.PERSON);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
-        FindCommand command = new FindCommand(predicate);
+        FindPersonCommand command = new FindPersonCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedResult, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
@@ -156,7 +156,7 @@ public class FindCommandTest {
         CommandResult expectedResult = new CommandResult(String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0),
                 GuiListContentType.PERSON);
         PhoneContainsKeywordsPredicate predicate = preparePhonePredicate(" ");
-        FindCommand command = new FindCommand(predicate);
+        FindPersonCommand command = new FindPersonCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedResult, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
@@ -167,7 +167,7 @@ public class FindCommandTest {
         CommandResult expectedResult = new CommandResult(String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0),
                 GuiListContentType.PERSON);
         EmailContainsKeywordsPredicate predicate = prepareEmailPredicate(" ");
-        FindCommand command = new FindCommand(predicate);
+        FindPersonCommand command = new FindPersonCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedResult, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
@@ -178,7 +178,7 @@ public class FindCommandTest {
         CommandResult expectedResult = new CommandResult(String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0),
                 GuiListContentType.PERSON);
         AddressContainsKeywordsPredicate predicate = prepareAddressPredicate(" ");
-        FindCommand command = new FindCommand(predicate);
+        FindPersonCommand command = new FindPersonCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedResult, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
@@ -189,7 +189,7 @@ public class FindCommandTest {
         CommandResult expectedResult = new CommandResult(String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3),
                 GuiListContentType.PERSON);
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
-        FindCommand command = new FindCommand(predicate);
+        FindPersonCommand command = new FindPersonCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedResult, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
@@ -200,7 +200,7 @@ public class FindCommandTest {
         CommandResult expectedResult = new CommandResult(String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3),
                 GuiListContentType.PERSON);
         PhoneContainsKeywordsPredicate predicate = preparePhonePredicate("95352563 9482224 9482427");
-        FindCommand command = new FindCommand(predicate);
+        FindPersonCommand command = new FindPersonCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedResult, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
@@ -212,7 +212,7 @@ public class FindCommandTest {
                 GuiListContentType.PERSON);
         EmailContainsKeywordsPredicate predicate = prepareEmailPredicate(
                 "heinz@example.com werner@example.com lydia@example.com");
-        FindCommand command = new FindCommand(predicate);
+        FindPersonCommand command = new FindPersonCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedResult, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
@@ -224,7 +224,7 @@ public class FindCommandTest {
                 GuiListContentType.PERSON);
         AddressContainsKeywordsPredicate predicate = prepareAddressPredicate(
                 "wall michegan");
-        FindCommand command = new FindCommand(predicate);
+        FindPersonCommand command = new FindPersonCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedResult, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE), model.getFilteredPersonList());
