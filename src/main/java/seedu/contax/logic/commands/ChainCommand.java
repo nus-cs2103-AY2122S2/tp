@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import seedu.contax.logic.commands.exceptions.CommandException;
 import seedu.contax.model.Model;
@@ -42,7 +41,7 @@ public class ChainCommand extends Command {
     public boolean equals(Object other) {
         if (other instanceof ChainCommand) {
             for (int i = 0; i < commands.size(); i++) {
-                if(((ChainCommand) other).commands.size() != 0) {
+                if (((ChainCommand) other).commands.size() != 0) {
                     if (!commands.get(i).equals(((ChainCommand) other).commands.get(i))) {
                         return false;
                     }
