@@ -13,6 +13,8 @@ import seedu.ibook.logic.commands.CommandResult;
 import seedu.ibook.logic.commands.exceptions.CommandException;
 import seedu.ibook.logic.parser.exceptions.ParseException;
 import seedu.ibook.model.product.Product;
+import seedu.ibook.model.product.filters.AttributeFilter;
+import seedu.ibook.ui.filters.FilterList;
 import seedu.ibook.ui.popup.PopupHandler;
 import seedu.ibook.ui.table.ProductTable;
 
@@ -32,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuToolbar menuToolbar;
     private CommandBox commandBox;
     private ResultWindow resultWindow;
+    private FilterList filterList;
     private ProductTable productTable;
 
     private PopupHandler popupHandler;
@@ -93,6 +96,9 @@ public class MainWindow extends UiPart<Stage> {
         resultWindow = new ResultWindow(this);
         children.add(resultWindow.getRoot());
 
+        filterList = new FilterList(this);
+        children.add(filterList.getRoot());
+
         productTable = new ProductTable(this);
         children.add(productTable.getRoot());
     }
@@ -116,6 +122,13 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Invalid command: " + commandText);
             setError(e.getMessage());
         }
+    }
+
+    /**
+     * Populate the filters used for the product list.
+     */
+    public void populateFilters() {
+        filterList.populateFilters();
     }
 
     /**
@@ -146,6 +159,23 @@ public class MainWindow extends UiPart<Stage> {
      */
     public ObservableList<Product> getFilteredIBook() {
         return logic.getFilteredIBook();
+    }
+
+    /**
+     * Gets the filtered list of {@code AttributeFilter} from {@code Logic}.
+     *
+     * @return Get a filtered list of {@code AttributeFilter}.
+     */
+    public ObservableList<AttributeFilter> getProductFilters() {
+        return logic.getProductFilters();
+    }
+
+    /**
+     * Removes a filter for the product list.
+     */
+    public void removeProductFilter(AttributeFilter filter) {
+        logic.removeProductFilter(filter);
+        populateFilters();
     }
 
     private void hidePopup() {

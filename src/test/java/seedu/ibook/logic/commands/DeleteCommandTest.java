@@ -17,6 +17,7 @@ import seedu.ibook.model.Model;
 import seedu.ibook.model.ModelManager;
 import seedu.ibook.model.UserPrefs;
 import seedu.ibook.model.product.Product;
+import seedu.ibook.model.product.filters.ProductFulfillsFiltersPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -103,7 +104,12 @@ public class DeleteCommandTest {
      */
 
     private void showNoProduct(Model model) {
-        model.updateFilteredProductList(p -> false);
+        model.updateProductFilters(new ProductFulfillsFiltersPredicate() {
+            @Override
+            public boolean test(Product other) {
+                return false;
+            }
+        });
 
         assertTrue(model.getFilteredProductList().isEmpty());
     }
