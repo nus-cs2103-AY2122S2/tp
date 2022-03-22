@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import seedu.address.model.Model;
+import seedu.address.model.person.Block;
 import seedu.address.model.person.CovidStatus;
 import seedu.address.model.person.Faculty;
 import seedu.address.model.person.Person;
@@ -41,10 +42,9 @@ public class FilterCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        ArrayList<Predicate<Person>> filters = filterDescriptor.getFilters();
-        for (Predicate<Person> filter : filters) {
-            model.updateFilteredPersonList(filter);
-        }
+        Predicate<Person> filters = filterDescriptor.getFilters();
+        model.updateFilteredPersonList(filters);
+
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
@@ -71,23 +71,45 @@ public class FilterCommand extends Command {
     public static class FilterDescriptor {
         private Faculty faculty;
         private CovidStatus status;
+        private Block block;
         private ArrayList<Predicate<Person>> filters = new ArrayList<>();
 
-        private Predicate<Person> covidStatusFilter = person -> person.isStatus(status);
-        private Predicate<Person> facultyFilter = person -> person.isFaculty(faculty);
+        private Predicate<Person> defaultFilter = person -> true;
 
-        public ArrayList<Predicate<Person>> getFilters() {
-            return filters;
+        private Predicate<Person> facultyFilter = person -> person.isFaculty(faculty);
+        private Predicate<Person> covidStatusFilter = person -> person.isStatus(status);
+        private Predicate<Person> blockFilter = person -> person.isBlock(block);
+
+        private int facultyIndex = 0;
+        private int covidStatusIndex = 1;
+        private int blockIndex = 2;
+
+        /**
+         * Constructor to create a FilterDescriptor object.
+         */
+        public FilterDescriptor() {
+            filters.add(defaultFilter);
+            filters.add(defaultFilter);
+            filters.add(defaultFilter);
+        }
+
+        public Predicate<Person> getFilters() {
+            return filters.get(facultyIndex).and(filters.get(covidStatusIndex)).and(filters.get(blockIndex));
         }
 
         public void setFaculty(Faculty faculty) {
             this.faculty = faculty;
-            filters.add(facultyFilter);
+            filters.set(facultyIndex, facultyFilter);
         }
 
         public void setCovidStatus(CovidStatus status) {
             this.status = status;
-            filters.add(covidStatusFilter);
+            filters.set(covidStatusIndex, covidStatusFilter);
+        }
+
+        public void setBlock(Block block) {
+            this.block = block;
+            filters.set(blockIndex, blockFilter);
         }
 
         @Override
@@ -104,22 +126,29 @@ public class FilterCommand extends Command {
 
             // state check
             FilterDescriptor f = (FilterDescriptor) other;
+            boolean sameFaculty;
+            boolean sameCovidStatus;
+            boolean sameBlock;
+
             if (faculty == null) {
-                if (f.faculty != null) {
-                    return false;
-                } else if (status == null) {
-                    return f.status == null;
-                } else {
-                    return status.equals(f.status);
-                }
+                sameFaculty = (f.faculty == null);
+            } else {
+                sameFaculty = faculty.equals(f.faculty);
             }
 
             if (status == null) {
-                return f.status == null;
+                sameCovidStatus = (f.status == null);
+            } else {
+                sameCovidStatus = status.equals(f.status);
             }
 
-            return faculty.equals(f.faculty)
-                    && status.equals(f.status);
+            if (block == null) {
+                sameBlock = (f.block == null);
+            } else {
+                sameBlock = block.equals(f.block);
+            }
+
+            return sameFaculty && sameCovidStatus && sameBlock;
         }
     }
 }

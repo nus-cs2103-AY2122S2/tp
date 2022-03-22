@@ -111,6 +111,16 @@ public class Person {
         return faculty.toString();
     }
 
+    /**
+     * Predicate to check if the block of Person object matches the given block.
+     *
+     * @param block given block to check if matched by block property in Person
+     * @return boolean value to show if there is a match
+     */
+    public boolean isBlock(Block block) {
+        return this.block.equals(block);
+    }
+
     public Address getAddress() {
         return address;
     }

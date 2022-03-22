@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BLOCK_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COVID_STATUS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FACULTY_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FACULTY_BOB;
@@ -11,12 +12,15 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.FilterCommand.FilterDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Block;
 import seedu.address.model.person.CovidStatus;
 import seedu.address.model.person.Faculty;
+
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -27,43 +31,80 @@ public class FilterCommandTest {
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
-        // only faculty specified
-        FilterCommand.FilterDescriptor filterDescriptor = new FilterCommand.FilterDescriptor();
         Faculty faculty = new Faculty(VALID_FACULTY_BOB);
-        filterDescriptor.setFaculty(faculty);
-        FilterCommand command = new FilterCommand(filterDescriptor);
-
+        CovidStatus status = new CovidStatus(VALID_COVID_STATUS_BOB);
+        Block block = new Block(VALID_BLOCK_BOB);
         CommandResult expectedCommandResult = new CommandResult(MESSAGE_SUCCESS);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+
+        // only faculty specified
+        FilterDescriptor descriptorFaculty = new FilterDescriptor();
+        descriptorFaculty.setFaculty(faculty);
+        FilterCommand commandFaculty = new FilterCommand(descriptorFaculty);
         expectedModel.updateFilteredPersonList(person -> person.isFaculty(faculty));
 
-        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
+        assertCommandSuccess(commandFaculty, model, expectedCommandResult, expectedModel);
 
         // only covid status specified
-        FilterCommand.FilterDescriptor filterDescriptor2 = new FilterCommand.FilterDescriptor();
-        CovidStatus status = new CovidStatus(VALID_COVID_STATUS_BOB);
-        filterDescriptor2.setCovidStatus(status);
-        FilterCommand command2 = new FilterCommand(filterDescriptor2);
-
+        FilterDescriptor descriptorStatus = new FilterDescriptor();
+        descriptorStatus.setCovidStatus(status);
+        FilterCommand commandStatus = new FilterCommand(descriptorStatus);
         expectedModel.updateFilteredPersonList(person -> person.isStatus(status));
 
-        assertCommandSuccess(command2, model, expectedCommandResult, expectedModel);
+        assertCommandSuccess(commandStatus, model, expectedCommandResult, expectedModel);
+
+        // only block specified
+        FilterDescriptor descriptorBlock = new FilterDescriptor();
+        descriptorBlock.setBlock(block);
+        FilterCommand commandBlock = new FilterCommand(descriptorBlock);
+        expectedModel.updateFilteredPersonList(person -> person.isBlock(block));
+
+        assertCommandSuccess(commandBlock, model, expectedCommandResult, expectedModel);
+
+        // only faculty and covid status specified
+        FilterDescriptor descriptorFacultyAndStatus = new FilterDescriptor();
+        descriptorFacultyAndStatus.setFaculty(faculty);
+        descriptorFacultyAndStatus.setCovidStatus(status);
+        FilterCommand commandFacultyAndStatus = new FilterCommand(descriptorFacultyAndStatus);
+        expectedModel.updateFilteredPersonList(person -> person.isFaculty(faculty) && person.isStatus(status));
+
+        assertCommandSuccess(commandFacultyAndStatus, model, expectedCommandResult, expectedModel);
+
+        // only faculty and block specified
+        FilterDescriptor descriptorFacultyAndBlock = new FilterDescriptor();
+        descriptorFacultyAndBlock.setFaculty(faculty);
+        descriptorFacultyAndBlock.setBlock(block);
+        FilterCommand commandFacultyAndBlock = new FilterCommand(descriptorFacultyAndBlock);
+        expectedModel.updateFilteredPersonList(person -> person.isFaculty(faculty) && person.isBlock(block));
+
+        assertCommandSuccess(commandFacultyAndBlock, model, expectedCommandResult, expectedModel);
+
+        // only covid status and block specified
+        FilterDescriptor descriptorStatusAndBlock = new FilterDescriptor();
+        descriptorStatusAndBlock.setCovidStatus(status);
+        descriptorStatusAndBlock.setBlock(block);
+        FilterCommand commandStatusAndBlock = new FilterCommand(descriptorStatusAndBlock);
+        expectedModel.updateFilteredPersonList(person -> person.isStatus(status) && person.isBlock(block));
+
+        assertCommandSuccess(commandStatusAndBlock, model, expectedCommandResult, expectedModel);
     }
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         // all fields specified
-        FilterCommand.FilterDescriptor filterDescriptor = new FilterCommand.FilterDescriptor();
+        FilterDescriptor filterDescriptor = new FilterDescriptor();
         Faculty faculty = new Faculty(VALID_FACULTY_BOB);
         CovidStatus status = new CovidStatus(VALID_COVID_STATUS_BOB);
+        Block block = new Block(VALID_BLOCK_BOB);
         filterDescriptor.setFaculty(faculty);
         filterDescriptor.setCovidStatus(status);
+        filterDescriptor.setBlock(block);
         FilterCommand command = new FilterCommand(filterDescriptor);
 
         CommandResult expectedCommandResult = new CommandResult(MESSAGE_SUCCESS);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.updateFilteredPersonList(person -> person.isFaculty(faculty));
-        expectedModel.updateFilteredPersonList(person -> person.isStatus(status));
+        expectedModel.updateFilteredPersonList(person -> person.isFaculty(faculty) && person.isStatus(status)
+                && person.isBlock(block));
 
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
     }
@@ -71,16 +112,18 @@ public class FilterCommandTest {
     @Test
     public void equals() {
 
-        FilterCommand.FilterDescriptor firstFilterDescriptor = new FilterCommand.FilterDescriptor();
-        FilterCommand.FilterDescriptor secondFilterDescriptor = new FilterCommand.FilterDescriptor();
+        FilterDescriptor firstFilterDescriptor = new FilterDescriptor();
+        FilterDescriptor secondFilterDescriptor = new FilterDescriptor();
 
         CovidStatus firstStatus = new CovidStatus(VALID_COVID_STATUS_BOB);
-
         Faculty firstFaculty = new Faculty(VALID_FACULTY_BOB);
+        Block firstBlock = new Block(VALID_BLOCK_BOB);
+
         Faculty secondFaculty = new Faculty(VALID_FACULTY_AMY);
 
         firstFilterDescriptor.setCovidStatus(firstStatus);
         firstFilterDescriptor.setFaculty(firstFaculty);
+        firstFilterDescriptor.setBlock(firstBlock);
 
         secondFilterDescriptor.setFaculty(secondFaculty);
 

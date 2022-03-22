@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOCK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COVID_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FACULTY;
 
@@ -26,7 +27,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         }
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_FACULTY, PREFIX_COVID_STATUS);
+                ArgumentTokenizer.tokenize(args, PREFIX_FACULTY, PREFIX_COVID_STATUS, PREFIX_BLOCK);
 
         FilterDescriptor filterDescriptor = new FilterDescriptor();
         if (argMultimap.getValue(PREFIX_FACULTY).isPresent()) {
@@ -36,6 +37,10 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         if (argMultimap.getValue(PREFIX_COVID_STATUS).isPresent()) {
             filterDescriptor.setCovidStatus(ParserUtil.parseCovidStatus(
                     argMultimap.getValue(PREFIX_COVID_STATUS).get()));
+        }
+        if (argMultimap.getValue(PREFIX_BLOCK).isPresent()) {
+            filterDescriptor.setBlock(ParserUtil.parseBlock(
+                    argMultimap.getValue(PREFIX_BLOCK).get()));
         }
 
         return new FilterCommand(filterDescriptor);
