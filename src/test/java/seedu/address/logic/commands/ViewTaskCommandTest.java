@@ -7,6 +7,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.GroupBuilder;
 
+/**
+ * Contains integration tests (interaction with the Model) and unit tests for {@code ViewTaskCommand}.
+ */
 public class ViewTaskCommandTest {
 
     @Test

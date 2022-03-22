@@ -4,6 +4,9 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Contains integration tests (interaction with the Model) and unit tests for {@code AssignCommand}.
+ */
 public class AssignCommandTest {
 
     @Test

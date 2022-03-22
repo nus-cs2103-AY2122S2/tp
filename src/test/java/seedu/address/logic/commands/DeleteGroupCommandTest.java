@@ -7,7 +7,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for DeleteGroupCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for {@code DeleteGroupCommand}.
  */
 public class DeleteGroupCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
