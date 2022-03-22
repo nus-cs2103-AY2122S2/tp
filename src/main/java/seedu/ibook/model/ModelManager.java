@@ -109,7 +109,7 @@ public class ModelManager implements Model {
     @Override
     public void setProduct(Product target, Product updatedProduct) {
         requireAllNonNull(target, updatedProduct);
-        
+
         reversibleIBook.setProduct(target, updatedProduct);
     }
 

@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import seedu.ibook.logic.commands.exceptions.CommandException;
 import seedu.ibook.model.Model;
 import seedu.ibook.model.exceptions.AtLatestStateException;
-import seedu.ibook.model.exceptions.AtOldestStateException;
 
 public class RedoCommand extends Command {
     public static final String COMMAND_WORD = "redo";
