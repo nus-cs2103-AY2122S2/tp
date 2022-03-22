@@ -57,7 +57,7 @@ public class EditCommand extends Command {
     private final EditStudentDescriptor editStudentDescriptor;
 
     /**
-     * @param index                 of the Student in the filtered Student list to edit
+     * @param index of the Student in the filtered Student list to edit
      * @param editStudentDescriptor details to edit the Student with
      */
     public EditCommand(Index index, EditStudentDescriptor editStudentDescriptor) {
@@ -140,8 +140,7 @@ public class EditCommand extends Command {
         private Telegram telegram;
         private StudentId studentId;
 
-        public EditStudentDescriptor() {
-        }
+        public EditStudentDescriptor() {}
 
         /**
          * Copy constructor.
