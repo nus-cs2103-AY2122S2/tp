@@ -16,6 +16,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.common.Description;
+import seedu.address.model.common.Name;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.FriendName;
@@ -29,7 +30,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Adds a log to a person in the address book.
  */
-public class AddLogCommand extends Command {
+public class AddLogCommand extends ByIndexByNameCommand {
 
     public static final String COMMAND_WORD = "addlog";
 
@@ -44,11 +45,9 @@ public class AddLogCommand extends Command {
 
     public static final String MESSAGE_ADD_LOG_SUCCESS = "New log added!";
     public static final String MESSAGE_DUPLICATE_LOG = "This log already exists for this friend.";
-    public static final String MESSAGE_INVALID_INDEX = Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
-    public static final String MESSAGE_PERSON_NOT_FOUND = Messages.MESSAGE_INVALID_PERSON_NAME;
 
     private final Index index;
-    private final Person personWithNameToAddLog;
+    private final Name nameToAddLog;
     private final AddLogDescriptor addLogDescriptor;
     private final boolean byName;
 
@@ -59,7 +58,7 @@ public class AddLogCommand extends Command {
     public AddLogCommand(Index index, AddLogDescriptor addLogDescriptor) {
         requireAllNonNull(index, addLogDescriptor);
         this.index = index;
-        this.personWithNameToAddLog = null;
+        this.nameToAddLog = null;
         this.addLogDescriptor = addLogDescriptor;
         this.byName = false;
     }
@@ -70,7 +69,7 @@ public class AddLogCommand extends Command {
      */
     public AddLogCommand(FriendName name, AddLogDescriptor addLogDescriptor) {
         requireAllNonNull(name, addLogDescriptor);
-        this.personWithNameToAddLog = new Person(name);
+        this.nameToAddLog = name;
         this.index = null;
         this.addLogDescriptor = addLogDescriptor;
         this.byName = true;
@@ -84,30 +83,9 @@ public class AddLogCommand extends Command {
         Person personToEdit;
 
         if (this.byName) {
-
-            // find person with same name
-            List<Person> personsToEdit = model.getAddressBook()
-                    .getPersonList().stream()
-                    .filter(p -> p.hasSameName(this.personWithNameToAddLog))
-                    .collect(Collectors.toList());
-
-            // if person not found, throw an error
-            if (personsToEdit.size() < 1) {
-                throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
-            }
-            assert (personsToEdit.size() == 1);
-            personToEdit = personsToEdit.get(0);
-
+            personToEdit = this.getPersonByName(model, this.nameToAddLog);
         } else {
-
-            // get list of persons from model
-            List<Person> lastShownList = model.getFilteredPersonList();
-
-            // get person and modify
-            if (this.index.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(MESSAGE_INVALID_INDEX);
-            }
-            personToEdit = lastShownList.get(this.index.getZeroBased());
+            personToEdit = this.getPersonByFilteredIndex(model, this.index);
         }
 
         // create person with added logs
@@ -161,10 +139,10 @@ public class AddLogCommand extends Command {
         // compare name or index
         if ((this.byName) && (a.byName)) {
             assert ((this.index == null) && (a.index == null));
-            return this.personWithNameToAddLog.equals(a.personWithNameToAddLog);
+            return this.nameToAddLog.equals(a.nameToAddLog);
 
         } else if ((!this.byName) && (!a.byName)) {
-            assert ((this.personWithNameToAddLog == null) && (a.personWithNameToAddLog == null));
+            assert ((this.nameToAddLog == null) && (a.nameToAddLog == null));
             return this.index.equals(a.index);
         }
 

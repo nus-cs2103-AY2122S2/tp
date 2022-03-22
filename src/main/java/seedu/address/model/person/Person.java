@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.isNull;
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.common.Description;
+import seedu.address.model.common.Name;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -167,6 +169,14 @@ public class Person {
      */
     public boolean hasSameName(Person otherPerson) {
         return this.name.equals(otherPerson.name);
+    }
+
+    /**
+     * Returns true if the person has a name equal to the specified name.
+     */
+    public boolean hasName(Name name) {
+        requireNonNull(name);
+        return this.name.equals(name);
     }
 
     /**
