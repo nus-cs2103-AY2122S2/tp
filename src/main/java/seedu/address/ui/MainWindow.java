@@ -181,17 +181,19 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private void handleModuleListButtonPress() {
-        moduleListButton.getStyleClass().add("active");
+        moduleListButton.getStyleClass().remove("active");
         classGroupListButton.getStyleClass().remove("active");
         studentListButton.getStyleClass().remove("active");
+        moduleListButton.getStyleClass().add("active");
         showModuleList();
     }
 
     @FXML
     private void handleClassGroupListButtonPress() {
         moduleListButton.getStyleClass().remove("active");
-        classGroupListButton.getStyleClass().add("active");
+        classGroupListButton.getStyleClass().remove("active");
         studentListButton.getStyleClass().remove("active");
+        classGroupListButton.getStyleClass().add("active");
         showClassGroupList();
     }
 
@@ -199,6 +201,7 @@ public class MainWindow extends UiPart<Stage> {
     private void handleStudentListButtonPress() {
         moduleListButton.getStyleClass().remove("active");
         classGroupListButton.getStyleClass().remove("active");
+        studentListButton.getStyleClass().remove("active");
         studentListButton.getStyleClass().add("active");
         showStudentList();
     }
