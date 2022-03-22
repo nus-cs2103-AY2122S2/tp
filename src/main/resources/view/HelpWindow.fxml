@@ -19,7 +19,7 @@
          <VBox>
             <children>
                 <StackPane>
-                    <GridPane fx:id="page1" hgap="1" prefWidth="1000.0" style="-fx-background-color: #383838;" vgap="1">
+                    <GridPane fx:id="page1" prefWidth="1000.0" style="-fx-background-color: #383838;" >
                         <columnConstraints>
                             <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="375.0" minWidth="10.0" prefWidth="375.0" />
                             <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="500.0" minWidth="10.0" prefWidth="500.0" />
@@ -28,7 +28,7 @@
                         <children>
                         </children>
                     </GridPane>
-                    <GridPane fx:id="page2" hgap="1" prefWidth="1000.0" style="-fx-background-color: #383838;" vgap="1">
+                    <GridPane fx:id="page2" prefWidth="1000.0" style="-fx-background-color: #383838;" >
                         <columnConstraints>
                             <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="375.0" minWidth="10.0" prefWidth="375.0" />
                             <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="500.0" minWidth="10.0" prefWidth="500.0" />

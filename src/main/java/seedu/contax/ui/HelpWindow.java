@@ -119,6 +119,7 @@ public class HelpWindow extends UiPart<Stage> {
     private Node makeCell(String text, Paint paint) {
         HBox hbox = new HBox();
         hbox.setAlignment(Pos.CENTER_LEFT);
+        hbox.setStyle("-fx-border-color: #383838; -fx-border-width: 0.7px;");
 
         Label label = new Label();
         label.setWrapText(true);
