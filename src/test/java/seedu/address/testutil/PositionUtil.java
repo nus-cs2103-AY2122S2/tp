@@ -25,7 +25,7 @@ public class PositionUtil {
     public static String getPositionDetails(Position position) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_POSITION + position.getPositionName().positionName + " ");
-        sb.append(PREFIX_NUM_OPENINGS + position.getPositionOpenings().numOfOpenings.toString() + " ");
+        sb.append(PREFIX_NUM_OPENINGS + position.getPositionOpenings().getCount().toString() + " ");
         sb.append(PREFIX_DESCRIPTION + position.getDescription().descriptionText + " ");
         position.getRequirements().stream().forEach(r -> sb.append(PREFIX_REQUIREMENT + r.requirementText + " "));
         return sb.toString();

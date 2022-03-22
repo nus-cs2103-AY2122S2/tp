@@ -91,5 +91,69 @@ public class PositionTest {
         editedJrSwe = new PositionBuilder(JR_SOFTWARE_ENGINEER).withRequirements(VALID_REQUIREMENT_EXPERIENCE)
                 .build();
         assertFalse(JR_SOFTWARE_ENGINEER.equals(editedJrSwe));
+
+        // different offers count -> returns false
+        Position editedJrSw4 = new PositionBuilder(JR_SOFTWARE_ENGINEER).build();
+        editedJrSw4.getPositionOffers().increment();
+        assertFalse(JR_SOFTWARE_ENGINEER.equals(editedJrSw4));
+    }
+
+    @Test
+    public void isValidOpeningsToPosition() {
+        Position jrSweCopy = new PositionBuilder(JR_SOFTWARE_ENGINEER).withPositionOpenings("2").build();
+
+        // no offers yet - valid
+        assertTrue(jrSweCopy.isValidOpeningsToOffers());
+
+        // extend first offer - 1 offer to 2 openings - valid
+        jrSweCopy.getPositionOffers().increment();
+        assertTrue(jrSweCopy.isValidOpeningsToOffers());
+
+        // should have 1 offer
+        assertTrue(jrSweCopy.getPositionOffers().getCount().equals(1));
+
+        // extend second offer - 2 offers to 2 openings - valid
+        jrSweCopy.getPositionOffers().increment();
+        assertTrue(jrSweCopy.isValidOpeningsToOffers());
+
+        // should have 2 offers
+        assertTrue(jrSweCopy.getPositionOffers().getCount().equals(2));
+
+        // extend third offer - invalid
+        jrSweCopy.getPositionOffers().increment();
+        assertFalse(jrSweCopy.isValidOpeningsToOffers());
+    }
+
+    @Test
+    public void canExtendOffer() {
+        Position jrSweCopy = new PositionBuilder(JR_SOFTWARE_ENGINEER).withPositionOpenings("2").build();
+
+        // no offers yet, can extend offer
+        assertTrue(jrSweCopy.canExtendOffer());
+
+        // after offering 1, still can extend offer
+        jrSweCopy.getPositionOffers().increment();
+        assertTrue(jrSweCopy.canExtendOffer());
+
+        // after offering 2nd, cannot extend offer anymore
+        jrSweCopy.getPositionOffers().increment();
+        assertFalse(jrSweCopy.canExtendOffer());
+    }
+
+    @Test
+    public void canAcceptOffer() {
+        Position jrSweCopy = new PositionBuilder(JR_SOFTWARE_ENGINEER).withPositionOpenings("1").build();
+
+        // no offers, cannot accept offer
+        assertFalse(jrSweCopy.canAcceptOffer());
+
+        // after 1 offer, can accept
+        jrSweCopy.getPositionOffers().increment();
+        assertTrue(jrSweCopy.canAcceptOffer());
+
+        // after accepting 1st offer, cannot accept
+        jrSweCopy.getPositionOffers().decrement();
+        jrSweCopy.getPositionOpenings().decrement();
+        assertFalse(jrSweCopy.canAcceptOffer());
     }
 }
