@@ -172,7 +172,7 @@ public class SkillSet {
         int sameSkill = 0;
         for (Skill s : otherSkillSet.getSkillSet()) {
             if (this.hasSkill(s)) {
-                sameSkill ++;
+                sameSkill++;
             }
         }
         return sameSkill == this.getSize();
