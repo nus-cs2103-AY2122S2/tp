@@ -1,0 +1,42 @@
+@startuml
+!include style.puml
+
+box Storage STORAGE_COLOR_T1
+participant ":JsonSerializableAddressBook" as JsonSerializableAddressBook STORAGE_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant  ":AddressBook" as AddressBook MODEL_COLOR
+participant ":Person" as Person MODEL_COLOR
+participant ":Tag" as Tag MODEL_COLOR
+end box
+
+[-> JsonSerializableAddressBook : addMissingTags(person, addressbook)
+activate JsonSerializableAddressBook
+JsonSerializableAddressBook -> Person : getTags()
+activate Person
+JsonSerializableAddressBook <-- Person : personTags
+deactivate Person
+
+loop for each tag in personTags
+    JsonSerializableAddressBook -> AddressBook : hasTag(tag)
+    activate AddressBook
+    JsonSerializableAddressBook <-- AddressBook : isTagMissing
+    deactivate AddressBook
+
+    opt isTagMissing
+        create Tag
+        JsonSerializableAddressBook -> Tag
+        activate Tag
+        JsonSerializableAddressBook <-- Tag : newTag
+        deactivate Tag
+        JsonSerializableAddressBook -> AddressBook : addTag(newTag)
+        activate AddressBook
+        JsonSerializableAddressBook <-- AddressBook
+        deactivate AddressBook
+    end
+end loop
+
+deactivate JsonSerializableAddressBook
+
+@enduml
