@@ -2,8 +2,6 @@ package seedu.trackermon.ui;
 
 import java.util.Comparator;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;

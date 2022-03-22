@@ -4,16 +4,12 @@ import java.util.logging.Logger;
 
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextInputControl;
-import javafx.scene.input.InputEvent;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TouchEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.trackermon.commons.core.GuiSettings;
