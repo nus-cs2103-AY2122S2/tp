@@ -1,10 +1,8 @@
-package seedu.address.model.student.lab;
+package seedu.address.model.lab;
 
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
-
-import seedu.address.model.lab.LabList;
 
 
 class LabListTest {

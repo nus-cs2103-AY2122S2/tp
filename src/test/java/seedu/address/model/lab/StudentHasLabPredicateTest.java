@@ -1,4 +1,4 @@
-package seedu.address.model.student.lab;
+package seedu.address.model.lab;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -6,9 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import javafx.util.Pair;
-import seedu.address.model.lab.Lab;
-import seedu.address.model.lab.LabStatus;
-import seedu.address.model.lab.StudentHasLabPredicate;
 import seedu.address.testutil.StudentBuilder;
 
 public class StudentHasLabPredicateTest {
