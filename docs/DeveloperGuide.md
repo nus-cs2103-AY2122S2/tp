@@ -133,6 +133,7 @@ The `Model` component,
 
 </div>
 
+Within the `model` package, there also exists an `IndexedCsvFile` model that helps with the parsing of CSV files for the Import CSV function. However, the class does not maintain any persistent instances, and does not fit within the model component diagram, serving solely as a helper model.
 
 ### Storage component
 
@@ -144,6 +145,8 @@ The `Storage` component,
 * can save both address book data and user preference data in json format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+
+Within the `storage` package, there also exists a `CsvManager` class that is a helper that provides file IO related operations for working with CSV files. It is used in the Import CSV or Export CSV features. This class does not fit within the storage component diagram as it does not interact with any other classes, serving solely as a helper class.
 
 ### Common classes
 
@@ -210,6 +213,42 @@ A helper method `JSONSerializableAddressBook#addMissingTags()` is implemented to
 ![Modified toModelType](images/ToModelTypeSequenceDiagram.png)
 
 ![AddMissingTags](images/AddMissingTagsSequenceDiagram.png)
+
+### Import and Export CSV Features
+
+This section describes some of the details as to how the import and export CSV features were implemented
+
+#### Import CSV
+
+The import CSV function is meant to append to the current address book with new data imported from any CSV file. The intention is to allow users to be able to import from a Microsoft Excel compatible format. Since there are multiple different templates for contacts in CSV files across various platforms, such as Microsoft Outlook and Google Contacts, the feature is designed to be as flexible as possible, allowing the user to specify mappings for the information contained in the various columns.
+
+The arguments that are parsed here are the custom column numbers for each value, e.g. `n/3 p/4 e/5 a/6 t/7` will read `Name` from column 3, `Phone` from column 4, `Email` from column 5, `Address` from column 6 and `Tags` from column 7
+
+In the event that any of the data fields read do not conform to the restrictions given by each of the components in `Person`, that particular line will be skipped. For example, if the record in a line has an email that does not have the `@` symbol or if the record contains a duplicated name that already exists in the Address Book, the entire line will be skipped.
+
+The `CSVManager` takes in a `IndexedCsvFile` object, opens the file and reads the lines. The logic that performs the parsing of data fields and creation of `Person` models is specified in the import command, and is passed as an anonymous function to CsvManager. The sequence diagram is as follows:
+
+![ImportCsvSequenceDiagram](images/ImportCsvSequenceDiagram.png)
+
+#### Export CSV
+
+The Export CSV function is meant to value add upon the existing `.json` file saving to provide an alternative option, especially for users who prefer interacting with a Microsoft Excel compatible format.
+
+The resulting `addressbook.csv` that will be produced will be in the following format:
+
+| Name        | Phone        | Email        | Address        | Tags                            |
+|-------------|--------------|--------------|----------------|---------------------------------|
+| Person Name | Person Phone | Person Email | Person Address | Person Tag 1;Person Tag 2; .... |
+
+Multiple tags are delimited by the `;` character.
+
+Like the Import feature, File IO operations are also separated into the `CsvManager` class, such that the command logic takes the current address book, parses them into the appropriate strings, then passes it to the `CsvManager` to handle the writing to file.
+
+The sequence diagram is as follows:
+![ExportCsvSequenceDiagram](images/ExportCsvSequenceDiagram.png)
+
+The exported file can be subsequently imported back into any other instance of ContaX, similar to the existing `.json` system of import/export.
+
 
 ### \[Proposed\] Undo/redo feature
 
