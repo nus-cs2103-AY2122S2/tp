@@ -46,6 +46,12 @@ TAssist is a **desktop app for managing students and their participation in less
 * Items in square brackets are optional.<br>
   e.g. `n/NAME [t/TELEGRAM_ID]` can be used as `n/John Doe t/john_doe` or as `n/John Doe`.
 
+* Only one item in curly brackets can be chosen.<br>
+  e.g. `{m/MODULE_INDEX | c/CLASS_GROUP_INDEX}` can be used as `m/1` or as `c/1` but not as `m/1 c/1`.
+
+* If multiple options are accepted for a parameter, only one option can be specified.<br>
+  e.g. `s/all|COMMA_SEPARATED_INDEXES|COMMA_SEPARATED_STUDENT_IDS` can be used as `s/all`, `s/1,2,3,4,5,6` and `s/e0123456,e0234567` but not mix-and-matched as `s/all,1,2,e0123456`.
+
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME e/EMAIL`, `e/EMAIL n/NAME` is also acceptable.
 
@@ -107,23 +113,26 @@ Examples:
 
 Adds an assessment to TAssist.
 
-Format: `add assessment n\ASSESSMENT_NAME m\MODULE_INDEX [sn\SIMPLE_NAME]`
+Format: `add assessment n/ASSESSMENT_NAME m/MODULE_INDEX [sn/SIMPLE_NAME]`
 
 Examples:
-* `add assessment n\Test m\1` creates a new assessment that is tied to the 1st module shown when `list module` is run.
+* `add assessment n/Test m/1` creates a new assessment that is tied to the 1st module shown when `list module` is run.
 
 ### Enrolling students [coming in v1.3]
 
 Enrols 1 or more students to a class group.
 
-Format: `enrol c/CLASS_GROUP_INDEX s/COMMA_SEPARATED_INDEXES`
+Format: `enrol c/CLASS_GROUP_INDEX s/all|COMMA_SEPARATED_INDEXES|COMMA_SEPARATED_STUDENT_IDS`
 
-* Enrols the students at the specified `COMMA_SEPARATED_INDEXES` to the class group at the specified `CLASS_GROUP_INDEX`.
+* Enrols the specified students to the class group at the specified `CLASS_GROUP_INDEX`.
+* Students may be specified with either `all` (i.e. all students), `COMMA_SEPARATED_INDEXES` or `COMMA_SEPARATED_STUDENT_IDS`.
 * The index refers to the index number shown in the displayed student or class group list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
+* `enrol c/1 s/all` enrols all students to the 1st class group shown when `list class` is run.
 * `enrol c/1 s/1,2,3,4,5,6` enrols the 1st 6 students shown when `list student` is run to the 1st class group shown when `list class` is run.
+* `enrol c/1 s/e0123456,e0234567` enrols the students with student IDs `E0123456` and `E0234567` to the 1st class group shown when `list class` is run.
 
 ### Taking student attendance [coming in v1.3]
 
@@ -131,45 +140,50 @@ Examples:
 
 Marks student(s)' attendance(s).
 
-Format: `mark attend c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|COMMA_SEPARATED_INDEXES`
+Format: `mark attend c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|COMMA_SEPARATED_INDEXES|COMMA_SEPARATED_STUDENT_IDS`
 
-* Marks the attendance(s) of the student(s) at the specified `COMMA_SEPARATED_INDEXES` belonging to the class group at the specified `CLASS_GROUP_INDEX` for the specified week.
+* Marks the attendance(s) of the specified student(s) belonging to the class group at the specified `CLASS_GROUP_INDEX` for the specified week.
+* Students may be specified with either `all` (i.e. all students), `COMMA_SEPARATED_INDEXES` or `COMMA_SEPARATED_STUDENT_IDS`.
 * The index refers to the index number shown in the displayed student or class group list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `mark attend c/1 w/3 s/1,2,3,4,5,6` marks the attendances of the 1st 6 students belonging to the 1st class group for week 3.
 * `mark attend c/1 w/3 s/all` marks the attendances of all the students belonging to the 1st class group for week 3.
+* `mark attend c/1 w/3 s/1,2,3,4,5,6` marks the attendances of the 1st 6 students belonging to the 1st class group for week 3.
+* `mark attend c/1 w/3 s/e0123456,e0234567` marks the attendances of the students with student IDs `E0123456` and `E0234567` belonging to the 1st class group for week 3.
 
 #### Unmarking attendance
 
 Unmarks student(s)' attendance(s).
 
-Format: `unmark attend c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|COMMA_SEPARATED_INDEXES`
+Format: `unmark attend c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|COMMA_SEPARATED_INDEXES|COMMA_SEPARATED_STUDENT_IDS`
 
-* Unmarks the attendance(s) of the student(s) at the specified `COMMA_SEPARATED_INDEXES` belonging to the class group at the specified `CLASS_GROUP_INDEX` for the specified week.
+* Unmarks the attendance(s) of the specified student(s) belonging to the class group at the specified `CLASS_GROUP_INDEX` for the specified week.
+* Students may be specified with either `all` (i.e. all students), `COMMA_SEPARATED_INDEXES` or `COMMA_SEPARATED_STUDENT_IDS`.
 * The index refers to the index number shown in the displayed student or class group list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `unmark attend c/1 w/3 s/1,2,3,4,5,6` unmarks the attendances of the 1st 6 students belonging to the 1st class group for week 3.
 * `unmark attend c/1 w/3 s/all` unmarks the attendances of all the students belonging to the 1st class group for week 3.
+* `unmark attend c/1 w/3 s/1,2,3,4,5,6` unmarks the attendances of the 1st 6 students belonging to the 1st class group for week 3.
+* `unmark attend c/1 w/3 s/e0123456,e0234567` unmarks the attendances of the students with student IDs `E0123456` and `E0234567` belonging to the 1st class group for week 3.
 
 ### Grading assessments: `grade` [coming in v1.3]
 
 Grades student's assessment.
 
-Format: `grade {a\ASSESSMENT_INDEX | sn\SIMPLE_NAME m\MODULE_INDEX} s\STUDENT_ID [g\GRADE]`
+Format: `grade {a/ASSESSMENT_INDEX | sn/SIMPLE_NAME m/MODULE_INDEX} s/all|COMMA_SEPARATED_INDEXES|COMMA_SEPARATED_STUDENT_IDS [g/GRADE]`
 
-* Grades the assessment of the student with the specified `STUDENT_ID`.
 * The assessment can be specified with either the `ASSESSMENT_INDEX` or the `SIMPLE_NAME` and `MODULE_INDEX`.
+* Students may be specified with either `all` (i.e. all students), `COMMA_SEPARATED_INDEXES` or `COMMA_SEPARATED_STUDENT_IDS`.
 * The index refers to the index number shown in the displayed assessment or module list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* If the grade is omitted, the value of the student's attempt will simply be incremented.
+* If the grade is omitted, the value of the student's attempt will simply be incremented (i.e. `0` will be incremented to `1`).
 
 Examples:
-* `grade a\1 s\e0123456 g\1` adds a grade of value `1` for the student with a student ID of `E0123456` to the 1st assessment shown when `list assessment` is run.
-* `grade sn\lab1 m\1 s\e0123456 g\1` adds a grade of value `1` for the student with a student ID of `E0123456` to the `lab1` assessment belonging to the 1st module shown when `list module` is run.
+* `grade sn/lab1 m/1 s/all g/1` adds a grade of value `1` for all students to the `lab1` assessment belonging to the 1st module shown when `list module` is run.
+* `grade a/1 s/1,2,3,4,5,6` increments the grades of the 1st 6 students shown when `list student` is run to the 1st assessment shown when `list assessment` is run.
+* `grade a/1 s/e0123456,e0234567 g/1` adds a grade of value `1` for the students with student IDs `E0123456` and `E0234567` to the 1st assessment shown when `list assessment` is run.
 
 ### Listing entries
 
@@ -203,7 +217,7 @@ Format: `list assessment`
 
 Shows a list of students belonging to either module or class group.
 
-Format: `list student m/MODULE_INDEX OR c/CLASS_GROUP_INDEX`
+Format: `list student {m/MODULE_INDEX | c/CLASS_GROUP_INDEX}`
 
 * Displays the students belonging to the module at the specified `MODULE_INDEX` or the class group at the specified `CLASS_GROUP_INDEX`.
 * The index refers to the index number shown in the displayed module or class group list.
@@ -230,7 +244,7 @@ Examples:
 
 Shows a list of all assessments belonging to a particular module.
 
-Format: `list assessment m\MODULE_INDEX`
+Format: `list assessment m/MODULE_INDEX`
 
 Examples:
 * `list assessment m/1` displays the assessment(s) belonging to the 1st module shown when `list module` is run.
@@ -360,8 +374,8 @@ _Details coming soon ..._
         <td>assessment</td>
         <td>
             <ul>
-                <li>syntax: <code>add assessment n\ASSESSMENT_NAME m\MODULE_INDEX [sn\SIMPLE_NAME]</code></li>
-                <li>e.g., <code>add assessment n\Test m\1</code></li>
+                <li>syntax: <code>add assessment n/ASSESSMENT_NAME m/MODULE_INDEX [sn/SIMPLE_NAME]</code></li>
+                <li>e.g., <code>add assessment n/Test m/1</code></li>
             </ul>
         </td>
     </tr>
@@ -370,8 +384,10 @@ _Details coming soon ..._
         <td>student(s)</td>
         <td>
             <ul>
-                <li>syntax: <code>enrol c/CLASS_GROUP_INDEX s/COMMA_SEPARATED_INDEXES</code></li>
+                <li>syntax: <code>enrol c/CLASS_GROUP_INDEX s/all|COMMA_SEPARATED_INDEXES|COMMA_SEPARATED_STUDENT_IDS</code></li>
+                <li>e.g., <code>enrol c/1 s/all</code></li>
                 <li>e.g., <code>enrol c/1 s/1,2,3,4,5,6</code></li>
+                <li>e.g., <code>enrol c/1 s/e0123456,e0234567</code></li>
             </ul>
         </td>
     </tr>
@@ -380,12 +396,16 @@ _Details coming soon ..._
         <td>student(s)</td>
         <td>
             <ul>
-                <li>syntax: <code>mark attend c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|COMMA_SEPARATED_INDEXES</code></li>
+                <li>syntax: <code>mark attend c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|COMMA_SEPARATED_INDEXES|COMMA_SEPARATED_STUDENT_IDS</code></li>
+                <li>e.g., <code>mark attend c/1 w/3 s/all</code></li>
                 <li>e.g., <code>mark attend c/1 w/3 s/1,2,3,4,5,6</code></li>
+                <li>e.g., <code>mark attend c/1 w/3 s/e0123456,e0234567</code></li>
             </ul>
             <ul>
-                <li>syntax: <code>unmark attend c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|COMMA_SEPARATED_INDEXES</code></li>
+                <li>syntax: <code>unmark attend c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|COMMA_SEPARATED_INDEXES|COMMA_SEPARATED_STUDENT_IDS</code></li>
+                <li>e.g., <code>unmark attend c/1 w/3 s/all</code></li>
                 <li>e.g., <code>unmark attend c/1 w/3 s/1,2,3,4,5,6</code></li>
+                <li>e.g., <code>unmark attend c/1 w/3 s/e0123456,e0234567</code></li>
             </ul>
         </td>
     </tr>
@@ -394,9 +414,10 @@ _Details coming soon ..._
         <td>assessment</td>
         <td>
             <ul>
-                <li>syntax: <code>grade {a\ASSESSMENT_INDEX | sn\SIMPLE_NAME m\MODULE_INDEX} s\STUDENT_ID [g\GRADE]</code></li>
-                <li>e.g., <code>grade a\1 s\e0123456 g\1</code></li>
-                <li>e.g., <code>grade sn\lab1 m\1 s\e0123456 g\1</code></li>
+                <li>syntax: <code>grade {a/ASSESSMENT_INDEX | sn/SIMPLE_NAME m/MODULE_INDEX} s/all|COMMA_SEPARATED_INDEXES|COMMA_SEPARATED_STUDENT_IDS [g/GRADE]</code></li>
+                <li>e.g., <code>grade sn/lab1 m/1 s/all g/1</code></li>
+                <li>e.g., <code>grade a/1 s/1,2,3,4,5,6</code></li>
+                <li>e.g., <code>grade a/1 s/e0123456,e0234567 g/1</code></li>
             </ul>
         </td>
     </tr>
@@ -438,7 +459,7 @@ _Details coming soon ..._
         <td>students</td>
         <td>
             <ul>
-                <li>syntax: <code>list student m/MODULE_INDEX OR c/CLASS_GROUP_INDEX</code></li>
+                <li>syntax: <code>list student {m/MODULE_INDEX | c/CLASS_GROUP_INDEX}</code></li>
                 <li>e.g., <code>list student m/1</code></li>
                 <li>e.g., <code>list student c/2</code></li>
             </ul>
@@ -457,7 +478,7 @@ _Details coming soon ..._
         <td>assessments</td>
         <td>
             <ul>
-                <li>syntax: <code>list assessment m\MODULE_INDEX</code></li>
+                <li>syntax: <code>list assessment m/MODULE_INDEX</code></li>
                 <li>e.g., <code>list assessment m/1</code></li>
             </ul>
         </td>

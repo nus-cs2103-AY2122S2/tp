@@ -159,11 +159,9 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Delete feature
+### Delete feature
 
-#### Proposed Implementation
-
-The proposed delete mechanism is facilitated by `TAssist`. Its functionality, usage and behaviour is the same for all entities. Additionally, it implements the following operations:
+The delete mechanism is facilitated by `TAssist`. Its functionality, usage and behaviour is the same for all entities. Additionally, it implements the following operations:
 
 * `DeleteCommandParser#parse()` — Parses the command arguments.
 * `DeleteCommand#execute()` — Executes `ModelManager#deleteEntity()` with the specified entity.
