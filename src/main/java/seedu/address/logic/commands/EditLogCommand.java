@@ -1,10 +1,20 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOG_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_TITLE;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.common.Description;
-import seedu.address.model.common.Name;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.FriendName;
@@ -14,16 +24,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LOG_INDEX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_TITLE;
 
 /**
  * Edits a log of a person in the address book.
@@ -37,13 +37,13 @@ public class EditLogCommand extends ByIndexByNameCommand {
             + "Parameters: "
             + "INDEX ? " + PREFIX_NAME + "NAME "
             + PREFIX_LOG_INDEX + "LOG_INDEX ["
-            + PREFIX_NEW_TITLE + "NEW_TITLE ? "
-            + PREFIX_NEW_DESCRIPTION + "NEW DESCRIPTION\n"
+            + PREFIX_NEW_TITLE + "NEW_TITLE] ["
+            + PREFIX_NEW_DESCRIPTION + "NEW DESCRIPTION]\n"
             + "Note that at least one of title and description must be provided.\n"
             + "Example: " + COMMAND_WORD + " "
             + "1 "
             + PREFIX_LOG_INDEX + "1 "
-            + PREFIX_NEW_DESCRIPTION  + "Likes apples";
+            + PREFIX_NEW_DESCRIPTION + "Likes apples";
 
     public static final String MESSAGE_EDIT_LOG_SUCCESS = "Log successfully edited!";
     public static final String MESSAGE_LOG_NOT_FOUND = "The specified log does not exist!";
@@ -181,7 +181,7 @@ public class EditLogCommand extends ByIndexByNameCommand {
         public void setNewTitle(LogName newTitle) {
             this.newTitle = newTitle;
         }
-        
+
         public void setNewDescription(String newDescription) {
             this.newDescription = new Description(newDescription);
         }

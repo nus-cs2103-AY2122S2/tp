@@ -362,7 +362,7 @@ public class AddLogCommandTest {
 
         // ===== INVALID TITLE =====
 
-        assertThrows(AssertionError.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             Model m = new ModelManager(getTypicalAddressBook(), new UserPrefs());
             AddLogCommand.AddLogDescriptor d = new AddLogCommand.AddLogDescriptor();
             d.setNewTitle(invalidTitle);

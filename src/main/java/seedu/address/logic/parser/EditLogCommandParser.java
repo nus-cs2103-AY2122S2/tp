@@ -18,6 +18,9 @@ public class EditLogCommandParser implements Parser<EditLogCommand> {
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditLogCommand.MESSAGE_USAGE);
     public static final String MESSAGE_NO_EDITS_DETECTED = "No edits made!";
 
+    /**
+     * Parses a string argument and returns an EditLogCommand.
+     */
     public EditLogCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
@@ -27,8 +30,10 @@ public class EditLogCommandParser implements Parser<EditLogCommand> {
                         PREFIX_NAME, PREFIX_LOG_INDEX,
                         PREFIX_NEW_TITLE, PREFIX_NEW_DESCRIPTION);
 
-        // check that log index is present
-        if (!arePrefixesPresent(argMultimap, PREFIX_LOG_INDEX)) {
+        // check that log index, and at least one of new title/description is present
+        if (!arePrefixesPresent(argMultimap, PREFIX_LOG_INDEX)
+            || (!arePrefixesPresent(argMultimap, PREFIX_NEW_DESCRIPTION)
+                && !arePrefixesPresent(argMultimap, PREFIX_NEW_TITLE))) {
             throw new ParseException(MESSAGE_INVALID_FORMAT);
         }
 
@@ -40,6 +45,12 @@ public class EditLogCommandParser implements Parser<EditLogCommand> {
         boolean hasIndex = !argMultimap.getPreamble().isEmpty();
         boolean hasName = arePrefixesPresent(argMultimap, PREFIX_NAME);
 
+        // ensure exactly one of index or name prefix is present
+        if ((!hasIndex && !hasName)
+                || (hasIndex && hasName)) {
+            throw new ParseException(MESSAGE_INVALID_FORMAT);
+        }
+
         // parse index or name
         if (hasIndex) {
             personIndex = ParserUtil.parseIndex(argMultimap.getPreamble());
@@ -48,6 +59,8 @@ public class EditLogCommandParser implements Parser<EditLogCommand> {
                 personName = ParserUtil.parseFriendName(argMultimap.getValue(PREFIX_NAME).get());
             }
         }
+
+
 
         // parse other arguments
         if (argMultimap.getValue(PREFIX_LOG_INDEX).isPresent()) {

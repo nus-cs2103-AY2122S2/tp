@@ -174,7 +174,7 @@ public class EditLogCommandTest {
     }
 
     @Test
-    public void execute_withIndexValidInputFilteredList_success(){
+    public void execute_withIndexValidInputFilteredList_success() {
 
         String newTitle = "some new title";
         String newDescription = "some new description";

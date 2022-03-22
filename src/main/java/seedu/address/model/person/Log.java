@@ -38,7 +38,7 @@ public class Log {
     public Log(LogName title, Description description) {
         requireNonNull(title);
         this.title = title;
-        this.description = description;
+        this.description = description == null ? new Description(null) : description;
     }
 
     public Description getDescription() {
