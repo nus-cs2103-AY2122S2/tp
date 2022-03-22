@@ -36,6 +36,9 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
 
     @FXML
+    private PieChartWindow pieChartWindow;
+
+    @FXML
     private StackPane commandBoxPlaceholder;
 
     @FXML
@@ -168,10 +171,22 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Creates and open a pie chart window if it is not yet created or not showing. Or else it will close, create and
+     * open a new pie chart window. Focus of window is not used because user might edit the contact in Tracey and
+     * use the {@code SummariseCommand} again, so an updated window is needed to be shown.
+     * @param message Feedback message from {@code SummariseCommand} to user
+     */
     @FXML
     private void handleSummarise(String message) {
-        UiSummarisePieChart pieChartMaker = new UiSummarisePieChart(message);
-        pieChartMaker.showPieChartWindow();
+        if (pieChartWindow == null || !pieChartWindow.isShowing()) {
+            pieChartWindow = new PieChartWindow(message);
+            pieChartWindow.show();
+        } else {
+            pieChartWindow.hide();
+            pieChartWindow = new PieChartWindow(message);
+            pieChartWindow.show();
+        }
     }
 
     public PersonListPanel getPersonListPanel() {
