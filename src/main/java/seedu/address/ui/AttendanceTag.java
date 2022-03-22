@@ -34,14 +34,14 @@ public class AttendanceTag {
         Label attendanceTag = new Label(dateString);
 
         if (isPresent.isEmpty()) {
-            attendanceTag.setStyle("-fx-background-color: #55565b");
+            attendanceTag.setStyle("-fx-background-color: #c4c4c4");
             return attendanceTag;
         }
 
         if (isPresent.get()) {
-            attendanceTag.setStyle("-fx-background-color: #bffcc6");
+            attendanceTag.setStyle("-fx-background-color: #95ff7a");
         } else {
-            attendanceTag.setStyle("-fx-background-color: #fbbebc");
+            attendanceTag.setStyle("-fx-background-color: #ff7e7e");
         }
 
         return attendanceTag;
