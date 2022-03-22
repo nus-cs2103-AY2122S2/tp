@@ -1,0 +1,15 @@
+@startuml
+start
+:User executes sort command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([argument == "/o"])
+    :Sort pet list by owner name;
+else ([argument == "/n"])
+    :Sort pet list by pet name;
+endif
+stop
+@enduml
+

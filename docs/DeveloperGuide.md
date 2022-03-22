@@ -154,6 +154,39 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### \[Proposed\] Sorting feature
+
+#### Proposed Implementation
+
+The proposed sorting mechanism is facilitated by `SortCommand` class. It extends `Command` 
+and takes in a field that the user wishes to sort the Address Book by. The field is parsed by 
+`SortCommandParser`.
+
+The primary sorting operation that takes place in the SortCommand class is sortPetList. This operation is exposed
+in the `Model` interface as Model#sortPetList().
+
+Currently, pet list can only be sorted by pet name or owner name. Each class implements the `Comparable` interface so that
+they can be compared and sorted alphabetically. 
+
+The following sequence diagram shows how the sort operation works:
+![SortSequenceDiagram](images/SortSequenceDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes a new sort command:
+![SortActivityDiagram](images/SortActivityDiagram.png)
+
+#### Design considerations:
+
+* **Alternative 1 (current choice):** Currently the comparator classes for both owner name and pet name are generated 
+  within the `sortPetList` method in `UniquePetList`. 
+    * Pros: Easy to implement.
+    * Cons: May be confusing to edit if there are more comparator classes in the future. 
+
+* **Alternative 2:** Generate a new package containing the various comparator classes. 
+    * Pros: Cleaner code. Better for future scalability.
+    * Cons: Contributes to more lines of code. Harder to set up initially.
+
+    
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
