@@ -123,10 +123,6 @@ public class ModelManager implements Model {
             tAssist.removeStudent(EntityConverter.entityToStudent(target));
             break;
         case TA_MODULE:
-            // remove all the class groups tied to the current module
-            for (ClassGroup classGroup: this.getClassesOfModule(EntityConverter.entityToTaModule(target))) {
-                tAssist.removeClassGroup(classGroup);
-            }
             tAssist.removeModule(EntityConverter.entityToTaModule(target));
             break;
         case CLASS_GROUP:
@@ -221,22 +217,6 @@ public class ModelManager implements Model {
     public void updateFilteredClassGroupList(Predicate<? super ClassGroup> predicate) {
         requireNonNull(predicate);
         filteredClassGroups.setPredicate(predicate);
-    }
-
-    //@@author EvaderFati
-    /**
-     * Find all the class groups tied to a specific TA module.
-     * @param taModule the TA module that contains the target class groups
-     * @return a list of class groups
-     */
-    private List<ClassGroup> getClassesOfModule(TaModule taModule) {
-        List<ClassGroup> res = new ArrayList<>();
-        for (ClassGroup classGroup : filteredClassGroups) {
-            if (classGroup.getModule().equals(taModule)) {
-                res.add(classGroup);
-            }
-        }
-        return res;
     }
 
     @Override

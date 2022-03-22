@@ -3,6 +3,7 @@ package seedu.address.model.classgroup;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.classgroup.exceptions.ClassGroupNotFoundException;
 import seedu.address.model.classgroup.exceptions.DuplicateClassGroupException;
+import seedu.address.model.tamodule.TaModule;
 
 //@@author jxt00
 /**
@@ -105,6 +107,16 @@ public class UniqueClassGroupList implements Iterable<ClassGroup> {
      */
     public ObservableList<ClassGroup> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
+    }
+
+    public List<ClassGroup> findClassesOfModule(TaModule taModule) {
+        List<ClassGroup> lst = new ArrayList<>();
+        for (ClassGroup classGroup : internalList) {
+            if (classGroup.getModule().equals(taModule)) {
+                lst.add(classGroup);
+            }
+        }
+        return lst;
     }
 
     @Override
