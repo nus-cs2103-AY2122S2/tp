@@ -20,8 +20,10 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyInterviewSchedule;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.candidate.Candidate;
+import seedu.address.model.interview.Interview;
 import seedu.address.testutil.CandidateBuilder;
 
 public class AddCommandTest {
@@ -110,6 +112,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public Path getInterviewScheduleFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setInterviewScheduleFilePath(Path interviewListFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addPerson(Candidate candidate) {
             throw new AssertionError("This method should not be called.");
         }
@@ -120,7 +132,17 @@ public class AddCommandTest {
         }
 
         @Override
+        public void setInterviewSchedule(ReadOnlyInterviewSchedule interviewList) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ReadOnlyAddressBook getAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyInterviewSchedule getInterviewSchedule() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -136,6 +158,21 @@ public class AddCommandTest {
 
         @Override
         public void setPerson(Candidate target, Candidate editedCandidate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasInterviewCandidate(Interview interview) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasConflictingInterview(Interview interview) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addInterview(Interview interview) {
             throw new AssertionError("This method should not be called.");
         }
 

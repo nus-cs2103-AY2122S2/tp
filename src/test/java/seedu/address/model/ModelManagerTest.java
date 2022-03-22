@@ -5,20 +5,21 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalInterviews.INTERVIEW_ALICE;
+import static seedu.address.testutil.TypicalInterviews.INTERVIEW_BENSON;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.Comparator;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.candidate.Candidate;
 import seedu.address.model.candidate.predicate.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.InterviewScheduleBuilder;
 
 public class ModelManagerTest {
 
@@ -29,6 +30,7 @@ public class ModelManagerTest {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
         assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
+        assertEquals(new InterviewSchedule(), new InterviewSchedule(modelManager.getInterviewSchedule()));
     }
 
     @Test
@@ -95,33 +97,63 @@ public class ModelManagerTest {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
     }
 
+    //=======TODO======
     @Test
-    public void updateSortedPersonList_sortList() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(BENSON).withPerson(ALICE).build();
-        UserPrefs userPrefs = new UserPrefs();
-        modelManager = new ModelManager(addressBook, userPrefs);
-        Comparator<Candidate> sortComparator = Comparator.comparing(l -> l.getName().toString().toLowerCase());
-
-        // returns true before sorting
-        assertTrue(modelManager.getAddressBook().getPersonList().get(0).getName().fullName
-                .compareTo(modelManager.getAddressBook().getPersonList().get(1).getName().fullName) > 0);
-
-        // returns false after sorting
-        modelManager.updateSortedPersonList(sortComparator);
-        assertFalse(modelManager.getAddressBook().getPersonList().get(0).getName().fullName
-                .compareTo(modelManager.getAddressBook().getPersonList().get(1).getName().fullName) > 0);
+    public void setInterviewScheduleFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setInterviewScheduleFilePath(null));
     }
 
+    @Test
+    public void setInterviewScheduleFilePath_validPath_setsInterviewScheduleFilePath() {
+        Path path = Paths.get("interview/schedule/file/path");
+        modelManager.setInterviewScheduleFilePath(path);
+        assertEquals(path, modelManager.getInterviewScheduleFilePath());
+    }
+
+    @Test
+    public void hasInterviewCandidate_nullinterview_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasInterviewCandidate(null));
+    }
+
+    @Test
+    public void hasConflictingInterview_nullinterview_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasConflictingInterview(null));
+    }
+
+    @Test
+    public void hasInterviewCandidate_candidateNotInInterviewSchedule_returnsFalse() {
+        assertFalse(modelManager.hasInterviewCandidate(INTERVIEW_ALICE));
+    }
+
+    @Test
+    public void hasConflictingInterview_interviewNotInInterviewSchedule_returnsFalse() {
+        assertFalse(modelManager.hasConflictingInterview(INTERVIEW_ALICE));
+    }
+
+    @Test
+    public void hasInterviewCandidate_interviewInInterviewSchedule_returnsTrue() {
+        modelManager.addInterview(INTERVIEW_ALICE);
+        assertTrue(modelManager.hasInterviewCandidate(INTERVIEW_ALICE));
+    }
+
+    @Test
+    public void hasConflictingInterview_interviewInInterviewSchedule_returnsTrue() {
+        modelManager.addInterview(INTERVIEW_ALICE);
+        assertTrue(modelManager.hasConflictingInterview(INTERVIEW_ALICE));
+    }
 
     @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        InterviewSchedule interviewSchedule = new InterviewScheduleBuilder().withInterview(INTERVIEW_ALICE)
+                .withInterview(INTERVIEW_BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
+        InterviewSchedule differentInterviewSchedule = new InterviewSchedule();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        modelManager = new ModelManager(addressBook, interviewSchedule, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(addressBook, interviewSchedule, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -134,12 +166,13 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(differentAddressBook,
+                differentInterviewSchedule, userPrefs)));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, interviewSchedule, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -147,6 +180,6 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, interviewSchedule, differentUserPrefs)));
     }
 }

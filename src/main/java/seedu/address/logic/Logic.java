@@ -8,6 +8,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyInterviewSchedule;
 import seedu.address.model.candidate.Candidate;
 
 /**
@@ -30,6 +31,13 @@ public interface Logic {
      */
     ReadOnlyAddressBook getAddressBook();
 
+    /**
+     * Returns the InterviewSchedule.
+     *
+     * @see seedu.address.model.Model#getAddressBook()
+     */
+    ReadOnlyInterviewSchedule getInterviewSchedule();
+
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Candidate> getFilteredPersonList();
 
@@ -37,6 +45,11 @@ public interface Logic {
      * Returns the user prefs' address book file path.
      */
     Path getAddressBookFilePath();
+
+    /**
+     * Returns the user prefs' interview list file path.
+     */
+    Path getInterviewScheduleFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

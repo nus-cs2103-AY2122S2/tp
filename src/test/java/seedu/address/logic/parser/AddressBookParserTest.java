@@ -7,6 +7,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,7 +22,9 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.SortCommand;
+import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.candidate.Candidate;
 import seedu.address.model.candidate.predicate.PersonContainsKeywordsPredicate;
@@ -91,6 +94,20 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_sort() throws Exception {
         assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD + " s/" + "name") instanceof SortCommand);
+    }
+
+    @Test
+    public void parseCommand_schedule() throws Exception {
+        ScheduleCommand command = (ScheduleCommand) parser.parseCommand(
+                ScheduleCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+                        + " /at 01/01/2023 10:00");
+        assertEquals(new ScheduleCommand(INDEX_FIRST_PERSON,
+                LocalDateTime.of(2023, 01, 01, 10, 00)), command);
+    }
+
+    @Test
+    public void parseCommand_view() throws Exception {
+        assertTrue(parser.parseCommand(ViewCommand.COMMAND_WORD) instanceof ViewCommand);
     }
 
     @Test

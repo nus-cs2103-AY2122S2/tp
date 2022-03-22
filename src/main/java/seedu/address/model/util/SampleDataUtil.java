@@ -5,7 +5,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.InterviewSchedule;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyInterviewSchedule;
 import seedu.address.model.candidate.ApplicationStatus;
 import seedu.address.model.candidate.Availability;
 import seedu.address.model.candidate.Candidate;
@@ -54,6 +56,11 @@ public class SampleDataUtil {
             sampleAb.addPerson(sampleCandidate);
         }
         return sampleAb;
+    }
+
+    public static ReadOnlyInterviewSchedule getEmptyInterviewList() {
+        InterviewSchedule emptyList = new InterviewSchedule();
+        return emptyList;
     }
 
     /**

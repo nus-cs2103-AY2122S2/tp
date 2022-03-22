@@ -13,6 +13,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.candidate.Candidate;
+import seedu.address.model.interview.Interview;
+
 
 /**
  * Represents the in-memory model of the address book data.
@@ -21,24 +23,29 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
+    private final InterviewSchedule interviewSchedule;
     private final UserPrefs userPrefs;
     private final FilteredList<Candidate> filteredCandidates;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyInterviewSchedule interviewList,
+                        ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + addressBook + ", InterviewSchedule: " + interviewList
+                + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+
+        this.interviewSchedule = new InterviewSchedule(interviewList);
         filteredCandidates = new FilteredList<>(this.addressBook.getPersonList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new InterviewSchedule(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -74,6 +81,17 @@ public class ModelManager implements Model {
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
+    }
+
+    @Override
+    public Path getInterviewScheduleFilePath() {
+        return userPrefs.getInterviewListFilePath();
+    }
+
+    @Override
+    public void setInterviewScheduleFilePath(Path interviewListFilePath) {
+        requireNonNull(interviewListFilePath);
+        userPrefs.setInterviewListFilePath(interviewListFilePath);
     }
 
     //=========== AddressBook ================================================================================
@@ -112,8 +130,49 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedCandidate);
     }
 
-    //=========== Filter/Sort Person List Accessors =============================================================
+    //=========== InterviewSchedule ================================================================================
 
+    @Override
+    public void setInterviewSchedule(ReadOnlyInterviewSchedule interviewList) {
+        this.interviewSchedule.resetData(interviewList);
+    }
+
+    @Override
+    public ReadOnlyInterviewSchedule getInterviewSchedule() {
+        return interviewSchedule;
+    }
+
+    @Override
+    public boolean hasInterviewCandidate(Interview interview) {
+        requireNonNull(interview);
+        return interviewSchedule.hasCandidate(interview);
+    }
+
+    @Override
+    public boolean hasConflictingInterview(Interview interview) {
+        requireNonNull(interview);
+        return interviewSchedule.hasConflictingInterview(interview);
+    }
+
+    /*@Override
+    public void deleteInterview(Interview target) {
+        interviewSchedule.removeInterview(target);
+    }*/
+
+    @Override
+    public void addInterview(Interview interview) {
+        interviewSchedule.addInterview(interview);
+        //updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    /*@Override
+    public void setInterview(Interview target, Interview editedInterview) {
+        requireAllNonNull(target, editedInterview);
+
+        interviewSchedule.setInterview(target, editedInterview);
+    }*/
+
+    //=========== Filtered/Sort Person List Accessors =============================================================
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
      * {@code versionedAddressBook}
@@ -151,7 +210,8 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredCandidates.equals(other.filteredCandidates);
+                && filteredCandidates.equals(other.filteredCandidates)
+                && interviewSchedule.equals(other.interviewSchedule);
     }
 
 }

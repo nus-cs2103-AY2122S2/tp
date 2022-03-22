@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -28,6 +29,8 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_DATE_TIME = "01/01/2000 12:00";
+    private static final String INVALID_FORMAT_DATE_TIME = "2025/03/01 10PM";
 
     private static final String VALID_STUDENT_ID = "E0123456";
     private static final String VALID_NAME = "Rachel Walker";
@@ -36,6 +39,7 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_DATE_TIME = "20/03/2025 10:00";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -218,5 +222,23 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseDateTime_validFormat_returnsLocalDateTime() throws ParseException {
+        LocalDateTime actualInterviewDateTime = ParserUtil.parseDateTime(VALID_DATE_TIME);
+        LocalDateTime expectedInterviewDateTime = LocalDateTime.of(2025, 03, 20, 10, 00);
+
+        assertEquals(actualInterviewDateTime, expectedInterviewDateTime);
+    }
+
+    @Test
+    public void parseDateTime_invalidFormat_throwsException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDateTime(INVALID_FORMAT_DATE_TIME));
+    }
+
+    @Test
+    public void parseDateTime_invalidDateTime_throwsException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDateTime(INVALID_DATE_TIME));
     }
 }

@@ -13,6 +13,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -42,10 +44,19 @@ public class CommandTestUtil {
     public static final String VALID_COURSE_BOB = "Computer Engineering";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+
     public static final String VALID_APPLICATION_STATUS = "Pending";
     public static final String VALID_INTERVIEW_STATUS = "Pending";
     public static final String VALID_AVAILABILITY_AMY = "1,2,3,4,5";
     public static final String VALID_AVAILABILITY_BOB = "1,2,6,7";
+
+    public static final LocalDateTime VALID_ALICE_INTERVIEW_DATE_TIME =
+            LocalDateTime.of(2023, Month.FEBRUARY, 23, 15, 00);
+    public static final LocalDateTime VALID_BENSON_INTERVIEW_DATE_TIME =
+            LocalDateTime.of(2023, Month.DECEMBER, 01, 15, 00);
+    public static final LocalDateTime VALID_CARL_INTERVIEW_DATE_TIME =
+            VALID_ALICE_INTERVIEW_DATE_TIME.plusMinutes(15);
+
 
     public static final String STUDENT_ID_DESC_AMY = " " + PREFIX_ID + VALID_STUDENT_ID_AMY;
     public static final String STUDENT_ID_DESC_BOB = " " + PREFIX_ID + VALID_STUDENT_ID_BOB;
@@ -72,6 +83,10 @@ public class CommandTestUtil {
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_AVAILABILITY_DESC = " "
             + PREFIX_AVAILABILITY + "1,,1"; // double commas ',' not allowed in availability
+
+    public static final LocalDateTime INVALID_INTERVIEW_DATE_TIME =
+            LocalDateTime.of(2020, Month.FEBRUARY, 23, 15, 00); //Past date and time
+
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

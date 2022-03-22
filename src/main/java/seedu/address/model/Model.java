@@ -7,6 +7,8 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.candidate.Candidate;
+import seedu.address.model.interview.Interview;
+
 
 /**
  * The API of the Model component.
@@ -49,12 +51,30 @@ public interface Model {
     void setAddressBookFilePath(Path addressBookFilePath);
 
     /**
+     * Returns the user prefs' interview list file path.
+     */
+    Path getInterviewScheduleFilePath();
+
+    /**
+     * Sets the user prefs' interview list file path.
+     */
+    void setInterviewScheduleFilePath(Path interviewListFilePath);
+
+    /**
      * Replaces address book data with the data in {@code addressBook}.
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
+    /**
+     * Replaces interview list data with the data in {@code interviewList}.
+     */
+    void setInterviewSchedule(ReadOnlyInterviewSchedule interviewList);
+
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
+
+    /** Returns the InterviewSchedule */
+    ReadOnlyInterviewSchedule getInterviewSchedule();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
@@ -79,6 +99,16 @@ public interface Model {
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
     void setPerson(Candidate target, Candidate editedCandidate);
+
+    boolean hasInterviewCandidate(Interview interview);
+
+    boolean hasConflictingInterview(Interview interview);
+
+    //void deleteInterview(Interview target);
+
+    void addInterview(Interview interview);
+
+    //void setInterview(Interview target, Interview editedInterview);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Candidate> getFilteredPersonList();

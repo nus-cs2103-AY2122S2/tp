@@ -1,7 +1,12 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.ScheduleCommand.MESSAGE_INVALID_DATETIME;
+import static seedu.address.logic.commands.ScheduleCommand.MESSAGE_INVALID_FORMAT_DATETIME;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,6 +23,7 @@ import seedu.address.model.candidate.InterviewStatus;
 import seedu.address.model.candidate.Name;
 import seedu.address.model.candidate.Phone;
 import seedu.address.model.candidate.StudentId;
+import seedu.address.model.interview.Interview;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -202,5 +208,26 @@ public class ParserUtil {
             throw new ParseException(Availability.MESSAGE_CONSTRAINTS);
         }
         return new Availability(trimmedAvailability);
+    }
+
+    /**
+     * Parses a {@code String dateTime} into a {@code LocalDateTime}.
+     *
+     * @param dateTime The given interview date and time.
+     * @return the LocalDateTime of the string.
+     * @throws ParseException if the given {@code dateTime} is in the past or has an invalid format.
+     */
+    public static LocalDateTime parseDateTime(String dateTime) throws ParseException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        LocalDateTime formattedDateTime;
+        try {
+            formattedDateTime = LocalDateTime.parse(dateTime, formatter);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(MESSAGE_INVALID_FORMAT_DATETIME);
+        }
+        if (!Interview.isValidDateTime(formattedDateTime)) {
+            throw new ParseException(MESSAGE_INVALID_DATETIME);
+        }
+        return formattedDateTime;
     }
 }
