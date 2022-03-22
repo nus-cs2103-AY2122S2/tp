@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.team.Skill;
+import seedu.address.model.team.SkillSet;
 import seedu.address.model.team.Team;
 
 /**
@@ -21,17 +22,17 @@ public class Person {
     private final Phone phone;
     private final Email email;
     private final GithubUsername githubUsername;
+    private final SkillSet skillSet = new SkillSet();
 
     // Data fields
     private final boolean isPotentialTeammate;
     private final Set<Team> teams = new HashSet<>();
-    private final Set<Skill> skillSet = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, GithubUsername username,
-                  Set<Team> teams, Set<Skill> skillSet, boolean isPotentialTeammate) {
+                  Set<Team> teams, SkillSet skillSet, boolean isPotentialTeammate) {
         requireAllNonNull(name, phone, email, username, teams, skillSet);
         this.name = name;
         this.phone = phone;
@@ -71,46 +72,6 @@ public class Person {
     }
 
     /**
-     * Returns an immutable skill set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Skill> getSkillSet() {
-        return Collections.unmodifiableSet(skillSet);
-    }
-
-    /**
-     * Returns the skill proficiency of the person for the given skill,
-     * or 0 if the person does not have the skill.
-     *
-     * @param skill Skill of person to get proficiency of.
-     * @return Skill proficiency of the person.
-     */
-    public int getSkillProficiency(Skill skill) {
-        for (Skill s: skillSet) {
-            if (s.isSameSkill(skill)) {
-                return s.skillProficiency;
-            }
-        }
-        return 0;
-    }
-
-    /**
-     * Returns true if the person contains the skill, false otherwise.
-     *
-     * @param skill The skill to check if the person possess.
-     * @return True if the person has the skill, false otherwise.
-     */
-    public boolean hasSkill(Skill skill) {
-        requireAllNonNull(skill);
-        for (Skill s : skillSet) {
-            if (skill.isSameSkill(s)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
@@ -121,6 +82,36 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    /**
+     * Returns an immutable skill set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public SkillSet getSkillSet() {
+        return skillSet;
+    }
+
+    /**
+     * Returns true if the person contains the skill, false otherwise.
+     *
+     * @param skill The skill to check if the person possess.
+     * @return True if the person has the skill, false otherwise.
+     */
+    public boolean hasSkill(Skill skill) {
+        requireAllNonNull(skill);
+        return skillSet.hasSkill(skill);
+    }
+
+    /**
+     * Returns the skill proficiency of the person for the given skill,
+     * or 0 if the person does not have the skill.
+     *
+     * @param skill Skill of person to get proficiency of.
+     * @return Skill proficiency of the person.
+     */
+    public int getSkillProficiency(Skill skill) {
+        return skillSet.getSkillProficiency(skill);
     }
 
     /**
@@ -169,14 +160,9 @@ public class Person {
             builder.append("; Teams: ");
             teams.forEach(builder::append);
         }
+        String skillString = this.skillSet.toString();
 
-        Set<Skill> skillSet = getSkillSet();
-        if (!skillSet.isEmpty()) {
-            builder.append("; Skills: ");
-            skillSet.forEach(builder::append);
-        }
-
-        return builder.toString();
+        return builder.toString().concat(skillString);
     }
 
 }

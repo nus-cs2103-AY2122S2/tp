@@ -18,7 +18,7 @@ import seedu.address.model.person.GithubUsername;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.team.Skill;
+import seedu.address.model.team.SkillSet;
 import seedu.address.model.team.Team;
 
 /**
@@ -46,7 +46,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         GithubUsername username = ParserUtil.parseGithubUsername(argMultimap.getValue(PREFIX_GITHUB_USERNAME).get());
         Set<Team> teamList = ParserUtil.parseTeams(argMultimap.getAllValues(PREFIX_TEAM));
-        Set<Skill> skillSet = ParserUtil.parseSkillSet(argMultimap.getAllValues(PREFIX_SKILL));
+        SkillSet skillSet = ParserUtil.parseSkillSet(argMultimap.getAllValues(PREFIX_SKILL));
 
         Person person = new Person(name, phone, email, username, teamList, skillSet, false);
 

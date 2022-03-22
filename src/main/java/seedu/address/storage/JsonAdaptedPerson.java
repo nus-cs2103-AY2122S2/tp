@@ -16,6 +16,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.team.Skill;
+import seedu.address.model.team.SkillSet;
 import seedu.address.model.team.Team;
 
 /**
@@ -67,7 +68,7 @@ class JsonAdaptedPerson {
         teamSet.addAll(source.getTeams().stream()
                 .map(JsonAdaptedTeam::new)
                 .collect(Collectors.toList()));
-        skillSet.addAll(source.getSkillSet().stream()
+        skillSet.addAll(source.getSkillSet().getSkillSetInStream()
                 .map(JsonAdaptedSkill::new)
                 .collect(Collectors.toList()));
     }
@@ -123,7 +124,8 @@ class JsonAdaptedPerson {
         final GithubUsername modelGithubUsername = new GithubUsername(username);
 
         final Set<Team> modelTeams = new HashSet<>(personTeams);
-        final Set<Skill> modelSkill = new HashSet<>(personSkillSet);
+        final Set<Skill> modelSkillInSet = new HashSet<>(personSkillSet);
+        final SkillSet modelSkill = new SkillSet(modelSkillInSet);
         return new Person(modelName, modelPhone, modelEmail, modelGithubUsername,
                 modelTeams, modelSkill, isPotentialTeammate);
     }

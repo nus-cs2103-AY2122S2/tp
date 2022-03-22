@@ -8,7 +8,7 @@ import seedu.address.model.person.GithubUsername;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.team.Skill;
+import seedu.address.model.team.SkillSet;
 import seedu.address.model.team.Team;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -27,7 +27,7 @@ public class PersonBuilder {
     private Email email;
     private GithubUsername githubUsername;
     private Set<Team> teams;
-    private Set<Skill> skillSet;
+    private SkillSet skillSet;
     private boolean isPotentialTeammate;
 
     /**
@@ -39,7 +39,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         githubUsername = new GithubUsername(DEFAULT_USERNAME);
         teams = new HashSet<>();
-        skillSet = new HashSet<>();
+        skillSet = new SkillSet();
         isPotentialTeammate = false;
     }
 
@@ -53,7 +53,7 @@ public class PersonBuilder {
         githubUsername = personToCopy.getGithubUsername();
         isPotentialTeammate = personToCopy.isPotentialTeammate();
         teams = new HashSet<>(personToCopy.getTeams());
-        skillSet = new HashSet<>(personToCopy.getSkillSet());
+        skillSet = new SkillSet(personToCopy.getSkillSet());
     }
 
     /**

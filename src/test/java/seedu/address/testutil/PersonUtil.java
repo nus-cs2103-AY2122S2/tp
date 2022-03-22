@@ -12,7 +12,7 @@ import java.util.Set;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Person;
-import seedu.address.model.team.Skill;
+import seedu.address.model.team.SkillSet;
 import seedu.address.model.team.Team;
 
 /**
@@ -39,7 +39,7 @@ public class PersonUtil {
         person.getTeams().stream().forEach(
             s -> sb.append(PREFIX_TEAM + s.teamName + " ")
         );
-        person.getSkillSet().stream().forEach(
+        person.getSkillSet().getSkillSetInStream().forEach(
             s -> sb.append(PREFIX_SKILL + s.skillName + "_" + s.skillProficiency + " ")
         );
         return sb.toString();
@@ -64,11 +64,11 @@ public class PersonUtil {
             }
         }
         if (descriptor.getSkillSet().isPresent()) {
-            Set<Skill> skillSet = descriptor.getSkillSet().get();
-            if (skillSet.isEmpty()) {
+            SkillSet skillSet = descriptor.getSkillSet().get();
+            if (skillSet.getSkillSet().isEmpty()) {
                 sb.append(PREFIX_SKILL);
             } else {
-                skillSet.forEach(s -> sb.append(PREFIX_SKILL).append(s.skillName).append("_")
+                skillSet.getSkillSet().forEach(s -> sb.append(PREFIX_SKILL).append(s.skillName).append("_")
                         .append(s.skillProficiency).append(" "));
             }
         }
