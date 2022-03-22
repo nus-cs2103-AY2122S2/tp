@@ -17,6 +17,7 @@ public class Person {
 
     // Identity fields
     private final Name name;
+    private final Block block;
     private final Faculty faculty;
     private final Phone phone;
     private final Email email;
@@ -30,10 +31,11 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Faculty faculty, Phone phone, Email email, Address address,
+    public Person(Name name, Block block, Faculty faculty, Phone phone, Email email, Address address,
                   MatriculationNumber number, CovidStatus status, Set<Tag> tags) {
         requireAllNonNull(name, faculty, phone, email, address, number, status, tags);
         this.name = name;
+        this.block = block;
         this.faculty = faculty;
         this.phone = phone;
         this.email = email;
@@ -45,6 +47,10 @@ public class Person {
 
     public Name getName() {
         return name;
+    }
+
+    public Block getBlock() {
+        return block;
     }
 
     public Faculty getFaculty() {
@@ -138,6 +144,7 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return otherPerson.getName().equals(getName())
+                && otherPerson.getBlock().equals(getBlock())
                 && otherPerson.getFaculty().equals(getFaculty())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
@@ -150,13 +157,15 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, faculty, phone, email, address, number, status, tags);
+        return Objects.hash(name, block, faculty, phone, email, address, number, status, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
+                .append("; Block: ")
+                .append(getBlock())
                 .append("; Faculty: ")
                 .append(getFaculty())
                 .append("; Phone: ")

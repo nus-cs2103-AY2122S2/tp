@@ -2,6 +2,8 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BLOCK_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BLOCK_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COVID_STATUS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COVID_STATUS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
@@ -31,6 +33,7 @@ import seedu.address.model.person.Person;
 public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
+            .withBlock("B")
             .withFaculty("SOC")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253")
@@ -39,6 +42,7 @@ public class TypicalPersons {
             .withTags("friends")
             .build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
+            .withBlock("C")
             .withFaculty("BIZ")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
@@ -47,6 +51,7 @@ public class TypicalPersons {
             .withTags("owesMoney", "friends")
             .build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz")
+            .withBlock("E")
             .withFaculty("YLLSOM")
             .withPhone("95352563")
             .withEmail("heinz@example.com")
@@ -55,6 +60,7 @@ public class TypicalPersons {
             .withCovidStatus("HRN")
             .build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier")
+            .withBlock("A")
             .withFaculty("FOS")
             .withPhone("87652533")
             .withEmail("cornelia@example.com")
@@ -64,6 +70,7 @@ public class TypicalPersons {
             .withTags("friends")
             .build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer")
+            .withBlock("E")
             .withFaculty("DUKE")
             .withPhone("9482224")
             .withEmail("werner@example.com")
@@ -72,6 +79,7 @@ public class TypicalPersons {
             .withCovidStatus("HRW")
             .build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz")
+            .withBlock("B")
             .withFaculty("CDE")
             .withPhone("9482427")
             .withEmail("lydia@example.com")
@@ -80,6 +88,7 @@ public class TypicalPersons {
             .withCovidStatus("NEGATIVE")
             .build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best")
+            .withBlock("E")
             .withFaculty("YSTCOM")
             .withPhone("9482442")
             .withEmail("anna@example.com")
@@ -96,6 +105,7 @@ public class TypicalPersons {
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY)
+            .withBlock(VALID_BLOCK_AMY)
             .withFaculty(VALID_FACULTY_AMY)
             .withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY)
@@ -105,6 +115,7 @@ public class TypicalPersons {
             .withTags(VALID_TAG_FRIEND)
             .build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB)
+            .withBlock(VALID_BLOCK_BOB)
             .withFaculty(VALID_FACULTY_BOB)
             .withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB)

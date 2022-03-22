@@ -12,7 +12,8 @@ import java.util.stream.Stream;
 public class CovidStatus {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Covid status should be one of the following: " + getCovidStatusEnumAsString();
+            "Covid status should be one of the following: " + getCovidStatusEnumAsString() + ", and it should"
+                    + "not be blank";
 
     public enum CovidStatusTier {
         HRW,

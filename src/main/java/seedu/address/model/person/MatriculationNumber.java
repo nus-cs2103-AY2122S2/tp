@@ -12,7 +12,7 @@ public class MatriculationNumber {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Matriculation number should be in the following format: A1234567X, where X is a placeholder for the "
-                    + "last alphabet of the student's matriculation number";
+                    + "last alphabet of the student's matriculation number, and it should not be blank.";
 
     /*
      * The first character of the matriculation number must be an A.

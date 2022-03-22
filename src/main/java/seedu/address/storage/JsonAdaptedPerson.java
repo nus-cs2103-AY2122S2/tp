@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Block;
 import seedu.address.model.person.CovidStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Faculty;
@@ -28,6 +29,7 @@ class JsonAdaptedPerson {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
     private final String name;
+    private final String block;
     private final String faculty;
     private final String phone;
     private final String email;
@@ -40,12 +42,15 @@ class JsonAdaptedPerson {
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("faculty") String faculty,
+    public JsonAdaptedPerson(@JsonProperty("name") String name,
+                             @JsonProperty("block") String block,
+                             @JsonProperty("faculty") String faculty,
                              @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("number") String number, @JsonProperty("status") String status,
                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
+        this.block = block;
         this.faculty = faculty;
         this.phone = phone;
         this.email = email;
@@ -62,6 +67,7 @@ class JsonAdaptedPerson {
      */
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
+        block = source.getBlock().studentBlock;
         faculty = source.getFaculty().studentFaculty;
         phone = source.getPhone().value;
         email = source.getEmail().value;
@@ -91,6 +97,14 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
         final Name modelName = new Name(name);
+
+        if (block == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Block.class.getSimpleName()));
+        }
+        if (!Block.isValidBlock(block)) {
+            throw new IllegalValueException(Block.MESSAGE_CONSTRAINTS);
+        }
+        final Block modelBlock = new Block(block);
 
         if (faculty == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Faculty.class.getSimpleName()));
@@ -144,8 +158,8 @@ class JsonAdaptedPerson {
         final CovidStatus covidStatus = new CovidStatus(status);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelFaculty, modelPhone, modelEmail, modelAddress, matriculationNumber,
-                covidStatus, modelTags);
+        return new Person(modelName, modelBlock, modelFaculty, modelPhone, modelEmail, modelAddress,
+                matriculationNumber, covidStatus, modelTags);
     }
 
 }
