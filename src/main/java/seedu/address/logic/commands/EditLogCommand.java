@@ -52,7 +52,7 @@ public class EditLogCommand extends ByIndexByNameCommand {
     // data fields
     private final Index index;
     private final Index logIndex;
-    private final Name nameToEditLog;
+    private final FriendName nameToEditLog;
     private final EditLogDescriptor editLogDescriptor;
     private final boolean byName;
 
@@ -125,7 +125,7 @@ public class EditLogCommand extends ByIndexByNameCommand {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddLogCommand)) {
+        if (!(other instanceof EditLogCommand)) {
             return false;
         }
 
@@ -153,7 +153,7 @@ public class EditLogCommand extends ByIndexByNameCommand {
 
     @Override
     public String toString() {
-        return "Index: " + this.index.toString() + " Log Index: " + this.logIndex.toString()
+        return "Index: " + this.index.toString() + ", Log Index: " + this.logIndex.toString()
                 + "\nContent:\n" + this.editLogDescriptor.toString();
     }
 
@@ -209,7 +209,7 @@ public class EditLogCommand extends ByIndexByNameCommand {
                     this.newDescription != null ? this.newDescription : initialLog.getDescription()); // create log to be added
 
             // another sanity check
-            if (personToEdit.containsLog(editedLog)) {
+            if (personToEdit.containsLogExactly(editedLog)) {
                 throw new CommandException(MESSAGE_DUPLICATE_LOG); // ensure not a duplicate log being inserted
             }
 
@@ -228,7 +228,7 @@ public class EditLogCommand extends ByIndexByNameCommand {
             }
 
             // instanceof
-            if (!(other instanceof AddLogCommand.AddLogDescriptor)) {
+            if (!(other instanceof EditLogCommand.EditLogDescriptor)) {
                 return false;
             }
 
@@ -236,6 +236,7 @@ public class EditLogCommand extends ByIndexByNameCommand {
             EditLogCommand.EditLogDescriptor e = (EditLogCommand.EditLogDescriptor) other;
             Log thisLog = new Log(this.newTitle, this.newDescription);
             Log otherLog = new Log(e.newTitle, e.newDescription);
+
             return thisLog.equals(otherLog);
         }
 

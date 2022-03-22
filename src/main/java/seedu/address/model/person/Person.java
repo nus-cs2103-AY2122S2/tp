@@ -151,6 +151,10 @@ public class Person {
         return this.logs.contains(log);
     }
 
+    public boolean containsLogExactly(Log log) {
+        return this.logs.containsExactly(log);
+    }
+
     /**
      * Returns true if both persons are the same, which we define to be
      * having the same name.

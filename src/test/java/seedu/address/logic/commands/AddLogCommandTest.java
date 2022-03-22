@@ -332,7 +332,7 @@ public class AddLogCommandTest {
         command = new AddLogCommand(targetName, descriptor);
         assertCommandFailure(command, testModel, AddLogCommand.MESSAGE_DUPLICATE_LOG);
     }
-    @Test //todo
+    @Test
     public void execute_invalidInputUnfilteredList_failure() {
 
         String title = VALID_LOG_TITLE;
