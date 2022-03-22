@@ -120,6 +120,8 @@ Examples:
 
 ### Enrolling students [coming in v1.3]
 
+#### Enrolling students: `enrol`
+
 Enrols 1 or more students to a class group.
 
 Format: `enrol c/CLASS_GROUP_INDEX s/all|COMMA_SEPARATED_INDEXES|COMMA_SEPARATED_STUDENT_IDS`
@@ -133,6 +135,22 @@ Examples:
 * `enrol c/1 s/all` enrols all students to the 1st class group shown when `list class` is run.
 * `enrol c/1 s/1,2,3,4,5,6` enrols the 1st 6 students shown when `list student` is run to the 1st class group shown when `list class` is run.
 * `enrol c/1 s/e0123456,e0234567` enrols the students with student IDs `E0123456` and `E0234567` to the 1st class group shown when `list class` is run.
+
+#### Disenrolling students: `disenrol`
+
+Disenrols 1 or more students from a class group.
+
+Format: `disenrol c/CLASS_GROUP_INDEX s/all|COMMA_SEPARATED_INDEXES|COMMA_SEPARATED_STUDENT_IDS`
+
+* Disenrols the specified students from the class group at the specified `CLASS_GROUP_INDEX`.
+* Students may be specified with either `all` (i.e. all students), `COMMA_SEPARATED_INDEXES` or `COMMA_SEPARATED_STUDENT_IDS`; they should already be enrolled in the specified class group.
+* The index refers to the index number shown in the displayed student or class group list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `disenrol c/1 s/all` disenrols all students from the 1st class group shown when `list class` is run.
+* `disenrol c/1 s/1,2,3,4,5,6` disenrols the 1st 6 students belonging to the 1st class group shown when `list class` is run.
+* `disenrol c/1 s/e0123456,e0234567` disenrols the students with student IDs `E0123456` and `E0234567` from the 1st class group shown when `list class` is run.
 
 ### Taking student attendance [coming in v1.3]
 
@@ -175,14 +193,14 @@ Grades student's assessment.
 Format: `grade {a/ASSESSMENT_INDEX | sn/SIMPLE_NAME m/MODULE_INDEX} s/all|COMMA_SEPARATED_INDEXES|COMMA_SEPARATED_STUDENT_IDS [g/GRADE]`
 
 * The assessment can be specified with either the `ASSESSMENT_INDEX` or the `SIMPLE_NAME` and `MODULE_INDEX`.
-* Students may be specified with either `all` (i.e. all students), `COMMA_SEPARATED_INDEXES` or `COMMA_SEPARATED_STUDENT_IDS`.
+* Students may be specified with either `all` (i.e. all students), `COMMA_SEPARATED_INDEXES` or `COMMA_SEPARATED_STUDENT_IDS`; they should already be enrolled in the module tied to the assessment.
 * The index refers to the index number shown in the displayed assessment or module list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * If the grade is omitted, the value of the student's attempt will simply be incremented (i.e. `0` will be incremented to `1`).
 
 Examples:
-* `grade sn/lab1 m/1 s/all g/1` adds a grade of value `1` for all students to the `lab1` assessment belonging to the 1st module shown when `list module` is run.
-* `grade a/1 s/1,2,3,4,5,6` increments the grades of the 1st 6 students shown when `list student` is run to the 1st assessment shown when `list assessment` is run.
+* `grade sn/lab1 m/1 s/all g/1` adds a grade of value `1` to the `lab1` assessment for all students enrolled in the 1st module shown when `list module` is run.
+* `grade a/1 s/1,2,3,4,5,6` increments the grades of the 1st 6 students enrolled in the module tied to the 1st assessment shown when `list assessment` is run.
 * `grade a/1 s/e0123456,e0234567 g/1` adds a grade of value `1` for the students with student IDs `E0123456` and `E0234567` to the 1st assessment shown when `list assessment` is run.
 
 ### Listing entries
@@ -380,7 +398,7 @@ _Details coming soon ..._
         </td>
     </tr>
     <tr>
-        <td rowspan="1">Enrol</td>
+        <td rowspan="2">Enrolling</td>
         <td>student(s)</td>
         <td>
             <ul>
@@ -388,6 +406,17 @@ _Details coming soon ..._
                 <li>e.g., <code>enrol c/1 s/all</code></li>
                 <li>e.g., <code>enrol c/1 s/1,2,3,4,5,6</code></li>
                 <li>e.g., <code>enrol c/1 s/e0123456,e0234567</code></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>student(s)</td>
+        <td>
+            <ul>
+                <li>syntax: <code>disenrol c/CLASS_GROUP_INDEX s/all|COMMA_SEPARATED_INDEXES|COMMA_SEPARATED_STUDENT_IDS</code></li>
+                <li>e.g., <code>disenrol c/1 s/all</code></li>
+                <li>e.g., <code>disenrol c/1 s/1,2,3,4,5,6</code></li>
+                <li>e.g., <code>disenrol c/1 s/e0123456,e0234567</code></li>
             </ul>
         </td>
     </tr>
