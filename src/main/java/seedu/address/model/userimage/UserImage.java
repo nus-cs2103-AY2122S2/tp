@@ -1,22 +1,19 @@
 package seedu.address.model.userimage;
 
-import seedu.address.logic.commands.UploadCommand.UploadDescriptor;
-
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
 public class UserImage {
+
+    public static final String MESSAGE_CONSTRAINTS =
+                "Image must be of the format: [File Path:Description(optional)]";
+
     private final String description;
     private final FilePath filePath;
     private final File image;
 
-    public UserImage(UploadDescriptor uploadDescriptor) {
-        this.filePath = uploadDescriptor.getFilePath();
-        this.description = uploadDescriptor.getDescription().orElse(null);
-        this.image = new File(filePath.value);
-    }
     public UserImage(FilePath filePath, String description) {
         this.filePath = filePath;
         this.description = description;

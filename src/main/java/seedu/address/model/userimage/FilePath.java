@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 public class FilePath {
 
-    public static final String MESSAGE_CONSTRAINTS = "File path must direct to a existing file";
+    public static final String MESSAGE_CONSTRAINTS = "File not found. Please check your file path";
 
     public final String value;
 

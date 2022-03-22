@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROPERTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USERTYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_USERIMAGE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -48,6 +49,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_PROPERTY + "PROPERTY]..."
             + "[" + PREFIX_USERTYPE + "USERTYPE]\n"
+            + "[" + PREFIX_USERIMAGE + "FILEPATH:DESCRIPTION]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -109,10 +111,20 @@ public class EditCommand extends Command {
         // preference cannot be edited
         Optional<Preference> updatedPreference = personToEdit.getPreference();
         UserType updatedUserType = editPersonDescriptor.getUserType().orElse(personToEdit.getUserType());
-        Optional<UserImage> updatedUserImage = personToEdit.getUserImage();
+        Optional<UserImage> updatedUserImage = setUserImage(personToEdit, editPersonDescriptor);
 
         return new Person(updatedName, updatedPhone, updatedEmail, noChangeFavourite, updatedAddress, updatedProperties,
-                updatedPreference, updatedUserType);
+                updatedPreference, updatedUserType, updatedUserImage);
+    }
+
+    private static Optional<UserImage> setUserImage(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+        Optional<UserImage> updatedUserImage = personToEdit.getUserImage();
+
+        if (editPersonDescriptor.getUserImage().isPresent()) {
+            updatedUserImage = editPersonDescriptor.getUserImage();
+        }
+
+        return updatedUserImage;
     }
 
     @Override
@@ -145,6 +157,7 @@ public class EditCommand extends Command {
         private Address address;
         private Set<Property> properties;
         private UserType userType;
+        private UserImage userImage;
 
         public EditPersonDescriptor() {
         }
@@ -161,6 +174,7 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setProperties(toCopy.properties);
             setUserType(toCopy.userType);
+            setUserImage(toCopy.userImage);
         }
 
         /**
@@ -216,6 +230,14 @@ public class EditCommand extends Command {
 
         public Optional<UserType> getUserType() {
             return Optional.ofNullable(userType);
+        }
+
+        public void setUserImage(UserImage userImage) {
+            this.userImage = userImage;
+        }
+
+        public Optional<UserImage> getUserImage() {
+            return Optional.ofNullable(userImage);
         }
 
         /**

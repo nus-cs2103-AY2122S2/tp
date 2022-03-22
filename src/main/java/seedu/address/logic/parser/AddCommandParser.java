@@ -1,13 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PREFERENCE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PROPERTY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_USERTYPE;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import java.util.Optional;
 import java.util.Set;
@@ -38,7 +32,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_PROPERTY, PREFIX_PREFERENCE, PREFIX_USERTYPE);
+                        PREFIX_PROPERTY, PREFIX_PREFERENCE, PREFIX_USERTYPE, PREFIX_USERIMAGE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_USERTYPE)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -55,7 +49,10 @@ public class AddCommandParser implements Parser<AddCommand> {
                 ? Optional.of(ParserUtil.parsePreference(preferenceArg.get()))
                 : Optional.empty();
         UserType userType = ParserUtil.parseUserType(argMultimap.getValue(PREFIX_USERTYPE).get());
-        UserImage userImage = null;
+        Optional<String> userImageString =  argMultimap.getValue(PREFIX_USERIMAGE);
+        Optional<UserImage> userImage = userImageString.isPresent()
+                ? Optional.of(ParserUtil.parseUserImage(userImageString.get()))
+                : Optional.empty();
 
         Person person = new Person(name, phone, email, address, properties, preference, userType, userImage);
 

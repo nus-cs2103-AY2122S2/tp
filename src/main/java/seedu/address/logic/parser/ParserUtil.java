@@ -20,6 +20,7 @@ import seedu.address.model.property.Property;
 import seedu.address.model.property.Region;
 import seedu.address.model.property.Size;
 import seedu.address.model.userimage.FilePath;
+import seedu.address.model.userimage.UserImage;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -217,6 +218,19 @@ public class ParserUtil {
         return new UserType(trimmedUserType);
     }
 
+    public static UserImage parseUserImage(String userImage) throws ParseException {
+        requireNonNull(userImage);
+        String trimmedUserImage = userImage.trim();
+        String[] splitUserImage = trimmedUserImage.split(":");
+
+        FilePath filePath = parseFilePath(splitUserImage[0]);
+        String description = null;
+        if (splitUserImage.length == 2) {
+            description = parseDescription(splitUserImage[1]);
+        }
+        return new UserImage(filePath, description);
+    }
+
     public static FilePath parseFilePath(String filePath) throws ParseException {
         requireNonNull(filePath);
         String trimmedFilePath = filePath.trim();
@@ -224,5 +238,11 @@ public class ParserUtil {
             throw new ParseException(FilePath.MESSAGE_CONSTRAINTS);
         }
         return new FilePath(trimmedFilePath);
+    }
+
+    public static String parseDescription(String description) throws ParseException {
+        requireNonNull(description);
+        String trimmedDescription = description.trim();
+        return description;
     }
 }
