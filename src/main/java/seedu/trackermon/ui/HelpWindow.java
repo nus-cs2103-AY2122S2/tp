@@ -130,6 +130,8 @@ public class HelpWindow extends UiPart<Stage> {
         table.getColumns().add(titleColumn);
         table.getColumns().add(commandInputColumn);
 
+        titleColumn.setStyle("-fx-alignment: CENTER;");
+
         table.prefHeightProperty().bind(commandSummaryPlaceholder.heightProperty());
     }
 
@@ -139,7 +141,8 @@ public class HelpWindow extends UiPart<Stage> {
                 new CommandBuilder("Delete", "delete <INDEX>"),
                 new CommandBuilder("Edit", "edit <INDEX> [n/<NAME>] [s/<STATUS>] [t/<TAG>]…"),
                 new CommandBuilder("Exit", "exit"),
-                new CommandBuilder("Find", "find <KEYWORD>"),
+                new CommandBuilder("Find", "find <KEYWORD> OR find [n/NAME] [s/STATUS]"
+                        + "[t/TAG]"),
                 new CommandBuilder("List", "list")
         );
     }
