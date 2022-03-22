@@ -17,6 +17,7 @@ import seedu.trackermon.commons.core.index.Index;
 import seedu.trackermon.commons.util.CollectionUtil;
 import seedu.trackermon.logic.commands.exceptions.CommandException;
 import seedu.trackermon.model.Model;
+import seedu.trackermon.model.show.Comment;
 import seedu.trackermon.model.show.Name;
 import seedu.trackermon.model.show.Show;
 import seedu.trackermon.model.show.Status;
@@ -91,8 +92,9 @@ public class EditCommand extends Command {
         Name updatedName = editShowDescriptor.getName().orElse(showToEdit.getName());
         Status updatedStatus = editShowDescriptor.getStatus().orElse(showToEdit.getStatus());
         Set<Tag> updatedTags = editShowDescriptor.getTags().orElse(showToEdit.getTags());
+        Comment updateComment = editShowDescriptor.getComment().orElse(showToEdit.getComment());
 
-        return new Show(updatedName, updatedStatus, updatedTags);
+        return new Show(updatedName, updatedStatus, updatedTags, updateComment);
     }
 
     @Override
@@ -121,6 +123,7 @@ public class EditCommand extends Command {
         private Name name;
         private Status status;
         private Set<Tag> tags;
+        private Comment comment;
 
         public EditShowDescriptor() {}
 
@@ -155,6 +158,14 @@ public class EditCommand extends Command {
 
         public Optional<Status> getStatus() {
             return Optional.ofNullable(status);
+        }
+
+        public void setComment(Comment comment) {
+            this.comment = comment;
+        }
+
+        public Optional<Comment> getComment() {
+            return Optional.ofNullable(comment);
         }
 
         /**
