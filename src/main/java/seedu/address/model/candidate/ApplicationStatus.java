@@ -5,10 +5,10 @@ public class ApplicationStatus {
     public static final String MESSAGE_CONSTRAINTS =
             "Application Status should be Pending, Accepted or Rejected";
     public static final String PENDING_STATUS = "Pending";
-    public static final String ACCPETED_STATUS = "Accepted";
+    public static final String ACCEPTED_STATUS = "Accepted";
     public static final String REJECTED_STATUS = "Rejected";
 
-    private String statusType;
+    public final String statusType;
 
     /**
      * Constructor for Application Status.
@@ -17,13 +17,16 @@ public class ApplicationStatus {
      */
     public ApplicationStatus(String statusType) {
         String input = statusType.toLowerCase();
+        String statusTemp = "";
         if (input.equals(PENDING_STATUS.toLowerCase())) {
-            this.statusType = PENDING_STATUS;
-        } else if (input.equals(ACCPETED_STATUS.toLowerCase())) {
-            this.statusType = ACCPETED_STATUS;
+            statusTemp = PENDING_STATUS;
+        } else if (input.equals(ACCEPTED_STATUS.toLowerCase())) {
+            statusTemp = ACCEPTED_STATUS;
         } else if (input.equals(REJECTED_STATUS.toLowerCase())) {
-            this.statusType = REJECTED_STATUS;
+            statusTemp = REJECTED_STATUS;
         }
+
+        this.statusType = statusTemp;
     }
 
     /**
@@ -35,7 +38,7 @@ public class ApplicationStatus {
     public static boolean isValidStatus(String statusType) {
         String input = statusType.toLowerCase();
         if (input.equals(PENDING_STATUS.toLowerCase())
-                || input.equals(ACCPETED_STATUS.toLowerCase())
+                || input.equals(ACCEPTED_STATUS.toLowerCase())
                 || input.equals(REJECTED_STATUS.toLowerCase())) {
             return true;
         } else {
