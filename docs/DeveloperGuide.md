@@ -158,7 +158,7 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Description
 
-The `manual` command displays the format for a specified command and a short description for a particular command. Since the field is not compulsory during the execution of the `manual` command, the user's input is being parsed in `ManualCommandParser`. After which, a new `ManualCommand` object will be created, and is executed by the `LogicManager`.
+The `manual` command displays the format and a short description for a particular command. During the execution of the `manual` command, the user's input is being parsed in `ManualCommandParser`. After which, a new `ManualCommand` object will be created, and is executed by the `LogicManager`.
 
 #### Implementation
 1. Upon receiving the user input, the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
