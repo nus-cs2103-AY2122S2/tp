@@ -74,6 +74,8 @@
     -fx-text-fill: #828282;
     -fx-font-size: 12px;
     -fx-font-weight: bold;
+    -fx-font-family: "Segoe UI Light";
+
 }
 
 .table-view {
