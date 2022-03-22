@@ -46,6 +46,9 @@ public class Email {
 
     /**
      * Returns if a given string is a valid email.
+     *
+     * @param test string to be tested to determine if valid email.
+     * @return Boolean result where it is true if a given string is a valid email, false otherwise.
      */
     public static boolean isValidEmail(String test) {
         return test.matches(VALIDATION_REGEX);
