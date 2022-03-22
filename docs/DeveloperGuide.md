@@ -172,6 +172,7 @@ This section describes some noteworthy details on how certain features are imple
 
 - Add event
 - Delete event
+- Show events
 - Edit event
 
 #### 2.1 Add Event
@@ -182,11 +183,48 @@ This section describes some noteworthy details on how certain features are imple
 
 ##### Implementation
 
+#### 2.3 Show event
+
+#### Implementation
+
+The following is a detailed explanation of the operations which take place when the `showevents` command is called
+
+1. After successfully parsing of user input the `ShowEventCommand#exeucte(Model model)` method is called.
+2. Since all events are stored in a `FilterList`, a `PREDICATE_SHOW_ALL_EVENTS` is passed to the list so that it now contains all the events in the addressbook.
+3. The GUI will then switch to the events tab and display all the events in the addressbook.
+
+
+#### 2.4 Edit event
+
+##### Implementation
+
+The following is a detailed explanations of the operations which take place for an event to be executed.
+
+1. After successful parsing of arguments by the `EditEventCommandParser` all the edited fields are passed to a descriptor object `EditEventDescriptor`. This object stores the details of all edited and non-edited fields of event.
+2. A `EditEventCommand` instance is then created which contains the index of the event to be edited and the descriptor of the edited event.
+3. Upon calling `EditEventCommand#execute(Model model)`, first the index will verified, next the `UniqueEventList` will be checked for any duplicate events which may arise from the edit, if this is the case the transaction will be aborted. Lastly the friend list of the edited event will be verified as well.
+4. A new `Event` is created by `createEditedEvent` method from the details provided by the `EditEventDescriptor`
+5. Lastly the method `setEvent` from model is called which replaces the event at the specified index with the new event containing the edited fields.
+
+The following activity diagram summarizes what happens when a user executes the `EditEventCommand`:
+
+![EditEventActivityDiagram.png](C:\Users\aryan\Desktop\Sem 6\CS2103\tP\src\main\resources\images\EditEvent.png)
+
+#### Design Consideration
+
+- Current implementation 
+  - The current implementation relies on the index for identifying which event is to be edited.
+
+- Alternative implementation Considered
+  - We considered using the `EventName` and `Eventdate` to be used to identify the event to be edited. However, we realised that some events can have a very long name thus it is impractical for the user to have to type out the entire event name out, rather using the `showevents` command to identify the index of the event would be much more practical.
+
 ### 3. Logs Feature
 
 - Add log
 - Delete log
 - Edit log
+
+
 
 #### 3.1 Add Log
 
@@ -199,9 +237,24 @@ This section describes some noteworthy details on how certain features are imple
 
 ### 4. Tabs Feature
 
-- Change tabs (By Clicking)
-- Automatically change tab based on command entered
+Since our application had two primary classes `Friends` and `Events` we needed to be able to view instances of both of these classes without the GUI being cluttered with details. Thus, we decided to implement a Tab Pane with one `Friends` tab and an `Events` tab. 
 
+#### 4.1 Automatically Change tabs (By Command)
+
+1. `CommandResult` class was modified to contain another boolean called `event` this boolean indicates whether the command which was just executed requires us to switch to the events tab or not.
+2. If `event` is true the GUI will switch to the events tabs by `MainWindow#changeInterface` otherwise this method will switch over to the `Person` tab.
+
+#### 4.2 Manually Change tabs (By Clicking)
+
+1. Apart from commands automatically switching, since the `TabPane` class was used a user can click on the respective tab they want to view as well.
+
+#### Design Consideration
+
+- Current implementation
+  - The current implementation uses the `TabPane` class to hold the `Friends` and `Events` tabs which hold their respective `eventList` and `personList`. This allowed us to seamlessly switch between views our friends and upcoming events. 
+
+- Alternative implementation Considered
+  - Create a new window for `Friends` and `Events`, however we decided against this as it would result in duplication of the commandBox and other artifacts in the mainwindow.
 
 
 
