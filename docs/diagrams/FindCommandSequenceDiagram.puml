@@ -36,13 +36,13 @@ create FindPersonCommand
 FindPersonCommandParser -> FindPersonCommand
 activate FindPersonCommand
 create SearchType
-FindPersonCommand -> SearchType: getValueMatchedSearchType
+FindPersonCommand -> SearchType: getValueMatchedSearchType()
 activate SearchType
 SearchType -> FindPersonCommand
 deactivate SearchType
 
 create ContainsKeywordsPredicate
-FindPersonCommand -> ContainsKeywordsPredicate: bySearchType
+FindPersonCommand -> ContainsKeywordsPredicate: matchBySearchType()
 activate ContainsKeywordsPredicate
 
 ContainsKeywordsPredicate --> FindPersonCommand : f

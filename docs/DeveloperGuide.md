@@ -385,15 +385,12 @@ The exported file can be subsequently imported back into any other instance of C
 
 ### Enhanced Find Logic
 
-The previous implementation find target is limited to name field only. Hence, extending the find function will increase the user experience by enable them easily search `Person` with `phone`
-`email` and `address` field.
-
-This is done by creating `searchType` model within the `model util` package and extracting the original `NameConstrainsKeywordsPreicate` to form `ConstrainsKeywordsPreicate` then create different inherit of three different types of predicate.
-
+The previous implementation of the find function is limited to only searching the name field. The enhancement to the feature allows users to search for `Person` objects by more attributes, including by the `phone`, `email` and `address` fields.
+This is done by creating a helper `SearchType` model within the `model.util` package and abstracting the original `NameConstrainsKeywordsPreicate` to form `ConstrainsKeywordsPreicate` then create different inherit of three different types of predicate.
 The sequence diagram is as follows:
 ![Enhanced Find Logic](images/FindCommandSequenceDiagram.png)
 
-### Enhanced Command Features
+### Mass Operation Features
 
 #### Chain Command
 
@@ -406,18 +403,14 @@ The sequence diagram is as follows:
 
 #### Range Command
 
-This extension allows user to perform range of commands base on `index`. Hence, `from/INDEX to/INDEX` is essential in parsing the value of input. The validation of index is similar to original command (i.e. the index in edit command).
+This extension allows user to perform range of commands based on `index`. Hence, `from/INDEX to/INDEX` is essential in parsing the value of input. The validation for `INDEX` followed as original edit command index validation.
 
 #### Batch Command
 
-This extension focuses on matching specific value field (`name phone email address`) and then perform edit or delete operation on the target which satisfy the matching condition. This is achieved by `BatchCommand#matchInputStringToIndex()` which converts the person that matched the condition and returned as series of command and execute sequentially.
-
-The batch command extract the user input value and match them to create new `Index`.
+This extension allows the editing of `Person` objects that have attributes matching a specific value. Since this matching requires the objects to already exist, only edit and delete operations can be performed. The command translates the `Person` objects matching the condition into a series of indexes and executes the specified command on them sequentially.
 
 The sequence diagram is as follows:
 ![Input to Index](images/BatchCommandInputToIndexSequenceDiagram.png)
-
-#### Combined Feedback message
 
 The multiple commands executed will return a `CommandResult` which contains a list of feedback messages of the results executed combined all together and returned as `feedbackToUser`
 

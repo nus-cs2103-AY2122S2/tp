@@ -3,7 +3,7 @@
 
 box Logic LOGIC_COLOR_T1
 
-participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":BatchCommandParser" as BatchCommandParser LOGIC_COLOR
 participant ":BatchCommand"  as BatchCommand LOGIC_COLOR
 participant ":Index"  as Index LOGIC_COLOR
 
@@ -14,7 +14,7 @@ participant ":Person"  as Person MODEL_COLOR
 box end
 
 create BatchCommand
-LogicManager -> BatchCommand : execute()
+BatchCommandParser -> BatchCommand : parse()
 activate BatchCommand
 
 BatchCommand -> BatchCommand : matchInputStringToIndex()
