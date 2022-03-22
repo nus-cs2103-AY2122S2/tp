@@ -17,6 +17,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.entity.Entity;
 
+//@@author EvaderFati
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
