@@ -439,7 +439,7 @@ After which, a new `TaskCommand` object will be created, and is subsequently exe
    </div>
 
 5. The `TaskCommandParser` will pass the studentId input (found in the `ArgumentMultimap`)
-   into `ParserUtil#parseStudentId(String studentId).
+   into `ParserUtil#parseStudentId(String studentId).`
 
    <div markdown="span" class="alert alert-info">:information_source: 
    **Note:** A NullException will be thrown if the supplied string argument is null.
