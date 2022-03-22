@@ -19,8 +19,8 @@ public class SearchContainsKeywordsPredicateTest {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
 
-        ArrayList<List<String>> firstPrefixArr = new ArrayList<List<String>>(Collections.nCopies(8, null));
-        ArrayList<List<String>> secondPrefixArr = new ArrayList<List<String>>(Collections.nCopies(8, null));
+        ArrayList<List<String>> firstPrefixArr = new ArrayList<List<String>>(Collections.nCopies(9, null));
+        ArrayList<List<String>> secondPrefixArr = new ArrayList<List<String>>(Collections.nCopies(9, null));
         firstPrefixArr.add(0, firstPredicateKeywordList);
         SearchContainsKeywordsPredicate firstPredicate = new SearchContainsKeywordsPredicate(firstPrefixArr);
         secondPrefixArr.add(0, secondPredicateKeywordList);
@@ -46,7 +46,7 @@ public class SearchContainsKeywordsPredicateTest {
     @Test
     public void test_nameContainsKeywords_returnsTrue() {
         // One keyword
-        ArrayList<List<String>> prefixArr = new ArrayList<List<String>>(Collections.nCopies(8, null));
+        ArrayList<List<String>> prefixArr = new ArrayList<List<String>>(Collections.nCopies(9, null));
         prefixArr.add(0, Collections.singletonList("Alice"));
         SearchContainsKeywordsPredicate predicate = new SearchContainsKeywordsPredicate(prefixArr);
         assertTrue(predicate.test(new CustomerBuilder().withName("Alice Bob").build()));

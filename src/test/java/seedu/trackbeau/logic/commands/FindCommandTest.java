@@ -31,8 +31,8 @@ public class FindCommandTest {
 
     @Test
     public void equals() {
-        ArrayList<List<String>> firstPrefixArr = new ArrayList<List<String>>(Collections.nCopies(8, null));
-        ArrayList<List<String>> secondPrefixArr2 = new ArrayList<List<String>>(Collections.nCopies(8, null));
+        ArrayList<List<String>> firstPrefixArr = new ArrayList<List<String>>(Collections.nCopies(9, null));
+        ArrayList<List<String>> secondPrefixArr2 = new ArrayList<List<String>>(Collections.nCopies(9, null));
         firstPrefixArr.add(0, Collections.singletonList("first"));
         SearchContainsKeywordsPredicate firstPredicate =
                 new SearchContainsKeywordsPredicate(firstPrefixArr);
@@ -84,7 +84,7 @@ public class FindCommandTest {
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */
     private SearchContainsKeywordsPredicate preparePredicate(String userInput) {
-        ArrayList<List<String>> prefixArr = new ArrayList<List<String>>(Collections.nCopies(8, null));
+        ArrayList<List<String>> prefixArr = new ArrayList<List<String>>(Collections.nCopies(9, null));
         prefixArr.add(0, Arrays.asList(userInput.split("\\s+")));
         return new SearchContainsKeywordsPredicate(prefixArr);
     }
