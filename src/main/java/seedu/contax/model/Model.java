@@ -1,6 +1,9 @@
 package seedu.contax.model;
 
+import static java.util.Objects.requireNonNull;
+
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -8,6 +11,7 @@ import seedu.contax.commons.core.GuiSettings;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.tag.Tag;
+import seedu.contax.model.util.TimeRange;
 
 /**
  * The API of the Model component.
@@ -184,5 +188,20 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredAppointmentList(Predicate<Appointment> predicate);
+
+    /** Returns an unmodifiable view of the slots between appointments to be highlighted */
+    ObservableList<TimeRange> getDisplayedAppointmentSlots();
+
+    /**
+     * Sets the list of slots between appointments to highlight.
+     *
+     * @param items A list containing the ranges between appointments to highlight.
+     */
+    void setDisplayedAppointmentSlots(List<TimeRange> items);
+
+    /**
+     * Clears the slots between appointments that should be highlighted.
+     */
+    void clearDisplayedAppointmentSlots();
 
 }

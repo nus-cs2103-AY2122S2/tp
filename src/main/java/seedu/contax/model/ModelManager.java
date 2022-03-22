@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.contax.commons.core.GuiSettings;
@@ -16,6 +17,7 @@ import seedu.contax.commons.core.LogsCenter;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.tag.Tag;
+import seedu.contax.model.util.TimeRange;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -29,6 +31,9 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Appointment> filteredAppointments;
     private final FilteredList<Tag> filteredTags;
+
+    private final ObservableList<TimeRange> displayedAppointmentSlots;
+    private final ObservableList<TimeRange> unmodifiableDisplayedAppointmentSlots;
 
     /**
      * Initializes a ModelManager with the given addressBook, schedule and userPrefs.
@@ -47,6 +52,9 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredAppointments = new FilteredList<>(this.schedule.getAppointmentList());
         filteredTags = new FilteredList<>(this.addressBook.getTagList());
+        displayedAppointmentSlots = FXCollections.emptyObservableList();
+        unmodifiableDisplayedAppointmentSlots =
+                FXCollections.unmodifiableObservableList(displayedAppointmentSlots);
     }
 
     /**
@@ -274,6 +282,24 @@ public class ModelManager implements Model {
     public void updateFilteredAppointmentList(Predicate<Appointment> predicate) {
         requireNonNull(predicate);
         filteredAppointments.setPredicate(predicate);
+    }
+
+    //=========== Filtered Appointment List Accessors ========================================================
+
+    @Override
+    public ObservableList<TimeRange> getDisplayedAppointmentSlots() {
+        return unmodifiableDisplayedAppointmentSlots;
+    }
+
+    @Override
+    public void setDisplayedAppointmentSlots(List<TimeRange> items) {
+        requireNonNull(items);
+        displayedAppointmentSlots.setAll(items);
+    }
+
+    @Override
+    public void clearDisplayedAppointmentSlots() {
+        displayedAppointmentSlots.clear();
     }
 
     @Override
