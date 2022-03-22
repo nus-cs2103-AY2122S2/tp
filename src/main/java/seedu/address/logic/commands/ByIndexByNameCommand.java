@@ -1,16 +1,16 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.common.Name;
 import seedu.address.model.person.Person;
-
-import java.util.List;
-import java.util.stream.Collectors;
-
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * Represents a command with hidden internal logic and the ability to be executed,
@@ -28,7 +28,7 @@ public abstract class ByIndexByNameCommand extends Command {
      *
      * @throws CommandException if name provided does not exist in the model.
      */
-    public Person getPersonByName(Model model, Name name) throws CommandException {
+    public static Person getPersonByName(Model model, Name name) throws CommandException {
         requireAllNonNull(model, name);
         // find person with same name
         List<Person> personsToEdit = model.getAddressBook()
@@ -52,7 +52,7 @@ public abstract class ByIndexByNameCommand extends Command {
      *
      * @throws CommandException if index provided is out of bounds.
      */
-    public Person getPersonByFilteredIndex(Model model, Index index) throws CommandException {
+    public static Person getPersonByFilteredIndex(Model model, Index index) throws CommandException {
         requireAllNonNull(model, index);
 
         // get list of persons from model
