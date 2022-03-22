@@ -32,9 +32,10 @@ import seedu.address.model.team.Team;
 public class UniquePersonList implements Iterable<Person> {
     private static final int MAXIMUM_CAPACITY = 100;
 
-    private final Map<Name, Person> nameToPersonMap = new HashMap<>();
-    private final Map<Person, Team> personToTeamMap = new HashMap<>();
-    private final Map<Person, List<Lineup>> personToLineupMap = new HashMap<>();
+    /* to be deleted */
+    //private final Map<Name, Person> nameToPersonMap = new HashMap<>();
+    //private final Map<Person, Team> personToTeamMap = new HashMap<>();
+    //private final Map<Person, List<Lineup>> personToLineupMap = new HashMap<>();
 
     private final ObservableList<Person> internalList = FXCollections.observableArrayList();
     private final ObservableList<Person> internalUnmodifiableList =
@@ -98,6 +99,15 @@ public class UniquePersonList implements Iterable<Person> {
         return internalList.stream()
                 .filter(person -> person.isMatchName(targetName))
                 .collect(Collectors.toList()).get(0);
+    }
+
+    public void removeAllPlayerFromLineup(Lineup lineup) {
+        requireNonNull(lineup);
+        for (Person person : this.internalList) {
+            if (person.isInLineup(lineup)) {
+                person.removeFromLineup(lineup);
+            }
+        }
     }
 
     /**

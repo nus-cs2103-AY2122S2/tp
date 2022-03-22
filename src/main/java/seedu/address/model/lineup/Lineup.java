@@ -26,6 +26,10 @@ public class Lineup {
         this.playersList = playersList;
     }
 
+    public boolean hasPlayer(Person person) {
+        return playersList.hasPlayer(person);
+    }
+
     public LineupName getLineupName() {
         return lineupName;
     }
