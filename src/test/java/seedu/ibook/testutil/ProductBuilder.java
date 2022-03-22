@@ -16,11 +16,6 @@ public class ProductBuilder {
     public static final String DEFAULT_DESCRIPTION = "Delicious noodles";
     public static final String DEFAULT_PRICE = "1.99";
 
-    public static final Name WILDCARD_NAME = Name.WILD_NAME;
-    public static final Category WILDCARD_CATEGORY = Category.WILD_CATEGORY;
-    public static final Description WILDCARD_DESCRIPTION = Description.WILD_DESCRIPTION;
-    public static final Price WILDCARD_PRICE = Price.WILD_PRICE;
-
     private Name name;
     private Category category;
     private Description description;
@@ -80,16 +75,5 @@ public class ProductBuilder {
 
     public Product build() {
         return new Product(name, category, description, price);
-    }
-
-    /**
-     * Sets the various fields of the {@code Product} to their wildcard counterpart.
-     */
-    public ProductBuilder toWildProduct() {
-        name = WILDCARD_NAME;
-        category = WILDCARD_CATEGORY;
-        description = WILDCARD_DESCRIPTION;
-        price = WILDCARD_PRICE;
-        return this;
     }
 }

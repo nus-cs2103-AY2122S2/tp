@@ -1,18 +1,19 @@
 package seedu.ibook.model;
 
 import java.nio.file.Path;
-import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.ibook.commons.core.GuiSettings;
 import seedu.ibook.model.product.Product;
+import seedu.ibook.model.product.filters.AttributeFilter;
+import seedu.ibook.model.product.filters.ProductFulfillsFiltersPredicate;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Product> PREDICATE_SHOW_ALL_PRODUCTS = unused -> true;
+    ProductFulfillsFiltersPredicate PREDICATE_SHOW_ALL_PRODUCTS = new ProductFulfillsFiltersPredicate();
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -80,10 +81,30 @@ public interface Model {
     ObservableList<Product> getFilteredProductList();
 
     /**
+     * Adds a filter to the product list.
+     */
+    void addProductFilter(AttributeFilter filter);
+
+    /**
+     * Removes a filter from the product list.
+     */
+    void removeProductFilter(AttributeFilter filter);
+
+    /**
+     * Clears all filters.
+     */
+    void clearProductFilters();
+
+    /**
      * Updates the filter of the filtered product list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredProductList(Predicate<Product> predicate);
+    void updateProductFilters(ProductFulfillsFiltersPredicate predicate);
+
+    /**
+     * Gets the predicate of the current filter.
+     */
+    ObservableList<AttributeFilter> getProductFilters();
 
     /**
      * Saves changes made to IBook.
@@ -109,4 +130,5 @@ public interface Model {
      * Restores the iBook to one state newer.
      */
     void redoIBook();
+
 }

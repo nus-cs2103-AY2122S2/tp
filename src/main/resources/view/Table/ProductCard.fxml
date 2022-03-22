@@ -32,14 +32,16 @@
                     </ImageView>
                 </graphic>
             </Button>
-            <Button alignment="CENTER" onMouseClicked="#handlePopupUpdate" mnemonicParsing="false" styleClass="action-button">
+            <Button alignment="CENTER" onMouseClicked="#handlePopupUpdate" mnemonicParsing="false"
+                    styleClass="action-button">
                 <graphic>
                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                         <Image url="@../../images/edit-color.png"/>
                     </ImageView>
                 </graphic>
             </Button>
-            <Button alignment="CENTER" onMouseClicked="#handlePopupDelete" mnemonicParsing="false" styleClass="action-button">
+            <Button alignment="CENTER" onMouseClicked="#handlePopupDelete" mnemonicParsing="false"
+                    styleClass="action-button">
                 <graphic>
                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                         <Image url="@../../images/trash-2-color.png"/>

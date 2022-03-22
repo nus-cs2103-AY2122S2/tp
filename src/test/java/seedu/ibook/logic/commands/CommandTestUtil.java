@@ -17,7 +17,7 @@ import seedu.ibook.logic.commands.exceptions.CommandException;
 import seedu.ibook.model.IBook;
 import seedu.ibook.model.Model;
 import seedu.ibook.model.product.Product;
-import seedu.ibook.model.product.ProductFulfillsFiltersPredicate;
+import seedu.ibook.model.product.filters.ProductFulfillsFiltersPredicate;
 import seedu.ibook.testutil.UpdateProductDescriptorBuilder;
 
 /**
@@ -123,8 +123,7 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredProductList().size());
 
         Product product = model.getFilteredProductList().get(targetIndex.getZeroBased());
-        model.updateFilteredProductList(
-                new ProductFulfillsFiltersPredicate(product));
+        model.updateProductFilters(new ProductFulfillsFiltersPredicate(product));
 
         assertEquals(1, model.getFilteredProductList().size());
     }

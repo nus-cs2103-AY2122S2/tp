@@ -73,17 +73,15 @@ class UniqueItemListTest {
     }
 
     @Test
-    public void remove_existingItemWithSmallerQuantity_reduceQuantityOfExisting() {
+    public void remove_existingItemWithSmallerQuantity_throwsItemNotFoundException() {
         uniqueItemList.add(KAYA_BREAD_1_Q10);
-        uniqueItemList.remove(KAYA_BREAD_1_Q5);
-        Item expectedItem = KAYA_BREAD_1_Q5;
-        assertEquals(expectedItem, uniqueItemList.getExisting(expectedItem));
+        assertThrows(ItemNotFoundException.class, () -> uniqueItemList.remove(KAYA_BREAD_1_Q5));
     }
 
     @Test
-    public void remove_existingItemWithLargerQuantity_throwsIllegalArgumentException() {
+    public void remove_existingItemWithLargerQuantity_throwsItemNotFoundException() {
         uniqueItemList.add(KAYA_BREAD_1_Q5);
-        assertThrows(IllegalArgumentException.class, () -> uniqueItemList.remove(KAYA_BREAD_1_Q10));
+        assertThrows(ItemNotFoundException.class, () -> uniqueItemList.remove(KAYA_BREAD_1_Q10));
     }
 
     @Test

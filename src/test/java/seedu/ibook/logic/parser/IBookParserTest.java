@@ -22,8 +22,12 @@ import seedu.ibook.logic.commands.ListCommand;
 import seedu.ibook.logic.commands.UpdateCommand;
 import seedu.ibook.logic.commands.UpdateCommand.UpdateProductDescriptor;
 import seedu.ibook.logic.parser.exceptions.ParseException;
+import seedu.ibook.model.product.Category;
+import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Product;
-import seedu.ibook.model.product.ProductFulfillsFiltersPredicate;
+import seedu.ibook.model.product.filters.CategoryFilter;
+import seedu.ibook.model.product.filters.NameFilter;
+import seedu.ibook.model.product.filters.ProductFulfillsFiltersPredicate;
 import seedu.ibook.testutil.ProductBuilder;
 import seedu.ibook.testutil.ProductUtil;
 import seedu.ibook.testutil.UpdateProductDescriptorBuilder;
@@ -71,9 +75,12 @@ public class IBookParserTest {
     public void parseCommand_find() throws Exception {
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + NAME_FULL_A + CATEGORY_FULL_A);
-        Product product = new ProductBuilder().toWildProduct()
-                .withName(VALID_NAME_A).withCategory(VALID_CATEGORY_A).build();
-        assertEquals(new FindCommand(new ProductFulfillsFiltersPredicate(product)), command);
+
+        ProductFulfillsFiltersPredicate predicate = new ProductFulfillsFiltersPredicate();
+        predicate.addFilter(new NameFilter(new Name(VALID_NAME_A)));
+        predicate.addFilter(new CategoryFilter(new Category(VALID_CATEGORY_A)));
+
+        assertEquals(new FindCommand(predicate), command);
     }
 
     @Test
