@@ -278,6 +278,43 @@ The functionality was implemented this way to stick to the existing codebase as 
 
 There is existing functionality to export the AddressBook to JSON, hence the classes involved with CSV files are organised and structured in a similar way.
 
+### Adding the ability to Undo Add/Delete/Edit command
+
+The ability to undo an Add/Delete Edit command is facilitated by `ModelManager`. It stores a copy of the current address book as an `AddressBook`. 
+Additionally, it implements the following operations:
+
+- AddressBook#copy() - Makes a copy of the current address book.
+- Command#undo() - Reverts the address book to a copy before the last command.
+
+Given below is an example usage scenario and how the undo mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The `AddressBook` will be initialized with the initial address book state.
+
+![UndoRedoState0](images/UndoState0.png)
+
+Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `ModelManager#copyAddressBook()`, making a copy of the address book and pointing `backup` to it before the `delete 5` command executes, and the `AddressBook` is updated without the deleted person.
+
+![UndoRedoState1](images/UndoState1.png)
+
+Step 3. The user now decides that deleting the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoCommand()`, which will revert the `AddressBook`, by pointing it to the `backup`, and restores the address book to that state.
+
+![UndoRedoState3](images/UndoState2.png)
+
+#### Design considerations:
+
+**Aspect: How undo executes:**
+
+* **Alternative 1 (current choice):** Saves the entire address book.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
+
+* **Alternative 2:** Individual command knows how to undo/redo by
+  itself.
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
+
+_{more aspects and alternatives to be added}_
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
