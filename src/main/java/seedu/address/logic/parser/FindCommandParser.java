@@ -1,8 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
@@ -10,8 +8,6 @@ import java.util.Arrays;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.client.AddressContainsKeywordsPredicate;
-import seedu.address.model.client.EmailContainsKeywordsPredicate;
 import seedu.address.model.client.NameContainsKeywordsPredicate;
 import seedu.address.model.client.PhoneContainsKeywordsPredicate;
 
@@ -47,7 +43,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
         String prefix = firstArg.substring(0, 2);
-        if (checkPrefix(prefix, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS)) {
+        if (checkPrefix(prefix, PREFIX_NAME, PREFIX_PHONE)) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
@@ -75,12 +71,6 @@ public class FindCommandParser implements Parser<FindCommand> {
             // Fallthrough
         case "p/":
             return new FindCommand(new PhoneContainsKeywordsPredicate(Arrays.asList(keywords)));
-            // Fallthrough
-        case "e/":
-            return new FindCommand(new EmailContainsKeywordsPredicate(Arrays.asList(keywords)));
-            // Fallthrough
-        case "a/":
-            return new FindCommand(new AddressContainsKeywordsPredicate(Arrays.asList(keywords)));
             // Fallthrough
         default:
             throw new ParseException(
