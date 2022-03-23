@@ -8,7 +8,7 @@ title: Developer Guide
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
-* https://ay2021s2-cs2103t-t12-4.github.io/tp/DeveloperGuide.html#endpoint-components {Documentation idea of splitting the Model component into 2}
+* https://ay2021s2-cs2103t-t12-4.github.io/tp/DeveloperGuide.html#endpoint-components {Documentation idea of splitting the Model component into 2, to prevent cramping of image}
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -114,7 +114,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S2-CS2103-F11-1/tp/blob/master/src/main/java/manageezpz/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -128,9 +128,9 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `TaskList`, which `Task` references. This allows `TaskList` to only require one `Tag` object per unique tag, instead of each `Task` needing their own `Tag` objects.<br>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+<img src="images/BetterModelClassDiagramUpdated.png" width="450" />
 
 </div>
 
@@ -184,14 +184,6 @@ A `Task` contains the following attributes,
 - Alternative 1: Allow certain components within Task, like Time and Date to be mutable
   * Pros: Less overhead as fewer objects are created
   * Cons: Prone to error as a Component might not be correctly changed
-
-#### Aspect : How the `Task` class is created
-- **Current Choice**: The Task class is implemented not as an abstract class. This is because there are no common methods required to be overridden by the sub classes `Todo`, `Event`, `Deadline`.
-  * Pros: 
-  * Cons:  
-- Alternative 1: Implement `Task` class as a abstract class
-  * Pros: Enhances code usability & allows writing of shorter codes
-  * Cons:
 
 
 _{more aspects and alternatives to be added}_
