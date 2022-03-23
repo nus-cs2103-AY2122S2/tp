@@ -8,6 +8,7 @@ import java.util.Optional;
 import seedu.address.model.entity.Entity;
 import seedu.address.model.entity.EntityType;
 
+//@@author wxliong
 /**
  * Represents a Student in the TAssist.
  * Guarantees: details are present and not null (except Telegram handle), field values are validated, immutable.

@@ -1,0 +1,13 @@
+@startuml
+start
+:User executes clear command;
+
+:User executes add command;
+
+if () then ([entity doesn't exists])
+    :Add entity;
+    :Display new entity;
+else ([else])
+endif
+stop
+@enduml
