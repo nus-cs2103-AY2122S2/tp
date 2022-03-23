@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
+import java.util.TreeMap;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -47,6 +48,8 @@ public class SummariseCommand extends Command {
     private static final Predicate<Person> BY_POSITIVE = person -> person.getStatusAsString().equals("POSITIVE");
     private static final Predicate<Person> BY_NEGATIVE = person -> person.getStatusAsString().equals("NEGATIVE");
     private static final Predicate<Person> BY_HRN = person -> person.getStatusAsString().equals("HRN");
+    private static final TreeMap<String, TreeMap<String, Double>> covidStatsByBlockDataList = new TreeMap<>();
+    private static final TreeMap<String, Double> positiveStatsByFacultyData = new TreeMap<>();
 
 
     @Override
@@ -54,9 +57,11 @@ public class SummariseCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         List<Person> lastShownList = model.getFilteredPersonList();
+        // Summarises the contact list by Block first then by Faculty
         String answer = summariseAll(lastShownList) + filterByBlock(lastShownList) + filterByFaculty(lastShownList);
 
         if (answer.isEmpty()) {
+            // Returns a message indicating Tracey is unable to summarise her contact list.
             return new CommandResult(MESSAGE_SUMMARISE_PERSON_FAILURE);
         } else {
             return new CommandResult(MESSAGE_SUMMARISE_PERSON_SUCCESS + answer,
@@ -75,8 +80,10 @@ public class SummariseCommand extends Command {
 
         for (String facultyName : FACULTIES) {
             Predicate<Person> byFaculty = person -> person.getFacultyAsString().equals(facultyName);
+            // Create a list of students in the said faculty.
             List<Person> students = list.stream().filter(byFaculty).collect(Collectors.toList());
             if (students.size() <= 0) {
+                // Faculties with no students will not be summarised.
                 continue;
             }
             ans.append(summariseFaculty(students, facultyName));
@@ -95,8 +102,10 @@ public class SummariseCommand extends Command {
 
         for (String blockLetter : BLOCKS) {
             Predicate<Person> byBlock = person -> person.getBlockAsString().equals(blockLetter);
+            // Create a list of students in the said Hall Block.
             List<Person> students = list.stream().filter(byBlock).collect(Collectors.toList());
             if (students.size() <= 0) {
+                // Hall Block with no students will not be summarised.
                 continue;
             }
             ans.append(summariseBlock(students, blockLetter));
@@ -117,7 +126,8 @@ public class SummariseCommand extends Command {
         int numberOfNegative = (int) result.stream().filter(BY_NEGATIVE).count();
         int numberOfHrn = (int) result.stream().filter(BY_HRN).count();
         double percentagePositive = (double) numberOfPositive / totalNumberOfStudents * 100;
-
+        // Collating this faculty's covid statuses in a TreeMap used for making of PieCharts.
+        positiveStatsByFacultyData.put(facultyName, (double) numberOfPositive);
         return String.format(FACULTY_SUMMARY_FORM, facultyName, totalNumberOfStudents, numberOfPositive,
                 numberOfNegative, numberOfHrn, percentagePositive);
     }
@@ -135,7 +145,11 @@ public class SummariseCommand extends Command {
         int numberOfNegative = (int) result.stream().filter(BY_NEGATIVE).count();
         int numberOfHrn = (int) result.stream().filter(BY_HRN).count();
         double percentagePositive = (double) numberOfPositive / totalNumberOfStudents * 100;
-
+        TreeMap<String, Double> covidStatsByBlockData = new TreeMap<>();
+        covidStatsByBlockData.put("Positive", (double) numberOfPositive);
+        covidStatsByBlockData.put("Negative", (double) numberOfNegative);
+        covidStatsByBlockData.put("HRN", (double) numberOfHrn);
+        covidStatsByBlockDataList.put(blockLetter, covidStatsByBlockData);
         return String.format(BLOCK_SUMMARY_FORM, blockLetter, totalNumberOfStudents, numberOfPositive,
                 numberOfNegative, numberOfHrn, percentagePositive);
     }
@@ -150,10 +164,29 @@ public class SummariseCommand extends Command {
         StringBuilder ans = new StringBuilder();
         int numberOfStudents = list.size();
 
+        // Create a list of students in the Hall that are covid positive.
         List<Person> students = list.stream().filter(BY_POSITIVE).collect(Collectors.toList());
         int numberOfPositive = students.size();
 
         return String.format(HALL_SUMMARY_FORM, numberOfPositive, numberOfStudents);
+    }
+
+    /**
+     * Returns a the relevant data present in a Block.
+     *
+     * @return A TreeMap with the block and its students categorised by covid statuses
+     */
+    public static TreeMap<String, TreeMap<String, Double>> getCovidStatsByBlockDataList() {
+        return covidStatsByBlockDataList;
+    }
+
+    /**
+     * Returns a the relevant data present in a Faculty.
+     *
+     * @return A TreeMap with the faculty and its number of Covid Positive students
+     */
+    public static TreeMap<String, Double> getPositiveStatsByFacultyData() {
+        return positiveStatsByFacultyData;
     }
 }
 

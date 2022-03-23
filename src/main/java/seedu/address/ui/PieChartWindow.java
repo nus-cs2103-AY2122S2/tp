@@ -1,10 +1,8 @@
 package seedu.address.ui;
 
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.logging.Logger;
-import java.util.stream.Stream;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,18 +13,18 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.SummariseCommand;
 
 /**
- * Controller for a pie chart page
+ * Controller for a pie chart page.
  */
 public class PieChartWindow extends UiPart<Stage> {
 
     private static final Logger logger = LogsCenter.getLogger(PieChartWindow.class);
     private static final String FXML = "PieChartWindow.fxml";
-    private ArrayList<String> faculties;
-    private ArrayList<String> blocks;
     private TreeMap<String, Double> covidStatsByBlockData;
     private TreeMap<String, Double> positiveStatsByFacultyData;
+    private TreeMap<String, TreeMap<String, Double>> covidStatsDataByBlocks;
     private PieChart pieChart;
     private Scene pieChartScene;
     private HBox charts;
@@ -42,43 +40,16 @@ public class PieChartWindow extends UiPart<Stage> {
 
     /**
      * Creates a new PieChartWindow.
-     *
-     * @param message Feedback by tracey with summary of the covid data
+     * Obtain the organised covid statuses from SummariseCommand.
+     * Pie Charts by blocks and for faculties are created.
      */
-    public PieChartWindow(String message) {
+    public PieChartWindow() {
         this(new Stage());
         charts = new HBox();
         covidStatsByBlockData = new TreeMap<>();
-        positiveStatsByFacultyData = new TreeMap<>();
-        blocks = parseBlockLetter(message);
-        faculties = parseFacultyName(message);
+        covidStatsDataByBlocks = SummariseCommand.getCovidStatsByBlockDataList();
+        positiveStatsByFacultyData = SummariseCommand.getPositiveStatsByFacultyData();
         execute();
-    }
-
-    /**
-     * Parse the output message from SummariseCommand and gets the list of student's faculty in Tracey.
-     *
-     * @param message Feedback message to user from SummariseCommand
-     * @return Array list containing student's faculty present in Tracey
-     */
-    private ArrayList<String> parseFacultyName(String message) {
-        ArrayList<String> arrayList = new ArrayList<>();
-        String[] splitMessage = message.split("In ");
-        Stream.of(splitMessage).filter(string -> string.contains("faculty")).forEach(arrayList::add);
-        return arrayList;
-    }
-
-    /**
-     * Parse the output message from SummariseCommand and gets the list of student's block in Tracey.
-     *
-     * @param message Feedback message to user from SummariseCommand
-     * @return Array list containing student's blocks present in Tracey
-     */
-    private ArrayList<String> parseBlockLetter(String message) {
-        ArrayList<String> arrayList = new ArrayList<>();
-        String[] splitMessage = message.split("In ");
-        Stream.of(splitMessage).filter(string -> string.contains("block")).forEach(arrayList::add);
-        return arrayList;
     }
 
     /**
@@ -94,12 +65,13 @@ public class PieChartWindow extends UiPart<Stage> {
     }
 
     /**
-     * Collate the pie charts for each block into a H-box.
+     * Collate the pie charts for each block into a H-box by stacking the charts together.
+     * Pie charts are created one at a time by blocks. ie, if there are 5 blocks, 5 pie charts are created.
      */
     private void collateBlocksChart() {
-        for (int i = 0; i < blocks.size(); i++) {
-            String title = blocks.get(i).substring(0, 1); // example: A
-            covidStatsByBlockData = getCovidStats(blocks, i);
+        for (Map.Entry<String, TreeMap<String, Double>> entry : covidStatsDataByBlocks.entrySet()) {
+            String title = entry.getKey(); // ie. A, B, C, D, E
+            covidStatsByBlockData = entry.getValue();
             pieChart = makePieChart(covidStatsByBlockData, title);
             charts.getChildren().add(pieChart);
         }
@@ -110,52 +82,10 @@ public class PieChartWindow extends UiPart<Stage> {
      */
     private HBox createFacultyChartPositive() {
         HBox facChart = new HBox();
-        for (int i = 0; i < faculties.size(); i++) {
-            getPositiveStatsByFaculty(positiveStatsByFacultyData, faculties, i);
-        }
         pieChart = makePieChart(positiveStatsByFacultyData, "Hall");
         facChart.getChildren().add(pieChart);
         facChart.setAlignment(Pos.CENTER);
         return facChart;
-    }
-
-    /**
-     * Puts the parsed data from the array list of blocks in the hall
-     * in Tracey into a treemap for processing of data for the pie chart.
-     *
-     * @param forms Array list containing students' covid status types in a block present in Tracey
-     * @param index The specific form number to find the covid status types and number of students
-     * @return A treemap containing key value a pair of status type and number of students
-     */
-    private TreeMap<String, Double> getCovidStats(ArrayList<String> forms, int index) {
-        TreeMap<String, Double> treeMap = new TreeMap<>();
-        String targetForm = forms.get(index);
-        // spilt the form by lines
-        String[] spiltTargetForm = targetForm.split(System.lineSeparator());
-        // get data from the standardised forms
-        for (int j = 1; j < 4; j++) {
-            String[] spiltLine = spiltTargetForm[j].split(": ", 2);
-            String status = spiltLine[0]; // Type of status
-            int numOfStudents = Integer.parseInt(spiltLine[1].substring(0, 1));
-            treeMap.put(status, (double) numOfStudents);
-        }
-        return treeMap;
-    }
-
-    /**
-     * Puts the parsed data from the array list of faculty into a tree map
-     * in Tracey into a treemap for processing of data for the pie chart.
-     *
-     * @param treeMap The treemap containing the faculty and number of students
-     * @param form Array list containing student's faculty present in Tracey
-     * @param i the specific form number to find the number of students who are positive
-     */
-    private void getPositiveStatsByFaculty(TreeMap<String, Double> treeMap, ArrayList<String> form, int i) {
-        String targetForm = form.get(i);
-        String faculty = targetForm.split(" ", 2)[0];
-        String[] spiltTargetForm = targetForm.split("Covid Positive: ", 2);
-        int numOfStudents = Integer.parseInt(spiltTargetForm[1].substring(0, 1));
-        treeMap.put(faculty, (double) numOfStudents);
     }
 
     /**
