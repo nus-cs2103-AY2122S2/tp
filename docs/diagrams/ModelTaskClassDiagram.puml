@@ -32,4 +32,5 @@ Deadline *--> Description
 
 ModelManager -->"~* filtered" Task
 Task -->"~* assigned" Person
+
 @enduml
