@@ -2,6 +2,7 @@ package seedu.address.model.group;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -67,7 +68,7 @@ public class Group {
     }
 
     public Set<Person> getPersons() {
-        return this.persons;
+        return Collections.unmodifiableSet(persons);
     }
 
     /**
@@ -109,11 +110,33 @@ public class Group {
     public String viewTask() {
         ObservableList<Task> taskList = tasks.asUnmodifiableObservableList();
         String output = "Here are the tasks in the group: \n";
-        for (int i = 0; i < taskList.size(); i++) {
-            output += (i + 1) + ". " + taskList.get(i).getTaskName().taskName + "\n";
+        for (int id = 0; id < taskList.size(); id++) {
+            output += (id + 1) + ". " + taskList.get(id).getTaskName().taskName + "\n";
         }
         return output;
     }
+
+    /**
+     * Views student contacts from this specific group.
+     */
+    public String viewContact() {
+        final StringBuilder builder = new StringBuilder();
+
+        String output = "Here are the student contacts in the group: \n";
+        builder.append(output);
+
+        Set<Person> persons = getPersons();
+        if (!persons.isEmpty()) {
+            int id = 1;
+
+            for (Person person : persons) {
+                builder.append(id).append(". ").append(person.getName()).append("\n");
+                id++;
+            }
+        }
+        return builder.toString();
+    }
+
 
     /**
      * Retrieves the UniqueTaskList from this specific group.
