@@ -47,6 +47,13 @@ public class Property {
         return price;
     }
 
+    /**
+     * Returns the input command representing the addition of a {@code Property}.
+     */
+    public String toParseValue() {
+        return region + "," + address + "," + size + "," + price.value;
+    }
+
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();

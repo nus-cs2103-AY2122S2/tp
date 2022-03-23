@@ -35,10 +35,10 @@ public class PersonUtil {
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
-        sb.append(PREFIX_PREFERENCE + person.getPreference().get().toParseValue() + " ");
+        person.getPreference().ifPresent(preference ->
+                sb.append(PREFIX_PREFERENCE + preference.toParseValue() + " "));
         person.getProperties().stream().forEach(
-            s -> sb.append(PREFIX_PROPERTY).append(s.getRegion().value).append(",").append(s.getAddress().value)
-                    .append(",").append(s.getSize().value).append(",").append(s.getPrice().value).append(" ")
+            s -> sb.append(PREFIX_PROPERTY + s.toParseValue() + " ")
         );
         return sb.toString();
     }
@@ -59,10 +59,7 @@ public class PersonUtil {
             if (properties.isEmpty()) {
                 sb.append(PREFIX_PROPERTY);
             } else {
-                properties.forEach(s -> sb.append(PREFIX_PROPERTY).append(s.getRegion().value).append(",")
-                        .append(s.getAddress().value).append(",").append(s.getSize().value).append(",")
-                        .append(s.getPrice().value).append(" ")
-                );
+                properties.forEach(s -> sb.append(PREFIX_PROPERTY).append(s.toParseValue()).append(" "));
             }
         }
         return sb.toString();
