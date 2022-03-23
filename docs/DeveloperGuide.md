@@ -257,18 +257,21 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**: 
 
-This product is for competitive team sports manager to manage their players
-(i.e. roles, player attributes, trainings), team formation during practice as well as the booking of venues.
+This product is for competitive team sports manager to manage players in their clubs
+(i.e. roles, player attributes, trainings), lineup formation during practice as well
+as scheduling of events (i.e. trainings, competitions, etc.).
 
 **Value proposition**: 
 
 This product solves:
 * the issues of managing large quantity of players;
+* the issues of managing large quantity of training and competition schedules in a club;
+* keeping track of the players that have played in the same lineup before;
 * identifying the positions that are lacking of manpower for recruitment.
 
 This product is not able to:
-* provide recommendation on team formation, coaching strategies, etc.
 * support users with multiple clubs.
+* provide recommendation on coaching strategies, etc.
 
 
 ### User stories
@@ -388,8 +391,8 @@ Use case ends.
 
 ### Glossary
 
-* **Team**: A team contains the players from the same highschool basketball club.
-* **Lineup**: Part of a team that plays together on the court, typically consisting of 5 players.
+* **Club**: A basketball club consisting of a number of players, who regularly trains and participates in competitions.
+* **Lineup**: Players from part of a club that play together on the court, typically consisting of 5 players.
 * **Schedule**: Event of a team, including training and competitions.
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 --------------------------------------------------------------------------------------------------------------------
