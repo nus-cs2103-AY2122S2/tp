@@ -5,10 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.contax.commons.core.GuiListContentType;
 import seedu.contax.commons.core.Messages;
 import seedu.contax.model.Model;
-import seedu.contax.model.appointment.ClientNameContainsKeywordsPredicate;
 import seedu.contax.model.appointment.ContainsKeywordsPredicate;
-import seedu.contax.model.appointment.HasClientPredicate;
-import seedu.contax.model.appointment.NameContainsKeywordsPredicate;
 
 /**
  * Finds and lists all appointments in address book whose name contains any of the argument keywords.

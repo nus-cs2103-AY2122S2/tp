@@ -7,6 +7,8 @@ import seedu.contax.model.person.Person;
 import java.util.List;
 import java.util.function.Predicate;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * Tests that an {@code Appointment}'s {@code Person}'s {@code Name} matches any of the keywords given.
  */
@@ -18,6 +20,10 @@ public class ClientNameContainsKeywordsPredicate extends ContainsKeywordsPredica
 
     @Override
     public boolean test(Appointment appointment) {
+        if(appointment.getPerson() == null) {
+            return false;
+        }
+
         return super.getKeywords().stream()
                 .anyMatch(keyword ->
                         StringUtil.containsWordIgnoreCase(appointment.getPerson().getName().fullName,keyword));

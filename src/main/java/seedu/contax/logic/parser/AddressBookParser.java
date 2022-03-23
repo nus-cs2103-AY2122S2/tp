@@ -128,7 +128,7 @@ public class AddressBookParser {
             return new FindByTagCommandParser().parse(arguments);
 
         case FindAppointmentCommand.COMMAND_WORD:
-            return new FindAppointmentParser().parse(arguments);
+            return new FindAppointmentCommandParser().parse(arguments);
 
         // Command chaining
         case ChainCommand.COMMAND_WORD:
