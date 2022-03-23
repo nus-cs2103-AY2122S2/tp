@@ -295,13 +295,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
         return returnValue;
     }
-  
+    
     public void setTask(Task target, Task editedTask) {
         requireNonNull(editedTask);
 
         tasks.setTask(target, editedTask);
     }
-  
+    
     public void untagTask(Task task, Person person) {
         task.removeAssigned(person);
     }
