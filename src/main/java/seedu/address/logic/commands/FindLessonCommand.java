@@ -1,10 +1,10 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.LessonNameContainsKeywordsPredicate;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Finds and lists all lessons in the lesson book whose name contains any of the argument keywords.
@@ -32,6 +32,16 @@ public class FindLessonCommand extends Command {
         model.updateFilteredLessonList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_LESSONS_LISTED_OVERVIEW, model.getFilteredLessonList().size()));
+    }
+
+    /**
+     * Returns true if the command word entered inside the user-input matches any of the
+     * specified keywords identified with this command.
+     */
+    public boolean matchesCommandWord(String commandWord) {
+        String lowerCaseCommandWord = commandWord.toLowerCase();
+
+        return commandWord.equals(COMMAND_WORD) || commandWord.equals(SHORTENED_COMMAND_WORD);
     }
 
     @Override
