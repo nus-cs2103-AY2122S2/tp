@@ -92,17 +92,23 @@ Examples:
 * `add n/John Doe d/A student in NUS p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/Forgetful`
 * `add n/Betsy Crowe d/From Malaysia t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 r/Dangerous t/criminal`
 
+### Adding a buyer: `addbuyer`
+
+Adds a client as a Buyer to the contact list.
+
+Format: `addbuyer n/NAME d/DESCRIPTION p/PHONE_NUMBER e/EMAIL a/ADDRESS r/REMARK [t/TAG]...
+
+Examples:
+* `add n/Yu Qi d/A baller p/98765432 e/johnd@example.com a/Tampines street 66, block 123, #01-01 r/Cool`
+* `add n/Janald d/From Singapore t/friend e/betsycrowe@example.com a/Bishan Ave 1, #04-12 p/1234567 r/Smart t/criminal`
+
 ### Listing all clients : `list`
 
 Shows a list of all clients in the contact list.
 
 Format: `list`
 
-### Editing a client : `edit`
-
-Edits the fields of a client in the contact list.
-
-### Sort all persons : `sort`
+### Sort all clients : `sort`
 
 Sort all the person according to the orders specified
 
@@ -123,7 +129,7 @@ Examples:
 
 
 
-### Editing a person : `edit`
+### Editing a client : `edit`
 
 Edits an existing client in the contact list.
 
@@ -233,6 +239,7 @@ _Details coming soon ..._
 Action | Format, Examples
 --------|------------------
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**AddBuyer** | `addbuyer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
